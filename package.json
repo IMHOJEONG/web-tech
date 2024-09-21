@@ -1,5 +1,5 @@
 {
-  "name": "skill_for_web_service",
+  "name": "web-tech",
   "private": true,
   "scripts": {
     "build": "turbo build",
