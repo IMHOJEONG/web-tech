@@ -21,5 +21,5 @@ export const IconUI = ({
   label,
   ...props
 }: ButtonProps) => {
-  return <Icon />;
+  return <Icon text="aa" />;
 };

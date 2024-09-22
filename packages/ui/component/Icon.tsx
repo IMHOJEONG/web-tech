@@ -11,6 +11,8 @@ const Container = styled.div({
   //   width: "100vw",
   //   height: "100vh",
   // borderRadius: "12%",
+  display: "flex",
+  flexDirection: "column",
   //   border: "1px solid black",
 });
 

@@ -1,22 +1,37 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { PropsWithChildren, ReactNode } from "react";
+import {
+  ComponentProps,
+  CSSProperties,
+  PropsWithChildren,
+  ReactNode,
+} from "react";
 
-const Container = styled.button({
-  //   width: "100vw",
-  //   height: "100vh",
-  // borderRadius: "12%",
-  //   border: "1px solid black",
-});
+//   width: "100vw",
+//   height: "100vh",
+// borderRadius: "12%",
+//   border: "1px solid black",
 
-interface ButtonProps {
-  icon?: ReactNode;
-  text?: string;
+export interface ButtonProps extends ComponentProps<"button"> {
+  background?: string;
+  border?: string;
+  borderRadius?: string;
+  fontSize?: string;
+  padding?: string;
+  backdropFilter?: string;
+  onClick?: () => void;
 }
 
-export function Button({
-  children,
-  icon,
-  text,
-}: PropsWithChildren<ButtonProps>) {
-  return <Container>{children}</Container>;
+// 이 방식으로 스타일 컴포넌트 작성 방식 고정
+const Container = styled.button((props: ButtonProps) => ({
+  background: props.background,
+  border: props.border,
+  borderRadius: props.borderRadius,
+  fontSize: props.fontSize,
+  padding: props.padding,
+  backdropFilter: props.backdropFilter,
+}));
+
+export function Button({ children, ...props }: PropsWithChildren<ButtonProps>) {
+  return <Container {...props}>{children}</Container>;
 }
