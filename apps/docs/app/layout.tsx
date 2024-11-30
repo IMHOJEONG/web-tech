@@ -3,10 +3,10 @@ import "@web-tech/ui/globals.css";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
-      <body>
+    <html className="size-full">
+      <body className="size-full">
         <Header />
-        <div className="px-6 py-0">{children}</div>
+        {children}
       </body>
     </html>
   );
