@@ -1,14 +1,13 @@
 {
   "extends": "@web-tech/typescript-config/react-library.json",
-  "include": [
-    "./component/**/*.ts",
-    "./layout/**/*.ts",
-    "./component/**/*.tsx",
-    "./layout/**/*.tsx"
-  ],
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react"
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": ".",
+    "paths": {
+      "@web-tech/ui/*": ["./*"]
+    }
   },
+  "include": ["."],
   "exclude": ["node_modules", "dist"]
 }
