@@ -5,12 +5,19 @@ function Icon() {
   return (
     <a className="mr-4 flex items-center gap-2 lg:mr-6" href="/">
       <div className="w-6 h-6 relative">
-        <Image src={"/logo.svg"} layout="fill" objectFit="cover" alt="" />
+        <Image src={"/logo.svg"} alt="" width={100} height={100} priority />
       </div>
       <span className="font-bold">Net</span>
     </a>
   );
 }
+
+const navigation = [
+  {
+    href: "/",
+    name: "문서",
+  },
+];
 
 export default function Header() {
   return (
@@ -18,14 +25,22 @@ export default function Header() {
       <div className="flex h-14 items-center px-4">
         <div className="mr-4 flex">
           <Icon />
-          <nav className="flex items-center gap-4 text-sm xl:gap-6">
-            <Link
-              className="transition-colors hover:text-foreground/80 text-foreground/80"
-              href="/docs"
-            >
-              문서
-            </Link>
-          </nav>
+          {navigation.map((nav) => {
+            const { href, name } = nav;
+            return (
+              <nav
+                key={name}
+                className="flex items-center gap-4 text-sm xl:gap-6"
+              >
+                <Link
+                  className="transition-colors hover:text-foreground/80 text-foreground/80"
+                  href={href}
+                >
+                  {name}
+                </Link>
+              </nav>
+            );
+          })}
         </div>
       </div>
     </header>

@@ -9,7 +9,7 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
-  transpilePackages: ["@web-tech/ui"],
+  transpilePackages: ["@web-tech/ui", "next-mdx-remote"],
 };
 
 const withMDX = createMDX({
