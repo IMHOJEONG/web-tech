@@ -24,7 +24,6 @@ export function getDocsData() {
     const fileContents = fs.readFileSync(fullPath, "utf8");
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
-    console.log(fileContents, matterResult);
 
     // Combine the data with the id
     return {

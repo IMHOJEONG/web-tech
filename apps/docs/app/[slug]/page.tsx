@@ -1,7 +1,10 @@
-import { getDocsData } from "~/lib/util";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import CodeBlock from "./codeblock";
+import { compileMDX } from "next-mdx-remote/rsc";
 import { PropsWithChildren } from "react";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import { getDocsData } from "~/lib/util";
+import CodeBlock from "./codeblock";
+
+import remarkGfm from "remark-gfm";
 
 const components = {
   // pre: (props: PropsWithChildren<{ className?: string }>) => {
@@ -10,7 +13,7 @@ const components = {
   // },
   pre: (props: PropsWithChildren<{ className?: string }>) => {
     const { className, children } = props;
-    
+
     return <CodeBlock className={className}>{children}</CodeBlock>;
   },
 };
@@ -23,7 +26,18 @@ export default async function Page({
   const slug = (await params).slug;
   const data = await getDocsData();
   const target = data.find((doc) => doc.slug == slug);
-  const mdxSource = target?.content ?? "## 12";
+  const { content: mdxSource } = await compileMDX({
+    source: target?.content ?? "## 12",
+    components: components,
+    options: {
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [rehypeAutolinkHeadings],
 
-  return <MDXRemote source={mdxSource} components={components} />;
+        format: "mdx",
+      },
+    },
+  });
+
+  return <>{mdxSource}</>;
 }
