@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-interface Metadata {
+export interface Metadata {
   id: string;
   title: string;
   date: string;
