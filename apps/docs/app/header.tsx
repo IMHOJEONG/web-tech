@@ -1,13 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import localFont from "next/font/local";
+import { cn } from "@web-tech/ui/lib/utils";
+
+const headerLogoFont = localFont({ src: "fonts/header-logo.ttf" });
+
 function Icon() {
   return (
     <a className="mr-4 flex items-center gap-2 lg:mr-6" href="/">
       <div className="w-6 h-6 relative">
         <Image src={"/logo.svg"} alt="" width={100} height={100} priority />
       </div>
-      <span className="font-bold">Net</span>
+      <span className={cn("font-bold", headerLogoFont.className)}>Net</span>
     </a>
   );
 }

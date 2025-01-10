@@ -6,13 +6,15 @@ const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
   const { title, date, summary, slug, content } = doc;
   return (
     <div className="flex flex-col gap-3 p-3 rounded-lg">
-      <Image
-        src={"/default/no-image.webp"}
-        alt={title ?? ""}
-        width={200}
-        height={200}
-        className="rounded-lg"
-      />
+      <div className="object-cover size-full">
+        <Image
+          src={"/default/no-image.webp"}
+          alt={title ?? ""}
+          width={200}
+          height={200}
+          className="rounded-lg"
+        />
+      </div>
       <div>{title}</div>
       <div>{summary}</div>
       {/* <div>{date}</div> */}
