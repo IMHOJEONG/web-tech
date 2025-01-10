@@ -4,9 +4,6 @@
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
-    "paths": {
-      "@web-tech/ui/*": ["./*"]
-    }
   },
   "include": ["."],
   "exclude": ["node_modules", "dist"]
