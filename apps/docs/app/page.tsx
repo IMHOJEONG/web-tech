@@ -13,9 +13,7 @@ export default async function Page() {
         }
         return (
           <Link href={`/${slug}`} key={id} className="hover:bg-gray-200">
-            <MainCard 
-              doc={doc}
-            />
+            <MainCard doc={doc} />
           </Link>
         );
       })}

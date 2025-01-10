@@ -1,5 +1,4 @@
-
-- Target 설정 
+- Target 설정
 
 ```js
 ---
@@ -8,4 +7,3 @@ slug: js-memory
 date: 2024-11-30 18:00:00
 ---
 ```
-
