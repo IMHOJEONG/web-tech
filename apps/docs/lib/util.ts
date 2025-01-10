@@ -12,16 +12,41 @@ export interface Metadata {
 }
 
 const docsDirectory = path.join(process.cwd(), "docs");
+function exploreDirectory(directory: string) {
+  let files: string[] = [];
+  try {
+    const items = fs.readdirSync(directory, { withFileTypes: true });
+    for (const item of items) {
+      const fullPath = path.join(directory, item.name);
+
+      if (item.isDirectory()) {
+        // console.log("Directory:", fullPath);
+        files = files.concat(exploreDirectory(fullPath)); // 재귀 호출
+      } else if (item.isFile()) {
+        // console.log("File:", fullPath);
+        files.push(fullPath);
+      }
+    }
+  } catch (error) {
+    console.error("Error reading directory:", directory, error);
+  }
+
+  return files;
+}
 
 export function getDocsData() {
-  const fileNames = fs.readdirSync(docsDirectory);
+  console.log(exploreDirectory(docsDirectory));
+
+  const fileNames = exploreDirectory(docsDirectory);
+
   const allPostsData: Partial<Metadata>[] = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.mdx?$/, "");
 
     // Read markdown file as string
-    const fullPath = path.join(docsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+    // const fullPath = path.join(docsDirectory, fileName);
+    console.log(fileName);
+    const fileContents = fs.readFileSync(fileName, "utf8");
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
 
@@ -32,6 +57,7 @@ export function getDocsData() {
       content: matterResult.content,
     };
   });
+  console.log(allPostsData);
 
   return allPostsData;
 }
