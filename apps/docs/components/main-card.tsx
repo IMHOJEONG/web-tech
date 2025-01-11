@@ -1,26 +1,26 @@
-import { Metadata } from "~/lib/util";
-import Image from "next/image";
-import { getTime } from "@web-tech/ui/lib/time";
+import { Metadata } from '~/lib/util'
+import Image from 'next/image'
+import { getTime } from '@web-tech/ui/lib/time'
 
 const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
-  const { title, date, summary, slug, content } = doc;
-  return (
-    <div className="flex flex-col gap-3 p-3 rounded-lg">
-      <div className="object-cover size-full">
-        <Image
-          src={"/default/no-image.webp"}
-          alt={title ?? ""}
-          width={200}
-          height={200}
-          className="rounded-lg"
-        />
-      </div>
-      <div>{title}</div>
-      <div>{summary}</div>
-      {/* <div>{date}</div> */}
-      <div>{getTime(date ?? "")}</div>
-    </div>
-  );
-};
+    const { title, date, summary, slug, content } = doc
+    return (
+        <div className="flex flex-col gap-3 p-3 rounded-lg">
+            <div className="object-cover size-full">
+                <Image
+                    src={'/default/no-image.webp'}
+                    alt={title ?? ''}
+                    width={200}
+                    height={200}
+                    className="rounded-lg"
+                />
+            </div>
+            <div>{title}</div>
+            <div>{summary}</div>
+            {/* <div>{date}</div> */}
+            <div>{getTime(date ?? '')}</div>
+        </div>
+    )
+}
 
-export default MainCard;
+export default MainCard

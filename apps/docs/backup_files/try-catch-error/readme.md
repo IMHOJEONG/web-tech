@@ -4,13 +4,13 @@
 
 ```typescript
 try {
-  // some code that may throw an error
+    // some code that may throw an error
 } catch (error: unknown) {
-  if (error instanceof Error) {
-    console.error(error.message);
-  } else {
-    console.error("Unknown error:", error);
-  }
+    if (error instanceof Error) {
+        console.error(error.message)
+    } else {
+        console.error('Unknown error:', error)
+    }
 }
 ```
 

@@ -2,14 +2,12 @@ const { resolve } = require("node:path");
 
 const project = resolve(process.cwd(), "tsconfig.json");
 
+const { fixupPluginRules } = require("@eslint/compat");
+const onlyWarn = require("eslint-plugin-only-warn");
+
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: [
-    "eslint:recommended",
-    "prettier",
-    require.resolve("@vercel/style-guide/eslint/next"),
-    "turbo",
-  ],
+  extends: ["eslint:recommended", "prettier", "turbo"],
   globals: {
     React: true,
     JSX: true,
@@ -18,7 +16,7 @@ module.exports = {
     node: true,
     browser: true,
   },
-  plugins: ["only-warn"],
+  plugins: [],
   settings: {
     "import/resolver": {
       typescript: {

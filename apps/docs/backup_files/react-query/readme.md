@@ -2,11 +2,11 @@
 
 - staleTime = 캐사된 데이터를 얼마나 오래 "fresh"하다고 간주할 지
 
-  - 해당 시간 동안 데이터는 재요청 없이 신선한 상태로 유지됨
+    - 해당 시간 동안 데이터는 재요청 없이 신선한 상태로 유지됨
 
 - cacheTime = 사용되지 않을 때, 메모리에서 언제 제거할지를 관리하는 데 도움을 줌
 
-  - 사용되지 않는 데이터가 메모리에서 자동으로 제거되기까지 걸리는 시간을 의미
+    - 사용되지 않는 데이터가 메모리에서 자동으로 제거되기까지 걸리는 시간을 의미
 
 ### cacheTime < staleTime 의 경우
 
@@ -30,11 +30,11 @@ https://www.codemzy.com/blog/react-query-cachetime-staletime
 
 - JavaScript의 AbortController에서 비롯된 abort signal
 
-  - 네트워크 요청을 중단시키기 위한 일종의 신호
+    - 네트워크 요청을 중단시키기 위한 일종의 신호
 
-  - AbortController 인스턴스를 만들고, 이를 사용하여 요청을 중단 가능
+    - AbortController 인스턴스를 만들고, 이를 사용하여 요청을 중단 가능
 
-  - abort signal을 특정 요청에 전달하고, AbortController의 abort 메서드를 호출하면 해당 요청이 즉시 중단
+    - abort signal을 특정 요청에 전달하고, AbortController의 abort 메서드를 호출하면 해당 요청이 즉시 중단
 
 ### @tanstack-query에서는?
 
@@ -43,27 +43,27 @@ https://www.codemzy.com/blog/react-query-cachetime-staletime
 - 사용자가 페이지를 떠나거나, 컴포넌트가 언마운트될 때 불필요한 데이터 페칭을 중단하고자 할 때 유용
 
 ```js
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query'
 
 const fetchData = async ({ signal }) => {
-  const response = await fetch("https://api.example.com/data", { signal });
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-  return response.json();
-};
+    const response = await fetch('https://api.example.com/data', { signal })
+    if (!response.ok) {
+        throw new Error('Network response was not ok')
+    }
+    return response.json()
+}
 
 const MyComponent = () => {
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["data"],
-    queryFn: fetchData,
-  });
+    const { data, error, isLoading } = useQuery({
+        queryKey: ['data'],
+        queryFn: fetchData,
+    })
 
-  if (isLoading) return "Loading...";
-  if (error) return "An error occurred";
+    if (isLoading) return 'Loading...'
+    if (error) return 'An error occurred'
 
-  return <div>{JSON.stringify(data)}</div>;
-};
+    return <div>{JSON.stringify(data)}</div>
+}
 ```
 
 ### Abort Signal 사용 사례
