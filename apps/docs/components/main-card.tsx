@@ -5,18 +5,18 @@ import { getTime } from '@web-tech/ui/lib/time'
 const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
     const { title, date, summary, slug, content } = doc
     return (
-        <div className="flex flex-col gap-3 p-3 rounded-lg">
+        <div className="size-full flex flex-col gap-3 p-3 rounded-lg">
             <div className="object-cover size-full">
                 <Image
                     src={'/default/no-image.webp'}
                     alt={title ?? ''}
-                    width={200}
-                    height={200}
-                    className="rounded-lg"
+                    width={1920}
+                    height={1920}
+                    className="rounded-lg size-full"
                 />
             </div>
-            <div>{title}</div>
-            <div>{summary}</div>
+            <div className="text-wrap text-ellipsis">{title}</div>
+            {summary && <div className="text- wrap">{summary}</div>}
             {/* <div>{date}</div> */}
             <div>{getTime(date ?? '')}</div>
         </div>

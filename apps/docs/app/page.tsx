@@ -5,7 +5,7 @@ import { getSortedPostsData } from '~/lib/util'
 export default async function Page() {
     const data = await getSortedPostsData()
     return (
-        <div className="flex flex-wrap gap-3 p-3">
+        <div className="flex flex-wrap sm:grid sm:grid-cols-4 gap-3 p-3">
             {data.map((doc) => {
                 const { title, slug, id } = doc
                 if (!slug) {
@@ -15,7 +15,7 @@ export default async function Page() {
                     <Link
                         href={`/${slug}`}
                         key={id}
-                        className="hover:bg-gray-200"
+                        className="hover:bg-gray-200 size-full"
                     >
                         <MainCard doc={doc} />
                     </Link>
