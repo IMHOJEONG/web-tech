@@ -5,7 +5,7 @@ import { getSortedPostsData } from '~/lib/util'
 export default async function Page() {
     const data = await getSortedPostsData()
     return (
-        <div className="flex flex-wrap sm:grid sm:grid-cols-4 gap-3 p-3">
+        <div className="flex flex-col gap-3 p-3">
             {data.map((doc) => {
                 const { title, slug, id } = doc
                 if (!slug) {

@@ -1,5 +1,5 @@
-import { Button } from "@web-tech/ui/components/ui/button";
+import DashBoard from "@/components/effect/dash-board";
 
 export default function Home() {
-  return <Button>12</Button>;
+  return <DashBoard />;
 }
