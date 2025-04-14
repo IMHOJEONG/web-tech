@@ -1,5 +1,4 @@
-import React, { isValidElement } from 'react'
-import { PropsWithChildren, ReactNode } from 'react'
+import React, { isValidElement, PropsWithChildren } from 'react'
 import { codeToHtml } from 'shiki'
 
 export default async function CodeBlock(
@@ -7,14 +6,31 @@ export default async function CodeBlock(
 ) {
     const { children } = props
 
-    const codeElement = React.Children.toArray(children)[0]
+    const codeElement = React.Children.toArray(
+        children
+    )[0] as React.ReactElement<{
+        children?: React.ReactNode
+        className?: string
+    }>
     const isCodeElement =
         isValidElement(codeElement) && codeElement.type === 'code'
-    const code = isCodeElement ? codeElement?.props?.children : null
-    const lang = isCodeElement
-        ? codeElement?.props?.className.replace('language-', '')
-        : 'text'
-    const out = await codeToHtml(code, { lang, theme: 'github-dark' })
+
+    const rawCode = isCodeElement ? codeElement?.props?.children : ''
+    const code =
+        typeof rawCode === 'string'
+            ? rawCode
+            : Array.isArray(rawCode)
+              ? rawCode.join('')
+              : String(rawCode ?? '')
+
+    const rawLang = isCodeElement ? (codeElement?.props?.className ?? '') : ''
+    const langMatch = rawLang.match(/language-(\w+)/)
+    const lang = langMatch ? langMatch[1] : 'text'
+
+    const out = await codeToHtml(code, {
+        lang: lang || 'text',
+        theme: 'github-dark',
+    })
 
     return (
         <div
