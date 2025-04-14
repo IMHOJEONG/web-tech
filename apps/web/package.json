@@ -9,27 +9,25 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.3",
     "@web-tech/ui": "workspace:*",
-    "effect": "^3.12.7",
-    "next": "15.0.3",
-    "next-auth": "5.0.0-beta.25",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "zod": "^3.24.1",
-    "zustand": "^5.0.3"
+    "next": "15.3.0",
+    "postcss": "^8.5.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "tailwindcss": "^4.1.3",
+    "tw-animate-css": "^1.2.5"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.15",
-    "@types/node": "^20.17.9",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/node": "^22.14.1",
+    "@types/react": "^19.1.1",
+    "@types/react-dom": "^19.1.2",
     "@web-tech/eslint-config": "workspace:*",
     "@web-tech/tailwind-config": "workspace:*",
     "@web-tech/typescript-config": "workspace:*",
-    "autoprefixer": "^10.4.20",
-    "eslint-config-next": "14.2.6",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.7.2"
+    "autoprefixer": "^10.4.21",
+    "eslint-config-next": "15.3.0",
+    "typescript": "^5.8.3"
   }
 }

@@ -33,7 +33,6 @@ export default async function Page({
             mdxOptions: {
                 remarkPlugins: [remarkGfm],
                 rehypePlugins: [rehypeAutolinkHeadings],
-
                 format: 'mdx',
             },
         },
