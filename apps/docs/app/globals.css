@@ -1,6 +1,13 @@
 @import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 @import 'tw-animate-css';
 @plugin "@tailwindcss/typography";
+
+@theme {
+    --color-header-border: rgb(226 232 240 / 40%);
+}
 
 :root {
     --background: hsl(0 0% 100%);
@@ -84,4 +91,12 @@
     --sidebar-accent-foreground: oklch(0.985 0.001 106.423);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.553 0.013 58.071);
+}
+
+:lang(ko) {
+    font-family: var(--font-maru);
+}
+
+:lang(en) {
+    font-family: var(--font-jetbrains-mono);
 }

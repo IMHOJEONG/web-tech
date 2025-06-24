@@ -2,10 +2,6 @@ const { resolve } = require("node:path");
 
 const project = resolve(process.cwd(), "tsconfig.json");
 
-const { fixupPluginRules } = require("@eslint/compat");
-const vercelNext = require("@vercel/style-guide/eslint/next");
-const { includeIgnoreFile, fixupConfigRules } = require("@eslint/compat");
-
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
   // ...compat.extends(vercelNext),
