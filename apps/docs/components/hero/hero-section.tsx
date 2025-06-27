@@ -1,5 +1,5 @@
-import Node from './node'
 import { LandingBox } from '../layout/landing-box'
+import Node from '../react-flow/node'
 
 export const HeroSection = () => {
     return (
