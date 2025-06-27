@@ -19,6 +19,7 @@
     "gray-matter": "^4.0.3",
     "next": "15.3.0",
     "next-mdx-remote": "^5.0.0",
+    "overlay-kit": "^1.8.2",
     "react": "^19.1.0",
     "react-dom": "19.1.0",
     "rehype-autolink-headings": "^7.1.0",
