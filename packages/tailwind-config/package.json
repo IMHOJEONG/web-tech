@@ -7,6 +7,6 @@
   },
   "devDependencies": {
     "@web-tech/typescript-config": "workspace:*",
-    "tailwindcss": "^4.1.10"
+    "tailwindcss": "^4.1.12"
   }
 }
