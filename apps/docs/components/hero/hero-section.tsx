@@ -4,7 +4,7 @@ import Node from '../react-flow/node'
 export const HeroSection = () => {
     return (
         <LandingBox>
-            <div className="flex justify-between flex-1">
+            <div className="grid grid-cols-[0.5fr_1fr] justify-between ">
                 <div className="flex flex-col justify-center">
                     <h1
                         className="text-5xl md:text-6xl font-extrabold tracking-tight leading-tight to-neutral-600 dark:from-white dark:to-zinc-400

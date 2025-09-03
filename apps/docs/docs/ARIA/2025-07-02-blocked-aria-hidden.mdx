@@ -1,0 +1,37 @@
+---
+title: 'Shadcn Drawer 컴포넌트 사용 시 발생하는, ARIA'
+slug: drawer-aria-error
+date: 2025-07-02
+summary: Shadcn Drawer 컴포넌트 사용 시, ARIA Warning
+---
+
+### 문제
+
+- Shadcn 컴포넌트를 활용 중인데, Drawer Close 시 Warning이 발생
+
+![problem1.png](/docs/blocked-aria-problem/problem1.png)
+
+### 문제 해결 방법 고민
+
+- 일반적인 경우에는 아래 문서를 참고해서 개발해야 함 
+
+https://vaul.emilkowal.ski/api
+
+`Blocked aria-hidden on an element because its descendant retained focus`
+
+- 즉, drawer를 닫을 때만 발생하는 aria-hidden 문제
+
+### 가설 
+
+- Drawer를 닫고 나서 바로 화면에 존재하는 input에 focus를 주는 것은 문제가 되는가?
+
+    - 확인해보니, 해당 부분에서 스크린 리더가 읽지를 못함 
+
+- 서비스에서 해결할 방법은?
+
+    - vaul 패키지 내, onAnimationEnd를 활용하는 방법 
+
+    - 이 함수를 이용해 완전히 닫혔을 때, focus를 주는 방향으로 변경이 필요합니다. 
+
+- 
+
