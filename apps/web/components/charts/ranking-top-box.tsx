@@ -14,7 +14,7 @@ export const RankingTopBox = () => {
     const response: RankingTopResponse = await handleRankingTopData();
     const { top_0 } = response;
     // const { categories, domain, rank } = top_0;
-    const newData = top_0.map((top: RankingTopResponse.Top0, index: number) => {
+    const newData = top_0.map((top: RankingTopResponse.Top0) => {
       const { domain, rank } = top;
       return {
         domain: domain,
@@ -32,7 +32,7 @@ export const RankingTopBox = () => {
 
   return (
     <div className="flex  gap-1 flex-wrap">
-      {data.map((top) => (
+      {data?.map((top) => (
         <div key={top.domain} className="flex ">
           <Badge>{top.rank}</Badge>
           <Badge>{top.domain}</Badge>

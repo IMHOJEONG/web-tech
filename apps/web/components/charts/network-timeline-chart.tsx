@@ -17,19 +17,16 @@ import { CustomTick } from "./tick";
 
 // https://recharts.org/en-US/guide/getting-started
 export const NetworkTimelineChart = () => {
-  const [data, setData] = useState<any>("");
+  const [data, setData] = useState<
+    { time: string; value: string | undefined }[]
+  >([]);
 
   const callData = async () => {
     // FIXME
-    const response: {
-      serie_0: {
-        timestamps: any;
-        values: any;
-      };
-    } = await handleTimeSeriesData();
-    console.log((response as any).serie_0);
+    const response = await handleTimeSeriesData();
+    console.log(response.serie_0);
     const { timestamps, values } = response.serie_0;
-    const newData = timestamps.map((time: string, index: number) => {
+    const newData = timestamps?.map((time: string, index: number) => {
       return {
         time: toKST(time),
         value: values[index],

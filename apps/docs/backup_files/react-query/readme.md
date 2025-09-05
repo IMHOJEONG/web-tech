@@ -1,11 +1,9 @@
 ### React Query의 staleTime, cacheTime
 
 - staleTime = 캐사된 데이터를 얼마나 오래 "fresh"하다고 간주할 지
-
     - 해당 시간 동안 데이터는 재요청 없이 신선한 상태로 유지됨
 
 - cacheTime = 사용되지 않을 때, 메모리에서 언제 제거할지를 관리하는 데 도움을 줌
-
     - 사용되지 않는 데이터가 메모리에서 자동으로 제거되기까지 걸리는 시간을 의미
 
 ### cacheTime < staleTime 의 경우
@@ -29,7 +27,6 @@ https://www.codemzy.com/blog/react-query-cachetime-staletime
 - 특히, 네트워크 요청을 관리하는 데 유용 & 불필요한 요청을 줄여 성능을 최적화 & 데이터 일관성을 유지하는 데 도움을 줌
 
 - JavaScript의 AbortController에서 비롯된 abort signal
-
     - 네트워크 요청을 중단시키기 위한 일종의 신호
 
     - AbortController 인스턴스를 만들고, 이를 사용하여 요청을 중단 가능
