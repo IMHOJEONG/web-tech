@@ -17,3 +17,7 @@
 4. zod, next-auth
 
 -
+
+5. shadcn UI를 사용하자
+
+- https://ui.shadcn.com/docs/components/badge

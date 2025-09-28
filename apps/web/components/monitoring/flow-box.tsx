@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Background,
   ReactFlow,
   addEdge,
   applyEdgeChanges,
@@ -8,14 +9,7 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { useCallback, useState } from "react";
-
-// import { client } from "../cloudflare/api";
-
-const initialNodes = [
-  { id: "n1", position: { x: 0, y: 0 }, data: { label: "Node 1" } },
-  { id: "n2", position: { x: 0, y: 100 }, data: { label: "Node 2" } },
-];
-const initialEdges = [{ id: "n1-n2", source: "n1", target: "n2" }];
+import { initialEdges, initialNodes } from "./data";
 
 export const FlowBox = () => {
   const [nodes, setNodes] = useState(initialNodes);
@@ -51,9 +45,9 @@ export const FlowBox = () => {
   //   };
 
   return (
-    <>
+    <div className="flex flex-col gap-2">
       <h1>Monitoring System</h1>
-      <div style={{ width: "100vw", height: "50vh" }}>
+      <div className="size-full">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -61,8 +55,10 @@ export const FlowBox = () => {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           fitView
-        />
+        >
+          <Background />
+        </ReactFlow>
       </div>
-    </>
+    </div>
   );
 };

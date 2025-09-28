@@ -1,9 +1,10 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import { RankingTopResponse } from "cloudflare/resources/radar/ranking/ranking.mjs";
 import { useEffect, useState } from "react";
-import { handleRankingTopData } from "../feature/ranking/top/api";
-import { Badge } from "../ui/badge";
+import { handleRankingTopData } from "../../feature/ranking/top/api";
 
 // https://recharts.org/en-US/guide/getting-started
 export const RankingTopBox = () => {
@@ -31,12 +32,15 @@ export const RankingTopBox = () => {
   }, []);
 
   return (
-    <div className="flex  gap-1 flex-wrap">
+    <div className="flex items-center justify-stretch gap-1 flex-wrap p-2">
       {data?.map((top) => (
-        <div key={top.domain} className="flex ">
-          <Badge>{top.rank}</Badge>
+        <Card key={top.domain} className="flex gap-1 flex-col p-4 size-full">
+          <Badge className="flex gap-1">
+            <div>TOP</div>
+            <div>{top.rank}</div>
+          </Badge>
           <Badge>{top.domain}</Badge>
-        </div>
+        </Card>
       ))}
     </div>
   );
