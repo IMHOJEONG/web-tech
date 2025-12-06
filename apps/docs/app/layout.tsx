@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { maruburi } from '~/components/maruburi-font'
 import { mono } from '~/components/mono-font'
-import './globals.css'
+import './css/global.scss'
 import Header from './header'
 
 export const metadata: Metadata = {
@@ -33,7 +33,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 />
             </head>
             <body
-                className={`flex flex-col size-full min-h-screen bg-gradient-to-b from-amber-50 to-stone-100 ${maruburi.variable} ${mono.variable}`}
+                className={`flex flex-col size-full min-h-screen bg-gradient-to-b 
+                   
+                    ${maruburi.variable} ${mono.variable}`}
             >
                 <Header />
                 {children}

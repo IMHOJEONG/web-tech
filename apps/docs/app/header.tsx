@@ -1,16 +1,16 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import localFont from 'next/font/local'
 import { cn } from '@web-tech/ui/lib/utils'
+import localFont from 'next/font/local'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const headerLogoFont = localFont({ src: 'fonts/header-logo.ttf' })
 
 function Icon() {
     return (
         <a className="mr-4 flex items-center gap-2 lg:mr-6" href="/">
-            <div className="w-6 h-6 relative">
+            <div className="w-20 h-20 relative">
                 <Image
-                    src={'/logo.svg'}
+                    src={'/logo.webp'}
                     alt=""
                     width={100}
                     height={100}
@@ -18,7 +18,7 @@ function Icon() {
                 />
             </div>
             <span className={cn('font-bold', headerLogoFont.className)}>
-                Net
+                Heap Forge
             </span>
         </a>
     )
@@ -34,7 +34,7 @@ const navigation = [
 export default function Header() {
     return (
         <header className="sticky top-0 z-50 w-full border-b border-header-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:border-border">
-            <div className="flex h-14 items-center px-4">
+            <div className="flex h-20 items-center px-4">
                 <div className="mr-4 flex">
                     <Icon />
                     {navigation.map((nav) => {

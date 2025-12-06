@@ -10,7 +10,7 @@ export const LandingBox = (props: LandingBoxProps) => {
     return (
         <div
             className="size-full flex flex-1
-            bg-stone-100 px-4 sm:px-6 md:px"
+             px-4 sm:px-6 md:px"
             key={name}
         >
             {children}
