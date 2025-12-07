@@ -1,7 +1,6 @@
 'use client'
 
 import {
-    addEdge,
     Connection,
     ReactFlow,
     useEdgesState,
@@ -12,12 +11,17 @@ import {
 import '@xyflow/react/dist/style.css'
 import { useCallback, useEffect } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-import CustomEdge from './custom-edge'
-import { EndNode, StartNode } from './custom-node'
+import { CustomEdge } from './custom-edge'
+import { EndNode, StartEndNode, StartNode } from './custom-node'
 import { EDGES, NODES } from './data'
 import { connectionLineStyle, edgeOptions } from './edge/edge-style'
 
-const nodeTypes = { start: StartNode, end: EndNode }
+const nodeTypes = {
+    start: StartNode,
+    end: EndNode,
+    'start-end': StartEndNode,
+}
+
 const edgeTypes = {
     'custom-edge': CustomEdge,
 }
@@ -50,17 +54,19 @@ export default function Node() {
     const onConnect = useCallback(
         (connection: Connection) => {
             console.log(connection)
-            const edge: {
-                id: string
-                type: string
-                source: string
-                target: string
-            } = {
-                id: `${connection.source}-${connection.target}`,
-                ...connection,
-                type: 'custom-edge',
-            }
-            setEdges((eds) => addEdge(edge, eds))
+            // const edge: Edge = {
+            //     id: `${connection.source}-${connection.target}`,
+            //     ...connection,
+            //     type: 'custom-edge',
+            //     markerEnd: { type: MarkerType.ArrowClosed, color: '#fff' },
+            //     markerStart: {
+            //         type: MarkerType.ArrowClosed,
+            //         color: '#fff',
+            //         orient: 'auto-start-reverse',
+            //     },
+            // }
+
+            // setEdges((eds) => addEdge(edge, eds))
         },
         [setEdges]
     )

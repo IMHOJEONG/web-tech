@@ -7,7 +7,7 @@ export const StartHandle = () => {
         <Handle
             type="source"
             position={Position.Bottom}
-            id="a"
+            id="source"
             // style={handleStyle}
         />
     )
@@ -17,7 +17,7 @@ export const EndHandle = () => {
         <Handle
             type="target"
             position={Position.Top}
-            id="b"
+            id="target"
             // style={handleStyle}
         />
     )
@@ -25,11 +25,19 @@ export const EndHandle = () => {
 
 export const StartEndHandle = () => {
     return (
-        <Handle
-            type="target"
-            position={Position.Top}
-            id="b"
-            // style={handleStyle}
-        />
+        <>
+            <Handle
+                type="target"
+                position={Position.Top}
+                id="target"
+                // style={handleStyle}
+            />
+            <Handle
+                type="source"
+                position={Position.Bottom}
+                id="source"
+                // style={handleStyle}
+            />
+        </>
     )
 }

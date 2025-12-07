@@ -27,7 +27,7 @@ function Icon() {
 const navigation = [
     {
         href: '/docs',
-        name: 'DOCS',
+        name: 'Documents',
     },
 ]
 

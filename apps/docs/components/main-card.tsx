@@ -1,7 +1,7 @@
-import { Metadata } from '~/lib/util'
-import Image from 'next/image'
 import { getTime } from '@web-tech/ui/lib/time'
 import { cn } from '@web-tech/ui/lib/utils'
+import Image from 'next/image'
+import { Metadata } from '~/lib/util'
 
 const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
     const { title, date, summary, slug, content } = doc

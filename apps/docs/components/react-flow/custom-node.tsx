@@ -29,7 +29,6 @@ const CustomNodeComponent = ({ data, children }: CustomNodeComponentProps) => {
                     {data.description}
                 </p>
             </div>
-
             {children}
         </div>
     )

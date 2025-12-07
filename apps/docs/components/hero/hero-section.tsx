@@ -1,6 +1,10 @@
+'use client'
+
+import dynamic from 'next/dynamic'
 import { HERO } from '~/shared/constants'
 import { LandingBox } from '../layout/landing-box'
-import Node from '../react-flow/node'
+
+const Node = dynamic(() => import('../react-flow/node'), { ssr: false })
 
 export const HeroSection = () => {
     return (
@@ -24,12 +28,3 @@ export const HeroSection = () => {
         </LandingBox>
     )
 }
-
-// @font-face {
-//   font-family: 'MyFont';
-//   src: url('/fonts/MyFont.woff2') format('woff2'),
-//        url('/fonts/MyFont.woff') format('woff'),
-//        url('/fonts/MyFont.ttf') format('truetype'); /* fallback */
-//   font-weight: normal;
-//   font-style: normal;
-// }
