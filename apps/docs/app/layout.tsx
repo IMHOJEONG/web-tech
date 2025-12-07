@@ -31,6 +31,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     src="https://unpkg.com/react-scan/dist/auto.global.js"
                     async
                 />
+
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossOrigin="anonymous"
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap"
+                    rel="stylesheet"
+                />
             </head>
             <body
                 className={`flex flex-col size-full min-h-screen bg-gradient-to-b 
