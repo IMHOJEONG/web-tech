@@ -27,7 +27,7 @@ function Icon() {
 const navigation = [
     {
         href: '/docs',
-        name: '문서',
+        name: 'DOCS',
     },
 ]
 

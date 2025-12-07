@@ -12,11 +12,7 @@ export default async function Page() {
                     return null
                 }
                 return (
-                    <Link
-                        href={`/${slug}`}
-                        key={id}
-                        className="hover:bg-gray-200 size-full"
-                    >
+                    <Link href={`/${slug}`} key={id} className=" size-full">
                         <MainCard doc={doc} />
                     </Link>
                 )
