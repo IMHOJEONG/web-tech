@@ -1,6 +1,6 @@
 import fs from 'fs'
-import path from 'path'
 import matter from 'gray-matter'
+import path from 'path'
 
 export interface Metadata {
     id: string
@@ -9,9 +9,11 @@ export interface Metadata {
     summary: string
     slug: string
     content: string
+    fileName: string
 }
 
-const docsDirectory = path.join(process.cwd(), 'docs')
+const docsDirectory = path.join(process.cwd(), 'data')
+
 function exploreDirectory(directory: string) {
     let files: string[] = []
     try {
@@ -49,12 +51,17 @@ export function getDocsData() {
         const fileContents = fs.readFileSync(fileName, 'utf8')
         // Use gray-matter to parse the post metadata section
         const matterResult = matter(fileContents)
-
+        // 프로젝트 루트 기준의 상대경로(확장자 없는)만 추출
+        const relPathFromRoot = path
+            .relative(process.cwd(), fileName)
+            .replace(/\.(mdx|md)$/i, '')
+        console.log(relPathFromRoot)
         // Combine the data with the id
         return {
             id,
             ...matterResult.data,
             content: matterResult.content,
+            fileName: relPathFromRoot,
         }
     })
     console.log(allPostsData)

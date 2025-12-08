@@ -1,9 +1,6 @@
 import { cn } from '@web-tech/ui/lib/utils'
-import localFont from 'next/font/local'
 import Image from 'next/image'
 import Link from 'next/link'
-
-const headerLogoFont = localFont({ src: 'fonts/header-logo.ttf' })
 
 function Icon() {
     return (
@@ -17,9 +14,7 @@ function Icon() {
                     priority
                 />
             </div>
-            <span className={cn('font-bold', headerLogoFont.className)}>
-                Heap Forge
-            </span>
+            <span className={cn('font-bold')}>Heap Forge</span>
         </a>
     )
 }
@@ -29,6 +24,10 @@ const navigation = [
         href: '/docs',
         name: 'Documents',
     },
+    {
+        href: '/architecture',
+        name: 'architecture',
+    },
 ]
 
 export default function Header() {
@@ -37,22 +36,24 @@ export default function Header() {
             <div className="flex h-20 items-center px-4">
                 <div className="mr-4 flex">
                     <Icon />
-                    {navigation.map((nav) => {
-                        const { href, name } = nav
-                        return (
-                            <nav
-                                key={name}
-                                className="flex items-center gap-4 text-sm xl:gap-6"
-                            >
-                                <Link
-                                    className="transition-colors hover:text-foreground/80 text-foreground/80"
-                                    href={href}
+                    <div className="flex items-center gap-5">
+                        {navigation.map((nav) => {
+                            const { href, name } = nav
+                            return (
+                                <nav
+                                    key={name}
+                                    className="flex items-center gap-4 text-sm xl:gap-6"
                                 >
-                                    {name}
-                                </Link>
-                            </nav>
-                        )
-                    })}
+                                    <Link
+                                        className="transition-colors hover:text-foreground/80 text-foreground/80"
+                                        href={href}
+                                    >
+                                        {name}
+                                    </Link>
+                                </nav>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </header>

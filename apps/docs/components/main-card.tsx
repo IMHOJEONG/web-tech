@@ -9,11 +9,14 @@ const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
         <div
             className={cn(
                 'size-full',
-                'flex flex-col gap-3 rounded-lg',
+                'grid grid-cols-1 md:grid-cols-[0.4fr_0.6fr]',
+                'grid-cols-[0.3fr_0.7fr]',
+
+                'gap-3 rounded-lg',
                 'justify-between'
             )}
         >
-            <div className="object-cover">
+            <div className="aspect-square w-full overflow-hidden rounded-lg">
                 <Image
                     src={'/default/no-image.webp'}
                     alt={title ?? ''}
@@ -22,15 +25,9 @@ const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
                     className="rounded-lg size-full"
                 />
             </div>
-            <div
-                className={cn(
-                    'size-full',
-                    'flex flex-col gap-10 justify-between',
-                    'text-wrap'
-                )}
-            >
-                <div className="text-ellipsis">{title}</div>
-                {summary && <div>{summary}</div>}
+            <div className="flex flex-col justify-between gap-1 text-wrap">
+                <div className="line-clamp-2">{title}</div>
+                {summary && <div className="line-clamp-3">{summary}</div>}
                 <div>{getTime(date ?? '')}</div>
             </div>
         </div>

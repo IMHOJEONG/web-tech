@@ -1,8 +1,8 @@
-@import 'tailwindcss';
+@use 'tailwindcss';
 // @import 'tailwindcss/typography';
 // @import 'tw-animate-css';
 
-@import './variables.scss';
+@use './variables.scss' as *;
 
 // Variant for dark mode
 @custom-variant dark (&:where(.dark, .dark *));

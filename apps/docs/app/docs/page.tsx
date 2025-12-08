@@ -5,14 +5,24 @@ import { getSortedPostsData } from '~/lib/util'
 export default async function Page() {
     const data = await getSortedPostsData()
     return (
-        <div className="flex flex-col gap-3 p-3 sm:grid sm:grid-cols-4">
+        <div
+            className="
+        grid
+        gap-4 p-4
+        grid-cols-[repeat(auto-fit,minmax(260px,1fr))]
+    "
+        >
             {data.map((doc) => {
                 const { title, slug, id } = doc
                 if (!slug) {
                     return null
                 }
                 return (
-                    <Link href={`/${slug}`} key={id} className=" size-full">
+                    <Link
+                        href={`/docs/${slug}`}
+                        key={id}
+                        className=" size-full"
+                    >
                         <MainCard doc={doc} />
                     </Link>
                 )

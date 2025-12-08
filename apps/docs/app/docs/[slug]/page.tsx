@@ -1,10 +1,6 @@
-import { compileMDX } from 'next-mdx-remote/rsc'
 import { PropsWithChildren } from 'react'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import { getDocsData } from '~/lib/util'
 import CodeBlock from './codeblock'
-
-import remarkGfm from 'remark-gfm'
 
 const components = {
     // pre: (props: PropsWithChildren<{ className?: string }>) => {
@@ -18,25 +14,22 @@ const components = {
     },
 }
 
+// export function generateStaticParams() {
+//     return [{ slug: 'welcome' }, { slug: 'about' }]
+// }
+
+// export const dynamicParams = false
+
 export default async function Page({
     params,
 }: {
     params: Promise<{ slug: string }>
 }) {
-    const slug = (await params).slug
+    const { slug } = await params
     const data = await getDocsData()
     const target = data.find((doc) => doc.slug == slug)
-    const { content: mdxSource } = await compileMDX({
-        source: target?.content ?? '## 12',
-        components: components,
-        options: {
-            mdxOptions: {
-                remarkPlugins: [remarkGfm],
-                rehypePlugins: [rehypeAutolinkHeadings],
-                format: 'mdx',
-            },
-        },
-    })
+    console.log(slug, target?.fileName)
+    const { default: Post } = await import(`~/${target?.fileName}.mdx`)
 
-    return <>{mdxSource}</>
+    return <Post />
 }
