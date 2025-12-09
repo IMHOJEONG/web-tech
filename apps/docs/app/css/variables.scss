@@ -1,34 +1,62 @@
-// =======================================
-// Heap Forge – Industrial Cold Theme (OKLCH)
-// =======================================
+/* =======================================
+   Heap Forge – Industrial Cold Theme (OKLCH)
+   ======================================= */
 
-// --- Base Backgrounds ---
-// HEX 원본: #0b1220 / #081023 / #05070a
-$hf-bg-dark: oklch(0.2 0.03 260); // 깊은 네이비
-$hf-bg-body: oklch(0.17 0.03 260); // 메인 바디 (~#081023)
-$hf-bg-deep: oklch(0.12 0.02 260); // 최심부 (~#05070a)
+:root {
+    /* --- Base Backgrounds --- */
+    --hf-bg-dark: oklch(0.2 0.03 260); /* 깊은 네이비 (#0b1220) */
+    --hf-bg-body: oklch(0.17 0.03 260); /* 메인 바디 (~#081023) */
+    --hf-bg-deep: oklch(0.12 0.02 260); /* 최심부 (~#05070a) */
 
-// --- Surfaces ---
-$hf-surface: oklch(0.24 0.03 260); // #0f1624와 유사
-$hf-surface-border: oklch(0.89 0 0 / 3%); // rgba(255,255,255,0.03)
+    /* --- Surfaces --- */
+    --hf-surface: oklch(0.24 0.03 260); /* #0f1624 */
+    --hf-surface-border: oklch(0.89 0 0 / 3%); /* rgba(255,255,255,0.03) */
 
-// --- Text ---
-$hf-text-primary: oklch(0.98 0 0); // pure white
-$hf-text-muted: oklch(0.75 0.02 260); // #a6b0bf 차갑게 변환
-$hf-text-metal: oklch(0.65 0.03 230); // 금속성 느낌 엣지 텍스트
+    /* --- Text --- */
+    --hf-text-primary: oklch(0.98 0 0); /* white */
+    --hf-text-muted: oklch(0.75 0.02 260); /* 차가운 그레이 */
+    --hf-text-metal: oklch(0.65 0.03 230); /* 금속성 텍스트 */
 
-// --- Accent colors ---
-// HEX: #00e5ff / #ff9f1c
-$hf-accent-cold: oklch(0.85 0.12 200); // 전기 사이안
-$hf-accent-warm: oklch(0.8 0.12 75); // 작은 포인트
+    /* --- Accents --- */
+    --hf-accent-cold: oklch(0.85 0.12 200); /* 전기 사이안 */
+    --hf-accent-warm: oklch(0.8 0.12 75); /* 워밍 포인트 */
 
-// --- Shadows ---
-$hf-shadow-deep: 0 8px 30px oklch(0 0 0 / 0.6);
+    /* --- Shadow --- */
+    --hf-shadow-deep: 0 8px 30px oklch(0 0 0 / 0.6);
 
-// --- Gradient (body) ---
-$hf-body-gradient: linear-gradient(
-    180deg,
-    $hf-bg-body 0%,
-    $hf-bg-dark 50%,
-    $hf-bg-deep 100%
-);
+    /* --- Gradient --- */
+    --hf-body-gradient: linear-gradient(
+        180deg,
+        oklch(0.17 0.03 260) 0%,
+        oklch(0.2 0.03 260) 50%,
+        oklch(0.12 0.02 260) 100%
+    );
+}
+
+/* =======================================
+   사용 예시 (선택)
+   ======================================= */
+
+body {
+    background: var(--hf-body-gradient);
+    color: var(--hf-text-primary);
+}
+
+.card {
+    background: var(--hf-surface);
+    border: 1px solid var(--hf-surface-border);
+    box-shadow: var(--hf-shadow-deep);
+    color: var(--hf-text-primary);
+}
+
+.text-muted {
+    color: var(--hf-text-muted);
+}
+
+.text-metal {
+    color: var(--hf-text-metal);
+}
+
+.link-cold {
+    color: var(--hf-accent-cold);
+}

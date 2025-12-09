@@ -1,0 +1,175 @@
+/* =========================================
+   MDX COLD MODERN THEME (SCSS + OKLCH SAFE)
+   ========================================= */
+
+:root {
+    /* Text */
+    --mdx-text-primary: oklch(0.98 0 0);
+    --mdx-text-muted: oklch(0.9 0.01 260);
+
+    /* Headings */
+    --mdx-h1: oklch(0.92 0.02 260);
+    --mdx-h2: oklch(0.92 0.02 260);
+    --mdx-h3: oklch(0.88 0.02 260);
+    --mdx-h4: oklch(0.85 0.02 260);
+
+    /* Accent */
+    --mdx-accent-cold: oklch(0.75 0.12 200);
+
+    /* Blockquote */
+    --mdx-blockquote-bg: oklch(0.18 0.03 260);
+    --mdx-blockquote-text: oklch(0.8 0.02 260);
+
+    /* Code */
+    --mdx-code-inline-bg: oklch(0.22 0.02 260);
+    --mdx-code-block-bg: oklch(0.16 0.02 260);
+
+    /* Shadows */
+    --mdx-shadow-deep: oklch(0 0 0 / 0.4);
+}
+
+/* ------------------------------
+   Wrapper
+------------------------------ */
+
+.mdx-wrapper {
+    color: var(--mdx-text-primary);
+    font-weight: 400;
+    line-height: 1.7;
+    padding-bottom: 4rem;
+}
+
+/* ------------------------------
+   Headings
+------------------------------ */
+
+.mdx-h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+    color: var(--mdx-h1);
+}
+
+.mdx-h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    border-left: 4px solid var(--mdx-accent-cold);
+    padding-left: 0.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1.2rem;
+    color: var(--mdx-h2);
+}
+
+.mdx-h3 {
+    font-size: 1.55rem;
+    font-weight: 600;
+    margin-top: 1.8rem;
+    margin-bottom: 0.8rem;
+    color: var(--mdx-h3);
+}
+
+.mdx-h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--mdx-h4);
+}
+
+/* ------------------------------
+   Text / Paragraph
+------------------------------ */
+
+.mdx-p {
+    font-size: 1.05rem;
+    margin: 1rem 0;
+    color: var(--mdx-text-muted);
+}
+
+/* ------------------------------
+   Lists
+------------------------------ */
+
+.mdx-ul,
+.mdx-ol {
+    list-style: disc;
+    list-style-position: outside;
+    margin: 1.2rem 0;
+    padding-left: 1.6rem;
+}
+
+.mdx-li {
+    margin: 0.4rem 0;
+    color: var(--mdx-text-muted);
+}
+
+/* ------------------------------
+   Links
+------------------------------ */
+
+.mdx-a {
+    color: var(--mdx-accent-cold);
+    font-weight: 500;
+    text-decoration: underline;
+    transition: opacity 0.2s;
+}
+
+.mdx-a:hover {
+    opacity: 0.7;
+}
+
+/* ------------------------------
+   Blockquote
+------------------------------ */
+
+.mdx-blockquote {
+    border-left: 4px solid var(--mdx-accent-cold);
+    padding: 1rem 1rem;
+    margin: 1.5rem 0;
+    color: var(--mdx-blockquote-text);
+    font-style: italic;
+    background: var(--mdx-blockquote-bg);
+    border-radius: 0.5rem;
+}
+
+/* ------------------------------
+   Inline Code
+------------------------------ */
+
+.mdx-inline-code {
+    background: var(--mdx-code-inline-bg);
+    padding: 0.15rem 0.4rem;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--mdx-accent-cold);
+}
+
+/* ------------------------------
+   Code Block
+------------------------------ */
+
+.mdx-code-block {
+    background: var(--mdx-code-block-bg);
+    padding: 1.2rem;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--mdx-h2);
+    box-shadow: 0 0 20px var(--mdx-shadow-deep);
+}
+
+/* ------------------------------
+   Images
+------------------------------ */
+
+.mdx-img {
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 20px var(--mdx-shadow-deep);
+}

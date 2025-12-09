@@ -3,33 +3,49 @@
 // @import 'tw-animate-css';
 
 @use './variables.scss' as *;
+@use './mdx.scss' as *;
 
-// Variant for dark mode
-@custom-variant dark (&:where(.dark, .dark *));
+// /* Variant for dark mode */
+// @custom-variant dark (&: where(.dark, .dark *));
 
-@theme {
-    --color-header-border: rgb(226 232 240 / 40%);
-}
+// @theme {
+//     --color-header-border: rgb(226 232 240 / 40%);
+// }
 
 /* 기본 라이트/다크 색상 */
 :root {
     --background: oklch(1 0 0);
     --foreground: oklch(0.147 0.004 49.25);
-}
 
-.dark {
-    --background: oklch(0.147 0.004 49.25);
-    --foreground: oklch(0.985 0.001 106.423);
-}
+    /* Heap Forge Base Backgrounds */
+    --hf-bg-dark: oklch(0.2 0.03 260);
+    --hf-bg-body: oklch(0.17 0.03 260);
+    --hf-bg-deep: oklch(0.12 0.02 260);
 
-/* Tailwind inline theme variables */
-@theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-}
+    /* Surfaces */
+    --hf-surface: oklch(0.24 0.03 260);
+    --hf-surface-border: oklch(0.89 0 0 / 3%);
 
-/* Heap Forge 별도 확장된 palette */
-:root {
+    /* Text */
+    --hf-text-primary: oklch(0.98 0 0);
+    --hf-text-muted: oklch(0.75 0.02 260);
+    --hf-text-metal: oklch(0.65 0.03 230);
+
+    /* Accents */
+    --hf-accent-cold: oklch(0.85 0.12 200);
+    --hf-accent-warm: oklch(0.8 0.12 75);
+
+    /* Shadows */
+    --hf-shadow-deep: 0 8px 30px oklch(0 0 0 / 0.6);
+
+    /* Gradient */
+    --hf-body-gradient: linear-gradient(
+        180deg,
+        oklch(0.17 0.03 260) 0%,
+        oklch(0.2 0.03 260) 50%,
+        oklch(0.12 0.02 260) 100%
+    );
+
     --radius: 0.625rem;
 
     --primary: oklch(0.216 0.006 56.043);
@@ -41,6 +57,9 @@
 }
 
 .dark {
+    --background: oklch(0.147 0.004 49.25);
+    --foreground: oklch(0.985 0.001 106.423);
+
     --primary: oklch(0.923 0.003 48.717);
     --primary-foreground: oklch(0.216 0.006 56.043);
 
@@ -58,23 +77,27 @@
     font-family: var(--font-jetbrains-mono);
 }
 
-/* Heap Forge Header */
+/* =============================
+   Heap Forge Header → 수정됨
+   ============================= */
 header {
-    background: $hf-bg-dark;
-    border-bottom: 1px solid $hf-surface-border;
-    color: $hf-text-primary;
+    background: var(--hf-bg-dark);
+    border-bottom: 1px solid var(--hf-surface-border);
+    color: var(--hf-text-primary);
     backdrop-filter: blur(6px);
 }
 
-/* Heap Forge Body */
+/* =============================
+   Heap Forge Body → 수정됨
+   ============================= */
 body {
-    background: $hf-body-gradient;
-    color: $hf-text-primary;
+    background: var(--hf-body-gradient);
+    color: var(--hf-text-primary);
     font-family: 'Inter', sans-serif;
 }
 
 h1,
 nav,
 a {
-    color: $hf-text-primary;
+    color: var(--hf-text-primary);
 }

@@ -9,6 +9,9 @@ const nextConfig = {
 }
 
 const withMDX = createMDX({
+    experimental: {
+        mdxRs: true,
+    },
     options: {
         remarkPlugins: [
             // Without options
