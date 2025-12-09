@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Metadata } from '~/lib/util'
 
 const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
-    const { title, date, summary, slug, content } = doc
+    const { title, date, summary, slug, content, thumbnail } = doc
     return (
         <div
             className={cn(
@@ -16,7 +16,7 @@ const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
         >
             <div className="aspect-[16/9] w-full overflow-hidden rounded-lg">
                 <Image
-                    src={'/default/no-image.webp'}
+                    src={thumbnail ?? '/default/no-image.webp'}
                     alt={title ?? ''}
                     width={1920}
                     height={1080}
