@@ -1,0 +1,33 @@
+.monitoring-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.monitor-card {
+  background: var(--hf-surface);
+  border: 1px solid var(--hf-border);
+  border-radius: 12px;
+  padding: 1rem;
+  color: var(--hf-text-primary);
+}
+
+.monitor-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--hf-text-primary);
+}
+
+.monitor-sub {
+  font-size: 0.85rem;
+  color: var(--hf-text-secondary);
+}
+
+.monitor-accent {
+  color: var(--hf-accent);
+}

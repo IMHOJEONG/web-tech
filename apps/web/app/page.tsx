@@ -4,7 +4,7 @@ import { RankingTopBox } from "@/components/charts/ranking-top-box";
 import { FlowBox } from "@/components/monitoring/flow-box";
 import dynamic from "next/dynamic";
 
-// import { NetworkTimelineChart } from "@/components/charts/network-timeline-chart";
+import "./css/monitoring.scss";
 
 const NetworkTimelineChart = dynamic(
   () =>
@@ -17,11 +17,19 @@ const NetworkTimelineChart = dynamic(
 // 모니터링, npm registry 정보?
 export default function Home() {
   return (
-    <div className="size-full grid grid-cols-2 gap-2">
-      <FlowBox />
-      <div className="flex flex-col gap-2">
-        <NetworkTimelineChart />
-        <div className="size-full">
+    <div className="monitoring-layout">
+      {/* Left large panel */}
+      <div className="monitoring-left">
+        <FlowBox />
+      </div>
+
+      {/* Right group */}
+      <div className="monitoring-right">
+        <div className="monitoring-chart">
+          <NetworkTimelineChart />
+        </div>
+
+        <div className="monitoring-ranking">
           <RankingTopBox />
         </div>
       </div>

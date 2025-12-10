@@ -45,7 +45,7 @@ export const FlowBox = () => {
   //   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 size-full">
       <h1>Monitoring System</h1>
       <div className="size-full">
         <ReactFlow
