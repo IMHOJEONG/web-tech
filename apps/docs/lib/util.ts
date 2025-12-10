@@ -56,7 +56,7 @@ export function getDocsData() {
         const relPathFromRoot = path
             .relative(process.cwd(), fileName)
             .replace(/\.(mdx|md)$/i, '')
-            
+
         console.log(relPathFromRoot)
         // Combine the data with the id
         // thumbnail 경로를 항상 /로 시작하게, 중복 / 방지, null/undefined 안전하게
