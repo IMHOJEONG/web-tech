@@ -1,7 +1,7 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
 import MainCard from '~/components/main-card'
-import { getSortedPostsData } from '~/lib/util'
+import { getSortedPostsData } from '~/lib/get-document'
 
 export default async function Page() {
     const data = await getSortedPostsData()

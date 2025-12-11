@@ -1,10 +1,10 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
-import MainCard from '~/components/main-card'
-import { getSortedPostsData } from '~/lib/util'
+import { ArchitectureCard } from '~/components/architecture/architecture-card'
+import { getArchitecturesData } from '~/lib/get-architecture'
 
 export default async function Page() {
-    const data = await getSortedPostsData()
+    const data = await getArchitecturesData()
     return (
         <div
             className={cn(
@@ -21,11 +21,11 @@ export default async function Page() {
                 }
                 return (
                     <Link
-                        href={`/docs/${slug}`}
+                        href={`/architecture/${slug}`}
                         key={id}
                         className=" size-full"
                     >
-                        <MainCard doc={doc} />
+                        <ArchitectureCard doc={doc} />
                     </Link>
                 )
             })}

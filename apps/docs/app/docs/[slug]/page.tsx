@@ -1,7 +1,7 @@
 import { evaluate, EvaluateOptions } from 'next-mdx-remote-client/rsc'
 import { Suspense } from 'react'
-import remarkFlexibleToc, { TocItem } from 'remark-flexible-toc' // <---------
-import { getDocsData } from '~/lib/util'
+import remarkFlexibleToc, { TocItem } from 'remark-flexible-toc'
+import { getDocsData } from '~/lib/get-document'
 import { components } from '~/mdx-components'
 import { LoadingComponent } from '~/shared/loading-component'
 import Toc from '~/shared/toc'
@@ -50,7 +50,7 @@ export default async function Page({
     })
     return (
         <div className="flex gap-4">
-            <div className="sticky top-20 h-fit">
+            <div className="sticky top-24 h-fit">
                 <Toc toc={scope.toc} />
             </div>
 
