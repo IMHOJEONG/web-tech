@@ -1,11 +1,12 @@
-import { evaluate, EvaluateOptions } from 'next-mdx-remote-client/rsc'
+import fs from 'fs'
+import { bundleMDX } from 'mdx-bundler'
+import path from 'path'
 import { Suspense } from 'react'
-import remarkFlexibleToc, { TocItem } from 'remark-flexible-toc' // <---------
+import { TocItem } from 'remark-flexible-toc' // <---------
 import { getArchitecturesData } from '~/lib/get-architecture'
-import { components } from '~/mdx-components'
+import { injectImport } from '~/lib/inject-import'
+import { ArchitecturePage } from '~/shared/architecture-page'
 import { LoadingComponent } from '~/shared/loading-component'
-import Toc from '~/shared/toc'
-
 type Scope = {
     readingTime: string
     toc?: TocItem[]
@@ -15,6 +16,16 @@ type Frontmatter = {
     title: string
     author: string
 }
+
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+export const CONTENT_ROOT = path.resolve(
+    __dirname,
+    '../../../data-architecture/arch1'
+)
 
 export default async function Page({
     params,
@@ -26,36 +37,32 @@ export default async function Page({
     const target = data.find((doc) => doc.slug == slug)
     console.log(slug, target?.fileName)
 
-    const options: EvaluateOptions<Scope> = {
-        mdxOptions: {
-            // ...
+    const withImports = injectImport(target?.content ?? '')
 
-            remarkPlugins: [remarkFlexibleToc],
+    // const cwd = path.join(process.cwd(), './data-architecture/arch1')
+    const result = await bundleMDX({
+        source: withImports,
+        cwd: CONTENT_ROOT,
+        files: {
+            './flow.tsx': fs.readFileSync(
+                path.join(CONTENT_ROOT, 'flow.tsx'),
+                'utf8'
+            ),
         },
-        parseFrontmatter: true,
-        scope: {
-            // readingTime: calculateSomeHow(source),
-            readingTime: '',
-        },
-        vfileDataIntoScope: 'toc',
-    }
-
-    const { content, frontmatter, scope, error } = await evaluate<
-        Frontmatter,
-        Scope
-    >({
-        source: target?.content ?? '',
-        options,
-        components,
     })
+
+    const { code, frontmatter } = result
+
     return (
         <div className="flex gap-4">
-            <div className="sticky top-24 h-fit">
+            {/* <div className="sticky top-24 h-fit">
                 <Toc toc={scope.toc} />
-            </div>
+            </div> */}
 
             <div className="flex-1">
-                <Suspense fallback={<LoadingComponent />}>{content}</Suspense>
+                <Suspense fallback={<LoadingComponent />}>
+                    <ArchitecturePage code={code} frontmatter={frontmatter} />
+                </Suspense>
             </div>
         </div>
     )

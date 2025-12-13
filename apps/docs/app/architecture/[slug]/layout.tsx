@@ -1,3 +1,5 @@
+import '@xyflow/react/dist/style.css'
+
 function MdxLayout({ children }: { children: React.ReactNode }) {
     // Create any shared layout or styles here
     return (

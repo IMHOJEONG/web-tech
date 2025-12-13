@@ -23,11 +23,12 @@ function exploreDirectory(directory: string) {
             const fullPath = path.join(directory, item.name)
 
             if (item.isDirectory()) {
-                // console.log("Directory:", fullPath);
                 files = files.concat(exploreDirectory(fullPath)) // 재귀 호출
             } else if (item.isFile()) {
-                // console.log("File:", fullPath);
-                files.push(fullPath)
+                // md, mdx 파일만 허용
+                if (/\.(mdx?|MDX?)$/.test(item.name)) {
+                    files.push(fullPath)
+                }
             }
         }
     } catch (error) {
@@ -80,6 +81,7 @@ export function getArchitecturesData() {
         return {
             id,
             ...matterResult.data,
+            use: matterResult.data.use ?? [],
             content: matterResult.content,
             fileName: relPathFromRoot,
             thumbnail: thumbnailPath,
