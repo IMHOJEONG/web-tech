@@ -36,6 +36,8 @@
         "sass": "^1.94.2",
         "tw-animate-css": "^1.3.8",
         "use-debounce": "^10.0.6",
+        "vfile": "^6.0.3",
+        "vfile-matter": "^5.0.1",
         "web": "^0.0.2"
     },
     "devDependencies": {

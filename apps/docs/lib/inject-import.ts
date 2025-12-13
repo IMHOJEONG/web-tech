@@ -1,7 +1,11 @@
-import matter from 'gray-matter'
+import { VFile } from 'vfile'
+import { matter as vfileMatter } from 'vfile-matter'
 
 export function injectImport(source: string) {
-    const { content, data } = matter(source)
+    const vfile = new VFile({ value: source })
+    vfileMatter(vfile, { strip: true })
+    const data = vfile.data.matter || {}
+    const content = String(vfile)
 
     if (!data.use) return source
 
@@ -9,7 +13,6 @@ export function injectImport(source: string) {
         ({ name, from }: { name: string; from: 'mdx' | 'tsx' }) => {
             const dir = from === 'mdx' ? 'partials' : 'components'
             const ext = from === 'mdx' ? 'mdx' : 'tsx'
-
             return `import ${name} from './${dir}/${name}.${ext}'`
         }
     )
