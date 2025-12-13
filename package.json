@@ -37,7 +37,14 @@
   },
   "pnpm": {
     "overrides": {
-      "glob": ">=11.1.0"
+      "glob": ">=11.1.0",
+      "tmp": ">=0.2.4",
+      "undici": ">=5.29.0",
+      "esbuild": ">=0.25.0",
+      "js-yaml": ">=4.1.1",
+      "body-parser": ">=2.2.1",
+      "mdast-util-to-hast": ">=13.2.1",
+      "path-to-regexp": ">=6.3.0"
     }
   }
 }
