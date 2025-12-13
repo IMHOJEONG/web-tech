@@ -16,7 +16,7 @@
         "@types/mdx": "^2.0.13",
         "@web-tech/ui": "workspace:*",
         "@xyflow/react": "^12.8.4",
-        "better-auth": "^1.3.18",
+        "better-auth": "^1.4.2",
         "clsx": "^2.1.1",
         "esbuild": "^0.27.1",
         "gray-matter": "^4.0.3",
