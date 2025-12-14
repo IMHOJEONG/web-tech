@@ -1,23 +1,13 @@
-import fs from 'fs'
 import { bundleMDX } from 'mdx-bundler'
 import path from 'path'
 import { Suspense } from 'react'
-import { TocItem } from 'remark-flexible-toc' // <---------
 import { getArchitecturesData } from '~/lib/get-architecture'
 import { injectImport } from '~/lib/inject-import'
 import { ArchitecturePage } from '~/shared/architecture-page'
 import { LoadingComponent } from '~/shared/loading-component'
-type Scope = {
-    readingTime: string
-    toc?: TocItem[]
-}
-
-type Frontmatter = {
-    title: string
-    author: string
-}
 
 import { fileURLToPath } from 'url'
+import { Flow } from '~/data-architecture/arch1/flow'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -55,12 +45,12 @@ export default async function Page({
     const result = await bundleMDX({
         source: withImports,
         cwd: CONTENT_ROOT,
-        files: {
-            './flow.tsx': fs.readFileSync(
-                path.join(CONTENT_ROOT, 'flow.tsx'),
-                'utf8'
-            ),
-        },
+        // files: {
+        //     './flow.tsx': fs.readFileSync(
+        //         path.join(CONTENT_ROOT, 'flow.tsx'),
+        //         'utf8'
+        //     ),
+        // },
         esbuildOptions(options) {
             options.external = [...(options.external ?? []), ...EXTERNALS]
             return options
@@ -77,7 +67,13 @@ export default async function Page({
 
             <div className="flex-1">
                 <Suspense fallback={<LoadingComponent />}>
-                    <ArchitecturePage code={code} frontmatter={frontmatter} />
+                    <ArchitecturePage
+                        code={code}
+                        frontmatter={frontmatter}
+                        components={{
+                            Flow: Flow,
+                        }}
+                    />
                 </Suspense>
             </div>
         </div>

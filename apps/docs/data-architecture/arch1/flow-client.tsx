@@ -9,7 +9,7 @@ const initialNodes = [
 ]
 const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }]
 
-export const Flowbox = () => {
+export const FlowClient = () => {
     const [nodes, setNodes] = useState(initialNodes)
     const [edges, setEdges] = useState(initialEdges)
 

@@ -2,9 +2,13 @@
 
 import dynamic from 'next/dynamic'
 
-const Flowbox = dynamic(() => import('./flow-box').then((mod) => mod.Flowbox), {
-    ssr: false,
-})
+const FlowClient = dynamic(
+    () => import('./flow-client').then((mod) => mod.FlowClient),
+    {
+        ssr: false,
+    }
+)
+
 export const Flow = () => {
-    return <Flowbox />
+    return <FlowClient />
 }
