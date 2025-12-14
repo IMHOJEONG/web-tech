@@ -6,6 +6,8 @@
     "dev": "turbo dev",
     "dev:web": "turbo dev --filter=web",
     "dev:docs": "turbo dev --filter=docs",
+    "start:web": "turbo start --filter=web",
+    "start:docs": "turbo start --filter=docs",
     "dev:api": "turbo dev --filter=api",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test",
