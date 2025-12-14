@@ -26,6 +26,18 @@ export const CONTENT_ROOT = path.resolve(
     __dirname,
     '../../../data-architecture/arch1'
 )
+const EXTERNALS = [
+    // Next
+    'next/*',
+
+    // UI / DOM libs
+    '@xyflow/react',
+    '@xyflow/react/*',
+    'reactflow',
+
+    // styling
+    '*.css',
+]
 
 export default async function Page({
     params,
@@ -48,6 +60,10 @@ export default async function Page({
                 path.join(CONTENT_ROOT, 'flow.tsx'),
                 'utf8'
             ),
+        },
+        esbuildOptions(options) {
+            options.external = [...(options.external ?? []), ...EXTERNALS]
+            return options
         },
     })
 
