@@ -13,7 +13,7 @@ export function injectImport(source: string) {
         ({ name, from }: { name: string; from: 'mdx' | 'tsx' }) => {
             const dir = from === 'mdx' ? 'partials' : 'components'
             const ext = from === 'mdx' ? 'mdx' : 'tsx'
-            return `import ${name} from './${dir}/${name}.${ext}'`
+            return `import { ${name} } from './${dir}/${name}.${ext}'`
         }
     )
 
