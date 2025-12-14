@@ -1,23 +1,15 @@
 {
-  "extends": "@web-tech/typescript-config/nextjs.json",
-  "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "~/*": [
-        "./*"
-      ]
-    }
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-, "docs/ARIA/2025-07-02-blocked-aria-hidden.mdx"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "extends": "@web-tech/typescript-config/nextjs.json",
+    "compilerOptions": {
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ],
+        "paths": {
+            "~/*": ["./*"]
+        }
+    },
+    "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+    "exclude": ["node_modules"]
 }

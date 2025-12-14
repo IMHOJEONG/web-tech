@@ -7,7 +7,7 @@ import { ArchitecturePage } from '~/shared/architecture-page'
 import { LoadingComponent } from '~/shared/loading-component'
 
 import { fileURLToPath } from 'url'
-import { Flow } from '~/data-architecture/arch1/flow'
+import { getComponentsBySlug } from '~/data-architecture/component-registry'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -59,6 +59,8 @@ export default async function Page({
 
     const { code, frontmatter } = result
 
+    const components = await getComponentsBySlug(slug)
+
     return (
         <div className="flex gap-4">
             {/* <div className="sticky top-24 h-fit">
@@ -70,9 +72,7 @@ export default async function Page({
                     <ArchitecturePage
                         code={code}
                         frontmatter={frontmatter}
-                        components={{
-                            Flow: Flow,
-                        }}
+                        components={components}
                     />
                 </Suspense>
             </div>
