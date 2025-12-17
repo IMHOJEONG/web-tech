@@ -1,18 +1,15 @@
-@use 'tailwindcss';
-// @import 'tailwindcss/typography';
-// @import 'tw-animate-css';
+/* Tailwind CSS v4 */
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
-@use './variables.scss' as *;
-@use './mdx.scss' as *;
+@config "../../tailwind.config.ts";
+@source "../../../../packages/ui/components/**/*.{ts,tsx}";
+@import './variables.css';
+@import './mdx.css';
 
-// /* Variant for dark mode */
-// @custom-variant dark (&: where(.dark, .dark *));
-
-// @theme {
-//     --color-header-border: rgb(226 232 240 / 40%);
-// }
-
-/* 기본 라이트/다크 색상 */
+/* =============================
+   기본 라이트 / 다크 색상
+   ============================= */
 :root {
     --background: oklch(1 0 0);
     --foreground: oklch(0.147 0.004 49.25);
@@ -78,7 +75,7 @@
 }
 
 /* =============================
-   Heap Forge Header → 수정됨
+   Heap Forge Header
    ============================= */
 header {
     background: var(--hf-bg-dark);
@@ -88,16 +85,41 @@ header {
 }
 
 /* =============================
-   Heap Forge Body → 수정됨
+   Heap Forge Body
    ============================= */
 body {
     background: var(--hf-body-gradient);
     color: var(--hf-text-primary);
-    font-family: 'Inter', sans-serif;
+    font-family: Inter, sans-serif;
 }
 
 h1,
 nav,
 a {
     color: var(--hf-text-primary);
+}
+
+/* Sidebar */
+@layer base {
+    :root {
+        --sidebar: oklch(0.985 0 0);
+        --sidebar-foreground: oklch(0.145 0 0);
+        --sidebar-primary: oklch(0.205 0 0);
+        --sidebar-primary-foreground: oklch(0.985 0 0);
+        --sidebar-accent: oklch(0.97 0 0);
+        --sidebar-accent-foreground: oklch(0.205 0 0);
+        --sidebar-border: oklch(0.922 0 0);
+        --sidebar-ring: oklch(0.708 0 0);
+    }
+
+    .dark {
+        --sidebar: oklch(0.205 0 0);
+        --sidebar-foreground: oklch(0.985 0 0);
+        --sidebar-primary: oklch(0.488 0.243 264.376);
+        --sidebar-primary-foreground: oklch(0.985 0 0);
+        --sidebar-accent: oklch(0.269 0 0);
+        --sidebar-accent-foreground: oklch(0.985 0 0);
+        --sidebar-border: oklch(1 0 0 / 10%);
+        --sidebar-ring: oklch(0.439 0 0);
+    }
 }

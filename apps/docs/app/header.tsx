@@ -25,8 +25,8 @@ const navigation = [
         name: 'Documents',
     },
     {
-        href: '/architecture',
-        name: 'architecture',
+        href: '/category',
+        name: 'category',
     },
 ]
 

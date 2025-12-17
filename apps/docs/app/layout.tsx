@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { maruburi } from '~/components/maruburi-font'
 import { mono } from '~/components/mono-font'
-import './css/global.scss'
+import './css/global.css'
 import Header from './header'
 
 export const metadata: Metadata = {
