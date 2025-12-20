@@ -11,28 +11,48 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarMenuSub,
+    SidebarMenuSubItem,
     useSidebar,
 } from '@/components/ui/sidebar'
+
+import {
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
+} from '@/components/ui/collapsible'
 
 // Menu items.
 const items = [
     {
-        title: 'Home',
+        title: 'React',
         url: '#',
         icon: Home,
+        sub: [
+            {
+                title: 'React',
+                url: '#',
+                icon: Home,
+            },
+            {
+                title: 'React Router',
+                url: '#',
+                icon: Calendar,
+            },
+        ],
     },
     {
-        title: 'Inbox',
+        title: 'Svelte',
         url: '#',
         icon: Inbox,
     },
     {
-        title: 'Calendar',
+        title: 'React Router',
         url: '#',
         icon: Calendar,
     },
     {
-        title: 'Search',
+        title: 'Astro',
         url: '#',
         icon: Search,
     },
@@ -54,6 +74,37 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <SidebarGroupLabel>Application</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
+                            <Collapsible
+                                defaultOpen
+                                className="group/collapsible"
+                            >
+                                {items.map((item) => (
+                                    <SidebarMenuItem key={item.title}>
+                                        <CollapsibleTrigger asChild>
+                                            <SidebarMenuButton asChild>
+                                                <a href={item.url}>
+                                                    <item.icon />
+                                                    <span>{item.title}</span>
+                                                </a>
+                                            </SidebarMenuButton>
+                                        </CollapsibleTrigger>
+                                        <CollapsibleContent>
+                                            <SidebarMenuSub>
+                                                <SidebarMenuSubItem />
+                                            </SidebarMenuSub>
+                                        </CollapsibleContent>
+                                    </SidebarMenuItem>
+                                ))}
+                            </Collapsible>
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+            </SidebarContent>
+            {/* <SidebarContent>
+                <SidebarGroup>
+                    <SidebarGroupLabel>Application</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
@@ -67,7 +118,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
-            </SidebarContent>
+            </SidebarContent> */}
         </Sidebar>
     )
 }

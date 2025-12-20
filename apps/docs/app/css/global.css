@@ -2,7 +2,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@config "../../tailwind.config.ts";
 @source "../../../../packages/ui/components/**/*.{ts,tsx}";
 @import './variables.css';
 @import './mdx.css';

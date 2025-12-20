@@ -1,11 +1,12 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
+import { HEADER_HEIGHT } from '~/shared/constants'
 
 function Icon() {
     return (
         <a className="mr-4 flex items-center gap-2 lg:mr-6" href="/">
-            <div className="w-20 h-20 relative">
+            <div className={`w-20 ${HEADER_HEIGHT} relative`}>
                 <Image
                     src={'/logo.webp'}
                     alt=""
@@ -33,7 +34,7 @@ const navigation = [
 export default function Header() {
     return (
         <header className="sticky top-0 z-50 w-full border-b border-header-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:border-border">
-            <div className="flex h-20 items-center px-4">
+            <div className={`flex ${HEADER_HEIGHT} items-center px-4`}>
                 <div className="mr-4 flex">
                     <Icon />
                     <div className="flex items-center gap-5">
