@@ -1,5 +1,5 @@
 {
-  "extends": "@web-tech/typescript-config/base.json",
+  "extends": "@web-tech/typescript-config/base",
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"]
 }

@@ -1,5 +1,5 @@
 {
-  "extends": "../typescript-config/react-library.json",
+  "extends": "../typescript-config/react-library",
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",

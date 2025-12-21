@@ -1,30 +1,25 @@
 import js from "@eslint/js";
 import pluginNext from "@next/eslint-plugin-next";
-import eslintConfigPrettier from "eslint-config-prettier";
+import prettier from "eslint-config-prettier/flat";
 import pluginReact from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
 import { globalIgnores } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
-import { config as baseConfig } from "./base.js";
+import baseConfig from "./base.js";
 
-/**
- * A custom ESLint configuration for libraries that use Next.js.
- *
- * @type {import("eslint").Linter.Config}
- * */
-export const nextJsConfig = [
+export default [
+  // ✅ 2️⃣ base config (default export 전제)
   ...baseConfig,
+
+  // ✅ 3️⃣ JS / TS
   js.configs.recommended,
-  eslintConfigPrettier,
   ...tseslint.configs.recommended,
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-  ]),
+
+  // ✅ 4️⃣ Next.js 기본 ignore
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
+
+  // ✅ 5️⃣ React
   {
     ...pluginReact.configs.flat.recommended,
     languageOptions: {
@@ -34,6 +29,8 @@ export const nextJsConfig = [
       },
     },
   },
+
+  // ✅ 6️⃣ Next.js rules
   {
     plugins: {
       "@next/next": pluginNext,
@@ -43,15 +40,21 @@ export const nextJsConfig = [
       ...pluginNext.configs["core-web-vitals"].rules,
     },
   },
+
+  // ✅ 7️⃣ React Hooks
   {
     plugins: {
       "react-hooks": pluginReactHooks,
     },
-    settings: { react: { version: "detect" } },
+    settings: {
+      react: { version: "detect" },
+    },
     rules: {
       ...pluginReactHooks.configs.recommended.rules,
-      // React scope no longer necessary with new JSX transform.
       "react/react-in-jsx-scope": "off",
     },
   },
+
+  // ✅ 8️⃣ Prettier는 항상 맨 뒤
+  prettier,
 ];

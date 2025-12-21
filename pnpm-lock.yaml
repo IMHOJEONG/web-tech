@@ -648,9 +648,6 @@ importers:
 
   packages/tailwind-config:
     devDependencies:
-      '@web-tech/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
       postcss:
         specifier: ^8.5.6
         version: 8.5.6
