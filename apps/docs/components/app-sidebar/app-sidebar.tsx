@@ -1,7 +1,5 @@
 'use client'
 
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react'
-
 import {
     Sidebar,
     SidebarContent,
@@ -21,47 +19,7 @@ import {
     CollapsibleContent,
     CollapsibleTrigger,
 } from '@/components/ui/collapsible'
-
-// Menu items.
-const items = [
-    {
-        title: 'React',
-        url: '#',
-        icon: Home,
-        sub: [
-            {
-                title: 'React',
-                url: '#',
-                icon: Home,
-            },
-            {
-                title: 'React Router',
-                url: '#',
-                icon: Calendar,
-            },
-        ],
-    },
-    {
-        title: 'Svelte',
-        url: '#',
-        icon: Inbox,
-    },
-    {
-        title: 'React Router',
-        url: '#',
-        icon: Calendar,
-    },
-    {
-        title: 'Astro',
-        url: '#',
-        icon: Search,
-    },
-    {
-        title: 'Settings',
-        url: '#',
-        icon: Settings,
-    },
-]
+import { items, makeUrl } from '~/feature/category/category-item'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const { state } = useSidebar()
@@ -71,31 +29,53 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <Sidebar collapsible="offcanvas" {...props}>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Application</SidebarGroupLabel>
+                    <SidebarGroupLabel>Category</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            <Collapsible
-                                defaultOpen
-                                className="group/collapsible"
-                            >
-                                {items.map((item) => (
-                                    <SidebarMenuItem key={item.title}>
+                            {items.map((item) => (
+                                <Collapsible
+                                    defaultOpen
+                                    className="group/collapsible"
+                                    key={item.title}
+                                >
+                                    <SidebarMenuItem>
                                         <CollapsibleTrigger asChild>
                                             <SidebarMenuButton asChild>
-                                                <a href={item.url}>
+                                                <a href={makeUrl([item.url])}>
                                                     <item.icon />
                                                     <span>{item.title}</span>
                                                 </a>
                                             </SidebarMenuButton>
                                         </CollapsibleTrigger>
-                                        <CollapsibleContent>
-                                            <SidebarMenuSub>
-                                                <SidebarMenuSubItem />
-                                            </SidebarMenuSub>
+                                        <CollapsibleContent className="flex flex-col gap-3">
+                                            {item.sub?.map((subItem) => {
+                                                return (
+                                                    <SidebarMenuSub
+                                                        key={subItem.title}
+                                                    >
+                                                        <SidebarMenuSubItem>
+                                                            <a
+                                                                href={makeUrl([
+                                                                    item.url,
+                                                                    subItem.url,
+                                                                ])}
+                                                                className="flex items-center gap-2"
+                                                            >
+                                                                <subItem.icon />
+                                                                <span>
+                                                                    {
+                                                                        subItem.title
+                                                                    }
+                                                                </span>
+                                                            </a>
+                                                        </SidebarMenuSubItem>
+                                                    </SidebarMenuSub>
+                                                )
+                                            })}
                                         </CollapsibleContent>
                                     </SidebarMenuItem>
-                                ))}
-                            </Collapsible>
+                                </Collapsible>
+                            ))}
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>

@@ -14,7 +14,14 @@ export interface Metadata {
     thumbnail?: string | null
 }
 
-const docsDirectory = path.join(process.cwd(), 'data-architecture')
+const categoryDirectory = path.join(process.cwd(), 'category')
+export const getSubCategoryDirectory = (main: string, sub: string) =>
+    path.join(process.cwd(), 'category', main, sub)
+
+export const subCategories = fs
+    .readdirSync(categoryDirectory, { withFileTypes: true })
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => path.join(categoryDirectory, dirent.name))
 
 function exploreDirectory(directory: string) {
     let files: string[] = []
@@ -39,10 +46,60 @@ function exploreDirectory(directory: string) {
     return files
 }
 
-export function getArchitecturesData() {
-    console.log(exploreDirectory(docsDirectory))
+export function getSubCategoryData(main: string, sub: string) {
+    const fileNames = exploreDirectory(getSubCategoryDirectory(main, sub))
 
-    const fileNames = exploreDirectory(docsDirectory)
+    const allPostsData: Partial<Metadata>[] = fileNames.map((fileName) => {
+        // Remove ".md" from file name to get id
+        const id = fileName.replace(/\.mdx?$/, '')
+
+        // Read markdown file as string
+        console.log(fileName)
+        const fileContents = fs.readFileSync(fileName, 'utf8')
+        // Use vfile-matter to parse the post metadata section
+        const vfile = new VFile({ path: fileName, value: fileContents })
+        vfileMatter(vfile, { strip: true })
+        const data = vfile.data.matter || {}
+        const content = String(vfile)
+        // 프로젝트 루트 기준의 상대경로(확장자 없는)만 추출
+        const relPathFromRoot = path
+            .relative(process.cwd(), fileName)
+            .replace(/\.(mdx|md)$/i, '')
+
+        console.log(relPathFromRoot)
+        // thumbnail 경로를 public 폴더 기준으로 /로 시작하게 단순화, 타입 안전하게
+        let thumbnailPath: string | null = null
+        if (typeof data.thumbnail === 'string') {
+            const trimmed = data.thumbnail.trim()
+            if (trimmed.length > 0) {
+                thumbnailPath = trimmed
+                const idx = thumbnailPath.indexOf('public/')
+                if (idx !== -1) {
+                    thumbnailPath = thumbnailPath.slice(idx + 'public/'.length)
+                }
+                if (!thumbnailPath.startsWith('/')) {
+                    thumbnailPath = '/' + thumbnailPath
+                }
+            }
+        }
+        return {
+            id,
+            ...data,
+            use: data.use ?? [],
+            content,
+            fileName: relPathFromRoot,
+            thumbnail: thumbnailPath,
+        }
+    })
+    console.log(allPostsData)
+
+    return allPostsData
+}
+
+export function getCategoryData() {
+    console.log(exploreDirectory(categoryDirectory))
+
+    const fileNames = exploreDirectory(categoryDirectory)
 
     const allPostsData: Partial<Metadata>[] = fileNames.map((fileName) => {
         // Remove ".md" from file name to get id
@@ -92,7 +149,7 @@ export function getArchitecturesData() {
 }
 
 export function getSortedPostsData() {
-    const allPostsData = getArchitecturesData()
+    const allPostsData = getCategoryData()
     return allPostsData.sort((a, b) => {
         if (a.date && b.date && a.date < b.date) {
             return 1

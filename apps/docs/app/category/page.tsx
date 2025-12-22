@@ -1,7 +1,18 @@
 import { cn } from '@web-tech/ui/lib/utils'
-import { getSortedPostsData } from '~/lib/get-document'
+import Link from 'next/link'
+import { mainCategories } from '~/feature/category/category-item'
 
-export default async function Page() {
-    const data = await getSortedPostsData()
-    return <div className={cn()}>test</div>
+// category 소개 페이지 만들면 될 듯
+export default function Page() {
+    const mainCategory = mainCategories
+
+    return (
+        <div className={cn('flex flex-col gap-3')}>
+            {mainCategory.map(({ title, url }) => (
+                <Link key={url} href={url}>
+                    {title}
+                </Link>
+            ))}
+        </div>
+    )
 }

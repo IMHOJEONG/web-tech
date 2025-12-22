@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 className={`h-full ${HEADER_HEIGHT_TOP}`}
             />
             <SidebarTrigger />
-            {/* {children} */}
+            {children}
         </SidebarProvider>
     )
 }
