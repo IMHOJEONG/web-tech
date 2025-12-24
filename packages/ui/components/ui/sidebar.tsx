@@ -2,7 +2,9 @@
 
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { PanelLeftIcon } from "lucide-react";
+
+import { MdOutlineDoubleArrow } from "react-icons/md";
+
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -273,8 +275,10 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      <PanelLeftIcon />
-      <span className="sr-only">Toggle Sidebar</span>
+      {/* <PanelLeftIcon /> */}
+      <MdOutlineDoubleArrow />
+
+      <span className="sr-only">Sidebar 열고 닫기</span>
     </Button>
   );
 }

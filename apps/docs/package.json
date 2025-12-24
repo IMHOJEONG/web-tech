@@ -19,7 +19,9 @@
         "better-auth": "^1.4.2",
         "clsx": "^2.1.1",
         "esbuild": "^0.27.1",
+        "fast-glob": "^3.3.3",
         "gray-matter": "^4.0.3",
+        "ky": "^1.9.1",
         "lucide-react": "^0.542.0",
         "mdx-bundler": "^10.1.1",
         "next": "16.0.10",
@@ -36,11 +38,13 @@
         "remark-gfm": "^4.0.1",
         "remark-toc": "^9.0.0",
         "sass": "^1.94.2",
+        "to-vfile": "^8.0.0",
         "tw-animate-css": "^1.3.8",
         "use-debounce": "^10.0.6",
         "vfile": "^6.0.3",
         "vfile-matter": "^5.0.1",
-        "web": "^0.0.2"
+        "web": "^0.0.2",
+        "zustand": "^5.0.9"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3.3.1",
