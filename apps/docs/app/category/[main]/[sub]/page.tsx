@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import { TocItem } from 'remark-flexible-toc'
 import { CategoryBox } from '~/feature/category/category-box'
 import { getSubCategoryData } from '~/lib/get-category'
@@ -22,7 +23,7 @@ export default async function Page({
     console.log(data)
 
     return (
-        <div className="flex gap-4">
+        <div className={cn('w-full', 'grid grid-cols-3 gap-3', 'p-3')}>
             <div className="flex-1">
                 {data.map((item) => {
                     return <CategoryBox key={item.title} data={item} />

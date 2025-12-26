@@ -10,7 +10,7 @@ export const makeUrl = (str: string[]) => {
 export const items = [
     {
         title: 'FE',
-        url: '/fe',
+        url: 'fe',
         icon: FaRegWindowRestore,
         sub: [
             {
@@ -37,7 +37,7 @@ export const items = [
     },
     {
         title: 'BE',
-        url: '/be',
+        url: 'be',
         icon: Search,
         sub: [
             {
@@ -55,7 +55,7 @@ export const items = [
 
     {
         title: 'Computer Science',
-        url: '/computer-science',
+        url: 'computer-science',
         icon: Settings,
         sub: [
             {
