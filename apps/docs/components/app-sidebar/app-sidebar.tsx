@@ -19,6 +19,7 @@ import {
     CollapsibleContent,
     CollapsibleTrigger,
 } from '@/components/ui/collapsible'
+import { cn } from '@/lib/utils'
 import { items, makeUrl } from '~/feature/category/category-item'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -59,7 +60,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                                                     item.url,
                                                                     subItem.url,
                                                                 ])}
-                                                                className="flex items-center gap-2"
+                                                                className={cn(
+                                                                    'flex items-center gap-2',
+                                                                    'p-2',
+                                                                    'transition-all duration-300 ease-out',
+                                                                    'hover:opacity-90',
+                                                                    'hover:bg-gray-100 hover:text-black'
+                                                                )}
                                                             >
                                                                 <subItem.icon />
                                                                 <span>

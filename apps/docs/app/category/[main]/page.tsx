@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { getSubCategories } from '~/feature/category/category-item'
+import { SubCategoryBox } from '~/feature/category/sub-category-box'
 
 export default async function Page({
     params,
@@ -12,10 +13,17 @@ export default async function Page({
     console.log(mainCategory, subCategories)
 
     return (
-        <div className={cn('flex flex-col gap-3')}>
+        <div className={cn('w-full', 'grid grid-cols-3 gap-3', 'p-3')}>
             {subCategories?.map(({ title, url }) => (
-                <Link key={url} href={url}>
-                    {title}
+                <Link
+                    key={url}
+                    href={url}
+                    className={cn(
+                        'hover:bg-gray-500 cursor-pointer',
+                        'rounded rounded-lg'
+                    )}
+                >
+                    <SubCategoryBox id={title} />
                 </Link>
             ))}
         </div>

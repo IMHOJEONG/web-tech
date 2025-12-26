@@ -92,12 +92,6 @@ body {
     font-family: Inter, sans-serif;
 }
 
-h1,
-nav,
-a {
-    color: var(--hf-text-primary);
-}
-
 /* Sidebar */
 @layer base {
     :root {
