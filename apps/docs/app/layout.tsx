@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { Suspense } from 'react'
 import { maruburi } from '~/components/maruburi-font'
 import { mono } from '~/components/mono-font'
 import './css/global.css'
@@ -48,7 +49,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                    
                     ${maruburi.variable} ${mono.variable}`}
             >
-                <Header />
+                <Suspense>
+                    <Header />
+                </Suspense>
                 {children}
             </body>
         </html>
