@@ -1,4 +1,10 @@
-export const ERROR = () => {
+'use client'
+
+import { useSearchParams } from 'next/navigation'
+
+export const ErrorBox = () => {
+    const searchParams = useSearchParams()
+
     return (
         <>
             <h1 className="text-3xl font-bold">404: Address Not Allocated</h1>
