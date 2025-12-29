@@ -1,12 +1,14 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import dynamic from 'next/dynamic'
-import { HERO } from '~/shared/constants'
 import { LandingBox } from '../layout/landing-box'
 
 const Node = dynamic(() => import('../react-flow/node'), { ssr: false })
 
 export const HeroSection = () => {
+    const t = useTranslations('home')
+
     return (
         <LandingBox>
             <div className="grid grid-cols-[0.5fr_1fr] justify-between ">
@@ -17,10 +19,10 @@ export const HeroSection = () => {
                     text-transparent bg-clip-text bg-gradient-to-r from-zinc-700 via-zinc-500 to-zinc-300
                     "
                     >
-                        {HERO.title}
+                        {t('title')}
                     </h1>
                     <div className="text-gray-500" lang="ko">
-                        {HERO.description}
+                        {t('description')}
                     </div>
                 </div>
                 <Node />

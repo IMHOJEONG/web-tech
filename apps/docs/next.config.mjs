@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 import createMDX from '@next/mdx'
+import createNextIntlPlugin from 'next-intl/plugin'
 
 const nextConfig = {
     // Configure `pageExtensions` to include markdown and MDX files
@@ -31,5 +32,7 @@ const withMDX = createMDX({
     },
 })
 
+const withNextIntl = createNextIntlPlugin('./shared/message/request.ts')
+
 // Merge MDX config with Next.js config
-export default withMDX(nextConfig)
+export default withNextIntl(withMDX(nextConfig))

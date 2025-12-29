@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
+import { NextIntlClientProvider } from 'next-intl'
 import { Suspense } from 'react'
 import { maruburi } from '~/components/maruburi-font'
 import { mono } from '~/components/mono-font'
+
 import './css/global.css'
 import Header from './header'
 
@@ -44,16 +46,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     rel="stylesheet"
                 />
             </head>
-            <body
-                className={`flex flex-col size-full min-h-screen bg-gradient-to-b 
+            <NextIntlClientProvider>
+                <body
+                    className={`flex flex-col size-full min-h-screen bg-gradient-to-b 
                    
                     ${maruburi.variable} ${mono.variable}`}
-            >
-                <Suspense>
-                    <Header />
-                </Suspense>
-                {children}
-            </body>
+                >
+                    <Suspense>
+                        <Header />
+                    </Suspense>
+                    {children}
+                </body>
+            </NextIntlClientProvider>
         </html>
     )
 }
