@@ -1,5 +1,11 @@
 {
     "home": {
         "title": "hi~"
+    },
+    "search": {
+        "empty": {
+            "result-title": "{keyword}에 맞는 결과가 없습니다",
+            "result-description": "다른 키워드로 검색해보세요"
+        }
     }
 }

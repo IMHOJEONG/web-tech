@@ -35,6 +35,7 @@ export const Search = () => {
                 }}
                 maxLength={10}
                 minLength={1}
+                placeholder="search document..."
             />
         </div>
     )
