@@ -4,6 +4,7 @@ import { Suspense } from 'react'
 import { maruburi } from '~/components/maruburi-font'
 import { mono } from '~/components/mono-font'
 
+import Script from 'next/script'
 import './css/global.css'
 import Header from './header'
 
@@ -49,7 +50,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <NextIntlClientProvider>
                 <body
                     className={`flex flex-col size-full min-h-screen bg-gradient-to-b 
-                   
+            
                     ${maruburi.variable} ${mono.variable}`}
                 >
                     <Suspense>
@@ -58,6 +59,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     {children}
                 </body>
             </NextIntlClientProvider>
+            <Script id="tailwindcss-dark-mode">
+                {`
+                    document.documentElement.classList.toggle(
+                        "dark",
+                        localStorage.theme === "dark" ||
+                            (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+                        );
+                `}
+            </Script>
         </html>
     )
 }

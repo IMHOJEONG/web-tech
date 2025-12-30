@@ -23,12 +23,17 @@ export default async function Page({
     console.log(data)
 
     return (
-        <div className={cn('w-full', 'grid grid-cols-3 gap-3', 'p-3')}>
-            <div className="flex-1">
-                {data.map((item) => {
-                    return <CategoryBox key={item.title} data={item} />
-                })}
-            </div>
+        <div
+            className={cn(
+                'w-full',
+                'grid grid-cols-3 grid-rows-3 gap-3',
+                'p-3',
+                'place-items-start'
+            )}
+        >
+            {data.map((item) => {
+                return <CategoryBox key={item.title} data={item} />
+            })}
         </div>
     )
 }

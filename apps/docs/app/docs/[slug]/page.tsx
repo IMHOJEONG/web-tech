@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import { evaluate, EvaluateOptions } from 'next-mdx-remote-client/rsc'
 import { Suspense } from 'react'
 import remarkFlexibleToc, { TocItem } from 'remark-flexible-toc'
@@ -54,7 +55,7 @@ export default async function Page({
                 <Toc toc={scope.toc} />
             </div>
 
-            <div className="flex-1">
+            <div className={cn('flex-1')}>
                 <Suspense fallback={<LoadingComponent />}>{content}</Suspense>
             </div>
         </div>

@@ -26,7 +26,7 @@ export default function Page() {
                     )
                 })}
             </div>
-            <div className={cn('w-full', 'flex flex-col gap-5')}>
+            <div className={cn('w-full', 'grid grid-cols-3 gap-5')}>
                 {mainCategory.map(({ title, url }) => (
                     <Link
                         key={url}

@@ -1,5 +1,7 @@
 /* Tailwind CSS v4 */
 @import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
+
 @import 'tw-animate-css';
 
 @source "../../../../packages/ui/components/**/*.{ts,tsx}";
@@ -7,11 +9,57 @@
 @import './mdx.css';
 
 /* =============================
-   기본 라이트 / 다크 색상
+   Light Mode (Default)
    ============================= */
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.147 0.004 49.25);
+    --background: oklch(0.99 0.01 240);
+    --foreground: oklch(0.18 0.02 255);
+
+    /* Heap Forge Base Backgrounds */
+    --hf-bg-dark: oklch(0.97 0.015 245);
+    --hf-bg-body: oklch(0.985 0.01 240);
+    --hf-bg-deep: oklch(0.94 0.02 250);
+
+    /* Surfaces */
+    --hf-surface: oklch(0.96 0.015 245);
+    --hf-surface-border: oklch(0.82 0.02 250 / 25%);
+
+    /* Text */
+    --hf-text-primary: oklch(0.18 0.02 255);
+    --hf-text-muted: oklch(0.45 0.03 250);
+    --hf-text-metal: oklch(0.35 0.04 245);
+
+    /* Accents */
+    --hf-accent-cold: oklch(0.62 0.14 245); /* primary blue */
+    --hf-accent-warm: oklch(0.78 0.12 85);
+
+    /* Shadows */
+    --hf-shadow-deep: 0 8px 24px oklch(0.2 0.03 260 / 0.15);
+
+    /* Gradient */
+    --hf-body-gradient: linear-gradient(
+        180deg,
+        oklch(0.99 0.01 240) 0%,
+        oklch(0.97 0.015 245) 60%,
+        oklch(0.94 0.02 250) 100%
+    );
+
+    --radius: 0.625rem;
+
+    /* UI System */
+    --primary: oklch(0.62 0.14 245);
+    --primary-foreground: oklch(0.99 0.01 240);
+
+    --border: oklch(0.82 0.02 250 / 30%);
+    --input: oklch(0.82 0.02 250 / 40%);
+    --ring: oklch(0.62 0.14 245);
+}
+/* =============================
+   Dark Mode
+   ============================= */
+.dark {
+    --background: oklch(0.147 0.004 49.25);
+    --foreground: oklch(0.98 0 0);
 
     /* Heap Forge Base Backgrounds */
     --hf-bg-dark: oklch(0.2 0.03 260);
@@ -44,20 +92,9 @@
 
     --radius: 0.625rem;
 
+    /* UI System */
     --primary: oklch(0.216 0.006 56.043);
     --primary-foreground: oklch(0.985 0.001 106.423);
-
-    --border: oklch(0.923 0.003 48.717);
-    --input: oklch(0.923 0.003 48.717);
-    --ring: oklch(0.709 0.01 56.259);
-}
-
-.dark {
-    --background: oklch(0.147 0.004 49.25);
-    --foreground: oklch(0.985 0.001 106.423);
-
-    --primary: oklch(0.923 0.003 48.717);
-    --primary-foreground: oklch(0.216 0.006 56.043);
 
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
@@ -71,16 +108,6 @@
 
 :lang(en) {
     font-family: var(--font-jetbrains-mono);
-}
-
-/* =============================
-   Heap Forge Header
-   ============================= */
-header {
-    background: var(--hf-bg-dark);
-    border-bottom: 1px solid var(--hf-surface-border);
-    color: var(--hf-text-primary);
-    backdrop-filter: blur(6px);
 }
 
 /* =============================

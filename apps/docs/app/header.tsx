@@ -2,7 +2,9 @@ import { cn } from '@web-tech/ui/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import { HEADER_HEIGHT } from '~/shared/constants'
+import { Navigation } from '~/shared/navigation'
 import { Search } from '~/shared/search'
+import { ThemeToggle } from '~/shared/theme-toggle'
 
 function Icon() {
     return (
@@ -22,43 +24,26 @@ function Icon() {
     )
 }
 
-const navigation = [
-    {
-        href: '/docs',
-        name: 'Documents',
-    },
-    {
-        href: '/category',
-        name: 'category',
-    },
-]
-
 export default function Header() {
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-header-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:border-border">
+        <header
+            className={cn(
+                'sticky top-0 z-50 w-full border-b border-header-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:border-border',
+                'bg-blue-100 text-black',
+                `dark:bg-[var(--hf-bg-dark)]
+                    border-b
+                    border-[var(--hf-surface-border)]
+                dark:text-[var(--hf-text-primary)]
+                    backdrop-blur-[6px]`
+            )}
+        >
             <div className={`flex ${HEADER_HEIGHT} items-center px-4`}>
-                <div className="flex size-full items-center justify-stretch">
+                <div className="flex size-full items-center justify-stretch gap-2">
                     <div className="flex size-full items-center justify-stretch gap-4">
                         <Icon />
-                        <div className="flex items-center gap-5">
-                            {navigation.map((nav) => {
-                                const { href, name } = nav
-                                return (
-                                    <nav
-                                        key={name}
-                                        className="flex items-center gap-4 text-sm xl:gap-6"
-                                    >
-                                        <Link
-                                            className="transition-colors hover:text-foreground/80 text-foreground/80"
-                                            href={href}
-                                        >
-                                            {name}
-                                        </Link>
-                                    </nav>
-                                )
-                            })}
-                        </div>
+                        <Navigation />
                     </div>
+                    <ThemeToggle />
                     <Search />
                 </div>
             </div>

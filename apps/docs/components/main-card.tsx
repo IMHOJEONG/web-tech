@@ -25,17 +25,38 @@ const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
             </div>
 
             <div className="flex flex-col justify-between gap-2 text-wrap">
-                <div className="text-[1.05rem] font-semibold text-[oklch(0.92_0.02_260)] tracking-[-0.01em] leading-snug line-clamp-2">
+                <div
+                    className={cn(
+                        'text-[1.05rem] font-semibol',
+                        'dark:text-[var(--hf-text-primary)]',
+                        'text-[var(--hf-text-primary)]',
+                        'tracking-[-0.01em] leading-snug line-clamp-2'
+                    )}
+                >
                     {title}
                 </div>
 
                 {summary && (
-                    <div className="text-[0.90rem] font-normal text-[oklch(0.75_0.02_260)] leading-relaxed line-clamp-3">
+                    <div
+                        className={cn(
+                            'text-[0.90rem] font-normal',
+                            'dark:text-[var(--hf-text-primary)]',
+                            'text-[var(--hf-text-primary)]',
+                            'leading-relaxed line-clamp-3'
+                        )}
+                    >
                         {summary}
                     </div>
                 )}
 
-                <div className="text-[0.75rem] text-[oklch(0.65_0.03_230)] uppercase tracking-wider mt-1">
+                <div
+                    className={cn(
+                        'text-[0.75rem]',
+                        'dark:text-[var(--hf-text-primary)]',
+                        'text-[var(--hf-text-primary)]',
+                        'uppercase tracking-wider mt-1'
+                    )}
+                >
                     {getTime(date ?? '')}
                 </div>
             </div>

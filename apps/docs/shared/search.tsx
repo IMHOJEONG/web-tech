@@ -1,17 +1,34 @@
 'use client'
 
 import { Input } from '@/components/ui/input'
+import { cn } from '@/lib/utils'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { ChangeEvent, KeyboardEvent } from 'react'
+import { ChangeEvent, KeyboardEvent, useRef } from 'react'
+import { GoSearch } from 'react-icons/go'
 
 // title, summary 검색 내용 추가 필요
 export const Search = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
 
+    const inputRef = useRef<HTMLInputElement>(null)
+
     return (
-        <div className="max-w-[500px]">
+        <div
+            className={cn('relative max-w-[500px] flex gap-2', 'items-center')}
+        >
+            <GoSearch
+                className="cursor-pointer"
+                onClick={() => {
+                    inputRef.current?.focus()
+                }}
+            />
             <Input
+                ref={inputRef}
+                className={cn(
+                    'dark:text-[var(--hf-text-primary)] placeholder:text-[var(--hf-text-primary)]',
+                    'text-[var(--hf-text-primary)] placeholder:text-[var(--hf-text-primary)]'
+                )}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {}}
                 // 조합 확정용?
                 onKeyDown={async (event: KeyboardEvent<HTMLInputElement>) => {
