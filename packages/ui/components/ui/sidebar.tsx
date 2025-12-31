@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -260,7 +261,7 @@ function SidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar();
+  const { toggleSidebar, open } = useSidebar();
 
   return (
     <Button
@@ -275,8 +276,13 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      {/* <PanelLeftIcon /> */}
-      <MdOutlineDoubleArrow />
+      <motion.div
+        initial={false} // 👈 마운트 시 애니메이션 없음
+        animate={{ rotate: open ? 180 : 0 }}
+        transition={{ duration: 1 }}
+      >
+        <MdOutlineDoubleArrow />
+      </motion.div>
 
       <span className="sr-only">Sidebar 열고 닫기</span>
     </Button>

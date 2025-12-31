@@ -7,6 +7,7 @@
 @source "../../../../packages/ui/components/**/*.{ts,tsx}";
 @import './variables.css';
 @import './mdx.css';
+@import './animation.css';
 
 /* =============================
    Light Mode (Default)

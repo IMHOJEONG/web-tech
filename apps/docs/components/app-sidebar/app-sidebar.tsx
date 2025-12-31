@@ -65,7 +65,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                                                     'p-2',
                                                                     'transition-all duration-300 ease-out',
                                                                     'hover:opacity-90',
-                                                                    'hover:bg-gray-100 hover:text-black'
+                                                                    'dark:hover:bg-gray-100',
+                                                                    'hover:bg-slate-300 hover:text-black'
                                                                 )}
                                                             >
                                                                 <subItem.icon />
