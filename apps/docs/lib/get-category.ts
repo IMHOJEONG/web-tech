@@ -1,3 +1,4 @@
+import fg from 'fast-glob'
 import fs from 'fs'
 import path from 'path'
 import { VFile } from 'vfile'
@@ -15,39 +16,21 @@ export interface Metadata {
 }
 
 const categoryDirectory = path.join(process.cwd(), 'category')
-export const getSubCategoryDirectory = (main: string, sub: string) =>
-    path.join(process.cwd(), 'category', main, sub)
 
 export const subCategories = fs
     .readdirSync(categoryDirectory, { withFileTypes: true })
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => path.join(categoryDirectory, dirent.name))
 
-function exploreDirectory(directory: string) {
-    let files: string[] = []
-    try {
-        const items = fs.readdirSync(directory, { withFileTypes: true })
-        for (const item of items) {
-            const fullPath = path.join(directory, item.name)
-
-            if (item.isDirectory()) {
-                files = files.concat(exploreDirectory(fullPath)) // 재귀 호출
-            } else if (item.isFile()) {
-                // md, mdx 파일만 허용
-                if (/\.(mdx?|MDX?)$/.test(item.name)) {
-                    files.push(fullPath)
-                }
-            }
-        }
-    } catch (error) {
-        console.error('Error reading directory:', directory, error)
-    }
-
+async function exploreDirectory(path: string) {
+    const files = await fg(path)
     return files
 }
 
-export function getSubCategoryData(main: string, sub: string) {
-    const fileNames = exploreDirectory(getSubCategoryDirectory(main, sub))
+export async function getSubCategoryData(main: string, sub: string) {
+    const fileNames = await exploreDirectory(
+        `category/${main}/${sub}/*.{md,mdx}`
+    )
 
     const allPostsData: Partial<Metadata>[] = fileNames.map((fileName) => {
         // Remove ".md" from file name to get id
@@ -96,10 +79,8 @@ export function getSubCategoryData(main: string, sub: string) {
     return allPostsData
 }
 
-export function getCategoryData() {
-    console.log(exploreDirectory(categoryDirectory))
-
-    const fileNames = exploreDirectory(categoryDirectory)
+export async function getCategoryData() {
+    const fileNames = await exploreDirectory(`category`)
 
     const allPostsData: Partial<Metadata>[] = fileNames.map((fileName) => {
         // Remove ".md" from file name to get id
@@ -146,15 +127,4 @@ export function getCategoryData() {
     console.log(allPostsData)
 
     return allPostsData
-}
-
-export function getSortedPostsData() {
-    const allPostsData = getCategoryData()
-    return allPostsData.sort((a, b) => {
-        if (a.date && b.date && a.date < b.date) {
-            return 1
-        } else {
-            return -1
-        }
-    })
 }
