@@ -21,7 +21,10 @@ export const CategoryBox = ({ data }: { data: CategoryBoxItem }) => {
             className={cn(
                 'p-2 flex flex-col gap-2',
 
-                'items-center justify-center'
+                'items-center justify-center',
+                'dark:hover:bg-gray-500',
+                'hover:bg-slate-300',
+                'rounded rounded-lg'
             )}
             href={`/${fileName}`}
         >
@@ -36,7 +39,12 @@ export const CategoryBox = ({ data }: { data: CategoryBoxItem }) => {
                 />
             </div>
             <div className="text-lg">{title}</div>
-            <div className="text-sm leading-6 line-clamp-2 min-h-[3rem]">
+            <div
+                className={cn(
+                    'text-sm leading-6 line-clamp-2 min-h-[3rem]',
+                    'break-keep'
+                )}
+            >
                 {summary}
             </div>
             <div className="text-xs">{date}</div>

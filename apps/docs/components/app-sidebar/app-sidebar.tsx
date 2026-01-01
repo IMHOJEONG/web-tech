@@ -20,11 +20,14 @@ import {
     CollapsibleTrigger,
 } from '@/components/ui/collapsible'
 import { cn } from '@/lib/utils'
+import { usePathname } from 'next/navigation'
 import { items, makeUrl } from '~/feature/category/category-item'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const { state } = useSidebar()
     console.log(state)
+
+    const pathname = usePathname()
 
     return (
         <Sidebar collapsible="offcanvas" {...props}>
@@ -42,7 +45,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                     <SidebarMenuItem>
                                         <CollapsibleTrigger asChild>
                                             <SidebarMenuButton asChild>
-                                                <a href={makeUrl([item.url])}>
+                                                <a
+                                                    href={makeUrl([item.url])}
+                                                    className={cn(
+                                                        '',
+
+                                                        {
+                                                            'bg-blue-100 dark:bg-gray-400':
+                                                                pathname ===
+                                                                makeUrl([
+                                                                    item.url,
+                                                                ]),
+                                                        }
+                                                    )}
+                                                >
                                                     <item.icon />
                                                     <span>{item.title}</span>
                                                 </a>
@@ -66,7 +82,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                                                     'transition-all duration-300 ease-out',
                                                                     'hover:opacity-90',
                                                                     'dark:hover:bg-gray-100',
-                                                                    'hover:bg-slate-300 hover:text-black'
+                                                                    'hover:bg-slate-300 hover:text-black',
+                                                                    {
+                                                                        'bg-blue-100 dark:bg-gray-400':
+                                                                            pathname ===
+                                                                            makeUrl(
+                                                                                [
+                                                                                    item.url,
+                                                                                    subItem.url,
+                                                                                ]
+                                                                            ),
+                                                                    }
                                                                 )}
                                                             >
                                                                 <subItem.icon />
