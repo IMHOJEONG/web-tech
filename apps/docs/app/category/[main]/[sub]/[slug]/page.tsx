@@ -15,15 +15,21 @@ type Frontmatter = {
     author: string
 }
 
+interface PagesProps {
+    slug: string
+    main: string
+    sub: string
+}
+
 export default async function Page({
     params,
 }: {
-    params: Promise<{ slug: string }>
+    params: Promise<PagesProps>
 }) {
-    const { slug } = await params
-    const data = await getCategoryData()
+    const { slug, main, sub } = await params
+    const data = await getCategoryData(main, sub)
     const target = data.find((doc) => doc.slug == slug)
-    console.log(slug, target?.fileName)
+    console.log(slug, main, sub, target?.fileName, data)
 
     const options: EvaluateOptions<Scope> = {
         mdxOptions: {

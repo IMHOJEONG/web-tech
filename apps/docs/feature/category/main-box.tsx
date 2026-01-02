@@ -44,6 +44,8 @@ export const MainBox = ({ id }: MainBoxProps) => {
                     sizes="(max-width: 768px) 200vw, 200px"
                     className="rounded rounded-lg"
                     priority
+                    placeholder="blur"
+                    blurDataURL="/image/blur-image.webp"
                 />
             </div>
             <div className="text-xl">{data?.title}</div>

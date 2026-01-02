@@ -22,6 +22,8 @@ const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
                     height={1080}
                     className="rounded-lg w-full h-full object-cover"
                     priority
+                    placeholder="blur"
+                    blurDataURL="/image/blur-image.webp"
                 />
             </div>
 

@@ -37,6 +37,8 @@ export const CategoryBox = ({ data }: { data: CategoryBoxItem }) => {
                     className="object-cover"
                     quality={90}
                     priority
+                    placeholder="blur"
+                    blurDataURL="/image/blur-image.webp"
                 />
             </div>
             <div className="text-lg">{title}</div>

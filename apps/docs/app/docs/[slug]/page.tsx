@@ -29,8 +29,6 @@ export default async function Page({
 
     const options: EvaluateOptions<Scope> = {
         mdxOptions: {
-            // ...
-
             remarkPlugins: [remarkFlexibleToc],
         },
         parseFrontmatter: true,

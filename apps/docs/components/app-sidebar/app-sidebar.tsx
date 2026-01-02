@@ -11,7 +11,6 @@ import {
     SidebarMenuItem,
     SidebarMenuSub,
     SidebarMenuSubItem,
-    useSidebar,
 } from '@/components/ui/sidebar'
 
 import {
@@ -24,10 +23,7 @@ import { usePathname } from 'next/navigation'
 import { items, makeUrl } from '~/feature/category/category-item'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-    const { state } = useSidebar()
-    console.log(state)
-
-    const pathname = usePathname()
+    const pathname = usePathname()?.replace(/\/$/, '')
 
     return (
         <Sidebar collapsible="offcanvas" {...props}>
@@ -42,7 +38,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                     className="group/collapsible"
                                     key={item.title}
                                 >
-                                    <SidebarMenuItem>
+                                    <SidebarMenuItem className="flex flex-col gap-1">
                                         <CollapsibleTrigger asChild>
                                             <SidebarMenuButton asChild>
                                                 <a

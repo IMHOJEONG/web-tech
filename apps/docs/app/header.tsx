@@ -16,6 +16,8 @@ function Icon() {
                     width={100}
                     height={100}
                     priority
+                    placeholder="blur"
+                    blurDataURL="/image/blur-image.webp"
                     className="items-center flex size-full"
                 />
             </div>

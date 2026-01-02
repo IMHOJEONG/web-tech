@@ -48,6 +48,8 @@ export const SubCategoryBox = ({ id }: SubCategoryBoxItem) => {
                     sizes="100vw"
                     className="rounded rounded-lg"
                     priority
+                    placeholder="blur"
+                    blurDataURL="/image/blur-image.webp"
                 />
             </div>
             <div>{item?.title}</div>

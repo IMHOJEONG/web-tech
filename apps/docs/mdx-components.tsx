@@ -92,6 +92,8 @@ export const components = {
             height={0}
             style={{ width: '100%', height: 'auto' }}
             priority
+            placeholder="blur"
+            blurDataURL="/image/blur-image.webp"
             {...(props as ImageProps)}
         />
     ),

@@ -79,8 +79,10 @@ export async function getSubCategoryData(main: string, sub: string) {
     return allPostsData
 }
 
-export async function getCategoryData() {
-    const fileNames = await exploreDirectory(`category`)
+export async function getCategoryData(main: string, sub: string) {
+    const fileNames = await exploreDirectory(
+        `category/${main}/${sub}/*.{md,mdx}`
+    )
 
     const allPostsData: Partial<Metadata>[] = fileNames.map((fileName) => {
         // Remove ".md" from file name to get id
