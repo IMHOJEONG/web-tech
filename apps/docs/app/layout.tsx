@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
+import NextTopLoader from 'nextjs-toploader'
 import { Suspense } from 'react'
 import { maruburi } from '~/components/maruburi-font'
 import { mono } from '~/components/mono-font'
@@ -7,6 +8,16 @@ import { mono } from '~/components/mono-font'
 import Script from 'next/script'
 import './css/global.css'
 import Header from './header'
+
+import { cn } from '@/lib/utils'
+import { Google_Sans_Flex } from 'next/font/google'
+
+const googleSansFlex = Google_Sans_Flex({
+    subsets: ['latin'],
+    display: 'swap',
+    weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+    variable: '--font-google-sans-flex',
+})
 
 export const metadata: Metadata = {
     title: 'HeapForge - Where memory meets mastery.',
@@ -35,27 +46,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     src="https://unpkg.com/react-scan/dist/auto.global.js"
                     async
                 />
-
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link
-                    rel="preconnect"
-                    href="https://fonts.gstatic.com"
-                    crossOrigin="anonymous"
-                />
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap"
-                    rel="stylesheet"
-                />
             </head>
             <NextIntlClientProvider>
                 <body
-                    className={`flex flex-col size-full min-h-screen bg-gradient-to-b 
-            
-                    ${maruburi.variable} ${mono.variable}`}
+                    className={cn(
+                        `flex flex-col size-full min-h-screen bg-gradient-to-b`,
+                        maruburi.variable,
+                        mono.variable,
+                        googleSansFlex.variable
+                    )}
                 >
                     <Suspense>
                         <Header />
                     </Suspense>
+                    <NextTopLoader />
                     {children}
                 </body>
             </NextIntlClientProvider>
