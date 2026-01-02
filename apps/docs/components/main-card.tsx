@@ -21,6 +21,7 @@ const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
                     width={1920}
                     height={1080}
                     className="rounded-lg w-full h-full object-cover"
+                    priority
                 />
             </div>
 

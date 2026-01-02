@@ -43,6 +43,7 @@ export const MainBox = ({ id }: MainBoxProps) => {
                     quality={90}
                     sizes="(max-width: 768px) 200vw, 200px"
                     className="rounded rounded-lg"
+                    priority
                 />
             </div>
             <div className="text-xl">{data?.title}</div>

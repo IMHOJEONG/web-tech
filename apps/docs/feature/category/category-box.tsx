@@ -36,6 +36,7 @@ export const CategoryBox = ({ data }: { data: CategoryBoxItem }) => {
                     sizes="(max-width: 768px) 100vw, 200px"
                     className="object-cover"
                     quality={90}
+                    priority
                 />
             </div>
             <div className="text-lg">{title}</div>

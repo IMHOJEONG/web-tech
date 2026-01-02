@@ -47,6 +47,7 @@ export const SubCategoryBox = ({ id }: SubCategoryBoxItem) => {
                     alt="sub-category"
                     sizes="100vw"
                     className="rounded rounded-lg"
+                    priority
                 />
             </div>
             <div>{item?.title}</div>
