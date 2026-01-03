@@ -53,7 +53,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         `flex flex-col size-full min-h-screen bg-gradient-to-b`,
                         maruburi.variable,
                         mono.variable,
-                        googleSansFlex.variable
+                        googleSansFlex.className
                     )}
                 >
                     <Suspense>
