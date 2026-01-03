@@ -21,7 +21,6 @@ function Icon() {
                     className="items-center flex size-full"
                 />
             </div>
-            <span className={cn('font-bold text-center')}>Heap Forge</span>
         </Link>
     )
 }

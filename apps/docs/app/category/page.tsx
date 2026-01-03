@@ -15,7 +15,7 @@ export default function Page() {
                         <Badge
                             className={cn(
                                 'text-lg',
-                                'bg-gray-100',
+                                'bg-gray-200',
                                 'text-black',
                                 'cursor-pointer'
                             )}
