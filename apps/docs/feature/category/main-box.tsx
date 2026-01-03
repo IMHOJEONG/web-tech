@@ -32,8 +32,8 @@ export const MainBox = ({ id }: MainBoxProps) => {
     )
     // const { title, summary } = data
     return (
-        <div className={cn('flex flex-col gap-2', 'p-2')}>
-            <div className={cn('relative w-full aspect-square max-w-[200px]')}>
+        <div className={cn('size-full flex flex-col gap-2', 'p-2')}>
+            <div className={cn('relative w-full aspect-square ')}>
                 <Image
                     fill
                     src={data?.image ?? '/test.png'}

@@ -37,8 +37,15 @@ export const SubCategoryBox = ({ id }: SubCategoryBoxItem) => {
         (sub) => sub.id === id.toLowerCase().split(' ').join('-')
     )
     return (
-        <div className={cn('w-full flex flex-col gap-2', 'p-3')}>
-            <div className="relative w-full aspect-square max-w-[200px] ">
+        <div
+            className={cn(
+                'flex flex-col',
+                'items-center justify-center',
+                'size-full gap-2',
+                'p-3'
+            )}
+        >
+            <div className="relative w-full aspect-square ">
                 <Image
                     src={item?.icon ?? '/test.png'}
                     width={0}

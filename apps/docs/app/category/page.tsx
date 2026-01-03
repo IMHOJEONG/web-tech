@@ -32,6 +32,8 @@ export default function Page() {
                         key={url}
                         href={url}
                         className={cn(
+                            'flex flex-col',
+                            'items-center justify-center',
                             'cursor-pointer',
                             'dark:hover:bg-gray-500',
                             'hover:bg-slate-300',

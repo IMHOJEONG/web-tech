@@ -19,8 +19,8 @@ export const CategoryBox = ({ data }: { data: CategoryBoxItem }) => {
     return (
         <Link
             className={cn(
+                'size-full',
                 'p-2 flex flex-col gap-2',
-
                 'items-center justify-center',
                 'dark:hover:bg-gray-500',
                 'hover:bg-slate-300',
