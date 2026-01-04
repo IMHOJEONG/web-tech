@@ -17,6 +17,7 @@ const googleSansFlex = Google_Sans_Flex({
     display: 'swap',
     weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
     variable: '--font-google-sans-flex',
+    fallback: ['Arial', 'Times New Roman'],
 })
 
 export const metadata: Metadata = {
