@@ -37,7 +37,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                             href={makeUrl([item.url])}
                                             className={cn(
                                                 '',
-
+                                                'hover:opacity-90',
+                                                'dark:hover:bg-gray-100',
+                                                'hover:bg-slate-300 hover:text-black',
                                                 {
                                                     'bg-blue-100 dark:bg-gray-400':
                                                         pathname ===
