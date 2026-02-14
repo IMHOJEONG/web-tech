@@ -8,5 +8,7 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
-  }
+  },
+  "typescript.experimental.useTsgo": true
+
 }
