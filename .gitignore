@@ -27,6 +27,9 @@ out/
 build
 dist
 
+# Auto-generated files
+**/routeTree.gen.ts
+
 
 # Debug
 npm-debug.log*

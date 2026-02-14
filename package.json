@@ -52,7 +52,8 @@
       "hono": ">=4.11.7",
       "seroval": ">=1.4.1",
       "lodash": ">=4.17.23",
-      "@isaacs/brace-expansion": ">=5.0.1"
+      "@isaacs/brace-expansion": ">=5.0.1",
+      "lodash-es": ">=4.17.23"
     }
   }
 }

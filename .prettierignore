@@ -1,0 +1,18 @@
+# Auto-generated files
+**/routeTree.gen.ts
+**/*.gen.ts
+
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+build
+.next
+out
+.turbo
+
+# Lock files
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
