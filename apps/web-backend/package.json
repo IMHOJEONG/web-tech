@@ -39,7 +39,7 @@
     "@web-tech/eslint-config": "workspace:*",
     "@web-tech/tailwind-config": "workspace:*",
     "@web-tech/typescript-config": "workspace:*",
-    "eslint": "^9.39.2",
+    "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^16.5.0",
