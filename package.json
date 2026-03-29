@@ -41,12 +41,12 @@
     "overrides": {
       "glob": ">=11.1.0",
       "tmp": ">=0.2.4",
-      "undici": ">=5.29.0",
+      "undici": ">=7.24.0",
       "esbuild": ">=0.25.0",
       "js-yaml": ">=4.1.1",
       "body-parser": ">=2.2.1",
       "mdast-util-to-hast": ">=13.2.1",
-      "path-to-regexp": ">=6.3.0",
+      "path-to-regexp": ">=8.4.0",
       "qs": ">=6.14.1",
       "tar": ">=7.5.7",
       "hono": ">=4.11.7",
@@ -59,7 +59,10 @@
       "minimatch": ">=10.2.3",
       "rollup": ">=4.59.0",
       "flatted": ">=3.4.2",
-      "@tootallnate/once": ">=3.0.1"
+      "@tootallnate/once": ">=3.0.1",
+      "ajv": ">=8.18.0",
+      "h3": ">=2.0.1-rc.18",
+      "multer": ">=2.1.1"
     }
   }
 }
