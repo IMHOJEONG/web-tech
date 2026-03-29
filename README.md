@@ -21,5 +21,4 @@ background: "red",
 
 - icon은 https://www.radix-ui.com/icons으로 설정
 
-
-- Tsgo/native-preview 도입 예정 
+- Tsgo/native-preview 도입 예정
