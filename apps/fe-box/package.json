@@ -25,7 +25,7 @@
     "@prisma/adapter-pg": "^7.4.0",
     "@prisma/client": "^7.4.0",
     "@sentry/tanstackstart-react": "^10.38.0",
-    "@storybook/react-vite": "^9.1.17",
+    "@storybook/react-vite": "^10.3.3",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/ai": "^0.0.1",
     "@tanstack/ai-anthropic": "^0.0.1",
