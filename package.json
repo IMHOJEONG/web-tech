@@ -54,7 +54,10 @@
       "lodash": ">=4.17.23",
       "@isaacs/brace-expansion": ">=5.0.1",
       "lodash-es": ">=4.17.23",
-      "handlebars": ">=4.7.9"
+      "handlebars": ">=4.7.9",
+      "picomatch": ">=4.0.4",
+      "minimatch": ">=10.2.3",
+      "rollup": ">=4.59.0"
     }
   }
 }
