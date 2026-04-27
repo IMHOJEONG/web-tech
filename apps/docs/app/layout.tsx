@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { Inter, Space_Grotesk } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import NextTopLoader from 'nextjs-toploader'
 import { Suspense } from 'react'
@@ -10,14 +11,17 @@ import './css/global.css'
 import Header from './header'
 
 import { cn } from '@/lib/utils'
-import { Google_Sans_Flex } from 'next/font/google'
 
-const googleSansFlex = Google_Sans_Flex({
+const inter = Inter({
     subsets: ['latin'],
     display: 'swap',
-    weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-    variable: '--font-google-sans-flex',
-    fallback: ['Arial', 'Times New Roman'],
+    variable: '--font-body',
+})
+
+const spaceGrotesk = Space_Grotesk({
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-display',
 })
 
 export const metadata: Metadata = {
@@ -27,7 +31,7 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <html>
+        <html lang="ko" className="size-full">
             <head>
                 <meta
                     property="og:title"
@@ -51,10 +55,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <NextIntlClientProvider>
                 <body
                     className={cn(
-                        `flex flex-col size-full min-h-screen bg-gradient-to-b`,
+                        'flex size-full min-h-screen flex-col',
                         maruburi.variable,
                         mono.variable,
-                        googleSansFlex.className
+                        inter.variable,
+                        spaceGrotesk.variable
                     )}
                 >
                     <Suspense>
