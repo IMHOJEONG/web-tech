@@ -1,6 +1,3 @@
-export const HEADER_HEIGHT = 'h-20'
-export const HEADER_HEIGHT_TOP = 'top-20'
-
 export const HERO = {
     title: 'A journey where ideas crystallize into reality.',
     description:

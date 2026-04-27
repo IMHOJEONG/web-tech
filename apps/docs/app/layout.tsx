@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import { NextIntlClientProvider } from 'next-intl'
 import NextTopLoader from 'nextjs-toploader'
 import { Suspense } from 'react'
@@ -18,8 +19,9 @@ const inter = Inter({
     variable: '--font-body',
 })
 
-const spaceGrotesk = Space_Grotesk({
-    subsets: ['latin'],
+const spaceGrotesk = localFont({
+    src: '../public/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf',
+    weight: '300 700',
     display: 'swap',
     variable: '--font-display',
 })

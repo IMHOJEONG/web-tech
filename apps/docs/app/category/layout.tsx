@@ -1,13 +1,12 @@
 import { SidebarProvider } from '@web-tech/ui/components/sidebar'
 import { AppSidebar } from '~/components/app-sidebar/app-sidebar'
-import { HEADER_HEIGHT_TOP } from '~/shared/constants'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <SidebarProvider>
             <AppSidebar
                 variant="inset"
-                className={`h-full ${HEADER_HEIGHT_TOP}`}
+                className="top-[4.0625rem] h-[calc(100svh-4.0625rem)]"
             />
             <div className="w-full flex gap-2">
                 {/* <div className="flex h-full w-fit">

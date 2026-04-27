@@ -7,12 +7,13 @@
 
 body {
   --font-mono: var(--font-jetbrains-mono), monospace;
+  font-family: var(--font-body-locale, var(--font-body), sans-serif);
 }
 
 :lang(ko) {
-  font-family: var(--font-maru), var(--font-body), sans-serif;
+  --font-body-locale: var(--font-maru), var(--font-body), sans-serif;
 }
 
 :lang(en) {
-  font-family: var(--font-body), sans-serif;
+  --font-body-locale: var(--font-body), sans-serif;
 }
