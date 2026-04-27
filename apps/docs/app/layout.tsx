@@ -1,15 +1,15 @@
 import { Metadata } from 'next'
+import { NextIntlClientProvider } from 'next-intl'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
-import { NextIntlClientProvider } from 'next-intl'
 import NextTopLoader from 'nextjs-toploader'
 import { Suspense } from 'react'
 import { maruburi } from '~/components/maruburi-font'
 import { mono } from '~/components/mono-font'
 
 import Script from 'next/script'
+import Header from '~/shared/layout/header'
 import './css/global.css'
-import Header from './header'
 
 import { cn } from '@/lib/utils'
 
