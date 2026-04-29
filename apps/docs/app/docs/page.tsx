@@ -1,6 +1,6 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
-import MainCard from '~/components/main-card'
+import { MainCard } from '~/entities/document'
 import { EmptyAllDocs } from '~/feature/search/empty-all-docs'
 import { EmptySearchResult } from '~/feature/search/empty-search-result'
 import { getSortedPostsData } from '~/lib/get-document'

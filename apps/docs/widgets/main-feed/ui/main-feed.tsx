@@ -95,10 +95,7 @@ function estimateReadMinutes(content?: string) {
 function getTopicStyle(doc: FeedDoc): TopicTone {
     const fileName = doc.fileName ?? ''
 
-    if (
-        fileName.includes('/category/fe/') ||
-        fileName.includes('/data/v8/')
-    ) {
+    if (fileName.includes('/category/fe/') || fileName.includes('/data/v8/')) {
         return WEB_TOPIC
     }
 
@@ -122,13 +119,7 @@ function getAuthor(doc: FeedDoc, index: number): FeedAuthor {
     return AUTHOR_PALETTE[seededIndex] ?? AUTHOR_PALETTE[0]!
 }
 
-function FeedBadge({
-    label,
-    className,
-}: {
-    label: string
-    className: string
-}) {
+function FeedBadge({ label, className }: { label: string; className: string }) {
     return (
         <div
             className={cn(
@@ -142,13 +133,7 @@ function FeedBadge({
     )
 }
 
-function FeaturedCard({
-    doc,
-    index,
-}: {
-    doc: FeedDoc
-    index: number
-}) {
+function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
     const topic = getTopicStyle(doc)
     const minutes = estimateReadMinutes(doc.content)
     const author = getAuthor(doc, index)
@@ -193,13 +178,7 @@ function FeaturedCard({
     )
 }
 
-function CompactCard({
-    doc,
-    index,
-}: {
-    doc: FeedDoc
-    index: number
-}) {
+function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
     const topic = getTopicStyle(doc)
     const minutes = estimateReadMinutes(doc.content)
 
@@ -209,7 +188,10 @@ function CompactCard({
             className="group ds-card col-span-12 flex h-full flex-col justify-between bg-surface-container-low p-8 lg:col-span-4"
         >
             <div className="space-y-4">
-                <FeedBadge label={topic.label} className={topic.badgeClassName} />
+                <FeedBadge
+                    label={topic.label}
+                    className={topic.badgeClassName}
+                />
                 <h3 className="font-display text-headline-md text-on-surface">
                     {doc.title}
                 </h3>
@@ -230,13 +212,7 @@ function CompactCard({
     )
 }
 
-function ImageCard({
-    doc,
-    index,
-}: {
-    doc: FeedDoc
-    index: number
-}) {
+function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
     const topic = getTopicStyle(doc)
     const minutes = estimateReadMinutes(doc.content)
     const author = getAuthor(doc, index)
@@ -258,7 +234,10 @@ function ImageCard({
             </div>
 
             <div className="flex flex-1 flex-col gap-4 p-8">
-                <FeedBadge label={topic.label} className={topic.badgeClassName} />
+                <FeedBadge
+                    label={topic.label}
+                    className={topic.badgeClassName}
+                />
                 <h3 className="font-display text-headline-md text-on-surface">
                     {doc.title}
                 </h3>
@@ -293,11 +272,16 @@ function TextSupportCard({
     return (
         <article className="ds-card col-span-12 flex h-full flex-col justify-between bg-surface-container-low p-8 lg:col-span-4">
             <div className="space-y-4">
-                <FeedBadge label={topic.label} className={topic.badgeClassName} />
+                <FeedBadge
+                    label={topic.label}
+                    className={topic.badgeClassName}
+                />
                 <h3 className="font-display text-headline-md text-on-surface">
                     {title}
                 </h3>
-                <p className="text-body-md text-on-surface-variant">{summary}</p>
+                <p className="text-body-md text-on-surface-variant">
+                    {summary}
+                </p>
             </div>
 
             <div className="mt-8">{footer}</div>
@@ -432,8 +416,12 @@ export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
                     </div>
 
                     <div className="grid grid-cols-12 gap-6">
-                        {featuredDoc && <FeaturedCard doc={featuredDoc} index={1} />}
-                        {compactDoc && <CompactCard doc={compactDoc} index={2} />}
+                        {featuredDoc && (
+                            <FeaturedCard doc={featuredDoc} index={1} />
+                        )}
+                        {compactDoc && (
+                            <CompactCard doc={compactDoc} index={2} />
+                        )}
                         {imageDoc ? (
                             <ImageCard doc={imageDoc} index={3} />
                         ) : (

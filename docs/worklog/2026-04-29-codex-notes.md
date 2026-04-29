@@ -13,15 +13,18 @@
 - `About Us`의 다크 전용 하드코딩 색상을 디자인 토큰 기준으로 정리
 - `web`, `mobile` 탭을 Figma 기사 상세 화면 기반으로 공용 article detail 템플릿으로 전환
 - `ui-ux` 탭도 공용 article detail 템플릿으로 통일
+- FSD 2차 정리로 `MainCard`, `Search`, `ThemeToggle`를 `entities/features` 레이어로 이동
 
 ## Changed
 
-- `apps/docs/components/main-feed.tsx`
 - `apps/docs/app/docs/page.tsx`
 - `apps/docs/app/feed/page.tsx`
 - `apps/docs/widgets/main-feed/ui/main-feed.tsx`
 - `apps/docs/widgets/about-us/ui/about-us.tsx`
 - `apps/docs/widgets/article-detail/ui/article-detail.tsx`
+- `apps/docs/entities/document/ui/main-card.tsx`
+- `apps/docs/feature/search/ui/search.tsx`
+- `apps/docs/feature/theme-toggle/ui/theme-toggle.tsx`
 - `apps/docs/app/about/page.tsx`
 - `apps/docs/app/web/page.tsx`
 - `apps/docs/app/mobile/page.tsx`
@@ -51,6 +54,7 @@
 - 현재 `apps/docs`는 `shared`, `feature`, `components`가 혼재되어 있어 일부 재사용은 가능하지만 FSD 레이어가 명확히 정리된 상태는 아님
 - `article-detail` 같은 페이지 단위 UI는 장기적으로 `widgets` 또는 `pages` 성격의 레이어로 분리하는 편이 더 자연스러움
 - 1차 FSD 정리로 `MainFeed`, `AboutUs`, `ArticleDetail`를 `widgets/*/ui`로 이동하고 독립 FSD 문서 추가
+- 2차 FSD 정리로 `MainCard`는 `entities/document`, `Search`와 `ThemeToggle`는 각 `feature/*/ui`로 이동
 
 ## Open Questions
 
@@ -61,6 +65,7 @@
 - footer/privacy/terms/changelog/github 링크를 어떤 실제 경로로 연결할지
 - article-detail 화면을 `ui-ux`에도 확장할지 여부
 - `components/`, `feature/`, `shared/`를 FSD 기준으로 재배치할지 여부
+- app shell인 `header/footer/navigation`을 `shared`에 둘지 별도 shell/widget 레이어로 둘지 여부
 
 ## Next
 
@@ -70,3 +75,4 @@
 - about hero 및 creator 영역에 정식 자산을 쓸지 검토
 - article-detail 내용을 실제 문서 데이터와 연결할지, 현재처럼 curated static spotlight로 유지할지 결정
 - `docs` 앱 구조를 `shared / entities / features / widgets / pages` 기준으로 단계적으로 재정리할지 결정
+- `shared/navigation` 및 `shared/layout/*`의 최종 레이어 위치 확정

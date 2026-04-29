@@ -1,8 +1,8 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
+import { Search } from '~/feature/search'
+import { ThemeToggle } from '~/feature/theme-toggle'
 import { Navigation } from '~/shared/navigation'
-import { Search } from '~/shared/search'
-import { ThemeToggle } from '~/shared/theme-toggle'
 
 function Brand() {
     return (

@@ -65,6 +65,10 @@
 - author badge
 - category chip
 
+현재 1차 적용:
+
+- `MainCard`를 `entities/document`로 이동
+
 ### `features`
 
 사용자 액션이나 상호작용 단위를 담습니다.
@@ -76,6 +80,11 @@
 - `category`
 
 이 레이어는 유지하고, 화면 전체를 담지 않도록 제한하는 것이 좋습니다.
+
+현재 1차 적용:
+
+- `Search` UI를 `feature/search/ui`로 이동
+- `ThemeToggle` UI를 `feature/theme-toggle/ui`로 이동
 
 ### `widgets`
 
@@ -124,22 +133,20 @@
 안전한 순서는 다음과 같습니다.
 
 1. 대형 페이지 조합 UI를 먼저 `widgets`로 이동
-2. `MainCard`처럼 문서 표현 성격이 강한 UI를 `entities/document` 후보로 검토
-3. `shared/search.tsx`, `shared/theme-toggle.tsx`처럼 기능성이 강한 파일을 `features`로 재배치할지 검토
+2. `MainCard`처럼 문서 표현 성격이 강한 UI를 `entities/document`로 이동
+3. `Search`, `ThemeToggle`처럼 기능성이 강한 UI를 `features`로 이동
 4. `components/`에 남은 파일을 레이어별로 소진
 
 ## Immediate Next Candidates
 
 다음 리팩터링 후보는 아래와 같습니다.
 
-- `apps/docs/components/main-card.tsx`
-  - `entities/document` 또는 `shared/ui` 후보
-- `apps/docs/shared/search.tsx`
-  - `features/search/ui` 후보
-- `apps/docs/shared/theme-toggle.tsx`
-  - `features/theme-toggle/ui` 후보
 - `apps/docs/shared/navigation.tsx`
   - `shared/ui/navigation` 또는 app shell widget 후보
+- `apps/docs/shared/layout/header.tsx`
+  - app shell widget 후보
+- `apps/docs/shared/layout/footer.tsx`
+  - app shell widget 후보
 
 ## Non-Goals
 

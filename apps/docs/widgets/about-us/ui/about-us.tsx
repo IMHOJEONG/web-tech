@@ -88,7 +88,10 @@ export function AboutUs() {
                 <section className="grid grid-cols-12 gap-6">
                     <article className="ds-card col-span-12 flex min-h-[22rem] flex-col justify-between rounded-lg bg-surface-container-low p-12 lg:col-span-8">
                         <div className="space-y-4">
-                            <PillBadge label={webCard.eyebrow} tone="secondary" />
+                            <PillBadge
+                                label={webCard.eyebrow}
+                                tone="secondary"
+                            />
                             <h2 className="font-display text-headline-lg text-on-surface">
                                 {webCard.title}
                             </h2>
@@ -105,7 +108,10 @@ export function AboutUs() {
 
                     <article className="ds-card col-span-12 flex min-h-[22rem] flex-col justify-between rounded-lg bg-surface-container-low p-12 lg:col-span-4">
                         <div className="space-y-4">
-                            <PillBadge label={mobileCard.eyebrow} tone="primary" />
+                            <PillBadge
+                                label={mobileCard.eyebrow}
+                                tone="primary"
+                            />
                             <h2 className="font-display text-headline-md text-on-surface">
                                 {mobileCard.title}
                             </h2>
@@ -122,7 +128,10 @@ export function AboutUs() {
 
                     <article className="ds-card col-span-12 grid min-h-[19rem] rounded-lg bg-surface-container-low p-12 lg:grid-cols-[1.4fr_0.9fr] lg:items-center lg:gap-8">
                         <div className="space-y-4">
-                            <PillBadge label={designCard.eyebrow} tone="muted" />
+                            <PillBadge
+                                label={designCard.eyebrow}
+                                tone="muted"
+                            />
                             <h2 className="font-display text-headline-lg text-on-surface">
                                 {designCard.title}
                             </h2>
@@ -155,10 +164,11 @@ export function AboutUs() {
                             </div>
 
                             <p className="text-body-md text-on-surface-variant">
-                                A full-stack engineer with a penchant for minimal
-                                aesthetics and maximal performance. Building
-                                TECH_LOGIC as an open-source knowledge base for
-                                the next generation of digital builders.
+                                A full-stack engineer with a penchant for
+                                minimal aesthetics and maximal performance.
+                                Building TECH_LOGIC as an open-source knowledge
+                                base for the next generation of digital
+                                builders.
                             </p>
 
                             <div className="flex flex-wrap gap-4">

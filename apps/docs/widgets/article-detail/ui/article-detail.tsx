@@ -267,13 +267,22 @@ const useReactiveState = (stream$) => {
                                     density, and product feel. {meta.note}
                                 </p>
                                 <div className="flex flex-wrap gap-4 font-display text-xs tracking-[0.08em] uppercase">
-                                    <Link href="/about" className="text-primary">
+                                    <Link
+                                        href="/about"
+                                        className="text-primary"
+                                    >
                                         TWITTER
                                     </Link>
-                                    <Link href="/about" className="text-primary">
+                                    <Link
+                                        href="/about"
+                                        className="text-primary"
+                                    >
                                         GITHUB
                                     </Link>
-                                    <Link href="/about" className="text-primary">
+                                    <Link
+                                        href="/about"
+                                        className="text-primary"
+                                    >
                                         LINKEDIN
                                     </Link>
                                 </div>
