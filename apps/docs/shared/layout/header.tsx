@@ -1,4 +1,5 @@
 import { cn } from '@web-tech/ui/lib/utils'
+import { Menu } from 'lucide-react'
 import Link from 'next/link'
 import { Search } from '~/feature/search'
 import { ThemeToggle } from '~/feature/theme-toggle'
@@ -23,19 +24,34 @@ export default function Header() {
                 'h-[4.0625rem]'
             )}
         >
-            <div className="mx-auto flex h-16 w-full max-w-page items-center px-4 sm:px-6 lg:px-8">
-                <div className="flex min-w-0 flex-1 items-center justify-start">
+            <div className="mx-auto flex h-16 w-full max-w-page items-center px-4 md:px-8">
+                <div className="flex flex-1 items-center justify-start md:hidden">
+                    <Link
+                        href="/feed"
+                        aria-label="Go to feed"
+                        className="flex size-9 items-center justify-center text-zinc-300 transition-colors hover:text-cyan-400"
+                    >
+                        <Menu className="size-[1.125rem]" strokeWidth={2} />
+                    </Link>
+                </div>
+
+                <div className="hidden min-w-0 flex-1 items-center justify-start md:flex">
                     <Brand />
                 </div>
 
-                <div className="flex shrink-0 items-center justify-center px-4">
+                <div className="flex shrink-0 items-center justify-center md:px-4">
+                    <div className="md:hidden">
+                        <Brand />
+                    </div>
                     <Navigation />
                 </div>
 
                 <div className="flex min-w-0 flex-1 items-center justify-end">
-                    <div className="flex shrink-0 items-center gap-6">
+                    <div className="flex shrink-0 items-center gap-4 md:gap-6">
                         <Search />
-                        <ThemeToggle />
+                        <div className="hidden md:block">
+                            <ThemeToggle />
+                        </div>
                     </div>
                 </div>
             </div>

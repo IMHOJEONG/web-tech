@@ -289,6 +289,43 @@ function TextSupportCard({
     )
 }
 
+function NewsletterInjectionCard() {
+    return (
+        <article className="ds-card col-span-12 overflow-hidden bg-[#09090b] lg:col-span-4">
+            <div className="relative flex h-full flex-col gap-5 p-6">
+                <div className="absolute -right-8 top-0 size-24 rounded-full bg-primary/10 blur-2xl" />
+                <div className="relative flex items-center gap-3 text-primary">
+                    <div className="size-5 rounded-sm border border-primary/30" />
+                    <span className="font-display text-[0.75rem] tracking-[0.18em] uppercase text-outline">
+                        Weekly_Patch_Notes
+                    </span>
+                </div>
+
+                <div className="relative space-y-3">
+                    <h3 className="font-display text-[1.5rem] leading-[1.2] text-zinc-100">
+                        Get the most important technical deep-dives delivered to
+                        your terminal inbox every Monday.
+                    </h3>
+                </div>
+
+                <div className="relative mt-auto flex flex-col gap-2 sm:flex-row">
+                    <div className="flex min-h-10 flex-1 items-center border border-zinc-700 bg-surface-container px-3">
+                        <span className="font-mono text-sm text-zinc-500">
+                            user@domain.com
+                        </span>
+                    </div>
+                    <button
+                        type="button"
+                        className="bg-primary px-5 py-2.5 font-display text-sm tracking-[0.12em] text-primary-foreground uppercase"
+                    >
+                        Join
+                    </button>
+                </div>
+            </div>
+        </article>
+    )
+}
+
 export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
     const feedDocs = docs.filter(isFeedDoc)
     const [heroDoc, featuredDoc, compactDoc, imageDoc, supportDoc] = feedDocs
@@ -437,6 +474,8 @@ export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
                             />
                         )}
 
+                        <NewsletterInjectionCard />
+
                         {supportDoc ? (
                             <CompactCard doc={supportDoc} index={4} />
                         ) : (
@@ -464,41 +503,6 @@ export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
                             LOAD MORE SEQUENCES
                             <ArrowRight className="size-4" />
                         </Link>
-                    </div>
-                </div>
-            </section>
-
-            <section className="px-4 pb-20 sm:px-8">
-                <div className="mx-auto max-w-page">
-                    <div className="relative overflow-hidden border border-white/5 bg-surface-container p-8 sm:p-12">
-                        <div className="absolute right-0 top-0 h-40 w-56 bg-[linear-gradient(135deg,transparent_25%,rgba(255,255,255,0.04)_25%,rgba(255,255,255,0.04)_50%,transparent_50%,transparent_75%,rgba(255,255,255,0.03)_75%)] opacity-70" />
-
-                        <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
-                            <div className="space-y-3">
-                                <h2 className="font-display text-headline-lg text-on-surface">
-                                    Join the Logic
-                                </h2>
-                                <p className="max-w-xl text-body-md text-on-surface-variant">
-                                    Get precision-engineered technical insights
-                                    delivered to your terminal every Monday
-                                    morning.
-                                </p>
-                            </div>
-
-                            <div className="flex flex-col gap-3 sm:flex-row">
-                                <div className="flex min-h-12 flex-1 items-center border border-white/10 bg-background px-6">
-                                    <span className="font-mono text-sm uppercase tracking-[0.08em] text-zinc-500">
-                                        user@terminal.io
-                                    </span>
-                                </div>
-                                <button
-                                    type="button"
-                                    className="ds-button-primary justify-center"
-                                >
-                                    SUBSCRIBE
-                                </button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>

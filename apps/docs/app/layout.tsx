@@ -10,6 +10,7 @@ import { mono } from '~/components/mono-font'
 import Script from 'next/script'
 import Footer from '~/shared/layout/footer'
 import Header from '~/shared/layout/header'
+import MobileBottomNav from '~/shared/layout/mobile-bottom-nav'
 import './css/global.css'
 
 import { cn } from '@/lib/utils'
@@ -69,8 +70,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         <Header />
                     </Suspense>
                     <NextTopLoader />
-                    <div className="flex-1">{children}</div>
+                    <div className="flex-1 pb-[4.0625rem] md:pb-0">
+                        {children}
+                    </div>
                     <Footer />
+                    <MobileBottomNav />
                 </body>
             </NextIntlClientProvider>
             <Script id="tailwindcss-dark-mode">

@@ -14,6 +14,8 @@
 - `web`, `mobile` 탭을 Figma 기사 상세 화면 기반으로 공용 article detail 템플릿으로 전환
 - `ui-ux` 탭도 공용 article detail 템플릿으로 통일
 - FSD 2차 정리로 `MainCard`, `Search`, `ThemeToggle`를 `entities/features` 레이어로 이동
+- Figma 루트 페이지(`0:1`) 기준으로 `MainFeed`, `ArticleDetail`의 최신 컴포넌트 패턴 반영
+- Figma 모바일 chrome 기준으로 top app bar / bottom nav 반영
 
 ## Changed
 
@@ -29,6 +31,11 @@
 - `apps/docs/app/web/page.tsx`
 - `apps/docs/app/mobile/page.tsx`
 - `apps/docs/app/ui-ux/page.tsx`
+- `apps/docs/widgets/main-feed/ui/main-feed.tsx`
+- `apps/docs/widgets/article-detail/ui/article-detail.tsx`
+- `apps/docs/shared/layout/header.tsx`
+- `apps/docs/shared/layout/mobile-bottom-nav.tsx`
+- `apps/docs/app/layout.tsx`
 - `apps/docs/shared/layout/footer.tsx`
 - `apps/docs/shared/layout/header.tsx`
 - `apps/docs/shared/navigation.tsx`
@@ -55,6 +62,17 @@
 - `article-detail` 같은 페이지 단위 UI는 장기적으로 `widgets` 또는 `pages` 성격의 레이어로 분리하는 편이 더 자연스러움
 - 1차 FSD 정리로 `MainFeed`, `AboutUs`, `ArticleDetail`를 `widgets/*/ui`로 이동하고 독립 FSD 문서 추가
 - 2차 FSD 정리로 `MainCard`는 `entities/document`, `Search`와 `ThemeToggle`는 각 `feature/*/ui`로 이동
+- 루트 Figma 페이지의 최신 상태를 확인한 결과, 현재 앱에서 차이가 큰 부분은 피드 내 pattern-injection 뉴스레터 카드와 모바일 article-detail 구조였음
+- `ArticleDetail`은 모바일에서 sidebar를 숨기고 본문 내 newsletter card를 노출하도록 조정
+- `MainFeed`는 카드 그리드 내부에 `Weekly_Patch_Notes` 스타일 뉴스레터 injection card를 추가하고 하단 중복 newsletter section은 제거
+- 모바일 Figma 프레임(`57:1888`)을 기준으로 global mobile top app bar와 fixed bottom nav를 추가
+- mobile bottom nav 높이만큼 layout content 하단 padding도 보정
+- 이후 desktop 회귀를 확인했고, 원인은 `ArticleDetail`의 mobile/desktop 분기 기준이 `xl`로 잡혀 있어 `lg~xl` 구간에서 mobile newsletter가 노출되던 점이었음
+- 이를 `lg` 기준으로 수정해 desktop sidebar와 mobile newsletter 노출 조건을 다시 분리
+- Figma 루트 페이지의 `TopNavBar Shell`(`57:984`)과 현재 header를 다시 비교한 결과, 실제 앱은 `mobile: 56px / desktop: 65px`로 나뉘어 있어 더 얇게 느껴졌음
+- header를 전 구간 `65px shell / 64px inner` 구조로 통일해 Figma 데스크톱 top bar 높이감에 맞춤
+- article-detail 화면에서 Figma localhost asset URL이 깨지는 문제를 확인했고, 현재 활성화된 `Article Detail` 프레임(`57:2`) 기준 최신 자산을 다시 받아 `apps/docs/public/figma/article-detail`에 저장
+- `widgets/article-detail/ui/article-detail.tsx`는 더 이상 `localhost:3845`를 직접 보지 않고 `/figma/article-detail/*` 정적 경로를 사용하도록 변경
 
 ## Open Questions
 
@@ -66,6 +84,8 @@
 - article-detail 화면을 `ui-ux`에도 확장할지 여부
 - `components/`, `feature/`, `shared/`를 FSD 기준으로 재배치할지 여부
 - app shell인 `header/footer/navigation`을 `shared`에 둘지 별도 shell/widget 레이어로 둘지 여부
+- 루트 Figma의 다른 desktop/mobile feed 프레임도 추가로 코드에 1:1 반영할지 여부
+- mobile nav icon을 Figma asset 기반으로 더 정밀하게 교체할지 여부
 
 ## Next
 
@@ -76,3 +96,4 @@
 - article-detail 내용을 실제 문서 데이터와 연결할지, 현재처럼 curated static spotlight로 유지할지 결정
 - `docs` 앱 구조를 `shared / entities / features / widgets / pages` 기준으로 단계적으로 재정리할지 결정
 - `shared/navigation` 및 `shared/layout/*`의 최종 레이어 위치 확정
+- 최신 Figma root에 있는 별도 mobile feed / alternate feed 프레임까지 구현 범위를 넓힐지 결정

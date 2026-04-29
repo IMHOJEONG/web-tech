@@ -1,15 +1,12 @@
 import Link from 'next/link'
 
-const imgAuthorProfile =
-    'http://localhost:3845/assets/9883d61216c94307ecd4202521c147ae585a6902.png'
+const imgAuthorProfile = '/figma/article-detail/author-profile.png'
 const imgAbstractTechnologyHero =
-    'http://localhost:3845/assets/b380afb3118d9ce236034c24a046e94c837e80a0.png'
-const imgDesignDetail1 =
-    'http://localhost:3845/assets/ce95727877f35eaee57e9743aafa602fc7016358.png'
-const imgDesignDetail2 =
-    'http://localhost:3845/assets/ea415ff9f811cbf03199c1d86283ed2fc70606ba.png'
+    '/figma/article-detail/hero-abstract-technology.png'
+const imgDesignDetail1 = '/figma/article-detail/design-detail-1.png'
+const imgDesignDetail2 = '/figma/article-detail/design-detail-2.png'
 const imgMobileInterfaceMockup =
-    'http://localhost:3845/assets/3558d689791f4d286eb7f8da187223fd3d922065.png'
+    '/figma/article-detail/mobile-interface-mockup.png'
 
 const tocItems = [
     '01. The Reactivity Paradox',
@@ -76,6 +73,65 @@ function SidebarSection({
     )
 }
 
+function NewsletterCard({
+    title,
+    description,
+    placeholder,
+    buttonLabel,
+    note,
+    compact = false,
+}: {
+    title: string
+    description: string
+    placeholder: string
+    buttonLabel: string
+    note?: string
+    compact?: boolean
+}) {
+    return (
+        <div className="relative overflow-hidden rounded-sm border border-primary/20 bg-[#09090b] p-6">
+            <div className="absolute -right-10 -top-10 size-24 rounded-full bg-primary/10 blur-2xl" />
+            <div className="relative space-y-5">
+                <div className="space-y-2">
+                    <h3 className="font-display text-base text-zinc-100">
+                        {title}
+                    </h3>
+                    <p className="text-sm leading-5 text-zinc-400">
+                        {description}
+                    </p>
+                </div>
+
+                {compact ? (
+                    <div className="space-y-2">
+                        <input
+                            className="w-full border border-zinc-700 bg-surface-container px-3 py-3 text-sm tracking-[0.05em] text-zinc-300 uppercase outline-none transition-colors focus:border-primary"
+                            placeholder={placeholder}
+                        />
+                        <button className="w-full bg-primary px-4 py-3 font-display text-sm tracking-[0.12em] text-primary-foreground uppercase transition-opacity hover:opacity-90">
+                            {buttonLabel}
+                        </button>
+                    </div>
+                ) : (
+                    <div className="space-y-4">
+                        <input
+                            className="w-full border border-zinc-700 bg-surface-container px-4 py-3 text-sm tracking-[0.05em] text-zinc-300 outline-none transition-colors focus:border-primary"
+                            placeholder={placeholder}
+                        />
+                        <button className="w-full bg-primary px-4 py-3 font-display text-sm tracking-[0.12em] text-primary-foreground uppercase transition-opacity hover:opacity-90">
+                            {buttonLabel}
+                        </button>
+                        {note ? (
+                            <p className="text-center font-display text-[0.625rem] tracking-[0.16em] text-zinc-500 uppercase">
+                                {note}
+                            </p>
+                        ) : null}
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}
+
 export function ArticleDetail({ channel }: ArticleDetailProps) {
     const meta = pageMeta[channel]
 
@@ -85,7 +141,7 @@ export function ArticleDetail({ channel }: ArticleDetailProps) {
                 <div className="h-full w-1/3 bg-primary shadow-[0_0_10px_rgba(0,220,229,0.5)]" />
             </div>
 
-            <div className="mx-auto grid w-full max-w-page gap-8 px-4 pb-20 pt-32 sm:px-8 xl:grid-cols-[minmax(0,1fr)_20rem]">
+            <div className="mx-auto grid w-full max-w-page gap-8 px-4 pb-20 pt-32 sm:px-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
                 <article className="min-w-0 space-y-12">
                     <section className="space-y-6">
                         <div className="flex flex-wrap items-center gap-2">
@@ -248,6 +304,16 @@ const useReactiveState = (stream$) => {
                         </p>
                     </section>
 
+                    <section className="lg:hidden">
+                        <NewsletterCard
+                            title="Build Better Systems"
+                            description="Join 12,000+ engineers receiving bi-weekly deep dives into infrastructure, Rust, and distributed computing."
+                            placeholder="user@tech-logic.io"
+                            buttonLabel="Subscribe to the Patch"
+                            note="NO SPAM // SYSTEM-GRADE SIGNAL ONLY"
+                        />
+                    </section>
+
                     <section className="border-t border-border pt-8">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                             <div className="overflow-hidden rounded-full border border-border bg-surface-container size-12 shrink-0">
@@ -291,7 +357,7 @@ const useReactiveState = (stream$) => {
                     </section>
                 </article>
 
-                <aside className="space-y-8 xl:sticky xl:top-28 xl:self-start">
+                <aside className="hidden space-y-8 lg:sticky lg:top-28 lg:block lg:self-start">
                     <SidebarSection title="TABLE OF CONTENTS">
                         <div className="space-y-3">
                             {tocItems.map((item, index) => (
@@ -310,26 +376,13 @@ const useReactiveState = (stream$) => {
                     </SidebarSection>
 
                     <SidebarSection title="JOIN THE SYSTEM">
-                        <div className="relative overflow-hidden rounded-sm border border-primary/20 bg-[#09090b] p-6">
-                            <div className="absolute -right-10 -top-10 size-24 rounded-full bg-primary/10 blur-2xl" />
-                            <div className="relative space-y-5">
-                                <div className="space-y-2">
-                                    <h3 className="font-display text-base text-zinc-100">
-                                        Get engineering insights delivered to
-                                        your terminal weekly.
-                                    </h3>
-                                </div>
-                                <div className="space-y-2">
-                                    <input
-                                        className="w-full border border-zinc-700 bg-surface-container px-3 py-3 text-sm tracking-[0.05em] text-zinc-300 uppercase outline-none transition-colors focus:border-primary"
-                                        placeholder="USER@DOMAIN.COM"
-                                    />
-                                    <button className="w-full bg-primary px-4 py-3 font-display text-sm tracking-[0.12em] text-primary-foreground uppercase transition-opacity hover:opacity-90">
-                                        SUBSCRIBE
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <NewsletterCard
+                            compact
+                            title="Join the System"
+                            description="Get engineering insights delivered to your terminal weekly."
+                            placeholder="USER@DOMAIN.COM"
+                            buttonLabel="SUBSCRIBE"
+                        />
                     </SidebarSection>
 
                     <SidebarSection title="RELATED SIGNALS">
