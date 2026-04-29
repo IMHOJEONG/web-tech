@@ -5,6 +5,7 @@ import { EmptyAllDocs } from '~/feature/search/empty-all-docs'
 import { EmptySearchResult } from '~/feature/search/empty-search-result'
 import { getSortedPostsData } from '~/lib/get-document'
 import { getSearchData } from '~/lib/get-search-data'
+import { MainFeed } from '~/widgets/main-feed'
 
 type Props = {
     searchParams: { q?: string }
@@ -21,6 +22,10 @@ export default async function Page({ searchParams }: Props) {
 
     if (q && data.length === 0) {
         return <EmptySearchResult keyword={q} />
+    }
+
+    if (!q) {
+        return <MainFeed docs={data} />
     }
 
     return (

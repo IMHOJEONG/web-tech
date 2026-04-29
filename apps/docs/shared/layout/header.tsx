@@ -7,10 +7,10 @@ import { ThemeToggle } from '~/shared/theme-toggle'
 function Brand() {
     return (
         <Link
-            className="font-display flex items-center text-[1.25rem] leading-7 font-bold tracking-[0.12em] text-cyan-400 uppercase"
+            className="font-display flex items-center text-[1.25rem] leading-7 font-bold tracking-[0.1em] text-cyan-400 uppercase"
             href="/"
         >
-            HeapForge
+            TECH_LOGIC
         </Link>
     )
 }

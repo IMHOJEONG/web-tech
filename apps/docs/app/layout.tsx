@@ -8,6 +8,7 @@ import { maruburi } from '~/components/maruburi-font'
 import { mono } from '~/components/mono-font'
 
 import Script from 'next/script'
+import Footer from '~/shared/layout/footer'
 import Header from '~/shared/layout/header'
 import './css/global.css'
 
@@ -68,7 +69,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         <Header />
                     </Suspense>
                     <NextTopLoader />
-                    {children}
+                    <div className="flex-1">{children}</div>
+                    <Footer />
                 </body>
             </NextIntlClientProvider>
             <Script id="tailwindcss-dark-mode">

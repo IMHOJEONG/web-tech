@@ -48,7 +48,7 @@ export const Navigation = () => {
                     <nav key={name} className="flex items-center">
                         <Link
                             className={cn(
-                                'font-display flex h-[30px] items-center border-b-2 pb-1 text-base font-normal leading-6 tracking-[-0.025em] transition-colors',
+                                'font-display flex h-[1.875rem] items-center border-b-2 pb-[0.375rem] text-base font-normal leading-6 tracking-[-0.025em] transition-colors',
                                 isActive
                                     ? 'border-cyan-400 text-cyan-400'
                                     : 'border-transparent text-zinc-400 hover:text-zinc-200'
