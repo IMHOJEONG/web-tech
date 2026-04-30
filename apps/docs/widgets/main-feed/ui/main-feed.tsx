@@ -92,6 +92,10 @@ function estimateReadMinutes(content?: string) {
     return Math.max(5, Math.ceil(source.length / 420))
 }
 
+function getTextLang(text: string) {
+    return /[가-힣]/.test(text) ? 'ko' : 'en'
+}
+
 function getTopicStyle(doc: FeedDoc): TopicTone {
     const fileName = doc.fileName ?? ''
 
@@ -141,10 +145,10 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
     return (
         <Link
             href={`/docs/${doc.slug}`}
-            className="group ds-card col-span-12 grid overflow-hidden bg-surface-container-low lg:col-span-8 lg:grid-cols-2"
+            className="group ds-card col-span-12 grid w-full min-w-0 overflow-hidden bg-surface-container-low lg:col-span-8 lg:grid-cols-2"
         >
-            <div className="flex flex-col justify-between p-8">
-                <div className="space-y-4">
+            <div className="flex w-full min-w-0 self-stretch flex-col justify-between p-8">
+                <div className="w-full min-w-0 self-stretch space-y-4">
                     <FeedBadge
                         label={`${topic.label} DEVELOPMENT`}
                         className={topic.badgeClassName}
@@ -152,7 +156,10 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
                     <h3 className="font-display text-[1.75rem] leading-[1.25] font-bold tracking-[-0.03em] text-on-surface">
                         {doc.title}
                     </h3>
-                    <p className="max-w-sm text-body-md text-on-surface-variant">
+                    <p
+                        lang={getTextLang(doc.summary)}
+                        className="block w-full max-w-none self-stretch break-keep whitespace-normal text-body-md text-on-surface-variant"
+                    >
                         {doc.summary}
                     </p>
                 </div>
@@ -185,9 +192,9 @@ function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
     return (
         <Link
             href={`/docs/${doc.slug}`}
-            className="group ds-card col-span-12 flex h-full flex-col justify-between bg-surface-container-low p-8 lg:col-span-4"
+            className="group ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-8 lg:col-span-4"
         >
-            <div className="space-y-4">
+            <div className="w-full min-w-0 self-stretch space-y-4">
                 <FeedBadge
                     label={topic.label}
                     className={topic.badgeClassName}
@@ -195,7 +202,10 @@ function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
                 <h3 className="font-display text-headline-md text-on-surface">
                     {doc.title}
                 </h3>
-                <p className="text-body-md text-on-surface-variant">
+                <p
+                    lang={getTextLang(doc.summary)}
+                    className="block w-full max-w-none self-stretch break-keep whitespace-normal text-body-md text-on-surface-variant"
+                >
                     {doc.summary}
                 </p>
             </div>
@@ -220,7 +230,7 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
     return (
         <Link
             href={`/docs/${doc.slug}`}
-            className="group ds-card col-span-12 flex h-full flex-col overflow-hidden bg-surface-container-low lg:col-span-4"
+            className="group ds-card col-span-12 flex h-full w-full min-w-0 flex-col overflow-hidden bg-surface-container-low lg:col-span-4"
         >
             <div className="relative aspect-[4/3] overflow-hidden bg-surface">
                 <Image
@@ -233,7 +243,7 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,19,25,0.12),rgba(17,19,25,0.4))]" />
             </div>
 
-            <div className="flex flex-1 flex-col gap-4 p-8">
+            <div className="flex w-full min-w-0 flex-1 self-stretch flex-col gap-4 p-8">
                 <FeedBadge
                     label={topic.label}
                     className={topic.badgeClassName}
@@ -241,7 +251,10 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
                 <h3 className="font-display text-headline-md text-on-surface">
                     {doc.title}
                 </h3>
-                <p className="flex-1 text-body-md text-on-surface-variant">
+                <p
+                    lang={getTextLang(doc.summary)}
+                    className="block w-full max-w-none self-stretch break-keep whitespace-normal text-body-md text-on-surface-variant"
+                >
                     {doc.summary}
                 </p>
 
@@ -270,8 +283,8 @@ function TextSupportCard({
     footer: React.ReactNode
 }) {
     return (
-        <article className="ds-card col-span-12 flex h-full flex-col justify-between bg-surface-container-low p-8 lg:col-span-4">
-            <div className="space-y-4">
+        <article className="ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-8 lg:col-span-4">
+            <div className="w-full min-w-0 self-stretch space-y-4">
                 <FeedBadge
                     label={topic.label}
                     className={topic.badgeClassName}
@@ -279,7 +292,10 @@ function TextSupportCard({
                 <h3 className="font-display text-headline-md text-on-surface">
                     {title}
                 </h3>
-                <p className="text-body-md text-on-surface-variant">
+                <p
+                    lang={getTextLang(summary)}
+                    className="block w-full max-w-none self-stretch break-keep whitespace-normal text-body-md text-on-surface-variant"
+                >
                     {summary}
                 </p>
             </div>

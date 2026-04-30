@@ -12,6 +12,9 @@ body {
 
 :lang(ko) {
   --font-body-locale: var(--font-maru), var(--font-body), sans-serif;
+  line-break: normal;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 :lang(en) {

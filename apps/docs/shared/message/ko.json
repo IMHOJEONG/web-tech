@@ -1,8 +1,13 @@
 {
+    "common": {
+        "brand": "TECH_LOGIC"
+    },
     "home": {
-        "title": "hi~"
+        "title": "아이디어가 시스템으로 단련되는 곳.",
+        "description": "소프트웨어 장인정신과 시스템 사고가 만나는 공간입니다. 메모리부터 아키텍처까지, 한 바이트씩 지식을 정제합니다."
     },
     "search": {
+        "placeholder": "문서를 검색해보세요",
         "empty": {
             "result-title": "{keyword}에 맞는 결과가 없습니다",
             "result-description": "다른 키워드로 검색해보세요"

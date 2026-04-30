@@ -73,6 +73,18 @@
 - header를 전 구간 `65px shell / 64px inner` 구조로 통일해 Figma 데스크톱 top bar 높이감에 맞춤
 - article-detail 화면에서 Figma localhost asset URL이 깨지는 문제를 확인했고, 현재 활성화된 `Article Detail` 프레임(`57:2`) 기준 최신 자산을 다시 받아 `apps/docs/public/figma/article-detail`에 저장
 - `widgets/article-detail/ui/article-detail.tsx`는 더 이상 `localhost:3845`를 직접 보지 않고 `/figma/article-detail/*` 정적 경로를 사용하도록 변경
+- `app/layout.tsx`가 서버 컴포넌트인데 `react-i18next`의 `initReactI18next`를 직접 초기화하고 있어 `context-in-server-component` 계열 런타임 에러가 발생
+- `shared/ui/brand.tsx`는 `Trans` 기반 클라이언트 컴포넌트 대신 서버 안전한 정적 브랜드 텍스트로 단순화하고, layout의 `react-i18next` 초기화 코드는 제거
+- `next-intl` 기준으로 `shared/message/en.json`, `ko.json`의 메시지 구조를 다시 정리하고, `home`/`search` 카피 및 `common.brand`, `search.placeholder`를 추가
+- `main-feed` 카드 summary 문단에 `break-keep`을 추가해 한국어가 폭이 좁을 때 음절 단위로 세로처럼 쪼개져 보이는 현상을 완화
+- 이후 카드 summary를 한 줄로만 보이게 하려는 요구에 맞춰 `main-feed`의 주요 summary 문단에 `truncate`를 추가하고 말줄임표 처리로 전환
+- 한국어가 포함된 긴 summary에서 `truncate`가 덜 안정적으로 보이는 문제를 줄이기 위해 summary 블록과 부모 컨테이너에 `min-w-0`를 추가해 flex/grid 축소가 제대로 일어나도록 보강
+- 이후 실제 브라우저 스크린샷을 기준으로 접근을 바꿔, `main-feed` summary에 `block w-full overflow-hidden text-ellipsis whitespace-nowrap`를 직접 명시하고 부모에도 `w-full min-w-0`를 부여해 한 줄 박스 동작을 강제
+- 여전히 한국어 summary에서 폭 계산 이상이 남아 있어 CSS 한 줄 강제 전략을 버리고, `getDisplaySummary` 헬퍼로 카드별 표시 문자열 자체를 짧게 잘라 자연스럽게 한 줄 안에 들어오도록 방향 전환
+- 이후 요구를 다시 정리해, summary는 한 줄 고정보다 “가능하면 한 줄, 넘치면 자연스럽게 다음 줄”이 더 중요하다고 보고 `getDisplaySummary`를 제거하고 원문 + `break-keep whitespace-normal` 조합으로 복귀
+- `p` 태그 자체보다는 텍스트 언어 힌트와 줄바꿈 규칙 문제가 더 크다고 보고, summary 문단에 `lang`를 직접 부여하고 `:lang(ko)`에 `line-break`, `word-break`, `overflow-wrap` 규칙을 추가
+- 그래도 세로 현상이 남아 있어 텍스트 자체보다 카드 내부 폭 수축을 의심했고, `main-feed` 카드 루트/래퍼/summary에 `w-full`, `self-stretch`, `min-w-0`, `max-w-none`를 추가해 summary가 카드 가용 폭 전체를 쓰도록 보강
+- Figma `57:1723` 기준으로 mobile top bar 구조를 재정렬: 모바일은 `56px` 높이, 좌측 `menu + brand`, 우측 `search`만 보이도록 변경하고 가운데 브랜드/desktop nav 구조는 모바일에서 제거
 
 ## Open Questions
 
