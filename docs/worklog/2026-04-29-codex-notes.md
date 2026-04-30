@@ -85,6 +85,8 @@
 - `p` 태그 자체보다는 텍스트 언어 힌트와 줄바꿈 규칙 문제가 더 크다고 보고, summary 문단에 `lang`를 직접 부여하고 `:lang(ko)`에 `line-break`, `word-break`, `overflow-wrap` 규칙을 추가
 - 그래도 세로 현상이 남아 있어 텍스트 자체보다 카드 내부 폭 수축을 의심했고, `main-feed` 카드 루트/래퍼/summary에 `w-full`, `self-stretch`, `min-w-0`, `max-w-none`를 추가해 summary가 카드 가용 폭 전체를 쓰도록 보강
 - Figma `57:1723` 기준으로 mobile top bar 구조를 재정렬: 모바일은 `56px` 높이, 좌측 `menu + brand`, 우측 `search`만 보이도록 변경하고 가운데 브랜드/desktop nav 구조는 모바일에서 제거
+- 데스크톱 top navigation은 좌우 영역 폭 차이 때문에 시각적 중심이 어긋나 보여, header 컨테이너를 `relative`로 두고 navigation을 `absolute left-1/2 -translate-x-1/2`로 고정해 정중앙 배치
+- 이후 탭 중심 어긋남 원인을 active 상태 표시 CSS로 재판단했고, navigation의 active 표현을 `border-bottom` 기반에서 `after` 밑줄로 전환해 선택 표시가 레이아웃 box를 밀지 않도록 수정
 
 ## Open Questions
 

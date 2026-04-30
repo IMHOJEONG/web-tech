@@ -48,10 +48,10 @@ export const Navigation = () => {
                     <nav key={name} className="flex items-center">
                         <Link
                             className={cn(
-                                'font-display flex h-[1.875rem] items-center border-b-2 pb-[0.375rem] text-base font-normal leading-6 tracking-[-0.025em] transition-colors',
+                                'font-display relative inline-flex h-6 items-center text-base font-normal leading-6 tracking-[-0.025em] transition-colors after:absolute after:-bottom-1.5 after:left-1/2 after:h-0.5 after:w-full after:-translate-x-1/2 after:rounded-full after:transition-colors',
                                 isActive
-                                    ? 'border-cyan-400 text-cyan-400'
-                                    : 'border-transparent text-zinc-400 hover:text-zinc-200'
+                                    ? 'text-cyan-400 after:bg-cyan-400'
+                                    : 'text-zinc-400 after:bg-transparent hover:text-zinc-200'
                             )}
                             href={href}
                             aria-current={isActive ? 'page' : undefined}

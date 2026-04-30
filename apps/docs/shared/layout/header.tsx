@@ -14,7 +14,7 @@ export default function Header() {
                 'h-14 md:h-[4.0625rem]'
             )}
         >
-            <div className="mx-auto flex h-full w-full max-w-page items-center justify-between px-4 md:h-16 md:px-8">
+            <div className="relative mx-auto flex h-full w-full max-w-page items-center justify-between px-4 md:h-16 md:px-8">
                 <div className="flex items-center gap-3 md:hidden">
                     <Link
                         href="/feed"
@@ -41,7 +41,7 @@ export default function Header() {
                     </Link>
                 </div>
 
-                <div className="hidden shrink-0 items-center justify-center md:flex md:px-4">
+                <div className="hidden md:absolute md:left-1/2 md:flex md:-translate-x-1/2 md:items-center md:justify-center">
                     <Navigation />
                 </div>
 
