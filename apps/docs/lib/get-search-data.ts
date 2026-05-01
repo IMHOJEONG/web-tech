@@ -6,6 +6,7 @@ import fg from 'fast-glob'
 import fs from 'fs/promises'
 import { read } from 'to-vfile'
 import { matter } from 'vfile-matter'
+import { fetchRemoteSearchData } from '~/lib/content-api'
 
 export type SearchData = {
     slug: string
@@ -27,6 +28,12 @@ export type SearchData = {
  * keyword가 있으면 content에 포함된 것만 반환
  */
 export async function getSearchData(keyword?: string): Promise<SearchData[]> {
+    const remoteResults = await fetchRemoteSearchData(keyword)
+
+    if (remoteResults) {
+        return remoteResults
+    }
+
     const files = await fg('**/*.mdx', {
         cwd: process.cwd(),
         absolute: true,

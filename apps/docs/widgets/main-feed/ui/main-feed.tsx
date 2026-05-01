@@ -79,8 +79,44 @@ const PLACEHOLDER_UI = {
     metric: '+12 CONTRIBUTORS',
 }
 
-function isFeedDoc(doc: Partial<Metadata>): doc is FeedDoc {
-    return Boolean(doc.title && doc.slug && doc.summary && doc.date)
+function stripMarkup(text: string) {
+    return text
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+}
+
+function getFeedSummary(doc: Partial<Metadata>) {
+    const summary = doc.summary?.trim()
+
+    if (summary) {
+        return summary
+    }
+
+    const content = stripMarkup(doc.content ?? '')
+
+    if (content) {
+        return content.slice(0, 160)
+    }
+
+    return 'Open the article to read the latest draft.'
+}
+
+function toFeedDoc(doc: Partial<Metadata>): FeedDoc | null {
+    const title = doc.title?.trim()
+    const slug = doc.slug?.trim()
+
+    if (!title || !slug) {
+        return null
+    }
+
+    return {
+        ...doc,
+        title,
+        slug,
+        summary: getFeedSummary(doc),
+        date: doc.date?.trim() ?? '',
+    }
 }
 
 function estimateReadMinutes(content?: string) {
@@ -343,7 +379,9 @@ function NewsletterInjectionCard() {
 }
 
 export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
-    const feedDocs = docs.filter(isFeedDoc)
+    const feedDocs = docs
+        .map((doc) => toFeedDoc(doc))
+        .filter((doc): doc is FeedDoc => doc !== null)
     const [heroDoc, featuredDoc, compactDoc, imageDoc, supportDoc] = feedDocs
 
     if (!heroDoc) {

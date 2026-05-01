@@ -8,8 +8,8 @@ function matchesPrefix(doc: Doc, prefixes: string[]) {
     return prefixes.some((prefix) => doc.fileName?.includes(prefix))
 }
 
-export function getHubDocs(hub: HubKey) {
-    const docs = getSortedPostsData()
+export async function getHubDocs(hub: HubKey) {
+    const docs = await getSortedPostsData()
 
     switch (hub) {
         case 'feed':

@@ -1,7 +1,7 @@
 import { getSortedPostsData } from '~/lib/get-document'
 import { MainFeed } from '~/widgets/main-feed'
 
-export default function Page() {
-    const docs = getSortedPostsData()
+export default async function Page() {
+    const docs = await getSortedPostsData()
     return <MainFeed docs={docs} />
 }

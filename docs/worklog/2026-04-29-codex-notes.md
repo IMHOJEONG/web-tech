@@ -88,6 +88,21 @@
 - 데스크톱 top navigation은 좌우 영역 폭 차이 때문에 시각적 중심이 어긋나 보여, header 컨테이너를 `relative`로 두고 navigation을 `absolute left-1/2 -translate-x-1/2`로 고정해 정중앙 배치
 - 이후 탭 중심 어긋남 원인을 active 상태 표시 CSS로 재판단했고, navigation의 active 표현을 `border-bottom` 기반에서 `after` 밑줄로 전환해 선택 표시가 레이아웃 box를 밀지 않도록 수정
 - 블로그에 실제 노출될 markdown 콘텐츠 저장소 기준으로 DB 선택 문서를 추가했고, 기본 추천안을 `PostgreSQL` + 필요 시 `Meilisearch`/`pgvector` 확장 구조로 정리
+- `docs` 앱의 블로그 콘텐츠는 원격 백엔드에서도 읽을 수 있게 방향을 확장했고, `BLOG_CONTENT_API_BASE_URL`, `BLOG_CONTENT_API_POSTS_PATH` 환경변수와 함께 `remote fetch -> local markdown fallback` 구조를 추가
+- 이후 요구를 다시 맞춰, 백엔드에서는 게시물 메타데이터만 받고 본문 markdown는 NAS에서 별도 가져오는 구조를 지원하도록 `BLOG_CONTENT_MARKDOWN_BASE_URL`과 markdown path/url 필드 기반 2단계 fetch 로직을 추가
+- markdown 본문 재요청 규칙을 더 구체화해, 응답의 `markdownPath` 계열 필드를 받으면 `${BLOG_CONTENT_MARKDOWN_BASE_URL}/posts/{markdownPath}` 형태로 요청하도록 `BLOG_CONTENT_MARKDOWN_PATH_PREFIX`를 추가
+- 원격 콘텐츠 점검 결과 목록 조회에서도 모든 markdown 본문을 다시 받아오는 N+1 구조를 확인했고, 목록은 메타데이터만 받고 상세 페이지 진입 시에만 `/posts/{markdownPath}` 본문을 가져오도록 분리
+- 상세 문서 페이지는 전체 목록을 불러와 `slug`를 찾는 방식 대신 `getDocBySlug`를 통해 원격 상세 1건만 조회하도록 변경
+- 원격 목록 메타데이터에는 `markdownPath`를 유지하고, 검색은 제목/요약/슬러그 중심으로 동작하도록 정리
+- `http://192.168.0.7:8000/posts/test` 엔드포인트 연결을 직접 확인했고, 현재는 `200 OK`로 응답하지만 `text/html` 본문을 반환함을 확인
+- 원격 본문 형식을 `markdown`으로 유지할지 `html`로 전환할지 비교했고, 현재 백엔드 엔드포인트 상태와 운영 편의성을 고려하면 단기적으로는 HTML 응답을 허용하는 쪽이 더 현실적이라는 판단을 기록
+- 위 비교를 독립 문서 `docs/architecture/blog-content-html-vs-markdown.md`로 분리하고, 저장 포맷은 markdown 유지 + 전달 포맷은 HTML 허용인 하이브리드 방향을 현재 추천안으로 정리
+- 원격 본문 fetch는 이제 `text/html`도 허용하고, 응답 `content-type` 및 본문 패턴을 기준으로 `html`/`mdx` 포맷을 추론하도록 변경
+- 상세 문서 페이지는 `contentFormat === 'html'`이면 MDX 평가 대신 원격 HTML을 그대로 렌더링하고, 로컬 문서는 기존 MDX 파이프라인을 유지
+- 목록 미노출 원인을 점검한 결과 `/api/posts`가 `{ results: [{ id, markdownPath }] }`만 반환하고 있어 `slug/title` 누락으로 전부 필터링되던 것을 확인했고, 테스트 편의를 위해 `id`와 `markdownPath`에서 `slug/title`을 유도하는 fallback 로직을 추가
+- 이후 `MainFeed` 자체도 `summary/date`가 비어 있으면 문서를 버리고 있어 최소 응답이 다시 숨겨지는 문제를 확인했고, 피드에서는 `title/slug`만 필수로 보고 `summary`는 본문 또는 기본 문구로 보정하도록 수정
+- 콘텐츠 API 구조 검토 결과, `api/posts -> markdownPath 조회` 후 `posts/{markdownPath}`로 본문을 다시 요청하는 2단계 자체는 이상하지 않으며, 목록은 메타데이터만, 상세는 본문만 가져오는 역할 분리가 실무적으로 자연스럽다는 판단을 기록
+- 프론트/백엔드 정렬을 위해 `docs/architecture/blog-content-api-contract.md` 문서를 추가하고, `/api/posts` 목록 응답과 `/posts/{markdownPath}` HTML 본문 응답의 최소/권장 계약을 정리
 
 ## Open Questions
 

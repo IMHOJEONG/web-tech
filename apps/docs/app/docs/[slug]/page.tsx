@@ -1,8 +1,9 @@
 import { cn } from '@/lib/utils'
 import { evaluate, EvaluateOptions } from 'next-mdx-remote-client/rsc'
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import remarkFlexibleToc, { TocItem } from 'remark-flexible-toc'
-import { getDocsData } from '~/lib/get-document'
+import { getDocBySlug } from '~/lib/get-document'
 import { components } from '~/mdx-components'
 import { LoadingComponent } from '~/shared/loading-component'
 import Toc from '~/shared/toc'
@@ -23,9 +24,25 @@ export default async function Page({
     params: Promise<{ slug: string }>
 }) {
     const { slug } = await params
-    const data = await getDocsData()
-    const target = data.find((doc) => doc.slug == slug)
-    console.log(slug, target?.fileName)
+    const target = await getDocBySlug(slug)
+
+    if (!target) {
+        notFound()
+    }
+
+    if (target.contentFormat === 'html') {
+        return (
+            <div className="flex gap-4">
+                <div className={cn('flex-1')}>
+                    <article
+                        dangerouslySetInnerHTML={{
+                            __html: target.content ?? '',
+                        }}
+                    />
+                </div>
+            </div>
+        )
+    }
 
     const options: EvaluateOptions<Scope> = {
         mdxOptions: {

@@ -14,6 +14,9 @@ import fs from 'fs'
 import path from 'path'
 import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
+import { fetchRemoteDocBySlug, fetchRemoteDocsData } from '~/lib/content-api'
+
+export type ContentFormat = 'mdx' | 'html'
 
 export interface Metadata {
     id: string
@@ -23,6 +26,8 @@ export interface Metadata {
     slug: string
     content: string
     fileName: string
+    contentFormat?: ContentFormat
+    markdownPath?: string | null
     thumbnail?: string | null
 }
 
@@ -50,9 +55,7 @@ function exploreDirectory(directory: string) {
     return files
 }
 
-export function getDocsData() {
-    console.log(exploreDirectory(docsDirectory))
-
+function getLocalDocsData() {
     const fileNames = exploreDirectory(docsDirectory)
 
     const allPostsData: Partial<Metadata>[] = fileNames.map((fileName) => {
@@ -60,7 +63,6 @@ export function getDocsData() {
         const id = fileName.replace(/\.mdx?$/, '')
 
         // Read markdown file as string
-        console.log(fileName)
         const fileContents = fs.readFileSync(fileName, 'utf8')
         // Use vfile-matter to parse the post metadata section
         const vfile = new VFile({ path: fileName, value: fileContents })
@@ -72,7 +74,6 @@ export function getDocsData() {
             .relative(process.cwd(), fileName)
             .replace(/\.(mdx|md)$/i, '')
 
-        console.log(relPathFromRoot)
         // thumbnail 경로를 public 폴더 기준으로 /로 시작하게 단순화
         let thumbnailPath = data.thumbnail
         if (typeof thumbnailPath === 'string' && thumbnailPath.length > 0) {
@@ -92,16 +93,26 @@ export function getDocsData() {
             ...data,
             content,
             fileName: relPathFromRoot,
+            contentFormat: 'mdx',
             thumbnail: thumbnailPath,
         }
     })
-    console.log(allPostsData)
 
     return allPostsData
 }
 
-export function getSortedPostsData() {
-    const allPostsData = getDocsData()
+export async function getDocsData() {
+    const remoteDocs = await fetchRemoteDocsData()
+
+    if (remoteDocs) {
+        return remoteDocs
+    }
+
+    return getLocalDocsData()
+}
+
+export async function getSortedPostsData() {
+    const allPostsData = await getDocsData()
     return allPostsData.sort((a, b) => {
         if (a.date && b.date && a.date < b.date) {
             return 1
@@ -109,4 +120,14 @@ export function getSortedPostsData() {
             return -1
         }
     })
+}
+
+export async function getDocBySlug(slug: string) {
+    const remoteDoc = await fetchRemoteDocBySlug(slug)
+
+    if (remoteDoc) {
+        return remoteDoc
+    }
+
+    return getLocalDocsData().find((doc) => doc.slug === slug)
 }
