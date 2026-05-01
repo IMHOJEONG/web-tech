@@ -4,9 +4,9 @@
 
 `apps/docs`는 블로그 목록 메타데이터를 백엔드에서 받고, 개별 본문은 별도 엔드포인트로 다시 가져오는 구조를 준비 중이다.
 
-현재 확인된 백엔드 본문 엔드포인트:
+현재 확인된 백엔드 본문 엔드포인트 예시:
 
-- `http://192.168.0.7:8000/posts/test`
+- `<BLOG_CONTENT_MARKDOWN_BASE_URL>/posts/test`
 
 이 엔드포인트는 현재 `200 OK`와 함께 `text/html`을 반환한다. 따라서 앞으로의 선택지는 크게 두 가지다.
 
@@ -125,3 +125,81 @@ HTML 응답을 채택하면 프론트는 다음 방향으로 바뀌어야 한다
 - heading id / TOC를 백엔드가 같이 내려줄지
 - 코드 하이라이트를 백엔드가 완료할지, 프론트가 후처리할지
 - 로컬 문서와 원격 문서를 장기적으로 하나의 렌더링 파이프라인으로 통일할지
+
+## Security Considerations In Current Code
+
+현재 코드 방식에서는 아래 리스크를 실제로 고려해야 한다.
+
+### 1. Raw HTML Rendering Risk
+
+현재 원격 문서가 `html`로 판별되면 프론트는 해당 본문을 그대로 렌더링한다.
+
+- 관련 위치: `apps/docs/app/docs/[slug]/page.tsx`
+- 현재 방식: `dangerouslySetInnerHTML`
+
+이 경우 백엔드나 NAS에 저장된 HTML이 신뢰되지 않거나 변조될 수 있으면 XSS 계열 문제가 생길 수 있다.
+
+특히 아래 요소는 주의 대상이다.
+
+- 인라인 이벤트 핸들러
+- 악성 링크(`javascript:` 등)
+- 외부 iframe/embed
+- 의도하지 않은 form/script 스타일 주입
+
+즉 HTML 응답을 허용한다면, 실무적으로는 **백엔드 sanitize** 또는 **프론트 sanitize** 중 적어도 하나는 필요하다.
+
+### 2. Remote MDX Evaluation Risk
+
+현재 코드는 원격 본문이 `html`이 아니면 `mdx`로 간주해 평가한다.
+
+- 관련 위치: `apps/docs/app/docs/[slug]/page.tsx`
+- 관련 판단: `apps/docs/lib/content-api.ts`
+
+이건 단순 markdown 렌더링보다 위험하다. MDX는 표현력이 강해서, 신뢰되지 않은 원격 입력을 그대로 평가하는 구조는 보수적으로 봐야 한다.
+
+따라서 원격 입력에 대해서는 다음 중 하나가 더 안전하다.
+
+- 원격 문서는 항상 HTML만 허용
+- 원격 문서는 markdown-only 파서로 처리
+- MDX 평가는 로컬/신뢰 문서에만 제한
+
+현재 구조에서 보안 관점의 안전한 방향은 **원격은 HTML 또는 plain markdown만 허용하고, MDX 평가는 로컬 콘텐츠 전용으로 두는 것**이다.
+
+### 3. Server-side Fetch Target Control Risk
+
+현재 본문 URL은 메타데이터 응답의 `markdownPath` 또는 `markdown_url` 계열 값에 의해 결정된다.
+
+- 관련 위치: `apps/docs/lib/content-api.ts`
+
+특히 절대 URL(`http://...`)을 허용하면, 메타데이터 공급자가 의도하지 않은 외부/내부 주소를 지정하도록 만들 수 있다.
+
+이 경우 SSRF 성격의 문제가 생길 수 있다.
+
+안전하게 가려면:
+
+- 절대 URL 금지
+- 허용 호스트 allowlist 적용
+- `markdownPath`는 상대 경로만 허용
+- `..` 같은 상위 경로 이동 패턴 거부
+
+### Practical Recommendation
+
+현재 구조를 유지하면서 위험을 낮추려면 우선순위는 이렇다.
+
+1. 원격 문서는 HTML만 허용하고 sanitize 정책을 정한다.
+2. 원격 문서는 MDX 평가 대상에서 제외한다.
+3. `markdown_url` 절대 URL 허용을 막거나 allowlist를 둔다.
+4. `markdownPath` 입력값 검증을 추가한다.
+
+즉 “HTML이냐 markdown이냐”보다 더 중요한 것은, **신뢰되지 않은 원격 본문을 어떤 실행/렌더링 규칙으로 통과시키느냐**다.
+
+### Current Mitigations Applied
+
+현재 코드에는 아래 방어가 이미 반영되어 있다.
+
+- 원격 본문은 HTML이 아니면 렌더링 대상에서 제외
+- 원격 본문 URL은 상대 경로만 허용
+- 절대 URL, `..`, 백슬래시, 제어 문자가 포함된 경로는 거부
+- 원격 HTML은 기본적인 위험 태그/속성 제거 후 렌더링
+
+다만 이건 **기본 방어선**에 가깝고, 장기적으로는 백엔드 sanitize까지 함께 두는 것이 더 안전하다.

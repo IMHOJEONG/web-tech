@@ -17,6 +17,7 @@ import { matter as vfileMatter } from 'vfile-matter'
 import { fetchRemoteDocBySlug, fetchRemoteDocsData } from '~/lib/content-api'
 
 export type ContentFormat = 'mdx' | 'html'
+export type ContentSource = 'local' | 'remote'
 
 export interface Metadata {
     id: string
@@ -27,6 +28,7 @@ export interface Metadata {
     content: string
     fileName: string
     contentFormat?: ContentFormat
+    contentSource?: ContentSource
     markdownPath?: string | null
     thumbnail?: string | null
 }
@@ -94,6 +96,7 @@ function getLocalDocsData() {
             content,
             fileName: relPathFromRoot,
             contentFormat: 'mdx',
+            contentSource: 'local',
             thumbnail: thumbnailPath,
         }
     })

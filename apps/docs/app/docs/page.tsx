@@ -14,7 +14,7 @@ type Props = {
 export default async function Page({ searchParams }: Props) {
     const { q } = await searchParams
     console.log('KEYWORD : ', q)
-        const data = q ? await getSearchData(q) : await getSortedPostsData()
+    const data = q ? await getSearchData(q) : await getSortedPostsData()
 
     if (!q && data.length === 0) {
         return <EmptyAllDocs />

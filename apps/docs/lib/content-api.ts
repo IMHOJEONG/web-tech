@@ -2,6 +2,7 @@ import 'server-only'
 
 import type { Metadata } from '~/lib/get-document'
 import type { ContentFormat } from '~/lib/get-document'
+import type { ContentSource } from '~/lib/get-document'
 import type { SearchData } from '~/lib/get-search-data'
 
 type RemotePost = {
@@ -114,10 +115,7 @@ function getFallbackSlug(post: RemotePost) {
 }
 
 function formatFallbackTitle(value: string) {
-    const normalized = value
-        .replace(/[-_]+/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim()
+    const normalized = value.replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim()
 
     if (!normalized) {
         return ''
@@ -169,6 +167,60 @@ function inferContentFormat(
     return 'mdx'
 }
 
+function normalizeRemoteReference(reference: string) {
+    const trimmedReference = reference.trim()
+
+    if (!trimmedReference) {
+        return null
+    }
+
+    if (
+        /^https?:\/\//i.test(trimmedReference) ||
+        /^\/\//.test(trimmedReference) ||
+        trimmedReference.includes('..') ||
+        trimmedReference.includes('\\') ||
+        /[\u0000-\u001f]/.test(trimmedReference)
+    ) {
+        return null
+    }
+
+    return trimLeadingSlash(trimmedReference)
+}
+
+function sanitizeRemoteHtml(content: string) {
+    return content
+        .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
+        .replace(/<style[\s\S]*?>[\s\S]*?<\/style>/gi, '')
+        .replace(
+            /<(iframe|object|embed|form|meta|link|base)[^>]*?>[\s\S]*?<\/\1>/gi,
+            ''
+        )
+        .replace(/<(iframe|object|embed|form|meta|link|base)[^>]*?\/?>/gi, '')
+        .replace(/\son[a-z]+\s*=\s*(['"]).*?\1/gi, '')
+        .replace(/\son[a-z]+\s*=\s*[^\s>]+/gi, '')
+        .replace(
+            /\s(href|src|xlink:href)\s*=\s*(['"])\s*javascript:[\s\S]*?\2/gi,
+            ' $1="#"'
+        )
+        .replace(/\ssrcdoc\s*=\s*(['"]).*?\1/gi, '')
+}
+
+function normalizeRemoteContent(
+    content: string,
+    contentType?: string | null
+): { content: string; contentFormat: ContentFormat } | null {
+    const detectedContentFormat = inferContentFormat(content, contentType)
+
+    if (detectedContentFormat !== 'html') {
+        return null
+    }
+
+    return {
+        content: sanitizeRemoteHtml(content),
+        contentFormat: 'html',
+    }
+}
+
 function getInlineContentResult(post: RemotePost) {
     const content = getInlineMarkdown(post).trim()
 
@@ -176,10 +228,7 @@ function getInlineContentResult(post: RemotePost) {
         return null
     }
 
-    return {
-        content,
-        contentFormat: inferContentFormat(content, null),
-    }
+    return normalizeRemoteContent(content, null)
 }
 
 async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
@@ -189,40 +238,42 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
         return inlineContentResult
     }
 
-    const inlineMarkdown = getInlineMarkdown(post)
-
-    if (inlineMarkdown) {
-        return {
-            content: inlineMarkdown,
-            contentFormat: inferContentFormat(inlineMarkdown, null),
-        }
-    }
-
     const markdownReference = getMarkdownReference(post)
 
     if (!markdownReference) {
         return {
             content: '',
-            contentFormat: 'mdx' as ContentFormat,
+            contentFormat: 'html' as ContentFormat,
+        }
+    }
+
+    const normalizedReference = normalizeRemoteReference(markdownReference)
+
+    if (!normalizedReference) {
+        console.warn(
+            '[docs] Rejected unsafe remote markdown reference:',
+            markdownReference
+        )
+        return {
+            content: '',
+            contentFormat: 'html' as ContentFormat,
         }
     }
 
     const markdownPathPrefix =
         process.env.BLOG_CONTENT_MARKDOWN_PATH_PREFIX?.trim() || '/posts'
 
-    const markdownUrl = /^https?:\/\//i.test(markdownReference)
-        ? markdownReference
-        : markdownBaseUrl
-          ? joinUrl(
-                markdownBaseUrl,
-                `${trimTrailingSlash(markdownPathPrefix)}/${trimLeadingSlash(markdownReference)}`
-            )
-          : null
+    const markdownUrl = markdownBaseUrl
+        ? joinUrl(
+              markdownBaseUrl,
+              `${trimTrailingSlash(markdownPathPrefix)}/${normalizedReference}`
+          )
+        : null
 
     if (!markdownUrl) {
         return {
             content: '',
-            contentFormat: 'mdx' as ContentFormat,
+            contentFormat: 'html' as ContentFormat,
         }
     }
 
@@ -230,7 +281,7 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
         const response = await fetch(markdownUrl, {
             method: 'GET',
             headers: {
-                Accept: 'text/html,text/markdown,text/plain;q=0.9,*/*;q=0.8',
+                Accept: 'text/html,text/plain;q=0.9,*/*;q=0.8',
             },
             cache: 'no-store',
         })
@@ -243,24 +294,38 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
             )
             return {
                 content: '',
-                contentFormat: 'mdx' as ContentFormat,
+                contentFormat: 'html' as ContentFormat,
             }
         }
 
         const content = await response.text()
-
-        return {
+        const normalizedContent = normalizeRemoteContent(
             content,
-            contentFormat: inferContentFormat(
-                content,
+            response.headers.get('content-type')
+        )
+
+        if (!normalizedContent) {
+            console.warn(
+                '[docs] Rejected non-HTML remote body:',
+                markdownUrl,
                 response.headers.get('content-type')
-            ),
+            )
+            return {
+                content: '',
+                contentFormat: 'html' as ContentFormat,
+            }
         }
+
+        return normalizedContent
     } catch (error) {
-        console.warn('[docs] Failed to fetch markdown body:', markdownUrl, error)
+        console.warn(
+            '[docs] Failed to fetch markdown body:',
+            markdownUrl,
+            error
+        )
         return {
             content: '',
-            contentFormat: 'mdx' as ContentFormat,
+            contentFormat: 'html' as ContentFormat,
         }
     }
 }
@@ -286,10 +351,7 @@ async function normalizeRemotePost(
     const date = post.date?.trim() ?? ''
     const id = String(post.id ?? slug)
     const fileName =
-        post.fileName ??
-        post.path ??
-        markdownPath ??
-        `remote/${slug}`
+        post.fileName ?? post.path ?? markdownPath ?? `remote/${slug}`
 
     return {
         id,
@@ -300,6 +362,7 @@ async function normalizeRemotePost(
         content,
         fileName,
         contentFormat,
+        contentSource: 'remote' as ContentSource,
         markdownPath,
         thumbnail: normalizeThumbnailPath(
             post.thumbnail ?? post.thumbnail_url ?? post.thumbnailUrl
@@ -318,15 +381,9 @@ function normalizeRemotePostMeta(post: RemotePost): Partial<Metadata> | null {
     const summary = post.summary?.trim() ?? ''
     const date = post.date?.trim() ?? ''
     const id = String(post.id ?? slug)
-    const inlineContentResult = getInlineContentResult(post)
-    const content = inlineContentResult?.content ?? ''
-    const contentFormat = inlineContentResult?.contentFormat ?? 'mdx'
     const markdownPath = getMarkdownReference(post)
     const fileName =
-        post.fileName ??
-        post.path ??
-        markdownPath ??
-        `remote/${slug}`
+        post.fileName ?? post.path ?? markdownPath ?? `remote/${slug}`
 
     return {
         id,
@@ -334,9 +391,10 @@ function normalizeRemotePostMeta(post: RemotePost): Partial<Metadata> | null {
         title,
         summary,
         date,
-        content,
+        content: '',
         fileName,
-        contentFormat,
+        contentFormat: 'html',
+        contentSource: 'remote' as ContentSource,
         markdownPath,
         thumbnail: normalizeThumbnailPath(
             post.thumbnail ?? post.thumbnail_url ?? post.thumbnailUrl

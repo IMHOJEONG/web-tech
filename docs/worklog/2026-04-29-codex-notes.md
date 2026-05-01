@@ -94,7 +94,7 @@
 - 원격 콘텐츠 점검 결과 목록 조회에서도 모든 markdown 본문을 다시 받아오는 N+1 구조를 확인했고, 목록은 메타데이터만 받고 상세 페이지 진입 시에만 `/posts/{markdownPath}` 본문을 가져오도록 분리
 - 상세 문서 페이지는 전체 목록을 불러와 `slug`를 찾는 방식 대신 `getDocBySlug`를 통해 원격 상세 1건만 조회하도록 변경
 - 원격 목록 메타데이터에는 `markdownPath`를 유지하고, 검색은 제목/요약/슬러그 중심으로 동작하도록 정리
-- `http://192.168.0.7:8000/posts/test` 엔드포인트 연결을 직접 확인했고, 현재는 `200 OK`로 응답하지만 `text/html` 본문을 반환함을 확인
+- 원격 본문 엔드포인트(`<BLOG_CONTENT_MARKDOWN_BASE_URL>/posts/test`) 연결을 직접 확인했고, 현재는 `200 OK`로 응답하지만 `text/html` 본문을 반환함을 확인
 - 원격 본문 형식을 `markdown`으로 유지할지 `html`로 전환할지 비교했고, 현재 백엔드 엔드포인트 상태와 운영 편의성을 고려하면 단기적으로는 HTML 응답을 허용하는 쪽이 더 현실적이라는 판단을 기록
 - 위 비교를 독립 문서 `docs/architecture/blog-content-html-vs-markdown.md`로 분리하고, 저장 포맷은 markdown 유지 + 전달 포맷은 HTML 허용인 하이브리드 방향을 현재 추천안으로 정리
 - 원격 본문 fetch는 이제 `text/html`도 허용하고, 응답 `content-type` 및 본문 패턴을 기준으로 `html`/`mdx` 포맷을 추론하도록 변경
@@ -103,6 +103,9 @@
 - 이후 `MainFeed` 자체도 `summary/date`가 비어 있으면 문서를 버리고 있어 최소 응답이 다시 숨겨지는 문제를 확인했고, 피드에서는 `title/slug`만 필수로 보고 `summary`는 본문 또는 기본 문구로 보정하도록 수정
 - 콘텐츠 API 구조 검토 결과, `api/posts -> markdownPath 조회` 후 `posts/{markdownPath}`로 본문을 다시 요청하는 2단계 자체는 이상하지 않으며, 목록은 메타데이터만, 상세는 본문만 가져오는 역할 분리가 실무적으로 자연스럽다는 판단을 기록
 - 프론트/백엔드 정렬을 위해 `docs/architecture/blog-content-api-contract.md` 문서를 추가하고, `/api/posts` 목록 응답과 `/posts/{markdownPath}` HTML 본문 응답의 최소/권장 계약을 정리
+- 현재 원격 콘텐츠 구조의 보안 리스크도 점검했고, raw HTML 렌더링, 원격 MDX 평가, 본문 URL 제어(SSRF 성격) 가능성을 `docs/architecture/blog-content-html-vs-markdown.md`에 별도 정리
+- 이후 위험한 경로를 줄이기 위해 원격 MDX 평가는 사실상 차단하고, 원격 본문은 HTML만 허용하며, 절대 URL/상위 경로/백슬래시가 포함된 `markdownPath`는 거부하도록 보강
+- 배포 환경용 base URL도 점검했고, `/api/posts`는 `{"results":[{"id":"test","markdownPath":"test.md"}]}`를 반환하지만 실제 본문은 `/posts/test.md`가 아니라 `/posts/test`에서만 `200 OK`가 나오는 계약 불일치를 확인
 
 ## Open Questions
 
