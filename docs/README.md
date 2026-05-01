@@ -16,6 +16,7 @@
   - 작업 방식, 문서화 규칙, 협업 운영 기준
 - `docs/runbooks/`
   - 배포/운영/로컬 실행/장애 대응 절차
+  - 예: [docs/runbooks/docs-env-checklist.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/docs-env-checklist.md)
 
 운영 원칙:
 

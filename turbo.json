@@ -20,5 +20,13 @@
       "persistent": true
     }
   },
-  "globalEnv": ["CLOUDFLARE_API_TOKEN"]
+  "globalEnv": [
+    "CLOUDFLARE_API_TOKEN",
+    "BETTER_AUTH_SECRET",
+    "BETTER_AUTH_URL",
+    "BLOG_CONTENT_API_BASE_URL",
+    "BLOG_CONTENT_API_POSTS_PATH",
+    "BLOG_CONTENT_MARKDOWN_BASE_URL",
+    "BLOG_CONTENT_MARKDOWN_PATH_PREFIX"
+  ]
 }

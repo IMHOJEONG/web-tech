@@ -106,6 +106,8 @@
 - 현재 원격 콘텐츠 구조의 보안 리스크도 점검했고, raw HTML 렌더링, 원격 MDX 평가, 본문 URL 제어(SSRF 성격) 가능성을 `docs/architecture/blog-content-html-vs-markdown.md`에 별도 정리
 - 이후 위험한 경로를 줄이기 위해 원격 MDX 평가는 사실상 차단하고, 원격 본문은 HTML만 허용하며, 절대 URL/상위 경로/백슬래시가 포함된 `markdownPath`는 거부하도록 보강
 - 배포 환경용 base URL도 점검했고, `/api/posts`는 `{"results":[{"id":"test","markdownPath":"test.md"}]}`를 반환하지만 실제 본문은 `/posts/test.md`가 아니라 `/posts/test`에서만 `200 OK`가 나오는 계약 불일치를 확인
+- Vercel/Turborepo 환경변수 경고를 줄이기 위해 `turbo.json`의 `globalEnv`에 `BETTER_AUTH_*`, `BLOG_CONTENT_*` 항목을 추가해 빌드 시 주입 대상임을 명시
+- 로컬 env, `.env.example`, `turbo.json`, Vercel 등록값을 함께 확인할 수 있도록 `docs/runbooks/docs-env-checklist.md` 체크 기준표를 추가
 
 ## Open Questions
 
