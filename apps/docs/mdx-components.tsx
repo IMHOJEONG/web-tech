@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@web-tech/ui/lib/utils'
 import type { MDXComponents } from 'mdx/types'
 import Image, { type ImageProps } from 'next/image'
 

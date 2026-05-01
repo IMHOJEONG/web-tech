@@ -11,9 +11,9 @@ import {
     SidebarMenuItem,
     SidebarMenuSub,
     SidebarMenuSubItem,
-} from '@/components/ui/sidebar'
+} from '@web-tech/ui/components/sidebar'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@web-tech/ui/lib/utils'
 import { usePathname } from 'next/navigation'
 import { items, makeUrl } from '~/feature/category/category-item'
 

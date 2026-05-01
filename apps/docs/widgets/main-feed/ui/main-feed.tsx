@@ -23,10 +23,7 @@ type FeedAuthor = {
 }
 
 const AUTHOR_PALETTE = [
-    { name: 'Alex Rivers', role: 'Sr. Architect' },
-    { name: 'Sarah Chen', role: 'Web Engineer' },
-    { name: 'Mina Park', role: 'Product Designer' },
-    { name: 'John Doe', role: 'Mobile Engineer' },
+    { name: 'coder', role: 'Web Engineer' },
 ] satisfies FeedAuthor[]
 
 const WEB_TOPIC: TopicTone = {

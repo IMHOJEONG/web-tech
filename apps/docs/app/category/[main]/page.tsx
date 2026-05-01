@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
 import { getSubCategories } from '~/feature/category/category-item'
 import { SubCategoryBox } from '~/feature/category/sub-category-box'

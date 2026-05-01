@@ -1,9 +1,9 @@
 import { cn } from '@web-tech/ui/lib/utils'
-import { Menu } from 'lucide-react'
 import Link from 'next/link'
 import { Search } from '~/feature/search'
 import { ThemeToggle } from '~/feature/theme-toggle'
 import { Navigation } from '~/shared/navigation'
+import MobileNavDrawer from './mobile-nav-drawer'
 import { Brand } from '../ui/brand'
 
 export default function Header() {
@@ -15,22 +15,7 @@ export default function Header() {
             )}
         >
             <div className="relative mx-auto flex h-full w-full max-w-page items-center justify-between px-4 md:h-16 md:px-8">
-                <div className="flex items-center gap-3 md:hidden">
-                    <Link
-                        href="/feed"
-                        aria-label="Go to feed"
-                        className="flex h-7 w-[2.125rem] items-center justify-center text-zinc-300 transition-colors hover:text-cyan-400"
-                    >
-                        <Menu className="h-3 w-[1.125rem]" strokeWidth={2} />
-                    </Link>
-
-                    <Link
-                        className="font-display flex items-center text-[1.25rem] leading-7 font-bold tracking-[-0.05em] text-cyan-400"
-                        href="/"
-                    >
-                        <Brand />
-                    </Link>
-                </div>
+                <MobileNavDrawer />
 
                 <div className="hidden min-w-0 flex-1 items-center justify-start md:flex">
                     <Link

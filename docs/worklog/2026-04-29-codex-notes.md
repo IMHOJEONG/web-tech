@@ -134,3 +134,14 @@
 - `docs` 앱 구조를 `shared / entities / features / widgets / pages` 기준으로 단계적으로 재정리할지 결정
 - `shared/navigation` 및 `shared/layout/*`의 최종 레이어 위치 확정
 - 최신 Figma root에 있는 별도 mobile feed / alternate feed 프레임까지 구현 범위를 넓힐지 결정
+
+- Figma node `88:2026` 기준으로 모바일 header menu trigger에 좌측 navigation drawer(320px, overlay, active state, technical stats, bottom action section)를 추가
+
+- shadcn manual 구조 기준으로 `packages/ui`를 source of truth로 다시 보고, docs의 mobile drawer를 `@web-tech/ui/components/sheet` 기반으로 전환하고 `Input/Sidebar` import도 `@web-tech/ui`로 명시 정리
+
+- docs 전반에 남아 있던 `@/lib/utils` alias import도 `@web-tech/ui/lib/utils`로 통일해 packages/ui를 shadcn/ui와 공용 유틸의 단일 source로 더 명확히 정리
+- 이어서 `apps/docs/tsconfig.json`의 `@/* -> packages/ui/*` alias 제거도 시도했지만, 현재 `@web-tech/ui`가 소스 TS를 직접 export하고 있고 내부 구현이 아직 `@/components`, `@/lib`, `@/hooks` alias를 사용하고 있어 `docs` 소비 앱 쪽 alias 해석이 여전히 필요하다는 점을 확인
+
+- docs 앱에서는 더 이상 `@/* -> packages/ui/*` alias가 필요하지 않아 `apps/docs/tsconfig.json`에서 제거하고, import 경로는 `@web-tech/ui`와 `~/*` 기준으로 정리된 상태를 확정
+- `packages/ui/components/ui/*`와 `packages/ui/components/ui/sidebar.tsx` 내부의 `@/...` source import를 상대 경로로 정리해, 실제 런타임 소스 기준으로는 더 이상 소비 앱이 `packages/ui` 내부 alias를 해석할 필요가 없게 되었음
+- `packages/ui/components.json`에 남아 있는 `@/lib/utils`, `@/components/ui` alias는 shadcn CLI 설정용 메타데이터로 유지하고, `pnpm --filter docs exec tsc --noEmit` 통과로 `apps/docs/tsconfig.json`에서 `@/* -> ../../packages/ui/*` 매핑을 제거한 상태가 유효함을 확인

@@ -13,7 +13,7 @@ import Header from '~/shared/layout/header'
 import MobileBottomNav from '~/shared/layout/mobile-bottom-nav'
 import './css/global.css'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@web-tech/ui/lib/utils'
 
 const inter = Inter({
     subsets: ['latin'],

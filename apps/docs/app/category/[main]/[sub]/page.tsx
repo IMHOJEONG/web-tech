@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@web-tech/ui/lib/utils'
 import { TocItem } from 'remark-flexible-toc'
 import { CategoryBox } from '~/feature/category/category-box'
 import { getSubCategoryData } from '~/lib/get-category'

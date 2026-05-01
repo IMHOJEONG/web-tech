@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@web-tech/ui/lib/utils'
 import { evaluate, EvaluateOptions } from 'next-mdx-remote-client/rsc'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'

@@ -1,7 +1,7 @@
 'use client'
 
-import { Input } from '@/components/ui/input'
-import { cn } from '@/lib/utils'
+import { Input } from '@web-tech/ui/components/input'
+import { cn } from '@web-tech/ui/lib/utils'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ChangeEvent, KeyboardEvent, useRef } from 'react'
 import { GoSearch } from 'react-icons/go'
