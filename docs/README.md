@@ -10,6 +10,7 @@
   - 예: [docs/architecture/blog-content-database-recommendation.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-database-recommendation.md)
   - 예: [docs/architecture/blog-content-html-vs-markdown.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-html-vs-markdown.md)
   - 예: [docs/architecture/blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
+  - 예: [docs/architecture/docs-content-rendering-strategy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-rendering-strategy.md)
 - `docs/worklog/`
   - Codex 작업 로그, 협의 내용, 다음 액션, 열린 이슈
 - `docs/process/`

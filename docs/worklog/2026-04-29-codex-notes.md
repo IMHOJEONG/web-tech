@@ -108,6 +108,8 @@
 - 배포 환경용 base URL도 점검했고, `/api/posts`는 `{"results":[{"id":"test","markdownPath":"test.md"}]}`를 반환하지만 실제 본문은 `/posts/test.md`가 아니라 `/posts/test`에서만 `200 OK`가 나오는 계약 불일치를 확인
 - Vercel/Turborepo 환경변수 경고를 줄이기 위해 `turbo.json`의 `globalEnv`에 `BETTER_AUTH_*`, `BLOG_CONTENT_*` 항목을 추가해 빌드 시 주입 대상임을 명시
 - 로컬 env, `.env.example`, `turbo.json`, Vercel 등록값을 함께 확인할 수 있도록 `docs/runbooks/docs-env-checklist.md` 체크 기준표를 추가
+- `DYNAMIC_SERVER_USAGE` 원인과 대응을 구조적으로 정리하기 위해 `docs/architecture/docs-content-rendering-strategy.md` 문서를 추가하고, `apps/docs`는 기본적으로 ISR 중심 전략이 적합하다는 기준을 기록
+- 위 전략을 실제 코드에 반영해 `content-api.ts`의 원격 fetch를 `next.revalidate` 기반으로 전환하고, `BLOG_CONTENT_REVALIDATE_SECONDS` env를 추가
 
 ## Open Questions
 

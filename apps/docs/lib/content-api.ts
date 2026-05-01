@@ -278,12 +278,15 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
     }
 
     try {
+        const revalidateSeconds = getContentRevalidateSeconds()
         const response = await fetch(markdownUrl, {
             method: 'GET',
             headers: {
                 Accept: 'text/html,text/plain;q=0.9,*/*;q=0.8',
             },
-            cache: 'no-store',
+            next: {
+                revalidate: revalidateSeconds,
+            },
         })
 
         if (!response.ok) {
@@ -436,6 +439,22 @@ function getContentApiConfig() {
     }
 }
 
+function getContentRevalidateSeconds() {
+    const rawValue = process.env.BLOG_CONTENT_REVALIDATE_SECONDS?.trim()
+
+    if (!rawValue) {
+        return 300
+    }
+
+    const parsedValue = Number.parseInt(rawValue, 10)
+
+    if (Number.isNaN(parsedValue) || parsedValue < 0) {
+        return 300
+    }
+
+    return parsedValue
+}
+
 function getRemotePosts(payload: RemotePayload) {
     return Array.isArray(payload)
         ? payload
@@ -456,12 +475,15 @@ async function fetchRemotePostsPayload() {
     const url = joinUrl(config.baseUrl, config.postsPath)
 
     try {
+        const revalidateSeconds = getContentRevalidateSeconds()
         const response = await fetch(url, {
             method: 'GET',
             headers: {
                 Accept: 'application/json',
             },
-            cache: 'no-store',
+            next: {
+                revalidate: revalidateSeconds,
+            },
         })
 
         if (!response.ok) {

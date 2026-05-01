@@ -30,6 +30,7 @@
 | `BLOG_CONTENT_API_POSTS_PATH`       | Yes                          | Yes            | Yes          | Yes     | 기본값은 `/api/posts`        |
 | `BLOG_CONTENT_MARKDOWN_BASE_URL`    | Yes                          | Yes            | Yes          | Yes     | 본문 HTML API base URL       |
 | `BLOG_CONTENT_MARKDOWN_PATH_PREFIX` | Yes                          | Yes            | Yes          | Yes     | 기본값은 `/posts`            |
+| `BLOG_CONTENT_REVALIDATE_SECONDS`   | Yes                          | Yes            | Yes          | Yes     | ISR 주기, 기본값은 `300`     |
 | `CLOUDFLARE_API_TOKEN`              | Repo-level usage             | No             | Yes          | If used | `docs` 앱 전용은 아님        |
 
 ## Local Setup
@@ -43,6 +44,7 @@ BLOG_CONTENT_API_BASE_URL=http://localhost:8000
 BLOG_CONTENT_API_POSTS_PATH=/api/posts
 BLOG_CONTENT_MARKDOWN_BASE_URL=http://localhost:8000
 BLOG_CONTENT_MARKDOWN_PATH_PREFIX=/posts
+BLOG_CONTENT_REVALIDATE_SECONDS=300
 ```
 
 권장:
