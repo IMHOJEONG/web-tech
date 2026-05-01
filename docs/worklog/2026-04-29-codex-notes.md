@@ -87,6 +87,7 @@
 - Figma `57:1723` 기준으로 mobile top bar 구조를 재정렬: 모바일은 `56px` 높이, 좌측 `menu + brand`, 우측 `search`만 보이도록 변경하고 가운데 브랜드/desktop nav 구조는 모바일에서 제거
 - 데스크톱 top navigation은 좌우 영역 폭 차이 때문에 시각적 중심이 어긋나 보여, header 컨테이너를 `relative`로 두고 navigation을 `absolute left-1/2 -translate-x-1/2`로 고정해 정중앙 배치
 - 이후 탭 중심 어긋남 원인을 active 상태 표시 CSS로 재판단했고, navigation의 active 표현을 `border-bottom` 기반에서 `after` 밑줄로 전환해 선택 표시가 레이아웃 box를 밀지 않도록 수정
+- 블로그에 실제 노출될 markdown 콘텐츠 저장소 기준으로 DB 선택 문서를 추가했고, 기본 추천안을 `PostgreSQL` + 필요 시 `Meilisearch`/`pgvector` 확장 구조로 정리
 
 ## Open Questions
 
