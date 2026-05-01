@@ -145,3 +145,10 @@
 - docs 앱에서는 더 이상 `@/* -> packages/ui/*` alias가 필요하지 않아 `apps/docs/tsconfig.json`에서 제거하고, import 경로는 `@web-tech/ui`와 `~/*` 기준으로 정리된 상태를 확정
 - `packages/ui/components/ui/*`와 `packages/ui/components/ui/sidebar.tsx` 내부의 `@/...` source import를 상대 경로로 정리해, 실제 런타임 소스 기준으로는 더 이상 소비 앱이 `packages/ui` 내부 alias를 해석할 필요가 없게 되었음
 - `packages/ui/components.json`에 남아 있는 `@/lib/utils`, `@/components/ui` alias는 shadcn CLI 설정용 메타데이터로 유지하고, `pnpm --filter docs exec tsc --noEmit` 통과로 `apps/docs/tsconfig.json`에서 `@/* -> ../../packages/ui/*` 매핑을 제거한 상태가 유효함을 확인
+- 이후 `packages/ui`를 source export에서 build export로 전환하기로 결정하고, `tsconfig.build.json` + `dist` 기반 `exports` + `build/dev` 스크립트를 추가했으며, Turbo `build/dev`도 `dist` 산출물과 의존 패키지 watch를 고려하도록 조정
+- `apps/docs`, `apps/web`에는 `prebuild` / `predev`로 `@web-tech/ui build`를 먼저 수행하는 hook을 넣어 앱 단독 실행이나 배포 빌드에서도 `ui` 산출물이 누락되지 않도록 보강
+- 검증 기준으로 `pnpm --filter @web-tech/ui build`와 `pnpm --filter docs exec tsc --noEmit`는 통과했고, `docs`의 `next build`는 `prebuild -> ui build -> next build` 흐름 진입까지 확인했지만 세션 중 남아 있던 별도 `next build` lock 때문에 완료 로그는 다시 확보하지 못함
+- 이후 `pnpm --filter docs build`에서 `/category` 페이지 수집 중 `f.createContext is not a function` 에러를 재현했고, 원인은 build export로 전환된 `@web-tech/ui`를 `apps/docs`의 Next 설정에서 `transpilePackages`로 처리하지 않아 client boundary와 패키지 모듈 해석이 어긋나던 점으로 판단
+- `apps/docs/next.config.mjs`에 `transpilePackages: ['@web-tech/ui']`를 추가해 `apps/web`와 동일한 기준으로 맞췄고, 수정 후에는 동일한 `/category` 즉시 실패 지점은 재현되지 않음을 확인
+- 추가로 `packages/ui`의 build 산출물이 `@emotion/react/jsx-runtime`를 직접 물고 있어 `/category` 번들에 Emotion runtime이 불필요하게 깊게 들어가는 점을 확인했고, `tsconfig.build.json`에서 `jsxImportSource`를 `react`로 override해 일반 shadcn/ui 컴포넌트 산출물은 `react/jsx-runtime`를 사용하도록 조정
+- 조정 후 `packages/ui/dist/components/ui/badge.js` 등은 실제로 `react/jsx-runtime`를 import하도록 바뀌었고, 동일한 `pnpm --filter docs build`에서 이전처럼 `/category` 수집 직전에 `createContext` 에러가 즉시 재현되지는 않음을 재확인

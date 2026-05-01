@@ -75,7 +75,7 @@
     "dotenv-cli": "^10.0.0",
     "jsdom": "^27.4.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vite": "^7.3.2",
     "vitest": "^3.2.4",
     "web-vitals": "^5.1.0"

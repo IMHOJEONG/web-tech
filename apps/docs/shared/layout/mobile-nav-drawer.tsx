@@ -140,9 +140,9 @@ export default function MobileNavDrawer() {
                         className="font-display text-2xl font-bold text-cyan-400"
                         href="/"
                         onClick={() => setOpen(false)}
-                        >
-                            <Brand />
-                        </Link>
+                    >
+                        <Brand />
+                    </Link>
 
                     <SheetClose
                         type="button"
