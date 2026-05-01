@@ -12,6 +12,7 @@
   - 예: [docs/architecture/blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
   - 예: [docs/architecture/docs-content-rendering-strategy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-rendering-strategy.md)
   - 예: [docs/architecture/ui-package-build-export.md](/Users/coder/Desktop/project/web-tech/docs/architecture/ui-package-build-export.md)
+  - 예: [docs/architecture/ui-build-export-retrospective.md](/Users/coder/Desktop/project/web-tech/docs/architecture/ui-build-export-retrospective.md)
 - `docs/worklog/`
   - Codex 작업 로그, 협의 내용, 다음 액션, 열린 이슈
 - `docs/process/`

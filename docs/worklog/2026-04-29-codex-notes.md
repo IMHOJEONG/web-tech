@@ -152,3 +152,4 @@
 - `apps/docs/next.config.mjs`에 `transpilePackages: ['@web-tech/ui']`를 추가해 `apps/web`와 동일한 기준으로 맞췄고, 수정 후에는 동일한 `/category` 즉시 실패 지점은 재현되지 않음을 확인
 - 추가로 `packages/ui`의 build 산출물이 `@emotion/react/jsx-runtime`를 직접 물고 있어 `/category` 번들에 Emotion runtime이 불필요하게 깊게 들어가는 점을 확인했고, `tsconfig.build.json`에서 `jsxImportSource`를 `react`로 override해 일반 shadcn/ui 컴포넌트 산출물은 `react/jsx-runtime`를 사용하도록 조정
 - 조정 후 `packages/ui/dist/components/ui/badge.js` 등은 실제로 `react/jsx-runtime`를 import하도록 바뀌었고, 동일한 `pnpm --filter docs build`에서 이전처럼 `/category` 수집 직전에 `createContext` 에러가 즉시 재현되지는 않음을 재확인
+- 지금까지의 build export 전환 이슈, 해결 과정, 남은 고민점, 읽어볼 코드와 학습 포인트를 독립 문서 `docs/architecture/ui-build-export-retrospective.md`로 분리 정리
