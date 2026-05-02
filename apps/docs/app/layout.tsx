@@ -70,7 +70,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         <Header />
                     </Suspense>
                     <NextTopLoader />
-                    <div className="flex-1 pb-[4.0625rem] md:pb-0">
+                    <div className="flex-1 pb-[4.0625rem] sm:pb-0">
                         {children}
                     </div>
                     <Footer />

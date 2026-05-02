@@ -36,7 +36,7 @@ export default function MobileBottomNav() {
     const pathname = usePathname()
 
     return (
-        <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#09090b]/90 backdrop-blur-[6px] md:hidden">
+        <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#09090b]/90 backdrop-blur-[6px] sm:hidden">
             <div className="grid h-[4.0625rem] grid-cols-4 items-center px-6">
                 {mobileNav.map((item) => {
                     const isActive = item.activePrefixes.some(

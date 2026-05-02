@@ -11,13 +11,13 @@ export default function Header() {
         <header
             className={cn(
                 'sticky top-0 z-50 w-full border-b border-white/10 bg-[#09090b]/80 text-white backdrop-blur-[12px]',
-                'h-14 md:h-[4.0625rem]'
+                'h-[4.0625rem]'
             )}
         >
-            <div className="relative mx-auto flex h-full w-full max-w-page items-center justify-between px-4 md:h-16 md:px-8">
+            <div className="relative mx-auto flex h-16 w-full max-w-page items-center justify-between px-4 sm:px-6 md:px-8">
                 <MobileNavDrawer />
 
-                <div className="hidden min-w-0 flex-1 items-center justify-start md:flex">
+                <div className="hidden min-w-0 flex-1 items-center justify-start sm:flex">
                     <Link
                         className="font-display flex items-center text-[1.25rem] leading-7 font-bold tracking-[0.1em] text-cyan-400 uppercase"
                         href="/"
@@ -26,14 +26,14 @@ export default function Header() {
                     </Link>
                 </div>
 
-                <div className="hidden md:absolute md:left-1/2 md:flex md:-translate-x-1/2 md:items-center md:justify-center">
+                <div className="hidden sm:absolute sm:left-1/2 sm:flex sm:-translate-x-1/2 sm:items-center sm:justify-center">
                     <Navigation />
                 </div>
 
-                <div className="flex min-w-0 items-center justify-end md:flex-1">
-                    <div className="flex shrink-0 items-center gap-4 md:gap-6">
+                <div className="flex min-w-0 items-center justify-end sm:flex-1">
+                    <div className="flex shrink-0 items-center gap-4 sm:gap-5 md:gap-6">
                         <Search />
-                        <div className="hidden md:block">
+                        <div className="hidden sm:block">
                             <ThemeToggle />
                         </div>
                     </div>

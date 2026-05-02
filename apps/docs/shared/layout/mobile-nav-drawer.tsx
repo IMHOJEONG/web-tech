@@ -97,7 +97,7 @@ export default function MobileNavDrawer() {
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
-            <div className="flex items-center gap-3 md:hidden">
+            <div className="flex items-center gap-3 sm:hidden">
                 <SheetTrigger
                     aria-label="Open navigation drawer"
                     className="flex h-7 w-[2.125rem] items-center justify-center text-zinc-300 transition-colors hover:text-cyan-400"
@@ -128,7 +128,7 @@ export default function MobileNavDrawer() {
 
             <SheetContent
                 side="left"
-                className="z-[70] flex w-80 max-w-[85vw] flex-col gap-0 border-r border-white/5 bg-[#18181b] p-0 text-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.45)] [&>button]:hidden md:hidden"
+                className="z-[70] flex w-80 max-w-[85vw] flex-col gap-0 border-r border-white/5 bg-[#18181b] p-0 text-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.45)] [&>button]:hidden sm:hidden"
             >
                 <SheetTitle className="sr-only">Navigation Drawer</SheetTitle>
                 <SheetDescription className="sr-only">

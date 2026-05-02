@@ -35,7 +35,7 @@ export const Navigation = () => {
     const pathname = usePathname()
 
     return (
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-6 sm:flex md:gap-8">
             {navigation.map((nav) => {
                 const { href, name, activePrefixes } = nav
                 const isActive = activePrefixes.some(

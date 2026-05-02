@@ -80,6 +80,8 @@
 - `apps/docs`, `apps/web`, `apps/fe-box`, `apps/web-backend`, `packages/api`, `packages/ui` 등 주요 workspace package.json은 `catalog:` / `catalog:<name>` 참조로 전환해 버전 기준점을 workspace 루트로 끌어올림
 - 로컬 스크립트로 `package.json` 파싱과 catalog reference 정합성은 확인했고, `pnpm install --lockfile-only` 실검증은 현재 환경의 npm registry DNS 제한 때문에 완료하지 못함
 - `apps/docs/widgets/about-us/ui/about-us.tsx`에서 `lucide-react`의 `Twitter` export가 더 이상 존재하지 않아 타입 에러가 발생했고, 이를 `react-icons/fa6`의 `FaXTwitter`로 교체
+- `docs` 앱 반응형 기준을 app shell과 content layout로 분리하는 정책을 `docs/architecture/docs-responsive-policy.md`로 문서화
+- 정책에 맞춰 app shell은 `sm` 기준으로 정렬하고, `Header`, `MobileNavDrawer`, `MobileBottomNav`, `layout` bottom padding, top navigation 표시 기준을 `sm` 중심으로 통일
 - `main-feed` 카드 summary 문단에 `break-keep`을 추가해 한국어가 폭이 좁을 때 음절 단위로 세로처럼 쪼개져 보이는 현상을 완화
 - 이후 카드 summary를 한 줄로만 보이게 하려는 요구에 맞춰 `main-feed`의 주요 summary 문단에 `truncate`를 추가하고 말줄임표 처리로 전환
 - 한국어가 포함된 긴 summary에서 `truncate`가 덜 안정적으로 보이는 문제를 줄이기 위해 summary 블록과 부모 컨테이너에 `min-w-0`를 추가해 flex/grid 축소가 제대로 일어나도록 보강
