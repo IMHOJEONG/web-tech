@@ -35,14 +35,14 @@
   },
   "packageManager": "pnpm@9.15.1+sha512.1acb565e6193efbebda772702950469150cf12bcc764262e7587e71d19dc98a423dff9536e57ea44c49bdf790ff694e83c27be5faa23d67e0c033b583be4bfcf",
   "dependencies": {
-    "vercel": "^50.37.3"
+    "vercel": "^53.1.0"
   },
   "pnpm": {
     "overrides": {
       "glob": "^11.1.0",
       "tmp": "^0.2.4",
       "undici": "^7.24.0",
-      "esbuild": "^0.25.0",
+      "esbuild": "^0.28.0",
       "js-yaml": "^4.1.1",
       "body-parser": "^2.2.1",
       "mdast-util-to-hast": "^13.2.1",
