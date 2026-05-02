@@ -1,4 +1,6 @@
-import { ArrowUpRight, Github, Twitter } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
+import { FaGithub } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
 
 const pillarCards = [
     {
@@ -102,7 +104,7 @@ export function AboutUs() {
 
                         <div className="flex items-center gap-4 text-primary">
                             <ArrowUpRight className="size-6" />
-                            <Github className="size-5 text-outline" />
+                            <FaGithub className="size-5 text-outline" />
                         </div>
                     </article>
 
@@ -176,14 +178,14 @@ export function AboutUs() {
                                     href="#"
                                     className="inline-flex items-center gap-2 rounded-sm border border-outline-variant bg-surface-container-low px-4 py-2 text-sm text-on-surface transition-colors hover:border-primary hover:text-primary"
                                 >
-                                    <Github className="size-4" />
+                                    <FaGithub className="size-4" />
                                     GITHUB
                                 </a>
                                 <a
                                     href="#"
                                     className="inline-flex items-center gap-2 rounded-sm border border-outline-variant bg-surface-container-low px-4 py-2 text-sm text-on-surface transition-colors hover:border-primary hover:text-primary"
                                 >
-                                    <Twitter className="size-4" />
+                                    <FaXTwitter className="size-4" />
                                     TWITTER/X
                                 </a>
                             </div>
