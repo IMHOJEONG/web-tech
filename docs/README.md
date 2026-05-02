@@ -18,6 +18,9 @@
   - Codex 작업 로그, 협의 내용, 다음 액션, 열린 이슈
 - `docs/process/`
   - 작업 방식, 문서화 규칙, 협업 운영 기준
+- `docs/todo/`
+  - 장기 개선 백로그, 우선순위별 TODO, 구조/디자인/인프라 개선 항목
+  - 예: [docs/todo/platform-improvement-todo.md](/Users/coder/Desktop/project/web-tech/docs/todo/platform-improvement-todo.md)
 - `docs/runbooks/`
   - 배포/운영/로컬 실행/장애 대응 절차
   - 예: [docs/runbooks/docs-env-checklist.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/docs-env-checklist.md)
