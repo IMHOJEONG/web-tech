@@ -47,10 +47,10 @@
 
 현재 이 정책은 아래 shell 레이어에 먼저 적용되었다.
 
-- `apps/docs/shared/layout/header.tsx`
-- `apps/docs/shared/layout/mobile-nav-drawer.tsx`
-- `apps/docs/shared/layout/mobile-bottom-nav.tsx`
-- `apps/docs/shared/navigation.tsx`
+- `apps/docs/widgets/app-shell/ui/header.tsx`
+- `apps/docs/widgets/app-shell/ui/mobile-nav-drawer.tsx`
+- `apps/docs/widgets/app-shell/ui/mobile-bottom-nav.tsx`
+- `apps/docs/widgets/app-shell/ui/navigation.tsx`
 - `apps/docs/app/layout.tsx`
 
 ### Follow-up

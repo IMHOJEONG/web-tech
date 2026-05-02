@@ -1,6 +1,6 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
-import { MainCard } from '~/entities/document'
+import MainCard from '~/entities/document/ui/main-card'
 import { Metadata } from '~/lib/get-document'
 
 type HubPanel = {

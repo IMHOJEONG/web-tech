@@ -1,5 +1,5 @@
 import { getSortedPostsData } from '~/lib/get-document'
-import { MainFeed } from '~/widgets/main-feed'
+import { MainFeed } from '~/widgets/main-feed/ui/main-feed'
 
 export default async function Page() {
     const docs = await getSortedPostsData()

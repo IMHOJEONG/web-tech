@@ -1,10 +1,10 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
-import { Search } from '~/feature/search'
-import { ThemeToggle } from '~/feature/theme-toggle'
-import { Navigation } from '~/shared/navigation'
+import { Search } from '~/feature/search/ui/search'
+import { ThemeToggle } from '~/feature/theme-toggle/ui/theme-toggle'
+import { Brand } from '~/shared/ui/brand'
 import MobileNavDrawer from './mobile-nav-drawer'
-import { Brand } from '../ui/brand'
+import { Navigation } from './navigation'
 
 export default function Header() {
     return (

@@ -18,7 +18,7 @@
 좋은 점:
 
 - `feature/` 폴더가 이미 존재하고 일부 사용자 기능을 분리하고 있습니다.
-- `shared/` 아래에 layout, navigation, theme toggle 같은 공용 UI가 모여 있습니다.
+- `widgets/` 아래에 페이지 본문과 app shell이 점차 역할별로 분리되고 있습니다.
 - 페이지 단위 대형 UI가 점차 공용 템플릿으로 재사용되기 시작했습니다.
 
 아쉬운 점:
@@ -41,11 +41,10 @@
 
 예:
 
-- app shell
 - theme
-- navigation
 - 공용 토큰/유틸
 - i18n 메시지
+- brand 같은 범용 프리미티브
 
 ### `entities`
 
@@ -95,8 +94,23 @@
 - `main-feed`
 - `about-us`
 - `article-detail`
+- `app-shell`
 
 이 레이어는 여러 shared/feature/entity를 조합해 실제 페이지 본문을 구성합니다.
+
+현재 3차 적용:
+
+- `Header`, `Footer`, `MobileBottomNav`, `MobileNavDrawer`, `Navigation`을 `widgets/app-shell`로 이동
+
+이유:
+
+- app shell은 앱 전역에서 보이지만, 단순 기술 기반이 아니라 실제 사용자 화면을 구성하는 조합형 UI입니다.
+- `shared`에 두면 범용 프리미티브와 화면 구조 레이어가 섞이기 쉽습니다.
+- `widget`으로 올리면 shell도 “한 화면 단위의 큰 UI 조합”이라는 기준으로 일관되게 해석할 수 있습니다.
+
+관련 상세 설명:
+
+- [docs-app-shell-rationale.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-app-shell-rationale.md)
 
 ### `pages`
 
@@ -126,7 +140,12 @@
 2. 사용자 액션 중심의 작은 인터랙션은 `features`에 둡니다.
 3. 도메인 표현 단위는 `entities`로 분리합니다.
 4. 앱 전역 공용 요소는 `shared`에 둡니다.
+   - 단, `Header`, `Footer`, `Navigation`처럼 화면 shell을 직접 구성하는 조합 UI는 `widgets/app-shell`로 둡니다.
 5. 의미가 불분명한 신규 코드는 `components`에 추가하지 않습니다.
+6. `apps/docs`에서는 barrel file(`index.ts`)을 기본 패턴으로 사용하지 않습니다.
+   - 이유: TypeScript 해석/순환 참조/auto-import 혼선을 줄이기 위해서입니다.
+   - import는 가능한 한 실제 파일 경로를 직접 가리킵니다.
+   - 현재 `apps/docs` 내부 barrel file은 제거된 상태를 기본값으로 유지합니다.
 
 ## Migration Strategy
 
@@ -135,18 +154,35 @@
 1. 대형 페이지 조합 UI를 먼저 `widgets`로 이동
 2. `MainCard`처럼 문서 표현 성격이 강한 UI를 `entities/document`로 이동
 3. `Search`, `ThemeToggle`처럼 기능성이 강한 UI를 `features`로 이동
-4. `components/`에 남은 파일을 레이어별로 소진
+4. app shell을 `widgets/app-shell`로 올려 shared와 화면 조합 UI의 경계를 분리
+5. `components/`에 남은 파일을 레이어별로 소진
+
+## Completed Third Pass
+
+이번 3차 정리에서 완료한 항목은 아래와 같습니다.
+
+- `apps/docs/widgets/app-shell/ui/header.tsx`
+- `apps/docs/widgets/app-shell/ui/footer.tsx`
+- `apps/docs/widgets/app-shell/ui/mobile-bottom-nav.tsx`
+- `apps/docs/widgets/app-shell/ui/mobile-nav-drawer.tsx`
+- `apps/docs/widgets/app-shell/ui/navigation.tsx`
+
+이 변경으로:
+
+- `shared/layout`은 더 이상 app shell 책임을 갖지 않습니다.
+- `shared`는 메시지, brand, i18n, util, 범용 스타일 자산 중심으로 유지됩니다.
+- `app/layout.tsx`는 `widgets/app-shell`을 조합하는 얇은 엔트리 역할로 정리됩니다.
 
 ## Immediate Next Candidates
 
 다음 리팩터링 후보는 아래와 같습니다.
 
-- `apps/docs/shared/navigation.tsx`
-  - `shared/ui/navigation` 또는 app shell widget 후보
-- `apps/docs/shared/layout/header.tsx`
-  - app shell widget 후보
-- `apps/docs/shared/layout/footer.tsx`
-  - app shell widget 후보
+- `apps/docs/shared/toc.tsx`
+  - article-detail 전용 widget 보조 UI인지, shared primitive인지 재판단
+- `apps/docs/feature/category/*`
+  - 실제로 entity/category와 feature/category 경계가 맞는지 점검
+- `apps/docs/shared/architecture-page.tsx`
+  - 실사용 범위와 레이어 책임 재판단
 
 ## Non-Goals
 

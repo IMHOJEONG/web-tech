@@ -1,11 +1,11 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
-import { MainCard } from '~/entities/document'
+import MainCard from '~/entities/document/ui/main-card'
 import { EmptyAllDocs } from '~/feature/search/empty-all-docs'
 import { EmptySearchResult } from '~/feature/search/empty-search-result'
 import { getSortedPostsData } from '~/lib/get-document'
 import { getSearchData } from '~/lib/get-search-data'
-import { MainFeed } from '~/widgets/main-feed'
+import { MainFeed } from '~/widgets/main-feed/ui/main-feed'
 
 type Props = {
     searchParams: { q?: string }

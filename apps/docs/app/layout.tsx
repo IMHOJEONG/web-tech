@@ -8,12 +8,12 @@ import { maruburi } from '~/components/maruburi-font'
 import { mono } from '~/components/mono-font'
 
 import Script from 'next/script'
-import Footer from '~/shared/layout/footer'
-import Header from '~/shared/layout/header'
-import MobileBottomNav from '~/shared/layout/mobile-bottom-nav'
 import './css/global.css'
 
 import { cn } from '@web-tech/ui/lib/utils'
+import Footer from '~/widgets/app-shell/ui/footer'
+import Header from '~/widgets/app-shell/ui/header'
+import MobileBottomNav from '~/widgets/app-shell/ui/mobile-bottom-nav'
 
 const inter = Inter({
     subsets: ['latin'],

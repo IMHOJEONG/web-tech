@@ -22,7 +22,7 @@ import {
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { Brand } from '../ui/brand'
+import { Brand } from '~/shared/ui/brand'
 
 const drawerLinks = [
     {
