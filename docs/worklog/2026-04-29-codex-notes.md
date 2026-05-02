@@ -76,6 +76,9 @@
 - `app/layout.tsx`가 서버 컴포넌트인데 `react-i18next`의 `initReactI18next`를 직접 초기화하고 있어 `context-in-server-component` 계열 런타임 에러가 발생
 - `shared/ui/brand.tsx`는 `Trans` 기반 클라이언트 컴포넌트 대신 서버 안전한 정적 브랜드 텍스트로 단순화하고, layout의 `react-i18next` 초기화 코드는 제거
 - `next-intl` 기준으로 `shared/message/en.json`, `ko.json`의 메시지 구조를 다시 정리하고, `home`/`search` 카피 및 `common.brand`, `search.placeholder`를 추가
+- `pnpm-workspace.yaml`에 기본 catalog와 `docs`, `web`, `fe-box`, `backend`, `ui` named catalog를 추가해 workspace 성격별 버전 묶음을 분리
+- `apps/docs`, `apps/web`, `apps/fe-box`, `apps/web-backend`, `packages/api`, `packages/ui` 등 주요 workspace package.json은 `catalog:` / `catalog:<name>` 참조로 전환해 버전 기준점을 workspace 루트로 끌어올림
+- 로컬 스크립트로 `package.json` 파싱과 catalog reference 정합성은 확인했고, `pnpm install --lockfile-only` 실검증은 현재 환경의 npm registry DNS 제한 때문에 완료하지 못함
 - `main-feed` 카드 summary 문단에 `break-keep`을 추가해 한국어가 폭이 좁을 때 음절 단위로 세로처럼 쪼개져 보이는 현상을 완화
 - 이후 카드 summary를 한 줄로만 보이게 하려는 요구에 맞춰 `main-feed`의 주요 summary 문단에 `truncate`를 추가하고 말줄임표 처리로 전환
 - 한국어가 포함된 긴 summary에서 `truncate`가 덜 안정적으로 보이는 문제를 줄이기 위해 summary 블록과 부모 컨테이너에 `min-w-0`를 추가해 flex/grid 축소가 제대로 일어나도록 보강
