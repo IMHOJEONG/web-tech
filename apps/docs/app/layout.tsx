@@ -69,7 +69,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <Suspense>
                         <Header />
                     </Suspense>
-                    <NextTopLoader />
+                    <NextTopLoader showSpinner={false} />
                     <div className="flex-1 pb-[4.0625rem] sm:pb-0">
                         {children}
                     </div>

@@ -15,6 +15,7 @@
   - 예: [docs/architecture/ui-build-export-retrospective.md](/Users/coder/Desktop/project/web-tech/docs/architecture/ui-build-export-retrospective.md)
   - 예: [docs/architecture/docs-responsive-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-responsive-policy.md)
   - 예: [docs/architecture/docs-app-shell-rationale.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-app-shell-rationale.md)
+  - 예: [docs/architecture/docs-loading-ux-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-loading-ux-policy.md)
 - `docs/worklog/`
   - Codex 작업 로그, 협의 내용, 다음 액션, 열린 이슈
 - `docs/process/`
