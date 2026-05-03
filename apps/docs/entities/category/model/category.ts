@@ -2,12 +2,11 @@ import { Search, Settings } from 'lucide-react'
 import { FaReact, FaRegWindowRestore } from 'react-icons/fa'
 import { SiAstro, SiReactrouter, SiSvelte } from 'react-icons/si'
 
-export const makeUrl = (str: string[]) => {
-    return ['/category', ...str].join('/')
+export const makeCategoryUrl = (segments: string[]) => {
+    return ['/category', ...segments].join('/')
 }
 
-// Menu items.
-export const items = [
+export const categoryTree = [
     {
         title: 'FE',
         url: 'fe',
@@ -52,7 +51,6 @@ export const items = [
             },
         ],
     },
-
     {
         title: 'Computer Science',
         url: 'computer-science',
@@ -65,25 +63,28 @@ export const items = [
             },
         ],
     },
-]
+] as const
 
-export const mainCategories = items.map((item) => {
+export const categoryMainLinks = categoryTree.map((item) => {
     const { title, url } = item
+
     return {
         title,
-        url: makeUrl([url]),
+        url: makeCategoryUrl([url]),
     }
 })
 
 export const getSubCategories = (category: string) => {
-    const mainItem = items
-        .filter((item) => item.title.toLowerCase() === category.toLowerCase())
-        .at(0)
+    const mainItem = categoryTree.find(
+        (item) => item.title.toLowerCase() === category.toLowerCase()
+    )
+
     return mainItem?.sub.map((value) => {
         const { title, url } = value
+
         return {
             title,
-            url: makeUrl([mainItem.url, url]),
+            url: makeCategoryUrl([mainItem.url, url]),
         }
     })
 }

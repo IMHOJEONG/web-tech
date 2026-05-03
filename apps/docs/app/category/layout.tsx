@@ -1,10 +1,10 @@
 import { SidebarProvider } from '@web-tech/ui/components/sidebar'
-import { AppSidebar } from '~/components/app-sidebar/app-sidebar'
+import { CategorySidebar } from '~/widgets/category-sidebar/ui/category-sidebar'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <SidebarProvider>
-            <AppSidebar
+            <CategorySidebar
                 variant="inset"
                 className="top-[4.0625rem] h-[calc(100svh-4.0625rem)]"
             />

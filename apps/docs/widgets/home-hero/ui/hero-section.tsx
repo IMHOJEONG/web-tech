@@ -2,9 +2,11 @@
 
 import { useTranslations } from 'next-intl'
 import dynamic from 'next/dynamic'
-import { LandingBox } from '../layout/landing-box'
+import { LandingBox } from './landing-box'
 
-const Node = dynamic(() => import('../react-flow/node'), { ssr: false })
+const Node = dynamic(() => import('~/components/react-flow/node'), {
+    ssr: false,
+})
 
 export const HeroSection = () => {
     const t = useTranslations('home')

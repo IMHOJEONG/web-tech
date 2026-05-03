@@ -38,8 +38,17 @@
   - `shared/layout`, `shared/navigation` 기반 app shell을 `widgets/app-shell`로 이동
   - `app/layout.tsx`는 shell widget을 조합하는 얇은 엔트리로 정리
   - 후속으로 widget/feature/entity 경계 재점검은 별도 항목으로 계속 진행
-- [ ] `P1` `apps/docs`의 widget / feature / entity 경계를 한 번 더 재점검한다.
-  - `toc`, `category`, `architecture-page` 같은 애매한 파일의 레이어 확정
+- [x] `P1` `apps/docs`의 widget / feature / entity 경계를 한 번 더 재점검한다.
+  - `toc`는 `widgets/article-toc`
+  - `category`는 `entities/category`
+  - `architecture-page`는 `widgets/architecture-page`
+- [x] `P1` `apps/docs`의 남은 legacy `components/` 레이어를 계속 소진한다.
+  - `app-sidebar`는 `widgets/category-sidebar`
+  - `content-hub`는 `widgets/content-hub`
+  - `hero`는 `widgets/home-hero`
+- [ ] `P1` `apps/docs/components/react-flow`의 최종 레이어를 확정한다.
+  - `home-hero` 전용 보조 UI인지
+  - 독립 widget 또는 shared visual module인지 판단
 - [ ] `P1` `next-intl` 기준으로 i18n 사용 방식을 통일한다.
   - `Brand`, `Header`, `Footer`, `Search` placeholder 실제 메시지 연결
   - 언어별 메시지 키 네이밍 규칙 정리

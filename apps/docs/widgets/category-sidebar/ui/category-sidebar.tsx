@@ -15,9 +15,14 @@ import {
 
 import { cn } from '@web-tech/ui/lib/utils'
 import { usePathname } from 'next/navigation'
-import { items, makeUrl } from '~/feature/category/category-item'
+import {
+    categoryTree,
+    makeCategoryUrl,
+} from '~/entities/category/model/category'
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function CategorySidebar({
+    ...props
+}: React.ComponentProps<typeof Sidebar>) {
     const pathname = usePathname()?.replace(/\/$/, '')
 
     return (
@@ -27,14 +32,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <SidebarGroupLabel>Category</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {items.map((item) => (
+                            {categoryTree.map((item) => (
                                 <SidebarMenuItem
                                     className="flex flex-col gap-1"
                                     key={item.title}
                                 >
                                     <SidebarMenuButton asChild>
                                         <a
-                                            href={makeUrl([item.url])}
+                                            href={makeCategoryUrl([item.url])}
                                             className={cn(
                                                 '',
                                                 'hover:opacity-90',
@@ -43,7 +48,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                                 {
                                                     'bg-blue-100 dark:bg-gray-400':
                                                         pathname ===
-                                                        makeUrl([item.url]),
+                                                        makeCategoryUrl([
+                                                            item.url,
+                                                        ]),
                                                 }
                                             )}
                                         >
@@ -60,10 +67,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                                 >
                                                     <SidebarMenuSubItem>
                                                         <a
-                                                            href={makeUrl([
-                                                                item.url,
-                                                                subItem.url,
-                                                            ])}
+                                                            href={makeCategoryUrl(
+                                                                [
+                                                                    item.url,
+                                                                    subItem.url,
+                                                                ]
+                                                            )}
                                                             className={cn(
                                                                 'flex items-center gap-2',
                                                                 'p-2',
@@ -74,7 +83,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                                                 {
                                                                     'bg-blue-100 dark:bg-gray-400':
                                                                         pathname ===
-                                                                        makeUrl(
+                                                                        makeCategoryUrl(
                                                                             [
                                                                                 item.url,
                                                                                 subItem.url,

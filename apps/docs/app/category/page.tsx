@@ -1,11 +1,11 @@
 import { Badge } from '@web-tech/ui/components/badge'
 import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
-import { mainCategories } from '~/feature/category/category-item'
-import { MainBox } from '~/feature/category/main-box'
+import { categoryMainLinks } from '~/entities/category/model/category'
+import { MainCategoryCard } from '~/entities/category/ui/main-category-card'
 // category 소개 페이지 만들면 될 듯
 export default function Page() {
-    const mainCategory = mainCategories
+    const mainCategory = categoryMainLinks
 
     return (
         <div className={cn('w-full', 'flex flex-col', 'gap-3', 'p-3')}>
@@ -40,7 +40,7 @@ export default function Page() {
                             'rounded rounded-lg'
                         )}
                     >
-                        <MainBox id={title} />
+                        <MainCategoryCard id={title} />
                     </Link>
                 ))}
             </div>

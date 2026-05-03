@@ -1,11 +1,11 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Image from 'next/image'
 
-interface SubCategoryBoxItem {
+interface SubCategoryCardProps {
     id: string
 }
 
-const subCategory = [
+const subCategoryCards = [
     {
         title: 'React',
         id: 'react',
@@ -32,10 +32,11 @@ const subCategory = [
     },
 ]
 
-export const SubCategoryBox = ({ id }: SubCategoryBoxItem) => {
-    const item = subCategory.find(
+export const SubCategoryCard = ({ id }: SubCategoryCardProps) => {
+    const item = subCategoryCards.find(
         (sub) => sub.id === id.toLowerCase().split(' ').join('-')
     )
+
     return (
         <div
             className={cn(

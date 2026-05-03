@@ -173,16 +173,51 @@
 - `shared`는 메시지, brand, i18n, util, 범용 스타일 자산 중심으로 유지됩니다.
 - `app/layout.tsx`는 `widgets/app-shell`을 조합하는 얇은 엔트리 역할로 정리됩니다.
 
+## Completed Fourth Pass
+
+이번 4차 정리에서 확정한 항목은 아래와 같습니다.
+
+- `apps/docs/widgets/article-toc/ui/toc.tsx`
+  - `shared`가 아니라 문서 상세 화면의 조합 UI로 본다.
+  - 이유: `remark-flexible-toc` 결과를 특정 상세 페이지 맥락에서 렌더링하고, 추후 article/detail 계열 화면에서 재사용되는 widget 성격이 더 강하다.
+- `apps/docs/entities/category/model/category.ts`
+  - 카테고리 트리, URL 생성 규칙, 서브카테고리 파생 로직은 사용자 액션이 아니라 카테고리 도메인 모델에 가깝다.
+- `apps/docs/entities/category/ui/*`
+  - 메인 카테고리 카드, 서브카테고리 카드, 카테고리 문서 카드는 category 도메인의 표현 단위이므로 `entity`로 본다.
+- `apps/docs/widgets/architecture-page/ui/architecture-page.tsx`
+  - 특정 문서 페이지를 MDX 코드로 렌더링하는 페이지 단위 UI이므로 `shared`보다 `widget`이 적합하다.
+
+이 변경으로:
+
+- `feature/category`는 비워졌고, category는 `entity` 중심으로 해석된다.
+- `shared/toc.tsx`, `shared/architecture-page.tsx` 같은 화면 맥락성 강한 파일은 `shared`에 두지 않는다.
+
+## Completed Fifth Pass
+
+이번 5차 정리에서 확정한 항목은 아래와 같습니다.
+
+- `apps/docs/widgets/category-sidebar/ui/category-sidebar.tsx`
+  - 기존 `components/app-sidebar`는 전역 app shell이 아니라 category 라우트 전용 조합 UI이므로 `widget`으로 본다.
+- `apps/docs/widgets/content-hub/ui/hub-page.tsx`
+  - 허브형 본문 전체를 책임지는 화면 단위 조합 UI라서 `widget`이 적합하다.
+- `apps/docs/widgets/home-hero/ui/hero-section.tsx`
+  - 홈 화면 첫 섹션을 구성하는 조합 UI이므로 `widget`으로 본다.
+- `apps/docs/widgets/home-hero/ui/landing-box.tsx`
+  - 현재는 `home-hero` 전용 보조 레이아웃이므로 범용 `shared`보다 widget 내부 보조 UI로 유지한다.
+
+이 변경으로:
+
+- `components/app-sidebar`, `components/content-hub`, `components/hero`는 legacy 분류에서 빠진다.
+- 사용되지 않던 `components/app-sidebar/top-bar.css`는 제거한다.
+
 ## Immediate Next Candidates
 
 다음 리팩터링 후보는 아래와 같습니다.
 
-- `apps/docs/shared/toc.tsx`
-  - article-detail 전용 widget 보조 UI인지, shared primitive인지 재판단
-- `apps/docs/feature/category/*`
-  - 실제로 entity/category와 feature/category 경계가 맞는지 점검
-- `apps/docs/shared/architecture-page.tsx`
-  - 실사용 범위와 레이어 책임 재판단
+- `apps/docs/components/react-flow/*`
+  - `home-hero` 전용 시각화 보조 UI인지, 독립 widget인지 분리 기준 검토
+- `apps/docs/components/layout/*`
+  - 남아 있는 파일이 있다면 shared/layout 또는 widget 보조 레이어로 재배치 검토
 
 ## Non-Goals
 

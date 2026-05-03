@@ -6,7 +6,7 @@ import remarkFlexibleToc, { TocItem } from 'remark-flexible-toc'
 import { getDocBySlug } from '~/lib/get-document'
 import { components } from '~/mdx-components'
 import { LoadingComponent } from '~/shared/loading-component'
-import Toc from '~/shared/toc'
+import Toc from '~/widgets/article-toc/ui/toc'
 
 type Scope = {
     readingTime: string

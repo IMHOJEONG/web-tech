@@ -1,7 +1,7 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
-import { getSubCategories } from '~/feature/category/category-item'
-import { SubCategoryBox } from '~/feature/category/sub-category-box'
+import { getSubCategories } from '~/entities/category/model/category'
+import { SubCategoryCard } from '~/entities/category/ui/sub-category-card'
 
 export default async function Page({
     params,
@@ -27,7 +27,7 @@ export default async function Page({
                         'rounded rounded-lg'
                     )}
                 >
-                    <SubCategoryBox id={title} />
+                    <SubCategoryCard id={title} />
                 </Link>
             ))}
         </div>

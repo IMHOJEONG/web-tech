@@ -88,6 +88,8 @@
 - 왜 `shared`가 아니라 `widgets/app-shell`인지, 그리고 왜 이름을 `app-shell`로 정했는지 설명하는 독립 문서 `docs/architecture/docs-app-shell-rationale.md`를 추가
 - `docs` 앱의 로딩 UX 기준을 정리한 `docs/architecture/docs-loading-ux-policy.md`를 추가하고, 전역 route transition은 top bar, 섹션 단위 로딩은 skeleton 중심으로 해석하는 방향을 문서화
 - `turbo.json`의 공용 `dev` task에서 `dependsOn: ["^dev"]`를 제거했다. 기존 설정은 `docs#dev -> @web-tech/ui#dev`처럼 persistent watcher가 다른 persistent watcher에 의존하게 만들어 Turbo가 `Invalid task configuration`으로 즉시 실패했고, 현재 `apps/docs`, `apps/web`는 이미 `predev`에서 `@web-tech/ui build`를 선행하므로 공용 `dev` 의존 없이 부팅하는 편이 더 안전하다
+- FSD 경계 재점검 4차 정리로 `shared/toc.tsx`는 `widgets/article-toc/ui/toc.tsx`로, `shared/architecture-page.tsx`는 `widgets/architecture-page/ui/architecture-page.tsx`로 이동했고, 기존 `feature/category/*`는 카테고리 도메인 모델과 표현 단위로 판단해 `entities/category/model`, `entities/category/ui`로 재배치했다
+- legacy `components/` 소진 5차 정리로 `components/app-sidebar`는 `widgets/category-sidebar`, `components/content-hub`는 `widgets/content-hub`, `components/hero`와 그 전용 `landing-box`는 `widgets/home-hero`로 이동했고, 더 이상 사용되지 않던 `components/app-sidebar/top-bar.css`는 삭제했다
 - `main-feed` 카드 summary 문단에 `break-keep`을 추가해 한국어가 폭이 좁을 때 음절 단위로 세로처럼 쪼개져 보이는 현상을 완화
 - 이후 카드 summary를 한 줄로만 보이게 하려는 요구에 맞춰 `main-feed`의 주요 summary 문단에 `truncate`를 추가하고 말줄임표 처리로 전환
 - 한국어가 포함된 긴 summary에서 `truncate`가 덜 안정적으로 보이는 문제를 줄이기 위해 summary 블록과 부모 컨테이너에 `min-w-0`를 추가해 flex/grid 축소가 제대로 일어나도록 보강
@@ -136,6 +138,8 @@
 - 루트 Figma의 다른 desktop/mobile feed 프레임도 추가로 코드에 1:1 반영할지 여부
 - mobile nav icon을 Figma asset 기반으로 더 정밀하게 교체할지 여부
 - `@web-tech/ui` 변경을 앱 dev 중 실시간 반영해야 할 때 watcher orchestration을 `turbo dev` 기준으로 어떻게 둘지 별도 기준이 필요한지
+- `components/app-sidebar`, `components/content-hub`, `components/hero`처럼 남아 있는 legacy `components/`의 최종 레이어를 어디로 둘지
+- `components/react-flow/*`를 `home-hero` 내부 보조 UI로 흡수할지, 별도 시각화 레이어로 남길지
 
 ## Next
 
@@ -148,6 +152,8 @@
 - `shared/navigation` 및 `shared/layout/*`의 최종 레이어 위치 확정
 - 최신 Figma root에 있는 별도 mobile feed / alternate feed 프레임까지 구현 범위를 넓힐지 결정
 - `turbo dev`에서 persistent dependency를 직접 연결하지 않는 현재 정책에 맞춰, 필요하면 `ui watch + app dev` 병렬 실행 전략을 별도 runbook으로 정리
+- 남아 있는 legacy `components/` 정리 우선순위 확정
+- `components/react-flow`의 최종 레이어 확정
 
 - Figma node `88:2026` 기준으로 모바일 header menu trigger에 좌측 navigation drawer(320px, overlay, active state, technical stats, bottom action section)를 추가
 

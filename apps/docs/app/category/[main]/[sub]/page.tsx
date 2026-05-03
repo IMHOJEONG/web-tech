@@ -1,6 +1,6 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import { TocItem } from 'remark-flexible-toc'
-import { CategoryBox } from '~/feature/category/category-box'
+import { CategoryDocumentCard } from '~/entities/category/ui/category-document-card'
 import { getSubCategoryData } from '~/lib/get-category'
 
 type Scope = {
@@ -32,7 +32,7 @@ export default async function Page({
             )}
         >
             {data.map((item) => {
-                return <CategoryBox key={item.title} data={item} />
+                return <CategoryDocumentCard key={item.title} data={item} />
             })}
         </div>
     )

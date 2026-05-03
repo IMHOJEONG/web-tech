@@ -2,7 +2,7 @@ import { cn } from '@web-tech/ui/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 
-interface CategoryBoxItem {
+interface CategoryDocumentCardItem {
     slug?: string
     summary?: string
     thumbnail?: string | null
@@ -11,10 +11,12 @@ interface CategoryBoxItem {
     fileName?: string
 }
 
-export const CategoryBox = ({ data }: { data: CategoryBoxItem }) => {
-    const { summary, thumbnail, title, date, slug, fileName } = data
-
-    console.log(slug)
+export const CategoryDocumentCard = ({
+    data,
+}: {
+    data: CategoryDocumentCardItem
+}) => {
+    const { summary, thumbnail, title, date, fileName } = data
 
     return (
         <Link

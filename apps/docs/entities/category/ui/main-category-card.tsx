@@ -1,11 +1,11 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Image from 'next/image'
 
-interface MainBoxProps {
+interface MainCategoryCardProps {
     id: string
 }
 
-const mainData = [
+const mainCategoryCards = [
     {
         title: 'Frontend',
         key: 'fe',
@@ -26,11 +26,11 @@ const mainData = [
     },
 ]
 
-export const MainBox = ({ id }: MainBoxProps) => {
-    const data = mainData.find(
+export const MainCategoryCard = ({ id }: MainCategoryCardProps) => {
+    const data = mainCategoryCards.find(
         (item) => item.key === id.toLowerCase().split(' ').join('-')
     )
-    // const { title, summary } = data
+
     return (
         <div className={cn('size-full flex flex-col gap-2', 'p-2')}>
             <div className={cn('relative w-full aspect-square ')}>
