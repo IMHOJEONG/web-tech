@@ -1,14 +1,25 @@
 packages:
   - "apps/*"
   - "packages/*"
+allowBuilds:
+  '@nestjs/core': true
+  '@parcel/watcher': true
+  '@prisma/engines': true
+  '@sentry/cli': true
+  '@swc/core': true
+  esbuild: true
+  prisma: true
+  sharp: true
+  simple-git-hooks: true
+  unrs-resolver: true
 
 catalog:
   "@eslint/eslintrc": "^3.3.3"
   "@eslint/js": "^9.39.2"
+  "@tailwindcss/postcss": "^4.1.18"
   "@types/node": "^25.6.0"
   "@types/react": "^19.2.14"
   "@types/react-dom": "^19.2.3"
-  "@tailwindcss/postcss": "^4.1.18"
   clsx: "^2.1.1"
   eslint: "^9.39.4"
   ky: "^2.0.2"
@@ -23,6 +34,30 @@ catalog:
   typescript: "^6.0.3"
 
 catalogs:
+  backend:
+    "@nestjs/cli": "^11.0.16"
+    "@nestjs/common": "^11.1.13"
+    "@nestjs/core": "^11.1.18"
+    "@nestjs/platform-express": "^11.1.13"
+    "@nestjs/schematics": "^11.0.9"
+    "@nestjs/testing": "^11.1.13"
+    "@types/express": "^5.0.6"
+    "@types/jest": "^30.0.0"
+    "@types/supertest": "^6.0.3"
+    eslint-config-prettier: "^10.1.8"
+    eslint-plugin-prettier: "^5.5.5"
+    globals: "^16.5.0"
+    jest: "^30.2.0"
+    prisma: "^7.6.0"
+    reflect-metadata: "^0.2.2"
+    rxjs: "^7.8.2"
+    source-map-support: "^0.5.21"
+    supertest: "^7.2.2"
+    ts-jest: "^29.4.6"
+    ts-loader: "^9.5.4"
+    ts-node: "^10.9.2"
+    tsconfig-paths: "^4.2.0"
+    typescript-eslint: "^8.55.0"
   docs:
     "@mdx-js/loader": "^3.1.1"
     "@mdx-js/react": "^3.1.1"
@@ -51,20 +86,6 @@ catalogs:
     vfile-matter: "^5.0.1"
     web: "^0.0.2"
     zustand: "^5.0.11"
-  web:
-    "@radix-ui/react-slot": "^1.2.4"
-    "@supabase/supabase-js": "^2.95.3"
-    "@xyflow/react": "^12.10.0"
-    class-variance-authority: "^0.7.1"
-    cloudflare: "^6.0.0"
-    dayjs: "^1.11.19"
-    effect: "^3.20.0"
-    next: "16.2.3"
-    overlay-kit: "^1.8.6"
-    recharts: "^3.7.0"
-    tailwind-merge: "^3.4.0"
-    use-debounce: "^10.1.0"
-    zod: "^4.3.6"
   fe-box:
     "@modelcontextprotocol/sdk": "^1.28.0"
     "@prisma/adapter-pg": "^7.4.0"
@@ -101,8 +122,8 @@ catalogs:
     jsdom: "^27.4.0"
     nitro: "latest"
     prisma: "^7.6.0"
-    streamdown: "^2.5.0"
     storybook: "^9.1.17"
+    streamdown: "^2.5.0"
     superjson: "^2.2.6"
     tailwind-merge: "^3.4.0"
     tsx: "^4.21.0"
@@ -111,30 +132,6 @@ catalogs:
     vitest: "^4.1.5"
     web-vitals: "^5.1.0"
     zod: "^4.3.6"
-  backend:
-    "@nestjs/cli": "^11.0.16"
-    "@nestjs/common": "^11.1.13"
-    "@nestjs/core": "^11.1.18"
-    "@nestjs/platform-express": "^11.1.13"
-    "@nestjs/schematics": "^11.0.9"
-    "@nestjs/testing": "^11.1.13"
-    "@types/express": "^5.0.6"
-    "@types/jest": "^30.0.0"
-    "@types/supertest": "^6.0.3"
-    eslint-config-prettier: "^10.1.8"
-    eslint-plugin-prettier: "^5.5.5"
-    globals: "^16.5.0"
-    jest: "^30.2.0"
-    prisma: "^7.6.0"
-    reflect-metadata: "^0.2.2"
-    rxjs: "^7.8.2"
-    source-map-support: "^0.5.21"
-    supertest: "^7.2.2"
-    ts-jest: "^29.4.6"
-    ts-loader: "^9.5.4"
-    ts-node: "^10.9.2"
-    tsconfig-paths: "^4.2.0"
-    typescript-eslint: "^8.55.0"
   ui:
     "@emotion/react": "^11.14.0"
     "@emotion/styled": "^11.14.1"
@@ -151,3 +148,17 @@ catalogs:
     react-icons: "^5.5.0"
     recharts: "^3.7.0"
     tailwind-merge: "^3.4.0"
+  web:
+    "@radix-ui/react-slot": "^1.2.4"
+    "@supabase/supabase-js": "^2.95.3"
+    "@xyflow/react": "^12.10.0"
+    class-variance-authority: "^0.7.1"
+    cloudflare: "^6.0.0"
+    dayjs: "^1.11.19"
+    effect: "^3.20.0"
+    next: "16.2.3"
+    overlay-kit: "^1.8.6"
+    recharts: "^3.7.0"
+    tailwind-merge: "^3.4.0"
+    use-debounce: "^10.1.0"
+    zod: "^4.3.6"
