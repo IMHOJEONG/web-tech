@@ -23,6 +23,7 @@
         "esbuild": "^0.28.0",
         "fast-glob": "catalog:docs",
         "gray-matter": "catalog:docs",
+        "jsdom": "catalog:docs",
         "ky": "catalog:",
         "lucide-react": "catalog:",
         "mdx-bundler": "catalog:docs",

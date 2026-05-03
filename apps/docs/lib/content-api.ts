@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { JSDOM } from 'jsdom'
 import type { Metadata } from '~/lib/get-document'
 import type { ContentFormat } from '~/lib/get-document'
 import type { ContentSource } from '~/lib/get-document'
@@ -37,6 +38,27 @@ type RemotePayload =
           items?: RemotePost[]
           results?: RemotePost[]
       }
+
+const DISALLOWED_REMOTE_TAGS = [
+    'script',
+    'style',
+    'iframe',
+    'object',
+    'embed',
+    'form',
+    'meta',
+    'link',
+    'base',
+] as const
+
+const URL_ATTRIBUTE_NAMES = new Set([
+    'href',
+    'src',
+    'xlink:href',
+    'action',
+    'formaction',
+    'poster',
+])
 
 function trimTrailingSlash(value: string) {
     return value.replace(/\/+$/, '')
@@ -188,21 +210,40 @@ function normalizeRemoteReference(reference: string) {
 }
 
 function sanitizeRemoteHtml(content: string) {
-    return content
-        .replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
-        .replace(/<style[\s\S]*?>[\s\S]*?<\/style>/gi, '')
-        .replace(
-            /<(iframe|object|embed|form|meta|link|base)[^>]*?>[\s\S]*?<\/\1>/gi,
-            ''
-        )
-        .replace(/<(iframe|object|embed|form|meta|link|base)[^>]*?\/?>/gi, '')
-        .replace(/\son[a-z]+\s*=\s*(['"]).*?\1/gi, '')
-        .replace(/\son[a-z]+\s*=\s*[^\s>]+/gi, '')
-        .replace(
-            /\s(href|src|xlink:href)\s*=\s*(['"])\s*javascript:[\s\S]*?\2/gi,
-            ' $1="#"'
-        )
-        .replace(/\ssrcdoc\s*=\s*(['"]).*?\1/gi, '')
+    const dom = new JSDOM(content)
+    const { document } = dom.window
+
+    DISALLOWED_REMOTE_TAGS.forEach((tagName) => {
+        document.querySelectorAll(tagName).forEach((node) => node.remove())
+    })
+
+    document.querySelectorAll('*').forEach((element) => {
+        Array.from(element.attributes).forEach((attribute) => {
+            const attributeName = attribute.name.toLowerCase()
+
+            if (attributeName.startsWith('on') || attributeName === 'srcdoc') {
+                element.removeAttribute(attribute.name)
+                return
+            }
+
+            if (!URL_ATTRIBUTE_NAMES.has(attributeName)) {
+                return
+            }
+
+            const normalizedValue = attribute.value
+                .replace(/[\u0000-\u0020\u007f-\u009f]+/g, '')
+                .toLowerCase()
+
+            if (
+                normalizedValue.startsWith('javascript:') ||
+                normalizedValue.startsWith('vbscript:')
+            ) {
+                element.setAttribute(attribute.name, '#')
+            }
+        })
+    })
+
+    return document.body.innerHTML
 }
 
 function normalizeRemoteContent(
