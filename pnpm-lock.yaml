@@ -106,9 +106,6 @@ catalogs:
     lucide-react:
       specifier: ^1.14.0
       version: 1.14.0
-    postcss:
-      specifier: ^8.5.10
-      version: 8.5.13
     react:
       specifier: ^19.2.5
       version: 19.2.5
@@ -465,6 +462,7 @@ overrides:
   dompurify: ^3.4.0
   '@hono/node-server': ^1.19.13
   uuid: ^14.0.0
+  postcss: ^8.5.10
 
 importers:
 
@@ -647,7 +645,7 @@ importers:
         specifier: 15.5.2
         version: 15.5.2(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3)
       postcss:
-        specifier: 'catalog:'
+        specifier: ^8.5.10
         version: 8.5.13
       shiki:
         specifier: ^3.22.0
@@ -879,7 +877,7 @@ importers:
         specifier: catalog:web
         version: 1.9.0(react@19.2.5)
       postcss:
-        specifier: 'catalog:'
+        specifier: ^8.5.10
         version: 8.5.13
       react:
         specifier: 'catalog:'
@@ -1137,7 +1135,7 @@ importers:
   packages/tailwind-config:
     devDependencies:
       postcss:
-        specifier: 'catalog:'
+        specifier: ^8.5.10
         version: 8.5.13
       tailwindcss:
         specifier: 'catalog:'
@@ -1193,7 +1191,7 @@ importers:
         specifier: catalog:ui
         version: 12.38.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       postcss:
-        specifier: 'catalog:'
+        specifier: ^8.5.10
         version: 8.5.13
       react:
         specifier: 'catalog:'
@@ -5722,7 +5720,7 @@ packages:
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
-      postcss: ^8.1.0
+      postcss: ^8.5.10
 
   available-typed-arrays@1.0.7:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
@@ -9150,10 +9148,6 @@ packages:
 
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
-
-  postcss@8.4.31:
-    resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
-    engines: {node: ^10 || ^12 || >=14}
 
   postcss@8.5.13:
     resolution: {integrity: sha512-qif0+jGGZoLWdHey3UFHHWP0H7Gbmsk8T5VEqyYFbWqPr1XqvLGBbk/sl8V5exGmcYJklJOhOQq1pV9IcsiFag==}
@@ -19393,7 +19387,7 @@ snapshots:
       '@swc/helpers': 0.5.15
       baseline-browser-mapping: 2.10.27
       caniuse-lite: 1.0.30001791
-      postcss: 8.4.31
+      postcss: 8.5.13
       react: 19.2.5
       react-dom: 19.2.5(react@19.2.5)
       styled-jsx: 5.1.6(react@19.2.5)
@@ -19864,12 +19858,6 @@ snapshots:
       util-deprecate: 1.0.2
 
   postcss-value-parser@4.2.0: {}
-
-  postcss@8.4.31:
-    dependencies:
-      nanoid: 3.3.12
-      picocolors: 1.1.1
-      source-map-js: 1.2.1
 
   postcss@8.5.13:
     dependencies:
