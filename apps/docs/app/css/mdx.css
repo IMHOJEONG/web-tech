@@ -1,130 +1,140 @@
 .mdx-wrapper {
-  color: var(--foreground);
-  font-family: var(--font-body);
-  font-weight: 400;
-  line-height: 1.75;
-  padding-bottom: var(--space-xl);
+    color: var(--foreground);
+    font-family: var(--font-body-locale, var(--font-body), sans-serif);
+    font-weight: 400;
+    line-height: 1.75;
+    padding-bottom: var(--space-xl);
 }
 
 .mdx-h1,
 .mdx-h2,
 .mdx-h3,
 .mdx-h4 {
-  color: var(--on-surface);
-  font-family: var(--font-display);
+    color: var(--on-surface);
+    font-family: var(--font-display);
 }
 
 .mdx-h1 {
-  font-size: clamp(2.4rem, 4vw, 3rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-top: 2.5rem;
-  margin-bottom: 1.5rem;
+    font-size: clamp(2.4rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .mdx-h2 {
-  font-size: clamp(1.8rem, 3vw, 2rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  border-left: 4px solid var(--primary);
-  padding-left: 0.75rem;
-  margin-top: 2rem;
-  margin-bottom: 1.2rem;
+    font-size: clamp(1.8rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    border-left: 4px solid var(--primary);
+    padding-left: 0.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1.2rem;
 }
 
 .mdx-h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.3;
-  margin-top: 1.8rem;
-  margin-bottom: 0.8rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: 1.8rem;
+    margin-bottom: 0.8rem;
 }
 
 .mdx-h4 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.35;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .mdx-p {
-  color: var(--on-surface-variant);
-  font-size: 1.05rem;
-  margin: 1rem 0;
+    color: var(--on-surface-variant);
+    font-size: 1.05rem;
+    margin: 1rem 0;
 }
 
 .mdx-ul,
 .mdx-ol {
-  list-style-position: outside;
-  margin: 1.2rem 0;
-  padding-left: 1.6rem;
+    list-style-position: outside;
+    margin: 1.2rem 0;
+    padding-left: 1.6rem;
 }
 
 .mdx-ul {
-  list-style-type: disc;
+    list-style-type: disc;
 }
 
 .mdx-ol {
-  list-style-type: decimal;
+    list-style-type: decimal;
 }
 
 .mdx-li {
-  color: var(--on-surface-variant);
-  margin: 0.4rem 0;
+    color: var(--on-surface-variant);
+    margin: 0.4rem 0;
 }
 
 .mdx-a {
-  color: var(--primary);
-  font-weight: 500;
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--primary) 48%, transparent);
-  transition: opacity 0.2s ease, text-decoration-color 0.2s ease;
+    color: var(--primary);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--primary) 48%, transparent);
+    transition:
+        opacity 0.2s ease,
+        text-decoration-color 0.2s ease;
 }
 
 .mdx-a:hover {
-  opacity: 0.78;
-  text-decoration-color: var(--primary);
+    opacity: 0.78;
+    text-decoration-color: var(--primary);
 }
 
 .mdx-blockquote {
-  border-left: 4px solid var(--primary);
-  border-radius: var(--radius-lg);
-  background: color-mix(in srgb, var(--surface-container-low) 92%, transparent);
-  color: var(--on-surface-variant);
-  margin: 1.5rem 0;
-  padding: 1rem 1rem 1rem 1.1rem;
-  font-style: italic;
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius-lg);
+    background: color-mix(
+        in srgb,
+        var(--surface-container-low) 92%,
+        transparent
+    );
+    color: var(--on-surface-variant);
+    margin: 1.5rem 0;
+    padding: 1rem 1rem 1rem 1.1rem;
+    font-style: italic;
 }
 
 .mdx-inline-code {
-  border: 1px solid color-mix(in srgb, var(--primary) 16%, var(--border));
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--surface-container-lowest) 90%, transparent);
-  color: var(--primary);
-  padding: 0.15rem 0.45rem;
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
+    border: 1px solid color-mix(in srgb, var(--primary) 16%, var(--border));
+    border-radius: var(--radius-md);
+    background: color-mix(
+        in srgb,
+        var(--surface-container-lowest) 90%,
+        transparent
+    );
+    color: var(--primary);
+    padding: 0.15rem 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
 }
 
 .mdx-code-block {
-  background: var(--hf-bg-deep);
-  color: var(--inverse-surface);
-  border: 1px solid color-mix(in srgb, var(--primary) 14%, transparent);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--hf-shadow-deep);
-  overflow-x: auto;
-  margin: 1.5rem 0;
-  padding: 1.2rem;
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  line-height: 1.6;
+    background: var(--hf-bg-deep);
+    color: var(--inverse-surface);
+    border: 1px solid color-mix(in srgb, var(--primary) 14%, transparent);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--hf-shadow-deep);
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    padding: 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .mdx-img {
-  border-radius: var(--radius-xl);
-  margin: 1.5rem 0;
-  box-shadow: var(--hf-shadow-deep);
+    border-radius: var(--radius-xl);
+    margin: 1.5rem 0;
+    box-shadow: var(--hf-shadow-deep);
 }

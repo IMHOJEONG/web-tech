@@ -1,77 +1,215 @@
-// lib/get-search-data.ts
 import 'server-only'
 
-import { randomUUID } from 'crypto'
 import fg from 'fast-glob'
 import fs from 'fs/promises'
-import { read } from 'to-vfile'
-import { matter } from 'vfile-matter'
-import { fetchRemoteSearchData } from '~/lib/content-api'
+import path from 'path'
+import { VFile } from 'vfile'
+import { matter as vfileMatter } from 'vfile-matter'
+import type { Metadata } from '~/lib/get-document'
+import { fetchRemoteDocsData } from '~/lib/content-api'
 
 export type SearchData = {
-    slug: string
-    title?: string
-    content: string
-    excerpt: string
-    path: string
     id: string
+    title?: string
+    summary?: string
+    content: string
+    slug: string
+    fileName: string
+    date?: string
+    thumbnail?: string | null
+    href: string
+    section: string
 }
 
-// const CONTENT_DIRS = [
-//     path.join(process.cwd(), 'data'),
-//     path.join(process.cwd(), 'category'),
-//     // path.join(process.cwd(), 'content/notes'),
-// ]
+const LOCAL_SEARCH_PATTERNS = ['data/**/*.{md,mdx}', 'category/**/*.{md,mdx}']
 
-/**
- * 모든 mdx를 읽고
- * keyword가 있으면 content에 포함된 것만 반환
- */
-export async function getSearchData(keyword?: string): Promise<SearchData[]> {
-    const remoteResults = await fetchRemoteSearchData(keyword)
-
-    if (remoteResults) {
-        return remoteResults
+function normalizeThumbnailPath(thumbnail?: unknown) {
+    if (typeof thumbnail !== 'string') {
+        return null
     }
 
-    const files = await fg('**/*.mdx', {
+    const trimmed = thumbnail.trim()
+
+    if (!trimmed) {
+        return null
+    }
+
+    let thumbnailPath = trimmed
+    const idx = thumbnailPath.indexOf('public/')
+
+    if (idx !== -1) {
+        thumbnailPath = thumbnailPath.slice(idx + 'public/'.length)
+    }
+
+    if (!thumbnailPath.startsWith('/')) {
+        thumbnailPath = `/${thumbnailPath}`
+    }
+
+    return thumbnailPath
+}
+
+function stripFrontmatter(value: string) {
+    return value.replace(/---[\s\S]*?---/, '').trim()
+}
+
+function slugFromFileName(fileName: string) {
+    return fileName.split('/').filter(Boolean).pop() ?? ''
+}
+
+function inferSearchHref(fileName: string, slug: string) {
+    const segments = fileName.split('/').filter(Boolean)
+
+    if (segments[0] === 'category' && segments.length >= 4) {
+        const [, main, sub] = segments
+        return `/category/${main}/${sub}/${slug}`
+    }
+
+    return `/docs/${slug}`
+}
+
+function inferSearchSection(fileName: string) {
+    if (fileName.startsWith('category/fe/')) {
+        return 'Web'
+    }
+
+    if (fileName.startsWith('category/be/')) {
+        return 'Backend'
+    }
+
+    if (fileName.startsWith('category/computer-science/')) {
+        return 'Computer Science'
+    }
+
+    if (fileName.startsWith('data/shadcn/')) {
+        return 'UI/UX'
+    }
+
+    if (fileName.startsWith('data/v8/')) {
+        return 'Web'
+    }
+
+    return 'Docs'
+}
+
+function buildSearchHaystack(doc: SearchData) {
+    const pathTokens = doc.fileName.replace(/\//g, ' ').replace(/[-_]/g, ' ')
+
+    return [
+        doc.title,
+        doc.summary,
+        doc.slug,
+        doc.section,
+        pathTokens,
+        doc.content,
+    ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase()
+}
+
+function sortByDateDesc<T extends { date?: string }>(docs: T[]) {
+    return [...docs].sort((a, b) => {
+        const aTime = a.date ? new Date(a.date).getTime() : 0
+        const bTime = b.date ? new Date(b.date).getTime() : 0
+
+        return bTime - aTime
+    })
+}
+
+async function parseLocalSearchFile(filePath: string): Promise<SearchData> {
+    const fileContents = await fs.readFile(filePath, 'utf8')
+    const vfile = new VFile({ path: filePath, value: fileContents })
+    vfileMatter(vfile, { strip: true })
+    const data = (vfile.data.matter || {}) as {
+        id?: string | number
+        title?: string
+        slug?: string
+        summary?: string
+        date?: string | number
+        thumbnail?: string | null
+    }
+    const content = stripFrontmatter(String(vfile))
+    const fileName = path
+        .relative(process.cwd(), filePath)
+        .replace(/\.(mdx|md)$/i, '')
+        .replace(/\\/g, '/')
+    const slug =
+        typeof data.slug === 'string' && data.slug.trim()
+            ? data.slug.trim()
+            : slugFromFileName(fileName)
+
+    return {
+        id: String(data.id ?? fileName),
+        title:
+            typeof data.title === 'string' && data.title.trim()
+                ? data.title.trim()
+                : slug,
+        summary:
+            typeof data.summary === 'string' && data.summary.trim()
+                ? data.summary.trim()
+                : content.slice(0, 140),
+        content,
+        slug,
+        fileName,
+        date:
+            typeof data.date === 'string' || typeof data.date === 'number'
+                ? String(data.date)
+                : undefined,
+        thumbnail: normalizeThumbnailPath(data.thumbnail),
+        href: inferSearchHref(fileName, slug),
+        section: inferSearchSection(fileName),
+    }
+}
+
+function normalizeRemoteSearchDoc(doc: Partial<Metadata>): SearchData | null {
+    if (!doc.slug) {
+        return null
+    }
+
+    const fileName = doc.fileName ?? `remote/${doc.slug}`
+
+    return {
+        id: String(doc.id ?? doc.slug),
+        title: doc.title ?? doc.slug,
+        summary: doc.summary ?? '',
+        content: doc.content ?? '',
+        slug: doc.slug,
+        fileName,
+        date: doc.date,
+        thumbnail: doc.thumbnail ?? null,
+        href: `/docs/${doc.slug}`,
+        section: inferSearchSection(fileName),
+    }
+}
+
+async function getLocalSearchDocs() {
+    const files = await fg(LOCAL_SEARCH_PATTERNS, {
         cwd: process.cwd(),
         absolute: true,
     })
 
-    const results: SearchData[] = []
+    const docs = await Promise.all(files.map(parseLocalSearchFile))
+    return sortByDateDesc(docs)
+}
 
-    for (const filePath of files) {
-        const raw = await fs.readFile(filePath, 'utf-8')
+export async function getSearchData(keyword?: string): Promise<SearchData[]> {
+    const remoteDocs = await fetchRemoteDocsData()
 
-        const slug = filePath.replace(/\\/g, '/').replace(/\.mdx$/, '')
+    const docs = remoteDocs
+        ? sortByDateDesc(
+              remoteDocs
+                  .map(normalizeRemoteSearchDoc)
+                  .filter((doc): doc is SearchData => doc !== null)
+          )
+        : await getLocalSearchDocs()
 
-        // 간단한 frontmatter title 추출 (선택)
-        const titleMatch = raw.match(/title:\s*(.+)/)
-        const title = titleMatch?.[1]?.replace(/['"]/g, '')
+    const normalizedKeyword = keyword?.trim().toLowerCase()
 
-        // mdx에서 실제 content만 대충 정제
-        const content = raw
-            .replace(/---[\s\S]*?---/, '') // frontmatter 제거
-            .trim()
-
-        // 2. vfile-matter
-        const fileTest = await read(filePath)
-        matter(fileTest, { strip: true })
-
-        if (keyword && !content.toLowerCase().includes(keyword.toLowerCase())) {
-            continue
-        }
-
-        results.push({
-            slug,
-            id: `${fileTest.data.matter?.title} ${randomUUID()}`,
-            title,
-            content,
-            excerpt: content.slice(0, 200),
-            path: filePath,
-        })
+    if (!normalizedKeyword) {
+        return docs
     }
 
-    return results
+    return docs.filter((doc) =>
+        buildSearchHaystack(doc).includes(normalizedKeyword)
+    )
 }

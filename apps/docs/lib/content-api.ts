@@ -452,15 +452,28 @@ function normalizeSearchResult(post: Partial<Metadata>): SearchData | null {
     }
 
     const content = post.content ?? ''
-    const excerpt = post.summary || content.slice(0, 200)
+    const summary = post.summary || content.slice(0, 200)
+    const fileName = post.markdownPath ?? post.fileName ?? `remote/${post.slug}`
 
     return {
-        slug: post.slug,
         id: `${post.id ?? post.slug}`,
         title: post.title,
+        summary,
         content,
-        excerpt,
-        path: post.markdownPath ?? post.fileName ?? `remote/${post.slug}`,
+        slug: post.slug,
+        fileName,
+        date: post.date,
+        thumbnail: post.thumbnail ?? null,
+        href: `/docs/${post.slug}`,
+        section: fileName.startsWith('data/shadcn/')
+            ? 'UI/UX'
+            : fileName.startsWith('category/fe/')
+              ? 'Web'
+              : fileName.startsWith('category/be/')
+                ? 'Backend'
+                : fileName.startsWith('category/computer-science/')
+                  ? 'Computer Science'
+                  : 'Docs',
     }
 }
 

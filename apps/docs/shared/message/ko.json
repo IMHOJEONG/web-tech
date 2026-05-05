@@ -37,7 +37,8 @@
         "placeholder": "문서를 검색해보세요",
         "empty": {
             "result-title": "{keyword}에 맞는 결과가 없습니다",
-            "result-description": "다른 키워드로 검색해보세요"
+            "result-description": "다른 키워드로 검색하거나 추천 주제에서 다시 시작해보세요",
+            "clear": "전체 문서로 돌아가기"
         }
     }
 }

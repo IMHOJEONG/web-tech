@@ -37,7 +37,8 @@
         "placeholder": "Search the docs",
         "empty": {
             "result-title": "No results found for \"{keyword}\"",
-            "result-description": "Try searching with a different keyword"
+            "result-description": "Try another keyword or restart from one of the suggested topics",
+            "clear": "Back to all docs"
         }
     }
 }

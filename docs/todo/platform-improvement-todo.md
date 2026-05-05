@@ -29,9 +29,11 @@
 - [ ] `P1` 콘텐츠 운영 모델을 정한다.
   - `apps/docs/data` 기반 정적 운영을 유지할지
   - 별도 CMS/DB/API 계약으로 확장할지 결정
-- [ ] `P2` 검색 경험의 목표를 정의한다.
-  - 제목/본문/태그 검색 범위
-  - empty state와 추천 검색어 정책
+- [x] `P2` 검색 경험의 목표를 정의한다.
+  - 검색 결과는 `/docs?q=...` 상태로 운영
+  - 검색 범위는 `title / summary / taxonomy / content` 우선순위로 정리
+  - empty state와 추천 검색어 정책 문서화
+  - 기준 문서: `docs/architecture/docs-search-experience-policy.md`
 
 ## Code / Architecture
 

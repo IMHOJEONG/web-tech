@@ -4,7 +4,6 @@ import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import NextTopLoader from 'nextjs-toploader'
 import { Suspense } from 'react'
-import { maruburi } from '~/components/maruburi-font'
 import { mono } from '~/components/mono-font'
 
 import Script from 'next/script'
@@ -21,8 +20,15 @@ const inter = Inter({
     variable: '--font-body',
 })
 
+const pretendard = localFont({
+    src: '../public/fonts/PretendardVariable.woff2',
+    display: 'swap',
+    weight: '45 920',
+    variable: '--font-body-ko',
+})
+
 const spaceGrotesk = localFont({
-    src: '../public/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf',
+    src: '../public/fonts/SpaceGroteskVariable.woff2',
     weight: '300 700',
     display: 'swap',
     variable: '--font-display',
@@ -60,9 +66,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <body
                     className={cn(
                         'flex size-full min-h-screen flex-col',
-                        maruburi.variable,
                         mono.variable,
                         inter.variable,
+                        pretendard.variable,
                         spaceGrotesk.variable
                     )}
                 >
