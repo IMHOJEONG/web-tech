@@ -72,7 +72,7 @@
 
 ## UI / UX
 
-- [ ] `P0` `640px ~ 1023px` 구간의 shell/UI 동작을 실제 디바이스 기준으로 점검한다.
+- [-] `P0` `640px ~ 1023px` 구간의 shell/UI 동작을 실제 디바이스 기준으로 점검한다.
   - header
   - mobile drawer
   - bottom nav

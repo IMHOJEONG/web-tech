@@ -52,6 +52,8 @@
 - `apps/docs/widgets/app-shell/ui/mobile-bottom-nav.tsx`
 - `apps/docs/widgets/app-shell/ui/navigation.tsx`
 - `apps/docs/app/layout.tsx`
+- `apps/docs/widgets/m/ui/main-feed.tsx`
+- `apps/docs/widgets/article-detail/ui/article-detail.tsx`
 
 ### Follow-up
 

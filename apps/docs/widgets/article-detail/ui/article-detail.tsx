@@ -22,7 +22,7 @@ function SidebarSection({
 }) {
     return (
         <section className="space-y-4">
-            <p className="font-display text-[0.625rem] leading-[0.9375rem] tracking-[0.2em] text-outline uppercase">
+            <p className="font-display text-[0.625rem] leading-3.75 tracking-[0.2em] text-outline uppercase">
                 {title}
             </p>
             {children}
@@ -61,7 +61,7 @@ function NewsletterCard({
                 {compact ? (
                     <div className="space-y-2">
                         <input
-                            className="w-full border border-zinc-700 bg-surface-container px-3 py-3 text-sm tracking-[0.05em] text-zinc-300 uppercase outline-none transition-colors focus:border-primary"
+                            className="w-full border border-zinc-700 bg-surface-container px-3 py-3 text-sm tracking-wider text-zinc-300 uppercase outline-none transition-colors focus:border-primary"
                             placeholder={placeholder}
                         />
                         <button className="w-full bg-primary px-4 py-3 font-display text-sm tracking-[0.12em] text-primary-foreground uppercase transition-opacity hover:opacity-90">
@@ -71,7 +71,7 @@ function NewsletterCard({
                 ) : (
                     <div className="space-y-4">
                         <input
-                            className="w-full border border-zinc-700 bg-surface-container px-4 py-3 text-sm tracking-[0.05em] text-zinc-300 outline-none transition-colors focus:border-primary"
+                            className="w-full border border-zinc-700 bg-surface-container px-4 py-3 text-sm tracking-wider text-zinc-300 outline-none transition-colors focus:border-primary"
                             placeholder={placeholder}
                         />
                         <button className="w-full bg-primary px-4 py-3 font-display text-sm tracking-[0.12em] text-primary-foreground uppercase transition-opacity hover:opacity-90">
@@ -132,15 +132,15 @@ export async function ArticleDetail({ channel }: ArticleDetailProps) {
                 <div className="h-full w-1/3 bg-primary shadow-[0_0_10px_rgba(0,220,229,0.5)]" />
             </div>
 
-            <div className="mx-auto grid w-full max-w-page gap-8 px-4 pb-20 pt-32 sm:px-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
-                <article className="min-w-0 space-y-12">
+            <div className="mx-auto grid w-full max-w-page gap-6 px-4 pb-16 pt-24 sm:px-6 md:px-8 lg:gap-8 lg:pb-20 lg:pt-32 lg:grid-cols-[minmax(0,1fr)_20rem]">
+                <article className="min-w-0 space-y-10 lg:space-y-12">
                     <section className="space-y-6">
                         <div className="flex flex-wrap items-center gap-2">
-                            <span className="rounded-sm bg-secondary/15 px-3 py-1 font-display text-xs tracking-[0.05em] text-secondary uppercase">
+                            <span className="rounded-sm bg-secondary/15 px-3 py-1 font-display text-xs tracking-wider text-secondary uppercase">
                                 {meta.badge}
                             </span>
                             <span className="text-on-surface-variant">•</span>
-                            <span className="font-display text-xs tracking-[0.05em] text-outline uppercase">
+                            <span className="font-display text-xs tracking-wider text-outline uppercase">
                                 {t('hero.readTime')}
                             </span>
                         </div>
@@ -171,17 +171,17 @@ export async function ArticleDetail({ channel }: ArticleDetailProps) {
                     </section>
 
                     <section className="overflow-hidden rounded-sm border border-border bg-surface-container-lowest">
-                        <div className="relative aspect-[16/9]">
+                        <div className="relative aspect-video">
                             <img
                                 src={imgAbstractTechnologyHero}
                                 alt={t('hero.heroImageAlt')}
                                 className="h-full w-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
+                            <div className="absolute inset-0 bg-linear-to-t from-background/70 to-transparent" />
                         </div>
                     </section>
 
-                    <section className="space-y-6 text-body-lg text-on-surface-variant">
+                    <section className="space-y-5 text-body-lg text-on-surface-variant lg:space-y-6">
                         <p>{t('body.intro')}</p>
 
                         <div className="space-y-4 pt-4">
@@ -201,7 +201,7 @@ export async function ArticleDetail({ channel }: ArticleDetailProps) {
                                 {t('code.actionLabel')}
                             </span>
                         </div>
-                        <pre className="overflow-x-auto px-6 py-10 font-mono text-sm leading-[1.5] text-zinc-200">
+                        <pre className="overflow-x-auto px-6 py-10 font-mono text-sm leading-normal text-zinc-200">
                             <code>{`async function initializeNode(id: string) {
   // Initialize high-frequency stream
   const stream = await connectToRegistry(id);
@@ -221,7 +221,7 @@ const useReactiveState = (stream$) => {
                         </pre>
                     </section>
 
-                    <section className="space-y-6 text-body-lg text-on-surface-variant">
+                    <section className="space-y-5 text-body-lg text-on-surface-variant lg:space-y-6">
                         <p>{t('body.streamParagraph')}</p>
 
                         <div className="space-y-4 pt-4">
@@ -253,9 +253,9 @@ const useReactiveState = (stream$) => {
                             </h2>
                         </div>
 
-                        <div className="rounded-lg border border-border bg-surface-container-low p-8">
+                        <div className="rounded-lg border border-border bg-surface-container-low p-6 sm:p-7 lg:p-8">
                             <div className="mx-auto max-w-[16rem] overflow-hidden rounded-[3rem] border-8 border-zinc-900 bg-black shadow-deep">
-                                <div className="relative aspect-[256/500]">
+                                <div className="relative aspect-256/500">
                                     <img
                                         src={imgMobileInterfaceMockup}
                                         alt={t('body.mobileMockupAlt')}
@@ -279,7 +279,7 @@ const useReactiveState = (stream$) => {
                         />
                     </section>
 
-                    <section className="border-t border-border pt-8">
+                    <section className="border-t border-border pt-6 lg:pt-8">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                             <div className="size-12 shrink-0 overflow-hidden rounded-full border border-border bg-surface-container">
                                 <img
@@ -362,7 +362,7 @@ const useReactiveState = (stream$) => {
                                     <h3 className="mt-2 font-display text-base leading-[1.4] text-on-surface">
                                         {signal.title}
                                     </h3>
-                                    <p className="mt-1 font-display text-[0.625rem] tracking-[0.1em] text-outline uppercase">
+                                    <p className="mt-1 font-display text-[0.625rem] tracking-widest text-outline uppercase">
                                         {signal.meta}
                                     </p>
                                 </Link>

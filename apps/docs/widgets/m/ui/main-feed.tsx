@@ -160,7 +160,7 @@ function FeedBadge({ label, className }: { label: string; className: string }) {
     return (
         <div
             className={cn(
-                'font-display inline-flex items-center gap-2 rounded-[0.125rem] px-3 py-1 text-[0.625rem] tracking-[0.2em] uppercase',
+                'font-display inline-flex items-center gap-2 rounded-xs px-3 py-1 text-[0.625rem] tracking-[0.2em] uppercase',
                 className
             )}
         >
@@ -180,13 +180,13 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
             href={`/docs/${doc.slug}`}
             className="group ds-card col-span-12 grid w-full min-w-0 overflow-hidden bg-surface-container-low lg:col-span-8 lg:grid-cols-2"
         >
-            <div className="flex w-full min-w-0 self-stretch flex-col justify-between p-8">
+            <div className="flex w-full min-w-0 self-stretch flex-col justify-between p-6 sm:p-7 lg:p-8">
                 <div className="w-full min-w-0 self-stretch space-y-4">
                     <FeedBadge
                         label={`${topic.label} DEVELOPMENT`}
                         className={topic.badgeClassName}
                     />
-                    <h3 className="font-display text-[1.75rem] leading-[1.25] font-bold tracking-[-0.03em] text-on-surface">
+                    <h3 className="font-display text-[1.75rem] leading-tight font-bold tracking-[-0.03em] text-on-surface">
                         {doc.title}
                     </h3>
                     <p
@@ -204,7 +204,7 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
                 </div>
             </div>
 
-            <div className="relative min-h-[18rem] overflow-hidden">
+            <div className="relative min-h-72 overflow-hidden">
                 <Image
                     src={doc.thumbnail ?? '/default/no-image.webp'}
                     alt={doc.title}
@@ -225,7 +225,7 @@ function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
     return (
         <Link
             href={`/docs/${doc.slug}`}
-            className="group ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-8 lg:col-span-4"
+            className="group ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-6 sm:p-7 lg:col-span-4 lg:p-8"
         >
             <div className="w-full min-w-0 self-stretch space-y-4">
                 <FeedBadge
@@ -265,7 +265,7 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
             href={`/docs/${doc.slug}`}
             className="group ds-card col-span-12 flex h-full w-full min-w-0 flex-col overflow-hidden bg-surface-container-low lg:col-span-4"
         >
-            <div className="relative aspect-[4/3] overflow-hidden bg-surface">
+            <div className="relative aspect-4/3 overflow-hidden bg-surface">
                 <Image
                     src={doc.thumbnail ?? '/default/no-image.webp'}
                     alt={doc.title}
@@ -276,7 +276,7 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,19,25,0.12),rgba(17,19,25,0.4))]" />
             </div>
 
-            <div className="flex w-full min-w-0 flex-1 self-stretch flex-col gap-4 p-8">
+            <div className="flex w-full min-w-0 flex-1 self-stretch flex-col gap-4 p-6 sm:p-7 lg:p-8">
                 <FeedBadge
                     label={topic.label}
                     className={topic.badgeClassName}
@@ -316,7 +316,7 @@ function TextSupportCard({
     footer: React.ReactNode
 }) {
     return (
-        <article className="ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-8 lg:col-span-4">
+        <article className="ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-6 sm:p-7 lg:col-span-4 lg:p-8">
             <div className="w-full min-w-0 self-stretch space-y-4">
                 <FeedBadge
                     label={topic.label}
@@ -391,8 +391,8 @@ export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
 
     return (
         <main className="w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
-            <section className="border-b border-white/5 bg-surface-container-lowest px-4 pb-20 pt-20 sm:px-8">
-                <div className="mx-auto grid max-w-page gap-12 lg:grid-cols-12 lg:items-center">
+            <section className="border-b border-white/5 bg-surface-container-lowest px-4 pb-16 pt-16 sm:px-6 md:px-8 lg:pb-20 lg:pt-20">
+                <div className="mx-auto grid max-w-page gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
                     <div className="space-y-6 lg:col-span-7">
                         <FeedBadge
                             label="TRENDING NOW"
@@ -400,7 +400,7 @@ export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
                         />
 
                         <div className="space-y-5">
-                            <div className="max-w-[42rem]">
+                            <div className="max-w-2xl">
                                 <span
                                     className={cn(
                                         'font-display block text-headline-xl text-on-surface',
@@ -470,8 +470,8 @@ export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
                 </div>
             </section>
 
-            <section className="px-4 py-16 sm:px-8">
-                <div className="mx-auto max-w-page space-y-12">
+            <section className="px-4 py-12 sm:px-6 md:px-8 lg:py-16">
+                <div className="mx-auto max-w-page space-y-10 lg:space-y-12">
                     <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                         <div className="space-y-2">
                             <div className="flex items-center gap-3">
@@ -491,7 +491,7 @@ export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
                                     key={filter}
                                     type="button"
                                     className={cn(
-                                        'font-display border px-[1.0625rem] py-[0.5625rem] text-sm transition-colors',
+                                        'font-display border px-4.25 py-2.25 text-sm transition-colors',
                                         index === 0
                                             ? 'border-white/10 bg-surface-container text-cyan-400'
                                             : 'border-white/5 bg-surface-container-low text-on-surface-variant hover:text-on-surface'
@@ -549,7 +549,7 @@ export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
                     <div className="flex justify-center pt-4">
                         <Link
                             href="/feed"
-                            className="font-display inline-flex items-center gap-4 border border-white/10 px-12 py-4 text-base text-on-surface transition-colors hover:border-cyan-400/40 hover:text-cyan-300"
+                            className="font-display inline-flex items-center gap-4 border border-white/10 px-8 py-3 text-sm text-on-surface transition-colors hover:border-cyan-400/40 hover:text-cyan-300 sm:px-10 sm:py-4 sm:text-base"
                         >
                             LOAD MORE SEQUENCES
                             <ArrowRight className="size-4" />

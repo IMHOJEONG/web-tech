@@ -47,7 +47,7 @@ export const Search = () => {
             </button>
             <Input
                 ref={inputRef}
-                className="h-8 w-0 border-0 border-b border-b-transparent bg-transparent px-0 py-0 text-sm text-zinc-100 opacity-0 shadow-none transition-all duration-200 placeholder:text-zinc-500 group-focus-within:w-36 group-focus-within:border-b-cyan-400/70 group-focus-within:px-1.5 group-focus-within:opacity-100 focus-visible:ring-0 focus-visible:ring-offset-0"
+                className="h-8 w-0 border-0 border-b border-b-transparent bg-transparent px-0 py-0 text-sm text-zinc-100 opacity-0 shadow-none transition-all duration-200 placeholder:text-zinc-500 group-focus-within:w-24 group-focus-within:border-b-cyan-400/70 group-focus-within:px-1.5 group-focus-within:opacity-100 md:group-focus-within:w-32 lg:group-focus-within:w-36 focus-visible:ring-0 focus-visible:ring-offset-0"
                 defaultValue={currentKeyword}
                 maxLength={40}
                 minLength={1}

@@ -7,27 +7,27 @@ import { Navigation } from './navigation'
 
 export default function Header() {
     return (
-        <header className="sticky top-0 z-50 h-[4.0625rem] w-full border-b border-white/10 bg-zinc-950/80 text-white backdrop-blur-[12px]">
-            <div className="relative mx-auto flex h-16 w-full max-w-page items-center justify-between px-4 sm:px-6 md:px-8">
+        <header className="sticky top-0 z-50 h-16.25 w-full border-b border-white/10 bg-zinc-950/80 text-white backdrop-blur-md">
+            <div className="mx-auto flex h-16 w-full max-w-page items-center justify-between px-4 sm:grid sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-4 sm:px-6 md:gap-6 md:px-8">
                 <MobileNavDrawer />
 
-                <div className="hidden min-w-0 flex-1 items-center justify-start sm:flex">
+                <div className="hidden min-w-0 items-center justify-start sm:flex">
                     <Link
-                        className="font-display flex items-center text-xl font-bold leading-7 tracking-[0.1em] text-cyan-400 uppercase"
+                        className="font-display flex items-center text-xl font-bold leading-7 tracking-widest text-cyan-400 uppercase"
                         href="/"
                     >
                         <Brand />
                     </Link>
                 </div>
 
-                <div className="hidden sm:absolute sm:left-1/2 sm:flex sm:-translate-x-1/2 sm:items-center sm:justify-center">
+                <div className="hidden min-w-0 sm:flex sm:items-center sm:justify-center">
                     <Navigation />
                 </div>
 
-                <div className="flex min-w-0 items-center justify-end sm:flex-1">
-                    <div className="flex shrink-0 items-center gap-4 sm:gap-5 md:gap-6">
+                <div className="flex min-w-0 items-center justify-end">
+                    <div className="flex shrink-0 items-center gap-3 sm:gap-4 md:gap-5">
                         <Search />
-                        <div className="hidden sm:block">
+                        <div className="hidden md:block">
                             <ThemeToggle />
                         </div>
                     </div>
