@@ -22,9 +22,10 @@
 
 ## Planning / Product
 
-- [ ] `P1` `docs` 앱의 정보구조를 확정한다.
-  - `Feed / Web / Mobile / UI/UX / About`의 목적, 관계, 이동 흐름을 명시
-  - 상세 페이지와 허브 페이지의 역할 차이를 문서화
+- [x] `P1` `docs` 앱의 정보구조를 확정한다.
+  - `Feed / Web / Mobile / UI/UX / About`를 사용자-facing IA로 정의
+  - `Category`는 taxonomy 허브, 허브 페이지는 탐색 단위, 상세 페이지는 학습 단위로 문서화
+  - 기준 문서: `docs/architecture/docs-app-information-architecture.md`
 - [ ] `P1` 콘텐츠 운영 모델을 정한다.
   - `apps/docs/data` 기반 정적 운영을 유지할지
   - 별도 CMS/DB/API 계약으로 확장할지 결정
