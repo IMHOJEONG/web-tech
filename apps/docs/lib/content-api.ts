@@ -1,6 +1,6 @@
 import 'server-only'
 
-import { JSDOM } from 'jsdom'
+import sanitizeHtml from 'sanitize-html'
 import type { Metadata } from '~/lib/get-document'
 import type { ContentFormat } from '~/lib/get-document'
 import type { ContentSource } from '~/lib/get-document'
@@ -39,26 +39,71 @@ type RemotePayload =
           results?: RemotePost[]
       }
 
-const DISALLOWED_REMOTE_TAGS = [
-    'script',
-    'style',
-    'iframe',
-    'object',
-    'embed',
-    'form',
-    'meta',
-    'link',
-    'base',
+const ALLOWED_REMOTE_HTML_TAGS = [
+    'a',
+    'abbr',
+    'article',
+    'aside',
+    'b',
+    'blockquote',
+    'br',
+    'caption',
+    'code',
+    'col',
+    'colgroup',
+    'dd',
+    'del',
+    'details',
+    'div',
+    'dl',
+    'dt',
+    'em',
+    'figcaption',
+    'figure',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'hr',
+    'i',
+    'img',
+    'ins',
+    'li',
+    'mark',
+    'ol',
+    'p',
+    'picture',
+    'pre',
+    'section',
+    'small',
+    'source',
+    'span',
+    'strong',
+    'sub',
+    'summary',
+    'sup',
+    'table',
+    'tbody',
+    'td',
+    'tfoot',
+    'th',
+    'thead',
+    'tr',
+    'u',
+    'ul',
 ] as const
 
-const URL_ATTRIBUTE_NAMES = new Set([
-    'href',
-    'src',
-    'xlink:href',
-    'action',
-    'formaction',
-    'poster',
-])
+const ALLOWED_REMOTE_HTML_ATTRIBUTES: Record<string, string[]> = {
+    '*': ['aria-*', 'class', 'data-*', 'dir', 'id', 'lang', 'role', 'title'],
+    a: ['href', 'name', 'rel', 'target'],
+    img: ['alt', 'height', 'loading', 'src', 'srcset', 'width'],
+    source: ['media', 'sizes', 'src', 'srcset', 'type'],
+    td: ['colspan', 'rowspan'],
+    th: ['colspan', 'rowspan', 'scope'],
+    col: ['span', 'width'],
+}
 
 function trimTrailingSlash(value: string) {
     return value.replace(/\/+$/, '')
@@ -210,40 +255,31 @@ function normalizeRemoteReference(reference: string) {
 }
 
 function sanitizeRemoteHtml(content: string) {
-    const dom = new JSDOM(content)
-    const { document } = dom.window
+    return sanitizeHtml(content, {
+        allowedTags: [...ALLOWED_REMOTE_HTML_TAGS],
+        allowedAttributes: ALLOWED_REMOTE_HTML_ATTRIBUTES,
+        disallowedTagsMode: 'discard',
+        allowedSchemes: ['http', 'https', 'mailto', 'ftp'],
+        allowedSchemesAppliedToAttributes: ['href', 'src', 'srcset'],
+        allowProtocolRelative: false,
+        parser: {
+            lowerCaseAttributeNames: true,
+        },
+        transformTags: {
+            a: (tagName, attribs) => {
+                const sanitizedAttribs = { ...attribs }
 
-    DISALLOWED_REMOTE_TAGS.forEach((tagName) => {
-        document.querySelectorAll(tagName).forEach((node) => node.remove())
+                if (sanitizedAttribs.target === '_blank') {
+                    sanitizedAttribs.rel = 'noopener noreferrer'
+                }
+
+                return {
+                    tagName,
+                    attribs: sanitizedAttribs,
+                }
+            },
+        },
     })
-
-    document.querySelectorAll('*').forEach((element) => {
-        Array.from(element.attributes).forEach((attribute) => {
-            const attributeName = attribute.name.toLowerCase()
-
-            if (attributeName.startsWith('on') || attributeName === 'srcdoc') {
-                element.removeAttribute(attribute.name)
-                return
-            }
-
-            if (!URL_ATTRIBUTE_NAMES.has(attributeName)) {
-                return
-            }
-
-            const normalizedValue = attribute.value
-                .replace(/[\u0000-\u0020\u007f-\u009f]+/g, '')
-                .toLowerCase()
-
-            if (
-                normalizedValue.startsWith('javascript:') ||
-                normalizedValue.startsWith('vbscript:')
-            ) {
-                element.setAttribute(attribute.name, '#')
-            }
-        })
-    })
-
-    return document.body.innerHTML
 }
 
 function normalizeRemoteContent(
