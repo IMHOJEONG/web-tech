@@ -16,11 +16,7 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  "tailwindCSS.classFunctions": [
-    "cn",
-    "cva",
-    "cx"
-  ],
+  "tailwindCSS.classFunctions": ["cn", "cva", "cx"],
   "tailwindCSS.lint.suggestCanonicalClasses": "error",
-  "tailwindCSS.lint.recommendedVariantOrder": "error"
+  "tailwindCSS.lint.recommendedVariantOrder": "error",
 }
