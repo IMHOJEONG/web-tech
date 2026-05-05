@@ -97,9 +97,10 @@
 
 - [ ] `P1` Figma asset 의존 화면을 모두 `public/figma/*` 또는 정식 에셋으로 이관한다.
   - `article-detail` 외 나머지 페이지도 점검
-- [ ] `P1` 디자인 토큰 사용 일관성을 높인다.
+- [-] `P1` 디자인 토큰 사용 일관성을 높인다.
   - 하드코딩 색상, radius, shadow 제거
   - `design.md` 토큰 기준으로 치환
+  - 1차 적용: `MainFeed`, `DocsIndex`, `ArticleDetail`, `AboutUs`, `Search`
 - [ ] `P2` mobile/top/bottom chrome 아이콘을 Figma 자산 또는 확정 아이콘 세트로 통일한다.
 - [ ] `P2` 라이트 모드/다크 모드 시안 차이를 페이지별로 점검한다.
   - `About`

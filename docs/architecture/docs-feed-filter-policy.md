@@ -2,13 +2,13 @@
 
 ## Purpose
 
-이 문서는 `apps/docs`의 `MainFeed` 필터 인터랙션을 어떤 방식으로 운영할지 정리합니다.
+이 문서는 `apps/docs`의 `MainFeed` 필터를 어떤 방식으로 운영할지 정리합니다.
 
 이 문서는 다음 질문에 답하도록 작성합니다.
 
-- `MainFeed` 필터 상태는 어디에 저장해야 하는가
+- `Feed` 필터 상태는 어디에 저장해야 하는가
 - `client filter`, `route transition`, `query string` 중 무엇을 선택하는가
-- `Feed` 허브와 `Web / Mobile / UI/UX` 허브의 역할은 어떻게 겹치지 않게 유지하는가
+- `Feed`와 `Web / Mobile / UI/UX` 허브의 역할은 어떻게 겹치지 않게 유지하는가
 
 ## Core Decision
 
@@ -39,7 +39,7 @@ URL에 필터 상태가 남기 때문에:
 
 ### 2. 현재 IA와 잘 맞는다
 
-이미 `docs` 앱은 검색을 `/docs?q=...` 형태로 다루고 있습니다.
+이미 검색은 `/docs?q=...` 형태로 운영하고 있습니다.
 
 그래서 `Feed`도:
 

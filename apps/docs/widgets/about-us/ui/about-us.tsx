@@ -93,7 +93,7 @@ export async function AboutUs() {
                 </section>
 
                 <section className="grid grid-cols-12 gap-6">
-                    <article className="ds-card col-span-12 flex min-h-88 flex-col justify-between rounded-lg bg-surface-container-low p-12 lg:col-span-8">
+                    <article className="ds-card col-span-12 flex min-h-88 flex-col justify-between bg-surface-container-low p-12 lg:col-span-8">
                         <div className="space-y-4">
                             <PillBadge
                                 label={webCard.eyebrow}
@@ -113,7 +113,7 @@ export async function AboutUs() {
                         </div>
                     </article>
 
-                    <article className="ds-card col-span-12 flex min-h-88 flex-col justify-between rounded-lg bg-surface-container-low p-12 lg:col-span-4">
+                    <article className="ds-card col-span-12 flex min-h-88 flex-col justify-between bg-surface-container-low p-12 lg:col-span-4">
                         <div className="space-y-4">
                             <PillBadge
                                 label={mobileCard.eyebrow}
@@ -133,7 +133,7 @@ export async function AboutUs() {
                         </div>
                     </article>
 
-                    <article className="ds-card col-span-12 grid min-h-76 rounded-lg bg-surface-container-low p-12 lg:grid-cols-[1.4fr_0.9fr] lg:items-center lg:gap-8">
+                    <article className="ds-card col-span-12 grid min-h-76 bg-surface-container-low p-12 lg:grid-cols-[1.4fr_0.9fr] lg:items-center lg:gap-8">
                         <div className="space-y-4">
                             <PillBadge
                                 label={designCard.eyebrow}
@@ -154,7 +154,7 @@ export async function AboutUs() {
                 </section>
 
                 <section className="grid gap-16 pt-8 lg:grid-cols-2">
-                    <article className="ds-card relative rounded-lg bg-surface-container p-8 shadow-glow-primary">
+                    <article className="ds-card relative bg-surface-container p-8 shadow-glow-primary">
                         <div className="space-y-8">
                             <div className="flex items-center gap-6">
                                 <div className="flex size-20 items-center justify-center rounded-xl border-2 border-primary bg-[linear-gradient(135deg,var(--surface-container-low),var(--surface-container-high))] text-2xl font-bold text-primary">
@@ -177,14 +177,14 @@ export async function AboutUs() {
                             <div className="flex flex-wrap gap-4">
                                 <a
                                     href="#"
-                                    className="inline-flex items-center gap-2 rounded-sm border border-outline-variant bg-surface-container-low px-4 py-2 text-sm text-on-surface transition-colors hover:border-primary hover:text-primary"
+                                    className="ds-button-secondary gap-2 px-4 py-2 text-sm"
                                 >
                                     <FaGithub className="size-4" />
                                     {t('profile.github')}
                                 </a>
                                 <a
                                     href="#"
-                                    className="inline-flex items-center gap-2 rounded-sm border border-outline-variant bg-surface-container-low px-4 py-2 text-sm text-on-surface transition-colors hover:border-primary hover:text-primary"
+                                    className="ds-button-secondary gap-2 px-4 py-2 text-sm"
                                 >
                                     <FaXTwitter className="size-4" />
                                     {t('profile.twitter')}

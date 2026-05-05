@@ -71,32 +71,32 @@ async function DocsIndexCard({ doc }: { doc: SearchData }) {
     return (
         <Link
             href={doc.href}
-            className="group rounded-3xl border border-zinc-200/80 bg-white/95 p-5 shadow-[0_16px_40px_rgba(24,24,27,0.05)] transition-all hover:-translate-y-0.5 hover:border-zinc-300 hover:shadow-[0_20px_48px_rgba(24,24,27,0.08)] dark:border-zinc-800 dark:bg-zinc-950/90 dark:hover:border-zinc-700"
+            className="group ds-card bg-surface-container-lowest p-5 hover:-translate-y-0.5"
         >
             <div className="flex items-start justify-between gap-3">
                 <div className="space-y-3">
                     <div className="flex flex-wrap items-center gap-2">
-                        <span className="rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
+                        <span className="ds-chip-muted px-2.5 py-1 text-[0.6875rem] font-semibold tracking-[0.18em]">
                             {doc.section}
                         </span>
                         {doc.date && (
-                            <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                            <span className="text-xs text-outline">
                                 {getTime(doc.date)}
                             </span>
                         )}
                     </div>
                     <div className="space-y-2">
-                        <h3 className="text-lg font-semibold tracking-[-0.02em] text-zinc-900 transition-colors group-hover:text-zinc-700 dark:text-zinc-100 dark:group-hover:text-zinc-200">
+                        <h3 className="text-lg font-semibold tracking-[-0.02em] text-on-surface transition-colors group-hover:text-primary">
                             {doc.title ?? doc.slug}
                         </h3>
                         {doc.summary && (
-                            <p className="line-clamp-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                            <p className="line-clamp-3 text-sm leading-6 text-on-surface-variant">
                                 {doc.summary}
                             </p>
                         )}
                     </div>
                 </div>
-                <span className="shrink-0 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400 transition-colors group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+                <span className="shrink-0 text-xs font-semibold uppercase tracking-[0.18em] text-outline transition-colors group-hover:text-primary">
                     {t('card.open')}
                 </span>
             </div>
@@ -117,19 +117,19 @@ export async function DocsIndex({
         return (
             <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
                 <div className="space-y-8">
-                    <section className="rounded-[28px] border border-zinc-200/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(244,244,245,0.92))] p-6 shadow-[0_20px_60px_rgba(24,24,27,0.06)] dark:border-zinc-800 dark:bg-[linear-gradient(180deg,rgba(24,24,27,0.96),rgba(9,9,11,0.92))] sm:p-8">
+                    <section className="ds-panel p-6 sm:p-8">
                         <div className="space-y-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
+                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-outline">
                                 {t('search.eyebrow')}
                             </p>
-                            <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-4xl">
+                            <h1 className="text-3xl font-extrabold tracking-tight text-on-surface sm:text-4xl">
                                 {t('search.title', { keyword })}
                             </h1>
-                            <p className="text-sm leading-7 text-zinc-500 dark:text-zinc-400 sm:text-base">
+                            <p className="text-sm leading-7 text-on-surface-variant sm:text-base">
                                 {t('search.description')}
                             </p>
                             <div className="flex flex-wrap gap-2 pt-2">
-                                <span className="rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+                                <span className="ds-chip-muted px-3 py-1 text-xs font-medium normal-case tracking-normal">
                                     {t('search.countLabel', {
                                         count: docs.length,
                                     })}
@@ -138,7 +138,7 @@ export async function DocsIndex({
                                     <Link
                                         key={term}
                                         href={`/docs?q=${encodeURIComponent(term)}`}
-                                        className="rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-600 transition-colors hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300 dark:hover:border-zinc-700 dark:hover:bg-zinc-900"
+                                        className="ds-chip-muted px-3 py-1 text-xs font-medium normal-case tracking-normal hover:border-primary hover:text-primary"
                                     >
                                         {term}
                                     </Link>
@@ -150,16 +150,16 @@ export async function DocsIndex({
                     <section className="space-y-4">
                         <div className="flex items-center justify-between gap-3">
                             <div>
-                                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
+                                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-outline">
                                     {t('search.matchingEyebrow')}
                                 </p>
-                                <h2 className="mt-2 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+                                <h2 className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
                                     {t('search.matchingTitle')}
                                 </h2>
                             </div>
                             <Link
                                 href="/docs"
-                                className="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+                                className="text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
                             >
                                 {t('search.backToDocs')}
                             </Link>
@@ -178,17 +178,17 @@ export async function DocsIndex({
     return (
         <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
             <div className="space-y-8">
-                <section className="rounded-[28px] border border-zinc-200/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(244,244,245,0.92))] p-6 shadow-[0_20px_60px_rgba(24,24,27,0.06)] dark:border-zinc-800 dark:bg-[linear-gradient(180deg,rgba(24,24,27,0.96),rgba(9,9,11,0.92))] sm:p-8">
+                <section className="ds-panel p-6 sm:p-8">
                     <div className="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)]">
                         <div className="space-y-4">
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
+                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-outline">
                                 {t('index.eyebrow')}
                             </p>
                             <div className="space-y-3">
-                                <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-4xl">
+                                <h1 className="text-3xl font-extrabold tracking-tight text-on-surface sm:text-4xl">
                                     {t('index.title')}
                                 </h1>
-                                <p className="max-w-2xl text-sm leading-7 text-zinc-500 dark:text-zinc-400 sm:text-base">
+                                <p className="max-w-2xl text-sm leading-7 text-on-surface-variant sm:text-base">
                                     {t('index.description')}
                                 </p>
                             </div>
@@ -197,7 +197,7 @@ export async function DocsIndex({
                                     <Link
                                         key={term}
                                         href={`/docs?q=${encodeURIComponent(term)}`}
-                                        className="rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-600 transition-colors hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300 dark:hover:border-zinc-700 dark:hover:bg-zinc-900"
+                                        className="ds-chip-muted px-3 py-1 text-xs font-medium normal-case tracking-normal hover:border-primary hover:text-primary"
                                     >
                                         {term}
                                     </Link>
@@ -206,27 +206,27 @@ export async function DocsIndex({
                         </div>
 
                         <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                            <div className="rounded-[22px] border border-zinc-200 bg-white/90 p-4 dark:border-zinc-800 dark:bg-zinc-950/80">
-                                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+                            <div className="ds-panel-muted p-4">
+                                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-outline">
                                     {t('stats.totalDocs')}
                                 </p>
-                                <p className="mt-3 text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+                                <p className="mt-3 text-3xl font-bold tracking-tight text-on-surface">
                                     {docs.length}
                                 </p>
                             </div>
-                            <div className="rounded-[22px] border border-zinc-200 bg-white/90 p-4 dark:border-zinc-800 dark:bg-zinc-950/80">
-                                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+                            <div className="ds-panel-muted p-4">
+                                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-outline">
                                     {t('stats.sections')}
                                 </p>
-                                <p className="mt-3 text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+                                <p className="mt-3 text-3xl font-bold tracking-tight text-on-surface">
                                     {sectionSummary.length}
                                 </p>
                             </div>
-                            <div className="rounded-[22px] border border-zinc-200 bg-white/90 p-4 dark:border-zinc-800 dark:bg-zinc-950/80">
-                                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+                            <div className="ds-panel-muted p-4">
+                                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-outline">
                                     {t('stats.latestUpdate')}
                                 </p>
-                                <p className="mt-3 text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+                                <p className="mt-3 text-lg font-semibold tracking-tight text-on-surface">
                                     {latestUpdated ?? t('stats.pending')}
                                 </p>
                             </div>
@@ -237,16 +237,16 @@ export async function DocsIndex({
                 <section className="space-y-4">
                     <div className="flex items-center justify-between gap-3">
                         <div>
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
+                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-outline">
                                 {t('sections.eyebrow')}
                             </p>
-                            <h2 className="mt-2 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+                            <h2 className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
                                 {t('sections.title')}
                             </h2>
                         </div>
                         <Link
                             href="/category"
-                            className="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+                            className="text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
                         >
                             {t('sections.toCategory')}
                         </Link>
@@ -259,32 +259,32 @@ export async function DocsIndex({
                                 <Link
                                     key={section.key}
                                     href={section.href}
-                                    className="group rounded-3xl border border-zinc-200/80 bg-white/95 p-5 shadow-[0_16px_40px_rgba(24,24,27,0.04)] transition-all hover:-translate-y-0.5 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-950/90 dark:hover:border-zinc-700"
+                                    className="group ds-card bg-surface-container-lowest p-5 hover:-translate-y-0.5"
                                 >
                                     <div className="flex items-start justify-between gap-4">
                                         <div className="space-y-2">
-                                            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+                                            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-outline">
                                                 {t(
                                                     `sectionLabels.${sectionKey}`
                                                 )}
                                             </p>
-                                            <h3 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+                                            <h3 className="text-xl font-semibold tracking-tight text-on-surface">
                                                 {t('sections.documentCount', {
                                                     count: section.count,
                                                 })}
                                             </h3>
-                                            <p className="text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                                            <p className="text-sm leading-6 text-on-surface-variant">
                                                 {t(
                                                     `sectionDescriptions.${sectionKey}`
                                                 )}
                                             </p>
                                         </div>
                                         <div className="text-right">
-                                            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400 transition-colors group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+                                            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-outline transition-colors group-hover:text-primary">
                                                 {t('card.open')}
                                             </span>
                                             {section.latest && (
-                                                <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400">
+                                                <p className="mt-3 text-xs text-on-surface-variant">
                                                     최근{' '}
                                                     {getTime(section.latest)}
                                                 </p>
@@ -300,16 +300,16 @@ export async function DocsIndex({
                 <section className="space-y-4">
                     <div className="flex items-center justify-between gap-3">
                         <div>
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
+                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-outline">
                                 {t('allDocuments.eyebrow')}
                             </p>
-                            <h2 className="mt-2 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+                            <h2 className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
                                 {t('allDocuments.title')}
                             </h2>
                         </div>
                         <Link
                             href="/feed"
-                            className="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+                            className="text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
                         >
                             {t('allDocuments.toFeed')}
                         </Link>

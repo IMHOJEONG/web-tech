@@ -30,8 +30,8 @@ const AUTHOR_PALETTE = [
 
 const WEB_TOPIC: TopicTone = {
     label: 'WEB',
-    badgeClassName: 'bg-cyan-400/10 border border-cyan-400/20 text-cyan-300',
-    textClassName: 'text-cyan-400',
+    badgeClassName: 'bg-primary/10 border border-primary/20 text-primary',
+    textClassName: 'text-primary',
 }
 
 const UIUX_TOPIC: TopicTone = {
@@ -180,6 +180,10 @@ function getFeedFilter(doc: FeedDoc): FeedFilter {
     return 'web'
 }
 
+function getFilterHref(filter: FeedFilter) {
+    return filter === 'all' ? '/feed' : `/feed?topic=${filter}`
+}
+
 export function normalizeFeedFilter(value?: string): FeedFilter {
     if (value === 'web' || value === 'mobile' || value === 'uiux') {
         return value
@@ -236,7 +240,7 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
 
                 <div className="mt-8 flex items-center gap-4 text-[0.75rem] uppercase tracking-[0.08em] text-on-surface-variant">
                     <span>{minutes} MIN READ</span>
-                    <span className="size-1 rounded-full bg-white/20" />
+                    <span className="size-1 rounded-full bg-outline-variant" />
                     <span>BY {author.name}</span>
                 </div>
             </div>
@@ -284,7 +288,7 @@ function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
                 <span className="text-[0.75rem] uppercase tracking-[0.08em] text-on-surface-variant">
                     {minutes} MIN READ
                 </span>
-                <span className="rounded-full border border-white/10 p-2 text-on-surface-variant transition-colors group-hover:text-on-surface">
+                <span className="ds-focus-ring rounded-full border border-outline-variant bg-surface-container-low p-2 text-on-surface-variant transition-colors group-hover:text-on-surface">
                     <ArrowUpRight className="size-4" />
                 </span>
             </div>
@@ -329,11 +333,11 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
                 </p>
 
                 <div className="flex items-center gap-3 pt-4 text-[0.75rem] uppercase tracking-[0.08em] text-on-surface-variant">
-                    <span className="inline-flex size-8 items-center justify-center rounded-full border border-white/10 bg-surface-container">
+                    <span className="inline-flex size-8 items-center justify-center rounded-full border border-outline-variant bg-surface-container-low">
                         {author.name.charAt(0)}
                     </span>
                     <span>{author.name}</span>
-                    <span className="size-1 rounded-full bg-white/20" />
+                    <span className="size-1 rounded-full bg-outline-variant" />
                     <span>{minutes} MIN READ</span>
                 </div>
             </div>
@@ -377,7 +381,7 @@ function TextSupportCard({
 
 function NewsletterInjectionCard() {
     return (
-        <article className="ds-card col-span-12 overflow-hidden bg-[#09090b] lg:col-span-4">
+        <article className="ds-code-shell col-span-12 lg:col-span-4">
             <div className="relative flex h-full flex-col gap-5 p-6">
                 <div className="absolute -right-8 top-0 size-24 rounded-full bg-primary/10 blur-2xl" />
                 <div className="relative flex items-center gap-3 text-primary">
@@ -388,21 +392,21 @@ function NewsletterInjectionCard() {
                 </div>
 
                 <div className="relative space-y-3">
-                    <h3 className="font-display text-[1.5rem] leading-[1.2] text-zinc-100">
+                    <h3 className="font-display text-[1.5rem] leading-[1.2] text-on-surface">
                         Get the most important technical deep-dives delivered to
                         your terminal inbox every Monday.
                     </h3>
                 </div>
 
                 <div className="relative mt-auto flex flex-col gap-2 sm:flex-row">
-                    <div className="flex min-h-10 flex-1 items-center border border-zinc-700 bg-surface-container px-3">
-                        <span className="font-mono text-sm text-zinc-500">
+                    <div className="ds-input flex min-h-10 flex-1 items-center px-3">
+                        <span className="font-mono text-sm text-outline">
                             user@domain.com
                         </span>
                     </div>
                     <button
                         type="button"
-                        className="bg-primary px-5 py-2.5 font-display text-sm tracking-[0.12em] text-primary-foreground uppercase"
+                        className="ds-button-primary px-5 py-2.5 text-sm tracking-[0.12em] uppercase"
                     >
                         Join
                     </button>
@@ -438,13 +442,13 @@ function EmptyFilteredFeed({ activeFilter }: { activeFilter: FeedFilter }) {
             <div className="flex flex-wrap gap-3">
                 <Link
                     href="/feed"
-                    className="font-display inline-flex items-center gap-3 border border-white/10 px-5 py-3 text-sm text-on-surface transition-colors hover:border-cyan-400/40 hover:text-cyan-300"
+                    className="ds-outline-button gap-3 px-5 py-3 text-sm"
                 >
                     전체 피드 보기
                 </Link>
                 <Link
                     href="/docs"
-                    className="font-display inline-flex items-center gap-3 border border-white/5 bg-surface-container px-5 py-3 text-sm text-on-surface-variant transition-colors hover:border-white/10 hover:text-on-surface"
+                    className="ds-button-secondary gap-3 px-5 py-3 text-sm"
                 >
                     전체 문서 인덱스
                 </Link>
@@ -474,7 +478,7 @@ export function MainFeed({
     if (!heroDoc) {
         return (
             <main className="w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
-                <section className="border-b border-white/5 bg-surface-container-lowest px-4 pb-16 pt-16 sm:px-6 md:px-8 lg:pb-20 lg:pt-20">
+                <section className="border-b border-outline-variant bg-surface-container-lowest px-4 pb-16 pt-16 sm:px-6 md:px-8 lg:pb-20 lg:pt-20">
                     <div className="mx-auto max-w-page space-y-6">
                         <FeedBadge
                             label="FILTERED FEED"
@@ -511,20 +515,15 @@ export function MainFeed({
 
                             <div className="flex flex-wrap items-center gap-3">
                                 {CATEGORY_FILTERS.map((filter) => {
-                                    const href =
-                                        filter.key === 'all'
-                                            ? '/feed'
-                                            : `/feed?topic=${filter.key}`
-
                                     return (
                                         <Link
                                             key={filter.key}
-                                            href={href}
+                                            href={getFilterHref(filter.key)}
                                             className={cn(
-                                                'font-display border px-4.25 py-2.25 text-sm transition-colors',
+                                                'ds-outline-button px-4.25 py-2.25 text-sm',
                                                 activeFilter === filter.key
-                                                    ? 'border-white/10 bg-surface-container text-cyan-400'
-                                                    : 'border-white/5 bg-surface-container-low text-on-surface-variant hover:text-on-surface'
+                                                    ? 'border-primary bg-surface-container text-primary shadow-glow-primary'
+                                                    : 'text-on-surface-variant hover:text-on-surface'
                                             )}
                                         >
                                             {filter.label}
@@ -549,7 +548,7 @@ export function MainFeed({
 
     return (
         <main className="w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
-            <section className="border-b border-white/5 bg-surface-container-lowest px-4 pb-16 pt-16 sm:px-6 md:px-8 lg:pb-20 lg:pt-20">
+            <section className="border-b border-outline-variant bg-surface-container-lowest px-4 pb-16 pt-16 sm:px-6 md:px-8 lg:pb-20 lg:pt-20">
                 <div className="mx-auto grid max-w-page gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
                     <div className="space-y-6 lg:col-span-7">
                         <FeedBadge
@@ -579,7 +578,7 @@ export function MainFeed({
 
                         <div className="flex flex-wrap items-center gap-6 pt-2 text-sm text-on-surface-variant">
                             <div className="flex items-center gap-3">
-                                <span className="inline-flex size-10 items-center justify-center rounded-full border border-white/10 bg-surface-container text-cyan-400">
+                                <span className="inline-flex size-10 items-center justify-center rounded-full border border-outline-variant bg-surface-container-low text-primary">
                                     {heroAuthor.name.charAt(0)}
                                 </span>
                                 <div className="space-y-0.5">
@@ -592,7 +591,7 @@ export function MainFeed({
                                 </div>
                             </div>
 
-                            <div className="h-8 w-px bg-white/10" />
+                            <div className="h-8 w-px bg-outline-variant" />
 
                             <div className="space-y-0.5">
                                 <p className="font-display text-base text-on-surface">
@@ -614,13 +613,13 @@ export function MainFeed({
 
                     <div className="relative lg:col-span-5">
                         <div className="absolute -left-8 bottom-0 size-40 rounded-full bg-secondary/10 blur-3xl" />
-                        <div className="absolute -right-8 top-0 size-48 rounded-full bg-cyan-400/10 blur-3xl" />
-                        <div className="relative overflow-hidden rounded-sm border border-white/10 bg-[#0c0e14] p-4 shadow-[0_0_20px_rgba(0,220,229,0.15)]">
-                            <div className="relative aspect-[1/1.02] overflow-hidden border border-white/10 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_36%),linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))]">
-                                <div className="absolute inset-[12%] border border-white/10" />
-                                <div className="absolute inset-[20%] border border-white/10" />
-                                <div className="absolute inset-[28%] border border-white/10" />
-                                <div className="absolute inset-[36%] border border-cyan-400/20 shadow-[0_0_30px_rgba(0,220,229,0.12)]" />
+                        <div className="absolute -right-8 top-0 size-48 rounded-full bg-primary/10 blur-3xl" />
+                        <div className="ds-code-shell relative p-4">
+                            <div className="relative aspect-[1/1.02] overflow-hidden border border-outline-variant bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_36%),linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))]">
+                                <div className="absolute inset-[12%] border border-outline-variant" />
+                                <div className="absolute inset-[20%] border border-outline-variant" />
+                                <div className="absolute inset-[28%] border border-outline-variant" />
+                                <div className="absolute inset-[36%] border border-primary/20 shadow-glow-primary" />
                                 <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.03),transparent_40%,rgba(255,255,255,0.02))]" />
                             </div>
                         </div>
@@ -645,20 +644,15 @@ export function MainFeed({
 
                         <div className="flex flex-wrap items-center gap-3">
                             {CATEGORY_FILTERS.map((filter) => {
-                                const href =
-                                    filter.key === 'all'
-                                        ? '/feed'
-                                        : `/feed?topic=${filter.key}`
-
                                 return (
                                     <Link
                                         key={filter.key}
-                                        href={href}
+                                        href={getFilterHref(filter.key)}
                                         className={cn(
-                                            'font-display border px-4.25 py-2.25 text-sm transition-colors',
+                                            'ds-outline-button px-4.25 py-2.25 text-sm',
                                             activeFilter === filter.key
-                                                ? 'border-white/10 bg-surface-container text-cyan-400'
-                                                : 'border-white/5 bg-surface-container-low text-on-surface-variant hover:text-on-surface'
+                                                ? 'border-primary bg-surface-container text-primary shadow-glow-primary'
+                                                : 'text-on-surface-variant hover:text-on-surface'
                                         )}
                                     >
                                         {filter.label}
@@ -701,7 +695,7 @@ export function MainFeed({
                                 topic={PLACEHOLDER_UI.topic}
                                 footer={
                                     <div className="flex items-center gap-3 text-[0.75rem] uppercase tracking-[0.08em] text-on-surface-variant">
-                                        <span className="inline-flex size-8 items-center justify-center rounded-full border border-white/10 bg-surface-container">
+                                        <span className="inline-flex size-8 items-center justify-center rounded-full border border-outline-variant bg-surface-container-low">
                                             +
                                         </span>
                                         <span>{PLACEHOLDER_UI.metric}</span>
@@ -714,7 +708,7 @@ export function MainFeed({
                     <div className="flex justify-center pt-4">
                         <Link
                             href={activeFilter === 'all' ? '/docs' : '/feed'}
-                            className="font-display inline-flex items-center gap-4 border border-white/10 px-8 py-3 text-sm text-on-surface transition-colors hover:border-cyan-400/40 hover:text-cyan-300 sm:px-10 sm:py-4 sm:text-base"
+                            className="ds-outline-button gap-4 px-8 py-3 text-sm sm:px-10 sm:py-4 sm:text-base"
                         >
                             {activeFilter === 'all'
                                 ? 'BROWSE DOCUMENT INDEX'
