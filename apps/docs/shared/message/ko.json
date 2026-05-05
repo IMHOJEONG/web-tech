@@ -4,7 +4,34 @@
     },
     "home": {
         "title": "아이디어가 시스템으로 단련되는 곳.",
-        "description": "소프트웨어 장인정신과 시스템 사고가 만나는 공간입니다. 메모리부터 아키텍처까지, 한 바이트씩 지식을 정제합니다."
+        "description": "소프트웨어 장인정신과 시스템 사고가 만나는 공간입니다. 메모리부터 아키텍처까지, 한 바이트씩 지식을 정제합니다.",
+        "preview": {
+            "eyebrow": "Curated Tracks",
+            "panelLabel": "이곳에서 다루는 주제",
+            "panelDescription": "첫 화면에서 바로 읽을 수 있는 핵심 트랙만 모았습니다.",
+            "panelBadge": "Docs Preview",
+            "linkLabel": "Open",
+            "topics": {
+                "architecture": "Architecture",
+                "uiux": "UI/UX",
+                "designSystem": "Design System",
+                "infrastructure": "Infrastructure"
+            },
+            "cards": {
+                "web": {
+                    "title": "Web Engineering",
+                    "description": "프론트엔드 구현, 컴포넌트 구조, 렌더링 전략을 실제 코드 맥락으로 정리합니다."
+                },
+                "mobile": {
+                    "title": "Product Interface",
+                    "description": "모바일 경험, 상호작용, 레이아웃 완성도를 사용자 관점에서 다시 점검합니다."
+                },
+                "system": {
+                    "title": "System Thinking",
+                    "description": "아키텍처, 디자인 시스템, 운영 흐름까지 연결해서 더 큰 구조를 설명합니다."
+                }
+            }
+        }
     },
     "search": {
         "placeholder": "문서를 검색해보세요",

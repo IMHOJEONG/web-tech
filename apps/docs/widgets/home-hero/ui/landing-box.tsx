@@ -8,11 +8,7 @@ export const LandingBox = (props: LandingBoxProps) => {
     const { name, children } = props
 
     return (
-        <div
-            className="size-full flex flex-1
-             px-4 sm:px-6 md:px"
-            key={name}
-        >
+        <div key={name} className="flex size-full flex-1 px-4 sm:px-6 md:px-8">
             {children}
         </div>
     )

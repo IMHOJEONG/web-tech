@@ -5,7 +5,7 @@ import { EmptyAllDocs } from '~/feature/search/empty-all-docs'
 import { EmptySearchResult } from '~/feature/search/empty-search-result'
 import { getSortedPostsData } from '~/lib/get-document'
 import { getSearchData } from '~/lib/get-search-data'
-import { MainFeed } from '~/widgets/main-feed/ui/main-feed'
+import { MainFeed } from '~/widgets/m/ui/main-feed'
 
 type Props = {
     searchParams: { q?: string }

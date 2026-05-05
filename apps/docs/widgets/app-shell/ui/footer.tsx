@@ -9,10 +9,10 @@ const footerLinks = [
 
 export default function Footer() {
     return (
-        <footer className="w-full border-t border-zinc-900 bg-[#09090b] px-4 pb-16 pt-[4.0625rem] sm:px-6 lg:px-8">
+        <footer className="relative z-20 w-full border-t border-zinc-900 bg-[#09090b] px-4 pt-[4.0625rem] pb-16 sm:px-6 lg:px-8">
             <div className="mx-auto flex max-w-page flex-col gap-6 md:flex-row md:items-end md:justify-between">
                 <div className="space-y-2">
-                    <div className="font-display text-[1.125rem] leading-7 font-bold tracking-[0.1em] text-zinc-100 uppercase">
+                    <div className="font-display text-[1.125rem] font-bold leading-7 tracking-[0.1em] text-zinc-100 uppercase">
                         TECH_LOGIC
                     </div>
                     <div className="font-display text-[0.625rem] leading-[0.9375rem] tracking-[0.2em] text-zinc-600 uppercase">

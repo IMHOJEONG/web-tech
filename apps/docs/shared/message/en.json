@@ -4,7 +4,34 @@
     },
     "home": {
         "title": "Where ideas are forged into systems.",
-        "description": "A space where software craftsmanship meets systems thinking, refining knowledge one byte at a time from memory to architecture."
+        "description": "A space where software craftsmanship meets systems thinking, refining knowledge one byte at a time from memory to architecture.",
+        "preview": {
+            "eyebrow": "Curated Tracks",
+            "panelLabel": "What you will find here",
+            "panelDescription": "A tighter overview of the themes this docs home is built around.",
+            "panelBadge": "Docs Preview",
+            "linkLabel": "Open",
+            "topics": {
+                "architecture": "Architecture",
+                "uiux": "UI/UX",
+                "designSystem": "Design System",
+                "infrastructure": "Infrastructure"
+            },
+            "cards": {
+                "web": {
+                    "title": "Web Engineering",
+                    "description": "Frontend implementation, component structure, and rendering strategy explained in real code context."
+                },
+                "mobile": {
+                    "title": "Product Interface",
+                    "description": "Mobile experience, interaction, and layout polish revisited from the user point of view."
+                },
+                "system": {
+                    "title": "System Thinking",
+                    "description": "Architecture, design systems, and operational flow connected into one larger picture."
+                }
+            }
+        }
     },
     "search": {
         "placeholder": "Search the docs",

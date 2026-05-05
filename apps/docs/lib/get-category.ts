@@ -3,6 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
+import { categoryTree } from '~/entities/category/model/category'
 
 export interface Metadata {
     id: string
@@ -27,106 +28,114 @@ async function exploreDirectory(path: string) {
     return files
 }
 
-export async function getSubCategoryData(main: string, sub: string) {
-    const fileNames = await exploreDirectory(
-        `category/${main}/${sub}/*.{md,mdx}`
-    )
+function normalizeThumbnailPath(thumbnail?: unknown) {
+    if (typeof thumbnail !== 'string') {
+        return null
+    }
 
-    const allPostsData: Partial<Metadata>[] = fileNames.map((fileName) => {
-        // Remove ".md" from file name to get id
-        const id = fileName.replace(/\.mdx?$/, '')
+    const trimmed = thumbnail.trim()
 
-        // Read markdown file as string
-        console.log(fileName)
-        const fileContents = fs.readFileSync(fileName, 'utf8')
-        // Use vfile-matter to parse the post metadata section
-        const vfile = new VFile({ path: fileName, value: fileContents })
-        vfileMatter(vfile, { strip: true })
-        const data = vfile.data.matter || {}
-        const content = String(vfile)
-        // 프로젝트 루트 기준의 상대경로(확장자 없는)만 추출
-        const relPathFromRoot = path
-            .relative(process.cwd(), fileName)
-            .replace(/\.(mdx|md)$/i, '')
+    if (!trimmed) {
+        return null
+    }
 
-        console.log(relPathFromRoot)
-        // thumbnail 경로를 public 폴더 기준으로 /로 시작하게 단순화, 타입 안전하게
-        let thumbnailPath: string | null = null
-        if (typeof data.thumbnail === 'string') {
-            const trimmed = data.thumbnail.trim()
-            if (trimmed.length > 0) {
-                thumbnailPath = trimmed
-                const idx = thumbnailPath.indexOf('public/')
-                if (idx !== -1) {
-                    thumbnailPath = thumbnailPath.slice(idx + 'public/'.length)
-                }
-                if (!thumbnailPath.startsWith('/')) {
-                    thumbnailPath = '/' + thumbnailPath
-                }
-            }
-        }
-        return {
-            id,
-            ...data,
-            use: data.use ?? [],
-            content,
-            fileName: relPathFromRoot,
-            thumbnail: thumbnailPath,
-        }
+    let thumbnailPath = trimmed
+    const idx = thumbnailPath.indexOf('public/')
+
+    if (idx !== -1) {
+        thumbnailPath = thumbnailPath.slice(idx + 'public/'.length)
+    }
+
+    if (!thumbnailPath.startsWith('/')) {
+        thumbnailPath = `/${thumbnailPath}`
+    }
+
+    return thumbnailPath
+}
+
+function parseCategoryFile(fileName: string): Partial<Metadata> {
+    const id = fileName.replace(/\.mdx?$/, '')
+    const fileContents = fs.readFileSync(fileName, 'utf8')
+    const vfile = new VFile({ path: fileName, value: fileContents })
+    vfileMatter(vfile, { strip: true })
+    const data = vfile.data.matter || {}
+    const content = String(vfile)
+    const relPathFromRoot = path
+        .relative(process.cwd(), fileName)
+        .replace(/\.(mdx|md)$/i, '')
+
+    return {
+        id,
+        ...data,
+        content,
+        fileName: relPathFromRoot,
+        thumbnail: normalizeThumbnailPath(data.thumbnail),
+    }
+}
+
+function sortDocsByDate(docs: Partial<Metadata>[]) {
+    return [...docs].sort((a, b) => {
+        const aTime = a.date ? new Date(a.date).getTime() : 0
+        const bTime = b.date ? new Date(b.date).getTime() : 0
+
+        return bTime - aTime
     })
-    console.log(allPostsData)
+}
 
-    return allPostsData
+async function getDocsByPattern(pattern: string) {
+    const fileNames = await exploreDirectory(pattern)
+    return sortDocsByDate(fileNames.map(parseCategoryFile))
+}
+
+export async function getSubCategoryData(main: string, sub: string) {
+    return getDocsByPattern(`category/${main}/${sub}/*.{md,mdx}`)
 }
 
 export async function getCategoryData(main: string, sub: string) {
-    const fileNames = await exploreDirectory(
-        `category/${main}/${sub}/*.{md,mdx}`
-    )
+    return getDocsByPattern(`category/${main}/${sub}/*.{md,mdx}`)
+}
 
-    const allPostsData: Partial<Metadata>[] = fileNames.map((fileName) => {
-        // Remove ".md" from file name to get id
-        const id = fileName.replace(/\.mdx?$/, '')
+export async function getMainCategoryOverview() {
+    return Promise.all(
+        categoryTree.map(async (category) => {
+            const subDocs = await Promise.all(
+                category.sub.map((topic) =>
+                    getSubCategoryData(category.url, topic.url)
+                )
+            )
 
-        // Read markdown file as string
-        console.log(fileName)
-        const fileContents = fs.readFileSync(fileName, 'utf8')
-        // Use vfile-matter to parse the post metadata section
-        const vfile = new VFile({ path: fileName, value: fileContents })
-        vfileMatter(vfile, { strip: true })
-        const data = vfile.data.matter || {}
-        const content = String(vfile)
-        // 프로젝트 루트 기준의 상대경로(확장자 없는)만 추출
-        const relPathFromRoot = path
-            .relative(process.cwd(), fileName)
-            .replace(/\.(mdx|md)$/i, '')
+            const docs = sortDocsByDate(subDocs.flat())
 
-        console.log(relPathFromRoot)
-        // thumbnail 경로를 public 폴더 기준으로 /로 시작하게 단순화, 타입 안전하게
-        let thumbnailPath: string | null = null
-        if (typeof data.thumbnail === 'string') {
-            const trimmed = data.thumbnail.trim()
-            if (trimmed.length > 0) {
-                thumbnailPath = trimmed
-                const idx = thumbnailPath.indexOf('public/')
-                if (idx !== -1) {
-                    thumbnailPath = thumbnailPath.slice(idx + 'public/'.length)
-                }
-                if (!thumbnailPath.startsWith('/')) {
-                    thumbnailPath = '/' + thumbnailPath
-                }
+            return {
+                title: category.title,
+                url: category.url,
+                docCount: docs.length,
+                subCount: category.sub.length,
+                latestTitle: docs[0]?.title ?? null,
+                latestDate: docs[0]?.date ?? null,
             }
-        }
-        return {
-            id,
-            ...data,
-            use: data.use ?? [],
-            content,
-            fileName: relPathFromRoot,
-            thumbnail: thumbnailPath,
-        }
-    })
-    console.log(allPostsData)
+        })
+    )
+}
 
-    return allPostsData
+export async function getSubCategoryOverview(main: string) {
+    const category = categoryTree.find((item) => item.url === main)
+
+    if (!category) {
+        return []
+    }
+
+    return Promise.all(
+        category.sub.map(async (topic) => {
+            const docs = await getSubCategoryData(main, topic.url)
+
+            return {
+                title: topic.title,
+                url: topic.url,
+                docCount: docs.length,
+                latestTitle: docs[0]?.title ?? null,
+                latestDate: docs[0]?.date ?? null,
+            }
+        })
+    )
 }

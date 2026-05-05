@@ -1,4 +1,3 @@
-import { cn } from '@web-tech/ui/lib/utils'
 import { evaluate, EvaluateOptions } from 'next-mdx-remote-client/rsc'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
@@ -33,7 +32,7 @@ export default async function Page({
     if (target.contentFormat === 'html') {
         return (
             <div className="flex gap-4">
-                <div className={cn('flex-1')}>
+                <div className="flex-1">
                     <article
                         dangerouslySetInnerHTML={{
                             __html: target.content ?? '',
@@ -70,7 +69,7 @@ export default async function Page({
                 <Toc toc={scope.toc} />
             </div>
 
-            <div className={cn('flex-1')}>
+            <div className="flex-1">
                 <Suspense fallback={<LoadingComponent />}>{content}</Suspense>
             </div>
         </div>

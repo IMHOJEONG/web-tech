@@ -40,21 +40,18 @@ export const SubCategoryCard = ({ id }: SubCategoryCardProps) => {
     return (
         <div
             className={cn(
-                'flex flex-col',
-                'items-center justify-center',
-                'size-full gap-2',
-                'p-3'
+                'flex size-full flex-col items-center justify-center gap-2 p-3'
             )}
         >
-            <div className="relative w-full aspect-square ">
+            <div className="relative aspect-square w-full">
                 <Image
                     src={item?.icon ?? '/test.png'}
+                    alt="sub-category"
+                    fill
                     width={0}
                     height={0}
-                    fill
-                    alt="sub-category"
                     sizes="100vw"
-                    className="rounded rounded-lg"
+                    className="rounded-lg"
                     priority
                     placeholder="blur"
                     blurDataURL="/image/blur-image.webp"

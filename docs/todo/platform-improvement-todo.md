@@ -46,9 +46,9 @@
   - `app-sidebar`는 `widgets/category-sidebar`
   - `content-hub`는 `widgets/content-hub`
   - `hero`는 `widgets/home-hero`
-- [ ] `P1` `apps/docs/components/react-flow`의 최종 레이어를 확정한다.
-  - `home-hero` 전용 보조 UI인지
-  - 독립 widget 또는 shared visual module인지 판단
+- [x] `P1` `apps/docs/components/react-flow`의 최종 레이어를 확정한다.
+  - 메인 hero UX 관점에서 장식 대비 효용이 낮다고 판단해 제거
+  - `home-hero`는 더 직접적인 콘텐츠 preview UI로 대체
 - [ ] `P1` `next-intl` 기준으로 i18n 사용 방식을 통일한다.
   - `Brand`, `Header`, `Footer`, `Search` placeholder 실제 메시지 연결
   - 언어별 메시지 키 네이밍 규칙 정리

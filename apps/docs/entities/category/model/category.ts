@@ -76,7 +76,9 @@ export const categoryMainLinks = categoryTree.map((item) => {
 
 export const getSubCategories = (category: string) => {
     const mainItem = categoryTree.find(
-        (item) => item.title.toLowerCase() === category.toLowerCase()
+        (item) =>
+            item.title.toLowerCase() === category.toLowerCase() ||
+            item.url.toLowerCase() === category.toLowerCase()
     )
 
     return mainItem?.sub.map((value) => {

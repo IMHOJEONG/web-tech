@@ -1,4 +1,3 @@
-import { cn } from '@web-tech/ui/lib/utils'
 import Image from 'next/image'
 
 interface MainCategoryCardProps {
@@ -32,8 +31,8 @@ export const MainCategoryCard = ({ id }: MainCategoryCardProps) => {
     )
 
     return (
-        <div className={cn('size-full flex flex-col gap-2', 'p-2')}>
-            <div className={cn('relative w-full aspect-square ')}>
+        <div className="flex size-full flex-col gap-4">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-zinc-200/70 bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.08),_transparent_42%),linear-gradient(180deg,rgba(248,250,252,0.96),rgba(241,245,249,0.9))] dark:border-zinc-800 dark:bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.12),_transparent_34%),linear-gradient(180deg,rgba(24,24,27,0.96),rgba(9,9,11,0.9))]">
                 <Image
                     fill
                     src={data?.image ?? '/test.png'}
@@ -41,15 +40,21 @@ export const MainCategoryCard = ({ id }: MainCategoryCardProps) => {
                     width={0}
                     height={0}
                     quality={90}
-                    sizes="(max-width: 768px) 200vw, 200px"
-                    className="rounded rounded-lg"
+                    sizes="(max-width: 768px) 100vw, 420px"
+                    className="object-contain p-5"
                     priority
                     placeholder="blur"
                     blurDataURL="/image/blur-image.webp"
                 />
             </div>
-            <div className="text-xl">{data?.title}</div>
-            <div>{data?.summary}</div>
+            <div className="space-y-2">
+                <div className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+                    {data?.title}
+                </div>
+                <div className="text-sm leading-6 text-zinc-500 dark:text-zinc-400">
+                    {data?.summary}
+                </div>
+            </div>
         </div>
     )
 }
