@@ -34,6 +34,10 @@
   - 검색 범위는 `title / summary / taxonomy / content` 우선순위로 정리
   - empty state와 추천 검색어 정책 문서화
   - 기준 문서: `docs/architecture/docs-search-experience-policy.md`
+- [x] `P1` `/feed`와 `/docs`의 실제 화면 차이를 더 분명히 만든다.
+  - `/feed`는 `MainFeed` 기반 큐레이션 피드로 유지
+  - `/docs`는 전용 index/search layout으로 분리
+  - 기준 문서: `docs/architecture/docs-feed-and-docs-routing-policy.md`
 
 ## Code / Architecture
 
