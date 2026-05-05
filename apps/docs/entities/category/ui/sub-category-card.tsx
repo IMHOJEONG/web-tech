@@ -1,4 +1,3 @@
-import { cn } from '@web-tech/ui/lib/utils'
 import Image from 'next/image'
 
 interface SubCategoryCardProps {
@@ -38,11 +37,7 @@ export const SubCategoryCard = ({ id }: SubCategoryCardProps) => {
     )
 
     return (
-        <div
-            className={cn(
-                'flex size-full flex-col items-center justify-center gap-2 p-3'
-            )}
-        >
+        <div className="flex size-full flex-col items-center justify-center gap-2 p-3">
             <div className="relative aspect-square w-full">
                 <Image
                     src={item?.icon ?? '/test.png'}

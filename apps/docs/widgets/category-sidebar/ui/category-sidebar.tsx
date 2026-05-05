@@ -41,10 +41,8 @@ export function CategorySidebar({
                                         <a
                                             href={makeCategoryUrl([item.url])}
                                             className={cn(
-                                                '',
-                                                'hover:opacity-90',
+                                                'hover:bg-slate-300 hover:text-black hover:opacity-90',
                                                 'dark:hover:bg-gray-100',
-                                                'hover:bg-slate-300 hover:text-black',
                                                 {
                                                     'bg-blue-100 dark:bg-gray-400':
                                                         pathname ===
@@ -74,12 +72,9 @@ export function CategorySidebar({
                                                                 ]
                                                             )}
                                                             className={cn(
-                                                                'flex items-center gap-2',
-                                                                'p-2',
-                                                                'transition-all duration-300 ease-out',
-                                                                'hover:opacity-90',
+                                                                'flex items-center gap-2 p-2 transition-all duration-300 ease-out',
+                                                                'hover:bg-slate-300 hover:text-black hover:opacity-90',
                                                                 'dark:hover:bg-gray-100',
-                                                                'hover:bg-slate-300 hover:text-black',
                                                                 {
                                                                     'bg-blue-100 dark:bg-gray-400':
                                                                         pathname ===

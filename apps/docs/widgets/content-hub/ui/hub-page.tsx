@@ -1,4 +1,3 @@
-import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
 import MainCard from '~/entities/document/ui/main-card'
 import { Metadata } from '~/lib/get-document'
@@ -110,12 +109,7 @@ export function HubPage({
                     </div>
 
                     {docs.length > 0 ? (
-                        <div
-                            className={cn(
-                                'grid gap-4',
-                                'grid-cols-[repeat(auto-fit,minmax(280px,1fr))]'
-                            )}
-                        >
+                        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
                             {docs.map((doc) => {
                                 if (!doc.slug || !doc.id) {
                                     return null

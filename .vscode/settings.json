@@ -6,9 +6,21 @@
   ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
-  "typescript.experimental.useTsgo": true
-
+  "typescript.experimental.useTsgo": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.classFunctions": [
+    "cn",
+    "cva",
+    "cx"
+  ],
+  "tailwindCSS.lint.suggestCanonicalClasses": "error",
+  "tailwindCSS.lint.recommendedVariantOrder": "error"
 }

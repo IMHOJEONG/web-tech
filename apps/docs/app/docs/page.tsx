@@ -1,4 +1,3 @@
-import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
 import MainCard from '~/entities/document/ui/main-card'
 import { EmptyAllDocs } from '~/feature/search/empty-all-docs'
@@ -13,7 +12,6 @@ type Props = {
 
 export default async function Page({ searchParams }: Props) {
     const { q } = await searchParams
-    console.log('KEYWORD : ', q)
     const data = q ? await getSearchData(q) : await getSortedPostsData()
 
     if (!q && data.length === 0) {
@@ -29,25 +27,14 @@ export default async function Page({ searchParams }: Props) {
     }
 
     return (
-        <div
-            className={cn(
-                'w-full max-w-[720px] mx-auto',
-                'grid gap-4 p-4',
-                'md:grid-cols-1',
-                'grid-cols-[repeat(auto-fit,minmax(260px,1fr))]'
-            )}
-        >
+        <div className="mx-auto grid w-full max-w-[720px] grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4 p-4 md:grid-cols-1">
             {data.map((doc) => {
                 const { title, slug, id } = doc
                 if (!slug) {
                     return null
                 }
                 return (
-                    <Link
-                        href={`/docs/${slug}`}
-                        key={id}
-                        className=" size-full"
-                    >
+                    <Link href={`/docs/${slug}`} key={id} className="size-full">
                         <MainCard doc={doc} />
                     </Link>
                 )
