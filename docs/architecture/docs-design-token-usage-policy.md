@@ -91,8 +91,18 @@
 - `AboutUs`
 - `Search`
 
+2026-05-05 2차 정리 범위:
+
+- `/category`
+- `/category/[main]`
+- `/category/[main]/[sub]`
+- `content-hub`
+- `main-category-card`
+- `category-document-card`
+- `sub-category-card`
+
 이후 확장 대상:
 
 - `/category` 계열 허브
-- `content-hub`
 - 모바일 drawer / bottom nav 상호작용 계열
+- shell 공통 CTA / icon button 계열

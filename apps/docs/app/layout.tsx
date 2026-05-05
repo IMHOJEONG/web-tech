@@ -85,9 +85,7 @@ export default async function Layout({
                         <Header />
                     </Suspense>
                     <NextTopLoader showSpinner={false} />
-                    <div className="flex-1 pb-[4.0625rem] sm:pb-0">
-                        {children}
-                    </div>
+                    <div className="flex-1 pb-16.25 sm:pb-0">{children}</div>
                     <Footer />
                     <MobileBottomNav />
                 </body>

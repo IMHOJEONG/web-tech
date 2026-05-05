@@ -32,11 +32,11 @@ export function HubPage({
     return (
         <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
             <div className="space-y-8">
-                <section className="relative overflow-hidden rounded-xl border border-white/8 bg-surface-container-lowest/80 p-6 sm:p-8">
+                <section className="ds-panel relative overflow-hidden p-6 sm:p-8">
                     <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.12),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(139,92,246,0.14),transparent_34%)]" />
                     <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(300px,0.7fr)]">
                         <div className="space-y-4">
-                            <p className="font-display text-label-md uppercase text-cyan-400">
+                            <p className="font-display text-label-md uppercase text-primary">
                                 {eyebrow}
                             </p>
                             <h1 className="font-display text-headline-xl text-on-surface">
@@ -50,9 +50,9 @@ export function HubPage({
                             {stats.map((stat) => (
                                 <div
                                     key={stat.label}
-                                    className="ds-card bg-surface-container-low border-outline-variant p-4"
+                                    className="ds-panel-muted p-4"
                                 >
-                                    <p className="text-xs uppercase tracking-[0.08em] text-on-surface-variant">
+                                    <p className="text-xs uppercase tracking-[0.08em] text-outline">
                                         {stat.label}
                                     </p>
                                     <p className="mt-2 font-display text-2xl font-semibold text-on-surface">
@@ -80,7 +80,7 @@ export function HubPage({
                                 {panel.items.map((item) => (
                                     <li
                                         key={item}
-                                        className="rounded-md border border-outline-variant/70 bg-surface-container px-3 py-2"
+                                        className="ds-panel-muted rounded-md px-3 py-2"
                                     >
                                         {item}
                                     </li>
@@ -93,7 +93,7 @@ export function HubPage({
                 <section className="space-y-4">
                     <div className="flex items-end justify-between gap-4">
                         <div>
-                            <p className="font-display text-label-md uppercase text-cyan-400">
+                            <p className="font-display text-label-md uppercase text-primary">
                                 Latest
                             </p>
                             <h2 className="font-display text-headline-lg text-on-surface">
@@ -102,7 +102,7 @@ export function HubPage({
                         </div>
                         <Link
                             href="/docs"
-                            className="text-sm text-cyan-400 transition-colors hover:text-cyan-300"
+                            className="text-sm text-primary transition-colors hover:text-secondary"
                         >
                             View all docs
                         </Link>

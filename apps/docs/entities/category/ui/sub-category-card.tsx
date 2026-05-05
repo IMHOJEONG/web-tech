@@ -52,8 +52,12 @@ export const SubCategoryCard = ({ id }: SubCategoryCardProps) => {
                     blurDataURL="/image/blur-image.webp"
                 />
             </div>
-            <div>{item?.title}</div>
-            <div>{item?.description}</div>
+            <div className="font-display text-base text-on-surface">
+                {item?.title}
+            </div>
+            <div className="text-center text-sm text-on-surface-variant">
+                {item?.description}
+            </div>
         </div>
     )
 }

@@ -101,6 +101,7 @@
   - 하드코딩 색상, radius, shadow 제거
   - `design.md` 토큰 기준으로 치환
   - 1차 적용: `MainFeed`, `DocsIndex`, `ArticleDetail`, `AboutUs`, `Search`
+  - 2차 적용: `/category` 계열, `content-hub`, category cards
 - [ ] `P2` mobile/top/bottom chrome 아이콘을 Figma 자산 또는 확정 아이콘 세트로 통일한다.
 - [ ] `P2` 라이트 모드/다크 모드 시안 차이를 페이지별로 점검한다.
   - `About`
