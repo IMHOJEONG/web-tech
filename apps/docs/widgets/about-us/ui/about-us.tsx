@@ -62,8 +62,8 @@ export async function AboutUs() {
     return (
         <main className="w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
             <div className="mx-auto flex w-full max-w-page flex-col gap-24 px-4 pb-24 pt-32 sm:px-8">
-                <section className="flex flex-col gap-10 border-b border-border pb-12 lg:flex-row lg:items-end lg:justify-between">
-                    <div className="max-w-2xl space-y-4">
+                <section className="grid gap-10 border-b border-border pb-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+                    <div className="min-w-0 max-w-4xl space-y-4">
                         <div className="flex items-center gap-2 text-primary">
                             <span className="size-2 rounded-full bg-current" />
                             <span className="font-display text-sm font-medium tracking-wider uppercase">
@@ -71,7 +71,7 @@ export async function AboutUs() {
                             </span>
                         </div>
 
-                        <h1 className="font-display max-w-120 text-[clamp(2.75rem,6vw,4.75rem)] leading-[1.05] font-bold tracking-[-0.04em] text-on-surface">
+                        <h1 className="font-display max-w-[13ch] text-[clamp(2.75rem,6vw,4.75rem)] leading-[1.05] font-bold tracking-[-0.04em] text-on-surface">
                             {t('hero.titleLead')}{' '}
                             <span className="text-secondary">
                                 {t('hero.titleAccentOne')}
@@ -81,12 +81,12 @@ export async function AboutUs() {
                             </span>
                         </h1>
 
-                        <p className="max-w-xl text-body-lg text-on-surface-variant">
+                        <p className="max-w-2xl break-keep text-body-lg text-on-surface-variant">
                             {t('hero.description')}
                         </p>
                     </div>
 
-                    <div className="font-mono text-sm leading-normal text-outline">
+                    <div className="font-mono text-sm leading-normal text-outline lg:shrink-0 lg:text-right">
                         <p>{t('hero.missionLabel')}</p>
                         <p>{t('hero.establishedLabel')}</p>
                     </div>

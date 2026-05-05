@@ -35,15 +35,11 @@ export const CategoryDocumentCard = ({
                     blurDataURL="/image/blur-image.webp"
                 />
             </div>
-            <div className="text-lg font-semibold text-on-surface">
-                {title}
-            </div>
+            <div className="text-lg font-semibold text-on-surface">{title}</div>
             <div className="min-h-[3rem] break-keep text-sm leading-6 text-on-surface-variant line-clamp-2">
                 {summary}
             </div>
-            <div className="text-xs text-outline">
-                {date}
-            </div>
+            <div className="text-xs text-outline">{date}</div>
         </Link>
     )
 }
