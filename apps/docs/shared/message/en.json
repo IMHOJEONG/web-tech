@@ -2,6 +2,41 @@
     "common": {
         "brand": "TECH_LOGIC"
     },
+    "navigation": {
+        "feed": "Feed",
+        "web": "Web",
+        "mobile": "Mobile",
+        "uiux": "UI/UX",
+        "about": "About"
+    },
+    "header": {
+        "drawer": {
+            "openAriaLabel": "Open navigation drawer",
+            "closeAriaLabel": "Close navigation drawer",
+            "title": "Navigation Drawer",
+            "description": "Mobile navigation drawer for docs sections.",
+            "statsLabel": "Technical Stats",
+            "systemIntegrity": "System Integrity",
+            "config": "Config",
+            "exit": "Exit",
+            "links": {
+                "feed": "Latest Articles",
+                "web": "Tutorials",
+                "uiux": "Code Snippets",
+                "docs": "Documentation",
+                "about": "Community"
+            }
+        }
+    },
+    "footer": {
+        "tagline": "© {year} {brand} // PRECISION ENGINEERED",
+        "links": {
+            "privacy": "PRIVACY",
+            "terms": "TERMS",
+            "changelog": "CHANGELOG",
+            "github": "GITHUB"
+        }
+    },
     "home": {
         "title": "Where ideas are forged into systems.",
         "description": "A space where software craftsmanship meets systems thinking, refining knowledge one byte at a time from memory to architecture.",
@@ -34,10 +69,13 @@
         }
     },
     "search": {
-        "placeholder": "Search the docs",
+        "input": {
+            "placeholder": "Search the docs",
+            "submitAriaLabel": "Search documents"
+        },
         "empty": {
-            "result-title": "No results found for \"{keyword}\"",
-            "result-description": "Try another keyword or restart from one of the suggested topics",
+            "resultTitle": "No results found for \"{keyword}\"",
+            "resultDescription": "Try another keyword or restart from one of the suggested topics",
             "clear": "Back to all docs"
         }
     }

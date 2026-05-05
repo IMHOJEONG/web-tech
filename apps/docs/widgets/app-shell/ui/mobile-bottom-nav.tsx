@@ -2,31 +2,32 @@
 
 import { cn } from '@web-tech/ui/lib/utils'
 import { House, Monitor, Smartphone, UserRound } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const mobileNav = [
     {
         href: '/feed',
-        label: 'Feed',
+        key: 'feed',
         icon: House,
         activePrefixes: ['/feed', '/docs'],
     },
     {
         href: '/web',
-        label: 'Web',
+        key: 'web',
         icon: Monitor,
         activePrefixes: ['/web', '/category/fe'],
     },
     {
         href: '/mobile',
-        label: 'Mobile',
+        key: 'mobile',
         icon: Smartphone,
         activePrefixes: ['/mobile'],
     },
     {
         href: '/about',
-        label: 'About',
+        key: 'about',
         icon: UserRound,
         activePrefixes: ['/about'],
     },
@@ -34,6 +35,7 @@ const mobileNav = [
 
 export default function MobileBottomNav() {
     const pathname = usePathname()
+    const t = useTranslations('navigation')
 
     return (
         <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#09090b]/90 backdrop-blur-[6px] sm:hidden">
@@ -52,7 +54,7 @@ export default function MobileBottomNav() {
                             key={item.href}
                             href={item.href}
                             aria-current={isActive ? 'page' : undefined}
-                            aria-label={item.label}
+                            aria-label={t(item.key)}
                             className={cn(
                                 'flex items-center justify-center text-zinc-500 transition-colors',
                                 isActive &&

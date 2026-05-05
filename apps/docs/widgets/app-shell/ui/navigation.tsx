@@ -1,43 +1,45 @@
 'use client'
 import { cn } from '@web-tech/ui/lib/utils'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const navigation = [
     {
         href: '/feed',
-        name: 'Feed',
+        key: 'feed',
         activePrefixes: ['/feed', '/docs'],
     },
     {
         href: '/web',
-        name: 'Web',
+        key: 'web',
         activePrefixes: ['/web', '/category/fe'],
     },
     {
         href: '/mobile',
-        name: 'Mobile',
+        key: 'mobile',
         activePrefixes: ['/mobile'],
     },
     {
         href: '/ui-ux',
-        name: 'UI/UX',
+        key: 'uiux',
         activePrefixes: ['/ui-ux'],
     },
     {
         href: '/about',
-        name: 'About',
+        key: 'about',
         activePrefixes: ['/about'],
     },
 ]
 
 export const Navigation = () => {
     const pathname = usePathname()
+    const t = useTranslations('navigation')
 
     return (
         <div className="hidden items-center gap-6 sm:flex md:gap-8">
             {navigation.map((nav) => {
-                const { href, name, activePrefixes } = nav
+                const { href, key, activePrefixes } = nav
                 const isActive = activePrefixes.some(
                     (prefix) =>
                         pathname === prefix ||
@@ -45,7 +47,7 @@ export const Navigation = () => {
                 )
 
                 return (
-                    <nav key={name} className="flex items-center">
+                    <nav key={key} className="flex items-center">
                         <Link
                             className={cn(
                                 'font-display relative inline-flex h-6 items-center text-base font-normal leading-6 tracking-[-0.025em] transition-colors after:absolute after:-bottom-1.5 after:left-1/2 after:h-0.5 after:w-full after:-translate-x-1/2 after:rounded-full after:transition-colors',
@@ -56,7 +58,7 @@ export const Navigation = () => {
                             href={href}
                             aria-current={isActive ? 'page' : undefined}
                         >
-                            {name}
+                            {t(key)}
                         </Link>
                     </nav>
                 )

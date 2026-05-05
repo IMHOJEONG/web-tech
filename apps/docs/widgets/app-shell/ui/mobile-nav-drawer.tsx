@@ -19,6 +19,7 @@ import {
     Users,
     X,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -27,31 +28,31 @@ import { Brand } from '~/shared/ui/brand'
 const drawerLinks = [
     {
         href: '/feed',
-        label: 'Latest Articles',
+        key: 'feed',
         icon: Newspaper,
         activePrefixes: ['/feed', '/docs'],
     },
     {
         href: '/web',
-        label: 'Tutorials',
+        key: 'web',
         icon: BookOpenText,
         activePrefixes: ['/web', '/mobile', '/platform'],
     },
     {
         href: '/ui-ux',
-        label: 'Code Snippets',
+        key: 'uiux',
         icon: Braces,
         activePrefixes: ['/ui-ux'],
     },
     {
         href: '/docs',
-        label: 'Documentation',
+        key: 'docs',
         icon: FileText,
         activePrefixes: ['/docs'],
     },
     {
         href: '/about',
-        label: 'Community',
+        key: 'about',
         icon: Users,
         activePrefixes: ['/about'],
     },
@@ -90,6 +91,7 @@ function DrawerLink({
 export default function MobileNavDrawer() {
     const pathname = usePathname()
     const [open, setOpen] = useState(false)
+    const headerT = useTranslations('header')
 
     useEffect(() => {
         setOpen(false)
@@ -99,7 +101,7 @@ export default function MobileNavDrawer() {
         <Sheet open={open} onOpenChange={setOpen}>
             <div className="flex items-center gap-3 sm:hidden">
                 <SheetTrigger
-                    aria-label="Open navigation drawer"
+                    aria-label={headerT('drawer.openAriaLabel')}
                     className="flex h-7 w-[2.125rem] items-center justify-center text-zinc-300 transition-colors hover:text-cyan-400"
                 >
                     <svg
@@ -130,9 +132,11 @@ export default function MobileNavDrawer() {
                 side="left"
                 className="z-[70] flex w-80 max-w-[85vw] flex-col gap-0 border-r border-white/5 bg-[#18181b] p-0 text-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.45)] [&>button]:hidden sm:hidden"
             >
-                <SheetTitle className="sr-only">Navigation Drawer</SheetTitle>
+                <SheetTitle className="sr-only">
+                    {headerT('drawer.title')}
+                </SheetTitle>
                 <SheetDescription className="sr-only">
-                    Mobile navigation drawer for docs sections.
+                    {headerT('drawer.description')}
                 </SheetDescription>
 
                 <div className="flex items-center justify-between px-6 py-6">
@@ -146,7 +150,7 @@ export default function MobileNavDrawer() {
 
                     <SheetClose
                         type="button"
-                        aria-label="Close navigation drawer"
+                        aria-label={headerT('drawer.closeAriaLabel')}
                         className="text-zinc-500 transition-colors hover:text-zinc-200"
                     >
                         <X className="size-4" strokeWidth={1.8} />
@@ -166,7 +170,7 @@ export default function MobileNavDrawer() {
                                 <DrawerLink
                                     key={item.href}
                                     href={item.href}
-                                    label={item.label}
+                                    label={headerT(`drawer.links.${item.key}`)}
                                     icon={item.icon}
                                     isActive={isActive}
                                     onNavigate={() => setOpen(false)}
@@ -177,13 +181,13 @@ export default function MobileNavDrawer() {
 
                     <div className="border-t border-white/5 px-6 pb-4 pt-[1.0625rem]">
                         <p className="font-display text-[0.625rem] tracking-[0.1em] text-zinc-500 uppercase">
-                            Technical Stats
+                            {headerT('drawer.statsLabel')}
                         </p>
 
                         <div className="mt-4 space-y-2">
                             <div className="flex items-center justify-between text-[0.75rem] text-zinc-400">
                                 <span className="font-display">
-                                    System Integrity
+                                    {headerT('drawer.systemIntegrity')}
                                 </span>
                                 <span className="font-display text-cyan-400">
                                     98%
@@ -222,7 +226,9 @@ export default function MobileNavDrawer() {
                             className="flex items-center justify-center gap-2 rounded-[0.125rem] bg-zinc-800 px-4 py-2.5 text-[0.75rem] text-zinc-300"
                         >
                             <Settings className="size-3.5" strokeWidth={1.8} />
-                            <span className="font-display">Config</span>
+                            <span className="font-display">
+                                {headerT('drawer.config')}
+                            </span>
                         </Link>
                         <button
                             type="button"
@@ -230,7 +236,9 @@ export default function MobileNavDrawer() {
                             className="flex items-center justify-center gap-2 rounded-[0.125rem] border border-cyan-400/20 bg-cyan-500/10 px-4 py-2.5 text-[0.75rem] text-cyan-400"
                         >
                             <LogOut className="size-3.5" strokeWidth={1.8} />
-                            <span className="font-display">Exit</span>
+                            <span className="font-display">
+                                {headerT('drawer.exit')}
+                            </span>
                         </button>
                     </div>
                 </div>

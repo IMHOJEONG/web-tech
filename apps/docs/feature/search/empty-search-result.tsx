@@ -15,11 +15,11 @@ export const EmptySearchResult = ({
     return (
         <div className="flex flex-col items-center gap-4 py-20 text-center text-muted-foreground">
             <p className="text-lg font-medium">
-                {t('empty.result-title', {
+                {t('empty.resultTitle', {
                     keyword: keyword,
                 })}
             </p>
-            <p className="text-sm">{t('empty.result-description')}</p>
+            <p className="text-sm">{t('empty.resultDescription')}</p>
             <div className="flex flex-wrap items-center justify-center gap-2">
                 {recommendations.map((term) => (
                     <Link

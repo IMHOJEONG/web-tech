@@ -41,7 +41,7 @@ export const Search = () => {
                         inputRef.current?.focus()
                     })
                 }}
-                aria-label="Search documents"
+                aria-label={t('input.submitAriaLabel')}
             >
                 <GoSearch className="size-5" />
             </button>
@@ -51,7 +51,7 @@ export const Search = () => {
                 defaultValue={currentKeyword}
                 maxLength={40}
                 minLength={1}
-                placeholder={t('placeholder')}
+                placeholder={t('input.placeholder')}
             />
         </form>
     )

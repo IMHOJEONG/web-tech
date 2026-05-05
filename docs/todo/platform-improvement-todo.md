@@ -56,9 +56,10 @@
 - [x] `P1` `apps/docs/components/react-flow`의 최종 레이어를 확정한다.
   - 메인 hero UX 관점에서 장식 대비 효용이 낮다고 판단해 제거
   - `home-hero`는 더 직접적인 콘텐츠 preview UI로 대체
-- [ ] `P1` `next-intl` 기준으로 i18n 사용 방식을 통일한다.
-  - `Brand`, `Header`, `Footer`, `Search` placeholder 실제 메시지 연결
-  - 언어별 메시지 키 네이밍 규칙 정리
+- [x] `P1` `next-intl` 기준으로 i18n 사용 방식을 통일한다.
+  - `Brand`, app shell navigation, `Footer`, `Search`를 실제 메시지에 연결
+  - 메시지 키는 `common / navigation / header / footer / search` namespace와 camelCase 규칙으로 정리
+  - 기준 문서: `docs/architecture/docs-next-intl-usage-policy.md`
 - [ ] `P1` `docs` app shell의 responsive 정책을 widget 레벨까지 확장 적용한다.
   - `MainFeed`, `ArticleDetail`, `AboutUs` 내부의 `sm/md/lg` 사용 재점검
   - shell breakpoint와 content breakpoint 충돌 제거
