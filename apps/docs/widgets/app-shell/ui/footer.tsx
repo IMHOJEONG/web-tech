@@ -13,13 +13,13 @@ export default async function Footer() {
     const footerT = await getTranslations('footer')
 
     return (
-        <footer className="relative z-20 w-full border-t border-zinc-900 bg-zinc-950 px-4 pt-[4.0625rem] pb-16 sm:px-6 lg:px-8">
+        <footer className="relative z-20 w-full border-t border-header-border bg-surface-container-low px-4 pt-[4.0625rem] pb-16 sm:px-6 lg:px-8">
             <div className="mx-auto flex max-w-page flex-col gap-6 md:flex-row md:items-end md:justify-between">
                 <div className="space-y-2">
-                    <div className="font-display text-lg font-bold leading-7 tracking-[0.1em] text-zinc-100 uppercase">
+                    <div className="font-display text-lg font-bold leading-7 tracking-[0.1em] text-on-surface uppercase">
                         {commonT('brand')}
                     </div>
-                    <div className="font-display text-[0.625rem] leading-[0.9375rem] tracking-[0.2em] text-zinc-600 uppercase">
+                    <div className="font-display text-[0.625rem] leading-[0.9375rem] tracking-[0.2em] text-muted-foreground uppercase">
                         {footerT('tagline', {
                             year: '2024',
                             brand: commonT('brand'),
@@ -32,7 +32,7 @@ export default async function Footer() {
                         <Link
                             key={link.key}
                             href={link.href}
-                            className="font-display text-[0.625rem] leading-[0.9375rem] tracking-[0.2em] text-zinc-600 uppercase transition-colors hover:text-zinc-400"
+                            className="font-display text-[0.625rem] leading-[0.9375rem] tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-on-surface"
                         >
                             {footerT(`links.${link.key}`)}
                         </Link>

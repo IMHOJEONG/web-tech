@@ -15,6 +15,12 @@
 
 디자인 원본 의도는 [apps/docs/.stitch/design.md](/Users/coder/Desktop/project/web-tech/apps/docs/.stitch/design.md:1)에 있고, 실제 런타임 토큰은 [packages/tailwind-config/shared-styles.css](/Users/coder/Desktop/project/web-tech/packages/tailwind-config/shared-styles.css:443)에 있다.
 
+외부 레퍼런스 기반 조정이 필요한 경우에는, 화면 레이아웃을 바로 복제하지 않고 먼저 `shared-styles.css`의 token 계층을 조정한 뒤 shell/component가 그 값을 따르게 한다.
+
+예:
+
+- `2026-05-06` HeapForge reference zip 정렬
+
 실제 구현에서는 `design.md`의 의미를 직접 복사하지 않고, 아래 공용 유틸을 우선 사용한다.
 
 - `ds-card`

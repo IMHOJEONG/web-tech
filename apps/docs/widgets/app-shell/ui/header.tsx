@@ -7,13 +7,13 @@ import { Navigation } from './navigation'
 
 export default function Header() {
     return (
-        <header className="sticky top-0 z-50 h-16.25 w-full border-b border-white/10 bg-zinc-950/80 text-white backdrop-blur-md">
+        <header className="sticky top-0 z-50 h-16.25 w-full border-b border-header-border bg-popover/80 text-on-surface backdrop-blur-md">
             <div className="mx-auto flex h-16 w-full max-w-page items-center justify-between px-4 sm:grid sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-4 sm:px-6 md:gap-6 md:px-8">
                 <MobileNavDrawer />
 
                 <div className="hidden min-w-0 items-center justify-start sm:flex">
                     <Link
-                        className="font-display flex items-center text-xl font-bold leading-7 tracking-widest text-cyan-400 uppercase"
+                        className="font-display flex items-center text-xl font-bold leading-7 tracking-widest text-primary uppercase"
                         href="/"
                     >
                         <Brand />

@@ -25,7 +25,7 @@ export const EmptySearchResult = ({
                     <Link
                         key={term}
                         href={`/docs?q=${encodeURIComponent(term)}`}
-                        className="rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-600 transition-colors hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-zinc-700 dark:hover:bg-zinc-950"
+                        className="ds-chip-muted px-3 py-1 text-xs font-medium normal-case tracking-normal hover:border-primary hover:text-primary"
                     >
                         {term}
                     </Link>
@@ -33,7 +33,7 @@ export const EmptySearchResult = ({
             </div>
             <Link
                 href="/docs"
-                className="text-sm text-cyan-500 transition-colors hover:text-cyan-400"
+                className="text-sm text-primary transition-colors hover:text-secondary"
             >
                 {t('empty.clear')}
             </Link>

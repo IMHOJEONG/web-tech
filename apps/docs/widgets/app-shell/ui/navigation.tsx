@@ -52,8 +52,8 @@ export const Navigation = () => {
                             className={cn(
                                 'font-display relative inline-flex h-6 items-center text-sm font-normal leading-6 tracking-tight transition-colors after:absolute after:-bottom-1.5 after:left-1/2 after:h-0.5 after:w-full after:-translate-x-1/2 after:rounded-full after:transition-colors md:text-[0.9375rem] lg:text-base',
                                 isActive
-                                    ? 'text-cyan-400 after:bg-cyan-400'
-                                    : 'text-zinc-400 after:bg-transparent hover:text-zinc-200'
+                                    ? 'text-primary after:bg-primary'
+                                    : 'text-muted-foreground after:bg-transparent hover:text-on-surface'
                             )}
                             href={href}
                             aria-current={isActive ? 'page' : undefined}
