@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server'
 import { ArrowUpRight } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
+import { ContactForm } from './contact-form'
 
 function PillBadge({
     label,
@@ -62,15 +63,15 @@ export async function AboutUs() {
         <main className="w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
             <div className="mx-auto flex w-full max-w-page flex-col gap-24 px-4 pb-24 pt-32 sm:px-8">
                 <section className="flex flex-col gap-10 border-b border-border pb-12 lg:flex-row lg:items-end lg:justify-between">
-                    <div className="max-w-[42rem] space-y-4">
+                    <div className="max-w-2xl space-y-4">
                         <div className="flex items-center gap-2 text-primary">
                             <span className="size-2 rounded-full bg-current" />
-                            <span className="font-display text-sm font-medium tracking-[0.05em] uppercase">
+                            <span className="font-display text-sm font-medium tracking-wider uppercase">
                                 {t('hero.status')}
                             </span>
                         </div>
 
-                        <h1 className="font-display max-w-[30rem] text-[clamp(2.75rem,6vw,4.75rem)] leading-[1.05] font-bold tracking-[-0.04em] text-on-surface">
+                        <h1 className="font-display max-w-120 text-[clamp(2.75rem,6vw,4.75rem)] leading-[1.05] font-bold tracking-[-0.04em] text-on-surface">
                             {t('hero.titleLead')}{' '}
                             <span className="text-secondary">
                                 {t('hero.titleAccentOne')}
@@ -80,19 +81,19 @@ export async function AboutUs() {
                             </span>
                         </h1>
 
-                        <p className="max-w-[36rem] text-body-lg text-on-surface-variant">
+                        <p className="max-w-xl text-body-lg text-on-surface-variant">
                             {t('hero.description')}
                         </p>
                     </div>
 
-                    <div className="font-mono text-sm leading-[1.5] text-outline">
+                    <div className="font-mono text-sm leading-normal text-outline">
                         <p>{t('hero.missionLabel')}</p>
                         <p>{t('hero.establishedLabel')}</p>
                     </div>
                 </section>
 
                 <section className="grid grid-cols-12 gap-6">
-                    <article className="ds-card col-span-12 flex min-h-[22rem] flex-col justify-between rounded-lg bg-surface-container-low p-12 lg:col-span-8">
+                    <article className="ds-card col-span-12 flex min-h-88 flex-col justify-between rounded-lg bg-surface-container-low p-12 lg:col-span-8">
                         <div className="space-y-4">
                             <PillBadge
                                 label={webCard.eyebrow}
@@ -101,7 +102,7 @@ export async function AboutUs() {
                             <h2 className="font-display text-headline-lg text-on-surface">
                                 {webCard.title}
                             </h2>
-                            <p className="max-w-[32rem] text-body-md text-on-surface-variant">
+                            <p className="max-w-128 text-body-md text-on-surface-variant">
                                 {webCard.description}
                             </p>
                         </div>
@@ -112,7 +113,7 @@ export async function AboutUs() {
                         </div>
                     </article>
 
-                    <article className="ds-card col-span-12 flex min-h-[22rem] flex-col justify-between rounded-lg bg-surface-container-low p-12 lg:col-span-4">
+                    <article className="ds-card col-span-12 flex min-h-88 flex-col justify-between rounded-lg bg-surface-container-low p-12 lg:col-span-4">
                         <div className="space-y-4">
                             <PillBadge
                                 label={mobileCard.eyebrow}
@@ -132,7 +133,7 @@ export async function AboutUs() {
                         </div>
                     </article>
 
-                    <article className="ds-card col-span-12 grid min-h-[19rem] rounded-lg bg-surface-container-low p-12 lg:grid-cols-[1.4fr_0.9fr] lg:items-center lg:gap-8">
+                    <article className="ds-card col-span-12 grid min-h-76 rounded-lg bg-surface-container-low p-12 lg:grid-cols-[1.4fr_0.9fr] lg:items-center lg:gap-8">
                         <div className="space-y-4">
                             <PillBadge
                                 label={designCard.eyebrow}
@@ -141,13 +142,13 @@ export async function AboutUs() {
                             <h2 className="font-display text-headline-lg text-on-surface">
                                 {designCard.title}
                             </h2>
-                            <p className="max-w-[42rem] text-body-md text-on-surface-variant">
+                            <p className="max-w-2xl text-body-md text-on-surface-variant">
                                 {designCard.description}
                             </p>
                         </div>
 
                         <div className="mt-8 overflow-hidden rounded-sm border border-border lg:mt-0">
-                            <div className="aspect-[16/9] bg-[radial-gradient(circle_at_top_left,color-mix(in_srgb,var(--primary)_18%,transparent),transparent_35%),linear-gradient(135deg,color-mix(in_srgb,var(--surface-bright)_90%,transparent),color-mix(in_srgb,var(--surface-container)_82%,transparent))]" />
+                            <div className="aspect-video bg-[radial-gradient(circle_at_top_left,color-mix(in_srgb,var(--primary)_18%,transparent),transparent_35%),linear-gradient(135deg,color-mix(in_srgb,var(--surface-bright)_90%,transparent),color-mix(in_srgb,var(--surface-container)_82%,transparent))]" />
                         </div>
                     </article>
                 </section>
@@ -163,7 +164,7 @@ export async function AboutUs() {
                                     <h2 className="font-display text-[1.5rem] leading-[1.3] font-bold text-on-surface">
                                         {t('profile.name')}
                                     </h2>
-                                    <p className="font-display text-base tracking-[0.05em] uppercase text-primary">
+                                    <p className="font-display text-base tracking-wider uppercase text-primary">
                                         {t('profile.role')}
                                     </p>
                                 </div>
@@ -202,51 +203,7 @@ export async function AboutUs() {
                             </p>
                         </div>
 
-                        <form className="space-y-8">
-                            <div className="grid gap-8 md:grid-cols-2">
-                                <label className="space-y-2">
-                                    <span className="font-display text-xs tracking-[0.1em] uppercase text-outline">
-                                        {t('contact.fields.name.label')}
-                                    </span>
-                                    <input
-                                        className="w-full border-b border-outline-variant bg-surface-container-lowest px-3 py-4 text-base text-on-surface outline-none transition-colors focus:border-primary"
-                                        placeholder={t(
-                                            'contact.fields.name.placeholder'
-                                        )}
-                                    />
-                                </label>
-                                <label className="space-y-2">
-                                    <span className="font-display text-xs tracking-[0.1em] uppercase text-outline">
-                                        {t('contact.fields.email.label')}
-                                    </span>
-                                    <input
-                                        className="w-full border-b border-outline-variant bg-surface-container-lowest px-3 py-4 text-base text-on-surface outline-none transition-colors focus:border-primary"
-                                        placeholder={t(
-                                            'contact.fields.email.placeholder'
-                                        )}
-                                    />
-                                </label>
-                            </div>
-
-                            <label className="space-y-2">
-                                <span className="font-display text-xs tracking-[0.1em] uppercase text-outline">
-                                    {t('contact.fields.message.label')}
-                                </span>
-                                <textarea
-                                    className="min-h-32 w-full border-b border-outline-variant bg-surface-container-lowest px-3 py-4 text-base text-on-surface outline-none transition-colors focus:border-primary"
-                                    placeholder={t(
-                                        'contact.fields.message.placeholder'
-                                    )}
-                                />
-                            </label>
-
-                            <button
-                                type="button"
-                                className="inline-flex items-center justify-center bg-primary-container px-12 py-4 font-display text-base tracking-[0.1em] text-on-primary-container uppercase shadow-glow-primary transition-transform hover:-translate-y-0.5"
-                            >
-                                {t('contact.submit')}
-                            </button>
-                        </form>
+                        <ContactForm />
                     </section>
                 </section>
             </div>

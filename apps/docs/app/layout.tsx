@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages, getTranslations } from 'next-intl/server'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import NextTopLoader from 'nextjs-toploader'
@@ -34,35 +35,43 @@ const spaceGrotesk = localFont({
     variable: '--font-display',
 })
 
-export const metadata: Metadata = {
-    title: 'HeapForge - Where memory meets mastery.',
-    description: '기술은 정말 중요하고, 꾸준히 배워서 적용해야 합니다!',
+export async function generateMetadata(): Promise<Metadata> {
+    const t = await getTranslations('metadata.site')
+
+    return {
+        title: t('title'),
+        description: t('description'),
+        openGraph: {
+            title: t('ogTitle'),
+            description: t('ogDescription'),
+            images: ['/og-image.png'],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: t('ogTitle'),
+            description: t('ogDescription'),
+            images: ['/og-image.png'],
+        },
+    }
 }
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-    return (
-        <html lang="ko" className="size-full">
-            <head>
-                <meta
-                    property="og:title"
-                    content="HeapForge – Where Memory Meets Mastery"
-                />
-                <meta
-                    property="og:description"
-                    content="HeapForge is a developer's foundry of deep system insights, memory internals, and software craftsmanship. From bytes to architecture — forge your knowledge."
-                />
-                <meta property="og:image" content="/og-image.png" />
-                <meta
-                    name="description"
-                    content="HeapForge is a blog dedicated to systems programming, memory internals, and software design. Explore in-depth guides and engineering insights."
-                />
+export default async function Layout({
+    children,
+}: {
+    children: React.ReactNode
+}) {
+    const locale = await getLocale()
+    const messages = await getMessages()
 
+    return (
+        <html lang={locale} className="size-full">
+            <head>
                 <script
                     src="https://unpkg.com/react-scan/dist/auto.global.js"
                     async
                 />
             </head>
-            <NextIntlClientProvider>
+            <NextIntlClientProvider locale={locale} messages={messages}>
                 <body
                     className={cn(
                         'flex size-full min-h-screen flex-col',

@@ -2,6 +2,14 @@
     "common": {
         "brand": "TECH_LOGIC"
     },
+    "metadata": {
+        "site": {
+            "title": "HeapForge - Where memory meets mastery.",
+            "description": "웹 엔지니어링, 시스템 사고, UI/UX 아키텍처, 제품 관점의 기술 글쓰기를 탐색하는 docs 경험입니다.",
+            "ogTitle": "HeapForge - Where memory meets mastery.",
+            "ogDescription": "웹 시스템, 모바일 제품 사고, UI/UX 아키텍처, 엔지니어링 노트를 탐색 가능한 지식 베이스 형태로 만나보세요."
+        }
+    },
     "navigation": {
         "feed": "Feed",
         "web": "Web",
@@ -169,6 +177,13 @@
             "title": "INITIATE CONTACT",
             "description": "제안이나 기술 관련 문의가 있다면 아래로 패킷을 보내주세요.",
             "submit": "EXECUTE SEND",
+            "validation": {
+                "nameRequired": "이름을 입력해주세요.",
+                "emailRequired": "이메일 주소를 입력해주세요.",
+                "emailInvalid": "올바른 이메일 주소를 입력해주세요.",
+                "messageRequired": "문의 내용을 입력해주세요.",
+                "reviewMessage": "입력 내용은 확인되었습니다. 아직 실제 전송 흐름은 연결되지 않았지만, 검토를 위한 패킷은 준비된 상태입니다."
+            },
             "fields": {
                 "name": {
                     "label": "SENDER_NAME",
@@ -183,6 +198,12 @@
                     "placeholder": "문의 내용을 간단히 설명해주세요..."
                 }
             }
+        },
+        "metadata": {
+            "title": "About HeapForge",
+            "description": "HeapForge의 목적, 엔지니어링 철학, 에디토리얼 방향을 소개합니다.",
+            "ogTitle": "About HeapForge",
+            "ogDescription": "HeapForge를 구성하는 프로젝트의 배경과 미션, 문의 흐름, 그리고 docs 경험을 만드는 제품 관점을 확인해보세요."
         }
     },
     "articleDetail": {

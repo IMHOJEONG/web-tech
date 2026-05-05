@@ -2,6 +2,14 @@
     "common": {
         "brand": "TECH_LOGIC"
     },
+    "metadata": {
+        "site": {
+            "title": "HeapForge - Where memory meets mastery.",
+            "description": "A docs experience for web engineering, system thinking, UI/UX architecture, and product-minded technical writing.",
+            "ogTitle": "HeapForge - Where memory meets mastery.",
+            "ogDescription": "Explore web systems, mobile product thinking, UI/UX architecture, and engineering notes shaped into a navigable knowledge base."
+        }
+    },
     "navigation": {
         "feed": "Feed",
         "web": "Web",
@@ -169,6 +177,13 @@
             "title": "INITIATE CONTACT",
             "description": "Have a proposal or technical inquiry? Send a packet below.",
             "submit": "EXECUTE SEND",
+            "validation": {
+                "nameRequired": "Please enter your name.",
+                "emailRequired": "Please enter your email address.",
+                "emailInvalid": "Please enter a valid email address.",
+                "messageRequired": "Please describe your inquiry.",
+                "reviewMessage": "Looks good so far. The delivery flow is not connected yet, but your packet is ready for review."
+            },
             "fields": {
                 "name": {
                     "label": "SENDER_NAME",
@@ -183,6 +198,12 @@
                     "placeholder": "Briefly describe your inquiry..."
                 }
             }
+        },
+        "metadata": {
+            "title": "About HeapForge",
+            "description": "Learn the purpose, engineering philosophy, and editorial direction behind HeapForge.",
+            "ogTitle": "About HeapForge",
+            "ogDescription": "Meet the project behind HeapForge and understand the mission, contact flow, and product mindset shaping the docs experience."
         }
     },
     "articleDetail": {
