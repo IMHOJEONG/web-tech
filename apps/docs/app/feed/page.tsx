@@ -1,7 +1,16 @@
 import { getSortedPostsData } from '~/lib/get-document'
-import { MainFeed } from '~/widgets/m/ui/main-feed'
+import { MainFeed, normalizeFeedFilter } from '~/widgets/m/ui/main-feed'
 
-export default async function Page() {
+type Props = {
+    searchParams: Promise<{
+        topic?: string
+    }>
+}
+
+export default async function Page({ searchParams }: Props) {
+    const { topic } = await searchParams
     const docs = await getSortedPostsData()
-    return <MainFeed docs={docs} />
+    const activeFilter = normalizeFeedFilter(topic)
+
+    return <MainFeed docs={docs} activeFilter={activeFilter} />
 }

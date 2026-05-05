@@ -4,6 +4,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Metadata } from '~/lib/get-document'
 
+export type FeedFilter = 'all' | 'web' | 'mobile' | 'uiux'
+
 type FeedDoc = Partial<Metadata> & {
     title: string
     slug: string
@@ -58,7 +60,15 @@ const GENERAL_TOPIC: TopicTone = {
     textClassName: 'text-on-surface-variant',
 }
 
-const CATEGORY_FILTERS = ['ALL', 'WEB', 'MOBILE', 'UI/UX']
+const CATEGORY_FILTERS: Array<{
+    key: FeedFilter
+    label: string
+}> = [
+    { key: 'all', label: 'ALL' },
+    { key: 'web', label: 'WEB' },
+    { key: 'mobile', label: 'MOBILE' },
+    { key: 'uiux', label: 'UI/UX' },
+]
 
 const PLACEHOLDER_MOBILE = {
     title: 'Mobile notes are lining up for the next drop.',
@@ -149,6 +159,33 @@ function getTopicStyle(doc: FeedDoc): TopicTone {
     }
 
     return GENERAL_TOPIC
+}
+
+function getFeedFilter(doc: FeedDoc): FeedFilter {
+    const fileName = doc.fileName ?? ''
+
+    if (
+        fileName.includes('/mobile/') ||
+        fileName.includes('/react-native/') ||
+        fileName.includes('/ios/') ||
+        fileName.includes('/android/')
+    ) {
+        return 'mobile'
+    }
+
+    if (fileName.includes('/data/shadcn/')) {
+        return 'uiux'
+    }
+
+    return 'web'
+}
+
+export function normalizeFeedFilter(value?: string): FeedFilter {
+    if (value === 'web' || value === 'mobile' || value === 'uiux') {
+        return value
+    }
+
+    return 'all'
 }
 
 function getAuthor(doc: FeedDoc, index: number): FeedAuthor {
@@ -375,14 +412,135 @@ function NewsletterInjectionCard() {
     )
 }
 
-export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
+function EmptyFilteredFeed({ activeFilter }: { activeFilter: FeedFilter }) {
+    return (
+        <article className="ds-card col-span-12 flex min-h-80 flex-col justify-between bg-surface-container-low p-6 sm:p-7 lg:p-8">
+            <div className="space-y-4">
+                <FeedBadge
+                    label={
+                        activeFilter === 'mobile'
+                            ? 'MOBILE FILTER'
+                            : activeFilter === 'uiux'
+                              ? 'UI/UX FILTER'
+                              : 'WEB FILTER'
+                    }
+                    className="bg-surface-container border border-outline-variant text-on-surface-variant"
+                />
+                <h3 className="font-display text-headline-md text-on-surface">
+                    아직 이 필터에 맞는 큐레이션 문서가 충분하지 않습니다.
+                </h3>
+                <p className="max-w-xl text-body-md text-on-surface-variant">
+                    현재는 전체 피드에서 더 많은 문서를 볼 수 있고, 이후 모바일
+                    및 세부 트랙 문서를 계속 확장할 예정입니다.
+                </p>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+                <Link
+                    href="/feed"
+                    className="font-display inline-flex items-center gap-3 border border-white/10 px-5 py-3 text-sm text-on-surface transition-colors hover:border-cyan-400/40 hover:text-cyan-300"
+                >
+                    전체 피드 보기
+                </Link>
+                <Link
+                    href="/docs"
+                    className="font-display inline-flex items-center gap-3 border border-white/5 bg-surface-container px-5 py-3 text-sm text-on-surface-variant transition-colors hover:border-white/10 hover:text-on-surface"
+                >
+                    전체 문서 인덱스
+                </Link>
+            </div>
+        </article>
+    )
+}
+
+export function MainFeed({
+    docs,
+    activeFilter = 'all',
+}: {
+    docs: Partial<Metadata>[]
+    activeFilter?: FeedFilter
+}) {
     const feedDocs = docs
         .map((doc) => toFeedDoc(doc))
         .filter((doc): doc is FeedDoc => doc !== null)
-    const [heroDoc, featuredDoc, compactDoc, imageDoc, supportDoc] = feedDocs
+    const filteredFeedDocs =
+        activeFilter === 'all'
+            ? feedDocs
+            : feedDocs.filter((doc) => getFeedFilter(doc) === activeFilter)
+
+    const [heroDoc, featuredDoc, compactDoc, imageDoc, supportDoc] =
+        filteredFeedDocs
 
     if (!heroDoc) {
-        return null
+        return (
+            <main className="w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
+                <section className="border-b border-white/5 bg-surface-container-lowest px-4 pb-16 pt-16 sm:px-6 md:px-8 lg:pb-20 lg:pt-20">
+                    <div className="mx-auto max-w-page space-y-6">
+                        <FeedBadge
+                            label="FILTERED FEED"
+                            className="bg-secondary/15 text-secondary"
+                        />
+                        <div className="space-y-3">
+                            <h1 className="font-display text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.08] font-bold tracking-[-0.04em] text-on-surface">
+                                선택한 트랙을 기준으로 피드를 좁혀보고 있습니다.
+                            </h1>
+                            <p className="max-w-2xl text-body-lg text-on-surface-variant">
+                                `topic` query string 기반으로 큐레이션 피드를
+                                필터링하고 있습니다. 아직 이 조건에 맞는 문서는
+                                많지 않아서, 전체 피드나 문서 인덱스로 이동하는
+                                흐름을 함께 제공합니다.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="px-4 py-12 sm:px-6 md:px-8 lg:py-16">
+                    <div className="mx-auto max-w-page space-y-10 lg:space-y-12">
+                        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                            <div className="space-y-2">
+                                <div className="flex items-center gap-3">
+                                    <span className="h-8 w-2 bg-primary" />
+                                    <h2 className="font-display text-headline-lg text-on-surface">
+                                        Latest Technical Insights
+                                    </h2>
+                                </div>
+                                <p className="font-body text-sm tracking-[0.16em] uppercase text-on-surface-variant">
+                                    Precision curated knowledge
+                                </p>
+                            </div>
+
+                            <div className="flex flex-wrap items-center gap-3">
+                                {CATEGORY_FILTERS.map((filter) => {
+                                    const href =
+                                        filter.key === 'all'
+                                            ? '/feed'
+                                            : `/feed?topic=${filter.key}`
+
+                                    return (
+                                        <Link
+                                            key={filter.key}
+                                            href={href}
+                                            className={cn(
+                                                'font-display border px-4.25 py-2.25 text-sm transition-colors',
+                                                activeFilter === filter.key
+                                                    ? 'border-white/10 bg-surface-container text-cyan-400'
+                                                    : 'border-white/5 bg-surface-container-low text-on-surface-variant hover:text-on-surface'
+                                            )}
+                                        >
+                                            {filter.label}
+                                        </Link>
+                                    )
+                                })}
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-12 gap-6">
+                            <EmptyFilteredFeed activeFilter={activeFilter} />
+                        </div>
+                    </div>
+                </section>
+            </main>
+        )
     }
 
     const heroTopic = getTopicStyle(heroDoc)
@@ -486,20 +644,27 @@ export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
                         </div>
 
                         <div className="flex flex-wrap items-center gap-3">
-                            {CATEGORY_FILTERS.map((filter, index) => (
-                                <button
-                                    key={filter}
-                                    type="button"
-                                    className={cn(
-                                        'font-display border px-4.25 py-2.25 text-sm transition-colors',
-                                        index === 0
-                                            ? 'border-white/10 bg-surface-container text-cyan-400'
-                                            : 'border-white/5 bg-surface-container-low text-on-surface-variant hover:text-on-surface'
-                                    )}
-                                >
-                                    {filter}
-                                </button>
-                            ))}
+                            {CATEGORY_FILTERS.map((filter) => {
+                                const href =
+                                    filter.key === 'all'
+                                        ? '/feed'
+                                        : `/feed?topic=${filter.key}`
+
+                                return (
+                                    <Link
+                                        key={filter.key}
+                                        href={href}
+                                        className={cn(
+                                            'font-display border px-4.25 py-2.25 text-sm transition-colors',
+                                            activeFilter === filter.key
+                                                ? 'border-white/10 bg-surface-container text-cyan-400'
+                                                : 'border-white/5 bg-surface-container-low text-on-surface-variant hover:text-on-surface'
+                                        )}
+                                    >
+                                        {filter.label}
+                                    </Link>
+                                )
+                            })}
                         </div>
                     </div>
 
@@ -548,10 +713,12 @@ export function MainFeed({ docs }: { docs: Partial<Metadata>[] }) {
 
                     <div className="flex justify-center pt-4">
                         <Link
-                            href="/feed"
+                            href={activeFilter === 'all' ? '/docs' : '/feed'}
                             className="font-display inline-flex items-center gap-4 border border-white/10 px-8 py-3 text-sm text-on-surface transition-colors hover:border-cyan-400/40 hover:text-cyan-300 sm:px-10 sm:py-4 sm:text-base"
                         >
-                            LOAD MORE SEQUENCES
+                            {activeFilter === 'all'
+                                ? 'BROWSE DOCUMENT INDEX'
+                                : 'RESET TO ALL FEED'}
                             <ArrowRight className="size-4" />
                         </Link>
                     </div>

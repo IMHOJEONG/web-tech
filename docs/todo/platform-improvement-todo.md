@@ -77,10 +77,10 @@
   - mobile drawer
   - bottom nav
   - article/feed spacing
-- [ ] `P1` `MainFeed` 필터 버튼에 실제 인터랙션을 연결한다.
-  - client filter
-  - route transition
-  - query string 기반 중 하나로 확정
+- [x] `P1` `MainFeed` 필터 버튼에 실제 인터랙션을 연결한다.
+  - `query string` 기반으로 확정
+  - `/feed?topic=web|mobile|uiux` 형태로 상태를 표현
+  - 기준 문서: `docs/architecture/docs-feed-filter-policy.md`
 - [ ] `P1` `About` contact form의 사용자 흐름을 확정한다.
   - 실제 전송
   - 제출 상태
