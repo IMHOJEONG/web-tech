@@ -23,6 +23,7 @@
 - `Footer`
 - `Search`
 - `DocsIndex`
+- `RootLanding`
 - `AboutUs`
 - `ArticleDetail`
 - locale-aware `metadata` / `openGraph` copy
@@ -41,6 +42,7 @@
 - `header`
 - `footer`
 - `home`
+- `rootLanding`
 - `search`
 
 규칙은 다음과 같습니다.
@@ -59,6 +61,7 @@
 - `header.drawer.openAriaLabel`
 - `footer.links.github`
 - `search.input.placeholder`
+- `rootLanding.hero.titleLineOne`
 
 ## Key Naming Rules
 
@@ -157,6 +160,7 @@ client component에서는 `useTranslations`를 사용합니다.
 - `footer.links.*`
 - `search.input.*`
 - `search.empty.*`
+- `rootLanding.*`
 - `docsIndex.*`
 - `about.*`
 - `articleDetail.*`
