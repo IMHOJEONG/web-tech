@@ -78,5 +78,215 @@
             "resultDescription": "Try another keyword or restart from one of the suggested topics",
             "clear": "Back to all docs"
         }
+    },
+    "docsIndex": {
+        "card": {
+            "open": "Open"
+        },
+        "search": {
+            "eyebrow": "Search Results",
+            "title": "Results for \"{keyword}\"",
+            "description": "`/docs` is not a curated feed. It is the document index context, organized around title, summary, taxonomy, and content matches.",
+            "countLabel": "{count} results",
+            "matchingEyebrow": "Matching Documents",
+            "matchingTitle": "Documents closest to your query",
+            "backToDocs": "Back to all docs"
+        },
+        "index": {
+            "eyebrow": "Document Index",
+            "title": "A faster index for every document",
+            "description": "`/docs` is the place to scan the full archive, move across sections, and start from search instead of curation."
+        },
+        "stats": {
+            "totalDocs": "Total Docs",
+            "sections": "Sections",
+            "latestUpdate": "Latest Update",
+            "pending": "Update pending"
+        },
+        "sections": {
+            "eyebrow": "Section Overview",
+            "title": "Sections where documents live",
+            "toCategory": "Browse category",
+            "documentCount": "{count} documents"
+        },
+        "sectionLabels": {
+            "web": "Web",
+            "uiux": "UI/UX",
+            "backend": "Backend",
+            "computerscience": "Computer Science",
+            "docs": "General Docs"
+        },
+        "sectionDescriptions": {
+            "web": "Documents about browsers, frontend systems, and rendering.",
+            "uiux": "Documents about interface design and experience systems.",
+            "backend": "Technical notes focused on server architecture and APIs.",
+            "computerscience": "Documents grounded in operating systems and computer science.",
+            "docs": "General notes, records, and uncategorized articles."
+        },
+        "allDocuments": {
+            "eyebrow": "All Documents",
+            "title": "Full document list",
+            "toFeed": "Go to curated feed"
+        }
+    },
+    "about": {
+        "hero": {
+            "status": "STATUS: LIVE // VERSION 2.0.4",
+            "titleLead": "BRIDGING THE STACK THROUGH",
+            "titleAccentOne": "TECHNICAL",
+            "titleAccentTwo": "PRECISION",
+            "description": "A digital lab dedicated to unraveling modern engineering. We explore the point where Web performance, Mobile fluidity, and UI/UX architecture converge.",
+            "missionLabel": "// MISSION_STATEMENT.md",
+            "establishedLabel": "// ESTABLISHED_2024"
+        },
+        "pillars": {
+            "web": {
+                "eyebrow": "ENGINEERING PHILOSOPHY",
+                "title": "Web & Performance",
+                "description": "Deep dives into React, Rust, and the future of the V8 engine. We do not just write code; we architect experiences that scale with precision."
+            },
+            "mobile": {
+                "eyebrow": "MOBILITY",
+                "title": "Mobile Fluidity",
+                "description": "Mastering the nuance of native and cross-platform ecosystems to build seamless handheld tools.",
+                "terminalLineOne": "const mobile = await optimize(ui,",
+                "terminalLineTwo": "stack);"
+            },
+            "design": {
+                "eyebrow": "INTERFACE DESIGN",
+                "title": "UI/UX as Code",
+                "description": "Design systems are living entities. We examine hierarchy, motion, and accessibility as part of a precise interface language."
+            }
+        },
+        "profile": {
+            "name": "Alex Volkov",
+            "role": "LEAD ARCHITECT & CREATOR",
+            "bio": "A full-stack engineer with a taste for minimal aesthetics and maximal performance, building TECH_LOGIC as an open knowledge base for digital builders.",
+            "github": "GITHUB",
+            "twitter": "TWITTER/X"
+        },
+        "contact": {
+            "title": "INITIATE CONTACT",
+            "description": "Have a proposal or technical inquiry? Send a packet below.",
+            "submit": "EXECUTE SEND",
+            "fields": {
+                "name": {
+                    "label": "SENDER_NAME",
+                    "placeholder": "e.g. John Doe"
+                },
+                "email": {
+                    "label": "RETURN_ADDRESS",
+                    "placeholder": "email@provider.com"
+                },
+                "message": {
+                    "label": "PAYLOAD_DESCRIPTION",
+                    "placeholder": "Briefly describe your inquiry..."
+                }
+            }
+        }
+    },
+    "articleDetail": {
+        "channels": {
+            "web": {
+                "badge": "WEB DEVELOPMENT",
+                "note": "A technical field guide for frontend systems and runtime-aware interfaces."
+            },
+            "mobile": {
+                "badge": "MOBILE SYSTEMS",
+                "note": "A dense article format for touch-first product thinking and mobile runtime constraints."
+            },
+            "uiux": {
+                "badge": "UI/UX SYSTEMS",
+                "note": "A design-technical reading format for hierarchy, interaction semantics, motion, and accessible component craft."
+            }
+        },
+        "toc": {
+            "paradox": "01. The Reactivity Paradox",
+            "logic": "02. Logic & Stream Primitives",
+            "visual": "03. Visual Refinement",
+            "mobile": "04. The Mobile Delta",
+            "summary": "05. Summary & Benchmarks"
+        },
+        "hero": {
+            "readTime": "12 MIN READ",
+            "title": "Architecting the Next Generation of Real-time Reactive Interfaces",
+            "authorAlt": "Alex Rivers profile",
+            "authorName": "Alex Rivers",
+            "authorMeta": "LEAD ENGINEER • MAY 24, 2024",
+            "heroImageAlt": "Abstract technology hero"
+        },
+        "body": {
+            "intro": "The transition from static data fetching to granular reactivity marks a deeper shift in how we design digital interaction. As low-latency products become more common, the infrastructure behind them needs to evolve beyond traditional state patterns.",
+            "streamParagraph": "By leaning on stream-based state primitives, teams can reduce the cost of virtual DOM reconciliation in dense, high-frequency interfaces such as terminal views or financial dashboards.",
+            "mobileParagraph": "The mobile experience comes with a different set of constraints. Precision here is not only visual; it becomes essential for maintaining clarity on smaller viewports.",
+            "designAltOne": "Design detail with red accents",
+            "designAltTwo": "Design detail with metallic lighting",
+            "mobileMockupAlt": "Mobile interface mockup",
+            "sections": {
+                "paradox": {
+                    "title": "The Reactivity Paradox",
+                    "description": "Modern web architecture often forces teams to fight their framework just to achieve the precision required by high-density interfaces. The challenge is reducing re-render scope while keeping the model declarative."
+                },
+                "visual": {
+                    "title": "Visual Refinement in High-Density Environments"
+                },
+                "mobile": {
+                    "title": "The Mobile Delta"
+                }
+            }
+        },
+        "code": {
+            "fileLabel": "REACTIVE_STREAM.TS",
+            "actionLabel": "COPY"
+        },
+        "newsletter": {
+            "mobile": {
+                "title": "Build Better Systems",
+                "description": "Join 12,000+ engineers receiving bi-weekly deep dives into infrastructure, Rust, and distributed computing.",
+                "placeholder": "user@tech-logic.io",
+                "button": "Subscribe to the Patch",
+                "note": "NO SPAM // SYSTEM-GRADE SIGNAL ONLY"
+            },
+            "sidebar": {
+                "title": "Join the System",
+                "description": "Get engineering insights delivered to your terminal weekly.",
+                "placeholder": "USER@DOMAIN.COM",
+                "button": "SUBSCRIBE"
+            }
+        },
+        "author": {
+            "alt": "Alex Rivers portrait",
+            "title": "About Alex Rivers",
+            "description": "Engineering the intersection of high-performance application logic, information density, and product feel.",
+            "links": {
+                "twitter": "TWITTER",
+                "github": "GITHUB",
+                "linkedin": "LINKEDIN"
+            }
+        },
+        "sidebar": {
+            "tocTitle": "TABLE OF CONTENTS",
+            "joinTitle": "JOIN THE SYSTEM"
+        },
+        "related": {
+            "title": "RELATED SIGNALS",
+            "items": {
+                "rust": {
+                    "category": "MOBILE",
+                    "title": "Optimizing Rust compilation for ARM architectures",
+                    "meta": "MAY 12 • 08 MIN"
+                },
+                "ethics": {
+                    "category": "UI/UX",
+                    "title": "The ethics of algorithmic visual feedback",
+                    "meta": "MAY 08 • 15 MIN"
+                },
+                "transport": {
+                    "category": "WEB",
+                    "title": "Beyond HTTP/3: The future of data transport",
+                    "meta": "APR 29 • 20 MIN"
+                }
+            }
+        }
     }
 }

@@ -78,5 +78,215 @@
             "resultDescription": "다른 키워드로 검색하거나 추천 주제에서 다시 시작해보세요",
             "clear": "전체 문서로 돌아가기"
         }
+    },
+    "docsIndex": {
+        "card": {
+            "open": "Open"
+        },
+        "search": {
+            "eyebrow": "Search Results",
+            "title": "\"{keyword}\"에 대한 검색 결과",
+            "description": "`/docs`는 큐레이션 피드가 아니라 문서 인덱스 컨텍스트입니다. 제목, 요약, 분류, 본문을 기준으로 관련 문서를 정리했습니다.",
+            "countLabel": "{count} results",
+            "matchingEyebrow": "Matching Documents",
+            "matchingTitle": "검색과 가장 가까운 문서",
+            "backToDocs": "전체 문서 보기"
+        },
+        "index": {
+            "eyebrow": "Document Index",
+            "title": "모든 문서를 빠르게 찾는 인덱스",
+            "description": "`/docs`는 `feed`처럼 큐레이션을 보여주는 화면이 아니라, 전체 문서를 빠르게 스캔하고 섹션 탐색과 검색을 시작하는 컨텍스트입니다."
+        },
+        "stats": {
+            "totalDocs": "Total Docs",
+            "sections": "Sections",
+            "latestUpdate": "Latest Update",
+            "pending": "업데이트 준비 중"
+        },
+        "sections": {
+            "eyebrow": "Section Overview",
+            "title": "문서가 모여 있는 섹션",
+            "toCategory": "category 보기",
+            "documentCount": "문서 {count}개"
+        },
+        "sectionLabels": {
+            "web": "Web",
+            "uiux": "UI/UX",
+            "backend": "Backend",
+            "computerscience": "Computer Science",
+            "docs": "General Docs"
+        },
+        "sectionDescriptions": {
+            "web": "브라우저, 프론트엔드, 렌더링 관련 문서",
+            "uiux": "인터페이스와 경험 설계 관련 문서",
+            "backend": "서버 구조와 API 관점의 기술 노트",
+            "computerscience": "운영체제, 컴퓨터 과학 기반 문서",
+            "docs": "기타 문서와 기록성 아티클"
+        },
+        "allDocuments": {
+            "eyebrow": "All Documents",
+            "title": "전체 문서 목록",
+            "toFeed": "큐레이션 피드로 이동"
+        }
+    },
+    "about": {
+        "hero": {
+            "status": "STATUS: LIVE // VERSION 2.0.4",
+            "titleLead": "기술 스택을",
+            "titleAccentOne": "정밀한",
+            "titleAccentTwo": "구현으로 연결합니다",
+            "description": "현대 엔지니어링의 복잡성을 해부하는 디지털 랩입니다. Web 성능, Mobile 유연성, UI/UX 아키텍처가 만나는 지점을 탐구합니다.",
+            "missionLabel": "// MISSION_STATEMENT.md",
+            "establishedLabel": "// ESTABLISHED_2024"
+        },
+        "pillars": {
+            "web": {
+                "eyebrow": "ENGINEERING PHILOSOPHY",
+                "title": "Web & Performance",
+                "description": "React, Rust, V8 엔진의 미래까지 깊게 다룹니다. 단순히 코드를 작성하는 것이 아니라, 정밀하게 확장되는 경험을 설계합니다."
+            },
+            "mobile": {
+                "eyebrow": "MOBILITY",
+                "title": "Mobile Fluidity",
+                "description": "네이티브와 크로스플랫폼 생태계의 미묘한 차이를 이해하고, 손 안에서 자연스럽게 작동하는 도구를 만듭니다.",
+                "terminalLineOne": "const mobile = await optimize(ui,",
+                "terminalLineTwo": "stack);"
+            },
+            "design": {
+                "eyebrow": "INTERFACE DESIGN",
+                "title": "UI/UX as Code",
+                "description": "디자인 시스템은 살아 있는 구조입니다. 계층, 모션, 접근성을 하나의 정밀한 인터페이스 언어로 다룹니다."
+            }
+        },
+        "profile": {
+            "name": "Alex Volkov",
+            "role": "LEAD ARCHITECT & CREATOR",
+            "bio": "미니멀한 미감과 높은 성능을 함께 지향하는 풀스택 엔지니어로, 디지털 빌더를 위한 열린 지식 베이스로서 TECH_LOGIC을 구축하고 있습니다.",
+            "github": "GITHUB",
+            "twitter": "TWITTER/X"
+        },
+        "contact": {
+            "title": "INITIATE CONTACT",
+            "description": "제안이나 기술 관련 문의가 있다면 아래로 패킷을 보내주세요.",
+            "submit": "EXECUTE SEND",
+            "fields": {
+                "name": {
+                    "label": "SENDER_NAME",
+                    "placeholder": "예: John Doe"
+                },
+                "email": {
+                    "label": "RETURN_ADDRESS",
+                    "placeholder": "email@provider.com"
+                },
+                "message": {
+                    "label": "PAYLOAD_DESCRIPTION",
+                    "placeholder": "문의 내용을 간단히 설명해주세요..."
+                }
+            }
+        }
+    },
+    "articleDetail": {
+        "channels": {
+            "web": {
+                "badge": "WEB DEVELOPMENT",
+                "note": "프론트엔드 시스템과 런타임 인식 인터페이스를 위한 기술 필드 가이드입니다."
+            },
+            "mobile": {
+                "badge": "MOBILE SYSTEMS",
+                "note": "터치 중심 제품 사고와 모바일 런타임 제약을 다루는 고밀도 아티클 포맷입니다."
+            },
+            "uiux": {
+                "badge": "UI/UX SYSTEMS",
+                "note": "계층, 인터랙션 의미론, 모션, 접근 가능한 컴포넌트 제작을 다루는 디자인-기술 읽기 포맷입니다."
+            }
+        },
+        "toc": {
+            "paradox": "01. 반응성의 역설",
+            "logic": "02. 로직과 스트림 프리미티브",
+            "visual": "03. 고밀도 환경의 시각 정제",
+            "mobile": "04. 모바일 델타",
+            "summary": "05. 요약과 벤치마크"
+        },
+        "hero": {
+            "readTime": "12 MIN READ",
+            "title": "차세대 실시간 반응형 인터페이스를 설계하는 법",
+            "authorAlt": "Alex Rivers 프로필",
+            "authorName": "Alex Rivers",
+            "authorMeta": "LEAD ENGINEER • MAY 24, 2024",
+            "heroImageAlt": "추상 기술 비주얼"
+        },
+        "body": {
+            "intro": "정적인 데이터 패칭에서 세분화된 반응성으로 넘어가는 전환은 디지털 인터랙션을 설계하는 방식 자체를 바꿉니다. 저지연 제품이 일반화될수록, 그 뒤를 받치는 인프라도 전통적인 상태 패턴을 넘어 진화해야 합니다.",
+            "streamParagraph": "스트림 기반 상태 프리미티브를 사용하면 터미널 뷰나 금융 대시보드처럼 고밀도이고 빈번하게 갱신되는 인터페이스에서 가상 DOM 재조정 비용을 크게 줄일 수 있습니다.",
+            "mobileParagraph": "모바일 경험은 전혀 다른 제약 집합을 갖습니다. 여기서 정밀함은 단지 시각적 선택이 아니라, 작은 화면에서도 명확성을 유지하기 위한 기능적 필요가 됩니다.",
+            "designAltOne": "붉은 포인트가 있는 디자인 디테일",
+            "designAltTwo": "금속성 조명이 있는 디자인 디테일",
+            "mobileMockupAlt": "모바일 인터페이스 목업",
+            "sections": {
+                "paradox": {
+                    "title": "반응성의 역설",
+                    "description": "현대 웹 아키텍처에서는 고밀도 인터페이스에 필요한 정밀함을 확보하기 위해 프레임워크와 씨름하게 되는 경우가 많습니다. 핵심 과제는 선언적 모델을 유지하면서도 재렌더 범위를 줄이는 데 있습니다."
+                },
+                "visual": {
+                    "title": "고밀도 환경의 시각 정제"
+                },
+                "mobile": {
+                    "title": "모바일 델타"
+                }
+            }
+        },
+        "code": {
+            "fileLabel": "REACTIVE_STREAM.TS",
+            "actionLabel": "COPY"
+        },
+        "newsletter": {
+            "mobile": {
+                "title": "더 나은 시스템을 만드세요",
+                "description": "인프라, Rust, 분산 컴퓨팅에 대한 깊이 있는 글을 격주로 받아보는 12,000명 이상의 엔지니어와 함께하세요.",
+                "placeholder": "user@tech-logic.io",
+                "button": "패치 구독하기",
+                "note": "NO SPAM // SYSTEM-GRADE SIGNAL ONLY"
+            },
+            "sidebar": {
+                "title": "Join the System",
+                "description": "엔지니어링 인사이트를 매주 터미널로 받아보세요.",
+                "placeholder": "USER@DOMAIN.COM",
+                "button": "SUBSCRIBE"
+            }
+        },
+        "author": {
+            "alt": "Alex Rivers 인물 사진",
+            "title": "About Alex Rivers",
+            "description": "고성능 애플리케이션 로직, 정보 밀도, 제품 감각이 만나는 지점을 설계합니다.",
+            "links": {
+                "twitter": "TWITTER",
+                "github": "GITHUB",
+                "linkedin": "LINKEDIN"
+            }
+        },
+        "sidebar": {
+            "tocTitle": "TABLE OF CONTENTS",
+            "joinTitle": "JOIN THE SYSTEM"
+        },
+        "related": {
+            "title": "RELATED SIGNALS",
+            "items": {
+                "rust": {
+                    "category": "MOBILE",
+                    "title": "ARM 아키텍처를 위한 Rust 컴파일 최적화",
+                    "meta": "MAY 12 • 08 MIN"
+                },
+                "ethics": {
+                    "category": "UI/UX",
+                    "title": "알고리즘 기반 시각 피드백의 윤리",
+                    "meta": "MAY 08 • 15 MIN"
+                },
+                "transport": {
+                    "category": "WEB",
+                    "title": "HTTP/3 이후의 데이터 전송 미래",
+                    "meta": "APR 29 • 20 MIN"
+                }
+            }
+        }
     }
 }

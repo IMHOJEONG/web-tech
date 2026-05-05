@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
 const imgAuthorProfile = '/figma/article-detail/author-profile.png'
@@ -8,52 +9,8 @@ const imgDesignDetail2 = '/figma/article-detail/design-detail-2.png'
 const imgMobileInterfaceMockup =
     '/figma/article-detail/mobile-interface-mockup.png'
 
-const tocItems = [
-    '01. The Reactivity Paradox',
-    '02. Logic & Stream Primitives',
-    '03. Visual Refinement',
-    '04. The Mobile Delta',
-    '05. Summary & Benchmarks',
-]
-
-const relatedSignals = [
-    {
-        category: 'MOBILE',
-        title: 'Optimizing Rust compilation for ARM architectures',
-        meta: 'MAY 12 • 08 MIN',
-        href: '/mobile',
-    },
-    {
-        category: 'UI/UX',
-        title: 'The ethics of algorithmic visual feedback',
-        meta: 'MAY 08 • 15 MIN',
-        href: '/ui-ux',
-    },
-    {
-        category: 'WEB',
-        title: 'Beyond HTTP/3: The future of data transport',
-        meta: 'APR 29 • 20 MIN',
-        href: '/web',
-    },
-]
-
-const pageMeta = {
-    web: {
-        badge: 'WEB DEVELOPMENT',
-        note: 'A technical field guide for frontend systems and runtime-aware interfaces.',
-    },
-    mobile: {
-        badge: 'MOBILE SYSTEMS',
-        note: 'A high-density article template for touch-first product thinking and mobile runtime constraints.',
-    },
-    uiux: {
-        badge: 'UI/UX SYSTEMS',
-        note: 'A design-technical reading format for interaction semantics, hierarchy, motion, and accessible component craft.',
-    },
-} as const
-
 type ArticleDetailProps = {
-    channel: keyof typeof pageMeta
+    channel: 'web' | 'mobile' | 'uiux'
 }
 
 function SidebarSection({
@@ -132,8 +89,42 @@ function NewsletterCard({
     )
 }
 
-export function ArticleDetail({ channel }: ArticleDetailProps) {
-    const meta = pageMeta[channel]
+export async function ArticleDetail({ channel }: ArticleDetailProps) {
+    const t = await getTranslations('articleDetail')
+
+    const meta = {
+        badge: t(`channels.${channel}.badge`),
+        note: t(`channels.${channel}.note`),
+    }
+
+    const tocItems = [
+        t('toc.paradox'),
+        t('toc.logic'),
+        t('toc.visual'),
+        t('toc.mobile'),
+        t('toc.summary'),
+    ]
+
+    const relatedSignals = [
+        {
+            category: t('related.items.rust.category'),
+            title: t('related.items.rust.title'),
+            meta: t('related.items.rust.meta'),
+            href: '/mobile',
+        },
+        {
+            category: t('related.items.ethics.category'),
+            title: t('related.items.ethics.title'),
+            meta: t('related.items.ethics.meta'),
+            href: '/ui-ux',
+        },
+        {
+            category: t('related.items.transport.category'),
+            title: t('related.items.transport.title'),
+            meta: t('related.items.transport.meta'),
+            href: '/web',
+        },
+    ]
 
     return (
         <main className="w-full text-on-surface">
@@ -150,30 +141,29 @@ export function ArticleDetail({ channel }: ArticleDetailProps) {
                             </span>
                             <span className="text-on-surface-variant">•</span>
                             <span className="font-display text-xs tracking-[0.05em] text-outline uppercase">
-                                12 MIN READ
+                                {t('hero.readTime')}
                             </span>
                         </div>
 
                         <div className="space-y-6">
                             <h1 className="font-display max-w-[15ch] text-[clamp(2.4rem,5vw,4rem)] leading-[1.15] font-bold tracking-[-0.03em] text-on-surface">
-                                Architecting the Next Generation of Real-time
-                                Reactive Interfaces
+                                {t('hero.title')}
                             </h1>
 
                             <div className="flex items-center gap-4">
-                                <div className="overflow-hidden rounded-xl border border-border bg-surface-container size-12">
+                                <div className="size-12 overflow-hidden rounded-xl border border-border bg-surface-container">
                                     <img
                                         src={imgAuthorProfile}
-                                        alt="Alex Rivers profile"
+                                        alt={t('hero.authorAlt')}
                                         className="h-full w-full object-cover"
                                     />
                                 </div>
                                 <div>
                                     <p className="font-display text-base text-on-surface">
-                                        Alex Rivers
+                                        {t('hero.authorName')}
                                     </p>
                                     <p className="font-display text-sm tracking-[0.08em] text-outline uppercase">
-                                        LEAD ENGINEER • MAY 24, 2024
+                                        {t('hero.authorMeta')}
                                     </p>
                                 </div>
                             </div>
@@ -184,7 +174,7 @@ export function ArticleDetail({ channel }: ArticleDetailProps) {
                         <div className="relative aspect-[16/9]">
                             <img
                                 src={imgAbstractTechnologyHero}
-                                alt="Abstract technology hero"
+                                alt={t('hero.heroImageAlt')}
                                 className="h-full w-full object-cover"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
@@ -192,37 +182,23 @@ export function ArticleDetail({ channel }: ArticleDetailProps) {
                     </section>
 
                     <section className="space-y-6 text-body-lg text-on-surface-variant">
-                        <p>
-                            The transition from static data fetching to granular
-                            reactivity represents a paradigm shift in how we
-                            conceive digital interactions. As we push the
-                            boundaries of low-latency applications, the
-                            infrastructure supporting these experiences must
-                            evolve beyond traditional state management patterns.
-                        </p>
+                        <p>{t('body.intro')}</p>
 
                         <div className="space-y-4 pt-4">
                             <h2 className="font-display text-headline-lg text-on-surface">
-                                The Reactivity Paradox
+                                {t('body.sections.paradox.title')}
                             </h2>
-                            <p>
-                                In modern web architecture, we often find
-                                ourselves fighting the framework to achieve the
-                                level of precision required for high-density
-                                information displays. The core challenge lies in
-                                minimizing the re-render footprint while
-                                maintaining a declarative mental model.
-                            </p>
+                            <p>{t('body.sections.paradox.description')}</p>
                         </div>
                     </section>
 
                     <section className="overflow-hidden rounded-sm border border-white/10 bg-black">
                         <div className="flex items-center justify-between border-b border-white/5 bg-surface-container px-3 py-1.5">
                             <span className="font-display text-[0.625rem] tracking-[0.14em] text-outline uppercase">
-                                REACTIVE_STREAM.TS
+                                {t('code.fileLabel')}
                             </span>
                             <span className="font-mono text-xs text-outline">
-                                COPY
+                                {t('code.actionLabel')}
                             </span>
                         </div>
                         <pre className="overflow-x-auto px-6 py-10 font-mono text-sm leading-[1.5] text-zinc-200">
@@ -246,16 +222,11 @@ const useReactiveState = (stream$) => {
                     </section>
 
                     <section className="space-y-6 text-body-lg text-on-surface-variant">
-                        <p>
-                            By leveraging stream-based state primitives,
-                            developers can bypass the overhead of virtual DOM
-                            reconciliation for data-heavy components like
-                            real-time terminal outputs or financial dashboards.
-                        </p>
+                        <p>{t('body.streamParagraph')}</p>
 
                         <div className="space-y-4 pt-4">
                             <h2 className="font-display text-headline-lg text-on-surface">
-                                Visual Refinement in High-Density Environments
+                                {t('body.sections.visual.title')}
                             </h2>
                         </div>
 
@@ -263,14 +234,14 @@ const useReactiveState = (stream$) => {
                             <div className="overflow-hidden rounded-sm border border-border bg-surface-container">
                                 <img
                                     src={imgDesignDetail1}
-                                    alt="Design detail with red accents"
+                                    alt={t('body.designAltOne')}
                                     className="h-full w-full object-cover"
                                 />
                             </div>
                             <div className="overflow-hidden rounded-sm border border-border bg-surface-container">
                                 <img
                                     src={imgDesignDetail2}
-                                    alt="Design detail with metallic lighting"
+                                    alt={t('body.designAltTwo')}
                                     className="h-full w-full object-cover"
                                 />
                             </div>
@@ -278,7 +249,7 @@ const useReactiveState = (stream$) => {
 
                         <div className="space-y-4 pt-4">
                             <h2 className="font-display text-headline-lg text-on-surface">
-                                The Mobile Delta
+                                {t('body.sections.mobile.title')}
                             </h2>
                         </div>
 
@@ -287,7 +258,7 @@ const useReactiveState = (stream$) => {
                                 <div className="relative aspect-[256/500]">
                                     <img
                                         src={imgMobileInterfaceMockup}
-                                        alt="Mobile interface mockup"
+                                        alt={t('body.mobileMockupAlt')}
                                         className="h-full w-full object-cover"
                                     />
                                     <div className="absolute left-1/2 top-0 h-6 w-24 -translate-x-1/2 rounded-b-2xl bg-zinc-900" />
@@ -295,61 +266,53 @@ const useReactiveState = (stream$) => {
                             </div>
                         </div>
 
-                        <p>
-                            The mobile experience requires a different set of
-                            constraints. Here, the precision engineered
-                            aesthetic is not just a visual choice but a
-                            functional necessity for maintaining clarity on
-                            smaller viewports.
-                        </p>
+                        <p>{t('body.mobileParagraph')}</p>
                     </section>
 
                     <section className="lg:hidden">
                         <NewsletterCard
-                            title="Build Better Systems"
-                            description="Join 12,000+ engineers receiving bi-weekly deep dives into infrastructure, Rust, and distributed computing."
-                            placeholder="user@tech-logic.io"
-                            buttonLabel="Subscribe to the Patch"
-                            note="NO SPAM // SYSTEM-GRADE SIGNAL ONLY"
+                            title={t('newsletter.mobile.title')}
+                            description={t('newsletter.mobile.description')}
+                            placeholder={t('newsletter.mobile.placeholder')}
+                            buttonLabel={t('newsletter.mobile.button')}
+                            note={t('newsletter.mobile.note')}
                         />
                     </section>
 
                     <section className="border-t border-border pt-8">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-                            <div className="overflow-hidden rounded-full border border-border bg-surface-container size-12 shrink-0">
+                            <div className="size-12 shrink-0 overflow-hidden rounded-full border border-border bg-surface-container">
                                 <img
                                     src={imgAuthorProfile}
-                                    alt="Alex Rivers portrait"
+                                    alt={t('author.alt')}
                                     className="h-full w-full object-cover"
                                 />
                             </div>
                             <div className="space-y-2">
                                 <p className="font-display text-sm text-on-surface">
-                                    About Alex Rivers
+                                    {t('author.title')}
                                 </p>
                                 <p className="max-w-2xl text-sm leading-6 text-on-surface-variant">
-                                    Engineering the intersection of high
-                                    performance application logic, information
-                                    density, and product feel. {meta.note}
+                                    {t('author.description')} {meta.note}
                                 </p>
                                 <div className="flex flex-wrap gap-4 font-display text-xs tracking-[0.08em] uppercase">
                                     <Link
                                         href="/about"
                                         className="text-primary"
                                     >
-                                        TWITTER
+                                        {t('author.links.twitter')}
                                     </Link>
                                     <Link
                                         href="/about"
                                         className="text-primary"
                                     >
-                                        GITHUB
+                                        {t('author.links.github')}
                                     </Link>
                                     <Link
                                         href="/about"
                                         className="text-primary"
                                     >
-                                        LINKEDIN
+                                        {t('author.links.linkedin')}
                                     </Link>
                                 </div>
                             </div>
@@ -358,7 +321,7 @@ const useReactiveState = (stream$) => {
                 </article>
 
                 <aside className="hidden space-y-8 lg:sticky lg:top-28 lg:block lg:self-start">
-                    <SidebarSection title="TABLE OF CONTENTS">
+                    <SidebarSection title={t('sidebar.tocTitle')}>
                         <div className="space-y-3">
                             {tocItems.map((item, index) => (
                                 <div
@@ -375,17 +338,17 @@ const useReactiveState = (stream$) => {
                         </div>
                     </SidebarSection>
 
-                    <SidebarSection title="JOIN THE SYSTEM">
+                    <SidebarSection title={t('sidebar.joinTitle')}>
                         <NewsletterCard
                             compact
-                            title="Join the System"
-                            description="Get engineering insights delivered to your terminal weekly."
-                            placeholder="USER@DOMAIN.COM"
-                            buttonLabel="SUBSCRIBE"
+                            title={t('newsletter.sidebar.title')}
+                            description={t('newsletter.sidebar.description')}
+                            placeholder={t('newsletter.sidebar.placeholder')}
+                            buttonLabel={t('newsletter.sidebar.button')}
                         />
                     </SidebarSection>
 
-                    <SidebarSection title="RELATED SIGNALS">
+                    <SidebarSection title={t('related.title')}>
                         <div className="space-y-2">
                             {relatedSignals.map((signal) => (
                                 <Link

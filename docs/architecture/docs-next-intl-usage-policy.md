@@ -22,6 +22,9 @@
 - `Header`의 drawer 관련 라벨
 - `Footer`
 - `Search`
+- `DocsIndex`
+- `AboutUs`
+- `ArticleDetail`
 
 이 기준은 이후 다른 widget과 feature에도 동일하게 확장합니다.
 
@@ -135,9 +138,12 @@ client component에서는 `useTranslations`를 사용합니다.
 - `footer.links.*`
 - `search.input.*`
 - `search.empty.*`
+- `docsIndex.*`
+- `about.*`
+- `articleDetail.*`
 
 ## Follow-Up
 
-- `docs-index`, `about-us`, `article-detail`에 남아 있는 하드코딩 UI copy를 같은 기준으로 확장
+- 새 화면을 추가할 때는 page/widget 단위 namespace를 먼저 정하고 시작
 - metadata, OG copy를 locale-aware 하게 만들지 추후 검토
 - dead key 정리 시 이 문서의 namespace 규칙을 기준으로 검사

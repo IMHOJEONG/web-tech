@@ -1,31 +1,7 @@
+import { getTranslations } from 'next-intl/server'
 import { ArrowUpRight } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
-
-const pillarCards = [
-    {
-        eyebrow: 'ENGINEERING PHILOSOPHY',
-        title: 'Web & Performance',
-        description:
-            "Deep dives into React, Rust, and the future of the V8 engine. We don't just write code; we architect experiences that scale with mathematical certainty.",
-        tone: 'secondary',
-    },
-    {
-        eyebrow: 'MOBILITY',
-        title: 'Mobile Fluidity',
-        description:
-            'Mastering the nuances of native and cross-platform ecosystems to build seamless handheld tools.',
-        tone: 'primary',
-        terminal: ['const mobile = await optimize(ui,', 'stack);'],
-    },
-    {
-        eyebrow: 'INTERFACE DESIGN',
-        title: 'UI/UX as Code',
-        description:
-            'Design systems are living entities. We explore the systematic approach to visual hierarchy, motion patterns, and accessibility that transforms a generic interface into a precision instrument.',
-        tone: 'muted',
-    },
-]
 
 function PillBadge({
     label,
@@ -50,7 +26,34 @@ function PillBadge({
     )
 }
 
-export function AboutUs() {
+export async function AboutUs() {
+    const t = await getTranslations('about')
+
+    const pillarCards = [
+        {
+            eyebrow: t('pillars.web.eyebrow'),
+            title: t('pillars.web.title'),
+            description: t('pillars.web.description'),
+            tone: 'secondary' as const,
+        },
+        {
+            eyebrow: t('pillars.mobile.eyebrow'),
+            title: t('pillars.mobile.title'),
+            description: t('pillars.mobile.description'),
+            tone: 'primary' as const,
+            terminal: [
+                t('pillars.mobile.terminalLineOne'),
+                t('pillars.mobile.terminalLineTwo'),
+            ],
+        },
+        {
+            eyebrow: t('pillars.design.eyebrow'),
+            title: t('pillars.design.title'),
+            description: t('pillars.design.description'),
+            tone: 'muted' as const,
+        },
+    ]
+
     const webCard = pillarCards[0]!
     const mobileCard = pillarCards[1]!
     const designCard = pillarCards[2]!
@@ -63,27 +66,28 @@ export function AboutUs() {
                         <div className="flex items-center gap-2 text-primary">
                             <span className="size-2 rounded-full bg-current" />
                             <span className="font-display text-sm font-medium tracking-[0.05em] uppercase">
-                                STATUS: LIVE // VERSION 2.0.4
+                                {t('hero.status')}
                             </span>
                         </div>
 
                         <h1 className="font-display max-w-[30rem] text-[clamp(2.75rem,6vw,4.75rem)] leading-[1.05] font-bold tracking-[-0.04em] text-on-surface">
-                            BRIDGING THE STACK THROUGH{' '}
-                            <span className="text-secondary">TECHNICAL</span>{' '}
-                            <span className="text-secondary">PRECISION</span>
+                            {t('hero.titleLead')}{' '}
+                            <span className="text-secondary">
+                                {t('hero.titleAccentOne')}
+                            </span>{' '}
+                            <span className="text-secondary">
+                                {t('hero.titleAccentTwo')}
+                            </span>
                         </h1>
 
                         <p className="max-w-[36rem] text-body-lg text-on-surface-variant">
-                            A digital lab dedicated to unraveling the
-                            complexities of modern engineering. We explore the
-                            intersection where Web performance, Mobile fluidity,
-                            and UI/UX architecture converge.
+                            {t('hero.description')}
                         </p>
                     </div>
 
                     <div className="font-mono text-sm leading-[1.5] text-outline">
-                        <p>{'// MISSION_STATEMENT.md'}</p>
-                        <p>{'// ESTABLISHED_2024'}</p>
+                        <p>{t('hero.missionLabel')}</p>
+                        <p>{t('hero.establishedLabel')}</p>
                     </div>
                 </section>
 
@@ -157,20 +161,16 @@ export function AboutUs() {
                                 </div>
                                 <div className="space-y-1">
                                     <h2 className="font-display text-[1.5rem] leading-[1.3] font-bold text-on-surface">
-                                        Alex Volkov
+                                        {t('profile.name')}
                                     </h2>
                                     <p className="font-display text-base tracking-[0.05em] uppercase text-primary">
-                                        LEAD ARCHITECT & CREATOR
+                                        {t('profile.role')}
                                     </p>
                                 </div>
                             </div>
 
                             <p className="text-body-md text-on-surface-variant">
-                                A full-stack engineer with a penchant for
-                                minimal aesthetics and maximal performance.
-                                Building TECH_LOGIC as an open-source knowledge
-                                base for the next generation of digital
-                                builders.
+                                {t('profile.bio')}
                             </p>
 
                             <div className="flex flex-wrap gap-4">
@@ -179,14 +179,14 @@ export function AboutUs() {
                                     className="inline-flex items-center gap-2 rounded-sm border border-outline-variant bg-surface-container-low px-4 py-2 text-sm text-on-surface transition-colors hover:border-primary hover:text-primary"
                                 >
                                     <FaGithub className="size-4" />
-                                    GITHUB
+                                    {t('profile.github')}
                                 </a>
                                 <a
                                     href="#"
                                     className="inline-flex items-center gap-2 rounded-sm border border-outline-variant bg-surface-container-low px-4 py-2 text-sm text-on-surface transition-colors hover:border-primary hover:text-primary"
                                 >
                                     <FaXTwitter className="size-4" />
-                                    TWITTER/X
+                                    {t('profile.twitter')}
                                 </a>
                             </div>
                         </div>
@@ -195,11 +195,10 @@ export function AboutUs() {
                     <section className="space-y-12">
                         <div className="border-l-4 border-primary pl-7">
                             <h2 className="font-display text-headline-lg text-on-surface">
-                                INITIATE CONTACT
+                                {t('contact.title')}
                             </h2>
                             <p className="mt-2 text-body-md text-on-surface-variant">
-                                Have a proposal or a technical inquiry? Send a
-                                packet below.
+                                {t('contact.description')}
                             </p>
                         </div>
 
@@ -207,31 +206,37 @@ export function AboutUs() {
                             <div className="grid gap-8 md:grid-cols-2">
                                 <label className="space-y-2">
                                     <span className="font-display text-xs tracking-[0.1em] uppercase text-outline">
-                                        SENDER_NAME
+                                        {t('contact.fields.name.label')}
                                     </span>
                                     <input
                                         className="w-full border-b border-outline-variant bg-surface-container-lowest px-3 py-4 text-base text-on-surface outline-none transition-colors focus:border-primary"
-                                        placeholder="e.g. John Doe"
+                                        placeholder={t(
+                                            'contact.fields.name.placeholder'
+                                        )}
                                     />
                                 </label>
                                 <label className="space-y-2">
                                     <span className="font-display text-xs tracking-[0.1em] uppercase text-outline">
-                                        RETURN_ADDRESS
+                                        {t('contact.fields.email.label')}
                                     </span>
                                     <input
                                         className="w-full border-b border-outline-variant bg-surface-container-lowest px-3 py-4 text-base text-on-surface outline-none transition-colors focus:border-primary"
-                                        placeholder="email@provider.com"
+                                        placeholder={t(
+                                            'contact.fields.email.placeholder'
+                                        )}
                                     />
                                 </label>
                             </div>
 
                             <label className="space-y-2">
                                 <span className="font-display text-xs tracking-[0.1em] uppercase text-outline">
-                                    PAYLOAD_DESCRIPTION
+                                    {t('contact.fields.message.label')}
                                 </span>
                                 <textarea
                                     className="min-h-32 w-full border-b border-outline-variant bg-surface-container-lowest px-3 py-4 text-base text-on-surface outline-none transition-colors focus:border-primary"
-                                    placeholder="Briefly describe your inquiry..."
+                                    placeholder={t(
+                                        'contact.fields.message.placeholder'
+                                    )}
                                 />
                             </label>
 
@@ -239,7 +244,7 @@ export function AboutUs() {
                                 type="button"
                                 className="inline-flex items-center justify-center bg-primary-container px-12 py-4 font-display text-base tracking-[0.1em] text-on-primary-container uppercase shadow-glow-primary transition-transform hover:-translate-y-0.5"
                             >
-                                EXECUTE SEND
+                                {t('contact.submit')}
                             </button>
                         </form>
                     </section>
