@@ -29,6 +29,8 @@ function PillBadge({
 
 export async function AboutUs() {
     const t = await getTranslations('about')
+    const githubHref = t('profile.links.github.href')
+    const twitterHref = t('profile.links.twitter.href')
 
     const pillarCards = [
         {
@@ -175,20 +177,33 @@ export async function AboutUs() {
                             </p>
 
                             <div className="flex flex-wrap gap-4">
-                                <a
-                                    href="#"
-                                    className="ds-button-secondary gap-2 px-4 py-2 text-sm"
-                                >
-                                    <FaGithub className="size-4" />
-                                    {t('profile.github')}
-                                </a>
-                                <a
-                                    href="#"
-                                    className="ds-button-secondary gap-2 px-4 py-2 text-sm"
-                                >
-                                    <FaXTwitter className="size-4" />
-                                    {t('profile.twitter')}
-                                </a>
+                                {githubHref ? (
+                                    <a
+                                        href={githubHref}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="ds-button-secondary gap-2 px-4 py-2 text-sm"
+                                    >
+                                        <FaGithub className="size-4" />
+                                        {t('profile.links.github.label')}
+                                    </a>
+                                ) : null}
+                                {twitterHref ? (
+                                    <a
+                                        href={twitterHref}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="ds-button-secondary gap-2 px-4 py-2 text-sm"
+                                    >
+                                        <FaXTwitter className="size-4" />
+                                        {t('profile.links.twitter.label')}
+                                    </a>
+                                ) : (
+                                    <span className="inline-flex items-center gap-2 rounded-md border border-outline-variant/60 bg-surface-container px-4 py-2 text-sm text-on-surface-variant">
+                                        <FaXTwitter className="size-4" />
+                                        {t('profile.links.twitter.label')}
+                                    </span>
+                                )}
                             </div>
                         </div>
                     </article>

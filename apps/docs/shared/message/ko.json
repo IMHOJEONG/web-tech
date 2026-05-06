@@ -217,11 +217,19 @@
             }
         },
         "profile": {
-            "name": "Alex Volkov",
-            "role": "LEAD ARCHITECT & CREATOR",
+            "name": "HoJeong Im",
+            "role": "Full Stack Engineer",
             "bio": "미니멀한 미감과 높은 성능을 함께 지향하는 풀스택 엔지니어로, 디지털 빌더를 위한 열린 지식 베이스로서 TECH_LOGIC을 구축하고 있습니다.",
-            "github": "GITHUB",
-            "twitter": "TWITTER/X"
+            "links": {
+                "github": {
+                    "label": "GITHUB",
+                    "href": "https://github.com/IMHOJEONG"
+                },
+                "twitter": {
+                    "label": "TWITTER/X",
+                    "href": ""
+                }
+            }
         },
         "contact": {
             "title": "INITIATE CONTACT",
