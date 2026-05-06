@@ -77,6 +77,10 @@
   - mobile drawer
   - bottom nav
   - article/feed spacing
+- [-] `P1` 루트 `/` 화면을 `141:2 Landing Page - HEAPFORGE` 기준으로 재구성한다.
+  - 현재 `HeroSection` 단일 구성을 landing page 섹션 구조로 확장
+  - `Hero Section`, `Thematic Foundations`, `Latest Notes`를 별도 위젯/엔티티로 분리 검토
+  - 기준 문서: `docs/architecture/docs-heapforge-alignment-checklist.md`
 - [x] `P1` `MainFeed` 필터 버튼에 실제 인터랙션을 연결한다.
   - `query string` 기반으로 확정
   - `/feed?topic=web|mobile|uiux` 형태로 상태를 표현
@@ -97,6 +101,10 @@
 
 - [ ] `P1` Figma asset 의존 화면을 모두 `public/figma/*` 또는 정식 에셋으로 이관한다.
   - `article-detail` 외 나머지 페이지도 점검
+- [-] `P1` `HEAPFORGE` 기준 화면과 현재 `docs` 구현의 정렬 체크리스트를 운영한다.
+  - 공통 shell, `/feed`, `/about`, `article-detail`, `/category` 순으로 정렬
+  - 기준 프레임: `141:676`, `141:325`, `141:470`, `141:189`, `141:2`
+  - 기준 문서: `docs/architecture/docs-heapforge-alignment-checklist.md`
 - [-] `P1` 디자인 토큰 사용 일관성을 높인다.
   - 하드코딩 색상, radius, shadow 제거
   - `design.md` 토큰 기준으로 치환
@@ -127,6 +135,10 @@
 
 ## Content / Editorial
 
+- [ ] `P1` landing / hero 계열 카피의 자연스러운 한국어 표현을 다듬는다.
+  - 직역투 표현보다 한국어 사용자에게 자연스럽게 읽히는 문장으로 조정
+  - headline, eyebrow, CTA, section title 우선 점검
+  - 특히 `/` root landing과 `/about` hero의 한국어 카피를 우선 정리
 - [ ] `P1` `Mobile` 섹션의 실제 콘텐츠 초안을 작성한다.
 - [ ] `P1` `UI/UX` 섹션도 상세형 static spotlight가 아니라 실제 문서 연결 구조로 확장할지 결정
 - [ ] `P2` article metadata 정책을 정리한다.

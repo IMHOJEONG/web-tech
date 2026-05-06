@@ -28,6 +28,28 @@
 
 - 개별 문서의 렌더링된 HTML 본문 제공
 
+## Endpoint Selection
+
+프론트는 현재 단일 endpoint만 강제하지 않는다.
+
+운영 환경에 따라 다음 전략을 사용할 수 있다.
+
+1. 단일 base URL
+   - `BLOG_CONTENT_API_BASE_URL`
+   - `BLOG_CONTENT_MARKDOWN_BASE_URL`
+2. 후보군 fallback
+   - `BLOG_CONTENT_API_BASE_URLS`
+   - `BLOG_CONTENT_MARKDOWN_BASE_URLS`
+3. 내부망 / 외부망 분리
+   - `BLOG_CONTENT_API_BASE_URL_INTERNAL`
+   - `BLOG_CONTENT_API_BASE_URL_PUBLIC`
+   - `BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL`
+   - `BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC`
+
+코드는 선언된 순서대로 후보를 시도하고, 성공한 첫 번째 endpoint를 사용한다.
+
+이 방식은 사용자의 네트워크 위치가 바뀌는 로컬 개발 환경에서 특히 유용하다.
+
 ## Recommended Contract
 
 ### 1. List API

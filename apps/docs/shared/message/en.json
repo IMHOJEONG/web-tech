@@ -76,6 +76,56 @@
             }
         }
     },
+    "rootLanding": {
+        "hero": {
+            "eyebrow": "SYSTEM ENGINEERING & DESIGN",
+            "titleLineOne": "Forging technical",
+            "titleLineTwo": "systems with",
+            "titleLineThree": "precision",
+            "description": "At the point where software craftsmanship meets systems thinking, this landing page distills web engineering and interface structure into a slower, more readable editorial flow.",
+            "primaryCta": "Browse the feed",
+            "secondaryCta": "Read about the project",
+            "metaLabel": "EDITORIAL RANGE",
+            "metaValue": "WEB / MOBILE / UI/UX / SYSTEMS",
+            "statusLabel": "STATUS",
+            "statusValue": "LIVE // LANDING CALIBRATED"
+        },
+        "foundations": {
+            "eyebrow": "THEMATIC FOUNDATIONS",
+            "title": "Core exploration areas",
+            "countLabel": "04 AREAS",
+            "items": {
+                "web": {
+                    "title": "Scalable Systems",
+                    "description": "Browser rendering, component structure, and performance bottlenecks documented in real code context."
+                },
+                "product": {
+                    "title": "Product Logic",
+                    "description": "Curated writing that connects technical constraints with user-facing product thinking."
+                },
+                "interface": {
+                    "title": "Interface DNA",
+                    "description": "Information hierarchy, typography, and interaction patterns examined through a UI/UX systems lens."
+                },
+                "mobile": {
+                    "title": "Mobile Runtime",
+                    "description": "A closer look at mobile constraints, touch-first interaction, and platform-specific runtime behavior."
+                }
+            }
+        },
+        "latestNotes": {
+            "eyebrow": "LATEST NOTES",
+            "title": "Recently refined articles",
+            "viewAll": "OPEN FEED",
+            "open": "OPEN",
+            "sectionLabels": {
+                "web": "WEB",
+                "mobile": "MOBILE",
+                "uiux": "UI/UX",
+                "systems": "SYSTEMS"
+            }
+        }
+    },
     "search": {
         "input": {
             "placeholder": "Search the docs",

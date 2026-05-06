@@ -1,5 +1,5 @@
-import { HeroSection } from '~/widgets/home-hero/ui/hero-section'
+import { RootLandingPage } from '~/widgets/root-landing/ui/root-landing-page'
 
 export default async function Page() {
-    return <HeroSection />
+    return <RootLandingPage />
 }

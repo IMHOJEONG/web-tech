@@ -76,6 +76,56 @@
             }
         }
     },
+    "rootLanding": {
+        "hero": {
+            "eyebrow": "SYSTEM ENGINEERING & DESIGN",
+            "titleLineOne": "기술 스택을",
+            "titleLineTwo": "정교한 구현으로",
+            "titleLineThree": "연결합니다",
+            "description": "소프트웨어 장인정신과 시스템 사고가 만나는 지점에서, 웹 엔지니어링과 인터페이스 구조를 더 오래 읽히는 형태로 정제합니다.",
+            "primaryCta": "큐레이션 피드 보기",
+            "secondaryCta": "프로젝트 소개 보기",
+            "metaLabel": "EDITORIAL RANGE",
+            "metaValue": "WEB / MOBILE / UI/UX / SYSTEMS",
+            "statusLabel": "STATUS",
+            "statusValue": "LIVE // LANDING CALIBRATED"
+        },
+        "foundations": {
+            "eyebrow": "THEMATIC FOUNDATIONS",
+            "title": "핵심 탐색 영역",
+            "countLabel": "04 AREAS",
+            "items": {
+                "web": {
+                    "title": "Scalable Systems",
+                    "description": "브라우저 렌더링, 컴포넌트 구조, 성능 병목을 실제 코드 기준으로 정리합니다."
+                },
+                "product": {
+                    "title": "Product Logic",
+                    "description": "기술 제약과 사용자 경험 사이를 잇는 제품 관점의 글과 큐레이션을 모읍니다."
+                },
+                "interface": {
+                    "title": "Interface DNA",
+                    "description": "정보 계층, 타이포그래피, 상호작용 패턴을 UI/UX 시스템 관점에서 해부합니다."
+                },
+                "mobile": {
+                    "title": "Mobile Runtime",
+                    "description": "모바일 제약, 터치 중심 상호작용, 플랫폼별 런타임 차이를 더 촘촘하게 살핍니다."
+                }
+            }
+        },
+        "latestNotes": {
+            "eyebrow": "LATEST NOTES",
+            "title": "최근 정리한 아티클",
+            "viewAll": "FEED 열기",
+            "open": "OPEN",
+            "sectionLabels": {
+                "web": "WEB",
+                "mobile": "MOBILE",
+                "uiux": "UI/UX",
+                "systems": "SYSTEMS"
+            }
+        }
+    },
     "search": {
         "input": {
             "placeholder": "문서를 검색해보세요",

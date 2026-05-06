@@ -78,8 +78,8 @@ function DrawerLink({
             className={cn(
                 'flex w-full items-center gap-3 px-6 py-4 text-[0.875rem] tracking-[0.05em] transition-colors',
                 isActive
-                    ? 'border-r-2 border-cyan-400 bg-cyan-500/10 text-cyan-400'
-                    : 'text-zinc-400 hover:bg-white/5 hover:text-zinc-100'
+                    ? 'border-r-2 border-primary bg-primary/10 text-primary'
+                    : 'text-muted-foreground hover:bg-surface-container hover:text-on-surface'
             )}
         >
             <Icon className="size-4" strokeWidth={1.8} />
@@ -102,7 +102,7 @@ export default function MobileNavDrawer() {
             <div className="flex items-center gap-3 sm:hidden">
                 <SheetTrigger
                     aria-label={headerT('drawer.openAriaLabel')}
-                    className="flex h-7 w-[2.125rem] items-center justify-center text-zinc-300 transition-colors hover:text-cyan-400"
+                    className="flex h-7 w-[2.125rem] items-center justify-center text-muted-foreground transition-colors hover:text-primary"
                 >
                     <svg
                         width="18"
@@ -121,7 +121,7 @@ export default function MobileNavDrawer() {
                     </svg>
                 </SheetTrigger>
                 <Link
-                    className="font-display flex items-center text-[1.25rem] font-bold leading-7 tracking-[-0.05em] text-cyan-400"
+                    className="font-display flex items-center text-[1.25rem] font-bold leading-7 tracking-[-0.05em] text-primary"
                     href="/"
                 >
                     <Brand />
@@ -130,7 +130,7 @@ export default function MobileNavDrawer() {
 
             <SheetContent
                 side="left"
-                className="z-[70] flex w-80 max-w-[85vw] flex-col gap-0 border-r border-white/5 bg-[#18181b] p-0 text-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.45)] [&>button]:hidden sm:hidden"
+                className="z-[70] flex w-80 max-w-[85vw] flex-col gap-0 border-r border-header-border bg-popover p-0 text-on-surface shadow-deep [&>button]:hidden sm:hidden"
             >
                 <SheetTitle className="sr-only">
                     {headerT('drawer.title')}
@@ -141,7 +141,7 @@ export default function MobileNavDrawer() {
 
                 <div className="flex items-center justify-between px-6 py-6">
                     <Link
-                        className="font-display text-2xl font-bold text-cyan-400"
+                        className="font-display text-2xl font-bold text-primary"
                         href="/"
                         onClick={() => setOpen(false)}
                     >
@@ -151,7 +151,7 @@ export default function MobileNavDrawer() {
                     <SheetClose
                         type="button"
                         aria-label={headerT('drawer.closeAriaLabel')}
-                        className="text-zinc-500 transition-colors hover:text-zinc-200"
+                        className="text-muted-foreground transition-colors hover:text-on-surface"
                     >
                         <X className="size-4" strokeWidth={1.8} />
                     </SheetClose>
@@ -179,41 +179,41 @@ export default function MobileNavDrawer() {
                         })}
                     </div>
 
-                    <div className="border-t border-white/5 px-6 pb-4 pt-[1.0625rem]">
-                        <p className="font-display text-[0.625rem] tracking-[0.1em] text-zinc-500 uppercase">
+                    <div className="border-t border-header-border px-6 pb-4 pt-[1.0625rem]">
+                        <p className="font-display text-[0.625rem] tracking-[0.1em] text-muted-foreground uppercase">
                             {headerT('drawer.statsLabel')}
                         </p>
 
                         <div className="mt-4 space-y-2">
-                            <div className="flex items-center justify-between text-[0.75rem] text-zinc-400">
+                            <div className="flex items-center justify-between text-[0.75rem] text-muted-foreground">
                                 <span className="font-display">
                                     {headerT('drawer.systemIntegrity')}
                                 </span>
-                                <span className="font-display text-cyan-400">
+                                <span className="font-display text-primary">
                                     98%
                                 </span>
                             </div>
-                            <div className="h-1 w-full bg-zinc-800">
-                                <div className="h-full w-[98%] bg-cyan-400 shadow-[0_0_8px_rgba(0,245,255,0.5)]" />
+                            <div className="h-1 w-full bg-surface-container-high">
+                                <div className="h-full w-[98%] bg-primary shadow-glow-primary" />
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="border-t border-white/5 bg-black/20 px-6 pb-6 pt-6">
+                <div className="border-t border-header-border bg-surface-container-low px-6 pb-6 pt-6">
                     <div className="flex items-center gap-4">
                         <div className="relative">
-                            <div className="flex size-12 items-center justify-center rounded-[0.25rem] border border-cyan-400/30 bg-zinc-900 text-sm font-semibold text-zinc-200">
+                            <div className="flex size-12 items-center justify-center rounded-[0.25rem] border border-primary/30 bg-surface-container text-sm font-semibold text-on-surface">
                                 D
                             </div>
-                            <div className="absolute -bottom-1 -right-1 size-3 rounded-full border-2 border-[#18181b] bg-cyan-400" />
+                            <div className="absolute -bottom-1 -right-1 size-3 rounded-full border-2 border-popover bg-primary" />
                         </div>
 
                         <div>
                             <p className="font-display text-sm font-bold tracking-[-0.02em] text-on-surface">
                                 DEV_PROTOCOL_01
                             </p>
-                            <p className="font-mono text-[0.6875rem] text-zinc-500">
+                            <p className="font-mono text-[0.6875rem] text-muted-foreground">
                                 Senior Contributor
                             </p>
                         </div>
@@ -223,7 +223,7 @@ export default function MobileNavDrawer() {
                         <Link
                             href="/about"
                             onClick={() => setOpen(false)}
-                            className="flex items-center justify-center gap-2 rounded-[0.125rem] bg-zinc-800 px-4 py-2.5 text-[0.75rem] text-zinc-300"
+                            className="flex items-center justify-center gap-2 rounded-[0.125rem] bg-surface-container px-4 py-2.5 text-[0.75rem] text-on-surface"
                         >
                             <Settings className="size-3.5" strokeWidth={1.8} />
                             <span className="font-display">
@@ -233,7 +233,7 @@ export default function MobileNavDrawer() {
                         <button
                             type="button"
                             onClick={() => setOpen(false)}
-                            className="flex items-center justify-center gap-2 rounded-[0.125rem] border border-cyan-400/20 bg-cyan-500/10 px-4 py-2.5 text-[0.75rem] text-cyan-400"
+                            className="flex items-center justify-center gap-2 rounded-[0.125rem] border border-primary/20 bg-primary/10 px-4 py-2.5 text-[0.75rem] text-primary"
                         >
                             <LogOut className="size-3.5" strokeWidth={1.8} />
                             <span className="font-display">

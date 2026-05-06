@@ -38,8 +38,8 @@ export default function MobileBottomNav() {
     const t = useTranslations('navigation')
 
     return (
-        <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#09090b]/90 backdrop-blur-[6px] sm:hidden">
-            <div className="grid h-[4.0625rem] grid-cols-4 items-center px-6">
+        <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-header-border bg-popover/90 backdrop-blur-[6px] sm:hidden">
+            <div className="grid h-16.25 grid-cols-4 items-center px-6">
                 {mobileNav.map((item) => {
                     const isActive = item.activePrefixes.some(
                         (prefix) =>
@@ -56,9 +56,8 @@ export default function MobileBottomNav() {
                             aria-current={isActive ? 'page' : undefined}
                             aria-label={t(item.key)}
                             className={cn(
-                                'flex items-center justify-center text-zinc-500 transition-colors',
-                                isActive &&
-                                    'text-cyan-400 drop-shadow-[0_0_4px_rgba(0,245,255,0.5)]'
+                                'flex items-center justify-center text-muted-foreground transition-colors',
+                                isActive && 'text-primary shadow-glow-primary'
                             )}
                         >
                             <Icon

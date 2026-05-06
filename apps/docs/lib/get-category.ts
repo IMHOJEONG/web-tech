@@ -4,6 +4,7 @@ import path from 'path'
 import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
 import { categoryTree } from '~/entities/category/model/category'
+import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export interface Metadata {
     id: string
@@ -63,12 +64,13 @@ function parseCategoryFile(fileName: string): Partial<Metadata> {
     const relPathFromRoot = path
         .relative(process.cwd(), fileName)
         .replace(/\.(mdx|md)$/i, '')
+    const normalizedFileName = normalizeDocPath(relPathFromRoot)
 
     return {
         id,
         ...data,
         content,
-        fileName: relPathFromRoot,
+        fileName: normalizedFileName,
         thumbnail: normalizeThumbnailPath(data.thumbnail),
     }
 }

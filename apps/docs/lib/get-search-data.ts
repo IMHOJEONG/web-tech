@@ -7,6 +7,7 @@ import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
 import type { Metadata } from '~/lib/get-document'
 import { fetchRemoteDocsData } from '~/lib/content-api'
+import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export type SearchData = {
     id: string
@@ -132,11 +133,11 @@ async function parseLocalSearchFile(filePath: string): Promise<SearchData> {
     const fileName = path
         .relative(process.cwd(), filePath)
         .replace(/\.(mdx|md)$/i, '')
-        .replace(/\\/g, '/')
+    const normalizedFileName = normalizeDocPath(fileName)
     const slug =
         typeof data.slug === 'string' && data.slug.trim()
             ? data.slug.trim()
-            : slugFromFileName(fileName)
+            : slugFromFileName(normalizedFileName)
 
     return {
         id: String(data.id ?? fileName),
@@ -150,14 +151,14 @@ async function parseLocalSearchFile(filePath: string): Promise<SearchData> {
                 : content.slice(0, 140),
         content,
         slug,
-        fileName,
+        fileName: normalizedFileName,
         date:
             typeof data.date === 'string' || typeof data.date === 'number'
                 ? String(data.date)
                 : undefined,
         thumbnail: normalizeThumbnailPath(data.thumbnail),
-        href: inferSearchHref(fileName, slug),
-        section: inferSearchSection(fileName),
+        href: inferSearchHref(normalizedFileName, slug),
+        section: inferSearchSection(normalizedFileName),
     }
 }
 
@@ -166,7 +167,7 @@ function normalizeRemoteSearchDoc(doc: Partial<Metadata>): SearchData | null {
         return null
     }
 
-    const fileName = doc.fileName ?? `remote/${doc.slug}`
+    const fileName = normalizeDocPath(doc.fileName ?? `remote/${doc.slug}`)
 
     return {
         id: String(doc.id ?? doc.slug),

@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Metadata } from '~/lib/get-document'
+import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export type FeedFilter = 'all' | 'web' | 'mobile' | 'uiux'
 
@@ -140,7 +141,7 @@ function getTextLang(text: string) {
 }
 
 function getTopicStyle(doc: FeedDoc): TopicTone {
-    const fileName = doc.fileName ?? ''
+    const fileName = normalizeDocPath(doc.fileName ?? '')
 
     if (fileName.includes('/category/fe/') || fileName.includes('/data/v8/')) {
         return WEB_TOPIC
@@ -162,7 +163,7 @@ function getTopicStyle(doc: FeedDoc): TopicTone {
 }
 
 function getFeedFilter(doc: FeedDoc): FeedFilter {
-    const fileName = doc.fileName ?? ''
+    const fileName = normalizeDocPath(doc.fileName ?? '')
 
     if (
         fileName.includes('/mobile/') ||
