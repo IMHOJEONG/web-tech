@@ -81,7 +81,7 @@
   - `dist` 전용 build 설정 추가
 - [apps/docs/package.json](/Users/coder/Desktop/project/web-tech/apps/docs/package.json)
   - `prebuild`, `predev` 추가
-- [apps/web/package.json](/Users/coder/Desktop/project/web-tech/apps/web/package.json)
+- [apps/vuln-radar/package.json](/Users/coder/Desktop/project/web-tech/apps/vuln-radar/package.json)
   - 동일하게 `prebuild`, `predev` 추가
 
 의미:
@@ -133,7 +133,7 @@
 
 효과:
 
-- `apps/web`와 동일한 기준으로 맞춰졌고
+- `apps/vuln-radar`와 동일한 기준으로 맞춰졌고
 - 적어도 같은 즉시 실패 지점은 재현되지 않기 시작했다.
 
 ### 6. `@emotion/react/jsx-runtime`가 build 산출물에 깊게 들어감
@@ -164,7 +164,7 @@
 
 - `apps/docs`가 `packages/ui` 내부 alias를 직접 해석하지 않아도 됨
 - `packages/ui`는 `dist` build 산출물을 생성함
-- `apps/docs`, `apps/web`는 앱 단독 실행 시 `ui build`를 먼저 수행함
+- `apps/docs`, `apps/vuln-radar`는 앱 단독 실행 시 `ui build`를 먼저 수행함
 - `docs`는 `@web-tech/ui`를 `transpilePackages`로 처리함
 - 일반 shadcn/ui 산출물은 `react/jsx-runtime` 기준으로 배출됨
 
@@ -228,7 +228,7 @@
 
 - [apps/docs/package.json](/Users/coder/Desktop/project/web-tech/apps/docs/package.json)
 - [apps/docs/next.config.mjs](/Users/coder/Desktop/project/web-tech/apps/docs/next.config.mjs)
-- [apps/web/package.json](/Users/coder/Desktop/project/web-tech/apps/web/package.json)
+- [apps/vuln-radar/package.json](/Users/coder/Desktop/project/web-tech/apps/vuln-radar/package.json)
 
 보면 좋은 포인트:
 

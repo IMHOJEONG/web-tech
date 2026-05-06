@@ -64,11 +64,11 @@
 - 소비 앱은 `@web-tech/ui/...`만 사용하고, `packages/ui` 내부 alias를 해석하지 않는다.
 - Turbo `build`는 `dist/**`를 산출물로 취급한다.
 - Turbo `dev`는 의존 패키지의 `dev`를 먼저 실행한다.
-- `apps/docs`, `apps/web`는 단독 `build/dev` 시에도 `prebuild` / `predev`로 `@web-tech/ui build`를 먼저 수행한다.
+- `apps/docs`, `apps/vuln-radar`는 단독 `build/dev` 시에도 `prebuild` / `predev`로 `@web-tech/ui build`를 먼저 수행한다.
 
 ## Why This Fits This Repo
 
-현재 repo는 이미 `packages/ui`를 공용 패키지로 두고 있고, `apps/docs`와 `apps/web`가 이를 소비하는 구조다.
+현재 repo는 이미 `packages/ui`를 공용 패키지로 두고 있고, `apps/docs`와 `apps/vuln-radar`가 이를 소비하는 구조다.
 
 즉 지금 단계에서는:
 
@@ -83,7 +83,7 @@
 
 권장 실행 방식:
 
-- 로컬 개발: root에서 `pnpm dev:docs`, `pnpm dev:web`
+- 로컬 개발: root에서 `pnpm dev:docs`, `pnpm dev:vuln-radar`
 - 패키지 단독 검증: `pnpm --filter @web-tech/ui build`
 
 주의:
