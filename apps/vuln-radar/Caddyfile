@@ -1,0 +1,17 @@
+:443 {
+    tls internal
+
+    # Optional local gateway.
+    # Default recommendation is app-level proxy:
+    # - Next rewrites now
+    # - Vite server.proxy after migration
+
+    handle /api/backend/* {
+        uri replace /api/backend /api
+        reverse_proxy localhost:4000
+    }
+
+    handle {
+        reverse_proxy localhost:3000
+    }
+}
