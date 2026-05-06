@@ -15,6 +15,7 @@ import path from 'path'
 import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
 import { fetchRemoteDocBySlug, fetchRemoteDocsData } from '~/lib/content-api'
+import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export type ContentFormat = 'mdx' | 'html'
 export type ContentSource = 'local' | 'remote'
@@ -75,6 +76,7 @@ function getLocalDocsData() {
         const relPathFromRoot = path
             .relative(process.cwd(), fileName)
             .replace(/\.(mdx|md)$/i, '')
+        const normalizedFileName = normalizeDocPath(relPathFromRoot)
 
         // thumbnail 경로를 public 폴더 기준으로 /로 시작하게 단순화
         let thumbnailPath = data.thumbnail
@@ -94,7 +96,7 @@ function getLocalDocsData() {
             id,
             ...data,
             content,
-            fileName: relPathFromRoot,
+            fileName: normalizedFileName,
             contentFormat: 'mdx',
             contentSource: 'local',
             thumbnail: thumbnailPath,

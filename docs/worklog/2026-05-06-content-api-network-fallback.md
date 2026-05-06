@@ -39,3 +39,7 @@
 
 - 로컬 개발 환경에서 네트워크 위치가 자주 바뀌면 `*_BASE_URLS` 또는 `*_INTERNAL` / `*_PUBLIC`을 우선 사용한다.
 - Vercel 같은 고정 배포 환경은 단일 public URL만 써도 충분하다.
+
+## Follow-up
+
+- Windows 환경에서 `path.relative()`가 역슬래시를 반환해 section 분류가 어긋날 수 있으므로, 문서 경로는 공통 유틸로 POSIX 스타일(`/`)로 정규화하는 후속 보완이 필요하다.

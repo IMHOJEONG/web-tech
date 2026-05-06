@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import { getSortedPostsData, type Metadata } from '~/lib/get-document'
+import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { LandingHero } from './landing-hero'
 import { LatestNotes } from './latest-notes'
 import { ThematicFoundations } from './thematic-foundations'
@@ -51,7 +52,7 @@ function getSectionLabel(
     doc: LandingDoc,
     t: Awaited<ReturnType<typeof getTranslations>>
 ) {
-    const fileName = doc.fileName ?? ''
+    const fileName = normalizeDocPath(doc.fileName ?? '')
 
     if (
         fileName.includes('/mobile/') ||

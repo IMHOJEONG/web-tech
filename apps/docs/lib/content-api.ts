@@ -5,6 +5,7 @@ import type { Metadata } from '~/lib/get-document'
 import type { ContentFormat } from '~/lib/get-document'
 import type { ContentSource } from '~/lib/get-document'
 import type { SearchData } from '~/lib/get-search-data'
+import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 type RemotePost = {
     id?: string | number
@@ -441,8 +442,9 @@ async function normalizeRemotePost(
     const summary = post.summary?.trim() ?? ''
     const date = post.date?.trim() ?? ''
     const id = String(post.id ?? slug)
-    const fileName =
+    const fileName = normalizeDocPath(
         post.fileName ?? post.path ?? markdownPath ?? `remote/${slug}`
+    )
 
     return {
         id,
@@ -473,8 +475,9 @@ function normalizeRemotePostMeta(post: RemotePost): Partial<Metadata> | null {
     const date = post.date?.trim() ?? ''
     const id = String(post.id ?? slug)
     const markdownPath = getMarkdownReference(post)
-    const fileName =
+    const fileName = normalizeDocPath(
         post.fileName ?? post.path ?? markdownPath ?? `remote/${slug}`
+    )
 
     return {
         id,
@@ -500,7 +503,9 @@ function normalizeSearchResult(post: Partial<Metadata>): SearchData | null {
 
     const content = post.content ?? ''
     const summary = post.summary || content.slice(0, 200)
-    const fileName = post.markdownPath ?? post.fileName ?? `remote/${post.slug}`
+    const fileName = normalizeDocPath(
+        post.markdownPath ?? post.fileName ?? `remote/${post.slug}`
+    )
 
     return {
         id: `${post.id ?? post.slug}`,
