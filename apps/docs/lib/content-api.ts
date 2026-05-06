@@ -117,6 +117,17 @@ function joinUrl(base: string, path: string) {
     return `${trimTrailingSlash(base)}/${trimLeadingSlash(path)}`
 }
 
+function parseCsvEnv(value?: string | null) {
+    if (!value) {
+        return []
+    }
+
+    return value
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean)
+}
+
 function normalizeThumbnailPath(thumbnail?: string | null) {
     if (!thumbnail) {
         return null
@@ -513,20 +524,96 @@ function normalizeSearchResult(post: Partial<Metadata>): SearchData | null {
     }
 }
 
-function getContentApiConfig() {
-    const baseUrl = process.env.BLOG_CONTENT_API_BASE_URL?.trim()
+type ContentApiConfig = {
+    baseUrl: string
+    postsPath: string
+    markdownBaseUrl?: string
+    label: string
+}
 
-    if (!baseUrl) {
+function createContentApiConfig(
+    label: string,
+    baseUrl?: string,
+    markdownBaseUrl?: string
+): ContentApiConfig | null {
+    const normalizedBaseUrl = baseUrl?.trim()
+
+    if (!normalizedBaseUrl) {
         return null
     }
 
+    const normalizedMarkdownBaseUrl = markdownBaseUrl?.trim()
+
     return {
-        baseUrl,
+        label,
+        baseUrl: normalizedBaseUrl,
         postsPath:
             process.env.BLOG_CONTENT_API_POSTS_PATH?.trim() || '/api/posts',
         markdownBaseUrl:
-            process.env.BLOG_CONTENT_MARKDOWN_BASE_URL?.trim() || undefined,
+            normalizedMarkdownBaseUrl || normalizedBaseUrl || undefined,
     }
+}
+
+function dedupeContentApiConfigs(configs: ContentApiConfig[]) {
+    const seen = new Set<string>()
+
+    return configs.filter((config) => {
+        const key = [
+            trimTrailingSlash(config.baseUrl),
+            trimTrailingSlash(config.markdownBaseUrl ?? ''),
+            config.postsPath,
+        ].join('|')
+
+        if (seen.has(key)) {
+            return false
+        }
+
+        seen.add(key)
+        return true
+    })
+}
+
+function getContentApiConfigs() {
+    const configs: ContentApiConfig[] = []
+
+    const csvApiBases = parseCsvEnv(process.env.BLOG_CONTENT_API_BASE_URLS)
+    const csvMarkdownBases = parseCsvEnv(
+        process.env.BLOG_CONTENT_MARKDOWN_BASE_URLS
+    )
+
+    csvApiBases.forEach((baseUrl, index) => {
+        const config = createContentApiConfig(
+            `csv:${index + 1}`,
+            baseUrl,
+            csvMarkdownBases[index]
+        )
+
+        if (config) {
+            configs.push(config)
+        }
+    })
+
+    const namedConfigs = [
+        createContentApiConfig(
+            'internal',
+            process.env.BLOG_CONTENT_API_BASE_URL_INTERNAL,
+            process.env.BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL
+        ),
+        createContentApiConfig(
+            'public',
+            process.env.BLOG_CONTENT_API_BASE_URL_PUBLIC,
+            process.env.BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC
+        ),
+        createContentApiConfig(
+            'default',
+            process.env.BLOG_CONTENT_API_BASE_URL,
+            process.env.BLOG_CONTENT_MARKDOWN_BASE_URL
+        ),
+    ].filter((config): config is ContentApiConfig => config !== null)
+
+    configs.push(...namedConfigs)
+
+    return dedupeContentApiConfigs(configs)
 }
 
 function getContentRevalidateSeconds() {
@@ -556,57 +643,65 @@ function getRemotePosts(payload: RemotePayload) {
 }
 
 async function fetchRemotePostsPayload() {
-    const config = getContentApiConfig()
+    const configs = getContentApiConfigs()
 
-    if (!config) {
+    if (configs.length === 0) {
         return null
     }
 
-    const url = joinUrl(config.baseUrl, config.postsPath)
+    const revalidateSeconds = getContentRevalidateSeconds()
 
-    try {
-        const revalidateSeconds = getContentRevalidateSeconds()
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-            },
-            next: {
-                revalidate: revalidateSeconds,
-            },
-        })
+    for (const config of configs) {
+        const url = joinUrl(config.baseUrl, config.postsPath)
 
-        if (!response.ok) {
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json',
+                },
+                next: {
+                    revalidate: revalidateSeconds,
+                },
+            })
+
+            if (!response.ok) {
+                console.warn(
+                    '[docs] Failed to fetch remote markdown list:',
+                    config.label,
+                    url,
+                    response.status
+                )
+                continue
+            }
+
+            const payload = (await response.json()) as RemotePayload
+            const rawPosts = getRemotePosts(payload)
+
+            if (!rawPosts) {
+                console.warn(
+                    '[docs] Unsupported remote markdown payload shape:',
+                    config.label,
+                    url
+                )
+                continue
+            }
+
+            return {
+                config,
+                rawPosts,
+            }
+        } catch (error) {
             console.warn(
-                '[docs] Failed to fetch remote markdown list:',
+                '[docs] Remote markdown fetch candidate failed:',
+                config.label,
                 url,
-                response.status
+                error
             )
-            return null
         }
-
-        const payload = (await response.json()) as RemotePayload
-        const rawPosts = getRemotePosts(payload)
-
-        if (!rawPosts) {
-            console.warn(
-                '[docs] Unsupported remote markdown payload shape:',
-                url
-            )
-            return null
-        }
-
-        return {
-            config,
-            rawPosts,
-        }
-    } catch (error) {
-        console.warn(
-            '[docs] Remote markdown fetch fallback to local files:',
-            error
-        )
-        return null
     }
+
+    return null
 }
 
 export async function fetchRemoteDocsData() {

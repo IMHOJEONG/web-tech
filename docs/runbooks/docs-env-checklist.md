@@ -22,16 +22,22 @@
 
 ## Checklist Table
 
-| Variable                            | Used In Code                 | `.env.example` | `turbo.json` | Vercel  | Notes                        |
-| ----------------------------------- | ---------------------------- | -------------- | ------------ | ------- | ---------------------------- |
-| `BETTER_AUTH_SECRET`                | Yes                          | Yes            | Yes          | Yes     | 실제 비밀값, 절대 커밋 금지  |
-| `BETTER_AUTH_URL`                   | Potential runtime dependency | Yes            | Yes          | Yes     | 앱 기본 URL                  |
-| `BLOG_CONTENT_API_BASE_URL`         | Yes                          | Yes            | Yes          | Yes     | 목록 메타데이터 API base URL |
-| `BLOG_CONTENT_API_POSTS_PATH`       | Yes                          | Yes            | Yes          | Yes     | 기본값은 `/api/posts`        |
-| `BLOG_CONTENT_MARKDOWN_BASE_URL`    | Yes                          | Yes            | Yes          | Yes     | 본문 HTML API base URL       |
-| `BLOG_CONTENT_MARKDOWN_PATH_PREFIX` | Yes                          | Yes            | Yes          | Yes     | 기본값은 `/posts`            |
-| `BLOG_CONTENT_REVALIDATE_SECONDS`   | Yes                          | Yes            | Yes          | Yes     | ISR 주기, 기본값은 `300`     |
-| `CLOUDFLARE_API_TOKEN`              | Repo-level usage             | No             | Yes          | If used | `docs` 앱 전용은 아님        |
+| Variable                                  | Used In Code                 | `.env.example` | `turbo.json` | Vercel  | Notes                        |
+| ----------------------------------------- | ---------------------------- | -------------- | ------------ | ------- | ---------------------------- |
+| `BETTER_AUTH_SECRET`                      | Yes                          | Yes            | Yes          | Yes     | 실제 비밀값, 절대 커밋 금지  |
+| `BETTER_AUTH_URL`                         | Potential runtime dependency | Yes            | Yes          | Yes     | 앱 기본 URL                  |
+| `BLOG_CONTENT_API_BASE_URL`               | Yes                          | Yes            | Yes          | Yes     | 목록 메타데이터 API base URL |
+| `BLOG_CONTENT_API_BASE_URLS`              | Optional                     | Yes            | Yes          | If used | 목록 API fallback 후보군     |
+| `BLOG_CONTENT_API_BASE_URL_INTERNAL`      | Optional                     | Yes            | Yes          | If used | 내부망 우선 base URL         |
+| `BLOG_CONTENT_API_BASE_URL_PUBLIC`        | Optional                     | Yes            | Yes          | If used | 외부망/public base URL       |
+| `BLOG_CONTENT_API_POSTS_PATH`             | Yes                          | Yes            | Yes          | Yes     | 기본값은 `/api/posts`        |
+| `BLOG_CONTENT_MARKDOWN_BASE_URL`          | Yes                          | Yes            | Yes          | Yes     | 본문 HTML API base URL       |
+| `BLOG_CONTENT_MARKDOWN_BASE_URLS`         | Optional                     | Yes            | Yes          | If used | 본문 API fallback 후보군     |
+| `BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL` | Optional                     | Yes            | Yes          | If used | 내부망 본문 base URL         |
+| `BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC`   | Optional                     | Yes            | Yes          | If used | 외부망 본문 base URL         |
+| `BLOG_CONTENT_MARKDOWN_PATH_PREFIX`       | Yes                          | Yes            | Yes          | Yes     | 기본값은 `/posts`            |
+| `BLOG_CONTENT_REVALIDATE_SECONDS`         | Yes                          | Yes            | Yes          | Yes     | ISR 주기, 기본값은 `300`     |
+| `CLOUDFLARE_API_TOKEN`                    | Repo-level usage             | No             | Yes          | If used | `docs` 앱 전용은 아님        |
 
 ## Local Setup
 
@@ -41,8 +47,10 @@
 BETTER_AUTH_SECRET=replace-with-your-secret
 BETTER_AUTH_URL=http://localhost:3000
 BLOG_CONTENT_API_BASE_URL=http://localhost:8000
+BLOG_CONTENT_API_BASE_URLS=http://192.168.0.10:8000,https://content.example.com
 BLOG_CONTENT_API_POSTS_PATH=/api/posts
 BLOG_CONTENT_MARKDOWN_BASE_URL=http://localhost:8000
+BLOG_CONTENT_MARKDOWN_BASE_URLS=http://192.168.0.10:8000,https://content.example.com
 BLOG_CONTENT_MARKDOWN_PATH_PREFIX=/posts
 BLOG_CONTENT_REVALIDATE_SECONDS=300
 ```
@@ -51,6 +59,8 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
 
 - 실제 값은 `apps/docs/.env.local` 또는 플랫폼 환경변수에만 둔다.
 - `apps/docs/.env.example`는 placeholder만 유지한다.
+- 여러 네트워크 위치를 오갈 수 있으면 `*_BASE_URLS` 또는 `*_INTERNAL` / `*_PUBLIC`을 우선 사용한다.
+- 코드는 후보군을 선언된 순서대로 시도하고, 성공한 첫 번째 base URL을 사용한다.
 
 ## Pre-deploy Checks
 
@@ -63,6 +73,7 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
    - `${BLOG_CONTENT_API_BASE_URL}${BLOG_CONTENT_API_POSTS_PATH}`
    - `${BLOG_CONTENT_MARKDOWN_BASE_URL}${BLOG_CONTENT_MARKDOWN_PATH_PREFIX}/{slug-or-path}`
      가 실제 응답하는가
+   - fallback을 쓴다면 `*_BASE_URLS`의 각 후보가 실제로 reachable 한가
 5. 목록 API의 `markdownPath` 값이 본문 API 라우트 규칙과 일치하는가
 
 ## Failure Symptoms
@@ -84,11 +95,13 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
 - 목록 API가 비어 있음
 - `slug/title`이 없음
 - base URL이 잘못됨
+- 현재 네트워크에서 첫 번째 base URL 후보가 unreachable 함
 
 조치:
 
 - `/api/posts` 응답 shape 확인
 - Vercel env 값 확인
+- `BLOG_CONTENT_API_BASE_URLS`, `BLOG_CONTENT_MARKDOWN_BASE_URLS` 순서 확인
 
 ### Detail page is empty
 
