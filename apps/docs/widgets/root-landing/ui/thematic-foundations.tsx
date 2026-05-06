@@ -41,7 +41,7 @@ export function ThematicFoundations({
                     <div className="grid divide-y divide-outline-variant/70 md:grid-cols-2 md:divide-x md:divide-y-0 xl:grid-cols-4">
                         {items.map((item) => (
                             <Link
-                                key={item.area}
+                                key={item.href}
                                 href={item.href}
                                 className="group flex min-h-72 flex-col justify-between px-6 py-8 transition-colors hover:bg-surface-container-low/50"
                             >
