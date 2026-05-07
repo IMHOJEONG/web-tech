@@ -30,6 +30,7 @@
 | `BLOG_CONTENT_API_BASE_URLS`              | Optional                     | Yes            | Yes          | If used | 목록 API fallback 후보군     |
 | `BLOG_CONTENT_API_BASE_URL_INTERNAL`      | Optional                     | Yes            | Yes          | If used | 내부망 우선 base URL         |
 | `BLOG_CONTENT_API_BASE_URL_PUBLIC`        | Optional                     | Yes            | Yes          | If used | 외부망/public base URL       |
+| `BLOG_CONTENT_API_TOKEN`                  | Optional                     | Yes            | Yes          | If used | server-to-server Bearer 토큰 |
 | `BLOG_CONTENT_API_POSTS_PATH`             | Yes                          | Yes            | Yes          | Yes     | 기본값은 `/api/posts`        |
 | `BLOG_CONTENT_MARKDOWN_BASE_URL`          | Yes                          | Yes            | Yes          | Yes     | 본문 HTML API base URL       |
 | `BLOG_CONTENT_MARKDOWN_BASE_URLS`         | Optional                     | Yes            | Yes          | If used | 본문 API fallback 후보군     |
@@ -48,6 +49,7 @@ BETTER_AUTH_SECRET=replace-with-your-secret
 BETTER_AUTH_URL=http://localhost:3000
 BLOG_CONTENT_API_BASE_URL=http://localhost:8000
 BLOG_CONTENT_API_BASE_URLS=http://192.168.0.10:8000,https://content.example.com
+BLOG_CONTENT_API_TOKEN=replace-with-server-to-server-token
 BLOG_CONTENT_API_POSTS_PATH=/api/posts
 BLOG_CONTENT_MARKDOWN_BASE_URL=http://localhost:8000
 BLOG_CONTENT_MARKDOWN_BASE_URLS=http://192.168.0.10:8000,https://content.example.com
@@ -61,6 +63,7 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
 - `apps/docs/.env.example`는 placeholder만 유지한다.
 - 여러 네트워크 위치를 오갈 수 있으면 `*_BASE_URLS` 또는 `*_INTERNAL` / `*_PUBLIC`을 우선 사용한다.
 - 코드는 후보군을 선언된 순서대로 시도하고, 성공한 첫 번째 base URL을 사용한다.
+- 콘텐츠 endpoint가 외부에 노출돼 있어도 브라우저 직접 접근을 막고 싶다면 `BLOG_CONTENT_API_TOKEN`으로 server-to-server 인증을 붙인다.
 
 ## Pre-deploy Checks
 
@@ -74,6 +77,7 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
    - `${BLOG_CONTENT_MARKDOWN_BASE_URL}${BLOG_CONTENT_MARKDOWN_PATH_PREFIX}/{slug-or-path}`
      가 실제 응답하는가
    - fallback을 쓴다면 `*_BASE_URLS`의 각 후보가 실제로 reachable 한가
+   - 토큰 보호를 쓴다면 `Authorization: Bearer <BLOG_CONTENT_API_TOKEN>` 없이 `401/403`이 나는가
 5. 목록 API의 `markdownPath` 값이 본문 API 라우트 규칙과 일치하는가
 
 ## Failure Symptoms
@@ -96,12 +100,14 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
 - `slug/title`이 없음
 - base URL이 잘못됨
 - 현재 네트워크에서 첫 번째 base URL 후보가 unreachable 함
+- server-to-server 토큰이 누락되었거나 잘못됨
 
 조치:
 
 - `/api/posts` 응답 shape 확인
 - Vercel env 값 확인
 - `BLOG_CONTENT_API_BASE_URLS`, `BLOG_CONTENT_MARKDOWN_BASE_URLS` 순서 확인
+- `BLOG_CONTENT_API_TOKEN` 값과 백엔드 기대값 일치 여부 확인
 
 ### Detail page is empty
 
@@ -110,10 +116,12 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
 - `markdownPath`와 실제 본문 라우트 불일치
 - 본문 API가 `404`
 - HTML이 아닌 응답이 와서 프론트가 거부
+- 토큰 검증으로 본문 endpoint가 `401/403`
 
 조치:
 
 - `/posts/{markdownPath}` 직접 호출
+- 토큰 보호를 쓴다면 `Authorization` 헤더 포함 호출로 재검증
 - 필요 시 `markdownPath` 규칙 수정
 
 ## Related Docs

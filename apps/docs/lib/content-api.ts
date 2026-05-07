@@ -1,5 +1,6 @@
 import 'server-only'
 
+import ky from 'ky'
 import sanitizeHtml from 'sanitize-html'
 import type { Metadata } from '~/lib/get-document'
 import type { ContentFormat } from '~/lib/get-document'
@@ -320,6 +321,18 @@ function getInlineContentResult(post: RemotePost) {
     return normalizeRemoteContent(content, null)
 }
 
+function getContentApiAuthHeaders() {
+    const token = process.env.BLOG_CONTENT_API_TOKEN?.trim()
+
+    if (!token) {
+        return {}
+    }
+
+    return {
+        Authorization: `Bearer ${token}`,
+    }
+}
+
 async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
     const inlineContentResult = getInlineContentResult(post)
 
@@ -368,14 +381,16 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
 
     try {
         const revalidateSeconds = getContentRevalidateSeconds()
-        const response = await fetch(markdownUrl, {
-            method: 'GET',
+        const authHeaders = getContentApiAuthHeaders()
+        const response = await ky.get(markdownUrl, {
             headers: {
                 Accept: 'text/html,text/plain;q=0.9,*/*;q=0.8',
+                ...authHeaders,
             },
             next: {
                 revalidate: revalidateSeconds,
             },
+            throwHttpErrors: false,
         })
 
         if (!response.ok) {
@@ -655,19 +670,21 @@ async function fetchRemotePostsPayload() {
     }
 
     const revalidateSeconds = getContentRevalidateSeconds()
+    const authHeaders = getContentApiAuthHeaders()
 
     for (const config of configs) {
         const url = joinUrl(config.baseUrl, config.postsPath)
 
         try {
-            const response = await fetch(url, {
-                method: 'GET',
+            const response = await ky.get(url, {
                 headers: {
                     Accept: 'application/json',
+                    ...authHeaders,
                 },
                 next: {
                     revalidate: revalidateSeconds,
                 },
+                throwHttpErrors: false,
             })
 
             if (!response.ok) {

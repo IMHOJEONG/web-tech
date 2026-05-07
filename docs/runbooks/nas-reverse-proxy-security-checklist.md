@@ -39,6 +39,12 @@
 
 이 경로들은 `read-only` 콘텐츠 소비에 필요한 최소 범위다.
 
+다만 `apps/docs`가 다른 서버에 배포되어 있고, 브라우저 직접 접근은 막고 싶다면 다음 구조를 권장한다.
+
+- path는 reverse proxy에서 열려 있음
+- upstream은 `Authorization: Bearer <shared-secret>` 없이는 `401/403`
+- 즉 사람의 URL 직접 입력은 실패하고, `apps/docs` 서버 fetch만 통과
+
 ### Not Public By Default
 
 다음은 기본적으로 외부 비공개가 권장된다.
@@ -115,6 +121,7 @@ FastAPI 기본 문서 경로는 운영에서 열지 않는 편이 안전하다.
 
 - read credential은 앱 runtime만
 - write credential은 로컬 authoring 또는 CI publish job만
+- read endpoint를 public route로 열더라도 Bearer token 같은 server-to-server 인증을 붙여 브라우저 직접 접근은 차단
 
 ### Do Not
 
@@ -164,6 +171,7 @@ FastAPI 기본 문서 경로는 운영에서 열지 않는 편이 안전하다.
 - read path만 사용
 - endpoint fallback은 read-only 기준으로만 허용
 - write path와 절대 섞지 않음
+- 필요 시 `BLOG_CONTENT_API_TOKEN`으로 server-to-server Bearer 인증만 수행
 
 환경변수도:
 
@@ -177,6 +185,7 @@ FastAPI 기본 문서 경로는 운영에서 열지 않는 편이 안전하다.
 - [ ] HTTPS가 강제되는가
 - [ ] 인증서 갱신 경로가 준비되어 있는가
 - [ ] 공개 path가 `GET /api/posts`, `GET /posts/*` 수준으로 최소화되어 있는가
+- [ ] raw content path에 토큰 없는 브라우저 직접 접근 시 `401/403`이 나는가
 - [ ] `/docs`, `/redoc`, `/openapi.json` 공개 여부를 의도적으로 결정했는가
 - [ ] write/upload/admin endpoint는 외부 비공개인가
 - [ ] 앱 runtime과 publish workflow의 credential이 분리되어 있는가
@@ -198,7 +207,7 @@ FastAPI 기본 문서 경로는 운영에서 열지 않는 편이 안전하다.
 
 즉:
 
-- 콘텐츠 읽기는 public reverse proxy 경유
+- 콘텐츠 읽기는 public reverse proxy 경유 + server-to-server 인증
 - 콘텐츠 쓰기는 로컬/CI에서 별도 수행
 
 으로 분리하는 것이 맞다.

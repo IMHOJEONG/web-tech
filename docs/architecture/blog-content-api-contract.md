@@ -50,6 +50,26 @@
 
 이 방식은 사용자의 네트워크 위치가 바뀌는 로컬 개발 환경에서 특히 유용하다.
 
+## Server-to-Server Auth
+
+`apps/docs`가 다른 곳에 배포되어 있고, 콘텐츠 source endpoint를 브라우저 직접 접근에서는 막고 싶다면 `server-to-server` 인증을 붙이는 것이 권장된다.
+
+권장 방식:
+
+- `Authorization: Bearer <shared-secret>`
+
+프론트 동작:
+
+- `apps/docs` 서버 fetch에서만 토큰을 보낸다
+- 브라우저에는 토큰을 절대 내려주지 않는다
+
+백엔드 기대 동작:
+
+- 올바른 토큰이 없으면 `401 Unauthorized` 또는 `403 Forbidden`
+- 토큰이 맞을 때만 `/api/posts`, `/posts/{markdownPath}` 응답
+
+현재 `apps/docs`는 `BLOG_CONTENT_API_TOKEN`이 있으면 목록 API와 본문 API 양쪽에 같은 Bearer 토큰을 붙인다.
+
 ## Recommended Contract
 
 ### 1. List API
@@ -59,6 +79,7 @@
 ```http
 GET /api/posts
 Accept: application/json
+Authorization: Bearer <shared-secret>
 ```
 
 #### Response
@@ -115,6 +136,7 @@ Accept: application/json
 ```http
 GET /posts/test.md
 Accept: text/html,text/plain;q=0.9,*/*;q=0.8
+Authorization: Bearer <shared-secret>
 ```
 
 #### Response
@@ -244,11 +266,13 @@ Content-Type: text/html; charset=utf-8
 
 - 프론트는 로컬 문서 fallback을 시도할 수 있다.
 - 운영 환경에서는 에러 로깅이 필요하다.
+- 토큰 보호를 쓴다면 `401/403`도 관측 가능한 failure case로 본다.
 
 ### Body API failure
 
 - 상세 페이지는 빈 본문이 되지 않도록 `404` 또는 에러 UI로 처리하는 편이 좋다.
 - 장기적으로는 `slug` 기준 상세 메타 API를 두는 것도 고려할 수 있다.
+- 토큰 누락/만료/오타가 있으면 본문 endpoint도 `401/403`가 나므로 read token 관리가 필요하다.
 
 ## Recommended Production Contract
 
