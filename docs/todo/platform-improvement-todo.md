@@ -29,6 +29,8 @@
 - [ ] `P1` 콘텐츠 운영 모델을 정한다.
   - `apps/docs/data` 기반 정적 운영을 유지할지
   - 별도 CMS/DB/API 계약으로 확장할지 결정
+  - 글 업로드는 로컬 authoring + 별도 publish workflow로 둘지 확정
+  - 기준 문서: `docs/architecture/docs-content-authoring-pipeline.md`
 - [x] `P2` 검색 경험의 목표를 정의한다.
   - 검색 결과는 `/docs?q=...` 상태로 운영
   - 검색 범위는 `title / summary / taxonomy / content` 우선순위로 정리
