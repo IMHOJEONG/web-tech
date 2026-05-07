@@ -30,25 +30,27 @@
 
 ## Endpoint Selection
 
-프론트는 현재 단일 endpoint만 강제하지 않는다.
+프론트는 현재 한 번에 하나의 endpoint만 선택해서 사용한다.
 
-운영 환경에 따라 다음 전략을 사용할 수 있다.
+우선순위:
 
-1. 단일 base URL
-   - `BLOG_CONTENT_API_BASE_URL`
-   - `BLOG_CONTENT_MARKDOWN_BASE_URL`
-2. 후보군 fallback
-   - `BLOG_CONTENT_API_BASE_URLS`
-   - `BLOG_CONTENT_MARKDOWN_BASE_URLS`
-3. 내부망 / 외부망 분리
-   - `BLOG_CONTENT_API_BASE_URL_INTERNAL`
-   - `BLOG_CONTENT_API_BASE_URL_PUBLIC`
-   - `BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL`
-   - `BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC`
+1. `BLOG_CONTENT_API_BASE_URL_PUBLIC`
+2. `BLOG_CONTENT_API_BASE_URL_INTERNAL`
+3. `BLOG_CONTENT_API_BASE_URL`
 
-코드는 선언된 순서대로 후보를 시도하고, 성공한 첫 번째 endpoint를 사용한다.
+본문 endpoint도 같은 방식으로 선택한다.
 
-이 방식은 사용자의 네트워크 위치가 바뀌는 로컬 개발 환경에서 특히 유용하다.
+1. `BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC`
+2. `BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL`
+3. `BLOG_CONTENT_MARKDOWN_BASE_URL`
+
+즉 `PUBLIC`과 `INTERNAL`이 동시에 있어도 둘 다 시도하지 않고, 더 우선순위가 높은 하나만 사용한다.
+
+이렇게 하면:
+
+- 인증 실패 후 내부망 주소까지 연쇄 호출되는 문제를 줄이고
+- 로그 해석이 쉬워지고
+- 배포 환경에서 실제로 사용할 endpoint가 더 분명해진다.
 
 ## Server-to-Server Auth
 
