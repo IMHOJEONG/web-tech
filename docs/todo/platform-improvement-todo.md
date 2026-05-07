@@ -97,6 +97,7 @@
   - `CHANGELOG`
   - `GITHUB`
 - [ ] `P2` empty state, loading state, error state의 시각 톤을 통일한다.
+  - root landing은 remote latest notes 실패 시 페이지 전체를 죽이지 않고 섹션 단위 graceful degradation을 유지
 - [ ] `P2` keyboard navigation / focus ring / drawer close flow 접근성을 점검한다.
 
 ## Design / Design System

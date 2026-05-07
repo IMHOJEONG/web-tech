@@ -723,7 +723,9 @@ async function fetchRemotePostsPayload() {
         }
     }
 
-    return null
+    throw new Error(
+        '[docs] Failed to fetch remote content from every configured content API candidate.'
+    )
 }
 
 export async function fetchRemoteDocsData() {

@@ -10,6 +10,8 @@ type LatestNotesProps = {
     viewAllLabel: string
     openLabel: string
     items: LatestNoteRowItem[]
+    unavailableTitle?: string
+    unavailableDescription?: string
 }
 
 export function LatestNotes({
@@ -18,6 +20,8 @@ export function LatestNotes({
     viewAllLabel,
     openLabel,
     items,
+    unavailableTitle,
+    unavailableDescription,
 }: LatestNotesProps) {
     return (
         <section>
@@ -40,13 +44,24 @@ export function LatestNotes({
                 </div>
 
                 <div className="ds-panel mt-8 overflow-hidden p-0">
-                    {items.map((item) => (
-                        <LatestNoteRow
-                            key={item.href}
-                            item={item}
-                            openLabel={openLabel}
-                        />
-                    ))}
+                    {items.length > 0 ? (
+                        items.map((item) => (
+                            <LatestNoteRow
+                                key={item.href}
+                                item={item}
+                                openLabel={openLabel}
+                            />
+                        ))
+                    ) : (
+                        <div className="space-y-3 px-5 py-6 sm:px-6 sm:py-7">
+                            <h3 className="text-lg font-semibold tracking-[-0.02em] text-on-surface">
+                                {unavailableTitle}
+                            </h3>
+                            <p className="max-w-2xl break-keep text-sm leading-6 text-on-surface-variant sm:text-base">
+                                {unavailableDescription}
+                            </p>
+                        </div>
+                    )}
                 </div>
             </div>
         </section>

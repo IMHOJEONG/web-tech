@@ -80,10 +80,19 @@ function getSectionLabel(
 
 export async function RootLandingPage() {
     const t = await getTranslations('rootLanding')
-    const docs = (await getSortedPostsData())
-        .map(toLandingDoc)
-        .filter((doc): doc is LandingDoc => doc !== null)
-        .slice(0, 4)
+    let docs: LandingDoc[] = []
+
+    try {
+        docs = (await getSortedPostsData())
+            .map(toLandingDoc)
+            .filter((doc): doc is LandingDoc => doc !== null)
+            .slice(0, 4)
+    } catch (error) {
+        console.error(
+            '[docs] Root landing latest notes fallback activated.',
+            error
+        )
+    }
 
     const foundationItems = [
         {
@@ -135,6 +144,8 @@ export async function RootLandingPage() {
                 viewAllLabel={t('latestNotes.viewAll')}
                 openLabel={t('latestNotes.open')}
                 items={latestItems}
+                unavailableTitle={t('latestNotes.unavailableTitle')}
+                unavailableDescription={t('latestNotes.unavailableDescription')}
             />
         </main>
     )

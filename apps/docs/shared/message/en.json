@@ -118,6 +118,8 @@
             "title": "Recently refined articles",
             "viewAll": "OPEN FEED",
             "open": "OPEN",
+            "unavailableTitle": "Recent notes are temporarily unavailable",
+            "unavailableDescription": "You can keep exploring the landing page for now, or jump into the feed and come back in a moment.",
             "sectionLabels": {
                 "web": "WEB",
                 "mobile": "MOBILE",
