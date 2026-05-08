@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import { formatSearchKeyword } from './lib/format-search-keyword'
 
 interface EmptySearchResultProps {
     keyword: string
@@ -11,12 +12,13 @@ export const EmptySearchResult = ({
     recommendations,
 }: EmptySearchResultProps) => {
     const t = useTranslations('search')
+    const formattedKeyword = formatSearchKeyword(keyword)
 
     return (
         <div className="flex flex-col items-center gap-4 py-20 text-center text-muted-foreground">
             <p className="text-lg font-medium">
                 {t('empty.resultTitle', {
-                    keyword: keyword,
+                    keyword: formattedKeyword,
                 })}
             </p>
             <p className="text-sm">{t('empty.resultDescription')}</p>

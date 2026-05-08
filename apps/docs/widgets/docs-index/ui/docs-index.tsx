@@ -1,6 +1,7 @@
 import { getTime } from '@web-tech/ui/lib/time'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
+import { formatSearchKeyword } from '~/feature/search/lib/format-search-keyword'
 import type { SearchData } from '~/lib/get-search-data'
 
 type DocsIndexProps = {
@@ -114,6 +115,8 @@ export async function DocsIndex({
     const latestUpdated = docs[0]?.date ? getTime(docs[0].date) : null
 
     if (keyword) {
+        const formattedKeyword = formatSearchKeyword(keyword)
+
         return (
             <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
                 <div className="space-y-8">
@@ -123,7 +126,9 @@ export async function DocsIndex({
                                 {t('search.eyebrow')}
                             </p>
                             <h1 className="text-3xl font-extrabold tracking-tight text-on-surface sm:text-4xl">
-                                {t('search.title', { keyword })}
+                                {t('search.title', {
+                                    keyword: formattedKeyword,
+                                })}
                             </h1>
                             <p className="text-sm leading-7 text-on-surface-variant sm:text-base">
                                 {t('search.description')}

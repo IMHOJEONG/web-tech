@@ -131,7 +131,8 @@
     "search": {
         "input": {
             "placeholder": "Search the docs",
-            "submitAriaLabel": "Search documents"
+            "submitAriaLabel": "Search documents",
+            "clearAriaLabel": "Clear search query"
         },
         "empty": {
             "resultTitle": "No results found for \"{keyword}\"",

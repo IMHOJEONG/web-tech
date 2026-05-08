@@ -131,7 +131,8 @@
     "search": {
         "input": {
             "placeholder": "문서를 검색해보세요",
-            "submitAriaLabel": "문서 검색"
+            "submitAriaLabel": "문서 검색",
+            "clearAriaLabel": "검색어 지우기"
         },
         "empty": {
             "resultTitle": "{keyword}에 맞는 결과가 없습니다",
