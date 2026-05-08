@@ -1,6 +1,6 @@
 {
     "common": {
-        "brand": "TECH_LOGIC"
+        "brand": "HEAP-FORGE"
     },
     "metadata": {
         "site": {
@@ -379,7 +379,7 @@
         "profile": {
             "name": "HoJeong Im",
             "role": "Full Stack Engineer",
-            "bio": "A full-stack engineer pursuing both minimal aesthetics and high performance, building TECH_LOGIC as an open knowledge base for digital builders.",
+            "bio": "A full-stack engineer pursuing both minimal aesthetics and high performance, building HEAP-FORGE as an open knowledge base for digital builders.",
             "links": {
                 "github": {
                     "label": "GITHUB",
@@ -482,7 +482,7 @@
             "mobile": {
                 "title": "Build Better Systems",
                 "description": "Join 12,000+ engineers receiving bi-weekly deep dives into infrastructure, Rust, and distributed computing.",
-                "placeholder": "user@tech-logic.io",
+                "placeholder": "user@heap-forge.io",
                 "button": "Subscribe to the Patch",
                 "note": "NO SPAM // SYSTEM-GRADE SIGNAL ONLY"
             },

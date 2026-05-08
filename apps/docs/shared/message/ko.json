@@ -1,6 +1,6 @@
 {
     "common": {
-        "brand": "TECH_LOGIC"
+        "brand": "HEAP-FORGE"
     },
     "metadata": {
         "site": {
@@ -379,7 +379,7 @@
         "profile": {
             "name": "HoJeong Im",
             "role": "Full Stack Engineer",
-            "bio": "미니멀한 미감과 높은 성능을 함께 지향하는 풀스택 엔지니어로, 디지털 빌더를 위한 열린 지식 베이스로서 TECH_LOGIC을 구축하고 있습니다.",
+            "bio": "미니멀한 미감과 높은 성능을 함께 지향하는 풀스택 엔지니어로, 디지털 빌더를 위한 열린 지식 베이스로서 HEAP-FORGE를 구축하고 있습니다.",
             "links": {
                 "github": {
                     "label": "GITHUB",
@@ -482,7 +482,7 @@
             "mobile": {
                 "title": "더 나은 시스템을 만드세요",
                 "description": "인프라, Rust, 분산 컴퓨팅에 대한 깊이 있는 글을 격주로 받아보는 12,000명 이상의 엔지니어와 함께하세요.",
-                "placeholder": "user@tech-logic.io",
+                "placeholder": "user@heap-forge.io",
                 "button": "패치 구독하기",
                 "note": "NO SPAM // SYSTEM-GRADE SIGNAL ONLY"
             },
