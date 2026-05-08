@@ -55,6 +55,22 @@ function stripFileExtension(value: string) {
     return value.replace(/\.[a-z0-9]+$/i, '')
 }
 
+function normalizeReadMinutes(value?: unknown) {
+    if (typeof value === 'number' && Number.isFinite(value) && value > 0) {
+        return Math.round(value)
+    }
+
+    if (typeof value === 'string') {
+        const parsedValue = Number.parseInt(value.trim(), 10)
+
+        if (Number.isFinite(parsedValue) && parsedValue > 0) {
+            return parsedValue
+        }
+    }
+
+    return undefined
+}
+
 function getFallbackSlug(post: RemotePost) {
     const reference =
         getMarkdownReference(post) ?? post.fileName ?? post.path ?? ''
@@ -157,6 +173,22 @@ export function normalizeRemotePostMeta(
         thumbnail: normalizeThumbnailPath(
             post.thumbnail ?? post.thumbnail_url ?? post.thumbnailUrl
         ),
+        authorName: post.authorName ?? post.author_name ?? post.author,
+        authorRole: post.authorRole ?? post.author_role ?? post.role,
+        readMinutes: normalizeReadMinutes(
+            post.readMinutes ??
+                post.read_minutes ??
+                post.readTime ??
+                post.read_time ??
+                post.readingTime ??
+                post.reading_time
+        ),
+        topicLabel:
+            post.topicLabel ??
+            post.topic_label ??
+            post.sectionLabel ??
+            post.section_label ??
+            post.topic,
     }
 }
 

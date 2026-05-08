@@ -26,7 +26,9 @@ export async function ChannelHubPage({ channel }: ChannelHubPageProps) {
     const channelKey = getChannelKey(channel)
     const channelDocs = await getChannelHubDocs(channel)
     const docs = channelDocs.slice(0, 6)
-    const latestDate = channelDocs[0]?.date ? getTime(channelDocs[0].date) : null
+    const latestDate = channelDocs[0]?.date
+        ? getTime(channelDocs[0].date)
+        : null
 
     const panels = ['first', 'second', 'third'].map((panelKey) => ({
         title: t(`${channelKey}.panels.${panelKey}.title`),

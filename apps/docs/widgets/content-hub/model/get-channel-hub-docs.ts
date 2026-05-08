@@ -30,9 +30,8 @@ async function getWebCategoryDocs() {
             const topicDocs = await getSubCategoryData('fe', topic.url)
 
             return topicDocs
-                .filter(
-                    (doc): doc is SearchData =>
-                        Boolean(doc.slug && doc.id && doc.title)
+                .filter((doc): doc is SearchData =>
+                    Boolean(doc.slug && doc.id && doc.title)
                 )
                 .map((doc) => ({
                     id: String(doc.id),
@@ -40,7 +39,8 @@ async function getWebCategoryDocs() {
                     summary: doc.summary ?? '',
                     content: doc.content ?? '',
                     slug: doc.slug!,
-                    fileName: doc.fileName ?? `category/fe/${topic.url}/${doc.slug}`,
+                    fileName:
+                        doc.fileName ?? `category/fe/${topic.url}/${doc.slug}`,
                     date: doc.date,
                     thumbnail: doc.thumbnail ?? null,
                     href: `/category/fe/${topic.url}/${doc.slug}`,

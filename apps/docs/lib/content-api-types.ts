@@ -27,6 +27,23 @@ export type RemotePost = {
     markdownUrl?: string
     md_url?: string
     mdUrl?: string
+    author?: string
+    author_name?: string
+    authorName?: string
+    author_role?: string
+    authorRole?: string
+    role?: string
+    read_minutes?: number | string
+    readMinutes?: number | string
+    reading_time?: number | string
+    readingTime?: number | string
+    read_time?: number | string
+    readTime?: number | string
+    topic?: string
+    topic_label?: string
+    topicLabel?: string
+    section_label?: string
+    sectionLabel?: string
 }
 
 export type RemotePayload =

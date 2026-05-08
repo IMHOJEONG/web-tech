@@ -137,30 +137,51 @@ function estimateReadMinutes(content?: string) {
     return Math.max(5, Math.ceil(source.length / 420))
 }
 
+function getReadMinutes(doc: FeedDoc) {
+    if (typeof doc.readMinutes === 'number' && doc.readMinutes > 0) {
+        return doc.readMinutes
+    }
+
+    return estimateReadMinutes(doc.content)
+}
+
 function getTextLang(text: string) {
     return /[가-힣]/.test(text) ? 'ko' : 'en'
 }
 
 function getTopicStyle(doc: FeedDoc): TopicTone {
     const fileName = normalizeDocPath(doc.fileName ?? '')
+    const inferredTone = (() => {
+        if (
+            fileName.includes('/category/fe/') ||
+            fileName.includes('/data/v8/')
+        ) {
+            return WEB_TOPIC
+        }
 
-    if (fileName.includes('/category/fe/') || fileName.includes('/data/v8/')) {
-        return WEB_TOPIC
+        if (fileName.includes('/data/shadcn/')) {
+            return UIUX_TOPIC
+        }
+
+        if (fileName.includes('/category/computer-science/')) {
+            return SYSTEMS_TOPIC
+        }
+
+        if (fileName.includes('/category/be/')) {
+            return ARCHITECTURE_TOPIC
+        }
+
+        return GENERAL_TOPIC
+    })()
+
+    if (doc.topicLabel?.trim()) {
+        return {
+            ...inferredTone,
+            label: doc.topicLabel.trim(),
+        }
     }
 
-    if (fileName.includes('/data/shadcn/')) {
-        return UIUX_TOPIC
-    }
-
-    if (fileName.includes('/category/computer-science/')) {
-        return SYSTEMS_TOPIC
-    }
-
-    if (fileName.includes('/category/be/')) {
-        return ARCHITECTURE_TOPIC
-    }
-
-    return GENERAL_TOPIC
+    return inferredTone
 }
 
 function getFeedFilter(doc: FeedDoc): FeedFilter {
@@ -182,6 +203,13 @@ export function normalizeFeedFilter(value?: string): FeedFilter {
 }
 
 function getAuthor(doc: FeedDoc, index: number): FeedAuthor {
+    if (doc.authorName?.trim()) {
+        return {
+            name: doc.authorName.trim(),
+            role: doc.authorRole?.trim() || 'Contributor',
+        }
+    }
+
     const seededIndex = (doc.slug.length + index) % AUTHOR_PALETTE.length
     return AUTHOR_PALETTE[seededIndex] ?? AUTHOR_PALETTE[0]!
 }
@@ -202,7 +230,7 @@ function FeedBadge({ label, className }: { label: string; className: string }) {
 
 function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
     const topic = getTopicStyle(doc)
-    const minutes = estimateReadMinutes(doc.content)
+    const minutes = getReadMinutes(doc)
     const author = getAuthor(doc, index)
 
     return (
@@ -250,7 +278,7 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
 
 function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
     const topic = getTopicStyle(doc)
-    const minutes = estimateReadMinutes(doc.content)
+    const minutes = getReadMinutes(doc)
 
     return (
         <Link
@@ -262,7 +290,7 @@ function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
                     label={topic.label}
                     className={topic.badgeClassName}
                 />
-                <h3 className="font-display text-headline-md text-on-surface">
+                <h3 className="font-display text-[1.4rem] leading-[1.18] tracking-[-0.03em] text-on-surface">
                     {doc.title}
                 </h3>
                 <p
@@ -287,7 +315,7 @@ function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
 
 function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
     const topic = getTopicStyle(doc)
-    const minutes = estimateReadMinutes(doc.content)
+    const minutes = getReadMinutes(doc)
     const author = getAuthor(doc, index)
 
     return (
@@ -311,7 +339,7 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
                     label={topic.label}
                     className={topic.badgeClassName}
                 />
-                <h3 className="font-display text-headline-md text-on-surface">
+                <h3 className="font-display text-[1.4rem] leading-[1.18] tracking-[-0.03em] text-on-surface">
                     {doc.title}
                 </h3>
                 <p
@@ -352,7 +380,7 @@ function TextSupportCard({
                     label={topic.label}
                     className={topic.badgeClassName}
                 />
-                <h3 className="font-display text-headline-md text-on-surface">
+                <h3 className="font-display text-[1.4rem] leading-[1.18] tracking-[-0.03em] text-on-surface">
                     {title}
                 </h3>
                 <p
@@ -419,7 +447,7 @@ function EmptyFilteredFeed({ activeFilter }: { activeFilter: FeedFilter }) {
                     }
                     className="bg-surface-container border border-outline-variant text-on-surface-variant"
                 />
-                <h3 className="font-display text-headline-md text-on-surface">
+                <h3 className="font-display text-[1.4rem] leading-[1.18] tracking-[-0.03em] text-on-surface">
                     아직 이 필터에 맞는 큐레이션 문서가 충분하지 않습니다.
                 </h3>
                 <p className="max-w-xl text-body-md text-on-surface-variant">
@@ -474,7 +502,7 @@ export function MainFeed({
                             className="bg-secondary/15 text-secondary"
                         />
                         <div className="space-y-3">
-                            <h1 className="font-display text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.08] font-bold tracking-[-0.04em] text-on-surface">
+                            <h1 className="font-display text-[clamp(1.9rem,3.4vw,2.9rem)] leading-[1.1] font-bold tracking-[-0.04em] text-on-surface">
                                 선택한 트랙을 기준으로 피드를 좁혀보고 있습니다.
                             </h1>
                             <p className="max-w-2xl text-body-lg text-on-surface-variant">
@@ -493,7 +521,7 @@ export function MainFeed({
                             <div className="space-y-2">
                                 <div className="flex items-center gap-3">
                                     <span className="h-8 w-2 bg-primary" />
-                                    <h2 className="font-display text-headline-lg text-on-surface">
+                                    <h2 className="font-display text-[1.9rem] leading-[1.08] tracking-[-0.04em] text-on-surface">
                                         Latest Technical Insights
                                     </h2>
                                 </div>
@@ -533,7 +561,7 @@ export function MainFeed({
 
     const heroTopic = getTopicStyle(heroDoc)
     const heroAuthor = getAuthor(heroDoc, 0)
-    const heroMinutes = estimateReadMinutes(heroDoc.content)
+    const heroMinutes = getReadMinutes(heroDoc)
 
     return (
         <main className="w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
@@ -549,13 +577,13 @@ export function MainFeed({
                             <div className="max-w-2xl">
                                 <span
                                     className={cn(
-                                        'font-display block text-headline-xl text-on-surface',
+                                        'font-display block text-[1.35rem] leading-[1.08] tracking-[-0.03em] text-on-surface',
                                         heroTopic.textClassName
                                     )}
                                 >
                                     {heroTopic.label}
                                 </span>
-                                <h1 className="font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.08] font-bold tracking-[-0.04em] text-on-surface">
+                                <h1 className="font-display text-[clamp(2.1rem,4vw,3.1rem)] leading-[1.08] font-bold tracking-[-0.04em] text-on-surface">
                                     {heroDoc.title}
                                 </h1>
                             </div>
@@ -622,7 +650,7 @@ export function MainFeed({
                         <div className="space-y-2">
                             <div className="flex items-center gap-3">
                                 <span className="h-8 w-2 bg-primary" />
-                                <h2 className="font-display text-headline-lg text-on-surface">
+                                <h2 className="font-display text-[1.9rem] leading-[1.08] tracking-[-0.04em] text-on-surface">
                                     Latest Technical Insights
                                 </h2>
                             </div>

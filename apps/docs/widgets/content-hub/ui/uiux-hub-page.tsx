@@ -87,7 +87,9 @@ function SmallArticleCard({
 
 export async function UiUxHubPage() {
     const t = await getTranslations('uiuxHub')
-    const docs = (await getChannelHubDocs('uiux')).map(toUiUxDoc).filter(Boolean)
+    const docs = (await getChannelHubDocs('uiux'))
+        .map(toUiUxDoc)
+        .filter(Boolean)
     const renderedDocs = docs as UiUxDoc[]
 
     const fallbackHref = '/feed?topic=uiux'
@@ -177,7 +179,10 @@ export async function UiUxHubPage() {
                     >
                         <div className="absolute inset-0">
                             <Image
-                                src={featured.thumbnail ?? FALLBACK_IMAGES.featured}
+                                src={
+                                    featured.thumbnail ??
+                                    FALLBACK_IMAGES.featured
+                                }
                                 alt={featured.title}
                                 fill
                                 className="object-cover opacity-45 transition-transform duration-700 group-hover:scale-[1.03]"
@@ -227,7 +232,10 @@ export async function UiUxHubPage() {
                     >
                         <div className="absolute inset-0">
                             <Image
-                                src={tutorial.thumbnail ?? FALLBACK_IMAGES.tutorial}
+                                src={
+                                    tutorial.thumbnail ??
+                                    FALLBACK_IMAGES.tutorial
+                                }
                                 alt={tutorial.title}
                                 fill
                                 className="object-cover opacity-65 transition-transform duration-700 group-hover:scale-[1.03]"

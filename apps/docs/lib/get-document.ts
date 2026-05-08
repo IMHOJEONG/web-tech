@@ -1,9 +1,19 @@
 declare module 'vfile' {
     interface DataMap {
         matter: {
-            // `file.data.matter.string` is typed as `string | undefined`.
             title?: string | undefined
+            slug?: string | undefined
+            date?: string | undefined
+            summary?: string | undefined
             thumbnail?: string | null
+            author?: string | undefined
+            authorName?: string | undefined
+            authorRole?: string | undefined
+            role?: string | undefined
+            readMinutes?: number | string | undefined
+            readTime?: number | string | undefined
+            topicLabel?: string | undefined
+            topic?: string | undefined
             use?: {
                 [key: string]: any
             }
@@ -32,9 +42,29 @@ export interface Metadata {
     contentSource?: ContentSource
     markdownPath?: string | null
     thumbnail?: string | null
+    authorName?: string
+    authorRole?: string
+    readMinutes?: number
+    topicLabel?: string
 }
 
 const docsDirectory = path.join(process.cwd(), 'data')
+
+function normalizeReadMinutes(value?: unknown) {
+    if (typeof value === 'number' && Number.isFinite(value) && value > 0) {
+        return Math.round(value)
+    }
+
+    if (typeof value === 'string') {
+        const parsedValue = Number.parseInt(value.trim(), 10)
+
+        if (Number.isFinite(parsedValue) && parsedValue > 0) {
+            return parsedValue
+        }
+    }
+
+    return undefined
+}
 
 function exploreDirectory(directory: string) {
     let files: string[] = []
@@ -100,6 +130,12 @@ function getLocalDocsData() {
             contentFormat: 'mdx',
             contentSource: 'local',
             thumbnail: thumbnailPath,
+            authorName: data.authorName ?? data.author,
+            authorRole: data.authorRole ?? data.role,
+            readMinutes: normalizeReadMinutes(
+                data.readMinutes ?? data.readTime
+            ),
+            topicLabel: data.topicLabel ?? data.topic,
         }
     })
 

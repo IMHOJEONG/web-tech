@@ -129,8 +129,25 @@ Authorization: Bearer <shared-secret>
 - `thumbnail_url`
 - `fileName`
 - `path`
+- `author`
+- `authorName`
+- `author_role`
+- `authorRole`
+- `role`
+- `read_minutes`
+- `readMinutes`
+- `read_time`
+- `readTime`
+- `reading_time`
+- `readingTime`
+- `topic`
+- `topic_label`
+- `topicLabel`
+- `section_label`
+- `sectionLabel`
 
 프론트는 현재 일부 fallback을 갖고 있지만, 운영용으로는 `slug`, `title`, `summary`, `markdownPath`를 명시적으로 주는 것을 권장한다.
+추가로 피드/허브에서 더 풍부한 메타를 보여주고 싶다면 `authorName`, `authorRole`, `readMinutes`, `topicLabel`까지 함께 주는 편이 좋다.
 
 ### 2. Body API
 
