@@ -52,21 +52,63 @@ content/posts/
 
 권장 규칙:
 
+- 공개 문서 URL은 `/docs/{channel}/{articleSlug}` 형태로 고정한다.
+  - `feed/weekly-note-001` -> `/docs/feed/weekly-note-001`
+  - `web/rendering-pipeline` -> `/docs/web/rendering-pipeline`
+  - `ui-ux/blocked-aria-hidden` -> `/docs/ui-ux/blocked-aria-hidden`
 - `markdownPath`는 확장자 없는 상대 경로로 반환
   - `web/rendering-pipeline`
   - `feed/weekly-note-001`
   - `ui-ux/blocked-aria-hidden`
   - `mobile/touch-targets`
-- `slug`는 전역에서 유일하게 만든다.
-  - 예: `web-rendering-pipeline`
-  - 예: `uiux-blocked-aria-hidden`
+- `slug`는 leaf slug만 쓴다.
+  - 예: `rendering-pipeline`
+  - 예: `blocked-aria-hidden`
+- `slug`에 channel prefix를 다시 넣지 않는다.
+  - 나쁜 예: `feed-pna`
+  - 좋은 예: `slug: "pna"` + `markdownPath: "feed/pna"`
+- `id`는 전역에서 유일하게 만든다.
+  - 예: `web/rendering-pipeline`
+  - 예: `ui-ux/blocked-aria-hidden`
+
+## Route And Metadata Policy
+
+FastAPI는 아래 의미를 기준으로 응답 값을 만든다.
+
+- `markdownPath`
+  - 실제 본문 파일 위치를 나타내는 상대 경로
+  - 예: `feed/pna`
+- `slug`
+  - 채널을 제외한 leaf slug
+  - 예: `pna`
+- `id`
+  - 전역 유일 식별자
+  - `markdownPath` 그대로 쓰는 방식을 권장
+  - 예: `feed/pna`
+
+즉 아래처럼 정리하는 것이 권장이다.
+
+```json
+{
+  "id": "feed/pna",
+  "slug": "pna",
+  "markdownPath": "feed/pna"
+}
+```
+
+이 구조를 쓰면:
+
+- 본문 API는 `/posts/feed/pna`
+- 공개 상세 URL은 `/docs/feed/pna`
+
+로 자연스럽게 이어진다.
 
 ## Example Frontmatter
 
 ```md
 ---
 title: "ARIA에 대해 깊게 알아봅시다"
-slug: "uiux-blocked-aria-hidden"
+slug: "blocked-aria-hidden"
 date: "2025-12-30"
 summary: "Shadcn Drawer 컴포넌트 사용 시, ARIA Warning"
 thumbnail: "shadcn/thumbnail.webp"
@@ -203,9 +245,6 @@ def parse_frontmatter(raw_text: str) -> tuple[dict, str]:
 
     return data, body.strip()
 
-def make_slug(markdown_path: str) -> str:
-    return markdown_path.replace("/", "-").replace("_", "-").lower()
-
 def infer_title(markdown_path: str) -> str:
     leaf = markdown_path.split("/")[-1]
     spaced = re.sub(r"[-_]+", " ", leaf).strip()
@@ -232,7 +271,7 @@ def infer_topic_label(markdown_path: str) -> str:
 def build_post_meta(file_path: Path):
     relative = file_path.relative_to(CONTENT_DIR).with_suffix("")
     markdown_path = relative.as_posix()
-    slug = make_slug(markdown_path)
+    leaf_slug = markdown_path.split("/")[-1]
 
     raw_text = file_path.read_text(encoding="utf-8")
     frontmatter, body = parse_frontmatter(raw_text)
@@ -241,8 +280,8 @@ def build_post_meta(file_path: Path):
     summary = frontmatter.get("summary") or infer_summary(body)
 
     return {
-        "id": slug,
-        "slug": frontmatter.get("slug") or slug,
+        "id": markdown_path,
+        "slug": frontmatter.get("slug") or leaf_slug,
         "title": title,
         "summary": summary,
         "date": frontmatter.get("date", ""),
@@ -295,6 +334,12 @@ def get_post(markdown_path: str):
     \"\"\"
 ```
 
+위 `build_post_meta()`에서 중요한 점:
+
+- `id`는 `markdown_path`를 그대로 쓴다.
+- `slug`는 마지막 leaf segment만 쓴다.
+- `feed-pna`처럼 channel이 포함된 slug는 만들지 않는다.
+
 ## Example Response
 
 `GET /api/posts`
@@ -303,8 +348,8 @@ def get_post(markdown_path: str):
 {
   "results": [
     {
-      "id": "web-rendering-pipeline",
-      "slug": "web-rendering-pipeline",
+      "id": "web/rendering-pipeline",
+      "slug": "rendering-pipeline",
       "title": "Rendering Pipeline",
       "summary": "브라우저 렌더링 파이프라인 정리",
       "date": "2026-05-08",
@@ -350,5 +395,6 @@ curl -i http://192.168.0.7:8000/api/posts \
 ## Notes
 
 - `apps/docs`는 `markdownPath`에 슬래시가 들어간 상대 경로를 지원한다.
-- `slug`는 가능하면 채널 prefix를 포함해 전역 유일하게 유지한다.
+- `slug`는 public URL 전체가 아니라 마지막 leaf segment라고 보는 편이 좋다.
+- `id`는 전역 유일 값으로 유지하고, `markdownPath`를 그대로 쓰는 방식을 권장한다.
 - `CONTENT_API_TOKEN`은 compose 파일에 직접 적지 말고 `.env`나 secret store를 통해 주입한다.

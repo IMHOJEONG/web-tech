@@ -2,7 +2,7 @@ import { evaluate, EvaluateOptions } from 'next-mdx-remote-client/rsc'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import remarkFlexibleToc, { TocItem } from 'remark-flexible-toc'
-import { getDocBySlug } from '~/lib/get-document'
+import { getDocByRoutePath } from '~/lib/get-document'
 import { components } from '~/mdx-components'
 import { LoadingComponent } from '~/shared/loading-component'
 import { normalizeRemoteArticleHtml } from '~/widgets/article-detail/model/normalize-remote-article-html'
@@ -21,10 +21,11 @@ type Frontmatter = {
 export default async function Page({
     params,
 }: {
-    params: Promise<{ slug: string }>
+    params: Promise<{ slugParts: string[] }>
 }) {
-    const { slug } = await params
-    const target = await getDocBySlug(slug)
+    const { slugParts } = await params
+    const routePath = slugParts.join('/')
+    const target = await getDocByRoutePath(routePath)
 
     if (!target) {
         notFound()
@@ -54,20 +55,17 @@ export default async function Page({
         },
         parseFrontmatter: true,
         scope: {
-            // readingTime: calculateSomeHow(source),
             readingTime: '',
         },
         vfileDataIntoScope: 'toc',
     }
 
-    const { content, frontmatter, scope, error } = await evaluate<
-        Frontmatter,
-        Scope
-    >({
-        source: target?.content ?? '',
+    const { content, scope } = await evaluate<Frontmatter, Scope>({
+        source: target.content ?? '',
         options,
         components,
     })
+
     return (
         <ArticleContentLayout toc={scope.toc}>
             <div className="mdx-wrapper">

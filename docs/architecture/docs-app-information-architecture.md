@@ -415,7 +415,7 @@ flowchart TD
 
 대표 예:
 
-- `/docs/[slug]`
+- `/docs/[channel]/[articleSlug]`
 - `/category/[main]/[sub]/[slug]`
 
 ## What To Show On Each Page

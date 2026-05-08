@@ -16,6 +16,7 @@ import {
     normalizeRemoteReference,
     normalizeRemoteSearchResult,
 } from '~/lib/content-api-normalize'
+import { isDocRouteMatch } from '~/lib/get-doc-route'
 import type {
     ContentFormat,
     Metadata,
@@ -224,15 +225,23 @@ export async function fetchRemoteDocsData() {
         .filter((post): post is Partial<Metadata> => post !== null)
 }
 
-export async function fetchRemoteDocBySlug(slug: string) {
+export async function fetchRemoteDocByRoutePath(routePath: string) {
     const payload = await fetchRemotePostsPayload()
 
     if (!payload) {
         return null
     }
 
-    const targetPost = payload.rawPosts.find(
-        (post) => getRemotePostSlug(post) === slug
+    const targetPost = payload.rawPosts.find((post) =>
+        isDocRouteMatch(
+            {
+                slug: getRemotePostSlug(post),
+                markdownPath: getMarkdownReference(post),
+                fileName: post.fileName,
+                path: post.path,
+            },
+            routePath
+        )
     )
 
     if (!targetPost) {

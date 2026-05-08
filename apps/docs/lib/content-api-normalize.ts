@@ -1,3 +1,4 @@
+import { getDocHref, getDocRoutePath } from '~/lib/get-doc-route'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { normalizeRemoteContent } from '~/lib/content-api-html'
 import type { Metadata, RemotePost, SearchData } from '~/lib/content-api-types'
@@ -153,11 +154,17 @@ export function normalizeRemotePostMeta(
 
     const summary = post.summary?.trim() ?? ''
     const date = post.date?.trim() ?? ''
-    const id = String(post.id ?? slug)
     const markdownPath = getMarkdownReference(post)
     const fileName = normalizeDocPath(
         post.fileName ?? post.path ?? markdownPath ?? `remote/${slug}`
     )
+    const routePath = getDocRoutePath({
+        slug,
+        markdownPath,
+        fileName,
+        path: post.path,
+    })
+    const id = String(post.id ?? routePath ?? slug)
 
     return {
         id,
@@ -204,9 +211,14 @@ export function normalizeRemoteSearchResult(
     const fileName = normalizeDocPath(
         post.markdownPath ?? post.fileName ?? `remote/${post.slug}`
     )
+    const routePath = getDocRoutePath({
+        slug: post.slug,
+        markdownPath: post.markdownPath,
+        fileName,
+    })
 
     return {
-        id: `${post.id ?? post.slug}`,
+        id: `${post.id ?? routePath ?? post.slug}`,
         title: post.title,
         summary,
         content,
@@ -214,7 +226,11 @@ export function normalizeRemoteSearchResult(
         fileName,
         date: post.date,
         thumbnail: post.thumbnail ?? null,
-        href: `/docs/${post.slug}`,
+        href: getDocHref({
+            slug: post.slug,
+            markdownPath: post.markdownPath,
+            fileName,
+        }),
         section: fileName.startsWith('data/shadcn/')
             ? 'UI/UX'
             : fileName.startsWith('category/fe/')

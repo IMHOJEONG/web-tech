@@ -114,7 +114,9 @@ Authorization: Bearer <shared-secret>
 #### Strongly recommended fields
 
 - `slug`
-  - 라우팅과 공유 URL 안정성을 위해 권장
+  - leaf slug 용도로 권장
+  - channel prefix를 다시 포함하지 않는 편이 좋음
+  - 예: `slug: "pna"` + `markdownPath: "feed/pna"`
 - `title`
   - 목록 카드/페이지 제목에 필요
 - `summary`

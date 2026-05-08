@@ -4,6 +4,7 @@
 
 - `FastAPI` 기반 원격 콘텐츠 서버의 최소 운영 예시를 문서로 정리했다.
 - `requirements.txt`, `docker-compose.yml`, `Dockerfile`, `posts/` 폴더 구조, `main.py` 예시, `curl` 검증 명령을 한 문서에 모았다.
+- 추가로 `slug`, `id`, `markdownPath` 역할과 `/docs/{channel}/{articleSlug}` 공개 URL 규칙을 문서에 명시했다.
 
 ## Why
 

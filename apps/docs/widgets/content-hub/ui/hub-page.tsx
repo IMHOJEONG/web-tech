@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import MainCard from '~/entities/document/ui/main-card'
 import { Metadata } from '~/lib/get-document'
+import { getDocHref } from '~/lib/get-doc-route'
 
 type HubPanel = {
     title: string
@@ -125,7 +126,7 @@ export function HubPage({
 
                                 return (
                                     <Link
-                                        href={doc.href ?? `/docs/${doc.slug}`}
+                                        href={doc.href ?? getDocHref(doc)}
                                         key={doc.id}
                                         className="ds-card bg-surface-container-low p-4"
                                     >

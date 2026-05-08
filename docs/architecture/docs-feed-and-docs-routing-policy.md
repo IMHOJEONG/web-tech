@@ -154,7 +154,7 @@ flowchart TD
   - 전체 문서 인덱스
 - `/docs?q=keyword`
   - 검색 결과 화면
-- `/docs/[slug]`
+- `/docs/[channel]/[articleSlug]`
   - 일반 문서 상세
 - `/category/...`
   - taxonomy 기반 탐색 및 상세

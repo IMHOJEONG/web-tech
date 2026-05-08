@@ -24,7 +24,11 @@ import fs from 'fs'
 import path from 'path'
 import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
-import { fetchRemoteDocBySlug, fetchRemoteDocsData } from '~/lib/content-api'
+import {
+    fetchRemoteDocByRoutePath,
+    fetchRemoteDocsData,
+} from '~/lib/content-api'
+import { isDocRouteMatch } from '~/lib/get-doc-route'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export type ContentFormat = 'mdx' | 'html'
@@ -163,12 +167,12 @@ export async function getSortedPostsData() {
     })
 }
 
-export async function getDocBySlug(slug: string) {
-    const remoteDoc = await fetchRemoteDocBySlug(slug)
+export async function getDocByRoutePath(routePath: string) {
+    const remoteDoc = await fetchRemoteDocByRoutePath(routePath)
 
     if (remoteDoc) {
         return remoteDoc
     }
 
-    return getLocalDocsData().find((doc) => doc.slug === slug)
+    return getLocalDocsData().find((doc) => isDocRouteMatch(doc, routePath))
 }

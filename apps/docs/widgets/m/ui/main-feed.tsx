@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Metadata } from '~/lib/get-document'
 import { getDocChannel } from '~/lib/get-doc-channel'
+import { getDocHref } from '~/lib/get-doc-route'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export type FeedFilter = 'all' | 'web' | 'mobile' | 'uiux'
@@ -235,7 +236,7 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
 
     return (
         <Link
-            href={`/docs/${doc.slug}`}
+            href={getDocHref(doc)}
             className="group ds-card col-span-12 grid w-full min-w-0 overflow-hidden bg-surface-container-low lg:col-span-8 lg:grid-cols-2"
         >
             <div className="flex w-full min-w-0 self-stretch flex-col justify-between p-6 sm:p-7 lg:p-8">
@@ -282,7 +283,7 @@ function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
 
     return (
         <Link
-            href={`/docs/${doc.slug}`}
+            href={getDocHref(doc)}
             className="group ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-6 sm:p-7 lg:col-span-4 lg:p-8"
         >
             <div className="w-full min-w-0 self-stretch space-y-4">
@@ -320,7 +321,7 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
 
     return (
         <Link
-            href={`/docs/${doc.slug}`}
+            href={getDocHref(doc)}
             className="group ds-card col-span-12 flex h-full w-full min-w-0 flex-col overflow-hidden bg-surface-container-low lg:col-span-4"
         >
             <div className="relative aspect-4/3 overflow-hidden bg-surface">
@@ -621,7 +622,7 @@ export function MainFeed({
                         </div>
 
                         <Link
-                            href={`/docs/${heroDoc.slug}`}
+                            href={getDocHref(heroDoc)}
                             className="ds-button-primary inline-flex"
                         >
                             READ ARTICLE

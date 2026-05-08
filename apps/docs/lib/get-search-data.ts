@@ -6,6 +6,7 @@ import path from 'path'
 import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
 import type { Metadata } from '~/lib/get-document'
+import { getDocHref } from '~/lib/get-doc-route'
 import { fetchRemoteDocsData } from '~/lib/content-api'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
@@ -65,7 +66,7 @@ function inferSearchHref(fileName: string, slug: string) {
         return `/category/${main}/${sub}/${slug}`
     }
 
-    return `/docs/${slug}`
+    return getDocHref({ fileName, slug })
 }
 
 function inferSearchSection(fileName: string) {
@@ -168,9 +169,15 @@ function normalizeRemoteSearchDoc(doc: Partial<Metadata>): SearchData | null {
     }
 
     const fileName = normalizeDocPath(doc.fileName ?? `remote/${doc.slug}`)
+    const href = getDocHref({
+        slug: doc.slug,
+        markdownPath: doc.markdownPath,
+        fileName,
+    })
+    const routeKey = doc.markdownPath ?? fileName
 
     return {
-        id: String(doc.id ?? doc.slug),
+        id: String(doc.id ?? routeKey ?? doc.slug),
         title: doc.title ?? doc.slug,
         summary: doc.summary ?? '',
         content: doc.content ?? '',
@@ -178,7 +185,7 @@ function normalizeRemoteSearchDoc(doc: Partial<Metadata>): SearchData | null {
         fileName,
         date: doc.date,
         thumbnail: doc.thumbnail ?? null,
-        href: `/docs/${doc.slug}`,
+        href,
         section: inferSearchSection(fileName),
     }
 }

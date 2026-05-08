@@ -47,7 +47,7 @@ export function LatestNotes({
                     {items.length > 0 ? (
                         items.map((item) => (
                             <LatestNoteRow
-                                key={item.href}
+                                key={item.id}
                                 item={item}
                                 openLabel={openLabel}
                             />

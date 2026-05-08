@@ -2,6 +2,7 @@ import { getTime } from '@web-tech/ui/lib/time'
 import Link from 'next/link'
 
 export type LatestNoteRowItem = {
+    id: string
     href: string
     title: string
     summary: string

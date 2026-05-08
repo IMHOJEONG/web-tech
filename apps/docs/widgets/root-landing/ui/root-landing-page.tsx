@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { getSortedPostsData, type Metadata } from '~/lib/get-document'
 import { getDocChannel } from '~/lib/get-doc-channel'
+import { getDocHref, getDocRoutePath } from '~/lib/get-doc-route'
 import { LandingHero } from './landing-hero'
 import { LatestNotes } from './latest-notes'
 import { ThematicFoundations } from './thematic-foundations'
@@ -110,7 +111,8 @@ export async function RootLandingPage() {
     ]
 
     const latestItems = docs.map((doc) => ({
-        href: `/docs/${doc.slug}`,
+        id: String(doc.id ?? getDocRoutePath(doc) ?? doc.slug),
+        href: getDocHref(doc),
         title: doc.title,
         summary: doc.summary,
         date: doc.date,

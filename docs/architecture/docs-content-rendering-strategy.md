@@ -95,7 +95,7 @@ Next.js 관점에서 아래 선택지가 있다.
 - 서버 검색을 유지하면 `q`가 있을 때만 dynamic
 - 문서 수가 크지 않다면 장기적으로는 client-side search도 고려 가능
 
-### `/docs/[slug]`
+### `/docs/[channel]/[articleSlug]`
 
 역할:
 
@@ -151,7 +151,7 @@ Next.js 관점에서 아래 선택지가 있다.
 
 - `/feed`
 - `/docs`
-- `/docs/[slug]`
+- `/docs/[channel]/[articleSlug]`
 
 전략:
 
@@ -203,7 +203,7 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
 3. `/feed`: ISR
 4. `/docs` 기본: ISR
 5. `/docs?q=...`: dynamic 유지 또는 추후 client-side search 전환
-6. `/docs/[slug]`: ISR
+6. `/docs/[channel]/[articleSlug]`: ISR
 7. preview/debug 경로가 필요하면 별도 dynamic route 추가
 
 ## Why Not `force-dynamic` Everywhere
