@@ -123,6 +123,14 @@
 
 ## Infra / Tooling
 
+- [ ] `P0` `docs` remote content 인증/장애 대응 운영 기준을 확정한다.
+  - `BLOG_CONTENT_API_TOKEN` / `CONTENT_API_TOKEN`의 교체 주기와 회전 절차(runbook) 정리
+  - `401/403`은 인증 실패로 보고 즉시 중단하며 다른 endpoint로 fallback 하지 않는 정책 유지
+  - 향후 다중 endpoint 정책이 다시 필요해질 경우에도 `timeout`, `ENOTFOUND` 같은 네트워크 오류에서만 다음 후보를 시도하도록 기준 문서화
+  - NAS reverse proxy가 `Authorization` 헤더를 upstream에 그대로 전달하는지 검증 절차 추가
+  - `docs` 서버 재시작 누락, 배포 env 누락, backend env 누락을 빠르게 확인하는 점검 순서 정리
+  - remote content 장애 시 홈(`/`)은 section-level graceful degradation, 문서 상세는 에러 페이지로 보내는 현재 정책을 문서에 명시
+  - 기준 문서: `docs/runbooks/content-api-auth-ops-runbook.md`
 - [ ] `P0` `pnpm` catalog 도입 이후 네트워크 가능한 환경에서 `pnpm install --lockfile-only` 재검증
 - [ ] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정
 - [ ] `P1` catalog reference 정합성 검사를 스크립트나 CI 체크로 자동화
