@@ -137,18 +137,16 @@
   - 내부 기준 섹션:
     - `Hero Section`
     - `Section - Pillars Bento Grid`
-    - `Creator & Contact Section`
+    - `Creator Section`
 - Code
   - `apps/docs/app/about/page.tsx`
   - `apps/docs/widgets/about-us/ui/about-us.tsx`
-  - `apps/docs/widgets/about-us/ui/contact-form.tsx`
 
 체크리스트:
 
 - [ ] hero 카피 블록과 우측 status/meta 블록의 2-column 위계를 Figma 기준으로 정리
 - [ ] pillar section을 단순 카드 나열이 아니라 `large + small + wide` 조합으로 재구성
-- [ ] creator card와 contact form의 시각적 무게를 명확히 분리
-- [ ] contact form validation / submit state UI도 shell token과 같은 톤으로 정리
+- [ ] creator card의 정보 밀도와 행동 링크 구성을 Figma 기준으로 더 정교하게 다듬기
 
 ### 5. Article Detail
 

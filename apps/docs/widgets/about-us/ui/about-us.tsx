@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server'
 import { ArrowUpRight } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
-import { ContactForm } from './contact-form'
 
 function PillBadge({
     label,
@@ -155,8 +154,8 @@ export async function AboutUs() {
                     </article>
                 </section>
 
-                <section className="grid gap-16 pt-8 lg:grid-cols-2">
-                    <article className="ds-card relative bg-surface-container p-8 shadow-glow-primary">
+                <section className="pt-8">
+                    <article className="ds-card relative mx-auto max-w-3xl bg-surface-container p-8 shadow-glow-primary">
                         <div className="space-y-8">
                             <div className="flex items-center gap-6">
                                 <div className="flex size-20 items-center justify-center rounded-xl border-2 border-primary bg-[linear-gradient(135deg,var(--surface-container-low),var(--surface-container-high))] text-2xl font-bold text-primary">
@@ -207,19 +206,6 @@ export async function AboutUs() {
                             </div>
                         </div>
                     </article>
-
-                    <section className="space-y-12">
-                        <div className="border-l-4 border-primary pl-7">
-                            <h2 className="font-display text-headline-lg text-on-surface">
-                                {t('contact.title')}
-                            </h2>
-                            <p className="mt-2 text-body-md text-on-surface-variant">
-                                {t('contact.description')}
-                            </p>
-                        </div>
-
-                        <ContactForm />
-                    </section>
                 </section>
             </div>
         </main>

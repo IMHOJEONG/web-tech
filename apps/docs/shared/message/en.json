@@ -391,37 +391,11 @@
                 }
             }
         },
-        "contact": {
-            "title": "INITIATE CONTACT",
-            "description": "Have a proposal or technical inquiry? Send a packet below.",
-            "submit": "EXECUTE SEND",
-            "validation": {
-                "nameRequired": "Please enter your name.",
-                "emailRequired": "Please enter your email address.",
-                "emailInvalid": "Please enter a valid email address.",
-                "messageRequired": "Please describe your inquiry.",
-                "reviewMessage": "Looks good so far. The delivery flow is not connected yet, but your packet is ready for review."
-            },
-            "fields": {
-                "name": {
-                    "label": "SENDER_NAME",
-                    "placeholder": "e.g. John Doe"
-                },
-                "email": {
-                    "label": "RETURN_ADDRESS",
-                    "placeholder": "email@provider.com"
-                },
-                "message": {
-                    "label": "PAYLOAD_DESCRIPTION",
-                    "placeholder": "Briefly describe your inquiry..."
-                }
-            }
-        },
         "metadata": {
             "title": "About HeapForge",
             "description": "Learn the purpose, engineering philosophy, and editorial direction behind HeapForge.",
             "ogTitle": "About HeapForge",
-            "ogDescription": "Meet the project behind HeapForge and understand the mission, contact flow, and product mindset shaping the docs experience."
+            "ogDescription": "Meet the project behind HeapForge and understand the mission and product mindset shaping the docs experience."
         }
     },
     "articleDetail": {
