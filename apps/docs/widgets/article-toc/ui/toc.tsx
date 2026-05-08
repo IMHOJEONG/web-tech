@@ -1,6 +1,7 @@
 'use client'
 
 import { clsx } from 'clsx'
+import { MouseEvent, useCallback, useState } from 'react'
 import type { HeadingDepth, HeadingParent, TocItem } from 'remark-flexible-toc'
 
 import styles from './toc.module.css'
@@ -62,30 +63,67 @@ const Toc = ({
             !skipParentsFilter(heading.parent) &&
             !exludeRegexFilter.test(heading.value)
     )
+    const [isOpen, setIsOpen] = useState(true)
+    const handleAnchorClick = useCallback(
+        (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+            if (!href.startsWith('#')) {
+                return
+            }
+
+            const id = decodeURIComponent(href.slice(1))
+            const target = document.getElementById(id)
+
+            if (!target) {
+                return
+            }
+
+            event.preventDefault()
+
+            window.history.replaceState(null, '', href)
+
+            const prefersReducedMotion = window.matchMedia(
+                '(prefers-reduced-motion: reduce)'
+            ).matches
+
+            target.scrollIntoView({
+                behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                block: 'start',
+            })
+
+            event.currentTarget.blur()
+        },
+        []
+    )
 
     return (
         <details
-            className={styles['toc-container']}
-            onClick={(e) => {
-                if (styles.close) {
-                    e.currentTarget.classList.toggle(styles.close)
-                }
-            }}
-            open
+            className={clsx(styles['toc-container'], !isOpen && styles.close)}
+            open={isOpen}
         >
-            <summary className={styles['toc-title']}>
+            <summary
+                className={styles['toc-title']}
+                onClick={(event) => {
+                    event.preventDefault()
+                    setIsOpen((current) => !current)
+                }}
+            >
                 <strong>{title}</strong>
             </summary>
             <ul className={styles['toc-list']}>
                 {filteredToc.map((heading) => (
                     <li
-                        key={heading.value}
+                        key={heading.href}
                         className={clsx(
                             indented && styles[`h${heading.depth}indent`],
                             tight && styles['tight']
                         )}
                     >
-                        <a href={heading.href}>
+                        <a
+                            href={heading.href}
+                            onClick={(event) =>
+                                handleAnchorClick(event, heading.href)
+                            }
+                        >
                             <div className={`h${heading.depth}`}>
                                 {ordered ? (
                                     <strong>

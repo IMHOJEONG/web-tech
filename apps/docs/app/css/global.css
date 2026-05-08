@@ -5,6 +5,11 @@
 @import './mdx.css';
 @import './animation.css';
 
+html,
+body {
+    background: var(--background);
+}
+
 body {
     --font-mono: var(--font-jetbrains-mono), monospace;
     font-family: var(--font-body-locale, var(--font-body), sans-serif);

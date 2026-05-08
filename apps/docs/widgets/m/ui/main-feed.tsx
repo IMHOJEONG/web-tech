@@ -398,40 +398,7 @@ function TextSupportCard({
 }
 
 function NewsletterInjectionCard() {
-    return (
-        <article className="ds-code-shell col-span-12 lg:col-span-4">
-            <div className="relative flex h-full flex-col gap-5 p-6">
-                <div className="absolute -right-8 top-0 size-24 rounded-full bg-primary/10 blur-2xl" />
-                <div className="relative flex items-center gap-3 text-primary">
-                    <div className="size-5 rounded-sm border border-primary/30" />
-                    <span className="font-display text-[0.75rem] tracking-[0.18em] uppercase text-outline">
-                        Weekly_Patch_Notes
-                    </span>
-                </div>
-
-                <div className="relative space-y-3">
-                    <h3 className="font-display text-[1.5rem] leading-[1.2] text-on-surface">
-                        Get the most important technical deep-dives delivered to
-                        your terminal inbox every Monday.
-                    </h3>
-                </div>
-
-                <div className="relative mt-auto flex flex-col gap-2 sm:flex-row">
-                    <div className="ds-input flex min-h-10 flex-1 items-center px-3">
-                        <span className="font-mono text-sm text-outline">
-                            user@domain.com
-                        </span>
-                    </div>
-                    <button
-                        type="button"
-                        className="ds-button-primary px-5 py-2.5 text-sm tracking-[0.12em] uppercase"
-                    >
-                        Join
-                    </button>
-                </div>
-            </div>
-        </article>
-    )
+    return null
 }
 
 function EmptyFilteredFeed({ activeFilter }: { activeFilter: FeedFilter }) {

@@ -7,7 +7,7 @@ import { Navigation } from './navigation'
 
 export default function Header() {
     return (
-        <header className="sticky top-0 z-50 h-16.25 w-full border-b border-header-border bg-popover/80 text-on-surface backdrop-blur-md">
+        <header className="sticky top-0 z-50 h-16.25 w-full border-b border-header-border bg-background text-on-surface shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
             <div className="mx-auto flex h-16 w-full max-w-page items-center justify-between px-4 sm:grid sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-4 sm:px-6 md:gap-6 md:px-8">
                 <MobileNavDrawer />
 
