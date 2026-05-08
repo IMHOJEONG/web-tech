@@ -1,5 +1,5 @@
-import { ArticleDetail } from '~/widgets/article-detail/ui/article-detail'
+import { UiUxHubPage } from '~/widgets/content-hub/ui/uiux-hub-page'
 
 export default function Page() {
-    return <ArticleDetail channel="uiux" />
+    return <UiUxHubPage />
 }

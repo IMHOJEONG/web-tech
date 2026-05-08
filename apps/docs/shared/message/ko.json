@@ -189,6 +189,163 @@
             "toFeed": "큐레이션 피드로 이동"
         }
     },
+    "channelHub": {
+        "stats": {
+            "totalDocs": "Total Docs",
+            "focusAreas": "Focus Areas",
+            "latestUpdate": "Latest Update",
+            "pending": "업데이트 준비 중"
+        },
+        "latest": {
+            "eyebrow": "Latest Signals",
+            "title": "최근 연결된 문서",
+            "action": "피드에서 이어보기"
+        },
+        "web": {
+            "hero": {
+                "eyebrow": "WEB SYSTEMS",
+                "title": "브라우저와 프론트엔드 구조를 읽는 허브",
+                "description": "React, Next.js, 렌더링 흐름, 바이트코드까지 웹 실행 환경에 가까운 문서를 한 곳에 모아 빠르게 훑을 수 있도록 정리했습니다."
+            },
+            "panels": {
+                "first": {
+                    "title": "Component Systems",
+                    "description": "컴포넌트 구성과 프레임워크 사용법을 실제 문서 흐름으로 연결합니다.",
+                    "items": ["React", "Next.js", "Composition"]
+                },
+                "second": {
+                    "title": "Runtime Awareness",
+                    "description": "렌더링 비용, 런타임 해석, 성능 병목처럼 브라우저 아래층의 이슈를 함께 다룹니다.",
+                    "items": ["Rendering", "V8", "Bytecode"]
+                },
+                "third": {
+                    "title": "Reading Path",
+                    "description": "입문용 문서와 내부 구조 문서를 한 허브에서 이어 읽을 수 있게 큐레이션합니다.",
+                    "items": ["Guide", "Reference", "Deep Dive"]
+                }
+            },
+            "empty": {
+                "title": "웹 섹션 문서를 준비 중입니다",
+                "description": "허브 구조는 먼저 열어두었고, 웹 시스템 관련 글을 이 영역으로 계속 연결해 나갈 예정입니다."
+            }
+        },
+        "mobile": {
+            "hero": {
+                "eyebrow": "MOBILE RUNTIME",
+                "title": "모바일 제약과 인터랙션을 위한 허브",
+                "description": "터치 중심 상호작용, 화면 제약, 플랫폼별 차이처럼 모바일 제품 경험을 설계할 때 필요한 주제를 분리해서 모아둔 영역입니다."
+            },
+            "panels": {
+                "first": {
+                    "title": "Touch-first Interfaces",
+                    "description": "작은 화면에서의 계층, 제스처, 조작 밀도를 문서 중심으로 다시 살펴봅니다.",
+                    "items": ["Touch", "Density", "Layout"]
+                },
+                "second": {
+                    "title": "Platform Constraints",
+                    "description": "iOS, Android, 크로스플랫폼 실행 차이와 같은 제약 요소를 독립된 읽기 단위로 정리합니다.",
+                    "items": ["iOS", "Android", "Cross-platform"]
+                },
+                "third": {
+                    "title": "Product Signals",
+                    "description": "모바일은 기술과 UX가 더 가까이 붙어 있으므로, 제품 관점의 메모도 함께 담습니다.",
+                    "items": ["Product", "Motion", "Usability"]
+                }
+            },
+            "empty": {
+                "title": "모바일 허브는 열려 있지만 아직 문서가 적습니다",
+                "description": "모바일 관련 초안과 실험 노트를 이 허브로 계속 모아둘 예정입니다. 지금은 피드와 루트 랜딩에서 연결되는 흐름을 먼저 확인할 수 있습니다."
+            }
+        },
+        "uiux": {
+            "hero": {
+                "eyebrow": "INTERFACE SYSTEMS",
+                "title": "UI/UX 문서를 편집형 허브로 정리합니다",
+                "description": "디자인 시스템, 접근성, 가독성, 컴포넌트 의미론처럼 인터페이스 설계에 가까운 글을 한 화면에서 탐색할 수 있도록 구성했습니다."
+            },
+            "panels": {
+                "first": {
+                    "title": "Design Systems",
+                    "description": "컴포넌트 규칙과 토큰, 조합 방식을 코드와 문서 언어로 함께 설명합니다.",
+                    "items": ["Tokens", "Components", "Patterns"]
+                },
+                "second": {
+                    "title": "Accessibility",
+                    "description": "시각 계층뿐 아니라 상호작용 접근성과 의미 구조까지 함께 다룹니다.",
+                    "items": ["ARIA", "Semantics", "Keyboard Flow"]
+                },
+                "third": {
+                    "title": "Readable Interfaces",
+                    "description": "텍스트, 간격, 정보 밀도를 UI 자체로 다루는 문서를 연결합니다.",
+                    "items": ["Typography", "Hierarchy", "Readability"]
+                }
+            },
+            "empty": {
+                "title": "UI/UX 허브에 연결된 문서가 아직 없습니다",
+                "description": "먼저 허브 구조와 레이아웃을 맞춰두었고, 이후 디자인 시스템과 경험 설계 문서를 이 화면에 이어 붙일 예정입니다."
+            }
+        }
+    },
+    "uiuxHub": {
+        "hero": {
+            "eyebrow": "DIRECTORY // 04",
+            "titleLineOne": "UI/UX DESIGN",
+            "titleLineTwo": "INTERFACE EXCELLENCE",
+            "description": "인지 구조, 인터페이스 미감, 접근 가능한 상호작용을 함께 다루는 편집형 허브입니다. 디자인 시스템과 읽기 경험, 세밀한 사용성 신호를 한 화면에서 이어서 볼 수 있도록 구성했습니다."
+        },
+        "featured": {
+            "primaryLabel": "CASE STUDY",
+            "secondaryLabel": "10 MIN READ",
+            "action": "VIEW ANALYSIS"
+        },
+        "secondary": {
+            "researchLabel": "RESEARCH PAPER // 02",
+            "guideLabel": "TECHNICAL GUIDE // 03"
+        },
+        "bottomLeft": {
+            "label": "TUTORIAL // 04"
+        },
+        "newsletter": {
+            "title": "THE UX NEWSLETTER",
+            "description": "인터페이스 해부, 타이포그래피, 디자인 시스템 메모를 격주 단위로 정리해 전달합니다.",
+            "placeholder": "terminal@user.io",
+            "button": "CONNECT"
+        },
+        "more": {
+            "fallbackDate": "LATEST NOTE"
+        },
+        "loadMore": "LOAD NEXT ENTRIES",
+        "fallback": {
+            "featured": {
+                "title": "공간형 인터페이스와 시각 계층 재설계",
+                "summary": "고밀도 데스크톱 인터페이스에서 정보 우선순위를 잃지 않기 위해 어떤 시각 계층이 필요한지 다시 정리합니다."
+            },
+            "secondaryOne": {
+                "title": "인지 부하와 그리드 시스템",
+                "summary": "고위험 환경에서 의사결정 피로를 줄이기 위한 수학적 레이아웃 접근을 살펴봅니다."
+            },
+            "secondaryTwo": {
+                "title": "마이크로 인터랙션 상태 설계",
+                "summary": "전이와 피드백의 작은 차이가 어떻게 촉각적인 디지털 경험을 만드는지 다룹니다."
+            },
+            "tutorial": {
+                "title": "고급 오토 레이아웃 전략",
+                "summary": "Figma 안에서 유연한 레이아웃 구조를 유지하면서도 컴포넌트 일관성을 지키는 방법을 정리합니다."
+            },
+            "moreOne": {
+                "title": "대비비를 넘어서는 접근성",
+                "summary": "일시적 제약과 다양한 인지 능력까지 고려한 경험 설계를 다룹니다."
+            },
+            "moreTwo": {
+                "title": "시선 추적 기반 위계 분석",
+                "summary": "히트맵과 시선 흐름이 실제 정보 구조에 어떤 힌트를 주는지 정리합니다."
+            },
+            "moreThree": {
+                "title": "반응형 타이포그래피를 더 정교하게",
+                "summary": "clamp()와 세로 리듬을 활용해 긴 문서를 더 안정적으로 읽히게 만드는 방법을 다룹니다."
+            }
+        }
+    },
     "about": {
         "hero": {
             "status": "STATUS: LIVE // VERSION 2.0.4",

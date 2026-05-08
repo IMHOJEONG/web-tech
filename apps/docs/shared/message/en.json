@@ -189,6 +189,163 @@
             "toFeed": "Go to curated feed"
         }
     },
+    "channelHub": {
+        "stats": {
+            "totalDocs": "Total Docs",
+            "focusAreas": "Focus Areas",
+            "latestUpdate": "Latest Update",
+            "pending": "Update pending"
+        },
+        "latest": {
+            "eyebrow": "Latest Signals",
+            "title": "Recently connected documents",
+            "action": "Continue in the feed"
+        },
+        "web": {
+            "hero": {
+                "eyebrow": "WEB SYSTEMS",
+                "title": "A hub for reading browser and frontend structure",
+                "description": "React, Next.js, rendering flow, and bytecode-oriented notes are gathered here so the web runtime can be scanned as one editorial surface."
+            },
+            "panels": {
+                "first": {
+                    "title": "Component Systems",
+                    "description": "Connect component architecture and framework usage through real document flows.",
+                    "items": ["React", "Next.js", "Composition"]
+                },
+                "second": {
+                    "title": "Runtime Awareness",
+                    "description": "Look below the UI layer at rendering cost, runtime interpretation, and performance bottlenecks.",
+                    "items": ["Rendering", "V8", "Bytecode"]
+                },
+                "third": {
+                    "title": "Reading Path",
+                    "description": "Curate introductory notes and deeper internals in one place so the reading order feels intentional.",
+                    "items": ["Guide", "Reference", "Deep Dive"]
+                }
+            },
+            "empty": {
+                "title": "Web documents are still being assembled",
+                "description": "The hub structure is ready first, and more writing about web systems will be connected into this space."
+            }
+        },
+        "mobile": {
+            "hero": {
+                "eyebrow": "MOBILE RUNTIME",
+                "title": "A hub for mobile constraints and interaction",
+                "description": "Touch-first interaction, viewport constraints, and platform differences are separated into a focused surface for mobile product thinking."
+            },
+            "panels": {
+                "first": {
+                    "title": "Touch-first Interfaces",
+                    "description": "Revisit hierarchy, gesture, and density on smaller screens through a document-first lens.",
+                    "items": ["Touch", "Density", "Layout"]
+                },
+                "second": {
+                    "title": "Platform Constraints",
+                    "description": "Organize iOS, Android, and cross-platform runtime differences as their own reading units.",
+                    "items": ["iOS", "Android", "Cross-platform"]
+                },
+                "third": {
+                    "title": "Product Signals",
+                    "description": "Because mobile sits closer to UX constraints, product-facing notes live here as well.",
+                    "items": ["Product", "Motion", "Usability"]
+                }
+            },
+            "empty": {
+                "title": "The mobile hub is open, but still light on documents",
+                "description": "Drafts and experimental notes for mobile will continue to gather here. For now, the surrounding feed and landing flow are in place."
+            }
+        },
+        "uiux": {
+            "hero": {
+                "eyebrow": "INTERFACE SYSTEMS",
+                "title": "UI/UX documents organized as an editorial hub",
+                "description": "Design systems, accessibility, readability, and component semantics are grouped into one screen for faster interface-focused exploration."
+            },
+            "panels": {
+                "first": {
+                    "title": "Design Systems",
+                    "description": "Explain tokens, components, and composition rules in both code and documentation language.",
+                    "items": ["Tokens", "Components", "Patterns"]
+                },
+                "second": {
+                    "title": "Accessibility",
+                    "description": "Go beyond visual hierarchy into semantic structure and interaction accessibility.",
+                    "items": ["ARIA", "Semantics", "Keyboard Flow"]
+                },
+                "third": {
+                    "title": "Readable Interfaces",
+                    "description": "Connect documents where text, spacing, and information density are treated as interface design material.",
+                    "items": ["Typography", "Hierarchy", "Readability"]
+                }
+            },
+            "empty": {
+                "title": "No UI/UX documents are connected yet",
+                "description": "The hub layout is now in place, and future writing about design systems and experience architecture will be attached here."
+            }
+        }
+    },
+    "uiuxHub": {
+        "hero": {
+            "eyebrow": "DIRECTORY // 04",
+            "titleLineOne": "UI/UX DESIGN",
+            "titleLineTwo": "INTERFACE EXCELLENCE",
+            "description": "An editorial hub for cognitive structure, interface craft, and accessible interaction. It brings design systems, reading experience, and small usability signals into one navigable screen."
+        },
+        "featured": {
+            "primaryLabel": "CASE STUDY",
+            "secondaryLabel": "10 MIN READ",
+            "action": "VIEW ANALYSIS"
+        },
+        "secondary": {
+            "researchLabel": "RESEARCH PAPER // 02",
+            "guideLabel": "TECHNICAL GUIDE // 03"
+        },
+        "bottomLeft": {
+            "label": "TUTORIAL // 04"
+        },
+        "newsletter": {
+            "title": "THE UX NEWSLETTER",
+            "description": "Bi-weekly notes on interface teardowns, typography, and design system thinking.",
+            "placeholder": "terminal@user.io",
+            "button": "CONNECT"
+        },
+        "more": {
+            "fallbackDate": "LATEST NOTE"
+        },
+        "loadMore": "LOAD NEXT ENTRIES",
+        "fallback": {
+            "featured": {
+                "title": "Reframing spatial interfaces and visual hierarchy",
+                "summary": "A closer look at what kind of visual hierarchy helps dense desktop interfaces stay readable under pressure."
+            },
+            "secondaryOne": {
+                "title": "Cognitive load and grid systems",
+                "summary": "Mathematical layout approaches for reducing decision fatigue in high-stakes environments."
+            },
+            "secondaryTwo": {
+                "title": "Designing micro-interaction states",
+                "summary": "How subtle transitions and feedback states shape a more tactile digital experience."
+            },
+            "tutorial": {
+                "title": "Advanced auto-layout strategies",
+                "summary": "Ways to preserve flexible layout structure in Figma without losing component consistency."
+            },
+            "moreOne": {
+                "title": "Accessibility beyond contrast ratios",
+                "summary": "Designing for temporary constraints and diverse cognitive abilities."
+            },
+            "moreTwo": {
+                "title": "Eye-tracking as hierarchy analysis",
+                "summary": "What heatmaps and scan paths can reveal about information structure."
+            },
+            "moreThree": {
+                "title": "Sharpening responsive typography",
+                "summary": "Using clamp() and vertical rhythm to make long-form reading more stable."
+            }
+        }
+    },
     "about": {
         "hero": {
             "status": "STATUS: LIVE // VERSION 2.0.4",

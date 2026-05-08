@@ -5,7 +5,8 @@ import remarkFlexibleToc, { TocItem } from 'remark-flexible-toc'
 import { getDocBySlug } from '~/lib/get-document'
 import { components } from '~/mdx-components'
 import { LoadingComponent } from '~/shared/loading-component'
-import Toc from '~/widgets/article-toc/ui/toc'
+import { normalizeRemoteArticleHtml } from '~/widgets/article-detail/model/normalize-remote-article-html'
+import { ArticleContentLayout } from '~/widgets/article-detail/ui/article-content-layout'
 
 type Scope = {
     readingTime: string
@@ -30,16 +31,20 @@ export default async function Page({
     }
 
     if (target.contentFormat === 'html') {
+        const normalizedRemoteArticle = normalizeRemoteArticleHtml(
+            target.content ?? ''
+        )
+
         return (
-            <div className="flex gap-4">
-                <div className="flex-1">
+            <ArticleContentLayout toc={normalizedRemoteArticle.toc}>
+                <div className="mdx-wrapper">
                     <article
                         dangerouslySetInnerHTML={{
-                            __html: target.content ?? '',
+                            __html: normalizedRemoteArticle.content,
                         }}
                     />
                 </div>
-            </div>
+            </ArticleContentLayout>
         )
     }
 
@@ -64,14 +69,10 @@ export default async function Page({
         components,
     })
     return (
-        <div className="flex gap-4">
-            <div className="sticky top-24 h-fit">
-                <Toc toc={scope.toc} />
-            </div>
-
-            <div className="flex-1">
+        <ArticleContentLayout toc={scope.toc}>
+            <div className="mdx-wrapper">
                 <Suspense fallback={<LoadingComponent />}>{content}</Suspense>
             </div>
-        </div>
+        </ArticleContentLayout>
     )
 }

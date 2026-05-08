@@ -15,6 +15,7 @@ import styles from './toc.module.css'
 // skipParents — disallow headings to be children of certain node types,(if the parent is "root", it is not skipped)
 type Props = {
     toc?: TocItem[]
+    title?: string
     maxDepth?: HeadingDepth
     indented?: boolean
     ordered?: boolean
@@ -26,6 +27,7 @@ type Props = {
 
 const Toc = ({
     toc,
+    title = 'TABLE OF CONTENTS',
     maxDepth = 6,
     ordered = false,
     indented = false,
@@ -72,7 +74,7 @@ const Toc = ({
             open
         >
             <summary className={styles['toc-title']}>
-                <strong>TABLE OF CONTENTS</strong>
+                <strong>{title}</strong>
             </summary>
             <ul className={styles['toc-list']}>
                 {filteredToc.map((heading) => (

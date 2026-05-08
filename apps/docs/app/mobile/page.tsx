@@ -1,5 +1,5 @@
-import { ArticleDetail } from '~/widgets/article-detail/ui/article-detail'
+import { ChannelHubPage } from '~/widgets/content-hub/ui/channel-hub-page'
 
 export default function Page() {
-    return <ArticleDetail channel="mobile" />
+    return <ChannelHubPage channel="mobile" />
 }

@@ -96,7 +96,7 @@ Authorization: Bearer <shared-secret>
       "summary": "테스트 문서",
       "date": "2026-05-01",
       "thumbnail": "/images/test.webp",
-      "markdownPath": "test.md"
+      "markdownPath": "web/test"
     }
   ]
 }
@@ -109,6 +109,7 @@ Authorization: Bearer <shared-secret>
   - 내부 식별자
 - `markdownPath`
   - 본문 HTML을 조회할 때 사용할 경로 값
+  - 단일 파일명보다 `web/test`, `ui-ux/blocked-aria-hidden`, `mobile/sample`처럼 채널/섹션을 포함한 상대 경로를 권장
 
 #### Strongly recommended fields
 
@@ -136,7 +137,7 @@ Authorization: Bearer <shared-secret>
 #### Request
 
 ```http
-GET /posts/test.md
+GET /posts/web/test
 Accept: text/html,text/plain;q=0.9,*/*;q=0.8
 Authorization: Bearer <shared-secret>
 ```
@@ -184,7 +185,7 @@ Content-Type: text/html; charset=utf-8
     "id": "test",
     "slug": "test",
     "title": "Test",
-    "markdownPath": "test.md"
+    "markdownPath": "web/test"
   }
 ]
 ```
@@ -198,7 +199,7 @@ Content-Type: text/html; charset=utf-8
       "id": "test",
       "slug": "test",
       "title": "Test",
-      "markdownPath": "test.md"
+      "markdownPath": "web/test"
     }
   ]
 }
@@ -213,7 +214,7 @@ Content-Type: text/html; charset=utf-8
       "id": "test",
       "slug": "test",
       "title": "Test",
-      "markdownPath": "test.md"
+      "markdownPath": "web/test"
     }
   ]
 }

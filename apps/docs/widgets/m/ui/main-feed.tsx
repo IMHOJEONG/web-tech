@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Metadata } from '~/lib/get-document'
+import { getDocChannel } from '~/lib/get-doc-channel'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export type FeedFilter = 'all' | 'web' | 'mobile' | 'uiux'
@@ -163,22 +164,9 @@ function getTopicStyle(doc: FeedDoc): TopicTone {
 }
 
 function getFeedFilter(doc: FeedDoc): FeedFilter {
-    const fileName = normalizeDocPath(doc.fileName ?? '')
+    const channel = getDocChannel(doc.fileName)
 
-    if (
-        fileName.includes('/mobile/') ||
-        fileName.includes('/react-native/') ||
-        fileName.includes('/ios/') ||
-        fileName.includes('/android/')
-    ) {
-        return 'mobile'
-    }
-
-    if (fileName.includes('/data/shadcn/')) {
-        return 'uiux'
-    }
-
-    return 'web'
+    return channel === 'other' ? 'web' : channel
 }
 
 function getFilterHref(filter: FeedFilter) {

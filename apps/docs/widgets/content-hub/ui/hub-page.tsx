@@ -13,8 +13,12 @@ type HubPageProps = {
     title: string
     description: string
     stats: Array<{ label: string; value: string }>
-    docs: Partial<Metadata>[]
+    docs: Array<Partial<Metadata> & { href?: string }>
     panels: HubPanel[]
+    latestEyebrow: string
+    latestTitle: string
+    latestActionHref: string
+    latestActionLabel: string
     emptyTitle: string
     emptyDescription: string
 }
@@ -26,6 +30,10 @@ export function HubPage({
     stats,
     docs,
     panels,
+    latestEyebrow,
+    latestTitle,
+    latestActionHref,
+    latestActionLabel,
     emptyTitle,
     emptyDescription,
 }: HubPageProps) {
@@ -94,17 +102,17 @@ export function HubPage({
                     <div className="flex items-end justify-between gap-4">
                         <div>
                             <p className="font-display text-label-md uppercase text-primary">
-                                Latest
+                                {latestEyebrow}
                             </p>
                             <h2 className="font-display text-headline-lg text-on-surface">
-                                Curated entries
+                                {latestTitle}
                             </h2>
                         </div>
                         <Link
-                            href="/docs"
+                            href={latestActionHref}
                             className="text-sm text-primary transition-colors hover:text-secondary"
                         >
-                            View all docs
+                            {latestActionLabel}
                         </Link>
                     </div>
 
@@ -117,7 +125,7 @@ export function HubPage({
 
                                 return (
                                     <Link
-                                        href={`/docs/${doc.slug}`}
+                                        href={doc.href ?? `/docs/${doc.slug}`}
                                         key={doc.id}
                                         className="ds-card bg-surface-container-low p-4"
                                     >

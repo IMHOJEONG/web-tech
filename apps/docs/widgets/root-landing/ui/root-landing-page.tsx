@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import { getSortedPostsData, type Metadata } from '~/lib/get-document'
-import { normalizeDocPath } from '~/lib/normalize-doc-path'
+import { getDocChannel } from '~/lib/get-doc-channel'
 import { LandingHero } from './landing-hero'
 import { LatestNotes } from './latest-notes'
 import { ThematicFoundations } from './thematic-foundations'
@@ -52,30 +52,18 @@ function getSectionLabel(
     doc: LandingDoc,
     t: Awaited<ReturnType<typeof getTranslations>>
 ) {
-    const fileName = normalizeDocPath(doc.fileName ?? '')
+    const channel = getDocChannel(doc.fileName)
 
-    if (
-        fileName.includes('/mobile/') ||
-        fileName.includes('/react-native/') ||
-        fileName.includes('/ios/') ||
-        fileName.includes('/android/')
-    ) {
-        return t('latestNotes.sectionLabels.mobile')
+    switch (channel) {
+        case 'mobile':
+            return t('latestNotes.sectionLabels.mobile')
+        case 'uiux':
+            return t('latestNotes.sectionLabels.uiux')
+        case 'web':
+            return t('latestNotes.sectionLabels.web')
+        default:
+            return t('latestNotes.sectionLabels.systems')
     }
-
-    if (fileName.includes('/data/shadcn/') || fileName.includes('/ui-ux/')) {
-        return t('latestNotes.sectionLabels.uiux')
-    }
-
-    if (
-        fileName.includes('/category/be/') ||
-        fileName.includes('/category/computer-science/') ||
-        fileName.includes('/data/v8/')
-    ) {
-        return t('latestNotes.sectionLabels.systems')
-    }
-
-    return t('latestNotes.sectionLabels.web')
 }
 
 export async function RootLandingPage() {

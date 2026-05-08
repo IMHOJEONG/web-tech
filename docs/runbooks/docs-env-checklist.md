@@ -73,9 +73,10 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
    - `${BLOG_CONTENT_API_BASE_URL}${BLOG_CONTENT_API_POSTS_PATH}`
    - `${BLOG_CONTENT_MARKDOWN_BASE_URL}${BLOG_CONTENT_MARKDOWN_PATH_PREFIX}/{slug-or-path}`
      가 실제 응답하는가
-   - 실제 선택되는 endpoint가 `PUBLIC`, `INTERNAL`, `DEFAULT` 중 무엇인지 명확한가
-   - 토큰 보호를 쓴다면 `Authorization: Bearer <BLOG_CONTENT_API_TOKEN>` 없이 `401/403`이 나는가
+- 실제 선택되는 endpoint가 `PUBLIC`, `INTERNAL`, `DEFAULT` 중 무엇인지 명확한가
+- 토큰 보호를 쓴다면 `Authorization: Bearer <BLOG_CONTENT_API_TOKEN>` 없이 `401/403`이 나는가
 5. 목록 API의 `markdownPath` 값이 본문 API 라우트 규칙과 일치하는가
+   - 예: `web/test`, `feed/sample`, `ui-ux/blocked-aria-hidden`, `mobile/intro`
 
 ## Failure Symptoms
 
@@ -118,6 +119,7 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
 조치:
 
 - `/posts/{markdownPath}` 직접 호출
+- nested path라면 `/posts/web/test`처럼 실제 하위 디렉터리까지 포함해서 호출
 - 토큰 보호를 쓴다면 `Authorization` 헤더 포함 호출로 재검증
 - 필요 시 `markdownPath` 규칙 수정
 
