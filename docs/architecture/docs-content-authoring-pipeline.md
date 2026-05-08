@@ -182,6 +182,11 @@
 - 피드/인덱스/상세 렌더링
 - 검색
 - remote fetch fallback
+- 앱 공통 UI 이미지 관리
+  - 로고
+  - OG 기본 이미지
+  - hero 장식 이미지
+  - placeholder/fallback asset
 
 ### `publish script`
 
@@ -191,6 +196,108 @@
 - thumbnail/path 규칙 검사
 - remote upload
 - optional invalidate/rebuild trigger
+
+## Image Ownership Policy
+
+블로그 이미지는 성격에 따라 ownership을 나누는 것이 좋다.
+
+### 1. 콘텐츠 이미지
+
+글 본문에 직접 포함되는 이미지는 `content repo / backend storage`에서 관리하는 쪽을 권장한다.
+
+예:
+
+- 글 본문 캡처 이미지
+- 다이어그램
+- 글 전용 thumbnail
+- 문서에 종속된 illustration
+
+이유:
+
+- 글과 이미지가 함께 versioning 된다
+- 글을 이동/삭제할 때 asset 관계를 같이 추적할 수 있다
+- 작성/업로드 pipeline 안에서 함께 검증할 수 있다
+- 프론트 배포와 무관하게 콘텐츠만 갱신할 수 있다
+
+권장 구조 예:
+
+```txt
+content/
+  posts/
+    web/
+      rendering-pipeline.md
+  assets/
+    web/
+      rendering-pipeline/
+        hero.webp
+        diagram-01.png
+```
+
+또는 더 단순하게:
+
+```txt
+content/
+  posts/
+    web/
+      rendering-pipeline.md
+      rendering-pipeline-hero.webp
+```
+
+### 2. 프론트 앱 이미지
+
+문서 본문과 직접 결합되지 않은 이미지는 `apps/docs` 또는 프론트 static asset에서 관리하는 편이 맞다.
+
+예:
+
+- 사이트 로고
+- 브랜드 장식 요소
+- 홈/허브 공통 fallback image
+- 기본 OG image
+- 공용 placeholder
+
+이유:
+
+- 제품 UI 자산이기 때문에 콘텐츠 lifecycle과 분리된다
+- 디자인 시스템과 함께 버전 관리하기 쉽다
+- 페이지 chrome 변경과 함께 다루기 좋다
+
+### Practical Recommendation
+
+이 레포 기준으로는 아래처럼 나누는 것이 가장 현실적이다.
+
+- `글 내용에 종속된 이미지`
+  - backend/content side
+- `사이트 UI에 종속된 이미지`
+  - frontend side
+
+즉 블로그 글에 넣는 실제 article image는 보통 `프론트`보다 `콘텐츠 저장소/백엔드`에서 관리하는 쪽이 더 자연스럽다.
+
+### Frontmatter Recommendation
+
+글 메타에 thumbnail을 둘 때는 frontend 상대 경로보다 `content source` 기준 경로를 권장한다.
+
+예:
+
+```md
+---
+title: "Rendering Pipeline"
+thumbnail: "web/rendering-pipeline/hero.webp"
+---
+```
+
+또는 절대 URL/CDN을 쓸 수도 있다.
+
+```md
+---
+thumbnail: "https://cdn.example.com/blog/web/rendering-pipeline/hero.webp"
+---
+```
+
+### What To Avoid
+
+- 글 이미지가 `apps/docs/public`와 backend storage 양쪽에 중복 저장되는 구조
+- 글 삭제 후 이미지 orphan cleanup이 안 되는 구조
+- 콘텐츠 이미지가 frontend deploy에만 묶여 있어, 글 수정 때마다 앱을 다시 배포해야 하는 구조
 
 ## Suggested Commands
 

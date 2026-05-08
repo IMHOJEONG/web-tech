@@ -19,6 +19,13 @@ blog-content/
   app/
     main.py
   content/
+    assets/
+      web/
+        rendering-pipeline/
+          hero.webp
+      feed/
+        weekly-note-001/
+          hero.webp
     posts/
       web/
         rendering-pipeline.md
@@ -48,6 +55,19 @@ content/posts/
     readable-interfaces.md
   mobile/
     touch-targets.md
+```
+
+예시 asset 구조:
+
+```txt
+content/assets/
+  web/
+    rendering-pipeline/
+      hero.webp
+      diagram-01.png
+  feed/
+    weekly-note-001/
+      hero.webp
 ```
 
 권장 규칙:
@@ -111,7 +131,7 @@ title: "ARIA에 대해 깊게 알아봅시다"
 slug: "blocked-aria-hidden"
 date: "2025-12-30"
 summary: "Shadcn Drawer 컴포넌트 사용 시, ARIA Warning"
-thumbnail: "shadcn/thumbnail.webp"
+thumbnail: "ui-ux/blocked-aria-hidden/hero.webp"
 authorName: "HoJeong Im"
 authorRole: "Frontend Engineer"
 readMinutes: 8
