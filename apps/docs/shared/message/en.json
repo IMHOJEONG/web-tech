@@ -23,8 +23,14 @@
             "closeAriaLabel": "Close navigation drawer",
             "title": "Navigation Drawer",
             "description": "Mobile navigation drawer for docs sections.",
-            "statsLabel": "Technical Stats",
-            "systemIntegrity": "System Integrity",
+            "statsLabel": "Runtime Status",
+            "healthy": "OK",
+            "criteriaHint": "A lightweight status check based on navigation, search, and remote content availability.",
+            "checks": {
+                "navigation": "Navigation",
+                "search": "Search",
+                "content": "Remote Content"
+            },
             "config": "Config",
             "exit": "Exit",
             "links": {}

@@ -23,8 +23,14 @@
             "closeAriaLabel": "내비게이션 메뉴 닫기",
             "title": "내비게이션 메뉴",
             "description": "docs 섹션을 위한 모바일 내비게이션 메뉴입니다.",
-            "statsLabel": "기술 상태",
-            "systemIntegrity": "시스템 안정성",
+            "statsLabel": "운영 상태",
+            "healthy": "정상",
+            "criteriaHint": "내비게이션, 검색, 원격 콘텐츠 응답 기준으로 현재 동작 상태를 간단히 점검합니다.",
+            "checks": {
+                "navigation": "내비게이션",
+                "search": "검색",
+                "content": "원격 콘텐츠"
+            },
             "config": "설정",
             "exit": "닫기",
             "links": {}

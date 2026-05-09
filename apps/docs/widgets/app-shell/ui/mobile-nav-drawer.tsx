@@ -93,6 +93,12 @@ export default function MobileNavDrawer() {
     const [open, setOpen] = useState(false)
     const headerT = useTranslations('header')
     const navT = useTranslations('navigation')
+    const aboutT = useTranslations('about')
+    const statusChecks = [
+        headerT('drawer.checks.navigation'),
+        headerT('drawer.checks.search'),
+        headerT('drawer.checks.content'),
+    ]
 
     useEffect(() => {
         setOpen(false)
@@ -185,18 +191,23 @@ export default function MobileNavDrawer() {
                             {headerT('drawer.statsLabel')}
                         </p>
 
-                        <div className="mt-4 space-y-2">
-                            <div className="flex items-center justify-between text-[0.75rem] text-muted-foreground">
-                                <span className="font-display">
-                                    {headerT('drawer.systemIntegrity')}
-                                </span>
-                                <span className="font-display text-primary">
-                                    98%
-                                </span>
-                            </div>
-                            <div className="h-1 w-full bg-surface-container-high">
-                                <div className="h-full w-[98%] bg-primary shadow-glow-primary" />
-                            </div>
+                        <div className="mt-4 space-y-3">
+                            {statusChecks.map((label) => (
+                                <div
+                                    key={label}
+                                    className="flex items-center justify-between text-[0.75rem] text-muted-foreground"
+                                >
+                                    <span className="font-display">
+                                        {label}
+                                    </span>
+                                    <span className="font-display text-primary">
+                                        {headerT('drawer.healthy')}
+                                    </span>
+                                </div>
+                            ))}
+                            <p className="text-[0.6875rem] leading-5 text-muted-foreground">
+                                {headerT('drawer.criteriaHint')}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -205,17 +216,17 @@ export default function MobileNavDrawer() {
                     <div className="flex items-center gap-4">
                         <div className="relative">
                             <div className="flex size-12 items-center justify-center rounded-[0.25rem] border border-primary/30 bg-surface-container text-sm font-semibold text-on-surface">
-                                D
+                                HI
                             </div>
                             <div className="absolute -bottom-1 -right-1 size-3 rounded-full border-2 border-popover bg-primary" />
                         </div>
 
                         <div>
                             <p className="font-display text-sm font-bold tracking-[-0.02em] text-on-surface">
-                                DEV_PROTOCOL_01
+                                {aboutT('profile.name')}
                             </p>
                             <p className="font-mono text-[0.6875rem] text-muted-foreground">
-                                Senior Contributor
+                                {aboutT('profile.role')}
                             </p>
                         </div>
                     </div>
