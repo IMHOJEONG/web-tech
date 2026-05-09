@@ -12,10 +12,10 @@ import { cn } from '@web-tech/ui/lib/utils'
 import {
     BookOpenText,
     Braces,
-    FileText,
     LogOut,
     Newspaper,
     Settings,
+    Smartphone,
     Users,
     X,
 } from 'lucide-react'
@@ -30,25 +30,25 @@ const drawerLinks = [
         href: '/feed',
         key: 'feed',
         icon: Newspaper,
-        activePrefixes: ['/feed', '/docs'],
+        activePrefixes: ['/feed'],
     },
     {
         href: '/web',
         key: 'web',
         icon: BookOpenText,
-        activePrefixes: ['/web', '/mobile', '/platform'],
+        activePrefixes: ['/web', '/category/fe'],
+    },
+    {
+        href: '/mobile',
+        key: 'mobile',
+        icon: Smartphone,
+        activePrefixes: ['/mobile'],
     },
     {
         href: '/ui-ux',
         key: 'uiux',
         icon: Braces,
         activePrefixes: ['/ui-ux'],
-    },
-    {
-        href: '/docs',
-        key: 'docs',
-        icon: FileText,
-        activePrefixes: ['/docs'],
     },
     {
         href: '/about',
@@ -92,6 +92,7 @@ export default function MobileNavDrawer() {
     const pathname = usePathname()
     const [open, setOpen] = useState(false)
     const headerT = useTranslations('header')
+    const navT = useTranslations('navigation')
 
     useEffect(() => {
         setOpen(false)
@@ -170,7 +171,7 @@ export default function MobileNavDrawer() {
                                 <DrawerLink
                                     key={item.href}
                                     href={item.href}
-                                    label={headerT(`drawer.links.${item.key}`)}
+                                    label={navT(item.key)}
                                     icon={item.icon}
                                     isActive={isActive}
                                     onNavigate={() => setOpen(false)}

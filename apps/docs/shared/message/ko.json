@@ -27,13 +27,7 @@
             "systemIntegrity": "시스템 안정성",
             "config": "설정",
             "exit": "닫기",
-            "links": {
-                "feed": "Latest Articles",
-                "web": "Tutorials",
-                "uiux": "Code Snippets",
-                "docs": "Documentation",
-                "about": "Community"
-            }
+            "links": {}
         }
     },
     "footer": {

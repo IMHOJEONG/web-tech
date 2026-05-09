@@ -27,13 +27,7 @@
             "systemIntegrity": "System Integrity",
             "config": "Config",
             "exit": "Exit",
-            "links": {
-                "feed": "Latest Articles",
-                "web": "Tutorials",
-                "uiux": "Code Snippets",
-                "docs": "Documentation",
-                "about": "Community"
-            }
+            "links": {}
         }
     },
     "footer": {
