@@ -91,6 +91,14 @@ function inferContentFormat(
     return 'mdx'
 }
 
+function promoteImageCaptionParagraph(content: string) {
+    return content.replace(
+        /<p>\s*(<img\b[^>]*>)\s*<em>([\s\S]*?)<\/em>\s*<\/p>/gi,
+        (_match, imageTag: string, caption: string) =>
+            `<figure>${imageTag}<figcaption>${caption.trim()}</figcaption></figure>`
+    )
+}
+
 function sanitizeRemoteHtml(content: string) {
     return sanitizeHtml(content, {
         allowedTags: [...ALLOWED_REMOTE_HTML_TAGS],
@@ -129,8 +137,10 @@ export function normalizeRemoteContent(
         return null
     }
 
+    const normalizedFigureContent = promoteImageCaptionParagraph(content)
+
     return {
-        content: sanitizeRemoteHtml(content),
+        content: sanitizeRemoteHtml(normalizedFigureContent),
         contentFormat: 'html',
     }
 }

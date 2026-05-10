@@ -163,7 +163,24 @@
 
 .mdx-wrapper img,
 .mdx-img {
+    display: block;
     border-radius: var(--radius-xl);
-    margin: 1.5rem 0;
+    margin: 1.5rem auto;
     box-shadow: var(--hf-shadow-deep);
+}
+
+.mdx-wrapper figure {
+    margin: 2rem 0;
+}
+
+.mdx-wrapper figure img {
+    margin: 0 auto;
+}
+
+.mdx-wrapper figcaption {
+    margin-top: 0.75rem;
+    color: var(--on-surface-variant);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: center;
 }
