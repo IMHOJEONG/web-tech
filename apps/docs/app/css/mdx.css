@@ -149,7 +149,7 @@
 .mdx-wrapper pre,
 .mdx-code-block {
     background: var(--hf-bg-deep);
-    color: var(--inverse-surface);
+    color: color-mix(in srgb, white 92%, var(--primary) 8%);
     border: 1px solid color-mix(in srgb, var(--primary) 14%, transparent);
     border-radius: var(--radius-xl);
     box-shadow: var(--hf-shadow-deep);
@@ -159,6 +159,19 @@
     font-family: var(--font-mono);
     font-size: 0.95rem;
     line-height: 1.6;
+}
+
+.mdx-wrapper pre code,
+.mdx-code-block code {
+    display: block;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    white-space: pre;
 }
 
 .mdx-wrapper img,

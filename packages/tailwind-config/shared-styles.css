@@ -624,7 +624,7 @@
     border: 1px solid color-mix(in srgb, var(--outline-variant) 60%, transparent);
     border-radius: var(--radius-xl);
     background: var(--hf-bg-deep);
-    color: var(--inverse-surface);
+    color: color-mix(in srgb, white 92%, var(--primary) 8%);
     overflow: hidden;
   }
 
