@@ -1,12 +1,12 @@
-# Worklog: 2026-05-05 Docs Next Intl Extension
+# 2026-05-05 Docs next-intl 확장
 
-## Summary
+## 요약
 
 - `docs-index`, `about-us`, `article-detail`에 남아 있던 하드코딩 UI copy를 `next-intl`로 이관
 - 화면 단위 namespace로 `docsIndex`, `about`, `articleDetail`를 추가
 - 기존 i18n 정책 문서도 현재 스코프에 맞게 보강
 
-## Changed
+## 변경 내용
 
 - `apps/docs/widgets/docs-index/ui/docs-index.tsx`
 - `apps/docs/widgets/about-us/ui/about-us.tsx`
@@ -15,7 +15,7 @@
 - `apps/docs/shared/message/en.json`
 - `docs/architecture/docs-next-intl-usage-policy.md`
 
-## Notes
+## 메모
 
 - 이번 작업은 단순 placeholder 치환이 아니라 화면 단위 카피를 namespace별로 묶는 데 목적이 있다.
 - `docsIndex`는 인덱스/검색 전용 UI copy를, `about`와 `articleDetail`은 page-scope 카피를 담당한다.

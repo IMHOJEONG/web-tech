@@ -1,13 +1,13 @@
-# Worklog: 2026-05-05 Tailwind Canonical Settings
+# 2026-05-05 Tailwind canonical 설정 정리
 
-## Summary
+## 요약
 
 - workspace editor 설정에 Tailwind canonical class lint 기준을 추가
 - class 표현 통일을 위해 canonical class와 variant order를 `error`로 승격
 - CSS 파일이 Tailwind language mode로 열리도록 정리
 - `apps/docs`의 최근 변경 화면을 기준으로 canonical form 1차 정리
 
-## Changed
+## 변경 내용
 
 - `.vscode/settings.json`
 - `apps/docs/app/category/page.tsx`
@@ -30,7 +30,7 @@
 - `docs/runbooks/tailwind-canonical-form.md`
 - `docs/worklog/2026-05-05-tailwind-canonical-settings.md`
 
-## Notes
+## 메모
 
 - 팀 기준이 "표현 통일 우선"이므로, Tailwind IntelliSense의 `suggestCanonicalClasses`를 단순 경고가 아니라 `error`로 보도록 맞췄다.
 - 함께 `recommendedVariantOrder`도 `error`로 올려 class variant 순서까지 같은 기준으로 보게 했다.
@@ -43,12 +43,12 @@
 - 후속으로 `aspect-[16/9]` -> `aspect-video`, `text-[0.75rem]` -> `text-xs`, `text-[1.125rem]` -> `text-lg`, `bg-[#09090b]` -> `bg-zinc-950` 같이 built-in과 정확히 대응되는 값은 추가 치환했다.
 - 반대로 gradient, CSS variable, custom grid fraction, shell 고정 높이처럼 의도가 있는 arbitrary 값은 canonical form 예외로 문서에 명시했다.
 
-## Open Questions
+## 열린 질문
 
 - Prettier 기반 class sorting까지 프로젝트 기본값으로 강제할지
 - ESLint/CI 단계에서도 Tailwind 표현 규칙을 검사할지
 
-## Next
+## 다음 단계
 
 - 실제 작업 중 canonical class 에러가 자주 뜨는 패턴이 있는지 관찰
 - 필요하면 Tailwind class sorting 도구까지 팀 기본값으로 확장

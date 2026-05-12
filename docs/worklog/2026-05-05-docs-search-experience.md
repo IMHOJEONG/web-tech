@@ -1,6 +1,6 @@
-# Worklog: 2026-05-05 Docs Search Experience
+# 2026-05-05 Docs 검색 경험 정리
 
-## Summary
+## 요약
 
 - `docs` 검색이 현재 라우트 구조와 맞지 않던 부분을 정리
 - 검색 결과를 `/docs?q=...` 통합 상태로 유지하되 전용 결과 화면처럼 보이도록 조정
@@ -8,7 +8,7 @@
 - 추천 검색어와 empty state 흐름 추가
 - 검색 경험 목표를 architecture 문서로 정리
 
-## Changed
+## 변경 내용
 
 - `apps/docs/lib/get-search-data.ts`
 - `apps/docs/feature/search/ui/search.tsx`
@@ -20,7 +20,7 @@
 - `docs/worklog/2026-05-05-docs-search-experience.md`
 - `docs/todo/platform-improvement-todo.md`
 
-## Notes
+## 메모
 
 - 예전처럼 별도 검색 라우트를 복원하는 대신, 현재 정보구조에 맞춰 `/docs?q=...`를 검색 결과 상태로 해석했다.
 - 검색 결과 링크는 로컬 문서의 실제 위치(`docs` 상세 또는 `category` 상세)에 맞춰 생성되도록 정리했다.

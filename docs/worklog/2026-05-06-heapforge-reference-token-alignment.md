@@ -1,6 +1,6 @@
 # 2026-05-06 HeapForge Reference Token Alignment
 
-## Reference
+## 레퍼런스
 
 사용자 제공 레퍼런스:
 
@@ -13,7 +13,7 @@
 - accent는 `orange-500` 중심
 - navigation / CTA / selection은 단순하고 선명한 대비
 
-## Applied Direction
+## 적용 방향
 
 현재 `docs` 앱의 공용 토큰을 위 레퍼런스에 더 가깝게 재정렬했다.
 
@@ -27,7 +27,7 @@
 - [apps/docs/widgets/app-shell/ui/mobile-nav-drawer.tsx](/Users/coder/Desktop/project/web-tech/apps/docs/widgets/app-shell/ui/mobile-nav-drawer.tsx:1)
 - [apps/docs/feature/search/empty-search-result.tsx](/Users/coder/Desktop/project/web-tech/apps/docs/feature/search/empty-search-result.tsx:1)
 
-## Token Changes
+## 토큰 변경
 
 - `primary`: cyan 계열 -> orange accent
 - `secondary`: purple 계열 -> neutral zinc 계열
@@ -35,14 +35,14 @@
 - `border` / `outline`: low-contrast blue-gray -> neutral gray
 - `shadow-glow-primary`: cyan glow -> orange glow
 
-## Shell Changes
+## 셸 변경
 
 - header를 dark hardcoded bar에서 `popover` 기반 shell로 변경
 - navigation active / hover 상태를 `primary` 기준으로 변경
 - footer를 black block에서 `surface-container-low` 기반으로 변경
 - mobile drawer / bottom nav도 같은 neutral + orange accent 기준으로 정렬
 
-## Notes
+## 메모
 
 이번 변경은 “HeapForge 레퍼런스의 토큰 성격을 현재 docs 구조에 이식”하는 작업이다.
 

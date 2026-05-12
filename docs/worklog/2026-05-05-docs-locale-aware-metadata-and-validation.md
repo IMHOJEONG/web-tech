@@ -1,12 +1,12 @@
-# Worklog: 2026-05-05 Docs Locale Aware Metadata And Validation
+# 2026-05-05 Docs 로케일 인지형 메타데이터와 검증
 
-## Summary
+## 요약
 
 - request 기반 locale 해석을 추가해 `next-intl` locale 고정을 해제
 - root metadata와 `about` page metadata를 locale-aware 하게 전환
 - `about` contact form에 locale-aware validation 메시지를 추가
 
-## Changed
+## 변경 내용
 
 - `apps/docs/shared/message/request.ts`
 - `apps/docs/app/layout.tsx`
@@ -17,7 +17,7 @@
 - `apps/docs/shared/message/en.json`
 - `docs/architecture/docs-next-intl-usage-policy.md`
 
-## Notes
+## 메모
 
 - locale 우선순위는 `NEXT_LOCALE` cookie -> `Accept-Language` header -> `en` fallback 순으로 정리했다.
 - metadata는 Next metadata API로 옮기고, 수동 `<meta>` 하드코딩은 제거했다.

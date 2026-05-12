@@ -1,16 +1,16 @@
-# 2026-05-09 Mobile Drawer Status Criteria
+# 2026-05-09 모바일 드로어 상태 기준 정리
 
-## Summary
+## 요약
 
-- Replaced the fake `98% system integrity` meter in the mobile drawer with explicit status criteria.
-- The drawer now communicates status through three lightweight checks:
+- 모바일 드로어에 있던 가짜 `98% system integrity` 게이지를 제거하고, 명시적인 상태 기준으로 바꿨다.
+- 이제 드로어의 상태 표시는 다음 세 가지 가벼운 체크로 전달한다.
   - navigation
   - search
   - remote content
-- Replaced the lower profile placeholder copy with the real owner identity:
+- 하단 프로필 placeholder 문구도 실제 운영자 정보로 교체했다.
   - `HoJeong Im`
   - `Full Stack Engineer`
 
-## Why
+## 이유
 
-The previous percentage-based status block suggested a real metric without a defined measurement source. The updated version is more honest and easier to maintain because it reflects concrete product surfaces instead of an invented score.
+기존의 퍼센트 기반 상태 블록은 실제 측정 기준이 없는 수치를 암시하고 있었다. 이번 버전은 임의 점수 대신 실제 제품 표면을 보여주기 때문에 더 정직하고, 유지보수도 쉬운 표현이라고 판단했다.

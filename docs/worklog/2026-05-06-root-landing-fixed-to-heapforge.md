@@ -1,12 +1,12 @@
-# 2026-05-06 Root Landing Fixed To HEAPFORGE
+# 2026-05-06 루트 랜딩 기준을 HEAPFORGE로 고정
 
-## Summary
+## 요약
 
 - 루트 `/` 화면의 기준 시안을 `141:2 Landing Page - HEAPFORGE`로 고정하기로 결정했다.
 - 기존 체크리스트에서 landing을 선택 반영 항목으로 두지 않고, shell 다음 우선순위로 승격했다.
 - 현재 `app/page.tsx`가 `HeroSection` 하나만 렌더하는 구조라서, 신규 root landing 위젯 조합이 필요하다고 판단했다.
 
-## Current State
+## 현재 상태
 
 - `apps/docs/app/page.tsx`
   - `HeroSection`만 렌더 중
@@ -19,13 +19,13 @@
   - `Navigation`
   - `Footer`
 
-## Decision
+## 결정
 
 - 루트 `/` 화면은 `141:2`를 고정 기준 화면으로 삼는다.
 - 구현 순서는 `shell -> root landing -> feed -> about -> article-detail -> category`로 조정한다.
 - root landing은 공통 shell 재사용 + landing 전용 editorial section 신규 추가 방향으로 진행한다.
 
-## Why Composition
+## 왜 Composition 구조가 필요한가
 
 - 현재 루트는 `HeroSection` 단일 렌더 구조다.
 - 하지만 `141:2`는 hero 하나로 끝나는 화면이 아니라, `Hero Section -> Thematic Foundations -> Latest Notes`로 이어지는 multi-section landing이다.
@@ -40,7 +40,7 @@
   - `latest-notes`
     - recent notes list section
 
-## Candidate Components
+## 후보 컴포넌트
 
 - `widgets/root-landing/ui/root-landing-page.tsx`
 - `widgets/root-landing/ui/landing-hero.tsx`
@@ -48,7 +48,7 @@
 - `widgets/root-landing/ui/latest-notes.tsx`
 - `entities/document/ui/latest-note-row.tsx`
 
-## Related Docs
+## 관련 문서
 
 - `docs/architecture/docs-heapforge-alignment-checklist.md`
 - `docs/todo/platform-improvement-todo.md`

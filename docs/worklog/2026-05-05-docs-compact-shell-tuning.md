@@ -1,12 +1,12 @@
-# Worklog: 2026-05-05 Docs Compact Shell Tuning
+# 2026-05-05 Docs 컴팩트 셸 튜닝
 
-## Summary
+## 요약
 
 - `640px ~ 1023px` 구간을 compact desktop/tablet shell로 더 명확하게 조정
 - header의 중앙 navigation과 우측 search/action 충돌 가능성을 줄임
 - `MainFeed`, `ArticleDetail`의 tablet spacing을 데스크톱 대비 더 촘촘하게 조정
 
-## Changed
+## 변경 내용
 
 - `apps/docs/widgets/app-shell/ui/header.tsx`
 - `apps/docs/widgets/app-shell/ui/navigation.tsx`
@@ -16,7 +16,7 @@
 - `docs/architecture/docs-responsive-policy.md`
 - `docs/todo/platform-improvement-todo.md`
 
-## Notes
+## 메모
 
 - 이번 작업은 실제 디바이스 실측 전 단계의 breakpoint tuning이다.
 - shell 관점에서는:

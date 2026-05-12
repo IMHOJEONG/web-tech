@@ -1,17 +1,17 @@
-# 2026-05-09 Mobile Drawer Navigation Alignment
+# 2026-05-09 모바일 드로어 내비게이션 정렬
 
-## Summary
+## 요약
 
-- Aligned the mobile drawer primary navigation with the desktop primary navigation.
-- Removed `/docs` from the drawer's first-level list because `/docs` is an index/search context, not a primary user-facing destination.
-- Added the missing `Mobile` entry back into the drawer.
-- Stopped using alternate drawer-only labels such as `Latest Articles` or `Tutorials`, and reused the same `navigation` copy as desktop.
+- 모바일 드로어의 1차 내비게이션을 데스크톱 1차 내비게이션과 맞췄다.
+- `/docs`는 사용자 관점의 1차 목적지가 아니라 인덱스/검색 컨텍스트이므로, 드로어의 최상위 목록에서 제거했다.
+- 빠져 있던 `Mobile` 항목을 다시 추가했다.
+- `Latest Articles`, `Tutorials`처럼 드로어에서만 쓰이던 별도 라벨을 제거하고, 데스크톱과 같은 `navigation` 문구를 재사용하도록 정리했다.
 
-## Why
+## 이유
 
-The previous drawer structure created an IA mismatch:
+이전 드로어 구조는 정보구조 관점에서 불일치를 만들고 있었다.
 
-- desktop primary nav: `Feed / Web / Mobile / UI/UX / About`
-- mobile drawer primary nav: `Feed / Web / UI/UX / Docs / About`
+- 데스크톱 1차 내비게이션: `Feed / Web / Mobile / UI/UX / About`
+- 모바일 드로어 1차 내비게이션: `Feed / Web / UI/UX / Docs / About`
 
-That made mobile navigation feel like a different product model. The updated drawer now matches the main navigation policy more closely.
+이 상태에서는 모바일 내비게이션이 마치 다른 제품의 구조처럼 느껴질 수 있었다. 이번 정리로 모바일 드로어도 메인 내비게이션 정책과 더 가깝게 맞춰졌다.

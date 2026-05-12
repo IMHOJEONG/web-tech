@@ -1,6 +1,6 @@
-# Worklog: 2026-05-05 Docs Information Architecture
+# 2026-05-05 Docs 정보구조 정리
 
-## Summary
+## 요약
 
 - `docs` 앱의 제품 목적과 정보구조를 architecture 문서로 정리
 - `Feed / Web / Mobile / UI/UX / About / Category`의 역할과 관계를 명시
@@ -8,12 +8,12 @@
 - 정보 노출 기준과 이동 흐름을 함께 정리
 - Mermaid 기반 정보구조도 2종 추가
 
-## Changed
+## 변경 내용
 
 - `docs/architecture/docs-app-information-architecture.md`
 - `docs/todo/platform-improvement-todo.md`
 
-## Notes
+## 메모
 
 - 이번 문서는 UI 구현 세부보다 “무엇을 보여줄 것인가”와 “왜 이 페이지가 존재하는가”를 기준으로 정리했다.
 - 메인 내비게이션은 사용자-facing IA로, `Category`는 taxonomy 허브로 해석했다.

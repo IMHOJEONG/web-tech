@@ -1,12 +1,12 @@
-# 2026-05-08 Brand Rename To HEAP-FORGE
+# 2026-05-08 브랜드명을 HEAP-FORGE로 변경
 
-## Summary
+## 요약
 
-- Updated the docs app brand label from `TECH_LOGIC` to `HEAP-FORGE`.
-- Aligned the about profile bio copy with the new brand name.
-- Updated the newsletter/contact placeholder email to `user@heap-forge.io` so the domain naming matches the product branding.
+- docs 앱의 브랜드 표기를 `TECH_LOGIC`에서 `HEAP-FORGE`로 변경했다.
+- About 프로필 소개 문구도 새 브랜드명에 맞춰 정리했다.
+- 뉴스레터/문의 placeholder 메일 주소도 `user@heap-forge.io`로 바꿔, 도메인 표기와 제품 브랜딩이 일치하도록 맞췄다.
 
-## Files
+## 파일
 
 - `apps/docs/shared/message/ko.json`
 - `apps/docs/shared/message/en.json`

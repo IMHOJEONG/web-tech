@@ -1,17 +1,17 @@
 # 2026-05-08 Content API Server-to-Server Auth
 
-## Summary
+## 요약
 
 - `apps/docs` 원격 콘텐츠 fetch에 `server-to-server` Bearer 토큰 모델을 적용했다.
 - 구현은 `fetch` 대신 기존 의존성인 `ky` 기준으로 맞췄다.
 
-## Why
+## 이유
 
 - `docs` 앱 서버는 외부에 배포되어 있다.
 - 콘텐츠 source endpoint는 브라우저 직접 접근으로 열어두고 싶지 않다.
 - 따라서 내부망 전용 접근보다 `앱 서버만 통과할 수 있는 인증`이 더 적합하다.
 
-## Applied
+## 적용 내용
 
 - `apps/docs/lib/content-api.ts`
   - `BLOG_CONTENT_API_TOKEN`을 읽어 `Authorization: Bearer <token>` 헤더를 구성
@@ -25,7 +25,7 @@
   - `docs/runbooks/docs-env-checklist.md`
   - `docs/runbooks/nas-reverse-proxy-security-checklist.md`
 
-## Decision
+## 결정
 
 - `apps/docs`는 read-only consumer
 - 콘텐츠 endpoint는 public host/path로 열 수 있어도, 토큰 없이는 `401/403`

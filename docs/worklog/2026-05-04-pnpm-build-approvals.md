@@ -1,6 +1,6 @@
-# Worklog: 2026-05-04 pnpm Build Approvals
+# 2026-05-04 pnpm 빌드 승인 정리
 
-## Summary
+## 요약
 
 - pnpm dependency build approval 모델이 왜 도입되었는지 조사
 - pnpm `v10.1`, `v10.4`, `v11` 기준의 차이를 정리
@@ -10,7 +10,7 @@
 - `rm:node_modules` script는 `pnpm run`의 dependency check와 상성이 좋지 않아 제거
 - `scripts/rm-node-modules.sh`를 추가해 삭제 전용 명령을 독립 shell script로 분리
 
-## Changed
+## 변경 내용
 
 - `docs/runbooks/pnpm-build-approvals.md`
 - `docs/worklog/2026-05-04-pnpm-build-approvals.md`
@@ -20,7 +20,7 @@
 - `package.json`
 - `scripts/rm-node-modules.sh`
 
-## Notes
+## 메모
 
 - 공식 근거가 분명한 구간만 문서화했다.
 - 버전 차이는 `approve-builds` 도입 시점과 `allowBuilds` 전환 시점을 중심으로 정리했다.
@@ -31,12 +31,12 @@
 - `verifyDepsBeforeRun` 때문에 `pnpm run`은 단순 shell wrapper가 아니며, 삭제 전용 script는 install 흐름을 먼저 유발할 수 있어 shell 직접 실행이 더 적합하다고 판단했다.
 - 반복 입력 부담은 줄이기 위해, repo root로 이동한 뒤 동일한 `find ... rm -rf`를 수행하는 독립 shell script를 `scripts/`에 두었다.
 
-## Open Questions
+## 열린 질문
 
 - 로컬 `.pnpm-store`를 계속 허용할지, 전역 store로 되돌릴지
 - `verifyDepsBeforeRun` 기본 동작을 유지할지, 스크립트 DX를 위해 별도 조정할지
 
-## Next
+## 다음 단계
 
 - moved `overrides` 기준으로 clean install 후 lockfile이 어떻게 정리되는지 검증
 - clean install 기준으로 `pnpm install`, `pnpm format`, 주요 build를 다시 검증

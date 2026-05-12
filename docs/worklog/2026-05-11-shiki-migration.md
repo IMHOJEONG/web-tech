@@ -1,20 +1,20 @@
-# 2026-05-11 Shiki Migration
+# 2026-05-11 Shiki 전환
 
-## Summary
+## 요약
 
-- Dropped the `Expressive Code` path from the docs app and switched local MDX highlighting to the official `@shikijs/rehype` integration.
-- Used Shiki dual themes with:
+- docs 앱에서 `Expressive Code` 경로를 제거하고, 로컬 MDX 하이라이팅을 공식 `@shikijs/rehype` 통합으로 전환했다.
+- Shiki dual theme는 다음 조합으로 맞췄다.
   - `github-light`
   - `poimandres`
-- Replaced the previous `data-theme` workaround with the official class-based dark-mode CSS pattern using `html.dark .shiki`.
-- Updated both MDX evaluation paths to use the same Shiki rehype plugin so `/docs` detail pages and `/category` detail pages render code blocks consistently.
-- Adjusted `mdx-components.tsx` so highlighted block markup from Shiki preserves its classes and token styles.
+- 기존 `data-theme` 우회 방식은 제거하고, `html.dark .shiki`를 쓰는 공식 class 기반 dark mode CSS 패턴으로 바꿨다.
+- 두 MDX 평가 경로가 같은 Shiki rehype plugin을 사용하도록 정리해서 `/docs` 상세와 `/category` 상세의 코드 블록 렌더링이 일관되게 나오게 했다.
+- `mdx-components.tsx`도 손봐서, Shiki가 만든 하이라이트 블록 마크업이 기존 클래스와 토큰 스타일을 그대로 유지하도록 했다.
 
-## Why
+## 이유
 
-`Expressive Code` introduced loader serialization friction in `@next/mdx`, and it was heavier than needed for the current docs scope. Shiki offers a simpler, more direct highlighting path that better fits the current codebase.
+`Expressive Code`는 `@next/mdx`와 맞물리면서 loader 직렬화 마찰을 만들었고, 현재 docs 범위 기준으로는 다소 무거운 선택지였다. 반면 Shiki는 더 단순하고 직접적인 하이라이팅 경로를 제공해서 현재 코드베이스에 더 잘 맞는다.
 
-## Files
+## 파일
 
 - `apps/docs/lib/shiki-options.js`
 - `apps/docs/next.config.mjs`

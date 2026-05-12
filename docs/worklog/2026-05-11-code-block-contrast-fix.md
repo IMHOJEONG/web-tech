@@ -1,12 +1,12 @@
-# 2026-05-11 Code Block Contrast Fix
+# 2026-05-11 코드 블록 대비 수정
 
-## Summary
+## 요약
 
-- Fixed code block contrast in the docs app by correcting the foreground token used on dark code surfaces.
-- `var(--inverse-surface)` had been used as text color on `var(--hf-bg-deep)`, which caused near-black text on near-black backgrounds in light mode.
-- Switched code surfaces to `var(--inverse-on-surface)` for readable contrast.
+- docs 앱의 코드 블록 대비 문제를 수정했다. 핵심은 어두운 코드 표면에서 잘못 쓰이던 전경색 토큰을 바로잡는 것이었다.
+- 기존에는 `var(--hf-bg-deep)` 위에 텍스트 색으로 `var(--inverse-surface)`를 쓰고 있었고, 이 때문에 light mode에서 거의 검은 배경 위에 거의 검은 글자가 보이는 상태가 되었다.
+- 코드 표면의 글자색을 `var(--inverse-on-surface)`로 바꿔 읽기 가능한 대비를 확보했다.
 
-## Files
+## 파일
 
 - `apps/docs/app/css/mdx.css`
 - `packages/tailwind-config/shared-styles.css`

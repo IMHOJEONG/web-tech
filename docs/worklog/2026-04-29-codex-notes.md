@@ -1,6 +1,6 @@
-# Worklog: 2026-04-29
+# 2026-04-29 작업 메모
 
-## Summary
+## 요약
 
 - Figma 로컬 MCP로 `Main Feed` 본문 구조 확인
 - `apps/docs/widgets/main-feed/ui/main-feed.tsx` 구현
@@ -17,7 +17,7 @@
 - Figma 루트 페이지(`0:1`) 기준으로 `MainFeed`, `ArticleDetail`의 최신 컴포넌트 패턴 반영
 - Figma 모바일 chrome 기준으로 top app bar / bottom nav 반영
 
-## Changed
+## 변경 내용
 
 - `apps/docs/app/docs/page.tsx`
 - `apps/docs/app/feed/page.tsx`
@@ -46,7 +46,7 @@
 - `docs/architecture/docs-app-fsd.md`
 - `docs/worklog/2026-04-29-codex-notes.md`
 
-## Notes
+## 메모
 
 - 원격 Figma MCP는 파일 권한 문제로 접근 실패
 - 로컬 `figma-local` MCP로 노드 `1:2905` / `1:2906` 구조와 스크린샷 확인 후 구현 진행
@@ -125,7 +125,7 @@
 - `DYNAMIC_SERVER_USAGE` 원인과 대응을 구조적으로 정리하기 위해 `docs/architecture/docs-content-rendering-strategy.md` 문서를 추가하고, `apps/docs`는 기본적으로 ISR 중심 전략이 적합하다는 기준을 기록
 - 위 전략을 실제 코드에 반영해 `content-api.ts`의 원격 fetch를 `next.revalidate` 기반으로 전환하고, `BLOG_CONTENT_REVALIDATE_SECONDS` env를 추가
 
-## Open Questions
+## 열린 질문
 
 - 카테고리 필터 버튼을 클라이언트 필터로 둘지, 라우트 이동으로 둘지
 - main card와 feed card를 더 통합할지
@@ -141,7 +141,7 @@
 - `components/app-sidebar`, `components/content-hub`, `components/hero`처럼 남아 있는 legacy `components/`의 최종 레이어를 어디로 둘지
 - `components/react-flow/*`를 `home-hero` 내부 보조 UI로 흡수할지, 별도 시각화 레이어로 남길지
 
-## Next
+## 다음 단계
 
 - `MainFeed` 필터 인터랙션 연결
 - 데이터가 늘어났을 때 카드 우선순위 규칙 정리
