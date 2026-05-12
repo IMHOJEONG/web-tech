@@ -2,6 +2,7 @@
     "name": "docs",
     "version": "0.1.0",
     "private": true,
+    "type": "module",
     "scripts": {
         "predev": "pnpm --filter @web-tech/ui build",
         "dev": "next dev --port 3001",
@@ -35,6 +36,7 @@
         "react": "catalog:",
         "react-dom": "catalog:",
         "react-icons": "^5.5.0",
+        "@shikijs/rehype": "^4.0.2",
         "rehype-autolink-headings": "catalog:docs",
         "rehype-katex": "catalog:docs",
         "rehype-slug": "catalog:docs",
@@ -43,6 +45,7 @@
         "remark-toc": "catalog:docs",
         "sanitize-html": "catalog:docs",
         "sass": "catalog:",
+        "shiki": "^4.0.2",
         "to-vfile": "catalog:docs",
         "tw-animate-css": "catalog:",
         "use-debounce": "catalog:docs",
@@ -65,7 +68,6 @@
         "autoprefixer": "^10.4.24",
         "eslint-config-next": "15.5.2",
         "postcss": "catalog:",
-        "shiki": "^3.22.0",
         "tailwindcss": "catalog:",
         "type-fest": "catalog:",
         "typescript": "catalog:"

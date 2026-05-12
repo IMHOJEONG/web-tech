@@ -2,6 +2,8 @@
 import createMDX from '@next/mdx'
 import createNextIntlPlugin from 'next-intl/plugin'
 
+import { shikiRehypeOptions } from './lib/shiki-options.js'
+
 const nextConfig = {
     // Configure `pageExtensions` to include markdown and MDX files
     pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
@@ -29,6 +31,7 @@ const withMDX = createMDX({
             'rehype-slug',
             // With options
             ['rehype-katex', { strict: true, throwOnError: true }],
+            ['@shikijs/rehype', shikiRehypeOptions],
         ],
     },
 })

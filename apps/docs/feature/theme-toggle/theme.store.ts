@@ -10,6 +10,17 @@ interface ThemeState {
     setTheme: (t: Theme) => void
 }
 
+function applyThemeToDocument(theme: Theme) {
+    const root = document.documentElement
+
+    if (theme === 'dark') {
+        root.classList.add('dark')
+        return
+    }
+
+    root.classList.remove('dark')
+}
+
 export const useThemeStore = create<ThemeState>()(
     persist(
         (set) => ({
@@ -17,13 +28,7 @@ export const useThemeStore = create<ThemeState>()(
 
             setTheme: (t) => {
                 set({ theme: t })
-
-                // DOM 반영
-                if (t === 'dark') {
-                    document.documentElement.classList.add('dark')
-                } else {
-                    document.documentElement.classList.remove('dark')
-                }
+                applyThemeToDocument(t)
             },
         }),
         {

@@ -146,7 +146,7 @@
     font-size: 0.95rem;
 }
 
-.mdx-wrapper pre,
+.mdx-wrapper pre:not(.shiki),
 .mdx-code-block {
     background: var(--hf-bg-deep);
     color: color-mix(in srgb, white 92%, var(--primary) 8%);
@@ -161,7 +161,7 @@
     line-height: 1.6;
 }
 
-.mdx-wrapper pre code,
+.mdx-wrapper pre:not(.shiki) code,
 .mdx-code-block code {
     display: block;
     color: inherit;
@@ -172,6 +172,40 @@
     font-size: inherit;
     line-height: inherit;
     white-space: pre;
+}
+
+.mdx-wrapper .shiki {
+    margin: 1.75rem 0;
+    border: 1px solid color-mix(in srgb, var(--primary) 14%, transparent);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--hf-shadow-deep);
+    overflow-x: auto;
+    padding: 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.mdx-wrapper .shiki code {
+    display: block;
+    background: transparent !important;
+    border: 0;
+    padding: 0;
+    font: inherit;
+}
+
+.mdx-wrapper .shiki .line {
+    display: block;
+    min-height: 1.6em;
+}
+
+html.dark .mdx-wrapper .shiki,
+html.dark .mdx-wrapper .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
 .mdx-wrapper img,

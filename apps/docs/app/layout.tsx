@@ -92,11 +92,11 @@ export default async function Layout({
             </NextIntlClientProvider>
             <Script id="tailwindcss-dark-mode">
                 {`
-                    document.documentElement.classList.toggle(
-                        "dark",
+                    const isDark =
                         localStorage.theme === "dark" ||
-                            (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
-                        );
+                        (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+                    document.documentElement.classList.toggle("dark", isDark);
                 `}
             </Script>
         </html>

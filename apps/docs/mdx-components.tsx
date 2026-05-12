@@ -76,12 +76,31 @@ export const components = {
         </blockquote>
     ),
 
-    code: ({ children }) => (
-        <code className={cn('mdx-inline-code', ...commonCss)}>{children}</code>
-    ),
+    code: ({ children, className, ...props }) => {
+        const isInline =
+            !className &&
+            (typeof children === 'string' || typeof children === 'number')
 
-    pre: ({ children }) => (
-        <pre className={cn('mdx-code-block', ...commonCss)}>{children}</pre>
+        return (
+            <code
+                {...props}
+                className={cn(isInline && 'mdx-inline-code', className)}
+            >
+                {children}
+            </code>
+        )
+    },
+
+    pre: ({ children, className, ...props }) => (
+        <pre
+            {...props}
+            className={cn(
+                className?.includes('shiki') ? className : 'mdx-code-block',
+                !className?.includes('shiki') && commonCss
+            )}
+        >
+            {children}
+        </pre>
     ),
 
     img: (props) => (

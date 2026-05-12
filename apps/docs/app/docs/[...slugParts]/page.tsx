@@ -1,7 +1,9 @@
 import { evaluate, EvaluateOptions } from 'next-mdx-remote-client/rsc'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
+import rehypeShiki from '@shikijs/rehype'
 import remarkFlexibleToc, { TocItem } from 'remark-flexible-toc'
+import { shikiRehypeOptions } from '~/lib/shiki-options.js'
 import { getDocByRoutePath } from '~/lib/get-document'
 import { components } from '~/mdx-components'
 import { LoadingComponent } from '~/shared/loading-component'
@@ -52,6 +54,7 @@ export default async function Page({
     const options: EvaluateOptions<Scope> = {
         mdxOptions: {
             remarkPlugins: [remarkFlexibleToc],
+            rehypePlugins: [[rehypeShiki, shikiRehypeOptions]],
         },
         parseFrontmatter: true,
         scope: {
