@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import { getChannelHubDocs } from '~/widgets/content-hub/model/get-channel-hub-docs'
 import type { SearchData } from '~/lib/get-search-data'
@@ -86,7 +86,9 @@ function SmallArticleCard({
 }
 
 export async function UiUxHubPage() {
+    const locale = await getLocale()
     const t = await getTranslations('uiuxHub')
+    const isKorean = locale === 'ko'
     const docs = (await getChannelHubDocs('uiux'))
         .map(toUiUxDoc)
         .filter(Boolean)
@@ -225,7 +227,7 @@ export async function UiUxHubPage() {
                     </div>
                 </section>
 
-                <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+                <section className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
                     <Link
                         href={tutorial.href}
                         className="ds-card group relative min-h-[26rem] overflow-hidden bg-surface-container-lowest"
@@ -252,12 +254,24 @@ export async function UiUxHubPage() {
                         </div>
                     </Link>
 
-                    <section className="ds-card flex min-h-[26rem] flex-col justify-center bg-zinc-950 p-8 text-zinc-50 sm:p-10">
+                    <section className="ds-card flex min-h-[26rem] flex-col justify-center bg-zinc-950 p-8 text-zinc-50 sm:p-10 lg:px-12">
                         <div className="mb-6 h-1 w-16 bg-primary" />
-                        <h2 className="max-w-[12ch] text-4xl font-bold leading-[0.98] tracking-[-0.05em] text-white">
+                        <h2
+                            className={[
+                                'w-full max-w-none whitespace-normal text-4xl font-bold text-white [overflow-wrap:normal] [word-break:keep-all]',
+                                isKorean
+                                    ? 'break-keep leading-[1.18] tracking-[-0.03em]'
+                                    : 'leading-[1.04] tracking-[-0.04em]',
+                            ].join(' ')}
+                        >
                             {t('newsletter.title')}
                         </h2>
-                        <p className="mt-5 max-w-md text-sm leading-7 text-white/72 sm:text-base">
+                        <p
+                            className={[
+                                'mt-5 w-full max-w-none whitespace-normal text-sm text-white/72 [overflow-wrap:normal] sm:text-base',
+                                isKorean ? 'break-keep leading-7' : 'leading-7',
+                            ].join(' ')}
+                        >
                             {t('newsletter.description')}
                         </p>
                         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
