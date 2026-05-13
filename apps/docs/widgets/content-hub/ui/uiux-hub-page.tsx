@@ -153,7 +153,7 @@ export async function UiUxHubPage() {
     ).slice(0, 3)
 
     return (
-        <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+        <main className="docs-shell overflow-x-clip px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
             <div className="space-y-10 lg:space-y-14">
                 <section className="pl-5 md:pl-8">
                     <div className="max-w-5xl border-l-2 border-on-surface pl-5 md:pl-8">
@@ -174,7 +174,7 @@ export async function UiUxHubPage() {
                     </div>
                 </section>
 
-                <section className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
+                <section className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
                     <Link
                         href={featured.href}
                         className="group ds-card relative min-h-[32rem] overflow-hidden bg-zinc-950 text-zinc-50"
@@ -206,14 +206,14 @@ export async function UiUxHubPage() {
                             <p className="mt-5 max-w-2xl text-sm leading-7 text-white/72 sm:text-base">
                                 {featured.summary}
                             </p>
-                            <div className="mt-6 inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-white">
+                            <div className="mt-6 inline-flex max-w-full flex-wrap items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-white">
                                 <span>{t('featured.action')}</span>
                                 <span aria-hidden="true">↗</span>
                             </div>
                         </div>
                     </Link>
 
-                    <div className="grid gap-6">
+                    <div className="grid min-w-0 gap-6">
                         <SmallArticleCard
                             eyebrow={t('secondary.researchLabel')}
                             doc={secondaryOne}
@@ -227,7 +227,7 @@ export async function UiUxHubPage() {
                     </div>
                 </section>
 
-                <section className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+                <section className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
                     <Link
                         href={tutorial.href}
                         className="ds-card group relative min-h-[26rem] overflow-hidden bg-surface-container-lowest"
@@ -254,7 +254,7 @@ export async function UiUxHubPage() {
                         </div>
                     </Link>
 
-                    <section className="ds-card flex min-h-[26rem] flex-col justify-center bg-zinc-950 p-8 text-zinc-50 sm:p-10 lg:px-12">
+                    <section className="ds-card flex min-w-0 flex-col justify-center bg-zinc-950 p-8 text-zinc-50 sm:min-h-[26rem] sm:p-10 lg:px-12">
                         <div className="mb-6 h-1 w-16 bg-primary" />
                         <h2
                             className={[
@@ -279,7 +279,7 @@ export async function UiUxHubPage() {
                                 className="min-h-14 min-w-0 flex-1 border border-white/12 bg-white/6 px-4 text-sm text-white placeholder:text-white/40"
                                 placeholder={t('newsletter.placeholder')}
                             />
-                            <button className="min-h-14 w-full min-w-0 bg-white px-5 text-[0.72rem] font-semibold tracking-[0.16em] text-zinc-950 uppercase transition-opacity hover:opacity-90 sm:w-auto sm:min-w-40">
+                            <button className="min-h-14 w-full min-w-0 bg-white px-5 text-[0.72rem] font-semibold tracking-[0.16em] text-zinc-950 uppercase transition-opacity hover:opacity-90 sm:w-auto sm:min-w-40 sm:tracking-[0.2em]">
                                 {t('newsletter.button')}
                             </button>
                         </div>
