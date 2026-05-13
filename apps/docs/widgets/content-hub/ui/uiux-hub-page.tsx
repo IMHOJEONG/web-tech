@@ -276,10 +276,10 @@ export async function UiUxHubPage() {
                         </p>
                         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                             <input
-                                className="min-h-14 flex-1 border border-white/12 bg-white/6 px-4 text-sm text-white placeholder:text-white/40"
+                                className="min-h-14 min-w-0 flex-1 border border-white/12 bg-white/6 px-4 text-sm text-white placeholder:text-white/40"
                                 placeholder={t('newsletter.placeholder')}
                             />
-                            <button className="min-h-14 min-w-40 bg-white px-5 text-[0.72rem] font-semibold tracking-[0.2em] text-zinc-950 uppercase transition-opacity hover:opacity-90">
+                            <button className="min-h-14 w-full min-w-0 bg-white px-5 text-[0.72rem] font-semibold tracking-[0.16em] text-zinc-950 uppercase transition-opacity hover:opacity-90 sm:w-auto sm:min-w-40">
                                 {t('newsletter.button')}
                             </button>
                         </div>
@@ -309,9 +309,11 @@ export async function UiUxHubPage() {
                     <div className="flex justify-center pt-2">
                         <Link
                             href="/feed?topic=uiux"
-                            className="inline-flex min-h-16 items-center gap-3 border border-outline px-10 text-[0.72rem] font-semibold tracking-[0.24em] text-on-surface uppercase transition-colors hover:border-primary hover:text-primary"
+                            className="inline-flex max-w-full items-center justify-center gap-3 border border-outline px-6 py-5 text-center text-[0.72rem] font-semibold tracking-[0.16em] text-on-surface uppercase transition-colors hover:border-primary hover:text-primary sm:min-h-16 sm:px-10 sm:text-left sm:tracking-[0.24em]"
                         >
-                            <span>{t('loadMore')}</span>
+                            <span className="break-keep whitespace-normal">
+                                {t('loadMore')}
+                            </span>
                             <span aria-hidden="true">⌄</span>
                         </Link>
                     </div>
