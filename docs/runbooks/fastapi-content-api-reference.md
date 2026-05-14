@@ -12,12 +12,41 @@
 - `FastAPI` 앱 예시
 - `curl` 검증 포인트
 
+## Related Architecture
+
+현재 문서는 `FastAPI 단독` 기준의 최소 운영 예시를 설명한다.
+
+다만 코드 블록 품질을 로컬 MDX와 같은 계열로 맞추고 싶다면, 별도 `Node sidecar + Shiki` 구조를 함께 검토하는 것이 좋다.
+
+관련 기준 문서:
+
+- `docs/architecture/docs-remote-code-highlighting-sidecar.md`
+
+sidecar 구조를 쓰는 경우에는:
+
+- `FastAPI`는 파일 IO, 인증, 메타데이터, renderer 호출만 담당
+- markdown -> HTML + Shiki highlighting은 `renderer` 컨테이너가 담당
+
+하는 방식이 권장된다.
+
+실제 예시 파일 세트는 아래 경로에 정리되어 있다.
+
+- `docs/examples/remote-content-sidecar/`
+
 ## Recommended Directory Layout
 
 ```txt
 blog-content/
   app/
+    auth.py
+    config.py
+    content.py
     main.py
+    renderer.py
+  renderer/
+    package.json
+    server.mjs
+    Dockerfile
   content/
     assets/
       web/
@@ -150,6 +179,7 @@ fastapi
 uvicorn[standard]
 mistune
 PyYAML
+httpx
 ```
 
 설명:
@@ -162,6 +192,8 @@ PyYAML
   - markdown -> HTML 렌더링
 - `PyYAML`
   - frontmatter 파싱
+- `httpx`
+  - sidecar 호출
 
 ## Example `docker-compose.yml`
 
@@ -173,16 +205,29 @@ services:
     build: .
     ports:
       - "8000:80"
+    volumes:
+      - ./app:/code/app
+      - /volume1/data/blog/content:/app/content
+    env_file:
+      - .env
     environment:
-      - ENV=development
-      - CONTENT_API_TOKEN=${CONTENT_API_TOKEN}
+      - SHIKI_RENDERER_URL=http://renderer:3000/render
     command: uvicorn app.main:app --host 0.0.0.0 --port 80
+    depends_on:
+      - renderer
+
+  renderer:
+    build:
+      context: ./renderer
+    expose:
+      - "3000"
 ```
 
 같은 디렉터리의 `.env` 예시:
 
 ```env
 CONTENT_API_TOKEN=replace-with-shared-secret
+SHIKI_RENDERER_URL=http://renderer:3000/render
 ```
 
 ## Example `Dockerfile`

@@ -2,6 +2,6 @@
 export const shikiRehypeOptions = {
     themes: {
         light: 'github-light',
-        dark: 'poimandres',
+        dark: 'github-dark',
     },
 }
