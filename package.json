@@ -29,8 +29,8 @@
     "typescript": "^6.0.3"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm format && echo 'ok'",
-    "pre-push": "pnpm format",
+    "pre-commit": "./scripts/pnpmw.sh format && echo 'ok'",
+    "pre-push": "./scripts/pnpmw.sh format",
     "preserveUnused": [
       "commit-msg"
     ]

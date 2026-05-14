@@ -30,7 +30,9 @@ export function UiUxHubFeaturedSection({
             >
                 <div className="absolute inset-0">
                     <Image
-                        src={featured.thumbnail ?? UIUX_FALLBACK_IMAGES.featured}
+                        src={
+                            featured.thumbnail ?? UIUX_FALLBACK_IMAGES.featured
+                        }
                         alt={featured.title}
                         fill
                         className="object-cover opacity-45 transition-transform duration-700 group-hover:scale-[1.03]"

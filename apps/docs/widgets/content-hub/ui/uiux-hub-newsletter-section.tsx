@@ -27,7 +27,9 @@ export function UiUxHubNewsletterSection({
             >
                 <div className="absolute inset-0">
                     <Image
-                        src={tutorial.thumbnail ?? UIUX_FALLBACK_IMAGES.tutorial}
+                        src={
+                            tutorial.thumbnail ?? UIUX_FALLBACK_IMAGES.tutorial
+                        }
                         alt={tutorial.title}
                         fill
                         className="object-cover opacity-65 transition-transform duration-700 group-hover:scale-[1.03]"
