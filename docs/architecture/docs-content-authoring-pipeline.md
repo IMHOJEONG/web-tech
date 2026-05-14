@@ -233,14 +233,44 @@ content/
         diagram-01.png
 ```
 
-또는 더 단순하게:
+여기서 중요한 기준은:
+
+- `posts`는 `channel/slug.md`
+- `assets`는 `channel/slug/...`
+
+로 운영한다는 점이다.
+
+예:
 
 ```txt
-content/
-  posts/
-    web/
-      rendering-pipeline.md
-      rendering-pipeline-hero.webp
+content/posts/feed/pna.md
+content/assets/feed/pna/hero.webp
+content/assets/feed/pna/permissions.png
+```
+
+즉:
+
+- `feed/pna/pna.md`
+  - 비권장
+- `feed/pna.md`
+  - 권장
+
+이유:
+
+- `posts`는 API의 `markdownPath`, `slug`, 공개 URL과 1:1로 이어지는 편이 좋다
+- `assets`는 이미지가 여러 장 붙을 수 있어서 slug 폴더를 두는 편이 자연스럽다
+
+markdown 파일 이름 규칙도 같이 고정하는 편이 좋다.
+
+- 소문자만 사용
+- 단어 구분은 `-`
+- 공백/`_`/대문자 금지
+- 확장자는 `.md`
+
+정규식 기준:
+
+```txt
+^[a-z0-9]+(?:-[a-z0-9]+)*\.md$
 ```
 
 ### 2. 프론트 앱 이미지

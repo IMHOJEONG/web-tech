@@ -1,6 +1,10 @@
 import { getDocHref, getDocRoutePath } from '~/lib/get-doc-route'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { normalizeRemoteContent } from '~/lib/content-api-html'
+import {
+    remoteMarkdownPathSchema,
+    validateRemoteRouteContract,
+} from '~/lib/content-api-schema'
 import type { Metadata, RemotePost, SearchData } from '~/lib/content-api-types'
 
 function normalizeThumbnailPath(thumbnail?: string | null) {
@@ -129,7 +133,18 @@ export function normalizeRemoteReference(reference: string) {
         return null
     }
 
-    return trimmedReference.replace(/^\/+/, '')
+    const normalizedReference = trimmedReference.replace(/^\/+/, '')
+    const parseResult = remoteMarkdownPathSchema.safeParse(normalizedReference)
+
+    if (!parseResult.success) {
+        console.warn(
+            '[docs] Rejected invalid remote markdownPath contract:',
+            normalizedReference
+        )
+        return null
+    }
+
+    return parseResult.data
 }
 
 export function getInlineContentResult(post: RemotePost) {
@@ -145,16 +160,36 @@ export function getInlineContentResult(post: RemotePost) {
 export function normalizeRemotePostMeta(
     post: RemotePost
 ): Partial<Metadata> | null {
-    const slug = getRemotePostSlug(post)
-    const title = getRemotePostTitle(post, slug)
+    const candidateSlug = getRemotePostSlug(post)
+    const candidateTitle = getRemotePostTitle(post, candidateSlug)
+    const candidateMarkdownPath = getMarkdownReference(post)
+    const contractResult = validateRemoteRouteContract({
+        slug: candidateSlug,
+        title: candidateTitle,
+        markdownPath: candidateMarkdownPath,
+    })
 
-    if (!slug || !title) {
+    if (!contractResult.success) {
+        console.warn(
+            '[docs] Rejected remote post due to route contract mismatch:',
+            {
+                id: post.id,
+                slug: candidateSlug,
+                markdownPath: candidateMarkdownPath,
+            }
+        )
         return null
     }
 
+    const {
+        slug,
+        title,
+        markdownPath: validatedMarkdownPath,
+    } = contractResult.data
+
     const summary = post.summary?.trim() ?? ''
     const date = post.date?.trim() ?? ''
-    const markdownPath = getMarkdownReference(post)
+    const markdownPath = validatedMarkdownPath ?? undefined
     const fileName = normalizeDocPath(
         post.fileName ?? post.path ?? markdownPath ?? `remote/${slug}`
     )

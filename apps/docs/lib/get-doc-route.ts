@@ -23,6 +23,27 @@ function normalizeRouteValue(value?: string | null) {
     return normalized || null
 }
 
+function collapseTrailingDuplicateLeaf(path: string) {
+    const segments = path.split('/').filter(Boolean)
+
+    if (segments.length < 2) {
+        return path
+    }
+
+    const lastSegment = segments.at(-1)
+    const previousSegment = segments.at(-2)
+
+    if (lastSegment && previousSegment && lastSegment === previousSegment) {
+        return segments.slice(0, -1).join('/')
+    }
+
+    return path
+}
+
+function normalizeStructuredRoutePath(path: string) {
+    return collapseTrailingDuplicateLeaf(path)
+}
+
 function mapLocalDataPathToRoute(path: string) {
     if (path.startsWith('data/v8/')) {
         return `web/${path.slice('data/v8/'.length)}`
@@ -48,11 +69,11 @@ function getStructuredRoutePath(source: DocRouteSource) {
         const mappedLocalPath = mapLocalDataPathToRoute(normalized)
 
         if (mappedLocalPath) {
-            return mappedLocalPath
+            return normalizeStructuredRoutePath(mappedLocalPath)
         }
 
         if (CHANNEL_PREFIXES.some((prefix) => normalized.startsWith(prefix))) {
-            return normalized
+            return normalizeStructuredRoutePath(normalized)
         }
     }
 

@@ -177,6 +177,40 @@ Shiki는 보통 아래 정보를 코드 블록 HTML에 싣는다.
 
 으로 fallback 하는 편이 안전하다.
 
+## Frontend Runtime Validation
+
+backend 계약 문서만으로는 잘못된 payload를 완전히 막기 어렵다.
+
+예를 들어:
+
+- `markdownPath: "feed/pna/pna"`
+- `slug: "feed-pna"`
+- `title: ""`
+
+같은 값이 내려오면, 문서상 계약은 어겨도 프론트가 그대로 통과시킬 수 있다.
+
+그래서 프론트에서는 `zod` 같은 런타임 검증으로 최소 계약을 한 번 더 확인하는 편이 좋다.
+
+현재 권장 최소 검증:
+
+- `markdownPath`
+  - `feed/pna`
+  - `web/rendering-pipeline`
+  - `ui-ux/blocked-aria-hidden`
+    같은 `channel/leaf-slug` 형태만 허용
+- `slug`
+  - leaf slug만 허용
+- `title`
+  - 비어 있지 않아야 함
+
+즉:
+
+- 계약 문서
+- backend 구현
+- frontend runtime validation
+
+세 층으로 맞추는 편이 가장 안전하다.
+
 ## Compose 기준 운영안
 
 실무적으로는 `renderer`도 별도 Dockerfile을 두는 편이 더 낫다.

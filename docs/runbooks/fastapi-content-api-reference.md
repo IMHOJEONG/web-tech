@@ -29,6 +29,14 @@ sidecar 구조를 쓰는 경우에는:
 
 하는 방식이 권장된다.
 
+또한 프론트에서는 계약 문서만 신뢰하지 말고, 원격 payload를 받을 때 `zod` 같은 런타임 검증으로:
+
+- `markdownPath`가 `feed/pna` 형태인지
+- `slug`가 leaf slug인지
+- `title`이 비어 있지 않은지
+
+를 한 번 더 확인하는 편이 안전하다.
+
 실제 예시 파일 세트는 아래 경로에 정리되어 있다.
 
 - `docs/examples/remote-content-sidecar/`
@@ -98,6 +106,84 @@ content/assets/
     weekly-note-001/
       hero.webp
 ```
+
+## File Naming Policy
+
+`posts`와 `assets`는 같은 규칙을 쓰지 않는 편이 더 낫다.
+
+권장 기준:
+
+- `posts`
+  - `content/posts/{channel}/{article-slug}.md`
+- `assets`
+  - `content/assets/{channel}/{article-slug}/...`
+
+예:
+
+```txt
+content/posts/feed/pna.md
+content/assets/feed/pna/hero.webp
+content/assets/feed/pna/permissions.png
+```
+
+즉 아래 구조는 피한다.
+
+```txt
+content/posts/feed/pna/pna.md
+```
+
+대신 아래 구조를 기준으로 본다.
+
+```txt
+content/posts/feed/pna.md
+```
+
+### Markdown File Name Rule
+
+`posts` 아래의 markdown 파일 이름은 곧 leaf slug가 된다.
+
+권장 규칙:
+
+- 소문자만 사용
+- 단어 구분은 `-`만 사용
+- 공백 금지
+- `_` 금지
+- 대문자 금지
+- 확장자는 `.md`
+
+정규식 기준:
+
+```txt
+^[a-z0-9]+(?:-[a-z0-9]+)*\.md$
+```
+
+좋은 예:
+
+- `pna.md`
+- `rendering-pipeline.md`
+- `blocked-aria-hidden.md`
+
+피해야 할 예:
+
+- `PNA.md`
+- `feed-pna.md`
+- `pna_test.md`
+- `pna final.md`
+
+### Why Posts And Assets Differ
+
+`posts`는 API 계약과 공개 URL을 단순하게 유지하는 것이 더 중요하다.
+
+그래서:
+
+- `content/posts/feed/pna.md`
+- `markdownPath: "feed/pna"`
+- `slug: "pna"`
+- `id: "feed/pna"`
+
+처럼 바로 대응되는 구조가 더 적합하다.
+
+반면 `assets`는 문서 하나에 여러 파일이 종속될 수 있으므로, slug 폴더를 두는 편이 더 자연스럽다.
 
 권장 규칙:
 
