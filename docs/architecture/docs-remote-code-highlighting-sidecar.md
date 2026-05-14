@@ -762,6 +762,7 @@ FastAPI:
 - `Dockerfile`
 - `requirements.txt`
 - `app/config.py`
+- `app/assets.py`
 - `app/auth.py`
 - `app/content.py`
 - `app/renderer.py`

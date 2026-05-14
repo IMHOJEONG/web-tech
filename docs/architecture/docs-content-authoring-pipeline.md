@@ -201,6 +201,10 @@
 
 블로그 이미지는 성격에 따라 ownership을 나누는 것이 좋다.
 
+관련해서 “원본 스토리지 주소를 외부에 어떻게 노출할 것인가”는 별도 문서에서 다룬다.
+
+- `docs/architecture/docs-content-asset-exposure-strategy.md`
+
 ### 1. 콘텐츠 이미지
 
 글 본문에 직접 포함되는 이미지는 `content repo / backend storage`에서 관리하는 쪽을 권장한다.

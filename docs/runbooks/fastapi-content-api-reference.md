@@ -46,6 +46,7 @@ sidecar 구조를 쓰는 경우에는:
 ```txt
 blog-content/
   app/
+    assets.py
     auth.py
     config.py
     content.py
