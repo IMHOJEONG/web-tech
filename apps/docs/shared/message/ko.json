@@ -84,11 +84,7 @@
             "titleLineThree": "연결합니다",
             "description": "소프트웨어 장인정신과 시스템 사고가 만나는 지점에서, 웹 엔지니어링과 인터페이스 구조를 더 오래 읽히는 형태로 정제합니다.",
             "primaryCta": "큐레이션 피드 보기",
-            "secondaryCta": "프로젝트 소개 보기",
-            "metaLabel": "EDITORIAL RANGE",
-            "metaValue": "WEB / MOBILE / UI/UX / SYSTEMS",
-            "statusLabel": "STATUS",
-            "statusValue": "LIVE // LANDING CALIBRATED"
+            "secondaryCta": "프로젝트 소개 보기"
         },
         "foundations": {
             "eyebrow": "THEMATIC FOUNDATIONS",

@@ -84,11 +84,7 @@
             "titleLineThree": "precision",
             "description": "At the point where software craftsmanship meets systems thinking, this landing page distills web engineering and interface structure into a slower, more readable editorial flow.",
             "primaryCta": "Browse the feed",
-            "secondaryCta": "Read about the project",
-            "metaLabel": "EDITORIAL RANGE",
-            "metaValue": "WEB / MOBILE / UI/UX / SYSTEMS",
-            "statusLabel": "STATUS",
-            "statusValue": "LIVE // LANDING CALIBRATED"
+            "secondaryCta": "Read about the project"
         },
         "foundations": {
             "eyebrow": "THEMATIC FOUNDATIONS",

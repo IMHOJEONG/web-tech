@@ -95,7 +95,7 @@ Authorization: Bearer <shared-secret>
       "title": "Test",
       "summary": "테스트 문서",
       "date": "2026-05-01",
-      "thumbnail": "/images/test.webp",
+      "thumbnail": "web/test/thumbnail.webp",
       "markdownPath": "web/test"
     }
   ]
@@ -127,6 +127,9 @@ Authorization: Bearer <shared-secret>
 #### Optional fields
 
 - `thumbnail`
+- 상대 경로를 써도 된다.
+  - 예: `web/test/thumbnail.webp`
+  - frontend는 원격 콘텐츠 asset base URL을 기준으로 절대 URL로 해석할 수 있어야 한다.
 - `thumbnailUrl`
 - `thumbnail_url`
 - `fileName`
@@ -309,8 +312,8 @@ Content-Type: text/html; charset=utf-8
       "title": "Test",
       "summary": "테스트 문서",
       "date": "2026-05-01",
-      "thumbnail": "/images/test.webp",
-      "markdownPath": "test.md"
+      "thumbnail": "web/test/thumbnail.webp",
+      "markdownPath": "web/test"
     }
   ]
 }
@@ -318,7 +321,7 @@ Content-Type: text/html; charset=utf-8
 
 ### Body API
 
-- `GET /posts/test.md`
+- `GET /posts/web/test`
 - `Content-Type: text/html`
 - `<article>...</article>` 포함 HTML 반환
 

@@ -4,6 +4,57 @@ import createNextIntlPlugin from 'next-intl/plugin'
 
 import { shikiRehypeOptions } from './lib/shiki-options.js'
 
+function toRemotePattern(value) {
+    const trimmedValue = value?.trim()
+
+    if (!trimmedValue) {
+        return null
+    }
+
+    try {
+        const url = new URL(trimmedValue)
+
+        return {
+            protocol: url.protocol.replace(':', ''),
+            hostname: url.hostname,
+            port: url.port,
+            pathname: '/**',
+        }
+    } catch {
+        return null
+    }
+}
+
+function getRemoteImagePatterns() {
+    const candidates = [
+        process.env.BLOG_CONTENT_ASSET_BASE_URL_PUBLIC,
+        process.env.BLOG_CONTENT_ASSET_BASE_URL_INTERNAL,
+        process.env.BLOG_CONTENT_ASSET_BASE_URL,
+        process.env.BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC,
+        process.env.BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL,
+        process.env.BLOG_CONTENT_MARKDOWN_BASE_URL,
+        process.env.BLOG_CONTENT_API_BASE_URL_PUBLIC,
+        process.env.BLOG_CONTENT_API_BASE_URL_INTERNAL,
+        process.env.BLOG_CONTENT_API_BASE_URL,
+    ]
+
+    const patterns = candidates
+        .map((value) => toRemotePattern(value))
+        .filter((value) => value !== null)
+
+    return patterns.filter((pattern, index, array) => {
+        return (
+            array.findIndex(
+                (candidate) =>
+                    candidate.protocol === pattern.protocol &&
+                    candidate.hostname === pattern.hostname &&
+                    candidate.port === pattern.port &&
+                    candidate.pathname === pattern.pathname
+            ) === index
+        )
+    })
+}
+
 const nextConfig = {
     // Configure `pageExtensions` to include markdown and MDX files
     pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
@@ -12,6 +63,7 @@ const nextConfig = {
     transpilePackages: ['@web-tech/ui'],
     images: {
         qualities: [25, 50, 75, 90],
+        remotePatterns: getRemoteImagePatterns(),
     },
 }
 

@@ -259,6 +259,11 @@ topicLabel: "ACCESSIBILITY"
 ...
 ```
 
+`thumbnail`은 절대 URL이어도 되고, `ui-ux/blocked-aria-hidden/hero.webp`처럼
+`content source` 기준 상대 경로여도 된다. 현재 `docs` 앱은 원격 메타의 상대
+썸네일 경로를 `BLOG_CONTENT_ASSET_BASE_URL` 또는 fallback content host 기준으로
+절대 URL로 해석한다.
+
 ## `requirements.txt`
 
 ```txt

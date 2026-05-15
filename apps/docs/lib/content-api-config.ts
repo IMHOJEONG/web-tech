@@ -15,7 +15,8 @@ export function joinUrl(base: string, path: string) {
 function createContentApiConfig(
     label: ContentApiConfig['label'],
     baseUrl?: string,
-    markdownBaseUrl?: string
+    markdownBaseUrl?: string,
+    assetBaseUrl?: string
 ): ContentApiConfig | null {
     const normalizedBaseUrl = baseUrl?.trim()
 
@@ -24,6 +25,7 @@ function createContentApiConfig(
     }
 
     const normalizedMarkdownBaseUrl = markdownBaseUrl?.trim()
+    const normalizedAssetBaseUrl = assetBaseUrl?.trim()
 
     return {
         label,
@@ -32,6 +34,11 @@ function createContentApiConfig(
             process.env.BLOG_CONTENT_API_POSTS_PATH?.trim() || '/api/posts',
         markdownBaseUrl:
             normalizedMarkdownBaseUrl || normalizedBaseUrl || undefined,
+        assetBaseUrl:
+            normalizedAssetBaseUrl ||
+            normalizedMarkdownBaseUrl ||
+            normalizedBaseUrl ||
+            undefined,
     }
 }
 
@@ -40,17 +47,20 @@ export function getContentApiConfig() {
         createContentApiConfig(
             'public',
             process.env.BLOG_CONTENT_API_BASE_URL_PUBLIC,
-            process.env.BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC
+            process.env.BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC,
+            process.env.BLOG_CONTENT_ASSET_BASE_URL_PUBLIC
         ) ??
         createContentApiConfig(
             'internal',
             process.env.BLOG_CONTENT_API_BASE_URL_INTERNAL,
-            process.env.BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL
+            process.env.BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL,
+            process.env.BLOG_CONTENT_ASSET_BASE_URL_INTERNAL
         ) ??
         createContentApiConfig(
             'default',
             process.env.BLOG_CONTENT_API_BASE_URL,
-            process.env.BLOG_CONTENT_MARKDOWN_BASE_URL
+            process.env.BLOG_CONTENT_MARKDOWN_BASE_URL,
+            process.env.BLOG_CONTENT_ASSET_BASE_URL
         )
     )
 }

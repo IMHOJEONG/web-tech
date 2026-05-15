@@ -57,5 +57,6 @@ export type ContentApiConfig = {
     baseUrl: string
     postsPath: string
     markdownBaseUrl?: string
+    assetBaseUrl?: string
     label: 'public' | 'internal' | 'default'
 }

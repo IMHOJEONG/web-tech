@@ -8,8 +8,8 @@ export async function LandingHero() {
 
     return (
         <section className="border-b border-outline-variant/70">
-            <div className="mx-auto grid w-full max-w-page gap-12 px-4 py-12 sm:px-6 sm:py-16 md:px-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(240px,0.35fr)] lg:items-end lg:gap-10 lg:py-20">
-                <div className="space-y-7">
+            <div className="mx-auto w-full max-w-page px-4 py-12 sm:px-6 sm:py-16 md:px-8 lg:py-20">
+                <div className="max-w-5xl space-y-7">
                     <div className="inline-flex items-center gap-3 text-sm font-semibold tracking-[0.2em] text-primary uppercase">
                         <span className="inline-block size-2 rounded-full bg-primary" />
                         <span>{t('hero.eyebrow')}</span>
@@ -52,25 +52,6 @@ export async function LandingHero() {
                         <Link href="/about" className="ds-outline-button">
                             {t('hero.secondaryCta')}
                         </Link>
-                    </div>
-                </div>
-
-                <div className="ds-panel-muted space-y-4 p-5 sm:p-6 lg:text-right">
-                    <div className="space-y-1">
-                        <p className="text-xs font-semibold tracking-[0.18em] text-outline uppercase">
-                            {t('hero.metaLabel')}
-                        </p>
-                        <p className="text-sm text-on-surface-variant">
-                            {t('hero.metaValue')}
-                        </p>
-                    </div>
-                    <div className="space-y-1">
-                        <p className="text-xs font-semibold tracking-[0.18em] text-outline uppercase">
-                            {t('hero.statusLabel')}
-                        </p>
-                        <p className="text-sm text-on-surface-variant">
-                            {t('hero.statusValue')}
-                        </p>
                     </div>
                 </div>
             </div>

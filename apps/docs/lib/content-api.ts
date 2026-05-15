@@ -139,9 +139,10 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
 
 async function normalizeRemotePost(
     post: RemotePost,
-    markdownBaseUrl?: string
+    markdownBaseUrl?: string,
+    assetBaseUrl?: string
 ): Promise<Partial<Metadata> | null> {
-    const metadata = normalizeRemotePostMeta(post)
+    const metadata = normalizeRemotePostMeta(post, assetBaseUrl)
 
     if (!metadata?.slug || !metadata.title) {
         return null
@@ -221,7 +222,7 @@ export async function fetchRemoteDocsData() {
     }
 
     return payload.rawPosts
-        .map((post) => normalizeRemotePostMeta(post))
+        .map((post) => normalizeRemotePostMeta(post, payload.config.assetBaseUrl))
         .filter((post): post is Partial<Metadata> => post !== null)
 }
 
@@ -248,7 +249,11 @@ export async function fetchRemoteDocByRoutePath(routePath: string) {
         return null
     }
 
-    return normalizeRemotePost(targetPost, payload.config.markdownBaseUrl)
+    return normalizeRemotePost(
+        targetPost,
+        payload.config.markdownBaseUrl,
+        payload.config.assetBaseUrl
+    )
 }
 
 export async function fetchRemoteSearchData(keyword?: string) {

@@ -1,3 +1,4 @@
+import { joinUrl } from '~/lib/content-api-config'
 import { getDocHref, getDocRoutePath } from '~/lib/get-doc-route'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { normalizeRemoteContent } from '~/lib/content-api-html'
@@ -7,7 +8,10 @@ import {
 } from '~/lib/content-api-schema'
 import type { Metadata, RemotePost, SearchData } from '~/lib/content-api-types'
 
-function normalizeThumbnailPath(thumbnail?: string | null) {
+function normalizeThumbnailPath(
+    thumbnail?: string | null,
+    assetBaseUrl?: string
+) {
     if (!thumbnail) {
         return null
     }
@@ -18,17 +22,28 @@ function normalizeThumbnailPath(thumbnail?: string | null) {
         return null
     }
 
-    if (/^https?:\/\//i.test(value)) {
+    if (/^https?:\/\//i.test(value) || /^\/\//.test(value)) {
         return value
     }
 
-    const publicIndex = value.indexOf('public/')
-    if (publicIndex !== -1) {
-        const sliced = value.slice(publicIndex + 'public/'.length)
-        return sliced.startsWith('/') ? sliced : `/${sliced}`
+    const withoutPublicPrefix = (() => {
+        const publicIndex = value.indexOf('public/')
+        if (publicIndex !== -1) {
+            return value.slice(publicIndex + 'public/'.length)
+        }
+
+        return value
+    })()
+
+    const normalizedAssetPath = withoutPublicPrefix.startsWith('/')
+        ? withoutPublicPrefix
+        : `/${withoutPublicPrefix}`
+
+    if (assetBaseUrl) {
+        return joinUrl(assetBaseUrl, normalizedAssetPath)
     }
 
-    return value.startsWith('/') ? value : `/${value}`
+    return normalizedAssetPath
 }
 
 function getInlineMarkdown(post: RemotePost) {
@@ -158,7 +173,8 @@ export function getInlineContentResult(post: RemotePost) {
 }
 
 export function normalizeRemotePostMeta(
-    post: RemotePost
+    post: RemotePost,
+    assetBaseUrl?: string
 ): Partial<Metadata> | null {
     const candidateSlug = getRemotePostSlug(post)
     const candidateTitle = getRemotePostTitle(post, candidateSlug)
@@ -213,7 +229,8 @@ export function normalizeRemotePostMeta(
         contentSource: 'remote',
         markdownPath,
         thumbnail: normalizeThumbnailPath(
-            post.thumbnail ?? post.thumbnail_url ?? post.thumbnailUrl
+            post.thumbnail ?? post.thumbnail_url ?? post.thumbnailUrl,
+            assetBaseUrl
         ),
         authorName: post.authorName ?? post.author_name ?? post.author,
         authorRole: post.authorRole ?? post.author_role ?? post.role,
