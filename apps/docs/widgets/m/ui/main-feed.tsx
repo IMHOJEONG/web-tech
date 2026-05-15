@@ -268,10 +268,10 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
                     src={doc.thumbnail ?? '/default/no-image.webp'}
                     alt={doc.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]"
                     sizes="(max-width: 1024px) 100vw, 40vw"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(17,19,25,0.12),rgba(17,19,25,0.48))]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.07),transparent_38%),linear-gradient(135deg,rgba(17,19,25,0.12),rgba(17,19,25,0.48))]" />
             </div>
         </Link>
     )
@@ -329,10 +329,10 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
                     src={doc.thumbnail ?? '/default/no-image.webp'}
                     alt={doc.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.04]"
                     sizes="(max-width: 1024px) 100vw, 30vw"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,19,25,0.12),rgba(17,19,25,0.4))]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.07),transparent_38%),linear-gradient(180deg,rgba(17,19,25,0.12),rgba(17,19,25,0.4))]" />
             </div>
 
             <div className="flex w-full min-w-0 flex-1 self-stretch flex-col gap-4 p-6 sm:p-7 lg:p-8">
@@ -600,7 +600,7 @@ export function MainFeed({
                         <div className="absolute -left-8 bottom-0 size-40 rounded-full bg-secondary/10 blur-3xl" />
                         <div className="absolute -right-8 top-0 size-48 rounded-full bg-primary/10 blur-3xl" />
                         <div className="ds-code-shell relative p-4">
-                            <div className="relative aspect-[1/1.02] overflow-hidden border border-outline-variant bg-surface">
+                            <div className="relative aspect-[1/1.02] overflow-hidden border border-outline-variant bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]">
                                 <Image
                                     src={
                                         heroDoc.thumbnail ??
@@ -608,16 +608,38 @@ export function MainFeed({
                                     }
                                     alt={heroDoc.title}
                                     fill
-                                    className="object-cover"
+                                    className="scale-110 object-cover opacity-18 blur-2xl"
                                     sizes="(max-width: 1024px) 100vw, 36vw"
                                     priority
                                 />
-                                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.04),rgba(10,11,15,0.18)_55%,rgba(10,11,15,0.46))]" />
-                                <div className="absolute inset-0 border border-white/6" />
-                                <div className="absolute right-5 bottom-5 inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/35 px-3 py-1.5 text-[0.65rem] tracking-[0.18em] text-white uppercase backdrop-blur-sm">
-                                    <span className="inline-block size-1.5 rounded-full bg-primary" />
-                                    <span>{heroTopic.label}</span>
+                                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.08),rgba(10,11,15,0.3)_58%,rgba(10,11,15,0.48))]" />
+                                <div className="absolute inset-x-[12%] top-[12%] bottom-[12%] overflow-hidden border border-white/8 bg-surface-container-low shadow-[0_28px_48px_rgba(0,0,0,0.28)]">
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_44%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]" />
+                                    <div className="absolute inset-3 overflow-hidden border border-white/6 bg-black/10">
+                                        <Image
+                                            src={
+                                                heroDoc.thumbnail ??
+                                                '/default/no-image.webp'
+                                            }
+                                            alt={heroDoc.title}
+                                            fill
+                                            className="object-contain p-3"
+                                            sizes="(max-width: 1024px) 80vw, 28vw"
+                                        />
+                                    </div>
+                                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.04)_42%,rgba(0,0,0,0.58))]" />
+                                    <div className="absolute inset-x-0 bottom-0 space-y-3 p-5">
+                                        <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/30 px-3 py-1.5 text-[0.65rem] tracking-[0.18em] text-white uppercase backdrop-blur-sm">
+                                            <span className="inline-block size-1.5 rounded-full bg-primary" />
+                                            <span>{heroTopic.label}</span>
+                                        </div>
+                                        <p className="line-clamp-2 text-sm leading-6 font-medium text-white/88">
+                                            {heroDoc.title}
+                                        </p>
+                                    </div>
                                 </div>
+                                <div className="absolute inset-x-[18%] top-[7%] h-px bg-white/10" />
+                                <div className="absolute inset-x-[18%] bottom-[7%] h-px bg-white/10" />
                             </div>
                         </div>
                     </div>
