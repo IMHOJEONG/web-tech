@@ -600,12 +600,24 @@ export function MainFeed({
                         <div className="absolute -left-8 bottom-0 size-40 rounded-full bg-secondary/10 blur-3xl" />
                         <div className="absolute -right-8 top-0 size-48 rounded-full bg-primary/10 blur-3xl" />
                         <div className="ds-code-shell relative p-4">
-                            <div className="relative aspect-[1/1.02] overflow-hidden border border-outline-variant bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_36%),linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))]">
-                                <div className="absolute inset-[12%] border border-outline-variant" />
-                                <div className="absolute inset-[20%] border border-outline-variant" />
-                                <div className="absolute inset-[28%] border border-outline-variant" />
-                                <div className="absolute inset-[36%] border border-primary/20 shadow-glow-primary" />
-                                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.03),transparent_40%,rgba(255,255,255,0.02))]" />
+                            <div className="relative aspect-[1/1.02] overflow-hidden border border-outline-variant bg-surface">
+                                <Image
+                                    src={
+                                        heroDoc.thumbnail ??
+                                        '/default/no-image.webp'
+                                    }
+                                    alt={heroDoc.title}
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 1024px) 100vw, 36vw"
+                                    priority
+                                />
+                                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.04),rgba(10,11,15,0.18)_55%,rgba(10,11,15,0.46))]" />
+                                <div className="absolute inset-0 border border-white/6" />
+                                <div className="absolute right-5 bottom-5 inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/35 px-3 py-1.5 text-[0.65rem] tracking-[0.18em] text-white uppercase backdrop-blur-sm">
+                                    <span className="inline-block size-1.5 rounded-full bg-primary" />
+                                    <span>{heroTopic.label}</span>
+                                </div>
                             </div>
                         </div>
                     </div>

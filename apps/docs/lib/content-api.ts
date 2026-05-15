@@ -222,7 +222,9 @@ export async function fetchRemoteDocsData() {
     }
 
     return payload.rawPosts
-        .map((post) => normalizeRemotePostMeta(post, payload.config.assetBaseUrl))
+        .map((post) =>
+            normalizeRemotePostMeta(post, payload.config.assetBaseUrl)
+        )
         .filter((post): post is Partial<Metadata> => post !== null)
 }
 
