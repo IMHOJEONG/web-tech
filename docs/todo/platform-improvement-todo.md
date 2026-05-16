@@ -102,8 +102,9 @@
 
 ## Design / Design System
 
-- [ ] `P1` Figma asset 의존 화면을 모두 `public/figma/*` 또는 정식 에셋으로 이관한다.
-  - `article-detail` 외 나머지 페이지도 점검
+- [x] `P1` Figma asset 의존 화면을 모두 `public/figma/*` 또는 정식 에셋으로 이관한다.
+  - `article-detail`, `ui-ux hub`에 남아 있던 Figma export 경로를 `public/editorial/*` 정식 자산 경로로 이관
+  - 공용 editorial asset 상수로 묶어 재사용
 - [-] `P1` `HEAPFORGE` 기준 화면과 현재 `docs` 구현의 정렬 체크리스트를 운영한다.
   - 공통 shell, `/feed`, `/about`, `article-detail`, `/category` 순으로 정렬
   - 기준 프레임: `141:676`, `141:325`, `141:470`, `141:189`, `141:2`

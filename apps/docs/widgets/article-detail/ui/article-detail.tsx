@@ -1,93 +1,7 @@
 import { getTranslations } from 'next-intl/server'
-import Link from 'next/link'
-
-const imgAuthorProfile = '/figma/article-detail/author-profile.png'
-const imgAbstractTechnologyHero =
-    '/figma/article-detail/hero-abstract-technology.png'
-const imgDesignDetail1 = '/figma/article-detail/design-detail-1.png'
-const imgDesignDetail2 = '/figma/article-detail/design-detail-2.png'
-const imgMobileInterfaceMockup =
-    '/figma/article-detail/mobile-interface-mockup.png'
-
-type ArticleDetailProps = {
-    channel: 'web' | 'mobile' | 'uiux'
-}
-
-function SidebarSection({
-    title,
-    children,
-}: {
-    title: string
-    children: React.ReactNode
-}) {
-    return (
-        <section className="space-y-4">
-            <p className="font-display text-[0.625rem] leading-3.75 tracking-[0.2em] text-outline uppercase">
-                {title}
-            </p>
-            {children}
-        </section>
-    )
-}
-
-function NewsletterCard({
-    title,
-    description,
-    placeholder,
-    buttonLabel,
-    note,
-    compact = false,
-}: {
-    title: string
-    description: string
-    placeholder: string
-    buttonLabel: string
-    note?: string
-    compact?: boolean
-}) {
-    return (
-        <div className="ds-code-shell relative p-6">
-            <div className="absolute -right-10 -top-10 size-24 rounded-full bg-primary/10 blur-2xl" />
-            <div className="relative space-y-5">
-                <div className="space-y-2">
-                    <h3 className="font-display text-base text-on-surface">
-                        {title}
-                    </h3>
-                    <p className="text-sm leading-5 text-on-surface-variant">
-                        {description}
-                    </p>
-                </div>
-
-                {compact ? (
-                    <div className="space-y-2">
-                        <input
-                            className="ds-input w-full px-3 py-3 text-sm tracking-wider text-on-surface uppercase"
-                            placeholder={placeholder}
-                        />
-                        <button className="ds-button-primary w-full px-4 py-3 text-sm tracking-[0.12em] uppercase">
-                            {buttonLabel}
-                        </button>
-                    </div>
-                ) : (
-                    <div className="space-y-4">
-                        <input
-                            className="ds-input w-full px-4 py-3 text-sm tracking-wider text-on-surface"
-                            placeholder={placeholder}
-                        />
-                        <button className="ds-button-primary w-full px-4 py-3 text-sm tracking-[0.12em] uppercase">
-                            {buttonLabel}
-                        </button>
-                        {note ? (
-                            <p className="text-center font-display text-[0.625rem] tracking-[0.16em] text-outline uppercase">
-                                {note}
-                            </p>
-                        ) : null}
-                    </div>
-                )}
-            </div>
-        </div>
-    )
-}
+import { ArticleDetailMain } from '~/widgets/article-detail/ui/article-detail-main'
+import { ArticleDetailSidebar } from '~/widgets/article-detail/ui/article-detail-sidebar'
+import type { ArticleDetailProps } from '~/widgets/article-detail/ui/article-detail.types'
 
 export async function ArticleDetail({ channel }: ArticleDetailProps) {
     const t = await getTranslations('articleDetail')
@@ -133,243 +47,59 @@ export async function ArticleDetail({ channel }: ArticleDetailProps) {
             </div>
 
             <div className="mx-auto grid w-full max-w-page gap-6 px-4 pb-16 pt-10 sm:px-6 sm:pt-12 md:px-8 lg:gap-8 lg:pb-20 lg:pt-16 lg:grid-cols-[minmax(0,1fr)_20rem]">
-                <article className="min-w-0 space-y-10 lg:space-y-12">
-                    <section className="space-y-6">
-                        <div className="flex flex-wrap items-center gap-2">
-                            <span className="ds-chip px-3 py-1 text-xs tracking-wider">
-                                {meta.badge}
-                            </span>
-                            <span className="text-on-surface-variant">•</span>
-                            <span className="font-display text-xs tracking-wider text-outline uppercase">
-                                {t('hero.readTime')}
-                            </span>
-                        </div>
+                <ArticleDetailMain
+                    badge={meta.badge}
+                    note={meta.note}
+                    heroReadTime={t('hero.readTime')}
+                    heroTitle={t('hero.title')}
+                    heroAuthorAlt={t('hero.authorAlt')}
+                    heroAuthorName={t('hero.authorName')}
+                    heroAuthorMeta={t('hero.authorMeta')}
+                    heroImageAlt={t('hero.heroImageAlt')}
+                    bodyIntro={t('body.intro')}
+                    bodyParadoxTitle={t('body.sections.paradox.title')}
+                    bodyParadoxDescription={t(
+                        'body.sections.paradox.description'
+                    )}
+                    codeFileLabel={t('code.fileLabel')}
+                    codeActionLabel={t('code.actionLabel')}
+                    bodyStreamParagraph={t('body.streamParagraph')}
+                    bodyVisualTitle={t('body.sections.visual.title')}
+                    bodyDesignAltOne={t('body.designAltOne')}
+                    bodyDesignAltTwo={t('body.designAltTwo')}
+                    bodyMobileTitle={t('body.sections.mobile.title')}
+                    bodyMobileMockupAlt={t('body.mobileMockupAlt')}
+                    bodyMobileParagraph={t('body.mobileParagraph')}
+                    mobileNewsletter={{
+                        title: t('newsletter.mobile.title'),
+                        description: t('newsletter.mobile.description'),
+                        placeholder: t('newsletter.mobile.placeholder'),
+                        buttonLabel: t('newsletter.mobile.button'),
+                        note: t('newsletter.mobile.note'),
+                    }}
+                    authorAlt={t('author.alt')}
+                    authorTitle={t('author.title')}
+                    authorDescription={t('author.description')}
+                    authorLinks={{
+                        twitter: t('author.links.twitter'),
+                        github: t('author.links.github'),
+                        linkedin: t('author.links.linkedin'),
+                    }}
+                />
 
-                        <div className="space-y-6">
-                            <h1 className="font-display max-w-[15ch] text-[clamp(2.4rem,5vw,4rem)] leading-[1.15] font-bold tracking-[-0.03em] text-on-surface">
-                                {t('hero.title')}
-                            </h1>
-
-                            <div className="flex items-center gap-4">
-                                <div className="size-12 overflow-hidden rounded-xl border border-border bg-surface-container">
-                                    <img
-                                        src={imgAuthorProfile}
-                                        alt={t('hero.authorAlt')}
-                                        className="h-full w-full object-cover"
-                                    />
-                                </div>
-                                <div>
-                                    <p className="font-display text-base text-on-surface">
-                                        {t('hero.authorName')}
-                                    </p>
-                                    <p className="font-display text-sm tracking-[0.08em] text-outline uppercase">
-                                        {t('hero.authorMeta')}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section className="overflow-hidden rounded-sm border border-border bg-surface-container-lowest">
-                        <div className="relative aspect-video">
-                            <img
-                                src={imgAbstractTechnologyHero}
-                                alt={t('hero.heroImageAlt')}
-                                className="h-full w-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-linear-to-t from-background/70 to-transparent" />
-                        </div>
-                    </section>
-
-                    <section className="space-y-5 text-body-lg text-on-surface-variant lg:space-y-6">
-                        <p>{t('body.intro')}</p>
-
-                        <div className="space-y-4 pt-4">
-                            <h2 className="font-display text-headline-lg text-on-surface">
-                                {t('body.sections.paradox.title')}
-                            </h2>
-                            <p>{t('body.sections.paradox.description')}</p>
-                        </div>
-                    </section>
-
-                    <section className="ds-code-shell">
-                        <div className="ds-code-shell__header">
-                            <span className="tracking-[0.14em]">
-                                {t('code.fileLabel')}
-                            </span>
-                            <span className="font-mono text-xs text-outline">
-                                {t('code.actionLabel')}
-                            </span>
-                        </div>
-                        <pre className="overflow-x-auto px-6 py-10 font-mono text-sm leading-normal text-on-surface">
-                            <code>{`async function initializeNode(id: string) {
-  // Initialize high-frequency stream
-  const stream = await connectToRegistry(id);
-
-  return stream.pipe(
-    filter(data => data.priority > 0.8),
-    map(transformData),
-    tap(uiRegistry.update)
-  );
-}
-
-// Precision observer hook
-const useReactiveState = (stream$) => {
-  const [state, setState] = useState([]);
-  // Implementation details...
-}`}</code>
-                        </pre>
-                    </section>
-
-                    <section className="space-y-5 text-body-lg text-on-surface-variant lg:space-y-6">
-                        <p>{t('body.streamParagraph')}</p>
-
-                        <div className="space-y-4 pt-4">
-                            <h2 className="font-display text-headline-lg text-on-surface">
-                                {t('body.sections.visual.title')}
-                            </h2>
-                        </div>
-
-                        <div className="grid gap-2 sm:grid-cols-2">
-                            <div className="overflow-hidden rounded-sm border border-border bg-surface-container">
-                                <img
-                                    src={imgDesignDetail1}
-                                    alt={t('body.designAltOne')}
-                                    className="h-full w-full object-cover"
-                                />
-                            </div>
-                            <div className="overflow-hidden rounded-sm border border-border bg-surface-container">
-                                <img
-                                    src={imgDesignDetail2}
-                                    alt={t('body.designAltTwo')}
-                                    className="h-full w-full object-cover"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="space-y-4 pt-4">
-                            <h2 className="font-display text-headline-lg text-on-surface">
-                                {t('body.sections.mobile.title')}
-                            </h2>
-                        </div>
-
-                        <div className="rounded-lg border border-border bg-surface-container-low p-6 sm:p-7 lg:p-8">
-                            <div className="mx-auto max-w-[16rem] overflow-hidden rounded-[3rem] border-8 border-surface-container-highest bg-surface-container-lowest shadow-deep">
-                                <div className="relative aspect-256/500">
-                                    <img
-                                        src={imgMobileInterfaceMockup}
-                                        alt={t('body.mobileMockupAlt')}
-                                        className="h-full w-full object-cover"
-                                    />
-                                    <div className="absolute left-1/2 top-0 h-6 w-24 -translate-x-1/2 rounded-b-2xl bg-zinc-900" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <p>{t('body.mobileParagraph')}</p>
-                    </section>
-
-                    <section className="lg:hidden">
-                        <NewsletterCard
-                            title={t('newsletter.mobile.title')}
-                            description={t('newsletter.mobile.description')}
-                            placeholder={t('newsletter.mobile.placeholder')}
-                            buttonLabel={t('newsletter.mobile.button')}
-                            note={t('newsletter.mobile.note')}
-                        />
-                    </section>
-
-                    <section className="border-t border-border pt-6 lg:pt-8">
-                        <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-                            <div className="size-12 shrink-0 overflow-hidden rounded-full border border-border bg-surface-container">
-                                <img
-                                    src={imgAuthorProfile}
-                                    alt={t('author.alt')}
-                                    className="h-full w-full object-cover"
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <p className="font-display text-sm text-on-surface">
-                                    {t('author.title')}
-                                </p>
-                                <p className="max-w-2xl text-sm leading-6 text-on-surface-variant">
-                                    {t('author.description')} {meta.note}
-                                </p>
-                                <div className="flex flex-wrap gap-4 font-display text-xs tracking-[0.08em] uppercase">
-                                    <Link
-                                        href="/about"
-                                        className="text-primary"
-                                    >
-                                        {t('author.links.twitter')}
-                                    </Link>
-                                    <Link
-                                        href="/about"
-                                        className="text-primary"
-                                    >
-                                        {t('author.links.github')}
-                                    </Link>
-                                    <Link
-                                        href="/about"
-                                        className="text-primary"
-                                    >
-                                        {t('author.links.linkedin')}
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </article>
-
-                <aside className="hidden space-y-8 lg:sticky lg:top-28 lg:block lg:self-start">
-                    <SidebarSection title={t('sidebar.tocTitle')}>
-                        <div className="space-y-3">
-                            {tocItems.map((item, index) => (
-                                <div
-                                    key={item}
-                                    className={
-                                        index === 0
-                                            ? 'font-display text-base text-primary'
-                                            : 'font-display text-base text-outline'
-                                    }
-                                >
-                                    {item}
-                                </div>
-                            ))}
-                        </div>
-                    </SidebarSection>
-
-                    <SidebarSection title={t('sidebar.joinTitle')}>
-                        <NewsletterCard
-                            compact
-                            title={t('newsletter.sidebar.title')}
-                            description={t('newsletter.sidebar.description')}
-                            placeholder={t('newsletter.sidebar.placeholder')}
-                            buttonLabel={t('newsletter.sidebar.button')}
-                        />
-                    </SidebarSection>
-
-                    <SidebarSection title={t('related.title')}>
-                        <div className="space-y-2">
-                            {relatedSignals.map((signal) => (
-                                <Link
-                                    key={signal.title}
-                                    href={signal.href}
-                                    className="ds-focus-ring block rounded-sm border border-transparent px-2 py-2 transition-colors hover:bg-surface-container-low"
-                                >
-                                    <div className="inline-flex rounded-sm bg-surface-container px-1.5 py-0.5 font-display text-[0.625rem] tracking-[0.08em] text-on-surface-variant uppercase">
-                                        {signal.category}
-                                    </div>
-                                    <h3 className="mt-2 font-display text-base leading-[1.4] text-on-surface">
-                                        {signal.title}
-                                    </h3>
-                                    <p className="mt-1 font-display text-[0.625rem] tracking-widest text-outline uppercase">
-                                        {signal.meta}
-                                    </p>
-                                </Link>
-                            ))}
-                        </div>
-                    </SidebarSection>
-                </aside>
+                <ArticleDetailSidebar
+                    tocTitle={t('sidebar.tocTitle')}
+                    tocItems={tocItems}
+                    joinTitle={t('sidebar.joinTitle')}
+                    sidebarNewsletter={{
+                        title: t('newsletter.sidebar.title'),
+                        description: t('newsletter.sidebar.description'),
+                        placeholder: t('newsletter.sidebar.placeholder'),
+                        buttonLabel: t('newsletter.sidebar.button'),
+                    }}
+                    relatedTitle={t('related.title')}
+                    relatedSignals={relatedSignals}
+                />
             </div>
         </main>
     )
