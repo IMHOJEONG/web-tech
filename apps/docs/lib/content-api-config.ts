@@ -34,11 +34,7 @@ function createContentApiConfig(
             process.env.BLOG_CONTENT_API_POSTS_PATH?.trim() || '/api/posts',
         markdownBaseUrl:
             normalizedMarkdownBaseUrl || normalizedBaseUrl || undefined,
-        assetBaseUrl:
-            normalizedAssetBaseUrl ||
-            normalizedMarkdownBaseUrl ||
-            normalizedBaseUrl ||
-            undefined,
+        assetBaseUrl: normalizedAssetBaseUrl || undefined,
     }
 }
 
