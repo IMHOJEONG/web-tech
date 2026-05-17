@@ -2,10 +2,11 @@
 
 ## 변경 내용
 
-- 원격 메타의 상대 썸네일 경로는 `BLOG_CONTENT_ASSET_BASE_URL*`로만 해석되도록 정리했다.
+- 원격 메타의 상대 썸네일 경로는 `NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC`
+  또는 `BLOG_CONTENT_ASSET_BASE_URL*`로만 해석되도록 정리했다.
 - 더 이상 `BLOG_CONTENT_MARKDOWN_BASE_URL*`나 `BLOG_CONTENT_API_BASE_URL*`로 썸네일
   경로를 fallback 하지 않는다.
-- `turbo.json`에도 asset base env 키를 전체 변형 기준으로 추가했다.
+- `turbo.json`에도 public asset base env 키를 `NEXT_PUBLIC_*` 이름으로 반영했다.
 
 ## 이유
 
@@ -18,5 +19,6 @@
 - 절대 `thumbnail` URL
   - 그대로 사용
 - 상대 `thumbnail` 경로
-  - `BLOG_CONTENT_ASSET_BASE_URL*`와 결합
+  - `NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC` 또는
+    `BLOG_CONTENT_ASSET_BASE_URL*`와 결합
   - 값이 없으면 frontend 상대 경로로 남고, remote host fallback은 하지 않음

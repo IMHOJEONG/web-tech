@@ -5,6 +5,7 @@
 - `next/image`가 원격 썸네일을 정상적으로 읽을 수 있도록 `next.config.mjs`에
   remote image allowlist를 추가했다.
 - 허용 대상은 다음 env를 기준으로 자동 수집한다.
+  - `NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC`
   - `BLOG_CONTENT_ASSET_BASE_URL*`
   - `BLOG_CONTENT_MARKDOWN_BASE_URL*`
   - `BLOG_CONTENT_API_BASE_URL*`

@@ -44,7 +44,7 @@ export function getContentApiConfig() {
             'public',
             process.env.BLOG_CONTENT_API_BASE_URL_PUBLIC,
             process.env.BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC,
-            process.env.BLOG_CONTENT_ASSET_BASE_URL_PUBLIC
+            process.env.NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC
         ) ??
         createContentApiConfig(
             'internal',
