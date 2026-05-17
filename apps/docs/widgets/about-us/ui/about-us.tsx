@@ -162,7 +162,7 @@ export async function AboutUs() {
                                     AV
                                 </div>
                                 <div className="space-y-1">
-                                    <h2 className="font-display text-[1.5rem] leading-[1.3] font-bold text-on-surface">
+                                    <h2 className="font-display text-2xl leading-[1.3] font-bold text-on-surface">
                                         {t('profile.name')}
                                     </h2>
                                     <p className="font-display text-base tracking-wider uppercase text-primary">

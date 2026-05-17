@@ -157,7 +157,7 @@ const useReactiveState = (stream$) => {
                 </div>
 
                 <div className="rounded-lg border border-border bg-surface-container-low p-6 sm:p-7 lg:p-8">
-                    <div className="mx-auto max-w-[16rem] overflow-hidden rounded-[3rem] border-8 border-surface-container-highest bg-surface-container-lowest shadow-deep">
+                    <div className="mx-auto max-w-64 overflow-hidden rounded-[3rem] border-8 border-surface-container-highest bg-surface-container-lowest shadow-deep">
                         <div className="relative aspect-256/500">
                             <img
                                 src={imgMobileInterfaceMockup}

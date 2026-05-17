@@ -23,7 +23,7 @@ export function UiUxHubNewsletterSection({
         <section className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
             <Link
                 href={tutorial.href}
-                className="ds-card group relative min-h-[26rem] overflow-hidden bg-surface-container-lowest"
+                className="ds-card group relative min-h-104 overflow-hidden bg-surface-container-lowest"
             >
                 <div className="absolute inset-0">
                     <Image
@@ -46,7 +46,7 @@ export function UiUxHubNewsletterSection({
                 </div>
             </Link>
 
-            <section className="ds-card flex min-w-0 flex-col justify-center bg-zinc-950 p-8 text-zinc-50 sm:min-h-[26rem] sm:p-10 lg:px-12">
+            <section className="ds-card flex min-w-0 flex-col justify-center bg-zinc-950 p-8 text-zinc-50 sm:min-h-104 sm:p-10 lg:px-12">
                 <div className="mb-6 h-1 w-16 bg-primary" />
                 <h2
                     className={[

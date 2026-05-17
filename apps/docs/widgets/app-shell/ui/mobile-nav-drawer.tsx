@@ -76,7 +76,7 @@ function DrawerLink({
             href={href}
             onClick={onNavigate}
             className={cn(
-                'flex w-full items-center gap-3 px-6 py-4 text-[0.875rem] tracking-[0.05em] transition-colors',
+                'flex w-full items-center gap-3 px-6 py-4 text-sm tracking-[0.05em] transition-colors',
                 isActive
                     ? 'border-r-2 border-primary bg-primary/10 text-primary'
                     : 'text-muted-foreground hover:bg-surface-container hover:text-on-surface'
@@ -128,7 +128,7 @@ export default function MobileNavDrawer() {
                     </svg>
                 </SheetTrigger>
                 <Link
-                    className="font-display flex items-center text-[1.25rem] font-bold leading-7 tracking-[-0.05em] text-primary"
+                    className="font-display flex items-center text-xl font-bold leading-7 tracking-[-0.05em] text-primary"
                     href="/"
                 >
                     <Brand />
@@ -195,7 +195,7 @@ export default function MobileNavDrawer() {
                             {statusChecks.map((label) => (
                                 <div
                                     key={label}
-                                    className="flex items-center justify-between text-[0.75rem] text-muted-foreground"
+                                    className="flex items-center justify-between text-xs text-muted-foreground"
                                 >
                                     <span className="font-display">
                                         {label}
@@ -215,7 +215,7 @@ export default function MobileNavDrawer() {
                 <div className="border-t border-header-border bg-surface-container-low px-6 pb-6 pt-6">
                     <div className="flex items-center gap-4">
                         <div className="relative">
-                            <div className="flex size-12 items-center justify-center rounded-[0.25rem] border border-primary/30 bg-surface-container text-sm font-semibold text-on-surface">
+                            <div className="flex size-12 items-center justify-center rounded-sm border border-primary/30 bg-surface-container text-sm font-semibold text-on-surface">
                                 HI
                             </div>
                             <div className="absolute -bottom-1 -right-1 size-3 rounded-full border-2 border-popover bg-primary" />
@@ -235,7 +235,7 @@ export default function MobileNavDrawer() {
                         <Link
                             href="/about"
                             onClick={() => setOpen(false)}
-                            className="flex items-center justify-center gap-2 rounded-[0.125rem] bg-surface-container px-4 py-2.5 text-[0.75rem] text-on-surface"
+                            className="flex items-center justify-center gap-2 rounded-xs bg-surface-container px-4 py-2.5 text-xs text-on-surface"
                         >
                             <Settings className="size-3.5" strokeWidth={1.8} />
                             <span className="font-display">
@@ -245,7 +245,7 @@ export default function MobileNavDrawer() {
                         <button
                             type="button"
                             onClick={() => setOpen(false)}
-                            className="flex items-center justify-center gap-2 rounded-[0.125rem] border border-primary/20 bg-primary/10 px-4 py-2.5 text-[0.75rem] text-primary"
+                            className="flex items-center justify-center gap-2 rounded-xs border border-primary/20 bg-primary/10 px-4 py-2.5 text-xs text-primary"
                         >
                             <LogOut className="size-3.5" strokeWidth={1.8} />
                             <span className="font-display">

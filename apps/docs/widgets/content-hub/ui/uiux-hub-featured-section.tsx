@@ -26,7 +26,7 @@ export function UiUxHubFeaturedSection({
         <section className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
             <Link
                 href={featured.href}
-                className="group ds-card relative min-h-[32rem] overflow-hidden bg-zinc-950 text-zinc-50"
+                className="group ds-card relative min-h-128 overflow-hidden bg-zinc-950 text-zinc-50"
             >
                 <div className="absolute inset-0">
                     <Image

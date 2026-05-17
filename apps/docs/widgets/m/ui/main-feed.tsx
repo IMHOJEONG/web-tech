@@ -256,7 +256,7 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
                     </p>
                 </div>
 
-                <div className="mt-8 flex items-center gap-4 text-[0.75rem] uppercase tracking-[0.08em] text-on-surface-variant">
+                <div className="mt-8 flex items-center gap-4 text-xs uppercase tracking-[0.08em] text-on-surface-variant">
                     <span>{minutes} MIN READ</span>
                     <span className="size-1 rounded-full bg-outline-variant" />
                     <span>BY {author.name}</span>
@@ -303,7 +303,7 @@ function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
             </div>
 
             <div className="mt-8 flex items-center justify-between">
-                <span className="text-[0.75rem] uppercase tracking-[0.08em] text-on-surface-variant">
+                <span className="text-xs uppercase tracking-[0.08em] text-on-surface-variant">
                     {minutes} MIN READ
                 </span>
                 <span className="ds-focus-ring rounded-full border border-outline-variant bg-surface-container-low p-2 text-on-surface-variant transition-colors group-hover:text-on-surface">
@@ -350,7 +350,7 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
                     {doc.summary}
                 </p>
 
-                <div className="flex items-center gap-3 pt-4 text-[0.75rem] uppercase tracking-[0.08em] text-on-surface-variant">
+                <div className="flex items-center gap-3 pt-4 text-xs uppercase tracking-[0.08em] text-on-surface-variant">
                     <span className="inline-flex size-8 items-center justify-center rounded-full border border-outline-variant bg-surface-container-low">
                         {author.name.charAt(0)}
                     </span>
@@ -696,7 +696,7 @@ export function MainFeed({
                                 summary={PLACEHOLDER_MOBILE.summary}
                                 topic={PLACEHOLDER_MOBILE.topic}
                                 footer={
-                                    <div className="text-[0.75rem] uppercase tracking-[0.08em] text-on-surface-variant">
+                                    <div className="text-xs uppercase tracking-[0.08em] text-on-surface-variant">
                                         {PLACEHOLDER_MOBILE.metric}
                                     </div>
                                 }
@@ -713,7 +713,7 @@ export function MainFeed({
                                 summary={PLACEHOLDER_UI.summary}
                                 topic={PLACEHOLDER_UI.topic}
                                 footer={
-                                    <div className="flex items-center gap-3 text-[0.75rem] uppercase tracking-[0.08em] text-on-surface-variant">
+                                    <div className="flex items-center gap-3 text-xs uppercase tracking-[0.08em] text-on-surface-variant">
                                         <span className="inline-flex size-8 items-center justify-center rounded-full border border-outline-variant bg-surface-container-low">
                                             +
                                         </span>
