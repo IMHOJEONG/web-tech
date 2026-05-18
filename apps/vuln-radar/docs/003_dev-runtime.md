@@ -42,15 +42,14 @@ pnpm check:vuln-radar:dev
 
 전환기에는 경로를 두 종류로 나눈다.
 
-- legacy Next route: `/api/*`
 - backend route: `/api/backend/*`
 
 이 규칙을 두면 기존 `app/api`를 당장 다 지우지 않아도 되고, 새 backend API는 별도 경로로 붙일 수 있다.
 지금은 legacy `app/api`가 제거된 상태라, 새 backend API는 `/api/backend/*` 경로를 기준으로 붙이면 된다.
 
-## 현재 기본값: Next rewrite proxy
+## 현재 기본값: Vite `server.proxy`
 
-현재 `apps/vuln-radar`는 Next를 쓰고 있으므로 가장 가벼운 선택은 `next.config.mjs`의 `rewrites()`다.
+현재 `apps/vuln-radar`는 Vite를 쓰므로 가장 가벼운 선택은 `vite.config.ts`의 `server.proxy`다.
 
 예시:
 
@@ -68,27 +67,8 @@ pnpm check:vuln-radar:dev
 
 이 방식의 한계:
 
-- Next 개발 서버 안에서만 의미가 있다.
+- Vite 개발 서버 안에서만 의미가 있다.
 - HTTPS, 고정 origin, 여러 서비스 게이트웨이 요구에는 약하다.
-
-## Vite 전환 후 기본값: `server.proxy`
-
-`apps/vuln-radar`가 Vite로 옮겨가면 같은 공개 경로를 그대로 유지한다.
-
-예시 방향:
-
-```ts
-server: {
-  proxy: {
-    "/api/backend": {
-      target: "http://localhost:4000",
-      rewrite: (path) => path.replace(/^\/api\/backend/, "/api"),
-    },
-  },
-}
-```
-
-즉, 지금은 Next rewrite를 쓰고, 나중에는 Vite proxy로 같은 역할을 넘기면 된다.
 
 ## `Caddyfile` vs proxy
 
@@ -128,8 +108,8 @@ server: {
 
 지금 단계에서는 이렇게 가는 걸 추천한다.
 
-1. 기본 개발은 `Next rewrites`
-2. 추후 Vite 전환 후 `server.proxy`
+1. 기본 개발은 `Vite dev server + server.proxy`
+2. 기본 proxy는 `server.proxy`
 3. `Caddyfile`은 HTTPS / gateway 요구가 생길 때만 사용
 
-즉, `proxy first, Caddy optional`이 현재 repo에 가장 잘 맞는다.
+즉, `Vite proxy first, Caddy optional`이 현재 repo에 가장 잘 맞는다.

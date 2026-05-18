@@ -212,13 +212,12 @@ entities/cve/
 - 백엔드만: `pnpm dev:vuln-radar-backend`
 - 둘 다: `pnpm dev:vuln-radar:full`
 
-전환기 공개 경로 규칙은 이렇게 유지한다.
+공개 경로 규칙은 이렇게 유지한다.
 
-- legacy Next route: `/api/*`
 - backend route: `/api/backend/*`
 
-현재 Next에서는 `rewrites()`가 `/api/backend/*`를 `http://localhost:4000/api/*`로 프록시한다.
-Vite 전환 후에도 같은 공개 경로를 유지하고 `server.proxy`만 교체하는 방향을 권장한다.
+현재 프론트는 `vite.config.ts`의 `server.proxy`가 `/api/backend/*`를 `http://localhost:4000/api/*`로 프록시한다.
+즉, 브라우저 공개 경로는 유지하고 실제 목적지 연결만 Vite 개발 서버가 맡는다.
 
 ## 실시간 데이터 원칙
 

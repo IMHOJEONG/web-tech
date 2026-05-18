@@ -4,10 +4,17 @@
 
 ## 1. 앱 부트스트랩 다시 세우기
 
-- [ ] `Next -> Vite` 전환 범위를 최종 확정한다.
-- [ ] `src/app/main.tsx`, `src/app/App.tsx` 기준의 최소 앱 엔트리를 만든다.
-- [ ] `TanStack Router`와 `TanStack Query`를 초기 provider에 연결한다.
-- [ ] env 파싱 위치와 런타임 config 방식을 정한다.
+- [x] `Next -> Vite` 전환 범위를 최종 확정한다.
+- [x] `src/app/main.tsx`, `src/app/App.tsx` 기준의 최소 앱 엔트리를 만든다.
+- [x] `TanStack Router`와 `TanStack Query`를 초기 provider에 연결한다.
+- [x] env 파싱 위치와 런타임 config 방식을 정한다.
+
+결정 메모:
+
+- `Next` App Router, `next.config.mjs`, `next-env.d.ts`, `next-auth` 타입 파일은 부트스트랩 전환 범위에서 제거한다.
+- 브라우저 공개 API path는 계속 `/api/backend/*`로 유지한다.
+- 실제 백엔드 origin 연결은 `vite.config.ts`의 `server.proxy`와 `VULN_RADAR_BACKEND_ORIGIN`이 맡는다.
+- 클라이언트에서 읽는 런타임 값은 `src/shared/config/env.ts`에서 `VITE_*`만 파싱하고 `runtime.ts`로 노출한다.
 
 공부 포인트:
 

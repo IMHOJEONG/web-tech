@@ -97,7 +97,7 @@
 - 프론트 공개 경로: `/api/backend/*`
 - 실제 백엔드 origin: `VULN_RADAR_BACKEND_ORIGIN`
 
-즉, 브라우저는 `/api/backend/...`만 알고, 실제 목적지 연결은 Next rewrite 또는 이후 Vite proxy가 맡는다.
+즉, 브라우저는 `/api/backend/...`만 알고, 실제 목적지 연결은 현재 Vite proxy가 맡는다.
 
 ## v0.1 우선순위
 

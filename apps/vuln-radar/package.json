@@ -2,17 +2,20 @@
   "name": "vuln-radar",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "predev": "pnpm --filter @web-tech/ui build",
-    "dev": "next dev --turbo",
+    "dev": "vite dev --port 3000",
     "prebuild": "pnpm --filter @web-tech/ui build",
-    "build": "next build",
-    "start": "next start"
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 3000",
+    "start": "vite preview --host 0.0.0.0 --port 3000"
   },
   "dependencies": {
+    "@tanstack/react-query": "catalog:fe-box",
+    "@tanstack/react-router": "catalog:fe-box",
     "@radix-ui/react-slot": "catalog:web",
     "@supabase/supabase-js": "catalog:web",
-    "@tailwindcss/postcss": "catalog:",
     "@web-tech/ui": "workspace:*",
     "@xyflow/react": "catalog:web",
     "class-variance-authority": "catalog:web",
@@ -22,9 +25,7 @@
     "effect": "catalog:web",
     "ky": "catalog:",
     "lucide-react": "catalog:",
-    "next": "catalog:web",
     "overlay-kit": "catalog:web",
-    "postcss": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "recharts": "catalog:web",
@@ -35,20 +36,14 @@
     "zod": "catalog:web"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "catalog:",
     "@eslint/js": "catalog:",
-    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@typescript/native-preview": "7.0.0-dev.20260430.1",
+    "@vitejs/plugin-react": "catalog:fe-box",
     "@web-tech/eslint-config": "workspace:*",
-    "@web-tech/tailwind-config": "workspace:*",
     "@web-tech/typescript-config": "workspace:*",
-    "autoprefixer": "^10.4.24",
-    "eslint-config-next": "15.5.2",
-    "lightningcss": "^1.31.1",
-    "tw-animate-css": "catalog:",
+    "vite": "catalog:fe-box",
     "type-fest": "catalog:",
     "typescript": "catalog:"
   }

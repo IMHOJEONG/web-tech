@@ -1,4 +1,4 @@
-import nextJsConfig from "@web-tech/eslint-config/next-js";
+import reactInternalConfig from "@web-tech/eslint-config/react-internal";
 
 /** @type {import("eslint").Linter.Config} */
-export default nextJsConfig;
+export default reactInternalConfig;

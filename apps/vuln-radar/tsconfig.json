@@ -1,24 +1,19 @@
 {
-  "extends": "@web-tech/typescript-config/nextjs",
+  "extends": "@web-tech/typescript-config/react-library",
   "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     },
     "strict": true
   },
   "include": [
-    "next-env.d.ts",
-    "next.config.mjs",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
+    "src",
+    "vite.config.ts",
     "eslint.config.mjs",
-    "postcss.config.mjs"
+    "index.html"
   ],
   "exclude": ["node_modules"]
 }

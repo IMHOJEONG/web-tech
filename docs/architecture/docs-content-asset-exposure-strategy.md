@@ -297,6 +297,16 @@ https://public-content.example.com/feed/pna/permissions.png
 
 이다.
 
+특히 썸네일은 list API 단계에서 바로 absolute URL로 정규화하는 편이 좋다.
+
+- frontmatter
+  - `thumbnail: "feed/pna/thumbnail.webp"`
+- backend list API 응답
+  - `thumbnail: "https://public-content.example.com/feed/pna/thumbnail.webp"`
+
+이렇게 하면 frontend는 상대 썸네일 경로를 다시 조합하지 않고, backend가 이미
+정규화한 값을 그대로 사용할 수 있다.
+
 ## Recommended Configuration
 
 현재 레포 기준 가장 추천하는 설정안은 아래다.

@@ -260,9 +260,8 @@ topicLabel: "ACCESSIBILITY"
 ```
 
 `thumbnail`은 절대 URL이어도 되고, `ui-ux/blocked-aria-hidden/hero.webp`처럼
-`content source` 기준 상대 경로여도 된다. 현재 `docs` 앱은 원격 메타의 상대
-썸네일 경로를 `NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC` 또는
-environment별 asset base 기준으로 절대 URL로 해석한다.
+`content source` 기준 상대 경로여도 된다. 다만 운영 안정성을 위해서는 backend가
+목록 응답에서 이미 절대 URL로 정규화해 내려주는 편이 더 좋다.
 
 ## `requirements.txt`
 
@@ -425,6 +424,25 @@ def infer_topic_label(markdown_path: str) -> str:
         return "MOBILE"
     return "ENGINEERING"
 
+def normalize_thumbnail_url(thumbnail: str | None) -> str | None:
+    if not thumbnail:
+        return None
+
+    value = thumbnail.strip()
+
+    if not value:
+        return None
+
+    if value.startswith(("http://", "https://")):
+        return value
+
+    asset_base_url = os.getenv("ASSET_BASE_URL", "").strip()
+
+    if not asset_base_url:
+        return value
+
+    return f"{asset_base_url.rstrip('/')}/{value.lstrip('/')}"
+
 def build_post_meta(file_path: Path):
     relative = file_path.relative_to(CONTENT_DIR).with_suffix("")
     markdown_path = relative.as_posix()
@@ -443,7 +461,7 @@ def build_post_meta(file_path: Path):
         "summary": summary,
         "date": frontmatter.get("date", ""),
         "markdownPath": markdown_path,
-        "thumbnail": frontmatter.get("thumbnail"),
+        "thumbnail": normalize_thumbnail_url(frontmatter.get("thumbnail")),
         "authorName": frontmatter.get("authorName") or frontmatter.get("author"),
         "authorRole": frontmatter.get("authorRole") or frontmatter.get("role"),
         "readMinutes": frontmatter.get("readMinutes") or frontmatter.get("readTime"),
