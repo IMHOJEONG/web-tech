@@ -1,11 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { AppConfigService } from '../../config/app-config.service';
+import { HealthStatusResponse } from './health.types';
 
 @Injectable()
 export class HealthService {
-  getStatus() {
+  constructor(private readonly appConfigService: AppConfigService) {}
+
+  getStatus(): HealthStatusResponse {
     return {
       status: 'ok',
-      service: 'vuln-radar-backend',
+      service: this.appConfigService.serviceName,
+      env: this.appConfigService.appEnv,
+      frontendOrigin: this.appConfigService.frontendOrigin,
     };
   }
 }

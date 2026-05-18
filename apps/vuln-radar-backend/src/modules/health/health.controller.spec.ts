@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { AppConfigService } from '../../config/app-config.service';
 import { HealthController } from './health.controller';
 import { HealthService } from './health.service';
 
@@ -8,7 +9,17 @@ describe('HealthController', () => {
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [HealthController],
-      providers: [HealthService],
+      providers: [
+        HealthService,
+        {
+          provide: AppConfigService,
+          useValue: {
+            appEnv: 'test',
+            frontendOrigin: 'http://localhost:3000',
+            serviceName: 'vuln-radar-backend',
+          },
+        },
+      ],
     }).compile();
 
     healthController = app.get<HealthController>(HealthController);
@@ -18,6 +29,8 @@ describe('HealthController', () => {
     expect(healthController.getStatus()).toEqual({
       status: 'ok',
       service: 'vuln-radar-backend',
+      env: 'test',
+      frontendOrigin: 'http://localhost:3000',
     });
   });
 });

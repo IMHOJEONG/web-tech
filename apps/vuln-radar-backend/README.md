@@ -162,6 +162,7 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 - `/api/feed`
 - `/api/kev`
 - `/api/alerts`
+- `/api/watchlist`
 
 ## API 원칙
 
@@ -183,7 +184,9 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 현재 코드 기준 첫 정리는 다음 상태다.
 
 - generic `AppController/AppService` 제거
-- `src/modules/health`로 첫 모듈 분리
-- `/api/health` 헬스체크 엔드포인트 제공
+- `src/config`에서 앱 env와 포트, frontend origin 정리
+- `src/bootstrap/app-bootstrap.ts`로 global prefix와 CORS 적용
+- `src/modules/health`로 상태 확인 엔드포인트 제공
+- `src/modules/feeds`에서 `/api/overview`, `/api/feed`, `/api/watchlist`, `/api/alerts` mock read-model 제공
 
 이 다음 단계로는 `ingest`, `vulnerabilities`, `scoring` 순서로 확장하는 걸 추천한다.

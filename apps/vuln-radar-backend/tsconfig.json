@@ -4,8 +4,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "outDir": "./dist",
-    "rootDir": "./src",
-    "types": ["node"]
+    "rootDir": ".",
+    "types": ["node", "jest"]
   },
   "include": ["src/**/*.ts", "test/**/*.ts"],
   "exclude": ["dist", "build", "node_modules"]

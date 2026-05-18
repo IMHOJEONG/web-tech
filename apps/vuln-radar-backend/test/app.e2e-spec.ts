@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
+import request from 'supertest';
 import { App } from 'supertest/types';
 import { AppModule } from './../src/app.module';
+import { applyAppBootstrap } from './../src/bootstrap/app-bootstrap';
 
 describe('HealthController (e2e)', () => {
   let app: INestApplication<App>;
@@ -13,7 +14,7 @@ describe('HealthController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.setGlobalPrefix('api');
+    applyAppBootstrap(app);
     await app.init();
   });
 
@@ -21,6 +22,19 @@ describe('HealthController (e2e)', () => {
     return request(app.getHttpServer()).get('/api/health').expect(200).expect({
       status: 'ok',
       service: 'vuln-radar-backend',
+      env: 'development',
+      frontendOrigin: 'http://localhost:3000',
+    });
+  });
+
+  it('/api/overview (GET)', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/api/overview')
+      .expect(200);
+
+    expect(response.body.cards.length).toBeGreaterThan(0);
+    expect(response.body.cards[0]).toMatchObject({
+      id: 'p0-open',
     });
   });
 });

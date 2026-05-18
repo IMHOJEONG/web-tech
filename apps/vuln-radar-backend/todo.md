@@ -4,9 +4,16 @@
 
 ## 1. 런타임 기초 다지기
 
-- [ ] `main.ts`의 bootstrap 흐름을 이해한다.
-- [ ] global prefix, CORS, env loading 전략을 정리한다.
-- [ ] health check가 왜 제일 먼저 필요한지 정리한다.
+- [x] `main.ts`의 bootstrap 흐름을 이해한다.
+- [x] global prefix, CORS, env loading 전략을 정리한다.
+- [x] health check가 왜 제일 먼저 필요한지 정리한다.
+
+결정 메모:
+
+- bootstrap 공통 로직은 `src/bootstrap/app-bootstrap.ts`로 분리한다.
+- backend 공개 prefix는 계속 `/api`로 유지한다.
+- CORS 허용 origin은 `CORS_ORIGIN`, `FRONTEND_ORIGIN`으로 제어한다.
+- health 응답은 `status`뿐 아니라 `service`, `env`, `frontendOrigin`을 포함한다.
 
 공부 포인트:
 
@@ -134,11 +141,11 @@
 
 ## 11. feeds API 만들기
 
-- [ ] `/api/overview`
-- [ ] `/api/feed`
+- [x] `/api/overview`
+- [x] `/api/feed`
 - [ ] `/api/kev`
-- [ ] `/api/alerts`
-- [ ] `/api/watchlist`
+- [x] `/api/alerts`
+- [x] `/api/watchlist`
 
 공부 포인트:
 
