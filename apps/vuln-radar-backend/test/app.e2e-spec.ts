@@ -24,6 +24,7 @@ describe('HealthController (e2e)', () => {
       service: 'vuln-radar-backend',
       env: 'development',
       frontendOrigin: 'http://localhost:3000',
+      storage: 'mock',
     });
   });
 

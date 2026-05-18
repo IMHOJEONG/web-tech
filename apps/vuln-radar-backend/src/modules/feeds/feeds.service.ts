@@ -1,26 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import {
-  getAlertsResponse,
-  getFeedResponse,
-  getOverviewResponse,
-  getWatchlistResponse,
-} from '../../shared/data/mock-radar-data';
+import { FeedsRepository } from './feeds.repository';
 
 @Injectable()
 export class FeedsService {
+  constructor(private readonly feedsRepository: FeedsRepository) {}
+
   getOverview() {
-    return getOverviewResponse();
+    return this.feedsRepository.getOverview();
   }
 
   getFeed() {
-    return getFeedResponse();
+    return this.feedsRepository.getFeed();
   }
 
   getWatchlist() {
-    return getWatchlistResponse();
+    return this.feedsRepository.getWatchlist();
   }
 
   getAlerts() {
-    return getAlertsResponse();
+    return this.feedsRepository.getAlerts();
   }
 }

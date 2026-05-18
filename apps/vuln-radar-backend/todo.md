@@ -37,8 +37,8 @@
 
 ## 3. Prisma와 PostgreSQL 기본선 잡기
 
-- [ ] Prisma client 생성 흐름 정리
-- [ ] database URL 관리
+- [x] Prisma client 생성 흐름 정리
+- [x] database URL 관리
 - [ ] migration 전략 정리
 - [ ] local/dev/prod DB 분리 기준 정리
 
@@ -50,10 +50,10 @@
 
 ## 4. 첫 스키마 설계: vulnerability
 
-- [ ] `vulnerabilities` 테이블
-- [ ] raw payload 저장 방식
-- [ ] published / modified time 필드
-- [ ] severity / score 필드
+- [x] `vulnerabilities` 테이블
+- [x] raw payload 저장 방식
+- [x] published / modified time 필드
+- [x] severity / score 필드
 
 공부 포인트:
 
@@ -62,9 +62,9 @@
 
 ## 5. advisory / enrichment 스키마 설계
 
-- [ ] `advisories`
+- [x] `advisories`
 - [ ] `kev_entries`
-- [ ] `epss_scores`
+- [x] `epss_scores`
 - [ ] `package_advisories`
 
 공부 포인트:
@@ -74,10 +74,10 @@
 
 ## 6. watchlist 스키마 설계
 
-- [ ] vendor
-- [ ] product
-- [ ] ecosystem
-- [ ] keyword
+- [x] vendor
+- [x] product
+- [x] ecosystem
+- [x] keyword
 - [ ] user preference 확장 가능성 검토
 
 공부 포인트:

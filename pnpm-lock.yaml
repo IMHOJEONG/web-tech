@@ -24,6 +24,9 @@ catalogs:
     '@nestjs/testing':
       specifier: ^11.1.13
       version: 11.1.19
+    '@prisma/client':
+      specifier: ^7.8.0
+      version: 7.8.0
     '@types/express':
       specifier: ^5.0.6
       version: 5.0.6
@@ -949,6 +952,9 @@ importers:
       '@nestjs/platform-express':
         specifier: catalog:backend
         version: 11.1.19(@nestjs/common@11.1.19(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.19)
+      '@prisma/client':
+        specifier: catalog:backend
+        version: 7.8.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@6.0.3))(typescript@6.0.3)
       reflect-metadata:
         specifier: catalog:backend
         version: 0.2.2

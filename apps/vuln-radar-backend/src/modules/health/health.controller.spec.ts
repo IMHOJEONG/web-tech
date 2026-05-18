@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppConfigService } from '../../config/app-config.service';
+import { PrismaService } from '../../infra/prisma/prisma.service';
 import { HealthController } from './health.controller';
 import { HealthService } from './health.service';
 
@@ -19,6 +20,12 @@ describe('HealthController', () => {
             serviceName: 'vuln-radar-backend',
           },
         },
+        {
+          provide: PrismaService,
+          useValue: {
+            isReady: false,
+          },
+        },
       ],
     }).compile();
 
@@ -31,6 +38,7 @@ describe('HealthController', () => {
       service: 'vuln-radar-backend',
       env: 'test',
       frontendOrigin: 'http://localhost:3000',
+      storage: 'mock',
     });
   });
 });

@@ -29,10 +29,10 @@ function readNumberEnv(name: string, fallback: number) {
 
 export function getAppConfig(): AppConfig {
   return {
-    appEnv: readStringEnv("APP_ENV", "development"),
-    appPort: readNumberEnv("PORT", 4000),
-    corsOrigin: readStringEnv("CORS_ORIGIN", "http://localhost:3000"),
-    frontendOrigin: readStringEnv("FRONTEND_ORIGIN", "http://localhost:3000"),
-    serviceName: "vuln-radar-backend",
+    appEnv: readStringEnv('APP_ENV', 'development'),
+    appPort: readNumberEnv('PORT', 4000),
+    corsOrigin: readStringEnv('CORS_ORIGIN', 'http://localhost:3000'),
+    frontendOrigin: readStringEnv('FRONTEND_ORIGIN', 'http://localhost:3000'),
+    serviceName: 'vuln-radar-backend',
   };
 }

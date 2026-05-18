@@ -14,6 +14,7 @@
 - `zod`
 - `REST + SSE`
 - `Jest`
+- `Prisma 7 config`
 
 ## 기본 포트
 
@@ -187,6 +188,8 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 - `src/config`에서 앱 env와 포트, frontend origin 정리
 - `src/bootstrap/app-bootstrap.ts`로 global prefix와 CORS 적용
 - `src/modules/health`로 상태 확인 엔드포인트 제공
-- `src/modules/feeds`에서 `/api/overview`, `/api/feed`, `/api/watchlist`, `/api/alerts` mock read-model 제공
+- `prisma/schema.prisma`에서 vulnerability, advisory, epss, watchlist, alert 기본 스키마 정의
+- `prisma.config.ts`로 Prisma 7 datasource 설정 분리
+- `src/modules/feeds`에서 `/api/overview`, `/api/feed`, `/api/watchlist`, `/api/alerts` DB 우선 fallback read-model 제공
 
 이 다음 단계로는 `ingest`, `vulnerabilities`, `scoring` 순서로 확장하는 걸 추천한다.

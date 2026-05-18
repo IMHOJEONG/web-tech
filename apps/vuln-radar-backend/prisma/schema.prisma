@@ -11,5 +11,127 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+}
+
+enum RadarPriority {
+  P0
+  P1
+  P2
+  P3
+}
+
+enum AlertChannel {
+  slack
+  discord
+  telegram
+}
+
+enum AlertStatus {
+  pending
+  sent
+  failed
+}
+
+enum WatchlistType {
+  vendor
+  product
+  ecosystem
+  keyword
+}
+
+model Vulnerability {
+  id              String        @id @default(cuid())
+  cveId           String        @unique
+  title           String
+  description     String
+  severity        String?
+  cvssScore       Float?
+  epssScore       Float?
+  epssPercentile  Float?
+  isKev           Boolean       @default(false)
+  riskScore       Int           @default(0)
+  priority        RadarPriority @default(P3)
+  publishedAt     DateTime
+  lastModifiedAt  DateTime
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  rawSourceJson   Json?
+  advisories      Advisory[]
+  epssHistory     EpssScore[]
+  watchMatches    WatchMatch[]
+  alerts          Alert[]
+
+  @@index([priority, lastModifiedAt])
+  @@index([isKev, priority])
+}
+
+model Advisory {
+  id                  String         @id @default(cuid())
+  vulnerabilityCveId  String
+  source              String
+  externalId          String?
+  title               String?
+  summary             String?
+  sourceUrl           String?
+  publishedAt         DateTime?
+  lastModifiedAt      DateTime?
+  rawSourceJson       Json?
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+  vulnerability       Vulnerability  @relation(fields: [vulnerabilityCveId], references: [cveId], onDelete: Cascade)
+
+  @@index([source])
+  @@index([vulnerabilityCveId, source])
+}
+
+model EpssScore {
+  id                  String         @id @default(cuid())
+  vulnerabilityCveId  String
+  score               Float
+  percentile          Float
+  observedAt          DateTime
+  createdAt           DateTime       @default(now())
+  vulnerability       Vulnerability  @relation(fields: [vulnerabilityCveId], references: [cveId], onDelete: Cascade)
+
+  @@unique([vulnerabilityCveId, observedAt])
+  @@index([observedAt])
+}
+
+model WatchlistEntry {
+  id          String         @id @default(cuid())
+  type        WatchlistType
+  value       String
+  enabled     Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  matches     WatchMatch[]
+
+  @@unique([type, value])
+}
+
+model WatchMatch {
+  id                  String         @id @default(cuid())
+  vulnerabilityCveId  String
+  watchlistEntryId    String
+  matchedValue        String
+  createdAt           DateTime       @default(now())
+  vulnerability       Vulnerability  @relation(fields: [vulnerabilityCveId], references: [cveId], onDelete: Cascade)
+  watchlistEntry      WatchlistEntry @relation(fields: [watchlistEntryId], references: [id], onDelete: Cascade)
+
+  @@unique([vulnerabilityCveId, watchlistEntryId])
+  @@index([watchlistEntryId])
+}
+
+model Alert {
+  id                  String         @id @default(cuid())
+  vulnerabilityCveId  String
+  title               String
+  priority            RadarPriority
+  channel             AlertChannel
+  status              AlertStatus
+  sentAt              DateTime?
+  createdAt           DateTime       @default(now())
+  vulnerability       Vulnerability  @relation(fields: [vulnerabilityCveId], references: [cveId], onDelete: Cascade)
+
+  @@index([status, priority, createdAt])
 }
