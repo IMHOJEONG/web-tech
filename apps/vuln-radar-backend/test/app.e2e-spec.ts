@@ -38,4 +38,15 @@ describe('HealthController (e2e)', () => {
       id: 'p0-open',
     });
   });
+
+  it('/api/kev (GET)', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/api/kev')
+      .expect(200);
+
+    expect(response.body.items.length).toBeGreaterThan(0);
+    expect(response.body.items[0]).toMatchObject({
+      cveId: 'CVE-2026-10001',
+    });
+  });
 });

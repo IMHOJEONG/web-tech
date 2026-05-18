@@ -24,6 +24,9 @@ catalogs:
     '@nestjs/testing':
       specifier: ^11.1.13
       version: 11.1.19
+    '@prisma/adapter-pg':
+      specifier: ^7.8.0
+      version: 7.8.0
     '@prisma/client':
       specifier: ^7.8.0
       version: 7.8.0
@@ -33,6 +36,9 @@ catalogs:
     '@types/jest':
       specifier: ^30.0.0
       version: 30.0.0
+    '@types/pg':
+      specifier: ^8.15.5
+      version: 8.20.0
     '@types/supertest':
       specifier: ^6.0.3
       version: 6.0.3
@@ -48,6 +54,9 @@ catalogs:
     jest:
       specifier: ^30.2.0
       version: 30.3.0
+    pg:
+      specifier: ^8.16.3
+      version: 8.20.0
     prisma:
       specifier: ^7.6.0
       version: 7.8.0
@@ -952,9 +961,15 @@ importers:
       '@nestjs/platform-express':
         specifier: catalog:backend
         version: 11.1.19(@nestjs/common@11.1.19(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.19)
+      '@prisma/adapter-pg':
+        specifier: catalog:backend
+        version: 7.8.0
       '@prisma/client':
         specifier: catalog:backend
         version: 7.8.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@6.0.3))(typescript@6.0.3)
+      pg:
+        specifier: catalog:backend
+        version: 8.20.0
       reflect-metadata:
         specifier: catalog:backend
         version: 0.2.2
@@ -986,6 +1001,9 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 25.6.0
+      '@types/pg':
+        specifier: catalog:backend
+        version: 8.20.0
       '@types/supertest':
         specifier: catalog:backend
         version: 6.0.3
@@ -13729,7 +13747,7 @@ snapshots:
 
   '@types/pg-pool@2.0.7':
     dependencies:
-      '@types/pg': 8.15.6
+      '@types/pg': 8.20.0
 
   '@types/pg@8.15.6':
     dependencies:

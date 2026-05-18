@@ -12,6 +12,7 @@
     "db:generate": "prisma generate",
     "db:migrate:dev": "prisma migrate dev",
     "db:push": "prisma db push",
+    "db:seed": "ts-node --project tsconfig.json prisma/seed.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -25,10 +26,12 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "catalog:backend",
     "@prisma/client": "catalog:backend",
     "@nestjs/common": "catalog:backend",
     "@nestjs/core": "catalog:backend",
     "@nestjs/platform-express": "catalog:backend",
+    "pg": "catalog:backend",
     "reflect-metadata": "catalog:backend",
     "rxjs": "catalog:backend"
   },
@@ -41,6 +44,7 @@
     "@types/express": "catalog:backend",
     "@types/jest": "catalog:backend",
     "@types/node": "catalog:",
+    "@types/pg": "catalog:backend",
     "@types/supertest": "catalog:backend",
     "@web-tech/eslint-config": "workspace:*",
     "@web-tech/tailwind-config": "workspace:*",

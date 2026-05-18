@@ -3,12 +3,14 @@ import { PrismaService } from '../../infra/prisma/prisma.service';
 import {
   getAlertsResponse,
   getFeedResponse,
+  getKevResponse,
   getOverviewResponse,
   getWatchlistResponse,
 } from '../../shared/data/mock-radar-data';
 import {
   AlertsResponse,
   FeedResponse,
+  KevResponse,
   OverviewResponse,
   WatchlistResponse,
 } from '../../shared/types/radar';
@@ -32,6 +34,17 @@ type DbWatchlistEntry = {
   type: 'vendor' | 'product' | 'ecosystem' | 'keyword';
   value: string;
   matches: Array<{ id: string }>;
+};
+
+type DbKevAdvisory = {
+  vulnerabilityCveId: string;
+  sourceUrl: string | null;
+  publishedAt: Date | null;
+  vulnerability: {
+    cveId: string;
+    title: string;
+    priority: 'P0' | 'P1' | 'P2' | 'P3';
+  };
 };
 
 type DbAlert = {
@@ -125,7 +138,9 @@ export class FeedsRepository {
         isKev: vulnerability.isKev,
         publishedAt: vulnerability.publishedAt.toISOString(),
         updatedAt: vulnerability.lastModifiedAt.toISOString(),
-        matchedWatchlist: vulnerability.watchMatches.map((match) => match.matchedValue),
+        matchedWatchlist: vulnerability.watchMatches.map(
+          (match) => match.matchedValue,
+        ),
       })),
     };
   }
@@ -164,6 +179,46 @@ export class FeedsRepository {
     };
   }
 
+  async getKev(): Promise<KevResponse> {
+    const client = await this.prismaService.getClient();
+
+    if (!client) {
+      return getKevResponse();
+    }
+
+    const advisories = (await client.advisory.findMany({
+      where: {
+        source: 'cisa-kev',
+      },
+      include: {
+        vulnerability: {
+          select: {
+            cveId: true,
+            title: true,
+            priority: true,
+          },
+        },
+      },
+      orderBy: [{ publishedAt: 'desc' }],
+      take: 25,
+    })) as DbKevAdvisory[];
+
+    if (advisories.length === 0) {
+      return getKevResponse();
+    }
+
+    return {
+      generatedAt: new Date().toISOString(),
+      items: advisories.map((advisory) => ({
+        cveId: advisory.vulnerability.cveId,
+        title: advisory.vulnerability.title,
+        priority: advisory.vulnerability.priority,
+        sourceUrl: advisory.sourceUrl,
+        addedAt: (advisory.publishedAt ?? new Date()).toISOString(),
+      })),
+    };
+  }
+
   async getAlerts(): Promise<AlertsResponse> {
     const client = await this.prismaService.getClient();
 
@@ -194,7 +249,9 @@ export class FeedsRepository {
   }
 }
 
-function normalizeSeverity(severity: string | null): 'critical' | 'high' | 'medium' | 'low' {
+function normalizeSeverity(
+  severity: string | null,
+): 'critical' | 'high' | 'medium' | 'low' {
   const normalizedSeverity = severity?.toLowerCase();
 
   if (

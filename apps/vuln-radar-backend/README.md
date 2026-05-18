@@ -190,6 +190,27 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 - `src/modules/health`로 상태 확인 엔드포인트 제공
 - `prisma/schema.prisma`에서 vulnerability, advisory, epss, watchlist, alert 기본 스키마 정의
 - `prisma.config.ts`로 Prisma 7 datasource 설정 분리
+- `prisma/seed.ts`에서 demo DB 데이터 입력 경로 제공
 - `src/modules/feeds`에서 `/api/overview`, `/api/feed`, `/api/watchlist`, `/api/alerts` DB 우선 fallback read-model 제공
+- `src/modules/ingest`에서 NVD, KEV, EPSS pull sync를 수동 실행할 수 있음
 
 이 다음 단계로는 `ingest`, `vulnerabilities`, `scoring` 순서로 확장하는 걸 추천한다.
+
+## 온보딩 문서
+
+- `docs/001_nest_structure_and_request_flow.md`
+  - 왜 현재 구조를 이렇게 나눴는지
+  - `/api/feed` 같은 요청이 Nest 내부에서 어떻게 흐르는지
+- `docs/002_live_ingest_and_polling.md`
+  - 어떤 upstream source를 실제로 읽는지
+  - 왜 현재 구조를 polling / near-real-time으로 보는지
+  - live sync와 freshness를 어떻게 확인하는지
+
+## 실시간 데이터에 대한 현재 기준
+
+- 현재 upstream source는 `push`가 아니라 `pull` 기반이다.
+- 즉, “실시간 조회 API”는 존재하지만 대부분 polling 방식이다.
+- 현재 backend는 아래 수동 동기화 엔드포인트를 제공한다.
+  - `GET /api/ingest/sources`
+  - `GET /api/ingest/status`
+  - `POST /api/ingest/sync`

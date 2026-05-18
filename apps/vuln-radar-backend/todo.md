@@ -22,13 +22,13 @@
 
 ## 2. 모듈 구조를 실제 코드로 확장하기
 
-- [ ] `modules/ingest`
+- [x] `modules/ingest`
 - [ ] `modules/vulnerabilities`
 - [ ] `modules/advisories`
 - [ ] `modules/watchlist`
 - [ ] `modules/scoring`
 - [ ] `modules/alerts`
-- [ ] `modules/feeds`
+- [x] `modules/feeds`
 
 공부 포인트:
 
@@ -39,8 +39,14 @@
 
 - [x] Prisma client 생성 흐름 정리
 - [x] database URL 관리
-- [ ] migration 전략 정리
+- [x] migration 전략 정리
 - [ ] local/dev/prod DB 분리 기준 정리
+
+결정 메모:
+
+- 로컬 초기화는 `pnpm --filter vuln-radar-backend db:push` 후 `db:seed` 순서로 진행한다.
+- Prisma 7 기준 datasource URL은 `prisma.config.ts`에서 읽고, schema에는 provider만 둔다.
+- 첫 단계에서는 migration SQL보다 schema + seed + read-model 검증을 우선한다.
 
 공부 포인트:
 
@@ -87,11 +93,18 @@
 
 ## 7. ingest 모듈 만들기
 
-- [ ] `collectors/nvd`
-- [ ] `collectors/kev`
-- [ ] `collectors/epss`
+- [x] `collectors/nvd`
+- [x] `collectors/kev`
+- [x] `collectors/epss`
 - [ ] `collectors/osv`
 - [ ] `collectors/kisa`
+
+결정 메모:
+
+- 현재 upstream source는 모두 push가 아니라 polling API로 본다.
+- 첫 단계는 scheduler 없이 `POST /api/ingest/sync` 수동 실행으로 시작한다.
+- freshness 확인용 `GET /api/ingest/status`를 함께 둬서 live 여부를 바로 확인한다.
+- `NVD + KEV + EPSS`를 먼저 연결하고 `OSV`, `KISA`는 다음 단계로 넘긴다.
 
 공부 포인트:
 
@@ -143,7 +156,7 @@
 
 - [x] `/api/overview`
 - [x] `/api/feed`
-- [ ] `/api/kev`
+- [x] `/api/kev`
 - [x] `/api/alerts`
 - [x] `/api/watchlist`
 

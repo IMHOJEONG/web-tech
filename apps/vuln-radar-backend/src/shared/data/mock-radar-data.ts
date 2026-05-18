@@ -3,13 +3,16 @@ import {
   AlertsResponse,
   FeedItem,
   FeedResponse,
+  KevItem,
+  KevResponse,
   OverviewCard,
   OverviewResponse,
   WatchlistEntry,
   WatchlistResponse,
 } from '../types/radar';
+import { radarGeneratedAt } from './radar-seed-data';
 
-const GENERATED_AT = '2026-05-18T09:00:00.000Z';
+const GENERATED_AT = radarGeneratedAt;
 
 const overviewCards: OverviewCard[] = [
   {
@@ -117,6 +120,16 @@ const alertItems: AlertItem[] = [
   },
 ];
 
+const kevItems: KevItem[] = [
+  {
+    cveId: 'CVE-2026-10001',
+    title: 'Citrix NetScaler gateway auth bypass under active exploitation',
+    priority: 'P0',
+    sourceUrl: 'https://www.cisa.gov/known-exploited-vulnerabilities-catalog',
+    addedAt: '2026-05-18T05:30:00.000Z',
+  },
+];
+
 export function getOverviewResponse(): OverviewResponse {
   return {
     generatedAt: GENERATED_AT,
@@ -139,6 +152,13 @@ export function getWatchlistResponse(): WatchlistResponse {
   return {
     generatedAt: GENERATED_AT,
     entries: watchlistEntries,
+  };
+}
+
+export function getKevResponse(): KevResponse {
+  return {
+    generatedAt: GENERATED_AT,
+    items: kevItems,
   };
 }
 

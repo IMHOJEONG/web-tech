@@ -15,6 +15,11 @@ export class FeedsController {
     return this.feedsService.getFeed();
   }
 
+  @Get('kev')
+  getKev() {
+    return this.feedsService.getKev();
+  }
+
   @Get('watchlist')
   getWatchlist() {
     return this.feedsService.getWatchlist();

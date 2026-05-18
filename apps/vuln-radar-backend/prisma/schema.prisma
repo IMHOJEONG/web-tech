@@ -69,7 +69,7 @@ model Advisory {
   id                  String         @id @default(cuid())
   vulnerabilityCveId  String
   source              String
-  externalId          String?
+  externalId          String
   title               String?
   summary             String?
   sourceUrl           String?
@@ -82,6 +82,7 @@ model Advisory {
 
   @@index([source])
   @@index([vulnerabilityCveId, source])
+  @@unique([vulnerabilityCveId, source, externalId])
 }
 
 model EpssScore {
@@ -134,4 +135,5 @@ model Alert {
   vulnerability       Vulnerability  @relation(fields: [vulnerabilityCveId], references: [cveId], onDelete: Cascade)
 
   @@index([status, priority, createdAt])
+  @@unique([vulnerabilityCveId, channel, title])
 }

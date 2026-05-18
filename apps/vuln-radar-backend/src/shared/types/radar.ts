@@ -31,6 +31,19 @@ export interface FeedResponse {
   items: FeedItem[];
 }
 
+export interface KevItem {
+  cveId: string;
+  title: string;
+  priority: RadarPriority;
+  sourceUrl: string | null;
+  addedAt: string;
+}
+
+export interface KevResponse {
+  generatedAt: string;
+  items: KevItem[];
+}
+
 export interface WatchlistEntry {
   id: string;
   type: 'vendor' | 'product' | 'ecosystem' | 'keyword';

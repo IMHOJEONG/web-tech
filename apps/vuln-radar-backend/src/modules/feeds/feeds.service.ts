@@ -13,6 +13,10 @@ export class FeedsService {
     return this.feedsRepository.getFeed();
   }
 
+  getKev() {
+    return this.feedsRepository.getKev();
+  }
+
   getWatchlist() {
     return this.feedsRepository.getWatchlist();
   }

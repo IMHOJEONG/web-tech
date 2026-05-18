@@ -1,5 +1,9 @@
 import { loadEnvFile } from 'node:process';
 import { defineConfig } from 'prisma/config';
+import {
+  resolveDirectDatabaseUrl,
+  resolveShadowDatabaseUrl,
+} from './src/infra/prisma/direct-connection';
 
 loadEnvFile('.env');
 
@@ -9,8 +13,7 @@ export default defineConfig({
     path: 'prisma/migrations',
   },
   datasource: {
-    url:
-      process.env.DATABASE_URL ??
-      'postgresql://postgres:postgres@localhost:5432/vuln_radar',
+    url: resolveDirectDatabaseUrl(),
+    shadowDatabaseUrl: resolveShadowDatabaseUrl(),
   },
 });

@@ -1,8 +1,14 @@
+import { loadEnvFile } from 'node:process';
+
+loadEnvFile('.env');
+
 export interface AppConfig {
   appEnv: string;
   appPort: number;
   corsOrigin: string;
   frontendOrigin: string;
+  ingestLookbackHours: number;
+  nvdApiKey?: string;
   serviceName: string;
 }
 
@@ -33,6 +39,8 @@ export function getAppConfig(): AppConfig {
     appPort: readNumberEnv('PORT', 4000),
     corsOrigin: readStringEnv('CORS_ORIGIN', 'http://localhost:3000'),
     frontendOrigin: readStringEnv('FRONTEND_ORIGIN', 'http://localhost:3000'),
+    ingestLookbackHours: readNumberEnv('INGEST_LOOKBACK_HOURS', 24),
+    nvdApiKey: process.env.NVD_API_KEY?.trim() || undefined,
     serviceName: 'vuln-radar-backend',
   };
 }

@@ -25,6 +25,14 @@ export class AppConfigService {
     return this.config.frontendOrigin;
   }
 
+  get ingestLookbackHours() {
+    return this.config.ingestLookbackHours;
+  }
+
+  get nvdApiKey() {
+    return this.config.nvdApiKey;
+  }
+
   get serviceName() {
     return this.config.serviceName;
   }

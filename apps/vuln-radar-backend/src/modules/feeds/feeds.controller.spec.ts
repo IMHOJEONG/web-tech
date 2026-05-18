@@ -41,4 +41,11 @@ describe('FeedsController', () => {
     expect(response.items.length).toBeGreaterThan(0);
     expect(response.items[0]?.cveId).toBe('CVE-2026-10001');
   });
+
+  it('returns kev items', async () => {
+    const response = await feedsController.getKev();
+
+    expect(response.items.length).toBeGreaterThan(0);
+    expect(response.items[0]?.cveId).toBe('CVE-2026-10001');
+  });
 });
