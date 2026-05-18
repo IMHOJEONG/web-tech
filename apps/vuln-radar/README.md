@@ -219,6 +219,16 @@ entities/cve/
 현재 프론트는 `vite.config.ts`의 `server.proxy`가 `/api/backend/*`를 `http://localhost:4000/api/*`로 프록시한다.
 즉, 브라우저 공개 경로는 유지하고 실제 목적지 연결만 Vite 개발 서버가 맡는다.
 
+## 관련 문서
+
+- `docs/003_dev-runtime.md`
+  - 프론트/백엔드 로컬 실행 전략
+  - Vite proxy와 backend 연결 방식
+- `docs/004_workspace_install_and_typescript_recovery.md`
+  - `@web-tech/ui prebuild` 실패 복구
+  - `@web-tech/typescript-config/react-library` 미해석 복구
+  - workspace 설치/타입 해석 장애 재발 대응
+
 ## 실시간 데이터 원칙
 
 실시간 처리도 화면 성격에 맞게 나눈다.

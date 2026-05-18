@@ -88,7 +88,8 @@ export function OverviewPage() {
           <h2>Backend data is being loaded into the dashboard.</h2>
           <p className="hero-copy">
             We are checking health, ingest freshness, overview cards, feed, KEV,
-            and watchlist coverage through <code>{runtimeConfig.apiBasePath}</code>.
+            and watchlist coverage through{" "}
+            <code>{runtimeConfig.apiBasePath}</code>.
           </p>
         </article>
       </section>
@@ -102,8 +103,8 @@ export function OverviewPage() {
           <p className="app-eyebrow">API Error</p>
           <h2>The dashboard could not load backend data.</h2>
           <p className="hero-copy">
-            Check <code>{runtimeConfig.apiBasePath}/health</code> and confirm the
-            Vite proxy is pointed at the running backend.
+            Check <code>{runtimeConfig.apiBasePath}/health</code> and confirm
+            the Vite proxy is pointed at the running backend.
           </p>
           <button className="action-button" onClick={() => void refreshAll()}>
             Retry
@@ -179,7 +180,9 @@ export function OverviewPage() {
         <article className="section-panel">
           <div className="panel-heading">
             <h3>Ingest Freshness</h3>
-            <span className="panel-meta">{formatDateTime(status.checkedAt)}</span>
+            <span className="panel-meta">
+              {formatDateTime(status.checkedAt)}
+            </span>
           </div>
           <dl className="detail-list">
             <div>
@@ -230,10 +233,10 @@ export function OverviewPage() {
           <ul className="compact-list">
             {statusSources.map(
               (source: IngestStatusResponse["sources"][number]) => (
-              <li key={source.id}>
-                <strong>{source.name}</strong>
-                <span>{source.note}</span>
-              </li>
+                <li key={source.id}>
+                  <strong>{source.name}</strong>
+                  <span>{source.note}</span>
+                </li>
               ),
             )}
           </ul>
@@ -244,7 +247,9 @@ export function OverviewPage() {
         <article className="section-panel">
           <div className="panel-heading">
             <h3>Latest Feed</h3>
-            <span className="panel-meta">{formatDateTime(feed.generatedAt)}</span>
+            <span className="panel-meta">
+              {formatDateTime(feed.generatedAt)}
+            </span>
           </div>
           <ul className="feed-list">
             {feedItems.map((item: FeedResponse["items"][number]) => (
@@ -279,7 +284,9 @@ export function OverviewPage() {
         <article className="section-panel">
           <div className="panel-heading">
             <h3>New KEV Entries</h3>
-            <span className="panel-meta">{formatDateTime(kev.generatedAt)}</span>
+            <span className="panel-meta">
+              {formatDateTime(kev.generatedAt)}
+            </span>
           </div>
           <ul className="compact-list">
             {kevItems.map((item: KevResponse["items"][number]) => (

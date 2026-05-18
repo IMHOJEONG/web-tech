@@ -113,3 +113,11 @@ pnpm check:vuln-radar:dev
 3. `Caddyfile`은 HTTPS / gateway 요구가 생길 때만 사용
 
 즉, `Vite proxy first, Caddy optional`이 현재 repo에 가장 잘 맞는다.
+
+## 관련 트러블슈팅
+
+- `docs/004_workspace_install_and_typescript_recovery.md`
+  - `@web-tech/ui prebuild` 실패
+  - `@web-tech/typescript-config/react-library` 미해석
+  - React/Vite/JSX 타입 동시 붕괴
+  - `pnpm install` 기반 복구 순서
