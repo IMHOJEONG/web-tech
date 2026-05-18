@@ -113,6 +113,8 @@
 
 ## 8. 스케줄링 전략 세우기
 
+- [ ] `@nestjs/schedule` 또는 worker 기반 자동 ingest 실행 방식을 확정한다.
+- [ ] `POST /api/ingest/sync`를 수동 검증용으로 남기고, 정기 sync 경로를 분리한다.
 - [ ] NVD 주기
 - [ ] KEV 주기
 - [ ] EPSS 주기

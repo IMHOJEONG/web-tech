@@ -39,10 +39,10 @@
 
 ## 3. 공용 API 클라이언트 만들기
 
-- [ ] `shared/api/client.ts`를 만든다.
-- [ ] 기본 base URL 전략을 `/api/backend` 기준으로 고정한다.
-- [ ] timeout, retry, error normalization 규칙을 정한다.
-- [ ] health check 호출 함수를 가장 먼저 붙인다.
+- [x] `shared/api/client.ts`를 만든다.
+- [x] 기본 base URL 전략을 `/api/backend` 기준으로 고정한다.
+- [x] timeout, retry, error normalization 규칙을 정한다.
+- [x] health check 호출 함수를 가장 먼저 붙인다.
 
 공부 포인트:
 
@@ -76,10 +76,16 @@
 
 ## 6. overview 페이지 만들기
 
-- [ ] 오늘의 P0/P1 요약 카드
-- [ ] 최근 수정 CVE 리스트
-- [ ] KEV 추가 항목 요약
-- [ ] watchlist match count
+- [x] 오늘의 P0/P1 요약 카드
+- [x] 최근 수정 CVE 리스트
+- [x] KEV 추가 항목 요약
+- [x] watchlist match count
+
+결정 메모:
+
+- 첫 화면은 placeholder 문구보다 실데이터 상태를 우선 보여준다.
+- `health`, `ingest/status`, `overview`, `feed`, `kev`, `watchlist`를 병렬 조회한다.
+- 스케줄러 전까지는 프론트에서 60초 polling으로 freshness를 보조 확인한다.
 
 공부 포인트:
 
