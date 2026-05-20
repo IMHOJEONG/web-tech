@@ -31,6 +31,7 @@
     "@nestjs/common": "catalog:backend",
     "@nestjs/core": "catalog:backend",
     "@nestjs/platform-express": "catalog:backend",
+    "@nestjs/schedule": "catalog:backend",
     "pg": "catalog:backend",
     "reflect-metadata": "catalog:backend",
     "rxjs": "catalog:backend"

@@ -56,6 +56,11 @@ export interface IngestStatusResponse {
   mode: 'pull';
   storage: 'database' | 'unavailable';
   note: string;
+  scheduler: {
+    enabled: boolean;
+    intervalMinutes: number;
+    syncOnStartup: boolean;
+  };
   sources: ExternalApiSource[];
   latest: {
     databaseUpdatedAt: string | null;

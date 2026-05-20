@@ -137,6 +137,28 @@ curl -X POST "http://127.0.0.1:4000/api/ingest/sync?lookbackHours=6"
 `manual sync 또는 추후 scheduler`
 를 통해 near-real-time을 만드는 단계다.
 
+## 자동 스케줄링 기준
+
+현재 backend는 수동 sync만이 아니라
+앱 내부 scheduler로 정기 ingest를 돌릴 수 있다.
+
+관련 env:
+
+- `INGEST_SCHEDULER_ENABLED`
+- `INGEST_SYNC_INTERVAL_MINUTES`
+- `INGEST_SYNC_ON_STARTUP`
+
+권장 해석:
+
+- `POST /api/ingest/sync`
+  - parser, normalization, scoring 흐름을 수동 검증할 때 사용
+- scheduler
+  - 실제 운영에서 주기적으로 최신 상태를 유지할 때 사용
+
+현재 구현은 단일 앱 인스턴스 기준의 단순 interval scheduler다.
+나중에 replica가 여러 개가 되면
+queue worker 또는 분리된 ingest worker로 옮기는 편이 더 안전하다.
+
 ## 현재 개발 기준
 
 - mock fallback은 FE 계약 보호용으로 유지한다.

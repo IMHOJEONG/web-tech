@@ -20,6 +20,11 @@ describe('IngestController', () => {
       mode: 'pull' as const,
       storage: 'database' as const,
       note: 'Upstream sources are pull-based.',
+      scheduler: {
+        enabled: true,
+        intervalMinutes: 60,
+        syncOnStartup: false,
+      },
       sources: [],
       latest: {
         databaseUpdatedAt: '2026-05-18T15:00:00.000Z',

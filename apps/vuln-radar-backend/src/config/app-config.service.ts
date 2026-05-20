@@ -29,6 +29,18 @@ export class AppConfigService {
     return this.config.ingestLookbackHours;
   }
 
+  get ingestSchedulerEnabled() {
+    return this.config.ingestSchedulerEnabled;
+  }
+
+  get ingestSyncIntervalMinutes() {
+    return this.config.ingestSyncIntervalMinutes;
+  }
+
+  get ingestSyncOnStartup() {
+    return this.config.ingestSyncOnStartup;
+  }
+
   get nvdApiKey() {
     return this.config.nvdApiKey;
   }

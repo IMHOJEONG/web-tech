@@ -113,13 +113,19 @@
 
 ## 8. 스케줄링 전략 세우기
 
-- [ ] `@nestjs/schedule` 또는 worker 기반 자동 ingest 실행 방식을 확정한다.
-- [ ] `POST /api/ingest/sync`를 수동 검증용으로 남기고, 정기 sync 경로를 분리한다.
+- [x] `@nestjs/schedule` 또는 worker 기반 자동 ingest 실행 방식을 확정한다.
+- [x] `POST /api/ingest/sync`를 수동 검증용으로 남기고, 정기 sync 경로를 분리한다.
 - [ ] NVD 주기
 - [ ] KEV 주기
 - [ ] EPSS 주기
 - [ ] OSV 주기
 - [ ] daily summary 주기
+
+결정 메모:
+
+- 현재 단계는 `@nestjs/schedule + interval`로 단일 앱 인스턴스 기준 자동 sync를 돌린다.
+- 중복 실행은 앱 내부에서 막고, 다중 replica 환경은 나중에 worker/queue로 분리한다.
+- startup sync는 옵션으로 두고 기본값은 `false`로 유지한다.
 
 공부 포인트:
 

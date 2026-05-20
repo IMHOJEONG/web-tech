@@ -62,6 +62,11 @@ export class IngestService {
         mode: 'pull',
         storage: 'unavailable',
         note: 'Database client is not ready, so live ingest freshness cannot be derived yet.',
+        scheduler: {
+          enabled: this.appConfigService.ingestSchedulerEnabled,
+          intervalMinutes: this.appConfigService.ingestSyncIntervalMinutes,
+          syncOnStartup: this.appConfigService.ingestSyncOnStartup,
+        },
         sources: this.getSources(),
         latest: {
           databaseUpdatedAt: null,
@@ -152,6 +157,11 @@ export class IngestService {
       mode: 'pull',
       storage: 'database',
       note: 'Upstream sources are polled on demand right now, so freshness is near-real-time rather than push-real-time.',
+      scheduler: {
+        enabled: this.appConfigService.ingestSchedulerEnabled,
+        intervalMinutes: this.appConfigService.ingestSyncIntervalMinutes,
+        syncOnStartup: this.appConfigService.ingestSyncOnStartup,
+      },
       sources: this.getSources(),
       latest: {
         databaseUpdatedAt: latestDatabaseUpdatedAt?.toISOString() ?? null,

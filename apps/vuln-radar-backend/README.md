@@ -192,7 +192,7 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 - `prisma.config.ts`로 Prisma 7 datasource 설정 분리
 - `prisma/seed.ts`에서 demo DB 데이터 입력 경로 제공
 - `src/modules/feeds`에서 `/api/overview`, `/api/feed`, `/api/watchlist`, `/api/alerts` DB 우선 fallback read-model 제공
-- `src/modules/ingest`에서 NVD, KEV, EPSS pull sync를 수동 실행할 수 있음
+- `src/modules/ingest`에서 NVD, KEV, EPSS pull sync를 수동 또는 자동 주기로 실행할 수 있음
 
 이 다음 단계로는 `ingest`, `vulnerabilities`, `scoring` 순서로 확장하는 걸 추천한다.
 
@@ -210,7 +210,11 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 
 - 현재 upstream source는 `push`가 아니라 `pull` 기반이다.
 - 즉, “실시간 조회 API”는 존재하지만 대부분 polling 방식이다.
-- 현재 backend는 아래 수동 동기화 엔드포인트를 제공한다.
+- 현재 backend는 아래 ingest 관측/수동 동기화 엔드포인트를 제공한다.
   - `GET /api/ingest/sources`
   - `GET /api/ingest/status`
   - `POST /api/ingest/sync`
+- 자동 sync는 env로 제어한다.
+  - `INGEST_SCHEDULER_ENABLED=true`
+  - `INGEST_SYNC_INTERVAL_MINUTES=60`
+  - `INGEST_SYNC_ON_STARTUP=false`
