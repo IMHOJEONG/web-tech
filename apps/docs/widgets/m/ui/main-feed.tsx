@@ -2,9 +2,9 @@ import { cn } from '@web-tech/ui/lib/utils'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Metadata } from '~/lib/get-document'
 import { getDocChannel } from '~/lib/get-doc-channel'
 import { getDocHref } from '~/lib/get-doc-route'
+import { Metadata } from '~/lib/get-document'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export type FeedFilter = 'all' | 'web' | 'mobile' | 'uiux'
@@ -611,6 +611,7 @@ export function MainFeed({
                                     className="scale-110 object-cover opacity-18 blur-2xl"
                                     sizes="(max-width: 1024px) 100vw, 36vw"
                                     priority
+                                    unoptimized
                                 />
                                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.08),rgba(10,11,15,0.3)_58%,rgba(10,11,15,0.48))]" />
                                 <div className="absolute inset-x-[12%] top-[12%] bottom-[12%] overflow-hidden border border-white/8 bg-surface-container-low shadow-[0_28px_48px_rgba(0,0,0,0.28)]">
@@ -625,6 +626,7 @@ export function MainFeed({
                                             fill
                                             className="object-contain p-3"
                                             sizes="(max-width: 1024px) 80vw, 28vw"
+                                            unoptimized
                                         />
                                     </div>
                                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.04)_42%,rgba(0,0,0,0.58))]" />
