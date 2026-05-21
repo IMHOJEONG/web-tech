@@ -27,6 +27,7 @@ function toRemotePattern(value) {
 
 function getRemoteImagePatterns() {
     const candidates = [
+        process.env.BLOG_CONTENT_ASSET_BASE_URL_PUBLIC,
         process.env.NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC,
         process.env.BLOG_CONTENT_ASSET_BASE_URL_INTERNAL,
         process.env.BLOG_CONTENT_ASSET_BASE_URL,
