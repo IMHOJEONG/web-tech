@@ -59,3 +59,26 @@
 
 - `widgets/*` 내부에서도 `md`가 shell 전환처럼 쓰이는 지점이 있는지 점검
 - 새로운 global navigation 또는 drawer variant를 추가할 때는 먼저 이 문서를 기준으로 breakpoint 역할을 확인
+
+## Widget Audit Notes
+
+`MainFeed`, `ArticleDetail`, `AboutUs` 점검 기준은 아래처럼 둔다.
+
+- `sm`
+  - shell 전환과 outer gutter 정렬에 한정
+  - 예: `px-4 -> sm:px-6`
+- `md`
+  - spacing, top offset, 내부 완충 여백 같은 미세조정
+  - 예: `md:px-8`, `md:pt-*`
+- `lg`
+  - 실제 콘텐츠 밀도 변화
+  - 예: multi-column, 카드 패딩 증가, 이미지 그리드 분할, author row 수평 전환
+
+점검 시 피할 패턴:
+
+- `sm:grid-cols-*`
+- `sm:flex-row`
+- `sm:p-*`로 카드 밀도 자체를 키우는 규칙
+
+위 패턴은 `640px ~ 1023px` 구간에서 shell은 compact desktop으로 바뀌었는데,
+content까지 너무 빨리 desktop 밀도로 올라가서 읽기 리듬이 깨질 수 있다.

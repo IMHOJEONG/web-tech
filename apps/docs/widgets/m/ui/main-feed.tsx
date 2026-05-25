@@ -239,7 +239,7 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
             href={getDocHref(doc)}
             className="group ds-card col-span-12 grid w-full min-w-0 overflow-hidden bg-surface-container-low lg:col-span-8 lg:grid-cols-2"
         >
-            <div className="flex w-full min-w-0 self-stretch flex-col justify-between p-6 sm:p-7 lg:p-8">
+            <div className="flex w-full min-w-0 self-stretch flex-col justify-between p-6 lg:p-8">
                 <div className="w-full min-w-0 self-stretch space-y-4">
                     <FeedBadge
                         label={`${topic.label} DEVELOPMENT`}
@@ -284,7 +284,7 @@ function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
     return (
         <Link
             href={getDocHref(doc)}
-            className="group ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-6 sm:p-7 lg:col-span-4 lg:p-8"
+            className="group ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-6 lg:col-span-4 lg:p-8"
         >
             <div className="w-full min-w-0 self-stretch space-y-4">
                 <FeedBadge
@@ -335,7 +335,7 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.07),transparent_38%),linear-gradient(180deg,rgba(17,19,25,0.12),rgba(17,19,25,0.4))]" />
             </div>
 
-            <div className="flex w-full min-w-0 flex-1 self-stretch flex-col gap-4 p-6 sm:p-7 lg:p-8">
+            <div className="flex w-full min-w-0 flex-1 self-stretch flex-col gap-4 p-6 lg:p-8">
                 <FeedBadge
                     label={topic.label}
                     className={topic.badgeClassName}
@@ -375,7 +375,7 @@ function TextSupportCard({
     footer: React.ReactNode
 }) {
     return (
-        <article className="ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-6 sm:p-7 lg:col-span-4 lg:p-8">
+        <article className="ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-6 lg:col-span-4 lg:p-8">
             <div className="w-full min-w-0 self-stretch space-y-4">
                 <FeedBadge
                     label={topic.label}
@@ -403,7 +403,7 @@ function NewsletterInjectionCard() {
 
 function EmptyFilteredFeed({ activeFilter }: { activeFilter: FeedFilter }) {
     return (
-        <article className="ds-card col-span-12 flex min-h-80 flex-col justify-between bg-surface-container-low p-6 sm:p-7 lg:p-8">
+        <article className="ds-card col-span-12 flex min-h-80 flex-col justify-between bg-surface-container-low p-6 lg:p-8">
             <div className="space-y-4">
                 <FeedBadge
                     label={
@@ -729,7 +729,7 @@ export function MainFeed({
                     <div className="flex justify-center pt-4">
                         <Link
                             href={activeFilter === 'all' ? '/docs' : '/feed'}
-                            className="ds-outline-button gap-4 px-8 py-3 text-sm sm:px-10 sm:py-4 sm:text-base"
+                            className="ds-outline-button gap-4 px-8 py-3 text-sm lg:px-10 lg:py-4 lg:text-base"
                         >
                             {activeFilter === 'all'
                                 ? 'BROWSE DOCUMENT INDEX'

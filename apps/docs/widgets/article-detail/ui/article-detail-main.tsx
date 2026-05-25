@@ -133,7 +133,7 @@ const useReactiveState = (stream$) => {
                     </h2>
                 </div>
 
-                <div className="grid gap-2 sm:grid-cols-2">
+                <div className="grid gap-2 lg:grid-cols-2">
                     <div className="overflow-hidden rounded-sm border border-border bg-surface-container">
                         <img
                             src={imgDesignDetail1}
@@ -156,7 +156,7 @@ const useReactiveState = (stream$) => {
                     </h2>
                 </div>
 
-                <div className="rounded-lg border border-border bg-surface-container-low p-6 sm:p-7 lg:p-8">
+                <div className="rounded-lg border border-border bg-surface-container-low p-6 lg:p-8">
                     <div className="mx-auto max-w-64 overflow-hidden rounded-[3rem] border-8 border-surface-container-highest bg-surface-container-lowest shadow-deep">
                         <div className="relative aspect-256/500">
                             <img
@@ -177,7 +177,7 @@ const useReactiveState = (stream$) => {
             </section>
 
             <section className="border-t border-border pt-6 lg:pt-8">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+                <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
                     <div className="size-12 shrink-0 overflow-hidden rounded-full border border-border bg-surface-container">
                         <img
                             src={imgAuthorProfile}

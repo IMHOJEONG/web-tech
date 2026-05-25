@@ -66,7 +66,7 @@
   - `Brand`, app shell navigation, `Footer`, `Search`를 실제 메시지에 연결
   - 메시지 키는 `common / navigation / header / footer / search` namespace와 camelCase 규칙으로 정리
   - 기준 문서: `docs/architecture/docs-next-intl-usage-policy.md`
-- [ ] `P1` `docs` app shell의 responsive 정책을 widget 레벨까지 확장 적용한다.
+- [x] `P1` `docs` app shell의 responsive 정책을 widget 레벨까지 확장 적용한다.
   - `MainFeed`, `ArticleDetail`, `AboutUs` 내부의 `sm/md/lg` 사용 재점검
   - shell breakpoint와 content breakpoint 충돌 제거
 - [ ] `P2` `MainFeed`, `HubPage`, `ArticleDetail`의 데이터 주입 방식을 정리한다.

@@ -62,7 +62,7 @@ export async function AboutUs() {
 
     return (
         <main className="w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
-            <div className="mx-auto flex w-full max-w-page flex-col gap-24 px-4 pb-24 pt-32 sm:px-8">
+            <div className="mx-auto flex w-full max-w-page flex-col gap-24 px-4 pb-24 pt-32 sm:px-6 md:px-8">
                 <section className="grid gap-10 border-b border-border pb-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
                     <div className="min-w-0 max-w-4xl space-y-4">
                         <div className="flex items-center gap-2 text-primary">

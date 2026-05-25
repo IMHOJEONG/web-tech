@@ -46,7 +46,7 @@ export async function ArticleDetail({ channel }: ArticleDetailProps) {
                 <div className="ds-progress-line w-1/3" />
             </div>
 
-            <div className="mx-auto grid w-full max-w-page gap-6 px-4 pb-16 pt-10 sm:px-6 sm:pt-12 md:px-8 lg:gap-8 lg:pb-20 lg:pt-16 lg:grid-cols-[minmax(0,1fr)_20rem]">
+            <div className="mx-auto grid w-full max-w-page gap-6 px-4 pb-16 pt-10 sm:px-6 md:px-8 md:pt-12 lg:gap-8 lg:pb-20 lg:pt-16 lg:grid-cols-[minmax(0,1fr)_20rem]">
                 <ArticleDetailMain
                     badge={meta.badge}
                     note={meta.note}
