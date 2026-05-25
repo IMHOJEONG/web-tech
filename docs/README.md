@@ -20,6 +20,8 @@
   - Codex 작업 로그, 협의 내용, 다음 액션, 열린 이슈
 - `docs/process/`
   - 작업 방식, 문서화 규칙, 협업 운영 기준
+- `docs/knowledge/`
+  - 프로젝트를 진행하면서 배운 점, 운영 시 알아둘 점, 다음 사람이 빠르게 따라잡아야 할 지식 정리
 - `docs/todo/`
   - 장기 개선 백로그, 우선순위별 TODO, 구조/디자인/인프라 개선 항목
   - 예: [docs/todo/platform-improvement-todo.md](/Users/coder/Desktop/project/web-tech/docs/todo/platform-improvement-todo.md)
@@ -35,6 +37,7 @@
 - 모든 구현/수정 작업은 반드시 관련 문서 업데이트를 동반합니다.
   - 기본적으로 `docs/worklog/`는 매 작업마다 갱신합니다.
   - 장기 규칙이나 협업 기준은 `docs/process/`에서 관리합니다.
+  - 프로젝트를 하며 축적되는 운영 지식은 `docs/knowledge/`에 정리합니다.
 
 Codex와 함께 쓰는 방법:
 
