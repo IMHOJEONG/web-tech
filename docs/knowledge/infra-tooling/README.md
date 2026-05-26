@@ -29,6 +29,12 @@
 - package manager 기준
   - workspace `pnpm@11.0.4`
   - CI도 동일 계열로 맞춘 뒤 검증
+- GitHub `main` ruleset 기준
+  - PR 필수
+  - approval 필수는 없음
+  - status check 필수
+  - conversation resolution 필수
+  - force push 차단
 
 ## 구현하면서 반복 확인한 패턴
 
@@ -42,6 +48,13 @@
   - 외부 네트워크에서 재검증 성공
     이라는 패턴이 실제로 있었다.
 - image optimize 문제는 asset 서버 응답, env, build 시점 반영, component 종류를 분리해서 보면 훨씬 빨리 원인을 찾을 수 있었다.
+- GitHub ruleset은 “리뷰 문화”보다 “main 보호 정책”에 가깝게 해석하는 편이 이 저장소에 맞았다.
+  - 사람 승인 강제보다
+  - PR 생성
+  - 자동 검증
+  - 대화 정리
+  - 이력 보존
+  조합이 더 현실적이었다.
 
 ## 다음 작업자가 먼저 점검할 것
 
@@ -69,3 +82,4 @@
 - `docs/worklog/2026-05-15-remote-thumbnail-host-allowlist.md`
 - `docs/worklog/2026-05-15-remote-thumbnail-server-base-resolution.md`
 - `docs/worklog/2026-05-18-remote-thumbnail-asset-base-only.md`
+- `docs/worklog/2026-05-26-main-ruleset-verification.md`

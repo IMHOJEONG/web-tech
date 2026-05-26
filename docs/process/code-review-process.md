@@ -151,6 +151,44 @@
 - 관련 문서 업데이트 완료
 - 반복될 운영 지식이 생긴 경우 `docs/knowledge/` 반영 완료
 
+## 현재 `main` ruleset 의미
+
+현재 저장소의 `main` 보호 규칙은 아래 의미로 해석한다.
+
+### `Require a pull request before merging`
+
+- `main`에 직접 push하지 않고, 모든 변경을 PR 단위로 남긴다.
+- 혼자 개발이어도 변경 이유, diff, 문서 업데이트, AI 리뷰 기록을 PR에 묶어두는 것이 목적이다.
+
+### `Required approvals: 0`
+
+- 이 저장소는 현재 사람 승인 수를 merge 조건으로 강제하지 않는다.
+- 혼자 개발 + AI 리뷰 흐름에서는 “사람 승인”보다 “PR 생성 + 셀프 리뷰 + CI 통과 + 문서 갱신”이 더 현실적인 품질 게이트다.
+
+### `Require status checks`
+
+- 현재는 `Build and Test` 하나를 필수 체크로 둔다.
+- 의미는 “코멘트만 정리됐다고 merge하지 않고, 최소한 자동 검증이 통과한 변경만 main에 반영한다”는 것이다.
+- 이후 `Lint / Typecheck / Build / Test`로 CI를 분리해 안정화하면, required status check도 그 이름들로 세분화한다.
+
+### `Require conversation resolution`
+
+- PR 대화나 리뷰 스레드가 열린 채로 merge하지 않는다.
+- AI 리뷰 코멘트든 셀프 리뷰 메모든, 남겨진 쟁점은 해결하거나 명시적으로 정리한 뒤 merge하는 흐름을 의도한다.
+
+### `Block force pushes`
+
+- `main`의 이력을 덮어쓰지 않는다.
+- 장기적으로 worklog, PR, commit 이력과 함께 문제를 추적할 수 있게 보존하는 목적이 있다.
+
+## 이 저장소에서의 해석
+
+즉 현재 ruleset 조합은 아래를 의미한다.
+
+- 사람 승인 중심의 팀 리뷰 프로세스를 강제하는 저장소는 아니다.
+- 대신 `PR 기반 변경 관리`, `자동 검증`, `대화 정리`, `이력 보존`을 main 보호 기준으로 삼는다.
+- 품질 게이트는 앞으로도 “승인 수”보다 “명확한 기록과 재현 가능한 검증”을 우선한다.
+
 ## 관련 문서
 
 - `docs/process/codex-documentation-policy.md`
@@ -158,3 +196,4 @@
 - `docs/architecture/docs-responsive-policy.md`
 - `docs/runbooks/content-api-auth-ops-runbook.md`
 - `docs/todo/todo.md`
+- `docs/worklog/2026-05-26-main-ruleset-verification.md`
