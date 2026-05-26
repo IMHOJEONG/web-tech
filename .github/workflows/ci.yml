@@ -7,15 +7,62 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  build:
-    name: Build and Test
+  lint:
+    name: Lint
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    # To use Remote Caching, uncomment the next lines and follow the steps below.
-    # env:
-    #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-    #  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 11.0.4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm lint
+
+  typecheck:
+    name: Typecheck
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 11.0.4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+  build:
+    name: Build
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -37,6 +84,29 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+  test:
+    name: Test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 11.0.4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Test
         run: pnpm test

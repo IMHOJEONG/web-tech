@@ -6,6 +6,7 @@
     "build": "rm -rf dist && tsc -p tsconfig.build.json",
     "dev": "rm -rf dist && tsc -p tsconfig.build.json --watch --preserveWatchOutput",
     "lint": "eslint \"**/*.{ts,tsx}\" --max-warnings 0",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
     "generate:component": "turbo gen react-component"
   },
   "devDependencies": {

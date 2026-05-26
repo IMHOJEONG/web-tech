@@ -14,8 +14,10 @@
     "dev:vuln-radar-backend": "turbo dev --filter=vuln-radar-backend",
     "start:vuln-radar-backend": "turbo start --filter=vuln-radar-backend",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo lint",
     "rm:pnpm-store": "rm -rf \"$(pnpm store path)\"",
     "test": "turbo test",
+    "typecheck": "turbo typecheck",
     "vercel:deploy:vuln-radar": "vercel --cwd apps/vuln-radar && vercel deploy",
     "vercel:deploy:docs": "vercel --cwd apps/docs && vercel deploy",
     "update:simple-git-hooks": "npx simple-git-hooks"

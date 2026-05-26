@@ -6,10 +6,12 @@
   "scripts": {
     "predev": "pnpm --filter @web-tech/ui build",
     "dev": "vite dev --port 3000",
+    "lint": "eslint \"**/*.{ts,tsx,mjs}\" --max-warnings 0",
     "prebuild": "pnpm --filter @web-tech/ui build",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0 --port 3000",
-    "start": "vite preview --host 0.0.0.0 --port 3000"
+    "start": "vite preview --host 0.0.0.0 --port 3000",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@tanstack/react-query": "catalog:fe-box",
