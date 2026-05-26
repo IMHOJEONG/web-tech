@@ -124,7 +124,7 @@
 
 ## Infra / Tooling
 
-- [ ] `P0` `docs` remote content 인증/장애 대응 운영 기준을 확정한다.
+- [x] `P0` `docs` remote content 인증/장애 대응 운영 기준을 확정한다.
   - `BLOG_CONTENT_API_TOKEN` / `CONTENT_API_TOKEN`의 교체 주기와 회전 절차(runbook) 정리
   - `401/403`은 인증 실패로 보고 즉시 중단하며 다른 endpoint로 fallback 하지 않는 정책 유지
   - 향후 다중 endpoint 정책이 다시 필요해질 경우에도 `timeout`, `ENOTFOUND` 같은 네트워크 오류에서만 다음 후보를 시도하도록 기준 문서화

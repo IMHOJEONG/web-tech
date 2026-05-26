@@ -28,6 +28,8 @@
   - `id`: 전역 유일값
   - `slug`: leaf slug
   - `markdownPath`: `channel/article-slug`
+- 인증/장애 대응의 기준 문서
+  - `docs/runbooks/content-api-auth-ops-runbook.md`
 - authoring pipeline
   - 로컬에서 원격에 직접 업로드
   - 앱 런타임은 read-only consumer
