@@ -1,18 +1,20 @@
+#
 packages:
   - "apps/*"
   - "packages/*"
+#
 allowBuilds:
-  "@nestjs/core": true
-  "@parcel/watcher": true
-  "@prisma/engines": true
-  "@sentry/cli": true
-  "@swc/core": true
-  esbuild: true
-  prisma: true
-  sharp: true
-  simple-git-hooks: true
-  unrs-resolver: true
-
+  "@nestjs/core": false
+  "@parcel/watcher": false
+  "@prisma/engines": false
+  "@sentry/cli": false
+  "@swc/core": false
+  esbuild: false
+  prisma: false
+  sharp: false
+  simple-git-hooks: false
+  unrs-resolver: false
+#
 overrides:
   glob: "^11.1.0"
   tmp: "^0.2.4"
@@ -22,9 +24,9 @@ overrides:
   body-parser: "^2.2.1"
   mdast-util-to-hast: "^13.2.1"
   path-to-regexp: "^8.4.0"
-  qs: "^6.14.1"
+  qs: ">=6.15.2"
   tar: "^7.5.11"
-  hono: "^4.12.14"
+  hono: ">=4.12.18"
   seroval: "^1.4.1"
   lodash: "^4.18.0"
   lodash-es: "^4.18.0"
@@ -48,6 +50,10 @@ overrides:
   uuid: "^14.0.0"
   postcss: "^8.5.10"
   ip-address: ">=10.1.1"
+  sanitize-html: ">=2.17.4"
+  fast-uri: ">=3.1.2"
+  "@tanstack/start-server-core": ">=1.167.30"
+  mermaid: ">=11.15.0"
 
 catalog:
   "@eslint/eslintrc": "^3.3.3"
