@@ -78,41 +78,41 @@
     },
     "rootLanding": {
         "hero": {
-            "eyebrow": "SYSTEM ENGINEERING & DESIGN",
-            "titleLineOne": "기술 스택을",
+            "eyebrow": "시스템 엔지니어링과 디자인",
+            "titleLineOne": "기술과 경험을",
             "titleLineTwo": "정교한 구현으로",
-            "titleLineThree": "연결합니다",
-            "description": "소프트웨어 장인정신과 시스템 사고가 만나는 지점에서, 웹 엔지니어링과 인터페이스 구조를 더 오래 읽히는 형태로 정제합니다.",
-            "primaryCta": "큐레이션 피드 보기",
-            "secondaryCta": "프로젝트 소개 보기"
+            "titleLineThree": "이어갑니다",
+            "description": "웹 엔지니어링, 인터페이스 구조, 제품 감각이 만나는 지점을 천천히 정리합니다. 오래 참고할 수 있는 글과 큐레이션으로 기술을 다룹니다.",
+            "primaryCta": "피드 보러 가기",
+            "secondaryCta": "HeapForge 소개"
         },
         "foundations": {
-            "eyebrow": "THEMATIC FOUNDATIONS",
-            "title": "핵심 탐색 영역",
-            "countLabel": "04 AREAS",
+            "eyebrow": "핵심 주제",
+            "title": "지금 살펴볼 주제",
+            "countLabel": "4개 주제",
             "items": {
                 "web": {
-                    "title": "Scalable Systems",
-                    "description": "브라우저 렌더링, 컴포넌트 구조, 성능 병목을 실제 코드 기준으로 정리합니다."
+                    "title": "확장 가능한 웹 시스템",
+                    "description": "브라우저 렌더링, 컴포넌트 구조, 성능 병목을 실제 코드 흐름에 맞춰 정리합니다."
                 },
                 "product": {
-                    "title": "Product Logic",
+                    "title": "제품을 움직이는 로직",
                     "description": "기술 제약과 사용자 경험 사이를 잇는 제품 관점의 글과 큐레이션을 모읍니다."
                 },
                 "interface": {
-                    "title": "Interface DNA",
-                    "description": "정보 계층, 타이포그래피, 상호작용 패턴을 UI/UX 시스템 관점에서 해부합니다."
+                    "title": "인터페이스 설계 원리",
+                    "description": "정보 계층, 타이포그래피, 상호작용 패턴을 UI/UX 시스템 관점에서 살펴봅니다."
                 },
                 "mobile": {
-                    "title": "Mobile Runtime",
+                    "title": "모바일 실행 환경",
                     "description": "모바일 제약, 터치 중심 상호작용, 플랫폼별 런타임 차이를 더 촘촘하게 살핍니다."
                 }
             }
         },
         "latestNotes": {
-            "eyebrow": "LATEST NOTES",
-            "title": "최근 정리한 아티클",
-            "viewAll": "FEED 열기",
+            "eyebrow": "최근 글",
+            "title": "최근에 정리한 글",
+            "viewAll": "피드 전체 보기",
             "open": "OPEN",
             "unavailableTitle": "최근 글을 지금은 불러오지 못했습니다",
             "unavailableDescription": "홈 화면은 계속 둘러볼 수 있습니다. 잠시 후 다시 시도하거나 피드에서 다른 문서를 먼저 살펴보세요.",
@@ -188,93 +188,93 @@
     },
     "channelHub": {
         "stats": {
-            "totalDocs": "Total Docs",
-            "focusAreas": "Focus Areas",
-            "latestUpdate": "Latest Update",
+            "totalDocs": "문서 수",
+            "focusAreas": "핵심 영역",
+            "latestUpdate": "최근 업데이트",
             "pending": "업데이트 준비 중"
         },
         "latest": {
-            "eyebrow": "Latest Signals",
+            "eyebrow": "최근 연결된 글",
             "title": "최근 연결된 문서",
             "action": "피드에서 이어보기"
         },
         "web": {
             "hero": {
-                "eyebrow": "WEB SYSTEMS",
+                "eyebrow": "웹 시스템",
                 "title": "브라우저와 프론트엔드 구조를 읽는 허브",
                 "description": "React, Next.js, 렌더링 흐름, 바이트코드까지 웹 실행 환경에 가까운 문서를 한 곳에 모아 빠르게 훑을 수 있도록 정리했습니다."
             },
             "panels": {
                 "first": {
-                    "title": "Component Systems",
+                    "title": "컴포넌트 구조",
                     "description": "컴포넌트 구성과 프레임워크 사용법을 실제 문서 흐름으로 연결합니다.",
-                    "items": ["React", "Next.js", "Composition"]
+                    "items": ["React", "Next.js", "조합 패턴"]
                 },
                 "second": {
-                    "title": "Runtime Awareness",
+                    "title": "런타임 감각",
                     "description": "렌더링 비용, 런타임 해석, 성능 병목처럼 브라우저 아래층의 이슈를 함께 다룹니다.",
-                    "items": ["Rendering", "V8", "Bytecode"]
+                    "items": ["렌더링", "V8", "바이트코드"]
                 },
                 "third": {
-                    "title": "Reading Path",
+                    "title": "읽기 흐름",
                     "description": "입문용 문서와 내부 구조 문서를 한 허브에서 이어 읽을 수 있게 큐레이션합니다.",
-                    "items": ["Guide", "Reference", "Deep Dive"]
+                    "items": ["가이드", "레퍼런스", "딥다이브"]
                 }
             },
             "empty": {
-                "title": "웹 섹션 문서를 준비 중입니다",
-                "description": "허브 구조는 먼저 열어두었고, 웹 시스템 관련 글을 이 영역으로 계속 연결해 나갈 예정입니다."
+                "title": "웹 허브에 연결할 글을 더 채우고 있습니다",
+                "description": "허브 구조는 먼저 열어두었고, 브라우저와 프론트엔드 시스템 관련 글을 이 영역으로 계속 이어갈 예정입니다."
             }
         },
         "mobile": {
             "hero": {
-                "eyebrow": "MOBILE RUNTIME",
+                "eyebrow": "모바일 실행 환경",
                 "title": "모바일 제약과 인터랙션을 위한 허브",
                 "description": "터치 중심 상호작용, 화면 제약, 플랫폼별 차이처럼 모바일 제품 경험을 설계할 때 필요한 주제를 분리해서 모아둔 영역입니다."
             },
             "panels": {
                 "first": {
-                    "title": "Touch-first Interfaces",
+                    "title": "터치 중심 인터페이스",
                     "description": "작은 화면에서의 계층, 제스처, 조작 밀도를 문서 중심으로 다시 살펴봅니다.",
-                    "items": ["Touch", "Density", "Layout"]
+                    "items": ["터치", "밀도", "레이아웃"]
                 },
                 "second": {
-                    "title": "Platform Constraints",
+                    "title": "플랫폼 제약",
                     "description": "iOS, Android, 크로스플랫폼 실행 차이와 같은 제약 요소를 독립된 읽기 단위로 정리합니다.",
-                    "items": ["iOS", "Android", "Cross-platform"]
+                    "items": ["iOS", "Android", "크로스플랫폼"]
                 },
                 "third": {
-                    "title": "Product Signals",
+                    "title": "제품 관점의 신호",
                     "description": "모바일은 기술과 UX가 더 가까이 붙어 있으므로, 제품 관점의 메모도 함께 담습니다.",
-                    "items": ["Product", "Motion", "Usability"]
+                    "items": ["제품", "모션", "사용성"]
                 }
             },
             "empty": {
-                "title": "모바일 허브는 열려 있지만 아직 문서가 적습니다",
-                "description": "모바일 관련 초안과 실험 노트를 이 허브로 계속 모아둘 예정입니다. 지금은 피드와 루트 랜딩에서 연결되는 흐름을 먼저 확인할 수 있습니다."
+                "title": "모바일 허브는 열어두었고, 글은 계속 보강할 예정입니다",
+                "description": "모바일 관련 초안과 실험 노트를 이 허브로 계속 모아둘 예정입니다. 지금은 피드와 루트 랜딩에서 이어지는 흐름을 먼저 볼 수 있습니다."
             }
         },
         "uiux": {
             "hero": {
-                "eyebrow": "INTERFACE SYSTEMS",
-                "title": "UI/UX 문서를 편집형 허브로 정리합니다",
+                "eyebrow": "인터페이스 시스템",
+                "title": "UI/UX 문서를 편집형 허브로 엮어봅니다",
                 "description": "디자인 시스템, 접근성, 가독성, 컴포넌트 의미론처럼 인터페이스 설계에 가까운 글을 한 화면에서 탐색할 수 있도록 구성했습니다."
             },
             "panels": {
                 "first": {
-                    "title": "Design Systems",
+                    "title": "디자인 시스템",
                     "description": "컴포넌트 규칙과 토큰, 조합 방식을 코드와 문서 언어로 함께 설명합니다.",
-                    "items": ["Tokens", "Components", "Patterns"]
+                    "items": ["토큰", "컴포넌트", "패턴"]
                 },
                 "second": {
-                    "title": "Accessibility",
+                    "title": "접근성",
                     "description": "시각 계층뿐 아니라 상호작용 접근성과 의미 구조까지 함께 다룹니다.",
-                    "items": ["ARIA", "Semantics", "Keyboard Flow"]
+                    "items": ["ARIA", "시맨틱 구조", "키보드 흐름"]
                 },
                 "third": {
-                    "title": "Readable Interfaces",
+                    "title": "읽기 좋은 인터페이스",
                     "description": "텍스트, 간격, 정보 밀도를 UI 자체로 다루는 문서를 연결합니다.",
-                    "items": ["Typography", "Hierarchy", "Readability"]
+                    "items": ["타이포그래피", "위계", "가독성"]
                 }
             },
             "empty": {
@@ -285,33 +285,33 @@
     },
     "uiuxHub": {
         "hero": {
-            "eyebrow": "DIRECTORY // 04",
-            "titleLineOne": "UI/UX DESIGN",
-            "titleLineTwo": "INTERFACE EXCELLENCE",
+            "eyebrow": "디렉터리 // 04",
+            "titleLineOne": "UI/UX 설계와",
+            "titleLineTwo": "인터페이스 완성도",
             "description": "인지 구조, 인터페이스 미감, 접근 가능한 상호작용을 함께 다루는 편집형 허브입니다. 디자인 시스템과 읽기 경험, 세밀한 사용성 신호를 한 화면에서 이어서 볼 수 있도록 구성했습니다."
         },
         "featured": {
-            "primaryLabel": "CASE STUDY",
-            "secondaryLabel": "10 MIN READ",
-            "action": "VIEW ANALYSIS"
+            "primaryLabel": "케이스 스터디",
+            "secondaryLabel": "10분 읽기",
+            "action": "분석 보기"
         },
         "secondary": {
-            "researchLabel": "RESEARCH PAPER // 02",
-            "guideLabel": "TECHNICAL GUIDE // 03"
+            "researchLabel": "리서치 노트 // 02",
+            "guideLabel": "기술 가이드 // 03"
         },
         "bottomLeft": {
-            "label": "TUTORIAL // 04"
+            "label": "튜토리얼 // 04"
         },
         "newsletter": {
-            "title": "THE UX NEWSLETTER",
+            "title": "UI/UX 뉴스레터",
             "description": "인터페이스 해부, 타이포그래피, 디자인 시스템 메모를 격주 단위로 정리해 전달합니다.",
             "placeholder": "terminal@user.io",
-            "button": "CONNECT"
+            "button": "구독하기"
         },
         "more": {
-            "fallbackDate": "LATEST NOTE"
+            "fallbackDate": "최근 글"
         },
-        "loadMore": "LOAD NEXT ENTRIES",
+        "loadMore": "다음 글 더 보기",
         "fallback": {
             "featured": {
                 "title": "공간형 인터페이스와 시각 계층 재설계",
@@ -345,37 +345,37 @@
     },
     "about": {
         "hero": {
-            "status": "STATUS: LIVE // VERSION 2.0.4",
-            "titleLead": "기술 스택을",
-            "titleAccentOne": "정밀한",
-            "titleAccentTwo": "구현으로 연결합니다",
-            "description": "현대 엔지니어링의 복잡성을 해부하는 디지털 랩입니다. Web 성능, Mobile 유연성, UI/UX 아키텍처가 만나는 지점을 탐구합니다.",
-            "missionLabel": "// MISSION_STATEMENT.md",
-            "establishedLabel": "// ESTABLISHED_2024"
+            "status": "운영 중 // VERSION 2.0.4",
+            "titleLead": "웹과 제품, 인터페이스를",
+            "titleAccentOne": "하나의",
+            "titleAccentTwo": "구조로 엮습니다",
+            "description": "HeapForge는 웹 엔지니어링, 모바일 제품 감각, UI/UX 구조를 함께 다루는 작은 실험실입니다. 구현과 설계를 따로 보지 않고 오래 쓰이는 구조를 만드는 데 관심을 둡니다.",
+            "missionLabel": "// 운영 원칙",
+            "establishedLabel": "// 2024부터 기록 중"
         },
         "pillars": {
             "web": {
-                "eyebrow": "ENGINEERING PHILOSOPHY",
-                "title": "Web & Performance",
-                "description": "React, Rust, V8 엔진의 미래까지 깊게 다룹니다. 단순히 코드를 작성하는 것이 아니라, 정밀하게 확장되는 경험을 설계합니다."
+                "eyebrow": "엔지니어링 관점",
+                "title": "웹 구조와 성능",
+                "description": "브라우저 동작, 렌더링 비용, 프론트엔드 구조를 실제 구현 맥락에서 깊게 다룹니다. 단순히 기능을 붙이는 대신 오래 버티는 구조를 설계합니다."
             },
             "mobile": {
-                "eyebrow": "MOBILITY",
-                "title": "Mobile Fluidity",
-                "description": "네이티브와 크로스플랫폼 생태계의 미묘한 차이를 이해하고, 손 안에서 자연스럽게 작동하는 도구를 만듭니다.",
+                "eyebrow": "모바일 경험",
+                "title": "손 안에서 자연스러운 흐름",
+                "description": "네이티브와 크로스플랫폼 생태계의 차이를 이해하고, 작은 화면에서도 자연스럽게 이어지는 경험을 만듭니다.",
                 "terminalLineOne": "const mobile = await optimize(ui,",
                 "terminalLineTwo": "stack);"
             },
             "design": {
-                "eyebrow": "INTERFACE DESIGN",
-                "title": "UI/UX as Code",
-                "description": "디자인 시스템은 살아 있는 구조입니다. 계층, 모션, 접근성을 하나의 정밀한 인터페이스 언어로 다룹니다."
+                "eyebrow": "인터페이스 설계",
+                "title": "UI/UX를 구조로 다루기",
+                "description": "디자인 시스템을 살아 있는 구조로 보고, 계층과 모션, 접근성을 하나의 인터페이스 언어처럼 다룹니다."
             }
         },
         "profile": {
             "name": "HoJeong Im",
             "role": "Full Stack Engineer",
-            "bio": "미니멀한 미감과 높은 성능을 함께 지향하는 풀스택 엔지니어로, 디지털 빌더를 위한 열린 지식 베이스로서 HEAP-FORGE를 구축하고 있습니다.",
+            "bio": "미니멀한 미감과 높은 성능을 함께 지향하는 풀스택 엔지니어입니다. 디지털 빌더가 오래 참고할 수 있는 열린 지식 베이스로 HEAP-FORGE를 만들어가고 있습니다.",
             "links": {
                 "github": {
                     "label": "GITHUB",
