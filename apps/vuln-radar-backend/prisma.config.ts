@@ -1,11 +1,11 @@
-import { loadEnvFile } from 'node:process';
 import { defineConfig } from 'prisma/config';
 import {
   resolveDirectDatabaseUrl,
   resolveShadowDatabaseUrl,
 } from './src/infra/prisma/direct-connection';
+import { loadOptionalEnvFile } from './src/shared/lib/load-optional-env';
 
-loadEnvFile('.env');
+loadOptionalEnvFile('.env');
 
 export default defineConfig({
   schema: 'prisma/schema.prisma',

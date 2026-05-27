@@ -23,6 +23,26 @@
 
 개발 중 프론트는 `/api/backend/*`만 호출하고, 실제 backend origin 매핑은 프론트의 proxy 계층이 담당한다.
 
+## 환경 변수 로딩 기준
+
+- 로컬 개발에서는 `apps/vuln-radar-backend/.env`를 둘 수 있다.
+- 배포 환경에서는 `.env` 파일이 없어도 된다.
+- 현재 backend는 `.env` 파일이 있으면 읽고, 없으면 무시한 뒤 런타임 환경변수만 사용한다.
+
+즉 Railway 같은 PaaS에서는 파일 업로드 대신 Variables 설정만 맞추면 된다.
+
+예시:
+
+- `PORT`
+- `APP_ENV`
+- `DATABASE_URL`
+- `DIRECT_URL`
+- `SHADOW_DATABASE_URL`
+- `CORS_ORIGIN`
+- `FRONTEND_ORIGIN`
+- `VULN_RADAR_API_TOKEN`
+- `NVD_API_KEY`
+
 ## 왜 이 스택인가
 
 이 backend는 단순 CRUD보다 아래 책임이 더 크다.
