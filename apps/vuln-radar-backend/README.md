@@ -28,6 +28,8 @@
 - 현재 Nest build 결과의 entry는 `dist/main.js`가 아니라 `dist/src/main.js`다.
 - 따라서 Docker/배포 환경의 start command도 이 경로를 기준으로 맞춰야 한다.
 - `/app/dist/main`을 바라보면 `MODULE_NOT_FOUND`가 발생한다.
+- `pnpm deploy`는 tarball 기준으로 파일을 담기 때문에, `dist`와 `generated/prisma`가 package 파일 목록에 포함되어 있어야 한다.
+- 현재는 `package.json > files`에 해당 경로를 명시해서 runtime 이미지에도 같이 들어가도록 맞췄다.
 
 ## 환경 변수 로딩 기준
 

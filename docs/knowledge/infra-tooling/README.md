@@ -73,6 +73,10 @@
   Railway 배포용 `pnpm deploy`는 `--legacy`가 가장 마찰이 적다.
 - Nest 서비스는 `dist/main.js`라고 가정하지 말고 실제 build 산출물 경로를 먼저 확인해야 한다.
   - 현재 `vuln-radar-backend`는 `dist/src/main.js`가 entry다.
+- `pnpm deploy`는 package tarball에 포함된 파일만 runtime 쪽으로 가져간다.
+  - `.gitignore`에 걸린 `dist`, `generated/prisma`는 기본 상태에선 빠질 수 있다.
+  - 이 경우 build는 성공해도 runtime에서 `MODULE_NOT_FOUND`가 난다.
+  - 배포 대상 서비스는 `package.json > files`를 명시하는 편이 안전하다.
 - Prisma 7 config는 `generate`에도 영향을 준다.
   - 공식 문서 기준 `prisma generate`는 DB URL이 꼭 필요하지 않지만,
     config 로딩 중 `env()`나 custom resolver가 throw하면 generate도 실패한다.
@@ -118,6 +122,10 @@
 - 런타임에서 `Cannot find module '/app/dist/main'`가 나면
   - Docker copy 문제보다 먼저
   - 실제 Nest build entry가 `dist/main.js`인지 `dist/src/main.js`인지
+    확인
+- 런타임에서 `Cannot find module '/app/dist/src/main.js'`가 나면
+  - entry 경로만이 아니라
+  - `pnpm deploy` 결과물에 `dist` 자체가 포함됐는지
     확인
 - `pnpm deploy`에서 `ERR_PNPM_DEPLOY_NONINJECTED_WORKSPACE`가 나면
   - 현재 workspace가 pnpm의 새 injected deploy 전제를 만족하지 않는다는 뜻이다.

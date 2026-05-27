@@ -37,6 +37,10 @@
 - runtime에서 `Cannot find module '/app/dist/main'`가 났고, 원인은 CMD 경로가 실제 Nest 산출물과 달랐던 것이다.
   - 현재 backend entry는 `dist/main.js`가 아니라 `dist/src/main.js`
   - Docker CMD를 그 경로로 수정했다.
+- 이후에도 `Cannot find module '/app/dist/src/main.js'`가 이어졌고, 원인은 `pnpm deploy` tarball에 `dist`와 `generated/prisma`가 들어가지 않았던 것이다.
+  - `apps/vuln-radar-backend/.gitignore`가 `dist`, `generated/prisma`를 무시하고 있었고
+  - `package.json > files`가 없어서 배포 패키지에 산출물이 빠졌다.
+  - 현재는 `files`에 `dist`, `generated`, `prisma`, `package.json`, `README.md`를 명시했다.
 
 ## 선택 비교
 
