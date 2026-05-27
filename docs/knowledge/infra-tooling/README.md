@@ -21,6 +21,9 @@
 - `pnpm install --lockfile-only`는 네트워크 가능한 환경 기준으로 재검증 완료
 - asset public host는 서버 전용 키를 우선
 - docs 관련 env는 build/runtime 경계를 나눠서 점검
+- backend API 공개 범위는 endpoint 성격에 따라 나눈다.
+  - health/status 성격 엔드포인트는 공개 가능
+  - 실제 데이터 응답 엔드포인트는 기본적으로 인증 보호
 - asset public host 우선순위
   1. `BLOG_CONTENT_ASSET_BASE_URL_PUBLIC`
   2. `NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC`
@@ -55,6 +58,8 @@
   - 대화 정리
   - 이력 보존
     조합이 더 현실적이었다.
+- backend 인증은 특별한 요구가 없으면 `Authorization: Bearer <shared-secret>`로 시작하고,
+  `401/403`은 fallback이 아니라 설정/인증 문제로 본다.
 
 ## 다음 작업자가 먼저 점검할 것
 
@@ -72,6 +77,11 @@
   - 원본 asset URL 200 여부
   - remotePatterns host 포함 여부
   - `<Image />`인지 일반 `<img>`인지
+    순서로 확인
+- backend 데이터 API가 의도치 않게 열려 있지 않은지 확인할 때는
+  - health endpoint만 공개인지
+  - shared secret env가 서버에 실제로 들어갔는지
+  - 무토큰 요청이 `401`로 막히는지
     순서로 확인
 
 ## 먼저 보면 좋은 문서

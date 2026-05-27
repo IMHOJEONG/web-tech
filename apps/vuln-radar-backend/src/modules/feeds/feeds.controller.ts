@@ -1,7 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { FeedsService } from './feeds.service';
+import { BackendAuthGuard } from '../../shared/guards/backend-auth.guard';
 
 @Controller()
+@UseGuards(BackendAuthGuard)
 export class FeedsController {
   constructor(private readonly feedsService: FeedsService) {}
 

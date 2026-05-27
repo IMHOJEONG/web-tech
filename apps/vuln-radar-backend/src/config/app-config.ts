@@ -5,6 +5,7 @@ loadEnvFile('.env');
 export interface AppConfig {
   appEnv: string;
   appPort: number;
+  backendApiToken?: string;
   corsOrigin: string;
   frontendOrigin: string;
   ingestLookbackHours: number;
@@ -58,6 +59,7 @@ export function getAppConfig(): AppConfig {
   return {
     appEnv: readStringEnv('APP_ENV', 'development'),
     appPort: readNumberEnv('PORT', 4000),
+    backendApiToken: process.env.VULN_RADAR_API_TOKEN?.trim() || undefined,
     corsOrigin: readStringEnv('CORS_ORIGIN', 'http://localhost:3000'),
     frontendOrigin: readStringEnv('FRONTEND_ORIGIN', 'http://localhost:3000'),
     ingestLookbackHours: readNumberEnv('INGEST_LOOKBACK_HOURS', 24),
