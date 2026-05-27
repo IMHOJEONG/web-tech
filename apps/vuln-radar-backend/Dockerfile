@@ -1,4 +1,10 @@
 # syntax=docker/dockerfile:1.7
+#
+# IMPORTANT:
+# - build context must be the workspace root
+# - example:
+#   docker build -f apps/vuln-radar-backend/Dockerfile .
+# - Railway service root must also point to the repo root if this Dockerfile is used
 
 FROM node:22-bookworm-slim AS base
 
