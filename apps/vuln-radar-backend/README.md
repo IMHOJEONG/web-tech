@@ -23,6 +23,12 @@
 
 개발 중 프론트는 `/api/backend/*`만 호출하고, 실제 backend origin 매핑은 프론트의 proxy 계층이 담당한다.
 
+## 빌드 산출물 기준
+
+- 현재 Nest build 결과의 entry는 `dist/main.js`가 아니라 `dist/src/main.js`다.
+- 따라서 Docker/배포 환경의 start command도 이 경로를 기준으로 맞춰야 한다.
+- `/app/dist/main`을 바라보면 `MODULE_NOT_FOUND`가 발생한다.
+
 ## 환경 변수 로딩 기준
 
 - 로컬 개발에서는 `apps/vuln-radar-backend/.env`를 둘 수 있다.

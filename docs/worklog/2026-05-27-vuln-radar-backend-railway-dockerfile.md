@@ -34,6 +34,9 @@
 - `pnpm deploy`는 pnpm v10+부터 injected workspace 전제를 더 강하게 요구한다.
   - 현재 repo는 그 전역 설정을 쓰지 않아서 `ERR_PNPM_DEPLOY_NONINJECTED_WORKSPACE`가 발생했다.
   - 이번엔 Railway 서비스 하나를 빠르게 올리는 목적이라 `--legacy`를 선택했다.
+- runtime에서 `Cannot find module '/app/dist/main'`가 났고, 원인은 CMD 경로가 실제 Nest 산출물과 달랐던 것이다.
+  - 현재 backend entry는 `dist/main.js`가 아니라 `dist/src/main.js`
+  - Docker CMD를 그 경로로 수정했다.
 
 ## 선택 비교
 

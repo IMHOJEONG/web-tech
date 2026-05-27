@@ -38,4 +38,4 @@ COPY --from=build /prod/vuln-radar-backend ./
 
 EXPOSE 4000
 
-CMD ["node", "dist/main"]
+CMD ["node", "dist/src/main.js"]
