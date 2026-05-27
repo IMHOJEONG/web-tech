@@ -69,6 +69,10 @@
   - `pnpm install --filter <service>...`
   - `pnpm --filter <service> deploy --prod`
     흐름으로 필요한 패키지만 최종 이미지에 담는 편이 안정적이었다.
+- Prisma 7 config는 `generate`에도 영향을 준다.
+  - 공식 문서 기준 `prisma generate`는 DB URL이 꼭 필요하지 않지만,
+    config 로딩 중 `env()`나 custom resolver가 throw하면 generate도 실패한다.
+  - 그래서 build-friendly한 config와 runtime-strict한 resolver를 분리하는 편이 안전하다.
 
 ## 다음 작업자가 먼저 점검할 것
 
@@ -102,6 +106,11 @@
   - build context가 workspace root인지
   - `PORT` env를 앱이 그대로 읽는지
     먼저 확인
+- Railway build에서 `Missing DATABASE_URL or DIRECT_URL`가 나면
+  - 진짜 DB 접속이 필요한 단계인지
+  - 아니면 `prisma generate`처럼 config 로딩만 하는 단계인지
+    먼저 구분
+  - 후자라면 config resolver가 빌드 단계까지 엄격하게 막고 있는지 확인
 
 ## 먼저 보면 좋은 문서
 

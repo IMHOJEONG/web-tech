@@ -43,6 +43,15 @@
 - `VULN_RADAR_API_TOKEN`
 - `NVD_API_KEY`
 
+### Prisma generate와 DB URL
+
+- `prisma generate`는 실제 DB 접속이 필요한 명령은 아니지만, Prisma 7에서는 `prisma.config.ts`를 먼저 로드한다.
+- 따라서 config 로딩 단계에서 `DATABASE_URL`이나 `DIRECT_URL`을 강제로 해석하다가 throw하면, generate도 같이 실패할 수 있다.
+- 현재 backend는 이 차이를 반영해서:
+  - runtime / migrate 성격 로직은 실제 DB URL을 엄격하게 요구
+  - `prisma generate` 같은 build 단계는 fallback URL로 통과
+    하도록 분리해뒀다.
+
 ## 왜 이 스택인가
 
 이 backend는 단순 CRUD보다 아래 책임이 더 크다.

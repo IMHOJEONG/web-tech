@@ -1,6 +1,6 @@
 import { defineConfig } from 'prisma/config';
 import {
-  resolveDirectDatabaseUrl,
+  resolvePrismaConfigDatabaseUrl,
   resolveShadowDatabaseUrl,
 } from './src/infra/prisma/direct-connection';
 import { loadOptionalEnvFile } from './src/shared/lib/load-optional-env';
@@ -13,7 +13,7 @@ export default defineConfig({
     path: 'prisma/migrations',
   },
   datasource: {
-    url: resolveDirectDatabaseUrl(),
+    url: resolvePrismaConfigDatabaseUrl(),
     shadowDatabaseUrl: resolveShadowDatabaseUrl(),
   },
 });

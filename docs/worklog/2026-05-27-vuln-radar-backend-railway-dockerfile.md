@@ -28,3 +28,6 @@
   - Railway에서는 repo root를 build context로 두고, Dockerfile path만 `apps/vuln-radar-backend/Dockerfile`로 지정해야 한다.
 - backend의 env 로딩은 `.env` 파일 필수가 아니라 “있으면 읽고, 없으면 무시”로 바꿨다.
   - 따라서 Railway에서는 `.env` 파일을 만들 필요 없이 Variables만 설정하면 된다.
+- `prisma generate`는 DB 접속 명령이 아닌데도 `prisma.config.ts`를 먼저 로드한다.
+  - 기존에는 `resolveDirectDatabaseUrl()`가 `DATABASE_URL`/`DIRECT_URL` 부재 시 즉시 throw해서 build가 실패했다.
+  - 현재는 `prisma.config.ts`에서만 fallback URL을 허용하도록 분리해서 generate/build 단계는 통과하게 정리했다.
