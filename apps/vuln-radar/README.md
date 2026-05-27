@@ -219,6 +219,10 @@ entities/cve/
 현재 프론트는 `vite.config.ts`의 `server.proxy`가 `/api/backend/*`를 `http://localhost:4000/api/*`로 프록시한다.
 즉, 브라우저 공개 경로는 유지하고 실제 목적지 연결만 Vite 개발 서버가 맡는다.
 
+backend 데이터 endpoint가 `Bearer` 토큰으로 보호되는 경우에는, 브라우저 코드에 secret을 넣지 않는다.
+대신 `VULN_RADAR_BACKEND_API_TOKEN`을 Vite 서버 env에 두고 `server.proxy` 또는 배포 reverse proxy가
+`Authorization` 헤더를 upstream에 주입하는 구조를 사용한다.
+
 ## 관련 문서
 
 - `docs/003_dev-runtime.md`

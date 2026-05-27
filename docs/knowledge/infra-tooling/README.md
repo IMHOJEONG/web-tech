@@ -60,6 +60,10 @@
     조합이 더 현실적이었다.
 - backend 인증은 특별한 요구가 없으면 `Authorization: Bearer <shared-secret>`로 시작하고,
   `401/403`은 fallback이 아니라 설정/인증 문제로 본다.
+- 브라우저 앱이 backend shared-secret을 직접 들고 가면 안 된다.
+  - 로컬 개발은 `Vite server.proxy`
+  - 운영은 reverse proxy / gateway
+    가 `Authorization` 헤더를 대신 주입하는 구조가 기본이다.
 
 ## 다음 작업자가 먼저 점검할 것
 
@@ -83,6 +87,11 @@
   - shared secret env가 서버에 실제로 들어갔는지
   - 무토큰 요청이 `401`로 막히는지
     순서로 확인
+- 브라우저 앱이 backend auth와 연결되지 않을 때는
+  - client 코드에 secret을 넣으려 하고 있지 않은지
+  - dev proxy가 헤더를 주입하는지
+  - 운영 reverse proxy도 같은 역할을 하도록 설계되어 있는지
+    먼저 확인
 
 ## 먼저 보면 좋은 문서
 
