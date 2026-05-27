@@ -67,8 +67,10 @@
 - monorepo 안의 Nest 서비스는 배포 Dockerfile에서
   - workspace root context
   - `pnpm install --filter <service>...`
-  - `pnpm --filter <service> deploy --prod`
+  - `pnpm --filter <service> deploy --prod --legacy`
     흐름으로 필요한 패키지만 최종 이미지에 담는 편이 안정적이었다.
+- 현재 repo는 `inject-workspace-packages=true`를 전역 정책으로 아직 채택하지 않았기 때문에,
+  Railway 배포용 `pnpm deploy`는 `--legacy`가 가장 마찰이 적다.
 - Prisma 7 config는 `generate`에도 영향을 준다.
   - 공식 문서 기준 `prisma generate`는 DB URL이 꼭 필요하지 않지만,
     config 로딩 중 `env()`나 custom resolver가 throw하면 generate도 실패한다.
@@ -111,6 +113,10 @@
   - 아니면 `prisma generate`처럼 config 로딩만 하는 단계인지
     먼저 구분
   - 후자라면 config resolver가 빌드 단계까지 엄격하게 막고 있는지 확인
+- `pnpm deploy`에서 `ERR_PNPM_DEPLOY_NONINJECTED_WORKSPACE`가 나면
+  - 현재 workspace가 pnpm의 새 injected deploy 전제를 만족하지 않는다는 뜻이다.
+  - 당장 서비스 하나를 배포하려면 `--legacy`가 가장 빠르다.
+  - repo 전체 정책을 새 방식으로 바꾸려면 `inject-workspace-packages=true` 도입을 별도로 검토해야 한다.
 
 ## 먼저 보면 좋은 문서
 

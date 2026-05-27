@@ -25,7 +25,7 @@ COPY packages/tailwind-config ./packages/tailwind-config
 
 RUN pnpm install --filter vuln-radar-backend... --frozen-lockfile
 RUN pnpm --filter vuln-radar-backend build
-RUN pnpm --filter vuln-radar-backend deploy --prod /prod/vuln-radar-backend
+RUN pnpm --filter vuln-radar-backend deploy --prod --legacy /prod/vuln-radar-backend
 
 FROM node:22-bookworm-slim AS runtime
 
