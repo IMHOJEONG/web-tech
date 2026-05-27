@@ -64,6 +64,11 @@
   - 로컬 개발은 `Vite server.proxy`
   - 운영은 reverse proxy / gateway
     가 `Authorization` 헤더를 대신 주입하는 구조가 기본이다.
+- monorepo 안의 Nest 서비스는 배포 Dockerfile에서
+  - workspace root context
+  - `pnpm install --filter <service>...`
+  - `pnpm --filter <service> deploy --prod`
+    흐름으로 필요한 패키지만 최종 이미지에 담는 편이 안정적이었다.
 
 ## 다음 작업자가 먼저 점검할 것
 
@@ -91,6 +96,11 @@
   - client 코드에 secret을 넣으려 하고 있지 않은지
   - dev proxy가 헤더를 주입하는지
   - 운영 reverse proxy도 같은 역할을 하도록 설계되어 있는지
+    먼저 확인
+- Railway 같은 PaaS에 monorepo backend를 올릴 때는
+  - Dockerfile 경로
+  - build context가 workspace root인지
+  - `PORT` env를 앱이 그대로 읽는지
     먼저 확인
 
 ## 먼저 보면 좋은 문서
