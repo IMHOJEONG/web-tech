@@ -23,12 +23,12 @@
     "update:simple-git-hooks": "npx simple-git-hooks"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.4.1",
-    "eslint": "^9.39.4",
-    "prettier": "^3.8.1",
-    "simple-git-hooks": "^2.13.1",
-    "turbo": "^2.9.14",
-    "typescript": "^6.0.3"
+    "@eslint/compat": "catalog:",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "simple-git-hooks": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:"
   },
   "simple-git-hooks": {
     "pre-commit": "./scripts/pnpmw.sh format && echo 'ok'",

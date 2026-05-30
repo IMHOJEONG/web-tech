@@ -3,6 +3,7 @@
 ## 배운 점
 
 - `pnpm` catalog 도입 후에는 로컬만이 아니라 네트워크 가능한 환경에서 `lockfile-only`도 한 번 더 검증하는 편이 안전하다.
+- workspace package만이 아니라 root `package.json`도 catalog 기준을 같이 쓰면, 도구 체인 버전 기준점이 한 군데로 모여서 drift가 줄어든다.
 - `next.config`의 env 해석은 빌드 시점이라서, 배포 env와 로컬 env를 구분해서 봐야 한다.
 - `remotePatterns` 문제처럼 보이는 이슈도 실제로는 빌드 타이밍, env 우선순위, 렌더 방식 차이일 수 있다.
 - env 키 이름 하나가 build, runtime, client, server 경계를 동시에 건드릴 수 있어서, 변수명과 우선순위를 먼저 문서화하는 편이 사고가 적다.
@@ -19,6 +20,14 @@
 ## 현재 운영 기준
 
 - `pnpm install --lockfile-only`는 네트워크 가능한 환경 기준으로 재검증 완료
+- root `package.json`의 toolchain 의존성도 catalog를 사용한다.
+  - 현재 대상:
+    - `@eslint/compat`
+    - `eslint`
+    - `prettier`
+    - `simple-git-hooks`
+    - `turbo`
+    - `typescript`
 - asset public host는 서버 전용 키를 우선
 - docs 관련 env는 build/runtime 경계를 나눠서 점검
 - asset public host 우선순위
@@ -55,6 +64,31 @@
   - 대화 정리
   - 이력 보존
     조합이 더 현실적이었다.
+- catalog 확장 여부는 “해당 버전이 여러 앱에 직접 쓰이느냐”보다 “repo 전체 개발 흐름에 버전 기준점으로 작동하느냐”로 판단하는 편이 더 실용적이었다.
+  - 예: `turbo`, `prettier`, `simple-git-hooks`는 root-only라도 전체 개발 흐름에 영향을 준다.
+- backend 인증은 특별한 요구가 없으면 `Authorization: Bearer <shared-secret>`로 시작하고,
+  `401/403`은 fallback이 아니라 설정/인증 문제로 본다.
+- 브라우저 앱이 backend shared-secret을 직접 들고 가면 안 된다.
+  - 로컬 개발은 `Vite server.proxy`
+  - 운영은 reverse proxy / gateway
+    가 `Authorization` 헤더를 대신 주입하는 구조가 기본이다.
+- monorepo 안의 Nest 서비스는 배포 Dockerfile에서
+  - workspace root context
+  - `pnpm install --filter <service>...`
+  - `pnpm --filter <service> deploy --prod --legacy`
+    흐름으로 필요한 패키지만 최종 이미지에 담는 편이 안정적이었다.
+- 현재 repo는 `inject-workspace-packages=true`를 전역 정책으로 아직 채택하지 않았기 때문에,
+  Railway 배포용 `pnpm deploy`는 `--legacy`가 가장 마찰이 적다.
+- Nest 서비스는 `dist/main.js`라고 가정하지 말고 실제 build 산출물 경로를 먼저 확인해야 한다.
+  - 현재 `vuln-radar-backend`는 `dist/src/main.js`가 entry다.
+- `pnpm deploy`는 package tarball에 포함된 파일만 runtime 쪽으로 가져간다.
+  - `.gitignore`에 걸린 `dist`, `generated/prisma`는 기본 상태에선 빠질 수 있다.
+  - 이 경우 build는 성공해도 runtime에서 `MODULE_NOT_FOUND`가 난다.
+  - 배포 대상 서비스는 `package.json > files`를 명시하는 편이 안전하다.
+- Prisma 7 config는 `generate`에도 영향을 준다.
+  - 공식 문서 기준 `prisma generate`는 DB URL이 꼭 필요하지 않지만,
+    config 로딩 중 `env()`나 custom resolver가 throw하면 generate도 실패한다.
+  - 그래서 build-friendly한 config와 runtime-strict한 resolver를 분리하는 편이 안전하다.
 
 ## 다음 작업자가 먼저 점검할 것
 
@@ -68,6 +102,11 @@
   - 외부 네트워크 환경인지
   - workspace pnpm 버전과 CI 버전이 맞는지
     먼저 구분
+- root 도구 버전을 올릴 때는
+  - root `package.json`
+  - `pnpm-workspace.yaml` catalog
+  - lockfile 재검증
+    세 군데를 같이 본다.
 - image optimize 400이 나면
   - 원본 asset URL 200 여부
   - remotePatterns host 포함 여부

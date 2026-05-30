@@ -133,7 +133,7 @@
   - remote content 장애 시 홈(`/`)은 section-level graceful degradation, 문서 상세는 에러 페이지로 보내는 현재 정책을 문서에 명시
   - 기준 문서: `docs/runbooks/content-api-auth-ops-runbook.md`
 - [x] `P0` `pnpm` catalog 도입 이후 네트워크 가능한 환경에서 `pnpm install --lockfile-only` 재검증
-- [ ] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정
+- [x] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정
 - [ ] `P1` catalog reference 정합성 검사를 스크립트나 CI 체크로 자동화
 - [ ] `P1` `docs`와 `web`의 공통 build/lint/typecheck 파이프라인을 Turbo 기준으로 정리
 - [ ] `P2` design asset 동기화 절차를 runbook으로 정리
