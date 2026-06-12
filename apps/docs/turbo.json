@@ -1,0 +1,14 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "env": ["BETTER_AUTH_*", "BLOG_CONTENT_*", "NEXT_PUBLIC_BLOG_CONTENT_*"]
+    },
+    "dev": {
+      "env": ["BETTER_AUTH_*", "BLOG_CONTENT_*", "NEXT_PUBLIC_BLOG_CONTENT_*"]
+    },
+    "start": {
+      "env": ["BETTER_AUTH_*", "BLOG_CONTENT_*", "NEXT_PUBLIC_BLOG_CONTENT_*"]
+    }
+  }
+}

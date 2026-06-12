@@ -7,6 +7,7 @@
 - `next.config`의 env 해석은 빌드 시점이라서, 배포 env와 로컬 env를 구분해서 봐야 한다.
 - `remotePatterns` 문제처럼 보이는 이슈도 실제로는 빌드 타이밍, env 우선순위, 렌더 방식 차이일 수 있다.
 - env 키 이름 하나가 build, runtime, client, server 경계를 동시에 건드릴 수 있어서, 변수명과 우선순위를 먼저 문서화하는 편이 사고가 적다.
+- monorepo에서는 app 전용 env를 root `globalEnv`에 계속 쌓기보다, 각 앱 `turbo.json`으로 내리는 편이 유지보수성이 훨씬 좋다.
 - “로컬에서는 되는데 배포에서 안 된다” 유형은 대개 네트워크보다 빌드 시점 설정 차이로 풀리는 경우가 많았다.
 
 ## 자주 헷갈리는 부분
@@ -32,6 +33,10 @@
     - `typescript`
 - asset public host는 서버 전용 키를 우선
 - docs 관련 env는 build/runtime 경계를 나눠서 점검
+- Turbo env 선언은 앱별 파일에서 관리
+  - `apps/docs/turbo.json`
+  - `apps/vuln-radar/turbo.json`
+  - root `turbo.json > globalEnv`는 repo-wide 값만 유지
 - asset public host 우선순위
   1. `BLOG_CONTENT_ASSET_BASE_URL_PUBLIC`
   2. `NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC`

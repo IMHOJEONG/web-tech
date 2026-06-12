@@ -219,6 +219,17 @@ entities/cve/
 현재 프론트는 `vite.config.ts`의 `server.proxy`가 `/api/backend/*`를 `http://localhost:4000/api/*`로 프록시한다.
 즉, 브라우저 공개 경로는 유지하고 실제 목적지 연결만 Vite 개발 서버가 맡는다.
 
+## Turbo env 관리
+
+Turbo 환경변수 선언은 root `turbo.json`에 몰아넣지 않고 앱별로 관리한다.
+
+- `apps/vuln-radar/turbo.json`
+  - `VULN_RADAR_BACKEND_ORIGIN`
+- `VITE_*`
+  - Vite framework inference로 Turbo가 패키지 단위로 자동 추적한다.
+
+즉, 이 앱 전용 env를 추가할 때는 가능하면 root `globalEnv`가 아니라 `apps/vuln-radar/turbo.json`부터 갱신한다.
+
 ## 관련 문서
 
 - `docs/003_dev-runtime.md`
