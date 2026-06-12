@@ -70,6 +70,16 @@ export async function getJson<T>(
       });
     }
 
+    const dataSource = getResponseDataSource(parsed.data);
+
+    if (dataSource?.kind === "mock") {
+      console.warn("[vuln-radar api] mock fallback response", {
+        path,
+        url: buildApiUrl(path),
+        dataSource,
+      });
+    }
+
     return parsed.data;
   } catch (error) {
     if (error instanceof ApiError) {
@@ -86,4 +96,34 @@ export async function getJson<T>(
   } finally {
     window.clearTimeout(timeoutId);
   }
+}
+
+function getResponseDataSource(value: unknown):
+  | { kind: string; reason: string; message: string }
+  | null {
+  if (!value || typeof value !== "object") {
+    return null;
+  }
+
+  const dataSource = (value as { dataSource?: unknown }).dataSource;
+
+  if (!dataSource || typeof dataSource !== "object") {
+    return null;
+  }
+
+  const candidate = dataSource as Record<string, unknown>;
+
+  if (
+    typeof candidate.kind === "string" &&
+    typeof candidate.reason === "string" &&
+    typeof candidate.message === "string"
+  ) {
+    return {
+      kind: candidate.kind,
+      reason: candidate.reason,
+      message: candidate.message,
+    };
+  }
+
+  return null;
 }

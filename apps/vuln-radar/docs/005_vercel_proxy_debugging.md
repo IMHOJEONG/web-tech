@@ -187,6 +187,40 @@ status: 200
 - Overview 화면의 에러 상세에서 `parse` 실패가 찍히는지 본다
 - 브라우저 콘솔에서 `[vuln-radar api] schema parse failed` 로그와 `issues`를 본다
 
+### Browser response is `200`, but the timestamp still looks old
+
+의미:
+
+- proxy나 네트워크가 아니라 backend read API가 mock fallback을 반환 중일 수 있다.
+- 이 경우 `generatedAt`은 최신 ingest 시각이 아니라 seed data 기준 시각일 수 있다.
+
+체크:
+
+- response body에 `dataSource`가 있는지 본다
+- `dataSource.kind === "mock"`인지 확인한다
+- 브라우저 콘솔에서 `[vuln-radar api] mock fallback response` 경고가 찍히는지 본다
+- overview 화면 상단의 mock fallback 안내 문구를 본다
+
+예시:
+
+```json
+{
+  "generatedAt": "2026-05-18T09:00:00.000Z",
+  "dataSource": {
+    "kind": "mock",
+    "reason": "no_database_rows",
+    "message": "Feed is using seed mock data because no ingested database rows are available yet."
+  }
+}
+```
+
+해석:
+
+- `database_unavailable`
+  - DB 연결을 못 얻어서 seed mock으로 응답 중
+- `no_database_rows`
+  - DB 연결은 있지만 아직 ingest 결과 row가 없어서 seed mock으로 응답 중
+
 ## 엔드포인트 점검 순서
 
 아래 순서로 보면 가장 빠르다.
@@ -233,6 +267,7 @@ Vercel에서 아래를 본다.
 - JSON/text 응답을 문자열 그대로 전달
 - Vercel Node 런타임용 `req, res` 시그니처 대응
 - 디버그 로그 유지
+- mock fallback 응답은 프런트 콘솔에서 경고로 노출
 
 ## 관련 문서
 

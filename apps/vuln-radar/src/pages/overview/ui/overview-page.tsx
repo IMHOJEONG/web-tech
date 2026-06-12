@@ -4,6 +4,7 @@ import {
   type IngestStatusResponse,
   type KevResponse,
   type OverviewResponse,
+  type RadarDataSource,
   type WatchlistResponse,
   getFeed,
   getHealthStatus,
@@ -162,11 +163,21 @@ export function OverviewPage() {
   const overview = overviewQuery.data as OverviewResponse;
   const feed = feedQuery.data as FeedResponse;
   const kev = kevQuery.data as KevResponse;
+  const watchlist = watchlistQuery.data as WatchlistResponse;
   const status = statusQuery.data as IngestStatusResponse;
   const overviewCards = overview.cards;
   const feedItems = feed.items.slice(0, 8);
   const kevItems = kev.items.slice(0, 8);
   const statusSources = status.sources;
+  const responseSources = [
+    { label: "overview", source: overview.dataSource },
+    { label: "feed", source: feed.dataSource },
+    { label: "kev", source: kev.dataSource },
+    { label: "watchlist", source: watchlist.dataSource },
+  ];
+  const mockFallbacks = responseSources.filter(
+    ({ source }) => source.kind === "mock",
+  );
 
   return (
     <section className="page-grid">
@@ -196,7 +207,32 @@ export function OverviewPage() {
           <span className="status-pill" data-tone={status.mode}>
             Upstream {status.mode}
           </span>
+          <span
+            className="status-pill"
+            data-tone={overview.dataSource.kind}
+            title={overview.dataSource.message}
+          >
+            Overview {formatDataSourceLabel(overview.dataSource)}
+          </span>
         </div>
+
+        {mockFallbacks.length > 0 ? (
+          <div className="source-alert" data-kind="mock">
+            <strong>Mock fallback is active</strong>
+            <p>
+              Some cards are still rendering seed data, so timestamps may lag
+              behind the latest ingest run.
+            </p>
+            <ul className="compact-list source-alert-list">
+              {mockFallbacks.map(({ label, source }) => (
+                <li key={label}>
+                  <strong>{label}</strong>
+                  <span>{source.message}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
 
         <div className="metric-grid">
           {overviewCards.map((card: OverviewResponse["cards"][number]) => (
@@ -214,8 +250,7 @@ export function OverviewPage() {
             <span>Watchlist Matches</span>
             <strong>{totalWatchMatches}</strong>
             <p>
-              {watchlistQuery.data?.entries.length ?? 0} watchlist entries are
-              currently active.
+              {watchlist.entries.length} watchlist entries are currently active.
             </p>
           </article>
         </div>
@@ -292,10 +327,18 @@ export function OverviewPage() {
         <article className="section-panel">
           <div className="panel-heading">
             <h3>Latest Feed</h3>
-            <span className="panel-meta">
-              {formatDateTime(feed.generatedAt)}
-            </span>
+            <div className="panel-heading-meta">
+              <span className="panel-meta">{formatDateTime(feed.generatedAt)}</span>
+              <span
+                className="status-pill"
+                data-tone={feed.dataSource.kind}
+                title={feed.dataSource.message}
+              >
+                {formatDataSourceLabel(feed.dataSource)}
+              </span>
+            </div>
           </div>
+          <p className="panel-note">{feed.dataSource.message}</p>
           <ul className="feed-list">
             {feedItems.map((item: FeedResponse["items"][number]) => (
               <li key={item.cveId} className="feed-card">
@@ -329,10 +372,18 @@ export function OverviewPage() {
         <article className="section-panel">
           <div className="panel-heading">
             <h3>New KEV Entries</h3>
-            <span className="panel-meta">
-              {formatDateTime(kev.generatedAt)}
-            </span>
+            <div className="panel-heading-meta">
+              <span className="panel-meta">{formatDateTime(kev.generatedAt)}</span>
+              <span
+                className="status-pill"
+                data-tone={kev.dataSource.kind}
+                title={kev.dataSource.message}
+              >
+                {formatDataSourceLabel(kev.dataSource)}
+              </span>
+            </div>
           </div>
+          <p className="panel-note">{kev.dataSource.message}</p>
           <ul className="compact-list">
             {kevItems.map((item: KevResponse["items"][number]) => (
               <li key={item.cveId}>
@@ -362,4 +413,16 @@ function formatDateTime(value: string | null) {
     dateStyle: "medium",
     timeStyle: "short",
   }).format(new Date(value));
+}
+
+function formatDataSourceLabel(source: RadarDataSource) {
+  if (source.kind === "mock") {
+    return "Mock fallback";
+  }
+
+  if (source.reason === "derived_from_feed") {
+    return "Derived";
+  }
+
+  return "Database";
 }

@@ -238,6 +238,11 @@ select {
   color: #16603b;
 }
 
+.status-pill[data-tone="mock"] {
+  background: #fff0dc;
+  color: #9a5e00;
+}
+
 .status-pill[data-tone="pull"] {
   background: #fff5dd;
   color: #8a5d00;
@@ -290,6 +295,12 @@ select {
   align-items: start;
 }
 
+.panel-heading-meta {
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+}
+
 .panel-meta {
   color: #53708a;
   font-size: 0.9rem;
@@ -324,6 +335,27 @@ select {
 .panel-note {
   margin: 18px 0 0;
   color: #415b73;
+}
+
+.source-alert {
+  margin-top: 20px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 176, 32, 0.28);
+  background: linear-gradient(180deg, #fff9ef 0%, #fffdf8 100%);
+}
+
+.source-alert strong {
+  color: #7a4c00;
+}
+
+.source-alert p {
+  margin: 8px 0 0;
+  max-width: 64ch;
+}
+
+.source-alert-list {
+  margin-top: 14px;
 }
 
 .compact-list,

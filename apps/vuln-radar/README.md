@@ -244,6 +244,24 @@ Turbo 환경변수 선언은 root `turbo.json`에 몰아넣지 않고 앱별로 
 즉, 브라우저는 계속 `/api/backend/*`만 호출하고, Vercel 배포에서는 proxy function이 `VULN_RADAR_BACKEND_ORIGIN`을 읽어 `${backendOrigin}/api/*`로 전달한다.
 backend가 server-to-server Bearer 인증을 요구하면 `VULN_RADAR_BACKEND_API_TOKEN`을 읽어 `Authorization: Bearer <token>` 헤더도 같이 주입한다.
 
+## read API source metadata
+
+overview, feed, kev, watchlist, alerts 응답은 이제 `dataSource` 메타데이터를 같이 내려준다.
+
+- `kind`
+  - `database`
+  - `mock`
+- `reason`
+  - `live_read_model`
+  - `derived_from_feed`
+  - `database_unavailable`
+  - `no_database_rows`
+- `message`
+  - 현재 응답이 왜 database 또는 mock으로 보이는지 설명
+
+프런트 overview 화면은 이 값을 배지와 안내 문구로 그대로 표시한다.
+즉, 오래된 `generatedAt`이 보이면 먼저 `dataSource.kind === "mock"`인지 보면 된다.
+
 ## 관련 문서
 
 - `docs/003_dev-runtime.md`
