@@ -230,6 +230,18 @@ Turbo 환경변수 선언은 root `turbo.json`에 몰아넣지 않고 앱별로 
 
 즉, 이 앱 전용 env를 추가할 때는 가능하면 root `globalEnv`가 아니라 `apps/vuln-radar/turbo.json`부터 갱신한다.
 
+## 운영 프록시 기준
+
+로컬 개발과 운영 배포는 같은 공개 경로를 유지하되, 프록시 계층만 다르게 둔다.
+
+- local dev
+  - `vite.config.ts`의 `server.proxy`
+- Vercel production
+  - `vercel.json`
+  - `api/proxy/[...path].ts`
+
+즉, 브라우저는 계속 `/api/backend/*`만 호출하고, Vercel 배포에서는 proxy function이 `VULN_RADAR_BACKEND_ORIGIN`을 읽어 `${backendOrigin}/api/*`로 전달한다.
+
 ## 관련 문서
 
 - `docs/003_dev-runtime.md`
