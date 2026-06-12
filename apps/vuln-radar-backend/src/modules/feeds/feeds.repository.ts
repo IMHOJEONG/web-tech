@@ -12,6 +12,7 @@ import {
   FeedResponse,
   KevResponse,
   OverviewResponse,
+  RadarDataSource,
   WatchlistResponse,
 } from '../../shared/types/radar';
 
@@ -64,8 +65,8 @@ export class FeedsRepository {
   async getOverview(): Promise<OverviewResponse> {
     const feed = await this.getFeed();
 
-    if (feed.items.length === 0) {
-      return getOverviewResponse();
+    if (feed.dataSource.kind === 'mock') {
+      return getOverviewResponse(getMockFallbackReason(feed.dataSource.reason));
     }
 
     const p0Count = feed.items.filter((item) => item.priority === 'P0').length;
@@ -74,6 +75,12 @@ export class FeedsRepository {
 
     return {
       generatedAt: feed.generatedAt,
+      dataSource: {
+        kind: 'database',
+        reason: 'derived_from_feed',
+        message:
+          'Overview cards are derived from the live feed read-model stored in the database.',
+      },
       cards: [
         {
           id: 'p0-open',
@@ -108,7 +115,7 @@ export class FeedsRepository {
     const client = await this.prismaService.getClient();
 
     if (!client) {
-      return getFeedResponse();
+      return getFeedResponse('database_unavailable');
     }
 
     const vulnerabilities = (await client.vulnerability.findMany({
@@ -124,11 +131,14 @@ export class FeedsRepository {
     })) as DbVulnerability[];
 
     if (vulnerabilities.length === 0) {
-      return getFeedResponse();
+      return getFeedResponse('no_database_rows');
     }
 
     return {
       generatedAt: new Date().toISOString(),
+      dataSource: getDatabaseDataSource(
+        'Feed is reading the current vulnerability read-model from the database.',
+      ),
       items: vulnerabilities.map((vulnerability) => ({
         cveId: vulnerability.cveId,
         title: vulnerability.title,
@@ -149,7 +159,7 @@ export class FeedsRepository {
     const client = await this.prismaService.getClient();
 
     if (!client) {
-      return getWatchlistResponse();
+      return getWatchlistResponse('database_unavailable');
     }
 
     const entries = (await client.watchlistEntry.findMany({
@@ -165,11 +175,14 @@ export class FeedsRepository {
     })) as DbWatchlistEntry[];
 
     if (entries.length === 0) {
-      return getWatchlistResponse();
+      return getWatchlistResponse('no_database_rows');
     }
 
     return {
       generatedAt: new Date().toISOString(),
+      dataSource: getDatabaseDataSource(
+        'Watchlist coverage is reading enabled entries from the database.',
+      ),
       entries: entries.map((entry) => ({
         id: entry.id,
         type: entry.type,
@@ -183,7 +196,7 @@ export class FeedsRepository {
     const client = await this.prismaService.getClient();
 
     if (!client) {
-      return getKevResponse();
+      return getKevResponse('database_unavailable');
     }
 
     const advisories = (await client.advisory.findMany({
@@ -204,11 +217,14 @@ export class FeedsRepository {
     })) as DbKevAdvisory[];
 
     if (advisories.length === 0) {
-      return getKevResponse();
+      return getKevResponse('no_database_rows');
     }
 
     return {
       generatedAt: new Date().toISOString(),
+      dataSource: getDatabaseDataSource(
+        'KEV entries are reading advisory records from the database.',
+      ),
       items: advisories.map((advisory) => ({
         cveId: advisory.vulnerability.cveId,
         title: advisory.vulnerability.title,
@@ -223,7 +239,7 @@ export class FeedsRepository {
     const client = await this.prismaService.getClient();
 
     if (!client) {
-      return getAlertsResponse();
+      return getAlertsResponse('database_unavailable');
     }
 
     const alerts = (await client.alert.findMany({
@@ -232,11 +248,14 @@ export class FeedsRepository {
     })) as DbAlert[];
 
     if (alerts.length === 0) {
-      return getAlertsResponse();
+      return getAlertsResponse('no_database_rows');
     }
 
     return {
       generatedAt: new Date().toISOString(),
+      dataSource: getDatabaseDataSource(
+        'Alerts are reading notification delivery records from the database.',
+      ),
       items: alerts.map((alert) => ({
         id: alert.id,
         priority: alert.priority,
@@ -263,4 +282,22 @@ function normalizeSeverity(
   }
 
   return 'low';
+}
+
+function getDatabaseDataSource(message: string): RadarDataSource {
+  return {
+    kind: 'database',
+    reason: 'live_read_model',
+    message,
+  };
+}
+
+function getMockFallbackReason(
+  reason: RadarDataSource['reason'],
+): 'database_unavailable' | 'no_database_rows' {
+  if (reason === 'no_database_rows') {
+    return reason;
+  }
+
+  return 'database_unavailable';
 }

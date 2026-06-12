@@ -7,6 +7,8 @@ import {
   KevResponse,
   OverviewCard,
   OverviewResponse,
+  RadarDataSource,
+  RadarDataSourceReason,
   WatchlistEntry,
   WatchlistResponse,
 } from '../types/radar';
@@ -130,9 +132,36 @@ const kevItems: KevItem[] = [
   },
 ];
 
-export function getOverviewResponse(): OverviewResponse {
+type MockFallbackReason = Extract<
+  RadarDataSourceReason,
+  'database_unavailable' | 'no_database_rows'
+>;
+
+function buildMockDataSource(
+  resourceLabel: string,
+  reason: MockFallbackReason = 'database_unavailable',
+): RadarDataSource {
+  if (reason === 'no_database_rows') {
+    return {
+      kind: 'mock',
+      reason,
+      message: `${resourceLabel} is using seed mock data because no ingested database rows are available yet.`,
+    };
+  }
+
+  return {
+    kind: 'mock',
+    reason,
+    message: `${resourceLabel} is using seed mock data because the database connection is currently unavailable.`,
+  };
+}
+
+export function getOverviewResponse(
+  reason: MockFallbackReason = 'database_unavailable',
+): OverviewResponse {
   return {
     generatedAt: GENERATED_AT,
+    dataSource: buildMockDataSource('Overview', reason),
     cards: overviewCards,
     highlights: [
       'KEV + watchlist match signals are elevated.',
@@ -141,30 +170,42 @@ export function getOverviewResponse(): OverviewResponse {
   };
 }
 
-export function getFeedResponse(): FeedResponse {
+export function getFeedResponse(
+  reason: MockFallbackReason = 'database_unavailable',
+): FeedResponse {
   return {
     generatedAt: GENERATED_AT,
+    dataSource: buildMockDataSource('Feed', reason),
     items: feedItems,
   };
 }
 
-export function getWatchlistResponse(): WatchlistResponse {
+export function getWatchlistResponse(
+  reason: MockFallbackReason = 'database_unavailable',
+): WatchlistResponse {
   return {
     generatedAt: GENERATED_AT,
+    dataSource: buildMockDataSource('Watchlist', reason),
     entries: watchlistEntries,
   };
 }
 
-export function getKevResponse(): KevResponse {
+export function getKevResponse(
+  reason: MockFallbackReason = 'database_unavailable',
+): KevResponse {
   return {
     generatedAt: GENERATED_AT,
+    dataSource: buildMockDataSource('KEV', reason),
     items: kevItems,
   };
 }
 
-export function getAlertsResponse(): AlertsResponse {
+export function getAlertsResponse(
+  reason: MockFallbackReason = 'database_unavailable',
+): AlertsResponse {
   return {
     generatedAt: GENERATED_AT,
+    dataSource: buildMockDataSource('Alerts', reason),
     items: alertItems,
   };
 }

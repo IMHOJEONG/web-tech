@@ -166,3 +166,27 @@ queue worker 또는 분리된 ingest worker로 옮기는 편이 더 안전하다
 - ingest는 먼저 수동 sync로 검증한다.
 - 그다음 scheduler를 붙여 자동 polling으로 확장한다.
 - push가 꼭 필요해지면 그때 SSE/websocket을 검토한다.
+
+## mock fallback을 어떻게 식별하나
+
+feed, overview, kev, watchlist, alerts 응답은 `dataSource` 메타데이터를 함께 내려준다.
+
+- `kind`
+  - `database`
+  - `mock`
+- `reason`
+  - `live_read_model`
+  - `derived_from_feed`
+  - `database_unavailable`
+  - `no_database_rows`
+- `message`
+  - 현재 응답이 왜 그 source로 내려왔는지 설명
+
+즉 오래된 `generatedAt`이 보이면, 먼저 이 값을 본다.
+
+- `kind: "database"`
+  - 최신 read-model 기준 응답
+- `kind: "mock"`
+  - seed mock data 기준 응답
+
+특히 `kind: "mock"`이면 날짜가 최신 ingest 시각이 아닐 수 있다.

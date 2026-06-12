@@ -1,4 +1,16 @@
 export type RadarPriority = 'P0' | 'P1' | 'P2' | 'P3';
+export type RadarDataSourceKind = 'database' | 'mock';
+export type RadarDataSourceReason =
+  | 'live_read_model'
+  | 'derived_from_feed'
+  | 'database_unavailable'
+  | 'no_database_rows';
+
+export interface RadarDataSource {
+  kind: RadarDataSourceKind;
+  reason: RadarDataSourceReason;
+  message: string;
+}
 
 export interface OverviewCard {
   id: string;
@@ -10,6 +22,7 @@ export interface OverviewCard {
 
 export interface OverviewResponse {
   generatedAt: string;
+  dataSource: RadarDataSource;
   cards: OverviewCard[];
   highlights: string[];
 }
@@ -28,6 +41,7 @@ export interface FeedItem {
 
 export interface FeedResponse {
   generatedAt: string;
+  dataSource: RadarDataSource;
   items: FeedItem[];
 }
 
@@ -41,6 +55,7 @@ export interface KevItem {
 
 export interface KevResponse {
   generatedAt: string;
+  dataSource: RadarDataSource;
   items: KevItem[];
 }
 
@@ -53,6 +68,7 @@ export interface WatchlistEntry {
 
 export interface WatchlistResponse {
   generatedAt: string;
+  dataSource: RadarDataSource;
   entries: WatchlistEntry[];
 }
 
@@ -67,5 +83,6 @@ export interface AlertItem {
 
 export interface AlertsResponse {
   generatedAt: string;
+  dataSource: RadarDataSource;
   items: AlertItem[];
 }
