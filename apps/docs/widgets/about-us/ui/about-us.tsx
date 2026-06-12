@@ -157,18 +157,13 @@ export async function AboutUs() {
                 <section className="pt-8">
                     <article className="ds-card relative mx-auto max-w-3xl bg-surface-container p-8 shadow-glow-primary">
                         <div className="space-y-8">
-                            <div className="flex items-center gap-6">
-                                <div className="flex size-20 items-center justify-center rounded-xl border-2 border-primary bg-[linear-gradient(135deg,var(--surface-container-low),var(--surface-container-high))] text-2xl font-bold text-primary">
-                                    AV
-                                </div>
-                                <div className="space-y-1">
+                            <div className="space-y-1">
                                     <h2 className="font-display text-2xl leading-[1.3] font-bold text-on-surface">
                                         {t('profile.name')}
                                     </h2>
                                     <p className="font-display text-base tracking-wider uppercase text-primary">
                                         {t('profile.role')}
                                     </p>
-                                </div>
                             </div>
 
                             <p className="text-body-md text-on-surface-variant">

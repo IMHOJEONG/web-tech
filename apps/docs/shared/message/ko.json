@@ -4,10 +4,10 @@
     },
     "metadata": {
         "site": {
-            "title": "HeapForge - Where memory meets mastery.",
-            "description": "웹 엔지니어링, 시스템 사고, UI/UX 아키텍처, 제품 관점의 기술 글쓰기를 탐색하는 docs 경험입니다.",
-            "ogTitle": "HeapForge - Where memory meets mastery.",
-            "ogDescription": "웹 시스템, 모바일 제품 사고, UI/UX 아키텍처, 엔지니어링 노트를 탐색 가능한 지식 베이스 형태로 만나보세요."
+            "title": "HeapForge - 기술을 구조로 쌓아 올리는 아카이브",
+            "description": "웹 엔지니어링, 시스템 설계, UI/UX 구조, 제품 관점의 기술 메모를 차분히 정리하는 기술 아카이브입니다.",
+            "ogTitle": "HeapForge - 기술을 구조로 쌓아 올리는 아카이브",
+            "ogDescription": "웹 시스템, 모바일 제품 감각, UI/UX 설계, 엔지니어링 메모를 오래 참고할 수 있는 지식 베이스로 정리합니다."
         }
     },
     "navigation": {
@@ -350,8 +350,8 @@
             "titleAccentOne": "하나의",
             "titleAccentTwo": "구조로 엮습니다",
             "description": "HeapForge는 웹 엔지니어링, 모바일 제품 감각, UI/UX 구조를 함께 다루는 작은 실험실입니다. 구현과 설계를 따로 보지 않고 오래 쓰이는 구조를 만드는 데 관심을 둡니다.",
-            "missionLabel": "// 운영 원칙",
-            "establishedLabel": "// 2024부터 기록 중"
+            "missionLabel": "// 만들고 기록하는 기준",
+            "establishedLabel": "// 2024년부터 이어온 아카이브"
         },
         "pillars": {
             "web": {
@@ -375,7 +375,7 @@
         "profile": {
             "name": "HoJeong Im",
             "role": "Full Stack Engineer",
-            "bio": "미니멀한 미감과 높은 성능을 함께 지향하는 풀스택 엔지니어입니다. 디지털 빌더가 오래 참고할 수 있는 열린 지식 베이스로 HEAP-FORGE를 만들어가고 있습니다.",
+            "bio": "구조가 분명한 인터페이스와 오래 버티는 구현을 좋아하는 풀스택 엔지니어입니다. HEAP-FORGE에는 디지털 빌더가 두고두고 참고할 수 있는 기술 메모와 설계 기록을 차곡차곡 쌓아가고 있습니다.",
             "links": {
                 "github": {
                     "label": "GITHUB",
