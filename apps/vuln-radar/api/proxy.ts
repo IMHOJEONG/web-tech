@@ -239,13 +239,24 @@ async function writeProxyResponse(
   upstreamResponse: Response,
 ) {
   const headers = createResponseHeaders(upstreamResponse);
+  const contentType =
+    upstreamResponse.headers.get("content-type")?.toLowerCase() || "";
 
   headers.forEach((value, name) => {
     response.setHeader(name, value);
   });
 
-  const bodyBuffer = new Uint8Array(await upstreamResponse.arrayBuffer());
+  if (
+    contentType.includes("application/json") ||
+    contentType.startsWith("text/") ||
+    contentType.includes("application/problem+json")
+  ) {
+    const bodyText = await upstreamResponse.text();
+    response.status(upstreamResponse.status).send(bodyText);
+    return;
+  }
 
+  const bodyBuffer = new Uint8Array(await upstreamResponse.arrayBuffer());
   response.status(upstreamResponse.status).send(bodyBuffer);
 }
 

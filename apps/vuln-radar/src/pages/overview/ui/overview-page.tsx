@@ -12,6 +12,7 @@ import {
   getOverview,
   getWatchlist,
 } from "@/shared/api/radar";
+import { ApiError } from "@/shared/api/client";
 import { runtimeConfig } from "@/shared/config/runtime";
 
 export function OverviewPage() {
@@ -61,6 +62,15 @@ export function OverviewPage() {
     feedQuery.error ||
     kevQuery.error ||
     watchlistQuery.error;
+  const queryStates = [
+    { label: "health", query: healthQuery },
+    { label: "ingest/status", query: statusQuery },
+    { label: "overview", query: overviewQuery },
+    { label: "feed", query: feedQuery },
+    { label: "kev", query: kevQuery },
+    { label: "watchlist", query: watchlistQuery },
+  ];
+  const failedQueries = queryStates.filter(({ query }) => query.error);
 
   const totalWatchMatches =
     watchlistQuery.data?.entries.reduce(
@@ -97,6 +107,29 @@ export function OverviewPage() {
   }
 
   if (error) {
+    const errorDetails = failedQueries.map(({ label, query }) => {
+      const queryError = query.error;
+
+      if (queryError instanceof ApiError) {
+        return {
+          label,
+          code: queryError.code,
+          status: queryError.status,
+          message: queryError.message,
+        };
+      }
+
+      return {
+        label,
+        code: "unknown",
+        status: null,
+        message:
+          queryError instanceof Error
+            ? queryError.message
+            : "Unknown query failure.",
+      };
+    });
+
     return (
       <section className="page-grid">
         <article className="hero-panel">
@@ -106,6 +139,18 @@ export function OverviewPage() {
             Check <code>{runtimeConfig.apiBasePath}/health</code> and confirm
             the Vite proxy is pointed at the running backend.
           </p>
+          <ul className="compact-list">
+            {errorDetails.map((item) => (
+              <li key={item.label}>
+                <strong>{item.label}</strong>
+                <span>
+                  {item.code}
+                  {item.status ? ` / ${item.status}` : ""}
+                  {` - ${item.message}`}
+                </span>
+              </li>
+            ))}
+          </ul>
           <button className="action-button" onClick={() => void refreshAll()}>
             Retry
           </button>
