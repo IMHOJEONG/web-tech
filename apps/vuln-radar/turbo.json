@@ -1,8 +1,26 @@
 {
   "extends": ["//"],
   "tasks": {
+    "build": {
+      "env": [
+        "VULN_RADAR_BACKEND_ORIGIN",
+        "VULN_RADAR_BACKEND_API_TOKEN",
+        "VITE_*"
+      ]
+    },
     "dev": {
-      "env": ["VULN_RADAR_BACKEND_ORIGIN"]
+      "env": [
+        "VULN_RADAR_BACKEND_ORIGIN",
+        "VULN_RADAR_BACKEND_API_TOKEN",
+        "VITE_*"
+      ]
+    },
+    "start": {
+      "env": [
+        "VULN_RADAR_BACKEND_ORIGIN",
+        "VULN_RADAR_BACKEND_API_TOKEN",
+        "VITE_*"
+      ]
     }
   }
 }

@@ -61,8 +61,15 @@ function buildUpstreamUrl(request: Request, backendOrigin: string) {
 
 function createUpstreamHeaders(request: Request) {
   const headers = new Headers(request.headers);
+  const backendApiToken = process.env.VULN_RADAR_BACKEND_API_TOKEN?.trim();
 
   HOP_BY_HOP_HEADERS.forEach((header) => headers.delete(header));
+
+  // Browser clients should keep calling the frontend origin only.
+  // When the upstream backend is protected, inject the shared token here.
+  if (backendApiToken && !headers.has("authorization")) {
+    headers.set("authorization", `Bearer ${backendApiToken}`);
+  }
 
   return headers;
 }
@@ -77,13 +84,34 @@ function createResponseHeaders(upstreamResponse: Response) {
 
 export default async function handler(request: Request) {
   try {
-    const upstreamUrl = buildUpstreamUrl(request, getBackendOrigin());
+    const backendOrigin = getBackendOrigin();
+    const upstreamUrl = buildUpstreamUrl(request, backendOrigin);
     const method = request.method.toUpperCase();
+
+    console.log("[vuln-radar proxy] request received", {
+      method,
+      requestUrl: request.url,
+      backendOrigin,
+      upstreamUrl: upstreamUrl.toString(),
+    });
+
+    console.log("[vuln-radar proxy] starting upstream fetch", {
+      method,
+      upstreamUrl: upstreamUrl.toString(),
+    });
+
     const upstreamResponse = await fetch(upstreamUrl, {
       method,
       headers: createUpstreamHeaders(request),
       body: method === "GET" || method === "HEAD" ? undefined : request.body,
       redirect: "manual",
+    });
+
+    console.log("[vuln-radar proxy] upstream response received", {
+      method,
+      upstreamUrl: upstreamUrl.toString(),
+      status: upstreamResponse.status,
+      statusText: upstreamResponse.statusText,
     });
 
     return new Response(upstreamResponse.body, {
@@ -96,6 +124,12 @@ export default async function handler(request: Request) {
       error instanceof Error
         ? error.message
         : "Unknown proxy error while forwarding the request.";
+
+    console.error("[vuln-radar proxy] upstream fetch failed", {
+      requestUrl: request.url,
+      message,
+      error,
+    });
 
     return Response.json(
       {

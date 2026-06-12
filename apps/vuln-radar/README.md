@@ -225,6 +225,7 @@ Turbo 환경변수 선언은 root `turbo.json`에 몰아넣지 않고 앱별로 
 
 - `apps/vuln-radar/turbo.json`
   - `VULN_RADAR_BACKEND_ORIGIN`
+  - `VULN_RADAR_BACKEND_API_TOKEN`
 - `VITE_*`
   - Vite framework inference로 Turbo가 패키지 단위로 자동 추적한다.
 
@@ -241,6 +242,7 @@ Turbo 환경변수 선언은 root `turbo.json`에 몰아넣지 않고 앱별로 
   - `api/proxy/[...path].ts`
 
 즉, 브라우저는 계속 `/api/backend/*`만 호출하고, Vercel 배포에서는 proxy function이 `VULN_RADAR_BACKEND_ORIGIN`을 읽어 `${backendOrigin}/api/*`로 전달한다.
+backend가 server-to-server Bearer 인증을 요구하면 `VULN_RADAR_BACKEND_API_TOKEN`을 읽어 `Authorization: Bearer <token>` 헤더도 같이 주입한다.
 
 ## 관련 문서
 
