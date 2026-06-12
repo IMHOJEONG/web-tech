@@ -16,6 +16,8 @@
 - 네트워크 제한 환경에서는 설치/검증 명령이 부분 성공처럼 보여도 마지막 메타 조회에서 실패할 수 있다.
 - `remotePatterns`는 일반 HTML 이미지가 아니라 `next/image`에만 적용된다.
 - `NEXT_PUBLIC`를 붙였더니 해결된 것처럼 보여도, 실제 원인은 그 키를 `next.config`가 읽고 있었기 때문일 수 있다.
+- Vercel은 `ENABLE_EXPERIMENTAL_COREPACK=1`과 root `package.json > packageManager`가 있어도, Turbo 환경 전달 조건이 맞지 않으면 Corepack을 비활성화하고 자체 heuristics로 `pnpm` 버전을 고를 수 있다.
+- `pnpm-lock.yaml` 버전 9는 Vercel 로그에서 `pnpm@9.x 또는 pnpm@10.x`로 해석될 수 있어서, Corepack이 꺼진 상태에서는 최신 `packageManager` 선언보다 낮은 `pnpm`으로 fallback 될 수 있다.
 
 ## 현재 운영 기준
 
@@ -36,8 +38,9 @@
   3. `BLOG_CONTENT_ASSET_BASE_URL_INTERNAL`
   4. `BLOG_CONTENT_ASSET_BASE_URL`
 - package manager 기준
-  - workspace `pnpm@11.0.4`
-  - CI도 동일 계열로 맞춘 뒤 검증
+  - root `package.json`의 `packageManager`는 `pnpm@11.3.0`
+  - Vercel에서는 `ENABLE_EXPERIMENTAL_COREPACK=1`과 함께 `turbo.json > globalPassThroughEnv`에 `COREPACK_HOME`을 포함해 Corepack fallback을 막는다.
+  - lockfile 관련 검증은 가능한 한 로컬과 CI/배포 환경 모두 같은 `pnpm` 메이저 버전에서 확인한다.
 - GitHub `main` ruleset 기준
   - PR 필수
   - approval 필수는 없음
@@ -102,6 +105,11 @@
   - 외부 네트워크 환경인지
   - workspace pnpm 버전과 CI 버전이 맞는지
     먼저 구분
+- Vercel 로그에
+  - `Disabling corepack`
+  - `Using pnpm@9.x based on project creation date`
+  - `ERR_PNPM_LOCKFILE_CONFIG_MISMATCH`
+    가 같이 보이면, 먼저 `pnpm-lock.yaml` 자체보다 `packageManager`가 실제로 반영되지 못한 상황인지 확인한다.
 - root 도구 버전을 올릴 때는
   - root `package.json`
   - `pnpm-workspace.yaml` catalog
@@ -122,3 +130,4 @@
 - `docs/worklog/2026-05-15-remote-thumbnail-server-base-resolution.md`
 - `docs/worklog/2026-05-18-remote-thumbnail-asset-base-only.md`
 - `docs/worklog/2026-05-26-main-ruleset-verification.md`
+- `docs/worklog/2026-06-12-vercel-corepack-pnpm-lockfile-mismatch.md`
