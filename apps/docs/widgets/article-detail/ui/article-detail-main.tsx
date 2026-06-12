@@ -100,7 +100,7 @@ export function ArticleDetailMain({
             <section className="ds-code-shell">
                 <div className="ds-code-shell__header">
                     <span className="tracking-[0.14em]">{codeFileLabel}</span>
-                    <span className="font-mono text-xs text-outline">
+                    <span className="font-display text-xs tracking-[0.12em] text-outline uppercase">
                         {codeActionLabel}
                     </span>
                 </div>

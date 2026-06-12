@@ -87,7 +87,7 @@ export async function AboutUs() {
                         </p>
                     </div>
 
-                    <div className="font-mono text-sm leading-normal text-outline lg:shrink-0 lg:text-right">
+                    <div className="font-display text-sm leading-normal tracking-[0.08em] text-outline uppercase lg:shrink-0 lg:text-right">
                         <p>{t('hero.missionLabel')}</p>
                         <p>{t('hero.establishedLabel')}</p>
                     </div>
@@ -158,12 +158,12 @@ export async function AboutUs() {
                     <article className="ds-card relative mx-auto max-w-3xl bg-surface-container p-8 shadow-glow-primary">
                         <div className="space-y-8">
                             <div className="space-y-1">
-                                    <h2 className="font-display text-2xl leading-[1.3] font-bold text-on-surface">
-                                        {t('profile.name')}
-                                    </h2>
-                                    <p className="font-display text-base tracking-wider uppercase text-primary">
-                                        {t('profile.role')}
-                                    </p>
+                                <h2 className="font-display text-2xl leading-[1.3] font-bold text-on-surface">
+                                    {t('profile.name')}
+                                </h2>
+                                <p className="font-display text-base tracking-wider uppercase text-primary">
+                                    {t('profile.role')}
+                                </p>
                             </div>
 
                             <p className="text-body-md text-on-surface-variant">
