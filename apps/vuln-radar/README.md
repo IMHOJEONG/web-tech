@@ -239,7 +239,7 @@ Turbo 환경변수 선언은 root `turbo.json`에 몰아넣지 않고 앱별로 
   - `vite.config.ts`의 `server.proxy`
 - Vercel production
   - `vercel.json`
-  - `api/proxy/[...path].ts`
+  - `api/proxy.ts`
 
 즉, 브라우저는 계속 `/api/backend/*`만 호출하고, Vercel 배포에서는 proxy function이 `VULN_RADAR_BACKEND_ORIGIN`을 읽어 `${backendOrigin}/api/*`로 전달한다.
 backend가 server-to-server Bearer 인증을 요구하면 `VULN_RADAR_BACKEND_API_TOKEN`을 읽어 `Authorization: Bearer <token>` 헤더도 같이 주입한다.

@@ -1,5 +1,6 @@
-const INTERNAL_PROXY_PREFIX = "/api/proxy";
+const PROXY_ROUTE_PATH = "/api/proxy";
 const PUBLIC_PROXY_PREFIX = "/api/backend";
+const INTERNAL_PATH_QUERY_KEY = "proxyPath";
 
 const HOP_BY_HOP_HEADERS = [
   "connection",
@@ -29,6 +30,10 @@ type ResponseLike = {
   status(code: number): ResponseLike;
   send(body?: string | Uint8Array): void;
 };
+
+function trimLeadingSlash(value: string) {
+  return value.replace(/^\/+/, "");
+}
 
 function trimTrailingSlash(value: string) {
   return value.replace(/\/+$/, "");
@@ -107,24 +112,38 @@ function getRequestOrigin(request: RequestLike) {
 }
 
 function isKnownProxyQueryParam(name: string) {
-  return name === "...path" || name === "path";
+  return (
+    name === INTERNAL_PATH_QUERY_KEY || name === "...path" || name === "path"
+  );
 }
 
-function stripKnownProxyPrefix(pathname: string) {
-  if (pathname.startsWith(INTERNAL_PROXY_PREFIX)) {
-    return pathname.slice(INTERNAL_PROXY_PREFIX.length);
+function resolveProxyPath(incomingUrl: URL) {
+  const queryPath = incomingUrl.searchParams
+    .get(INTERNAL_PATH_QUERY_KEY)
+    ?.trim();
+
+  if (queryPath) {
+    return trimLeadingSlash(queryPath);
   }
 
-  if (pathname.startsWith(PUBLIC_PROXY_PREFIX)) {
-    return pathname.slice(PUBLIC_PROXY_PREFIX.length);
+  if (incomingUrl.pathname.startsWith(PUBLIC_PROXY_PREFIX)) {
+    return trimLeadingSlash(
+      incomingUrl.pathname.slice(PUBLIC_PROXY_PREFIX.length),
+    );
   }
 
-  return pathname;
+  if (incomingUrl.pathname.startsWith(PROXY_ROUTE_PATH)) {
+    return trimLeadingSlash(
+      incomingUrl.pathname.slice(PROXY_ROUTE_PATH.length),
+    );
+  }
+
+  return trimLeadingSlash(incomingUrl.pathname);
 }
 
 function buildUpstreamUrl(request: RequestLike, backendOrigin: string) {
   const incomingUrl = new URL(request.url, getRequestOrigin(request));
-  const proxyPath = stripKnownProxyPrefix(incomingUrl.pathname);
+  const proxyPath = resolveProxyPath(incomingUrl);
   const upstreamUrl = new URL(backendOrigin);
 
   Array.from(incomingUrl.searchParams.keys()).forEach((name) => {
@@ -165,8 +184,6 @@ function createUpstreamHeaders(request: RequestLike) {
   HOP_BY_HOP_HEADERS.forEach((header) => headers.delete(header));
   headers.delete("accept-encoding");
 
-  // Browser clients should keep calling the frontend origin only.
-  // When the upstream backend is protected, inject the shared token here.
   if (backendApiToken && !headers.has("authorization")) {
     headers.set("authorization", `Bearer ${backendApiToken}`);
   }

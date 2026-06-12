@@ -10,14 +10,14 @@
 Browser
 -> https://<frontend>.vercel.app/api/backend/*
 -> vercel.json rewrite
--> api/proxy/[...path].ts
+-> api/proxy.ts
 -> https://<backend-origin>/api/*
 ```
 
 현재 기준 파일:
 
 - `apps/vuln-radar/vercel.json`
-- `apps/vuln-radar/api/proxy/[...path].ts`
+- `apps/vuln-radar/api/proxy.ts`
 
 핵심 env:
 
@@ -32,7 +32,7 @@ Browser
 - local dev
   - `vite.config.ts > server.proxy`
 - Vercel production
-  - `vercel.json` + `api/proxy/[...path].ts`
+  - `vercel.json` + `api/proxy.ts`
 
 즉, 로컬에서 정상이어도 운영 프록시 계층은 따로 점검해야 한다.
 
@@ -186,10 +186,11 @@ Vercel에서 아래를 본다.
 ## 현재 프록시가 보장하는 것
 
 현재 `api/proxy/[...path].ts`는 아래를 처리한다.
+현재 `api/proxy.ts`는 아래를 처리한다.
 
 - public prefix `/api/backend` 제거
-- internal prefix `/api/proxy` 제거
-- rewrite 부산물 query(`...path`, `path`) 제거
+- internal proxy query(`proxyPath`) 해석
+- rewrite 부산물 query(`proxyPath`, `...path`, `path`) 제거
 - Bearer 토큰 주입
 - 압축 관련 헤더 정리
 - Vercel Node 런타임용 `req, res` 시그니처 대응
