@@ -1,4 +1,5 @@
 const INTERNAL_PROXY_PREFIX = "/api/proxy";
+const PUBLIC_PROXY_PREFIX = "/api/backend";
 
 const HOP_BY_HOP_HEADERS = [
   "connection",
@@ -46,11 +47,37 @@ function getBackendOrigin() {
   return trimTrailingSlash(url.toString());
 }
 
+function getRequestOrigin(request: Request) {
+  const forwardedProto = request.headers.get("x-forwarded-proto")?.trim();
+  const forwardedHost = request.headers.get("x-forwarded-host")?.trim();
+  const host = request.headers.get("host")?.trim();
+
+  if (forwardedProto && forwardedHost) {
+    return `${forwardedProto}://${forwardedHost}`;
+  }
+
+  if (host) {
+    return `https://${host}`;
+  }
+
+  return "https://localhost";
+}
+
+function stripKnownProxyPrefix(pathname: string) {
+  if (pathname.startsWith(INTERNAL_PROXY_PREFIX)) {
+    return pathname.slice(INTERNAL_PROXY_PREFIX.length);
+  }
+
+  if (pathname.startsWith(PUBLIC_PROXY_PREFIX)) {
+    return pathname.slice(PUBLIC_PROXY_PREFIX.length);
+  }
+
+  return pathname;
+}
+
 function buildUpstreamUrl(request: Request, backendOrigin: string) {
-  const incomingUrl = new URL(request.url);
-  const proxyPath = incomingUrl.pathname.startsWith(INTERNAL_PROXY_PREFIX)
-    ? incomingUrl.pathname.slice(INTERNAL_PROXY_PREFIX.length)
-    : incomingUrl.pathname;
+  const incomingUrl = new URL(request.url, getRequestOrigin(request));
+  const proxyPath = stripKnownProxyPrefix(incomingUrl.pathname);
   const upstreamUrl = new URL(backendOrigin);
 
   upstreamUrl.pathname = joinUrlPaths(upstreamUrl.pathname, "/api", proxyPath);
