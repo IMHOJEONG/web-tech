@@ -249,6 +249,10 @@ backend가 server-to-server Bearer 인증을 요구하면 `VULN_RADAR_BACKEND_AP
 - `docs/003_dev-runtime.md`
   - 프론트/백엔드 로컬 실행 전략
   - Vite proxy와 backend 연결 방식
+- `docs/005_vercel_proxy_debugging.md`
+  - Vercel 운영 프록시 디버깅
+  - direct backend / vercel proxy 비교 순서
+  - Function Logs 해석 기준
 - `docs/004_workspace_install_and_typescript_recovery.md`
   - `@web-tech/ui prebuild` 실패 복구
   - `@web-tech/typescript-config/react-library` 미해석 복구
