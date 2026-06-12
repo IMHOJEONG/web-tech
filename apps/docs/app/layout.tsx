@@ -66,10 +66,18 @@ export default async function Layout({
     return (
         <html lang={locale} className="size-full">
             <head>
-                <script
-                    src="https://unpkg.com/react-scan/dist/auto.global.js"
-                    async
+                <Script
+                    src="//unpkg.com/react-scan/dist/auto.global.js"
+                    crossOrigin="anonymous"
+                    strategy="beforeInteractive"
                 />
+                {process.env.NODE_ENV === 'development' && (
+                    <Script
+                        src="//unpkg.com/react-grab/dist/index.global.js"
+                        crossOrigin="anonymous"
+                        strategy="beforeInteractive"
+                    />
+                )}
             </head>
             <NextIntlClientProvider locale={locale} messages={messages}>
                 <body
