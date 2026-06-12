@@ -14,6 +14,11 @@ const HOP_BY_HOP_HEADERS = [
   "upgrade",
 ];
 
+type RequestLike = Request & {
+  headers?: Headers | Record<string, string | string[] | undefined>;
+  url: string;
+};
+
 function trimTrailingSlash(value: string) {
   return value.replace(/\/+$/, "");
 }
@@ -47,10 +52,31 @@ function getBackendOrigin() {
   return trimTrailingSlash(url.toString());
 }
 
-function getRequestOrigin(request: Request) {
-  const forwardedProto = request.headers.get("x-forwarded-proto")?.trim();
-  const forwardedHost = request.headers.get("x-forwarded-host")?.trim();
-  const host = request.headers.get("host")?.trim();
+function getHeaderValue(
+  headers: RequestLike["headers"],
+  name: string,
+): string | undefined {
+  if (!headers) {
+    return undefined;
+  }
+
+  if (headers instanceof Headers) {
+    return headers.get(name)?.trim() || undefined;
+  }
+
+  const rawValue = headers[name] ?? headers[name.toLowerCase()];
+
+  if (Array.isArray(rawValue)) {
+    return rawValue[0]?.trim() || undefined;
+  }
+
+  return rawValue?.trim() || undefined;
+}
+
+function getRequestOrigin(request: RequestLike) {
+  const forwardedProto = getHeaderValue(request.headers, "x-forwarded-proto");
+  const forwardedHost = getHeaderValue(request.headers, "x-forwarded-host");
+  const host = getHeaderValue(request.headers, "host");
 
   if (forwardedProto && forwardedHost) {
     return `${forwardedProto}://${forwardedHost}`;
@@ -75,7 +101,7 @@ function stripKnownProxyPrefix(pathname: string) {
   return pathname;
 }
 
-function buildUpstreamUrl(request: Request, backendOrigin: string) {
+function buildUpstreamUrl(request: RequestLike, backendOrigin: string) {
   const incomingUrl = new URL(request.url, getRequestOrigin(request));
   const proxyPath = stripKnownProxyPrefix(incomingUrl.pathname);
   const upstreamUrl = new URL(backendOrigin);
@@ -86,7 +112,7 @@ function buildUpstreamUrl(request: Request, backendOrigin: string) {
   return upstreamUrl;
 }
 
-function createUpstreamHeaders(request: Request) {
+function createUpstreamHeaders(request: RequestLike) {
   const headers = new Headers(request.headers);
   const backendApiToken = process.env.VULN_RADAR_BACKEND_API_TOKEN?.trim();
 
@@ -109,7 +135,7 @@ function createResponseHeaders(upstreamResponse: Response) {
   return headers;
 }
 
-export default async function handler(request: Request) {
+export default async function handler(request: RequestLike) {
   try {
     const backendOrigin = getBackendOrigin();
     const upstreamUrl = buildUpstreamUrl(request, backendOrigin);
