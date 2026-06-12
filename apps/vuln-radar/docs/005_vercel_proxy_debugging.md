@@ -149,6 +149,44 @@ status: 200
 - `hasAuthorizationHeader: true`가 찍히는가
 - direct backend + same token으로도 `200`이 나는가
 
+### Browser response is `200`, but the app still shows `API Error`
+
+의미:
+
+- HTTP는 성공했지만 프런트가 기대하는 JSON shape로 전달되지 않았을 수 있다.
+- 특히 proxy가 upstream body를 잘못 전달하면 브라우저 Network에는 `200`으로 보이지만,
+  프런트 `zod` parse는 실패할 수 있다.
+
+대표 증상:
+
+```json
+{
+  "0": 123,
+  "1": 34,
+  "2": 103
+}
+```
+
+원인:
+
+- proxy가 upstream response body를 `Uint8Array`로 받은 뒤
+- Vercel/Express `res.send()`가 이를 일반 object처럼 직렬화
+- 결과적으로 정상 JSON 대신 숫자 인덱스 object가 브라우저에 전달됨
+
+현재 프록시는:
+
+- `application/json`
+- `text/*`
+- `application/problem+json`
+
+응답은 `text()`로 그대로 전달한다.
+
+체크:
+
+- 브라우저 Network의 Response 탭에서 body가 정상 JSON인지 본다
+- Overview 화면의 에러 상세에서 `parse` 실패가 찍히는지 본다
+- 브라우저 콘솔에서 `[vuln-radar api] schema parse failed` 로그와 `issues`를 본다
+
 ## 엔드포인트 점검 순서
 
 아래 순서로 보면 가장 빠르다.
@@ -185,7 +223,6 @@ Vercel에서 아래를 본다.
 
 ## 현재 프록시가 보장하는 것
 
-현재 `api/proxy/[...path].ts`는 아래를 처리한다.
 현재 `api/proxy.ts`는 아래를 처리한다.
 
 - public prefix `/api/backend` 제거
@@ -193,6 +230,7 @@ Vercel에서 아래를 본다.
 - rewrite 부산물 query(`proxyPath`, `...path`, `path`) 제거
 - Bearer 토큰 주입
 - 압축 관련 헤더 정리
+- JSON/text 응답을 문자열 그대로 전달
 - Vercel Node 런타임용 `req, res` 시그니처 대응
 - 디버그 로그 유지
 
