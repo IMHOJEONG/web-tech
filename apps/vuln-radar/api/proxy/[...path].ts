@@ -3,6 +3,7 @@ const PUBLIC_PROXY_PREFIX = "/api/backend";
 
 const HOP_BY_HOP_HEADERS = [
   "connection",
+  "content-encoding",
   "content-length",
   "host",
   "keep-alive",
@@ -124,6 +125,7 @@ function createUpstreamHeaders(request: RequestLike) {
   const backendApiToken = process.env.VULN_RADAR_BACKEND_API_TOKEN?.trim();
 
   HOP_BY_HOP_HEADERS.forEach((header) => headers.delete(header));
+  headers.delete("accept-encoding");
 
   // Browser clients should keep calling the frontend origin only.
   // When the upstream backend is protected, inject the shared token here.
