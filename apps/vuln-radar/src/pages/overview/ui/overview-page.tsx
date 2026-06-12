@@ -328,7 +328,9 @@ export function OverviewPage() {
           <div className="panel-heading">
             <h3>Latest Feed</h3>
             <div className="panel-heading-meta">
-              <span className="panel-meta">{formatDateTime(feed.generatedAt)}</span>
+              <span className="panel-meta">
+                {formatDateTime(feed.generatedAt)}
+              </span>
               <span
                 className="status-pill"
                 data-tone={feed.dataSource.kind}
@@ -373,7 +375,9 @@ export function OverviewPage() {
           <div className="panel-heading">
             <h3>New KEV Entries</h3>
             <div className="panel-heading-meta">
-              <span className="panel-meta">{formatDateTime(kev.generatedAt)}</span>
+              <span className="panel-meta">
+                {formatDateTime(kev.generatedAt)}
+              </span>
               <span
                 className="status-pill"
                 data-tone={kev.dataSource.kind}

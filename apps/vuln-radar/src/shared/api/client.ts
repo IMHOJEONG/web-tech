@@ -98,9 +98,9 @@ export async function getJson<T>(
   }
 }
 
-function getResponseDataSource(value: unknown):
-  | { kind: string; reason: string; message: string }
-  | null {
+function getResponseDataSource(
+  value: unknown,
+): { kind: string; reason: string; message: string } | null {
   if (!value || typeof value !== "object") {
     return null;
   }
