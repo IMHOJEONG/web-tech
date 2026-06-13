@@ -303,6 +303,9 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 - `docs/003_watchlist_admin_api.md`
   - 운영에서 watchlist를 어떻게 CRUD하는지
   - 왜 JSON upsert보다 admin API를 기본 경로로 선택했는지
+- `docs/004_backend_bootstrap_and_ops_history.md`
+  - 이번 bootstrap / Prisma / Railway / proxy 작업 히스토리 정리
+  - 처음 NestJS 및 인프라를 볼 때 알아둘 함정과 운영 기준
 
 ## 실시간 데이터에 대한 현재 기준
 
