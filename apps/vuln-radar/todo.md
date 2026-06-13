@@ -111,6 +111,14 @@
 - [ ] ecosystem 목록
 - [ ] keyword 목록
 - [ ] watchlist 편집 UI
+- [ ] backend `admin/watchlist` CRUD API를 연결한 운영용 watchlist admin 화면 추가
+- [ ] watchlist 변경 뒤 `POST /api/ingest/sync`를 이어서 실행하거나 유도하는 운영 UX 정리
+
+후속 메모:
+
+- backend에는 이미 `GET/POST/PATCH/DELETE /api/admin/watchlist`가 준비되어 있다.
+- 프런트 admin 화면은 backend 배포 후 실제 운영 토큰과 응답 shape를 검증한 뒤 붙인다.
+- 지금 단계에서는 curl 기반 운영 검증을 먼저 끝내고, 그 다음 브라우저 관리 UI로 확장한다.
 
 공부 포인트:
 

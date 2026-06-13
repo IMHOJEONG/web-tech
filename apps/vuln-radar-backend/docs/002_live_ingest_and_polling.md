@@ -190,3 +190,122 @@ feed, overview, kev, watchlist, alerts 응답은 `dataSource` 메타데이터를
   - seed mock data 기준 응답
 
 특히 `kind: "mock"`이면 날짜가 최신 ingest 시각이 아닐 수 있다.
+
+## 운영 데이터 준비 순서
+
+실제 배포에서 DB 연결이 이미 되어 있다면, 다음 순서로 보는 것이 가장 안전하다.
+
+1. admin API 또는 운영용 JSON으로 watchlist 준비
+2. watchlist만 DB에 반영
+3. `POST /api/ingest/sync` 실행
+4. `/api/ingest/status`와 read API를 확인
+
+### admin API로 watchlist 관리
+
+운영에서는 backend auth 토큰이 있다면 JSON 파일 업로드 없이 admin API로 직접 watchlist를 관리할 수 있다.
+
+- `GET /api/admin/watchlist`
+- `POST /api/admin/watchlist`
+- `PATCH /api/admin/watchlist/:id`
+- `DELETE /api/admin/watchlist/:id`
+
+예시:
+
+```bash
+curl -X POST "http://127.0.0.1:4000/api/admin/watchlist" \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "product",
+    "value": "react",
+    "enabled": true
+  }'
+```
+
+이 선택의 배경과 운영 CRUD 절차는 `docs/003_watchlist_admin_api.md`에 따로 정리한다.
+
+### 1. 운영용 watchlist JSON 준비
+
+예제 파일:
+
+- `config/watchlist.entries.example.json`
+
+실제 운영 파일:
+
+- `config/watchlist.entries.json`
+
+권장 포맷:
+
+```json
+{
+  "version": 1,
+  "entries": [
+    { "type": "vendor", "value": "microsoft", "enabled": true },
+    { "type": "product", "value": "kubernetes", "enabled": true },
+    { "type": "ecosystem", "value": "npm", "enabled": true },
+    { "type": "keyword", "value": "auth bypass", "enabled": true }
+  ]
+}
+```
+
+지원 type:
+
+- `vendor`
+- `product`
+- `ecosystem`
+- `keyword`
+
+### 2. watchlist만 DB에 upsert
+
+운영에서는 `db:seed`를 그대로 쓰지 않는 편이 안전하다.
+그 스크립트는 watchlist뿐 아니라 demo vulnerability/advisory/epss/alert도 같이 넣기 때문이다.
+
+대신 아래 스크립트를 사용한다.
+
+```bash
+pnpm --filter vuln-radar-backend watchlist:upsert
+```
+
+다른 파일 경로를 쓰고 싶으면:
+
+```bash
+pnpm --filter vuln-radar-backend watchlist:upsert -- --file ./config/my-watchlist.json
+```
+
+파일에 없는 기존 enabled 항목을 한 번에 비활성화하려면:
+
+```bash
+pnpm --filter vuln-radar-backend watchlist:upsert -- --disable-missing
+```
+
+이 스크립트는:
+
+- JSON 포맷 검증
+- `type + value` 기준 upsert
+- value trim + lowercase 정규화
+- 선택적으로 missing entry 비활성화
+
+를 수행한다.
+
+### 3. ingest 실행
+
+watchlist가 들어간 뒤에 sync를 돌리면, 외부 소스에서 읽은 CVE에 대해 watch match와 priority가 계산된다.
+
+```bash
+curl -X POST "http://127.0.0.1:4000/api/ingest/sync?lookbackHours=24"
+```
+
+배포 환경에서 backend auth가 켜져 있으면 `Authorization: Bearer <token>` 헤더를 함께 보낸다.
+
+### 4. 결과 확인
+
+확인 포인트:
+
+- `/api/ingest/status`
+  - `storage: "database"`
+- `/api/feed`
+- `/api/overview`
+- `/api/kev`
+- `/api/watchlist`
+
+이제 read API의 `dataSource.kind`가 `mock`이 아니라 `database`로 바뀌면 실데이터 전환이 된 것이다.

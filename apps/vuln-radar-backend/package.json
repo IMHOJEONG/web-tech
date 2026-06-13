@@ -20,6 +20,7 @@
     "db:migrate:dev": "prisma migrate dev",
     "db:push": "prisma db push",
     "db:seed": "ts-node --project tsconfig.json prisma/seed.ts",
+    "watchlist:upsert": "prisma generate && ts-node --project tsconfig.json src/scripts/upsert-watchlist.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",

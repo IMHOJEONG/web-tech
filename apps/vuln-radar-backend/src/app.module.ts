@@ -5,6 +5,7 @@ import { PrismaModule } from './infra/prisma/prisma.module';
 import { FeedsModule } from './modules/feeds/feeds.module';
 import { HealthModule } from './modules/health/health.module';
 import { IngestModule } from './modules/ingest/ingest.module';
+import { WatchlistModule } from './modules/watchlist/watchlist.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { IngestModule } from './modules/ingest/ingest.module';
     HealthModule,
     FeedsModule,
     IngestModule,
+    WatchlistModule,
   ],
 })
 export class AppModule {}

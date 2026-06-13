@@ -18,6 +18,11 @@ interface PrismaLikeClient {
   };
   watchlistEntry: {
     findMany: (args?: unknown) => Promise<unknown[]>;
+    create: (args: unknown) => Promise<unknown>;
+    update: (args: unknown) => Promise<unknown>;
+    delete: (args: unknown) => Promise<unknown>;
+    findUnique: (args: unknown) => Promise<unknown | null>;
+    upsert: (args: unknown) => Promise<unknown>;
   };
   watchMatch: {
     deleteMany: (args?: unknown) => Promise<unknown>;

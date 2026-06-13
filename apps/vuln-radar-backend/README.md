@@ -51,6 +51,41 @@
 - `VULN_RADAR_API_TOKEN`
 - `NVD_API_KEY`
 
+## 운영 watchlist 입력 방식
+
+운영에서 실데이터 ingest를 쓰려면 데모용 `db:seed` 대신
+`watchlistEntry`만 별도로 넣는 편이 안전하다.
+
+현재 repo에는 운영용 watchlist JSON 포맷과 upsert 스크립트가 있다.
+
+- example JSON
+  - `config/watchlist.entries.example.json`
+- 실제 비공개 파일
+  - `config/watchlist.entries.json`
+- upsert script
+  - `pnpm --filter vuln-radar-backend watchlist:upsert`
+
+파일 포맷은 아래처럼 단순하다.
+
+```json
+{
+  "version": 1,
+  "entries": [
+    { "type": "vendor", "value": "microsoft", "enabled": true },
+    { "type": "product", "value": "kubernetes", "enabled": true },
+    { "type": "ecosystem", "value": "npm", "enabled": true },
+    { "type": "keyword", "value": "auth bypass", "enabled": true }
+  ]
+}
+```
+
+주의:
+
+- `db:seed`는 demo vulnerability/advisory/epss/alert까지 같이 넣는다.
+- 운영에서는 `watchlist:upsert`로 관심 키워드만 먼저 넣고 `POST /api/ingest/sync`를 실행하는 흐름을 권장한다.
+- 스크립트는 값을 trim + lowercase 정규화해서 upsert한다.
+- 파일에 없는 기존 항목까지 비활성화하려면 `--disable-missing` 옵션을 쓴다.
+
 ### Prisma generate와 DB URL
 
 - `prisma generate`는 실제 DB 접속이 필요한 명령은 아니지만, Prisma 7에서는 `prisma.config.ts`를 먼저 로드한다.
@@ -172,6 +207,13 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 - ecosystem
 - keyword
 
+현재는 운영용 admin API도 제공한다.
+
+- `GET /api/admin/watchlist`
+- `POST /api/admin/watchlist`
+- `PATCH /api/admin/watchlist/:id`
+- `DELETE /api/admin/watchlist/:id`
+
 ### `scoring`
 
 위험도 계산의 핵심이다.
@@ -242,6 +284,9 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
   - 어떤 upstream source를 실제로 읽는지
   - 왜 현재 구조를 polling / near-real-time으로 보는지
   - live sync와 freshness를 어떻게 확인하는지
+- `docs/003_watchlist_admin_api.md`
+  - 운영에서 watchlist를 어떻게 CRUD하는지
+  - 왜 JSON upsert보다 admin API를 기본 경로로 선택했는지
 
 ## 실시간 데이터에 대한 현재 기준
 
