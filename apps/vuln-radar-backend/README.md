@@ -33,9 +33,11 @@
 
 ## 환경 변수 로딩 기준
 
-- 로컬 개발에서는 `apps/vuln-radar-backend/.env`를 둘 수 있다.
+- 로컬 개발에서는 `apps/vuln-radar-backend/.env`와 `.env.local`을 둘 수 있다.
+- 로더는 `.env`를 먼저 읽고, `.env.local`을 나중에 읽는다.
+- 즉 로컬에서 machine-specific override는 `.env.local`에 두는 편이 안전하다.
 - 배포 환경에서는 `.env` 파일이 없어도 된다.
-- 현재 backend는 `.env` 파일이 있으면 읽고, 없으면 무시한 뒤 런타임 환경변수만 사용한다.
+- Railway 같은 PaaS에서는 파일 업로드 대신 Variables 설정만 맞추는 것을 권장한다.
 
 즉 Railway 같은 PaaS에서는 파일 업로드 대신 Variables 설정만 맞추면 된다.
 
@@ -50,6 +52,20 @@
 - `FRONTEND_ORIGIN`
 - `VULN_RADAR_API_TOKEN`
 - `NVD_API_KEY`
+
+권장 예제 파일:
+
+- base local example
+  - `.env.example`
+- local machine override example
+  - `.env.local.example`
+- Railway dashboard Variables reference
+  - `.env.railway.example`
+
+중요:
+
+- 로컬에서 Railway production DB를 테스트할 때는 `DIRECT_URL`이 있으면 그것이 `DATABASE_URL`보다 우선한다.
+- 즉 `DATABASE_URL`만 public DB URL로 바꿔도, `DIRECT_URL`에 예전 internal host가 남아 있으면 계속 internal host를 타게 된다.
 
 ## 운영 watchlist 입력 방식
 

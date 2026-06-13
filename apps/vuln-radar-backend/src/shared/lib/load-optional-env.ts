@@ -11,3 +11,9 @@ export function loadOptionalEnvFile(path = '.env') {
     throw error;
   }
 }
+
+export function loadOptionalEnvFiles(paths: string[]) {
+  for (const path of paths) {
+    loadOptionalEnvFile(path);
+  }
+}

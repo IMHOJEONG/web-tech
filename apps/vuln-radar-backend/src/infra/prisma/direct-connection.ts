@@ -1,6 +1,6 @@
-import { loadOptionalEnvFile } from '../../shared/lib/load-optional-env';
+import { loadOptionalEnvFiles } from '../../shared/lib/load-optional-env';
 
-loadOptionalEnvFile('.env');
+loadOptionalEnvFiles(['.env', '.env.local']);
 
 type PrismaPostgresTokenPayload = {
   databaseUrl?: string;
