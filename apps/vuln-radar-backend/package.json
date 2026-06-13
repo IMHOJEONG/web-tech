@@ -38,6 +38,7 @@
   "dependencies": {
     "@prisma/adapter-pg": "catalog:backend",
     "@prisma/client": "catalog:backend",
+    "@prisma/client-runtime-utils": "catalog:backend",
     "@nestjs/common": "catalog:backend",
     "@nestjs/core": "catalog:backend",
     "@nestjs/platform-express": "catalog:backend",

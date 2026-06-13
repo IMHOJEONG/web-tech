@@ -78,6 +78,7 @@ catalog:
 catalogs:
   backend:
     "@prisma/client": "^7.8.0"
+    "@prisma/client-runtime-utils": "^7.8.0"
     "@prisma/adapter-pg": "^7.8.0"
     "@nestjs/cli": "^11.0.16"
     "@nestjs/common": "^11.1.13"
