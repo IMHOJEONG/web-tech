@@ -159,6 +159,8 @@ curl -X POST "http://127.0.0.1:4000/api/ingest/sync?lookbackHours=6"
 나중에 replica가 여러 개가 되면
 queue worker 또는 분리된 ingest worker로 옮기는 편이 더 안전하다.
 
+운영 정책과 보안 관점은 `docs/006_ingest_sync_policy_and_security.md`에 따로 정리한다.
+
 ## 현재 개발 기준
 
 - mock fallback은 FE 계약 보호용으로 유지한다.

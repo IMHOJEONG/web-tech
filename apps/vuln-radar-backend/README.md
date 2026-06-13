@@ -306,6 +306,13 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 - `docs/004_backend_bootstrap_and_ops_history.md`
   - 이번 bootstrap / Prisma / Railway / proxy 작업 히스토리 정리
   - 처음 NestJS 및 인프라를 볼 때 알아둘 함정과 운영 기준
+- `docs/005_postgres_checkpoint_notes.md`
+  - PostgreSQL checkpoint 로그가 무엇인지
+  - 언제 돌고 어떤 필드를 읽어야 하는지
+  - checkpoint 주기와 ingest scheduler 주기를 어떻게 구분해서 봐야 하는지
+- `docs/006_ingest_sync_policy_and_security.md`
+  - `POST /api/ingest/sync`와 scheduler를 어떻게 운영해야 하는지
+  - ingest/write 작업에서 알아둘 보안과 멀티 인스턴스 한계
 
 ## 실시간 데이터에 대한 현재 기준
 
