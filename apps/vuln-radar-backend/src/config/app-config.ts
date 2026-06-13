@@ -66,7 +66,7 @@ export function getAppConfig(): AppConfig {
     ingestSchedulerEnabled: readBooleanEnv('INGEST_SCHEDULER_ENABLED', true),
     ingestSyncIntervalMinutes: readNumberEnv(
       'INGEST_SYNC_INTERVAL_MINUTES',
-      60,
+      1440,
     ),
     ingestSyncOnStartup: readBooleanEnv('INGEST_SYNC_ON_STARTUP', false),
     nvdApiKey: process.env.NVD_API_KEY?.trim() || undefined,

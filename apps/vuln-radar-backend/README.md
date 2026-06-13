@@ -324,5 +324,5 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
   - `POST /api/ingest/sync`
 - 자동 sync는 env로 제어한다.
   - `INGEST_SCHEDULER_ENABLED=true`
-  - `INGEST_SYNC_INTERVAL_MINUTES=60`
+  - `INGEST_SYNC_INTERVAL_MINUTES=1440`
   - `INGEST_SYNC_ON_STARTUP=false`

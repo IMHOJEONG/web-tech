@@ -53,12 +53,12 @@
 이 프로젝트의 수집 루틴은 backend env로 따로 제어한다.
 
 - `INGEST_SCHEDULER_ENABLED=true`
-- `INGEST_SYNC_INTERVAL_MINUTES=60`
+- `INGEST_SYNC_INTERVAL_MINUTES=1440`
 - `INGEST_SYNC_ON_STARTUP=false`
 
 즉 현재 앱 설정 기본값 기준으로는:
 
-- ingest sync는 `60분마다` 돌도록 해석할 수 있다
+- ingest sync는 `24시간마다` 돌도록 해석할 수 있다
 - 하지만 PostgreSQL checkpoint는 그 주기와 무관하게 별도로 돈다
 
 한 줄로 구분하면:
@@ -272,7 +272,7 @@ dirty page write 자체 쪽일 가능성이 더 높다.
 
 - checkpoint는 정상 동작이다
 - “한 시간마다”가 아니라 `checkpoint_timeout`과 `max_wal_size`의 영향을 받는다
-- 반면 `vuln-radar-backend`의 ingest 수집 루틴은 기본값 기준 `60분` 간격이다
+- 반면 `vuln-radar-backend`의 ingest 수집 루틴은 기본값 기준 `24시간` 간격이다
 - 예시 로그에서는 `fsync`보다 write 단계가 대부분 시간을 쓰고 있다
 
 ## 참고 문서

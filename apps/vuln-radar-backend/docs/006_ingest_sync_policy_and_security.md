@@ -74,12 +74,12 @@ curl -X POST "https://<backend-host>/api/ingest/sync?lookbackHours=6" \
 현재 기본값은 다음과 같다.
 
 - `INGEST_SCHEDULER_ENABLED=true`
-- `INGEST_SYNC_INTERVAL_MINUTES=60`
+- `INGEST_SYNC_INTERVAL_MINUTES=1440`
 - `INGEST_SYNC_ON_STARTUP=false`
 
 즉 기본 해석은:
 
-- 앱이 떠 있는 동안 60분마다 자동 sync
+- 앱이 떠 있는 동안 24시간마다 자동 sync
 - 앱이 재시작될 때 즉시 sync는 하지 않음
 
 ## 현재 운영 정책 추천
