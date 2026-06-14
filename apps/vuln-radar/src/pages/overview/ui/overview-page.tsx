@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 import {
   type FeedResponse,
   type IngestStatusResponse,
@@ -15,8 +16,10 @@ import {
 } from "@/shared/api/radar";
 import { ApiError } from "@/shared/api/client";
 import { runtimeConfig } from "@/shared/config/runtime";
+import { useI18n } from "@/shared/i18n/i18n-provider";
 
 export function OverviewPage() {
+  const { t, formatDateTime } = useI18n();
   const healthQuery = useQuery({
     queryKey: ["radar", "health"],
     queryFn: getHealthStatus,
@@ -79,6 +82,14 @@ export function OverviewPage() {
         total + entry.matchCount,
       0,
     ) ?? 0;
+  const isRefreshing =
+    !isLoading &&
+    (healthQuery.isFetching ||
+      statusQuery.isFetching ||
+      overviewQuery.isFetching ||
+      feedQuery.isFetching ||
+      kevQuery.isFetching ||
+      watchlistQuery.isFetching);
 
   const refreshAll = async () => {
     await Promise.all([
@@ -95,12 +106,10 @@ export function OverviewPage() {
     return (
       <section className="page-grid">
         <article className="hero-panel">
-          <p className="app-eyebrow">Loading Live Radar</p>
-          <h2>Backend data is being loaded into the dashboard.</h2>
+          <p className="app-eyebrow">{t("overview.loadingEyebrow")}</p>
+          <h2>{t("overview.loadingTitle")}</h2>
           <p className="hero-copy">
-            We are checking health, ingest freshness, overview cards, feed, KEV,
-            and watchlist coverage through{" "}
-            <code>{runtimeConfig.apiBasePath}</code>.
+            {t("overview.loadingBody")} <code>{runtimeConfig.apiBasePath}</code>
           </p>
         </article>
       </section>
@@ -134,11 +143,11 @@ export function OverviewPage() {
     return (
       <section className="page-grid">
         <article className="hero-panel">
-          <p className="app-eyebrow">API Error</p>
-          <h2>The dashboard could not load backend data.</h2>
+          <p className="app-eyebrow">{t("overview.errorEyebrow")}</p>
+          <h2>{t("overview.errorTitle")}</h2>
           <p className="hero-copy">
-            Check <code>{runtimeConfig.apiBasePath}/health</code> and confirm
-            the Vite proxy is pointed at the running backend.
+            {t("overview.errorBody")}{" "}
+            <code>{runtimeConfig.apiBasePath}/health</code>
           </p>
           <ul className="compact-list">
             {errorDetails.map((item) => (
@@ -153,7 +162,7 @@ export function OverviewPage() {
             ))}
           </ul>
           <button className="action-button" onClick={() => void refreshAll()}>
-            Retry
+            {t("common.retry")}
           </button>
         </article>
       </section>
@@ -184,28 +193,39 @@ export function OverviewPage() {
       <article className="hero-panel">
         <div className="panel-toolbar">
           <div>
-            <p className="app-eyebrow">Live Radar Overview</p>
-            <h2>Backend data is now rendered directly inside the Vite app.</h2>
+            <p className="app-eyebrow">{t("overview.heroEyebrow")}</p>
+            <h2>{t("overview.heroTitle")}</h2>
           </div>
-          <button className="action-button" onClick={() => void refreshAll()}>
-            Refresh
+          <button
+            className="action-button"
+            onClick={() => void refreshAll()}
+            disabled={isRefreshing}
+            aria-busy={isRefreshing}
+          >
+            {isRefreshing ? t("common.refreshing") : t("common.refresh")}
           </button>
         </div>
-        <p className="hero-copy">
-          This screen is reading live backend endpoints instead of a static
-          placeholder. The browser stays on a stable public path while the Vite
-          proxy forwards requests to the Nest backend.
-        </p>
+        <p className="hero-copy">{t("overview.heroBody")}</p>
+        {isRefreshing ? (
+          <div className="refresh-indicator" role="status" aria-live="polite">
+            <span className="refresh-indicator-dot" />
+            <span>{t("overview.refreshingNotice")}</span>
+          </div>
+        ) : null}
         <div className="badge-row">
           <span className="config-line">
-            API path
+            {t("overview.apiPath")}
             <code>{runtimeConfig.apiBasePath}</code>
           </span>
           <span className="status-pill" data-tone={healthQuery.data?.storage}>
-            Storage {healthQuery.data?.storage}
+            {t("overview.storage")}{" "}
+            {healthQuery.data?.storage
+              ? t(`domain.storage.${healthQuery.data.storage}` as const)
+              : ""}
           </span>
           <span className="status-pill" data-tone={status.mode}>
-            Upstream {status.mode}
+            {t("overview.upstream")}{" "}
+            {status.mode ? t(`domain.upstream.${status.mode}` as const) : ""}
           </span>
           <span
             className="status-pill"
@@ -241,13 +261,21 @@ export function OverviewPage() {
               className="metric-card"
               data-priority={card.priority}
             >
-              <span>{card.label}</span>
+              <span>
+                {card.id === "p0-open" ||
+                card.id === "p1-open" ||
+                card.id === "kev-new"
+                  ? t(`domain.card.${card.id}` as const)
+                  : card.label}
+              </span>
               <strong>{card.value}</strong>
-              <p>{card.deltaLabel}</p>
+              <p>
+                {getLocalizedCardDelta(t, card.id, card.value, card.deltaLabel)}
+              </p>
             </article>
           ))}
           <article className="metric-card" data-priority="P1">
-            <span>Watchlist Matches</span>
+            <span>{t("overview.watchlistMatches")}</span>
             <strong>{totalWatchMatches}</strong>
             <p>
               {watchlist.entries.length} watchlist entries are currently active.
@@ -259,55 +287,57 @@ export function OverviewPage() {
       <div className="section-grid dashboard-grid">
         <article className="section-panel">
           <div className="panel-heading">
-            <h3>Ingest Freshness</h3>
+            <h3>{t("overview.ingestFreshness")}</h3>
             <span className="panel-meta">
               {formatDateTime(status.checkedAt)}
             </span>
           </div>
           <dl className="detail-list">
             <div>
-              <dt>Database updated</dt>
+              <dt>{t("overview.databaseUpdated")}</dt>
               <dd>{formatDateTime(status.latest.databaseUpdatedAt)}</dd>
             </div>
             <div>
-              <dt>Latest upstream modified</dt>
+              <dt>{t("overview.latestUpstreamModified")}</dt>
               <dd>{formatDateTime(status.latest.upstreamLastModifiedAt)}</dd>
             </div>
             <div>
-              <dt>Latest KEV addition</dt>
+              <dt>{t("overview.latestKevAddition")}</dt>
               <dd>{formatDateTime(status.latest.kevCatalogAddedAt)}</dd>
             </div>
             <div>
-              <dt>Latest EPSS observed</dt>
+              <dt>{t("overview.latestEpssObserved")}</dt>
               <dd>{formatDateTime(status.latest.epssObservedAt)}</dd>
             </div>
           </dl>
-          <p className="panel-note">{status.note}</p>
+          <p className="panel-note">{t("overview.statusNote")}</p>
         </article>
 
         <article className="section-panel">
           <div className="panel-heading">
-            <h3>Coverage Snapshot</h3>
+            <h3>{t("overview.coverageSnapshot")}</h3>
             <span className="panel-meta">
-              {status.counts.vulnerabilities} vulnerabilities
+              {t("overview.vulnerabilityCount", {
+                count: status.counts.vulnerabilities,
+              })}
             </span>
           </div>
           <div className="coverage-grid">
             <div className="coverage-card">
               <strong>{status.counts.p0}</strong>
-              <span>P0 items</span>
+              <span>{t("overview.p0Items")}</span>
             </div>
             <div className="coverage-card">
               <strong>{status.counts.p1}</strong>
-              <span>P1 items</span>
+              <span>{t("overview.p1Items")}</span>
             </div>
             <div className="coverage-card">
               <strong>{status.counts.kevAdvisories}</strong>
-              <span>KEV advisories</span>
+              <span>{t("overview.kevAdvisories")}</span>
             </div>
             <div className="coverage-card">
               <strong>{status.counts.enabledWatchlistEntries}</strong>
-              <span>Watchlist entries</span>
+              <span>{t("overview.watchlistEntries")}</span>
             </div>
           </div>
           <ul className="compact-list">
@@ -315,7 +345,9 @@ export function OverviewPage() {
               (source: IngestStatusResponse["sources"][number]) => (
                 <li key={source.id}>
                   <strong>{source.name}</strong>
-                  <span>{source.note}</span>
+                  <span>
+                    {getLocalizedSourceNote(t, source.id, source.note)}
+                  </span>
                 </li>
               ),
             )}
@@ -343,29 +375,44 @@ export function OverviewPage() {
           <p className="panel-note">{feed.dataSource.message}</p>
           <ul className="feed-list">
             {feedItems.map((item: FeedResponse["items"][number]) => (
-              <li key={item.cveId} className="feed-card">
-                <div className="feed-card-top">
-                  <span className="priority-pill" data-priority={item.priority}>
-                    {item.priority}
-                  </span>
-                  {item.isKev ? <span className="signal-pill">KEV</span> : null}
-                  <span className="signal-pill" data-tone={item.severity}>
-                    {item.severity}
-                  </span>
-                </div>
-                <strong>{item.title}</strong>
-                <p>{item.cveId}</p>
-                <div className="feed-meta">
-                  <span>EPSS {item.epssScore.toFixed(3)}</span>
-                  <span>{formatDateTime(item.updatedAt)}</span>
-                </div>
-                {item.matchedWatchlist.length > 0 ? (
-                  <div className="watchlist-tags">
-                    {item.matchedWatchlist.map((value: string) => (
-                      <span key={`${item.cveId}-${value}`}>{value}</span>
-                    ))}
+              <li key={item.cveId}>
+                <Link
+                  to="/vulnerabilities/$cveId"
+                  params={{ cveId: item.cveId }}
+                  className="feed-card feed-card-link"
+                >
+                  <div className="feed-card-top">
+                    <span
+                      className="priority-pill"
+                      data-priority={item.priority}
+                    >
+                      {item.priority}
+                    </span>
+                    {item.isKev ? (
+                      <span className="signal-pill">KEV</span>
+                    ) : null}
+                    <span className="signal-pill" data-tone={item.severity}>
+                      {item.severity}
+                    </span>
                   </div>
-                ) : null}
+                  <strong>{item.title}</strong>
+                  <p>{item.cveId}</p>
+                  <div className="feed-meta">
+                    <span>
+                      {t("overview.feedEpss", {
+                        score: item.epssScore.toFixed(3),
+                      })}
+                    </span>
+                    <span>{formatDateTime(item.updatedAt)}</span>
+                  </div>
+                  {item.matchedWatchlist.length > 0 ? (
+                    <div className="watchlist-tags">
+                      {item.matchedWatchlist.map((value: string) => (
+                        <span key={`${item.cveId}-${value}`}>{value}</span>
+                      ))}
+                    </div>
+                  ) : null}
+                </Link>
               </li>
             ))}
           </ul>
@@ -391,14 +438,23 @@ export function OverviewPage() {
           <ul className="compact-list">
             {kevItems.map((item: KevResponse["items"][number]) => (
               <li key={item.cveId}>
-                <div className="list-line">
-                  <span className="priority-pill" data-priority={item.priority}>
-                    {item.priority}
-                  </span>
-                  <strong>{item.cveId}</strong>
-                </div>
-                <span>{item.title}</span>
-                <span>{formatDateTime(item.addedAt)}</span>
+                <Link
+                  to="/vulnerabilities/$cveId"
+                  params={{ cveId: item.cveId }}
+                  className="compact-link"
+                >
+                  <div className="list-line">
+                    <span
+                      className="priority-pill"
+                      data-priority={item.priority}
+                    >
+                      {item.priority}
+                    </span>
+                    <strong>{item.cveId}</strong>
+                  </div>
+                  <span>{item.title}</span>
+                  <span>{formatDateTime(item.addedAt)}</span>
+                </Link>
               </li>
             ))}
           </ul>
@@ -408,15 +464,29 @@ export function OverviewPage() {
   );
 }
 
-function formatDateTime(value: string | null) {
-  if (!value) {
-    return "Not available yet";
+function getLocalizedCardDelta(
+  t: ReturnType<typeof useI18n>["t"],
+  cardId: string,
+  value: number,
+  fallback: string,
+) {
+  if (cardId === "p0-open" || cardId === "p1-open" || cardId === "kev-new") {
+    return t(`overview.cardDelta.${cardId}` as const, { count: value });
   }
 
-  return new Intl.DateTimeFormat("ko-KR", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(new Date(value));
+  return fallback;
+}
+
+function getLocalizedSourceNote(
+  t: ReturnType<typeof useI18n>["t"],
+  sourceId: string,
+  fallback: string,
+) {
+  if (sourceId === "nvd" || sourceId === "kev" || sourceId === "epss") {
+    return t(`overview.sourceNote.${sourceId}` as const);
+  }
+
+  return fallback;
 }
 
 function formatDataSourceLabel(source: RadarDataSource) {

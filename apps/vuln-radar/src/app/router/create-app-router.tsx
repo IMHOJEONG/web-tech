@@ -8,18 +8,22 @@ import {
   redirect,
 } from "@tanstack/react-router";
 import { OverviewPage } from "@/pages/overview/ui/overview-page";
+import { VulnerabilityDetailPage } from "@/pages/vulnerability-detail/ui/vulnerability-detail-page";
 import { runtimeConfig } from "@/shared/config/runtime";
+import { useI18n } from "@/shared/i18n/i18n-provider";
 
 export interface AppRouterContext {
   queryClient: QueryClient;
 }
 
 function RootLayout() {
+  const { t } = useI18n();
+
   return (
     <div className="app-shell">
       <header className="app-header">
         <div>
-          <p className="app-eyebrow">Global Vuln Radar</p>
+          <p className="app-eyebrow">{t("app.eyebrow")}</p>
           <h1>{runtimeConfig.appTitle}</h1>
         </div>
         <nav className="app-nav">
@@ -28,7 +32,7 @@ function RootLayout() {
             className="app-nav-link"
             activeProps={{ "data-active": "true" }}
           >
-            Overview
+            {t("nav.overview")}
           </Link>
         </nav>
       </header>
@@ -58,7 +62,17 @@ const overviewRoute = createRoute({
   component: OverviewPage,
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, overviewRoute]);
+const vulnerabilityDetailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/vulnerabilities/$cveId",
+  component: VulnerabilityDetailPage,
+});
+
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  overviewRoute,
+  vulnerabilityDetailRoute,
+]);
 
 export function createAppRouter(context: AppRouterContext) {
   return createRouter({

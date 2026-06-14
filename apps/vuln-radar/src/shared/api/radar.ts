@@ -54,6 +54,38 @@ const feedResponseSchema = z.object({
   items: z.array(feedItemSchema),
 });
 
+const vulnerabilityAdvisorySchema = z.object({
+  source: z.string(),
+  title: z.string().nullable(),
+  summary: z.string().nullable(),
+  sourceUrl: z.string().nullable(),
+  publishedAt: z.string().nullable(),
+  lastModifiedAt: z.string().nullable(),
+});
+
+const vulnerabilityDetailResponseSchema = z.object({
+  generatedAt: z.string(),
+  item: z.object({
+    cveId: z.string(),
+    title: z.string(),
+    description: z.string(),
+    priority: radarPrioritySchema,
+    severity: z.enum(["critical", "high", "medium", "low"]),
+    cvssScore: z.number().nullable(),
+    epssScore: z.number(),
+    epssPercentile: z.number().nullable(),
+    isKev: z.boolean(),
+    riskScore: z.number(),
+    publishedAt: z.string(),
+    updatedAt: z.string(),
+    matchedWatchlist: z.array(z.string()),
+    advisories: z.array(vulnerabilityAdvisorySchema),
+    references: z.object({
+      nvdUrl: z.string().url(),
+    }),
+  }),
+});
+
 const kevItemSchema = z.object({
   cveId: z.string(),
   title: z.string(),
@@ -114,6 +146,9 @@ export type HealthStatus = z.infer<typeof healthStatusSchema>;
 export type RadarDataSource = z.infer<typeof radarDataSourceSchema>;
 export type OverviewResponse = z.infer<typeof overviewResponseSchema>;
 export type FeedResponse = z.infer<typeof feedResponseSchema>;
+export type VulnerabilityDetailResponse = z.infer<
+  typeof vulnerabilityDetailResponseSchema
+>;
 export type KevResponse = z.infer<typeof kevResponseSchema>;
 export type WatchlistResponse = z.infer<typeof watchlistResponseSchema>;
 export type IngestStatusResponse = z.infer<typeof ingestStatusResponseSchema>;
@@ -128,6 +163,13 @@ export function getOverview() {
 
 export function getFeed() {
   return getJson("feed", feedResponseSchema);
+}
+
+export function getVulnerabilityDetail(cveId: string) {
+  return getJson(
+    `vulnerabilities/${encodeURIComponent(cveId)}`,
+    vulnerabilityDetailResponseSchema,
+  );
 }
 
 export function getKev() {
