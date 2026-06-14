@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "type": "vendor",
+      "value": "microsoft",
+      "enabled": true
+    },
+    {
+      "type": "vendor",
+      "value": "citrix",
+      "enabled": true
+    },
+    {
+      "type": "product",
+      "value": "kubernetes",
+      "enabled": true
+    },
+    {
+      "type": "product",
+      "value": "postgresql",
+      "enabled": true
+    },
+    {
+      "type": "ecosystem",
+      "value": "npm",
+      "enabled": true
+    },
+    {
+      "type": "keyword",
+      "value": "auth bypass",
+      "enabled": true
+    },
+    {
+      "type": "keyword",
+      "value": "remote code execution",
+      "enabled": true
+    }
+  ]
+}

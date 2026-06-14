@@ -58,6 +58,18 @@ pnpm check:vuln-radar:dev
 -> http://localhost:4000/api/health
 ```
 
+데이터 endpoint가 backend shared-secret으로 보호되는 경우에는 아래처럼 맞춘다.
+
+```text
+브라우저
+-> /api/backend/*
+-> Vite server.proxy
+-> Authorization: Bearer <VULN_RADAR_BACKEND_API_TOKEN> 주입
+-> http://localhost:4000/api/*
+```
+
+즉, 토큰은 `VITE_*` public env로 두지 않고, Vite 서버 env 또는 운영 reverse proxy env에만 둔다.
+
 이 방식의 장점:
 
 - 별도 로컬 게이트웨이가 필요 없다.
@@ -113,6 +125,17 @@ pnpm check:vuln-radar:dev
 3. `Caddyfile`은 HTTPS / gateway 요구가 생길 때만 사용
 
 즉, `Vite proxy first, Caddy optional`이 현재 repo에 가장 잘 맞는다.
+
+## backend auth 연동 메모
+
+로컬 개발에서 backend auth가 켜져 있으면 두 앱에 같은 토큰을 맞춰야 한다.
+
+- `apps/vuln-radar-backend/.env`
+  - `VULN_RADAR_API_TOKEN=...`
+- `apps/vuln-radar/.env`
+  - `VULN_RADAR_BACKEND_API_TOKEN=...`
+
+프론트는 이 값을 브라우저 코드에서 직접 읽지 않고, Vite proxy가 upstream 헤더로만 사용한다.
 
 ## 관련 트러블슈팅
 

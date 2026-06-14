@@ -8,6 +8,11 @@ export const publicEnvSchema = z.object({
 
 export const viteServerEnvSchema = z.object({
   VULN_RADAR_BACKEND_ORIGIN: z.string().url().default("http://localhost:4000"),
+  VULN_RADAR_BACKEND_API_TOKEN: z
+    .string()
+    .trim()
+    .optional()
+    .transform((value) => (value && value.length > 0 ? value : undefined)),
 });
 
 export type PublicEnv = z.infer<typeof publicEnvSchema>;

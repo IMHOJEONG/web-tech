@@ -1,11 +1,14 @@
-import { loadEnvFile } from 'node:process';
+import { loadOptionalEnvFiles } from '../../shared/lib/load-optional-env';
 
-loadEnvFile('.env');
+loadOptionalEnvFiles(['.env', '.env.local']);
 
 type PrismaPostgresTokenPayload = {
   databaseUrl?: string;
   shadowDatabaseUrl?: string;
 };
+
+const PRISMA_CONFIG_FALLBACK_DATABASE_URL =
+  'postgresql://postgres:postgres@localhost:5432/vuln_radar';
 
 function readEnv(name: string) {
   const value = process.env[name]?.trim();
@@ -56,6 +59,14 @@ export function resolveDirectDatabaseUrl() {
   }
 
   return payload.databaseUrl;
+}
+
+export function resolvePrismaConfigDatabaseUrl() {
+  try {
+    return resolveDirectDatabaseUrl();
+  } catch {
+    return PRISMA_CONFIG_FALLBACK_DATABASE_URL;
+  }
 }
 
 export function resolveShadowDatabaseUrl() {

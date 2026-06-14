@@ -30,6 +30,10 @@
   - `markdownPath`: `channel/article-slug`
 - 인증/장애 대응의 기준 문서
   - `docs/runbooks/content-api-auth-ops-runbook.md`
+- 브라우저 앱에서 backend shared-secret을 직접 보관하지 않는다.
+  - 개발 환경은 dev proxy
+  - 운영 환경은 reverse proxy / gateway
+    가 `Authorization` 헤더를 대신 주입한다.
 - authoring pipeline
   - 로컬에서 원격에 직접 업로드
   - 앱 런타임은 read-only consumer
