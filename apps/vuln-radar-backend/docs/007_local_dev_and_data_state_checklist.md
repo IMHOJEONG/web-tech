@@ -136,7 +136,7 @@ Postgres service에 포트 공개 필요:
 
 ```yaml
 ports:
-  - "5432:5432"
+  - '5432:5432'
 ```
 
 ### 해결 2. backend도 같은 Docker 네트워크 안에서 실행 중
