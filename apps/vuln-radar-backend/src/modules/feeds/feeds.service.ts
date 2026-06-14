@@ -24,4 +24,8 @@ export class FeedsService {
   getAlerts() {
     return this.feedsRepository.getAlerts();
   }
+
+  getVulnerabilityDetail(cveId: string) {
+    return this.feedsRepository.getVulnerabilityDetail(cveId);
+  }
 }

@@ -9,10 +9,16 @@ import {
   OverviewResponse,
   RadarDataSource,
   RadarDataSourceReason,
+  VulnerabilityDetailResponse,
   WatchlistEntry,
   WatchlistResponse,
 } from '../types/radar';
-import { radarGeneratedAt } from './radar-seed-data';
+import {
+  advisorySeeds,
+  radarGeneratedAt,
+  vulnerabilitySeeds,
+  watchMatchSeeds,
+} from './radar-seed-data';
 
 const GENERATED_AT = radarGeneratedAt;
 
@@ -208,4 +214,70 @@ export function getAlertsResponse(
     dataSource: buildMockDataSource('Alerts', reason),
     items: alertItems,
   };
+}
+
+export function getVulnerabilityDetailResponse(
+  cveId: string,
+  reason: MockFallbackReason = 'database_unavailable',
+): VulnerabilityDetailResponse | null {
+  const vulnerability = vulnerabilitySeeds.find((item) => item.cveId === cveId);
+
+  if (!vulnerability) {
+    return null;
+  }
+
+  const advisories = advisorySeeds
+    .filter((item) => item.vulnerabilityCveId === cveId)
+    .map((item) => ({
+      source: item.source,
+      title: item.title ?? null,
+      summary: item.summary ?? null,
+      sourceUrl: item.sourceUrl ?? null,
+      publishedAt: item.publishedAt?.toISOString() ?? null,
+      lastModifiedAt: item.lastModifiedAt?.toISOString() ?? null,
+    }));
+
+  const matchedWatchlist = watchMatchSeeds
+    .filter((item) => item.vulnerabilityCveId === cveId)
+    .map((item) => item.matchedValue);
+
+  return {
+    generatedAt: GENERATED_AT,
+    dataSource: buildMockDataSource('Vulnerability detail', reason),
+    item: {
+      cveId: vulnerability.cveId,
+      title: vulnerability.title,
+      description: vulnerability.description,
+      priority: vulnerability.priority,
+      severity: normalizeSeverity(vulnerability.severity),
+      cvssScore: vulnerability.cvssScore ?? null,
+      epssScore: vulnerability.epssScore ?? 0,
+      epssPercentile: vulnerability.epssPercentile ?? null,
+      isKev: vulnerability.isKev,
+      riskScore: vulnerability.riskScore,
+      publishedAt: vulnerability.publishedAt.toISOString(),
+      updatedAt: vulnerability.lastModifiedAt.toISOString(),
+      matchedWatchlist,
+      advisories,
+      references: {
+        nvdUrl: `https://nvd.nist.gov/vuln/detail/${vulnerability.cveId}`,
+      },
+    },
+  };
+}
+
+function normalizeSeverity(
+  severity: string | null,
+): 'critical' | 'high' | 'medium' | 'low' {
+  const normalizedSeverity = severity?.toLowerCase();
+
+  if (
+    normalizedSeverity === 'critical' ||
+    normalizedSeverity === 'high' ||
+    normalizedSeverity === 'medium'
+  ) {
+    return normalizedSeverity;
+  }
+
+  return 'low';
 }

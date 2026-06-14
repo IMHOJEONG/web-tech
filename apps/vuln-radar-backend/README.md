@@ -313,6 +313,9 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 - `docs/006_ingest_sync_policy_and_security.md`
   - `POST /api/ingest/sync`와 scheduler를 어떻게 운영해야 하는지
   - ingest/write 작업에서 알아둘 보안과 멀티 인스턴스 한계
+- `docs/007_local_dev_and_data_state_checklist.md`
+  - `db:push`, `db:seed`, `ingest/sync` 차이
+  - 로컬 Docker Postgres, proxy 경로, scheduler env override까지 한 번에 보는 체크리스트
 
 ## 실시간 데이터에 대한 현재 기준
 

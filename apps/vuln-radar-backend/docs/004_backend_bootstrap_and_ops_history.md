@@ -197,6 +197,24 @@ overview/feed/kev/watchlist 응답에서 오래된 날짜가 보였던 이유는
 
 - `docs/002_live_ingest_and_polling.md`
 
+### 5-1. `db:push`, `db:seed`, `ingest/sync`는 서로 다르다
+
+중간에 가장 자주 헷갈렸던 포인트 중 하나다.
+
+- `db:push`
+  - schema 반영
+  - 테이블 생성/동기화
+- `db:seed`
+  - demo/mock row 입력
+- `POST /api/ingest/sync`
+  - 실제 NVD/KEV/EPSS 수집 후 DB upsert
+
+즉:
+
+- `db:push`만으로는 실데이터가 생기지 않는다
+- `database` source 응답이라고 해서 항상 실데이터라는 뜻도 아니다
+- 먼저 `seed`를 넣었는지, `ingest/sync`를 했는지 같이 봐야 한다
+
 ## 6. Prisma / Railway에서 실제로 걸린 함정
 
 이번 작업에서 가장 헷갈렸던 부분이다.
@@ -277,6 +295,52 @@ PostgreSQL 외부 접속은:
 
 즉 Prisma generated output을 deploy할 때는
 generated client가 require하는 런타임 패키지도 함께 있어야 한다.
+
+### 7. 로컬 Docker DB는 포트 공개 여부를 먼저 본다
+
+로컬에서 `DATABASE_URL=...@localhost:5432/...`로 붙을 때는,
+정작 Docker Postgres 서비스가 5432를 호스트에 공개하지 않은 경우가 많았다.
+
+즉:
+
+- backend는 `localhost:5432`로 접속 시도
+- 컨테이너는 host port mapping 없음
+- 결과는 `ECONNREFUSED`
+
+이 경우는:
+
+- backend를 호스트에서 돌리면 `5432:5432` 포트 공개
+- backend도 Docker 안이면 `localhost` 대신 service name 사용
+
+으로 정리된다.
+
+### 8. scheduler 기본값 변경과 실제 런타임 값은 다를 수 있다
+
+코드 기본값을 `1440`으로 바꿔도,
+배포 env에 `INGEST_SYNC_INTERVAL_MINUTES=60`이 남아 있으면
+실제 런타임은 계속 60분 기준으로 돈다.
+
+즉:
+
+- 코드 default
+- 배포 env
+- 부팅 로그
+
+이 세 개를 같이 봐야 한다.
+
+### 9. frontend가 `localhost:3000`을 치는 것은 정상이다
+
+처음에는 `VULN_RADAR_BACKEND_ORIGIN`이 있는데 왜 브라우저가
+`localhost:3000`으로 호출하는지 헷갈릴 수 있다.
+
+하지만 현재 구조는:
+
+- browser
+  - `/api/backend/*`
+- dev/Vercel proxy
+  - 실제 backend origin으로 전달
+
+이기 때문에, 브라우저 network tab에 `localhost:3000`이 보이는 것이 맞다.
 
 ## 7. watchlist 운영 방식을 바꾼 이유
 

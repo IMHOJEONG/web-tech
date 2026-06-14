@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { FeedsService } from './feeds.service';
 import { BackendAuthGuard } from '../../shared/guards/backend-auth.guard';
 
@@ -30,5 +30,10 @@ export class FeedsController {
   @Get('alerts')
   getAlerts() {
     return this.feedsService.getAlerts();
+  }
+
+  @Get('vulnerabilities/:cveId')
+  getVulnerabilityDetail(@Param('cveId') cveId: string) {
+    return this.feedsService.getVulnerabilityDetail(cveId);
   }
 }

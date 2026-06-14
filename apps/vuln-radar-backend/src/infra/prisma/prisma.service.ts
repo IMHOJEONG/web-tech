@@ -14,6 +14,7 @@ interface PrismaLikeClient {
   $disconnect(): Promise<void>;
   vulnerability: {
     findMany: (args?: unknown) => Promise<unknown[]>;
+    findUnique: (args: unknown) => Promise<unknown | null>;
     upsert: (args: unknown) => Promise<unknown>;
   };
   watchlistEntry: {

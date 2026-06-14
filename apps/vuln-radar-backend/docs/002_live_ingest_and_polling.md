@@ -160,6 +160,7 @@ curl -X POST "http://127.0.0.1:4000/api/ingest/sync?lookbackHours=6"
 queue worker 또는 분리된 ingest worker로 옮기는 편이 더 안전하다.
 
 운영 정책과 보안 관점은 `docs/006_ingest_sync_policy_and_security.md`에 따로 정리한다.
+로컬 DB에 실제 ingest 데이터를 넣고 상세 페이지까지 확인하는 흐름은 `docs/007_local_dev_and_data_state_checklist.md`에 따로 정리한다.
 
 ## 현재 개발 기준
 

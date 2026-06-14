@@ -45,6 +45,41 @@ export interface FeedResponse {
   items: FeedItem[];
 }
 
+export interface VulnerabilityAdvisoryItem {
+  source: string;
+  title: string | null;
+  summary: string | null;
+  sourceUrl: string | null;
+  publishedAt: string | null;
+  lastModifiedAt: string | null;
+}
+
+export interface VulnerabilityDetailItem {
+  cveId: string;
+  title: string;
+  description: string;
+  priority: RadarPriority;
+  severity: 'critical' | 'high' | 'medium' | 'low';
+  cvssScore: number | null;
+  epssScore: number;
+  epssPercentile: number | null;
+  isKev: boolean;
+  riskScore: number;
+  publishedAt: string;
+  updatedAt: string;
+  matchedWatchlist: string[];
+  advisories: VulnerabilityAdvisoryItem[];
+  references: {
+    nvdUrl: string;
+  };
+}
+
+export interface VulnerabilityDetailResponse {
+  generatedAt: string;
+  dataSource: RadarDataSource;
+  item: VulnerabilityDetailItem;
+}
+
 export interface KevItem {
   cveId: string;
   title: string;

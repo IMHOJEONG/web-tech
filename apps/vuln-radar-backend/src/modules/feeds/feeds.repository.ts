@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../infra/prisma/prisma.service';
 import {
   getAlertsResponse,
   getFeedResponse,
   getKevResponse,
   getOverviewResponse,
+  getVulnerabilityDetailResponse,
   getWatchlistResponse,
 } from '../../shared/data/mock-radar-data';
 import {
@@ -13,15 +14,20 @@ import {
   KevResponse,
   OverviewResponse,
   RadarDataSource,
+  VulnerabilityDetailResponse,
   WatchlistResponse,
 } from '../../shared/types/radar';
 
 type DbVulnerability = {
   cveId: string;
   title: string;
+  description: string;
   severity: string | null;
+  cvssScore: number | null;
   epssScore: number | null;
+  epssPercentile: number | null;
   isKev: boolean;
+  riskScore: number;
   priority: 'P0' | 'P1' | 'P2' | 'P3';
   publishedAt: Date;
   lastModifiedAt: Date;
@@ -46,6 +52,17 @@ type DbKevAdvisory = {
     title: string;
     priority: 'P0' | 'P1' | 'P2' | 'P3';
   };
+};
+
+type DbVulnerabilityDetail = DbVulnerability & {
+  advisories: Array<{
+    source: string;
+    title: string | null;
+    summary: string | null;
+    sourceUrl: string | null;
+    publishedAt: Date | null;
+    lastModifiedAt: Date | null;
+  }>;
 };
 
 type DbAlert = {
@@ -264,6 +281,88 @@ export class FeedsRepository {
         title: alert.title,
         sentAt: (alert.sentAt ?? alert.createdAt).toISOString(),
       })),
+    };
+  }
+
+  async getVulnerabilityDetail(
+    cveId: string,
+  ): Promise<VulnerabilityDetailResponse> {
+    const client = await this.prismaService.getClient();
+
+    if (!client) {
+      const mockResponse = getVulnerabilityDetailResponse(
+        cveId,
+        'database_unavailable',
+      );
+
+      if (mockResponse) {
+        return mockResponse;
+      }
+
+      throw new NotFoundException(`Vulnerability ${cveId} was not found.`);
+    }
+
+    const vulnerability = (await client.vulnerability.findUnique({
+      where: {
+        cveId,
+      },
+      include: {
+        watchMatches: {
+          select: {
+            matchedValue: true,
+          },
+        },
+        advisories: {
+          select: {
+            source: true,
+            title: true,
+            summary: true,
+            sourceUrl: true,
+            publishedAt: true,
+            lastModifiedAt: true,
+          },
+          orderBy: [{ publishedAt: 'desc' }],
+        },
+      },
+    })) as DbVulnerabilityDetail | null;
+
+    if (!vulnerability) {
+      throw new NotFoundException(`Vulnerability ${cveId} was not found.`);
+    }
+
+    return {
+      generatedAt: new Date().toISOString(),
+      dataSource: getDatabaseDataSource(
+        'Vulnerability detail is reading the current database record for this CVE.',
+      ),
+      item: {
+        cveId: vulnerability.cveId,
+        title: vulnerability.title,
+        description: vulnerability.description,
+        priority: vulnerability.priority,
+        severity: normalizeSeverity(vulnerability.severity),
+        cvssScore: vulnerability.cvssScore ?? null,
+        epssScore: vulnerability.epssScore ?? 0,
+        epssPercentile: vulnerability.epssPercentile ?? null,
+        isKev: vulnerability.isKev,
+        riskScore: vulnerability.riskScore,
+        publishedAt: vulnerability.publishedAt.toISOString(),
+        updatedAt: vulnerability.lastModifiedAt.toISOString(),
+        matchedWatchlist: vulnerability.watchMatches.map(
+          (match) => match.matchedValue,
+        ),
+        advisories: vulnerability.advisories.map((advisory) => ({
+          source: advisory.source,
+          title: advisory.title ?? null,
+          summary: advisory.summary ?? null,
+          sourceUrl: advisory.sourceUrl ?? null,
+          publishedAt: advisory.publishedAt?.toISOString() ?? null,
+          lastModifiedAt: advisory.lastModifiedAt?.toISOString() ?? null,
+        })),
+        references: {
+          nvdUrl: `https://nvd.nist.gov/vuln/detail/${vulnerability.cveId}`,
+        },
+      },
     };
   }
 }
