@@ -65,6 +65,7 @@ const vulnerabilityAdvisorySchema = z.object({
 
 const vulnerabilityDetailResponseSchema = z.object({
   generatedAt: z.string(),
+  dataSource: radarDataSourceSchema,
   item: z.object({
     cveId: z.string(),
     title: z.string(),

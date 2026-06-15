@@ -60,6 +60,23 @@ export const messages = {
     "detail.errorTitle": "선택한 취약점 정보를 불러오지 못했습니다.",
     "detail.errorBody":
       "현재 데이터셋에 해당 CVE가 없거나, 백엔드 응답 형식이 기대와 다를 수 있습니다.",
+    "detail.notFoundEyebrow": "상세 정보를 찾지 못함",
+    "detail.notFoundTitle": "선택한 취약점이 현재 상세 데이터셋에 없습니다.",
+    "detail.notFoundBody.mock":
+      "현재 피드가 mock fallback을 사용 중일 수 있습니다. 목록에 보인 CVE라도 로컬 DB나 배포 DB에 아직 적재되지 않았을 수 있습니다.",
+    "detail.notFoundBody.database":
+      "현재 데이터베이스에서 이 CVE 레코드를 찾지 못했습니다. 아직 수집되지 않았거나, 현재 조회 범위에 없는 항목일 수 있습니다.",
+    "detail.notFoundBody.unknown":
+      "현재 피드 소스를 확인하지 못해 mock/DB 상태를 단정할 수 없습니다. 개요 페이지의 데이터 소스와 최신 피드를 함께 확인해 주세요.",
+    "detail.notFoundSourceLabel": "현재 피드 소스",
+    "detail.notFoundReasonLabel": "상태 설명",
+    "detail.notFoundNextSteps": "다음에 확인할 것",
+    "detail.notFoundStep.feed":
+      "개요 페이지에서 현재 피드가 mock fallback인지 먼저 확인합니다.",
+    "detail.notFoundStep.database":
+      "실데이터를 기대한다면 ingest sync 이후 최신 feed에 나온 CVE ID로 다시 확인합니다.",
+    "detail.notFoundStep.retry":
+      "방금 수집을 실행했다면 잠시 뒤 새로고침해서 다시 확인합니다.",
     "detail.heroEyebrow": "취약점 상세",
     "detail.riskScore": "위험 점수",
     "detail.riskScoreBody":
@@ -151,6 +168,24 @@ export const messages = {
     "detail.errorTitle": "The selected vulnerability could not be loaded.",
     "detail.errorBody":
       "The CVE may not exist in the current dataset or the backend returned an unexpected response.",
+    "detail.notFoundEyebrow": "Detail not found",
+    "detail.notFoundTitle":
+      "The selected vulnerability is not available in the current detail dataset.",
+    "detail.notFoundBody.mock":
+      "The current feed may still be using mock fallback data. A CVE visible in the list may not be ingested into the local or deployed database yet.",
+    "detail.notFoundBody.database":
+      "The current database does not contain a record for this CVE yet. It may not have been ingested or may be outside the current dataset window.",
+    "detail.notFoundBody.unknown":
+      "The current feed source could not be confirmed, so the app cannot tell whether this is a mock/database mismatch. Check the overview source badges and latest feed first.",
+    "detail.notFoundSourceLabel": "Current feed source",
+    "detail.notFoundReasonLabel": "Status note",
+    "detail.notFoundNextSteps": "What to check next",
+    "detail.notFoundStep.feed":
+      "Check whether the current feed is using mock fallback on the overview page.",
+    "detail.notFoundStep.database":
+      "If you expect live data, run ingest sync and retry with a CVE ID that appears in the latest feed.",
+    "detail.notFoundStep.retry":
+      "If a sync just completed, wait a moment and refresh this page again.",
     "detail.heroEyebrow": "Vulnerability detail",
     "detail.riskScore": "Risk score",
     "detail.riskScoreBody":

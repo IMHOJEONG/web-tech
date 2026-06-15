@@ -351,6 +351,32 @@ select {
   gap: 14px;
 }
 
+.detail-empty-state {
+  margin-top: 22px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(83, 112, 138, 0.14);
+  background: #f5f8fc;
+}
+
+.detail-empty-state h3 {
+  margin: 0;
+  color: #15253a;
+  font-size: 1rem;
+}
+
+.detail-next-steps {
+  margin: 12px 0 0;
+  padding-inline-start: 18px;
+  display: grid;
+  gap: 10px;
+  color: #53708a;
+}
+
+.detail-next-steps li {
+  line-height: 1.6;
+}
+
 .detail-list div {
   display: grid;
   gap: 4px;
@@ -589,6 +615,12 @@ select {
 .action-link:hover {
   transform: translateY(-1px);
   background: #e4edf7;
+}
+
+.secondary-action {
+  background: #f5f8fc;
+  color: #29425a;
+  border-color: rgba(83, 112, 138, 0.18);
 }
 
 .detail-actions {
