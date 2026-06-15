@@ -78,6 +78,12 @@ export default async function Layout({
                         strategy="beforeInteractive"
                     />
                 )}
+                <link
+                    rel="icon"
+                    href="/favicon.png"
+                    type="image/<generated>"
+                    sizes="<generated>"
+                />
             </head>
             <NextIntlClientProvider locale={locale} messages={messages}>
                 <body
