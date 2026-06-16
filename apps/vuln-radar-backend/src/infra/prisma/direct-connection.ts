@@ -1,6 +1,6 @@
-import { loadEnvFile } from 'node:process';
+import { loadOptionalEnvFile } from '../../config/load-optional-env';
 
-loadEnvFile('.env');
+loadOptionalEnvFile();
 
 type PrismaPostgresTokenPayload = {
   databaseUrl?: string;
