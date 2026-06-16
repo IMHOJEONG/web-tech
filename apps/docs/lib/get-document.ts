@@ -14,9 +14,7 @@ declare module 'vfile' {
             readTime?: number | string | undefined
             topicLabel?: string | undefined
             topic?: string | undefined
-            use?: {
-                [key: string]: any
-            }
+            use?: Record<string, unknown>
         }
     }
 }

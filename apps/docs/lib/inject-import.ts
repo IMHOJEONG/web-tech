@@ -7,15 +7,14 @@ export function injectImport(source: string) {
     const data = vfile.data.matter || {}
     const content = String(vfile)
 
-    if (!data.use) return source
+    if (!Array.isArray(data.use)) return source
 
-    const imports = data.use.map(
-        ({ name, from }: { name: string; from: 'mdx' | 'tsx' }) => {
-            const dir = from === 'mdx' ? 'partials' : 'components'
-            const ext = from === 'mdx' ? 'mdx' : 'tsx'
-            return `import { ${name} } from './${dir}/${name}.${ext}'`
-        }
-    )
+    const imports = data.use.map((entry) => {
+        const { name, from } = entry as { name: string; from: 'mdx' | 'tsx' }
+        const dir = from === 'mdx' ? 'partials' : 'components'
+        const ext = from === 'mdx' ? 'mdx' : 'tsx'
+        return `import { ${name} } from './${dir}/${name}.${ext}'`
+    })
 
     return `${imports.join('\n')}\n\n${content}`
 }

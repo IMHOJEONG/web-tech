@@ -2,13 +2,16 @@
   "extends": ["//"],
   "tasks": {
     "build": {
-      "env": ["BETTER_AUTH_*", "BLOG_CONTENT_*", "NEXT_PUBLIC_BLOG_CONTENT_*"]
+      "env": ["BETTER_AUTH_*", "BLOG_CONTENT_*", "NEXT_PUBLIC_BLOG_CONTENT_*", "NODE_ENV"]
     },
     "dev": {
-      "env": ["BETTER_AUTH_*", "BLOG_CONTENT_*", "NEXT_PUBLIC_BLOG_CONTENT_*"]
+      "env": ["BETTER_AUTH_*", "BLOG_CONTENT_*", "NEXT_PUBLIC_BLOG_CONTENT_*", "NODE_ENV"]
+    },
+    "lint": {
+      "env": ["BETTER_AUTH_*", "BLOG_CONTENT_*", "NEXT_PUBLIC_BLOG_CONTENT_*", "NODE_ENV"]
     },
     "start": {
-      "env": ["BETTER_AUTH_*", "BLOG_CONTENT_*", "NEXT_PUBLIC_BLOG_CONTENT_*"]
+      "env": ["BETTER_AUTH_*", "BLOG_CONTENT_*", "NEXT_PUBLIC_BLOG_CONTENT_*", "NODE_ENV"]
     }
   }
 }
