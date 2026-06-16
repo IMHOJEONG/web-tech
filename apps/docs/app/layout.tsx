@@ -66,11 +66,13 @@ export default async function Layout({
     return (
         <html lang={locale} className="size-full">
             <head>
-                <Script
-                    src="//unpkg.com/react-scan/dist/auto.global.js"
-                    crossOrigin="anonymous"
-                    strategy="beforeInteractive"
-                />
+                {process.env.NODE_ENV === 'development' && (
+                    <Script
+                        src="//unpkg.com/react-scan/dist/auto.global.js"
+                        crossOrigin="anonymous"
+                        strategy="beforeInteractive"
+                    />
+                )}
                 {process.env.NODE_ENV === 'development' && (
                     <Script
                         src="//unpkg.com/react-grab/dist/index.global.js"
@@ -78,12 +80,7 @@ export default async function Layout({
                         strategy="beforeInteractive"
                     />
                 )}
-                <link
-                    rel="icon"
-                    href="/favicon.png"
-                    type="image/<generated>"
-                    sizes="<generated>"
-                />
+                <link rel="icon" href="/favicon.png" type="image/png" />
             </head>
             <NextIntlClientProvider locale={locale} messages={messages}>
                 <body

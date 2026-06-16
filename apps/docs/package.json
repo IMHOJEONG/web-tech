@@ -6,7 +6,7 @@
     "scripts": {
         "predev": "pnpm --filter @web-tech/ui build",
         "dev": "next dev --port 3001",
-        "lint": "eslint \"**/*.{ts,tsx,mts}\" --max-warnings 0",
+        "lint": "eslint \"**/*.{js,mjs,cjs,ts,tsx,mts}\" --max-warnings 0",
         "prebuild": "pnpm --filter @web-tech/ui build",
         "build": "next build",
         "start": "next start",
