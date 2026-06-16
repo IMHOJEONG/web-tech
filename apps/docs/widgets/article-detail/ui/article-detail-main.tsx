@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { ARTICLE_DETAIL_EDITORIAL_ASSETS } from '~/shared/assets/editorial'
 import { ArticleDetailNewsletterCard } from '~/widgets/article-detail/ui/article-detail-newsletter-card'
@@ -57,9 +58,11 @@ export function ArticleDetailMain({
 
                     <div className="flex items-center gap-4">
                         <div className="size-12 overflow-hidden rounded-xl border border-border bg-surface-container">
-                            <img
+                            <Image
                                 src={imgAuthorProfile}
                                 alt={heroAuthorAlt}
+                                width={48}
+                                height={48}
                                 className="h-full w-full object-cover"
                             />
                         </div>
@@ -77,9 +80,11 @@ export function ArticleDetailMain({
 
             <section className="overflow-hidden rounded-sm border border-border bg-surface-container-lowest">
                 <div className="relative aspect-video">
-                    <img
+                    <Image
                         src={imgAbstractTechnologyHero}
                         alt={heroImageAlt}
+                        fill
+                        sizes="100vw"
                         className="h-full w-full object-cover"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-background/70 to-transparent" />
@@ -135,16 +140,20 @@ const useReactiveState = (stream$) => {
 
                 <div className="grid gap-2 lg:grid-cols-2">
                     <div className="overflow-hidden rounded-sm border border-border bg-surface-container">
-                        <img
+                        <Image
                             src={imgDesignDetail1}
                             alt={bodyDesignAltOne}
+                            width={960}
+                            height={640}
                             className="h-full w-full object-cover"
                         />
                     </div>
                     <div className="overflow-hidden rounded-sm border border-border bg-surface-container">
-                        <img
+                        <Image
                             src={imgDesignDetail2}
                             alt={bodyDesignAltTwo}
+                            width={960}
+                            height={640}
                             className="h-full w-full object-cover"
                         />
                     </div>
@@ -159,9 +168,11 @@ const useReactiveState = (stream$) => {
                 <div className="rounded-lg border border-border bg-surface-container-low p-6 lg:p-8">
                     <div className="mx-auto max-w-64 overflow-hidden rounded-[3rem] border-8 border-surface-container-highest bg-surface-container-lowest shadow-deep">
                         <div className="relative aspect-256/500">
-                            <img
+                            <Image
                                 src={imgMobileInterfaceMockup}
                                 alt={bodyMobileMockupAlt}
+                                fill
+                                sizes="256px"
                                 className="h-full w-full object-cover"
                             />
                             <div className="absolute left-1/2 top-0 h-6 w-24 -translate-x-1/2 rounded-b-2xl bg-zinc-900" />
@@ -179,9 +190,11 @@ const useReactiveState = (stream$) => {
             <section className="border-t border-border pt-6 lg:pt-8">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
                     <div className="size-12 shrink-0 overflow-hidden rounded-full border border-border bg-surface-container">
-                        <img
+                        <Image
                             src={imgAuthorProfile}
                             alt={authorAlt}
+                            width={48}
+                            height={48}
                             className="h-full w-full object-cover"
                         />
                     </div>
