@@ -184,6 +184,8 @@
     font-family: var(--font-mono);
     font-size: 0.95rem;
     line-height: 1.7;
+    color: var(--shiki-dark, inherit) !important;
+    background-color: var(--shiki-dark-bg, var(--hf-bg-deep)) !important;
 }
 
 .mdx-wrapper .shiki code {
@@ -192,11 +194,13 @@
     border: 0;
     padding: 0;
     font: inherit;
+    font-style: normal !important;
 }
 
 .mdx-wrapper .shiki .line {
     display: block;
     min-height: 1.6em;
+    font-style: normal !important;
 }
 
 html.dark .mdx-wrapper .shiki {
@@ -212,7 +216,10 @@ html.dark .mdx-wrapper .shiki span {
 }
 
 .mdx-wrapper .shiki span {
+    color: var(--shiki-dark, inherit) !important;
     font-style: normal !important;
+    font-weight: var(--shiki-dark-font-weight, inherit) !important;
+    text-decoration: var(--shiki-dark-text-decoration, inherit) !important;
 }
 
 .mdx-wrapper img,

@@ -1,6 +1,6 @@
-import { loadEnvFile } from 'node:process';
+import { loadOptionalEnvFile } from './load-optional-env';
 
-loadEnvFile('.env');
+loadOptionalEnvFile();
 
 export interface AppConfig {
   appEnv: string;

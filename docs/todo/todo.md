@@ -124,7 +124,7 @@
 
 ## Infra / Tooling
 
-- [ ] `P0` `docs` remote content 인증/장애 대응 운영 기준을 확정한다.
+- [x] `P0` `docs` remote content 인증/장애 대응 운영 기준을 확정한다.
   - `BLOG_CONTENT_API_TOKEN` / `CONTENT_API_TOKEN`의 교체 주기와 회전 절차(runbook) 정리
   - `401/403`은 인증 실패로 보고 즉시 중단하며 다른 endpoint로 fallback 하지 않는 정책 유지
   - 향후 다중 endpoint 정책이 다시 필요해질 경우에도 `timeout`, `ENOTFOUND` 같은 네트워크 오류에서만 다음 후보를 시도하도록 기준 문서화
@@ -133,7 +133,7 @@
   - remote content 장애 시 홈(`/`)은 section-level graceful degradation, 문서 상세는 에러 페이지로 보내는 현재 정책을 문서에 명시
   - 기준 문서: `docs/runbooks/content-api-auth-ops-runbook.md`
 - [x] `P0` `pnpm` catalog 도입 이후 네트워크 가능한 환경에서 `pnpm install --lockfile-only` 재검증
-- [ ] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정
+- [x] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정
 - [ ] `P1` catalog reference 정합성 검사를 스크립트나 CI 체크로 자동화
 - [ ] `P1` `docs`와 `web`의 공통 build/lint/typecheck 파이프라인을 Turbo 기준으로 정리
 - [ ] `P2` design asset 동기화 절차를 runbook으로 정리
@@ -147,7 +147,7 @@
 
 ## Content / Editorial
 
-- [ ] `P1` landing / hero 계열 카피의 자연스러운 한국어 표현을 다듬는다.
+- [-] `P1` landing / hero 계열 카피의 자연스러운 한국어 표현을 다듬는다.
   - 직역투 표현보다 한국어 사용자에게 자연스럽게 읽히는 문장으로 조정
   - headline, eyebrow, CTA, section title 우선 점검
   - 특히 `/` root landing과 `/about` hero의 한국어 카피를 우선 정리

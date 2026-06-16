@@ -1,9 +1,7 @@
 import { getRequestConfig } from 'next-intl/server'
 import { cookies, headers } from 'next/headers'
 
-const SUPPORTED_LOCALES = ['en', 'ko'] as const
-
-type AppLocale = (typeof SUPPORTED_LOCALES)[number]
+type AppLocale = 'en' | 'ko'
 
 function normalizeLocale(value?: string | null): AppLocale | null {
     if (!value) {

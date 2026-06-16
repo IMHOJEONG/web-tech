@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Metadata } from '~/lib/get-document'
 
 const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
-    const { title, date, summary, slug, content, thumbnail } = doc
+    const { title, date, summary, thumbnail } = doc
     return (
         <div className="grid size-full grid-cols-1 justify-between gap-3 rounded-lg md:grid-cols-[0.4fr_0.6fr]">
             <div className="aspect-video w-full overflow-hidden rounded-lg">

@@ -1,0 +1,85 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "env": [
+        "APP_ENV",
+        "PORT",
+        "CORS_ORIGIN",
+        "FRONTEND_ORIGIN",
+        "INGEST_LOOKBACK_HOURS",
+        "INGEST_SCHEDULER_ENABLED",
+        "INGEST_SYNC_INTERVAL_MINUTES",
+        "INGEST_SYNC_ON_STARTUP",
+        "NVD_API_KEY",
+        "DATABASE_URL",
+        "DIRECT_URL",
+        "SHADOW_DATABASE_URL"
+      ]
+    },
+    "dev": {
+      "env": [
+        "APP_ENV",
+        "PORT",
+        "CORS_ORIGIN",
+        "FRONTEND_ORIGIN",
+        "INGEST_LOOKBACK_HOURS",
+        "INGEST_SCHEDULER_ENABLED",
+        "INGEST_SYNC_INTERVAL_MINUTES",
+        "INGEST_SYNC_ON_STARTUP",
+        "NVD_API_KEY",
+        "DATABASE_URL",
+        "DIRECT_URL",
+        "SHADOW_DATABASE_URL"
+      ]
+    },
+    "lint": {
+      "env": [
+        "APP_ENV",
+        "PORT",
+        "CORS_ORIGIN",
+        "FRONTEND_ORIGIN",
+        "INGEST_LOOKBACK_HOURS",
+        "INGEST_SCHEDULER_ENABLED",
+        "INGEST_SYNC_INTERVAL_MINUTES",
+        "INGEST_SYNC_ON_STARTUP",
+        "NVD_API_KEY",
+        "DATABASE_URL",
+        "DIRECT_URL",
+        "SHADOW_DATABASE_URL"
+      ]
+    },
+    "start": {
+      "env": [
+        "APP_ENV",
+        "PORT",
+        "CORS_ORIGIN",
+        "FRONTEND_ORIGIN",
+        "INGEST_LOOKBACK_HOURS",
+        "INGEST_SCHEDULER_ENABLED",
+        "INGEST_SYNC_INTERVAL_MINUTES",
+        "INGEST_SYNC_ON_STARTUP",
+        "NVD_API_KEY",
+        "DATABASE_URL",
+        "DIRECT_URL",
+        "SHADOW_DATABASE_URL"
+      ]
+    },
+    "typecheck": {
+      "env": [
+        "APP_ENV",
+        "PORT",
+        "CORS_ORIGIN",
+        "FRONTEND_ORIGIN",
+        "INGEST_LOOKBACK_HOURS",
+        "INGEST_SCHEDULER_ENABLED",
+        "INGEST_SYNC_INTERVAL_MINUTES",
+        "INGEST_SYNC_ON_STARTUP",
+        "NVD_API_KEY",
+        "DATABASE_URL",
+        "DIRECT_URL",
+        "SHADOW_DATABASE_URL"
+      ]
+    }
+  }
+}

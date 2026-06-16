@@ -4,6 +4,8 @@ import createNextIntlPlugin from 'next-intl/plugin'
 
 import { shikiRehypeOptions } from './lib/shiki-options.js'
 
+const { env } = process
+
 function toRemotePattern(value) {
     const trimmedValue = value?.trim()
 
@@ -27,16 +29,16 @@ function toRemotePattern(value) {
 
 function getRemoteImagePatterns() {
     const candidates = [
-        process.env.BLOG_CONTENT_ASSET_BASE_URL_PUBLIC,
-        process.env.NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC,
-        process.env.BLOG_CONTENT_ASSET_BASE_URL_INTERNAL,
-        process.env.BLOG_CONTENT_ASSET_BASE_URL,
-        process.env.BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC,
-        process.env.BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL,
-        process.env.BLOG_CONTENT_MARKDOWN_BASE_URL,
-        process.env.BLOG_CONTENT_API_BASE_URL_PUBLIC,
-        process.env.BLOG_CONTENT_API_BASE_URL_INTERNAL,
-        process.env.BLOG_CONTENT_API_BASE_URL,
+        env.BLOG_CONTENT_ASSET_BASE_URL_PUBLIC,
+        env.NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC,
+        env.BLOG_CONTENT_ASSET_BASE_URL_INTERNAL,
+        env.BLOG_CONTENT_ASSET_BASE_URL,
+        env.BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC,
+        env.BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL,
+        env.BLOG_CONTENT_MARKDOWN_BASE_URL,
+        env.BLOG_CONTENT_API_BASE_URL_PUBLIC,
+        env.BLOG_CONTENT_API_BASE_URL_INTERNAL,
+        env.BLOG_CONTENT_API_BASE_URL,
     ]
 
     const patterns = candidates

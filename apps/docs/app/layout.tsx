@@ -35,6 +35,8 @@ const spaceGrotesk = localFont({
     variable: '--font-display',
 })
 
+const isDevelopment = process.env.NODE_ENV === 'development'
+
 export async function generateMetadata(): Promise<Metadata> {
     const t = await getTranslations('metadata.site')
 
@@ -66,10 +68,21 @@ export default async function Layout({
     return (
         <html lang={locale} className="size-full">
             <head>
-                <script
-                    src="https://unpkg.com/react-scan/dist/auto.global.js"
-                    async
-                />
+                {isDevelopment && (
+                    <Script
+                        src="//unpkg.com/react-scan/dist/auto.global.js"
+                        crossOrigin="anonymous"
+                        strategy="beforeInteractive"
+                    />
+                )}
+                {isDevelopment && (
+                    <Script
+                        src="//unpkg.com/react-grab/dist/index.global.js"
+                        crossOrigin="anonymous"
+                        strategy="beforeInteractive"
+                    />
+                )}
+                <link rel="icon" href="/favicon.png" type="image/png" />
             </head>
             <NextIntlClientProvider locale={locale} messages={messages}>
                 <body
