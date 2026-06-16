@@ -16,6 +16,8 @@ allowBuilds:
   unrs-resolver: false
 #
 overrides:
+  "eslint>ajv": "^6.12.6"
+  "@eslint/eslintrc>ajv": "^6.12.6"
   glob: "^11.1.0"
   tmp: "^0.2.4"
   undici: "^7.24.0"
