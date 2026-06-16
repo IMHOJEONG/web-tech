@@ -20,7 +20,8 @@ jobs:
         with:
           fetch-depth: 2
           persist-credentials: false
-      - uses: pnpm/action-setup@v3
+
+      - uses: pnpm/action-setup@v6
         with:
           version: 11.3.0
 
@@ -42,13 +43,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
         with:
           fetch-depth: 2
+          persist-credentials: false
 
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v6
         with:
-          version: 11.0.4
+          version: 11.3.0
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
@@ -68,13 +70,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
         with:
           fetch-depth: 2
+          persist-credentials: false
 
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v6
         with:
-          version: 11.0.4
+          version: 11.3.0
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
@@ -94,13 +97,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
         with:
           fetch-depth: 2
+          persist-credentials: false
 
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v6
         with:
-          version: 11.0.4
+          version: 11.3.0
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
