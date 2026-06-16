@@ -2,6 +2,16 @@ import { z } from "zod";
 import { getJson } from "@/shared/api/client";
 
 const radarPrioritySchema = z.enum(["P0", "P1", "P2", "P3"]);
+const radarDataSourceSchema = z.object({
+  kind: z.enum(["database", "mock"]),
+  reason: z.enum([
+    "live_read_model",
+    "derived_from_feed",
+    "database_unavailable",
+    "no_database_rows",
+  ]),
+  message: z.string(),
+});
 
 const healthStatusSchema = z.object({
   status: z.literal("ok"),
@@ -21,6 +31,7 @@ const overviewCardSchema = z.object({
 
 const overviewResponseSchema = z.object({
   generatedAt: z.string(),
+  dataSource: radarDataSourceSchema,
   cards: z.array(overviewCardSchema),
   highlights: z.array(z.string()),
 });
@@ -39,7 +50,41 @@ const feedItemSchema = z.object({
 
 const feedResponseSchema = z.object({
   generatedAt: z.string(),
+  dataSource: radarDataSourceSchema,
   items: z.array(feedItemSchema),
+});
+
+const vulnerabilityAdvisorySchema = z.object({
+  source: z.string(),
+  title: z.string().nullable(),
+  summary: z.string().nullable(),
+  sourceUrl: z.string().nullable(),
+  publishedAt: z.string().nullable(),
+  lastModifiedAt: z.string().nullable(),
+});
+
+const vulnerabilityDetailResponseSchema = z.object({
+  generatedAt: z.string(),
+  dataSource: radarDataSourceSchema,
+  item: z.object({
+    cveId: z.string(),
+    title: z.string(),
+    description: z.string(),
+    priority: radarPrioritySchema,
+    severity: z.enum(["critical", "high", "medium", "low"]),
+    cvssScore: z.number().nullable(),
+    epssScore: z.number(),
+    epssPercentile: z.number().nullable(),
+    isKev: z.boolean(),
+    riskScore: z.number(),
+    publishedAt: z.string(),
+    updatedAt: z.string(),
+    matchedWatchlist: z.array(z.string()),
+    advisories: z.array(vulnerabilityAdvisorySchema),
+    references: z.object({
+      nvdUrl: z.string().url(),
+    }),
+  }),
 });
 
 const kevItemSchema = z.object({
@@ -52,6 +97,7 @@ const kevItemSchema = z.object({
 
 const kevResponseSchema = z.object({
   generatedAt: z.string(),
+  dataSource: radarDataSourceSchema,
   items: z.array(kevItemSchema),
 });
 
@@ -64,6 +110,7 @@ const watchlistEntrySchema = z.object({
 
 const watchlistResponseSchema = z.object({
   generatedAt: z.string(),
+  dataSource: radarDataSourceSchema,
   entries: z.array(watchlistEntrySchema),
 });
 
@@ -97,8 +144,12 @@ const ingestStatusResponseSchema = z.object({
 });
 
 export type HealthStatus = z.infer<typeof healthStatusSchema>;
+export type RadarDataSource = z.infer<typeof radarDataSourceSchema>;
 export type OverviewResponse = z.infer<typeof overviewResponseSchema>;
 export type FeedResponse = z.infer<typeof feedResponseSchema>;
+export type VulnerabilityDetailResponse = z.infer<
+  typeof vulnerabilityDetailResponseSchema
+>;
 export type KevResponse = z.infer<typeof kevResponseSchema>;
 export type WatchlistResponse = z.infer<typeof watchlistResponseSchema>;
 export type IngestStatusResponse = z.infer<typeof ingestStatusResponseSchema>;
@@ -113,6 +164,13 @@ export function getOverview() {
 
 export function getFeed() {
   return getJson("feed", feedResponseSchema);
+}
+
+export function getVulnerabilityDetail(cveId: string) {
+  return getJson(
+    `vulnerabilities/${encodeURIComponent(cveId)}`,
+    vulnerabilityDetailResponseSchema,
+  );
 }
 
 export function getKev() {

@@ -6,16 +6,19 @@ const API_TIMEOUT_MS = 8_000;
 export class ApiError extends Error {
   readonly status: number | null;
   readonly code: "network" | "http" | "parse";
+  readonly details?: unknown;
 
   constructor(params: {
     message: string;
     status?: number | null;
     code: "network" | "http" | "parse";
+    details?: unknown;
   }) {
     super(params.message);
     this.name = "ApiError";
     this.status = params.status ?? null;
     this.code = params.code;
+    this.details = params.details;
   }
 }
 
@@ -53,9 +56,27 @@ export async function getJson<T>(
     const parsed = schema.safeParse(json);
 
     if (!parsed.success) {
+      console.error("[vuln-radar api] schema parse failed", {
+        path,
+        url: buildApiUrl(path),
+        issues: parsed.error.issues,
+        response: json,
+      });
+
       throw new ApiError({
         message: "API response shape did not match the expected schema.",
         code: "parse",
+        details: parsed.error.issues,
+      });
+    }
+
+    const dataSource = getResponseDataSource(parsed.data);
+
+    if (dataSource?.kind === "mock") {
+      console.warn("[vuln-radar api] mock fallback response", {
+        path,
+        url: buildApiUrl(path),
+        dataSource,
       });
     }
 
@@ -75,4 +96,34 @@ export async function getJson<T>(
   } finally {
     window.clearTimeout(timeoutId);
   }
+}
+
+function getResponseDataSource(
+  value: unknown,
+): { kind: string; reason: string; message: string } | null {
+  if (!value || typeof value !== "object") {
+    return null;
+  }
+
+  const dataSource = (value as { dataSource?: unknown }).dataSource;
+
+  if (!dataSource || typeof dataSource !== "object") {
+    return null;
+  }
+
+  const candidate = dataSource as Record<string, unknown>;
+
+  if (
+    typeof candidate.kind === "string" &&
+    typeof candidate.reason === "string" &&
+    typeof candidate.message === "string"
+  ) {
+    return {
+      kind: candidate.kind,
+      reason: candidate.reason,
+      message: candidate.message,
+    };
+  }
+
+  return null;
 }

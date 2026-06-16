@@ -10,6 +10,7 @@
     "strict": true
   },
   "include": [
+    "api",
     "src",
     "vite.config.ts",
     "eslint.config.mjs",

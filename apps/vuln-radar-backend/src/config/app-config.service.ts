@@ -17,6 +17,10 @@ export class AppConfigService {
     return this.config.appPort;
   }
 
+  get backendApiToken() {
+    return this.config.backendApiToken;
+  }
+
   get corsOrigin() {
     return this.config.corsOrigin;
   }

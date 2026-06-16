@@ -37,6 +37,9 @@
   - `apps/docs/turbo.json`
   - `apps/vuln-radar/turbo.json`
   - root `turbo.json > globalEnv`는 repo-wide 값만 유지
+- backend API 공개 범위는 endpoint 성격에 따라 나눈다.
+  - health/status 성격 엔드포인트는 공개 가능
+  - 실제 데이터 응답 엔드포인트는 기본적으로 인증 보호
 - asset public host 우선순위
   1. `BLOG_CONTENT_ASSET_BASE_URL_PUBLIC`
   2. `NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC`
@@ -125,6 +128,38 @@
   - remotePatterns host 포함 여부
   - `<Image />`인지 일반 `<img>`인지
     순서로 확인
+- backend 데이터 API가 의도치 않게 열려 있지 않은지 확인할 때는
+  - health endpoint만 공개인지
+  - shared secret env가 서버에 실제로 들어갔는지
+  - 무토큰 요청이 `401`로 막히는지
+    순서로 확인
+- 브라우저 앱이 backend auth와 연결되지 않을 때는
+  - client 코드에 secret을 넣으려 하고 있지 않은지
+  - dev proxy가 헤더를 주입하는지
+  - 운영 reverse proxy도 같은 역할을 하도록 설계되어 있는지
+    먼저 확인
+- Railway 같은 PaaS에 monorepo backend를 올릴 때는
+  - Dockerfile 경로
+  - build context가 workspace root인지
+  - `PORT` env를 앱이 그대로 읽는지
+    먼저 확인
+- Railway build에서 `Missing DATABASE_URL or DIRECT_URL`가 나면
+  - 진짜 DB 접속이 필요한 단계인지
+  - 아니면 `prisma generate`처럼 config 로딩만 하는 단계인지
+    먼저 구분
+  - 후자라면 config resolver가 빌드 단계까지 엄격하게 막고 있는지 확인
+- 런타임에서 `Cannot find module '/app/dist/main'`가 나면
+  - Docker copy 문제보다 먼저
+  - 실제 Nest build entry가 `dist/main.js`인지 `dist/src/main.js`인지
+    확인
+- 런타임에서 `Cannot find module '/app/dist/src/main.js'`가 나면
+  - entry 경로만이 아니라
+  - `pnpm deploy` 결과물에 `dist` 자체가 포함됐는지
+    확인
+- `pnpm deploy`에서 `ERR_PNPM_DEPLOY_NONINJECTED_WORKSPACE`가 나면
+  - 현재 workspace가 pnpm의 새 injected deploy 전제를 만족하지 않는다는 뜻이다.
+  - 당장 서비스 하나를 배포하려면 `--legacy`가 가장 빠르다.
+  - repo 전체 정책을 새 방식으로 바꾸려면 `inject-workspace-packages=true` 도입을 별도로 검토해야 한다.
 
 ## 먼저 보면 좋은 문서
 
