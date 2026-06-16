@@ -687,9 +687,7 @@ export function MainFeed({
                         {featuredDoc && (
                             <FeaturedCard doc={featuredDoc} index={1} />
                         )}
-                        {compactDoc && (
-                            <CompactCard doc={compactDoc} index={2} />
-                        )}
+                        {compactDoc && <CompactCard doc={compactDoc} />}
                         {imageDoc ? (
                             <ImageCard doc={imageDoc} index={3} />
                         ) : (
@@ -708,7 +706,7 @@ export function MainFeed({
                         <NewsletterInjectionCard />
 
                         {supportDoc ? (
-                            <CompactCard doc={supportDoc} index={4} />
+                            <CompactCard doc={supportDoc} />
                         ) : (
                             <TextSupportCard
                                 title={PLACEHOLDER_UI.title}
