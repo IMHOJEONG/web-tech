@@ -37,32 +37,6 @@ const Toc = ({
     skipLevels = [1],
     skipParents = [],
 }: Props) => {
-    if (!toc) return null
-
-    // ********* filters **************
-    const exludeRegexFilter = exclude
-        ? Array.isArray(exclude)
-            ? new RegExp(exclude.join('|'), 'i')
-            : new RegExp(exclude, 'i')
-        : new RegExp('(?!.*)')
-
-    const skipLevelsFilter = (depth: TocItem['depth']): boolean =>
-        skipLevels.includes(depth)
-
-    const skipParentsFilter = (parent: TocItem['parent']): boolean =>
-        parent !== 'root' && skipParents.includes(parent)
-
-    const maxDepthFilter = (depth: TocItem['depth']): boolean =>
-        depth > maxDepth
-    // ********************************
-
-    const filteredToc = toc.filter(
-        (heading) =>
-            !maxDepthFilter(heading.depth) &&
-            !skipLevelsFilter(heading.depth) &&
-            !skipParentsFilter(heading.parent) &&
-            !exludeRegexFilter.test(heading.value)
-    )
     const [isOpen, setIsOpen] = useState(true)
     const handleAnchorClick = useCallback(
         (event: MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -95,6 +69,32 @@ const Toc = ({
         []
     )
 
+    if (!toc) return null
+
+    // ********* filters **************
+    const exludeRegexFilter = exclude
+        ? Array.isArray(exclude)
+            ? new RegExp(exclude.join('|'), 'i')
+            : new RegExp(exclude, 'i')
+        : new RegExp('(?!.*)')
+
+    const skipLevelsFilter = (depth: TocItem['depth']): boolean =>
+        skipLevels.includes(depth)
+
+    const skipParentsFilter = (parent: TocItem['parent']): boolean =>
+        parent !== 'root' && skipParents.includes(parent)
+
+    const maxDepthFilter = (depth: TocItem['depth']): boolean =>
+        depth > maxDepth
+    // ********************************
+
+    const filteredToc = toc.filter(
+        (heading) =>
+            !maxDepthFilter(heading.depth) &&
+            !skipLevelsFilter(heading.depth) &&
+            !skipParentsFilter(heading.parent) &&
+            !exludeRegexFilter.test(heading.value)
+    )
     return (
         <details
             className={clsx(styles['toc-container'], !isOpen && styles.close)}

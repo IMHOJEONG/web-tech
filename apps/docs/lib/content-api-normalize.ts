@@ -138,12 +138,16 @@ export function normalizeRemoteReference(reference: string) {
         return null
     }
 
+    const hasControlCharacter = Array.from(trimmedReference).some(
+        (character) => character.charCodeAt(0) < 0x20
+    )
+
     if (
         /^https?:\/\//i.test(trimmedReference) ||
         /^\/\//.test(trimmedReference) ||
         trimmedReference.includes('..') ||
         trimmedReference.includes('\\') ||
-        /[\u0000-\u001f]/.test(trimmedReference)
+        hasControlCharacter
     ) {
         return null
     }

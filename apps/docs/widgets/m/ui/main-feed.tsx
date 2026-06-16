@@ -277,7 +277,7 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
     )
 }
 
-function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
+function CompactCard({ doc }: { doc: FeedDoc }) {
     const topic = getTopicStyle(doc)
     const minutes = getReadMinutes(doc)
 

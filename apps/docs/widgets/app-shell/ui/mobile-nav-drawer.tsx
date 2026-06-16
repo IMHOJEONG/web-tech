@@ -22,7 +22,7 @@ import {
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Brand } from '~/shared/ui/brand'
 
 const drawerLinks = [
@@ -90,6 +90,11 @@ function DrawerLink({
 
 export default function MobileNavDrawer() {
     const pathname = usePathname()
+
+    return <MobileNavDrawerContent key={pathname} pathname={pathname} />
+}
+
+function MobileNavDrawerContent({ pathname }: { pathname: string }) {
     const [open, setOpen] = useState(false)
     const headerT = useTranslations('header')
     const navT = useTranslations('navigation')
@@ -99,10 +104,6 @@ export default function MobileNavDrawer() {
         headerT('drawer.checks.search'),
         headerT('drawer.checks.content'),
     ]
-
-    useEffect(() => {
-        setOpen(false)
-    }, [pathname])
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>

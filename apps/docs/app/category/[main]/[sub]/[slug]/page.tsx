@@ -46,10 +46,7 @@ export default async function Page({
         vfileDataIntoScope: 'toc',
     }
 
-    const { content, frontmatter, scope, error } = await evaluate<
-        Frontmatter,
-        Scope
-    >({
+    const { content } = await evaluate<Frontmatter, Scope>({
         source: target?.content ?? '',
         options,
         components,

@@ -16,24 +16,37 @@ import { GoSearch } from 'react-icons/go'
 const SEARCH_KEYWORD_MAX_LENGTH = 40
 
 export const Search = () => {
-    const t = useTranslations('search')
-    const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
+    const currentKeyword = searchParams.get('q') ?? ''
+    const searchParamsString = searchParams.toString()
+
+    return (
+        <SearchForm
+            key={currentKeyword}
+            currentKeyword={currentKeyword}
+            pathname={pathname}
+            searchParamsString={searchParamsString}
+        />
+    )
+}
+
+function SearchForm({
+    currentKeyword,
+    pathname,
+    searchParamsString,
+}: {
+    currentKeyword: string
+    pathname: string
+    searchParamsString: string
+}) {
+    const t = useTranslations('search')
+    const router = useRouter()
     const formRef = useRef<HTMLFormElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
-    const currentKeyword = searchParams.get('q') ?? ''
     const [keyword, setKeyword] = useState(currentKeyword)
     const [isOpen, setIsOpen] = useState(Boolean(currentKeyword))
     const [isPending, startTransition] = useTransition()
-
-    useEffect(() => {
-        setKeyword(currentKeyword)
-
-        if (currentKeyword) {
-            setIsOpen(true)
-        }
-    }, [currentKeyword])
 
     useEffect(() => {
         if (!isOpen) {
@@ -81,9 +94,8 @@ export const Search = () => {
         event.preventDefault()
 
         const targetHref = getTargetHref(keyword)
-        const currentParams = searchParams.toString()
-        const currentHref = currentParams
-            ? `${pathname}?${currentParams}`
+        const currentHref = searchParamsString
+            ? `${pathname}?${searchParamsString}`
             : pathname
 
         if (targetHref === currentHref) {
