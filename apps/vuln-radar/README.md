@@ -228,7 +228,11 @@ Turbo 환경변수 선언은 root `turbo.json`에 몰아넣지 않고 앱별로 
 - `VITE_*`
   - Vite framework inference로 Turbo가 패키지 단위로 자동 추적한다.
 
-즉, 이 앱 전용 env를 추가할 때는 가능하면 root `globalEnv`가 아니라 `apps/vuln-radar/turbo.json`부터 갱신한다.
+다만 이 자동 추적만으로 `.env` 파일 변경까지 항상 캐시 무효화되는 것은 아니다.
+캐시를 사용하는 task에서는 `.env*`를 `inputs`에 포함해야 env 파일 변경이 Turbo 캐시에 반영된다.
+
+이 저장소는 root `turbo.json`의 `build.inputs`에 이미 `.env*`를 넣어두었으므로, 현재 `build` 기준으로는 env 파일 변경도 함께 추적된다.
+즉, 이 앱 전용 env를 추가할 때는 가능하면 root `globalEnv`가 아니라 `apps/vuln-radar/turbo.json`부터 갱신하되, 새 cached task를 앱 쪽에 정의할 때는 `.env*` 입력 추적도 같이 확인한다.
 
 ## 관련 문서
 
