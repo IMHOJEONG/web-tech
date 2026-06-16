@@ -92,6 +92,11 @@
 - [ ] 대시보드 첫 화면에서 “무엇을 제일 먼저 보여줘야 하는가”를 설명할 수 있다.
 - [ ] 정보가 많을 때 summary > list > detail 순서가 왜 중요한지 이해한다.
 
+후속 TODO:
+
+- [ ] overview / detail에서 `왜 P0/P1인지`를 설명하는 점수 근거 UI를 추가한다.
+- [ ] `KEV`, `EPSS`, watchlist match가 priority에 어떤 영향을 줬는지 사용자에게 보여준다.
+
 ## 7. feed 페이지 만들기
 
 - [ ] 시간순 피드
@@ -111,11 +116,23 @@
 - [ ] ecosystem 목록
 - [ ] keyword 목록
 - [ ] watchlist 편집 UI
+- [ ] backend `admin/watchlist` CRUD API를 연결한 운영용 watchlist admin 화면 추가
+- [ ] watchlist 변경 뒤 `POST /api/ingest/sync`를 이어서 실행하거나 유도하는 운영 UX 정리
+
+후속 메모:
+
+- backend에는 이미 `GET/POST/PATCH/DELETE /api/admin/watchlist`가 준비되어 있다.
+- 프런트 admin 화면은 backend 배포 후 실제 운영 토큰과 응답 shape를 검증한 뒤 붙인다.
+- 지금 단계에서는 curl 기반 운영 검증을 먼저 끝내고, 그 다음 브라우저 관리 UI로 확장한다.
 
 공부 포인트:
 
 - [ ] watchlist가 왜 `제품 관리`가 아니라 `우선순위 판단 장치`인지 이해한다.
 - [ ] 사용자 입력 모델과 백엔드 저장 모델이 다를 수 있다는 점을 이해한다.
+
+후속 TODO:
+
+- [ ] 사용자별 필터 저장과 운영 watchlist를 어떻게 분리할지 정리한다.
 
 ## 9. alert 페이지 만들기
 
@@ -128,6 +145,10 @@
 
 - [ ] 알림은 이벤트 로그인지 작업 큐인지 개념을 구분할 수 있다.
 - [ ] alert feed와 vulnerability feed가 왜 다른지 설명할 수 있다.
+
+후속 TODO:
+
+- [ ] 상세 페이지에서 Slack 공유, 이슈 생성, 확인 완료 같은 다음 액션을 연결한다.
 
 ## 10. SSE 연결 붙이기
 
@@ -152,6 +173,11 @@
 
 - [ ] “데이터 없음”과 “에러”와 “로딩 중”을 확실히 구분할 수 있다.
 - [ ] 운영 도구형 앱에서 과한 animation보다 빠른 피드백이 더 중요한 이유를 이해한다.
+
+후속 TODO:
+
+- [x] 상세 페이지 `404`일 때 mock/DB 상태를 더 설명하는 empty state를 정리한다.
+- [ ] 상세 페이지 `404` empty state에 현재 최신 feed의 대표 CVE 예시를 함께 보여준다.
 
 ## 12. 디자인 시스템 최소 기준 세우기
 

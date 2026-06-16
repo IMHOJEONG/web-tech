@@ -23,6 +23,94 @@
 
 개발 중 프론트는 `/api/backend/*`만 호출하고, 실제 backend origin 매핑은 프론트의 proxy 계층이 담당한다.
 
+## 빌드 산출물 기준
+
+- 현재 Nest build 결과의 entry는 `dist/main.js`가 아니라 `dist/src/main.js`다.
+- 따라서 Docker/배포 환경의 start command도 이 경로를 기준으로 맞춰야 한다.
+- `/app/dist/main`을 바라보면 `MODULE_NOT_FOUND`가 발생한다.
+- `pnpm deploy`는 tarball 기준으로 파일을 담기 때문에, `dist`와 `generated/prisma`가 package 파일 목록에 포함되어 있어야 한다.
+- 현재는 `package.json > files`에 해당 경로를 명시해서 runtime 이미지에도 같이 들어가도록 맞췄다.
+
+## 환경 변수 로딩 기준
+
+- 로컬 개발에서는 `apps/vuln-radar-backend/.env`와 `.env.local`을 둘 수 있다.
+- 로더는 `.env`를 먼저 읽고, `.env.local`을 나중에 읽는다.
+- 즉 로컬에서 machine-specific override는 `.env.local`에 두는 편이 안전하다.
+- 배포 환경에서는 `.env` 파일이 없어도 된다.
+- Railway 같은 PaaS에서는 파일 업로드 대신 Variables 설정만 맞추는 것을 권장한다.
+
+즉 Railway 같은 PaaS에서는 파일 업로드 대신 Variables 설정만 맞추면 된다.
+
+예시:
+
+- `PORT`
+- `APP_ENV`
+- `DATABASE_URL`
+- `DIRECT_URL`
+- `SHADOW_DATABASE_URL`
+- `CORS_ORIGIN`
+- `FRONTEND_ORIGIN`
+- `VULN_RADAR_API_TOKEN`
+- `NVD_API_KEY`
+
+권장 예제 파일:
+
+- base local example
+  - `.env.example`
+- local machine override example
+  - `.env.local.example`
+- Railway dashboard Variables reference
+  - `.env.railway.example`
+
+중요:
+
+- 로컬에서 Railway production DB를 테스트할 때는 `DIRECT_URL`이 있으면 그것이 `DATABASE_URL`보다 우선한다.
+- 즉 `DATABASE_URL`만 public DB URL로 바꿔도, `DIRECT_URL`에 예전 internal host가 남아 있으면 계속 internal host를 타게 된다.
+
+## 운영 watchlist 입력 방식
+
+운영에서 실데이터 ingest를 쓰려면 데모용 `db:seed` 대신
+`watchlistEntry`만 별도로 넣는 편이 안전하다.
+
+현재 repo에는 운영용 watchlist JSON 포맷과 upsert 스크립트가 있다.
+
+- example JSON
+  - `config/watchlist.entries.example.json`
+- 실제 비공개 파일
+  - `config/watchlist.entries.json`
+- upsert script
+  - `pnpm --filter vuln-radar-backend watchlist:upsert`
+
+파일 포맷은 아래처럼 단순하다.
+
+```json
+{
+  "version": 1,
+  "entries": [
+    { "type": "vendor", "value": "microsoft", "enabled": true },
+    { "type": "product", "value": "kubernetes", "enabled": true },
+    { "type": "ecosystem", "value": "npm", "enabled": true },
+    { "type": "keyword", "value": "auth bypass", "enabled": true }
+  ]
+}
+```
+
+주의:
+
+- `db:seed`는 demo vulnerability/advisory/epss/alert까지 같이 넣는다.
+- 운영에서는 `watchlist:upsert`로 관심 키워드만 먼저 넣고 `POST /api/ingest/sync`를 실행하는 흐름을 권장한다.
+- 스크립트는 값을 trim + lowercase 정규화해서 upsert한다.
+- 파일에 없는 기존 항목까지 비활성화하려면 `--disable-missing` 옵션을 쓴다.
+
+### Prisma generate와 DB URL
+
+- `prisma generate`는 실제 DB 접속이 필요한 명령은 아니지만, Prisma 7에서는 `prisma.config.ts`를 먼저 로드한다.
+- 따라서 config 로딩 단계에서 `DATABASE_URL`이나 `DIRECT_URL`을 강제로 해석하다가 throw하면, generate도 같이 실패할 수 있다.
+- 현재 backend는 이 차이를 반영해서:
+  - runtime / migrate 성격 로직은 실제 DB URL을 엄격하게 요구
+  - `prisma generate` 같은 build 단계는 fallback URL로 통과
+    하도록 분리해뒀다.
+
 ## 왜 이 스택인가
 
 이 backend는 단순 CRUD보다 아래 책임이 더 크다.
@@ -135,6 +223,13 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 - ecosystem
 - keyword
 
+현재는 운영용 admin API도 제공한다.
+
+- `GET /api/admin/watchlist`
+- `POST /api/admin/watchlist`
+- `PATCH /api/admin/watchlist/:id`
+- `DELETE /api/admin/watchlist/:id`
+
 ### `scoring`
 
 위험도 계산의 핵심이다.
@@ -205,6 +300,22 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
   - 어떤 upstream source를 실제로 읽는지
   - 왜 현재 구조를 polling / near-real-time으로 보는지
   - live sync와 freshness를 어떻게 확인하는지
+- `docs/003_watchlist_admin_api.md`
+  - 운영에서 watchlist를 어떻게 CRUD하는지
+  - 왜 JSON upsert보다 admin API를 기본 경로로 선택했는지
+- `docs/004_backend_bootstrap_and_ops_history.md`
+  - 이번 bootstrap / Prisma / Railway / proxy 작업 히스토리 정리
+  - 처음 NestJS 및 인프라를 볼 때 알아둘 함정과 운영 기준
+- `docs/005_postgres_checkpoint_notes.md`
+  - PostgreSQL checkpoint 로그가 무엇인지
+  - 언제 돌고 어떤 필드를 읽어야 하는지
+  - checkpoint 주기와 ingest scheduler 주기를 어떻게 구분해서 봐야 하는지
+- `docs/006_ingest_sync_policy_and_security.md`
+  - `POST /api/ingest/sync`와 scheduler를 어떻게 운영해야 하는지
+  - ingest/write 작업에서 알아둘 보안과 멀티 인스턴스 한계
+- `docs/007_local_dev_and_data_state_checklist.md`
+  - `db:push`, `db:seed`, `ingest/sync` 차이
+  - 로컬 Docker Postgres, proxy 경로, scheduler env override까지 한 번에 보는 체크리스트
 
 ## 실시간 데이터에 대한 현재 기준
 
@@ -216,5 +327,5 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
   - `POST /api/ingest/sync`
 - 자동 sync는 env로 제어한다.
   - `INGEST_SCHEDULER_ENABLED=true`
-  - `INGEST_SYNC_INTERVAL_MINUTES=60`
+  - `INGEST_SYNC_INTERVAL_MINUTES=1440`
   - `INGEST_SYNC_ON_STARTUP=false`

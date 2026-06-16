@@ -7,10 +7,18 @@ import {
   KevResponse,
   OverviewCard,
   OverviewResponse,
+  RadarDataSource,
+  RadarDataSourceReason,
+  VulnerabilityDetailResponse,
   WatchlistEntry,
   WatchlistResponse,
 } from '../types/radar';
-import { radarGeneratedAt } from './radar-seed-data';
+import {
+  advisorySeeds,
+  radarGeneratedAt,
+  vulnerabilitySeeds,
+  watchMatchSeeds,
+} from './radar-seed-data';
 
 const GENERATED_AT = radarGeneratedAt;
 
@@ -130,9 +138,36 @@ const kevItems: KevItem[] = [
   },
 ];
 
-export function getOverviewResponse(): OverviewResponse {
+type MockFallbackReason = Extract<
+  RadarDataSourceReason,
+  'database_unavailable' | 'no_database_rows'
+>;
+
+function buildMockDataSource(
+  resourceLabel: string,
+  reason: MockFallbackReason = 'database_unavailable',
+): RadarDataSource {
+  if (reason === 'no_database_rows') {
+    return {
+      kind: 'mock',
+      reason,
+      message: `${resourceLabel} is using seed mock data because no ingested database rows are available yet.`,
+    };
+  }
+
+  return {
+    kind: 'mock',
+    reason,
+    message: `${resourceLabel} is using seed mock data because the database connection is currently unavailable.`,
+  };
+}
+
+export function getOverviewResponse(
+  reason: MockFallbackReason = 'database_unavailable',
+): OverviewResponse {
   return {
     generatedAt: GENERATED_AT,
+    dataSource: buildMockDataSource('Overview', reason),
     cards: overviewCards,
     highlights: [
       'KEV + watchlist match signals are elevated.',
@@ -141,30 +176,108 @@ export function getOverviewResponse(): OverviewResponse {
   };
 }
 
-export function getFeedResponse(): FeedResponse {
+export function getFeedResponse(
+  reason: MockFallbackReason = 'database_unavailable',
+): FeedResponse {
   return {
     generatedAt: GENERATED_AT,
+    dataSource: buildMockDataSource('Feed', reason),
     items: feedItems,
   };
 }
 
-export function getWatchlistResponse(): WatchlistResponse {
+export function getWatchlistResponse(
+  reason: MockFallbackReason = 'database_unavailable',
+): WatchlistResponse {
   return {
     generatedAt: GENERATED_AT,
+    dataSource: buildMockDataSource('Watchlist', reason),
     entries: watchlistEntries,
   };
 }
 
-export function getKevResponse(): KevResponse {
+export function getKevResponse(
+  reason: MockFallbackReason = 'database_unavailable',
+): KevResponse {
   return {
     generatedAt: GENERATED_AT,
+    dataSource: buildMockDataSource('KEV', reason),
     items: kevItems,
   };
 }
 
-export function getAlertsResponse(): AlertsResponse {
+export function getAlertsResponse(
+  reason: MockFallbackReason = 'database_unavailable',
+): AlertsResponse {
   return {
     generatedAt: GENERATED_AT,
+    dataSource: buildMockDataSource('Alerts', reason),
     items: alertItems,
   };
+}
+
+export function getVulnerabilityDetailResponse(
+  cveId: string,
+  reason: MockFallbackReason = 'database_unavailable',
+): VulnerabilityDetailResponse | null {
+  const vulnerability = vulnerabilitySeeds.find((item) => item.cveId === cveId);
+
+  if (!vulnerability) {
+    return null;
+  }
+
+  const advisories = advisorySeeds
+    .filter((item) => item.vulnerabilityCveId === cveId)
+    .map((item) => ({
+      source: item.source,
+      title: item.title ?? null,
+      summary: item.summary ?? null,
+      sourceUrl: item.sourceUrl ?? null,
+      publishedAt: item.publishedAt?.toISOString() ?? null,
+      lastModifiedAt: item.lastModifiedAt?.toISOString() ?? null,
+    }));
+
+  const matchedWatchlist = watchMatchSeeds
+    .filter((item) => item.vulnerabilityCveId === cveId)
+    .map((item) => item.matchedValue);
+
+  return {
+    generatedAt: GENERATED_AT,
+    dataSource: buildMockDataSource('Vulnerability detail', reason),
+    item: {
+      cveId: vulnerability.cveId,
+      title: vulnerability.title,
+      description: vulnerability.description,
+      priority: vulnerability.priority,
+      severity: normalizeSeverity(vulnerability.severity),
+      cvssScore: vulnerability.cvssScore ?? null,
+      epssScore: vulnerability.epssScore ?? 0,
+      epssPercentile: vulnerability.epssPercentile ?? null,
+      isKev: vulnerability.isKev,
+      riskScore: vulnerability.riskScore,
+      publishedAt: vulnerability.publishedAt.toISOString(),
+      updatedAt: vulnerability.lastModifiedAt.toISOString(),
+      matchedWatchlist,
+      advisories,
+      references: {
+        nvdUrl: `https://nvd.nist.gov/vuln/detail/${vulnerability.cveId}`,
+      },
+    },
+  };
+}
+
+function normalizeSeverity(
+  severity: string | null,
+): 'critical' | 'high' | 'medium' | 'low' {
+  const normalizedSeverity = severity?.toLowerCase();
+
+  if (
+    normalizedSeverity === 'critical' ||
+    normalizedSeverity === 'high' ||
+    normalizedSeverity === 'medium'
+  ) {
+    return normalizedSeverity;
+  }
+
+  return 'low';
 }

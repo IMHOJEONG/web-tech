@@ -225,6 +225,7 @@ Turbo 환경변수 선언은 root `turbo.json`에 몰아넣지 않고 앱별로 
 
 - `apps/vuln-radar/turbo.json`
   - `VULN_RADAR_BACKEND_ORIGIN`
+  - `VULN_RADAR_BACKEND_API_TOKEN`
 - `VITE_*`
   - Vite framework inference로 Turbo가 패키지 단위로 자동 추적한다.
 
@@ -234,11 +235,65 @@ Turbo 환경변수 선언은 root `turbo.json`에 몰아넣지 않고 앱별로 
 이 저장소는 root `turbo.json`의 `build.inputs`에 이미 `.env*`를 넣어두었으므로, 현재 `build` 기준으로는 env 파일 변경도 함께 추적된다.
 즉, 이 앱 전용 env를 추가할 때는 가능하면 root `globalEnv`가 아니라 `apps/vuln-radar/turbo.json`부터 갱신하되, 새 cached task를 앱 쪽에 정의할 때는 `.env*` 입력 추적도 같이 확인한다.
 
+## 운영 프록시 기준
+
+로컬 개발과 운영 배포는 같은 공개 경로를 유지하되, 프록시 계층만 다르게 둔다.
+
+- local dev
+  - `vite.config.ts`의 `server.proxy`
+- Vercel production
+  - `vercel.json`
+  - `api/proxy.ts`
+
+즉, 브라우저는 계속 `/api/backend/*`만 호출하고, Vercel 배포에서는 proxy function이 `VULN_RADAR_BACKEND_ORIGIN`을 읽어 `${backendOrigin}/api/*`로 전달한다.
+backend가 server-to-server Bearer 인증을 요구하면 `VULN_RADAR_BACKEND_API_TOKEN`을 읽어 `Authorization: Bearer <token>` 헤더도 같이 주입한다.
+
+## read API source metadata
+
+overview, feed, kev, watchlist, alerts 응답은 이제 `dataSource` 메타데이터를 같이 내려준다.
+
+- `kind`
+  - `database`
+  - `mock`
+- `reason`
+  - `live_read_model`
+  - `derived_from_feed`
+  - `database_unavailable`
+  - `no_database_rows`
+- `message`
+  - 현재 응답이 왜 database 또는 mock으로 보이는지 설명
+
+## 프런트 학습 문서
+
+- `docs/001_find.md`
+  - 이 앱을 어떤 관점으로 보는지와 제품 목표
+- `docs/002_data.md`
+  - overview / feed / watchlist 데이터 흐름 메모
+- `docs/003_dev-runtime.md`
+  - dev runtime과 env 해석 기준
+- `docs/004_workspace_install_and_typescript_recovery.md`
+  - workspace / 타입스크립트 복구 메모
+- `docs/005_vercel_proxy_debugging.md`
+  - Vercel proxy 디버깅 흐름
+- `docs/006_vulnerability_detail_and_security_notes.md`
+  - 상세 페이지에서 어떤 필드를 먼저 읽어야 하는지
+  - KEV / EPSS / CVSS / watchlist match를 어떻게 공부하면 좋은지
+
+프런트 overview 화면은 이 값을 배지와 안내 문구로 그대로 표시한다.
+즉, 오래된 `generatedAt`이 보이면 먼저 `dataSource.kind === "mock"`인지 보면 된다.
+backend 데이터 endpoint가 `Bearer` 토큰으로 보호되는 경우에는, 브라우저 코드에 secret을 넣지 않는다.
+대신 `VULN_RADAR_BACKEND_API_TOKEN`을 Vite 서버 env에 두고 `server.proxy` 또는 배포 reverse proxy가
+`Authorization` 헤더를 upstream에 주입하는 구조를 사용한다.
+
 ## 관련 문서
 
 - `docs/003_dev-runtime.md`
   - 프론트/백엔드 로컬 실행 전략
   - Vite proxy와 backend 연결 방식
+- `docs/005_vercel_proxy_debugging.md`
+  - Vercel 운영 프록시 디버깅
+  - direct backend / vercel proxy 비교 순서
+  - Function Logs 해석 기준
 - `docs/004_workspace_install_and_typescript_recovery.md`
   - `@web-tech/ui prebuild` 실패 복구
   - `@web-tech/typescript-config/react-library` 미해석 복구

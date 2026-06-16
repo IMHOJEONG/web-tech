@@ -1,7 +1,16 @@
-import { Controller, Get, ParseIntPipe, Post, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  ParseIntPipe,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { IngestService } from './ingest.service';
+import { BackendAuthGuard } from '../../shared/guards/backend-auth.guard';
 
 @Controller('ingest')
+@UseGuards(BackendAuthGuard)
 export class IngestController {
   constructor(private readonly ingestService: IngestService) {}
 

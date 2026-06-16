@@ -7,8 +7,11 @@ import { applyAppBootstrap } from './../src/bootstrap/app-bootstrap';
 
 describe('HealthController (e2e)', () => {
   let app: INestApplication<App>;
+  const backendApiToken = 'test-vuln-radar-token';
 
   beforeEach(async () => {
+    process.env.VULN_RADAR_API_TOKEN = backendApiToken;
+
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -35,6 +38,7 @@ describe('HealthController (e2e)', () => {
   it('/api/overview (GET)', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/overview')
+      .set('Authorization', `Bearer ${backendApiToken}`)
       .expect(200);
 
     expect(response.body.cards.length).toBeGreaterThan(0);
@@ -46,11 +50,16 @@ describe('HealthController (e2e)', () => {
   it('/api/kev (GET)', async () => {
     const response = await request(app.getHttpServer())
       .get('/api/kev')
+      .set('Authorization', `Bearer ${backendApiToken}`)
       .expect(200);
 
     expect(response.body.items.length).toBeGreaterThan(0);
     expect(response.body.items[0]).toMatchObject({
       cveId: 'CVE-2026-10001',
     });
+  });
+
+  it('/api/feed (GET) returns 401 without authorization header', () => {
+    return request(app.getHttpServer()).get('/api/feed').expect(401);
   });
 });
