@@ -1,4 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { AppConfigService } from '../../config/app-config.service';
+import { BackendAuthGuard } from '../../shared/guards/backend-auth.guard';
 import { IngestController } from './ingest.controller';
 import { IngestService } from './ingest.service';
 
@@ -64,6 +66,18 @@ describe('IngestController', () => {
         {
           provide: IngestService,
           useValue: ingestService,
+        },
+        {
+          provide: BackendAuthGuard,
+          useValue: {
+            canActivate: () => true,
+          },
+        },
+        {
+          provide: AppConfigService,
+          useValue: {
+            backendApiToken: 'test-token',
+          },
         },
       ],
     }).compile();

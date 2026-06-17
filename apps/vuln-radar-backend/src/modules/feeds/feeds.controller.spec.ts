@@ -1,5 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { AppConfigService } from '../../config/app-config.service';
 import { PrismaService } from '../../infra/prisma/prisma.service';
+import { BackendAuthGuard } from '../../shared/guards/backend-auth.guard';
 import { FeedsController } from './feeds.controller';
 import { FeedsRepository } from './feeds.repository';
 import { FeedsService } from './feeds.service';
@@ -13,6 +15,18 @@ describe('FeedsController', () => {
       providers: [
         FeedsService,
         FeedsRepository,
+        {
+          provide: BackendAuthGuard,
+          useValue: {
+            canActivate: () => true,
+          },
+        },
+        {
+          provide: AppConfigService,
+          useValue: {
+            backendApiToken: 'test-token',
+          },
+        },
         {
           provide: PrismaService,
           useValue: {

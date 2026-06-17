@@ -316,6 +316,9 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 - `docs/007_local_dev_and_data_state_checklist.md`
   - `db:push`, `db:seed`, `ingest/sync` 차이
   - 로컬 Docker Postgres, proxy 경로, scheduler env override까지 한 번에 보는 체크리스트
+- `docs/008_backend_auth_guard_testing_and_useguards.md`
+  - `BackendAuthGuard` 추가 뒤 controller unit test가 왜 깨질 수 있는지
+  - Nest에서 왜 `@UseGuards(...)`로 인증을 분리하는지
 
 ## 실시간 데이터에 대한 현재 기준
 

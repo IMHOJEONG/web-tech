@@ -10,6 +10,7 @@ export default [
     ignores: [
       "**/package.json",
       "**/node_modules/**",
+      "**/.next/**",
       "**/dist/**",
       "packages/tailwind-config/**",
       "packages/eslint-config/**",
