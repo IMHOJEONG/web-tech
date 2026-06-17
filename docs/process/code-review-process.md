@@ -167,9 +167,10 @@
 
 ### `Require status checks`
 
-- 현재는 `Build and Test` 하나를 필수 체크로 둔다.
+- 현재는 실제로 생성되는 체크 이름만 required status check에 둔다.
 - 의미는 “코멘트만 정리됐다고 merge하지 않고, 최소한 자동 검증이 통과한 변경만 main에 반영한다”는 것이다.
-- 이후 `Lint / Typecheck / Build / Test`로 CI를 분리해 안정화하면, required status check도 그 이름들로 세분화한다.
+- 과거 체크 이름(`Build and Test`)을 ruleset에 남겨두면 PR이 `BLOCKED` 상태로 남을 수 있으므로, 현재 CI 이름과 항상 맞춘다.
+- 현재 기준 권장 required status checks는 `Lint`, `Typecheck`, `Test`, `Analyze (actions)`, `Analyze (javascript-typescript)`이다.
 
 ### `Require conversation resolution`
 
@@ -192,6 +193,7 @@
 ## 관련 문서
 
 - `docs/process/codex-documentation-policy.md`
+- `docs/process/branch-policy.md`
 - `docs/architecture/docs-app-information-architecture.md`
 - `docs/architecture/docs-responsive-policy.md`
 - `docs/runbooks/content-api-auth-ops-runbook.md`

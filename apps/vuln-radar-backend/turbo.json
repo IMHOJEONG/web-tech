@@ -12,6 +12,7 @@
         "INGEST_SYNC_INTERVAL_MINUTES",
         "INGEST_SYNC_ON_STARTUP",
         "NVD_API_KEY",
+        "VULN_RADAR_API_TOKEN",
         "DATABASE_URL",
         "DIRECT_URL",
         "SHADOW_DATABASE_URL"
@@ -28,6 +29,7 @@
         "INGEST_SYNC_INTERVAL_MINUTES",
         "INGEST_SYNC_ON_STARTUP",
         "NVD_API_KEY",
+        "VULN_RADAR_API_TOKEN",
         "DATABASE_URL",
         "DIRECT_URL",
         "SHADOW_DATABASE_URL"
@@ -44,6 +46,7 @@
         "INGEST_SYNC_INTERVAL_MINUTES",
         "INGEST_SYNC_ON_STARTUP",
         "NVD_API_KEY",
+        "VULN_RADAR_API_TOKEN",
         "DATABASE_URL",
         "DIRECT_URL",
         "SHADOW_DATABASE_URL"
@@ -60,6 +63,7 @@
         "INGEST_SYNC_INTERVAL_MINUTES",
         "INGEST_SYNC_ON_STARTUP",
         "NVD_API_KEY",
+        "VULN_RADAR_API_TOKEN",
         "DATABASE_URL",
         "DIRECT_URL",
         "SHADOW_DATABASE_URL"
@@ -76,6 +80,7 @@
         "INGEST_SYNC_INTERVAL_MINUTES",
         "INGEST_SYNC_ON_STARTUP",
         "NVD_API_KEY",
+        "VULN_RADAR_API_TOKEN",
         "DATABASE_URL",
         "DIRECT_URL",
         "SHADOW_DATABASE_URL"
