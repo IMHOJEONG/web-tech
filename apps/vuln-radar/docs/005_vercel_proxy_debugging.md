@@ -273,3 +273,11 @@ Vercel에서 아래를 본다.
 
 - `docs/003_dev-runtime.md`
 - `README.md`
+
+# Vercel Proxy / SPA Fallback Notes
+
+- `Vite + TanStack Router` 기반 `apps/vuln-radar`는 `/overview` 같은 경로를 서버가 직접 아는 것이 아니라, `index.html`이 먼저 로드된 뒤 클라이언트 라우터가 해석한다.
+- 그래서 Vercel에서는 API rewrite 외에도 SPA fallback rewrite가 필요하다.
+- 권장 순서:
+  1. `/api/backend/:path*` -> `/api/proxy?proxyPath=:path*`
+  2. 나머지 모든 경로 -> `/index.html`
