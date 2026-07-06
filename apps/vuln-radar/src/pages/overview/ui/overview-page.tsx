@@ -59,7 +59,6 @@ export function OverviewPage() {
     statusQuery.isLoading ||
     overviewQuery.isLoading ||
     feedQuery.isLoading ||
-    kevQuery.isLoading ||
     watchlistQuery.isLoading;
 
   const queryStates = [
@@ -67,7 +66,6 @@ export function OverviewPage() {
     { label: "ingest/status", query: statusQuery },
     { label: "overview", query: overviewQuery },
     { label: "feed", query: feedQuery },
-    { label: "kev", query: kevQuery },
     { label: "watchlist", query: watchlistQuery },
   ];
 
@@ -110,7 +108,7 @@ export function OverviewPage() {
 
   const overview = overviewQuery.data as OverviewResponse;
   const feed = feedQuery.data as FeedResponse;
-  const kev = kevQuery.data as KevResponse;
+  const kev = kevQuery.data as KevResponse | undefined;
   const watchlist = watchlistQuery.data as WatchlistResponse;
   const status = statusQuery.data as IngestStatusResponse;
   const latestAppliedAt =
@@ -147,6 +145,7 @@ export function OverviewPage() {
         feed={feed}
         healthStorage={healthQuery.data?.storage}
         kev={kev}
+        isLoading={kevQuery.isLoading && !kevQuery.data}
         overview={overview}
         status={status}
       />
