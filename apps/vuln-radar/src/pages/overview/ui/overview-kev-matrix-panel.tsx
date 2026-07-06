@@ -15,7 +15,8 @@ import {
 interface OverviewKevMatrixPanelProps {
   feed: FeedResponse;
   healthStorage: "mock" | "database" | undefined;
-  kev: KevResponse;
+  isLoading: boolean;
+  kev?: KevResponse;
   overview: OverviewResponse;
   status: IngestStatusResponse;
 }
@@ -23,6 +24,7 @@ interface OverviewKevMatrixPanelProps {
 export function OverviewKevMatrixPanel({
   feed,
   healthStorage,
+  isLoading,
   kev,
   overview,
   status,
@@ -31,7 +33,7 @@ export function OverviewKevMatrixPanel({
   const matrixItems = buildKevMatrixItems(feed, kev);
 
   return (
-    <article className="overflow-hidden rounded-sm border border-radar-border/70 bg-radar-panel shadow-[0_20px_48px_rgba(0,0,0,0.28)] backdrop-blur">
+    <article className="overflow-hidden rounded-sm border border-radar-border/70 bg-[rgba(12,14,18,0.82)] shadow-[0_12px_24px_rgba(0,0,0,0.18)]">
       <div className="flex flex-col gap-4 border-b border-radar-border/60 px-5 py-5 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <h2 className="font-display text-[1.45rem] font-semibold tracking-[-0.04em] text-white">
@@ -61,7 +63,7 @@ export function OverviewKevMatrixPanel({
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="min-h-[332px] overflow-x-auto">
         <table className="w-full min-w-[760px] border-collapse">
           <thead>
             <tr className="bg-radar-panel-muted">
@@ -73,56 +75,82 @@ export function OverviewKevMatrixPanel({
             </tr>
           </thead>
           <tbody>
-            {matrixItems.map((item) => (
-              <tr
-                key={item.cveId}
-                className="border-b border-radar-border-soft"
-              >
-                <td className="px-4 py-4 align-middle">
-                  <span className="font-mono text-[0.85rem] text-radar-primary">
-                    {item.cveId}
-                  </span>
-                </td>
-                <td className="px-4 py-4 align-middle text-sm text-white">
-                  {item.title}
-                </td>
-                <td className="px-4 py-4 align-middle">
-                  <div className="inline-flex items-center gap-3">
-                    <div className="relative h-1.5 w-24 overflow-hidden rounded-full bg-radar-panel-muted">
-                      <span
-                        className={getScoreFillClassName(item.severity)}
-                        style={{
-                          width: `${Math.max(
-                            12,
-                            Math.min(100, Math.round(item.score * 100)),
-                          )}%`,
-                        }}
-                      />
-                    </div>
-                    <span
-                      className={`font-mono text-[0.85rem] ${getScoreTextClassName(item.severity)}`}
-                    >
-                      {item.score.toFixed(3)}
-                    </span>
-                  </div>
-                </td>
-                <td className="px-4 py-4 align-middle">
-                  <span className={getStatusPillClassName(item.priority)}>
-                    {item.statusLabel}
-                  </span>
-                </td>
-                <td className="px-4 py-4 text-right align-middle">
-                  <Link
-                    to="/vulnerabilities/$cveId"
-                    params={{ cveId: item.cveId }}
-                    className="inline-flex size-7 items-center justify-center rounded-sm border border-transparent text-radar-copy/72 transition hover:-translate-y-px hover:border-radar-primary/22 hover:bg-radar-panel-muted"
-                    aria-label={t("common.detail")}
+            {isLoading
+              ? Array.from({ length: 4 }, (_, index) => (
+                  <tr
+                    key={`kev-skeleton-${index}`}
+                    className="border-b border-radar-border-soft"
                   >
-                    <MoreVertical size={16} strokeWidth={1.8} />
-                  </Link>
-                </td>
-              </tr>
-            ))}
+                    <td className="px-4 py-4 align-middle">
+                      <div className="h-4 w-28 animate-pulse rounded-sm bg-radar-panel-muted" />
+                    </td>
+                    <td className="px-4 py-4 align-middle">
+                      <div className="h-4 w-[88%] animate-pulse rounded-sm bg-radar-panel-muted" />
+                    </td>
+                    <td className="px-4 py-4 align-middle">
+                      <div className="inline-flex items-center gap-3">
+                        <div className="h-1.5 w-24 animate-pulse rounded-full bg-radar-panel-muted" />
+                        <div className="h-4 w-12 animate-pulse rounded-sm bg-radar-panel-muted" />
+                      </div>
+                    </td>
+                    <td className="px-4 py-4 align-middle">
+                      <div className="h-7 w-28 animate-pulse rounded-sm bg-radar-panel-muted" />
+                    </td>
+                    <td className="px-4 py-4 text-right align-middle">
+                      <div className="ml-auto h-7 w-7 animate-pulse rounded-sm bg-radar-panel-muted" />
+                    </td>
+                  </tr>
+                ))
+              : matrixItems.map((item) => (
+                  <tr
+                    key={item.cveId}
+                    className="border-b border-radar-border-soft"
+                  >
+                    <td className="px-4 py-4 align-middle">
+                      <span className="font-mono text-[0.85rem] text-radar-primary">
+                        {item.cveId}
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 align-middle text-sm text-white">
+                      {item.title}
+                    </td>
+                    <td className="px-4 py-4 align-middle">
+                      <div className="inline-flex items-center gap-3">
+                        <div className="relative h-1.5 w-24 overflow-hidden rounded-full bg-radar-panel-muted">
+                          <span
+                            className={getScoreFillClassName(item.severity)}
+                            style={{
+                              width: `${Math.max(
+                                12,
+                                Math.min(100, Math.round(item.score * 100)),
+                              )}%`,
+                            }}
+                          />
+                        </div>
+                        <span
+                          className={`font-mono text-[0.85rem] ${getScoreTextClassName(item.severity)}`}
+                        >
+                          {item.score.toFixed(3)}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-4 align-middle">
+                      <span className={getStatusPillClassName(item.priority)}>
+                        {item.statusLabel}
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-right align-middle">
+                      <Link
+                        to="/vulnerabilities/$cveId"
+                        params={{ cveId: item.cveId }}
+                        className="inline-flex size-7 items-center justify-center rounded-sm border border-transparent text-radar-copy/72 transition hover:-translate-y-px hover:border-radar-primary/22 hover:bg-radar-panel-muted"
+                        aria-label={t("common.detail")}
+                      >
+                        <MoreVertical size={16} strokeWidth={1.8} />
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
           </tbody>
         </table>
       </div>

@@ -13,20 +13,21 @@ export interface OverviewMatrixItem {
   statusLabel: string;
 }
 
-export function buildKevMatrixItems(feed: FeedResponse, kev: KevResponse) {
+export function buildKevMatrixItems(feed: FeedResponse, kev?: KevResponse) {
   const feedByCveId = new Map(feed.items.map((item) => [item.cveId, item]));
-  const kevRows = kev.items.slice(0, 6).map((item) => {
-    const feedItem = feedByCveId.get(item.cveId);
+  const kevRows =
+    kev?.items.slice(0, 6).map((item) => {
+      const feedItem = feedByCveId.get(item.cveId);
 
-    return {
-      cveId: item.cveId,
-      title: item.title,
-      priority: item.priority,
-      severity: feedItem?.severity ?? "high",
-      score: feedItem?.epssScore ?? 0.5,
-      statusLabel: getStatusLabel(item.priority),
-    } satisfies OverviewMatrixItem;
-  });
+      return {
+        cveId: item.cveId,
+        title: item.title,
+        priority: item.priority,
+        severity: feedItem?.severity ?? "high",
+        score: feedItem?.epssScore ?? 0.5,
+        statusLabel: getStatusLabel(item.priority),
+      } satisfies OverviewMatrixItem;
+    }) ?? [];
 
   if (kevRows.length > 0) {
     return kevRows;
