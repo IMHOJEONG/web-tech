@@ -7,7 +7,7 @@ import { buildSearchResultItem } from '~/lib/search-result-contract'
 
 type DocsIndexProps = {
     docs: SearchData[]
-    recommendations: string[]
+    recommendations: readonly string[]
     keyword?: string
 }
 

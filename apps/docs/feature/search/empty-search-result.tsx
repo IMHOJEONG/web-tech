@@ -4,7 +4,7 @@ import { formatSearchKeyword } from './lib/format-search-keyword'
 
 interface EmptySearchResultProps {
     keyword: string
-    recommendations: string[]
+    recommendations: readonly string[]
 }
 
 export const EmptySearchResult = ({

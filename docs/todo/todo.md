@@ -111,7 +111,7 @@
   - `query string` 기반으로 확정
   - `/feed?topic=web|mobile|uiux` 형태로 상태를 표현
   - 기준 문서: `docs/architecture/docs-feed-filter-policy.md`
-- [ ] `P1` footer 링크를 실제 라우트 또는 외부 링크와 연결한다.
+- [x] `P1` footer 링크를 실제 라우트 또는 외부 링크와 연결한다.
   - `PRIVACY`
   - `TERMS`
   - `CHANGELOG`

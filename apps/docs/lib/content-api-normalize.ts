@@ -50,6 +50,14 @@ function normalizeThumbnailPath(
     return normalizedAssetPath
 }
 
+function normalizeScalarText(value?: string | number | null) {
+    if (typeof value === 'number') {
+        return Number.isFinite(value) ? String(value) : ''
+    }
+
+    return value?.trim() ?? ''
+}
+
 function getInlineMarkdown(post: RemotePost) {
     return (
         post.content ??
@@ -195,8 +203,8 @@ export function normalizeRemotePostMeta(
         markdownPath: validatedMarkdownPath,
     } = contractResult.data
 
-    const summary = post.summary?.trim() ?? ''
-    const date = post.date?.trim() ?? ''
+    const summary = normalizeScalarText(post.summary)
+    const date = normalizeScalarText(post.date)
     const markdownPath = validatedMarkdownPath ?? undefined
     const fileName = normalizeDocPath(
         post.fileName ?? post.path ?? markdownPath ?? `remote/${slug}`

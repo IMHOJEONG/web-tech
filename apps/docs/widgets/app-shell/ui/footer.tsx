@@ -1,11 +1,12 @@
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
+import { DOCS_GITHUB_REPO_URL } from '~/shared/config/external-links'
 
 const footerLinks = [
-    { href: '#', key: 'privacy' },
-    { href: '#', key: 'terms' },
-    { href: '#', key: 'changelog' },
-    { href: '#', key: 'github' },
+    { href: '/privacy', key: 'privacy' },
+    { href: '/terms', key: 'terms' },
+    { href: '/changelog', key: 'changelog' },
+    { href: DOCS_GITHUB_REPO_URL, key: 'github', external: true },
 ]
 
 export default async function Footer() {
@@ -32,6 +33,12 @@ export default async function Footer() {
                         <Link
                             key={link.key}
                             href={link.href}
+                            target={link.external ? '_blank' : undefined}
+                            rel={
+                                link.external
+                                    ? 'noreferrer noopener'
+                                    : undefined
+                            }
                             className="font-display text-[0.625rem] leading-[0.9375rem] tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-on-surface"
                         >
                             {footerT(`links.${link.key}`)}
