@@ -109,25 +109,27 @@ function getLocalDocsData() {
         } else {
             thumbnailPath = null
         }
-        return [{
-            id: frontmatter.id ?? normalizedFileName,
-            title: frontmatter.title ?? fallbackSlug,
-            slug: frontmatter.slug ?? fallbackSlug,
-            summary: frontmatter.summary ?? '',
-            date: frontmatter.date ?? '',
-            content,
-            fileName: normalizedFileName,
-            contentFormat: 'mdx',
-            contentSource: 'local',
-            thumbnail: thumbnailPath,
-            updatedAt: frontmatter.updatedAt,
-            authorName: frontmatter.authorName,
-            authorRole: frontmatter.authorRole,
-            readMinutes: frontmatter.readMinutes,
-            topicLabel: frontmatter.topicLabel,
-            tags: frontmatter.tags,
-            status: frontmatter.status,
-        }]
+        return [
+            {
+                id: frontmatter.id ?? normalizedFileName,
+                title: frontmatter.title ?? fallbackSlug,
+                slug: frontmatter.slug ?? fallbackSlug,
+                summary: frontmatter.summary ?? '',
+                date: frontmatter.date ?? '',
+                content,
+                fileName: normalizedFileName,
+                contentFormat: 'mdx',
+                contentSource: 'local',
+                thumbnail: thumbnailPath,
+                updatedAt: frontmatter.updatedAt,
+                authorName: frontmatter.authorName,
+                authorRole: frontmatter.authorRole,
+                readMinutes: frontmatter.readMinutes,
+                topicLabel: frontmatter.topicLabel,
+                tags: frontmatter.tags,
+                status: frontmatter.status,
+            },
+        ]
     })
 
     return allPostsData

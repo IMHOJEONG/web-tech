@@ -80,12 +80,14 @@ const localDocFrontmatterBaseSchema = z.object({
     status: editorialStatusSchema.optional(),
 })
 
-const publishedLocalDocFrontmatterSchema = localDocFrontmatterBaseSchema.extend({
-    title: localDocTitleSchema,
-    slug: localDocSlugSchema,
-    summary: localDocSummarySchema,
-    date: localDocDateSchema,
-})
+const publishedLocalDocFrontmatterSchema = localDocFrontmatterBaseSchema.extend(
+    {
+        title: localDocTitleSchema,
+        slug: localDocSlugSchema,
+        summary: localDocSummarySchema,
+        date: localDocDateSchema,
+    }
+)
 
 const draftLocalDocFrontmatterSchema = localDocFrontmatterBaseSchema.extend({
     title: localDocTitleSchema,
@@ -243,9 +245,7 @@ export function normalizeRemoteEditorialMetadata(input: {
     }
 }
 
-export function validateLocalDocFrontmatter(
-    input: NormalizedDocFrontmatter
-) {
+export function validateLocalDocFrontmatter(input: NormalizedDocFrontmatter) {
     if (isNonPublicDocStatus(input.status)) {
         return draftLocalDocFrontmatterSchema.safeParse(input)
     }
@@ -258,7 +258,8 @@ export function formatLocalDocFrontmatterIssues(
 ) {
     return issues
         .map((issue) => {
-            const pathLabel = issue.path.length > 0 ? issue.path.join('.') : 'frontmatter'
+            const pathLabel =
+                issue.path.length > 0 ? issue.path.join('.') : 'frontmatter'
             return `${pathLabel}: ${issue.message}`
         })
         .join('; ')

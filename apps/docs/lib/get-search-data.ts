@@ -123,7 +123,9 @@ function sortByDateDesc<T extends { date?: string }>(docs: T[]) {
     })
 }
 
-async function parseLocalSearchFile(filePath: string): Promise<SearchData | null> {
+async function parseLocalSearchFile(
+    filePath: string
+): Promise<SearchData | null> {
     const fileContents = await fs.readFile(filePath, 'utf8')
     const vfile = new VFile({ path: filePath, value: fileContents })
     vfileMatter(vfile, { strip: true })
