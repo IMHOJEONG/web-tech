@@ -1,4 +1,4 @@
-import { normalizeDocPath } from '~/lib/normalize-doc-path'
+import { normalizeDocPath } from './normalize-doc-path.ts'
 
 type DocRouteSource = {
     slug?: string | null
@@ -136,8 +136,7 @@ export function shouldRedirectToCanonicalDocRoute(
     source: DocRouteSource,
     requestedRoutePath: string
 ) {
-    const normalizedRequestedRoutePath =
-        normalizeRequestedDocRoutePath(requestedRoutePath)
+    const normalizedRequestedRoutePath = normalizeRouteValue(requestedRoutePath)
     const canonicalRoutePath = getDocRoutePath(source)
 
     if (!normalizedRequestedRoutePath || !canonicalRoutePath) {

@@ -1,5 +1,5 @@
-import { HeadingDepth, TocItem } from 'remark-flexible-toc'
-import { slugifyHeading } from '~/mdx-components'
+import type { HeadingDepth, TocItem } from 'remark-flexible-toc'
+import { slugifyHeading } from '../../../lib/slugify-heading.ts'
 
 function stripHeadingMarkup(value: string) {
     return value

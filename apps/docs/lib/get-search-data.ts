@@ -14,6 +14,7 @@ import type { Metadata } from '~/lib/get-document'
 import { getDocHref } from '~/lib/get-doc-route'
 import { fetchRemoteDocsData } from '~/lib/content-api'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
+import { rankSearchDocs } from '~/lib/search-ranking'
 
 export type SearchData = {
     id: string
@@ -96,22 +97,6 @@ function inferSearchSection(fileName: string) {
     }
 
     return 'Docs'
-}
-
-function buildSearchHaystack(doc: SearchData) {
-    const pathTokens = doc.fileName.replace(/\//g, ' ').replace(/[-_]/g, ' ')
-
-    return [
-        doc.title,
-        doc.summary,
-        doc.slug,
-        doc.section,
-        pathTokens,
-        doc.content,
-    ]
-        .filter(Boolean)
-        .join(' ')
-        .toLowerCase()
 }
 
 function sortByDateDesc<T extends { date?: string }>(docs: T[]) {
@@ -217,7 +202,5 @@ export async function getSearchData(keyword?: string): Promise<SearchData[]> {
         return docs
     }
 
-    return docs.filter((doc) =>
-        buildSearchHaystack(doc).includes(normalizedKeyword)
-    )
+    return rankSearchDocs(docs, normalizedKeyword)
 }
