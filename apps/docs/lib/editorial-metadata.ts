@@ -1,10 +1,6 @@
 import { z } from 'zod'
 
-export const editorialStatusSchema = z.enum([
-    'draft',
-    'published',
-    'archived',
-])
+export const editorialStatusSchema = z.enum(['draft', 'published', 'archived'])
 
 export type EditorialStatus = z.infer<typeof editorialStatusSchema>
 

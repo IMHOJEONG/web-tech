@@ -75,7 +75,8 @@ function parseCategoryFile(fileName: string): Partial<Metadata> {
         .relative(process.cwd(), fileName)
         .replace(/\.(mdx|md)$/i, '')
     const normalizedFileName = normalizeDocPath(relPathFromRoot)
-    const fallbackSlug = normalizedFileName.split('/').filter(Boolean).pop() ?? ''
+    const fallbackSlug =
+        normalizedFileName.split('/').filter(Boolean).pop() ?? ''
 
     return {
         id: frontmatter.id ?? normalizedFileName,

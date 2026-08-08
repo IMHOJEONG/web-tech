@@ -92,7 +92,12 @@ function getStructuredRoutePath(source: DocRouteSource) {
 
 function getDocRouteAliases(source: DocRouteSource) {
     const aliases = new Set<string>()
-    const candidates = [source.slug, source.markdownPath, source.fileName, source.path]
+    const candidates = [
+        source.slug,
+        source.markdownPath,
+        source.fileName,
+        source.path,
+    ]
 
     for (const candidate of candidates) {
         const normalizedCandidate = normalizeRequestedDocRoutePath(candidate)

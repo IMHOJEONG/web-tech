@@ -75,7 +75,9 @@ function getLocalDocsData() {
         // Use vfile-matter to parse the post metadata section
         const vfile = new VFile({ path: fileName, value: fileContents })
         vfileMatter(vfile, { strip: true })
-        const frontmatter = normalizeLocalDocFrontmatter(vfile.data.matter || {})
+        const frontmatter = normalizeLocalDocFrontmatter(
+            vfile.data.matter || {}
+        )
         const content = String(vfile)
         // 프로젝트 루트 기준의 상대경로(확장자 없는)만 추출
         const relPathFromRoot = path
