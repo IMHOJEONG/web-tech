@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import { formatSearchKeyword } from '~/feature/search/lib/format-search-keyword'
 import type { SearchData } from '~/lib/get-search-data'
+import { buildSearchResultItem } from '~/lib/search-result-contract'
 
 type DocsIndexProps = {
     docs: SearchData[]
@@ -66,8 +67,15 @@ function getSectionSummary(docs: SearchData[]) {
     )
 }
 
-async function DocsIndexCard({ doc }: { doc: SearchData }) {
+async function DocsIndexCard({
+    doc,
+    keyword,
+}: {
+    doc: SearchData
+    keyword?: string
+}) {
     const t = await getTranslations('docsIndex')
+    const resultItem = buildSearchResultItem(doc, keyword)
 
     return (
         <Link
@@ -87,13 +95,19 @@ async function DocsIndexCard({ doc }: { doc: SearchData }) {
                         )}
                     </div>
                     <div className="space-y-2">
-                        <h3 className="text-lg font-semibold tracking-[-0.02em] text-on-surface transition-colors group-hover:text-primary">
-                            {doc.title ?? doc.slug}
-                        </h3>
-                        {doc.summary && (
-                            <p className="line-clamp-3 text-sm leading-6 text-on-surface-variant">
-                                {doc.summary}
-                            </p>
+                        <h3
+                            className="text-lg font-semibold tracking-[-0.02em] text-on-surface transition-colors group-hover:text-primary [&_.search-highlight]:rounded-sm [&_.search-highlight]:bg-primary-container/70 [&_.search-highlight]:px-1 [&_.search-highlight]:py-px [&_.search-highlight]:font-medium [&_.search-highlight]:text-on-primary-container dark:[&_.search-highlight]:bg-primary/18 dark:[&_.search-highlight]:text-primary-fixed"
+                            dangerouslySetInnerHTML={{
+                                __html: resultItem.preview.titleHtml,
+                            }}
+                        />
+                        {(keyword || doc.summary) && (
+                            <p
+                                className="line-clamp-4 text-sm leading-6 text-on-surface-variant [&_.search-highlight]:rounded-sm [&_.search-highlight]:bg-primary-container/70 [&_.search-highlight]:px-1 [&_.search-highlight]:py-px [&_.search-highlight]:font-medium [&_.search-highlight]:text-on-primary-container dark:[&_.search-highlight]:bg-primary/18 dark:[&_.search-highlight]:text-primary-fixed"
+                                dangerouslySetInnerHTML={{
+                                    __html: resultItem.preview.excerptHtml,
+                                }}
+                            />
                         )}
                     </div>
                 </div>
@@ -171,7 +185,11 @@ export async function DocsIndex({
                         </div>
                         <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
                             {docs.map((doc) => (
-                                <DocsIndexCard key={doc.id} doc={doc} />
+                                <DocsIndexCard
+                                    key={doc.id}
+                                    doc={doc}
+                                    keyword={keyword}
+                                />
                             ))}
                         </div>
                     </section>
