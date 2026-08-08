@@ -147,6 +147,10 @@
   - `ArticleDetail`
 - [ ] `P2` typography scale과 실제 component usage를 대조한다.
   - headline/body/label usage mismatch 정리
+- [x] `P2` 검색 highlight와 excerpt의 시각 규칙을 토큰 기준으로 다듬는다.
+  - `<mark>` 표현이 light/dark 모두에서 과하지 않게 보이도록 조정
+  - search result card에서 title / excerpt emphasis 강도를 다시 점검
+  - 기준 문서: `docs/architecture/docs-search-experience-policy.md`
 
 ## Infra / Tooling
 
@@ -162,11 +166,21 @@
 - [x] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정
 - [ ] `P1` catalog reference 정합성 검사를 스크립트나 CI 체크로 자동화
 - [ ] `P1` `docs`와 `web`의 공통 build/lint/typecheck 파이프라인을 Turbo 기준으로 정리
-- [ ] `P1` `docs` 콘텐츠 흐름의 테스트 기준을 자동화한다.
-  - route normalize / path normalize 유닛 테스트
-  - remote payload schema 검증
-  - 검색 결과 스모크 테스트
-  - 문서 상세 렌더링 스모크 테스트
+- [-] `P1` `docs` 콘텐츠 흐름의 테스트 기준을 자동화한다.
+  - route normalize / path normalize 유닛 테스트 완료
+  - search relevance scoring 유닛 테스트 완료
+  - remote payload schema 검증 테스트 완료
+  - 문서 상세 렌더링 스모크 테스트 완료
+  - 검색 결과 스모크 테스트 완료
+  - `test:lib` / `test:content` CI 연결 완료
+  - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
+- [x] `P1` 검색 결과 contract를 API route까지 정리한다.
+  - `/api/search` 응답에도 ranking / preview 기준을 반영할지 결정
+  - server page와 API consumer가 다른 정렬/preview 규칙을 쓰지 않도록 공통화
+  - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
+- [x] `P1` remote payload schema failure 관측 방식을 정한다.
+  - parse failure를 운영 로그에 어떤 형식으로 남길지 결정
+  - 필요 시 alerting 또는 error aggregation 연결 기준 정리
   - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
 - [ ] `P2` design asset 동기화 절차를 runbook으로 정리
   - Figma local asset export

@@ -61,10 +61,5 @@ export default async function Page({ searchParams }: Props) {
             )
     }
 
-    return (
-        <DocsIndex
-            docs={docs}
-            recommendations={RECOMMENDED_SEARCH_TERMS}
-        />
-    )
+    return <DocsIndex docs={docs} recommendations={RECOMMENDED_SEARCH_TERMS} />
 }

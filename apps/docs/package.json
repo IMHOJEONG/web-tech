@@ -9,6 +9,7 @@
         "lint": "eslint \"**/*.{js,mjs,cjs,ts,tsx,mts}\" --max-warnings 0",
         "validate:content": "node ./scripts/validate-content.mjs",
         "test:content": "node --test ./scripts/validate-content.test.mjs",
+        "test:lib": "node --experimental-strip-types --test ./lib/*.test.ts",
         "prebuild": "pnpm --filter @web-tech/ui build && pnpm validate:content",
         "build": "next build",
         "start": "next start",

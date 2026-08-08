@@ -90,14 +90,21 @@
 2. 제목/요약/분류에 매치된 문서 우선
 3. 본문만 매치된 문서는 뒤로
 
-현재 구현은 “최신 문서 우선 + 포함 여부 필터”에 가깝고, 이후 필요하면 relevance scoring으로 확장합니다.
+현재 구현 기준은 아래와 같습니다.
+
+- `title` exact / prefix / includes match를 가장 강하게 반영한다.
+- `summary` match는 그 다음 우선순위로 반영한다.
+- `section`, `slug`, `fileName` 기반 taxonomy match는 보조 점수로 반영한다.
+- `content` match는 약한 점수만 부여한다.
+- multi-token query는 각 토큰이 문서 어딘가에 모두 존재할 때만 결과로 인정한다.
+- score가 같으면 최신 문서를 먼저 보여준다.
 
 다음 단계 목표는 아래와 같습니다.
 
-- `title` exact/strong match 최우선
-- `summary`와 taxonomy match 차순위
-- `content` match는 약한 가중치
-- 최신성은 동점 조정 요소로 사용
+- 검색 결과 카드의 excerpt highlight
+- typo tolerance
+- tag metadata 정식 반영
+- 운영 로그 기반 relevance tuning
 
 ## What Not To Search First
 
@@ -202,6 +209,20 @@
 
 초기에는 로그 수집 범위를 과도하게 넓히지 않고, `zero-result query`와 `result click` 정도부터 시작하는 편이 적절하다.
 
+## Search API Note
+
+현재 `/api/search`는 page와 같은 ranking / preview helper를 사용한다.
+
+즉:
+
+- 결과 정렬 기준
+- preview title highlight
+- excerpt 생성 규칙
+
+은 API와 page가 같은 의미 체계를 유지해야 한다.
+
+응답 contract 자체는 별도 문서에서 관리한다.
+
 ## Decision Summary
 
 1. 검색 결과 페이지는 별도 `/search`가 아니라 `/docs?q=...` 상태로 운영한다.
@@ -211,9 +232,13 @@
 5. 추천 검색어는 대표 주제 중심으로 운영한다.
 6. 검색은 기술 기능보다 탐색 기능으로 설계한다.
 
+## Related Docs
+
+- [docs-search-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-search-api-contract.md)
+- [docs-blog-improvement-roadmap.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-blog-improvement-roadmap.md)
+
 ## Follow-Up
 
-- relevance scoring이 필요한 시점인지 추후 검토
 - 태그 메타데이터가 생기면 검색 범위에 정식 포함
 - 검색 결과 카드에 매치 문맥(excerpt highlight)이 필요한지 검토
 - typo tolerance를 언제 도입할지 검토

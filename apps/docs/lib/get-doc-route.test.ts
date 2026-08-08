@@ -10,7 +10,10 @@ import {
 
 test('normalizes requested doc route path and collapses duplicate leaf', () => {
     assert.equal(normalizeRequestedDocRoutePath('/feed/pna/pna/'), 'feed/pna')
-    assert.equal(normalizeRequestedDocRoutePath('web/rendering-pipeline.mdx'), 'web/rendering-pipeline')
+    assert.equal(
+        normalizeRequestedDocRoutePath('web/rendering-pipeline.mdx'),
+        'web/rendering-pipeline'
+    )
     assert.equal(normalizeRequestedDocRoutePath(undefined), null)
 })
 
@@ -53,6 +56,9 @@ test('matches legacy aliases but redirects them to canonical routes', () => {
 
     assert.equal(isDocRouteMatch(source, 'pna'), true)
     assert.equal(isDocRouteMatch(source, 'feed/pna/pna'), true)
-    assert.equal(shouldRedirectToCanonicalDocRoute(source, 'feed/pna/pna'), true)
+    assert.equal(
+        shouldRedirectToCanonicalDocRoute(source, 'feed/pna/pna'),
+        true
+    )
     assert.equal(shouldRedirectToCanonicalDocRoute(source, 'feed/pna'), false)
 })

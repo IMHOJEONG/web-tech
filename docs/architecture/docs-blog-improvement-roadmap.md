@@ -132,6 +132,25 @@
 
 이 단계가 완료되어야 이후 taxonomy 확장이나 콘텐츠 스케일업을 안전하게 진행할 수 있다.
 
+현재 완료 범위:
+
+- route mapping / canonical redirect test
+- editorial metadata normalize / validation test
+- remote payload container + field-level schema validation test
+- remote payload schema failure structured logging
+- search relevance ranking test
+- search result preview / highlight shared helper
+- `/api/search` 응답 contract에 shared preview 규칙 반영
+- docs detail render smoke test
+- `/docs?q=...` search state smoke test
+- `docs` 전용 `test:lib`, `test:content` CI 연결
+
+다음 보강 후보:
+
+- remote payload parse failure를 실제 alerting / error aggregation과 연결할지 결정
+- search API consumer가 늘어날 경우 contract versioning이 필요한지 검토
+- search preview highlight의 visual tuning을 더 세밀하게 조정할지 검토
+
 ### P1. Contributor Guide
 
 콘텐츠 운영 문서에 반드시 포함할 항목:
@@ -191,6 +210,12 @@ local MDX와 remote HTML/markdown 사이의 표현 차이를 더 줄인다.
 - query to click conversion
 - channel hub to article click path
 - outdated article feedback
+
+추가로 검토할 운영 신호:
+
+- remote payload schema parse failure count
+- upstream contract drift가 발생한 endpoint / field path
+- search preview click-through가 실제 클릭률 개선으로 이어지는지
 
 ### Content Freshness Signals
 

@@ -90,3 +90,9 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+      - name: Docs content validation tests
+        run: pnpm --filter docs test:content
+
+      - name: Docs lib tests
+        run: pnpm --filter docs test:lib
