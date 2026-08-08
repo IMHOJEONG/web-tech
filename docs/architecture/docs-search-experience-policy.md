@@ -92,6 +92,13 @@
 
 현재 구현은 “최신 문서 우선 + 포함 여부 필터”에 가깝고, 이후 필요하면 relevance scoring으로 확장합니다.
 
+다음 단계 목표는 아래와 같습니다.
+
+- `title` exact/strong match 최우선
+- `summary`와 taxonomy match 차순위
+- `content` match는 약한 가중치
+- 최신성은 동점 조정 요소로 사용
+
 ## What Not To Search First
 
 초기 버전에서 기본 검색 대상으로 강하게 넣지 않는 항목은 아래와 같습니다.
@@ -172,6 +179,29 @@
 
 이 구조는 유지하되, 사용자가 “검색이 실행되었다”는 것을 분명히 느낄 수 있도록 결과 화면을 전용 상태로 보이게 유지합니다.
 
+## Near-Term Enhancements
+
+가까운 시일 내 검토할 개선:
+
+- query normalization
+- typo tolerance
+- 결과 카드 내 excerpt highlight
+- 입력어 길이 제한과 결과 표시 문구의 더 자연스러운 요약
+- keyboard-first 검색 흐름 점검
+
+이 항목들은 검색을 기술 데모보다 실제 탐색 도구에 가깝게 만드는 역할을 한다.
+
+## Measurement Candidates
+
+검색 품질을 체감이 아니라 데이터로 보려면 아래를 후보로 둔다.
+
+- zero-result query
+- 추천 검색어 클릭률
+- 검색 결과 클릭률
+- 검색 후 허브 이탈률
+
+초기에는 로그 수집 범위를 과도하게 넓히지 않고, `zero-result query`와 `result click` 정도부터 시작하는 편이 적절하다.
+
 ## Decision Summary
 
 1. 검색 결과 페이지는 별도 `/search`가 아니라 `/docs?q=...` 상태로 운영한다.
@@ -186,3 +216,5 @@
 - relevance scoring이 필요한 시점인지 추후 검토
 - 태그 메타데이터가 생기면 검색 범위에 정식 포함
 - 검색 결과 카드에 매치 문맥(excerpt highlight)이 필요한지 검토
+- typo tolerance를 언제 도입할지 검토
+- zero-result analytics를 운영 지표로 올릴지 검토

@@ -9,6 +9,8 @@ export type RemotePost = {
     title?: string
     summary?: string
     date?: string
+    updated_at?: string
+    updatedAt?: string
     content?: string
     body_markdown?: string
     bodyMarkdown?: string
@@ -44,6 +46,10 @@ export type RemotePost = {
     topicLabel?: string
     section_label?: string
     sectionLabel?: string
+    tags?: string[] | string
+    tag_list?: string[] | string
+    tagList?: string[] | string
+    status?: string
 }
 
 export type RemotePayload =

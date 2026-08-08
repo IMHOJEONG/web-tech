@@ -5,6 +5,7 @@ import fs from 'fs/promises'
 import path from 'path'
 import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
+import { normalizeLocalDocFrontmatter } from '~/lib/editorial-metadata'
 import type { Metadata } from '~/lib/get-document'
 import { getDocHref } from '~/lib/get-doc-route'
 import { fetchRemoteDocsData } from '~/lib/content-api'
@@ -122,42 +123,27 @@ async function parseLocalSearchFile(filePath: string): Promise<SearchData> {
     const fileContents = await fs.readFile(filePath, 'utf8')
     const vfile = new VFile({ path: filePath, value: fileContents })
     vfileMatter(vfile, { strip: true })
-    const data = (vfile.data.matter || {}) as {
-        id?: string | number
-        title?: string
-        slug?: string
-        summary?: string
-        date?: string | number
-        thumbnail?: string | null
-    }
+    const frontmatter = normalizeLocalDocFrontmatter(vfile.data.matter || {})
     const content = stripFrontmatter(String(vfile))
     const fileName = path
         .relative(process.cwd(), filePath)
         .replace(/\.(mdx|md)$/i, '')
     const normalizedFileName = normalizeDocPath(fileName)
     const slug =
-        typeof data.slug === 'string' && data.slug.trim()
-            ? data.slug.trim()
-            : slugFromFileName(normalizedFileName)
+        frontmatter.slug?.trim() || slugFromFileName(normalizedFileName)
 
     return {
-        id: String(data.id ?? fileName),
-        title:
-            typeof data.title === 'string' && data.title.trim()
-                ? data.title.trim()
-                : slug,
-        summary:
-            typeof data.summary === 'string' && data.summary.trim()
-                ? data.summary.trim()
-                : content.slice(0, 140),
+        id: frontmatter.id ?? normalizedFileName,
+        title: frontmatter.title ?? slug,
+        summary: frontmatter.summary ?? content.slice(0, 140),
         content,
         slug,
         fileName: normalizedFileName,
         date:
-            typeof data.date === 'string' || typeof data.date === 'number'
-                ? String(data.date)
+            frontmatter.date && frontmatter.date.trim()
+                ? frontmatter.date
                 : undefined,
-        thumbnail: normalizeThumbnailPath(data.thumbnail),
+        thumbnail: normalizeThumbnailPath(frontmatter.thumbnail),
         href: inferSearchHref(normalizedFileName, slug),
         section: inferSearchSection(normalizedFileName),
     }

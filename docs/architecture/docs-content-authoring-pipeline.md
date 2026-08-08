@@ -193,9 +193,66 @@
 - 파일 존재 확인
 - frontmatter schema 검사
 - slug uniqueness 검사
+- canonical `markdownPath` 검사
 - thumbnail/path 규칙 검사
 - remote upload
 - optional invalidate/rebuild trigger
+
+## Contributor Baseline
+
+콘텐츠 작성자는 최소한 아래 기준을 알고 작업해야 한다.
+
+- 글은 `channel/slug.md` 규칙을 따른다.
+- `slug`는 lowercase kebab-case만 허용한다.
+- 콘텐츠 이미지와 UI 이미지를 같은 저장소 책임으로 섞지 않는다.
+- publish 전 frontmatter validation이 반드시 통과해야 한다.
+- local preview에서 제목, 요약, 썸네일, heading 구조를 먼저 확인한다.
+
+권장 contributor guide 항목:
+
+1. 새 글을 어느 폴더에 둘지
+2. frontmatter 필수/선택 필드
+3. 이미지 저장 규칙
+4. publish command
+5. remote content contract와 연결되는 필드 설명
+
+이 기준은 별도 contributor-facing 문서로 계속 보강한다.
+
+## Recommended Frontmatter Baseline
+
+권장 frontmatter baseline:
+
+```md
+---
+title: "Rendering Pipeline"
+slug: "rendering-pipeline"
+summary: "브라우저 렌더링 파이프라인을 단계별로 정리한다."
+date: "2026-08-08"
+updatedAt: "2026-08-08"
+thumbnail: "web/rendering-pipeline/hero.webp"
+authorName: "HoJeong Im"
+authorRole: "Web Engineer"
+readMinutes: 7
+topicLabel: "WEB"
+tags:
+  - rendering
+  - browser
+status: "published"
+---
+```
+
+설명:
+
+- `title`, `slug`, `summary`, `date`, `markdownPath`
+  - 핵심 식별/탐색 메타
+- `updatedAt`
+  - 최신성 신호
+- `thumbnail`
+  - 허브/피드 노출 메타
+- `authorName`, `authorRole`, `readMinutes`, `topicLabel`
+  - 카드/상세 표현 메타
+- `tags`, `status`
+  - 중기 taxonomy 확장 대비
 
 ## Image Ownership Policy
 
@@ -380,5 +437,6 @@ pnpm docs:publish-draft --slug my-post
 
 - [docs-content-rendering-strategy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-rendering-strategy.md)
 - [blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
+- [docs-blog-improvement-roadmap.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-blog-improvement-roadmap.md)
 - [blog-content-html-vs-markdown.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-html-vs-markdown.md)
 - [docs/runbooks/docs-env-checklist.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/docs-env-checklist.md)

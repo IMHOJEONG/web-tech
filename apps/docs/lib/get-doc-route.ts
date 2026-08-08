@@ -44,6 +44,16 @@ function normalizeStructuredRoutePath(path: string) {
     return collapseTrailingDuplicateLeaf(path)
 }
 
+export function normalizeRequestedDocRoutePath(value?: string | null) {
+    const normalizedValue = normalizeRouteValue(value)
+
+    if (!normalizedValue) {
+        return null
+    }
+
+    return normalizeStructuredRoutePath(normalizedValue)
+}
+
 function mapLocalDataPathToRoute(path: string) {
     if (path.startsWith('data/v8/')) {
         return `web/${path.slice('data/v8/'.length)}`
@@ -80,6 +90,27 @@ function getStructuredRoutePath(source: DocRouteSource) {
     return null
 }
 
+function getDocRouteAliases(source: DocRouteSource) {
+    const aliases = new Set<string>()
+    const candidates = [source.slug, source.markdownPath, source.fileName, source.path]
+
+    for (const candidate of candidates) {
+        const normalizedCandidate = normalizeRequestedDocRoutePath(candidate)
+
+        if (normalizedCandidate) {
+            aliases.add(normalizedCandidate)
+        }
+    }
+
+    const structuredRoutePath = getStructuredRoutePath(source)
+
+    if (structuredRoutePath) {
+        aliases.add(structuredRoutePath)
+    }
+
+    return aliases
+}
+
 export function getDocRoutePath(source: DocRouteSource) {
     const structuredRoutePath = getStructuredRoutePath(source)
 
@@ -96,20 +127,27 @@ export function getDocHref(source: DocRouteSource) {
     return routePath ? `/docs/${routePath}` : '/docs'
 }
 
+export function shouldRedirectToCanonicalDocRoute(
+    source: DocRouteSource,
+    requestedRoutePath: string
+) {
+    const normalizedRequestedRoutePath =
+        normalizeRequestedDocRoutePath(requestedRoutePath)
+    const canonicalRoutePath = getDocRoutePath(source)
+
+    if (!normalizedRequestedRoutePath || !canonicalRoutePath) {
+        return false
+    }
+
+    return normalizedRequestedRoutePath !== canonicalRoutePath
+}
+
 export function isDocRouteMatch(source: DocRouteSource, routePath: string) {
-    const normalizedRoutePath = normalizeRouteValue(routePath)
+    const normalizedRoutePath = normalizeRequestedDocRoutePath(routePath)
 
     if (!normalizedRoutePath) {
         return false
     }
 
-    const derivedRoutePath = getDocRoutePath(source)
-
-    if (derivedRoutePath === normalizedRoutePath) {
-        return true
-    }
-
-    const normalizedSlug = normalizeRouteValue(source.slug)
-
-    return normalizedSlug === normalizedRoutePath
+    return getDocRouteAliases(source).has(normalizedRoutePath)
 }

@@ -4,6 +4,10 @@ import path from 'path'
 import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
 import { categoryTree } from '~/entities/category/model/category'
+import {
+    normalizeLocalDocFrontmatter,
+    type EditorialStatus,
+} from '~/lib/editorial-metadata'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export interface Metadata {
@@ -15,6 +19,13 @@ export interface Metadata {
     content: string
     fileName: string
     thumbnail?: string | null
+    updatedAt?: string
+    authorName?: string
+    authorRole?: string
+    readMinutes?: number
+    topicLabel?: string
+    tags?: string[]
+    status?: EditorialStatus
 }
 
 const categoryDirectory = path.join(process.cwd(), 'category')
@@ -55,23 +66,33 @@ function normalizeThumbnailPath(thumbnail?: unknown) {
 }
 
 function parseCategoryFile(fileName: string): Partial<Metadata> {
-    const id = fileName.replace(/\.mdx?$/, '')
     const fileContents = fs.readFileSync(fileName, 'utf8')
     const vfile = new VFile({ path: fileName, value: fileContents })
     vfileMatter(vfile, { strip: true })
-    const data = vfile.data.matter || {}
+    const frontmatter = normalizeLocalDocFrontmatter(vfile.data.matter || {})
     const content = String(vfile)
     const relPathFromRoot = path
         .relative(process.cwd(), fileName)
         .replace(/\.(mdx|md)$/i, '')
     const normalizedFileName = normalizeDocPath(relPathFromRoot)
+    const fallbackSlug = normalizedFileName.split('/').filter(Boolean).pop() ?? ''
 
     return {
-        id,
-        ...data,
+        id: frontmatter.id ?? normalizedFileName,
+        title: frontmatter.title ?? fallbackSlug,
+        slug: frontmatter.slug ?? fallbackSlug,
+        summary: frontmatter.summary ?? '',
+        date: frontmatter.date ?? '',
         content,
         fileName: normalizedFileName,
-        thumbnail: normalizeThumbnailPath(data.thumbnail),
+        thumbnail: normalizeThumbnailPath(frontmatter.thumbnail),
+        updatedAt: frontmatter.updatedAt,
+        authorName: frontmatter.authorName,
+        authorRole: frontmatter.authorRole,
+        readMinutes: frontmatter.readMinutes,
+        topicLabel: frontmatter.topicLabel,
+        tags: frontmatter.tags,
+        status: frontmatter.status,
     }
 }
 

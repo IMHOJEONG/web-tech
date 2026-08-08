@@ -1,8 +1,9 @@
 import { evaluate, EvaluateOptions } from 'next-mdx-remote-client/rsc'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 import { Suspense } from 'react'
 import rehypeShiki from '@shikijs/rehype'
 import remarkFlexibleToc, { TocItem } from 'remark-flexible-toc'
+import { getDocHref, shouldRedirectToCanonicalDocRoute } from '~/lib/get-doc-route'
 import { shikiRehypeOptions } from '~/lib/shiki-options.js'
 import { getDocByRoutePath } from '~/lib/get-document'
 import { components } from '~/mdx-components'
@@ -31,6 +32,10 @@ export default async function Page({
 
     if (!target) {
         notFound()
+    }
+
+    if (shouldRedirectToCanonicalDocRoute(target, routePath)) {
+        permanentRedirect(getDocHref(target))
     }
 
     if (target.contentFormat === 'html') {
