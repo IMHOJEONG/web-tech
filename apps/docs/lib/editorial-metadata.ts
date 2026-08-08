@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+export const LEAF_SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 export const editorialStatusSchema = z.enum(['draft', 'published', 'archived'])
 
 export type EditorialStatus = z.infer<typeof editorialStatusSchema>
@@ -43,6 +44,53 @@ export type NormalizedDocFrontmatter = {
     date?: string
     thumbnail?: string | null
 } & NormalizedEditorialMetadata
+
+const localDocTitleSchema = z.string().trim().min(1)
+const localDocSlugSchema = z.string().trim().regex(LEAF_SLUG_PATTERN)
+const localDocDateSchema = z
+    .string()
+    .trim()
+    .min(1)
+    .refine((value) => Number.isFinite(Date.parse(value)), {
+        message: 'date must be a valid date string',
+    })
+const localDocSummarySchema = z.string().trim().min(1)
+const optionalDateSchema = z
+    .string()
+    .trim()
+    .min(1)
+    .refine((value) => Number.isFinite(Date.parse(value)), {
+        message: 'updatedAt must be a valid date string',
+    })
+    .optional()
+
+const localDocFrontmatterBaseSchema = z.object({
+    id: z.string().trim().min(1).optional(),
+    title: localDocTitleSchema.optional(),
+    slug: localDocSlugSchema.optional(),
+    summary: localDocSummarySchema.optional(),
+    date: localDocDateSchema.optional(),
+    thumbnail: z.string().trim().min(1).nullable().optional(),
+    updatedAt: optionalDateSchema,
+    authorName: z.string().trim().min(1).optional(),
+    authorRole: z.string().trim().min(1).optional(),
+    readMinutes: z.number().int().positive().optional(),
+    topicLabel: z.string().trim().min(1).optional(),
+    tags: z.array(z.string().trim().min(1)).min(1).optional(),
+    status: editorialStatusSchema.optional(),
+})
+
+const publishedLocalDocFrontmatterSchema = localDocFrontmatterBaseSchema.extend({
+    title: localDocTitleSchema,
+    slug: localDocSlugSchema,
+    summary: localDocSummarySchema,
+    date: localDocDateSchema,
+})
+
+const draftLocalDocFrontmatterSchema = localDocFrontmatterBaseSchema.extend({
+    title: localDocTitleSchema,
+    slug: localDocSlugSchema,
+})
 
 function normalizeOptionalString(value?: unknown) {
     if (typeof value !== 'string') {
@@ -112,6 +160,14 @@ function normalizeStatus(value?: unknown) {
     const parseResult = editorialStatusSchema.safeParse(normalizedValue)
 
     return parseResult.success ? parseResult.data : undefined
+}
+
+function isNonPublicDocStatus(status?: EditorialStatus) {
+    return status === 'draft' || status === 'archived'
+}
+
+export function isPublicDocStatus(status?: EditorialStatus) {
+    return !isNonPublicDocStatus(status)
 }
 
 export function normalizeLocalDocFrontmatter(
@@ -185,4 +241,42 @@ export function normalizeRemoteEditorialMetadata(input: {
         tags: normalizeTags(input.tags ?? input.tagList ?? input.tag_list),
         status: normalizeStatus(input.status),
     }
+}
+
+export function validateLocalDocFrontmatter(
+    input: NormalizedDocFrontmatter
+) {
+    if (isNonPublicDocStatus(input.status)) {
+        return draftLocalDocFrontmatterSchema.safeParse(input)
+    }
+
+    return publishedLocalDocFrontmatterSchema.safeParse(input)
+}
+
+export function formatLocalDocFrontmatterIssues(
+    issues: Array<{ path: PropertyKey[]; message: string }>
+) {
+    return issues
+        .map((issue) => {
+            const pathLabel = issue.path.length > 0 ? issue.path.join('.') : 'frontmatter'
+            return `${pathLabel}: ${issue.message}`
+        })
+        .join('; ')
+}
+
+export function assertValidLocalDocFrontmatter(
+    filePath: string,
+    frontmatter: NormalizedDocFrontmatter
+) {
+    const parseResult = validateLocalDocFrontmatter(frontmatter)
+
+    if (parseResult.success) {
+        return
+    }
+
+    throw new Error(
+        `[docs] Invalid frontmatter in ${filePath}: ${formatLocalDocFrontmatterIssues(
+            parseResult.error.issues
+        )}`
+    )
 }

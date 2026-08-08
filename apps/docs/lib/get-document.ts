@@ -12,6 +12,8 @@ import {
     fetchRemoteDocsData,
 } from '~/lib/content-api'
 import {
+    assertValidLocalDocFrontmatter,
+    isPublicDocStatus,
     normalizeLocalDocFrontmatter,
     type EditorialStatus,
 } from '~/lib/editorial-metadata'
@@ -69,7 +71,7 @@ function exploreDirectory(directory: string) {
 function getLocalDocsData() {
     const fileNames = exploreDirectory(docsDirectory)
 
-    const allPostsData: Partial<Metadata>[] = fileNames.map((fileName) => {
+    const allPostsData: Partial<Metadata>[] = fileNames.flatMap((fileName) => {
         // Read markdown file as string
         const fileContents = fs.readFileSync(fileName, 'utf8')
         // Use vfile-matter to parse the post metadata section
@@ -78,6 +80,12 @@ function getLocalDocsData() {
         const frontmatter = normalizeLocalDocFrontmatter(
             vfile.data.matter || {}
         )
+        assertValidLocalDocFrontmatter(fileName, frontmatter)
+
+        if (!isPublicDocStatus(frontmatter.status)) {
+            return []
+        }
+
         const content = String(vfile)
         // 프로젝트 루트 기준의 상대경로(확장자 없는)만 추출
         const relPathFromRoot = path
@@ -101,7 +109,7 @@ function getLocalDocsData() {
         } else {
             thumbnailPath = null
         }
-        return {
+        return [{
             id: frontmatter.id ?? normalizedFileName,
             title: frontmatter.title ?? fallbackSlug,
             slug: frontmatter.slug ?? fallbackSlug,
@@ -119,7 +127,7 @@ function getLocalDocsData() {
             topicLabel: frontmatter.topicLabel,
             tags: frontmatter.tags,
             status: frontmatter.status,
-        }
+        }]
     })
 
     return allPostsData

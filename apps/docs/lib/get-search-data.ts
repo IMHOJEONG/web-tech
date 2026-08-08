@@ -5,7 +5,11 @@ import fs from 'fs/promises'
 import path from 'path'
 import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
-import { normalizeLocalDocFrontmatter } from '~/lib/editorial-metadata'
+import {
+    assertValidLocalDocFrontmatter,
+    isPublicDocStatus,
+    normalizeLocalDocFrontmatter,
+} from '~/lib/editorial-metadata'
 import type { Metadata } from '~/lib/get-document'
 import { getDocHref } from '~/lib/get-doc-route'
 import { fetchRemoteDocsData } from '~/lib/content-api'
@@ -119,11 +123,17 @@ function sortByDateDesc<T extends { date?: string }>(docs: T[]) {
     })
 }
 
-async function parseLocalSearchFile(filePath: string): Promise<SearchData> {
+async function parseLocalSearchFile(filePath: string): Promise<SearchData | null> {
     const fileContents = await fs.readFile(filePath, 'utf8')
     const vfile = new VFile({ path: filePath, value: fileContents })
     vfileMatter(vfile, { strip: true })
     const frontmatter = normalizeLocalDocFrontmatter(vfile.data.matter || {})
+    assertValidLocalDocFrontmatter(filePath, frontmatter)
+
+    if (!isPublicDocStatus(frontmatter.status)) {
+        return null
+    }
+
     const content = stripFrontmatter(String(vfile))
     const fileName = path
         .relative(process.cwd(), filePath)
@@ -182,7 +192,9 @@ async function getLocalSearchDocs() {
         absolute: true,
     })
 
-    const docs = await Promise.all(files.map(parseLocalSearchFile))
+    const docs = (await Promise.all(files.map(parseLocalSearchFile))).filter(
+        (doc): doc is SearchData => doc !== null
+    )
     return sortByDateDesc(docs)
 }
 

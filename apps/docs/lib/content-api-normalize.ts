@@ -1,5 +1,8 @@
 import { joinUrl } from '~/lib/content-api-config'
-import { normalizeRemoteEditorialMetadata } from '~/lib/editorial-metadata'
+import {
+    isPublicDocStatus,
+    normalizeRemoteEditorialMetadata,
+} from '~/lib/editorial-metadata'
 import { getDocHref, getDocRoutePath } from '~/lib/get-doc-route'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { normalizeRemoteContent } from '~/lib/content-api-html'
@@ -206,6 +209,10 @@ export function normalizeRemotePostMeta(
     })
     const id = String(post.id ?? routePath ?? slug)
     const editorialMetadata = normalizeRemoteEditorialMetadata(post)
+
+    if (!isPublicDocStatus(editorialMetadata.status)) {
+        return null
+    }
 
     return {
         id,

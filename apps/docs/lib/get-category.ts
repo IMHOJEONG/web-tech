@@ -5,6 +5,8 @@ import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
 import { categoryTree } from '~/entities/category/model/category'
 import {
+    assertValidLocalDocFrontmatter,
+    isPublicDocStatus,
     normalizeLocalDocFrontmatter,
     type EditorialStatus,
 } from '~/lib/editorial-metadata'
@@ -65,11 +67,17 @@ function normalizeThumbnailPath(thumbnail?: unknown) {
     return thumbnailPath
 }
 
-function parseCategoryFile(fileName: string): Partial<Metadata> {
+function parseCategoryFile(fileName: string): Partial<Metadata> | null {
     const fileContents = fs.readFileSync(fileName, 'utf8')
     const vfile = new VFile({ path: fileName, value: fileContents })
     vfileMatter(vfile, { strip: true })
     const frontmatter = normalizeLocalDocFrontmatter(vfile.data.matter || {})
+    assertValidLocalDocFrontmatter(fileName, frontmatter)
+
+    if (!isPublicDocStatus(frontmatter.status)) {
+        return null
+    }
+
     const content = String(vfile)
     const relPathFromRoot = path
         .relative(process.cwd(), fileName)
@@ -108,7 +116,11 @@ function sortDocsByDate(docs: Partial<Metadata>[]) {
 
 async function getDocsByPattern(pattern: string) {
     const fileNames = await exploreDirectory(pattern)
-    return sortDocsByDate(fileNames.map(parseCategoryFile))
+    return sortDocsByDate(
+        fileNames
+            .map(parseCategoryFile)
+            .filter((doc): doc is Partial<Metadata> => doc !== null)
+    )
 }
 
 export async function getSubCategoryData(main: string, sub: string) {

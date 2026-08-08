@@ -59,6 +59,10 @@
   - 채널 허브(`/feed`, `/web`, `/mobile`, `/ui-ux`)와 상세(`/docs/{channel}/{slug}`)의 책임을 명확히 분리
   - 상세 URL 계산에서 `markdownPath`를 canonical source로 고정하고 redirect/alias 정책을 문서화
   - 기준 문서: `docs/architecture/docs-content-routing-policy.md`
+- [x] `P1` local content build-time frontmatter validation을 추가한다.
+  - `published` 문서는 `title`, `slug`, `date`, `summary`를 강제
+  - `draft`/`archived`는 공개 목록에서 제외하고 완화된 규칙으로 검증
+  - `pnpm --filter docs validate:content`와 `prebuild` 단계에서 같은 기준을 실행
 - [x] `P1` `apps/docs`의 FSD 3차 정리를 진행한다.
   - `shared/layout`, `shared/navigation` 기반 app shell을 `widgets/app-shell`로 이동
   - `app/layout.tsx`는 shell widget을 조합하는 얇은 엔트리로 정리
