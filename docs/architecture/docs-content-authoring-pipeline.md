@@ -208,19 +208,20 @@
 - publish 전 frontmatter validation이 반드시 통과해야 한다.
 - local preview에서 제목, 요약, 썸네일, heading 구조를 먼저 확인한다.
 
-권장 contributor guide 항목:
+현재 contributor-facing 운영 기준은
+`docs/runbooks/docs-contributor-guide.md`를 canonical guide로 사용한다.
+
+포함 범위:
 
 1. 새 글을 어느 폴더에 둘지
-2. frontmatter 필수/선택 필드
+2. published 기준 frontmatter 필수 필드
 3. 이미지 저장 규칙
-4. publish command
+4. local validation command
 5. remote content contract와 연결되는 필드 설명
-
-이 기준은 별도 contributor-facing 문서로 계속 보강한다.
 
 ## Recommended Frontmatter Baseline
 
-권장 frontmatter baseline:
+published 기준 권장 baseline:
 
 ```md
 ---
@@ -253,6 +254,19 @@ status: "published"
   - 카드/상세 표현 메타
 - `tags`, `status`
   - 중기 taxonomy 확장 대비
+
+현재 local validator는 published 문서에 대해 아래 필드를 실질적으로 강제한다.
+
+- `status`
+- `title`
+- `slug`
+- `summary`
+- `date`
+- `updatedAt`
+- `authorName`
+- `authorRole`
+- `readMinutes`
+- `topicLabel`
 
 ## Image Ownership Policy
 

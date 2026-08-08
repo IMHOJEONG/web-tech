@@ -149,6 +149,10 @@ export function normalizeStatus(value) {
     return '__invalid__'
 }
 
+export function isPositiveInteger(value) {
+    return Number.isInteger(value) && value > 0
+}
+
 export function getFrontmatterIssues(frontmatter) {
     const issues = []
     const status = normalizeStatus(frontmatter.status)
@@ -156,10 +160,16 @@ export function getFrontmatterIssues(frontmatter) {
     const title = normalizeOptionalString(frontmatter.title)
     const slug = normalizeOptionalString(frontmatter.slug)
     const summary = normalizeOptionalString(frontmatter.summary)
+    const authorName = normalizeOptionalString(frontmatter.authorName)
+    const authorRole = normalizeOptionalString(frontmatter.authorRole)
+    const topicLabel = normalizeOptionalString(frontmatter.topicLabel)
     const date = frontmatter.date
     const updatedAt = frontmatter.updatedAt
+    const readMinutes = frontmatter.readMinutes
 
-    if (status === '__invalid__') {
+    if (frontmatter.status == null || frontmatter.status === '') {
+        issues.push('status is required')
+    } else if (status === '__invalid__') {
         issues.push('status must be draft, published, or archived')
     }
 
@@ -192,6 +202,32 @@ export function getFrontmatterIssues(frontmatter) {
 
     if (updatedAt != null && !isValidDateString(String(updatedAt))) {
         issues.push('updatedAt must be a valid date string when provided')
+    }
+
+    if (readMinutes != null && !isPositiveInteger(readMinutes)) {
+        issues.push('readMinutes must be a positive integer when provided')
+    }
+
+    if (!isNonPublic) {
+        if (!updatedAt) {
+            issues.push('updatedAt is required for published content')
+        }
+
+        if (!authorName) {
+            issues.push('authorName is required for published content')
+        }
+
+        if (!authorRole) {
+            issues.push('authorRole is required for published content')
+        }
+
+        if (readMinutes == null) {
+            issues.push('readMinutes is required for published content')
+        }
+
+        if (!topicLabel) {
+            issues.push('topicLabel is required for published content')
+        }
     }
 
     return issues

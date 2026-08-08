@@ -193,12 +193,12 @@
 
 ## Content / Editorial
 
-- [ ] `P1` contributor-facing 블로그 운영 가이드를 정리한다.
+- [x] `P1` contributor-facing 블로그 운영 가이드를 정리한다.
   - 새 글 추가 위치
   - frontmatter 규칙
   - 이미지 저장 규칙
   - publish 전 검증 항목
-  - 기준 문서: `docs/architecture/docs-content-authoring-pipeline.md`
+  - 기준 문서: `docs/runbooks/docs-contributor-guide.md`
 - [-] `P1` landing / hero 계열 카피의 자연스러운 한국어 표현을 다듬는다.
   - 직역투 표현보다 한국어 사용자에게 자연스럽게 읽히는 문장으로 조정
   - headline, eyebrow, CTA, section title 우선 점검

@@ -25,7 +25,7 @@
 - 상세 URL canonical 정책이 더 강하게 닫혀야 한다.
 - 검색은 현재 “최신순 + 포함 여부 필터”에 가까워 관련도 품질 여지가 있다.
 - 렌더링 품질은 좋아졌지만 local MDX와 remote HTML의 표현력 차이가 남을 수 있다.
-- 회귀를 막는 테스트와 contributor guide가 아직 제품 성숙도에 비해 얇다.
+- contributor guide와 taxonomy 운영 기준은 계속 보강이 필요하다.
 
 ## Core Decisions
 
@@ -144,6 +144,8 @@
 - docs detail render smoke test
 - `/docs?q=...` search state smoke test
 - `docs` 전용 `test:lib`, `test:content` CI 연결
+- contributor-facing guide 초안 정리
+- published frontmatter 필수 editorial metadata validation 연결
 
 다음 보강 후보:
 
@@ -162,7 +164,11 @@
 - publish 전 검증 항목
 - remote content contract와 관계
 
-현재 `apps/docs/README.md`는 메모 성격이 강하므로, contributor-facing 문서는 architecture 또는 runbook 기준으로 보강한다.
+현재 `apps/docs/README.md`는 메모 성격이 강하므로, contributor-facing 문서는 runbook 기준으로 관리한다.
+
+현재 canonical guide:
+
+- [docs-contributor-guide.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/docs-contributor-guide.md)
 
 ## Medium-Term Candidates
 
