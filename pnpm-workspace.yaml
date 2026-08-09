@@ -58,6 +58,8 @@ overrides:
   shell-quote: "^1.8.4"
 
 catalog:
+  "@commitlint/cli": "^21.2.1"
+  "@commitlint/config-conventional": "^21.2.0"
   "@eslint/compat": "^1.4.1"
   "@eslint/eslintrc": "^3.3.3"
   "@eslint/js": "^9.39.2"

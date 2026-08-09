@@ -61,6 +61,7 @@ git checkout -b feature/<topic>
 - 가능하면 작은 단위 PR로 나눈다.
 - 리뷰 스레드는 resolve 후 머지한다.
 - CI가 통과하지 않으면 머지하지 않는다.
+- 커밋 메시지는 `type(scope): summary` 규칙을 따른다.
 
 ## 공통 변경 반영 방식
 
@@ -124,6 +125,7 @@ GitHub 저장소 설정은 아래 기준을 유지한다.
 
 현재는 아래 체크 이름을 기준으로 맞춘다.
 
+- `Commit Messages`
 - `Lint`
 - `Typecheck`
 - `Test`
@@ -158,5 +160,6 @@ GitHub 저장소 설정은 아래 기준을 유지한다.
 ## 관련 문서
 
 - `docs/process/code-review-process.md`
+- `docs/process/commit-message-convention.md`
 - `docs/process/codex-documentation-policy.md`
 - `docs/worklog/2026-06-17-trunk-based-branch-policy.md`
