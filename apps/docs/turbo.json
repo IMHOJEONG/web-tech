@@ -12,6 +12,9 @@
     },
     "start": {
       "env": ["BETTER_AUTH_*", "BLOG_CONTENT_*", "NEXT_PUBLIC_BLOG_CONTENT_*", "NODE_ENV"]
+    },
+    "typecheck": {
+      "env": ["BETTER_AUTH_*", "BLOG_CONTENT_*", "NEXT_PUBLIC_BLOG_CONTENT_*", "NODE_ENV"]
     }
   }
 }

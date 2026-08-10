@@ -1,5 +1,6 @@
 import fs from 'fs/promises'
 import path from 'path'
+import process from 'node:process'
 import { fileURLToPath, pathToFileURL } from 'url'
 
 const LEAF_SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
