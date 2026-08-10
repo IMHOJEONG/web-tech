@@ -77,6 +77,9 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Validate catalog references
+        run: pnpm validate:catalog
+
   typecheck:
     name: Typecheck
     timeout-minutes: 15
@@ -130,6 +133,9 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+      - name: Repo validation tests
+        run: pnpm test:repo
 
       - name: Docs content validation tests
         run: pnpm --filter docs test:content
