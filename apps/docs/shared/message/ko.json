@@ -170,13 +170,13 @@
     },
     "rootLanding": {
         "hero": {
-            "eyebrow": "시스템 엔지니어링과 디자인",
+            "eyebrow": "시스템 엔지니어링과 인터페이스 설계",
             "titleLineOne": "기술과 경험을",
-            "titleLineTwo": "정교한 구현으로",
-            "titleLineThree": "이어갑니다",
-            "description": "웹 엔지니어링, 인터페이스 구조, 제품 감각이 만나는 지점을 천천히 정리합니다. 오래 참고할 수 있는 글과 큐레이션으로 기술을 다룹니다.",
-            "primaryCta": "피드 보러 가기",
-            "secondaryCta": "HeapForge 소개"
+            "titleLineTwo": "오래 쓰이는 구조로",
+            "titleLineThree": "다듬어 갑니다",
+            "description": "웹 엔지니어링, 제품 인터페이스, 시스템 설계를 한 흐름으로 정리합니다. 구현 과정에서 얻은 판단과 구조를 오래 읽을 수 있는 기록으로 남깁니다.",
+            "primaryCta": "피드 둘러보기",
+            "secondaryCta": "프로젝트 소개 보기"
         },
         "foundations": {
             "eyebrow": "핵심 주제",
@@ -440,34 +440,34 @@
             "status": "운영 중 // VERSION 2.0.4",
             "titleLead": "웹과 제품, 인터페이스를",
             "titleAccentOne": "하나의",
-            "titleAccentTwo": "구조로 엮습니다",
-            "description": "HeapForge는 웹 엔지니어링, 모바일 제품 감각, UI/UX 구조를 함께 다루는 작은 실험실입니다. 구현과 설계를 따로 보지 않고 오래 쓰이는 구조를 만드는 데 관심을 둡니다.",
-            "missionLabel": "// 만들고 기록하는 기준",
-            "establishedLabel": "// 2024년부터 이어온 아카이브"
+            "titleAccentTwo": "흐름으로 설계합니다",
+            "description": "HeapForge는 웹 엔지니어링, 모바일 제품 경험, UI/UX 구조를 함께 다루는 기술 아카이브입니다. 구현과 설계를 따로 떼어 보지 않고, 실제로 오래 쓰이는 구조를 기록합니다.",
+            "missionLabel": "// 구현과 설계를 잇는 기록",
+            "establishedLabel": "// 2024년부터 쌓아온 아카이브"
         },
         "pillars": {
             "web": {
                 "eyebrow": "엔지니어링 관점",
-                "title": "웹 구조와 성능",
-                "description": "브라우저 동작, 렌더링 비용, 프론트엔드 구조를 실제 구현 맥락에서 깊게 다룹니다. 단순히 기능을 붙이는 대신 오래 버티는 구조를 설계합니다."
+                "title": "웹 구조와 실행 성능",
+                "description": "브라우저 동작, 렌더링 비용, 프론트엔드 구조를 실제 구현 맥락에서 다룹니다. 기능을 덧붙이는 데 그치지 않고, 오래 버티는 구조를 고민합니다."
             },
             "mobile": {
                 "eyebrow": "모바일 경험",
-                "title": "손 안에서 자연스러운 흐름",
-                "description": "네이티브와 크로스플랫폼 생태계의 차이를 이해하고, 작은 화면에서도 자연스럽게 이어지는 경험을 만듭니다.",
+                "title": "손 안에서 자연스럽게 이어지는 경험",
+                "description": "네이티브와 크로스플랫폼의 차이를 이해하고, 작은 화면에서도 흐름이 끊기지 않는 인터페이스를 고민합니다.",
                 "terminalLineOne": "const mobile = await optimize(ui,",
                 "terminalLineTwo": "stack);"
             },
             "design": {
                 "eyebrow": "인터페이스 설계",
-                "title": "UI/UX를 구조로 다루기",
-                "description": "디자인 시스템을 살아 있는 구조로 보고, 계층과 모션, 접근성을 하나의 인터페이스 언어처럼 다룹니다."
+                "title": "UI/UX를 구조로 설계하기",
+                "description": "디자인 시스템을 살아 있는 운영 언어로 보고, 계층과 모션, 접근성을 하나의 인터페이스 구조로 다룹니다."
             }
         },
         "profile": {
             "name": "HoJeong Im",
             "role": "Full Stack Engineer",
-            "bio": "구조가 분명한 인터페이스와 오래 버티는 구현을 좋아하는 풀스택 엔지니어입니다. HEAP-FORGE에는 디지털 빌더가 두고두고 참고할 수 있는 기술 메모와 설계 기록을 차곡차곡 쌓아가고 있습니다.",
+            "bio": "구조가 분명한 인터페이스와 오래 버티는 구현을 좋아하는 풀스택 엔지니어입니다. HEAP-FORGE에는 디지털 빌더가 필요할 때 다시 펼쳐볼 수 있는 기술 메모와 설계 기록을 꾸준히 쌓고 있습니다.",
             "links": {
                 "github": {
                     "label": "GITHUB",

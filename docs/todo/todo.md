@@ -165,7 +165,7 @@
 - [x] `P0` `pnpm` catalog 도입 이후 네트워크 가능한 환경에서 `pnpm install --lockfile-only` 재검증
 - [x] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정
 - [x] `P1` catalog reference 정합성 검사를 스크립트나 CI 체크로 자동화
-- [ ] `P1` `docs`와 `web`의 공통 build/lint/typecheck 파이프라인을 Turbo 기준으로 정리
+- [x] `P1` `docs`와 `web`의 공통 build/lint/typecheck 파이프라인을 Turbo 기준으로 정리
 - [-] `P1` `docs` 콘텐츠 흐름의 테스트 기준을 자동화한다.
   - route normalize / path normalize 유닛 테스트 완료
   - search relevance scoring 유닛 테스트 완료
@@ -203,6 +203,7 @@
   - 직역투 표현보다 한국어 사용자에게 자연스럽게 읽히는 문장으로 조정
   - headline, eyebrow, CTA, section title 우선 점검
   - 특히 `/` root landing과 `/about` hero의 한국어 카피를 우선 정리
+  - 2026-08-10 기준 root landing / about hero / about profile 2차 정리 완료
 - [ ] `P1` `Mobile` 섹션의 실제 콘텐츠 초안을 작성한다.
 - [x] `P1` `UI/UX` 섹션도 상세형 static spotlight가 아니라 실제 문서 연결 구조로 확장할지 결정
   - `HubPage` 기반 채널 허브에서 시작했지만, 최종적으로는 Figma `141:189` 기준의 전용 editorial hub로 분기
