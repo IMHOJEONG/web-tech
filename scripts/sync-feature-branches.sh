@@ -171,9 +171,9 @@ for branch in "${branches[@]}"; do
 
     if [ "$PUSH" -eq 1 ]; then
         if git rev-parse --abbrev-ref --symbolic-full-name '@{u}' >/dev/null 2>&1; then
-            git push "$REMOTE" "$branch"
+            SKIP_SIMPLE_GIT_HOOKS=1 git push "$REMOTE" "$branch"
         else
-            git push -u "$REMOTE" "$branch"
+            SKIP_SIMPLE_GIT_HOOKS=1 git push -u "$REMOTE" "$branch"
         fi
     fi
 done

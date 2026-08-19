@@ -15,6 +15,8 @@
 - `branch:sync-feature:apply` 스크립트를 추가했다.
 - `branch:sync-feature:push` 스크립트를 추가했다.
 - `docs/process/branch-policy.md`에 feature 브랜치 동기화 기준을 추가했다.
+- 브랜치를 오가며 push하는 중 `pre-push` formatter가 오래된 브랜치 작업 트리를 수정하지 않도록,
+  sync 스크립트 내부 push에는 `SKIP_SIMPLE_GIT_HOOKS=1`을 적용한다.
 
 ## 동기화 정책
 
