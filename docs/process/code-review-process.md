@@ -42,6 +42,7 @@
 
 작성자는 리뷰 요청 전에 아래를 먼저 확인한다.
 
+- 커밋 메시지가 현재 규칙(`type(scope): summary`)과 맞는지 확인
 - 타입 체크
 - 관련 테스트 또는 최소 실행 확인
 - 문서 갱신 여부
@@ -170,7 +171,7 @@
 - 현재는 실제로 생성되는 체크 이름만 required status check에 둔다.
 - 의미는 “코멘트만 정리됐다고 merge하지 않고, 최소한 자동 검증이 통과한 변경만 main에 반영한다”는 것이다.
 - 과거 체크 이름(`Build and Test`)을 ruleset에 남겨두면 PR이 `BLOCKED` 상태로 남을 수 있으므로, 현재 CI 이름과 항상 맞춘다.
-- 현재 기준 권장 required status checks는 `Lint`, `Typecheck`, `Test`, `Analyze (actions)`, `Analyze (javascript-typescript)`이다.
+- 현재 기준 권장 required status checks는 `Commit Messages`, `Lint`, `Typecheck`, `Test`, `Analyze (actions)`, `Analyze (javascript-typescript)`이다.
 
 ### `Require conversation resolution`
 
@@ -193,6 +194,7 @@
 ## 관련 문서
 
 - `docs/process/codex-documentation-policy.md`
+- `docs/process/commit-message-convention.md`
 - `docs/process/branch-policy.md`
 - `docs/architecture/docs-app-information-architecture.md`
 - `docs/architecture/docs-responsive-policy.md`

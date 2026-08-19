@@ -22,6 +22,10 @@
 
 ## Planning / Product
 
+- [ ] `P1` 블로그 개선 로드맵을 기준 문서로 고정한다.
+  - 메타데이터, 라우팅, 검색, 렌더링, 테스트, contributor guide를 한 번에 정리
+  - 신규 과제는 우선 이 로드맵 문서와 `todo` 양쪽에 반영
+  - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
 - [x] `P1` `docs` 앱의 정보구조를 확정한다.
   - `Feed / Web / Mobile / UI/UX / About`를 사용자-facing IA로 정의
   - `Category`는 taxonomy 허브, 허브 페이지는 탐색 단위, 상세 페이지는 학습 단위로 문서화
@@ -47,6 +51,18 @@
 
 ## Code / Architecture
 
+- [x] `P1` article frontmatter / remote metadata 스키마를 고정한다.
+  - `title`, `slug`, `summary`, `date`, `markdownPath`, `thumbnail`, `authorName`, `authorRole`, `readMinutes`, `topicLabel`, `updatedAt`, `tags`, `status`의 필수/선택 여부를 확정
+  - local MDX와 remote API가 같은 의미 체계를 쓰도록 contract를 정리
+  - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
+- [x] `P1` 상세 문서 canonical route 정책을 더 강하게 닫는다.
+  - 채널 허브(`/feed`, `/web`, `/mobile`, `/ui-ux`)와 상세(`/docs/{channel}/{slug}`)의 책임을 명확히 분리
+  - 상세 URL 계산에서 `markdownPath`를 canonical source로 고정하고 redirect/alias 정책을 문서화
+  - 기준 문서: `docs/architecture/docs-content-routing-policy.md`
+- [x] `P1` local content build-time frontmatter validation을 추가한다.
+  - `published` 문서는 `title`, `slug`, `date`, `summary`를 강제
+  - `draft`/`archived`는 공개 목록에서 제외하고 완화된 규칙으로 검증
+  - `pnpm --filter docs validate:content`와 `prebuild` 단계에서 같은 기준을 실행
 - [x] `P1` `apps/docs`의 FSD 3차 정리를 진행한다.
   - `shared/layout`, `shared/navigation` 기반 app shell을 `widgets/app-shell`로 이동
   - `app/layout.tsx`는 shell widget을 조합하는 얇은 엔트리로 정리
@@ -75,6 +91,10 @@
   - `transpilePackages`
   - build artifact usage
   - import path 안정성
+- [ ] `P2` local MDX와 remote HTML/markdown 렌더링 전략을 한 단계 더 통일한다.
+  - source별 렌더링 차이로 callout, code block, figure, heading anchor가 달라지지 않게 기준을 정리
+  - 필요 시 remote content도 markdown-first 계약으로 수렴할지 검토
+  - 기준 문서: `docs/architecture/docs-content-rendering-strategy.md`
 
 ## UI / UX
 
@@ -91,7 +111,7 @@
   - `query string` 기반으로 확정
   - `/feed?topic=web|mobile|uiux` 형태로 상태를 표현
   - 기준 문서: `docs/architecture/docs-feed-filter-policy.md`
-- [ ] `P1` footer 링크를 실제 라우트 또는 외부 링크와 연결한다.
+- [x] `P1` footer 링크를 실제 라우트 또는 외부 링크와 연결한다.
   - `PRIVACY`
   - `TERMS`
   - `CHANGELOG`
@@ -99,6 +119,12 @@
 - [ ] `P2` empty state, loading state, error state의 시각 톤을 통일한다.
   - root landing은 remote latest notes 실패 시 페이지 전체를 죽이지 않고 섹션 단위 graceful degradation을 유지
 - [ ] `P2` keyboard navigation / focus ring / drawer close flow 접근성을 점검한다.
+- [ ] `P2` article detail의 읽기 보조 UX를 확장한다.
+  - related posts
+  - previous / next navigation
+  - last updated badge
+  - feedback entry point
+  - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
 
 ## Design / Design System
 
@@ -121,6 +147,10 @@
   - `ArticleDetail`
 - [ ] `P2` typography scale과 실제 component usage를 대조한다.
   - headline/body/label usage mismatch 정리
+- [x] `P2` 검색 highlight와 excerpt의 시각 규칙을 토큰 기준으로 다듬는다.
+  - `<mark>` 표현이 light/dark 모두에서 과하지 않게 보이도록 조정
+  - search result card에서 title / excerpt emphasis 강도를 다시 점검
+  - 기준 문서: `docs/architecture/docs-search-experience-policy.md`
 
 ## Infra / Tooling
 
@@ -134,8 +164,24 @@
   - 기준 문서: `docs/runbooks/content-api-auth-ops-runbook.md`
 - [x] `P0` `pnpm` catalog 도입 이후 네트워크 가능한 환경에서 `pnpm install --lockfile-only` 재검증
 - [x] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정
-- [ ] `P1` catalog reference 정합성 검사를 스크립트나 CI 체크로 자동화
-- [ ] `P1` `docs`와 `web`의 공통 build/lint/typecheck 파이프라인을 Turbo 기준으로 정리
+- [x] `P1` catalog reference 정합성 검사를 스크립트나 CI 체크로 자동화
+- [x] `P1` `docs`와 `web`의 공통 build/lint/typecheck 파이프라인을 Turbo 기준으로 정리
+- [-] `P1` `docs` 콘텐츠 흐름의 테스트 기준을 자동화한다.
+  - route normalize / path normalize 유닛 테스트 완료
+  - search relevance scoring 유닛 테스트 완료
+  - remote payload schema 검증 테스트 완료
+  - 문서 상세 렌더링 스모크 테스트 완료
+  - 검색 결과 스모크 테스트 완료
+  - `test:lib` / `test:content` CI 연결 완료
+  - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
+- [x] `P1` 검색 결과 contract를 API route까지 정리한다.
+  - `/api/search` 응답에도 ranking / preview 기준을 반영할지 결정
+  - server page와 API consumer가 다른 정렬/preview 규칙을 쓰지 않도록 공통화
+  - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
+- [x] `P1` remote payload schema failure 관측 방식을 정한다.
+  - parse failure를 운영 로그에 어떤 형식으로 남길지 결정
+  - 필요 시 alerting 또는 error aggregation 연결 기준 정리
+  - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
 - [ ] `P2` design asset 동기화 절차를 runbook으로 정리
   - Figma local asset export
   - `public/figma/*` 저장 규칙
@@ -147,10 +193,17 @@
 
 ## Content / Editorial
 
+- [x] `P1` contributor-facing 블로그 운영 가이드를 정리한다.
+  - 새 글 추가 위치
+  - frontmatter 규칙
+  - 이미지 저장 규칙
+  - publish 전 검증 항목
+  - 기준 문서: `docs/runbooks/docs-contributor-guide.md`
 - [-] `P1` landing / hero 계열 카피의 자연스러운 한국어 표현을 다듬는다.
   - 직역투 표현보다 한국어 사용자에게 자연스럽게 읽히는 문장으로 조정
   - headline, eyebrow, CTA, section title 우선 점검
   - 특히 `/` root landing과 `/about` hero의 한국어 카피를 우선 정리
+  - 2026-08-10 기준 root landing / about hero / about profile 2차 정리 완료
 - [ ] `P1` `Mobile` 섹션의 실제 콘텐츠 초안을 작성한다.
 - [x] `P1` `UI/UX` 섹션도 상세형 static spotlight가 아니라 실제 문서 연결 구조로 확장할지 결정
   - `HubPage` 기반 채널 허브에서 시작했지만, 최종적으로는 Figma `141:189` 기준의 전용 editorial hub로 분기
@@ -160,6 +213,14 @@
   - read time
   - category label
   - thumbnail fallback
+- [ ] `P2` 태그 / 시리즈 / 상태 기반 editorial taxonomy를 확장할지 결정한다.
+  - `channel` 외에 `tags`, `series`, `status(draft/published)`를 운영 메타로 승격할지 검토
+  - 검색, 허브, 관련 글 추천에 재사용 가능한 구조여야 함
+- [ ] `P2` 검색 및 문서 탐색 telemetry의 필요 수준을 정리한다.
+  - zero-result query
+  - 인기 검색어
+  - 허브 진입 후 상세 클릭 흐름
+  - 오래된 글 신고 또는 품질 피드백 수집 여부
 
 ## Review Queue
 

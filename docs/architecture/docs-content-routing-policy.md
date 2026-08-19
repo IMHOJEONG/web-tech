@@ -25,6 +25,15 @@
 - `/docs/ui-ux/blocked-aria-hidden`
 - `/docs/mobile/touch-targets`
 
+추가 기준:
+
+- `/feed`, `/web`, `/mobile`, `/ui-ux`
+  - 허브/인덱스/큐레이션 라우트
+- `/docs/{channel}/{articleSlug}`
+  - 상세 canonical route
+
+즉 채널 페이지와 상세 페이지는 역할을 분리한다.
+
 ## Field Semantics
 
 `markdownPath`
@@ -52,6 +61,34 @@
 - `articleSlug`는 lowercase kebab-case를 기본으로 한다.
 - `slug`에는 채널 prefix를 중복하지 않는다.
 - React key나 리스트 dedupe에는 `href`보다 `id`를 우선 사용한다.
+
+## Canonical Source Rule
+
+공개 상세 route 계산의 canonical source는 `markdownPath`다.
+
+우선순위:
+
+1. `markdownPath`
+2. `fileName` 기반 channel mapping
+3. `slug`
+
+의미:
+
+- `slug`는 사람이 읽는 leaf 값이다.
+- `markdownPath`는 저장 구조와 공개 route를 연결하는 구조적 식별자다.
+- 같은 `slug`가 다른 channel에 존재해도 `markdownPath`가 다르면 충돌하지 않는다.
+
+## Redirect / Alias Rule
+
+허용 가능한 alias가 있더라도 canonical URL은 하나로 수렴해야 한다.
+
+예:
+
+- legacy slug-only route
+- old duplicated leaf route
+- 과거 channel prefix가 중복된 route
+
+이 경우에도 최종 공개 기준은 `/docs/{channel}/{slug}`로 유지한다.
 
 ## Backend Contract
 
@@ -81,3 +118,10 @@
 3. `slug`
 
 즉 `slug`는 마지막 fallback이고, 공개 URL의 주 source는 `markdownPath`다.
+
+## Decision Summary
+
+1. 채널 허브와 상세 route는 역할을 분리한다.
+2. 상세 canonical URL은 `/docs/{channel}/{slug}`로 고정한다.
+3. `markdownPath`를 상세 route의 주 source로 사용한다.
+4. `slug`는 leaf slug만 사용하고 channel prefix를 중복하지 않는다.

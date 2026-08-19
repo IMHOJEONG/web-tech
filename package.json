@@ -3,7 +3,9 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "build:web-apps": "turbo build --filter=docs --filter=vuln-radar",
     "check:vuln-radar:dev": "bash ./scripts/check-vuln-radar-dev.sh",
+    "check:web-apps": "pnpm lint:web-apps && pnpm typecheck:web-apps && pnpm build:web-apps",
     "dev": "turbo dev",
     "dev:vuln-radar": "turbo dev --filter=vuln-radar",
     "dev:vuln-radar:full": "turbo dev --filter=vuln-radar --filter=vuln-radar-backend",
@@ -15,7 +17,13 @@
     "start:vuln-radar-backend": "turbo start --filter=vuln-radar-backend",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo lint",
+    "lint:web-apps": "turbo lint --filter=docs --filter=vuln-radar",
+    "test:repo": "node --test ./scripts/validate-catalog-references.test.mjs",
+    "lint:commit:head": "commitlint --from HEAD~1 --to HEAD --verbose",
+    "typecheck:web-apps": "turbo typecheck --filter=docs --filter=vuln-radar",
+    "validate:catalog": "node ./scripts/validate-catalog-references.mjs",
     "rm:pnpm-store": "rm -rf \"$(pnpm store path)\"",
+    "prepare": "simple-git-hooks",
     "test": "turbo test",
     "typecheck": "turbo typecheck",
     "vercel:deploy:vuln-radar": "vercel --cwd apps/vuln-radar && vercel deploy",
@@ -23,6 +31,8 @@
     "update:simple-git-hooks": "npx simple-git-hooks"
   },
   "devDependencies": {
+    "@commitlint/cli": "catalog:",
+    "@commitlint/config-conventional": "catalog:",
     "@eslint/compat": "catalog:",
     "eslint": "catalog:",
     "prettier": "catalog:",
@@ -31,11 +41,9 @@
     "typescript": "catalog:"
   },
   "simple-git-hooks": {
+    "commit-msg": "./scripts/pnpmw.sh exec commitlint --edit $1",
     "pre-commit": "./scripts/pnpmw.sh format && echo 'ok'",
-    "pre-push": "./scripts/pnpmw.sh format",
-    "preserveUnused": [
-      "commit-msg"
-    ]
+    "pre-push": "./scripts/pnpmw.sh format"
   },
   "engines": {
     "node": ">=18"

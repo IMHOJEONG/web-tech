@@ -50,10 +50,12 @@
   "exports": {
     "./lib/*": {
       "types": "./dist/lib/*.d.ts",
+      "import": "./dist/lib/*.js",
       "default": "./dist/lib/*.js"
     },
     "./components/*": {
       "types": "./dist/components/ui/*.d.ts",
+      "import": "./dist/components/ui/*.js",
       "default": "./dist/components/ui/*.js"
     }
   }

@@ -1,4 +1,8 @@
 import { joinUrl } from '~/lib/content-api-config'
+import {
+    isPublicDocStatus,
+    normalizeRemoteEditorialMetadata,
+} from '~/lib/editorial-metadata'
 import { getDocHref, getDocRoutePath } from '~/lib/get-doc-route'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { normalizeRemoteContent } from '~/lib/content-api-html'
@@ -46,6 +50,14 @@ function normalizeThumbnailPath(
     return normalizedAssetPath
 }
 
+function normalizeScalarText(value?: string | number | null) {
+    if (typeof value === 'number') {
+        return Number.isFinite(value) ? String(value) : ''
+    }
+
+    return value?.trim() ?? ''
+}
+
 function getInlineMarkdown(post: RemotePost) {
     return (
         post.content ??
@@ -73,22 +85,6 @@ export function getMarkdownReference(post: RemotePost) {
 
 function stripFileExtension(value: string) {
     return value.replace(/\.[a-z0-9]+$/i, '')
-}
-
-function normalizeReadMinutes(value?: unknown) {
-    if (typeof value === 'number' && Number.isFinite(value) && value > 0) {
-        return Math.round(value)
-    }
-
-    if (typeof value === 'string') {
-        const parsedValue = Number.parseInt(value.trim(), 10)
-
-        if (Number.isFinite(parsedValue) && parsedValue > 0) {
-            return parsedValue
-        }
-    }
-
-    return undefined
 }
 
 function getFallbackSlug(post: RemotePost) {
@@ -207,8 +203,8 @@ export function normalizeRemotePostMeta(
         markdownPath: validatedMarkdownPath,
     } = contractResult.data
 
-    const summary = post.summary?.trim() ?? ''
-    const date = post.date?.trim() ?? ''
+    const summary = normalizeScalarText(post.summary)
+    const date = normalizeScalarText(post.date)
     const markdownPath = validatedMarkdownPath ?? undefined
     const fileName = normalizeDocPath(
         post.fileName ?? post.path ?? markdownPath ?? `remote/${slug}`
@@ -220,6 +216,11 @@ export function normalizeRemotePostMeta(
         path: post.path,
     })
     const id = String(post.id ?? routePath ?? slug)
+    const editorialMetadata = normalizeRemoteEditorialMetadata(post)
+
+    if (!isPublicDocStatus(editorialMetadata.status)) {
+        return null
+    }
 
     return {
         id,
@@ -236,22 +237,13 @@ export function normalizeRemotePostMeta(
             post.thumbnail ?? post.thumbnail_url ?? post.thumbnailUrl,
             assetBaseUrl
         ),
-        authorName: post.authorName ?? post.author_name ?? post.author,
-        authorRole: post.authorRole ?? post.author_role ?? post.role,
-        readMinutes: normalizeReadMinutes(
-            post.readMinutes ??
-                post.read_minutes ??
-                post.readTime ??
-                post.read_time ??
-                post.readingTime ??
-                post.reading_time
-        ),
-        topicLabel:
-            post.topicLabel ??
-            post.topic_label ??
-            post.sectionLabel ??
-            post.section_label ??
-            post.topic,
+        updatedAt: editorialMetadata.updatedAt,
+        authorName: editorialMetadata.authorName,
+        authorRole: editorialMetadata.authorRole,
+        readMinutes: editorialMetadata.readMinutes,
+        topicLabel: editorialMetadata.topicLabel,
+        tags: editorialMetadata.tags,
+        status: editorialMetadata.status,
     }
 }
 

@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages, getTranslations } from 'next-intl/server'
-import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import NextTopLoader from 'nextjs-toploader'
 import { Suspense } from 'react'
@@ -14,12 +13,6 @@ import { cn } from '@web-tech/ui/lib/utils'
 import Footer from '~/widgets/app-shell/ui/footer'
 import Header from '~/widgets/app-shell/ui/header'
 import MobileBottomNav from '~/widgets/app-shell/ui/mobile-bottom-nav'
-
-const inter = Inter({
-    subsets: ['latin'],
-    display: 'swap',
-    variable: '--font-body',
-})
 
 const pretendard = localFont({
     src: '../public/fonts/PretendardVariable.woff2',
@@ -89,7 +82,6 @@ export default async function Layout({
                     className={cn(
                         'flex size-full min-h-screen flex-col',
                         mono.variable,
-                        inter.variable,
                         pretendard.variable,
                         spaceGrotesk.variable
                     )}

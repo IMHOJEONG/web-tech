@@ -15,7 +15,21 @@
         "VITE_*"
       ]
     },
+    "lint": {
+      "env": [
+        "VULN_RADAR_BACKEND_ORIGIN",
+        "VULN_RADAR_BACKEND_API_TOKEN",
+        "VITE_*"
+      ]
+    },
     "start": {
+      "env": [
+        "VULN_RADAR_BACKEND_ORIGIN",
+        "VULN_RADAR_BACKEND_API_TOKEN",
+        "VITE_*"
+      ]
+    },
+    "typecheck": {
       "env": [
         "VULN_RADAR_BACKEND_ORIGIN",
         "VULN_RADAR_BACKEND_API_TOKEN",
