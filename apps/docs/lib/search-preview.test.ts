@@ -21,7 +21,7 @@ function createDoc(overrides: Partial<SearchData> = {}): SearchData {
 test('highlightSearchText escapes html before applying marks', () => {
     const html = highlightSearchText('<script>alert(1)</script> React', 'react')
 
-    assert.doesNotMatch(html, /<script>/)
+    assert.doesNotMatch(html, /<script>/i)
     assert.match(html, /<mark/)
     assert.match(html, /React<\/mark>/)
 })
