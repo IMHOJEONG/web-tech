@@ -45,6 +45,98 @@
             "github": "GITHUB"
         }
     },
+    "staticPages": {
+        "privacy": {
+            "metadata": {
+                "title": "Privacy - HeapForge",
+                "description": "HeapForge가 어떤 운영 로그와 콘텐츠 요청 데이터를 다루는지 간단히 정리합니다.",
+                "ogTitle": "Privacy - HeapForge",
+                "ogDescription": "HeapForge 운영 중 발생할 수 있는 기본 로그와 외부 서비스 연동 범위를 안내합니다."
+            },
+            "eyebrow": "Privacy",
+            "title": "이 프로젝트가 다루는 정보 범위",
+            "description": "HeapForge는 계정, 결제, 댓글 같은 무거운 개인 데이터 흐름 없이 운영되는 기술 아카이브입니다. 다만 배포 인프라와 원격 콘텐츠 시스템 관점에서 기본 운영 로그는 남을 수 있습니다.",
+            "sections": {
+                "collection": {
+                    "title": "수집 범위",
+                    "body": "현재 서비스는 별도 회원 계정이나 프로필 데이터를 직접 저장하지 않습니다. 다만 배포 인프라, 웹 서버, 원격 콘텐츠 API에서는 접속 시각, 요청 경로, 응답 상태 같은 운영 로그가 남을 수 있습니다."
+                },
+                "usage": {
+                    "title": "사용 목적",
+                    "body": "이 로그는 장애 파악, 성능 점검, 콘텐츠 응답 상태 확인처럼 서비스 안정성을 유지하기 위한 최소 운영 용도로만 사용합니다. 검색 품질이나 콘텐츠 흐름을 개선할 때도 개인 식별보다 시스템 동작 확인을 우선합니다."
+                },
+                "vendors": {
+                    "title": "외부 연동",
+                    "body": "배포 환경, 이미지 자산 서버, 원격 콘텐츠 API처럼 문서 제공에 필요한 외부 인프라가 함께 동작할 수 있습니다. 각 인프라에서 생성되는 로그 보관 기간과 세부 정책은 해당 운영 환경 기준을 따릅니다."
+                }
+            },
+            "aside": {
+                "title": "정책 변경 안내",
+                "body": "운영 방식이 바뀌면 changelog에 먼저 남기고, 필요 시 이 안내 문서도 함께 갱신합니다.",
+                "linkLabel": "CHANGELOG 보기"
+            }
+        },
+        "terms": {
+            "metadata": {
+                "title": "Terms - HeapForge",
+                "description": "HeapForge 문서 사용 시 참고할 기본 운영 원칙을 정리합니다.",
+                "ogTitle": "Terms - HeapForge",
+                "ogDescription": "HeapForge 콘텐츠 사용 범위와 외부 링크, 서비스 변경 가능성에 대한 기본 안내입니다."
+            },
+            "eyebrow": "Terms",
+            "title": "문서를 읽을 때의 기본 전제",
+            "description": "HeapForge는 오래 참고할 수 있는 기술 기록을 목표로 하지만, 모든 문서는 시점과 운영 환경에 따라 달라질 수 있습니다. 아래 내용은 이 프로젝트를 사용할 때의 기본 전제를 설명합니다.",
+            "sections": {
+                "reference": {
+                    "title": "참고 자료 성격",
+                    "body": "문서는 학습과 실무 참고를 돕기 위한 기술 기록입니다. 특정 환경에서는 코드, 인프라, 정책이 이미 달라졌을 수 있으므로 실제 적용 전에는 공식 문서와 현재 환경을 함께 확인하는 것을 권장합니다."
+                },
+                "availability": {
+                    "title": "변경 가능성",
+                    "body": "프로젝트 구조, 콘텐츠 분류, 원격 콘텐츠 연결 방식은 운영 과정에서 바뀔 수 있습니다. 일부 문서는 업데이트 전까지 과거 판단을 담고 있을 수 있으며, 이 경우 최신성 신호나 changelog를 함께 확인하는 편이 좋습니다."
+                },
+                "links": {
+                    "title": "외부 링크와 인용",
+                    "body": "문서 안에는 외부 레퍼런스나 서비스 링크가 포함될 수 있습니다. 해당 링크의 내용과 가용성은 각 외부 제공자 책임 범위에 있으며, HeapForge는 이를 실시간으로 보증하지 않습니다."
+                }
+            },
+            "aside": {
+                "title": "운영 기준 같이 보기",
+                "body": "콘텐츠 입력 규칙과 검증 흐름은 contributor guide와 함께 보면 더 이해하기 쉽습니다.",
+                "linkLabel": "PRIVACY 보기"
+            }
+        },
+        "changelog": {
+            "metadata": {
+                "title": "Changelog - HeapForge",
+                "description": "최근 문서 구조, 검색, 콘텐츠 운영 기준 변경 사항을 요약합니다.",
+                "ogTitle": "Changelog - HeapForge",
+                "ogDescription": "검색 계약, 원격 콘텐츠 검증, contributor guide 같은 최근 개선 사항을 확인할 수 있습니다."
+            },
+            "eyebrow": "Changelog",
+            "title": "최근 운영 변화",
+            "description": "문서 탐색 품질과 콘텐츠 운영 기준을 다듬는 변경들을 짧게 묶어 보여줍니다. 세부 기록은 worklog와 architecture 문서에서 계속 이어집니다.",
+            "sections": {
+                "search": {
+                    "title": "검색 결과 정렬과 미리보기 정리",
+                    "body": "검색 결과가 title, summary, 본문 문맥을 더 일관되게 반영하도록 관련도 로직과 preview 규칙을 공통화했습니다. `/docs?q=...` 페이지와 `/api/search` 응답이 같은 기준을 따르도록 맞춘 상태입니다."
+                },
+                "contracts": {
+                    "title": "원격 콘텐츠 계약과 관측 강화",
+                    "body": "remote payload schema validation을 더 엄격하게 적용하고, parse failure가 발생했을 때 어떤 필드에서 drift가 생겼는지 로그로 파악할 수 있도록 정리했습니다. 문서 상세와 검색이 upstream 계약 변화에 더 빨리 반응할 수 있게 됐습니다."
+                },
+                "editorial": {
+                    "title": "작성자 가이드와 published 메타 기준 추가",
+                    "body": "published 문서에 `status`, `updatedAt`, 작성자 정보, 읽기 시간, 주제 라벨이 항상 포함되도록 local validation 기준을 높였습니다. 동시에 contributor guide를 분리해 새 글 작성 위치와 publish 전 체크리스트를 명시했습니다."
+                }
+            },
+            "aside": {
+                "title": "더 자세한 기록",
+                "body": "세부 커밋과 변경 이력은 GitHub 저장소와 worklog 문서에서 계속 추적할 수 있습니다.",
+                "linkLabel": "GitHub 저장소 열기"
+            }
+        }
+    },
     "home": {
         "title": "아이디어가 시스템으로 단련되는 곳.",
         "description": "소프트웨어 장인정신과 시스템 사고가 만나는 공간입니다. 메모리부터 아키텍처까지, 한 바이트씩 지식을 정제합니다.",
@@ -78,13 +170,13 @@
     },
     "rootLanding": {
         "hero": {
-            "eyebrow": "시스템 엔지니어링과 디자인",
+            "eyebrow": "시스템 엔지니어링과 인터페이스 설계",
             "titleLineOne": "기술과 경험을",
-            "titleLineTwo": "정교한 구현으로",
-            "titleLineThree": "이어갑니다",
-            "description": "웹 엔지니어링, 인터페이스 구조, 제품 감각이 만나는 지점을 천천히 정리합니다. 오래 참고할 수 있는 글과 큐레이션으로 기술을 다룹니다.",
-            "primaryCta": "피드 보러 가기",
-            "secondaryCta": "HeapForge 소개"
+            "titleLineTwo": "오래 쓰이는 구조로",
+            "titleLineThree": "다듬어 갑니다",
+            "description": "웹 엔지니어링, 제품 인터페이스, 시스템 설계를 한 흐름으로 정리합니다. 구현 과정에서 얻은 판단과 구조를 오래 읽을 수 있는 기록으로 남깁니다.",
+            "primaryCta": "피드 둘러보기",
+            "secondaryCta": "프로젝트 소개 보기"
         },
         "foundations": {
             "eyebrow": "핵심 주제",
@@ -348,34 +440,34 @@
             "status": "운영 중 // VERSION 2.0.4",
             "titleLead": "웹과 제품, 인터페이스를",
             "titleAccentOne": "하나의",
-            "titleAccentTwo": "구조로 엮습니다",
-            "description": "HeapForge는 웹 엔지니어링, 모바일 제품 감각, UI/UX 구조를 함께 다루는 작은 실험실입니다. 구현과 설계를 따로 보지 않고 오래 쓰이는 구조를 만드는 데 관심을 둡니다.",
-            "missionLabel": "// 만들고 기록하는 기준",
-            "establishedLabel": "// 2024년부터 이어온 아카이브"
+            "titleAccentTwo": "흐름으로 설계합니다",
+            "description": "HeapForge는 웹 엔지니어링, 모바일 제품 경험, UI/UX 구조를 함께 다루는 기술 아카이브입니다. 구현과 설계를 따로 떼어 보지 않고, 실제로 오래 쓰이는 구조를 기록합니다.",
+            "missionLabel": "// 구현과 설계를 잇는 기록",
+            "establishedLabel": "// 2024년부터 쌓아온 아카이브"
         },
         "pillars": {
             "web": {
                 "eyebrow": "엔지니어링 관점",
-                "title": "웹 구조와 성능",
-                "description": "브라우저 동작, 렌더링 비용, 프론트엔드 구조를 실제 구현 맥락에서 깊게 다룹니다. 단순히 기능을 붙이는 대신 오래 버티는 구조를 설계합니다."
+                "title": "웹 구조와 실행 성능",
+                "description": "브라우저 동작, 렌더링 비용, 프론트엔드 구조를 실제 구현 맥락에서 다룹니다. 기능을 덧붙이는 데 그치지 않고, 오래 버티는 구조를 고민합니다."
             },
             "mobile": {
                 "eyebrow": "모바일 경험",
-                "title": "손 안에서 자연스러운 흐름",
-                "description": "네이티브와 크로스플랫폼 생태계의 차이를 이해하고, 작은 화면에서도 자연스럽게 이어지는 경험을 만듭니다.",
+                "title": "손 안에서 자연스럽게 이어지는 경험",
+                "description": "네이티브와 크로스플랫폼의 차이를 이해하고, 작은 화면에서도 흐름이 끊기지 않는 인터페이스를 고민합니다.",
                 "terminalLineOne": "const mobile = await optimize(ui,",
                 "terminalLineTwo": "stack);"
             },
             "design": {
                 "eyebrow": "인터페이스 설계",
-                "title": "UI/UX를 구조로 다루기",
-                "description": "디자인 시스템을 살아 있는 구조로 보고, 계층과 모션, 접근성을 하나의 인터페이스 언어처럼 다룹니다."
+                "title": "UI/UX를 구조로 설계하기",
+                "description": "디자인 시스템을 살아 있는 운영 언어로 보고, 계층과 모션, 접근성을 하나의 인터페이스 구조로 다룹니다."
             }
         },
         "profile": {
             "name": "HoJeong Im",
             "role": "Full Stack Engineer",
-            "bio": "구조가 분명한 인터페이스와 오래 버티는 구현을 좋아하는 풀스택 엔지니어입니다. HEAP-FORGE에는 디지털 빌더가 두고두고 참고할 수 있는 기술 메모와 설계 기록을 차곡차곡 쌓아가고 있습니다.",
+            "bio": "구조가 분명한 인터페이스와 오래 버티는 구현을 좋아하는 풀스택 엔지니어입니다. HEAP-FORGE에는 디지털 빌더가 필요할 때 다시 펼쳐볼 수 있는 기술 메모와 설계 기록을 꾸준히 쌓고 있습니다.",
             "links": {
                 "github": {
                     "label": "GITHUB",

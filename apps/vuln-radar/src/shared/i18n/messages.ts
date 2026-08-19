@@ -2,6 +2,10 @@ export const messages = {
   ko: {
     "app.eyebrow": "글로벌 취약점 레이더",
     "nav.overview": "개요",
+    "nav.primary": "주요 탐색",
+    "nav.alerts": "경보",
+    "nav.assets": "자산",
+    "nav.inbox": "수집 대기열",
     "common.notAvailableYet": "아직 확인되지 않음",
     "common.refresh": "새로고침",
     "common.refreshing": "새로고침 중...",
@@ -28,11 +32,36 @@ export const messages = {
     "overview.watchlistMatches": "워치리스트 매치",
     "overview.watchlistActive":
       "현재 활성화된 워치리스트 {{count}}개 기준으로 집계됩니다.",
-    "overview.ingestFreshness": "수집 최신성",
+    "overview.ingestFreshness": "데이터 반영 상태",
     "overview.databaseUpdated": "DB 반영 시각",
     "overview.latestUpstreamModified": "최신 원본 수정 시각",
     "overview.latestKevAddition": "최신 KEV 반영 시각",
     "overview.latestEpssObserved": "최신 EPSS 관측 시각",
+    "overview.refreshCadenceLabel": "화면 갱신 주기",
+    "overview.refreshCadence": "{{count}}분마다 자동으로 다시 확인합니다.",
+    "overview.coreTitle": "CRITICAL CORE",
+    "overview.streamTitle": "THREAT STREAM",
+    "overview.realTimeTelemetry": "REAL-TIME TELEMETRY",
+    "overview.activeP0Threats": "ACTIVE P0 THREATS",
+    "overview.trackedVulnerabilities": "TRACKED VULNERABILITIES",
+    "overview.totalVulnerabilities": "TOTAL VULNERABILITIES",
+    "overview.latestIngest": "LATEST INGEST",
+    "overview.statTrackedDelta":
+      "KEV 매치 {{count}}건과 우선 점검 P1 {{p1}}건을 함께 추적합니다.",
+    "overview.statFreshnessDelta":
+      "워치리스트 매치 {{count}}건 기준으로 {{cadence}}분 주기로 다시 확인합니다.",
+    "overview.matrixTitle": "KNOWN EXPLOITED VULNERABILITIES (KEV) MATRIX",
+    "overview.matrixDescription":
+      "{{storage}} 저장소와 {{upstream}} 수집 기준으로 정리된 우선 대응 목록입니다.",
+    "overview.tableCveId": "CVE ID",
+    "overview.tableComponent": "COMPONENT",
+    "overview.tableExploitScore": "EXPLOIT SCORE",
+    "overview.tableStatus": "STATUS",
+    "overview.tableActions": "ACTIONS",
+    "overview.severity.critical": "CRITICAL",
+    "overview.severity.high": "HIGH SEVERITY",
+    "overview.severity.medium": "MEDIUM",
+    "overview.severity.low": "LOW",
     "overview.coverageSnapshot": "적재 현황",
     "overview.vulnerabilityCount": "총 {{count}}건",
     "overview.p0Items": "P0 항목",
@@ -47,7 +76,7 @@ export const messages = {
     "overview.cardDelta.p1-open": "우선 점검이 필요한 P1 취약점 {{count}}건",
     "overview.cardDelta.kev-new": "KEV와 겹치는 취약점 {{count}}건",
     "overview.statusNote":
-      "현재 백엔드는 외부 취약점 소스를 주기적으로 확인해 최신 상태에 가깝게 유지합니다.",
+      "이 패널은 마지막 반영 시각과 화면 갱신 주기를 함께 보여줘 현재 데이터가 얼마나 최근 상태인지 빠르게 판단할 수 있게 합니다.",
     "overview.sourceNote.nvd":
       "최근 수정된 CVE를 NVD에서 주기적으로 수집합니다.",
     "overview.sourceNote.kev":
@@ -108,6 +137,10 @@ export const messages = {
   en: {
     "app.eyebrow": "Global Vuln Radar",
     "nav.overview": "Overview",
+    "nav.primary": "Primary navigation",
+    "nav.alerts": "Alerts",
+    "nav.assets": "Assets",
+    "nav.inbox": "Ingest queue",
     "common.notAvailableYet": "Not available yet",
     "common.refresh": "Refresh",
     "common.refreshing": "Refreshing...",
@@ -135,11 +168,37 @@ export const messages = {
     "overview.watchlistMatches": "Watchlist matches",
     "overview.watchlistActive":
       "Calculated from {{count}} active watchlist entries.",
-    "overview.ingestFreshness": "Ingest freshness",
+    "overview.ingestFreshness": "Data freshness",
     "overview.databaseUpdated": "Database updated",
     "overview.latestUpstreamModified": "Latest upstream modified",
     "overview.latestKevAddition": "Latest KEV addition",
     "overview.latestEpssObserved": "Latest EPSS observed",
+    "overview.refreshCadenceLabel": "Refresh cadence",
+    "overview.refreshCadence":
+      "Automatically checks again every {{count}} minute(s).",
+    "overview.coreTitle": "CRITICAL CORE",
+    "overview.streamTitle": "THREAT STREAM",
+    "overview.realTimeTelemetry": "REAL-TIME TELEMETRY",
+    "overview.activeP0Threats": "ACTIVE P0 THREATS",
+    "overview.trackedVulnerabilities": "TRACKED VULNERABILITIES",
+    "overview.totalVulnerabilities": "TOTAL VULNERABILITIES",
+    "overview.latestIngest": "LATEST INGEST",
+    "overview.statTrackedDelta":
+      "Tracking {{count}} KEV matches alongside {{p1}} open P1 items.",
+    "overview.statFreshnessDelta":
+      "Rechecking every {{cadence}} minute(s) across {{count}} watchlist matches.",
+    "overview.matrixTitle": "KNOWN EXPLOITED VULNERABILITIES (KEV) MATRIX",
+    "overview.matrixDescription":
+      "Priority response list assembled from {{storage}} storage and {{upstream}} ingest flow.",
+    "overview.tableCveId": "CVE ID",
+    "overview.tableComponent": "COMPONENT",
+    "overview.tableExploitScore": "EXPLOIT SCORE",
+    "overview.tableStatus": "STATUS",
+    "overview.tableActions": "ACTIONS",
+    "overview.severity.critical": "CRITICAL",
+    "overview.severity.high": "HIGH SEVERITY",
+    "overview.severity.medium": "MEDIUM",
+    "overview.severity.low": "LOW",
     "overview.coverageSnapshot": "Coverage snapshot",
     "overview.vulnerabilityCount": "{{count}} vulnerabilities",
     "overview.p0Items": "P0 items",
@@ -156,7 +215,7 @@ export const messages = {
     "overview.cardDelta.kev-new":
       "{{count}} vulnerabilities currently overlap with KEV",
     "overview.statusNote":
-      "The backend polls upstream vulnerability sources to keep the dataset near real time.",
+      "This panel shows both the latest applied timestamps and the screen refresh cadence so you can judge how recent the current dataset is.",
     "overview.sourceNote.nvd": "Polling NVD for recently modified CVEs.",
     "overview.sourceNote.kev":
       "Re-reading the CISA KEV catalog to reflect known exploited vulnerabilities.",

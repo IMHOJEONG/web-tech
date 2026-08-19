@@ -4,6 +4,12 @@ import path from 'path'
 import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
 import { categoryTree } from '~/entities/category/model/category'
+import {
+    assertValidLocalDocFrontmatter,
+    isPublicDocStatus,
+    normalizeLocalDocFrontmatter,
+    type EditorialStatus,
+} from '~/lib/editorial-metadata'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export interface Metadata {
@@ -15,6 +21,13 @@ export interface Metadata {
     content: string
     fileName: string
     thumbnail?: string | null
+    updatedAt?: string
+    authorName?: string
+    authorRole?: string
+    readMinutes?: number
+    topicLabel?: string
+    tags?: string[]
+    status?: EditorialStatus
 }
 
 const categoryDirectory = path.join(process.cwd(), 'category')
@@ -54,24 +67,41 @@ function normalizeThumbnailPath(thumbnail?: unknown) {
     return thumbnailPath
 }
 
-function parseCategoryFile(fileName: string): Partial<Metadata> {
-    const id = fileName.replace(/\.mdx?$/, '')
+function parseCategoryFile(fileName: string): Partial<Metadata> | null {
     const fileContents = fs.readFileSync(fileName, 'utf8')
     const vfile = new VFile({ path: fileName, value: fileContents })
     vfileMatter(vfile, { strip: true })
-    const data = vfile.data.matter || {}
+    const frontmatter = normalizeLocalDocFrontmatter(vfile.data.matter || {})
+    assertValidLocalDocFrontmatter(fileName, frontmatter)
+
+    if (!isPublicDocStatus(frontmatter.status)) {
+        return null
+    }
+
     const content = String(vfile)
     const relPathFromRoot = path
         .relative(process.cwd(), fileName)
         .replace(/\.(mdx|md)$/i, '')
     const normalizedFileName = normalizeDocPath(relPathFromRoot)
+    const fallbackSlug =
+        normalizedFileName.split('/').filter(Boolean).pop() ?? ''
 
     return {
-        id,
-        ...data,
+        id: frontmatter.id ?? normalizedFileName,
+        title: frontmatter.title ?? fallbackSlug,
+        slug: frontmatter.slug ?? fallbackSlug,
+        summary: frontmatter.summary ?? '',
+        date: frontmatter.date ?? '',
         content,
         fileName: normalizedFileName,
-        thumbnail: normalizeThumbnailPath(data.thumbnail),
+        thumbnail: normalizeThumbnailPath(frontmatter.thumbnail),
+        updatedAt: frontmatter.updatedAt,
+        authorName: frontmatter.authorName,
+        authorRole: frontmatter.authorRole,
+        readMinutes: frontmatter.readMinutes,
+        topicLabel: frontmatter.topicLabel,
+        tags: frontmatter.tags,
+        status: frontmatter.status,
     }
 }
 
@@ -86,7 +116,11 @@ function sortDocsByDate(docs: Partial<Metadata>[]) {
 
 async function getDocsByPattern(pattern: string) {
     const fileNames = await exploreDirectory(pattern)
-    return sortDocsByDate(fileNames.map(parseCategoryFile))
+    return sortDocsByDate(
+        fileNames
+            .map(parseCategoryFile)
+            .filter((doc): doc is Partial<Metadata> => doc !== null)
+    )
 }
 
 export async function getSubCategoryData(main: string, sub: string) {

@@ -9,6 +9,10 @@ import {
 } from '~/lib/content-api-config'
 import { normalizeRemoteContent } from '~/lib/content-api-html'
 import {
+    buildRemotePayloadSchemaFailureEvent,
+    reportRemotePayloadSchemaFailure,
+} from '~/lib/content-api-observability'
+import {
     getInlineContentResult,
     getMarkdownReference,
     getRemotePostSlug,
@@ -16,24 +20,17 @@ import {
     normalizeRemoteReference,
     normalizeRemoteSearchResult,
 } from '~/lib/content-api-normalize'
+import {
+    parseRemotePostsPayload,
+    remotePayloadSchema,
+} from '~/lib/content-api-schema'
 import { isDocRouteMatch } from '~/lib/get-doc-route'
 import type {
     ContentFormat,
     Metadata,
-    RemotePayload,
     RemotePost,
     SearchData,
 } from '~/lib/content-api-types'
-
-function getRemotePosts(payload: RemotePayload) {
-    return Array.isArray(payload)
-        ? payload
-        : Array.isArray(payload.items)
-          ? payload.items
-          : Array.isArray(payload.results)
-            ? payload.results
-            : null
-}
 
 async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
     const inlineContentResult = getInlineContentResult(post)
@@ -187,12 +184,22 @@ async function fetchRemotePostsPayload() {
             )
         }
 
-        const payload = (await response.json()) as RemotePayload
-        const rawPosts = getRemotePosts(payload)
+        const payload = await response.json()
+        const rawPosts = parseRemotePostsPayload(payload)
 
         if (!rawPosts) {
+            const parseResult = remotePayloadSchema.safeParse(payload)
+            const event = buildRemotePayloadSchemaFailureEvent({
+                label: config.label,
+                url,
+                payload,
+                issues: parseResult.success ? null : parseResult.error.issues,
+            })
+
+            reportRemotePayloadSchemaFailure(event)
+
             throw new Error(
-                `[docs] Unsupported remote content payload shape (${config.label}): ${url}`
+                `[docs] Unsupported remote content payload shape (${config.label}): ${url}${event.issues ? ` // ${event.issues}` : ''}`
             )
         }
 

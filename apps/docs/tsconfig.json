@@ -1,6 +1,7 @@
 {
     "extends": "@web-tech/typescript-config/nextjs",
     "compilerOptions": {
+        "allowImportingTsExtensions": true,
         "plugins": [
             {
                 "name": "next"

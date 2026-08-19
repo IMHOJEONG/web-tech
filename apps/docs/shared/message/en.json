@@ -45,6 +45,98 @@
             "github": "GITHUB"
         }
     },
+    "staticPages": {
+        "privacy": {
+            "metadata": {
+                "title": "Privacy - HeapForge",
+                "description": "A short overview of what operational logs and content request data HeapForge may handle.",
+                "ogTitle": "Privacy - HeapForge",
+                "ogDescription": "A lightweight note on infrastructure logs, remote content requests, and supporting services."
+            },
+            "eyebrow": "Privacy",
+            "title": "What this project may keep track of",
+            "description": "HeapForge runs as a technical archive without heavyweight personal data flows such as user accounts, payments, or comments. That said, the deployment stack and remote content infrastructure may still keep basic operational logs.",
+            "sections": {
+                "collection": {
+                    "title": "Scope of collection",
+                    "body": "The site does not currently store member accounts or profile data directly. However, the deployment platform, web server, and remote content API may retain operational details such as request time, request path, and response status."
+                },
+                "usage": {
+                    "title": "Why those logs exist",
+                    "body": "Those signals are used for minimum operational needs such as incident tracing, performance checks, and remote content health verification. Even when search or discovery quality improves, system behavior is prioritized over personal identification."
+                },
+                "vendors": {
+                    "title": "Supporting services",
+                    "body": "Deployment infrastructure, image asset hosting, and remote content APIs may all participate in serving the docs experience. Retention windows and lower-level handling depend on the infrastructure operating each layer."
+                }
+            },
+            "aside": {
+                "title": "Policy updates",
+                "body": "If the operating model changes, the changelog is updated first and this note is revised alongside it when needed.",
+                "linkLabel": "View changelog"
+            }
+        },
+        "terms": {
+            "metadata": {
+                "title": "Terms - HeapForge",
+                "description": "Basic usage expectations for the HeapForge docs experience.",
+                "ogTitle": "Terms - HeapForge",
+                "ogDescription": "A short note on content intent, changeability, and external references."
+            },
+            "eyebrow": "Terms",
+            "title": "The basic framing for using these docs",
+            "description": "HeapForge aims to be a long-lived technical archive, but every document is still bound to its moment, assumptions, and operating environment. These notes explain the baseline expectations around that reality.",
+            "sections": {
+                "reference": {
+                    "title": "Reference-oriented content",
+                    "body": "The material is written to support learning and real-world technical reference. Before applying any idea directly, it is still worth checking the latest official documentation and the exact environment you are working in."
+                },
+                "availability": {
+                    "title": "Things can change",
+                    "body": "Project structure, content grouping, and remote content delivery rules may evolve over time. Some documents may still reflect older tradeoffs until they are refreshed, so freshness signals and the changelog should be read together."
+                },
+                "links": {
+                    "title": "External links and citations",
+                    "body": "Articles may include external references, tools, or service links. Their content and availability remain the responsibility of the external provider, and HeapForge does not guarantee them in real time."
+                }
+            },
+            "aside": {
+                "title": "Related operating notes",
+                "body": "The contributor guide gives extra context on how content gets structured, validated, and promoted into the published docs flow.",
+                "linkLabel": "View privacy note"
+            }
+        },
+        "changelog": {
+            "metadata": {
+                "title": "Changelog - HeapForge",
+                "description": "A short summary of recent updates across docs structure, search, and content operations.",
+                "ogTitle": "Changelog - HeapForge",
+                "ogDescription": "Track the latest improvements around search contracts, remote validation, and contributor guidance."
+            },
+            "eyebrow": "Changelog",
+            "title": "Recent operating changes",
+            "description": "This page groups the latest changes around discovery quality and editorial operations into a shorter reading surface. The detailed trail continues in worklogs and architecture notes.",
+            "sections": {
+                "search": {
+                    "title": "Search ranking and preview alignment",
+                    "body": "Search ranking now treats title, summary, and in-body context more consistently, and the preview/highlight rules are shared between the `/docs?q=...` page and the `/api/search` response contract."
+                },
+                "contracts": {
+                    "title": "Remote content contract and observability",
+                    "body": "Remote payload schema validation has been tightened so upstream contract drift is easier to detect. Parse failures now leave clearer clues about which fields no longer match the expected document shape."
+                },
+                "editorial": {
+                    "title": "Contributor guide and published metadata checks",
+                    "body": "Published local documents now require explicit `status`, `updatedAt`, author metadata, read time, and topic label. A dedicated contributor guide also documents where to place files and what to verify before publishing."
+                }
+            },
+            "aside": {
+                "title": "Follow the detailed history",
+                "body": "The GitHub repository and worklog documents continue the full trail behind these summaries.",
+                "linkLabel": "Open GitHub repository"
+            }
+        }
+    },
     "home": {
         "title": "Where ideas are forged into systems.",
         "description": "A space where software craftsmanship meets systems thinking, refining knowledge one byte at a time from memory to architecture.",

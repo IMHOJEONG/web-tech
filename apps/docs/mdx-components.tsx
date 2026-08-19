@@ -1,20 +1,7 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import type { MDXComponents } from 'mdx/types'
 import Image, { type ImageProps } from 'next/image'
-
-export function slugifyHeading(title: string) {
-    return (
-        title
-            .trim()
-            .toLowerCase()
-            // 괄호, 물음표, 느낌표 등 특수문자 제거
-            .replace(/[^\p{L}\p{N}\s-]/gu, '')
-            // 공백을 - 로 변환
-            .replace(/\s+/g, '-')
-            // 연속된 하이픈 정리
-            .replace(/-+/g, '-')
-    )
-}
+import { slugifyHeading } from '~/lib/slugify-heading'
 
 export const commonCss = [
     'dark:text-[var(--hf-text-primary)]',

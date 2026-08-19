@@ -150,9 +150,51 @@ Authorization: Bearer <shared-secret>
 - `topicLabel`
 - `section_label`
 - `sectionLabel`
+- `updatedAt`
+- `tags`
+- `status`
 
 프론트는 현재 일부 fallback을 갖고 있지만, 운영용으로는 `slug`, `title`, `summary`, `markdownPath`를 명시적으로 주는 것을 권장한다.
 추가로 피드/허브에서 더 풍부한 메타를 보여주고 싶다면 `authorName`, `authorRole`, `readMinutes`, `topicLabel`까지 함께 주는 편이 좋다.
+
+## Recommended Editorial Metadata
+
+권장 운영 필드:
+
+- `id`
+  - 전역 유일 식별자
+  - `markdownPath`와 같은 값 권장
+- `slug`
+  - leaf slug
+- `markdownPath`
+  - `channel/slug` 구조
+- `updatedAt`
+  - 문서 최신성 신호
+- `tags`
+  - 검색/추천/허브 재사용 가능 토큰
+- `status`
+  - `draft`, `published` 같은 운영 상태
+
+권장 예:
+
+```json
+{
+  "id": "web/rendering-pipeline",
+  "slug": "rendering-pipeline",
+  "title": "Rendering Pipeline",
+  "summary": "브라우저 렌더링 파이프라인을 단계별로 정리한다.",
+  "date": "2026-08-08",
+  "updatedAt": "2026-08-08",
+  "thumbnail": "web/rendering-pipeline/hero.webp",
+  "markdownPath": "web/rendering-pipeline",
+  "authorName": "HoJeong Im",
+  "authorRole": "Web Engineer",
+  "readMinutes": 7,
+  "topicLabel": "WEB",
+  "tags": ["rendering", "browser"],
+  "status": "published"
+}
+```
 
 ### 2. Body API
 

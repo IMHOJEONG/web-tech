@@ -1,21 +1,6 @@
 declare module 'vfile' {
     interface DataMap {
-        matter: {
-            title?: string | undefined
-            slug?: string | undefined
-            date?: string | undefined
-            summary?: string | undefined
-            thumbnail?: string | null
-            author?: string | undefined
-            authorName?: string | undefined
-            authorRole?: string | undefined
-            role?: string | undefined
-            readMinutes?: number | string | undefined
-            readTime?: number | string | undefined
-            topicLabel?: string | undefined
-            topic?: string | undefined
-            use?: Record<string, unknown>
-        }
+        matter: import('~/lib/editorial-metadata').LocalDocFrontmatterInput
     }
 }
 import fs from 'fs'
@@ -26,6 +11,12 @@ import {
     fetchRemoteDocByRoutePath,
     fetchRemoteDocsData,
 } from '~/lib/content-api'
+import {
+    assertValidLocalDocFrontmatter,
+    isPublicDocStatus,
+    normalizeLocalDocFrontmatter,
+    type EditorialStatus,
+} from '~/lib/editorial-metadata'
 import { isDocRouteMatch } from '~/lib/get-doc-route'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
@@ -44,29 +35,16 @@ export interface Metadata {
     contentSource?: ContentSource
     markdownPath?: string | null
     thumbnail?: string | null
+    updatedAt?: string
     authorName?: string
     authorRole?: string
     readMinutes?: number
     topicLabel?: string
+    tags?: string[]
+    status?: EditorialStatus
 }
 
 const docsDirectory = path.join(process.cwd(), 'data')
-
-function normalizeReadMinutes(value?: unknown) {
-    if (typeof value === 'number' && Number.isFinite(value) && value > 0) {
-        return Math.round(value)
-    }
-
-    if (typeof value === 'string') {
-        const parsedValue = Number.parseInt(value.trim(), 10)
-
-        if (Number.isFinite(parsedValue) && parsedValue > 0) {
-            return parsedValue
-        }
-    }
-
-    return undefined
-}
 
 function exploreDirectory(directory: string) {
     let files: string[] = []
@@ -93,25 +71,32 @@ function exploreDirectory(directory: string) {
 function getLocalDocsData() {
     const fileNames = exploreDirectory(docsDirectory)
 
-    const allPostsData: Partial<Metadata>[] = fileNames.map((fileName) => {
-        // Remove ".md" from file name to get id
-        const id = fileName.replace(/\.mdx?$/, '')
-
+    const allPostsData: Partial<Metadata>[] = fileNames.flatMap((fileName) => {
         // Read markdown file as string
         const fileContents = fs.readFileSync(fileName, 'utf8')
         // Use vfile-matter to parse the post metadata section
         const vfile = new VFile({ path: fileName, value: fileContents })
         vfileMatter(vfile, { strip: true })
-        const data = vfile.data.matter || {}
+        const frontmatter = normalizeLocalDocFrontmatter(
+            vfile.data.matter || {}
+        )
+        assertValidLocalDocFrontmatter(fileName, frontmatter)
+
+        if (!isPublicDocStatus(frontmatter.status)) {
+            return []
+        }
+
         const content = String(vfile)
         // 프로젝트 루트 기준의 상대경로(확장자 없는)만 추출
         const relPathFromRoot = path
             .relative(process.cwd(), fileName)
             .replace(/\.(mdx|md)$/i, '')
         const normalizedFileName = normalizeDocPath(relPathFromRoot)
+        const fallbackSlug =
+            normalizedFileName.split('/').filter(Boolean).pop() ?? ''
 
         // thumbnail 경로를 public 폴더 기준으로 /로 시작하게 단순화
-        let thumbnailPath = data.thumbnail
+        let thumbnailPath = frontmatter.thumbnail
         if (typeof thumbnailPath === 'string' && thumbnailPath.length > 0) {
             thumbnailPath = thumbnailPath.trim()
             const idx = thumbnailPath.indexOf('public/')
@@ -124,21 +109,27 @@ function getLocalDocsData() {
         } else {
             thumbnailPath = null
         }
-        return {
-            id,
-            ...data,
-            content,
-            fileName: normalizedFileName,
-            contentFormat: 'mdx',
-            contentSource: 'local',
-            thumbnail: thumbnailPath,
-            authorName: data.authorName ?? data.author,
-            authorRole: data.authorRole ?? data.role,
-            readMinutes: normalizeReadMinutes(
-                data.readMinutes ?? data.readTime
-            ),
-            topicLabel: data.topicLabel ?? data.topic,
-        }
+        return [
+            {
+                id: frontmatter.id ?? normalizedFileName,
+                title: frontmatter.title ?? fallbackSlug,
+                slug: frontmatter.slug ?? fallbackSlug,
+                summary: frontmatter.summary ?? '',
+                date: frontmatter.date ?? '',
+                content,
+                fileName: normalizedFileName,
+                contentFormat: 'mdx',
+                contentSource: 'local',
+                thumbnail: thumbnailPath,
+                updatedAt: frontmatter.updatedAt,
+                authorName: frontmatter.authorName,
+                authorRole: frontmatter.authorRole,
+                readMinutes: frontmatter.readMinutes,
+                topicLabel: frontmatter.topicLabel,
+                tags: frontmatter.tags,
+                status: frontmatter.status,
+            },
+        ]
     })
 
     return allPostsData
