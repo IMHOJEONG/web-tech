@@ -18,12 +18,32 @@
 type(scope): summary
 ```
 
+중요:
+
+- `scope`는 소괄호 `()`로 감싼다.
+- 대괄호 `[]`는 사용하지 않는다.
+
 예:
 
 - `docs(docs-arch): add contributor guide baseline`
 - `feat(docs-app): add static footer info pages`
 - `fix(vuln-radar-app): stabilize overview initial paint`
 - `ci(repo-ci): add commit message validation job`
+
+잘못된 예:
+
+```text
+fix[vuln-radar]: add skeleton in vuln-radar overview
+```
+
+올바른 예:
+
+```text
+fix(vuln-radar-app): add skeleton in overview
+```
+
+위처럼 대괄호를 쓰면 `commitlint`가 메시지를 `type(scope): subject` 구조로 파싱하지 못해
+`type-empty`, `subject-empty` 오류를 낼 수 있다.
 
 ## 왜 `type(scope)`를 쓰는가
 
