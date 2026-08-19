@@ -160,7 +160,7 @@ for branch in "${branches[@]}"; do
     echo "[feature-sync] ${branch}: merging ${BASE_REF}."
     git switch -q "$branch"
 
-    if git merge --no-edit "$BASE_REF"; then
+    if git merge --no-edit -m "chore(repo-tooling): sync ${branch} with ${BASE_REF}" "$BASE_REF"; then
         updated+=("$branch")
     else
         echo "[feature-sync] ${branch}: merge conflict. Aborting merge and continuing." >&2
