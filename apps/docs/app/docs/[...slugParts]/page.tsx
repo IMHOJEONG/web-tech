@@ -28,6 +28,7 @@ export default async function Page({
     }
 
     const renderedArticle = await renderArticleContent(target, {
+        codeHighlight: target.contentSource !== 'local',
         components,
     })
 

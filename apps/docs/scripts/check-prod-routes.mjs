@@ -10,6 +10,7 @@ const DEFAULT_ROUTES = [
     '/web',
     '/mobile',
     '/ui-ux',
+    '/docs/web/javascript-event-loop-runtime',
     '/category/fe/react/server-client-component-boundary',
 ]
 

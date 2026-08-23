@@ -159,3 +159,20 @@ DOCS_PROD_CHECK_BASE_URL=http://localhost:3003 pnpm --filter docs check:prod-rou
 - `false`이면 목록/검색/허브는 원격 API URL이 설정되어 있어도 원격 목록 API를 호출하지 않는다.
 - `true`일 때만 원격 문서를 `/feed`, `/docs`, 검색/허브 인덱스에 합친다.
 - 로컬에 없는 상세 route에 대한 원격 상세 fallback은 유지한다.
+
+## 2026-08-23 Follow-up 7
+
+배포 URL에서 `/docs/web/javascript-event-loop-runtime`만 10초 이상 지연되어 `504`가 발생하는 케이스를 확인했다.
+
+관찰:
+
+- `/`, `/feed`, `/docs`는 배포에서 정상 응답했다.
+- 원격 content API는 `530`을 약 0.5초 안에 반환했다.
+- 따라서 이 문제는 원격 목록 API 지연이 아니라 `/docs/[...slugParts]` 상세 렌더링 비용 문제로 분리된다.
+- 카테고리 상세에는 이미 `codeHighlight: false`가 적용되어 있었지만, 일반 `/docs/...` 상세는 기본 Shiki 하이라이팅 경로를 사용하고 있었다.
+
+조치:
+
+- 로컬 문서 상세는 `renderArticleContent()` 호출 시 `codeHighlight: false`를 사용한다.
+- 원격 MDX 문서는 기존 동작을 유지하고, 원격 HTML 문서는 기존처럼 HTML 정규화 경로를 사용한다.
+- 배포 전 route timing check 기본 목록에 `/docs/web/javascript-event-loop-runtime`을 추가했다.
