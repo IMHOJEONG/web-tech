@@ -107,3 +107,36 @@ Vercel 로그에서 `Remote search index unavailable. Searching local docs only.
 - 카테고리 상세에서는 우선 `codeHighlight: false`로 Shiki 초기화를 피한다.
 - 문서가 없으면 빈 MDX를 평가하지 않고 `notFound()`로 빠진다.
 - 운영 debug log를 제거했다.
+
+## 2026-08-23 Follow-up 5
+
+배포 후에도 Vercel runtime timeout이 남아 로컬 프로덕션 검증 방법을 추가했다.
+
+로컬 확인 결과:
+
+- `next build`는 성공했다.
+- `next start` 기준 `/category/fe/react/server-client-component-boundary` 첫 요청은 `200`, 약 `0.46s`였다.
+- 반복 요청은 약 `0.04s`였다.
+- `/`, `/feed`, `/docs`도 로컬 프로덕션 기준 1초 안에 응답했다.
+- 따라서 현재 브랜치 코드 기준으로 category 상세 렌더링 자체의 10초 timeout은 로컬에서 재현되지 않았다.
+
+추가 조치:
+
+- `apps/docs/scripts/check-prod-routes.mjs`를 추가했다.
+- `pnpm --filter docs check:prod-routes`로 주요 라우트의 상태 코드와 응답 시간을 한 번에 확인한다.
+- 기본 임계값은 `5000ms`이며 `DOCS_PROD_CHECK_MAX_TOTAL_MS`로 조정할 수 있다.
+- 기본 요청 timeout은 `10000ms`이며 `DOCS_PROD_CHECK_TIMEOUT_MS`로 조정할 수 있다.
+
+사용 예:
+
+```bash
+pnpm --filter docs build
+cd apps/docs
+./node_modules/.bin/next start --port 3003
+DOCS_PROD_CHECK_BASE_URL=http://localhost:3003 pnpm --filter docs check:prod-routes
+```
+
+해석:
+
+- 로컬 prod route check가 통과하는데 Vercel만 timeout이면, 코드의 순수 렌더 비용보다 배포 환경의 원격 API 지연, 환경 변수, stale deployment, edge/cache 상태를 우선 의심한다.
+- `/feed`, `/docs`, `/`는 원격 API 실패 후 로컬 fallback으로 내려오는 경로라 원격 endpoint가 느리게 실패하면 배포 환경에서만 지연될 수 있다.

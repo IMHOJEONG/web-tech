@@ -120,6 +120,41 @@ BLOG_CONTENT_API_TIMEOUT_MS=2500
 - 원격 API가 530 또는 지연 상태이면 상세 페이지가 Vercel runtime timeout에 묶일 수 있다.
 - 로그에는 원격 상세 fallback 경고가 남지만 실제 원인은 로컬 문서 탐색 실패일 수 있다.
 
+## Pre-Deploy Route Timing Check
+
+배포 전에는 로컬 프로덕션 서버에서 주요 라우트 응답 시간을 확인한다.
+
+```bash
+pnpm --filter docs build
+cd apps/docs
+./node_modules/.bin/next start --port 3003
+DOCS_PROD_CHECK_BASE_URL=http://localhost:3003 pnpm --filter docs check:prod-routes
+```
+
+기본 체크 라우트:
+
+- `/`
+- `/feed`
+- `/docs`
+- `/docs?q=react`
+- `/web`
+- `/mobile`
+- `/ui-ux`
+- `/category/fe/react/server-client-component-boundary`
+
+환경 변수:
+
+- `DOCS_PROD_CHECK_BASE_URL`: 요청 대상 origin, 기본값 `http://localhost:3003`
+- `DOCS_PROD_CHECK_TIMEOUT_MS`: 요청 timeout, 기본값 `10000`
+- `DOCS_PROD_CHECK_MAX_TOTAL_MS`: 실패로 볼 최대 응답 시간, 기본값 `5000`
+
+로컬 체크가 통과하는데 Vercel만 timeout이면 아래를 먼저 확인한다.
+
+- 배포가 최신 커밋을 포함했는지
+- Vercel 환경 변수의 원격 API URL이 의도한 값인지
+- 원격 API가 530을 즉시 반환하는지, 연결을 오래 붙잡는지
+- 목록/검색 라우트가 원격 API 실패를 기다리느라 로컬 fallback 도달이 늦어지는지
+
 ## Related Docs
 
 - [content-api-auth-ops-runbook.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/content-api-auth-ops-runbook.md)
