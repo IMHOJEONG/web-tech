@@ -176,3 +176,7 @@ DOCS_PROD_CHECK_BASE_URL=http://localhost:3003 pnpm --filter docs check:prod-rou
 - 로컬 문서 상세는 `renderArticleContent()` 호출 시 `codeHighlight: false`를 사용한다.
 - 원격 MDX 문서는 기존 동작을 유지하고, 원격 HTML 문서는 기존처럼 HTML 정규화 경로를 사용한다.
 - 배포 전 route timing check 기본 목록에 `/docs/web/javascript-event-loop-runtime`을 추가했다.
+
+후속 문서:
+
+- `docs/architecture/docs-local-mdx-shiki-timeout-analysis.md`
