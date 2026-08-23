@@ -206,6 +206,14 @@ export async function getSortedPostsData() {
 }
 
 export async function getDocByRoutePath(routePath: string) {
+    const localDoc = getLocalDocsData().find((doc) =>
+        isDocRouteMatch(doc, routePath)
+    )
+
+    if (localDoc) {
+        return localDoc
+    }
+
     let remoteDoc: Partial<Metadata> | null = null
 
     try {
@@ -221,6 +229,5 @@ export async function getDocByRoutePath(routePath: string) {
     if (remoteDoc) {
         return remoteDoc
     }
-
-    return getLocalDocsData().find((doc) => isDocRouteMatch(doc, routePath))
+    return null
 }

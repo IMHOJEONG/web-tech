@@ -157,7 +157,8 @@ print("token configured:", bool(CONTENT_API_TOKEN))
 
 상세 정책:
 
-- 원격 상세 요청이 실패하면 같은 route의 로컬 문서를 fallback으로 찾는다.
+- 같은 route의 로컬 문서가 있으면 원격 상세 요청보다 로컬 문서를 먼저 사용한다.
+- 로컬 문서가 없는 route만 원격 상세 요청을 시도한다.
 - 같은 route의 로컬 문서도 없을 때만 상세 페이지 오류 또는 not found로 처리한다.
 
 주의:
@@ -165,6 +166,7 @@ print("token configured:", bool(CONTENT_API_TOKEN))
 - 이 정책은 다른 endpoint로 fallback한다는 뜻이 아니다.
 - `401/403`도 다른 endpoint 후보를 계속 시도하지 않는다.
 - 다만 사이트 사용성을 위해 로컬 문서 렌더링은 계속 허용한다.
+- 원격 API는 `BLOG_CONTENT_API_TIMEOUT_MS` 안에 응답하지 않으면 실패로 처리한다.
 
 ### 왜 이렇게 구분하는가
 

@@ -5,6 +5,7 @@ import {
     joinUrl,
     getContentApiAuthHeaders,
     getContentApiConfig,
+    getContentApiTimeoutMs,
     getContentRevalidateSeconds,
 } from '~/lib/content-api-config'
 import { normalizeRemoteContent } from '~/lib/content-api-html'
@@ -88,6 +89,7 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
                 revalidate: getContentRevalidateSeconds(),
             },
             throwHttpErrors: false,
+            timeout: getContentApiTimeoutMs(),
         })
 
         if (!response.ok) {
@@ -176,6 +178,7 @@ async function fetchRemotePostsPayload() {
                 revalidate: getContentRevalidateSeconds(),
             },
             throwHttpErrors: false,
+            timeout: getContentApiTimeoutMs(),
         })
 
         if (!response.ok) {

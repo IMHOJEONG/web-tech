@@ -78,6 +78,22 @@ export function getContentRevalidateSeconds() {
     return parsedValue
 }
 
+export function getContentApiTimeoutMs() {
+    const rawValue = process.env.BLOG_CONTENT_API_TIMEOUT_MS?.trim()
+
+    if (!rawValue) {
+        return 2500
+    }
+
+    const parsedValue = Number.parseInt(rawValue, 10)
+
+    if (Number.isNaN(parsedValue) || parsedValue <= 0) {
+        return 2500
+    }
+
+    return parsedValue
+}
+
 export function getContentApiAuthHeaders() {
     const token = process.env.BLOG_CONTENT_API_TOKEN?.trim()
 

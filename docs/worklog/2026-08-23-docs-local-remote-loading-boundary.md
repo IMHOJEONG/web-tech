@@ -31,7 +31,8 @@
 
 상세:
 
-- 원격 상세 요청이 실패하면 동일 route의 로컬 문서를 시도한다.
+- 동일 route의 로컬 문서가 있으면 원격 요청보다 로컬 문서를 먼저 사용한다.
+- 로컬 문서가 없는 route만 원격 상세 요청을 시도한다.
 - 로컬 문서도 없으면 기존 오류 또는 not found 흐름을 따른다.
 
 ## 주의
@@ -39,3 +40,11 @@
 - `401/403`에서 다른 endpoint 후보를 계속 시도하지 않는 기존 정책은 유지한다.
 - 이번 변경은 endpoint fallback이 아니라 local / remote source fallback이다.
 - 운영 로그에서는 원격 실패를 계속 남겨야 한다. 화면을 살리는 것과 장애를 숨기는 것은 다르다.
+
+## 2026-08-23 Follow-up
+
+Vercel runtime에서 원격 content API 530 이후 10초 timeout이 발생할 수 있어 추가 조정했다.
+
+- 상세 route는 로컬 문서를 먼저 찾고, 로컬 문서가 없을 때만 원격 상세 요청을 시도한다.
+- 원격 content API 요청은 `BLOG_CONTENT_API_TIMEOUT_MS` 기준으로 fail-fast 한다.
+- 기본 timeout은 `2500ms`다.
