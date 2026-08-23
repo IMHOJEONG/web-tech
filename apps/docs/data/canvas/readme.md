@@ -9,10 +9,10 @@ authorRole: 'Web Engineer'
 readMinutes: 6
 topicLabel: 'BROWSER'
 tags:
-  - browser
-  - canvas
-  - rendering
-  - chromium
+    - browser
+    - canvas
+    - rendering
+    - chromium
 status: published
 ---
 
@@ -147,4 +147,3 @@ canvas.requestPaint?.()
 - [WICG HTML-in-Canvas proposal](https://github.com/WICG/html-in-canvas)
 
 - https://developer.chrome.com/blog/html-in-canvas-origin-trial?hl=ko
-
