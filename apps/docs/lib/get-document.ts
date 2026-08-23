@@ -17,6 +17,7 @@ import {
     resolveCollectionContentSource,
 } from '~/lib/content-source-log'
 import { selectDocumentBySourcePolicy } from '~/lib/content-source-policy'
+import { DEFAULT_LOCAL_DOCUMENT_THUMBNAIL } from '~/shared/assets/default-thumbnails'
 import {
     assertValidLocalDocFrontmatter,
     isPublicDocStatus,
@@ -115,7 +116,7 @@ export function getLocalDocsData() {
                 thumbnailPath = '/' + thumbnailPath
             }
         } else {
-            thumbnailPath = null
+            thumbnailPath = DEFAULT_LOCAL_DOCUMENT_THUMBNAIL
         }
         return [
             {

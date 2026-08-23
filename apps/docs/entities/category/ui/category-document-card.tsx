@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { DEFAULT_LOCAL_DOCUMENT_THUMBNAIL } from '~/shared/assets/default-thumbnails'
 
 interface CategoryDocumentCardItem {
     slug?: string
@@ -24,7 +25,7 @@ export const CategoryDocumentCard = ({
         >
             <div className="relative aspect-square w-full overflow-hidden rounded-2xl">
                 <Image
-                    src={thumbnail ?? ''}
+                    src={thumbnail ?? DEFAULT_LOCAL_DOCUMENT_THUMBNAIL}
                     alt="category-image"
                     fill
                     sizes="(max-width: 768px) 100vw, 360px"

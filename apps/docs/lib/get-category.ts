@@ -16,6 +16,7 @@ import {
     toLocalContentFileName,
 } from '~/lib/local-content-paths'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
+import { DEFAULT_LOCAL_DOCUMENT_THUMBNAIL } from '~/shared/assets/default-thumbnails'
 
 export interface Metadata {
     id: string
@@ -104,7 +105,9 @@ function parseCategoryFile(fileName: string): Partial<Metadata> | null {
         date: frontmatter.date ?? '',
         content,
         fileName: normalizedFileName,
-        thumbnail: normalizeThumbnailPath(frontmatter.thumbnail),
+        thumbnail:
+            normalizeThumbnailPath(frontmatter.thumbnail) ??
+            DEFAULT_LOCAL_DOCUMENT_THUMBNAIL,
         updatedAt: frontmatter.updatedAt,
         authorName: frontmatter.authorName,
         authorRole: frontmatter.authorRole,

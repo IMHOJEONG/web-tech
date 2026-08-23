@@ -6,6 +6,7 @@ import { getDocChannel } from '~/lib/get-doc-channel'
 import { getDocHref } from '~/lib/get-doc-route'
 import { Metadata } from '~/lib/get-document'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
+import { DEFAULT_DOCUMENT_THUMBNAIL } from '~/shared/assets/default-thumbnails'
 
 export type FeedFilter = 'all' | 'web' | 'mobile' | 'uiux'
 
@@ -265,7 +266,7 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
 
             <div className="relative min-h-72 overflow-hidden">
                 <Image
-                    src={doc.thumbnail ?? '/default/no-image.webp'}
+                    src={doc.thumbnail ?? DEFAULT_DOCUMENT_THUMBNAIL}
                     alt={doc.title}
                     fill
                     className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]"
@@ -326,7 +327,7 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
         >
             <div className="relative aspect-4/3 overflow-hidden bg-surface">
                 <Image
-                    src={doc.thumbnail ?? '/default/no-image.webp'}
+                    src={doc.thumbnail ?? DEFAULT_DOCUMENT_THUMBNAIL}
                     alt={doc.title}
                     fill
                     className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.04]"
@@ -604,7 +605,7 @@ export function MainFeed({
                                 <Image
                                     src={
                                         heroDoc.thumbnail ??
-                                        '/default/no-image.webp'
+                                        DEFAULT_DOCUMENT_THUMBNAIL
                                     }
                                     alt={heroDoc.title}
                                     fill
@@ -620,7 +621,7 @@ export function MainFeed({
                                         <Image
                                             src={
                                                 heroDoc.thumbnail ??
-                                                '/default/no-image.webp'
+                                                DEFAULT_DOCUMENT_THUMBNAIL
                                             }
                                             alt={heroDoc.title}
                                             fill

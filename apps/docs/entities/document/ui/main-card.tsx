@@ -1,6 +1,7 @@
 import { getTime } from '@web-tech/ui/lib/time'
 import Image from 'next/image'
 import { Metadata } from '~/lib/get-document'
+import { DEFAULT_DOCUMENT_THUMBNAIL } from '~/shared/assets/default-thumbnails'
 
 const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
     const { title, date, summary, thumbnail } = doc
@@ -8,7 +9,7 @@ const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
         <div className="grid size-full grid-cols-1 justify-between gap-3 rounded-lg md:grid-cols-[0.4fr_0.6fr]">
             <div className="aspect-video w-full overflow-hidden rounded-lg">
                 <Image
-                    src={thumbnail ?? '/default/no-image.webp'}
+                    src={thumbnail ?? DEFAULT_DOCUMENT_THUMBNAIL}
                     alt={title ?? ''}
                     width={1920}
                     height={1080}

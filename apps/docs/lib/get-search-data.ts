@@ -23,6 +23,7 @@ import {
 } from '~/lib/local-content-paths'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { rankSearchDocs } from '~/lib/search-ranking'
+import { DEFAULT_LOCAL_DOCUMENT_THUMBNAIL } from '~/shared/assets/default-thumbnails'
 
 export type SearchData = {
     id: string
@@ -146,7 +147,9 @@ async function parseLocalSearchFile(
             frontmatter.date && frontmatter.date.trim()
                 ? frontmatter.date
                 : undefined,
-        thumbnail: normalizeThumbnailPath(frontmatter.thumbnail),
+        thumbnail:
+            normalizeThumbnailPath(frontmatter.thumbnail) ??
+            DEFAULT_LOCAL_DOCUMENT_THUMBNAIL,
         href: inferSearchHref(normalizedFileName, slug),
         section: inferSearchSection(normalizedFileName),
     }
