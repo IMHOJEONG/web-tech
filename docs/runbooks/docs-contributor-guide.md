@@ -16,14 +16,23 @@
 
 - `apps/docs/data/*`
   - 현재 메인 docs 채널에서 직접 노출되는 문서
+  - 원격 문서 서버 장애 시에도 보여줄 evergreen fallback 문서
+  - 예: browser runtime, accessibility, rendering, UI behavior
 - `apps/docs/category/*`
   - taxonomy 실험 또는 세부 카테고리 문서
+  - FE / BE / Computer Science 같은 학습 축의 기준 문서
+- remote content server
+  - 앱 배포 없이 운영 중 추가/수정할 문서
+  - 최신 글, 실험 기록, 이미지가 자주 바뀌는 글
 
 기본 원칙:
 
 - 파일명보다 `frontmatter.slug`가 leaf slug의 기준이다.
 - 실제 canonical route 계산은 파일 경로와 `slug`를 함께 사용하므로, 임시 폴더명이나 테스트용 구조를 오래 유지하지 않는다.
 - published 문서는 가능한 한 실제 채널 의미가 드러나는 폴더에 둔다.
+- 앱 코드와 함께 리뷰되어야 하거나 원격 장애 시에도 반드시 보여야 하는 글은 local에 둔다.
+- 빠르게 발행/수정해야 하거나 asset 변경이 잦은 글은 remote에 둔다.
+- 같은 route의 local/remote 문서가 동시에 있으면 remote 문서를 우선 노출한다.
 
 ## Naming Rules
 
@@ -139,6 +148,25 @@ status: "draft"
 5. heading 구조가 `h2`, `h3` 기준으로 TOC에 자연스럽게 잡히는지 확인
 6. draft 문서를 실수로 published로 바꾸지 않았는지 확인
 
+## Content Style Rules
+
+`apps/docs`는 frontmatter 외에도 최소한의 문서 형식을 검사한다.
+
+Hard fail:
+
+- `apps/docs/data`, `apps/docs/category` 아래에는 `md`, `mdx` 문서만 둔다.
+- `# h1`은 사용하지 않는다. 페이지 제목은 frontmatter `title`이 담당한다.
+- 첫 heading은 `##` 또는 `###`로 시작한다.
+- heading level을 한 번에 두 단계 이상 건너뛰지 않는다.
+- 코드 블록은 언어를 명시한다.
+- 코드 블록은 반드시 닫는다.
+
+Warning:
+
+- published 문서 본문이 비어 있는 경우
+- published 문서에 `TODO`, `FIXME`, `임시`, `테스트용` 같은 placeholder 표현이 남은 경우
+- published 문서 slug가 `test`, `sample`, `todo`, `draft` 같은 임시값인 경우
+
 ## Local Validation Commands
 
 로컬에서 최소 아래 명령을 권장한다.
@@ -169,5 +197,6 @@ pnpm --filter docs dev
 ## Related Docs
 
 - [docs-content-authoring-pipeline.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-pipeline.md)
+- [docs-local-vs-remote-content-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-local-vs-remote-content-policy.md)
 - [docs-blog-improvement-roadmap.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-blog-improvement-roadmap.md)
 - [blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)

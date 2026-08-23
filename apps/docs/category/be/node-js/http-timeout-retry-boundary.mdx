@@ -1,0 +1,61 @@
+---
+title: 'HTTP Timeout과 Retry 경계'
+slug: http-timeout-retry-boundary
+date: 2026-08-23
+updatedAt: 2026-08-23
+summary: 서버 API 호출에서 timeout, retry, fallback을 분리해 장애 원인을 흐리지 않는 기준을 정리합니다.
+authorName: 'HoJeong Im'
+authorRole: 'Web Engineer'
+readMinutes: 5
+topicLabel: 'BACKEND'
+tags:
+    - backend
+    - http
+    - timeout
+    - retry
+status: published
+---
+
+## Timeout을 먼저 정해야 하는 이유
+
+- timeout이 없으면 실패한 요청이 너무 오래 자원을 붙잡을 수 있다.
+
+- timeout이 너무 짧으면 정상적인 느린 응답까지 장애로 오해할 수 있다.
+
+- retry는 timeout 정책 위에서만 의미가 있다.
+
+### Retry가 어울리는 경우
+
+- 일시적인 네트워크 오류
+
+- DNS 또는 연결 도달성 문제
+
+- idempotent한 읽기 요청
+
+- 짧은 지연 후 다시 시도했을 때 성공 가능성이 있는 요청
+
+### Retry하면 안 되는 경우
+
+- 인증 실패
+
+- 권한 부족
+
+- 잘못된 요청 payload
+
+- 중복 실행되면 안 되는 쓰기 요청
+
+### Fallback과 Retry의 차이
+
+- retry는 같은 목적지에 다시 요청하는 것이다.
+
+- fallback은 다른 데이터 소스나 다른 표현으로 화면을 유지하는 것이다.
+
+- 두 개를 섞으면 장애 원인이 “서버가 느린 것인지, 인증이 틀린 것인지, fallback 데이터가 오래된 것인지” 불명확해진다.
+
+## 운영 기준
+
+- `401`, `403`은 retry나 endpoint fallback 대상이 아니다.
+
+- `timeout`, `ENOTFOUND`, `ECONNREFUSED`는 네트워크 계열 장애로 보고 별도 관측한다.
+
+- 사용자 화면은 fallback으로 살리더라도 운영 로그는 반드시 남긴다.

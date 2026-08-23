@@ -1,0 +1,55 @@
+---
+title: 'Focus Management 체크리스트'
+slug: focus-management-checklist
+date: 2026-08-23
+updatedAt: 2026-08-23
+summary: Dialog, Drawer, Popover 같은 오버레이 UI에서 focus 이동을 점검하는 기준을 정리합니다.
+authorName: 'HoJeong Im'
+authorRole: 'Web Engineer'
+readMinutes: 4
+topicLabel: 'ACCESSIBILITY'
+tags:
+    - accessibility
+    - focus
+    - dialog
+    - ui
+status: published
+---
+
+## Focus Management가 중요한 이유
+
+- 키보드 사용자와 스크린 리더 사용자는 현재 focus 위치를 기준으로 화면을 탐색한다.
+
+- 오버레이 UI가 열렸는데 focus가 뒤쪽 페이지에 남아 있으면 사용자는 새로 열린 영역을 인지하기 어렵다.
+
+- 반대로 오버레이가 닫힌 뒤 focus가 사라지면 사용자는 이전 작업 맥락으로 돌아가기 어렵다.
+
+### 열릴 때 확인할 것
+
+- Dialog나 Drawer가 열리면 의미 있는 첫 번째 컨트롤로 focus가 이동하는지 확인한다.
+
+- 닫기 버튼, 제목, 주요 입력 필드 중 어떤 곳이 시작점으로 적절한지 의도적으로 정한다.
+
+- 자동 focus가 사용자 입력을 방해하지 않는지 확인한다.
+
+### 닫힐 때 확인할 것
+
+- 오버레이를 열었던 trigger로 focus가 돌아오는지 확인한다.
+
+- trigger가 사라지는 UI라면 다음으로 자연스러운 대체 focus target을 정한다.
+
+- animation이 끝나기 전에 focus를 옮겨 `aria-hidden` 경고가 발생하지 않는지 확인한다.
+
+### 테스트 기준
+
+- Tab / Shift + Tab으로 focus가 오버레이 안에서 순환하는지 확인한다.
+
+- Escape로 닫을 수 있는지 확인한다.
+
+- 스크린 리더에서 제목과 역할이 자연스럽게 읽히는지 확인한다.
+
+## 운영 기준
+
+- 접근성 경고는 콘솔 노이즈가 아니라 사용자 조작 맥락이 깨졌다는 신호일 수 있다.
+
+- 컴포넌트 라이브러리를 사용할 때도 focus restore 지점은 제품 UI 맥락에 맞게 직접 검토한다.

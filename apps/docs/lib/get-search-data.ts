@@ -185,16 +185,48 @@ async function getLocalSearchDocs() {
     return sortByDateDesc(docs)
 }
 
-export async function getSearchData(keyword?: string): Promise<SearchData[]> {
-    const remoteDocs = await fetchRemoteDocsData()
+async function getRemoteSearchDocs() {
+    try {
+        const remoteDocs = await fetchRemoteDocsData()
 
-    const docs = remoteDocs
-        ? sortByDateDesc(
-              remoteDocs
-                  .map(normalizeRemoteSearchDoc)
-                  .filter((doc): doc is SearchData => doc !== null)
-          )
-        : await getLocalSearchDocs()
+        if (!remoteDocs) {
+            return []
+        }
+
+        return remoteDocs
+            .map(normalizeRemoteSearchDoc)
+            .filter((doc): doc is SearchData => doc !== null)
+    } catch (error) {
+        console.warn(
+            '[docs] Remote search index unavailable. Searching local docs only.',
+            error
+        )
+        return []
+    }
+}
+
+function mergeSearchDocs(localDocs: SearchData[], remoteDocs: SearchData[]) {
+    const seenHrefs = new Set<string>()
+    const mergedDocs: SearchData[] = []
+
+    for (const doc of [...remoteDocs, ...localDocs]) {
+        if (seenHrefs.has(doc.href)) {
+            continue
+        }
+
+        seenHrefs.add(doc.href)
+        mergedDocs.push(doc)
+    }
+
+    return mergedDocs
+}
+
+export async function getSearchData(keyword?: string): Promise<SearchData[]> {
+    const [localDocs, remoteDocs] = await Promise.all([
+        getLocalSearchDocs(),
+        getRemoteSearchDocs(),
+    ])
+    const docs = sortByDateDesc(mergeSearchDocs(localDocs, remoteDocs))
 
     const normalizedKeyword = keyword?.trim().toLowerCase()
 

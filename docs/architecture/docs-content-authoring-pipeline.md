@@ -188,6 +188,24 @@
   - hero 장식 이미지
   - placeholder/fallback asset
 
+### `local content`
+
+- 원격 문서 서버 없이도 사이트가 기본 가치를 유지하게 하는 evergreen 문서
+- 카테고리별 기준 문서
+- 검색/피드 fallback 품질을 유지하는 대표 문서
+- 앱 코드 변경과 함께 리뷰되어야 하는 문서
+
+예시:
+
+- `apps/docs/data/v8/javascript-event-loop-runtime.mdx`
+- `apps/docs/data/shadcn/focus-management-checklist.mdx`
+- `apps/docs/category/fe/react/server-client-component-boundary.mdx`
+- `apps/docs/category/be/node-js/http-timeout-retry-boundary.mdx`
+- `apps/docs/category/computer-science/os/process-thread-scheduler.mdx`
+
+세부 기준은
+`docs/architecture/docs-local-vs-remote-content-policy.md`를 따른다.
+
 ### `publish script`
 
 - 파일 존재 확인

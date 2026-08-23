@@ -17,7 +17,7 @@ import {
     normalizeLocalDocFrontmatter,
     type EditorialStatus,
 } from '~/lib/editorial-metadata'
-import { isDocRouteMatch } from '~/lib/get-doc-route'
+import { getDocHref, isDocRouteMatch } from '~/lib/get-doc-route'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export type ContentFormat = 'mdx' | 'html'
@@ -135,14 +135,63 @@ function getLocalDocsData() {
     return allPostsData
 }
 
-export async function getDocsData() {
-    const remoteDocs = await fetchRemoteDocsData()
+function getDocIdentityKey(doc: Partial<Metadata>) {
+    const href = getDocHref({
+        slug: doc.slug,
+        markdownPath: doc.markdownPath,
+        fileName: doc.fileName,
+    })
 
-    if (remoteDocs) {
-        return remoteDocs
+    if (href !== '/docs') {
+        return href
     }
 
-    return getLocalDocsData()
+    return String(doc.id ?? doc.markdownPath ?? doc.fileName ?? doc.slug ?? '')
+}
+
+function mergeDocsData(
+    localDocs: Partial<Metadata>[],
+    remoteDocs: Partial<Metadata>[]
+) {
+    const seenKeys = new Set<string>()
+    const mergedDocs: Partial<Metadata>[] = []
+
+    for (const doc of [...remoteDocs, ...localDocs]) {
+        const key = getDocIdentityKey(doc)
+
+        if (key && seenKeys.has(key)) {
+            continue
+        }
+
+        if (key) {
+            seenKeys.add(key)
+        }
+
+        mergedDocs.push(doc)
+    }
+
+    return mergedDocs
+}
+
+async function fetchRemoteDocsDataSafely() {
+    try {
+        return (await fetchRemoteDocsData()) ?? []
+    } catch (error) {
+        console.warn(
+            '[docs] Remote document index unavailable. Rendering local docs only.',
+            error
+        )
+        return []
+    }
+}
+
+export async function getDocsData() {
+    const [localDocs, remoteDocs] = await Promise.all([
+        Promise.resolve(getLocalDocsData()),
+        fetchRemoteDocsDataSafely(),
+    ])
+
+    return mergeDocsData(localDocs, remoteDocs)
 }
 
 export async function getSortedPostsData() {
@@ -157,7 +206,17 @@ export async function getSortedPostsData() {
 }
 
 export async function getDocByRoutePath(routePath: string) {
-    const remoteDoc = await fetchRemoteDocByRoutePath(routePath)
+    let remoteDoc: Partial<Metadata> | null = null
+
+    try {
+        remoteDoc = await fetchRemoteDocByRoutePath(routePath)
+    } catch (error) {
+        console.warn(
+            '[docs] Remote document detail unavailable. Trying local document fallback.',
+            routePath,
+            error
+        )
+    }
 
     if (remoteDoc) {
         return remoteDoc

@@ -1,0 +1,57 @@
+---
+title: 'Process, Thread, Scheduler 기본 노트'
+slug: process-thread-scheduler
+date: 2026-08-23
+updatedAt: 2026-08-23
+summary: 운영체제에서 process, thread, scheduler를 구분해서 이해하기 위한 기본 기준을 정리합니다.
+authorName: 'HoJeong Im'
+authorRole: 'Web Engineer'
+readMinutes: 5
+topicLabel: 'OPERATING SYSTEM'
+tags:
+    - computer-science
+    - operating-system
+    - process
+    - thread
+status: published
+---
+
+## Process와 Thread를 나누는 이유
+
+- process는 실행 중인 프로그램의 독립된 자원 단위로 볼 수 있다.
+
+- thread는 process 안에서 실행 흐름을 나누는 단위로 볼 수 있다.
+
+- 두 개를 구분하면 메모리 격리, context switching, 동시성 문제를 더 명확하게 볼 수 있다.
+
+### Process
+
+- 독립된 address space를 가진다.
+
+- 다른 process와 메모리를 직접 공유하지 않는다.
+
+- 안정성 측면에서는 격리가 강하지만, 전환 비용은 thread보다 클 수 있다.
+
+### Thread
+
+- 같은 process 안의 메모리 공간을 공유한다.
+
+- 데이터 공유가 쉬운 대신 race condition에 주의해야 한다.
+
+- 동시 실행 흐름을 만들 때 더 가볍게 사용할 수 있다.
+
+### Scheduler
+
+- scheduler는 어떤 실행 흐름에 CPU 시간을 줄지 결정한다.
+
+- 목표는 공정성, 응답성, 처리량 사이에서 균형을 잡는 것이다.
+
+- interactive workload와 batch workload는 좋은 scheduling 기준이 다를 수 있다.
+
+## 실무 연결
+
+- Node.js 서버에서 CPU 작업이 길어지면 event loop가 밀린다.
+
+- 브라우저에서 main thread가 막히면 입력과 렌더링이 늦어진다.
+
+- 운영체제 개념은 프론트엔드와 백엔드 성능 문제를 해석하는 공통 언어가 된다.
