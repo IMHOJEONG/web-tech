@@ -1,21 +1,8 @@
-import { evaluate, EvaluateOptions } from 'next-mdx-remote-client/rsc'
-import { Suspense } from 'react'
-import rehypeShiki from '@shikijs/rehype'
-import remarkFlexibleToc, { TocItem } from 'remark-flexible-toc'
-import { shikiRehypeOptions } from '~/lib/shiki-options.js'
+import { notFound } from 'next/navigation'
 import { getCategoryData } from '~/lib/get-category'
+import { renderArticleContent } from '~/lib/render-article-content'
 import { components } from '~/mdx-components'
-import { LoadingComponent } from '~/shared/loading-component'
-
-type Scope = {
-    readingTime: string
-    toc?: TocItem[]
-}
-
-type Frontmatter = {
-    title: string
-    author: string
-}
+import { ArticleContentLayout } from '~/widgets/article-detail/ui/article-content-layout'
 
 interface PagesProps {
     slug: string
@@ -30,35 +17,34 @@ export default async function Page({
 }) {
     const { slug, main, sub } = await params
     const data = await getCategoryData(main, sub)
-    const target = data.find((doc) => doc.slug == slug)
-    console.log(slug, main, sub, target?.fileName, data)
+    const target = data.find((doc) => doc.slug === slug)
 
-    const options: EvaluateOptions<Scope> = {
-        mdxOptions: {
-            remarkPlugins: [remarkFlexibleToc],
-            rehypePlugins: [[rehypeShiki, shikiRehypeOptions]],
-        },
-        parseFrontmatter: true,
-        scope: {
-            // readingTime: calculateSomeHow(source),
-            readingTime: '',
-        },
-        vfileDataIntoScope: 'toc',
+    if (!target) {
+        notFound()
     }
 
-    const { content } = await evaluate<Frontmatter, Scope>({
-        source: target?.content ?? '',
-        options,
+    const renderedArticle = await renderArticleContent(target, {
+        codeHighlight: false,
         components,
     })
 
-    console.log(content)
+    if (renderedArticle.mode === 'html') {
+        return (
+            <ArticleContentLayout toc={renderedArticle.toc}>
+                <div className="mdx-wrapper">
+                    <article
+                        dangerouslySetInnerHTML={{
+                            __html: renderedArticle.content,
+                        }}
+                    />
+                </div>
+            </ArticleContentLayout>
+        )
+    }
 
     return (
-        <div className="flex gap-4">
-            <div className="flex-1">
-                <Suspense fallback={<LoadingComponent />}>{content}</Suspense>
-            </div>
-        </div>
+        <ArticleContentLayout toc={renderedArticle.toc}>
+            <div className="mdx-wrapper">{renderedArticle.content}</div>
+        </ArticleContentLayout>
     )
 }

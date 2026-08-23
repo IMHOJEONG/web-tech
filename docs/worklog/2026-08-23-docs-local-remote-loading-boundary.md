@@ -83,3 +83,27 @@ Vercel 로그에서 `Remote search index unavailable. Searching local docs only.
 - `data`, `category`, `apps/docs/data`, `apps/docs/category` 계열을 실행 위치에 상관없이 안정적으로 탐색한다.
 - `apps/docs/lib/get-document.ts`, `apps/docs/lib/get-search-data.ts`, `apps/docs/lib/get-category.ts`가 같은 로컬 콘텐츠 루트 기준을 사용하도록 통일했다.
 - `apps/docs/lib/local-content-paths.test.ts`로 direct docs root와 monorepo root 케이스를 검증한다.
+
+## 2026-08-23 Follow-up 4
+
+카테고리 상세 페이지에서 로컬 문서 데이터가 정상 출력된 뒤 Vercel runtime timeout이 발생하는 흐름을 추가 점검했다.
+
+관찰:
+
+- `getCategoryData()`는 정상적으로 로컬 문서를 반환했다.
+- `/category/[main]/[sub]/[slug]/page.tsx`의 첫 debug log는 찍혔다.
+- `evaluate()` 이후에 있던 두 번째 debug log는 찍히지 않았다.
+
+원인 후보:
+
+- 데이터 로딩이 아니라 MDX 평가/렌더링 단계가 10초 제한에 걸리는 구조였다.
+- 카테고리 상세 라우트가 공용 article renderer와 분리된 오래된 렌더 경로를 사용했다.
+- 해당 경로에서 `rehypeShiki`를 직접 초기화해 serverless cold start 비용이 커질 수 있었다.
+- 운영 로그에 전체 문서 배열과 React content를 출력하는 debug log가 남아 있었다.
+
+조치:
+
+- 카테고리 상세 라우트를 공용 `renderArticleContent()` 흐름으로 합쳤다.
+- 카테고리 상세에서는 우선 `codeHighlight: false`로 Shiki 초기화를 피한다.
+- 문서가 없으면 빈 MDX를 평가하지 않고 `notFound()`로 빠진다.
+- 운영 debug log를 제거했다.
