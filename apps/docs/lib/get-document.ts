@@ -18,6 +18,10 @@ import {
     type EditorialStatus,
 } from '~/lib/editorial-metadata'
 import { getDocHref, isDocRouteMatch } from '~/lib/get-doc-route'
+import {
+    getLocalDataDirectory,
+    toLocalContentFileName,
+} from '~/lib/local-content-paths'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export type ContentFormat = 'mdx' | 'html'
@@ -44,21 +48,7 @@ export interface Metadata {
     status?: EditorialStatus
 }
 
-function resolveDocsDirectory() {
-    const fallbackDirectory = path.join(process.cwd(), 'data')
-    const candidates = [
-        fallbackDirectory,
-        path.join(process.cwd(), 'apps/docs/data'),
-    ]
-
-    return (
-        candidates.find((candidate) => fs.existsSync(candidate)) ??
-        fallbackDirectory
-    )
-}
-
-const docsDirectory = resolveDocsDirectory()
-const docsRootDirectory = path.dirname(docsDirectory)
+const docsDirectory = getLocalDataDirectory()
 
 function exploreDirectory(directory: string) {
     let files: string[] = []
@@ -102,9 +92,7 @@ function getLocalDocsData() {
 
         const content = String(vfile)
         // 프로젝트 루트 기준의 상대경로(확장자 없는)만 추출
-        const relPathFromRoot = path
-            .relative(docsRootDirectory, fileName)
-            .replace(/\.(mdx|md)$/i, '')
+        const relPathFromRoot = toLocalContentFileName(fileName)
         const normalizedFileName = normalizeDocPath(relPathFromRoot)
         const fallbackSlug =
             normalizedFileName.split('/').filter(Boolean).pop() ?? ''

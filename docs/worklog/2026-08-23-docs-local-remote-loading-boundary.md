@@ -64,3 +64,22 @@ fail-fast 적용 후에도 상세 페이지에서 Vercel runtime timeout이 남�
 
 - `apps/docs/lib/get-document.ts`에서 로컬 문서 루트 후보를 `data`, `apps/docs/data`로 확장했다.
 - 로컬 문서 상대경로는 실제 data 디렉터리의 부모 기준으로 계산해 `data/v8/...` 매핑을 유지했다.
+
+## 2026-08-23 Follow-up 3
+
+Vercel 로그에서 `Remote search index unavailable. Searching local docs only.` 이후에도 runtime timeout이 남는 흐름을 추가 점검했다.
+
+상세 문서 로더는 로컬 루트 후보를 보강했지만, 검색 인덱스와 카테고리 로더에는 아직 `process.cwd()` 기준 경로가 남아 있었다.
+
+영향:
+
+- `/docs?q=...` 검색 페이지와 `/api/search`가 로컬 검색 문서를 찾지 못할 수 있다.
+- `/web`, `/mobile`, `/ui-ux` 허브가 검색 인덱스 기반 문서 목록을 만들 때 배포 환경의 cwd 차이에 영향을 받을 수 있다.
+- 원격 API가 530 상태이면 검색/허브가 원격 실패 후 로컬 fallback으로 내려가야 하지만, 로컬 루트가 비어 있으면 fallback 품질이 떨어지고 runtime timeout 원인 추적이 어려워진다.
+
+조치:
+
+- `apps/docs/lib/local-content-paths.ts`를 추가해 로컬 콘텐츠 루트 탐색을 공통화했다.
+- `data`, `category`, `apps/docs/data`, `apps/docs/category` 계열을 실행 위치에 상관없이 안정적으로 탐색한다.
+- `apps/docs/lib/get-document.ts`, `apps/docs/lib/get-search-data.ts`, `apps/docs/lib/get-category.ts`가 같은 로컬 콘텐츠 루트 기준을 사용하도록 통일했다.
+- `apps/docs/lib/local-content-paths.test.ts`로 direct docs root와 monorepo root 케이스를 검증한다.

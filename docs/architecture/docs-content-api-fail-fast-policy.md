@@ -90,7 +90,12 @@ fail-fast를 신중히 써야 하는 경우:
   - 목록 API와 본문 API 요청에 `timeout` 적용
 - `apps/docs/lib/get-document.ts`
   - 상세 route에서 로컬 문서 우선 조회
-  - 모노레포/Vercel 실행 위치 차이를 고려해 `data`와 `apps/docs/data`를 모두 로컬 문서 루트 후보로 본다.
+- `apps/docs/lib/get-search-data.ts`
+  - 검색 index에서 원격 실패 시 로컬 검색 문서를 사용
+- `apps/docs/lib/get-category.ts`
+  - 카테고리 문서도 같은 로컬 콘텐츠 루트 기준을 사용
+- `apps/docs/lib/local-content-paths.ts`
+  - 모노레포/Vercel 실행 위치 차이를 고려해 `data`, `category`, `apps/docs/data`, `apps/docs/category` 계열을 같은 기준으로 탐색
 
 환경 변수:
 

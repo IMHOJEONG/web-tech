@@ -2,7 +2,6 @@ import 'server-only'
 
 import fg from 'fast-glob'
 import fs from 'fs/promises'
-import path from 'path'
 import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
 import {
@@ -13,6 +12,10 @@ import {
 import type { Metadata } from '~/lib/get-document'
 import { getDocHref } from '~/lib/get-doc-route'
 import { fetchRemoteDocsData } from '~/lib/content-api'
+import {
+    resolveLocalContentRoot,
+    toLocalContentFileName,
+} from '~/lib/local-content-paths'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { rankSearchDocs } from '~/lib/search-ranking'
 
@@ -122,9 +125,7 @@ async function parseLocalSearchFile(
     }
 
     const content = stripFrontmatter(String(vfile))
-    const fileName = path
-        .relative(process.cwd(), filePath)
-        .replace(/\.(mdx|md)$/i, '')
+    const fileName = toLocalContentFileName(filePath)
     const normalizedFileName = normalizeDocPath(fileName)
     const slug =
         frontmatter.slug?.trim() || slugFromFileName(normalizedFileName)
@@ -175,7 +176,7 @@ function normalizeRemoteSearchDoc(doc: Partial<Metadata>): SearchData | null {
 
 async function getLocalSearchDocs() {
     const files = await fg(LOCAL_SEARCH_PATTERNS, {
-        cwd: process.cwd(),
+        cwd: resolveLocalContentRoot(),
         absolute: true,
     })
 

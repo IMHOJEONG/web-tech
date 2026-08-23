@@ -10,6 +10,11 @@ import {
     normalizeLocalDocFrontmatter,
     type EditorialStatus,
 } from '~/lib/editorial-metadata'
+import {
+    getLocalCategoryDirectory,
+    resolveLocalContentRoot,
+    toLocalContentFileName,
+} from '~/lib/local-content-paths'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export interface Metadata {
@@ -30,15 +35,22 @@ export interface Metadata {
     status?: EditorialStatus
 }
 
-const categoryDirectory = path.join(process.cwd(), 'category')
+const categoryDirectory = getLocalCategoryDirectory()
 
-export const subCategories = fs
-    .readdirSync(categoryDirectory, { withFileTypes: true })
+export const subCategories = (
+    fs.existsSync(categoryDirectory)
+        ? fs.readdirSync(categoryDirectory, { withFileTypes: true })
+        : []
+)
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => path.join(categoryDirectory, dirent.name))
 
-async function exploreDirectory(path: string) {
-    const files = await fg(path)
+async function exploreDirectory(pattern: string) {
+    const files = await fg(pattern, {
+        cwd: resolveLocalContentRoot(),
+        absolute: true,
+    })
+
     return files
 }
 
@@ -79,9 +91,7 @@ function parseCategoryFile(fileName: string): Partial<Metadata> | null {
     }
 
     const content = String(vfile)
-    const relPathFromRoot = path
-        .relative(process.cwd(), fileName)
-        .replace(/\.(mdx|md)$/i, '')
+    const relPathFromRoot = toLocalContentFileName(fileName)
     const normalizedFileName = normalizeDocPath(relPathFromRoot)
     const fallbackSlug =
         normalizedFileName.split('/').filter(Boolean).pop() ?? ''
