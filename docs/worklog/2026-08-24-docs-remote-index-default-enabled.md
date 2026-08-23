@@ -34,3 +34,36 @@ BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false
 ```
 
 이 값을 명시하면 목록/검색은 원격 문서를 합치지 않고, 상세도 로컬 문서를 먼저 사용한다.
+
+## Follow-up: Runtime Source Logging
+
+배포 후 Vercel Runtime Logs에서 local / remote 선택 결과를 바로 확인할 수 있게 했다.
+
+추가 이벤트:
+
+- `docs.content_source`
+
+기록 위치:
+
+- `getDocsData`
+  - `/feed`, `/docs`, root landing, hub 목록 등 index 계열
+- `getSearchData`
+  - 검색 index 병합 결과
+- `getDocByRoutePath`
+  - 상세 페이지의 remote / local / fallback 선택 결과
+
+로그에는 다음 정보만 남긴다.
+
+- `area`
+- `source`
+- `reason`
+- `routePath`
+- `includeRemote`
+- `localCount`, `remoteCount`, `totalCount`
+
+민감하거나 노이즈가 큰 값은 남기지 않는다.
+
+- token
+- Authorization header
+- 전체 endpoint URL
+- 검색어 원문

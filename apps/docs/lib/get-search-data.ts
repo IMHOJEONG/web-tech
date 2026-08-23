@@ -14,6 +14,10 @@ import { getDocHref } from '~/lib/get-doc-route'
 import { fetchRemoteDocsData } from '~/lib/content-api'
 import { shouldIncludeRemoteContentIndex } from '~/lib/content-api-config'
 import {
+    logContentSource,
+    resolveCollectionContentSource,
+} from '~/lib/content-source-log'
+import {
     resolveLocalContentRoot,
     toLocalContentFileName,
 } from '~/lib/local-content-paths'
@@ -236,8 +240,23 @@ export async function getSearchData(
         options.includeRemote ?? shouldIncludeRemoteContentIndex()
     const remoteDocs = includeRemote ? await getRemoteSearchDocs() : []
     const docs = sortByDateDesc(mergeSearchDocs(localDocs, remoteDocs))
-
     const normalizedKeyword = keyword?.trim().toLowerCase()
+
+    logContentSource({
+        area: 'search',
+        source: resolveCollectionContentSource(
+            localDocs.length,
+            remoteDocs.length
+        ),
+        reason: includeRemote
+            ? 'remote-index-enabled'
+            : 'remote-index-disabled',
+        keyword: normalizedKeyword ? '[provided]' : undefined,
+        includeRemote,
+        localCount: localDocs.length,
+        remoteCount: remoteDocs.length,
+        totalCount: docs.length,
+    })
 
     if (!normalizedKeyword) {
         return docs

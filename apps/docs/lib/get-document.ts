@@ -12,6 +12,10 @@ import {
     fetchRemoteDocsData,
 } from '~/lib/content-api'
 import { shouldIncludeRemoteContentIndex } from '~/lib/content-api-config'
+import {
+    logContentSource,
+    resolveCollectionContentSource,
+} from '~/lib/content-source-log'
 import { selectDocumentBySourcePolicy } from '~/lib/content-source-policy'
 import {
     assertValidLocalDocFrontmatter,
@@ -177,15 +181,26 @@ function mergeDocsData(
     return mergedDocs
 }
 
-async function fetchRemoteDocsDataSafely() {
+type RemoteDocsDataResult = {
+    docs: Partial<Metadata>[]
+    status: 'available' | 'failed'
+}
+
+async function fetchRemoteDocsDataSafely(): Promise<RemoteDocsDataResult> {
     try {
-        return (await fetchRemoteDocsData()) ?? []
+        return {
+            docs: (await fetchRemoteDocsData()) ?? [],
+            status: 'available',
+        }
     } catch (error) {
         console.warn(
             '[docs] Remote document index unavailable. Rendering local docs only.',
             error
         )
-        return []
+        return {
+            docs: [],
+            status: 'failed',
+        }
     }
 }
 
@@ -199,12 +214,40 @@ export async function getDocsData(options: DocsDataOptions = {}) {
         options.includeRemote ?? shouldIncludeRemoteContentIndex()
 
     if (!includeRemote) {
+        logContentSource({
+            area: 'index',
+            source: resolveCollectionContentSource(localDocs.length, 0),
+            reason: 'remote-index-disabled',
+            includeRemote,
+            localCount: localDocs.length,
+            remoteCount: 0,
+            totalCount: localDocs.length,
+        })
+
         return localDocs
     }
 
-    const remoteDocs = await fetchRemoteDocsDataSafely()
+    const remoteResult = await fetchRemoteDocsDataSafely()
+    const remoteDocs = remoteResult.docs
+    const mergedDocs = mergeDocsData(localDocs, remoteDocs)
 
-    return mergeDocsData(localDocs, remoteDocs)
+    logContentSource({
+        area: 'index',
+        source: resolveCollectionContentSource(
+            localDocs.length,
+            remoteDocs.length
+        ),
+        reason:
+            remoteResult.status === 'failed'
+                ? 'remote-index-failed-local-fallback'
+                : 'remote-index-enabled',
+        includeRemote,
+        localCount: localDocs.length,
+        remoteCount: remoteDocs.length,
+        totalCount: mergedDocs.length,
+    })
+
+    return mergedDocs
 }
 
 export async function getSortedPostsData(options: DocsDataOptions = {}) {
@@ -229,6 +272,14 @@ export async function getDocByRoutePath(routePath: string) {
             const remoteDoc = await fetchRemoteDocByRoutePath(routePath)
 
             if (remoteDoc) {
+                logContentSource({
+                    area: 'detail',
+                    source: 'remote',
+                    reason: 'remote-detail-found',
+                    routePath,
+                    includeRemote,
+                })
+
                 return remoteDoc
             }
         } catch (error) {
@@ -239,14 +290,34 @@ export async function getDocByRoutePath(routePath: string) {
             )
         }
 
-        return selectDocumentBySourcePolicy({
+        const selectedDoc = selectDocumentBySourcePolicy({
             includeRemote,
             localDoc,
             remoteDoc: null,
         })
+
+        logContentSource({
+            area: 'detail',
+            source: selectedDoc ? 'local' : 'none',
+            reason: selectedDoc
+                ? 'remote-detail-unavailable-local-fallback'
+                : 'remote-detail-unavailable-no-local-fallback',
+            routePath,
+            includeRemote,
+        })
+
+        return selectedDoc
     }
 
     if (localDoc) {
+        logContentSource({
+            area: 'detail',
+            source: 'local',
+            reason: 'remote-index-disabled-local-first',
+            routePath,
+            includeRemote,
+        })
+
         return selectDocumentBySourcePolicy({
             includeRemote,
             localDoc,
@@ -255,11 +326,23 @@ export async function getDocByRoutePath(routePath: string) {
     }
 
     try {
-        return selectDocumentBySourcePolicy({
+        const selectedDoc = selectDocumentBySourcePolicy({
             includeRemote,
             localDoc,
             remoteDoc: await fetchRemoteDocByRoutePath(routePath),
         })
+
+        logContentSource({
+            area: 'detail',
+            source: selectedDoc ? 'remote' : 'none',
+            reason: selectedDoc
+                ? 'local-missing-remote-fallback'
+                : 'local-and-remote-missing',
+            routePath,
+            includeRemote,
+        })
+
+        return selectedDoc
     } catch (error) {
         console.warn(
             '[docs] Remote document detail unavailable.',
@@ -267,6 +350,14 @@ export async function getDocByRoutePath(routePath: string) {
             error
         )
     }
+
+    logContentSource({
+        area: 'detail',
+        source: 'none',
+        reason: 'local-and-remote-unavailable',
+        routePath,
+        includeRemote,
+    })
 
     return null
 }
