@@ -167,6 +167,7 @@ print("token configured:", bool(CONTENT_API_TOKEN))
 - `401/403`도 다른 endpoint 후보를 계속 시도하지 않는다.
 - 다만 사이트 사용성을 위해 로컬 문서 렌더링은 계속 허용한다.
 - 원격 API는 `BLOG_CONTENT_API_TIMEOUT_MS` 안에 응답하지 않으면 실패로 처리한다.
+- fail-fast 기준 문서: `docs/architecture/docs-content-api-fail-fast-policy.md`
 
 ### 왜 이렇게 구분하는가
 
