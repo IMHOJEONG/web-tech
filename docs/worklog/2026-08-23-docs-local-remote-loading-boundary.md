@@ -31,7 +31,7 @@
 
 상세:
 
-- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 동일 route에서 원격 문서를 먼저 사용한다.
+- 기본값 또는 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 동일 route에서 원격 문서를 먼저 사용한다.
 - 원격 상세 요청이 실패하면 동일 route의 로컬 문서를 fallback으로 사용한다.
 - `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`이면 로컬 문서를 먼저 사용하고, 로컬 문서가 없는 route만 원격 상세 요청을 시도한다.
 - 로컬 문서도 없으면 기존 오류 또는 not found 흐름을 따른다.
@@ -194,6 +194,6 @@ DOCS_PROD_CHECK_BASE_URL=http://localhost:3003 pnpm --filter docs check:prod-rou
 
 조치:
 
-- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 상세 route도 원격 문서를 먼저 사용한다.
+- 기본값 또는 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 상세 route도 원격 문서를 먼저 사용한다.
 - 원격 상세가 실패하거나 없으면 동일 route의 로컬 문서로 fallback한다.
-- 기본값인 `false`에서는 로컬 상세 우선 정책을 유지해 원격 장애가 로컬 문서 접근을 흔들지 않게 한다.
+- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`에서는 로컬 상세 우선 정책을 유지해 원격 장애가 로컬 문서 접근을 흔들지 않게 한다.

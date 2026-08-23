@@ -95,10 +95,10 @@ export function getContentApiTimeoutMs() {
 }
 
 export function shouldIncludeRemoteContentIndex() {
-    return (
-        process.env.BLOG_CONTENT_INCLUDE_REMOTE_INDEX?.trim().toLowerCase() ===
-        'true'
-    )
+    const rawValue =
+        process.env.BLOG_CONTENT_INCLUDE_REMOTE_INDEX?.trim().toLowerCase()
+
+    return rawValue !== 'false'
 }
 
 export function getContentApiAuthHeaders() {

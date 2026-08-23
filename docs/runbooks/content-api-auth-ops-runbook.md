@@ -157,7 +157,7 @@ print("token configured:", bool(CONTENT_API_TOKEN))
 
 상세 정책:
 
-- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 같은 route에서 원격 상세를 먼저 사용한다.
+- 기본값 또는 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 같은 route에서 원격 상세를 먼저 사용한다.
 - 원격 상세 요청이 실패하면 같은 route의 로컬 문서를 fallback으로 사용한다.
 - `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`이면 로컬 문서를 먼저 사용하고, 로컬 문서가 없는 route만 원격 상세 요청을 시도한다.
 - 같은 route의 로컬 문서도 없을 때만 상세 페이지 오류 또는 not found로 처리한다.

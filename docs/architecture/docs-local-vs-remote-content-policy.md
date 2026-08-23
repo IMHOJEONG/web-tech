@@ -88,9 +88,9 @@
 - 중복 카드 노출을 막아 목록과 검색 결과를 안정적으로 유지한다.
 - 목록/검색에서 원격 카드가 보였는데 상세에서 로컬 본문이 열리는 불일치를 막는다.
 
-단, 이 우선순위는 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`일 때 적용한다.
+단, 이 우선순위는 기본값 또는 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`일 때 적용한다.
 
-기본값인 `false`에서는 목록/검색이 원격 문서를 포함하지 않으므로, 로컬 상세도 원격 장애에 묶이지 않게 로컬 문서를 먼저 사용한다.
+`BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`에서는 목록/검색이 원격 문서를 포함하지 않으므로, 로컬 상세도 원격 장애에 묶이지 않게 로컬 문서를 먼저 사용한다.
 
 ## Failure Policy
 
@@ -99,14 +99,14 @@
 목록/검색:
 
 - 로컬 문서는 독립적으로 로드한다.
-- 원격 목록 로드는 기본적으로 수행하지 않는다.
-- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`일 때만 원격 목록을 로컬 목록/검색에 합친다.
+- 원격 목록 로드는 기본적으로 수행한다.
+- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`일 때만 원격 목록을 로컬 목록/검색에서 제외한다.
 - 원격 목록 로드가 실패하면 원격 문서는 빈 목록으로 처리한다.
 - 화면은 로컬 문서만으로 계속 렌더링한다.
 
 상세:
 
-- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 원격 상세를 먼저 시도한다.
+- 기본값 또는 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 원격 상세를 먼저 시도한다.
 - 원격 상세 로드가 실패하면 동일 route의 로컬 문서를 fallback으로 사용한다.
 - `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`이면 로컬 문서를 먼저 사용하고, 로컬에 없는 route만 원격 상세를 시도한다.
 - 로컬 문서도 없으면 기존 error / not found 흐름을 따른다.
@@ -115,7 +115,7 @@
 
 - 이 정책은 다른 endpoint 후보로 fallback한다는 뜻이 아니다.
 - `401/403`은 여전히 인증/설정 문제로 보고 다른 endpoint를 계속 시도하지 않는다.
-- 원격 API URL이 설정되어 있어도 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`가 아니면 목록/검색은 원격 API를 호출하지 않는다.
+- 원격 API URL이 설정되어 있어도 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`이면 목록/검색은 원격 API를 호출하지 않는다.
 
 ## Practical Examples
 
