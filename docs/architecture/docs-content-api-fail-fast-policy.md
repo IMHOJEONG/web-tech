@@ -31,9 +31,10 @@ BLOG_CONTENT_API_TIMEOUT_MS=2500
 
 1. 원격 API가 timeout 안에 응답하면 정상 처리한다.
 2. timeout 안에 응답하지 않으면 원격 content fetch를 실패로 본다.
-3. 목록/검색은 로컬 문서만으로 렌더링한다.
-4. 상세 페이지는 로컬 문서가 있으면 원격 요청보다 로컬 문서를 먼저 사용한다.
-5. 로컬 문서가 없는 route만 원격 상세 요청을 시도한다.
+3. 목록/검색은 기본적으로 원격 API를 호출하지 않고 로컬 문서만으로 렌더링한다.
+4. `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`일 때만 목록/검색에 원격 문서를 합친다.
+5. 상세 페이지는 로컬 문서가 있으면 원격 요청보다 로컬 문서를 먼저 사용한다.
+6. 로컬 문서가 없는 route만 원격 상세 요청을 시도한다.
 
 ## Why 2500ms
 
@@ -101,7 +102,10 @@ fail-fast를 신중히 써야 하는 경우:
 
 ```env
 BLOG_CONTENT_API_TIMEOUT_MS=2500
+BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false
 ```
+
+`BLOG_CONTENT_INCLUDE_REMOTE_INDEX`가 `true`가 아니면 `/feed`, `/docs`, 검색, 허브 목록은 원격 API URL이 설정되어 있어도 원격 목록 API를 호출하지 않는다.
 
 ## Deployment Pitfall
 

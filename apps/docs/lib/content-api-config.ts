@@ -94,6 +94,13 @@ export function getContentApiTimeoutMs() {
     return parsedValue
 }
 
+export function shouldIncludeRemoteContentIndex() {
+    return (
+        process.env.BLOG_CONTENT_INCLUDE_REMOTE_INDEX?.trim().toLowerCase() ===
+        'true'
+    )
+}
+
 export function getContentApiAuthHeaders() {
     const token = process.env.BLOG_CONTENT_API_TOKEN?.trim()
 

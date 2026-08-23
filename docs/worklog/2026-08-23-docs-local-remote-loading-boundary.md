@@ -140,3 +140,22 @@ DOCS_PROD_CHECK_BASE_URL=http://localhost:3003 pnpm --filter docs check:prod-rou
 
 - 로컬 prod route check가 통과하는데 Vercel만 timeout이면, 코드의 순수 렌더 비용보다 배포 환경의 원격 API 지연, 환경 변수, stale deployment, edge/cache 상태를 우선 의심한다.
 - `/feed`, `/docs`, `/`는 원격 API 실패 후 로컬 fallback으로 내려오는 경로라 원격 endpoint가 느리게 실패하면 배포 환경에서만 지연될 수 있다.
+
+## 2026-08-23 Follow-up 6
+
+로컬 문서를 보고 있는데도 원격 API 호출 로그가 남는 원인을 정리하고 구현을 수정했다.
+
+원인:
+
+- 상세 문서 로더는 로컬 문서를 먼저 찾는다.
+- 하지만 `/`, `/feed`, `/docs`, 검색 API, 채널 허브는 `getSortedPostsData()` 또는 `getSearchData()`를 사용한다.
+- 이 함수들이 기본적으로 로컬 문서와 원격 문서를 병합하려고 원격 `/api/posts`를 호출했다.
+- 따라서 로컬 상세 자체가 원격을 호출하지 않더라도, 같은 사이트 이용 흐름의 목록/검색/허브 요청에서 원격 호출 로그가 함께 보일 수 있었다.
+
+조치:
+
+- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX`를 추가했다.
+- 기본값은 `false`다.
+- `false`이면 목록/검색/허브는 원격 API URL이 설정되어 있어도 원격 목록 API를 호출하지 않는다.
+- `true`일 때만 원격 문서를 `/feed`, `/docs`, 검색/허브 인덱스에 합친다.
+- 로컬에 없는 상세 route에 대한 원격 상세 fallback은 유지한다.

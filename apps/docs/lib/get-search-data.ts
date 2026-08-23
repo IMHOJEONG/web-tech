@@ -12,6 +12,7 @@ import {
 import type { Metadata } from '~/lib/get-document'
 import { getDocHref } from '~/lib/get-doc-route'
 import { fetchRemoteDocsData } from '~/lib/content-api'
+import { shouldIncludeRemoteContentIndex } from '~/lib/content-api-config'
 import {
     resolveLocalContentRoot,
     toLocalContentFileName,
@@ -222,11 +223,18 @@ function mergeSearchDocs(localDocs: SearchData[], remoteDocs: SearchData[]) {
     return mergedDocs
 }
 
-export async function getSearchData(keyword?: string): Promise<SearchData[]> {
-    const [localDocs, remoteDocs] = await Promise.all([
-        getLocalSearchDocs(),
-        getRemoteSearchDocs(),
-    ])
+type SearchDataOptions = {
+    includeRemote?: boolean
+}
+
+export async function getSearchData(
+    keyword?: string,
+    options: SearchDataOptions = {}
+): Promise<SearchData[]> {
+    const localDocs = await getLocalSearchDocs()
+    const includeRemote =
+        options.includeRemote ?? shouldIncludeRemoteContentIndex()
+    const remoteDocs = includeRemote ? await getRemoteSearchDocs() : []
     const docs = sortByDateDesc(mergeSearchDocs(localDocs, remoteDocs))
 
     const normalizedKeyword = keyword?.trim().toLowerCase()

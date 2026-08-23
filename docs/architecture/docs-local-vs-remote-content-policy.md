@@ -94,6 +94,8 @@
 목록/검색:
 
 - 로컬 문서는 독립적으로 로드한다.
+- 원격 목록 로드는 기본적으로 수행하지 않는다.
+- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`일 때만 원격 목록을 로컬 목록/검색에 합친다.
 - 원격 목록 로드가 실패하면 원격 문서는 빈 목록으로 처리한다.
 - 화면은 로컬 문서만으로 계속 렌더링한다.
 
@@ -106,6 +108,7 @@
 
 - 이 정책은 다른 endpoint 후보로 fallback한다는 뜻이 아니다.
 - `401/403`은 여전히 인증/설정 문제로 보고 다른 endpoint를 계속 시도하지 않는다.
+- 원격 API URL이 설정되어 있어도 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`가 아니면 목록/검색은 원격 API를 호출하지 않는다.
 
 ## Practical Examples
 

@@ -11,6 +11,7 @@ import {
     fetchRemoteDocByRoutePath,
     fetchRemoteDocsData,
 } from '~/lib/content-api'
+import { shouldIncludeRemoteContentIndex } from '~/lib/content-api-config'
 import {
     assertValidLocalDocFrontmatter,
     isPublicDocStatus,
@@ -72,7 +73,7 @@ function exploreDirectory(directory: string) {
     return files
 }
 
-function getLocalDocsData() {
+export function getLocalDocsData() {
     const fileNames = exploreDirectory(docsDirectory)
 
     const allPostsData: Partial<Metadata>[] = fileNames.flatMap((fileName) => {
@@ -187,17 +188,26 @@ async function fetchRemoteDocsDataSafely() {
     }
 }
 
-export async function getDocsData() {
-    const [localDocs, remoteDocs] = await Promise.all([
-        Promise.resolve(getLocalDocsData()),
-        fetchRemoteDocsDataSafely(),
-    ])
+type DocsDataOptions = {
+    includeRemote?: boolean
+}
+
+export async function getDocsData(options: DocsDataOptions = {}) {
+    const localDocs = getLocalDocsData()
+    const includeRemote =
+        options.includeRemote ?? shouldIncludeRemoteContentIndex()
+
+    if (!includeRemote) {
+        return localDocs
+    }
+
+    const remoteDocs = await fetchRemoteDocsDataSafely()
 
     return mergeDocsData(localDocs, remoteDocs)
 }
 
-export async function getSortedPostsData() {
-    const allPostsData = await getDocsData()
+export async function getSortedPostsData(options: DocsDataOptions = {}) {
+    const allPostsData = await getDocsData(options)
     return allPostsData.sort((a, b) => {
         if (a.date && b.date && a.date < b.date) {
             return 1
