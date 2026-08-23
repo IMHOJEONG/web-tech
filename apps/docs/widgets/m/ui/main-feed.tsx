@@ -90,6 +90,22 @@ const PLACEHOLDER_UI = {
     metric: '+12 CONTRIBUTORS',
 }
 
+function FeedSectionHeader() {
+    return (
+        <div className="space-y-2">
+            <div className="flex items-center gap-3">
+                <span className="h-8 w-2 bg-primary" />
+                <h2 className="font-display text-[1.9rem] leading-[1.08] tracking-[-0.04em] text-on-surface">
+                    최근에 올라온 글
+                </h2>
+            </div>
+            <p className="font-body text-sm tracking-[0.16em] uppercase text-on-surface-variant">
+                새로 정리한 기술 글을 모았습니다
+            </p>
+        </div>
+    )
+}
+
 function stripMarkup(text: string) {
     return text
         .replace(/<[^>]+>/g, ' ')
@@ -487,17 +503,7 @@ export function MainFeed({
                 <section className="px-4 py-12 sm:px-6 md:px-8 lg:py-16">
                     <div className="mx-auto max-w-page space-y-10 lg:space-y-12">
                         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                            <div className="space-y-2">
-                                <div className="flex items-center gap-3">
-                                    <span className="h-8 w-2 bg-primary" />
-                                    <h2 className="font-display text-[1.9rem] leading-[1.08] tracking-[-0.04em] text-on-surface">
-                                        Latest Technical Insights
-                                    </h2>
-                                </div>
-                                <p className="font-body text-sm tracking-[0.16em] uppercase text-on-surface-variant">
-                                    Precision curated knowledge
-                                </p>
-                            </div>
+                            <FeedSectionHeader />
 
                             <div className="flex flex-wrap items-center gap-3">
                                 {CATEGORY_FILTERS.map((filter) => {
@@ -652,17 +658,7 @@ export function MainFeed({
             <section className="px-4 py-12 sm:px-6 md:px-8 lg:py-16">
                 <div className="mx-auto max-w-page space-y-10 lg:space-y-12">
                     <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                        <div className="space-y-2">
-                            <div className="flex items-center gap-3">
-                                <span className="h-8 w-2 bg-primary" />
-                                <h2 className="font-display text-[1.9rem] leading-[1.08] tracking-[-0.04em] text-on-surface">
-                                    Latest Technical Insights
-                                </h2>
-                            </div>
-                            <p className="font-body text-sm tracking-[0.16em] uppercase text-on-surface-variant">
-                                Precision curated knowledge
-                            </p>
-                        </div>
+                        <FeedSectionHeader />
 
                         <div className="flex flex-wrap items-center gap-3">
                             {CATEGORY_FILTERS.map((filter) => {

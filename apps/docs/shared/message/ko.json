@@ -286,8 +286,8 @@
             "pending": "업데이트 준비 중"
         },
         "latest": {
-            "eyebrow": "최근 연결된 글",
-            "title": "최근 연결된 문서",
+            "eyebrow": "최근 글",
+            "title": "새로 정리한 문서",
             "action": "피드에서 이어보기"
         },
         "web": {
