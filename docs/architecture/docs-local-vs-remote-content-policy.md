@@ -86,6 +86,11 @@
 - 원격 문서는 최신 authoring pipeline에서 발행된 문서일 가능성이 높다.
 - 로컬 문서는 fallback / baseline 역할에 더 가깝다.
 - 중복 카드 노출을 막아 목록과 검색 결과를 안정적으로 유지한다.
+- 목록/검색에서 원격 카드가 보였는데 상세에서 로컬 본문이 열리는 불일치를 막는다.
+
+단, 이 우선순위는 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`일 때 적용한다.
+
+기본값인 `false`에서는 목록/검색이 원격 문서를 포함하지 않으므로, 로컬 상세도 원격 장애에 묶이지 않게 로컬 문서를 먼저 사용한다.
 
 ## Failure Policy
 
@@ -101,7 +106,9 @@
 
 상세:
 
-- 원격 상세 로드가 실패하면 동일 route의 로컬 문서를 찾는다.
+- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 원격 상세를 먼저 시도한다.
+- 원격 상세 로드가 실패하면 동일 route의 로컬 문서를 fallback으로 사용한다.
+- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`이면 로컬 문서를 먼저 사용하고, 로컬에 없는 route만 원격 상세를 시도한다.
 - 로컬 문서도 없으면 기존 error / not found 흐름을 따른다.
 
 주의:

@@ -12,6 +12,7 @@ import {
     fetchRemoteDocsData,
 } from '~/lib/content-api'
 import { shouldIncludeRemoteContentIndex } from '~/lib/content-api-config'
+import { selectDocumentBySourcePolicy } from '~/lib/content-source-policy'
 import {
     assertValidLocalDocFrontmatter,
     isPublicDocStatus,
@@ -221,25 +222,51 @@ export async function getDocByRoutePath(routePath: string) {
     const localDoc = getLocalDocsData().find((doc) =>
         isDocRouteMatch(doc, routePath)
     )
+    const includeRemote = shouldIncludeRemoteContentIndex()
 
-    if (localDoc) {
-        return localDoc
+    if (includeRemote) {
+        try {
+            const remoteDoc = await fetchRemoteDocByRoutePath(routePath)
+
+            if (remoteDoc) {
+                return remoteDoc
+            }
+        } catch (error) {
+            console.warn(
+                '[docs] Remote document detail unavailable. Trying local document fallback.',
+                routePath,
+                error
+            )
+        }
+
+        return selectDocumentBySourcePolicy({
+            includeRemote,
+            localDoc,
+            remoteDoc: null,
+        })
     }
 
-    let remoteDoc: Partial<Metadata> | null = null
+    if (localDoc) {
+        return selectDocumentBySourcePolicy({
+            includeRemote,
+            localDoc,
+            remoteDoc: null,
+        })
+    }
 
     try {
-        remoteDoc = await fetchRemoteDocByRoutePath(routePath)
+        return selectDocumentBySourcePolicy({
+            includeRemote,
+            localDoc,
+            remoteDoc: await fetchRemoteDocByRoutePath(routePath),
+        })
     } catch (error) {
         console.warn(
-            '[docs] Remote document detail unavailable. Trying local document fallback.',
+            '[docs] Remote document detail unavailable.',
             routePath,
             error
         )
     }
 
-    if (remoteDoc) {
-        return remoteDoc
-    }
     return null
 }

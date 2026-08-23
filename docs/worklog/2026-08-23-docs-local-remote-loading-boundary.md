@@ -31,8 +31,9 @@
 
 상세:
 
-- 동일 route의 로컬 문서가 있으면 원격 요청보다 로컬 문서를 먼저 사용한다.
-- 로컬 문서가 없는 route만 원격 상세 요청을 시도한다.
+- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 동일 route에서 원격 문서를 먼저 사용한다.
+- 원격 상세 요청이 실패하면 동일 route의 로컬 문서를 fallback으로 사용한다.
+- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`이면 로컬 문서를 먼저 사용하고, 로컬 문서가 없는 route만 원격 상세 요청을 시도한다.
 - 로컬 문서도 없으면 기존 오류 또는 not found 흐름을 따른다.
 
 ## 주의
@@ -45,7 +46,7 @@
 
 Vercel runtime에서 원격 content API 530 이후 10초 timeout이 발생할 수 있어 추가 조정했다.
 
-- 상세 route는 로컬 문서를 먼저 찾고, 로컬 문서가 없을 때만 원격 상세 요청을 시도한다.
+- 기본 모드에서는 상세 route가 로컬 문서를 먼저 찾고, 로컬 문서가 없을 때만 원격 상세 요청을 시도한다.
 - 원격 content API 요청은 `BLOG_CONTENT_API_TIMEOUT_MS` 기준으로 fail-fast 한다.
 - 기본 timeout은 `2500ms`다.
 
@@ -180,3 +181,19 @@ DOCS_PROD_CHECK_BASE_URL=http://localhost:3003 pnpm --filter docs check:prod-rou
 후속 문서:
 
 - `docs/architecture/docs-local-mdx-shiki-timeout-analysis.md`
+
+## 2026-08-23 Follow-up 8
+
+목록/검색과 상세 route의 local / remote 우선순위가 다를 수 있는 문제를 정리했다.
+
+문제:
+
+- 목록/검색 병합은 같은 공개 route에서 원격 문서를 우선했다.
+- 상세 route는 로컬 문서를 먼저 찾고, 있으면 원격 상세를 시도하지 않았다.
+- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`일 때 목록에는 원격 제목/요약이 보이지만, 클릭하면 로컬 본문이 열릴 수 있었다.
+
+조치:
+
+- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 상세 route도 원격 문서를 먼저 사용한다.
+- 원격 상세가 실패하거나 없으면 동일 route의 로컬 문서로 fallback한다.
+- 기본값인 `false`에서는 로컬 상세 우선 정책을 유지해 원격 장애가 로컬 문서 접근을 흔들지 않게 한다.

@@ -33,8 +33,9 @@ BLOG_CONTENT_API_TIMEOUT_MS=2500
 2. timeout 안에 응답하지 않으면 원격 content fetch를 실패로 본다.
 3. 목록/검색은 기본적으로 원격 API를 호출하지 않고 로컬 문서만으로 렌더링한다.
 4. `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`일 때만 목록/검색에 원격 문서를 합친다.
-5. 상세 페이지는 로컬 문서가 있으면 원격 요청보다 로컬 문서를 먼저 사용한다.
-6. 로컬 문서가 없는 route만 원격 상세 요청을 시도한다.
+5. `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 상세 페이지도 원격 문서를 먼저 사용한다.
+6. 원격 상세가 실패하거나 없으면 동일 route의 로컬 문서를 fallback으로 사용한다.
+7. `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`이면 로컬 문서를 먼저 사용하고, 로컬 문서가 없는 route만 원격 상세 요청을 시도한다.
 
 ## Why 2500ms
 
@@ -90,7 +91,8 @@ fail-fast를 신중히 써야 하는 경우:
 - `apps/docs/lib/content-api.ts`
   - 목록 API와 본문 API 요청에 `timeout` 적용
 - `apps/docs/lib/get-document.ts`
-  - 상세 route에서 로컬 문서 우선 조회
+  - `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`일 때 상세 route도 원격 우선, 실패 시 로컬 fallback
+  - `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`일 때 로컬 문서 우선, 로컬에 없는 route만 원격 상세 fallback
 - `apps/docs/lib/get-search-data.ts`
   - 검색 index에서 원격 실패 시 로컬 검색 문서를 사용
 - `apps/docs/lib/get-category.ts`
@@ -123,6 +125,9 @@ BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false
 - 로컬 문서를 사용할 수 있는데도 원격 `/api/posts`를 호출한다.
 - 원격 API가 530 또는 지연 상태이면 상세 페이지가 Vercel runtime timeout에 묶일 수 있다.
 - 로그에는 원격 상세 fallback 경고가 남지만 실제 원인은 로컬 문서 탐색 실패일 수 있다.
+
+`BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`를 켠 운영 환경에서는 위 로그가 정책상 정상일 수도 있다.
+이 모드에서는 목록/검색/상세의 정합성을 위해 같은 route가 겹칠 때 원격 문서를 우선한다.
 
 ## Pre-Deploy Route Timing Check
 
