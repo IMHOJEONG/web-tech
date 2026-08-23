@@ -90,12 +90,30 @@ fail-fast를 신중히 써야 하는 경우:
   - 목록 API와 본문 API 요청에 `timeout` 적용
 - `apps/docs/lib/get-document.ts`
   - 상세 route에서 로컬 문서 우선 조회
+  - 모노레포/Vercel 실행 위치 차이를 고려해 `data`와 `apps/docs/data`를 모두 로컬 문서 루트 후보로 본다.
 
 환경 변수:
 
 ```env
 BLOG_CONTENT_API_TIMEOUT_MS=2500
 ```
+
+## Deployment Pitfall
+
+로컬 문서 fallback이 있어도 배포 환경에서 runtime timeout이 계속 발생하면, 먼저 로컬 문서 루트가 올바르게 잡히는지 확인한다.
+
+모노레포에서는 실행 위치가 환경마다 달라질 수 있다.
+
+- 로컬 `apps/docs` 기준 실행: `process.cwd()/data`
+- Vercel 또는 repo root 기준 실행: `process.cwd()/apps/docs/data`
+
+로컬 문서 루트를 찾지 못하면 `/docs/web/...`처럼 로컬에 있는 상세 route도 원격 상세 조회로 떨어질 수 있다.
+
+이 경우 fail-fast timeout 이전에 다음 문제가 발생한다.
+
+- 로컬 문서를 사용할 수 있는데도 원격 `/api/posts`를 호출한다.
+- 원격 API가 530 또는 지연 상태이면 상세 페이지가 Vercel runtime timeout에 묶일 수 있다.
+- 로그에는 원격 상세 fallback 경고가 남지만 실제 원인은 로컬 문서 탐색 실패일 수 있다.
 
 ## Related Docs
 

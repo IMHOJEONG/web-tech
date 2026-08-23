@@ -48,3 +48,19 @@ Vercel runtime에서 원격 content API 530 이후 10초 timeout이 발생할 �
 - 상세 route는 로컬 문서를 먼저 찾고, 로컬 문서가 없을 때만 원격 상세 요청을 시도한다.
 - 원격 content API 요청은 `BLOG_CONTENT_API_TIMEOUT_MS` 기준으로 fail-fast 한다.
 - 기본 timeout은 `2500ms`다.
+
+## 2026-08-23 Follow-up 2
+
+fail-fast 적용 후에도 상세 페이지에서 Vercel runtime timeout이 남을 수 있는 원인을 점검했다.
+
+원인은 원격 API 자체보다 로컬 문서 탐색 기준일 수 있다.
+
+- 기존 로컬 문서 루트는 `process.cwd()/data`만 사용했다.
+- 모노레포 배포 환경에서는 `process.cwd()`가 repo root로 잡힐 수 있다.
+- 이 경우 실제 문서는 `apps/docs/data` 아래에 있어도 로컬 문서로 감지되지 않는다.
+- 로컬 문서가 감지되지 않으면 `/docs/web/...` 상세 route가 원격 상세 조회로 떨어지고, 원격 API 장애가 다시 Vercel timeout으로 이어질 수 있다.
+
+조치:
+
+- `apps/docs/lib/get-document.ts`에서 로컬 문서 루트 후보를 `data`, `apps/docs/data`로 확장했다.
+- 로컬 문서 상대경로는 실제 data 디렉터리의 부모 기준으로 계산해 `data/v8/...` 매핑을 유지했다.

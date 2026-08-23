@@ -44,7 +44,21 @@ export interface Metadata {
     status?: EditorialStatus
 }
 
-const docsDirectory = path.join(process.cwd(), 'data')
+function resolveDocsDirectory() {
+    const fallbackDirectory = path.join(process.cwd(), 'data')
+    const candidates = [
+        fallbackDirectory,
+        path.join(process.cwd(), 'apps/docs/data'),
+    ]
+
+    return (
+        candidates.find((candidate) => fs.existsSync(candidate)) ??
+        fallbackDirectory
+    )
+}
+
+const docsDirectory = resolveDocsDirectory()
+const docsRootDirectory = path.dirname(docsDirectory)
 
 function exploreDirectory(directory: string) {
     let files: string[] = []
@@ -89,7 +103,7 @@ function getLocalDocsData() {
         const content = String(vfile)
         // 프로젝트 루트 기준의 상대경로(확장자 없는)만 추출
         const relPathFromRoot = path
-            .relative(process.cwd(), fileName)
+            .relative(docsRootDirectory, fileName)
             .replace(/\.(mdx|md)$/i, '')
         const normalizedFileName = normalizeDocPath(relPathFromRoot)
         const fallbackSlug =
