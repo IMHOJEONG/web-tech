@@ -2,6 +2,7 @@ import { cn } from '@web-tech/ui/lib/utils'
 import type { MDXComponents } from 'mdx/types'
 import Image, { type ImageProps } from 'next/image'
 import { isValidElement, type ReactNode } from 'react'
+import { highlightCode } from '~/feature/code-block/lib/highlight-code'
 import { CodeCopyButton } from '~/feature/code-block/ui/code-copy-button'
 import { slugifyHeading } from '~/lib/slugify-heading'
 
@@ -120,17 +121,22 @@ export const components = {
             )
         }
 
+        const code = getCodeText(children)
+        const language = getCodeLanguage(children)
+
         return (
             <figure className="mdx-code-frame">
-                <CodeCopyButton
-                    code={getCodeText(children)}
-                    className="mdx-code-copy-button"
-                />
+                <CodeCopyButton code={code} className="mdx-code-copy-button" />
                 <pre {...props} className={cn('mdx-code-block', commonCss)}>
-                    {children}
+                    <code
+                        className="mdx-code-block__code"
+                        dangerouslySetInnerHTML={{
+                            __html: highlightCode(code, language),
+                        }}
+                    />
                 </pre>
                 <figcaption className="mdx-code-frame__language">
-                    {getCodeLanguage(children)}
+                    {language}
                 </figcaption>
             </figure>
         )
