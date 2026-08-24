@@ -451,6 +451,7 @@
             "titleAccentOne": "하나의",
             "titleAccentTwo": "흐름으로 설계합니다",
             "description": "HeapForge는 웹 엔지니어링, 모바일 제품 경험, UI/UX 구조를 함께 다루는 기술 아카이브입니다. 구현과 설계를 따로 떼어 보지 않고, 실제로 오래 쓰이는 구조를 기록합니다.",
+            "asideTitle": "HeapForge 노트",
             "missionLabel": "// 구현과 설계를 잇는 기록",
             "establishedLabel": "// 2024년부터 쌓아온 아카이브"
         },
