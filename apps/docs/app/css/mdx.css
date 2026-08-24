@@ -146,8 +146,46 @@
     font-size: 0.95rem;
 }
 
-.mdx-wrapper pre:not(.shiki),
-.mdx-code-block {
+.mdx-code-frame {
+    position: relative;
+    margin: 1.75rem 0;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--primary) 14%, transparent);
+    border-radius: var(--radius-xl);
+    background: var(--hf-bg-deep);
+    box-shadow: var(--hf-shadow-deep);
+}
+
+.mdx-code-copy-button {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
+    opacity: 0.78;
+    backdrop-filter: blur(10px);
+}
+
+.mdx-code-copy-button:hover,
+.mdx-code-copy-button:focus-visible {
+    opacity: 1;
+}
+
+.mdx-code-frame__language {
+    position: absolute;
+    right: 0.85rem;
+    bottom: 0.7rem;
+    z-index: 1;
+    color: color-mix(in srgb, white 30%, transparent);
+    font-family: var(--font-display);
+    font-size: 0.52rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    pointer-events: none;
+    text-transform: uppercase;
+}
+
+.mdx-wrapper pre:not(.shiki):not(.mdx-code-block) {
     background: var(--hf-bg-deep);
     color: color-mix(in srgb, white 92%, var(--primary) 8%);
     border: 1px solid color-mix(in srgb, var(--primary) 14%, transparent);
@@ -159,6 +197,17 @@
     font-family: var(--font-mono);
     font-size: 0.95rem;
     line-height: 1.6;
+}
+
+.mdx-code-block {
+    margin: 0;
+    overflow-x: auto;
+    background: transparent;
+    color: color-mix(in srgb, white 92%, var(--primary) 8%);
+    padding: 1.45rem 1.35rem 2.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    line-height: 1.7;
 }
 
 .mdx-wrapper pre:not(.shiki) code,

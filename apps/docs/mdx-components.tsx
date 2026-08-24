@@ -1,12 +1,45 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import type { MDXComponents } from 'mdx/types'
 import Image, { type ImageProps } from 'next/image'
+import { isValidElement, type ReactNode } from 'react'
+import { CodeCopyButton } from '~/feature/code-block/ui/code-copy-button'
 import { slugifyHeading } from '~/lib/slugify-heading'
 
 export const commonCss = [
     'dark:text-[var(--hf-text-primary)]',
     'text-[var(--hf-text-primary)]',
 ]
+
+function getCodeText(node: ReactNode): string {
+    if (typeof node === 'string' || typeof node === 'number') {
+        return String(node)
+    }
+
+    if (Array.isArray(node)) {
+        return node.map(getCodeText).join('')
+    }
+
+    if (isValidElement<{ children?: ReactNode }>(node)) {
+        return getCodeText(node.props.children)
+    }
+
+    return ''
+}
+
+function getCodeLanguage(node: ReactNode): string {
+    if (!isValidElement<{ className?: string; children?: ReactNode }>(node)) {
+        return 'CODE'
+    }
+
+    const className = node.props.className ?? ''
+    const language = className
+        .split(/\s+/)
+        .find((value) => value.startsWith('language-'))
+        ?.replace('language-', '')
+        .trim()
+
+    return language ? language.toUpperCase() : 'CODE'
+}
 
 export const components = {
     h1: ({ children }) => (
@@ -78,17 +111,30 @@ export const components = {
         )
     },
 
-    pre: ({ children, className, ...props }) => (
-        <pre
-            {...props}
-            className={cn(
-                className?.includes('shiki') ? className : 'mdx-code-block',
-                !className?.includes('shiki') && commonCss
-            )}
-        >
-            {children}
-        </pre>
-    ),
+    pre: ({ children, className, ...props }) => {
+        if (className?.includes('shiki')) {
+            return (
+                <pre {...props} className={className}>
+                    {children}
+                </pre>
+            )
+        }
+
+        return (
+            <figure className="mdx-code-frame">
+                <CodeCopyButton
+                    code={getCodeText(children)}
+                    className="mdx-code-copy-button"
+                />
+                <pre {...props} className={cn('mdx-code-block', commonCss)}>
+                    {children}
+                </pre>
+                <figcaption className="mdx-code-frame__language">
+                    {getCodeLanguage(children)}
+                </figcaption>
+            </figure>
+        )
+    },
 
     img: (props) => (
         <Image
