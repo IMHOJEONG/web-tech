@@ -128,7 +128,7 @@ export function HubPage({
                                     <Link
                                         href={doc.href ?? getDocHref(doc)}
                                         key={doc.id}
-                                        className="ds-card bg-surface-container-low p-3.5"
+                                        className="group ds-card bg-surface-container-low p-3.5"
                                     >
                                         <MainCard doc={doc} />
                                     </Link>
