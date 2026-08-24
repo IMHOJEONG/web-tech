@@ -237,6 +237,26 @@ const renderedArticle = await renderArticleContent(target, {
 - syntax highlight는 사용자 경험 개선 요소지만, 페이지 전체 timeout을 감수할 만큼 핵심 기능은 아니다.
 - 코드 하이라이팅이 꼭 필요하면 build-time highlighting 또는 remote pre-rendered HTML sidecar로 옮기는 편이 안전하다.
 
+## Local Code Block UX
+
+Shiki를 끈다고 해서 로컬 코드 블록을 plain text 상태로 방치하지는 않는다.
+
+로컬 MDX 상세는 가벼운 코드 블록 렌더러를 사용한다.
+
+- 코드 블록 프레임은 CSS 기반으로 렌더링한다.
+- 복사 버튼은 작은 client component로 분리한다.
+- 언어 라벨은 헤더가 아니라 우측 하단 메타 텍스트로 표시한다.
+- syntax highlighting은 lightweight highlighter로 처리한다.
+- 하이라이트 출력은 원본 코드를 HTML escape한 뒤 제한된 token span만 삽입한다.
+
+이 기준은 request-time Shiki를 다시 켜지 않으면서도 최소한의 코드 읽기 경험을 제공하기 위한 절충안이다.
+
+정교한 VS Code 수준의 highlighting이 필요하면 다음 경로를 우선 검토한다.
+
+- build-time highlighting
+- remote pre-rendered HTML sidecar
+- 정적 HTML cache
+
 ## Verification Commands
 
 배포 URL 단건 확인:
@@ -270,4 +290,5 @@ DOCS_PROD_CHECK_BASE_URL=http://localhost:3003 pnpm --filter docs check:prod-rou
 - `docs/architecture/docs-local-vs-remote-content-policy.md`
 - `docs/architecture/docs-content-api-fail-fast-policy.md`
 - `docs/architecture/docs-remote-code-highlighting-sidecar.md`
+- `docs/worklog/2026-08-24-docs-lightweight-code-block-highlighting.md`
 - `039ffe6 fix(docs-content): skip shiki for local docs detail`
