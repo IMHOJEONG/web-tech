@@ -39,19 +39,19 @@ export function HubPage({
     emptyDescription,
 }: HubPageProps) {
     return (
-        <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-            <div className="space-y-8">
-                <section className="ds-panel relative overflow-hidden p-6 sm:p-8">
+        <main className="docs-shell px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+            <div className="space-y-7">
+                <section className="ds-panel relative overflow-hidden p-5 sm:p-6 lg:p-7">
                     <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.12),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(139,92,246,0.14),transparent_34%)]" />
-                    <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(300px,0.7fr)]">
-                        <div className="space-y-4">
+                    <div className="relative grid gap-5 lg:grid-cols-[minmax(0,1.25fr)_minmax(260px,0.65fr)] lg:items-end">
+                        <div className="space-y-3">
                             <p className="font-display text-label-md uppercase text-primary">
                                 {eyebrow}
                             </p>
-                            <h1 className="font-display text-headline-xl text-on-surface">
+                            <h1 className="max-w-4xl font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl lg:text-[2.75rem]">
                                 {title}
                             </h1>
-                            <p className="max-w-2xl text-body-lg text-on-surface-variant">
+                            <p className="max-w-2xl text-sm leading-7 text-on-surface-variant sm:text-base">
                                 {description}
                             </p>
                         </div>
@@ -59,12 +59,12 @@ export function HubPage({
                             {stats.map((stat) => (
                                 <div
                                     key={stat.label}
-                                    className="ds-panel-muted p-4"
+                                    className="ds-panel-muted p-3.5"
                                 >
                                     <p className="text-xs uppercase tracking-[0.08em] text-outline">
                                         {stat.label}
                                     </p>
-                                    <p className="mt-2 font-display text-2xl font-semibold text-on-surface">
+                                    <p className="mt-1.5 font-display text-xl font-semibold text-on-surface">
                                         {stat.value}
                                     </p>
                                 </div>
@@ -118,7 +118,7 @@ export function HubPage({
                     </div>
 
                     {docs.length > 0 ? (
-                        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
+                        <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-3">
                             {docs.map((doc) => {
                                 if (!doc.slug || !doc.id) {
                                     return null
@@ -128,7 +128,7 @@ export function HubPage({
                                     <Link
                                         href={doc.href ?? getDocHref(doc)}
                                         key={doc.id}
-                                        className="ds-card bg-surface-container-low p-4"
+                                        className="ds-card bg-surface-container-low p-3.5"
                                     >
                                         <MainCard doc={doc} />
                                     </Link>
