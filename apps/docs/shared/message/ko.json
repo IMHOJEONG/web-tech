@@ -236,6 +236,8 @@
             "eyebrow": "Search Results",
             "title": "\"{keyword}\"에 대한 검색 결과",
             "description": "`/docs`는 큐레이션 피드가 아니라 문서 인덱스 컨텍스트입니다. 제목, 요약, 분류, 본문을 기준으로 관련 문서를 정리했습니다.",
+            "placeholder": "React, V8, ARIA...",
+            "submit": "검색",
             "countLabel": "{count} results",
             "matchingEyebrow": "Matching Documents",
             "matchingTitle": "검색과 가장 가까운 문서",
@@ -244,7 +246,9 @@
         "index": {
             "eyebrow": "Document Index",
             "title": "모든 문서를 빠르게 찾는 인덱스",
-            "description": "`/docs`는 `feed`처럼 큐레이션을 보여주는 화면이 아니라, 전체 문서를 빠르게 스캔하고 섹션 탐색과 검색을 시작하는 컨텍스트입니다."
+            "description": "`/docs`는 `feed`처럼 큐레이션을 보여주는 화면이 아니라, 전체 문서를 빠르게 스캔하고 섹션 탐색과 검색을 시작하는 컨텍스트입니다.",
+            "placeholder": "React, V8, ARIA...",
+            "submit": "검색"
         },
         "stats": {
             "totalDocs": "Total Docs",
@@ -254,9 +258,10 @@
         },
         "sections": {
             "eyebrow": "Section Overview",
-            "title": "문서가 모여 있는 섹션",
+            "title": "주제별 문서 모음",
             "toCategory": "category 보기",
-            "documentCount": "문서 {count}개"
+            "documentCount": "문서 {count}개",
+            "latestPrefix": "최근"
         },
         "sectionLabels": {
             "web": "Web",
@@ -275,7 +280,11 @@
         "allDocuments": {
             "eyebrow": "All Documents",
             "title": "전체 문서 목록",
-            "toFeed": "큐레이션 피드로 이동"
+            "toFeed": "큐레이션 피드로 이동",
+            "pageSummary": "{start}-{end} / 총 {total}개",
+            "previous": "이전",
+            "next": "다음",
+            "paginationAriaLabel": "전체 문서 페이지 이동"
         }
     },
     "channelHub": {

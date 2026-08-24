@@ -236,6 +236,8 @@
             "eyebrow": "Search Results",
             "title": "Results for \"{keyword}\"",
             "description": "`/docs` is not a curated feed. It is the document index context, organized around title, summary, taxonomy, and content matches.",
+            "placeholder": "React, V8, ARIA...",
+            "submit": "Search",
             "countLabel": "{count} results",
             "matchingEyebrow": "Matching Documents",
             "matchingTitle": "Documents closest to your query",
@@ -244,7 +246,9 @@
         "index": {
             "eyebrow": "Document Index",
             "title": "A faster index for every document",
-            "description": "`/docs` is the place to scan the full archive, move across sections, and start from search instead of curation."
+            "description": "`/docs` is the place to scan the full archive, move across sections, and start from search instead of curation.",
+            "placeholder": "React, V8, ARIA...",
+            "submit": "Search"
         },
         "stats": {
             "totalDocs": "Total Docs",
@@ -254,9 +258,10 @@
         },
         "sections": {
             "eyebrow": "Section Overview",
-            "title": "Sections where documents live",
+            "title": "Documents by topic",
             "toCategory": "Browse category",
-            "documentCount": "{count} documents"
+            "documentCount": "{count} documents",
+            "latestPrefix": "Latest"
         },
         "sectionLabels": {
             "web": "Web",
@@ -275,7 +280,11 @@
         "allDocuments": {
             "eyebrow": "All Documents",
             "title": "Full document list",
-            "toFeed": "Go to curated feed"
+            "toFeed": "Go to curated feed",
+            "pageSummary": "{start}-{end} of {total} documents",
+            "previous": "Previous",
+            "next": "Next",
+            "paginationAriaLabel": "All documents pagination"
         }
     },
     "channelHub": {

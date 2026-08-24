@@ -8,12 +8,23 @@ import { getSearchData } from '~/lib/get-search-data'
 import { DocsIndex } from '~/widgets/docs-index/ui/docs-index'
 
 type Props = {
-    searchParams: { q?: string }
+    searchParams: { page?: string; q?: string }
+}
+
+function parsePageParam(page?: string) {
+    const pageNumber = Number.parseInt(page ?? '', 10)
+
+    if (!Number.isFinite(pageNumber) || pageNumber < 1) {
+        return 1
+    }
+
+    return pageNumber
 }
 
 export default async function Page({ searchParams }: Props) {
-    const { q } = await searchParams
+    const { page, q } = await searchParams
     const keyword = q?.trim() ?? ''
+    const currentPage = parsePageParam(page)
     const docs = keyword ? [] : await getSearchData()
     const searchResults = keyword ? await getSearchData(keyword) : []
     const pageState = resolveDocsSearchPageState({
@@ -47,6 +58,7 @@ export default async function Page({ searchParams }: Props) {
         case 'index':
             return (
                 <DocsIndex
+                    currentPage={currentPage}
                     docs={pageState.docs}
                     recommendations={RECOMMENDED_SEARCH_TERMS}
                 />
@@ -61,5 +73,11 @@ export default async function Page({ searchParams }: Props) {
             )
     }
 
-    return <DocsIndex docs={docs} recommendations={RECOMMENDED_SEARCH_TERMS} />
+    return (
+        <DocsIndex
+            currentPage={currentPage}
+            docs={docs}
+            recommendations={RECOMMENDED_SEARCH_TERMS}
+        />
+    )
 }
