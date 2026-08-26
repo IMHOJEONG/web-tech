@@ -103,6 +103,9 @@
   - mobile drawer
   - bottom nav
   - article/feed spacing
+  - 브라우저/기기 점검 체크리스트 추가 완료
+  - 정적 breakpoint 감사 후보 식별 완료
+  - 기준 문서: `docs/runbooks/docs-responsive-browser-device-checklist.md`
 - [-] `P1` 루트 `/` 화면을 `141:2 Landing Page - HEAPFORGE` 기준으로 재구성한다.
   - 현재 `HeroSection` 단일 구성을 landing page 섹션 구조로 확장
   - `Hero Section`, `Thematic Foundations`, `Latest Notes`를 별도 위젯/엔티티로 분리 검토
