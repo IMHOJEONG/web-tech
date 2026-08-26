@@ -113,8 +113,8 @@
   - 기준 문서: `docs/architecture/docs-feed-filter-policy.md`
 - [-] `P1` `/docs`를 검색/색인 중심 화면으로 점진 개선한다.
   - 1차: compact search panel, 추천 키워드, 섹션 요약, row형 문서 카드, 페이지네이션 반영 완료
-  - 2차: `section/source/sort` query string 기반 필터와 정렬 UI 반영 중
-  - 3차: 검색 결과 화면에도 필터 적용 범위를 확장할지 검토
+  - 2차: `section/source/sort` query string 기반 필터와 정렬 UI, 필터 empty state, 카드 메타 정보 반영 완료
+  - 3차: 검색 결과 화면에도 필터 적용 범위를 확장할지 검토하고 모바일 터치 사용성을 점검
   - 목표: `/feed`는 발견/큐레이션, `/docs`는 빠른 검색/탐색으로 역할을 분리
 - [x] `P1` footer 링크를 실제 라우트 또는 외부 링크와 연결한다.
   - `PRIVACY`

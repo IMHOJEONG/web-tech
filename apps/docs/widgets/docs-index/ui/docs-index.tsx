@@ -97,6 +97,10 @@ function getDocsPageHref(page: number, controls: DocsIndexControls) {
     })
 }
 
+function getDocSourceMessageKey(source: SearchData['contentSource']) {
+    return source === 'remote' ? 'remote' : 'local'
+}
+
 function DocsIndexControlPill({
     active,
     href,
@@ -119,6 +123,41 @@ function DocsIndexControlPill({
         >
             {children}
         </Link>
+    )
+}
+
+async function DocsIndexEmptyState({
+    controls,
+}: {
+    controls: DocsIndexControls
+}) {
+    const t = await getTranslations('docsIndex')
+
+    return (
+        <div className="rounded-3xl border border-dashed border-border bg-surface-container-lowest px-5 py-8 text-center">
+            <p className="text-xs font-semibold tracking-[0.18em] text-outline uppercase">
+                {t('emptyFiltered.eyebrow')}
+            </p>
+            <h3 className="mt-3 text-xl font-bold tracking-tight text-on-surface">
+                {t('emptyFiltered.title')}
+            </h3>
+            <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-on-surface-variant">
+                {t('emptyFiltered.description')}
+            </p>
+            <Link
+                href={getDocsIndexHref({
+                    controls,
+                    overrides: {
+                        section: 'all',
+                        source: 'all',
+                        sort: 'latest',
+                    },
+                })}
+                className="mt-5 inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary-fixed"
+            >
+                {t('emptyFiltered.reset')}
+            </Link>
+        </div>
     )
 }
 
@@ -201,6 +240,7 @@ async function DocsIndexCard({
 }) {
     const t = await getTranslations('docsIndex')
     const resultItem = buildSearchResultItem(doc, keyword)
+    const visibleTags = doc.tags?.slice(0, 3) ?? []
 
     return (
         <Link
@@ -221,6 +261,33 @@ async function DocsIndexCard({
                                 </span>
                             </>
                         )}
+                    </div>
+                    <div className="flex flex-wrap items-center gap-1.5 text-xs text-outline">
+                        <span className="rounded-full border border-border bg-surface-container px-2.5 py-1 font-medium text-on-surface-variant">
+                            {t(
+                                `card.sources.${getDocSourceMessageKey(doc.contentSource)}`
+                            )}
+                        </span>
+                        {doc.readMinutes && (
+                            <span className="rounded-full border border-border bg-surface-container px-2.5 py-1 font-medium text-on-surface-variant">
+                                {t('card.readMinutes', {
+                                    count: doc.readMinutes,
+                                })}
+                            </span>
+                        )}
+                        {doc.topicLabel && (
+                            <span className="rounded-full border border-border bg-surface-container px-2.5 py-1 font-medium text-on-surface-variant">
+                                {doc.topicLabel}
+                            </span>
+                        )}
+                        {visibleTags.map((tag) => (
+                            <span
+                                key={tag}
+                                className="rounded-full border border-border bg-surface-container-low px-2.5 py-1 font-medium text-outline"
+                            >
+                                #{tag}
+                            </span>
+                        ))}
                     </div>
                     <h3
                         className="text-base font-semibold tracking-[-0.02em] text-on-surface transition-colors group-hover:text-primary sm:text-lg [&_.search-highlight]:rounded-sm [&_.search-highlight]:bg-primary-container/70 [&_.search-highlight]:px-1 [&_.search-highlight]:py-px [&_.search-highlight]:font-medium [&_.search-highlight]:text-on-primary-container dark:[&_.search-highlight]:bg-primary/18 dark:[&_.search-highlight]:text-primary-fixed"
@@ -351,7 +418,7 @@ export async function DocsIndex({
         allDocumentsStartIndex + ALL_DOCS_PAGE_SIZE
     )
     const allDocumentsRangeStart =
-        docs.length === 0 ? 0 : allDocumentsStartIndex + 1
+        visibleDocs.length === 0 ? 0 : allDocumentsStartIndex + 1
     const allDocumentsRangeEnd = Math.min(
         visibleDocs.length,
         allDocumentsStartIndex + ALL_DOCS_PAGE_SIZE
@@ -525,11 +592,15 @@ export async function DocsIndex({
                             {t('allDocuments.toFeed')}
                         </Link>
                     </div>
-                    <div className="grid grid-cols-1 gap-3">
-                        {paginatedDocs.map((doc) => (
-                            <DocsIndexCard key={doc.id} doc={doc} />
-                        ))}
-                    </div>
+                    {visibleDocs.length === 0 ? (
+                        <DocsIndexEmptyState controls={resolvedControls} />
+                    ) : (
+                        <div className="grid grid-cols-1 gap-3">
+                            {paginatedDocs.map((doc) => (
+                                <DocsIndexCard key={doc.id} doc={doc} />
+                            ))}
+                        </div>
+                    )}
                     {allDocumentsTotalPages > 1 && (
                         <nav
                             aria-label={t('allDocuments.paginationAriaLabel')}

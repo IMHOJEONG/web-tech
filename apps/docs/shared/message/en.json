@@ -230,7 +230,12 @@
     },
     "docsIndex": {
         "card": {
-            "open": "Open"
+            "open": "Open",
+            "readMinutes": "{count} min read",
+            "sources": {
+                "local": "Local",
+                "remote": "Remote"
+            }
         },
         "search": {
             "eyebrow": "Search Results",
@@ -277,6 +282,12 @@
                 "title": "Title",
                 "section": "Section"
             }
+        },
+        "emptyFiltered": {
+            "eyebrow": "No Documents",
+            "title": "No documents match these filters",
+            "description": "Try broadening the selected section or source. Remote documents may temporarily disappear when the content server is unavailable.",
+            "reset": "View all documents"
         },
         "sections": {
             "eyebrow": "Section Overview",

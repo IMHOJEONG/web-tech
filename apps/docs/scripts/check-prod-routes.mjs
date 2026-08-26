@@ -7,6 +7,7 @@ const DEFAULT_ROUTES = [
     '/feed',
     '/docs',
     '/docs?q=react',
+    '/docs?section=web&source=local&sort=title',
     '/robots.txt',
     '/sitemap.xml',
     '/web',

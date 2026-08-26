@@ -37,6 +37,9 @@ export type SearchData = {
     href: string
     section: string
     contentSource: ContentSource
+    readMinutes?: number
+    topicLabel?: string
+    tags?: string[]
 }
 
 const LOCAL_SEARCH_PATTERNS = ['data/**/*.{md,mdx}', 'category/**/*.{md,mdx}']
@@ -154,6 +157,9 @@ async function parseLocalSearchFile(
         href: inferSearchHref(normalizedFileName, slug),
         section: inferSearchSection(normalizedFileName),
         contentSource: 'local',
+        readMinutes: frontmatter.readMinutes,
+        topicLabel: frontmatter.topicLabel,
+        tags: frontmatter.tags,
     }
 }
 
@@ -182,6 +188,9 @@ function normalizeRemoteSearchDoc(doc: Partial<Metadata>): SearchData | null {
         href,
         section: inferSearchSection(fileName),
         contentSource: 'remote',
+        readMinutes: doc.readMinutes,
+        topicLabel: doc.topicLabel,
+        tags: doc.tags,
     }
 }
 

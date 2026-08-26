@@ -16,10 +16,11 @@
   - 예: `/docs?section=web&source=local&sort=title`
 - 검색 결과는 당장 정렬을 덮어쓰지 않는다. `/docs?q=...`는 관련도 순서가 더 중요하기 때문이다.
 - `SearchData`에 `contentSource`를 포함해 local/remote 문서 출처를 UI에서 구분할 수 있게 했다.
+- 문서 카드에 출처, 읽기 시간, topic label, tags를 보조 메타로 노출했다.
+- 필터 결과가 0개일 때 전용 empty state를 보여주고 전체 문서로 돌아갈 수 있게 했다.
+- production route check 기본 목록에 대표 필터 URL을 추가했다.
 
 ## 다음 단계
 
 - 검색 결과 화면에도 섹션/source 필터를 확장할지 결정한다.
-- 문서 카드에 `local/remote` 배지를 노출할지 검토한다.
-- 필터 결과가 0개일 때 전용 empty state를 추가한다.
 - 페이지네이션과 필터 조합의 모바일 터치 영역을 실제 기기에서 점검한다.
