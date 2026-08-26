@@ -45,6 +45,7 @@ async function getWebCategoryDocs() {
                     thumbnail: doc.thumbnail ?? null,
                     href: `/category/fe/${topic.url}/${doc.slug}`,
                     section: 'Web',
+                    contentSource: 'local' as const,
                 }))
         })
     )

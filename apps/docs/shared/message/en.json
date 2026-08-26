@@ -256,6 +256,28 @@
             "latestUpdate": "Latest Update",
             "pending": "Update pending"
         },
+        "filters": {
+            "eyebrow": "Browse Controls",
+            "title": "{count} documents match this view",
+            "sections": {
+                "all": "All",
+                "web": "Web",
+                "uiux": "UI/UX",
+                "backend": "Backend",
+                "computerscience": "Computer Science",
+                "docs": "Docs"
+            },
+            "sources": {
+                "all": "All sources",
+                "local": "Local docs",
+                "remote": "Remote docs"
+            },
+            "sorts": {
+                "latest": "Latest",
+                "title": "Title",
+                "section": "Section"
+            }
+        },
         "sections": {
             "eyebrow": "Section Overview",
             "title": "Documents by topic",

@@ -2,14 +2,25 @@ import { getTime } from '@web-tech/ui/lib/time'
 import { cn } from '@web-tech/ui/lib/utils'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 import { formatSearchKeyword } from '~/feature/search/lib/format-search-keyword'
 import type { SearchData } from '~/lib/get-search-data'
 import { buildSearchResultItem } from '~/lib/search-result-contract'
+import {
+    applyDocsIndexControls,
+    DOCS_INDEX_SECTION_FILTERS,
+    DOCS_INDEX_SOURCE_FILTERS,
+    DOCS_INDEX_SORT_OPTIONS,
+    getDocsIndexHref,
+    resolveDocsIndexControls,
+    type DocsIndexControls,
+} from '~/widgets/docs-index/model/docs-index-controls'
 
 type DocsIndexProps = {
     docs: SearchData[]
     recommendations: readonly string[]
     currentPage?: number
+    controls?: DocsIndexControls
     keyword?: string
 }
 
@@ -56,14 +67,6 @@ function clampPage(page: number, totalPages: number) {
     return Math.min(Math.trunc(page), totalPages)
 }
 
-function getDocsPageHref(page: number) {
-    if (page <= 1) {
-        return '/docs'
-    }
-
-    return `/docs?page=${page}`
-}
-
 function getSectionSummary(docs: SearchData[]) {
     const counts = new Map<string, number>()
     const latestDates = new Map<string, string>()
@@ -84,6 +87,108 @@ function getSectionSummary(docs: SearchData[]) {
             count: counts.get(section) ?? 0,
             latest: latestDates.get(section),
         })
+    )
+}
+
+function getDocsPageHref(page: number, controls: DocsIndexControls) {
+    return getDocsIndexHref({
+        controls,
+        page,
+    })
+}
+
+function DocsIndexControlPill({
+    active,
+    href,
+    children,
+}: {
+    active: boolean
+    href: string
+    children: ReactNode
+}) {
+    return (
+        <Link
+            href={href}
+            aria-current={active ? 'true' : undefined}
+            className={cn(
+                'shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold transition',
+                active
+                    ? 'border-primary bg-primary text-primary-foreground shadow-glow-primary'
+                    : 'border-border bg-surface-container-lowest text-on-surface-variant hover:border-primary/50 hover:text-primary'
+            )}
+        >
+            {children}
+        </Link>
+    )
+}
+
+async function DocsIndexControlsBar({
+    controls,
+    resultCount,
+}: {
+    controls: DocsIndexControls
+    resultCount: number
+}) {
+    const t = await getTranslations('docsIndex')
+
+    return (
+        <section className="rounded-2xl border border-border bg-surface-container-lowest p-4">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                    <p className="text-xs font-semibold tracking-[0.18em] text-outline uppercase">
+                        {t('filters.eyebrow')}
+                    </p>
+                    <h2 className="mt-1 text-lg font-bold tracking-tight text-on-surface">
+                        {t('filters.title', { count: resultCount })}
+                    </h2>
+                </div>
+
+                <div className="grid gap-3 lg:min-w-[38rem]">
+                    <div className="flex gap-2 overflow-x-auto pb-1">
+                        {DOCS_INDEX_SECTION_FILTERS.map((filter) => (
+                            <DocsIndexControlPill
+                                key={filter.value}
+                                active={controls.section === filter.value}
+                                href={getDocsIndexHref({
+                                    controls,
+                                    overrides: { section: filter.value },
+                                })}
+                            >
+                                {t(`filters.sections.${filter.messageKey}`)}
+                            </DocsIndexControlPill>
+                        ))}
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                        {DOCS_INDEX_SOURCE_FILTERS.map((source) => (
+                            <DocsIndexControlPill
+                                key={source}
+                                active={controls.source === source}
+                                href={getDocsIndexHref({
+                                    controls,
+                                    overrides: { source },
+                                })}
+                            >
+                                {t(`filters.sources.${source}`)}
+                            </DocsIndexControlPill>
+                        ))}
+                        <span className="mx-1 hidden h-7 w-px bg-border sm:block" />
+                        {DOCS_INDEX_SORT_OPTIONS.map((sort) => (
+                            <DocsIndexControlPill
+                                key={sort}
+                                active={controls.sort === sort}
+                                href={getDocsIndexHref({
+                                    controls,
+                                    overrides: { sort },
+                                })}
+                            >
+                                {t(`filters.sorts.${sort}`)}
+                            </DocsIndexControlPill>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
     )
 }
 
@@ -221,14 +326,19 @@ export async function DocsIndex({
     docs,
     recommendations,
     currentPage = 1,
+    controls,
     keyword,
 }: DocsIndexProps) {
     const t = await getTranslations('docsIndex')
+    const resolvedControls = controls ?? resolveDocsIndexControls({})
+    const visibleDocs = keyword
+        ? docs
+        : applyDocsIndexControls(docs, resolvedControls)
     const sectionSummary = getSectionSummary(docs)
     const latestUpdated = docs[0]?.date ? getTime(docs[0].date) : null
     const allDocumentsTotalPages = Math.max(
         1,
-        Math.ceil(docs.length / ALL_DOCS_PAGE_SIZE)
+        Math.ceil(visibleDocs.length / ALL_DOCS_PAGE_SIZE)
     )
     const allDocumentsCurrentPage = clampPage(
         currentPage,
@@ -236,14 +346,14 @@ export async function DocsIndex({
     )
     const allDocumentsStartIndex =
         (allDocumentsCurrentPage - 1) * ALL_DOCS_PAGE_SIZE
-    const paginatedDocs = docs.slice(
+    const paginatedDocs = visibleDocs.slice(
         allDocumentsStartIndex,
         allDocumentsStartIndex + ALL_DOCS_PAGE_SIZE
     )
     const allDocumentsRangeStart =
         docs.length === 0 ? 0 : allDocumentsStartIndex + 1
     const allDocumentsRangeEnd = Math.min(
-        docs.length,
+        visibleDocs.length,
         allDocumentsStartIndex + ALL_DOCS_PAGE_SIZE
     )
 
@@ -318,7 +428,7 @@ export async function DocsIndex({
                             {t('stats.totalDocs')}
                         </p>
                         <p className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
-                            {docs.length}
+                            {visibleDocs.length}
                         </p>
                     </div>
                     <div className="rounded-2xl border border-border bg-surface-container-lowest p-4">
@@ -338,6 +448,11 @@ export async function DocsIndex({
                         </p>
                     </div>
                 </section>
+
+                <DocsIndexControlsBar
+                    controls={resolvedControls}
+                    resultCount={visibleDocs.length}
+                />
 
                 <section className="space-y-4">
                     <div className="flex items-center justify-between gap-3">
@@ -399,7 +514,7 @@ export async function DocsIndex({
                                 {t('allDocuments.pageSummary', {
                                     start: allDocumentsRangeStart,
                                     end: allDocumentsRangeEnd,
-                                    total: docs.length,
+                                    total: visibleDocs.length,
                                 })}
                             </p>
                         </div>
@@ -422,7 +537,8 @@ export async function DocsIndex({
                         >
                             <Link
                                 href={getDocsPageHref(
-                                    allDocumentsCurrentPage - 1
+                                    allDocumentsCurrentPage - 1,
+                                    resolvedControls
                                 )}
                                 aria-disabled={allDocumentsCurrentPage === 1}
                                 className={cn(
@@ -440,7 +556,10 @@ export async function DocsIndex({
                                 ).map((page) => (
                                     <Link
                                         key={page}
-                                        href={getDocsPageHref(page)}
+                                        href={getDocsPageHref(
+                                            page,
+                                            resolvedControls
+                                        )}
                                         aria-current={
                                             page === allDocumentsCurrentPage
                                                 ? 'page'
@@ -459,7 +578,8 @@ export async function DocsIndex({
                             </div>
                             <Link
                                 href={getDocsPageHref(
-                                    allDocumentsCurrentPage + 1
+                                    allDocumentsCurrentPage + 1,
+                                    resolvedControls
                                 )}
                                 aria-disabled={
                                     allDocumentsCurrentPage ===

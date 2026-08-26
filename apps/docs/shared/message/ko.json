@@ -256,6 +256,28 @@
             "latestUpdate": "Latest Update",
             "pending": "업데이트 준비 중"
         },
+        "filters": {
+            "eyebrow": "Browse Controls",
+            "title": "현재 조건에 맞는 문서 {count}개",
+            "sections": {
+                "all": "전체",
+                "web": "Web",
+                "uiux": "UI/UX",
+                "backend": "Backend",
+                "computerscience": "Computer Science",
+                "docs": "Docs"
+            },
+            "sources": {
+                "all": "전체 출처",
+                "local": "로컬 문서",
+                "remote": "원격 문서"
+            },
+            "sorts": {
+                "latest": "최신순",
+                "title": "제목순",
+                "section": "섹션순"
+            }
+        },
         "sections": {
             "eyebrow": "Section Overview",
             "title": "주제별 문서 모음",

@@ -9,7 +9,7 @@ import {
     isPublicDocStatus,
     normalizeLocalDocFrontmatter,
 } from '~/lib/editorial-metadata'
-import type { Metadata } from '~/lib/get-document'
+import type { ContentSource, Metadata } from '~/lib/get-document'
 import { getDocHref } from '~/lib/get-doc-route'
 import { fetchRemoteDocsData } from '~/lib/content-api'
 import { shouldIncludeRemoteContentIndex } from '~/lib/content-api-config'
@@ -36,6 +36,7 @@ export type SearchData = {
     thumbnail?: string | null
     href: string
     section: string
+    contentSource: ContentSource
 }
 
 const LOCAL_SEARCH_PATTERNS = ['data/**/*.{md,mdx}', 'category/**/*.{md,mdx}']
@@ -152,6 +153,7 @@ async function parseLocalSearchFile(
             DEFAULT_LOCAL_DOCUMENT_THUMBNAIL,
         href: inferSearchHref(normalizedFileName, slug),
         section: inferSearchSection(normalizedFileName),
+        contentSource: 'local',
     }
 }
 
@@ -179,6 +181,7 @@ function normalizeRemoteSearchDoc(doc: Partial<Metadata>): SearchData | null {
         thumbnail: doc.thumbnail ?? null,
         href,
         section: inferSearchSection(fileName),
+        contentSource: 'remote',
     }
 }
 
