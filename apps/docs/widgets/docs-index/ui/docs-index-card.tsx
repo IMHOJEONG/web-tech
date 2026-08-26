@@ -1,8 +1,9 @@
-import { getTime } from '@web-tech/ui/lib/time'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import type { SearchData } from '~/lib/get-search-data'
 import { buildSearchResultItem } from '~/lib/search-result-contract'
+import { DocumentDateText } from '~/shared/ui/document-date-text'
+import { DocumentMetaPills } from '~/shared/ui/document-meta-pills'
 
 type DocsIndexCardProps = {
     doc: SearchData
@@ -16,7 +17,38 @@ function getDocSourceMessageKey(source: SearchData['contentSource']) {
 export async function DocsIndexCard({ doc, keyword }: DocsIndexCardProps) {
     const t = await getTranslations('docsIndex')
     const resultItem = buildSearchResultItem(doc, keyword)
-    const visibleTags = doc.tags?.slice(0, 3) ?? []
+    const metaPills = [
+        {
+            key: 'source',
+            label: t(
+                `card.sources.${getDocSourceMessageKey(doc.contentSource)}`
+            ),
+            tone: 'source' as const,
+        },
+        ...(doc.readMinutes
+            ? [
+                  {
+                      key: 'read-minutes',
+                      label: t('card.readMinutes', {
+                          count: doc.readMinutes,
+                      }),
+                  },
+              ]
+            : []),
+        ...(doc.topicLabel
+            ? [
+                  {
+                      key: 'topic',
+                      label: doc.topicLabel,
+                  },
+              ]
+            : []),
+        ...(doc.tags?.slice(0, 3).map((tag, index) => ({
+            key: `tag:${tag}:${index}`,
+            label: `#${tag}`,
+            tone: 'tag' as const,
+        })) ?? []),
+    ]
 
     return (
         <Link
@@ -32,9 +64,10 @@ export async function DocsIndexCard({ doc, keyword }: DocsIndexCardProps) {
                         {doc.date && (
                             <>
                                 <span className="text-xs text-outline">/</span>
-                                <span className="text-xs text-outline">
-                                    {getTime(doc.date)}
-                                </span>
+                                <DocumentDateText
+                                    date={doc.date}
+                                    className="text-xs text-outline"
+                                />
                             </>
                         )}
                     </div>
@@ -56,34 +89,7 @@ export async function DocsIndexCard({ doc, keyword }: DocsIndexCardProps) {
                         )}
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-1.5 text-xs text-outline">
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-container-low px-2.5 py-1 font-medium text-outline">
-                            <span className="size-1.5 rounded-full bg-primary/70" />
-                            {t(
-                                `card.sources.${getDocSourceMessageKey(doc.contentSource)}`
-                            )}
-                        </span>
-                        {doc.readMinutes && (
-                            <span className="rounded-full border border-border bg-surface-container-low px-2.5 py-1 font-medium text-outline">
-                                {t('card.readMinutes', {
-                                    count: doc.readMinutes,
-                                })}
-                            </span>
-                        )}
-                        {doc.topicLabel && (
-                            <span className="rounded-full border border-border bg-surface-container-low px-2.5 py-1 font-medium text-outline">
-                                {doc.topicLabel}
-                            </span>
-                        )}
-                        {visibleTags.map((tag) => (
-                            <span
-                                key={tag}
-                                className="rounded-full border border-transparent bg-transparent px-1.5 py-1 font-medium text-outline"
-                            >
-                                #{tag}
-                            </span>
-                        ))}
-                    </div>
+                    <DocumentMetaPills items={metaPills} />
                 </div>
 
                 <span className="shrink-0 self-start rounded-full border border-border px-3 py-1.5 font-display text-[0.65rem] font-semibold tracking-[0.14em] text-outline uppercase transition-colors group-hover:border-primary/40 group-hover:text-primary">
