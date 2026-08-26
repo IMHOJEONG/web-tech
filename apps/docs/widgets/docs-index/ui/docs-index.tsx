@@ -2,6 +2,7 @@ import { getTime } from '@web-tech/ui/lib/time'
 import { cn } from '@web-tech/ui/lib/utils'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
+import type { CSSProperties } from 'react'
 import { formatSearchKeyword } from '~/feature/search/lib/format-search-keyword'
 import type { SearchData } from '~/lib/get-search-data'
 import {
@@ -32,11 +33,19 @@ type DocsIndexProps = {
     keyword?: string
 }
 
+type MotionOrderStyle = CSSProperties & {
+    '--motion-order': number
+}
+
 function getDocsPageHref(page: number, controls: DocsIndexControls) {
     return getDocsIndexHref({
         controls,
         page,
     })
+}
+
+function getMotionOrderStyle(index: number): MotionOrderStyle {
+    return { '--motion-order': index }
 }
 
 export async function DocsIndex({
@@ -68,7 +77,7 @@ export async function DocsIndex({
         const formattedKeyword = formatSearchKeyword(keyword)
 
         return (
-            <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+            <main className="docs-shell motion-layout px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
                 <div className="space-y-7">
                     <DocsSearchPanel
                         keyword={keyword}
@@ -115,12 +124,14 @@ export async function DocsIndex({
                                 keyword={keyword}
                             />
                         ) : (
-                            <div className="grid grid-cols-1 gap-3">
-                                {visibleDocs.map((doc) => (
+                            <div className="motion-layout grid grid-cols-1 gap-3">
+                                {visibleDocs.map((doc, index) => (
                                     <DocsIndexCard
                                         key={doc.id}
                                         doc={doc}
                                         keyword={keyword}
+                                        className="motion-reveal"
+                                        style={getMotionOrderStyle(index)}
                                     />
                                 ))}
                             </div>
@@ -132,7 +143,7 @@ export async function DocsIndex({
     }
 
     return (
-        <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+        <main className="docs-shell motion-layout px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
             <div className="space-y-7">
                 <DocsSearchPanel
                     eyebrow={t('index.eyebrow')}
@@ -143,8 +154,11 @@ export async function DocsIndex({
                     recommendations={recommendations}
                 />
 
-                <section className="grid gap-3 sm:grid-cols-3">
-                    <div className="rounded-2xl border border-border bg-surface-container-lowest p-4">
+                <section className="motion-layout grid gap-3 sm:grid-cols-3">
+                    <div
+                        className="motion-layout motion-reveal rounded-2xl border border-border bg-surface-container-lowest p-4"
+                        style={getMotionOrderStyle(0)}
+                    >
                         <p className="text-xs font-semibold tracking-[0.16em] text-outline uppercase">
                             {t('stats.totalDocs')}
                         </p>
@@ -152,7 +166,10 @@ export async function DocsIndex({
                             {visibleDocs.length}
                         </p>
                     </div>
-                    <div className="rounded-2xl border border-border bg-surface-container-lowest p-4">
+                    <div
+                        className="motion-layout motion-reveal rounded-2xl border border-border bg-surface-container-lowest p-4"
+                        style={getMotionOrderStyle(1)}
+                    >
                         <p className="text-xs font-semibold tracking-[0.16em] text-outline uppercase">
                             {t('stats.sections')}
                         </p>
@@ -160,7 +177,10 @@ export async function DocsIndex({
                             {sectionSummary.length}
                         </p>
                     </div>
-                    <div className="rounded-2xl border border-border bg-surface-container-lowest p-4">
+                    <div
+                        className="motion-layout motion-reveal rounded-2xl border border-border bg-surface-container-lowest p-4"
+                        style={getMotionOrderStyle(2)}
+                    >
                         <p className="text-xs font-semibold tracking-[0.16em] text-outline uppercase">
                             {t('stats.latestUpdate')}
                         </p>
@@ -192,8 +212,8 @@ export async function DocsIndex({
                             {t('sections.toCategory')}
                         </Link>
                     </div>
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
-                        {sectionSummary.map((section) => {
+                    <div className="motion-layout grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
+                        {sectionSummary.map((section, index) => {
                             const sectionKey = getDocsIndexSectionMessageKey(
                                 section.key
                             )
@@ -202,7 +222,8 @@ export async function DocsIndex({
                                 <Link
                                     key={section.key}
                                     href={section.href}
-                                    className="group rounded-2xl border border-border bg-surface-container-lowest p-4 transition hover:-translate-y-0.5 hover:border-primary/40"
+                                    className="motion-layout motion-reveal group rounded-2xl border border-border bg-surface-container-lowest p-4 hover:-translate-y-0.5 hover:border-primary/40"
+                                    style={getMotionOrderStyle(index)}
                                 >
                                     <p className="font-display text-xs font-semibold tracking-[0.16em] text-primary uppercase">
                                         {t(`sectionLabels.${sectionKey}`)}
@@ -251,16 +272,21 @@ export async function DocsIndex({
                     {visibleDocs.length === 0 ? (
                         <DocsIndexEmptyState controls={resolvedControls} />
                     ) : (
-                        <div className="grid grid-cols-1 gap-3">
-                            {paginatedDocs.map((doc) => (
-                                <DocsIndexCard key={doc.id} doc={doc} />
+                        <div className="motion-layout grid grid-cols-1 gap-3">
+                            {paginatedDocs.map((doc, index) => (
+                                <DocsIndexCard
+                                    key={doc.id}
+                                    doc={doc}
+                                    className="motion-reveal"
+                                    style={getMotionOrderStyle(index)}
+                                />
                             ))}
                         </div>
                     )}
                     {pagination.totalPages > 1 && (
                         <nav
                             aria-label={t('allDocuments.paginationAriaLabel')}
-                            className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between"
+                            className="motion-layout flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between"
                         >
                             <Link
                                 href={getDocsPageHref(

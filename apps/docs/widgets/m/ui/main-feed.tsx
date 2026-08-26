@@ -2,6 +2,7 @@ import { cn } from '@web-tech/ui/lib/utils'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { CSSProperties } from 'react'
 import { getDocChannel } from '~/lib/get-doc-channel'
 import { getDocHref } from '~/lib/get-doc-route'
 import { Metadata } from '~/lib/get-document'
@@ -26,6 +27,10 @@ type TopicTone = {
 type FeedAuthor = {
     name: string
     role: string
+}
+
+type MotionOrderStyle = CSSProperties & {
+    '--motion-order': number
 }
 
 const AUTHOR_PALETTE = [
@@ -212,6 +217,10 @@ function getFilterHref(filter: FeedFilter) {
     return filter === 'all' ? '/feed' : `/feed?topic=${filter}`
 }
 
+function getMotionOrderStyle(index: number): MotionOrderStyle {
+    return { '--motion-order': index }
+}
+
 export function normalizeFeedFilter(value?: string): FeedFilter {
     if (value === 'web' || value === 'mobile' || value === 'uiux') {
         return value
@@ -254,7 +263,8 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
     return (
         <Link
             href={getDocHref(doc)}
-            className="group ds-card col-span-12 grid w-full min-w-0 overflow-hidden bg-surface-container-low lg:col-span-8 lg:grid-cols-2"
+            style={getMotionOrderStyle(index)}
+            className="group ds-card motion-layout motion-reveal col-span-12 grid w-full min-w-0 overflow-hidden bg-surface-container-low lg:col-span-8 lg:grid-cols-2"
         >
             <div className="flex w-full min-w-0 self-stretch flex-col justify-between p-6 lg:p-8">
                 <div className="w-full min-w-0 self-stretch space-y-4">
@@ -294,14 +304,15 @@ function FeaturedCard({ doc, index }: { doc: FeedDoc; index: number }) {
     )
 }
 
-function CompactCard({ doc }: { doc: FeedDoc }) {
+function CompactCard({ doc, index }: { doc: FeedDoc; index: number }) {
     const topic = getTopicStyle(doc)
     const minutes = getReadMinutes(doc)
 
     return (
         <Link
             href={getDocHref(doc)}
-            className="group ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-6 lg:col-span-4 lg:p-8"
+            style={getMotionOrderStyle(index)}
+            className="group ds-card motion-layout motion-reveal col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-6 lg:col-span-4 lg:p-8"
         >
             <div className="w-full min-w-0 self-stretch space-y-4">
                 <FeedBadge
@@ -339,7 +350,8 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
     return (
         <Link
             href={getDocHref(doc)}
-            className="group ds-card col-span-12 flex h-full w-full min-w-0 flex-col overflow-hidden bg-surface-container-low lg:col-span-4"
+            style={getMotionOrderStyle(index)}
+            className="group ds-card motion-layout motion-reveal col-span-12 flex h-full w-full min-w-0 flex-col overflow-hidden bg-surface-container-low lg:col-span-4"
         >
             <div className="relative aspect-4/3 overflow-hidden bg-surface">
                 <Image
@@ -381,18 +393,23 @@ function ImageCard({ doc, index }: { doc: FeedDoc; index: number }) {
 }
 
 function TextSupportCard({
+    index,
     title,
     summary,
     topic,
     footer,
 }: {
+    index: number
     title: string
     summary: string
     topic: TopicTone
     footer: React.ReactNode
 }) {
     return (
-        <article className="ds-card col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-6 lg:col-span-4 lg:p-8">
+        <article
+            style={getMotionOrderStyle(index)}
+            className="ds-card motion-layout motion-reveal col-span-12 flex h-full w-full min-w-0 flex-col justify-between bg-surface-container-low p-6 lg:col-span-4 lg:p-8"
+        >
             <div className="w-full min-w-0 self-stretch space-y-4">
                 <FeedBadge
                     label={topic.label}
@@ -420,7 +437,10 @@ function NewsletterInjectionCard() {
 
 function EmptyFilteredFeed({ activeFilter }: { activeFilter: FeedFilter }) {
     return (
-        <article className="ds-card col-span-12 flex min-h-80 flex-col justify-between bg-surface-container-low p-6 lg:p-8">
+        <article
+            style={getMotionOrderStyle(0)}
+            className="ds-card motion-layout motion-reveal col-span-12 flex min-h-80 flex-col justify-between bg-surface-container-low p-6 lg:p-8"
+        >
             <div className="space-y-4">
                 <FeedBadge
                     label={
@@ -479,8 +499,8 @@ export function MainFeed({
 
     if (!heroDoc) {
         return (
-            <main className="w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
-                <section className="border-b border-outline-variant bg-surface-container-lowest px-4 pb-16 pt-16 sm:px-6 md:px-8 lg:pb-20 lg:pt-20">
+            <main className="motion-layout w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
+                <section className="motion-layout border-b border-outline-variant bg-surface-container-lowest px-4 pb-16 pt-16 sm:px-6 md:px-8 lg:pb-20 lg:pt-20">
                     <div className="mx-auto max-w-page space-y-6">
                         <FeedBadge
                             label="FILTERED FEED"
@@ -500,7 +520,7 @@ export function MainFeed({
                     </div>
                 </section>
 
-                <section className="px-4 py-12 sm:px-6 md:px-8 lg:py-16">
+                <section className="motion-layout px-4 py-12 sm:px-6 md:px-8 lg:py-16">
                     <div className="mx-auto max-w-page space-y-10 lg:space-y-12">
                         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                             <FeedSectionHeader />
@@ -525,7 +545,7 @@ export function MainFeed({
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-12 gap-6">
+                        <div className="motion-layout grid grid-cols-12 gap-6">
                             <EmptyFilteredFeed activeFilter={activeFilter} />
                         </div>
                     </div>
@@ -539,8 +559,8 @@ export function MainFeed({
     const heroMinutes = getReadMinutes(heroDoc)
 
     return (
-        <main className="w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
-            <section className="border-b border-outline-variant bg-surface-container-lowest px-4 pb-16 pt-16 sm:px-6 md:px-8 lg:pb-20 lg:pt-20">
+        <main className="motion-layout w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
+            <section className="motion-layout border-b border-outline-variant bg-surface-container-lowest px-4 pb-16 pt-16 sm:px-6 md:px-8 lg:pb-20 lg:pt-20">
                 <div className="mx-auto grid max-w-page gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
                     <div className="space-y-6 lg:col-span-7">
                         <FeedBadge
@@ -655,7 +675,7 @@ export function MainFeed({
                 </div>
             </section>
 
-            <section className="px-4 py-12 sm:px-6 md:px-8 lg:py-16">
+            <section className="motion-layout px-4 py-12 sm:px-6 md:px-8 lg:py-16">
                 <div className="mx-auto max-w-page space-y-10 lg:space-y-12">
                     <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                         <FeedSectionHeader />
@@ -680,15 +700,18 @@ export function MainFeed({
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-12 gap-6">
+                    <div className="motion-layout grid grid-cols-12 gap-6">
                         {featuredDoc && (
                             <FeaturedCard doc={featuredDoc} index={1} />
                         )}
-                        {compactDoc && <CompactCard doc={compactDoc} />}
+                        {compactDoc && (
+                            <CompactCard doc={compactDoc} index={2} />
+                        )}
                         {imageDoc ? (
                             <ImageCard doc={imageDoc} index={3} />
                         ) : (
                             <TextSupportCard
+                                index={3}
                                 title={PLACEHOLDER_MOBILE.title}
                                 summary={PLACEHOLDER_MOBILE.summary}
                                 topic={PLACEHOLDER_MOBILE.topic}
@@ -703,9 +726,10 @@ export function MainFeed({
                         <NewsletterInjectionCard />
 
                         {supportDoc ? (
-                            <CompactCard doc={supportDoc} />
+                            <CompactCard doc={supportDoc} index={5} />
                         ) : (
                             <TextSupportCard
+                                index={5}
                                 title={PLACEHOLDER_UI.title}
                                 summary={PLACEHOLDER_UI.summary}
                                 topic={PLACEHOLDER_UI.topic}

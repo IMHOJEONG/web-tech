@@ -105,6 +105,7 @@
   - article/feed spacing
   - 브라우저/기기 점검 체크리스트 추가 완료
   - 정적 breakpoint 감사 후보 식별 완료
+  - `/docs`, `/feed`의 breakpoint/list 변화에 CSS 기반 motion 적용 완료
   - 기준 문서: `docs/runbooks/docs-responsive-browser-device-checklist.md`
 - [-] `P1` 루트 `/` 화면을 `141:2 Landing Page - HEAPFORGE` 기준으로 재구성한다.
   - 현재 `HeroSection` 단일 구성을 landing page 섹션 구조로 확장
@@ -129,6 +130,10 @@
 - [ ] `P2` empty state, loading state, error state의 시각 톤을 통일한다.
   - root landing은 remote latest notes 실패 시 페이지 전체를 죽이지 않고 섹션 단위 graceful degradation을 유지
 - [ ] `P2` keyboard navigation / focus ring / drawer close flow 접근성을 점검한다.
+- [-] `P2` layout/list motion 정책을 운영한다.
+  - `motion-layout`, `motion-reveal` 기반으로 시작
+  - `prefers-reduced-motion` 대응 필수
+  - 기준 문서: `docs/architecture/docs-motion-interaction-policy.md`
 - [ ] `P2` article detail의 읽기 보조 UX를 확장한다.
   - related posts
   - previous / next navigation

@@ -24,8 +24,8 @@ export async function DocsIndexControlsBar({
     const t = await getTranslations('docsIndex')
 
     return (
-        <section className="rounded-2xl border border-border bg-surface-container-lowest p-4">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <section className="motion-layout rounded-2xl border border-border bg-surface-container-lowest p-4">
+            <div className="motion-layout flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                     <p className="text-xs font-semibold tracking-[0.18em] text-outline uppercase">
                         {t('filters.eyebrow')}

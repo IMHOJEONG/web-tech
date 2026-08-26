@@ -1,20 +1,29 @@
+import { cn } from '@web-tech/ui/lib/utils'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
+import type { CSSProperties } from 'react'
 import type { SearchData } from '~/lib/get-search-data'
 import { buildSearchResultItem } from '~/lib/search-result-contract'
 import { DocumentDateText } from '~/shared/ui/document-date-text'
 import { DocumentMetaPills } from '~/shared/ui/document-meta-pills'
 
 type DocsIndexCardProps = {
+    className?: string
     doc: SearchData
     keyword?: string
+    style?: CSSProperties
 }
 
 function getDocSourceMessageKey(source: SearchData['contentSource']) {
     return source === 'remote' ? 'remote' : 'local'
 }
 
-export async function DocsIndexCard({ doc, keyword }: DocsIndexCardProps) {
+export async function DocsIndexCard({
+    className,
+    doc,
+    keyword,
+    style,
+}: DocsIndexCardProps) {
     const t = await getTranslations('docsIndex')
     const resultItem = buildSearchResultItem(doc, keyword)
     const metaPills = [
@@ -53,7 +62,11 @@ export async function DocsIndexCard({ doc, keyword }: DocsIndexCardProps) {
     return (
         <Link
             href={doc.href}
-            className="group block rounded-2xl border border-border bg-surface-container-lowest p-4 transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-deep"
+            style={style}
+            className={cn(
+                'motion-layout group block rounded-2xl border border-border bg-surface-container-lowest p-4 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-deep',
+                className
+            )}
         >
             <article className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div className="min-w-0 space-y-3">

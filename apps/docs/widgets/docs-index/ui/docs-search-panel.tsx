@@ -22,8 +22,8 @@ export function DocsSearchPanel({
     resultCount,
 }: DocsSearchPanelProps) {
     return (
-        <section className="ds-panel overflow-hidden p-5 sm:p-6 lg:p-7">
-            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.72fr)] lg:items-end">
+        <section className="ds-panel motion-layout overflow-hidden p-5 sm:p-6 lg:p-7">
+            <div className="motion-layout grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.72fr)] lg:items-end">
                 <div className="space-y-3">
                     <p className="text-xs font-semibold tracking-[0.2em] text-outline uppercase">
                         {eyebrow}
