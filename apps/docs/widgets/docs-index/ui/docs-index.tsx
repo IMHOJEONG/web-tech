@@ -2,20 +2,27 @@ import { getTime } from '@web-tech/ui/lib/time'
 import { cn } from '@web-tech/ui/lib/utils'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
-import type { ReactNode } from 'react'
 import { formatSearchKeyword } from '~/feature/search/lib/format-search-keyword'
 import type { SearchData } from '~/lib/get-search-data'
-import { buildSearchResultItem } from '~/lib/search-result-contract'
 import {
     applyDocsIndexControls,
-    DOCS_INDEX_SECTION_FILTERS,
-    DOCS_INDEX_SOURCE_FILTERS,
-    DOCS_INDEX_SORT_OPTIONS,
     filterDocsIndexControls,
     getDocsIndexHref,
     resolveDocsIndexControls,
     type DocsIndexControls,
 } from '~/widgets/docs-index/model/docs-index-controls'
+import {
+    ALL_DOCS_PAGE_SIZE,
+    getPaginationRange,
+} from '~/widgets/docs-index/model/docs-index-pagination'
+import {
+    getDocsIndexSectionMessageKey,
+    getDocsIndexSectionSummary,
+} from '~/widgets/docs-index/model/docs-index-summary'
+import { DocsIndexCard } from './docs-index-card'
+import { DocsIndexControlsBar } from './docs-index-controls-bar'
+import { DocsIndexEmptyState } from './docs-index-empty-state'
+import { DocsSearchPanel } from './docs-search-panel'
 
 type DocsIndexProps = {
     docs: SearchData[]
@@ -25,383 +32,11 @@ type DocsIndexProps = {
     keyword?: string
 }
 
-const ALL_DOCS_PAGE_SIZE = 8
-
-const SECTION_ORDER = [
-    'Web',
-    'UI/UX',
-    'Backend',
-    'Computer Science',
-    'Docs',
-] as const
-
-type SectionKey = (typeof SECTION_ORDER)[number]
-
-const SECTION_HREFS: Record<SectionKey, string> = {
-    Web: '/web',
-    'UI/UX': '/ui-ux',
-    Backend: '/category/be',
-    'Computer Science': '/category/computer-science',
-    Docs: '/docs',
-}
-
-function getSectionMessageKey(section: SectionKey) {
-    switch (section) {
-        case 'Web':
-            return 'web'
-        case 'UI/UX':
-            return 'uiux'
-        case 'Backend':
-            return 'backend'
-        case 'Computer Science':
-            return 'computerscience'
-        case 'Docs':
-            return 'docs'
-    }
-}
-
-function clampPage(page: number, totalPages: number) {
-    if (!Number.isFinite(page) || page < 1) {
-        return 1
-    }
-
-    return Math.min(Math.trunc(page), totalPages)
-}
-
-function getSectionSummary(docs: SearchData[]) {
-    const counts = new Map<string, number>()
-    const latestDates = new Map<string, string>()
-
-    docs.forEach((doc) => {
-        const currentCount = counts.get(doc.section) ?? 0
-        counts.set(doc.section, currentCount + 1)
-
-        if (!latestDates.has(doc.section) && doc.date) {
-            latestDates.set(doc.section, doc.date)
-        }
-    })
-
-    return SECTION_ORDER.filter((section) => counts.has(section)).map(
-        (section) => ({
-            key: section,
-            href: SECTION_HREFS[section],
-            count: counts.get(section) ?? 0,
-            latest: latestDates.get(section),
-        })
-    )
-}
-
 function getDocsPageHref(page: number, controls: DocsIndexControls) {
     return getDocsIndexHref({
         controls,
         page,
     })
-}
-
-function getDocSourceMessageKey(source: SearchData['contentSource']) {
-    return source === 'remote' ? 'remote' : 'local'
-}
-
-function DocsIndexControlPill({
-    active,
-    href,
-    children,
-}: {
-    active: boolean
-    href: string
-    children: ReactNode
-}) {
-    return (
-        <Link
-            href={href}
-            aria-current={active ? 'true' : undefined}
-            className={cn(
-                'shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold transition',
-                active
-                    ? 'border-primary bg-primary text-primary-foreground shadow-glow-primary'
-                    : 'border-border bg-surface-container-lowest text-on-surface-variant hover:border-primary/50 hover:text-primary'
-            )}
-        >
-            {children}
-        </Link>
-    )
-}
-
-async function DocsIndexEmptyState({
-    controls,
-    keyword,
-}: {
-    controls: DocsIndexControls
-    keyword?: string
-}) {
-    const t = await getTranslations('docsIndex')
-
-    return (
-        <div className="rounded-3xl border border-dashed border-border bg-surface-container-lowest px-5 py-8 text-center">
-            <p className="text-xs font-semibold tracking-[0.18em] text-outline uppercase">
-                {t('emptyFiltered.eyebrow')}
-            </p>
-            <h3 className="mt-3 text-xl font-bold tracking-tight text-on-surface">
-                {t('emptyFiltered.title')}
-            </h3>
-            <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-on-surface-variant">
-                {t('emptyFiltered.description')}
-            </p>
-            <Link
-                href={getDocsIndexHref({
-                    controls,
-                    keyword,
-                    overrides: {
-                        section: 'all',
-                        source: 'all',
-                        sort: 'latest',
-                    },
-                })}
-                className="mt-5 inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary-fixed"
-            >
-                {t('emptyFiltered.reset')}
-            </Link>
-        </div>
-    )
-}
-
-async function DocsIndexControlsBar({
-    controls,
-    keyword,
-    resultCount,
-    showSort = true,
-}: {
-    controls: DocsIndexControls
-    keyword?: string
-    resultCount: number
-    showSort?: boolean
-}) {
-    const t = await getTranslations('docsIndex')
-
-    return (
-        <section className="rounded-2xl border border-border bg-surface-container-lowest p-4">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                <div>
-                    <p className="text-xs font-semibold tracking-[0.18em] text-outline uppercase">
-                        {t('filters.eyebrow')}
-                    </p>
-                    <h2 className="mt-1 text-lg font-bold tracking-tight text-on-surface">
-                        {t('filters.title', { count: resultCount })}
-                    </h2>
-                </div>
-
-                <div className="grid gap-3 lg:min-w-[38rem]">
-                    <div className="flex gap-2 overflow-x-auto pb-1">
-                        {DOCS_INDEX_SECTION_FILTERS.map((filter) => (
-                            <DocsIndexControlPill
-                                key={filter.value}
-                                active={controls.section === filter.value}
-                                href={getDocsIndexHref({
-                                    controls,
-                                    keyword,
-                                    overrides: { section: filter.value },
-                                })}
-                            >
-                                {t(`filters.sections.${filter.messageKey}`)}
-                            </DocsIndexControlPill>
-                        ))}
-                    </div>
-
-                    <div className="flex flex-wrap gap-2">
-                        {DOCS_INDEX_SOURCE_FILTERS.map((source) => (
-                            <DocsIndexControlPill
-                                key={source}
-                                active={controls.source === source}
-                                href={getDocsIndexHref({
-                                    controls,
-                                    keyword,
-                                    overrides: { source },
-                                })}
-                            >
-                                {t(`filters.sources.${source}`)}
-                            </DocsIndexControlPill>
-                        ))}
-                        {showSort && (
-                            <>
-                                <span className="mx-1 hidden h-7 w-px bg-border sm:block" />
-                                {DOCS_INDEX_SORT_OPTIONS.map((sort) => (
-                                    <DocsIndexControlPill
-                                        key={sort}
-                                        active={controls.sort === sort}
-                                        href={getDocsIndexHref({
-                                            controls,
-                                            keyword,
-                                            overrides: { sort },
-                                        })}
-                                    >
-                                        {t(`filters.sorts.${sort}`)}
-                                    </DocsIndexControlPill>
-                                ))}
-                            </>
-                        )}
-                    </div>
-                </div>
-            </div>
-        </section>
-    )
-}
-
-async function DocsIndexCard({
-    doc,
-    keyword,
-}: {
-    doc: SearchData
-    keyword?: string
-}) {
-    const t = await getTranslations('docsIndex')
-    const resultItem = buildSearchResultItem(doc, keyword)
-    const visibleTags = doc.tags?.slice(0, 3) ?? []
-
-    return (
-        <Link
-            href={doc.href}
-            className="group block rounded-2xl border border-border bg-surface-container-lowest p-4 transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-deep"
-        >
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div className="min-w-0 space-y-2.5">
-                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                        <span className="font-display text-[0.68rem] font-semibold tracking-[0.16em] text-primary uppercase">
-                            {doc.section}
-                        </span>
-                        {doc.date && (
-                            <>
-                                <span className="text-xs text-outline">/</span>
-                                <span className="text-xs text-outline">
-                                    {getTime(doc.date)}
-                                </span>
-                            </>
-                        )}
-                    </div>
-                    <div className="flex flex-wrap items-center gap-1.5 text-xs text-outline">
-                        <span className="rounded-full border border-border bg-surface-container px-2.5 py-1 font-medium text-on-surface-variant">
-                            {t(
-                                `card.sources.${getDocSourceMessageKey(doc.contentSource)}`
-                            )}
-                        </span>
-                        {doc.readMinutes && (
-                            <span className="rounded-full border border-border bg-surface-container px-2.5 py-1 font-medium text-on-surface-variant">
-                                {t('card.readMinutes', {
-                                    count: doc.readMinutes,
-                                })}
-                            </span>
-                        )}
-                        {doc.topicLabel && (
-                            <span className="rounded-full border border-border bg-surface-container px-2.5 py-1 font-medium text-on-surface-variant">
-                                {doc.topicLabel}
-                            </span>
-                        )}
-                        {visibleTags.map((tag) => (
-                            <span
-                                key={tag}
-                                className="rounded-full border border-border bg-surface-container-low px-2.5 py-1 font-medium text-outline"
-                            >
-                                #{tag}
-                            </span>
-                        ))}
-                    </div>
-                    <h3
-                        className="text-base font-semibold tracking-[-0.02em] text-on-surface transition-colors group-hover:text-primary sm:text-lg [&_.search-highlight]:rounded-sm [&_.search-highlight]:bg-primary-container/70 [&_.search-highlight]:px-1 [&_.search-highlight]:py-px [&_.search-highlight]:font-medium [&_.search-highlight]:text-on-primary-container dark:[&_.search-highlight]:bg-primary/18 dark:[&_.search-highlight]:text-primary-fixed"
-                        dangerouslySetInnerHTML={{
-                            __html: resultItem.preview.titleHtml,
-                        }}
-                    />
-                    {(keyword || doc.summary) && (
-                        <p
-                            className="line-clamp-2 text-sm leading-6 text-on-surface-variant [&_.search-highlight]:rounded-sm [&_.search-highlight]:bg-primary-container/70 [&_.search-highlight]:px-1 [&_.search-highlight]:py-px [&_.search-highlight]:font-medium [&_.search-highlight]:text-on-primary-container dark:[&_.search-highlight]:bg-primary/18 dark:[&_.search-highlight]:text-primary-fixed"
-                            dangerouslySetInnerHTML={{
-                                __html: resultItem.preview.excerptHtml,
-                            }}
-                        />
-                    )}
-                </div>
-                <span className="shrink-0 self-start rounded-full border border-border px-3 py-1.5 font-display text-[0.65rem] font-semibold tracking-[0.14em] text-outline uppercase transition-colors group-hover:border-primary/40 group-hover:text-primary">
-                    {t('card.open')}
-                </span>
-            </div>
-        </Link>
-    )
-}
-
-function DocsSearchPanel({
-    keyword,
-    eyebrow,
-    title,
-    description,
-    placeholder,
-    submitLabel,
-    recommendations,
-    resultCount,
-}: {
-    keyword?: string
-    eyebrow: string
-    title: string
-    description: string
-    placeholder: string
-    submitLabel: string
-    recommendations: readonly string[]
-    resultCount?: string
-}) {
-    return (
-        <section className="ds-panel overflow-hidden p-5 sm:p-6 lg:p-7">
-            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.72fr)] lg:items-end">
-                <div className="space-y-3">
-                    <p className="text-xs font-semibold tracking-[0.2em] text-outline uppercase">
-                        {eyebrow}
-                    </p>
-                    <div className="space-y-2">
-                        <h1 className="text-2xl font-extrabold tracking-tight text-on-surface sm:text-3xl lg:text-4xl">
-                            {title}
-                        </h1>
-                        <p className="max-w-2xl text-sm leading-7 text-on-surface-variant sm:text-base">
-                            {description}
-                        </p>
-                    </div>
-                    {resultCount && (
-                        <span className="inline-flex rounded-full border border-primary/25 bg-primary/8 px-3 py-1 text-xs font-medium text-primary">
-                            {resultCount}
-                        </span>
-                    )}
-                </div>
-
-                <div className="space-y-3">
-                    <form
-                        action="/docs"
-                        className="flex overflow-hidden rounded-2xl border border-border bg-surface-container-lowest p-1.5 focus-within:border-primary/60 focus-within:shadow-glow-primary"
-                    >
-                        <input
-                            name="q"
-                            type="search"
-                            defaultValue={keyword}
-                            placeholder={placeholder}
-                            className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm text-on-surface outline-none placeholder:text-outline"
-                        />
-                        <button
-                            type="submit"
-                            className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:bg-primary-fixed"
-                        >
-                            {submitLabel}
-                        </button>
-                    </form>
-                    <div className="flex gap-2 overflow-x-auto pb-1">
-                        {recommendations.map((term) => (
-                            <Link
-                                key={term}
-                                href={`/docs?q=${encodeURIComponent(term)}`}
-                                className="shrink-0 rounded-full border border-border bg-surface-container px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:border-primary/50 hover:text-primary"
-                            >
-                                {term}
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </section>
-    )
 }
 
 export async function DocsIndex({
@@ -417,27 +52,16 @@ export async function DocsIndex({
     const visibleDocs = keyword
         ? filterDocsIndexControls(docs, searchControls)
         : applyDocsIndexControls(docs, resolvedControls)
-    const sectionSummary = getSectionSummary(docs)
+    const sectionSummary = getDocsIndexSectionSummary(docs)
     const latestUpdated = docs[0]?.date ? getTime(docs[0].date) : null
-    const allDocumentsTotalPages = Math.max(
-        1,
-        Math.ceil(visibleDocs.length / ALL_DOCS_PAGE_SIZE)
-    )
-    const allDocumentsCurrentPage = clampPage(
+    const pagination = getPaginationRange({
         currentPage,
-        allDocumentsTotalPages
-    )
-    const allDocumentsStartIndex =
-        (allDocumentsCurrentPage - 1) * ALL_DOCS_PAGE_SIZE
+        pageSize: ALL_DOCS_PAGE_SIZE,
+        totalCount: visibleDocs.length,
+    })
     const paginatedDocs = visibleDocs.slice(
-        allDocumentsStartIndex,
-        allDocumentsStartIndex + ALL_DOCS_PAGE_SIZE
-    )
-    const allDocumentsRangeStart =
-        visibleDocs.length === 0 ? 0 : allDocumentsStartIndex + 1
-    const allDocumentsRangeEnd = Math.min(
-        visibleDocs.length,
-        allDocumentsStartIndex + ALL_DOCS_PAGE_SIZE
+        pagination.startIndex,
+        pagination.startIndex + pagination.pageSize
     )
 
     if (keyword) {
@@ -471,7 +95,7 @@ export async function DocsIndex({
                     <section className="space-y-4">
                         <div className="flex items-center justify-between gap-3">
                             <div>
-                                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-outline">
+                                <p className="text-xs font-semibold tracking-[0.2em] text-outline uppercase">
                                     {t('search.matchingEyebrow')}
                                 </p>
                                 <h2 className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
@@ -554,7 +178,7 @@ export async function DocsIndex({
                 <section className="space-y-4">
                     <div className="flex items-center justify-between gap-3">
                         <div>
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-outline">
+                            <p className="text-xs font-semibold tracking-[0.2em] text-outline uppercase">
                                 {t('sections.eyebrow')}
                             </p>
                             <h2 className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
@@ -570,7 +194,9 @@ export async function DocsIndex({
                     </div>
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
                         {sectionSummary.map((section) => {
-                            const sectionKey = getSectionMessageKey(section.key)
+                            const sectionKey = getDocsIndexSectionMessageKey(
+                                section.key
+                            )
 
                             return (
                                 <Link
@@ -601,7 +227,7 @@ export async function DocsIndex({
                 <section className="space-y-4">
                     <div className="flex items-center justify-between gap-3">
                         <div>
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-outline">
+                            <p className="text-xs font-semibold tracking-[0.2em] text-outline uppercase">
                                 {t('allDocuments.eyebrow')}
                             </p>
                             <h2 className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
@@ -609,8 +235,8 @@ export async function DocsIndex({
                             </h2>
                             <p className="mt-2 text-sm text-on-surface-variant">
                                 {t('allDocuments.pageSummary', {
-                                    start: allDocumentsRangeStart,
-                                    end: allDocumentsRangeEnd,
+                                    start: pagination.rangeStart,
+                                    end: pagination.rangeEnd,
                                     total: visibleDocs.length,
                                 })}
                             </p>
@@ -631,20 +257,20 @@ export async function DocsIndex({
                             ))}
                         </div>
                     )}
-                    {allDocumentsTotalPages > 1 && (
+                    {pagination.totalPages > 1 && (
                         <nav
                             aria-label={t('allDocuments.paginationAriaLabel')}
                             className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between"
                         >
                             <Link
                                 href={getDocsPageHref(
-                                    allDocumentsCurrentPage - 1,
+                                    pagination.page - 1,
                                     resolvedControls
                                 )}
-                                aria-disabled={allDocumentsCurrentPage === 1}
+                                aria-disabled={pagination.page === 1}
                                 className={cn(
                                     'inline-flex items-center justify-center rounded-full border border-border bg-surface-container-lowest px-4 py-2 text-sm font-semibold text-on-surface-variant transition hover:border-primary/50 hover:text-primary',
-                                    allDocumentsCurrentPage === 1 &&
+                                    pagination.page === 1 &&
                                         'pointer-events-none opacity-45'
                                 )}
                             >
@@ -652,7 +278,7 @@ export async function DocsIndex({
                             </Link>
                             <div className="flex flex-wrap items-center gap-1.5">
                                 {Array.from(
-                                    { length: allDocumentsTotalPages },
+                                    { length: pagination.totalPages },
                                     (_, index) => index + 1
                                 ).map((page) => (
                                     <Link
@@ -662,13 +288,13 @@ export async function DocsIndex({
                                             resolvedControls
                                         )}
                                         aria-current={
-                                            page === allDocumentsCurrentPage
+                                            page === pagination.page
                                                 ? 'page'
                                                 : undefined
                                         }
                                         className={cn(
                                             'inline-flex size-9 items-center justify-center rounded-full border text-sm font-semibold transition',
-                                            page === allDocumentsCurrentPage
+                                            page === pagination.page
                                                 ? 'border-primary bg-primary text-primary-foreground'
                                                 : 'border-border bg-surface-container-lowest text-on-surface-variant hover:border-primary/50 hover:text-primary'
                                         )}
@@ -679,17 +305,15 @@ export async function DocsIndex({
                             </div>
                             <Link
                                 href={getDocsPageHref(
-                                    allDocumentsCurrentPage + 1,
+                                    pagination.page + 1,
                                     resolvedControls
                                 )}
                                 aria-disabled={
-                                    allDocumentsCurrentPage ===
-                                    allDocumentsTotalPages
+                                    pagination.page === pagination.totalPages
                                 }
                                 className={cn(
                                     'inline-flex items-center justify-center rounded-full border border-border bg-surface-container-lowest px-4 py-2 text-sm font-semibold text-on-surface-variant transition hover:border-primary/50 hover:text-primary',
-                                    allDocumentsCurrentPage ===
-                                        allDocumentsTotalPages &&
+                                    pagination.page === pagination.totalPages &&
                                         'pointer-events-none opacity-45'
                                 )}
                             >

@@ -24,6 +24,15 @@
   - 예: `/docs?q=react&source=local`
   - 검색 결과에서는 `sort`를 숨기고 관련도 순서를 유지한다.
 
+## 리팩터링
+
+- `docs-index.tsx`가 화면 조립 책임만 갖도록 UI와 model을 분리했다.
+- `DocsSearchPanel`, `DocsIndexCard`, `DocsIndexControlsBar`, `DocsIndexEmptyState`, `DocsIndexControlPill`을 개별 UI 컴포넌트로 분리했다.
+- pagination 계산은 `docs-index-pagination.ts`로 분리했다.
+- section summary 계산은 `docs-index-summary.ts`로 분리했다.
+- 문서 카드의 정보 계층은 `섹션/날짜 -> 제목 -> 요약 -> 보조 메타` 순서로 정리했다.
+  - `local/remote`, 읽기 시간, topic label, tags는 제목보다 낮은 우선순위로 배치한다.
+
 ## 다음 단계
 
 - 페이지네이션과 필터 조합의 모바일 터치 영역을 실제 기기에서 점검한다.
