@@ -11,6 +11,7 @@ import {
     DOCS_INDEX_SECTION_FILTERS,
     DOCS_INDEX_SOURCE_FILTERS,
     DOCS_INDEX_SORT_OPTIONS,
+    filterDocsIndexControls,
     getDocsIndexHref,
     resolveDocsIndexControls,
     type DocsIndexControls,
@@ -128,8 +129,10 @@ function DocsIndexControlPill({
 
 async function DocsIndexEmptyState({
     controls,
+    keyword,
 }: {
     controls: DocsIndexControls
+    keyword?: string
 }) {
     const t = await getTranslations('docsIndex')
 
@@ -147,6 +150,7 @@ async function DocsIndexEmptyState({
             <Link
                 href={getDocsIndexHref({
                     controls,
+                    keyword,
                     overrides: {
                         section: 'all',
                         source: 'all',
@@ -163,10 +167,14 @@ async function DocsIndexEmptyState({
 
 async function DocsIndexControlsBar({
     controls,
+    keyword,
     resultCount,
+    showSort = true,
 }: {
     controls: DocsIndexControls
+    keyword?: string
     resultCount: number
+    showSort?: boolean
 }) {
     const t = await getTranslations('docsIndex')
 
@@ -190,6 +198,7 @@ async function DocsIndexControlsBar({
                                 active={controls.section === filter.value}
                                 href={getDocsIndexHref({
                                     controls,
+                                    keyword,
                                     overrides: { section: filter.value },
                                 })}
                             >
@@ -205,25 +214,31 @@ async function DocsIndexControlsBar({
                                 active={controls.source === source}
                                 href={getDocsIndexHref({
                                     controls,
+                                    keyword,
                                     overrides: { source },
                                 })}
                             >
                                 {t(`filters.sources.${source}`)}
                             </DocsIndexControlPill>
                         ))}
-                        <span className="mx-1 hidden h-7 w-px bg-border sm:block" />
-                        {DOCS_INDEX_SORT_OPTIONS.map((sort) => (
-                            <DocsIndexControlPill
-                                key={sort}
-                                active={controls.sort === sort}
-                                href={getDocsIndexHref({
-                                    controls,
-                                    overrides: { sort },
-                                })}
-                            >
-                                {t(`filters.sorts.${sort}`)}
-                            </DocsIndexControlPill>
-                        ))}
+                        {showSort && (
+                            <>
+                                <span className="mx-1 hidden h-7 w-px bg-border sm:block" />
+                                {DOCS_INDEX_SORT_OPTIONS.map((sort) => (
+                                    <DocsIndexControlPill
+                                        key={sort}
+                                        active={controls.sort === sort}
+                                        href={getDocsIndexHref({
+                                            controls,
+                                            keyword,
+                                            overrides: { sort },
+                                        })}
+                                    >
+                                        {t(`filters.sorts.${sort}`)}
+                                    </DocsIndexControlPill>
+                                ))}
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
@@ -398,8 +413,9 @@ export async function DocsIndex({
 }: DocsIndexProps) {
     const t = await getTranslations('docsIndex')
     const resolvedControls = controls ?? resolveDocsIndexControls({})
+    const searchControls = { ...resolvedControls, sort: 'latest' as const }
     const visibleDocs = keyword
-        ? docs
+        ? filterDocsIndexControls(docs, searchControls)
         : applyDocsIndexControls(docs, resolvedControls)
     const sectionSummary = getSectionSummary(docs)
     const latestUpdated = docs[0]?.date ? getTime(docs[0].date) : null
@@ -441,8 +457,15 @@ export async function DocsIndex({
                         submitLabel={t('search.submit')}
                         recommendations={recommendations}
                         resultCount={t('search.countLabel', {
-                            count: docs.length,
+                            count: visibleDocs.length,
                         })}
+                    />
+
+                    <DocsIndexControlsBar
+                        controls={searchControls}
+                        keyword={keyword}
+                        resultCount={visibleDocs.length}
+                        showSort={false}
                     />
 
                     <section className="space-y-4">
@@ -462,15 +485,22 @@ export async function DocsIndex({
                                 {t('search.backToDocs')}
                             </Link>
                         </div>
-                        <div className="grid grid-cols-1 gap-3">
-                            {docs.map((doc) => (
-                                <DocsIndexCard
-                                    key={doc.id}
-                                    doc={doc}
-                                    keyword={keyword}
-                                />
-                            ))}
-                        </div>
+                        {visibleDocs.length === 0 ? (
+                            <DocsIndexEmptyState
+                                controls={searchControls}
+                                keyword={keyword}
+                            />
+                        ) : (
+                            <div className="grid grid-cols-1 gap-3">
+                                {visibleDocs.map((doc) => (
+                                    <DocsIndexCard
+                                        key={doc.id}
+                                        doc={doc}
+                                        keyword={keyword}
+                                    />
+                                ))}
+                            </div>
+                        )}
                     </section>
                 </div>
             </main>

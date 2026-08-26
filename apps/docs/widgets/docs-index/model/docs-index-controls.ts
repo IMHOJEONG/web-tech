@@ -83,17 +83,7 @@ export function applyDocsIndexControls(
     docs: SearchData[],
     controls: DocsIndexControls
 ) {
-    const sectionFilter = DOCS_INDEX_SECTION_FILTERS.find(
-        (filter) => filter.value === controls.section
-    )
-    const filteredDocs = docs.filter((doc) => {
-        const matchesSection =
-            !sectionFilter?.section || doc.section === sectionFilter.section
-        const matchesSource =
-            controls.source === 'all' || doc.contentSource === controls.source
-
-        return matchesSection && matchesSource
-    })
+    const filteredDocs = filterDocsIndexControls(docs, controls)
 
     return [...filteredDocs].sort((a, b) => {
         if (controls.sort === 'title') {
@@ -114,6 +104,24 @@ export function applyDocsIndexControls(
         }
 
         return normalizeDateValue(b.date) - normalizeDateValue(a.date)
+    })
+}
+
+export function filterDocsIndexControls(
+    docs: SearchData[],
+    controls: DocsIndexControls
+) {
+    const sectionFilter = DOCS_INDEX_SECTION_FILTERS.find(
+        (filter) => filter.value === controls.section
+    )
+
+    return docs.filter((doc) => {
+        const matchesSection =
+            !sectionFilter?.section || doc.section === sectionFilter.section
+        const matchesSource =
+            controls.source === 'all' || doc.contentSource === controls.source
+
+        return matchesSection && matchesSource
     })
 }
 

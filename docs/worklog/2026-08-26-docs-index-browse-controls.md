@@ -19,8 +19,11 @@
 - 문서 카드에 출처, 읽기 시간, topic label, tags를 보조 메타로 노출했다.
 - 필터 결과가 0개일 때 전용 empty state를 보여주고 전체 문서로 돌아갈 수 있게 했다.
 - production route check 기본 목록에 대표 필터 URL을 추가했다.
+- 검색 결과 화면에도 `section/source` 필터를 적용했다.
+  - 예: `/docs?q=react&section=web`
+  - 예: `/docs?q=react&source=local`
+  - 검색 결과에서는 `sort`를 숨기고 관련도 순서를 유지한다.
 
 ## 다음 단계
 
-- 검색 결과 화면에도 섹션/source 필터를 확장할지 결정한다.
 - 페이지네이션과 필터 조합의 모바일 터치 영역을 실제 기기에서 점검한다.

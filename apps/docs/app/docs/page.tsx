@@ -75,6 +75,7 @@ export default async function Page({ searchParams }: Props) {
         case 'search-results':
             return (
                 <DocsIndex
+                    controls={controls}
                     docs={pageState.docs}
                     keyword={pageState.keyword}
                     recommendations={RECOMMENDED_SEARCH_TERMS}
