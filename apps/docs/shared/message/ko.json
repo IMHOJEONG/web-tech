@@ -11,6 +11,7 @@
         }
     },
     "navigation": {
+        "mobileAriaLabel": "모바일 주요 내비게이션",
         "feed": "Feed",
         "web": "Web",
         "mobile": "Mobile",
@@ -38,6 +39,7 @@
     },
     "footer": {
         "tagline": "© {year} {brand} // PRECISION ENGINEERED",
+        "linksAriaLabel": "푸터 보조 링크",
         "links": {
             "privacy": "PRIVACY",
             "terms": "TERMS",

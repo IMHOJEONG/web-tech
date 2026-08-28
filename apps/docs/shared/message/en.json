@@ -11,6 +11,7 @@
         }
     },
     "navigation": {
+        "mobileAriaLabel": "Mobile primary navigation",
         "feed": "Feed",
         "web": "Web",
         "mobile": "Mobile",
@@ -38,6 +39,7 @@
     },
     "footer": {
         "tagline": "© {year} {brand} // PRECISION ENGINEERED",
+        "linksAriaLabel": "Footer utility links",
         "links": {
             "privacy": "PRIVACY",
             "terms": "TERMS",
