@@ -68,7 +68,7 @@ export async function DocsIndexCard({
                 className
             )}
         >
-            <article className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <article className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                 <div className="min-w-0 space-y-3">
                     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                         <span className="font-display text-[0.68rem] font-semibold tracking-[0.16em] text-primary uppercase">
@@ -87,7 +87,7 @@ export async function DocsIndexCard({
 
                     <div className="space-y-2">
                         <h3
-                            className="text-base font-semibold tracking-[-0.02em] text-on-surface transition-colors group-hover:text-primary sm:text-lg [&_.search-highlight]:rounded-sm [&_.search-highlight]:bg-primary-container/70 [&_.search-highlight]:px-1 [&_.search-highlight]:py-px [&_.search-highlight]:font-medium [&_.search-highlight]:text-on-primary-container dark:[&_.search-highlight]:bg-primary/18 dark:[&_.search-highlight]:text-primary-fixed"
+                            className="text-base font-semibold tracking-[-0.02em] text-on-surface transition-colors group-hover:text-primary md:text-lg [&_.search-highlight]:rounded-sm [&_.search-highlight]:bg-primary-container/70 [&_.search-highlight]:px-1 [&_.search-highlight]:py-px [&_.search-highlight]:font-medium [&_.search-highlight]:text-on-primary-container dark:[&_.search-highlight]:bg-primary/18 dark:[&_.search-highlight]:text-primary-fixed"
                             dangerouslySetInnerHTML={{
                                 __html: resultItem.preview.titleHtml,
                             }}

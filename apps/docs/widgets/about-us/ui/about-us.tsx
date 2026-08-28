@@ -98,7 +98,7 @@ export async function AboutUs() {
                     </div>
                 </section>
 
-                <section className="grid gap-3 md:grid-cols-3">
+                <section className="grid gap-3 lg:grid-cols-3">
                     {pillarCards.map((card, index) => (
                         <article
                             key={card.title}
@@ -180,7 +180,7 @@ export async function AboutUs() {
 
                     <article className="relative overflow-hidden rounded-3xl border border-border bg-surface-container-lowest p-5">
                         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,107,31,0.1),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(139,92,246,0.12),transparent_36%)]" />
-                        <div className="relative grid h-full gap-3 sm:grid-cols-3">
+                        <div className="relative grid h-full gap-3 lg:grid-cols-3">
                             {pillarCards.map((card) => (
                                 <div
                                     key={card.eyebrow}

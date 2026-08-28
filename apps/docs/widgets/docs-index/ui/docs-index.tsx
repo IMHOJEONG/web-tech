@@ -154,7 +154,7 @@ export async function DocsIndex({
                     recommendations={recommendations}
                 />
 
-                <section className="motion-layout grid gap-3 sm:grid-cols-3">
+                <section className="motion-layout grid gap-3 md:grid-cols-3">
                     <div
                         className="motion-layout motion-reveal rounded-2xl border border-border bg-surface-container-lowest p-4"
                         style={getMotionOrderStyle(0)}
@@ -212,7 +212,7 @@ export async function DocsIndex({
                             {t('sections.toCategory')}
                         </Link>
                     </div>
-                    <div className="motion-layout grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
+                    <div className="motion-layout grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-5">
                         {sectionSummary.map((section, index) => {
                             const sectionKey = getDocsIndexSectionMessageKey(
                                 section.key

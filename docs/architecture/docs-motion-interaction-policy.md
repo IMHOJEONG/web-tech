@@ -57,3 +57,9 @@ motion은 장식이 아니라 상태 변화의 방향을 알려주는 보조 수
 따라서 `/docs`와 `/feed` 목록 전환은 부드럽지만 짧게 유지한다.
 
 긴 전환이 필요한 경우에도 `prefers-reduced-motion` 대응을 먼저 확인한다.
+
+## 검증
+
+브라우저에서 motion 적용 여부를 확인할 때는 `docs/runbooks/docs-responsive-browser-device-checklist.md`의 `Motion 확인 방법`을 따른다.
+
+특히 Chrome DevTools의 `Rendering` 패널에서 `Emulate CSS media feature prefers-reduced-motion`을 `no-preference`와 `reduce`로 번갈아 확인한다.

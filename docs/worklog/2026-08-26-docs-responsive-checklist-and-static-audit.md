@@ -63,3 +63,21 @@ rg -n "sm:|md:|lg:|xl:" apps/docs/widgets/docs-index apps/docs/widgets/m apps/do
 - `DocsIndex` section summary grid를 640px 구간에서는 1열 또는 2열로 유지할지 검토
 - `HubPage` panel grid의 `md:grid-cols-3`를 `lg:grid-cols-3`로 늦출지 검토
 - `AboutUs` 내부 `sm:grid-cols-3` 사용 지점을 실제 viewport에서 확인
+
+## 1차 조치
+
+정적 점검에서 확인된 후보 중 사용자 영향이 작고 정책과 잘 맞는 부분을 먼저 조정했다.
+
+- `DocsIndexCard`
+  - `sm:flex-row`를 `md:flex-row`로 늦췄다.
+  - 제목 크기 증가도 `sm:text-lg`에서 `md:text-lg`로 늦췄다.
+- `DocsIndex`
+  - stats grid를 `sm:grid-cols-3`에서 `md:grid-cols-3`로 늦췄다.
+  - section summary grid를 `sm:grid-cols-2`에서 `md:grid-cols-2`로 늦췄다.
+- `HubPage`
+  - panel grid를 `md:grid-cols-3`에서 `lg:grid-cols-3`로 늦췄다.
+- `AboutUs`
+  - pillar cards grid를 `md:grid-cols-3`에서 `lg:grid-cols-3`로 늦췄다.
+  - profile side cards grid를 `sm:grid-cols-3`에서 `lg:grid-cols-3`로 늦췄다.
+
+의도는 `640px ~ 1023px`에서 shell은 compact desktop처럼 보이더라도, 콘텐츠 밀도는 너무 빨리 desktop layout으로 올라가지 않게 하는 것이다.

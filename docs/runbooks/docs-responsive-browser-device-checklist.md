@@ -81,6 +81,62 @@ pnpm dev:docs
 
 6. 첫 로드, 스크롤 중, drawer/search open 상태를 각각 확인한다.
 
+## Motion 확인 방법
+
+`motion-layout`, `motion-reveal` 같은 CSS motion은 의도적으로 짧게 적용한다. 빠른 기기에서는 눈에 잘 띄지 않을 수 있으므로 DevTools에서 아래 순서로 확인한다.
+
+### Chrome DevTools
+
+1. DevTools를 연다.
+
+```text
+macOS: Cmd + Option + I
+Windows/Linux: Ctrl + Shift + I
+```
+
+2. Command Menu를 연다.
+
+```text
+macOS: Cmd + Shift + P
+Windows/Linux: Ctrl + Shift + P
+```
+
+3. `Rendering`을 입력하고 `Show Rendering`을 선택한다.
+
+4. 하단 drawer에 열린 `Rendering` 패널에서 `Emulate CSS media feature prefers-reduced-motion`을 찾는다.
+
+5. 아래 값을 번갈아 선택한다.
+
+- `No emulation`: 실제 OS 설정 그대로 확인
+- `prefers-reduced-motion: no-preference`: 애니메이션 허용 상태로 확인
+- `prefers-reduced-motion: reduce`: 움직임 줄이기 상태로 확인
+
+### 기대 결과
+
+- `no-preference`에서는 `/docs?section=web`, `/docs?source=local`, `/feed?topic=web` 이동 시 카드가 짧게 fade-in/up reveal 된다.
+- `reduce`에서는 카드 reveal animation이 보이지 않아야 한다.
+- `reduce`에서도 레이아웃과 콘텐츠는 동일하게 보여야 한다.
+
+### CSS 적용 여부 확인
+
+Elements 패널에서 카드 또는 패널을 선택한 뒤 class와 computed style을 확인한다.
+
+- `motion-layout`이 있으면 `transition-property`가 적용된다.
+- `motion-reveal`이 있으면 `animation-name: docs-motion-reveal`이 적용된다.
+- `prefers-reduced-motion: reduce` 상태에서는 `animation: none`, `transition: none`으로 바뀌어야 한다.
+
+### 눈으로 잘 안 보일 때
+
+실제 사용자용 duration은 짧게 유지한다. 확인이 어려울 때만 임시로 duration을 늘려 비교한다.
+
+```css
+.motion-reveal {
+  animation: docs-motion-reveal 1200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+```
+
+확인 후에는 다시 `360ms`로 돌린다.
+
 ## Shell 체크리스트
 
 ### Header

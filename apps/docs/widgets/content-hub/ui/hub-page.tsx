@@ -73,7 +73,7 @@ export function HubPage({
                     </div>
                 </section>
 
-                <section className="grid gap-3 md:grid-cols-3">
+                <section className="grid gap-3 lg:grid-cols-3">
                     {panels.map((panel, index) => (
                         <article
                             key={panel.title}
