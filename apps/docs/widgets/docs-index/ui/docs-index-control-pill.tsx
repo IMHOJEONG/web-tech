@@ -18,13 +18,13 @@ export function DocsIndexControlPill({
             href={href}
             aria-current={active ? 'true' : undefined}
             className={cn(
-                'shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold transition',
+                'max-w-full rounded-full border px-3 py-1.5 text-xs font-semibold transition',
                 active
                     ? 'border-primary bg-primary text-primary-foreground shadow-glow-primary'
                     : 'border-border bg-surface-container-lowest text-on-surface-variant hover:border-primary/50 hover:text-primary'
             )}
         >
-            {children}
+            <span className="block max-w-full truncate">{children}</span>
         </Link>
     )
 }

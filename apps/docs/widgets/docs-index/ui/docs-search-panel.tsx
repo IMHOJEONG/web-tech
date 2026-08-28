@@ -22,17 +22,17 @@ export function DocsSearchPanel({
     resultCount,
 }: DocsSearchPanelProps) {
     return (
-        <section className="ds-panel motion-layout overflow-hidden p-5 sm:p-6 lg:p-7">
-            <div className="motion-layout grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.72fr)] lg:items-end">
-                <div className="space-y-3">
+        <section className="ds-panel motion-layout max-w-full overflow-hidden p-5 sm:p-6 lg:p-7">
+            <div className="motion-layout grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.72fr)] lg:items-end">
+                <div className="min-w-0 space-y-3">
                     <p className="text-xs font-semibold tracking-[0.2em] text-outline uppercase">
                         {eyebrow}
                     </p>
                     <div className="space-y-2">
-                        <h1 className="text-2xl font-extrabold tracking-tight text-on-surface sm:text-3xl lg:text-4xl">
+                        <h1 className="max-w-full break-keep text-2xl font-extrabold tracking-tight text-on-surface [overflow-wrap:anywhere] sm:text-3xl lg:text-4xl">
                             {title}
                         </h1>
-                        <p className="max-w-2xl text-sm leading-7 text-on-surface-variant sm:text-base">
+                        <p className="max-w-2xl break-keep text-sm leading-7 text-on-surface-variant [overflow-wrap:anywhere] sm:text-base">
                             {description}
                         </p>
                     </div>
@@ -43,10 +43,10 @@ export function DocsSearchPanel({
                     )}
                 </div>
 
-                <div className="space-y-3">
+                <div className="min-w-0 space-y-3">
                     <form
                         action="/docs"
-                        className="flex overflow-hidden rounded-2xl border border-border bg-surface-container-lowest p-1.5 focus-within:border-primary/60 focus-within:shadow-glow-primary"
+                        className="flex min-w-0 overflow-hidden rounded-2xl border border-border bg-surface-container-lowest p-1.5 focus-within:border-primary/60 focus-within:shadow-glow-primary"
                     >
                         <input
                             name="q"
@@ -62,14 +62,16 @@ export function DocsSearchPanel({
                             {submitLabel}
                         </button>
                     </form>
-                    <div className="flex gap-2 overflow-x-auto pb-1">
+                    <div className="flex min-w-0 flex-wrap gap-2 pb-1">
                         {recommendations.map((term) => (
                             <Link
                                 key={term}
                                 href={`/docs?q=${encodeURIComponent(term)}`}
-                                className="shrink-0 rounded-full border border-border bg-surface-container px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:border-primary/50 hover:text-primary"
+                                className="min-w-0 max-w-full rounded-full border border-border bg-surface-container px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:border-primary/50 hover:text-primary"
                             >
-                                {term}
+                                <span className="block max-w-full truncate">
+                                    {term}
+                                </span>
                             </Link>
                         ))}
                     </div>

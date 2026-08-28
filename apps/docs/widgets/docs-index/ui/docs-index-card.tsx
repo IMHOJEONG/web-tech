@@ -68,8 +68,8 @@ export async function DocsIndexCard({
                 className
             )}
         >
-            <article className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                <div className="min-w-0 space-y-3">
+            <article className="flex min-w-0 flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                <div className="min-w-0 flex-1 space-y-3">
                     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                         <span className="font-display text-[0.68rem] font-semibold tracking-[0.16em] text-primary uppercase">
                             {doc.section}
@@ -87,14 +87,14 @@ export async function DocsIndexCard({
 
                     <div className="space-y-2">
                         <h3
-                            className="text-base font-semibold tracking-[-0.02em] text-on-surface transition-colors group-hover:text-primary md:text-lg [&_.search-highlight]:rounded-sm [&_.search-highlight]:bg-primary-container/70 [&_.search-highlight]:px-1 [&_.search-highlight]:py-px [&_.search-highlight]:font-medium [&_.search-highlight]:text-on-primary-container dark:[&_.search-highlight]:bg-primary/18 dark:[&_.search-highlight]:text-primary-fixed"
+                            className="break-keep text-base font-semibold tracking-[-0.02em] text-on-surface transition-colors [overflow-wrap:anywhere] group-hover:text-primary md:text-lg [&_.search-highlight]:rounded-sm [&_.search-highlight]:bg-primary-container/70 [&_.search-highlight]:px-1 [&_.search-highlight]:py-px [&_.search-highlight]:font-medium [&_.search-highlight]:text-on-primary-container dark:[&_.search-highlight]:bg-primary/18 dark:[&_.search-highlight]:text-primary-fixed"
                             dangerouslySetInnerHTML={{
                                 __html: resultItem.preview.titleHtml,
                             }}
                         />
                         {(keyword || doc.summary) && (
                             <p
-                                className="line-clamp-2 text-sm leading-6 text-on-surface-variant [&_.search-highlight]:rounded-sm [&_.search-highlight]:bg-primary-container/70 [&_.search-highlight]:px-1 [&_.search-highlight]:py-px [&_.search-highlight]:font-medium [&_.search-highlight]:text-on-primary-container dark:[&_.search-highlight]:bg-primary/18 dark:[&_.search-highlight]:text-primary-fixed"
+                                className="line-clamp-2 break-keep text-sm leading-6 text-on-surface-variant [overflow-wrap:anywhere] [&_.search-highlight]:rounded-sm [&_.search-highlight]:bg-primary-container/70 [&_.search-highlight]:px-1 [&_.search-highlight]:py-px [&_.search-highlight]:font-medium [&_.search-highlight]:text-on-primary-container dark:[&_.search-highlight]:bg-primary/18 dark:[&_.search-highlight]:text-primary-fixed"
                                 dangerouslySetInnerHTML={{
                                     __html: resultItem.preview.excerptHtml,
                                 }}

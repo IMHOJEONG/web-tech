@@ -102,12 +102,12 @@ export async function DocsIndex({
                     />
 
                     <section className="space-y-4">
-                        <div className="flex items-center justify-between gap-3">
-                            <div>
+                        <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                            <div className="min-w-0">
                                 <p className="text-xs font-semibold tracking-[0.2em] text-outline uppercase">
                                     {t('search.matchingEyebrow')}
                                 </p>
-                                <h2 className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
+                                <h2 className="mt-2 break-keep text-2xl font-bold tracking-tight text-on-surface [overflow-wrap:anywhere]">
                                     {t('search.matchingTitle')}
                                 </h2>
                             </div>
@@ -196,12 +196,12 @@ export async function DocsIndex({
                 />
 
                 <section className="space-y-4">
-                    <div className="flex items-center justify-between gap-3">
-                        <div>
+                    <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="min-w-0">
                             <p className="text-xs font-semibold tracking-[0.2em] text-outline uppercase">
                                 {t('sections.eyebrow')}
                             </p>
-                            <h2 className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
+                            <h2 className="mt-2 break-keep text-2xl font-bold tracking-tight text-on-surface [overflow-wrap:anywhere]">
                                 {t('sections.title')}
                             </h2>
                         </div>
@@ -246,15 +246,15 @@ export async function DocsIndex({
                 </section>
 
                 <section className="space-y-4">
-                    <div className="flex items-center justify-between gap-3">
-                        <div>
+                    <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="min-w-0">
                             <p className="text-xs font-semibold tracking-[0.2em] text-outline uppercase">
                                 {t('allDocuments.eyebrow')}
                             </p>
-                            <h2 className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
+                            <h2 className="mt-2 break-keep text-2xl font-bold tracking-tight text-on-surface [overflow-wrap:anywhere]">
                                 {t('allDocuments.title')}
                             </h2>
-                            <p className="mt-2 text-sm text-on-surface-variant">
+                            <p className="mt-2 break-keep text-sm text-on-surface-variant [overflow-wrap:anywhere]">
                                 {t('allDocuments.pageSummary', {
                                     start: pagination.rangeStart,
                                     end: pagination.rangeEnd,
