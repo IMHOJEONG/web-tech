@@ -108,6 +108,7 @@
   - `/docs`, `/feed`의 breakpoint/list 변화에 CSS 기반 motion 적용 완료
   - 1차 조치: `/docs`, channel hub, about의 빠른 다열화 지점 일부 완화
   - 2차 조치: `/docs` 모바일 검색/필터 영역의 텍스트 잘림과 가로 스크롤 발생 지점 완화
+  - 3차 조치: Playwright 기반 mobile/tablet horizontal overflow smoke test 추가
   - 기준 문서: `docs/runbooks/docs-responsive-browser-device-checklist.md`
 - [-] `P1` 루트 `/` 화면을 `141:2 Landing Page - HEAPFORGE` 기준으로 재구성한다.
   - 현재 `HeroSection` 단일 구성을 landing page 섹션 구조로 확장

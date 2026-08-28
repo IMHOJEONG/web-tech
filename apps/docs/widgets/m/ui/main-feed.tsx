@@ -623,7 +623,7 @@ export function MainFeed({
                         </Link>
                     </div>
 
-                    <div className="relative lg:col-span-5">
+                    <div className="relative overflow-hidden rounded-3xl lg:col-span-5">
                         <div className="absolute -left-8 bottom-0 size-40 rounded-full bg-secondary/10 blur-3xl" />
                         <div className="absolute -right-8 top-0 size-48 rounded-full bg-primary/10 blur-3xl" />
                         <div className="ds-code-shell relative p-4">
