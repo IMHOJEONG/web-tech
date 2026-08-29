@@ -95,6 +95,7 @@
 - [-] `P2` local MDX와 remote HTML/markdown 렌더링 전략을 한 단계 더 통일한다.
   - 기본 방향은 renderer 단일화가 아니라 output contract 통일로 확정
   - 1차 적용: remote HTML code block을 local MDX와 같은 `.mdx-code-frame` 계층으로 normalize
+  - 1.5차 적용: remote HTML code block에 client-side copy enhancer 연결
   - remote MDX evaluation, markdown-first, HTML-only 전략은 후속 spike로 검증
   - 기준 문서: `docs/architecture/docs-article-rendering-convergence.md`
 

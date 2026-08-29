@@ -150,8 +150,8 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 - 실제 코드 영역은 `.mdx-code-block`을 사용한다.
 - 언어 라벨은 `.mdx-code-frame__language`로 우측 하단에 둔다.
 - local MDX는 React component 기반 copy button을 가진다.
-- remote HTML은 1차로 같은 frame / language / lightweight highlight만 보장한다.
-- remote HTML copy button은 client enhancer가 필요하므로 후속 후보로 둔다.
+- remote HTML은 같은 frame / language / lightweight highlight를 보장한다.
+- remote HTML copy button은 client enhancer로 부착한다.
 
 ### Common Styling
 
@@ -168,6 +168,7 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 - remote HTML `<pre><code class="language-*">`를 `.mdx-code-frame` 출력 계약으로 normalize
 - remote code block에 lightweight syntax highlight 적용
 - local MDX와 remote HTML code block이 같은 CSS token을 공유
+- remote HTML code block에 client enhancer로 copy button 부착
 
 ## Future Experiments
 
@@ -178,7 +179,7 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 - remote MDX evaluation spike
 - markdown-first sidecar spike
 - HTML-only pre-render spike
-- remote HTML client enhancer로 copy button 붙이기
+- remote HTML client enhancer의 keyboard / clipboard failure UX 점검
 
 검증 기준:
 

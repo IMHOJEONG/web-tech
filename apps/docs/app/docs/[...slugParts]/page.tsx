@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound, permanentRedirect } from 'next/navigation'
-import { Suspense } from 'react'
-import { cache } from 'react'
+import { cache, Suspense } from 'react'
+import { RemoteCodeCopyEnhancer } from '~/feature/code-block/ui/remote-code-copy-enhancer'
 import { buildArticleMetadata } from '~/lib/article-metadata'
 import {
     getDocHref,
@@ -62,6 +62,7 @@ export default async function Page({
                             __html: renderedArticle.content,
                         }}
                     />
+                    <RemoteCodeCopyEnhancer />
                 </div>
             </ArticleContentLayout>
         )
