@@ -51,5 +51,12 @@ export default defineConfig({
                 viewport: { width: 768, height: 1024 },
             },
         },
+        {
+            name: 'chromium-desktop',
+            use: {
+                browserName: 'chromium',
+                viewport: { width: 1280, height: 800 },
+            },
+        },
     ],
 })

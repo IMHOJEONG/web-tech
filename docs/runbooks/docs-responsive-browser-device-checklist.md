@@ -223,8 +223,8 @@ rg -n "sm:grid-cols|sm:flex-row|md:grid-cols|md:hidden|md:block" apps/docs/widge
 - viewport별 route smoke test
 - header/drawer/bottom nav visibility assertion
 - `/docs` 주요 touch target 최소 크기 assertion
-- screenshot diff
 - anchor scroll 후 heading visibility assertion
+- screenshot diff
 
 도입 시 우선순위:
 
@@ -233,3 +233,9 @@ rg -n "sm:grid-cols|sm:flex-row|md:grid-cols|md:hidden|md:block" apps/docs/widge
 3. `/docs` 주요 touch target 최소 크기 assertion
 4. article anchor visibility assertion
 5. screenshot diff
+
+현재 자동화된 viewport:
+
+- `chromium-mobile`: `390 x 844`
+- `chromium-tablet`: `768 x 1024`
+- `chromium-desktop`: `1280 x 800`
