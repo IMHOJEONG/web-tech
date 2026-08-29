@@ -239,7 +239,10 @@
 - [x] `P1` `UI/UX` 섹션도 상세형 static spotlight가 아니라 실제 문서 연결 구조로 확장할지 결정
   - `HubPage` 기반 채널 허브에서 시작했지만, 최종적으로는 Figma `141:189` 기준의 전용 editorial hub로 분기
   - 작업 기록: `docs/worklog/2026-05-08-uiux-hub-figma-alignment.md`
-- [ ] `P2` article metadata 정책을 정리한다.
+- [-] `P2` article metadata 정책을 정리한다.
+  - `/docs/{channel}/{slug}` 상세 metadata 정책 문서화 완료
+  - 문서별 title/summary/canonical/OG image 연결 완료
+  - `/category/...` 상세 metadata 적용 여부는 canonical route 정책 확정 후 별도 진행
   - author
   - read time
   - category label

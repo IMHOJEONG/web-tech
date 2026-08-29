@@ -1,5 +1,8 @@
+import { Metadata } from 'next'
 import { notFound, permanentRedirect } from 'next/navigation'
 import { Suspense } from 'react'
+import { cache } from 'react'
+import { buildArticleMetadata } from '~/lib/article-metadata'
 import {
     getDocHref,
     shouldRedirectToCanonicalDocRoute,
@@ -10,6 +13,24 @@ import { components } from '~/mdx-components'
 import { LoadingComponent } from '~/shared/loading-component'
 import { ArticleContentLayout } from '~/widgets/article-detail/ui/article-content-layout'
 
+const getCachedDocByRoutePath = cache(getDocByRoutePath)
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ slugParts: string[] }>
+}): Promise<Metadata> {
+    const { slugParts } = await params
+    const routePath = slugParts.join('/')
+    const target = await getCachedDocByRoutePath(routePath)
+
+    if (!target) {
+        return {}
+    }
+
+    return buildArticleMetadata(target)
+}
+
 export default async function Page({
     params,
 }: {
@@ -17,7 +38,7 @@ export default async function Page({
 }) {
     const { slugParts } = await params
     const routePath = slugParts.join('/')
-    const target = await getDocByRoutePath(routePath)
+    const target = await getCachedDocByRoutePath(routePath)
 
     if (!target) {
         notFound()
