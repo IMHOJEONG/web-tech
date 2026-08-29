@@ -22,9 +22,9 @@
 
 ## Planning / Product
 
-- [ ] `P1` 블로그 개선 로드맵을 기준 문서로 고정한다.
-  - 메타데이터, 라우팅, 검색, 렌더링, 테스트, contributor guide를 한 번에 정리
-  - 신규 과제는 우선 이 로드맵 문서와 `todo` 양쪽에 반영
+- [x] `P1` 블로그 개선 로드맵을 기준 문서로 고정한다.
+  - 메타데이터, 라우팅, 검색, 렌더링, 테스트, contributor guide 기준선을 정리
+  - 신규 과제는 우선 `todo`에 추가하고, 운영 규칙으로 승격되면 로드맵 또는 관련 architecture/runbook 문서에 연결
   - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
 - [x] `P1` `docs` 앱의 정보구조를 확정한다.
   - `Feed / Web / Mobile / UI/UX / About`를 사용자-facing IA로 정의

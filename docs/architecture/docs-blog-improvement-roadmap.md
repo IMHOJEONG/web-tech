@@ -1,5 +1,7 @@
 # Docs Blog Improvement Roadmap
 
+Status: baseline fixed on 2026-08-29
+
 ## Purpose
 
 이 문서는 `apps/docs` 블로그의 다음 개선 단계를 한 문서에서 관리하기 위한 기준서다.
@@ -18,14 +20,28 @@
 - remote content API와 local fallback 운영 경험이 축적되어 있다.
 - `next-intl`, design token, article layout, search UI의 기본 틀이 있다.
 - 정책성 문서가 이미 다수 존재해 후속 정리가 용이하다.
+- local MDX와 remote payload의 주요 metadata 의미 체계가 고정되어 있다.
+- 상세 문서 canonical route가 `/docs/...` 기준으로 정리되어 있다.
+- 검색, route, content validation, metadata 생성에 대한 lib 테스트가 연결되어 있다.
 
 반면 다음 성격의 개선 포인트가 남아 있다.
 
-- 메타데이터 의미 체계가 local MDX와 remote payload 사이에서 완전히 고정되지는 않았다.
-- 상세 URL canonical 정책이 더 강하게 닫혀야 한다.
-- 검색은 현재 “최신순 + 포함 여부 필터”에 가까워 관련도 품질 여지가 있다.
+- 콘텐츠 운영 모델은 local authoring과 remote publishing의 경계가 더 구체화되어야 한다.
 - 렌더링 품질은 좋아졌지만 local MDX와 remote HTML의 표현력 차이가 남을 수 있다.
-- contributor guide와 taxonomy 운영 기준은 계속 보강이 필요하다.
+- taxonomy, series, stale/reviewed 같은 editorial discovery layer는 아직 중기 후보 단계다.
+
+## Baseline Scope
+
+2026-08-29 기준 이 로드맵은 아래 범위를 현재 기준선으로 고정한다.
+
+- Metadata: local MDX frontmatter와 remote API payload는 같은 editorial metadata 의미 체계를 따른다.
+- Routing: 문서 상세 canonical route는 `/docs/{path}`이며, channel/category 상세 alias는 canonical docs route로 수렴한다.
+- Search: `/docs?q=...`와 `/api/search`는 shared ranking, preview, highlight helper를 사용한다.
+- Rendering: local MDX와 remote HTML은 공통 article layout을 통과하되, source별 표현 차이는 rendering convergence 후보로 관리한다.
+- Quality Gates: `test:lib`, `test:content`, `validate:content`, build-time content validation을 기준 검증으로 둔다.
+- Contributor Guide: 새 글 작성, frontmatter, slug, 이미지, publish 전 검증은 runbook 기준으로 운영한다.
+
+이 문서에 없는 새 과제는 먼저 `docs/todo/todo.md`에 추가하고, 운영 규칙으로 승격되면 이 로드맵 또는 관련 architecture/runbook 문서에 연결한다.
 
 ## Core Decisions
 
@@ -94,6 +110,14 @@
 - `slug`는 leaf slug만 사용한다.
 - `id`는 전역 유일 식별자로 `markdownPath`를 우선 권장한다.
 
+현재 상태: 완료.
+
+관련 문서:
+
+- [blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
+- [docs-contributor-guide.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/docs-contributor-guide.md)
+- [docs-article-metadata-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-article-metadata-policy.md)
+
 ### P1. Canonical Routing Hardening
 
 강화할 기준:
@@ -102,6 +126,13 @@
 - `/feed`, `/web`, `/mobile`, `/ui-ux`는 상세 본문을 직접 대표하지 않는다.
 - alias나 legacy route는 허용하더라도 canonical은 한 곳으로 수렴한다.
 - route 계산에서 `slug`는 최후 fallback이고, 기본 source는 `markdownPath`다.
+
+현재 상태: 완료.
+
+관련 문서:
+
+- [docs-content-routing-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-routing-policy.md)
+- [docs-page-metadata-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-page-metadata-policy.md)
 
 ### P1. Search Quality Upgrade
 
@@ -119,6 +150,15 @@
 - excerpt highlight
 - zero-result analytics
 - recommended keyword refresh rule
+
+현재 상태: 1차 완료. typo tolerance와 telemetry는 중기 후보로 유지한다.
+
+완료 범위:
+
+- title / summary / taxonomy / content ranking helper
+- shared preview / highlight helper
+- `/docs?q=...` 검색 화면과 `/api/search` 응답 contract 정렬
+- empty state와 recommended keyword 정책
 
 ### P1. Quality Gates And Tests
 
@@ -153,6 +193,8 @@
 - search API consumer가 늘어날 경우 contract versioning이 필요한지 검토
 - search preview highlight의 visual tuning을 더 세밀하게 조정할지 검토
 
+현재 상태: 기준선 완료. 위 항목은 운영 확장 후보로 유지한다.
+
 ### P1. Contributor Guide
 
 콘텐츠 운영 문서에 반드시 포함할 항목:
@@ -169,6 +211,8 @@
 현재 canonical guide:
 
 - [docs-contributor-guide.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/docs-contributor-guide.md)
+
+현재 상태: 완료. 새 콘텐츠 추가 시 이 runbook과 content validation을 함께 기준으로 본다.
 
 ## Medium-Term Candidates
 
