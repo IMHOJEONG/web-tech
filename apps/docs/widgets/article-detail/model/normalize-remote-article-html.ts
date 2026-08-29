@@ -80,12 +80,53 @@ function normalizeRemoteCodeBlocks(content: string) {
     )
 }
 
+function appendClassName(rawAttributes: string, className: string) {
+    const classNameMatch = rawAttributes.match(/\sclass=(["'])(.*?)\1/i)
+
+    if (!classNameMatch) {
+        return `${rawAttributes} class="${className}"`
+    }
+
+    const [attribute, quote, matchedClassName] = classNameMatch
+    const currentClassName = matchedClassName ?? ''
+
+    if (currentClassName.split(/\s+/).includes(className)) {
+        return rawAttributes
+    }
+
+    return rawAttributes.replace(
+        attribute,
+        ` class=${quote}${currentClassName} ${className}${quote}`
+    )
+}
+
+function normalizeRemoteTables(content: string) {
+    return content.replace(
+        /<table([^>]*)>([\s\S]*?)<\/table>/gi,
+        (_match, rawAttributes: string, innerHtml: string) => {
+            const attributes = appendClassName(rawAttributes, 'mdx-table')
+
+            return `<div class="mdx-table-scroll" role="region" aria-label="문서 표" tabindex="0"><table${attributes}>${innerHtml}</table></div>`
+        }
+    )
+}
+
+function normalizeRemoteBlockquotes(content: string) {
+    return content.replace(
+        /<blockquote([^>]*)>/gi,
+        (_match, rawAttributes: string) =>
+            `<blockquote${appendClassName(rawAttributes, 'mdx-blockquote')}>`
+    )
+}
+
 export function normalizeRemoteArticleHtml(content: string) {
     const toc: TocItem[] = []
 
-    const normalizedCodeContent = normalizeRemoteCodeBlocks(content)
+    const normalizedContentBlocks = normalizeRemoteBlockquotes(
+        normalizeRemoteTables(normalizeRemoteCodeBlocks(content))
+    )
 
-    const normalizedContent = normalizedCodeContent.replace(
+    const normalizedContent = normalizedContentBlocks.replace(
         /<h([1-4])([^>]*)>([\s\S]*?)<\/h\1>/gi,
         (match, depthValue, rawAttributes, innerHtml) => {
             const depth = Number(depthValue) as HeadingDepth

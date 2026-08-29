@@ -24,11 +24,13 @@ Option 4를 채택한다.
 - remote HTML `<pre><code class="language-*">`를 `.mdx-code-frame` / `.mdx-code-block` / `.mdx-code-frame__language` 구조로 normalize했다.
 - remote code block도 lightweight syntax highlight를 적용하도록 했다.
 - remote HTML code block에 client-side copy button enhancer를 붙였다.
+- local MDX와 remote HTML table을 `.mdx-table-scroll` / `.mdx-table` 구조로 맞췄다.
+- remote HTML blockquote에 `.mdx-blockquote` class를 부착하고 공통 여백 규칙을 적용했다.
 - 관련 테스트를 추가했다.
 
 ## Follow-Up
 
 - remote HTML client enhancer의 keyboard / clipboard failure UX 점검
-- callout / table / blockquote의 source별 표현 차이 점검
+- callout authoring syntax 결정
 - markdown-first sidecar spike
 - HTML-only pre-render spike

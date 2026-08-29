@@ -153,6 +153,25 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 - remote HTML은 같은 frame / language / lightweight highlight를 보장한다.
 - remote HTML copy button은 client enhancer로 부착한다.
 
+### Table
+
+- table은 `.mdx-table-scroll`로 감싼다.
+- 실제 table은 `.mdx-table` class를 사용한다.
+- 작은 화면에서는 page 전체가 아니라 table wrapper 내부에서만 가로 스크롤한다.
+- wrapper는 keyboard focus가 가능해야 하며, focus ring은 design token을 따른다.
+
+### Blockquote
+
+- blockquote는 `.mdx-blockquote` class를 사용한다.
+- local MDX와 remote HTML 모두 같은 border, background, spacing token을 공유한다.
+- blockquote 내부 첫/마지막 요소의 margin을 정리해 source별 여백 차이를 줄인다.
+
+### Callout
+
+- callout은 아직 production authoring 문법으로 고정하지 않는다.
+- `> [!NOTE]` 같은 markdown convention, MDX component, remote HTML data attribute 중 하나를 별도 spike로 비교한다.
+- 문법이 정해지기 전에는 blockquote를 callout처럼 과하게 꾸미지 않는다.
+
 ### Common Styling
 
 - typography, color, radius, shadow는 `mdx.css`와 design token 계층을 사용한다.
@@ -169,6 +188,8 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 - remote code block에 lightweight syntax highlight 적용
 - local MDX와 remote HTML code block이 같은 CSS token을 공유
 - remote HTML code block에 client enhancer로 copy button 부착
+- local MDX와 remote HTML table을 `.mdx-table-scroll` / `.mdx-table` 계약으로 통일
+- remote HTML blockquote에 `.mdx-blockquote` class를 부착하고 공통 여백 규칙 적용
 
 ## Future Experiments
 
@@ -180,6 +201,7 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 - markdown-first sidecar spike
 - HTML-only pre-render spike
 - remote HTML client enhancer의 keyboard / clipboard failure UX 점검
+- callout authoring syntax spike
 
 검증 기준:
 

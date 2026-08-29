@@ -38,6 +38,26 @@ test('renderArticleContent normalizes remote html code blocks to shared code fra
     assert.match(rendered.content, /mdx-code-token--number">42/)
 })
 
+test('renderArticleContent normalizes remote html tables and blockquotes to shared article contract', async () => {
+    const rendered = await renderArticleContent({
+        contentFormat: 'html',
+        content: `
+            <h2>Comparison</h2>
+            <blockquote><p>Prefer stable output contracts.</p></blockquote>
+            <table>
+                <thead><tr><th>Source</th><th>Renderer</th></tr></thead>
+                <tbody><tr><td>remote</td><td>html</td></tr></tbody>
+            </table>
+        `,
+    })
+
+    assert.equal(rendered.mode, 'html')
+    assert.match(rendered.content, /class="mdx-blockquote"/)
+    assert.match(rendered.content, /class="mdx-table-scroll"/)
+    assert.match(rendered.content, /role="region"/)
+    assert.match(rendered.content, /<table class="mdx-table">/)
+})
+
 test('renderArticleContent renders mdx content and exposes toc data', async () => {
     const rendered = await renderArticleContent({
         contentFormat: 'mdx',

@@ -97,6 +97,17 @@ export const components = {
         </blockquote>
     ),
 
+    table: ({ children }) => (
+        <div
+            className="mdx-table-scroll"
+            role="region"
+            aria-label="문서 표"
+            tabIndex={0}
+        >
+            <table className="mdx-table">{children}</table>
+        </div>
+    ),
+
     code: ({ children, className, ...props }) => {
         const isInline =
             !className &&

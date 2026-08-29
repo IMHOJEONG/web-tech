@@ -96,6 +96,8 @@
   - 기본 방향은 renderer 단일화가 아니라 output contract 통일로 확정
   - 1차 적용: remote HTML code block을 local MDX와 같은 `.mdx-code-frame` 계층으로 normalize
   - 1.5차 적용: remote HTML code block에 client-side copy enhancer 연결
+  - 2차 적용: local/remote table wrapper와 blockquote class/spacing 계약 통일
+  - 후속: callout authoring syntax 결정 후 output contract에 편입
   - remote MDX evaluation, markdown-first, HTML-only 전략은 후속 spike로 검증
   - 기준 문서: `docs/architecture/docs-article-rendering-convergence.md`
 
