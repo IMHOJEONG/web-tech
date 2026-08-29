@@ -20,6 +20,24 @@ DOCS_SITE_URL=https://heap-forge.app
 
 이 값은 `robots.txt`의 `Host`, `Sitemap`과 `sitemap.xml`의 절대 URL 생성에 사용한다. 값이 없거나 잘못되면 기본값 `https://heap-forge.app`을 사용한다.
 
+## metadataBase 정책
+
+root layout의 `generateMetadata()`는 `metadataBase`를 `DOCS_SITE_URL` 기준으로 설정한다.
+
+이유:
+
+- Open Graph 이미지처럼 상대 경로로 선언된 metadata URL을 배포 도메인 기준 절대 URL로 해석하기 위함이다.
+- Vercel preview, custom domain, 로컬 환경이 섞여도 canonical metadata 기준을 명확히 하기 위함이다.
+- metadata base는 path가 아니라 origin 기준으로 사용한다.
+
+예:
+
+```env
+DOCS_SITE_URL=https://heap-forge.app
+```
+
+이 설정이면 `/og-image.png`는 metadata에서 `https://heap-forge.app/og-image.png` 기준으로 해석된다.
+
 ## robots.txt 정책
 
 - 모든 사용자 에이전트에 `/` 접근을 허용한다.

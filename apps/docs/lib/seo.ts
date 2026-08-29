@@ -26,6 +26,10 @@ export function getSiteUrl() {
     }
 }
 
+export function getMetadataBase() {
+    return new URL(getSiteUrl().origin)
+}
+
 export function toAbsoluteSiteUrl(pathname: string, siteUrl = getSiteUrl()) {
     return new URL(pathname, siteUrl).toString()
 }

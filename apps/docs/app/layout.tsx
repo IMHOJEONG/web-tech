@@ -15,6 +15,7 @@ import {
     REACT_SCAN_SCRIPT_SRC,
     shouldLoadReactInspectionTools,
 } from '~/shared/config/react-inspection-tools'
+import { getMetadataBase } from '~/lib/seo'
 import Footer from '~/widgets/app-shell/ui/footer'
 import Header from '~/widgets/app-shell/ui/header'
 import MobileBottomNav from '~/widgets/app-shell/ui/mobile-bottom-nav'
@@ -39,6 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const t = await getTranslations('metadata.site')
 
     return {
+        metadataBase: getMetadataBase(),
         title: t('title'),
         description: t('description'),
         openGraph: {
