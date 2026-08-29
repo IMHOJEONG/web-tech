@@ -2,7 +2,7 @@
 title: 'HTTP Timeout과 Retry 경계'
 slug: http-timeout-retry-boundary
 date: 2026-08-23
-updatedAt: 2026-08-23
+updatedAt: 2026-08-29
 summary: 서버 API 호출에서 timeout, retry, fallback을 분리해 장애 원인을 흐리지 않는 기준을 정리합니다.
 authorName: 'HoJeong Im'
 authorRole: 'Web Engineer'
@@ -51,6 +51,9 @@ status: published
 - fallback은 다른 데이터 소스나 다른 표현으로 화면을 유지하는 것이다.
 
 - 두 개를 섞으면 장애 원인이 “서버가 느린 것인지, 인증이 틀린 것인지, fallback 데이터가 오래된 것인지” 불명확해진다.
+
+> [!WARNING]
+> `401`, `403`처럼 권한 자체가 실패한 응답은 retry나 fallback으로 덮지 않는다. 재시도하면 장애 원인이 흐려지고, 잘못된 인증 설정을 더 늦게 발견할 수 있다.
 
 ## 운영 기준
 

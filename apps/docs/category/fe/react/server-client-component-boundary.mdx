@@ -2,7 +2,7 @@
 title: 'Server Component와 Client Component 경계'
 slug: server-client-component-boundary
 date: 2026-08-23
-updatedAt: 2026-08-23
+updatedAt: 2026-08-29
 summary: React 기반 앱에서 서버 컴포넌트와 클라이언트 컴포넌트를 나눌 때의 판단 기준을 정리합니다.
 authorName: 'HoJeong Im'
 authorRole: 'Web Engineer'
@@ -59,3 +59,6 @@ status: published
 - 이벤트가 없다면 서버 컴포넌트로 시작하고, interaction이 필요한 가장 작은 지점에서 client boundary를 둔다.
 
 - 서버에서 가져온 데이터는 직렬화 가능한 props로 클라이언트에 넘긴다.
+
+> [!TIP]
+> 판단이 애매하다면 서버 컴포넌트로 시작하고, 실제 브라우저 이벤트가 필요한 가장 작은 컴포넌트에만 `use client`를 붙이는 편이 안전하다.

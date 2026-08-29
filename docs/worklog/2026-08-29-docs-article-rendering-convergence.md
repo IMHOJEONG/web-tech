@@ -30,6 +30,10 @@ Option 4를 채택한다.
 - callout marker 판정은 `feature/callout/model` 공용 로직으로 분리했다.
 - contributor guide에 callout/table 작성 규칙을 추가했다.
 - content style validator에서 callout marker 위치와 지원 marker를 검증하도록 했다.
+- local 문서 3개에 callout 예제를 추가했다.
+  - `HTML-in-Canvas에 대해 알아봅시다`: `NOTE`
+  - `Server Component와 Client Component 경계`: `TIP`
+  - `HTTP Timeout과 Retry 경계`: `WARNING`
 - 관련 테스트를 추가했다.
 
 ## Follow-Up

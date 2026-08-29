@@ -2,7 +2,7 @@
 title: 'HTML-in-Canvas에 대해 알아봅시다'
 slug: html-in-canvas-paint-record
 date: 2026-08-21
-updatedAt: 2026-08-22
+updatedAt: 2026-08-29
 summary: Chromium 실험 API인 drawElementImage 사용 중 발생한 paint record 오류를 정리합니다.
 authorName: 'HoJeong Im'
 authorRole: 'Web Engineer'
@@ -25,6 +25,9 @@ status: published
 - 핵심 API는 `drawElementImage()`이며, DOM 요소의 paint 결과를 Canvas에 그리는 방식으로 이해할 수 있음
 
 - 현재는 실험 기능이므로 실제 서비스 코드에 바로 적용하기보다는 브라우저 렌더링 동작을 이해하기 위한 실험에 가까움
+
+> [!NOTE]
+> 이 글은 production 적용 가이드가 아니라 Chromium 실험 API를 통해 브라우저의 layout / paint 타이밍을 이해하기 위한 기록입니다.
 
 ### 왜 작성하였는가?
 
