@@ -4,6 +4,9 @@
 
 이 문서는 `apps/docs`에서 어떤 글을 로컬 문서로 유지하고, 어떤 글을 원격 문서 서버로 운영할지 정리한다.
 
+상위 운영 모델은
+`docs/architecture/docs-content-operating-model.md`를 따른다.
+
 핵심 기준은 단순하다.
 
 - 로컬 문서: 사이트가 원격 서버 없이도 기본 가치를 유지하기 위한 evergreen 문서
@@ -156,6 +159,7 @@
 
 ## Related Docs
 
+- [docs-content-operating-model.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-operating-model.md)
 - [docs-content-authoring-pipeline.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-pipeline.md)
 - [blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
 - [content-api-auth-ops-runbook.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/content-api-auth-ops-runbook.md)

@@ -30,11 +30,12 @@
   - `Feed / Web / Mobile / UI/UX / About`를 사용자-facing IA로 정의
   - `Category`는 taxonomy 허브, 허브 페이지는 탐색 단위, 상세 페이지는 학습 단위로 문서화
   - 기준 문서: `docs/architecture/docs-app-information-architecture.md`
-- [ ] `P1` 콘텐츠 운영 모델을 정한다.
-  - `apps/docs/data` 기반 정적 운영을 유지할지
-  - 별도 CMS/DB/API 계약으로 확장할지 결정
-  - 글 업로드는 로컬 authoring + 별도 publish workflow로 둘지 확정
-  - 기준 문서: `docs/architecture/docs-content-authoring-pipeline.md`
+- [x] `P1` 콘텐츠 운영 모델을 정한다.
+  - local MDX는 baseline / evergreen / fallback 콘텐츠로 유지
+  - remote content API는 배포 없이 갱신되는 운영형 콘텐츠로 사용
+  - 글 업로드는 local authoring + explicit publish workflow로 확정
+  - CMS/API direct publish는 현재 단계에서 보류
+  - 기준 문서: `docs/architecture/docs-content-operating-model.md`
 - [x] `P2` 검색 경험의 목표를 정의한다.
   - 검색 결과는 `/docs?q=...` 상태로 운영
   - 검색 범위는 `title / summary / taxonomy / content` 우선순위로 정리
