@@ -116,7 +116,7 @@ Vercel 로그에서 `Remote search index unavailable. Searching local docs only.
 로컬 확인 결과:
 
 - `next build`는 성공했다.
-- `next start` 기준 `/category/fe/react/server-client-component-boundary` 첫 요청은 `200`, 약 `0.46s`였다.
+- `next start` 기준 `/docs/category/fe/react/server-client-component-boundary` 첫 요청은 `200`, 약 `0.46s`였다.
 - 반복 요청은 약 `0.04s`였다.
 - `/`, `/feed`, `/docs`도 로컬 프로덕션 기준 1초 안에 응답했다.
 - 따라서 현재 브랜치 코드 기준으로 category 상세 렌더링 자체의 10초 timeout은 로컬에서 재현되지 않았다.

@@ -15,7 +15,7 @@ const DEFAULT_ROUTES = [
     '/mobile',
     '/ui-ux',
     '/docs/web/javascript-event-loop-runtime',
-    '/category/fe/react/server-client-component-boundary',
+    '/docs/category/fe/react/server-client-component-boundary',
 ]
 
 function parseRoutes(argv) {

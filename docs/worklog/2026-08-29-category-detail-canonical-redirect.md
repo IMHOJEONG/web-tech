@@ -41,3 +41,4 @@ category 기반 문서는 다음 route를 canonical로 사용한다.
 
 - `getDocHref({ fileName: 'category/fe/react/server-client-component-boundary' })`는 `/docs/category/fe/react/server-client-component-boundary`를 반환해야 한다.
 - category 상세 alias는 렌더링 비용을 만들지 않고 canonical docs route로 수렴해야 한다.
+- 프로덕션 라우트 체크와 docs-index 테스트 픽스처도 canonical docs route를 사용해야 한다.

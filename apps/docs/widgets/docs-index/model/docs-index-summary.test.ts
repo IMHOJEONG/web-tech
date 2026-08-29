@@ -16,7 +16,7 @@ function createDoc(overrides: Partial<SearchData> = {}): SearchData {
         fileName: 'category/fe/react/react-guide',
         date: '2026-08-24',
         thumbnail: null,
-        href: '/category/fe/react/react-guide',
+        href: '/docs/category/fe/react/react-guide',
         section: 'Web',
         contentSource: 'local',
         ...overrides,

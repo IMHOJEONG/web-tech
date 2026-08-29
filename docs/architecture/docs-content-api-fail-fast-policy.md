@@ -151,7 +151,7 @@ DOCS_PROD_CHECK_BASE_URL=http://localhost:3003 pnpm --filter docs check:prod-rou
 - `/web`
 - `/mobile`
 - `/ui-ux`
-- `/category/fe/react/server-client-component-boundary`
+- `/docs/category/fe/react/server-client-component-boundary`
 
 환경 변수:
 

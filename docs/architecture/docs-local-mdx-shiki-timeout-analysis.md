@@ -164,7 +164,7 @@ DOCS_PROD_CHECK_BASE_URL=http://localhost:3003 pnpm --filter docs check:prod-rou
 
 ```txt
 PASS /docs/web/javascript-event-loop-runtime status=200 total=81ms bytes=73599
-PASS /category/fe/react/server-client-component-boundary status=200 total=78ms bytes=93629
+PASS /docs/category/fe/react/server-client-component-boundary status=200 total=78ms bytes=93629
 ```
 
 해석:
