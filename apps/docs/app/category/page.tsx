@@ -1,10 +1,25 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import {
     categoryTree,
     makeCategoryUrl,
 } from '~/entities/category/model/category'
 import { MainCategoryCard } from '~/entities/category/ui/main-category-card'
 import { getMainCategoryOverview } from '~/lib/get-category'
+import { buildPageMetadata } from '~/lib/page-metadata'
+
+export async function generateMetadata(): Promise<Metadata> {
+    const t = await getTranslations('metadata.pages.category')
+
+    return buildPageMetadata({
+        pathname: '/category',
+        title: t('title'),
+        description: t('description'),
+        ogTitle: t('ogTitle'),
+        ogDescription: t('ogDescription'),
+    })
+}
 
 export default async function Page() {
     const mainCategories = categoryTree.map((category) => ({

@@ -1,18 +1,18 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import { buildPageMetadata } from '~/lib/page-metadata'
 import { StaticPage } from '~/widgets/static-page/ui/static-page'
 
 export async function generateMetadata(): Promise<Metadata> {
     const t = await getTranslations('staticPages.privacy.metadata')
 
-    return {
+    return buildPageMetadata({
+        pathname: '/privacy',
         title: t('title'),
         description: t('description'),
-        openGraph: {
-            title: t('ogTitle'),
-            description: t('ogDescription'),
-        },
-    }
+        ogTitle: t('ogTitle'),
+        ogDescription: t('ogDescription'),
+    })
 }
 
 export default async function PrivacyPage() {

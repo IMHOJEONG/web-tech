@@ -21,6 +21,8 @@ HeapForge 문서 상세 페이지가 사이트 공통 metadata가 아니라 문�
 
 `/category/...` 상세는 legacy/category browsing route 성격이 강하므로, canonical 정책을 더 닫은 뒤 별도 적용한다.
 
+목록, 허브, 정적 페이지 metadata는 별도 page-level 정책인 `docs-page-metadata-policy.md`를 따른다.
+
 ## Metadata Source Priority
 
 문서 상세 metadata는 article payload를 기준으로 만든다.

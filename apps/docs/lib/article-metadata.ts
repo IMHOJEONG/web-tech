@@ -1,30 +1,11 @@
 import type { Metadata as NextMetadata } from 'next'
 import type { Metadata as Article } from '~/lib/get-document'
 import { getDocHref } from './get-doc-route.ts'
-import { getMetadataBase, toAbsoluteSiteUrl } from './seo.ts'
-
-const DEFAULT_OG_IMAGE_PATH = '/og-image.png'
-
-function normalizeMetadataImageUrl(
-    imageUrl?: string | null,
-    siteUrl = getMetadataBase()
-) {
-    const trimmedImageUrl = imageUrl?.trim()
-
-    if (!trimmedImageUrl) {
-        return toAbsoluteSiteUrl(DEFAULT_OG_IMAGE_PATH, siteUrl)
-    }
-
-    if (/^\/\//.test(trimmedImageUrl)) {
-        return `https:${trimmedImageUrl}`
-    }
-
-    if (/^https?:\/\//i.test(trimmedImageUrl)) {
-        return trimmedImageUrl
-    }
-
-    return toAbsoluteSiteUrl(trimmedImageUrl, siteUrl)
-}
+import {
+    getMetadataBase,
+    normalizeMetadataImageUrl,
+    toAbsoluteSiteUrl,
+} from './seo.ts'
 
 export function buildArticleMetadata(
     article: Pick<

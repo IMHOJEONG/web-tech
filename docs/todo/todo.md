@@ -242,6 +242,8 @@
 - [-] `P2` article metadata 정책을 정리한다.
   - `/docs/{channel}/{slug}` 상세 metadata 정책 문서화 완료
   - 문서별 title/summary/canonical/OG image 연결 완료
+  - 목록/허브/정적 페이지 metadata는 `docs-page-metadata-policy.md`로 별도 정책화 완료
+  - `/feed`, `/docs`, `/web`, `/mobile`, `/ui-ux`, `/category` 계열 목록, 정적 안내 페이지 metadata 연결 완료
   - `/category/...` 상세 metadata 적용 여부는 canonical route 정책 확정 후 별도 진행
   - author
   - read time

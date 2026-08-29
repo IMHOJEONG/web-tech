@@ -8,6 +8,56 @@
             "description": "웹 엔지니어링, 시스템 설계, UI/UX 구조, 제품 관점의 기술 메모를 차분히 정리하는 기술 아카이브입니다.",
             "ogTitle": "HeapForge - 기술을 구조로 쌓아 올리는 아카이브",
             "ogDescription": "웹 시스템, 모바일 제품 감각, UI/UX 설계, 엔지니어링 메모를 오래 참고할 수 있는 지식 베이스로 정리합니다."
+        },
+        "pages": {
+            "feed": {
+                "title": "Feed - HeapForge",
+                "description": "최근에 정리한 기술 글과 큐레이션 문서를 한 흐름으로 읽는 피드입니다.",
+                "ogTitle": "HeapForge Feed",
+                "ogDescription": "웹 엔지니어링, 인터페이스 설계, 시스템 사고를 이어 읽을 수 있도록 큐레이션한 글 모음입니다."
+            },
+            "docs": {
+                "title": "Docs - HeapForge",
+                "description": "HeapForge의 전체 문서를 검색하고 섹션별로 빠르게 찾는 문서 인덱스입니다.",
+                "ogTitle": "HeapForge Docs",
+                "ogDescription": "제목, 요약, 태그, 본문 흐름을 기준으로 HeapForge 문서를 찾는 색인 화면입니다."
+            },
+            "web": {
+                "title": "Web - HeapForge",
+                "description": "브라우저, 프론트엔드 구조, 렌더링 흐름을 다루는 웹 엔지니어링 허브입니다.",
+                "ogTitle": "HeapForge Web",
+                "ogDescription": "React, Next.js, 브라우저 런타임, 렌더링 성능을 한곳에서 탐색하는 문서 허브입니다."
+            },
+            "mobile": {
+                "title": "Mobile - HeapForge",
+                "description": "모바일 실행 환경과 터치 중심 인터페이스를 다루는 문서 허브입니다.",
+                "ogTitle": "HeapForge Mobile",
+                "ogDescription": "모바일 제약, 플랫폼 차이, 제품 인터랙션을 함께 살피는 문서 허브입니다."
+            },
+            "uiux": {
+                "title": "UI/UX - HeapForge",
+                "description": "인터페이스 설계, 접근성, 디자인 시스템을 다루는 UI/UX 문서 허브입니다.",
+                "ogTitle": "HeapForge UI/UX",
+                "ogDescription": "디자인 시스템, 접근성, 가독성, 인터페이스 구조를 연결해 읽는 편집형 허브입니다."
+            },
+            "category": {
+                "title": "Category - HeapForge",
+                "description": "큰 기술 주제와 세부 카테고리를 기준으로 HeapForge 문서를 탐색하는 화면입니다.",
+                "ogTitle": "HeapForge Category",
+                "ogDescription": "프론트엔드, 백엔드, 컴퓨터 과학 등 큰 주제별로 문서를 찾아볼 수 있습니다."
+            },
+            "categoryMain": {
+                "title": "{category} - HeapForge",
+                "description": "{category} 카테고리 안의 세부 기술 주제를 빠르게 탐색하는 화면입니다.",
+                "ogTitle": "HeapForge {category}",
+                "ogDescription": "{category} 문서를 하위 주제별로 나누어 이어 읽을 수 있도록 정리했습니다."
+            },
+            "categorySub": {
+                "title": "{category} / {topic} - HeapForge",
+                "description": "{category}의 {topic} 관련 문서를 한곳에서 살펴보는 목록 화면입니다.",
+                "ogTitle": "HeapForge {category} / {topic}",
+                "ogDescription": "{topic} 주제와 연결된 문서를 빠르게 훑고 상세 글로 이동할 수 있습니다."
+            }
         }
     },
     "navigation": {

@@ -1,3 +1,5 @@
+import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { EmptyAllDocs } from '~/feature/search/empty-all-docs'
 import { EmptySearchResult } from '~/feature/search/empty-search-result'
 import {
@@ -5,6 +7,7 @@ import {
     resolveDocsSearchPageState,
 } from '~/lib/docs-search-page-state'
 import { getSearchData } from '~/lib/get-search-data'
+import { buildPageMetadata } from '~/lib/page-metadata'
 import { DocsIndex } from '~/widgets/docs-index/ui/docs-index'
 import { resolveDocsIndexControls } from '~/widgets/docs-index/model/docs-index-controls'
 
@@ -26,6 +29,18 @@ function parsePageParam(page?: string) {
     }
 
     return pageNumber
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+    const t = await getTranslations('metadata.pages.docs')
+
+    return buildPageMetadata({
+        pathname: '/docs',
+        title: t('title'),
+        description: t('description'),
+        ogTitle: t('ogTitle'),
+        ogDescription: t('ogDescription'),
+    })
 }
 
 export default async function Page({ searchParams }: Props) {

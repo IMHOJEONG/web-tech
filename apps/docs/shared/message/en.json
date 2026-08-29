@@ -8,6 +8,56 @@
             "description": "A docs experience for web engineering, system thinking, UI/UX architecture, and product-minded technical writing.",
             "ogTitle": "HeapForge - Where memory meets mastery.",
             "ogDescription": "Explore web systems, mobile product thinking, UI/UX architecture, and engineering notes shaped into a navigable knowledge base."
+        },
+        "pages": {
+            "feed": {
+                "title": "Feed - HeapForge",
+                "description": "A curated feed for recently refined technical articles and connected docs.",
+                "ogTitle": "HeapForge Feed",
+                "ogDescription": "Curated writing across web engineering, interface systems, and product-minded technical notes."
+            },
+            "docs": {
+                "title": "Docs - HeapForge",
+                "description": "Search and scan the full HeapForge document index by section, source, and topic.",
+                "ogTitle": "HeapForge Docs",
+                "ogDescription": "A document index for finding HeapForge articles by title, summary, tags, and content context."
+            },
+            "web": {
+                "title": "Web - HeapForge",
+                "description": "A web engineering hub for browser behavior, frontend structure, and rendering flow.",
+                "ogTitle": "HeapForge Web",
+                "ogDescription": "Explore React, Next.js, browser runtime behavior, and rendering performance in one document hub."
+            },
+            "mobile": {
+                "title": "Mobile - HeapForge",
+                "description": "A document hub for mobile runtime constraints and touch-first interface thinking.",
+                "ogTitle": "HeapForge Mobile",
+                "ogDescription": "Notes on mobile constraints, platform differences, and product interaction patterns."
+            },
+            "uiux": {
+                "title": "UI/UX - HeapForge",
+                "description": "A UI/UX hub for interface design, accessibility, and design system writing.",
+                "ogTitle": "HeapForge UI/UX",
+                "ogDescription": "An editorial hub connecting design systems, accessibility, readability, and interface structure."
+            },
+            "category": {
+                "title": "Category - HeapForge",
+                "description": "Browse HeapForge documents through major technical topics and focused subcategories.",
+                "ogTitle": "HeapForge Category",
+                "ogDescription": "Explore documents grouped by frontend, backend, computer science, and related technical areas."
+            },
+            "categoryMain": {
+                "title": "{category} - HeapForge",
+                "description": "Browse focused technical topics inside the {category} category.",
+                "ogTitle": "HeapForge {category}",
+                "ogDescription": "A category view for reading {category} documents through smaller topic groups."
+            },
+            "categorySub": {
+                "title": "{category} / {topic} - HeapForge",
+                "description": "Browse HeapForge documents related to {topic} inside {category}.",
+                "ogTitle": "HeapForge {category} / {topic}",
+                "ogDescription": "A focused document list for scanning {topic} articles and moving into the full detail view."
+            }
         }
     },
     "navigation": {
