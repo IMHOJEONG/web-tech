@@ -98,6 +98,7 @@
   - 1.5차 적용: remote HTML code block에 client-side copy enhancer 연결
   - 2차 적용: local/remote table wrapper와 blockquote class/spacing 계약 통일
   - 3차 적용: `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]` callout marker를 output contract에 편입
+  - 3.5차 적용: content style validator에 callout marker 위치/지원 범위 검증 추가
   - 후속: callout variant 확장 필요성 점검
   - remote MDX evaluation, markdown-first, HTML-only 전략은 후속 spike로 검증
   - 기준 문서: `docs/architecture/docs-article-rendering-convergence.md`

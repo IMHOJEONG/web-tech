@@ -72,3 +72,46 @@ status: published
         'published content uses a placeholder-like slug',
     ])
 })
+
+test('accepts supported callout markers at the start of blockquotes', () => {
+    const issues = getContentStyleIssues(`## 참고
+
+> [!NOTE]
+> 배경 맥락을 적습니다.
+
+> [!TIP] 바로 적용할 수 있는 팁을 적습니다.
+
+> [!WARNING]
+> 장애로 이어질 수 있는 내용을 적습니다.
+`)
+
+    assert.deepEqual(issues.failures, [])
+    assert.deepEqual(issues.warnings, [])
+})
+
+test('rejects unsupported callout markers', () => {
+    const issues = getContentStyleIssues(`## 참고
+
+> [!INFO]
+> 아직 지원하지 않는 marker입니다.
+`)
+
+    assert.deepEqual(issues.failures, [
+        'line 3: unsupported callout marker [!INFO]',
+    ])
+})
+
+test('rejects callout markers outside the first text of a blockquote', () => {
+    const issues = getContentStyleIssues(`## 참고
+
+[!NOTE]
+본문에 직접 marker를 쓰면 안 됩니다.
+
+> 먼저 설명하고 [!TIP] marker를 뒤에 넣으면 안 됩니다.
+`)
+
+    assert.deepEqual(issues.failures, [
+        'line 3: callout marker should be the first text in a blockquote',
+        'line 6: callout marker should be the first text in a blockquote',
+    ])
+})

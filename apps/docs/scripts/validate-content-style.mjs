@@ -17,6 +17,9 @@ const CONTENT_DIRECTORIES = ['data', 'category'].map((directory) =>
 )
 const CODE_FENCE_PATTERN = /^```(\S*)\s*$/
 const HEADING_PATTERN = /^(#{1,6})\s+(.+?)\s*$/
+const CALLOUT_MARKER_PATTERN = /\[!([A-Za-z][A-Za-z0-9_-]*)\]/
+const CALLOUT_BLOCKQUOTE_PATTERN = /^\s*>\s*\[!([A-Za-z][A-Za-z0-9_-]*)\]/
+const SUPPORTED_CALLOUT_MARKERS = new Set(['NOTE', 'TIP', 'WARNING'])
 const PLACEHOLDER_PATTERN = /\b(TODO|FIXME|lorem ipsum)\b|임시|테스트용/i
 const PLACEHOLDER_SLUGS = new Set(['test', 'sample', 'todo', 'draft'])
 
@@ -92,6 +95,23 @@ export function getContentStyleIssues(source, frontmatter = {}) {
 
         if (isInsideCodeFence) {
             continue
+        }
+
+        const calloutMarkerMatch = line.match(CALLOUT_MARKER_PATTERN)
+        const calloutBlockquoteMatch = line.match(CALLOUT_BLOCKQUOTE_PATTERN)
+
+        if (calloutMarkerMatch) {
+            const marker = calloutMarkerMatch[1].toUpperCase()
+
+            if (!calloutBlockquoteMatch) {
+                failures.push(
+                    `line ${index + 1}: callout marker should be the first text in a blockquote`
+                )
+            } else if (!SUPPORTED_CALLOUT_MARKERS.has(marker)) {
+                failures.push(
+                    `line ${index + 1}: unsupported callout marker [!${marker}]`
+                )
+            }
         }
 
         const headingMatch = line.match(HEADING_PATTERN)

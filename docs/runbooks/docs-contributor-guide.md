@@ -201,6 +201,8 @@ Hard fail:
 - heading level을 한 번에 두 단계 이상 건너뛰지 않는다.
 - 코드 블록은 언어를 명시한다.
 - 코드 블록은 반드시 닫는다.
+- callout marker는 blockquote의 첫 텍스트로만 사용한다.
+- 지원하지 않는 callout marker를 사용하지 않는다.
 
 Warning:
 
