@@ -92,10 +92,11 @@
   - `transpilePackages`
   - build artifact usage
   - import path 안정성
-- [ ] `P2` local MDX와 remote HTML/markdown 렌더링 전략을 한 단계 더 통일한다.
-  - source별 렌더링 차이로 callout, code block, figure, heading anchor가 달라지지 않게 기준을 정리
-  - 필요 시 remote content도 markdown-first 계약으로 수렴할지 검토
-  - 기준 문서: `docs/architecture/docs-content-rendering-strategy.md`
+- [-] `P2` local MDX와 remote HTML/markdown 렌더링 전략을 한 단계 더 통일한다.
+  - 기본 방향은 renderer 단일화가 아니라 output contract 통일로 확정
+  - 1차 적용: remote HTML code block을 local MDX와 같은 `.mdx-code-frame` 계층으로 normalize
+  - remote MDX evaluation, markdown-first, HTML-only 전략은 후속 spike로 검증
+  - 기준 문서: `docs/architecture/docs-article-rendering-convergence.md`
 
 ## UI / UX
 

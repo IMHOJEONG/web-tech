@@ -292,6 +292,7 @@ local MDX와 remote HTML/markdown 사이의 표현 차이를 더 줄인다.
 
 - [docs-content-authoring-pipeline.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-pipeline.md)
 - [docs-content-operating-model.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-operating-model.md)
+- [docs-article-rendering-convergence.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-article-rendering-convergence.md)
 - [docs-content-routing-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-routing-policy.md)
 - [docs-search-experience-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-search-experience-policy.md)
 - [blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)

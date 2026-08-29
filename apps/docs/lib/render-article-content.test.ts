@@ -21,6 +21,23 @@ test('renderArticleContent normalizes remote html content and extracts toc', asy
     assert.match(rendered.content, /id="local-network-access"/)
 })
 
+test('renderArticleContent normalizes remote html code blocks to shared code frame', async () => {
+    const rendered = await renderArticleContent({
+        contentFormat: 'html',
+        content: `
+            <h2>Example</h2>
+            <pre><code class="language-js">const answer = 42;</code></pre>
+        `,
+    })
+
+    assert.equal(rendered.mode, 'html')
+    assert.match(rendered.content, /class="mdx-code-frame"/)
+    assert.match(rendered.content, /class="mdx-code-block"/)
+    assert.match(rendered.content, /class="mdx-code-frame__language">JS/)
+    assert.match(rendered.content, /mdx-code-token--keyword">const/)
+    assert.match(rendered.content, /mdx-code-token--number">42/)
+})
+
 test('renderArticleContent renders mdx content and exposes toc data', async () => {
     const rendered = await renderArticleContent({
         contentFormat: 'mdx',
