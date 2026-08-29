@@ -66,8 +66,27 @@ E2E 실행 중 아래 개발용 경고가 반복적으로 보였다.
 
 아직 하지 않은 일:
 
-- CDN URL 버전 고정은 별도 작업으로 남긴다.
 - E2E 전용 disable flag는 필요성이 더 커지면 추가한다.
+
+## React Inspection Tools CDN 버전 고정
+
+`react-scan`과 `react-grab`의 CDN URL을 명시 버전으로 고정했다.
+
+고정 버전:
+
+- `react-scan@0.5.7`
+- `react-grab@0.2.0`
+
+적용 이유:
+
+- `//unpkg.com/react-scan/dist/auto.global.js` 같은 경로는 unpkg의 latest redirect에 의존한다.
+- latest redirect는 시간이 지나면 다른 버전으로 바뀔 수 있어 개발 환경과 E2E 로그의 재현성이 약해진다.
+- production에는 로드하지 않더라도, 개발 도구가 매번 다른 코드로 로드되는 구조는 디버깅 노이즈를 만든다.
+
+추가한 보호 장치:
+
+- `apps/docs/shared/config/react-inspection-tools.test.ts`에서 CDN URL이 명시 버전을 포함하는지 검사한다.
+- unpinned 경로인 `react-scan/dist`, `react-grab/dist` 형태로 되돌아가지 않도록 테스트한다.
 
 ## 검증
 
