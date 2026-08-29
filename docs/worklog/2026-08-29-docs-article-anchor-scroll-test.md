@@ -48,6 +48,27 @@ E2E 실행 중 아래 개발용 경고가 반복적으로 보였다.
 3. 필요 시 CDN URL을 버전 고정 형태로 바꾼다.
 4. 별도 작업으로 `react-scan` 로딩 자체가 E2E 로그를 오염시키지 않게 dev-only/debug flag를 더 명확히 분리한다.
 
+## React Inspection Tools 정책 고정
+
+우선순위는 `production bundle/runtime에 싣지 않는다`로 고정했다.
+
+적용 내용:
+
+- `react-scan`과 `react-grab` script URL을 `apps/docs/shared/config/react-inspection-tools.ts`로 분리했다.
+- `shouldLoadReactInspectionTools()`는 `NODE_ENV === "development"`일 때만 `true`를 반환한다.
+- `production`, `test`, `undefined` 환경에서는 항상 로드하지 않도록 unit test를 추가했다.
+
+이 정책을 먼저 고정한 이유:
+
+- 두 도구는 사용자 기능이 아니라 개발 진단 도구다.
+- production에 포함되면 불필요한 외부 CDN 의존성과 runtime noise가 생긴다.
+- `react-scan@0.5.x`의 transitive dependency 재현성 이슈가 정리되기 전까지는 production 영향권 밖에 두는 편이 안전하다.
+
+아직 하지 않은 일:
+
+- CDN URL 버전 고정은 별도 작업으로 남긴다.
+- E2E 전용 disable flag는 필요성이 더 커지면 추가한다.
+
 ## 검증
 
 ```bash
