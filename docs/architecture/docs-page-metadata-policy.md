@@ -25,7 +25,14 @@ HeapForge의 목록, 허브, 정책성 페이지가 공통 canonical, Open Graph
 
 루트 `/`는 site-level metadata를 유지한다.
 
-`/category/{main}/{sub}/{slug}` 상세 alias는 아직 별도 적용하지 않는다. 같은 글이 `/docs/{channel}/{slug}` 또는 `/docs/{routePath}`에서도 접근될 수 있기 때문에, category 상세 canonical을 어디로 보낼지 먼저 확정해야 한다.
+`/category/{main}/{sub}/{slug}` 상세 alias는 page-level metadata 대상이 아니다. 이 route는 직접 렌더링하지 않고 canonical docs route로 redirect한다.
+
+예:
+
+```txt
+/category/fe/react/server-client-component-boundary
+-> /docs/category/fe/react/server-client-component-boundary
+```
 
 ## Metadata Source
 
@@ -44,11 +51,11 @@ HeapForge의 목록, 허브, 정책성 페이지가 공통 canonical, Open Graph
 - `/docs`: 검색/색인 metadata
 - `/web`, `/mobile`, `/ui-ux`: 채널 허브 metadata
 - `/category...`: taxonomy 탐색 metadata
+- `/category/{main}/{sub}/{slug}`: 상세 alias이며 `/docs/category/{main}/{sub}/{slug}`로 redirect
 - `/about`, `/privacy`, `/terms`, `/changelog`: 정적 안내 페이지 metadata
 
 ## Non-goals
 
 - 검색어 query를 canonical에 포함하지 않는다.
 - `/docs?q=...` 검색 결과별 동적 metadata를 만들지 않는다.
-- category 상세 alias의 article canonical을 즉시 확정하지 않는다.
 - locale alternate link는 별도 i18n SEO 작업으로 남긴다.

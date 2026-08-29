@@ -18,8 +18,9 @@ HeapForge 문서 상세 페이지가 사이트 공통 metadata가 아니라 문�
 - `/docs/feed/pna`
 - `/docs/ui-ux/blocked-aria-hidden`
 - `/docs/mobile/touch-targets`
+- `/docs/category/fe/react/server-client-component-boundary`
 
-`/category/...` 상세는 legacy/category browsing route 성격이 강하므로, canonical 정책을 더 닫은 뒤 별도 적용한다.
+`/category/{main}/{sub}/{slug}` 상세는 legacy/category browsing alias로만 유지한다. 직접 렌더링하지 않고 `/docs/category/{main}/{sub}/{slug}`로 redirect한다.
 
 목록, 허브, 정적 페이지 metadata는 별도 page-level 정책인 `docs-page-metadata-policy.md`를 따른다.
 
@@ -54,6 +55,8 @@ canonical=https://heap-forge.app/docs/web/javascript-event-loop-runtime
 
 즉 metadata canonical과 실제 redirect canonical은 같은 route 계산 함수를 공유해야 한다.
 
+category 기반 문서는 channel hub가 아니라 taxonomy source에서 시작한 문서이므로 `/docs/category/{main}/{sub}/{slug}`를 canonical route로 사용한다.
+
 ## Image Rule
 
 문서 thumbnail이 있으면 OG/Twitter image로 사용한다.
@@ -74,5 +77,4 @@ canonical=https://heap-forge.app/docs/web/javascript-event-loop-runtime
 ## Non-goals
 
 - 검색 결과 metadata를 동적으로 만든다.
-- `/category/...` legacy detail route에 canonical metadata를 즉시 적용한다.
 - locale별 alternate link를 이 작업에서 함께 확장한다.

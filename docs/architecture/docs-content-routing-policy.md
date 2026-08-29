@@ -90,6 +90,15 @@
 
 이 경우에도 최종 공개 기준은 `/docs/{channel}/{slug}`로 유지한다.
 
+category 기반 문서는 channel hub가 아니라 taxonomy source에서 시작한 문서이므로 `/docs/category/{main}/{sub}/{slug}`를 canonical route로 사용한다.
+
+예:
+
+```txt
+/category/fe/react/server-client-component-boundary
+-> /docs/category/fe/react/server-client-component-boundary
+```
+
 ## Backend Contract
 
 권장 응답 예:

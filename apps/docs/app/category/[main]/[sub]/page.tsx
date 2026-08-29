@@ -109,7 +109,9 @@ export default async function Page({
                         {data.map((item) => {
                             return (
                                 <CategoryDocumentCard
-                                    key={item.title}
+                                    key={
+                                        item.fileName ?? item.slug ?? item.title
+                                    }
                                     data={item}
                                 />
                             )

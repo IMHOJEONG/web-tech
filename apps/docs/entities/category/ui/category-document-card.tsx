@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { getDocHref } from '~/lib/get-doc-route'
 import { DocumentDateText } from '~/shared/ui/document-date-text'
 import { DocumentThumbnail } from '~/shared/ui/document-thumbnail'
 
@@ -9,6 +10,7 @@ interface CategoryDocumentCardItem {
     title?: string
     date?: string
     fileName?: string
+    markdownPath?: string | null
 }
 
 export const CategoryDocumentCard = ({
@@ -16,11 +18,11 @@ export const CategoryDocumentCard = ({
 }: {
     data: CategoryDocumentCardItem
 }) => {
-    const { summary, thumbnail, title, date, fileName } = data
+    const { summary, thumbnail, title, date } = data
 
     return (
         <Link
-            href={`/${fileName}`}
+            href={getDocHref(data)}
             className="ds-card flex size-full flex-col gap-3 bg-surface-container-lowest p-4 hover:-translate-y-1"
         >
             <DocumentThumbnail

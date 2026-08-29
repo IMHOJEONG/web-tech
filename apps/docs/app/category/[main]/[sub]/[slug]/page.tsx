@@ -1,8 +1,6 @@
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
+import { getDocHref } from '~/lib/get-doc-route'
 import { getCategoryData } from '~/lib/get-category'
-import { renderArticleContent } from '~/lib/render-article-content'
-import { components } from '~/mdx-components'
-import { ArticleContentLayout } from '~/widgets/article-detail/ui/article-content-layout'
 
 interface PagesProps {
     slug: string
@@ -23,28 +21,5 @@ export default async function Page({
         notFound()
     }
 
-    const renderedArticle = await renderArticleContent(target, {
-        codeHighlight: false,
-        components,
-    })
-
-    if (renderedArticle.mode === 'html') {
-        return (
-            <ArticleContentLayout toc={renderedArticle.toc}>
-                <div className="mdx-wrapper">
-                    <article
-                        dangerouslySetInnerHTML={{
-                            __html: renderedArticle.content,
-                        }}
-                    />
-                </div>
-            </ArticleContentLayout>
-        )
-    }
-
-    return (
-        <ArticleContentLayout toc={renderedArticle.toc}>
-            <div className="mdx-wrapper">{renderedArticle.content}</div>
-        </ArticleContentLayout>
-    )
+    permanentRedirect(getDocHref(target))
 }
