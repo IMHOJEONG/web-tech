@@ -55,8 +55,8 @@ E2E 실행 중 아래 개발용 경고가 반복적으로 보였다.
 적용 내용:
 
 - `react-scan`과 `react-grab` script URL을 `apps/docs/shared/config/react-inspection-tools.ts`로 분리했다.
-- `shouldLoadReactInspectionTools()`는 `NODE_ENV === "development"`일 때만 `true`를 반환한다.
-- `production`, `test`, `undefined` 환경에서는 항상 로드하지 않도록 unit test를 추가했다.
+- `shouldLoadReactInspectionTools()`는 `NODE_ENV === "development"`이고 `DOCS_ENABLE_REACT_INSPECTION=true`일 때만 `true`를 반환한다.
+- `development`라도 flag가 없으면 로드하지 않고, `production`, `test`, `undefined` 환경에서는 flag가 있어도 로드하지 않도록 unit test를 추가했다.
 
 이 정책을 먼저 고정한 이유:
 
@@ -64,9 +64,22 @@ E2E 실행 중 아래 개발용 경고가 반복적으로 보였다.
 - production에 포함되면 불필요한 외부 CDN 의존성과 runtime noise가 생긴다.
 - `react-scan@0.5.x`의 transitive dependency 재현성 이슈가 정리되기 전까지는 production 영향권 밖에 두는 편이 안전하다.
 
-아직 하지 않은 일:
+## React Inspection Tools Opt-in Flag
 
-- E2E 전용 disable flag는 필요성이 더 커지면 추가한다.
+개발 환경에서도 React inspection tools를 항상 로드하지 않고 명시 opt-in으로 전환했다.
+
+환경 변수:
+
+```env
+DOCS_ENABLE_REACT_INSPECTION=true
+```
+
+적용 이유:
+
+- E2E 실행 중 개발 진단 도구 로그가 콘솔을 오염시키지 않게 한다.
+- 일반 개발 서버에서도 성능/렌더링 진단이 필요한 순간에만 도구를 켠다.
+- 이 값은 서버 레이아웃에서만 읽기 때문에 `NEXT_PUBLIC_*`로 노출하지 않는다.
+- Turbo 캐시가 env 변화를 놓치지 않도록 `DOCS_*` env를 docs task env와 root `globalEnv`에 포함했다.
 
 ## React Inspection Tools CDN 버전 고정
 

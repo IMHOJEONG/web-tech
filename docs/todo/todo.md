@@ -144,6 +144,7 @@
 - [x] `P2` React inspection tools는 development 환경에서만 로드하도록 고정한다.
   - `react-scan`, `react-grab`은 production bundle/runtime에 포함하지 않는다.
   - CDN URL은 명시 버전으로 고정한다.
+  - development에서도 `DOCS_ENABLE_REACT_INSPECTION=true`일 때만 opt-in 로드한다.
   - 기준 문서: `docs/worklog/2026-08-29-docs-article-anchor-scroll-test.md`
 - [ ] `P2` article detail의 읽기 보조 UX를 확장한다.
   - related posts

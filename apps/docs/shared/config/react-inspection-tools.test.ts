@@ -6,11 +6,17 @@ import {
     shouldLoadReactInspectionTools,
 } from './react-inspection-tools.ts'
 
-test('loads react inspection tools only in development', () => {
-    assert.equal(shouldLoadReactInspectionTools('development'), true)
-    assert.equal(shouldLoadReactInspectionTools('production'), false)
-    assert.equal(shouldLoadReactInspectionTools('test'), false)
-    assert.equal(shouldLoadReactInspectionTools(undefined), false)
+test('loads react inspection tools only when development debug flag is enabled', () => {
+    assert.equal(shouldLoadReactInspectionTools('development', 'true'), true)
+    assert.equal(shouldLoadReactInspectionTools('development', 'TRUE'), true)
+    assert.equal(shouldLoadReactInspectionTools('development', 'false'), false)
+    assert.equal(
+        shouldLoadReactInspectionTools('development', undefined),
+        false
+    )
+    assert.equal(shouldLoadReactInspectionTools('production', 'true'), false)
+    assert.equal(shouldLoadReactInspectionTools('test', 'true'), false)
+    assert.equal(shouldLoadReactInspectionTools(undefined, 'true'), false)
 })
 
 test('pins react inspection tool CDN versions', () => {
