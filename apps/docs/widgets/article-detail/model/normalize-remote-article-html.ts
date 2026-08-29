@@ -1,4 +1,9 @@
 import type { HeadingDepth, TocItem } from 'remark-flexible-toc'
+import {
+    getCalloutLabel,
+    getCalloutVariantFromText,
+    type CalloutVariant,
+} from '../../../feature/callout/model/callout.ts'
 import { highlightCode } from '../../../feature/code-block/lib/highlight-code.ts'
 import { slugifyHeading } from '../../../lib/slugify-heading.ts'
 
@@ -119,11 +124,42 @@ function normalizeRemoteBlockquotes(content: string) {
     )
 }
 
+function getRemoteCalloutVariant(innerHtml: string): CalloutVariant | null {
+    const text = decodeHtmlEntities(stripHtmlTags(innerHtml))
+    return getCalloutVariantFromText(text)
+}
+
+function stripRemoteCalloutMarker(innerHtml: string) {
+    return innerHtml
+        .replace(/(<p[^>]*>\s*)?\[!(NOTE|WARNING|TIP)\]\s*/i, '$1')
+        .replace(/<p[^>]*>\s*<\/p>/i, '')
+}
+
+function normalizeRemoteCallouts(content: string) {
+    return content.replace(
+        /<blockquote[^>]*>([\s\S]*?)<\/blockquote>/gi,
+        (match, innerHtml: string) => {
+            const variant = getRemoteCalloutVariant(innerHtml)
+
+            if (!variant) {
+                return match
+            }
+
+            const label = getCalloutLabel(variant)
+            const body = stripRemoteCalloutMarker(innerHtml)
+
+            return `<aside class="mdx-callout mdx-callout--${variant}" role="note" aria-label="${label}"><p class="mdx-callout__label">${label}</p><div class="mdx-callout__content">${body}</div></aside>`
+        }
+    )
+}
+
 export function normalizeRemoteArticleHtml(content: string) {
     const toc: TocItem[] = []
 
     const normalizedContentBlocks = normalizeRemoteBlockquotes(
-        normalizeRemoteTables(normalizeRemoteCodeBlocks(content))
+        normalizeRemoteCallouts(
+            normalizeRemoteTables(normalizeRemoteCodeBlocks(content))
+        )
     )
 
     const normalizedContent = normalizedContentBlocks.replace(

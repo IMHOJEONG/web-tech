@@ -137,6 +137,47 @@ status: "draft"
 - 콘텐츠 이미지와 앱 UI 이미지를 같은 책임으로 섞지 않는다.
 - 본문 이미지 경로는 글 이동 후에도 예측 가능하게 유지한다.
 
+## Article Element Rules
+
+본문 요소는 local MDX와 remote HTML/markdown의 최종 UI가 달라지지 않도록 아래 문법을 우선 사용한다.
+
+### Callout
+
+주의, 팁, 참고 박스는 blockquote marker 문법으로 작성한다.
+
+```md
+> [!NOTE]
+> 배경 설명이나 읽기 전에 알면 좋은 맥락을 적습니다.
+
+> [!TIP]
+> 바로 적용할 수 있는 실무 팁을 적습니다.
+
+> [!WARNING]
+> 장애, 보안, 성능 저하처럼 조심해야 할 내용을 적습니다.
+```
+
+규칙:
+
+- 지원 marker는 `[!NOTE]`, `[!TIP]`, `[!WARNING]`만 사용한다.
+- marker는 blockquote의 첫 텍스트로 둔다.
+- 일반 인용문은 marker 없이 `>`만 사용한다.
+
+### Table
+
+표는 markdown table을 사용한다.
+
+```md
+| Source | Role                 |
+| ------ | -------------------- |
+| local  | fallback / evergreen |
+| remote | operational content  |
+```
+
+규칙:
+
+- 긴 표는 모바일에서 표 영역 내부만 가로 스크롤된다.
+- 표 안에는 너무 긴 URL이나 코드 전체를 그대로 넣지 말고 요약 후 링크로 분리한다.
+
 ## Pre-Publish Checklist
 
 글을 올리기 전 아래를 확인한다.

@@ -168,9 +168,11 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 
 ### Callout
 
-- callout은 아직 production authoring 문법으로 고정하지 않는다.
-- `> [!NOTE]` 같은 markdown convention, MDX component, remote HTML data attribute 중 하나를 별도 spike로 비교한다.
-- 문법이 정해지기 전에는 blockquote를 callout처럼 과하게 꾸미지 않는다.
+- callout은 blockquote 기반 markdown convention을 사용한다.
+- 지원 문법은 `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`으로 제한한다.
+- local MDX와 remote HTML 모두 최종적으로 `.mdx-callout`과 `.mdx-callout--{variant}` 구조를 사용한다.
+- callout label은 `NOTE`, `TIP`, `WARNING`으로 고정한다.
+- 일반 blockquote는 callout처럼 과하게 꾸미지 않고 `.mdx-blockquote`로 유지한다.
 
 ### Common Styling
 
@@ -190,6 +192,7 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 - remote HTML code block에 client enhancer로 copy button 부착
 - local MDX와 remote HTML table을 `.mdx-table-scroll` / `.mdx-table` 계약으로 통일
 - remote HTML blockquote에 `.mdx-blockquote` class를 부착하고 공통 여백 규칙 적용
+- `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]` callout marker를 `.mdx-callout` 출력 계약으로 통일
 
 ## Future Experiments
 
@@ -201,7 +204,7 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 - markdown-first sidecar spike
 - HTML-only pre-render spike
 - remote HTML client enhancer의 keyboard / clipboard failure UX 점검
-- callout authoring syntax spike
+- callout variant 확장 필요성 점검
 
 검증 기준:
 

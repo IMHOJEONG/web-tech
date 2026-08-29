@@ -58,6 +58,22 @@ test('renderArticleContent normalizes remote html tables and blockquotes to shar
     assert.match(rendered.content, /<table class="mdx-table">/)
 })
 
+test('renderArticleContent normalizes remote html callouts to shared article contract', async () => {
+    const rendered = await renderArticleContent({
+        contentFormat: 'html',
+        content: `
+            <h2>Operational note</h2>
+            <blockquote><p>[!WARNING] Remote rendering should stay bounded.</p></blockquote>
+        `,
+    })
+
+    assert.equal(rendered.mode, 'html')
+    assert.match(rendered.content, /class="mdx-callout mdx-callout--warning"/)
+    assert.match(rendered.content, /class="mdx-callout__label">WARNING/)
+    assert.match(rendered.content, /Remote rendering should stay bounded\./)
+    assert.doesNotMatch(rendered.content, /\[!WARNING\]/)
+})
+
 test('renderArticleContent renders mdx content and exposes toc data', async () => {
     const rendered = await renderArticleContent({
         contentFormat: 'mdx',

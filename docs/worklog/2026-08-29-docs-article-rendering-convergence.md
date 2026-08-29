@@ -26,11 +26,14 @@ Option 4를 채택한다.
 - remote HTML code block에 client-side copy button enhancer를 붙였다.
 - local MDX와 remote HTML table을 `.mdx-table-scroll` / `.mdx-table` 구조로 맞췄다.
 - remote HTML blockquote에 `.mdx-blockquote` class를 부착하고 공통 여백 규칙을 적용했다.
+- `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]` callout marker를 `.mdx-callout` 구조로 normalize했다.
+- callout marker 판정은 `feature/callout/model` 공용 로직으로 분리했다.
+- contributor guide에 callout/table 작성 규칙을 추가했다.
 - 관련 테스트를 추가했다.
 
 ## Follow-Up
 
 - remote HTML client enhancer의 keyboard / clipboard failure UX 점검
-- callout authoring syntax 결정
+- callout variant 확장 필요성 점검
 - markdown-first sidecar spike
 - HTML-only pre-render spike
