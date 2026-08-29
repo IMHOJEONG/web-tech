@@ -113,7 +113,8 @@ export async function DocsIndex({
                             </div>
                             <Link
                                 href="/docs"
-                                className="text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
+                                data-touch-target="docs-index"
+                                className="ds-focus-ring inline-flex min-h-11 items-center rounded-full px-1 text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
                             >
                                 {t('search.backToDocs')}
                             </Link>
@@ -207,7 +208,8 @@ export async function DocsIndex({
                         </div>
                         <Link
                             href="/category"
-                            className="text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
+                            data-touch-target="docs-index"
+                            className="ds-focus-ring inline-flex min-h-11 items-center rounded-full px-1 text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
                         >
                             {t('sections.toCategory')}
                         </Link>
@@ -222,7 +224,8 @@ export async function DocsIndex({
                                 <Link
                                     key={section.key}
                                     href={section.href}
-                                    className="motion-layout motion-reveal group rounded-2xl border border-border bg-surface-container-lowest p-4 hover:-translate-y-0.5 hover:border-primary/40"
+                                    data-touch-target="docs-index"
+                                    className="ds-focus-ring motion-layout motion-reveal group rounded-2xl border border-border bg-surface-container-lowest p-4 hover:-translate-y-0.5 hover:border-primary/40"
                                     style={getMotionOrderStyle(index)}
                                 >
                                     <p className="font-display text-xs font-semibold tracking-[0.16em] text-primary uppercase">
@@ -264,7 +267,8 @@ export async function DocsIndex({
                         </div>
                         <Link
                             href="/feed"
-                            className="text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
+                            data-touch-target="docs-index"
+                            className="ds-focus-ring inline-flex min-h-11 items-center rounded-full px-1 text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
                         >
                             {t('allDocuments.toFeed')}
                         </Link>
@@ -294,8 +298,9 @@ export async function DocsIndex({
                                     resolvedControls
                                 )}
                                 aria-disabled={pagination.page === 1}
+                                data-touch-target="docs-index"
                                 className={cn(
-                                    'inline-flex items-center justify-center rounded-full border border-border bg-surface-container-lowest px-4 py-2 text-sm font-semibold text-on-surface-variant transition hover:border-primary/50 hover:text-primary',
+                                    'ds-focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-border bg-surface-container-lowest px-4 py-2 text-sm font-semibold text-on-surface-variant transition hover:border-primary/50 hover:text-primary',
                                     pagination.page === 1 &&
                                         'pointer-events-none opacity-45'
                                 )}
@@ -318,8 +323,9 @@ export async function DocsIndex({
                                                 ? 'page'
                                                 : undefined
                                         }
+                                        data-touch-target="docs-index"
                                         className={cn(
-                                            'inline-flex size-9 items-center justify-center rounded-full border text-sm font-semibold transition',
+                                            'ds-focus-ring inline-flex size-11 items-center justify-center rounded-full border text-sm font-semibold transition',
                                             page === pagination.page
                                                 ? 'border-primary bg-primary text-primary-foreground'
                                                 : 'border-border bg-surface-container-lowest text-on-surface-variant hover:border-primary/50 hover:text-primary'
@@ -337,8 +343,9 @@ export async function DocsIndex({
                                 aria-disabled={
                                     pagination.page === pagination.totalPages
                                 }
+                                data-touch-target="docs-index"
                                 className={cn(
-                                    'inline-flex items-center justify-center rounded-full border border-border bg-surface-container-lowest px-4 py-2 text-sm font-semibold text-on-surface-variant transition hover:border-primary/50 hover:text-primary',
+                                    'ds-focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-border bg-surface-container-lowest px-4 py-2 text-sm font-semibold text-on-surface-variant transition hover:border-primary/50 hover:text-primary',
                                     pagination.page === pagination.totalPages &&
                                         'pointer-events-none opacity-45'
                                 )}

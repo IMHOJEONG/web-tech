@@ -63,8 +63,9 @@ export async function DocsIndexCard({
         <Link
             href={doc.href}
             style={style}
+            data-touch-target="docs-index"
             className={cn(
-                'motion-layout group block rounded-2xl border border-border bg-surface-container-lowest p-4 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-deep',
+                'ds-focus-ring motion-layout group block rounded-2xl border border-border bg-surface-container-lowest p-4 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-deep',
                 className
             )}
         >

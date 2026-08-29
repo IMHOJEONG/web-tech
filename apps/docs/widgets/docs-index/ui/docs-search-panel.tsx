@@ -53,11 +53,12 @@ export function DocsSearchPanel({
                             type="search"
                             defaultValue={keyword}
                             placeholder={placeholder}
-                            className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm text-on-surface outline-none placeholder:text-outline"
+                            className="min-h-11 min-w-0 flex-1 bg-transparent px-3 py-2 text-sm text-on-surface outline-none placeholder:text-outline"
                         />
                         <button
                             type="submit"
-                            className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:bg-primary-fixed"
+                            data-touch-target="docs-index"
+                            className="ds-focus-ring min-h-11 shrink-0 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary-fixed"
                         >
                             {submitLabel}
                         </button>
@@ -67,7 +68,8 @@ export function DocsSearchPanel({
                             <Link
                                 key={term}
                                 href={`/docs?q=${encodeURIComponent(term)}`}
-                                className="min-w-0 max-w-full rounded-full border border-border bg-surface-container px-3 py-1.5 text-xs font-medium text-on-surface-variant transition hover:border-primary/50 hover:text-primary"
+                                data-touch-target="docs-index"
+                                className="ds-focus-ring inline-flex min-h-11 min-w-0 max-w-full items-center rounded-full border border-border bg-surface-container px-3.5 py-2 text-xs font-medium text-on-surface-variant transition hover:border-primary/50 hover:text-primary"
                             >
                                 <span className="block max-w-full truncate">
                                     {term}

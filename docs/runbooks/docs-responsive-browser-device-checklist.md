@@ -170,6 +170,8 @@ Elements 패널에서 카드 또는 패널을 선택한 뒤 class와 computed st
 
 - 검색 패널이 모바일에서 너무 높지 않다.
 - 추천 키워드와 필터 pill이 터치하기 쉬운 크기다.
+- 검색 제출 버튼, 추천 키워드, 필터 pill, 문서 카드, pagination은 최소 `44px` 터치 타깃을 유지한다.
+- 터치 가능한 요소에는 `focus-visible` 상태가 보이고 키보드 이동 순서가 시각적 읽기 순서와 크게 어긋나지 않는다.
 - `section/source/sort` 컨트롤이 줄바꿈되어도 읽기 순서가 유지된다.
 - 검색 결과와 기본 인덱스 화면의 차이가 명확하다.
 - pagination 버튼이 작은 화면에서 서로 붙지 않는다.
@@ -220,6 +222,7 @@ rg -n "sm:grid-cols|sm:flex-row|md:grid-cols|md:hidden|md:block" apps/docs/widge
 
 - viewport별 route smoke test
 - header/drawer/bottom nav visibility assertion
+- `/docs` 주요 touch target 최소 크기 assertion
 - screenshot diff
 - anchor scroll 후 heading visibility assertion
 
@@ -227,5 +230,6 @@ rg -n "sm:grid-cols|sm:flex-row|md:grid-cols|md:hidden|md:block" apps/docs/widge
 
 1. route smoke test
 2. shell visibility assertion
-3. article anchor visibility assertion
-4. screenshot diff
+3. `/docs` 주요 touch target 최소 크기 assertion
+4. article anchor visibility assertion
+5. screenshot diff

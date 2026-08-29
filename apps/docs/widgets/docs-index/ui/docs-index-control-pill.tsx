@@ -17,8 +17,9 @@ export function DocsIndexControlPill({
         <Link
             href={href}
             aria-current={active ? 'true' : undefined}
+            data-touch-target="docs-index"
             className={cn(
-                'max-w-full rounded-full border px-3 py-1.5 text-xs font-semibold transition',
+                'ds-focus-ring inline-flex min-h-11 max-w-full items-center rounded-full border px-3.5 py-2 text-xs font-semibold transition',
                 active
                     ? 'border-primary bg-primary text-primary-foreground shadow-glow-primary'
                     : 'border-border bg-surface-container-lowest text-on-surface-variant hover:border-primary/50 hover:text-primary'

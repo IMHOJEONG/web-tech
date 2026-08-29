@@ -110,6 +110,7 @@
   - 2차 조치: `/docs` 모바일 검색/필터 영역의 텍스트 잘림과 가로 스크롤 발생 지점 완화
   - 3차 조치: Playwright 기반 mobile/tablet horizontal overflow smoke test 추가
   - 4차 조치: mobile footer 보조 링크 노출을 줄이고 bottom nav route 구조 정리
+  - 5차 조치: `/docs` 모바일 주요 touch target 최소 크기와 focus ring 보강
   - 기준 문서: `docs/runbooks/docs-responsive-browser-device-checklist.md`
 - [-] `P1` 루트 `/` 화면을 `141:2 Landing Page - HEAPFORGE` 기준으로 재구성한다.
   - 현재 `HeroSection` 단일 구성을 landing page 섹션 구조로 확장
@@ -124,7 +125,7 @@
   - 2차: `section/source/sort` query string 기반 필터와 정렬 UI, 필터 empty state, 카드 메타 정보 반영 완료
   - 3차: 검색 결과 화면에도 `section/source` 필터 적용 완료, 카드 정보 계층과 `docs-index` UI/model 분리 완료
   - 3.5차: 문서 썸네일, 날짜, 보조 메타 pill을 shared UI로 분리 완료
-  - 4차: 모바일 터치 사용성 점검은 보류
+  - 4차: 모바일 터치 사용성 1차 보강 완료
   - 목표: `/feed`는 발견/큐레이션, `/docs`는 빠른 검색/탐색으로 역할을 분리
 - [x] `P1` footer 링크를 실제 라우트 또는 외부 링크와 연결한다.
   - `PRIVACY`
