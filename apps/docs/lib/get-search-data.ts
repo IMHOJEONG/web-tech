@@ -78,13 +78,6 @@ function slugFromFileName(fileName: string) {
 }
 
 function inferSearchHref(fileName: string, slug: string) {
-    const segments = fileName.split('/').filter(Boolean)
-
-    if (segments[0] === 'category' && segments.length >= 4) {
-        const [, main, sub] = segments
-        return `/category/${main}/${sub}/${slug}`
-    }
-
     return getDocHref({ fileName, slug })
 }
 

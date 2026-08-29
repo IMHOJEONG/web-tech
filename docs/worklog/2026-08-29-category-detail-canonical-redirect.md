@@ -33,6 +33,7 @@ category 기반 문서는 다음 route를 canonical로 사용한다.
 
 - `getDocRoutePath()`가 `category/...` fileName을 canonical docs route 후보로 사용하도록 변경했다.
 - category 문서 카드 링크를 `/category/...`가 아니라 `getDocHref()` 결과로 이동하도록 변경했다.
+- 검색 인덱스와 Web channel hub에서 만들어지는 category 문서 상세 링크도 `getDocHref()` 기준으로 통일했다.
 - `/category/{main}/{sub}/{slug}` page는 target 문서를 찾은 뒤 `permanentRedirect(getDocHref(target))`만 수행한다.
 - route helper 테스트에 category canonical route 케이스를 추가했다.
 
