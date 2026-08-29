@@ -34,6 +34,8 @@ Option 4를 채택한다.
   - `HTML-in-Canvas에 대해 알아봅시다`: `NOTE`
   - `Server Component와 Client Component 경계`: `TIP`
   - `HTTP Timeout과 Retry 경계`: `WARNING`
+- local MDX blockquote children 앞에 줄바꿈 노드가 있을 때 callout marker가 본문에 남는 문제를 수정했다.
+- React children 기반 callout marker 제거 로직을 테스트 가능한 helper로 분리했다.
 - 관련 테스트를 추가했다.
 
 ## Follow-Up

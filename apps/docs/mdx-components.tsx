@@ -1,19 +1,13 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import type { MDXComponents } from 'mdx/types'
 import Image, { type ImageProps } from 'next/image'
+import { isValidElement, type ReactNode } from 'react'
 import {
-    Children,
-    cloneElement,
-    isValidElement,
-    type ReactElement,
-    type ReactNode,
-} from 'react'
-import {
-    CALLOUT_MARKER_PATTERN,
-    getCalloutLabel,
-    getCalloutVariantFromText,
-    type CalloutVariant,
-} from '~/feature/callout/model/callout'
+    getCalloutVariantFromChildren,
+    getNodeTextContent,
+    stripCalloutMarkerFromNode,
+} from '~/feature/callout/model/react-callout'
+import { getCalloutLabel } from '~/feature/callout/model/callout'
 import { highlightCode } from '~/feature/code-block/lib/highlight-code'
 import { CodeCopyButton } from '~/feature/code-block/ui/code-copy-button'
 import { slugifyHeading } from '~/lib/slugify-heading'
@@ -22,22 +16,6 @@ export const commonCss = [
     'dark:text-[var(--hf-text-primary)]',
     'text-[var(--hf-text-primary)]',
 ]
-
-function getNodeTextContent(node: ReactNode): string {
-    if (typeof node === 'string' || typeof node === 'number') {
-        return String(node)
-    }
-
-    if (Array.isArray(node)) {
-        return node.map(getNodeTextContent).join('')
-    }
-
-    if (isValidElement<{ children?: ReactNode }>(node)) {
-        return getNodeTextContent(node.props.children)
-    }
-
-    return ''
-}
 
 function getCodeText(node: ReactNode): string {
     return getNodeTextContent(node)
@@ -56,78 +34,6 @@ function getCodeLanguage(node: ReactNode): string {
         .trim()
 
     return language ? language.toUpperCase() : 'CODE'
-}
-
-function getCalloutVariant(children: ReactNode): CalloutVariant | null {
-    return getCalloutVariantFromText(getNodeTextContent(children))
-}
-
-function stripCalloutMarkerFromText(value: string) {
-    return value.replace(CALLOUT_MARKER_PATTERN, '').replace(/^\n+/, '')
-}
-
-function stripCalloutMarkerFromNode(node: ReactNode): {
-    node: ReactNode
-    stripped: boolean
-} {
-    if (typeof node === 'string' || typeof node === 'number') {
-        const value = String(node)
-        const strippedValue = stripCalloutMarkerFromText(value)
-
-        return {
-            node: strippedValue,
-            stripped: strippedValue !== value,
-        }
-    }
-
-    if (Array.isArray(node)) {
-        let stripped = false
-        const nodes = Children.toArray(node).map((child) => {
-            if (stripped) {
-                return child
-            }
-
-            const result = stripCalloutMarkerFromNode(child)
-            stripped = result.stripped
-
-            return result.node
-        })
-
-        return {
-            node: nodes,
-            stripped,
-        }
-    }
-
-    if (isValidElement<{ children?: ReactNode }>(node)) {
-        const result = stripCalloutMarkerFromNode(node.props.children)
-
-        if (!result.stripped) {
-            return {
-                node,
-                stripped: false,
-            }
-        }
-
-        const nextText = getNodeTextContent(result.node).trim()
-        const nextNode = nextText
-            ? cloneElement(
-                  node as ReactElement<{ children?: ReactNode }>,
-                  undefined,
-                  result.node
-              )
-            : null
-
-        return {
-            node: nextNode,
-            stripped: true,
-        }
-    }
-
-    return {
-        node,
-        stripped: false,
-    }
 }
 
 export const components = {
@@ -180,7 +86,7 @@ export const components = {
     a: (props) => <a {...props} className={cn('mdx-a', ...commonCss)} />,
 
     blockquote: ({ children }) => {
-        const calloutVariant = getCalloutVariant(children)
+        const calloutVariant = getCalloutVariantFromChildren(children)
 
         if (calloutVariant) {
             const strippedChildren = stripCalloutMarkerFromNode(children).node
