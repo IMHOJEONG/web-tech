@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { getRequestBlockReason } from './lib/request-blocklist'
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
     const blockReason = getRequestBlockReason(
         request.nextUrl.pathname,
         request.method

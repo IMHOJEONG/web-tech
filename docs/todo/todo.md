@@ -112,6 +112,7 @@
   - 4차 조치: mobile footer 보조 링크 노출을 줄이고 bottom nav route 구조 정리
   - 5차 조치: `/docs` 모바일 주요 touch target 최소 크기와 focus ring 보강
   - 6차 조치: desktop TOC anchor 이동 시 sticky header와 heading 겹침 회귀 테스트 추가
+  - 7차 조치: Next.js 16 기준 `middleware.ts`를 `proxy.ts` 문법으로 전환
   - 기준 문서: `docs/runbooks/docs-responsive-browser-device-checklist.md`
 - [-] `P1` 루트 `/` 화면을 `141:2 Landing Page - HEAPFORGE` 기준으로 재구성한다.
   - 현재 `HeroSection` 단일 구성을 landing page 섹션 구조로 확장

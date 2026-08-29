@@ -24,7 +24,7 @@ DOCS_SITE_URL=https://heap-forge.app
 
 - 모든 사용자 에이전트에 `/` 접근을 허용한다.
 - 검색 결과나 앱 내부 구현 경로로 볼 수 있는 `/api/`, `/_next/`, `/open/`은 크롤링하지 않도록 안내한다.
-- 보안 차단은 `robots.txt`가 아니라 `apps/docs/middleware.ts`의 request blocklist가 담당한다.
+- 보안 차단은 `robots.txt`가 아니라 `apps/docs/proxy.ts`의 request blocklist가 담당한다.
 
 ## sitemap.xml 정책
 
