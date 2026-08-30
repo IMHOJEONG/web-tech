@@ -39,57 +39,62 @@ export function HubPage({
     emptyDescription,
 }: HubPageProps) {
     return (
-        <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-            <div className="space-y-8">
-                <section className="ds-panel relative overflow-hidden p-6 sm:p-8">
-                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.12),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(139,92,246,0.14),transparent_34%)]" />
-                    <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(300px,0.7fr)]">
-                        <div className="space-y-4">
+        <main className="docs-shell px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+            <div className="space-y-7">
+                <section className="ds-panel relative overflow-hidden p-5 sm:p-6 lg:p-7">
+                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,107,31,0.11),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(139,92,246,0.12),transparent_34%)]" />
+                    <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.42fr)] lg:items-end">
+                        <div className="max-w-4xl space-y-3">
                             <p className="font-display text-label-md uppercase text-primary">
                                 {eyebrow}
                             </p>
-                            <h1 className="font-display text-headline-xl text-on-surface">
+                            <h1 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl lg:text-[2.5rem]">
                                 {title}
                             </h1>
-                            <p className="max-w-2xl text-body-lg text-on-surface-variant">
+                            <p className="max-w-2xl text-sm leading-7 text-on-surface-variant sm:text-base">
                                 {description}
                             </p>
                         </div>
-                        <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                        <dl className="rounded-3xl border border-border bg-surface-container-lowest/85 p-4 backdrop-blur">
                             {stats.map((stat) => (
                                 <div
                                     key={stat.label}
-                                    className="ds-panel-muted p-4"
+                                    className="flex items-center justify-between gap-4 border-b border-border/70 py-3 first:pt-0 last:border-b-0 last:pb-0"
                                 >
-                                    <p className="text-xs uppercase tracking-[0.08em] text-outline">
+                                    <dt className="text-xs font-medium tracking-[0.08em] text-outline uppercase">
                                         {stat.label}
-                                    </p>
-                                    <p className="mt-2 font-display text-2xl font-semibold text-on-surface">
+                                    </dt>
+                                    <dd className="font-display text-lg font-semibold tracking-tight text-on-surface">
                                         {stat.value}
-                                    </p>
+                                    </dd>
                                 </div>
                             ))}
-                        </div>
+                        </dl>
                     </div>
                 </section>
 
-                <section className="grid gap-4 lg:grid-cols-3">
-                    {panels.map((panel) => (
+                <section className="grid gap-3 lg:grid-cols-3">
+                    {panels.map((panel, index) => (
                         <article
                             key={panel.title}
-                            className="ds-card bg-surface-container-low p-5"
+                            className="rounded-3xl border border-border bg-surface-container-lowest p-4 transition hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-deep"
                         >
-                            <h2 className="font-display text-headline-md text-on-surface">
-                                {panel.title}
-                            </h2>
-                            <p className="mt-2 text-body-md text-on-surface-variant">
+                            <div className="flex items-center gap-3">
+                                <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 font-display text-xs font-semibold text-primary">
+                                    {String(index + 1).padStart(2, '0')}
+                                </span>
+                                <h2 className="font-display text-lg font-semibold tracking-tight text-on-surface">
+                                    {panel.title}
+                                </h2>
+                            </div>
+                            <p className="mt-3 line-clamp-2 text-sm leading-6 text-on-surface-variant">
                                 {panel.description}
                             </p>
-                            <ul className="mt-4 space-y-2 text-sm text-on-surface">
+                            <ul className="mt-4 flex flex-wrap gap-2">
                                 {panel.items.map((item) => (
                                     <li
                                         key={item}
-                                        className="ds-panel-muted rounded-md px-3 py-2"
+                                        className="rounded-full border border-border bg-surface-container px-3 py-1 text-xs font-medium text-on-surface-variant"
                                     >
                                         {item}
                                     </li>
@@ -118,7 +123,7 @@ export function HubPage({
                     </div>
 
                     {docs.length > 0 ? (
-                        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
+                        <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-3">
                             {docs.map((doc) => {
                                 if (!doc.slug || !doc.id) {
                                     return null
@@ -128,7 +133,7 @@ export function HubPage({
                                     <Link
                                         href={doc.href ?? getDocHref(doc)}
                                         key={doc.id}
-                                        className="ds-card bg-surface-container-low p-4"
+                                        className="group ds-card bg-surface-container-low p-3.5"
                                     >
                                         <MainCard doc={doc} />
                                     </Link>

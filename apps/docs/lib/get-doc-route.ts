@@ -7,7 +7,13 @@ type DocRouteSource = {
     path?: string | null
 }
 
-const CHANNEL_PREFIXES = ['feed/', 'web/', 'mobile/', 'ui-ux/'] as const
+const CANONICAL_ROUTE_PREFIXES = [
+    'category/',
+    'feed/',
+    'web/',
+    'mobile/',
+    'ui-ux/',
+] as const
 
 function normalizeRouteValue(value?: string | null) {
     if (typeof value !== 'string') {
@@ -72,7 +78,7 @@ function getStructuredRoutePath(source: DocRouteSource) {
     for (const candidate of candidates) {
         const normalized = normalizeRouteValue(candidate)
 
-        if (!normalized || normalized.startsWith('category/')) {
+        if (!normalized) {
             continue
         }
 
@@ -82,7 +88,11 @@ function getStructuredRoutePath(source: DocRouteSource) {
             return normalizeStructuredRoutePath(mappedLocalPath)
         }
 
-        if (CHANNEL_PREFIXES.some((prefix) => normalized.startsWith(prefix))) {
+        if (
+            CANONICAL_ROUTE_PREFIXES.some((prefix) =>
+                normalized.startsWith(prefix)
+            )
+        ) {
             return normalizeStructuredRoutePath(normalized)
         }
     }

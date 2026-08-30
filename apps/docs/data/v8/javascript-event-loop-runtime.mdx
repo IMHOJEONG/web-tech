@@ -1,0 +1,65 @@
+---
+title: 'JavaScript Event Loop 런타임 노트'
+slug: javascript-event-loop-runtime
+date: 2026-08-23
+updatedAt: 2026-08-23
+summary: 브라우저와 Node.js 런타임에서 이벤트 루프를 이해할 때 먼저 확인할 기준을 정리합니다.
+authorName: 'HoJeong Im'
+authorRole: 'Web Engineer'
+readMinutes: 5
+topicLabel: 'RUNTIME'
+tags:
+    - javascript
+    - event-loop
+    - runtime
+    - browser
+status: published
+---
+
+## 이벤트 루프를 보는 이유
+
+- JavaScript는 하나의 호출 스택에서 코드를 실행하지만, 실제 애플리케이션은 네트워크, 타이머, 렌더링, 사용자 입력을 함께 다룬다.
+
+- 이벤트 루프는 이런 비동기 작업이 언제 다시 JavaScript 실행 흐름으로 들어오는지 설명하는 모델이다.
+
+- 성능 문제를 볼 때는 “코드가 느린가?”보다 “어느 큐에 작업이 쌓였는가?”를 먼저 확인하는 편이 좋다.
+
+### 기본 흐름
+
+- 동기 코드는 call stack에서 바로 실행된다.
+
+- 비동기 작업은 Web API 또는 런타임 영역으로 위임된다.
+
+- 완료된 작업은 task queue 또는 microtask queue를 통해 다시 실행 순서를 기다린다.
+
+- microtask는 일반 task보다 먼저 비워지는 경향이 있으므로, 과하게 쌓이면 렌더링 타이밍을 밀어낼 수 있다.
+
+### 브라우저에서 확인할 것
+
+- 긴 JavaScript task가 main thread를 오래 점유하는지 확인한다.
+
+- promise callback이 연속으로 쌓여 렌더링 기회를 빼앗는지 확인한다.
+
+- input, scroll, animation이 같은 main thread 자원을 공유한다는 점을 고려한다.
+
+### Node.js에서 확인할 것
+
+- I/O callback과 timer callback이 어느 단계에서 실행되는지 확인한다.
+
+- CPU 작업이 길어지면 비동기 I/O 자체가 빨라져도 응답은 지연될 수 있다.
+
+- 서버 코드에서는 event loop lag를 별도 지표로 보는 것이 좋다.
+
+## 실무 체크리스트
+
+- 긴 반복문이나 큰 JSON 처리처럼 main thread를 오래 막는 작업이 있는가?
+
+- microtask를 재귀적으로 계속 만드는 코드가 있는가?
+
+- 사용자 입력 직후 실행되는 로직이 화면 업데이트보다 먼저 몰려 있지는 않은가?
+
+- 서버에서는 event loop lag와 API latency를 함께 보고 있는가?
+
+## 참고
+
+- 이벤트 루프는 특정 API 이름보다 실행 순서와 큐의 성격을 이해하는 쪽이 중요하다.

@@ -279,6 +279,7 @@ export function normalizeRemoteSearchResult(
             markdownPath: post.markdownPath,
             fileName,
         }),
+        contentSource: 'remote',
         section: fileName.startsWith('data/shadcn/')
             ? 'UI/UX'
             : fileName.startsWith('category/fe/')

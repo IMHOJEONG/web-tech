@@ -5,7 +5,13 @@ import globals from 'globals'
 export default [
     ...nextJsConfig,
     {
-        files: ['next.config.mjs', '*.config.mjs', '*.config.js', '*.config.cjs'],
+        files: [
+            'next.config.mjs',
+            '*.config.mjs',
+            '*.config.js',
+            '*.config.cjs',
+            'scripts/**/*.mjs',
+        ],
         languageOptions: {
             globals: {
                 ...globals.node,

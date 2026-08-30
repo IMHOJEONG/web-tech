@@ -8,9 +8,60 @@
             "description": "A docs experience for web engineering, system thinking, UI/UX architecture, and product-minded technical writing.",
             "ogTitle": "HeapForge - Where memory meets mastery.",
             "ogDescription": "Explore web systems, mobile product thinking, UI/UX architecture, and engineering notes shaped into a navigable knowledge base."
+        },
+        "pages": {
+            "feed": {
+                "title": "Feed - HeapForge",
+                "description": "A curated feed for recently refined technical articles and connected docs.",
+                "ogTitle": "HeapForge Feed",
+                "ogDescription": "Curated writing across web engineering, interface systems, and product-minded technical notes."
+            },
+            "docs": {
+                "title": "Docs - HeapForge",
+                "description": "Search and scan the full HeapForge document index by section, source, and topic.",
+                "ogTitle": "HeapForge Docs",
+                "ogDescription": "A document index for finding HeapForge articles by title, summary, tags, and content context."
+            },
+            "web": {
+                "title": "Web - HeapForge",
+                "description": "A web engineering hub for browser behavior, frontend structure, and rendering flow.",
+                "ogTitle": "HeapForge Web",
+                "ogDescription": "Explore React, Next.js, browser runtime behavior, and rendering performance in one document hub."
+            },
+            "mobile": {
+                "title": "Mobile - HeapForge",
+                "description": "A document hub for mobile runtime constraints and touch-first interface thinking.",
+                "ogTitle": "HeapForge Mobile",
+                "ogDescription": "Notes on mobile constraints, platform differences, and product interaction patterns."
+            },
+            "uiux": {
+                "title": "UI/UX - HeapForge",
+                "description": "A UI/UX hub for interface design, accessibility, and design system writing.",
+                "ogTitle": "HeapForge UI/UX",
+                "ogDescription": "An editorial hub connecting design systems, accessibility, readability, and interface structure."
+            },
+            "category": {
+                "title": "Category - HeapForge",
+                "description": "Browse HeapForge documents through major technical topics and focused subcategories.",
+                "ogTitle": "HeapForge Category",
+                "ogDescription": "Explore documents grouped by frontend, backend, computer science, and related technical areas."
+            },
+            "categoryMain": {
+                "title": "{category} - HeapForge",
+                "description": "Browse focused technical topics inside the {category} category.",
+                "ogTitle": "HeapForge {category}",
+                "ogDescription": "A category view for reading {category} documents through smaller topic groups."
+            },
+            "categorySub": {
+                "title": "{category} / {topic} - HeapForge",
+                "description": "Browse HeapForge documents related to {topic} inside {category}.",
+                "ogTitle": "HeapForge {category} / {topic}",
+                "ogDescription": "A focused document list for scanning {topic} articles and moving into the full detail view."
+            }
         }
     },
     "navigation": {
+        "mobileAriaLabel": "Mobile primary navigation",
         "feed": "Feed",
         "web": "Web",
         "mobile": "Mobile",
@@ -38,6 +89,7 @@
     },
     "footer": {
         "tagline": "© {year} {brand} // PRECISION ENGINEERED",
+        "linksAriaLabel": "Footer utility links",
         "links": {
             "privacy": "PRIVACY",
             "terms": "TERMS",
@@ -230,12 +282,15 @@
     },
     "docsIndex": {
         "card": {
-            "open": "Open"
+            "open": "Open",
+            "readMinutes": "{count} min read"
         },
         "search": {
             "eyebrow": "Search Results",
             "title": "Results for \"{keyword}\"",
             "description": "`/docs` is not a curated feed. It is the document index context, organized around title, summary, taxonomy, and content matches.",
+            "placeholder": "React, V8, ARIA...",
+            "submit": "Search",
             "countLabel": "{count} results",
             "matchingEyebrow": "Matching Documents",
             "matchingTitle": "Documents closest to your query",
@@ -244,7 +299,9 @@
         "index": {
             "eyebrow": "Document Index",
             "title": "A faster index for every document",
-            "description": "`/docs` is the place to scan the full archive, move across sections, and start from search instead of curation."
+            "description": "`/docs` is the place to scan the full archive, move across sections, and start from search instead of curation.",
+            "placeholder": "React, V8, ARIA...",
+            "submit": "Search"
         },
         "stats": {
             "totalDocs": "Total Docs",
@@ -252,11 +309,35 @@
             "latestUpdate": "Latest Update",
             "pending": "Update pending"
         },
+        "filters": {
+            "eyebrow": "Browse Controls",
+            "title": "{count} documents match this view",
+            "sections": {
+                "all": "All",
+                "web": "Web",
+                "uiux": "UI/UX",
+                "backend": "Backend",
+                "computerscience": "Computer Science",
+                "docs": "Docs"
+            },
+            "sorts": {
+                "latest": "Latest",
+                "title": "Title",
+                "section": "Section"
+            }
+        },
+        "emptyFiltered": {
+            "eyebrow": "No Documents",
+            "title": "No documents match these filters",
+            "description": "Try broadening the selected section or return to the full document index.",
+            "reset": "View all documents"
+        },
         "sections": {
             "eyebrow": "Section Overview",
-            "title": "Sections where documents live",
+            "title": "Documents by topic",
             "toCategory": "Browse category",
-            "documentCount": "{count} documents"
+            "documentCount": "{count} documents",
+            "latestPrefix": "Latest"
         },
         "sectionLabels": {
             "web": "Web",
@@ -275,7 +356,11 @@
         "allDocuments": {
             "eyebrow": "All Documents",
             "title": "Full document list",
-            "toFeed": "Go to curated feed"
+            "toFeed": "Go to curated feed",
+            "pageSummary": "{start}-{end} of {total} documents",
+            "previous": "Previous",
+            "next": "Next",
+            "paginationAriaLabel": "All documents pagination"
         }
     },
     "channelHub": {
@@ -442,6 +527,7 @@
             "titleAccentOne": "TECHNICAL",
             "titleAccentTwo": "PRECISION",
             "description": "A digital lab dedicated to unraveling modern engineering. We explore the point where Web performance, Mobile fluidity, and UI/UX architecture converge.",
+            "asideTitle": "HeapForge Notes",
             "missionLabel": "// MISSION_STATEMENT.md",
             "establishedLabel": "// ESTABLISHED_2024"
         },
@@ -568,6 +654,16 @@
         "sidebar": {
             "tocTitle": "TABLE OF CONTENTS",
             "joinTitle": "JOIN THE SYSTEM"
+        },
+        "readingNavigation": {
+            "sectionTitle": "Continue reading",
+            "previous": "Previous document",
+            "next": "Next document",
+            "lastUpdated": "Last updated"
+        },
+        "relatedDocuments": {
+            "sectionTitle": "Related documents",
+            "description": "A short list of nearby documents selected by tags, topic, and section."
         },
         "related": {
             "title": "RELATED SIGNALS",

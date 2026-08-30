@@ -2,7 +2,6 @@ import { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages, getTranslations } from 'next-intl/server'
 import localFont from 'next/font/local'
-import NextTopLoader from 'nextjs-toploader'
 import { Suspense } from 'react'
 import { mono } from '~/components/mono-font'
 
@@ -10,6 +9,13 @@ import Script from 'next/script'
 import './css/global.css'
 
 import { cn } from '@web-tech/ui/lib/utils'
+import {
+    REACT_GRAB_SCRIPT_SRC,
+    REACT_SCAN_SCRIPT_SRC,
+    shouldLoadReactInspectionTools,
+} from '~/shared/config/react-inspection-tools'
+import { getMetadataBase } from '~/lib/seo'
+import { AppTopLoader } from '~/widgets/app-shell/ui/app-top-loader'
 import Footer from '~/widgets/app-shell/ui/footer'
 import Header from '~/widgets/app-shell/ui/header'
 import MobileBottomNav from '~/widgets/app-shell/ui/mobile-bottom-nav'
@@ -28,12 +34,13 @@ const spaceGrotesk = localFont({
     variable: '--font-display',
 })
 
-const isDevelopment = process.env.NODE_ENV === 'development'
+const shouldLoadInspectionTools = shouldLoadReactInspectionTools()
 
 export async function generateMetadata(): Promise<Metadata> {
     const t = await getTranslations('metadata.site')
 
     return {
+        metadataBase: getMetadataBase(),
         title: t('title'),
         description: t('description'),
         openGraph: {
@@ -61,16 +68,16 @@ export default async function Layout({
     return (
         <html lang={locale} className="size-full">
             <head>
-                {isDevelopment && (
+                {shouldLoadInspectionTools && (
                     <Script
-                        src="//unpkg.com/react-scan/dist/auto.global.js"
+                        src={REACT_SCAN_SCRIPT_SRC}
                         crossOrigin="anonymous"
                         strategy="beforeInteractive"
                     />
                 )}
-                {isDevelopment && (
+                {shouldLoadInspectionTools && (
                     <Script
-                        src="//unpkg.com/react-grab/dist/index.global.js"
+                        src={REACT_GRAB_SCRIPT_SRC}
                         crossOrigin="anonymous"
                         strategy="beforeInteractive"
                     />
@@ -89,7 +96,7 @@ export default async function Layout({
                     <Suspense>
                         <Header />
                     </Suspense>
-                    <NextTopLoader showSpinner={false} />
+                    <AppTopLoader />
                     <div className="flex-1 pb-16.25 sm:pb-0">{children}</div>
                     <Footer />
                     <MobileBottomNav />

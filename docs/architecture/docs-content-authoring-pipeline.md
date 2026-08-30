@@ -13,6 +13,15 @@
 
 글 작성/업로드는 `로컬에서 원격에 직접 접근하는 authoring pipeline`으로 두는 것이 맞다.
 
+콘텐츠 운영 모델 자체는 `hybrid content model`로 고정한다.
+
+- local MDX: baseline / evergreen / fallback content
+- remote content API: operational / frequently updated content
+- authoring pipeline: local authoring + explicit publish workflow
+
+상위 운영 결정은
+`docs/architecture/docs-content-operating-model.md`를 따른다.
+
 다만 중요한 점은:
 
 - `docs 앱`이 글을 읽는 런타임 경로
@@ -162,9 +171,11 @@
 
 ## Recommendation For This Repo
 
-현재 구조에서는 `Option A` 또는 `Option B`가 맞다.
+현재 구조에서는 `Option B: Remote Storage Upload`를 기본 실행 모델로 둔다.
 
-특히 지금 상황에 더 잘 맞는 판단은:
+다만 장기적으로 review / rollback / history가 더 중요해지면 `Option A: Git-backed Remote Content Repo`로 승격할 수 있다.
+
+현재 시점의 판단은:
 
 - 로컬에서 작성
 - 로컬에서 preview
@@ -173,6 +184,14 @@
 - 앱은 읽기만 수행
 
 즉, `로컬에서 원격에 직접 접근해 업로드하는 authoring pipeline`을 두는 것이 맞다.
+
+`Option C: CMS/API Direct Publish`는 현재 단계에서 보류한다.
+
+이유:
+
+- 작성자가 많지 않다
+- 앱 런타임에 write credential을 둘 필요가 없다
+- 지금은 draft/review/publish UI보다 validation과 explicit publish가 더 중요하다
 
 ## Suggested Responsibilities
 
@@ -187,6 +206,24 @@
   - OG 기본 이미지
   - hero 장식 이미지
   - placeholder/fallback asset
+
+### `local content`
+
+- 원격 문서 서버 없이도 사이트가 기본 가치를 유지하게 하는 evergreen 문서
+- 카테고리별 기준 문서
+- 검색/피드 fallback 품질을 유지하는 대표 문서
+- 앱 코드 변경과 함께 리뷰되어야 하는 문서
+
+예시:
+
+- `apps/docs/data/v8/javascript-event-loop-runtime.mdx`
+- `apps/docs/data/shadcn/focus-management-checklist.mdx`
+- `apps/docs/category/fe/react/server-client-component-boundary.mdx`
+- `apps/docs/category/be/node-js/http-timeout-retry-boundary.mdx`
+- `apps/docs/category/computer-science/os/process-thread-scheduler.mdx`
+
+세부 기준은
+`docs/architecture/docs-local-vs-remote-content-policy.md`를 따른다.
 
 ### `publish script`
 
@@ -449,6 +486,7 @@ pnpm docs:publish-draft --slug my-post
 
 ## Related Docs
 
+- [docs-content-operating-model.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-operating-model.md)
 - [docs-content-rendering-strategy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-rendering-strategy.md)
 - [blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
 - [docs-blog-improvement-roadmap.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-blog-improvement-roadmap.md)
