@@ -153,10 +153,10 @@
   - CDN URL은 명시 버전으로 고정한다.
   - development에서도 `DOCS_ENABLE_REACT_INSPECTION=true`일 때만 opt-in 로드한다.
   - 기준 문서: `docs/worklog/2026-08-29-docs-article-anchor-scroll-test.md`
-- [ ] `P2` article detail의 읽기 보조 UX를 확장한다.
+- [-] `P2` article detail의 읽기 보조 UX를 확장한다.
   - related posts
-  - previous / next navigation
-  - last updated badge
+  - previous / next navigation 1차 적용 완료
+  - last updated badge 1차 적용 완료
   - feedback entry point
   - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
 - [-] `P2` 문서 카드 공통 UI 재사용 기준을 운영한다.

@@ -664,6 +664,14 @@
             "tocTitle": "TABLE OF CONTENTS",
             "joinTitle": "JOIN THE SYSTEM"
         },
+        "readingNavigation": {
+            "sectionTitle": "이어 읽기",
+            "previous": "이전 문서",
+            "next": "다음 문서",
+            "lastUpdated": "마지막 업데이트",
+            "sourceLocal": "로컬 문서",
+            "sourceRemote": "원격 문서"
+        },
         "related": {
             "title": "RELATED SIGNALS",
             "items": {

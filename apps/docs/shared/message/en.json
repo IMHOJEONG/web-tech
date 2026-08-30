@@ -664,6 +664,14 @@
             "tocTitle": "TABLE OF CONTENTS",
             "joinTitle": "JOIN THE SYSTEM"
         },
+        "readingNavigation": {
+            "sectionTitle": "Continue reading",
+            "previous": "Previous document",
+            "next": "Next document",
+            "lastUpdated": "Last updated",
+            "sourceLocal": "Local doc",
+            "sourceRemote": "Remote doc"
+        },
         "related": {
             "title": "RELATED SIGNALS",
             "items": {
