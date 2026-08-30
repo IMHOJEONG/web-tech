@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Canvas drawElementImage experiment</title>
+        <style>
+            body {
+                display: grid;
+                min-height: 100vh;
+                margin: 0;
+                place-items: center;
+                background: #111827;
+                color: #f9fafb;
+                font-family:
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    'Segoe UI',
+                    sans-serif;
+            }
+
+            canvas {
+                width: 640px;
+                height: 360px;
+                border: 1px solid rgb(249 250 251 / 0.18);
+                border-radius: 24px;
+                background:
+                    radial-gradient(circle at 50% 24%, rgb(34 197 94 / 0.16), transparent 32%),
+                    linear-gradient(135deg, #0f172a, #111827);
+                box-shadow: 0 28px 80px rgb(0 0 0 / 0.4);
+            }
+
+            button {
+                min-width: 164px;
+                border: 0;
+                border-radius: 999px;
+                padding: 18px 26px;
+                background: #f97316;
+                color: #111827;
+                cursor: pointer;
+                font: inherit;
+                font-weight: 800;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                transform-origin: left top;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas width="640" height="360" layoutsubtree>
+            <button>click me</button>
+        </canvas>
+        <script>
+            const canvas = document.querySelector('canvas')
+            const ctx = canvas.getContext('2d')
+            const button = canvas.querySelector('button')
+
+            const X = 280
+            const Y = 140
+            const H = 90
+
+            let hasPaintRecord = false
+            let retryFrame = 0
+            let rippleState = null
+
+            const render = () => {
+                // 매 프레임마다 canvas를 깨끗하게 지움
+                // 안 그러면, 이전에 그린 것들이 계속 쌓임
+                if (!hasPaintRecord) {
+                    requestCanvasPaint()
+                    return
+                }
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+                // 브러시한테 현재 상태를 북마크해두라고 함
+                ctx.save()
+
+                // 브러시 조작
+                ctx.translate(0, 2 * Y + H) // 아래 이동
+                ctx.scale(1, -1) // 위 아래 뒤집고
+                ctx.globalAlpha = 0.3 // 30% 투명도
+
+                // 버튼을 캔버스에 찍음
+                // 브러시가 뒤집히고 흐릿해진 상태
+                if (!drawButton(X, Y)) {
+                    ctx.restore()
+                    return
+                }
+                // 그 후, 브러시를 아까 북마크 해둔 상태로 되돌림
+                ctx.restore()
+
+                // 사용자가 실제로 클릭하게 되는 버튼
+
+                //
+                // 버튼을 어디에 그렸는지 알려주는 수학값을 돌려줌
+                const m = drawButton(X, Y)
+                if (!m) {
+                    return
+                }
+
+                // 투명한 버튼이 그려진 버튼 위치와 맞도록 이동함
+                button.style.transform = m.toString()
+
+                renderRipple()
+            }
+
+            const drawButton = (x, y) => {
+                try {
+                    return ctx.drawElementImage(button, x, y)
+                } catch (error) {
+                    if (
+                        error instanceof DOMException &&
+                        error.name === 'InvalidStateError' &&
+                        error.message.includes('No cached paint record')
+                    ) {
+                        hasPaintRecord = false
+                        requestCanvasPaint()
+                        return null
+                    }
+
+                    throw error
+                }
+            }
+
+            const requestCanvasPaint = () => {
+                cancelAnimationFrame(retryFrame)
+
+                if (typeof canvas.requestPaint === 'function') {
+                    canvas.requestPaint()
+                }
+
+                retryFrame = requestAnimationFrame(() => {
+                    if (!hasPaintRecord) {
+                        requestCanvasPaint()
+                    }
+                })
+            }
+
+            const handleCanvasPaint = () => {
+                hasPaintRecord = true
+                render()
+            }
+
+            const renderRipple = () => {
+                if (!rippleState) {
+                    return
+                }
+
+                const progress = Math.min((performance.now() - rippleState.startedAt) / 520, 1)
+                const radius = 16 + progress * 58
+
+                ctx.save()
+                ctx.globalAlpha = 1 - progress
+                ctx.strokeStyle = '#f97316'
+                ctx.lineWidth = 4
+                ctx.beginPath()
+                ctx.arc(rippleState.x, rippleState.y, radius, 0, Math.PI * 2)
+                ctx.stroke()
+                ctx.restore()
+
+                if (progress < 1) {
+                    requestAnimationFrame(render)
+                } else {
+                    rippleState = null
+                }
+            }
+
+            canvas.addEventListener('paint', handleCanvasPaint)
+            canvas.onpaint = handleCanvasPaint
+            requestCanvasPaint()
+
+            button.addEventListener('click', (e) => {
+                rippleState = {
+                    x: X + e.offsetX,
+                    y: Y + e.offsetY,
+                    startedAt: performance.now(),
+                }
+                render()
+            })
+
+            // ctx.drawElementImage(button, x, y)
+
+            // webGL
+            // GPU Texture에 넣는 것
+            // gl.texElementImage2D(gl.TEXTURE_2D, gl.RGBA, button)
+
+            // webGPU
+            // device.queue.copyElementImageToTexture(
+            //     {
+            //         source: button,
+            //     },
+            //     {
+            //         texture,
+            //     }
+            // )
+
+            // canvas 안 HTML이 바뀔 때마다,
+            // input에 포커스가 되거나 버튼에 마우스를 올리면,
+            // canvas가 paint 이벤트를 발생시킴
+
+            // canvas.onpaint = () => {
+            //     ctx.drawElementImage(button, x, y)
+            // }
+        </script>
+    </body>
+</html>

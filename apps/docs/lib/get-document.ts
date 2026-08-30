@@ -11,13 +11,24 @@ import {
     fetchRemoteDocByRoutePath,
     fetchRemoteDocsData,
 } from '~/lib/content-api'
+import { shouldIncludeRemoteContentIndex } from '~/lib/content-api-config'
+import {
+    logContentSource,
+    resolveCollectionContentSource,
+} from '~/lib/content-source-log'
+import { selectDocumentBySourcePolicy } from '~/lib/content-source-policy'
+import { DEFAULT_LOCAL_DOCUMENT_THUMBNAIL } from '~/shared/assets/default-thumbnails'
 import {
     assertValidLocalDocFrontmatter,
     isPublicDocStatus,
     normalizeLocalDocFrontmatter,
     type EditorialStatus,
 } from '~/lib/editorial-metadata'
-import { isDocRouteMatch } from '~/lib/get-doc-route'
+import { getDocHref, isDocRouteMatch } from '~/lib/get-doc-route'
+import {
+    getLocalDataDirectory,
+    toLocalContentFileName,
+} from '~/lib/local-content-paths'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 
 export type ContentFormat = 'mdx' | 'html'
@@ -44,7 +55,7 @@ export interface Metadata {
     status?: EditorialStatus
 }
 
-const docsDirectory = path.join(process.cwd(), 'data')
+const docsDirectory = getLocalDataDirectory()
 
 function exploreDirectory(directory: string) {
     let files: string[] = []
@@ -68,7 +79,7 @@ function exploreDirectory(directory: string) {
     return files
 }
 
-function getLocalDocsData() {
+export function getLocalDocsData() {
     const fileNames = exploreDirectory(docsDirectory)
 
     const allPostsData: Partial<Metadata>[] = fileNames.flatMap((fileName) => {
@@ -88,9 +99,7 @@ function getLocalDocsData() {
 
         const content = String(vfile)
         // 프로젝트 루트 기준의 상대경로(확장자 없는)만 추출
-        const relPathFromRoot = path
-            .relative(process.cwd(), fileName)
-            .replace(/\.(mdx|md)$/i, '')
+        const relPathFromRoot = toLocalContentFileName(fileName)
         const normalizedFileName = normalizeDocPath(relPathFromRoot)
         const fallbackSlug =
             normalizedFileName.split('/').filter(Boolean).pop() ?? ''
@@ -107,7 +116,7 @@ function getLocalDocsData() {
                 thumbnailPath = '/' + thumbnailPath
             }
         } else {
-            thumbnailPath = null
+            thumbnailPath = DEFAULT_LOCAL_DOCUMENT_THUMBNAIL
         }
         return [
             {
@@ -135,18 +144,115 @@ function getLocalDocsData() {
     return allPostsData
 }
 
-export async function getDocsData() {
-    const remoteDocs = await fetchRemoteDocsData()
+function getDocIdentityKey(doc: Partial<Metadata>) {
+    const href = getDocHref({
+        slug: doc.slug,
+        markdownPath: doc.markdownPath,
+        fileName: doc.fileName,
+    })
 
-    if (remoteDocs) {
-        return remoteDocs
+    if (href !== '/docs') {
+        return href
     }
 
-    return getLocalDocsData()
+    return String(doc.id ?? doc.markdownPath ?? doc.fileName ?? doc.slug ?? '')
 }
 
-export async function getSortedPostsData() {
-    const allPostsData = await getDocsData()
+function mergeDocsData(
+    localDocs: Partial<Metadata>[],
+    remoteDocs: Partial<Metadata>[]
+) {
+    const seenKeys = new Set<string>()
+    const mergedDocs: Partial<Metadata>[] = []
+
+    for (const doc of [...remoteDocs, ...localDocs]) {
+        const key = getDocIdentityKey(doc)
+
+        if (key && seenKeys.has(key)) {
+            continue
+        }
+
+        if (key) {
+            seenKeys.add(key)
+        }
+
+        mergedDocs.push(doc)
+    }
+
+    return mergedDocs
+}
+
+type RemoteDocsDataResult = {
+    docs: Partial<Metadata>[]
+    status: 'available' | 'failed'
+}
+
+async function fetchRemoteDocsDataSafely(): Promise<RemoteDocsDataResult> {
+    try {
+        return {
+            docs: (await fetchRemoteDocsData()) ?? [],
+            status: 'available',
+        }
+    } catch (error) {
+        console.warn(
+            '[docs] Remote document index unavailable. Rendering local docs only.',
+            error
+        )
+        return {
+            docs: [],
+            status: 'failed',
+        }
+    }
+}
+
+type DocsDataOptions = {
+    includeRemote?: boolean
+}
+
+export async function getDocsData(options: DocsDataOptions = {}) {
+    const localDocs = getLocalDocsData()
+    const includeRemote =
+        options.includeRemote ?? shouldIncludeRemoteContentIndex()
+
+    if (!includeRemote) {
+        logContentSource({
+            area: 'index',
+            source: resolveCollectionContentSource(localDocs.length, 0),
+            reason: 'remote-index-disabled',
+            includeRemote,
+            localCount: localDocs.length,
+            remoteCount: 0,
+            totalCount: localDocs.length,
+        })
+
+        return localDocs
+    }
+
+    const remoteResult = await fetchRemoteDocsDataSafely()
+    const remoteDocs = remoteResult.docs
+    const mergedDocs = mergeDocsData(localDocs, remoteDocs)
+
+    logContentSource({
+        area: 'index',
+        source: resolveCollectionContentSource(
+            localDocs.length,
+            remoteDocs.length
+        ),
+        reason:
+            remoteResult.status === 'failed'
+                ? 'remote-index-failed-local-fallback'
+                : 'remote-index-enabled',
+        includeRemote,
+        localCount: localDocs.length,
+        remoteCount: remoteDocs.length,
+        totalCount: mergedDocs.length,
+    })
+
+    return mergedDocs
+}
+
+export async function getSortedPostsData(options: DocsDataOptions = {}) {
+    const allPostsData = await getDocsData(options)
     return allPostsData.sort((a, b) => {
         if (a.date && b.date && a.date < b.date) {
             return 1
@@ -157,11 +263,102 @@ export async function getSortedPostsData() {
 }
 
 export async function getDocByRoutePath(routePath: string) {
-    const remoteDoc = await fetchRemoteDocByRoutePath(routePath)
+    const localDoc = getLocalDocsData().find((doc) =>
+        isDocRouteMatch(doc, routePath)
+    )
+    const includeRemote = shouldIncludeRemoteContentIndex()
 
-    if (remoteDoc) {
-        return remoteDoc
+    if (includeRemote) {
+        try {
+            const remoteDoc = await fetchRemoteDocByRoutePath(routePath)
+
+            if (remoteDoc) {
+                logContentSource({
+                    area: 'detail',
+                    source: 'remote',
+                    reason: 'remote-detail-found',
+                    routePath,
+                    includeRemote,
+                })
+
+                return remoteDoc
+            }
+        } catch (error) {
+            console.warn(
+                '[docs] Remote document detail unavailable. Trying local document fallback.',
+                routePath,
+                error
+            )
+        }
+
+        const selectedDoc = selectDocumentBySourcePolicy({
+            includeRemote,
+            localDoc,
+            remoteDoc: null,
+        })
+
+        logContentSource({
+            area: 'detail',
+            source: selectedDoc ? 'local' : 'none',
+            reason: selectedDoc
+                ? 'remote-detail-unavailable-local-fallback'
+                : 'remote-detail-unavailable-no-local-fallback',
+            routePath,
+            includeRemote,
+        })
+
+        return selectedDoc
     }
 
-    return getLocalDocsData().find((doc) => isDocRouteMatch(doc, routePath))
+    if (localDoc) {
+        logContentSource({
+            area: 'detail',
+            source: 'local',
+            reason: 'remote-index-disabled-local-first',
+            routePath,
+            includeRemote,
+        })
+
+        return selectDocumentBySourcePolicy({
+            includeRemote,
+            localDoc,
+            remoteDoc: null,
+        })
+    }
+
+    try {
+        const selectedDoc = selectDocumentBySourcePolicy({
+            includeRemote,
+            localDoc,
+            remoteDoc: await fetchRemoteDocByRoutePath(routePath),
+        })
+
+        logContentSource({
+            area: 'detail',
+            source: selectedDoc ? 'remote' : 'none',
+            reason: selectedDoc
+                ? 'local-missing-remote-fallback'
+                : 'local-and-remote-missing',
+            routePath,
+            includeRemote,
+        })
+
+        return selectedDoc
+    } catch (error) {
+        console.warn(
+            '[docs] Remote document detail unavailable.',
+            routePath,
+            error
+        )
+    }
+
+    logContentSource({
+        area: 'detail',
+        source: 'none',
+        reason: 'local-and-remote-unavailable',
+        routePath,
+        includeRemote,
+    })
+
+    return null
 }

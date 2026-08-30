@@ -35,6 +35,7 @@ function makeFallbackDoc(
         fileName: `fallback/${id}`,
         href,
         section: 'UI/UX',
+        contentSource: 'local',
     }
 }
 

@@ -151,6 +151,37 @@ GitHub 저장소 설정은 아래 기준을 유지한다.
 - 다시 시작할 때는 `main`에서 새 브랜치를 만든다.
 - 꼭 기존 이름을 유지해야 하면, 기존 브랜치를 삭제하거나 ref를 `main`으로 다시 맞춘 뒤 시작한다.
 
+## feature 브랜치 동기화
+
+`main`에 공통 변경이 들어간 뒤 아직 열려 있는 `feature/*` 브랜치가 남아 있으면
+아래 스크립트로 `origin/main` 반영 여부를 점검한다.
+
+```bash
+pnpm branch:sync-feature
+```
+
+기본 실행은 dry-run이며, 각 feature 브랜치가 `origin/main`의 최신 커밋을 포함하는지만 확인한다.
+
+실제로 `origin/main`을 각 feature 브랜치에 merge하려면 아래 명령을 사용한다.
+
+```bash
+pnpm branch:sync-feature:apply
+```
+
+merge 후 원격 브랜치까지 갱신하려면 아래 명령을 사용한다.
+
+```bash
+pnpm branch:sync-feature:push
+```
+
+운영 기준:
+
+- 동기화 기준은 기본적으로 `origin/main`이다.
+- 브랜치 히스토리 rewrite를 피하기 위해 기본 전략은 `merge`다.
+- 충돌이 발생하면 해당 브랜치는 merge를 abort하고 실패 목록에 남긴다.
+- 작업 트리가 깨끗하지 않으면 실제 적용 모드는 실행하지 않는다.
+- 장기적으로는 브랜치를 자주 sync하기보다, 오래된 feature 브랜치를 닫고 `main`에서 새로 따는 방식을 우선한다.
+
 ## 운영 메모
 
 - trunk-based의 핵심은 “그래프를 예쁘게 유지하는 것”보다 “긴-lived 브랜치를 만들지 않는 것”이다.

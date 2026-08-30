@@ -1,4 +1,5 @@
 import { type DocChannel, isDocInChannel } from '~/lib/get-doc-channel'
+import { getDocHref } from '~/lib/get-doc-route'
 import { getSubCategoryData } from '~/lib/get-category'
 import { getSearchData, type SearchData } from '~/lib/get-search-data'
 import { categoryTree } from '~/entities/category/model/category'
@@ -43,8 +44,14 @@ async function getWebCategoryDocs() {
                         doc.fileName ?? `category/fe/${topic.url}/${doc.slug}`,
                     date: doc.date,
                     thumbnail: doc.thumbnail ?? null,
-                    href: `/category/fe/${topic.url}/${doc.slug}`,
+                    href: getDocHref({
+                        fileName:
+                            doc.fileName ??
+                            `category/fe/${topic.url}/${doc.slug}`,
+                        slug: doc.slug,
+                    }),
                     section: 'Web',
+                    contentSource: 'local' as const,
                 }))
         })
     )

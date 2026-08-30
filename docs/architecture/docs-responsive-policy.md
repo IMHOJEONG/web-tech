@@ -59,6 +59,7 @@
 
 - `widgets/*` 내부에서도 `md`가 shell 전환처럼 쓰이는 지점이 있는지 점검
 - 새로운 global navigation 또는 drawer variant를 추가할 때는 먼저 이 문서를 기준으로 breakpoint 역할을 확인
+- 실제 브라우저/기기 점검은 `docs/runbooks/docs-responsive-browser-device-checklist.md`를 따른다.
 
 ## Widget Audit Notes
 
