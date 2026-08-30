@@ -672,6 +672,12 @@
             "sourceLocal": "로컬 문서",
             "sourceRemote": "원격 문서"
         },
+        "relatedDocuments": {
+            "sectionTitle": "함께 읽으면 좋은 문서",
+            "description": "태그, 주제, 섹션이 가까운 문서를 골라 이어 읽기 쉽게 정리했습니다.",
+            "sourceLocal": "로컬 문서",
+            "sourceRemote": "원격 문서"
+        },
         "related": {
             "title": "RELATED SIGNALS",
             "items": {

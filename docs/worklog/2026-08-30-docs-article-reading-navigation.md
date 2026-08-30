@@ -34,5 +34,4 @@ article rendering output contract를 정리한 뒤, 상세 문서에서 다음�
 
 ## Follow-Up
 
-- related posts는 단순 이전/다음보다 topic/tag 기반 추천으로 별도 확장한다.
 - feedback entry point는 공개 운영 정책을 먼저 정한 뒤 추가한다.

@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { notFound, permanentRedirect } from 'next/navigation'
 import { cache, Suspense } from 'react'
 import { RemoteCodeCopyEnhancer } from '~/feature/code-block/ui/remote-code-copy-enhancer'
+import { buildArticleRelatedDocuments } from '~/lib/article-related-documents'
 import { buildArticleReadingNavigation } from '~/lib/article-reading-navigation'
 import { buildArticleMetadata } from '~/lib/article-metadata'
 import {
@@ -61,10 +62,15 @@ export default async function Page({
         navigationDocs,
         target
     )
+    const relatedDocuments = buildArticleRelatedDocuments(
+        navigationDocs,
+        target
+    )
 
     if (renderedArticle.mode === 'html') {
         return (
             <ArticleContentLayout
+                relatedDocuments={relatedDocuments}
                 readingNavigation={readingNavigation}
                 toc={renderedArticle.toc}
             >
@@ -82,6 +88,7 @@ export default async function Page({
 
     return (
         <ArticleContentLayout
+            relatedDocuments={relatedDocuments}
             readingNavigation={readingNavigation}
             toc={renderedArticle.toc}
         >

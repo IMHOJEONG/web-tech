@@ -672,6 +672,12 @@
             "sourceLocal": "Local doc",
             "sourceRemote": "Remote doc"
         },
+        "relatedDocuments": {
+            "sectionTitle": "Related documents",
+            "description": "A short list of nearby documents selected by tags, topic, and section.",
+            "sourceLocal": "Local doc",
+            "sourceRemote": "Remote doc"
+        },
         "related": {
             "title": "RELATED SIGNALS",
             "items": {

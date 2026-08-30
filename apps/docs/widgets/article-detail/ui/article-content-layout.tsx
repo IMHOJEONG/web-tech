@@ -1,14 +1,18 @@
 import type { TocItem } from 'remark-flexible-toc'
 import Toc from '~/widgets/article-toc/ui/toc'
 import { getTranslations } from 'next-intl/server'
+import type { ArticleRelatedDocumentItem } from '~/lib/article-related-documents'
 import type { ArticleReadingNavigation as ArticleReadingNavigationData } from '~/lib/article-reading-navigation'
+import { ArticleRelatedDocuments } from './article-related-documents'
 import { ArticleReadingNavigation } from './article-reading-navigation'
 
 export async function ArticleContentLayout({
+    relatedDocuments,
     toc,
     readingNavigation,
     children,
 }: {
+    relatedDocuments?: ArticleRelatedDocumentItem[]
     toc?: TocItem[]
     readingNavigation?: ArticleReadingNavigationData
     children: React.ReactNode
@@ -25,6 +29,17 @@ export async function ArticleContentLayout({
 
             <div className="min-w-0">
                 {children}
+                {relatedDocuments && (
+                    <ArticleRelatedDocuments
+                        items={relatedDocuments}
+                        labels={{
+                            description: t('relatedDocuments.description'),
+                            sectionTitle: t('relatedDocuments.sectionTitle'),
+                            sourceLocal: t('relatedDocuments.sourceLocal'),
+                            sourceRemote: t('relatedDocuments.sourceRemote'),
+                        }}
+                    />
+                )}
                 {readingNavigation && (
                     <ArticleReadingNavigation
                         navigation={readingNavigation}
