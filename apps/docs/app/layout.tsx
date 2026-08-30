@@ -2,7 +2,6 @@ import { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages, getTranslations } from 'next-intl/server'
 import localFont from 'next/font/local'
-import NextTopLoader from 'nextjs-toploader'
 import { Suspense } from 'react'
 import { mono } from '~/components/mono-font'
 
@@ -16,6 +15,7 @@ import {
     shouldLoadReactInspectionTools,
 } from '~/shared/config/react-inspection-tools'
 import { getMetadataBase } from '~/lib/seo'
+import { AppTopLoader } from '~/widgets/app-shell/ui/app-top-loader'
 import Footer from '~/widgets/app-shell/ui/footer'
 import Header from '~/widgets/app-shell/ui/header'
 import MobileBottomNav from '~/widgets/app-shell/ui/mobile-bottom-nav'
@@ -96,7 +96,7 @@ export default async function Layout({
                     <Suspense>
                         <Header />
                     </Suspense>
-                    <NextTopLoader showSpinner={false} />
+                    <AppTopLoader />
                     <div className="flex-1 pb-16.25 sm:pb-0">{children}</div>
                     <Footer />
                     <MobileBottomNav />
