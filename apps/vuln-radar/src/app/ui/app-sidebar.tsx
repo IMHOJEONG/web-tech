@@ -49,7 +49,7 @@ export function AppSidebar() {
           icon={Activity}
           label={t("nav.overview")}
         />
-        <AppSidebarLink icon={ShieldAlert} label={t("nav.alerts")} />
+        <AppSidebarLink to="/feed" icon={ShieldAlert} label={t("nav.feed")} />
         <AppSidebarLink icon={Database} label={t("nav.assets")} />
         <AppSidebarLink icon={Inbox} label={t("nav.inbox")} />
       </nav>

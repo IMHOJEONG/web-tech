@@ -99,10 +99,17 @@
 
 ## 7. feed 페이지 만들기
 
-- [ ] 시간순 피드
-- [ ] priority 필터
+- [x] 시간순 피드
+- [x] priority 필터
 - [ ] source 필터
-- [ ] keyword 검색
+- [x] keyword 검색
+
+결정 메모:
+
+- `/feed` 라우트를 실제 화면으로 열고, 사이드바의 두 번째 항목을 feed 탐색으로 연결한다.
+- 현재 1차 필터는 클라이언트 상태로 시작한다. feed API가 query/filter parameter를 지원하면 URL query 기반 또는 서버 필터로 확장한다.
+- 필터 기준은 `priority`, `severity`, `KEV`, keyword이며, 최신 수정 시각 내림차순으로 정렬한다.
+- `source` 필터는 응답 모델이 item 단위 source를 아직 갖고 있지 않아 보류한다. API가 `source` 또는 `dataSource`를 item 단위로 제공하면 추가한다.
 
 공부 포인트:
 
