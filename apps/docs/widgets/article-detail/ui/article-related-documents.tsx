@@ -1,6 +1,7 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
 import type { ArticleRelatedDocumentItem } from '~/lib/article-related-documents'
+import { shouldShowContentSourceBadge } from '~/lib/content-source-visibility'
 import { DocumentDateText } from '~/shared/ui/document-date-text'
 import { DocumentMetaPills } from '~/shared/ui/document-meta-pills'
 
@@ -19,6 +20,8 @@ function getMetaItems(
     item: ArticleRelatedDocumentItem,
     labels: ArticleRelatedDocumentsProps['labels']
 ) {
+    const showContentSourceBadge = shouldShowContentSourceBadge()
+
     return [
         item.topicLabel
             ? {
@@ -27,7 +30,7 @@ function getMetaItems(
                   tone: 'tag' as const,
               }
             : null,
-        item.contentSource
+        showContentSourceBadge && item.contentSource
             ? {
                   key: 'source',
                   label:

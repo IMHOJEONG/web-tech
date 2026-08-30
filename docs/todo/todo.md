@@ -199,6 +199,7 @@
   - NAS reverse proxy가 `Authorization` 헤더를 upstream에 그대로 전달하는지 검증 절차 추가
   - `docs` 서버 재시작 누락, 배포 env 누락, backend env 누락을 빠르게 확인하는 점검 순서 정리
   - remote content 장애 시 목록/검색은 로컬 문서로 graceful degradation, 문서 상세는 동일 route 로컬 문서 fallback 후 실패하도록 정책 정리
+  - source 선택 결과는 runtime log에 항상 남기되, production UI에서는 숨기고 development UI에서만 badge/filter로 노출
   - 기준 문서: `docs/runbooks/content-api-auth-ops-runbook.md`
 - [x] `P0` `pnpm` catalog 도입 이후 네트워크 가능한 환경에서 `pnpm install --lockfile-only` 재검증
 - [x] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정

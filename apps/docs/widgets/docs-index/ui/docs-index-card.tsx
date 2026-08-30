@@ -2,6 +2,7 @@ import { cn } from '@web-tech/ui/lib/utils'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import type { CSSProperties } from 'react'
+import { shouldShowContentSourceBadge } from '~/lib/content-source-visibility'
 import type { SearchData } from '~/lib/get-search-data'
 import { buildSearchResultItem } from '~/lib/search-result-contract'
 import { DocumentDateText } from '~/shared/ui/document-date-text'
@@ -26,14 +27,17 @@ export async function DocsIndexCard({
 }: DocsIndexCardProps) {
     const t = await getTranslations('docsIndex')
     const resultItem = buildSearchResultItem(doc, keyword)
+    const showContentSourceBadge = shouldShowContentSourceBadge()
     const metaPills = [
-        {
-            key: 'source',
-            label: t(
-                `card.sources.${getDocSourceMessageKey(doc.contentSource)}`
-            ),
-            tone: 'source' as const,
-        },
+        showContentSourceBadge
+            ? {
+                  key: 'source',
+                  label: t(
+                      `card.sources.${getDocSourceMessageKey(doc.contentSource)}`
+                  ),
+                  tone: 'source' as const,
+              }
+            : null,
         ...(doc.readMinutes
             ? [
                   {
@@ -57,7 +61,7 @@ export async function DocsIndexCard({
             label: `#${tag}`,
             tone: 'tag' as const,
         })) ?? []),
-    ]
+    ].filter((item) => item !== null)
 
     return (
         <Link

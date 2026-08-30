@@ -4,6 +4,7 @@ import type {
     ArticleReadingNavigation as ArticleReadingNavigationData,
     ArticleReadingNavigationItem,
 } from '~/lib/article-reading-navigation'
+import { shouldShowContentSourceBadge } from '~/lib/content-source-visibility'
 import { DocumentDateText } from '~/shared/ui/document-date-text'
 import { DocumentMetaPills } from '~/shared/ui/document-meta-pills'
 
@@ -24,6 +25,8 @@ function getMetaItems(
     item: ArticleReadingNavigationItem,
     labels: ArticleReadingNavigationProps['labels']
 ) {
+    const showContentSourceBadge = shouldShowContentSourceBadge()
+
     return [
         item.topicLabel
             ? {
@@ -32,7 +35,7 @@ function getMetaItems(
                   tone: 'tag' as const,
               }
             : null,
-        item.contentSource
+        showContentSourceBadge && item.contentSource
             ? {
                   key: 'source',
                   label:

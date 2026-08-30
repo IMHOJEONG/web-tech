@@ -95,6 +95,17 @@
 
 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`에서는 목록/검색이 원격 문서를 포함하지 않으므로, 로컬 상세도 원격 장애에 묶이지 않게 로컬 문서를 먼저 사용한다.
 
+## Source Visibility Policy
+
+`local` / `remote`는 독자에게 필요한 분류가 아니라 운영자가 로딩 경로를 확인하기 위한 구현 메타데이터다.
+
+따라서 기본 정책은 다음과 같다.
+
+- runtime log에는 source 선택 결과를 항상 남긴다.
+- production UI에는 source badge와 source filter를 노출하지 않는다.
+- development UI에서만 source badge와 source filter를 노출한다.
+- 화면에서 문서의 성격을 설명해야 할 때는 source 대신 section, topic label, tags, read minutes를 사용한다.
+
 ## Failure Policy
 
 원격 문서 API 실패는 사이트 전체 실패로 전파하지 않는다.

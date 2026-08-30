@@ -91,6 +91,9 @@ event name:
 
 - 토큰, Authorization header, 전체 endpoint URL은 기록하지 않는다.
 - 검색어 원문은 기록하지 않고, 검색어 존재 여부만 `[provided]`로 남긴다.
+- `local` / `remote` source 정보는 운영 관측용 메타데이터로 취급한다.
+- production 화면에는 source badge나 source filter를 노출하지 않는다.
+- development 화면에서만 source badge / source filter를 보여 빠르게 로딩 경로를 확인한다.
 
 ## Vercel Runtime Log Check
 
