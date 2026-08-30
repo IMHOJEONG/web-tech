@@ -16,7 +16,6 @@ type Props = {
         page?: string
         q?: string
         section?: string
-        source?: string
         sort?: string
     }>
 }
@@ -44,10 +43,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page({ searchParams }: Props) {
-    const { page, q, section, source, sort } = await searchParams
+    const { page, q, section, sort } = await searchParams
     const keyword = q?.trim() ?? ''
     const currentPage = parsePageParam(page)
-    const controls = resolveDocsIndexControls({ section, source, sort })
+    const controls = resolveDocsIndexControls({ section, sort })
     const docs = keyword ? [] : await getSearchData()
     const searchResults = keyword ? await getSearchData(keyword) : []
     const pageState = resolveDocsSearchPageState({

@@ -131,8 +131,9 @@
   - 기준 문서: `docs/architecture/docs-feed-filter-policy.md`
 - [-] `P1` `/docs`를 검색/색인 중심 화면으로 점진 개선한다.
   - 1차: compact search panel, 추천 키워드, 섹션 요약, row형 문서 카드, 페이지네이션 반영 완료
-  - 2차: `section/source/sort` query string 기반 필터와 정렬 UI, 필터 empty state, 카드 메타 정보 반영 완료
-  - 3차: 검색 결과 화면에도 `section/source` 필터 적용 완료, 카드 정보 계층과 `docs-index` UI/model 분리 완료
+  - 2차: `section/sort` query string 기반 필터와 정렬 UI, 필터 empty state, 카드 메타 정보 반영 완료
+  - 3차: 검색 결과 화면에도 `section` 필터 적용 완료, 카드 정보 계층과 `docs-index` UI/model 분리 완료
+  - source 필터/배지는 사용자-facing UI에서 제거하고 runtime log 관측 메타로 분리
   - 3.5차: 문서 썸네일, 날짜, 보조 메타 pill을 shared UI로 분리 완료
   - 4차: 모바일 터치 사용성 1차 보강 완료
   - 목표: `/feed`는 발견/큐레이션, `/docs`는 빠른 검색/탐색으로 역할을 분리
@@ -161,7 +162,8 @@
   - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
 - [-] `P2` 문서 카드 공통 UI 재사용 기준을 운영한다.
   - 카드 전체 레이아웃은 화면별로 유지
-  - 썸네일 fallback, 날짜 포맷, source/read time/topic/tags 보조 메타는 shared UI로 관리
+  - 썸네일 fallback, 날짜 포맷, read time/topic/tags 보조 메타는 shared UI로 관리
+  - source는 UI 메타가 아니라 runtime log 관측 메타로 분리
   - 기준 문서: `docs/architecture/docs-document-ui-reuse-policy.md`
 
 ## Design / Design System
@@ -199,7 +201,7 @@
   - NAS reverse proxy가 `Authorization` 헤더를 upstream에 그대로 전달하는지 검증 절차 추가
   - `docs` 서버 재시작 누락, 배포 env 누락, backend env 누락을 빠르게 확인하는 점검 순서 정리
   - remote content 장애 시 목록/검색은 로컬 문서로 graceful degradation, 문서 상세는 동일 route 로컬 문서 fallback 후 실패하도록 정책 정리
-  - source 선택 결과는 runtime log에 항상 남기되, production UI에서는 숨기고 development UI에서만 badge/filter로 노출
+  - source 선택 결과는 runtime log에 항상 남기되, UI에는 badge/filter를 노출하지 않음
   - 기준 문서: `docs/runbooks/content-api-auth-ops-runbook.md`
 - [x] `P0` `pnpm` catalog 도입 이후 네트워크 가능한 환경에서 `pnpm install --lockfile-only` 재검증
 - [x] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정

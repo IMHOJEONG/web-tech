@@ -17,7 +17,7 @@
 
 1. 카드 레이아웃은 화면별로 유지한다.
 2. 문서 메타 표시 규칙은 공통 컴포넌트로 관리한다.
-3. 썸네일 fallback, 날짜 포맷, tag/source/read-time 표현은 한 곳에서 바꿀 수 있어야 한다.
+3. 썸네일 fallback, 날짜 포맷, tag/topic/read-time 표현은 한 곳에서 바꿀 수 있어야 한다.
 4. 공통 컴포넌트는 i18n 메시지를 직접 읽지 않고, 화면 컴포넌트가 번역된 label을 주입한다.
 5. 공통화가 `/feed = 발견`, `/docs = 검색/색인`의 역할 차이를 약하게 만들면 분리 상태를 유지한다.
 
@@ -29,7 +29,7 @@
 - `apps/docs/shared/ui/document-date-text.tsx`
   - 문서 날짜를 동일한 `getTime()` 포맷으로 표시한다.
 - `apps/docs/shared/ui/document-meta-pills.tsx`
-  - `local/remote`, 읽기 시간, topic label, tags 같은 보조 메타를 pill 형태로 표시한다.
+  - 읽기 시간, topic label, tags 같은 보조 메타를 pill 형태로 표시한다.
   - 번역 문구는 호출부에서 주입한다.
 
 ## 화면별 책임
@@ -39,7 +39,8 @@
 `DocsIndexCard`는 검색 결과와 인덱스 탐색을 위한 row/card hybrid 레이아웃을 유지한다.
 
 - 제목과 요약이 가장 중요하다.
-- `source`, `readMinutes`, `topicLabel`, `tags`는 보조 메타로 낮은 시각 강도를 갖는다.
+- `readMinutes`, `topicLabel`, `tags`는 보조 메타로 낮은 시각 강도를 갖는다.
+- `local/remote` source는 사용자-facing 메타가 아니므로 카드에 표시하지 않는다.
 - 검색 highlight는 `/docs` 카드 안에서 유지한다.
 
 ### 채널 허브
@@ -68,7 +69,7 @@
 ## 후속 후보
 
 - `DocumentCardMeta` 모델 유틸 추가
-  - `readMinutes`, `topicLabel`, `tags`, `contentSource`를 UI에 넘기기 좋은 형태로 정리
+  - `readMinutes`, `topicLabel`, `tags`를 UI에 넘기기 좋은 형태로 정리
 - `DocumentListItem` 추가 검토
   - `/docs`와 검색 결과 API consumer가 같은 row형 목록 UI를 쓰게 될 때만 검토
 - `DocumentImagePolicy` 문서와 연결

@@ -102,8 +102,8 @@
 따라서 기본 정책은 다음과 같다.
 
 - runtime log에는 source 선택 결과를 항상 남긴다.
-- production UI에는 source badge와 source filter를 노출하지 않는다.
-- development UI에서만 source badge와 source filter를 노출한다.
+- UI에는 source badge와 source filter를 노출하지 않는다.
+- `/docs?source=local|remote` query가 들어와도 화면 필터 조건으로 사용하지 않는다.
 - 화면에서 문서의 성격을 설명해야 할 때는 source 대신 section, topic label, tags, read minutes를 사용한다.
 
 ## Failure Policy

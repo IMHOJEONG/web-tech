@@ -1,7 +1,6 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import Link from 'next/link'
 import type { ArticleRelatedDocumentItem } from '~/lib/article-related-documents'
-import { shouldShowContentSourceBadge } from '~/lib/content-source-visibility'
 import { DocumentDateText } from '~/shared/ui/document-date-text'
 import { DocumentMetaPills } from '~/shared/ui/document-meta-pills'
 
@@ -11,33 +10,16 @@ type ArticleRelatedDocumentsProps = {
     labels: {
         description: string
         sectionTitle: string
-        sourceLocal: string
-        sourceRemote: string
     }
 }
 
-function getMetaItems(
-    item: ArticleRelatedDocumentItem,
-    labels: ArticleRelatedDocumentsProps['labels']
-) {
-    const showContentSourceBadge = shouldShowContentSourceBadge()
-
+function getMetaItems(item: ArticleRelatedDocumentItem) {
     return [
         item.topicLabel
             ? {
                   key: 'topic',
                   label: item.topicLabel,
                   tone: 'tag' as const,
-              }
-            : null,
-        showContentSourceBadge && item.contentSource
-            ? {
-                  key: 'source',
-                  label:
-                      item.contentSource === 'remote'
-                          ? labels.sourceRemote
-                          : labels.sourceLocal,
-                  tone: 'source' as const,
               }
             : null,
         typeof item.readMinutes === 'number'
@@ -103,7 +85,7 @@ export function ArticleRelatedDocuments({
                             />
                             <DocumentMetaPills
                                 items={[
-                                    ...getMetaItems(item, labels),
+                                    ...getMetaItems(item),
                                     ...item.tags.slice(0, 2).map((tag) => ({
                                         key: `tag-${tag}`,
                                         label: `#${tag}`,

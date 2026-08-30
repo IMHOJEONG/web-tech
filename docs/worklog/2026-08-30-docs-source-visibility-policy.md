@@ -9,20 +9,21 @@ source 정보는 운영자가 콘텐츠 로딩 경로를 확인할 때는 유용
 ## Decision
 
 - `docs.content_source` runtime log는 환경 변수와 관계없이 계속 출력한다.
-- production UI에서는 source badge를 숨긴다.
-- production UI에서는 `/docs` source filter도 숨긴다.
-- development UI에서만 source badge와 source filter를 보여 로컬 확인을 돕는다.
+- UI에서는 source badge를 숨긴다.
+- UI에서는 `/docs` source filter도 숨긴다.
+- 로컬/원격 로딩 경로는 화면이 아니라 runtime log로만 확인한다.
 
 ## Implementation
 
-- `apps/docs/lib/content-source-visibility.ts`에 UI 노출 조건을 중앙화했다.
-- `/docs` 문서 카드의 source pill을 development 환경에서만 렌더링한다.
-- 상세 하단 `함께 읽으면 좋은 문서`와 `이어 읽기` 카드의 source pill도 같은 조건을 따른다.
-- `/docs` controls bar의 source filter는 development 환경에서만 보인다.
+- `/docs` 문서 카드의 source pill을 제거했다.
+- 상세 하단 `함께 읽으면 좋은 문서`와 `이어 읽기` 카드의 source pill도 제거했다.
+- `/docs` controls bar의 source filter를 제거했다.
+- `/docs?source=local|remote` query가 남아 있어도 화면 필터 조건으로 사용하지 않는다.
+- source를 언급하던 filtered empty state copy를 독자-facing 문구로 수정했다.
 
 ## Notes
 
-production에서 source를 확인해야 할 때는 화면이 아니라 Vercel Runtime Logs에서 `docs.content_source`를 검색한다.
+source를 확인해야 할 때는 화면이 아니라 Vercel Runtime Logs에서 `docs.content_source`를 검색한다.
 
 관련 문서:
 

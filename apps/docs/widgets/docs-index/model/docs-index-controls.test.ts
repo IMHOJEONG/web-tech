@@ -29,18 +29,16 @@ test('resolveDocsIndexControls falls back to safe defaults', () => {
     assert.deepEqual(
         resolveDocsIndexControls({
             section: 'unknown',
-            source: 'external',
             sort: 'popular',
         }),
         {
             section: 'all',
-            source: 'all',
             sort: 'latest',
         }
     )
 })
 
-test('applyDocsIndexControls filters by section and source', () => {
+test('applyDocsIndexControls filters by section', () => {
     const docs = [
         createDoc(),
         createDoc({
@@ -54,7 +52,6 @@ test('applyDocsIndexControls filters by section and source', () => {
 
     const filtered = applyDocsIndexControls(docs, {
         section: 'backend',
-        source: 'remote',
         sort: 'latest',
     })
 
@@ -82,7 +79,6 @@ test('filterDocsIndexControls keeps incoming order for search relevance', () => 
 
     const filtered = filterDocsIndexControls(docs, {
         section: 'web',
-        source: 'local',
         sort: 'title',
     })
 
@@ -100,7 +96,6 @@ test('applyDocsIndexControls sorts by title when requested', () => {
 
     const sorted = applyDocsIndexControls(docs, {
         section: 'all',
-        source: 'all',
         sort: 'title',
     })
 
@@ -117,17 +112,17 @@ test('getDocsIndexHref omits default controls from query string', () => {
     assert.equal(
         getDocsIndexHref({
             controls,
-            overrides: { section: 'web', source: 'local', sort: 'title' },
+            overrides: { section: 'web', sort: 'title' },
             page: 2,
         }),
-        '/docs?page=2&section=web&source=local&sort=title'
+        '/docs?page=2&section=web&sort=title'
     )
     assert.equal(
         getDocsIndexHref({
             controls,
             keyword: 'react suspense',
-            overrides: { section: 'web', source: 'local' },
+            overrides: { section: 'web' },
         }),
-        '/docs?q=react+suspense&section=web&source=local'
+        '/docs?q=react+suspense&section=web'
     )
 })

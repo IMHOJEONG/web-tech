@@ -3,7 +3,7 @@ import { cn } from '@web-tech/ui/lib/utils'
 type DocumentMetaPill = {
     key: string
     label: string
-    tone?: 'default' | 'source' | 'tag'
+    tone?: 'default' | 'tag'
 }
 
 type DocumentMetaPillsProps = {
@@ -42,9 +42,6 @@ export function DocumentMetaPills({
                         getPillClassName(item.tone)
                     )}
                 >
-                    {item.tone === 'source' && (
-                        <span className="size-1.5 rounded-full bg-primary/70" />
-                    )}
                     {item.label}
                 </span>
             ))}

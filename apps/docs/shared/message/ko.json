@@ -283,11 +283,7 @@
     "docsIndex": {
         "card": {
             "open": "Open",
-            "readMinutes": "{count}분 읽기",
-            "sources": {
-                "local": "로컬",
-                "remote": "원격"
-            }
+            "readMinutes": "{count}분 읽기"
         },
         "search": {
             "eyebrow": "Search Results",
@@ -324,11 +320,6 @@
                 "computerscience": "Computer Science",
                 "docs": "Docs"
             },
-            "sources": {
-                "all": "전체 출처",
-                "local": "로컬 문서",
-                "remote": "원격 문서"
-            },
             "sorts": {
                 "latest": "최신순",
                 "title": "제목순",
@@ -338,7 +329,7 @@
         "emptyFiltered": {
             "eyebrow": "No Documents",
             "title": "조건에 맞는 문서가 없어요",
-            "description": "선택한 섹션이나 출처 조건을 조금 넓혀보세요. 원격 문서는 서버 상태에 따라 일시적으로 비어 보일 수 있습니다.",
+            "description": "선택한 섹션 조건을 조금 넓히거나 전체 문서 목록에서 다시 탐색해보세요.",
             "reset": "전체 문서 보기"
         },
         "sections": {
@@ -668,15 +659,11 @@
             "sectionTitle": "이어 읽기",
             "previous": "이전 문서",
             "next": "다음 문서",
-            "lastUpdated": "마지막 업데이트",
-            "sourceLocal": "로컬 문서",
-            "sourceRemote": "원격 문서"
+            "lastUpdated": "마지막 업데이트"
         },
         "relatedDocuments": {
             "sectionTitle": "함께 읽으면 좋은 문서",
-            "description": "태그, 주제, 섹션이 가까운 문서를 골라 이어 읽기 쉽게 정리했습니다.",
-            "sourceLocal": "로컬 문서",
-            "sourceRemote": "원격 문서"
+            "description": "태그, 주제, 섹션이 가까운 문서를 골라 이어 읽기 쉽게 정리했습니다."
         },
         "related": {
             "title": "RELATED SIGNALS",

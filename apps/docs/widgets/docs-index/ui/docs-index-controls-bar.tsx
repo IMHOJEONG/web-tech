@@ -1,9 +1,7 @@
 import { getTranslations } from 'next-intl/server'
-import { shouldShowContentSourceBadge } from '~/lib/content-source-visibility'
 import {
     DOCS_INDEX_SECTION_FILTERS,
     DOCS_INDEX_SORT_OPTIONS,
-    DOCS_INDEX_SOURCE_FILTERS,
     getDocsIndexHref,
     type DocsIndexControls,
 } from '~/widgets/docs-index/model/docs-index-controls'
@@ -23,7 +21,6 @@ export async function DocsIndexControlsBar({
     showSort = true,
 }: DocsIndexControlsBarProps) {
     const t = await getTranslations('docsIndex')
-    const showSourceControls = shouldShowContentSourceBadge()
 
     return (
         <section className="motion-layout max-w-full rounded-2xl border border-border bg-surface-container-lowest p-4">
@@ -54,42 +51,23 @@ export async function DocsIndexControlsBar({
                         ))}
                     </div>
 
-                    <div className="flex min-w-0 flex-wrap gap-2">
-                        {showSourceControls &&
-                            DOCS_INDEX_SOURCE_FILTERS.map((source) => (
+                    {showSort && (
+                        <div className="flex min-w-0 flex-wrap gap-2">
+                            {DOCS_INDEX_SORT_OPTIONS.map((sort) => (
                                 <DocsIndexControlPill
-                                    key={source}
-                                    active={controls.source === source}
+                                    key={sort}
+                                    active={controls.sort === sort}
                                     href={getDocsIndexHref({
                                         controls,
                                         keyword,
-                                        overrides: { source },
+                                        overrides: { sort },
                                     })}
                                 >
-                                    {t(`filters.sources.${source}`)}
+                                    {t(`filters.sorts.${sort}`)}
                                 </DocsIndexControlPill>
                             ))}
-                        {showSort && (
-                            <>
-                                {showSourceControls && (
-                                    <span className="mx-1 hidden h-7 w-px bg-border sm:block" />
-                                )}
-                                {DOCS_INDEX_SORT_OPTIONS.map((sort) => (
-                                    <DocsIndexControlPill
-                                        key={sort}
-                                        active={controls.sort === sort}
-                                        href={getDocsIndexHref({
-                                            controls,
-                                            keyword,
-                                            overrides: { sort },
-                                        })}
-                                    >
-                                        {t(`filters.sorts.${sort}`)}
-                                    </DocsIndexControlPill>
-                                ))}
-                            </>
-                        )}
-                    </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </section>

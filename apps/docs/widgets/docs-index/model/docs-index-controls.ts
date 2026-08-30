@@ -13,38 +13,29 @@ export const DOCS_INDEX_SECTION_FILTERS = [
     { value: 'docs', section: 'Docs', messageKey: 'docs' },
 ] as const
 
-export const DOCS_INDEX_SOURCE_FILTERS = ['all', 'local', 'remote'] as const
 export const DOCS_INDEX_SORT_OPTIONS = ['latest', 'title', 'section'] as const
 
 export type DocsIndexSectionFilter =
     (typeof DOCS_INDEX_SECTION_FILTERS)[number]['value']
-export type DocsIndexSourceFilter = (typeof DOCS_INDEX_SOURCE_FILTERS)[number]
 export type DocsIndexSortOption = (typeof DOCS_INDEX_SORT_OPTIONS)[number]
 
 export type DocsIndexControls = {
     section: DocsIndexSectionFilter
-    source: DocsIndexSourceFilter
     sort: DocsIndexSortOption
 }
 
 type RawDocsIndexControls = {
     section?: string
-    source?: string
     sort?: string
 }
 
 const DEFAULT_DOCS_INDEX_CONTROLS: DocsIndexControls = {
     section: 'all',
-    source: 'all',
     sort: 'latest',
 }
 
 function isSectionFilter(value: string): value is DocsIndexSectionFilter {
     return DOCS_INDEX_SECTION_FILTERS.some((filter) => filter.value === value)
-}
-
-function isSourceFilter(value: string): value is DocsIndexSourceFilter {
-    return DOCS_INDEX_SOURCE_FILTERS.includes(value as DocsIndexSourceFilter)
 }
 
 function isSortOption(value: string): value is DocsIndexSortOption {
@@ -65,16 +56,12 @@ export function resolveDocsIndexControls(
     input: RawDocsIndexControls
 ): DocsIndexControls {
     const section = input.section?.trim() ?? ''
-    const source = input.source?.trim() ?? ''
     const sort = input.sort?.trim() ?? ''
 
     return {
         section: isSectionFilter(section)
             ? section
             : DEFAULT_DOCS_INDEX_CONTROLS.section,
-        source: isSourceFilter(source)
-            ? source
-            : DEFAULT_DOCS_INDEX_CONTROLS.source,
         sort: isSortOption(sort) ? sort : DEFAULT_DOCS_INDEX_CONTROLS.sort,
     }
 }
@@ -118,10 +105,8 @@ export function filterDocsIndexControls(
     return docs.filter((doc) => {
         const matchesSection =
             !sectionFilter?.section || doc.section === sectionFilter.section
-        const matchesSource =
-            controls.source === 'all' || doc.contentSource === controls.source
 
-        return matchesSection && matchesSource
+        return matchesSection
     })
 }
 
@@ -152,10 +137,6 @@ export function getDocsIndexHref({
 
     if (nextControls.section !== DEFAULT_DOCS_INDEX_CONTROLS.section) {
         params.set('section', nextControls.section)
-    }
-
-    if (nextControls.source !== DEFAULT_DOCS_INDEX_CONTROLS.source) {
-        params.set('source', nextControls.source)
     }
 
     if (nextControls.sort !== DEFAULT_DOCS_INDEX_CONTROLS.sort) {

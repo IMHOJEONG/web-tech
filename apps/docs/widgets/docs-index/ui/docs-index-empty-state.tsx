@@ -33,7 +33,6 @@ export async function DocsIndexEmptyState({
                     keyword,
                     overrides: {
                         section: 'all',
-                        source: 'all',
                         sort: 'latest',
                     },
                 })}

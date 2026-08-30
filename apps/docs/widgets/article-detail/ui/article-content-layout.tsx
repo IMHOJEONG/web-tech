@@ -35,8 +35,6 @@ export async function ArticleContentLayout({
                         labels={{
                             description: t('relatedDocuments.description'),
                             sectionTitle: t('relatedDocuments.sectionTitle'),
-                            sourceLocal: t('relatedDocuments.sourceLocal'),
-                            sourceRemote: t('relatedDocuments.sourceRemote'),
                         }}
                     />
                 )}
@@ -48,8 +46,6 @@ export async function ArticleContentLayout({
                             next: t('readingNavigation.next'),
                             previous: t('readingNavigation.previous'),
                             sectionTitle: t('readingNavigation.sectionTitle'),
-                            sourceLocal: t('readingNavigation.sourceLocal'),
-                            sourceRemote: t('readingNavigation.sourceRemote'),
                         }}
                     />
                 )}

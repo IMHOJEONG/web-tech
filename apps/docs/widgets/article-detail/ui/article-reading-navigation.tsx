@@ -4,7 +4,6 @@ import type {
     ArticleReadingNavigation as ArticleReadingNavigationData,
     ArticleReadingNavigationItem,
 } from '~/lib/article-reading-navigation'
-import { shouldShowContentSourceBadge } from '~/lib/content-source-visibility'
 import { DocumentDateText } from '~/shared/ui/document-date-text'
 import { DocumentMetaPills } from '~/shared/ui/document-meta-pills'
 
@@ -15,34 +14,17 @@ type ArticleReadingNavigationProps = {
         next: string
         previous: string
         sectionTitle: string
-        sourceLocal: string
-        sourceRemote: string
     }
     navigation: ArticleReadingNavigationData
 }
 
-function getMetaItems(
-    item: ArticleReadingNavigationItem,
-    labels: ArticleReadingNavigationProps['labels']
-) {
-    const showContentSourceBadge = shouldShowContentSourceBadge()
-
+function getMetaItems(item: ArticleReadingNavigationItem) {
     return [
         item.topicLabel
             ? {
                   key: 'topic',
                   label: item.topicLabel,
                   tone: 'tag' as const,
-              }
-            : null,
-        showContentSourceBadge && item.contentSource
-            ? {
-                  key: 'source',
-                  label:
-                      item.contentSource === 'remote'
-                          ? labels.sourceRemote
-                          : labels.sourceLocal,
-                  tone: 'source' as const,
               }
             : null,
         typeof item.readMinutes === 'number'
@@ -57,11 +39,9 @@ function getMetaItems(
 function ArticleReadingNavigationCard({
     item,
     label,
-    labels,
 }: {
     item: ArticleReadingNavigationItem | null
     label: string
-    labels: ArticleReadingNavigationProps['labels']
 }) {
     if (!item) {
         return null
@@ -88,7 +68,7 @@ function ArticleReadingNavigationCard({
                     date={item.date}
                     className="text-xs font-medium text-outline"
                 />
-                <DocumentMetaPills items={getMetaItems(item, labels)} />
+                <DocumentMetaPills items={getMetaItems(item)} />
             </div>
         </Link>
     )
@@ -133,12 +113,10 @@ export function ArticleReadingNavigation({
                 <ArticleReadingNavigationCard
                     item={navigation.previous}
                     label={labels.previous}
-                    labels={labels}
                 />
                 <ArticleReadingNavigationCard
                     item={navigation.next}
                     label={labels.next}
-                    labels={labels}
                 />
             </div>
         </section>

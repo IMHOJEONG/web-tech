@@ -283,11 +283,7 @@
     "docsIndex": {
         "card": {
             "open": "Open",
-            "readMinutes": "{count} min read",
-            "sources": {
-                "local": "Local",
-                "remote": "Remote"
-            }
+            "readMinutes": "{count} min read"
         },
         "search": {
             "eyebrow": "Search Results",
@@ -324,11 +320,6 @@
                 "computerscience": "Computer Science",
                 "docs": "Docs"
             },
-            "sources": {
-                "all": "All sources",
-                "local": "Local docs",
-                "remote": "Remote docs"
-            },
             "sorts": {
                 "latest": "Latest",
                 "title": "Title",
@@ -338,7 +329,7 @@
         "emptyFiltered": {
             "eyebrow": "No Documents",
             "title": "No documents match these filters",
-            "description": "Try broadening the selected section or source. Remote documents may temporarily disappear when the content server is unavailable.",
+            "description": "Try broadening the selected section or return to the full document index.",
             "reset": "View all documents"
         },
         "sections": {
@@ -668,15 +659,11 @@
             "sectionTitle": "Continue reading",
             "previous": "Previous document",
             "next": "Next document",
-            "lastUpdated": "Last updated",
-            "sourceLocal": "Local doc",
-            "sourceRemote": "Remote doc"
+            "lastUpdated": "Last updated"
         },
         "relatedDocuments": {
             "sectionTitle": "Related documents",
-            "description": "A short list of nearby documents selected by tags, topic, and section.",
-            "sourceLocal": "Local doc",
-            "sourceRemote": "Remote doc"
+            "description": "A short list of nearby documents selected by tags, topic, and section."
         },
         "related": {
             "title": "RELATED SIGNALS",
