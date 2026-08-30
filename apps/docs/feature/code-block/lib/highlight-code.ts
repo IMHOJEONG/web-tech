@@ -50,7 +50,7 @@ function token(className: string, value: string) {
 
 function highlightAttributes(value: string) {
     const attributePattern =
-        /([A-Za-z_:][-A-Za-z0-9_:.]*)(\s*=\s*)("[^"]*"|'[^']*'|[^\s"'=<>`]+)/g
+        /([A-Za-z_:][-A-Za-z0-9_:.]*)(?:(\s*=\s*)("[^"]*"|'[^']*'|[^\s"'=<>`]+))?/g
     let highlighted = ''
     let lastIndex = 0
 
@@ -61,7 +61,11 @@ function highlightAttributes(value: string) {
         highlighted += escapeHtml(value.slice(lastIndex, index))
         highlighted += token('attribute', name ?? '')
         highlighted += escapeHtml(equals ?? '')
-        highlighted += token('string', attributeValue ?? '')
+
+        if (attributeValue) {
+            highlighted += token('string', attributeValue)
+        }
+
         lastIndex = index + raw.length
     }
 
@@ -87,8 +91,28 @@ function highlightHtmlTag(value: string) {
     ].join('')
 }
 
+function highlightEncodedHtmlTag(value: string) {
+    const match = value.match(
+        /^(&lt;\/?)([A-Za-z][^\s/&]*)([\s\S]*?)(\/?&gt;)$/
+    )
+
+    if (!match) {
+        return token('tag', value)
+    }
+
+    const [, open = '', name = '', attributes = '', close = ''] = match
+
+    return [
+        token('punctuation', open),
+        token('tag', name),
+        highlightAttributes(attributes),
+        token('punctuation', close),
+    ].join('')
+}
+
 function highlightHtml(code: string) {
-    const htmlPattern = /<!--[\s\S]*?-->|<\/?[A-Za-z][^>]*>/g
+    const htmlPattern =
+        /<!--[\s\S]*?-->|<\/?[A-Za-z][^>]*>|&lt;\/?[A-Za-z][\s\S]*?&gt;/g
     let highlighted = ''
     let lastIndex = 0
 
@@ -99,7 +123,9 @@ function highlightHtml(code: string) {
         highlighted += escapeHtml(code.slice(lastIndex, index))
         highlighted += raw.startsWith('<!--')
             ? token('comment', raw)
-            : highlightHtmlTag(raw)
+            : raw.startsWith('&lt;')
+              ? highlightEncodedHtmlTag(raw)
+              : highlightHtmlTag(raw)
         lastIndex = index + raw.length
     }
 

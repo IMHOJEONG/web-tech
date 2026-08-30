@@ -1,3 +1,4 @@
+import sanitizeHtml from 'sanitize-html'
 import type { HeadingDepth, TocItem } from 'remark-flexible-toc'
 import {
     getCalloutLabel,
@@ -7,26 +8,32 @@ import {
 import { highlightCode } from '../../../feature/code-block/lib/highlight-code.ts'
 import { slugifyHeading } from '../../../lib/slugify-heading.ts'
 
-function stripHeadingMarkup(value: string) {
+function normalizePlainText(value: string) {
     return value
-        .replace(/<[^>]+>/g, ' ')
-        .replace(/&nbsp;/g, ' ')
-        .replace(/&amp;/g, '&')
+        .replace(/\u00a0/g, ' ')
         .replace(/\s+/g, ' ')
         .trim()
 }
 
-function stripHtmlTags(value: string) {
-    return value.replace(/<[^>]+>/g, '')
+function toPlainText(value: string) {
+    return normalizePlainText(
+        sanitizeHtml(value, {
+            allowedTags: [],
+            allowedAttributes: {},
+            disallowedTagsMode: 'discard',
+        })
+    )
 }
 
-function decodeHtmlEntities(value: string) {
-    return value
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&amp;/g, '&')
-        .replace(/&quot;/g, '"')
-        .replace(/&#39;/g, "'")
+function toCodeText(value: string) {
+    return sanitizeHtml(value, {
+        allowedTags: [],
+        allowedAttributes: {},
+        disallowedTagsMode: 'discard',
+    })
+        .replace(/\u00a0/g, ' ')
+        .replace(/\r\n?/g, '\n')
+        .trim()
 }
 
 function escapeAttribute(value: string) {
@@ -72,7 +79,7 @@ function normalizeRemoteCodeBlocks(content: string) {
                 `${preAttributes} ${codeAttributes}`
             )
             const normalizedLanguage = normalizeCodeLanguage(language) || 'code'
-            const code = decodeHtmlEntities(stripHtmlTags(innerHtml))
+            const code = toCodeText(innerHtml)
             const highlightedCode = highlightCode(code, normalizedLanguage)
             const languageLabel = escapeAttribute(
                 normalizedLanguage.toUpperCase()
@@ -125,7 +132,7 @@ function normalizeRemoteBlockquotes(content: string) {
 }
 
 function getRemoteCalloutVariant(innerHtml: string): CalloutVariant | null {
-    const text = decodeHtmlEntities(stripHtmlTags(innerHtml))
+    const text = toPlainText(innerHtml)
     return getCalloutVariantFromText(text)
 }
 
@@ -166,7 +173,7 @@ export function normalizeRemoteArticleHtml(content: string) {
         /<h([1-4])([^>]*)>([\s\S]*?)<\/h\1>/gi,
         (match, depthValue, rawAttributes, innerHtml) => {
             const depth = Number(depthValue) as HeadingDepth
-            const value = stripHeadingMarkup(innerHtml)
+            const value = toPlainText(innerHtml)
 
             if (!value) {
                 return match

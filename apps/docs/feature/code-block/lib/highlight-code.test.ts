@@ -16,6 +16,19 @@ test('highlightCode escapes raw html before inserting token spans', () => {
     assert.match(html, /mdx-code-token--attribute/)
 })
 
+test('highlightCode tokenizes escaped html tags from sanitized remote code', () => {
+    const html = highlightCode(
+        '&lt;canvas layoutsubtree&gt;\n  &lt;button&gt;click me&lt;/button&gt;\n&lt;/canvas&gt;',
+        'html'
+    )
+
+    assert.doesNotMatch(html, /<canvas/i)
+    assert.match(html, /mdx-code-token--punctuation">&amp;lt;<\/span>/)
+    assert.match(html, /mdx-code-token--tag">canvas<\/span>/)
+    assert.match(html, /mdx-code-token--attribute">layoutsubtree<\/span>/)
+    assert.match(html, /mdx-code-token--tag">button<\/span>/)
+})
+
 test('highlightCode highlights js keywords strings numbers and comments', () => {
     const html = highlightCode(
         'const answer = 42\n// explain\nreturn "ready"',
