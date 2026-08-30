@@ -1,18 +1,18 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import { buildPageMetadata } from '~/lib/page-metadata'
 import { AboutUs } from '~/widgets/about-us/ui/about-us'
 
 export async function generateMetadata(): Promise<Metadata> {
     const t = await getTranslations('about.metadata')
 
-    return {
+    return buildPageMetadata({
+        pathname: '/about',
         title: t('title'),
         description: t('description'),
-        openGraph: {
-            title: t('ogTitle'),
-            description: t('ogDescription'),
-        },
-    }
+        ogTitle: t('ogTitle'),
+        ogDescription: t('ogDescription'),
+    })
 }
 
 export default function Page() {

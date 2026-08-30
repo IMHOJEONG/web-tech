@@ -22,19 +22,20 @@
 
 ## Planning / Product
 
-- [ ] `P1` 블로그 개선 로드맵을 기준 문서로 고정한다.
-  - 메타데이터, 라우팅, 검색, 렌더링, 테스트, contributor guide를 한 번에 정리
-  - 신규 과제는 우선 이 로드맵 문서와 `todo` 양쪽에 반영
+- [x] `P1` 블로그 개선 로드맵을 기준 문서로 고정한다.
+  - 메타데이터, 라우팅, 검색, 렌더링, 테스트, contributor guide 기준선을 정리
+  - 신규 과제는 우선 `todo`에 추가하고, 운영 규칙으로 승격되면 로드맵 또는 관련 architecture/runbook 문서에 연결
   - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
 - [x] `P1` `docs` 앱의 정보구조를 확정한다.
   - `Feed / Web / Mobile / UI/UX / About`를 사용자-facing IA로 정의
   - `Category`는 taxonomy 허브, 허브 페이지는 탐색 단위, 상세 페이지는 학습 단위로 문서화
   - 기준 문서: `docs/architecture/docs-app-information-architecture.md`
-- [ ] `P1` 콘텐츠 운영 모델을 정한다.
-  - `apps/docs/data` 기반 정적 운영을 유지할지
-  - 별도 CMS/DB/API 계약으로 확장할지 결정
-  - 글 업로드는 로컬 authoring + 별도 publish workflow로 둘지 확정
-  - 기준 문서: `docs/architecture/docs-content-authoring-pipeline.md`
+- [x] `P1` 콘텐츠 운영 모델을 정한다.
+  - local MDX는 baseline / evergreen / fallback 콘텐츠로 유지
+  - remote content API는 배포 없이 갱신되는 운영형 콘텐츠로 사용
+  - 글 업로드는 local authoring + explicit publish workflow로 확정
+  - CMS/API direct publish는 현재 단계에서 보류
+  - 기준 문서: `docs/architecture/docs-content-operating-model.md`
 - [x] `P2` 검색 경험의 목표를 정의한다.
   - 검색 결과는 `/docs?q=...` 상태로 운영
   - 검색 범위는 `title / summary / taxonomy / content` 우선순위로 정리
@@ -91,10 +92,16 @@
   - `transpilePackages`
   - build artifact usage
   - import path 안정성
-- [ ] `P2` local MDX와 remote HTML/markdown 렌더링 전략을 한 단계 더 통일한다.
-  - source별 렌더링 차이로 callout, code block, figure, heading anchor가 달라지지 않게 기준을 정리
-  - 필요 시 remote content도 markdown-first 계약으로 수렴할지 검토
-  - 기준 문서: `docs/architecture/docs-content-rendering-strategy.md`
+- [-] `P2` local MDX와 remote HTML/markdown 렌더링 전략을 한 단계 더 통일한다.
+  - 기본 방향은 renderer 단일화가 아니라 output contract 통일로 확정
+  - 1차 적용: remote HTML code block을 local MDX와 같은 `.mdx-code-frame` 계층으로 normalize
+  - 1.5차 적용: remote HTML code block에 client-side copy enhancer 연결
+  - 2차 적용: local/remote table wrapper와 blockquote class/spacing 계약 통일
+  - 3차 적용: `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]` callout marker를 output contract에 편입
+  - 3.5차 적용: content style validator에 callout marker 위치/지원 범위 검증 추가
+  - 후속: callout variant 확장 필요성 점검
+  - remote MDX evaluation, markdown-first, HTML-only 전략은 후속 spike로 검증
+  - 기준 문서: `docs/architecture/docs-article-rendering-convergence.md`
 
 ## UI / UX
 
@@ -103,6 +110,17 @@
   - mobile drawer
   - bottom nav
   - article/feed spacing
+  - 브라우저/기기 점검 체크리스트 추가 완료
+  - 정적 breakpoint 감사 후보 식별 완료
+  - `/docs`, `/feed`의 breakpoint/list 변화에 CSS 기반 motion 적용 완료
+  - 1차 조치: `/docs`, channel hub, about의 빠른 다열화 지점 일부 완화
+  - 2차 조치: `/docs` 모바일 검색/필터 영역의 텍스트 잘림과 가로 스크롤 발생 지점 완화
+  - 3차 조치: Playwright 기반 mobile/tablet horizontal overflow smoke test 추가
+  - 4차 조치: mobile footer 보조 링크 노출을 줄이고 bottom nav route 구조 정리
+  - 5차 조치: `/docs` 모바일 주요 touch target 최소 크기와 focus ring 보강
+  - 6차 조치: desktop TOC anchor 이동 시 sticky header와 heading 겹침 회귀 테스트 추가
+  - 7차 조치: Next.js 16 기준 `middleware.ts`를 `proxy.ts` 문법으로 전환
+  - 기준 문서: `docs/runbooks/docs-responsive-browser-device-checklist.md`
 - [-] `P1` 루트 `/` 화면을 `141:2 Landing Page - HEAPFORGE` 기준으로 재구성한다.
   - 현재 `HeroSection` 단일 구성을 landing page 섹션 구조로 확장
   - `Hero Section`, `Thematic Foundations`, `Latest Notes`를 별도 위젯/엔티티로 분리 검토
@@ -111,6 +129,14 @@
   - `query string` 기반으로 확정
   - `/feed?topic=web|mobile|uiux` 형태로 상태를 표현
   - 기준 문서: `docs/architecture/docs-feed-filter-policy.md`
+- [-] `P1` `/docs`를 검색/색인 중심 화면으로 점진 개선한다.
+  - 1차: compact search panel, 추천 키워드, 섹션 요약, row형 문서 카드, 페이지네이션 반영 완료
+  - 2차: `section/sort` query string 기반 필터와 정렬 UI, 필터 empty state, 카드 메타 정보 반영 완료
+  - 3차: 검색 결과 화면에도 `section` 필터 적용 완료, 카드 정보 계층과 `docs-index` UI/model 분리 완료
+  - source 필터/배지는 사용자-facing UI에서 제거하고 runtime log 관측 메타로 분리
+  - 3.5차: 문서 썸네일, 날짜, 보조 메타 pill을 shared UI로 분리 완료
+  - 4차: 모바일 터치 사용성 1차 보강 완료
+  - 목표: `/feed`는 발견/큐레이션, `/docs`는 빠른 검색/탐색으로 역할을 분리
 - [x] `P1` footer 링크를 실제 라우트 또는 외부 링크와 연결한다.
   - `PRIVACY`
   - `TERMS`
@@ -119,12 +145,26 @@
 - [ ] `P2` empty state, loading state, error state의 시각 톤을 통일한다.
   - root landing은 remote latest notes 실패 시 페이지 전체를 죽이지 않고 섹션 단위 graceful degradation을 유지
 - [ ] `P2` keyboard navigation / focus ring / drawer close flow 접근성을 점검한다.
-- [ ] `P2` article detail의 읽기 보조 UX를 확장한다.
-  - related posts
-  - previous / next navigation
-  - last updated badge
+- [-] `P2` layout/list motion 정책을 운영한다.
+  - `motion-layout`, `motion-reveal` 기반으로 시작
+  - `prefers-reduced-motion` 대응 필수
+  - 기준 문서: `docs/architecture/docs-motion-interaction-policy.md`
+- [x] `P2` React inspection tools는 development 환경에서만 로드하도록 고정한다.
+  - `react-scan`, `react-grab`은 production bundle/runtime에 포함하지 않는다.
+  - CDN URL은 명시 버전으로 고정한다.
+  - development에서도 `DOCS_ENABLE_REACT_INSPECTION=true`일 때만 opt-in 로드한다.
+  - 기준 문서: `docs/worklog/2026-08-29-docs-article-anchor-scroll-test.md`
+- [-] `P2` article detail의 읽기 보조 UX를 확장한다.
+  - related posts 1차 적용 완료
+  - previous / next navigation 1차 적용 완료
+  - last updated badge 1차 적용 완료
   - feedback entry point
   - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
+- [-] `P2` 문서 카드 공통 UI 재사용 기준을 운영한다.
+  - 카드 전체 레이아웃은 화면별로 유지
+  - 썸네일 fallback, 날짜 포맷, read time/topic/tags 보조 메타는 shared UI로 관리
+  - source는 UI 메타가 아니라 runtime log 관측 메타로 분리
+  - 기준 문서: `docs/architecture/docs-document-ui-reuse-policy.md`
 
 ## Design / Design System
 
@@ -160,7 +200,8 @@
   - 향후 다중 endpoint 정책이 다시 필요해질 경우에도 `timeout`, `ENOTFOUND` 같은 네트워크 오류에서만 다음 후보를 시도하도록 기준 문서화
   - NAS reverse proxy가 `Authorization` 헤더를 upstream에 그대로 전달하는지 검증 절차 추가
   - `docs` 서버 재시작 누락, 배포 env 누락, backend env 누락을 빠르게 확인하는 점검 순서 정리
-  - remote content 장애 시 홈(`/`)은 section-level graceful degradation, 문서 상세는 에러 페이지로 보내는 현재 정책을 문서에 명시
+  - remote content 장애 시 목록/검색은 로컬 문서로 graceful degradation, 문서 상세는 동일 route 로컬 문서 fallback 후 실패하도록 정책 정리
+  - source 선택 결과는 runtime log에 항상 남기되, UI에는 badge/filter를 노출하지 않음
   - 기준 문서: `docs/runbooks/content-api-auth-ops-runbook.md`
 - [x] `P0` `pnpm` catalog 도입 이후 네트워크 가능한 환경에서 `pnpm install --lockfile-only` 재검증
 - [x] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정
@@ -208,7 +249,12 @@
 - [x] `P1` `UI/UX` 섹션도 상세형 static spotlight가 아니라 실제 문서 연결 구조로 확장할지 결정
   - `HubPage` 기반 채널 허브에서 시작했지만, 최종적으로는 Figma `141:189` 기준의 전용 editorial hub로 분기
   - 작업 기록: `docs/worklog/2026-05-08-uiux-hub-figma-alignment.md`
-- [ ] `P2` article metadata 정책을 정리한다.
+- [-] `P2` article metadata 정책을 정리한다.
+  - `/docs/{channel}/{slug}` 상세 metadata 정책 문서화 완료
+  - 문서별 title/summary/canonical/OG image 연결 완료
+  - 목록/허브/정적 페이지 metadata는 `docs-page-metadata-policy.md`로 별도 정책화 완료
+  - `/feed`, `/docs`, `/web`, `/mobile`, `/ui-ux`, `/category` 계열 목록, 정적 안내 페이지 metadata 연결 완료
+  - `/category/...` 상세 alias는 `/docs/category/...` canonical route로 redirect하도록 정책 확정
   - author
   - read time
   - category label

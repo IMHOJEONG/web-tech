@@ -19,6 +19,9 @@
     "lint": "turbo lint",
     "lint:web-apps": "turbo lint --filter=docs --filter=vuln-radar",
     "test:repo": "node --test ./scripts/validate-catalog-references.test.mjs",
+    "branch:sync-feature": "bash ./scripts/sync-feature-branches.sh",
+    "branch:sync-feature:apply": "bash ./scripts/sync-feature-branches.sh --apply",
+    "branch:sync-feature:push": "bash ./scripts/sync-feature-branches.sh --apply --push",
     "lint:commit:head": "commitlint --from HEAD~1 --to HEAD --verbose",
     "typecheck:web-apps": "turbo typecheck --filter=docs --filter=vuln-radar",
     "validate:catalog": "node ./scripts/validate-catalog-references.mjs",
@@ -41,7 +44,7 @@
     "typescript": "catalog:"
   },
   "simple-git-hooks": {
-    "commit-msg": "./scripts/pnpmw.sh exec commitlint --edit $1",
+    "commit-msg": "./scripts/pnpmw.sh exec commitlint --edit \"$1\"",
     "pre-commit": "./scripts/pnpmw.sh format && echo 'ok'",
     "pre-push": "./scripts/pnpmw.sh format"
   },

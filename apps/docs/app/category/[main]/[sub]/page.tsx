@@ -1,5 +1,46 @@
+import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
+import { categoryTree } from '~/entities/category/model/category'
 import { CategoryDocumentCard } from '~/entities/category/ui/category-document-card'
 import { getSubCategoryData } from '~/lib/get-category'
+import { buildPageMetadata } from '~/lib/page-metadata'
+
+function findCategoryLabels(main: string, sub: string) {
+    const category = categoryTree.find((item) => item.url === main)
+    const topic = category?.sub.find((item) => item.url === sub)
+
+    return {
+        categoryTitle: category?.title ?? main,
+        topicTitle: topic?.title ?? sub,
+    }
+}
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ main: string; sub: string }>
+}): Promise<Metadata> {
+    const { main, sub } = await params
+    const t = await getTranslations('metadata.pages.categorySub')
+    const { categoryTitle, topicTitle } = findCategoryLabels(main, sub)
+
+    return buildPageMetadata({
+        pathname: `/category/${main}/${sub}`,
+        title: t('title', { category: categoryTitle, topic: topicTitle }),
+        description: t('description', {
+            category: categoryTitle,
+            topic: topicTitle,
+        }),
+        ogTitle: t('ogTitle', {
+            category: categoryTitle,
+            topic: topicTitle,
+        }),
+        ogDescription: t('ogDescription', {
+            category: categoryTitle,
+            topic: topicTitle,
+        }),
+    })
+}
 
 export default async function Page({
     params,
@@ -68,7 +109,9 @@ export default async function Page({
                         {data.map((item) => {
                             return (
                                 <CategoryDocumentCard
-                                    key={item.title}
+                                    key={
+                                        item.fileName ?? item.slug ?? item.title
+                                    }
                                     data={item}
                                 />
                             )

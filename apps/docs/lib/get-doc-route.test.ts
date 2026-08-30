@@ -46,6 +46,22 @@ test('maps local data paths to channel routes', () => {
     )
 })
 
+test('keeps category document paths under docs canonical route', () => {
+    const source = {
+        slug: 'server-client-component-boundary',
+        fileName: 'category/fe/react/server-client-component-boundary',
+    }
+
+    assert.equal(
+        getDocRoutePath(source),
+        'category/fe/react/server-client-component-boundary'
+    )
+    assert.equal(
+        getDocHref(source),
+        '/docs/category/fe/react/server-client-component-boundary'
+    )
+})
+
 test('matches legacy aliases but redirects them to canonical routes', () => {
     const source = {
         slug: 'pna',

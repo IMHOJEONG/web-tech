@@ -244,3 +244,18 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
 - override env: `BLOG_CONTENT_REVALIDATE_SECONDS`
 
 즉 현재 `apps/docs`는 기본적으로 ISR 중심으로 동작하도록 정리된 상태다.
+
+## Local / Remote Rendering Convergence
+
+local MDX와 remote HTML/markdown의 렌더링 통일은 `renderer 단일화`보다 `output contract 통일`을 우선한다.
+
+현재 채택한 방향:
+
+- local MDX는 유지한다.
+- remote HTML은 sanitize 후 normalize한다.
+- article layout에 들어오는 최종 heading, figure, code block, table, blockquote 표현을 같은 CSS/token 계약으로 맞춘다.
+- remote MDX runtime evaluation은 보안/성능 리스크 때문에 기본 경로로 두지 않는다.
+- markdown-first 또는 HTML-only 전략은 후속 spike로 검증한다.
+
+세부 판단과 대안 비교는
+`docs/architecture/docs-article-rendering-convergence.md`를 따른다.

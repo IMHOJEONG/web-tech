@@ -33,11 +33,17 @@ export type RenderArticleContentResult =
           content: ReactNode
       }
 
-function createMdxEvaluateOptions(): EvaluateOptions<Scope> {
+function createMdxEvaluateOptions({
+    codeHighlight = true,
+}: {
+    codeHighlight?: boolean
+} = {}): EvaluateOptions<Scope> {
     return {
         mdxOptions: {
             remarkPlugins: [remarkFlexibleToc],
-            rehypePlugins: [[rehypeShiki, shikiRehypeOptions]],
+            rehypePlugins: codeHighlight
+                ? [[rehypeShiki, shikiRehypeOptions]]
+                : [],
         },
         parseFrontmatter: true,
         scope: {
@@ -50,6 +56,7 @@ function createMdxEvaluateOptions(): EvaluateOptions<Scope> {
 export async function renderArticleContent(
     article: RenderableArticle,
     options: {
+        codeHighlight?: boolean
         components?: MDXComponents
     } = {}
 ): Promise<RenderArticleContentResult> {
@@ -67,7 +74,9 @@ export async function renderArticleContent(
 
     const { content, scope } = await evaluate<Frontmatter, Scope>({
         source: article.content ?? '',
-        options: createMdxEvaluateOptions(),
+        options: createMdxEvaluateOptions({
+            codeHighlight: options.codeHighlight,
+        }),
         components: options.components,
     })
 

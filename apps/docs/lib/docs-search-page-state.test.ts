@@ -18,6 +18,7 @@ function createDoc(overrides: Partial<SearchData> = {}): SearchData {
         thumbnail: null,
         href: '/docs/web/react-suspense-guide',
         section: 'Web',
+        contentSource: 'local',
         ...overrides,
     }
 }

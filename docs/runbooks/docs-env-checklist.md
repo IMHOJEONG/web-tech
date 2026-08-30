@@ -23,21 +23,23 @@
 
 ## Checklist Table
 
-| Variable                                  | Used In Code                 | `.env.example` | `turbo.json` | Vercel  | Notes                        |
-| ----------------------------------------- | ---------------------------- | -------------- | ------------ | ------- | ---------------------------- |
-| `BETTER_AUTH_SECRET`                      | Yes                          | Yes            | Yes          | Yes     | 실제 비밀값, 절대 커밋 금지  |
-| `BETTER_AUTH_URL`                         | Potential runtime dependency | Yes            | Yes          | Yes     | 앱 기본 URL                  |
-| `BLOG_CONTENT_API_BASE_URL`               | Yes                          | Yes            | Yes          | Yes     | 목록 메타데이터 API base URL |
-| `BLOG_CONTENT_API_BASE_URL_INTERNAL`      | Optional                     | Yes            | Yes          | If used | 내부망 우선 base URL         |
-| `BLOG_CONTENT_API_BASE_URL_PUBLIC`        | Optional                     | Yes            | Yes          | If used | 외부망/public base URL, 우선 |
-| `BLOG_CONTENT_API_TOKEN`                  | Optional                     | Yes            | Yes          | If used | server-to-server Bearer 토큰 |
-| `BLOG_CONTENT_API_POSTS_PATH`             | Yes                          | Yes            | Yes          | Yes     | 기본값은 `/api/posts`        |
-| `BLOG_CONTENT_MARKDOWN_BASE_URL`          | Yes                          | Yes            | Yes          | Yes     | 본문 HTML API base URL       |
-| `BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL` | Optional                     | Yes            | Yes          | If used | 내부망 본문 base URL         |
-| `BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC`   | Optional                     | Yes            | Yes          | If used | 외부망 본문 base URL, 우선   |
-| `BLOG_CONTENT_MARKDOWN_PATH_PREFIX`       | Yes                          | Yes            | Yes          | Yes     | 기본값은 `/posts`            |
-| `BLOG_CONTENT_REVALIDATE_SECONDS`         | Yes                          | Yes            | Yes          | Yes     | ISR 주기, 기본값은 `300`     |
-| `CLOUDFLARE_API_TOKEN`                    | Repo-level usage             | No             | Yes          | If used | `docs` 앱 전용은 아님        |
+| Variable                                  | Used In Code                 | `.env.example` | `turbo.json` | Vercel  | Notes                                     |
+| ----------------------------------------- | ---------------------------- | -------------- | ------------ | ------- | ----------------------------------------- |
+| `BETTER_AUTH_SECRET`                      | Yes                          | Yes            | Yes          | Yes     | 실제 비밀값, 절대 커밋 금지               |
+| `BETTER_AUTH_URL`                         | Potential runtime dependency | Yes            | Yes          | Yes     | 앱 기본 URL                               |
+| `BLOG_CONTENT_API_BASE_URL`               | Yes                          | Yes            | Yes          | Yes     | 목록 메타데이터 API base URL              |
+| `BLOG_CONTENT_API_BASE_URL_INTERNAL`      | Optional                     | Yes            | Yes          | If used | 내부망 우선 base URL                      |
+| `BLOG_CONTENT_API_BASE_URL_PUBLIC`        | Optional                     | Yes            | Yes          | If used | 외부망/public base URL, 우선              |
+| `BLOG_CONTENT_API_TOKEN`                  | Optional                     | Yes            | Yes          | If used | server-to-server Bearer 토큰              |
+| `BLOG_CONTENT_API_POSTS_PATH`             | Yes                          | Yes            | Yes          | Yes     | 기본값은 `/api/posts`                     |
+| `BLOG_CONTENT_MARKDOWN_BASE_URL`          | Yes                          | Yes            | Yes          | Yes     | 본문 HTML API base URL                    |
+| `BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL` | Optional                     | Yes            | Yes          | If used | 내부망 본문 base URL                      |
+| `BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC`   | Optional                     | Yes            | Yes          | If used | 외부망 본문 base URL, 우선                |
+| `BLOG_CONTENT_MARKDOWN_PATH_PREFIX`       | Yes                          | Yes            | Yes          | Yes     | 기본값은 `/posts`                         |
+| `BLOG_CONTENT_REVALIDATE_SECONDS`         | Yes                          | Yes            | Yes          | Yes     | ISR 주기, 기본값은 `300`                  |
+| `BLOG_CONTENT_API_TIMEOUT_MS`             | Yes                          | Yes            | Yes          | Yes     | 원격 content API timeout, 기본값은 `2500` |
+| `BLOG_CONTENT_INCLUDE_REMOTE_INDEX`       | Yes                          | Yes            | Yes          | If used | 기본값은 `true`, 로컬 전용이면 `false`    |
+| `CLOUDFLARE_API_TOKEN`                    | Repo-level usage             | No             | Yes          | If used | `docs` 앱 전용은 아님                     |
 
 ## Local Setup
 
@@ -52,6 +54,8 @@ BLOG_CONTENT_API_POSTS_PATH=/api/posts
 BLOG_CONTENT_MARKDOWN_BASE_URL=http://localhost:8000
 BLOG_CONTENT_MARKDOWN_PATH_PREFIX=/posts
 BLOG_CONTENT_REVALIDATE_SECONDS=300
+BLOG_CONTENT_API_TIMEOUT_MS=2500
+BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true
 ```
 
 권장:
@@ -62,6 +66,8 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
 - 코드는 여러 후보를 순차 fallback 하지 않고, 우선순위에 따라 하나의 endpoint만 선택한다.
 - 현재 우선순위는 `PUBLIC -> INTERNAL -> DEFAULT`다.
 - 콘텐츠 endpoint가 외부에 노출돼 있어도 브라우저 직접 접근을 막고 싶다면 `BLOG_CONTENT_API_TOKEN`으로 server-to-server 인증을 붙인다.
+- 원격 문서는 기본으로 `/feed`, `/docs`, 검색/허브 목록에 합친다.
+- 로컬 문서만으로 렌더링해야 하는 개발/점검 환경에서는 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`를 설정한다.
 
 ## Pre-deploy Checks
 
