@@ -78,7 +78,10 @@ test('renderArticleContent normalizes remote html callouts to shared article con
 test('renderArticleContent keeps sanitized remote html safe while highlighting escaped code', async () => {
     const normalizedRemoteContent = normalizeRemoteContent(
         `
-            <h2><script>alert("heading")</script>Safe Heading</h2>
+            <h2 onclick="alert('x')"><script>alert("heading")</script>Safe Heading</h2>
+            <a href="javascript:alert(1)" target="_blank">Unsafe Link</a>
+            <a href="https://heap-forge.app" target="_blank">Safe Link</a>
+            <img src="https://assets.heap-forge.app/safe.webp" onerror="alert(1)" alt="safe">
             <pre><code class="language-html">&lt;script&gt;alert("code")&lt;/script&gt;</code></pre>
         `,
         'text/html'
@@ -91,7 +94,18 @@ test('renderArticleContent keeps sanitized remote html safe while highlighting e
     assert.equal(rendered.mode, 'html')
     assert.equal(rendered.toc[0]?.value, 'Safe Heading')
     assert.doesNotMatch(rendered.content, /<script/i)
+    assert.doesNotMatch(rendered.content, /onclick=/i)
+    assert.doesNotMatch(rendered.content, /onerror=/i)
+    assert.doesNotMatch(rendered.content, /javascript:/i)
     assert.doesNotMatch(rendered.content, /alert\("heading"\)/)
+    assert.match(
+        rendered.content,
+        /<a href="https:\/\/heap-forge\.app" target="_blank" rel="noopener noreferrer">Safe Link<\/a>/
+    )
+    assert.match(
+        rendered.content,
+        /<img src="https:\/\/assets\.heap-forge\.app\/safe\.webp" alt="safe">/
+    )
     assert.match(rendered.content, /mdx-code-token--tag">script/)
     assert.match(rendered.content, /alert\(&quot;code&quot;\)/)
 })

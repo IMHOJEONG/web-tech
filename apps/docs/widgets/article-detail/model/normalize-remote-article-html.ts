@@ -1,4 +1,3 @@
-import sanitizeHtml from 'sanitize-html'
 import type { HeadingDepth, TocItem } from 'remark-flexible-toc'
 import {
     getCalloutLabel,
@@ -6,6 +5,10 @@ import {
     type CalloutVariant,
 } from '../../../feature/callout/model/callout.ts'
 import { highlightCode } from '../../../feature/code-block/lib/highlight-code.ts'
+import {
+    stripHtmlToCodeText,
+    stripHtmlToText,
+} from '../../../lib/remote-html-sanitizer.ts'
 import { slugifyHeading } from '../../../lib/slugify-heading.ts'
 
 function normalizePlainText(value: string) {
@@ -16,24 +19,11 @@ function normalizePlainText(value: string) {
 }
 
 function toPlainText(value: string) {
-    return normalizePlainText(
-        sanitizeHtml(value, {
-            allowedTags: [],
-            allowedAttributes: {},
-            disallowedTagsMode: 'discard',
-        })
-    )
+    return normalizePlainText(stripHtmlToText(value))
 }
 
 function toCodeText(value: string) {
-    return sanitizeHtml(value, {
-        allowedTags: [],
-        allowedAttributes: {},
-        disallowedTagsMode: 'discard',
-    })
-        .replace(/\u00a0/g, ' ')
-        .replace(/\r\n?/g, '\n')
-        .trim()
+    return stripHtmlToCodeText(value)
 }
 
 function escapeAttribute(value: string) {
