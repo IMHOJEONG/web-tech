@@ -101,8 +101,23 @@ export function FeedPage() {
               labels={{
                 detail: t("common.detail"),
                 epss: t("feed.epss"),
+                freshness: t("feed.freshness"),
+                freshnessStatuses: {
+                  aging: t("domain.freshness.aging"),
+                  fresh: t("domain.freshness.fresh"),
+                  stale: t("domain.freshness.stale"),
+                  unknown: t("domain.freshness.unknown"),
+                },
                 kev: t("feed.kev"),
                 noWatchlistMatch: t("feed.noWatchlistMatch"),
+                reliability: t("feed.reliability"),
+                reliabilityLevels: {
+                  high: t("domain.reliability.high"),
+                  low: t("domain.reliability.low"),
+                  medium: t("domain.reliability.medium"),
+                  unknown: t("domain.reliability.unknown"),
+                  verified: t("domain.reliability.verified"),
+                },
                 updated: t("feed.updated"),
               }}
             />

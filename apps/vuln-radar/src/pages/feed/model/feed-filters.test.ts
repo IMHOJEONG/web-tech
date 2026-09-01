@@ -95,6 +95,21 @@ function createItem(overrides: Partial<FeedItem>): FeedItem {
     publishedAt: "2026-08-30T00:00:00.000Z",
     updatedAt: "2026-08-30T00:00:00.000Z",
     matchedWatchlist: [],
+    reliability: {
+      level: "medium",
+      confidenceScore: 68,
+      freshness: {
+        status: "fresh",
+        ingestedAt: "2026-08-30T00:00:00.000Z",
+        upstreamModifiedAt: "2026-08-30T00:00:00.000Z",
+        verifiedAt: "2026-08-30T00:00:00.000Z",
+      },
+      evidenceCompleteness: {
+        score: 72,
+        missing: ["affected", "mitigation"],
+      },
+      conflicts: [],
+    },
     ...overrides,
   };
 }

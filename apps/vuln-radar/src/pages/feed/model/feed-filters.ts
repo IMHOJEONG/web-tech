@@ -72,6 +72,10 @@ function buildSearchText(item: FeedItem) {
     item.priority,
     item.severity,
     item.isKev ? "kev" : "",
+    item.reliability.level,
+    item.reliability.freshness.status,
+    ...item.reliability.evidenceCompleteness.missing,
+    ...item.reliability.conflicts.map((conflict) => conflict.message),
     ...item.matchedWatchlist,
   ]
     .join(" ")
