@@ -37,10 +37,21 @@ export interface ExternalApiSource {
   note: string;
 }
 
+export type IngestSourceId = 'nvd' | 'kev' | 'epss';
+
+export interface IngestSourceFailure {
+  sourceId: IngestSourceId;
+  stage: string;
+  message: string;
+  fatal: boolean;
+}
+
 export interface IngestSyncResponse {
+  status: 'completed' | 'partial';
   startedAt: string;
   completedAt: string;
   lookbackHours: number;
+  failures: IngestSourceFailure[];
   sources: ExternalApiSource[];
   counts: {
     nvdVulnerabilities: number;
@@ -59,6 +70,9 @@ export interface IngestStatusResponse {
   scheduler: {
     enabled: boolean;
     intervalMinutes: number;
+    lookbackHours: number;
+    maxLookbackHours: number;
+    sourceTimeoutMs: number;
     syncOnStartup: boolean;
   };
   sources: ExternalApiSource[];

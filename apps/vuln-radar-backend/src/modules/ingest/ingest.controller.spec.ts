@@ -43,9 +43,11 @@ describe('IngestController', () => {
       },
     })),
     syncRecent: jest.fn(async () => ({
+      status: 'completed' as const,
       startedAt: '2026-05-18T15:00:00.000Z',
       completedAt: '2026-05-18T15:00:10.000Z',
       lookbackHours: 6,
+      failures: [],
       sources: [],
       counts: {
         nvdVulnerabilities: 10,

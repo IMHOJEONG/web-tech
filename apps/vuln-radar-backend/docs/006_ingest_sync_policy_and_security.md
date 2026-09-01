@@ -70,17 +70,23 @@ curl -X POST "https://<backend-host>/api/ingest/sync?lookbackHours=6" \
 - `INGEST_SCHEDULER_ENABLED`
 - `INGEST_SYNC_INTERVAL_MINUTES`
 - `INGEST_SYNC_ON_STARTUP`
+- `INGEST_SOURCE_TIMEOUT_MS`
+- `INGEST_MAX_LOOKBACK_HOURS`
 
 현재 기본값은 다음과 같다.
 
 - `INGEST_SCHEDULER_ENABLED=true`
 - `INGEST_SYNC_INTERVAL_MINUTES=1440`
 - `INGEST_SYNC_ON_STARTUP=false`
+- `INGEST_SOURCE_TIMEOUT_MS=60000`
+- `INGEST_MAX_LOOKBACK_HOURS=240`
 
 즉 기본 해석은:
 
 - 앱이 떠 있는 동안 24시간마다 자동 sync
 - 앱이 재시작될 때 즉시 sync는 하지 않음
+- 각 upstream source 요청은 기본 60초 안에 끝나야 함
+- 수동 backfill은 기본 최대 240시간까지 허용
 
 ## 현재 운영 정책 추천
 
@@ -218,6 +224,96 @@ curl -X POST "https://<backend-host>/api/ingest/sync?lookbackHours=6" \
 
 - lookback이 길수록 NVD fetch 대상이 늘 수 있다
 - 운영 중 무심코 큰 값을 자주 넣으면 write 부담이 커질 수 있다
+- `INGEST_MAX_LOOKBACK_HOURS`보다 큰 요청은 명시적으로 거절한다
+
+## timeout과 부분 성공 정책
+
+이전 구조에서는 NVD, CISA KEV, EPSS 중 하나라도 timeout이 나면
+전체 sync가 실패했다.
+
+현재 정책은 다음과 같다.
+
+- NVD와 CISA KEV는 primary source다
+- 둘 중 하나라도 성공하면 가능한 데이터를 계속 처리한다
+- EPSS가 실패해도 NVD/KEV로 수집한 취약점은 DB에 반영한다
+- 실패한 source가 담당하는 필드는 기존 DB 값을 보존한다
+- 실패한 source는 `failures` 배열과 서버 로그에 남긴다
+- NVD와 CISA KEV가 둘 다 실패하면 처리할 primary source가 없으므로 전체 sync를 실패시킨다
+
+수동 sync 응답은 아래처럼 해석한다.
+
+```json
+{
+  "status": "partial",
+  "lookbackHours": 24,
+  "failures": [
+    {
+      "sourceId": "epss",
+      "stage": "fetch_scores",
+      "message": "The operation was aborted due to timeout",
+      "fatal": false
+    }
+  ]
+}
+```
+
+- `status=completed`: 모든 source가 성공했다
+- `status=partial`: 일부 source가 실패했지만 가능한 데이터는 반영했다
+- `failures[].fatal=false`: 이 응답 안에서는 전체 sync를 중단시키지 않은 실패다
+
+## 배포 환경 권장값
+
+신뢰성이 중요한 운영 환경에서는 아래 값을 우선 검토한다.
+
+```env
+INGEST_SCHEDULER_ENABLED=true
+INGEST_SYNC_INTERVAL_MINUTES=60
+INGEST_SYNC_ON_STARTUP=true
+INGEST_LOOKBACK_HOURS=48
+INGEST_MAX_LOOKBACK_HOURS=240
+INGEST_SOURCE_TIMEOUT_MS=60000
+```
+
+주의할 점:
+
+- `INGEST_SYNC_ON_STARTUP=true`는 배포 직후 빠르게 따라잡는 데 유리하다
+- 다만 앱이 자주 재시작되는 환경에서는 startup sync가 반복될 수 있다
+- 장기적으로는 앱 내부 interval보다 외부 cron이나 별도 worker가 더 안전하다
+
+## 장애 후 backfill 절차
+
+DB 최신 시각이 며칠 이상 뒤처져 있으면 한 번에 크게 당기기보다
+작게 넓혀가며 확인한다.
+
+```bash
+curl -X POST "https://<backend-host>/api/ingest/sync?lookbackHours=24" \
+  -H "Authorization: Bearer <token>"
+```
+
+```bash
+curl -X POST "https://<backend-host>/api/ingest/sync?lookbackHours=72" \
+  -H "Authorization: Bearer <token>"
+```
+
+```bash
+curl -X POST "https://<backend-host>/api/ingest/sync?lookbackHours=240" \
+  -H "Authorization: Bearer <token>"
+```
+
+각 단계 후에는 아래를 확인한다.
+
+```bash
+curl "https://<backend-host>/api/ingest/status" \
+  -H "Authorization: Bearer <token>"
+```
+
+확인 기준:
+
+- `latest.databaseUpdatedAt`이 현재 시각에 가까워졌는지
+- `latest.upstreamLastModifiedAt`이 최신 NVD 수정 시각에 가까워졌는지
+- `latest.epssObservedAt`이 최근 관측일로 갱신됐는지
+- `sync` 응답의 `status`가 `completed`인지 `partial`인지
+- `failures`에 반복적으로 같은 source가 남는지
 
 ## 운영에서 먼저 보는 것
 

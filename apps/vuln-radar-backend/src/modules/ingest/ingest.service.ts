@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { AppConfigService } from '../../config/app-config.service';
 import { PrismaService } from '../../infra/prisma/prisma.service';
 import { calculateRiskScore } from '../../shared/lib/risk-score';
@@ -8,10 +8,22 @@ import { KevCollector } from './collectors/kev/kev.collector';
 import { NvdCollector } from './collectors/nvd/nvd.collector';
 import {
   ExternalApiSource,
+  IngestSourceFailure,
+  IngestSourceId,
   IngestStatusResponse,
   IngestSyncResponse,
   ProcessedVulnerabilitySnapshot,
 } from './ingest.types';
+
+type SourceCollectionResult<T> =
+  | {
+      data: T;
+      failure: null;
+    }
+  | {
+      data: null;
+      failure: IngestSourceFailure;
+    };
 
 type DbWatchlistEntry = {
   id: string;
@@ -36,6 +48,8 @@ type DbIngestStatusEpssScore = {
 
 @Injectable()
 export class IngestService {
+  private readonly logger = new Logger(IngestService.name);
+
   constructor(
     private readonly appConfigService: AppConfigService,
     private readonly prismaService: PrismaService,
@@ -65,6 +79,9 @@ export class IngestService {
         scheduler: {
           enabled: this.appConfigService.ingestSchedulerEnabled,
           intervalMinutes: this.appConfigService.ingestSyncIntervalMinutes,
+          lookbackHours: this.appConfigService.ingestLookbackHours,
+          maxLookbackHours: this.appConfigService.ingestMaxLookbackHours,
+          sourceTimeoutMs: this.appConfigService.ingestSourceTimeoutMs,
           syncOnStartup: this.appConfigService.ingestSyncOnStartup,
         },
         sources: this.getSources(),
@@ -160,6 +177,9 @@ export class IngestService {
       scheduler: {
         enabled: this.appConfigService.ingestSchedulerEnabled,
         intervalMinutes: this.appConfigService.ingestSyncIntervalMinutes,
+        lookbackHours: this.appConfigService.ingestLookbackHours,
+        maxLookbackHours: this.appConfigService.ingestMaxLookbackHours,
+        sourceTimeoutMs: this.appConfigService.ingestSourceTimeoutMs,
         syncOnStartup: this.appConfigService.ingestSyncOnStartup,
       },
       sources: this.getSources(),
@@ -196,10 +216,45 @@ export class IngestService {
     const effectiveLookbackHours =
       lookbackHours ?? this.appConfigService.ingestLookbackHours;
 
-    const nvdVulnerabilities = await this.nvdCollector.fetchRecent(
-      effectiveLookbackHours,
+    if (effectiveLookbackHours > this.appConfigService.ingestMaxLookbackHours) {
+      throw new BadRequestException(
+        `lookbackHours must be less than or equal to ${this.appConfigService.ingestMaxLookbackHours}.`,
+      );
+    }
+
+    this.logger.log(
+      `Ingest sync started: lookbackHours=${effectiveLookbackHours}, sourceTimeoutMs=${this.appConfigService.ingestSourceTimeoutMs}`,
     );
-    const kevEntries = await this.kevCollector.fetchCatalog();
+
+    const failures: IngestSourceFailure[] = [];
+    const [nvdResult, kevResult] = await Promise.all([
+      this.collectSource('nvd', 'fetch_recent', () =>
+        this.nvdCollector.fetchRecent(effectiveLookbackHours),
+      ),
+      this.collectSource('kev', 'fetch_catalog', () =>
+        this.kevCollector.fetchCatalog(),
+      ),
+    ]);
+
+    if (nvdResult.failure) {
+      failures.push(nvdResult.failure);
+    }
+
+    if (kevResult.failure) {
+      failures.push(kevResult.failure);
+    }
+
+    if (!nvdResult.data && !kevResult.data) {
+      throw new Error(
+        `Ingest sync failed before processing any primary source: ${failures
+          .map((failure) => `${failure.sourceId}:${failure.message}`)
+          .join(', ')}`,
+      );
+    }
+
+    const nvdVulnerabilities = nvdResult.data ?? [];
+    const kevEntries = kevResult.data ?? [];
+    const hasKevData = kevResult.data !== null;
 
     const vulnerabilityMap = new Map<string, ProcessedVulnerabilitySnapshot>();
 
@@ -254,9 +309,17 @@ export class IngestService {
       });
     }
 
-    const epssScores = await this.epssCollector.fetchScores([
-      ...vulnerabilityMap.keys(),
-    ]);
+    const epssResult = await this.collectSource('epss', 'fetch_scores', () =>
+      this.epssCollector.fetchScores([...vulnerabilityMap.keys()]),
+    );
+
+    if (epssResult.failure) {
+      failures.push(epssResult.failure);
+    }
+
+    const epssScores = epssResult.data ?? [];
+    const hasEpssData = epssResult.data !== null;
+    const shouldUpdateRiskFields = hasKevData && hasEpssData;
 
     for (const epssScore of epssScores) {
       const vulnerability = vulnerabilityMap.get(epssScore.cveId);
@@ -313,14 +376,26 @@ export class IngestService {
           description: vulnerability.description,
           severity: vulnerability.severity,
           cvssScore: vulnerability.cvssScore,
-          epssScore: vulnerability.epssScore,
-          epssPercentile: vulnerability.epssPercentile,
-          isKev: vulnerability.isKev,
-          riskScore: vulnerability.riskScore,
-          priority: vulnerability.priority,
           publishedAt: vulnerability.publishedAt,
           lastModifiedAt: vulnerability.lastModifiedAt,
           rawSourceJson: vulnerability.rawSourceJson,
+          ...(hasEpssData
+            ? {
+                epssScore: vulnerability.epssScore,
+                epssPercentile: vulnerability.epssPercentile,
+              }
+            : {}),
+          ...(hasKevData
+            ? {
+                isKev: vulnerability.isKev,
+              }
+            : {}),
+          ...(shouldUpdateRiskFields
+            ? {
+                riskScore: vulnerability.riskScore,
+                priority: vulnerability.priority,
+              }
+            : {}),
         },
         create: {
           cveId: vulnerability.cveId,
@@ -422,11 +497,18 @@ export class IngestService {
     }
 
     const completedAt = new Date();
+    const status = failures.length > 0 ? 'partial' : 'completed';
+
+    this.logger.log(
+      `Ingest sync ${status}: processed=${vulnerabilityMap.size}, nvd=${nvdVulnerabilities.length}, kev=${kevEntries.length}, epss=${epssScores.length}, failures=${failures.length}`,
+    );
 
     return {
+      status,
       startedAt: startedAt.toISOString(),
       completedAt: completedAt.toISOString(),
       lookbackHours: effectiveLookbackHours,
+      failures,
       sources: this.getSources(),
       counts: {
         nvdVulnerabilities: nvdVulnerabilities.length,
@@ -436,5 +518,46 @@ export class IngestService {
         processedVulnerabilities: vulnerabilityMap.size,
       },
     };
+  }
+
+  private async collectSource<T>(
+    sourceId: IngestSourceId,
+    stage: string,
+    task: () => Promise<T>,
+  ): Promise<SourceCollectionResult<T>> {
+    const startedAt = Date.now();
+
+    try {
+      const data = await task();
+      this.logger.log(
+        `Ingest source completed: source=${sourceId}, stage=${stage}, durationMs=${
+          Date.now() - startedAt
+        }`,
+      );
+
+      return {
+        data,
+        failure: null,
+      };
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : 'Unknown source error';
+
+      this.logger.warn(
+        `Ingest source failed: source=${sourceId}, stage=${stage}, durationMs=${
+          Date.now() - startedAt
+        }, error=${message}`,
+      );
+
+      return {
+        data: null,
+        failure: {
+          sourceId,
+          stage,
+          message,
+          fatal: false,
+        },
+      };
+    }
   }
 }

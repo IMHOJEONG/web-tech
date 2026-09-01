@@ -9,7 +9,9 @@ export interface AppConfig {
   corsOrigin: string;
   frontendOrigin: string;
   ingestLookbackHours: number;
+  ingestMaxLookbackHours: number;
   ingestSchedulerEnabled: boolean;
+  ingestSourceTimeoutMs: number;
   ingestSyncIntervalMinutes: number;
   ingestSyncOnStartup: boolean;
   nvdApiKey?: string;
@@ -63,7 +65,9 @@ export function getAppConfig(): AppConfig {
     corsOrigin: readStringEnv('CORS_ORIGIN', 'http://localhost:3000'),
     frontendOrigin: readStringEnv('FRONTEND_ORIGIN', 'http://localhost:3000'),
     ingestLookbackHours: readNumberEnv('INGEST_LOOKBACK_HOURS', 24),
+    ingestMaxLookbackHours: readNumberEnv('INGEST_MAX_LOOKBACK_HOURS', 240),
     ingestSchedulerEnabled: readBooleanEnv('INGEST_SCHEDULER_ENABLED', true),
+    ingestSourceTimeoutMs: readNumberEnv('INGEST_SOURCE_TIMEOUT_MS', 60_000),
     ingestSyncIntervalMinutes: readNumberEnv(
       'INGEST_SYNC_INTERVAL_MINUTES',
       1440,

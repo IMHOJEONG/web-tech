@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { AppConfigService } from '../../../../config/app-config.service';
 import { CollectedVulnerability } from '../../ingest.types';
 
@@ -24,6 +24,8 @@ type NvdResponse = {
 
 @Injectable()
 export class NvdCollector {
+  private readonly logger = new Logger(NvdCollector.name);
+
   constructor(private readonly appConfigService: AppConfigService) {}
 
   async fetchRecent(lookbackHours: number): Promise<CollectedVulnerability[]> {
@@ -43,13 +45,19 @@ export class NvdCollector {
       requestUrl.searchParams.set('resultsPerPage', String(resultsPerPage));
       requestUrl.searchParams.set('startIndex', String(startIndex));
 
+      this.logger.log(
+        `NVD page request started: lookbackHours=${lookbackHours}, startIndex=${startIndex}, timeoutMs=${this.appConfigService.ingestSourceTimeoutMs}`,
+      );
+
       const response = await fetch(requestUrl, {
         headers: this.appConfigService.nvdApiKey
           ? {
               apiKey: this.appConfigService.nvdApiKey,
             }
           : undefined,
-        signal: AbortSignal.timeout(20_000),
+        signal: AbortSignal.timeout(
+          this.appConfigService.ingestSourceTimeoutMs,
+        ),
       });
 
       if (!response.ok) {
@@ -59,6 +67,10 @@ export class NvdCollector {
       }
 
       const payload = (await response.json()) as NvdResponse;
+
+      this.logger.log(
+        `NVD page request completed: startIndex=${startIndex}, received=${payload.vulnerabilities.length}, total=${payload.totalResults}`,
+      );
 
       allVulnerabilities.push(
         ...payload.vulnerabilities.map((item) => mapNvdVulnerability(item.cve)),

@@ -319,6 +319,10 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
 - `docs/008_backend_auth_guard_testing_and_useguards.md`
   - `BackendAuthGuard` 추가 뒤 controller unit test가 왜 깨질 수 있는지
   - Nest에서 왜 `@UseGuards(...)`로 인증을 분리하는지
+- `docs/009_ingest_backfill_timeout_recovery.md`
+  - 큰 backfill에서 upstream timeout이 발생하는 이유
+  - source timeout, partial success, 기존 DB 값 보존 정책
+  - 장애 후 단계적 backfill 절차
 
 ## 실시간 데이터에 대한 현재 기준
 
@@ -332,3 +336,8 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
   - `INGEST_SCHEDULER_ENABLED=true`
   - `INGEST_SYNC_INTERVAL_MINUTES=1440`
   - `INGEST_SYNC_ON_STARTUP=false`
+  - `INGEST_SOURCE_TIMEOUT_MS=60000`
+  - `INGEST_MAX_LOOKBACK_HOURS=240`
+
+큰 backfill이나 upstream timeout 복구 정책은
+`docs/009_ingest_backfill_timeout_recovery.md`에 따로 정리한다.
