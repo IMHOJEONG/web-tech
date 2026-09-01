@@ -1,9 +1,7 @@
 import { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages, getTranslations } from 'next-intl/server'
-import localFont from 'next/font/local'
 import { Suspense } from 'react'
-import { mono } from '~/components/mono-font'
 
 import Script from 'next/script'
 import './css/global.css'
@@ -15,24 +13,11 @@ import {
     shouldLoadReactInspectionTools,
 } from '~/shared/config/react-inspection-tools'
 import { getMetadataBase } from '~/lib/seo'
+import { mono, pretendard, spaceGrotesk } from '~/shared/config/fonts'
 import { AppTopLoader } from '~/widgets/app-shell/ui/app-top-loader'
 import Footer from '~/widgets/app-shell/ui/footer'
 import Header from '~/widgets/app-shell/ui/header'
 import MobileBottomNav from '~/widgets/app-shell/ui/mobile-bottom-nav'
-
-const pretendard = localFont({
-    src: '../public/fonts/PretendardVariable.woff2',
-    display: 'swap',
-    weight: '45 920',
-    variable: '--font-body-ko',
-})
-
-const spaceGrotesk = localFont({
-    src: '../public/fonts/SpaceGroteskVariable.woff2',
-    weight: '300 700',
-    display: 'swap',
-    variable: '--font-display',
-})
 
 const shouldLoadInspectionTools = shouldLoadReactInspectionTools()
 

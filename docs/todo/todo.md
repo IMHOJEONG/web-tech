@@ -120,6 +120,7 @@
   - 5차 조치: `/docs` 모바일 주요 touch target 최소 크기와 focus ring 보강
   - 6차 조치: desktop TOC anchor 이동 시 sticky header와 heading 겹침 회귀 테스트 추가
   - 7차 조치: Next.js 16 기준 `middleware.ts`를 `proxy.ts` 문법으로 전환
+  - 8차 조치: shell navigation visibility e2e를 mobile/tablet/desktop 기준으로 확장하고 제거된 `source` query 기준을 정리
   - 기준 문서: `docs/runbooks/docs-responsive-browser-device-checklist.md`
 - [-] `P1` 루트 `/` 화면을 `141:2 Landing Page - HEAPFORGE` 기준으로 재구성한다.
   - 현재 `HeroSection` 단일 구성을 landing page 섹션 구조로 확장
@@ -165,6 +166,11 @@
   - 썸네일 fallback, 날짜 포맷, read time/topic/tags 보조 메타는 shared UI로 관리
   - source는 UI 메타가 아니라 runtime log 관측 메타로 분리
   - 기준 문서: `docs/architecture/docs-document-ui-reuse-policy.md`
+- [ ] `P2` 문서 썸네일 LCP 정책을 정리한다.
+  - Playwright e2e 중 `/default/local-document.svg`가 LCP 후보로 감지됨
+  - above-the-fold 카드 이미지에 `priority` 또는 `loading="eager"`를 적용할지 기준화
+  - 모든 카드 이미지에 일괄 적용하지 말고 첫 화면 노출 이미지와 lazy 이미지 기준을 분리
+  - 관련 컴포넌트: `DocumentThumbnail`, `MainCard`, `DocsIndexCard`
 
 ## Design / Design System
 
@@ -271,5 +277,8 @@
 ## Review Queue
 
 - [ ] `P1` `docs-responsive-policy.md` 적용 이후 shell 회귀 테스트
-- [ ] `P1` FSD 문서와 실제 폴더 구조의 불일치 재점검
+- [x] `P1` FSD 문서와 실제 폴더 구조의 불일치 재점검
+  - 전역 font config를 `shared/config/fonts.ts`로 이동
+  - import되지 않는 legacy `components/category/*` 제거
+  - 기준 문서: `docs/architecture/docs-app-fsd.md`
 - [ ] `P2` `apps/docs/shared/message/*.json` 키 사용 현황과 dead key 정리

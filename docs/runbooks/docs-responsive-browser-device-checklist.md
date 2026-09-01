@@ -69,7 +69,7 @@ pnpm dev:docs
 /feed?topic=web
 /docs
 /docs?q=react
-/docs?section=web&source=local
+/docs?section=web&sort=latest
 /web
 /mobile
 /ui-ux
@@ -113,7 +113,7 @@ Windows/Linux: Ctrl + Shift + P
 
 ### 기대 결과
 
-- `no-preference`에서는 `/docs?section=web`, `/docs?source=local`, `/feed?topic=web` 이동 시 카드가 짧게 fade-in/up reveal 된다.
+- `no-preference`에서는 `/docs?section=web`, `/docs?sort=latest`, `/feed?topic=web` 이동 시 카드가 짧게 fade-in/up reveal 된다.
 - `reduce`에서는 카드 reveal animation이 보이지 않아야 한다.
 - `reduce`에서도 레이아웃과 콘텐츠는 동일하게 보여야 한다.
 

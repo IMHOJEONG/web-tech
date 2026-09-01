@@ -110,6 +110,7 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
             <div className="flex items-center gap-3 sm:hidden">
                 <SheetTrigger
                     aria-label={headerT('drawer.openAriaLabel')}
+                    data-testid="mobile-nav-drawer-trigger"
                     className="flex h-7 w-[2.125rem] items-center justify-center text-muted-foreground transition-colors hover:text-primary"
                 >
                     <svg
