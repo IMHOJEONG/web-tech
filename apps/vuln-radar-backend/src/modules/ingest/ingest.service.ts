@@ -84,6 +84,7 @@ export class IngestService {
           sourceTimeoutMs: this.appConfigService.ingestSourceTimeoutMs,
           syncOnStartup: this.appConfigService.ingestSyncOnStartup,
         },
+        nvd: this.getNvdStatusConfig(),
         sources: this.getSources(),
         latest: {
           databaseUpdatedAt: null,
@@ -182,6 +183,7 @@ export class IngestService {
         sourceTimeoutMs: this.appConfigService.ingestSourceTimeoutMs,
         syncOnStartup: this.appConfigService.ingestSyncOnStartup,
       },
+      nvd: this.getNvdStatusConfig(),
       sources: this.getSources(),
       latest: {
         databaseUpdatedAt: latestDatabaseUpdatedAt?.toISOString() ?? null,
@@ -517,6 +519,15 @@ export class IngestService {
         watchMatches: watchMatchCount,
         processedVulnerabilities: vulnerabilityMap.size,
       },
+    };
+  }
+
+  private getNvdStatusConfig(): IngestStatusResponse['nvd'] {
+    return {
+      requestMaxRetries: this.appConfigService.nvdRequestMaxRetries,
+      requestPageDelayMs: this.appConfigService.nvdRequestPageDelayMs,
+      requestRetryDelayMs: this.appConfigService.nvdRequestRetryDelayMs,
+      resultsPerPage: this.appConfigService.nvdResultsPerPage,
     };
   }
 

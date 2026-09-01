@@ -21,10 +21,16 @@ NVD, CISA KEV, EPSS collector가 외부 API를 호출하는 동안
 - source timeout이 코드 안에 `20_000ms`로 고정되어 있었다
 - NVD/KEV/EPSS 중 하나라도 실패하면 전체 sync가 실패했다
 - 큰 backfill이 어느 source, 어느 단계에서 막혔는지 로그만 보고 알기 어려웠다
+- NVD 조회가 `resultsPerPage=2000`으로 고정되어 있어 최근 변경량이 많은 날에는 단일 요청 payload가 지나치게 커졌다
 
 특히 `lookbackHours`가 커지면 NVD 조회 대상이 많아지고,
 EPSS는 CVE ID를 여러 chunk로 나눠 반복 호출한다.
 이때 chunk 하나만 timeout이 나도 전체 sync가 실패할 수 있었다.
+
+2026-09-01에 확인한 `source=nvd, stage=fetch_recent, durationMs=23912, error=terminated` 로그는
+설정 timeout인 `60_000ms`보다 먼저 연결이 종료된 사례다.
+이는 `AbortSignal.timeout(...)`이 직접 요청을 끊었다기보다,
+NVD 응답 지연, 큰 응답 body, 중간 네트워크/proxy 종료, upstream 연결 종료가 겹친 증상으로 본다.
 
 ## 적용한 근본 조치
 
@@ -78,6 +84,54 @@ INGEST_MAX_LOOKBACK_HOURS=240
 - KEV가 실패하면 기존 `isKev`, `riskScore`, `priority`는 덮어쓰지 않는다
 - NVD와 CISA KEV가 둘 다 실패하면 처리할 primary source가 없으므로 전체 실패한다
 
+### 5. NVD 요청 단위 축소와 재시도
+
+NVD는 최근 변경량에 따라 응답 크기와 지연 시간이 크게 달라질 수 있다.
+한 번에 너무 많은 결과를 요청하면 fetch body 수신 중 연결이 종료되어 `terminated`가 발생할 수 있다.
+
+따라서 NVD 전용 설정을 추가했다.
+
+```env
+NVD_RESULTS_PER_PAGE=200
+NVD_REQUEST_MAX_RETRIES=2
+NVD_REQUEST_RETRY_DELAY_MS=1500
+NVD_REQUEST_PAGE_DELAY_MS=600
+```
+
+동작 기준:
+
+- `NVD_RESULTS_PER_PAGE`는 NVD 한 페이지 요청 크기를 제어한다
+- `NVD_REQUEST_MAX_RETRIES`는 일시적 실패 재시도 횟수를 제어한다
+- `NVD_REQUEST_RETRY_DELAY_MS`는 재시도 전 기본 대기 시간이다
+- `NVD_REQUEST_PAGE_DELAY_MS`는 다음 NVD page 요청 전 대기 시간이다
+- `terminated`, `timeout`, `fetch failed`, `ECONNRESET`, `ETIMEDOUT`은 재시도 대상이다
+- `429`, `5xx` 응답은 재시도 대상이다
+- `400`, `401`, `403` 계열은 설정/권한 문제 가능성이 높으므로 즉시 실패한다
+
+운영에서는 `NVD_API_KEY`를 넣는 것을 권장한다.
+API key가 없으면 `NVD_REQUEST_PAGE_DELAY_MS` 기본값은 `6000ms`,
+API key가 있으면 기본값은 `600ms`로 둔다.
+
+상태 확인 API는 현재 적용된 NVD 설정도 함께 반환한다.
+
+```bash
+curl "https://<backend-host>/api/ingest/status" \
+  -H "Authorization: Bearer <token>"
+```
+
+확인할 필드:
+
+```json
+{
+  "nvd": {
+    "resultsPerPage": 200,
+    "requestMaxRetries": 2,
+    "requestRetryDelayMs": 1500,
+    "requestPageDelayMs": 600
+  }
+}
+```
+
 예시 응답:
 
 ```json
@@ -106,6 +160,11 @@ INGEST_SYNC_ON_STARTUP=true
 INGEST_LOOKBACK_HOURS=48
 INGEST_MAX_LOOKBACK_HOURS=240
 INGEST_SOURCE_TIMEOUT_MS=60000
+NVD_API_KEY=<issued-nvd-api-key>
+NVD_RESULTS_PER_PAGE=200
+NVD_REQUEST_MAX_RETRIES=2
+NVD_REQUEST_RETRY_DELAY_MS=1500
+NVD_REQUEST_PAGE_DELAY_MS=600
 ```
 
 ## 장애 후 수동 복구 절차
@@ -135,6 +194,23 @@ curl "https://<backend-host>/api/ingest/status" \
 ```
 
 ## 앞으로의 개선 후보
+
+근본 조치는 아래 순서로 진행한다.
+
+1. NVD 요청 단위 안정화
+   `NVD_RESULTS_PER_PAGE`, retry, page delay를 운영값으로 제어한다.
+
+2. 수집 상태 관측 강화
+   source별 마지막 성공 시각, 마지막 실패 사유, 연속 실패 횟수를 DB에 저장한다.
+
+3. 수집 실행 책임 분리
+   HTTP 요청 안에서 긴 backfill을 끝까지 처리하지 않고, 별도 ingest worker/job queue로 넘긴다.
+
+4. 외부 cron 전환 검토
+   앱 내부 `setInterval` 대신 Railway Cron, GitHub Actions scheduled workflow, 별도 scheduler 중 하나를 선택한다.
+
+5. source별 checkpoint 저장
+   `lookbackHours`만 믿지 않고 NVD/KEV/EPSS source별 마지막 성공 cursor를 저장해 누락 구간을 자동 복구한다.
 
 아직 앱 내부 scheduler는 `setInterval` 기반이다.
 단일 인스턴스에서는 동작하지만, 신뢰성이 중요한 운영에서는 장기적으로 아래가 더 낫다.

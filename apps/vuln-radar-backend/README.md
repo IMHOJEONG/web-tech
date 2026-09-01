@@ -52,6 +52,10 @@
 - `FRONTEND_ORIGIN`
 - `VULN_RADAR_API_TOKEN`
 - `NVD_API_KEY`
+- `NVD_RESULTS_PER_PAGE`
+- `NVD_REQUEST_MAX_RETRIES`
+- `NVD_REQUEST_RETRY_DELAY_MS`
+- `NVD_REQUEST_PAGE_DELAY_MS`
 
 권장 예제 파일:
 
@@ -338,6 +342,10 @@ KEV, OSV, 벤더 공지, 한국어 공지 같은 `보강 정보`를 다룬다.
   - `INGEST_SYNC_ON_STARTUP=false`
   - `INGEST_SOURCE_TIMEOUT_MS=60000`
   - `INGEST_MAX_LOOKBACK_HOURS=240`
+  - `NVD_RESULTS_PER_PAGE=200`
+  - `NVD_REQUEST_MAX_RETRIES=2`
+  - `NVD_REQUEST_RETRY_DELAY_MS=1500`
+  - `NVD_REQUEST_PAGE_DELAY_MS=6000` without `NVD_API_KEY`, `600` with `NVD_API_KEY`
 
 큰 backfill이나 upstream timeout 복구 정책은
 `docs/009_ingest_backfill_timeout_recovery.md`에 따로 정리한다.

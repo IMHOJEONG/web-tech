@@ -25,7 +25,16 @@ describe('IngestController', () => {
       scheduler: {
         enabled: true,
         intervalMinutes: 60,
+        lookbackHours: 24,
+        maxLookbackHours: 240,
+        sourceTimeoutMs: 60_000,
         syncOnStartup: false,
+      },
+      nvd: {
+        requestMaxRetries: 2,
+        requestPageDelayMs: 600,
+        requestRetryDelayMs: 1_500,
+        resultsPerPage: 200,
       },
       sources: [],
       latest: {

@@ -15,6 +15,10 @@ export interface AppConfig {
   ingestSyncIntervalMinutes: number;
   ingestSyncOnStartup: boolean;
   nvdApiKey?: string;
+  nvdRequestMaxRetries: number;
+  nvdRequestPageDelayMs: number;
+  nvdRequestRetryDelayMs: number;
+  nvdResultsPerPage: number;
   serviceName: string;
 }
 
@@ -39,6 +43,22 @@ function readNumberEnv(name: string, fallback: number) {
   return parsedValue;
 }
 
+function readNonNegativeNumberEnv(name: string, fallback: number) {
+  const rawValue = process.env[name]?.trim();
+
+  if (!rawValue) {
+    return fallback;
+  }
+
+  const parsedValue = Number(rawValue);
+
+  if (!Number.isFinite(parsedValue) || parsedValue < 0) {
+    throw new Error(`Invalid non-negative numeric env: ${name}=${rawValue}`);
+  }
+
+  return parsedValue;
+}
+
 function readBooleanEnv(name: string, fallback: boolean) {
   const rawValue = process.env[name]?.trim().toLowerCase();
 
@@ -58,6 +78,8 @@ function readBooleanEnv(name: string, fallback: boolean) {
 }
 
 export function getAppConfig(): AppConfig {
+  const nvdApiKey = process.env.NVD_API_KEY?.trim() || undefined;
+
   return {
     appEnv: readStringEnv('APP_ENV', 'development'),
     appPort: readNumberEnv('PORT', 4000),
@@ -73,7 +95,20 @@ export function getAppConfig(): AppConfig {
       1440,
     ),
     ingestSyncOnStartup: readBooleanEnv('INGEST_SYNC_ON_STARTUP', false),
-    nvdApiKey: process.env.NVD_API_KEY?.trim() || undefined,
+    nvdApiKey,
+    nvdRequestMaxRetries: readNonNegativeNumberEnv(
+      'NVD_REQUEST_MAX_RETRIES',
+      2,
+    ),
+    nvdRequestPageDelayMs: readNonNegativeNumberEnv(
+      'NVD_REQUEST_PAGE_DELAY_MS',
+      nvdApiKey ? 600 : 6_000,
+    ),
+    nvdRequestRetryDelayMs: readNonNegativeNumberEnv(
+      'NVD_REQUEST_RETRY_DELAY_MS',
+      1_500,
+    ),
+    nvdResultsPerPage: readNumberEnv('NVD_RESULTS_PER_PAGE', 200),
     serviceName: 'vuln-radar-backend',
   };
 }

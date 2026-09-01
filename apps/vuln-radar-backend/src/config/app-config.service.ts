@@ -57,6 +57,22 @@ export class AppConfigService {
     return this.config.nvdApiKey;
   }
 
+  get nvdRequestMaxRetries() {
+    return this.config.nvdRequestMaxRetries;
+  }
+
+  get nvdRequestPageDelayMs() {
+    return this.config.nvdRequestPageDelayMs;
+  }
+
+  get nvdRequestRetryDelayMs() {
+    return this.config.nvdRequestRetryDelayMs;
+  }
+
+  get nvdResultsPerPage() {
+    return this.config.nvdResultsPerPage;
+  }
+
   get serviceName() {
     return this.config.serviceName;
   }

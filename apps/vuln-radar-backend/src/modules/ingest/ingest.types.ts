@@ -75,6 +75,12 @@ export interface IngestStatusResponse {
     sourceTimeoutMs: number;
     syncOnStartup: boolean;
   };
+  nvd: {
+    requestMaxRetries: number;
+    requestPageDelayMs: number;
+    requestRetryDelayMs: number;
+    resultsPerPage: number;
+  };
   sources: ExternalApiSource[];
   latest: {
     databaseUpdatedAt: string | null;

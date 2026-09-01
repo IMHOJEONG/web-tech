@@ -72,6 +72,10 @@ curl -X POST "https://<backend-host>/api/ingest/sync?lookbackHours=6" \
 - `INGEST_SYNC_ON_STARTUP`
 - `INGEST_SOURCE_TIMEOUT_MS`
 - `INGEST_MAX_LOOKBACK_HOURS`
+- `NVD_RESULTS_PER_PAGE`
+- `NVD_REQUEST_MAX_RETRIES`
+- `NVD_REQUEST_RETRY_DELAY_MS`
+- `NVD_REQUEST_PAGE_DELAY_MS`
 
 현재 기본값은 다음과 같다.
 
@@ -80,6 +84,10 @@ curl -X POST "https://<backend-host>/api/ingest/sync?lookbackHours=6" \
 - `INGEST_SYNC_ON_STARTUP=false`
 - `INGEST_SOURCE_TIMEOUT_MS=60000`
 - `INGEST_MAX_LOOKBACK_HOURS=240`
+- `NVD_RESULTS_PER_PAGE=200`
+- `NVD_REQUEST_MAX_RETRIES=2`
+- `NVD_REQUEST_RETRY_DELAY_MS=1500`
+- `NVD_REQUEST_PAGE_DELAY_MS=6000` without `NVD_API_KEY`, `600` with `NVD_API_KEY`
 
 즉 기본 해석은:
 
@@ -87,6 +95,7 @@ curl -X POST "https://<backend-host>/api/ingest/sync?lookbackHours=6" \
 - 앱이 재시작될 때 즉시 sync는 하지 않음
 - 각 upstream source 요청은 기본 60초 안에 끝나야 함
 - 수동 backfill은 기본 최대 240시간까지 허용
+- NVD는 한 번에 200건씩 나눠 가져오고 일시적 네트워크 실패는 2회 재시도함
 
 ## 현재 운영 정책 추천
 
