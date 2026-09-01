@@ -233,7 +233,11 @@ function sanitizeAttributes(tagName: string, rawAttributes: string) {
             continue
         }
 
-        if (tagName === 'a' && attributeName === 'target' && value === '_blank') {
+        if (
+            tagName === 'a' &&
+            attributeName === 'target' &&
+            value === '_blank'
+        ) {
             hasBlankTarget = true
         }
 
@@ -246,7 +250,8 @@ function sanitizeAttributes(tagName: string, rawAttributes: string) {
 
     if (tagName === 'a' && hasBlankTarget) {
         if (linkRelIndex >= 0) {
-            const relValue = attributes[linkRelIndex]?.match(/^rel="(.*)"$/)?.[1]
+            const relValue =
+                attributes[linkRelIndex]?.match(/^rel="(.*)"$/)?.[1]
 
             attributes[linkRelIndex] = `rel="${mergeLinkRel(relValue ?? '')}"`
         } else {
