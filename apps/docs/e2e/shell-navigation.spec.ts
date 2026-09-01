@@ -49,9 +49,7 @@ test.describe('docs shell navigation visibility', () => {
         await page.goto('/docs')
 
         await expect(page.getByTestId('desktop-navigation')).toBeVisible()
-        await expect(
-            page.getByTestId('mobile-nav-drawer-trigger')
-        ).toBeHidden()
+        await expect(page.getByTestId('mobile-nav-drawer-trigger')).toBeHidden()
         await expect(page.getByTestId('mobile-bottom-nav')).toBeHidden()
         await expect(page.getByTestId('footer-utility-links')).toBeHidden()
     })
@@ -67,9 +65,7 @@ test.describe('docs shell navigation visibility', () => {
         await page.goto('/docs')
 
         await expect(page.getByTestId('desktop-navigation')).toBeVisible()
-        await expect(
-            page.getByTestId('mobile-nav-drawer-trigger')
-        ).toBeHidden()
+        await expect(page.getByTestId('mobile-nav-drawer-trigger')).toBeHidden()
         await expect(page.getByTestId('mobile-bottom-nav')).toBeHidden()
         await expect(page.getByTestId('footer-utility-links')).toBeVisible()
     })
