@@ -12,6 +12,46 @@ export interface RadarDataSource {
   message: string;
 }
 
+export type VulnerabilityReliabilityLevel =
+  | 'verified'
+  | 'high'
+  | 'medium'
+  | 'low'
+  | 'unknown';
+export type VulnerabilityFreshnessStatus =
+  | 'fresh'
+  | 'aging'
+  | 'stale'
+  | 'unknown';
+export type VulnerabilityMissingEvidence =
+  | 'cvss'
+  | 'epss'
+  | 'kev'
+  | 'advisory'
+  | 'affected'
+  | 'watchlist'
+  | 'mitigation';
+
+export interface VulnerabilityReliability {
+  level: VulnerabilityReliabilityLevel;
+  confidenceScore: number;
+  freshness: {
+    status: VulnerabilityFreshnessStatus;
+    ingestedAt: string | null;
+    upstreamModifiedAt: string | null;
+    verifiedAt: string | null;
+  };
+  evidenceCompleteness: {
+    score: number;
+    missing: VulnerabilityMissingEvidence[];
+  };
+  conflicts: Array<{
+    type: 'severity' | 'affected' | 'alias' | 'status' | 'score';
+    message: string;
+    sourceIds: string[];
+  }>;
+}
+
 export interface OverviewCard {
   id: string;
   label: string;
@@ -37,6 +77,7 @@ export interface FeedItem {
   publishedAt: string;
   updatedAt: string;
   matchedWatchlist: string[];
+  reliability: VulnerabilityReliability;
 }
 
 export interface FeedResponse {
@@ -68,6 +109,7 @@ export interface VulnerabilityDetailItem {
   publishedAt: string;
   updatedAt: string;
   matchedWatchlist: string[];
+  reliability: VulnerabilityReliability;
   advisories: VulnerabilityAdvisoryItem[];
   references: {
     nvdUrl: string;
