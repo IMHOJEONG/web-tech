@@ -26,6 +26,7 @@
         "@shikijs/rehype": "^4.0.2",
         "@tailwindcss/postcss": "catalog:",
         "@types/mdx": "catalog:docs",
+        "@vercel/analytics": "^2.0.1",
         "@web-tech/ui": "workspace:*",
         "@xyflow/react": "catalog:docs",
         "better-auth": "catalog:docs",
