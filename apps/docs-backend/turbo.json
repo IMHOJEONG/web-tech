@@ -1,0 +1,11 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "dev": {
+      "env": ["CONTENT_API_TOKEN", "CONTENT_API_TOKEN_FILE"]
+    },
+    "start": {
+      "env": ["CONTENT_API_TOKEN", "CONTENT_API_TOKEN_FILE"]
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "name": "docs-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "NestJS content API for the HEAP-FORGE docs application",
+  "files": [
+    "dist",
+    "content",
+    "package.json",
+    "README.md"
+  ],
+  "scripts": {
+    "prebuild": "pnpm --filter @web-tech/docs-content-contract build",
+    "build": "nest build",
+    "check": "pnpm lint && pnpm typecheck && pnpm test --runInBand && pnpm test:e2e --runInBand && pnpm build",
+    "dev": "nest start --watch",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"{src,test}/**/*.ts\" --max-warnings 0",
+    "lint:fix": "eslint \"{src,test}/**/*.ts\" --fix",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/src/main.js",
+    "pretest": "pnpm --filter @web-tech/docs-content-contract build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "pretest:e2e": "pnpm --filter @web-tech/docs-content-contract build",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "pretypecheck": "pnpm --filter @web-tech/docs-content-contract build",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@nestjs/common": "catalog:backend",
+    "@nestjs/core": "catalog:backend",
+    "@nestjs/platform-express": "catalog:backend",
+    "@web-tech/docs-content-contract": "workspace:*",
+    "dotenv": "^17.4.2",
+    "gray-matter": "catalog:docs",
+    "markdown-it": "^14.1.0",
+    "reflect-metadata": "catalog:backend",
+    "rxjs": "catalog:backend",
+    "yaml": "^2.8.3",
+    "zod": "^4.4.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "catalog:",
+    "@eslint/js": "catalog:",
+    "@nestjs/cli": "catalog:backend",
+    "@nestjs/schematics": "catalog:backend",
+    "@nestjs/testing": "catalog:backend",
+    "@types/express": "catalog:backend",
+    "@types/jest": "catalog:backend",
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "catalog:",
+    "@types/supertest": "catalog:backend",
+    "@web-tech/eslint-config": "workspace:*",
+    "@web-tech/typescript-config": "workspace:*",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "catalog:backend",
+    "globals": "catalog:backend",
+    "jest": "catalog:backend",
+    "prettier": "catalog:",
+    "source-map-support": "catalog:backend",
+    "supertest": "catalog:backend",
+    "ts-jest": "catalog:backend",
+    "ts-loader": "catalog:backend",
+    "ts-node": "catalog:backend",
+    "tsconfig-paths": "catalog:backend",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:backend"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
