@@ -33,6 +33,8 @@ assets: content/assets/{channel}/{slug}/...
 
 따라서 `web/event-loop.md` 안의 `./diagram.webp`는 `web/diagram.webp`가 아니라 `web/event-loop/diagram.webp`로 해석해야 한다. 현재 구현은 의도한 동작이며, 이를 회귀 테스트와 코드 주석으로 고정했다.
 
+추가 확인 결과 backend repository는 실제 파일 `content/posts/web/event-loop.md`를 읽을 때 확장자와 content root를 제거한 `web/event-loop`만 `markdownPath`로 전달한다. 혼동을 줄이기 위해 resolver의 인자 이름도 `documentAssetNamespace`로 변경했다. `posix.dirname()`을 적용하면 결과가 `web/diagram.webp`가 되어 오히려 저장소의 asset 배치 계약을 위반한다.
+
 ## 고려사항
 
 CodeRabbit의 docstring coverage 80% 제안은 현재 저장소의 CI 품질 게이트가 아니다. 모든 함수에 형식적인 주석을 추가하면 유지보수 비용과 코드 잡음이 커질 수 있어 이번 PR에서는 적용하지 않는다. 공개 API, 보안 경계, 복잡한 계약처럼 이름과 타입만으로 의도가 드러나지 않는 곳에만 설명을 추가하는 정책이 더 적합하다.

@@ -5,7 +5,7 @@ const ABSOLUTE_URL_PATTERN = /^[a-z][a-z\d+.-]*:/i;
 export function resolveAssetUrl(
   reference: string,
   assetBaseUrl: string,
-  markdownPath?: string,
+  documentAssetNamespace?: string,
 ): string {
   const value = reference.trim();
 
@@ -13,10 +13,11 @@ export function resolveAssetUrl(
     return value;
   }
 
-  // `./` targets the channel/slug asset namespace defined by the content contract.
+  // This is intentionally not filesystem-relative: `./` maps to the
+  // `assets/{channel}/{slug}` namespace paired with `posts/{channel}/{slug}.md`.
   const rootRelativePath =
-    value.startsWith('./') && markdownPath
-      ? posix.join(markdownPath, value)
+    value.startsWith('./') && documentAssetNamespace
+      ? posix.join(documentAssetNamespace, value)
       : value.replace(/^\/+/, '');
   const normalizedPath = posix.normalize(rootRelativePath);
 
