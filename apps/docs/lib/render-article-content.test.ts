@@ -125,7 +125,7 @@ test('renderArticleContent keeps sanitized remote html safe while highlighting e
     )
     assert.match(
         rendered.content,
-        /<img src="https:\/\/assets\.heap-forge\.app\/safe\.webp" alt="safe">/
+        /<img src="https:\/\/assets\.heap-forge\.app\/safe\.webp" alt="safe" \/>/
     )
     assert.match(rendered.content, /mdx-code-token--tag">script/)
     assert.match(rendered.content, /alert\(&quot;code&quot;\)/)
