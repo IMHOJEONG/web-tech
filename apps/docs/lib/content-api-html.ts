@@ -1,74 +1,5 @@
-import sanitizeHtml from 'sanitize-html'
 import type { ContentFormat } from '~/lib/content-api-types'
-
-const ALLOWED_REMOTE_HTML_TAGS = [
-    'a',
-    'abbr',
-    'article',
-    'aside',
-    'b',
-    'blockquote',
-    'br',
-    'caption',
-    'code',
-    'col',
-    'colgroup',
-    'dd',
-    'del',
-    'details',
-    'div',
-    'dl',
-    'dt',
-    'em',
-    'figcaption',
-    'figure',
-    'h1',
-    'h2',
-    'h3',
-    'h4',
-    'h5',
-    'h6',
-    'hr',
-    'i',
-    'img',
-    'ins',
-    'li',
-    'mark',
-    'ol',
-    'p',
-    'picture',
-    'pre',
-    'section',
-    'small',
-    'source',
-    'span',
-    'strong',
-    'sub',
-    'summary',
-    'sup',
-    'table',
-    'tbody',
-    'td',
-    'tfoot',
-    'th',
-    'thead',
-    'tr',
-    'u',
-    'ul',
-] as const
-
-const ALLOWED_REMOTE_HTML_ATTRIBUTES: Record<string, string[]> = {
-    '*': ['aria-*', 'class', 'data-*', 'dir', 'id', 'lang', 'role', 'title'],
-    a: ['href', 'name', 'rel', 'target'],
-    img: ['alt', 'height', 'loading', 'src', 'srcset', 'width'],
-    pre: ['style', 'tabindex'],
-    code: ['style'],
-    source: ['media', 'sizes', 'src', 'srcset', 'type'],
-    span: ['style'],
-    td: ['colspan', 'rowspan'],
-    th: ['colspan', 'rowspan', 'scope'],
-    col: ['span', 'width'],
-}
+import { sanitizeRemoteHtml } from './remote-html-sanitizer.ts'
 
 function inferContentFormat(
     content: string,
@@ -100,34 +31,6 @@ function promoteImageCaptionParagraph(content: string) {
         (_match, imageTag: string, caption: string) =>
             `<figure>${imageTag}<figcaption>${caption.trim()}</figcaption></figure>`
     )
-}
-
-function sanitizeRemoteHtml(content: string) {
-    return sanitizeHtml(content, {
-        allowedTags: [...ALLOWED_REMOTE_HTML_TAGS],
-        allowedAttributes: ALLOWED_REMOTE_HTML_ATTRIBUTES,
-        disallowedTagsMode: 'discard',
-        allowedSchemes: ['http', 'https', 'mailto', 'ftp'],
-        allowedSchemesAppliedToAttributes: ['href', 'src', 'srcset'],
-        allowProtocolRelative: false,
-        parser: {
-            lowerCaseAttributeNames: true,
-        },
-        transformTags: {
-            a: (tagName, attribs) => {
-                const sanitizedAttribs = { ...attribs }
-
-                if (sanitizedAttribs.target === '_blank') {
-                    sanitizedAttribs.rel = 'noopener noreferrer'
-                }
-
-                return {
-                    tagName,
-                    attribs: sanitizedAttribs,
-                }
-            },
-        },
-    })
 }
 
 export function normalizeRemoteContent(
