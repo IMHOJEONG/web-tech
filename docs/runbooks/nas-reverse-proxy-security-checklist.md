@@ -2,11 +2,11 @@
 
 ## Purpose
 
-이 문서는 NAS 역방향 프록시를 통해 `FastAPI` 또는 콘텐츠 endpoint를 외부에 공개할 때 확인해야 할 보안 기준을 정리합니다.
+이 문서는 NAS 역방향 프록시를 통해 내부 콘텐츠 API를 외부에 공개할 때 확인해야 할 보안 기준을 정리합니다. 현재 기준 구현은 `apps/docs-backend` NestJS이며, 상세 배포 명령은 `docs-backend-nas-deployment.md`를 따른다.
 
 대상 시나리오:
 
-- NAS 내부에서 Docker로 `FastAPI` 실행
+- NAS 내부에서 Docker로 NestJS content API 실행
 - NAS 역방향 프록시 또는 NAS가 노출하는 80/443 포트를 통해 외부 도메인 연결
 - `apps/docs`가 해당 콘텐츠 endpoint를 읽는 구조
 
@@ -19,7 +19,7 @@
 
 1. 외부 클라이언트
 2. NAS reverse proxy
-3. 내부 HTTP 서비스 (`FastAPI`, content API)
+3. 내부 HTTP 서비스 (`apps/docs-backend`)
 
 즉:
 
@@ -58,7 +58,7 @@
 
 ### Strongly Consider Disabling
 
-FastAPI 기본 문서 경로는 운영에서 열지 않는 편이 안전하다.
+이전 FastAPI를 함께 운영한다면 기본 문서 경로는 외부에 열지 않는다. 현재 NestJS 앱은 Swagger/OpenAPI route를 등록하지 않는다.
 
 - `/docs`
 - `/redoc`
@@ -87,7 +87,7 @@ FastAPI 기본 문서 경로는 운영에서 열지 않는 편이 안전하다.
 ### Recommended
 
 - NAS reverse proxy만 외부 개방
-- FastAPI 컨테이너는 내부 포트만 사용
+- API 컨테이너는 loopback 또는 내부 컨테이너 network만 사용
 - 컨테이너 포트를 NAS 외부에 직접 publish 하지 않기
 
 예:
@@ -181,7 +181,7 @@ FastAPI 기본 문서 경로는 운영에서 열지 않는 편이 안전하다.
 ## Quick Checklist
 
 - [ ] 외부에는 NAS reverse proxy만 노출되어 있는가
-- [ ] FastAPI/API 컨테이너가 외부 포트로 직접 열려 있지 않은가
+- [ ] API 컨테이너가 외부 포트로 직접 열려 있지 않은가
 - [ ] HTTPS가 강제되는가
 - [ ] 인증서 갱신 경로가 준비되어 있는가
 - [ ] 공개 path가 `GET /api/posts`, `GET /posts/*` 수준으로 최소화되어 있는가
@@ -214,6 +214,7 @@ FastAPI 기본 문서 경로는 운영에서 열지 않는 편이 안전하다.
 
 ## Related Docs
 
-- [docs-content-authoring-pipeline.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-pipeline.md)
-- [blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
-- [docs-env-checklist.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/docs-env-checklist.md)
+- [docs-content-authoring-pipeline.md](../architecture/docs-content-authoring-pipeline.md)
+- [blog-content-api-contract.md](../architecture/blog-content-api-contract.md)
+- [docs-env-checklist.md](docs-env-checklist.md)
+- [docs-backend-nas-deployment.md](docs-backend-nas-deployment.md)

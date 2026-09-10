@@ -1,9 +1,12 @@
+import {
+    editorialStatusSchema,
+    LEAF_SLUG_PATTERN,
+    type EditorialStatus,
+} from '@web-tech/docs-content-contract'
 import { z } from 'zod'
 
-export const LEAF_SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
-export const editorialStatusSchema = z.enum(['draft', 'published', 'archived'])
-
-export type EditorialStatus = z.infer<typeof editorialStatusSchema>
+export { editorialStatusSchema, LEAF_SLUG_PATTERN }
+export type { EditorialStatus }
 
 export type LocalDocFrontmatterInput = {
     id?: string | number | undefined

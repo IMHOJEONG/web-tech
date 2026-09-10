@@ -210,14 +210,30 @@
 - `components/app-sidebar`, `components/content-hub`, `components/hero`는 legacy 분류에서 빠진다.
 - 사용되지 않던 `components/app-sidebar/top-bar.css`는 제거한다.
 
+## Completed Sixth Pass
+
+이번 6차 정리에서 실제 폴더 구조와 FSD 문서의 불일치를 다시 점검했다.
+
+- `apps/docs/shared/config/fonts.ts`
+  - 전역 폰트 설정은 화면 조합 UI가 아니라 앱 전역 config 성격이 강하므로 `shared/config`로 이동했다.
+  - `Pretendard`, `Space Grotesk`, `JetBrains Mono` 정의를 한 파일에서 관리한다.
+- `apps/docs/components/category/main-category.tsx`
+  - import되지 않는 빈 legacy 컴포넌트라 제거했다.
+- `apps/docs/components/category/sub-category.tsx`
+  - import되지 않는 빈 legacy 컴포넌트라 제거했다.
+
+이 변경으로:
+
+- `apps/docs/components` 아래에 남아 있던 실제 런타임 import가 제거되었다.
+- `app/layout.tsx`는 font config를 조합하는 얇은 layout entry에 더 가까워졌다.
+- 새 코드가 `components`로 돌아가는 흐름을 막고, `shared/config`, `entities`, `features`, `widgets` 기준을 더 명확히 했다.
+
 ## Immediate Next Candidates
 
 다음 리팩터링 후보는 아래와 같습니다.
 
-- `apps/docs/components/react-flow/*`
-  - `home-hero` 전용 시각화 보조 UI인지, 독립 widget인지 분리 기준 검토
-- `apps/docs/components/layout/*`
-  - 남아 있는 파일이 있다면 shared/layout 또는 widget 보조 레이어로 재배치 검토
+- `apps/docs/widgets/*` 내부의 data adapter / presentational UI 분리 기준 점검
+- `apps/docs/shared/ui`에 들어간 UI가 실제 범용 primitive인지, 특정 widget 보조 UI인지 재확인
 
 ## Non-Goals
 
