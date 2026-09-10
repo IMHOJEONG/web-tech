@@ -92,3 +92,23 @@ test('missing status, invalid slug, invalid updatedAt, and invalid readMinutes a
         'topicLabel is required for published content',
     ])
 })
+
+test('calendar dates must exist and use YYYY-MM-DD', () => {
+    const issues = getFrontmatterIssues({
+        title: 'Bad date',
+        slug: 'bad-date',
+        summary: 'Summary',
+        date: '2026-02-30',
+        updatedAt: '2026/09/09',
+        authorName: 'HoJeong Im',
+        authorRole: 'Web Engineer',
+        readMinutes: 3,
+        topicLabel: 'WEB',
+        status: 'published',
+    })
+
+    assert.deepEqual(issues, [
+        'date must be a valid date string',
+        'updatedAt must be a valid date string when provided',
+    ])
+})

@@ -295,10 +295,22 @@ export function stripHtmlToText(content: string) {
         .trim()
 }
 
+function decodeCodeHtmlEntities(value: string) {
+    return value
+        .replace(/&lt;/gi, '<')
+        .replace(/&gt;/gi, '>')
+        .replace(/&quot;/gi, '"')
+        .replace(/&#39;/gi, "'")
+        .replace(/&apos;/gi, "'")
+        .replace(/&amp;/gi, '&')
+}
+
 export function stripHtmlToCodeText(content: string) {
-    return removeDangerousBlocks(content)
+    const codeText = removeDangerousBlocks(content)
         .replace(/<[^>]*>/g, '')
         .replace(/\u00a0/g, ' ')
         .replace(/\r\n?/g, '\n')
         .trim()
+
+    return decodeCodeHtmlEntities(codeText)
 }
