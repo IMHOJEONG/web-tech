@@ -1,0 +1,55 @@
+services:
+  docs-backend:
+    image: ${DOCS_BACKEND_IMAGE:-heap-forge/docs-backend:local}
+    build:
+      context: ../..
+      dockerfile: apps/docs-backend/Dockerfile
+    init: true
+    environment:
+      CONTENT_API_TOKEN_FILE: /run/secrets/content_api_token
+      CONTENT_ASSET_BASE_URL: ${CONTENT_ASSET_BASE_URL:-}
+      CONTENT_DIR: /app/content/posts
+      NODE_ENV: production
+      PORT: 8000
+    ports:
+      - '${DOCS_BACKEND_BIND_ADDRESS:-127.0.0.1}:${DOCS_BACKEND_PORT:-8000}:8000'
+    volumes:
+      - '${DOCS_CONTENT_PATH:-./content/posts}:/app/content/posts:ro'
+    secrets:
+      - content_api_token
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:8000/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: unless-stopped
+    stop_grace_period: 15s
+    networks:
+      - docs-backend-private
+
+secrets:
+  content_api_token:
+    file: ${DOCS_CONTENT_TOKEN_FILE:-./secrets/content_api_token}
+
+networks:
+  docs-backend-private:
+    driver: bridge
