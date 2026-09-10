@@ -39,6 +39,27 @@ test('renderArticleContent normalizes remote html code blocks to shared code fra
     assert.match(rendered.content, /mdx-code-token--number">42/)
 })
 
+test('renderArticleContent decodes remote html entities inside code blocks before highlighting', async () => {
+    const rendered = await renderArticleContent({
+        contentFormat: 'html',
+        content: `
+            <h2>Browser permissions</h2>
+            <pre><code class="language-tsx">const [state, setState] = React.useState&lt;BrowserPermissionState&gt;(BROWSER_PERMISSION_STATE.PROMPT);
+
+React.useEffect(() =&gt; {
+  return state;
+}</code></pre>
+        `,
+    })
+
+    assert.equal(rendered.mode, 'html')
+    assert.match(rendered.content, /React\.useState/)
+    assert.match(rendered.content, /BrowserPermissionState/)
+    assert.match(rendered.content, /\(\) =&gt; \{/)
+    assert.doesNotMatch(rendered.content, /&amp;lt;BrowserPermissionState/)
+    assert.doesNotMatch(rendered.content, /&amp;gt;/)
+})
+
 test('renderArticleContent normalizes remote html tables and blockquotes to shared article contract', async () => {
     const rendered = await renderArticleContent({
         contentFormat: 'html',
@@ -104,7 +125,7 @@ test('renderArticleContent keeps sanitized remote html safe while highlighting e
     )
     assert.match(
         rendered.content,
-        /<img src="https:\/\/assets\.heap-forge\.app\/safe\.webp" alt="safe">/
+        /<img src="https:\/\/assets\.heap-forge\.app\/safe\.webp" alt="safe" \/>/
     )
     assert.match(rendered.content, /mdx-code-token--tag">script/)
     assert.match(rendered.content, /alert\(&quot;code&quot;\)/)

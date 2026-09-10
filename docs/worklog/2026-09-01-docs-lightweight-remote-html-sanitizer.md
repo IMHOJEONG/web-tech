@@ -1,5 +1,7 @@
 # Docs Lightweight Remote HTML Sanitizer
 
+> Superseded on 2026-09-10: PR #30 CodeQL 검사에서 정규식 기반 다중 문자 제거가 HTML element injection으로 이어질 수 있다는 지적을 받아 이 결정을 폐기했다. 현재 정책은 parser 기반 `sanitize-html` allowlist이며, 상세 내용은 `docs/worklog/2026-09-10-pr-30-html-sanitizer-security.md`를 따른다.
+
 ## Context
 
 Vercel SSR에서 `postcss` external module load 중 `nanoid@6` ESM/CJS 충돌이 발생했다.

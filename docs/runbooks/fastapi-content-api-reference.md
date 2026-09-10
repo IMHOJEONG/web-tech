@@ -1,5 +1,7 @@
 # FastAPI Content API Reference
 
+> Legacy reference: 신규 운영 구현은 `apps/docs-backend` NestJS와 `packages/docs-content-contract`를 기준으로 한다. 이 문서는 기존 FastAPI sidecar를 이관하거나 비교할 때만 사용한다.
+
 ## Purpose
 
 `apps/docs`가 읽는 원격 콘텐츠 서버를 `FastAPI + markdown files` 기반으로 운영할 때 필요한 최소 구성을 정리한다.

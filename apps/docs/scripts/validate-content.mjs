@@ -2,8 +2,13 @@ import fs from 'fs/promises'
 import path from 'path'
 import process from 'node:process'
 import { fileURLToPath, pathToFileURL } from 'url'
+import {
+    EDITORIAL_STATUSES,
+    LEAF_SLUG_PATTERN,
+    contentDateSchema,
+    editorialStatusSchema,
+} from '@web-tech/docs-content-contract'
 
-const LEAF_SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 const NON_PUBLIC_STATUSES = new Set(['draft', 'archived'])
 const DOCS_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const CONTENT_DIRECTORIES = ['data', 'category'].map((directory) =>
@@ -129,7 +134,7 @@ export async function collectMarkdownFiles(directory) {
 }
 
 export function isValidDateString(value) {
-    return typeof value === 'string' && value.trim() && Number.isFinite(Date.parse(value))
+    return contentDateSchema.safeParse(value).success
 }
 
 export function normalizeStatus(value) {
@@ -139,15 +144,9 @@ export function normalizeStatus(value) {
         return undefined
     }
 
-    if (
-        normalizedValue === 'draft' ||
-        normalizedValue === 'published' ||
-        normalizedValue === 'archived'
-    ) {
-        return normalizedValue
-    }
+    const result = editorialStatusSchema.safeParse(normalizedValue)
 
-    return '__invalid__'
+    return result.success ? result.data : '__invalid__'
 }
 
 export function isPositiveInteger(value) {
@@ -171,7 +170,7 @@ export function getFrontmatterIssues(frontmatter) {
     if (frontmatter.status == null || frontmatter.status === '') {
         issues.push('status is required')
     } else if (status === '__invalid__') {
-        issues.push('status must be draft, published, or archived')
+        issues.push(`status must be ${EDITORIAL_STATUSES.join(', ')}`)
     }
 
     if (!title) {

@@ -61,6 +61,10 @@ function normalizeCodeLanguage(value: string) {
         .replace(/^-+|-+$/g, '')
 }
 
+function createCodePreview(value: string) {
+    return value.slice(0, 240)
+}
+
 function normalizeRemoteCodeBlocks(content: string) {
     return content.replace(
         /<pre([^>]*)>\s*<code([^>]*)>([\s\S]*?)<\/code>\s*<\/pre>/gi,
@@ -70,6 +74,21 @@ function normalizeRemoteCodeBlocks(content: string) {
             )
             const normalizedLanguage = normalizeCodeLanguage(language) || 'code'
             const code = toCodeText(innerHtml)
+
+            if (process.env.NODE_ENV !== 'production') {
+                console.info('[docs] remote code block normalized', {
+                    language: normalizedLanguage,
+                    beforePreview: createCodePreview(innerHtml),
+                    afterPreview: createCodePreview(code),
+                    beforeHasHtmlEntities: /&(?:amp|lt|gt|quot|#39);/i.test(
+                        innerHtml
+                    ),
+                    afterHasHtmlEntities: /&(?:amp|lt|gt|quot|#39);/i.test(
+                        code
+                    ),
+                })
+            }
+
             const highlightedCode = highlightCode(code, normalizedLanguage)
             const languageLabel = escapeAttribute(
                 normalizedLanguage.toUpperCase()

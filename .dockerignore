@@ -2,6 +2,11 @@
 .github
 .turbo
 .DS_Store
+**/.env
+**/.env.*
+**/*.log
+**/*.pem
+**/secrets
 
 **/node_modules
 **/dist
@@ -12,3 +17,4 @@
 
 apps/docs/.next
 apps/docs/out
+apps/docs-backend/content
