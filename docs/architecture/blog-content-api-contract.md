@@ -2,81 +2,78 @@
 
 ## Purpose
 
-`apps/docs`는 블로그 콘텐츠를 2단계로 가져온다.
+`apps/docs`와 `apps/docs-backend` 사이의 목록, 상세 본문, 인증, 콘텐츠 metadata 계약을 정의한다. 실행 가능한 단일 기준은 `packages/docs-content-contract`이며, 문서와 구현이 다르면 공유 패키지의 스키마를 우선한다.
 
-1. 목록 API에서 메타데이터를 조회한다.
-2. 개별 본문 API에서 HTML 본문을 조회한다.
+기존 FastAPI 문서는 이관 참고 자료일 뿐 신규 운영 기준이 아니다.
 
-이 문서는 프론트와 백엔드가 맞춰야 하는 최소 계약을 정리한다.
+## Ownership
 
-## Current Flow
+- `packages/docs-content-contract`: channel, status, route, 날짜, frontmatter, 목록 응답 스키마
+- `apps/docs-backend`: Markdown 읽기, published 필터, baseline HTML 렌더링, Bearer 인증
+- `apps/docs`: legacy payload 호환, 목록 조합, HTML sanitize/normalize, syntax highlighting, UI
+- NAS reverse proxy: TLS 종료, 공개 host/path 제한, rate limit과 접근 로그
 
-### List API
+## Routes
 
-- `GET /api/posts`
+허용 channel은 `feed`, `web`, `mobile`, `ui-ux`다.
 
-역할:
+```txt
+Markdown file  content/posts/{channel}/{slug}.md
+Public route   /docs/{channel}/{slug}
+List API       GET /api/posts
+Body API       GET /posts/{channel}/{slug}
+```
 
-- 피드, 목록, 검색용 메타데이터 제공
-- 본문 전체를 포함하지 않아도 됨
+`slug`는 lowercase kebab-case leaf slug이며 중첩 경로를 허용하지 않는다. `markdownPath`는 `{channel}/{slug}`이고 API `id`와 같은 값을 사용한다.
 
-### Body API
+## Authentication
 
-- `GET /posts/{markdownPath}`
+`/health`를 제외한 content endpoint는 다음 헤더가 필요하다.
 
-역할:
+```http
+Authorization: Bearer <shared-secret>
+```
 
-- 개별 문서의 렌더링된 HTML 본문 제공
+- 프론트 서버의 `BLOG_CONTENT_API_TOKEN`과 백엔드의 `CONTENT_API_TOKEN` 값은 같다.
+- NAS Compose에서는 `CONTENT_API_TOKEN_FILE`로 Docker secret을 읽는다.
+- 토큰은 `NEXT_PUBLIC_*` 환경 변수나 브라우저 응답에 포함하지 않는다.
+- 인증 실패는 원인을 구분해 노출하지 않고 `401 Unauthorized`로 통일한다.
 
-## Endpoint Selection
+## Published Frontmatter
 
-프론트는 현재 한 번에 하나의 endpoint만 선택해서 사용한다.
+`published` 문서는 아래 필드를 모두 명시한다. 백엔드는 읽기 시간, 작성자, topic, 수정일을 추론하지 않는다.
 
-우선순위:
+```yaml
+---
+title: Event Loop
+slug: event-loop
+summary: 브라우저 이벤트 루프의 실행 순서를 정리합니다.
+date: 2026-09-09
+updatedAt: 2026-09-09
+status: published
+authorName: HoJeong Im
+authorRole: Web Engineer
+readMinutes: 4
+topicLabel: WEB
+thumbnail: web/event-loop/thumbnail.webp
+tags:
+  - javascript
+  - browser
+---
+```
 
-1. `BLOG_CONTENT_API_BASE_URL_PUBLIC`
-2. `BLOG_CONTENT_API_BASE_URL_INTERNAL`
-3. `BLOG_CONTENT_API_BASE_URL`
+규칙:
 
-본문 endpoint도 같은 방식으로 선택한다.
+- `date`, `updatedAt`: 실제 존재하는 `YYYY-MM-DD`
+- `slug`: 파일명과 일치하는 lowercase kebab-case
+- `readMinutes`: 양의 정수
+- `tags`: 문자열 배열이며 빈 배열 허용
+- `thumbnail`: 선택 필드이며 상대 경로 또는 절대 URL
+- `status`: `draft`, `published`, `archived`; API는 `published`만 노출
 
-1. `BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC`
-2. `BLOG_CONTENT_MARKDOWN_BASE_URL_INTERNAL`
-3. `BLOG_CONTENT_MARKDOWN_BASE_URL`
+## List API
 
-즉 `PUBLIC`과 `INTERNAL`이 동시에 있어도 둘 다 시도하지 않고, 더 우선순위가 높은 하나만 사용한다.
-
-이렇게 하면:
-
-- 인증 실패 후 내부망 주소까지 연쇄 호출되는 문제를 줄이고
-- 로그 해석이 쉬워지고
-- 배포 환경에서 실제로 사용할 endpoint가 더 분명해진다.
-
-## Server-to-Server Auth
-
-`apps/docs`가 다른 곳에 배포되어 있고, 콘텐츠 source endpoint를 브라우저 직접 접근에서는 막고 싶다면 `server-to-server` 인증을 붙이는 것이 권장된다.
-
-권장 방식:
-
-- `Authorization: Bearer <shared-secret>`
-
-프론트 동작:
-
-- `apps/docs` 서버 fetch에서만 토큰을 보낸다
-- 브라우저에는 토큰을 절대 내려주지 않는다
-
-백엔드 기대 동작:
-
-- 올바른 토큰이 없으면 `401 Unauthorized` 또는 `403 Forbidden`
-- 토큰이 맞을 때만 `/api/posts`, `/posts/{markdownPath}` 응답
-
-현재 `apps/docs`는 `BLOG_CONTENT_API_TOKEN`이 있으면 목록 API와 본문 API 양쪽에 같은 Bearer 토큰을 붙인다.
-
-## Recommended Contract
-
-### 1. List API
-
-#### Request
+### Request
 
 ```http
 GET /api/posts
@@ -84,129 +81,48 @@ Accept: application/json
 Authorization: Bearer <shared-secret>
 ```
 
-#### Response
+### Canonical Response
 
 ```json
 {
   "results": [
     {
-      "id": "test",
-      "slug": "test",
-      "title": "Test",
-      "summary": "테스트 문서",
-      "date": "2026-05-01",
-      "thumbnail": "web/test/thumbnail.webp",
-      "markdownPath": "web/test"
+      "id": "web/event-loop",
+      "markdownPath": "web/event-loop",
+      "slug": "event-loop",
+      "title": "Event Loop",
+      "summary": "브라우저 이벤트 루프의 실행 순서를 정리합니다.",
+      "date": "2026-09-09",
+      "updatedAt": "2026-09-09",
+      "status": "published",
+      "authorName": "HoJeong Im",
+      "authorRole": "Web Engineer",
+      "readMinutes": 4,
+      "topicLabel": "WEB",
+      "thumbnail": "https://assets.heap-forge.app/web/event-loop/thumbnail.webp",
+      "tags": ["javascript", "browser"]
     }
   ]
 }
 ```
 
-#### Required fields
+`apps/docs-backend`는 반환 직전에 `canonicalPostsPayloadSchema`로 응답을 검증한다. 잘못된 개별 파일은 목록에서 제외하고 서버 로그에 경로와 검증 실패를 남긴다.
 
-- `id`
-  - 문자열 또는 숫자
-  - 내부 식별자
-- `markdownPath`
-  - 본문 HTML을 조회할 때 사용할 경로 값
-  - 단일 파일명보다 `web/test`, `ui-ux/blocked-aria-hidden`, `mobile/sample`처럼 채널/섹션을 포함한 상대 경로를 권장
+## Legacy Input Compatibility
 
-#### Strongly recommended fields
+`apps/docs`는 이관 기간 동안 배열, `{items: []}`, `{results: []}` 형태와 snake_case alias를 계속 읽을 수 있다. 이 규칙은 기존 원격 서버를 읽기 위한 호환 계층이며, 새 NestJS 출력 규격을 느슨하게 만드는 근거로 사용하지 않는다.
 
-- `slug`
-  - leaf slug 용도로 권장
-  - channel prefix를 다시 포함하지 않는 편이 좋음
-  - 예: `slug: "pna"` + `markdownPath: "feed/pna"`
-- `title`
-  - 목록 카드/페이지 제목에 필요
-- `summary`
-  - 피드 카드 요약 문구
-- `date`
-  - 정렬/노출용
+## Body API
 
-#### Optional fields
-
-- `thumbnail`
-- 상대 경로를 써도 된다.
-  - 예: `web/test/thumbnail.webp`
-  - frontend는 원격 콘텐츠 asset base URL을 기준으로 절대 URL로 해석할 수 있어야 한다.
-- `thumbnailUrl`
-- `thumbnail_url`
-- `fileName`
-- `path`
-- `author`
-- `authorName`
-- `author_role`
-- `authorRole`
-- `role`
-- `read_minutes`
-- `readMinutes`
-- `read_time`
-- `readTime`
-- `reading_time`
-- `readingTime`
-- `topic`
-- `topic_label`
-- `topicLabel`
-- `section_label`
-- `sectionLabel`
-- `updatedAt`
-- `tags`
-- `status`
-
-프론트는 현재 일부 fallback을 갖고 있지만, 운영용으로는 `slug`, `title`, `summary`, `markdownPath`를 명시적으로 주는 것을 권장한다.
-추가로 피드/허브에서 더 풍부한 메타를 보여주고 싶다면 `authorName`, `authorRole`, `readMinutes`, `topicLabel`까지 함께 주는 편이 좋다.
-
-## Recommended Editorial Metadata
-
-권장 운영 필드:
-
-- `id`
-  - 전역 유일 식별자
-  - `markdownPath`와 같은 값 권장
-- `slug`
-  - leaf slug
-- `markdownPath`
-  - `channel/slug` 구조
-- `updatedAt`
-  - 문서 최신성 신호
-- `tags`
-  - 검색/추천/허브 재사용 가능 토큰
-- `status`
-  - `draft`, `published` 같은 운영 상태
-
-권장 예:
-
-```json
-{
-  "id": "web/rendering-pipeline",
-  "slug": "rendering-pipeline",
-  "title": "Rendering Pipeline",
-  "summary": "브라우저 렌더링 파이프라인을 단계별로 정리한다.",
-  "date": "2026-08-08",
-  "updatedAt": "2026-08-08",
-  "thumbnail": "web/rendering-pipeline/hero.webp",
-  "markdownPath": "web/rendering-pipeline",
-  "authorName": "HoJeong Im",
-  "authorRole": "Web Engineer",
-  "readMinutes": 7,
-  "topicLabel": "WEB",
-  "tags": ["rendering", "browser"],
-  "status": "published"
-}
-```
-
-### 2. Body API
-
-#### Request
+### Request
 
 ```http
-GET /posts/web/test
-Accept: text/html,text/plain;q=0.9,*/*;q=0.8
+GET /posts/web/event-loop
+Accept: text/html
 Authorization: Bearer <shared-secret>
 ```
 
-#### Response
+### Response
 
 ```http
 HTTP/1.1 200 OK
@@ -218,158 +134,30 @@ Content-Type: text/html; charset=utf-8
 <html>
   <body>
     <article>
-      <h1 id="test">Test</h1>
-      <p>본문 내용</p>
+      <h1>Event Loop</h1>
+      <pre><code class="language-tsx">const run = () =&gt; true;</code></pre>
     </article>
   </body>
 </html>
 ```
 
-#### Required behavior
+백엔드는 Markdown을 안전하게 escape한 baseline HTML과 `language-*` 정보만 만든다. Shiki highlighting, copy button, language badge, 최종 sanitize/normalize는 프론트가 담당한다.
 
-- `200 OK` on success
-- HTML 본문 반환
-- `Content-Type: text/html` 권장
+## Error Contract
 
-#### Recommended HTML rules
+- `401`: 토큰 누락 또는 불일치
+- `404`: 존재하지 않음, 비공개 상태, 잘못된 route, 유효하지 않은 published metadata
+- `5xx`: filesystem 또는 예상하지 못한 서버 장애
 
-- 문서 본문은 `<article>` 내부에 감싸기
-- heading에는 가능한 `id` 부여
-- 코드 블록은 서버에서 렌더링 규칙을 통일
+원격 목록/본문 실패는 `apps/docs` 전체 장애로 전파하지 않는다. 로컬 문서가 있으면 로컬 목록과 상세 fallback을 계속 제공한다.
 
-## Supported Payload Shapes
+## Verification
 
-프론트는 현재 아래 목록 응답 shape를 허용한다.
-
-### Shape A
-
-```json
-[
-  {
-    "id": "test",
-    "slug": "test",
-    "title": "Test",
-    "markdownPath": "web/test"
-  }
-]
+```bash
+pnpm --filter @web-tech/docs-content-contract test
+pnpm --filter docs test:content
+pnpm --filter docs test:lib
+pnpm --filter docs-backend test:e2e --runInBand
 ```
 
-### Shape B
-
-```json
-{
-  "items": [
-    {
-      "id": "test",
-      "slug": "test",
-      "title": "Test",
-      "markdownPath": "web/test"
-    }
-  ]
-}
-```
-
-### Shape C
-
-```json
-{
-  "results": [
-    {
-      "id": "test",
-      "slug": "test",
-      "title": "Test",
-      "markdownPath": "web/test"
-    }
-  ]
-}
-```
-
-권장 shape는 `results`를 쓰는 Shape C다.
-
-## Current Frontend Fallbacks
-
-현재 프론트는 테스트 편의를 위해 일부 fallback을 지원한다.
-
-- `slug`가 없으면 `id` 또는 `markdownPath` 파일명에서 유도
-- `title`이 없으면 `slug`를 사람이 읽기 쉬운 텍스트로 변환
-
-예:
-
-```json
-{
-  "results": [
-    {
-      "id": "test",
-      "markdownPath": "test.md"
-    }
-  ]
-}
-```
-
-이 경우 프론트는 대략 다음처럼 보정한다.
-
-- `slug`: `test`
-- `title`: `TEST`
-
-이 fallback은 개발 편의용이다. 운영에서는 명시 필드를 내려주는 편이 안전하다.
-
-## Search Considerations
-
-현재 프론트 검색은 목록 API 메타데이터 기준으로 동작한다.
-
-즉 지금 본문 전체 검색을 하려면 두 가지 중 하나가 필요하다.
-
-1. 목록 API가 `summary` 외에 검색 가능한 텍스트를 더 제공
-2. 백엔드가 별도 검색 API를 제공
-
-권장 방향:
-
-- 간단한 검색: `GET /api/posts?q=keyword`
-- 전문 검색이 필요하면 전용 검색 API 또는 검색 엔진 도입
-
-## Error Handling
-
-### List API failure
-
-- 프론트는 로컬 문서 fallback을 시도할 수 있다.
-- 운영 환경에서는 에러 로깅이 필요하다.
-- 토큰 보호를 쓴다면 `401/403`도 관측 가능한 failure case로 본다.
-
-### Body API failure
-
-- 상세 페이지는 빈 본문이 되지 않도록 `404` 또는 에러 UI로 처리하는 편이 좋다.
-- 장기적으로는 `slug` 기준 상세 메타 API를 두는 것도 고려할 수 있다.
-- 토큰 누락/만료/오타가 있으면 본문 endpoint도 `401/403`가 나므로 read token 관리가 필요하다.
-
-## Recommended Production Contract
-
-### List API
-
-```json
-{
-  "results": [
-    {
-      "id": "test",
-      "slug": "test",
-      "title": "Test",
-      "summary": "테스트 문서",
-      "date": "2026-05-01",
-      "thumbnail": "web/test/thumbnail.webp",
-      "markdownPath": "web/test"
-    }
-  ]
-}
-```
-
-### Body API
-
-- `GET /posts/web/test`
-- `Content-Type: text/html`
-- `<article>...</article>` 포함 HTML 반환
-
-## Follow-up
-
-- TOC 데이터를 백엔드가 같이 내려줄지 여부
-- heading id를 서버에서 항상 보장할지 여부
-- 본문 HTML sanitize 정책을 어디서 담당할지 여부
-- 검색 API를 별도로 둘지 여부
+NAS 배포 검증은 [docs-backend-nas-deployment.md](../runbooks/docs-backend-nas-deployment.md)를 따른다.

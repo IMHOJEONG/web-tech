@@ -11,7 +11,7 @@ const routes = [
     },
     {
         name: 'docs filtered index',
-        path: '/docs?section=web&source=all&sort=latest',
+        path: '/docs?section=web&sort=latest',
     },
     { name: 'feed', path: '/feed' },
     { name: 'web hub', path: '/web' },

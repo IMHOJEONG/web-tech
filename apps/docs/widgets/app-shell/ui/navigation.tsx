@@ -37,7 +37,10 @@ export const Navigation = () => {
     const t = useTranslations('navigation')
 
     return (
-        <div className="hidden min-w-0 items-center gap-3 sm:flex md:gap-5 lg:gap-8">
+        <div
+            data-testid="desktop-navigation"
+            className="hidden min-w-0 items-center gap-3 sm:flex md:gap-5 lg:gap-8"
+        >
             {navigation.map((nav) => {
                 const { href, key, activePrefixes } = nav
                 const isActive = activePrefixes.some(

@@ -14,7 +14,7 @@ Status: fixed on 2026-08-29
 
 ## Decision
 
-현재 `apps/docs`는 `hybrid content model`을 사용한다.
+현재 `apps/docs`는 `hybrid content model`을 사용한다. 원격 콘텐츠 API 구현은 같은 모노레포의 `apps/docs-backend`가 담당한다.
 
 - 로컬 MDX는 사이트의 baseline / evergreen / fallback 콘텐츠를 담당한다.
 - 원격 콘텐츠 API는 배포 없이 추가/수정되는 운영형 블로그 콘텐츠를 담당한다.
@@ -52,6 +52,21 @@ Status: fixed on 2026-08-29
 - 앱 재배포 없이 글을 추가하거나 수정한다.
 - 최신 작업 기록, 실험 기록, 이미지가 많은 문서를 운영한다.
 - 목록 API와 본문 API를 통해 `apps/docs`에 읽기 전용 데이터를 제공한다.
+
+구현 위치:
+
+- 공유 계약: `packages/docs-content-contract`
+- NestJS API: `apps/docs-backend/src`
+- 원격 게시 원본: `apps/docs-backend/content/posts`
+- 배포용 asset 원본 또는 mount 지점: `apps/docs-backend/content/assets`
+- API 계약 테스트: `apps/docs-backend/test`
+
+백엔드와 프론트를 같은 저장소에 두는 이유:
+
+- `markdownPath`, frontmatter, 인증 헤더 변경을 한 PR에서 검증할 수 있다.
+- backend가 생성한 code block HTML을 frontend 정규화 테스트와 함께 관리할 수 있다.
+- 별도 저장소 간 버전 불일치로 목록은 보이지만 상세 렌더링이 깨지는 상황을 줄인다.
+- 배포 단위는 분리하되 변경 이력과 계약은 함께 유지한다.
 
 권장 source 구조:
 
