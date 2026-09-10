@@ -66,6 +66,8 @@ uname -m
 docker info --format '{{.Architecture}}'
 ```
 
+현재 배포 대상 NAS는 `linux/amd64`로 확인됐으며 Compose와 GitHub Actions도 이 platform으로 고정한다.
+
 일반적인 대응 관계:
 
 - `x86_64`: `linux/amd64`
@@ -73,11 +75,27 @@ docker info --format '{{.Architecture}}'
 
 Apple Silicon Docker Desktop에서 별도 platform 없이 만든 local image는 보통 `linux/arm64`다. 이 이미지는 `linux/amd64` NAS에서 직접 실행할 수 없다.
 
-## Publish Multi-Arch Image
+## Automated AMD64 Publish
 
-권장 방식은 `linux/amd64`, `linux/arm64`를 함께 GHCR에 게시하고 NAS가 자신의 architecture에 맞는 manifest를 pull하도록 하는 것이다.
+기본 게시 방식은 `.github/workflows/docs-backend-image.yml`을 사용한다.
 
-로컬에서 GitHub Packages write 권한이 있는 token을 사용한다.
+- pull request: `linux/amd64` build만 검증하고 push하지 않는다.
+- `main` 관련 경로 변경: GHCR에 자동 게시한다.
+- 수동 실행: GitHub Actions의 `Docs Backend Image`에서 `Run workflow`로 선택한 ref를 게시한다.
+
+workflow는 별도의 PAT 대신 repository의 `GITHUB_TOKEN`과 `packages: write` 권한으로 게시한다. 게시되는 image는 다음 형식의 immutable tag를 갖는다.
+
+```txt
+ghcr.io/imhojeong/web-tech-docs-backend:sha-<full-git-sha>
+```
+
+첫 게시 후 GitHub package 설정에서 visibility가 `private`인지 확인하고, package의 Actions access에 이 repository가 연결되어 있는지 확인한다.
+
+## Manual Publish Fallback
+
+GitHub Actions를 사용할 수 없을 때만 로컬에서 NAS와 같은 `linux/amd64` image를 GHCR에 게시한다.
+
+로컬 게시에는 GitHub Packages write 권한이 있는 별도 token을 사용한다. token을 저장소 파일이나 shell history에 직접 기록하지 않는다.
 
 ```bash
 export DOCS_BACKEND_IMAGE=ghcr.io/imhojeong/web-tech-docs-backend
@@ -86,7 +104,7 @@ export DOCS_BACKEND_TAG="sha-$(git rev-parse HEAD)"
 echo "$GHCR_TOKEN" | docker login ghcr.io -u IMHOJEONG --password-stdin
 
 docker buildx build \
-  --platform linux/amd64,linux/arm64 \
+  --platform linux/amd64 \
   --file apps/docs-backend/Dockerfile \
   --tag "${DOCS_BACKEND_IMAGE}:${DOCS_BACKEND_TAG}" \
   --push \
@@ -99,9 +117,10 @@ NAS의 `.env.nas`에는 게시한 immutable image tag를 기록한다.
 
 ```dotenv
 DOCS_BACKEND_IMAGE=ghcr.io/imhojeong/web-tech-docs-backend:sha-<full-git-sha>
+DOCS_BACKEND_PLATFORM=linux/amd64
 ```
 
-NAS에서 image를 받은 뒤 build 없이 실행한다.
+NAS에서 image를 받은 뒤 build 없이 실행한다. NAS token에는 package download에 필요한 `read:packages` 권한만 부여하고 content API token과 재사용하지 않는다.
 
 ```bash
 echo "$GHCR_READ_TOKEN" | docker login ghcr.io -u IMHOJEONG --password-stdin

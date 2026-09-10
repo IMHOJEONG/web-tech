@@ -117,13 +117,13 @@ docker compose --env-file apps/docs-backend/.env.nas.example \
 
 ## Image Distribution Decision
 
-로컬 smoke image는 Apple Silicon Docker Desktop에서 생성되어 `linux/arm64`로 확인됐다. NAS architecture가 `linux/amd64`이면 이 local image를 그대로 전달할 수 없다.
+로컬 smoke image는 Apple Silicon Docker Desktop에서 생성되어 `linux/arm64`였고, 실제 NAS는 `linux/amd64`로 확인됐다. 따라서 기존 local image를 NAS에 그대로 전달할 수 없다.
 
-- 기본 배포 방식은 GHCR multi-arch image pull로 정한다.
-- image platform은 `linux/amd64`, `linux/arm64`를 함께 게시한다.
+- 기본 배포 방식은 GHCR image pull로 정한다.
+- 현재 production image platform은 NAS architecture와 같은 `linux/amd64`로 고정한다.
 - image tag는 mutable한 `latest` 대신 `sha-<git-sha>`를 사용한다.
 - Compose는 `DOCS_BACKEND_IMAGE`로 registry image를 선택한다.
 - NAS에서는 `docker compose pull` 후 `up -d --no-build`로 실행한다.
 - registry를 사용하지 못할 때만 NAS platform으로 단일 image를 build하고 tar archive로 전달한다.
 
-현재 local buildx builder는 `linux/amd64`와 `linux/arm64` build를 모두 지원한다. GHCR publish 자체는 registry 인증 정보가 필요한 운영 작업이므로 별도로 수행한다.
+현재 local buildx builder는 `linux/amd64` build를 지원한다. GHCR publish 자체는 registry 인증 정보가 필요한 운영 작업이므로 별도로 수행한다.

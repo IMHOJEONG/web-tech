@@ -1,6 +1,7 @@
 services:
   docs-backend:
     image: ${DOCS_BACKEND_IMAGE:-heap-forge/docs-backend:local}
+    platform: ${DOCS_BACKEND_PLATFORM:-linux/amd64}
     build:
       context: ../..
       dockerfile: apps/docs-backend/Dockerfile
