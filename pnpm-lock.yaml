@@ -188,6 +188,9 @@ catalogs:
     better-auth:
       specifier: '>=1.6.22'
       version: 1.7.0
+    entities:
+      specifier: ^8.1.0
+      version: 8.1.0
     fast-glob:
       specifier: ^3.3.3
       version: 3.3.3
@@ -468,6 +471,9 @@ importers:
       clsx:
         specifier: 'catalog:'
         version: 2.1.1
+      entities:
+        specifier: catalog:docs
+        version: 8.1.0
       esbuild:
         specifier: ^0.28.1
         version: 0.28.2

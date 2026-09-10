@@ -214,7 +214,7 @@
 
 ## Related Docs
 
-- [docs-content-authoring-pipeline.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-pipeline.md)
-- [blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
-- [docs-env-checklist.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/docs-env-checklist.md)
-- [docs-backend-nas-deployment.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/docs-backend-nas-deployment.md)
+- [docs-content-authoring-pipeline.md](../architecture/docs-content-authoring-pipeline.md)
+- [blog-content-api-contract.md](../architecture/blog-content-api-contract.md)
+- [docs-env-checklist.md](docs-env-checklist.md)
+- [docs-backend-nas-deployment.md](docs-backend-nas-deployment.md)

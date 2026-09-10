@@ -1,3 +1,4 @@
+import { decodeHTML } from 'entities'
 import sanitizeHtml from 'sanitize-html'
 
 const ALLOWED_REMOTE_HTML_TAGS = [
@@ -97,18 +98,25 @@ const PLAIN_TEXT_SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
     disallowedTagsMode: 'discard',
 }
 
-function decodeCommonHtmlEntities(value: string) {
-    return value
-        .replace(/&lt;/gi, '<')
-        .replace(/&gt;/gi, '>')
-        .replace(/&quot;/gi, '"')
-        .replace(/&#39;/gi, "'")
-        .replace(/&apos;/gi, "'")
-        .replace(/&amp;/gi, '&')
+function decodeHtmlEntities(value: string) {
+    let decodedValue = value
+
+    // Remote Markdown may arrive encoded twice after passing through an HTML API.
+    for (let pass = 0; pass < 2; pass += 1) {
+        const nextValue = decodeHTML(decodedValue)
+
+        if (nextValue === decodedValue) {
+            break
+        }
+
+        decodedValue = nextValue
+    }
+
+    return decodedValue
 }
 
 function extractSafeText(content: string) {
-    return decodeCommonHtmlEntities(
+    return decodeHtmlEntities(
         sanitizeHtml(content, PLAIN_TEXT_SANITIZE_OPTIONS)
     )
 }

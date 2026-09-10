@@ -13,6 +13,7 @@ export function resolveAssetUrl(
     return value;
   }
 
+  // `./` targets the channel/slug asset namespace defined by the content contract.
   const rootRelativePath =
     value.startsWith('./') && markdownPath
       ? posix.join(markdownPath, value)

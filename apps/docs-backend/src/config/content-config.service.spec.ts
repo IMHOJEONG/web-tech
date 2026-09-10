@@ -7,10 +7,12 @@ import { ContentConfigService } from './content-config.service';
 describe('ContentConfigService', () => {
   const originalToken = process.env.CONTENT_API_TOKEN;
   const originalTokenFile = process.env.CONTENT_API_TOKEN_FILE;
+  const originalPort = process.env.PORT;
 
   afterEach(() => {
     restoreEnvironment('CONTENT_API_TOKEN', originalToken);
     restoreEnvironment('CONTENT_API_TOKEN_FILE', originalTokenFile);
+    restoreEnvironment('PORT', originalPort);
   });
 
   it('prefers the Docker secret file over the direct environment value', () => {
@@ -32,6 +34,20 @@ describe('ContentConfigService', () => {
     process.env.CONTENT_API_TOKEN = 'local-secret';
 
     expect(new ContentConfigService().contentApiToken).toBe('local-secret');
+  });
+
+  it.each([
+    ['1234junk', 8000],
+    ['0', 8000],
+    ['65536', 8000],
+    ['1.5', 8000],
+    ['  ', 8000],
+    ['65535', 65535],
+    [' 3000 ', 3000],
+  ])('normalizes PORT=%s to %i', (value, expectedPort) => {
+    process.env.PORT = value;
+
+    expect(new ContentConfigService().port).toBe(expectedPort);
   });
 });
 

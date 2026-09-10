@@ -31,6 +31,27 @@ test("accepts archived legacy metadata without publishing it canonically", () =>
   assert.equal(posts?.[0]?.status, "archived");
 });
 
+test("accepts either legacy items or canonical results payloads", () => {
+  const item = {
+    markdownPath: "web/event-loop",
+    slug: "event-loop",
+    title: "Event Loop",
+  };
+
+  assert.deepEqual(parseRemotePostsPayload({ items: [item] }), [item]);
+  assert.deepEqual(parseRemotePostsPayload({ results: [item] }), [item]);
+});
+
+test("rejects ambiguous payloads containing both items and results", () => {
+  assert.equal(
+    parseRemotePostsPayload({
+      items: [{ slug: "legacy", title: "Legacy" }],
+      results: [{ slug: "canonical", title: "Canonical" }],
+    }),
+    null,
+  );
+});
+
 test("validates the NestJS canonical list payload", () => {
   const result = canonicalPostsPayloadSchema.safeParse({
     results: [

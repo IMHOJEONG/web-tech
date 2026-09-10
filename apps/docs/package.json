@@ -37,6 +37,7 @@
         "@xyflow/react": "catalog:docs",
         "better-auth": "catalog:docs",
         "clsx": "catalog:",
+        "entities": "catalog:docs",
         "esbuild": "^0.28.0",
         "fast-glob": "catalog:docs",
         "gray-matter": "catalog:docs",

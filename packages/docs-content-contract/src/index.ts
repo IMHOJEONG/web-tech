@@ -135,8 +135,11 @@ export const remotePayloadSchema = z.union([
       results: z.array(remotePostSchema).optional(),
     })
     .refine(
-      (value) => Array.isArray(value.items) || Array.isArray(value.results),
-      { message: "payload must include items or results array" },
+      (value) =>
+        Number(Array.isArray(value.items)) +
+          Number(Array.isArray(value.results)) ===
+        1,
+      { message: "payload must include exactly one of items or results" },
     ),
 ]);
 

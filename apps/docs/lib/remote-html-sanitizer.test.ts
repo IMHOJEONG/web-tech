@@ -37,6 +37,16 @@ test('sanitizeRemoteHtml keeps the allowlist and rejects unsafe attributes and U
     )
 })
 
+test('sanitizeRemoteHtml emits one safe rel attribute for blank-target links', () => {
+    const sanitized = sanitizeRemoteHtml(
+        '<a href="https://heap-forge.app" target="_blank" rel="opener" rel="external">Safe</a>'
+    )
+
+    assert.equal(sanitized.match(/\brel=/g)?.length, 1)
+    assert.match(sanitized, /rel="noopener noreferrer"/)
+    assert.doesNotMatch(sanitized, /\bopener\b/)
+})
+
 test('plain and code text extraction cannot reconstruct executable markup', () => {
     const craftedHtml = `<scr<!-- -->ipt>alert('text-boundary')</script><strong>Safe</strong>`
 
@@ -48,4 +58,13 @@ test('plain and code text extraction cannot reconstruct executable markup', () =
         assert.doesNotMatch(text, /<!--/)
         assert.match(text, /Safe/)
     }
+})
+
+test('code text extraction decodes named, decimal, hexadecimal, and double-encoded entities', () => {
+    assert.equal(
+        stripHtmlToCodeText(
+            '&lt;main&gt;&#60;span&#62;&#x3c;strong&#x3e;&amp;#60;em&amp;#62;'
+        ),
+        '<main><span><strong><em>'
+    )
 })

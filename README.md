@@ -102,10 +102,12 @@ NestJS 기반의 취약점 수집/정규화 백엔드입니다.
 최초 한 번 `~/.zshrc`에 mise를 활성화합니다.
 
 ```bash
-eval "$(mise activate zsh)"
+grep -qxF 'eval "$(mise activate zsh)"' ~/.zshrc || \
+  echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
+exec zsh
 ```
 
-새 터미널을 연 뒤 저장소에서 프로젝트 설정을 준비합니다.
+이미 같은 설정이 있다면 중복으로 추가하지 않습니다. 활성화된 shell에서 저장소 프로젝트 설정을 준비합니다.
 
 ```bash
 mise trust

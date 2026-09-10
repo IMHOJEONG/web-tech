@@ -3,9 +3,17 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 function parsePort(value: string | undefined): number {
-  const parsed = Number.parseInt(value ?? '', 10);
+  const normalizedValue = value?.trim() ?? '';
 
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : 8000;
+  if (!/^\d+$/.test(normalizedValue)) {
+    return 8000;
+  }
+
+  const parsed = Number(normalizedValue);
+
+  return Number.isInteger(parsed) && parsed >= 1 && parsed <= 65_535
+    ? parsed
+    : 8000;
 }
 
 function readContentApiToken(): string {

@@ -281,17 +281,17 @@ curl --fail \
 
 ## Update And Rollback
 
-업데이트 전 content volume을 별도로 백업한다. 앱 이미지는 immutable하게 다시 build하고 콘텐츠는 read-only volume으로 유지한다.
+업데이트 전 content volume을 별도로 백업한다. 운영에서는 immutable GHCR 이미지를 pull하고 콘텐츠는 read-only volume으로 유지한다.
 
 ```bash
 docker compose \
   --env-file apps/docs-backend/.env.nas \
   -f apps/docs-backend/docker-compose.yml \
-  build --pull docs-backend
+  pull docs-backend
 docker compose \
   --env-file apps/docs-backend/.env.nas \
   -f apps/docs-backend/docker-compose.yml \
-  up -d docs-backend
+  up -d --no-build docs-backend
 ```
 
-문제가 있으면 이전 Git revision에서 이미지를 다시 build한 뒤 재기동한다. token file과 content volume은 이미지 rollback과 분리한다.
+문제가 있으면 `DOCS_BACKEND_IMAGE`를 이전 immutable tag 또는 digest로 되돌린 뒤 같은 명령으로 재기동한다. NAS에서의 source build는 registry를 사용할 수 없는 fallback 절차로만 사용한다. token file과 content volume은 이미지 rollback과 분리한다.
