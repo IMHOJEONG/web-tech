@@ -8,6 +8,7 @@ import {
     getContentApiTimeoutMs,
     getContentRevalidateSeconds,
 } from '~/lib/content-api-config'
+import { REMOTE_CONTENT_CACHE_TAG } from '~/lib/content-cache'
 import { normalizeRemoteContent } from '~/lib/content-api-html'
 import {
     buildRemotePayloadSchemaFailureEvent,
@@ -87,6 +88,7 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
             },
             next: {
                 revalidate: getContentRevalidateSeconds(),
+                tags: [REMOTE_CONTENT_CACHE_TAG],
             },
             throwHttpErrors: false,
             timeout: getContentApiTimeoutMs(),
@@ -176,6 +178,7 @@ async function fetchRemotePostsPayload() {
             },
             next: {
                 revalidate: getContentRevalidateSeconds(),
+                tags: [REMOTE_CONTENT_CACHE_TAG],
             },
             throwHttpErrors: false,
             timeout: getContentApiTimeoutMs(),

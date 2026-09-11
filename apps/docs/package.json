@@ -11,6 +11,7 @@
         "prevalidate:content": "pnpm --filter @web-tech/docs-content-contract build",
         "validate:content": "node ./scripts/validate-content.mjs && node ./scripts/validate-content-style.mjs",
         "pretest:content": "pnpm --filter @web-tech/docs-content-contract build",
+        "revalidate:content-cache": "node ./scripts/revalidate-content-cache.mjs",
         "test:content": "node --test ./scripts/validate-content.test.mjs ./scripts/validate-content-style.test.mjs && pnpm validate:content",
         "test:e2e": "playwright test",
         "check:prod-routes": "node ./scripts/check-prod-routes.mjs",

@@ -245,6 +245,10 @@ BLOG_CONTENT_REVALIDATE_SECONDS=300
 
 즉 현재 `apps/docs`는 기본적으로 ISR 중심으로 동작하도록 정리된 상태다.
 
+원격 문서 발행 직후 반영은 TTL을 제거하지 않고 tag 기반 on-demand
+revalidation을 함께 사용한다. 세부 정책과 운영 절차는
+`docs/architecture/docs-content-cache-revalidation-policy.md`를 따른다.
+
 ## Local / Remote Rendering Convergence
 
 local MDX와 remote HTML/markdown의 렌더링 통일은 `renderer 단일화`보다 `output contract 통일`을 우선한다.
