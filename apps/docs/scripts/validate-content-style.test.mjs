@@ -51,6 +51,41 @@ const value = 1
     ])
 })
 
+test('rejects malformed HTML comments used as writing markers', () => {
+    const issues = getContentStyleIssues(`## 페인트
+
+<!-- 작성중 →
+
+- 각 노드를 화면에 페인팅하는 단계
+`)
+
+    assert.deepEqual(issues.failures, [
+        'line 3: HTML comment is not closed with -->; use frontmatter status: draft for unfinished content',
+    ])
+})
+
+test('rejects valid HTML comments outside code examples', () => {
+    const issues = getContentStyleIssues(`## 페인트
+
+<!-- 작성 중: 예시 보완 필요 -->
+`)
+
+    assert.deepEqual(issues.failures, [
+        'line 3: HTML comments are not allowed; use frontmatter status: draft for unfinished content',
+    ])
+})
+
+test('allows HTML comment syntax inside a fenced code example', () => {
+    const issues = getContentStyleIssues(`## HTML 주석
+
+\`\`\`html
+<!-- 접근성 설명 -->
+\`\`\`
+`)
+
+    assert.deepEqual(issues.failures, [])
+})
+
 test('warns for published placeholder-like content without failing', () => {
     const issues = getContentStyleIssues(
         `---

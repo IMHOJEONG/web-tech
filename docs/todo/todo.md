@@ -64,6 +64,11 @@
   - `published` 문서는 `title`, `slug`, `date`, `summary`를 강제
   - `draft`/`archived`는 공개 목록에서 제외하고 완화된 규칙으로 검증
   - `pnpm --filter docs validate:content`와 `prebuild` 단계에서 같은 기준을 실행
+- [-] `P1` 편집용 문구가 공개 본문에 노출되지 않도록 authoring 검증을 통일한다.
+  - local content validator에서 코드 예제 밖의 HTML 주석과 잘못 닫힌 주석을 hard fail 처리
+  - 문서 상태는 본문 `작성중` 표현이 아니라 frontmatter `status: draft`로 관리
+  - 후속: remote NAS publish pipeline 또는 docs-backend에 같은 body validation 연결
+  - 기준 문서: `docs/architecture/docs-content-authoring-markup-policy.md`
 - [x] `P1` `apps/docs`의 FSD 3차 정리를 진행한다.
   - `shared/layout`, `shared/navigation` 기반 app shell을 `widgets/app-shell`로 이동
   - `app/layout.tsx`는 shell widget을 조합하는 얇은 엔트리로 정리

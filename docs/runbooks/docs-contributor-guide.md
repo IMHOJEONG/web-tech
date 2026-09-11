@@ -121,6 +121,26 @@ status: "draft"
 
 초안이 published로 올라가기 전에는 published 필수 메타를 모두 채운다.
 
+### Unfinished Work Markers
+
+작성 중인 상태는 본문에 `작성중`, `WIP`, `TODO` 같은 편집 메모를 넣어 표현하지 않는다. frontmatter의 `status`가 문서 공개 상태의 유일한 기준이다.
+
+```md
+---
+title: "Rendering Pipeline"
+slug: "rendering-pipeline"
+status: "draft"
+---
+```
+
+HTML 주석도 편집 메모 용도로 사용하지 않는다.
+
+```md
+<!-- 작성 중 -->
+```
+
+remote renderer는 보안을 위해 raw HTML을 비활성화한다. 이 때문에 정상 주석도 화면에 문자열로 나타날 수 있고, `<!-- 작성중 →`처럼 `-->`가 아닌 문자로 닫으면 일반 본문으로 노출된다. 독자에게 필요한 안내는 callout으로 작성하고, 작성자용 작업 메모는 이슈나 작업 문서에서 관리한다.
+
 ## Image Ownership
 
 이미지는 성격에 따라 관리 위치를 나눈다.
@@ -188,6 +208,7 @@ status: "draft"
 4. 썸네일/본문 이미지 경로가 깨지지 않는지 확인
 5. heading 구조가 `h2`, `h3` 기준으로 TOC에 자연스럽게 잡히는지 확인
 6. draft 문서를 실수로 published로 바꾸지 않았는지 확인
+7. 본문에 `작성중`, HTML 주석 같은 편집 메모가 남지 않았는지 확인
 
 ## Content Style Rules
 
@@ -203,6 +224,7 @@ Hard fail:
 - 코드 블록은 반드시 닫는다.
 - callout marker는 blockquote의 첫 텍스트로만 사용한다.
 - 지원하지 않는 callout marker를 사용하지 않는다.
+- 본문에 HTML 주석을 사용하지 않는다. 미완성 문서는 `status: draft`로 관리한다.
 
 Warning:
 
@@ -239,6 +261,7 @@ pnpm --filter docs dev
 
 ## Related Docs
 
+- [docs-content-authoring-markup-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-markup-policy.md)
 - [docs-content-authoring-pipeline.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-pipeline.md)
 - [docs-local-vs-remote-content-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-local-vs-remote-content-policy.md)
 - [docs-blog-improvement-roadmap.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-blog-improvement-roadmap.md)
