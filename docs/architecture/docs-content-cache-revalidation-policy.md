@@ -132,4 +132,5 @@ After the explicit publication flow is stable, evaluate these options in order:
 - `docs/architecture/docs-content-rendering-strategy.md`
 - `docs/architecture/docs-content-api-fail-fast-policy.md`
 - `docs/architecture/docs-content-authoring-pipeline.md`
+- `docs/architecture/docs-vercel-platform-operations-policy.md`
 - `docs/runbooks/docs-backend-nas-deployment.md`

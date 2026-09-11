@@ -200,6 +200,19 @@
 
 ## Infra / Tooling
 
+- [-] `P0` `apps/docs` Vercel 운영 보안 기준을 적용한다.
+  - `/api/revalidate/content`에 Production 전용 `5 requests / 60 seconds / IP` WAF rate limit 적용
+  - `BLOG_CONTENT_API_TOKEN`, `BLOG_CONTENT_REVALIDATE_TOKEN`을 Sensitive 환경변수로 관리
+  - Preview-only Vercel Authentication 활성화
+  - Function 실패와 비정상 사용량 alert 구독
+  - Dashboard 설정은 실제 적용 및 검증 전까지 완료로 표시하지 않음
+  - 기준 문서: `docs/architecture/docs-vercel-platform-operations-policy.md`
+- [ ] `P1` `apps/docs` 실사용 성능 계측을 도입한다.
+  - Speed Insights로 LCP, CLS, INP를 Production/Preview 기준으로 측정
+  - 서울 `icn1` Function region은 원격 NAS fetch latency 측정 후 적용 여부 결정
+- [ ] `P2` Vercel 확장 운영 기능의 도입 시점을 재평가한다.
+  - Log Drains, Spend Management, Rolling Releases, Deployment Checks
+  - 현재는 Runtime Logs, GitHub CI, Preview 검증, Instant Rollback을 우선 사용
 - [x] `P0` `docs` remote content 인증/장애 대응 운영 기준을 확정한다.
   - `BLOG_CONTENT_API_TOKEN` / `CONTENT_API_TOKEN`의 교체 주기와 회전 절차(runbook) 정리
   - `401/403`은 인증 실패로 보고 즉시 중단하며 다른 endpoint로 fallback 하지 않는 정책 유지
