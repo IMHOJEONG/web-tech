@@ -48,9 +48,24 @@ chmod 600 apps/docs-backend/secrets/content_api_token
 DOCS_BACKEND_IMAGE=ghcr.io/imhojeong/web-tech-docs-backend:sha-replace-with-git-sha
 DOCS_BACKEND_BIND_ADDRESS=127.0.0.1
 DOCS_BACKEND_PORT=8000
+DOCS_BACKEND_TIMEZONE=Asia/Seoul
 DOCS_CONTENT_PATH=/volume1/docker/heap-forge/content/posts
 DOCS_CONTENT_TOKEN_FILE=/volume1/docker/heap-forge/secrets/content_api_token
 CONTENT_ASSET_BASE_URL=https://assets.heap-forge.app
+```
+
+`DOCS_BACKEND_TIMEZONE`은 Nest runtime 로그의 시간대를 결정한다. NAS 운영 환경에서는 `Asia/Seoul`로 고정하고, 값을 변경한 뒤에는 컨테이너를 다시 생성해야 한다.
+
+```bash
+docker compose \
+  --env-file apps/docs-backend/.env.nas \
+  -f apps/docs-backend/docker-compose.yml \
+  up -d --force-recreate docs-backend
+
+docker compose \
+  --env-file apps/docs-backend/.env.nas \
+  -f apps/docs-backend/docker-compose.yml \
+  exec docs-backend node -e "console.log(new Date().toString())"
 ```
 
 `DOCS_CONTENT_PATH`는 NAS에 존재하는 디렉터리이며 컨테이너에는 read-only로 mount된다. 이미지 파일은 이 API가 직접 제공하지 않으므로 `CONTENT_ASSET_BASE_URL`의 별도 정적 asset origin에 배포해야 한다.
@@ -130,7 +145,7 @@ docker compose \
   -f apps/docs-backend/docker-compose.yml \
   pull docs-backend
 
-docker compose \
+sudo docker compose \
   --env-file apps/docs-backend/.env.nas \
   -f apps/docs-backend/docker-compose.yml \
   up -d --no-build docs-backend
