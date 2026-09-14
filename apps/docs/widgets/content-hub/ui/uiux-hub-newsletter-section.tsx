@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import { UIUX_FALLBACK_IMAGES, type UiUxDoc } from './uiux-hub.types'
 
 export function UiUxHubNewsletterSection({

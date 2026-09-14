@@ -20,8 +20,8 @@ import {
     X,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { Link } from '~/shared/i18n/navigation'
+import { usePathname } from '~/shared/i18n/navigation'
 import { useState } from 'react'
 import { Brand } from '~/shared/ui/brand'
 

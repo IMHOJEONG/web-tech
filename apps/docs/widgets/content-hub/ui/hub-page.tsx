@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import MainCard from '~/entities/document/ui/main-card'
 import { Metadata } from '~/lib/get-document'
 import { getDocHref } from '~/lib/get-doc-route'

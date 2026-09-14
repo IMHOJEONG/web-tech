@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getSearchData } from '~/lib/get-search-data'
+import { locales, localizePath } from '~/shared/i18n/locale-path'
 import {
     getSiteUrl,
     getStaticSitemapEntries,
@@ -47,5 +48,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.65,
     }))
 
-    return dedupeSitemapEntries([...staticEntries, ...localDocEntries])
+    return dedupeSitemapEntries(
+        [...staticEntries, ...localDocEntries].flatMap((entry) => {
+            const pathname = new URL(entry.url).pathname
+            const languages = Object.fromEntries(
+                locales.map((locale) => [
+                    locale,
+                    toAbsoluteSiteUrl(localizePath(pathname, locale), siteUrl),
+                ])
+            )
+            return locales.map((locale) => ({
+                ...entry,
+                url: languages[locale]!,
+                alternates: { languages },
+            }))
+        })
+    )
 }

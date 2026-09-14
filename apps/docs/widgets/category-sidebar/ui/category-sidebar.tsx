@@ -14,7 +14,7 @@ import {
 } from '@web-tech/ui/components/sidebar'
 
 import { cn } from '@web-tech/ui/lib/utils'
-import { usePathname } from 'next/navigation'
+import { Link, usePathname } from '~/shared/i18n/navigation'
 import {
     categoryTree,
     makeCategoryUrl,
@@ -38,7 +38,7 @@ export function CategorySidebar({
                                     key={item.title}
                                 >
                                     <SidebarMenuButton asChild>
-                                        <a
+                                        <Link
                                             href={makeCategoryUrl([item.url])}
                                             className={cn(
                                                 'hover:bg-slate-300 hover:text-black hover:opacity-90',
@@ -54,7 +54,7 @@ export function CategorySidebar({
                                         >
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
 
                                     <div className="flex flex-col gap-3">
@@ -64,7 +64,7 @@ export function CategorySidebar({
                                                     key={subItem.title}
                                                 >
                                                     <SidebarMenuSubItem>
-                                                        <a
+                                                        <Link
                                                             href={makeCategoryUrl(
                                                                 [
                                                                     item.url,
@@ -91,7 +91,7 @@ export function CategorySidebar({
                                                             <span>
                                                                 {subItem.title}
                                                             </span>
-                                                        </a>
+                                                        </Link>
                                                     </SidebarMenuSubItem>
                                                 </SidebarMenuSub>
                                             )

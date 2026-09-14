@@ -3,8 +3,8 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import { Braces, House, Monitor, Smartphone, UserRound } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { Link } from '~/shared/i18n/navigation'
+import { usePathname } from '~/shared/i18n/navigation'
 
 const mobileNav = [
     {

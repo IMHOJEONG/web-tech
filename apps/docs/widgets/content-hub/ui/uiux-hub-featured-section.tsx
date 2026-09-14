@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import { UiUxSmallArticleCard } from './uiux-small-article-card'
 import { UIUX_FALLBACK_IMAGES, type UiUxDoc } from './uiux-hub.types'
 

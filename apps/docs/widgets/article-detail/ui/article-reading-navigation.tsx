@@ -1,5 +1,5 @@
 import { cn } from '@web-tech/ui/lib/utils'
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import type {
     ArticleReadingNavigation as ArticleReadingNavigationData,
     ArticleReadingNavigationItem,

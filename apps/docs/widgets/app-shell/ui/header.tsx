@@ -1,9 +1,10 @@
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import { Search } from '~/feature/search/ui/search'
 import { ThemeToggle } from '~/feature/theme-toggle/ui/theme-toggle'
 import { Brand } from '~/shared/ui/brand'
 import MobileNavDrawer from './mobile-nav-drawer'
 import { Navigation } from './navigation'
+import { LocaleSwitcher } from './locale-switcher'
 
 export default function Header() {
     return (
@@ -27,6 +28,7 @@ export default function Header() {
                 <div className="flex min-w-0 items-center justify-end">
                     <div className="flex shrink-0 items-center gap-3 sm:gap-4 md:gap-5">
                         <Search />
+                        <LocaleSwitcher />
                         <div className="hidden md:block">
                             <ThemeToggle />
                         </div>

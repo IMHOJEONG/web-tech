@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import { getDocHref } from '~/lib/get-doc-route'
 import { DocumentDateText } from '~/shared/ui/document-date-text'
 import { DocumentThumbnail } from '~/shared/ui/document-thumbnail'

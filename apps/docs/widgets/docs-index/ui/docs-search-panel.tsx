@@ -1,4 +1,10 @@
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
+import { useLocale } from 'next-intl'
+import {
+    isLocale,
+    defaultLocale,
+    localizePath,
+} from '~/shared/i18n/locale-path'
 
 type DocsSearchPanelProps = {
     keyword?: string
@@ -21,6 +27,7 @@ export function DocsSearchPanel({
     recommendations,
     resultCount,
 }: DocsSearchPanelProps) {
+    const locale = useLocale()
     return (
         <section className="ds-panel motion-layout max-w-full overflow-hidden p-5 sm:p-6 lg:p-7">
             <div className="motion-layout grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.72fr)] lg:items-end">
@@ -45,7 +52,10 @@ export function DocsSearchPanel({
 
                 <div className="min-w-0 space-y-3">
                     <form
-                        action="/docs"
+                        action={localizePath(
+                            '/docs',
+                            isLocale(locale) ? locale : defaultLocale
+                        )}
                         className="flex min-w-0 overflow-hidden rounded-2xl border border-border bg-surface-container-lowest p-1.5 focus-within:border-primary/60 focus-within:shadow-glow-primary"
                     >
                         <input

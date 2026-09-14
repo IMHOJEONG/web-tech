@@ -1,7 +1,7 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import type { CSSProperties } from 'react'
 import { getDocChannel } from '~/lib/get-doc-channel'
 import { getDocHref } from '~/lib/get-doc-route'

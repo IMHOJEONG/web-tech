@@ -1,7 +1,7 @@
 import { getTime } from '@web-tech/ui/lib/time'
 import { cn } from '@web-tech/ui/lib/utils'
 import { getTranslations } from 'next-intl/server'
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import type { CSSProperties } from 'react'
 import { formatSearchKeyword } from '~/feature/search/lib/format-search-keyword'
 import type { SearchData } from '~/lib/get-search-data'
