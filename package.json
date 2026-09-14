@@ -10,6 +10,7 @@
     "dev:vuln-radar": "turbo dev --filter=vuln-radar",
     "dev:vuln-radar:full": "turbo dev --filter=vuln-radar --filter=vuln-radar-backend",
     "dev:docs": "turbo dev --filter=docs",
+    "dev:crp-lab": "node --experimental-strip-types docs/examples/critical-rendering-path-lab/server.ts",
     "start:vuln-radar": "turbo start --filter=vuln-radar",
     "start:vuln-radar:full": "turbo start --filter=vuln-radar --filter=vuln-radar-backend",
     "start:docs": "turbo start --filter=docs",
@@ -34,7 +35,9 @@
     "rm:pnpm-store": "rm -rf \"$(pnpm store path)\"",
     "prepare": "simple-git-hooks",
     "test": "turbo test",
+    "test:crp-lab": "pnpm typecheck:crp-lab && node --experimental-strip-types --test docs/examples/critical-rendering-path-lab/server.test.ts",
     "typecheck": "turbo typecheck",
+    "typecheck:crp-lab": "tsc -p docs/examples/critical-rendering-path-lab/tsconfig.json",
     "vercel:deploy:vuln-radar": "vercel --cwd apps/vuln-radar && vercel deploy",
     "vercel:deploy:docs": "vercel --cwd apps/docs && vercel deploy",
     "update:simple-git-hooks": "npx simple-git-hooks"
@@ -43,6 +46,7 @@
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
     "@eslint/compat": "catalog:",
+    "@types/node": "catalog:",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "simple-git-hooks": "catalog:",
@@ -55,7 +59,7 @@
     "pre-push": "./scripts/pnpmw.sh format"
   },
   "engines": {
-    "node": ">=24"
+    "node": "24.x"
   },
   "packageManager": "pnpm@11.10.0+sha512.0b7f8b98060031904c017e3a41eb187a16d40eeb829b95c4f8cb03681761fc4ab53dd219115b9b447f4dce1a05a214764461e7d3703392a9f32f9511ce8c86c8"
 }
