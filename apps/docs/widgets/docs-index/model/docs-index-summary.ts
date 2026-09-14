@@ -4,6 +4,7 @@ export const DOCS_INDEX_SECTION_ORDER = [
     'Web',
     'UI/UX',
     'Backend',
+    'Infrastructure',
     'Computer Science',
     'Docs',
 ] as const
@@ -14,6 +15,7 @@ export const DOCS_INDEX_SECTION_HREFS: Record<DocsIndexSectionKey, string> = {
     Web: '/web',
     'UI/UX': '/ui-ux',
     Backend: '/category/be',
+    Infrastructure: '/category/infra',
     'Computer Science': '/category/computer-science',
     Docs: '/docs',
 }
@@ -26,6 +28,8 @@ export function getDocsIndexSectionMessageKey(section: DocsIndexSectionKey) {
             return 'uiux'
         case 'Backend':
             return 'backend'
+        case 'Infrastructure':
+            return 'infrastructure'
         case 'Computer Science':
             return 'computerscience'
         case 'Docs':

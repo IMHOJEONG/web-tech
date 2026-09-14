@@ -258,6 +258,11 @@
 
 ## Content / Editorial
 
+- [-] `P1` 양질의 기술 리소스를 category별 reading path로 확장한다.
+  - 1차: Browser rendering, Network request path, Container health 기준 문서 추가
+  - 빈 category는 문서가 준비되기 전까지 UI 노출을 보류
+  - 2차: Testing, Observability, Security, API Design 순으로 문서 우선 작성
+  - 기준 문서: `docs/architecture/docs-resource-content-roadmap.md`
 - [x] `P1` contributor-facing 블로그 운영 가이드를 정리한다.
   - 새 글 추가 위치
   - frontmatter 규칙

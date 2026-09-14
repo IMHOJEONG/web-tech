@@ -94,6 +94,10 @@ function inferSearchSection(fileName: string) {
         return 'Computer Science'
     }
 
+    if (fileName.startsWith('category/infra/')) {
+        return 'Infrastructure'
+    }
+
     if (fileName.startsWith('data/shadcn/')) {
         return 'UI/UX'
     }

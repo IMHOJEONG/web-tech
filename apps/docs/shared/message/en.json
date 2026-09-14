@@ -317,6 +317,7 @@
                 "web": "Web",
                 "uiux": "UI/UX",
                 "backend": "Backend",
+                "infrastructure": "Infrastructure",
                 "computerscience": "Computer Science",
                 "docs": "Docs"
             },
@@ -343,6 +344,7 @@
             "web": "Web",
             "uiux": "UI/UX",
             "backend": "Backend",
+            "infrastructure": "Infrastructure",
             "computerscience": "Computer Science",
             "docs": "General Docs"
         },
@@ -350,6 +352,7 @@
             "web": "Documents about browsers, frontend systems, and rendering.",
             "uiux": "Documents about interface design and experience systems.",
             "backend": "Technical notes focused on server architecture and APIs.",
+            "infrastructure": "Documents about containers, delivery, observability, and operations.",
             "computerscience": "Documents grounded in operating systems and computer science.",
             "docs": "General notes, records, and uncategorized articles."
         },

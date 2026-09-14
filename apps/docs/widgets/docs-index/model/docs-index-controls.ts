@@ -6,6 +6,11 @@ export const DOCS_INDEX_SECTION_FILTERS = [
     { value: 'uiux', section: 'UI/UX', messageKey: 'uiux' },
     { value: 'backend', section: 'Backend', messageKey: 'backend' },
     {
+        value: 'infrastructure',
+        section: 'Infrastructure',
+        messageKey: 'infrastructure',
+    },
+    {
         value: 'computer-science',
         section: 'Computer Science',
         messageKey: 'computerscience',

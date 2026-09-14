@@ -68,7 +68,7 @@ export default async function Page({
                     </div>
 
                     <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                        {subCategories.map(({ title, url }) => {
+                        {subCategories.map(({ title, url, summary, icon }) => {
                             const sub = overview.find(
                                 (item) => item.title === title
                             )
@@ -79,7 +79,11 @@ export default async function Page({
                                     href={url}
                                     className="group ds-card bg-surface-container-lowest p-4 hover:-translate-y-1"
                                 >
-                                    <SubCategoryCard id={title} />
+                                    <SubCategoryCard
+                                        title={title}
+                                        summary={summary}
+                                        icon={icon}
+                                    />
                                     <div className="mt-3 border-t border-outline-variant pt-3">
                                         <div className="flex items-center justify-between gap-3">
                                             <span className="text-xs font-semibold tracking-[0.18em] text-outline uppercase">

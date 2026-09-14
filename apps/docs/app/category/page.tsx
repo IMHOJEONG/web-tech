@@ -78,7 +78,11 @@ export default async function Page() {
                                         href={category.href}
                                         className="group ds-card bg-surface-container-lowest p-4 hover:-translate-y-1"
                                     >
-                                        <MainCategoryCard id={category.title} />
+                                        <MainCategoryCard
+                                            title={category.title}
+                                            summary={category.summary}
+                                            icon={category.icon}
+                                        />
                                         <div className="mt-3 border-t border-outline-variant pt-3">
                                             <div className="flex items-center justify-between gap-3">
                                                 <span className="text-xs font-semibold tracking-[0.18em] text-outline uppercase">

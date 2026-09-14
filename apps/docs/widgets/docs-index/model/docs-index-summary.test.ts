@@ -29,6 +29,10 @@ test('getDocsIndexSectionMessageKey maps section labels to message keys', () => 
         getDocsIndexSectionMessageKey('Computer Science'),
         'computerscience'
     )
+    assert.equal(
+        getDocsIndexSectionMessageKey('Infrastructure'),
+        'infrastructure'
+    )
 })
 
 test('getDocsIndexSectionSummary counts known sections in display order', () => {
@@ -37,6 +41,7 @@ test('getDocsIndexSectionSummary counts known sections in display order', () => 
         createDoc({ id: 'web-1', section: 'Web', date: '2026-08-24' }),
         createDoc({ id: 'web-2', section: 'Web', date: '2026-08-20' }),
         createDoc({ id: 'backend', section: 'Backend' }),
+        createDoc({ id: 'infra', section: 'Infrastructure' }),
     ])
 
     assert.deepEqual(
@@ -44,6 +49,7 @@ test('getDocsIndexSectionSummary counts known sections in display order', () => 
         [
             ['Web', 2],
             ['Backend', 1],
+            ['Infrastructure', 1],
             ['Docs', 1],
         ]
     )

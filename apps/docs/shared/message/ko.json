@@ -317,6 +317,7 @@
                 "web": "Web",
                 "uiux": "UI/UX",
                 "backend": "Backend",
+                "infrastructure": "Infrastructure",
                 "computerscience": "Computer Science",
                 "docs": "Docs"
             },
@@ -343,6 +344,7 @@
             "web": "Web",
             "uiux": "UI/UX",
             "backend": "Backend",
+            "infrastructure": "Infrastructure",
             "computerscience": "Computer Science",
             "docs": "General Docs"
         },
@@ -350,6 +352,7 @@
             "web": "브라우저, 프론트엔드, 렌더링 관련 문서",
             "uiux": "인터페이스와 경험 설계 관련 문서",
             "backend": "서버 구조와 API 관점의 기술 노트",
+            "infrastructure": "컨테이너, 배포, 관측성과 운영 관련 문서",
             "computerscience": "운영체제, 컴퓨터 과학 기반 문서",
             "docs": "기타 문서와 기록성 아티클"
         },

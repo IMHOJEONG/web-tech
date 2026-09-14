@@ -261,6 +261,7 @@ pnpm --filter docs dev
 
 ## Related Docs
 
+- [docs-resource-content-roadmap.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-resource-content-roadmap.md)
 - [docs-content-authoring-markup-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-markup-policy.md)
 - [docs-content-authoring-pipeline.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-pipeline.md)
 - [docs-local-vs-remote-content-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-local-vs-remote-content-policy.md)
