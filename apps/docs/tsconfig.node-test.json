@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "erasableSyntaxOnly": true,
+        "noEmit": true
+    },
+    "include": [
+        "lib/*.test.ts",
+        "feature/callout/model/*.test.ts",
+        "feature/code-block/lib/*.test.ts",
+        "shared/config/*.test.ts"
+    ],
+    "exclude": [".next", "node_modules"]
+}

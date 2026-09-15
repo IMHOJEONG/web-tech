@@ -17,13 +17,14 @@
         "check:prod-routes": "node ./scripts/check-prod-routes.mjs",
         "test:cache:prod": "node ./scripts/test-content-cache-prod.mjs",
         "pretest:lib": "pnpm --filter @web-tech/docs-content-contract build",
-        "test:lib": "node --experimental-strip-types --test ./lib/*.test.ts ./feature/callout/model/*.test.ts ./feature/code-block/lib/*.test.ts ./shared/config/*.test.ts",
+        "test:lib": "pnpm typecheck:node-test && node --experimental-strip-types --test ./lib/*.test.ts ./feature/callout/model/*.test.ts ./feature/code-block/lib/*.test.ts ./shared/config/*.test.ts",
         "prebuild": "pnpm --filter @web-tech/docs-content-contract build && pnpm --filter @web-tech/ui build && pnpm validate:content",
         "build": "next build",
         "start": "next start",
         "rm:next-server": "rm -rf .next",
         "pretypecheck": "pnpm --filter @web-tech/docs-content-contract build",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "typecheck:node-test": "tsc -p tsconfig.node-test.json"
     },
     "dependencies": {
         "@mdx-js/loader": "catalog:docs",

@@ -20,8 +20,9 @@
     "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.cjs.json && cp package.cjs.json dist/cjs/package.json",
     "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
     "lint": "eslint \"src/**/*.ts\" --max-warnings 0",
-    "test": "node --experimental-strip-types --test ./src/*.test.ts",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "test": "pnpm typecheck:test && node --experimental-strip-types --test ./src/*.test.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck:test": "tsc -p tsconfig.test.json"
   },
   "dependencies": {
     "zod": "^4.4.2"
