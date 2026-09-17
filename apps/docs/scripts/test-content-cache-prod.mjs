@@ -167,6 +167,17 @@ try {
     )
     await symlink(join(root, 'packages'), join(sandbox, 'packages'), 'dir')
     await cp(join(root, 'package.json'), join(sandbox, 'package.json'))
+    // The CRP browser test imports this workspace example during type checking.
+    await cp(
+        join(root, 'docs/examples/critical-rendering-path-lab'),
+        join(sandbox, 'docs/examples/critical-rendering-path-lab'),
+        {
+            recursive: true,
+            filter: (path) =>
+                !['node_modules', '.git', '.next'].includes(basename(path)) &&
+                !basename(path).startsWith('.env'),
+        }
+    )
     if (minimal) {
         await cp(
             join(app, 'scripts/fixtures/cache-components-app'),

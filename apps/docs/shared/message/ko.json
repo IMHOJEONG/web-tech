@@ -1,6 +1,7 @@
 {
     "common": {
-        "brand": "HEAP-FORGE"
+        "brand": "HEAP-FORGE",
+        "loadingDocuments": "문서를 불러오고 있어요."
     },
     "metadata": {
         "site": {

@@ -1,6 +1,7 @@
 {
     "common": {
-        "brand": "HEAP-FORGE"
+        "brand": "HEAP-FORGE",
+        "loadingDocuments": "Loading documents..."
     },
     "metadata": {
         "site": {

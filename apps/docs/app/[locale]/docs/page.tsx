@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
+import { ContentPending } from '~/shared/ui/content-pending'
 import { getTranslations } from 'next-intl/server'
 import { EmptyAllDocs } from '~/feature/search/empty-all-docs'
 import { EmptySearchResult } from '~/feature/search/empty-search-result'
@@ -42,7 +44,15 @@ export async function generateMetadata(): Promise<Metadata> {
     })
 }
 
-export default async function Page({ searchParams }: Props) {
+export default function Page(props: Props) {
+    return (
+        <Suspense fallback={<ContentPending />}>
+            <DocsResults {...props} />
+        </Suspense>
+    )
+}
+
+async function DocsResults({ searchParams }: Props) {
     const { page, q, section, sort } = await searchParams
     const keyword = q?.trim() ?? ''
     const currentPage = parsePageParam(page)
