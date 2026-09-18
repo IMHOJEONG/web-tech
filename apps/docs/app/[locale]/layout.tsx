@@ -81,7 +81,7 @@ export default async function Layout({
             <NextIntlClientProvider locale={locale} messages={messages}>
                 <body
                     className={cn(
-                        'flex size-full min-h-screen flex-col',
+                        'flex w-full min-h-screen flex-col',
                         mono.variable,
                         pretendard.variable,
                         spaceGrotesk.variable
