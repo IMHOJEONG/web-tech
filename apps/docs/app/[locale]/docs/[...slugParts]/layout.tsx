@@ -1,11 +1,5 @@
-function MdxLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <div className="p-3">
-            <div className="prose">{children}</div>
-        </div>
-    )
-}
+import { ArticlePageShell } from '~/shared/ui/article-page-shell'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-    return <MdxLayout>{children}</MdxLayout>
+    return <ArticlePageShell>{children}</ArticlePageShell>
 }
