@@ -20,6 +20,8 @@
 - 실제 값은 절대 저장소에 커밋하지 않는다.
 - 배포에 필요한 값은 Vercel에 등록한다.
 - root `turbo.json > globalEnv`에는 repo-wide 값만 둔다.
+- secret의 소유자, 회전 주기와 폐기 절차는
+  `docs/architecture/docs-secret-token-lifecycle-policy.md`를 따른다.
 
 ## Checklist Table
 
@@ -152,3 +154,4 @@ BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true
 - [docs/architecture/blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
 - [docs/architecture/blog-content-html-vs-markdown.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-html-vs-markdown.md)
 - [docs/architecture/docs-content-cache-revalidation-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-cache-revalidation-policy.md)
+- [docs/architecture/docs-secret-token-lifecycle-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-secret-token-lifecycle-policy.md)

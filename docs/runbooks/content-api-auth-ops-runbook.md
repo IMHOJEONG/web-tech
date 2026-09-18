@@ -50,6 +50,10 @@
 
 ## 권장 토큰 교체 주기
 
+전체 credential inventory, 예외 기준과 공급자 token 정책은
+`docs/architecture/docs-secret-token-lifecycle-policy.md`를 상위 기준으로
+사용합니다.
+
 기본 권장:
 
 - 정기 교체: `90일` 주기
@@ -64,6 +68,10 @@
 - 너무 잦은 수동 교체는 운영 실수 가능성을 높이므로, 정기 + 이벤트 기반 혼합이 적절합니다.
 
 ## 토큰 회전 절차
+
+현재 backend는 하나의 token만 허용하므로 아래 절차에는 짧은 불일치 구간이
+생길 수 있습니다. 무중단 회전의 한계와 current/next token 도입 조건은 상위
+수명주기 정책을 따릅니다.
 
 1. 새 토큰 생성
 2. 백엔드 `CONTENT_API_TOKEN` 교체
@@ -259,3 +267,4 @@ curl -i https://your-content-host/posts/feed/example-article \
 - [docs-env-checklist.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/docs-env-checklist.md)
 - [nas-reverse-proxy-security-checklist.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/nas-reverse-proxy-security-checklist.md)
 - [docs-content-authoring-pipeline.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-pipeline.md)
+- [docs-secret-token-lifecycle-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-secret-token-lifecycle-policy.md)

@@ -79,6 +79,11 @@ Preview 환경의 `Sensitive` 옵션을 활성화한다.
 - `BLOG_CONTENT_REVALIDATE_TOKEN`
 - 향후 추가되는 server-to-server credential
 
+토큰별 회전 주기와 폐기 순서는
+`docs/architecture/docs-secret-token-lifecycle-policy.md`를 따른다. 환경변수
+변경은 기존 deployment에 소급되지 않으므로 새 deployment 검증 전 이전
+credential을 폐기하지 않는다.
+
 기존 변수를 Sensitive로 직접 전환할 수 없다면 삭제 후 같은 key로 다시
 추가한다. 환경변수 변경은 이전 deployment에 적용되지 않으므로 새
 deployment를 만든다.

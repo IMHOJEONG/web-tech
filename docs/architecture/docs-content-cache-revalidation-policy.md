@@ -82,6 +82,10 @@ The revalidation endpoint is a server-to-server administration endpoint.
 The NAS-side token should be stored in a file outside the repository. Neither the
 Vercel token nor the NAS token file is committed to Git.
 
+The token is reviewed and rotated under
+`docs/architecture/docs-secret-token-lifecycle-policy.md`. It must remain separate
+from the Content API read token.
+
 ## Publication Flow
 
 ```text

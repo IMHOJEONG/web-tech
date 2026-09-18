@@ -227,6 +227,13 @@
   - remote content 장애 시 목록/검색은 로컬 문서로 graceful degradation, 문서 상세는 동일 route 로컬 문서 fallback 후 실패하도록 정책 정리
   - source 선택 결과는 runtime log에 항상 남기되, UI에는 badge/filter를 노출하지 않음
   - 기준 문서: `docs/runbooks/content-api-auth-ops-runbook.md`
+- [x] `P0` `docs` secret/token 수명주기 정책을 확정한다.
+  - Content API, revalidation, Better Stack, Cloudflare, GHCR credential inventory 정리
+  - 직접 관리하는 shared secret은 90일 회전, 공급자 token은 권한/만료 기준 적용
+  - 노출, 권한 변경, 운영자 변경 시 정기 일정과 무관하게 즉시 폐기
+  - `GITHUB_TOKEN`처럼 실행별 발급 token은 수동 회전 대상에서 제외
+  - 단일 Content API token 구조의 무중단 회전 한계와 dual-token 개선 조건 기록
+  - 기준 문서: `docs/architecture/docs-secret-token-lifecycle-policy.md`
 - [x] `P0` `pnpm` catalog 도입 이후 네트워크 가능한 환경에서 `pnpm install --lockfile-only` 재검증
 - [x] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정
 - [x] `P1` catalog reference 정합성 검사를 스크립트나 CI 체크로 자동화
