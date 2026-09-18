@@ -26,7 +26,7 @@ import {
 } from '~/lib/editorial-metadata'
 import { getDocHref, isDocRouteMatch } from '~/lib/get-doc-route'
 import {
-    getLocalDataDirectory,
+    getLocalContentDirectories,
     toLocalContentFileName,
 } from '~/lib/local-content-paths'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
@@ -55,8 +55,6 @@ export interface Metadata {
     status?: EditorialStatus
 }
 
-const docsDirectory = getLocalDataDirectory()
-
 function exploreDirectory(directory: string) {
     let files: string[] = []
     try {
@@ -80,7 +78,7 @@ function exploreDirectory(directory: string) {
 }
 
 export function getLocalDocsData() {
-    const fileNames = exploreDirectory(docsDirectory)
+    const fileNames = getLocalContentDirectories().flatMap(exploreDirectory)
 
     const allPostsData: Partial<Metadata>[] = fileNames.flatMap((fileName) => {
         // Read markdown file as string

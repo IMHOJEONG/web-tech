@@ -3,7 +3,10 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import test from 'node:test'
-import { resolveLocalContentRoot } from './local-content-paths.ts'
+import {
+    getLocalContentDirectories,
+    resolveLocalContentRoot,
+} from './local-content-paths.ts'
 
 test('resolveLocalContentRoot accepts direct docs app root', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'docs-root-'))
@@ -23,6 +26,21 @@ test('resolveLocalContentRoot accepts monorepo root', () => {
 
     try {
         assert.equal(resolveLocalContentRoot(root), docsRoot)
+    } finally {
+        fs.rmSync(root, { recursive: true, force: true })
+    }
+})
+
+test('getLocalContentDirectories includes data and category roots', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'docs-content-roots-'))
+    fs.mkdirSync(path.join(root, 'data'))
+    fs.mkdirSync(path.join(root, 'category'))
+
+    try {
+        assert.deepEqual(getLocalContentDirectories(root), [
+            path.join(root, 'data'),
+            path.join(root, 'category'),
+        ])
     } finally {
         fs.rmSync(root, { recursive: true, force: true })
     }
