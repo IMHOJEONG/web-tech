@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages, getTranslations } from 'next-intl/server'
-import { Suspense } from 'react'
 
 import Script from 'next/script'
 import '../css/global.css'
@@ -88,9 +87,7 @@ export default async function Layout({
                         spaceGrotesk.variable
                     )}
                 >
-                    <Suspense>
-                        <Header />
-                    </Suspense>
+                    <Header />
                     <AppTopLoader />
                     <div className="flex-1 pb-16.25 sm:pb-0">{children}</div>
                     <Footer />
