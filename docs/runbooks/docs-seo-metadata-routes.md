@@ -46,10 +46,16 @@ DOCS_SITE_URL=https://heap-forge.app
 
 ## sitemap.xml 정책
 
-- 정적 라우트와 로컬 문서 라우트만 포함한다.
-- 원격 콘텐츠 API는 sitemap 생성 시 호출하지 않는다.
-  - 원격 서버 장애가 sitemap 응답 지연이나 Vercel timeout으로 이어지는 것을 막기 위함이다.
-  - 원격 문서 sitemap은 콘텐츠 API 안정화 후 별도 feed 또는 사전 생성 방식으로 확장한다.
+- 정적 라우트와 공개된 로컬·원격 문서의 canonical 라우트를 포함한다. 초안과 보관된 글은 제외한다.
+- 검색 인덱스와 같은 콘텐츠 정책을 사용한다. 동일 URL은 원격 문서를 우선하고 한 번만 포함한다.
+- `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`이면 원격 목록을 호출하지 않는다.
+- 원격 API 미설정 또는 조회 실패 시 정적 라우트와 로컬 공개 문서로 응답한다.
+  - 원격 목록 조회에는 기존 API timeout 설정(`BLOG_CONTENT_API_TIMEOUT_MS`, 기본 2500ms)과 클라이언트 재시도 정책이 적용된다. 전체 응답 시간이 timeout 값 이하임을 보장하지는 않는다.
+  - 문서 본문은 가져오지 않고 목록 메타데이터만 사용한다.
+- `lastModified`는 유효한 `updatedAt`을 우선하며, 없으면 `date`를 사용한다. 둘 다 유효하지 않으면 생략한다.
+- 기존 한국어·영어 URL과 언어별 alternate 링크를 유지한다.
+- 사이트맵은 300초 주기로 재검증한다. 장애 중 로컬 문서만 생성된 경우에도 이후 요청에서 원격 목록을 다시 시도할 수 있다.
+  - 원격 목록 캐시는 `BLOG_CONTENT_REVALIDATE_SECONDS`(기본 300초)를 따른다. 발행 후 즉시 캐시를 무효화하려면 기존 `/api/revalidate/content` 운영 절차를 사용한다.
 
 ## 확인 명령
 

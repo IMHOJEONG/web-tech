@@ -7,6 +7,9 @@ import {
     toAbsoluteSiteUrl,
 } from '~/lib/seo'
 
+// Retry generation even when a transient upstream failure produced a local-only sitemap.
+export const revalidate = 300
+
 function toLastModified(date?: string) {
     if (!date) {
         return undefined
@@ -40,16 +43,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...entry,
         changeFrequency: 'weekly' as const,
     }))
-    const localDocs = await getSearchData(undefined, { includeRemote: false })
-    const localDocEntries = localDocs.map((doc) => ({
+    const docs = await getSearchData()
+    const docEntries = docs.map((doc) => ({
         url: toAbsoluteSiteUrl(doc.href, siteUrl),
-        lastModified: toLastModified(doc.date),
+        lastModified: toLastModified(doc.updatedAt) ?? toLastModified(doc.date),
         changeFrequency: 'monthly' as const,
         priority: 0.65,
     }))
 
     return dedupeSitemapEntries(
-        [...staticEntries, ...localDocEntries].flatMap((entry) => {
+        [...staticEntries, ...docEntries].flatMap((entry) => {
             const pathname = new URL(entry.url).pathname
             const languages = Object.fromEntries(
                 locales.map((locale) => [

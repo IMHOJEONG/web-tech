@@ -33,6 +33,7 @@ export type SearchData = {
     slug: string
     fileName: string
     date?: string
+    updatedAt?: string
     thumbnail?: string | null
     href: string
     section: string
@@ -151,6 +152,7 @@ async function parseLocalSearchFile(
         thumbnail:
             normalizeThumbnailPath(frontmatter.thumbnail) ??
             DEFAULT_LOCAL_DOCUMENT_THUMBNAIL,
+        updatedAt: frontmatter.updatedAt,
         href: inferSearchHref(normalizedFileName, slug),
         section: inferSearchSection(normalizedFileName),
         contentSource: 'local',
@@ -181,6 +183,7 @@ function normalizeRemoteSearchDoc(doc: Partial<Metadata>): SearchData | null {
         slug: doc.slug,
         fileName,
         date: doc.date,
+        updatedAt: doc.updatedAt,
         thumbnail: doc.thumbnail ?? null,
         href,
         section: inferSearchSection(fileName),
