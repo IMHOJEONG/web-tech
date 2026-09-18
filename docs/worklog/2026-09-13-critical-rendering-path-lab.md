@@ -29,12 +29,14 @@
 
 ```bash
 pnpm test:crp-lab
+pnpm test:crp-lab:browser
 pnpm --filter docs test:content
 pnpm exec prettier --check docs/examples/critical-rendering-path-lab
 git diff --check
 ```
 
-- 실험 서버 테스트 4개 통과
+- 실험 서버 테스트 6개 통과
+- Chromium 관계 기반 테스트 3개 통과
 - 콘텐츠 단위 테스트 17개 통과
 - local 콘텐츠 15개 frontmatter·style 검증 통과
 - Prettier와 whitespace 검사 통과

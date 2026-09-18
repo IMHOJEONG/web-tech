@@ -64,6 +64,18 @@ test("reports an injected asset delay through Server-Timing", async () => {
   assert.match(await response.text(), /font-family/);
 });
 
+test("accepts a bounded delay override for browser automation", async () => {
+  const overridden = await fetch(`${baseUrl}/late-lcp?delay=25`).then(
+    (response) => response.text(),
+  );
+  const bounded = await fetch(`${baseUrl}/slow-css?delay=9999`).then(
+    (response) => response.text(),
+  );
+
+  assert.match(overridden, /id="hero-slot" data-delay="25"/);
+  assert.match(bounded, /styles\.css\?delay=3000/);
+});
+
 test("rejects routes outside the experiment allowlist", async () => {
   const response = await fetch(`${baseUrl}/unknown`);
 

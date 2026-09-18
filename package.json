@@ -36,6 +36,7 @@
     "prepare": "simple-git-hooks",
     "test": "turbo test",
     "test:crp-lab": "pnpm typecheck:crp-lab && node --experimental-strip-types --test docs/examples/critical-rendering-path-lab/server.test.ts",
+    "test:crp-lab:browser": "pnpm --filter docs test:crp-lab:browser",
     "typecheck": "turbo typecheck",
     "typecheck:crp-lab": "tsc -p docs/examples/critical-rendering-path-lab/tsconfig.json",
     "vercel:deploy:vuln-radar": "vercel --cwd apps/vuln-radar && vercel deploy",

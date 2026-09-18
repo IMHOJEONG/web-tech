@@ -13,6 +13,8 @@
         "pretest:content": "pnpm --filter @web-tech/docs-content-contract build",
         "revalidate:content-cache": "node ./scripts/revalidate-content-cache.mjs",
         "test:content": "node --test ./scripts/validate-content.test.mjs ./scripts/validate-content-style.test.mjs && pnpm validate:content",
+        "pretest:crp-lab:browser": "tsc -p tsconfig.crp-e2e.json",
+        "test:crp-lab:browser": "playwright test --config=playwright.crp.config.ts",
         "test:e2e": "playwright test",
         "check:prod-routes": "node ./scripts/check-prod-routes.mjs",
         "test:cache:prod": "node ./scripts/test-content-cache-prod.mjs",

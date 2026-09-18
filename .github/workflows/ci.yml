@@ -135,11 +135,17 @@ jobs:
       - name: Docs lib tests
         run: pnpm --filter docs test:lib
 
+      - name: Critical rendering path lab tests
+        run: pnpm test:crp-lab
+
       - name: Docs backend contract tests
         run: pnpm --filter docs-backend test:e2e --runInBand
 
       - name: Install Playwright Chromium
         run: pnpm --filter docs exec playwright install --with-deps chromium
+
+      - name: Critical rendering path browser tests
+        run: pnpm test:crp-lab:browser
 
       - name: Docs responsive smoke tests
         run: pnpm --filter docs test:e2e

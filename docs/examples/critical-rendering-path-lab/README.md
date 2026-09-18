@@ -27,9 +27,18 @@ pnpm dev:crp-lab
 
 ```bash
 pnpm test:crp-lab
+pnpm test:crp-lab:browser
 ```
 
 서버, 테스트, 브라우저 실행 코드는 모두 TypeScript로 관리한다. `pnpm test:crp-lab`은 전용 `tsconfig.json`으로 타입을 먼저 검사한 뒤 테스트를 실행한다. 서버는 Node.js 24의 type stripping으로 실행하며 브라우저용 TypeScript asset도 요청 시 type stripping 후 JavaScript로 응답한다.
+
+`pnpm test:crp-lab:browser`는 Chromium에서 다음 관계를 확인한다.
+
+- render-blocking CSS 응답이 끝난 뒤 FCP가 발생하는가
+- parser-blocking script가 실행된 뒤 `DOMContentLoaded`가 발생하는가
+- JavaScript로 늦게 추가한 hero image가 baseline보다 늦게 요청되는가
+
+테스트는 고정된 FCP·LCP 점수를 성능 예산으로 사용하지 않는다. 실행 환경에 따라 달라지는 절대 시간 대신 resource timing, `Server-Timing`, browser milestone 사이의 순서를 검증한다.
 
 브라우저에서는 DevTools의 Network에서 `Disable cache`를 켜고 Performance reload recording을 mode별로 최소 세 번 실행한다.
 

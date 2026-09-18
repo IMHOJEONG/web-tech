@@ -143,7 +143,11 @@ export function createLabServer() {
     const mode = requestUrl.pathname.slice(1);
 
     if (isLabMode(mode)) {
-      send(res, 200, "text/html; charset=utf-8", renderPage(mode));
+      const delayMs = requestUrl.searchParams.has("delay")
+        ? parseDelay(requestUrl.searchParams.get("delay"))
+        : DEFAULT_DELAY_MS;
+
+      send(res, 200, "text/html; charset=utf-8", renderPage(mode, delayMs));
       return;
     }
 
