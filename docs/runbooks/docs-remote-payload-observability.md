@@ -207,7 +207,9 @@ DOCS_BETTER_STACK_ENVIRONMENT=production
 로컬 검증은 `apps/docs/.env.local`에 넣고 `DOCS_BETTER_STACK_ENVIRONMENT=development`로 구분한다.
 Preview는 별도 소스를 권장하며 환경 이름은 `preview`로 설정한다. `NODE_ENV=production`만으로 Preview를 실서비스로 분류하지 않는다.
 세 값이 모두 설정되어야 전송한다. 토큰과 주소가 모두 없으면 기존 콘솔 로그만 유지한다.
-`apps/docs/turbo.json`의 기존 `DOCS_*` 선언이 이 변수들을 포함한다.
+`apps/docs/turbo.json`의 `DOCS_*` 선언과 루트 `turbo.json`의 `globalEnv`에 등록되어 있다.
+앱의 선언만으로는 의존 패키지인 `@web-tech/ui`, `@web-tech/docs-content-contract` 빌드에 적용되지 않아 Vercel 환경변수 누락 경고가 발생한다.
+루트 선언으로 의존 빌드에도 전달하며, 값 변경 시 전체 task 캐시 키에 반영된다. 실제 토큰 값은 설정 파일에 넣지 않는다.
 
 ### 3. 데이터와 전달 보장 범위
 

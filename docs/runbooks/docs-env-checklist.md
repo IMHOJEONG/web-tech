@@ -42,7 +42,7 @@
 | `BLOG_CONTENT_INCLUDE_REMOTE_INDEX`       | Yes                          | Yes            | Yes          | If used | 기본값은 `true`, 로컬 전용이면 `false`    |
 | `CLOUDFLARE_API_TOKEN`                    | Repo-level usage             | No             | Yes          | If used | `docs` 앱 전용은 아님                     |
 
-Better Stack 서버 로그 수집(선택, `DOCS_*` Turbo 선언에 포함):
+Better Stack 서버 로그 수집(선택, 앱의 `DOCS_*` 및 루트 `globalEnv`에 선언):
 
 | Variable                          | 설정 위치                              | 용도                                        |
 | --------------------------------- | -------------------------------------- | ------------------------------------------- |
