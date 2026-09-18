@@ -202,7 +202,7 @@ async function fetchRemotePostsPayload() {
                 issues: parseResult.success ? null : parseResult.error.issues,
             })
 
-            reportRemotePayloadSchemaFailure(event)
+            await reportRemotePayloadSchemaFailure(event)
 
             throw new Error(
                 `[docs] Unsupported remote content payload shape (${config.label}): ${url}${event.issues ? ` // ${event.issues}` : ''}`

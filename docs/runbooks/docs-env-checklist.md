@@ -42,6 +42,16 @@
 | `BLOG_CONTENT_INCLUDE_REMOTE_INDEX`       | Yes                          | Yes            | Yes          | If used | 기본값은 `true`, 로컬 전용이면 `false`    |
 | `CLOUDFLARE_API_TOKEN`                    | Repo-level usage             | No             | Yes          | If used | `docs` 앱 전용은 아님                     |
 
+Better Stack 서버 로그 수집(선택, `DOCS_*` Turbo 선언에 포함):
+
+| Variable                          | 설정 위치                              | 용도                                        |
+| --------------------------------- | -------------------------------------- | ------------------------------------------- |
+| `DOCS_BETTER_STACK_SOURCE_TOKEN`  | `.env.local` 또는 Vercel 서버 환경변수 | 소스 쓰기 토큰, 커밋 금지                   |
+| `DOCS_BETTER_STACK_INGESTING_URL` | 위와 동일                              | 소스의 HTTPS Ingesting host origin          |
+| `DOCS_BETTER_STACK_ENVIRONMENT`   | 위와 동일                              | `production`, `preview`, `development` 구분 |
+
+연결 절차는 [원격 payload 관측 runbook](./docs-remote-payload-observability.md#better-stack-연결)을 따른다.
+
 ## Local Setup
 
 예시:

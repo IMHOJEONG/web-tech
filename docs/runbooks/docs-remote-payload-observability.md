@@ -10,7 +10,7 @@
 - top-level payload shape drift
 - field-level contract drift
 - local / remote content source selection
-- alerting / error aggregation 연결 후보
+- Better Stack 로그 수집 및 알림 설정
 
 ## Payload Schema Failure Event
 
@@ -26,6 +26,7 @@ event name:
 - `url`
 - `payloadSummary`
 - `issues`
+- `fingerprint`: endpoint와 배열 위치를 제외한 필드 경로를 기준으로 생성한 집계 키
 
 예시:
 
@@ -179,20 +180,83 @@ curl -i https://your-content-host/api/posts \
 
 JSON body를 로컬 파일로 저장해서 wrapper / field를 확인해도 된다.
 
-## Alerting Recommendation
+## Better Stack 연결
 
-현재는 structured `console.error`까지 연결되어 있다.
+2026-09-18 기준 서버용 HTTP ingestion을 사용한다. Next.js 클라이언트 SDK나 Vercel Log Drain은 필요하지 않다.
+현재 전송 대상은 `docs.remote_payload_schema_failure` 하나다. 접속 장애, 인증 오류, 정상 요청, 브라우저 오류는 이 연결의 수집 대상이 아니다.
 
-다음 단계 후보:
+### 1. Source 생성
 
-1. deployment platform log drain에서 event name 필터링
-2. Sentry / Datadog 같은 error aggregation에 event forwarding
-3. 동일 `url + issues` 반복 발생 시 alert noise dedupe
+1. [Better Stack](https://betterstack.com/)에 가입 또는 로그인한다.
+2. Telemetry/Logs → Sources → Connect source에서 `heap-forge-docs-production` 소스를 만든다. HTTP 또는 JavaScript/Node.js 수집 소스를 선택한다.
+3. Source의 Configure 화면에서 **Source token**과 **Ingesting host**를 확인한다.
+4. Ingesting host 앞에 `https://`를 붙인 origin을 사용한다. 대시보드 URL이나 임의의 공통 수집 주소를 사용하지 않는다.
 
-권장 우선순위:
+Source token은 로그 쓰기용이며 계정 관리 API token과 다르다. 채팅·Git에 넣지 않는다.
 
-- 개인/소규모 운영: log query + 수동 확인
-- 문서 수와 배포 빈도가 커지면: error aggregation 연결
+### 2. 환경변수 설정
+
+Vercel 프로젝트 Settings → Environment Variables의 Production 범위에 다음을 등록한 뒤 재배포한다.
+
+```env
+DOCS_BETTER_STACK_SOURCE_TOKEN=<Source token>
+DOCS_BETTER_STACK_INGESTING_URL=https://<Ingesting host>
+DOCS_BETTER_STACK_ENVIRONMENT=production
+```
+
+로컬 검증은 `apps/docs/.env.local`에 넣고 `DOCS_BETTER_STACK_ENVIRONMENT=development`로 구분한다.
+Preview는 별도 소스를 권장하며 환경 이름은 `preview`로 설정한다. `NODE_ENV=production`만으로 Preview를 실서비스로 분류하지 않는다.
+세 값이 모두 설정되어야 전송한다. 토큰과 주소가 모두 없으면 기존 콘솔 로그만 유지한다.
+`apps/docs/turbo.json`의 기존 `DOCS_*` 선언이 이 변수들을 포함한다.
+
+### 3. 데이터와 전달 보장 범위
+
+- `dt`, `level=error`, `message`, `event`, `service=docs`, `environment`, `fingerprint`, `label`, `url`, `payloadSummary`, `issues`를 전송한다.
+- endpoint의 사용자명·비밀번호·query·fragment는 제거한다. 원본 응답 본문과 인증 헤더는 전송하지 않는다.
+- `results.0.date`와 `results.12.date`처럼 배열 위치만 다른 오류는 동일 fingerprint로 묶는다.
+- 발생 건수 보존을 위해 앱에서 반복 이벤트를 버리지 않는다. 알림 반복 제어는 Better Stack에서 설정한다.
+- 전송을 await하여 서버리스 실행 종료 전에 완료를 기다린다. 오류 처리 경로에 최대 약 1초의 네트워크 대기 시간이 추가될 수 있다.
+- HTTP 수집 요청은 캐시하지 않고 리다이렉트를 따르지 않으며 재시도하지 않는다.
+- quota 초과(402), 인증 오류(403), 네트워크 실패·timeout은 콘솔에 전달 상태만 남기고 기존 로컬 대체 흐름을 유지한다. 실패 시 유실될 수 있으며 영속 큐/재전송은 제공하지 않는다.
+- 수집 서버의 응답 본문, token, 전체 fetch 예외는 전달 실패 로그에 기록하지 않는다.
+
+### 4. 집계·알림 만들기
+
+Live tail에서 `event=docs.remote_payload_schema_failure`와 `environment=production`을 필터링한다.
+실제 소스에서 생성된 필드 이름을 확인한 뒤 해당 결과로 Chart/Exploration을 만들고 다음 규칙을 시작점으로 삼는다.
+
+| 항목                | 초기 권장 설정                                      |
+| ------------------- | --------------------------------------------------- |
+| 집계                | 이벤트 수, fingerprint별 그룹                       |
+| 검사 주기           | 1분                                                 |
+| 조회 구간           | 최근 5분                                            |
+| 임계값              | 오류 수가 0보다 큼                                  |
+| Confirmation period | 0초: 새 형식 오류를 바로 확인                       |
+| 데이터 없음         | Don't start an incident                             |
+| Recovery            | 자동 복구를 끄고 정상 콘텐츠 조회 확인 후 수동 해결 |
+| 알림 수신           | 본인 이메일부터 시작, 필요 시 Slack 연동            |
+
+오류 이벤트가 더 이상 없다는 것만으로 복구를 판단하지 않는다. 방문 요청 자체가 없을 수도 있다.
+인시던트가 열린 동안의 재알림/에스컬레이션 빈도는 수신 정책에서 제한한다. 그룹별 인시던트 생성과 재알림 동작은 테스트 소스로 확인한다.
+
+### 5. 검증 순서
+
+1. `pnpm --filter docs test:lib`로 모의 전송·인증 실패·timeout·집계 키 테스트를 실행한다. 이 테스트는 외부로 로그를 보내지 않는다.
+2. 별도 개발 소스에 환경변수를 설정한다.
+3. 개발용 콘텐츠 API가 유효한 JSON이지만 계약이 다른 응답을 반환하도록 만든다. 예: `{"data": []}`.
+4. `/docs` 또는 `/sitemap.xml`을 요청해 로컬 문서로 응답하는지 확인한다.
+5. Live tail에서 이벤트·environment·fingerprint·필드 오류를 확인하고 토큰/원본 본문이 없는지 확인한다.
+6. 본인 수신 경로의 테스트 알림을 확인한다. 운영 API를 고의로 망가뜨리지는 않는다.
+7. Production 설정 및 재배포 후 실제 로그 수신 상태를 점검한다.
+
+코드 연결 완료와 외부 소스/알림 활성화는 별도다. 소스 생성·환경변수 등록·배포·실제 수신 확인 전에는 운영 알림이 활성화되었다고 판단하지 않는다.
+
+공식 참고:
+
+- [HTTP 로그 수집 API](https://betterstack.com/docs/logs/ingesting-data/http/logs/)
+- [Source 생성과 로그 시작](https://betterstack.com/docs/logs/logging-start/)
+- [차트·알림 설정](https://betterstack.com/docs/logs/dashboards/alerts/)
+- [알림 API의 복구·데이터 없음 정책](https://betterstack.com/docs/logs/api/alerts/update/)
 
 ## What Not To Do
 
