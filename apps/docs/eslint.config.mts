@@ -18,4 +18,19 @@ export default [
             },
         },
     },
+    {
+        // The standalone CommonJS CLI contains Playwright browser callbacks.
+        files: ['scripts/verify-deployed-article-shell.cjs'],
+        languageOptions: {
+            sourceType: 'commonjs',
+            globals: { ...globals.node, ...globals.browser },
+        },
+        rules: {
+            '@typescript-eslint/no-require-imports': 'off',
+            'turbo/no-undeclared-env-vars': [
+                'warn',
+                { allowList: ['SHELL_OUTPUT'] },
+            ],
+        },
+    },
 ]

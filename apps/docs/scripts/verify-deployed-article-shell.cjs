@@ -78,6 +78,41 @@ const fs = require('node:fs')
                     window.__stopShell()
                     return window.__shell
                 })
+                const scrollPositions = []
+                for (const fraction of [0, 0.5, 1, 0]) {
+                    await page.evaluate((ratio) => {
+                        scrollTo({
+                            top:
+                                (document.documentElement.scrollHeight -
+                                    innerHeight) *
+                                ratio,
+                            behavior: 'instant',
+                        })
+                    }, fraction)
+                    await page.waitForTimeout(100)
+                    scrollPositions.push(
+                        await page.evaluate(() => {
+                            const header = document
+                                .querySelector('header')
+                                .getBoundingClientRect()
+                            return {
+                                scrollY,
+                                bodyHeight:
+                                    document.body.getBoundingClientRect()
+                                        .height,
+                                documentHeight:
+                                    document.documentElement.scrollHeight,
+                                viewport: innerHeight,
+                                headerTop: header.top,
+                                headerHeight: header.height,
+                                headerBottom: header.bottom,
+                                overflow:
+                                    document.documentElement.scrollWidth -
+                                    innerWidth,
+                            }
+                        })
+                    )
+                }
                 let anchor = null
                 if (!mobile) {
                     const a = page.locator('aside a[href^="#"]').last()
@@ -92,6 +127,9 @@ const fs = require('node:fs')
                             return {
                                 target: href,
                                 top: n?.getBoundingClientRect().top,
+                                headerTop: document
+                                    .querySelector('header')
+                                    .getBoundingClientRect().top,
                                 headerBottom: document
                                     .querySelector('header')
                                     .getBoundingClientRect().bottom,
@@ -104,6 +142,7 @@ const fs = require('node:fs')
                     slug,
                     status: response.status(),
                     ...layout,
+                    scrollPositions,
                     anchor,
                 })
                 console.log(
@@ -114,6 +153,7 @@ const fs = require('node:fs')
                         samples: layout.samples.length,
                         pendingSeen: layout.pendingSeen,
                         violations: layout.violations,
+                        scrollPositions,
                         anchor,
                     })
                 )
@@ -122,10 +162,34 @@ const fs = require('node:fs')
     } finally {
         await browser.close()
         fs.writeFileSync(
-            '/tmp/heap-forge-cls-shell-check.json',
+            process.env.SHELL_OUTPUT || '/tmp/heap-forge-cls-shell-check.json',
             JSON.stringify(results, null, 2)
         )
     }
+    if (
+        results.length !== 4 ||
+        results.some(
+            (row) =>
+                row.status !== 200 ||
+                row.samples.length === 0 ||
+                row.violations.length > 0 ||
+                row.scrollPositions.some(
+                    (p) =>
+                        Math.abs(p.headerTop) > 1 ||
+                        Math.abs(p.headerHeight - 65) > 1 ||
+                        p.overflow > 1
+                ) ||
+                row.scrollPositions[1].scrollY <= 0 ||
+                row.scrollPositions[2].scrollY <= 0 ||
+                (!row.mobile &&
+                    (!row.anchor ||
+                        Math.abs(row.anchor.headerTop) > 1 ||
+                        Math.abs(row.anchor.headerBottom - 65) > 1 ||
+                        !Number.isFinite(row.anchor.top) ||
+                        row.anchor.top < row.anchor.headerBottom + 8))
+        )
+    )
+        process.exitCode = 1
 })().catch((e) => {
     console.error(e)
     process.exitCode = 1

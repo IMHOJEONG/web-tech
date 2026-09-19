@@ -2,6 +2,7 @@
 
 [월별 목록](../README.md) · [검증 보고서](../../verification/README.md)
 
+- [배포 화면 헤더·TOC 검사 정리](2026-09-19-deployed-shell-probe.md)
 - [Better Stack 로컬 진단 도구 정리](2026-09-19-better-stack-local-probe.md)
 - [게시 후 목록·검색·상세 갱신 검증](2026-09-19-content-publication-browser-test.md)
 - [상세 렌더링 회귀 검사 실행](2026-09-19-article-regression-check.md)
