@@ -1,0 +1,39 @@
+{
+  "date": "2026-09-19",
+  "timezone": "Asia/Seoul",
+  "commit": "964ff3aa5f45669a16bfb02d1fe6fa5b037ca78a",
+  "environment": "local production fixtures; not Vercel or NAS",
+  "node": "24.12.0",
+  "next": "16.3.4",
+  "evidenceType": "summary transcribed from command output, not full logs",
+  "article": {
+    "exitCode": 0,
+    "passed": 40,
+    "failed": 0,
+    "reportedSeconds": 53.6,
+    "destinationStreamClosedEarlyCount": 8
+  },
+  "cache": {
+    "exitCode": 0,
+    "allChecksPassed": true,
+    "coldReadAndReuseCounts": { "index": 2, "body": 1 },
+    "expireZero": {
+      "elapsedMs": 118,
+      "version": 2,
+      "originCounts": { "index": 3, "body": 2 }
+    },
+    "maxStale": { "elapsedMs": 3, "version": 2 },
+    "maxRefreshedWarmCounts": { "index": 5, "body": 4 },
+    "finalArticleVersion": 3
+  },
+  "lib": { "exitCode": 0, "passed": 127, "failed": 0 },
+  "typecheck": { "exitCode": 0 },
+  "content": { "exitCode": 0, "passed": 17, "failed": 0, "validatedFiles": 15 },
+  "notVerified": [
+    "remote outage route matrix",
+    "deployed latency budget",
+    "full route delayed supplementary streaming",
+    "all Router Cache navigation paths",
+    "stream error root cause"
+  ]
+}

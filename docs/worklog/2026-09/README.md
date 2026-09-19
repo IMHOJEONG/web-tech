@@ -2,9 +2,13 @@
 
 [월별 목록](../README.md) · [검증 보고서](../../verification/README.md)
 
+- [Next.js 체크리스트 1차 실행](2026-09-19-nextjs-checklist-validation.md)
+
 - [로컬 문서 타입 보호와 파서 통합](2026-09-19-local-document-parser-unification.md)
 
+- [Next.js 활용 점검 기준 정리](2026-09-19-nextjs-usage-checklist.md)
 - [상세 요청의 로컬 문서 중복 읽기 제거](2026-09-19-local-document-request-cache.md)
+
 - [배포 화면 헤더·TOC 검사 정리](2026-09-19-deployed-shell-probe.md)
 - [Better Stack 로컬 진단 도구 정리](2026-09-19-better-stack-local-probe.md)
 - [게시 후 목록·검색·상세 갱신 검증](2026-09-19-content-publication-browser-test.md)
