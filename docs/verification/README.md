@@ -4,17 +4,18 @@
 
 ## 성능과 화면 안정성
 
-| 보고서 | 대상 |
-| --- | --- |
-| [09-19 Sticky header 운영 검증](performance/2026-09-19-docs-sticky-header-deployment-verification.md) | 긴 글 스크롤, TOC 위치, 12회 성능 재측정 |
-| [09-19 CLS 배포 검증](performance/2026-09-19-docs-cls-deployment-verification.md) | 셸 교체와 초기 레이아웃 안정성 |
-| [09-18 레이아웃 이동·텍스트 지연 진단](performance/2026-09-18-docs-layout-shift-text-lcp-diagnosis.md) | 수정 전 원인 및 폰트 차단 비교 |
-| [09-18 성능 기준선](performance/2026-09-18-deployed-performance-measurement.md) | 최초 배포 측정 기록 |
+| 보고서                                                                                                 | 대상                                     |
+| ------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
+| [09-19 Sticky header 운영 검증](performance/2026-09-19-docs-sticky-header-deployment-verification.md)  | 긴 글 스크롤, TOC 위치, 12회 성능 재측정 |
+| [09-19 CLS 배포 검증](performance/2026-09-19-docs-cls-deployment-verification.md)                      | 셸 교체와 초기 레이아웃 안정성           |
+| [09-18 레이아웃 이동·텍스트 지연 진단](performance/2026-09-18-docs-layout-shift-text-lcp-diagnosis.md) | 수정 전 원인 및 폰트 차단 비교           |
+| [09-18 성능 기준선](performance/2026-09-18-deployed-performance-measurement.md)                        | 최초 배포 측정 기록                      |
 
 재현 절차: [배포 성능 측정](../runbooks/docs-deployed-performance-measurement.md), [브라우저·기기 점검](../runbooks/docs-responsive-browser-device-checklist.md).
 
 ## 캐시와 정적 셸
 
+- [09-19 게시 갱신 브라우저 검증](cache/2026-09-19-content-publication-browser-test.md): webhook 이후 목록·검색·상세 DOM과 인증 경계.
 - [09-16 언어 URL 전환 후 정적 셸 검증](cache/2026-09-16-docs-static-shell-verification.md): 당시 운영 모델 통과, Cache Components 전체 앱 실패. 이후 조치와 구분하여 읽습니다.
 - 재현 절차: [캐시 프로덕션 통합 시험](../runbooks/docs-content-cache-production-test.md).
 - 테스트 도입 및 변경 과정은 [9월 작업 기록](../worklog/2026-09/README.md)에 유지합니다.

@@ -149,3 +149,6 @@ jobs:
 
       - name: Docs responsive smoke tests
         run: pnpm --filter docs test:e2e
+
+      - name: Docs production article rendering tests
+        run: pnpm --filter docs test:article:prod

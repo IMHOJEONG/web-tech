@@ -16,6 +16,7 @@
         "pretest:crp-lab:browser": "tsc -p tsconfig.crp-e2e.json",
         "test:crp-lab:browser": "playwright test --config=playwright.crp.config.ts",
         "test:e2e": "playwright test",
+        "test:article:prod": "playwright test --config=playwright.article.config.ts",
         "check:prod-routes": "node ./scripts/check-prod-routes.mjs",
         "test:cache:prod": "node ./scripts/test-content-cache-prod.mjs",
         "pretest:lib": "pnpm --filter @web-tech/docs-content-contract build",

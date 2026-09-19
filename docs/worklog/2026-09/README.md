@@ -2,6 +2,7 @@
 
 [월별 목록](../README.md) · [검증 보고서](../../verification/README.md)
 
+- [게시 후 목록·검색·상세 갱신 검증](2026-09-19-content-publication-browser-test.md)
 - [스테이징 검사와 문서 품질 기준](2026-09-19-documentation-quality-gates.md)
 - [공통 문서 템플릿 적용 규칙](2026-09-19-documentation-template-rules.md)
 - [문서 역할별 분리](2026-09-19-documentation-role-separation.md)
