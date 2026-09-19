@@ -66,7 +66,10 @@ function SearchForm({
         }
 
         const handlePointerDown = (event: MouseEvent) => {
-            if (!formRef.current?.contains(event.target as Node)) {
+            if (
+                !(event.target instanceof Node) ||
+                !formRef.current?.contains(event.target)
+            ) {
                 setIsOpen(false)
             }
         }

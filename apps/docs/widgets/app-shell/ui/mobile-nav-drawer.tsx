@@ -24,6 +24,7 @@ import { Link } from '~/shared/i18n/navigation'
 import { usePathname } from '~/shared/i18n/navigation'
 import { useState } from 'react'
 import { Brand } from '~/shared/ui/brand'
+import type { DrawerLinkConfig } from './mobile-nav-drawer.types'
 
 const drawerLinks = [
     {
@@ -56,7 +57,7 @@ const drawerLinks = [
         icon: Users,
         activePrefixes: ['/about'],
     },
-] as const
+] as const satisfies readonly DrawerLinkConfig[]
 
 function DrawerLink({
     href,

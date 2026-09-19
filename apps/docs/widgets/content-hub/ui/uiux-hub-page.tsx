@@ -43,10 +43,9 @@ export async function UiUxHubPage() {
     const locale = await getLocale()
     const t = await getTranslations('uiuxHub')
     const isKorean = locale === 'ko'
-    const docs = (await getChannelHubDocs('uiux'))
+    const renderedDocs = (await getChannelHubDocs('uiux'))
         .map(toUiUxDoc)
-        .filter(Boolean)
-    const renderedDocs = docs as UiUxDoc[]
+        .filter((doc): doc is UiUxDoc => doc !== null)
 
     const fallbackHref = '/feed?topic=uiux'
     const featured =

@@ -28,13 +28,16 @@ import {
 } from '~/lib/content-api-schema'
 import { isDocRouteMatch } from '~/lib/get-doc-route'
 import type {
-    ContentFormat,
+    RemoteContentBody,
     Metadata,
     RemotePost,
     SearchData,
 } from '~/lib/content-api-types'
 
-async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
+async function fetchRemoteBody(
+    post: RemotePost,
+    markdownBaseUrl?: string
+): Promise<RemoteContentBody> {
     const inlineContentResult = getInlineContentResult(post)
 
     if (inlineContentResult) {
@@ -46,7 +49,7 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
     if (!markdownReference) {
         return {
             content: '',
-            contentFormat: 'html' as ContentFormat,
+            contentFormat: 'html',
         }
     }
 
@@ -59,7 +62,7 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
         )
         return {
             content: '',
-            contentFormat: 'html' as ContentFormat,
+            contentFormat: 'html',
         }
     }
 
@@ -76,7 +79,7 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
     if (!markdownUrl) {
         return {
             content: '',
-            contentFormat: 'html' as ContentFormat,
+            contentFormat: 'html',
         }
     }
 
@@ -102,7 +105,7 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
             )
             return {
                 content: '',
-                contentFormat: 'html' as ContentFormat,
+                contentFormat: 'html',
             }
         }
 
@@ -120,7 +123,7 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
             )
             return {
                 content: '',
-                contentFormat: 'html' as ContentFormat,
+                contentFormat: 'html',
             }
         }
 
@@ -133,7 +136,7 @@ async function fetchRemoteBody(post: RemotePost, markdownBaseUrl?: string) {
         )
         return {
             content: '',
-            contentFormat: 'html' as ContentFormat,
+            contentFormat: 'html',
         }
     }
 }
@@ -292,5 +295,5 @@ export async function fetchRemoteSearchData(keyword?: string) {
 
     return filtered
         .map((doc) => normalizeRemoteSearchResult(doc))
-        .filter(Boolean) as SearchData[]
+        .filter((doc): doc is SearchData => doc !== null)
 }

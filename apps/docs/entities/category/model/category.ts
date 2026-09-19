@@ -1,6 +1,7 @@
 import { Box, Cpu, Globe2, Network, ServerCog } from 'lucide-react'
 import { FaReact, FaRegWindowRestore } from 'react-icons/fa'
 import { SiNodedotjs } from 'react-icons/si'
+import type { CategoryGroupConfig } from './category.types'
 
 export const makeCategoryUrl = (segments: string[]) => {
     return ['/category', ...segments].join('/')
@@ -78,7 +79,7 @@ export const categoryTree = [
             },
         ],
     },
-] as const
+] as const satisfies readonly CategoryGroupConfig[]
 
 export const categoryMainLinks = categoryTree.map((item) => {
     const { title, url } = item
