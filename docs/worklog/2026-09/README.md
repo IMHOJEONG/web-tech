@@ -4,6 +4,8 @@
 
 [월별 목록](../README.md) · [검증 보고서](../../verification/README.md)
 
+- [로컬 MDX 상세 GFM 표 수정](2026-09-19-local-mdx-gfm-table-fix.md)
+
 - [Next.js 체크리스트 1차 실행](2026-09-19-nextjs-checklist-validation.md)
 
 - [로컬 문서 타입 보호와 파서 통합](2026-09-19-local-document-parser-unification.md)
