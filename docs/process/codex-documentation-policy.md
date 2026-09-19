@@ -12,6 +12,8 @@
 
 ## Required Updates
 
+새 문서에는 [역할별 문서 템플릿](documentation-templates.md)을 적용하고, 완료 체크에 따라 목차와 상대 링크를 확인합니다.
+
 Codex가 작업할 때 기본적으로 지켜야 하는 최소 문서화 범위는 다음과 같습니다.
 
 1. 모든 작업은 `docs/worklog/YYYY-MM/`에 기록합니다.

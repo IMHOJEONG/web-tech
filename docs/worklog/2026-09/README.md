@@ -2,6 +2,8 @@
 
 [월별 목록](../README.md) · [검증 보고서](../../verification/README.md)
 
+- [스테이징 검사와 문서 품질 기준](2026-09-19-documentation-quality-gates.md)
+- [공통 문서 템플릿 적용 규칙](2026-09-19-documentation-template-rules.md)
 - [문서 역할별 분리](2026-09-19-documentation-role-separation.md)
 - [긴 문서에서 sticky 헤더 이탈 수정](2026-09-19-docs-sticky-header-body-height-fix.md)
 - [Docs Secret And Token Lifecycle Policy](2026-09-18-docs-secret-token-lifecycle-policy.md)
