@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [공개 글의 저장소 전용 안내 제거](2026-09-19-reader-facing-article-copy.md)
+
 - [아카이브 시작 시점 변경](2026-09-19-archive-start-date.md)
 
 [월별 목록](../README.md) · [검증 보고서](../../verification/README.md)

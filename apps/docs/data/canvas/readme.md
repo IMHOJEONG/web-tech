@@ -119,8 +119,6 @@ canvas.requestPaint?.()
 
 ### 실험 페이지
 
-- 로컬 개발 서버에서 아래 경로로 실험 페이지를 확인할 수 있음
-
 [HTML-in-Canvas 실험 페이지](/experiments/html-in-canvas/index.html)
 
 ### 알게 된 점
