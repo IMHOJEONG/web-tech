@@ -2,13 +2,7 @@ import 'server-only'
 
 import fg from 'fast-glob'
 import fs from 'fs/promises'
-import { VFile } from 'vfile'
-import { matter as vfileMatter } from 'vfile-matter'
-import {
-    assertValidLocalDocFrontmatter,
-    isPublicDocStatus,
-    normalizeLocalDocFrontmatter,
-} from '~/lib/editorial-metadata'
+import { parseLocalDocument } from './local-document-parser'
 import type { ContentSource, Metadata } from '~/lib/get-document'
 import { getDocHref } from '~/lib/get-doc-route'
 import { fetchRemoteDocsData } from '~/lib/content-api'
@@ -23,60 +17,25 @@ import {
 } from '~/lib/local-content-paths'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { rankSearchDocs } from '~/lib/search-ranking'
-import { DEFAULT_LOCAL_DOCUMENT_THUMBNAIL } from '~/shared/assets/default-thumbnails'
-
-export type SearchData = {
-    id: string
-    title?: string
-    summary?: string
-    content: string
-    slug: string
-    fileName: string
-    date?: string
-    updatedAt?: string
-    thumbnail?: string | null
-    href: string
-    section: string
-    contentSource: ContentSource
-    readMinutes?: number
-    topicLabel?: string
-    tags?: string[]
+export interface SearchData {
+    readonly id: string
+    readonly title?: string
+    readonly summary?: string
+    readonly content: string
+    readonly slug: string
+    readonly fileName: string
+    readonly date?: string
+    readonly updatedAt?: string
+    readonly thumbnail?: string | null
+    readonly href: string
+    readonly section: string
+    readonly contentSource: ContentSource
+    readonly readMinutes?: number
+    readonly topicLabel?: string
+    readonly tags?: readonly string[]
 }
 
 const LOCAL_SEARCH_PATTERNS = ['data/**/*.{md,mdx}', 'category/**/*.{md,mdx}']
-
-function normalizeThumbnailPath(thumbnail?: unknown) {
-    if (typeof thumbnail !== 'string') {
-        return null
-    }
-
-    const trimmed = thumbnail.trim()
-
-    if (!trimmed) {
-        return null
-    }
-
-    let thumbnailPath = trimmed
-    const idx = thumbnailPath.indexOf('public/')
-
-    if (idx !== -1) {
-        thumbnailPath = thumbnailPath.slice(idx + 'public/'.length)
-    }
-
-    if (!thumbnailPath.startsWith('/')) {
-        thumbnailPath = `/${thumbnailPath}`
-    }
-
-    return thumbnailPath
-}
-
-function stripFrontmatter(value: string) {
-    return value.replace(/---[\s\S]*?---/, '').trim()
-}
-
-function slugFromFileName(fileName: string) {
-    return fileName.split('/').filter(Boolean).pop() ?? ''
-}
 
 function inferSearchHref(fileName: string, slug: string) {
     return getDocHref({ fileName, slug })
@@ -123,42 +82,31 @@ async function parseLocalSearchFile(
     filePath: string
 ): Promise<SearchData | null> {
     const fileContents = await fs.readFile(filePath, 'utf8')
-    const vfile = new VFile({ path: filePath, value: fileContents })
-    vfileMatter(vfile, { strip: true })
-    const frontmatter = normalizeLocalDocFrontmatter(vfile.data.matter || {})
-    assertValidLocalDocFrontmatter(filePath, frontmatter)
-
-    if (!isPublicDocStatus(frontmatter.status)) {
-        return null
-    }
-
-    const content = stripFrontmatter(String(vfile))
-    const fileName = toLocalContentFileName(filePath)
-    const normalizedFileName = normalizeDocPath(fileName)
-    const slug =
-        frontmatter.slug?.trim() || slugFromFileName(normalizedFileName)
+    const doc = parseLocalDocument(
+        filePath,
+        toLocalContentFileName(filePath),
+        fileContents
+    )
+    if (!doc) return null
+    // The common parser already removed frontmatter; preserve body separators.
+    const content = doc.content.trim()
 
     return {
-        id: frontmatter.id ?? normalizedFileName,
-        title: frontmatter.title ?? slug,
-        summary: frontmatter.summary ?? content.slice(0, 140),
+        id: doc.id,
+        title: doc.title,
+        summary: doc.summary,
         content,
-        slug,
-        fileName: normalizedFileName,
-        date:
-            frontmatter.date && frontmatter.date.trim()
-                ? frontmatter.date
-                : undefined,
-        thumbnail:
-            normalizeThumbnailPath(frontmatter.thumbnail) ??
-            DEFAULT_LOCAL_DOCUMENT_THUMBNAIL,
-        updatedAt: frontmatter.updatedAt,
-        href: inferSearchHref(normalizedFileName, slug),
-        section: inferSearchSection(normalizedFileName),
+        slug: doc.slug,
+        fileName: doc.fileName,
+        date: doc.date || undefined,
+        thumbnail: doc.thumbnail,
+        updatedAt: doc.updatedAt,
+        href: inferSearchHref(doc.fileName, doc.slug),
+        section: inferSearchSection(doc.fileName),
         contentSource: 'local',
-        readMinutes: frontmatter.readMinutes,
-        topicLabel: frontmatter.topicLabel,
-        tags: frontmatter.tags,
+        readMinutes: doc.readMinutes,
+        topicLabel: doc.topicLabel,
+        tags: doc.tags,
     }
 }
 

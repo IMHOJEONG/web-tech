@@ -1,13 +1,9 @@
-declare module 'vfile' {
-    interface DataMap {
-        matter: import('~/lib/editorial-metadata').LocalDocFrontmatterInput
-    }
-}
 import fs from 'fs'
 import path from 'path'
 import { cache } from 'react'
-import { VFile } from 'vfile'
-import { matter as vfileMatter } from 'vfile-matter'
+import { parseLocalDocument } from './local-document-parser'
+import type { Metadata } from './document.types'
+export type { Metadata, ContentFormat, ContentSource } from './document.types'
 import {
     fetchRemoteDocByRoutePath,
     fetchRemoteDocsData,
@@ -18,43 +14,11 @@ import {
     resolveCollectionContentSource,
 } from '~/lib/content-source-log'
 import { selectDocumentBySourcePolicy } from '~/lib/content-source-policy'
-import { DEFAULT_LOCAL_DOCUMENT_THUMBNAIL } from '~/shared/assets/default-thumbnails'
-import {
-    assertValidLocalDocFrontmatter,
-    isPublicDocStatus,
-    normalizeLocalDocFrontmatter,
-    type EditorialStatus,
-} from '~/lib/editorial-metadata'
 import { getDocHref, isDocRouteMatch } from '~/lib/get-doc-route'
 import {
     getLocalContentDirectories,
     toLocalContentFileName,
 } from '~/lib/local-content-paths'
-import { normalizeDocPath } from '~/lib/normalize-doc-path'
-
-export type ContentFormat = 'mdx' | 'html'
-export type ContentSource = 'local' | 'remote'
-
-export interface Metadata {
-    id: string
-    title: string
-    date: string
-    summary: string
-    slug: string
-    content: string
-    fileName: string
-    contentFormat?: ContentFormat
-    contentSource?: ContentSource
-    markdownPath?: string | null
-    thumbnail?: string | null
-    updatedAt?: string
-    authorName?: string
-    authorRole?: string
-    readMinutes?: number
-    topicLabel?: string
-    tags?: string[]
-    status?: EditorialStatus
-}
 
 function exploreDirectory(directory: string) {
     let files: string[] = []
@@ -82,62 +46,13 @@ const readLocalDocsSnapshot = cache(function readLocalDocsSnapshot() {
     const fileNames = getLocalContentDirectories().flatMap(exploreDirectory)
 
     const allPostsData: Partial<Metadata>[] = fileNames.flatMap((fileName) => {
-        // Read markdown file as string
         const fileContents = fs.readFileSync(fileName, 'utf8')
-        // Use vfile-matter to parse the post metadata section
-        const vfile = new VFile({ path: fileName, value: fileContents })
-        vfileMatter(vfile, { strip: true })
-        const frontmatter = normalizeLocalDocFrontmatter(
-            vfile.data.matter || {}
+        const doc = parseLocalDocument(
+            fileName,
+            toLocalContentFileName(fileName),
+            fileContents
         )
-        assertValidLocalDocFrontmatter(fileName, frontmatter)
-
-        if (!isPublicDocStatus(frontmatter.status)) {
-            return []
-        }
-
-        const content = String(vfile)
-        // 프로젝트 루트 기준의 상대경로(확장자 없는)만 추출
-        const relPathFromRoot = toLocalContentFileName(fileName)
-        const normalizedFileName = normalizeDocPath(relPathFromRoot)
-        const fallbackSlug =
-            normalizedFileName.split('/').filter(Boolean).pop() ?? ''
-
-        // thumbnail 경로를 public 폴더 기준으로 /로 시작하게 단순화
-        let thumbnailPath = frontmatter.thumbnail
-        if (typeof thumbnailPath === 'string' && thumbnailPath.length > 0) {
-            thumbnailPath = thumbnailPath.trim()
-            const idx = thumbnailPath.indexOf('public/')
-            if (idx !== -1) {
-                thumbnailPath = thumbnailPath.slice(idx + 'public/'.length)
-            }
-            if (!thumbnailPath.startsWith('/')) {
-                thumbnailPath = '/' + thumbnailPath
-            }
-        } else {
-            thumbnailPath = DEFAULT_LOCAL_DOCUMENT_THUMBNAIL
-        }
-        return [
-            {
-                id: frontmatter.id ?? normalizedFileName,
-                title: frontmatter.title ?? fallbackSlug,
-                slug: frontmatter.slug ?? fallbackSlug,
-                summary: frontmatter.summary ?? '',
-                date: frontmatter.date ?? '',
-                content,
-                fileName: normalizedFileName,
-                contentFormat: 'mdx',
-                contentSource: 'local',
-                thumbnail: thumbnailPath,
-                updatedAt: frontmatter.updatedAt,
-                authorName: frontmatter.authorName,
-                authorRole: frontmatter.authorRole,
-                readMinutes: frontmatter.readMinutes,
-                topicLabel: frontmatter.topicLabel,
-                tags: frontmatter.tags,
-                status: frontmatter.status,
-            },
-        ]
+        return doc ? [doc] : []
     })
 
     return Object.freeze(allPostsData)

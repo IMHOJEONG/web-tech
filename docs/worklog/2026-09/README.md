@@ -2,6 +2,8 @@
 
 [월별 목록](../README.md) · [검증 보고서](../../verification/README.md)
 
+- [로컬 문서 타입 보호와 파서 통합](2026-09-19-local-document-parser-unification.md)
+
 - [상세 요청의 로컬 문서 중복 읽기 제거](2026-09-19-local-document-request-cache.md)
 - [배포 화면 헤더·TOC 검사 정리](2026-09-19-deployed-shell-probe.md)
 - [Better Stack 로컬 진단 도구 정리](2026-09-19-better-stack-local-probe.md)

@@ -61,16 +61,20 @@ React 하위 컴포넌트 렌더링, hydration, 이미지 로딩, TTFB/LCP는 �
 React `cache` 함수에서 수행한다. 상세 선택과 부가 영역 목록 조회가 같은 RSC
 렌더링에서 스냅샷을 공유한다. 요청 간 영속 캐시나 `use cache`를 추가하지 않는다.
 호출자에는 배열 복사본을 반환하고 정렬도 복사본에서 수행한다. 내부 배열은 freeze한다.
-문서 객체 자체의 deep freeze/복제는 하지 않으므로 소비자는 문서 필드를 변경하지 않는다.
+문서 필드와 태그 배열은 readonly 타입으로 보호한다. 객체 자체의 deep freeze/복제는
+하지 않으므로 JavaScript 호출자까지 런타임 불변성이 보장되는 것은 아니다.
 
 React 서버 렌더링 바깥에서 직접 호출하면 같은 memoization을 보장하지 않는다.
 로컬 콘텐츠가 배포 산출물에 포함되는 정책은 유지하며, 운영 로컬 글 수정은 여전히
 재배포가 필요하다. 원격 우선 선택, 원격 fetch TTL/tag, 웹훅 계약은 변경하지 않는다.
-`get-category.ts`, `get-search-data.ts`의 별도 파싱 경로 통합은 이번 범위가 아니다.
+세 로더의 정규화는 `parseLocalDocument()`를 공유한다. 파일 탐색과 I/O는 별개이므로
+검색·카테고리까지 요청 캐시가 확장된 것으로 해석하지 않는다.
+본문 구분선 보존, 공개 상태, readonly 계약은 다음 단위 검사로 확인한다.
 
 ```sh
 pnpm --filter docs exec node --experimental-strip-types --test lib/article-timing.test.ts
 pnpm --filter docs typecheck:node-test
+pnpm --filter docs test:lib
 pnpm --filter docs test:article:prod
 pnpm --filter docs test:article:prod local-document-reads --project=article-mobile
 ```
