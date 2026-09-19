@@ -45,6 +45,7 @@
 - [Docs Search API Contract](docs-search-api-contract.md)
 - [Docs Search Experience Policy](docs-search-experience-policy.md)
 - [Docs Secret And Token Lifecycle Policy](docs-secret-token-lifecycle-policy.md)
+- [블로그 SSR 필요성 검증](docs-server-rendering-assessment.md)
 - [Docs Vercel Platform Operations Policy](docs-vercel-platform-operations-policy.md)
 - [UI Build Export Retrospective](ui-build-export-retrospective.md)
 - [UI Package Build Export Strategy](ui-package-build-export.md)

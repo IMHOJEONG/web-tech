@@ -6,6 +6,7 @@
 
 - [Content API 인증/장애 대응 운영 Runbook](content-api-auth-ops-runbook.md)
 - [상세 문서 렌더링 회귀 테스트](docs-article-rendering-regression.md)
+- [상세 페이지 스트리밍 성능 개선](docs-article-streaming-performance.md)
 - [Docs Backend NAS Deployment](docs-backend-nas-deployment.md)
 - [로컬 프로덕션 캐시 통합 테스트](docs-content-cache-production-test.md)
 - [Docs Contributor Guide](docs-contributor-guide.md)

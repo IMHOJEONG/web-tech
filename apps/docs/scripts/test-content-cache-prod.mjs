@@ -203,7 +203,10 @@ try {
             join(app, 'scripts/fixtures/cache-locale-layout.mjs'),
             join(copy, 'app/[locale]/layout.tsx')
         )
-        const localePage = join(copy, 'app/[locale]/cache-locale-probe/page.tsx')
+        const localePage = join(
+            copy,
+            'app/[locale]/cache-locale-probe/page.tsx'
+        )
         await mkdir(dirname(localePage), { recursive: true })
         await cp(
             join(app, 'scripts/fixtures/cache-locale-page.tsx'),
@@ -283,13 +286,20 @@ try {
         clearTimeout(buildTimer)
     }
     assert.equal(result.code, 0, 'Production build failed or timed out')
+    const routeTableStart = logs.lastIndexOf('Route (app)')
+    if (routeTableStart >= 0) console.log(logs.slice(routeTableStart))
     server = launch(
         ['start', '--hostname', '127.0.0.1', '--port', String(port)],
         env
     )
     async function request(path, options = {}) {
         assert.ok(!interrupted, 'Interrupted')
-        if (path.startsWith('/api/cache-probe') || path.startsWith('/api/locale-cache-probe') || path.startsWith('/docs/')) path = `/en${path}`
+        if (
+            path.startsWith('/api/cache-probe') ||
+            path.startsWith('/api/locale-cache-probe') ||
+            path.startsWith('/docs/')
+        )
+            path = `/en${path}`
         return fetch(`${base}${path}`, {
             ...options,
             signal: AbortSignal.timeout(30_000),
@@ -475,9 +485,14 @@ try {
     console.log('[cache-test] Checking article response', { minimal })
     const page = await request('/docs/feed/cache-probe')
     assert.equal(page.status, 200)
-    assert.ok(
-        (await page.text()).includes('CACHE_BODY_V3'),
-        'Article must render fresh body'
+    const articleHtml = (await page.text()).replace(
+        /<script\b[^>]*>[\s\S]*?<\/script>/gi,
+        ''
+    )
+    assert.match(
+        articleHtml,
+        /<article\b[^>]*>[\s\S]*CACHE_BODY_V3[\s\S]*?<\/article>/i,
+        'Fresh article body must exist in HTML, not only in hydration scripts'
     )
     console.log('[PASS] Article renders V3', { minimal })
     console.log('[cache-test] All checks passed')
