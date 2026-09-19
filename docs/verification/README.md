@@ -4,6 +4,8 @@
 
 ## 성능과 화면 안정성
 
+- [09-19 로컬 문서 읽기 중복 제거](performance/2026-09-19-local-document-reads.md): 요청 내 파일 읽기 공유와 요청 간 재읽기 검증.
+
 - [09-19 상세 렌더링 회귀 검증](performance/2026-09-19-article-production-regression.md): 상세 16개 통과, 스트리밍 검사 2개 실패. 동시 변경을 정리한 후 재검증 필요.
 
 | 보고서                                                                                                 | 대상                                     |

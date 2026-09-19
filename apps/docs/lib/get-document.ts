@@ -5,6 +5,7 @@ declare module 'vfile' {
 }
 import fs from 'fs'
 import path from 'path'
+import { cache } from 'react'
 import { VFile } from 'vfile'
 import { matter as vfileMatter } from 'vfile-matter'
 import {
@@ -77,7 +78,7 @@ function exploreDirectory(directory: string) {
     return files
 }
 
-export function getLocalDocsData() {
+const readLocalDocsSnapshot = cache(function readLocalDocsSnapshot() {
     const fileNames = getLocalContentDirectories().flatMap(exploreDirectory)
 
     const allPostsData: Partial<Metadata>[] = fileNames.flatMap((fileName) => {
@@ -139,7 +140,12 @@ export function getLocalDocsData() {
         ]
     })
 
-    return allPostsData
+    return Object.freeze(allPostsData)
+})
+
+export function getLocalDocsData() {
+    // Share file reads only within a React server render; keep caller sorting isolated.
+    return [...readLocalDocsSnapshot()]
 }
 
 function getDocIdentityKey(doc: Partial<Metadata>) {
@@ -251,7 +257,7 @@ export async function getDocsData(options: DocsDataOptions = {}) {
 
 export async function getSortedPostsData(options: DocsDataOptions = {}) {
     const allPostsData = await getDocsData(options)
-    return allPostsData.sort((a, b) => {
+    return [...allPostsData].sort((a, b) => {
         if (a.date && b.date && a.date < b.date) {
             return 1
         } else {

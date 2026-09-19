@@ -26,7 +26,7 @@ export default defineConfig({
         },
         {
             command:
-                'pnpm build && pnpm exec next start --hostname 127.0.0.1 --port 3111',
+                'pnpm build && node --import ./article-e2e/local-io-probe.ts ./node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3111',
             url: `${baseURL}/ko/about`,
             timeout: 180_000,
             reuseExistingServer: false,

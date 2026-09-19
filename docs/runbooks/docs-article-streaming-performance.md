@@ -10,7 +10,7 @@ Node.js 24와 설치된 workspace 의존성을 사용한다. 원격 지연과 �
 - [x] 문서 선택, 본문 변환, 탐색 목록 조회, 탐색 링크 계산 계측 추가
 - [ ] 프로덕션 모드에서 로컬/원격 문서의 캐시 적중/미적중 기준값 수집
 - [x] 관련 문서와 이어 읽기를 별도 Suspense 영역으로 분리
-- [ ] 요청 내 로컬 문서 전체 읽기 중복 제거
+- [x] 상세 렌더링 요청 내 로컬 문서 전체 읽기 중복 제거
 - [ ] 콘텐츠 변경과 렌더러 버전을 고려한 렌더링 결과 캐시 적용
 
 ## 측정 방법
@@ -55,14 +55,34 @@ React 하위 컴포넌트 렌더링, hydration, 이미지 로딩, TTFB/LCP는 �
 
 ## 실행 순서
 
+### 요청 내 로컬 문서 공유
+
+`getLocalDocsData()`의 파일 읽기와 frontmatter 파싱은 모듈 단위로 선언한
+React `cache` 함수에서 수행한다. 상세 선택과 부가 영역 목록 조회가 같은 RSC
+렌더링에서 스냅샷을 공유한다. 요청 간 영속 캐시나 `use cache`를 추가하지 않는다.
+호출자에는 배열 복사본을 반환하고 정렬도 복사본에서 수행한다. 내부 배열은 freeze한다.
+문서 객체 자체의 deep freeze/복제는 하지 않으므로 소비자는 문서 필드를 변경하지 않는다.
+
+React 서버 렌더링 바깥에서 직접 호출하면 같은 memoization을 보장하지 않는다.
+로컬 콘텐츠가 배포 산출물에 포함되는 정책은 유지하며, 운영 로컬 글 수정은 여전히
+재배포가 필요하다. 원격 우선 선택, 원격 fetch TTL/tag, 웹훅 계약은 변경하지 않는다.
+`get-category.ts`, `get-search-data.ts`의 별도 파싱 경로 통합은 이번 범위가 아니다.
+
 ```sh
 pnpm --filter docs exec node --experimental-strip-types --test lib/article-timing.test.ts
 pnpm --filter docs typecheck:node-test
 pnpm --filter docs test:article:prod
+pnpm --filter docs test:article:prod local-document-reads --project=article-mobile
 ```
 
 마지막 명령은 별도 fixture로 프로덕션 빌드와 상세 페이지 회귀 테스트를 실행한다.
 동일 체크아웃에서 개발 서버나 다른 빌드를 동시에 실행하지 않는다.
+
+읽기 횟수 테스트는 프로덕션 테스트 서버에만 `local-io-probe.ts`를 preload한다.
+유효한 테스트 UUID 헤더가 있는 요청의 동기 Markdown 파일 읽기와 디렉터리 조회만
+AsyncLocalStorage로 집계한다. 운영 애플리케이션·Next 설정에는 probe를 import하지 않는다.
+`test-results/local-io` 및 테스트 attachment에는 횟수만 저장하고 파일 경로·본문·토큰은 남기지 않는다.
+각 요청의 모든 파일 읽기가 1회인지, 다음 요청에서도 새로 읽는지 검사한다.
 
 ## 기대 결과
 
@@ -80,3 +100,4 @@ timeout 값을 늘려 실패를 숨기지 않고 로컬 fixture에서 재현한�
 
 - [상세 렌더링 검사 절차](docs-article-rendering-regression.md)
 - [게시 갱신 및 스트림 취소 비교](../verification/cache/2026-09-19-content-publication-browser-test.md)
+- [로컬 문서 읽기 중복 제거 검증](../verification/performance/2026-09-19-local-document-reads.md)

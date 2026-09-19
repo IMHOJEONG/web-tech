@@ -4,6 +4,8 @@
 
 JSON은 특정 시점의 측정값입니다. 실행 환경과 해석은 보고서 및 runbook을 함께 읽습니다. 인증 토큰·개인정보는 저장하지 않습니다.
 
+- [2026-09-19-local-document-reads.json](2026-09-19-local-document-reads.json)
+
 - [2026-09-18-after-font-preload.json](2026-09-18-after-font-preload.json)
 - [2026-09-18-deployed-performance.json](2026-09-18-deployed-performance.json)
 - [2026-09-18-font-browser-smoke.json](2026-09-18-font-browser-smoke.json)
