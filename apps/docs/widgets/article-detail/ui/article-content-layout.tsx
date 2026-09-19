@@ -1,24 +1,16 @@
-import type { TocItem } from 'remark-flexible-toc'
+import type { ArticleContentLayoutProps } from './article-content.types'
 import Toc from '~/widgets/article-toc/ui/toc'
 import { getTranslations } from 'next-intl/server'
-import type { ArticleRelatedDocumentItem } from '~/lib/article-related-documents'
-import type { ArticleReadingNavigation as ArticleReadingNavigationData } from '~/lib/article-reading-navigation'
-import { ArticleRelatedDocuments } from './article-related-documents'
-import { ArticleReadingNavigation } from './article-reading-navigation'
 import { ArticleContentGrid } from './article-content-grid'
+import { ArticleSupplementaryBoundary } from './article-supplementary-boundary'
 
 export async function ArticleContentLayout({
-    relatedDocuments,
+    supplementary,
     toc,
-    readingNavigation,
     children,
-}: {
-    relatedDocuments?: ArticleRelatedDocumentItem[]
-    toc?: TocItem[]
-    readingNavigation?: ArticleReadingNavigationData
-    children: React.ReactNode
-}) {
+}: ArticleContentLayoutProps) {
     const t = await getTranslations('articleDetail')
+    const common = await getTranslations('common')
 
     return (
         <ArticleContentGrid>
@@ -30,25 +22,12 @@ export async function ArticleContentLayout({
 
             <div className="min-w-0">
                 {children}
-                {relatedDocuments && (
-                    <ArticleRelatedDocuments
-                        items={relatedDocuments}
-                        labels={{
-                            description: t('relatedDocuments.description'),
-                            sectionTitle: t('relatedDocuments.sectionTitle'),
-                        }}
-                    />
-                )}
-                {readingNavigation && (
-                    <ArticleReadingNavigation
-                        navigation={readingNavigation}
-                        labels={{
-                            lastUpdated: t('readingNavigation.lastUpdated'),
-                            next: t('readingNavigation.next'),
-                            previous: t('readingNavigation.previous'),
-                            sectionTitle: t('readingNavigation.sectionTitle'),
-                        }}
-                    />
+                {supplementary && (
+                    <ArticleSupplementaryBoundary
+                        loadingLabel={common('loadingDocuments')}
+                    >
+                        {supplementary}
+                    </ArticleSupplementaryBoundary>
                 )}
             </div>
         </ArticleContentGrid>
