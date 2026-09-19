@@ -241,7 +241,33 @@ Live tail에서 `event=docs.remote_payload_schema_failure`와 `environment=produ
 오류 이벤트가 더 이상 없다는 것만으로 복구를 판단하지 않는다. 방문 요청 자체가 없을 수도 있다.
 인시던트가 열린 동안의 재알림/에스컬레이션 빈도는 수신 정책에서 제한한다. 그룹별 인시던트 생성과 재알림 동작은 테스트 소스로 확인한다.
 
-### 5. 검증 순서
+### 5. 로컬 자동 검증
+
+Source token과 HTTPS 수집 URL을 `apps/docs/.env.local` 또는 기존 로컬 env 파일에 설정한 뒤 실행한다.
+
+```bash
+pnpm --filter docs test:better-stack:local
+```
+
+의존성과 공용 content contract가 이미 빌드된 환경에서는 아래 명령으로 직접 실행할 수도 있다.
+
+```bash
+node apps/docs/scripts/test-better-stack-local.mjs
+```
+
+이 명령은 실제 Better Stack Source로 테스트 오류를 전송한다. CI 기본 테스트에는 포함하지 않는다.
+
+- Next.js의 env loader로 로컬 설정을 읽으며 토큰은 출력하거나 임시 파일에 저장하지 않는다.
+- 임시 디렉터리에 실제 사이트맵·콘텐츠 로딩 코드를 복사하고 별도 Next 개발 서버를 실행한다. 실제 앱의 `.next`, 운영 API, 기존 개발 서버는 사용하지 않는다.
+- 테스트용 콘텐츠 API를 정상 배열 `[]`에서 잘못된 형식 `{"data":[]}`으로 전환한다.
+- 두 번의 `/sitemap.xml` 요청이 HTTP 200이며 동일한 로컬 문서 URL을 포함하는지 비교한다.
+- 임시 복사본에서 실제 전송 함수의 결과만 관측한다. HTTPS 전송이나 인증을 mock하지 않는다.
+- 이벤트에 `test_run_id=local-probe-...`를 추가하고, 테스트 프로세스의 환경은 항상 `development`로 지정한다. Source 자체는 로컬에 설정된 Source이므로 개발용 Source 사용을 권장한다.
+- 종료 시 테스트 서버와 임시 파일을 정리한다.
+
+`PASS Better Stack accepted`는 수집 API의 성공 응답을 뜻한다. 출력된 `test_run_id`로 Live tail을 검색해 화면 수신을 확인한다. 이메일/Slack 알림 수신은 별도 확인이 필요하며, `production` 전용 규칙은 이 테스트에 반응하지 않는다.
+
+### 6. 수신·알림 검증 순서
 
 1. `pnpm --filter docs test:lib`로 모의 전송·인증 실패·timeout·집계 키 테스트를 실행한다. 이 테스트는 외부로 로그를 보내지 않는다.
 2. 별도 개발 소스에 환경변수를 설정한다.

@@ -18,6 +18,8 @@
         "test:e2e": "playwright test",
         "test:article:prod": "playwright test --config=playwright.article.config.ts",
         "check:prod-routes": "node ./scripts/check-prod-routes.mjs",
+        "pretest:better-stack:local": "pnpm --filter @web-tech/docs-content-contract build",
+        "test:better-stack:local": "node ./scripts/test-better-stack-local.mjs",
         "test:cache:prod": "node ./scripts/test-content-cache-prod.mjs",
         "pretest:lib": "pnpm --filter @web-tech/docs-content-contract build",
         "test:lib": "pnpm typecheck:node-test && node --experimental-strip-types --test ./lib/*.test.ts ./feature/callout/model/*.test.ts ./feature/code-block/lib/*.test.ts ./shared/config/*.test.ts",
