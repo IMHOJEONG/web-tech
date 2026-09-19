@@ -65,8 +65,8 @@
 
 - `docs/architecture/docs-design-token-usage-policy.md`
 - `docs/architecture/docs-responsive-policy.md`
-- `docs/worklog/2026-05-11-code-block-contrast-fix.md`
-- `docs/worklog/2026-05-10-remote-image-figcaption-normalization.md`
-- `docs/worklog/2026-05-08-header-search-ux-refresh.md`
-- `docs/worklog/2026-05-11-shiki-migration.md`
-- `docs/worklog/2026-05-25-docs-widget-responsive-audit.md`
+- `docs/worklog/2026-05/2026-05-11-code-block-contrast-fix.md`
+- `docs/worklog/2026-05/2026-05-10-remote-image-figcaption-normalization.md`
+- `docs/worklog/2026-05/2026-05-08-header-search-ux-refresh.md`
+- `docs/worklog/2026-05/2026-05-11-shiki-migration.md`
+- `docs/worklog/2026-05/2026-05-25-docs-widget-responsive-audit.md`

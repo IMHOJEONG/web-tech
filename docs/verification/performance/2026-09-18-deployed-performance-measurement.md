@@ -8,7 +8,7 @@ heap-forge.app의 두 상세 페이지를 desktop/mobile-lab 조건에서 각각
 
 - `apps/docs/scripts/measure-deployed-performance.mjs`: 읽기 전용 재현 스크립트.
 - `docs/runbooks/docs-deployed-performance-measurement.md`: 수치, 조건, 한계, 후속 검증 절차.
-- `docs/worklog/artifacts/2026-09-18-deployed-performance.json`: 12회 원본 측정값.
+- `docs/verification/artifacts/2026-09-18-deployed-performance.json`: 12회 원본 측정값.
 
 ## Notes
 

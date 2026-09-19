@@ -78,7 +78,7 @@ POST는 매번 생성한 임시 토큰으로 인증하고 ko/en만 허용한다.
 - [시험 fixture](../../apps/docs/scripts/fixtures/locale-cache-probe.ts): locale 인자, cacheTag, UUID 생성, 인증.
 - [검증 모듈](../../apps/docs/scripts/test-utils/assert-locale-cache-key.mjs): deepEqual/notEqual assertion.
 - [실행기](../../apps/docs/scripts/test-content-cache-prod.mjs): 격리 복사, 빌드, 시작과 정리.
-- [실제 결과](../worklog/2026-09-14-docs-locale-cache-key-test.md): 관측 UUID와 환경.
+- [실제 결과](../worklog/2026-09/2026-09-14-docs-locale-cache-key-test.md): 관측 UUID와 환경.
 
 ## 한계와 실패 시 점검
 

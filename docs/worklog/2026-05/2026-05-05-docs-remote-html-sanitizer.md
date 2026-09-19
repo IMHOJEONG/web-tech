@@ -12,7 +12,7 @@
 - `apps/docs/package.json`
 - `pnpm-workspace.yaml`
 - `pnpm-lock.yaml`
-- `docs/worklog/2026-05-05-docs-remote-html-sanitizer.md`
+- `docs/worklog/2026-05/2026-05-05-docs-remote-html-sanitizer.md`
 
 ## 메모
 

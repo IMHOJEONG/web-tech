@@ -13,7 +13,7 @@
 ## 변경 내용
 
 - `docs/runbooks/pnpm-build-approvals.md`
-- `docs/worklog/2026-05-04-pnpm-build-approvals.md`
+- `docs/worklog/2026-05/2026-05-04-pnpm-build-approvals.md`
 - `package.json`
 - `pnpm-workspace.yaml`
 - `.gitignore`

@@ -68,8 +68,8 @@ desktop 이벤트 루프 1회에서 CLS 1.00018이 재현됐으며 다른 11회�
 
 원본:
 
-- `docs/worklog/artifacts/2026-09-18-after-font-preload.json`
-- `docs/worklog/artifacts/2026-09-18-font-browser-smoke.json`
+- `docs/verification/artifacts/2026-09-18-after-font-preload.json`
+- `docs/verification/artifacts/2026-09-18-font-browser-smoke.json`
 
 재현:
 

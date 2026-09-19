@@ -110,9 +110,9 @@ NAS 문서 변경
 ## 관련 프로젝트 문서
 
 - [Locale 캐시 키 재현 가이드](../../runbooks/docs-locale-cache-key-test.md): locale 인자별 재사용과 언어별 선택적 만료 검증.
-- [2026-09-14 locale 경계 시험](../../worklog/2026-09-14-docs-cache-locale-boundary-test.md): 임시 instant=false와 함수 캐시 단독 구성에서 전체 앱 빌드 및 언어별 서버 응답 검증 통과. 정적 셸 최적화는 미완료.
-- [2026-09-13 Cache Components 실험](../../worklog/2026-09-13-docs-cache-components-experiment.md): 전체 앱은 locale 경계에서 실패, 최소 앱의 함수 캐시 단독 구성은 통과. 운영 전환은 보류.
-- [2026-09-13 갱신 정책 비교 결과](../../worklog/2026-09-13-docs-cache-policy-comparison-test.md): 기존 모델에서 `max`와 `expire: 0` 비교 완료. Cache Components 결과는 별도 실험 기록에서 다룬다.
+- [2026-09-14 locale 경계 시험](../../worklog/2026-09/2026-09-14-docs-cache-locale-boundary-test.md): 임시 instant=false와 함수 캐시 단독 구성에서 전체 앱 빌드 및 언어별 서버 응답 검증 통과. 정적 셸 최적화는 미완료.
+- [2026-09-13 Cache Components 실험](../../worklog/2026-09/2026-09-13-docs-cache-components-experiment.md): 전체 앱은 locale 경계에서 실패, 최소 앱의 함수 캐시 단독 구성은 통과. 운영 전환은 보류.
+- [2026-09-13 갱신 정책 비교 결과](../../worklog/2026-09/2026-09-13-docs-cache-policy-comparison-test.md): 기존 모델에서 `max`와 `expire: 0` 비교 완료. Cache Components 결과는 별도 실험 기록에서 다룬다.
 - [로컬 production 캐시 테스트](../../runbooks/docs-content-cache-production-test.md)
 - [개선 우선순위](../../architecture/docs-content-cache-improvement-backlog.md)
 - [통합 테스트 실험 노트](./next-data-cache-integration-lab.md)

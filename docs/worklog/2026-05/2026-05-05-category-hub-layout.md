@@ -16,7 +16,7 @@
 - `apps/docs/app/category/[main]/[sub]/page.tsx`
 - `apps/docs/entities/category/ui/category-document-card.tsx`
 - `apps/docs/lib/get-category.ts`
-- `docs/worklog/2026-05-05-category-hub-layout.md`
+- `docs/worklog/2026-05/2026-05-05-category-hub-layout.md`
 
 ## 메모
 

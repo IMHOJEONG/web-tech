@@ -1,48 +1,33 @@
-# Project Docs
+# 프로젝트 문서 안내
 
-이 디렉터리는 서비스에 노출되는 `apps/docs/data`와 별도로, 프로젝트 운영 문서를 관리하기 위한 공간입니다.
+이곳은 모노레포의 설계·운영·검증 기록입니다. 블로그에 공개되는 글은 `apps/docs/data`, `apps/docs/category`에서 별도로 관리합니다.
 
-권장 규칙:
+## 필요한 문서 찾기
 
-- `docs/architecture/`
-  - 아키텍처 결정 기록(ADR), 큰 구조 변경, 데이터 흐름, 기술 선택 이유
-  - 예: [docs/architecture/docs-app-fsd.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-app-fsd.md)
-  - 예: [docs/architecture/blog-content-database-recommendation.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-database-recommendation.md)
-  - 예: [docs/architecture/blog-content-html-vs-markdown.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-html-vs-markdown.md)
-  - 예: [docs/architecture/blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
-  - 예: [docs/architecture/docs-content-rendering-strategy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-rendering-strategy.md)
-  - 예: [docs/architecture/ui-package-build-export.md](/Users/coder/Desktop/project/web-tech/docs/architecture/ui-package-build-export.md)
-  - 예: [docs/architecture/ui-build-export-retrospective.md](/Users/coder/Desktop/project/web-tech/docs/architecture/ui-build-export-retrospective.md)
-  - 예: [docs/architecture/docs-responsive-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-responsive-policy.md)
-  - 예: [docs/architecture/docs-app-shell-rationale.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-app-shell-rationale.md)
-  - 예: [docs/architecture/docs-loading-ux-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-loading-ux-policy.md)
-- `docs/worklog/`
-  - Codex 작업 로그, 협의 내용, 다음 액션, 열린 이슈
-- `docs/process/`
-  - 작업 방식, 문서화 규칙, 협업 운영 기준
-- `docs/knowledge/`
-  - 프로젝트를 진행하면서 배운 점, 운영 시 알아둘 점, 다음 사람이 빠르게 따라잡아야 할 지식 정리
-- `docs/todo/`
-  - 장기 개선 백로그, 우선순위별 TODO, 구조/디자인/인프라 개선 항목
-  - 예: [docs/todo/platform-improvement-todo.md](/Users/coder/Desktop/project/web-tech/docs/todo/platform-improvement-todo.md)
-- `docs/runbooks/`
-  - 배포/운영/로컬 실행/장애 대응 절차
-  - 예: [docs/runbooks/docs-env-checklist.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/docs-env-checklist.md)
+| 알고 싶은 내용 | 위치 | 관리 기준 |
+| --- | --- | --- |
+| 왜 이런 구조와 정책을 선택했는가? | [설계와 정책](architecture/README.md) | 현재 유효한 결정, 계약, 대안과 제약 |
+| 실행·배포·장애 대응·테스트를 어떻게 하는가? | [운영 및 재현 절차](runbooks/README.md) | 반복 실행 가능한 명령과 준비 조건 |
+| 실제로 무엇을 검증했고 결과는 어땠는가? | [검증 보고서](verification/README.md) | 날짜, 대상 버전, 조건, 결과, 증거, 한계 |
+| 어느 작업에서 무엇이 바뀌었는가? | [월별 작업 기록](worklog/README.md) | 변경 이유, 범위, 다음 작업 |
+| 다음에 무엇을 해야 하는가? | [할 일](todo/) | 우선순위와 완료 조건 |
+| 다음 작업에도 재사용할 지식은? | [지식 모음](knowledge/README.md) | 개념과 반복되는 교훈 |
+| 협업·문서 작성 규칙은? | [문서화 규칙](process/codex-documentation-policy.md) | 공통 프로세스 |
+| 예제나 실험용 파일은? | [예제](examples/) | 배포 콘텐츠와 구분되는 참고 자료 |
 
-운영 원칙:
+## 최근 검증 바로가기
 
-- 사용자에게 보여줄 콘텐츠는 `apps/docs/data`, `apps/docs/category`에 둡니다.
-- 팀 내부 협의/메모/의사결정은 여기 `docs/` 아래에 둡니다.
-- 큰 변경은 `worklog`에 남기고, 장기적으로 중요한 결정은 `architecture`의 ADR로 승격합니다.
-- 모든 구현/수정 작업은 반드시 관련 문서 업데이트를 동반합니다.
-  - 기본적으로 `docs/worklog/`는 매 작업마다 갱신합니다.
-  - 장기 규칙이나 협업 기준은 `docs/process/`에서 관리합니다.
-  - 프로젝트를 하며 축적되는 운영 지식은 `docs/knowledge/`에 정리합니다.
+- [운영 sticky header 및 성능 검증](verification/performance/2026-09-19-docs-sticky-header-deployment-verification.md)
+- [CLS 배포 검증](verification/performance/2026-09-19-docs-cls-deployment-verification.md)
+- [Cache Components 정적 셸 검증](verification/cache/2026-09-16-docs-static-shell-verification.md): 당시 실패 기록이며 현재 운영 상태와 구분합니다.
 
-Codex와 함께 쓰는 방법:
+## 문서가 다시 커지지 않게 하는 기준
 
-1. 작업을 시작할 때 관련 ADR과 최근 worklog를 먼저 확인합니다.
-2. 구현 중 결정이 바뀌면 `worklog`에 이유와 영향 범위를 짧게 남깁니다.
-3. 재사용될 결정이면 새 ADR을 추가합니다.
-4. 문서화 규칙은 [docs/process/codex-documentation-policy.md](/Users/coder/Desktop/project/web-tech/docs/process/codex-documentation-policy.md)를 기준으로 따릅니다.
-5. 세션이 끝날 때 다음 사람이 바로 이어갈 수 있게 `Next` 섹션을 갱신합니다.
+- 작업 기록은 `worklog/YYYY-MM/YYYY-MM-DD-주제.md`에 짧게 남깁니다.
+- 실행 방법은 runbook, 특정 실행 결과는 verification에 둡니다. 같은 내용을 두 문서에 복사하지 않고 링크로 연결합니다.
+- 검증 JSON 등 원본 증거는 `verification/artifacts/`에 두고 관련 보고서에서 연결합니다. 토큰, 개인정보, 전체 인증 헤더는 저장하지 않습니다.
+- 테스트 코드를 추가한 변경 기록은 worklog에 남길 수 있습니다. 파일명에 `test`가 있다는 이유만으로 검증 보고서로 분류하지 않습니다.
+- 과거 기록의 수치는 당시 환경에 대한 증거입니다. 최신 정책을 대체하지 않습니다.
+- 문서 링크는 저장소 내 상대경로를 사용합니다. 개인 PC의 절대경로를 새 링크에 넣지 않습니다.
+
+상세 분류 및 이동 기준은 [문서 역할과 구조](process/documentation-organization.md)를 참고합니다.

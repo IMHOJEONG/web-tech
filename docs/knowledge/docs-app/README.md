@@ -74,9 +74,9 @@
 - `docs/architecture/docs-responsive-policy.md`
 - `docs/architecture/docs-content-routing-policy.md`
 - `docs/architecture/docs-search-experience-policy.md`
-- `docs/worklog/2026-05-05-docs-feed-and-docs-routing.md`
-- `docs/worklog/2026-05-05-docs-search-experience.md`
-- `docs/worklog/2026-05-08-channel-hub-layout-conversion.md`
-- `docs/worklog/2026-05-08-uiux-hub-figma-alignment.md`
-- `docs/worklog/2026-05-09-mobile-drawer-navigation-alignment.md`
-- `docs/worklog/2026-05-25-docs-widget-responsive-audit.md`
+- `docs/worklog/2026-05/2026-05-05-docs-feed-and-docs-routing.md`
+- `docs/worklog/2026-05/2026-05-05-docs-search-experience.md`
+- `docs/worklog/2026-05/2026-05-08-channel-hub-layout-conversion.md`
+- `docs/worklog/2026-05/2026-05-08-uiux-hub-figma-alignment.md`
+- `docs/worklog/2026-05/2026-05-09-mobile-drawer-navigation-alignment.md`
+- `docs/worklog/2026-05/2026-05-25-docs-widget-responsive-audit.md`

@@ -8,7 +8,7 @@
 ## Changed
 
 - 재현 스크립트: `apps/docs/scripts/trace-deployed-rendering.cjs`
-- 원본 증거: `docs/worklog/artifacts/2026-09-18-rendering-trace.json`
+- 원본 증거: `docs/verification/artifacts/2026-09-18-rendering-trace.json`
 - LayoutShift sources/좌표, LCP 후보 이력, 본문 높이, CSS/폰트 Resource Timing,
   loadingdone 및 Long Task를 수집했다. 전체 DevTools CPU trace는 아니다.
 

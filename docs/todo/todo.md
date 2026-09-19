@@ -48,7 +48,7 @@
 - [x] `P1` `/web`, `/mobile`, `/ui-ux`를 상세 showcase가 아니라 채널 허브로 전환한다.
   - 세 라우트는 `HubPage` 기반 탐색 허브를 사용
   - `web`은 FE/V8 문서, `ui-ux`는 interface/system 문서, `mobile`은 empty state를 포함한 허브 구조로 운영
-  - 작업 기록: `docs/worklog/2026-05-08-channel-hub-layout-conversion.md`
+  - 작업 기록: `docs/worklog/2026-05/2026-05-08-channel-hub-layout-conversion.md`
 
 ## Code / Architecture
 
@@ -159,7 +159,7 @@
   - `react-scan`, `react-grab`은 production bundle/runtime에 포함하지 않는다.
   - CDN URL은 명시 버전으로 고정한다.
   - development에서도 `DOCS_ENABLE_REACT_INSPECTION=true`일 때만 opt-in 로드한다.
-  - 기준 문서: `docs/worklog/2026-08-29-docs-article-anchor-scroll-test.md`
+  - 기준 문서: `docs/worklog/2026-08/2026-08-29-docs-article-anchor-scroll-test.md`
 - [-] `P2` article detail의 읽기 보조 UX를 확장한다.
   - related posts 1차 적용 완료
   - previous / next navigation 1차 적용 완료
@@ -284,7 +284,7 @@
 - [ ] `P1` `Mobile` 섹션의 실제 콘텐츠 초안을 작성한다.
 - [x] `P1` `UI/UX` 섹션도 상세형 static spotlight가 아니라 실제 문서 연결 구조로 확장할지 결정
   - `HubPage` 기반 채널 허브에서 시작했지만, 최종적으로는 Figma `141:189` 기준의 전용 editorial hub로 분기
-  - 작업 기록: `docs/worklog/2026-05-08-uiux-hub-figma-alignment.md`
+  - 작업 기록: `docs/worklog/2026-05/2026-05-08-uiux-hub-figma-alignment.md`
 - [-] `P2` article metadata 정책을 정리한다.
   - `/docs/{channel}/{slug}` 상세 metadata 정책 문서화 완료
   - 문서별 title/summary/canonical/OG image 연결 완료

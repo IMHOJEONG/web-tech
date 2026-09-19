@@ -17,7 +17,7 @@
 - `apps/docs/shared/message/ko.json`
 - `apps/docs/shared/message/en.json`
 - `docs/architecture/docs-search-experience-policy.md`
-- `docs/worklog/2026-05-05-docs-search-experience.md`
+- `docs/worklog/2026-05/2026-05-05-docs-search-experience.md`
 - `docs/todo/platform-improvement-todo.md`
 
 ## 메모

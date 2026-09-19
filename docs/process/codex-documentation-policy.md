@@ -14,14 +14,16 @@
 
 Codex가 작업할 때 기본적으로 지켜야 하는 최소 문서화 범위는 다음과 같습니다.
 
-1. 모든 작업은 `docs/worklog/`에 기록합니다.
+1. 모든 작업은 `docs/worklog/YYYY-MM/`에 기록합니다.
 2. 구조적 결정이나 장기 영향이 있는 변경은 `docs/architecture/`에 ADR로 남깁니다.
 3. 반복될 운영 절차나 협업 규칙은 `docs/process/` 또는 향후 `docs/runbooks/`에 정리합니다.
 4. 같은 유형의 설명이 두 번 이상 반복되거나, 다음 작업자가 미리 알면 시간을 아낄 수 있는 내용은 `docs/knowledge/`에 승격합니다.
+5. 검증 중심의 실행 결과는 `docs/verification/<주제>/`, 원본 측정값은 `docs/verification/artifacts/`에 보관하고 worklog에서 연결합니다.
+6. 상세 분류와 이동 규칙은 [문서 역할과 구조](documentation-organization.md)를 따릅니다.
 
 ## Worklog Rule
 
-작업이 끝날 때 `docs/worklog/`에는 아래 항목이 남아 있어야 합니다.
+작업이 끝날 때 `docs/worklog/YYYY-MM/YYYY-MM-DD-주제.md`에는 아래 항목이 남아 있어야 합니다.
 
 - `Summary`
 - `Changed`

@@ -52,6 +52,6 @@ UUID는 시험용 실행 식별자이며 인증 토큰이 아니다.
 
 ## Next
 
-[재현 가이드](../runbooks/docs-locale-cache-key-test.md)에 따라 독립 재실행할 수 있다.
+[재현 가이드](../../runbooks/docs-locale-cache-key-test.md)에 따라 독립 재실행할 수 있다.
 다음 시험은 브라우저 언어 전환 또는 정적 셸 경계 중 하나로 범위를 좁힌다.
 이번 작업에서는 커밋/배포하지 않았다.

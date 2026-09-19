@@ -33,4 +33,4 @@
 ## 관련 문서
 
 - `docs/architecture/docs-document-ui-reuse-policy.md`
-- `docs/worklog/2026-08-26-docs-index-browse-controls.md`
+- `docs/worklog/2026-08/2026-08-26-docs-index-browse-controls.md`

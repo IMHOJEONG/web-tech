@@ -19,13 +19,13 @@
 
 변경 대상:
 
-- [packages/tailwind-config/shared-styles.css](/Users/coder/Desktop/project/web-tech/packages/tailwind-config/shared-styles.css:1)
-- [apps/docs/widgets/app-shell/ui/header.tsx](/Users/coder/Desktop/project/web-tech/apps/docs/widgets/app-shell/ui/header.tsx:1)
-- [apps/docs/widgets/app-shell/ui/navigation.tsx](/Users/coder/Desktop/project/web-tech/apps/docs/widgets/app-shell/ui/navigation.tsx:1)
-- [apps/docs/widgets/app-shell/ui/footer.tsx](/Users/coder/Desktop/project/web-tech/apps/docs/widgets/app-shell/ui/footer.tsx:1)
-- [apps/docs/widgets/app-shell/ui/mobile-bottom-nav.tsx](/Users/coder/Desktop/project/web-tech/apps/docs/widgets/app-shell/ui/mobile-bottom-nav.tsx:1)
-- [apps/docs/widgets/app-shell/ui/mobile-nav-drawer.tsx](/Users/coder/Desktop/project/web-tech/apps/docs/widgets/app-shell/ui/mobile-nav-drawer.tsx:1)
-- [apps/docs/feature/search/empty-search-result.tsx](/Users/coder/Desktop/project/web-tech/apps/docs/feature/search/empty-search-result.tsx:1)
+- [packages/tailwind-config/shared-styles.css](../../../packages/tailwind-config/shared-styles.css:1)
+- [apps/docs/widgets/app-shell/ui/header.tsx](../../../apps/docs/widgets/app-shell/ui/header.tsx:1)
+- [apps/docs/widgets/app-shell/ui/navigation.tsx](../../../apps/docs/widgets/app-shell/ui/navigation.tsx:1)
+- [apps/docs/widgets/app-shell/ui/footer.tsx](../../../apps/docs/widgets/app-shell/ui/footer.tsx:1)
+- [apps/docs/widgets/app-shell/ui/mobile-bottom-nav.tsx](../../../apps/docs/widgets/app-shell/ui/mobile-bottom-nav.tsx:1)
+- [apps/docs/widgets/app-shell/ui/mobile-nav-drawer.tsx](../../../apps/docs/widgets/app-shell/ui/mobile-nav-drawer.tsx:1)
+- [apps/docs/feature/search/empty-search-result.tsx](../../../apps/docs/feature/search/empty-search-result.tsx:1)
 
 ## 토큰 변경
 

@@ -28,7 +28,7 @@
 - `apps/docs/widgets/home-hero/ui/hero-section.tsx`
 - `apps/docs/widgets/home-hero/ui/landing-box.tsx`
 - `docs/runbooks/tailwind-canonical-form.md`
-- `docs/worklog/2026-05-05-tailwind-canonical-settings.md`
+- `docs/worklog/2026-05/2026-05-05-tailwind-canonical-settings.md`
 
 ## 메모
 

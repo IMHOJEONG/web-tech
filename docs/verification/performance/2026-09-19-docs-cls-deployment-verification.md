@@ -11,7 +11,7 @@
 검증 스크립트와 원본 결과를 보존했다. 운영 코드 수정/배포/커밋/푸시는 하지 않았다.
 
 - `apps/docs/scripts/verify-deployed-article-shell.cjs`
-- `docs/worklog/artifacts/2026-09-19-cls-deployment-verification.json`
+- `docs/verification/artifacts/2026-09-19-cls-deployment-verification.json`
 
 ## Measurements
 

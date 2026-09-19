@@ -44,7 +44,7 @@
 - `docs/architecture/adr-0001-docs-feed-main.md`
 - `docs/architecture/adr-0002-about-us-page-and-shared-footer.md`
 - `docs/architecture/docs-app-fsd.md`
-- `docs/worklog/2026-04-29-codex-notes.md`
+- `docs/worklog/2026-04/2026-04-29-codex-notes.md`
 
 ## 메모
 

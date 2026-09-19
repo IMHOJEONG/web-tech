@@ -15,7 +15,7 @@
 - `apps/docs/public/fonts/SpaceGroteskVariable.woff2`
 - `apps/docs/public/fonts/Pretendard-LICENSE.txt`
 - `apps/docs/public/fonts/SpaceGrotesk-LICENSE.txt`
-- `docs/worklog/2026-05-05-docs-font-optimization.md`
+- `docs/worklog/2026-05/2026-05-05-docs-font-optimization.md`
 
 ## 메모
 

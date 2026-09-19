@@ -13,7 +13,7 @@
 - `docs/architecture/docs-app-information-architecture.md`
 - `docs/architecture/docs-search-experience-policy.md`
 - `docs/todo/platform-improvement-todo.md`
-- `docs/worklog/2026-05-05-docs-feed-and-docs-routing.md`
+- `docs/worklog/2026-05/2026-05-05-docs-feed-and-docs-routing.md`
 
 ## 메모
 

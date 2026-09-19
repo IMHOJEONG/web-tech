@@ -38,7 +38,7 @@ node_modules와 공용 packages는 기존 설치를 참조하므로 실행 중 �
 V3 확인은 최대 100회, 회당 50ms 간격으로 조회하므로 관측용 요청도 발생한다.
 측정 시간은 인위적인 원본 보류를 포함하며 두 정책의 일반적인 성능 차이로 해석하지 않는다.
 
-실행 결과는 [정책 비교 기록](../worklog/2026-09-13-docs-cache-policy-comparison-test.md)을 참고한다.
+실행 결과는 [정책 비교 기록](../worklog/2026-09/2026-09-13-docs-cache-policy-comparison-test.md)을 참고한다.
 
 테스트 전용 `/api/cache-probe`는 임시 앱에만 생성된다. `connection()`으로
 페이지 결과 캐시를 피하면서 실제 `content-api.ts` 함수를 호출한다.
@@ -83,10 +83,10 @@ mise exec -- node apps/docs/scripts/test-content-cache-prod.mjs --locale-boundar
 실패 모드는 오류를 숨기지 않고 종료 코드 1을 반환한다. CI의 필수 성공 검사로
 등록한 것이 아니며, 현재 전환 장애를 재현하기 위한 실험 명령이다.
 최소 모드는 실제 앱 UI 검증을 대체하지 않는다.
-[전체 결과와 제한](../worklog/2026-09-13-docs-cache-components-experiment.md)을 먼저 읽는다.
+[전체 결과와 제한](../worklog/2026-09/2026-09-13-docs-cache-components-experiment.md)을 먼저 읽는다.
 
 `--locale-boundary`는 전체 앱의 정적 셸 검증을 임시로 완화한다.
-[언어별 응답 검증 결과와 한계](../worklog/2026-09-14-docs-cache-locale-boundary-test.md)를 참고한다.
+[언어별 응답 검증 결과와 한계](../worklog/2026-09/2026-09-14-docs-cache-locale-boundary-test.md)를 참고한다.
 해당 모드의 통과를 정적 셸 최적화나 브라우저 언어 전환 검증 완료로 해석하지 않는다.
 
 [개선 우선순위](../architecture/docs-content-cache-improvement-backlog.md)의

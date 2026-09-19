@@ -13,7 +13,7 @@
 - `apps/docs/shared/message/ko.json`
 - `apps/docs/shared/message/en.json`
 - `docs/todo/platform-improvement-todo.md`
-- `docs/worklog/2026-05-05-home-hero-preview.md`
+- `docs/worklog/2026-05/2026-05-05-home-hero-preview.md`
 
 ## 메모
 

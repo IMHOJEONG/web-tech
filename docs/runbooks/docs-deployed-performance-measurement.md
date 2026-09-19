@@ -6,7 +6,7 @@
 데스크톱/모바일 조건에서 각각 3회, 총 12회 측정했다. 운영 데이터 변경,
 웹훅 호출, 캐시 초기화, 재배포는 하지 않았다.
 
-원본 증거: `docs/worklog/artifacts/2026-09-18-deployed-performance.json`.
+원본 증거: `docs/verification/artifacts/2026-09-18-deployed-performance.json`.
 측정 종료: 2026-09-18 02:51:52 UTC / 11:51:52 KST.
 
 | 페이지 / 조건                              | TTFB 중앙값 (범위)   | LCP 중앙값 (범위)    | 본문 컨테이너 표시 관측 중앙값 |
