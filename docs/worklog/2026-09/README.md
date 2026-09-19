@@ -10,6 +10,7 @@
 - [Docs Secret And Token Lifecycle Policy](2026-09-18-docs-secret-token-lifecycle-policy.md)
 - [검증된 경계 분리 반영과 Cache Components 도입 보류](2026-09-18-docs-safe-boundary-rollout.md)
 - [코드용 폰트의 전역 preload 해제](2026-09-18-docs-font-preload-policy.md)
+- [상세 문서 본문 렌더링 회귀 검증](2026-09-18-docs-article-rendering-regression.md)
 - [상세 페이지 스트리밍 shell 공간 유지](2026-09-18-docs-article-shell-cls-fix.md)
 - [동적 영역 분리와 정적 셸 재검증](2026-09-17-docs-dynamic-boundary-separation.md)
 - [언어별 URL로 docs 화면 분리](2026-09-14-docs-locale-url-routing.md)

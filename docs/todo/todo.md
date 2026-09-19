@@ -243,6 +243,10 @@
   - search relevance scoring 유닛 테스트 완료
   - remote payload schema 검증 테스트 완료
   - 문서 상세 렌더링 스모크 테스트 완료
+  - production 브라우저에서 로컬 data/category 및 원격 fixture의 본문 완성, loading 종료, soft 404 방지 검증 추가
+  - 상세 16개 + 한국어/영어·모바일/데스크톱 게시 갱신 4개: `pnpm --filter docs test:article:prod`
+  - fixture 원본 수정 → 미인증/오인증 시 기존 화면 유지 → 정상 webhook 후 목록·검색·상세 갱신 검증
+  - 실행 기준: `docs/runbooks/docs-article-rendering-regression.md`
   - 검색 결과 스모크 테스트 완료
   - `test:lib` / `test:content` CI 연결 완료
   - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
