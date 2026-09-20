@@ -39,9 +39,7 @@ pnpm --filter docs exec node --experimental-strip-types --test \
 
 ## Open Questions
 
-`eslint.config.mts`는 globals를 직접 import하지만 docs의 직접 의존성에는 없다.
-현재 pnpm ESLint CLI 실행은 통과하지만, Node에서 ESLint API를 직접 import한 보조 검사는
-globals 모듈을 찾지 못했다. 직접 의존성 선언 또는 공통 설정 패키지를 통한 제공은 후속 검토한다.
+없음. 아래 후속 작업에서 테스트 범위와 globals 직접 의존성 누락을 보완했다.
 
 ## 진단 스크립트 설정 보완
 
@@ -54,6 +52,26 @@ globals 모듈을 찾지 못했다. 직접 의존성 선언 또는 공통 설정
 
 배포 진단 스크립트 자체를 실행하거나 외부 사이트에 요청하지는 않았다.
 
+## 정규 테스트 편입과 의존성 보완
+
+- `test:lib`와 `tsconfig.node-test.json`에 `widgets/docs-index/model/*.test.ts`를 추가했다.
+  필터·정렬 6개, 페이지네이션 3개, 섹션 요약 2개가 정규 검사에 포함된다.
+- CI는 이미 `pnpm --filter docs test:lib`를 실행하므로 워크플로는 변경하지 않았다.
+- docs devDependencies에 `globals: ^16.5.0`을 선언했다. 공통 ESLint 패키지와 같은
+  버전 범위를 사용하며, backend 전용 catalog를 docs에서 참조하지 않는다.
+- `pnpm install --offline --ignore-scripts`로 동기화했다. lockfile에는 docs의 globals
+  항목 3줄만 추가됐고 다운로드나 설치 스크립트 실행은 없었다.
+
+재검증 결과:
+
+- `pnpm --filter docs test:lib`: Node 테스트 타입 검사 및 142개 테스트 통과.
+- `pnpm --filter docs lint`: 경고 없이 통과.
+- docs 작업 디렉터리에서 Node로 globals를 직접 import하고 ESLint API의
+  `calculateConfigForFile()`을 호출해 설정 로딩 성공을 확인했다. 이전 globals 해석 실패가 해소됐다.
+
+설치는 기존 node_modules와 로컬 store를 활용했으므로 빈 환경에서의 새 설치까지 검증한 것은 아니다.
+콘텐츠 원문 및 다른 작업의 검수 문서는 수정하지 않았다.
+
 ## Next
 
-docs-index 테스트를 CI에 포함하고 globals 의존성 선언을 검토한다.
+모바일 검색·필터·페이지 이동의 실제 화면 회귀는 별도 작업으로 확인한다.
