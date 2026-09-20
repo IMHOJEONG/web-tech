@@ -3,6 +3,20 @@
         "brand": "HEAP-FORGE",
         "loadingDocuments": "Loading documents..."
     },
+    "feedRecent": {
+        "title": "Recent articles",
+        "description": "Explore the latest technical articles.",
+        "filterLabel": "Filter articles by topic",
+        "empty": "There are no more articles in this topic yet.",
+        "emptyTitle": "No articles in this topic yet",
+        "emptyDescription": "Choose another topic or browse all documents to find something to read.",
+        "browse": "Browse all documents",
+        "reset": "View all articles"
+    },
+    "feedLeadStory": {
+        "label": "Featured article",
+        "readingTime": "{count} min read"
+    },
     "metadata": {
         "site": {
             "title": "HeapForge - Where memory meets mastery.",

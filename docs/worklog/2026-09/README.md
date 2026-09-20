@@ -2,6 +2,8 @@
 
 - [공용 문서 미리보기 카드 도입](2026-09-21-document-preview-card.md)
 
+- [피드 상단 글을 작은 링크 카드로 변경](2026-09-21-feed-lead-card.md)
+
 - [헤더 가독성과 탐색 개선](2026-09-20-header-clarity-refresh.md)
 
 - [공개 콘텐츠 독해 검토](2026-09-20-content-readability-review.md)

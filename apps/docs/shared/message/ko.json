@@ -3,6 +3,20 @@
         "brand": "HEAP-FORGE",
         "loadingDocuments": "문서를 불러오고 있어요."
     },
+    "feedRecent": {
+        "title": "최근에 올라온 글",
+        "description": "새로 정리한 기술 글을 모았습니다.",
+        "filterLabel": "글 주제 필터",
+        "empty": "이 주제의 다른 글은 아직 없습니다.",
+        "emptyTitle": "아직 이 주제에 올라온 글이 없습니다",
+        "emptyDescription": "다른 주제를 선택하거나 전체 문서에서 읽을 글을 찾아보세요.",
+        "browse": "전체 문서 보기",
+        "reset": "전체 피드 보기"
+    },
+    "feedLeadStory": {
+        "label": "먼저 읽어볼 글",
+        "readingTime": "{count}분 읽기"
+    },
     "metadata": {
         "site": {
             "title": "HeapForge - 기술을 구조로 쌓아 올리는 아카이브",
