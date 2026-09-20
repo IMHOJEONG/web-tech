@@ -271,6 +271,7 @@
     },
     "search": {
         "input": {
+            "triggerLabel": "Search docs",
             "placeholder": "Search the docs",
             "submitAriaLabel": "Search documents",
             "clearAriaLabel": "Clear search query"

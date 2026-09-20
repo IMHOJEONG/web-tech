@@ -39,7 +39,7 @@ export const Navigation = () => {
     return (
         <div
             data-testid="desktop-navigation"
-            className="hidden min-w-0 items-center gap-3 sm:flex md:gap-5 lg:gap-8"
+            className="hidden min-w-0 items-center gap-1 sm:flex lg:gap-2"
         >
             {navigation.map((nav) => {
                 const { href, key, activePrefixes } = nav
@@ -53,10 +53,10 @@ export const Navigation = () => {
                     <nav key={key} className="flex items-center">
                         <Link
                             className={cn(
-                                'font-display relative inline-flex h-6 items-center text-sm font-normal leading-6 tracking-tight transition-colors after:absolute after:-bottom-1.5 after:left-1/2 after:h-0.5 after:w-full after:-translate-x-1/2 after:rounded-full after:transition-colors md:text-[0.9375rem] lg:text-base',
+                                'ds-focus-ring font-display relative inline-flex min-h-11 items-center whitespace-nowrap rounded-lg px-2 text-sm font-medium tracking-tight transition-colors after:absolute after:inset-x-2 after:bottom-1 after:h-0.5 after:rounded-full md:px-2.5 lg:px-3',
                                 isActive
-                                    ? 'text-primary after:bg-primary'
-                                    : 'text-muted-foreground after:bg-transparent hover:text-on-surface'
+                                    ? 'bg-primary/10 text-primary after:bg-primary'
+                                    : 'text-on-surface-variant after:bg-transparent hover:bg-surface-container-low hover:text-on-surface'
                             )}
                             href={href}
                             aria-current={isActive ? 'page' : undefined}

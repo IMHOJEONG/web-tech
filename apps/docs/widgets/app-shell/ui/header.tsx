@@ -19,12 +19,12 @@ export default function Header() {
 
 function HeaderContent() {
     return (
-        <div className="mx-auto flex h-16 w-full max-w-page items-center justify-between px-4 sm:grid sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-4 sm:px-6 md:gap-6 md:px-8">
+        <div className="mx-auto flex h-16 w-full max-w-page items-center justify-between px-4 sm:grid sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-3 sm:px-6 md:gap-4 md:px-8">
             <MobileNavDrawer />
 
             <div className="hidden min-w-0 items-center justify-start sm:flex">
                 <Link
-                    className="font-display flex items-center text-xl font-bold leading-7 tracking-widest text-primary uppercase"
+                    className="ds-focus-ring font-display inline-flex min-h-11 shrink-0 items-center rounded-md text-lg font-bold tracking-tight text-primary"
                     href="/"
                 >
                     <Brand />
@@ -36,7 +36,7 @@ function HeaderContent() {
             </div>
 
             <div className="flex min-w-0 items-center justify-end">
-                <div className="flex shrink-0 items-center gap-3 sm:gap-4 md:gap-5">
+                <div className="flex shrink-0 items-center gap-1 lg:gap-2">
                     <Search />
                     <LocaleSwitcher />
                     <div className="hidden md:block">

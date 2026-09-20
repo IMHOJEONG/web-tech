@@ -76,6 +76,7 @@ function DrawerLink({
         <Link
             href={href}
             onClick={onNavigate}
+            aria-current={isActive ? 'page' : undefined}
             className={cn(
                 'flex w-full items-center gap-3 px-6 py-4 text-sm tracking-[0.05em] transition-colors',
                 isActive
@@ -131,7 +132,7 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                     </svg>
                 </SheetTrigger>
                 <Link
-                    className="font-display flex items-center text-xl font-bold leading-7 tracking-[-0.05em] text-primary"
+                    className="ds-focus-ring font-display inline-flex min-h-11 items-center rounded-md text-lg font-bold tracking-tight text-primary"
                     href="/"
                 >
                     <Brand />
