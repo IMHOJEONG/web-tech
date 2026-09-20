@@ -22,6 +22,7 @@
 
 ## Planning / Product
 
+- [ ] `P1` ARIA·V8·Next.js 패키지 글의 제목/요약과 본문 범위를 맞추고 필요한 용어·사례·검증 결과를 보완한다. 완료 기준은 [독해 검토](../verification/content/2026-09-20-content-readability-review.md)에 따르며 실제 경험을 추정해서 작성하지 않는다.
 - [x] `P1` 블로그 개선 로드맵을 기준 문서로 고정한다.
   - 메타데이터, 라우팅, 검색, 렌더링, 테스트, contributor guide 기준선을 정리
   - 신규 과제는 우선 `todo`에 추가하고, 운영 규칙으로 승격되면 로드맵 또는 관련 architecture/runbook 문서에 연결

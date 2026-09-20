@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [공개 콘텐츠 독해 검토](2026-09-20-content-readability-review.md)
+
 - [콘텐츠와 분리한 docs 코드 점검](2026-09-20-docs-non-content-check.md)
 
 - [ARIA 중복 콘텐츠 정리](2026-09-20-aria-content-consolidation.md)

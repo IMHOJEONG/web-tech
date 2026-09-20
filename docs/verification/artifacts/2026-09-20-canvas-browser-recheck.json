@@ -1,0 +1,98 @@
+{
+  "date": "2026-09-20T06:06:55.780Z",
+  "mode": "headed",
+  "flag": "CanvasDrawElement",
+  "cases": [
+    {
+      "route": "/",
+      "errors": [],
+      "state": {
+        "paints": 3,
+        "clicks": 0,
+        "transform": "matrix(1, 0, 0, 1, 280, 140)",
+        "rect": {
+          "x": 288,
+          "y": 148,
+          "width": 64.140625,
+          "height": 21.5,
+          "top": 148,
+          "right": 352.140625,
+          "bottom": 169.5,
+          "left": 288
+        },
+        "canvasRect": {
+          "x": 8,
+          "y": 8,
+          "width": 640,
+          "height": 360,
+          "top": 8,
+          "right": 648,
+          "bottom": 368,
+          "left": 8
+        },
+        "nonTransparent": 1406,
+        "support": {
+          "draw": "function",
+          "paint": "function"
+        },
+        "contained": true
+      },
+      "hover": false,
+      "hoverFrames": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "afterClick": 1,
+      "afterOutsideClick": 1
+    },
+    {
+      "route": "/demo",
+      "errors": [],
+      "state": {
+        "paints": 2,
+        "clicks": 0,
+        "transform": "matrix(1, 0, 0, 1, 280, 140)",
+        "rect": {
+          "x": 459,
+          "y": 309,
+          "width": 164,
+          "height": 55,
+          "top": 309,
+          "right": 623,
+          "bottom": 364,
+          "left": 459
+        },
+        "canvasRect": {
+          "x": 179,
+          "y": 169,
+          "width": 642,
+          "height": 362,
+          "top": 169,
+          "right": 821,
+          "bottom": 531,
+          "left": 179
+        },
+        "nonTransparent": 14076,
+        "support": {
+          "draw": "function",
+          "paint": "function"
+        },
+        "contained": true
+      },
+      "failure": "page.waitForFunction: Timeout 3000ms exceeded.",
+      "support": {
+        "draw": "function",
+        "paint": "function"
+      }
+    }
+  ],
+  "version": "153.0.8010.48"
+}
