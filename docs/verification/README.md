@@ -25,6 +25,10 @@
 - 재현 절차: [캐시 프로덕션 통합 시험](../runbooks/docs-content-cache-production-test.md).
 - 테스트 도입 및 변경 과정은 [9월 작업 기록](../worklog/2026-09/README.md)에 유지합니다.
 
+## 콘텐츠
+
+- [09-20 로컬 콘텐츠 재점검](content/2026-09-20-local-content-review.md): 15개 변환, 이미지 참조, ARIA 본문 중복 확인.
+
 ## 원본 증거
 
 [artifacts 목록](artifacts/README.md)에서 JSON 측정값을 찾을 수 있습니다. 각 결과의 환경·표본·한계는 연결된 보고서와 함께 확인해야 합니다. 이 폴더의 결과만으로 현재 배포가 통과했다고 판단하지 않습니다.

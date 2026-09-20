@@ -1,5 +1,9 @@
 # 2026-09 작업 기록
 
+- [ARIA 중복 콘텐츠 정리](2026-09-20-aria-content-consolidation.md)
+
+- [콘텐츠 재점검](2026-09-20-content-review.md)
+
 - [공개 글의 저장소 전용 안내 제거](2026-09-19-reader-facing-article-copy.md)
 
 - [아카이브 시작 시점 변경](2026-09-19-archive-start-date.md)

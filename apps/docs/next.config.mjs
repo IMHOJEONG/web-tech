@@ -64,6 +64,23 @@ const nextConfig = {
     // Optionally, add any other Next.js config below,
     reactStrictMode: true,
     transpilePackages: ['@web-tech/ui'],
+    redirects() {
+        const aliases = [
+            '/docs/category/fe/react/test',
+            '/docs/drawer-aria-focus-management',
+            '/category/fe/react/drawer-aria-focus-management',
+            '/category/fe/react/test',
+        ]
+        const destination = '/docs/ui-ux/blocked-aria-hidden'
+        return aliases.flatMap((source) => [
+            { source, destination, permanent: true },
+            {
+                source: `/:locale(ko|en)${source}`,
+                destination: `/:locale${destination}`,
+                permanent: true,
+            },
+        ])
+    },
     images: {
         qualities: [25, 50, 75, 90],
         remotePatterns: getRemoteImagePatterns(),
