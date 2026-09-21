@@ -69,6 +69,8 @@
 
 ## 먼저 보면 좋은 문서
 
+- [UI/UX 자료 조사와 콘텐츠 방향](uiux-resource-research.md)
+
 - `docs/architecture/docs-app-information-architecture.md`
 - `docs/architecture/docs-feed-and-docs-routing-policy.md`
 - `docs/architecture/docs-responsive-policy.md`

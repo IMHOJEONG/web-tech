@@ -1,5 +1,9 @@
 # 2026-09 작업 기록
 
+- [Dialog 포커스 복귀 심화 글 초안](2026-09-21-dialog-focus-article.md)
+
+- [UI/UX 자료 조사](2026-09-21-uiux-resource-research.md)
+
 - [현재 결정의 ADR 기준선과 작성 절차](2026-09-21-adr-baseline-and-workflow.md)
 
 - [Web·Mobile 주제 필터 구현](2026-09-21-channel-topic-filters.md)
