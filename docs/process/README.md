@@ -1,5 +1,6 @@
 # 협업과 문서 작성 규칙
 
+- [ADR 작성과 상태 관리](adr-management.md)
 - [브랜치 정책](branch-policy.md)
 - [코드 리뷰](code-review-process.md)
 - [커밋 메시지](commit-message-convention.md)

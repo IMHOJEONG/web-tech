@@ -136,6 +136,19 @@ test("policy metadata requires status, scope and a real review date", () => {
   after[file] = body.replace("2026-02-30", "2026-09-19");
   assert.deepEqual(validate(view({}, after, changes)), []);
 });
+test("superseded ADR is an accepted architecture status", () => {
+  const file = "docs/architecture/adr-0001-example.md";
+  const body =
+    "# ADR-0001: 이전 결정\n## 상태와 범위\n- 상태: 대체됨\n- 대상: docs 앱\n- 최종 검토: 2026-09-21\n## 배경\n## 결정\n## 대안과 영향\n## 관련 문서";
+  const after = {
+    [file]: body,
+    "docs/architecture/README.md": "# 목록\n[이전 결정](adr-0001-example.md)",
+  };
+  assert.deepEqual(
+    validate(view({}, after, [{ file, old: file, status: "A" }])),
+    [],
+  );
+});
 test("new large artifacts fail; untouched historical artifacts do not", () => {
   const file = "docs/verification/artifacts/big.txt",
     data = "x".repeat(ARTIFACT_LIMIT + 1);

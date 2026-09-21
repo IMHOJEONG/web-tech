@@ -4,8 +4,19 @@
 
 [전체 문서 안내](../README.md)
 
-- [ADR-0001: Docs Feed Main Composition](adr-0001-docs-feed-main.md)
-- [ADR-0002: About Us Page and Shared Footer Alignment](adr-0002-about-us-page-and-shared-footer.md)
+현재 적용 중인 결정:
+
+- [ADR-0003: 피드와 문서 인덱스의 역할 분리](adr-0003-feed-and-docs-roles.md)
+- [ADR-0004: About은 소개에 집중하고 공용 셸을 재사용한다](adr-0004-about-content-and-shared-shell.md)
+- [ADR-0005: 문서 미리보기 카드의 재사용 경계](adr-0005-document-preview-card-boundary.md)
+
+이전 결정(대체됨):
+
+- [ADR-0001: Docs Feed Main Composition](adr-0001-docs-feed-main.md) → ADR-0003
+- [ADR-0002: About Us Page and Shared Footer Alignment](adr-0002-about-us-page-and-shared-footer.md) → ADR-0004
+
+새 결정의 작성·대체 규칙은 [ADR 관리 규칙](../process/adr-management.md)을 참고합니다.
+
 - [Blog Content API Contract](blog-content-api-contract.md)
 - [Blog Markdown DB Recommendation](blog-content-database-recommendation.md)
 - [Blog Content Delivery: HTML vs Markdown](blog-content-html-vs-markdown.md)

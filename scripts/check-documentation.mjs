@@ -107,7 +107,7 @@ function issues(file, buffer, files) {
         found.add(`missing-section:${section}`);
     }
     if (role === "architecture") {
-      if (!/^- 상태: (제안|적용 중|보류|폐기)\s*$/m.test(body))
+      if (!/^- 상태: (제안|적용 중|대체됨|보류|폐기)\s*$/m.test(body))
         found.add("missing-status");
       if (!/^- 대상: \S.+$/m.test(body)) found.add("missing-scope");
       const date = body.match(/^- 최종 검토: (\d{4}-\d{2}-\d{2})\s*$/m)?.[1];

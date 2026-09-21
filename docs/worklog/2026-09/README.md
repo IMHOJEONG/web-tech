@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [현재 결정의 ADR 기준선과 작성 절차](2026-09-21-adr-baseline-and-workflow.md)
+
 - [Web·Mobile 주제 필터 구현](2026-09-21-channel-topic-filters.md)
 
 - [About 하단 작성자 영역 정리](2026-09-21-about-author-simplification.md)
