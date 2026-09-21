@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 
 let bundle = ''
 let css = ''
+let bundleInputs: string[] = []
 const pageErrors = new WeakMap<Page, string[]>()
 
 test.beforeAll(async () => {
@@ -20,9 +21,11 @@ test.beforeAll(async () => {
         format: 'iife',
         platform: 'browser',
         jsx: 'automatic',
+        metafile: true,
         define: { 'process.env.NODE_ENV': '"development"' },
     })
     bundle = result.outputFiles[0]!.text
+    bundleInputs = Object.keys(result.metafile.inputs)
     css = (
         await postcss([tailwind()]).process(
             '@import "@web-tech/tailwind-config"; @import "tw-animate-css"; @source "../../../packages/ui/components"; @source "./fixtures";',
@@ -55,6 +58,19 @@ test.beforeEach(async ({ page }) => {
 
 test.afterEach(async ({ page }) => {
     expect(pageErrors.get(page)).toEqual([])
+})
+
+test('shared UI excludes the CommonJS Radix umbrella and unused primitives', () => {
+    expect(
+        bundleInputs.some((path) => path.endsWith('/radix-ui/dist/index.js'))
+    ).toBe(false)
+    expect(
+        bundleInputs.filter((path) =>
+            /\/@radix-ui\/react-(select|dropdown-menu|navigation-menu)\//.test(
+                path
+            )
+        )
+    ).toEqual([])
 })
 
 test('Button sizes retain defaults and allow explicit touch target overrides', async ({

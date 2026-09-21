@@ -24,7 +24,8 @@
 
 - [x] `P1` 공식 Radix/new-york-v4의 Sheet 닫기 옵션, Button 작은 크기, Badge 변형, Tooltip Provider 구성을 선별 반영한다. 기존 디자인 토큰 유지와 회귀 검사 결과는 [작업 기록](../worklog/2026-09/2026-09-22-shadcn-primitives-refresh.md)을 참고한다.
 - [ ] `P1` Activity를 운영 UI에 도입하기 전에 Portal 생명주기 경계를 검증한다. 완료 조건: Root·Content 외부 배치와 닫힘 완료 후 숨김 방식을 비교하고, production·애니메이션·빠른 재열기에서 Overlay 제거, 스크롤 잠금 해제, 보이는 대상으로 포커스 복귀, 재진입을 확인한다. 현재 운영 장애로 확정된 항목은 아니며 [실험 결과](../verification/content/2026-09-21-activity-focus.md)가 근거다.
-- [ ] `P2` 공용 UI의 cn·통합 radix-ui 패키지 전환을 별도 변경으로 검증한다. 완료 조건: 공개 exports 유지, 버전·중복 Context 확인, class 병합 호환성·번들·소비 앱 검사 및 Activity 실험 재실행. 현재 방식이 단지 공식 import와 다르다는 이유만으로 교체하지 않는다.
+- [x] `P2` 공용 UI의 cn·통합 radix-ui 패키지를 단계적으로 전환했다. 공개 exports 유지, 클래스 병합·UI 46개, Activity 22개, 모바일 Drawer 4개, 소비 앱 타입 검사와 vuln-radar 빌드를 확인했다. 번들 측정 범위와 중복 Context 확인 한계는 [작업 기록](../worklog/2026-09/2026-09-22-ui-dependency-migration.md)을 참고한다.
+- [ ] `P2` 공용 UI 의존성 전환 후 docs의 Next.js 프로덕션 빌드와 production 모드 Drawer·Tooltip 동작을 확인한다. 현재 검증은 타입 검사, 독립 브라우저 fixture, docs 개발 서버 및 vuln-radar 프로덕션 빌드까지다.
 - [ ] `P2` 공용 Sidebar와 Tooltip의 Safari·Firefox·모바일·스크린 리더 점검을 추가한다. 완료 조건: 키보드 탐색, 닫기·복귀, 테마별 가독성 및 reduced-motion을 실제 소비 화면에서 확인한다. 현재 새 기본 컴포넌트 검사는 headless Chromium 범위다.
 
 ## Planning / Product
