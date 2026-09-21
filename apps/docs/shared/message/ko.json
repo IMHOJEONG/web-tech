@@ -383,6 +383,14 @@
         }
     },
     "channelHub": {
+        "filters": {
+            "title": "주제로 찾아보기",
+            "all": "전체",
+            "more": "다른 주제 보기",
+            "less": "주제 접기",
+            "results": "{topic} · 글 {count}개",
+            "total": "전체 글 {count}개"
+        },
         "stats": {
             "totalDocs": "문서 수",
             "focusAreas": "핵심 영역",
@@ -397,8 +405,8 @@
         "web": {
             "hero": {
                 "eyebrow": "웹 시스템",
-                "title": "브라우저와 프론트엔드 구조를 읽는 허브",
-                "description": "React, Next.js, 렌더링 흐름, 바이트코드까지 웹 실행 환경에 가까운 문서를 한 곳에 모아 빠르게 훑을 수 있도록 정리했습니다."
+                "title": "웹 개발 이야기",
+                "description": "컴포넌트 설계부터 브라우저 동작까지, 직접 살펴보고 기록한 글입니다."
             },
             "panels": {
                 "first": {
@@ -425,8 +433,8 @@
         "mobile": {
             "hero": {
                 "eyebrow": "모바일 실행 환경",
-                "title": "모바일 제약과 인터랙션을 위한 허브",
-                "description": "터치 중심 상호작용, 화면 제약, 플랫폼별 차이처럼 모바일 제품 경험을 설계할 때 필요한 주제를 분리해서 모아둔 영역입니다."
+                "title": "모바일 개발 이야기",
+                "description": "작은 화면의 인터랙션과 플랫폼별 차이를 살펴봅니다."
             },
             "panels": {
                 "first": {

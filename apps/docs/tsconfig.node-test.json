@@ -9,7 +9,8 @@
         "feature/callout/model/*.test.ts",
         "feature/code-block/lib/*.test.ts",
         "shared/config/*.test.ts",
-        "widgets/docs-index/model/*.test.ts"
+        "widgets/docs-index/model/*.test.ts",
+        "widgets/content-hub/model/*.test.ts"
     ],
     "exclude": [".next", "node_modules"]
 }

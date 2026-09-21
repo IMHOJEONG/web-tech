@@ -383,6 +383,14 @@
         }
     },
     "channelHub": {
+        "filters": {
+            "title": "Browse by topic",
+            "all": "All",
+            "more": "More topics",
+            "less": "Fewer topics",
+            "results": "{topic} · {count, plural, one {# article} other {# articles}}",
+            "total": "{count, plural, one {# article} other {# articles}}"
+        },
         "stats": {
             "totalDocs": "Total Docs",
             "focusAreas": "Focus Areas",
@@ -397,8 +405,8 @@
         "web": {
             "hero": {
                 "eyebrow": "WEB SYSTEMS",
-                "title": "A hub for reading browser and frontend structure",
-                "description": "React, Next.js, rendering flow, and bytecode-oriented notes are gathered here so the web runtime can be scanned as one editorial surface."
+                "title": "Notes on web development",
+                "description": "Explorations of component design, browser behavior, and the work behind them."
             },
             "panels": {
                 "first": {
@@ -425,8 +433,8 @@
         "mobile": {
             "hero": {
                 "eyebrow": "MOBILE RUNTIME",
-                "title": "A hub for mobile constraints and interaction",
-                "description": "Touch-first interaction, viewport constraints, and platform differences are separated into a focused surface for mobile product thinking."
+                "title": "Notes on mobile development",
+                "description": "Exploring small-screen interactions and differences between platforms."
             },
             "panels": {
                 "first": {

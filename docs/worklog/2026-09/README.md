@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [Web·Mobile 주제 필터 구현](2026-09-21-channel-topic-filters.md)
+
 - [About 하단 작성자 영역 정리](2026-09-21-about-author-simplification.md)
 
 - [UI/UX 이미지 카드를 작은 문서 카드로 통일](2026-09-21-uiux-compact-cards.md)

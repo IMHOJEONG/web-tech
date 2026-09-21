@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
+import { ContentPending } from '~/shared/ui/content-pending'
+import type { HubSearchParams } from '~/widgets/content-hub/model/hub-topic-filter'
 import { getTranslations } from 'next-intl/server'
 import { buildPageMetadata } from '~/lib/localized-metadata'
 import { ChannelHubPage } from '~/widgets/content-hub/ui/channel-hub-page'
@@ -15,6 +18,14 @@ export async function generateMetadata(): Promise<Metadata> {
     })
 }
 
-export default function Page() {
-    return <ChannelHubPage channel="web" />
+export default function Page({
+    searchParams,
+}: {
+    searchParams: HubSearchParams
+}) {
+    return (
+        <Suspense fallback={<ContentPending />}>
+            <ChannelHubPage channel="web" searchParams={searchParams} />
+        </Suspense>
+    )
 }

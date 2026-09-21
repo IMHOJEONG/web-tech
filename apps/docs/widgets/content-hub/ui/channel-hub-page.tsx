@@ -1,6 +1,11 @@
 import { getTime } from '@web-tech/ui/lib/time'
 import { getTranslations } from 'next-intl/server'
 import { HubPage } from '~/widgets/content-hub/ui/hub-page'
+import { HubTopicFilters } from './hub-topic-filters'
+import {
+    resolveHubTopics,
+    type HubSearchParams,
+} from '../model/hub-topic-filter'
 import {
     getChannelHubDocs,
     type HubChannel,
@@ -8,6 +13,7 @@ import {
 
 type ChannelHubPageProps = {
     channel: HubChannel
+    searchParams: HubSearchParams
 }
 
 function getChannelKey(channel: HubChannel) {
@@ -21,20 +27,21 @@ function getChannelKey(channel: HubChannel) {
     }
 }
 
-export async function ChannelHubPage({ channel }: ChannelHubPageProps) {
+export async function ChannelHubPage({
+    channel,
+    searchParams,
+}: ChannelHubPageProps) {
     const t = await getTranslations('channelHub')
     const channelKey = getChannelKey(channel)
     const channelDocs = await getChannelHubDocs(channel)
-    const docs = channelDocs.slice(0, 6)
+    const { topic } = await searchParams
+    const { topics, selected, docs, showFilters } = resolveHubTopics(
+        channelDocs,
+        topic
+    )
     const latestDate = channelDocs[0]?.date
         ? getTime(channelDocs[0].date)
         : null
-
-    const panels = ['first', 'second', 'third'].map((panelKey) => ({
-        title: t(`${channelKey}.panels.${panelKey}.title`),
-        description: t(`${channelKey}.panels.${panelKey}.description`),
-        items: t.raw(`${channelKey}.panels.${panelKey}.items`) as string[],
-    }))
 
     return (
         <HubPage
@@ -47,20 +54,35 @@ export async function ChannelHubPage({ channel }: ChannelHubPageProps) {
                     value: String(channelDocs.length).padStart(2, '0'),
                 },
                 {
-                    label: t('stats.focusAreas'),
-                    value: String(panels.length).padStart(2, '0'),
-                },
-                {
                     label: t('stats.latestUpdate'),
                     value: latestDate ?? t('stats.pending'),
                 },
             ]}
             docs={docs}
-            panels={panels}
-            latestEyebrow={t('latest.eyebrow')}
-            latestTitle={t('latest.title')}
-            latestActionHref={`/feed?topic=${channel}`}
-            latestActionLabel={t('latest.action')}
+            filters={
+                showFilters || selected ? (
+                    <HubTopicFilters
+                        pathname={`/${channel}`}
+                        topics={topics}
+                        selected={selected?.value}
+                        total={channelDocs.length}
+                        labels={{
+                            title: t('filters.title'),
+                            all: t('filters.all'),
+                            more: t('filters.more'),
+                            less: t('filters.less'),
+                        }}
+                    />
+                ) : null
+            }
+            resultsTitle={
+                selected
+                    ? t('filters.results', {
+                          topic: selected.label,
+                          count: docs.length,
+                      })
+                    : t('filters.total', { count: docs.length })
+            }
             emptyTitle={t(`${channelKey}.empty.title`)}
             emptyDescription={t(`${channelKey}.empty.description`)}
         />
