@@ -141,7 +141,8 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
 
             <SheetContent
                 side="left"
-                className="z-[70] flex w-80 max-w-[85vw] flex-col gap-0 border-r border-header-border bg-popover p-0 text-on-surface shadow-deep [&>button]:hidden sm:hidden"
+                showCloseButton={false}
+                className="z-[70] flex w-80 max-w-[85vw] flex-col gap-0 border-r border-header-border bg-popover p-0 text-on-surface shadow-deep sm:hidden"
             >
                 <SheetTitle className="sr-only">
                     {headerT('drawer.title')}

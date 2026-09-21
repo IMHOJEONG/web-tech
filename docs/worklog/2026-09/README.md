@@ -1,5 +1,9 @@
 # 2026-09 작업 기록
 
+- [공용 shadcn 기본 컴포넌트 후속 반영](2026-09-22-shadcn-primitives-refresh.md)
+
+- [공식 Sheet 닫기 버튼 옵션 반영](2026-09-21-sheet-close-button-upstream.md)
+
 - [공용 UI의 shadcn 업데이트 범위 점검](2026-09-21-shadcn-upstream-audit.md)
 
 - [Activity와 Sheet 포커스 별도 실험](2026-09-21-activity-focus-lab.md)

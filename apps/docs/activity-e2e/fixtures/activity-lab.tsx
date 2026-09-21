@@ -86,6 +86,7 @@ function App() {
     const content = (
         <SheetContent
             id="dialog-content"
+            showCloseButton={policy === 'no-close' ? false : undefined}
             onCloseAutoFocus={(event) => {
                 record('dialog:close-auto-focus')
                 if (

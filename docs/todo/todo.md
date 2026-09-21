@@ -20,6 +20,13 @@
 - `P1` 가까운 시일 내 반영 권장
 - `P2` 품질 향상용 중기 과제
 
+## Shared UI
+
+- [x] `P1` 공식 Radix/new-york-v4의 Sheet 닫기 옵션, Button 작은 크기, Badge 변형, Tooltip Provider 구성을 선별 반영한다. 기존 디자인 토큰 유지와 회귀 검사 결과는 [작업 기록](../worklog/2026-09/2026-09-22-shadcn-primitives-refresh.md)을 참고한다.
+- [ ] `P1` Activity를 운영 UI에 도입하기 전에 Portal 생명주기 경계를 검증한다. 완료 조건: Root·Content 외부 배치와 닫힘 완료 후 숨김 방식을 비교하고, production·애니메이션·빠른 재열기에서 Overlay 제거, 스크롤 잠금 해제, 보이는 대상으로 포커스 복귀, 재진입을 확인한다. 현재 운영 장애로 확정된 항목은 아니며 [실험 결과](../verification/content/2026-09-21-activity-focus.md)가 근거다.
+- [ ] `P2` 공용 UI의 cn·통합 radix-ui 패키지 전환을 별도 변경으로 검증한다. 완료 조건: 공개 exports 유지, 버전·중복 Context 확인, class 병합 호환성·번들·소비 앱 검사 및 Activity 실험 재실행. 현재 방식이 단지 공식 import와 다르다는 이유만으로 교체하지 않는다.
+- [ ] `P2` 공용 Sidebar와 Tooltip의 Safari·Firefox·모바일·스크린 리더 점검을 추가한다. 완료 조건: 키보드 탐색, 닫기·복귀, 테마별 가독성 및 reduced-motion을 실제 소비 화면에서 확인한다. 현재 새 기본 컴포넌트 검사는 headless Chromium 범위다.
+
 ## Planning / Product
 
 - [ ] `P1` ARIA·V8·Next.js 패키지 글의 제목/요약과 본문 범위를 맞추고 필요한 용어·사례·검증 결과를 보완한다. 완료 기준은 [독해 검토](../verification/content/2026-09-20-content-readability-review.md)에 따르며 실제 경험을 추정해서 작성하지 않는다.

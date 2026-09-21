@@ -5,6 +5,53 @@ import { fileURLToPath } from 'node:url'
 let bundle = ''
 const pageErrors = new WeakMap<Page, string[]>()
 
+test.describe('official Sheet close button API', () => {
+    test('omitting the option keeps the default close button', async ({
+        page,
+    }, info) => {
+        await load(page, Boolean(info.project.metadata.strict))
+        await page.locator('#dialog-trigger').click()
+        const close = page.getByRole('button', { name: 'Close', exact: true })
+        await expect(close).toHaveCount(1)
+        await close.click()
+        await expect(page.getByRole('dialog')).toHaveCount(0)
+        await expect(page.locator('#dialog-trigger')).toBeFocused()
+    })
+
+    test('false removes only the default close button, not custom actions', async ({
+        page,
+    }, info) => {
+        await load(page, Boolean(info.project.metadata.strict), 'no-close')
+        await page.locator('#dialog-trigger').click()
+        await expect(page.getByRole('dialog')).toBeVisible()
+        await expect(
+            page.getByRole('button', { name: 'Close', exact: true })
+        ).toHaveCount(0)
+        await expect(page.locator('#leave-view')).toBeVisible()
+        await expect(page.locator('#close')).toBeVisible()
+        await expect(page.locator('#dialog-content')).not.toHaveAttribute(
+            'showclosebutton'
+        )
+        await page.locator('#close').click()
+        await expect(page.getByRole('dialog')).toHaveCount(0)
+        await expect(page.locator('#dialog-trigger')).toBeFocused()
+    })
+
+    test('false preserves keyboard closing and focus restoration', async ({
+        page,
+    }, info) => {
+        await load(page, Boolean(info.project.metadata.strict), 'no-close')
+        await page.locator('#dialog-trigger').focus()
+        await page.keyboard.press('Enter')
+        await expect(page.locator('#dialog-input')).toBeFocused()
+        await page.keyboard.press('Tab')
+        await expect(page.locator('#close')).toBeFocused()
+        await page.keyboard.press('Escape')
+        await expect(page.getByRole('dialog')).toHaveCount(0)
+        await expect(page.locator('#dialog-trigger')).toBeFocused()
+    })
+})
+
 test.beforeAll(async () => {
     const result = await build({
         entryPoints: [
