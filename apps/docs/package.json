@@ -15,6 +15,8 @@
         "test:content": "node --test ./scripts/validate-content.test.mjs ./scripts/validate-content-style.test.mjs && pnpm validate:content",
         "pretest:crp-lab:browser": "tsc -p tsconfig.crp-e2e.json",
         "test:crp-lab:browser": "playwright test --config=playwright.crp.config.ts",
+        "pretest:activity-lab": "pnpm --filter @web-tech/ui build && tsc -p tsconfig.activity-e2e.json",
+        "test:activity-lab": "playwright test --config=playwright.activity.config.ts",
         "test:e2e": "playwright test",
         "test:article:prod": "playwright test --config=playwright.article.config.ts",
         "check:prod-routes": "node ./scripts/check-prod-routes.mjs",

@@ -27,6 +27,8 @@
 
 ## 콘텐츠
 
+- [09-21 Activity 포커스 실험](content/2026-09-21-activity-focus.md): DOM·Effect 보존, Sheet 포털 잔존과 외부 배치 비교.
+
 - [09-20 공개 글 독해 검토](content/2026-09-20-content-readability-review.md): 로컬 공개 글 10개의 설명 흐름과 편집 우선순위.
 - [09-20 로컬 콘텐츠 재점검](content/2026-09-20-local-content-review.md): 15개 변환, 이미지 참조, ARIA 본문 중복 확인.
 

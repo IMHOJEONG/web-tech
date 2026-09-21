@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [Activity와 Sheet 포커스 별도 실험](2026-09-21-activity-focus-lab.md)
+
 - [Dialog 포커스 복귀 심화 글 초안](2026-09-21-dialog-focus-article.md)
 
 - [UI/UX 자료 조사](2026-09-21-uiux-resource-research.md)

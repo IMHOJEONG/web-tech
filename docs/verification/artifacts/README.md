@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [Activity 포커스 실험](2026-09-21-activity-focus.json)
+
 [검증 보고서 목록](../README.md)
 
 - [Next.js 체크리스트 1차 결과 요약](2026-09-19-nextjs-checklist-phase-one.json)
