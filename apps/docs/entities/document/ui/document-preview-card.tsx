@@ -9,7 +9,7 @@ type DocumentPreviewCardProps = {
     topic: string
     thumbnail?: string | null
     authorName?: string
-    readingTime: string
+    readingTime?: string
     headingLevel?: 'h1' | 'h2' | 'h3'
     unoptimized?: boolean
 }

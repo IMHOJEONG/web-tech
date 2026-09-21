@@ -1,10 +1,10 @@
-import { getLocale, getTranslations } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import { getChannelHubDocs } from '~/widgets/content-hub/model/get-channel-hub-docs'
 import type { SearchData } from '~/lib/get-search-data'
 import { UiUxHubFeaturedSection } from './uiux-hub-featured-section'
 import { UiUxHubHero } from './uiux-hub-hero'
 import { UiUxHubMoreArticlesSection } from './uiux-hub-more-articles-section'
-import { UiUxHubNewsletterSection } from './uiux-hub-newsletter-section'
+import { UiUxHubTutorialSection } from './uiux-hub-tutorial-section'
 import type { UiUxDoc } from './uiux-hub.types'
 
 function toUiUxDoc(doc: SearchData | undefined): UiUxDoc | null {
@@ -40,9 +40,7 @@ function makeFallbackDoc(
 }
 
 export async function UiUxHubPage() {
-    const locale = await getLocale()
     const t = await getTranslations('uiuxHub')
-    const isKorean = locale === 'ko'
     const renderedDocs = (await getChannelHubDocs('uiux'))
         .map(toUiUxDoc)
         .filter((doc): doc is UiUxDoc => doc !== null)
@@ -120,20 +118,13 @@ export async function UiUxHubPage() {
                     secondaryOne={secondaryOne}
                     secondaryTwo={secondaryTwo}
                     primaryLabel={t('featured.primaryLabel')}
-                    secondaryLabel={t('featured.secondaryLabel')}
-                    actionLabel={t('featured.action')}
                     researchLabel={t('secondary.researchLabel')}
                     guideLabel={t('secondary.guideLabel')}
                 />
 
-                <UiUxHubNewsletterSection
+                <UiUxHubTutorialSection
                     tutorial={tutorial}
                     tutorialLabel={t('bottomLeft.label')}
-                    newsletterTitle={t('newsletter.title')}
-                    newsletterDescription={t('newsletter.description')}
-                    newsletterPlaceholder={t('newsletter.placeholder')}
-                    newsletterButton={t('newsletter.button')}
-                    isKorean={isKorean}
                 />
 
                 <UiUxHubMoreArticlesSection

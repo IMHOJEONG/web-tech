@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [UI/UX 이미지 카드를 작은 문서 카드로 통일](2026-09-21-uiux-compact-cards.md)
+
 - [공용 문서 미리보기 카드 도입](2026-09-21-document-preview-card.md)
 
 - [피드 상단 글을 작은 링크 카드로 변경](2026-09-21-feed-lead-card.md)

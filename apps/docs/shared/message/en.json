@@ -480,6 +480,7 @@
         }
     },
     "uiuxHub": {
+        "readingTime": "{count} min read",
         "hero": {
             "eyebrow": "DIRECTORY // 04",
             "titleLineOne": "UI/UX DESIGN",
@@ -497,12 +498,6 @@
         },
         "bottomLeft": {
             "label": "TUTORIAL // 04"
-        },
-        "newsletter": {
-            "title": "THE UX NEWSLETTER",
-            "description": "Bi-weekly notes on interface teardowns, typography, and design system thinking.",
-            "placeholder": "terminal@user.io",
-            "button": "CONNECT"
         },
         "more": {
             "fallbackDate": "LATEST NOTE"

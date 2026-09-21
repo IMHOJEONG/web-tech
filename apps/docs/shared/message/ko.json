@@ -480,6 +480,7 @@
         }
     },
     "uiuxHub": {
+        "readingTime": "{count}분 읽기",
         "hero": {
             "eyebrow": "디렉터리 // 04",
             "titleLineOne": "UI/UX 설계와",
@@ -497,12 +498,6 @@
         },
         "bottomLeft": {
             "label": "튜토리얼 // 04"
-        },
-        "newsletter": {
-            "title": "UI/UX 뉴스레터",
-            "description": "인터페이스 해부, 타이포그래피, 디자인 시스템 메모를 격주 단위로 정리해 전달합니다.",
-            "placeholder": "terminal@user.io",
-            "button": "구독하기"
         },
         "more": {
             "fallbackDate": "최근 글"
