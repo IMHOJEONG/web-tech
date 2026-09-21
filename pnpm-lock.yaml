@@ -298,6 +298,9 @@ catalogs:
     cmdk:
       specifier: ^1.1.1
       version: 1.1.1
+    cn:
+      specifier: 0.3.0
+      version: 0.3.0
     dayjs:
       specifier: ^1.11.19
       version: 1.11.20
@@ -307,9 +310,6 @@ catalogs:
     recharts:
       specifier: ^3.7.0
       version: 3.8.1
-    tailwind-merge:
-      specifier: ^3.4.0
-      version: 3.5.0
   web:
     '@radix-ui/react-slot':
       specifier: ^1.2.4
@@ -1108,12 +1108,12 @@ importers:
       class-variance-authority:
         specifier: catalog:ui
         version: 0.7.1
-      clsx:
-        specifier: 'catalog:'
-        version: 2.1.1
       cmdk:
         specifier: catalog:ui
         version: 1.1.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      cn:
+        specifier: catalog:ui
+        version: 0.3.0
       dayjs:
         specifier: catalog:ui
         version: 1.11.20
@@ -1135,9 +1135,6 @@ importers:
       recharts:
         specifier: catalog:ui
         version: 3.8.1(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react-is@18.3.1)(react@19.2.6)(redux@5.0.1)
-      tailwind-merge:
-        specifier: catalog:ui
-        version: 3.5.0
       tailwindcss:
         specifier: 'catalog:'
         version: 4.2.4
@@ -4549,6 +4546,11 @@ packages:
     peerDependencies:
       react: ^18 || ^19 || ^19.0.0-rc
       react-dom: ^18 || ^19 || ^19.0.0-rc
+
+  cn@0.3.0:
+    resolution: {integrity: sha512-qRoU0ARrZD3Bbj1wKFftEKxPjSnzTEdFkf22NVhW+zU9D/wajhoP+qUZ5DChhhSOBCH1onV12hrmGqfu1+5Z2Q==}
+    engines: {node: '>=20'}
+    hasBin: true
 
   co@4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
@@ -11674,6 +11676,8 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
+
+  cn@0.3.0: {}
 
   co@4.6.0: {}
 

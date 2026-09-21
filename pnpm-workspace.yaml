@@ -205,6 +205,7 @@ catalogs:
     web-vitals: "^5.1.0"
     zod: "^4.3.6"
   ui:
+    cn: "0.3.0"
     "@emotion/react": "^11.14.0"
     "@emotion/styled": "^11.14.1"
     "@radix-ui/react-collapsible": "^1.1.12"
