@@ -30,6 +30,7 @@ for (const locale of ['ko', 'en']) {
                     .innerText()
                 await expect(card).toHaveAccessibleName(title)
                 await expect(card.locator('a, button')).toHaveCount(0)
+                await expect(card.locator('svg')).toHaveCount(0)
                 await expect(card.locator('img')).toHaveCount(1)
                 const href = await card.getAttribute('href')
                 expect(href).not.toBe(leadHref)
@@ -79,6 +80,42 @@ for (const locale of ['ko', 'en']) {
         })
     }
 }
+
+test('cards indicate interaction through title color and keyboard focus without arrows', async ({
+    page,
+}) => {
+    test.skip(
+        page.viewportSize()?.width !== 1280,
+        'Desktop hover and keyboard check.'
+    )
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await page.goto('/ko/feed')
+    const cards = [
+        page.getByTestId('feed-lead-story').getByRole('link'),
+        page.getByTestId('feed-recent-articles').locator('li > a').first(),
+    ]
+    for (const card of cards) {
+        await card.scrollIntoViewIfNeeded()
+        await page.mouse.move(0, 0)
+        const heading = card.getByRole('heading')
+        const restingColor = await heading.evaluate(
+            (element) => getComputedStyle(element).color
+        )
+        await card.hover()
+        await expect(heading).not.toHaveCSS('color', restingColor)
+        await page.mouse.move(0, 0)
+        await expect(heading).toHaveCSS('color', restingColor)
+        await page.keyboard.press('Tab')
+        await card.focus()
+        await expect(card).toBeFocused()
+        await expect(heading).not.toHaveCSS('color', restingColor)
+        expect(
+            await card.evaluate((element) => element.matches(':focus-visible'))
+        ).toBe(true)
+        await expect(card).not.toHaveCSS('box-shadow', 'none')
+        await card.press('Tab')
+    }
+})
 
 test('empty topic keeps filters and returns to actual recent articles', async ({
     page,

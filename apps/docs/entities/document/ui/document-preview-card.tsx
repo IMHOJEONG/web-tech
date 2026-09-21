@@ -1,4 +1,3 @@
-import { ArrowUpRight } from 'lucide-react'
 import { Link } from '~/shared/i18n/navigation'
 import { DocumentThumbnail } from '~/shared/ui/document-thumbnail'
 import { DocumentCardMeta } from './document-card-meta'
@@ -33,18 +32,14 @@ export function DocumentPreviewCard({
             className="group ds-card ds-focus-ring grid min-w-0 gap-5 bg-surface-container-lowest p-5 transition-colors hover:border-primary/40 motion-reduce:transition-none sm:p-6 md:grid-cols-[minmax(0,1fr)_14rem] md:items-center md:gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]"
         >
             <div className="min-w-0 space-y-4">
-                <div className="flex items-start justify-between gap-3">
-                    <span className="min-w-0 break-words text-xs font-semibold tracking-wide text-primary">
+                <div className="space-y-2">
+                    <p className="break-words text-xs font-semibold tracking-wide text-primary">
                         {topic}
-                    </span>
-                    <ArrowUpRight
-                        aria-hidden="true"
-                        className="size-5 shrink-0 text-on-surface-variant transition-colors group-hover:text-primary group-focus-visible:text-primary"
-                    />
+                    </p>
+                    <Heading className="font-display break-words text-2xl font-bold leading-snug tracking-tight text-on-surface transition-colors group-hover:text-primary group-focus-visible:text-primary motion-reduce:transition-none sm:text-3xl">
+                        {title}
+                    </Heading>
                 </div>
-                <Heading className="font-display break-words text-2xl font-bold leading-snug tracking-tight text-on-surface sm:text-3xl">
-                    {title}
-                </Heading>
                 <p className="line-clamp-3 break-words text-sm leading-6 text-on-surface-variant sm:text-base sm:leading-7">
                     {summary}
                 </p>

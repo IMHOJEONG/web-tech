@@ -62,6 +62,16 @@ pnpm --filter docs exec eslint entities/document/ui/document-card-meta.tsx entit
 pnpm --filter docs exec playwright test e2e/feed-lead-story.spec.ts e2e/feed-recent-articles.spec.ts --workers=1
 ```
 
+## 화살표 제거와 클릭 피드백 정리
+
+- 공용 카드의 우측 상단 화살표를 제거해 상단과 최근 글에 함께 반영했다.
+- 주제와 제목을 8px 간격으로 묶고 요약·메타데이터와는 기존 간격을 유지했다.
+- hover와 키보드 focus-visible에서 제목을 primary 색상으로 강조한다.
+  기존 카드 테두리 피드백과 공용 focus ring을 유지하며 reduced-motion에서는 제목 색상 전환을 생략한다.
+- 위 Playwright 명령 재실행: 29개 통과, viewport 전용 검사 4개 제외.
+  화살표 부재, hover 제목 색상, 키보드 포커스 및 기존 상세 이동을 확인했다.
+- 변경된 컴포넌트와 두 E2E 파일의 ESLint 검사도 통과했다. 프로덕션 빌드는 별도로 실행하지 않았다.
+
 ## Next
 
-`http://127.0.0.1:3001/ko/feed`에서 확인한다. 공용 카드 도입과 피드 적용을 별도 커밋으로 관리한다.
+`http://127.0.0.1:3001/ko/feed`에서 확인한다. 화살표 제거 변경은 아직 커밋하지 않았다.

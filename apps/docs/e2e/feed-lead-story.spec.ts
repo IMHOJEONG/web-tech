@@ -22,6 +22,7 @@ for (const locale of ['ko', 'en']) {
                 (await heading.innerText()).trim()
             )
             await expect(card.locator('a, button, input')).toHaveCount(0)
+            await expect(card.locator('svg')).toHaveCount(0)
             await expect(
                 section.getByText('READ ARTICLE', { exact: true })
             ).toHaveCount(0)
