@@ -80,12 +80,15 @@
 
 ## 먼저 보면 좋은 문서
 
+- [기존 캐시 모델과 Cache Components 비교](./next-cache-components-comparison.md)
+- [Next.js Data Cache 통합 테스트 실험 노트](./next-data-cache-integration-lab.md)
+
 - `docs/architecture/docs-content-authoring-pipeline.md`
 - `docs/architecture/blog-content-api-contract.md`
 - `docs/runbooks/content-api-auth-ops-runbook.md`
 - `docs/runbooks/fastapi-content-api-reference.md`
 - `docs/architecture/docs-content-routing-policy.md`
-- `docs/worklog/2026-05-07-content-authoring-pipeline.md`
-- `docs/worklog/2026-05-08-content-api-server-to-server-auth.md`
-- `docs/worklog/2026-05-15-remote-content-zod-validation.md`
-- `docs/worklog/2026-05-21-public-asset-base-server-env-support.md`
+- `docs/worklog/2026-05/2026-05-07-content-authoring-pipeline.md`
+- `docs/worklog/2026-05/2026-05-08-content-api-server-to-server-auth.md`
+- `docs/worklog/2026-05/2026-05-15-remote-content-zod-validation.md`
+- `docs/worklog/2026-05/2026-05-21-public-asset-base-server-env-support.md`

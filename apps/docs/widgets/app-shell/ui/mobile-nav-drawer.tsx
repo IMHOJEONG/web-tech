@@ -20,10 +20,11 @@ import {
     X,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { Link } from '~/shared/i18n/navigation'
+import { usePathname } from '~/shared/i18n/navigation'
 import { useState } from 'react'
 import { Brand } from '~/shared/ui/brand'
+import type { DrawerLinkConfig } from './mobile-nav-drawer.types'
 
 const drawerLinks = [
     {
@@ -56,7 +57,7 @@ const drawerLinks = [
         icon: Users,
         activePrefixes: ['/about'],
     },
-] as const
+] as const satisfies readonly DrawerLinkConfig[]
 
 function DrawerLink({
     href,
@@ -75,6 +76,7 @@ function DrawerLink({
         <Link
             href={href}
             onClick={onNavigate}
+            aria-current={isActive ? 'page' : undefined}
             className={cn(
                 'flex w-full items-center gap-3 px-6 py-4 text-sm tracking-[0.05em] transition-colors',
                 isActive
@@ -130,7 +132,7 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                     </svg>
                 </SheetTrigger>
                 <Link
-                    className="font-display flex items-center text-xl font-bold leading-7 tracking-[-0.05em] text-primary"
+                    className="ds-focus-ring font-display inline-flex min-h-11 items-center rounded-md text-lg font-bold tracking-tight text-primary"
                     href="/"
                 >
                     <Brand />
@@ -139,7 +141,8 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
 
             <SheetContent
                 side="left"
-                className="z-[70] flex w-80 max-w-[85vw] flex-col gap-0 border-r border-header-border bg-popover p-0 text-on-surface shadow-deep [&>button]:hidden sm:hidden"
+                showCloseButton={false}
+                className="z-[70] flex w-80 max-w-[85vw] flex-col gap-0 border-r border-header-border bg-popover p-0 text-on-surface shadow-deep sm:hidden"
             >
                 <SheetTitle className="sr-only">
                     {headerT('drawer.title')}

@@ -1,0 +1,138 @@
+---
+title: '살아 있는 컨테이너, 준비되지 않은 서비스'
+slug: health-readiness-boundary
+date: 2026-09-12
+updatedAt: 2026-09-12
+summary: 프로세스 생존과 트래픽 준비는 같은 상태가 아닙니다. Startup, Liveness, Readiness가 누구에게 어떤 신호를 보내는지 구분합니다.
+authorName: 'HoJeong Im'
+authorRole: 'Web Engineer'
+readMinutes: 9
+topicLabel: 'CONTAINERS'
+tags:
+    - infrastructure
+    - docker
+    - container
+    - health-check
+    - operations
+status: draft
+---
+
+## PID 1이 살아 있어도 요청은 실패한다
+
+컨테이너의 main process가 살아 있어도 애플리케이션이 정상 요청을 처리하지 못할 수 있다.
+
+- 설정이나 secret을 아직 읽는 중일 수 있다.
+- migration 또는 cache warm-up이 끝나지 않았을 수 있다.
+- event loop가 막히거나 deadlock 상태일 수 있다.
+- 필수 데이터 저장소에 연결하지 못했을 수 있다.
+- reverse proxy가 잘못된 port로 연결하고 있을 수 있다.
+
+따라서 하나의 `/health` endpoint에 모든 상태를 섞기보다 운영 주체가 어떤 결정을 내려야 하는지부터 나눈다.
+
+## “살아 있다”를 세 가지 질문으로 쪼개기
+
+### 시작을 마쳤나: Startup
+
+초기화가 오래 걸리는 애플리케이션에 충분한 시간을 준다. startup check가 성공하기 전에는 liveness 판단을 미뤄 정상적인 초기화를 강제 재시작으로 방해하지 않는다.
+
+### 재시작해야 회복되나: Liveness
+
+프로세스가 진행 불가능한 상태인지 판단한다. 실패하면 orchestrator가 컨테이너를 재시작할 수 있으므로 보수적으로 설계해야 한다.
+
+데이터베이스나 외부 API가 잠시 실패했다는 이유만으로 liveness를 실패시키면 건강한 애플리케이션까지 반복 재시작할 수 있다. 재시작으로 해결되지 않는 외부 의존성은 일반적으로 liveness 조건에서 제외한다.
+
+### 지금 트래픽을 받아도 되나: Readiness
+
+현재 요청을 정상 처리할 준비가 되었는지 판단한다. 실패하면 트래픽 대상에서 잠시 제외하되, 프로세스를 반드시 재시작할 필요는 없다.
+
+> [!NOTE]
+> Docker의 `HEALTHCHECK`는 컨테이너 상태를 기록한다. 그 결과를 보고 트래픽을 자동으로 제외하거나 재시작하는 동작은 Compose 설정, orchestrator, load balancer 정책에 따라 달라진다.
+
+## Health endpoint는 누구에게 보내는 신호인가
+
+| Endpoint          | 질문                         | 외부 의존성 포함              |
+| ----------------- | ---------------------------- | ----------------------------- |
+| `/health/live`    | 프로세스가 진행 가능한가     | 원칙적으로 제외               |
+| `/health/ready`   | 현재 요청을 처리할 수 있는가 | 필수 의존성만 제한적으로 포함 |
+| `/health/startup` | 초기화가 끝났는가            | 초기화 완료 조건 포함         |
+
+응답은 작고 빠르게 유지한다. secret, 내부 주소, stack trace를 외부 응답에 포함하지 않는다.
+
+```json
+{
+    "status": "ok"
+}
+```
+
+상세 실패 원인은 구조화된 server log와 metrics에 기록하고, 공개 health response는 최소 정보만 제공한다.
+
+## Compose는 상태를 기록한다
+
+이미지 안에 존재하는 실행 파일만 사용한다. 경량 이미지에는 `curl`이 없을 수 있으므로 health check 때문에 불필요한 패키지를 추가하지 않도록 확인한다.
+
+```yaml
+services:
+    api:
+        image: ghcr.io/example/content-api:latest
+        healthcheck:
+            test:
+                - CMD
+                - node
+                - dist/healthcheck.js
+            interval: 30s
+            timeout: 3s
+            retries: 3
+            start_period: 20s
+```
+
+다른 서비스가 `service_healthy` 조건을 사용하더라도 이것은 시작 순서를 돕는 장치이지, 운영 중 모든 장애 복구를 대신하는 것은 아니다.
+
+## Kubernetes는 결과를 행동으로 바꾼다
+
+```yaml
+startupProbe:
+    httpGet:
+        path: /health/startup
+        port: 3000
+    periodSeconds: 5
+    failureThreshold: 24
+
+livenessProbe:
+    httpGet:
+        path: /health/live
+        port: 3000
+    periodSeconds: 10
+    failureThreshold: 3
+
+readinessProbe:
+    httpGet:
+        path: /health/ready
+        port: 3000
+    periodSeconds: 5
+    failureThreshold: 2
+```
+
+위 숫자는 예시다. 실제 startup 시간과 일시적 지연 분포를 측정한 뒤 threshold를 정한다. 짧은 timeout과 낮은 failure threshold를 근거 없이 사용하면 부하가 높은 순간에 정상 pod를 연쇄적으로 제외할 수 있다.
+
+## 잘못된 health check가 장애를 키울 때
+
+- 하나의 endpoint가 모든 외부 API를 순차 호출하도록 만들기
+- health 응답에서 token 설정 여부나 내부 파일 경로를 공개하기
+- readiness 실패와 liveness 실패를 같은 재시작 정책으로 처리하기
+- probe 요청을 일반 access log에 과도하게 남겨 실제 요청 로그를 묻히게 하기
+- health endpoint가 애플리케이션의 평소 요청보다 더 비싼 작업을 수행하게 하기
+
+## 배포 전에 던질 질문
+
+- 실패 결과를 누가 소비하고 어떤 조치를 하는가?
+- liveness 실패가 실제로 재시작으로 회복 가능한 문제인가?
+- readiness에 포함한 의존성이 모든 요청에 정말 필수인가?
+- startup의 최대 허용 시간이 실제 cold start보다 충분한가?
+- probe timeout이 정상 지연 분포보다 지나치게 짧지 않은가?
+- health response와 내부 진단 로그의 정보 노출 경계가 분리되어 있는가?
+
+## 원문으로 이어 읽기
+
+- [Dockerfile reference: HEALTHCHECK](https://docs.docker.com/reference/dockerfile/#healthcheck)
+- [Kubernetes: Liveness, Readiness, and Startup Probes](https://kubernetes.io/docs/concepts/workloads/pods/probes/)
+- [Kubernetes: Configure probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/)

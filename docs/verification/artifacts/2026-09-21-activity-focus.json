@@ -1,0 +1,728 @@
+{
+  "config": {
+    "argv": [
+      "/Users/coder/.local/share/mise/installs/node/24.12.0/bin/node",
+      "/Users/coder/Desktop/project/web-tech/apps/docs/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=playwright.activity.config.ts",
+      "--reporter=list,json"
+    ],
+    "configFile": "/Users/coder/Desktop/project/web-tech/apps/docs/playwright.activity.config.ts",
+    "rootDir": "/Users/coder/Desktop/project/web-tech/apps/docs/activity-e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/coder/Desktop/project/web-tech/apps/docs/test-results/activity",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "strict": false
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/coder/Desktop/project/web-tech/apps/docs/activity-e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 15000
+      },
+      {
+        "outputDir": "/Users/coder/Desktop/project/web-tech/apps/docs/test-results/activity",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "strict": true
+        },
+        "id": "chromium-strict",
+        "name": "chromium-strict",
+        "testDir": "/Users/coder/Desktop/project/web-tech/apps/docs/activity-e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 15000
+      }
+    ],
+    "quiet": false,
+    "reporter": [["list"], ["json"]],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "activity-focus.spec.ts",
+      "file": "activity-focus.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "hidden preserves DOM and state but cleans up effects",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 731,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:43.276Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiBmYWxzZSwKICAiZXZlbnRzIjogWwogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAiQk9EWSIsCiAgICAgICJ0aW1lIjogMjI2Ljc5OTk5OTk1MjMxNjI4CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImRyYWZ0IiwKICAgICAgInRpbWUiOiAzMDQKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAiY291bnQiLAogICAgICAidGltZSI6IDM0Ni4yOTk5OTk5NTIzMTYzCiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMzk4LjI5OTk5OTk1MjMxNjMKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogInJlcXVlc3Q6aGlkZSIsCiAgICAgICJmb2N1cyI6ICJ0b2dnbGUiLAogICAgICAidGltZSI6IDM5OC41CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6Y2xlYW51cCIsCiAgICAgICJmb2N1cyI6ICJ0b2dnbGUiLAogICAgICAidGltZSI6IDQwMC4xMDAwMDAwMjM4NDE4NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAicmVxdWVzdDpzaG93IiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogNDI3LjY5OTk5OTkyODQ3NDQKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpzZXR1cCIsCiAgICAgICJmb2N1cyI6ICJ0b2dnbGUiLAogICAgICAidGltZSI6IDQyOQogICAgfQogIF0sCiAgInJlYWN0IjogIjE5LjIuNiIsCiAgInNuYXBzaG90IjogewogICAgImFjdGl2ZUVsZW1lbnQiOiAidG9nZ2xlIiwKICAgICJzdGF0ZSI6ICJ0cnVlIC8gZmFsc2UiLAogICAgIm92ZXJsYXlDb3VudCI6IDAsCiAgICAicGFuZURpc3BsYXkiOiAiYmxvY2siCiAgfSwKICAidG9nZ2xlSGl0VGFyZ2V0IjogInRvZ2dsZSIsCiAgInBhZ2VFcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-4224b3d655f234fd6263",
+          "file": "activity-focus.spec.ts",
+          "line": 106,
+          "column": 1
+        },
+        {
+          "title": "a connected hidden input cannot receive focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 340,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:44.528Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiBmYWxzZSwKICAiZXZlbnRzIjogWwogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAiQk9EWSIsCiAgICAgICJ0aW1lIjogMTY5Ljc5OTk5OTk1MjMxNjI4CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMjE5LjY5OTk5OTkyODQ3NDQzCiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJyZXF1ZXN0OmhpZGUiLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAyMjAKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMjIxLjE5OTk5OTkyODQ3NDQzCiAgICB9CiAgXSwKICAicmVhY3QiOiAiMTkuMi42IiwKICAic25hcHNob3QiOiB7CiAgICAiYWN0aXZlRWxlbWVudCI6ICJ0b2dnbGUiLAogICAgInN0YXRlIjogImZhbHNlIC8gZmFsc2UiLAogICAgIm92ZXJsYXlDb3VudCI6IDAsCiAgICAicGFuZURpc3BsYXkiOiAibm9uZSIKICB9LAogICJ0b2dnbGVIaXRUYXJnZXQiOiAidG9nZ2xlIiwKICAicGFnZUVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-53fa2526c31613504d1f",
+          "file": "activity-focus.spec.ts",
+          "line": 134,
+          "column": 1
+        },
+        {
+          "title": "actual unmount disconnects DOM and resets state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 369,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:44.875Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiBmYWxzZSwKICAiZXZlbnRzIjogWwogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAiQk9EWSIsCiAgICAgICJ0aW1lIjogMTc4CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImRyYWZ0IiwKICAgICAgInRpbWUiOiAyMjIuODAwMDAwMDcxNTI1NTcKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAiY291bnQiLAogICAgICAidGltZSI6IDI0Mi41CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogIm1vdW50IiwKICAgICAgInRpbWUiOiAyODIuNQogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OmNsZWFudXAiLAogICAgICAiZm9jdXMiOiAibW91bnQiLAogICAgICAidGltZSI6IDI4My41CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAibW91bnQiLAogICAgICAidGltZSI6IDMwMC45MDAwMDAwOTUzNjc0MwogICAgfQogIF0sCiAgInJlYWN0IjogIjE5LjIuNiIsCiAgInNuYXBzaG90IjogewogICAgImFjdGl2ZUVsZW1lbnQiOiAibW91bnQiLAogICAgInN0YXRlIjogInRydWUgLyBmYWxzZSIsCiAgICAib3ZlcmxheUNvdW50IjogMCwKICAgICJwYW5lRGlzcGxheSI6ICJibG9jayIKICB9LAogICJ0b2dnbGVIaXRUYXJnZXQiOiAidG9nZ2xlIiwKICAicGFnZUVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-704a7e4a7a24c0acfb44",
+          "file": "activity-focus.spec.ts",
+          "line": 150,
+          "column": 1
+        },
+        {
+          "title": "unconditional cleanup focus steals focus on hide",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 333,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:45.251Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiBmYWxzZSwKICAiZXZlbnRzIjogWwogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAiQk9EWSIsCiAgICAgICJ0aW1lIjogMTcwCiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMjEwLjM5OTk5OTk3NjE1ODE0CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJyZXF1ZXN0OmhpZGUiLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAyMTAuNjk5OTk5OTI4NDc0NDMKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMjExLjc5OTk5OTk1MjMxNjI4CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogIm9sZC10cmlnZ2VyIiwKICAgICAgInRpbWUiOiAyMTEuODk5OTk5OTc2MTU4MTQKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImNsZWFudXA6Zm9jdXMiLAogICAgICAiZm9jdXMiOiAib2xkLXRyaWdnZXIiLAogICAgICAidGltZSI6IDIxMgogICAgfQogIF0sCiAgInJlYWN0IjogIjE5LjIuNiIsCiAgInNuYXBzaG90IjogewogICAgImFjdGl2ZUVsZW1lbnQiOiAib2xkLXRyaWdnZXIiLAogICAgInN0YXRlIjogImZhbHNlIC8gZmFsc2UiLAogICAgIm92ZXJsYXlDb3VudCI6IDAsCiAgICAicGFuZURpc3BsYXkiOiAibm9uZSIKICB9LAogICJ0b2dnbGVIaXRUYXJnZXQiOiAidG9nZ2xlIiwKICAicGFnZUVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-06346a04dbc4257ff341",
+          "file": "activity-focus.spec.ts",
+          "line": 165,
+          "column": 1
+        },
+        {
+          "title": "normal Sheet close restores a visible trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 379,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:45.591Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiBmYWxzZSwKICAiZXZlbnRzIjogWwogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAiQk9EWSIsCiAgICAgICJ0aW1lIjogMTc4CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImRpYWxvZy10cmlnZ2VyIiwKICAgICAgInRpbWUiOiAyMzYuMTk5OTk5OTI4NDc0NDMKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAiZGlhbG9nLWlucHV0IiwKICAgICAgInRpbWUiOiAyNTAuODk5OTk5OTc2MTU4MTQKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImRpYWxvZzpjbG9zZS1hdXRvLWZvY3VzIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDMwMQogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJkaWFsb2ctdHJpZ2dlciIsCiAgICAgICJ0aW1lIjogMzAxLjE5OTk5OTkyODQ3NDQKICAgIH0KICBdLAogICJyZWFjdCI6ICIxOS4yLjYiLAogICJzbmFwc2hvdCI6IHsKICAgICJhY3RpdmVFbGVtZW50IjogImRpYWxvZy10cmlnZ2VyIiwKICAgICJzdGF0ZSI6ICJ0cnVlIC8gZmFsc2UiLAogICAgIm92ZXJsYXlDb3VudCI6IDAsCiAgICAicGFuZURpc3BsYXkiOiAiYmxvY2siCiAgfSwKICAidG9nZ2xlSGl0VGFyZ2V0IjogInRvZ2dsZSIsCiAgInBhZ2VFcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-ec047442f20b113d21f9",
+          "file": "activity-focus.spec.ts",
+          "line": 179,
+          "column": 1
+        },
+        {
+          "title": "hiding an open Sheet leaves the portal blocking the next view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 389,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:45.976Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiBmYWxzZSwKICAiZXZlbnRzIjogWwogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAiQk9EWSIsCiAgICAgICJ0aW1lIjogMTgwLjUKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAiZGlhbG9nLXRyaWdnZXIiLAogICAgICAidGltZSI6IDIxNy4yOTk5OTk5NTIzMTYyOAogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJkaWFsb2ctaW5wdXQiLAogICAgICAidGltZSI6IDIyOS41CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImxlYXZlLXZpZXciLAogICAgICAidGltZSI6IDI5MC4xOTk5OTk5Mjg0NzQ0CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJyZXF1ZXN0OmhpZGUiLAogICAgICAiZm9jdXMiOiAibGVhdmUtdmlldyIsCiAgICAgICJ0aW1lIjogMjkwLjI5OTk5OTk1MjMxNjMKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogImxlYXZlLXZpZXciLAogICAgICAidGltZSI6IDI5MS4xOTk5OTk5Mjg0NzQ0CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJkaWFsb2c6Y2xvc2UtYXV0by1mb2N1cyIsCiAgICAgICJmb2N1cyI6ICJsZWF2ZS12aWV3IiwKICAgICAgInRpbWUiOiAyOTkuMjk5OTk5OTUyMzE2MwogICAgfQogIF0sCiAgInJlYWN0IjogIjE5LjIuNiIsCiAgInNuYXBzaG90IjogewogICAgImFjdGl2ZUVsZW1lbnQiOiAibGVhdmUtdmlldyIsCiAgICAic3RhdGUiOiAiZmFsc2UgLyB0cnVlIiwKICAgICJvdmVybGF5Q291bnQiOiAxLAogICAgInBhbmVEaXNwbGF5IjogIm5vbmUiCiAgfSwKICAidG9nZ2xlSGl0VGFyZ2V0IjogInNoZWV0LW92ZXJsYXkiLAogICJwYWdlRXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-1c673e6cfcb242f0b1f7",
+          "file": "activity-focus.spec.ts",
+          "line": 190,
+          "column": 1
+        },
+        {
+          "title": "same-commit close and hide still leave a portal inside Activity",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 387,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:46.372Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiBmYWxzZSwKICAiZXZlbnRzIjogWwogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAiQk9EWSIsCiAgICAgICJ0aW1lIjogMTY4LjgwMDAwMDA3MTUyNTU3CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImRpYWxvZy10cmlnZ2VyIiwKICAgICAgInRpbWUiOiAyMjkuNjAwMDAwMDIzODQxODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAiZGlhbG9nLWlucHV0IiwKICAgICAgInRpbWUiOiAyNDAuODAwMDAwMDcxNTI1NTcKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAibGVhdmUtdmlldyIsCiAgICAgICJ0aW1lIjogMjk1LjcwMDAwMDA0NzY4MzcKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogInJlcXVlc3Q6aGlkZSIsCiAgICAgICJmb2N1cyI6ICJsZWF2ZS12aWV3IiwKICAgICAgInRpbWUiOiAyOTUuODAwMDAwMDcxNTI1NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OmNsZWFudXAiLAogICAgICAiZm9jdXMiOiAibGVhdmUtdmlldyIsCiAgICAgICJ0aW1lIjogMjk2LjYwMDAwMDAyMzg0MTg2CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJkaWFsb2c6Y2xvc2UtYXV0by1mb2N1cyIsCiAgICAgICJmb2N1cyI6ICJsZWF2ZS12aWV3IiwKICAgICAgInRpbWUiOiAzMDAuMTAwMDAwMDIzODQxODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAzMDAuMjAwMDAwMDQ3NjgzNwogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZGlhbG9nOmZhbGxiYWNrLWZvY3VzIiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMzAwLjIwMDAwMDA0NzY4MzcKICAgIH0KICBdLAogICJyZWFjdCI6ICIxOS4yLjYiLAogICJzbmFwc2hvdCI6IHsKICAgICJhY3RpdmVFbGVtZW50IjogInRvZ2dsZSIsCiAgICAic3RhdGUiOiAiZmFsc2UgLyBmYWxzZSIsCiAgICAib3ZlcmxheUNvdW50IjogMSwKICAgICJwYW5lRGlzcGxheSI6ICJub25lIgogIH0sCiAgInRvZ2dsZUhpdFRhcmdldCI6ICJzaGVldC1vdmVybGF5IiwKICAicGFnZUVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-1ac72591dd0680df5722",
+          "file": "activity-focus.spec.ts",
+          "line": 208,
+          "column": 1
+        },
+        {
+          "title": "keeping Sheet lifecycle outside Activity permits close and return",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 415,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:46.765Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiBmYWxzZSwKICAiZXZlbnRzIjogWwogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAiQk9EWSIsCiAgICAgICJ0aW1lIjogMTcwLjg5OTk5OTk3NjE1ODE0CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImRpYWxvZy10cmlnZ2VyIiwKICAgICAgInRpbWUiOiAyMTIuMjAwMDAwMDQ3NjgzNzIKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAiZGlhbG9nLWlucHV0IiwKICAgICAgInRpbWUiOiAyMjUuNQogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJsZWF2ZS12aWV3IiwKICAgICAgInRpbWUiOiAyNzYuMTAwMDAwMDIzODQxODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogInJlcXVlc3Q6aGlkZSIsCiAgICAgICJmb2N1cyI6ICJsZWF2ZS12aWV3IiwKICAgICAgInRpbWUiOiAyNzYuMzAwMDAwMDcxNTI1NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OmNsZWFudXAiLAogICAgICAiZm9jdXMiOiAibGVhdmUtdmlldyIsCiAgICAgICJ0aW1lIjogMjc5CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJkaWFsb2c6Y2xvc2UtYXV0by1mb2N1cyIsCiAgICAgICJmb2N1cyI6ICJCT0RZIiwKICAgICAgInRpbWUiOiAyODMuNzAwMDAwMDQ3NjgzNwogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJ0b2dnbGUiLAogICAgICAidGltZSI6IDI4My44MDAwMDAwNzE1MjU2CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJkaWFsb2c6ZmFsbGJhY2stZm9jdXMiLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAyODMuODAwMDAwMDcxNTI1NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAicmVxdWVzdDpzaG93IiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMzA4Ljg5OTk5OTk3NjE1ODE0CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAzMTAKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAiZGlhbG9nLXRyaWdnZXIiLAogICAgICAidGltZSI6IDMzNC43MDAwMDAwNDc2ODM3CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImRpYWxvZy1pbnB1dCIsCiAgICAgICJ0aW1lIjogMzM5LjgwMDAwMDA3MTUyNTYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImRpYWxvZzpjbG9zZS1hdXRvLWZvY3VzIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDM1MS4zOTk5OTk5NzYxNTgxNAogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJkaWFsb2ctdHJpZ2dlciIsCiAgICAgICJ0aW1lIjogMzUxLjUKICAgIH0KICBdLAogICJyZWFjdCI6ICIxOS4yLjYiLAogICJzbmFwc2hvdCI6IHsKICAgICJhY3RpdmVFbGVtZW50IjogImRpYWxvZy10cmlnZ2VyIiwKICAgICJzdGF0ZSI6ICJ0cnVlIC8gZmFsc2UiLAogICAgIm92ZXJsYXlDb3VudCI6IDAsCiAgICAicGFuZURpc3BsYXkiOiAiYmxvY2siCiAgfSwKICAidG9nZ2xlSGl0VGFyZ2V0IjogInRvZ2dsZSIsCiAgInBhZ2VFcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-4ce196434edd5f113830",
+          "file": "activity-focus.spec.ts",
+          "line": 221,
+          "column": 1
+        },
+        {
+          "title": "hidden preserves DOM and state but cleans up effects",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-strict",
+              "projectName": "chromium-strict",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 495,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:47.534Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiB0cnVlLAogICJldmVudHMiOiBbCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpzZXR1cCIsCiAgICAgICJmb2N1cyI6ICJCT0RZIiwKICAgICAgInRpbWUiOiAxOTguNjAwMDAwMDIzODQxODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE5OC44OTk5OTk5NzYxNTgxNAogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OnNldHVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE5OS4xMDAwMDAwMjM4NDE4NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJkcmFmdCIsCiAgICAgICJ0aW1lIjogMjYxLjgwMDAwMDA3MTUyNTYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAiY291bnQiLAogICAgICAidGltZSI6IDI4NS4xMDAwMDAwMjM4NDE4NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJ0b2dnbGUiLAogICAgICAidGltZSI6IDM1MC4yMDAwMDAwNDc2ODM3CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJyZXF1ZXN0OmhpZGUiLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAzNTMuODAwMDAwMDcxNTI1NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OmNsZWFudXAiLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAzNTQuODAwMDAwMDcxNTI1NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAicmVxdWVzdDpzaG93IiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMzkxLjEwMDAwMDAyMzg0MTg2CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAzOTIuNzAwMDAwMDQ3NjgzNwogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OmNsZWFudXAiLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAzOTIuODAwMDAwMDcxNTI1NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OnNldHVwIiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMzkyLjgwMDAwMDA3MTUyNTYKICAgIH0KICBdLAogICJyZWFjdCI6ICIxOS4yLjYiLAogICJzbmFwc2hvdCI6IHsKICAgICJhY3RpdmVFbGVtZW50IjogInRvZ2dsZSIsCiAgICAic3RhdGUiOiAidHJ1ZSAvIGZhbHNlIiwKICAgICJvdmVybGF5Q291bnQiOiAwLAogICAgInBhbmVEaXNwbGF5IjogImJsb2NrIgogIH0sCiAgInRvZ2dsZUhpdFRhcmdldCI6ICJ0b2dnbGUiLAogICJwYWdlRXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-b0dcbf4d7271973d3371",
+          "file": "activity-focus.spec.ts",
+          "line": 106,
+          "column": 1
+        },
+        {
+          "title": "a connected hidden input cannot receive focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-strict",
+              "projectName": "chromium-strict",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 359,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:48.270Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiB0cnVlLAogICJldmVudHMiOiBbCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpzZXR1cCIsCiAgICAgICJmb2N1cyI6ICJCT0RZIiwKICAgICAgInRpbWUiOiAxODEuMTk5OTk5OTI4NDc0NDMKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE4MS41CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAiQk9EWSIsCiAgICAgICJ0aW1lIjogMTgxLjU5OTk5OTkwNDYzMjU3CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMjMwCiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJyZXF1ZXN0OmhpZGUiLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAyMzAuMjk5OTk5OTUyMzE2MjgKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMjMxLjU5OTk5OTkwNDYzMjU3CiAgICB9CiAgXSwKICAicmVhY3QiOiAiMTkuMi42IiwKICAic25hcHNob3QiOiB7CiAgICAiYWN0aXZlRWxlbWVudCI6ICJ0b2dnbGUiLAogICAgInN0YXRlIjogImZhbHNlIC8gZmFsc2UiLAogICAgIm92ZXJsYXlDb3VudCI6IDAsCiAgICAicGFuZURpc3BsYXkiOiAibm9uZSIKICB9LAogICJ0b2dnbGVIaXRUYXJnZXQiOiAidG9nZ2xlIiwKICAicGFnZUVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-705d359deee93d07b268",
+          "file": "activity-focus.spec.ts",
+          "line": 134,
+          "column": 1
+        },
+        {
+          "title": "actual unmount disconnects DOM and resets state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-strict",
+              "projectName": "chromium-strict",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 391,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:48.636Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiB0cnVlLAogICJldmVudHMiOiBbCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpzZXR1cCIsCiAgICAgICJmb2N1cyI6ICJCT0RZIiwKICAgICAgInRpbWUiOiAxNzQuMzk5OTk5OTc2MTU4MTQKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE3NC42MDAwMDAwMjM4NDE4NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OnNldHVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE3NC44MDAwMDAwNzE1MjU1NwogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJkcmFmdCIsCiAgICAgICJ0aW1lIjogMjIxLjcwMDAwMDA0NzY4MzcyCiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImNvdW50IiwKICAgICAgInRpbWUiOiAyNDMuMzk5OTk5OTc2MTU4MTQKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAibW91bnQiLAogICAgICAidGltZSI6IDI4Ni44OTk5OTk5NzYxNTgxNAogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OmNsZWFudXAiLAogICAgICAiZm9jdXMiOiAibW91bnQiLAogICAgICAidGltZSI6IDI4OAogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OnNldHVwIiwKICAgICAgImZvY3VzIjogIm1vdW50IiwKICAgICAgInRpbWUiOiAzMTAuNzAwMDAwMDQ3NjgzNwogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OmNsZWFudXAiLAogICAgICAiZm9jdXMiOiAibW91bnQiLAogICAgICAidGltZSI6IDMxMC43MDAwMDAwNDc2ODM3CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAibW91bnQiLAogICAgICAidGltZSI6IDMxMC44MDAwMDAwNzE1MjU2CiAgICB9CiAgXSwKICAicmVhY3QiOiAiMTkuMi42IiwKICAic25hcHNob3QiOiB7CiAgICAiYWN0aXZlRWxlbWVudCI6ICJtb3VudCIsCiAgICAic3RhdGUiOiAidHJ1ZSAvIGZhbHNlIiwKICAgICJvdmVybGF5Q291bnQiOiAwLAogICAgInBhbmVEaXNwbGF5IjogImJsb2NrIgogIH0sCiAgInRvZ2dsZUhpdFRhcmdldCI6ICJ0b2dnbGUiLAogICJwYWdlRXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-046d71ed19623ba77a2f",
+          "file": "activity-focus.spec.ts",
+          "line": 150,
+          "column": 1
+        },
+        {
+          "title": "unconditional cleanup focus steals focus on hide",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-strict",
+              "projectName": "chromium-strict",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 356,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:49.033Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiB0cnVlLAogICJldmVudHMiOiBbCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpzZXR1cCIsCiAgICAgICJmb2N1cyI6ICJCT0RZIiwKICAgICAgInRpbWUiOiAxNzIuMjk5OTk5OTUyMzE2MjgKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE3Mi42MDAwMDAwMjM4NDE4NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJvbGQtdHJpZ2dlciIsCiAgICAgICJ0aW1lIjogMTgzLjEwMDAwMDAyMzg0MTg2CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJjbGVhbnVwOmZvY3VzIiwKICAgICAgImZvY3VzIjogIm9sZC10cmlnZ2VyIiwKICAgICAgInRpbWUiOiAxODMuMTAwMDAwMDIzODQxODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpzZXR1cCIsCiAgICAgICJmb2N1cyI6ICJvbGQtdHJpZ2dlciIsCiAgICAgICJ0aW1lIjogMTgzLjM5OTk5OTk3NjE1ODE0CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMjI5Ljg5OTk5OTk3NjE1ODE0CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJyZXF1ZXN0OmhpZGUiLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAyMzAuMTAwMDAwMDIzODQxODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMjMxLjI5OTk5OTk1MjMxNjI4CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogIm9sZC10cmlnZ2VyIiwKICAgICAgInRpbWUiOiAyMzEuNQogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiY2xlYW51cDpmb2N1cyIsCiAgICAgICJmb2N1cyI6ICJvbGQtdHJpZ2dlciIsCiAgICAgICJ0aW1lIjogMjMxLjUKICAgIH0KICBdLAogICJyZWFjdCI6ICIxOS4yLjYiLAogICJzbmFwc2hvdCI6IHsKICAgICJhY3RpdmVFbGVtZW50IjogIm9sZC10cmlnZ2VyIiwKICAgICJzdGF0ZSI6ICJmYWxzZSAvIGZhbHNlIiwKICAgICJvdmVybGF5Q291bnQiOiAwLAogICAgInBhbmVEaXNwbGF5IjogIm5vbmUiCiAgfSwKICAidG9nZ2xlSGl0VGFyZ2V0IjogInRvZ2dsZSIsCiAgInBhZ2VFcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-6908eee19881c118dbdd",
+          "file": "activity-focus.spec.ts",
+          "line": 165,
+          "column": 1
+        },
+        {
+          "title": "normal Sheet close restores a visible trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-strict",
+              "projectName": "chromium-strict",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 342,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:49.395Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiB0cnVlLAogICJldmVudHMiOiBbCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpzZXR1cCIsCiAgICAgICJmb2N1cyI6ICJCT0RZIiwKICAgICAgInRpbWUiOiAxNzAuMTAwMDAwMDIzODQxODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE3MC4yOTk5OTk5NTIzMTYyOAogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OnNldHVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE3MC41CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImRpYWxvZy10cmlnZ2VyIiwKICAgICAgInRpbWUiOiAyMDUuNzk5OTk5OTUyMzE2MjgKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAiZGlhbG9nLWlucHV0IiwKICAgICAgInRpbWUiOiAyMTkuMzk5OTk5OTc2MTU4MTQKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImRpYWxvZzpjbG9zZS1hdXRvLWZvY3VzIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDI2Ni4zOTk5OTk5NzYxNTgxNAogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJkaWFsb2ctdHJpZ2dlciIsCiAgICAgICJ0aW1lIjogMjY2LjM5OTk5OTk3NjE1ODE0CiAgICB9CiAgXSwKICAicmVhY3QiOiAiMTkuMi42IiwKICAic25hcHNob3QiOiB7CiAgICAiYWN0aXZlRWxlbWVudCI6ICJkaWFsb2ctdHJpZ2dlciIsCiAgICAic3RhdGUiOiAidHJ1ZSAvIGZhbHNlIiwKICAgICJvdmVybGF5Q291bnQiOiAwLAogICAgInBhbmVEaXNwbGF5IjogImJsb2NrIgogIH0sCiAgInRvZ2dsZUhpdFRhcmdldCI6ICJ0b2dnbGUiLAogICJwYWdlRXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-86078ed431d3010b174e",
+          "file": "activity-focus.spec.ts",
+          "line": 179,
+          "column": 1
+        },
+        {
+          "title": "hiding an open Sheet leaves the portal blocking the next view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-strict",
+              "projectName": "chromium-strict",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 383,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:49.743Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiB0cnVlLAogICJldmVudHMiOiBbCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpzZXR1cCIsCiAgICAgICJmb2N1cyI6ICJCT0RZIiwKICAgICAgInRpbWUiOiAxNjguODk5OTk5OTc2MTU4MTQKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE2OS4xMDAwMDAwMjM4NDE4NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OnNldHVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE2OS4zMDAwMDAwNzE1MjU1NwogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJkaWFsb2ctdHJpZ2dlciIsCiAgICAgICJ0aW1lIjogMjIwLjIwMDAwMDA0NzY4MzcyCiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImRpYWxvZy1pbnB1dCIsCiAgICAgICJ0aW1lIjogMjMzLjUKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAibGVhdmUtdmlldyIsCiAgICAgICJ0aW1lIjogMjg0LjUKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogInJlcXVlc3Q6aGlkZSIsCiAgICAgICJmb2N1cyI6ICJsZWF2ZS12aWV3IiwKICAgICAgInRpbWUiOiAyODQuNjAwMDAwMDIzODQxODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogImxlYXZlLXZpZXciLAogICAgICAidGltZSI6IDI4NS41CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJkaWFsb2c6Y2xvc2UtYXV0by1mb2N1cyIsCiAgICAgICJmb2N1cyI6ICJsZWF2ZS12aWV3IiwKICAgICAgInRpbWUiOiAyOTQuODk5OTk5OTc2MTU4MTQKICAgIH0KICBdLAogICJyZWFjdCI6ICIxOS4yLjYiLAogICJzbmFwc2hvdCI6IHsKICAgICJhY3RpdmVFbGVtZW50IjogImxlYXZlLXZpZXciLAogICAgInN0YXRlIjogImZhbHNlIC8gdHJ1ZSIsCiAgICAib3ZlcmxheUNvdW50IjogMSwKICAgICJwYW5lRGlzcGxheSI6ICJub25lIgogIH0sCiAgInRvZ2dsZUhpdFRhcmdldCI6ICJzaGVldC1vdmVybGF5IiwKICAicGFnZUVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-3dc89ef9605554ff7562",
+          "file": "activity-focus.spec.ts",
+          "line": 190,
+          "column": 1
+        },
+        {
+          "title": "same-commit close and hide still leave a portal inside Activity",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-strict",
+              "projectName": "chromium-strict",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 370,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:50.133Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiB0cnVlLAogICJldmVudHMiOiBbCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpzZXR1cCIsCiAgICAgICJmb2N1cyI6ICJCT0RZIiwKICAgICAgInRpbWUiOiAxNjcuNjAwMDAwMDIzODQxODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE2Ny43OTk5OTk5NTIzMTYyOAogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OnNldHVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE2OAogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJkaWFsb2ctdHJpZ2dlciIsCiAgICAgICJ0aW1lIjogMjEwLjc5OTk5OTk1MjMxNjI4CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImRpYWxvZy1pbnB1dCIsCiAgICAgICJ0aW1lIjogMjI0LjEwMDAwMDAyMzg0MTg2CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImxlYXZlLXZpZXciLAogICAgICAidGltZSI6IDI3NS44OTk5OTk5NzYxNTgxNAogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAicmVxdWVzdDpoaWRlIiwKICAgICAgImZvY3VzIjogImxlYXZlLXZpZXciLAogICAgICAidGltZSI6IDI3NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OmNsZWFudXAiLAogICAgICAiZm9jdXMiOiAibGVhdmUtdmlldyIsCiAgICAgICJ0aW1lIjogMjc2Ljg5OTk5OTk3NjE1ODE0CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJkaWFsb2c6Y2xvc2UtYXV0by1mb2N1cyIsCiAgICAgICJmb2N1cyI6ICJsZWF2ZS12aWV3IiwKICAgICAgInRpbWUiOiAyODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAyODYuMTAwMDAwMDIzODQxODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImRpYWxvZzpmYWxsYmFjay1mb2N1cyIsCiAgICAgICJmb2N1cyI6ICJ0b2dnbGUiLAogICAgICAidGltZSI6IDI4Ni4yMDAwMDAwNDc2ODM3CiAgICB9CiAgXSwKICAicmVhY3QiOiAiMTkuMi42IiwKICAic25hcHNob3QiOiB7CiAgICAiYWN0aXZlRWxlbWVudCI6ICJ0b2dnbGUiLAogICAgInN0YXRlIjogImZhbHNlIC8gZmFsc2UiLAogICAgIm92ZXJsYXlDb3VudCI6IDEsCiAgICAicGFuZURpc3BsYXkiOiAibm9uZSIKICB9LAogICJ0b2dnbGVIaXRUYXJnZXQiOiAic2hlZXQtb3ZlcmxheSIsCiAgInBhZ2VFcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-f8d33238a71c6d1bfe34",
+          "file": "activity-focus.spec.ts",
+          "line": 208,
+          "column": 1
+        },
+        {
+          "title": "keeping Sheet lifecycle outside Activity permits close and return",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-strict",
+              "projectName": "chromium-strict",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 440,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T11:54:50.510Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "activity-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJicm93c2VyIjogIjE1MS4wLjc5MjIuMzQiLAogICJzdHJpY3QiOiB0cnVlLAogICJldmVudHMiOiBbCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpzZXR1cCIsCiAgICAgICJmb2N1cyI6ICJCT0RZIiwKICAgICAgInRpbWUiOiAxNzUKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpjbGVhbnVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE3NS4zMDAwMDAwNzE1MjU1NwogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OnNldHVwIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDE3NS41CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImRpYWxvZy10cmlnZ2VyIiwKICAgICAgInRpbWUiOiAyMTYuMTAwMDAwMDIzODQxODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAiZGlhbG9nLWlucHV0IiwKICAgICAgInRpbWUiOiAyMjkuOTAwMDAwMDk1MzY3NDMKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImZvY3VzaW4iLAogICAgICAiZm9jdXMiOiAibGVhdmUtdmlldyIsCiAgICAgICJ0aW1lIjogMjgyLjUKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogInJlcXVlc3Q6aGlkZSIsCiAgICAgICJmb2N1cyI6ICJsZWF2ZS12aWV3IiwKICAgICAgInRpbWUiOiAyODIuNzAwMDAwMDQ3NjgzNwogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZWZmZWN0OmNsZWFudXAiLAogICAgICAiZm9jdXMiOiAibGVhdmUtdmlldyIsCiAgICAgICJ0aW1lIjogMjg2LjMwMDAwMDA3MTUyNTYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImRpYWxvZzpjbG9zZS1hdXRvLWZvY3VzIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDI4OQogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJ0b2dnbGUiLAogICAgICAidGltZSI6IDI4OS4xMDAwMDAwMjM4NDE4NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZGlhbG9nOmZhbGxiYWNrLWZvY3VzIiwKICAgICAgImZvY3VzIjogInRvZ2dsZSIsCiAgICAgICJ0aW1lIjogMjg5LjEwMDAwMDAyMzg0MTg2CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJyZXF1ZXN0OnNob3ciLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAzMzIuNjAwMDAwMDIzODQxODYKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImVmZmVjdDpzZXR1cCIsCiAgICAgICJmb2N1cyI6ICJ0b2dnbGUiLAogICAgICAidGltZSI6IDMzNC4zMDAwMDAwNzE1MjU2CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6Y2xlYW51cCIsCiAgICAgICJmb2N1cyI6ICJ0b2dnbGUiLAogICAgICAidGltZSI6IDMzNC4zMDAwMDAwNzE1MjU2CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJlZmZlY3Q6c2V0dXAiLAogICAgICAiZm9jdXMiOiAidG9nZ2xlIiwKICAgICAgInRpbWUiOiAzMzQuMzAwMDAwMDcxNTI1NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJkaWFsb2ctdHJpZ2dlciIsCiAgICAgICJ0aW1lIjogMzU2LjYwMDAwMDAyMzg0MTg2CiAgICB9LAogICAgewogICAgICAibmFtZSI6ICJmb2N1c2luIiwKICAgICAgImZvY3VzIjogImRpYWxvZy1pbnB1dCIsCiAgICAgICJ0aW1lIjogMzY0LjIwMDAwMDA0NzY4MzcKICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogImRpYWxvZzpjbG9zZS1hdXRvLWZvY3VzIiwKICAgICAgImZvY3VzIjogIkJPRFkiLAogICAgICAidGltZSI6IDM3Ni4xMDAwMDAwMjM4NDE4NgogICAgfSwKICAgIHsKICAgICAgIm5hbWUiOiAiZm9jdXNpbiIsCiAgICAgICJmb2N1cyI6ICJkaWFsb2ctdHJpZ2dlciIsCiAgICAgICJ0aW1lIjogMzc2LjMwMDAwMDA3MTUyNTYKICAgIH0KICBdLAogICJyZWFjdCI6ICIxOS4yLjYiLAogICJzbmFwc2hvdCI6IHsKICAgICJhY3RpdmVFbGVtZW50IjogImRpYWxvZy10cmlnZ2VyIiwKICAgICJzdGF0ZSI6ICJ0cnVlIC8gZmFsc2UiLAogICAgIm92ZXJsYXlDb3VudCI6IDAsCiAgICAicGFuZURpc3BsYXkiOiAiYmxvY2siCiAgfSwKICAidG9nZ2xlSGl0VGFyZ2V0IjogInRvZ2dsZSIsCiAgInBhZ2VFcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f7c594f808b71ba7e3f-31e03c12129241af69c6",
+          "file": "activity-focus.spec.ts",
+          "line": 221,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-21T11:54:42.755Z",
+    "duration": 8243.798999999999,
+    "expected": 16,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

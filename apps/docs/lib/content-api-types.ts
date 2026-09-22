@@ -6,6 +6,11 @@ export type { ContentFormat, ContentSource, Metadata, SearchData }
 
 export type RemotePost = RemotePostContract
 
+export interface RemoteContentBody {
+    content: string
+    contentFormat: ContentFormat
+}
+
 export type RemotePayload =
     | RemotePost[]
     | {

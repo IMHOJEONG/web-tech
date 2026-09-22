@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import { ARTICLE_DETAIL_EDITORIAL_ASSETS } from '~/shared/assets/editorial'
 import { ArticleDetailNewsletterCard } from '~/widgets/article-detail/ui/article-detail-newsletter-card'
 import type { ArticleDetailMainProps } from '~/widgets/article-detail/ui/article-detail.types'

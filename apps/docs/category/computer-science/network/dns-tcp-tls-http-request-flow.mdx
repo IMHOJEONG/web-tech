@@ -1,0 +1,125 @@
+---
+title: '502 앞에서 서버부터 의심하지 않기'
+slug: dns-tcp-tls-http-request-flow
+date: 2026-09-12
+updatedAt: 2026-09-12
+summary: 짧은 오류 한 줄 뒤에 숨어 있는 DNS, TCP, TLS, proxy를 차례로 지나며 요청이 멈춘 마지막 경계를 찾습니다.
+authorName: 'HoJeong Im'
+authorRole: 'Web Engineer'
+readMinutes: 10
+topicLabel: 'NETWORK'
+tags:
+    - network
+    - dns
+    - tcp
+    - tls
+    - http
+status: draft
+---
+
+## 502를 보고 곧바로 서버 코드를 열기 전에
+
+브라우저에는 짧은 오류 한 줄만 보여도 그 오류가 만들어진 장소는 서로 다를 수 있다. 이름을 주소로 바꾸지 못했을 수도 있고, TLS 협상에서 멈췄을 수도 있으며, origin에 닿기 전 gateway가 대신 `502`를 보냈을 수도 있다.
+
+그래서 네트워크 문제를 볼 때는 “서버가 안 된다”는 한 문장보다 요청이 통과한 마지막 경계를 찾는 편이 빠르다.
+
+## 하나의 요청, 여러 개의 경계
+
+`https://api.example.com/posts`를 호출할 때 애플리케이션에는 하나의 요청처럼 보이지만, 네트워크에서는 여러 단계가 이어진다.
+
+1. URL에서 scheme, host, port, path를 해석한다.
+2. DNS resolver가 host에 대응하는 IP 주소를 찾는다.
+3. 대상과 transport 연결을 준비한다.
+4. HTTPS라면 TLS handshake로 암호화 조건과 서버 인증서를 확인한다.
+5. HTTP request를 전송한다.
+6. CDN, reverse proxy, load balancer를 거쳐 origin 애플리케이션에 도달한다.
+7. HTTP response가 같은 경로를 통해 돌아온다.
+
+이 모델은 HTTP/1.1과 HTTP/2를 이해하는 출발점으로 유용하다. HTTP/3는 TCP 대신 QUIC을 사용하므로 transport 수립 방식이 다르지만, 이름 해석과 보안 연결, 애플리케이션 요청을 구분해서 보는 원칙은 같다.
+
+## 첫 번째 갈림길: 이름은 어느 주소를 가리키나
+
+애플리케이션은 일반적으로 authoritative name server에 직접 묻지 않고 OS나 네트워크에 설정된 recursive resolver를 사용한다. resolver는 cache를 확인하고 필요한 경우 다른 name server를 따라가며 결과를 얻는다.
+
+확인할 항목:
+
+- A 또는 AAAA record가 기대한 주소를 가리키는가?
+- CNAME chain이 의도한 서비스로 연결되는가?
+- TTL 때문에 이전 주소가 cache에 남아 있지 않은가?
+- 내부망과 외부망 resolver가 서로 다른 답을 주는 split DNS 구조인가?
+
+```bash
+dig api.example.com
+dig api.example.com @1.1.1.1
+```
+
+`ENOTFOUND`는 HTTP status가 아니다. HTTP 요청을 보내기 전에 이름을 주소로 바꾸지 못한 상태다.
+
+## 주소를 찾았다고 연결된 것은 아니다
+
+DNS가 성공해도 대상 port에 도달할 수 있다는 보장은 없다. TCP 기반 HTTP에서는 연결 수립, packet loss, 방화벽, NAT, listen address를 구분해서 확인한다.
+
+```bash
+nc -vz api.example.com 443
+curl -v --connect-timeout 3 https://api.example.com/health
+```
+
+`ECONNREFUSED`는 주소에는 도달했지만 해당 port에서 연결을 받지 않는 경우가 많다. timeout은 packet이 유실되거나 방화벽이 응답을 버리는 경우, 경로 자체가 닿지 않는 경우 등 원인이 더 넓다.
+
+## 연결 위에 신뢰를 세우는 TLS
+
+TLS handshake에서는 지원 protocol version, cipher suite, 인증서 chain, hostname을 확인한다. 이 단계가 실패하면 애플리케이션의 `/posts` handler까지 요청이 도달하지 않는다.
+
+```bash
+openssl s_client -connect api.example.com:443 -servername api.example.com
+curl -v https://api.example.com/health
+```
+
+확인할 항목:
+
+- 인증서의 유효기간이 지나지 않았는가?
+- 요청 hostname이 인증서의 SAN에 포함되는가?
+- reverse proxy가 올바른 인증서 chain을 제공하는가?
+- client와 server가 공통으로 지원하는 TLS version이 있는가?
+
+> [!WARNING]
+> 진단을 위해 인증서 검증을 끄는 옵션을 production 해결책으로 사용하지 않는다. 연결이 된다는 사실만 확인할 뿐 서버 신원 검증 문제를 해결하지 못한다.
+
+## 이 응답은 누가 만들었을까
+
+HTTP status를 받았다면 최소한 앞선 이름 해석과 연결 계층은 응답을 받을 정도로 진행된 것이다. 다만 그 응답을 origin 애플리케이션이 만들었다고 단정할 수는 없다.
+
+| 증상             | 우선 확인할 위치                                     |
+| ---------------- | ---------------------------------------------------- |
+| `401`, `403`     | token, 권한, proxy의 Authorization header 전달       |
+| `404`            | host/path routing, base path, origin route           |
+| `502`            | gateway가 upstream에 연결하거나 정상 응답을 받았는지 |
+| `503`            | 서비스 준비 상태, overload, maintenance              |
+| `504`            | gateway와 upstream 사이의 응답 timeout               |
+| Cloudflare `530` | Cloudflare가 보고한 origin/DNS 계열 상세 오류        |
+
+응답 header의 `server`, `via`, request ID와 proxy 로그를 함께 보면 어느 계층이 status를 만들었는지 좁히는 데 도움이 된다.
+
+## 아래층부터 하나씩 확인하기
+
+```bash
+dig api.example.com
+nc -vz api.example.com 443
+openssl s_client -connect api.example.com:443 -servername api.example.com
+curl -v --connect-timeout 3 --max-time 10 https://api.example.com/health
+```
+
+1. 이름이 기대한 주소로 해석되는지 확인한다.
+2. 대상 port에 연결할 수 있는지 확인한다.
+3. TLS certificate와 hostname 검증이 성공하는지 확인한다.
+4. health endpoint의 status와 header를 확인한다.
+5. proxy access/error log와 애플리케이션 log에서 같은 request를 찾는다.
+
+한 단계가 실패하면 뒤 단계의 설정을 먼저 바꾸지 않는다. 예를 들어 TLS handshake가 실패하는 동안 FastAPI나 NestJS route 코드를 수정해도 요청은 애플리케이션에 도달하지 않는다.
+
+## 원문으로 이어 읽기
+
+- [RFC 1034: Domain Names - Concepts and Facilities](https://www.rfc-editor.org/rfc/rfc1034)
+- [RFC 9293: Transmission Control Protocol](https://www.rfc-editor.org/rfc/rfc9293)
+- [RFC 8446: TLS 1.3](https://www.rfc-editor.org/rfc/rfc8446)
+- [RFC 9110: HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110)

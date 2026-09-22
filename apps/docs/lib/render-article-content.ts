@@ -2,6 +2,7 @@ import rehypeShiki from '@shikijs/rehype'
 import type { MDXComponents } from 'mdx/types'
 import { evaluate, type EvaluateOptions } from 'next-mdx-remote-client/rsc'
 import type { ReactNode } from 'react'
+import remarkGfm from 'remark-gfm'
 import remarkFlexibleToc, { type TocItem } from 'remark-flexible-toc'
 import { shikiRehypeOptions } from './shiki-options.js'
 import { normalizeRemoteArticleHtml } from '../widgets/article-detail/model/normalize-remote-article-html.ts'
@@ -40,7 +41,7 @@ function createMdxEvaluateOptions({
 } = {}): EvaluateOptions<Scope> {
     return {
         mdxOptions: {
-            remarkPlugins: [remarkFlexibleToc],
+            remarkPlugins: [remarkGfm, remarkFlexibleToc],
             rehypePlugins: codeHighlight
                 ? [[rehypeShiki, shikiRehypeOptions]]
                 : [],

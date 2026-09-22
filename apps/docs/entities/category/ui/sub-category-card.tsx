@@ -1,62 +1,28 @@
-import Image from 'next/image'
+import type { ComponentType } from 'react'
 
 interface SubCategoryCardProps {
-    id: string
+    title: string
+    summary: string
+    icon: ComponentType<{ className?: string; 'aria-hidden'?: boolean }>
 }
 
-const subCategoryCards = [
-    {
-        title: 'React',
-        id: 'react',
-        icon: '/category/sub/react.png',
-        description: 'react 기술 소개',
-    },
-    {
-        title: 'svelte',
-        id: 'svelte',
-        icon: '/category/sub/svelte.png',
-        description: 'svelte 기술 소개',
-    },
-    {
-        title: 'React Router v7',
-        id: 'react-router',
-        icon: '/category/sub/react-router.png',
-        description: 'react-router 기술 소개',
-    },
-    {
-        title: 'Astro',
-        id: 'astro',
-        icon: '/category/sub/astro.png',
-        description: 'astro 기술 소개',
-    },
-]
-
-export const SubCategoryCard = ({ id }: SubCategoryCardProps) => {
-    const item = subCategoryCards.find(
-        (sub) => sub.id === id.toLowerCase().split(' ').join('-')
-    )
-
+export const SubCategoryCard = ({
+    title,
+    summary,
+    icon: Icon,
+}: SubCategoryCardProps) => {
     return (
-        <div className="flex size-full flex-col items-center justify-center gap-2 p-3">
-            <div className="relative aspect-square w-full">
-                <Image
-                    src={item?.icon ?? '/test.png'}
-                    alt="sub-category"
-                    fill
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    className="rounded-lg"
-                    priority
-                    placeholder="blur"
-                    blurDataURL="/image/blur-image.webp"
-                />
+        <div className="flex size-full flex-col gap-4 p-3">
+            <div className="flex size-12 items-center justify-center rounded-2xl border border-outline-variant bg-surface-container-low text-primary">
+                <Icon aria-hidden className="size-6" />
             </div>
-            <div className="font-display text-base text-on-surface">
-                {item?.title}
-            </div>
-            <div className="text-center text-sm text-on-surface-variant">
-                {item?.description}
+            <div className="space-y-2">
+                <div className="font-display text-lg font-semibold text-on-surface">
+                    {title}
+                </div>
+                <div className="text-sm leading-6 text-on-surface-variant">
+                    {summary}
+                </div>
             </div>
         </div>
     )

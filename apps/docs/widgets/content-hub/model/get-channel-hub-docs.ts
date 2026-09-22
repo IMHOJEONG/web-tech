@@ -44,6 +44,9 @@ async function getWebCategoryDocs() {
                         doc.fileName ?? `category/fe/${topic.url}/${doc.slug}`,
                     date: doc.date,
                     thumbnail: doc.thumbnail ?? null,
+                    tags: doc.tags,
+                    topicLabel: doc.topicLabel,
+                    readMinutes: doc.readMinutes,
                     href: getDocHref({
                         fileName:
                             doc.fileName ??

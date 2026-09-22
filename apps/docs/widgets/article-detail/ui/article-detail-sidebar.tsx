@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import { ArticleDetailNewsletterCard } from '~/widgets/article-detail/ui/article-detail-newsletter-card'
 import { ArticleDetailSidebarSection } from '~/widgets/article-detail/ui/article-detail-sidebar-section'
 import type { ArticleDetailSidebarProps } from '~/widgets/article-detail/ui/article-detail.types'

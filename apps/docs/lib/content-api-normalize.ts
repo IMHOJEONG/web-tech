@@ -288,6 +288,8 @@ export function normalizeRemoteSearchResult(
                 ? 'Backend'
                 : fileName.startsWith('category/computer-science/')
                   ? 'Computer Science'
-                  : 'Docs',
+                  : fileName.startsWith('category/infra/')
+                    ? 'Infrastructure'
+                    : 'Docs',
     }
 }

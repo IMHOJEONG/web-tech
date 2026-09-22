@@ -20,8 +20,24 @@
 - `P1` 가까운 시일 내 반영 권장
 - `P2` 품질 향상용 중기 과제
 
+## Shared UI
+
+- [-] `P1` 공용 UI와 모든 대상 소비 앱의 동작 기반을 Base UI로 통일한다. 1차 공용 primitive 전환은 완료했지만 전체 전환은 진행 중이다. [ADR-0006의 최종 목표](../architecture/adr-0006-shared-ui-base-ui.md)를 기준으로 관리한다.
+- [x] `P1` 저장소 소유 UI의 직접 Radix 의존성과 wrapper를 정리한다. 미사용 `apps/vuln-radar`의 `@radix-ui/react-slot`, `packages/ui`의 `cmdk`·`@radix-ui/react-icons`와 catalog 선언을 제거했다. cmdk의 Dialog 전이 경로도 제거됐으며 UI 54개·production 16개·Drawer 반복 20개 검증을 통과했다. [검증 보고서](../verification/content/2026-09-22-base-ui-migration.md)를 참고한다. Prisma Studio의 전이 의존성과 외부 모노레포는 아래 별도 과제로 남긴다.
+- [ ] `P2` Prisma Studio의 Radix 전이 의존성을 별도 검토한다. `prisma -> @prisma/studio-core -> @radix-ui/react-toggle` 경로가 남아 있다. 완료 조건: 실제 앱 번들·런타임 포함 여부와 상위 패키지 제거·업데이트 가능성을 확인하고 인증·DB 기능을 유지한 상태에서 처리 방향을 결정한다. 이 경로가 남은 동안 저장소 전체 Radix 의존성 제거 완료로 표시하지 않는다. Base UI로 강제 override하거나 Prisma를 임의 제거하지 않는다.
+- [ ] `P2` 다른 모노레포에서 공용 UI를 사용할 배포·버전 정책과 소비처 목록을 확정한다. 완료 조건: 실제 소비 저장소, React/빌드 호환성, 패키지 전달 방식, API 변경 이행 절차를 기록하고 각 소비처에서 검증한다. 현재 외부 모노레포는 미조사이며 자동 배포·변경하지 않는다.
+
+- [x] `P1` Radix 유지안과 비교 후 공용 primitive를 Base UI로 전환한다. 디자인 토큰·모듈 경로를 유지하고 render·포커스·Tooltip 설명 관계를 재검증했다. 선택 이유는 [ADR-0006](../architecture/adr-0006-shared-ui-base-ui.md), 실행 범위는 [검증 보고서](../verification/content/2026-09-22-base-ui-migration.md)를 참고한다. 운영 배포 완료를 의미하지 않는다.
+
+- [x] `P1` 공식 Radix/new-york-v4의 Sheet 닫기 옵션, Button 작은 크기, Badge 변형, Tooltip Provider 구성을 선별 반영한다. 기존 디자인 토큰 유지와 회귀 검사 결과는 [작업 기록](../worklog/2026-09/2026-09-22-shadcn-primitives-refresh.md)을 참고한다.
+- [ ] `P1` Activity를 운영 UI에 도입하기 전에 Portal 생명주기 경계를 검증한다. 완료 조건: Root·Content 외부 배치와 닫힘 완료 후 숨김 방식을 비교하고, production·애니메이션·빠른 재열기에서 Overlay 제거, 스크롤 잠금 해제, 보이는 대상으로 포커스 복귀, 재진입을 확인한다. 현재 운영 장애로 확정된 항목은 아니며 [실험 결과](../verification/content/2026-09-21-activity-focus.md)가 근거다.
+- [x] `P2` 공용 UI의 cn·통합 radix-ui 패키지를 단계적으로 전환했다. 공개 exports 유지, 클래스 병합·UI 46개, Activity 22개, 모바일 Drawer 4개, 소비 앱 타입 검사와 vuln-radar 빌드를 확인했다. 번들 측정 범위와 중복 Context 확인 한계는 [작업 기록](../worklog/2026-09/2026-09-22-ui-dependency-migration.md)을 참고한다.
+- [-] `P2` 공용 UI 의존성 전환 후 docs의 production 동작을 확인한다. Base UI 기준 Next.js 빌드와 Drawer·필터 16개는 통과했다. production Tooltip은 미검증이며, [현재 검증 기록](../verification/content/2026-09-22-base-ui-migration.md)을 참고한다.
+- [ ] `P2` 공용 Sidebar와 Tooltip의 Safari·Firefox·모바일·스크린 리더 점검을 추가한다. 완료 조건: 키보드 탐색, 닫기·복귀, 테마별 가독성 및 reduced-motion을 실제 소비 화면에서 확인한다. 현재 새 기본 컴포넌트 검사는 headless Chromium 범위다.
+
 ## Planning / Product
 
+- [ ] `P1` ARIA·V8·Next.js 패키지 글의 제목/요약과 본문 범위를 맞추고 필요한 용어·사례·검증 결과를 보완한다. 완료 기준은 [독해 검토](../verification/content/2026-09-20-content-readability-review.md)에 따르며 실제 경험을 추정해서 작성하지 않는다.
 - [x] `P1` 블로그 개선 로드맵을 기준 문서로 고정한다.
   - 메타데이터, 라우팅, 검색, 렌더링, 테스트, contributor guide 기준선을 정리
   - 신규 과제는 우선 `todo`에 추가하고, 운영 규칙으로 승격되면 로드맵 또는 관련 architecture/runbook 문서에 연결
@@ -48,7 +64,7 @@
 - [x] `P1` `/web`, `/mobile`, `/ui-ux`를 상세 showcase가 아니라 채널 허브로 전환한다.
   - 세 라우트는 `HubPage` 기반 탐색 허브를 사용
   - `web`은 FE/V8 문서, `ui-ux`는 interface/system 문서, `mobile`은 empty state를 포함한 허브 구조로 운영
-  - 작업 기록: `docs/worklog/2026-05-08-channel-hub-layout-conversion.md`
+  - 작업 기록: `docs/worklog/2026-05/2026-05-08-channel-hub-layout-conversion.md`
 
 ## Code / Architecture
 
@@ -64,6 +80,11 @@
   - `published` 문서는 `title`, `slug`, `date`, `summary`를 강제
   - `draft`/`archived`는 공개 목록에서 제외하고 완화된 규칙으로 검증
   - `pnpm --filter docs validate:content`와 `prebuild` 단계에서 같은 기준을 실행
+- [-] `P1` 편집용 문구가 공개 본문에 노출되지 않도록 authoring 검증을 통일한다.
+  - local content validator에서 코드 예제 밖의 HTML 주석과 잘못 닫힌 주석을 hard fail 처리
+  - 문서 상태는 본문 `작성중` 표현이 아니라 frontmatter `status: draft`로 관리
+  - 후속: remote NAS publish pipeline 또는 docs-backend에 같은 body validation 연결
+  - 기준 문서: `docs/architecture/docs-content-authoring-markup-policy.md`
 - [x] `P1` `apps/docs`의 FSD 3차 정리를 진행한다.
   - `shared/layout`, `shared/navigation` 기반 app shell을 `widgets/app-shell`로 이동
   - `app/layout.tsx`는 shell widget을 조합하는 얇은 엔트리로 정리
@@ -154,7 +175,7 @@
   - `react-scan`, `react-grab`은 production bundle/runtime에 포함하지 않는다.
   - CDN URL은 명시 버전으로 고정한다.
   - development에서도 `DOCS_ENABLE_REACT_INSPECTION=true`일 때만 opt-in 로드한다.
-  - 기준 문서: `docs/worklog/2026-08-29-docs-article-anchor-scroll-test.md`
+  - 기준 문서: `docs/worklog/2026-08/2026-08-29-docs-article-anchor-scroll-test.md`
 - [-] `P2` article detail의 읽기 보조 UX를 확장한다.
   - related posts 1차 적용 완료
   - previous / next navigation 1차 적용 완료
@@ -200,6 +221,19 @@
 
 ## Infra / Tooling
 
+- [-] `P0` `apps/docs` Vercel 운영 보안 기준을 적용한다.
+  - `/api/revalidate/content`에 Production 전용 `5 requests / 60 seconds / IP` WAF rate limit 적용
+  - `BLOG_CONTENT_API_TOKEN`, `BLOG_CONTENT_REVALIDATE_TOKEN`을 Sensitive 환경변수로 관리
+  - Preview-only Vercel Authentication 활성화
+  - Function 실패와 비정상 사용량 alert 구독
+  - Dashboard 설정은 실제 적용 및 검증 전까지 완료로 표시하지 않음
+  - 기준 문서: `docs/architecture/docs-vercel-platform-operations-policy.md`
+- [ ] `P1` `apps/docs` 실사용 성능 계측을 도입한다.
+  - Speed Insights로 LCP, CLS, INP를 Production/Preview 기준으로 측정
+  - 서울 `icn1` Function region은 원격 NAS fetch latency 측정 후 적용 여부 결정
+- [ ] `P2` Vercel 확장 운영 기능의 도입 시점을 재평가한다.
+  - Log Drains, Spend Management, Rolling Releases, Deployment Checks
+  - 현재는 Runtime Logs, GitHub CI, Preview 검증, Instant Rollback을 우선 사용
 - [x] `P0` `docs` remote content 인증/장애 대응 운영 기준을 확정한다.
   - `BLOG_CONTENT_API_TOKEN` / `CONTENT_API_TOKEN`의 교체 주기와 회전 절차(runbook) 정리
   - `401/403`은 인증 실패로 보고 즉시 중단하며 다른 endpoint로 fallback 하지 않는 정책 유지
@@ -209,6 +243,13 @@
   - remote content 장애 시 목록/검색은 로컬 문서로 graceful degradation, 문서 상세는 동일 route 로컬 문서 fallback 후 실패하도록 정책 정리
   - source 선택 결과는 runtime log에 항상 남기되, UI에는 badge/filter를 노출하지 않음
   - 기준 문서: `docs/runbooks/content-api-auth-ops-runbook.md`
+- [x] `P0` `docs` secret/token 수명주기 정책을 확정한다.
+  - Content API, revalidation, Better Stack, Cloudflare, GHCR credential inventory 정리
+  - 직접 관리하는 shared secret은 90일 회전, 공급자 token은 권한/만료 기준 적용
+  - 노출, 권한 변경, 운영자 변경 시 정기 일정과 무관하게 즉시 폐기
+  - `GITHUB_TOKEN`처럼 실행별 발급 token은 수동 회전 대상에서 제외
+  - 단일 Content API token 구조의 무중단 회전 한계와 dual-token 개선 조건 기록
+  - 기준 문서: `docs/architecture/docs-secret-token-lifecycle-policy.md`
 - [x] `P0` `pnpm` catalog 도입 이후 네트워크 가능한 환경에서 `pnpm install --lockfile-only` 재검증
 - [x] `P1` root `package.json`까지 catalog/버전 관리 전략을 확장할지 결정
 - [x] `P1` catalog reference 정합성 검사를 스크립트나 CI 체크로 자동화
@@ -218,6 +259,10 @@
   - search relevance scoring 유닛 테스트 완료
   - remote payload schema 검증 테스트 완료
   - 문서 상세 렌더링 스모크 테스트 완료
+  - production 브라우저에서 로컬 data/category 및 원격 fixture의 본문 완성, loading 종료, soft 404 방지 검증 추가
+  - 상세 16개 + 한국어/영어·모바일/데스크톱 게시 갱신 4개: `pnpm --filter docs test:article:prod`
+  - fixture 원본 수정 → 미인증/오인증 시 기존 화면 유지 → 정상 webhook 후 목록·검색·상세 갱신 검증
+  - 실행 기준: `docs/runbooks/docs-article-rendering-regression.md`
   - 검색 결과 스모크 테스트 완료
   - `test:lib` / `test:content` CI 연결 완료
   - 기준 문서: `docs/architecture/docs-blog-improvement-roadmap.md`
@@ -240,6 +285,11 @@
 
 ## Content / Editorial
 
+- [-] `P1` 양질의 기술 리소스를 category별 reading path로 확장한다.
+  - 1차: Browser rendering, Network request path, Container health 기준 문서 추가
+  - 빈 category는 문서가 준비되기 전까지 UI 노출을 보류
+  - 2차: Testing, Observability, Security, API Design 순으로 문서 우선 작성
+  - 기준 문서: `docs/architecture/docs-resource-content-roadmap.md`
 - [x] `P1` contributor-facing 블로그 운영 가이드를 정리한다.
   - 새 글 추가 위치
   - frontmatter 규칙
@@ -254,7 +304,7 @@
 - [ ] `P1` `Mobile` 섹션의 실제 콘텐츠 초안을 작성한다.
 - [x] `P1` `UI/UX` 섹션도 상세형 static spotlight가 아니라 실제 문서 연결 구조로 확장할지 결정
   - `HubPage` 기반 채널 허브에서 시작했지만, 최종적으로는 Figma `141:189` 기준의 전용 editorial hub로 분기
-  - 작업 기록: `docs/worklog/2026-05-08-uiux-hub-figma-alignment.md`
+  - 작업 기록: `docs/worklog/2026-05/2026-05-08-uiux-hub-figma-alignment.md`
 - [-] `P2` article metadata 정책을 정리한다.
   - `/docs/{channel}/{slug}` 상세 metadata 정책 문서화 완료
   - 문서별 title/summary/canonical/OG image 연결 완료
