@@ -1,10 +1,4 @@
-import {
-    Children,
-    cloneElement,
-    isValidElement,
-    type ReactElement,
-    type ReactNode,
-} from 'react'
+import { Children, cloneElement, isValidElement, type ReactNode } from 'react'
 import {
     CALLOUT_MARKER_PATTERN,
     getCalloutVariantFromText,
@@ -88,11 +82,7 @@ export function stripCalloutMarkerFromNode(node: ReactNode): {
 
         const nextText = getNodeTextContent(result.node).trim()
         const nextNode = nextText
-            ? cloneElement(
-                  node as ReactElement<{ children?: ReactNode }>,
-                  undefined,
-                  result.node
-              )
+            ? cloneElement(node, undefined, result.node)
             : null
 
         return {

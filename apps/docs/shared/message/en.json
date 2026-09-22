@@ -1,6 +1,21 @@
 {
     "common": {
-        "brand": "HEAP-FORGE"
+        "brand": "HEAP-FORGE",
+        "loadingDocuments": "Loading documents..."
+    },
+    "feedRecent": {
+        "title": "Recent articles",
+        "description": "Explore the latest technical articles.",
+        "filterLabel": "Filter articles by topic",
+        "empty": "There are no more articles in this topic yet.",
+        "emptyTitle": "No articles in this topic yet",
+        "emptyDescription": "Choose another topic or browse all documents to find something to read.",
+        "browse": "Browse all documents",
+        "reset": "View all articles"
+    },
+    "feedLeadStory": {
+        "label": "Featured article",
+        "readingTime": "{count} min read"
     },
     "metadata": {
         "site": {
@@ -270,6 +285,7 @@
     },
     "search": {
         "input": {
+            "triggerLabel": "Search docs",
             "placeholder": "Search the docs",
             "submitAriaLabel": "Search documents",
             "clearAriaLabel": "Clear search query"
@@ -317,6 +333,7 @@
                 "web": "Web",
                 "uiux": "UI/UX",
                 "backend": "Backend",
+                "infrastructure": "Infrastructure",
                 "computerscience": "Computer Science",
                 "docs": "Docs"
             },
@@ -343,6 +360,7 @@
             "web": "Web",
             "uiux": "UI/UX",
             "backend": "Backend",
+            "infrastructure": "Infrastructure",
             "computerscience": "Computer Science",
             "docs": "General Docs"
         },
@@ -350,6 +368,7 @@
             "web": "Documents about browsers, frontend systems, and rendering.",
             "uiux": "Documents about interface design and experience systems.",
             "backend": "Technical notes focused on server architecture and APIs.",
+            "infrastructure": "Documents about containers, delivery, observability, and operations.",
             "computerscience": "Documents grounded in operating systems and computer science.",
             "docs": "General notes, records, and uncategorized articles."
         },
@@ -364,6 +383,14 @@
         }
     },
     "channelHub": {
+        "filters": {
+            "title": "Browse by topic",
+            "all": "All",
+            "more": "More topics",
+            "less": "Fewer topics",
+            "results": "{topic} · {count, plural, one {# article} other {# articles}}",
+            "total": "{count, plural, one {# article} other {# articles}}"
+        },
         "stats": {
             "totalDocs": "Total Docs",
             "focusAreas": "Focus Areas",
@@ -378,8 +405,8 @@
         "web": {
             "hero": {
                 "eyebrow": "WEB SYSTEMS",
-                "title": "A hub for reading browser and frontend structure",
-                "description": "React, Next.js, rendering flow, and bytecode-oriented notes are gathered here so the web runtime can be scanned as one editorial surface."
+                "title": "Notes on web development",
+                "description": "Explorations of component design, browser behavior, and the work behind them."
             },
             "panels": {
                 "first": {
@@ -406,8 +433,8 @@
         "mobile": {
             "hero": {
                 "eyebrow": "MOBILE RUNTIME",
-                "title": "A hub for mobile constraints and interaction",
-                "description": "Touch-first interaction, viewport constraints, and platform differences are separated into a focused surface for mobile product thinking."
+                "title": "Notes on mobile development",
+                "description": "Exploring small-screen interactions and differences between platforms."
             },
             "panels": {
                 "first": {
@@ -461,6 +488,7 @@
         }
     },
     "uiuxHub": {
+        "readingTime": "{count} min read",
         "hero": {
             "eyebrow": "DIRECTORY // 04",
             "titleLineOne": "UI/UX DESIGN",
@@ -478,12 +506,6 @@
         },
         "bottomLeft": {
             "label": "TUTORIAL // 04"
-        },
-        "newsletter": {
-            "title": "THE UX NEWSLETTER",
-            "description": "Bi-weekly notes on interface teardowns, typography, and design system thinking.",
-            "placeholder": "terminal@user.io",
-            "button": "CONNECT"
         },
         "more": {
             "fallbackDate": "LATEST NOTE"
@@ -529,7 +551,7 @@
             "description": "A digital lab dedicated to unraveling modern engineering. We explore the point where Web performance, Mobile fluidity, and UI/UX architecture converge.",
             "asideTitle": "HeapForge Notes",
             "missionLabel": "// MISSION_STATEMENT.md",
-            "establishedLabel": "// ESTABLISHED_2024"
+            "establishedLabel": "// ESTABLISHED SEPTEMBER 2026"
         },
         "pillars": {
             "web": {
@@ -558,10 +580,6 @@
                 "github": {
                     "label": "GITHUB",
                     "href": "https://github.com/IMHOJEONG"
-                },
-                "twitter": {
-                    "label": "TWITTER/X",
-                    "href": ""
                 }
             }
         },

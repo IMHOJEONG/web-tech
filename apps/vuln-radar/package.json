@@ -16,7 +16,6 @@
   "dependencies": {
     "@tanstack/react-query": "catalog:fe-box",
     "@tanstack/react-router": "catalog:fe-box",
-    "@radix-ui/react-slot": "catalog:web",
     "@supabase/supabase-js": "catalog:web",
     "@web-tech/ui": "workspace:*",
     "@xyflow/react": "catalog:web",

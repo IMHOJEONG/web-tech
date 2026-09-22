@@ -61,6 +61,28 @@ test('applyDocsIndexControls filters by section', () => {
     )
 })
 
+test('applyDocsIndexControls filters infrastructure documents', () => {
+    const docs = [
+        createDoc(),
+        createDoc({
+            id: 'infra-1',
+            title: 'Container Health',
+            slug: 'container-health',
+            section: 'Infrastructure',
+        }),
+    ]
+
+    const filtered = applyDocsIndexControls(docs, {
+        section: 'infrastructure',
+        sort: 'latest',
+    })
+
+    assert.deepEqual(
+        filtered.map((doc) => doc.id),
+        ['infra-1']
+    )
+})
+
 test('filterDocsIndexControls keeps incoming order for search relevance', () => {
     const docs = [
         createDoc({ id: 'relevant-1', section: 'Web', contentSource: 'local' }),

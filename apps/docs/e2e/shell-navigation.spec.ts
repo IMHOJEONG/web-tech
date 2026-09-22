@@ -35,7 +35,10 @@ test.describe('docs shell navigation visibility', () => {
             .getByRole('link')
 
         await expect(mobileLinks).toHaveCount(5)
-        await expect(mobileLinks.nth(3)).toHaveAttribute('href', '/ui-ux')
+        await expect(mobileLinks.nth(3)).toHaveAttribute(
+            'href',
+            /^\/(ko|en)\/ui-ux$/
+        )
     })
 
     test('tablet uses top navigation without bottom navigation or footer utility links', async ({

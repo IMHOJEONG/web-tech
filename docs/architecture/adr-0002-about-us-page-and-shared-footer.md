@@ -1,7 +1,8 @@
 # ADR-0002: About Us Page and Shared Footer Alignment
 
-- Status: Accepted
+- Status: Superseded by [ADR-0004](adr-0004-about-content-and-shared-shell.md)
 - Date: 2026-04-29
+- Superseded on: 2026-09-21
 
 ## Context
 

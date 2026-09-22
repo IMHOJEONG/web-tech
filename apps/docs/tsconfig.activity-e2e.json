@@ -1,0 +1,16 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "erasableSyntaxOnly": true,
+        "incremental": false,
+        "noEmit": true,
+        "plugins": [],
+        "types": ["node"]
+    },
+    "include": [
+        "playwright.activity.config.ts",
+        "activity-e2e/**/*.ts",
+        "activity-e2e/**/*.tsx"
+    ],
+    "exclude": [".next", "node_modules"]
+}

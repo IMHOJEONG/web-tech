@@ -15,13 +15,17 @@
 
 ## 원칙
 
-1. 카드 레이아웃은 화면별로 유지한다.
+1. 피드와 UI/UX처럼 같은 미리보기 맥락의 카드 표현은 공유할 수 있지만, 검색 인덱스와 taxonomy 카드는 화면별로 유지한다.
 2. 문서 메타 표시 규칙은 공통 컴포넌트로 관리한다.
 3. 썸네일 fallback, 날짜 포맷, tag/topic/read-time 표현은 한 곳에서 바꿀 수 있어야 한다.
 4. 공통 컴포넌트는 i18n 메시지를 직접 읽지 않고, 화면 컴포넌트가 번역된 label을 주입한다.
 5. 공통화가 `/feed = 발견`, `/docs = 검색/색인`의 역할 차이를 약하게 만들면 분리 상태를 유지한다.
 
 ## 현재 공통 UI
+
+- `apps/docs/entities/document/ui/document-preview-card.tsx`
+  - 피드와 UI/UX 목록의 단일 링크·썸네일·제목·요약을 공통으로 표시한다.
+  - 데이터 조회, 필터, 큐레이션 순서, 번역은 호출 화면의 책임이다.
 
 - `apps/docs/shared/ui/document-thumbnail.tsx`
   - 문서 썸네일과 fallback 이미지를 관리한다.
@@ -45,7 +49,7 @@
 
 ### 채널 허브
 
-`HubPage`와 `MainCard`는 문서를 빠르게 훑는 썸네일 카드 레이아웃을 유지한다.
+채널 허브는 문서를 빠르게 훑는 레이아웃을 유지한다. UI/UX 목록에서는 `DocumentPreviewCard`를 사용한다.
 
 - 카드 전체 모양은 허브 컨텍스트에 맞게 유지한다.
 - 썸네일 fallback과 날짜 포맷만 공통 UI를 사용한다.
@@ -59,7 +63,7 @@
 
 ## 아직 공통화하지 않는 것
 
-- `/feed`의 editorial 카드 레이아웃
+- `/feed`의 editorial 배치와 데이터 선택
 - `/feed` hero image composition
 - 검색 highlight 마크업
 - 채널 허브의 hero/stat/panel 구성
@@ -74,3 +78,5 @@
   - `/docs`와 검색 결과 API consumer가 같은 row형 목록 UI를 쓰게 될 때만 검토
 - `DocumentImagePolicy` 문서와 연결
   - 로컬/원격 asset fallback, remotePatterns, blur placeholder 정책을 함께 관리
+
+결정 이유와 적용 범위는 [ADR-0005](adr-0005-document-preview-card-boundary.md)를 따른다.
