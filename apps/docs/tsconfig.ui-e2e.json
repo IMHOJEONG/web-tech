@@ -1,0 +1,12 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "erasableSyntaxOnly": true,
+        "incremental": false,
+        "noEmit": true,
+        "plugins": [],
+        "types": ["node"]
+    },
+    "include": ["playwright.ui.config.ts", "ui-e2e/**/*.ts", "ui-e2e/**/*.tsx"],
+    "exclude": [".next", "node_modules"]
+}

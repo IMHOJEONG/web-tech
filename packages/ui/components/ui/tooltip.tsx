@@ -1,57 +1,111 @@
-import * as React from "react";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+"use client";
 
-import { cn } from "../../lib/utils";
+import * as React from "react";
+import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
+import { mergeUiClassName } from "../../lib/merge-ui-class-name";
 
 function TooltipProvider({
-  delayDuration = 0,
+  delay = 0,
   ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
-  return (
-    <TooltipPrimitive.Provider
-      data-slot="tooltip-provider"
-      delayDuration={delayDuration}
-      {...props}
-    />
-  );
+}: TooltipPrimitive.Provider.Props) {
+  return <TooltipPrimitive.Provider delay={delay} {...props} />;
 }
 
+const TooltipDescriptionContext = React.createContext<{
+  id: string;
+  open: boolean;
+} | null>(null);
+
+function useTooltipDescription() {
+  const context = React.useContext(TooltipDescriptionContext);
+  if (!context) throw new Error("Tooltip parts must be used within Tooltip.");
+  return context;
+}
+
+// Our single-trigger wrapper owns the accessible description relationship.
 function Tooltip({
+  open: controlledOpen,
+  defaultOpen = false,
+  onOpenChange,
+  disabled,
   ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Root>) {
+}: Omit<
+  TooltipPrimitive.Root.Props,
+  "handle" | "triggerId" | "defaultTriggerId"
+>) {
+  const id = React.useId();
+  const [uncontrolledOpen, setOpen] = React.useState(defaultOpen);
+  const open = controlledOpen ?? uncontrolledOpen;
   return (
-    <TooltipProvider>
-      <TooltipPrimitive.Root data-slot="tooltip" {...props} />
-    </TooltipProvider>
+    <TooltipDescriptionContext.Provider value={{ id, open: open && !disabled }}>
+      <TooltipPrimitive.Root
+        {...props}
+        disabled={disabled}
+        open={open}
+        onOpenChange={(nextOpen, details) => {
+          onOpenChange?.(nextOpen, details);
+          if (!details.isCanceled) setOpen(nextOpen);
+        }}
+      />
+    </TooltipDescriptionContext.Provider>
   );
 }
 
 function TooltipTrigger({
+  "aria-describedby": describedBy,
   ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
-  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
+}: Omit<TooltipPrimitive.Trigger.Props, "handle">) {
+  const context = useTooltipDescription();
+  return (
+    <TooltipPrimitive.Trigger
+      {...props}
+      data-slot="tooltip-trigger"
+      aria-describedby={
+        [describedBy, context.open ? context.id : undefined]
+          .filter(Boolean)
+          .join(" ") || undefined
+      }
+    />
+  );
 }
 
 function TooltipContent({
   className,
   sideOffset = 0,
+  side = "top",
+  align = "center",
+  alignOffset = 0,
   children,
   ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Content>) {
+}: Omit<React.ComponentProps<typeof TooltipPrimitive.Popup>, "id" | "role"> &
+  Pick<
+    TooltipPrimitive.Positioner.Props,
+    "side" | "sideOffset" | "align" | "alignOffset"
+  >) {
+  const { id } = useTooltipDescription();
   return (
     <TooltipPrimitive.Portal>
-      <TooltipPrimitive.Content
-        data-slot="tooltip-content"
+      <TooltipPrimitive.Positioner
+        side={side}
         sideOffset={sideOffset}
-        className={cn(
-          "bg-foreground text-background animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) rounded-md px-3 py-1.5 text-xs text-balance",
-          className,
-        )}
-        {...props}
+        align={align}
+        alignOffset={alignOffset}
+        className="z-50"
       >
-        {children}
-        <TooltipPrimitive.Arrow className="bg-foreground fill-foreground z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]" />
-      </TooltipPrimitive.Content>
+        <TooltipPrimitive.Popup
+          data-slot="tooltip-content"
+          className={mergeUiClassName(
+            "bg-foreground text-background w-fit origin-(--transform-origin) rounded-md px-3 py-1.5 text-xs text-balance transition-[opacity,transform] duration-150 data-starting-style:opacity-0 data-ending-style:opacity-0 data-starting-style:scale-95 data-ending-style:scale-95 motion-reduce:transition-none",
+            className,
+          )}
+          {...props}
+          id={id}
+          role="tooltip"
+        >
+          {children}
+          <TooltipPrimitive.Arrow className="bg-foreground size-2.5 rotate-45 rounded-[2px] data-[side=bottom]:-top-1 data-[side=left]:-right-1 data-[side=right]:-left-1 data-[side=top]:-bottom-1" />
+        </TooltipPrimitive.Popup>
+      </TooltipPrimitive.Positioner>
     </TooltipPrimitive.Portal>
   );
 }
