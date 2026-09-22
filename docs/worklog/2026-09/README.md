@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [Sidebar 모바일 판별을 shadcn 공식 구현으로 복원](2026-09-22-sidebar-mobile-hydration.md)
+
 - [이벤트 루프 설명과 실행 예제 보완](2026-09-22-event-loop-content-clarification.md)
 
 - [블로그 PR 병합 후 feature 브랜치 동기화](2026-09-22-feature-branches-sync-after-blog-merge.md)
