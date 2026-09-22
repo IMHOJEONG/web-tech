@@ -71,10 +71,26 @@ mise exec -- pnpm --filter docs exec eslint scripts/measure-shared-ui-bundle.ts 
 
 루트 import는 기준보다 gzip 58,763 bytes 증가했다. 하위 경로 사용 후 증가분은 1,690 bytes, 약 0.22%로 줄었다. 이 결과에 따라 ESM 빌드·export 전환까지 작업 범위를 넓히지 않았다. 측정 스크립트는 현재 checkout의 값만 재현하므로 이전 값과 비교할 때는 해당 의존성과 빌드 산출물을 함께 맞춰야 한다.
 
+### 푸시 후 추가 검증
+
+2026-09-22 KST에 `feature/docs`의 `242d81a`까지 origin에 푸시한 뒤 Node 24에서 재검증했다.
+
+```sh
+BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false BLOG_CONTENT_API_BASE_URL='' BLOG_CONTENT_API_BASE_URL_INTERNAL='' BLOG_CONTENT_API_BASE_URL_PUBLIC='' mise exec -- pnpm --filter docs build
+mise exec -- pnpm --filter docs exec playwright test --config=/private/tmp/web-tech-ui-prod-check.config.mjs
+mise exec -- pnpm --filter docs test:ui
+mise exec -- pnpm --filter docs test:activity-lab
+```
+
+- Next.js 16.3.4 프로덕션 빌드 성공: 컴파일·타입 검사·정적 페이지 28개 생성 완료, 콘텐츠 검증 16개 통과.
+- 임시 Playwright 설정은 기존 `e2e/mobile-drawer-close.spec.ts`를 그대로 사용하고, `next start --hostname 127.0.0.1 --port 3115`를 webServer로 실행했다. 프로젝트 이름은 `chromium-mobile`, viewport는 390×844, touch/mobile 활성화, 원격 API 환경 변수는 빌드와 동일하게 비웠다. Better Stack 전송도 비활성화했다. 임시 설정은 저장소 파일이 아니므로 다른 환경에서는 같은 조건으로 작성해야 한다.
+- production Drawer 4개, UI 46개, Activity 22개 모두 통과. Drawer는 light/dark와 reduced-motion 조합에서 닫기·Escape·재열기·포커스 복귀·Overlay 제거를 확인했다.
+- 테스트가 띄운 3115 서버는 종료하고 기존 3001 개발 서버는 유지한다. Vercel 배포 상태, NAS 연동, production Tooltip 및 다른 브라우저는 미검증이다.
+
 ## Open Questions
 
 Activity 안의 열린 Sheet를 숨기면 Portal이 남는 동작은 새 Radix에서도 재현된다. 테스트 통과를 문제 해결로 해석하지 않는다. 최신 cn 패치는 배포 대기 정책을 충족한 뒤 다시 검토한다.
 
 ## Next
 
-Next.js 프로덕션 빌드 확인과 Activity 생명주기·전체 브라우저 검증을 이어간다. 후속 범위는 [백로그](../../todo/todo.md)에 따른다.
+production Tooltip과 Activity 생명주기·전체 브라우저 검증을 이어간다. 후속 범위는 [백로그](../../todo/todo.md)에 따른다.
