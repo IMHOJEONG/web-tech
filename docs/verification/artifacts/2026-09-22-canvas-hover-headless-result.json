@@ -1,0 +1,2167 @@
+{
+  "date": "2026-09-22T12:16:41.572Z",
+  "flag": "CanvasDrawElement",
+  "cases": [
+    {
+      "mode": "headless",
+      "route": "/article",
+      "run": 1,
+      "errors": [],
+      "frames": [
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        }
+      ],
+      "clicks": 1,
+      "outsideClicks": 1,
+      "events": [
+        {
+          "type": "pointerover",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "HTML",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "focus",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "BUTTON",
+          "x": 320,
+          "y": 158,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "BUTTON",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "blur",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        }
+      ],
+      "hoverFrames": 20
+    },
+    {
+      "mode": "headless",
+      "route": "/article",
+      "run": 2,
+      "errors": [],
+      "frames": [
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        }
+      ],
+      "clicks": 1,
+      "outsideClicks": 1,
+      "events": [
+        {
+          "type": "pointerover",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "HTML",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "focus",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "BUTTON",
+          "x": 320,
+          "y": 158,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "BUTTON",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "blur",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        }
+      ],
+      "hoverFrames": 20
+    },
+    {
+      "mode": "headless",
+      "route": "/article",
+      "run": 3,
+      "errors": [],
+      "frames": [
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        }
+      ],
+      "clicks": 1,
+      "outsideClicks": 1,
+      "events": [
+        {
+          "type": "pointerover",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "HTML",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "focus",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "BUTTON",
+          "x": 320,
+          "y": 158,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "BUTTON",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "blur",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        }
+      ],
+      "hoverFrames": 20
+    },
+    {
+      "mode": "headless",
+      "route": "/demo",
+      "run": 1,
+      "errors": [],
+      "frames": [
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        }
+      ],
+      "clicks": 1,
+      "outsideClicks": 1,
+      "events": [
+        {
+          "type": "pointerover",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "BODY",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "BUTTON",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "focus",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "BUTTON",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "BUTTON",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "blur",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        }
+      ],
+      "hoverFrames": 20
+    },
+    {
+      "mode": "headless",
+      "route": "/demo",
+      "run": 2,
+      "errors": [],
+      "frames": [
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        }
+      ],
+      "clicks": 1,
+      "outsideClicks": 1,
+      "events": [
+        {
+          "type": "pointerover",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "BODY",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "BUTTON",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "focus",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "BUTTON",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "BUTTON",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "blur",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        }
+      ],
+      "hoverFrames": 20
+    },
+    {
+      "mode": "headless",
+      "route": "/demo",
+      "run": 3,
+      "errors": [],
+      "frames": [
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": "matrix(1, 0, 0, 1, 280, 140)"
+        }
+      ],
+      "clicks": 1,
+      "outsideClicks": 1,
+      "events": [
+        {
+          "type": "pointerover",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "BODY",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "BUTTON",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "focus",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "BUTTON",
+          "x": 541,
+          "y": 336,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "BUTTON",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "blur",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "BODY",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        }
+      ],
+      "hoverFrames": 20
+    },
+    {
+      "mode": "headless",
+      "route": "/control",
+      "run": 1,
+      "errors": [],
+      "frames": [
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        }
+      ],
+      "clicks": 1,
+      "outsideClicks": 1,
+      "events": [
+        {
+          "type": "pointerover",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "HTML",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "focus",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "BUTTON",
+          "x": 320,
+          "y": 158,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "BUTTON",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "blur",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        }
+      ],
+      "hoverFrames": 20
+    },
+    {
+      "mode": "headless",
+      "route": "/control",
+      "run": 2,
+      "errors": [],
+      "frames": [
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        }
+      ],
+      "clicks": 1,
+      "outsideClicks": 1,
+      "events": [
+        {
+          "type": "pointerover",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "HTML",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "focus",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "BUTTON",
+          "x": 320,
+          "y": 158,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "BUTTON",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "blur",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        }
+      ],
+      "hoverFrames": 20
+    },
+    {
+      "mode": "headless",
+      "route": "/control",
+      "run": 3,
+      "errors": [],
+      "frames": [
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        },
+        {
+          "hover": true,
+          "focus": true,
+          "visibility": "visible",
+          "hit": "BUTTON",
+          "transform": ""
+        }
+      ],
+      "clicks": 1,
+      "outsideClicks": 1,
+      "events": [
+        {
+          "type": "pointerover",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "HTML",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "BUTTON",
+          "x": 320.0703125,
+          "y": 158.5,
+          "focused": true
+        },
+        {
+          "type": "focus",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "BUTTON",
+          "x": 320,
+          "y": 158,
+          "focused": true
+        },
+        {
+          "type": "pointerout",
+          "target": "BUTTON",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointerover",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "pointermove",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        },
+        {
+          "type": "blur",
+          "target": "BUTTON",
+          "focused": true
+        },
+        {
+          "type": "click",
+          "target": "HTML",
+          "x": 5,
+          "y": 5,
+          "focused": true
+        }
+      ],
+      "hoverFrames": 20
+    }
+  ],
+  "version": "153.0.8010.53"
+}

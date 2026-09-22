@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [운영체제·입문 글 보완과 Canvas hover 진단](2026-09-22-content-editorial-and-canvas-hover.md)
+
 - [검색 키보드 조작과 상세 글 의미 구조 보완](2026-09-22-keyboard-article-accessibility.md)
 
 - [화면 전환 후 모바일 메뉴 오버레이 잔류 수정](2026-09-22-mobile-drawer-resize.md)
