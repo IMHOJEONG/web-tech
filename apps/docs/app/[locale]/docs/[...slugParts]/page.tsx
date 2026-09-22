@@ -78,6 +78,9 @@ export default async function Page({
     if (renderedArticle.mode === 'html') {
         return (
             <ArticleContentLayout
+                fallbackTitle={
+                    renderedArticle.hasTitle ? undefined : target.title
+                }
                 supplementary={supplementary}
                 toc={renderedArticle.toc}
             >
@@ -95,6 +98,7 @@ export default async function Page({
 
     return (
         <ArticleContentLayout
+            fallbackTitle={renderedArticle.hasTitle ? undefined : target.title}
             supplementary={supplementary}
             toc={renderedArticle.toc}
         >

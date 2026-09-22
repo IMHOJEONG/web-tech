@@ -57,10 +57,11 @@ function SearchForm({
             return
         }
 
-        requestAnimationFrame(() => {
+        const frame = requestAnimationFrame(() => {
             inputRef.current?.focus()
             inputRef.current?.select()
         })
+        return () => cancelAnimationFrame(frame)
     }, [isOpen])
 
     useEffect(() => {
@@ -123,8 +124,8 @@ function SearchForm({
         inputRef.current?.focus()
     }
 
-    const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Escape') {
+    const handleKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
+        if (event.key === 'Escape' && isOpen) {
             event.preventDefault()
             setIsOpen(false)
             triggerRef.current?.focus()
@@ -135,6 +136,7 @@ function SearchForm({
         <form
             ref={formRef}
             onSubmit={handleSubmit}
+            onKeyDown={handleKeyDown}
             className="flex items-center"
             aria-busy={isPending}
         >
@@ -160,7 +162,7 @@ function SearchForm({
             <div
                 id={panelId}
                 className={cn(
-                    'absolute inset-x-3 top-[calc(100%+0.5rem)] z-50 origin-top-right rounded-xl border border-outline-variant/70 bg-popover p-1.5 shadow-[0_18px_48px_rgba(15,23,42,0.08)] transition-all duration-200 motion-reduce:transition-none dark:border-outline-variant dark:bg-surface-container-low dark:shadow-[0_24px_56px_rgba(0,0,0,0.42)] sm:left-auto sm:right-6 sm:w-80 md:right-8',
+                    'absolute inset-x-3 top-[calc(100%+0.5rem)] z-50 origin-top-right rounded-xl border border-outline-variant/70 bg-popover p-1.5 shadow-[0_18px_48px_rgba(15,23,42,0.08)] transition-[opacity,transform] duration-200 motion-reduce:transition-none dark:border-outline-variant dark:bg-surface-container-low dark:shadow-[0_24px_56px_rgba(0,0,0,0.42)] sm:left-auto sm:right-6 sm:w-80 md:right-8',
                     isOpen
                         ? 'visible translate-y-0 opacity-100'
                         : 'invisible -translate-y-1 opacity-0'
@@ -181,7 +183,6 @@ function SearchForm({
                                 )
                             )
                         }
-                        onKeyDown={handleKeyDown}
                         maxLength={SEARCH_KEYWORD_MAX_LENGTH}
                         minLength={1}
                         placeholder={t('input.placeholder')}

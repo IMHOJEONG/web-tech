@@ -5,6 +5,7 @@ import { ArticleContentGrid } from './article-content-grid'
 import { ArticleSupplementaryBoundary } from './article-supplementary-boundary'
 
 export async function ArticleContentLayout({
+    fallbackTitle,
     supplementary,
     toc,
     children,
@@ -20,7 +21,12 @@ export async function ArticleContentLayout({
                 </div>
             </aside>
 
-            <div className="min-w-0">
+            <main className="min-w-0">
+                {fallbackTitle && (
+                    <h1 className="mdx-h1 mb-6 font-display text-on-surface">
+                        {fallbackTitle}
+                    </h1>
+                )}
                 {children}
                 {supplementary && (
                     <ArticleSupplementaryBoundary
@@ -29,7 +35,7 @@ export async function ArticleContentLayout({
                         {supplementary}
                     </ArticleSupplementaryBoundary>
                 )}
-            </div>
+            </main>
         </ArticleContentGrid>
     )
 }

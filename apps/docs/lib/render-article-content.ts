@@ -5,11 +5,13 @@ import type { ReactNode } from 'react'
 import remarkGfm from 'remark-gfm'
 import remarkFlexibleToc, { type TocItem } from 'remark-flexible-toc'
 import { shikiRehypeOptions } from './shiki-options.js'
+import { rehypeArticleTitle } from './rehype-article-title.ts'
 import { normalizeRemoteArticleHtml } from '../widgets/article-detail/model/normalize-remote-article-html.ts'
 
 type Scope = {
     readingTime: string
     toc?: TocItem[]
+    hasTitle?: boolean
 }
 
 type Frontmatter = {
@@ -25,11 +27,13 @@ type RenderableArticle = {
 export type RenderArticleContentResult =
     | {
           mode: 'html'
+          hasTitle: boolean
           toc: TocItem[]
           content: string
       }
     | {
           mode: 'mdx'
+          hasTitle: boolean
           toc?: TocItem[]
           content: ReactNode
       }
@@ -43,14 +47,14 @@ function createMdxEvaluateOptions({
         mdxOptions: {
             remarkPlugins: [remarkGfm, remarkFlexibleToc],
             rehypePlugins: codeHighlight
-                ? [[rehypeShiki, shikiRehypeOptions]]
-                : [],
+                ? [rehypeArticleTitle, [rehypeShiki, shikiRehypeOptions]]
+                : [rehypeArticleTitle],
         },
         parseFrontmatter: true,
         scope: {
             readingTime: '',
         },
-        vfileDataIntoScope: 'toc',
+        vfileDataIntoScope: ['toc', 'hasTitle'],
     }
 }
 
@@ -68,6 +72,7 @@ export async function renderArticleContent(
 
         return {
             mode: 'html',
+            hasTitle: /<h1(?:\s|>)/i.test(normalizedRemoteArticle.content),
             toc: normalizedRemoteArticle.toc,
             content: normalizedRemoteArticle.content,
         }
@@ -83,6 +88,7 @@ export async function renderArticleContent(
 
     return {
         mode: 'mdx',
+        hasTitle: scope.hasTitle === true,
         toc: scope.toc,
         content,
     }

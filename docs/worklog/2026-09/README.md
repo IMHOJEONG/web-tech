@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [검색 키보드 조작과 상세 글 의미 구조 보완](2026-09-22-keyboard-article-accessibility.md)
+
 - [화면 전환 후 모바일 메뉴 오버레이 잔류 수정](2026-09-22-mobile-drawer-resize.md)
 
 - [앱 셸의 현재 메뉴 판정 통합](2026-09-22-shell-active-navigation.md)
