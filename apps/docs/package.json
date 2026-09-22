@@ -27,7 +27,7 @@
         "test:better-stack:local": "node ./scripts/test-better-stack-local.mjs",
         "test:cache:prod": "node ./scripts/test-content-cache-prod.mjs",
         "pretest:lib": "pnpm --filter @web-tech/docs-content-contract build",
-        "test:lib": "pnpm typecheck:node-test && node --experimental-strip-types --test ./lib/*.test.ts ./feature/callout/model/*.test.ts ./feature/code-block/lib/*.test.ts ./shared/config/*.test.ts ./widgets/docs-index/model/*.test.ts ./widgets/content-hub/model/*.test.ts",
+        "test:lib": "pnpm typecheck:node-test && node --experimental-strip-types --test ./lib/*.test.ts ./feature/callout/model/*.test.ts ./feature/code-block/lib/*.test.ts ./shared/config/*.test.ts ./widgets/docs-index/model/*.test.ts ./widgets/content-hub/model/*.test.ts ./widgets/app-shell/model/*.test.ts",
         "prebuild": "pnpm --filter @web-tech/docs-content-contract build && pnpm --filter @web-tech/ui build && pnpm validate:content",
         "build": "next build",
         "start": "next start",

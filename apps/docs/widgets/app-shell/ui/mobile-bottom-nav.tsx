@@ -11,39 +11,15 @@ import {
     defaultLocale,
 } from '~/shared/i18n/locale-path'
 import { usePathname } from '~/shared/i18n/navigation'
+import { APP_NAVIGATION, getActiveNavigationKey } from '../model/app-navigation'
 
-const mobileNav = [
-    {
-        href: '/feed',
-        key: 'feed',
-        icon: House,
-        activePrefixes: ['/feed', '/docs'],
-    },
-    {
-        href: '/web',
-        key: 'web',
-        icon: Monitor,
-        activePrefixes: ['/web', '/category/fe'],
-    },
-    {
-        href: '/mobile',
-        key: 'mobile',
-        icon: Smartphone,
-        activePrefixes: ['/mobile'],
-    },
-    {
-        href: '/ui-ux',
-        key: 'uiux',
-        icon: Braces,
-        activePrefixes: ['/ui-ux'],
-    },
-    {
-        href: '/about',
-        key: 'about',
-        icon: UserRound,
-        activePrefixes: ['/about'],
-    },
-]
+const mobileIcons = {
+    feed: House,
+    web: Monitor,
+    mobile: Smartphone,
+    uiux: Braces,
+    about: UserRound,
+}
 
 export default function MobileBottomNav() {
     return (
@@ -59,6 +35,7 @@ function ActiveMobileNav() {
 }
 
 function MobileNavItems({ pathname = '' }: { pathname?: string }) {
+    const activeKey = getActiveNavigationKey(pathname)
     const value = useLocale()
     const locale = isLocale(value) ? value : defaultLocale
     const t = useTranslations('navigation')
@@ -70,14 +47,9 @@ function MobileNavItems({ pathname = '' }: { pathname?: string }) {
             className="fixed inset-x-0 bottom-0 z-50 border-t border-header-border bg-popover/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-10px_30px_rgba(15,23,42,0.08)] backdrop-blur-[10px] sm:hidden"
         >
             <div className="grid min-h-16.25 grid-cols-5 items-center gap-1 px-3">
-                {mobileNav.map((item) => {
-                    const isActive = item.activePrefixes.some(
-                        (prefix) =>
-                            pathname === prefix ||
-                            pathname?.startsWith(`${prefix}/`)
-                    )
-
-                    const Icon = item.icon
+                {APP_NAVIGATION.map((item) => {
+                    const isActive = activeKey === item.key
+                    const Icon = mobileIcons[item.key]
 
                     return (
                         <Link

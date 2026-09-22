@@ -25,39 +25,19 @@ import { usePathname } from '~/shared/i18n/navigation'
 import { useState } from 'react'
 import { Brand } from '~/shared/ui/brand'
 import type { DrawerLinkConfig } from './mobile-nav-drawer.types'
+import { APP_NAVIGATION, getActiveNavigationKey } from '../model/app-navigation'
 
-const drawerLinks = [
-    {
-        href: '/feed',
-        key: 'feed',
-        icon: Newspaper,
-        activePrefixes: ['/feed'],
-    },
-    {
-        href: '/web',
-        key: 'web',
-        icon: BookOpenText,
-        activePrefixes: ['/web', '/category/fe'],
-    },
-    {
-        href: '/mobile',
-        key: 'mobile',
-        icon: Smartphone,
-        activePrefixes: ['/mobile'],
-    },
-    {
-        href: '/ui-ux',
-        key: 'uiux',
-        icon: Braces,
-        activePrefixes: ['/ui-ux'],
-    },
-    {
-        href: '/about',
-        key: 'about',
-        icon: Users,
-        activePrefixes: ['/about'],
-    },
-] as const satisfies readonly DrawerLinkConfig[]
+const drawerIcons = {
+    feed: Newspaper,
+    web: BookOpenText,
+    mobile: Smartphone,
+    uiux: Braces,
+    about: Users,
+}
+const drawerLinks = APP_NAVIGATION.map((item) => ({
+    ...item,
+    icon: drawerIcons[item.key],
+})) satisfies readonly DrawerLinkConfig[]
 
 function DrawerLink({
     href,
@@ -97,6 +77,7 @@ export default function MobileNavDrawer() {
 }
 
 function MobileNavDrawerContent({ pathname }: { pathname: string }) {
+    const activeKey = getActiveNavigationKey(pathname)
     const [open, setOpen] = useState(false)
     const headerT = useTranslations('header')
     const navT = useTranslations('navigation')
@@ -172,11 +153,7 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                 <div className="flex flex-1 flex-col overflow-y-auto">
                     <div className="py-4">
                         {drawerLinks.map((item) => {
-                            const isActive = item.activePrefixes.some(
-                                (prefix) =>
-                                    pathname === prefix ||
-                                    pathname?.startsWith(`${prefix}/`)
-                            )
+                            const isActive = activeKey === item.key
 
                             return (
                                 <DrawerLink

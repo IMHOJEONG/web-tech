@@ -3,37 +3,11 @@ import { cn } from '@web-tech/ui/lib/utils'
 import { useTranslations } from 'next-intl'
 import { Link } from '~/shared/i18n/navigation'
 import { usePathname } from '~/shared/i18n/navigation'
-
-const navigation = [
-    {
-        href: '/feed',
-        key: 'feed',
-        activePrefixes: ['/feed', '/docs'],
-    },
-    {
-        href: '/web',
-        key: 'web',
-        activePrefixes: ['/web', '/category/fe'],
-    },
-    {
-        href: '/mobile',
-        key: 'mobile',
-        activePrefixes: ['/mobile'],
-    },
-    {
-        href: '/ui-ux',
-        key: 'uiux',
-        activePrefixes: ['/ui-ux'],
-    },
-    {
-        href: '/about',
-        key: 'about',
-        activePrefixes: ['/about'],
-    },
-]
+import { APP_NAVIGATION, getActiveNavigationKey } from '../model/app-navigation'
 
 export const Navigation = () => {
     const pathname = usePathname()
+    const activeKey = getActiveNavigationKey(pathname)
     const t = useTranslations('navigation')
 
     return (
@@ -41,13 +15,8 @@ export const Navigation = () => {
             data-testid="desktop-navigation"
             className="hidden min-w-0 items-center gap-1 sm:flex lg:gap-2"
         >
-            {navigation.map((nav) => {
-                const { href, key, activePrefixes } = nav
-                const isActive = activePrefixes.some(
-                    (prefix) =>
-                        pathname === prefix ||
-                        pathname?.startsWith(`${prefix}/`)
-                )
+            {APP_NAVIGATION.map(({ href, key }) => {
+                const isActive = activeKey === key
 
                 return (
                     <nav key={key} className="flex items-center">
