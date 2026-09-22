@@ -1,12 +1,13 @@
 # Docs Vercel Platform Operations Policy
 
-## Status
+## 상태와 범위
 
-- Proposed operational baseline
-- Applied scope: `apps/docs` Vercel project
-- Last reviewed: 2026-09-11
+- 상태: 제안
+- 대상: docs Vercel 프로젝트의 운영 통제
+- 최종 검토: 2026-09-22
+- 최초 제안: 2026-09-11. Dashboard 기능의 활성화 여부는 운영자가 별도 확인한다.
 
-## Purpose
+## 배경
 
 `apps/docs`는 Vercel에서 실행되고 NAS의 `docs-backend`를 원격 콘텐츠
 원본으로 사용한다. 이 구조에서는 애플리케이션 코드만으로 인증, 트래픽
@@ -15,7 +16,9 @@
 이 문서는 Vercel 기능을 무조건 활성화하는 목록이 아니라 현재 서비스
 규모에 맞춰 적용 순서와 보류 기준을 정한다.
 
-## Principles
+## 결정
+
+### Principles
 
 - 인터넷 경계의 반복 트래픽은 애플리케이션보다 Vercel Firewall에서 먼저 제한한다.
 - secret은 코드와 일반 환경변수 화면에서 최대한 읽을 수 없게 관리한다.
@@ -118,7 +121,9 @@ Playwright나 외부 QA가 Preview에 접근해야 하면 Vercel의 automation b
 traffic에서는 revalidation path를 기준으로 IP, User-Agent와 응답 상태를
 확인한다.
 
-## Measure Then Apply
+## 대안과 영향
+
+### Measure Then Apply
 
 ### 5. Speed Insights
 
@@ -233,7 +238,7 @@ Hobby에서는 custom/rate-limit rule 수가 제한되므로 추측성 규칙으
 - https://vercel.com/docs/drains
 - https://vercel.com/docs/spend-management
 
-## Related Documents
+## 관련 문서
 
 - `docs/architecture/docs-content-cache-revalidation-policy.md`
 - `docs/architecture/docs-content-api-fail-fast-policy.md`

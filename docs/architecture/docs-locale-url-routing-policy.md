@@ -1,5 +1,15 @@
 # 언어별 URL 라우팅 정책
 
+## 상태와 범위
+
+- 상태: 적용 중
+- 대상: docs 언어별 URL, 탐색 링크 및 검색 메타데이터
+- 최종 검토: 2026-09-22
+
+## 배경
+
+쿠키·헤더에만 언어를 맡기면 공유 URL과 캐시의 언어 구분이 불명확해진다. 콘텐츠 식별자를 유지하면서 화면 언어를 URL로 명시한다.
+
 ## 결정
 
 2026-09-14부터 화면 URL은 `/ko/...`, `/en/...`으로 구분한다.
@@ -19,7 +29,9 @@
 헤더의 KO/EN 링크는 현재 경로와 검색 조건을 유지한다.
 미지원 언어 경로는 대응 페이지가 없으면 404로 처리한다.
 
-## 두 번 관리하는가?
+## 대안과 영향
+
+### 두 번 관리하는가?
 
 페이지 구현과 Markdown 원본은 한 번만 관리한다. 기존 ko.json/en.json의 UI 메시지 관리도 동일하다.
 언어별 URL을 만든다고 Markdown 본문이나 frontmatter가 자동 번역되지는 않는다.
@@ -64,7 +76,7 @@ mise exec -- node apps/docs/scripts/test-content-cache-prod.mjs
 이어서 기존 expire: 0/max 재검증과 상세 문서 V3 렌더링을 확인한다.
 개발 서버에서 수동으로 `/ko/docs`, `/en/docs`, `/ko/about`, `/en/about`을 열어 언어 전환과 모바일 헤더 폭을 확인한다.
 
-## 참고
+## 관련 문서
 
 - [next-intl 라우팅 설정](https://next-intl.dev/docs/routing/setup)
 - [next-intl Navigation](https://next-intl.dev/docs/routing/navigation)

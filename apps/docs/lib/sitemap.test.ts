@@ -1,8 +1,11 @@
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import { test } from 'node:test'
 import { build } from 'esbuild'
+import { VFile } from 'vfile'
+import { matter } from 'vfile-matter'
 import type { MetadataRoute } from 'next'
 
 test('sitemap uses the public content pipeline', async (t) => {
@@ -124,9 +127,22 @@ test('sitemap uses the public content pipeline', async (t) => {
                 entry.url.endsWith('/ko/docs/html-in-canvas-paint-record')
             )
             assert.ok(local)
+            const source = new VFile(
+                readFileSync(
+                    new URL('../data/canvas/readme.md', import.meta.url),
+                    'utf8'
+                )
+            )
+            matter(source)
+            const localMetadata = source.data.matter as {
+                updatedAt?: string
+                date: string
+            }
             assert.equal(
                 (local.lastModified as Date).toISOString(),
-                '2026-08-29T00:00:00.000Z'
+                new Date(
+                    localMetadata.updatedAt ?? localMetadata.date
+                ).toISOString()
             )
         }
     )

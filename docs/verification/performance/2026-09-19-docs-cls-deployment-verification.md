@@ -1,6 +1,6 @@
 # CLS 수정 배포 검증
 
-## Summary
+## 대상과 조건
 
 `be0fd6a`를 포함한 `2ab3580`의 Vercel web-tech 배포 success 및 운영 HTML 변경을 확인했다.
 측정 종료: 2026-09-18 15:09:11 UTC / 2026-09-19 00:09:11 KST.
@@ -13,7 +13,7 @@
 - `apps/docs/scripts/verify-deployed-article-shell.cjs`
 - `docs/verification/artifacts/2026-09-19-cls-deployment-verification.json`
 
-## Measurements
+## 결과와 증거
 
 기존과 같은 새 Chromium context, desktop 1280×800,
 mobile 390×844 / 150ms latency / 1.6Mbps down / 0.75Mbps up / CPU 4배 제한.
@@ -69,7 +69,7 @@ body 자체는 800px인 채 자식 콘텐츠만 넘친다. sticky 요소가 cont
 height=65px를 함께 검사해야 한다.
 기존 TOC 테스트처럼 target top >= header bottom만 확인하면 음수 header bottom으로도 통과한다.
 
-## 재현
+## 재현 방법
 
 ```sh
 PERF_OUTPUT=/tmp/heap-forge-after-cls.json mise exec -- node apps/docs/scripts/measure-deployed-performance.mjs
@@ -80,10 +80,15 @@ mise exec -- node apps/docs/scripts/verify-deployed-article-shell.cjs
 출력 `/tmp/heap-forge-cls-shell-check.json`은 진단값이며 자동 합격 판정을 하지 않는다.
 보존한 결과 JSON에는 성능 원본, geometry 요약(최솟값/최댓값·위반 기록), 별도 sticky 진단을 포함한다.
 
-## Open Questions
+## 한계와 후속 작업
 
 폰트/내비게이션의 작은 이동, 짧은 글의 하단 공간, 실제 사용자 field 지표는 별도 추적한다.
 
 ## Next
 
 body 높이 제약과 깊은 스크롤 sticky header 문제를 독립 작업으로 수정하고 회귀 테스트를 보강한다.
+
+## 관련 문서
+
+- [배포 성능 측정 절차](../../runbooks/docs-deployed-performance-measurement.md)
+- [Sticky header 후속 검증](2026-09-19-docs-sticky-header-deployment-verification.md)

@@ -1,11 +1,11 @@
 # Docs Secret And Token Lifecycle Policy
 
-## 작업 목적
+## Summary
 
 docs 운영에 사용하는 Content API, cache revalidation, 관측 및 인프라
 credential을 하나의 수명주기 정책으로 관리한다.
 
-## 반영 내용
+## Changed
 
 - 필수, 선택, 공급자 자동 관리 token inventory를 구분했다.
 - Content API와 revalidation shared secret의 90일 회전 기준을 확정했다.
@@ -19,7 +19,7 @@ credential을 하나의 수명주기 정책으로 관리한다.
 - Vercel, NAS, GitHub Actions에서 secret 값을 저장하고 검증하는 기준을
   정리했다.
 
-## 보안 원칙
+## Notes
 
 - 실제 token 값은 문서, 로그와 Git에 남기지 않는다.
 - 회전 기록에는 이름, 일시, 환경과 상태 코드만 남긴다.
@@ -29,3 +29,11 @@ credential을 하나의 수명주기 정책으로 관리한다.
 ## 기준 문서
 
 - `docs/architecture/docs-secret-token-lifecycle-policy.md`
+
+## Open Questions
+
+단일 토큰 인증에서는 무중단 회전이 보장되지 않는다. 이 작업은 정책 작성이며 실제 토큰 회전은 포함하지 않는다.
+
+## Next
+
+정책에 따라 회전 시각과 검증 상태를 기록하고, 비밀값 자체는 기록하지 않는다.

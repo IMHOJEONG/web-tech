@@ -261,9 +261,9 @@ pnpm --filter docs dev
 
 ## Related Docs
 
-- [docs-resource-content-roadmap.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-resource-content-roadmap.md)
-- [docs-content-authoring-markup-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-markup-policy.md)
-- [docs-content-authoring-pipeline.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-pipeline.md)
-- [docs-local-vs-remote-content-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-local-vs-remote-content-policy.md)
-- [docs-blog-improvement-roadmap.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-blog-improvement-roadmap.md)
-- [blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
+- [docs-resource-content-roadmap.md](../architecture/docs-resource-content-roadmap.md)
+- [docs-content-authoring-markup-policy.md](../architecture/docs-content-authoring-markup-policy.md)
+- [docs-content-authoring-pipeline.md](../architecture/docs-content-authoring-pipeline.md)
+- [docs-local-vs-remote-content-policy.md](../architecture/docs-local-vs-remote-content-policy.md)
+- [docs-blog-improvement-roadmap.md](../architecture/docs-blog-improvement-roadmap.md)
+- [blog-content-api-contract.md](../architecture/blog-content-api-contract.md)

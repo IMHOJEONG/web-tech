@@ -1,12 +1,12 @@
 # 2026-05-05 Docs Design Token Unification
 
-## 요약
+## Summary
 
 `docs` 앱에서 반복되던 하드코딩 색상, radius, shadow를 공용 토큰 유틸로 1차 흡수했다.
 
 이번 단계의 핵심은 “모든 임시 값을 제거”가 아니라 “반복되는 surface / action / focus 기준을 shared token 계층으로 올리는 것”이었다.
 
-## 갱신한 공용 유틸
+## Changed
 
 [packages/tailwind-config/shared-styles.css](../../../packages/tailwind-config/shared-styles.css:443)
 
@@ -25,15 +25,15 @@
 - [apps/docs/widgets/article-detail/ui/article-detail.tsx](../../../apps/docs/widgets/article-detail/ui/article-detail.tsx:1)
 - [apps/docs/widgets/about-us/ui/about-us.tsx](../../../apps/docs/widgets/about-us/ui/about-us.tsx:1)
 - [apps/docs/feature/search/ui/search.tsx](../../../apps/docs/feature/search/ui/search.tsx:1)
-- [apps/docs/app/category/page.tsx](../../../apps/docs/app/category/page.tsx:1)
-- [apps/docs/app/category/[main]/page.tsx](../../../apps/docs/app/category/[main]/page.tsx:1)
-- [apps/docs/app/category/[main]/[sub]/page.tsx](../../../apps/docs/app/category/[main]/[sub]/page.tsx:1)
+- [현재 category 페이지](../../../apps/docs/app/%5Blocale%5D/category/page.tsx)
+- [현재 category main 페이지](../../../apps/docs/app/%5Blocale%5D/category/%5Bmain%5D/page.tsx)
+- [현재 category sub 페이지](../../../apps/docs/app/%5Blocale%5D/category/%5Bmain%5D/%5Bsub%5D/page.tsx)
 - [apps/docs/widgets/content-hub/ui/hub-page.tsx](../../../apps/docs/widgets/content-hub/ui/hub-page.tsx:1)
 - [apps/docs/entities/category/ui/main-category-card.tsx](../../../apps/docs/entities/category/ui/main-category-card.tsx:1)
 - [apps/docs/entities/category/ui/category-document-card.tsx](../../../apps/docs/entities/category/ui/category-document-card.tsx:1)
 - [apps/docs/entities/category/ui/sub-category-card.tsx](../../../apps/docs/entities/category/ui/sub-category-card.tsx:1)
 
-## 메모
+## Notes
 
 - `MainFeed`의 카드 액션, 필터 버튼, newsletter shell을 공용 토큰으로 교체했다.
 - `DocsIndex`의 hero panel, stat block, result card를 공용 panel/card 계층으로 교체했다.
@@ -43,10 +43,12 @@
 - `category` 계열의 hero panel, topic chip, summary block, document card도 같은 panel/card/chip 계층으로 정리했다.
 - `content-hub`의 hero / stat / latest 섹션도 같은 token 계층으로 맞췄다.
 
-## 남은 예외
+## Open Questions
 
 - 일부 topic accent color
 - 일부 decorative gradient / hero composition
 - device mockup frame처럼 실제 장식 의도가 강한 값
+
+## Next
 
 이 값들은 바로 제거하지 않고, 후속 범위에서 “semantic accent token” 또는 “decorative exception”으로 분리 검토한다.

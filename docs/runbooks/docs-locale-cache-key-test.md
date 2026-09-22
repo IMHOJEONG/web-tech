@@ -1,6 +1,6 @@
 # Locale 캐시 키 분리 재현 가이드
 
-## 목적
+## 목적과 준비 조건
 
 `readCopy(locale)`의 ko/en 인자가 별도 캐시 키로 작동하는지 확인한다.
 같은 문구가 나오는 것만으로 캐시 적중이라 판단하지 않고, 함수 실행 때 생성한
@@ -9,7 +9,7 @@
 이번 fixture는 실제 메시지 JSON에서 설명을 선택한다. 원격 문서 본문이
 다국어로 저장/조회된다는 것을 검증하는 시험은 아니다.
 
-## 준비
+### 준비
 
 저장소 루트에서 수행한다. Node.js 24, 설치된 의존성, 공용 패키지 빌드가 필요하다.
 현재 개발 중인 `.env`나 NAS 연결은 필요하지 않다.
@@ -24,7 +24,7 @@ mise exec -- pnpm --filter @web-tech/ui build
 공용 패키지는 기존 설치를 공유하므로 시험 도중 다른 터미널에서 의존성이나
 공용 패키지를 변경하지 않는다. 개발 서버의 `.next`는 사용하지 않는다.
 
-## 실행 및 로그 저장
+## 실행 순서
 
 ```bash
 set -o pipefail
@@ -57,7 +57,7 @@ POST는 매번 생성한 임시 토큰으로 인증하고 ko/en만 허용한다.
 `test:locale-copy:ko` 또는 `test:locale-copy:en`을 `expire: 0`으로 만료한다.
 프로덕션의 원격 콘텐츠 공통 태그를 locale 태그로 변경하는 작업은 아니다.
 
-## 검증 조건
+## 기대 결과
 
 | 단계                      | 기대 관계                                         |
 | ------------------------- | ------------------------------------------------- |
@@ -73,14 +73,14 @@ POST는 매번 생성한 임시 토큰으로 인증하고 ko/en만 허용한다.
 캐시 키 분리와 태그 분리는 서로 다르다. 인자 locale은 캐시 항목을 나누고,
 언어별 태그는 어떤 항목을 만료시킬지 정한다. 같은 태그를 쓰면 키가 달라도 함께 만료될 수 있다.
 
-## 코드에서 직접 확인할 위치
+## 관련 검증
 
 - [시험 fixture](../../apps/docs/scripts/fixtures/locale-cache-probe.ts): locale 인자, cacheTag, UUID 생성, 인증.
 - [검증 모듈](../../apps/docs/scripts/test-utils/assert-locale-cache-key.mjs): deepEqual/notEqual assertion.
 - [실행기](../../apps/docs/scripts/test-content-cache-prod.mjs): 격리 복사, 빌드, 시작과 정리.
 - [실제 결과](../worklog/2026-09/2026-09-14-docs-locale-cache-key-test.md): 관측 UUID와 환경.
 
-## 한계와 실패 시 점검
+## 실패 대응과 복구
 
 - 이 시험은 단일 로컬 next start 인스턴스의 warm 캐시 동작을 검증한다.
 - cold 동시 요청의 중복 실행 억제, 서버 재시작, Vercel 다중 인스턴스 캐시 공유는 별도 시험이다.

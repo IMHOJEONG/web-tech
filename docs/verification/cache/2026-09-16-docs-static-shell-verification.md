@@ -1,6 +1,6 @@
 # 언어별 URL 전환 후 정적 셸 검증
 
-## Summary
+## 대상과 조건
 
 `feature/docs`를 `origin`에 push했고 Everything up-to-date를 확인했다.
 확인 당시 HEAD와 origin/feature/docs는 모두 `648932153358cff1046deb1007a65f87c3219d50`이었다.
@@ -13,9 +13,7 @@
 작업 중 별도로 변경된 `normalize-remote-article-html.ts`는 수정하거나 커밋하지 않았다.
 시험은 작업 트리의 임시 복사본을 사용하므로 배포 커밋만으로 만든 아티팩트 검증이나 Vercel 실배포 확인과는 구분한다.
 
-## Notes
-
-### 재현 명령
+## 재현 방법
 
 저장소 루트에서 Node 24(mise)로 실행했다. 실제 NAS/인증정보 대신 모의 서버와 임시 토큰을 사용한다.
 
@@ -25,6 +23,8 @@ mise exec -- node apps/docs/scripts/test-content-cache-prod.mjs
 mise exec -- node apps/docs/scripts/test-content-cache-prod.mjs --cache-components
 mise exec -- node apps/docs/scripts/test-content-cache-prod.mjs --cache-components --debug-prerender
 ```
+
+## 결과와 증거
 
 ### 기존 운영 모델: PASS
 
@@ -60,7 +60,7 @@ Route "/[locale]/category/[main]/[sub]": Next.js encountered URL data `usePathna
 소스 확인상 `/feed`도 Page 시작에서 searchParams를 await한다. 검색 조건은 요청마다 달라 언어별 URL 도입만으로 정적으로 결정되지 않는다.
 이번 로그로 모든 실패 지점을 다 찾았다고 보장하지 않는다. 빌드 실패 순서는 실행마다 달랐다.
 
-## Open Questions
+## 한계와 후속 작업
 
 - URL locale 전환은 요청 쿠키 기반 번역 의존성을 줄이지만, 다른 runtime 데이터 경계까지 해결하지 않는다.
 - 각 UI의 fallback 높이/내용과 스트리밍 후 레이아웃 이동을 함께 검토해야 한다.
@@ -72,3 +72,8 @@ Route "/[locale]/category/[main]/[sub]": Next.js encountered URL data `usePathna
 2. feed/docs의 검색 조건 처리를 하위 비동기 컴포넌트로 이동하고 의미 있는 fallback을 둔다.
 3. category/detail의 params와 데이터 조회 경계에 대해 정적 생성, 캐시, Suspense 중 적절한 책임을 정한다.
 4. 같은 명령을 다시 실행해 정적 셸 검증과 캐시 갱신을 모두 확인한 뒤 운영 활성화 여부를 결정한다.
+
+## 관련 문서
+
+- [동적 콘텐츠 경계](../../architecture/docs-dynamic-content-boundaries.md)
+- [캐시 통합 시험](../../runbooks/docs-content-cache-production-test.md)

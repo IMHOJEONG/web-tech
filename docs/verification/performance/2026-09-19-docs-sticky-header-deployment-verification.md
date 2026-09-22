@@ -1,6 +1,6 @@
 # Sticky header 운영 배포 검증
 
-## 대상과 목적
+## 대상과 조건
 
 - 대상: https://heap-forge.app, 배포 커밋 `b509059`.
 - Vercel GitHub status에서 배포 완료를 확인한 뒤 읽기 전용으로 검사했다.
@@ -14,7 +14,7 @@
 
 단순히 제목이 header bottom보다 아래인지 검사하면, header bottom 자체가 음수인 상황도 통과할 수 있다. 따라서 헤더의 top과 높이도 별도로 검사한다.
 
-## 레이아웃 결과
+## 결과와 증거
 
 | 화면     | 문서        | body 높이 | 검사 scrollY     | 결과 |
 | -------- | ----------- | --------- | ---------------- | ---- |
@@ -49,7 +49,7 @@
 - LCP는 load 이후 5초까지 관측한 후보이며 CLS도 해당 관측 구간의 값이다. 장시간 사용, 실기기, Safari/Firefox, 실제 사용자 p75를 대표하지 않는다.
 - 폰트 요청 완료 때문에 스크립트가 오래 걸리는 것과 화면의 주요 콘텐츠가 늦게 보이는 것은 구분해야 한다.
 
-## 재현 명령
+## 재현 방법
 
 저장소 루트에서 실행한다. 운영 사이트 접근이 가능하고 Playwright Chromium이 설치되어 있어야 한다.
 
@@ -61,8 +61,13 @@ node --check apps/docs/scripts/verify-deployed-article-shell.cjs
 
 네트워크 경쟁을 피하기 위해 두 측정은 순차 실행한다. 레이아웃 스크립트는 HTTP 상태, 초기 샘플 위반, 헤더 좌표, 가로 넘침, 데스크톱 TOC 위치가 조건을 어기면 실패 종료한다. 성능 스크립트는 결과 수, 각 error/errors, CLS/LCP를 JSON에서 별도로 확인해야 한다.
 
-## 남은 점검
+## 한계와 후속 작업
 
 - 실기기 Safari/Chrome에서 긴 문서 및 회전 시 sticky/가로 넘침 확인.
 - 모바일 Browser의 pending 상태 전환은 로컬 지연 fixture 등으로 별도 보장.
 - 필드 데이터 누적 후 LCP/CLS p75 확인. 이번 소수 반복값으로 통계적 개선을 단정하지 않음.
+
+## 관련 문서
+
+- [배포 성능 측정 절차](../../runbooks/docs-deployed-performance-measurement.md)
+- [CLS 배포 검증](2026-09-19-docs-cls-deployment-verification.md)

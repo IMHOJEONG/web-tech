@@ -1,6 +1,14 @@
 # 배포 상세 페이지 성능 측정
 
-## 2026-09-18 기준선
+## 목적과 준비 조건
+
+공개 상세 페이지의 브라우저 로딩을 읽기 전용으로 측정한다. Node.js 24, 설치된 워크스페이스 의존성과 Playwright Chromium이 필요하다. 아래 과거 기준선은 현재 배포의 성능을 보장하지 않는다.
+
+## 기대 결과
+
+실행이 끝나면 JSON에 Navigation Timing·LCP·CLS·본문 hash가 기록된다. 표본 조건이 다른 결과를 직접적인 성능 개선으로 해석하지 않는다.
+
+### 2026-09-18 기준선
 
 대상: `https://heap-forge.app`. Chromium 151.0.7922.34로 두 상세 페이지를
 데스크톱/모바일 조건에서 각각 3회, 총 12회 측정했다. 운영 데이터 변경,
@@ -82,7 +90,7 @@ cfOrigin은 165–2949ms였지만 애플리케이션 렌더링 CPU 시간이 아
 운영 콘텐츠 수정/전역 태그 만료를 동반하므로 이번에는 실행하지 않았다.
 실행 시 별도 테스트 글과 최대 관측 시간, 원복 계획을 먼저 정한다.
 
-## 재현 명령
+## 실행 순서
 
 저장소 루트에서 Node/mise 및 workspace 의존성과 Playwright Chromium이 준비되어 있어야 한다.
 
@@ -101,9 +109,18 @@ PERF_OUTPUT=/tmp/browser-performance.json mise exec -- node apps/docs/scripts/me
 인증 헤더와 쿠키는 수집하지 않는다. 기본 실행은 12회 페이지 이동과 하위 리소스 요청을 만든다.
 스크립트의 폴더명/태그에 의존하는 selector는 UI 변경 시 함께 갱신한다.
 
-## 후속 우선순위
+## 실패 대응과 복구
+
+접속 실패나 본문 selector timeout이면 대상 URL·배포 상태·현재 DOM을 확인하고 종료 코드를 기록한다. 측정 실패를 정상 0ms로 치환하지 않는다. 운영 콘텐츠나 캐시를 변경하지 않으므로 이 읽기 전용 측정에는 콘텐츠 원복이 필요하지 않다.
+
+### 후속 우선순위
 
 1. desktop CLS 1.0 사례를 DevTools Performance trace/스크린샷으로 재현하고 이동 요소 확인.
 2. 모바일 텍스트 LCP의 폰트/CSS/메인 스레드 waterfall 확인. 이미지 preload부터 추가하지 않는다.
 3. 서버 span을 배포한 후 요청 ID 기반으로 상세 렌더링 비용 분해.
 4. 테스트 문서의 TTL/웹훅 신선도 실험 및 실사용자 LCP p75 수집.
+
+## 관련 검증
+
+- [2026-09-18 기준선 보고서](../verification/performance/2026-09-18-deployed-performance-measurement.md)
+- [레이아웃 이동과 텍스트 지연 진단](../verification/performance/2026-09-18-docs-layout-shift-text-lcp-diagnosis.md)
