@@ -1,40 +1,15 @@
 import fg from 'fast-glob'
 import fs from 'fs'
 import path from 'path'
-import { VFile } from 'vfile'
-import { matter as vfileMatter } from 'vfile-matter'
+import { parseLocalDocument } from './local-document-parser'
+import type { Metadata } from './document.types'
+export type { Metadata } from './document.types'
 import { categoryTree } from '~/entities/category/model/category'
-import {
-    assertValidLocalDocFrontmatter,
-    isPublicDocStatus,
-    normalizeLocalDocFrontmatter,
-    type EditorialStatus,
-} from '~/lib/editorial-metadata'
 import {
     getLocalCategoryDirectory,
     resolveLocalContentRoot,
     toLocalContentFileName,
 } from '~/lib/local-content-paths'
-import { normalizeDocPath } from '~/lib/normalize-doc-path'
-import { DEFAULT_LOCAL_DOCUMENT_THUMBNAIL } from '~/shared/assets/default-thumbnails'
-
-export interface Metadata {
-    id: string
-    title: string
-    date: string
-    summary: string
-    slug: string
-    content: string
-    fileName: string
-    thumbnail?: string | null
-    updatedAt?: string
-    authorName?: string
-    authorRole?: string
-    readMinutes?: number
-    topicLabel?: string
-    tags?: string[]
-    status?: EditorialStatus
-}
 
 const categoryDirectory = getLocalCategoryDirectory()
 
@@ -55,67 +30,13 @@ async function exploreDirectory(pattern: string) {
     return files
 }
 
-function normalizeThumbnailPath(thumbnail?: unknown) {
-    if (typeof thumbnail !== 'string') {
-        return null
-    }
-
-    const trimmed = thumbnail.trim()
-
-    if (!trimmed) {
-        return null
-    }
-
-    let thumbnailPath = trimmed
-    const idx = thumbnailPath.indexOf('public/')
-
-    if (idx !== -1) {
-        thumbnailPath = thumbnailPath.slice(idx + 'public/'.length)
-    }
-
-    if (!thumbnailPath.startsWith('/')) {
-        thumbnailPath = `/${thumbnailPath}`
-    }
-
-    return thumbnailPath
-}
-
 function parseCategoryFile(fileName: string): Partial<Metadata> | null {
     const fileContents = fs.readFileSync(fileName, 'utf8')
-    const vfile = new VFile({ path: fileName, value: fileContents })
-    vfileMatter(vfile, { strip: true })
-    const frontmatter = normalizeLocalDocFrontmatter(vfile.data.matter || {})
-    assertValidLocalDocFrontmatter(fileName, frontmatter)
-
-    if (!isPublicDocStatus(frontmatter.status)) {
-        return null
-    }
-
-    const content = String(vfile)
-    const relPathFromRoot = toLocalContentFileName(fileName)
-    const normalizedFileName = normalizeDocPath(relPathFromRoot)
-    const fallbackSlug =
-        normalizedFileName.split('/').filter(Boolean).pop() ?? ''
-
-    return {
-        id: frontmatter.id ?? normalizedFileName,
-        title: frontmatter.title ?? fallbackSlug,
-        slug: frontmatter.slug ?? fallbackSlug,
-        summary: frontmatter.summary ?? '',
-        date: frontmatter.date ?? '',
-        content,
-        fileName: normalizedFileName,
-        thumbnail:
-            normalizeThumbnailPath(frontmatter.thumbnail) ??
-            DEFAULT_LOCAL_DOCUMENT_THUMBNAIL,
-        updatedAt: frontmatter.updatedAt,
-        authorName: frontmatter.authorName,
-        authorRole: frontmatter.authorRole,
-        readMinutes: frontmatter.readMinutes,
-        topicLabel: frontmatter.topicLabel,
-        tags: frontmatter.tags,
-        status: frontmatter.status,
-    }
+    return parseLocalDocument(
+        fileName,
+        toLocalContentFileName(fileName),
+        fileContents
+    )
 }
 
 function sortDocsByDate(docs: Partial<Metadata>[]) {

@@ -1,5 +1,10 @@
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import Link from 'next/link'
+import {
+    localizePath,
+    isLocale,
+    defaultLocale,
+} from '~/shared/i18n/locale-path'
 import { DOCS_GITHUB_REPO_URL } from '~/shared/config/external-links'
 
 const footerLinks = [
@@ -10,6 +15,8 @@ const footerLinks = [
 ]
 
 export default async function Footer() {
+    const value = await getLocale()
+    const locale = isLocale(value) ? value : defaultLocale
     const commonT = await getTranslations('common')
     const footerT = await getTranslations('footer')
 
@@ -36,7 +43,7 @@ export default async function Footer() {
                     {footerLinks.map((link) => (
                         <Link
                             key={link.key}
-                            href={link.href}
+                            href={localizePath(link.href, locale)}
                             target={link.external ? '_blank' : undefined}
                             rel={
                                 link.external

@@ -12,16 +12,20 @@
 
 ## Required Updates
 
+새 문서에는 [역할별 문서 템플릿](documentation-templates.md)을 적용하고, 완료 체크에 따라 목차와 상대 링크를 확인합니다.
+
 Codex가 작업할 때 기본적으로 지켜야 하는 최소 문서화 범위는 다음과 같습니다.
 
-1. 모든 작업은 `docs/worklog/`에 기록합니다.
+1. 모든 작업은 `docs/worklog/YYYY-MM/`에 기록합니다.
 2. 구조적 결정이나 장기 영향이 있는 변경은 `docs/architecture/`에 ADR로 남깁니다.
 3. 반복될 운영 절차나 협업 규칙은 `docs/process/` 또는 향후 `docs/runbooks/`에 정리합니다.
 4. 같은 유형의 설명이 두 번 이상 반복되거나, 다음 작업자가 미리 알면 시간을 아낄 수 있는 내용은 `docs/knowledge/`에 승격합니다.
+5. 검증 중심의 실행 결과는 `docs/verification/<주제>/`, 원본 측정값은 `docs/verification/artifacts/`에 보관하고 worklog에서 연결합니다.
+6. 상세 분류와 이동 규칙은 [문서 역할과 구조](documentation-organization.md)를 따릅니다.
 
 ## Worklog Rule
 
-작업이 끝날 때 `docs/worklog/`에는 아래 항목이 남아 있어야 합니다.
+작업이 끝날 때 `docs/worklog/YYYY-MM/YYYY-MM-DD-주제.md`에는 아래 항목이 남아 있어야 합니다.
 
 - `Summary`
 - `Changed`
@@ -44,6 +48,8 @@ Codex가 작업할 때 기본적으로 지켜야 하는 최소 문서화 범위�
 - 공용 컴포넌트 책임이 달라질 때
 - 데이터 흐름이나 라우팅 기준이 달라질 때
 - 이후 작업에 반복적으로 참조될 결정이 생길 때
+
+작업 전 적용 중인 ADR을 확인하고, 작업 후 기존 결정과 충돌하거나 새 장기 선택이 생겼는지 점검합니다. 한 결정은 한 ADR에 기록하고, 대체 관계와 상태는 [ADR 관리 규칙](adr-management.md)에 따라 갱신합니다. 단순 구현·오류 수정에는 ADR을 강제하지 않습니다.
 
 ## Knowledge Rule
 

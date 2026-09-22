@@ -1,9 +1,67 @@
 import assert from 'node:assert/strict'
+import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 import { Fragment, createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { normalizeRemoteContent } from './content-api-html.ts'
 import { renderArticleContent } from './render-article-content.ts'
+
+for (const codeHighlight of [false, true]) {
+    test(`local GFM tables render with codeHighlight=${codeHighlight}`, async () => {
+        const rendered = await renderArticleContent(
+            {
+                contentFormat: 'mdx',
+                content: [
+                    '## Resources',
+                    '',
+                    '| Resource | Impact |',
+                    '| --- | --- |',
+                    '| `<head>` CSS | **Blocking** |',
+                    '| Image | Non-blocking |',
+                ].join('\n'),
+            },
+            { codeHighlight }
+        )
+        assert.equal(rendered.mode, 'mdx')
+        const markup = renderToStaticMarkup(
+            createElement(Fragment, null, rendered.content)
+        )
+        assert.match(markup, /<table>/)
+        assert.match(
+            markup,
+            /<thead><tr><th>Resource<\/th><th>Impact<\/th><\/tr><\/thead>/
+        )
+        assert.match(markup, /<td><code>&lt;head&gt;<\/code> CSS<\/td>/)
+        assert.match(markup, /<td><strong>Blocking<\/strong><\/td>/)
+        assert.equal((markup.match(/<tbody>/g) ?? []).length, 1)
+        assert.equal((markup.match(/<tr>/g) ?? []).length, 3)
+        assert.doesNotMatch(markup, /\| --- \|/)
+        assert.equal(rendered.toc?.[0]?.value, 'Resources')
+    })
+}
+
+test('critical rendering path article renders its resource comparison as a table', async () => {
+    const content = await readFile(
+        new URL(
+            '../category/fe/browser/critical-rendering-path-diagnosis.mdx',
+            import.meta.url
+        ),
+        'utf8'
+    )
+    const rendered = await renderArticleContent(
+        { contentFormat: 'mdx', content },
+        { codeHighlight: false }
+    )
+    assert.equal(rendered.mode, 'mdx')
+    const markup = renderToStaticMarkup(
+        createElement(Fragment, null, rendered.content)
+    )
+    assert.match(markup, /<th>리소스<\/th>/)
+    assert.match(markup, /<th>초기 화면에 주는 기본 영향<\/th>/)
+    assert.match(markup, /<td>HTML<\/td>/)
+    assert.match(markup, /<td>DOM 구성의 시작점<\/td>/)
+    assert.doesNotMatch(markup, /\| 리소스/)
+})
 
 test('renderArticleContent normalizes remote html content and extracts toc', async () => {
     const rendered = await renderArticleContent({

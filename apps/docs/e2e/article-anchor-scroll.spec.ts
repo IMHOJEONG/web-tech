@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test'
 
 type HeadingPosition = {
+    headerTop: number
+    headerHeight: number
     headerBottom: number
     headingTop: number
     viewportHeight: number
@@ -45,6 +47,8 @@ test.describe('docs article anchor navigation', () => {
             const headerRect = header.getBoundingClientRect()
 
             return {
+                headerTop: Math.round(headerRect.top),
+                headerHeight: Math.round(headerRect.height),
                 headerBottom: Math.round(headerRect.bottom),
                 headingTop: Math.round(headingRect.top),
                 viewportHeight: window.innerHeight,
@@ -55,9 +59,16 @@ test.describe('docs article anchor navigation', () => {
 
         expect(position).not.toBeNull()
 
-        const { headerBottom, headingTop, viewportHeight } =
-            position as HeadingPosition
+        const {
+            headerTop,
+            headerHeight,
+            headerBottom,
+            headingTop,
+            viewportHeight,
+        } = position as HeadingPosition
 
+        expect(headerTop).toBe(0)
+        expect(headerHeight).toBe(65)
         expect(headingTop).toBeGreaterThanOrEqual(headerBottom + 8)
         expect(headingTop).toBeLessThan(viewportHeight * 0.75)
     })

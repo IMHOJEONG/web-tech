@@ -193,4 +193,4 @@ pnpm branch:sync-feature:push
 - `docs/process/code-review-process.md`
 - `docs/process/commit-message-convention.md`
 - `docs/process/codex-documentation-policy.md`
-- `docs/worklog/2026-06-17-trunk-based-branch-policy.md`
+- `docs/worklog/2026-06/2026-06-17-trunk-based-branch-policy.md`

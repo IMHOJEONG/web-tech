@@ -1,0 +1,16 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "erasableSyntaxOnly": true,
+        "incremental": false,
+        "noEmit": true,
+        "plugins": [],
+        "types": ["node"]
+    },
+    "include": [
+        "playwright.crp.config.ts",
+        "crp-e2e/**/*.ts",
+        "../../docs/examples/critical-rendering-path-lab/server.ts"
+    ],
+    "exclude": [".next", "node_modules"]
+}

@@ -1,0 +1,269 @@
+---
+title: '닫았는데, 어디로 돌아가야 하지?'
+slug: dialog-focus-restoration
+date: 2026-09-21
+updatedAt: 2026-09-21
+summary: Dialog와 Drawer를 닫은 뒤 끊기는 키보드 탐색. 작은 재현 예제로 포커스 복귀 위치, aria-hidden 경고, 닫힘 타이밍을 나누어 살펴봅니다.
+authorName: 'HoJeong Im'
+authorRole: 'Web Engineer'
+readMinutes: 12
+topicLabel: 'ACCESSIBILITY'
+tags:
+    - accessibility
+    - focus
+    - dialog
+    - keyboard
+    - radix
+status: draft
+---
+
+## 창은 닫혔는데 작업은 이어지지 않는다
+
+목록에서 수정 버튼을 눌렀다. 작은 창에서 내용을 바꾸고 닫았다. 마우스로 보면 별다른 문제가 없다. 창이 사라졌고, 다음에 누를 버튼도 보인다.
+
+이번에는 키보드로 같은 일을 해보자. 닫은 뒤 Tab을 눌렀을 때 어디로 이동하는가? 방금 수정하던 항목의 다음 버튼인가, 페이지 맨 위 메뉴인가? 포커스 표시가 보이지 않아 Tab을 몇 번 더 눌러야 하는가?
+
+이 차이는 색상이나 그림자로 고치기 어렵다. 창을 닫는 구현에는 **사용자가 이어서 작업할 위치를 돌려주는 책임**도 있기 때문이다.
+
+이 글은 모달 Dialog와 모달로 동작하는 Drawer의 닫힘을 다룬다. 먼저 브라우저 기본 요소로 문제를 줄여 보고, React와 Radix에서 같은 질문을 어떻게 적용하는지 살펴본다. 특정 제품에서 발견한 장애를 재현했다고 주장하는 글은 아니다.
+
+## Drawer라는 이름보다 모달인지가 먼저다
+
+옆에서 미끄러져 나오는 패널이라고 해서 모두 같은 포커스 규칙을 갖는 것은 아니다. 배경을 계속 조작할 수 있는 패널과, 패널을 닫기 전까지 현재 작업에 머물러야 하는 모달은 다르다.
+
+WAI-ARIA APG의 모달 패턴에서는 열린 창 안으로 포커스를 이동하고, Tab 탐색을 창 내부에 유지하며, 닫으면 일반적으로 호출한 요소로 돌려보낸다. 호출 요소가 없어졌거나 다음 작업으로 이어지는 편이 자연스러우면 다른 복귀 위치를 정할 수 있다. [APG 모달 Dialog 패턴](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+
+첫 포커스도 무조건 첫 입력란은 아니다. 긴 설명을 먼저 읽어야 하면 제목 같은 정적 요소가, 되돌리기 어려운 작업이면 취소 같은 덜 파괴적인 선택지가 적절할 수 있다. 이것은 키보드 이벤트 처리 이전에 정할 UX다.
+
+> [!NOTE]
+> 이 글의 모달 규칙을 모든 Popover에 적용하지 않는다. 네이티브 Popover API는 비모달이며, 라이브러리 컴포넌트는 같은 이름이어도 설정에 따라 동작이 다를 수 있다. 모양이 아니라 배경 조작 가능 여부를 먼저 확인한다.
+
+네이티브 Popover의 동작 범위는 [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)에 설명되어 있다.
+
+## 닫기를 하나의 순간으로 보면 놓치는 것
+
+React 코드에서는 `setOpen(false)` 한 줄이면 닫힌 것처럼 보인다. 하지만 다음 질문은 서로 다르다.
+
+| 확인할 것                       | 의미                                  |
+| ------------------------------- | ------------------------------------- |
+| open 상태가 false인가?          | 애플리케이션이 닫힘을 요청했는가      |
+| 닫힘 애니메이션이 끝났는가?     | 시각적 전환이 끝났는가                |
+| 포커스 제한이 해제되었는가?     | 바깥 요소로 이동할 수 있는가          |
+| Content가 DOM에서 제거되었는가? | 기존 요소가 아직 연결되어 있는가      |
+| 복귀 위치가 유효한가?           | 이동할 요소가 남아 있고 조작 가능한가 |
+
+이 표의 순서는 모든 라이브러리의 실행 순서를 뜻하지 않는다. 어떤 구현은 애니메이션 동안 DOM을 유지하고, 어떤 구현은 먼저 제거한다. 그래서 닫는 클릭 핸들러에서 곧바로 외부 입력란에 `focus()`를 호출하면 다른 포커스 관리 코드와 충돌할 수 있다.
+
+**상태가 바뀌었다는 사실만으로 DOM 정리와 포커스 복귀까지 끝났다고 판단하지 않는 것**이 출발점이다.
+
+## 라이브러리를 빼고 작은 예제로 확인하기
+
+아래 예제는 디자인, 네트워크 요청, 닫힘 애니메이션을 제외한다. 취소하면 열기 버튼으로 돌아가고, 삭제하면 버튼 자체가 사라지므로 목록 제목으로 이동하는 두 경로만 남긴다. 실제 데이터는 삭제하지 않는다.
+
+HTML 파일로 실행할 수 있는 독립 예제다. 브라우저가 바로 실행하도록 script 부분은 JavaScript로 작성했다.
+
+```html
+<!doctype html>
+<html lang="ko">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>닫은 뒤의 포커스</title>
+    <style>
+        body {
+            max-width: 40rem;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        button {
+            padding: 0.75rem;
+        }
+        :focus-visible {
+            outline: 3px solid #175cd3;
+            outline-offset: 4px;
+        }
+        dialog {
+            max-width: min(28rem, 80vw);
+        }
+        dialog::backdrop {
+            background: rgb(0 0 0 / 40%);
+        }
+    </style>
+    <body>
+        <h1 id="list-title" tabindex="-1">문서 목록</h1>
+        <button id="open" type="button">이 문서 삭제</button>
+        <button id="next" type="button">새 문서 만들기</button>
+
+        <dialog
+            id="confirm"
+            aria-labelledby="dialog-title"
+            aria-describedby="dialog-description"
+        >
+            <h2 id="dialog-title">문서를 삭제할까요?</h2>
+            <p id="dialog-description">예제에서는 열기 버튼만 제거합니다.</p>
+            <button id="cancel" type="button" autofocus>취소</button>
+            <button id="remove" type="button">삭제</button>
+        </dialog>
+
+        <script>
+            const dialog = document.querySelector('#confirm')
+            const trigger = document.querySelector('#open')
+            const listTitle = document.querySelector('#list-title')
+
+            trigger.addEventListener('click', () => dialog.showModal())
+            document.querySelector('#cancel').addEventListener('click', () => {
+                dialog.close()
+            })
+            document.querySelector('#remove').addEventListener('click', () => {
+                trigger.remove()
+                dialog.close()
+            })
+            dialog.addEventListener('close', () => {
+                if (!trigger.isConnected) {
+                    listTitle.focus()
+                }
+            })
+        </script>
+    </body>
+</html>
+```
+
+`showModal()`은 배경과 상호작용할 수 없는 모달로 연다. `show()`나 `open` 속성만으로 여는 것과는 다르다. 이 예제에서는 기본 Escape 동작을 막지 않으며, 키보드가 없는 환경에서도 닫을 수 있도록 취소 버튼을 둔다. [MDN dialog 요소](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog)
+
+취소 경로에는 수동 복귀 코드를 넣지 않았다. 브라우저의 기본 복귀를 먼저 확인하려는 의도다. 삭제 경로에만 애플리케이션이 정한 대체 위치를 추가했다. 제목의 `tabindex="-1"`은 스크립트로 포커스를 받을 수 있게 하지만 일반 Tab 순서에 새 정지점을 추가하지 않는다.
+
+### 같은 예제에서 한 조건씩 바꾸기
+
+1. 키보드로 삭제 버튼에 도달해 Enter로 연다. 취소에 포커스가 있는지 확인하고 Escape로 닫는다. 열기 버튼으로 돌아오면 다음 Tab은 새 문서 만들기로 이어져야 한다.
+2. 다시 열고 삭제를 선택한다. 열기 버튼은 없어지고 목록 제목으로 이동해야 한다.
+3. `close` 리스너만 제거하고 2번을 반복한다. 사라진 버튼으로는 돌아갈 수 없다. 현재 포커스와 다음 Tab 위치를 기록한다. 특정 브라우저가 반드시 `body`로 간다고 미리 단정하지 않는다.
+
+이 비교가 보여주는 것은 “모든 닫기에 수동 focus가 필요하다”가 아니다. **기본 복귀로 충분한 경로와, 제품이 대체 위치를 정해야 하는 경로가 다르다**는 점이다.
+
+예제는 `isConnected`만 검사한다. 실제 제품에서는 연결되어 있어도 버튼이 disabled이거나 숨겨져 있을 수 있다. 목록 갱신, 필터 변경, 라우트 이동 뒤에도 대체 위치가 보이고 포커스를 받을 수 있는지 별도로 확인해야 한다.
+
+## aria-hidden 경고는 무엇을 알려주는가
+
+콘솔에서 아래 메시지를 만났다면 애니메이션 시간을 늘리기 전에 현재 포커스와 숨기려는 영역을 함께 보자.
+
+```text
+Blocked aria-hidden on an element because its descendant retained focus
+```
+
+`aria-hidden="true"`는 보조 기술에 해당 하위 트리를 노출하지 않겠다는 의미다. 하지만 그 속성만으로 키보드 포커스나 클릭을 막지는 않는다. 포커스를 가진 요소의 조상에 적용하면 “현재 조작 중인 위치를 접근성 트리에서는 숨기겠다”는 충돌이 생긴다. [MDN aria-hidden](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-hidden)
+
+`inert`는 포커스와 상호작용도 막는 별도 기능이다. 그렇다고 경고가 나는 곳마다 `aria-hidden`을 `inert`로 치환하는 것은 해결책이 아니다. 활성 Dialog까지 포함하는 조상에 적용하면 의도한 창도 영향을 받을 수 있다. 어떤 영역을 비활성화할지와 포커스를 어디로 옮길지를 같이 정해야 한다. [MDN inert](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/inert)
+
+확인할 것은 세 가지다. 포커스가 어느 요소에 남아 있는지, 그 요소의 어떤 조상이 숨겨지는지, 그 속성을 누가 변경하는지다. Overlay 라이브러리가 관리하는 속성을 애플리케이션이 다시 덮어쓰고 있지 않은지도 살핀다.
+
+이 경고는 닫힐 때만의 문제가 아니다. 열면서 배경을 숨기는 순간에도 생길 수 있다. 반대로 경고가 없다고 해서 닫힌 뒤의 탐색이 올바르다는 뜻도 아니다. 위 네이티브 예제는 복귀 위치를 비교하는 예제이지, 이 경고를 반드시 발생시키는 재현 코드는 아니다.
+
+## 어떤 로그를 남겨야 타이밍을 구분할 수 있을까
+
+전체 DOM이나 입력값보다 이벤트 시점과 요소 식별자를 기록한다. 다음은 개발 중 일반 DOM에서 사용할 수 있는 TypeScript 관찰 코드다.
+
+```ts
+function describeFocus() {
+    const active = document.activeElement
+    if (!(active instanceof HTMLElement)) return null
+
+    return {
+        tag: active.tagName,
+        id: active.id,
+        connected: active.isConnected,
+        hiddenAncestor: Boolean(active.closest('[aria-hidden="true"]')),
+        inertAncestor: Boolean(active.closest('[inert]')),
+    }
+}
+
+function logFocus() {
+    console.debug('focusin', performance.now(), describeFocus())
+}
+
+document.addEventListener('focusin', logFocus)
+// 관찰을 끝내면 정리한다.
+// document.removeEventListener('focusin', logFocus);
+```
+
+여기에 닫힘 요청 직전, 라이브러리의 복귀 콜백, 실제 Content 제거 시점의 로그를 같은 시간 기준으로 붙인다. 속성 변경은 개발자 도구의 해당 요소에 attribute modification breakpoint를 걸어 호출 경로를 확인할 수 있다.
+
+이 로그에도 한계가 있다. 네이티브 모달의 배경 비활성화는 반드시 DOM에 `[inert]` 속성으로 나타나지는 않는다. Shadow DOM이나 iframe 내부 포커스도 이 코드만으로 끝까지 추적하지 못한다. `inertAncestor: false`를 “배경이 활성 상태”라는 판정으로 사용하지 않는다.
+
+또한 `document.activeElement`는 DOM 포커스다. 스크린 리더의 가상 커서와 읽기 위치까지 증명하지 않으므로 실제 음성 안내는 별도 점검이 필요하다.
+
+## Radix에서는 기본 복귀를 먼저 살린다
+
+Radix Dialog는 모달 포커스 관리와 `onCloseAutoFocus` 훅을 제공한다. 일반적인 취소·닫기에서는 `Dialog.Trigger`와 `Dialog.Content`의 기본 동작을 먼저 사용한다. [Radix Dialog API](https://www.radix-ui.com/primitives/docs/components/dialog)
+
+삭제 후 다음 작업으로 이동해야 하는 경우처럼 기본 복귀와 목적지가 다를 때만 훅을 사용한다. 다음 TSX는 전체 컴포넌트가 아니라 해당 정책을 붙이는 부분이다. `Dialog`는 `@radix-ui/react-dialog`의 namespace import, `listTitleRef`는 항상 렌더링되는 목록 제목, `deletedRef`는 삭제 성공 후 true로 설정하는 ref를 뜻한다.
+
+```tsx
+<Dialog.Content
+    onCloseAutoFocus={(event) => {
+        if (!deletedRef.current) return
+
+        const target = listTitleRef.current
+        if (!target?.isConnected) return
+
+        event.preventDefault()
+        target.focus()
+        deletedRef.current = false
+    }}
+>
+    <Dialog.Title>문서를 삭제할까요?</Dialog.Title>
+    <Dialog.Description>삭제 후에는 복구할 수 없습니다.</Dialog.Description>
+    {/* 취소와 삭제 컨트롤 */}
+</Dialog.Content>
+```
+
+이 예제의 전제는 제목이 `tabIndex={-1}`을 갖고, 숨겨지거나 비활성화되지 않으며, Dialog가 닫히는 동안에도 유지된다는 것이다. 비동기 삭제는 성공한 뒤에만 삭제 여부와 닫힘 상태를 바꾼다. 실패했다면 오류를 창 안에서 안내하고 사용자가 재시도할 수 있게 한다.
+
+`preventDefault()`는 경고를 지우는 명령이 아니다. 라이브러리의 기본 복귀 대신 애플리케이션이 이동을 책임지겠다는 선택이다. 대상이 없어지는 구조라면 이 콜백에 방어 조건만 늘리지 말고, 유지되는 대체 위치부터 설계해야 한다.
+
+작성 시 확인한 설치 버전은 Radix Dialog 1.1.15다. 해당 버전의 모달 구현은 닫힘 자동 포커스 처리에서 trigger ref로 복귀하며, 사용자 핸들러가 기본 동작을 취소할 수 있도록 구성되어 있다. 이것은 소스 확인 결과이고 위 TSX를 제품 화면에서 검증했다는 뜻은 아니다. shadcn 래퍼나 Drawer 구현이 이 훅을 그대로 전달하는지도 실제 설치 코드에서 확인해야 한다.
+
+## 300ms를 기다리면 해결되는 것처럼 보이는 이유
+
+`setTimeout(() => target.focus(), 300)`을 넣고 경고가 사라질 수는 있다. 그 실행에서 기존 포커스 관리가 먼저 끝났을 가능성이 있다. 하지만 그 숫자는 DOM 정리 완료를 보장하지 않는다.
+
+애니메이션 길이가 바뀌거나 모션을 줄이는 설정이 적용되면 기다리는 시간과 실제 전환의 관계가 달라진다. 빠르게 다시 열었는데 이전 타이머가 실행되면 새 창의 포커스를 빼앗을 수도 있다. `requestAnimationFrame` 한 번 역시 특정 라이브러리의 정리 완료를 보장하는 계약은 아니다.
+
+선택 기준은 다음처럼 나눈다.
+
+| 상황                                        | 먼저 선택할 방법                                 |
+| ------------------------------------------- | ------------------------------------------------ |
+| 호출 버튼이 그대로 남는 일반적인 닫기       | 브라우저·라이브러리 기본 복귀                    |
+| 삭제 등으로 복귀 위치가 달라짐              | 공식 복귀 훅에서 목적지 지정                     |
+| 직접 만든 애니메이션과 DOM 제거를 직접 관리 | 닫힘 완료·취소·재열림을 포함하는 명시적 생명주기 |
+| 특정 라이브러리 버그가 의심됨               | 버전을 고정한 최소 재현과 이슈 확인              |
+
+직접 만든 구현에서 애니메이션 종료 이벤트를 쓴다면 자식의 이벤트 버블링, 애니메이션 취소, 모션을 껐을 때 이벤트 발생 여부까지 다뤄야 한다. “종료 이벤트에 focus를 넣는다”만으로 재사용 가능한 해결책이 완성되지는 않는다.
+
+## 닫힘 테스트의 끝은 다음 Tab이다
+
+창이 화면에서 사라지는지와 포커스가 돌아오는지는 별도로 검사한다. 다음 시나리오를 실제 UI에서 반복할 수 있어야 한다.
+
+| 시나리오                    | 확인할 결과                                       |
+| --------------------------- | ------------------------------------------------- |
+| 키보드로 열기               | 의도한 시작점에 포커스가 보임                     |
+| Tab / Shift + Tab           | 모달 뒤쪽 컨트롤을 조작하지 않음                  |
+| 취소 버튼 / Escape          | 호출 위치로 복귀하고 다음 탐색이 이어짐           |
+| 삭제 성공                   | 사라진 버튼 대신 남아 있는 작업 위치로 이동       |
+| 저장 실패                   | 창이 성급히 닫히지 않고 오류와 재시도 경로가 있음 |
+| 닫는 중 재열기              | 이전 닫힘 작업이 새 포커스를 빼앗지 않음          |
+| 모션 감소 / 애니메이션 제거 | 종료 이벤트에만 의존하지 않고 정상 복귀           |
+
+자동화에서는 닫힘 후 `toBeFocused()`로 목적지를 검사하고 다음 Tab 이동도 확인할 수 있다. 다만 자동 검사는 접근성 전체를 증명하지 못한다. 키보드 수동 조작, VoiceOver 또는 NVDA의 제목·역할 안내, 모바일 닫기 버튼도 따로 확인한다. [Playwright 접근성 테스트 안내](https://playwright.dev/docs/accessibility-testing)
+
+2026-09-21, Playwright 1.62.1의 headless Chromium 151.0.7922.34에서 위 HTML을 실행했다. 취소와 Escape는 열기 버튼으로, 삭제는 목록 제목으로 복귀했다. 세 경로 모두 다음 Tab은 새 문서 만들기로 이어졌다.
+
+복귀 리스너를 제거하면 목록 제목에는 도달하지 않았다. 두 차례 실행에서 닫힘 직후 읽은 `document.activeElement`는 각각 `BODY`와 닫힌 창 안의 삭제 버튼이었다. 이 순간의 스냅샷을 브라우저의 최종 복귀 규칙으로 단정할 수는 없다. 검사도 특정 요소에 남는다고 가정하지 않고, 의도한 대체 위치에 도달하지 못했다는 점만 확인한다.
+
+이 결과는 네이티브 예제의 제한된 키보드 시나리오에 한정된다. Safari·Firefox, 실제 모바일, 스크린 리더, Radix 적용 예제는 이번 브라우저 실험에 포함하지 않았다. 작은 예제의 통과를 애니메이션·비동기 요청·중첩 Overlay가 있는 제품 전체의 보증으로 확대하지 않는다.
+
+## 포커스 복귀는 사용자가 하던 일을 보존하는 일이다
+
+포커스 문제를 발견했을 때 가장 먼저 물어볼 것은 “몇 ms 뒤에 옮길까?”가 아니다. **사용자가 이 창을 닫고 나서 무엇을 하려는가?**가 먼저다.
+
+목적지가 정해지면 기본 동작으로 충분한지 판단할 수 있다. 기본 동작과 다를 때만 복귀를 재정의하고, 그 시점은 브라우저나 라이브러리의 생명주기에 맞춘다. 마지막으로 창이 없어졌다는 사실이 아니라 다음 키 입력으로 작업을 이어갈 수 있는지 확인한다.
+
+닫기 버튼의 기능은 창을 지우는 데서 끝나지 않는다.

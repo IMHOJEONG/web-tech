@@ -20,6 +20,8 @@
 - 실제 값은 절대 저장소에 커밋하지 않는다.
 - 배포에 필요한 값은 Vercel에 등록한다.
 - root `turbo.json > globalEnv`에는 repo-wide 값만 둔다.
+- secret의 소유자, 회전 주기와 폐기 절차는
+  `docs/architecture/docs-secret-token-lifecycle-policy.md`를 따른다.
 
 ## Checklist Table
 
@@ -37,9 +39,20 @@
 | `BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC`   | Optional                     | Yes            | Yes          | If used | 외부망 본문 base URL, 우선                |
 | `BLOG_CONTENT_MARKDOWN_PATH_PREFIX`       | Yes                          | Yes            | Yes          | Yes     | 기본값은 `/posts`                         |
 | `BLOG_CONTENT_REVALIDATE_SECONDS`         | Yes                          | Yes            | Yes          | Yes     | ISR 주기, 기본값은 `300`                  |
+| `BLOG_CONTENT_REVALIDATE_TOKEN`           | Yes                          | Yes            | Yes          | Yes     | cache webhook Bearer 토큰, 커밋 금지      |
 | `BLOG_CONTENT_API_TIMEOUT_MS`             | Yes                          | Yes            | Yes          | Yes     | 원격 content API timeout, 기본값은 `2500` |
 | `BLOG_CONTENT_INCLUDE_REMOTE_INDEX`       | Yes                          | Yes            | Yes          | If used | 기본값은 `true`, 로컬 전용이면 `false`    |
 | `CLOUDFLARE_API_TOKEN`                    | Repo-level usage             | No             | Yes          | If used | `docs` 앱 전용은 아님                     |
+
+Better Stack 서버 로그 수집(선택, 앱의 `DOCS_*` 및 루트 `globalEnv`에 선언):
+
+| Variable                          | 설정 위치                              | 용도                                        |
+| --------------------------------- | -------------------------------------- | ------------------------------------------- |
+| `DOCS_BETTER_STACK_SOURCE_TOKEN`  | `.env.local` 또는 Vercel 서버 환경변수 | 소스 쓰기 토큰, 커밋 금지                   |
+| `DOCS_BETTER_STACK_INGESTING_URL` | 위와 동일                              | 소스의 HTTPS Ingesting host origin          |
+| `DOCS_BETTER_STACK_ENVIRONMENT`   | 위와 동일                              | `production`, `preview`, `development` 구분 |
+
+연결 절차는 [원격 payload 관측 runbook](./docs-remote-payload-observability.md#better-stack-연결)을 따른다.
 
 ## Local Setup
 
@@ -54,6 +67,7 @@ BLOG_CONTENT_API_POSTS_PATH=/api/posts
 BLOG_CONTENT_MARKDOWN_BASE_URL=http://localhost:8000
 BLOG_CONTENT_MARKDOWN_PATH_PREFIX=/posts
 BLOG_CONTENT_REVALIDATE_SECONDS=300
+BLOG_CONTENT_REVALIDATE_TOKEN=replace-with-dedicated-revalidation-token
 BLOG_CONTENT_API_TIMEOUT_MS=2500
 BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true
 ```
@@ -66,6 +80,7 @@ BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true
 - 코드는 여러 후보를 순차 fallback 하지 않고, 우선순위에 따라 하나의 endpoint만 선택한다.
 - 현재 우선순위는 `PUBLIC -> INTERNAL -> DEFAULT`다.
 - 콘텐츠 endpoint가 외부에 노출돼 있어도 브라우저 직접 접근을 막고 싶다면 `BLOG_CONTENT_API_TOKEN`으로 server-to-server 인증을 붙인다.
+- NAS에서 Vercel cache를 만료시킬 때는 별도의 `BLOG_CONTENT_REVALIDATE_TOKEN`으로 `POST /api/revalidate/content`를 보호한다.
 - 원격 문서는 기본으로 `/feed`, `/docs`, 검색/허브 목록에 합친다.
 - 로컬 문서만으로 렌더링해야 하는 개발/점검 환경에서는 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`를 설정한다.
 
@@ -83,6 +98,7 @@ BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true
 
 - 실제 선택되는 endpoint가 `PUBLIC`, `INTERNAL`, `DEFAULT` 중 무엇인지 명확한가
 - 토큰 보호를 쓴다면 `Authorization: Bearer <BLOG_CONTENT_API_TOKEN>` 없이 `401/403`이 나는가
+- `POST /api/revalidate/content`가 토큰 없이 `401`, 올바른 revalidation 토큰으로 `200`을 반환하는가
 
 5. 목록 API의 `markdownPath` 값이 본문 API 라우트 규칙과 일치하는가
    - 예: `web/test`, `feed/sample`, `ui-ux/blocked-aria-hidden`, `mobile/intro`
@@ -135,5 +151,7 @@ BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true
 
 ## Related Docs
 
-- [docs/architecture/blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
-- [docs/architecture/blog-content-html-vs-markdown.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-html-vs-markdown.md)
+- [docs/architecture/blog-content-api-contract.md](../architecture/blog-content-api-contract.md)
+- [docs/architecture/blog-content-html-vs-markdown.md](../architecture/blog-content-html-vs-markdown.md)
+- [docs/architecture/docs-content-cache-revalidation-policy.md](../architecture/docs-content-cache-revalidation-policy.md)
+- [docs/architecture/docs-secret-token-lifecycle-policy.md](../architecture/docs-secret-token-lifecycle-policy.md)

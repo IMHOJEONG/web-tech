@@ -10,6 +10,7 @@
     "dev:vuln-radar": "turbo dev --filter=vuln-radar",
     "dev:vuln-radar:full": "turbo dev --filter=vuln-radar --filter=vuln-radar-backend",
     "dev:docs": "turbo dev --filter=docs",
+    "dev:crp-lab": "node --experimental-strip-types docs/examples/critical-rendering-path-lab/server.ts",
     "start:vuln-radar": "turbo start --filter=vuln-radar",
     "start:vuln-radar:full": "turbo start --filter=vuln-radar --filter=vuln-radar-backend",
     "start:docs": "turbo start --filter=docs",
@@ -22,9 +23,11 @@
     "typecheck:docs-backend": "turbo typecheck --filter=docs-backend",
     "check:docs-backend": "pnpm --filter docs-backend check",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format:staged:check": "node ./scripts/check-staged-format.mjs --staged",
+    "validate:docs": "node ./scripts/check-documentation.mjs",
     "lint": "turbo lint",
     "lint:web-apps": "turbo lint --filter=docs --filter=vuln-radar",
-    "test:repo": "node --test ./scripts/validate-catalog-references.test.mjs",
+    "test:repo": "node --test ./scripts/*.test.mjs",
     "branch:sync-feature": "bash ./scripts/sync-feature-branches.sh",
     "branch:sync-feature:apply": "bash ./scripts/sync-feature-branches.sh --apply",
     "branch:sync-feature:push": "bash ./scripts/sync-feature-branches.sh --apply --push",
@@ -34,7 +37,10 @@
     "rm:pnpm-store": "rm -rf \"$(pnpm store path)\"",
     "prepare": "simple-git-hooks",
     "test": "turbo test",
+    "test:crp-lab": "pnpm typecheck:crp-lab && node --experimental-strip-types --test docs/examples/critical-rendering-path-lab/server.test.ts",
+    "test:crp-lab:browser": "pnpm --filter docs test:crp-lab:browser",
     "typecheck": "turbo typecheck",
+    "typecheck:crp-lab": "tsc -p docs/examples/critical-rendering-path-lab/tsconfig.json",
     "vercel:deploy:vuln-radar": "vercel --cwd apps/vuln-radar && vercel deploy",
     "vercel:deploy:docs": "vercel --cwd apps/docs && vercel deploy",
     "update:simple-git-hooks": "npx simple-git-hooks"
@@ -43,6 +49,7 @@
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
     "@eslint/compat": "catalog:",
+    "@types/node": "catalog:",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "simple-git-hooks": "catalog:",
@@ -51,11 +58,10 @@
   },
   "simple-git-hooks": {
     "commit-msg": "./scripts/pnpmw.sh exec commitlint --edit \"$1\"",
-    "pre-commit": "./scripts/pnpmw.sh format && echo 'ok'",
-    "pre-push": "./scripts/pnpmw.sh format"
+    "pre-commit": "./scripts/pnpmw.sh format:staged:check && ./scripts/pnpmw.sh validate:docs --staged"
   },
   "engines": {
-    "node": ">=24"
+    "node": "24.x"
   },
   "packageManager": "pnpm@11.10.0+sha512.0b7f8b98060031904c017e3a41eb187a16d40eeb829b95c4f8cb03681761fc4ab53dd219115b9b447f4dce1a05a214764461e7d3703392a9f32f9511ce8c86c8"
 }

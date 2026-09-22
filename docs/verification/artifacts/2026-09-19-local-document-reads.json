@@ -1,0 +1,35 @@
+{
+  "baseCommit": "fda9022",
+  "before": {
+    "uniqueFiles": 15,
+    "totalReads": 30,
+    "maxReadsPerFile": 2,
+    "directoryReads": 32
+  },
+  "after": [
+    {
+      "uniqueFiles": 15,
+      "totalReads": 15,
+      "maxReadsPerFile": 1,
+      "directoryReads": 16
+    },
+    {
+      "uniqueFiles": 15,
+      "totalReads": 15,
+      "maxReadsPerFile": 1,
+      "directoryReads": 16
+    },
+    {
+      "uniqueFiles": 15,
+      "totalReads": 15,
+      "maxReadsPerFile": 1,
+      "directoryReads": 16
+    },
+    {
+      "uniqueFiles": 15,
+      "totalReads": 15,
+      "maxReadsPerFile": 1,
+      "directoryReads": 16
+    }
+  ]
+}
