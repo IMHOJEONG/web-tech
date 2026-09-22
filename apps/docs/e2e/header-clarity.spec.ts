@@ -16,7 +16,7 @@ for (const locale of ['ko', 'en']) {
             } else {
                 await expect(page.locator('html')).not.toHaveClass(/\bdark\b/)
             }
-            const header = page.locator('header')
+            const header = page.getByRole('banner')
             const trigger = header.locator(
                 'form button[aria-expanded][aria-controls]'
             )
@@ -90,7 +90,7 @@ test('header and expanded search fit narrow and breakpoint widths', async ({
     await page.goto('/en/web')
     for (const width of [320, 390, 640, 768, 1024, 1280]) {
         await page.setViewportSize({ width, height: 844 })
-        const header = page.locator('header')
+        const header = page.getByRole('banner')
         const trigger = header.locator(
             'form button[aria-expanded][aria-controls]'
         )

@@ -108,6 +108,13 @@ test("new private absolute links fail", () => {
     ).some((e) => e.includes("absolute-link:")),
   );
 });
+
+test("unterminated long link targets do not backtrack exponentially", () => {
+  const text = `[bad](${"!".repeat(50_000)}\n[ok](good.md)`;
+  assert.deepEqual(linkTargets("docs/a.md", text), [
+    { target: "docs/good.md" },
+  ]);
+});
 test("renamed legacy worklog is not treated as a newly authored template", () => {
   const old = "docs/worklog/2026-09-19-example.md";
   assert.deepEqual(

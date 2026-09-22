@@ -27,7 +27,7 @@ export function linkTargets(file, text) {
   const source = prose(text);
   const urls = [
     ...source.matchAll(
-      /\]\(\s*(<[^>]+>|(?:\\.|[^\s()]+|\([^()]*\))+)(?:\s+["'][^\n]*?["'])?\s*\)/g,
+      /\]\(\s*(<[^>]+>|(?:\\.|[^\s()\\]|\([^()]*\))+)(?:\s+["'][^\n]*?["'])?\s*\)/g,
     ),
   ].map((m) => m[1]);
   urls.push(

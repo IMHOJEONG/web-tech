@@ -10,6 +10,7 @@ import { setTimeout as delay } from 'node:timers/promises'
 import { assertLocaleBoundary } from './test-utils/assert-locale-boundary.mjs'
 import { assertLocaleCacheKey } from './test-utils/assert-locale-cache-key.mjs'
 import { assertLocaleRouting } from './test-utils/assert-locale-routing.mjs'
+import { assertArticleBody } from './test-utils/assert-content-response.mjs'
 
 const app = fileURLToPath(new URL('..', import.meta.url))
 const root = join(app, '../..')
@@ -485,15 +486,7 @@ try {
     console.log('[cache-test] Checking article response', { minimal })
     const page = await request('/docs/feed/cache-probe')
     assert.equal(page.status, 200)
-    const articleHtml = (await page.text()).replace(
-        /<script\b[^>]*>[\s\S]*?<\/script>/gi,
-        ''
-    )
-    assert.match(
-        articleHtml,
-        /<article\b[^>]*>[\s\S]*CACHE_BODY_V3[\s\S]*?<\/article>/i,
-        'Fresh article body must exist in HTML, not only in hydration scripts'
-    )
+    assertArticleBody(await page.text(), 'CACHE_BODY_V3')
     console.log('[PASS] Article renders V3', { minimal })
     console.log('[cache-test] All checks passed')
 } catch (error) {

@@ -25,6 +25,16 @@ API 변경과 한계는 [ADR-0006](../../architecture/adr-0006-shared-ui-base-ui
 - Node 24에서 `pnpm --filter docs test:lib` 149개와 `pnpm test:repo` 19개가 통과했다. 스테이징된 전체 PR diff를 main과 비교한 문서 검사도 통과했다.
 - 전체 CI와 프로덕션 E2E는 이 수정 커밋 이후 다시 확인한다. 이전 실행 결과를 이번 실행의 성공으로 간주하지 않는다.
 
+### 후속 보안·브라우저 검사
+
+- main retarget 후 CodeQL에서 검증 스크립트의 경고 5건이 추가 확인되었다. HTML 정규식 제거 대신 기존 `sanitize-html` 파서를 사용하고, sitemap URL은 `<loc>` 값의 정확 일치로 확인한다. 문서 링크 정규식의 중첩 반복을 제거했다. 경고 억제나 검사 제외는 추가하지 않았다.
+- 반응형 E2E의 실패 12건은 채널 내부의 `header`까지 선택한 strict locator 오류였다. 앱 셸의 의미적 `banner` 역할로 좁혔다. 65px 높이, 내비게이션, 검색 검증은 유지한다.
+- `DOCS_E2E_PORT`가 실제 서버 명령에도 적용되도록 맞춰 기존 3001 개발 서버와 분리해 실행할 수 있게 했다.
+- 재현 명령: `pnpm test:repo`, `pnpm --filter docs test:content`, `pnpm --filter docs test:lib`, `pnpm --filter docs test:article:prod`, `pnpm --filter docs test:cache:prod`, `pnpm --filter docs-backend test:e2e --runInBand`, `pnpm test:crp-lab`.
+- 확인 결과: 저장소 검사 20개, 콘텐츠 검사 19개와 문서 16개 검증, lib 149개, 프로덕션 상세 E2E 44개, 백엔드 계약 5개, CRP 서버 6개 통과. 프로덕션 캐시·로케일 검증도 전체 통과했다. E2E에서 스트림을 일찍 닫는 경우 서버에 `destination stream closed early` 로그가 있었지만 assertion 실패는 없었다.
+- 수정 후 CodeQL 및 전체 CI의 최종 결과는 PR #33 Checks에서 확인한다. 로컬 검증은 NAS 실환경 검증을 대신하지 않는다.
+- `DOCS_E2E_PORT=3117 pnpm --filter docs test:e2e header-clarity.spec.ts --workers=2`: 모바일·태블릿·데스크톱 13개 통과, 화면 폭 sweep 중복 실행 2개는 기존 조건대로 제외했다 (35.5초).
+
 ## Open Questions
 
 Prisma Studio의 Radix 전이 경로, 외부 소비 모노레포, 실제 모바일·스크린 리더 검증이 남아 있다.
