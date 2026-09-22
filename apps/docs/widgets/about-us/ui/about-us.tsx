@@ -1,7 +1,5 @@
 import { getTranslations } from 'next-intl/server'
-import { ArrowUpRight } from 'lucide-react'
-import { FaGithub } from 'react-icons/fa'
-import { FaXTwitter } from 'react-icons/fa6'
+import { AboutAuthor } from './about-author'
 
 function PillBadge({
     label,
@@ -28,8 +26,6 @@ function PillBadge({
 
 export async function AboutUs() {
     const t = await getTranslations('about')
-    const githubHref = t('profile.links.github.href')
-    const twitterHref = t('profile.links.twitter.href')
 
     const pillarCards = [
         {
@@ -129,74 +125,7 @@ export async function AboutUs() {
                     ))}
                 </section>
 
-                <section className="grid gap-4 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,1fr)] lg:items-stretch">
-                    <article className="rounded-3xl border border-border bg-surface-container-lowest p-5">
-                        <div className="flex items-start justify-between gap-4">
-                            <div>
-                                <h2 className="font-display text-xl font-bold tracking-tight text-on-surface">
-                                    {t('profile.name')}
-                                </h2>
-                                <p className="mt-1 font-display text-xs font-semibold tracking-[0.16em] text-primary uppercase">
-                                    {t('profile.role')}
-                                </p>
-                            </div>
-                            <ArrowUpRight className="size-5 shrink-0 text-primary" />
-                        </div>
-
-                        <p className="mt-5 text-sm leading-7 text-on-surface-variant">
-                            {t('profile.bio')}
-                        </p>
-
-                        <div className="mt-6 flex flex-wrap gap-3">
-                            {githubHref ? (
-                                <a
-                                    href={githubHref}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="ds-button-secondary gap-2 px-4 py-2 text-sm"
-                                >
-                                    <FaGithub className="size-4" />
-                                    {t('profile.links.github.label')}
-                                </a>
-                            ) : null}
-                            {twitterHref ? (
-                                <a
-                                    href={twitterHref}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="ds-button-secondary gap-2 px-4 py-2 text-sm"
-                                >
-                                    <FaXTwitter className="size-4" />
-                                    {t('profile.links.twitter.label')}
-                                </a>
-                            ) : (
-                                <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-container px-4 py-2 text-sm text-on-surface-variant">
-                                    <FaXTwitter className="size-4" />
-                                    {t('profile.links.twitter.label')}
-                                </span>
-                            )}
-                        </div>
-                    </article>
-
-                    <article className="relative overflow-hidden rounded-3xl border border-border bg-surface-container-lowest p-5">
-                        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,107,31,0.1),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(139,92,246,0.12),transparent_36%)]" />
-                        <div className="relative grid h-full gap-3 lg:grid-cols-3">
-                            {pillarCards.map((card) => (
-                                <div
-                                    key={card.eyebrow}
-                                    className="flex min-h-32 flex-col justify-between rounded-2xl border border-border/80 bg-background/70 p-4"
-                                >
-                                    <p className="font-display text-xs font-semibold tracking-[0.16em] text-outline uppercase">
-                                        {card.eyebrow}
-                                    </p>
-                                    <p className="mt-6 text-sm font-semibold leading-6 text-on-surface">
-                                        {card.title}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                    </article>
-                </section>
+                <AboutAuthor />
             </div>
         </main>
     )

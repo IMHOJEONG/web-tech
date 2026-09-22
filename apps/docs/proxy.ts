@@ -1,14 +1,26 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { getRequestBlockReason } from './lib/request-blocklist'
+import createMiddleware from 'next-intl/middleware'
+import { routing } from './shared/i18n/routing'
+import { stripLocale } from './shared/i18n/locale-path'
+
+const handleLocale = createMiddleware(routing)
 
 export function proxy(request: NextRequest) {
     const blockReason = getRequestBlockReason(
-        request.nextUrl.pathname,
+        stripLocale(request.nextUrl.pathname),
         request.method
     )
 
     if (!blockReason) {
-        return NextResponse.next()
+        const pathname = request.nextUrl.pathname
+        if (
+            /^\/(api|_next|_vercel)(\/|$)/.test(pathname) ||
+            /\.[^/]+$/.test(pathname)
+        ) {
+            return NextResponse.next()
+        }
+        return handleLocale(request)
     }
 
     console.warn('[docs] Blocked suspicious request.', {

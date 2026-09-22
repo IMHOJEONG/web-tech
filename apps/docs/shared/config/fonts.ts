@@ -15,6 +15,8 @@ export const spaceGrotesk = localFont({
 })
 
 export const mono = localFont({
+    // Code fonts are loaded on demand instead of preloading every weight/style.
+    preload: false,
     src: [
         {
             path: '../../../../packages/ui/common/fonts/jetbrains-mono/JetBrainsMono-Bold.woff2',

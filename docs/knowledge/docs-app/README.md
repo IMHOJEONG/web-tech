@@ -69,14 +69,16 @@
 
 ## 먼저 보면 좋은 문서
 
+- [UI/UX 자료 조사와 콘텐츠 방향](uiux-resource-research.md)
+
 - `docs/architecture/docs-app-information-architecture.md`
 - `docs/architecture/docs-feed-and-docs-routing-policy.md`
 - `docs/architecture/docs-responsive-policy.md`
 - `docs/architecture/docs-content-routing-policy.md`
 - `docs/architecture/docs-search-experience-policy.md`
-- `docs/worklog/2026-05-05-docs-feed-and-docs-routing.md`
-- `docs/worklog/2026-05-05-docs-search-experience.md`
-- `docs/worklog/2026-05-08-channel-hub-layout-conversion.md`
-- `docs/worklog/2026-05-08-uiux-hub-figma-alignment.md`
-- `docs/worklog/2026-05-09-mobile-drawer-navigation-alignment.md`
-- `docs/worklog/2026-05-25-docs-widget-responsive-audit.md`
+- `docs/worklog/2026-05/2026-05-05-docs-feed-and-docs-routing.md`
+- `docs/worklog/2026-05/2026-05-05-docs-search-experience.md`
+- `docs/worklog/2026-05/2026-05-08-channel-hub-layout-conversion.md`
+- `docs/worklog/2026-05/2026-05-08-uiux-hub-figma-alignment.md`
+- `docs/worklog/2026-05/2026-05-09-mobile-drawer-navigation-alignment.md`
+- `docs/worklog/2026-05/2026-05-25-docs-widget-responsive-audit.md`

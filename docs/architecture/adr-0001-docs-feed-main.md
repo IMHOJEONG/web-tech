@@ -1,7 +1,8 @@
 # ADR-0001: Docs Feed Main Composition
 
-- Status: Accepted
+- Status: Superseded by [ADR-0003](adr-0003-feed-and-docs-roles.md)
 - Date: 2026-04-29
+- Superseded on: 2026-09-21
 
 ## Context
 

@@ -200,4 +200,4 @@
 - `docs/architecture/docs-responsive-policy.md`
 - `docs/runbooks/content-api-auth-ops-runbook.md`
 - `docs/todo/todo.md`
-- `docs/worklog/2026-05-26-main-ruleset-verification.md`
+- `docs/worklog/2026-05/2026-05-26-main-ruleset-verification.md`

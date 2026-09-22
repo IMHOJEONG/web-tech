@@ -2,6 +2,15 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { buildArticleMetadata } from './article-metadata.ts'
 
+test('metadata receives a copy of readonly document tags', () => {
+    const tags = Object.freeze(['react'])
+    const metadata = buildArticleMetadata({ tags })
+    assert.deepEqual(metadata.keywords, tags)
+    assert.notEqual(metadata.keywords, tags)
+    if (Array.isArray(metadata.keywords)) metadata.keywords.push('nextjs')
+    assert.deepEqual(tags, ['react'])
+})
+
 test('builds article metadata with canonical route and local thumbnail', () => {
     const metadata = buildArticleMetadata(
         {

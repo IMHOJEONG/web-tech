@@ -1,6 +1,6 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import { getTranslations } from 'next-intl/server'
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import type { CSSProperties } from 'react'
 import type { SearchData } from '~/lib/get-search-data'
 import { buildSearchResultItem } from '~/lib/search-result-contract'

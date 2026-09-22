@@ -1,5 +1,5 @@
 import { getTime } from '@web-tech/ui/lib/time'
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 
 export type LatestNoteRowItem = {
     id: string

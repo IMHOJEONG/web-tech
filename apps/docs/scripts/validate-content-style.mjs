@@ -70,6 +70,7 @@ export function getContentStyleIssues(source, frontmatter = {}) {
     const trimmedBody = body.trim()
     const headings = []
     let isInsideCodeFence = false
+    let htmlCommentStartLine = null
 
     if (!trimmedBody) {
         if (isPublished) {
@@ -94,6 +95,39 @@ export function getContentStyleIssues(source, frontmatter = {}) {
         }
 
         if (isInsideCodeFence) {
+            continue
+        }
+
+        const htmlCommentStartIndex = line.indexOf('<!--')
+        const htmlCommentEndIndex = line.indexOf('-->')
+
+        if (htmlCommentStartLine !== null) {
+            if (htmlCommentEndIndex !== -1) {
+                failures.push(
+                    `line ${htmlCommentStartLine}: HTML comments are not allowed; use frontmatter status: draft for unfinished content`
+                )
+                htmlCommentStartLine = null
+            }
+
+            continue
+        }
+
+        if (htmlCommentStartIndex !== -1) {
+            if (htmlCommentEndIndex > htmlCommentStartIndex) {
+                failures.push(
+                    `line ${index + 1}: HTML comments are not allowed; use frontmatter status: draft for unfinished content`
+                )
+            } else {
+                htmlCommentStartLine = index + 1
+            }
+
+            continue
+        }
+
+        if (htmlCommentEndIndex !== -1) {
+            failures.push(
+                `line ${index + 1}: HTML comment closing marker has no matching opener`
+            )
             continue
         }
 
@@ -133,6 +167,12 @@ export function getContentStyleIssues(source, frontmatter = {}) {
 
     if (isInsideCodeFence) {
         failures.push('code block is not closed')
+    }
+
+    if (htmlCommentStartLine !== null) {
+        failures.push(
+            `line ${htmlCommentStartLine}: HTML comment is not closed with -->; use frontmatter status: draft for unfinished content`
+        )
     }
 
     if (headings.length === 0) {

@@ -1,5 +1,5 @@
 import { cn } from '@web-tech/ui/lib/utils'
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import type { ArticleRelatedDocumentItem } from '~/lib/article-related-documents'
 import { DocumentDateText } from '~/shared/ui/document-date-text'
 import { DocumentMetaPills } from '~/shared/ui/document-meta-pills'

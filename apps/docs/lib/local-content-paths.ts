@@ -25,6 +25,12 @@ export function getLocalCategoryDirectory() {
     return path.join(resolveLocalContentRoot(), 'category')
 }
 
+export function getLocalContentDirectories(cwd = process.cwd()) {
+    const root = resolveLocalContentRoot(cwd)
+
+    return [path.join(root, 'data'), path.join(root, 'category')]
+}
+
 export function toLocalContentFileName(filePath: string) {
     return path
         .relative(resolveLocalContentRoot(), filePath)
