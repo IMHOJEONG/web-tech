@@ -1,4 +1,5 @@
 import { getTime } from '@web-tech/ui/lib/time'
+import { MainContent } from '~/shared/ui/main-content'
 import { cn } from '@web-tech/ui/lib/utils'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '~/shared/i18n/navigation'
@@ -77,7 +78,7 @@ export async function DocsIndex({
         const formattedKeyword = formatSearchKeyword(keyword)
 
         return (
-            <main className="docs-shell motion-layout px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+            <MainContent className="docs-shell motion-layout px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
                 <div className="space-y-7">
                     <DocsSearchPanel
                         keyword={keyword}
@@ -139,12 +140,12 @@ export async function DocsIndex({
                         )}
                     </section>
                 </div>
-            </main>
+            </MainContent>
         )
     }
 
     return (
-        <main className="docs-shell motion-layout px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+        <MainContent className="docs-shell motion-layout px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
             <div className="space-y-7">
                 <DocsSearchPanel
                     eyebrow={t('index.eyebrow')}
@@ -356,6 +357,6 @@ export async function DocsIndex({
                     )}
                 </section>
             </div>
-        </main>
+        </MainContent>
     )
 }

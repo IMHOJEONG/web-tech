@@ -1,15 +1,15 @@
 import { getTranslations } from 'next-intl/server'
+import { MainContent } from './main-content'
 
 export async function ContentPending() {
     const t = await getTranslations('common')
     return (
-        <div
+        <MainContent
             className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8"
-            role="status"
             aria-busy="true"
             data-testid="content-pending"
         >
-            <p className="mb-6 text-sm text-on-surface-variant">
+            <p role="status" className="mb-6 text-sm text-on-surface-variant">
                 {t('loadingDocuments')}
             </p>
             <div className="space-y-4" aria-hidden="true">
@@ -24,6 +24,6 @@ export async function ContentPending() {
                     </div>
                 ))}
             </div>
-        </div>
+        </MainContent>
     )
 }

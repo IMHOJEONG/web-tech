@@ -1,6 +1,8 @@
 {
     "common": {
         "brand": "HEAP-FORGE",
+        "skipToContent": "본문으로 바로가기",
+        "documentIndexSearch": "문서 목록 검색",
         "loadingDocuments": "문서를 불러오고 있어요."
     },
     "feedRecent": {
@@ -76,6 +78,7 @@
         }
     },
     "navigation": {
+        "primaryAriaLabel": "주요 메뉴",
         "mobileAriaLabel": "모바일 주요 내비게이션",
         "feed": "Feed",
         "web": "Web",

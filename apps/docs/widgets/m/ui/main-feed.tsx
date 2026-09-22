@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import { MainContent } from '~/shared/ui/main-content'
 import type { Metadata } from '~/lib/get-document'
 import { getFeedArticles, type FeedFilter } from '../model/feed-document'
 import { FeedLeadStory } from './feed-lead-story'
@@ -17,7 +18,7 @@ export function MainFeed({
     const [lead, ...remaining] = getFeedArticles(docs, activeFilter)
 
     return (
-        <main className="motion-layout w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
+        <MainContent className="motion-layout w-full bg-[linear-gradient(180deg,var(--background)_0%,var(--surface-container-lowest)_100%)] text-on-surface">
             {lead ? (
                 <FeedLeadStory {...lead} />
             ) : (
@@ -36,6 +37,6 @@ export function MainFeed({
                 articles={remaining.slice(0, 4)}
                 activeFilter={activeFilter}
             />
-        </main>
+        </MainContent>
     )
 }

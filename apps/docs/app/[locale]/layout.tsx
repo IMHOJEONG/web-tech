@@ -20,6 +20,7 @@ import { AppTopLoader } from '~/widgets/app-shell/ui/app-top-loader'
 import Footer from '~/widgets/app-shell/ui/footer'
 import Header from '~/widgets/app-shell/ui/header'
 import MobileBottomNav from '~/widgets/app-shell/ui/mobile-bottom-nav'
+import { SkipLink } from '~/widgets/app-shell/ui/skip-link'
 
 const shouldLoadInspectionTools = shouldLoadReactInspectionTools()
 
@@ -58,6 +59,7 @@ export default async function Layout({
     if (!isLocale((await params).locale)) notFound()
     const locale = await getLocale()
     const messages = await getMessages()
+    const t = await getTranslations('common')
 
     return (
         <html lang={locale} className="size-full">
@@ -87,6 +89,7 @@ export default async function Layout({
                         spaceGrotesk.variable
                     )}
                 >
+                    <SkipLink label={t('skipToContent')} />
                     <Header />
                     <AppTopLoader />
                     <div className="flex-1 pb-16.25 sm:pb-0">{children}</div>

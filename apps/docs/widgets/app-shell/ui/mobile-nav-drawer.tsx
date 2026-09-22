@@ -63,7 +63,7 @@ function DrawerLink({
             className={cn(
                 'flex w-full items-center gap-3 px-6 py-4 text-sm tracking-[0.05em] transition-colors',
                 isActive
-                    ? 'border-r-2 border-primary bg-primary/10 text-primary'
+                    ? 'border-r-2 border-primary bg-primary/10 text-(--docs-interactive-text)'
                     : 'text-muted-foreground hover:bg-surface-container hover:text-on-surface'
             )}
         >
@@ -110,6 +110,7 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                     className="flex h-7 w-[2.125rem] items-center justify-center text-muted-foreground transition-colors hover:text-primary"
                 >
                     <svg
+                        aria-hidden="true"
                         width="18"
                         height="12"
                         viewBox="0 0 18 12"
@@ -164,7 +165,7 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                 </div>
 
                 <div className="flex flex-1 flex-col overflow-y-auto">
-                    <div className="py-4">
+                    <nav aria-label={navT('primaryAriaLabel')} className="py-4">
                         {drawerLinks.map((item) => {
                             const isActive = activeKey === item.key
 
@@ -179,7 +180,7 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                                 />
                             )
                         })}
-                    </div>
+                    </nav>
 
                     <div className="border-t border-header-border px-6 pb-4 pt-[1.0625rem]">
                         <p className="font-display text-[0.625rem] tracking-[0.1em] text-muted-foreground uppercase">
@@ -240,7 +241,7 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                         <button
                             type="button"
                             onClick={() => setOpen(false)}
-                            className="flex items-center justify-center gap-2 rounded-xs border border-primary/20 bg-primary/10 px-4 py-2.5 text-xs text-primary"
+                            className="flex items-center justify-center gap-2 rounded-xs border border-primary/20 bg-primary/10 px-4 py-2.5 text-xs text-(--docs-interactive-text)"
                         >
                             <LogOut className="size-3.5" strokeWidth={1.8} />
                             <span className="font-display">

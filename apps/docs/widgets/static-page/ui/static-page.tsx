@@ -1,4 +1,5 @@
 import { Link } from '~/shared/i18n/navigation'
+import { MainContent } from '~/shared/ui/main-content'
 
 type StaticPageSection = {
     id: string
@@ -32,7 +33,7 @@ export function StaticPage({
     asideLink,
 }: StaticPageProps) {
     return (
-        <main className="mx-auto flex w-full max-w-page flex-1 px-4 pb-20 pt-24 sm:px-6 lg:px-8">
+        <MainContent className="mx-auto flex w-full max-w-page flex-1 px-4 pb-20 pt-24 sm:px-6 lg:px-8">
             <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-12">
                 <section className="space-y-8">
                     <header className="space-y-4 border-b border-outline-variant/70 pb-8">
@@ -89,6 +90,6 @@ export function StaticPage({
                     ) : null}
                 </aside>
             </div>
-        </main>
+        </MainContent>
     )
 }

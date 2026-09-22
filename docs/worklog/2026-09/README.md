@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [본문 바로가기와 포커스·명암 대비 개선](2026-09-22-skip-link-focus-landmarks.md)
+
 - [운영체제·입문 글 보완과 Canvas hover 진단](2026-09-22-content-editorial-and-canvas-hover.md)
 
 - [검색 키보드 조작과 상세 글 의미 구조 보완](2026-09-22-keyboard-article-accessibility.md)

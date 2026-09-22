@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { MainContent } from '~/shared/ui/main-content'
 import { Link } from '~/shared/i18n/navigation'
 import MainCard from '~/entities/document/ui/main-card'
 import type { SearchData } from '~/lib/get-search-data'
@@ -27,7 +28,7 @@ export function HubPage({
     emptyDescription,
 }: HubPageProps) {
     return (
-        <main className="docs-shell min-w-0 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+        <MainContent className="docs-shell min-w-0 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
             <div className="min-w-0 space-y-6">
                 <header className="space-y-3 border-b border-outline-variant pb-5">
                     <p className="text-xs font-semibold tracking-wide text-primary">
@@ -94,6 +95,6 @@ export function HubPage({
                     )}
                 </section>
             </div>
-        </main>
+        </MainContent>
     )
 }

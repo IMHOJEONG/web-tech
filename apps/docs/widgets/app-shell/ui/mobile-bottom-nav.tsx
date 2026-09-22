@@ -60,7 +60,7 @@ function MobileNavItems({ pathname = '' }: { pathname?: string }) {
                             className={cn(
                                 'ds-focus-ring flex min-h-12 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-surface-container-low hover:text-on-surface',
                                 isActive &&
-                                    'bg-primary/10 text-primary shadow-glow-primary'
+                                    'bg-primary/10 text-(--docs-interactive-text) shadow-glow-primary'
                             )}
                         >
                             <Icon

@@ -49,7 +49,7 @@ function SearchForm({
     const triggerRef = useRef<HTMLButtonElement>(null)
     const panelId = useId()
     const [keyword, setKeyword] = useState(currentKeyword)
-    const [isOpen, setIsOpen] = useState(Boolean(currentKeyword))
+    const [isOpen, setIsOpen] = useState(false)
     const [isPending, startTransition] = useTransition()
 
     useEffect(() => {
@@ -135,6 +135,8 @@ function SearchForm({
     return (
         <form
             ref={formRef}
+            role="search"
+            aria-label={t('input.triggerLabel')}
             onSubmit={handleSubmit}
             onKeyDown={handleKeyDown}
             className="flex items-center"
@@ -146,7 +148,7 @@ function SearchForm({
                 className={cn(
                     'ds-focus-ring inline-flex size-11 shrink-0 items-center justify-center gap-2 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface-variant transition-colors hover:border-primary/40 hover:text-on-surface lg:w-auto lg:px-3',
                     isOpen &&
-                        'border-outline-variant bg-surface-container-low text-primary'
+                        'border-outline-variant bg-surface-container-low text-(--docs-interactive-text)'
                 )}
                 onClick={handleToggle}
                 aria-label={t('input.triggerLabel')}
@@ -169,11 +171,14 @@ function SearchForm({
                 )}
             >
                 <div className="flex min-h-11 items-center gap-2 rounded-[0.875rem] border border-outline-variant/55 bg-background px-3.5 dark:border-outline-variant/80 dark:bg-surface">
-                    <GoSearch className="size-4 shrink-0 text-outline dark:text-on-surface-variant" />
+                    <GoSearch
+                        aria-hidden="true"
+                        className="size-4 shrink-0 text-on-surface-variant"
+                    />
                     <input
                         ref={inputRef}
                         type="text"
-                        className="h-10 min-w-0 flex-1 border-0 bg-transparent px-0 py-0 text-[0.95rem] leading-none text-on-surface outline-none placeholder:text-[0.95rem] placeholder:text-outline dark:placeholder:text-on-surface-variant"
+                        className="h-10 min-w-0 flex-1 border-0 bg-transparent px-0 py-0 text-[0.95rem] leading-none text-on-surface placeholder:text-[0.95rem] placeholder:text-on-surface-variant"
                         value={keyword}
                         onChange={(event) =>
                             setKeyword(
@@ -192,7 +197,7 @@ function SearchForm({
                         <button
                             type="button"
                             onClick={handleClear}
-                            className="ds-focus-ring flex size-7 shrink-0 items-center justify-center rounded-full text-outline transition-colors hover:bg-surface-container-low hover:text-on-surface dark:text-on-surface-variant dark:hover:bg-surface-container-high"
+                            className="ds-focus-ring flex size-7 shrink-0 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-on-surface dark:hover:bg-surface-container-high"
                             aria-label={t('input.clearAriaLabel')}
                         >
                             <span aria-hidden="true" className="text-base">
@@ -202,11 +207,11 @@ function SearchForm({
                     ) : null}
                     <button
                         type="submit"
-                        className="ds-focus-ring flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors hover:bg-primary/15 hover:text-secondary disabled:bg-transparent disabled:text-outline"
+                        className="ds-focus-ring flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-(--docs-interactive-text) transition-colors hover:bg-primary/15 disabled:bg-transparent disabled:text-outline"
                         aria-label={t('input.submitAriaLabel')}
                         disabled={isPending}
                     >
-                        <GoSearch className="size-4" />
+                        <GoSearch aria-hidden="true" className="size-4" />
                     </button>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { MainContent } from '~/shared/ui/main-content'
 
 type ErrorBoxProps = {
     title: string
@@ -22,7 +23,7 @@ export function ErrorBox({
     secondaryHref = '/',
 }: ErrorBoxProps) {
     return (
-        <div className="mx-auto flex min-h-[60vh] w-full max-w-3xl flex-col justify-center px-6 py-16">
+        <MainContent className="mx-auto flex min-h-[60vh] w-full max-w-3xl flex-col justify-center px-6 py-16">
             <div className="ds-panel space-y-5 px-6 py-8 sm:px-8 sm:py-10">
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-(--hf-accent-strong)">
                     {eyebrow}
@@ -55,6 +56,6 @@ export function ErrorBox({
                     ) : null}
                 </div>
             </div>
-        </div>
+        </MainContent>
     )
 }

@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server'
+import { MainContent } from '~/shared/ui/main-content'
 import { getChannelHubDocs } from '~/widgets/content-hub/model/get-channel-hub-docs'
 import type { SearchData } from '~/lib/get-search-data'
 import { UiUxHubFeaturedSection } from './uiux-hub-featured-section'
@@ -104,7 +105,7 @@ export async function UiUxHubPage() {
     ).slice(0, 3)
 
     return (
-        <main className="docs-shell overflow-x-clip px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+        <MainContent className="docs-shell overflow-x-clip px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
             <div className="space-y-10 lg:space-y-14">
                 <UiUxHubHero
                     eyebrow={t('hero.eyebrow')}
@@ -133,6 +134,6 @@ export async function UiUxHubPage() {
                     loadMoreLabel={t('loadMore')}
                 />
             </div>
-        </main>
+        </MainContent>
     )
 }

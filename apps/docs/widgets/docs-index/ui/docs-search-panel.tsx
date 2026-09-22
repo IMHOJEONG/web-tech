@@ -1,5 +1,5 @@
 import { Link } from '~/shared/i18n/navigation'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import {
     isLocale,
     defaultLocale,
@@ -28,6 +28,7 @@ export function DocsSearchPanel({
     resultCount,
 }: DocsSearchPanelProps) {
     const locale = useLocale()
+    const t = useTranslations('common')
     return (
         <section className="ds-panel motion-layout max-w-full overflow-hidden p-5 sm:p-6 lg:p-7">
             <div className="motion-layout grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.72fr)] lg:items-end">
@@ -44,7 +45,7 @@ export function DocsSearchPanel({
                         </p>
                     </div>
                     {resultCount && (
-                        <span className="inline-flex rounded-full border border-primary/25 bg-primary/8 px-3 py-1 text-xs font-medium text-primary">
+                        <span className="inline-flex rounded-full border border-primary/25 bg-primary/8 px-3 py-1 text-xs font-medium text-(--docs-interactive-text)">
                             {resultCount}
                         </span>
                     )}
@@ -52,6 +53,8 @@ export function DocsSearchPanel({
 
                 <div className="min-w-0 space-y-3">
                     <form
+                        role="search"
+                        aria-label={t('documentIndexSearch')}
                         action={localizePath(
                             '/docs',
                             isLocale(locale) ? locale : defaultLocale
@@ -63,12 +66,13 @@ export function DocsSearchPanel({
                             type="search"
                             defaultValue={keyword}
                             placeholder={placeholder}
-                            className="min-h-11 min-w-0 flex-1 bg-transparent px-3 py-2 text-sm text-on-surface outline-none placeholder:text-outline"
+                            aria-label={placeholder}
+                            className="min-h-11 min-w-0 flex-1 bg-transparent px-3 py-2 text-sm text-on-surface placeholder:text-on-surface-variant"
                         />
                         <button
                             type="submit"
                             data-touch-target="docs-index"
-                            className="ds-focus-ring min-h-11 shrink-0 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary-fixed"
+                            className="ds-focus-ring min-h-11 shrink-0 rounded-xl bg-(--docs-interactive-text) px-4 py-2 text-sm font-semibold text-background transition hover:brightness-95"
                         >
                             {submitLabel}
                         </button>

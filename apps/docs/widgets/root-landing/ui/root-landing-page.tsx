@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server'
+import { MainContent } from '~/shared/ui/main-content'
 import { getSortedPostsData, type Metadata } from '~/lib/get-document'
 import { getDocChannel } from '~/lib/get-doc-channel'
 import { getDocHref, getDocRoutePath } from '~/lib/get-doc-route'
@@ -120,7 +121,7 @@ export async function RootLandingPage() {
     }))
 
     return (
-        <main>
+        <MainContent>
             <LandingHero />
             <ThematicFoundations
                 eyebrow={t('foundations.eyebrow')}
@@ -137,6 +138,6 @@ export async function RootLandingPage() {
                 unavailableTitle={t('latestNotes.unavailableTitle')}
                 unavailableDescription={t('latestNotes.unavailableDescription')}
             />
-        </main>
+        </MainContent>
     )
 }

@@ -139,6 +139,32 @@ Elements 패널에서 카드 또는 패널을 선택한 뒤 class와 computed st
 
 ## Shell 체크리스트
 
+### 키보드와 스크린 리더 검사 순서
+
+1. 페이지를 새로 열고 Tab을 누른다. 첫 포커스에서만 `본문으로 바로가기`가 표시되어야 한다. Enter로 유일한 `main#main-content`에 포커스가 이동하고 다음 Tab은 본문 컨트롤로 이어져야 한다. 제목과 포커스가 고정 헤더 아래에 보여야 한다.
+2. 라이트·다크 모드에서 메뉴·검색 입력·지우기·제출 버튼을 키보드로 이동한다. 실선 포커스가 보여야 한다. 일반 글자와 placeholder는 4.5:1, 필요한 아이콘은 3:1 이상을 목표로 검사한다. 장식과 로고 예외를 일반 버튼 글자에 확대 적용하지 않는다.
+3. 실제 macOS Safari + VoiceOver, 가능하면 Windows Firefox + NVDA로 아래 수동 검사를 수행한다. 브라우저 접근성 트리·Playwright 통과는 실제 낭독 통과를 의미하지 않는다.
+
+```bash
+pnpm --filter docs exec playwright test e2e/skip-link.spec.ts e2e/shell-focus-contrast.spec.ts e2e/keyboard-accessibility.spec.ts
+```
+
+스크린 리더 수동 체크리스트:
+
+- [ ] 한국어·영어 페이지에서 언어와 페이지 제목이 적절하게 안내되는가?
+- [ ] 랜드마크 목록에 주요 메뉴, 문서 검색, 문서 목록 검색(`/docs`), 본문이 구분되어 나오는가? 데스크톱 메뉴가 링크마다 개별 탐색 영역으로 반복되지 않는가?
+- [ ] 제목 목록에서 글 제목 `h1`과 하위 제목을 탐색할 수 있는가?
+- [ ] drawer를 열면 이름·설명이 안내되고 배경 링크는 탐색되지 않는가? Escape로 닫으면 열기 버튼으로 돌아오는가?
+- [ ] 검색 입력 이름과 지우기·제출 버튼이 구분되는가? 검색 결과 URL로 직접 진입해도 헤더 검색이 자동으로 포커스를 가져가지 않는가?
+- [ ] 검색 후 결과 수·빈 결과를 찾아 읽을 수 있고, 클라이언트 페이지 이동 안내가 중복되거나 누락되지 않는가?
+- [ ] 뒤로 가기, 화면 회전, 200% 확대 후에도 탐색 순서가 유지되는가?
+
+검사 시 OS·브라우저·스크린 리더 버전, URL, 실제 읽힌 문구와 기대 문구를 함께 기록한다. 낭독을 직접 확인하지 않았다면 반드시 미검증으로 남긴다.
+
+참고: [반복 영역 건너뛰기](https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks), [텍스트 대비](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html), [비텍스트 대비](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html), [포커스 표시](https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html).
+
+현재 대비 자동 검사는 단색 배경과 부모 배경의 알파 합성에 한정한다. 이미지·그라디언트·전체 사이트 대비, 실제 강제 색상 OS 테마는 별도 확인한다.
+
 ### Header
 
 - `< 640px`에서는 hamburger, brand, search가 잘 보인다.

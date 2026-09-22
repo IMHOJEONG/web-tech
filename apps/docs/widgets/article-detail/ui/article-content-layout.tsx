@@ -1,4 +1,5 @@
 import type { ArticleContentLayoutProps } from './article-content.types'
+import { MainContent } from '~/shared/ui/main-content'
 import Toc from '~/widgets/article-toc/ui/toc'
 import { getTranslations } from 'next-intl/server'
 import { ArticleContentGrid } from './article-content-grid'
@@ -21,7 +22,7 @@ export async function ArticleContentLayout({
                 </div>
             </aside>
 
-            <main className="min-w-0">
+            <MainContent className="min-w-0">
                 {fallbackTitle && (
                     <h1 className="mdx-h1 mb-6 font-display text-on-surface">
                         {fallbackTitle}
@@ -35,7 +36,7 @@ export async function ArticleContentLayout({
                         {supplementary}
                     </ArticleSupplementaryBoundary>
                 )}
-            </main>
+            </MainContent>
         </ArticleContentGrid>
     )
 }

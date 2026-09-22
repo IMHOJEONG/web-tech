@@ -1,6 +1,8 @@
 {
     "common": {
         "brand": "HEAP-FORGE",
+        "skipToContent": "Skip to main content",
+        "documentIndexSearch": "Search document index",
         "loadingDocuments": "Loading documents..."
     },
     "feedRecent": {
@@ -76,6 +78,7 @@
         }
     },
     "navigation": {
+        "primaryAriaLabel": "Primary navigation",
         "mobileAriaLabel": "Mobile primary navigation",
         "feed": "Feed",
         "web": "Web",

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { MainContent } from '~/shared/ui/main-content'
 import { Suspense } from 'react'
 import { ContentPending } from '~/shared/ui/content-pending'
 import { getTranslations } from 'next-intl/server'
@@ -70,7 +71,7 @@ async function DocsResults({ searchParams }: Props) {
             return <EmptyAllDocs />
         case 'empty-search':
             return (
-                <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+                <MainContent className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
                     <section className="space-y-6">
                         <div className="space-y-2">
                             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
@@ -85,7 +86,7 @@ async function DocsResults({ searchParams }: Props) {
                             recommendations={RECOMMENDED_SEARCH_TERMS}
                         />
                     </section>
-                </main>
+                </MainContent>
             )
         case 'index':
             return (
