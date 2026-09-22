@@ -35,4 +35,4 @@ pnpm --filter docs test:e2e shell-active-navigation.spec.ts --workers=1
 
 ## Next
 
-화면 크기가 모바일 메뉴 범위를 벗어나면 열린 drawer를 닫고 오버레이 및 스크롤 잠금을 해제하는 후속 작업이 남아 있다.
+후속 [화면 전환 시 drawer 닫힘 처리](2026-09-22-mobile-drawer-resize.md)에서 오버레이 및 스크롤 잠금 해제를 구현하고 검사했다.

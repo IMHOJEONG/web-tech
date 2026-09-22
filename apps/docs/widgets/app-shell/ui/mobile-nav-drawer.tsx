@@ -22,7 +22,7 @@ import {
 import { useTranslations } from 'next-intl'
 import { Link } from '~/shared/i18n/navigation'
 import { usePathname } from '~/shared/i18n/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Brand } from '~/shared/ui/brand'
 import type { DrawerLinkConfig } from './mobile-nav-drawer.types'
 import { APP_NAVIGATION, getActiveNavigationKey } from '../model/app-navigation'
@@ -38,6 +38,9 @@ const drawerLinks = APP_NAVIGATION.map((item) => ({
     ...item,
     icon: drawerIcons[item.key],
 })) satisfies readonly DrawerLinkConfig[]
+
+// Match the sm:hidden shell boundary, not the shared Sidebar's md breakpoint.
+const DESKTOP_SHELL_QUERY = '(min-width: 40rem)'
 
 function DrawerLink({
     href,
@@ -79,6 +82,16 @@ export default function MobileNavDrawer() {
 function MobileNavDrawerContent({ pathname }: { pathname: string }) {
     const activeKey = getActiveNavigationKey(pathname)
     const [open, setOpen] = useState(false)
+    useEffect(() => {
+        const desktopShell = window.matchMedia(DESKTOP_SHELL_QUERY)
+        const closeOnDesktop = (event: MediaQueryListEvent) => {
+            if (event.matches) setOpen(false)
+        }
+
+        desktopShell.addEventListener('change', closeOnDesktop)
+        return () => desktopShell.removeEventListener('change', closeOnDesktop)
+    }, [])
+
     const headerT = useTranslations('header')
     const navT = useTranslations('navigation')
     const aboutT = useTranslations('about')

@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [화면 전환 후 모바일 메뉴 오버레이 잔류 수정](2026-09-22-mobile-drawer-resize.md)
+
 - [앱 셸의 현재 메뉴 판정 통합](2026-09-22-shell-active-navigation.md)
 
 - [Sidebar 모바일 판별을 shadcn 공식 구현으로 복원](2026-09-22-sidebar-mobile-hydration.md)
