@@ -6,7 +6,7 @@
 - 대상: `@web-tech/ui`의 직접 사용 primitive와 저장소 내 소비 코드
 - 결정일: 2026-09-22
 - 최종 검토: 2026-09-22
-- 적용 위치: `feature/docs` 작업 트리. 운영 배포 완료를 의미하지 않는다.
+- 적용 위치: `main` 기반 `codex/shared-ui-base-ui` PR. 운영 배포 완료를 의미하지 않는다.
 
 ## 배경
 
@@ -20,13 +20,13 @@ Radix 기반 공용 UI와 cn 전환은 이미 검증된 상태다. shadcn은 신
 2. 공개 모듈 경로와 컴포넌트 이름, 디자인 토큰, variant, 크기를 유지한다. 전체 shadcn 기본 스타일로 덮어쓰지 않는다.
 3. `asChild` 대신 `render`를 사용하며 저장소 내 호출부도 함께 변경한다. Radix API 전체를 흉내 내는 호환 계층은 만들지 않는다. 포커스 복귀는 `finalFocus`, Tooltip 지연은 `delay`로 명시한다.
 4. Button처럼 클라이언트 동작을 갖는 컴포넌트와 서버에서도 실행하는 순수 variant 함수를 분리한다. 공용 UI의 dist exports와 현재 빌드 방식은 유지한다.
-5. `cn`은 유지한다. Radix 아이콘, cmdk 내부 의존성과 다른 앱의 독립적인 Slot 의존성은 이번 primitive 전환 범위가 아니다.
-6. 비교 기준 커밋은 `242d81a`다. 타입·UI 동작·실제 소비 앱 빌드를 통과하기 전에는 푸시하지 않는다. Activity 문제가 자동으로 해결되거나 성능이 개선된다고 가정하지 않는다.
+5. `cn` 0.3.0을 사용하고 미사용 Radix 아이콘·cmdk·앱의 독립적인 Slot 선언은 제거한다. Prisma Studio의 Radix 전이 의존성은 강제로 제거하지 않는다.
+6. 초기 실험 비교 기준은 `242d81a`이며 공용 UI PR은 `main`의 `c87fe59`에서 분리한다. 분리 후 타입·UI 동작·소비 앱 빌드를 다시 검증한다. Activity 문제가 자동으로 해결되거나 성능이 개선된다고 가정하지 않는다.
 7. shadcn 생성 설정은 `base-vega`, RSC 지원으로 맞춘다. 이후 생성되는 코드의 기준만 바꾸며 기존 스타일을 일괄 재생성하지 않는다.
 
 ### 최종 목표와 단계별 범위
 
-위 결정의 구현 범위는 1차 전환이다. 다른 앱의 Slot과 cmdk를 이번에 유지한 것은 영구 예외가 아니라 후속 정리 대상이라는 의미다.
+위 결정의 구현 범위는 저장소 소유 UI의 전환이다. 남은 Prisma Studio 전이 의존성과 외부 소비 모노레포는 후속 조사 대상이다.
 
 1. 공용 계층: 재사용할 인터랙티브 primitive를 Base UI 기반으로 제공한다. 신규 공용 컴포넌트에 Radix 기반 구현을 다시 추가하지 않는다.
 2. 저장소 소비 앱: 앱별 중복 wrapper와 의존성을 조사하고 공용 API로 통합한다. 미사용 의존성은 제거하고 실제 사용은 동작 검증 후 교체한다. 전이 의존성은 상위 패키지 교체·제거로 해결하며 lockfile에서 강제로 삭제하지 않는다.
@@ -76,7 +76,6 @@ Base UI 1.8.0으로 구성한 우리 Tooltip fixture에서 Popup의 `role="toolt
 - [Base UI Dialog: 포커스와 Popup API](https://base-ui.com/react/components/dialog)
 - [Base UI Tooltip: Provider와 Positioner](https://base-ui.com/react/components/tooltip)
 - [Base UI useRender: 컴포넌트 합성](https://base-ui.com/react/utils/use-render)
-- [기존 cn·Radix 전환 기록](../worklog/2026-09/2026-09-22-ui-dependency-migration.md)
 - [공용 UI 빌드 경계](ui-package-build-export.md)
-- [전환 작업 기록](../worklog/2026-09/2026-09-22-base-ui-migration.md)
-- [회귀 검사와 번들 관측](../verification/content/2026-09-22-base-ui-migration.md)
+- [main 기반 PR 분리 기록](../worklog/2026-09/2026-09-22-shared-ui-pr-split.md)
+- [분리 브랜치 검증](../verification/content/2026-09-22-shared-ui-main-baseline.md)

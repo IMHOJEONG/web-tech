@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [공용 UI와 블로그 PR 분리](2026-09-22-shared-ui-pr-split.md)
+
 - [공용 UI의 Base UI 전환](2026-09-22-base-ui-migration.md)
 
 - [공용 UI의 cn·Radix 의존성 전환](2026-09-22-ui-dependency-migration.md)
