@@ -1,6 +1,18 @@
 # 문서 화면의 정적 셸과 동적 영역 경계
 
-## 원칙
+## 상태와 범위
+
+- 상태: 적용 중
+- 대상: docs 정적 셸과 Suspense 경계. Cache Components 활성화는 보류.
+- 최종 검토: 2026-09-22
+
+## 배경
+
+언어별 URL만으로 요청별 경로·검색 조건 의존성이 없어지지는 않는다. 정적 셸 검증과 캐시 신선도를 별도로 평가해야 한다.
+
+## 결정
+
+### 원칙
 
 언어는 URL에서 결정하고, pathname에 따른 활성 표시와 query 기반 결과는 Suspense 아래에서 계산한다.
 루트 전체를 빈 fallback으로 감싸거나 `instant = false`로 정적 셸 검증을 끄지 않는다.
@@ -32,7 +44,7 @@ Cache Components는 반드시 지금 도입해야 하는 기능이 아니다. �
 - category와 docs 상세, web/mobile/ui-ux: loading.tsx로 해당 세그먼트 콘텐츠에 경계를 둔다. 공용 헤더/Footer는 이 경계 밖에 있다.
 - ContentPending: 공용 디자인 토큰, common.loadingDocuments 번역, role=status, aria-busy, motion-safe 애니메이션을 사용한다.
 
-## 의도적인 한계
+## 대안과 영향
 
 허브는 데이터 통계와 카드가 한 구성 요소에 묶여 있어 현재는 콘텐츠 영역 단위로 로딩한다.
 따라서 허브의 hero까지 즉시 보이는 설계는 아니다. 향후 정적 소개와 동적 목록을 더 분리할 수 있다.
@@ -49,3 +61,8 @@ mise exec -- node apps/docs/scripts/test-content-cache-prod.mjs
 2026-09-17 시험에서 정적 셸 빌드는 통과했지만 중첩 캐시의 max 재검증 후 V3 게시 검증은 실패했다.
 이는 Suspense 경계와 별개의 캐시 신선도 문제이며, 새 모델을 운영에 활성화하지 않는 이유다.
 현재 운영 모델의 전체 통합 시험은 V3 갱신 및 상세 렌더링까지 통과했다.
+
+## 관련 문서
+
+- [언어 URL 정책](docs-locale-url-routing-policy.md)
+- [캐시 통합 시험](../runbooks/docs-content-cache-production-test.md)

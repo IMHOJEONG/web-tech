@@ -13,6 +13,6 @@ JSON은 특정 시점의 측정값입니다. 실행 환경과 해석은 보고�
 - [2026-09-18-after-font-preload.json](2026-09-18-after-font-preload.json)
 - [2026-09-18-deployed-performance.json](2026-09-18-deployed-performance.json)
 - [2026-09-18-font-browser-smoke.json](2026-09-18-font-browser-smoke.json)
-- [2026-09-18-rendering-trace.json](2026-09-18-rendering-trace.json)
+- [2026-09-18-rendering-trace.json.gz](2026-09-18-rendering-trace.json.gz) (원본 JSON 무손실 압축)
 - [2026-09-19-cls-deployment-verification.json](2026-09-19-cls-deployment-verification.json)
 - [2026-09-19-sticky-header-deployment-verification.json](2026-09-19-sticky-header-deployment-verification.json)

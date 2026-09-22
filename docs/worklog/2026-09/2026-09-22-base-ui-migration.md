@@ -37,4 +37,6 @@ production Tooltip, Safari·Firefox·스크린 리더 검증과 실제 경로 �
 
 ## Next
 
-Prisma Studio의 전이 의존성이 실제 앱 번들·런타임에 포함되는지 확인하고, 외부 소비 모노레포의 배포·버전 정책을 정한다. 변경 단위 리뷰 후 커밋하며, Activity 도입 전 생명주기 검증과 다른 브라우저 검사는 [공용 UI 백로그](../../todo/todo.md)를 따른다.
+공용 UI는 `codex/shared-ui-base-ui`에서 main 대상 PR #32로 분리했다. 블로그 변경은 이 공용 브랜치를 base로 하는 `codex/blog-updates` PR로 관리하며 UI 패키지·독립 fixture는 두 브랜치에서 동일하다. main 병합 후 전파 순서는 [PR 분리 기록](2026-09-22-shared-ui-pr-split.md)을 따른다. 기존 feature/docs와 미커밋 Obsidian 문서는 보존했다.
+
+Prisma Studio의 전이 의존성이 실제 앱 번들·런타임에 포함되는지 확인하고, 외부 소비 모노레포의 배포·버전 정책을 정한다. Activity 도입 전 생명주기 검증과 다른 브라우저 검사는 [공용 UI 백로그](../../todo/todo.md)를 따른다.

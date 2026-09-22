@@ -1,14 +1,19 @@
 # Docs Resource Content Roadmap
 
-## Status
+## 상태와 범위
 
-Adopted on 2026-09-12.
+- 상태: 적용 중
+- 대상: docs 학습 리소스 품질 및 카테고리 확장 순서
+- 최종 검토: 2026-09-22
+- 최초 적용: 2026-09-12. 예정 주제를 게시 완료로 바꾸지 않는다.
 
-## Purpose
+## 배경
 
 HeapForge의 문서를 단편적인 메모 모음이 아니라 문제를 이해하고 직접 검증할 수 있는 기술 리소스로 확장한다. 카테고리 수보다 실제 문서 밀도와 품질을 먼저 확보한다.
 
-## Quality Bar
+## 결정
+
+### Quality Bar
 
 양질의 리소스는 다음 질문에 답해야 한다.
 
@@ -30,7 +35,11 @@ HeapForge의 문서를 단편적인 메모 모음이 아니라 문제를 이해�
 - checklist, table, callout은 정보를 더 잘 읽게 할 때만 사용하고 형식을 채우기 위해 넣지 않는다.
 - 직접 겪지 않은 장애나 실험을 작성자의 경험처럼 꾸미지 않는다. 재현하지 않은 내용은 일반 원리 또는 확인할 가설로 표현한다.
 
-## Category Principles
+## 대안과 영향
+
+카테고리를 먼저 늘리는 대신 검수한 글을 확보한 뒤 노출한다. 탐색 선택지는 천천히 늘지만 빈 화면과 검증되지 않은 자료를 줄일 수 있다.
+
+### Category Principles
 
 - 실제 published 문서가 없는 카테고리는 UI에 먼저 노출하지 않는다.
 - 한 문서가 들어오면 subcategory로 시작할 수 있지만, main category는 분명한 후속 주제 목록을 가져야 한다.
@@ -97,7 +106,7 @@ Phase 3에서는 단일 개념 글보다 앞선 기준 문서를 연결하는 re
 5. `pnpm --filter docs test:content`를 통과한다.
 6. 상세 route와 `/docs` 검색·section 분류를 확인한다.
 
-## Related Docs
+## 관련 문서
 
 - `docs/runbooks/docs-contributor-guide.md`
 - `docs/architecture/docs-content-authoring-markup-policy.md`

@@ -151,7 +151,7 @@ BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true
 
 ## Related Docs
 
-- [docs/architecture/blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
-- [docs/architecture/blog-content-html-vs-markdown.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-html-vs-markdown.md)
-- [docs/architecture/docs-content-cache-revalidation-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-cache-revalidation-policy.md)
-- [docs/architecture/docs-secret-token-lifecycle-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-secret-token-lifecycle-policy.md)
+- [docs/architecture/blog-content-api-contract.md](../architecture/blog-content-api-contract.md)
+- [docs/architecture/blog-content-html-vs-markdown.md](../architecture/blog-content-html-vs-markdown.md)
+- [docs/architecture/docs-content-cache-revalidation-policy.md](../architecture/docs-content-cache-revalidation-policy.md)
+- [docs/architecture/docs-secret-token-lifecycle-policy.md](../architecture/docs-secret-token-lifecycle-policy.md)

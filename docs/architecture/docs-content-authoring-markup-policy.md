@@ -1,14 +1,19 @@
 # Docs Content Authoring Markup Policy
 
-## Status
+## 상태와 범위
 
-Adopted on 2026-09-11.
+- 상태: 적용 중
+- 대상: docs 로컬·원격 콘텐츠 작성 및 검증 경계
+- 최종 검토: 2026-09-22
+- 최초 적용: 2026-09-11. 이번 검토는 문서 구조 정리이며 NAS 게시 검증의 추가 적용을 뜻하지 않는다.
 
-## Purpose
+## 배경
 
 local MDX와 remote Markdown이 서로 다른 renderer를 통과하더라도 편집용 문구가 사용자 화면에 노출되지 않도록 본문 작성 규칙과 검증 경계를 고정한다.
 
-## Publication State
+## 결정
+
+### Publication State
 
 문서 상태는 frontmatter의 `status`만 사용한다.
 
@@ -18,7 +23,9 @@ local MDX와 remote Markdown이 서로 다른 renderer를 통과하더라도 편
 
 본문에 `작성중`, `WIP`, `TODO` 같은 문자열을 넣어 공개 상태를 표현하지 않는다. 미완성 섹션이 있으면 문서 전체를 `draft`로 유지하거나 해당 섹션을 완성한 뒤 게시한다.
 
-## HTML Comments
+## 대안과 영향
+
+### HTML Comments
 
 본문에서는 HTML 주석을 사용하지 않는다.
 
@@ -103,7 +110,7 @@ remote NAS 콘텐츠는 `apps/docs` 빌드에 포함되지 않으므로 이 검�
 4. 코드 예제의 HTML 주석이 fenced code block 안에 있는지 확인한다.
 5. local validation을 통과한 뒤 remote publish와 cache revalidation을 실행한다.
 
-## Related Docs
+## 관련 문서
 
 - `docs/runbooks/docs-contributor-guide.md`
 - `docs/architecture/docs-content-authoring-pipeline.md`

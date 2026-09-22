@@ -1,13 +1,14 @@
 # Docs Content Cache Revalidation Policy
 
-## Status
+## 상태와 범위
 
-- Adopted
-- Applied scope: `apps/docs` remote content index and article body fetches
+- 상태: 적용 중
+- 대상: docs 원격 콘텐츠 목록 및 본문 캐시
+- 최종 검토: 2026-09-22
 - Runtime: Next.js on Vercel
 - Source: `apps/docs-backend` on NAS
 
-## Context
+## 배경
 
 `apps/docs-backend` reads Markdown files from the NAS volume for every request. Its
 responses therefore reflect a valid file change immediately and use
@@ -21,7 +22,7 @@ does not immediately update the public page.
 The frontend cannot detect a NAS filesystem change by itself. An explicit signal
 must cross the NAS-to-Vercel boundary when published content changes.
 
-## Decision
+## 결정
 
 Use a hybrid cache policy:
 
@@ -38,7 +39,9 @@ The invalidation request does not proactively download all documents. It expires
 the matching cache entries. The next request fetches only the data needed for that
 page and stores the fresh result.
 
-## Why TTL Remains Enabled
+## 대안과 영향
+
+### Why TTL Remains Enabled
 
 The webhook is an optimization for publication freshness, not the only expiration
 mechanism. Keeping the TTL means content eventually refreshes when:
@@ -131,7 +134,7 @@ After the explicit publication flow is stable, evaluate these options in order:
 5. Consider a debounced filesystem watcher only when edits are atomic and
    validation runs before notification.
 
-## References
+## 관련 문서
 
 - `docs/architecture/docs-content-rendering-strategy.md`
 - `docs/architecture/docs-content-api-fail-fast-policy.md`

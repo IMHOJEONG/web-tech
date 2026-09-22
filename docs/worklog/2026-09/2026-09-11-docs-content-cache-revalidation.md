@@ -1,11 +1,11 @@
 # 2026-09-11 Docs Content Cache Revalidation
 
-## Goal
+## Summary
 
 Keep the existing remote-content TTL while allowing a validated NAS content
 change to invalidate the Vercel cache on demand.
 
-## Applied
+## Changed
 
 - Added the shared `docs-content:remote` cache tag to remote index and body fetches.
 - Added the protected `POST /api/revalidate/content` Route Handler.
@@ -16,14 +16,14 @@ change to invalidate the Vercel cache on demand.
 - Kept `BLOG_CONTENT_REVALIDATE_SECONDS=300` as the missed-webhook fallback.
 - Documented authentication, failure, verification, and future automation policy.
 
-## Security Boundary
+## Notes
 
 - The read-side content API token and the write-side cache invalidation token stay
   separate.
 - The revalidation token is never accepted through a query string.
 - No secret value is written to application logs or committed configuration.
 
-## Deferred
+## Open Questions
 
 - Automatic filesystem watching
 - Per-document cache tags
@@ -31,3 +31,7 @@ change to invalidate the Vercel cache on demand.
 - Retry automation
 
 These are deferred until the explicit publish flow is verified on NAS and Vercel.
+
+## Next
+
+자동화를 추가하기 전에 NAS 게시와 Vercel 캐시 무효화의 수동 흐름을 검증한다.

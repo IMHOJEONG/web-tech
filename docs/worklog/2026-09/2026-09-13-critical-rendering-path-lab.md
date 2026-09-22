@@ -1,10 +1,10 @@
 # Critical Rendering Path Lab
 
-## Goal
+## Summary
 
 브라우저 렌더링 문서를 개념 요약에서 직접 기록하고 해석할 수 있는 실험형 리소스로 확장한다.
 
-## Review Outcome
+## Changed
 
 - 세 개의 1차 리소스를 Browser, Network, Containers 관점에서 독립 검토했다.
 - Browser 문서는 핵심 설명과 공식 자료 연결이 가장 안정적이어서 `published`를 유지했다.
@@ -25,7 +25,7 @@
 
 실험 서버는 `127.0.0.1`에만 bind하고, route와 asset을 allowlist로 제한하며, 지연 query를 최대 3000ms로 제한한다.
 
-## Validation
+## Notes
 
 ```bash
 pnpm test:crp-lab
@@ -40,3 +40,11 @@ git diff --check
 - 콘텐츠 단위 테스트 17개 통과
 - local 콘텐츠 15개 frontmatter·style 검증 통과
 - Prettier와 whitespace 검사 통과
+
+## Open Questions
+
+로컬 Chromium 실험은 실제 방문자의 필드 성능을 대표하지 않는다.
+
+## Next
+
+Network와 Containers 초안은 진단 명령과 실행 결과를 검증한 뒤 공개 여부를 재검토한다.

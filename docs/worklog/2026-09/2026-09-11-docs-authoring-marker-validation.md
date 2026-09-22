@@ -1,6 +1,6 @@
 # Docs Authoring Marker Validation
 
-## Background
+## Summary
 
 remote 문서의 `4-3. 페인트(Paint)` 섹션에서 `<!-- 작성중 →` 문자열이 사용자 화면에 그대로 노출됐다.
 
@@ -11,7 +11,7 @@ remote 문서의 `4-3. 페인트(Paint)` 섹션에서 `<!-- 작성중 →` 문�
 - 기존 content style validator는 heading, code fence, callout은 검사했지만 HTML 주석은 검사하지 않았다.
 - 해당 문서는 remote NAS 콘텐츠이므로 local docs build validation 경계 밖에 있었다.
 
-## Changes
+## Changed
 
 - local content style validator가 코드 블록 밖의 HTML 주석을 hard fail 처리하도록 확장했다.
 - 닫히지 않은 주석과 짝이 없는 닫힘 기호를 구분해 오류 위치를 출력한다.
@@ -29,9 +29,17 @@ status: draft
 
 본문을 공개해야 한다면 해당 섹션을 완성한 뒤 `status: published`를 유지한다. HTML 주석으로 편집 상태를 숨기지 않는다.
 
-## Verification
+## Notes
 
 ```bash
 node --test apps/docs/scripts/validate-content-style.test.mjs
 pnpm --filter docs validate:content
 ```
+
+## Open Questions
+
+NAS 원격 게시 경로에는 아직 같은 검증이 연결되지 않았다.
+
+## Next
+
+원격 문서 게시 전에도 편집 메모 검증을 실행하도록 게시 파이프라인을 연결한다.

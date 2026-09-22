@@ -1,6 +1,6 @@
 # 상세 페이지 레이아웃 이동과 모바일 텍스트 지연 진단
 
-## Summary
+## 대상과 조건
 
 실제 heap-forge.app 두 상세 페이지에 대해 기본 8회와 모바일 폰트 차단 4회를 추가 측정했다.
 운영 UI/설정은 변경하지 않았다. 코드 수정 전 원인 확인 작업이다.
@@ -8,11 +8,11 @@
 ## Changed
 
 - 재현 스크립트: `apps/docs/scripts/trace-deployed-rendering.cjs`
-- 원본 증거: `docs/verification/artifacts/2026-09-18-rendering-trace.json`
+- 원본 증거: [렌더링 trace](../artifacts/2026-09-18-rendering-trace.json.gz) (원본 JSON 무손실 압축)
 - LayoutShift sources/좌표, LCP 후보 이력, 본문 높이, CSS/폰트 Resource Timing,
   loadingdone 및 Long Task를 수집했다. 전체 DevTools CPU trace는 아니다.
 
-## Findings
+## 결과와 증거
 
 ### 1. 큰 CLS는 헤더/본문의 스트리밍 교체와 푸터 이동
 
@@ -85,7 +85,9 @@ locale layout에서 전역으로 사용한다. `preload: false` 지정 없이 �
    본문 폰트는 한글 unicode-range subset 또는 실제 콘텐츠 기반 분할을 별도 검증한다.
 4. 동일 브라우저 조건에서 재측정하고 읽기/코드 스타일/접근성/모바일 높이 회귀를 확인한다.
 
-## 재현
+## 재현 방법
+
+저장된 trace는 `gzip -dc docs/verification/artifacts/2026-09-18-rendering-trace.json.gz > /tmp/docs-rendering-trace.json`으로 풀어 확인한다. 압축은 보관 형식만 바꾸며 측정 데이터는 변경하지 않는다.
 
 ```sh
 mise exec -- node apps/docs/scripts/trace-deployed-rendering.cjs
@@ -103,13 +105,13 @@ NO_FONTS=1 mise exec -- node apps/docs/scripts/trace-deployed-rendering.cjs
 모바일 CLS=0을 모든 모바일 환경에서 이동이 없다는 뜻으로 해석하지 않는다.
 수정/배포/커밋/푸시는 하지 않았으며 다른 작업의 미커밋 변경은 유지했다.
 
-## References
+## 관련 문서
 
 - [Next font preload](https://nextjs.org/docs/app/api-reference/components/font#preload)
 - [웹 폰트 로드와 리소스 경쟁](https://web.dev/articles/font-best-practices)
 - [LCP 단계별 최적화](https://web.dev/articles/optimize-lcp)
 
-## Open Questions
+## 한계와 후속 작업
 
 폰트 요청 감소와 안정적인 shell을 각각 적용했을 때의 독립적인 개선 폭,
 실물 모바일/한국 네트워크의 field 성능은 후속 확인이 필요하다.

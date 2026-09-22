@@ -77,6 +77,14 @@ mise exec -- pnpm --filter docs exec eslint e2e/mobile-drawer-close.spec.ts --ma
 
 ## 한계와 후속 작업
 
+### PR 분리 후 재검증
+
+2026-09-22 KST, `codex/blog-updates`에서 `1a2e041`에 공용 UI 커밋 `2212a90`을 병합한 작업 트리를 검사했다. 충돌 해결 후 앱·패키지·lockfile·CI·스크립트는 `1a2e041`과 동일하며 공용 UI 패키지와 독립 UI fixture는 `2212a90`과 동일함을 git diff로 확인했다.
+
+`mise exec -- pnpm install --ignore-scripts --frozen-lockfile` 통과, `mise exec -- pnpm --filter docs test:ui:consumer`는 production 빌드 포함 16개 통과(55.4초). 비예제 .env 파일과 명백한 토큰·개인 키 패턴은 PR diff 검사에서 발견하지 못했다. 이는 제한된 패턴 검사이며 보안 보증이나 전체 히스토리 감사가 아니다.
+
+블로그 PR은 장기간 누적된 화면·콘텐츠·문서 정책·관련 CI 변경을 포함한다. 이번 재검사에서 전체 과거 변경의 모든 테스트를 재실행하지는 않았으므로 draft로 준비하고 CI 및 리뷰 후 병합한다.
+
 아래 한계는 후속 정리 이후에도 유지된다.
 
 - Activity의 열린 Sheet를 숨기면 Portal이 남는 테스트는 그 현상을 기대값으로 기록한다. 22개 통과가 결함 해결을 뜻하지 않는다.

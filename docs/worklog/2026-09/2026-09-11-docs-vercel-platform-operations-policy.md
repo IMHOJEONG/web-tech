@@ -1,11 +1,11 @@
 # 2026-09-11 Docs Vercel Platform Operations Policy
 
-## Goal
+## Summary
 
 Define which Vercel platform controls should protect and observe `apps/docs`
 without adding unnecessary paid infrastructure.
 
-## Applied
+## Changed
 
 - Documented the exact WAF rate-limit rule for the content revalidation endpoint.
 - Added Sensitive Environment Variable and Preview Deployment Protection guidance.
@@ -15,13 +15,17 @@ without adding unnecessary paid infrastructure.
 - Deferred Log Drains, Spend Management and Rolling Releases until scale or plan
   requirements justify their operational cost.
 
-## Boundary
+## Notes
 
 This change documents repository policy and dashboard procedures. It does not
 claim that a Vercel dashboard-only setting is active until an operator applies
 and verifies it.
 
-## Follow-up
+## Open Questions
+
+대시보드 설정의 실제 적용 여부와 운영 환경 측정 결과는 별도 확인이 필요하다.
+
+## Next
 
 1. Apply and verify the Production revalidation rate limit.
 2. Re-create the two content tokens as Sensitive variables where needed.

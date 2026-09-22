@@ -27,6 +27,8 @@
 
 ## 콘텐츠
 
+- [09-22 공용 UI main 기준 분리 검증](content/2026-09-22-shared-ui-main-baseline.md): 블로그 변경 없이 공용 UI만 적용한 브랜치 검사.
+
 - [09-22 Base UI 전환 검증](content/2026-09-22-base-ui-migration.md): 공용 UI·Activity·production 소비 화면과 번들 비용.
 
 - [09-21 Activity 포커스 실험](content/2026-09-21-activity-focus.md): DOM·Effect 보존, Sheet 포털 잔존과 외부 배치 비교.

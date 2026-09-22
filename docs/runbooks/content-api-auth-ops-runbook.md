@@ -263,8 +263,8 @@ curl -i https://your-content-host/posts/feed/example-article \
 
 ## 관련 문서
 
-- [blog-content-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-api-contract.md)
-- [docs-env-checklist.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/docs-env-checklist.md)
-- [nas-reverse-proxy-security-checklist.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/nas-reverse-proxy-security-checklist.md)
-- [docs-content-authoring-pipeline.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-pipeline.md)
-- [docs-secret-token-lifecycle-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-secret-token-lifecycle-policy.md)
+- [blog-content-api-contract.md](../architecture/blog-content-api-contract.md)
+- [docs-env-checklist.md](docs-env-checklist.md)
+- [nas-reverse-proxy-security-checklist.md](nas-reverse-proxy-security-checklist.md)
+- [docs-content-authoring-pipeline.md](../architecture/docs-content-authoring-pipeline.md)
+- [docs-secret-token-lifecycle-policy.md](../architecture/docs-secret-token-lifecycle-policy.md)
