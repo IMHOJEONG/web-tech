@@ -1,4 +1,5 @@
 import type { SearchData } from '~/lib/get-search-data'
+import type { DocsIndexSectionFilterConfig } from './docs-index-config.types'
 
 export const DOCS_INDEX_SECTION_FILTERS = [
     { value: 'all', section: null, messageKey: 'all' },
@@ -6,12 +7,17 @@ export const DOCS_INDEX_SECTION_FILTERS = [
     { value: 'uiux', section: 'UI/UX', messageKey: 'uiux' },
     { value: 'backend', section: 'Backend', messageKey: 'backend' },
     {
+        value: 'infrastructure',
+        section: 'Infrastructure',
+        messageKey: 'infrastructure',
+    },
+    {
         value: 'computer-science',
         section: 'Computer Science',
         messageKey: 'computerscience',
     },
     { value: 'docs', section: 'Docs', messageKey: 'docs' },
-] as const
+] as const satisfies readonly DocsIndexSectionFilterConfig[]
 
 export const DOCS_INDEX_SORT_OPTIONS = ['latest', 'title', 'section'] as const
 
@@ -39,7 +45,7 @@ function isSectionFilter(value: string): value is DocsIndexSectionFilter {
 }
 
 function isSortOption(value: string): value is DocsIndexSortOption {
-    return DOCS_INDEX_SORT_OPTIONS.includes(value as DocsIndexSortOption)
+    return DOCS_INDEX_SORT_OPTIONS.some((option) => option === value)
 }
 
 function normalizeDateValue(date?: string) {

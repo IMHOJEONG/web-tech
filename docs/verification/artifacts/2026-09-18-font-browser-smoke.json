@@ -1,0 +1,210 @@
+[
+  {
+    "slug": "javascript-event-loop-runtime",
+    "status": 200,
+    "fontPreloads": [
+      " </_next/static/immutable/media/PretendardVariable-s.p.40d1pes8boa5s.woff2>; rel=preload; as=\"font\"; crossorigin=\"\"; type=\"font/woff2\"",
+      " </_next/static/immutable/media/SpaceGroteskVariable-s.p.01wdk8bc6c7x0.woff2>; rel=preload; as=\"font\"; crossorigin=\"\"; type=\"font/woff2\""
+    ],
+    "fontRequests": [
+      {
+        "url": "https://heap-forge.app/_next/static/immutable/media/PretendardVariable-s.p.40d1pes8boa5s.woff2",
+        "bytes": 1756652
+      },
+      {
+        "url": "https://heap-forge.app/_next/static/immutable/media/SpaceGroteskVariable-s.p.01wdk8bc6c7x0.woff2",
+        "bytes": 25276
+      }
+    ],
+    "codeFont": [],
+    "codeFaces": [
+      {
+        "weight": "700",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "700",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "800",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "800",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "200",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "200",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "400",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "300",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "300",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "500",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "500",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "400",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "600",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "600",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "100",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "100",
+        "style": "italic",
+        "status": "unloaded"
+      }
+    ],
+    "bodyChars": 998
+  },
+  {
+    "slug": "browser",
+    "status": 200,
+    "fontPreloads": [
+      " </_next/static/immutable/media/PretendardVariable-s.p.40d1pes8boa5s.woff2>; rel=preload; as=\"font\"; crossorigin=\"\"; type=\"font/woff2\"",
+      " </_next/static/immutable/media/SpaceGroteskVariable-s.p.01wdk8bc6c7x0.woff2>; rel=preload; as=\"font\"; crossorigin=\"\"; type=\"font/woff2\""
+    ],
+    "fontRequests": [
+      {
+        "url": "https://heap-forge.app/_next/static/immutable/media/PretendardVariable-s.p.40d1pes8boa5s.woff2",
+        "bytes": 1756652
+      },
+      {
+        "url": "https://heap-forge.app/_next/static/immutable/media/SpaceGroteskVariable-s.p.01wdk8bc6c7x0.woff2",
+        "bytes": 25276
+      },
+      {
+        "url": "https://heap-forge.app/_next/static/immutable/media/JetBrainsMono_Regular-s.2i5im_bcn3ddy.woff2",
+        "bytes": 92164
+      }
+    ],
+    "codeFont": [],
+    "codeFaces": [
+      {
+        "weight": "700",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "700",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "800",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "800",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "200",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "200",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "400",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "300",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "300",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "500",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "500",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "400",
+        "style": "normal",
+        "status": "loaded"
+      },
+      {
+        "weight": "600",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "600",
+        "style": "italic",
+        "status": "unloaded"
+      },
+      {
+        "weight": "100",
+        "style": "normal",
+        "status": "unloaded"
+      },
+      {
+        "weight": "100",
+        "style": "italic",
+        "status": "unloaded"
+      }
+    ],
+    "bodyChars": 3835
+  }
+]

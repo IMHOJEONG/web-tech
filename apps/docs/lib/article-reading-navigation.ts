@@ -62,7 +62,7 @@ function toNavigationItem(
     }
 }
 
-function dedupeDocs(docs: ArticleReadingNavigationDoc[]) {
+function dedupeDocs(docs: readonly ArticleReadingNavigationDoc[]) {
     const seen = new Set<string>()
     const uniqueDocs: ArticleReadingNavigationDoc[] = []
 
@@ -81,7 +81,7 @@ function dedupeDocs(docs: ArticleReadingNavigationDoc[]) {
 }
 
 export function buildArticleReadingNavigation(
-    docs: ArticleReadingNavigationDoc[],
+    docs: readonly ArticleReadingNavigationDoc[],
     currentDoc: ArticleReadingNavigationDoc
 ): ArticleReadingNavigation {
     const currentIdentity = getIdentity(currentDoc)

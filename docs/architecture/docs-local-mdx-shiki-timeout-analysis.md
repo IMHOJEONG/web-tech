@@ -210,7 +210,7 @@ PASS /docs status=200 total=601ms bytes=107948
 
 - `apps/docs/app/docs/[...slugParts]/page.tsx`
 - `apps/docs/scripts/check-prod-routes.mjs`
-- `docs/worklog/2026-08-23-docs-local-remote-loading-boundary.md`
+- `docs/worklog/2026-08/2026-08-23-docs-local-remote-loading-boundary.md`
 
 핵심 변경:
 
@@ -286,9 +286,9 @@ DOCS_PROD_CHECK_BASE_URL=http://localhost:3003 pnpm --filter docs check:prod-rou
 
 ## Related Work
 
-- `docs/worklog/2026-08-23-docs-local-remote-loading-boundary.md`
+- `docs/worklog/2026-08/2026-08-23-docs-local-remote-loading-boundary.md`
 - `docs/architecture/docs-local-vs-remote-content-policy.md`
 - `docs/architecture/docs-content-api-fail-fast-policy.md`
 - `docs/architecture/docs-remote-code-highlighting-sidecar.md`
-- `docs/worklog/2026-08-24-docs-lightweight-code-block-highlighting.md`
+- `docs/worklog/2026-08/2026-08-24-docs-lightweight-code-block-highlighting.md`
 - `039ffe6 fix(docs-content): skip shiki for local docs detail`

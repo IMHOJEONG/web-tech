@@ -43,6 +43,21 @@ const unrelatedDoc: ArticleRelatedDocument = {
     contentSource: 'local',
 }
 
+test('related document calculation leaves shared documents and tags unchanged', () => {
+    const input = structuredClone([sameSectionDoc, sameTagsDoc, currentDoc])
+    const before = structuredClone(input)
+    for (const doc of input) {
+        if (doc.tags) Object.freeze(doc.tags)
+        Object.freeze(doc)
+    }
+    Object.freeze(input)
+    const target = input[2]
+    assert.ok(target)
+    const related = buildArticleRelatedDocuments(input, target)
+    assert.ok(related.length > 0)
+    assert.deepEqual(input, before)
+})
+
 test('buildArticleRelatedDocuments prefers docs with shared tags', () => {
     const related = buildArticleRelatedDocuments(
         [sameSectionDoc, sameTagsDoc, unrelatedDoc, currentDoc],

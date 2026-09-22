@@ -22,7 +22,7 @@ export type ArticleRelatedDocumentItem = {
     href: string
     readMinutes?: number
     summary?: string
-    tags: string[]
+    tags: readonly string[]
     title: string
     topicLabel?: string
 }
@@ -59,7 +59,7 @@ function getSection(doc: ArticleRelatedDocument) {
     return section || null
 }
 
-function normalizeTags(tags?: string[]) {
+function normalizeTags(tags?: readonly string[]) {
     return new Set(
         (tags ?? [])
             .map((tag) => tag.trim().toLowerCase())
@@ -138,7 +138,7 @@ function toRelatedItem(
 }
 
 export function buildArticleRelatedDocuments(
-    docs: ArticleRelatedDocument[],
+    docs: readonly ArticleRelatedDocument[],
     currentDoc: ArticleRelatedDocument,
     limit = DEFAULT_RELATED_LIMIT
 ): ArticleRelatedDocumentItem[] {

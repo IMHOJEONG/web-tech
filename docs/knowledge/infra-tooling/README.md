@@ -163,11 +163,11 @@
 
 ## 먼저 보면 좋은 문서
 
-- `docs/worklog/2026-05-25-pnpm-lockfile-only-revalidation.md`
-- `docs/worklog/2026-05-21-public-asset-base-server-env-support.md`
+- `docs/worklog/2026-05/2026-05-25-pnpm-lockfile-only-revalidation.md`
+- `docs/worklog/2026-05/2026-05-21-public-asset-base-server-env-support.md`
 - `docs/runbooks/docs-env-checklist.md`
-- `docs/worklog/2026-05-15-remote-thumbnail-host-allowlist.md`
-- `docs/worklog/2026-05-15-remote-thumbnail-server-base-resolution.md`
-- `docs/worklog/2026-05-18-remote-thumbnail-asset-base-only.md`
-- `docs/worklog/2026-05-26-main-ruleset-verification.md`
-- `docs/worklog/2026-06-12-vercel-corepack-pnpm-lockfile-mismatch.md`
+- `docs/worklog/2026-05/2026-05-15-remote-thumbnail-host-allowlist.md`
+- `docs/worklog/2026-05/2026-05-15-remote-thumbnail-server-base-resolution.md`
+- `docs/worklog/2026-05/2026-05-18-remote-thumbnail-asset-base-only.md`
+- `docs/worklog/2026-05/2026-05-26-main-ruleset-verification.md`
+- `docs/worklog/2026-06/2026-06-12-vercel-corepack-pnpm-lockfile-mismatch.md`

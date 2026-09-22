@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 
 type FoundationItem = {
     area: string

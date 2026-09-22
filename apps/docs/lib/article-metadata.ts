@@ -38,7 +38,7 @@ export function buildArticleMetadata(
             canonical: canonicalUrl,
         },
         authors: article.authorName ? [{ name: article.authorName }] : [],
-        keywords: article.tags,
+        keywords: article.tags ? [...article.tags] : undefined,
         openGraph: {
             type: 'article',
             title,
@@ -48,7 +48,7 @@ export function buildArticleMetadata(
             publishedTime: article.date,
             modifiedTime: article.updatedAt ?? article.date,
             authors: article.authorName ? [article.authorName] : undefined,
-            tags: article.tags,
+            tags: article.tags ? [...article.tags] : undefined,
             section: article.topicLabel,
         },
         twitter: {

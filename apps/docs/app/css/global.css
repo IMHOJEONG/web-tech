@@ -2,6 +2,7 @@
 @import 'tw-animate-css';
 
 @source "../../../../packages/ui/components/**/*.{ts,tsx}";
+@source "../../../../packages/ui/lib/**/*.{ts,tsx}";
 @import './mdx.css';
 @import './animation.css';
 

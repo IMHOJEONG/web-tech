@@ -8,9 +8,10 @@ function stringifyHeading(value: unknown): string {
     }
 
     if (value && typeof value === 'object' && 'props' in value) {
-        return stringifyHeading(
-            (value as { props?: { children?: unknown } }).props?.children
-        )
+        const props = value.props
+        if (props && typeof props === 'object' && 'children' in props) {
+            return stringifyHeading(props.children)
+        }
     }
 
     return ''

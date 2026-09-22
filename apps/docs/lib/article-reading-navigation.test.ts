@@ -27,6 +27,19 @@ const oldestDoc: ArticleReadingNavigationDoc = {
 
 const docs: ArticleReadingNavigationDoc[] = [newestDoc, currentDoc, oldestDoc]
 
+test('reading navigation leaves the shared collection and documents unchanged', () => {
+    const input = structuredClone(docs)
+    const before = structuredClone(input)
+    input.forEach((doc) => Object.freeze(doc))
+    Object.freeze(input)
+    const target = input[1]
+    assert.ok(target)
+    const result = buildArticleReadingNavigation(input, target)
+    assert.equal(result.next?.title, 'Newest')
+    assert.equal(result.previous?.title, 'Oldest')
+    assert.deepEqual(input, before)
+})
+
 test('buildArticleReadingNavigation returns previous older doc and next newer doc', () => {
     const navigation = buildArticleReadingNavigation(docs, currentDoc)
 

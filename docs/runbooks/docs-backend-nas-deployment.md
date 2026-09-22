@@ -55,6 +55,56 @@ CONTENT_ASSET_BASE_URL=https://assets.heap-forge.app
 
 `DOCS_CONTENT_PATH`는 NAS에 존재하는 디렉터리이며 컨테이너에는 read-only로 mount된다. 이미지 파일은 이 API가 직접 제공하지 않으므로 `CONTENT_ASSET_BASE_URL`의 별도 정적 asset origin에 배포해야 한다.
 
+## Vercel Content Cache Revalidation
+
+NAS의 Markdown 변경은 `docs-backend` API 응답에는 즉시 반영되지만,
+`apps/docs`는 기본 300초 동안 원격 응답을 캐시한다. 발행 직후 반영하려면
+Vercel과 NAS에 별도의 revalidation token을 설정한다.
+
+Vercel의 `apps/docs` 환경변수:
+
+```env
+BLOG_CONTENT_REVALIDATE_SECONDS=300
+BLOG_CONTENT_REVALIDATE_TOKEN=<dedicated-random-token>
+```
+
+이 값은 `BLOG_CONTENT_API_TOKEN`과 분리한다. Vercel 환경변수를 추가하거나
+변경한 뒤에는 새 deployment를 생성한다.
+
+NAS에는 같은 revalidation token을 Git 저장소 밖의 파일로 저장한다.
+
+```bash
+sudo install -d -m 700 /volume1/docker/heap-forge/secrets
+sudo sh -c 'umask 077; cat > /volume1/docker/heap-forge/secrets/docs_revalidation_token'
+```
+
+토큰을 입력하고 `Ctrl+D`로 종료한다. 문서와 frontmatter를 검증한 다음
+code-server 또는 NAS checkout에서 캐시 무효화 명령을 실행한다.
+
+```bash
+DOCS_CONTENT_REVALIDATE_URL=https://heap-forge.app/api/revalidate/content \
+DOCS_CONTENT_REVALIDATE_TOKEN_FILE=/volume1/docker/heap-forge/secrets/docs_revalidation_token \
+pnpm --filter docs revalidate:content-cache
+```
+
+직접 HTTP 상태를 확인하려면 다음과 같이 호출할 수도 있다.
+
+```bash
+read -s DOCS_REVALIDATE_TOKEN
+curl --fail-with-body --silent --show-error \
+  --request POST \
+  --header "Authorization: Bearer ${DOCS_REVALIDATE_TOKEN}" \
+  https://heap-forge.app/api/revalidate/content
+unset DOCS_REVALIDATE_TOKEN
+```
+
+성공 응답의 `revalidated: true`를 확인한 후 해당 목록 또는 상세 페이지를
+새로 요청한다. webhook은 데이터를 미리 가져오는 것이 아니라 캐시를 즉시
+만료시키므로, 다음 페이지 요청이 NAS API의 최신 응답을 가져온다.
+
+정책 문서:
+`docs/architecture/docs-content-cache-revalidation-policy.md`
+
 ## Image Architecture
 
 Docker image는 NAS의 CPU architecture와 일치해야 한다.

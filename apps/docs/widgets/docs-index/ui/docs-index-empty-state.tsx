@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server'
-import Link from 'next/link'
+import { Link } from '~/shared/i18n/navigation'
 import {
     getDocsIndexHref,
     type DocsIndexControls,
