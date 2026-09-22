@@ -10,6 +10,8 @@
 - [ADR-0004: About은 소개에 집중하고 공용 셸을 재사용한다](adr-0004-about-content-and-shared-shell.md)
 - [ADR-0005: 문서 미리보기 카드의 재사용 경계](adr-0005-document-preview-card-boundary.md)
 
+- [ADR-0006: 공용 UI의 동작 기반을 Base UI로 전환한다](adr-0006-shared-ui-base-ui.md)
+
 이전 결정(대체됨):
 
 - [ADR-0001: Docs Feed Main Composition](adr-0001-docs-feed-main.md) → ADR-0003

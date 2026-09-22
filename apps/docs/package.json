@@ -19,6 +19,7 @@
         "test:activity-lab": "playwright test --config=playwright.activity.config.ts",
         "pretest:ui": "pnpm --filter @web-tech/ui build && tsc -p tsconfig.ui-e2e.json",
         "test:ui": "playwright test --config=playwright.ui.config.ts",
+        "test:ui:consumer": "playwright test --config=playwright.ui-consumer.config.ts",
         "test:e2e": "playwright test",
         "test:article:prod": "playwright test --config=playwright.article.config.ts",
         "check:prod-routes": "node ./scripts/check-prod-routes.mjs",

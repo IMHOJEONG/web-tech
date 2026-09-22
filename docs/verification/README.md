@@ -27,6 +27,8 @@
 
 ## 콘텐츠
 
+- [09-22 Base UI 전환 검증](content/2026-09-22-base-ui-migration.md): 공용 UI·Activity·production 소비 화면과 번들 비용.
+
 - [09-21 Activity 포커스 실험](content/2026-09-21-activity-focus.md): DOM·Effect 보존, Sheet 포털 잔존과 외부 배치 비교.
 
 - [09-20 공개 글 독해 검토](content/2026-09-20-content-readability-review.md): 로컬 공개 글 10개의 설명 흐름과 편집 우선순위.

@@ -20,11 +20,11 @@ const result = await build({
 
 const bytes = result.outputFiles[0]!.contents
 const inputs = Object.keys(result.metafile.inputs)
-const radixPackages = [
+const primitivePackages = [
     ...new Set(
         inputs.flatMap((path) => {
             const match = path.match(
-                /\.pnpm\/(@radix-ui\+[^/]+?)\/node_modules/
+                /\.pnpm\/(@(?:radix-ui|base-ui)\+[^/]+?)\/node_modules/
             )
             return match ? [match[1]!.split('(')[0]] : []
         })
@@ -41,7 +41,7 @@ console.log(
             commonJsRadixEntry: inputs.some((path) =>
                 path.endsWith('/radix-ui/dist/index.js')
             ),
-            radixPackages,
+            primitivePackages,
         },
         null,
         2

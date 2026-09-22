@@ -87,16 +87,16 @@ function App() {
         <SheetContent
             id="dialog-content"
             showCloseButton={policy === 'no-close' ? false : undefined}
-            onCloseAutoFocus={(event) => {
+            finalFocus={() => {
                 record('dialog:close-auto-focus')
                 if (
                     (policy === 'guarded' || policy === 'isolated') &&
                     !visibleRef.current
                 ) {
-                    event.preventDefault()
-                    document.getElementById('toggle')?.focus()
                     record('dialog:fallback-focus')
+                    return document.getElementById('toggle')
                 }
+                return true
             }}
         >
             <SheetTitle>문서 편집</SheetTitle>

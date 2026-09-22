@@ -64,24 +64,26 @@ function SidebarItems({
                                     className="flex flex-col gap-1"
                                     key={item.title}
                                 >
-                                    <SidebarMenuButton asChild>
-                                        <Link
-                                            href={categoryHref([item.url])}
-                                            className={cn(
-                                                'hover:bg-slate-300 hover:text-black hover:opacity-90',
-                                                'dark:hover:bg-gray-100',
-                                                {
-                                                    'bg-blue-100 dark:bg-gray-400':
-                                                        pathname ===
-                                                        makeCategoryUrl([
-                                                            item.url,
-                                                        ]),
-                                                }
-                                            )}
-                                        >
-                                            <item.icon />
-                                            <span>{item.title}</span>
-                                        </Link>
+                                    <SidebarMenuButton
+                                        render={
+                                            <Link
+                                                href={categoryHref([item.url])}
+                                                className={cn(
+                                                    'hover:bg-slate-300 hover:text-black hover:opacity-90',
+                                                    'dark:hover:bg-gray-100',
+                                                    {
+                                                        'bg-blue-100 dark:bg-gray-400':
+                                                            pathname ===
+                                                            makeCategoryUrl([
+                                                                item.url,
+                                                            ]),
+                                                    }
+                                                )}
+                                            />
+                                        }
+                                    >
+                                        <item.icon />
+                                        <span>{item.title}</span>
                                     </SidebarMenuButton>
 
                                     <div className="flex flex-col gap-3">

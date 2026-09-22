@@ -22,10 +22,17 @@
 
 ## Shared UI
 
+- [-] `P1` 공용 UI와 모든 대상 소비 앱의 동작 기반을 Base UI로 통일한다. 1차 공용 primitive 전환은 완료했지만 전체 전환은 진행 중이다. [ADR-0006의 최종 목표](../architecture/adr-0006-shared-ui-base-ui.md)를 기준으로 관리한다.
+- [x] `P1` 저장소 소유 UI의 직접 Radix 의존성과 wrapper를 정리한다. 미사용 `apps/vuln-radar`의 `@radix-ui/react-slot`, `packages/ui`의 `cmdk`·`@radix-ui/react-icons`와 catalog 선언을 제거했다. cmdk의 Dialog 전이 경로도 제거됐으며 UI 54개·production 16개·Drawer 반복 20개 검증을 통과했다. [검증 보고서](../verification/content/2026-09-22-base-ui-migration.md)를 참고한다. Prisma Studio의 전이 의존성과 외부 모노레포는 아래 별도 과제로 남긴다.
+- [ ] `P2` Prisma Studio의 Radix 전이 의존성을 별도 검토한다. `prisma -> @prisma/studio-core -> @radix-ui/react-toggle` 경로가 남아 있다. 완료 조건: 실제 앱 번들·런타임 포함 여부와 상위 패키지 제거·업데이트 가능성을 확인하고 인증·DB 기능을 유지한 상태에서 처리 방향을 결정한다. 이 경로가 남은 동안 저장소 전체 Radix 의존성 제거 완료로 표시하지 않는다. Base UI로 강제 override하거나 Prisma를 임의 제거하지 않는다.
+- [ ] `P2` 다른 모노레포에서 공용 UI를 사용할 배포·버전 정책과 소비처 목록을 확정한다. 완료 조건: 실제 소비 저장소, React/빌드 호환성, 패키지 전달 방식, API 변경 이행 절차를 기록하고 각 소비처에서 검증한다. 현재 외부 모노레포는 미조사이며 자동 배포·변경하지 않는다.
+
+- [x] `P1` Radix 유지안과 비교 후 공용 primitive를 Base UI로 전환한다. 디자인 토큰·모듈 경로를 유지하고 render·포커스·Tooltip 설명 관계를 재검증했다. 선택 이유는 [ADR-0006](../architecture/adr-0006-shared-ui-base-ui.md), 실행 범위는 [검증 보고서](../verification/content/2026-09-22-base-ui-migration.md)를 참고한다. 운영 배포 완료를 의미하지 않는다.
+
 - [x] `P1` 공식 Radix/new-york-v4의 Sheet 닫기 옵션, Button 작은 크기, Badge 변형, Tooltip Provider 구성을 선별 반영한다. 기존 디자인 토큰 유지와 회귀 검사 결과는 [작업 기록](../worklog/2026-09/2026-09-22-shadcn-primitives-refresh.md)을 참고한다.
 - [ ] `P1` Activity를 운영 UI에 도입하기 전에 Portal 생명주기 경계를 검증한다. 완료 조건: Root·Content 외부 배치와 닫힘 완료 후 숨김 방식을 비교하고, production·애니메이션·빠른 재열기에서 Overlay 제거, 스크롤 잠금 해제, 보이는 대상으로 포커스 복귀, 재진입을 확인한다. 현재 운영 장애로 확정된 항목은 아니며 [실험 결과](../verification/content/2026-09-21-activity-focus.md)가 근거다.
 - [x] `P2` 공용 UI의 cn·통합 radix-ui 패키지를 단계적으로 전환했다. 공개 exports 유지, 클래스 병합·UI 46개, Activity 22개, 모바일 Drawer 4개, 소비 앱 타입 검사와 vuln-radar 빌드를 확인했다. 번들 측정 범위와 중복 Context 확인 한계는 [작업 기록](../worklog/2026-09/2026-09-22-ui-dependency-migration.md)을 참고한다.
-- [ ] `P2` 공용 UI 의존성 전환 후 docs의 Next.js 프로덕션 빌드와 production 모드 Drawer·Tooltip 동작을 확인한다. 현재 검증은 타입 검사, 독립 브라우저 fixture, docs 개발 서버 및 vuln-radar 프로덕션 빌드까지다.
+- [-] `P2` 공용 UI 의존성 전환 후 docs의 production 동작을 확인한다. Base UI 기준 Next.js 빌드와 Drawer·필터 16개는 통과했다. production Tooltip은 미검증이며, [현재 검증 기록](../verification/content/2026-09-22-base-ui-migration.md)을 참고한다.
 - [ ] `P2` 공용 Sidebar와 Tooltip의 Safari·Firefox·모바일·스크린 리더 점검을 추가한다. 완료 조건: 키보드 탐색, 닫기·복귀, 테마별 가독성 및 reduced-motion을 실제 소비 화면에서 확인한다. 현재 새 기본 컴포넌트 검사는 headless Chromium 범위다.
 
 ## Planning / Product

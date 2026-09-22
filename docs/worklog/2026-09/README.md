@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [공용 UI의 Base UI 전환](2026-09-22-base-ui-migration.md)
+
 - [공용 UI의 cn·Radix 의존성 전환](2026-09-22-ui-dependency-migration.md)
 
 - [공용 shadcn 기본 컴포넌트 후속 반영](2026-09-22-shadcn-primitives-refresh.md)

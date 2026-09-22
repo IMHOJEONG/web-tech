@@ -1,4 +1,4 @@
-import { Button, buttonVariants } from '@web-tech/ui/components/button'
+import { buttonVariants } from '@web-tech/ui/lib/button-variants'
 import { cn } from '@web-tech/ui/lib/utils'
 import { Check, ChevronDown } from 'lucide-react'
 import { Link } from '~/shared/i18n/navigation'
@@ -27,34 +27,29 @@ export function HubTopicFilters({
     const renderTopic = (topic: HubTopic) => {
         const active = topic.value === (selected ?? '')
         return (
-            <Button
-                asChild
-                variant="ghost"
+            <Link
+                data-slot="button"
+                href={getHubTopicHref(pathname, topic.value)}
+                scroll={false}
+                prefetch={false}
+                aria-current={active ? 'true' : undefined}
                 key={topic.value}
                 className={cn(
+                    buttonVariants({ variant: 'ghost' }),
                     'ds-focus-ring h-auto min-h-11 min-w-0 max-w-full justify-start rounded-full border px-3 py-2 text-sm shadow-none transition-colors motion-reduce:transition-none',
                     active
                         ? 'border-primary/40 bg-primary/10 text-primary hover:bg-primary/15 hover:text-primary dark:hover:bg-primary/15'
                         : 'border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface dark:hover:bg-surface-container'
                 )}
             >
-                <Link
-                    href={getHubTopicHref(pathname, topic.value)}
-                    scroll={false}
-                    prefetch={false}
-                    aria-current={active ? 'true' : undefined}
-                >
-                    {active && (
-                        <Check aria-hidden="true" className="size-3.5" />
-                    )}
-                    <span className="min-w-0 whitespace-normal break-words [overflow-wrap:anywhere]">
-                        {topic.label}
-                    </span>
-                    <span className="shrink-0 text-xs tabular-nums">
-                        {topic.count}
-                    </span>
-                </Link>
-            </Button>
+                {active && <Check aria-hidden="true" className="size-3.5" />}
+                <span className="min-w-0 whitespace-normal break-words [overflow-wrap:anywhere]">
+                    {topic.label}
+                </span>
+                <span className="shrink-0 text-xs tabular-nums">
+                    {topic.count}
+                </span>
+            </Link>
         )
     }
     return (

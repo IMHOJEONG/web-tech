@@ -28,7 +28,7 @@ test.beforeAll(async () => {
     bundleInputs = Object.keys(result.metafile.inputs)
     css = (
         await postcss([tailwind()]).process(
-            '@import "@web-tech/tailwind-config"; @import "tw-animate-css"; @source "../../../packages/ui/components"; @source "./fixtures";',
+            '@import "@web-tech/tailwind-config"; @import "tw-animate-css"; @source "../../../packages/ui/components"; @source "../../../packages/ui/lib"; @source "./fixtures";',
             { from: fileURLToPath(new URL('./test.css', import.meta.url)) }
         )
     ).css
@@ -60,17 +60,16 @@ test.afterEach(async ({ page }) => {
     expect(pageErrors.get(page)).toEqual([])
 })
 
-test('shared UI excludes the CommonJS Radix umbrella and unused primitives', () => {
+test('shared UI uses Base UI subpaths without direct Radix primitives', () => {
     expect(
         bundleInputs.some((path) => path.endsWith('/radix-ui/dist/index.js'))
     ).toBe(false)
     expect(
-        bundleInputs.filter((path) =>
-            /\/@radix-ui\/react-(select|dropdown-menu|navigation-menu)\//.test(
-                path
-            )
-        )
+        bundleInputs.filter((path) => /\/@radix-ui\/react-/.test(path))
     ).toEqual([])
+    expect(
+        bundleInputs.some((path) => /\/@base-ui\/react\/button\//.test(path))
+    ).toBe(true)
 })
 
 test('Button sizes retain defaults and allow explicit touch target overrides', async ({
@@ -86,7 +85,7 @@ test('Button sizes retain defaults and allow explicit touch target overrides', a
     await expect(page.locator('#xs')).toHaveAttribute('data-size', 'xs')
 })
 
-test('Button preserves keyboard activation, disabled semantics and asChild links', async ({
+test('Button preserves keyboard activation and disabled semantics while styled links stay links', async ({
     page,
 }) => {
     await page.locator('#xs').focus()
@@ -103,6 +102,50 @@ test('Button preserves keyboard activation, disabled semantics and asChild links
     await expect(page.getByRole('link', { name: 'Link button' })).toHaveCount(1)
     await page.keyboard.press('Enter')
     await expect(page).toHaveURL(/#destination$/)
+})
+
+test('render composes refs and click handlers without accidental form submission', async ({
+    page,
+}) => {
+    await page.locator('#composed').click()
+    await expect(page.locator('#composition-results')).toHaveText('1/1/0/false')
+    await expect(page.locator('#composed')).toHaveCSS('height', '44px')
+    await page.locator('#focus-composed').click()
+    await expect(page.locator('#composed')).toBeFocused()
+    await expect(page.locator('#composition-results')).toHaveText('1/1/0/true')
+    await page.keyboard.press('Space')
+    await expect(page.locator('#composition-results')).toHaveText('2/2/0/true')
+})
+
+test('controlled Tooltip preserves existing descriptions and cleans its relation on close', async ({
+    page,
+}) => {
+    const trigger = page.locator('#controlled-tooltip')
+    await trigger.focus()
+    const tooltip = page.getByRole('tooltip')
+    await expect(tooltip).toHaveText('Additional explanation.')
+    await expect(trigger).toHaveAccessibleDescription(
+        'Existing explanation. Additional explanation.'
+    )
+    await page.keyboard.press('Escape')
+    await expect(tooltip).toHaveCount(0)
+    await expect(trigger).toHaveAttribute(
+        'aria-describedby',
+        'extra-description'
+    )
+})
+
+test('cancelled and disabled Tooltips do not expose a dangling description', async ({
+    page,
+}) => {
+    for (const id of ['cancelled-tooltip', 'disabled-tooltip']) {
+        await page.locator(`#${id}`).hover()
+        await page.locator(`#${id}`).focus()
+        await expect(page.getByRole('tooltip')).toHaveCount(0)
+        await expect(page.locator(`#${id}`)).not.toHaveAttribute(
+            'aria-describedby'
+        )
+    }
 })
 
 test('Badge exposes variants and preserves token colors and link semantics', async ({
@@ -158,6 +201,9 @@ test('Tooltip supports immediate default hover and keyboard focus', async ({
 }) => {
     await page.locator('#instant').hover()
     await expect(page.getByRole('tooltip')).toHaveText('Default delay is zero')
+    await expect(page.locator('#instant')).toHaveAccessibleDescription(
+        'Default delay is zero'
+    )
     await page.mouse.move(1000, 600, { steps: 10 })
     await expect(page.getByRole('tooltip')).toHaveCount(0)
     await page.locator('#delayed').focus()
@@ -173,6 +219,20 @@ test('Sidebar supplies the Tooltip provider for collapsed menu buttons', async (
 }) => {
     await page.getByRole('button', { name: 'Sidebar destination' }).hover()
     await expect(page.getByRole('tooltip')).toHaveText('Sidebar destination')
+    await expect(
+        page.getByRole('button', { name: 'Sidebar destination' })
+    ).toHaveAttribute('data-popup-open')
+})
+
+test('Sidebar render preserves anchor semantics without nested buttons', async ({
+    page,
+}) => {
+    const link = page.getByRole('link', { name: 'Sidebar link' })
+    await expect(link).toHaveAttribute('data-sidebar', 'menu-button')
+    await expect(link.locator('button')).toHaveCount(0)
+    await link.focus()
+    await page.keyboard.press('Enter')
+    await expect(page).toHaveURL(/#destination$/)
 })
 
 test('Input, Collapsible and Separator retain public behavior', async ({
