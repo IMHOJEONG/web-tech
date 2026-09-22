@@ -37,24 +37,28 @@ export function CategorySidebar({
                                     className="flex flex-col gap-1"
                                     key={item.title}
                                 >
-                                    <SidebarMenuButton asChild>
-                                        <a
-                                            href={makeCategoryUrl([item.url])}
-                                            className={cn(
-                                                'hover:bg-slate-300 hover:text-black hover:opacity-90',
-                                                'dark:hover:bg-gray-100',
-                                                {
-                                                    'bg-blue-100 dark:bg-gray-400':
-                                                        pathname ===
-                                                        makeCategoryUrl([
-                                                            item.url,
-                                                        ]),
-                                                }
-                                            )}
-                                        >
-                                            <item.icon />
-                                            <span>{item.title}</span>
-                                        </a>
+                                    <SidebarMenuButton
+                                        render={
+                                            <a
+                                                href={makeCategoryUrl([
+                                                    item.url,
+                                                ])}
+                                                className={cn(
+                                                    'hover:bg-slate-300 hover:text-black hover:opacity-90',
+                                                    'dark:hover:bg-gray-100',
+                                                    {
+                                                        'bg-blue-100 dark:bg-gray-400':
+                                                            pathname ===
+                                                            makeCategoryUrl([
+                                                                item.url,
+                                                            ]),
+                                                    }
+                                                )}
+                                            />
+                                        }
+                                    >
+                                        <item.icon />
+                                        <span>{item.title}</span>
                                     </SidebarMenuButton>
 
                                     <div className="flex flex-col gap-3">

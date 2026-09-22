@@ -12,6 +12,8 @@
         "validate:content": "node ./scripts/validate-content.mjs && node ./scripts/validate-content-style.mjs",
         "pretest:content": "pnpm --filter @web-tech/docs-content-contract build",
         "test:content": "node --test ./scripts/validate-content.test.mjs ./scripts/validate-content-style.test.mjs && pnpm validate:content",
+        "pretest:ui": "pnpm --filter @web-tech/ui build && tsc -p tsconfig.ui-e2e.json",
+        "test:ui": "playwright test --config=playwright.ui.config.ts",
         "test:e2e": "playwright test",
         "check:prod-routes": "node ./scripts/check-prod-routes.mjs",
         "pretest:lib": "pnpm --filter @web-tech/docs-content-contract build",
