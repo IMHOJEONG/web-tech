@@ -1,15 +1,12 @@
 import { getTime } from '@web-tech/ui/lib/time'
 import { MainContent } from '~/shared/ui/main-content'
-import { cn } from '@web-tech/ui/lib/utils'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '~/shared/i18n/navigation'
-import type { CSSProperties } from 'react'
 import { formatSearchKeyword } from '~/feature/search/lib/format-search-keyword'
 import type { SearchData } from '~/lib/get-search-data'
 import {
     applyDocsIndexControls,
     filterDocsIndexControls,
-    getDocsIndexHref,
     resolveDocsIndexControls,
     type DocsIndexControls,
 } from '~/widgets/docs-index/model/docs-index-controls'
@@ -17,15 +14,15 @@ import {
     ALL_DOCS_PAGE_SIZE,
     getPaginationRange,
 } from '~/widgets/docs-index/model/docs-index-pagination'
-import {
-    getDocsIndexSectionMessageKey,
-    getDocsIndexSectionSummary,
-} from '~/widgets/docs-index/model/docs-index-summary'
+import { getDocsIndexSectionSummary } from '~/widgets/docs-index/model/docs-index-summary'
 import { DocsIndexCard } from './docs-index-card'
 import { DocsIndexControlsBar } from './docs-index-controls-bar'
 import { DocsIndexEmptyState } from './docs-index-empty-state'
 import { DocsSearchPanel } from './docs-search-panel'
-import { DocsPageNavigationLink } from './docs-page-navigation-link'
+import { DocsIndexPagination } from './docs-index-pagination'
+import { DocsIndexSections } from './docs-index-sections'
+import { DocsIndexStats } from './docs-index-stats'
+import { getMotionOrderStyle } from './docs-index-motion'
 
 type DocsIndexProps = {
     docs: SearchData[]
@@ -33,21 +30,6 @@ type DocsIndexProps = {
     currentPage?: number
     controls?: DocsIndexControls
     keyword?: string
-}
-
-type MotionOrderStyle = CSSProperties & {
-    '--motion-order': number
-}
-
-function getDocsPageHref(page: number, controls: DocsIndexControls) {
-    return getDocsIndexHref({
-        controls,
-        page,
-    })
-}
-
-function getMotionOrderStyle(index: number): MotionOrderStyle {
-    return { '--motion-order': index }
 }
 
 export async function DocsIndex({
@@ -157,98 +139,18 @@ export async function DocsIndex({
                     recommendations={recommendations}
                 />
 
-                <section className="motion-layout grid gap-3 md:grid-cols-3">
-                    <div
-                        className="motion-layout motion-reveal rounded-2xl border border-border bg-surface-container-lowest p-4"
-                        style={getMotionOrderStyle(0)}
-                    >
-                        <p className="text-xs font-semibold tracking-[0.16em] text-outline uppercase">
-                            {t('stats.totalDocs')}
-                        </p>
-                        <p className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
-                            {visibleDocs.length}
-                        </p>
-                    </div>
-                    <div
-                        className="motion-layout motion-reveal rounded-2xl border border-border bg-surface-container-lowest p-4"
-                        style={getMotionOrderStyle(1)}
-                    >
-                        <p className="text-xs font-semibold tracking-[0.16em] text-outline uppercase">
-                            {t('stats.sections')}
-                        </p>
-                        <p className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
-                            {sectionSummary.length}
-                        </p>
-                    </div>
-                    <div
-                        className="motion-layout motion-reveal rounded-2xl border border-border bg-surface-container-lowest p-4"
-                        style={getMotionOrderStyle(2)}
-                    >
-                        <p className="text-xs font-semibold tracking-[0.16em] text-outline uppercase">
-                            {t('stats.latestUpdate')}
-                        </p>
-                        <p className="mt-2 text-base font-semibold tracking-tight text-on-surface">
-                            {latestUpdated ?? t('stats.pending')}
-                        </p>
-                    </div>
-                </section>
+                <DocsIndexStats
+                    totalDocs={visibleDocs.length}
+                    sectionCount={sectionSummary.length}
+                    latestUpdated={latestUpdated}
+                />
 
                 <DocsIndexControlsBar
                     controls={resolvedControls}
                     resultCount={visibleDocs.length}
                 />
 
-                <section className="space-y-4">
-                    <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                        <div className="min-w-0">
-                            <p className="text-xs font-semibold tracking-[0.2em] text-outline uppercase">
-                                {t('sections.eyebrow')}
-                            </p>
-                            <h2 className="mt-2 break-keep text-2xl font-bold tracking-tight text-on-surface [overflow-wrap:anywhere]">
-                                {t('sections.title')}
-                            </h2>
-                        </div>
-                        <Link
-                            href="/category"
-                            data-touch-target="docs-index"
-                            className="ds-focus-ring inline-flex min-h-11 items-center rounded-full px-1 text-sm font-medium text-on-surface-variant transition-colors hover:text-primary"
-                        >
-                            {t('sections.toCategory')}
-                        </Link>
-                    </div>
-                    <div className="motion-layout grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-5">
-                        {sectionSummary.map((section, index) => {
-                            const sectionKey = getDocsIndexSectionMessageKey(
-                                section.key
-                            )
-
-                            return (
-                                <Link
-                                    key={section.key}
-                                    href={section.href}
-                                    data-touch-target="docs-index"
-                                    className="ds-focus-ring motion-layout motion-reveal group rounded-2xl border border-border bg-surface-container-lowest p-4 hover:-translate-y-0.5 hover:border-primary/40"
-                                    style={getMotionOrderStyle(index)}
-                                >
-                                    <p className="font-display text-xs font-semibold tracking-[0.16em] text-primary uppercase">
-                                        {t(`sectionLabels.${sectionKey}`)}
-                                    </p>
-                                    <h3 className="mt-3 text-lg font-semibold tracking-tight text-on-surface">
-                                        {t('sections.documentCount', {
-                                            count: section.count,
-                                        })}
-                                    </h3>
-                                    {section.latest && (
-                                        <p className="mt-2 text-xs text-on-surface-variant">
-                                            {t('sections.latestPrefix')}{' '}
-                                            {getTime(section.latest)}
-                                        </p>
-                                    )}
-                                </Link>
-                            )
-                        })}
-                    </div>
-                </section>
+                <DocsIndexSections sectionSummary={sectionSummary} />
 
                 <section className="space-y-4">
                     <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -289,63 +191,10 @@ export async function DocsIndex({
                             ))}
                         </div>
                     )}
-                    {pagination.totalPages > 1 && (
-                        <nav
-                            aria-label={t('allDocuments.paginationAriaLabel')}
-                            className="motion-layout flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between"
-                        >
-                            <DocsPageNavigationLink
-                                href={
-                                    pagination.page > 1
-                                        ? getDocsPageHref(
-                                              pagination.page - 1,
-                                              resolvedControls
-                                          )
-                                        : undefined
-                                }
-                                label={t('allDocuments.previous')}
-                            />
-                            <div className="flex flex-wrap items-center gap-1.5">
-                                {Array.from(
-                                    { length: pagination.totalPages },
-                                    (_, index) => index + 1
-                                ).map((page) => (
-                                    <Link
-                                        key={page}
-                                        href={getDocsPageHref(
-                                            page,
-                                            resolvedControls
-                                        )}
-                                        aria-current={
-                                            page === pagination.page
-                                                ? 'page'
-                                                : undefined
-                                        }
-                                        data-touch-target="docs-index"
-                                        className={cn(
-                                            'ds-focus-ring inline-flex size-11 items-center justify-center rounded-full border text-sm font-semibold transition',
-                                            page === pagination.page
-                                                ? 'border-primary bg-primary text-primary-foreground'
-                                                : 'border-border bg-surface-container-lowest text-on-surface-variant hover:border-primary/50 hover:text-primary'
-                                        )}
-                                    >
-                                        {page}
-                                    </Link>
-                                ))}
-                            </div>
-                            <DocsPageNavigationLink
-                                href={
-                                    pagination.page < pagination.totalPages
-                                        ? getDocsPageHref(
-                                              pagination.page + 1,
-                                              resolvedControls
-                                          )
-                                        : undefined
-                                }
-                                label={t('allDocuments.next')}
-                            />
-                        </nav>
-                    )}
+                    <DocsIndexPagination
+                        pagination={pagination}
+                        controls={resolvedControls}
+                    />
                 </section>
             </div>
         </MainContent>
