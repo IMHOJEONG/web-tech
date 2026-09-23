@@ -13,6 +13,8 @@
 
 ## Core Decision
 
+입력 길이·공백·반복 query·IME 처리의 현재 기준은 [ADR-0007](adr-0007-search-input-contract.md)을 따른다. 헤더·본문·서버·API가 동일한 유효 검색어를 사용한다.
+
 현재 `docs` 앱의 검색 경험은 아래처럼 정의합니다.
 
 1. 별도 `/search` 라우트를 두지 않는다.
@@ -234,8 +236,8 @@
 
 ## Related Docs
 
-- [docs-search-api-contract.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-search-api-contract.md)
-- [docs-blog-improvement-roadmap.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-blog-improvement-roadmap.md)
+- [docs-search-api-contract.md](docs-search-api-contract.md)
+- [docs-blog-improvement-roadmap.md](docs-blog-improvement-roadmap.md)
 
 ## Follow-Up
 

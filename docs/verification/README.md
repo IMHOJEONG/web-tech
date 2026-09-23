@@ -4,6 +4,8 @@
 
 ## 성능과 화면 안정성
 
+- [09-23 공개 배포 접근성 재검증](accessibility/2026-09-23-deployed-shell-recheck.md): 20개 통과·4개 조건부 제외. 이전 CSS 누락 증상은 현재 재현되지 않으며 원인은 미확정.
+
 - [09-23 코드·UI/UX 현황 분석](accessibility/2026-09-23-docs-code-ux-review.md): 빌드 재검증, 반영된 화면과 개선 후보 구분.
 
 - [09-23 배포 접근성 점검](accessibility/2026-09-23-deployed-shell.md): 키보드 이동 통과, 포커스 CSS 누락 확인과 미검증 범위.

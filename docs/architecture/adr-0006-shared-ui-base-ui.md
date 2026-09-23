@@ -81,3 +81,4 @@ Base UI 1.8.0으로 구성한 우리 Tooltip fixture에서 Popup의 `role="toolt
 - [main 기반 PR 분리 기록](../worklog/2026-09/2026-09-22-shared-ui-pr-split.md)
 - [분리 브랜치 검증](../verification/content/2026-09-22-shared-ui-main-baseline.md)
 - [main 반영 후 브랜치 동기화 기록](../worklog/2026-09/2026-09-22-feature-branches-sync-after-blog-merge.md)
+- [외부 소비 준비 상태 점검](../worklog/2026-09/2026-09-23-adr-followup-improvements.md#공용-ui-외부-재사용-점검)

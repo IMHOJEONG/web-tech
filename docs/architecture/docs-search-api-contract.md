@@ -53,7 +53,7 @@
 
 ### `query`
 
-- trimmed search keyword
+- [공통 입력 계약](adr-0007-search-input-contract.md)에 따라 정규화한 실제 검색어: 첫 q 값, 공백 정리, NFC, 최대 40 code point
 - empty string 가능
 - page와 API에서 같은 normalize 기준을 사용
 
@@ -134,5 +134,5 @@ preview는 page와 API가 같은 helper를 사용한다.
 
 ## Related Docs
 
-- [docs-search-experience-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-search-experience-policy.md)
-- [docs-blog-improvement-roadmap.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-blog-improvement-roadmap.md)
+- [docs-search-experience-policy.md](docs-search-experience-policy.md)
+- [docs-blog-improvement-roadmap.md](docs-blog-improvement-roadmap.md)

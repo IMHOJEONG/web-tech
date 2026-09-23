@@ -61,6 +61,8 @@ getComputedStyle(document.body).getPropertyValue("--docs-interactive-text");
 
 ## 한계와 후속 작업
 
+후속 상태: [같은 날 공개 배포 재검증](2026-09-23-deployed-shell-recheck.md)에서는 기존 포커스·대비 검사를 포함해 20개 통과·4개 조건부 제외였다. 아래 내용은 당시 관측과 조사 경과로 보존한다. CSS 누락의 원인은 여전히 미확정이다.
+
 ### 로컬 production 후속 검증
 
 같은 날 동일 커밋의 앱 코드로 `next build`와 `next start`를 실행했다. Node `24.12.0`, Next.js `16.3.4`이며 기존 `.next` 캐시는 삭제하지 않았다. 따라서 캐시를 비운 빌드 실험은 아니다. 원격 콘텐츠·로그 전송·개발 검사 도구를 끄고, 로컬 문서만 사용했다. 저장소 루트에서 실행한 명령:

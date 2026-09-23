@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [ADR 후속 점검과 About·검색·문서 목록 개선](2026-09-23-adr-followup-improvements.md)
+
 - [ADR 상태와 문서 생명주기 점검](2026-09-23-document-status-review.md)
 
 - [About의 근거 없는 버전·운영 상태 표시 제거](2026-09-23-about-intro-label.md)

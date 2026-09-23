@@ -25,7 +25,7 @@
 - [-] `P1` 공용 UI와 모든 대상 소비 앱의 동작 기반을 Base UI로 통일한다. 1차 공용 primitive 전환은 완료했지만 전체 전환은 진행 중이다. [ADR-0006의 최종 목표](../architecture/adr-0006-shared-ui-base-ui.md)를 기준으로 관리한다.
 - [x] `P1` 저장소 소유 UI의 직접 Radix 의존성과 wrapper를 정리한다. 미사용 `apps/vuln-radar`의 `@radix-ui/react-slot`, `packages/ui`의 `cmdk`·`@radix-ui/react-icons`와 catalog 선언을 제거했다. cmdk의 Dialog 전이 경로도 제거됐으며 UI 54개·production 16개·Drawer 반복 20개 검증을 통과했다. [검증 보고서](../verification/content/2026-09-22-base-ui-migration.md)를 참고한다. Prisma Studio의 전이 의존성과 외부 모노레포는 아래 별도 과제로 남긴다.
 - [ ] `P2` Prisma Studio의 Radix 전이 의존성을 별도 검토한다. `prisma -> @prisma/studio-core -> @radix-ui/react-toggle` 경로가 남아 있다. 완료 조건: 실제 앱 번들·런타임 포함 여부와 상위 패키지 제거·업데이트 가능성을 확인하고 인증·DB 기능을 유지한 상태에서 처리 방향을 결정한다. 이 경로가 남은 동안 저장소 전체 Radix 의존성 제거 완료로 표시하지 않는다. Base UI로 강제 override하거나 Prisma를 임의 제거하지 않는다.
-- [ ] `P2` 다른 모노레포에서 공용 UI를 사용할 배포·버전 정책과 소비처 목록을 확정한다. 완료 조건: 실제 소비 저장소, React/빌드 호환성, 패키지 전달 방식, API 변경 이행 절차를 기록하고 각 소비처에서 검증한다. 현재 외부 모노레포는 미조사이며 자동 배포·변경하지 않는다.
+- [ ] `P2` 다른 모노레포에서 공용 UI를 사용할 배포·버전 정책과 소비처 목록을 확정한다. 완료 조건: 실제 소비 저장소, React/빌드 호환성, 패키지 전달 방식, API 변경 이행 절차를 기록하고 각 소비처에서 검증한다. 09-23 확인: `private: true`, React 일반 dependency, CSS export 부재와 앱의 저장소 상대 source 경로가 남아 있다. tarball 내용·peer 정책·외부 소비 fixture 검증 전에는 외부 재사용 준비 완료로 처리하지 않는다. [점검 기록](../worklog/2026-09/2026-09-23-adr-followup-improvements.md#공용-ui-외부-재사용-점검). 외부 모노레포는 미조사이며 자동 배포·변경하지 않는다.
 
 - [x] `P1` Radix 유지안과 비교 후 공용 primitive를 Base UI로 전환한다. 디자인 토큰·모듈 경로를 유지하고 render·포커스·Tooltip 설명 관계를 재검증했다. 선택 이유는 [ADR-0006](../architecture/adr-0006-shared-ui-base-ui.md), 실행 범위는 [검증 보고서](../verification/content/2026-09-22-base-ui-migration.md)를 참고한다. 운영 배포 완료를 의미하지 않는다.
 
@@ -128,12 +128,14 @@
 
 ## UI / UX
 
-- [ ] `P0` 운영 CSS의 접근성 토큰·포커스 규칙 누락을 확인한다. 로컬 production에서는 정상이다. 완료 조건: Vercel 캐시 미사용 빌드 산출물과 공개 CSS를 비교하고 실패한 운영 4개 검사를 통과한다. [배포 검증](../verification/accessibility/2026-09-23-deployed-shell.md).
+- [x] `P0` 현재 공개 사이트의 접근성 토큰·포커스 규칙 누락을 재검사한다. 이전 실패 4개를 포함한 20개가 통과했고 모바일 전용 4개만 데스크톱에서 제외됐다. 증상 재검증 완료이며 캐시 원인 규명 완료는 아니다. [후속 검증](../verification/accessibility/2026-09-23-deployed-shell-recheck.md).
+- [ ] `P2` 접근성 CSS 누락 재발 시 배포 커밋·원본 CSS·공개 CSS를 함께 수집해 원인을 비교한다. 현재 증상은 재현되지 않았고 과거 원인은 미확정이다. 실패 당시 증거는 [기존 보고서](../verification/accessibility/2026-09-23-deployed-shell.md)에 보존한다.
 - [x] `P1` `/docs` 비활성 이전·다음 링크의 키보드 활성화를 막는다. 경계에서 href·포커스 없는 비활성 표시를 렌더링하고 정상 링크와 query 생성을 유지한다. ko/en 및 3개 화면 크기의 경계·이동 검사와 기존 필터 검사 통과. [수정과 검증](../worklog/2026-09/2026-09-23-docs-pagination-disabled-navigation.md).
 - [x] `P1` UI/UX 예시 글을 실제 문서처럼 표시하지 않는다. 실제 문서만 표시하고 부족한 섹션을 숨기며, 0개 안내와 명확한 피드 이동 CTA를 제공한다. 0·1·2·7개 등을 포함한 모델 테스트와 로컬 2개 문서의 브라우저 검사를 통과했다. 운영 원격 데이터 확인은 배포 후 별도 진행한다. [작업 기록](../worklog/2026-09/2026-09-23-uiux-real-article-cards.md).
 - [x] `P1` 검색 빈 상태의 번역과 본문 landmark를 통일한다. ko/en의 검색 0건·전체 문서 0건에서 제목·본문·복구 링크를 통일하고 공백 query도 같은 정책을 적용한다. 전체 0개는 서버 렌더링, 검색 0건은 브라우저로 검증했다. [작업 기록](../worklog/2026-09/2026-09-23-docs-empty-state-localization.md).
-- [ ] `P2` 헤더·본문 검색·직접 URL·API의 입력 정규화와 길이 정책을 공유한다. 완료 조건: 40자 정책을 확정하고 공백·긴 입력·한글 조합·중복 query를 경계별로 검사한다. 검색 결과 페이지네이션은 기존 보류 결정 확인 후 별도 적용한다.
-- [ ] `P2` `DocsIndex`의 통계·섹션·페이지 이동을 역할별로 분리한다. 완료 조건: 기존 query 유지와 검색 관련도 순서, 빈 상태 동작을 보존하며 공통 카드의 불필요한 통합은 피한다.
+- [x] `P2` 헤더·본문 검색·직접 URL·API의 입력 정규화와 길이 정책을 공유한다. [ADR-0007](../architecture/adr-0007-search-input-contract.md)의 40 code point·NFC·공백·첫 query 정책을 적용하고 합성 IME 이벤트와 서버 경계를 검사했다. 실제 OS IME는 별도 검증 대상이다. 검색 결과 페이지네이션은 보류를 유지한다.
+- [x] `P2` `DocsIndex`의 통계·섹션·페이지 이동을 역할별로 분리한다. 서버 컴포넌트 3개로 추출하고 기존 query·검색 관련도·빈 상태·페이지 이동 계약을 유지했다. [검증 기록](../worklog/2026-09/2026-09-23-adr-followup-improvements.md).
+- [ ] `P2` JavaScript 비활성 환경의 `/docs` 스트리밍 완결성을 확인한다. 개발 서버에서 본문 대신 loading 상태가 남았다. 프로덕션에서도 재현되는지 확인한 뒤 progressive enhancement 지원 범위를 정하며, 검색 입력 정규화와 별개로 관리한다.
 
 - [-] `P0` `640px ~ 1023px` 구간의 shell/UI 동작을 실제 디바이스 기준으로 점검한다.
   - header
@@ -293,6 +295,9 @@
   - i18n
 
 ## Content / Editorial
+
+- [x] `P1` About의 근거 없는 시작 날짜·직함을 제거하고 모바일 메뉴의 공유 직함 표시도 함께 제거한다. 새 날짜나 경력을 추정해 넣지 않았다. 한·영 메시지와 About 회귀 검사에 반영했다.
+- [ ] `P2` 남은 편집 메타데이터의 근거를 확인한다. footer 저작권 연도는 운영자 확인 후 변경하며, 현재 라우트에서 사용되지 않는 ArticleDetail 시안과 Alex Rivers·뉴스레터 메시지는 사용 경로를 정리한 별도 변경에서 제거한다. 이번 About 점검을 전체 카피 검수 완료로 간주하지 않는다.
 
 - [-] `P1` 양질의 기술 리소스를 category별 reading path로 확장한다.
   - 1차: Browser rendering, Network request path, Container health 기준 문서 추가
