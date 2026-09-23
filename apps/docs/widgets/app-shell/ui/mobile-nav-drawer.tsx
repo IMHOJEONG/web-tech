@@ -221,9 +221,6 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                             <p className="font-display text-sm font-bold tracking-[-0.02em] text-on-surface">
                                 {aboutT('profile.name')}
                             </p>
-                            <p className="font-display text-[0.6875rem] tracking-[0.08em] text-muted-foreground uppercase">
-                                {aboutT('profile.role')}
-                            </p>
                         </div>
                     </div>
 

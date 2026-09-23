@@ -5,6 +5,15 @@ for (const locale of ['ko', 'en']) {
         test(`${locale}/${theme}: About ends with a single author section`, async ({
             page,
         }, testInfo) => {
+            const missingMessages: string[] = []
+            page.on('console', (message) => {
+                if (
+                    message.type() === 'error' &&
+                    message.text().includes('MISSING_MESSAGE')
+                ) {
+                    missingMessages.push(message.text())
+                }
+            })
             await page.addInitScript(
                 (value) => localStorage.setItem('theme', value),
                 theme
@@ -21,7 +30,9 @@ for (const locale of ['ko', 'en']) {
                 )
             ).toBeVisible()
             await expect(
-                main.getByText(/VERSION\s*2\.0\.4|STATUS:\s*LIVE|운영 중/)
+                main.getByText(
+                    /VERSION\s*2\.0\.4|STATUS:\s*LIVE|운영 중|Full Stack Engineer|2026년 9월부터|ESTABLISHED SEPTEMBER/
+                )
             ).toHaveCount(0)
             expect(
                 await page.evaluate(
@@ -93,6 +104,7 @@ for (const locale of ['ko', 'en']) {
             await author.screenshot({
                 path: testInfo.outputPath('about-author.png'),
             })
+            expect(missingMessages).toEqual([])
         })
     }
 }

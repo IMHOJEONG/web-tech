@@ -523,8 +523,7 @@
             "titleAccentTwo": "PRECISION",
             "description": "A digital lab dedicated to unraveling modern engineering. We explore the point where Web performance, Mobile fluidity, and UI/UX architecture converge.",
             "asideTitle": "HeapForge Notes",
-            "missionLabel": "// MISSION_STATEMENT.md",
-            "establishedLabel": "// ESTABLISHED SEPTEMBER 2026"
+            "missionLabel": "Notes on what I learn while developing software and solving problems."
         },
         "pillars": {
             "web": {
@@ -547,7 +546,6 @@
         },
         "profile": {
             "name": "HoJeong Im",
-            "role": "Full Stack Engineer",
             "bio": "I write about the problems I encounter while developing software and how I solve them. HEAP-FORGE collects what I learn from web development and running services so I can refer back to it later.",
             "links": {
                 "github": {

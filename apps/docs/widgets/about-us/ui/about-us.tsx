@@ -86,7 +86,6 @@ export async function AboutUs() {
                             </p>
                             <div className="mt-4 space-y-3 text-sm leading-6 text-on-surface-variant">
                                 <p>{t('hero.missionLabel')}</p>
-                                <p>{t('hero.establishedLabel')}</p>
                             </div>
                         </aside>
                     </div>
