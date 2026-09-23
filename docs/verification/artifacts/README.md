@@ -1,5 +1,11 @@
 # 검증 원본 증거
 
+- [09-23 로컬 production 접근성 결과](2026-09-23-local-production-shell-playwright.json)
+- [09-23 로컬 production CSS와 계산값](2026-09-23-local-production-shell-css.json)
+
+- [09-23 배포 접근성 Chromium 결과](2026-09-23-deployed-shell-playwright.json)
+- [09-23 배포 접근성 Firefox·WebKit 결과](2026-09-23-deployed-shell-cross-browser.json)
+
 - [Activity 포커스 실험](2026-09-21-activity-focus.json)
 
 [검증 보고서 목록](../README.md)

@@ -1,0 +1,1145 @@
+{
+  "config": {
+    "argv": [
+      "/Users/coder/.local/share/mise/installs/node/24.12.0/bin/node",
+      "/Users/coder/Desktop/project/web-tech/apps/docs/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=/tmp/docs-accessibility-production.config.cjs"
+    ],
+    "configFile": "/tmp/docs-accessibility-production.config.cjs",
+    "rootDir": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/docs-accessibility-production-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-mobile",
+        "name": "chromium-mobile",
+        "testDir": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "skip-link.spec.ts",
+          "shell-focus-contrast.spec.ts",
+          "keyboard-accessibility.spec.ts",
+          "mobile-drawer-resize.spec.ts"
+        ],
+        "timeout": 45000
+      },
+      {
+        "outputDir": "/tmp/docs-accessibility-production-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-desktop",
+        "name": "chromium-desktop",
+        "testDir": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "skip-link.spec.ts",
+          "shell-focus-contrast.spec.ts",
+          "keyboard-accessibility.spec.ts",
+          "mobile-drawer-resize.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      ["list", null],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/docs-accessibility-production-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "keyboard-accessibility.spec.ts",
+      "file": "keyboard-accessibility.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ko: Escape closes search from every control and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6151,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:49:35.235Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-8d50815ed4024f23b76a",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "ko: local article exposes a main landmark and one visible title",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3096,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:49:41.731Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-300475c30310cd03c43b",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 45,
+          "column": 5
+        },
+        {
+          "title": "en: Escape closes search from every control and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3487,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:49:44.835Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-8185fcc95adbf5ca5e91",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "en: local article exposes a main landmark and one visible title",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2578,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:49:48.328Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-d5a8f9975d5b835aa913",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 45,
+          "column": 5
+        },
+        {
+          "title": "ko: Escape closes search from every control and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3253,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:50:55.302Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-82bc19a6d3dd4289d602",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "ko: local article exposes a main landmark and one visible title",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3053,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:50:58.724Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-36e9cd5b35f0e116c847",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 45,
+          "column": 5
+        },
+        {
+          "title": "en: Escape closes search from every control and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3034,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:51:01.784Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-67b74b5fc5f699ddb7e3",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "en: local article exposes a main landmark and one visible title",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2109,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:51:04.825Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-3826174da51a05b9a485",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 45,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "mobile-drawer-resize.spec.ts",
+      "file": "mobile-drawer-resize.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "light/no-preference: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2328,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:49:50.918Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-38e145a6aa18a58a4c36",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2526,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:49:53.252Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-5d586922e4b8cb3147b3",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3027,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:49:55.784Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-d94de2f471d31e47ea0a",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3078,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:49:58.817Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-643df8647a6db2896d19",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/no-preference: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile shell transition coverage.",
+                  "location": {
+                    "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 56,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:51:06.949Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile shell transition coverage.",
+                      "location": {
+                        "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-6d78a917c04f7f682d13",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile shell transition coverage.",
+                  "location": {
+                    "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 45,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:51:07.013Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile shell transition coverage.",
+                      "location": {
+                        "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-8577ef3a854e304c4c1b",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile shell transition coverage.",
+                  "location": {
+                    "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 47,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:51:07.065Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile shell transition coverage.",
+                      "location": {
+                        "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-04485791c905acc80a97",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile shell transition coverage.",
+                  "location": {
+                    "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 46,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:51:07.118Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile shell transition coverage.",
+                      "location": {
+                        "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-d7692957072bf434c8fa",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        }
+      ]
+    },
+    {
+      "title": "shell-focus-contrast.spec.ts",
+      "file": "shell-focus-contrast.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 13050,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: '본문으로 바로가기' })\nExpected: \u001b[32m\"solid\"\u001b[39m\nReceived: \u001b[31m\"auto\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: '본문으로 바로가기' })\u001b[22m\n\u001b[2m    24 × locator resolved to <a href=\"#main-content\" class=\"sr-only fixed left-3 top-3 z-[100] rounded-lg bg-background text-on-surface shadow-lg focus:not-sr-only focus:fixed focus:px-4 focus:py-3\">본문으로 바로가기</a>\u001b[22m\n\u001b[2m       - unexpected value \"auto\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: '본문으로 바로가기' })\nExpected: \u001b[32m\"solid\"\u001b[39m\nReceived: \u001b[31m\"auto\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: '본문으로 바로가기' })\u001b[22m\n\u001b[2m    24 × locator resolved to <a href=\"#main-content\" class=\"sr-only fixed left-3 top-3 z-[100] rounded-lg bg-background text-on-surface shadow-lg focus:not-sr-only focus:fixed focus:px-4 focus:py-3\">본문으로 바로가기</a>\u001b[22m\n\u001b[2m       - unexpected value \"auto\"\u001b[22m\n\n    at /Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts:77:28",
+                    "location": {
+                      "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts",
+                      "column": 28,
+                      "line": 77
+                    },
+                    "snippet": "  75 |         const skip = page.getByRole('link', { name: '본문으로 바로가기' })\n  76 |         await expect(skip).toBeFocused()\n> 77 |         await expect(skip).toHaveCSS('outline-style', 'solid')\n     |                            ^\n  78 |         await expect(skip).toHaveCSS('outline-width', '2px')\n  79 |         expect(await contrast(skip)).toBeGreaterThanOrEqual(4.5)\n  80 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts",
+                        "column": 28,
+                        "line": 77
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: '본문으로 바로가기' })\nExpected: \u001b[32m\"solid\"\u001b[39m\nReceived: \u001b[31m\"auto\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: '본문으로 바로가기' })\u001b[22m\n\u001b[2m    24 × locator resolved to <a href=\"#main-content\" class=\"sr-only fixed left-3 top-3 z-[100] rounded-lg bg-background text-on-surface shadow-lg focus:not-sr-only focus:fixed focus:px-4 focus:py-3\">본문으로 바로가기</a>\u001b[22m\n\u001b[2m       - unexpected value \"auto\"\u001b[22m\n\n\n  75 |         const skip = page.getByRole('link', { name: '본문으로 바로가기' })\n  76 |         await expect(skip).toBeFocused()\n> 77 |         await expect(skip).toHaveCSS('outline-style', 'solid')\n     |                            ^\n  78 |         await expect(skip).toHaveCSS('outline-width', '2px')\n  79 |         expect(await contrast(skip)).toBeGreaterThanOrEqual(4.5)\n  80 |\n    at /Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts:77:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:50:01.908Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/docs-accessibility-production-results/shell-focus-contrast-light-ae43c-contrast-and-landmark-names-chromium-mobile/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts",
+                    "column": 28,
+                    "line": 77
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-ed0b6e3ff3ad78bba54b",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12881,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: '본문으로 바로가기' })\nExpected: \u001b[32m\"solid\"\u001b[39m\nReceived: \u001b[31m\"auto\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: '본문으로 바로가기' })\u001b[22m\n\u001b[2m    24 × locator resolved to <a href=\"#main-content\" class=\"sr-only fixed left-3 top-3 z-[100] rounded-lg bg-background text-on-surface shadow-lg focus:not-sr-only focus:fixed focus:px-4 focus:py-3\">본문으로 바로가기</a>\u001b[22m\n\u001b[2m       - unexpected value \"auto\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: '본문으로 바로가기' })\nExpected: \u001b[32m\"solid\"\u001b[39m\nReceived: \u001b[31m\"auto\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: '본문으로 바로가기' })\u001b[22m\n\u001b[2m    24 × locator resolved to <a href=\"#main-content\" class=\"sr-only fixed left-3 top-3 z-[100] rounded-lg bg-background text-on-surface shadow-lg focus:not-sr-only focus:fixed focus:px-4 focus:py-3\">본문으로 바로가기</a>\u001b[22m\n\u001b[2m       - unexpected value \"auto\"\u001b[22m\n\n    at /Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts:77:28",
+                    "location": {
+                      "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts",
+                      "column": 28,
+                      "line": 77
+                    },
+                    "snippet": "  75 |         const skip = page.getByRole('link', { name: '본문으로 바로가기' })\n  76 |         await expect(skip).toBeFocused()\n> 77 |         await expect(skip).toHaveCSS('outline-style', 'solid')\n     |                            ^\n  78 |         await expect(skip).toHaveCSS('outline-width', '2px')\n  79 |         expect(await contrast(skip)).toBeGreaterThanOrEqual(4.5)\n  80 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts",
+                        "column": 28,
+                        "line": 77
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: '본문으로 바로가기' })\nExpected: \u001b[32m\"solid\"\u001b[39m\nReceived: \u001b[31m\"auto\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: '본문으로 바로가기' })\u001b[22m\n\u001b[2m    24 × locator resolved to <a href=\"#main-content\" class=\"sr-only fixed left-3 top-3 z-[100] rounded-lg bg-background text-on-surface shadow-lg focus:not-sr-only focus:fixed focus:px-4 focus:py-3\">본문으로 바로가기</a>\u001b[22m\n\u001b[2m       - unexpected value \"auto\"\u001b[22m\n\n\n  75 |         const skip = page.getByRole('link', { name: '본문으로 바로가기' })\n  76 |         await expect(skip).toBeFocused()\n> 77 |         await expect(skip).toHaveCSS('outline-style', 'solid')\n     |                            ^\n  78 |         await expect(skip).toHaveCSS('outline-width', '2px')\n  79 |         expect(await contrast(skip)).toBeGreaterThanOrEqual(4.5)\n  80 |\n    at /Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts:77:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:50:15.335Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/docs-accessibility-production-results/shell-focus-contrast-dark--d217c-contrast-and-landmark-names-chromium-mobile/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts",
+                    "column": 28,
+                    "line": 77
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-8e1cd8bc1536a71797ad",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12586,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: '본문으로 바로가기' })\nExpected: \u001b[32m\"solid\"\u001b[39m\nReceived: \u001b[31m\"auto\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: '본문으로 바로가기' })\u001b[22m\n\u001b[2m    24 × locator resolved to <a href=\"#main-content\" class=\"sr-only fixed left-3 top-3 z-[100] rounded-lg bg-background text-on-surface shadow-lg focus:not-sr-only focus:fixed focus:px-4 focus:py-3\">본문으로 바로가기</a>\u001b[22m\n\u001b[2m       - unexpected value \"auto\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: '본문으로 바로가기' })\nExpected: \u001b[32m\"solid\"\u001b[39m\nReceived: \u001b[31m\"auto\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: '본문으로 바로가기' })\u001b[22m\n\u001b[2m    24 × locator resolved to <a href=\"#main-content\" class=\"sr-only fixed left-3 top-3 z-[100] rounded-lg bg-background text-on-surface shadow-lg focus:not-sr-only focus:fixed focus:px-4 focus:py-3\">본문으로 바로가기</a>\u001b[22m\n\u001b[2m       - unexpected value \"auto\"\u001b[22m\n\n    at /Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts:77:28",
+                    "location": {
+                      "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts",
+                      "column": 28,
+                      "line": 77
+                    },
+                    "snippet": "  75 |         const skip = page.getByRole('link', { name: '본문으로 바로가기' })\n  76 |         await expect(skip).toBeFocused()\n> 77 |         await expect(skip).toHaveCSS('outline-style', 'solid')\n     |                            ^\n  78 |         await expect(skip).toHaveCSS('outline-width', '2px')\n  79 |         expect(await contrast(skip)).toBeGreaterThanOrEqual(4.5)\n  80 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts",
+                        "column": 28,
+                        "line": 77
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: '본문으로 바로가기' })\nExpected: \u001b[32m\"solid\"\u001b[39m\nReceived: \u001b[31m\"auto\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: '본문으로 바로가기' })\u001b[22m\n\u001b[2m    24 × locator resolved to <a href=\"#main-content\" class=\"sr-only fixed left-3 top-3 z-[100] rounded-lg bg-background text-on-surface shadow-lg focus:not-sr-only focus:fixed focus:px-4 focus:py-3\">본문으로 바로가기</a>\u001b[22m\n\u001b[2m       - unexpected value \"auto\"\u001b[22m\n\n\n  75 |         const skip = page.getByRole('link', { name: '본문으로 바로가기' })\n  76 |         await expect(skip).toBeFocused()\n> 77 |         await expect(skip).toHaveCSS('outline-style', 'solid')\n     |                            ^\n  78 |         await expect(skip).toHaveCSS('outline-width', '2px')\n  79 |         expect(await contrast(skip)).toBeGreaterThanOrEqual(4.5)\n  80 |\n    at /Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts:77:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:51:07.176Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/docs-accessibility-production-results/shell-focus-contrast-light-ae43c-contrast-and-landmark-names-chromium-desktop/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts",
+                    "column": 28,
+                    "line": 77
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-25af7bd5ef4dd06b4256",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12387,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: '본문으로 바로가기' })\nExpected: \u001b[32m\"solid\"\u001b[39m\nReceived: \u001b[31m\"auto\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: '본문으로 바로가기' })\u001b[22m\n\u001b[2m    24 × locator resolved to <a href=\"#main-content\" class=\"sr-only fixed left-3 top-3 z-[100] rounded-lg bg-background text-on-surface shadow-lg focus:not-sr-only focus:fixed focus:px-4 focus:py-3\">본문으로 바로가기</a>\u001b[22m\n\u001b[2m       - unexpected value \"auto\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: '본문으로 바로가기' })\nExpected: \u001b[32m\"solid\"\u001b[39m\nReceived: \u001b[31m\"auto\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: '본문으로 바로가기' })\u001b[22m\n\u001b[2m    24 × locator resolved to <a href=\"#main-content\" class=\"sr-only fixed left-3 top-3 z-[100] rounded-lg bg-background text-on-surface shadow-lg focus:not-sr-only focus:fixed focus:px-4 focus:py-3\">본문으로 바로가기</a>\u001b[22m\n\u001b[2m       - unexpected value \"auto\"\u001b[22m\n\n    at /Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts:77:28",
+                    "location": {
+                      "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts",
+                      "column": 28,
+                      "line": 77
+                    },
+                    "snippet": "  75 |         const skip = page.getByRole('link', { name: '본문으로 바로가기' })\n  76 |         await expect(skip).toBeFocused()\n> 77 |         await expect(skip).toHaveCSS('outline-style', 'solid')\n     |                            ^\n  78 |         await expect(skip).toHaveCSS('outline-width', '2px')\n  79 |         expect(await contrast(skip)).toBeGreaterThanOrEqual(4.5)\n  80 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts",
+                        "column": 28,
+                        "line": 77
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: '본문으로 바로가기' })\nExpected: \u001b[32m\"solid\"\u001b[39m\nReceived: \u001b[31m\"auto\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: '본문으로 바로가기' })\u001b[22m\n\u001b[2m    24 × locator resolved to <a href=\"#main-content\" class=\"sr-only fixed left-3 top-3 z-[100] rounded-lg bg-background text-on-surface shadow-lg focus:not-sr-only focus:fixed focus:px-4 focus:py-3\">본문으로 바로가기</a>\u001b[22m\n\u001b[2m       - unexpected value \"auto\"\u001b[22m\n\n\n  75 |         const skip = page.getByRole('link', { name: '본문으로 바로가기' })\n  76 |         await expect(skip).toBeFocused()\n> 77 |         await expect(skip).toHaveCSS('outline-style', 'solid')\n     |                            ^\n  78 |         await expect(skip).toHaveCSS('outline-width', '2px')\n  79 |         expect(await contrast(skip)).toBeGreaterThanOrEqual(4.5)\n  80 |\n    at /Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts:77:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:51:20.132Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/docs-accessibility-production-results/shell-focus-contrast-dark--d217c-contrast-and-landmark-names-chromium-desktop/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/shell-focus-contrast.spec.ts",
+                    "column": 28,
+                    "line": 77
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-0c54ebb27bda292ff6db",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "skip-link.spec.ts",
+      "file": "skip-link.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ko: first Tab skips the shell on public pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14016,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:50:28.725Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fa172f6935f932c784c9-9e78559fd82634a0da97",
+          "file": "skip-link.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "en: first Tab skips the shell on public pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12023,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:50:42.893Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fa172f6935f932c784c9-42d91ce8c298d652a69a",
+          "file": "skip-link.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "ko: first Tab skips the shell on public pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12152,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:51:33.073Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fa172f6935f932c784c9-74b102a9fa516bed92d5",
+          "file": "skip-link.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "en: first Tab skips the shell on public pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12129,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T02:51:45.404Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fa172f6935f932c784c9-04fa202c3685c2b4ba72",
+          "file": "skip-link.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-23T02:49:34.796Z",
+    "duration": 142803.683,
+    "expected": 16,
+    "skipped": 4,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

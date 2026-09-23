@@ -1,0 +1,46 @@
+{
+  "checkedAt": "2026-09-23T03:08:41.072Z",
+  "node": "v24.12.0",
+  "next": "16.3.4",
+  "buildId": "hJh7uvtPG-_yQqtf61Xvt",
+  "cssFiles": [
+    {
+      "file": ".next/static/chunks/2saq5vmtcukt3.css",
+      "sha256": "4485d211d95ee950ef9c57c7c28c70527271283126f3029a8321f3954e7c68d3",
+      "tokenDefinition": true,
+      "focusRule": true
+    },
+    {
+      "file": ".next/static/chunks/3__ym03-tahi-.css",
+      "sha256": "245753e42e955ba8a6511da4927316d05f896f2314a1e6a46057c9ebb5b545a8",
+      "tokenDefinition": false,
+      "focusRule": false
+    },
+    {
+      "file": ".next/static/chunks/3kvj2kez4_2ul.css",
+      "sha256": "b790f4db9cf3467ba1fc267b54d43693383f1e4b8e00cfcf2111d278e4f59d79",
+      "tokenDefinition": false,
+      "focusRule": false
+    }
+  ],
+  "observations": [
+    {
+      "theme": "light",
+      "outline": "rgb(23, 23, 23) solid 2px",
+      "token": "#b74400",
+      "sheets": [
+        "http://127.0.0.1:3116/_next/static/chunks/2saq5vmtcukt3.css",
+        "http://127.0.0.1:3116/_next/static/chunks/3__ym03-tahi-.css"
+      ]
+    },
+    {
+      "theme": "dark",
+      "outline": "rgb(237, 237, 237) solid 2px",
+      "token": "#fb923c",
+      "sheets": [
+        "http://127.0.0.1:3116/_next/static/chunks/2saq5vmtcukt3.css",
+        "http://127.0.0.1:3116/_next/static/chunks/3__ym03-tahi-.css"
+      ]
+    }
+  ]
+}
