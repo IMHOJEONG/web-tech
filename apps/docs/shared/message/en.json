@@ -498,51 +498,14 @@
             "titleLineTwo": "INTERFACE EXCELLENCE",
             "description": "An editorial hub for cognitive structure, interface craft, and accessible interaction. It brings design systems, reading experience, and small usability signals into one navigable screen."
         },
-        "featured": {
-            "primaryLabel": "CASE STUDY",
-            "secondaryLabel": "10 MIN READ",
-            "action": "VIEW ANALYSIS"
-        },
-        "secondary": {
-            "researchLabel": "RESEARCH PAPER // 02",
-            "guideLabel": "TECHNICAL GUIDE // 03"
-        },
-        "bottomLeft": {
-            "label": "TUTORIAL // 04"
-        },
         "more": {
             "fallbackDate": "LATEST NOTE"
         },
-        "loadMore": "LOAD NEXT ENTRIES",
-        "fallback": {
-            "featured": {
-                "title": "Reframing spatial interfaces and visual hierarchy",
-                "summary": "A closer look at what kind of visual hierarchy helps dense desktop interfaces stay readable under pressure."
-            },
-            "secondaryOne": {
-                "title": "Cognitive load and grid systems",
-                "summary": "Mathematical layout approaches for reducing decision fatigue in high-stakes environments."
-            },
-            "secondaryTwo": {
-                "title": "Designing micro-interaction states",
-                "summary": "How subtle transitions and feedback states shape a more tactile digital experience."
-            },
-            "tutorial": {
-                "title": "Advanced auto-layout strategies",
-                "summary": "Ways to preserve flexible layout structure in Figma without losing component consistency."
-            },
-            "moreOne": {
-                "title": "Accessibility beyond contrast ratios",
-                "summary": "Designing for temporary constraints and diverse cognitive abilities."
-            },
-            "moreTwo": {
-                "title": "Eye-tracking as hierarchy analysis",
-                "summary": "What heatmaps and scan paths can reveal about information structure."
-            },
-            "moreThree": {
-                "title": "Sharpening responsive typography",
-                "summary": "Using clamp() and vertical rhythm to make long-form reading more stable."
-            }
+        "browseFeed": "Browse the UI/UX feed",
+        "empty": {
+            "title": "No UI/UX articles to show yet",
+            "description": "Explore other topics in the document index.",
+            "action": "Browse all documents"
         }
     },
     "about": {

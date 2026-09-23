@@ -1,18 +1,12 @@
 import { UiUxArticleCard } from './uiux-article-card'
-import { UIUX_FALLBACK_IMAGES, type UiUxDoc } from './uiux-hub.types'
+import { UIUX_FALLBACK_IMAGES } from './uiux-hub.types'
+import type { UiUxDoc } from '../model/uiux-hub-docs'
 
-export function UiUxHubTutorialSection({
-    tutorial,
-    tutorialLabel,
-}: {
-    tutorial: UiUxDoc
-    tutorialLabel: string
-}) {
+export function UiUxHubTutorialSection({ tutorial }: { tutorial: UiUxDoc }) {
     return (
         <section data-testid="uiux-tutorial-card" className="min-w-0">
             <UiUxArticleCard
                 doc={tutorial}
-                label={tutorialLabel}
                 fallbackImage={UIUX_FALLBACK_IMAGES.tutorial}
             />
         </section>

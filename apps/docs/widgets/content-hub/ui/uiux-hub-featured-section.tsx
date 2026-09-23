@@ -1,41 +1,28 @@
 import { UiUxArticleCard } from './uiux-article-card'
-import { UIUX_FALLBACK_IMAGES, type UiUxDoc } from './uiux-hub.types'
+import { UIUX_FALLBACK_IMAGES } from './uiux-hub.types'
+import type { UiUxDoc } from '../model/uiux-hub-docs'
 
-export function UiUxHubFeaturedSection({
-    featured,
-    secondaryOne,
-    secondaryTwo,
-    primaryLabel,
-    researchLabel,
-    guideLabel,
-}: {
-    featured: UiUxDoc
-    secondaryOne: UiUxDoc
-    secondaryTwo: UiUxDoc
-    primaryLabel: string
-    researchLabel: string
-    guideLabel: string
-}) {
+export function UiUxHubFeaturedSection({ docs }: { docs: UiUxDoc[] }) {
+    if (docs.length === 0) return null
+    const images = [
+        UIUX_FALLBACK_IMAGES.featured,
+        UIUX_FALLBACK_IMAGES.first,
+        UIUX_FALLBACK_IMAGES.second,
+    ]
     return (
         <section
             data-testid="uiux-featured-articles"
             className="grid min-w-0 gap-4"
         >
-            <UiUxArticleCard
-                doc={featured}
-                label={primaryLabel}
-                fallbackImage={UIUX_FALLBACK_IMAGES.featured}
-            />
-            <UiUxArticleCard
-                doc={secondaryOne}
-                label={researchLabel}
-                fallbackImage={UIUX_FALLBACK_IMAGES.first}
-            />
-            <UiUxArticleCard
-                doc={secondaryTwo}
-                label={guideLabel}
-                fallbackImage={UIUX_FALLBACK_IMAGES.second}
-            />
+            {docs.map((doc, index) => (
+                <UiUxArticleCard
+                    key={doc.href}
+                    doc={doc}
+                    fallbackImage={
+                        images[index] ?? UIUX_FALLBACK_IMAGES.featured
+                    }
+                />
+            ))}
         </section>
     )
 }

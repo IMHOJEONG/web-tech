@@ -498,51 +498,14 @@
             "titleLineTwo": "인터페이스 완성도",
             "description": "인지 구조, 인터페이스 미감, 접근 가능한 상호작용을 함께 다루는 편집형 허브입니다. 디자인 시스템과 읽기 경험, 세밀한 사용성 신호를 한 화면에서 이어서 볼 수 있도록 구성했습니다."
         },
-        "featured": {
-            "primaryLabel": "케이스 스터디",
-            "secondaryLabel": "10분 읽기",
-            "action": "분석 보기"
-        },
-        "secondary": {
-            "researchLabel": "리서치 노트 // 02",
-            "guideLabel": "기술 가이드 // 03"
-        },
-        "bottomLeft": {
-            "label": "튜토리얼 // 04"
-        },
         "more": {
             "fallbackDate": "최근 글"
         },
-        "loadMore": "다음 글 더 보기",
-        "fallback": {
-            "featured": {
-                "title": "공간형 인터페이스와 시각 계층 재설계",
-                "summary": "고밀도 데스크톱 인터페이스에서 정보 우선순위를 잃지 않기 위해 어떤 시각 계층이 필요한지 다시 정리합니다."
-            },
-            "secondaryOne": {
-                "title": "인지 부하와 그리드 시스템",
-                "summary": "고위험 환경에서 의사결정 피로를 줄이기 위한 수학적 레이아웃 접근을 살펴봅니다."
-            },
-            "secondaryTwo": {
-                "title": "마이크로 인터랙션 상태 설계",
-                "summary": "전이와 피드백의 작은 차이가 어떻게 촉각적인 디지털 경험을 만드는지 다룹니다."
-            },
-            "tutorial": {
-                "title": "고급 오토 레이아웃 전략",
-                "summary": "Figma 안에서 유연한 레이아웃 구조를 유지하면서도 컴포넌트 일관성을 지키는 방법을 정리합니다."
-            },
-            "moreOne": {
-                "title": "대비비를 넘어서는 접근성",
-                "summary": "일시적 제약과 다양한 인지 능력까지 고려한 경험 설계를 다룹니다."
-            },
-            "moreTwo": {
-                "title": "시선 추적 기반 위계 분석",
-                "summary": "히트맵과 시선 흐름이 실제 정보 구조에 어떤 힌트를 주는지 정리합니다."
-            },
-            "moreThree": {
-                "title": "반응형 타이포그래피를 더 정교하게",
-                "summary": "clamp()와 세로 리듬을 활용해 긴 문서를 더 안정적으로 읽히게 만드는 방법을 다룹니다."
-            }
+        "browseFeed": "UI/UX 피드 보기",
+        "empty": {
+            "title": "아직 보여드릴 UI/UX 글이 없어요",
+            "description": "다른 주제의 글은 전체 문서에서 찾아보세요.",
+            "action": "전체 문서 보기"
         }
     },
     "about": {

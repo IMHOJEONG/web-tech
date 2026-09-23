@@ -1,108 +1,18 @@
 import { getTranslations } from 'next-intl/server'
 import { MainContent } from '~/shared/ui/main-content'
-import { getChannelHubDocs } from '~/widgets/content-hub/model/get-channel-hub-docs'
-import type { SearchData } from '~/lib/get-search-data'
+import { Link } from '~/shared/i18n/navigation'
+import { getChannelHubDocs } from '../model/get-channel-hub-docs'
+import { selectUiUxHubDocs } from '../model/uiux-hub-docs'
 import { UiUxHubFeaturedSection } from './uiux-hub-featured-section'
 import { UiUxHubHero } from './uiux-hub-hero'
 import { UiUxHubMoreArticlesSection } from './uiux-hub-more-articles-section'
 import { UiUxHubTutorialSection } from './uiux-hub-tutorial-section'
-import type { UiUxDoc } from './uiux-hub.types'
-
-function toUiUxDoc(doc: SearchData | undefined): UiUxDoc | null {
-    if (!doc?.title || !doc.href) {
-        return null
-    }
-
-    return {
-        ...doc,
-        title: doc.title,
-        href: doc.href,
-        summary: doc.summary?.trim() || 'Open the article to continue reading.',
-    }
-}
-
-function makeFallbackDoc(
-    href: string,
-    title: string,
-    summary: string,
-    id: string
-): UiUxDoc {
-    return {
-        id,
-        title,
-        summary,
-        content: '',
-        slug: id,
-        fileName: `fallback/${id}`,
-        href,
-        section: 'UI/UX',
-        contentSource: 'local',
-    }
-}
 
 export async function UiUxHubPage() {
     const t = await getTranslations('uiuxHub')
-    const renderedDocs = (await getChannelHubDocs('uiux'))
-        .map(toUiUxDoc)
-        .filter((doc): doc is UiUxDoc => doc !== null)
-
-    const fallbackHref = '/feed?topic=uiux'
-    const featured =
-        renderedDocs[0] ??
-        makeFallbackDoc(
-            fallbackHref,
-            t('fallback.featured.title'),
-            t('fallback.featured.summary'),
-            'uiux-fallback-featured'
-        )
-    const secondaryOne =
-        renderedDocs[1] ??
-        makeFallbackDoc(
-            fallbackHref,
-            t('fallback.secondaryOne.title'),
-            t('fallback.secondaryOne.summary'),
-            'uiux-fallback-secondary-one'
-        )
-    const secondaryTwo =
-        renderedDocs[2] ??
-        makeFallbackDoc(
-            fallbackHref,
-            t('fallback.secondaryTwo.title'),
-            t('fallback.secondaryTwo.summary'),
-            'uiux-fallback-secondary-two'
-        )
-    const tutorial =
-        renderedDocs[3] ??
-        makeFallbackDoc(
-            fallbackHref,
-            t('fallback.tutorial.title'),
-            t('fallback.tutorial.summary'),
-            'uiux-fallback-tutorial'
-        )
-    const moreArticles = (
-        renderedDocs.slice(4, 7).length > 0
-            ? renderedDocs.slice(4, 7)
-            : [
-                  makeFallbackDoc(
-                      fallbackHref,
-                      t('fallback.moreOne.title'),
-                      t('fallback.moreOne.summary'),
-                      'uiux-fallback-more-one'
-                  ),
-                  makeFallbackDoc(
-                      fallbackHref,
-                      t('fallback.moreTwo.title'),
-                      t('fallback.moreTwo.summary'),
-                      'uiux-fallback-more-two'
-                  ),
-                  makeFallbackDoc(
-                      fallbackHref,
-                      t('fallback.moreThree.title'),
-                      t('fallback.moreThree.summary'),
-                      'uiux-fallback-more-three'
-                  ),
-              ]
-    ).slice(0, 3)
+    const { featured, spotlight, more, isEmpty } = selectUiUxHubDocs(
+        await getChannelHubDocs('uiux')
+    )
 
     return (
         <MainContent className="docs-shell overflow-x-clip px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
@@ -113,26 +23,41 @@ export async function UiUxHubPage() {
                     titleLineTwo={t('hero.titleLineTwo')}
                     description={t('hero.description')}
                 />
-
-                <UiUxHubFeaturedSection
-                    featured={featured}
-                    secondaryOne={secondaryOne}
-                    secondaryTwo={secondaryTwo}
-                    primaryLabel={t('featured.primaryLabel')}
-                    researchLabel={t('secondary.researchLabel')}
-                    guideLabel={t('secondary.guideLabel')}
-                />
-
-                <UiUxHubTutorialSection
-                    tutorial={tutorial}
-                    tutorialLabel={t('bottomLeft.label')}
-                />
-
-                <UiUxHubMoreArticlesSection
-                    moreArticles={moreArticles}
-                    fallbackDate={t('more.fallbackDate')}
-                    loadMoreLabel={t('loadMore')}
-                />
+                {isEmpty ? (
+                    <section className="rounded-2xl border border-outline-variant bg-surface-container-low p-6 sm:p-8">
+                        <h2 className="text-xl font-semibold text-on-surface">
+                            {t('empty.title')}
+                        </h2>
+                        <p className="mt-3 text-sm leading-6 text-on-surface-variant">
+                            {t('empty.description')}
+                        </p>
+                        <Link
+                            href="/docs"
+                            className="mt-5 inline-flex min-h-11 items-center font-semibold text-[var(--docs-interactive-text)] underline underline-offset-4"
+                        >
+                            {t('empty.action')}
+                        </Link>
+                    </section>
+                ) : (
+                    <>
+                        <UiUxHubFeaturedSection docs={featured} />
+                        {spotlight && (
+                            <UiUxHubTutorialSection tutorial={spotlight} />
+                        )}
+                        <UiUxHubMoreArticlesSection
+                            moreArticles={more}
+                            fallbackDate={t('more.fallbackDate')}
+                        />
+                        <div className="flex justify-center border-t border-outline-variant pt-6">
+                            <Link
+                                href="/feed?topic=uiux"
+                                className="inline-flex min-h-11 items-center rounded-full border border-outline-variant px-5 py-2 text-sm font-semibold text-on-surface transition-colors hover:border-primary hover:text-[var(--docs-interactive-text)]"
+                            >
+                                {t('browseFeed')}
+                            </Link>
+                        </div>
+                    </>
+                )}
             </div>
         </MainContent>
     )
