@@ -4,6 +4,8 @@
 
 ## 성능과 화면 안정성
 
+- [09-23 코드·UI/UX 현황 분석](accessibility/2026-09-23-docs-code-ux-review.md): 빌드 재검증, 반영된 화면과 개선 후보 구분.
+
 - [09-23 배포 접근성 점검](accessibility/2026-09-23-deployed-shell.md): 키보드 이동 통과, 포커스 CSS 누락 확인과 미검증 범위.
 
 - [09-19 로컬 문서 읽기 중복 제거](performance/2026-09-19-local-document-reads.md): 요청 내 파일 읽기 공유와 요청 간 재읽기 검증.

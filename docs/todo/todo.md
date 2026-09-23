@@ -128,6 +128,13 @@
 
 ## UI / UX
 
+- [ ] `P0` 운영 CSS의 접근성 토큰·포커스 규칙 누락을 확인한다. 로컬 production에서는 정상이다. 완료 조건: Vercel 캐시 미사용 빌드 산출물과 공개 CSS를 비교하고 실패한 운영 4개 검사를 통과한다. [배포 검증](../verification/accessibility/2026-09-23-deployed-shell.md).
+- [ ] `P1` `/docs` 비활성 이전·다음 링크의 키보드 활성화를 막는다. 완료 조건: 첫·마지막 페이지의 클릭/Enter가 이동하지 않고 유효한 페이지 이동은 필터·정렬을 보존한다. [분석 근거](../verification/accessibility/2026-09-23-docs-code-ux-review.md).
+- [ ] `P1` UI/UX 예시 글을 실제 문서처럼 표시하지 않는다. 완료 조건: 0·1·2·7개 데이터에서 존재하는 문서만 상세로 이동하고 부족한 섹션은 숨김/명시적인 빈 상태를 제공한다. 피드 이동 CTA는 더 불러오기처럼 보이지 않도록 정리한다.
+- [ ] `P1` 검색 빈 상태의 번역과 본문 landmark를 통일한다. 완료 조건: ko/en의 검색 0건·전체 문서 0건에서 번역, `main#main-content`, h1, 복구 링크를 검사한다.
+- [ ] `P2` 헤더·본문 검색·직접 URL·API의 입력 정규화와 길이 정책을 공유한다. 완료 조건: 40자 정책을 확정하고 공백·긴 입력·한글 조합·중복 query를 경계별로 검사한다. 검색 결과 페이지네이션은 기존 보류 결정 확인 후 별도 적용한다.
+- [ ] `P2` `DocsIndex`의 통계·섹션·페이지 이동을 역할별로 분리한다. 완료 조건: 기존 query 유지와 검색 관련도 순서, 빈 상태 동작을 보존하며 공통 카드의 불필요한 통합은 피한다.
+
 - [-] `P0` `640px ~ 1023px` 구간의 shell/UI 동작을 실제 디바이스 기준으로 점검한다.
   - header
   - mobile drawer
@@ -168,7 +175,7 @@
   - `GITHUB`
 - [ ] `P2` empty state, loading state, error state의 시각 톤을 통일한다.
   - root landing은 remote latest notes 실패 시 페이지 전체를 죽이지 않고 섹션 단위 graceful degradation을 유지
-- [ ] `P2` keyboard navigation / focus ring / drawer close flow 접근성을 점검한다.
+- [-] `P2` keyboard navigation / focus ring / drawer close flow 접근성을 점검한다. 로컬 production 20개 통과와 운영 CSS 실패를 구분하며, VoiceOver/NVDA 낭독은 미검증이다. [현재 검증](../verification/accessibility/2026-09-23-deployed-shell.md).
 - [-] `P2` layout/list motion 정책을 운영한다.
   - `motion-layout`, `motion-reveal` 기반으로 시작
   - `prefers-reduced-motion` 대응 필수

@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [검증 문서 커밋과 코드·UI/UX 점검](2026-09-23-docs-code-ux-review.md)
+
 - [배포 접근성 후속 점검](2026-09-23-deployed-accessibility-check.md)
 
 - [본문 바로가기와 포커스·명암 대비 개선](2026-09-22-skip-link-focus-landmarks.md)
