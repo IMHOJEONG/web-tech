@@ -517,7 +517,7 @@
     },
     "about": {
         "hero": {
-            "status": "STATUS: LIVE // VERSION 2.0.4",
+            "eyebrow": "About HEAP-FORGE",
             "titleLead": "BRIDGING THE STACK THROUGH",
             "titleAccentOne": "TECHNICAL",
             "titleAccentTwo": "PRECISION",
@@ -548,7 +548,7 @@
         "profile": {
             "name": "HoJeong Im",
             "role": "Full Stack Engineer",
-            "bio": "A full-stack engineer pursuing both minimal aesthetics and high performance, building HEAP-FORGE as an open knowledge base for digital builders.",
+            "bio": "I write about the problems I encounter while developing software and how I solve them. HEAP-FORGE collects what I learn from web development and running services so I can refer back to it later.",
             "links": {
                 "github": {
                     "label": "GITHUB",

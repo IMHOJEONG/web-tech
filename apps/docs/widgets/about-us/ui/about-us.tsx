@@ -60,12 +60,9 @@ export async function AboutUs() {
                     <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,107,31,0.12),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(34,211,238,0.1),transparent_34%)]" />
                     <div className="relative grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.38fr)] lg:items-end">
                         <div className="max-w-4xl space-y-4">
-                            <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/8 px-3 py-1 text-primary">
-                                <span className="size-2 rounded-full bg-current" />
-                                <span className="font-display text-xs font-semibold tracking-[0.16em] uppercase">
-                                    {t('hero.status')}
-                                </span>
-                            </div>
+                            <p className="font-display text-xs font-semibold tracking-wide text-on-surface-variant">
+                                {t('hero.eyebrow')}
+                            </p>
 
                             <div className="space-y-3">
                                 <h1 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl lg:text-[2.7rem]">

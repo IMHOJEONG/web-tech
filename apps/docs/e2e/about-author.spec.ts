@@ -12,7 +12,39 @@ for (const locale of ['ko', 'en']) {
             await page.emulateMedia({ reducedMotion: 'reduce' })
             await page.goto(`/${locale}/about`)
             const main = page.getByRole('main')
+            await expect(main).toHaveCount(1)
+            await expect(main.getByRole('heading', { level: 1 })).toHaveCount(1)
+            await expect(
+                main.getByText(
+                    locale === 'ko' ? 'HEAP-FORGE 소개' : 'About HEAP-FORGE',
+                    { exact: true }
+                )
+            ).toBeVisible()
+            await expect(
+                main.getByText(/VERSION\s*2\.0\.4|STATUS:\s*LIVE|운영 중/)
+            ).toHaveCount(0)
+            expect(
+                await page.evaluate(
+                    () =>
+                        document.documentElement.scrollWidth <=
+                        window.innerWidth
+                )
+            ).toBe(true)
+            await main
+                .locator('section')
+                .first()
+                .screenshot({
+                    path: testInfo.outputPath('about-intro.png'),
+                })
             const author = page.getByTestId('about-author')
+            await expect(
+                author.getByText(
+                    locale === 'ko'
+                        ? '개발하면서 겪은 문제와 해결 과정을 기록합니다.'
+                        : 'I write about the problems I encounter while developing software and how I solve them.',
+                    { exact: false }
+                )
+            ).toBeVisible()
             await expect(
                 author.getByRole('heading', { name: 'HoJeong Im' })
             ).toBeVisible()
