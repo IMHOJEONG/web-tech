@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [ADR 상태와 문서 생명주기 점검](2026-09-23-document-status-review.md)
+
 - [About의 근거 없는 버전·운영 상태 표시 제거](2026-09-23-about-intro-label.md)
 
 - [검색·전체 문서 빈 화면의 번역과 본문 구조 통일](2026-09-23-docs-empty-state-localization.md)

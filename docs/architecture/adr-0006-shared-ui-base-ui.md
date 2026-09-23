@@ -5,8 +5,9 @@
 - 상태: 적용 중
 - 대상: `@web-tech/ui`의 직접 사용 primitive와 저장소 내 소비 코드
 - 결정일: 2026-09-22
-- 최종 검토: 2026-09-22
-- 적용 위치: `main` 기반 `codex/shared-ui-base-ui` PR. 운영 배포 완료를 의미하지 않는다.
+- 최종 검토: 2026-09-23
+- 적용 위치: PR #32가 `main`의 `41a6ba5`에 병합되었고 현재 `feature/docs`에도 포함되어 있다. 코드 반영 확인이며 전체 소비 앱의 운영 배포 검증 완료를 의미하지 않는다.
+- 남은 범위: 외부 모노레포 소비처 조사·이전 및 전이 의존성 후속 확인. 전체 통일 완료로 표시하지 않는다.
 
 ## 배경
 
@@ -79,3 +80,4 @@ Base UI 1.8.0으로 구성한 우리 Tooltip fixture에서 Popup의 `role="toolt
 - [공용 UI 빌드 경계](ui-package-build-export.md)
 - [main 기반 PR 분리 기록](../worklog/2026-09/2026-09-22-shared-ui-pr-split.md)
 - [분리 브랜치 검증](../verification/content/2026-09-22-shared-ui-main-baseline.md)
+- [main 반영 후 브랜치 동기화 기록](../worklog/2026-09/2026-09-22-feature-branches-sync-after-blog-merge.md)

@@ -28,3 +28,4 @@ About 본문은 소개·분야별 관점·작성자 정보를 담당한다. 문�
 - [문의 구역 제거 기록](../worklog/2026-05/2026-05-08-about-contact-removal.md)
 - [공용 앱 셸의 책임](docs-app-shell-rationale.md)
 - [About 작성자 영역 정리](../worklog/2026-09/2026-09-21-about-author-simplification.md)
+- [근거 없는 상태 배지 제거와 소개 문구 정리](../worklog/2026-09/2026-09-23-about-intro-label.md)
