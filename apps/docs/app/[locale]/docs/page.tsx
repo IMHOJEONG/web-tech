@@ -11,13 +11,17 @@ import { getSearchData } from '~/lib/get-search-data'
 import { buildPageMetadata } from '~/lib/localized-metadata'
 import { DocsIndex } from '~/widgets/docs-index/ui/docs-index'
 import { resolveDocsIndexControls } from '~/widgets/docs-index/model/docs-index-controls'
+import {
+    firstSearchParam,
+    normalizeSearchQuery,
+} from '~/shared/lib/search-query'
 
 type Props = {
     searchParams: Promise<{
-        page?: string
-        q?: string
-        section?: string
-        sort?: string
+        page?: string | string[]
+        q?: string | string[]
+        section?: string | string[]
+        sort?: string | string[]
     }>
 }
 
@@ -53,13 +57,16 @@ export default function Page(props: Props) {
 
 async function DocsResults({ searchParams }: Props) {
     const { page, q, section, sort } = await searchParams
-    const keyword = q?.trim() ?? ''
-    const currentPage = parsePageParam(page)
-    const controls = resolveDocsIndexControls({ section, sort })
+    const keyword = normalizeSearchQuery(q)
+    const currentPage = parsePageParam(firstSearchParam(page))
+    const controls = resolveDocsIndexControls({
+        section: firstSearchParam(section),
+        sort: firstSearchParam(sort),
+    })
     const docs = keyword ? [] : await getSearchData()
     const searchResults = keyword ? await getSearchData(keyword) : []
     const pageState = resolveDocsSearchPageState({
-        query: q,
+        query: keyword,
         docs,
         searchResults,
     })

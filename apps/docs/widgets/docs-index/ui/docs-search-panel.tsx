@@ -1,5 +1,6 @@
 import { Link } from '~/shared/i18n/navigation'
 import { useLocale, useTranslations } from 'next-intl'
+import { DocumentSearchForm } from '~/feature/search/ui/document-search-form'
 import {
     isLocale,
     defaultLocale,
@@ -52,31 +53,17 @@ export function DocsSearchPanel({
                 </div>
 
                 <div className="min-w-0 space-y-3">
-                    <form
-                        role="search"
-                        aria-label={t('documentIndexSearch')}
+                    <DocumentSearchForm
+                        key={keyword ?? ''}
+                        keyword={keyword}
+                        label={t('documentIndexSearch')}
                         action={localizePath(
                             '/docs',
                             isLocale(locale) ? locale : defaultLocale
                         )}
-                        className="flex min-w-0 overflow-hidden rounded-2xl border border-border bg-surface-container-lowest p-1.5 focus-within:border-primary/60 focus-within:shadow-glow-primary"
-                    >
-                        <input
-                            name="q"
-                            type="search"
-                            defaultValue={keyword}
-                            placeholder={placeholder}
-                            aria-label={placeholder}
-                            className="min-h-11 min-w-0 flex-1 bg-transparent px-3 py-2 text-sm text-on-surface placeholder:text-on-surface-variant"
-                        />
-                        <button
-                            type="submit"
-                            data-touch-target="docs-index"
-                            className="ds-focus-ring min-h-11 shrink-0 rounded-xl bg-(--docs-interactive-text) px-4 py-2 text-sm font-semibold text-background transition hover:brightness-95"
-                        >
-                            {submitLabel}
-                        </button>
-                    </form>
+                        placeholder={placeholder}
+                        submitLabel={submitLabel}
+                    />
                     <div className="flex min-w-0 flex-wrap gap-2 pb-1">
                         {recommendations.map((term) => (
                             <Link

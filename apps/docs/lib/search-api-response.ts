@@ -1,4 +1,5 @@
 import type { SearchData } from './get-search-data'
+import { normalizeSearchQuery } from '../shared/lib/search-query.ts'
 import {
     buildSearchResultItems,
     type SearchResultItem,
@@ -14,7 +15,7 @@ export function buildSearchApiResponse(
     docs: SearchData[],
     query?: string | null
 ): SearchApiResponse {
-    const normalizedQuery = query?.trim() ?? ''
+    const normalizedQuery = normalizeSearchQuery(query)
 
     return {
         query: normalizedQuery,

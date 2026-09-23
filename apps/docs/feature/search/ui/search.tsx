@@ -14,13 +14,13 @@ import {
     useTransition,
 } from 'react'
 import { GoSearch } from 'react-icons/go'
-
-const SEARCH_KEYWORD_MAX_LENGTH = 40
+import { useSearchKeyword } from '../model/use-search-keyword'
+import { getSearchHref, normalizeSearchQuery } from '~/shared/lib/search-query'
 
 export const Search = () => {
     const pathname = usePathname()
     const searchParams = useSearchParams()
-    const currentKeyword = searchParams.get('q') ?? ''
+    const currentKeyword = normalizeSearchQuery(searchParams.get('q'))
     const searchParamsString = searchParams.toString()
 
     return (
@@ -48,7 +48,8 @@ function SearchForm({
     const inputRef = useRef<HTMLInputElement>(null)
     const triggerRef = useRef<HTMLButtonElement>(null)
     const panelId = useId()
-    const [keyword, setKeyword] = useState(currentKeyword)
+    const { keyword, setKeyword, composing, inputProps } =
+        useSearchKeyword(currentKeyword)
     const [isOpen, setIsOpen] = useState(false)
     const [isPending, startTransition] = useTransition()
 
@@ -85,23 +86,11 @@ function SearchForm({
         }
     }, [isOpen])
 
-    const getTargetHref = (value: string) => {
-        const trimmedKeyword = value.trim().slice(0, SEARCH_KEYWORD_MAX_LENGTH)
-
-        if (!trimmedKeyword) {
-            return '/docs'
-        }
-
-        const params = new URLSearchParams()
-        params.set('q', trimmedKeyword)
-
-        return `/docs?${params.toString()}`
-    }
-
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        const targetHref = getTargetHref(keyword)
+        if (composing.current) return
+        const targetHref = getSearchHref(keyword)
         const currentHref = searchParamsString
             ? `${pathname}?${searchParamsString}`
             : pathname
@@ -179,17 +168,7 @@ function SearchForm({
                         ref={inputRef}
                         type="text"
                         className="h-10 min-w-0 flex-1 border-0 bg-transparent px-0 py-0 text-[0.95rem] leading-none text-on-surface placeholder:text-[0.95rem] placeholder:text-on-surface-variant"
-                        value={keyword}
-                        onChange={(event) =>
-                            setKeyword(
-                                event.target.value.slice(
-                                    0,
-                                    SEARCH_KEYWORD_MAX_LENGTH
-                                )
-                            )
-                        }
-                        maxLength={SEARCH_KEYWORD_MAX_LENGTH}
-                        minLength={1}
+                        {...inputProps}
                         placeholder={t('input.placeholder')}
                         aria-label={t('input.placeholder')}
                     />
