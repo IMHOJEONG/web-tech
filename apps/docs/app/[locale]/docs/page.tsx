@@ -1,10 +1,8 @@
 import type { Metadata } from 'next'
-import { MainContent } from '~/shared/ui/main-content'
 import { Suspense } from 'react'
 import { ContentPending } from '~/shared/ui/content-pending'
 import { getTranslations } from 'next-intl/server'
-import { EmptyAllDocs } from '~/feature/search/empty-all-docs'
-import { EmptySearchResult } from '~/feature/search/empty-search-result'
+import { DocsEmptyPage } from '~/widgets/docs-index/ui/docs-empty-page'
 import {
     RECOMMENDED_SEARCH_TERMS,
     resolveDocsSearchPageState,
@@ -68,25 +66,12 @@ async function DocsResults({ searchParams }: Props) {
 
     switch (pageState.mode) {
         case 'empty-all-docs':
-            return <EmptyAllDocs />
         case 'empty-search':
             return (
-                <MainContent className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-                    <section className="space-y-6">
-                        <div className="space-y-2">
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
-                                Search Results
-                            </p>
-                            <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-4xl">
-                                문서를 찾지 못했어요.
-                            </h1>
-                        </div>
-                        <EmptySearchResult
-                            keyword={pageState.keyword}
-                            recommendations={RECOMMENDED_SEARCH_TERMS}
-                        />
-                    </section>
-                </MainContent>
+                <DocsEmptyPage
+                    state={pageState}
+                    recommendations={RECOMMENDED_SEARCH_TERMS}
+                />
             )
         case 'index':
             return (

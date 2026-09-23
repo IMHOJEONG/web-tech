@@ -294,6 +294,13 @@
             "clearAriaLabel": "Clear search query"
         },
         "empty": {
+            "searchEyebrow": "Search results",
+            "resultHeading": "No matching documents",
+            "allEyebrow": "All documents",
+            "allHeading": "No documents to show yet",
+            "allDescription": "There are no documents available in this list right now. Check back later or visit the feed.",
+            "toFeed": "Go to the feed",
+            "recommendations": "Suggested searches",
             "resultTitle": "No results found for \"{keyword}\"",
             "resultDescription": "Try another keyword or restart from one of the suggested topics",
             "clear": "Back to all docs"

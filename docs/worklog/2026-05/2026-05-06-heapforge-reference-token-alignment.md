@@ -25,7 +25,7 @@
 - [apps/docs/widgets/app-shell/ui/footer.tsx](../../../apps/docs/widgets/app-shell/ui/footer.tsx:1)
 - [apps/docs/widgets/app-shell/ui/mobile-bottom-nav.tsx](../../../apps/docs/widgets/app-shell/ui/mobile-bottom-nav.tsx:1)
 - [apps/docs/widgets/app-shell/ui/mobile-nav-drawer.tsx](../../../apps/docs/widgets/app-shell/ui/mobile-nav-drawer.tsx:1)
-- [apps/docs/feature/search/empty-search-result.tsx](../../../apps/docs/feature/search/empty-search-result.tsx:1)
+- `apps/docs/feature/search/empty-search-result.tsx` (2026-09-23에 [DocsEmptyPage](../../../apps/docs/widgets/docs-index/ui/docs-empty-page.tsx:1)로 통합)
 
 ## 토큰 변경
 

@@ -34,7 +34,7 @@ export function resolveDocsSearchPageState(input: {
 }): DocsSearchPageState {
     const keyword = input.query?.trim() ?? ''
 
-    if (!input.query && input.docs.length === 0) {
+    if (!keyword && input.docs.length === 0) {
         return {
             mode: 'empty-all-docs',
         }
