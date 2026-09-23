@@ -59,7 +59,20 @@
 - 배포 검증 설정이 `/tmp`에 있어 재사용이 어렵다. 공개 페이지 읽기만 수행하는 저장소 소유 production/배포 smoke 설정과 CSS 토큰 assertion을 추가하는 것이 권장된다.
 - 실기기, 음성 낭독, 전체 사이트 명암 대비와 성능 부하는 미검증이다. 이번 요청에서는 앱 코드 수정·배포를 하지 않았다.
 
+## 페이지 이동 후속 점검
+
+`fd41450` UI/UX 개선 커밋 후 같은 날 로컬 production(원격 목록 제외, 문서 10개)에서 Chromium으로 재확인했다. 앱 코드는 추가 수정하지 않았다.
+
+- 첫 페이지 `?page=1&sort=title`의 비활성 이전 링크는 Enter로 `?sort=title`에 이동했다.
+- 마지막 페이지 `?page=2&sort=title`의 비활성 다음 링크는 Enter로 `?page=3&sort=title`에 이동했다. 표시 페이지는 범위 제한으로 2를 유지했다.
+- 두 비활성 링크 모두 `aria-disabled=true`, `tabIndex=0`, `pointer-events=none`이었다. CSS는 포인터 입력만 막고 실제 링크 활성화는 남아 있다.
+- 정상 다음 링크 클릭과 이전 링크 Enter는 `sort=title`을 유지했다. 섹션 조건 보존은 기존 URL 생성 단위 테스트에서 확인했으며, 이번 브라우저 표본은 정렬 조건만 검사했다.
+- `mise exec -- node --test apps/docs/widgets/docs-index/model/docs-index-pagination.test.ts apps/docs/widgets/docs-index/model/docs-index-controls.test.ts`: 9개 통과. 현재 단위 테스트에는 DOM의 비활성 링크 동작 검사가 없다.
+
+브라우저 관측 명령은 `mise exec -- node /tmp/docs-pagination-check.ts`였으며 [관측 원본](../artifacts/2026-09-23-docs-pagination-check.json)에 URL과 표시 페이지를 남겼다. 임시 스크립트 대신 위 조건에서 링크를 포커스하고 Enter로 재현할 수 있다. 다음 수정은 비활성 경계에서 href 없는 비대화형 요소로 렌더링하고, 양쪽 경계의 키보드 회귀 테스트를 추가하는 것이다. 정상 페이지는 기존 Link와 query 생성 함수를 유지한다.
+
 ## 관련 문서
 
+- [페이지 이동 비활성 경계 수정과 회귀 검증](../../worklog/2026-09/2026-09-23-docs-pagination-disabled-navigation.md): 위 재현 이후 적용한 수정. 기존 관측값은 수정 전 결과로 보존한다.
 - [지속 개선 목록](../../todo/todo.md)
 - [작업 기록](../../worklog/2026-09/2026-09-23-docs-code-ux-review.md)

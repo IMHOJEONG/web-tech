@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [문서 페이지 이동의 비활성 경계 수정](2026-09-23-docs-pagination-disabled-navigation.md)
+
 - [UI/UX 예시 카드 제거와 실제 문서 연결](2026-09-23-uiux-real-article-cards.md)
 
 - [검증 문서 커밋과 코드·UI/UX 점검](2026-09-23-docs-code-ux-review.md)

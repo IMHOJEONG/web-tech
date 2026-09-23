@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [09-23 문서 페이지 이동 후속 관측값](2026-09-23-docs-pagination-check.json)
+
 - [09-23 코드·UI/UX 브라우저 관측값](2026-09-23-docs-code-ux-review.json)
 
 - [09-23 로컬 production 접근성 결과](2026-09-23-local-production-shell-playwright.json)

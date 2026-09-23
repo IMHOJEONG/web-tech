@@ -1,0 +1,37 @@
+{
+  "checkedAt": "2026-09-23T08:37:15.600Z",
+  "commit": "fd41450",
+  "environment": "local production, remote index disabled",
+  "observations": [
+    {
+      "label": "이전",
+      "beforeUrl": "http://127.0.0.1:3116/ko/docs?page=1&sort=title",
+      "href": "/ko/docs?sort=title",
+      "tabIndex": 0,
+      "pointerEvents": "none",
+      "ariaDisabled": "true",
+      "afterUrl": "http://127.0.0.1:3116/ko/docs?sort=title",
+      "displayedPage": "1"
+    },
+    {
+      "label": "다음",
+      "beforeUrl": "http://127.0.0.1:3116/ko/docs?page=2&sort=title",
+      "href": "/ko/docs?page=3&sort=title",
+      "tabIndex": 0,
+      "pointerEvents": "none",
+      "ariaDisabled": "true",
+      "afterUrl": "http://127.0.0.1:3116/ko/docs?page=3&sort=title",
+      "displayedPage": "2"
+    },
+    {
+      "action": "enabled-next-click",
+      "afterUrl": "http://127.0.0.1:3116/ko/docs?page=2&sort=title",
+      "preservedSort": "title"
+    },
+    {
+      "action": "enabled-previous-enter",
+      "afterUrl": "http://127.0.0.1:3116/ko/docs?sort=title",
+      "preservedSort": "title"
+    }
+  ]
+}

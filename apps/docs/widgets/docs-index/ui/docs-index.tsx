@@ -25,6 +25,7 @@ import { DocsIndexCard } from './docs-index-card'
 import { DocsIndexControlsBar } from './docs-index-controls-bar'
 import { DocsIndexEmptyState } from './docs-index-empty-state'
 import { DocsSearchPanel } from './docs-search-panel'
+import { DocsPageNavigationLink } from './docs-page-navigation-link'
 
 type DocsIndexProps = {
     docs: SearchData[]
@@ -293,21 +294,17 @@ export async function DocsIndex({
                             aria-label={t('allDocuments.paginationAriaLabel')}
                             className="motion-layout flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between"
                         >
-                            <Link
-                                href={getDocsPageHref(
-                                    pagination.page - 1,
-                                    resolvedControls
-                                )}
-                                aria-disabled={pagination.page === 1}
-                                data-touch-target="docs-index"
-                                className={cn(
-                                    'ds-focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-border bg-surface-container-lowest px-4 py-2 text-sm font-semibold text-on-surface-variant transition hover:border-primary/50 hover:text-primary',
-                                    pagination.page === 1 &&
-                                        'pointer-events-none opacity-45'
-                                )}
-                            >
-                                {t('allDocuments.previous')}
-                            </Link>
+                            <DocsPageNavigationLink
+                                href={
+                                    pagination.page > 1
+                                        ? getDocsPageHref(
+                                              pagination.page - 1,
+                                              resolvedControls
+                                          )
+                                        : undefined
+                                }
+                                label={t('allDocuments.previous')}
+                            />
                             <div className="flex flex-wrap items-center gap-1.5">
                                 {Array.from(
                                     { length: pagination.totalPages },
@@ -336,23 +333,17 @@ export async function DocsIndex({
                                     </Link>
                                 ))}
                             </div>
-                            <Link
-                                href={getDocsPageHref(
-                                    pagination.page + 1,
-                                    resolvedControls
-                                )}
-                                aria-disabled={
-                                    pagination.page === pagination.totalPages
+                            <DocsPageNavigationLink
+                                href={
+                                    pagination.page < pagination.totalPages
+                                        ? getDocsPageHref(
+                                              pagination.page + 1,
+                                              resolvedControls
+                                          )
+                                        : undefined
                                 }
-                                data-touch-target="docs-index"
-                                className={cn(
-                                    'ds-focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-border bg-surface-container-lowest px-4 py-2 text-sm font-semibold text-on-surface-variant transition hover:border-primary/50 hover:text-primary',
-                                    pagination.page === pagination.totalPages &&
-                                        'pointer-events-none opacity-45'
-                                )}
-                            >
-                                {t('allDocuments.next')}
-                            </Link>
+                                label={t('allDocuments.next')}
+                            />
                         </nav>
                     )}
                 </section>
