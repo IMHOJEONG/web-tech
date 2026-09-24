@@ -63,6 +63,25 @@ git checkout -b feature/<topic>
 - CI가 통과하지 않으면 머지하지 않는다.
 - 커밋 메시지는 `type(scope): summary` 규칙을 따른다.
 
+## 현재 docs 배포 브랜치의 CI 검사
+
+2026-09-24 기준 `feature/docs`가 블로그 배포 브랜치로 사용되는 동안에는
+`CI`와 `Documentation` 워크플로가 `main`뿐 아니라 `feature/docs` 직접 push에서도
+실행되도록 한다. 경로 필터는 두지 않아 공용 패키지·설정 변경도 검사 대상에 포함한다.
+다른 feature 브랜치의 직접 push 범위는 확대하지 않으며 기존 PR 검사는 유지한다.
+
+- `CI`: Commit Messages, Lint, Typecheck, Test를 실행한다.
+- `Documentation`: 문서 검사기 테스트와 변경 문서 검사를 실행한다.
+- PR이 열린 `feature/docs`에 push하면 push와 PR 검사가 각각 실행될 수 있다. 이번에는 기존 PR 필수 검사를 건너뛰지 않는다.
+- 이 설정은 검사 실행 범위 보강이다. Vercel Git 배포는 별도로 실행되며 CI 성공을 기다리는 배포 차단 장치를 추가한 것은 아니다.
+- push 후에는 같은 커밋 SHA의 Actions 결과와 Vercel 배포 상태를 각각 확인한다. 배포 성공만으로 CI 통과를 판단하지 않는다.
+
+이는 장기 feature 브랜치를 기본 전략으로 승인하는 변경이 아니다. docs 배포 기준을
+`main`으로 옮길 때 해당 예외를 제거하며, 공통 workflow 변경도 PR로 `main`에 반영한다.
+원격 Actions 실행과 배포 검증은 push 이후 별도로 수행한다.
+
+관련 변경: [docs 배포 브랜치 CI 실행 범위 보강](../worklog/2026-09/2026-09-24-docs-deployment-branch-ci.md).
+
 ## 공통 변경 반영 방식
 
 이 저장소는 공통 변경을 위해 `develop` 같은 별도 통합 브랜치를 두지 않는다.

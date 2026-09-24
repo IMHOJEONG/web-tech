@@ -232,6 +232,8 @@
 
 ## Infra / Tooling
 
+- [-] `P1` docs 배포 브랜치의 직접 push에도 CI와 문서 검사를 실행한다. `feature/docs`를 두 workflow의 push 대상에 추가했으며 기존 PR 검사와 작업 구성은 유지한다. 완료 조건: push 후 같은 SHA의 Commit Messages·Lint·Typecheck·Test·Documentation 실행 및 결과를 확인한다. Vercel 배포와 CI는 별개이며 배포 차단 연동은 이번 범위가 아니다. [작업 기록](../worklog/2026-09/2026-09-24-docs-deployment-branch-ci.md).
+
 - [-] `P0` `apps/docs` Vercel 운영 보안 기준을 적용한다.
   - `/api/revalidate/content`에 Production 전용 `5 requests / 60 seconds / IP` WAF rate limit 적용
   - `BLOG_CONTENT_API_TOKEN`, `BLOG_CONTENT_REVALIDATE_TOKEN`을 Sensitive 환경변수로 관리
