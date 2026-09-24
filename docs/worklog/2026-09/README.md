@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [상세·게시 갱신 E2E의 오래된 기대값 수정](2026-09-24-article-e2e-expectation-refresh.md)
+
 - [docs 배포 브랜치 CI 실행 범위 보강](2026-09-24-docs-deployment-branch-ci.md)
 
 - [ADR 후속 점검과 About·검색·문서 목록 개선](2026-09-23-adr-followup-improvements.md)

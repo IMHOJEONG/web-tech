@@ -113,6 +113,12 @@ ARTICLE_STREAM_TRACE=1 ARTICLE_DISABLE_PREFETCH=1 pnpm --filter docs test:articl
 본문 assertion 실패는 로컬 탐색 누락, 원격 본문 반환 실패 또는 Suspense
 미완료를 의미할 수 있다. timeout만 늘리기 전에 실제 DOM과 서버 로그를 확인한다.
 
+본문 편집이나 번역 변경으로 기대 문구가 낡은 경우도 구분한다. 로컬 글의 문장을
+바꿀 때는 `article-detail.spec.ts`의 고유 문장과 마지막 본문 표식을 함께 확인한다.
+검색 빈 화면은 `content-publication.spec.ts`에서도 UI locale별 제목을 검사한다.
+기대값만 갱신할 때에도 본문 시작·끝, loading 종료, V1 검색 카드 부재와 V2 반영
+검사를 제거하지 않는다. production suite를 다시 실행한 뒤 실제 회귀와 구분한다.
+
 ```bash
 pnpm --filter docs exec playwright show-trace test-results/<failed-test>/trace.zip
 ```

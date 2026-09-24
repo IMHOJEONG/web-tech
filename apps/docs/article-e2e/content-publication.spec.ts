@@ -169,8 +169,12 @@ for (const locale of ['ko', 'en']) {
                 ).toBeVisible()
                 await page.goto(`/${locale}/docs?q=PUBLICATION_SUMMARY_V1`)
                 await expect(
-                    page.getByRole('heading', {
-                        name: '문서를 찾지 못했어요.',
+                    page.getByRole('main').getByRole('heading', {
+                        level: 1,
+                        name:
+                            locale === 'ko'
+                                ? '검색 결과가 없어요'
+                                : 'No matching documents',
                         exact: true,
                     })
                 ).toBeVisible()
