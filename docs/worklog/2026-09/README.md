@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [헤더·본문 검색 제출 방식 통일](2026-09-26-search-navigation.md)
+
 - [원격 문서에 공용 본문 작성 규칙 적용](2026-09-26-shared-body-validation.md)
 
 - [공용 UI 전용 회귀 테스트 CI 연결](2026-09-26-shared-ui-ci.md)

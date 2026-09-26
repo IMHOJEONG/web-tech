@@ -1,7 +1,8 @@
 'use client'
 
 import { useSearchKeyword } from '../model/use-search-keyword'
-import { normalizeSearchQuery } from '~/shared/lib/search-query'
+import { useSearchNavigation } from '../model/use-search-navigation'
+import { SearchSubmitButton } from './search-submit-button'
 
 type Props = {
     keyword?: string
@@ -19,22 +20,15 @@ export function DocumentSearchForm({
     submitLabel,
 }: Props) {
     const input = useSearchKeyword(keyword)
+    const { isPending, handleSubmit } = useSearchNavigation(input)
     return (
         <form
             role="search"
             aria-label={label}
             action={action}
-            onSubmit={(event) => {
-                if (input.composing.current) {
-                    event.preventDefault()
-                    return
-                }
-                // Normalize the successful control before native GET navigation.
-                const field = event.currentTarget.elements.namedItem(
-                    'q'
-                ) as HTMLInputElement
-                field.value = normalizeSearchQuery(input.keyword)
-            }}
+            method="get"
+            onSubmit={handleSubmit}
+            aria-busy={isPending}
             className="flex min-w-0 overflow-hidden rounded-2xl border border-border bg-surface-container-lowest p-1.5 focus-within:border-primary/60 focus-within:shadow-glow-primary"
         >
             <input
@@ -45,13 +39,11 @@ export function DocumentSearchForm({
                 aria-label={placeholder}
                 className="min-h-11 min-w-0 flex-1 bg-transparent px-3 py-2 text-sm text-on-surface placeholder:text-on-surface-variant"
             />
-            <button
-                type="submit"
-                data-touch-target="docs-index"
-                className="ds-focus-ring min-h-11 shrink-0 rounded-xl bg-(--docs-interactive-text) px-4 py-2 text-sm font-semibold text-background transition hover:brightness-95"
-            >
-                {submitLabel}
-            </button>
+            <SearchSubmitButton
+                isPending={isPending}
+                label={submitLabel}
+                variant="text"
+            />
         </form>
     )
 }

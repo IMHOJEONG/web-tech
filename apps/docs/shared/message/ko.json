@@ -291,6 +291,7 @@
             "triggerLabel": "문서 검색",
             "placeholder": "문서를 검색해보세요",
             "submitAriaLabel": "문서 검색",
+            "pendingLabel": "검색 결과를 불러오는 중",
             "clearAriaLabel": "검색어 지우기"
         },
         "empty": {

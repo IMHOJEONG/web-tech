@@ -1,57 +1,34 @@
 'use client'
 
 import { cn } from '@web-tech/ui/lib/utils'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
-import { usePathname, useRouter } from '~/shared/i18n/navigation'
-import {
-    FormEvent,
-    KeyboardEvent,
-    useEffect,
-    useId,
-    useRef,
-    useState,
-    useTransition,
-} from 'react'
+import { getPathname } from '~/shared/i18n/navigation'
+import { KeyboardEvent, useEffect, useId, useRef, useState } from 'react'
 import { GoSearch } from 'react-icons/go'
 import { useSearchKeyword } from '../model/use-search-keyword'
-import { getSearchHref, normalizeSearchQuery } from '~/shared/lib/search-query'
+import { normalizeSearchQuery } from '~/shared/lib/search-query'
+import { useSearchNavigation } from '../model/use-search-navigation'
+import { SearchSubmitButton } from './search-submit-button'
 
 export const Search = () => {
-    const pathname = usePathname()
     const searchParams = useSearchParams()
     const currentKeyword = normalizeSearchQuery(searchParams.get('q'))
-    const searchParamsString = searchParams.toString()
 
-    return (
-        <SearchForm
-            key={currentKeyword}
-            currentKeyword={currentKeyword}
-            pathname={pathname}
-            searchParamsString={searchParamsString}
-        />
-    )
+    return <SearchForm key={currentKeyword} currentKeyword={currentKeyword} />
 }
 
-function SearchForm({
-    currentKeyword,
-    pathname,
-    searchParamsString,
-}: {
-    currentKeyword: string
-    pathname: string
-    searchParamsString: string
-}) {
+function SearchForm({ currentKeyword }: { currentKeyword: string }) {
     const t = useTranslations('search')
-    const router = useRouter()
+    const locale = useLocale()
     const formRef = useRef<HTMLFormElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
     const triggerRef = useRef<HTMLButtonElement>(null)
     const panelId = useId()
-    const { keyword, setKeyword, composing, inputProps } =
-        useSearchKeyword(currentKeyword)
+    const input = useSearchKeyword(currentKeyword)
+    const { keyword, setKeyword, inputProps } = input
+    const { isPending, handleSubmit } = useSearchNavigation(input)
     const [isOpen, setIsOpen] = useState(false)
-    const [isPending, startTransition] = useTransition()
 
     useEffect(() => {
         if (!isOpen) {
@@ -86,24 +63,6 @@ function SearchForm({
         }
     }, [isOpen])
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-
-        if (composing.current) return
-        const targetHref = getSearchHref(keyword)
-        const currentHref = searchParamsString
-            ? `${pathname}?${searchParamsString}`
-            : pathname
-
-        if (targetHref === currentHref) {
-            return
-        }
-
-        startTransition(() => {
-            router.push(targetHref)
-        })
-    }
-
     const handleToggle = () => {
         setIsOpen((current) => !current)
     }
@@ -126,6 +85,8 @@ function SearchForm({
             ref={formRef}
             role="search"
             aria-label={t('input.triggerLabel')}
+            action={getPathname({ locale, href: '/docs' })}
+            method="get"
             onSubmit={handleSubmit}
             onKeyDown={handleKeyDown}
             className="flex items-center"
@@ -167,6 +128,7 @@ function SearchForm({
                     <input
                         ref={inputRef}
                         type="text"
+                        name="q"
                         className="h-10 min-w-0 flex-1 border-0 bg-transparent px-0 py-0 text-[0.95rem] leading-none text-on-surface placeholder:text-[0.95rem] placeholder:text-on-surface-variant"
                         {...inputProps}
                         placeholder={t('input.placeholder')}
@@ -184,14 +146,11 @@ function SearchForm({
                             </span>
                         </button>
                     ) : null}
-                    <button
-                        type="submit"
-                        className="ds-focus-ring flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-(--docs-interactive-text) transition-colors hover:bg-primary/15 disabled:bg-transparent disabled:text-outline"
-                        aria-label={t('input.submitAriaLabel')}
-                        disabled={isPending}
-                    >
-                        <GoSearch aria-hidden="true" className="size-4" />
-                    </button>
+                    <SearchSubmitButton
+                        isPending={isPending}
+                        label={t('input.submitAriaLabel')}
+                        variant="icon"
+                    />
                 </div>
             </div>
         </form>

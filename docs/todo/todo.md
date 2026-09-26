@@ -141,7 +141,8 @@
 - [x] `P1` 검색 빈 상태의 번역과 본문 landmark를 통일한다. ko/en의 검색 0건·전체 문서 0건에서 제목·본문·복구 링크를 통일하고 공백 query도 같은 정책을 적용한다. 전체 0개는 서버 렌더링, 검색 0건은 브라우저로 검증했다. [작업 기록](../worklog/2026-09/2026-09-23-docs-empty-state-localization.md).
 - [x] `P2` 헤더·본문 검색·직접 URL·API의 입력 정규화와 길이 정책을 공유한다. [ADR-0007](../architecture/adr-0007-search-input-contract.md)의 40 code point·NFC·공백·첫 query 정책을 적용하고 합성 IME 이벤트와 서버 경계를 검사했다. 실제 OS IME는 별도 검증 대상이다. 검색 결과 페이지네이션은 보류를 유지한다.
 - [x] `P2` `DocsIndex`의 통계·섹션·페이지 이동을 역할별로 분리한다. 서버 컴포넌트 3개로 추출하고 기존 query·검색 관련도·빈 상태·페이지 이동 계약을 유지했다. [검증 기록](../worklog/2026-09/2026-09-23-adr-followup-improvements.md).
-- [ ] `P2` JavaScript 비활성 환경의 `/docs` 스트리밍 완결성을 확인한다. 개발 서버에서 본문 대신 loading 상태가 남았다. 프로덕션에서도 재현되는지 확인한 뒤 progressive enhancement 지원 범위를 정하며, 검색 입력 정규화와 별개로 관리한다.
+- [x] `P2` 헤더·본문 검색의 이동 방식과 로딩 표시를 통일한다. 09-26 작업 트리에서 공용 navigation hook·제출 버튼, 같은 URL·IME·pending 중복 방지를 적용했다. [검증 기록](../verification/content/2026-09-26-search-navigation.md): 51개 E2E·production build 통과, 운영 배포 미검증.
+- [ ] `P2` JavaScript 비활성 환경의 `/docs` 스트리밍 완결성을 확인한다. 개발 서버에서 본문 대신 loading 상태가 남았다. 09-26에도 두 locale에서 재현했다. 폼 단독 native GET 통과와 구분하고 프로덕션에서도 재현되는지 확인한 뒤 progressive enhancement 지원 범위를 정한다. [검증 범위](../verification/content/2026-09-26-search-navigation.md).
 
 - [-] `P0` `640px ~ 1023px` 구간의 shell/UI 동작을 실제 디바이스 기준으로 점검한다.
   - header

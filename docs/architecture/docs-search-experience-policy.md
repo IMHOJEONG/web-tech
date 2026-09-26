@@ -24,7 +24,24 @@
 
 즉, 검색은 독립된 앱이 아니라 `docs` 탐색 흐름 안에 통합된 경험으로 본다.
 
-## Why
+## 검색 제출과 이동
+
+- 적용 상태: 2026-09-26 `feature/docs` 작업 트리, 운영 배포 미검증.
+- 헤더와 본문 폼은 `useSearchNavigation`을 공유한다. JavaScript가 동작하면 locale-aware `router.push`로 이동하고 문서 전체를 다시 로드하지 않는다.
+- 입력 규칙은 ADR-0007과 `useSearchKeyword`를 유지한다. 정규화한 검색어로 `/docs?q=...`를 만들고, 빈 검색어는 `/docs`로 이동한다. 새 검색은 기존 섹션·정렬·페이지 조건을 초기화한다.
+- 현재 URL과 목적지가 같으면 이동하지 않는다. 조합 중인 IME 입력과 진행 중인 제출도 다시 실행하지 않는다. 새 검색은 history에 추가하여 뒤로/앞으로 가기로 복원할 수 있다.
+- `SearchSubmitButton`은 헤더의 아이콘형·본문의 텍스트형을 지원한다. 로딩 중 버튼 폭을 유지하고 비활성화하며, 폼의 `aria-busy`와 번역된 상태 문구를 제공한다. reduced motion에서는 스피너 회전을 멈춘다.
+- 두 폼에 locale을 포함한 `action`, `method="get"`, `name="q"`를 유지한다. 단, 폼의 native GET 계약과 페이지 전체의 JavaScript 비활성 지원은 다르다. 현재 `/docs`의 스트리밍 로딩 화면은 별도 검증·개선 대상이며 헤더 팝오버도 JavaScript에 의존한다.
+
+대안과 영향:
+
+- 일반 GET만 사용하면 구현은 단순하지만 본문 검색마다 전체 문서가 다시 로드된다. 기존 헤더의 클라이언트 이동과 체감이 달라 이번에 통일했다.
+- `next/form` 대신 기존 locale-aware 라우터를 공유한다. 같은 URL 무시, IME·정규화·중복 제출 제어를 한 곳에 유지하며 별도의 prefetch 정책은 추가하지 않는다.
+- 자동 검색이나 debounce는 도입하지 않는다. 사용자의 명시적 제출만 처리하고 검색 원문 로그도 추가하지 않는다.
+
+기존 입력 계약을 유지하는 구현 정리이므로 ADR-0007을 대체하지 않는다. [회귀 검사 절차](../runbooks/docs-responsive-browser-device-checklist.md#검색-제출-회귀-검사), [검증 결과와 한계](../verification/content/2026-09-26-search-navigation.md)를 참고한다.
+
+## 선택 배경
 
 이 구조를 선택하는 이유는 다음과 같습니다.
 

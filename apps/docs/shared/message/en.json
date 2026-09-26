@@ -291,6 +291,7 @@
             "triggerLabel": "Search docs",
             "placeholder": "Search the docs",
             "submitAriaLabel": "Search documents",
+            "pendingLabel": "Loading search results",
             "clearAriaLabel": "Clear search query"
         },
         "empty": {

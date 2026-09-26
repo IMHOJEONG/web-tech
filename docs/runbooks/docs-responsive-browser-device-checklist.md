@@ -165,6 +165,29 @@ pnpm --filter docs exec playwright test e2e/skip-link.spec.ts e2e/shell-focus-co
 
 현재 대비 자동 검사는 단색 배경과 부모 배경의 알파 합성에 한정한다. 이미지·그라디언트·전체 사이트 대비, 실제 강제 색상 OS 테마는 별도 확인한다.
 
+### 검색 제출 회귀 검사
+
+Node 24와 Playwright Chromium을 준비하고 저장소 루트에서 실행한다. 사용 중인 개발 서버와 겹치지 않는 포트를 지정한다.
+
+```bash
+DOCS_E2E_PORT=3116 \
+DOCS_BETTER_STACK_SOURCE_TOKEN= DOCS_BETTER_STACK_INGESTING_URL= \
+DOCS_ENABLE_REACT_INSPECTION=false \
+mise exec -- pnpm --filter docs test:e2e \
+  search-navigation.spec.ts search-query-policy.spec.ts keyboard-accessibility.spec.ts \
+  --workers=1 --max-failures=2
+```
+
+기본 Playwright 설정은 원격 목록을 끄고 로컬 문서를 사용한다. 한국어·영어의 헤더·본문 폼을 모바일·태블릿·데스크톱 크기에서 검사한다.
+
+- 새 검색은 locale을 유지하면서 필터·페이지를 초기화하고 document reload 없이 결과로 이동해야 한다.
+- 같은 검색은 history를 추가하지 않아야 하며 빈 입력·뒤로/앞으로 가기는 URL과 본문 입력값을 복원해야 한다.
+- 응답을 지연시키면 제출 버튼이 비활성화되고 폭이 유지되어야 한다. 진행 중 Enter/submit으로 두 번째 요청을 만들지 않아야 한다.
+- 40 code point·NFC·공백·합성 IME 정책, Escape 포커스 복원, reduced motion을 확인한다.
+- native GET 검사는 실제 폼 markup을 별도 JavaScript 비활성 페이지에 옮겨 제출 계약만 확인한다. 전체 `/docs`의 무-JavaScript 지원을 보증하지 않는다.
+
+실패 시 로컬 fixture에 검색 결과가 있는지, 서버 포트 충돌 여부와 trace를 먼저 확인한다. 문구 기대값을 바꿔 이동·인증·결과 계약을 우회하지 않는다. 실제 OS IME와 스크린리더 낭독은 위 수동 검사로 보완한다. [09-26 검증 결과](../verification/content/2026-09-26-search-navigation.md).
+
 ### Header
 
 - `< 640px`에서는 hamburger, brand, search가 잘 보인다.
