@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [공용 UI 전용 회귀 테스트 CI 연결](2026-09-26-shared-ui-ci.md)
+
 - [상세·게시 갱신 E2E의 오래된 기대값 수정](2026-09-24-article-e2e-expectation-refresh.md)
 
 - [docs 배포 브랜치 CI 실행 범위 보강](2026-09-24-docs-deployment-branch-ci.md)

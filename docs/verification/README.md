@@ -33,6 +33,8 @@
 
 ## 콘텐츠
 
+- [09-26 공용 UI CI 연결 검증](content/2026-09-26-shared-ui-ci.md): fixture 62개·production 소비 화면 16개 통과, 원격 Actions 미검증 범위.
+
 - [09-22 콘텐츠 편집과 Canvas hover 진단](content/2026-09-22-content-editorial-and-canvas-hover.md): 글 4개 보완과 일반 버튼 대조군·headless 비교.
 
 - [09-22 이벤트 루프 예제 검증](content/2026-09-22-event-loop-example.md): 본문 예제를 Chrome에서 10회 반복 검증.

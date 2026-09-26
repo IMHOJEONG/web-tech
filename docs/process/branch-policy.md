@@ -70,7 +70,7 @@ git checkout -b feature/<topic>
 실행되도록 한다. 경로 필터는 두지 않아 공용 패키지·설정 변경도 검사 대상에 포함한다.
 다른 feature 브랜치의 직접 push 범위는 확대하지 않으며 기존 PR 검사는 유지한다.
 
-- `CI`: Commit Messages, Lint, Typecheck, Test를 실행한다.
+- `CI`: Commit Messages, Lint, Typecheck, Test와 Shared UI 검사를 실행한다.
 - `Documentation`: 문서 검사기 테스트와 변경 문서 검사를 실행한다.
 - PR이 열린 `feature/docs`에 push하면 push와 PR 검사가 각각 실행될 수 있다. 이번에는 기존 PR 필수 검사를 건너뛰지 않는다.
 - 이 설정은 검사 실행 범위 보강이다. Vercel Git 배포는 별도로 실행되며 CI 성공을 기다리는 배포 차단 장치를 추가한 것은 아니다.
@@ -81,6 +81,28 @@ git checkout -b feature/<topic>
 원격 Actions 실행과 배포 검증은 push 이후 별도로 수행한다.
 
 관련 변경: [docs 배포 브랜치 CI 실행 범위 보강](../worklog/2026-09/2026-09-24-docs-deployment-branch-ci.md).
+
+### 공용 UI 회귀 검사
+
+2026-09-26 작업 트리부터 기존 Test job과 독립된 matrix job 두 개를 실행하도록 구성한다.
+
+- `Shared UI (test:ui)`: 라이트·다크 primitive, Tooltip 설명 관계·포커스, Sidebar hydration 및 클래스 병합.
+- `Shared UI (test:ui:consumer)`: docs production 빌드의 모바일 Drawer 닫기·포커스 복귀 및 Web·Mobile 주제 필터.
+- 각 job은 별도 runner에서 Node 24, frozen lockfile 설치, Chromium 설치 후 실행한다. 작업당 제한은 20분이며 기존 Test job의 15분 예산을 공유하지 않는다.
+- `fail-fast: false`로 한 suite가 실패해도 다른 suite 결과를 수집한다. 실패를 성공으로 처리하는 `continue-on-error`는 사용하지 않는다.
+- main·feature/docs push 및 기존 PR 이벤트에 적용하며, 공용 UI 파일만의 경로 필터로 소비 코드·토큰·lockfile 변경을 누락시키지 않는다.
+
+로컬 재현은 저장소 루트에서 아래 순서로 실행한다. 소비 테스트가 같은 `.next`를 빌드하므로 dev/build와 동시 실행하지 않고 3115 포트를 비워 둔다.
+
+```bash
+mise exec -- pnpm --filter docs exec playwright install chromium
+mise exec -- pnpm --filter docs test:ui
+mise exec -- pnpm --filter docs test:ui:consumer
+```
+
+실패 시 각 job의 Actions 로그에서 실패한 테스트를 확인하고 같은 명령을 로컬에서 재현한다. 실패 trace는 각각 `apps/docs/test-results/ui`, `apps/docs/test-results/ui-consumer`에 남는다. 이번 변경은 CI artifact 업로드를 추가하지 않으므로 runner 종료 후 trace가 영구 보존되지는 않는다.
+
+PR 병합을 강제 차단하려면 GitHub ruleset의 required checks에 위 두 실제 check 이름을 등록해야 한다. 이 저장소 파일 변경만으로 원격 ruleset이나 Vercel 배포 대기 설정을 변경하지 않는다. push 후 동일 SHA에서 두 job의 결과를 확인한다. [로컬 검증과 미검증 범위](../verification/content/2026-09-26-shared-ui-ci.md).
 
 ## 공통 변경 반영 방식
 

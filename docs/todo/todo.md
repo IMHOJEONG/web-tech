@@ -22,6 +22,9 @@
 
 ## Shared UI
 
+- [x] `P1` `test:ui`와 `test:ui:consumer`를 CI 독립 matrix에 연결한다. 09-26 작업 트리 반영과 로컬 78개 검증 완료. [검증 기록](../verification/content/2026-09-26-shared-ui-ci.md).
+- [ ] `P1` 공용 UI matrix를 push한 뒤 동일 SHA의 GitHub Actions 두 check 통과를 확인한다. required checks 등록과 Vercel 배포 대기는 별도 설정으로 판단하며 로컬 통과를 원격 성공으로 간주하지 않는다.
+
 - [-] `P1` 공용 UI와 모든 대상 소비 앱의 동작 기반을 Base UI로 통일한다. 1차 공용 primitive 전환은 완료했지만 전체 전환은 진행 중이다. [ADR-0006의 최종 목표](../architecture/adr-0006-shared-ui-base-ui.md)를 기준으로 관리한다.
 - [x] `P1` 저장소 소유 UI의 직접 Radix 의존성과 wrapper를 정리한다. 미사용 `apps/vuln-radar`의 `@radix-ui/react-slot`, `packages/ui`의 `cmdk`·`@radix-ui/react-icons`와 catalog 선언을 제거했다. cmdk의 Dialog 전이 경로도 제거됐으며 UI 54개·production 16개·Drawer 반복 20개 검증을 통과했다. [검증 보고서](../verification/content/2026-09-22-base-ui-migration.md)를 참고한다. Prisma Studio의 전이 의존성과 외부 모노레포는 아래 별도 과제로 남긴다.
 - [ ] `P2` Prisma Studio의 Radix 전이 의존성을 별도 검토한다. `prisma -> @prisma/studio-core -> @radix-ui/react-toggle` 경로가 남아 있다. 완료 조건: 실제 앱 번들·런타임 포함 여부와 상위 패키지 제거·업데이트 가능성을 확인하고 인증·DB 기능을 유지한 상태에서 처리 방향을 결정한다. 이 경로가 남은 동안 저장소 전체 Radix 의존성 제거 완료로 표시하지 않는다. Base UI로 강제 override하거나 Prisma를 임의 제거하지 않는다.
