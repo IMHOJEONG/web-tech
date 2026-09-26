@@ -1,6 +1,26 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { getContentStyleIssues } from './validate-content-style.mjs'
+import { getMarkdownBodyStyleIssues } from '@web-tech/docs-content-contract/body-style'
+
+test('local frontmatter adapter produces the shared body validation result', () => {
+    const metadata = { status: 'published', slug: 'example' }
+    for (const body of [
+        '## Topic\n<!-- writing -->',
+        '## Topic\n<!-- writing →',
+        '# Title\n#### Jump',
+        '## Topic\n> [!INFO]',
+        '## Topic\n~~~~html\n<!-- example -->\n~~~~',
+        '## Topic\n~~~~js\ncode',
+        '',
+    ]) {
+        const source = '---\nstatus: published\nslug: example\n---\n' + body
+        assert.deepEqual(
+            getContentStyleIssues(source, metadata),
+            getMarkdownBodyStyleIssues(body, metadata)
+        )
+    }
+})
 
 test('accepts existing blog-style heading flow', () => {
     const issues = getContentStyleIssues(

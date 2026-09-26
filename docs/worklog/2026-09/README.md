@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [원격 문서에 공용 본문 작성 규칙 적용](2026-09-26-shared-body-validation.md)
+
 - [공용 UI 전용 회귀 테스트 CI 연결](2026-09-26-shared-ui-ci.md)
 
 - [상세·게시 갱신 E2E의 오래된 기대값 수정](2026-09-24-article-e2e-expectation-refresh.md)

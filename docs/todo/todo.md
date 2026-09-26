@@ -73,6 +73,9 @@
 
 ## Code / Architecture
 
+- [x] `P1` 로컬·원격 published 문서에 공용 본문 작성 검증기를 연결한다. 09-26 작업 트리에서 로컬 CLI·NestJS 목록/상세의 동일 실패 규칙과 경고 유지 확인. [검증 기록](../verification/content/2026-09-26-shared-body-validation.md).
+- [ ] `P1` 새 docs-backend 이미지 배포 전에 기존 NAS 문서의 본문 규칙 위반을 점검하고, 배포 후 목록·상세 및 인증된 revalidation을 확인한다. 위반 문서는 목록에서 제외되므로 [배포 영향](../architecture/docs-content-authoring-markup-policy.md#배포-영향)을 먼저 검토한다.
+
 - [x] `P1` article frontmatter / remote metadata 스키마를 고정한다.
   - `title`, `slug`, `summary`, `date`, `markdownPath`, `thumbnail`, `authorName`, `authorRole`, `readMinutes`, `topicLabel`, `updatedAt`, `tags`, `status`의 필수/선택 여부를 확정
   - local MDX와 remote API가 같은 의미 체계를 쓰도록 contract를 정리
