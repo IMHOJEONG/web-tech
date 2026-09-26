@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [09-26 공개 배포 검색 계약 검사 요약](2026-09-26-deployed-search-contract.json)
+
 - [09-23 공개 배포 접근성 재검증 요약](2026-09-23-deployed-shell-recheck.json)
 
 - [09-23 문서 페이지 이동 후속 관측값](2026-09-23-docs-pagination-check.json)

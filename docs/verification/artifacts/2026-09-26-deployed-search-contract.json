@@ -1,0 +1,196 @@
+{
+  "target": "https://heap-forge.app",
+  "testCodeCommit": "d7305af",
+  "stats": {
+    "startTime": "2026-09-26T13:16:52.085Z",
+    "duration": 117198.878,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "file": "about-author.spec.ts",
+      "title": "ko/light: About ends with a single author section",
+      "project": "deployed-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3892,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "about-author.spec.ts",
+      "title": "ko/dark: About ends with a single author section",
+      "project": "deployed-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1871,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "about-author.spec.ts",
+      "title": "en/light: About ends with a single author section",
+      "project": "deployed-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1963,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "about-author.spec.ts",
+      "title": "en/dark: About ends with a single author section",
+      "project": "deployed-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 12053,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "about-author.spec.ts",
+      "title": "ko/light: About ends with a single author section",
+      "project": "deployed-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1932,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "about-author.spec.ts",
+      "title": "ko/dark: About ends with a single author section",
+      "project": "deployed-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 7688,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "about-author.spec.ts",
+      "title": "en/light: About ends with a single author section",
+      "project": "deployed-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 5028,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "about-author.spec.ts",
+      "title": "en/dark: About ends with a single author section",
+      "project": "deployed-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2653,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "search-query-policy.spec.ts",
+      "title": "direct URL and API use the first query, collapse whitespace and cap length",
+      "project": "deployed-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 10001,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "search-query-policy.spec.ts",
+      "title": "header: length, IME and submit share the same rules",
+      "project": "deployed-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 5621,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "search-query-policy.spec.ts",
+      "title": "index: length, IME and submit share the same rules",
+      "project": "deployed-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 4599,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "search-query-policy.spec.ts",
+      "title": "direct URL and API use the first query, collapse whitespace and cap length",
+      "project": "deployed-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 11680,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "search-query-policy.spec.ts",
+      "title": "header: length, IME and submit share the same rules",
+      "project": "deployed-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 9823,
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "search-query-policy.spec.ts",
+      "title": "index: length, IME and submit share the same rules",
+      "project": "deployed-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 36723,
+          "retry": 0
+        }
+      ]
+    }
+  ]
+}

@@ -8,15 +8,15 @@
 
 2026-09-23에 ADR의 상태와 대체 관계를 확인했다. `적용 중`은 해당 범위의 결정이 현재 코드에 반영되었다는 의미이며 운영 배포·외부 소비처까지 검증 완료했다는 의미는 아니다. 상태의 원본은 각 ADR의 `상태와 범위`이며 전환할 때 이 목록도 함께 갱신한다.
 
-| 결정                                                                            | 상태    | 범위 또는 후속 결정                                           |
-| ------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------- |
-| [ADR-0001: 초기 Docs Feed 구성](adr-0001-docs-feed-main.md)                     | 대체됨  | ADR-0003을 따른다.                                            |
-| [ADR-0002: 초기 About·Footer 구성](adr-0002-about-us-page-and-shared-footer.md) | 대체됨  | ADR-0004를 따른다.                                            |
-| [ADR-0003: 피드와 문서 인덱스 역할 분리](adr-0003-feed-and-docs-roles.md)       | 적용 중 | `/feed` 발견·큐레이션, `/docs` 검색·인덱스                    |
-| [ADR-0004: About 소개와 공용 셸](adr-0004-about-content-and-shared-shell.md)    | 적용 중 | 소개·작성자 정보, 문의 폼 제외                                |
-| [ADR-0005: 문서 카드의 재사용 경계](adr-0005-document-preview-card-boundary.md) | 적용 중 | feed·UI/UX 카드 공유, 인덱스 표현 분리                        |
-| [ADR-0006: 공용 UI의 Base UI 전환](adr-0006-shared-ui-base-ui.md)               | 적용 중 | 저장소 내 구현 반영, 외부 소비처 이전은 남아 있음             |
-| [ADR-0007: 검색 입력 계약 공유](adr-0007-search-input-contract.md)              | 적용 중 | 헤더·본문·URL·API의 40자·공백·중복 query 규칙, 작업 트리 반영 |
+| 결정                                                                            | 상태    | 범위 또는 후속 결정                                                          |
+| ------------------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------- |
+| [ADR-0001: 초기 Docs Feed 구성](adr-0001-docs-feed-main.md)                     | 대체됨  | ADR-0003을 따른다.                                                           |
+| [ADR-0002: 초기 About·Footer 구성](adr-0002-about-us-page-and-shared-footer.md) | 대체됨  | ADR-0004를 따른다.                                                           |
+| [ADR-0003: 피드와 문서 인덱스 역할 분리](adr-0003-feed-and-docs-roles.md)       | 적용 중 | `/feed` 발견·큐레이션, `/docs` 검색·인덱스                                   |
+| [ADR-0004: About 소개와 공용 셸](adr-0004-about-content-and-shared-shell.md)    | 적용 중 | 소개·작성자 정보, 문의 폼 제외                                               |
+| [ADR-0005: 문서 카드의 재사용 경계](adr-0005-document-preview-card-boundary.md) | 적용 중 | feed·UI/UX 카드 공유, 인덱스 표현 분리                                       |
+| [ADR-0006: 공용 UI의 Base UI 전환](adr-0006-shared-ui-base-ui.md)               | 적용 중 | 저장소 내 구현 반영, 외부 소비처 이전은 남아 있음                            |
+| [ADR-0007: 검색 입력 계약 공유](adr-0007-search-input-contract.md)              | 적용 중 | 입력 계약 커밋·Production 성공·09-26 공개 화면 검사 연결, 이동 개선은 미배포 |
 
 새 결정의 작성·대체 규칙은 [ADR 관리 규칙](../process/adr-management.md)을 참고합니다.
 

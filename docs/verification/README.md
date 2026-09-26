@@ -33,6 +33,8 @@
 
 ## 콘텐츠
 
+- [09-26 공개 배포 검색 계약 재검증](content/2026-09-26-deployed-search-contract.md): 검색 6개·About 8개 통과, GitHub Production 기록과 alias 확인 한계.
+
 - [09-26 검색 이동 통일 검증](content/2026-09-26-search-navigation.md): reload 없는 검색·중복 제출·history·로딩 51개 E2E와 빌드, 무-JavaScript 한계.
 - [09-26 로컬·원격 공용 본문 검증](content/2026-09-26-shared-body-validation.md): 공용 규칙·로컬 어댑터·NestJS 목록과 상세의 공개 차단, NAS 배포 미검증.
 

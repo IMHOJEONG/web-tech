@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [검색 ADR에 배포와 검증 근거 연결](2026-09-26-search-adr-evidence.md)
+
 - [헤더·본문 검색 제출 방식 통일](2026-09-26-search-navigation.md)
 
 - [원격 문서에 공용 본문 작성 규칙 적용](2026-09-26-shared-body-validation.md)
