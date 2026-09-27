@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [푸터의 확인되지 않은 연도와 장식 문구 제거](2026-09-28-footer-brand-copy.md)
+
 - [문서 인덱스 검색 E2E locator 충돌 수정](2026-09-27-docs-index-search-locator.md)
 - [모바일 drawer와 주제 필터 E2E 안정화](2026-09-27-docs-mobile-navigation-e2e-stability.md)
 

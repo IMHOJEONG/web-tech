@@ -106,7 +106,6 @@
         }
     },
     "footer": {
-        "tagline": "© {year} {brand} // PRECISION ENGINEERED",
         "linksAriaLabel": "푸터 보조 링크",
         "links": {
             "privacy": "PRIVACY",
