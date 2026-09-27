@@ -49,6 +49,8 @@
 
 - [이벤트 루프 설명과 실행 예제 보완](2026-09-22-event-loop-content-clarification.md)
 
+- [Obsidian 프로젝트 연동 기준 추가](2026-09-22-obsidian-project-integration.md)
+
 - [블로그 PR 병합 후 feature 브랜치 동기화](2026-09-22-feature-branches-sync-after-blog-merge.md)
 
 - [공용 UI와 블로그 PR 분리](2026-09-22-shared-ui-pr-split.md)
