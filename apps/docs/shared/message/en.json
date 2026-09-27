@@ -138,11 +138,6 @@
                     "title": "Supporting services",
                     "body": "Deployment infrastructure, image asset hosting, and remote content APIs may all participate in serving the docs experience. Retention windows and lower-level handling depend on the infrastructure operating each layer."
                 }
-            },
-            "aside": {
-                "title": "Policy updates",
-                "body": "If the operating model changes, the changelog is updated first and this note is revised alongside it when needed.",
-                "linkLabel": "View changelog"
             }
         },
         "terms": {
@@ -168,11 +163,6 @@
                     "title": "External links and citations",
                     "body": "Articles may include external references, tools, or service links. Their content and availability remain the responsibility of the external provider, and HeapForge does not guarantee them in real time."
                 }
-            },
-            "aside": {
-                "title": "Related operating notes",
-                "body": "The contributor guide gives extra context on how content gets structured, validated, and promoted into the published docs flow.",
-                "linkLabel": "View privacy note"
             }
         },
         "changelog": {
@@ -198,11 +188,6 @@
                     "title": "Contributor guide and published metadata checks",
                     "body": "Published local documents now require explicit `status`, `updatedAt`, author metadata, read time, and topic label. A dedicated contributor guide also documents where to place files and what to verify before publishing."
                 }
-            },
-            "aside": {
-                "title": "Follow the detailed history",
-                "body": "The GitHub repository and worklog documents continue the full trail behind these summaries.",
-                "linkLabel": "Open GitHub repository"
             }
         }
     },

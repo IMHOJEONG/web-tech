@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [안내 페이지와 푸터 링크 밀도 조정](2026-09-28-static-pages-footer-density.md)
+
 - [푸터의 확인되지 않은 연도와 장식 문구 제거](2026-09-28-footer-brand-copy.md)
 
 - [문서 인덱스 검색 E2E locator 충돌 수정](2026-09-27-docs-index-search-locator.md)

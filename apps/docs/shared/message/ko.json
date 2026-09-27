@@ -138,11 +138,6 @@
                     "title": "외부 연동",
                     "body": "배포 환경, 이미지 자산 서버, 원격 콘텐츠 API처럼 문서 제공에 필요한 외부 인프라가 함께 동작할 수 있습니다. 각 인프라에서 생성되는 로그 보관 기간과 세부 정책은 해당 운영 환경 기준을 따릅니다."
                 }
-            },
-            "aside": {
-                "title": "정책 변경 안내",
-                "body": "운영 방식이 바뀌면 changelog에 먼저 남기고, 필요 시 이 안내 문서도 함께 갱신합니다.",
-                "linkLabel": "CHANGELOG 보기"
             }
         },
         "terms": {
@@ -168,11 +163,6 @@
                     "title": "외부 링크와 인용",
                     "body": "문서 안에는 외부 레퍼런스나 서비스 링크가 포함될 수 있습니다. 해당 링크의 내용과 가용성은 각 외부 제공자 책임 범위에 있으며, HeapForge는 이를 실시간으로 보증하지 않습니다."
                 }
-            },
-            "aside": {
-                "title": "운영 기준 같이 보기",
-                "body": "콘텐츠 입력 규칙과 검증 흐름은 contributor guide와 함께 보면 더 이해하기 쉽습니다.",
-                "linkLabel": "PRIVACY 보기"
             }
         },
         "changelog": {
@@ -198,11 +188,6 @@
                     "title": "작성자 가이드와 published 메타 기준 추가",
                     "body": "published 문서에 `status`, `updatedAt`, 작성자 정보, 읽기 시간, 주제 라벨이 항상 포함되도록 local validation 기준을 높였습니다. 동시에 contributor guide를 분리해 새 글 작성 위치와 publish 전 체크리스트를 명시했습니다."
                 }
-            },
-            "aside": {
-                "title": "더 자세한 기록",
-                "body": "세부 커밋과 변경 이력은 GitHub 저장소와 worklog 문서에서 계속 추적할 수 있습니다.",
-                "linkLabel": "GitHub 저장소 열기"
             }
         }
     },
