@@ -1,5 +1,6 @@
 # 2026-09 작업 기록
 
+- [문서 인덱스 검색 E2E locator 충돌 수정](2026-09-27-docs-index-search-locator.md)
 - [검색 ADR에 배포와 검증 근거 연결](2026-09-26-search-adr-evidence.md)
 
 - [헤더·본문 검색 제출 방식 통일](2026-09-26-search-navigation.md)
