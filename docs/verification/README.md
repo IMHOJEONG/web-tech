@@ -25,6 +25,14 @@
 
 ## 캐시와 정적 셸
 
+- [09-27 docs CI 로그 재검토](cache/2026-09-27-docs-ci-log-review.md): 같은 SHA의 CI·배포 성공과 별개로 남은 hydration 및 스트림 종료 경고를 분리했다.
+
+- [09-26 로컬 요청 계측 재검증](cache/2026-09-26-request-lifecycle-recheck.md): 80개 회귀 통과, prefetch 스트림 오류 2건의 요청 연결 재확인과 unknown 유지.
+
+- [09-24 로컬 요청 생명주기 계측](cache/2026-09-24-local-request-lifecycle.md): HTTP 종료·오류 판정, Next 요청 ID 분리, 서버 오류와 요청의 상관관계.
+
+- [09-24 스트림 조기 종료 재조사](cache/2026-09-24-stream-cancellation.md): prefetch 전달·대체·재전달 3회 비교, 페이지 요청 실패 없음과 운영 미검증 범위.
+
 - [09-19 Next.js 체크리스트 1차 검증](cache/2026-09-19-nextjs-checklist-phase-one.md): production suite·캐시 통과와 미검증 범위, 서버 스트림 오류 기록.
 - [09-19 게시 갱신 브라우저 검증](cache/2026-09-19-content-publication-browser-test.md): webhook 이후 목록·검색·상세 DOM과 인증 경계.
 - [09-16 언어 URL 전환 후 정적 셸 검증](cache/2026-09-16-docs-static-shell-verification.md): 당시 운영 모델 통과, Cache Components 전체 앱 실패. 이후 조치와 구분하여 읽습니다.

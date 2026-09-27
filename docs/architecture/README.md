@@ -20,7 +20,11 @@
 
 새 결정의 작성·대체 규칙은 [ADR 관리 규칙](../process/adr-management.md)을 참고합니다.
 
+- [ADR-0008: 요청별 증거로 스트림 종료 판정](adr-0008-request-lifecycle-observability.md): 제안. 2026-09-24 로컬 fixture 계측·테스트 추가, 운영 적용은 미구현.
+
 ## 설계·정책 목록
+
+- [Docs 요청 생명주기 로그 정책](docs-request-lifecycle-logging-policy.md)
 
 아래 일반 정책 전체의 최신성을 이번 ADR 점검에서 검증한 것은 아니다. 관련 작업을 할 때 각 문서의 적용 범위·상태·검토일을 실제 코드와 대조한다.
 

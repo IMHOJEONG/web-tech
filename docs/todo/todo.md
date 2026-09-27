@@ -23,7 +23,7 @@
 ## Shared UI
 
 - [x] `P1` `test:ui`와 `test:ui:consumer`를 CI 독립 matrix에 연결한다. 09-26 작업 트리 반영과 로컬 78개 검증 완료. [검증 기록](../verification/content/2026-09-26-shared-ui-ci.md).
-- [ ] `P1` 공용 UI matrix를 push한 뒤 동일 SHA의 GitHub Actions 두 check 통과를 확인한다. required checks 등록과 Vercel 배포 대기는 별도 설정으로 판단하며 로컬 통과를 원격 성공으로 간주하지 않는다.
+- [x] `P1` 공용 UI matrix를 push한 뒤 동일 SHA의 GitHub Actions 두 check 통과를 확인한다. `5dbbcc5`의 두 Shared UI 작업이 성공했다. required checks 등록은 별도 설정이다. [원격 검증](../verification/cache/2026-09-27-docs-ci-log-review.md).
 
 - [-] `P1` 공용 UI와 모든 대상 소비 앱의 동작 기반을 Base UI로 통일한다. 1차 공용 primitive 전환은 완료했지만 전체 전환은 진행 중이다. [ADR-0006의 최종 목표](../architecture/adr-0006-shared-ui-base-ui.md)를 기준으로 관리한다.
 - [x] `P1` 저장소 소유 UI의 직접 Radix 의존성과 wrapper를 정리한다. 미사용 `apps/vuln-radar`의 `@radix-ui/react-slot`, `packages/ui`의 `cmdk`·`@radix-ui/react-icons`와 catalog 선언을 제거했다. cmdk의 Dialog 전이 경로도 제거됐으며 UI 54개·production 16개·Drawer 반복 20개 검증을 통과했다. [검증 보고서](../verification/content/2026-09-22-base-ui-migration.md)를 참고한다. Prisma Studio의 전이 의존성과 외부 모노레포는 아래 별도 과제로 남긴다.
@@ -241,7 +241,12 @@
 
 - [x] `P2` ADR-0007의 구현·배포·검증 근거를 연결한다. 09-26 공개 검색 6개·About 8개 통과와 GitHub Production 성공 기록을 연결했다. alias 매핑 미확정 및 후속 이동 개선 미배포를 구분한다. [검증 보고서](../verification/content/2026-09-26-deployed-search-contract.md).
 
-- [-] `P1` docs 배포 브랜치의 직접 push에도 CI와 문서 검사를 실행한다. `feature/docs`를 두 workflow의 push 대상에 추가했으며 기존 PR 검사와 작업 구성은 유지한다. 완료 조건: push 후 같은 SHA의 Commit Messages·Lint·Typecheck·Test·Documentation 실행 및 결과를 확인한다. Vercel 배포와 CI는 별개이며 배포 차단 연동은 이번 범위가 아니다. [작업 기록](../worklog/2026-09/2026-09-24-docs-deployment-branch-ci.md).
+- [x] `P1` 요청별 스트림 종료 로그 정책을 수립한다. 문구·prefetch 여부만으로 취소를 확정하지 않고 선행 오류와 완료 상태를 함께 판정한다. [정책](../architecture/docs-request-lifecycle-logging-policy.md), [ADR-0008](../architecture/adr-0008-request-lifecycle-observability.md).
+- [x] `P1` 로컬 production fixture에 요청별 계측과 판정 테스트를 추가한다. 전체 80개 통과. 상세 진단의 스트림 오류 2건을 서버 요청과 브라우저 dispatch에 연결했다. Next의 선행 오류 관측은 partial이므로 정상 취소로 단정하지 않는다. 기존 메시지는 필터링하지 않는다. [결과와 한계](../verification/cache/2026-09-24-local-request-lifecycle.md).
+- [ ] `P1` Vercel Preview에서 오류 훅과 플랫폼 로그의 요청 상관관계를 검증한다. 완료 조건: 실제 지원 필드·누락 범위 기록, 캐시 ID 재사용 없음, 강제 종료와 늦은 오류의 unknown/failed 분류, 캐시·스트리밍 동작 유지 확인.
+- [ ] `P2` 검증된 요청 로그를 운영 수집·집계·알림에 연결한다. 완료 조건: 보관/비용/마스킹/전달 실패 정책 확인, 실제 탐색과 prefetch 지표 분리, 테스트 알림 수신. 기존 Better Stack schema failure 연결과 구분한다.
+
+- [x] `P1` docs 배포 브랜치의 직접 push에도 CI와 문서 검사를 실행한다. `5dbbcc5`의 Commit Messages·Lint·Typecheck·Test·Documentation과 두 Shared UI 작업이 성공했다. Vercel 배포와 CI는 별개이며 배포 차단 연동은 이번 범위가 아니다. [원격 검증](../verification/cache/2026-09-27-docs-ci-log-review.md).
 
 - [-] `P0` `apps/docs` Vercel 운영 보안 기준을 적용한다.
   - `/api/revalidate/content`에 Production 전용 `5 requests / 60 seconds / IP` WAF rate limit 적용

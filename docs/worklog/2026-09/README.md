@@ -4,6 +4,8 @@
 
 - [푸터의 확인되지 않은 연도와 장식 문구 제거](2026-09-28-footer-brand-copy.md)
 
+- [Docs CI 로그와 배포 동작 후속 점검](2026-09-27-docs-ci-and-deployment-followup.md)
+
 - [문서 인덱스 검색 E2E locator 충돌 수정](2026-09-27-docs-index-search-locator.md)
 - [모바일 drawer와 주제 필터 E2E 안정화](2026-09-27-docs-mobile-navigation-e2e-stability.md)
 
@@ -15,9 +17,19 @@
 
 - [공용 UI 전용 회귀 테스트 CI 연결](2026-09-26-shared-ui-ci.md)
 
+- [요청별 로컬 계측 재검증](2026-09-26-request-lifecycle-recheck.md)
+
+- [로컬 요청 생명주기 계측과 테스트](2026-09-24-local-request-lifecycle-probe.md)
+
+- [요청별 스트림 로그 정책 수립](2026-09-24-request-lifecycle-logging-policy.md)
+
+- [E2E 수정 푸시와 스트림 조기 종료 조사](2026-09-24-stream-cancellation-investigation.md)
+
 - [상세·게시 갱신 E2E의 오래된 기대값 수정](2026-09-24-article-e2e-expectation-refresh.md)
 
 - [docs 배포 브랜치 CI 실행 범위 보강](2026-09-24-docs-deployment-branch-ci.md)
+
+- [Better Stack 로컬 검증의 사이트맵 500 수정](2026-09-24-better-stack-local-probe-fix.md)
 
 - [ADR 후속 점검과 About·검색·문서 목록 개선](2026-09-23-adr-followup-improvements.md)
 

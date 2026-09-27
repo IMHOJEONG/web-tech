@@ -2,6 +2,12 @@
 
 - [09-26 공개 배포 검색 계약 검사 요약](2026-09-26-deployed-search-contract.json)
 
+- [09-26 요청별 계측 재검증 집계·발췌](2026-09-26-request-lifecycle-recheck.json)
+
+- [09-24 요청별 스트림 계측 집계·발췌](2026-09-24-request-lifecycle.json)
+
+- [09-24 스트림 취소 대조 실험 집계·발췌](2026-09-24-stream-cancellation.json)
+
 - [09-23 공개 배포 접근성 재검증 요약](2026-09-23-deployed-shell-recheck.json)
 
 - [09-23 문서 페이지 이동 후속 관측값](2026-09-23-docs-pagination-check.json)

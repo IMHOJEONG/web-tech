@@ -15,12 +15,12 @@ CI에서 모바일 drawer가 열리지 않거나 주제 필터 이동 및 뒤로
 - 수정 전 CI `36245303265`에서 hydration 경고와 이력 탐색 불일치를 확인했다. 로컬 병렬 반복 실행은 모바일 8건 실패, 40건 통과였다. 실패 시 `nprogress-busy` 상태에서 URL 대기 5초가 끝나거나 버튼 클릭 뒤 dialog가 나타나지 않았다.
 - 수정 후 모바일 병렬 반복 16개 통과. 두 이슈를 함께 포함한 전체 대상 E2E는 27개 통과, 6개 건너뜀. docs lint 및 typecheck 통과.
 - `useSyncExternalStore`의 서버 snapshot은 `false`, 클라이언트 snapshot은 `true`로 두어 hydration 중 HTML 속성이 일치하도록 했다. 일반 `useEffect`의 즉시 `setState`는 lint 경고가 있어 사용하지 않았다.
-- 원격 CI 및 운영 브라우저의 재현 여부는 아직 확인하지 않았다. 로컬 통과만으로 기존 CI의 모든 hydration 경고가 사라졌다고 단정하지 않는다.
+- 후속 [동일 SHA의 원격 CI](../../verification/cache/2026-09-27-docs-ci-log-review.md)는 성공했지만 hydration 경고는 남았다. 운영 브라우저의 상호작용은 아직 확인하지 않았다.
 
 ## Open Questions
 
-- 원격 CI에서 경고가 재발하면 모달의 inert 속성이 아직 hydration되지 않은 스트리밍 영역을 변경하는지 별도로 계측한다.
+- CI 로그에 `aria-hidden` 속성 차이가 남았다. 모달이 아직 hydration되지 않은 스트리밍 영역을 변경하는지 별도로 계측한다.
 
 ## Next
 
-전체 대상 E2E와 원격 CI를 재실행하고, 실패 시 최초 선행 오류와 route 전환 시간을 함께 기록한다.
+남은 hydration 경고를 재현하고, 실제 배포 화면의 drawer와 필터 이동을 확인한다.
