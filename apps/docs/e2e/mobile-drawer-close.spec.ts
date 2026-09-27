@@ -38,6 +38,12 @@ for (const theme of ['light', 'dark']) {
             await expect(
                 page.locator('[data-slot="sheet-overlay"]')
             ).toHaveCount(0)
+            await expect(
+                page.locator('header[aria-hidden="true"]')
+            ).toHaveCount(0)
+            await expect(page.locator('main[aria-hidden="true"]')).toHaveCount(
+                0
+            )
 
             await trigger.click()
             await expect(drawer).toBeVisible()
@@ -80,6 +86,12 @@ for (const theme of ['light', 'dark']) {
             await expect(
                 page.locator('[data-slot="sheet-overlay"]')
             ).toHaveCount(0)
+            await expect(
+                page.locator('header[aria-hidden="true"]')
+            ).toHaveCount(0)
+            await expect(page.locator('main[aria-hidden="true"]')).toHaveCount(
+                0
+            )
         })
     }
 }
