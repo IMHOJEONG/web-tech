@@ -14,6 +14,7 @@ async function expectActiveSection(
     const trigger = page.getByTestId('mobile-nav-drawer-trigger')
     if (page.viewportSize()!.width < 640) {
         await expect(trigger).toBeVisible()
+        await expect(trigger).toBeEnabled()
         await trigger.click()
         const drawer = page.getByRole('dialog')
         await expect(drawer).toBeVisible()
@@ -62,7 +63,11 @@ for (const locale of ['ko', 'en']) {
         }
 
         const mobile = page.viewportSize()!.width < 640
-        if (mobile) await page.getByTestId('mobile-nav-drawer-trigger').click()
+        if (mobile) {
+            const trigger = page.getByTestId('mobile-nav-drawer-trigger')
+            await expect(trigger).toBeEnabled()
+            await trigger.click()
+        }
         const menu = mobile
             ? page.getByRole('dialog')
             : page.getByTestId('desktop-navigation')

@@ -22,7 +22,7 @@ import {
 import { useTranslations } from 'next-intl'
 import { Link } from '~/shared/i18n/navigation'
 import { usePathname } from '~/shared/i18n/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 import { Brand } from '~/shared/ui/brand'
 import type { DrawerLinkConfig } from './mobile-nav-drawer.types'
 import { APP_NAVIGATION, getActiveNavigationKey } from '../model/app-navigation'
@@ -41,6 +41,8 @@ const drawerLinks = APP_NAVIGATION.map((item) => ({
 
 // Match the sm:hidden shell boundary, not the shared Sidebar's md breakpoint.
 const DESKTOP_SHELL_QUERY = '(min-width: 40rem)'
+// The server snapshot keeps the trigger disabled until React attaches its handlers.
+const subscribeToHydration = () => () => {}
 
 function DrawerLink({
     href,
@@ -82,6 +84,11 @@ export default function MobileNavDrawer() {
 function MobileNavDrawerContent({ pathname }: { pathname: string }) {
     const activeKey = getActiveNavigationKey(pathname)
     const [open, setOpen] = useState(false)
+    const isHydrated = useSyncExternalStore(
+        subscribeToHydration,
+        () => true,
+        () => false
+    )
     useEffect(() => {
         const desktopShell = window.matchMedia(DESKTOP_SHELL_QUERY)
         const closeOnDesktop = (event: MediaQueryListEvent) => {
@@ -107,6 +114,7 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                 <SheetTrigger
                     aria-label={headerT('drawer.openAriaLabel')}
                     data-testid="mobile-nav-drawer-trigger"
+                    disabled={!isHydrated}
                     className="flex h-7 w-[2.125rem] items-center justify-center text-muted-foreground transition-colors hover:text-primary"
                 >
                     <svg
