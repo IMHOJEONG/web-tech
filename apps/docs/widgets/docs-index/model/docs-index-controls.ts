@@ -1,5 +1,6 @@
 import type { SearchData } from '~/lib/get-search-data'
 import type { DocsIndexSectionFilterConfig } from './docs-index-config.types'
+import { normalizeSearchQuery } from '../../../shared/lib/search-query.ts'
 
 export const DOCS_INDEX_SECTION_FILTERS = [
     { value: 'all', section: null, messageKey: 'all' },
@@ -133,8 +134,9 @@ export function getDocsIndexHref({
     }
     const params = new URLSearchParams()
 
-    if (keyword?.trim()) {
-        params.set('q', keyword.trim())
+    const query = normalizeSearchQuery(keyword)
+    if (query) {
+        params.set('q', query)
     }
 
     if (page && page > 1) {

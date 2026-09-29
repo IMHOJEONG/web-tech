@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { buildPageMetadata } from '~/lib/localized-metadata'
-import { DOCS_GITHUB_REPO_URL } from '~/shared/config/external-links'
 import { StaticPage } from '~/widgets/static-page/ui/static-page'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -41,13 +40,6 @@ export default async function ChangelogPage() {
                     body: t('sections.editorial.body'),
                 },
             ]}
-            asideTitle={t('aside.title')}
-            asideBody={t('aside.body')}
-            asideLink={{
-                href: DOCS_GITHUB_REPO_URL,
-                label: t('aside.linkLabel'),
-                external: true,
-            }}
         />
     )
 }

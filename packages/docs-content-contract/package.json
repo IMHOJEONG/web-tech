@@ -9,6 +9,12 @@
     "README.md"
   ],
   "exports": {
+    "./body-style": {
+      "types": "./dist/esm/body-style.d.ts",
+      "import": "./dist/esm/body-style.js",
+      "require": "./dist/cjs/body-style.js",
+      "default": "./dist/esm/body-style.js"
+    },
     ".": {
       "types": "./dist/esm/index.d.ts",
       "import": "./dist/esm/index.js",

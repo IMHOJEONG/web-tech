@@ -1,0 +1,1025 @@
+{
+  "config": {
+    "argv": [
+      "/Users/coder/.local/share/mise/installs/node/24.12.0/bin/node",
+      "/Users/coder/Desktop/project/web-tech/apps/docs/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=/tmp/docs-accessibility-local-production.config.cjs"
+    ],
+    "configFile": "/tmp/docs-accessibility-local-production.config.cjs",
+    "rootDir": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/docs-accessibility-local-production-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-mobile",
+        "name": "chromium-mobile",
+        "testDir": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "skip-link.spec.ts",
+          "shell-focus-contrast.spec.ts",
+          "keyboard-accessibility.spec.ts",
+          "mobile-drawer-resize.spec.ts"
+        ],
+        "timeout": 45000
+      },
+      {
+        "outputDir": "/tmp/docs-accessibility-local-production-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-desktop",
+        "name": "chromium-desktop",
+        "testDir": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "skip-link.spec.ts",
+          "shell-focus-contrast.spec.ts",
+          "keyboard-accessibility.spec.ts",
+          "mobile-drawer-resize.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      ["list", null],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/docs-accessibility-local-production-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "keyboard-accessibility.spec.ts",
+      "file": "keyboard-accessibility.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ko: Escape closes search from every control and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 956,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:07:48.767Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-8d50815ed4024f23b76a",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "ko: local article exposes a main landmark and one visible title",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 457,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:07:50.060Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-300475c30310cd03c43b",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 45,
+          "column": 5
+        },
+        {
+          "title": "en: Escape closes search from every control and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 438,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:07:50.526Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-8185fcc95adbf5ca5e91",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "en: local article exposes a main landmark and one visible title",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 312,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:07:50.971Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-d5a8f9975d5b835aa913",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 45,
+          "column": 5
+        },
+        {
+          "title": "ko: Escape closes search from every control and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 430,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:08:03.665Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-82bc19a6d3dd4289d602",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "ko: local article exposes a main landmark and one visible title",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 231,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:08:04.248Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-36e9cd5b35f0e116c847",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 45,
+          "column": 5
+        },
+        {
+          "title": "en: Escape closes search from every control and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 371,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:08:04.486Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-67b74b5fc5f699ddb7e3",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "en: local article exposes a main landmark and one visible title",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 395,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:08:04.864Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "57f991618306702b98f4-3826174da51a05b9a485",
+          "file": "keyboard-accessibility.spec.ts",
+          "line": 45,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "mobile-drawer-resize.spec.ts",
+      "file": "mobile-drawer-resize.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "light/no-preference: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 766,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:07:51.296Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-38e145a6aa18a58a4c36",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 878,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:07:52.067Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-5d586922e4b8cb3147b3",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 746,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:07:52.951Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-d94de2f471d31e47ea0a",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 792,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:07:53.706Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-643df8647a6db2896d19",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/no-preference: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile shell transition coverage.",
+                  "location": {
+                    "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 57,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:08:05.283Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile shell transition coverage.",
+                      "location": {
+                        "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-6d78a917c04f7f682d13",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile shell transition coverage.",
+                  "location": {
+                    "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 53,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:08:05.350Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile shell transition coverage.",
+                      "location": {
+                        "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-8577ef3a854e304c4c1b",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile shell transition coverage.",
+                  "location": {
+                    "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 66,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:08:05.411Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile shell transition coverage.",
+                      "location": {
+                        "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-04485791c905acc80a97",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: leaving the mobile shell releases the drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile shell transition coverage.",
+                  "location": {
+                    "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 64,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:08:05.487Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile shell transition coverage.",
+                      "location": {
+                        "file": "/Users/coder/Desktop/project/web-tech/apps/docs/e2e/mobile-drawer-resize.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "4fd4c9c504eb3972d6f4-d7692957072bf434c8fa",
+          "file": "mobile-drawer-resize.spec.ts",
+          "line": 5,
+          "column": 9
+        }
+      ]
+    },
+    {
+      "title": "shell-focus-contrast.spec.ts",
+      "file": "shell-focus-contrast.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 443,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:07:54.511Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-ed0b6e3ff3ad78bba54b",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 436,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:07:54.961Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-8e1cd8bc1536a71797ad",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 586,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:08:05.567Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-25af7bd5ef4dd06b4256",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 493,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:08:06.165Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-0c54ebb27bda292ff6db",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "skip-link.spec.ts",
+      "file": "skip-link.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ko: first Tab skips the shell on public pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3840,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:07:55.409Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fa172f6935f932c784c9-9e78559fd82634a0da97",
+          "file": "skip-link.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "en: first Tab skips the shell on public pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4022,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:07:59.259Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fa172f6935f932c784c9-42d91ce8c298d652a69a",
+          "file": "skip-link.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "ko: first Tab skips the shell on public pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4203,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:08:06.674Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fa172f6935f932c784c9-74b102a9fa516bed92d5",
+          "file": "skip-link.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "en: first Tab skips the shell on public pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4183,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-23T03:08:10.884Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fa172f6935f932c784c9-04fa202c3685c2b4ba72",
+          "file": "skip-link.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-23T03:07:48.353Z",
+    "duration": 26778.515,
+    "expected": 20,
+    "skipped": 4,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

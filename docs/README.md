@@ -2,6 +2,8 @@
 
 이곳은 모노레포의 설계·운영·검증 기록입니다. 블로그에 공개되는 글은 `apps/docs/data`, `apps/docs/category`에서 별도로 관리합니다.
 
+프로젝트 작업의 지식 진입점은 [web-tech Knowledge Map](knowledge-map.md)입니다. Obsidian 프로젝트 허브와 저장소 문서의 책임 경계를 이 문서에서 확인합니다.
+
 ## 필요한 문서 찾기
 
 | 알고 싶은 내용                              | 위치                                                 | 관리 기준                               |

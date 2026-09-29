@@ -4,6 +4,7 @@ import type { Metadata } from '~/lib/get-document'
 import type { ArticleTimingMeasure } from '~/lib/article-timing.types'
 
 export interface ArticleContentLayoutProps {
+    fallbackTitle?: string
     supplementary?: ReactNode
     toc?: TocItem[]
     children: ReactNode

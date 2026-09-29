@@ -120,6 +120,29 @@
 - `apps/docs/widgets/app-shell/ui/mobile-bottom-nav.tsx`
 - `apps/docs/widgets/app-shell/ui/footer.tsx`
 
+## 현재 메뉴 표시 기준 (2026-09-22)
+
+헤더, 모바일 하단 메뉴, 모바일 drawer는 [app-navigation 모델](../../apps/docs/widgets/app-shell/model/app-navigation.ts)의 메뉴 목록과 `getActiveNavigationKey`를 함께 사용한다. 아이콘과 화면별 스타일은 각 UI 컴포넌트에 둔다. 경로 규칙은 공용 UI 패키지가 아니라 docs 앱의 shell 책임이다.
+
+| 경로                                                                 | 표시 메뉴               |
+| -------------------------------------------------------------------- | ----------------------- |
+| `/web`, `/category/fe/...`, `/docs/web/...`, `/docs/category/fe/...` | Web                     |
+| `/mobile`, `/docs/mobile/...`                                        | Mobile                  |
+| `/ui-ux`, `/docs/ui-ux/...`                                          | UI/UX                   |
+| `/about`                                                             | About                   |
+| `/`, `/feed`, `/docs/feed/...`                                       | Feed                    |
+| `/docs`, 위 전용 섹션에 해당하지 않는 `/docs/...`                    | 기존 호환 정책으로 Feed |
+| 나머지 경로 또는 초기 pathname 부재                                  | 선택 없음               |
+
+- 전용 섹션 판정을 일반 `/docs` fallback보다 먼저 수행한다. 따라서 Web 문서에서 Feed가 함께 선택되지 않는다.
+- `ko`/`en` prefix, query, hash와 후행 slash는 선택 결과를 바꾸지 않는다. 문자열 유사성이 아니라 경로 세그먼트 경계를 비교한다. `/webinar`는 Web이 아니다.
+- 제목, 문서 출처(local/remote), 본문 데이터 조회는 필요하지 않다. canonical URL과 지원 중인 기존 FE category URL만으로 판단한다.
+- `/docs`의 Feed 표시는 현재 메뉴에 Docs 항목이 없다는 기존 제약을 유지한 것이다. 새 Docs 탭 도입이나 미분류 taxonomy의 메뉴 정책은 별도 변경으로 다룬다.
+- 기존 `aria-current="page"` 표시는 유지하되, 각 메뉴 컨테이너에서 최대 한 항목만 선택한다.
+- 이번 변경은 메뉴 강조 판정 통합이며 화면 회전 시 drawer를 닫는 문제는 포함하지 않는다.
+
+회귀 검사는 [순수 함수 테스트](../../apps/docs/widgets/app-shell/model/app-navigation.test.ts)와 [실제 화면 테스트](../../apps/docs/e2e/shell-active-navigation.spec.ts)로 유지한다. 실행 결과는 [작업 기록](../worklog/2026-09/2026-09-22-shell-active-navigation.md)에 남긴다.
+
 ## Follow-up
 
 - shell 내부에서 더 작은 단위로 쪼갤 필요가 있는지 검토

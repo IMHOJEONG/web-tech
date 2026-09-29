@@ -1,8 +1,15 @@
 # ADR-0002: About Us Page and Shared Footer Alignment
 
-- Status: Superseded by [ADR-0004](adr-0004-about-content-and-shared-shell.md)
-- Date: 2026-04-29
-- Superseded on: 2026-09-21
+## 상태와 범위
+
+- 상태: 대체됨
+- 대상: docs 앱의 초기 About 및 공용 footer 구성
+- 결정일: 2026-04-29
+- 대체일: 2026-09-21
+- 최종 검토: 2026-09-23
+- 후속 결정: [ADR-0004](adr-0004-about-content-and-shared-shell.md)
+
+아래 본문과 후속 과제는 당시 기록이다. 문의 폼 등의 현재 구현 지침은 후속 결정을 따른다.
 
 ## Context
 

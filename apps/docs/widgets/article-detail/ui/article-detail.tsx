@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server'
+import { MainContent } from '~/shared/ui/main-content'
 import { ArticleDetailMain } from '~/widgets/article-detail/ui/article-detail-main'
 import { ArticleDetailSidebar } from '~/widgets/article-detail/ui/article-detail-sidebar'
 import type { ArticleDetailProps } from '~/widgets/article-detail/ui/article-detail.types'
@@ -41,7 +42,7 @@ export async function ArticleDetail({ channel }: ArticleDetailProps) {
     ]
 
     return (
-        <main className="w-full text-on-surface">
+        <MainContent className="w-full text-on-surface">
             <div className="mx-auto h-0.5 max-w-page">
                 <div className="ds-progress-line w-1/3" />
             </div>
@@ -101,6 +102,6 @@ export async function ArticleDetail({ channel }: ArticleDetailProps) {
                     relatedSignals={relatedSignals}
                 />
             </div>
-        </main>
+        </MainContent>
     )
 }

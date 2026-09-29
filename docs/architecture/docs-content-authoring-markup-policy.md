@@ -4,8 +4,8 @@
 
 - 상태: 적용 중
 - 대상: docs 로컬·원격 콘텐츠 작성 및 검증 경계
-- 최종 검토: 2026-09-22
-- 최초 적용: 2026-09-11. 이번 검토는 문서 구조 정리이며 NAS 게시 검증의 추가 적용을 뜻하지 않는다.
+- 최종 검토: 2026-09-26
+- 최초 적용: 2026-09-11. 09-26 작업 트리에서 공용 본문 검증기와 NestJS 공개 경로 검사를 추가했다. NAS 이미지 배포·운영 문서 검증 완료를 뜻하지 않는다.
 
 ## 배경
 
@@ -100,7 +100,23 @@ pnpm --filter docs test:content
 - 시작 기호 없이 사용된 `-->`
 - 정상적으로 닫혔더라도 본문에 포함된 HTML 주석
 
-remote NAS 콘텐츠는 `apps/docs` 빌드에 포함되지 않으므로 이 검사만으로 차단되지 않는다. remote publish pipeline 또는 docs-backend에 동일한 body validation을 연결하기 전까지는 게시 전 명령을 콘텐츠 checkout에서 별도로 실행해야 한다.
+공용 검증기는 `@web-tech/docs-content-contract/body-style`의 `getMarkdownBodyStyleIssues`다. frontmatter를 제외한 본문과 status·slug를 입력받고 failures·warnings를 반환한다. 파일 I/O나 renderer에 의존하지 않으며 ESM과 CommonJS로 제공한다.
+
+- local: 기존 CLI가 frontmatter를 분리하고 같은 함수로 검사한다. 파일 형식·디렉터리 검사는 로컬 CLI에 남는다. draft도 명시적인 문법 실패는 검사하지만 공개 상태에 따른 경고는 published에만 적용한다.
+- remote: NestJS가 published metadata·slug를 확인한 다음 같은 함수로 본문을 검사한다. draft·archived는 이전과 같이 공개하지 않고 반환 경로에서 제외한다.
+- failures: 목록에서 해당 글만 제외하고, 상세 요청은 기존의 일반 404 응답으로 처리한다. 다른 정상 글의 목록·상세를 함께 실패시키지 않는다.
+- warnings: 빈 본문·heading 부재·placeholder 경고는 기존 로컬 정책대로 공개 차단으로 승격하지 않는다. 서버에서는 경고를 기록한다.
+- 새 본문 오류 로그에는 문서 경로와 규칙 메시지·본문 기준 행 번호만 기록한다. 원문·인증 헤더를 덤프하거나 오류 원인을 외부 응답에 노출하지 않는다. failures 로그는 앞 5개까지만 기록한다.
+
+언어가 지정된 최상위 코드 펜스는 백틱·틸드 3개 이상을 지원한다. 여는 펜스와 같은 문자이며 길이가 같거나 긴 닫는 펜스만 종료로 판단한다. 그 안의 HTML 주석은 설명용 코드로 허용한다. 들여쓴 코드나 복잡한 목록·인용문 안의 코드까지 완전한 Markdown AST로 해석하는 검사기는 아니므로, HTML 주석을 설명할 때는 최상위 fenced code block을 사용한다.
+
+이 검사는 HTML sanitizer가 아니다. 서버의 `html: false`와 프론트의 기존 처리 경계는 유지한다. 자동 검사로 기술 내용의 정확성·독해 품질을 보장하지도 않는다.
+
+### 배포 영향
+
+기존 NAS 글의 본문 h1·HTML 주석·잘못된 callout·코드 블록도 새 이미지에서는 거절될 수 있다. 운영 content를 바로 수정하거나 삭제하지 말고 복사본을 사용한 검증 환경에서 목록·상세와 서버 규칙 로그를 먼저 확인한다. 문법 실패를 고치거나 미완성 글을 draft로 전환한 뒤 이미지를 배포한다.
+
+본문을 고치면 백엔드는 다음 요청에서 다시 읽고 검사한다. Vercel에 이미 캐시된 목록·상세를 소급 삭제하지는 않으므로 기존 인증된 revalidation 절차도 수행해야 한다. 이번 작업에서 NAS 파일·컨테이너·운영 캐시를 변경하지 않았다.
 
 ## Review Checklist
 
@@ -111,6 +127,9 @@ remote NAS 콘텐츠는 `apps/docs` 빌드에 포함되지 않으므로 이 검�
 5. local validation을 통과한 뒤 remote publish와 cache revalidation을 실행한다.
 
 ## 관련 문서
+
+- [공용 본문 검증 결과](../verification/content/2026-09-26-shared-body-validation.md)
+- [구현 기록](../worklog/2026-09/2026-09-26-shared-body-validation.md)
 
 - `docs/runbooks/docs-contributor-guide.md`
 - `docs/architecture/docs-content-authoring-pipeline.md`
