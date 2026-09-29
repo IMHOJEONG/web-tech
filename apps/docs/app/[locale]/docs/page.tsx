@@ -2,8 +2,7 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { ContentPending } from '~/shared/ui/content-pending'
 import { getTranslations } from 'next-intl/server'
-import { EmptyAllDocs } from '~/feature/search/empty-all-docs'
-import { EmptySearchResult } from '~/feature/search/empty-search-result'
+import { DocsEmptyPage } from '~/widgets/docs-index/ui/docs-empty-page'
 import {
     RECOMMENDED_SEARCH_TERMS,
     resolveDocsSearchPageState,
@@ -12,13 +11,17 @@ import { getSearchData } from '~/lib/get-search-data'
 import { buildPageMetadata } from '~/lib/localized-metadata'
 import { DocsIndex } from '~/widgets/docs-index/ui/docs-index'
 import { resolveDocsIndexControls } from '~/widgets/docs-index/model/docs-index-controls'
+import {
+    firstSearchParam,
+    normalizeSearchQuery,
+} from '~/shared/lib/search-query'
 
 type Props = {
     searchParams: Promise<{
-        page?: string
-        q?: string
-        section?: string
-        sort?: string
+        page?: string | string[]
+        q?: string | string[]
+        section?: string | string[]
+        sort?: string | string[]
     }>
 }
 
@@ -54,38 +57,28 @@ export default function Page(props: Props) {
 
 async function DocsResults({ searchParams }: Props) {
     const { page, q, section, sort } = await searchParams
-    const keyword = q?.trim() ?? ''
-    const currentPage = parsePageParam(page)
-    const controls = resolveDocsIndexControls({ section, sort })
+    const keyword = normalizeSearchQuery(q)
+    const currentPage = parsePageParam(firstSearchParam(page))
+    const controls = resolveDocsIndexControls({
+        section: firstSearchParam(section),
+        sort: firstSearchParam(sort),
+    })
     const docs = keyword ? [] : await getSearchData()
     const searchResults = keyword ? await getSearchData(keyword) : []
     const pageState = resolveDocsSearchPageState({
-        query: q,
+        query: keyword,
         docs,
         searchResults,
     })
 
     switch (pageState.mode) {
         case 'empty-all-docs':
-            return <EmptyAllDocs />
         case 'empty-search':
             return (
-                <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-                    <section className="space-y-6">
-                        <div className="space-y-2">
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
-                                Search Results
-                            </p>
-                            <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-4xl">
-                                문서를 찾지 못했어요.
-                            </h1>
-                        </div>
-                        <EmptySearchResult
-                            keyword={pageState.keyword}
-                            recommendations={RECOMMENDED_SEARCH_TERMS}
-                        />
-                    </section>
-                </main>
+                <DocsEmptyPage
+                    state={pageState}
+                    recommendations={RECOMMENDED_SEARCH_TERMS}
+                />
             )
         case 'index':
             return (

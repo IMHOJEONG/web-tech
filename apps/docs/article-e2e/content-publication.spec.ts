@@ -5,6 +5,7 @@ import {
     type Page,
     type Request,
 } from '@playwright/test'
+import { randomUUID } from 'node:crypto'
 
 const origin = 'http://127.0.0.1:3112'
 const documentPath = '/docs/web/article-e2e-publication'
@@ -92,18 +93,29 @@ for (const locale of ['ko', 'en']) {
     }) => {
         test.setTimeout(60_000)
         const errors: string[] = []
+        const clientProbeIds = new WeakMap<Request, string>()
         page.on('pageerror', (error) => errors.push(error.message))
         // Opt-in diagnostics only: never log auth headers or query values.
         if (traceRequests) {
+            const responseIds = new WeakMap<Request, string>()
+            page.on('response', (response) => {
+                const id = response.headers()['x-article-request-id']
+                if (id) responseIds.set(response.request(), id)
+            })
             const logRequest = (event: string) => (request: Request) => {
                 const url = new URL(request.url())
                 if (url.origin !== 'http://127.0.0.1:3111') return
                 if (!['document', 'fetch'].includes(request.resourceType()))
                     return
+                const time = new Date().toISOString()
+                // Never await response() after an abort: headers may not arrive.
+                const requestId = responseIds.get(request) ?? null
                 console.info(
                     '[article-stream-trace]',
                     JSON.stringify({
-                        time: new Date().toISOString(),
+                        time,
+                        requestId,
+                        clientProbeId: clientProbeIds.get(request) ?? null,
                         event,
                         path: url.pathname,
                         search: url.searchParams.has('q'),
@@ -130,7 +142,42 @@ for (const locale of ['ko', 'en']) {
                 ) {
                     await route.fulfill({ status: 204 })
                 } else {
-                    await route.continue()
+                    const target = route.request()
+                    if (
+                        traceRequests &&
+                        new URL(target.url()).origin ===
+                            'http://127.0.0.1:3111' &&
+                        ['document', 'fetch'].includes(target.resourceType())
+                    ) {
+                        const clientProbeId = randomUUID()
+                        clientProbeIds.set(target, clientProbeId)
+                        // Navigation may discard a request without a terminal
+                        // browser event. Preserve its correlation at dispatch.
+                        const url = new URL(target.url())
+                        console.info(
+                            '[article-stream-trace]',
+                            JSON.stringify({
+                                time: new Date().toISOString(),
+                                event: 'request-dispatched',
+                                requestId: null,
+                                clientProbeId,
+                                path: url.pathname,
+                                search: url.searchParams.has('q'),
+                                type: target.resourceType(),
+                                prefetch:
+                                    headers['next-router-prefetch'] === '1' ||
+                                    'next-router-segment-prefetch' in headers,
+                            })
+                        )
+                        await route.continue({
+                            headers: {
+                                ...headers,
+                                'x-article-client-probe': clientProbeId,
+                            },
+                        })
+                    } else {
+                        await route.continue()
+                    }
                 }
             })
         }
@@ -169,8 +216,12 @@ for (const locale of ['ko', 'en']) {
                 ).toBeVisible()
                 await page.goto(`/${locale}/docs?q=PUBLICATION_SUMMARY_V1`)
                 await expect(
-                    page.getByRole('heading', {
-                        name: '문서를 찾지 못했어요.',
+                    page.getByRole('main').getByRole('heading', {
+                        level: 1,
+                        name:
+                            locale === 'ko'
+                                ? '검색 결과가 없어요'
+                                : 'No matching documents',
                         exact: true,
                     })
                 ).toBeVisible()

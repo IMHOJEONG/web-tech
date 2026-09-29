@@ -1,4 +1,5 @@
 import type { SearchData } from './get-search-data'
+import { normalizeSearchQuery } from '../shared/lib/search-query.ts'
 
 export const RECOMMENDED_SEARCH_TERMS = [
     'React',
@@ -28,13 +29,13 @@ export type DocsSearchPageState =
       }
 
 export function resolveDocsSearchPageState(input: {
-    query?: string | null
+    query?: string | readonly string[] | null
     docs: SearchData[]
     searchResults: SearchData[]
 }): DocsSearchPageState {
-    const keyword = input.query?.trim() ?? ''
+    const keyword = normalizeSearchQuery(input.query)
 
-    if (!input.query && input.docs.length === 0) {
+    if (!keyword && input.docs.length === 0) {
         return {
             mode: 'empty-all-docs',
         }

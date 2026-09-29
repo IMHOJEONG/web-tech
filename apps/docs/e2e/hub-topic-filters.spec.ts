@@ -20,6 +20,9 @@ for (const locale of ['ko', 'en']) {
                 page.getByRole('heading', { name: '런타임 감각' })
             ).toHaveCount(0)
             const react = filters.getByRole('link', { name: /^React \d+$/ })
+            await expect(
+                page.getByTestId('mobile-nav-drawer-trigger')
+            ).toBeEnabled()
             const reactCount = Number(
                 (await react.innerText()).match(/\d+$/)?.[0]
             )
@@ -30,11 +33,9 @@ for (const locale of ['ko', 'en']) {
             await expect(react).not.toHaveCSS('box-shadow', 'none')
             await page.keyboard.press('Enter')
             await expect(page).toHaveURL(
-                new RegExp(`/${locale}/web\\?topic=react$`)
+                new RegExp(`/${locale}/web\\?topic=react$`),
+                { timeout: 15_000 }
             )
-            await expect(react).toHaveAttribute('aria-current', 'true')
-            await expect(results.locator(':scope > li')).toHaveCount(reactCount)
-            await page.reload()
             await expect(react).toHaveAttribute('aria-current', 'true')
             await expect(results.locator(':scope > li')).toHaveCount(reactCount)
             await page.goBack()
@@ -44,6 +45,9 @@ for (const locale of ['ko', 'en']) {
             )
             await page.goForward()
             await expect(react).toHaveAttribute('aria-current', 'true')
+            await page.reload()
+            await expect(react).toHaveAttribute('aria-current', 'true')
+            await expect(results.locator(':scope > li')).toHaveCount(reactCount)
             await filters
                 .getByRole('link', {
                     name: locale === 'ko' ? /^전체 \d+$/ : /^All \d+$/,

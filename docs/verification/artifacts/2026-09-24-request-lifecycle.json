@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "finalSuite": {
+    "summary": "80 passed (1.2m)",
+    "passed": 80,
+    "streamErrorCount": 8,
+    "logSha256": "26300957eb5e4c9d20ca27366a66d6a03be3879c52b0204f584576948fdb1048"
+  },
+  "baseCommit": "1c7bac56a690233d320b1e4a2dc83627b277b3ba",
+  "scope": "Local fixture production only; uncommitted request lifecycle instrumentation",
+  "initialUnbound": {
+    "date": "2026-09-24",
+    "run": "publication ko mobile with ARTICLE_STREAM_TRACE=1",
+    "summary": "1 passed (30.0s)",
+    "logSha256": "56cc4212980cfd439593b3092c01f6d9dd0452a86e9d4fcaf502e83563219cb8",
+    "requests": 714,
+    "outcomes": {
+      "completed": 672,
+      "unknown": 42
+    },
+    "streamErrorCount": 2,
+    "uncorrelatedErrors": 2,
+    "documentFinished": 21,
+    "documentFailed": 0,
+    "streamRequests": []
+  },
+  "finalDispatchCorrelated": {
+    "date": "2026-09-24",
+    "run": "publication ko mobile, dispatch correlation",
+    "summary": "1 passed (29.0s)",
+    "logSha256": "1af01bcbf480ec9d34d05899df45dc900f357781a9a9f5421507974910404d21",
+    "requests": 693,
+    "outcomes": {
+      "completed": 645,
+      "unknown": 48
+    },
+    "streamErrorCount": 2,
+    "uncorrelatedErrors": 0,
+    "documentFinished": 21,
+    "documentFailed": 0,
+    "streamRequests": [
+      {
+        "server": {
+          "schemaVersion": 1,
+          "event": "docs.request.summary",
+          "requestId": "72142b09-f382-49f4-b3ed-5b56b58fe0ae",
+          "service": "docs",
+          "environment": "test",
+          "observer": "node-fixture",
+          "clientProbeId": "43f0c71a-81bf-4bcf-ad93-38ab41ec9185",
+          "path": "/[locale]/docs/[...slugParts]",
+          "route": "/[locale]/docs/[...slugParts]",
+          "queryPresent": true,
+          "prefetch": true,
+          "prefetchEvidence": ["next-router-prefetch"],
+          "requestKind": "rsc",
+          "method": "GET",
+          "errorCoverage": "partial",
+          "responseFinished": false,
+          "responseClosed": true,
+          "closeBeforeFinish": true,
+          "transportClosed": null,
+          "headersSent": true,
+          "statusCode": 200,
+          "durationMs": 135.23,
+          "durationScope": "request-to-close",
+          "outcome": "unknown",
+          "reason": "prefetch-cancellation-suspected",
+          "level": "warn",
+          "precedingErrorIds": [],
+          "omittedEvents": 0,
+          "events": [
+            {
+              "eventId": "53715b75-8c89-4665-9920-f49ace500ebb",
+              "event": "started",
+              "sequence": 1,
+              "timestamp": "2026-09-24T08:56:36.053Z",
+              "elapsedMs": 0.02
+            },
+            {
+              "eventId": "7deb45f0-191f-456c-bd27-4d05a70561f5",
+              "event": "closed",
+              "sequence": 2,
+              "timestamp": "2026-09-24T08:56:36.188Z",
+              "elapsedMs": 135.23
+            },
+            {
+              "errorId": "cca976ae-e682-420c-8621-f018300a0e01",
+              "errorCategory": "stream",
+              "phase": "after-headers",
+              "digest": "3817797001",
+              "eventId": "44d3bc65-d625-4805-bbd7-fa0033c0ee80",
+              "event": "error",
+              "sequence": 3,
+              "timestamp": "2026-09-24T08:56:36.191Z",
+              "elapsedMs": 138.91
+            }
+          ]
+        },
+        "browser": [
+          {
+            "time": "2026-09-24T08:56:36.045Z",
+            "event": "request-dispatched",
+            "requestId": null,
+            "clientProbeId": "43f0c71a-81bf-4bcf-ad93-38ab41ec9185",
+            "path": "/ko/docs/web/article-e2e-remote",
+            "search": false,
+            "type": "fetch",
+            "prefetch": true
+          }
+        ]
+      },
+      {
+        "server": {
+          "schemaVersion": 1,
+          "event": "docs.request.summary",
+          "requestId": "f32b16e4-f333-447c-8fd7-3e192b0e257c",
+          "service": "docs",
+          "environment": "test",
+          "observer": "node-fixture",
+          "clientProbeId": "6d20e38b-9d8f-46b9-98a6-1e38e7d06505",
+          "path": "/[locale]/docs/[...slugParts]",
+          "route": "/[locale]/docs/[...slugParts]",
+          "queryPresent": true,
+          "prefetch": true,
+          "prefetchEvidence": ["next-router-prefetch"],
+          "requestKind": "rsc",
+          "method": "GET",
+          "errorCoverage": "partial",
+          "responseFinished": false,
+          "responseClosed": true,
+          "closeBeforeFinish": true,
+          "transportClosed": null,
+          "headersSent": true,
+          "statusCode": 200,
+          "durationMs": 79.03,
+          "durationScope": "request-to-close",
+          "outcome": "unknown",
+          "reason": "prefetch-cancellation-suspected",
+          "level": "warn",
+          "precedingErrorIds": [],
+          "omittedEvents": 0,
+          "events": [
+            {
+              "eventId": "7ce86e50-d226-4634-9524-5ddef4397465",
+              "event": "started",
+              "sequence": 1,
+              "timestamp": "2026-09-24T08:56:39.425Z",
+              "elapsedMs": 0.03
+            },
+            {
+              "eventId": "aa9b264f-d5da-4f37-bab2-447e5d64c342",
+              "event": "closed",
+              "sequence": 2,
+              "timestamp": "2026-09-24T08:56:39.504Z",
+              "elapsedMs": 79.03
+            },
+            {
+              "errorId": "8b799ed4-15f9-45e5-b4c7-284d1b0814ad",
+              "errorCategory": "stream",
+              "phase": "after-headers",
+              "digest": "3817797001",
+              "eventId": "2c5626c3-7d1f-4d71-83af-3bef89015908",
+              "event": "error",
+              "sequence": 3,
+              "timestamp": "2026-09-24T08:56:39.505Z",
+              "elapsedMs": 79.94
+            }
+          ]
+        },
+        "browser": [
+          {
+            "time": "2026-09-24T08:56:39.419Z",
+            "event": "request-dispatched",
+            "requestId": null,
+            "clientProbeId": "6d20e38b-9d8f-46b9-98a6-1e38e7d06505",
+            "path": "/ko/docs/web/article-e2e-remote",
+            "search": false,
+            "type": "fetch",
+            "prefetch": true
+          }
+        ]
+      }
+    ]
+  }
+}

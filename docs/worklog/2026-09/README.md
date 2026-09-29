@@ -1,5 +1,70 @@
 # 2026-09 작업 기록
 
+- [안내 페이지와 푸터 링크 밀도 조정](2026-09-28-static-pages-footer-density.md)
+
+- [푸터의 확인되지 않은 연도와 장식 문구 제거](2026-09-28-footer-brand-copy.md)
+
+- [Docs CI 로그와 배포 동작 후속 점검](2026-09-27-docs-ci-and-deployment-followup.md)
+
+- [문서 인덱스 검색 E2E locator 충돌 수정](2026-09-27-docs-index-search-locator.md)
+- [모바일 drawer와 주제 필터 E2E 안정화](2026-09-27-docs-mobile-navigation-e2e-stability.md)
+
+- [검색 ADR에 배포와 검증 근거 연결](2026-09-26-search-adr-evidence.md)
+
+- [헤더·본문 검색 제출 방식 통일](2026-09-26-search-navigation.md)
+
+- [원격 문서에 공용 본문 작성 규칙 적용](2026-09-26-shared-body-validation.md)
+
+- [공용 UI 전용 회귀 테스트 CI 연결](2026-09-26-shared-ui-ci.md)
+
+- [요청별 로컬 계측 재검증](2026-09-26-request-lifecycle-recheck.md)
+
+- [로컬 요청 생명주기 계측과 테스트](2026-09-24-local-request-lifecycle-probe.md)
+
+- [요청별 스트림 로그 정책 수립](2026-09-24-request-lifecycle-logging-policy.md)
+
+- [E2E 수정 푸시와 스트림 조기 종료 조사](2026-09-24-stream-cancellation-investigation.md)
+
+- [상세·게시 갱신 E2E의 오래된 기대값 수정](2026-09-24-article-e2e-expectation-refresh.md)
+
+- [docs 배포 브랜치 CI 실행 범위 보강](2026-09-24-docs-deployment-branch-ci.md)
+
+- [Better Stack 로컬 검증의 사이트맵 500 수정](2026-09-24-better-stack-local-probe-fix.md)
+
+- [ADR 후속 점검과 About·검색·문서 목록 개선](2026-09-23-adr-followup-improvements.md)
+
+- [ADR 상태와 문서 생명주기 점검](2026-09-23-document-status-review.md)
+
+- [About의 근거 없는 버전·운영 상태 표시 제거](2026-09-23-about-intro-label.md)
+
+- [검색·전체 문서 빈 화면의 번역과 본문 구조 통일](2026-09-23-docs-empty-state-localization.md)
+
+- [문서 페이지 이동의 비활성 경계 수정](2026-09-23-docs-pagination-disabled-navigation.md)
+
+- [UI/UX 예시 카드 제거와 실제 문서 연결](2026-09-23-uiux-real-article-cards.md)
+
+- [검증 문서 커밋과 코드·UI/UX 점검](2026-09-23-docs-code-ux-review.md)
+
+- [배포 접근성 후속 점검](2026-09-23-deployed-accessibility-check.md)
+
+- [본문 바로가기와 포커스·명암 대비 개선](2026-09-22-skip-link-focus-landmarks.md)
+
+- [운영체제·입문 글 보완과 Canvas hover 진단](2026-09-22-content-editorial-and-canvas-hover.md)
+
+- [검색 키보드 조작과 상세 글 의미 구조 보완](2026-09-22-keyboard-article-accessibility.md)
+
+- [화면 전환 후 모바일 메뉴 오버레이 잔류 수정](2026-09-22-mobile-drawer-resize.md)
+
+- [앱 셸의 현재 메뉴 판정 통합](2026-09-22-shell-active-navigation.md)
+
+- [Sidebar 모바일 판별을 shadcn 공식 구현으로 복원](2026-09-22-sidebar-mobile-hydration.md)
+
+- [이벤트 루프 설명과 실행 예제 보완](2026-09-22-event-loop-content-clarification.md)
+
+- [Obsidian 프로젝트 연동 기준 추가](2026-09-22-obsidian-project-integration.md)
+
+- [블로그 PR 병합 후 feature 브랜치 동기화](2026-09-22-feature-branches-sync-after-blog-merge.md)
+
 - [공용 UI와 블로그 PR 분리](2026-09-22-shared-ui-pr-split.md)
 
 - [공용 UI의 Base UI 전환](2026-09-22-base-ui-migration.md)

@@ -40,12 +40,6 @@ export default async function TermsPage() {
                     body: t('sections.links.body'),
                 },
             ]}
-            asideTitle={t('aside.title')}
-            asideBody={t('aside.body')}
-            asideLink={{
-                href: '/privacy',
-                label: t('aside.linkLabel'),
-            }}
         />
     )
 }

@@ -18,14 +18,30 @@ for (const locale of ['ko', 'en']) {
             await expect(main.locator('input, button')).toHaveCount(0)
             const featured = page.getByTestId('uiux-featured-articles')
             const tutorial = page.getByTestId('uiux-tutorial-card')
-            await expect(featured.getByRole('link')).toHaveCount(3)
-            await expect(tutorial.getByRole('link')).toHaveCount(1)
-            const cards = [
-                ...(await featured.getByRole('link').all()),
-                tutorial.getByRole('link'),
-            ]
+            await expect(featured.getByRole('link')).toHaveCount(2)
+            await expect(tutorial).toHaveCount(0)
+            await expect(page.getByTestId('uiux-more-articles')).toHaveCount(0)
+            const feedLink = main.getByRole('link', {
+                name:
+                    locale === 'ko'
+                        ? 'UI/UX 피드 보기'
+                        : 'Browse the UI/UX feed',
+                exact: true,
+            })
+            await expect(feedLink).toHaveAttribute(
+                'href',
+                `/${locale}/feed?topic=uiux`
+            )
+            await expect(
+                main.locator('a[href*="/feed?topic=uiux"]')
+            ).toHaveCount(1)
+            const cards = await featured.getByRole('link').all()
             const width = page.viewportSize()!.width
             for (const card of cards) {
+                await expect(card).toHaveAttribute(
+                    'href',
+                    new RegExp(`^/${locale}/docs/ui-ux/`)
+                )
                 await expect(card.locator('img')).toHaveCount(1)
                 await expect(card.locator('svg, button, a')).toHaveCount(0)
                 const heading = card.getByRole('heading', { level: 2 })
@@ -72,11 +88,10 @@ for (const locale of ['ko', 'en']) {
             await expect(page).toHaveURL(new URL(href, page.url()).href)
 
             await page.goBack()
-            const tutorialHref = (await tutorial
-                .getByRole('link')
-                .getAttribute('href'))!
-            await tutorial.locator('img').click()
-            await expect(page).toHaveURL(new URL(tutorialHref, page.url()).href)
+            await feedLink.click()
+            await expect(page).toHaveURL(
+                new URL(`/${locale}/feed?topic=uiux`, page.url()).href
+            )
         })
     }
 }
@@ -89,7 +104,7 @@ test('UI/UX cards fit 320px and intermediate widths', async ({ page }) => {
         const cards = page.locator(
             '[data-testid="uiux-featured-articles"] > a, [data-testid="uiux-tutorial-card"] > a'
         )
-        await expect(cards).toHaveCount(4)
+        await expect(cards).toHaveCount(2)
         for (const card of await cards.all()) {
             expect(
                 await card.evaluate(

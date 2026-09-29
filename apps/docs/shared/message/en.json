@@ -1,6 +1,8 @@
 {
     "common": {
         "brand": "HEAP-FORGE",
+        "skipToContent": "Skip to main content",
+        "documentIndexSearch": "Search document index",
         "loadingDocuments": "Loading documents..."
     },
     "feedRecent": {
@@ -76,6 +78,7 @@
         }
     },
     "navigation": {
+        "primaryAriaLabel": "Primary navigation",
         "mobileAriaLabel": "Mobile primary navigation",
         "feed": "Feed",
         "web": "Web",
@@ -103,7 +106,6 @@
         }
     },
     "footer": {
-        "tagline": "© {year} {brand} // PRECISION ENGINEERED",
         "linksAriaLabel": "Footer utility links",
         "links": {
             "privacy": "PRIVACY",
@@ -136,11 +138,6 @@
                     "title": "Supporting services",
                     "body": "Deployment infrastructure, image asset hosting, and remote content APIs may all participate in serving the docs experience. Retention windows and lower-level handling depend on the infrastructure operating each layer."
                 }
-            },
-            "aside": {
-                "title": "Policy updates",
-                "body": "If the operating model changes, the changelog is updated first and this note is revised alongside it when needed.",
-                "linkLabel": "View changelog"
             }
         },
         "terms": {
@@ -166,11 +163,6 @@
                     "title": "External links and citations",
                     "body": "Articles may include external references, tools, or service links. Their content and availability remain the responsibility of the external provider, and HeapForge does not guarantee them in real time."
                 }
-            },
-            "aside": {
-                "title": "Related operating notes",
-                "body": "The contributor guide gives extra context on how content gets structured, validated, and promoted into the published docs flow.",
-                "linkLabel": "View privacy note"
             }
         },
         "changelog": {
@@ -196,11 +188,6 @@
                     "title": "Contributor guide and published metadata checks",
                     "body": "Published local documents now require explicit `status`, `updatedAt`, author metadata, read time, and topic label. A dedicated contributor guide also documents where to place files and what to verify before publishing."
                 }
-            },
-            "aside": {
-                "title": "Follow the detailed history",
-                "body": "The GitHub repository and worklog documents continue the full trail behind these summaries.",
-                "linkLabel": "Open GitHub repository"
             }
         }
     },
@@ -288,9 +275,17 @@
             "triggerLabel": "Search docs",
             "placeholder": "Search the docs",
             "submitAriaLabel": "Search documents",
+            "pendingLabel": "Loading search results",
             "clearAriaLabel": "Clear search query"
         },
         "empty": {
+            "searchEyebrow": "Search results",
+            "resultHeading": "No matching documents",
+            "allEyebrow": "All documents",
+            "allHeading": "No documents to show yet",
+            "allDescription": "There are no documents available in this list right now. Check back later or visit the feed.",
+            "toFeed": "Go to the feed",
+            "recommendations": "Suggested searches",
             "resultTitle": "No results found for \"{keyword}\"",
             "resultDescription": "Try another keyword or restart from one of the suggested topics",
             "clear": "Back to all docs"
@@ -495,63 +490,25 @@
             "titleLineTwo": "INTERFACE EXCELLENCE",
             "description": "An editorial hub for cognitive structure, interface craft, and accessible interaction. It brings design systems, reading experience, and small usability signals into one navigable screen."
         },
-        "featured": {
-            "primaryLabel": "CASE STUDY",
-            "secondaryLabel": "10 MIN READ",
-            "action": "VIEW ANALYSIS"
-        },
-        "secondary": {
-            "researchLabel": "RESEARCH PAPER // 02",
-            "guideLabel": "TECHNICAL GUIDE // 03"
-        },
-        "bottomLeft": {
-            "label": "TUTORIAL // 04"
-        },
         "more": {
             "fallbackDate": "LATEST NOTE"
         },
-        "loadMore": "LOAD NEXT ENTRIES",
-        "fallback": {
-            "featured": {
-                "title": "Reframing spatial interfaces and visual hierarchy",
-                "summary": "A closer look at what kind of visual hierarchy helps dense desktop interfaces stay readable under pressure."
-            },
-            "secondaryOne": {
-                "title": "Cognitive load and grid systems",
-                "summary": "Mathematical layout approaches for reducing decision fatigue in high-stakes environments."
-            },
-            "secondaryTwo": {
-                "title": "Designing micro-interaction states",
-                "summary": "How subtle transitions and feedback states shape a more tactile digital experience."
-            },
-            "tutorial": {
-                "title": "Advanced auto-layout strategies",
-                "summary": "Ways to preserve flexible layout structure in Figma without losing component consistency."
-            },
-            "moreOne": {
-                "title": "Accessibility beyond contrast ratios",
-                "summary": "Designing for temporary constraints and diverse cognitive abilities."
-            },
-            "moreTwo": {
-                "title": "Eye-tracking as hierarchy analysis",
-                "summary": "What heatmaps and scan paths can reveal about information structure."
-            },
-            "moreThree": {
-                "title": "Sharpening responsive typography",
-                "summary": "Using clamp() and vertical rhythm to make long-form reading more stable."
-            }
+        "browseFeed": "Browse the UI/UX feed",
+        "empty": {
+            "title": "No UI/UX articles to show yet",
+            "description": "Explore other topics in the document index.",
+            "action": "Browse all documents"
         }
     },
     "about": {
         "hero": {
-            "status": "STATUS: LIVE // VERSION 2.0.4",
+            "eyebrow": "About HEAP-FORGE",
             "titleLead": "BRIDGING THE STACK THROUGH",
             "titleAccentOne": "TECHNICAL",
             "titleAccentTwo": "PRECISION",
             "description": "A digital lab dedicated to unraveling modern engineering. We explore the point where Web performance, Mobile fluidity, and UI/UX architecture converge.",
             "asideTitle": "HeapForge Notes",
-            "missionLabel": "// MISSION_STATEMENT.md",
-            "establishedLabel": "// ESTABLISHED SEPTEMBER 2026"
+            "missionLabel": "Notes on what I learn while developing software and solving problems."
         },
         "pillars": {
             "web": {
@@ -574,8 +531,7 @@
         },
         "profile": {
             "name": "HoJeong Im",
-            "role": "Full Stack Engineer",
-            "bio": "A full-stack engineer pursuing both minimal aesthetics and high performance, building HEAP-FORGE as an open knowledge base for digital builders.",
+            "bio": "I write about the problems I encounter while developing software and how I solve them. HEAP-FORGE collects what I learn from web development and running services so I can refer back to it later.",
             "links": {
                 "github": {
                     "label": "GITHUB",

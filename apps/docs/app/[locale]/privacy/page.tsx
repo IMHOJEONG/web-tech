@@ -40,12 +40,6 @@ export default async function PrivacyPage() {
                     body: t('sections.vendors.body'),
                 },
             ]}
-            asideTitle={t('aside.title')}
-            asideBody={t('aside.body')}
-            asideLink={{
-                href: '/changelog',
-                label: t('aside.linkLabel'),
-            }}
         />
     )
 }

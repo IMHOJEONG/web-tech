@@ -1,0 +1,128 @@
+{
+  "date": "2026-09-22T05:32:32.684Z",
+  "version": "153.0.8010.53",
+  "mode": "headless",
+  "source": "article classic script",
+  "samples": [
+    {
+      "run": 1,
+      "logs": [
+        "sync:start",
+        "sync:end",
+        "microtask:promise",
+        "microtask:queued",
+        "microtask:nested",
+        "task:timer"
+      ],
+      "errors": []
+    },
+    {
+      "run": 2,
+      "logs": [
+        "sync:start",
+        "sync:end",
+        "microtask:promise",
+        "microtask:queued",
+        "microtask:nested",
+        "task:timer"
+      ],
+      "errors": []
+    },
+    {
+      "run": 3,
+      "logs": [
+        "sync:start",
+        "sync:end",
+        "microtask:promise",
+        "microtask:queued",
+        "microtask:nested",
+        "task:timer"
+      ],
+      "errors": []
+    },
+    {
+      "run": 4,
+      "logs": [
+        "sync:start",
+        "sync:end",
+        "microtask:promise",
+        "microtask:queued",
+        "microtask:nested",
+        "task:timer"
+      ],
+      "errors": []
+    },
+    {
+      "run": 5,
+      "logs": [
+        "sync:start",
+        "sync:end",
+        "microtask:promise",
+        "microtask:queued",
+        "microtask:nested",
+        "task:timer"
+      ],
+      "errors": []
+    },
+    {
+      "run": 6,
+      "logs": [
+        "sync:start",
+        "sync:end",
+        "microtask:promise",
+        "microtask:queued",
+        "microtask:nested",
+        "task:timer"
+      ],
+      "errors": []
+    },
+    {
+      "run": 7,
+      "logs": [
+        "sync:start",
+        "sync:end",
+        "microtask:promise",
+        "microtask:queued",
+        "microtask:nested",
+        "task:timer"
+      ],
+      "errors": []
+    },
+    {
+      "run": 8,
+      "logs": [
+        "sync:start",
+        "sync:end",
+        "microtask:promise",
+        "microtask:queued",
+        "microtask:nested",
+        "task:timer"
+      ],
+      "errors": []
+    },
+    {
+      "run": 9,
+      "logs": [
+        "sync:start",
+        "sync:end",
+        "microtask:promise",
+        "microtask:queued",
+        "microtask:nested",
+        "task:timer"
+      ],
+      "errors": []
+    },
+    {
+      "run": 10,
+      "logs": [
+        "sync:start",
+        "sync:end",
+        "microtask:promise",
+        "microtask:queued",
+        "microtask:nested",
+        "task:timer"
+      ],
+      "errors": []
+    }
+  ]
+}

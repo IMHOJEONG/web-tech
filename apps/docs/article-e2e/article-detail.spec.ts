@@ -6,9 +6,10 @@ const articles = [
         path: '/docs/web/javascript-event-loop-runtime',
         title: 'JavaScript Event Loop 런타임 노트',
         firstHeading: '이벤트 루프를 보는 이유',
-        paragraph: '동기 코드는 call stack에서 바로 실행된다.',
+        paragraph:
+            '호출 스택(call stack): 현재 실행 중인 함수 호출을 관리한다. 동기 코드는 실행 도중에 microtask 때문에 끊기지 않는다.',
         lastHeading: '참고',
-        ending: '이벤트 루프는 특정 API 이름보다 실행 순서와 큐의 성격을 이해하는 쪽이 중요하다.',
+        ending: 'MDN: queueMicrotask와 microtask 처리',
     },
     {
         name: 'local category canonical route',

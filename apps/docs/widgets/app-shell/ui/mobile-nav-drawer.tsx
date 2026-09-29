@@ -22,42 +22,27 @@ import {
 import { useTranslations } from 'next-intl'
 import { Link } from '~/shared/i18n/navigation'
 import { usePathname } from '~/shared/i18n/navigation'
-import { useState } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 import { Brand } from '~/shared/ui/brand'
 import type { DrawerLinkConfig } from './mobile-nav-drawer.types'
+import { APP_NAVIGATION, getActiveNavigationKey } from '../model/app-navigation'
 
-const drawerLinks = [
-    {
-        href: '/feed',
-        key: 'feed',
-        icon: Newspaper,
-        activePrefixes: ['/feed'],
-    },
-    {
-        href: '/web',
-        key: 'web',
-        icon: BookOpenText,
-        activePrefixes: ['/web', '/category/fe'],
-    },
-    {
-        href: '/mobile',
-        key: 'mobile',
-        icon: Smartphone,
-        activePrefixes: ['/mobile'],
-    },
-    {
-        href: '/ui-ux',
-        key: 'uiux',
-        icon: Braces,
-        activePrefixes: ['/ui-ux'],
-    },
-    {
-        href: '/about',
-        key: 'about',
-        icon: Users,
-        activePrefixes: ['/about'],
-    },
-] as const satisfies readonly DrawerLinkConfig[]
+const drawerIcons = {
+    feed: Newspaper,
+    web: BookOpenText,
+    mobile: Smartphone,
+    uiux: Braces,
+    about: Users,
+}
+const drawerLinks = APP_NAVIGATION.map((item) => ({
+    ...item,
+    icon: drawerIcons[item.key],
+})) satisfies readonly DrawerLinkConfig[]
+
+// Match the sm:hidden shell boundary, not the shared Sidebar's md breakpoint.
+const DESKTOP_SHELL_QUERY = '(min-width: 40rem)'
+// The server snapshot keeps the trigger disabled until React attaches its handlers.
+const subscribeToHydration = () => () => {}
 
 function DrawerLink({
     href,
@@ -80,7 +65,7 @@ function DrawerLink({
             className={cn(
                 'flex w-full items-center gap-3 px-6 py-4 text-sm tracking-[0.05em] transition-colors',
                 isActive
-                    ? 'border-r-2 border-primary bg-primary/10 text-primary'
+                    ? 'border-r-2 border-primary bg-primary/10 text-(--docs-interactive-text)'
                     : 'text-muted-foreground hover:bg-surface-container hover:text-on-surface'
             )}
         >
@@ -97,7 +82,23 @@ export default function MobileNavDrawer() {
 }
 
 function MobileNavDrawerContent({ pathname }: { pathname: string }) {
+    const activeKey = getActiveNavigationKey(pathname)
     const [open, setOpen] = useState(false)
+    const isHydrated = useSyncExternalStore(
+        subscribeToHydration,
+        () => true,
+        () => false
+    )
+    useEffect(() => {
+        const desktopShell = window.matchMedia(DESKTOP_SHELL_QUERY)
+        const closeOnDesktop = (event: MediaQueryListEvent) => {
+            if (event.matches) setOpen(false)
+        }
+
+        desktopShell.addEventListener('change', closeOnDesktop)
+        return () => desktopShell.removeEventListener('change', closeOnDesktop)
+    }, [])
+
     const headerT = useTranslations('header')
     const navT = useTranslations('navigation')
     const aboutT = useTranslations('about')
@@ -113,9 +114,11 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                 <SheetTrigger
                     aria-label={headerT('drawer.openAriaLabel')}
                     data-testid="mobile-nav-drawer-trigger"
+                    disabled={!isHydrated}
                     className="flex h-7 w-[2.125rem] items-center justify-center text-muted-foreground transition-colors hover:text-primary"
                 >
                     <svg
+                        aria-hidden="true"
                         width="18"
                         height="12"
                         viewBox="0 0 18 12"
@@ -170,13 +173,9 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                 </div>
 
                 <div className="flex flex-1 flex-col overflow-y-auto">
-                    <div className="py-4">
+                    <nav aria-label={navT('primaryAriaLabel')} className="py-4">
                         {drawerLinks.map((item) => {
-                            const isActive = item.activePrefixes.some(
-                                (prefix) =>
-                                    pathname === prefix ||
-                                    pathname?.startsWith(`${prefix}/`)
-                            )
+                            const isActive = activeKey === item.key
 
                             return (
                                 <DrawerLink
@@ -189,7 +188,7 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                                 />
                             )
                         })}
-                    </div>
+                    </nav>
 
                     <div className="border-t border-header-border px-6 pb-4 pt-[1.0625rem]">
                         <p className="font-display text-[0.625rem] tracking-[0.1em] text-muted-foreground uppercase">
@@ -230,9 +229,6 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                             <p className="font-display text-sm font-bold tracking-[-0.02em] text-on-surface">
                                 {aboutT('profile.name')}
                             </p>
-                            <p className="font-display text-[0.6875rem] tracking-[0.08em] text-muted-foreground uppercase">
-                                {aboutT('profile.role')}
-                            </p>
                         </div>
                     </div>
 
@@ -250,7 +246,7 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                         <button
                             type="button"
                             onClick={() => setOpen(false)}
-                            className="flex items-center justify-center gap-2 rounded-xs border border-primary/20 bg-primary/10 px-4 py-2.5 text-xs text-primary"
+                            className="flex items-center justify-center gap-2 rounded-xs border border-primary/20 bg-primary/10 px-4 py-2.5 text-xs text-(--docs-interactive-text)"
                         >
                             <LogOut className="size-3.5" strokeWidth={1.8} />
                             <span className="font-display">
