@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { MainContent } from '~/shared/ui/main-content'
 import { getTranslations } from 'next-intl/server'
 import { categoryTree } from '~/entities/category/model/category'
 import { CategoryDocumentCard } from '~/entities/category/ui/category-document-card'
@@ -52,7 +53,7 @@ export default async function Page({
     const latestDoc = data[0]
 
     return (
-        <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+        <MainContent className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
             <div className="space-y-8">
                 <section className="ds-panel p-6 sm:p-8">
                     <div className="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(220px,0.8fr)]">
@@ -119,6 +120,6 @@ export default async function Page({
                     </div>
                 </section>
             </div>
-        </main>
+        </MainContent>
     )
 }

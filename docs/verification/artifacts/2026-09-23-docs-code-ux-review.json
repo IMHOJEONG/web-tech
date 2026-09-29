@@ -1,0 +1,135 @@
+{
+  "checkedAt": "2026-09-23T07:47:33.408Z",
+  "origin": "http://127.0.0.1:3116",
+  "remoteIndex": false,
+  "layouts": [
+    {
+      "width": 390,
+      "route": "feed",
+      "mainCount": 1,
+      "h1Count": 1,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "docs",
+      "mainCount": 1,
+      "h1Count": 1,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "web",
+      "mainCount": 1,
+      "h1Count": 1,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "mobile",
+      "mainCount": 1,
+      "h1Count": 1,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "ui-ux",
+      "mainCount": 1,
+      "h1Count": 1,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "route": "about",
+      "mainCount": 1,
+      "h1Count": 1,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1280,
+      "route": "feed",
+      "mainCount": 1,
+      "h1Count": 1,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1280,
+      "route": "docs",
+      "mainCount": 1,
+      "h1Count": 1,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1280,
+      "route": "web",
+      "mainCount": 1,
+      "h1Count": 1,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1280,
+      "route": "mobile",
+      "mainCount": 1,
+      "h1Count": 1,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1280,
+      "route": "ui-ux",
+      "mainCount": 1,
+      "h1Count": 1,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1280,
+      "route": "about",
+      "mainCount": 1,
+      "h1Count": 1,
+      "horizontalOverflow": false
+    }
+  ],
+  "disabledNext": {
+    "href": "/ko/docs?page=3",
+    "tabIndex": 0,
+    "pointerEvents": "none"
+  },
+  "disabledNextAfterEnter": "/ko/docs?page=3",
+  "englishEmptyState": {
+    "lang": "en",
+    "title": "문서를 찾지 못했어요."
+  },
+  "indexSearch": {
+    "maxLength": null,
+    "acceptedLength": 80
+  },
+  "headerSearch": {
+    "maxLength": "40",
+    "acceptedLength": 40
+  },
+  "uiuxFeedLinks": [
+    {
+      "title": "마이크로 인터랙션 상태 설계",
+      "href": "/ko/feed?topic=uiux"
+    },
+    {
+      "title": "고급 오토 레이아웃 전략",
+      "href": "/ko/feed?topic=uiux"
+    },
+    {
+      "title": "대비비를 넘어서는 접근성",
+      "href": "/ko/feed?topic=uiux"
+    },
+    {
+      "title": "시선 추적 기반 위계 분석",
+      "href": "/ko/feed?topic=uiux"
+    },
+    {
+      "title": "반응형 타이포그래피를 더 정교하게",
+      "href": "/ko/feed?topic=uiux"
+    },
+    {
+      "title": "다음 글 더 보기⌄",
+      "href": "/ko/feed?topic=uiux"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { Link } from '~/shared/i18n/navigation'
+import { MainContent } from '~/shared/ui/main-content'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import {
@@ -39,7 +40,7 @@ export default async function Page({
     const category = categoryTree.find((item) => item.url === mainCategory)
 
     return (
-        <main className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+        <MainContent className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
             <div className="space-y-8">
                 <section className="ds-panel p-6 sm:p-8">
                     <div className="max-w-3xl space-y-4">
@@ -115,6 +116,6 @@ export default async function Page({
                     </div>
                 </section>
             </div>
-        </main>
+        </MainContent>
     )
 }

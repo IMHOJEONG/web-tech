@@ -6,6 +6,41 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { normalizeRemoteContent } from './content-api-html.ts'
 import { renderArticleContent } from './render-article-content.ts'
 
+for (const [name, content, hasTitle] of [
+    ['markdown h1', '# Existing title\n\n## Body', true],
+    ['setext h1', 'Existing title\n==============\n\n## Body', true],
+    ['jsx h1', '<h1>Existing title</h1>\n\n## Body', true],
+    ['frontmatter only', '---\ntitle: Metadata title\n---\n\n## Body', false],
+    ['fenced heading', '```md\n# Not a title\n```\n\n## Body', false],
+    ['fenced html', '```html\n<h1>Example</h1>\n```', false],
+] as const) {
+    test(`article title detection: ${name}`, async () => {
+        const rendered = await renderArticleContent(
+            { contentFormat: 'mdx', content },
+            { codeHighlight: false }
+        )
+        assert.equal(rendered.hasTitle, hasTitle)
+        const markup = renderToStaticMarkup(
+            createElement(Fragment, null, rendered.content)
+        )
+        assert.equal(/<h1(?:\s|>)/.test(markup), hasTitle)
+    })
+}
+
+test('remote title detection preserves h1 but excludes escaped code', async () => {
+    for (const [content, hasTitle] of [
+        ['<h1 id="title">Existing title</h1><h2>Body</h2>', true],
+        ['<h2>Body</h2>', false],
+        ['<pre><code>&lt;h1&gt;Example&lt;/h1&gt;</code></pre>', false],
+    ] as const) {
+        const rendered = await renderArticleContent({
+            contentFormat: 'html',
+            content,
+        })
+        assert.equal(rendered.hasTitle, hasTitle)
+    }
+})
+
 for (const codeHighlight of [false, true]) {
     test(`local GFM tables render with codeHighlight=${codeHighlight}`, async () => {
         const rendered = await renderArticleContent(

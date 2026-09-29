@@ -1,12 +1,9 @@
+import { getMarkdownBodyStyleIssues } from '@web-tech/docs-content-contract/body-style'
 import fs from 'fs/promises'
 import path from 'path'
 import process from 'node:process'
 import { fileURLToPath, pathToFileURL } from 'url'
-import {
-    collectMarkdownFiles,
-    normalizeStatus,
-    parseFrontmatter,
-} from './validate-content.mjs'
+import { collectMarkdownFiles, parseFrontmatter } from './validate-content.mjs'
 
 const DOCS_ROOT = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)),
@@ -15,13 +12,6 @@ const DOCS_ROOT = path.resolve(
 const CONTENT_DIRECTORIES = ['data', 'category'].map((directory) =>
     path.join(DOCS_ROOT, directory)
 )
-const CODE_FENCE_PATTERN = /^```(\S*)\s*$/
-const HEADING_PATTERN = /^(#{1,6})\s+(.+?)\s*$/
-const CALLOUT_MARKER_PATTERN = /\[!([A-Za-z][A-Za-z0-9_-]*)\]/
-const CALLOUT_BLOCKQUOTE_PATTERN = /^\s*>\s*\[!([A-Za-z][A-Za-z0-9_-]*)\]/
-const SUPPORTED_CALLOUT_MARKERS = new Set(['NOTE', 'TIP', 'WARNING'])
-const PLACEHOLDER_PATTERN = /\b(TODO|FIXME|lorem ipsum)\b|임시|테스트용/i
-const PLACEHOLDER_SLUGS = new Set(['test', 'sample', 'todo', 'draft'])
 
 function getBody(source) {
     if (!source.startsWith('---')) {
@@ -61,153 +51,7 @@ async function collectNonMarkdownFiles(directory) {
 }
 
 export function getContentStyleIssues(source, frontmatter = {}) {
-    const failures = []
-    const warnings = []
-    const body = getBody(source)
-    const lines = body.split(/\r?\n/)
-    const status = normalizeStatus(frontmatter.status)
-    const isPublished = status === 'published'
-    const trimmedBody = body.trim()
-    const headings = []
-    let isInsideCodeFence = false
-    let htmlCommentStartLine = null
-
-    if (!trimmedBody) {
-        if (isPublished) {
-            warnings.push('published content should include body content')
-        }
-
-        return { failures, warnings }
-    }
-
-    for (const [index, line] of lines.entries()) {
-        const codeFenceMatch = line.match(CODE_FENCE_PATTERN)
-
-        if (codeFenceMatch) {
-            if (!isInsideCodeFence && !codeFenceMatch[1]) {
-                failures.push(
-                    `line ${index + 1}: code block language is required`
-                )
-            }
-
-            isInsideCodeFence = !isInsideCodeFence
-            continue
-        }
-
-        if (isInsideCodeFence) {
-            continue
-        }
-
-        const htmlCommentStartIndex = line.indexOf('<!--')
-        const htmlCommentEndIndex = line.indexOf('-->')
-
-        if (htmlCommentStartLine !== null) {
-            if (htmlCommentEndIndex !== -1) {
-                failures.push(
-                    `line ${htmlCommentStartLine}: HTML comments are not allowed; use frontmatter status: draft for unfinished content`
-                )
-                htmlCommentStartLine = null
-            }
-
-            continue
-        }
-
-        if (htmlCommentStartIndex !== -1) {
-            if (htmlCommentEndIndex > htmlCommentStartIndex) {
-                failures.push(
-                    `line ${index + 1}: HTML comments are not allowed; use frontmatter status: draft for unfinished content`
-                )
-            } else {
-                htmlCommentStartLine = index + 1
-            }
-
-            continue
-        }
-
-        if (htmlCommentEndIndex !== -1) {
-            failures.push(
-                `line ${index + 1}: HTML comment closing marker has no matching opener`
-            )
-            continue
-        }
-
-        const calloutMarkerMatch = line.match(CALLOUT_MARKER_PATTERN)
-        const calloutBlockquoteMatch = line.match(CALLOUT_BLOCKQUOTE_PATTERN)
-
-        if (calloutMarkerMatch) {
-            const marker = calloutMarkerMatch[1].toUpperCase()
-
-            if (!calloutBlockquoteMatch) {
-                failures.push(
-                    `line ${index + 1}: callout marker should be the first text in a blockquote`
-                )
-            } else if (!SUPPORTED_CALLOUT_MARKERS.has(marker)) {
-                failures.push(
-                    `line ${index + 1}: unsupported callout marker [!${marker}]`
-                )
-            }
-        }
-
-        const headingMatch = line.match(HEADING_PATTERN)
-
-        if (!headingMatch) {
-            continue
-        }
-
-        const level = headingMatch[1].length
-
-        headings.push({ level, line: index + 1 })
-
-        if (level === 1) {
-            failures.push(
-                `line ${index + 1}: h1 is reserved for frontmatter title`
-            )
-        }
-    }
-
-    if (isInsideCodeFence) {
-        failures.push('code block is not closed')
-    }
-
-    if (htmlCommentStartLine !== null) {
-        failures.push(
-            `line ${htmlCommentStartLine}: HTML comment is not closed with -->; use frontmatter status: draft for unfinished content`
-        )
-    }
-
-    if (headings.length === 0) {
-        if (isPublished) {
-            warnings.push(
-                'published content should include at least one heading'
-            )
-        }
-    } else if (headings[0].level !== 2 && headings[0].level !== 3) {
-        failures.push('first heading should start at h2 or h3')
-    }
-
-    for (let index = 1; index < headings.length; index += 1) {
-        const previousHeading = headings[index - 1]
-        const currentHeading = headings[index]
-
-        if (currentHeading.level - previousHeading.level > 1) {
-            failures.push(
-                `line ${currentHeading.line}: heading level jumps from h${previousHeading.level} to h${currentHeading.level}`
-            )
-        }
-    }
-
-    if (isPublished && PLACEHOLDER_PATTERN.test(body)) {
-        warnings.push('published content contains placeholder-like text')
-    }
-
-    if (
-        isPublished &&
-        PLACEHOLDER_SLUGS.has(String(frontmatter.slug ?? '').trim())
-    ) {
-        warnings.push('published content uses a placeholder-like slug')
-    }
-
-    return { failures, warnings }
+    return getMarkdownBodyStyleIssues(getBody(source), frontmatter)
 }
 
 export async function main() {

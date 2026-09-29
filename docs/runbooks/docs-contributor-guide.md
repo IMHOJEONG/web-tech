@@ -214,6 +214,8 @@ remote renderer는 보안을 위해 raw HTML을 비활성화한다. 이 때문�
 
 `apps/docs`는 frontmatter 외에도 최소한의 문서 형식을 검사한다.
 
+로컬 CLI와 NestJS `docs-backend`는 `@web-tech/docs-content-contract/body-style`의 같은 본문 검증기를 사용한다. 새 백엔드 이미지에서는 published 문서의 hard fail이 목록 제외·상세 404로 이어진다. warning만 있는 문서는 공개를 유지한다. [배포 전 점검과 캐시 주의점](../architecture/docs-content-authoring-markup-policy.md#배포-영향)을 확인한다.
+
 Hard fail:
 
 - `apps/docs/data`, `apps/docs/category` 아래에는 `md`, `mdx` 문서만 둔다.
