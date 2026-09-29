@@ -1,33 +1,46 @@
 ---
-title: V8
+title: 'V8과 Ignition 바이트코드 입문 노트'
 slug: browser-v8-bytecode
 date: 2024-12-10
-updatedAt: 2024-12-10
+updatedAt: 2026-09-22
 thumbnail: 'v8/thumbnail.webp'
-summary: V8 엔진에 대해 깊이 알아봅시다.
+summary: V8의 실행 역할과 Ignition 바이트코드를 읽기 전에 알아둘 용어를 정리합니다.
 authorName: 'HoJeong Im'
 authorRole: 'Web Engineer'
 readMinutes: 4
 topicLabel: 'RUNTIME'
 tags:
-  - v8
-  - runtime
-  - bytecode
+    - v8
+    - runtime
+    - bytecode
 status: published
 ---
 
-### V8
+## 이 글의 범위
 
-- V8 엔진: C++로 작성되어 있음 (Chrome 및 NodeJS에서 사용됨)
+이 글은 V8 최적화 전체를 설명하는 심화 글이 아니다. JavaScript 함수 실행을 알고 있는 독자가 Ignition 자료를 읽기 전에 엔진·바이트코드·레지스터·누산기를 구분하기 위한 입문 노트다.
 
-- ECMA-262에 지정된 ECMAScript를 구현
+### 엔진과 런타임
 
-- V8 엔진은 독립적 실행 가능 & C++ 포함 가능
+V8은 Chrome과 Node.js에서 사용하는 JavaScript·WebAssembly 엔진이다. 엔진이 같다고 브라우저와 Node.js가 제공하는 API까지 같지는 않다. DOM이나 서버 I/O처럼 주변 환경이 제공하는 기능은 엔진 자체와 구분해서 살펴본다.
 
-### ByteCode
+### 바이트코드를 읽기 위한 용어
 
-- JS를 더 깊게 이해하기 위한 방법
+Ignition은 V8의 바이트코드 인터프리터다. 바이트코드는 소스 코드의 연산을 인터프리터가 실행할 수 있는 명령으로 표현한 것이며, CPU가 직접 실행하는 기계어와는 다르다.
 
-- 레지스터에 대한 기본 이해도 필요함
+- 레지스터: 여기서는 바이트코드가 값을 보관하고 참조하는 가상 저장 위치를 뜻한다. CPU의 물리 레지스터와 일대일로 대응한다고 가정하지 않는다.
+- 누산기(accumulator): 연산의 입력이나 결과를 암묵적으로 주고받는 특별한 저장 위치다. 명령을 볼 때 값이 어디에서 들어와 어디에 남는지 함께 추적한다.
 
-- Lda, Sta의 a는 누산기를 나타냄
+### 실제 출력을 읽을 때의 순서
+
+1. 실행한 Node.js 또는 V8 버전과 원본 함수를 기록한다.
+2. 명령 이름만 외우지 말고 인수·레지스터·누산기 사이의 값 이동을 확인한다.
+3. 같은 함수라도 버전과 실행 옵션에 따라 출력이 달라질 수 있음을 전제로 비교한다.
+
+이 글에는 특정 버전에서 생성한 바이트코드 출력이나 성능 측정 결과를 아직 싣지 않았다. 명령 몇 개를 읽었다고 최적화된 기계어의 성능까지 판단할 수는 없다. 실제 출력 분석은 버전·명령·관측 결과를 함께 확보한 뒤 별도로 추가한다.
+
+## 참고
+
+- [V8 공식 소개](https://v8.dev/)
+- [Ignition 공식 문서와 설계 자료](https://v8.dev/docs/ignition)
+- [Ignition 소개: 레지스터와 누산기](https://v8.dev/blog/ignition-interpreter): 2016년 설계 소개다. 당시 성능 수치나 전체 실행 파이프라인을 현재 버전에 그대로 적용하지 않는다.

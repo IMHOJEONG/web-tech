@@ -4,6 +4,12 @@
 
 ## 성능과 화면 안정성
 
+- [09-23 공개 배포 접근성 재검증](accessibility/2026-09-23-deployed-shell-recheck.md): 20개 통과·4개 조건부 제외. 이전 CSS 누락 증상은 현재 재현되지 않으며 원인은 미확정.
+
+- [09-23 코드·UI/UX 현황 분석](accessibility/2026-09-23-docs-code-ux-review.md): 빌드 재검증, 반영된 화면과 개선 후보 구분.
+
+- [09-23 배포 접근성 점검](accessibility/2026-09-23-deployed-shell.md): 키보드 이동 통과, 포커스 CSS 누락 확인과 미검증 범위.
+
 - [09-19 로컬 문서 읽기 중복 제거](performance/2026-09-19-local-document-reads.md): 요청 내 파일 읽기 공유와 요청 간 재읽기 검증.
 
 - [09-19 상세 렌더링 회귀 검증](performance/2026-09-19-article-production-regression.md): 상세 16개 통과, 스트리밍 검사 2개 실패. 동시 변경을 정리한 후 재검증 필요.
@@ -19,6 +25,14 @@
 
 ## 캐시와 정적 셸
 
+- [09-27 docs CI 로그 재검토](cache/2026-09-27-docs-ci-log-review.md): 같은 SHA의 CI·배포 성공과 별개로 남은 hydration 및 스트림 종료 경고를 분리했다.
+
+- [09-26 로컬 요청 계측 재검증](cache/2026-09-26-request-lifecycle-recheck.md): 80개 회귀 통과, prefetch 스트림 오류 2건의 요청 연결 재확인과 unknown 유지.
+
+- [09-24 로컬 요청 생명주기 계측](cache/2026-09-24-local-request-lifecycle.md): HTTP 종료·오류 판정, Next 요청 ID 분리, 서버 오류와 요청의 상관관계.
+
+- [09-24 스트림 조기 종료 재조사](cache/2026-09-24-stream-cancellation.md): prefetch 전달·대체·재전달 3회 비교, 페이지 요청 실패 없음과 운영 미검증 범위.
+
 - [09-19 Next.js 체크리스트 1차 검증](cache/2026-09-19-nextjs-checklist-phase-one.md): production suite·캐시 통과와 미검증 범위, 서버 스트림 오류 기록.
 - [09-19 게시 갱신 브라우저 검증](cache/2026-09-19-content-publication-browser-test.md): webhook 이후 목록·검색·상세 DOM과 인증 경계.
 - [09-16 언어 URL 전환 후 정적 셸 검증](cache/2026-09-16-docs-static-shell-verification.md): 당시 운영 모델 통과, Cache Components 전체 앱 실패. 이후 조치와 구분하여 읽습니다.
@@ -26,6 +40,17 @@
 - 테스트 도입 및 변경 과정은 [9월 작업 기록](../worklog/2026-09/README.md)에 유지합니다.
 
 ## 콘텐츠
+
+- [09-26 공개 배포 검색 계약 재검증](content/2026-09-26-deployed-search-contract.md): 검색 6개·About 8개 통과, GitHub Production 기록과 alias 확인 한계.
+
+- [09-26 검색 이동 통일 검증](content/2026-09-26-search-navigation.md): reload 없는 검색·중복 제출·history·로딩 51개 E2E와 빌드, 무-JavaScript 한계.
+- [09-26 로컬·원격 공용 본문 검증](content/2026-09-26-shared-body-validation.md): 공용 규칙·로컬 어댑터·NestJS 목록과 상세의 공개 차단, NAS 배포 미검증.
+
+- [09-26 공용 UI CI 연결 검증](content/2026-09-26-shared-ui-ci.md): fixture 62개·production 소비 화면 16개 통과, 원격 Actions 미검증 범위.
+
+- [09-22 콘텐츠 편집과 Canvas hover 진단](content/2026-09-22-content-editorial-and-canvas-hover.md): 글 4개 보완과 일반 버튼 대조군·headless 비교.
+
+- [09-22 이벤트 루프 예제 검증](content/2026-09-22-event-loop-example.md): 본문 예제를 Chrome에서 10회 반복 검증.
 
 - [09-22 공용 UI main 기준 분리 검증](content/2026-09-22-shared-ui-main-baseline.md): 블로그 변경 없이 공용 UI만 적용한 브랜치 검사.
 

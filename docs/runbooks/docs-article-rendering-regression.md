@@ -109,9 +109,37 @@ ARTICLE_STREAM_TRACE=1 ARTICLE_DISABLE_PREFETCH=1 pnpm --filter docs test:articl
 
 ## 실패 대응과 복구
 
+### 로컬 요청별 계측
+
+production fixture만 사용하는 요청 생명주기 검증:
+
+```bash
+mise exec -- pnpm --filter docs test:article:prod request-lifecycle --project=article-mobile
+```
+
+`request-lifecycle.spec.ts`는 상태 판정 및 실제 loopback HTTP 완료·취소·단절·오류·복구를 검사한다. `request-lifecycle-next.spec.ts`는 실제 Next production 화면의 본문 완료, 새로고침·동시 RSC 요청의 서로 다른 ID를 검사한다. 전체 suite에도 두 검사가 포함된다.
+
+위 스트림 진단 명령에 `ARTICLE_STREAM_TRACE=1`을 사용하면 테스트 Next 서버가 요청별 JSON을 `apps/docs/test-results/request-lifecycle/<requestId>.json`에 쓴다. 기본 모드에서는 테스트 전용 `x-article-lifecycle-probe: 1` 요청만 계측한다. 일반 `pnpm dev`, 운영 build/start에는 probe를 import하지 않는다.
+
+- `responseFinished`, `responseClosed`, `closeBeforeFinish`, `durationMs`, `events`, `precedingErrorIds`를 함께 본다. `transportClosed=null`은 실제 소켓 종료를 계측하지 않았다는 의미다.
+- 서버 생성 `requestId`는 응답의 `x-article-request-id`로 연결된다. 응답을 못 받은 경우에는 테스트가 발급한 `clientProbeId`와 브라우저 `request-dispatched` 이벤트를 대조한다. 외부 ID는 서버 requestId를 대체하거나 인증에 사용하지 않는다.
+- 브라우저 종료 이벤트가 없으면 전송 시점과 서버 close까지만 관측된 것이다. 이를 브라우저 취소가 확인된 것으로 채우지 않는다.
+- Next 오류는 테스트 프로세스의 console 관측으로 최선의 노력을 다해 연결한다. 원래 로그는 그대로 출력하며, 관측 누락 가능성 때문에 `errorCoverage=partial`을 유지한다. 선행 오류가 비어 있다는 사실만으로 원인이 없다고 단정하지 않는다.
+- 응답 이벤트의 비동기 문맥 연결은 로컬 테스트 전용이다. Vercel 계측 구현으로 복사하지 않는다.
+- 파일은 매 이벤트의 최신 요약으로 갱신된다. 같은 requestId를 여러 실패로 중복 집계하지 않는다. 다음 Playwright 실행에서 test-results가 정리되므로 필요한 정제 증거만 따로 보관한다.
+- 동기 파일 기록·브라우저 route interception이 있어 이 모드의 시간을 운영 성능 수치로 사용하지 않는다. 테스트 후 fixture build가 남으므로 실제 환경의 production 실행 전 다시 build한다.
+
+판정 계약은 [요청 생명주기 로그 정책](../architecture/docs-request-lifecycle-logging-policy.md)을 따른다. 종료 누락·프로세스 강제 종료·운영 로그 보관/전송은 이 로컬 계측의 보장 범위 밖이다.
+
 `apps/docs/test-results`의 screenshot, error context와 Playwright trace를 확인한다.
 본문 assertion 실패는 로컬 탐색 누락, 원격 본문 반환 실패 또는 Suspense
 미완료를 의미할 수 있다. timeout만 늘리기 전에 실제 DOM과 서버 로그를 확인한다.
+
+본문 편집이나 번역 변경으로 기대 문구가 낡은 경우도 구분한다. 로컬 글의 문장을
+바꿀 때는 `article-detail.spec.ts`의 고유 문장과 마지막 본문 표식을 함께 확인한다.
+검색 빈 화면은 `content-publication.spec.ts`에서도 UI locale별 제목을 검사한다.
+기대값만 갱신할 때에도 본문 시작·끝, loading 종료, V1 검색 카드 부재와 V2 반영
+검사를 제거하지 않는다. production suite를 다시 실행한 뒤 실제 회귀와 구분한다.
 
 ```bash
 pnpm --filter docs exec playwright show-trace test-results/<failed-test>/trace.zip

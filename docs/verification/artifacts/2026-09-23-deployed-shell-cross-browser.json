@@ -1,0 +1,78 @@
+{
+  "checkedAt": "2026-09-23T02:51:01.331Z",
+  "origin": "https://heap-forge.app",
+  "results": [
+    {
+      "browser": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "locale": "ko",
+      "path": "/ko/docs?q=react",
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "browser": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "locale": "en",
+      "path": "/en/docs?q=react",
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "browser": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "locale": "ko",
+      "path": "/ko/docs?q=react",
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "browser": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "locale": "en",
+      "path": "/en/docs?q=react",
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "browser": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "locale": "ko",
+      "path": "/ko/docs?q=react",
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "browser": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "locale": "en",
+      "path": "/en/docs?q=react",
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "browser": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "locale": "ko",
+      "path": "/ko/docs?q=react",
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "browser": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "locale": "en",
+      "path": "/en/docs?q=react",
+      "status": "passed",
+      "error": ""
+    }
+  ]
+}

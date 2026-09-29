@@ -17,6 +17,7 @@ import {
 } from '~/lib/local-content-paths'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { rankSearchDocs } from '~/lib/search-ranking'
+import { normalizeSearchQuery } from '~/shared/lib/search-query'
 export interface SearchData {
     readonly id: string
     readonly title?: string
@@ -203,7 +204,7 @@ export async function getSearchData(
         options.includeRemote ?? shouldIncludeRemoteContentIndex()
     const remoteDocs = includeRemote ? await getRemoteSearchDocs() : []
     const docs = sortByDateDesc(mergeSearchDocs(localDocs, remoteDocs))
-    const normalizedKeyword = keyword?.trim().toLowerCase()
+    const normalizedKeyword = normalizeSearchQuery(keyword).toLowerCase()
 
     logContentSource({
         area: 'search',

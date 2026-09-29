@@ -43,6 +43,16 @@
 
 이 조합은 mobile/tablet 경계에서 셸과 콘텐츠의 기준이 갈라져 예측하기 어려운 상태를 만든다.
 
+### 열린 모바일 메뉴의 화면 전환 (2026-09-22)
+
+- `MobileNavDrawer`는 `sm:hidden`과 같은 `(min-width: 40rem)` 경계를 `matchMedia`로 구독한다. 기본 브라우저 설정에서 640px이며, 공용 Sidebar의 768px 기준과 혼동하지 않는다.
+- 경계를 넘어 desktop/tablet shell로 바뀌면 `open`을 false로 전환한다. CSS로 패널만 숨기거나 overlay만 제거하지 않고, Base UI Sheet의 닫힘 절차로 overlay, focus trap, 스크롤 잠금을 해제한다.
+- 메뉴는 초기 상태가 닫힘이므로 첫 렌더링에서 window를 읽거나 화면 크기에 따라 서버 HTML을 나누지 않는다. 이벤트 구독은 unmount 시 해제한다.
+- 639px 이하에서는 열린 상태를 유지한다. 다시 모바일로 돌아오면 자동으로 열리지 않으며, 사용자가 trigger를 눌러 다시 열 수 있다.
+- body 스타일을 강제로 초기화하거나 다른 overlay의 잠금을 해제하지 않는다. 메뉴 링크 이동, Escape, 닫기 버튼의 기존 동작은 유지한다.
+
+[브라우저 회귀 테스트](../../apps/docs/e2e/mobile-drawer-resize.spec.ts)는 경계값과 가로/세로 viewport 전환, 실제 wheel 스크롤 복구, desktop 링크 포커스 가능 여부, 모바일 복귀 후 재열기를 확인한다. 결과는 [작업 기록](../worklog/2026-09/2026-09-22-mobile-drawer-resize.md)에 남긴다.
+
 ### Initial Application
 
 현재 이 정책은 아래 shell 레이어에 먼저 적용되었다.

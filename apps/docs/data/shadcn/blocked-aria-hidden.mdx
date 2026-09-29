@@ -1,60 +1,61 @@
 ---
-title: 'ARIA에 대해 깊게 알아봅시다'
+title: 'Drawer를 닫을 때 발생한 aria-hidden 경고 조사'
 slug: drawer-aria-error
 date: 2025-07-02
-updatedAt: 2025-07-02
+updatedAt: 2026-09-22
 thumbnail: 'shadcn/thumbnail.webp'
-summary: Shadcn Drawer 컴포넌트 사용 시, ARIA Warning
+summary: Drawer 종료 시 포커스와 aria-hidden 처리가 충돌한 경고를 관찰 내용과 미검증 가설로 나눠 정리합니다.
 authorName: 'HoJeong Im'
 authorRole: 'Web Engineer'
 readMinutes: 5
 topicLabel: 'ACCESSIBILITY'
 tags:
-  - accessibility
-  - aria
-  - drawer
+    - accessibility
+    - aria
+    - drawer
 status: published
 ---
 
-## ARIA란?
+## 어떤 문제를 관찰했나
 
-- 경고 패널의 '개발자는 되도록 의미를 가진 HTML을 ARIA보다 선호해야 합니다' 문구가 있음
+기존 레거시 프로젝트에서 shadcn Drawer를 닫는 과정에 다음 경고를 관찰했다. 이 글은 ARIA 전체 설명이나 검증된 해결 가이드가 아니라 당시 문제를 다시 조사하기 위한 기록이다.
 
-### 왜? 작성하였는가?
+```text
+Blocked aria-hidden on an element because its descendant retained focus
+```
 
-- 기존 레거시 코드를 수정하는 프로젝트를 하게 되면서, 웹 접근성에 대해 고민하게 되는 계기가 되었습니다.
+![Drawer 종료 시 포커스가 남은 요소의 aria-hidden 처리를 차단한 브라우저 경고](/docs/blocked-aria-problem/problem1.png)
 
-- 스크린리더의 대응은 어떻게 확인할 수 있는 것일까?
-    - 직접 모바일 기기에 배포하면서 확인해야 하는가
+당시 메모에는 닫힌 뒤 입력으로 포커스를 옮겼을 때 스크린리더가 읽지 못했다는 관찰도 있다. 다만 브라우저·스크린리더·라이브러리 버전과 재현 코드가 남아 있지 않아 원인이나 일반적인 동작으로 확정할 수 없다.
 
-### 문제
+### 경고가 가리키는 충돌
 
-- Shadcn 컴포넌트를 활용 중인데, Drawer Close 시 Warning이 발생
+ARIA는 보조 기술에 요소의 역할과 상태 등을 전달하는 접근성 명세다. 그중 `aria-hidden="true"`는 해당 요소와 하위 콘텐츠를 접근성 트리에서 제외하려는 표시다. 화면을 숨기는 CSS나 키보드 포커스를 이동시키는 기능은 아니다.
 
-![problem1.png](/docs/blocked-aria-problem/problem1.png)
+경고는 숨기려는 영역의 자손에 포커스가 남아 있었음을 가리킨다. Drawer를 닫는 경우에만 발생하는 문제는 아니다. 포커스를 가진 요소나 그 조상을 접근성 트리에서 숨기려는 다른 UI에서도 확인해야 한다.
 
-### 문제 해결 방법 고민
+### 아직 확인하지 못한 가설
 
-- 일반적인 경우에는 아래 문서를 참고해서 개발해야 함
+닫힘 애니메이션, 포털 제거, 라이브러리의 포커스 복귀, 앱이 직접 호출하는 `focus()`의 순서가 충돌했을 가능성이 있다. 당시에는 애니메이션이 끝난 뒤 포커스를 옮기는 방안을 생각했지만, 실제 적용 코드와 수정 후 검증 결과가 없어 해결책으로 단정하지 않는다.
 
-https://vaul.emilkowal.ski/api
+특정 `onAnimationEnd` 처리나 고정된 지연 시간을 모든 Drawer의 해법으로 넣지 않는다. 설치한 라이브러리의 포커스 관리 API와 종료 시점을 먼저 확인해야 한다.
 
-`Blocked aria-hidden on an element because its descendant retained focus`
+## 다시 확인할 순서
 
-- 즉, drawer를 닫을 때만 발생하는 aria-hidden 문제
+1. 브라우저·운영체제·스크린리더·Drawer 라이브러리 버전과 모달 여부를 기록한다.
+2. Drawer를 열고 키보드로 내부 요소에 포커스를 둔 다음, 닫기 버튼과 Escape를 각각 시험한다.
+3. 닫기 직전과 직후의 `document.activeElement`, 경고가 지목한 조상 요소, `aria-hidden` 변경 시점을 확인한다.
+4. 앱에서 추가한 `focus()` 처리를 제거한 경우와 비교한다. 라이브러리의 기본 포커스 복귀와 경쟁하는지 확인하기 위한 비교이지, 제거만으로 해결된다는 뜻은 아니다.
+5. 모달을 닫은 뒤에는 보통 열기 버튼으로 포커스가 돌아오는지 확인한다. 버튼이 사라졌거나 다음 작업으로 이동해야 하는 흐름이면 논리적인 대체 대상을 정한다.
+6. 경고 소멸뿐 아니라 키보드 이동과 실제 스크린리더 읽기까지 다시 확인한다.
 
-### 가설
+`aria-hidden`을 무조건 제거하거나 현재 요소를 `blur()`하는 것만으로 끝내지 않는다. 경고가 사라져도 사용자가 다음에 조작할 위치를 잃거나 모달 배경이 보조 기술에 노출될 수 있다.
 
-- Drawer를 닫고 나서 바로 화면에 존재하는 input에 focus를 주는 것은 문제가 되는가?
-    - 확인해보니, 해당 부분에서 스크린 리더가 읽지를 못함
+## 현재 결론
 
-- 서비스에서 해결할 방법은?
-    - vaul 패키지 내, onAnimationEnd를 활용하는 방법
-
-    - 이 함수를 이용해 완전히 닫혔을 때, focus를 주는 방향으로 변경이 필요합니다.
-
----
+포커스와 숨김 처리의 순서를 함께 확인해야 한다는 조사 방향은 정리했다. 하지만 당시 현상에 대한 최종 원인과 수정 성공은 아직 입증하지 못했다. 재현 환경과 전후 결과를 확보하면 이 기록에 추가한다.
 
 ## 참고
 
-- [MDN ARIA 접근성](https://developer.mozilla.org/ko/docs/Web/Accessibility/ARIA)
+- [MDN: aria-hidden의 의미와 사용 시 주의점](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-hidden)
+- [WAI-ARIA APG: 모달 대화상자와 포커스 복귀](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)

@@ -1,0 +1,277 @@
+{
+  "target": "https://heap-forge.app",
+  "stats": {
+    "startTime": "2026-09-23T12:54:51.710Z",
+    "duration": 122939.448,
+    "expected": 20,
+    "skipped": 4,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "title": "ko: Escape closes search from every control and restores focus",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 4772
+        }
+      ]
+    },
+    {
+      "title": "ko: local article exposes a main landmark and one visible title",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 4198
+        }
+      ]
+    },
+    {
+      "title": "en: Escape closes search from every control and restores focus",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3012
+        }
+      ]
+    },
+    {
+      "title": "en: local article exposes a main landmark and one visible title",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 6635
+        }
+      ]
+    },
+    {
+      "title": "ko: Escape closes search from every control and restores focus",
+      "project": "chromium-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 4176
+        }
+      ]
+    },
+    {
+      "title": "ko: local article exposes a main landmark and one visible title",
+      "project": "chromium-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1956
+        }
+      ]
+    },
+    {
+      "title": "en: Escape closes search from every control and restores focus",
+      "project": "chromium-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3409
+        }
+      ]
+    },
+    {
+      "title": "en: local article exposes a main landmark and one visible title",
+      "project": "chromium-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 4899
+        }
+      ]
+    },
+    {
+      "title": "light/no-preference: leaving the mobile shell releases the drawer",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2284
+        }
+      ]
+    },
+    {
+      "title": "light/reduce: leaving the mobile shell releases the drawer",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 5325
+        }
+      ]
+    },
+    {
+      "title": "dark/no-preference: leaving the mobile shell releases the drawer",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 5424
+        }
+      ]
+    },
+    {
+      "title": "dark/reduce: leaving the mobile shell releases the drawer",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 4436
+        }
+      ]
+    },
+    {
+      "title": "light/no-preference: leaving the mobile shell releases the drawer",
+      "project": "chromium-desktop",
+      "status": "skipped",
+      "results": [
+        {
+          "status": "skipped",
+          "durationMs": 44
+        }
+      ]
+    },
+    {
+      "title": "light/reduce: leaving the mobile shell releases the drawer",
+      "project": "chromium-desktop",
+      "status": "skipped",
+      "results": [
+        {
+          "status": "skipped",
+          "durationMs": 42
+        }
+      ]
+    },
+    {
+      "title": "dark/no-preference: leaving the mobile shell releases the drawer",
+      "project": "chromium-desktop",
+      "status": "skipped",
+      "results": [
+        {
+          "status": "skipped",
+          "durationMs": 44
+        }
+      ]
+    },
+    {
+      "title": "dark/reduce: leaving the mobile shell releases the drawer",
+      "project": "chromium-desktop",
+      "status": "skipped",
+      "results": [
+        {
+          "status": "skipped",
+          "durationMs": 42
+        }
+      ]
+    },
+    {
+      "title": "light: shell focus, contrast and landmark names",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 4271
+        }
+      ]
+    },
+    {
+      "title": "dark: shell focus, contrast and landmark names",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 4445
+        }
+      ]
+    },
+    {
+      "title": "light: shell focus, contrast and landmark names",
+      "project": "chromium-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2205
+        }
+      ]
+    },
+    {
+      "title": "dark: shell focus, contrast and landmark names",
+      "project": "chromium-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 4557
+        }
+      ]
+    },
+    {
+      "title": "ko: first Tab skips the shell on public pages",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 16652
+        }
+      ]
+    },
+    {
+      "title": "en: first Tab skips the shell on public pages",
+      "project": "chromium-mobile",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 14012
+        }
+      ]
+    },
+    {
+      "title": "ko: first Tab skips the shell on public pages",
+      "project": "chromium-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 10532
+        }
+      ]
+    },
+    {
+      "title": "en: first Tab skips the shell on public pages",
+      "project": "chromium-desktop",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 13942
+        }
+      ]
+    }
+  ]
+}

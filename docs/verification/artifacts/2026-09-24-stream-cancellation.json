@@ -1,0 +1,254 @@
+{
+  "date": "2026-09-24",
+  "commit": "1c7bac56a690233d320b1e4a2dc83627b277b3ba",
+  "node": "v24.12.0",
+  "next": "16.3.4",
+  "playwright": "1.62.1",
+  "scenario": "content-publication.spec.ts, article-mobile, ko",
+  "runs": [
+    {
+      "name": "control",
+      "sourceLog": "/tmp/docs-stream-20260924-control.log",
+      "sha256": "6a3a06c132cd8759125e48e6b6e013931e3cdf8026337740202eabddc7b08f56",
+      "trace": true,
+      "disablePrefetch": false,
+      "summary": "1 passed (30.5s)",
+      "firstEvent": "2026-09-24T06:45:26.863Z",
+      "lastEvent": "2026-09-24T06:45:33.697Z",
+      "streamErrors": 2,
+      "documentFinished": 21,
+      "documentFailed": 0,
+      "failedPrefetch": 62,
+      "failedNonPrefetch": 0,
+      "errorContexts": [
+        {
+          "logLine": 89,
+          "before": [
+            {
+              "time": "2026-09-24T06:45:28.521Z",
+              "event": "request",
+              "path": "/ko/docs",
+              "search": false,
+              "type": "document",
+              "prefetch": false
+            },
+            {
+              "time": "2026-09-24T06:45:28.524Z",
+              "event": "requestfinished",
+              "path": "/ko/about",
+              "search": false,
+              "type": "fetch",
+              "prefetch": true
+            },
+            {
+              "time": "2026-09-24T06:45:28.524Z",
+              "event": "request",
+              "path": "/ko/docs/web/bytecode",
+              "search": false,
+              "type": "fetch",
+              "prefetch": true
+            }
+          ],
+          "message": "The destination stream closed early.",
+          "after": [
+            {
+              "time": "2026-09-24T06:45:28.645Z",
+              "event": "requestfinished",
+              "path": "/ko/docs",
+              "search": false,
+              "type": "document",
+              "prefetch": false
+            },
+            {
+              "time": "2026-09-24T06:45:28.851Z",
+              "event": "request",
+              "path": "/ko",
+              "search": false,
+              "type": "fetch",
+              "prefetch": true
+            }
+          ]
+        },
+        {
+          "logLine": 473,
+          "before": [
+            {
+              "time": "2026-09-24T06:45:33.113Z",
+              "event": "requestfailed",
+              "path": "/ko/docs/web/javascript-event-loop-runtime",
+              "search": false,
+              "type": "fetch",
+              "prefetch": true,
+              "failure": "net::ERR_ABORTED"
+            },
+            {
+              "time": "2026-09-24T06:45:33.116Z",
+              "event": "request",
+              "path": "/ko",
+              "search": false,
+              "type": "fetch",
+              "prefetch": true
+            },
+            {
+              "time": "2026-09-24T06:45:33.121Z",
+              "event": "request",
+              "path": "/ko/docs",
+              "search": true,
+              "type": "document",
+              "prefetch": false
+            }
+          ],
+          "message": "The destination stream closed early.",
+          "after": [
+            {
+              "time": "2026-09-24T06:45:33.189Z",
+              "event": "requestfinished",
+              "path": "/ko/docs",
+              "search": true,
+              "type": "document",
+              "prefetch": false
+            },
+            {
+              "time": "2026-09-24T06:45:33.328Z",
+              "event": "request",
+              "path": "/ko",
+              "search": false,
+              "type": "fetch",
+              "prefetch": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "no-prefetch",
+      "sourceLog": "/tmp/docs-stream-20260924-no-prefetch.log",
+      "sha256": "8bc9be70e432492d5e5ca1f3a7e8c8dc5769bbb4a8fa364ef7e70f676a6080aa",
+      "trace": true,
+      "disablePrefetch": true,
+      "summary": "1 passed (28.1s)",
+      "firstEvent": "2026-09-24T06:46:18.857Z",
+      "lastEvent": "2026-09-24T06:46:25.334Z",
+      "streamErrors": 0,
+      "documentFinished": 21,
+      "documentFailed": 0,
+      "failedPrefetch": 331,
+      "failedNonPrefetch": 0,
+      "errorContexts": []
+    },
+    {
+      "name": "control-repeat",
+      "sourceLog": "/tmp/docs-stream-20260924-control-repeat.log",
+      "sha256": "5100b181e3bf1abec078b6a44b4f70789ebd73b05724574e6d12fa153a9eddaf",
+      "trace": true,
+      "disablePrefetch": false,
+      "summary": "1 passed (30.5s)",
+      "firstEvent": "2026-09-24T06:47:14.758Z",
+      "lastEvent": "2026-09-24T06:47:23.533Z",
+      "streamErrors": 2,
+      "documentFinished": 21,
+      "documentFailed": 0,
+      "failedPrefetch": 73,
+      "failedNonPrefetch": 0,
+      "errorContexts": [
+        {
+          "logLine": 93,
+          "before": [
+            {
+              "time": "2026-09-24T06:47:16.513Z",
+              "event": "requestfailed",
+              "path": "/ko/docs/web/javascript-event-loop-runtime",
+              "search": false,
+              "type": "fetch",
+              "prefetch": true,
+              "failure": "net::ERR_ABORTED"
+            },
+            {
+              "time": "2026-09-24T06:47:16.513Z",
+              "event": "request",
+              "path": "/ko",
+              "search": false,
+              "type": "fetch",
+              "prefetch": true
+            },
+            {
+              "time": "2026-09-24T06:47:16.520Z",
+              "event": "request",
+              "path": "/ko/docs",
+              "search": false,
+              "type": "document",
+              "prefetch": false
+            }
+          ],
+          "message": "The destination stream closed early.",
+          "after": [
+            {
+              "time": "2026-09-24T06:47:16.611Z",
+              "event": "requestfinished",
+              "path": "/ko/docs",
+              "search": false,
+              "type": "document",
+              "prefetch": false
+            },
+            {
+              "time": "2026-09-24T06:47:16.717Z",
+              "event": "request",
+              "path": "/ko",
+              "search": false,
+              "type": "fetch",
+              "prefetch": true
+            }
+          ]
+        },
+        {
+          "logLine": 397,
+          "before": [
+            {
+              "time": "2026-09-24T06:47:21.758Z",
+              "event": "request",
+              "path": "/ko/docs",
+              "search": false,
+              "type": "document",
+              "prefetch": false
+            },
+            {
+              "time": "2026-09-24T06:47:21.761Z",
+              "event": "requestfinished",
+              "path": "/ko/about",
+              "search": false,
+              "type": "fetch",
+              "prefetch": true
+            },
+            {
+              "time": "2026-09-24T06:47:21.762Z",
+              "event": "request",
+              "path": "/ko",
+              "search": false,
+              "type": "fetch",
+              "prefetch": true
+            }
+          ],
+          "message": "The destination stream closed early.",
+          "after": [
+            {
+              "time": "2026-09-24T06:47:21.825Z",
+              "event": "requestfinished",
+              "path": "/ko/docs",
+              "search": false,
+              "type": "document",
+              "prefetch": false
+            },
+            {
+              "time": "2026-09-24T06:47:21.963Z",
+              "event": "request",
+              "path": "/ko",
+              "search": false,
+              "type": "fetch",
+              "prefetch": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

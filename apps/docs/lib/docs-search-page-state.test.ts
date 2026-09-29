@@ -59,6 +59,23 @@ test('resolveDocsSearchPageState returns empty-search when keyword has no matche
     })
 })
 
+test('empty and whitespace queries use the same empty collection state', () => {
+    for (const query of [undefined, null, '', '   ', '\t\n']) {
+        assert.deepEqual(
+            resolveDocsSearchPageState({ query, docs: [], searchResults: [] }),
+            { mode: 'empty-all-docs' }
+        )
+    }
+})
+
+test('whitespace queries still show available documents', () => {
+    const docs = [createDoc()]
+    assert.deepEqual(
+        resolveDocsSearchPageState({ query: '   ', docs, searchResults: [] }),
+        { mode: 'index', docs }
+    )
+})
+
 test('resolveDocsSearchPageState returns index mode when query is missing', () => {
     const docs = [createDoc()]
     const state = resolveDocsSearchPageState({

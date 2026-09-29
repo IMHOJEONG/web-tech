@@ -34,7 +34,7 @@ topicLabel: WEB
 tags:
   - javascript
 ---
-# Event Loop
+## Event Loop
 
 ![runtime](./runtime.webp)
 
@@ -162,4 +162,102 @@ Not published because metadata is incomplete.
       .set('Authorization', 'Bearer test-content-token')
       .expect(404);
   });
+
+  it.each([
+    ['comment', '## Topic\n<!-- private-editorial-note -->'],
+    ['unclosed-comment', '## Topic\n<!-- private-editorial-note →'],
+    ['multiline-comment', '## Topic\n<!-- private-editorial-note\nmore -->'],
+    ['orphan-comment', '## Topic\n-->'],
+    ['body-title', '# Duplicate title'],
+    ['heading-jump', '## Topic\n#### Skipped'],
+    ['missing-language', '## Topic\n```\ncode\n```'],
+    ['unclosed-fence', '## Topic\n```js\ncode'],
+    ['bad-callout', '## Topic\n> [!INFO] Unsupported'],
+  ])(
+    'rejects %s in both list and detail without breaking valid posts',
+    async (slug, body) => {
+      const file = join(temporaryRoot, 'posts', 'web', `${slug}.md`);
+      await writeFile(file, publishedSource(slug, body));
+      try {
+        const list = await request(app.getHttpServer())
+          .get('/api/posts')
+          .set('Authorization', 'Bearer test-content-token')
+          .expect(200);
+        expect(
+          list.body.results.map((post: { slug: string }) => post.slug),
+        ).toEqual(['event-loop']);
+        const detail = await request(app.getHttpServer())
+          .get(`/posts/web/${slug}`)
+          .set('Authorization', 'Bearer test-content-token')
+          .expect(404);
+        expect(detail.text).not.toContain('private-editorial-note');
+        expect(detail.text).not.toContain('body validation');
+      } finally {
+        await rm(file);
+      }
+    },
+  );
+
+  it.each(['```', '````', '~~~'])(
+    'keeps comments in %s code examples and escapes raw HTML',
+    async (fence) => {
+      const file = join(temporaryRoot, 'posts', 'web', 'comment-example.md');
+      await writeFile(
+        file,
+        publishedSource(
+          'comment-example',
+          `## Example\n${fence}html\n<!-- example -->\n${fence}\n<script>alert(1)</script>`,
+        ),
+      );
+      try {
+        const response = await request(app.getHttpServer())
+          .get('/posts/web/comment-example')
+          .set('Authorization', 'Bearer test-content-token')
+          .expect(200);
+        expect(response.text).toContain('<code class="language-html">');
+        expect(response.text).toContain('&lt;!-- example --&gt;');
+        expect(response.text).not.toContain('<script>');
+      } finally {
+        await rm(file);
+      }
+    },
+  );
+
+  it('allows warning-only bodies and reflects corrections without restarting', async () => {
+    const file = join(temporaryRoot, 'posts', 'web', 'editable.md');
+    const detail = () =>
+      request(app.getHttpServer())
+        .get('/posts/web/editable')
+        .set('Authorization', 'Bearer test-content-token');
+    try {
+      await writeFile(file, publishedSource('editable', '<!-- writing -->'));
+      await detail().expect(404);
+      await writeFile(file, publishedSource('editable', ''));
+      await detail().expect(200);
+      await writeFile(
+        file,
+        publishedSource('editable', '## Fixed\nActual content.'),
+      );
+      await detail().expect(200);
+    } finally {
+      await rm(file);
+    }
+  });
 });
+
+function publishedSource(slug: string, body: string): string {
+  return `---
+title: Body validation
+slug: ${slug}
+summary: Test publication rules
+date: 2026-09-26
+updatedAt: 2026-09-26
+status: published
+authorName: Test author
+authorRole: Engineer
+readMinutes: 1
+topicLabel: WEB
+---
+${body}
+`;
+}
