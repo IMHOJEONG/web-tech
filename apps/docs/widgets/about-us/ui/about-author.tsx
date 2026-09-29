@@ -19,9 +19,6 @@ export async function AboutAuthor() {
                     >
                         {t('name')}
                     </h2>
-                    <p className="text-xs font-medium tracking-wide text-primary">
-                        {t('role')}
-                    </p>
                 </div>
                 <p className="break-words text-sm leading-7 text-on-surface-variant">
                     {t('bio')}

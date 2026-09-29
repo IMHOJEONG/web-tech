@@ -1,4 +1,5 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { getMarkdownBodyStyleIssues } from '@web-tech/docs-content-contract/body-style';
 import matter from 'gray-matter';
 import { parse as parseYaml } from 'yaml';
 
@@ -91,6 +92,21 @@ export class ContentService {
 
     if (frontmatter.slug !== fileSlug) {
       throw new Error('frontmatter slug must match the Markdown file name');
+    }
+
+    const issues = getMarkdownBodyStyleIssues(
+      parsedMarkdown.content,
+      frontmatter,
+    );
+    if (issues.failures.length > 0) {
+      throw new Error(
+        `body validation failed: ${issues.failures.slice(0, 5).join('; ')}`,
+      );
+    }
+    if (issues.warnings.length > 0) {
+      this.logger.warn(
+        `Content style warning: ${file.markdownPath} (${issues.warnings.join('; ')})`,
+      );
     }
 
     return {

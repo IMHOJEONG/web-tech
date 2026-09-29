@@ -1,11 +1,14 @@
 import { getTranslations } from 'next-intl/server'
+import { MainContent } from '~/shared/ui/main-content'
 import { ArticleContentGrid } from './article-content-grid'
 
 export async function ArticlePending() {
     const t = await getTranslations('common')
     return (
-        <div role="status" aria-busy="true" data-testid="article-pending">
-            <span className="sr-only">{t('loadingDocuments')}</span>
+        <MainContent aria-busy="true" data-testid="article-pending">
+            <span role="status" className="sr-only">
+                {t('loadingDocuments')}
+            </span>
             <ArticleContentGrid>
                 <div
                     aria-hidden="true"
@@ -30,6 +33,6 @@ export async function ArticlePending() {
                     ))}
                 </div>
             </ArticleContentGrid>
-        </div>
+        </MainContent>
     )
 }

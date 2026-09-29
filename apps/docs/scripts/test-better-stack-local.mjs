@@ -77,12 +77,8 @@ try {
     const portReservation = createServer()
     const port = await listen(portReservation)
     await close(portReservation)
-    for (const directory of ['lib', 'data', 'category']) {
-        await cp(join(app, directory), join(sandbox, directory), {
-            recursive: true,
-        })
-    }
-    for (const directory of ['shared/assets', 'shared/i18n']) {
+    // Keep shared helpers with the copied content pipeline as its imports evolve.
+    for (const directory of ['lib', 'data', 'category', 'shared']) {
         await cp(join(app, directory), join(sandbox, directory), {
             recursive: true,
         })
@@ -202,7 +198,13 @@ export async function sendBetterStackEvent(event, config, options) {
         const response = await fetch(`${base}/sitemap.xml?probe=${query}`, {
             signal: AbortSignal.timeout(60000),
         })
-        assert.equal(response.status, 200, 'Sitemap should return HTTP 200')
+        assert.equal(
+            response.status,
+            200,
+            /Module not found|Can't resolve/.test(logs)
+                ? 'Sitemap compilation failed: check dependencies copied into the isolated test app'
+                : 'Sitemap should return HTTP 200'
+        )
         const xml = await response.text()
         const urls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)]
             .map((match) => match[1])

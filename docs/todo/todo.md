@@ -22,10 +22,13 @@
 
 ## Shared UI
 
+- [x] `P1` `test:ui`와 `test:ui:consumer`를 CI 독립 matrix에 연결한다. 09-26 작업 트리 반영과 로컬 78개 검증 완료. [검증 기록](../verification/content/2026-09-26-shared-ui-ci.md).
+- [x] `P1` 공용 UI matrix를 push한 뒤 동일 SHA의 GitHub Actions 두 check 통과를 확인한다. `5dbbcc5`의 두 Shared UI 작업이 성공했다. required checks 등록은 별도 설정이다. [원격 검증](../verification/cache/2026-09-27-docs-ci-log-review.md).
+
 - [-] `P1` 공용 UI와 모든 대상 소비 앱의 동작 기반을 Base UI로 통일한다. 1차 공용 primitive 전환은 완료했지만 전체 전환은 진행 중이다. [ADR-0006의 최종 목표](../architecture/adr-0006-shared-ui-base-ui.md)를 기준으로 관리한다.
 - [x] `P1` 저장소 소유 UI의 직접 Radix 의존성과 wrapper를 정리한다. 미사용 `apps/vuln-radar`의 `@radix-ui/react-slot`, `packages/ui`의 `cmdk`·`@radix-ui/react-icons`와 catalog 선언을 제거했다. cmdk의 Dialog 전이 경로도 제거됐으며 UI 54개·production 16개·Drawer 반복 20개 검증을 통과했다. [검증 보고서](../verification/content/2026-09-22-base-ui-migration.md)를 참고한다. Prisma Studio의 전이 의존성과 외부 모노레포는 아래 별도 과제로 남긴다.
 - [ ] `P2` Prisma Studio의 Radix 전이 의존성을 별도 검토한다. `prisma -> @prisma/studio-core -> @radix-ui/react-toggle` 경로가 남아 있다. 완료 조건: 실제 앱 번들·런타임 포함 여부와 상위 패키지 제거·업데이트 가능성을 확인하고 인증·DB 기능을 유지한 상태에서 처리 방향을 결정한다. 이 경로가 남은 동안 저장소 전체 Radix 의존성 제거 완료로 표시하지 않는다. Base UI로 강제 override하거나 Prisma를 임의 제거하지 않는다.
-- [ ] `P2` 다른 모노레포에서 공용 UI를 사용할 배포·버전 정책과 소비처 목록을 확정한다. 완료 조건: 실제 소비 저장소, React/빌드 호환성, 패키지 전달 방식, API 변경 이행 절차를 기록하고 각 소비처에서 검증한다. 현재 외부 모노레포는 미조사이며 자동 배포·변경하지 않는다.
+- [ ] `P2` 다른 모노레포에서 공용 UI를 사용할 배포·버전 정책과 소비처 목록을 확정한다. 완료 조건: 실제 소비 저장소, React/빌드 호환성, 패키지 전달 방식, API 변경 이행 절차를 기록하고 각 소비처에서 검증한다. 09-23 확인: `private: true`, React 일반 dependency, CSS export 부재와 앱의 저장소 상대 source 경로가 남아 있다. tarball 내용·peer 정책·외부 소비 fixture 검증 전에는 외부 재사용 준비 완료로 처리하지 않는다. [점검 기록](../worklog/2026-09/2026-09-23-adr-followup-improvements.md#공용-ui-외부-재사용-점검). 외부 모노레포는 미조사이며 자동 배포·변경하지 않는다.
 
 - [x] `P1` Radix 유지안과 비교 후 공용 primitive를 Base UI로 전환한다. 디자인 토큰·모듈 경로를 유지하고 render·포커스·Tooltip 설명 관계를 재검증했다. 선택 이유는 [ADR-0006](../architecture/adr-0006-shared-ui-base-ui.md), 실행 범위는 [검증 보고서](../verification/content/2026-09-22-base-ui-migration.md)를 참고한다. 운영 배포 완료를 의미하지 않는다.
 
@@ -37,7 +40,9 @@
 
 ## Planning / Product
 
-- [ ] `P1` ARIA·V8·Next.js 패키지 글의 제목/요약과 본문 범위를 맞추고 필요한 용어·사례·검증 결과를 보완한다. 완료 기준은 [독해 검토](../verification/content/2026-09-20-content-readability-review.md)에 따르며 실제 경험을 추정해서 작성하지 않는다.
+- [x] `P1` ARIA·V8·Next.js 패키지 글의 제목/요약을 조사 기록·입문 노트·탐색 체크리스트 범위에 맞추고 용어와 근거를 보완했다. 실제 경험·결과를 추정하지 않고 미검증 범위를 명시했다. [편집·검증 기록](../verification/content/2026-09-22-content-editorial-and-canvas-hover.md).
+- [ ] `P2` ARIA의 당시 재현 환경과 수정 전후 결과, V8의 버전별 실제 바이트코드 분석은 증거를 확보한 뒤 별도로 추가한다.
+- [ ] `P2` Canvas headed hover는 외부 포인터 입력을 통제한 환경에서 재확인한다. 일반 버튼 대조군에도 간섭이 관측됐으며 headless 결과와 구분한다. [진단 기록](../verification/content/2026-09-22-content-editorial-and-canvas-hover.md).
 - [x] `P1` 블로그 개선 로드맵을 기준 문서로 고정한다.
   - 메타데이터, 라우팅, 검색, 렌더링, 테스트, contributor guide 기준선을 정리
   - 신규 과제는 우선 `todo`에 추가하고, 운영 규칙으로 승격되면 로드맵 또는 관련 architecture/runbook 문서에 연결
@@ -67,6 +72,9 @@
   - 작업 기록: `docs/worklog/2026-05/2026-05-08-channel-hub-layout-conversion.md`
 
 ## Code / Architecture
+
+- [x] `P1` 로컬·원격 published 문서에 공용 본문 작성 검증기를 연결한다. 09-26 작업 트리에서 로컬 CLI·NestJS 목록/상세의 동일 실패 규칙과 경고 유지 확인. [검증 기록](../verification/content/2026-09-26-shared-body-validation.md).
+- [ ] `P1` 새 docs-backend 이미지 배포 전에 기존 NAS 문서의 본문 규칙 위반을 점검하고, 배포 후 목록·상세 및 인증된 revalidation을 확인한다. 위반 문서는 목록에서 제외되므로 [배포 영향](../architecture/docs-content-authoring-markup-policy.md#배포-영향)을 먼저 검토한다.
 
 - [x] `P1` article frontmatter / remote metadata 스키마를 고정한다.
   - `title`, `slug`, `summary`, `date`, `markdownPath`, `thumbnail`, `authorName`, `authorRole`, `readMinutes`, `topicLabel`, `updatedAt`, `tags`, `status`의 필수/선택 여부를 확정
@@ -126,6 +134,16 @@
 
 ## UI / UX
 
+- [x] `P0` 현재 공개 사이트의 접근성 토큰·포커스 규칙 누락을 재검사한다. 이전 실패 4개를 포함한 20개가 통과했고 모바일 전용 4개만 데스크톱에서 제외됐다. 증상 재검증 완료이며 캐시 원인 규명 완료는 아니다. [후속 검증](../verification/accessibility/2026-09-23-deployed-shell-recheck.md).
+- [ ] `P2` 접근성 CSS 누락 재발 시 배포 커밋·원본 CSS·공개 CSS를 함께 수집해 원인을 비교한다. 현재 증상은 재현되지 않았고 과거 원인은 미확정이다. 실패 당시 증거는 [기존 보고서](../verification/accessibility/2026-09-23-deployed-shell.md)에 보존한다.
+- [x] `P1` `/docs` 비활성 이전·다음 링크의 키보드 활성화를 막는다. 경계에서 href·포커스 없는 비활성 표시를 렌더링하고 정상 링크와 query 생성을 유지한다. ko/en 및 3개 화면 크기의 경계·이동 검사와 기존 필터 검사 통과. [수정과 검증](../worklog/2026-09/2026-09-23-docs-pagination-disabled-navigation.md).
+- [x] `P1` UI/UX 예시 글을 실제 문서처럼 표시하지 않는다. 실제 문서만 표시하고 부족한 섹션을 숨기며, 0개 안내와 명확한 피드 이동 CTA를 제공한다. 0·1·2·7개 등을 포함한 모델 테스트와 로컬 2개 문서의 브라우저 검사를 통과했다. 운영 원격 데이터 확인은 배포 후 별도 진행한다. [작업 기록](../worklog/2026-09/2026-09-23-uiux-real-article-cards.md).
+- [x] `P1` 검색 빈 상태의 번역과 본문 landmark를 통일한다. ko/en의 검색 0건·전체 문서 0건에서 제목·본문·복구 링크를 통일하고 공백 query도 같은 정책을 적용한다. 전체 0개는 서버 렌더링, 검색 0건은 브라우저로 검증했다. [작업 기록](../worklog/2026-09/2026-09-23-docs-empty-state-localization.md).
+- [x] `P2` 헤더·본문 검색·직접 URL·API의 입력 정규화와 길이 정책을 공유한다. [ADR-0007](../architecture/adr-0007-search-input-contract.md)의 40 code point·NFC·공백·첫 query 정책을 적용하고 합성 IME 이벤트와 서버 경계를 검사했다. 실제 OS IME는 별도 검증 대상이다. 검색 결과 페이지네이션은 보류를 유지한다.
+- [x] `P2` `DocsIndex`의 통계·섹션·페이지 이동을 역할별로 분리한다. 서버 컴포넌트 3개로 추출하고 기존 query·검색 관련도·빈 상태·페이지 이동 계약을 유지했다. [검증 기록](../worklog/2026-09/2026-09-23-adr-followup-improvements.md).
+- [x] `P2` 헤더·본문 검색의 이동 방식과 로딩 표시를 통일한다. 09-26 작업 트리에서 공용 navigation hook·제출 버튼, 같은 URL·IME·pending 중복 방지를 적용했다. [검증 기록](../verification/content/2026-09-26-search-navigation.md): 51개 E2E·production build 통과, 운영 배포 미검증.
+- [ ] `P2` JavaScript 비활성 환경의 `/docs` 스트리밍 완결성을 확인한다. 개발 서버에서 본문 대신 loading 상태가 남았다. 09-26에도 두 locale에서 재현했다. 폼 단독 native GET 통과와 구분하고 프로덕션에서도 재현되는지 확인한 뒤 progressive enhancement 지원 범위를 정한다. [검증 범위](../verification/content/2026-09-26-search-navigation.md).
+
 - [-] `P0` `640px ~ 1023px` 구간의 shell/UI 동작을 실제 디바이스 기준으로 점검한다.
   - header
   - mobile drawer
@@ -166,7 +184,7 @@
   - `GITHUB`
 - [ ] `P2` empty state, loading state, error state의 시각 톤을 통일한다.
   - root landing은 remote latest notes 실패 시 페이지 전체를 죽이지 않고 섹션 단위 graceful degradation을 유지
-- [ ] `P2` keyboard navigation / focus ring / drawer close flow 접근성을 점검한다.
+- [-] `P2` keyboard navigation / focus ring / drawer close flow 접근성을 점검한다. 로컬 production 20개 통과와 운영 CSS 실패를 구분하며, VoiceOver/NVDA 낭독은 미검증이다. [현재 검증](../verification/accessibility/2026-09-23-deployed-shell.md).
 - [-] `P2` layout/list motion 정책을 운영한다.
   - `motion-layout`, `motion-reveal` 기반으로 시작
   - `prefers-reduced-motion` 대응 필수
@@ -220,6 +238,15 @@
   - 기준 문서: `docs/architecture/docs-search-experience-policy.md`
 
 ## Infra / Tooling
+
+- [x] `P2` ADR-0007의 구현·배포·검증 근거를 연결한다. 09-26 공개 검색 6개·About 8개 통과와 GitHub Production 성공 기록을 연결했다. alias 매핑 미확정 및 후속 이동 개선 미배포를 구분한다. [검증 보고서](../verification/content/2026-09-26-deployed-search-contract.md).
+
+- [x] `P1` 요청별 스트림 종료 로그 정책을 수립한다. 문구·prefetch 여부만으로 취소를 확정하지 않고 선행 오류와 완료 상태를 함께 판정한다. [정책](../architecture/docs-request-lifecycle-logging-policy.md), [ADR-0008](../architecture/adr-0008-request-lifecycle-observability.md).
+- [x] `P1` 로컬 production fixture에 요청별 계측과 판정 테스트를 추가한다. 전체 80개 통과. 상세 진단의 스트림 오류 2건을 서버 요청과 브라우저 dispatch에 연결했다. Next의 선행 오류 관측은 partial이므로 정상 취소로 단정하지 않는다. 기존 메시지는 필터링하지 않는다. [결과와 한계](../verification/cache/2026-09-24-local-request-lifecycle.md).
+- [ ] `P1` Vercel Preview에서 오류 훅과 플랫폼 로그의 요청 상관관계를 검증한다. 완료 조건: 실제 지원 필드·누락 범위 기록, 캐시 ID 재사용 없음, 강제 종료와 늦은 오류의 unknown/failed 분류, 캐시·스트리밍 동작 유지 확인.
+- [ ] `P2` 검증된 요청 로그를 운영 수집·집계·알림에 연결한다. 완료 조건: 보관/비용/마스킹/전달 실패 정책 확인, 실제 탐색과 prefetch 지표 분리, 테스트 알림 수신. 기존 Better Stack schema failure 연결과 구분한다.
+
+- [x] `P1` docs 배포 브랜치의 직접 push에도 CI와 문서 검사를 실행한다. `5dbbcc5`의 Commit Messages·Lint·Typecheck·Test·Documentation과 두 Shared UI 작업이 성공했다. Vercel 배포와 CI는 별개이며 배포 차단 연동은 이번 범위가 아니다. [원격 검증](../verification/cache/2026-09-27-docs-ci-log-review.md).
 
 - [-] `P0` `apps/docs` Vercel 운영 보안 기준을 적용한다.
   - `/api/revalidate/content`에 Production 전용 `5 requests / 60 seconds / IP` WAF rate limit 적용
@@ -284,6 +311,9 @@
   - i18n
 
 ## Content / Editorial
+
+- [x] `P1` About의 근거 없는 시작 날짜·직함을 제거하고 모바일 메뉴의 공유 직함 표시도 함께 제거한다. 새 날짜나 경력을 추정해 넣지 않았다. 한·영 메시지와 About 회귀 검사에 반영했다.
+- [ ] `P2` 남은 편집 메타데이터의 근거를 확인한다. footer 저작권 연도는 운영자 확인 후 변경하며, 현재 라우트에서 사용되지 않는 ArticleDetail 시안과 Alex Rivers·뉴스레터 메시지는 사용 경로를 정리한 별도 변경에서 제거한다. 이번 About 점검을 전체 카피 검수 완료로 간주하지 않는다.
 
 - [-] `P1` 양질의 기술 리소스를 category별 reading path로 확장한다.
   - 1차: Browser rendering, Network request path, Container health 기준 문서 추가

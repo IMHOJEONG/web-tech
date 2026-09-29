@@ -39,11 +39,9 @@ test.describe('docs index mobile navigation', () => {
     }) => {
         await page.goto('/docs')
 
-        await page.locator('input[name="q"]').fill('React')
-        await page
-            .locator('form:has(input[name="q"])')
-            .getByRole('button')
-            .click()
+        const searchForm = page.getByRole('main').getByRole('search')
+        await searchForm.locator('input[name="q"]').fill('React')
+        await searchForm.getByRole('button', { name: 'Search' }).click()
         await expect
             .poll(() => new URL(page.url()).searchParams.get('q'))
             .toBe('React')

@@ -1,6 +1,8 @@
 {
     "common": {
         "brand": "HEAP-FORGE",
+        "skipToContent": "본문으로 바로가기",
+        "documentIndexSearch": "문서 목록 검색",
         "loadingDocuments": "문서를 불러오고 있어요."
     },
     "feedRecent": {
@@ -76,6 +78,7 @@
         }
     },
     "navigation": {
+        "primaryAriaLabel": "주요 메뉴",
         "mobileAriaLabel": "모바일 주요 내비게이션",
         "feed": "Feed",
         "web": "Web",
@@ -103,7 +106,6 @@
         }
     },
     "footer": {
-        "tagline": "© {year} {brand} // PRECISION ENGINEERED",
         "linksAriaLabel": "푸터 보조 링크",
         "links": {
             "privacy": "PRIVACY",
@@ -136,11 +138,6 @@
                     "title": "외부 연동",
                     "body": "배포 환경, 이미지 자산 서버, 원격 콘텐츠 API처럼 문서 제공에 필요한 외부 인프라가 함께 동작할 수 있습니다. 각 인프라에서 생성되는 로그 보관 기간과 세부 정책은 해당 운영 환경 기준을 따릅니다."
                 }
-            },
-            "aside": {
-                "title": "정책 변경 안내",
-                "body": "운영 방식이 바뀌면 changelog에 먼저 남기고, 필요 시 이 안내 문서도 함께 갱신합니다.",
-                "linkLabel": "CHANGELOG 보기"
             }
         },
         "terms": {
@@ -166,11 +163,6 @@
                     "title": "외부 링크와 인용",
                     "body": "문서 안에는 외부 레퍼런스나 서비스 링크가 포함될 수 있습니다. 해당 링크의 내용과 가용성은 각 외부 제공자 책임 범위에 있으며, HeapForge는 이를 실시간으로 보증하지 않습니다."
                 }
-            },
-            "aside": {
-                "title": "운영 기준 같이 보기",
-                "body": "콘텐츠 입력 규칙과 검증 흐름은 contributor guide와 함께 보면 더 이해하기 쉽습니다.",
-                "linkLabel": "PRIVACY 보기"
             }
         },
         "changelog": {
@@ -196,11 +188,6 @@
                     "title": "작성자 가이드와 published 메타 기준 추가",
                     "body": "published 문서에 `status`, `updatedAt`, 작성자 정보, 읽기 시간, 주제 라벨이 항상 포함되도록 local validation 기준을 높였습니다. 동시에 contributor guide를 분리해 새 글 작성 위치와 publish 전 체크리스트를 명시했습니다."
                 }
-            },
-            "aside": {
-                "title": "더 자세한 기록",
-                "body": "세부 커밋과 변경 이력은 GitHub 저장소와 worklog 문서에서 계속 추적할 수 있습니다.",
-                "linkLabel": "GitHub 저장소 열기"
             }
         }
     },
@@ -288,9 +275,17 @@
             "triggerLabel": "문서 검색",
             "placeholder": "문서를 검색해보세요",
             "submitAriaLabel": "문서 검색",
+            "pendingLabel": "검색 결과를 불러오는 중",
             "clearAriaLabel": "검색어 지우기"
         },
         "empty": {
+            "searchEyebrow": "검색 결과",
+            "resultHeading": "검색 결과가 없어요",
+            "allEyebrow": "전체 문서",
+            "allHeading": "아직 보여드릴 문서가 없어요",
+            "allDescription": "지금은 목록에 표시할 문서가 없습니다. 잠시 후 다시 방문하거나 피드를 확인해보세요.",
+            "toFeed": "피드로 이동",
+            "recommendations": "추천 검색어",
             "resultTitle": "{keyword}에 맞는 결과가 없습니다",
             "resultDescription": "다른 키워드로 검색하거나 추천 주제에서 다시 시작해보세요",
             "clear": "전체 문서로 돌아가기"
@@ -495,63 +490,25 @@
             "titleLineTwo": "인터페이스 완성도",
             "description": "인지 구조, 인터페이스 미감, 접근 가능한 상호작용을 함께 다루는 편집형 허브입니다. 디자인 시스템과 읽기 경험, 세밀한 사용성 신호를 한 화면에서 이어서 볼 수 있도록 구성했습니다."
         },
-        "featured": {
-            "primaryLabel": "케이스 스터디",
-            "secondaryLabel": "10분 읽기",
-            "action": "분석 보기"
-        },
-        "secondary": {
-            "researchLabel": "리서치 노트 // 02",
-            "guideLabel": "기술 가이드 // 03"
-        },
-        "bottomLeft": {
-            "label": "튜토리얼 // 04"
-        },
         "more": {
             "fallbackDate": "최근 글"
         },
-        "loadMore": "다음 글 더 보기",
-        "fallback": {
-            "featured": {
-                "title": "공간형 인터페이스와 시각 계층 재설계",
-                "summary": "고밀도 데스크톱 인터페이스에서 정보 우선순위를 잃지 않기 위해 어떤 시각 계층이 필요한지 다시 정리합니다."
-            },
-            "secondaryOne": {
-                "title": "인지 부하와 그리드 시스템",
-                "summary": "고위험 환경에서 의사결정 피로를 줄이기 위한 수학적 레이아웃 접근을 살펴봅니다."
-            },
-            "secondaryTwo": {
-                "title": "마이크로 인터랙션 상태 설계",
-                "summary": "전이와 피드백의 작은 차이가 어떻게 촉각적인 디지털 경험을 만드는지 다룹니다."
-            },
-            "tutorial": {
-                "title": "고급 오토 레이아웃 전략",
-                "summary": "Figma 안에서 유연한 레이아웃 구조를 유지하면서도 컴포넌트 일관성을 지키는 방법을 정리합니다."
-            },
-            "moreOne": {
-                "title": "대비비를 넘어서는 접근성",
-                "summary": "일시적 제약과 다양한 인지 능력까지 고려한 경험 설계를 다룹니다."
-            },
-            "moreTwo": {
-                "title": "시선 추적 기반 위계 분석",
-                "summary": "히트맵과 시선 흐름이 실제 정보 구조에 어떤 힌트를 주는지 정리합니다."
-            },
-            "moreThree": {
-                "title": "반응형 타이포그래피를 더 정교하게",
-                "summary": "clamp()와 세로 리듬을 활용해 긴 문서를 더 안정적으로 읽히게 만드는 방법을 다룹니다."
-            }
+        "browseFeed": "UI/UX 피드 보기",
+        "empty": {
+            "title": "아직 보여드릴 UI/UX 글이 없어요",
+            "description": "다른 주제의 글은 전체 문서에서 찾아보세요.",
+            "action": "전체 문서 보기"
         }
     },
     "about": {
         "hero": {
-            "status": "운영 중 // VERSION 2.0.4",
+            "eyebrow": "HEAP-FORGE 소개",
             "titleLead": "웹과 제품, 인터페이스를",
             "titleAccentOne": "하나의",
             "titleAccentTwo": "흐름으로 설계합니다",
             "description": "HeapForge는 웹 엔지니어링, 모바일 제품 경험, UI/UX 구조를 함께 다루는 기술 아카이브입니다. 구현과 설계를 따로 떼어 보지 않고, 실제로 오래 쓰이는 구조를 기록합니다.",
             "asideTitle": "HeapForge 노트",
-            "missionLabel": "// 구현과 설계를 잇는 기록",
-            "establishedLabel": "// 2026년 9월부터 쌓아온 아카이브"
+            "missionLabel": "개발 과정에서 배운 점과 문제를 해결한 방법을 기록합니다."
         },
         "pillars": {
             "web": {
@@ -574,8 +531,7 @@
         },
         "profile": {
             "name": "HoJeong Im",
-            "role": "Full Stack Engineer",
-            "bio": "구조가 분명한 인터페이스와 오래 버티는 구현을 좋아하는 풀스택 엔지니어입니다. HEAP-FORGE에는 디지털 빌더가 필요할 때 다시 펼쳐볼 수 있는 기술 메모와 설계 기록을 꾸준히 쌓고 있습니다.",
+            "bio": "개발하면서 겪은 문제와 해결 과정을 기록합니다. HEAP-FORGE에는 웹 개발과 서비스 운영에서 배운 내용을 나중에 다시 참고할 수 있도록 정리하고 있습니다.",
             "links": {
                 "github": {
                     "label": "GITHUB",

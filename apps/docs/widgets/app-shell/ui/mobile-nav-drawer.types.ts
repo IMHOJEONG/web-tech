@@ -5,5 +5,4 @@ export interface DrawerLinkConfig {
     href: `/${string}`
     key: keyof typeof messages.navigation
     icon: LucideIcon
-    activePrefixes: readonly `/${string}`[]
 }
