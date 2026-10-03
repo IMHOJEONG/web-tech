@@ -2,6 +2,8 @@
 
 [월별 목록](../README.md)
 
+- [2026-10-03 Docs 캐시 구조 설명](2026-10-03-docs-cache-structure-guide.md)
+
 - [2026-10-03 로컬 검색 인덱스 캐시](2026-10-03-local-search-index-cache.md)
 
 - [2026-10-03 검색 인덱스 비용 점검](2026-10-03-search-index-cost.md)

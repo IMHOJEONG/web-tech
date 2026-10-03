@@ -80,6 +80,7 @@
 
 ## 먼저 보면 좋은 문서
 
+- [Docs 캐시 구조 그림과 범위](./docs-cache-structure.md): React cache·메모리 캐시·Data Cache, 실제 검색과 게시 갱신 흐름.
 - [기존 캐시 모델과 Cache Components 비교](./next-cache-components-comparison.md)
 - [Next.js Data Cache 통합 테스트 실험 노트](./next-data-cache-integration-lab.md)
 
