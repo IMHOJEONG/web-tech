@@ -11,9 +11,18 @@ import { assertLocaleBoundary } from './test-utils/assert-locale-boundary.mjs'
 import { assertLocaleCacheKey } from './test-utils/assert-locale-cache-key.mjs'
 import { assertLocaleRouting } from './test-utils/assert-locale-routing.mjs'
 import { assertArticleBody } from './test-utils/assert-content-response.mjs'
+import {
+    prepareSearchIndexFixture,
+    assertSearchIndexCache,
+} from './test-utils/assert-search-index-cache.ts'
 
 const app = fileURLToPath(new URL('..', import.meta.url))
 const root = join(app, '../..')
+const searchIndex = process.argv.includes('--search-index')
+assert.ok(
+    !searchIndex || process.argv.length === 3,
+    'Search-index mode cannot be combined with Cache Components experiments'
+)
 const localeCacheKey = process.argv.includes('--locale-cache-key')
 const localeBoundary =
     localeCacheKey || process.argv.includes('--locale-boundary')
@@ -21,9 +30,13 @@ const functionCacheOnly =
     localeBoundary || process.argv.includes('--function-cache-only')
 const minimal =
     !localeBoundary &&
-    (functionCacheOnly || process.argv.includes('--cache-components-minimal'))
+    (searchIndex ||
+        functionCacheOnly ||
+        process.argv.includes('--cache-components-minimal'))
 const cacheComponents =
-    localeBoundary || minimal || process.argv.includes('--cache-components')
+    localeBoundary ||
+    (minimal && !searchIndex) ||
+    process.argv.includes('--cache-components')
 const debugPrerender = process.argv.includes('--debug-prerender')
 assert.ok(
     process.argv
@@ -36,6 +49,7 @@ assert.ok(
                 '--function-cache-only',
                 '--locale-boundary',
                 '--locale-cache-key',
+                '--search-index',
             ].includes(arg)
         ),
     'Unknown argument'
@@ -51,6 +65,8 @@ let interrupted = false
 let originGate
 let releaseOrigin
 let blockedRequests = 0
+let originUnavailable = false
+let localSearchFile
 const children = new Set()
 
 const origin = createServer(async (request, response) => {
@@ -65,6 +81,10 @@ const origin = createServer(async (request, response) => {
     response.setHeader('Cache-Control', 'private, no-store')
     if (request.url === '/api/posts') {
         counts.index++
+        if (originUnavailable) {
+            response.writeHead(503).end('Test origin unavailable')
+            return
+        }
         response.setHeader('Content-Type', 'application/json')
         response.end(
             JSON.stringify({
@@ -188,6 +208,18 @@ try {
         const webhook = join(copy, 'app/api/revalidate/content/route.ts')
         await mkdir(dirname(webhook), { recursive: true })
         await cp(join(app, 'app/api/revalidate/content/route.ts'), webhook)
+    }
+    if (searchIndex) {
+        localSearchFile = await prepareSearchIndexFixture(copy)
+        const searchProbe = join(
+            copy,
+            'app/[locale]/api/search-index-probe/route.ts'
+        )
+        await mkdir(dirname(searchProbe), { recursive: true })
+        await cp(
+            join(app, 'scripts/fixtures/search-index-probe.ts'),
+            searchProbe
+        )
     }
     const probe = join(copy, 'app/[locale]/api/cache-probe/route.ts')
     if (localeCacheKey) {
@@ -488,6 +520,17 @@ try {
     assert.equal(page.status, 200)
     assertArticleBody(await page.text(), 'CACHE_BODY_V3')
     console.log('[PASS] Article renders V3', { minimal })
+    if (searchIndex) {
+        await assertSearchIndexCache({
+            request,
+            file: localSearchFile,
+            token,
+            setOriginUnavailable: (value) => {
+                originUnavailable = value
+            },
+            getOriginCount: () => counts.index,
+        })
+    }
     console.log('[cache-test] All checks passed')
 } catch (error) {
     console.error(logs.replaceAll(token, '[REDACTED]'))

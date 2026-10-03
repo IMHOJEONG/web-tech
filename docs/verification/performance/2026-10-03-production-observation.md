@@ -4,7 +4,7 @@
 
 - 확인일: 2026-10-03, KST.
 - 커밋: `56698eced968b56f64414bee3b98191b3199a3ac`, `feature/docs`.
-- 배포: `dpl_HZBxFngXabbMS29dcQc54QEURKvJ`, Production web-tech, Node 24.x.
+- 배포: `<deployment-id>`, Production web-tech, Node 24.x. 실제 배포 ID는 공개 보고서에서 생략한다.
 - 공개 요청 3개 및 Playwright Chromium의 독립 세션 2개. 실제 사용자 성능 표본이 아니라 연결 확인용이다.
 - Vercel CLI 로그인 후 읽기 전용 프로젝트 API와 Runtime Logs 확인. 활성화·요금제·WAF·캐시 설정을 변경하지 않았다.
 
@@ -13,16 +13,16 @@
 저장소 루트에서 본인 Vercel 계정으로 로그인한다. 토큰·쿠키를 명령어나 문서에 넣지 않는다.
 
 ```sh
-vercel logs --project web-tech --scope hojeong-ims-projects --environment production --since 1h --query 2eb058c0-53cb-4dca-ab9c-b985fb660b25 --json --limit 20 --no-follow
+vercel logs --project web-tech --scope hojeong-ims-projects --environment production --since 1h --query '<request-id>' --json --limit 20 --no-follow
 vercel project inspect web-tech --scope hojeong-ims-projects
 ```
 
-UUID는 이 검증의 예시다. 이후에는 새 응답의 `x-docs-request-id`로 바꾼다. CLI `--request-id`는 플랫폼 요청 ID 필터이므로 앱의 UUID에는 `--query`를 사용한다. 로그의 보관 기간이 지난 경우 이 예시 조회는 재현되지 않을 수 있다.
+실제 요청 UUID도 공개 문서에서 생략했다. `<request-id>`는 새 응답의 `x-docs-request-id`로 바꾼다. CLI `--request-id`는 플랫폼 요청 ID 필터이므로 앱의 UUID에는 `--query`를 사용한다. 로그 보관 기간이 지나면 과거 로그를 조회할 수 없다.
 
 ## 결과와 증거
 
 - 통과: `/ko/docs?q=React`, `/api/search?q=React`, `/ko/docs/web/javascript-event-loop-runtime`은 HTTP 200. 각각 다른 UUID를 발급하고 입력한 외부 UUID를 덮어썼다.
-- 통과: 상세의 응답 ID `2eb058c0-53cb-4dca-ab9c-b985fb660b25`가 Runtime Logs의 아래 단계 및 `[docs.document_selection]`과 일치한다. 선택 결과는 local/found였다.
+- 통과: 상세의 응답 요청 ID가 Runtime Logs의 아래 단계 및 `[docs.document_selection]`과 일치한다. 실제 ID는 생략하고 측정값만 유지했다. 선택 결과는 local/found였다.
 
 | stage            | durationMs | outcome |
 | ---------------- | ---------: | ------- |

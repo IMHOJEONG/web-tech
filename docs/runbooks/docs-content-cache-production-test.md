@@ -67,6 +67,21 @@ TTL은 테스트 도중 자연 만료가 결과를 바꾸지 않도록 3600초�
 
 ## 관련 검증
 
+### 로컬 검색 인덱스 재사용과 만료
+
+저장소 루트에서 Node 24로 실행한다. 공용 패키지 빌드를 먼저 완료하고 테스트 중 변경하지 않는다.
+
+```sh
+mise exec -- node apps/docs/scripts/test-content-cache-prod.mjs --search-index
+mise exec -- pnpm --filter docs test:lib
+```
+
+`--search-index`는 기존 캐시 검증 뒤 실제 검색 로더를 최소 셸의 임시 Route Handler에서 호출한다. 다른 Cache Components 옵션과 함께 사용하지 않는다. 실제 `.env`·운영 인증값은 복사하지 않고 임시 생성 토큰만 사용한다. 정상 종료와 실패 모두 자체 서버·임시 파일을 정리한다.
+
+기대 조건은 요청 간·검색어 간 인덱스 재사용, draft 제외, 잘못된 인증의 캐시 유지, 인증된 웹훅 뒤 V2 조회, 미발행·삭제 제거, 원격 503 중 로컬 검색 유지 및 복구 후 원격 조회 재개다. 잘못된 로컬 frontmatter는 500으로 실패한 뒤 파일을 고치면 별도 웹훅 없이 재시도에 성공해야 한다. 테스트의 의도된 503/500을 운영 장애나 테스트 실패로 혼동하지 않는다.
+
+임시 앱 파일을 수정하는 것은 태그 무효화 검증 수단일 뿐 NAS가 Vercel 로컬 파일을 수정할 수 있다는 의미가 아니다. 테스트 전용 `/api/search-index-probe`는 운영 앱에 추가되지 않는다. 결과는 [검색 캐시 검증](../verification/cache/2026-10-03-local-search-index-cache.md)을 참고한다.
+
 locale 캐시 키 분리는 [독립 재현 가이드](./docs-locale-cache-key-test.md)를 따른다.
 `--locale-cache-key`로 기존 언어 경계 검사와 함수 캐시 분리 검사를 함께 실행할 수 있다.
 

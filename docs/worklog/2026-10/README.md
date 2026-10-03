@@ -2,6 +2,10 @@
 
 [월별 목록](../README.md)
 
+- [2026-10-03 로컬 검색 인덱스 캐시](2026-10-03-local-search-index-cache.md)
+
+- [2026-10-03 검색 인덱스 비용 점검](2026-10-03-search-index-cost.md)
+
 - [2026-10-03 성능·요청 계측](2026-10-03-docs-performance-observation.md)
 
 - [2026-10-03 웹 푸시 초대 세션과 WAF 활성화 게이트](2026-10-03-web-push-access-gate.md)

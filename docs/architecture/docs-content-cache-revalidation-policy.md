@@ -3,8 +3,8 @@
 ## 상태와 범위
 
 - 상태: 적용 중
-- 대상: docs 원격 콘텐츠 목록 및 본문 캐시
-- 최종 검토: 2026-09-22
+- 대상: docs 원격 콘텐츠 목록·본문 캐시 및 로컬 검색 인덱스
+- 최종 검토: 2026-10-03
 - Runtime: Next.js on Vercel
 - Source: `apps/docs-backend` on NAS
 
@@ -69,6 +69,12 @@ Advantages:
 If the content volume becomes large or publication frequency increases, this can
 be refined into an index tag plus a tag per canonical document path.
 
+## 로컬 검색 인덱스의 독립 캐시
+
+[ADR-0011](adr-0011-local-search-index-cache.md)에 따라 Production 로컬 인덱스만 별도 300초 캐시로 재사용한다. 태그는 `docs-content:local-search`이며 인증된 웹훅은 원격 태그와 함께 `{ expire: 0 }`으로 만료한다. 검색어별 결과와 원격 실패 fallback은 캐시하지 않는다. 개발 환경은 우회하고 새 배포는 문서 내용 digest가 다른 키를 사용한다. NAS 게시로 배포된 로컬 파일 자체가 바뀌지는 않는다.
+
+시간 기반 갱신은 stale-while-revalidate 동작일 수 있으므로 300초를 게시 내용의 강제 반영 시한으로 해석하지 않는다. 즉시 만료가 필요한 게시에는 웹훅을 사용한다.
+
 ## Authentication Policy
 
 The revalidation endpoint is a server-to-server administration endpoint.
@@ -117,7 +123,7 @@ or invalid content. The first operational step is an explicit publish command.
 ## Observability
 
 Successful invalidation writes one Vercel Runtime Log entry containing only the
-cache tag and UTC timestamp. Failed authentication never logs a supplied token.
+cache tags and UTC timestamp. Failed authentication never logs a supplied token.
 
 The caller prints the HTTP failure status or the successful invalidation time. A
 successful webhook response does not prove that the Markdown is valid, so the

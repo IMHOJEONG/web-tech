@@ -4,6 +4,10 @@
 
 ## 성능과 화면 안정성
 
+- [10-03 로컬 검색 인덱스 캐시](cache/2026-10-03-local-search-index-cache.md): 요청 간 재사용·인증 만료·미발행/삭제·장애 복구·전체 앱 빌드, 운영 배포 미검증.
+
+- [10-03 검색 인덱스 비용](performance/2026-10-03-search-index-cost.md): 로컬 읽기·파싱, 합성 순위 계산 증가, Production 단계 로그 3개. 캐시 도입은 보류.
+
 - [10-03 Production 계측 연결](performance/2026-10-03-production-observation.md): 응답 UUID와 Runtime Logs 단계 연결, Speed Insights 스크립트 확인. 실제 사용자 수집은 미검증.
 
 - [09-23 공개 배포 접근성 재검증](accessibility/2026-09-23-deployed-shell-recheck.md): 20개 통과·4개 조건부 제외. 이전 CSS 누락 증상은 현재 재현되지 않으며 원인은 미확정.

@@ -2,6 +2,7 @@ import { revalidateTag } from 'next/cache'
 import {
     isValidContentRevalidationToken,
     REMOTE_CONTENT_CACHE_TAG,
+    LOCAL_SEARCH_CACHE_TAG,
 } from '~/lib/content-cache'
 
 const NO_STORE_HEADERS = {
@@ -29,11 +30,12 @@ export async function POST(request: Request) {
     }
 
     revalidateTag(REMOTE_CONTENT_CACHE_TAG, { expire: 0 })
+    revalidateTag(LOCAL_SEARCH_CACHE_TAG, { expire: 0 })
 
     const revalidatedAt = new Date().toISOString()
 
-    console.info('[docs] Remote content cache invalidated.', {
-        tag: REMOTE_CONTENT_CACHE_TAG,
+    console.info('[docs] Content caches invalidated.', {
+        tags: [REMOTE_CONTENT_CACHE_TAG, LOCAL_SEARCH_CACHE_TAG],
         revalidatedAt,
     })
 

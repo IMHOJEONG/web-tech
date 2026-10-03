@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 import createMDX from '@next/mdx'
 import createNextIntlPlugin from 'next-intl/plugin'
+import { fileURLToPath } from 'node:url'
 
 import { shikiRehypeOptions } from './lib/shiki-options.js'
+import { getLocalSearchRevision } from './lib/local-search-revision.ts'
 
 const { env } = process
 
@@ -59,6 +61,12 @@ function getRemoteImagePatterns() {
 }
 
 const nextConfig = {
+    env: {
+        // A non-secret content digest prevents Data Cache reuse across changed builds.
+        DOCS_LOCAL_SEARCH_REVISION: getLocalSearchRevision(
+            fileURLToPath(new URL('.', import.meta.url))
+        ),
+    },
     // Configure `pageExtensions` to include markdown and MDX files
     pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
     // Optionally, add any other Next.js config below,

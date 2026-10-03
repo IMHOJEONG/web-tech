@@ -1,6 +1,7 @@
 import { timingSafeEqual } from 'node:crypto'
 
 export const REMOTE_CONTENT_CACHE_TAG = 'docs-content:remote'
+export const LOCAL_SEARCH_CACHE_TAG = 'docs-content:local-search'
 
 export function isValidContentRevalidationToken(
     authorization: string | null,
