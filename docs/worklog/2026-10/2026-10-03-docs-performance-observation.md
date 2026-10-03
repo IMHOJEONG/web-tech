@@ -13,6 +13,8 @@
 
 ## Notes
 
+- `56698ec` 푸시 후 CI 및 Production 배포 성공. 공개 상세 응답의 UUID와 Runtime Logs 단계 연결을 추가 확인했다. Speed Insights 스크립트는 로드되지만 API hasData=false이며 실제 브라우저 수집은 미검증이다. [배포 확인 보고서](../../verification/performance/2026-10-03-production-observation.md).
+
 - Node 24의 계측·정제 단위 테스트 6개, 앱 타입 검사와 변경 코드 ESLint를 통과했다.
 - 전체 라이브러리 검사 `mise exec -- pnpm --filter docs test:lib`는 Node 테스트 타입 검사와 201개 테스트를 통과했다. 최초 실행은 sandbox 쓰기 제한으로 중단되어 권한 승인 후 재실행했다.
 - 로컬 fixture production 빌드 및 모바일 상세/요청 ID 회귀 9개 통과. 실제 수신한 서로 다른 UUID와 외부 ID 덮어쓰기를 확인했다.
