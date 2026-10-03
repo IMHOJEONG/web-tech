@@ -64,6 +64,9 @@ const nextConfig = {
     // Optionally, add any other Next.js config below,
     reactStrictMode: true,
     transpilePackages: ['@web-tech/ui'],
+    outputFileTracingIncludes: {
+        '/og/article.png': ['./public/fonts/Pretendard-Bold.otf'],
+    },
     redirects() {
         const aliases = [
             '/docs/category/fe/react/test',

@@ -63,6 +63,8 @@
 
 ## 원본 증거
 
+- [10-03 문서 구조화 데이터와 OG 이미지](seo/2026-10-03-article-sharing.md): 프로덕션 빌드·82개 회귀·PNG 응답 검증.
+
 [artifacts 목록](artifacts/README.md)에서 JSON 측정값을 찾을 수 있습니다. 각 결과의 환경·표본·한계는 연결된 보고서와 함께 확인해야 합니다. 이 폴더의 결과만으로 현재 배포가 통과했다고 판단하지 않습니다.
 
 보고서 작성과 이동 기준은 [문서 역할과 구조](../process/documentation-organization.md)를 따릅니다.

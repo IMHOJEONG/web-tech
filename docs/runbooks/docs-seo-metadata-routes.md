@@ -65,3 +65,36 @@ curl -I https://heap-forge.app/sitemap.xml
 curl https://heap-forge.app/robots.txt
 curl https://heap-forge.app/sitemap.xml
 ```
+
+## 문서 구조화 데이터와 공유 이미지 확인
+
+저장소 루트에서 Node 24로 실행한다. 로컬 검증은 NAS를 끄고도 할 수 있다.
+
+```bash
+BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false mise exec -- pnpm --filter docs dev
+```
+
+다른 터미널에서 공개 상세와 이미지 응답을 확인한다. 아래 이미지 경로는 locale 없이 접근하며 `/api/`의 robots 차단 대상에 포함되지 않는다.
+
+```bash
+curl -fsS http://127.0.0.1:3001/ko/docs/web/javascript-event-loop-runtime
+curl -fG http://127.0.0.1:3001/og/article.png \
+  --data-urlencode 'title=첫 화면은 어디에서 늦어지는가' \
+  --data-urlencode 'topic=BROWSER PERFORMANCE' \
+  --data-urlencode 'author=HoJeong Im' -o /tmp/article-og.png
+```
+
+기대 결과는 다음과 같다.
+
+- 상세 HTML에 `BlogPosting` JSON-LD가 하나 있으며 `url`이 해당 locale의 canonical과 같다.
+- OG/Twitter 이미지가 `/og/article.png`의 절대 URL을 가리킨다.
+- 이미지 응답은 HTTP 200, `image/png`, 1200×630이며 한글 제목이 읽힌다.
+- 없는 문서와 alias 응답에는 별도 BlogPosting이 없다.
+
+단위 검사는 `mise exec -- pnpm --filter docs test:lib`, 전체 상세 회귀는 `mise exec -- pnpm --filter docs test:article:prod`로 실행한다. 로컬 fixture 서버와 프로덕션 빌드를 사용한다. 상세·OG 두 파일만 실행하려면 `apps/docs`에서 `mise exec -- pnpm exec playwright test --config=playwright.article.config.ts article-detail.spec.ts article-sharing.spec.ts`를 사용한다.
+
+실제 수행 결과는 [2026-10-03 SEO 검증](../verification/seo/2026-10-03-article-sharing.md)에 기록했다.
+
+배포 후에는 실제 글 URL로 [Rich Results Test](https://search.google.com/test/rich-results)와 [Schema Markup Validator](https://validator.schema.org/)를 실행한다. 검색 노출 여부와 공유 서비스의 캐시 갱신 결과는 배포 후 별도로 확인한다.
+
+PNG 생성이 실패하면 `public/fonts/Pretendard-Bold.otf`가 배포 함수의 파일 추적 결과에 포함되어 있는지 확인한다. 제목이 이전 버전이면 OG query와 공유 서비스의 미리보기 캐시를 확인한다. 구조화 데이터 날짜 오류는 frontmatter/API 날짜를 수정하고 기존 revalidation 절차를 적용한다.

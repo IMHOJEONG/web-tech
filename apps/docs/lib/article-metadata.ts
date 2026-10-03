@@ -1,11 +1,8 @@
 import type { Metadata as NextMetadata } from 'next'
 import type { Metadata as Article } from '~/lib/get-document'
 import { getDocHref } from './get-doc-route.ts'
-import {
-    getMetadataBase,
-    normalizeMetadataImageUrl,
-    toAbsoluteSiteUrl,
-} from './seo.ts'
+import { getArticleOgImageUrl } from './article-sharing.ts'
+import { getMetadataBase, toAbsoluteSiteUrl } from './seo.ts'
 
 export function buildArticleMetadata(
     article: Pick<
@@ -29,7 +26,7 @@ export function buildArticleMetadata(
     const title = article.title ?? 'HeapForge 문서'
     const description =
         article.summary ?? 'HeapForge에서 정리한 기술 문서입니다.'
-    const imageUrl = normalizeMetadataImageUrl(article.thumbnail, siteUrl)
+    const imageUrl = getArticleOgImageUrl(article, siteUrl)
 
     return {
         title,
@@ -44,7 +41,7 @@ export function buildArticleMetadata(
             title,
             description,
             url: canonicalUrl,
-            images: [imageUrl],
+            images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
             publishedTime: article.date,
             modifiedTime: article.updatedAt ?? article.date,
             authors: article.authorName ? [article.authorName] : undefined,

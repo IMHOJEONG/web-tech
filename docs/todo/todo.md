@@ -338,6 +338,7 @@
 - [-] `P2` article metadata 정책을 정리한다.
   - `/docs/{channel}/{slug}` 상세 metadata 정책 문서화 완료
   - 문서별 title/summary/canonical/OG image 연결 완료
+  - `BlogPosting`과 제목 기반 OG PNG 구현: [2026-10-03 기록](../worklog/2026-10/2026-10-03-article-structured-data-og.md). 배포 후 검색·공유 서비스 검증은 남아 있음
   - 목록/허브/정적 페이지 metadata는 `docs-page-metadata-policy.md`로 별도 정책화 완료
   - `/feed`, `/docs`, `/web`, `/mobile`, `/ui-ux`, `/category` 계열 목록, 정적 안내 페이지 metadata 연결 완료
   - `/category/...` 상세 alias는 `/docs/category/...` canonical route로 redirect하도록 정책 확정

@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-03",
+  "timezone": "Asia/Seoul",
+  "branch": "feature/docs",
+  "baseHead": "d77a041",
+  "workingTree": "uncommitted, including concurrent web-push changes",
+  "environment": {
+    "node": "v24.12.0",
+    "next": "16.3.4",
+    "browser": "Chromium",
+    "contentOrigin": "local fixture"
+  },
+  "evidenceKind": "summary extracted from command output",
+  "unit": { "passed": 7, "failed": 0 },
+  "productionBuild": "passed during Playwright webServer startup",
+  "playwright": {
+    "command": "mise exec -- pnpm --filter docs test:article:prod -- article-detail.spec.ts article-sharing.spec.ts",
+    "actualScope": "complete article suite",
+    "passed": 82,
+    "failed": 0,
+    "reportedDuration": "1.2m",
+    "projects": ["article-mobile", "article-desktop"],
+    "articleDetailCases": 16,
+    "sharingImageCases": 2,
+    "pngResponses": 6
+  },
+  "typecheck": { "application": "passed", "nodeTests": "passed" },
+  "changedCodeLint": "passed, zero warnings",
+  "observations": { "destinationStreamClosedEarlyLogs": 8 },
+  "notVerified": [
+    "Vercel runtime",
+    "Google Rich Results Test",
+    "sharing platform cache",
+    "real iOS Safari"
+  ]
+}
