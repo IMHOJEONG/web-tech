@@ -20,6 +20,10 @@
 
 새 결정의 작성·대체 규칙은 [ADR 관리 규칙](../process/adr-management.md)을 참고합니다.
 
+- [ADR-0010: 웹 푸시 초대 세션과 WAF 활성화 게이트](adr-0010-web-push-invitation-and-waf-gate.md): 적용 중. 코드 접근 제한 반영, Production WAF 게시·검증은 미완료.
+
+- [ADR-0009: 선택형 웹 푸시 실험](adr-0009-docs-web-push-experiment.md): 적용 중. 기본 비활성화 MVP, 실제 기기 수신·NAS 활성화는 미검증.
+
 - [ADR-0008: 요청별 증거로 스트림 종료 판정](adr-0008-request-lifecycle-observability.md): 제안. 2026-09-24 로컬 fixture 계측·테스트 추가, 운영 적용은 미구현.
 
 ## 설계·정책 목록

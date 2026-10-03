@@ -1,4 +1,30 @@
 {
+    "webPush": {
+        "experiment": "Web push experiment",
+        "title": "Try notifications in this browser",
+        "description": "Only administrator test notifications are sent during this experiment. Automatic new article alerts are not available yet. Subscribing stores this browser's push endpoint and encryption keys on our server.",
+        "subscribe": "Subscribe to test notifications",
+        "unsubscribe": "Unsubscribe",
+        "busy": "Updating settings",
+        "access": {
+            "label": "Experiment invitation code",
+            "submit": "Verify invitation",
+            "busy": "Verifying invitation",
+            "error": "Please check your invitation code.",
+            "note": "This experiment is invitation-only. Verifying a code does not grant notification permission. Access lasts for one hour."
+        },
+        "deviceNote": "Subscriptions are specific to each browser and device. On iPhone and iPad, use the web app added to your Home Screen. Blocked permissions can be changed in browser settings.",
+        "status": {
+            "loading": "Checking notification settings.",
+            "locked": "Enter the invitation code you received first.",
+            "ready": "Your browser will ask for permission when you select subscribe.",
+            "subscribed": "This browser is ready to receive test notifications.",
+            "denied": "Notifications are blocked. Check your browser's permission settings.",
+            "unsupported": "Web push is not available in this environment.",
+            "unavailable": "The notification experiment is unavailable right now. Please check again later.",
+            "error": "Unable to update notification settings. Please try again later."
+        }
+    },
     "common": {
         "brand": "HEAP-FORGE",
         "skipToContent": "Skip to main content",
@@ -137,6 +163,10 @@
                 "vendors": {
                     "title": "Supporting services",
                     "body": "Deployment infrastructure, image asset hosting, and remote content APIs may all participate in serving the docs experience. Retention windows and lower-level handling depend on the infrastructure operating each layer."
+                },
+                "push": {
+                    "title": "Optional web push experiment",
+                    "body": "This experiment is invitation-only. Verifying a code creates a one-hour HttpOnly access cookie; no account or email address is required. Granting permission and subscribing stores this browser's push endpoint and encryption keys on our NAS for administrator test notifications only. They are removed when you unsubscribe or delivery reports expiration. Cookie expiry does not end an existing subscription; verify your invitation again to unsubscribe. Blocking browser permission does not immediately delete the server record. Notifications use your browser provider's push service."
                 }
             }
         },

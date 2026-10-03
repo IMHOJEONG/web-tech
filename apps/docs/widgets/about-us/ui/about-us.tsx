@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { MainContent } from '~/shared/ui/main-content'
 import { AboutAuthor } from './about-author'
+import { PushSubscriptionPanel } from '~/feature/web-push/ui/push-subscription-panel'
 
 function PillBadge({
     label,
@@ -123,6 +124,9 @@ export async function AboutUs() {
                 </section>
 
                 <AboutAuthor />
+                {process.env.BLOG_PUSH_ENABLED === 'true' && (
+                    <PushSubscriptionPanel />
+                )}
             </div>
         </MainContent>
     )

@@ -39,6 +39,7 @@
     "markdown-it": "^14.1.0",
     "reflect-metadata": "catalog:backend",
     "rxjs": "catalog:backend",
+    "web-push": "^3.6.7",
     "yaml": "^2.8.3",
     "zod": "^4.4.2"
   },
@@ -53,6 +54,7 @@
     "@types/markdown-it": "^14.1.2",
     "@types/node": "catalog:",
     "@types/supertest": "catalog:backend",
+    "@types/web-push": "^3.6.4",
     "@web-tech/eslint-config": "workspace:*",
     "@web-tech/typescript-config": "workspace:*",
     "eslint": "catalog:",

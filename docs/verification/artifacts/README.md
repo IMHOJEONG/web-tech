@@ -1,5 +1,9 @@
 # 검증 원본 증거
 
+- [10-03 웹 푸시 초대 접근 제어](2026-10-03-push-access-gate.json)
+
+- [10-03 로컬 웹 푸시 실제 연동](2026-10-03-local-web-push.json)
+
 - [09-26 공개 배포 검색 계약 검사 요약](2026-09-26-deployed-search-contract.json)
 
 - [09-26 요청별 계측 재검증 집계·발췌](2026-09-26-request-lifecycle-recheck.json)

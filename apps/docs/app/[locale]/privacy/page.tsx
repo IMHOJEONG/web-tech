@@ -39,6 +39,15 @@ export default async function PrivacyPage() {
                     title: t('sections.vendors.title'),
                     body: t('sections.vendors.body'),
                 },
+                ...(process.env.BLOG_PUSH_ENABLED === 'true'
+                    ? [
+                          {
+                              id: 'push',
+                              title: t('sections.push.title'),
+                              body: t('sections.push.body'),
+                          },
+                      ]
+                    : []),
             ]}
         />
     )

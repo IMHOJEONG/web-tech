@@ -61,6 +61,12 @@
 - [09-20 공개 글 독해 검토](content/2026-09-20-content-readability-review.md): 로컬 공개 글 10개의 설명 흐름과 편집 우선순위.
 - [09-20 로컬 콘텐츠 재점검](content/2026-09-20-local-content-review.md): 15개 변환, 이미지 참조, ARIA 본문 중복 확인.
 
+## 웹 푸시
+
+- [10-03 초대 접근 제어](push/2026-10-03-push-access-gate.md): 미인증 BFF 거부·세션 위조/만료·모바일·초대 인증 후 실제 Chrome 수신과 해지. 운영 WAF는 미적용.
+
+- [10-03 로컬 실제 연동](push/2026-10-03-local-web-push.md): Chrome 네이티브 구독·FCM 발송·서비스 워커 수신·알림 생성·해지. OS 배너와 NAS/Vercel은 미검증.
+
 ## 원본 증거
 
 - [10-03 문서 구조화 데이터와 OG 이미지](seo/2026-10-03-article-sharing.md): 프로덕션 빌드·82개 회귀·PNG 응답 검증.

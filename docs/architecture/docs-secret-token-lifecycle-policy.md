@@ -4,7 +4,8 @@
 
 - 상태: 적용 중
 - 대상: docs, docs-backend 및 배포·관측 파이프라인의 credential 관리
-- 최종 검토: 2026-09-22
+- 최종 검토: 2026-10-03
+- 이번 검토 범위: 웹 푸시 실험 credential 추가.
 - 기존 정책 검토: 2026-09-18. 이번 문서 구조 정리는 실제 토큰 회전을 수행했다는 뜻이 아니다.
 
 ## 배경
@@ -45,16 +46,21 @@
 
 ## Token Inventory
 
-| Credential group                | 키 또는 저장 위치                                                                | 용도                                              | 기준 수명주기                                           |
-| ------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------- |
-| Content API read secret         | Vercel `BLOG_CONTENT_API_TOKEN`, NAS `CONTENT_API_TOKEN_FILE`                    | docs 서버가 목록과 본문 API를 읽음                | 90일마다 회전                                           |
-| Revalidation secret             | Vercel `BLOG_CONTENT_REVALIDATE_TOKEN`, NAS `DOCS_CONTENT_REVALIDATE_TOKEN_FILE` | NAS가 Vercel cache tag를 만료                     | 90일마다 회전                                           |
-| Better Stack source token       | `DOCS_BETTER_STACK_SOURCE_TOKEN`                                                 | 구조화 로그 ingest                                | 분기별 검토, 180일 이내 교체 또는 source 재발급         |
-| Better Auth secret              | `BETTER_AUTH_SECRET`                                                             | 인증 기능이 실제 활성화된 경우 서명/암호화        | 사용 여부를 분기별 확인, 활성화 시 180일 이내 계획 교체 |
-| Cloudflare API token            | `CLOUDFLARE_API_TOKEN`                                                           | DNS, Tunnel 또는 배포 자동화가 실제 사용하는 경우 | 만료일을 설정하고 90일 이내 교체                        |
-| GHCR NAS pull credential        | NAS의 `GHCR_READ_TOKEN` 등                                                       | private image pull                                | `read:packages`만 허용하고 90일 이내 만료/재발급        |
-| GitHub Actions token            | workflow의 `GITHUB_TOKEN`                                                        | GHCR image publish 등                             | 실행마다 발급되므로 수동 회전하지 않음                  |
-| Vercel automation bypass secret | Preview 자동 검증을 활성화한 경우의 CI secret                                    | 보호된 Preview 접근                               | 분기별 검토, 노출 또는 소비자 변경 시 즉시 교체         |
+| Credential group                | 키 또는 저장 위치                                                                | 용도                                              | 기준 수명주기                                            |
+| ------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------- | -------------------------------------------------------- |
+| Content API read secret         | Vercel `BLOG_CONTENT_API_TOKEN`, NAS `CONTENT_API_TOKEN_FILE`                    | docs 서버가 목록과 본문 API를 읽음                | 90일마다 회전                                            |
+| Revalidation secret             | Vercel `BLOG_CONTENT_REVALIDATE_TOKEN`, NAS `DOCS_CONTENT_REVALIDATE_TOKEN_FILE` | NAS가 Vercel cache tag를 만료                     | 90일마다 회전                                            |
+| Push subscription API secret    | Vercel `BLOG_PUSH_API_TOKEN`, NAS `PUSH_API_TOKEN_FILE`                          | 웹 푸시 구독 등록/해지                            | 실험 종료 시 폐기, 지속 사용 시 90일마다 회전            |
+| Push administrator secret       | NAS `PUSH_ADMIN_TOKEN_FILE`                                                      | 저장된 단건 구독에 테스트 알림 발송               | 실험 종료 시 폐기, 지속 사용 시 90일마다 회전            |
+| VAPID private key               | NAS `PUSH_VAPID_PRIVATE_KEY_FILE`                                                | 푸시 발송 서버 식별 서명                          | 분기별 접근 검토; 교체는 재구독 계획과 함께 수행         |
+| Push invitation code            | Vercel `BLOG_PUSH_INVITE_CODE`                                                   | 신뢰한 실험 참여자 초대                           | 실험 종료·유출·참여 범위 변경 시 교체; 지속 사용 시 90일 |
+| Push session signing secret     | Vercel `BLOG_PUSH_SESSION_SECRET`                                                | 1시간짜리 참여 세션 서명                          | 실험 종료·유출 시 폐기; 지속 사용 시 90일마다 회전       |
+| Better Stack source token       | `DOCS_BETTER_STACK_SOURCE_TOKEN`                                                 | 구조화 로그 ingest                                | 분기별 검토, 180일 이내 교체 또는 source 재발급          |
+| Better Auth secret              | `BETTER_AUTH_SECRET`                                                             | 인증 기능이 실제 활성화된 경우 서명/암호화        | 사용 여부를 분기별 확인, 활성화 시 180일 이내 계획 교체  |
+| Cloudflare API token            | `CLOUDFLARE_API_TOKEN`                                                           | DNS, Tunnel 또는 배포 자동화가 실제 사용하는 경우 | 만료일을 설정하고 90일 이내 교체                         |
+| GHCR NAS pull credential        | NAS의 `GHCR_READ_TOKEN` 등                                                       | private image pull                                | `read:packages`만 허용하고 90일 이내 만료/재발급         |
+| GitHub Actions token            | workflow의 `GITHUB_TOKEN`                                                        | GHCR image publish 등                             | 실행마다 발급되므로 수동 회전하지 않음                   |
+| Vercel automation bypass secret | Preview 자동 검증을 활성화한 경우의 CI secret                                    | 보호된 Preview 접근                               | 분기별 검토, 노출 또는 소비자 변경 시 즉시 교체          |
 
 표의 주기는 이 저장소의 운영 기준이다. 공급자가 더 짧은 만료 기간을
 강제하면 공급자 기준을 따른다. 사용하지 않는 optional credential은 빈 값으로
@@ -68,6 +74,7 @@
 - `BLOG_CONTENT_*_BASE_URL*`
 - `DOCS_BETTER_STACK_INGESTING_URL`
 - timeout, cache TTL, feature flag
+- `PUSH_VAPID_PUBLIC_KEY` (브라우저 구독에 사용되는 공개 키; private key와 구분)
 
 공개 가능하다는 사실과 임의 변경해도 된다는 뜻은 다르다. 이 값은 일반 배포
 설정으로 계속 관리한다.
@@ -165,6 +172,20 @@ endpoint는 반드시 `POST`와 `Authorization: Bearer`를 사용하며 query st
 token을 넣지 않는다.
 
 ## 공급자 Credential 기준
+
+### 웹 푸시 실험
+
+구독용 토큰과 관리자 발송 토큰은 서로 다른 값으로 생성하며 콘텐츠 읽기·revalidation 토큰을 재사용하지 않는다. Vercel에는 구독용 토큰·초대 코드·세션 서명 키, NAS에는 관리자 토큰과 VAPID private key를 보관한다. 모든 값은 optional 실험 활성화 때만 등록한다.
+
+초대 코드와 세션 서명 키는 각각 독립적인 256-bit 무작위 값으로 생성한다. 초대 코드는 신뢰한 참여자에게만 비공개로 전달하고, 서명 키는 운영자만 보관한다. 코드 확인 API가 알려 주는 정보는 성공 여부뿐이며 코드나 쿠키를 로그로 남기지 않는다. `NEXT_PUBLIC_` 값을 만들지 않는다.
+
+초대 코드 또는 서명 키를 교체하고 Vercel을 재배포하면 이전 세션이 거부된다. 공유 코드에는 개별 참여자 회수 기능이 없으므로 참여 범위 변경 시 전원에게 새 코드를 전달한다. 세션 만료·교체가 NAS 구독을 삭제하지는 않는다. 실험 종료나 구독 접근 철회는 해지·저장소 정리·발송 중단을 별도로 수행한다. `BLOG_PUSH_WAF_VERIFIED`는 비밀값이 아니라 실제 운영 WAF 검증을 확인하는 플래그다.
+
+현재 구현은 old/new 토큰 overlap을 지원하지 않는다. 구독 토큰 회전은 NAS와 Vercel 재배포를 같은 작업 창에서 진행하고, 관리자 토큰 회전은 NAS 재시작과 발송 도구 갱신을 함께 한다. 이전 토큰의 401 거부를 검증한다.
+
+VAPID 키를 API 토큰처럼 정기적으로 임의 교체하지 않는다. 브라우저 구독은 application server 공개 키에 묶이므로 새 키로 바꾸면 재구독 계획이 필요하다. 노출 시 발송을 중단하고 새 키를 발급한 뒤 이전 구독 정리와 참여자 재구독을 수행한다. 저장된 endpoint와 구독 암호화 키도 Git·로그·artifact에 포함하지 않는다.
+
+실행 순서와 실험 종료 정리는 [웹 푸시 runbook](../runbooks/docs-web-push-experiment.md)을 따른다. 시간 기반 구독 자동 만료와 일반 사용자 보관 기간은 아직 구현·확정하지 않았다.
 
 ### GitHub와 GHCR
 

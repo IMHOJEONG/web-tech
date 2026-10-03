@@ -1,0 +1,23 @@
+{
+  "node": "v24.12.0",
+  "stage": "complete",
+  "checks": {
+    "publicConfigOnly": true,
+    "unauthenticatedConfigStatus": 401,
+    "foreignOriginStatus": 403,
+    "invalidSubscriptionStatus": 400,
+    "authorizationBoundaries": true,
+    "syntheticPersistenceAndRestart": true,
+    "chromeVersion": "154.0.8037.95",
+    "nativeSubscription": true,
+    "localNotificationCount": 1,
+    "providerResponseStatus": 200,
+    "providerAccepted": true,
+    "observedPushEvents": 1,
+    "providerNotificationCount": 1,
+    "browserReceivedAndNotificationCreated": true,
+    "nativeUnsubscribe": true,
+    "osBannerAndManualClick": "not-verified",
+    "temporarySecretsRemoved": true
+  }
+}

@@ -20,6 +20,15 @@
 - `P1` 가까운 시일 내 반영 권장
 - `P2` 품질 향상용 중기 과제
 
+## Docs Web Push
+
+- [x] `P1` 웹 푸시 BFF에 초대 세션 접근 제한과 운영 WAF 미확인 시 fail-closed를 추가한다. [ADR-0010](../architecture/adr-0010-web-push-invitation-and-waf-gate.md), [로컬 검증](../verification/push/2026-10-03-push-access-gate.md). 운영 활성화 완료를 의미하지 않는다.
+- [ ] `P0` 웹 푸시 공개 활성화 전 docs 프로젝트의 IP별 10회/60초 WAF를 게시·검증한다. 완료 조건: 로그인 갱신·올바른 프로젝트·기존 revalidation 보호·draft 확인, 초대 API 포함 429 관측과 정상 문서 이용, Production Secure 쿠키 검증. [실행 절차](../runbooks/docs-web-push-experiment.md). 그 전에는 플래그 false 유지.
+
+- [-] `P2` 선택형 웹 푸시 MVP를 검증한다. 구독·해지 UI, NAS 저장, 관리자 테스트 발송 구현. 완료 조건: 내 브라우저 실제 수신/클릭, 재시작 유지, 해지 확인. [ADR](../architecture/adr-0009-docs-web-push-experiment.md), [실행 절차](../runbooks/docs-web-push-experiment.md).
+- [ ] `P2` 일반 사용자 활성화 전에 보관 기간·자동 삭제, 실제 기기 지원, Vercel WAF, VAPID 회전과 DB/큐 필요성을 확정한다.
+- [ ] `P2` 첫 published 전환만 알림으로 연결한다. 단순 수정·revalidation과 분리하고 중복 발송 방지를 검증한다.
+
 ## Shared UI
 
 - [x] `P1` `test:ui`와 `test:ui:consumer`를 CI 독립 matrix에 연결한다. 09-26 작업 트리 반영과 로컬 78개 검증 완료. [검증 기록](../verification/content/2026-09-26-shared-ui-ci.md).
