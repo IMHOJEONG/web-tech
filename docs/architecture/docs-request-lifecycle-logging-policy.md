@@ -4,8 +4,10 @@
 
 - 상태: 제안
 - 대상: `apps/docs`의 document·RSC·API 요청과 해당 요청에서 발생한 서버 오류
-- 최종 검토: 2026-09-24
-- 현재 적용: 로컬 production fixture에 요청별 계측·판정 테스트를 추가했다. 운영 수집·알림과 Vercel 관측 범위는 미구현·미검증이며 전체 정책을 적용한 것은 아니다. [로컬 검증](../verification/cache/2026-09-24-local-request-lifecycle.md)을 참고한다.
+- 최종 검토: 2026-10-03
+- 현재 적용: 로컬 production fixture에 요청별 계측·판정 테스트를 추가했고, 앱 코드에는 요청 ID·작업 시간·서버 오류 이벤트를 부분 반영했다. 운영 알림과 Vercel 관측 범위는 미구현·미검증이며 전체 정책을 적용한 것은 아니다. [로컬 검증](../verification/cache/2026-09-24-local-request-lifecycle.md)을 참고한다.
+
+2026-10-03에 Proxy 발급 ID, 상세·검색 operation span과 `onRequestError` 안전 이벤트를 앱 코드에 추가했다. 전송 종료 계측과 운영 알림은 구현하지 않았다. ADR의 전체 완료/취소 판정은 여전히 제안 상태다. [측정 절차](../runbooks/docs-deployed-performance-measurement.md)의 범위와 한계를 따른다.
 
 ## 배경
 

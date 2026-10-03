@@ -2,6 +2,8 @@
 
 [월별 목록](../README.md)
 
+- [2026-10-03 성능·요청 계측](2026-10-03-docs-performance-observation.md)
+
 - [2026-10-03 웹 푸시 초대 세션과 WAF 활성화 게이트](2026-10-03-web-push-access-gate.md)
 
 - [2026-10-03 Docs 웹 푸시 MVP](2026-10-03-docs-web-push-mvp.md)

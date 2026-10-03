@@ -4,6 +4,52 @@
 
 공개 상세 페이지의 브라우저 로딩을 읽기 전용으로 측정한다. Node.js 24, 설치된 워크스페이스 의존성과 Playwright Chromium이 필요하다. 아래 과거 기준선은 현재 배포의 성능을 보장하지 않는다.
 
+## 실사용 성능과 서버 단계 측정 (2026-10-03)
+
+측정은 세 층으로 구분한다. 서로 다른 지표를 하나의 렌더링 시간으로 합치지 않는다.
+
+| 구분      | 도구                                                                    | 확인할 내용                                                   |
+| --------- | ----------------------------------------------------------------------- | ------------------------------------------------------------- |
+| 실사용자  | Vercel Speed Insights                                                   | 기기·경로별 LCP, INP, CLS의 p75와 표본 수                     |
+| 재현 실험 | Chrome DevTools Performance/Network, Lighthouse, 아래 Playwright 측정기 | waterfall, 긴 작업, 레이아웃 이동과 같은 조건의 반복 측정     |
+| 서버 처리 | Vercel Runtime Logs                                                     | 문서 선택, 원격 조회, 본문 준비, 검색 단계의 경과 시간과 실패 |
+
+### 실사용자 수집 활성화
+
+1. Vercel 프로젝트의 Speed Insights에서 현재 플랜의 할당량·과금 조건을 확인한 뒤 활성화한다. 이 작업에서 계정 설정이나 유료 기능은 변경하지 않았다.
+2. `apps/docs`에 `@vercel/speed-insights`와 root layout의 `PerformanceInsights`가 연결된 배포를 올린다.
+3. 모바일에서 상세와 검색을 이용한 뒤 Dashboard에서 데이터가 수집되는지 확인한다. 수집 지연과 낮은 방문 수를 고려해 표본 수를 함께 기록한다.
+4. 기기·경로와 기간을 같게 맞추고 수정 전후 p75를 비교한다. 단일 Lighthouse 점수나 실험실 3회 중앙값은 실사용자 p75가 아니다.
+
+Speed Insights의 `beforeSend`는 URL의 쿼리·해시·인증정보를 제거하고 API·lab 경로의 이벤트를 제외한다. 공개 글 경로는 남긴다. 브라우저 debug 출력은 껐다. 이는 기존 Web Analytics나 플랫폼 자체 로그까지 정제하는 규칙은 아니다. Dashboard 실제 수집과 비용은 배포 후 확인해야 한다.
+
+### 로컬 진단 순서
+
+1. `mise exec -- pnpm --filter docs build`, 이어서 `mise exec -- pnpm --filter docs exec next start --port 3001`로 production 모드를 확인한다. 같은 체크아웃의 dev/build를 동시에 실행하지 않는다.
+2. DevTools Network에서 상세 또는 `/api/search?q=...` 응답의 `x-docs-request-id`를 확인한다. 검색어·쿠키·Authorization을 복사해 문서에 남기지 않는다.
+3. 터미널 또는 Vercel Logs에서 그 ID와 `[docs.article_timing]`, `[docs.document_selection]`, `[docs.content_source]`, `[docs.runtime]`을 검색한다.
+4. DevTools Performance에서 reload와 검색/필터 입력을 각각 기록한다. 느린 네트워크·CPU 제한을 적용한 실험과 제한 없는 실험을 분리하고 최소 3회 반복한다.
+5. 원격 장애 실험은 아래 production fixture 회귀 검사로 수행하며 실제 NAS를 끄지 않는다.
+
+```sh
+cd apps/docs
+mise exec -- node --experimental-strip-types --test lib/article-timing.test.ts lib/runtime-observation.test.ts
+mise exec -- pnpm exec playwright test --config=playwright.article.config.ts runtime-observation.spec.ts article-detail.spec.ts --project=article-mobile
+```
+
+### 로그 해석과 한계
+
+- Proxy는 들어온 ID를 덮어써 서버 UUID를 발급한다. 상세·검색의 span은 같은 요청 ID로 연결한다. ID는 인증 수단이 아니다.
+- `document-load`는 metadata와 페이지가 공유하는 실제 로더 작업, `document-select`는 페이지의 남은 대기, `remote-detail`은 원격 목록 조회·본문 준비의 합계다. 각 span은 겹칠 수 있으므로 합산하지 않는다.
+- `search-local`, `search-remote`, `search-rank`는 각각 파일/파싱, 원격 목록 대기, 순위 계산이다. 원격 실패가 로컬 fallback으로 복구되어도 원격 span은 error를 기록한다. 캐시 HIT 여부를 이 값으로 추정하지 않는다.
+- sitemap·허브의 공용 검색 로더는 요청 헤더를 읽지 않고 `requestId=null`로 측정한다. 이를 실제 브라우저 요청과 임의 연결하지 않는다.
+- `onRequestError`는 프레임워크가 포착한 서버 오류의 route 템플릿만 추가 기록한다. 원문 오류·본문·토큰·쿼리를 별도 이벤트에 담지 않는다. 기존 Next/콘텐츠 경고 로그 전체를 대체하거나 정제하는 것은 아니다.
+- `durationScope=operation`은 작업 경과 시간이며 CPU 시간·전체 React 렌더링·TTFB·스트림 완료가 아니다. `hook-only` 오류는 시작을 몰라 duration이 null이다.
+- CDN 캐시가 서버 실행을 생략하면 단계 로그가 없을 수 있다. 응답 ID를 모든 캐시 응답의 고유 ID라고 보장하지 않는다. 정적 리소스·OG 이미지는 대상이 아니다.
+- 프로세스 강제 종료·브라우저 취소·클라이언트 오류가 모두 `onRequestError`에 기록된다고 보장하지 않는다. 전송 완료/취소 판정은 기존 fixture와 플랫폼 증거가 필요하다. Preview 검증은 남아 있다.
+
+공식 근거: [Speed Insights 설정](https://vercel.com/docs/speed-insights/package), [한도와 과금](https://vercel.com/docs/speed-insights/limits-and-pricing), [Next instrumentation](https://nextjs.org/docs/app/api-reference/file-conventions/instrumentation).
+
 ## 기대 결과
 
 실행이 끝나면 JSON에 Navigation Timing·LCP·CLS·본문 hash가 기록된다. 표본 조건이 다른 결과를 직접적인 성능 개선으로 해석하지 않는다.

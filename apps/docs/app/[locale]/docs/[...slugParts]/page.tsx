@@ -8,7 +8,7 @@ import {
 } from '~/shared/i18n/locale-path'
 import { cache, Suspense } from 'react'
 import { RemoteCodeCopyEnhancer } from '~/feature/code-block/ui/remote-code-copy-enhancer'
-import { createArticleTiming } from '~/lib/article-timing'
+import { getRequestObservation } from '~/lib/request-observation'
 import { buildArticleMetadata } from '~/lib/localized-metadata'
 import {
     getDocHref,
@@ -22,7 +22,10 @@ import { ArticleContentLayout } from '~/widgets/article-detail/ui/article-conten
 import { ArticleSupplementary } from '~/widgets/article-detail/ui/article-supplementary'
 import { ArticleStructuredData } from '~/widgets/article-detail/ui/article-structured-data'
 
-const getCachedDocByRoutePath = cache(getDocByRoutePath)
+const getCachedDocByRoutePath = cache(async (routePath: string) => {
+    const { measure } = await getRequestObservation()
+    return measure('document-load', () => getDocByRoutePath(routePath, measure))
+})
 
 export async function generateMetadata({
     params,
@@ -45,11 +48,19 @@ export default async function Page({
 }: {
     params: Promise<{ slugParts: string[] }>
 }) {
-    const measure = createArticleTiming()
+    const { measure, requestId } = await getRequestObservation()
     const { slugParts } = await params
     const routePath = slugParts.join('/')
     const target = await measure('document-select', () =>
         getCachedDocByRoutePath(routePath)
+    )
+    console.info(
+        '[docs.document_selection]',
+        JSON.stringify({
+            requestId,
+            source: target?.contentSource ?? (target ? 'local' : 'none'),
+            outcome: target ? 'found' : 'missing',
+        })
     )
 
     if (!target) {

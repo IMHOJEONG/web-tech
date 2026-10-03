@@ -18,6 +18,9 @@ import {
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { rankSearchDocs } from '~/lib/search-ranking'
 import { normalizeSearchQuery } from '~/shared/lib/search-query'
+import { getRequestObservation } from '~/lib/request-observation'
+import { createArticleTiming } from '~/lib/article-timing'
+import type { ArticleTimingMeasure } from '~/lib/article-timing.types'
 export interface SearchData {
     readonly id: string
     readonly title?: string
@@ -155,9 +158,9 @@ async function getLocalSearchDocs() {
     return sortByDateDesc(docs)
 }
 
-async function getRemoteSearchDocs() {
+async function getRemoteSearchDocs(measure: ArticleTimingMeasure) {
     try {
-        const remoteDocs = await fetchRemoteDocsData()
+        const remoteDocs = await measure('search-remote', fetchRemoteDocsData)
 
         if (!remoteDocs) {
             return []
@@ -193,20 +196,25 @@ function mergeSearchDocs(localDocs: SearchData[], remoteDocs: SearchData[]) {
 
 type SearchDataOptions = {
     includeRemote?: boolean
+    observeRequest?: boolean
 }
 
 export async function getSearchData(
     keyword?: string,
     options: SearchDataOptions = {}
 ): Promise<SearchData[]> {
-    const localDocs = await getLocalSearchDocs()
+    const { measure, requestId } = options.observeRequest
+        ? await getRequestObservation()
+        : { measure: createArticleTiming(), requestId: null }
+    const localDocs = await measure('search-local', getLocalSearchDocs)
     const includeRemote =
         options.includeRemote ?? shouldIncludeRemoteContentIndex()
-    const remoteDocs = includeRemote ? await getRemoteSearchDocs() : []
+    const remoteDocs = includeRemote ? await getRemoteSearchDocs(measure) : []
     const docs = sortByDateDesc(mergeSearchDocs(localDocs, remoteDocs))
     const normalizedKeyword = normalizeSearchQuery(keyword).toLowerCase()
 
     logContentSource({
+        requestId,
         area: 'search',
         source: resolveCollectionContentSource(
             localDocs.length,
@@ -226,5 +234,5 @@ export async function getSearchData(
         return docs
     }
 
-    return rankSearchDocs(docs, normalizedKeyword)
+    return measure('search-rank', () => rankSearchDocs(docs, normalizedKeyword))
 }

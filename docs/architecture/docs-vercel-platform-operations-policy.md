@@ -144,7 +144,7 @@ INP 회귀를 확인하는 데 유용하다.
 4. Production과 Preview를 분리해 최소 일주일간 측정한다.
 5. 데이터 사용량이 크면 `sampleRate`를 낮춘다.
 
-현재는 정책 후보이며 패키지와 컴포넌트는 아직 추가하지 않는다.
+2026-10-03 `apps/docs`에만 패키지와 root layout 컴포넌트를 추가했다. URL 쿼리·해시 제거 및 debug 비활성화를 적용했다. 계정에서 활성화·할당량 확인·Production/Preview 실제 수집은 아직 수행하지 않았다. [측정 절차](../runbooks/docs-deployed-performance-measurement.md)를 따른다.
 
 ### 6. Function Region Near The NAS
 

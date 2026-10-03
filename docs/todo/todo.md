@@ -29,6 +29,10 @@
 - [ ] `P2` 일반 사용자 활성화 전에 보관 기간·자동 삭제, 실제 기기 지원, Vercel WAF, VAPID 회전과 DB/큐 필요성을 확정한다.
 - [ ] `P2` 첫 published 전환만 알림으로 연결한다. 단순 수정·revalidation과 분리하고 중복 발송 방지를 검증한다.
 
+## Docs Performance
+
+- [-] `P1` Docs 성능·요청 계측을 도입한다. Speed Insights·서버 발급 ID·상세/검색 단계 로그 구현 및 로컬 production 검증. 완료 조건: Vercel 할당량 확인·활성화, Preview ID 상관관계 검증, 모바일 실제 표본 수와 p75 기록. [측정 절차](../runbooks/docs-deployed-performance-measurement.md).
+
 ## Shared UI
 
 - [x] `P1` `test:ui`와 `test:ui:consumer`를 CI 독립 matrix에 연결한다. 09-26 작업 트리 반영과 로컬 78개 검증 완료. [검증 기록](../verification/content/2026-09-26-shared-ui-ci.md).

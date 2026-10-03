@@ -3,6 +3,7 @@ import path from 'path'
 import { cache } from 'react'
 import { parseLocalDocument } from './local-document-parser'
 import type { Metadata } from './document.types'
+import type { ArticleTimingMeasure } from './article-timing.types'
 export type { Metadata, ContentFormat, ContentSource } from './document.types'
 import {
     fetchRemoteDocByRoutePath,
@@ -181,7 +182,10 @@ export async function getSortedPostsData(options: DocsDataOptions = {}) {
     })
 }
 
-export async function getDocByRoutePath(routePath: string) {
+export async function getDocByRoutePath(
+    routePath: string,
+    measure?: ArticleTimingMeasure
+) {
     const localDoc = getLocalDocsData().find((doc) =>
         isDocRouteMatch(doc, routePath)
     )
@@ -189,7 +193,11 @@ export async function getDocByRoutePath(routePath: string) {
 
     if (includeRemote) {
         try {
-            const remoteDoc = await fetchRemoteDocByRoutePath(routePath)
+            const remoteDoc = await (measure
+                ? measure('remote-detail', () =>
+                      fetchRemoteDocByRoutePath(routePath)
+                  )
+                : fetchRemoteDocByRoutePath(routePath))
 
             if (remoteDoc) {
                 logContentSource({

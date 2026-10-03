@@ -162,7 +162,7 @@
                 },
                 "vendors": {
                     "title": "Supporting services",
-                    "body": "Deployment infrastructure, image asset hosting, and remote content APIs may all participate in serving the docs experience. Retention windows and lower-level handling depend on the infrastructure operating each layer."
+                    "body": "Deployment infrastructure, image asset hosting, and remote content APIs may all participate in serving the docs experience. Vercel Web Analytics and Speed Insights help us understand visits and page performance. URLs sent to Speed Insights have query parameters, including search terms, and fragments removed. Retention windows and detailed handling follow each service's policies."
                 },
                 "push": {
                     "title": "Optional web push experiment",

@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation'
 import { isLocale, locales } from '~/shared/i18n/locale-path'
 
 import { Analytics } from '@vercel/analytics/next'
+import { PerformanceInsights } from '~/widgets/app-shell/ui/performance-insights'
 import { cn } from '@web-tech/ui/lib/utils'
 import { getMetadataBase } from '~/lib/seo'
 import { mono, pretendard, spaceGrotesk } from '~/shared/config/fonts'
@@ -96,6 +97,7 @@ export default async function Layout({
                     <Footer />
                     <MobileBottomNav />
                     <Analytics />
+                    <PerformanceInsights />
                 </body>
             </NextIntlClientProvider>
             <Script id="tailwindcss-dark-mode">

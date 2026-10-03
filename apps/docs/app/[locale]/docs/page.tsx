@@ -63,8 +63,12 @@ async function DocsResults({ searchParams }: Props) {
         section: firstSearchParam(section),
         sort: firstSearchParam(sort),
     })
-    const docs = keyword ? [] : await getSearchData()
-    const searchResults = keyword ? await getSearchData(keyword) : []
+    const docs = keyword
+        ? []
+        : await getSearchData(undefined, { observeRequest: true })
+    const searchResults = keyword
+        ? await getSearchData(keyword, { observeRequest: true })
+        : []
     const pageState = resolveDocsSearchPageState({
         query: keyword,
         docs,
