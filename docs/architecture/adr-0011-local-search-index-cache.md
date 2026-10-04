@@ -5,8 +5,8 @@
 - 상태: 적용 중
 - 대상: docs 로컬 검색 인덱스와 인증된 게시 갱신 웹훅
 - 결정일: 2026-10-03
-- 최종 검토: 2026-10-03
-- 로컬 production 검증 완료. Vercel 배포·NAS 게시 검증은 미완료.
+- 최종 검토: 2026-10-04
+- 로컬 production 검증 완료. Vercel 배포·검색 반복 조회·정상 웹훅 후 재조회 확인. NAS 원문 변경에 따른 게시 갱신은 미완료.
 
 ## 배경
 
@@ -40,4 +40,5 @@ TTL은 즉시 갱신 보장이 아니다. 시간 만료는 stale 응답 후 갱�
 - [콘텐츠 캐시 정책](docs-content-cache-revalidation-policy.md)
 - [production 검사 절차](../runbooks/docs-content-cache-production-test.md)
 - [검증 결과](../verification/cache/2026-10-03-local-search-index-cache.md)
+- [배포 환경 관측](../verification/cache/2026-10-04-deployed-search-index-cache.md)
 - [작업 기록](../worklog/2026-10/2026-10-03-local-search-index-cache.md)

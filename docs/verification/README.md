@@ -35,6 +35,8 @@
 
 ## 캐시와 정적 셸
 
+- [10-04 배포 검색 인덱스 캐시](cache/2026-10-04-deployed-search-index-cache.md): 새 Production SHA·검색 5회와 Runtime Logs, 미인증 웹훅 401. NAS 게시 갱신은 미검증.
+
 - [09-27 docs CI 로그 재검토](cache/2026-09-27-docs-ci-log-review.md): 같은 SHA의 CI·배포 성공과 별개로 남은 hydration 및 스트림 종료 경고를 분리했다.
 
 - [09-26 로컬 요청 계측 재검증](cache/2026-09-26-request-lifecycle-recheck.md): 80개 회귀 통과, prefetch 스트림 오류 2건의 요청 연결 재확인과 unknown 유지.

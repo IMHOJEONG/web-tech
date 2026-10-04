@@ -6,6 +6,8 @@
 
 - [공용 UI 외부 설치 계약](2026-10-04-shared-ui-package.md)
 
+- [2026-10-04 검색 인덱스 캐시 배포 검증](2026-10-04-deployed-search-index-cache.md)
+
 - [2026-10-03 Docs 캐시 구조 설명](2026-10-03-docs-cache-structure-guide.md)
 
 - [2026-10-03 로컬 검색 인덱스 캐시](2026-10-03-local-search-index-cache.md)

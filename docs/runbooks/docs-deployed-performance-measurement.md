@@ -41,7 +41,7 @@ mise exec -- pnpm exec playwright test --config=playwright.article.config.ts run
 
 - Proxy는 들어온 ID를 덮어써 서버 UUID를 발급한다. 상세·검색의 span은 같은 요청 ID로 연결한다. ID는 인증 수단이 아니다.
 - `document-load`는 metadata와 페이지가 공유하는 실제 로더 작업, `document-select`는 페이지의 남은 대기, `remote-detail`은 원격 목록 조회·본문 준비의 합계다. 각 span은 겹칠 수 있으므로 합산하지 않는다.
-- `search-local`, `search-remote`, `search-rank`는 각각 파일/파싱, 원격 목록 대기, 순위 계산이다. 원격 실패가 로컬 fallback으로 복구되어도 원격 span은 error를 기록한다. 캐시 HIT 여부를 이 값으로 추정하지 않는다.
+- `search-local`, `search-remote`, `search-rank`는 각각 로컬 인덱스 캐시 조회 또는 파일/파싱, 원격 목록 대기, 순위 계산이다. 원격 실패가 로컬 fallback으로 복구되어도 원격 span은 error를 기록한다. 캐시 HIT 여부를 시간만으로 추정하지 않는다. `[docs.search_index_build]`는 실제 생성 때만 출력되지만 로그 누락·지연 가능성이 있으므로 응답과 함께 대조한다.
 - sitemap·허브의 공용 검색 로더는 요청 헤더를 읽지 않고 `requestId=null`로 측정한다. 이를 실제 브라우저 요청과 임의 연결하지 않는다.
 - `onRequestError`는 프레임워크가 포착한 서버 오류의 route 템플릿만 추가 기록한다. 원문 오류·본문·토큰·쿼리를 별도 이벤트에 담지 않는다. 기존 Next/콘텐츠 경고 로그 전체를 대체하거나 정제하는 것은 아니다.
 - `durationScope=operation`은 작업 경과 시간이며 CPU 시간·전체 React 렌더링·TTFB·스트림 완료가 아니다. `hook-only` 오류는 시작을 몰라 duration이 null이다.

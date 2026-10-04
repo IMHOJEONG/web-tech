@@ -1,0 +1,167 @@
+[
+  {
+    "sample": 1,
+    "query": "React",
+    "status": 200,
+    "httpMs": 2393.75,
+    "count": 3,
+    "uniqueHrefs": 3,
+    "cache": "MISS",
+    "timings": [
+      {
+        "stage": "search-local",
+        "outcome": "success",
+        "durationMs": 259.88
+      },
+      {
+        "stage": "search-remote",
+        "outcome": "success",
+        "durationMs": 82.61
+      },
+      {
+        "stage": "search-rank",
+        "outcome": "success",
+        "durationMs": 14.84
+      }
+    ],
+    "counts": {
+      "localCount": 10,
+      "remoteCount": 1,
+      "totalCount": 11
+    },
+    "indexBuildMessages": 1,
+    "expectedDeployment": true
+  },
+  {
+    "sample": 2,
+    "query": "accessibility",
+    "status": 200,
+    "httpMs": 946.77,
+    "count": 1,
+    "uniqueHrefs": 1,
+    "cache": "MISS",
+    "timings": [
+      {
+        "stage": "search-local",
+        "outcome": "success",
+        "durationMs": 7.14
+      },
+      {
+        "stage": "search-remote",
+        "outcome": "success",
+        "durationMs": 6.31
+      },
+      {
+        "stage": "search-rank",
+        "outcome": "success",
+        "durationMs": 4.86
+      }
+    ],
+    "counts": {
+      "localCount": 10,
+      "remoteCount": 1,
+      "totalCount": 11
+    },
+    "indexBuildMessages": 0,
+    "expectedDeployment": true
+  },
+  {
+    "sample": 3,
+    "query": "React",
+    "status": 200,
+    "httpMs": 289.45,
+    "count": 3,
+    "uniqueHrefs": 3,
+    "cache": "MISS",
+    "timings": [
+      {
+        "stage": "search-local",
+        "outcome": "success",
+        "durationMs": 5.94
+      },
+      {
+        "stage": "search-remote",
+        "outcome": "success",
+        "durationMs": 14.24
+      },
+      {
+        "stage": "search-rank",
+        "outcome": "success",
+        "durationMs": 0.8
+      }
+    ],
+    "counts": {
+      "localCount": 10,
+      "remoteCount": 1,
+      "totalCount": 11
+    },
+    "indexBuildMessages": 0,
+    "expectedDeployment": true
+  },
+  {
+    "sample": 4,
+    "query": "rendering",
+    "status": 200,
+    "httpMs": 307.71,
+    "count": 2,
+    "uniqueHrefs": 2,
+    "cache": "MISS",
+    "timings": [
+      {
+        "stage": "search-local",
+        "outcome": "success",
+        "durationMs": 9.64
+      },
+      {
+        "stage": "search-remote",
+        "outcome": "success",
+        "durationMs": 5.58
+      },
+      {
+        "stage": "search-rank",
+        "outcome": "success",
+        "durationMs": 0.77
+      }
+    ],
+    "counts": {
+      "localCount": 10,
+      "remoteCount": 1,
+      "totalCount": 11
+    },
+    "indexBuildMessages": 0,
+    "expectedDeployment": true
+  },
+  {
+    "sample": 5,
+    "query": "React",
+    "status": 200,
+    "httpMs": 472.98,
+    "count": 3,
+    "uniqueHrefs": 3,
+    "cache": "MISS",
+    "timings": [
+      {
+        "stage": "search-local",
+        "outcome": "success",
+        "durationMs": 5.79
+      },
+      {
+        "stage": "search-remote",
+        "outcome": "success",
+        "durationMs": 7.69
+      },
+      {
+        "stage": "search-rank",
+        "outcome": "success",
+        "durationMs": 0.83
+      }
+    ],
+    "counts": {
+      "localCount": 10,
+      "remoteCount": 1,
+      "totalCount": 11
+    },
+    "indexBuildMessages": 0,
+    "expectedDeployment": true
+  }
+]
