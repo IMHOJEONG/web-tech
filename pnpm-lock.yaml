@@ -1072,9 +1072,6 @@ importers:
       '@emotion/styled':
         specifier: catalog:ui
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6)
-      '@tailwindcss/postcss':
-        specifier: 'catalog:'
-        version: 4.2.4
       class-variance-authority:
         specifier: catalog:ui
         version: 0.7.1
@@ -1090,21 +1087,12 @@ importers:
       motion:
         specifier: catalog:ui
         version: 12.38.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      postcss:
-        specifier: '>=8.5.23'
-        version: 8.5.26
-      react:
-        specifier: 'catalog:'
-        version: 19.2.6
       react-icons:
         specifier: ^5.5.0
         version: 5.6.0(react@19.2.6)
       recharts:
         specifier: catalog:ui
         version: 3.8.1(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react-is@18.3.1)(react@19.2.6)(redux@5.0.1)
-      tailwindcss:
-        specifier: 'catalog:'
-        version: 4.2.4
       tw-animate-css:
         specifier: 'catalog:'
         version: 1.4.0
@@ -1115,6 +1103,9 @@ importers:
       '@eslint/js':
         specifier: 'catalog:'
         version: 9.39.4
+      '@tailwindcss/postcss':
+        specifier: 'catalog:'
+        version: 4.2.4
       '@turbo/gen':
         specifier: ^2.8.8
         version: 2.9.7(@types/node@24.13.4)
@@ -1142,6 +1133,18 @@ importers:
       eslint:
         specifier: 'catalog:'
         version: 9.39.4(jiti@2.6.1)
+      postcss:
+        specifier: '>=8.5.23'
+        version: 8.5.26
+      react:
+        specifier: 'catalog:'
+        version: 19.2.6
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.6(react@19.2.6)
+      tailwindcss:
+        specifier: 'catalog:'
+        version: 4.2.4
       typescript:
         specifier: 'catalog:'
         version: 6.0.3

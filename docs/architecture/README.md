@@ -20,6 +20,8 @@
 
 새 결정의 작성·대체 규칙은 [ADR 관리 규칙](../process/adr-management.md)을 참고합니다.
 
+- [ADR-0013: 공용 UI 외부 설치 계약](adr-0013-shared-ui-external-package.md): 적용 중. React peer·CSS export·tarball 검증, registry 게시와 실제 외부 앱 이전 미실행.
+
 - [ADR-0012: 공개 글 기반 탐색 모음](adr-0012-content-discovery-collections.md): 적용 중. 태그 query·시리즈/학습 경로, 운영 배포 미검증.
 
 - [ADR-0011: 로컬 검색 인덱스 재사용](adr-0011-local-search-index-cache.md): 적용 중. 독립 태그·빌드 digest·웹훅 만료, 격리 production 검증 완료·Vercel 미배포.

@@ -73,6 +73,8 @@ Base UI 1.8.0으로 구성한 우리 Tooltip fixture에서 Popup의 `role="toolt
 
 ## 관련 문서
 
+- [외부 소비 계약과 tarball 검증](adr-0013-shared-ui-external-package.md): Node/React/Tailwind 지원 범위, 스타일·버전 기준. 실제 외부 소비처 이전은 별도다.
+
 - [shadcn의 Base UI 기본값 정책](https://ui.shadcn.com/docs/changelog/2026-07-base-ui-default)
 - [Base UI Dialog: 포커스와 Popup API](https://base-ui.com/react/components/dialog)
 - [Base UI Tooltip: Provider와 Positioner](https://base-ui.com/react/components/tooltip)

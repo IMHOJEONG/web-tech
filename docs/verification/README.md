@@ -2,6 +2,8 @@
 
 - [10-04 태그·읽기 모음](content/2026-10-04-content-discovery.md): 태그·모음과 반응형 탐색 검증. 운영 혼합 목록 미검증.
 
+- [10-04 공용 UI 외부 설치](content/2026-10-04-shared-ui-package.md): 독립 tarball·테마·포커스 검증. registry 게시·실제 외부 앱 미검증.
+
 실제로 실행한 시험과 측정 결과를 보관합니다. 현재 정책은 [architecture](../architecture/README.md), 실행 절차는 [runbooks](../runbooks/README.md), 구현 변경 이력은 [worklog](../worklog/README.md)에서 확인합니다.
 
 ## 성능과 화면 안정성

@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": ".",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "declarationMap": false
   },
   "include": [
     "common/**/*.ts",
@@ -14,10 +15,5 @@
     "layout/**/*.tsx",
     "lib/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "dist-temp",
-    "turbo"
-  ]
+  "exclude": ["node_modules", "dist", "dist-temp", "turbo"]
 }

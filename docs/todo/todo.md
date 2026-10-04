@@ -35,6 +35,9 @@
 
 ## Shared UI
 
+- [x] `P2` UI React peer·CSS/hook export·0.1.x 버전 기준과 독립 tarball 검사를 추가했다. [ADR-0013](../architecture/adr-0013-shared-ui-external-package.md). registry 게시와 실제 외부 앱 이전은 완료가 아니다.
+- [ ] `P2` 외부 소비 앱 한 곳에서 tarball·RSC·PostCSS·토큰 충돌을 확인하고 registry·인증·자동 배포 정책을 확정한다.
+
 - [x] `P1` `test:ui`와 `test:ui:consumer`를 CI 독립 matrix에 연결한다. 09-26 작업 트리 반영과 로컬 78개 검증 완료. [검증 기록](../verification/content/2026-09-26-shared-ui-ci.md).
 - [x] `P1` 공용 UI matrix를 push한 뒤 동일 SHA의 GitHub Actions 두 check 통과를 확인한다. `5dbbcc5`의 두 Shared UI 작업이 성공했다. required checks 등록은 별도 설정이다. [원격 검증](../verification/cache/2026-09-27-docs-ci-log-review.md).
 
