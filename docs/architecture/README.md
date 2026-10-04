@@ -34,6 +34,8 @@
 
 ## 설계·정책 목록
 
+- [서비스 복구와 배포 안전 정책](platform-recovery-policy.md): 제안. RTO/RPO와 백업·롤백·리허설 기준, 운영 적용 미검증.
+
 - [Docs 요청 생명주기 로그 정책](docs-request-lifecycle-logging-policy.md)
 
 아래 일반 정책 전체의 최신성을 이번 ADR 점검에서 검증한 것은 아니다. 관련 작업을 할 때 각 문서의 적용 범위·상태·검토일을 실제 코드와 대조한다.

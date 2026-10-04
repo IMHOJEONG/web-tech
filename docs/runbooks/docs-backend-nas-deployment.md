@@ -331,6 +331,8 @@ curl --fail \
 
 ## Update And Rollback
 
+복구 목표·백업 보관·중단 기준은 [서비스 복구 정책](../architecture/platform-recovery-policy.md)을 따른다. 현재는 단일 컨테이너 교체로, 무중단 롤링 배포가 아니다. 실제 운영 적용 전 [격리 리허설](platform-recovery-drill.md)에서 이전 digest와 콘텐츠 호환성을 확인한다.
+
 업데이트 전 content volume을 별도로 백업한다. 운영에서는 immutable GHCR 이미지를 pull하고 콘텐츠는 read-only volume으로 유지한다.
 
 ```bash

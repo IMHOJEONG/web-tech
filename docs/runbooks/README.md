@@ -6,6 +6,8 @@
 
 - [Docs 웹 푸시 실험](docs-web-push-experiment.md)
 
+- [서비스 복구 리허설](platform-recovery-drill.md)
+
 - [Next.js 활용 점검 체크리스트](docs-nextjs-usage-checklist.md)
 - [Content API 인증/장애 대응 운영 Runbook](content-api-auth-ops-runbook.md)
 - [상세 문서 렌더링 회귀 테스트](docs-article-rendering-regression.md)

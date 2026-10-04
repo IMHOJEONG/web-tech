@@ -29,9 +29,15 @@
 - [ ] `P2` 일반 사용자 활성화 전에 보관 기간·자동 삭제, 실제 기기 지원, Vercel WAF, VAPID 회전과 DB/큐 필요성을 확정한다.
 - [ ] `P2` 첫 published 전환만 알림으로 연결한다. 단순 수정·revalidation과 분리하고 중복 발송 방지를 검증한다.
 
-## Docs Performance
+## Recovery / Operations
 
 - [-] `P1` Docs 성능·요청 계측을 도입한다. Speed Insights·서버 발급 ID·상세/검색 단계 로그 구현 및 로컬 production 검증. 완료 조건: Vercel 할당량 확인·활성화, Preview ID 상관관계 검증, 모바일 실제 표본 수와 p75 기록. [측정 절차](../runbooks/docs-deployed-performance-measurement.md).
+
+- [x] `P1` 복구 목표·롤백·백업 보관·격리 리허설 기준을 문서화했다. [정책](../architecture/platform-recovery-policy.md)은 제안 상태이며 운영 적용과 구분한다.
+- [ ] `P1` RTO/RPO 초안을 승인하고 NAS·DB의 백업 저장 위치, 주기, 암호화 키 복구 및 실패 알림을 설정한다. 완료 조건: 실제 성공 백업 식별자·보관 설정·알림 수신 기록 확보. 비밀값은 기록하지 않는다.
+- [ ] `P1` 콘텐츠와 PostgreSQL의 첫 격리 복구 리허설을 실행한다. 완료 조건: [절차](../runbooks/platform-recovery-drill.md)에 따라 데이터·권한·API와 실제 RTO/RPO를 검증 보고서에 기록한다.
+- [ ] `P1` 프론트 이전 deployment와 NAS 이전 digest 복귀를 격리 환경에서 검증한다. 완료 조건: 주요 사용자 동작·스키마 호환성·15분 관찰 통과. Production 장애를 임의로 유발하지 않는다.
+- [ ] `P2` 실제 복구 결과로 롤링 배포·DB 이중화/PITR 필요성을 결정한다. 완료 조건: 중단 허용 시간·복제 지연·트래픽 전환·데이터 손실·운영 비용 비교와 실패 복귀 실험. 기능 제공 여부만으로 완료 처리하지 않는다.
 
 ## Shared UI
 

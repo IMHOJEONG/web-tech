@@ -173,6 +173,8 @@ Bearer token을 custom event로 보내지 않는다.
 
 ### Instant Rollback
 
+복구 목표·판단 기준과 데이터 복원 경계는 [서비스 복구 정책](platform-recovery-policy.md)에 정리한다. 목표 수치는 제안 상태이며 Dashboard 적용·실제 복구 리허설 성공과 구분한다.
+
 Production 배포 후 5xx, hydration 오류 또는 주요 route 회귀가 발생하면
 Production Deployment의 `Instant Rollback`을 우선 복구 수단으로 사용한다.
 Hobby는 바로 이전 Production deployment, 상위 plan은 더 많은 eligible
