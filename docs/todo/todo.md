@@ -20,6 +20,51 @@
 - `P1` 가까운 시일 내 반영 권장
 - `P2` 품질 향상용 중기 과제
 
+## 2026-10-04 실행 우선순위
+
+현재 `feature/docs` 코드와 검증 기록을 대조한 실행 목록이다. 최근 작업의 중심은 docs·docs-backend이며, 공용 UI와 vuln-radar 후속 과제도 구분해 포함한다. Dashboard·NAS 설정은 문서만으로 적용을 확정하지 않는다. 기존 세부 백로그는 아래에 보존한다.
+
+### 현재 기준선
+
+- 로컬·원격 콘텐츠 계약과 본문 검증, 장애 시 로컬 fallback, 검색 입력·이동 규칙, 카드 재사용, CI와 공용 UI 테스트가 구현되어 있다.
+- 로컬 검색 인덱스 캐시는 배포 후 반복 조회와 정상 웹훅 후 재조회를 확인했다. NAS 원문 변경에 따른 새 버전 반영은 미검증이다. [배포 증거](../verification/cache/2026-10-04-deployed-search-index-cache.md).
+- 웹 푸시는 초대 접근 제한·구독/해지·관리자 발송 MVP까지 구현했다. 기본 비활성화이며 실제 기기 수신과 운영 활성화는 남아 있다.
+- 구조화 데이터와 제목 기반 OG 이미지, 성능·요청 단계 계측이 구현되어 있다. 검색 서비스 반영·실기기 성능·요청 오류 상관관계 검증은 별도다.
+- 복구 정책은 제안 상태다. NAS 한 대에서 외부 백업·격리 복원·이전 이미지 복귀를 먼저 검증한다.
+
+### 먼저 닫을 개발·운영 과제
+
+| 순서 | 우선순위  | 작업                      | 완료 기준과 근거                                                                                                                                                                                                       |
+| ---- | --------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | P1        | NAS 게시 갱신의 실제 검증 | 접근 가능한 테스트 문서에서 V1→V2 변경, 정상 웹훅, 목록·검색·상세의 새 버전 확인, 원복까지 기록. 웹훅 200과 발행 성공을 구분. [미검증 범위](../verification/cache/2026-10-04-deployed-search-index-cache.md#남은-범위) |
+| 2    | P1        | NAS 외부 백업과 복원      | Markdown·이미지·설정의 복구 범위를 정하고 NAS 밖에 백업을 보관. 성공/실패 알림과 격리 복원 결과, 실제 RTO/RPO 기록. DB는 별도 복원. [정책](../architecture/platform-recovery-policy.md)                                |
+| 3    | P0 조건부 | 운영 보안 게이트 확인     | 웹 푸시 공개 활성화 전 WAF·초대 세션·429·해지·Production 쿠키 검사. 기존 revalidation 보호도 확인. 현재 플래그 유지. [푸시 절차](../runbooks/docs-web-push-experiment.md)                                              |
+| 4    | P1        | 게시 검증 도구 보강       | 캐시 만료 후 기대한 문서 버전/내용을 검사하고 실패 시 종료 코드로 알림. 로컬·원격 게시 경로와 로그의 비밀값 제외 검사. 아래 Code / Architecture 과제 참조                                                              |
+| 5    | P1        | 성능과 오류 관측 완결     | 현재 구현으로 Production 실기기 표본·p75, 요청 ID와 단계 로그, prefetch/실제 탐색 구분, 외부 API 실패·백업 실패 알림을 확인. [측정 절차](../runbooks/docs-deployed-performance-measurement.md)                         |
+| 6    | P1        | 실제 브라우저·접근성 검사 | Safari/Firefox, 실제 모바일·태블릿, OS IME, VoiceOver/NVDA에서 검색·Drawer·Tooltip·회전·스크롤·포커스 확인. 재현된 결함을 개별 수정하며 기존 headless 성공과 구분                                                      |
+| 7    | P2        | 캐시 경계 추가 검사       | TTL 만료, 동시 cold 요청, 로컬 글이 바뀐 재배포, 원격 장애→복구를 검증. corpus가 커질 때 경로별 무효화와 인덱스 엔진 재검토. [ADR-0011](../architecture/adr-0011-local-search-index-cache.md)                          |
+
+1번의 NAS 연결 준비와 2번의 백업 목적지 설정이 필요한 동안 4번 개발·6번 로컬 검사를 진행할 수 있다. P0 조건부는 공개 활성화의 선행 조건이며 현재 악용·장애를 관측했다는 뜻은 아니다.
+
+### 사용자에게 추가할 기능
+
+- **웹 푸시 완성:** 실제 내 기기의 구독·수신·클릭·해지와 NAS 재시작 유지부터 검증한다. 그 다음 published 최초 전환 감지, 중복 발송 방지, 만료 구독 정리와 재시도 기록을 추가한다. 현 파일 저장소는 단일 프로세스·20개 제한이므로 공개 확장 전 저장/큐 전략을 결정한다.
+- **콘텐츠 탐색:** 인덱스 태그와 편집된 시리즈·학습 경로의 1차 구현은 아래 ADR-0012를 따른다. Mobile 실내용, 배포 혼합 목록 검사, 허브·관련 글의 분류 일관성은 후속 과제다.
+- **공유 품질:** 실제 공유 미리보기의 제목·이미지·canonical, 검색 서비스의 구조화 데이터 검증을 완료한다. 코드 구현 완료와 외부 서비스 반영을 구분한다.
+- **읽기 경험:** 빈/로딩/오류 화면의 복구 동작, 첫 화면 이미지의 eager/lazy 기준, 키보드와 모바일 읽기 동작을 다듬는다. 이미 있는 관련 글·이전/다음·수정일은 회귀 검사로 유지한다. 문의/뉴스레터 제거 결정을 유지하며 feedback은 별도 제품 판단이 필요하다.
+
+### 공용 패키지와 다른 앱
+
+- **공용 UI 외부 소비 준비:** peer 의존성·CSS export·버전과 tarball fixture의 타입·CSS·SSR·테마·포커스 1차 검증은 ADR-0013에 반영했다. 실제 외부 소비 앱과 registry 결정은 남아 있다. Base UI 전환과 외부 배포 준비는 별개다. [ADR-0006](../architecture/adr-0006-shared-ui-base-ui.md).
+- **vuln-radar 기본선 재점검:** 앱별 개발 브랜치에서 실제 모듈·테스트와 [학습 TODO](../../apps/vuln-radar-backend/todo.md)를 대조한다. watchlist와 health·scoring·scheduler 테스트가 이미 있으므로 unchecked 목록을 그대로 미구현으로 간주하지 않는다.
+- **vuln-radar 후속 개발:** DB 환경 분리·migration/복원, source별 freshness·retry/backoff·실패 기록을 우선 점검한다. scheduler 중복 방지는 현재 프로세스 내부이므로 replica 증가 전 공유 실행 제어를 설계한다. OSV/KISA 수집·실제 알림·SSE는 이 기본선 이후 선택한다.
+
+### 보류와 상태 정리
+
+- NAS 2대 HA, DB 이중화, 상시 롤링 배포, 검색 엔진·큐 도입은 복구 시간·트래픽·콘텐츠 규모를 측정한 뒤 판단한다.
+- Activity는 실험 과제이며 도입 자체를 목표로 하지 않는다. root/허브 재디자인과 남은 시안 정렬은 현재 탐색 UX의 실제 문제를 확인한 뒤 착수한다.
+- 전체 저장소 점검·NAS 설정·Dashboard 적용 완료를 주장하지 않는다. 이번 정리 기록은 [작업 기록](../worklog/2026-10/2026-10-04-development-backlog-review.md)을 참고한다.
+
 ## Docs Web Push
 
 - [x] `P1` 웹 푸시 BFF에 초대 세션 접근 제한과 운영 WAF 미확인 시 fail-closed를 추가한다. [ADR-0010](../architecture/adr-0010-web-push-invitation-and-waf-gate.md), [로컬 검증](../verification/push/2026-10-03-push-access-gate.md). 운영 활성화 완료를 의미하지 않는다.
@@ -114,11 +159,12 @@
   - `published` 문서는 `title`, `slug`, `date`, `summary`를 강제
   - `draft`/`archived`는 공개 목록에서 제외하고 완화된 규칙으로 검증
   - `pnpm --filter docs validate:content`와 `prebuild` 단계에서 같은 기준을 실행
-- [-] `P1` 편집용 문구가 공개 본문에 노출되지 않도록 authoring 검증을 통일한다.
+- [x] `P1` 편집용 문구가 공개 본문에 노출되지 않도록 authoring 검증을 통일한다.
   - local content validator에서 코드 예제 밖의 HTML 주석과 잘못 닫힌 주석을 hard fail 처리
   - 문서 상태는 본문 `작성중` 표현이 아니라 frontmatter `status: draft`로 관리
-  - 후속: remote NAS publish pipeline 또는 docs-backend에 같은 body validation 연결
+  - docs-backend의 published 목록/상세에도 공용 `getMarkdownBodyStyleIssues`를 연결했다. NAS 기존 글 점검과 이미지 배포 검증은 위의 별도 과제로 유지
   - 기준 문서: `docs/architecture/docs-content-authoring-markup-policy.md`
+- [ ] `P1` 게시 갱신 스크립트에 발행 결과 확인을 추가한다. 현재 `revalidate-content-cache.mjs`는 `revalidated: true` 응답까지만 검사한다. 완료 조건: 선택한 테스트 문서의 기대 버전/내용이 목록·검색·상세에 반영되는지 제한된 횟수·시간 내 확인하고 불일치 시 실패 종료한다. 운영 문서 원문·token은 로그에 남기지 않으며 로컬 모의 서버로 stale·인증 실패·timeout을 검사한다.
 - [x] `P1` `apps/docs`의 FSD 3차 정리를 진행한다.
   - `shared/layout`, `shared/navigation` 기반 app shell을 `widgets/app-shell`로 이동
   - `app/layout.tsx`는 shell widget을 조합하는 얇은 엔트리로 정리
@@ -281,8 +327,8 @@
   - Function 실패와 비정상 사용량 alert 구독
   - Dashboard 설정은 실제 적용 및 검증 전까지 완료로 표시하지 않음
   - 기준 문서: `docs/architecture/docs-vercel-platform-operations-policy.md`
-- [ ] `P1` `apps/docs` 실사용 성능 계측을 도입한다.
-  - Speed Insights로 LCP, CLS, INP를 Production/Preview 기준으로 측정
+- [-] `P1` `apps/docs` 실사용 성능 계측의 운영 검증을 완료한다.
+  - Speed Insights·요청 단계 로그 코드는 구현되어 있다. 상단 Recovery / Operations의 계측 과제를 기준으로 실제 표본과 Dashboard 활성화를 확인
   - 서울 `icn1` Function region은 원격 NAS fetch latency 측정 후 적용 여부 결정
 - [ ] `P2` Vercel 확장 운영 기능의 도입 시점을 재평가한다.
   - Log Drains, Spend Management, Rolling Releases, Deployment Checks
@@ -339,7 +385,8 @@
 ## Content / Editorial
 
 - [x] `P1` About의 근거 없는 시작 날짜·직함을 제거하고 모바일 메뉴의 공유 직함 표시도 함께 제거한다. 새 날짜나 경력을 추정해 넣지 않았다. 한·영 메시지와 About 회귀 검사에 반영했다.
-- [ ] `P2` 남은 편집 메타데이터의 근거를 확인한다. footer 저작권 연도는 운영자 확인 후 변경하며, 현재 라우트에서 사용되지 않는 ArticleDetail 시안과 Alex Rivers·뉴스레터 메시지는 사용 경로를 정리한 별도 변경에서 제거한다. 이번 About 점검을 전체 카피 검수 완료로 간주하지 않는다.
+- [x] `P2` 푸터의 잘못된 저작권 연도와 중복 슬로건을 제거한다. `2024`를 임의의 새 연도로 바꾸지 않고 문구 전체와 한·영 `footer.tagline` 키를 제거했다. 커밋 `22e7099`, [작업 기록](../worklog/2026-09/2026-09-28-footer-brand-copy.md). 2026-10-03 현재 코드와 완료 상태를 대조했다.
+- [ ] `P2` 남은 편집 메타데이터의 근거를 확인한다. 현재 라우트에서 사용되지 않는 ArticleDetail 시안과 Alex Rivers·뉴스레터 메시지는 사용 경로를 정리한 별도 변경에서 제거한다. About·푸터 점검을 전체 카피 검수 완료로 간주하지 않는다.
 
 - [-] `P1` 양질의 기술 리소스를 category별 reading path로 확장한다.
   - 1차: Browser rendering, Network request path, Container health 기준 문서 추가

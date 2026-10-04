@@ -6,6 +6,8 @@
 
 - [공용 UI 외부 설치 계약](2026-10-04-shared-ui-package.md)
 
+- [2026-10-04 개발 개선·기능 추가 백로그 정리](2026-10-04-development-backlog-review.md)
+
 - [2026-10-04 V8 바이트코드 실험 분리](2026-10-04-v8-bytecode-example.md)
 
 - [2026-10-04 검색 인덱스 캐시 배포 검증](2026-10-04-deployed-search-index-cache.md)
