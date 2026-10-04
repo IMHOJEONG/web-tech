@@ -53,6 +53,9 @@
 
 ## Planning / Product
 
+- [x] `P2` `/docs`에 공개 태그 query와 공개 글 기반 시리즈·학습 경로를 추가했다. [ADR-0012](../architecture/adr-0012-content-discovery-collections.md). 로컬 9개 E2E 통과이며 NAS·배포 혼합 목록은 후속 검사다.
+- [ ] `P2` 실제 콘텐츠 편집 빈도에 따라 모음의 원격 계약·회차·진도 저장 필요성을 결정한다. 현재는 편집 레지스트리 방식이다.
+
 - [x] `P1` ARIA·V8·Next.js 패키지 글의 제목/요약을 조사 기록·입문 노트·탐색 체크리스트 범위에 맞추고 용어와 근거를 보완했다. 실제 경험·결과를 추정하지 않고 미검증 범위를 명시했다. [편집·검증 기록](../verification/content/2026-09-22-content-editorial-and-canvas-hover.md).
 - [ ] `P2` ARIA의 당시 재현 환경과 수정 전후 결과, V8의 버전별 실제 바이트코드 분석은 증거를 확보한 뒤 별도로 추가한다.
 - [ ] `P2` Canvas headed hover는 외부 포인터 입력을 통제한 환경에서 재확인한다. 일반 버튼 대조군에도 간섭이 관측됐으며 headless 결과와 구분한다. [진단 기록](../verification/content/2026-09-22-content-editorial-and-canvas-hover.md).

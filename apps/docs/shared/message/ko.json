@@ -322,6 +322,17 @@
         }
     },
     "docsIndex": {
+        "discovery": {
+            "tags": "태그로 찾기",
+            "allTags": "전체 태그",
+            "moreTags": "태그 더 보기",
+            "clear": "해제",
+            "title": "함께 읽을 글",
+            "series": "시리즈",
+            "path": "학습 경로",
+            "clearCollection": "모음 해제",
+            "sequenceHint": "아래는 추천 읽기 순서입니다. 문서 목록 정렬과 태그 필터는 별도로 적용됩니다."
+        },
         "card": {
             "open": "Open",
             "readMinutes": "{count}분 읽기"

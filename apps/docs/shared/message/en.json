@@ -322,6 +322,17 @@
         }
     },
     "docsIndex": {
+        "discovery": {
+            "tags": "Browse tags",
+            "allTags": "All tags",
+            "moreTags": "More tags",
+            "clear": "Clear",
+            "title": "Read together",
+            "series": "Series",
+            "path": "Learning path",
+            "clearCollection": "Clear collection",
+            "sequenceHint": "This is a suggested reading order. List sorting and tag filters apply separately."
+        },
         "card": {
             "open": "Open",
             "readMinutes": "{count} min read"

@@ -1,6 +1,10 @@
 import type { SearchData } from '~/lib/get-search-data'
 import type { DocsIndexSectionFilterConfig } from './docs-index-config.types'
 import { normalizeSearchQuery } from '../../../shared/lib/search-query.ts'
+import {
+    isInContentCollection,
+    normalizeContentTag,
+} from './content-collections.ts'
 
 export const DOCS_INDEX_SECTION_FILTERS = [
     { value: 'all', section: null, messageKey: 'all' },
@@ -29,11 +33,15 @@ export type DocsIndexSortOption = (typeof DOCS_INDEX_SORT_OPTIONS)[number]
 export type DocsIndexControls = {
     section: DocsIndexSectionFilter
     sort: DocsIndexSortOption
+    tag?: string
+    collection?: string
 }
 
 type RawDocsIndexControls = {
     section?: string
     sort?: string
+    tag?: string
+    collection?: string
 }
 
 const DEFAULT_DOCS_INDEX_CONTROLS: DocsIndexControls = {
@@ -70,6 +78,12 @@ export function resolveDocsIndexControls(
             ? section
             : DEFAULT_DOCS_INDEX_CONTROLS.section,
         sort: isSortOption(sort) ? sort : DEFAULT_DOCS_INDEX_CONTROLS.sort,
+        ...(normalizeContentTag(input.tag)
+            ? { tag: normalizeContentTag(input.tag) }
+            : {}),
+        ...(input.collection?.trim()
+            ? { collection: input.collection.trim().slice(0, 64) }
+            : {}),
     }
 }
 
@@ -113,7 +127,17 @@ export function filterDocsIndexControls(
         const matchesSection =
             !sectionFilter?.section || doc.section === sectionFilter.section
 
-        return matchesSection
+        const matchesTag =
+            !controls.tag ||
+            doc.tags?.some(
+                (tag) =>
+                    normalizeContentTag(tag) ===
+                    normalizeContentTag(controls.tag)
+            )
+        const matchesCollection =
+            !controls.collection ||
+            isInContentCollection(doc, controls.collection)
+        return matchesSection && matchesTag && matchesCollection
     })
 }
 
@@ -150,6 +174,11 @@ export function getDocsIndexHref({
     if (nextControls.sort !== DEFAULT_DOCS_INDEX_CONTROLS.sort) {
         params.set('sort', nextControls.sort)
     }
+
+    const tag = normalizeContentTag(nextControls.tag)
+    if (tag) params.set('tag', tag)
+    if (nextControls.collection)
+        params.set('collection', nextControls.collection)
 
     const queryString = params.toString()
 

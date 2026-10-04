@@ -2,6 +2,8 @@
 
 [월별 목록](../README.md)
 
+- [실제 콘텐츠 태그와 읽기 모음](2026-10-04-content-discovery.md)
+
 - [2026-10-03 Docs 캐시 구조 설명](2026-10-03-docs-cache-structure-guide.md)
 
 - [2026-10-03 로컬 검색 인덱스 캐시](2026-10-03-local-search-index-cache.md)

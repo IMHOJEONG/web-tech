@@ -20,6 +20,8 @@
 
 새 결정의 작성·대체 규칙은 [ADR 관리 규칙](../process/adr-management.md)을 참고합니다.
 
+- [ADR-0012: 공개 글 기반 탐색 모음](adr-0012-content-discovery-collections.md): 적용 중. 태그 query·시리즈/학습 경로, 운영 배포 미검증.
+
 - [ADR-0011: 로컬 검색 인덱스 재사용](adr-0011-local-search-index-cache.md): 적용 중. 독립 태그·빌드 digest·웹훅 만료, 격리 production 검증 완료·Vercel 미배포.
 
 - [ADR-0010: 웹 푸시 초대 세션과 WAF 활성화 게이트](adr-0010-web-push-invitation-and-waf-gate.md): 적용 중. 코드 접근 제한 반영, Production WAF 게시·검증은 미완료.
