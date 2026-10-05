@@ -87,9 +87,9 @@
 ## Dependency Security
 
 - [-] `P1` fast-uri·multer 보안 override와 lockfile을 main에 반영한다. 10-05 보안 브랜치의 로컬 회귀 검사는 통과했다. 완료 조건: PR CI·main 병합 후 Dependabot #331~#334 종료와 필요한 배포 브랜치 동기화를 확인한다. [검증 보고서](../verification/security/2026-10-05-fast-uri-multer.md).
-- [-] `P0` Next.js critical advisory `GHSA-vcvr-r3jv-pc5j` 패치를 전달한다. 10-05 작업 트리의 next·@next/mdx는 `16.3.8`로 정렬했고 로컬 빌드를 통과했다. 완료 조건: PR CI·main 병합·배포 브랜치 동기화 후 실제 OG 이미지 경로와 배포를 재검증한다. main에 사용처가 없다는 사실만으로 배포 안전을 확정하지 않는다. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md).
+- [x] `P0` Next.js critical advisory `GHSA-vcvr-r3jv-pc5j` 패치를 전달했다. next·@next/mdx 16.3.8의 PR #35 병합·feature 동기화·CI·운영 alias와 정상 OG PNG 3개를 확인했다. 공격 재현 또는 완전한 도달 불가능성 증명은 아니다. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md), [운영 검증](../verification/security/2026-10-05-deployed-blog-smoke.md).
 - [-] `P1` brace-expansion의 DoS 경고 3건을 처리한다. 10-05 작업 트리는 `^5.0.12` override와 lockfile·개발 도구 검사를 반영했고 관련 audit 경고는 사라졌다. 완료 조건: PR CI·main 및 필요한 브랜치 반영을 확인한다. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md).
-- [-] `P1` braces의 공개 입력 경계를 보강한다. 카테고리 main·sub allowlist와 glob 비실행 회귀 검사를 작업 트리에 반영했다. 완료 조건: PR CI·배포 후 오류 화면·noindex·정상 카테고리 회귀 확인. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md).
+- [x] `P1` braces의 공개 카테고리 입력 경계를 보강했다. main·sub allowlist와 glob 비실행 회귀 검사, PR CI·운영 오류 화면/noindex·정상 카테고리 회귀를 확인했다. 패키지 취약점 자체의 해소와는 별개다. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md), [운영 검증](../verification/security/2026-10-05-deployed-blog-smoke.md).
 - [ ] `P1` braces의 미출시 패치를 추적하고 상위 패치·의존성 제거 대안을 검토한다. 10-05 registry 최신은 `3.0.3`으로 audit의 `>=3.0.4`는 출시 확인이 아니다. URL 경계 보강 이후에도 전체·production audit에 high 1개가 남는다. 완료 조건: 실제 패치 또는 검증된 의존성 제거 후 잔여 audit 경고 해소. [패치 조사](../verification/security/2026-10-05-remaining-advisories.md).
 
 ## Shared UI
@@ -221,7 +221,10 @@
 - [x] `P1` 검색 빈 상태의 번역과 본문 landmark를 통일한다. ko/en의 검색 0건·전체 문서 0건에서 제목·본문·복구 링크를 통일하고 공백 query도 같은 정책을 적용한다. 전체 0개는 서버 렌더링, 검색 0건은 브라우저로 검증했다. [작업 기록](../worklog/2026-09/2026-09-23-docs-empty-state-localization.md).
 - [x] `P2` 헤더·본문 검색·직접 URL·API의 입력 정규화와 길이 정책을 공유한다. [ADR-0007](../architecture/adr-0007-search-input-contract.md)의 40 code point·NFC·공백·첫 query 정책을 적용하고 합성 IME 이벤트와 서버 경계를 검사했다. 실제 OS IME는 별도 검증 대상이다. 검색 결과 페이지네이션은 보류를 유지한다.
 - [x] `P2` `DocsIndex`의 통계·섹션·페이지 이동을 역할별로 분리한다. 서버 컴포넌트 3개로 추출하고 기존 query·검색 관련도·빈 상태·페이지 이동 계약을 유지했다. [검증 기록](../worklog/2026-09/2026-09-23-adr-followup-improvements.md).
-- [x] `P2` 헤더·본문 검색의 이동 방식과 로딩 표시를 통일한다. 09-26 작업 트리에서 공용 navigation hook·제출 버튼, 같은 URL·IME·pending 중복 방지를 적용했다. [검증 기록](../verification/content/2026-09-26-search-navigation.md): 51개 E2E·production build 통과, 운영 배포 미검증.
+- [x] `P2` 헤더·본문 검색의 이동 방식과 로딩 표시를 통일한다. 09-26 공용 navigation hook·제출 버튼, 같은 URL·IME·pending 중복 방지를 적용했다. [로컬 검증](../verification/content/2026-09-26-search-navigation.md)은 51개 E2E·production build 통과. 10-05 [운영 검증](../verification/security/2026-10-05-deployed-blog-smoke.md)에서 모바일·데스크톱 헤더/본문 검색의 정규화·reload 없는 이동을 확인했다. 운영 실제 IME·pending 경쟁은 별도다.
+- [ ] `P2` 원격 Browser 글의 제목 계층을 보완한다. API 응답에 H1 두 개가 존재한다. 완료 조건: NAS 원문 복사본의 frontmatter·본문 heading 검증, 실행 이미지 확인, 게시 갱신 후 공개 상세 H1 확인. 새 검증 이미지 배포만으로 기존 글이 제외되지 않도록 한다. [관측 근거](../verification/security/2026-10-05-deployed-blog-smoke.md).
+- [ ] `P2` 카테고리 UI를 ko/en 번역으로 정리한다. 전체·상위·하위 페이지 안내, 문서 수·최근 업데이트와 주제 설명을 포함한다. 완료 조건: URL·분류 허용 목록 유지, UI의 해당 언어 확인. 문서 자체의 제목·요약 자동 번역과 구분한다. [관측 근거](../verification/security/2026-10-05-deployed-blog-smoke.md).
+- [ ] `P2` OG 이미지의 브라우저 TTL 차이를 보완한다. Vercel 직접 응답은 1시간, 공개 도메인은 4시간이며 `s-maxage` 제거는 정상이다. 완료 조건: Cloudflare Browser Cache TTL·Cache Rules 확인, 채택한 TTL 계약과 공개 응답 재검증. PNG 성공이나 `s-maxage` 표시 여부만으로 완료 처리하지 않는다. [관측 근거](../verification/security/2026-10-05-deployed-blog-smoke.md).
 - [ ] `P2` JavaScript 비활성 환경의 `/docs` 스트리밍 완결성을 확인한다. 개발 서버에서 본문 대신 loading 상태가 남았다. 09-26에도 두 locale에서 재현했다. 폼 단독 native GET 통과와 구분하고 프로덕션에서도 재현되는지 확인한 뒤 progressive enhancement 지원 범위를 정한다. [검증 범위](../verification/content/2026-09-26-search-navigation.md).
 
 - [-] `P0` `640px ~ 1023px` 구간의 shell/UI 동작을 실제 디바이스 기준으로 점검한다.

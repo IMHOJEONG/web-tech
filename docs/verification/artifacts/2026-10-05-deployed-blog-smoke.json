@@ -1,0 +1,731 @@
+{
+  "commit": "ee1f694e9deea575638a9738de671c4351988b71",
+  "baseURL": "https://heap-forge.app",
+  "checkedAt": "2026-10-05T08:50:47.079Z",
+  "browser": "Chrome 154.0.8037.95",
+  "viewports": ["1280x800", "390x844"],
+  "followupInspection": {
+    "date": "2026-10-05",
+    "remoteBody": {
+      "path": "/posts/web/browser",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bodyChars": 6518,
+      "h1": ["Browser 동작 원리", "Update!"],
+      "h1Count": 2,
+      "markdownSourceAndNasImageVersionVerified": false
+    },
+    "ogResponseComparison": {
+      "path": "/og/article.png?title=HEAP-FORGE&topic=WEB",
+      "vercelDeployment": {
+        "status": 200,
+        "cacheControl": "public, max-age=3600",
+        "server": "Vercel",
+        "vercelCache": "MISS"
+      },
+      "publicDomain": {
+        "status": 200,
+        "cacheControl": "public, max-age=14400",
+        "server": "cloudflare",
+        "cloudflareCache": "MISS",
+        "vercelCache": "MISS"
+      },
+      "sMaxageStrippingExpected": true,
+      "cloudflareConfigurationVerified": false,
+      "cliAutomaticallyGeneratedProtectionBypassToken": true
+    },
+    "renderArticleTests": { "pass": 17, "fail": 0 }
+  },
+  "initialRun": {
+    "pass": 21,
+    "fail": 5,
+    "failures": [
+      {
+        "name": "desktop: complete article /ko/docs/web/browser",
+        "error": "expect(locator).toBeVisible() failed\n\nLocator: locator('main h1')\nExpected: visible\nError: strict mode violation: locator('main h1') resolved to 2 elements:\n    1) <h1 id=\"browser-동작-원리\">Browser 동작 원리</h1> aka getByText('Browser 동작 원리')\n    2) <h1 id=\"update\">Update!</h1> aka getByText('Update!')\n\nCall log:\n  - Expect \"to.be.visible\" with timeout 5000ms\n  - waiting for locator('main h1')\n"
+      },
+      {
+        "name": "mobile: complete article /ko/docs/web/browser",
+        "error": "expect(locator).toBeVisible() failed\n\nLocator: locator('main h1')\nExpected: visible\nError: strict mode violation: locator('main h1') resolved to 2 elements:\n    1) <h1 id=\"browser-동작-원리\">Browser 동작 원리</h1> aka getByText('Browser 동작 원리')\n    2) <h1 id=\"update\">Update!</h1> aka getByText('Update!')\n\nCall log:\n  - Expect \"to.be.visible\" with timeout 5000ms\n  - waiting for locator('main h1')\n"
+      },
+      {
+        "name": "OG PNG Korean title",
+        "error": "expect(received).toContain(expected) // indexOf\n\nExpected substring: \"s-maxage=86400\"\nReceived string:    \"public, max-age=14400\""
+      },
+      {
+        "name": "OG PNG long title",
+        "error": "expect(received).toContain(expected) // indexOf\n\nExpected substring: \"s-maxage=86400\"\nReceived string:    \"public, max-age=14400\""
+      },
+      {
+        "name": "OG PNG empty title",
+        "error": "expect(received).toContain(expected) // indexOf\n\nExpected substring: \"s-maxage=86400\"\nReceived string:    \"public, max-age=14400\""
+      }
+    ]
+  },
+  "finalRun": {
+    "pass": 26,
+    "fail": 0,
+    "results": [
+      {
+        "name": "desktop: document index and pagination",
+        "result": "pass",
+        "durationMs": 3709,
+        "evidence": {
+          "firstPageCards": 8,
+          "secondPageCards": 3,
+          "dimensions": {
+            "viewport": 1280,
+            "scrollWidth": 1280
+          }
+        }
+      },
+      {
+        "name": "desktop: header search without full reload",
+        "result": "pass",
+        "durationMs": 2859,
+        "evidence": {
+          "query": "React",
+          "resultCards": 3,
+          "dimensions": {
+            "viewport": 1280,
+            "scrollWidth": 1280
+          }
+        }
+      },
+      {
+        "name": "desktop: main search without full reload",
+        "result": "pass",
+        "durationMs": 2638,
+        "evidence": {
+          "query": "React",
+          "resultCards": 3,
+          "dimensions": {
+            "viewport": 1280,
+            "scrollWidth": 1280
+          }
+        }
+      },
+      {
+        "name": "desktop: empty search and recovery",
+        "result": "pass",
+        "durationMs": 1652,
+        "evidence": {
+          "recovered": true,
+          "dimensions": {
+            "viewport": 1280,
+            "scrollWidth": 1280
+          }
+        }
+      },
+      {
+        "name": "desktop: complete article /ko/docs/web/javascript-event-loop-runtime",
+        "result": "pass",
+        "durationMs": 2967,
+        "evidence": {
+          "canonical": "https://heap-forge.app/ko/docs/web/javascript-event-loop-runtime",
+          "h1Count": 1,
+          "headings": [
+            "이벤트 루프를 보는 이유",
+            "기본 용어와 처리 규칙",
+            "실행 순서를 직접 확인하기",
+            "실행 순서와 화면 갱신은 다르다",
+            "브라우저에서 확인할 것",
+            "Node.js에서 확인할 것",
+            "실무 체크리스트",
+            "참고"
+          ],
+          "bodyCharacters": 2800,
+          "ending": "드가 있는가?\n\n사용자 입력 직후 실행되는 로직이 화면 업데이트보다 먼저 몰려 있지는 않은가?\n\n서버에서는 event loop lag와 API latency를 함께 보고 있는가?\n\n참고\nWHATWG: 이벤트 루프 처리 모델과 microtask checkpoint\nMDN: queueMicrotask와 microtask 처리",
+          "images": [],
+          "dimensions": {
+            "viewport": 1280,
+            "scrollWidth": 1280
+          },
+          "og": "https://heap-forge.app/og/article.png?v=1&title=JavaScript+Event+Loop+%EB%9F%B0%ED%83%80%EC%9E%84+%EB%85%B8%ED%8A%B8&topic=RUNTIME&author=HoJeong+Im"
+        }
+      },
+      {
+        "name": "desktop: complete article /ko/docs/web/browser",
+        "result": "pass",
+        "durationMs": 1348,
+        "evidence": {
+          "canonical": "https://heap-forge.app/ko/docs/web/browser",
+          "h1Count": 2,
+          "headings": [
+            "Browser 동작 원리",
+            "왜?",
+            "간략한 과정",
+            "상세 설명",
+            "1. 탐색",
+            "2. 응답",
+            "3. 구문 분석(Parsing)",
+            "3-1. DOM(Document Object Model) 트리 구축",
+            "3-2. CSSOM(CSS Object Model) 구축",
+            "3-3. Javascript 컴파일",
+            "3-4. 접근성 트리 구축",
+            "4. 렌더(Render)",
+            "4-1. 스타일",
+            "4-2. 레이아웃",
+            "4-3. 페인트(Paint)",
+            "+LCP?",
+            "4-4. 합성(Compositing)",
+            "5. 상호작용(Interactivity)",
+            "Update!"
+          ],
+          "bodyCharacters": 3714,
+          "ending": " 피할 것\nUpdate!\n\nFMP대신, LCP를 고려할 것\n\nhttps://web.dev/articles/lcp?hl=ko\n\nTTI가 예외적인 네트워크 요청과 긴 작업에 지나치게 민감 => 삭제됨\n\nhttps://web.dev/articles/tti?hl=ko\nLCP, TBT, INP과 같은 최신 대체 측정항목을 사용하자",
+          "images": [],
+          "dimensions": {
+            "viewport": 1280,
+            "scrollWidth": 1280
+          },
+          "og": "https://heap-forge.app/og/article.png?v=1&title=Browser+%EB%82%B4%EB%B6%80+%EB%8F%99%EC%9E%91+%EC%9B%90%EB%A6%AC&topic=WEB&author=HoJeong+Im"
+        }
+      },
+      {
+        "name": "desktop: rejected category /ko/category/unknown",
+        "result": "pass",
+        "durationMs": 2778,
+        "evidence": {
+          "status": 200,
+          "noindex": true,
+          "dimensions": {
+            "viewport": 1280,
+            "scrollWidth": 1280
+          }
+        }
+      },
+      {
+        "name": "desktop: rejected category /ko/category/fe/node-js",
+        "result": "pass",
+        "durationMs": 776,
+        "evidence": {
+          "status": 200,
+          "noindex": true,
+          "dimensions": {
+            "viewport": 1280,
+            "scrollWidth": 1280
+          }
+        }
+      },
+      {
+        "name": "desktop: rejected category /ko/category/fe/%7Breact%2Cbrowser%7D",
+        "result": "pass",
+        "durationMs": 652,
+        "evidence": {
+          "status": 200,
+          "noindex": true,
+          "dimensions": {
+            "viewport": 1280,
+            "scrollWidth": 1280
+          }
+        }
+      },
+      {
+        "name": "desktop: legacy canonical redirect",
+        "result": "pass",
+        "durationMs": 1632,
+        "evidence": {
+          "url": "https://heap-forge.app/ko/docs/category/fe/react/server-client-component-boundary",
+          "dimensions": {
+            "viewport": 1280,
+            "scrollWidth": 1280
+          }
+        }
+      },
+      {
+        "name": "desktop: English search index",
+        "result": "pass",
+        "durationMs": 874,
+        "evidence": {
+          "heading": "Results for \"React\"",
+          "dimensions": {
+            "viewport": 1280,
+            "scrollWidth": 1280
+          }
+        }
+      },
+      {
+        "name": "mobile: document index and pagination",
+        "result": "pass",
+        "durationMs": 10597,
+        "evidence": {
+          "firstPageCards": 8,
+          "secondPageCards": 3,
+          "dimensions": {
+            "viewport": 390,
+            "scrollWidth": 390
+          }
+        }
+      },
+      {
+        "name": "mobile: header search without full reload",
+        "result": "pass",
+        "durationMs": 2118,
+        "evidence": {
+          "query": "React",
+          "resultCards": 3,
+          "dimensions": {
+            "viewport": 390,
+            "scrollWidth": 390
+          }
+        }
+      },
+      {
+        "name": "mobile: main search without full reload",
+        "result": "pass",
+        "durationMs": 1149,
+        "evidence": {
+          "query": "React",
+          "resultCards": 3,
+          "dimensions": {
+            "viewport": 390,
+            "scrollWidth": 390
+          }
+        }
+      },
+      {
+        "name": "mobile: empty search and recovery",
+        "result": "pass",
+        "durationMs": 1547,
+        "evidence": {
+          "recovered": true,
+          "dimensions": {
+            "viewport": 390,
+            "scrollWidth": 390
+          }
+        }
+      },
+      {
+        "name": "mobile: complete article /ko/docs/web/javascript-event-loop-runtime",
+        "result": "pass",
+        "durationMs": 2359,
+        "evidence": {
+          "canonical": "https://heap-forge.app/ko/docs/web/javascript-event-loop-runtime",
+          "h1Count": 1,
+          "headings": [
+            "이벤트 루프를 보는 이유",
+            "기본 용어와 처리 규칙",
+            "실행 순서를 직접 확인하기",
+            "실행 순서와 화면 갱신은 다르다",
+            "브라우저에서 확인할 것",
+            "Node.js에서 확인할 것",
+            "실무 체크리스트",
+            "참고"
+          ],
+          "bodyCharacters": 2800,
+          "ending": "드가 있는가?\n\n사용자 입력 직후 실행되는 로직이 화면 업데이트보다 먼저 몰려 있지는 않은가?\n\n서버에서는 event loop lag와 API latency를 함께 보고 있는가?\n\n참고\nWHATWG: 이벤트 루프 처리 모델과 microtask checkpoint\nMDN: queueMicrotask와 microtask 처리",
+          "images": [],
+          "dimensions": {
+            "viewport": 390,
+            "scrollWidth": 390
+          },
+          "og": "https://heap-forge.app/og/article.png?v=1&title=JavaScript+Event+Loop+%EB%9F%B0%ED%83%80%EC%9E%84+%EB%85%B8%ED%8A%B8&topic=RUNTIME&author=HoJeong+Im"
+        }
+      },
+      {
+        "name": "mobile: complete article /ko/docs/web/browser",
+        "result": "pass",
+        "durationMs": 1934,
+        "evidence": {
+          "canonical": "https://heap-forge.app/ko/docs/web/browser",
+          "h1Count": 2,
+          "headings": [
+            "Browser 동작 원리",
+            "왜?",
+            "간략한 과정",
+            "상세 설명",
+            "1. 탐색",
+            "2. 응답",
+            "3. 구문 분석(Parsing)",
+            "3-1. DOM(Document Object Model) 트리 구축",
+            "3-2. CSSOM(CSS Object Model) 구축",
+            "3-3. Javascript 컴파일",
+            "3-4. 접근성 트리 구축",
+            "4. 렌더(Render)",
+            "4-1. 스타일",
+            "4-2. 레이아웃",
+            "4-3. 페인트(Paint)",
+            "+LCP?",
+            "4-4. 합성(Compositing)",
+            "5. 상호작용(Interactivity)",
+            "Update!"
+          ],
+          "bodyCharacters": 3714,
+          "ending": " 피할 것\nUpdate!\n\nFMP대신, LCP를 고려할 것\n\nhttps://web.dev/articles/lcp?hl=ko\n\nTTI가 예외적인 네트워크 요청과 긴 작업에 지나치게 민감 => 삭제됨\n\nhttps://web.dev/articles/tti?hl=ko\nLCP, TBT, INP과 같은 최신 대체 측정항목을 사용하자",
+          "images": [],
+          "dimensions": {
+            "viewport": 390,
+            "scrollWidth": 390
+          },
+          "og": "https://heap-forge.app/og/article.png?v=1&title=Browser+%EB%82%B4%EB%B6%80+%EB%8F%99%EC%9E%91+%EC%9B%90%EB%A6%AC&topic=WEB&author=HoJeong+Im"
+        }
+      },
+      {
+        "name": "mobile: rejected category /ko/category/unknown",
+        "result": "pass",
+        "durationMs": 1001,
+        "evidence": {
+          "status": 200,
+          "noindex": true,
+          "dimensions": {
+            "viewport": 390,
+            "scrollWidth": 390
+          }
+        }
+      },
+      {
+        "name": "mobile: rejected category /ko/category/fe/node-js",
+        "result": "pass",
+        "durationMs": 859,
+        "evidence": {
+          "status": 200,
+          "noindex": true,
+          "dimensions": {
+            "viewport": 390,
+            "scrollWidth": 390
+          }
+        }
+      },
+      {
+        "name": "mobile: rejected category /ko/category/fe/%7Breact%2Cbrowser%7D",
+        "result": "pass",
+        "durationMs": 1036,
+        "evidence": {
+          "status": 200,
+          "noindex": true,
+          "dimensions": {
+            "viewport": 390,
+            "scrollWidth": 390
+          }
+        }
+      },
+      {
+        "name": "mobile: legacy canonical redirect",
+        "result": "pass",
+        "durationMs": 1620,
+        "evidence": {
+          "url": "https://heap-forge.app/ko/docs/category/fe/react/server-client-component-boundary",
+          "dimensions": {
+            "viewport": 390,
+            "scrollWidth": 390
+          }
+        }
+      },
+      {
+        "name": "mobile: English search index",
+        "result": "pass",
+        "durationMs": 935,
+        "evidence": {
+          "heading": "Results for \"React\"",
+          "dimensions": {
+            "viewport": 390,
+            "scrollWidth": 390
+          }
+        }
+      },
+      {
+        "name": "public search API and unique result links",
+        "result": "pass",
+        "durationMs": 1519,
+        "evidence": {
+          "status": 200,
+          "count": 3,
+          "results": [
+            {
+              "title": "Server Component와 Client Component 경계",
+              "href": "/docs/category/fe/react/server-client-component-boundary",
+              "contentSource": "local"
+            },
+            {
+              "title": "Next.js 패키지 탐색 체크리스트",
+              "href": "/docs/category/fe/react/nextjs",
+              "contentSource": "local"
+            },
+            {
+              "title": "첫 화면은 어디에서 늦어지는가",
+              "href": "/docs/category/fe/browser/critical-rendering-path-diagnosis",
+              "contentSource": "local"
+            }
+          ]
+        }
+      },
+      {
+        "name": "OG PNG Korean title",
+        "result": "pass",
+        "durationMs": 175,
+        "evidence": {
+          "status": 200,
+          "bytes": 36946,
+          "width": 1200,
+          "height": 630,
+          "cacheControl": "public, max-age=14400",
+          "server": "cloudflare",
+          "cloudflareCache": "HIT"
+        }
+      },
+      {
+        "name": "OG PNG long title",
+        "result": "pass",
+        "durationMs": 194,
+        "evidence": {
+          "status": 200,
+          "bytes": 56821,
+          "width": 1200,
+          "height": 630,
+          "cacheControl": "public, max-age=14400",
+          "server": "cloudflare",
+          "cloudflareCache": "HIT"
+        }
+      },
+      {
+        "name": "OG PNG empty title",
+        "result": "pass",
+        "durationMs": 171,
+        "evidence": {
+          "status": 200,
+          "bytes": 32487,
+          "width": 1200,
+          "height": 630,
+          "cacheControl": "public, max-age=14400",
+          "server": "cloudflare",
+          "cloudflareCache": "HIT"
+        }
+      }
+    ],
+    "diagnostics": []
+  },
+  "initialCategoryRun": [
+    {
+      "width": 1280,
+      "path": "/ko/category/fe",
+      "result": "pass",
+      "status": 200,
+      "heading": "세부 기술 주제를 골라보세요.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "width": 1280,
+      "path": "/ko/category/fe/react",
+      "result": "pass",
+      "status": 200,
+      "heading": "관련 문서를 한곳에서 살펴보세요.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "width": 1280,
+      "path": "/en/category/be/node-js",
+      "result": "pass",
+      "status": 200,
+      "heading": "관련 문서를 한곳에서 살펴보세요.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "width": 390,
+      "path": "/ko/category/fe",
+      "result": "pass",
+      "status": 200,
+      "heading": "세부 기술 주제를 골라보세요.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "width": 390,
+      "path": "/ko/category/fe/react",
+      "result": "pass",
+      "status": 200,
+      "heading": "관련 문서를 한곳에서 살펴보세요.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "width": 390,
+      "path": "/en/category/be/node-js",
+      "result": "fail",
+      "error": "expect(locator).toBeVisible() failed\n\nLocator: locator('main h1')\nExpected: visible\nError: strict mode violation: locator('main h1') resolved to 2 elements:\n    1) <h1 class=\"text-3xl font-extrabold tracking-tight text-on-surface sm:text-4xl\">관련 문서를 한곳에서 살펴보세요.</h1> aka getByRole('heading', { name: '관련 문서를 한곳에서 살펴보세요' })\n    2) <h1 class=\"text-3xl font-extrabold tracking-tight text-on-surface sm:text-4xl\">관련 문서를 한곳에서 살펴보세요.</h1> aka getByText('관련 문서를 한곳에서 살펴보세요').nth(1)\n\nCall log:\n  - Expect \"to.be.visible\" with timeout 5000ms\n  - waiting for locator('main h1')\n"
+    }
+  ],
+  "finalCategoryRun": [
+    {
+      "width": 1280,
+      "path": "/ko/category/fe",
+      "result": "pass",
+      "status": 200,
+      "heading": "세부 기술 주제를 골라보세요.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "width": 1280,
+      "path": "/ko/category/fe/react",
+      "result": "pass",
+      "status": 200,
+      "heading": "관련 문서를 한곳에서 살펴보세요.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "width": 1280,
+      "path": "/en/category/be/node-js",
+      "result": "pass",
+      "status": 200,
+      "heading": "관련 문서를 한곳에서 살펴보세요.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "width": 390,
+      "path": "/ko/category/fe",
+      "result": "pass",
+      "status": 200,
+      "heading": "세부 기술 주제를 골라보세요.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "width": 390,
+      "path": "/ko/category/fe/react",
+      "result": "pass",
+      "status": 200,
+      "heading": "관련 문서를 한곳에서 살펴보세요.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "width": 390,
+      "path": "/en/category/be/node-js",
+      "result": "pass",
+      "status": 200,
+      "heading": "관련 문서를 한곳에서 살펴보세요.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    }
+  ],
+  "deployment": {
+    "target": "production",
+    "readyState": "READY",
+    "alias": "heap-forge.app",
+    "url": "web-tech-attbleol8-hojeong-ims-projects.vercel.app",
+    "matchedGitHubVercelStatus": true
+  },
+  "runtimeEvidence": [
+    {
+      "route": "/ko/docs/web/javascript-event-loop-runtime",
+      "status": 200,
+      "source": "local",
+      "reason": "remote-detail-unavailable-local-fallback",
+      "includeRemote": true,
+      "timings": [
+        {
+          "stage": "remote-detail",
+          "outcome": "success",
+          "durationMs": 55.3
+        },
+        {
+          "stage": "document-select",
+          "outcome": "success",
+          "durationMs": 62.08
+        },
+        {
+          "stage": "content-render",
+          "outcome": "success",
+          "durationMs": 178.58
+        }
+      ]
+    },
+    {
+      "route": "/ko/docs/web/browser",
+      "status": 200,
+      "source": "remote",
+      "reason": "remote-detail-found",
+      "includeRemote": true,
+      "timings": [
+        {
+          "stage": "remote-detail",
+          "outcome": "success",
+          "durationMs": 77.24
+        },
+        {
+          "stage": "document-select",
+          "outcome": "success",
+          "durationMs": 118.55
+        },
+        {
+          "stage": "content-render",
+          "outcome": "success",
+          "durationMs": 1.38
+        }
+      ]
+    },
+    {
+      "area": "index",
+      "source": "mixed",
+      "localCount": 10,
+      "remoteCount": 1,
+      "totalCount": 11
+    }
+  ],
+  "followUpObservations": [
+    {
+      "name": "single article H1",
+      "result": "needs-follow-up",
+      "path": "/ko/docs/web/browser",
+      "headings": ["Browser 동작 원리", "Update!"]
+    },
+    {
+      "name": "English category localization",
+      "result": "needs-follow-up",
+      "path": "/en/category/be/node-js",
+      "heading": "관련 문서를 한곳에서 살펴보세요."
+    },
+    {
+      "name": "OG cache policy",
+      "result": "needs-follow-up",
+      "applicationHeader": "public, max-age=3600, s-maxage=86400",
+      "publicHeader": "public, max-age=14400",
+      "server": "cloudflare",
+      "publicCloudflareCacheStates": ["MISS", "HIT"],
+      "originDirectlyVerified": false
+    },
+    {
+      "name": "Vercel domain comparison",
+      "publicAliasStatus": 307,
+      "publicAliasRedirectsTo": "heap-forge.app",
+      "immutableDeploymentStatus": 302,
+      "immutableDeploymentProtection": "SSO",
+      "originCachePolicyCauseConfirmed": false
+    },
+    {
+      "name": "bounded deployment error log query",
+      "since": "15m",
+      "level": "error",
+      "limit": 20,
+      "returnedRecords": 0
+    }
+  ]
+}

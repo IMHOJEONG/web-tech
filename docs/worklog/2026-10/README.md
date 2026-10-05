@@ -29,3 +29,4 @@
 - [10-05 잔여 취약점의 입력 경계와 패치 확인](2026-10-05-remaining-advisories-review.md)
 - [10-05 Next.js 패치·카테고리 입력 경계 보강](2026-10-05-next-category-security-hardening.md)
 - [10-05 보안 PR 병합 후 feature 브랜치 동기화](2026-10-05-feature-sync-after-security-pr.md)
+- [10-05 운영 블로그 점검](2026-10-05-deployed-blog-smoke.md)
