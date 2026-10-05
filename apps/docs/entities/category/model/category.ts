@@ -81,6 +81,13 @@ export const categoryTree = [
     },
 ] as const satisfies readonly CategoryGroupConfig[]
 
+export function getCategoryTopic(main: string, sub: string) {
+    const category = categoryTree.find((item) => item.url === main)
+    const topic = category?.sub.find((item) => item.url === sub)
+
+    return category && topic ? { category, topic } : null
+}
+
 export const categoryMainLinks = categoryTree.map((item) => {
     const { title, url } = item
 

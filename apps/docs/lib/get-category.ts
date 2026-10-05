@@ -4,7 +4,10 @@ import path from 'path'
 import { parseLocalDocument } from './local-document-parser'
 import type { Metadata } from './document.types'
 export type { Metadata } from './document.types'
-import { categoryTree } from '~/entities/category/model/category'
+import {
+    categoryTree,
+    getCategoryTopic,
+} from '~/entities/category/model/category'
 import {
     getLocalCategoryDirectory,
     resolveLocalContentRoot,
@@ -58,11 +61,17 @@ async function getDocsByPattern(pattern: string) {
 }
 
 export async function getSubCategoryData(main: string, sub: string) {
-    return getDocsByPattern(`category/${main}/${sub}/*.{md,mdx}`)
+    const match = getCategoryTopic(main, sub)
+
+    if (!match) return []
+
+    return getDocsByPattern(
+        `category/${match.category.url}/${match.topic.url}/*.{md,mdx}`
+    )
 }
 
 export async function getCategoryData(main: string, sub: string) {
-    return getDocsByPattern(`category/${main}/${sub}/*.{md,mdx}`)
+    return getSubCategoryData(main, sub)
 }
 
 export async function getMainCategoryOverview() {

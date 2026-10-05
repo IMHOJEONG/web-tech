@@ -7,6 +7,7 @@ import {
 } from '~/shared/i18n/locale-path'
 import { getDocHref } from '~/lib/get-doc-route'
 import { getCategoryData } from '~/lib/get-category'
+import { getCategoryTopic } from '~/entities/category/model/category'
 
 interface PagesProps {
     slug: string
@@ -20,6 +21,7 @@ export default async function Page({
     params: Promise<PagesProps>
 }) {
     const { slug, main, sub } = await params
+    if (!getCategoryTopic(main, sub)) notFound()
     const data = await getCategoryData(main, sub)
     const target = data.find((doc) => doc.slug === slug)
 
