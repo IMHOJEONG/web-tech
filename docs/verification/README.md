@@ -79,6 +79,12 @@
 
 - [10-03 로컬 실제 연동](push/2026-10-03-local-web-push.md): Chrome 네이티브 구독·FCM 발송·서비스 워커 수신·알림 생성·해지. OS 배너와 NAS/Vercel은 미검증.
 
+## 의존성 보안
+
+- [10-05 Next.js 패치·카테고리 입력 경계 검증](security/2026-10-05-next-category-hardening.md): Next.js 16.3.8·brace-expansion 5.0.12, glob 비실행 검사와 잔여 braces 경고.
+- [10-05 잔여 취약점 조사](security/2026-10-05-remaining-advisories.md): production 경고 2건, 카테고리 입력의 glob 해석과 braces 패치 미출시 확인.
+- [10-05 fast-uri·multer 보안 업데이트 검증](security/2026-10-05-fast-uri-multer.md): main 기준 override·lockfile 갱신, 회귀 검사 통과와 별도 잔여 취약점 5건. 병합·배포는 미검증.
+
 ## 원본 증거
 
 - [10-03 문서 구조화 데이터와 OG 이미지](seo/2026-10-03-article-sharing.md): 프로덕션 빌드·82개 회귀·PNG 응답 검증.

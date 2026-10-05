@@ -24,3 +24,8 @@
 
 - [2026-10-03 Docs 웹 푸시 MVP](2026-10-03-docs-web-push-mvp.md)
 - [2026-10-03 문서 구조화 데이터와 OG 이미지](2026-10-03-article-structured-data-og.md)
+
+- [10-05 fast-uri·multer 보안 업데이트](2026-10-05-fast-uri-multer-security-update.md)
+- [10-05 잔여 취약점의 입력 경계와 패치 확인](2026-10-05-remaining-advisories-review.md)
+- [10-05 Next.js 패치·카테고리 입력 경계 보강](2026-10-05-next-category-security-hardening.md)
+- [10-05 보안 PR 병합 후 feature 브랜치 동기화](2026-10-05-feature-sync-after-security-pr.md)

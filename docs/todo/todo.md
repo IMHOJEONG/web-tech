@@ -84,6 +84,14 @@
 - [ ] `P1` 프론트 이전 deployment와 NAS 이전 digest 복귀를 격리 환경에서 검증한다. 완료 조건: 주요 사용자 동작·스키마 호환성·15분 관찰 통과. Production 장애를 임의로 유발하지 않는다.
 - [ ] `P2` 실제 복구 결과로 롤링 배포·DB 이중화/PITR 필요성을 결정한다. 완료 조건: 중단 허용 시간·복제 지연·트래픽 전환·데이터 손실·운영 비용 비교와 실패 복귀 실험. 기능 제공 여부만으로 완료 처리하지 않는다.
 
+## Dependency Security
+
+- [-] `P1` fast-uri·multer 보안 override와 lockfile을 main에 반영한다. 10-05 보안 브랜치의 로컬 회귀 검사는 통과했다. 완료 조건: PR CI·main 병합 후 Dependabot #331~#334 종료와 필요한 배포 브랜치 동기화를 확인한다. [검증 보고서](../verification/security/2026-10-05-fast-uri-multer.md).
+- [-] `P0` Next.js critical advisory `GHSA-vcvr-r3jv-pc5j` 패치를 전달한다. 10-05 작업 트리의 next·@next/mdx는 `16.3.8`로 정렬했고 로컬 빌드를 통과했다. 완료 조건: PR CI·main 병합·배포 브랜치 동기화 후 실제 OG 이미지 경로와 배포를 재검증한다. main에 사용처가 없다는 사실만으로 배포 안전을 확정하지 않는다. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md).
+- [-] `P1` brace-expansion의 DoS 경고 3건을 처리한다. 10-05 작업 트리는 `^5.0.12` override와 lockfile·개발 도구 검사를 반영했고 관련 audit 경고는 사라졌다. 완료 조건: PR CI·main 및 필요한 브랜치 반영을 확인한다. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md).
+- [-] `P1` braces의 공개 입력 경계를 보강한다. 카테고리 main·sub allowlist와 glob 비실행 회귀 검사를 작업 트리에 반영했다. 완료 조건: PR CI·배포 후 오류 화면·noindex·정상 카테고리 회귀 확인. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md).
+- [ ] `P1` braces의 미출시 패치를 추적하고 상위 패치·의존성 제거 대안을 검토한다. 10-05 registry 최신은 `3.0.3`으로 audit의 `>=3.0.4`는 출시 확인이 아니다. URL 경계 보강 이후에도 전체·production audit에 high 1개가 남는다. 완료 조건: 실제 패치 또는 검증된 의존성 제거 후 잔여 audit 경고 해소. [패치 조사](../verification/security/2026-10-05-remaining-advisories.md).
+
 ## Shared UI
 
 - [x] `P2` UI React peer·CSS/hook export·0.1.x 버전 기준과 독립 tarball 검사를 추가했다. [ADR-0013](../architecture/adr-0013-shared-ui-external-package.md). registry 게시와 실제 외부 앱 이전은 완료가 아니다.
