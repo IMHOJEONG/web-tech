@@ -5,7 +5,7 @@ export interface CategoryItemConfig {
     title: string
     url: string
     icon: LucideIcon | IconType
-    summary: string
+    summaryKey: string
 }
 
 export interface CategoryGroupConfig extends CategoryItemConfig {

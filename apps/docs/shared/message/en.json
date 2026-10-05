@@ -1,4 +1,49 @@
 {
+    "category": {
+        "index": {
+            "label": "Browse by topic",
+            "title": "Find documents by topic.",
+            "description": "Choose frontend, backend, computer science or infrastructure, then explore a specific technical topic.",
+            "groupsLabel": "Categories",
+            "groupsTitle": "Choose an area of interest",
+            "topicsLabel": "Technical topics",
+            "topicsTitle": "Go directly to a topic",
+            "topicsDescription": "Select a technical topic to explore related documents."
+        },
+        "main": {
+            "title": "Choose a technical topic.",
+            "description": "Explore documents in {category}, grouped by technical topic.",
+            "label": "Technical topics",
+            "topicsTitle": "Technical topics"
+        },
+        "sub": {
+            "title": "Explore related documents in one place.",
+            "description": "Browse titles and summaries to find a document on this topic.",
+            "documentsLabel": "Documents",
+            "documentsTitle": "Document list"
+        },
+        "documentCount": "{count, plural, one {# document} other {# documents}}",
+        "documentCountLabel": "Documents",
+        "latestUpdate": "Latest update",
+        "emptyLatest": "No published documents yet.",
+        "topicLabel": "Topic",
+        "summaries": {
+            "groups": {
+                "fe": "Explore how browsers and frontend applications run.",
+                "be": "Explore reliability boundaries in APIs and server runtimes.",
+                "computer-science": "Connect operating system and networking fundamentals to practical problems.",
+                "infra": "Explore containers, deployment and observability from an operations perspective."
+            },
+            "topics": {
+                "react": "Explore component boundaries, rendering and state design.",
+                "browser": "Trace rendering paths and performance problems through browser internals.",
+                "node-js": "Explore request handling and operational practices for Node.js servers.",
+                "os": "Explore processes, threads, memory and scheduling.",
+                "network": "Follow the request path from DNS to the HTTP response.",
+                "containers": "Explore container health checks and safe traffic routing."
+            }
+        }
+    },
     "webPush": {
         "experiment": "Web push experiment",
         "title": "Try notifications in this browser",

@@ -1,4 +1,49 @@
 {
+    "category": {
+        "index": {
+            "label": "주제별 탐색",
+            "title": "주제별로 문서를 찾아보세요.",
+            "description": "프론트엔드, 백엔드, 컴퓨터 과학, 인프라 중 관심 있는 분야를 고른 뒤 세부 기술 주제로 탐색할 수 있습니다.",
+            "groupsLabel": "카테고리",
+            "groupsTitle": "관심 있는 분야 선택",
+            "topicsLabel": "기술 주제",
+            "topicsTitle": "주제 바로가기",
+            "topicsDescription": "기술 주제를 선택해 관련 문서를 살펴보세요."
+        },
+        "main": {
+            "title": "세부 기술 주제를 골라보세요.",
+            "description": "{category} 분야의 문서를 기술 주제별로 정리했습니다.",
+            "label": "기술 주제",
+            "topicsTitle": "세부 기술 주제"
+        },
+        "sub": {
+            "title": "관련 문서를 한곳에서 살펴보세요.",
+            "description": "이 주제의 글을 모았습니다. 제목과 요약을 살펴보고 필요한 문서로 이동하세요.",
+            "documentsLabel": "문서",
+            "documentsTitle": "문서 목록"
+        },
+        "documentCount": "문서 {count}개",
+        "documentCountLabel": "문서 수",
+        "latestUpdate": "최근 업데이트",
+        "emptyLatest": "아직 공개된 문서가 없습니다.",
+        "topicLabel": "주제",
+        "summaries": {
+            "groups": {
+                "fe": "브라우저와 프론트엔드 애플리케이션의 실행 구조를 다룹니다.",
+                "be": "API와 서버 런타임의 신뢰성 경계를 다룹니다.",
+                "computer-science": "운영체제와 네트워크의 핵심 원리를 실무 문제와 연결합니다.",
+                "infra": "컨테이너, 배포, 관측성을 운영 가능한 시스템 관점에서 다룹니다."
+            },
+            "topics": {
+                "react": "컴포넌트 경계, 렌더링, 상태 설계 원칙을 정리합니다.",
+                "browser": "렌더링 경로와 성능 문제를 브라우저 내부 흐름으로 해석합니다.",
+                "node-js": "Node.js 서버의 요청 처리와 운영 기준을 정리합니다.",
+                "os": "프로세스, 스레드, 메모리와 스케줄링을 다룹니다.",
+                "network": "DNS부터 HTTP 응답까지 요청 경로를 단계별로 다룹니다.",
+                "containers": "컨테이너 상태 확인과 안전한 트래픽 연결 기준을 정리합니다."
+            }
+        }
+    },
     "webPush": {
         "experiment": "웹 푸시 실험",
         "title": "이 브라우저에서 알림 받아보기",

@@ -23,6 +23,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
+    const t = await getTranslations('category')
+    const summaries = await getTranslations('category.summaries')
     const mainCategories = categoryTree.map((category) => ({
         ...category,
         href: makeCategoryUrl([category.url]),
@@ -43,15 +45,13 @@ export default async function Page() {
                 <section className="ds-panel relative overflow-hidden p-6 sm:p-8">
                     <div className="max-w-3xl space-y-4">
                         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-outline">
-                            Category Hub
+                            {t('index.label')}
                         </p>
                         <h1 className="text-3xl font-extrabold tracking-tight text-on-surface sm:text-4xl">
-                            주제별로 문서를 탐색해보세요.
+                            {t('index.title')}
                         </h1>
                         <p className="text-sm leading-7 text-on-surface-variant sm:text-base">
-                            프론트엔드, 백엔드, 컴퓨터 과학까지 큰 흐름으로 먼저
-                            나눈 뒤, 세부 기술 주제로 더 빠르게 들어갈 수 있도록
-                            구성했습니다.
+                            {t('index.description')}
                         </p>
                     </div>
                 </section>
@@ -59,10 +59,10 @@ export default async function Page() {
                 <section className="space-y-4">
                     <div className="space-y-2">
                         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-outline">
-                            Main Categories
+                            {t('index.groupsLabel')}
                         </p>
                         <h2 className="text-2xl font-bold tracking-tight text-on-surface">
-                            큰 주제부터 고르기
+                            {t('index.groupsTitle')}
                         </h2>
                     </div>
 
@@ -81,7 +81,9 @@ export default async function Page() {
                                     >
                                         <MainCategoryCard
                                             title={category.title}
-                                            summary={category.summary}
+                                            summary={summaries(
+                                                category.summaryKey
+                                            )}
                                             icon={category.icon}
                                         />
                                         <div className="mt-3 border-t border-outline-variant pt-3">
@@ -90,8 +92,11 @@ export default async function Page() {
                                                     {category.title}
                                                 </span>
                                                 <span className="ds-chip-muted px-2.5 py-1 text-xs font-medium normal-case tracking-normal">
-                                                    문서{' '}
-                                                    {overview?.docCount ?? 0}개
+                                                    {t('documentCount', {
+                                                        count:
+                                                            overview?.docCount ??
+                                                            0,
+                                                    })}
                                                 </span>
                                             </div>
                                             <div className="mt-3 flex flex-wrap gap-2">
@@ -107,7 +112,7 @@ export default async function Page() {
                                             {overview?.latestTitle ? (
                                                 <div className="ds-panel-muted mt-4 px-3 py-3">
                                                     <p className="text-[11px] font-semibold tracking-[0.18em] text-outline uppercase">
-                                                        최근 업데이트
+                                                        {t('latestUpdate')}
                                                     </p>
                                                     <p className="mt-2 text-sm font-medium text-on-surface">
                                                         {overview.latestTitle}
@@ -132,14 +137,13 @@ export default async function Page() {
                 <section className="space-y-4 border-t border-outline-variant pt-8">
                     <div className="space-y-2">
                         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-outline">
-                            Popular Topics
+                            {t('index.topicsLabel')}
                         </p>
                         <h2 className="text-2xl font-bold tracking-tight text-on-surface">
-                            인기 주제
+                            {t('index.topicsTitle')}
                         </h2>
                         <p className="text-sm leading-6 text-on-surface-variant">
-                            자주 찾는 기술 주제로 바로 들어가서 관련 문서를
-                            빠르게 살펴볼 수 있습니다.
+                            {t('index.topicsDescription')}
                         </p>
                     </div>
 

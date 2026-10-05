@@ -52,6 +52,7 @@ export default async function Page({
 }) {
     const { main, sub } = await params
     if (!getCategoryTopic(main, sub)) notFound()
+    const t = await getTranslations('category')
     const data = await getSubCategoryData(main, sub)
     const latestDoc = data[0]
 
@@ -65,18 +66,16 @@ export default async function Page({
                                 {main} / {sub}
                             </p>
                             <h1 className="text-3xl font-extrabold tracking-tight text-on-surface sm:text-4xl">
-                                관련 문서를 한곳에서 살펴보세요.
+                                {t('sub.title')}
                             </h1>
                             <p className="text-sm leading-7 text-on-surface-variant sm:text-base">
-                                이 주제와 연결된 문서를 카드형으로
-                                모아두었습니다. 필요한 글을 빠르게 훑고 바로
-                                상세 페이지로 이동할 수 있습니다.
+                                {t('sub.description')}
                             </p>
                         </div>
                         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
                             <div className="ds-panel-muted px-4 py-4">
                                 <p className="text-xs uppercase tracking-[0.18em] text-outline">
-                                    문서 수
+                                    {t('documentCountLabel')}
                                 </p>
                                 <p className="mt-2 text-2xl font-bold text-on-surface">
                                     {data.length}
@@ -84,10 +83,10 @@ export default async function Page({
                             </div>
                             <div className="ds-panel-muted px-4 py-4">
                                 <p className="text-xs uppercase tracking-[0.18em] text-outline">
-                                    최근 업데이트
+                                    {t('latestUpdate')}
                                 </p>
                                 <p className="mt-2 text-sm font-medium text-on-surface">
-                                    {latestDoc?.title ?? '문서 준비 중'}
+                                    {latestDoc?.title ?? t('emptyLatest')}
                                 </p>
                                 {latestDoc?.date ? (
                                     <p className="mt-1 text-xs text-on-surface-variant">
@@ -102,10 +101,10 @@ export default async function Page({
                 <section className="space-y-4">
                     <div className="space-y-2">
                         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-outline">
-                            Documents
+                            {t('sub.documentsLabel')}
                         </p>
                         <h2 className="text-2xl font-bold tracking-tight text-on-surface">
-                            문서 목록
+                            {t('sub.documentsTitle')}
                         </h2>
                     </div>
 
