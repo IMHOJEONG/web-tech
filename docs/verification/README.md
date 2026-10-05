@@ -61,6 +61,12 @@
 - [09-20 공개 글 독해 검토](content/2026-09-20-content-readability-review.md): 로컬 공개 글 10개의 설명 흐름과 편집 우선순위.
 - [09-20 로컬 콘텐츠 재점검](content/2026-09-20-local-content-review.md): 15개 변환, 이미지 참조, ARIA 본문 중복 확인.
 
+## 의존성 보안
+
+- [10-05 Next.js 패치·카테고리 입력 경계 검증](security/2026-10-05-next-category-hardening.md): Next.js 16.3.8·brace-expansion 5.0.12, glob 비실행 검사와 잔여 braces 경고.
+- [10-05 잔여 취약점 조사](security/2026-10-05-remaining-advisories.md): production 경고 2건, 카테고리 입력의 glob 해석과 braces 패치 미출시 확인.
+- [10-05 fast-uri·multer 보안 업데이트 검증](security/2026-10-05-fast-uri-multer.md): main 기준 override·lockfile 갱신, 회귀 검사 통과와 별도 잔여 취약점 5건. 병합·배포는 미검증.
+
 ## 원본 증거
 
 [artifacts 목록](artifacts/README.md)에서 JSON 측정값을 찾을 수 있습니다. 각 결과의 환경·표본·한계는 연결된 보고서와 함께 확인해야 합니다. 이 폴더의 결과만으로 현재 배포가 통과했다고 판단하지 않습니다.
