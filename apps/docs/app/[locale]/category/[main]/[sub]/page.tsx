@@ -1,18 +1,20 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { MainContent } from '~/shared/ui/main-content'
 import { getTranslations } from 'next-intl/server'
-import { categoryTree } from '~/entities/category/model/category'
+import { getCategoryTopic } from '~/entities/category/model/category'
 import { CategoryDocumentCard } from '~/entities/category/ui/category-document-card'
 import { getSubCategoryData } from '~/lib/get-category'
 import { buildPageMetadata } from '~/lib/localized-metadata'
 
 function findCategoryLabels(main: string, sub: string) {
-    const category = categoryTree.find((item) => item.url === main)
-    const topic = category?.sub.find((item) => item.url === sub)
+    const match = getCategoryTopic(main, sub)
+
+    if (!match) notFound()
 
     return {
-        categoryTitle: category?.title ?? main,
-        topicTitle: topic?.title ?? sub,
+        categoryTitle: match.category.title,
+        topicTitle: match.topic.title,
     }
 }
 
@@ -49,6 +51,7 @@ export default async function Page({
     params: Promise<{ main: string; sub: string }>
 }) {
     const { main, sub } = await params
+    if (!getCategoryTopic(main, sub)) notFound()
     const data = await getSubCategoryData(main, sub)
     const latestDoc = data[0]
 

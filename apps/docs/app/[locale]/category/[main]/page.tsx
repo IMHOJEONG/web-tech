@@ -1,6 +1,7 @@
 import { Link } from '~/shared/i18n/navigation'
 import { MainContent } from '~/shared/ui/main-content'
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import {
     categoryTree,
@@ -18,7 +19,8 @@ export async function generateMetadata({
     const { main } = await params
     const t = await getTranslations('metadata.pages.categoryMain')
     const category = categoryTree.find((item) => item.url === main)
-    const categoryTitle = category?.title ?? main
+    if (!category) notFound()
+    const categoryTitle = category.title
 
     return buildPageMetadata({
         pathname: `/category/${main}`,
@@ -35,9 +37,10 @@ export default async function Page({
     params: Promise<{ main: string }>
 }) {
     const { main: mainCategory } = await params
+    const category = categoryTree.find((item) => item.url === mainCategory)
+    if (!category) notFound()
     const subCategories = getSubCategories(mainCategory) ?? []
     const overview = await getSubCategoryOverview(mainCategory)
-    const category = categoryTree.find((item) => item.url === mainCategory)
 
     return (
         <MainContent className="docs-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8">

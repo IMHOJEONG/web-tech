@@ -46,7 +46,7 @@
 - [Docs Content Cache Revalidation Policy](docs-content-cache-revalidation-policy.md)
 - [Docs Content Operating Model](docs-content-operating-model.md)
 - [Docs Content Rendering Strategy](docs-content-rendering-strategy.md)
-- [Docs Content Routing Policy](docs-content-routing-policy.md)
+- [Docs Content Routing Policy](docs-content-routing-policy.md): 공개 URL과 카테고리 입력 allowlist, glob 실행 전 검증 경계.
 - [Docs Design Token Usage Policy](docs-design-token-usage-policy.md)
 - [Docs Document UI Reuse Policy](docs-document-ui-reuse-policy.md)
 - [문서 화면의 정적 셸과 동적 영역 경계](docs-dynamic-content-boundaries.md)
