@@ -95,6 +95,49 @@ curl -fG http://127.0.0.1:3001/og/article.png \
 
 실제 수행 결과는 [2026-10-03 SEO 검증](../verification/seo/2026-10-03-article-sharing.md)에 기록했다.
 
+## OG 브라우저 캐시와 CDN 캐시 분리
+
+2026-10-05 운영 표본은 Vercel 직접 응답 `max-age=3600`, Cloudflare를 거친 공개 응답 `max-age=14400`이었다. 특정 Cloudflare 규칙의 실제 값은 미확인이다. [관측 결과](../verification/security/2026-10-05-deployed-blog-smoke.md)를 참고한다.
+
+앱은 다음 두 헤더로 기존 TTL 의도를 구분한다.
+
+```http
+Cache-Control: public, max-age=3600
+Vercel-CDN-Cache-Control: public, s-maxage=86400
+```
+
+- 브라우저: 같은 URL의 PNG를 1시간 재사용할 수 있다.
+- Vercel CDN: 생성된 PNG를 1일 캐시하도록 지정한다. 캐시 가능 조건과 배포 무효화 등에 따라 항상 1일 보존을 보장하지는 않는다.
+- Cloudflare: 별도 중간 CDN이다. Vercel 전용 헤더는 이 서비스의 TTL을 설정하지 않는다. `Browser TTL` 덮어쓰기가 있으면 앱의 브라우저 1시간 값을 바꿀 수 있다.
+
+Vercel은 전용 헤더를 소비하므로 공개 응답에 `Vercel-CDN-Cache-Control`이 없다고 실패로 판단하지 않는다. 로컬 `next start`는 이 헤더가 보이므로 로컬 E2E에서 앱 지정 계약을 검사한다. [Vercel 공식 설명](https://vercel.com/docs/caching/cache-control-headers).
+
+### Cloudflare에서 필요한 조치
+
+프로젝트 담당자가 zone 설정 변경 권한과 기존 규칙을 확인하고 실행한다. 코드 커밋만으로 Cloudflare 설정이 변경되지는 않는다.
+
+1. Cloudflare의 `heap-forge.app` zone에서 Caching의 Browser Cache TTL과 `/og/article.png`에 적용되는 Cache Rules를 먼저 확인한다. 변경 전 값·규칙 순서를 기록한다.
+2. OG에만 적용할 Cache Rule을 만들거나 기존 규칙을 수정한다. 조건은 다음처럼 공개 호스트와 이미지 경로로 제한한다. 다른 정적 자산·인증 API의 캐시 정책은 변경하지 않는다.
+
+```txt
+(http.host eq "heap-forge.app" and http.request.uri.path eq "/og/article.png")
+```
+
+3. 해당 규칙의 `Browser TTL`을 `Respect origin`으로 지정한다. 중첩된 규칙이 다시 `Override origin`을 적용하는지도 확인한다. 전역 설정을 바꿀 경우 영향 범위가 전체 자산이므로 별도로 검토한다. [Cloudflare Cache Rules 설정](https://developers.cloudflare.com/cache/how-to/cache-rules/settings/).
+4. 앱 변경이 배포된 뒤 새 테스트 query로 공개 GET 응답을 조회한다. 헤더·PNG 성공을 함께 확인한다. 오래된 CDN 객체가 남아 있다면 검토한 OG URL만 선택적으로 purge하고 재확인한다. 전체 사이트 purge나 WAF 변경은 필요하지 않다.
+
+```sh
+curl -sS -D /tmp/heap-forge-og-headers.txt \
+  -o /tmp/heap-forge-og.png \
+  'https://heap-forge.app/og/article.png?v=ttl-check-20261005&title=HEAP-FORGE&topic=WEB'
+```
+
+기대 결과는 HTTP 200·PNG이며 브라우저용 `Cache-Control`의 `max-age`가 3600이다. Cloudflare가 다른 directive를 더할 수 있어 문자열 전체보다 해당 TTL과 캐시 가능성을 확인한다. 반복 요청의 HIT/MISS·Age는 CDN 동작 표본이지 정확히 1일 보존됐다는 증거는 아니다.
+
+purge는 이미 브라우저에 저장된 PNG를 삭제하지 않는다. 같은 이미지 URL을 유지한 디자인 변경에는 metadata URL의 `v` 변경도 필요하다. 브라우저 캐시·Vercel 캐시·Cloudflare 캐시·외부 공유 서비스의 미리보기 캐시는 서로 다른 계층이다.
+
+설정 변경 후 실패하면 기록한 OG 전용 규칙을 원래 값으로 되돌리고 응답을 재확인한다. 앱 헤더를 임의로 4시간으로 바꿔 설정 불일치를 숨기지 않는다. 보호된 배포를 비교할 때 bypass secret과 쿠키를 공유하지 않으며 CLI가 우회 토큰을 생성할 수 있다는 점도 사전에 확인한다.
+
 배포 후에는 실제 글 URL로 [Rich Results Test](https://search.google.com/test/rich-results)와 [Schema Markup Validator](https://validator.schema.org/)를 실행한다. 검색 노출 여부와 공유 서비스의 캐시 갱신 결과는 배포 후 별도로 확인한다.
 
 PNG 생성이 실패하면 `public/fonts/Pretendard-Bold.otf`가 배포 함수의 파일 추적 결과에 포함되어 있는지 확인한다. 제목이 이전 버전이면 OG query와 공유 서비스의 미리보기 캐시를 확인한다. 구조화 데이터 날짜 오류는 frontmatter/API 날짜를 수정하고 기존 revalidation 절차를 적용한다.

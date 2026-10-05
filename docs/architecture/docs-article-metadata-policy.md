@@ -4,7 +4,7 @@
 
 - 상태: 적용 중
 - 대상: docs 앱의 공개 문서 상세
-- 최종 검토: 2026-10-03
+- 최종 검토: 2026-10-05
 
 구현은 `feature/docs` 작업 트리에 반영했다. 배포 후 검색 엔진 및 공유 서비스의 결과는 미검증이다.
 
@@ -72,6 +72,8 @@ OG/Twitter는 `/og/article.png?v=1&title=...&topic=...&author=...`에서 생성�
 제목 90자, 분야 28자, 작성자 32자까지 표시하고 초과 부분은 말줄임한다. 한글은 공식 Pretendard v1.3.9 Bold OTF를 런타임 파일로 읽으며 해당 이미지 라우트의 `outputFileTracingIncludes`에 명시한다. 기존 OFL 라이선스를 유지한다. WOFF2는 ImageResponse 지원 형식이 아니므로 웹 본문용 글꼴을 그대로 사용하지 않는다.
 
 브라우저 캐시 1시간, 공유 캐시 1일을 사용한다. 제목 변경 시 query가 바뀌며, 이미지 디자인 변경 시 URL의 `v`를 올린다. 공유 서비스 자체의 미리보기 캐시는 별도 갱신이 필요할 수 있다. 공개 이미지 엔드포인트는 텍스트만 받고 임의 이미지 주소를 읽지 않는다.
+
+2026-10-05 작업 트리에서는 브라우저용 `Cache-Control: public, max-age=3600`과 Vercel 전용 `Vercel-CDN-Cache-Control: public, s-maxage=86400`을 분리했다. Vercel 전용 헤더는 공개 응답에서 소비되며 Cloudflare의 TTL을 지정하지 않는다. 공개 도메인의 4시간 browser TTL 표본은 [OG 캐시 조치 절차](../runbooks/docs-seo-metadata-routes.md#og-브라우저-캐시와-cdn-캐시-분리)에 따라 Cloudflare에서 별도 확인한다. 운영 설정 변경·새 배포 검증은 미실행이다.
 
 ## 구조화 데이터
 

@@ -31,3 +31,4 @@
 - [10-05 보안 PR 병합 후 feature 브랜치 동기화](2026-10-05-feature-sync-after-security-pr.md)
 - [10-05 운영 블로그 점검](2026-10-05-deployed-blog-smoke.md)
 - [10-05 카테고리 안내와 주제 설명 번역](2026-10-05-category-localization.md)
+- [10-05 OG 브라우저·Vercel 캐시 헤더 분리](2026-10-05-og-cache-header-boundary.md)

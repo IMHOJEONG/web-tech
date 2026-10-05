@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { ImageResponse } from 'next/og'
 import { normalizeOgText } from '~/lib/article-sharing'
+import { ARTICLE_OG_CACHE_HEADERS } from '~/lib/article-og-cache'
 
 export const runtime = 'nodejs'
 
@@ -88,7 +89,7 @@ export async function GET(request: Request) {
                 },
             ],
             headers: {
-                'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+                ...ARTICLE_OG_CACHE_HEADERS,
                 'X-Content-Type-Options': 'nosniff',
             },
         }

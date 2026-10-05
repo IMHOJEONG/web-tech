@@ -18,7 +18,11 @@ test('title-based OG images render as cacheable PNGs with the bundled Korean fon
         const response = await request.get(`/og/article.png?${query}`)
         expect(response.status()).toBe(200)
         expect(response.headers()['content-type']).toBe('image/png')
-        expect(response.headers()['cache-control']).toContain('s-maxage=86400')
+        expect(response.headers()['cache-control']).toBe('public, max-age=3600')
+        // Local next start exposes this header; Vercel consumes it at the CDN.
+        expect(response.headers()['vercel-cdn-cache-control']).toBe(
+            'public, s-maxage=86400'
+        )
         expect(response.headers()['x-content-type-options']).toBe('nosniff')
         const png = await response.body()
         expect(png.subarray(0, 8).toString('hex')).toBe('89504e470d0a1a0a')
