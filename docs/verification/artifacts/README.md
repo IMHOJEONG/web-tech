@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-05 보안 갱신 후 전체 audit 원본](2026-10-05-security-audit.json): 잔여 braces high 1개, 종료 코드 1. [검증 보고서](../security/2026-10-05-next-category-hardening.md).
+
 - [09-26 공개 배포 검색 계약 검사 요약](2026-09-26-deployed-search-contract.json)
 
 - [09-26 요청별 계측 재검증 집계·발췌](2026-09-26-request-lifecycle-recheck.json)
