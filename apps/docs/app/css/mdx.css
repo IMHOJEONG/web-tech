@@ -10,6 +10,94 @@
     margin-top: 0;
 }
 
+.mdx-flow {
+    margin: 1.75rem 0;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    background: var(--surface-container-lowest);
+}
+
+.mdx-flow > figcaption {
+    color: var(--on-surface);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.mdx-wrapper .mdx-flow > ol {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    margin: 1.25rem 0;
+    padding: 0;
+    list-style: none;
+}
+
+.mdx-wrapper .mdx-flow > ol > li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+    margin: 0;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-container-low);
+}
+
+.mdx-flow > ol > li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -1.35rem;
+    width: 0.65rem;
+    height: 0.65rem;
+    border-top: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.mdx-flow__type {
+    color: var(--primary);
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.mdx-flow > ol > li > strong {
+    color: var(--on-surface);
+    font-size: 1.05rem;
+    line-height: 1.4;
+}
+
+.mdx-flow > ol > li > span:last-child {
+    color: var(--on-surface-variant);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.mdx-wrapper .mdx-flow > p {
+    margin: 0;
+    color: var(--on-surface-variant);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 640px) {
+    .mdx-wrapper .mdx-flow > ol {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .mdx-flow > ol > li:not(:last-child)::after {
+        top: auto;
+        right: auto;
+        bottom: -1.35rem;
+        left: 50%;
+        transform: translateX(-50%) rotate(135deg);
+    }
+}
+
 .mdx-wrapper h1,
 .mdx-wrapper h2,
 .mdx-wrapper h3,

@@ -2,6 +2,10 @@
 
 [월별 목록](../README.md)
 
+- [주간 글의 로컬 게시와 수요일 자동 실행](2026-10-06-weekly-article-publication.md)
+
+- [10-06 번역·OG 캐시 배포 후속 점검](2026-10-06-deployed-followup.md)
+
 - [실제 콘텐츠 태그와 읽기 모음](2026-10-04-content-discovery.md)
 
 - [공용 UI 외부 설치 계약](2026-10-04-shared-ui-package.md)
