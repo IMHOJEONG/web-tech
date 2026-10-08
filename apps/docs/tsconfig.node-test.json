@@ -5,6 +5,7 @@
         "noEmit": true
     },
     "include": [
+        "scripts/content-publication.test.ts",
         "lib/*.test.ts",
         "feature/callout/model/*.test.ts",
         "feature/code-block/lib/*.test.ts",

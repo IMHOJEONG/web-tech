@@ -14,6 +14,7 @@
 - [상세 페이지 스트리밍 성능 개선](docs-article-streaming-performance.md)
 - [Docs Backend NAS Deployment](docs-backend-nas-deployment.md)
 - [로컬 프로덕션 캐시 통합 테스트](docs-content-cache-production-test.md)
+- [캐시 만료 후 콘텐츠 게시 결과 확인](docs-content-publication-verification.md)
 - [Docs Contributor Guide](docs-contributor-guide.md)
 - [배포 상세 페이지 성능 측정](docs-deployed-performance-measurement.md)
 - [Docs Env Checklist](docs-env-checklist.md)

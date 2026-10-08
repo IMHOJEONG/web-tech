@@ -79,11 +79,13 @@ sudo sh -c 'umask 077; cat > /volume1/docker/heap-forge/secrets/docs_revalidatio
 ```
 
 토큰을 입력하고 `Ctrl+D`로 종료한다. 문서와 frontmatter를 검증한 다음
-code-server 또는 NAS checkout에서 캐시 무효화 명령을 실행한다.
+code-server 또는 NAS checkout에서 Node.js 24로 명령을 실행한다. 먼저
+[게시 결과 확인 절차](docs-content-publication-verification.md)에 따라 기대값 JSON을 준비한다.
 
 ```bash
 DOCS_CONTENT_REVALIDATE_URL=https://heap-forge.app/api/revalidate/content \
 DOCS_CONTENT_REVALIDATE_TOKEN_FILE=/volume1/docker/heap-forge/secrets/docs_revalidation_token \
+DOCS_CONTENT_VERIFY_FILE=/volume1/docker/heap-forge/publication/expectation.json \
 pnpm --filter docs revalidate:content-cache
 ```
 
@@ -98,9 +100,11 @@ curl --fail-with-body --silent --show-error \
 unset DOCS_REVALIDATE_TOKEN
 ```
 
-성공 응답의 `revalidated: true`를 확인한 후 해당 목록 또는 상세 페이지를
-새로 요청한다. webhook은 데이터를 미리 가져오는 것이 아니라 캐시를 즉시
-만료시키므로, 다음 페이지 요청이 NAS API의 최신 응답을 가져온다.
+직접 curl 호출의 `revalidated: true`는 캐시 만료만 확인한다. 이후
+`--verify-only` 모드로 목록·검색·상세의 기대 버전을 확인해야 게시 결과를
+기록할 수 있다. webhook 자체는 데이터를 미리 가져오는 것이 아니라 캐시를
+만료시키며, 다음 페이지 요청에서 최신 데이터를 읽는다. 캐시 만료만 필요한
+호출에는 `--invalidate-only`를 명시한다.
 
 정책 문서:
 `docs/architecture/docs-content-cache-revalidation-policy.md`

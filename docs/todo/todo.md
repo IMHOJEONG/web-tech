@@ -44,7 +44,7 @@
 | 6    | P1        | 실제 브라우저·접근성 검사 | Safari/Firefox, 실제 모바일·태블릿, OS IME, VoiceOver/NVDA에서 검색·Drawer·Tooltip·회전·스크롤·포커스 확인. 재현된 결함을 개별 수정하며 기존 headless 성공과 구분                                                      |
 | 7    | P2        | 캐시 경계 추가 검사       | TTL 만료, 동시 cold 요청, 로컬 글이 바뀐 재배포, 원격 장애→복구를 검증. corpus가 커질 때 경로별 무효화와 인덱스 엔진 재검토. [ADR-0011](../architecture/adr-0011-local-search-index-cache.md)                          |
 
-1번의 NAS 연결 준비와 2번의 백업 목적지 설정이 필요한 동안 4번 개발·6번 로컬 검사를 진행할 수 있다. P0 조건부는 공개 활성화의 선행 조건이며 현재 악용·장애를 관측했다는 뜻은 아니다.
+4번 게시 검증 도구는 10-08 로컬 구현·검증을 완료했다. [결과](../verification/cache/2026-10-08-content-publication-verifier.md)와 [실행 절차](../runbooks/docs-content-publication-verification.md)를 따른다. 1번 NAS 운영 발행·원복은 별도로 남아 있다. NAS 연결 준비와 백업 목적지 설정이 필요한 동안 6번 로컬 검사를 진행할 수 있다. P0 조건부는 공개 활성화의 선행 조건이며 현재 악용·장애를 관측했다는 뜻은 아니다.
 
 ### 사용자에게 추가할 기능
 
@@ -172,7 +172,7 @@
   - 문서 상태는 본문 `작성중` 표현이 아니라 frontmatter `status: draft`로 관리
   - docs-backend의 published 목록/상세에도 공용 `getMarkdownBodyStyleIssues`를 연결했다. NAS 기존 글 점검과 이미지 배포 검증은 위의 별도 과제로 유지
   - 기준 문서: `docs/architecture/docs-content-authoring-markup-policy.md`
-- [ ] `P1` 게시 갱신 스크립트에 발행 결과 확인을 추가한다. 현재 `revalidate-content-cache.mjs`는 `revalidated: true` 응답까지만 검사한다. 완료 조건: 선택한 테스트 문서의 기대 버전/내용이 목록·검색·상세에 반영되는지 제한된 횟수·시간 내 확인하고 불일치 시 실패 종료한다. 운영 문서 원문·token은 로그에 남기지 않으며 로컬 모의 서버로 stale·인증 실패·timeout을 검사한다.
+- [x] `P1` 게시 갱신 스크립트에 발행 결과 확인을 추가했다. 기대값 JSON 기반 목록·검색·상세 검사, 제한 횟수·시간과 불일치 실패 종료, POST 1회와 401/403 즉시 중단, 로그 비밀값 제외를 구현했다. 로컬 콘텐츠 34개와 production 게시 E2E 3개 통과. [검증](../verification/cache/2026-10-08-content-publication-verifier.md), [명령 이행 절차](../runbooks/docs-content-publication-verification.md). NAS 운영 발행·원복과 구분한다.
 - [x] `P1` `apps/docs`의 FSD 3차 정리를 진행한다.
   - `shared/layout`, `shared/navigation` 기반 app shell을 `widgets/app-shell`로 이동
   - `app/layout.tsx`는 shell widget을 조합하는 얇은 엔트리로 정리

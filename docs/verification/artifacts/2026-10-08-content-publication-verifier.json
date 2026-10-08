@@ -1,0 +1,38 @@
+{
+  "verifiedOn": "2026-10-08",
+  "timezone": "Asia/Seoul",
+  "scope": "local working tree, synthetic HTTP and production Next.js fixture",
+  "node": "24.12.0",
+  "pnpm": "11.10.0",
+  "next": "16.3.8",
+  "contentTests": { "passed": 34, "failed": 0, "newPublicationTests": 14 },
+  "contentValidation": {
+    "files": 18,
+    "frontmatter": "passed",
+    "style": "passed"
+  },
+  "nodeTestTypes": "passed",
+  "appTypes": "passed",
+  "focusedLint": "passed",
+  "productionBuild": "passed",
+  "productionE2e": {
+    "project": "article-desktop",
+    "passed": 3,
+    "failed": 0,
+    "durationSeconds": 27.8
+  },
+  "cli": {
+    "staleAfterOriginChangeExitCode": 1,
+    "authorizedRefreshExitCode": 0,
+    "publicChecks": ["list", "search", "article"],
+    "postRetried": false,
+    "publicGetAuthorizationSent": false,
+    "credentialOrBodyLogged": false
+  },
+  "knownServerDiagnostics": {
+    "browserPublicationStreamClosedEarly": 4,
+    "classification": "not established by passing tests"
+  },
+  "nasPublication": "not tested",
+  "productionRequestsSent": false
+}

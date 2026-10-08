@@ -35,6 +35,8 @@
 
 ## 캐시와 정적 셸
 
+- [10-08 게시 결과 검증 CLI](cache/2026-10-08-content-publication-verifier.md): 웹훅 성공과 실제 목록·검색·상세 반영 구분, 모의 14개·production 3개. NAS 운영 발행 미검증.
+
 - [10-04 배포 검색 인덱스 캐시](cache/2026-10-04-deployed-search-index-cache.md): 새 Production SHA·검색 5회와 Runtime Logs, 미인증 웹훅 401. NAS 게시 갱신은 미검증.
 
 - [09-27 docs CI 로그 재검토](cache/2026-09-27-docs-ci-log-review.md): 같은 SHA의 CI·배포 성공과 별개로 남은 hydration 및 스트림 종료 경고를 분리했다.

@@ -12,7 +12,7 @@
         "validate:content": "node ./scripts/validate-content.mjs && node ./scripts/validate-content-style.mjs",
         "pretest:content": "pnpm --filter @web-tech/docs-content-contract build",
         "revalidate:content-cache": "node ./scripts/revalidate-content-cache.mjs",
-        "test:content": "node --test ./scripts/validate-content.test.mjs ./scripts/validate-content-style.test.mjs ./scripts/assert-content-response.test.mjs && pnpm validate:content",
+        "test:content": "node --test ./scripts/validate-content.test.mjs ./scripts/validate-content-style.test.mjs ./scripts/assert-content-response.test.mjs ./scripts/content-publication.test.ts && pnpm validate:content",
         "pretest:crp-lab:browser": "tsc -p tsconfig.crp-e2e.json",
         "test:crp-lab:browser": "playwright test --config=playwright.crp.config.ts",
         "pretest:activity-lab": "pnpm --filter @web-tech/ui build && tsc -p tsconfig.activity-e2e.json",
