@@ -2,6 +2,8 @@
 
 [월별 목록](../README.md)
 
+- [10-09 잔여 의존성 보안 패치](2026-10-09-security-patches.md)
+
 - [주간 글의 로컬 게시와 수요일 자동 실행](2026-10-06-weekly-article-publication.md)
 
 - [10-06 번역·OG 캐시 배포 후속 점검](2026-10-06-deployed-followup.md)

@@ -81,6 +81,8 @@
 
 ## 의존성 보안
 
+- [10-09 잔여 의존성 보안 패치](security/2026-10-09-security-patches.md): 6개 패치·전이 의존성 회귀·빌드 통과, main 기준 braces high 1개 잔여. 병합·배포는 미검증.
+
 - [10-06 배포 후속 점검](security/2026-10-06-deployed-followup.md): 카테고리 번역 16개 조건 통과, 공개 OG 4시간 TTL·원격 H1·braces 알림은 미완료.
 
 - [10-05 운영 블로그 점검](security/2026-10-05-deployed-blog-smoke.md): 배포 alias·32개 기능 검사·source 로그 확인, 원격 H1·카테고리 번역·OG 캐시 계약은 후속 과제.
