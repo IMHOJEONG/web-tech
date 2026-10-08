@@ -4,6 +4,8 @@
 
 - [10-08 게시 검증 CLI 실행 요약](2026-10-08-content-publication-verifier.json): 로컬 stale/인증 경계와 production 갱신 확인. 인증값·원문 제외.
 
+- [10-09 보안 패치 후 production·전체 audit 응답](2026-10-09-security-patch-audit.json): main 기준 braces high 1개, 두 검사 모두 종료 코드 1. [검증 보고서](../security/2026-10-09-security-patches.md).
+
 - [10-06 번역·OG 배포 후속 관측값](2026-10-06-deployed-followup.json): 카테고리 16개 조건과 공개 OG 응답, 인증정보 제외.
 
 - [10-05 운영 블로그 관측값](2026-10-05-deployed-blog-smoke.json): 초회 실패·최종 32개 기능 검사·식별자를 제외한 source/렌더링 관측.
