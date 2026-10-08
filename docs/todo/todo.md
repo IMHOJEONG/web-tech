@@ -90,7 +90,10 @@
 - [x] `P0` Next.js critical advisory `GHSA-vcvr-r3jv-pc5j` 패치를 전달했다. next·@next/mdx 16.3.8의 PR #35 병합·feature 동기화·CI·운영 alias와 정상 OG PNG 3개를 확인했다. 공격 재현 또는 완전한 도달 불가능성 증명은 아니다. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md), [운영 검증](../verification/security/2026-10-05-deployed-blog-smoke.md).
 - [-] `P1` brace-expansion의 DoS 경고 3건을 처리한다. 10-05 작업 트리는 `^5.0.12` override와 lockfile·개발 도구 검사를 반영했고 관련 audit 경고는 사라졌다. 완료 조건: PR CI·main 및 필요한 브랜치 반영을 확인한다. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md).
 - [x] `P1` braces의 공개 카테고리 입력 경계를 보강했다. main·sub allowlist와 glob 비실행 회귀 검사, PR CI·운영 오류 화면/noindex·정상 카테고리 회귀를 확인했다. 패키지 취약점 자체의 해소와는 별개다. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md), [운영 검증](../verification/security/2026-10-05-deployed-blog-smoke.md).
-- [ ] `P1` braces의 미출시 패치를 추적하고 상위 패치·의존성 제거 대안을 검토한다. 10-05 registry 최신은 `3.0.3`으로 audit의 `>=3.0.4`는 출시 확인이 아니다. URL 경계 보강 이후에도 전체·production audit에 high 1개가 남는다. 완료 조건: 실제 패치 또는 검증된 의존성 제거 후 잔여 audit 경고 해소. [패치 조사](../verification/security/2026-10-05-remaining-advisories.md).
+- [x] `P1` docs 직접 fast-glob 경로를 기본 파일 순회로 대체하고 카테고리·검색·revision·production trace를 검증했다. 10-09 로컬 검증 완료, Vercel 배포는 미검증. 저장소 전체 취약점 제거와 구분한다. [ADR-0014](../architecture/adr-0014-local-content-file-discovery.md), [증거](../verification/security/2026-10-09-braces-runtime-removal.md).
+- [-] `P1` braces의 미출시 패치를 추적한다. 10-09 registry 최신은 여전히 `3.0.3`이며 docs 운영 경로는 제거했다. ESLint·두 백엔드 ts-loader의 개발 경로에는 남는다. 완료 조건: 출시 패치 또는 검증된 개발 의존성 제거 후 전체 audit의 해당 경고 해소. [최신 조사](../verification/security/2026-10-09-braces-runtime-removal.md).
+- [ ] `P0` 두 NestJS 백엔드의 proxy-addr critical `GHSA-jqcg-44mw-7w3h`를 공통 main 기반 보안 브랜치에서 조치한다. 10-09 registry에 2.0.8 존재를 확인했다. 완료 조건: lockfile 패치·trust proxy/IP 기반 보호와 두 앱 회귀·CI·병합·배포 확인. 실제 악용 관측은 아님. [audit 결과](../verification/security/2026-10-09-braces-runtime-removal.md).
+- [ ] `P1` 10-09 새 audit의 source-map-js·sharp·seroval·katex 및 개발 postcss-selector-parser 경고를 별도 보안 작업으로 검토한다. 완료 조건: 패치의 실제 출시와 상위 API/major 호환성 확인, 관련 앱 회귀, audit 재검증. 현재 production 5건·전체 7건, 두 audit 모두 종료 코드 1. [검증 보고서](../verification/security/2026-10-09-braces-runtime-removal.md).
 
 ## Shared UI
 

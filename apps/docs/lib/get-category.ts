@@ -1,6 +1,6 @@
-import fg from 'fast-glob'
 import fs from 'fs'
 import path from 'path'
+import { listMarkdownFiles } from './local-markdown-files'
 import { parseLocalDocument } from './local-document-parser'
 import type { Metadata } from './document.types'
 export type { Metadata } from './document.types'
@@ -10,7 +10,6 @@ import {
 } from '~/entities/category/model/category'
 import {
     getLocalCategoryDirectory,
-    resolveLocalContentRoot,
     toLocalContentFileName,
 } from '~/lib/local-content-paths'
 
@@ -23,15 +22,6 @@ export const subCategories = (
 )
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => path.join(categoryDirectory, dirent.name))
-
-async function exploreDirectory(pattern: string) {
-    const files = await fg(pattern, {
-        cwd: resolveLocalContentRoot(),
-        absolute: true,
-    })
-
-    return files
-}
 
 function parseCategoryFile(fileName: string): Partial<Metadata> | null {
     const fileContents = fs.readFileSync(fileName, 'utf8')
@@ -51,8 +41,8 @@ function sortDocsByDate(docs: Partial<Metadata>[]) {
     })
 }
 
-async function getDocsByPattern(pattern: string) {
-    const fileNames = await exploreDirectory(pattern)
+function getDocsByDirectory(directory: string) {
+    const fileNames = listMarkdownFiles(directory)
     return sortDocsByDate(
         fileNames
             .map(parseCategoryFile)
@@ -65,8 +55,8 @@ export async function getSubCategoryData(main: string, sub: string) {
 
     if (!match) return []
 
-    return getDocsByPattern(
-        `category/${match.category.url}/${match.topic.url}/*.{md,mdx}`
+    return getDocsByDirectory(
+        path.join(categoryDirectory, match.category.url, match.topic.url)
     )
 }
 

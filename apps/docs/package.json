@@ -56,7 +56,6 @@
         "clsx": "catalog:",
         "entities": "catalog:docs",
         "esbuild": "^0.28.0",
-        "fast-glob": "catalog:docs",
         "gray-matter": "catalog:docs",
         "ky": "catalog:",
         "lucide-react": "catalog:",

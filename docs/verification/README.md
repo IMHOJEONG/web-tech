@@ -83,6 +83,8 @@
 
 ## 의존성 보안
 
+- [10-09 braces 운영 경로 제거](security/2026-10-09-braces-runtime-removal.md): 라이브러리 216개·production 4개·파일 trace 통과. 개발 braces와 다른 audit 경고는 남아 있음.
+
 - [10-06 배포 후속 점검](security/2026-10-06-deployed-followup.md): 카테고리 번역 16개 조건 통과, 공개 OG 4시간 TTL·원격 H1·braces 알림은 미완료.
 
 - [10-05 운영 블로그 점검](security/2026-10-05-deployed-blog-smoke.md): 배포 alias·32개 기능 검사·source 로그 확인, 원격 H1·카테고리 번역·OG 캐시 계약은 후속 과제.

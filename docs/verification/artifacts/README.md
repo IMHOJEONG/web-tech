@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-09 braces 운영 경로 제거 요약](2026-10-09-braces-runtime-removal.json): 파일·digest 대조와 production trace·잔여 audit, 인증값·원문 제외.
+
 - [10-08 게시 검증 CLI 실행 요약](2026-10-08-content-publication-verifier.json): 로컬 stale/인증 경계와 production 갱신 확인. 인증값·원문 제외.
 
 - [10-06 번역·OG 배포 후속 관측값](2026-10-06-deployed-followup.json): 카테고리 16개 조건과 공개 OG 응답, 인증정보 제외.

@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
+import path from 'node:path'
 import test from 'node:test'
 import { build } from 'esbuild'
 
-test('category loaders validate the real taxonomy before calling glob', async (t) => {
+test('category loaders validate the real taxonomy before reading directories', async (t) => {
     const result = await build({
         stdin: {
             contents: `
@@ -22,7 +23,8 @@ test('category loaders validate the real taxonomy before calling glob', async (t
         write: false,
     })
     const require = createRequire(import.meta.url)
-    const patterns: string[] = []
+    const directories: string[] = []
+    let readError: Error | undefined
     const compiled = {
         exports: {} as {
             categoryTree: readonly {
@@ -39,12 +41,17 @@ test('category loaders validate the real taxonomy before calling glob', async (t
             getMainCategoryOverview: () => Promise<unknown[]>
         },
     }
-    // Exercise the real route-to-pattern code, but never search the filesystem.
+    // Exercise the real loader and walker without reading content directories.
     const mockRequire = (id: string) =>
-        id === 'fast-glob'
-            ? async (pattern: string) => {
-                  patterns.push(pattern)
-                  return []
+        id === 'node:fs' || id === 'fs'
+            ? {
+                  ...require(id),
+                  lstatSync: () => ({ isDirectory: () => true }),
+                  readdirSync: (directory: string) => {
+                      directories.push(directory)
+                      if (readError) throw readError
+                      return []
+                  },
               }
             : require(id)
     new Function('require', 'module', 'exports', result.outputFiles[0]!.text)(
@@ -59,7 +66,7 @@ test('category loaders validate the real taxonomy before calling glob', async (t
         async () => {
             for (const category of api.categoryTree) {
                 for (const topic of category.sub) {
-                    patterns.length = 0
+                    directories.length = 0
                     assert.ok(api.getCategoryTopic(category.url, topic.url))
                     assert.deepEqual(
                         await api.getSubCategoryData(category.url, topic.url),
@@ -69,9 +76,9 @@ test('category loaders validate the real taxonomy before calling glob', async (t
                         await api.getCategoryData(category.url, topic.url),
                         []
                     )
-                    assert.deepEqual(patterns, [
-                        `category/${category.url}/${topic.url}/*.{md,mdx}`,
-                        `category/${category.url}/${topic.url}/*.{md,mdx}`,
+                    assert.deepEqual(directories, [
+                        path.resolve('category', category.url, topic.url),
+                        path.resolve('category', category.url, topic.url),
                     ])
                 }
             }
@@ -103,32 +110,46 @@ test('category loaders validate the real taxonomy before calling glob', async (t
         ['fe', '{'.repeat(10000)],
     ] as const
 
-    await t.test('invalid pairs never reach glob', async () => {
-        patterns.length = 0
+    await t.test('invalid pairs never reach directory reads', async () => {
+        directories.length = 0
         for (const [main, sub] of invalidPairs) {
             assert.equal(api.getCategoryTopic(main, sub), null)
             assert.deepEqual(await api.getSubCategoryData(main, sub), [])
             assert.deepEqual(await api.getCategoryData(main, sub), [])
         }
-        assert.deepEqual(patterns, [])
+        assert.deepEqual(directories, [])
     })
 
     await t.test('overview paths only use configured categories', async () => {
-        patterns.length = 0
+        directories.length = 0
         assert.deepEqual(await api.getSubCategoryOverview('{fe,be}'), [])
-        assert.deepEqual(patterns, [])
+        assert.deepEqual(directories, [])
         const overview = await api.getMainCategoryOverview()
         assert.equal(overview.length, api.categoryTree.length)
         assert.deepEqual(
-            [...patterns].sort(),
+            [...directories].sort(),
             api.categoryTree
                 .flatMap((category) =>
-                    category.sub.map(
-                        (topic) =>
-                            `category/${category.url}/${topic.url}/*.{md,mdx}`
+                    category.sub.map((topic) =>
+                        path.resolve('category', category.url, topic.url)
                     )
                 )
                 .sort()
         )
     })
+
+    await t.test(
+        'filesystem failures are not cached as empty content',
+        async () => {
+            readError = Object.assign(new Error('fixture permission failure'), {
+                code: 'EACCES',
+            })
+            const category = api.categoryTree[0]!
+            await assert.rejects(
+                api.getSubCategoryData(category.url, category.sub[0]!.url),
+                (error) => error === readError
+            )
+            readError = undefined
+        }
+    )
 })

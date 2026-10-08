@@ -74,6 +74,12 @@ const nextConfig = {
     transpilePackages: ['@web-tech/ui'],
     outputFileTracingIncludes: {
         '/og/article.png': ['./public/fonts/Pretendard-Bold.otf'],
+        '/*': [
+            './data/**/*.md',
+            './data/**/*.mdx',
+            './category/**/*.md',
+            './category/**/*.mdx',
+        ],
     },
     headers() {
         return [

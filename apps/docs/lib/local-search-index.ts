@@ -1,9 +1,8 @@
-import fg from 'fast-glob'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { parseLocalDocument } from './local-document-parser.ts'
 import { getDocHref } from './get-doc-route.ts'
-import { LOCAL_SEARCH_PATTERNS } from './local-search-revision.ts'
+import { listLocalMarkdownFiles } from './local-markdown-files.ts'
 import type { SearchData } from './get-search-data'
 
 export function inferSearchSection(fileName: string) {
@@ -20,7 +19,7 @@ export function inferSearchSection(fileName: string) {
 export async function loadLocalSearchIndex(
     root: string
 ): Promise<SearchData[]> {
-    const files = await fg(LOCAL_SEARCH_PATTERNS, { cwd: root, absolute: true })
+    const files = listLocalMarkdownFiles(root)
     const parsed = await Promise.all(
         files.map(async (file) => {
             const raw = await fs.readFile(file, 'utf8')

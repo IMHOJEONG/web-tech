@@ -20,6 +20,8 @@
 
 새 결정의 작성·대체 규칙은 [ADR 관리 규칙](../process/adr-management.md)을 참고합니다.
 
+- [ADR-0014: 로컬 문서의 기본 파일 탐색](adr-0014-local-content-file-discovery.md): 적용 중. docs 운영 glob 경로 제거·trace 검사, 개발 도구의 braces와 운영 배포는 별도.
+
 - [ADR-0013: 공용 UI 외부 설치 계약](adr-0013-shared-ui-external-package.md): 적용 중. React peer·CSS export·tarball 검증, registry 게시와 실제 외부 앱 이전 미실행.
 
 - [ADR-0012: 공개 글 기반 탐색 모음](adr-0012-content-discovery-collections.md): 적용 중. 태그 query·시리즈/학습 경로, 운영 배포 미검증.
@@ -58,7 +60,7 @@
 - [Docs Content Cache Revalidation Policy](docs-content-cache-revalidation-policy.md)
 - [Docs Content Operating Model](docs-content-operating-model.md)
 - [Docs Content Rendering Strategy](docs-content-rendering-strategy.md)
-- [Docs Content Routing Policy](docs-content-routing-policy.md): 공개 URL과 카테고리 입력 allowlist, glob 실행 전 검증 경계.
+- [Docs Content Routing Policy](docs-content-routing-policy.md): 공개 URL과 카테고리 입력 allowlist, 기본 파일 탐색 전 검증 경계.
 - [Docs Design Token Usage Policy](docs-design-token-usage-policy.md)
 - [Docs Document UI Reuse Policy](docs-document-ui-reuse-policy.md)
 - [문서 화면의 정적 셸과 동적 영역 경계](docs-dynamic-content-boundaries.md)
