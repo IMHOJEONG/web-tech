@@ -22,6 +22,10 @@
 
 ## Dependency Security
 
+- [-] `P0` proxy-addr·sharp·source-map-js·seroval·KaTeX·selector parser 보안 패치를 main에 전달한다. 10-09 별도 보안 작업 트리의 패치·회귀·production 빌드를 통과했다. 완료 조건: 커밋·PR CI·main 병합·배포 브랜치 동기화·Linux 배포 검증. braces high 1개가 남아 전체 보안 조치 완료는 아니다. [검증 보고서](../verification/security/2026-10-09-security-patches.md).
+- [ ] `P1` main의 fast-glob 운영 경로 제거와 개발 도구의 braces 경로를 각각 처리한다. feature/docs의 `c574bbd` 제거 구현 전달 후 production audit을 재검사하고, 개발 경로는 실제 상위 패치 출시와 회귀 검증으로 해결한다. 미출시 `>=3.0.4`를 강제하지 않는다. [10-09 잔여 경로](../verification/security/2026-10-09-security-patches.md#남은-braces-경고).
+- [ ] `P2` rehype-katex·Typography의 공식 보안 의존성 지원 후 scoped override를 제거할 수 있는지 재검토한다. KaTeX 0.18.2는 이번에 검증한 임시 고정이며, 0.19 전환은 별도 수식 호환성 검증 후 결정한다. [선택 이유](../verification/security/2026-10-09-security-patches.md#패치한-패키지).
+
 - [-] `P1` fast-uri·multer 보안 override와 lockfile을 main에 반영한다. 10-05 보안 브랜치의 로컬 회귀 검사는 통과했다. 완료 조건: PR CI·main 병합 후 Dependabot #331~#334 종료와 필요한 배포 브랜치 동기화를 확인한다. [검증 보고서](../verification/security/2026-10-05-fast-uri-multer.md).
 - [-] `P0` Next.js critical advisory `GHSA-vcvr-r3jv-pc5j` 패치를 전달한다. 10-05 작업 트리의 next·@next/mdx는 `16.3.8`로 정렬했고 로컬 빌드를 통과했다. 완료 조건: PR CI·main 병합·배포 브랜치 동기화 후 실제 OG 이미지 경로와 배포를 재검증한다. main에 사용처가 없다는 사실만으로 배포 안전을 확정하지 않는다. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md).
 - [-] `P1` brace-expansion의 DoS 경고 3건을 처리한다. 10-05 작업 트리는 `^5.0.12` override와 lockfile·개발 도구 검사를 반영했고 관련 audit 경고는 사라졌다. 완료 조건: PR CI·main 및 필요한 브랜치 반영을 확인한다. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md).
