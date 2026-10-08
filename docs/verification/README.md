@@ -63,6 +63,8 @@
 
 ## 의존성 보안
 
+- [10-09 잔여 의존성 보안 패치](security/2026-10-09-security-patches.md): 6개 패치·전이 의존성 회귀·빌드 통과, main 기준 braces high 1개 잔여. 병합·배포는 미검증.
+
 - [10-05 Next.js 패치·카테고리 입력 경계 검증](security/2026-10-05-next-category-hardening.md): Next.js 16.3.8·brace-expansion 5.0.12, glob 비실행 검사와 잔여 braces 경고.
 - [10-05 잔여 취약점 조사](security/2026-10-05-remaining-advisories.md): production 경고 2건, 카테고리 입력의 glob 해석과 braces 패치 미출시 확인.
 - [10-05 fast-uri·multer 보안 업데이트 검증](security/2026-10-05-fast-uri-multer.md): main 기준 override·lockfile 갱신, 회귀 검사 통과와 별도 잔여 취약점 5건. 병합·배포는 미검증.
