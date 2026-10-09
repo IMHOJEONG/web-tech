@@ -127,6 +127,8 @@ PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 �
 - [-] `P1` source-map-js·sharp·seroval: PR #36에서 버전 범위와 lockfile을 갱신하고 회귀 검사 후 main·feature에 반영했다. 남은 완료 조건: Vercel/Linux의 실제 이미지·OG·런타임 의존성 확인. 조사 당시 production 5건·전체 7건은 현재 상태가 아니라 [패치 전 기록](../verification/security/2026-10-09-remaining-advisories.md)이다. [패치 결과](../verification/security/2026-10-09-security-patches.md).
 - [-] `P2` KaTeX 0.18.2·postcss-selector-parser 7.1.6: 상위 범위 밖 갱신은 PR #36에서 parent-scoped override와 수식·Typography 회귀 검사를 거쳐 main·feature에 반영했다. 남은 완료 조건: 운영 화면 검증과 상위 공식 지원 시 override 재검토. [당시 대안 조사](../verification/security/2026-10-09-remaining-advisories.md), [적용 결과](../verification/security/2026-10-09-security-patches.md).
 
+- [ ] `P1` 10-09 최신 전체 audit의 Handlebars 4.7.9 경고 3건(critical 2·moderate 1)을 main 기반 별도 보안 작업으로 점검한다. 두 backend의 `ts-jest` 개발 경로이며 production audit에서는 검출되지 않았다. 완료 조건: 패치 실제 출시·상위 API 호환성 확인, 두 backend 테스트와 전체 audit 재검증. 악용·운영 도달성을 관측했다는 의미는 아니다. [조회 기록](../worklog/2026-10/2026-10-09-reviewed-wip-publication.md).
+
 ## Shared UI
 
 - [x] `P2` UI React peer·CSS/hook export·0.1.x 버전 기준과 독립 tarball 검사를 추가했다. [ADR-0013](../architecture/adr-0013-shared-ui-external-package.md). registry 게시와 실제 외부 앱 이전은 완료가 아니다.

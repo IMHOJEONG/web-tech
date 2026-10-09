@@ -2,9 +2,15 @@
 
 [월별 목록](../README.md)
 
+- [10-09 미커밋 기록 선별과 docs 푸시 전 검증](2026-10-09-reviewed-wip-publication.md)
+
+- [10-09 Jira PR #37 병합 후 feature 브랜치 동기화](2026-10-09-feature-sync-after-jira-pr37.md)
+
 - [10-09 Confluence 개발·운영 안내 게시](2026-10-09-confluence-project-guide.md)
 
 - [10-09 Jira 우선 과제와 Confluence 연결 확인](2026-10-09-jira-issue-tracking.md)
+
+- [10-09 보안 PR #36 병합 후 feature 브랜치 동기화](2026-10-09-feature-sync-after-security-pr36.md)
 
 - [남은 취약점 7건과 패치 가용성 재점검](2026-10-09-remaining-advisories.md)
 
