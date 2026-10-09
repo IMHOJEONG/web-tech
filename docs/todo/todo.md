@@ -20,6 +20,26 @@
 - `P1` 가까운 시일 내 반영 권장
 - `P2` 품질 향상용 중기 과제
 
+## Jira 우선 과제
+
+2026-10-09부터 아래 등록 과제의 진행 상태·보류 사유는 Jira에서 관리한다. 이 표는 상태를 복제하지 않는 연결 목차이며, 나머지 TODO 후보는 기존 목록에서 유지한다. [이슈 추적 규칙](../process/issue-tracking.md)을 따른다.
+
+에픽: [KAN-1 · 운영 검증과 공용 플랫폼 후속 개선](https://web-tech-service.atlassian.net/browse/KAN-1).
+
+| 이슈                                                           | 작업                                     | 앱 라벨                               | 우선순위 / 제약                  |
+| -------------------------------------------------------------- | ---------------------------------------- | ------------------------------------- | -------------------------------- |
+| [KAN-2](https://web-tech-service.atlassian.net/browse/KAN-2)   | PR #36 CI·Linux 배포 검증                | docs, docs-backend, vuln-radar, infra | p1                               |
+| [KAN-3](https://web-tech-service.atlassian.net/browse/KAN-3)   | 운영 glob 제거의 main 전달·braces 재검사 | docs, infra                           | p1                               |
+| [KAN-4](https://web-tech-service.atlassian.net/browse/KAN-4)   | 웹 푸시 WAF·초대 세션·쿠키 검증          | docs, docs-backend, infra             | p0-gate · 활성화 전제            |
+| [KAN-5](https://web-tech-service.atlassian.net/browse/KAN-5)   | Production 성능·요청 오류 관측           | docs, infra                           | p1                               |
+| [KAN-6](https://web-tech-service.atlassian.net/browse/KAN-6)   | 실제 브라우저·실기기·접근성 검사         | docs, ui                              | p1                               |
+| [KAN-7](https://web-tech-service.atlassian.net/browse/KAN-7)   | 공용 UI 외부 소비 앱 검증                | ui                                    | p2                               |
+| [KAN-8](https://web-tech-service.atlassian.net/browse/KAN-8)   | vuln-radar 구현·테스트 기준선 점검       | vuln-radar, infra                     | p1                               |
+| [KAN-9](https://web-tech-service.atlassian.net/browse/KAN-9)   | NAS 게시·웹훅·화면 새 버전 검증          | docs, docs-backend, infra             | p1 · SSH 차단으로 보류           |
+| [KAN-10](https://web-tech-service.atlassian.net/browse/KAN-10) | 외부 백업과 격리 복구 리허설             | docs-backend, vuln-radar, infra       | p1 · 외부 저장소 미구축으로 보류 |
+
+PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 과거 보안 항목의 미완료 체크만 보고 동일 패치를 다시 구현하지 않는다. CI·실제 배포는 KAN-2, main의 잔여 운영 glob 경로는 KAN-3에서 추적한다. 작업 등록을 구현·배포 검증 완료로 간주하지 않는다.
+
 ## Dependency Security
 
 - [-] `P0` proxy-addr·sharp·source-map-js·seroval·KaTeX·selector parser 보안 패치를 main에 전달한다. 10-09 별도 보안 작업 트리의 패치·회귀·production 빌드를 통과했다. 완료 조건: 커밋·PR CI·main 병합·배포 브랜치 동기화·Linux 배포 검증. braces high 1개가 남아 전체 보안 조치 완료는 아니다. [검증 보고서](../verification/security/2026-10-09-security-patches.md).
