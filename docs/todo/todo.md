@@ -64,7 +64,14 @@ PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 �
 | 6    | P1        | 실제 브라우저·접근성 검사 | Safari/Firefox, 실제 모바일·태블릿, OS IME, VoiceOver/NVDA에서 검색·Drawer·Tooltip·회전·스크롤·포커스 확인. 재현된 결함을 개별 수정하며 기존 headless 성공과 구분                                                      |
 | 7    | P2        | 캐시 경계 추가 검사       | TTL 만료, 동시 cold 요청, 로컬 글이 바뀐 재배포, 원격 장애→복구를 검증. corpus가 커질 때 경로별 무효화와 인덱스 엔진 재검토. [ADR-0011](../architecture/adr-0011-local-search-index-cache.md)                          |
 
-4번 게시 검증 도구는 10-08 로컬 구현·검증을 완료했다. [결과](../verification/cache/2026-10-08-content-publication-verifier.md)와 [실행 절차](../runbooks/docs-content-publication-verification.md)를 따른다. 1번 NAS 운영 발행·원복은 별도로 남아 있다. NAS 연결 준비와 백업 목적지 설정이 필요한 동안 6번 로컬 검사를 진행할 수 있다. P0 조건부는 공개 활성화의 선행 조건이며 현재 악용·장애를 관측했다는 뜻은 아니다.
+4번 게시 검증 도구는 10-08 로컬 구현·검증을 완료했다. [결과](../verification/cache/2026-10-08-content-publication-verifier.md)와 [실행 절차](../runbooks/docs-content-publication-verification.md)를 따른다. NAS 운영 발행·원복과 외부 백업·복원은 아래 사유로 추후 점검한다. 그동안 6번 로컬 검사를 진행할 수 있다. P0 조건부는 공개 활성화의 선행 조건이며 현재 악용·장애를 관측했다는 뜻은 아니다.
+
+#### 추후 점검으로 보류한 NAS 과제
+
+2026-10-09 사용자 결정이다. 대화의 **2번·4번**은 위 표의 순서가 아니라 각각 다음 과제를 가리킨다. 두 항목 모두 미완료·미검증 상태로 유지하며 이번 작업에서는 실행하지 않는다.
+
+- [ ] `P1` **NAS 게시 갱신의 실제 검증(대화 2번): 보류.** 사용자가 보안 조치로 SSH를 차단했다. 이 검증을 위해 SSH를 다시 열도록 요구하거나 연결을 시도하지 않는다. 재개 조건: 사용자가 승인한 안전한 작업 경로와 시험 문서를 준비하고 점검 재개를 요청한다. 완료 조건: NAS에서 V1→V2 변경, 인증된 웹훅, 목록·검색·상세의 새 버전 확인, 원복까지 기록한다. [게시 검증 절차](../runbooks/docs-content-publication-verification.md).
+- [ ] `P1` **NAS 외부 백업과 격리 복원(대화 4번): 보류.** NAS 외부 백업 저장소가 아직 없다. 재개 조건: 저장소·도구·접근 권한·암호화 및 보존 기준을 마련하고 점검 재개를 요청한다. 완료 조건: 실제 외부 백업과 성공/실패 알림, 격리 복원, 데이터·API 검증 및 실제 RTO/RPO를 기록한다. 정책 문서나 NAS 내부 복사만으로 완료 처리하지 않는다. [복구 리허설 절차](../runbooks/platform-recovery-drill.md).
 
 ### 사용자에게 추가할 기능
 
