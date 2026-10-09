@@ -2,6 +2,10 @@
 
 [월별 목록](../README.md)
 
+- [10-09 Confluence 개발·운영 안내 게시](2026-10-09-confluence-project-guide.md)
+
+- [10-09 Jira 우선 과제와 Confluence 연결 확인](2026-10-09-jira-issue-tracking.md)
+
 - [10-09 잔여 의존성 보안 패치](2026-10-09-security-patches.md)
 
 - [주간 글의 로컬 게시와 수요일 자동 실행](2026-10-06-weekly-article-publication.md)
