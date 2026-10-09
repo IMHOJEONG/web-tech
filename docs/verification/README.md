@@ -83,6 +83,8 @@
 
 ## 의존성 보안
 
+- [10-09 패치 전 잔여 취약점 조사](security/2026-10-09-remaining-advisories.md): `c574bbd`에서 production 5건·전체 7건 관측. 후속 PR #36의 패치 결과와 현재 운영 상태는 별도로 구분한다.
+
 - [10-09 braces 운영 경로 제거](security/2026-10-09-braces-runtime-removal.md): 라이브러리 216개·production 4개·파일 trace 통과. 개발 braces와 다른 audit 경고는 남아 있음.
 
 - [10-09 잔여 의존성 보안 패치](security/2026-10-09-security-patches.md): 6개 패치·전이 의존성 회귀·빌드 통과, main 기준 braces high 1개 잔여. 병합·배포는 미검증.

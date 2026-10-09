@@ -123,8 +123,9 @@ PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 �
 - [x] `P1` braces의 공개 카테고리 입력 경계를 보강했다. main·sub allowlist와 glob 비실행 회귀 검사, PR CI·운영 오류 화면/noindex·정상 카테고리 회귀를 확인했다. 패키지 취약점 자체의 해소와는 별개다. [구현 검증](../verification/security/2026-10-05-next-category-hardening.md), [운영 검증](../verification/security/2026-10-05-deployed-blog-smoke.md).
 - [x] `P1` docs 직접 fast-glob 경로를 기본 파일 순회로 대체하고 카테고리·검색·revision·production trace를 검증했다. 10-09 로컬 검증 완료, Vercel 배포는 미검증. 저장소 전체 취약점 제거와 구분한다. [ADR-0014](../architecture/adr-0014-local-content-file-discovery.md), [증거](../verification/security/2026-10-09-braces-runtime-removal.md).
 - [-] `P1` braces의 미출시 패치를 추적한다. 10-09 registry 최신은 여전히 `3.0.3`이며 docs 운영 경로는 제거했다. ESLint·두 백엔드 ts-loader의 개발 경로에는 남는다. 완료 조건: 출시 패치 또는 검증된 개발 의존성 제거 후 전체 audit의 해당 경고 해소. [최신 조사](../verification/security/2026-10-09-braces-runtime-removal.md).
-- [ ] `P0` 두 NestJS 백엔드의 proxy-addr critical `GHSA-jqcg-44mw-7w3h`를 공통 main 기반 보안 브랜치에서 조치한다. 10-09 registry에 2.0.8 존재를 확인했다. 완료 조건: lockfile 패치·trust proxy/IP 기반 보호와 두 앱 회귀·CI·병합·배포 확인. 실제 악용 관측은 아님. [audit 결과](../verification/security/2026-10-09-braces-runtime-removal.md).
-- [ ] `P1` 10-09 새 audit의 source-map-js·sharp·seroval·katex 및 개발 postcss-selector-parser 경고를 별도 보안 작업으로 검토한다. 완료 조건: 패치의 실제 출시와 상위 API/major 호환성 확인, 관련 앱 회귀, audit 재검증. 현재 production 5건·전체 7건, 두 audit 모두 종료 코드 1. [검증 보고서](../verification/security/2026-10-09-braces-runtime-removal.md).
+- [-] `P0` 두 NestJS 백엔드의 proxy-addr critical `GHSA-jqcg-44mw-7w3h`: 2.0.8 패치와 회귀 검사는 PR #36으로 main에 병합되고 feature 브랜치에 전달됐다. 남은 완료 조건: 실제 운영 이미지의 패치·proxy 설정과 배포 검증. 실제 악용 관측은 아님. [패치 검증](../verification/security/2026-10-09-security-patches.md).
+- [-] `P1` source-map-js·sharp·seroval: PR #36에서 버전 범위와 lockfile을 갱신하고 회귀 검사 후 main·feature에 반영했다. 남은 완료 조건: Vercel/Linux의 실제 이미지·OG·런타임 의존성 확인. 조사 당시 production 5건·전체 7건은 현재 상태가 아니라 [패치 전 기록](../verification/security/2026-10-09-remaining-advisories.md)이다. [패치 결과](../verification/security/2026-10-09-security-patches.md).
+- [-] `P2` KaTeX 0.18.2·postcss-selector-parser 7.1.6: 상위 범위 밖 갱신은 PR #36에서 parent-scoped override와 수식·Typography 회귀 검사를 거쳐 main·feature에 반영했다. 남은 완료 조건: 운영 화면 검증과 상위 공식 지원 시 override 재검토. [당시 대안 조사](../verification/security/2026-10-09-remaining-advisories.md), [적용 결과](../verification/security/2026-10-09-security-patches.md).
 
 ## Shared UI
 

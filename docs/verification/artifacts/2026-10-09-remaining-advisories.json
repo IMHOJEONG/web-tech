@@ -1,0 +1,105 @@
+{
+  "verifiedAt": "2026-10-09",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "c574bbd",
+  "node": "24.12.0",
+  "pnpm": "11.10.0",
+  "audit": {
+    "production": {
+      "exitCode": 1,
+      "critical": 1,
+      "high": 3,
+      "moderate": 0,
+      "low": 1
+    },
+    "all": { "exitCode": 1, "critical": 1, "high": 4, "moderate": 1, "low": 1 }
+  },
+  "registryChecks": [
+    {
+      "package": "proxy-addr",
+      "locked": "2.0.7",
+      "patch": "2.0.8",
+      "severity": "critical",
+      "scope": "production",
+      "patchExists": true,
+      "enginesNode": ">= 0.10"
+    },
+    {
+      "package": "sharp",
+      "locked": "0.35.4",
+      "patch": "0.35.5",
+      "severity": "high",
+      "scope": "production-optional",
+      "patchExists": true,
+      "enginesNode": ">=20.9.0"
+    },
+    {
+      "package": "source-map-js",
+      "locked": "1.2.1",
+      "patch": "1.2.2",
+      "severity": "high",
+      "scope": "production",
+      "patchExists": true,
+      "enginesNode": ">=0.10.0"
+    },
+    {
+      "package": "seroval",
+      "locked": "1.6.2",
+      "patch": "1.6.3",
+      "severity": "high",
+      "scope": "production",
+      "patchExists": true,
+      "enginesNode": ">=10"
+    },
+    {
+      "package": "katex",
+      "locked": "0.16.45",
+      "patch": "0.18.2",
+      "severity": "low",
+      "scope": "production",
+      "patchExists": true,
+      "enginesNode": null
+    },
+    {
+      "package": "postcss-selector-parser",
+      "locked": "6.0.10",
+      "patch": "7.1.6",
+      "severity": "moderate",
+      "scope": "development",
+      "patchExists": true,
+      "enginesNode": ">=4"
+    },
+    {
+      "package": "braces",
+      "locked": "3.0.3",
+      "registryLatest": "3.0.3",
+      "patch": null,
+      "severity": "high",
+      "scope": "development",
+      "patchExists": false
+    }
+  ],
+  "upstreamChecks": [
+    {
+      "package": "rehype-katex",
+      "registryLatest": "7.0.1",
+      "child": "katex",
+      "childRange": "^0.16.0"
+    },
+    {
+      "package": "@tailwindcss/typography",
+      "registryLatest": "0.5.20",
+      "child": "postcss-selector-parser",
+      "childRange": "6.0.10"
+    }
+  ],
+  "packageChanges": false,
+  "lockfileChanges": false,
+  "exploitTests": false,
+  "deploymentInspection": false,
+  "notes": [
+    "Sanitized execution summary, not a full raw audit response.",
+    "Package presence alone does not prove exploitable deployment.",
+    "Node engine allowance does not verify upstream API compatibility."
+  ]
+}

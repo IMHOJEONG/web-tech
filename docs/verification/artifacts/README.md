@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-09 잔여 취약점 실행 요약](2026-10-09-remaining-advisories.json): audit 집계·registry 패치 확인·상위 범위, 비밀값 제외.
+
 - [10-09 braces 운영 경로 제거 요약](2026-10-09-braces-runtime-removal.json): 파일·digest 대조와 production trace·잔여 audit, 인증값·원문 제외.
 
 - [10-08 게시 검증 CLI 실행 요약](2026-10-08-content-publication-verifier.json): 로컬 stale/인증 경계와 production 갱신 확인. 인증값·원문 제외.

@@ -6,6 +6,8 @@
 
 - [10-09 Jira 우선 과제와 Confluence 연결 확인](2026-10-09-jira-issue-tracking.md)
 
+- [남은 취약점 7건과 패치 가용성 재점검](2026-10-09-remaining-advisories.md)
+
 - [로컬 문서 탐색에서 운영 glob 의존성 제거](2026-10-09-braces-runtime-removal.md)
 
 - [캐시 만료와 실제 게시 결과 검증 분리](2026-10-08-content-publication-verifier.md)
