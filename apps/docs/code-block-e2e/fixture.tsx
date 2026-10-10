@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client'
+import { NextIntlClientProvider } from 'next-intl'
 import { CodeBlockFrame } from '../feature/code-block/ui/code-block-frame'
 import { RemoteCodeCopyEnhancer } from '../feature/code-block/ui/remote-code-copy-enhancer'
 
@@ -12,25 +13,31 @@ declare global {
 
 const { code, remoteHtml } = window.codeFixture
 createRoot(document.getElementById('fixture')!).render(
-    <div className="mdx-wrapper">
-        <section data-testid="local">
-            <CodeBlockFrame code={code} language="TS">
-                <pre className="mdx-code-block">
-                    <code>{code}</code>
-                </pre>
-            </CodeBlockFrame>
-        </section>
-        <section data-testid="shiki">
-            <CodeBlockFrame code={code} language="TS">
-                <pre className="shiki">
-                    <code>{code}</code>
-                </pre>
-            </CodeBlockFrame>
-        </section>
-        <section
-            data-testid="remote"
-            dangerouslySetInnerHTML={{ __html: remoteHtml }}
-        />
-        <RemoteCodeCopyEnhancer />
-    </div>
+    <NextIntlClientProvider
+        locale={document.documentElement.lang}
+        messages={{}}
+        timeZone="Asia/Seoul"
+    >
+        <div className="mdx-wrapper">
+            <section data-testid="local">
+                <CodeBlockFrame code={code} language="TS">
+                    <pre className="mdx-code-block">
+                        <code>{code}</code>
+                    </pre>
+                </CodeBlockFrame>
+            </section>
+            <section data-testid="shiki">
+                <CodeBlockFrame code={code} language="TS">
+                    <pre className="shiki">
+                        <code>{code}</code>
+                    </pre>
+                </CodeBlockFrame>
+            </section>
+            <section
+                data-testid="remote"
+                dangerouslySetInnerHTML={{ __html: remoteHtml }}
+            />
+            <RemoteCodeCopyEnhancer />
+        </div>
+    </NextIntlClientProvider>
 )

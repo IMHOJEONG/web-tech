@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-10 코드 접기 커밋과 UI/UX 점검](2026-10-10-code-block-ui-check.md)
+
 [월별 목록](../README.md)
 
 - [10-09 긴 코드 블록 접기](2026-10-09-code-block-disclosure.md)

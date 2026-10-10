@@ -85,10 +85,10 @@ function normalizeRemoteCodeBlocks(content: string) {
             )}">${highlightedCode}</code></pre>`
             const disclosure = getCodeDisclosure(code)
             const body = disclosure.collapsible
-                ? `<details class="mdx-code-disclosure"><summary>${getCodeDisclosureSummary(disclosure.lineCount)}</summary>${fullCode}</details><pre class="mdx-code-block mdx-code-preview"><code>${highlightCode(disclosure.preview, normalizedLanguage)}</code></pre>`
+                ? `<details class="mdx-code-disclosure"><summary>${getCodeDisclosureSummary(disclosure.lineCount, normalizedLanguage)}</summary>${fullCode}</details><pre class="mdx-code-block mdx-code-preview"><code>${highlightCode(disclosure.preview, normalizedLanguage)}</code></pre>`
                 : fullCode
 
-            return `<figure class="mdx-code-frame${disclosure.collapsible ? ' mdx-code-frame--collapsible' : ''}">${body}<figcaption class="mdx-code-frame__language">${languageLabel}</figcaption></figure>`
+            return `<figure class="mdx-code-frame${disclosure.collapsible ? ' mdx-code-frame--collapsible' : ''}">${body}${disclosure.collapsible ? '' : `<figcaption class="mdx-code-frame__language">${languageLabel}</figcaption>`}</figure>`
         }
     )
 }

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { getCodeCopyLabels } from './code-copy-labels.ts'
 import {
     getCodeDisclosure,
     getCodeDisclosureSummary,
@@ -45,7 +46,33 @@ test('remote long code uses native details with full code before a safe preview'
     assert.doesNotMatch(result.content.split('mdx-code-preview')[1]!, /line22/)
     assert.doesNotMatch(result.content, /<script>/)
     assert.match(result.content, /mdx-code-token--keyword/)
-    assert.match(result.content, /mdx-code-frame__language">JS/)
+    assert.match(
+        result.content,
+        /mdx-code-disclosure__language" aria-hidden="true">js/
+    )
+})
+
+test('shared copy labels cover every state in Korean and English', () => {
+    assert.deepEqual(getCodeCopyLabels('en'), {
+        idle: { text: 'Copy', announcement: 'Copy code' },
+        copied: { text: 'Copied', announcement: 'Code copied' },
+        error: { text: 'Copy failed', announcement: 'Failed to copy code' },
+    })
+    assert.equal(
+        getCodeCopyLabels('ko').copied.announcement,
+        '코드가 복사되었습니다'
+    )
+    assert.equal(getCodeCopyLabels('ko').error.text, '복사 실패')
+})
+
+test('footer language is escaped before local or remote HTML insertion', () => {
+    const summary = getCodeDisclosureSummary(
+        28,
+        '<img src=x onerror="alert(1)">'
+    )
+    assert.doesNotMatch(summary, /<img/)
+    assert.match(summary, /&lt;img/)
+    assert.match(summary, /&quot;alert\(1\)&quot;/)
 })
 
 test('remote short code stays expanded with one pre and no disclosure', () => {

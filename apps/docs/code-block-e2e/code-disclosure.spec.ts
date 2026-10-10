@@ -80,10 +80,9 @@ for (const locale of ['ko', 'en']) {
                 await expect(details.locator('pre')).toBeHidden()
                 await expect(details).toHaveCSS('padding-top', '0px')
                 await expect(details).toHaveCSS('margin-top', '0px')
-                await expect(frame.locator('figcaption')).toHaveCSS(
-                    'font-size',
-                    '10px'
-                )
+                await expect(
+                    frame.locator('.mdx-code-disclosure__language')
+                ).toHaveCSS('font-size', '10px')
                 await expect(
                     frame.locator('.mdx-code-preview code')
                 ).not.toContainText('value27')
@@ -93,7 +92,10 @@ for (const locale of ['ko', 'en']) {
                     })
                 }
                 await frame
-                    .getByRole('button', { name: '코드 복사', exact: true })
+                    .getByRole('button', {
+                        name: locale === 'en' ? 'Copy code' : '코드 복사',
+                        exact: true,
+                    })
                     .click()
                 // Remote HTML already trims outer whitespace during sanitization.
                 const expectedCode = source === 'remote' ? code.trim() : code
@@ -108,6 +110,12 @@ for (const locale of ['ko', 'en']) {
                 await expect(copyButton).toHaveAttribute(
                     'data-copy-state',
                     'copied'
+                )
+                await expect(copyButton).toHaveAccessibleName(
+                    locale === 'en' ? 'Code copied' : '코드가 복사되었습니다'
+                )
+                await expect(copyButton).toContainText(
+                    locale === 'en' ? 'Copied' : '복사됨'
                 )
                 expect(
                     (await copyButton.boundingBox())!.height
@@ -124,7 +132,20 @@ for (const locale of ['ko', 'en']) {
                     'error'
                 )
                 await expect(copyButton).toHaveAccessibleName(
-                    '코드 복사에 실패했습니다'
+                    locale === 'en'
+                        ? 'Failed to copy code'
+                        : '코드 복사에 실패했습니다'
+                )
+                await expect(copyButton).toContainText(
+                    locale === 'en' ? 'Copy failed' : '복사 실패'
+                )
+                await expect(copyButton).toHaveAttribute(
+                    'data-copy-state',
+                    'idle',
+                    { timeout: 4000 }
+                )
+                await expect(copyButton).toHaveAccessibleName(
+                    locale === 'en' ? 'Copy code' : '코드 복사'
                 )
                 await page.evaluate(() => {
                     window.codeCopyFails = false
@@ -198,3 +219,48 @@ test('native disclosure still works with JavaScript disabled', async ({
         await context.close()
     }
 })
+
+for (const scale of [1.25, 1.5, 2]) {
+    test(`320px English footer keeps separate metadata at ${scale * 100}% root text`, async ({
+        page,
+    }) => {
+        await page.setViewportSize({ width: 320, height: 900 })
+        await page.setContent(
+            `<html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1"><style>*{box-sizing:border-box}:root{font-size:${16 * scale}px;--hf-bg-deep:#171717;--font-mono:monospace;--font-display:sans-serif}body{margin:16px}${css}</style></head><body><div class="mdx-wrapper">${remoteHtml}</div></body></html>`
+        )
+        const details = page.locator('details')
+        for (const open of [false, true]) {
+            if (open) await details.locator('summary').click()
+            await expect(details.locator('pre')).toBeVisible({ visible: open })
+            await expect(page.locator('.mdx-code-preview')).toBeVisible({
+                visible: !open,
+            })
+            const layout = await details.locator('summary').evaluate((el) => {
+                const label = el
+                    .querySelector('[data-code-locale="en"]')!
+                    .getBoundingClientRect()
+                const count = el
+                    .querySelector('[data-code-locale="en"] small')!
+                    .getBoundingClientRect()
+                const language = el
+                    .querySelector('.mdx-code-disclosure__language')!
+                    .getBoundingClientRect()
+                const summary = el.getBoundingClientRect()
+                return {
+                    separate:
+                        label.right <= language.left &&
+                        count.right <= language.left,
+                    contained:
+                        language.right <= summary.right &&
+                        label.bottom <= summary.bottom,
+                    overflow: document.documentElement.scrollWidth > innerWidth,
+                }
+            })
+            expect(layout).toEqual({
+                separate: true,
+                contained: true,
+                overflow: false,
+            })
+        }
+    })
+}

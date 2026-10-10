@@ -8,6 +8,8 @@
 
 ## 성능과 화면 안정성
 
+- [10-10 코드 접기 UI/UX](accessibility/2026-10-10-code-block-usability.md): 영어 복사 문구·확대 footer 수정, 3개 엔진 432개 조건·개발 페이지 12개 통과. 실제 브라우저 zoom·축소·실기기는 미검증.
+
 - [10-03 로컬 검색 인덱스 캐시](cache/2026-10-03-local-search-index-cache.md): 요청 간 재사용·인증 만료·미발행/삭제·장애 복구·전체 앱 빌드, 운영 배포 미검증.
 
 - [10-03 검색 인덱스 비용](performance/2026-10-03-search-index-cost.md): 로컬 읽기·파싱, 합성 순위 계산 증가, Production 단계 로그 3개. 캐시 도입은 보류.

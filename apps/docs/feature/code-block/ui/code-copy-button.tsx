@@ -2,7 +2,9 @@
 
 import { Check, Copy } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useLocale } from 'next-intl'
 import { cn } from '@web-tech/ui/lib/utils'
+import { getCodeCopyLabels } from '../lib/code-copy-labels'
 
 interface CodeCopyButtonProps {
     code: string
@@ -10,7 +12,9 @@ interface CodeCopyButtonProps {
 }
 
 export function CodeCopyButton({ code, className }: CodeCopyButtonProps) {
+    const locale = useLocale()
     const [status, setStatus] = useState<'idle' | 'copied' | 'error'>('idle')
+    const label = getCodeCopyLabels(locale)[status]
 
     useEffect(() => {
         if (status === 'idle') {
@@ -45,26 +49,14 @@ export function CodeCopyButton({ code, className }: CodeCopyButtonProps) {
             className={cn('mdx-code-copy-button', className)}
             data-copy-state={status}
             onClick={handleCopy}
-            aria-label={
-                status === 'copied'
-                    ? '코드가 복사되었습니다'
-                    : status === 'error'
-                      ? '코드 복사에 실패했습니다'
-                      : '코드 복사'
-            }
+            aria-label={label.announcement}
         >
             {status === 'copied' ? (
                 <Check className="size-3.5" aria-hidden="true" />
             ) : (
                 <Copy className="size-3.5" aria-hidden="true" />
             )}
-            <span aria-live="polite">
-                {status === 'copied'
-                    ? '복사됨'
-                    : status === 'error'
-                      ? '복사 실패'
-                      : '복사'}
-            </span>
+            <span aria-live="polite">{label.text}</span>
         </button>
     )
 }

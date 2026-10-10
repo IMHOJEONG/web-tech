@@ -1,5 +1,9 @@
 # 검증 원본 증거
 
+- [10-10 코드 접기 측정값](2026-10-10-code-block-usability.json), [확대 시 하단 겹침](2026-10-10-code-footer-200-percent.png): [검증 보고서](../accessibility/2026-10-10-code-block-usability.md).
+
+- [10-10 코드 접기 수정 후 측정값](2026-10-10-code-block-usability-fixed.json), [겹침 보완 캡처](2026-10-10-code-footer-200-percent-fixed.png): 같은 보고서의 수정 후 재검증. 수정 전 증거와 분리.
+
 - [10-09 잔여 취약점 실행 요약](2026-10-09-remaining-advisories.json): audit 집계·registry 패치 확인·상위 범위, 비밀값 제외.
 
 - [10-09 braces 운영 경로 제거 요약](2026-10-09-braces-runtime-removal.json): 파일·digest 대조와 production trace·잔여 audit, 인증값·원문 제외.

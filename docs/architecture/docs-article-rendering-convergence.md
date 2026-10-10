@@ -148,7 +148,8 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 
 - code block은 `.mdx-code-frame`으로 감싼다.
 - 실제 코드 영역은 `.mdx-code-block`을 사용한다.
-- 언어 라벨은 `.mdx-code-frame__language`로 우측 하단에 둔다.
+- 짧은 블록의 언어 라벨은 `.mdx-code-frame__language`로 우측 하단에 둔다.
+  접을 수 있는 블록은 `.mdx-code-disclosure__language`를 summary의 grid 안에 배치한다.
 - local MDX는 React component 기반 copy button을 가진다.
 - remote HTML은 같은 frame / language / lightweight highlight를 보장한다.
 - remote HTML copy button은 client enhancer로 부착한다.
@@ -168,6 +169,11 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 - 복사는 중립적인 도구 버튼, 펼치기는 하단 조작 바로 구분한다. 조작 영역은 최소
   44px 높이를 유지하며, 가벼운 색 전환은 `prefers-reduced-motion`에서 끈다.
 - 로컬·원격 복사 성공/실패 안내를 표시하고 주석·언어 라벨 대비를 확보한다.
+- 복사 기본·성공·실패·복구 문구와 접근성 이름은 같은 locale별 규칙을 공유한다.
+- 긴 블록의 하단 높이는 내용에 맞춘다. 줄 수도 줄바꿈을 허용하고 언어 태그와
+  별도 열에 배치하여 확대 시 겹침을 막는다. `::details-content` 지원 브라우저에서는
+  summary를 코드 아래에 두며, 미지원 브라우저에서는 펼친 코드 위의 정상 흐름을
+  유지한다. 어느 경우에도 native 숨김·펼침과 키보드 동작을 유지한다.
 - 회귀 검사: 저장소 루트에서 `mise exec -- pnpm --filter docs test:code-block`.
   NAS 연결 없이 실제 코드 프레임·원격 정규화·복사 enhancer와 CSS를 Chromium에서 검사한다.
 

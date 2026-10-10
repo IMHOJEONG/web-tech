@@ -30,7 +30,8 @@ export function CodeBlockFrame({
                         <summary
                             dangerouslySetInnerHTML={{
                                 __html: getCodeDisclosureSummary(
-                                    disclosure.lineCount
+                                    disclosure.lineCount,
+                                    language
                                 ),
                             }}
                         />
@@ -50,9 +51,11 @@ export function CodeBlockFrame({
             ) : (
                 children
             )}
-            <figcaption className="mdx-code-frame__language">
-                {language}
-            </figcaption>
+            {!disclosure.collapsible && (
+                <figcaption className="mdx-code-frame__language">
+                    {language}
+                </figcaption>
+            )}
         </figure>
     )
 }
