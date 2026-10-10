@@ -13,12 +13,15 @@ function createRemoteCodeCopyButton(code: string) {
     button.textContent = '복사'
     button.setAttribute(REMOTE_CODE_COPY_BUTTON_ATTRIBUTE, 'true')
     button.setAttribute('aria-label', '코드 복사')
+    button.setAttribute('aria-live', 'polite')
+    button.dataset.copyState = 'idle'
 
     let resetTimer: number | undefined
 
     const resetButton = () => {
         button.textContent = '복사'
         button.setAttribute('aria-label', '코드 복사')
+        button.dataset.copyState = 'idle'
     }
 
     const handleClick = async () => {
@@ -30,9 +33,11 @@ function createRemoteCodeCopyButton(code: string) {
             await navigator.clipboard.writeText(code)
             button.textContent = '복사됨'
             button.setAttribute('aria-label', '코드가 복사되었습니다')
+            button.dataset.copyState = 'copied'
         } catch {
             button.textContent = '복사 실패'
             button.setAttribute('aria-label', '코드 복사에 실패했습니다')
+            button.dataset.copyState = 'error'
         }
 
         if (resetTimer) {
@@ -70,7 +75,8 @@ export function RemoteCodeCopyEnhancer() {
             }
 
             const codeElement = codeFrame.querySelector<HTMLElement>('pre code')
-            const code = codeElement?.innerText ?? ''
+            // The full pre precedes the preview and may be inside closed details.
+            const code = codeElement?.textContent ?? ''
 
             if (!code.trim()) {
                 return

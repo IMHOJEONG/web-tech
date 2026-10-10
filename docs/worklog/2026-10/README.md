@@ -2,6 +2,8 @@
 
 [월별 목록](../README.md)
 
+- [10-09 긴 코드 블록 접기](2026-10-09-code-block-disclosure.md)
+
 - [10-09 미커밋 기록 선별과 docs 푸시 전 검증](2026-10-09-reviewed-wip-publication.md)
 
 - [10-09 Jira PR #37 병합 후 feature 브랜치 동기화](2026-10-09-feature-sync-after-jira-pr37.md)

@@ -25,6 +25,7 @@
         "test:push:browser": "playwright test --config=playwright.push.config.ts",
         "test:push:local": "node ./scripts/verify-web-push-local.ts",
         "test:article:prod": "playwright test --config=playwright.article.config.ts",
+        "test:code-block": "playwright test --config=playwright.code-block.config.ts",
         "check:prod-routes": "node ./scripts/check-prod-routes.mjs",
         "pretest:better-stack:local": "pnpm --filter @web-tech/docs-content-contract build",
         "test:better-stack:local": "node ./scripts/test-better-stack-local.mjs",

@@ -152,6 +152,24 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 - local MDX는 React component 기반 copy button을 가진다.
 - remote HTML은 같은 frame / language / lightweight highlight를 보장한다.
 - remote HTML copy button은 client enhancer로 부착한다.
+- 20줄을 넘는 블록은 기본 접힘 상태에서 처음 10줄을 미리 보여준다. 빈 코드와
+  마지막 개행 한 개는 줄 수를 늘리지 않으며, 20줄 이하 블록은 기존처럼 펼쳐 둔다.
+- local MDX와 remote HTML이 같은 줄 수·미리보기 규칙을 사용한다. local은
+  `CodeBlockFrame`, remote는 HTML 정규화 단계에서 출력 구조를 구성한다.
+- 펼치기·접기는 native `details / summary`로 구현한다. 별도 클라이언트 상태나
+  하이드레이션을 기다리지 않으며, Enter·Space와 JavaScript 비활성 환경에서도 동작한다.
+- 복사 버튼은 접힘 여부와 관계없이 미리보기가 아닌 전체 코드를 복사한다.
+  remote의 기존 HTML entity 해제·외부 공백 정규화 규칙은 변경하지 않는다.
+- 전체 코드의 기존 하이라이팅을 보존하고 미리보기에는 경량 하이라이터를 사용한다.
+  숨긴 전체 코드는 DOM에 남으므로 이 기능은 화면 밀도 개선이며 지연 로딩은 아니다.
+- 한국어/영어 펼치기 문구는 문서의 `html[lang]`에 맞추고, 언어 태그는 우측 하단에 유지한다.
+- 접힌 상태의 하단에는 `10 / 전체 줄 수`를 표시하고 미리보기 끝을 옅게 처리하여
+  나머지 코드가 있음을 알린다. 펼친 상태에는 전체 줄 수만 표시한다.
+- 복사는 중립적인 도구 버튼, 펼치기는 하단 조작 바로 구분한다. 조작 영역은 최소
+  44px 높이를 유지하며, 가벼운 색 전환은 `prefers-reduced-motion`에서 끈다.
+- 로컬·원격 복사 성공/실패 안내를 표시하고 주석·언어 라벨 대비를 확보한다.
+- 회귀 검사: 저장소 루트에서 `mise exec -- pnpm --filter docs test:code-block`.
+  NAS 연결 없이 실제 코드 프레임·원격 정규화·복사 enhancer와 CSS를 Chromium에서 검사한다.
 
 ### Table
 
@@ -216,6 +234,7 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 
 ## Related Docs
 
+- [코드 블록 접기 적용 기록](../worklog/2026-10/2026-10-09-code-block-disclosure.md)
 - [docs-content-rendering-strategy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-rendering-strategy.md)
 - [docs-content-operating-model.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-operating-model.md)
 - [blog-content-html-vs-markdown.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-html-vs-markdown.md)

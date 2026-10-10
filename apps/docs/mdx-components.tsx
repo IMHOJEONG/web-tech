@@ -9,7 +9,7 @@ import {
 } from '~/feature/callout/model/react-callout'
 import { getCalloutLabel } from '~/feature/callout/model/callout'
 import { highlightCode } from '~/feature/code-block/lib/highlight-code'
-import { CodeCopyButton } from '~/feature/code-block/ui/code-copy-button'
+import { CodeBlockFrame } from '~/feature/code-block/ui/code-block-frame'
 import { slugifyHeading } from '~/lib/slugify-heading'
 
 export const commonCss = [
@@ -144,20 +144,21 @@ export const components = {
     },
 
     pre: ({ children, className, ...props }) => {
-        if (className?.includes('shiki')) {
-            return (
-                <pre {...props} className={className}>
-                    {children}
-                </pre>
-            )
-        }
-
         const code = getCodeText(children)
         const language = getCodeLanguage(children)
 
+        if (className?.includes('shiki')) {
+            return (
+                <CodeBlockFrame code={code} language={language}>
+                    <pre {...props} className={className}>
+                        {children}
+                    </pre>
+                </CodeBlockFrame>
+            )
+        }
+
         return (
-            <figure className="mdx-code-frame">
-                <CodeCopyButton code={code} className="mdx-code-copy-button" />
+            <CodeBlockFrame code={code} language={language}>
                 <pre {...props} className={cn('mdx-code-block', commonCss)}>
                     <code
                         className="mdx-code-block__code"
@@ -166,10 +167,7 @@ export const components = {
                         }}
                     />
                 </pre>
-                <figcaption className="mdx-code-frame__language">
-                    {language}
-                </figcaption>
-            </figure>
+            </CodeBlockFrame>
         )
     },
 

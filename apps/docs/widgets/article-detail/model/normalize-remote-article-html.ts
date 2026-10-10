@@ -6,6 +6,10 @@ import {
 } from '../../../feature/callout/model/callout.ts'
 import { highlightCode } from '../../../feature/code-block/lib/highlight-code.ts'
 import {
+    getCodeDisclosure,
+    getCodeDisclosureSummary,
+} from '../../../feature/code-block/lib/code-disclosure.ts'
+import {
     stripHtmlToCodeText,
     stripHtmlToText,
 } from '../../../lib/remote-html-sanitizer.ts'
@@ -76,9 +80,15 @@ function normalizeRemoteCodeBlocks(content: string) {
                 normalizedLanguage.toUpperCase()
             )
 
-            return `<figure class="mdx-code-frame"><pre class="mdx-code-block"><code class="mdx-code-block__code language-${escapeAttribute(
+            const fullCode = `<pre class="mdx-code-block"><code class="mdx-code-block__code language-${escapeAttribute(
                 normalizedLanguage
-            )}">${highlightedCode}</code></pre><figcaption class="mdx-code-frame__language">${languageLabel}</figcaption></figure>`
+            )}">${highlightedCode}</code></pre>`
+            const disclosure = getCodeDisclosure(code)
+            const body = disclosure.collapsible
+                ? `<details class="mdx-code-disclosure"><summary>${getCodeDisclosureSummary(disclosure.lineCount)}</summary>${fullCode}</details><pre class="mdx-code-block mdx-code-preview"><code>${highlightCode(disclosure.preview, normalizedLanguage)}</code></pre>`
+                : fullCode
+
+            return `<figure class="mdx-code-frame${disclosure.collapsible ? ' mdx-code-frame--collapsible' : ''}">${body}<figcaption class="mdx-code-frame__language">${languageLabel}</figcaption></figure>`
         }
     )
 }

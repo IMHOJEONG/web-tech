@@ -10,47 +10,61 @@ interface CodeCopyButtonProps {
 }
 
 export function CodeCopyButton({ code, className }: CodeCopyButtonProps) {
-    const [copied, setCopied] = useState(false)
+    const [status, setStatus] = useState<'idle' | 'copied' | 'error'>('idle')
 
     useEffect(() => {
-        if (!copied) {
+        if (status === 'idle') {
             return
         }
 
         const timer = window.setTimeout(() => {
-            setCopied(false)
+            setStatus('idle')
         }, 1600)
 
         return () => {
             window.clearTimeout(timer)
         }
-    }, [copied])
+    }, [status])
 
     const handleCopy = async () => {
         if (!code.trim()) {
             return
         }
 
-        await navigator.clipboard.writeText(code)
-        setCopied(true)
+        try {
+            await navigator.clipboard.writeText(code)
+            setStatus('copied')
+        } catch {
+            setStatus('error')
+        }
     }
 
     return (
         <button
             type="button"
-            className={cn(
-                'inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/8 px-3 py-1.5 font-display text-[0.68rem] tracking-[0.14em] text-white/72 uppercase transition hover:border-primary/40 hover:bg-primary/12 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary',
-                className
-            )}
+            className={cn('mdx-code-copy-button', className)}
+            data-copy-state={status}
             onClick={handleCopy}
-            aria-label={copied ? '코드가 복사되었습니다' : '코드 복사'}
+            aria-label={
+                status === 'copied'
+                    ? '코드가 복사되었습니다'
+                    : status === 'error'
+                      ? '코드 복사에 실패했습니다'
+                      : '코드 복사'
+            }
         >
-            {copied ? (
+            {status === 'copied' ? (
                 <Check className="size-3.5" aria-hidden="true" />
             ) : (
                 <Copy className="size-3.5" aria-hidden="true" />
             )}
-            <span>{copied ? '복사됨' : '복사'}</span>
+            <span aria-live="polite">
+                {status === 'copied'
+                    ? '복사됨'
+                    : status === 'error'
+                      ? '복사 실패'
+                      : '복사'}
+            </span>
         </button>
     )
 }
