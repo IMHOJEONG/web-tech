@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-11 큰 기본 글자 헤더 보완](2026-10-11-header-font-preference.md)
+
 - [10-10 코드 접기 커밋과 UI/UX 점검](2026-10-10-code-block-ui-check.md)
 
 [월별 목록](../README.md)

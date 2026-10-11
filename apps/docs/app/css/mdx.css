@@ -116,7 +116,10 @@
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: -0.03em;
-    scroll-margin-top: 6rem;
+    scroll-margin-top: max(
+        6rem,
+        calc(var(--docs-header-height, 4.0625rem) + 1.5rem)
+    );
     margin-top: 0;
     margin-bottom: 1.75rem;
 }
@@ -127,7 +130,10 @@
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.01em;
-    scroll-margin-top: 6rem;
+    scroll-margin-top: max(
+        6rem,
+        calc(var(--docs-header-height, 4.0625rem) + 1.5rem)
+    );
     margin-top: 2.5rem;
     margin-bottom: 1rem;
 }
@@ -137,7 +143,10 @@
     font-size: 1.35rem;
     font-weight: 600;
     line-height: 1.3;
-    scroll-margin-top: 6rem;
+    scroll-margin-top: max(
+        6rem,
+        calc(var(--docs-header-height, 4.0625rem) + 1.5rem)
+    );
     margin-top: 1.9rem;
     margin-bottom: 0.7rem;
 }
@@ -147,7 +156,10 @@
     font-size: 1.25rem;
     font-weight: 600;
     line-height: 1.35;
-    scroll-margin-top: 6rem;
+    scroll-margin-top: max(
+        6rem,
+        calc(var(--docs-header-height, 4.0625rem) + 1.5rem)
+    );
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
 }

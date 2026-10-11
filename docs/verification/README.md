@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-11 큰 기본 글자 헤더 보완](accessibility/2026-10-11-header-font-preference.md): 로컬 관련 E2E 33개 통과. 앞선 시간 초과를 기록하고 재검증했으며 운영 배포는 미검증.
+
 - [10-04 태그·읽기 모음](content/2026-10-04-content-discovery.md): 태그·모음과 반응형 탐색 검증. 운영 혼합 목록 미검증.
 
 - [10-04 공용 UI 외부 설치](content/2026-10-04-shared-ui-package.md): 독립 tarball·테마·포커스 검증. registry 게시·실제 외부 앱 미검증.
