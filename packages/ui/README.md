@@ -30,6 +30,26 @@ import { buttonVariants } from "@web-tech/ui/lib/button-variants";
 import { useIsMobile } from "@web-tech/ui/hooks/use-mobile";
 ```
 
+## 컴포넌트 생성
+
+저장소 개발 전용 명령입니다. 루트에서 실행합니다.
+
+```sh
+pnpm --filter @web-tech/ui run generate:component --args "Notice Card"
+pnpm --filter @web-tech/ui build
+```
+
+`components/ui/notice-card.tsx`에 `NoticeCard`를 생성합니다. 영어 문자로 시작하고 문자·숫자·공백·하이픈·밑줄을 사용하는 이름만 허용합니다. 경로 구분자·빈 이름·숫자로 시작하는 이름은 생성 전에 거부하며, 기존 파일을 덮어쓰지 않습니다. 이름은 PascalCase, 파일명은 kebab-case로 변환하고 출력 파일의 경로별 Prettier 설정을 적용합니다.
+
+빌드 후 `@web-tech/ui/components/notice-card`로 소비합니다. 현재 wildcard export를 사용하므로 생성기가 `package.json`에 source export를 추가하지 않습니다. `.tsx` 템플릿은 포맷·타입 검사 대상으로 유지하고, 생성기의 Node API는 별도 scripts tsconfig에서 검사합니다. 생성기·테스트는 tarball의 공개 파일 목록에 포함하지 않습니다.
+
+```sh
+pnpm --filter @web-tech/ui test:generator
+pnpm --filter @web-tech/ui typecheck
+```
+
+생성기 테스트는 임시 워크스페이스에서 실제 CLI, 생성 코드 포맷·빌드·타입·SSR, 입력 검증, 기존 파일 보존을 확인합니다. 실제 UI 소스에 테스트 컴포넌트를 추가하지 않습니다. 패키지 `test`에도 연결되어 기존 `turbo test`/CI 테스트 단계에서 실행됩니다.
+
 ## 버전과 검증
 
 초기 계약 버전은 `0.1.0`입니다. `0.x`에서 공개 API·peer 범위·기본 토큰의 호환되지 않는 변경은 minor, 호환되는 수정은 patch로 올립니다. 내부 파일 경로는 공개 API가 아닙니다. registry와 소비처가 확정되기 전 공개 게시·자동 release는 하지 않습니다. 변경은 main에 병합한 뒤 feature 브랜치로 전파하고, 외부 소비 프로젝트는 별도로 버전을 선택해 갱신합니다.

@@ -18,6 +18,8 @@
     "dev": "pnpm build && tsc -p tsconfig.build.json --watch --preserveWatchOutput",
     "lint": "eslint \"**/*.{ts,tsx,mts}\" --max-warnings 0 --cache --cache-strategy content --cache-location .cache/eslint/",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc -p tsconfig.scripts.json",
+    "test": "pnpm test:generator",
+    "test:generator": "tsc -p tsconfig.scripts.json && node --test scripts/component-generator.test.mts",
     "generate:component": "turbo gen react-component"
   },
   "devDependencies": {
@@ -33,6 +35,7 @@
     "tailwindcss": "catalog:",
     "@tailwindcss/postcss": "catalog:",
     "postcss": "catalog:",
+    "prettier": "catalog:",
     "@web-tech/eslint-config": "workspace:*",
     "@web-tech/tailwind-config": "workspace:*",
     "@web-tech/typescript-config": "workspace:*",

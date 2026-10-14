@@ -2,8 +2,13 @@
   "extends": "../typescript-config/base.json",
   "compilerOptions": {
     "types": ["node"],
+    "jsx": "react-jsx",
     "noEmit": true,
     "erasableSyntaxOnly": true
   },
-  "include": ["scripts/**/*.mts"]
+  "include": [
+    "scripts/**/*.mts",
+    "turbo/generators/**/*.ts",
+    "turbo/generators/templates/**/*.tsx"
+  ]
 }
