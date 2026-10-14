@@ -1,5 +1,11 @@
 # 2026-10 작업 기록
 
+- [10-14 CSS·HTML 포맷 정리와 UI 템플릿 검토](2026-10-14-css-html-format-cleanup.md)
+
+- [10-14 설정·스크립트 포맷 경고 선별 정리](2026-10-14-selective-format-cleanup.md)
+
+- [10-14 원격 세션 변경과 로컬 작업 보존 통합](2026-10-14-docs-remote-session-rebase.md)
+
 - [10-14 기존 포맷터·린터 기본 구성 개선](2026-10-14-tooling-baseline-improvements.md)
 
 - [10-14 포맷터·린터 개선 후보 조사](2026-10-14-formatter-linter-review.md)

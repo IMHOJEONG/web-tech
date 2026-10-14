@@ -22,7 +22,7 @@ pnpm exec simple-git-hooks
 
 - `pnpm format`은 `prettier --write .`, `pnpm format:check`는 `prettier --check .`입니다. TS/TSX뿐 아니라 MDX, JS/MJS/MTS, JSON, CSS, YAML 등 Prettier가 인식하는 형식을 포함합니다. 전체 write는 다른 작업까지 바꿀 수 있으므로 명시적 요청 없이 실행하지 않습니다.
 - 루트 `.prettierrc.json`은 기존 기본값인 80자·2칸·세미콜론·큰따옴표·all trailing comma 등을 명시합니다. docs와 두 백엔드의 가까운 설정을 유지하므로 앱별 스타일을 강제로 통일하지 않습니다.
-- CLI와 snapshot 검사는 `.gitignore`와 `.prettierignore`를 함께 적용합니다. 생성 코드, build 출력, node_modules, lockfile, 로컬 캐시·테스트 결과는 제외합니다. 알 수 없는 파일 형식과 삭제된 파일도 검사하지 않습니다.
+- CLI와 snapshot 검사는 `.gitignore`와 `.prettierignore`를 함께 적용합니다. 생성 코드, build 출력, node_modules, lockfile, 로컬 캐시·테스트 결과는 제외합니다. Next.js가 생성·갱신하는 `next-env.d.ts`도 직접 포맷하지 않고 제외하며 회귀 검사로 확인합니다. 알 수 없는 파일 형식과 삭제된 파일도 검사하지 않습니다.
 - `format:staged:check`는 HEAD 대비 인덱스의 blob, `format:changed:check --base <commit>`은 기준 커밋 대비 HEAD의 blob을 검사합니다. 파일명 목록만 받아 작업 트리 내용을 검사하는 방식으로 대체하지 않습니다. 포맷 옵션은 실행 위치의 경로별 설정으로 해석합니다.
 - CI의 Documentation 워크플로는 PR base 또는 main/feature/docs push의 이전 커밋을 기준으로 변경 파일의 포맷과 문서 구조를 검사합니다. 두 검사 모두 수정하지 않습니다. CI에서는 이 checkout의 HEAD 설정을 사용합니다.
 - 새 루트 설정과 전체 검사 명령은 기존 파일 전부가 포맷에 맞는다는 의미가 아닙니다. 변경되지 않은 과거 파일을 자동 정리하거나 예외로 덮어 숨기지 않습니다.

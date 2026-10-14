@@ -70,6 +70,7 @@ test("repository ignores generated outputs and keeps authored formatting targets
     "apps/docs/test-results/result.json",
     "apps/docs/playwright-report/index.html",
     "apps/docs/routeTree.gen.ts",
+    "apps/docs/next-env.d.ts",
     "pnpm-lock.yaml",
   ]) {
     assert.equal(

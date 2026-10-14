@@ -1,6 +1,7 @@
 # Auto-generated files
 **/routeTree.gen.ts
 **/*.gen.ts
+**/next-env.d.ts
 apps/vuln-radar-backend/generated/prisma/
 
 # Dependencies

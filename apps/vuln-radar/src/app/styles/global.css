@@ -3,11 +3,7 @@
 @theme inline {
   --font-display: Sora, Inter, system-ui, sans-serif;
   --font-mono:
-    "JetBrains Mono",
-    "SFMono-Regular",
-    "SF Mono",
-    Consolas,
-    monospace;
+    "JetBrains Mono", "SFMono-Regular", "SF Mono", Consolas, monospace;
 
   --color-radar-bg: var(--radar-bg);
   --color-radar-panel: var(--radar-panel);
@@ -54,16 +50,20 @@
   body {
     margin: 0;
     background:
-      radial-gradient(circle at top left, rgba(255, 82, 95, 0.12), transparent 26%),
-      radial-gradient(circle at top right, rgba(0, 228, 117, 0.08), transparent 22%),
+      radial-gradient(
+        circle at top left,
+        rgba(255, 82, 95, 0.12),
+        transparent 26%
+      ),
+      radial-gradient(
+        circle at top right,
+        rgba(0, 228, 117, 0.08),
+        transparent 22%
+      ),
       linear-gradient(180deg, #111318 0%, #111318 100%);
     color: #e2e2e8;
     font-family:
-      Inter,
-      "Apple SD Gothic Neo",
-      "Noto Sans KR",
-      system-ui,
-      sans-serif;
+      Inter, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -82,11 +82,7 @@
 
   code {
     font-family:
-      "JetBrains Mono",
-      "SFMono-Regular",
-      "SF Mono",
-      Consolas,
-      monospace;
+      "JetBrains Mono", "SFMono-Regular", "SF Mono", Consolas, monospace;
   }
 }
 
