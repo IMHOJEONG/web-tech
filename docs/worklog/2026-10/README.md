@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-14 모바일 문서 제목 크기](2026-10-14-mobile-article-title.md)
+
 - [10-14 HTTP 스트리밍 글 게시](2026-10-14-http-streaming-publication.md)
 
 - [10-11 큰 기본 글자 헤더 보완](2026-10-11-header-font-preference.md)

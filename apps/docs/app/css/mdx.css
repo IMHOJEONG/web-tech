@@ -162,6 +162,14 @@
     margin-bottom: 1.75rem;
 }
 
+@media (max-width: 639px) {
+    .mdx-wrapper h1,
+    .mdx-h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+}
+
 .mdx-wrapper h2,
 .mdx-h2 {
     font-size: clamp(1.7rem, 3vw, 2rem);
