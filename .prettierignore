@@ -1,6 +1,7 @@
 # Auto-generated files
 **/routeTree.gen.ts
 **/*.gen.ts
+apps/vuln-radar-backend/generated/prisma/
 
 # Dependencies
 node_modules
@@ -11,6 +12,13 @@ build
 .next
 out
 .turbo
+
+# Local caches and generated test reports
+.cache
+coverage
+playwright-report
+playwright-report-crp
+test-results
 
 # Lock files
 pnpm-lock.yaml

@@ -16,7 +16,7 @@
     "build": "node scripts/build.mts",
     "prepack": "pnpm build",
     "dev": "pnpm build && tsc -p tsconfig.build.json --watch --preserveWatchOutput",
-    "lint": "eslint \"**/*.{ts,tsx,mts}\" --max-warnings 0",
+    "lint": "eslint \"**/*.{ts,tsx,mts}\" --max-warnings 0 --cache --cache-strategy content --cache-location .cache/eslint/",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc -p tsconfig.scripts.json",
     "generate:component": "turbo gen react-component"
   },

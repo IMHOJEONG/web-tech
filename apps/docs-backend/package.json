@@ -15,7 +15,7 @@
     "check": "pnpm lint && pnpm typecheck && pnpm test --runInBand && pnpm test:e2e --runInBand && pnpm build",
     "dev": "nest start --watch",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lint": "eslint \"{src,test}/**/*.ts\" --max-warnings 0",
+    "lint": "eslint \"{src,test}/**/*.ts\" --max-warnings 0 --cache --cache-strategy content --cache-location .cache/eslint/",
     "lint:fix": "eslint \"{src,test}/**/*.ts\" --fix",
     "start": "nest start",
     "start:dev": "nest start --watch",

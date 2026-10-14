@@ -7,7 +7,7 @@
         "predev": "pnpm --filter @web-tech/docs-content-contract build && pnpm --filter @web-tech/ui build",
         "dev": "next dev --port 3001",
         "dev:e2e": "pnpm --filter @web-tech/docs-content-contract build && pnpm --filter @web-tech/ui build && next dev --port ${DOCS_E2E_PORT:-3001} --hostname 127.0.0.1",
-        "lint": "eslint \"**/*.{js,mjs,cjs,ts,tsx,mts}\" --max-warnings 0",
+        "lint": "eslint \"**/*.{js,mjs,cjs,ts,tsx,mts}\" --max-warnings 0 --cache --cache-strategy content --cache-location .cache/eslint/",
         "prevalidate:content": "pnpm --filter @web-tech/docs-content-contract build",
         "validate:content": "node ./scripts/validate-content.mjs && node ./scripts/validate-content-style.mjs",
         "pretest:content": "pnpm --filter @web-tech/docs-content-contract build",

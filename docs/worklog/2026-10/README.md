@@ -1,5 +1,9 @@
 # 2026-10 작업 기록
 
+- [10-14 기존 포맷터·린터 기본 구성 개선](2026-10-14-tooling-baseline-improvements.md)
+
+- [10-14 포맷터·린터 개선 후보 조사](2026-10-14-formatter-linter-review.md)
+
 - [10-14 모바일 문서 제목 크기](2026-10-14-mobile-article-title.md)
 
 - [10-14 HTTP 스트리밍 글 게시](2026-10-14-http-streaming-publication.md)

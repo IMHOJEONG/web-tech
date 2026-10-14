@@ -2,7 +2,7 @@
 
 ## 적용 범위
 
-대상은 모노레포의 `docs/` 운영 문서입니다. `docs/examples/`의 예제와 블로그 원문은 제외합니다. 상태는 적용 중이며 최종 검토일은 2026-09-23입니다. 문서 작성 형식은 [템플릿](documentation-templates.md)을 따릅니다.
+문서 구조 검사의 대상은 모노레포의 `docs/` 운영 문서입니다. `docs/examples/`의 예제와 블로그 원문은 문서 구조 검사에서 제외합니다. 포맷 검사는 저장소 전체의 지원 형식에 별도로 적용합니다. 상태는 적용 중이며 최종 검토일은 2026-10-14입니다. 문서 작성 형식은 [템플릿](documentation-templates.md)을 따릅니다.
 
 ## 커밋과 포맷
 
@@ -10,12 +10,32 @@
 
 ```sh
 pnpm format:staged:check
+pnpm format:changed:check --base origin/main
 pnpm validate:docs --staged
 pnpm test:repo
 pnpm exec simple-git-hooks
 ```
 
 마지막 명령은 훅 설치/갱신입니다. 포맷 실패 시 의도한 파일만 `pnpm exec prettier --write 경로`로 수정하고 diff를 검토하여 다시 스테이징합니다. 부분 스테이징 파일은 사용자 작업까지 포함되지 않도록 재검토합니다. 훅은 작업 트리나 인덱스를 수정하지 않습니다. 기존 `pnpm format`은 명시적으로 요청한 전체 포맷용이며 훅에서 사용하지 않습니다.
+
+### 포맷 범위와 경로별 스타일
+
+- `pnpm format`은 `prettier --write .`, `pnpm format:check`는 `prettier --check .`입니다. TS/TSX뿐 아니라 MDX, JS/MJS/MTS, JSON, CSS, YAML 등 Prettier가 인식하는 형식을 포함합니다. 전체 write는 다른 작업까지 바꿀 수 있으므로 명시적 요청 없이 실행하지 않습니다.
+- 루트 `.prettierrc.json`은 기존 기본값인 80자·2칸·세미콜론·큰따옴표·all trailing comma 등을 명시합니다. docs와 두 백엔드의 가까운 설정을 유지하므로 앱별 스타일을 강제로 통일하지 않습니다.
+- CLI와 snapshot 검사는 `.gitignore`와 `.prettierignore`를 함께 적용합니다. 생성 코드, build 출력, node_modules, lockfile, 로컬 캐시·테스트 결과는 제외합니다. 알 수 없는 파일 형식과 삭제된 파일도 검사하지 않습니다.
+- `format:staged:check`는 HEAD 대비 인덱스의 blob, `format:changed:check --base <commit>`은 기준 커밋 대비 HEAD의 blob을 검사합니다. 파일명 목록만 받아 작업 트리 내용을 검사하는 방식으로 대체하지 않습니다. 포맷 옵션은 실행 위치의 경로별 설정으로 해석합니다.
+- CI의 Documentation 워크플로는 PR base 또는 main/feature/docs push의 이전 커밋을 기준으로 변경 파일의 포맷과 문서 구조를 검사합니다. 두 검사 모두 수정하지 않습니다. CI에서는 이 checkout의 HEAD 설정을 사용합니다.
+- 새 루트 설정과 전체 검사 명령은 기존 파일 전부가 포맷에 맞는다는 의미가 아닙니다. 변경되지 않은 과거 파일을 자동 정리하거나 예외로 덮어 숨기지 않습니다.
+
+### 린트 구성과 로컬 캐시
+
+공용 base의 JS/TS recommended를 Next·React 확장에서 다시 추가하지 않습니다. React·Hooks·Next·Turbo 규칙과 severity 및 마지막 `eslint-config-prettier`는 유지합니다.
+
+각 lint 스크립트는 기존 `--max-warnings 0`과 파일 범위를 유지하며 `--cache --cache-strategy content --cache-location .cache/eslint/`를 사용합니다. 패키지 실행 디렉터리마다 캐시가 분리되고 Git/포맷에서 제외됩니다. source 또는 effective config가 바뀌면 ESLint가 캐시를 다시 판정합니다. lint는 자동 fix를 실행하지 않습니다.
+
+Turbo task cache와 ESLint file cache는 별개입니다. CI에서 ESLint cache 파일을 원격 보존하는 설정은 추가하지 않았으며 실행 시간의 보장된 개선 배율도 없습니다. 캐시가 의심되면 같은 lint 명령에 `--no-cache`를 전달해 재확인합니다. `lint:fix`는 사용자가 명시적으로 선택하는 기존 별도 명령입니다.
+
+부분 스테이징·지원 형식·ignore·중첩 설정·중복 구성·cache invalidation은 `pnpm test:repo`에서 검사합니다. 변경 기록은 [기본 도구 구성 개선](../worklog/2026-10/2026-10-14-tooling-baseline-improvements.md)을 참고합니다.
 
 ## 문서 변경 검사
 
@@ -26,7 +46,7 @@ pnpm exec simple-git-hooks
 - 일반 inline Markdown 링크와 reference 정의를 검사합니다. MDX 표현식 및 HTML href 같은 모든 문법을 완전하게 파싱하는 도구는 아닙니다.
 - 목차는 자동 덮어쓰지 않습니다. 새 문서가 상위 README 어디에도 연결되지 않으면 실패합니다.
 
-CI는 PR base 또는 main push의 이전 커밋을 기준으로 HEAD를 검사합니다. 로컬 기본값은 HEAD 대비 인덱스입니다.
+CI는 PR base 또는 main/feature/docs push의 이전 커밋을 기준으로 HEAD를 검사합니다. 로컬 기본값은 HEAD 대비 인덱스입니다.
 
 ```sh
 pnpm validate:docs --base origin/main
