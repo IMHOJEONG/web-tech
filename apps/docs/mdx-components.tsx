@@ -1,6 +1,7 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import type { MDXComponents } from 'mdx/types'
 import Image, { type ImageProps } from 'next/image'
+import { getArticleDiagramSources } from '~/lib/article-diagram-sources'
 import { isValidElement, type ReactNode } from 'react'
 import {
     getCalloutVariantFromChildren,
@@ -171,17 +172,41 @@ export const components = {
         )
     },
 
-    img: (props) => (
-        <Image
-            className={cn('mdx-img', ...commonCss)}
-            sizes="100vw"
-            width={0}
-            height={0}
-            style={{ width: '100%', height: 'auto' }}
-            priority
-            placeholder="blur"
-            blurDataURL="/image/blur-image.webp"
-            {...(props as ImageProps)}
-        />
-    ),
+    img: (props) => {
+        const diagram = getArticleDiagramSources(props.src)
+        if (diagram) {
+            return (
+                <picture className="mdx-diagram">
+                    <source
+                        media="(min-width: 640px)"
+                        srcSet={diagram.landscape}
+                    />
+                    <Image
+                        {...(props as ImageProps)}
+                        src={diagram.portrait}
+                        alt={props.alt ?? ''}
+                        className="mdx-img"
+                        width={720}
+                        height={diagram.portraitHeight}
+                        style={{ width: '100%', height: 'auto' }}
+                        unoptimized
+                        loading="eager"
+                    />
+                </picture>
+            )
+        }
+        return (
+            <Image
+                className={cn('mdx-img', ...commonCss)}
+                sizes="100vw"
+                width={0}
+                height={0}
+                style={{ width: '100%', height: 'auto' }}
+                priority
+                placeholder="blur"
+                blurDataURL="/image/blur-image.webp"
+                {...(props as ImageProps)}
+            />
+        )
+    },
 } satisfies MDXComponents

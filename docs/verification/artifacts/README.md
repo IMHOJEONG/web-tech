@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-14 HTTP 글 게시 준비](2026-10-14-http-publication-checks.json), [운영 모드 화면](2026-10-14-http-publication-local.json): [게시 검증 보고서](../content/2026-10-14-http-streaming-publication.md). 데스크톱·모바일 그림은 보고서에 연결했습니다.
+
 - [10-11 헤더 기본 글자 회귀 요약](2026-10-11-header-font-regression.json), [32px 수정 화면](2026-10-11-header-font32-fixed.png): [헤더 보완 보고서](../accessibility/2026-10-11-header-font-preference.md). 로컬 실행과 native 설정의 관측값이며 사용자 프로필은 변경하지 않았다.
 
 - [10-10 코드 접기 측정값](2026-10-10-code-block-usability.json), [확대 시 하단 겹침](2026-10-10-code-footer-200-percent.png): [검증 보고서](../accessibility/2026-10-10-code-block-usability.md).

@@ -98,6 +98,44 @@
     }
 }
 
+/* Diagrams have their own background so they remain readable in file previews. */
+.mdx-wrapper img[src*='http-response-stages.png'],
+.mdx-wrapper img[src*='http-response-completion.png'],
+.mdx-wrapper img[src*='http-response-local-architecture.png'],
+.mdx-wrapper img[src*='http-response-service-infrastructure.png'] {
+    max-width: 360px;
+    box-shadow: none;
+}
+
+.mdx-wrapper .mdx-diagram {
+    display: block;
+    margin: 1.5rem 0;
+}
+
+.mdx-wrapper .mdx-diagram .mdx-img {
+    max-width: 360px;
+    margin: 0 auto;
+    box-shadow: none;
+}
+
+@media (min-width: 640px) {
+    .mdx-wrapper .mdx-diagram .mdx-img {
+        max-width: 100%;
+    }
+}
+
+.mdx-wrapper details {
+    margin: 1rem 0;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.mdx-wrapper summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+
 .mdx-wrapper h1,
 .mdx-wrapper h2,
 .mdx-wrapper h3,
