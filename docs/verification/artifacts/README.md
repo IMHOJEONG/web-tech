@@ -1,8 +1,12 @@
 # 검증 원본 증거
 
-- [10-14 모바일 제목 실제 측정](2026-10-14-mobile-title-local.json): [제목 검증](../accessibility/2026-10-14-mobile-article-title.md). 모바일 32px·데스크톱 64px과 큰 기본 글자 모의 조건을 구분합니다.
+- [10-14 모바일 제목 실제 측정](2026-10-14-mobile-title-local.json), [공개 사이트 측정](2026-10-14-mobile-title-public.json), [Production 상태](2026-10-14-mobile-title-production.json): [제목 검증](../accessibility/2026-10-14-mobile-article-title.md).
 
-- [10-14 HTTP 글 게시 준비](2026-10-14-http-publication-checks.json), [운영 모드 화면](2026-10-14-http-publication-local.json): [게시 검증 보고서](../content/2026-10-14-http-streaming-publication.md). 데스크톱·모바일 그림은 보고서에 연결했습니다.
+- [10-14 HTTP 글 모바일 후속 확인](2026-10-14-http-mobile-followup.json): [게시 보고서의 모바일 절](../content/2026-10-14-http-streaming-publication.md#모바일-후속-확인). 320/390/430px의 실제 제목·코드 펼침, 실기기 검사 아님.
+
+- [10-14 HTTP 글 Production](2026-10-14-http-publication-production.json), [공개 본문·그림 검사](2026-10-14-http-publication-public.json): [배포 후 확인](../content/2026-10-14-http-streaming-publication.md#production-배포-후-확인).
+
+- [10-14 HTTP 글 게시 준비](2026-10-14-http-publication-checks.json), [운영 모드 화면](2026-10-14-http-publication-local.json): [게시 검증 보고서](../content/2026-10-14-http-streaming-publication.md).
 
 - [10-11 헤더 배포 후 검사](2026-10-11-header-deployed-check.json): [헤더 보고서의 배포 확인](../accessibility/2026-10-11-header-font-preference.md#배포-후-확인-2026-10-11-23시-kst). CI·배포·핵심 확대 통과와 전체 운영 load 시간 초과를 구분한다.
 

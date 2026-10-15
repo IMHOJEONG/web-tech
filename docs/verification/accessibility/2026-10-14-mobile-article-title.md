@@ -23,6 +23,13 @@
 
 공개 배포 성공은 후속 관측 전까지 추정하지 않습니다.
 
+### Production 배포 후 확인
+
+커밋 d5591d3을 feature/docs에 반영했습니다. 2026-10-14 14:26:58 KST에 Vercel Production이 READY인 것을 확인했고, 14:32:00 KST부터 공개 사이트의 두 글에서 로컬과 동일한 14개 조건을 검사해 통과했습니다. 모든 요청이 HTTP 200이며 모바일 32px·데스크톱 64px, 헤더 겹침과 페이지 가로 넘침 없음, pageerror 없음을 실제로 확인했습니다.
+
+- [배포 상태](../artifacts/2026-10-14-mobile-title-production.json), [공개 사이트 측정](../artifacts/2026-10-14-mobile-title-public.json).
+- [공개 모바일 화면](../artifacts/2026-10-14-mobile-title-public-390.jpg), [공개 데스크톱 화면](../artifacts/2026-10-14-mobile-title-public-1280.jpg).
+
 ## 한계와 후속 작업
 
 표본은 두 글·Chromium이며 실기기 Safari는 미검증입니다. root 글자 모의 검사는 rem의 배율과 헤더 배치를 확인한 것으로 실제 브라우저의 확대·기본 글자 환경 전체를 보장하지 않습니다. 본문 코드와 그림은 변경하지 않았습니다.

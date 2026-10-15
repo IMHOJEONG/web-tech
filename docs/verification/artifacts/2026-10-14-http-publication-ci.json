@@ -1,0 +1,52 @@
+{
+  "observedAt": "2026-10-14T04:00:54.835Z",
+  "commit": "d5d94542019d14b6d1bfd0992a3027cc11b3ca55",
+  "ci": {
+    "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/38508180933",
+    "conclusion": "success",
+    "proof": "gh run watch --exit-status finished with exit 0",
+    "jobs": [
+      {
+        "name": "Test",
+        "duration": "10m30s",
+        "id": 115670375493,
+        "conclusion": "success"
+      },
+      {
+        "name": "Commit Messages",
+        "duration": "27s",
+        "id": 115670375588,
+        "conclusion": "success"
+      },
+      {
+        "name": "Typecheck",
+        "duration": "42s",
+        "id": 115670375670,
+        "conclusion": "success"
+      },
+      {
+        "name": "Shared UI (test:ui)",
+        "duration": "1m59s",
+        "id": 115670375698,
+        "conclusion": "success"
+      },
+      {
+        "name": "Lint",
+        "duration": "43s",
+        "id": 115670375734,
+        "conclusion": "success"
+      },
+      {
+        "name": "Shared UI (test:ui:consumer)",
+        "duration": "1m58s",
+        "id": 115670376353,
+        "conclusion": "success"
+      }
+    ]
+  },
+  "documentation": {
+    "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/38508180937",
+    "conclusion": "success",
+    "proof": "gh run view JSON reported completed/success"
+  }
+}

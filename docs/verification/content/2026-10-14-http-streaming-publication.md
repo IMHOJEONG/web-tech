@@ -35,3 +35,21 @@ Production 배포는 이 게시 전 기록 시점에 아직 실행하지 않았�
 
 - [게시 작업 기록](../../worklog/2026-10/2026-10-14-http-streaming-publication.md)
 - [HTTP 스트리밍 글](../../../apps/docs/category/be/node-js/http-response-streaming-lab.mdx)
+
+## Production 배포 후 확인
+
+- 게시 커밋 `d5d94542019d14b6d1bfd0992a3027cc11b3ca55`를 feature/docs에 푸시했습니다.
+- [Production 상태](../artifacts/2026-10-14-http-publication-production.json): READY, 배포 ID `dpl_DthEUB4yJ9hG6MW7TadE19kKwA9S`. 최초 [배포·CI 관측](../artifacts/2026-10-14-http-publication-deployment.json)은 BUILDING과 CI 진행 중 상태를 보존합니다.
+- 2026-10-14 12:56 KST에 시작한 [공개 페이지 확인](../artifacts/2026-10-14-http-publication-public.json): HTTP 200, canonical, 본문 시작·마지막 문장, 게시일 10-14와 sitemap 포함을 확인했습니다.
+- 네 도식은 모바일/데스크톱의 대응 이미지를 실제로 디코딩해 표시했습니다. 두 폭에서 페이지 넘침·중첩 문단·pageerror가 없고 기존 백프레셔 글도 200으로 표시됩니다.
+- [공개 데스크톱](../artifacts/2026-10-14-http-publication-public-1280.jpg), [공개 모바일](../artifacts/2026-10-14-http-publication-public-390.jpg).
+- [게시 글](https://heap-forge.app/ko/docs/category/be/node-js/http-response-streaming-lab). 이 후속 결과는 배포 후 로컬에 추가한 기록입니다. 배포를 증명하기 위해 동일 글을 다시 푸시하지 않았습니다.
+
+- [최종 CI 결과](../artifacts/2026-10-14-http-publication-ci.json): CI 6개 작업과 Documentation 모두 성공했습니다.
+
+## 모바일 후속 확인
+
+사용자 질문으로 2026-10-14 공개 글을 Chromium 320/390/430px에서 다시 확인했습니다.
+[실제 측정](../artifacts/2026-10-14-http-mobile-followup.json): 세 폭 모두 200, 제목은 38.4px·3줄이며 header 아래에서 시작합니다. 코드 22줄을 펼친 뒤에도 프레임이 화면 안에 있고 페이지 가로 넘침·pageerror가 없습니다. 복사 버튼의 존재만 확인했으며 이번 후속 검사에서 클립보드를 다시 검사하지 않았습니다. 실기기·Safari 검증은 아닙니다.
+
+[첫 화면](../artifacts/2026-10-14-http-mobile-top390.jpg)과 [펼친 코드](../artifacts/2026-10-14-http-mobile-code390.jpg)를 저장했습니다. 첫 긴 코드가 서버 구현일 것이라는 검사기의 잘못된 가정으로 [초기 검사](../artifacts/2026-10-14-http-mobile-checker-initial-failure.json)가 실패했습니다. 실제 첫 긴 블록은 readResponse였고, 표시된 본문과 프레임을 검사하도록 수정해 통과했습니다. 글·서비스 코드는 변경하지 않았습니다.

@@ -16,10 +16,12 @@
 
 검사 결과는 [게시 준비 검증](../../verification/content/2026-10-14-http-streaming-publication.md)에 기록합니다. Production 성공·공개 본문·사이트맵의 후속 확인 전에는 배포 성공을 추정하지 않습니다.
 
+모바일 후속 질문에 따라 320/390/430px의 제목·코드 펼침을 추가 확인했습니다. 상세 증거는 게시 검증 보고서에 연결했습니다. 코드·글·배포 변경은 없습니다.
+
 ## Open Questions
 
 게시 승인 범위는 HTTP 글 한 편입니다. 소켓 초안과 이후 글은 별도 승인 대상입니다.
 
 ## Next
 
-검사 통과 후 feature/docs 배포 경로로 커밋·푸시하고 Vercel Production과 공개 글·그림·sitemap을 확인합니다.
+d5d9454를 feature/docs에 푸시했고 Production READY와 공개 본문·그림·sitemap을 확인했습니다. CI 6개 작업과 Documentation도 모두 성공했습니다. 이후 소켓 초안은 기존 사용자 검토를 유지합니다.
