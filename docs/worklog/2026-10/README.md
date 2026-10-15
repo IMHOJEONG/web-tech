@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-15 보존 중이던 블로그 작업의 단위별 커밋](2026-10-15-reviewed-backlog-commits.md)
+
 - [10-14 공용 UI 생성기의 빌드·포맷 계약 정리](2026-10-14-ui-component-generator.md)
 
 - [10-14 CSS·HTML 포맷 정리와 UI 템플릿 검토](2026-10-14-css-html-format-cleanup.md)

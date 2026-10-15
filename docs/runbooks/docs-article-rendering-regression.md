@@ -149,6 +149,26 @@ CI의 `Docs production article rendering tests` 단계에서 같은 명령을 �
 실제 Vercel/NAS 연결, WAF, 배포 환경의 timeout은 이 fixture 기반 테스트가
 보장하지 않는다. 실제 배포의 webhook과 화면 반영은 별도 운영 검증 대상이다.
 
+## 개발 서버에서 draft 보기
+
+기존 개발 서버가 있으면 해당 포트를 재사용한다. 새 서버가 필요하면
+`pnpm --filter docs dev`를 실행하고 출력된 포트를 확인한다.
+초안의 `data/` 또는 `category/` 상대 경로에서 확장자를 제외해
+`/[locale]/preview/<상대 경로>`에 접속한다. HTTP 글의 현재 로컬 주소는
+`http://127.0.0.1:3001/ko/preview/category/be/node-js/http-response-streaming-lab`다.
+
+이 경로는 `NODE_ENV=development`에서 draft만 표시한다. published·archived,
+경로 이탈·심볼릭 링크는 허용하지 않고 production/test에서는 조회를 거부한다.
+원격 API를 사용하지 않으며 실제 MDX 컴포넌트·본문·TOC를 검사할 수 있다.
+metadata는 noindex/nofollow다. 공개 상태를 변경하거나 공개 목록·sitemap에
+초안을 포함시키는 경로가 아니다.
+
+HTTP 도식 네 장은 640px 이상에서 가로형, 작은 화면에서는 세로형을 선택한다.
+SVG 편집 시 원본 PNG와 `-wide.png`를 함께 갱신한다. 세로 원본 폭은 720px,
+가로 원본 폭은 1600px다. 실제 개발 route에서 제목 크기·이미지 디코딩과
+`currentSrc`·본문 폭·코드 펼쳐보기를 확인한다. 파일 존재나 독립 HTML 검사로
+실제 앱 표시 검사를 대체하지 않는다. PNG 수정 후에는 브라우저를 새로고침한다.
+
 ## 관련 검증
 
 - [게시 갱신 브라우저 실행 결과](../verification/cache/2026-09-19-content-publication-browser-test.md)

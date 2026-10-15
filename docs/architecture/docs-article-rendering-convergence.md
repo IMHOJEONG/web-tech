@@ -238,6 +238,20 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 - 작성자가 추가로 배워야 하는 규칙이 과하지 않은가?
 - 장애 시 local fallback이 유지되는가?
 
+## Development Draft Preview
+
+로컬 draft는 개발 전용 `/[locale]/preview/[...slugParts]`에서 확인한다.
+`getLocalDraftPreview`는 development 환경을 먼저 검사하고 등록된 정규 Markdown
+파일 중 draft만 반환한다. production/test의 공개 콘텐츠 정책은 유지한다.
+본문은 기존 MDX 컴포넌트와 `ArticleContentLayout`으로 렌더링하고 noindex/nofollow를
+설정한다. 원격 콘텐츠 조회나 별도 공개 목록 생성은 수행하지 않는다.
+
+HTTP 교육용 도식 네 장은 알려진 `/diagrams/http-response-…png`에 한해
+`picture/source`로 640px 이상에서 가로형 PNG를 선택한다. 모바일과 파일 미리보기는
+세로형을 유지하고 다른 이미지·원격 HTML의 렌더링 계약은 그대로 유지한다.
+검사 절차는 [상세 렌더링 회귀 테스트](../runbooks/docs-article-rendering-regression.md)의
+개발 서버 초안 절차를 따른다.
+
 ## Related Docs
 
 - [코드 블록 접기 적용 기록](../worklog/2026-10/2026-10-09-code-block-disclosure.md)
