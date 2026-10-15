@@ -18,6 +18,10 @@
 
 - [10-14 HTTP 스트리밍 글 게시](2026-10-14-http-streaming-publication.md)
 
+- [10-12 테스트 직접 작성과 IDE 점검 가이드](2026-10-12-test-authoring-guide.md)
+
+- [10-12 저장소 테스트 전수 검사 전 목록 정리](2026-10-12-repository-test-inventory.md)
+
 - [10-11 큰 기본 글자 헤더 보완](2026-10-11-header-font-preference.md)
 
 - [10-10 코드 접기 커밋과 UI/UX 점검](2026-10-10-code-block-ui-check.md)
@@ -29,6 +33,8 @@
 - [10-09 미커밋 기록 선별과 docs 푸시 전 검증](2026-10-09-reviewed-wip-publication.md)
 
 - [10-09 Jira PR #37 병합 후 feature 브랜치 동기화](2026-10-09-feature-sync-after-jira-pr37.md)
+
+- [HTTP 기고 테스트·도식·코드 분할·개발 서버 초안](2026-10-09-http-article-tests-diagrams.md)
 
 - [10-09 Confluence 개발·운영 안내 게시](2026-10-09-confluence-project-guide.md)
 

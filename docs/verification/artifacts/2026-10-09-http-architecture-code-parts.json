@@ -1,0 +1,201 @@
+{
+  "observedAt": "2026-10-09T13:08:04.783Z",
+  "scope": "isolated actual app MDX renderer and CSS; not Codex UI or a Next route",
+  "results": [
+    {
+      "viewportWidth": 1280,
+      "theme": "light",
+      "index": 0,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 820,
+      "passed": true
+    },
+    {
+      "viewportWidth": 1280,
+      "theme": "light",
+      "index": 1,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 820,
+      "passed": true
+    },
+    {
+      "viewportWidth": 1280,
+      "theme": "light",
+      "index": 2,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 820,
+      "passed": true
+    },
+    {
+      "viewportWidth": 1280,
+      "theme": "light",
+      "index": 3,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 820,
+      "passed": true
+    },
+    {
+      "viewportWidth": 1280,
+      "theme": "dark",
+      "index": 0,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 820,
+      "passed": true
+    },
+    {
+      "viewportWidth": 1280,
+      "theme": "dark",
+      "index": 1,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 820,
+      "passed": true
+    },
+    {
+      "viewportWidth": 1280,
+      "theme": "dark",
+      "index": 2,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 820,
+      "passed": true
+    },
+    {
+      "viewportWidth": 1280,
+      "theme": "dark",
+      "index": 3,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 820,
+      "passed": true
+    },
+    {
+      "viewportWidth": 390,
+      "theme": "light",
+      "index": 0,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 380,
+      "passed": true
+    },
+    {
+      "viewportWidth": 390,
+      "theme": "light",
+      "index": 1,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 380,
+      "passed": true
+    },
+    {
+      "viewportWidth": 390,
+      "theme": "light",
+      "index": 2,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 380,
+      "passed": true
+    },
+    {
+      "viewportWidth": 390,
+      "theme": "light",
+      "index": 3,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 380,
+      "passed": true
+    },
+    {
+      "viewportWidth": 390,
+      "theme": "dark",
+      "index": 0,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 380,
+      "passed": true
+    },
+    {
+      "viewportWidth": 390,
+      "theme": "dark",
+      "index": 1,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 380,
+      "passed": true
+    },
+    {
+      "viewportWidth": 390,
+      "theme": "dark",
+      "index": 2,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 380,
+      "passed": true
+    },
+    {
+      "viewportWidth": 390,
+      "theme": "dark",
+      "index": 3,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 380,
+      "passed": true
+    }
+  ],
+  "publicImagePaths": true,
+  "collapsedExamples": true,
+  "draftSha256": "e3180195b1a4d623d317111f71a2a564e8166ed8312e65869eabfc582a3130d2",
+  "node": "v24.12.0",
+  "codeParts": {
+    "normal": 5,
+    "cancel": 7,
+    "maximumLinesPerBlock": 32,
+    "reassembly": "filename/part in document order, reject missing/duplicate/reordered/unregistered blocks"
+  },
+  "tests": {
+    "httpNodeTestPassed": 26,
+    "actualHttpExecutions": 21,
+    "strictTypes": "all four assembled variants passed",
+    "labTypecheck": "passed after allowImportingTsExtensions correction",
+    "publicImageTestsPassed": 3,
+    "nodeTestTypecheck": "passed",
+    "contentFilesValidated": 18
+  },
+  "reviews": ["technical", "audience", "Korean honorific tone"],
+  "limits": [
+    "Infrastructure is a conceptual example; HeapForge production topology was not inspected",
+    "Isolated app MDX renderer/CSS, not an actual Next route or Codex file preview UI",
+    "No staging, commit, push or deployment"
+  ],
+  "assets": {
+    "http-response-local-architecture.png": "bd9baf250e82f69ea082e1fbc3ad2dc835525efcf0ef11ee26c198a010ea87e2",
+    "http-response-local-architecture.svg": "8d1869ab9c3956142e53ff28698f1d57b1c9c35202134946b6331bbffae848fa",
+    "http-response-completion.png": "a93919e812bf6bd84dfdb9e53c250841e2ef5db689e4ad97f855aab7330d4dd3",
+    "http-response-service-infrastructure.png": "6ad86ab49d324c46dfa4329f1952a200a290be3ff82bf0e1829e69dae4d6d456",
+    "http-response-stages.png": "6ffed66cef110fc6f8d872916dc28d957da76ccdb5d4ae2bb00f21fddb69a17a",
+    "http-response-stages.svg": "adb3c7db227f1a056b46994f325bfd13822f273dbff2ddcee016c85ab34bf030",
+    "http-response-service-infrastructure.svg": "ffb2cb39cb02cc681ff2a7a4d5fdbf1f1411694384e53e44fa85a9224a732ba6",
+    "http-response-completion.svg": "2f29a9e35de0d1a49f6c3da105da3cae9803676900d61702544063af0419bbb2"
+  }
+}
