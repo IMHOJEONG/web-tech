@@ -47,9 +47,36 @@ env PLAYWRIGHT_JSON_OUTPUT_FILE=/private/tmp/header-regression-final.json \
 
 [최종 실행 요약](../artifacts/2026-10-11-header-font-regression.json), [큰 기본 글자 수정 화면](../artifacts/2026-10-11-header-font32-fixed.png).
 
+### 배포 후 확인 (2026-10-11 23시 KST)
+
+- `d8c09527f8cb9195aa16258fee9b2bec916ee818`을 `origin/feature/docs`에 푸시했다. [Vercel 배포](https://vercel.com/hojeong-ims-projects/web-tech/2TABKhgmP9ZT527hqSSFNH8eHsXV) 완료 및 운영 HTML의 새 HeaderFrame/container 규칙을 확인했다.
+- [CI 38146174659](https://github.com/IMHOJEONG/web-tech/actions/runs/38146174659)의 6개 job 성공. 반응형 271개 통과/50개 건너뛰기, 격리 production article 108개 통과. [Documentation CI](https://github.com/IMHOJEONG/web-tech/actions/runs/38146174689)도 성공했다. CI의 production article은 로컬 격리 production 서버이지 운영 주소 검사가 아니다.
+- 운영 `https://heap-forge.app`에서 native 기본 글자 16/32px·500/640/1280px·두 언어 12개 조건 모두 클릭 영역 겹침·가로 넘침 없음. root CSS 확대 320/390/500px의 한국어 테스트도 통과했다. 영어는 첫 실행에서 load 시간 초과 후, 탐색 예산을 60초로 지정한 별도 실행에서 4초 만에 통과했다. 합친 결과를 한 번의 전체 실행 성공으로 표현하지 않는다.
+- 최초 운영 전체 sweep은 11개 통과, 10개 시간 초과, 16개 건너뛰기, 20개 미실행으로 5분 global timeout에 도달했다. 실패는 주로 `page.goto`의 `load` 대기였으며 헤더 geometry 판정에 도달하지 못했다. 운영 전체 탐색이 통과했다고 주장할 수 없다.
+- 별도 관측에서 DOM은 HTTP 200으로 약 4.8초에 도착했으나 약 35초 후에도 폰트 1개와 같은 출처 JS 4개 요청이 pending이었다. 헤더 활성화를 기다리는 검사도 시간 초과했다. JS 한 파일은 curl에서 200·836,205 bytes·전송 11.29초였다. HTTP 오류나 pageerror는 해당 관측에서 없었다. CDN·로컬 네트워크·브라우저별 원인을 분리하지 못했으므로 앱 코드 원인 또는 장애 없음으로 단정하지 않는다.
+- CI의 `destination stream closed early` 로그 8건은 article 테스트 통과와 별개로 남아 있다. 취소/장애 분류는 기존 요청 생명주기 정책의 후속 과제이며 이번 헤더 수정의 성공 근거로 사용하지 않는다.
+
+[배포·CI·실패/재검증 증거](../artifacts/2026-10-11-header-deployed-check.json).
+
+운영 검사는 임시 config에서 `use.baseURL`만 운영 주소로 지정하고 로컬 `webServer`를 제거했다. 새 배포를 생성하거나 원격 콘텐츠를 수정하지 않는 읽기 전용 검사다. 실제 핵심 재검증 명령:
+
+```bash
+env PLAYWRIGHT_JSON_OUTPUT_FILE=/private/tmp/header-deployed-native.json \
+  mise exec -- pnpm exec playwright test \
+  --config=/private/tmp/header-deployed.config.ts \
+  header-font-preference.spec.ts --project=chromium-desktop \
+  --workers=1 --global-timeout=180000 --reporter=list,json
+env PLAYWRIGHT_JSON_OUTPUT_FILE=/private/tmp/header-deployed-en-recheck.json \
+  mise exec -- pnpm exec playwright test \
+  --config=/private/tmp/header-deployed.config.ts \
+  header-font-preference.spec.ts --project=chromium-desktop \
+  --grep 'en: enlarged root font' --workers=1 \
+  --timeout=60000 --global-timeout=90000 --reporter=list,json
+```
+
 ## 한계와 후속 작업
 
-- 기본 글자 검사는 Chromium만 수행했다. Firefox/WebKit·설치 Chrome의 수동 설정·실기기·운영 배포는 미검증이다.
+- 기본 글자 검사는 Chromium만 수행했다. Firefox/WebKit·설치 Chrome의 수동 설정·실기기는 미검증이다. 운영 배포에서는 헤더 핵심 조건만 통과했으며 전체 탐색 검사는 로드 지연이 남았다.
 - 큰 글자에서는 헤더가 높아져 가용 본문 높이가 줄어든다. 작은 높이의 가로 화면 UX는 별도 확인한다.
 - 주변 HTTP/TCP 초안·도식 변경이 있는 작업 트리에서 로컬 개발 서버를 사용했다. 해당 변경은 이 커밋에 포함하지 않는다.
 - 시간 초과는 최종 실행에서 재현되지 않았다. 재발하면 환경 중단 여부와 해당 경로의 서버 응답 시간을 함께 수집한다.

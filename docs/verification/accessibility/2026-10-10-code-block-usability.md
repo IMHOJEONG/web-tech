@@ -73,14 +73,70 @@ Chromium·WebKit의 폭 320px, 영어, 루트 글자 크기 200%에서 라이트
 
 [수정 후 측정값](../artifacts/2026-10-10-code-block-usability-fixed.json), [수정 후 200% 캡처](../artifacts/2026-10-10-code-footer-200-percent-fixed.png).
 
+## 2026-10-11 배포 후속 확인
+
+초회 작업 트리 검증과 별도로 `9c84c9d`의 CI 성공과 Vercel 배포 완료를 확인하고 공개 페이지를 검사했다. GitHub의 배포 상태는 같은 SHA에 연결되어 있지만 공개 페이지가 반환한 SHA를 별도로 대조하지는 않았다.
+
+- 대상: `https://heap-forge.app/{ko,en}/docs/category/be/node-js/stream-backpressure-diagnosis`.
+- 환경: macOS, Node.js 24.12.0, Playwright 1.62.1, Chromium headless.
+- 표본: 언어 2개 × 폭 320/390/1280px × 라이트/다크 × 루트 글자 크기 100/200%, 총 24개 조건. 축소·실제 browser zoom은 포함하지 않았다.
+- 임시 검사 실행 명령: 저장소 루트에서 `mise exec -- node /private/tmp/check-deployed-code-blocks.mjs`. 이 스크립트는 이번 실행용이며 저장소의 상시 회귀 검사에 편입하지 않았다.
+- 수동 재현: 대상 글에서 긴 코드 블록의 Enter 펼치기·Space 접기·포인터 토글, 접힌 상태의 전체 복사와 복사 상태 복구를 확인한다. DevTools로 root `font-size`를 32px로 바꾸는 조건은 실제 페이지 확대와 구분한다.
+
+24개 조건 모두 HTTP 200, 키보드·포인터 접기/펼치기, 전체 코드 클립보드 복사와 idle 상태 복구가 통과했다. 이번 복사는 mock이 아닌 Chromium 클립보드에 쓴 문자열을 읽어 전체 본문과 비교했다. 코드 footer의 겹침·잘림, 페이지 가로 넘침, pageerror·console warning/error·400 이상 리소스 응답은 관측되지 않았다. 복사 버튼과 summary의 높이는 44px 이상이었다. [배포 측정값](../artifacts/2026-10-11-deployed-code-blocks.json)에 원본 결과를 보관했다.
+
+### 별도 발견: 글자 확대 시 모바일 헤더 겹침
+
+영어·폭 320px·root `font-size: 32px`의 전체 화면에서 로고와 검색 버튼이 겹친다. 로고의 x 범위는 약 99.42~229.38px, 검색 버튼은 104~192px이며 y 범위도 겹친다. 두 영역은 서로 다른 flex 묶음이고 확대된 내부 요소의 최소 너비를 좁은 헤더가 수용하지 못하는 상황이다. 코드 프레임 검사 성공을 헤더 또는 전체 사이트 접근성 성공으로 해석하지 않는다. [전체 화면 캡처](../artifacts/2026-10-11-enlarged-mobile-header.png)를 남겼으며 애플리케이션 수정은 하지 않았다.
+
+후속으로 같은 배포 글의 헤더를 한국어·영어, 기본 root 16px에서 폭 320/390/640/768/1280px로 검사했다. 기본 크기 10개 조건에서는 로고·검색 버튼 겹침과 페이지 가로 넘침이 없었다. 폭 320/390px의 root 32px 조건을 추가한 4개 조건에서는 두 언어 모두 겹침을 재현했다. 모든 14개 요청은 HTTP 200이었다. 기본 모바일 화면에서 항상 발생하는 문제라는 의미는 아니다.
+
+실행 명령은 `mise exec -- node /private/tmp/check-live-header-baseline.mjs`와 `mise exec -- node /private/tmp/capture-live-header-comparison.mjs`였다. 두 파일은 일회성 임시 검사다. [비교 측정값](../artifacts/2026-10-11-deployed-header-baseline.json), [320px 기본 헤더](../artifacts/2026-10-11-header-font100.png), [같은 폭의 글자 200% 헤더](../artifacts/2026-10-11-header-font200.png)를 보관했다. 후속 검사도 Chromium headless이고 실제 browser zoom은 아니다.
+
+실제 Chrome 154.0.8037.99의 검증용 창을 여는 대체 경로도 시도했다. Apple Events JavaScript는 꺼져 있어 화면 내부 값을 읽지 못했고 macOS `screencapture`도 display/rect 이미지를 만들지 못했다. 브라우저 보안 설정이나 화면 기록 권한을 변경하지 않았다. 메뉴 조작 시도만으로 실제 확대 상태와 배치를 검증했다고 판정하지 않는다.
+
+### CI와 배포 결과 구분
+
+[CI 38051951925](https://github.com/IMHOJEONG/web-tech/actions/runs/38051951925)의 6개 작업은 모두 성공했다. 반응형 268개, production article 108개, 공용 UI 64개와 consumer 16개가 통과했다. [Vercel 배포](https://vercel.com/hojeong-ims-projects/web-tech/FkaHAzikL2gLisMfiWBKNavLBNVi)는 완료 상태다.
+
+게시 갱신 브라우저 테스트 구간에 `The destination stream closed early`가 8회 남았다. 요청 ID가 있는 hook-only 로그도 있지만 응답 완료·연결 종료·선행 오류를 함께 대조한 증거는 부족하다. 시간상 같은 구간이라는 이유나 테스트 통과만으로 정상 취소를 확정하지 않는다. 이 서버 로그와 이번 배포 브라우저의 pageerror 0건은 서로 다른 측정 범위다.
+
+초회 실제 브라우저 제어 도구는 초기화 오류로 실행되지 않았다. 설치 Chrome 메뉴 조작·OS 글자 확대·실기기·스크린리더는 미검증이다. 이후 격리 Chromium의 브라우저 자체 확대와 기본 글자 설정은 아래 후속 검증으로 구분했다. 배포 표본은 로컬 문서 한 글이며 NAS 원격 문서 전체나 운영 Runtime Logs까지 확인한 것은 아니다.
+
+### 후속: 브라우저 자체 확대와 기본 글자 설정 대조
+
+사용자 Chrome의 프로필·보안 설정을 바꾸지 않고 임시 프로필의 Chromium 151.0.7922.34에서 검사했다. Playwright 1.62.1의 `chromium` channel, headless, `viewport: null`, 1280px 창을 사용했다. [Playwright 확장 검사 방식](https://playwright.dev/docs/chrome-extensions)에 따라 격리 프로필에만 검증용 확장을 로드했다.
+
+[공식 tabs 확대 API](https://developer.chrome.com/docs/extensions/reference/api/tabs#method-setZoom)로 `automatic`·`per-tab` 확대를 설정하고 `getZoom` 결과를 대조했다. CSS zoom·root 글자 변경·device metrics override·pinch 확대는 사용하지 않았다. root 글자는 계속 16px, visual viewport scale은 1이며 페이지 zoom에 따라 devicePixelRatio와 CSS 표시 폭이 바뀌었다.
+
+| 브라우저 배율 | CSS 표시 폭 |
+| ------------- | ----------- |
+| 80%           | 1600px      |
+| 90%           | 1422px      |
+| 100%          | 1280px      |
+| 125%          | 1024px      |
+| 150%          | 853px       |
+| 200%          | 640px       |
+| 400%          | 320px       |
+
+한국어·영어 × 라이트/다크 × 7개 배율, 28개 조건 모두 HTTP 200, 로고·검색 버튼 영역 비겹침, 페이지 가로 넘침 없음, footer 비겹침·비잘림, 키보드 접기·펼치기와 전체 문자열 클립보드 복사가 통과했다. pageerror는 없었다. 실행 명령은 `mise exec -- node /private/tmp/check-native-browser-zoom.mjs`였으며 [측정값](../artifacts/2026-10-11-native-browser-zoom.json)을 보관했다.
+
+큰 배율의 locator 단위 캡처가 빈 영역을 반환해 해당 이미지는 증거에서 제외했다. 전체 표시 영역을 `Page.captureScreenshot`으로 다시 수집하고 눈으로 확인한 [400% 화면](../artifacts/2026-10-11-native-zoom400.png)을 남겼다. 재캡처 명령은 `mise exec -- node /private/tmp/capture-native-zoom-viewport.mjs`였다. 이 환경의 400% 표시 영역 높이는 203 CSS px이며 상·하단 고정 탐색 영역이 읽기 공간을 많이 차지한다. 기능 통과를 화면 사용성이 최적이라는 의미로 해석하지 않는다.
+
+기본 글자 설정은 별도 임시 프로필에서 [fontSettings API](https://developer.chrome.com/docs/extensions/reference/api/fontSettings#method-setDefaultFontSize)로 16/32px를 비교했다. 페이지 zoom은 100%, root inline 글자 스타일은 비어 있었다. 처음 320/390px 창을 요청했지만 실제 창은 최소 500px로 열려 해당 실행을 폭 320/390 검증으로 쓰지 않았다. 실제 폭과 요청 폭이 일치하는 500/640px에서 두 언어를 다시 검사했다.
+
+8개 조건 중 500px·기본 글자 32px의 두 언어에서 로고 링크와 검색 버튼의 클릭 영역이 겹쳤다. 로고 영역의 오른쪽은 약 300.69px, 검색 버튼의 왼쪽은 284px로 약 16.69px 겹친다. 캡처에서 로고는 두 줄로 표시되지만 글자 자체가 검색 아이콘에 가려진 것은 아니므로 **링크·버튼 영역 충돌**로 구분한다. 나머지 6개 조건은 겹치지 않았으며 가로 넘침은 없었다. [기본 글자 설정 측정값](../artifacts/2026-10-11-native-font-preference.json)과 [500px·32px 헤더](../artifacts/2026-10-11-native-font32-header.png)를 보관했다. 실행 명령은 `mise exec -- node /private/tmp/check-native-font-preference.mjs`였으며 종료 시 확장의 글자 설정을 해제했다.
+
+스크립트·확장은 이번 검사용 `/private/tmp` 파일이며 상시 회귀 검사에 편입하지 않았다. 사용자 설치 Chrome 154의 메뉴·실기기를 직접 검사한 것은 아니지만, 격리 Chromium의 브라우저 zoom과 기본 글자 설정은 실제 API와 계산값으로 대조했다. 일반 페이지 확대에서는 앞선 root-font 스트레스 캡처와 같은 겹침이 없었고, 큰 기본 글자 설정의 좁은 헤더는 별도 보완 대상으로 유지한다.
+
 ## 한계와 후속 작업
 
-- 루트 글자 크기 200% 검사는 실제 브라우저 zoom 200%와 다르다. 실제 확대·OS 글자 크기 설정도 확인해야 한다.
+- 루트 글자 크기 200%와 브라우저 zoom 200%는 다르다. 후속 Chromium 자동 검사는 두 설정을 분리했고, 설치 Chrome 메뉴와 OS 글자 크기 설정은 미검증이다.
 - WebKit은 실제 Safari/iPhone 검증이 아니다. 실제 기기·VoiceOver 등 스크린리더는 미검증이다.
-- clipboard는 mock했다. 문자열과 실패 안내를 검사했으며 OS 클립보드 권한은 검증하지 않았다.
+- 초회 fixture의 clipboard는 mock했다. 배포 후속 검사는 권한을 허용한 Chromium 클립보드로 전체 문자열을 확인했지만 사용자의 실제 브라우저·OS 권한 및 거부 동작은 미검증이다.
 - Shiki fixture는 출력 모양을 재사용하며 하이라이터 엔진 자체를 실행하지 않는다. NAS의 모든 원격 코드도 검사하지 않았다.
-- 전체 앱 빌드·CI·운영 배포는 이번 점검 범위에 포함하지 않았다.
-- 두 UI 문제는 작업 트리에서 수정하고 자동 검사를 통과했다. 실제 브라우저 zoom·축소, 실기기, 구형 브라우저, 배포는 별도 확인이 필요하다. 검사 범위는 [축소·확대 절차](../../runbooks/docs-responsive-browser-device-checklist.md#축소확대-점검-범위)에 유지한다.
+- 초회에는 전체 앱 빌드·CI·운영 배포를 확인하지 않았다. 이후의 CI·배포 표본 검사 결과는 위 10-11 절에 구분했다.
+- 두 코드 UI 문제의 배포 표본과 격리 Chromium의 zoom·축소 검사는 통과했다. 설치 브라우저 메뉴 조작, 실기기, 구형 브라우저와 큰 기본 글자 설정의 헤더 보완은 별도 확인이 필요하다. 검사 범위는 [축소·확대 절차](../../runbooks/docs-responsive-browser-device-checklist.md#축소확대-점검-범위)에 유지한다.
 
 ## 관련 문서
 

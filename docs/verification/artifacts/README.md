@@ -4,6 +4,8 @@
 
 - [10-14 HTTP 글 게시 준비](2026-10-14-http-publication-checks.json), [운영 모드 화면](2026-10-14-http-publication-local.json): [게시 검증 보고서](../content/2026-10-14-http-streaming-publication.md). 데스크톱·모바일 그림은 보고서에 연결했습니다.
 
+- [10-11 헤더 배포 후 검사](2026-10-11-header-deployed-check.json): [헤더 보고서의 배포 확인](../accessibility/2026-10-11-header-font-preference.md#배포-후-확인-2026-10-11-23시-kst). CI·배포·핵심 확대 통과와 전체 운영 load 시간 초과를 구분한다.
+
 - [10-11 이벤트 루프 검사·소스 해시](2026-10-11-event-loop-checks.json): [실험 보고서](../content/2026-10-11-node-event-loop-cpu.md)의 실행 버전과 검사 요약입니다.
 
 - [10-11 이벤트 루프 화면 검사](2026-10-11-event-loop-ui.json), [1280px](2026-10-11-event-loop-1280.jpg), [670px](2026-10-11-event-loop-670.jpg), [390px](2026-10-11-event-loop-390.jpg): [검증 보고서](../content/2026-10-11-node-event-loop-cpu.md). 실제 POST·재시도·403/409/405와 모의 오류를 구분합니다.
@@ -18,6 +20,12 @@
 - [10-11 실제 TCP 캡처](2026-10-11-tcp-packets.txt), [패킷·소켓 번호 대조](2026-10-11-tcp-capture-observed.json): [검증 보고서](../content/2026-10-11-node-tcp-packet-capture.md). 12개 캡처·커널 drop 0, OS 식별자는 정리한 소켓 사본에서 제외했습니다.
 
 - [10-11 첫 불완전 캡처](2026-10-11-tcp-capture-initial-incomplete.json), [두 번째 불완전 캡처](2026-10-11-tcp-capture-second-incomplete.json): [같은 실행의 소켓·캡처 대조 보고서](../content/2026-10-11-node-tcp-packet-capture.md). 시작 메시지를 실제 패킷 관측과 구분하며 OS 식별자는 제외했습니다.
+
+- [10-11 브라우저 자체 확대 측정값](2026-10-11-native-browser-zoom.json), [400% 화면](2026-10-11-native-zoom400.png), [기본 글자 설정 측정값](2026-10-11-native-font-preference.json), [큰 기본 글자 헤더](2026-10-11-native-font32-header.png): [코드 접기 보고서의 설정 대조](../accessibility/2026-10-10-code-block-usability.md#후속-브라우저-자체-확대와-기본-글자-설정-대조). 사용자 Chrome 설정은 수정하지 않았다.
+
+- [10-11 배포 코드 접기 측정값](2026-10-11-deployed-code-blocks.json), [확대된 모바일 헤더 겹침](2026-10-11-enlarged-mobile-header.png): [코드 접기 보고서의 배포 후속 확인](../accessibility/2026-10-10-code-block-usability.md#2026-10-11-배포-후속-확인).
+
+- [10-11 배포 헤더 비교 측정값](2026-10-11-deployed-header-baseline.json), [기본 크기](2026-10-11-header-font100.png), [글자 200%](2026-10-11-header-font200.png): 같은 보고서의 기본 화면 10개 조건·확대 4개 조건 비교. 실제 브라우저 zoom이 아님.
 
 - [10-10 코드 접기 측정값](2026-10-10-code-block-usability.json), [확대 시 하단 겹침](2026-10-10-code-footer-200-percent.png): [검증 보고서](../accessibility/2026-10-10-code-block-usability.md).
 

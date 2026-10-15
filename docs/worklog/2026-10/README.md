@@ -28,6 +28,8 @@
 
 - [10-11 TCP 캡처 로그 대조와 학습 개념 보강](2026-10-11-tcp-packet-analysis.md)
 
+- [10-11 코드 접기 배포 후속 점검](2026-10-11-deployed-code-block-check.md)
+
 - [10-10 코드 접기 커밋과 UI/UX 점검](2026-10-10-code-block-ui-check.md)
 
 - [10-10 소켓 끝점 학습 실험과 운영체제 관측](2026-10-10-tcp-socket-learning-experiment.md)
