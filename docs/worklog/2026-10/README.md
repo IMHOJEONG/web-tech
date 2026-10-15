@@ -14,6 +14,8 @@
 
 - [10-14 포맷터·린터 개선 후보 조사](2026-10-14-formatter-linter-review.md)
 
+- [10-14 문서 목록 순서와 밀도 개선의 1차 검토](2026-10-14-docs-index-density-review.md)
+
 - [10-14 모바일 문서 제목 크기](2026-10-14-mobile-article-title.md)
 
 - [10-14 HTTP 스트리밍 글 게시](2026-10-14-http-streaming-publication.md)

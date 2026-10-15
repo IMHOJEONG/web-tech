@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-14 인덱스·검색 목록 도달 거리 기준선](2026-10-14-docs-index-density-baseline.json): [밀도 검토 보고서](../accessibility/2026-10-14-docs-index-density-review.md). 공개 사이트 네 조건의 실제 값 발췌, 개선 목표와 구분.
+
 - [10-14 모바일 제목 실제 측정](2026-10-14-mobile-title-local.json), [공개 사이트 측정](2026-10-14-mobile-title-public.json), [Production 상태](2026-10-14-mobile-title-production.json): [제목 검증](../accessibility/2026-10-14-mobile-article-title.md).
 
 - [10-14 HTTP 글 모바일 후속 확인](2026-10-14-http-mobile-followup.json): [게시 보고서의 모바일 절](../content/2026-10-14-http-streaming-publication.md#모바일-후속-확인). 320/390/430px의 실제 제목·코드 펼침, 실기기 검사 아님.
