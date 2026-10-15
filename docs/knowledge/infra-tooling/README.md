@@ -1,5 +1,7 @@
 # Infra / Tooling 지식 정리
 
+## 학습 문서
+
 - [Node.js HTTP 요청의 운영체제 내부 경로](node-http-kernel-path.md): 소켓·버퍼·TCP·이벤트 루프의 책임과 관측 한계, 실제 CPU 0/200ms 비교와 흐름도입니다.
 
 ## 배운 점

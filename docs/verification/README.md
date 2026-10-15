@@ -6,9 +6,11 @@
 
 - [10-14 HTTP 스트리밍 게시 검증](content/2026-10-14-http-streaming-publication.md)
 
+- [10-14 수요일 기고 점검](content/2026-10-14-weekly-article-maintenance.md): 게시 canonical·실제 본문·metadata·sitemap·두 화면과 예제 통과, 기존 draft 진행 상태 보강. 재배포 없음.
+
 - [10-11 이벤트 루프 CPU 비교](content/2026-10-11-node-event-loop-cpu.md): 독립 송신자·수신자, CPU 0/200ms 각 3회와 실제 그래프. 초기 측정 실패와 보강을 구분합니다.
 
-- [10-11 큰 기본 글자 헤더 보완](accessibility/2026-10-11-header-font-preference.md): 로컬 관련 E2E 33개 통과. 앞선 시간 초과를 기록하고 재검증했으며 운영 배포는 미검증.
+- [10-11 큰 기본 글자 헤더 보완](accessibility/2026-10-11-header-font-preference.md): 로컬 관련 E2E 33개와 운영 헤더 핵심 조건 통과. 운영 전체 탐색은 로드 시간 초과가 남아 별도로 기록.
 
 - [10-11 로컬 TCP 캡처 재실행](content/2026-10-11-node-tcp-packet-capture.md): 이전 포트 불일치를 해결하고 실제 12행·순서 번호·양방향 FIN·커널 drop 0을 확인했습니다.
 

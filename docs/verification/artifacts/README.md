@@ -10,6 +10,8 @@
 
 - [10-14 HTTP 글 게시 준비](2026-10-14-http-publication-checks.json), [운영 모드 화면](2026-10-14-http-publication-local.json): [게시 검증 보고서](../content/2026-10-14-http-streaming-publication.md).
 
+- [10-14 공개 글 검사](2026-10-14-weekly-published.json), [실행 예제](2026-10-14-weekly-published-examples.json), [초안 화면 검사](2026-10-14-weekly-drafts.json), [Production·검사 요약](2026-10-14-weekly-checks.json): [주간 보고서](../content/2026-10-14-weekly-article-maintenance.md). 화면과 초기 부분·실패 증거는 보고서에 연결했습니다.
+
 - [10-11 헤더 배포 후 검사](2026-10-11-header-deployed-check.json): [헤더 보고서의 배포 확인](../accessibility/2026-10-11-header-font-preference.md#배포-후-확인-2026-10-11-23시-kst). CI·배포·핵심 확대 통과와 전체 운영 load 시간 초과를 구분한다.
 
 - [10-11 이벤트 루프 검사·소스 해시](2026-10-11-event-loop-checks.json): [실험 보고서](../content/2026-10-11-node-event-loop-cpu.md)의 실행 버전과 검사 요약입니다.

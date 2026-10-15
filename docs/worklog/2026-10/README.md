@@ -20,6 +20,8 @@
 
 - [10-14 HTTP 스트리밍 글 게시](2026-10-14-http-streaming-publication.md)
 
+- [10-14 수요일 게시 글 점검과 기존 초안 최신화](2026-10-14-weekly-article-maintenance.md)
+
 - [10-12 테스트 직접 작성과 IDE 점검 가이드](2026-10-12-test-authoring-guide.md)
 
 - [10-12 저장소 테스트 전수 검사 전 목록 정리](2026-10-12-repository-test-inventory.md)
@@ -63,6 +65,8 @@
 - [캐시 만료와 실제 게시 결과 검증 분리](2026-10-08-content-publication-verifier.md)
 
 - [10-09 잔여 의존성 보안 패치](2026-10-09-security-patches.md)
+
+- [게시 글 정기 점검과 다음 HTTP 스트리밍 초안](2026-10-08-weekly-article-maintenance.md)
 
 - [주간 글의 로컬 게시와 수요일 자동 실행](2026-10-06-weekly-article-publication.md)
 
