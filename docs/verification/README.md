@@ -4,7 +4,13 @@
 
 - [10-14 HTTP 스트리밍 게시 검증](content/2026-10-14-http-streaming-publication.md)
 
+- [10-11 이벤트 루프 CPU 비교](content/2026-10-11-node-event-loop-cpu.md): 독립 송신자·수신자, CPU 0/200ms 각 3회와 실제 그래프. 초기 측정 실패와 보강을 구분합니다.
+
 - [10-11 큰 기본 글자 헤더 보완](accessibility/2026-10-11-header-font-preference.md): 로컬 관련 E2E 33개 통과. 앞선 시간 초과를 기록하고 재검증했으며 운영 배포는 미검증.
+
+- [10-11 로컬 TCP 캡처 재실행](content/2026-10-11-node-tcp-packet-capture.md): 이전 포트 불일치를 해결하고 실제 12행·순서 번호·양방향 FIN·커널 drop 0을 확인했습니다.
+
+- [10-10 Node.js 소켓·운영체제 관측](content/2026-10-10-node-socket-kernel-observation.md): 실제 MDX·fixture 각 3회, 소켓 상태 조회. SYN·ACK 캡처는 권한 문제로 미완료.
 
 - [10-04 태그·읽기 모음](content/2026-10-04-content-discovery.md): 태그·모음과 반응형 탐색 검증. 운영 혼합 목록 미검증.
 

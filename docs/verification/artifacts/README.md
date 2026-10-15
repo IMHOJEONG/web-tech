@@ -4,11 +4,26 @@
 
 - [10-14 HTTP 글 게시 준비](2026-10-14-http-publication-checks.json), [운영 모드 화면](2026-10-14-http-publication-local.json): [게시 검증 보고서](../content/2026-10-14-http-streaming-publication.md). 데스크톱·모바일 그림은 보고서에 연결했습니다.
 
+- [10-11 이벤트 루프 검사·소스 해시](2026-10-11-event-loop-checks.json): [실험 보고서](../content/2026-10-11-node-event-loop-cpu.md)의 실행 버전과 검사 요약입니다.
+
+- [10-11 이벤트 루프 화면 검사](2026-10-11-event-loop-ui.json), [1280px](2026-10-11-event-loop-1280.jpg), [670px](2026-10-11-event-loop-670.jpg), [390px](2026-10-11-event-loop-390.jpg): [검증 보고서](../content/2026-10-11-node-event-loop-cpu.md). 실제 POST·재시도·403/409/405와 모의 오류를 구분합니다.
+- [10-11 필드명 보강 전 원본 실행](2026-10-11-event-loop-cpu-before-contract-fix.json), [초기 화면 선택자 실패](2026-10-11-event-loop-ui-initial-failure.txt), [모바일 보강 전 검사](2026-10-11-event-loop-ui-before-mobile-layout.json): 같은 보고서의 이전 증거입니다.
+
+- [10-11 이벤트 루프 6회 측정](2026-10-11-event-loop-cpu.json), [실제 첫 표본 그래프](2026-10-11-event-loop-timeline.svg), [초기 실패](2026-10-11-event-loop-initial-failure.txt): [검증 보고서](../content/2026-10-11-node-event-loop-cpu.md).
+
 - [10-11 헤더 기본 글자 회귀 요약](2026-10-11-header-font-regression.json), [32px 수정 화면](2026-10-11-header-font32-fixed.png): [헤더 보완 보고서](../accessibility/2026-10-11-header-font-preference.md). 로컬 실행과 native 설정의 관측값이며 사용자 프로필은 변경하지 않았다.
+
+- [10-11 소켓 초안 원문 재검사](2026-10-11-tcp-source-recheck.txt): [캡처·문서 반영 보고서](../content/2026-10-11-node-tcp-packet-capture.md). fixture·실제 MDX 각 3회와 strict 타입·실패 사례 11개 통과.
+
+- [10-11 실제 TCP 캡처](2026-10-11-tcp-packets.txt), [패킷·소켓 번호 대조](2026-10-11-tcp-capture-observed.json): [검증 보고서](../content/2026-10-11-node-tcp-packet-capture.md). 12개 캡처·커널 drop 0, OS 식별자는 정리한 소켓 사본에서 제외했습니다.
+
+- [10-11 첫 불완전 캡처](2026-10-11-tcp-capture-initial-incomplete.json), [두 번째 불완전 캡처](2026-10-11-tcp-capture-second-incomplete.json): [같은 실행의 소켓·캡처 대조 보고서](../content/2026-10-11-node-tcp-packet-capture.md). 시작 메시지를 실제 패킷 관측과 구분하며 OS 식별자는 제외했습니다.
 
 - [10-10 코드 접기 측정값](2026-10-10-code-block-usability.json), [확대 시 하단 겹침](2026-10-10-code-footer-200-percent.png): [검증 보고서](../accessibility/2026-10-10-code-block-usability.md).
 
 - [10-10 코드 접기 수정 후 측정값](2026-10-10-code-block-usability-fixed.json), [겹침 보완 캡처](2026-10-10-code-footer-200-percent-fixed.png): 같은 보고서의 수정 후 재검증. 수정 전 증거와 분리.
+
+- [10-10 소켓 실험 원문 검사](2026-10-10-tcp-socket-tests.txt), [화면 검사](2026-10-10-tcp-socket-preview.json), [캡처 접근 상태](2026-10-10-tcp-capture-access.json): [보고서](../content/2026-10-10-node-socket-kernel-observation.md).
 
 - [10-09 잔여 취약점 실행 요약](2026-10-09-remaining-advisories.json): audit 집계·registry 패치 확인·상위 범위, 비밀값 제외.
 

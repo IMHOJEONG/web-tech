@@ -1,0 +1,16 @@
+{
+  "recordedAt": "2026-10-10T10:29:35.653945+00:00",
+  "scope": "access probes in this session; no packets captured",
+  "tcpdump": {
+    "command": "/usr/sbin/tcpdump -i lo0 -nn -c 1 'tcp and port 1'",
+    "exitCode": 1,
+    "error": "You do not have permission to capture on that device; cannot open BPF device /dev/bpf0: Permission denied"
+  },
+  "sudo": {
+    "command": "sudo -n /usr/sbin/tcpdump -D",
+    "exitCode": 1,
+    "error": "sudo: a password is required"
+  },
+  "kernelSocketObservation": "lsof executed successfully on the experiment process only",
+  "packetCapture": "not performed"
+}

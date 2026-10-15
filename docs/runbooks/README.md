@@ -4,6 +4,10 @@
 
 - [저장소 테스트 목록과 실행 경로](repository-test-inventory.md)
 
+- [Node.js CPU 작업과 이벤트 루프 콜백 관측](node-event-loop-cpu-observation.md)
+
+- [Node.js 로컬 TCP 소켓과 패킷 관측](node-tcp-local-observation.md)
+
 로컬 실행, 배포, 장애 대응과 반복 가능한 검증 절차입니다. 실행 후 결과는 [검증 보고서](../verification/README.md)에 기록합니다.
 
 [전체 문서 안내](../README.md)

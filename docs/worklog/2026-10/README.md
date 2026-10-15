@@ -22,11 +22,21 @@
 
 - [10-12 저장소 테스트 전수 검사 전 목록 정리](2026-10-12-repository-test-inventory.md)
 
+- [10-11 이벤트 루프 CPU 실험](2026-10-11-event-loop-cpu-experiment.md)
+
 - [10-11 큰 기본 글자 헤더 보완](2026-10-11-header-font-preference.md)
+
+- [10-11 TCP 캡처 로그 대조와 학습 개념 보강](2026-10-11-tcp-packet-analysis.md)
 
 - [10-10 코드 접기 커밋과 UI/UX 점검](2026-10-10-code-block-ui-check.md)
 
+- [10-10 소켓 끝점 학습 실험과 운영체제 관측](2026-10-10-tcp-socket-learning-experiment.md)
+
 [월별 목록](../README.md)
+
+- [10-10 HTTP 학습 문서와 로드맵 재검사](2026-10-10-http-learning-roadmap-review.md)
+
+- [HTTP 운영체제 통신 학습 문서와 단계별 로드맵](2026-10-09-http-kernel-learning-roadmap.md)
 
 - [10-09 긴 코드 블록 접기](2026-10-09-code-block-disclosure.md)
 

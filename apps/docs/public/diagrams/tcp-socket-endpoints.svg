@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="670" viewBox="0 0 640 670">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 Z" fill="#4b5563"/></marker></defs>
+<style>text{font-family:Arial,'Apple SD Gothic Neo',sans-serif;fill:#172033}.title{font-size:32px;font-weight:700}.label{font-size:29px}.small{font-size:27px}.box{stroke-width:2;rx:18}</style>
+<rect width="640" height="670" fill="#f8fafc" rx="20"/>
+<text x="32" y="47" class="title">한 프로세스 · 두 통신 역할</text>
+<rect x="28" y="78" width="584" height="110" class="box" fill="#eff6ff" stroke="#60a5fa"/>
+<text x="50" y="118" class="title">클라이언트 연결 소켓</text>
+<text x="50" y="161" class="label">local C  →  remote S</text>
+<path d="M260 198 V228" stroke="#4b5563" stroke-width="3" marker-end="url(#arrow)"/><path d="M380 233 V203" stroke="#4b5563" stroke-width="3" marker-end="url(#arrow)"/><text x="135" y="224" class="small">요청 ↓</text><text x="410" y="224" class="small">응답 ↑</text>
+<rect x="28" y="243" width="584" height="118" class="box" fill="#f0fdf4" stroke="#4ade80"/>
+<text x="50" y="287" class="title">운영체제 커널</text>
+<text x="50" y="332" class="label">TCP · 루프백으로 요청과 응답 전달</text>
+<path d="M260 371 V401" stroke="#4b5563" stroke-width="3" marker-end="url(#arrow)"/><path d="M380 406 V376" stroke="#4b5563" stroke-width="3" marker-end="url(#arrow)"/><text x="135" y="398" class="small">요청 ↓</text><text x="410" y="398" class="small">응답 ↑</text>
+<rect x="28" y="416" width="584" height="110" class="box" fill="#fff7ed" stroke="#fb923c"/>
+<text x="50" y="457" class="title">서버 연결 소켓</text>
+<text x="50" y="500" class="label">local S  →  remote C</text>
+<rect x="28" y="551" width="584" height="92" class="box" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="50" y="590" class="label">별도 대기 소켓: S · LISTEN</text>
+<text x="50" y="628" class="small">새 연결을 기다림 · 본문 송수신과 구분</text>
+</svg>

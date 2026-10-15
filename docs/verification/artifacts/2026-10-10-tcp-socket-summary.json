@@ -1,0 +1,52 @@
+{
+  "recordedAt": "2026-10-10T10:36:10.375Z",
+  "scope": "local experiment and development draft; no publication",
+  "socket": {
+    "sourceSha256": "ddfcfa5a4d01bd264e6cb834a4db16a5b22962ffbc825fddf2374ce7913096f7",
+    "testSourceSha256": "ddfcfa5a4d01bd264e6cb834a4db16a5b22962ffbc825fddf2374ce7913096f7",
+    "tests": 11,
+    "passes": 11,
+    "runs": {
+      "fixture": 3,
+      "actualMdx": 3
+    },
+    "osSnapshot": "LISTEN 1 and ESTABLISHED 2 with matching endpoints in each run"
+  },
+  "http": {
+    "sourceSha256": "fe628d5c889c5b467c3fa9f2fcefbd9f973e7a3b6c5eced34f3cd19cb7fb50c9",
+    "testSourceSha256": "fe628d5c889c5b467c3fa9f2fcefbd9f973e7a3b6c5eced34f3cd19cb7fb50c9",
+    "tests": 14,
+    "passes": 14,
+    "runtimeExecutions": 12
+  },
+  "preview": {
+    "sourceSha256": "ddfcfa5a4d01bd264e6cb834a4db16a5b22962ffbc825fddf2374ce7913096f7",
+    "widths": [1280, 670, 390],
+    "diagramsDecoded": 3,
+    "maxDesktopDiagramWidth": 448
+  },
+  "content": {
+    "files": 19,
+    "passed": true
+  },
+  "documentation": {
+    "passed": true,
+    "stagingPerformed": false
+  },
+  "packetCapture": {
+    "status": "blocked by OS capture permission and sudo authentication",
+    "packetsObserved": 0,
+    "gateSmokeOnly": true
+  },
+  "reviews": {
+    "technical": "passed after endpoint, diagram, scope, link and separate tcpdump cleanup corrections",
+    "audience": "passed after corrections",
+    "tone": "passed after wording corrections"
+  },
+  "unverified": [
+    "SYN/ACK",
+    "kernel buffer sizes and syscalls",
+    "production",
+    "event loop experiment"
+  ]
+}
