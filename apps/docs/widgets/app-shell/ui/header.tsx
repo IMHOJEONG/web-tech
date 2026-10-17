@@ -6,20 +6,21 @@ import { Brand } from '~/shared/ui/brand'
 import MobileNavDrawer from './mobile-nav-drawer'
 import { Navigation } from './navigation'
 import { LocaleSwitcher } from './locale-switcher'
+import { HeaderFrame } from './header-frame'
 
 export default function Header() {
     return (
-        <header className="sticky top-0 z-50 h-16.25 shrink-0 w-full border-b border-header-border bg-background text-on-surface shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
+        <HeaderFrame>
             <Suspense fallback={<div aria-hidden="true" className="h-16" />}>
                 <HeaderContent />
             </Suspense>
-        </header>
+        </HeaderFrame>
     )
 }
 
 function HeaderContent() {
     return (
-        <div className="mx-auto flex h-16 w-full max-w-page items-center justify-between px-4 sm:grid sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-3 sm:px-6 md:gap-4 md:px-8">
+        <div className="mx-auto grid min-h-16 w-full max-w-page grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 px-[min(1rem,16px)] py-2 sm:px-6 md:gap-x-4 md:px-8">
             <MobileNavDrawer />
 
             <div className="hidden min-w-0 items-center justify-start sm:flex">
@@ -35,7 +36,7 @@ function HeaderContent() {
                 <Navigation />
             </div>
 
-            <div className="flex min-w-0 items-center justify-end">
+            <div className="col-start-3 flex min-w-0 items-center justify-end @max-[20rem]/shell:col-span-2 @max-[20rem]/shell:col-start-2 @max-[20rem]/shell:row-start-2">
                 <div className="flex shrink-0 items-center gap-1 lg:gap-2">
                     <Search />
                     <LocaleSwitcher />

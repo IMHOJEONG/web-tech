@@ -1,0 +1,78 @@
+{
+  "observedAt": "2026-10-14T04:56:44.610Z",
+  "scope": "Chromium mobile viewports; not physical phones",
+  "views": [
+    {
+      "width": 320,
+      "status": 200,
+      "top": {
+        "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+        "font": "38.4px",
+        "lineHeight": "44.16px",
+        "height": 132.46875,
+        "top": 85,
+        "bottom": 217.46875,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "codeLayout": {
+        "frameLeft": 28,
+        "frameRight": 292,
+        "frameWidth": 264,
+        "viewport": 320,
+        "overflow": 0,
+        "copyButtonVisible": true
+      },
+      "codeExpanded": true,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "status": 200,
+      "top": {
+        "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+        "font": "38.4px",
+        "lineHeight": "44.16px",
+        "height": 132.46875,
+        "top": 85,
+        "bottom": 217.46875,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "codeLayout": {
+        "frameLeft": 28,
+        "frameRight": 362,
+        "frameWidth": 334,
+        "viewport": 390,
+        "overflow": 0,
+        "copyButtonVisible": true
+      },
+      "codeExpanded": true,
+      "pageErrors": []
+    },
+    {
+      "width": 430,
+      "status": 200,
+      "top": {
+        "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+        "font": "38.4px",
+        "lineHeight": "44.16px",
+        "height": 132.46875,
+        "top": 85,
+        "bottom": 217.46875,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "codeLayout": {
+        "frameLeft": 28,
+        "frameRight": 402,
+        "frameWidth": 374,
+        "viewport": 430,
+        "overflow": 0,
+        "copyButtonVisible": true
+      },
+      "codeExpanded": true,
+      "pageErrors": []
+    }
+  ]
+}

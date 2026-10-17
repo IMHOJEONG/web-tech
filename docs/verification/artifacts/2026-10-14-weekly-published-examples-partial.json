@@ -1,0 +1,28 @@
+{
+  "observedAt": "2026-10-14T01:20:42.804Z",
+  "sourceSha256": "7b08d58cee37b3e085aad19478def8139da5db8cf4671350bb523fa625e62eb8",
+  "scope": "actual three TS blocks; conceptual TSX is not a standalone app",
+  "runs": [
+    {
+      "example": "helper",
+      "run": 1,
+      "typecheck": true,
+      "exit": 0,
+      "stdout": "PASS helper: body AB and completed"
+    },
+    {
+      "example": "helper",
+      "run": 2,
+      "typecheck": true,
+      "exit": 0,
+      "stdout": "PASS helper: body AB and completed"
+    },
+    {
+      "example": "helper",
+      "run": 3,
+      "typecheck": true,
+      "exit": 0,
+      "stdout": "PASS helper: body AB and completed"
+    }
+  ]
+}

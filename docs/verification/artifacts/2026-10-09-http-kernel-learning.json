@@ -1,0 +1,83 @@
+{
+  "observedAt": "2026-10-09T14:58:05.005Z",
+  "url": "http://127.0.0.1:3001/ko/preview/category/be/node-js/http-response-streaming-lab",
+  "scope": "existing development server; not production",
+  "results": [
+    {
+      "width": 1280,
+      "status": 200,
+      "kernelDisclosure": {
+        "initiallyClosed": true,
+        "opened": true,
+        "tableRows": 5,
+        "closed": true,
+        "limitsVisible": true
+      },
+      "diagramsLoaded": 4,
+      "cancelDisclosure": true,
+      "pageErrors": []
+    },
+    {
+      "width": 670,
+      "status": 200,
+      "kernelDisclosure": {
+        "initiallyClosed": true,
+        "opened": true,
+        "tableRows": 5,
+        "closed": true,
+        "limitsVisible": true
+      },
+      "diagramsLoaded": 4,
+      "cancelDisclosure": true,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "status": 200,
+      "kernelDisclosure": {
+        "initiallyClosed": true,
+        "opened": true,
+        "tableRows": 5,
+        "closed": true,
+        "limitsVisible": true
+      },
+      "diagramsLoaded": 4,
+      "cancelDisclosure": true,
+      "pageErrors": []
+    }
+  ],
+  "learningNote": "docs/knowledge/infra-tooling/node-http-kernel-path.md",
+  "roadmap": "docs/todo/todo.md",
+  "boundLabTests": {
+    "passed": 26,
+    "failed": 0,
+    "httpExecutions": 21,
+    "strictExampleVariants": 4,
+    "executedArticleSha256": "68e207f136387eb94bc01e4d51515aea5f1413afefcb6358c954baf5719864ac",
+    "finalArticleSha256": "c9e51e7d6db97936545c711a83a089a8fd7c2145c932eb76aafd15ce965408fd",
+    "note": "실행 후 설명문만 검토 수정했습니다. 실행 코드 12조각은 변경하지 않았습니다."
+  },
+  "applicationUnitTests": {
+    "passed": 4,
+    "failed": 0
+  },
+  "contentValidation": {
+    "files": 18,
+    "result": "passed"
+  },
+  "reviews": {
+    "technical": "passed after observation scope correction",
+    "audience": "reduced public explanation; future packet observation labeled",
+    "tone": "applied concise polite wording"
+  },
+  "limits": [
+    "커널 내부 계측·패킷 관측은 수행하지 않았습니다.",
+    "로드맵 3~9단계의 신규 실험은 수행하지 않았습니다.",
+    "개발 서버 검증이며 production·배포 검증은 아닙니다."
+  ],
+  "draftStatus": "draft",
+  "gitActions": "no staging, commit, push, or publication",
+  "screenshot": "2026-10-09-http-kernel-learning-desktop.jpg",
+  "documentationDeltaCheck": "passed; working tree checked without staging",
+  "formatCheck": "passed for new/updated scoped documentation; legacy TODO formatting preserved"
+}

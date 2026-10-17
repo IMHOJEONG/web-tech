@@ -1,0 +1,39 @@
+{
+  "reviewedAt": "2026-10-11T05:01:53.780002+00:00",
+  "scope": "first user-provided run; capture evidence incomplete",
+  "captureFileBytes": 152,
+  "captureSha256": "431046de2220a1c42ca0d1b98d23539b3058cdb37d9e25482df26a3f4bcfdace",
+  "captureText": "tcpdump: verbose output suppressed, use -v[v]... for full protocol decode\nlistening on lo0, link-type NULL (BSD loopback), snapshot length 524288 bytes\n",
+  "packetRows": 0,
+  "terminationSummaryPresent": false,
+  "socketResult": {
+    "listening": {
+      "address": "127.0.0.1",
+      "family": "IPv4",
+      "port": 59764
+    },
+    "client": {
+      "localAddress": "127.0.0.1",
+      "localPort": 59795,
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 59764
+    },
+    "accepted": {
+      "localAddress": "127.0.0.1",
+      "localPort": 59764,
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 59795
+    },
+    "connections": 1,
+    "statusCode": 200,
+    "received": "hello from TCP\n",
+    "complete": true,
+    "kernelSockets": [
+      "TCP 127.0.0.1:59764 (LISTEN)",
+      "TCP 127.0.0.1:59795->127.0.0.1:59764 (ESTABLISHED)",
+      "TCP 127.0.0.1:59764->127.0.0.1:59795 (ESTABLISHED)"
+    ]
+  },
+  "packetObservation": "not evidenced in provided file; not a claim that no packets occurred",
+  "sourceFileMtimeLocal": "2026-10-11 13:59:29 Asia/Seoul (capture); 13:59:36 (socket)"
+}

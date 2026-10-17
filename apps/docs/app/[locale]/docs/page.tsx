@@ -22,6 +22,8 @@ type Props = {
         q?: string | string[]
         section?: string | string[]
         sort?: string | string[]
+        tag?: string | string[]
+        collection?: string | string[]
     }>
 }
 
@@ -56,15 +58,21 @@ export default function Page(props: Props) {
 }
 
 async function DocsResults({ searchParams }: Props) {
-    const { page, q, section, sort } = await searchParams
+    const { page, q, section, sort, tag, collection } = await searchParams
     const keyword = normalizeSearchQuery(q)
     const currentPage = parsePageParam(firstSearchParam(page))
     const controls = resolveDocsIndexControls({
         section: firstSearchParam(section),
         sort: firstSearchParam(sort),
+        tag: firstSearchParam(tag),
+        collection: firstSearchParam(collection),
     })
-    const docs = keyword ? [] : await getSearchData()
-    const searchResults = keyword ? await getSearchData(keyword) : []
+    const docs = keyword
+        ? []
+        : await getSearchData(undefined, { observeRequest: true })
+    const searchResults = keyword
+        ? await getSearchData(keyword, { observeRequest: true })
+        : []
     const pageState = resolveDocsSearchPageState({
         query: keyword,
         docs,

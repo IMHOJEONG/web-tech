@@ -1,0 +1,121 @@
+{
+  "observedAt": "2026-10-09T09:10:11.016Z",
+  "scope": "isolated actual app MDX renderer and CSS; not Codex UI or a Next route",
+  "results": [
+    {
+      "viewportWidth": 1280,
+      "theme": "light",
+      "index": 0,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 820,
+      "passed": true
+    },
+    {
+      "viewportWidth": 1280,
+      "theme": "light",
+      "index": 1,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 820,
+      "passed": true
+    },
+    {
+      "viewportWidth": 1280,
+      "theme": "dark",
+      "index": 0,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 820,
+      "passed": true
+    },
+    {
+      "viewportWidth": 1280,
+      "theme": "dark",
+      "index": 1,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 820,
+      "passed": true
+    },
+    {
+      "viewportWidth": 390,
+      "theme": "light",
+      "index": 0,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 380,
+      "passed": true
+    },
+    {
+      "viewportWidth": 390,
+      "theme": "light",
+      "index": 1,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 380,
+      "passed": true
+    },
+    {
+      "viewportWidth": 390,
+      "theme": "dark",
+      "index": 0,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 380,
+      "passed": true
+    },
+    {
+      "viewportWidth": 390,
+      "theme": "dark",
+      "index": 1,
+      "loaded": true,
+      "naturalWidth": 720,
+      "width": 360,
+      "right": 380,
+      "passed": true
+    }
+  ],
+  "publicImagePaths": true,
+  "collapsedExamples": true,
+  "node": "v24.12.0",
+  "draftSha256": "0667eddb901344dfc57253d36558cf5b83acdd87f4a703f64684d6cec4fb03d2",
+  "proseCharacters": {
+    "before": 10566,
+    "after": 4893
+  },
+  "typeScriptCodeBlocks": {
+    "count": 2,
+    "unchanged": true
+  },
+  "tests": {
+    "httpTestsPassed": 25,
+    "httpExecutions": 21,
+    "publicImageTestsPassed": 3,
+    "nodeTestTypecheck": "passed",
+    "contentFilesValidated": 18,
+    "docsTypecheck": "passed",
+    "changedRendererLint": "passed",
+    "worktreeDocumentationDelta": "passed",
+    "httpTestSourceSha256": "d2da42b84d0a43a57c78348ad3ff681143ca2b496710c7b8298093788e99b591",
+    "httpTestSourceNote": "Subsequent changes only affected prose and image references; the two extracted TypeScript blocks remained byte-identical."
+  },
+  "limits": [
+    "Codex file preview UI not directly inspected: app computer-use access denied",
+    "Not a Next route or production deployment"
+  ],
+  "reviews": ["technical", "audience", "Korean honorific tone"],
+  "assets": {
+    "http-response-completion.png": "a93919e812bf6bd84dfdb9e53c250841e2ef5db689e4ad97f855aab7330d4dd3",
+    "http-response-stages.png": "6ffed66cef110fc6f8d872916dc28d957da76ccdb5d4ae2bb00f21fddb69a17a",
+    "http-response-stages.svg": "adb3c7db227f1a056b46994f325bfd13822f273dbff2ddcee016c85ab34bf030",
+    "http-response-completion.svg": "2f29a9e35de0d1a49f6c3da105da3cae9803676900d61702544063af0419bbb2"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "checkedAt": "2026-10-09T15:21:50.534Z",
+  "date": "2026-10-10",
+  "timezone": "Asia/Seoul",
+  "scope": "학습 문서와 학습 계획의 내용·구조 검사 및 최종 HTTP 초안 원문 코드 회귀 검사",
+  "head": "dc148894352702d069a273dff90f8062ce642d1b",
+  "documentation": {
+    "delta": "passed",
+    "roadmapAnchor": "passed",
+    "roadmapSectionFormat": "passed",
+    "legacyTodoFormatting": "preserved",
+    "localLinksChecked": 11
+  },
+  "reviews": {
+    "technical": "수정 후 통과",
+    "audience": "큰 결함 없음",
+    "politeKorean": "지적 문구 반영"
+  },
+  "examples": {
+    "passed": 26,
+    "failed": 0,
+    "httpExecutions": 21,
+    "strictVariants": 4,
+    "articleSha256": "c9e51e7d6db97936545c711a83a089a8fd7c2145c932eb76aafd15ce965408fd",
+    "executionSha256": "c9e51e7d6db97936545c711a83a089a8fd7c2145c932eb76aafd15ce965408fd",
+    "hashMatch": true,
+    "rawLog": "2026-10-10-http-article-source-recheck.txt"
+  },
+  "initialCheck": {
+    "result": "failed",
+    "reason": "생성 전 검증 JSON을 worklog가 참조하여 broken-link 발생",
+    "repair": "검증 artifact를 생성한 후 전체 문서 검사를 재실행"
+  },
+  "sources": [
+    "https://nodejs.org/download/release/v24.12.0/docs/api/http.html",
+    "https://nodejs.org/download/release/v24.12.0/docs/api/stream.html",
+    "https://docs.libuv.org/en/v1.x/design.html",
+    "https://www.rfc-editor.org/rfc/rfc9293.html",
+    "https://www.rfc-editor.org/rfc/rfc9112.html#section-6.3"
+  ],
+  "limits": [
+    "신규 학습 실험은 미실행이며 수치 조건은 제안입니다.",
+    "커널·TCP 패킷은 계측하지 않았습니다.",
+    "Mermaid 실제 렌더링과 새 브라우저 화면·production·배포는 검사하지 않았습니다."
+  ],
+  "gitActions": "스테이징·커밋·푸시·게시 없음"
+}

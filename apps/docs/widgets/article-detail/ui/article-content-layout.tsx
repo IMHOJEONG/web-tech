@@ -17,7 +17,7 @@ export async function ArticleContentLayout({
     return (
         <ArticleContentGrid>
             <aside className="hidden lg:block">
-                <div className="sticky top-[4.75rem] max-h-[calc(100vh-5.5rem)] overflow-y-auto rounded-xl border border-outline-variant/60 bg-background/98 px-5 py-4">
+                <div className="sticky top-[calc(var(--docs-header-height,4.0625rem)+0.6875rem)] max-h-[calc(100dvh-var(--docs-header-height,4.0625rem)-1.4375rem)] overflow-y-auto rounded-xl border border-outline-variant/60 bg-background/98 px-5 py-4">
                     <Toc toc={toc} title={t('sidebar.tocTitle')} />
                 </div>
             </aside>

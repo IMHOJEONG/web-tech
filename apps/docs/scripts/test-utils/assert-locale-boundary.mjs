@@ -24,7 +24,9 @@ export async function assertLocaleBoundary(request, app) {
         'Locale fixture must distinguish translations'
     )
     async function check(label, expected, headers = {}) {
-        const response = await request(`/${expected}/cache-locale-probe`, { headers })
+        const response = await request(`/${expected}/cache-locale-probe`, {
+            headers,
+        })
         assert.equal(response.status, 200, label)
         const html = await response.text()
         const copy = messages[expected]
