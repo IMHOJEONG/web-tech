@@ -6,6 +6,22 @@ import {
     stripHtmlToText,
 } from './remote-html-sanitizer.ts'
 
+test('sanitizeRemoteHtml discards mixed-case script tags with attributes and whitespace', () => {
+    for (const markup of [
+        '<script>alert(1)</script>',
+        '<SCRIPT>alert(1)</SCRIPT>',
+        '<ScRiPt data-test="case">alert(1)</sCrIpT>',
+        '<script\nsrc="/not-fetched.js"></script>',
+        '<script\ttype="text/javascript">alert(1)</script >',
+        '<script>alert(1)</script data-test="close">',
+    ]) {
+        assert.equal(
+            sanitizeRemoteHtml(`${markup}<p>Safe content</p>`),
+            '<p>Safe content</p>'
+        )
+    }
+})
+
 test('sanitizeRemoteHtml blocks executable markup hidden across comment boundaries', () => {
     const sanitized = sanitizeRemoteHtml(`
         <scr<!-- -->ipt>alert('comment-boundary')</script>

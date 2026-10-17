@@ -6,6 +6,23 @@ import {
     getCodeDisclosureSummary,
 } from './code-disclosure.ts'
 import { normalizeRemoteArticleHtml } from '../../../widgets/article-detail/model/normalize-remote-article-html.ts'
+import { stripHtmlToCodeText } from '../../../lib/remote-html-sanitizer.ts'
+
+const SCRIPT_TAG_TEST_PATTERN = /<\/?script\b/i
+
+test('script tag assertions reject mixed case, attributes and whitespace', () => {
+    for (const markup of [
+        '<script>',
+        '<SCRIPT>',
+        '<ScRiPt data-test="case">',
+        '<script\nsrc="/not-fetched.js">',
+        '<script\ttype="text/javascript">',
+        '</ScRiPt >',
+        '</script data-test="close">',
+    ]) {
+        assert.match(markup, SCRIPT_TAG_TEST_PATTERN)
+    }
+})
 
 test('only code beyond twenty lines collapses and the preview has ten lines', () => {
     const short = Array.from({ length: 20 }, (_, i) => `line ${i}`).join('\n')
@@ -44,12 +61,46 @@ test('remote long code uses native details with full code before a safe preview'
             result.content.indexOf('mdx-code-preview')
     )
     assert.doesNotMatch(result.content.split('mdx-code-preview')[1]!, /line22/)
-    assert.doesNotMatch(result.content, /<script>/)
+    assert.doesNotMatch(result.content, SCRIPT_TAG_TEST_PATTERN)
     assert.match(result.content, /mdx-code-token--keyword/)
     assert.match(
         result.content,
         /mdx-code-disclosure__language" aria-hidden="true">js/
     )
+})
+
+test('remote full code and preview escape script examples without losing code text', () => {
+    for (const markup of [
+        '<script>alert(1)</script>',
+        '<SCRIPT>alert(1)</SCRIPT>',
+        '<ScRiPt data-test="case">alert(1)</sCrIpT>',
+        '<script\nsrc="/not-fetched.js"></script>',
+        '<script\ttype="text/javascript">alert(1)</script >',
+        '<script>alert(1)</script data-test="close">',
+    ]) {
+        const code = [
+            `const example = ${JSON.stringify(markup)};`,
+            ...Array.from({ length: 22 }, (_, i) => `const line${i} = ${i};`),
+        ].join('\n')
+        const encoded = code
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+
+        for (const language of ['js', 'text']) {
+            const { content } = normalizeRemoteArticleHtml(
+                `<pre><code class="language-${language}">${encoded}</code></pre>`
+            )
+            assert.doesNotMatch(content, SCRIPT_TAG_TEST_PATTERN)
+            assert.match(content, /mdx-code-frame--collapsible/)
+            assert.match(content, /mdx-code-preview/)
+            const fullCode = content.match(
+                /<pre class="mdx-code-block"><code[^>]*>([\s\S]*?)<\/code><\/pre>/
+            )?.[1]
+            assert.notEqual(fullCode, undefined)
+            assert.equal(stripHtmlToCodeText(fullCode!), code)
+        }
+    }
 })
 
 test('shared copy labels cover every state in Korean and English', () => {
