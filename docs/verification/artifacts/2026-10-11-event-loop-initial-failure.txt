@@ -1,0 +1,6 @@
+Initial run before sampling-window fix: 2026-10-11
+AssertionError: Histogram captured the long pause
+1 functional test failed; startup timeout test passed.
+Body, timer and data callback assertions before the histogram assertion passed.
+The numeric histogram maximum was not captured in the output.
+The assertion was retained; reset immediately before CPU work was removed and pre/post sampling snapshots added. Cause attribution remains a hypothesis.

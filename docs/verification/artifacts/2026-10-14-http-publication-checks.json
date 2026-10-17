@@ -1,0 +1,16 @@
+{
+  "observedAt": "2026-10-14T03:45:44.881135+00:00",
+  "node": "v24.12.0",
+  "sourceSha256": "fd827b8add13507fe942b360188a4cbe31ec1d440b18974ce534f531fd8601ec",
+  "scope": "publication-only worktree; local production verification",
+  "passed": {
+    "sourceAndFixtureTests": 26,
+    "appUnitTests": 227,
+    "httpTypes": true,
+    "appTypes": true,
+    "appLint": true,
+    "productionBuild": true
+  },
+  "initialFailure": "UI dist missing before prebuild; rerun passed after dependency build",
+  "deployment": "not yet executed"
+}

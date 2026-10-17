@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="430" viewBox="0 0 960 430" role="img" aria-labelledby="title desc">
+<title id="title">CPU 작업과 콜백 실행: 2026-10-11 실제 첫 표본 비교</title>
+<desc id="desc">수신자 기준 시간축. CPU 없음 타이머 19.87ms, 첫 data 41.81ms. CPU 200ms 타이머 200.17ms, 첫 data 200.24ms.</desc>
+<rect width="960" height="430" rx="16" fill="#0f172a"/>
+<g font-family="sans-serif" fill="#e2e8f0"><text x="24" y="35" font-size="22">CPU 계산 중에는 같은 프로세스의 JS 콜백이 실행되지 않습니다</text><text x="24" y="62" font-size="15">2026-10-11 첫 표본 · 수신자 시작 이후 ms · 송신자 시각과 패킷 도착은 표시하지 않습니다</text>
+<text x="24" y="100" font-size="18">CPU 0ms 조건</text>
+<line x1="220.00" x2="220.00" y1="108" y2="215" stroke="#475569" stroke-dasharray="4 4"/><text x="220.00" y="237" text-anchor="middle" font-size="14">0ms</text>
+<line x1="267.50" x2="267.50" y1="108" y2="215" stroke="#475569" stroke-dasharray="4 4"/><text x="267.50" y="237" text-anchor="middle" font-size="14">20ms</text>
+<line x1="457.50" x2="457.50" y1="108" y2="215" stroke="#475569" stroke-dasharray="4 4"/><text x="457.50" y="237" text-anchor="middle" font-size="14">100ms</text>
+<line x1="695.00" x2="695.00" y1="108" y2="215" stroke="#475569" stroke-dasharray="4 4"/><text x="695.00" y="237" text-anchor="middle" font-size="14">200ms</text>
+<text x="35" y="133" font-size="16">CPU 구간 끝</text>
+<circle cx="220.12" cy="128" r="5" fill="#fb923c"/>
+<text x="232.12" y="133" font-size="16">0.05ms</text>
+<text x="35" y="167" font-size="16">타이머 실행</text>
+<circle cx="267.20" cy="162" r="5" fill="#facc15"/>
+<text x="279.20" y="167" font-size="16">19.87ms</text>
+<text x="35" y="201" font-size="16">첫 data 실행</text>
+<circle cx="319.30" cy="196" r="5" fill="#38bdf8"/>
+<text x="331.30" y="201" font-size="16">41.81ms</text>
+<text x="24" y="255" font-size="18">CPU 200ms 조건</text>
+<line x1="220.00" x2="220.00" y1="263" y2="370" stroke="#475569" stroke-dasharray="4 4"/><text x="220.00" y="392" text-anchor="middle" font-size="14">0ms</text>
+<line x1="267.50" x2="267.50" y1="263" y2="370" stroke="#475569" stroke-dasharray="4 4"/><text x="267.50" y="392" text-anchor="middle" font-size="14">20ms</text>
+<line x1="457.50" x2="457.50" y1="263" y2="370" stroke="#475569" stroke-dasharray="4 4"/><text x="457.50" y="392" text-anchor="middle" font-size="14">100ms</text>
+<line x1="695.00" x2="695.00" y1="263" y2="370" stroke="#475569" stroke-dasharray="4 4"/><text x="695.00" y="392" text-anchor="middle" font-size="14">200ms</text>
+<text x="35" y="288" font-size="16">CPU 구간 끝</text>
+<rect x="220.07" y="274" width="475.07" height="18" rx="4" fill="#fb923c"/>
+<text x="707.15" y="288" font-size="16">200.06ms</text>
+<text x="35" y="322" font-size="16">타이머 실행</text>
+<circle cx="695.41" cy="317" r="5" fill="#facc15"/>
+<text x="707.41" y="322" font-size="16">200.17ms</text>
+<text x="35" y="356" font-size="16">첫 data 실행</text>
+<circle cx="695.58" cy="351" r="5" fill="#38bdf8"/>
+<text x="707.58" y="356" font-size="16">200.24ms</text>
+</g></svg>

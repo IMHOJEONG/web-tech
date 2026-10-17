@@ -1,0 +1,258 @@
+{
+  "observedAt": "2026-10-11T11:31:24.565Z",
+  "node": "v24.12.0",
+  "config": {
+    "repetitions": 3,
+    "timerMs": 20,
+    "senderWriteAfterArmMs": [40, 80],
+    "bodyBytes": 16384
+  },
+  "runs": [
+    {
+      "cpuRequestedMs": 0,
+      "cpuStartMs": 0.119624999999985,
+      "cpuEndMs": 0.12045899999998255,
+      "timerRequestedMs": 20,
+      "timerFiredMs": 19.91220899999999,
+      "firstDataMs": 42.196417,
+      "endMs": 83.60599999999997,
+      "dataEvents": [
+        {
+          "atMs": 42.196417,
+          "bytes": 8192
+        },
+        {
+          "atMs": 83.38708399999999,
+          "bytes": 8192
+        }
+      ],
+      "senderEvents": [
+        {
+          "kind": "write",
+          "atSenderMs": 41.70691600000001,
+          "bytes": 8192
+        },
+        {
+          "kind": "end-write",
+          "atSenderMs": 83.101541,
+          "bytes": 8192
+        }
+      ],
+      "bodyBytes": 16384,
+      "bodySha256": "786a9f42b2dc7208710ecf3bf24194736ec7b57f97eb8c99231c9f50dafc54bd",
+      "eventLoop": {
+        "resolutionMs": 1,
+        "samples": 125,
+        "preBlock": {
+          "samples": 27,
+          "maxMs": 1.492991
+        },
+        "maxMs": 1.492991,
+        "meanMs": 1.12456704
+      }
+    },
+    {
+      "cpuRequestedMs": 200,
+      "cpuStartMs": 0.04512499999998454,
+      "cpuEndMs": 200.07987500000002,
+      "timerRequestedMs": 20,
+      "timerFiredMs": 200.21420799999999,
+      "firstDataMs": 200.29116599999998,
+      "endMs": 200.34799999999996,
+      "dataEvents": [
+        {
+          "atMs": 200.29116599999998,
+          "bytes": 16384
+        }
+      ],
+      "senderEvents": [
+        {
+          "kind": "write",
+          "atSenderMs": 41.582667,
+          "bytes": 8192
+        },
+        {
+          "kind": "end-write",
+          "atSenderMs": 82.04012499999999,
+          "bytes": 8192
+        }
+      ],
+      "bodyBytes": 16384,
+      "bodySha256": "786a9f42b2dc7208710ecf3bf24194736ec7b57f97eb8c99231c9f50dafc54bd",
+      "eventLoop": {
+        "resolutionMs": 1,
+        "samples": 48,
+        "preBlock": {
+          "samples": 25,
+          "maxMs": 1.926143
+        },
+        "maxMs": 200.802303,
+        "meanMs": 5.345450666666667
+      }
+    },
+    {
+      "cpuRequestedMs": 200,
+      "cpuStartMs": 0.031791999999995824,
+      "cpuEndMs": 200.07600000000002,
+      "timerRequestedMs": 20,
+      "timerFiredMs": 200.24804200000005,
+      "firstDataMs": 200.33733300000006,
+      "endMs": 200.4223750000001,
+      "dataEvents": [
+        {
+          "atMs": 200.33733300000006,
+          "bytes": 16384
+        }
+      ],
+      "senderEvents": [
+        {
+          "kind": "write",
+          "atSenderMs": 41.184917,
+          "bytes": 8192
+        },
+        {
+          "kind": "end-write",
+          "atSenderMs": 81.438375,
+          "bytes": 8192
+        }
+      ],
+      "bodyBytes": 16384,
+      "bodySha256": "786a9f42b2dc7208710ecf3bf24194736ec7b57f97eb8c99231c9f50dafc54bd",
+      "eventLoop": {
+        "resolutionMs": 1,
+        "samples": 45,
+        "preBlock": {
+          "samples": 28,
+          "maxMs": 1.250303
+        },
+        "maxMs": 200.802303,
+        "meanMs": 5.689776355555556
+      }
+    },
+    {
+      "cpuRequestedMs": 0,
+      "cpuStartMs": 0.5449169999999413,
+      "cpuEndMs": 0.5453329999998004,
+      "timerRequestedMs": 20,
+      "timerFiredMs": 21.306124999999838,
+      "firstDataMs": 47.7333329999999,
+      "endMs": 90.42058299999985,
+      "dataEvents": [
+        {
+          "atMs": 47.7333329999999,
+          "bytes": 8192
+        },
+        {
+          "atMs": 90.3444579999998,
+          "bytes": 8192
+        }
+      ],
+      "senderEvents": [
+        {
+          "kind": "write",
+          "atSenderMs": 46.82566700000001,
+          "bytes": 8192
+        },
+        {
+          "kind": "end-write",
+          "atSenderMs": 89.65545900000001,
+          "bytes": 8192
+        }
+      ],
+      "bodyBytes": 16384,
+      "bodySha256": "786a9f42b2dc7208710ecf3bf24194736ec7b57f97eb8c99231c9f50dafc54bd",
+      "eventLoop": {
+        "resolutionMs": 1,
+        "samples": 90,
+        "preBlock": {
+          "samples": 23,
+          "maxMs": 21.446655
+        },
+        "maxMs": 26.312703,
+        "meanMs": 2.262917688888889
+      }
+    },
+    {
+      "cpuRequestedMs": 0,
+      "cpuStartMs": 0.024458999999978914,
+      "cpuEndMs": 0.024666999999908512,
+      "timerRequestedMs": 20,
+      "timerFiredMs": 20.908709000000044,
+      "firstDataMs": 42.14595899999995,
+      "endMs": 81.10566700000004,
+      "dataEvents": [
+        {
+          "atMs": 42.14595899999995,
+          "bytes": 8192
+        },
+        {
+          "atMs": 81.018417,
+          "bytes": 8192
+        }
+      ],
+      "senderEvents": [
+        {
+          "kind": "write",
+          "atSenderMs": 42.017667,
+          "bytes": 8192
+        },
+        {
+          "kind": "end-write",
+          "atSenderMs": 80.90875,
+          "bytes": 8192
+        }
+      ],
+      "bodyBytes": 16384,
+      "bodySha256": "786a9f42b2dc7208710ecf3bf24194736ec7b57f97eb8c99231c9f50dafc54bd",
+      "eventLoop": {
+        "resolutionMs": 1,
+        "samples": 118,
+        "preBlock": {
+          "samples": 25,
+          "maxMs": 1.313791
+        },
+        "maxMs": 2.150399,
+        "meanMs": 1.1532149152542375
+      }
+    },
+    {
+      "cpuRequestedMs": 200,
+      "cpuStartMs": 0.019874999999956344,
+      "cpuEndMs": 200.50724999999989,
+      "timerRequestedMs": 20,
+      "timerFiredMs": 200.69212500000003,
+      "firstDataMs": 202.77270799999997,
+      "endMs": 204.86400000000003,
+      "dataEvents": [
+        {
+          "atMs": 202.77270799999997,
+          "bytes": 16384
+        }
+      ],
+      "senderEvents": [
+        {
+          "kind": "write",
+          "atSenderMs": 40.72808400000001,
+          "bytes": 8192
+        },
+        {
+          "kind": "end-write",
+          "atSenderMs": 81.11108400000002,
+          "bytes": 8192
+        }
+      ],
+      "bodyBytes": 16384,
+      "bodySha256": "786a9f42b2dc7208710ecf3bf24194736ec7b57f97eb8c99231c9f50dafc54bd",
+      "eventLoop": {
+        "resolutionMs": 1,
+        "samples": 53,
+        "preBlock": {
+          "samples": 25,
+          "maxMs": 1.224703
+        },
+        "maxMs": 201.195519,
+        "meanMs": 4.953310188679246
+      }
+    }
+  ]
+}

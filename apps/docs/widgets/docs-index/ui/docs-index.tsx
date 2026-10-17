@@ -23,6 +23,8 @@ import { DocsIndexPagination } from './docs-index-pagination'
 import { DocsIndexSections } from './docs-index-sections'
 import { DocsIndexStats } from './docs-index-stats'
 import { getMotionOrderStyle } from './docs-index-motion'
+import { ContentTagFilters } from './content-tag-filters'
+import { ContentCollectionNavigation } from './content-collection-navigation'
 
 type DocsIndexProps = {
     docs: SearchData[]
@@ -86,6 +88,16 @@ export async function DocsIndex({
                     />
 
                     <section className="space-y-4">
+                        <ContentTagFilters
+                            docs={docs}
+                            controls={searchControls}
+                            keyword={keyword}
+                        />
+                        <ContentCollectionNavigation
+                            docs={docs}
+                            controls={searchControls}
+                            keyword={keyword}
+                        />
                         <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <div className="min-w-0">
                                 <p className="text-xs font-semibold tracking-[0.2em] text-outline uppercase">
@@ -151,6 +163,12 @@ export async function DocsIndex({
                 />
 
                 <DocsIndexSections sectionSummary={sectionSummary} />
+
+                <ContentTagFilters docs={docs} controls={resolvedControls} />
+                <ContentCollectionNavigation
+                    docs={docs}
+                    controls={resolvedControls}
+                />
 
                 <section className="space-y-4">
                     <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">

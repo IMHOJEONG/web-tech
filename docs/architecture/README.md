@@ -20,9 +20,23 @@
 
 새 결정의 작성·대체 규칙은 [ADR 관리 규칙](../process/adr-management.md)을 참고합니다.
 
+- [ADR-0014: 로컬 문서의 기본 파일 탐색](adr-0014-local-content-file-discovery.md): 적용 중. docs 운영 glob 경로 제거·trace 검사, 개발 도구의 braces와 운영 배포는 별도.
+
+- [ADR-0013: 공용 UI 외부 설치 계약](adr-0013-shared-ui-external-package.md): 적용 중. React peer·CSS export·tarball 검증, registry 게시와 실제 외부 앱 이전 미실행.
+
+- [ADR-0012: 공개 글 기반 탐색 모음](adr-0012-content-discovery-collections.md): 적용 중. 태그 query·시리즈/학습 경로, 운영 배포 미검증.
+
+- [ADR-0011: 로컬 검색 인덱스 재사용](adr-0011-local-search-index-cache.md): 적용 중. 독립 태그·빌드 digest·웹훅 만료, 격리 production와 배포 반복 조회 검증. NAS 원문 V1/V2 게시 검증은 남아 있음.
+
+- [ADR-0010: 웹 푸시 초대 세션과 WAF 활성화 게이트](adr-0010-web-push-invitation-and-waf-gate.md): 적용 중. 코드 접근 제한 반영, Production WAF 게시·검증은 미완료.
+
+- [ADR-0009: 선택형 웹 푸시 실험](adr-0009-docs-web-push-experiment.md): 적용 중. 기본 비활성화 MVP, 실제 기기 수신·NAS 활성화는 미검증.
+
 - [ADR-0008: 요청별 증거로 스트림 종료 판정](adr-0008-request-lifecycle-observability.md): 제안. 2026-09-24 로컬 fixture 계측·테스트 추가, 운영 적용은 미구현.
 
 ## 설계·정책 목록
+
+- [서비스 복구와 배포 안전 정책](platform-recovery-policy.md): 제안. RTO/RPO와 백업·롤백·리허설 기준, 운영 적용 미검증.
 
 - [Docs 요청 생명주기 로그 정책](docs-request-lifecycle-logging-policy.md)
 
@@ -46,7 +60,7 @@
 - [Docs Content Cache Revalidation Policy](docs-content-cache-revalidation-policy.md)
 - [Docs Content Operating Model](docs-content-operating-model.md)
 - [Docs Content Rendering Strategy](docs-content-rendering-strategy.md)
-- [Docs Content Routing Policy](docs-content-routing-policy.md): 공개 URL과 카테고리 입력 allowlist, glob 실행 전 검증 경계.
+- [Docs Content Routing Policy](docs-content-routing-policy.md): 공개 URL과 카테고리 입력 allowlist, 기본 파일 탐색 전 검증 경계.
 - [Docs Design Token Usage Policy](docs-design-token-usage-policy.md)
 - [Docs Document UI Reuse Policy](docs-document-ui-reuse-policy.md)
 - [문서 화면의 정적 셸과 동적 영역 경계](docs-dynamic-content-boundaries.md)

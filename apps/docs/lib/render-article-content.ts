@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm'
 import remarkFlexibleToc, { type TocItem } from 'remark-flexible-toc'
 import { shikiRehypeOptions } from './shiki-options.js'
 import { rehypeArticleTitle } from './rehype-article-title.ts'
+import { rehypePublicImages } from './rehype-public-images.ts'
 import { normalizeRemoteArticleHtml } from '../widgets/article-detail/model/normalize-remote-article-html.ts'
 
 type Scope = {
@@ -47,8 +48,12 @@ function createMdxEvaluateOptions({
         mdxOptions: {
             remarkPlugins: [remarkGfm, remarkFlexibleToc],
             rehypePlugins: codeHighlight
-                ? [rehypeArticleTitle, [rehypeShiki, shikiRehypeOptions]]
-                : [rehypeArticleTitle],
+                ? [
+                      rehypeArticleTitle,
+                      rehypePublicImages,
+                      [rehypeShiki, shikiRehypeOptions],
+                  ]
+                : [rehypeArticleTitle, rehypePublicImages],
         },
         parseFrontmatter: true,
         scope: {

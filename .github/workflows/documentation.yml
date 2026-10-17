@@ -27,11 +27,12 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Test repository validators
         run: pnpm test:repo
-      - name: Check changed documentation
+      - name: Check changed formatting and documentation
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: |
           if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
             BASE_SHA=$(git hash-object -t tree /dev/null)
           fi
+          pnpm format:changed:check --base "$BASE_SHA"
           pnpm validate:docs --base "$BASE_SHA"

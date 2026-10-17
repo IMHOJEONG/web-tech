@@ -1,0 +1,37 @@
+{
+  "reviewedAt": "2026-10-11T05:05:06.312427+00:00",
+  "scope": "second user-provided run; still header only at read time",
+  "captureText": "tcpdump: verbose output suppressed, use -v[v]... for full protocol decode\nlistening on lo0, link-type NULL (BSD loopback), snapshot length 524288 bytes\n",
+  "captureSha256": "431046de2220a1c42ca0d1b98d23539b3058cdb37d9e25482df26a3f4bcfdace",
+  "packetRows": 0,
+  "terminationSummaryPresent": false,
+  "socketResult": {
+    "listening": {
+      "address": "127.0.0.1",
+      "family": "IPv4",
+      "port": 59896
+    },
+    "client": {
+      "localAddress": "127.0.0.1",
+      "localPort": 59897,
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 59896
+    },
+    "accepted": {
+      "localAddress": "127.0.0.1",
+      "localPort": 59896,
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 59897
+    },
+    "connections": 1,
+    "statusCode": 200,
+    "received": "hello from TCP\n",
+    "complete": true,
+    "kernelSockets": [
+      "TCP 127.0.0.1:59896 (LISTEN)",
+      "TCP 127.0.0.1:59897->127.0.0.1:59896 (ESTABLISHED)",
+      "TCP 127.0.0.1:59896->127.0.0.1:59897 (ESTABLISHED)"
+    ]
+  },
+  "observation": "No TCP packet evidence in saved text. Capture command actually executed in terminal B is not yet known."
+}

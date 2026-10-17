@@ -27,13 +27,18 @@ function normalizeThumbnail(thumbnail?: string | null) {
 export function parseLocalDocument(
     filePath: string,
     relativeFileName: string,
-    raw: string
+    raw: string,
+    options: { previewDraft?: boolean } = {}
 ): Metadata | null {
     const vfile = new VFile({ path: filePath, value: raw })
     vfileMatter(vfile, { strip: true })
     const frontmatter = normalizeLocalDocFrontmatter(vfile.data.matter || {})
     assertValidLocalDocFrontmatter(filePath, frontmatter)
-    if (!isPublicDocStatus(frontmatter.status)) return null
+    const previewDraft =
+        options.previewDraft === true &&
+        process.env.NODE_ENV === 'development' &&
+        frontmatter.status === 'draft'
+    if (!isPublicDocStatus(frontmatter.status) && !previewDraft) return null
 
     const fileName = normalizeDocPath(relativeFileName)
     const fallbackSlug = fileName.split('/').filter(Boolean).pop() ?? ''

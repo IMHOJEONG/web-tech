@@ -1,0 +1,30 @@
+{
+  "observedAt": "2026-10-07T16:31:53.322Z",
+  "nodeVersion": "v24.12.0",
+  "example": "http-response-streaming-lab.mdx first ts fence extracted to /private/tmp/http-response-streaming.mts",
+  "command": "node /private/tmp/http-response-streaming.mts",
+  "exitCode": 0,
+  "stdout": [
+    "22ms server write first: true",
+    "23ms client status: 200",
+    "24ms client data: \"first\\n\"",
+    "323ms server end second",
+    "325ms server finish",
+    "325ms server close writableFinished=true",
+    "326ms client data: \"second\\n\"",
+    "326ms client end"
+  ],
+  "checks": {
+    "statusAndCombinedBody": "passed",
+    "strictTypecheck": "passed",
+    "draftMdxRender": "passed",
+    "contentFrontmatterAndStyle": "passed (18 files)",
+    "publishedArticleHttp": 200,
+    "publishedArticleStartEndMarkers": "passed inside article, scripts excluded",
+    "sitemapHttp": 200,
+    "publishedCanonicalInSitemap": "passed",
+    "publishedBrowserVisual": "not checked",
+    "vercelProduction": "not checked"
+  },
+  "limits": "One loopback HTTP/1.1 run. Timing and data-event chunk boundaries are not guaranteed. No browser, TLS, HTTP/2 or deployment proxy test."
+}

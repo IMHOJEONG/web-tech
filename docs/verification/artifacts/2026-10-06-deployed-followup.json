@@ -1,0 +1,230 @@
+{
+  "checkedAt": "2026-10-06T13:45:32.754Z",
+  "results": [
+    {
+      "path": "/ko/category",
+      "width": 1280,
+      "result": "pass",
+      "status": 200,
+      "heading": "주제별로 문서를 찾아보세요.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "path": "/ko/category/fe",
+      "width": 1280,
+      "result": "pass",
+      "status": 200,
+      "heading": "세부 기술 주제를 골라보세요.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "path": "/ko/category/fe/react",
+      "width": 1280,
+      "result": "pass",
+      "status": 200,
+      "heading": "관련 문서를 한곳에서 살펴보세요.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "path": "/ko/category/be/node-js",
+      "width": 1280,
+      "result": "pass",
+      "status": 200,
+      "heading": "관련 문서를 한곳에서 살펴보세요.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "path": "/en/category",
+      "width": 1280,
+      "result": "pass",
+      "status": 200,
+      "heading": "Find documents by topic.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "path": "/en/category/fe",
+      "width": 1280,
+      "result": "pass",
+      "status": 200,
+      "heading": "Choose a technical topic.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "path": "/en/category/fe/react",
+      "width": 1280,
+      "result": "pass",
+      "status": 200,
+      "heading": "Explore related documents in one place.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "path": "/en/category/be/node-js",
+      "width": 1280,
+      "result": "pass",
+      "status": 200,
+      "heading": "Explore related documents in one place.",
+      "dimensions": {
+        "viewport": 1280,
+        "scrollWidth": 1280
+      }
+    },
+    {
+      "type": "pageerrors",
+      "width": 1280,
+      "errors": []
+    },
+    {
+      "path": "/ko/category",
+      "width": 390,
+      "result": "pass",
+      "status": 200,
+      "heading": "주제별로 문서를 찾아보세요.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "path": "/ko/category/fe",
+      "width": 390,
+      "result": "pass",
+      "status": 200,
+      "heading": "세부 기술 주제를 골라보세요.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "path": "/ko/category/fe/react",
+      "width": 390,
+      "result": "pass",
+      "status": 200,
+      "heading": "관련 문서를 한곳에서 살펴보세요.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "path": "/ko/category/be/node-js",
+      "width": 390,
+      "result": "pass",
+      "status": 200,
+      "heading": "관련 문서를 한곳에서 살펴보세요.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "path": "/en/category",
+      "width": 390,
+      "result": "pass",
+      "status": 200,
+      "heading": "Find documents by topic.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "path": "/en/category/fe",
+      "width": 390,
+      "result": "pass",
+      "status": 200,
+      "heading": "Choose a technical topic.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "path": "/en/category/fe/react",
+      "width": 390,
+      "result": "pass",
+      "status": 200,
+      "heading": "Explore related documents in one place.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "path": "/en/category/be/node-js",
+      "width": 390,
+      "result": "pass",
+      "status": 200,
+      "heading": "Explore related documents in one place.",
+      "dimensions": {
+        "viewport": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "type": "pageerrors",
+      "width": 390,
+      "errors": []
+    },
+    {
+      "type": "remote-headings",
+      "path": "/ko/docs/web/browser",
+      "h1": ["Browser 동작 원리", "Update!"]
+    },
+    {
+      "type": "og",
+      "query": "title=HEAP-FORGE&topic=WEB",
+      "status": 200,
+      "headers": {
+        "cache-control": "public, max-age=14400",
+        "content-type": "image/png",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-cache-status": "MISS",
+        "age": "0",
+        "x-vercel-cache": "MISS"
+      },
+      "png": true,
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "type": "og",
+      "query": "title=HEAP-FORGE&topic=WEB&v=ttl-check-20261006",
+      "status": 200,
+      "headers": {
+        "cache-control": "public, max-age=14400",
+        "content-type": "image/png",
+        "x-content-type-options": "nosniff",
+        "server": "cloudflare",
+        "cf-cache-status": "MISS",
+        "age": "0",
+        "x-vercel-cache": "MISS"
+      },
+      "png": true,
+      "width": 1200,
+      "height": 630
+    }
+  ]
+}

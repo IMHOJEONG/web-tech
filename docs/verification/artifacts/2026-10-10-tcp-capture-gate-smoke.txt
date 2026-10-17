@@ -1,0 +1,31 @@
+Server is listening; client connection has not started.
+In another terminal run:
+sudo /usr/sbin/tcpdump -i lo0 -nn -S -tttt 'tcp and host 127.0.0.1 and port 56221'
+{
+  "listening": {
+    "address": "127.0.0.1",
+    "family": "IPv4",
+    "port": 56221
+  },
+  "client": {
+    "localAddress": "127.0.0.1",
+    "localPort": 56222,
+    "remoteAddress": "127.0.0.1",
+    "remotePort": 56221
+  },
+  "accepted": {
+    "localAddress": "127.0.0.1",
+    "localPort": 56221,
+    "remoteAddress": "127.0.0.1",
+    "remotePort": 56222
+  },
+  "connections": 1,
+  "statusCode": 200,
+  "received": "hello from TCP\n",
+  "complete": true,
+  "kernelSockets": [
+    "TCP 127.0.0.1:56221 (LISTEN)",
+    "TCP 127.0.0.1:56222->127.0.0.1:56221 (ESTABLISHED)",
+    "TCP 127.0.0.1:56221->127.0.0.1:56222 (ESTABLISHED)"
+  ]
+}
