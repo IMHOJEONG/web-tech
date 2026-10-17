@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-10-14",
+  "timezone": "Asia/Seoul",
+  "origin": "https://heap-forge.app",
+  "deploymentId": null,
+  "deploymentCommit": null,
+  "codeReferenceCommit": "d8c09527f8cb9195aa16258fee9b2bec916ee818",
+  "codeReferenceIncludesUncommittedChanges": true,
+  "phase": "before-implementation",
+  "source": "selected observations from the preceding public Playwright UI audit",
+  "sourceArtifactLastWrittenAt": "2026-10-14T05:37:48.661Z",
+  "conditions": {
+    "engine": "Chromium",
+    "colorScheme": "light",
+    "reducedMotion": "reduce",
+    "sampleCountPerCondition": 1,
+    "coordinateUnit": "CSS pixels from document top"
+  },
+  "measurements": [
+    {
+      "path": "/ko/docs",
+      "viewport": { "width": 1280, "height": 900 },
+      "httpStatus": 200,
+      "pageErrorCount": 0,
+      "pageScrollWidth": 1280,
+      "pageScrollHeight": 2831,
+      "firstCardTop": 1223,
+      "firstCardHeight": 160,
+      "firstTitleTop": 1268,
+      "firstTitleWidth": 1060,
+      "documentCount": 13,
+      "visibleDocumentCount": 8
+    },
+    {
+      "path": "/ko/docs",
+      "viewport": { "width": 390, "height": 844 },
+      "httpStatus": 200,
+      "pageErrorCount": 0,
+      "pageScrollWidth": 390,
+      "pageScrollHeight": 5378,
+      "firstCardTop": 2685,
+      "firstCardHeight": 282,
+      "firstTitleTop": 2730,
+      "firstTitleWidth": 276,
+      "documentCount": 13,
+      "visibleDocumentCount": 8,
+      "leadingSections": [
+        { "name": "search-panel", "top": 105, "height": 420 },
+        { "name": "stats", "top": 553, "height": 286 },
+        { "name": "section-sort-controls", "top": 867, "height": 306 },
+        { "name": "section-overview", "top": 1201, "height": 746 },
+        { "name": "collections", "top": 2283, "height": 218 }
+      ]
+    },
+    {
+      "path": "/ko/docs?q=stream",
+      "viewport": { "width": 1280, "height": 900 },
+      "httpStatus": 200,
+      "pageErrorCount": 0,
+      "pageScrollWidth": 1280,
+      "pageScrollHeight": 1417,
+      "firstCardTop": 691,
+      "firstCardHeight": 184,
+      "firstTitleTop": 736,
+      "firstTitleWidth": 1060,
+      "resultCount": 3
+    },
+    {
+      "path": "/ko/docs?q=stream",
+      "viewport": { "width": 390, "height": 844 },
+      "httpStatus": 200,
+      "pageErrorCount": 0,
+      "pageScrollWidth": 390,
+      "pageScrollHeight": 2369,
+      "firstCardTop": 1261,
+      "firstCardHeight": 282,
+      "firstTitleTop": 1306,
+      "firstTitleWidth": 276,
+      "resultCount": 3,
+      "leadingSections": [
+        { "name": "search-panel", "top": 105, "height": 426 },
+        { "name": "section-controls", "top": 559, "height": 250 }
+      ]
+    }
+  ],
+  "limitations": [
+    "No production deployment SHA mapping was verified.",
+    "No user behavior, conversion or abandonment rate was measured.",
+    "No implementation or post-change verification has been performed.",
+    "Desktop and mobile are viewport emulations, not physical device tests."
+  ]
+}

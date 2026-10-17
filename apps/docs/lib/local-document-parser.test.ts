@@ -62,6 +62,32 @@ test('uses the default image and excludes draft and archived documents', () => {
     assert.equal(parse('status: published\n')?.title, 'Shared parser')
 })
 
+test('explicit preview admits drafts only in development and never archived content', () => {
+    const original = process.env.NODE_ENV
+    try {
+        for (const environment of ['production', 'test', 'development']) {
+            Reflect.set(process.env, 'NODE_ENV', environment)
+            const preview = (status: string) =>
+                parseLocalDocument(
+                    '/content/test.md',
+                    'data/web/test',
+                    `${header}status: ${status}\n---\nBody`,
+                    { previewDraft: true }
+                )
+            assert.equal(
+                preview('draft')?.status ?? null,
+                environment === 'development' ? 'draft' : null
+            )
+            assert.equal(preview('archived'), null)
+            assert.equal(parse('status: draft\n'), null)
+        }
+    } finally {
+        if (original === undefined)
+            Reflect.deleteProperty(process.env, 'NODE_ENV')
+        else Reflect.set(process.env, 'NODE_ENV', original)
+    }
+})
+
 test('rejects invalid published frontmatter instead of silently accepting it', () => {
     assert.throws(
         () =>

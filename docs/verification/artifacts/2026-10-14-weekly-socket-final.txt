@@ -1,0 +1,28 @@
+$ node --test scripts/socket-article-source.test.mts
+▶ macOS fixture and actual MDX: strict types, endpoint pairing, kernel state, full response
+  ✔ fixture strict type check (719.734083ms)
+  ✔ fixture connection 1 (144.018416ms)
+  ℹ {"kind":"fixture","run":1,"listening":{"address":"127.0.0.1","family":"IPv4","port":54194},"client":{"localAddress":"127.0.0.1","localPort":54195,"remoteAddress":"127.0.0.1","remotePort":54194},"accepted":{"localAddress":"127.0.0.1","localPort":54194,"remoteAddress":"127.0.0.1","remotePort":54195},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:54194 (LISTEN)","TCP 127.0.0.1:54195->127.0.0.1:54194 (ESTABLISHED)","TCP 127.0.0.1:54194->127.0.0.1:54195 (ESTABLISHED)"]}
+  ✔ fixture connection 2 (128.902833ms)
+  ℹ {"kind":"fixture","run":2,"listening":{"address":"127.0.0.1","family":"IPv4","port":54196},"client":{"localAddress":"127.0.0.1","localPort":54197,"remoteAddress":"127.0.0.1","remotePort":54196},"accepted":{"localAddress":"127.0.0.1","localPort":54196,"remoteAddress":"127.0.0.1","remotePort":54197},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:54196 (LISTEN)","TCP 127.0.0.1:54197->127.0.0.1:54196 (ESTABLISHED)","TCP 127.0.0.1:54196->127.0.0.1:54197 (ESTABLISHED)"]}
+  ✔ fixture connection 3 (128.255875ms)
+  ℹ {"kind":"fixture","run":3,"listening":{"address":"127.0.0.1","family":"IPv4","port":54198},"client":{"localAddress":"127.0.0.1","localPort":54199,"remoteAddress":"127.0.0.1","remotePort":54198},"accepted":{"localAddress":"127.0.0.1","localPort":54198,"remoteAddress":"127.0.0.1","remotePort":54199},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:54198 (LISTEN)","TCP 127.0.0.1:54199->127.0.0.1:54198 (ESTABLISHED)","TCP 127.0.0.1:54198->127.0.0.1:54199 (ESTABLISHED)"]}
+  ✔ actual-mdx strict type check (523.21575ms)
+  ✔ actual-mdx connection 1 (150.563791ms)
+  ℹ {"kind":"actual-mdx","run":1,"listening":{"address":"127.0.0.1","family":"IPv4","port":54200},"client":{"localAddress":"127.0.0.1","localPort":54201,"remoteAddress":"127.0.0.1","remotePort":54200},"accepted":{"localAddress":"127.0.0.1","localPort":54200,"remoteAddress":"127.0.0.1","remotePort":54201},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:54200 (LISTEN)","TCP 127.0.0.1:54201->127.0.0.1:54200 (ESTABLISHED)","TCP 127.0.0.1:54200->127.0.0.1:54201 (ESTABLISHED)"]}
+  ✔ actual-mdx connection 2 (145.918167ms)
+  ℹ {"kind":"actual-mdx","run":2,"listening":{"address":"127.0.0.1","family":"IPv4","port":54202},"client":{"localAddress":"127.0.0.1","localPort":54203,"remoteAddress":"127.0.0.1","remotePort":54202},"accepted":{"localAddress":"127.0.0.1","localPort":54202,"remoteAddress":"127.0.0.1","remotePort":54203},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:54202 (LISTEN)","TCP 127.0.0.1:54203->127.0.0.1:54202 (ESTABLISHED)","TCP 127.0.0.1:54202->127.0.0.1:54203 (ESTABLISHED)"]}
+  ✔ actual-mdx connection 3 (130.588083ms)
+  ℹ {"kind":"actual-mdx","run":3,"listening":{"address":"127.0.0.1","family":"IPv4","port":54204},"client":{"localAddress":"127.0.0.1","localPort":54205,"remoteAddress":"127.0.0.1","remotePort":54204},"accepted":{"localAddress":"127.0.0.1","localPort":54204,"remoteAddress":"127.0.0.1","remotePort":54205},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:54204 (LISTEN)","TCP 127.0.0.1:54205->127.0.0.1:54204 (ESTABLISHED)","TCP 127.0.0.1:54204->127.0.0.1:54205 (ESTABLISHED)"]}
+✔ macOS fixture and actual MDX: strict types, endpoint pairing, kernel state, full response (2077.4905ms)
+ℹ {"observedAt":"2026-10-14T01:55:19.594Z","node":"v24.12.0","sourceSha256":"2b7aebacabf042e0dd01309bcf4c97541a76c511fbdd3360554f191ab0c95fff"}
+✔ wrong endpoint, missing kernel state and incomplete body fail verification (1.43575ms)
+✔ missing or reordered MDX parts fail source binding (0.298708ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2213.351917

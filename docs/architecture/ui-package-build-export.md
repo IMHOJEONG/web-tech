@@ -1,5 +1,7 @@
 # UI Package Build Export Strategy
 
+2026-10-04 최신 외부 소비 계약은 [ADR-0013](adr-0013-shared-ui-external-package.md)을 따른다. React peer·CSS export·tarball 설치 검증을 추가했다. 아래는 초기 build export 전환 기록이며 당시 Next 빌드 미완료는 [최신 검증](../verification/content/2026-10-04-shared-ui-package.md)과 구분한다.
+
 ## Context
 
 `packages/ui`는 원래 `.ts` / `.tsx` 소스를 그대로 export하고, 소비 앱이 직접 이를 해석하는 방식이었다.

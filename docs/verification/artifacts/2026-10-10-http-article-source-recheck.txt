@@ -1,0 +1,60 @@
+▶ bound MDX source: extraction, hidden local tooling, strict types and execution
+  ✔ exact draft code: normal, run 1 (385.453167ms)
+  ✔ exact draft code: normal, run 2 (384.334875ms)
+  ✔ exact draft code: normal, run 3 (385.670417ms)
+  ✔ exact draft code: cancel, run 1 (83.054167ms)
+  ✔ exact draft code: cancel, run 2 (82.638375ms)
+  ✔ exact draft code: cancel, run 3 (82.3015ms)
+  ✔ exact draft code: comparison-streaming, run 1 (389.758584ms)
+  ✔ exact draft code: comparison-streaming, run 2 (393.274041ms)
+  ✔ exact draft code: comparison-streaming, run 3 (386.127042ms)
+  ✔ exact draft code: comparison-buffered, run 1 (588.795417ms)
+  ✔ exact draft code: comparison-buffered, run 2 (458.326625ms)
+  ✔ exact draft code: comparison-buffered, run 3 (393.880209ms)
+✔ bound MDX source: extraction, hidden local tooling, strict types and execution (7645.620458ms)
+ℹ sourceSha256=c9e51e7d6db97936545c711a83a089a8fd7c2145c932eb76aafd15ce965408fd
+ℹ {"mode":"normal","run":1,"events":["server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"normal","run":2,"events":["server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"normal","run":3,"events":["server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"cancel","run":1,"events":["server write first","client status: 200","client data: \"first\\n\"","client deliberate cancel","client close complete=false","server close writableFinished=false","server pending timer cleared","PASS deliberate cancel: partial body, no client end, no server finish, timer cleared"]}
+ℹ {"mode":"cancel","run":2,"events":["server write first","client status: 200","client data: \"first\\n\"","client deliberate cancel","client close complete=false","server close writableFinished=false","server pending timer cleared","PASS deliberate cancel: partial body, no client end, no server finish, timer cleared"]}
+ℹ {"mode":"cancel","run":3,"events":["server write first","client status: 200","client data: \"first\\n\"","client deliberate cancel","client close complete=false","server close writableFinished=false","server pending timer cleared","PASS deliberate cancel: partial body, no client end, no server finish, timer cleared"]}
+ℹ {"mode":"comparison-streaming","run":1,"events":["server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"comparison-streaming","run":2,"events":["server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"comparison-streaming","run":3,"events":["server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"comparison-buffered","run":1,"events":["client status: 200","server end second","server finish","server close writableFinished=true","client data: \"first\\nsecond\\n\"","client end"]}
+ℹ {"mode":"comparison-buffered","run":2,"events":["client status: 200","server end second","server finish","server close writableFinished=true","client data: \"first\\nsecond\\n\"","client end"]}
+ℹ {"mode":"comparison-buffered","run":3,"events":["client status: 200","server end second","server finish","server close writableFinished=true","client data: \"first\\nsecond\\n\"","client end"]}
+✔ split article binding rejects missing, duplicated, reordered and unknown parts (2.176833ms)
+▶ streaming: status, full body, first read and normal completion
+  ✔ run 1 (501.475541ms)
+  ✔ run 2 (393.952333ms)
+  ✔ run 3 (445.378333ms)
+✔ streaming: status, full body, first read and normal completion (1341.615458ms)
+ℹ {"mode":"streaming","run":1,"events":["server headersSent=true","server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"streaming","run":2,"events":["server headersSent=true","server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"streaming","run":3,"events":["server headersSent=true","server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+▶ buffered: status, full body, first read and normal completion
+  ✔ run 1 (391.05925ms)
+  ✔ run 2 (402.34ms)
+  ✔ run 3 (388.058375ms)
+✔ buffered: status, full body, first read and normal completion (1182.066416ms)
+ℹ {"mode":"buffered","run":1,"events":["server headersSent=true","client status: 200","server end second","server finish","server close writableFinished=true","client data: \"first\\nsecond\\n\"","client end"]}
+ℹ {"mode":"buffered","run":2,"events":["server headersSent=true","client status: 200","server end second","server finish","server close writableFinished=true","client data: \"first\\nsecond\\n\"","client end"]}
+ℹ {"mode":"buffered","run":3,"events":["server headersSent=true","client status: 200","server end second","server finish","server close writableFinished=true","client data: \"first\\nsecond\\n\"","client end"]}
+▶ deliberate cancel: partial body, incomplete close, no completion events
+  ✔ run 1 (84.682083ms)
+  ✔ run 2 (91.418625ms)
+  ✔ run 3 (108.112209ms)
+✔ deliberate cancel: partial body, incomplete close, no completion events (284.670625ms)
+ℹ {"mode":"cancel","run":1,"events":["server write first","client status: 200","client data: \"first\\n\"","client deliberate cancel","client close complete=false","server close writableFinished=false","server pending timer cleared","PASS deliberate cancel: partial body, no client end, no server finish, timer cleared"]}
+ℹ {"mode":"cancel","run":2,"events":["server write first","client status: 200","client data: \"first\\n\"","client deliberate cancel","client close complete=false","server close writableFinished=false","server pending timer cleared","PASS deliberate cancel: partial body, no client end, no server finish, timer cleared"]}
+ℹ {"mode":"cancel","run":3,"events":["server write first","client status: 200","client data: \"first\\n\"","client deliberate cancel","client close complete=false","server close writableFinished=false","server pending timer cleared","PASS deliberate cancel: partial body, no client end, no server finish, timer cleared"]}
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7765.900875

@@ -262,7 +262,8 @@
     #fcfcfc 48%,
     #f5f5f5 100%
   );
-  --shadow-glow-primary: 0 0 0 1px rgb(249 115 22 / 0.16), 0 0 24px rgb(249 115 22 / 0.12);
+  --shadow-glow-primary:
+    0 0 0 1px rgb(249 115 22 / 0.16), 0 0 24px rgb(249 115 22 / 0.12);
 }
 
 .dark {
@@ -352,7 +353,8 @@
     #111111 45%,
     #0a0a0a 100%
   );
-  --shadow-glow-primary: 0 0 0 1px rgb(249 115 22 / 0.18), 0 0 30px rgb(249 115 22 / 0.16);
+  --shadow-glow-primary:
+    0 0 0 1px rgb(249 115 22 / 0.18), 0 0 30px rgb(249 115 22 / 0.16);
 }
 
 @layer base {
@@ -445,7 +447,10 @@
     border-radius: var(--radius-lg);
     background: var(--card);
     color: var(--card-foreground);
-    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
   }
 
   .ds-card:hover,
@@ -456,7 +461,8 @@
   }
 
   .ds-panel {
-    border: 1px solid color-mix(in srgb, var(--outline-variant) 58%, transparent);
+    border: 1px solid
+      color-mix(in srgb, var(--outline-variant) 58%, transparent);
     border-radius: calc(var(--radius-xl) + 0.25rem);
     background:
       radial-gradient(
@@ -469,13 +475,19 @@
         color-mix(in srgb, var(--surface) 96%, white 4%),
         color-mix(in srgb, var(--surface-container-low) 94%, transparent)
       );
-    box-shadow: 0 20px 60px color-mix(in srgb, var(--foreground) 8%, transparent);
+    box-shadow: 0 20px 60px
+      color-mix(in srgb, var(--foreground) 8%, transparent);
   }
 
   .ds-panel-muted {
-    border: 1px solid color-mix(in srgb, var(--outline-variant) 52%, transparent);
+    border: 1px solid
+      color-mix(in srgb, var(--outline-variant) 52%, transparent);
     border-radius: var(--radius-xl);
-    background: color-mix(in srgb, var(--surface-container-low) 94%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--surface-container-low) 94%,
+      transparent
+    );
     color: var(--foreground);
   }
 
@@ -499,7 +511,10 @@
     font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 0.01em;
-    transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      opacity 180ms ease;
   }
 
   .ds-button-primary:hover,
@@ -516,13 +531,20 @@
     gap: 0.5rem;
     border: 1px solid color-mix(in srgb, var(--primary) 48%, var(--border));
     border-radius: var(--radius-md);
-    background: color-mix(in srgb, var(--surface-container-low) 92%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--surface-container-low) 92%,
+      transparent
+    );
     color: var(--primary);
     padding: 0.75rem 1rem;
     font-family: var(--font-display);
     font-size: 0.875rem;
     font-weight: 500;
-    transition: box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+    transition:
+      box-shadow 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease;
   }
 
   .ds-button-secondary:hover,
@@ -538,9 +560,14 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border: 1px solid color-mix(in srgb, var(--outline-variant) 64%, transparent);
+    border: 1px solid
+      color-mix(in srgb, var(--outline-variant) 64%, transparent);
     border-radius: var(--radius-md);
-    background: color-mix(in srgb, var(--surface-container-low) 92%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--surface-container-low) 92%,
+      transparent
+    );
     color: var(--foreground);
     padding: 0.75rem 1rem;
     font-family: var(--font-display);
@@ -580,9 +607,14 @@
   .ds-chip-muted {
     display: inline-flex;
     align-items: center;
-    border: 1px solid color-mix(in srgb, var(--outline-variant) 52%, transparent);
+    border: 1px solid
+      color-mix(in srgb, var(--outline-variant) 52%, transparent);
     border-radius: 9999px;
-    background: color-mix(in srgb, var(--surface-container-low) 94%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--surface-container-low) 94%,
+      transparent
+    );
     color: var(--on-surface-variant);
     padding: 0.35rem 0.65rem;
     font-family: var(--font-display);
@@ -601,10 +633,17 @@
     border: 1px solid transparent;
     border-bottom-color: color-mix(in srgb, var(--primary) 58%, var(--border));
     border-radius: var(--radius-md);
-    background: color-mix(in srgb, var(--surface-container-low) 95%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--surface-container-low) 95%,
+      transparent
+    );
     color: var(--foreground);
     padding: 0.75rem 0.875rem;
-    transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      background 180ms ease;
   }
 
   .ds-input:focus-visible {
@@ -621,7 +660,8 @@
   }
 
   .ds-code-shell {
-    border: 1px solid color-mix(in srgb, var(--outline-variant) 60%, transparent);
+    border: 1px solid
+      color-mix(in srgb, var(--outline-variant) 60%, transparent);
     border-radius: var(--radius-xl);
     background: var(--hf-bg-deep);
     color: color-mix(in srgb, white 92%, var(--primary) 8%);
@@ -634,7 +674,11 @@
     justify-content: space-between;
     gap: 0.75rem;
     border-bottom: 1px solid color-mix(in srgb, var(--primary) 14%, transparent);
-    background: color-mix(in srgb, var(--surface-container-low) 18%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--surface-container-low) 18%,
+      transparent
+    );
     padding: 0.75rem 1rem;
     font-family: var(--font-display);
     font-size: 0.75rem;

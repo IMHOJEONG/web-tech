@@ -1,0 +1,82 @@
+{
+  "observedAt": "2026-10-10T11:31:16.655Z",
+  "url": "http://127.0.0.1:3100",
+  "scope": "development lab; runtime script, not packet capture",
+  "results": [
+    {
+      "width": 1280,
+      "status": 200,
+      "client": {
+        "localAddress": "127.0.0.1",
+        "localPort": 59201,
+        "remoteAddress": "127.0.0.1",
+        "remotePort": 59200
+      },
+      "accepted": {
+        "localAddress": "127.0.0.1",
+        "localPort": 59200,
+        "remoteAddress": "127.0.0.1",
+        "remotePort": 59201
+      },
+      "kernelSockets": [
+        "TCP 127.0.0.1:59200 (LISTEN)",
+        "TCP 127.0.0.1:59201->127.0.0.1:59200 (ESTABLISHED)",
+        "TCP 127.0.0.1:59200->127.0.0.1:59201 (ESTABLISHED)"
+      ],
+      "complete": true,
+      "body": "hello from TCP\n",
+      "pageErrors": []
+    },
+    {
+      "width": 670,
+      "status": 200,
+      "client": {
+        "localAddress": "127.0.0.1",
+        "localPort": 59211,
+        "remoteAddress": "127.0.0.1",
+        "remotePort": 59210
+      },
+      "accepted": {
+        "localAddress": "127.0.0.1",
+        "localPort": 59210,
+        "remoteAddress": "127.0.0.1",
+        "remotePort": 59211
+      },
+      "kernelSockets": [
+        "TCP 127.0.0.1:59210 (LISTEN)",
+        "TCP 127.0.0.1:59211->127.0.0.1:59210 (ESTABLISHED)",
+        "TCP 127.0.0.1:59210->127.0.0.1:59211 (ESTABLISHED)"
+      ],
+      "complete": true,
+      "body": "hello from TCP\n",
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "status": 200,
+      "client": {
+        "localAddress": "127.0.0.1",
+        "localPort": 59220,
+        "remoteAddress": "127.0.0.1",
+        "remotePort": 59219
+      },
+      "accepted": {
+        "localAddress": "127.0.0.1",
+        "localPort": 59219,
+        "remoteAddress": "127.0.0.1",
+        "remotePort": 59220
+      },
+      "kernelSockets": [
+        "TCP 127.0.0.1:59219 (LISTEN)",
+        "TCP 127.0.0.1:59220->127.0.0.1:59219 (ESTABLISHED)",
+        "TCP 127.0.0.1:59219->127.0.0.1:59220 (ESTABLISHED)"
+      ],
+      "complete": true,
+      "body": "hello from TCP\n",
+      "pageErrors": []
+    }
+  ],
+  "crossOrigin403": true,
+  "get405": true,
+  "clientError500Simulation": true
+}

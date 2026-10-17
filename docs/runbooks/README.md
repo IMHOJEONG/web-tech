@@ -1,8 +1,20 @@
 # 운영 및 재현 절차
 
+- [테스트 직접 작성과 IDE 점검 가이드](test-authoring-ide-guide.md)
+
+- [저장소 테스트 목록과 실행 경로](repository-test-inventory.md)
+
+- [Node.js CPU 작업과 이벤트 루프 콜백 관측](node-event-loop-cpu-observation.md)
+
+- [Node.js 로컬 TCP 소켓과 패킷 관측](node-tcp-local-observation.md)
+
 로컬 실행, 배포, 장애 대응과 반복 가능한 검증 절차입니다. 실행 후 결과는 [검증 보고서](../verification/README.md)에 기록합니다.
 
 [전체 문서 안내](../README.md)
+
+- [Docs 웹 푸시 실험](docs-web-push-experiment.md)
+
+- [서비스 복구 리허설](platform-recovery-drill.md)
 
 - [Next.js 활용 점검 체크리스트](docs-nextjs-usage-checklist.md)
 - [Content API 인증/장애 대응 운영 Runbook](content-api-auth-ops-runbook.md)
@@ -10,6 +22,7 @@
 - [상세 페이지 스트리밍 성능 개선](docs-article-streaming-performance.md)
 - [Docs Backend NAS Deployment](docs-backend-nas-deployment.md)
 - [로컬 프로덕션 캐시 통합 테스트](docs-content-cache-production-test.md)
+- [캐시 만료 후 콘텐츠 게시 결과 확인](docs-content-publication-verification.md)
 - [Docs Contributor Guide](docs-contributor-guide.md)
 - [배포 상세 페이지 성능 측정](docs-deployed-performance-measurement.md)
 - [Docs Env Checklist](docs-env-checklist.md)

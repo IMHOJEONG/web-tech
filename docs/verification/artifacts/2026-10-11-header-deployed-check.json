@@ -1,0 +1,911 @@
+{
+  "commit": "d8c09527f8cb9195aa16258fee9b2bec916ee818",
+  "deployment": "https://vercel.com/hojeong-ims-projects/web-tech/2TABKhgmP9ZT527hqSSFNH8eHsXV",
+  "productionUrl": "https://heap-forge.app",
+  "ci": {
+    "run": 38146174659,
+    "conclusion": "success",
+    "jobs": 6,
+    "responsivePassed": 271,
+    "responsiveSkipped": 50,
+    "articlePassed": 108,
+    "streamClosedLogs": 8
+  },
+  "documentationCi": {
+    "run": 38146174689,
+    "conclusion": "success"
+  },
+  "fullDeployedSweep": {
+    "stats": {
+      "startTime": "2026-10-11T14:20:20.227Z",
+      "duration": 300003.974,
+      "expected": 11,
+      "skipped": 36,
+      "unexpected": 10,
+      "flaky": 0
+    },
+    "errors": [
+      "\u001b[31mTimed out waiting 300s for the test suite to run\u001b[39m",
+      "\u001b[31mTimed out waiting 300s for the teardown for test suite to run\u001b[39m"
+    ],
+    "nativeFontPreference": null,
+    "tests": [
+      {
+        "file": "article-sticky-header.spec.ts",
+        "title": "header stays visible through the full article scroll range",
+        "project": "chromium-mobile",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "timedOut",
+            "durationMs": 30063,
+            "error": "Test timeout of 30000ms exceeded."
+          }
+        ]
+      },
+      {
+        "file": "article-sticky-header.spec.ts",
+        "title": "header stays visible through the full article scroll range",
+        "project": "chromium-tablet",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "timedOut",
+            "durationMs": 30048,
+            "error": "Test timeout of 30000ms exceeded."
+          }
+        ]
+      },
+      {
+        "file": "article-sticky-header.spec.ts",
+        "title": "header stays visible through the full article scroll range",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 0
+          }
+        ]
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "ko/light: header navigation and search remain usable",
+        "project": "chromium-mobile",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "timedOut",
+            "durationMs": 30057,
+            "error": "Test timeout of 30000ms exceeded."
+          }
+        ]
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "ko/dark: header navigation and search remain usable",
+        "project": "chromium-mobile",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "timedOut",
+            "durationMs": 30058,
+            "error": "Test timeout of 30000ms exceeded."
+          }
+        ]
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "en/light: header navigation and search remain usable",
+        "project": "chromium-mobile",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "timedOut",
+            "durationMs": 30062,
+            "error": "Test timeout of 30000ms exceeded."
+          }
+        ]
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "en/dark: header navigation and search remain usable",
+        "project": "chromium-mobile",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 12373
+          }
+        ]
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "header and expanded search fit narrow and breakpoint widths",
+        "project": "chromium-mobile",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 380
+          }
+        ]
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "ko/light: header navigation and search remain usable",
+        "project": "chromium-tablet",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 9691
+          }
+        ]
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "ko/dark: header navigation and search remain usable",
+        "project": "chromium-tablet",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "timedOut",
+            "durationMs": 30043,
+            "error": "Test timeout of 30000ms exceeded."
+          }
+        ]
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "en/light: header navigation and search remain usable",
+        "project": "chromium-tablet",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 9110
+          }
+        ]
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "en/dark: header navigation and search remain usable",
+        "project": "chromium-tablet",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 4128
+          }
+        ]
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "header and expanded search fit narrow and breakpoint widths",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 56
+          }
+        ]
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "ko/light: header navigation and search remain usable",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "ko/dark: header navigation and search remain usable",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "en/light: header navigation and search remain usable",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "en/dark: header navigation and search remain usable",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "header-clarity.spec.ts",
+        "title": "header and expanded search fit narrow and breakpoint widths",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "ko: enlarged root font reflows the narrow header and search",
+        "project": "chromium-mobile",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 44
+          }
+        ]
+      },
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "en: enlarged root font reflows the narrow header and search",
+        "project": "chromium-mobile",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 41
+          }
+        ]
+      },
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "native browser default font respects layout without a CSS override",
+        "project": "chromium-mobile",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 0
+          }
+        ]
+      },
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "ko: enlarged root font reflows the narrow header and search",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 40
+          }
+        ]
+      },
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "en: enlarged root font reflows the narrow header and search",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 93
+          }
+        ]
+      },
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "native browser default font respects layout without a CSS override",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 0
+          }
+        ]
+      },
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "ko: enlarged root font reflows the narrow header and search",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "en: enlarged root font reflows the narrow header and search",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "native browser default font respects layout without a CSS override",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "mobile-drawer-close.spec.ts",
+        "title": "light/no-preference: mobile drawer has one custom close button and restores focus",
+        "project": "chromium-mobile",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "timedOut",
+            "durationMs": 30032,
+            "error": "Test timeout of 30000ms exceeded."
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-close.spec.ts",
+        "title": "light/reduce: mobile drawer has one custom close button and restores focus",
+        "project": "chromium-mobile",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "timedOut",
+            "durationMs": 30071,
+            "error": "Test timeout of 30000ms exceeded."
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-close.spec.ts",
+        "title": "dark/no-preference: mobile drawer has one custom close button and restores focus",
+        "project": "chromium-mobile",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 5103
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-close.spec.ts",
+        "title": "dark/reduce: mobile drawer has one custom close button and restores focus",
+        "project": "chromium-mobile",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 7361
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-close.spec.ts",
+        "title": "light/no-preference: mobile drawer has one custom close button and restores focus",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 42
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-close.spec.ts",
+        "title": "light/reduce: mobile drawer has one custom close button and restores focus",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 46
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-close.spec.ts",
+        "title": "dark/no-preference: mobile drawer has one custom close button and restores focus",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 42
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-close.spec.ts",
+        "title": "dark/reduce: mobile drawer has one custom close button and restores focus",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 40
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-close.spec.ts",
+        "title": "light/no-preference: mobile drawer has one custom close button and restores focus",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "mobile-drawer-close.spec.ts",
+        "title": "light/reduce: mobile drawer has one custom close button and restores focus",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "mobile-drawer-close.spec.ts",
+        "title": "dark/no-preference: mobile drawer has one custom close button and restores focus",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "mobile-drawer-close.spec.ts",
+        "title": "dark/reduce: mobile drawer has one custom close button and restores focus",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "mobile-drawer-resize.spec.ts",
+        "title": "light/no-preference: leaving the mobile shell releases the drawer",
+        "project": "chromium-mobile",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 4242
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-resize.spec.ts",
+        "title": "light/reduce: leaving the mobile shell releases the drawer",
+        "project": "chromium-mobile",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "timedOut",
+            "durationMs": 30042,
+            "error": "Test timeout of 30000ms exceeded."
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-resize.spec.ts",
+        "title": "dark/no-preference: leaving the mobile shell releases the drawer",
+        "project": "chromium-mobile",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 2835
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-resize.spec.ts",
+        "title": "dark/reduce: leaving the mobile shell releases the drawer",
+        "project": "chromium-mobile",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 4029
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-resize.spec.ts",
+        "title": "light/no-preference: leaving the mobile shell releases the drawer",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 41
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-resize.spec.ts",
+        "title": "light/reduce: leaving the mobile shell releases the drawer",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 44
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-resize.spec.ts",
+        "title": "dark/no-preference: leaving the mobile shell releases the drawer",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 39
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-resize.spec.ts",
+        "title": "dark/reduce: leaving the mobile shell releases the drawer",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "skipped",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 37
+          }
+        ]
+      },
+      {
+        "file": "mobile-drawer-resize.spec.ts",
+        "title": "light/no-preference: leaving the mobile shell releases the drawer",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "mobile-drawer-resize.spec.ts",
+        "title": "light/reduce: leaving the mobile shell releases the drawer",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "mobile-drawer-resize.spec.ts",
+        "title": "dark/no-preference: leaving the mobile shell releases the drawer",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "mobile-drawer-resize.spec.ts",
+        "title": "dark/reduce: leaving the mobile shell releases the drawer",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "skip-link.spec.ts",
+        "title": "ko: first Tab skips the shell on public pages",
+        "project": "chromium-mobile",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 84821
+          }
+        ]
+      },
+      {
+        "file": "skip-link.spec.ts",
+        "title": "en: first Tab skips the shell on public pages",
+        "project": "chromium-mobile",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "timedOut",
+            "durationMs": 120033,
+            "error": "Test timeout of 120000ms exceeded."
+          }
+        ]
+      },
+      {
+        "file": "skip-link.spec.ts",
+        "title": "ko: first Tab skips the shell on public pages",
+        "project": "chromium-tablet",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 11614
+          }
+        ]
+      },
+      {
+        "file": "skip-link.spec.ts",
+        "title": "en: first Tab skips the shell on public pages",
+        "project": "chromium-tablet",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "skipped",
+            "durationMs": 0
+          }
+        ]
+      },
+      {
+        "file": "skip-link.spec.ts",
+        "title": "ko: first Tab skips the shell on public pages",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      },
+      {
+        "file": "skip-link.spec.ts",
+        "title": "en: first Tab skips the shell on public pages",
+        "project": "chromium-desktop",
+        "status": "skipped",
+        "expectedStatus": "passed",
+        "attempts": []
+      }
+    ]
+  },
+  "focusedDeployedCheck": {
+    "stats": {
+      "startTime": "2026-10-11T14:25:34.657Z",
+      "duration": 61449.689999999995,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "errors": [],
+    "nativeFontPreference": {
+      "browser": "Chromium",
+      "baseURL": "https://heap-forge.app",
+      "results": [
+        {
+          "width": 500,
+          "fontSize": 16,
+          "locale": "ko",
+          "headerHeight": 65
+        },
+        {
+          "width": 500,
+          "fontSize": 16,
+          "locale": "en",
+          "headerHeight": 65
+        },
+        {
+          "width": 500,
+          "fontSize": 32,
+          "locale": "ko",
+          "headerHeight": 217
+        },
+        {
+          "width": 500,
+          "fontSize": 32,
+          "locale": "en",
+          "headerHeight": 217
+        },
+        {
+          "width": 640,
+          "fontSize": 16,
+          "locale": "ko",
+          "headerHeight": 65
+        },
+        {
+          "width": 640,
+          "fontSize": 16,
+          "locale": "en",
+          "headerHeight": 65
+        },
+        {
+          "width": 640,
+          "fontSize": 32,
+          "locale": "ko",
+          "headerHeight": 130
+        },
+        {
+          "width": 640,
+          "fontSize": 32,
+          "locale": "en",
+          "headerHeight": 130
+        },
+        {
+          "width": 1280,
+          "fontSize": 16,
+          "locale": "ko",
+          "headerHeight": 65
+        },
+        {
+          "width": 1280,
+          "fontSize": 16,
+          "locale": "en",
+          "headerHeight": 65
+        },
+        {
+          "width": 1280,
+          "fontSize": 32,
+          "locale": "ko",
+          "headerHeight": 130
+        },
+        {
+          "width": 1280,
+          "fontSize": 32,
+          "locale": "en",
+          "headerHeight": 130
+        }
+      ]
+    },
+    "tests": [
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "ko: enlarged root font reflows the narrow header and search",
+        "project": "chromium-desktop",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 3912
+          }
+        ]
+      },
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "en: enlarged root font reflows the narrow header and search",
+        "project": "chromium-desktop",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "timedOut",
+            "durationMs": 30058,
+            "error": "Test timeout of 30000ms exceeded."
+          }
+        ]
+      },
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "native browser default font respects layout without a CSS override",
+        "project": "chromium-desktop",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 26224
+          }
+        ]
+      }
+    ]
+  },
+  "englishRecheck": {
+    "stats": {
+      "startTime": "2026-10-11T14:27:31.095Z",
+      "duration": 4916.415,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": [],
+    "nativeFontPreference": null,
+    "tests": [
+      {
+        "file": "header-font-preference.spec.ts",
+        "title": "en: enlarged root font reflows the narrow header and search",
+        "project": "chromium-desktop",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "attempts": [
+          {
+            "status": "passed",
+            "durationMs": 4007
+          }
+        ]
+      }
+    ]
+  },
+  "resourceProbe": {
+    "checkedAt": "2026-10-11T14:24:39.335Z",
+    "phases": [
+      {
+        "phase": "domcontentloaded",
+        "elapsedMs": 4843,
+        "status": 200
+      },
+      {
+        "phase": "failure",
+        "elapsedMs": 35143,
+        "error": "TimeoutError: page.waitForFunction: Timeout 30000ms exceeded."
+      }
+    ],
+    "pending": [
+      {
+        "host": "heap-forge.app",
+        "path": "/_next/static/immutable/media/PretendardVariable-s.p.40d1pes8boa5s.woff2",
+        "type": "font",
+        "startedMs": 1363
+      },
+      {
+        "host": "heap-forge.app",
+        "path": "/_next/static/immutable/chunks/18r06m1e6y_zd.js",
+        "type": "script",
+        "startedMs": 1378
+      },
+      {
+        "host": "heap-forge.app",
+        "path": "/_next/static/immutable/chunks/3xns39ze6f_1f.js",
+        "type": "script",
+        "startedMs": 1378
+      },
+      {
+        "host": "heap-forge.app",
+        "path": "/_next/static/immutable/chunks/001sd6dq2_dgb.js",
+        "type": "script",
+        "startedMs": 1378
+      },
+      {
+        "host": "heap-forge.app",
+        "path": "/_next/static/immutable/chunks/3u1ev6n5i_rbu.js",
+        "type": "script",
+        "startedMs": 1378
+      }
+    ],
+    "failures": [],
+    "statuses": [],
+    "errors": []
+  },
+  "sampledChunkCurl": {
+    "status": 200,
+    "bytes": 836205,
+    "firstByteSeconds": 1.014789,
+    "totalSeconds": 11.290731
+  },
+  "limitation": "Header font checks passed; full public navigation sweep did not finish cleanly. Pending same-origin font/scripts observed; network/CDN/browser root cause remains unclassified."
+}

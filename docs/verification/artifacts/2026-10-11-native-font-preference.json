@@ -1,0 +1,214 @@
+{
+  "checkedOn": "2026-10-11",
+  "scope": "Isolated Chromium native default-font preference at browser zoom 100%; no injected CSS/root inline font override; no user profile modification",
+  "results": [
+    {
+      "requestedWidth": 500,
+      "requestedFont": 16,
+      "measuredFontPreference": 16,
+      "locale": "ko",
+      "zoom": 1,
+      "status": 200,
+      "width": 500,
+      "dpr": 1,
+      "rootFont": "16px",
+      "inlineRootStyle": "",
+      "pageOverflow": false,
+      "brandSearchOverlap": false,
+      "brand": {
+        "x": 62,
+        "y": 10,
+        "width": 101.75,
+        "height": 44
+      },
+      "search": {
+        "x": 392,
+        "y": 10,
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "requestedWidth": 500,
+      "requestedFont": 16,
+      "measuredFontPreference": 16,
+      "locale": "en",
+      "zoom": 1,
+      "status": 200,
+      "width": 500,
+      "dpr": 1,
+      "rootFont": "16px",
+      "inlineRootStyle": "",
+      "pageOverflow": false,
+      "brandSearchOverlap": false,
+      "brand": {
+        "x": 62,
+        "y": 10,
+        "width": 101.75,
+        "height": 44
+      },
+      "search": {
+        "x": 392,
+        "y": 10,
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "requestedWidth": 500,
+      "requestedFont": 32,
+      "measuredFontPreference": 32,
+      "locale": "ko",
+      "zoom": 1,
+      "status": 200,
+      "width": 500,
+      "dpr": 1,
+      "rootFont": "32px",
+      "inlineRootStyle": "",
+      "pageOverflow": false,
+      "brandSearchOverlap": true,
+      "brand": {
+        "x": 117.28125,
+        "y": 8,
+        "width": 183.40625,
+        "height": 112
+      },
+      "search": {
+        "x": 284,
+        "y": 20,
+        "width": 88,
+        "height": 88
+      }
+    },
+    {
+      "requestedWidth": 500,
+      "requestedFont": 32,
+      "measuredFontPreference": 32,
+      "locale": "en",
+      "zoom": 1,
+      "status": 200,
+      "width": 500,
+      "dpr": 1,
+      "rootFont": "32px",
+      "inlineRootStyle": "",
+      "pageOverflow": false,
+      "brandSearchOverlap": true,
+      "brand": {
+        "x": 117.28125,
+        "y": 8,
+        "width": 183.40625,
+        "height": 112
+      },
+      "search": {
+        "x": 284,
+        "y": 20,
+        "width": 88,
+        "height": 88
+      }
+    },
+    {
+      "requestedWidth": 640,
+      "requestedFont": 16,
+      "measuredFontPreference": 16,
+      "locale": "ko",
+      "zoom": 1,
+      "status": 200,
+      "width": 640,
+      "dpr": 1,
+      "rootFont": "16px",
+      "inlineRootStyle": "",
+      "pageOverflow": false,
+      "brandSearchOverlap": false,
+      "brand": {
+        "x": 24,
+        "y": 10,
+        "width": 101.75,
+        "height": 44
+      },
+      "search": {
+        "x": 524,
+        "y": 10,
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "requestedWidth": 640,
+      "requestedFont": 16,
+      "measuredFontPreference": 16,
+      "locale": "en",
+      "zoom": 1,
+      "status": 200,
+      "width": 640,
+      "dpr": 1,
+      "rootFont": "16px",
+      "inlineRootStyle": "",
+      "pageOverflow": false,
+      "brandSearchOverlap": false,
+      "brand": {
+        "x": 24,
+        "y": 10,
+        "width": 101.75,
+        "height": 44
+      },
+      "search": {
+        "x": 524,
+        "y": 10,
+        "width": 44,
+        "height": 44
+      }
+    },
+    {
+      "requestedWidth": 640,
+      "requestedFont": 32,
+      "measuredFontPreference": 32,
+      "locale": "ko",
+      "zoom": 1,
+      "status": 200,
+      "width": 640,
+      "dpr": 1,
+      "rootFont": "32px",
+      "inlineRootStyle": "",
+      "pageOverflow": false,
+      "brandSearchOverlap": false,
+      "brand": {
+        "x": 124,
+        "y": 20,
+        "width": 203.484375,
+        "height": 88
+      },
+      "search": {
+        "x": 424,
+        "y": 20,
+        "width": 88,
+        "height": 88
+      }
+    },
+    {
+      "requestedWidth": 640,
+      "requestedFont": 32,
+      "measuredFontPreference": 32,
+      "locale": "en",
+      "zoom": 1,
+      "status": 200,
+      "width": 640,
+      "dpr": 1,
+      "rootFont": "32px",
+      "inlineRootStyle": "",
+      "pageOverflow": false,
+      "brandSearchOverlap": false,
+      "brand": {
+        "x": 124,
+        "y": 20,
+        "width": 203.484375,
+        "height": 88
+      },
+      "search": {
+        "x": 424,
+        "y": 20,
+        "width": 88,
+        "height": 88
+      }
+    }
+  ]
+}

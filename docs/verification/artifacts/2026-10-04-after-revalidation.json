@@ -1,0 +1,120 @@
+[
+  {
+    "path": "/api/search?q=browser",
+    "status": 200,
+    "durationMs": 1998.01,
+    "count": 4,
+    "hasErrorPage": false,
+    "timings": [
+      {
+        "stage": "search-remote",
+        "outcome": "success",
+        "durationMs": 751.05
+      },
+      {
+        "stage": "search-rank",
+        "outcome": "success",
+        "durationMs": 5.12
+      },
+      {
+        "stage": "search-local",
+        "outcome": "success",
+        "durationMs": 257.95
+      }
+    ],
+    "indexBuildMessages": 1,
+    "hasRemoteSourceLog": false,
+    "logEntries": 1
+  },
+  {
+    "path": "/ko/docs",
+    "status": 200,
+    "durationMs": 783.18,
+    "hasErrorPage": false,
+    "hasTitle": true,
+    "timings": [
+      {
+        "stage": "search-local",
+        "outcome": "success",
+        "durationMs": 128.84
+      },
+      {
+        "stage": "search-remote",
+        "outcome": "success",
+        "durationMs": 19.11
+      }
+    ],
+    "indexBuildMessages": 1,
+    "hasRemoteSourceLog": false,
+    "logEntries": 1
+  },
+  {
+    "path": "/ko/docs/web/browser",
+    "status": 200,
+    "durationMs": 1612.71,
+    "hasErrorPage": false,
+    "hasTitle": true,
+    "timings": [
+      {
+        "stage": "remote-detail",
+        "outcome": "success",
+        "durationMs": 892.87
+      },
+      {
+        "stage": "document-load",
+        "outcome": "success",
+        "durationMs": 930.61
+      },
+      {
+        "stage": "document-select",
+        "outcome": "success",
+        "durationMs": 930.81
+      },
+      {
+        "stage": "content-render",
+        "outcome": "success",
+        "durationMs": 4.19
+      },
+      {
+        "stage": "navigation-load",
+        "outcome": "success",
+        "durationMs": 2.46
+      },
+      {
+        "stage": "navigation-build",
+        "outcome": "success",
+        "durationMs": 4.48
+      }
+    ],
+    "indexBuildMessages": 0,
+    "hasRemoteSourceLog": true,
+    "logEntries": 1
+  },
+  {
+    "path": "/api/search?q=React",
+    "status": 200,
+    "durationMs": 306.59,
+    "count": 3,
+    "hasErrorPage": false,
+    "timings": [
+      {
+        "stage": "search-local",
+        "outcome": "success",
+        "durationMs": 7.05
+      },
+      {
+        "stage": "search-remote",
+        "outcome": "success",
+        "durationMs": 14.01
+      },
+      {
+        "stage": "search-rank",
+        "outcome": "success",
+        "durationMs": 0.77
+      }
+    ],
+    "indexBuildMessages": 0,
+    "hasRemoteSourceLog": false,
+    "logEntries": 1
+  }
+]

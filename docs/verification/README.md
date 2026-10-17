@@ -1,8 +1,36 @@
 # 검증 보고서
 
+- [10-14 문서 인덱스·검색 목록 밀도 검토](accessibility/2026-10-14-docs-index-density-review.md): 공개 네 조건의 개선 전 기준선. UI 구현·개선 후 검증 미착수.
+
+- [10-14 모바일 문서 H1 크기](accessibility/2026-10-14-mobile-article-title.md)
+
+- [10-14 HTTP 스트리밍 게시 검증](content/2026-10-14-http-streaming-publication.md)
+
+- [10-14 수요일 기고 점검](content/2026-10-14-weekly-article-maintenance.md): 게시 canonical·실제 본문·metadata·sitemap·두 화면과 예제 통과, 기존 draft 진행 상태 보강. 재배포 없음.
+
+- [10-11 이벤트 루프 CPU 비교](content/2026-10-11-node-event-loop-cpu.md): 독립 송신자·수신자, CPU 0/200ms 각 3회와 실제 그래프. 초기 측정 실패와 보강을 구분합니다.
+
+- [10-11 큰 기본 글자 헤더 보완](accessibility/2026-10-11-header-font-preference.md): 로컬 관련 E2E 33개와 운영 헤더 핵심 조건 통과. 운영 전체 탐색은 로드 시간 초과가 남아 별도로 기록.
+
+- [10-11 로컬 TCP 캡처 재실행](content/2026-10-11-node-tcp-packet-capture.md): 이전 포트 불일치를 해결하고 실제 12행·순서 번호·양방향 FIN·커널 drop 0을 확인했습니다.
+
+- [10-10 Node.js 소켓·운영체제 관측](content/2026-10-10-node-socket-kernel-observation.md): 실제 MDX·fixture 각 3회, 소켓 상태 조회. SYN·ACK 캡처는 권한 문제로 미완료.
+
+- [10-04 태그·읽기 모음](content/2026-10-04-content-discovery.md): 태그·모음과 반응형 탐색 검증. 운영 혼합 목록 미검증.
+
+- [10-04 공용 UI 외부 설치](content/2026-10-04-shared-ui-package.md): 독립 tarball·테마·포커스 검증. registry 게시·실제 외부 앱 미검증.
+
 실제로 실행한 시험과 측정 결과를 보관합니다. 현재 정책은 [architecture](../architecture/README.md), 실행 절차는 [runbooks](../runbooks/README.md), 구현 변경 이력은 [worklog](../worklog/README.md)에서 확인합니다.
 
 ## 성능과 화면 안정성
+
+- [10-10 코드 접기 UI/UX와 10-11 배포 확인](accessibility/2026-10-10-code-block-usability.md): 3개 엔진 432개 조건·개발 페이지 12개·배포 24개 조건·Chromium 자체 확대 28개 조건 통과. 기본 글자 32px·폭 500px에서 헤더 클릭 영역 충돌. 설치 브라우저 메뉴·실기기는 미검증.
+
+- [10-03 로컬 검색 인덱스 캐시](cache/2026-10-03-local-search-index-cache.md): 요청 간 재사용·인증 만료·미발행/삭제·장애 복구·전체 앱 빌드, 운영 배포 미검증.
+
+- [10-03 검색 인덱스 비용](performance/2026-10-03-search-index-cost.md): 로컬 읽기·파싱, 합성 순위 계산 증가, Production 단계 로그 3개. 캐시 도입은 보류.
+
+- [10-03 Production 계측 연결](performance/2026-10-03-production-observation.md): 응답 UUID와 Runtime Logs 단계 연결, Speed Insights 스크립트 확인. 실제 사용자 수집은 미검증.
 
 - [09-23 공개 배포 접근성 재검증](accessibility/2026-09-23-deployed-shell-recheck.md): 20개 통과·4개 조건부 제외. 이전 CSS 누락 증상은 현재 재현되지 않으며 원인은 미확정.
 
@@ -24,6 +52,10 @@
 재현 절차: [배포 성능 측정](../runbooks/docs-deployed-performance-measurement.md), [브라우저·기기 점검](../runbooks/docs-responsive-browser-device-checklist.md).
 
 ## 캐시와 정적 셸
+
+- [10-08 게시 결과 검증 CLI](cache/2026-10-08-content-publication-verifier.md): 웹훅 성공과 실제 목록·검색·상세 반영 구분, 모의 14개·production 3개. NAS 운영 발행 미검증.
+
+- [10-04 배포 검색 인덱스 캐시](cache/2026-10-04-deployed-search-index-cache.md): 새 Production SHA·검색 5회와 Runtime Logs, 미인증 웹훅 401. NAS 게시 갱신은 미검증.
 
 - [09-27 docs CI 로그 재검토](cache/2026-09-27-docs-ci-log-review.md): 같은 SHA의 CI·배포 성공과 별개로 남은 hydration 및 스트림 종료 경고를 분리했다.
 
@@ -61,15 +93,31 @@
 - [09-20 공개 글 독해 검토](content/2026-09-20-content-readability-review.md): 로컬 공개 글 10개의 설명 흐름과 편집 우선순위.
 - [09-20 로컬 콘텐츠 재점검](content/2026-09-20-local-content-review.md): 15개 변환, 이미지 참조, ARIA 본문 중복 확인.
 
+## 웹 푸시
+
+- [10-03 초대 접근 제어](push/2026-10-03-push-access-gate.md): 미인증 BFF 거부·세션 위조/만료·모바일·초대 인증 후 실제 Chrome 수신과 해지. 운영 WAF는 미적용.
+
+- [10-03 로컬 실제 연동](push/2026-10-03-local-web-push.md): Chrome 네이티브 구독·FCM 발송·서비스 워커 수신·알림 생성·해지. OS 배너와 NAS/Vercel은 미검증.
+
 ## 의존성 보안
 
+- [10-09 패치 전 잔여 취약점 조사](security/2026-10-09-remaining-advisories.md): `c574bbd`에서 production 5건·전체 7건 관측. 후속 PR #36의 패치 결과와 현재 운영 상태는 별도로 구분한다.
+
+- [10-09 braces 운영 경로 제거](security/2026-10-09-braces-runtime-removal.md): 라이브러리 216개·production 4개·파일 trace 통과. 개발 braces와 다른 audit 경고는 남아 있음.
+
 - [10-09 잔여 의존성 보안 패치](security/2026-10-09-security-patches.md): 6개 패치·전이 의존성 회귀·빌드 통과, main 기준 braces high 1개 잔여. 병합·배포는 미검증.
+
+- [10-06 배포 후속 점검](security/2026-10-06-deployed-followup.md): 카테고리 번역 16개 조건 통과, 공개 OG 4시간 TTL·원격 H1·braces 알림은 미완료.
+
+- [10-05 운영 블로그 점검](security/2026-10-05-deployed-blog-smoke.md): 배포 alias·32개 기능 검사·source 로그 확인, 원격 H1·카테고리 번역·OG 캐시 계약은 후속 과제.
 
 - [10-05 Next.js 패치·카테고리 입력 경계 검증](security/2026-10-05-next-category-hardening.md): Next.js 16.3.8·brace-expansion 5.0.12, glob 비실행 검사와 잔여 braces 경고.
 - [10-05 잔여 취약점 조사](security/2026-10-05-remaining-advisories.md): production 경고 2건, 카테고리 입력의 glob 해석과 braces 패치 미출시 확인.
 - [10-05 fast-uri·multer 보안 업데이트 검증](security/2026-10-05-fast-uri-multer.md): main 기준 override·lockfile 갱신, 회귀 검사 통과와 별도 잔여 취약점 5건. 병합·배포는 미검증.
 
 ## 원본 증거
+
+- [10-03 문서 구조화 데이터와 OG 이미지](seo/2026-10-03-article-sharing.md): 프로덕션 빌드·82개 회귀·PNG 응답 검증.
 
 [artifacts 목록](artifacts/README.md)에서 JSON 측정값을 찾을 수 있습니다. 각 결과의 환경·표본·한계는 연결된 보고서와 함께 확인해야 합니다. 이 폴더의 결과만으로 현재 배포가 통과했다고 판단하지 않습니다.
 

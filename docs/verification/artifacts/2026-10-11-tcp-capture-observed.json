@@ -1,0 +1,202 @@
+{
+  "reviewedAt": "2026-10-11T05:13:37.176604+00:00",
+  "observationTimezone": "Asia/Seoul",
+  "captureSha256": "fe04a4c9c77b734a5230737d3d4e0f9e94198927b23f670d6e165434047f7024",
+  "sourceSocketLogSha256": "fc14795999f0755df7b30a092174ed7a320204d2b3d820378b889b7f08c598b2",
+  "captureCommand": "sudo /usr/sbin/tcpdump -i lo0 -nn -S -tttt -l 'tcp and host 127.0.0.1 and port 60116' 2>&1 | tee -i /tmp/heapforge-tcp-capture.txt",
+  "captureCounts": {
+    "captured": 12,
+    "receivedByFilter": 58,
+    "droppedByKernel": 0
+  },
+  "socketResult": {
+    "listening": {
+      "address": "127.0.0.1",
+      "family": "IPv4",
+      "port": 60116
+    },
+    "client": {
+      "localAddress": "127.0.0.1",
+      "localPort": 60187,
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 60116
+    },
+    "accepted": {
+      "localAddress": "127.0.0.1",
+      "localPort": 60116,
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 60187
+    },
+    "connections": 1,
+    "statusCode": 200,
+    "received": "hello from TCP\n",
+    "complete": true,
+    "kernelSockets": [
+      "TCP 127.0.0.1:60116 (LISTEN)",
+      "TCP 127.0.0.1:60187->127.0.0.1:60116 (ESTABLISHED)",
+      "TCP 127.0.0.1:60116->127.0.0.1:60187 (ESTABLISHED)"
+    ]
+  },
+  "packets": [
+    {
+      "row": 1,
+      "timeLocal": "2026-10-11 14:12:37.706212",
+      "direction": "client->server",
+      "sourcePort": 60187,
+      "destinationPort": 60116,
+      "flags": "S",
+      "seqStart": 197459810,
+      "seqEnd": null,
+      "ack": null,
+      "dataLength": 0
+    },
+    {
+      "row": 2,
+      "timeLocal": "2026-10-11 14:12:37.706308",
+      "direction": "server->client",
+      "sourcePort": 60116,
+      "destinationPort": 60187,
+      "flags": "S.",
+      "seqStart": 1070684333,
+      "seqEnd": null,
+      "ack": 197459811,
+      "dataLength": 0
+    },
+    {
+      "row": 3,
+      "timeLocal": "2026-10-11 14:12:37.706325",
+      "direction": "client->server",
+      "sourcePort": 60187,
+      "destinationPort": 60116,
+      "flags": ".",
+      "seqStart": null,
+      "seqEnd": null,
+      "ack": 1070684334,
+      "dataLength": 0
+    },
+    {
+      "row": 4,
+      "timeLocal": "2026-10-11 14:12:37.706335",
+      "direction": "server->client",
+      "sourcePort": 60116,
+      "destinationPort": 60187,
+      "flags": ".",
+      "seqStart": null,
+      "seqEnd": null,
+      "ack": 197459811,
+      "dataLength": 0
+    },
+    {
+      "row": 5,
+      "timeLocal": "2026-10-11 14:12:37.709360",
+      "direction": "client->server",
+      "sourcePort": 60187,
+      "destinationPort": 60116,
+      "flags": "P.",
+      "seqStart": 197459811,
+      "seqEnd": 197459871,
+      "ack": 1070684334,
+      "dataLength": 60
+    },
+    {
+      "row": 6,
+      "timeLocal": "2026-10-11 14:12:37.709398",
+      "direction": "server->client",
+      "sourcePort": 60116,
+      "destinationPort": 60187,
+      "flags": ".",
+      "seqStart": null,
+      "seqEnd": null,
+      "ack": 197459871,
+      "dataLength": 0
+    },
+    {
+      "row": 7,
+      "timeLocal": "2026-10-11 14:12:37.752861",
+      "direction": "server->client",
+      "sourcePort": 60116,
+      "destinationPort": 60187,
+      "flags": "P.",
+      "seqStart": 1070684334,
+      "seqEnd": 1070684470,
+      "ack": 197459871,
+      "dataLength": 136
+    },
+    {
+      "row": 8,
+      "timeLocal": "2026-10-11 14:12:37.752921",
+      "direction": "client->server",
+      "sourcePort": 60187,
+      "destinationPort": 60116,
+      "flags": ".",
+      "seqStart": null,
+      "seqEnd": null,
+      "ack": 1070684470,
+      "dataLength": 0
+    },
+    {
+      "row": 9,
+      "timeLocal": "2026-10-11 14:12:37.754009",
+      "direction": "server->client",
+      "sourcePort": 60116,
+      "destinationPort": 60187,
+      "flags": "F.",
+      "seqStart": 1070684470,
+      "seqEnd": null,
+      "ack": 197459871,
+      "dataLength": 0
+    },
+    {
+      "row": 10,
+      "timeLocal": "2026-10-11 14:12:37.754056",
+      "direction": "client->server",
+      "sourcePort": 60187,
+      "destinationPort": 60116,
+      "flags": ".",
+      "seqStart": null,
+      "seqEnd": null,
+      "ack": 1070684471,
+      "dataLength": 0
+    },
+    {
+      "row": 11,
+      "timeLocal": "2026-10-11 14:12:37.755833",
+      "direction": "client->server",
+      "sourcePort": 60187,
+      "destinationPort": 60116,
+      "flags": "F.",
+      "seqStart": 197459871,
+      "seqEnd": null,
+      "ack": 1070684471,
+      "dataLength": 0
+    },
+    {
+      "row": 12,
+      "timeLocal": "2026-10-11 14:12:37.755922",
+      "direction": "server->client",
+      "sourcePort": 60116,
+      "destinationPort": 60187,
+      "flags": ".",
+      "seqStart": null,
+      "seqEnd": null,
+      "ack": 197459872,
+      "dataLength": 0
+    }
+  ],
+  "checks": {
+    "matchingEndpoints": true,
+    "handshakeSeqAck": true,
+    "requestRangeAndAck": true,
+    "responseRangeAndAck": true,
+    "bothFinAcknowledged": true,
+    "noRstInCapturedRows": true,
+    "zeroReportedKernelDrops": true,
+    "socketHttpComplete": true
+  },
+  "limitations": [
+    "single IPv4 loopback sample",
+    "HTTP content is evidenced by socket result, not printed packet payload",
+    "receivedByFilter is not assumed equal to captured",
+    "synchronous lsof prevents performance interpretation"
+  ]
+}

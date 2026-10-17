@@ -110,12 +110,12 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
-            <div className="flex items-center gap-3 sm:hidden">
+            <div className="contents sm:hidden">
                 <SheetTrigger
                     aria-label={headerT('drawer.openAriaLabel')}
                     data-testid="mobile-nav-drawer-trigger"
                     disabled={!isHydrated}
-                    className="flex h-7 w-[2.125rem] items-center justify-center text-muted-foreground transition-colors hover:text-primary"
+                    className="ds-focus-ring col-start-1 flex min-h-11 w-[2.125rem] shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-primary @max-[20rem]/shell:row-start-2"
                 >
                     <svg
                         aria-hidden="true"
@@ -135,7 +135,7 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
                     </svg>
                 </SheetTrigger>
                 <Link
-                    className="ds-focus-ring font-display inline-flex min-h-11 items-center rounded-md text-lg font-bold tracking-tight text-primary"
+                    className="ds-focus-ring font-display col-start-2 inline-flex min-h-11 min-w-0 items-center justify-start whitespace-nowrap rounded-md text-lg font-bold tracking-tight text-primary @max-[20rem]/shell:col-span-3 @max-[20rem]/shell:col-start-1 @max-[20rem]/shell:row-start-1"
                     href="/"
                 >
                     <Brand />

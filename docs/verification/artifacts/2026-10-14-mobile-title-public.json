@@ -1,0 +1,215 @@
+{
+  "observedAt": "2026-10-14T05:32:00.801Z",
+  "base": "https://heap-forge.app",
+  "scope": "Chromium viewports and simulated root font; not physical devices",
+  "views": [
+    {
+      "slug": "http-response-streaming-lab",
+      "width": 320,
+      "status": 200,
+      "normal": {
+        "font": 32,
+        "lineHeight": 38.4,
+        "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+        "height": 115.171875,
+        "top": 85,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "simulatedRootFont32": null,
+      "pageErrors": []
+    },
+    {
+      "slug": "http-response-streaming-lab",
+      "width": 390,
+      "status": 200,
+      "normal": {
+        "font": 32,
+        "lineHeight": 38.4,
+        "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+        "height": 76.78125,
+        "top": 85,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "simulatedRootFont32": {
+        "font": 64,
+        "lineHeight": 76.8,
+        "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+        "height": 460.78125,
+        "top": 257,
+        "headerBottom": 217,
+        "overflow": 0
+      },
+      "pageErrors": []
+    },
+    {
+      "slug": "http-response-streaming-lab",
+      "width": 430,
+      "status": 200,
+      "normal": {
+        "font": 32,
+        "lineHeight": 38.4,
+        "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+        "height": 76.78125,
+        "top": 85,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "simulatedRootFont32": null,
+      "pageErrors": []
+    },
+    {
+      "slug": "http-response-streaming-lab",
+      "width": 639,
+      "status": 200,
+      "normal": {
+        "font": 32,
+        "lineHeight": 38.4,
+        "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+        "height": 38.390625,
+        "top": 85,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "simulatedRootFont32": null,
+      "pageErrors": []
+    },
+    {
+      "slug": "http-response-streaming-lab",
+      "width": 640,
+      "status": 200,
+      "normal": {
+        "font": 38.4,
+        "lineHeight": 44.16,
+        "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+        "height": 88.3125,
+        "top": 85,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "simulatedRootFont32": null,
+      "pageErrors": []
+    },
+    {
+      "slug": "http-response-streaming-lab",
+      "width": 1280,
+      "status": 200,
+      "normal": {
+        "font": 64,
+        "lineHeight": 73.6,
+        "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+        "height": 147.1875,
+        "top": 93,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "simulatedRootFont32": null,
+      "pageErrors": []
+    },
+    {
+      "slug": "stream-backpressure-diagnosis",
+      "width": 320,
+      "status": 200,
+      "normal": {
+        "font": 32,
+        "lineHeight": 38.4,
+        "title": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+        "height": 115.171875,
+        "top": 85,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "simulatedRootFont32": null,
+      "pageErrors": []
+    },
+    {
+      "slug": "stream-backpressure-diagnosis",
+      "width": 390,
+      "status": 200,
+      "normal": {
+        "font": 32,
+        "lineHeight": 38.4,
+        "title": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+        "height": 115.171875,
+        "top": 85,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "simulatedRootFont32": {
+        "font": 64,
+        "lineHeight": 76.8,
+        "title": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+        "height": 537.578125,
+        "top": 257,
+        "headerBottom": 217,
+        "overflow": 0
+      },
+      "pageErrors": []
+    },
+    {
+      "slug": "stream-backpressure-diagnosis",
+      "width": 430,
+      "status": 200,
+      "normal": {
+        "font": 32,
+        "lineHeight": 38.4,
+        "title": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+        "height": 115.171875,
+        "top": 85,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "simulatedRootFont32": null,
+      "pageErrors": []
+    },
+    {
+      "slug": "stream-backpressure-diagnosis",
+      "width": 639,
+      "status": 200,
+      "normal": {
+        "font": 32,
+        "lineHeight": 38.4,
+        "title": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+        "height": 76.78125,
+        "top": 85,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "simulatedRootFont32": null,
+      "pageErrors": []
+    },
+    {
+      "slug": "stream-backpressure-diagnosis",
+      "width": 640,
+      "status": 200,
+      "normal": {
+        "font": 38.4,
+        "lineHeight": 44.16,
+        "title": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+        "height": 88.3125,
+        "top": 85,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "simulatedRootFont32": null,
+      "pageErrors": []
+    },
+    {
+      "slug": "stream-backpressure-diagnosis",
+      "width": 1280,
+      "status": 200,
+      "normal": {
+        "font": 64,
+        "lineHeight": 73.6,
+        "title": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+        "height": 147.1875,
+        "top": 93,
+        "headerBottom": 65,
+        "overflow": 0
+      },
+      "simulatedRootFont32": null,
+      "pageErrors": []
+    }
+  ]
+}

@@ -1,8 +1,5 @@
 import 'server-only'
 
-import fg from 'fast-glob'
-import fs from 'fs/promises'
-import { parseLocalDocument } from './local-document-parser'
 import type { ContentSource, Metadata } from '~/lib/get-document'
 import { getDocHref } from '~/lib/get-doc-route'
 import { fetchRemoteDocsData } from '~/lib/content-api'
@@ -11,13 +8,14 @@ import {
     logContentSource,
     resolveCollectionContentSource,
 } from '~/lib/content-source-log'
-import {
-    resolveLocalContentRoot,
-    toLocalContentFileName,
-} from '~/lib/local-content-paths'
+import { getLocalSearchIndex } from './local-search-cache'
+import { inferSearchSection } from './local-search-index'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { rankSearchDocs } from '~/lib/search-ranking'
 import { normalizeSearchQuery } from '~/shared/lib/search-query'
+import { getRequestObservation } from '~/lib/request-observation'
+import { createArticleTiming } from '~/lib/article-timing'
+import type { ArticleTimingMeasure } from '~/lib/article-timing.types'
 export interface SearchData {
     readonly id: string
     readonly title?: string
@@ -36,40 +34,6 @@ export interface SearchData {
     readonly tags?: readonly string[]
 }
 
-const LOCAL_SEARCH_PATTERNS = ['data/**/*.{md,mdx}', 'category/**/*.{md,mdx}']
-
-function inferSearchHref(fileName: string, slug: string) {
-    return getDocHref({ fileName, slug })
-}
-
-function inferSearchSection(fileName: string) {
-    if (fileName.startsWith('category/fe/')) {
-        return 'Web'
-    }
-
-    if (fileName.startsWith('category/be/')) {
-        return 'Backend'
-    }
-
-    if (fileName.startsWith('category/computer-science/')) {
-        return 'Computer Science'
-    }
-
-    if (fileName.startsWith('category/infra/')) {
-        return 'Infrastructure'
-    }
-
-    if (fileName.startsWith('data/shadcn/')) {
-        return 'UI/UX'
-    }
-
-    if (fileName.startsWith('data/v8/')) {
-        return 'Web'
-    }
-
-    return 'Docs'
-}
-
 function sortByDateDesc<T extends { date?: string }>(docs: T[]) {
     return [...docs].sort((a, b) => {
         const aTime = a.date ? new Date(a.date).getTime() : 0
@@ -77,38 +41,6 @@ function sortByDateDesc<T extends { date?: string }>(docs: T[]) {
 
         return bTime - aTime
     })
-}
-
-async function parseLocalSearchFile(
-    filePath: string
-): Promise<SearchData | null> {
-    const fileContents = await fs.readFile(filePath, 'utf8')
-    const doc = parseLocalDocument(
-        filePath,
-        toLocalContentFileName(filePath),
-        fileContents
-    )
-    if (!doc) return null
-    // The common parser already removed frontmatter; preserve body separators.
-    const content = doc.content.trim()
-
-    return {
-        id: doc.id,
-        title: doc.title,
-        summary: doc.summary,
-        content,
-        slug: doc.slug,
-        fileName: doc.fileName,
-        date: doc.date || undefined,
-        thumbnail: doc.thumbnail,
-        updatedAt: doc.updatedAt,
-        href: inferSearchHref(doc.fileName, doc.slug),
-        section: inferSearchSection(doc.fileName),
-        contentSource: 'local',
-        readMinutes: doc.readMinutes,
-        topicLabel: doc.topicLabel,
-        tags: doc.tags,
-    }
 }
 
 function normalizeRemoteSearchDoc(doc: Partial<Metadata>): SearchData | null {
@@ -143,21 +75,9 @@ function normalizeRemoteSearchDoc(doc: Partial<Metadata>): SearchData | null {
     }
 }
 
-async function getLocalSearchDocs() {
-    const files = await fg(LOCAL_SEARCH_PATTERNS, {
-        cwd: resolveLocalContentRoot(),
-        absolute: true,
-    })
-
-    const docs = (await Promise.all(files.map(parseLocalSearchFile))).filter(
-        (doc): doc is SearchData => doc !== null
-    )
-    return sortByDateDesc(docs)
-}
-
-async function getRemoteSearchDocs() {
+async function getRemoteSearchDocs(measure: ArticleTimingMeasure) {
     try {
-        const remoteDocs = await fetchRemoteDocsData()
+        const remoteDocs = await measure('search-remote', fetchRemoteDocsData)
 
         if (!remoteDocs) {
             return []
@@ -193,20 +113,25 @@ function mergeSearchDocs(localDocs: SearchData[], remoteDocs: SearchData[]) {
 
 type SearchDataOptions = {
     includeRemote?: boolean
+    observeRequest?: boolean
 }
 
 export async function getSearchData(
     keyword?: string,
     options: SearchDataOptions = {}
 ): Promise<SearchData[]> {
-    const localDocs = await getLocalSearchDocs()
+    const { measure, requestId } = options.observeRequest
+        ? await getRequestObservation()
+        : { measure: createArticleTiming(), requestId: null }
+    const localDocs = await measure('search-local', getLocalSearchIndex)
     const includeRemote =
         options.includeRemote ?? shouldIncludeRemoteContentIndex()
-    const remoteDocs = includeRemote ? await getRemoteSearchDocs() : []
+    const remoteDocs = includeRemote ? await getRemoteSearchDocs(measure) : []
     const docs = sortByDateDesc(mergeSearchDocs(localDocs, remoteDocs))
     const normalizedKeyword = normalizeSearchQuery(keyword).toLowerCase()
 
     logContentSource({
+        requestId,
         area: 'search',
         source: resolveCollectionContentSource(
             localDocs.length,
@@ -226,5 +151,5 @@ export async function getSearchData(
         return docs
     }
 
-    return rankSearchDocs(docs, normalizedKeyword)
+    return measure('search-rank', () => rankSearchDocs(docs, normalizedKeyword))
 }

@@ -107,10 +107,10 @@ category 기반 문서는 channel hub가 아니라 taxonomy source에서 시작�
 - `/category/{main}/{sub}`와 legacy 상세는 `getCategoryTopic`으로 **실제 main·sub 조합**을 검증한다. 다른 main에 존재하는 sub도 허용하지 않는다.
 - 대소문자 변경, glob 문자, 경로 이동 문법을 정리하거나 대체하여 허용하지 않는다. taxonomy에 없는 값은 `notFound()`로 처리한다.
 - `getSubCategoryData`·`getCategoryData`도 같은 경계를 검사한다. 잘못된 조합은 파일 검색 전에 `[]`를 반환한다. 페이지 검사만 믿지 않는다.
-- glob 패턴은 검증을 통과한 taxonomy 설정값으로 생성한다. URL 문자열을 직접 삽입하지 않는다.
+- 디렉터리 경로는 검증을 통과한 taxonomy 설정값으로 조합한다. URL 문자열을 직접 삽입하거나 glob 패턴으로 해석하지 않는다.
 - taxonomy를 확장할 때 설정과 실제 콘텐츠 디렉터리를 함께 추가한다. 허용 조합 검사도 실제 taxonomy를 읽어 실행한다.
 
-이 경계는 공개 URL이 glob 파서의 입력으로 쓰이는 경로를 차단한다. `braces` 자체의 취약점을 패치하거나 고정 glob 패턴을 사용하는 다른 경로까지 제거한 조치는 아니다.
+10-05의 입력 경계 보강은 패키지 패치와 별개다. 10-09에는 [ADR-0014](adr-0014-local-content-file-discovery.md)에 따라 docs의 카테고리·검색·revision 탐색을 기본 파일 API로 변경해 직접 운영 glob 경로를 제거했다. 개발 도구의 `braces`는 남아 있으며 패치 완료로 표시하지 않는다.
 
 Next.js 스트리밍에서 not-found는 HTTP `200`으로 나갈 수 있다. 오류 화면·`noindex`를 검사하고, canonical 리다이렉트도 HTTP 상태뿐 아니라 최종 URL·본문으로 확인한다. [구현·검증 보고서](../verification/security/2026-10-05-next-category-hardening.md).
 

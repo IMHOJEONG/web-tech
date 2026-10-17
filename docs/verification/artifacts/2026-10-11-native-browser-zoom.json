@@ -1,0 +1,1240 @@
+{
+  "checkedOn": "2026-10-11",
+  "browserVersion": "151.0.7922.34",
+  "scope": "Isolated Chromium headless; native browser automatic per-tab zoom via chrome.tabs API; no root font override, CSS zoom, device metrics override or pinch scaling; real test browser clipboard; one public article",
+  "results": [
+    {
+      "locale": "ko",
+      "theme": "light",
+      "requestedZoom": 0.8,
+      "status": 200,
+      "measuredZoom": 0.8,
+      "viewport": {
+        "width": 1600,
+        "outerWidth": 1280,
+        "dpr": 0.800000011920929,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 191.9921875,
+          "y": 10,
+          "width": 101.73828125,
+          "height": 43.984375
+        },
+        "search": {
+          "x": 1225.76171875,
+          "y": 10,
+          "width": 102.28515625,
+          "height": 43.984375
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "light",
+      "requestedZoom": 0.9,
+      "status": 200,
+      "measuredZoom": 0.9,
+      "viewport": {
+        "width": 1422,
+        "outerWidth": 1280,
+        "dpr": 0.8999999761581421,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 103.1076431274414,
+          "y": 10,
+          "width": 101.68403625488281,
+          "height": 43.99305725097656
+        },
+        "search": {
+          "x": 1137.135498046875,
+          "y": 10,
+          "width": 102.0138931274414,
+          "height": 43.99305725097656
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "light",
+      "requestedZoom": 1,
+      "status": 200,
+      "measuredZoom": 1,
+      "viewport": {
+        "width": 1280,
+        "outerWidth": 1280,
+        "dpr": 1,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 32,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        "search": {
+          "x": 1066.171875,
+          "y": 10,
+          "width": 101.828125,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "light",
+      "requestedZoom": 1.25,
+      "status": 200,
+      "measuredZoom": 1.25,
+      "viewport": {
+        "width": 1024,
+        "outerWidth": 1280,
+        "dpr": 1.25,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 32,
+          "y": 10,
+          "width": 101.73750305175781,
+          "height": 44
+        },
+        "search": {
+          "x": 810.5750122070312,
+          "y": 10,
+          "width": 101.42500305175781,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "light",
+      "requestedZoom": 1.5,
+      "status": 200,
+      "measuredZoom": 1.5,
+      "viewport": {
+        "width": 853,
+        "outerWidth": 1280,
+        "dpr": 1.5,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 32,
+          "y": 10,
+          "width": 101.73958587646484,
+          "height": 44
+        },
+        "search": {
+          "x": 705.3333740234375,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "light",
+      "requestedZoom": 2,
+      "status": 200,
+      "measuredZoom": 2,
+      "viewport": {
+        "width": 640,
+        "outerWidth": 1280,
+        "dpr": 2,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 24,
+          "y": 10,
+          "width": 101.7421875,
+          "height": 44
+        },
+        "search": {
+          "x": 524,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "light",
+      "requestedZoom": 4,
+      "status": 200,
+      "measuredZoom": 3.9999999999999996,
+      "viewport": {
+        "width": 320,
+        "outerWidth": 1280,
+        "dpr": 4,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 62,
+          "y": 10,
+          "width": 101.73828125,
+          "height": 44
+        },
+        "search": {
+          "x": 212,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "dark",
+      "requestedZoom": 0.8,
+      "status": 200,
+      "measuredZoom": 0.8,
+      "viewport": {
+        "width": 1600,
+        "outerWidth": 1280,
+        "dpr": 0.800000011920929,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 191.9921875,
+          "y": 10,
+          "width": 101.73828125,
+          "height": 43.984375
+        },
+        "search": {
+          "x": 1225.76171875,
+          "y": 10,
+          "width": 102.28515625,
+          "height": 43.984375
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "dark",
+      "requestedZoom": 0.9,
+      "status": 200,
+      "measuredZoom": 0.9,
+      "viewport": {
+        "width": 1422,
+        "outerWidth": 1280,
+        "dpr": 0.8999999761581421,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 103.1076431274414,
+          "y": 10,
+          "width": 101.68403625488281,
+          "height": 43.99305725097656
+        },
+        "search": {
+          "x": 1137.135498046875,
+          "y": 10,
+          "width": 102.0138931274414,
+          "height": 43.99305725097656
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "dark",
+      "requestedZoom": 1,
+      "status": 200,
+      "measuredZoom": 1,
+      "viewport": {
+        "width": 1280,
+        "outerWidth": 1280,
+        "dpr": 1,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 32,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        "search": {
+          "x": 1066.171875,
+          "y": 10,
+          "width": 101.828125,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "dark",
+      "requestedZoom": 1.25,
+      "status": 200,
+      "measuredZoom": 1.25,
+      "viewport": {
+        "width": 1024,
+        "outerWidth": 1280,
+        "dpr": 1.25,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 32,
+          "y": 10,
+          "width": 101.73750305175781,
+          "height": 44
+        },
+        "search": {
+          "x": 810.5750122070312,
+          "y": 10,
+          "width": 101.42500305175781,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "dark",
+      "requestedZoom": 1.5,
+      "status": 200,
+      "measuredZoom": 1.5,
+      "viewport": {
+        "width": 853,
+        "outerWidth": 1280,
+        "dpr": 1.5,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 32,
+          "y": 10,
+          "width": 101.73958587646484,
+          "height": 44
+        },
+        "search": {
+          "x": 705.3333740234375,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "dark",
+      "requestedZoom": 2,
+      "status": 200,
+      "measuredZoom": 2,
+      "viewport": {
+        "width": 640,
+        "outerWidth": 1280,
+        "dpr": 2,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 24,
+          "y": 10,
+          "width": 101.7421875,
+          "height": 44
+        },
+        "search": {
+          "x": 524,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "ko",
+      "theme": "dark",
+      "requestedZoom": 4,
+      "status": 200,
+      "measuredZoom": 3.9999999999999996,
+      "viewport": {
+        "width": 320,
+        "outerWidth": 1280,
+        "dpr": 4,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 62,
+          "y": 10,
+          "width": 101.73828125,
+          "height": 44
+        },
+        "search": {
+          "x": 212,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "requestedZoom": 0.8,
+      "status": 200,
+      "measuredZoom": 0.8,
+      "viewport": {
+        "width": 1600,
+        "outerWidth": 1280,
+        "dpr": 0.800000011920929,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 191.9921875,
+          "y": 10,
+          "width": 101.73828125,
+          "height": 43.984375
+        },
+        "search": {
+          "x": 1199.74609375,
+          "y": 10,
+          "width": 128.30078125,
+          "height": 43.984375
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "requestedZoom": 0.9,
+      "status": 200,
+      "measuredZoom": 0.9,
+      "viewport": {
+        "width": 1422,
+        "outerWidth": 1280,
+        "dpr": 0.8999999761581421,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 103.1076431274414,
+          "y": 10,
+          "width": 101.68403625488281,
+          "height": 43.99305725097656
+        },
+        "search": {
+          "x": 1111.1285400390625,
+          "y": 10,
+          "width": 128.02084350585938,
+          "height": 43.99305725097656
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "requestedZoom": 1,
+      "status": 200,
+      "measuredZoom": 1,
+      "viewport": {
+        "width": 1280,
+        "outerWidth": 1280,
+        "dpr": 1,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 32,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        "search": {
+          "x": 1040.171875,
+          "y": 10,
+          "width": 127.828125,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "requestedZoom": 1.25,
+      "status": 200,
+      "measuredZoom": 1.25,
+      "viewport": {
+        "width": 1024,
+        "outerWidth": 1280,
+        "dpr": 1.25,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 32,
+          "y": 10,
+          "width": 101.73750305175781,
+          "height": 44
+        },
+        "search": {
+          "x": 784.5750122070312,
+          "y": 10,
+          "width": 127.42500305175781,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "requestedZoom": 1.5,
+      "status": 200,
+      "measuredZoom": 1.5,
+      "viewport": {
+        "width": 853,
+        "outerWidth": 1280,
+        "dpr": 1.5,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 32,
+          "y": 10,
+          "width": 101.73958587646484,
+          "height": 44
+        },
+        "search": {
+          "x": 705.3333740234375,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "requestedZoom": 2,
+      "status": 200,
+      "measuredZoom": 2,
+      "viewport": {
+        "width": 640,
+        "outerWidth": 1280,
+        "dpr": 2,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 24,
+          "y": 10,
+          "width": 101.7421875,
+          "height": 44
+        },
+        "search": {
+          "x": 524,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "requestedZoom": 4,
+      "status": 200,
+      "measuredZoom": 3.9999999999999996,
+      "viewport": {
+        "width": 320,
+        "outerWidth": 1280,
+        "dpr": 4,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 62,
+          "y": 10,
+          "width": 101.73828125,
+          "height": 44
+        },
+        "search": {
+          "x": 212,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "requestedZoom": 0.8,
+      "status": 200,
+      "measuredZoom": 0.8,
+      "viewport": {
+        "width": 1600,
+        "outerWidth": 1280,
+        "dpr": 0.800000011920929,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 191.9921875,
+          "y": 10,
+          "width": 101.73828125,
+          "height": 43.984375
+        },
+        "search": {
+          "x": 1199.74609375,
+          "y": 10,
+          "width": 128.30078125,
+          "height": 43.984375
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "requestedZoom": 0.9,
+      "status": 200,
+      "measuredZoom": 0.9,
+      "viewport": {
+        "width": 1422,
+        "outerWidth": 1280,
+        "dpr": 0.8999999761581421,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 103.1076431274414,
+          "y": 10,
+          "width": 101.68403625488281,
+          "height": 43.99305725097656
+        },
+        "search": {
+          "x": 1111.1285400390625,
+          "y": 10,
+          "width": 128.02084350585938,
+          "height": 43.99305725097656
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "requestedZoom": 1,
+      "status": 200,
+      "measuredZoom": 1,
+      "viewport": {
+        "width": 1280,
+        "outerWidth": 1280,
+        "dpr": 1,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 32,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        "search": {
+          "x": 1040.171875,
+          "y": 10,
+          "width": 127.828125,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "requestedZoom": 1.25,
+      "status": 200,
+      "measuredZoom": 1.25,
+      "viewport": {
+        "width": 1024,
+        "outerWidth": 1280,
+        "dpr": 1.25,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 32,
+          "y": 10,
+          "width": 101.73750305175781,
+          "height": 44
+        },
+        "search": {
+          "x": 784.5750122070312,
+          "y": 10,
+          "width": 127.42500305175781,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "requestedZoom": 1.5,
+      "status": 200,
+      "measuredZoom": 1.5,
+      "viewport": {
+        "width": 853,
+        "outerWidth": 1280,
+        "dpr": 1.5,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 32,
+          "y": 10,
+          "width": 101.73958587646484,
+          "height": 44
+        },
+        "search": {
+          "x": 705.3333740234375,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "requestedZoom": 2,
+      "status": 200,
+      "measuredZoom": 2,
+      "viewport": {
+        "width": 640,
+        "outerWidth": 1280,
+        "dpr": 2,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 24,
+          "y": 10,
+          "width": 101.7421875,
+          "height": 44
+        },
+        "search": {
+          "x": 524,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "requestedZoom": 4,
+      "status": 200,
+      "measuredZoom": 3.9999999999999996,
+      "viewport": {
+        "width": 320,
+        "outerWidth": 1280,
+        "dpr": 4,
+        "rootFont": "16px",
+        "visualScale": 1,
+        "pageOverflow": false
+      },
+      "header": {
+        "brandSearchOverlap": false,
+        "brand": {
+          "x": 62,
+          "y": 10,
+          "width": 101.73828125,
+          "height": 44
+        },
+        "search": {
+          "x": 212,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "closed": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "opens": true,
+      "expandedCodeVisible": true,
+      "opened": {
+        "captionOverlap": false,
+        "clippedFooter": false
+      },
+      "closes": true,
+      "previewVisible": true,
+      "wholeClipboardCopy": true,
+      "errors": []
+    }
+  ],
+  "failures": 0
+}

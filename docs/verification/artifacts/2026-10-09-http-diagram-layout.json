@@ -1,0 +1,94 @@
+{
+  "observedAt": "2026-10-09T05:20:37.597Z",
+  "scope": "isolated app MDX renderer and CSS; not a Next route or deployment",
+  "results": [
+    {
+      "width": 1280,
+      "theme": "light",
+      "index": 0,
+      "figureWidth": 852,
+      "scrollWidth": 850,
+      "clientWidth": 850,
+      "columns": 2,
+      "steps": 6,
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "index": 1,
+      "figureWidth": 852,
+      "scrollWidth": 850,
+      "clientWidth": 850,
+      "columns": 2,
+      "steps": 6,
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "index": 0,
+      "figureWidth": 852,
+      "scrollWidth": 850,
+      "clientWidth": 850,
+      "columns": 2,
+      "steps": 6,
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "index": 1,
+      "figureWidth": 852,
+      "scrollWidth": 850,
+      "clientWidth": 850,
+      "columns": 2,
+      "steps": 6,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "index": 0,
+      "figureWidth": 342,
+      "scrollWidth": 340,
+      "clientWidth": 340,
+      "columns": 1,
+      "steps": 6,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "index": 1,
+      "figureWidth": 342,
+      "scrollWidth": 340,
+      "clientWidth": 340,
+      "columns": 1,
+      "steps": 6,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "index": 0,
+      "figureWidth": 342,
+      "scrollWidth": 340,
+      "clientWidth": 340,
+      "columns": 1,
+      "steps": 6,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "index": 1,
+      "figureWidth": 342,
+      "scrollWidth": 340,
+      "clientWidth": 340,
+      "columns": 1,
+      "steps": 6,
+      "passed": true
+    }
+  ]
+}
