@@ -2,7 +2,9 @@
 
 import { Check, Copy } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useLocale } from 'next-intl'
 import { cn } from '@web-tech/ui/lib/utils'
+import { getCodeCopyLabels } from '../lib/code-copy-labels'
 
 interface CodeCopyButtonProps {
     code: string
@@ -10,47 +12,51 @@ interface CodeCopyButtonProps {
 }
 
 export function CodeCopyButton({ code, className }: CodeCopyButtonProps) {
-    const [copied, setCopied] = useState(false)
+    const locale = useLocale()
+    const [status, setStatus] = useState<'idle' | 'copied' | 'error'>('idle')
+    const label = getCodeCopyLabels(locale)[status]
 
     useEffect(() => {
-        if (!copied) {
+        if (status === 'idle') {
             return
         }
 
         const timer = window.setTimeout(() => {
-            setCopied(false)
+            setStatus('idle')
         }, 1600)
 
         return () => {
             window.clearTimeout(timer)
         }
-    }, [copied])
+    }, [status])
 
     const handleCopy = async () => {
         if (!code.trim()) {
             return
         }
 
-        await navigator.clipboard.writeText(code)
-        setCopied(true)
+        try {
+            await navigator.clipboard.writeText(code)
+            setStatus('copied')
+        } catch {
+            setStatus('error')
+        }
     }
 
     return (
         <button
             type="button"
-            className={cn(
-                'inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/8 px-3 py-1.5 font-display text-[0.68rem] tracking-[0.14em] text-white/72 uppercase transition hover:border-primary/40 hover:bg-primary/12 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary',
-                className
-            )}
+            className={cn('mdx-code-copy-button', className)}
+            data-copy-state={status}
             onClick={handleCopy}
-            aria-label={copied ? '코드가 복사되었습니다' : '코드 복사'}
+            aria-label={label.announcement}
         >
-            {copied ? (
+            {status === 'copied' ? (
                 <Check className="size-3.5" aria-hidden="true" />
             ) : (
                 <Copy className="size-3.5" aria-hidden="true" />
             )}
-            <span>{copied ? '복사됨' : '복사'}</span>
+            <span aria-live="polite">{label.text}</span>
         </button>
     )
 }

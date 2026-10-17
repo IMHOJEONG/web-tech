@@ -1,0 +1,27 @@
+▶ macOS fixture and actual MDX: strict types, endpoint pairing, kernel state, full response
+  ✔ fixture strict type check (946.815584ms)
+  ✔ fixture connection 1 (146.357208ms)
+  ℹ {"kind":"fixture","run":1,"listening":{"address":"127.0.0.1","family":"IPv4","port":55539},"client":{"localAddress":"127.0.0.1","localPort":55540,"remoteAddress":"127.0.0.1","remotePort":55539},"accepted":{"localAddress":"127.0.0.1","localPort":55539,"remoteAddress":"127.0.0.1","remotePort":55540},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:55539 (LISTEN)","TCP 127.0.0.1:55540->127.0.0.1:55539 (ESTABLISHED)","TCP 127.0.0.1:55539->127.0.0.1:55540 (ESTABLISHED)"]}
+  ✔ fixture connection 2 (130.252958ms)
+  ℹ {"kind":"fixture","run":2,"listening":{"address":"127.0.0.1","family":"IPv4","port":55541},"client":{"localAddress":"127.0.0.1","localPort":55542,"remoteAddress":"127.0.0.1","remotePort":55541},"accepted":{"localAddress":"127.0.0.1","localPort":55541,"remoteAddress":"127.0.0.1","remotePort":55542},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:55541 (LISTEN)","TCP 127.0.0.1:55542->127.0.0.1:55541 (ESTABLISHED)","TCP 127.0.0.1:55541->127.0.0.1:55542 (ESTABLISHED)"]}
+  ✔ fixture connection 3 (175.133875ms)
+  ℹ {"kind":"fixture","run":3,"listening":{"address":"127.0.0.1","family":"IPv4","port":55543},"client":{"localAddress":"127.0.0.1","localPort":55544,"remoteAddress":"127.0.0.1","remotePort":55543},"accepted":{"localAddress":"127.0.0.1","localPort":55543,"remoteAddress":"127.0.0.1","remotePort":55544},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:55543 (LISTEN)","TCP 127.0.0.1:55544->127.0.0.1:55543 (ESTABLISHED)","TCP 127.0.0.1:55543->127.0.0.1:55544 (ESTABLISHED)"]}
+  ✔ actual-mdx strict type check (963.479375ms)
+  ✔ actual-mdx connection 1 (133.519166ms)
+  ℹ {"kind":"actual-mdx","run":1,"listening":{"address":"127.0.0.1","family":"IPv4","port":55546},"client":{"localAddress":"127.0.0.1","localPort":55547,"remoteAddress":"127.0.0.1","remotePort":55546},"accepted":{"localAddress":"127.0.0.1","localPort":55546,"remoteAddress":"127.0.0.1","remotePort":55547},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:55546 (LISTEN)","TCP 127.0.0.1:55547->127.0.0.1:55546 (ESTABLISHED)","TCP 127.0.0.1:55546->127.0.0.1:55547 (ESTABLISHED)"]}
+  ✔ actual-mdx connection 2 (135.53175ms)
+  ℹ {"kind":"actual-mdx","run":2,"listening":{"address":"127.0.0.1","family":"IPv4","port":55548},"client":{"localAddress":"127.0.0.1","localPort":55549,"remoteAddress":"127.0.0.1","remotePort":55548},"accepted":{"localAddress":"127.0.0.1","localPort":55548,"remoteAddress":"127.0.0.1","remotePort":55549},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:55548 (LISTEN)","TCP 127.0.0.1:55549->127.0.0.1:55548 (ESTABLISHED)","TCP 127.0.0.1:55548->127.0.0.1:55549 (ESTABLISHED)"]}
+  ✔ actual-mdx connection 3 (143.823ms)
+  ℹ {"kind":"actual-mdx","run":3,"listening":{"address":"127.0.0.1","family":"IPv4","port":55550},"client":{"localAddress":"127.0.0.1","localPort":55551,"remoteAddress":"127.0.0.1","remotePort":55550},"accepted":{"localAddress":"127.0.0.1","localPort":55550,"remoteAddress":"127.0.0.1","remotePort":55551},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:55550 (LISTEN)","TCP 127.0.0.1:55551->127.0.0.1:55550 (ESTABLISHED)","TCP 127.0.0.1:55550->127.0.0.1:55551 (ESTABLISHED)"]}
+✔ macOS fixture and actual MDX: strict types, endpoint pairing, kernel state, full response (2784.640459ms)
+ℹ {"observedAt":"2026-10-10T09:57:46.735Z","node":"v24.12.0","sourceSha256":"b3c91b82984341230ba06903fd6a22a460acdb8d1f84bab0eadcee7eefcd4cd2"}
+✔ wrong endpoint, missing kernel state and incomplete body fail verification (1.569291ms)
+✔ missing or reordered MDX parts fail source binding (0.424417ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2982.383084

@@ -1,0 +1,112 @@
+{
+  "observedAt": "2026-10-09T14:32:23.238Z",
+  "url": "http://127.0.0.1:3001/ko/preview/category/be/node-js/http-response-streaming-lab",
+  "scope": "actual existing Next development server; not production",
+  "results": [
+    {
+      "width": 1280,
+      "status": 200,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/diagrams/http-response-stages-wide.png",
+          "width": 944,
+          "loaded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/diagrams/http-response-local-architecture-wide.png",
+          "width": 944,
+          "loaded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/diagrams/http-response-completion-wide.png",
+          "width": 944,
+          "loaded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/diagrams/http-response-service-infrastructure-wide.png",
+          "width": 944,
+          "loaded": true
+        }
+      ],
+      "cancellationDisclosure": true
+    },
+    {
+      "width": 670,
+      "status": 200,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/diagrams/http-response-stages-wide.png",
+          "width": 622,
+          "loaded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/diagrams/http-response-local-architecture-wide.png",
+          "width": 622,
+          "loaded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/diagrams/http-response-completion-wide.png",
+          "width": 622,
+          "loaded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/diagrams/http-response-service-infrastructure-wide.png",
+          "width": 622,
+          "loaded": true
+        }
+      ],
+      "cancellationDisclosure": true
+    },
+    {
+      "width": 390,
+      "status": 200,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/diagrams/http-response-stages.png",
+          "width": 358,
+          "loaded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/diagrams/http-response-local-architecture.png",
+          "width": 358,
+          "loaded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/diagrams/http-response-completion.png",
+          "width": 358,
+          "loaded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/diagrams/http-response-service-infrastructure.png",
+          "width": 358,
+          "loaded": true
+        }
+      ],
+      "cancellationDisclosure": true
+    }
+  ],
+  "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+  "status": "draft",
+  "checks": {
+    "unitTests": {
+      "passed": 11,
+      "failed": 0
+    },
+    "applicationTypecheck": "passed",
+    "changedCodeLint": "passed",
+    "contentValidation": {
+      "files": 18,
+      "result": "passed"
+    },
+    "productionAndTestGuard": "unit-tested; real production build not run"
+  },
+  "limitations": [
+    "실제 기존 개발 서버 화면 검사이며 배포 검증이 아닙니다.",
+    "HTTP 예제 코드는 이전 26개 테스트·21회 실행 이후 변경하지 않았습니다. 이번 단계에서는 다시 실행하지 않았습니다.",
+    "운영 인프라 그림은 교육용 예시이며 실제 HeapForge 배치를 확인한 것이 아닙니다."
+  ],
+  "screenshots": [
+    "2026-10-09-http-draft-title-desktop.jpg",
+    "2026-10-09-http-draft-title-mobile.jpg"
+  ]
+}

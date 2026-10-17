@@ -1,0 +1,9 @@
+{
+  "observedAt": "2026-10-14T01:45:31.897Z",
+  "scope": "local development previews; unpublished drafts; no production deployment",
+  "views": [],
+  "failure": {
+    "name": "Error",
+    "message": "locator.click: Error: strict mode violation: locator('.mdx-wrapper details').nth(4).locator('summary') resolved to 3 elements:\n    1) <summary>취소 실험 코드 7단계 보기</summary> aka getByText('취소 실험 코드 7단계 보기')\n    2) <summary>…</summary> aka getByText('전체 코드 보기코드 접기 10 / 23줄Show full codeCollapse code 10 / 23 linesTS')\n    3) <summary>…</summary> aka getByText('전체 코드 보기코드 접기 10 / 32줄Show full codeCollapse code 10 / 32 linesTS')\n\nCall log:\n\u001b[2m  - waiting for locator('.mdx-wrapper details').nth(4).locator('summary')\u001b[22m\n"
+  }
+}

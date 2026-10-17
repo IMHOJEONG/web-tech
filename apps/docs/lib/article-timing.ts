@@ -9,9 +9,10 @@ import type {
 
 export function createArticleTiming(
     emit: (event: ArticleTimingEvent) => void = (event) => {
-        console.info('[docs.article_timing]', event)
+        console.info('[docs.article_timing]', JSON.stringify(event))
     },
-    now: () => number = () => performance.now()
+    now: () => number = () => performance.now(),
+    context: { requestId: string | null } = { requestId: null }
 ): ArticleTimingMeasure {
     const traceId = randomUUID()
 
@@ -31,6 +32,8 @@ export function createArticleTiming(
             try {
                 emit({
                     traceId,
+                    requestId: context.requestId,
+                    durationScope: 'operation',
                     stage,
                     outcome,
                     durationMs: Math.max(

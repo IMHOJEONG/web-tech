@@ -1,6 +1,7 @@
 import { cn } from '@web-tech/ui/lib/utils'
 import type { MDXComponents } from 'mdx/types'
 import Image, { type ImageProps } from 'next/image'
+import { getArticleDiagramSources } from '~/lib/article-diagram-sources'
 import { isValidElement, type ReactNode } from 'react'
 import {
     getCalloutVariantFromChildren,
@@ -9,7 +10,7 @@ import {
 } from '~/feature/callout/model/react-callout'
 import { getCalloutLabel } from '~/feature/callout/model/callout'
 import { highlightCode } from '~/feature/code-block/lib/highlight-code'
-import { CodeCopyButton } from '~/feature/code-block/ui/code-copy-button'
+import { CodeBlockFrame } from '~/feature/code-block/ui/code-block-frame'
 import { slugifyHeading } from '~/lib/slugify-heading'
 
 export const commonCss = [
@@ -144,20 +145,21 @@ export const components = {
     },
 
     pre: ({ children, className, ...props }) => {
-        if (className?.includes('shiki')) {
-            return (
-                <pre {...props} className={className}>
-                    {children}
-                </pre>
-            )
-        }
-
         const code = getCodeText(children)
         const language = getCodeLanguage(children)
 
+        if (className?.includes('shiki')) {
+            return (
+                <CodeBlockFrame code={code} language={language}>
+                    <pre {...props} className={className}>
+                        {children}
+                    </pre>
+                </CodeBlockFrame>
+            )
+        }
+
         return (
-            <figure className="mdx-code-frame">
-                <CodeCopyButton code={code} className="mdx-code-copy-button" />
+            <CodeBlockFrame code={code} language={language}>
                 <pre {...props} className={cn('mdx-code-block', commonCss)}>
                     <code
                         className="mdx-code-block__code"
@@ -166,24 +168,45 @@ export const components = {
                         }}
                     />
                 </pre>
-                <figcaption className="mdx-code-frame__language">
-                    {language}
-                </figcaption>
-            </figure>
+            </CodeBlockFrame>
         )
     },
 
-    img: (props) => (
-        <Image
-            className={cn('mdx-img', ...commonCss)}
-            sizes="100vw"
-            width={0}
-            height={0}
-            style={{ width: '100%', height: 'auto' }}
-            priority
-            placeholder="blur"
-            blurDataURL="/image/blur-image.webp"
-            {...(props as ImageProps)}
-        />
-    ),
+    img: (props) => {
+        const diagram = getArticleDiagramSources(props.src)
+        if (diagram) {
+            return (
+                <picture className="mdx-diagram">
+                    <source
+                        media="(min-width: 640px)"
+                        srcSet={diagram.landscape}
+                    />
+                    <Image
+                        {...(props as ImageProps)}
+                        src={diagram.portrait}
+                        alt={props.alt ?? ''}
+                        className="mdx-img"
+                        width={720}
+                        height={diagram.portraitHeight}
+                        style={{ width: '100%', height: 'auto' }}
+                        unoptimized
+                        loading="eager"
+                    />
+                </picture>
+            )
+        }
+        return (
+            <Image
+                className={cn('mdx-img', ...commonCss)}
+                sizes="100vw"
+                width={0}
+                height={0}
+                style={{ width: '100%', height: 'auto' }}
+                priority
+                placeholder="blur"
+                blurDataURL="/image/blur-image.webp"
+                {...(props as ImageProps)}
+            />
+        )
+    },
 } satisfies MDXComponents

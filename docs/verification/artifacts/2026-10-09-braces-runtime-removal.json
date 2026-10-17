@@ -1,0 +1,54 @@
+{
+  "verifiedAt": "2026-10-09",
+  "timezone": "Asia/Seoul",
+  "environment": "local-production",
+  "baseCommit": "c000e41",
+  "node": "24.12.0",
+  "pnpm": "11.10.0",
+  "next": "16.3.8",
+  "registryLatestBraces": "3.0.3",
+  "libraryTests": { "passed": 216, "failed": 0 },
+  "productionTests": { "passed": 4, "failed": 0, "elapsedSeconds": 26.8 },
+  "focusedLint": "passed",
+  "fileParity": {
+    "count": 18,
+    "sameFileSet": true,
+    "sameRevisionDigest": true
+  },
+  "traceChecks": {
+    "routes": 3,
+    "allDocumentsIncluded": true,
+    "removedGlobPackagePaths": 0
+  },
+  "streamClosedErrors": 4,
+  "audit": {
+    "production": {
+      "exitCode": 1,
+      "critical": 1,
+      "high": 3,
+      "moderate": 0,
+      "low": 1,
+      "bracesAdvisoryPresent": false
+    },
+    "all": {
+      "exitCode": 1,
+      "critical": 1,
+      "high": 4,
+      "moderate": 1,
+      "low": 1,
+      "bracesAdvisoryPresent": true
+    }
+  },
+  "notVerified": [
+    "remote-ci",
+    "vercel-deployment",
+    "nas-publication-and-restore",
+    "off-nas-backup-and-restore",
+    "whole-repository-braces-removal"
+  ],
+  "limitations": [
+    "Trace paths do not prove absence from internal bundles.",
+    "Passing publication tests do not classify stream errors as normal cancellation.",
+    "No credentials, request identifiers or document contents are recorded."
+  ]
+}

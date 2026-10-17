@@ -1,0 +1,50 @@
+{
+  "observedAt": "2026-10-10T10:33:20.367Z",
+  "url": "http://127.0.0.1:3001/ko/preview/category/be/node-js/tcp-socket-endpoints-lab",
+  "scope": "development preview; not production",
+  "sourceSha256": "ddfcfa5a4d01bd264e6cb834a4db16a5b22962ffbc825fddf2374ce7913096f7",
+  "results": [
+    {
+      "width": 1280,
+      "status": 200,
+      "uniqueTitle": true,
+      "codeSections": 5,
+      "diagram": {
+        "x": 552,
+        "y": 1009.65625,
+        "width": 448,
+        "height": 469
+      },
+      "scopeLimitsVisible": true,
+      "pageErrors": []
+    },
+    {
+      "width": 670,
+      "status": 200,
+      "uniqueTitle": true,
+      "codeSections": 5,
+      "diagram": {
+        "x": 111,
+        "y": 1114.90625,
+        "width": 448,
+        "height": 468.90625
+      },
+      "scopeLimitsVisible": true,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "status": 200,
+      "uniqueTitle": true,
+      "codeSections": 5,
+      "diagram": {
+        "x": 16,
+        "y": 1569.484375,
+        "width": 358,
+        "height": 374.78125
+      },
+      "scopeLimitsVisible": true,
+      "pageErrors": []
+    }
+  ]
+}

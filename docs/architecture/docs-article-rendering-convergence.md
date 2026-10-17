@@ -148,10 +148,34 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 
 - code block은 `.mdx-code-frame`으로 감싼다.
 - 실제 코드 영역은 `.mdx-code-block`을 사용한다.
-- 언어 라벨은 `.mdx-code-frame__language`로 우측 하단에 둔다.
+- 짧은 블록의 언어 라벨은 `.mdx-code-frame__language`로 우측 하단에 둔다.
+  접을 수 있는 블록은 `.mdx-code-disclosure__language`를 summary의 grid 안에 배치한다.
 - local MDX는 React component 기반 copy button을 가진다.
 - remote HTML은 같은 frame / language / lightweight highlight를 보장한다.
 - remote HTML copy button은 client enhancer로 부착한다.
+- 20줄을 넘는 블록은 기본 접힘 상태에서 처음 10줄을 미리 보여준다. 빈 코드와
+  마지막 개행 한 개는 줄 수를 늘리지 않으며, 20줄 이하 블록은 기존처럼 펼쳐 둔다.
+- local MDX와 remote HTML이 같은 줄 수·미리보기 규칙을 사용한다. local은
+  `CodeBlockFrame`, remote는 HTML 정규화 단계에서 출력 구조를 구성한다.
+- 펼치기·접기는 native `details / summary`로 구현한다. 별도 클라이언트 상태나
+  하이드레이션을 기다리지 않으며, Enter·Space와 JavaScript 비활성 환경에서도 동작한다.
+- 복사 버튼은 접힘 여부와 관계없이 미리보기가 아닌 전체 코드를 복사한다.
+  remote의 기존 HTML entity 해제·외부 공백 정규화 규칙은 변경하지 않는다.
+- 전체 코드의 기존 하이라이팅을 보존하고 미리보기에는 경량 하이라이터를 사용한다.
+  숨긴 전체 코드는 DOM에 남으므로 이 기능은 화면 밀도 개선이며 지연 로딩은 아니다.
+- 한국어/영어 펼치기 문구는 문서의 `html[lang]`에 맞추고, 언어 태그는 우측 하단에 유지한다.
+- 접힌 상태의 하단에는 `10 / 전체 줄 수`를 표시하고 미리보기 끝을 옅게 처리하여
+  나머지 코드가 있음을 알린다. 펼친 상태에는 전체 줄 수만 표시한다.
+- 복사는 중립적인 도구 버튼, 펼치기는 하단 조작 바로 구분한다. 조작 영역은 최소
+  44px 높이를 유지하며, 가벼운 색 전환은 `prefers-reduced-motion`에서 끈다.
+- 로컬·원격 복사 성공/실패 안내를 표시하고 주석·언어 라벨 대비를 확보한다.
+- 복사 기본·성공·실패·복구 문구와 접근성 이름은 같은 locale별 규칙을 공유한다.
+- 긴 블록의 하단 높이는 내용에 맞춘다. 줄 수도 줄바꿈을 허용하고 언어 태그와
+  별도 열에 배치하여 확대 시 겹침을 막는다. `::details-content` 지원 브라우저에서는
+  summary를 코드 아래에 두며, 미지원 브라우저에서는 펼친 코드 위의 정상 흐름을
+  유지한다. 어느 경우에도 native 숨김·펼침과 키보드 동작을 유지한다.
+- 회귀 검사: 저장소 루트에서 `mise exec -- pnpm --filter docs test:code-block`.
+  NAS 연결 없이 실제 코드 프레임·원격 정규화·복사 enhancer와 CSS를 Chromium에서 검사한다.
 
 ### Table
 
@@ -214,8 +238,23 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 - 작성자가 추가로 배워야 하는 규칙이 과하지 않은가?
 - 장애 시 local fallback이 유지되는가?
 
+## Development Draft Preview
+
+로컬 draft는 개발 전용 `/[locale]/preview/[...slugParts]`에서 확인한다.
+`getLocalDraftPreview`는 development 환경을 먼저 검사하고 등록된 정규 Markdown
+파일 중 draft만 반환한다. production/test의 공개 콘텐츠 정책은 유지한다.
+본문은 기존 MDX 컴포넌트와 `ArticleContentLayout`으로 렌더링하고 noindex/nofollow를
+설정한다. 원격 콘텐츠 조회나 별도 공개 목록 생성은 수행하지 않는다.
+
+HTTP 교육용 도식 네 장은 알려진 `/diagrams/http-response-…png`에 한해
+`picture/source`로 640px 이상에서 가로형 PNG를 선택한다. 모바일과 파일 미리보기는
+세로형을 유지하고 다른 이미지·원격 HTML의 렌더링 계약은 그대로 유지한다.
+검사 절차는 [상세 렌더링 회귀 테스트](../runbooks/docs-article-rendering-regression.md)의
+개발 서버 초안 절차를 따른다.
+
 ## Related Docs
 
+- [코드 블록 접기 적용 기록](../worklog/2026-10/2026-10-09-code-block-disclosure.md)
 - [docs-content-rendering-strategy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-rendering-strategy.md)
 - [docs-content-operating-model.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-operating-model.md)
 - [blog-content-html-vs-markdown.md](/Users/coder/Desktop/project/web-tech/docs/architecture/blog-content-html-vs-markdown.md)

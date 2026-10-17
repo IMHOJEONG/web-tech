@@ -8,7 +8,7 @@ import {
 } from '~/shared/i18n/locale-path'
 import { cache, Suspense } from 'react'
 import { RemoteCodeCopyEnhancer } from '~/feature/code-block/ui/remote-code-copy-enhancer'
-import { createArticleTiming } from '~/lib/article-timing'
+import { getRequestObservation } from '~/lib/request-observation'
 import { buildArticleMetadata } from '~/lib/localized-metadata'
 import {
     getDocHref,
@@ -20,8 +20,12 @@ import { components } from '~/mdx-components'
 import { LoadingComponent } from '~/shared/loading-component'
 import { ArticleContentLayout } from '~/widgets/article-detail/ui/article-content-layout'
 import { ArticleSupplementary } from '~/widgets/article-detail/ui/article-supplementary'
+import { ArticleStructuredData } from '~/widgets/article-detail/ui/article-structured-data'
 
-const getCachedDocByRoutePath = cache(getDocByRoutePath)
+const getCachedDocByRoutePath = cache(async (routePath: string) => {
+    const { measure } = await getRequestObservation()
+    return measure('document-load', () => getDocByRoutePath(routePath, measure))
+})
 
 export async function generateMetadata({
     params,
@@ -44,25 +48,29 @@ export default async function Page({
 }: {
     params: Promise<{ slugParts: string[] }>
 }) {
-    const measure = createArticleTiming()
+    const { measure, requestId } = await getRequestObservation()
     const { slugParts } = await params
     const routePath = slugParts.join('/')
     const target = await measure('document-select', () =>
         getCachedDocByRoutePath(routePath)
+    )
+    console.info(
+        '[docs.document_selection]',
+        JSON.stringify({
+            requestId,
+            source: target?.contentSource ?? (target ? 'local' : 'none'),
+            outcome: target ? 'found' : 'missing',
+        })
     )
 
     if (!target) {
         notFound()
     }
 
+    const value = await getLocale()
+    const locale = isLocale(value) ? value : defaultLocale
     if (shouldRedirectToCanonicalDocRoute(target, routePath)) {
-        const locale = await getLocale()
-        permanentRedirect(
-            localizePath(
-                getDocHref(target),
-                isLocale(locale) ? locale : defaultLocale
-            )
-        )
+        permanentRedirect(localizePath(getDocHref(target), locale))
     }
 
     const renderedArticle = await measure('content-render', () =>
@@ -75,8 +83,9 @@ export default async function Page({
         <ArticleSupplementary target={target} measure={measure} />
     )
 
-    if (renderedArticle.mode === 'html') {
-        return (
+    return (
+        <>
+            <ArticleStructuredData article={target} locale={locale} />
             <ArticleContentLayout
                 fallbackTitle={
                     renderedArticle.hasTitle ? undefined : target.title
@@ -85,28 +94,22 @@ export default async function Page({
                 toc={renderedArticle.toc}
             >
                 <div className="mdx-wrapper">
-                    <article
-                        dangerouslySetInnerHTML={{
-                            __html: renderedArticle.content,
-                        }}
-                    />
-                    <RemoteCodeCopyEnhancer />
+                    {renderedArticle.mode === 'html' ? (
+                        <>
+                            <article
+                                dangerouslySetInnerHTML={{
+                                    __html: renderedArticle.content,
+                                }}
+                            />
+                            <RemoteCodeCopyEnhancer />
+                        </>
+                    ) : (
+                        <Suspense fallback={<LoadingComponent />}>
+                            {renderedArticle.content}
+                        </Suspense>
+                    )}
                 </div>
             </ArticleContentLayout>
-        )
-    }
-
-    return (
-        <ArticleContentLayout
-            fallbackTitle={renderedArticle.hasTitle ? undefined : target.title}
-            supplementary={supplementary}
-            toc={renderedArticle.toc}
-        >
-            <div className="mdx-wrapper">
-                <Suspense fallback={<LoadingComponent />}>
-                    {renderedArticle.content}
-                </Suspense>
-            </div>
-        </ArticleContentLayout>
+        </>
     )
 }

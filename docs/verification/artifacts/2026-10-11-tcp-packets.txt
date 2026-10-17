@@ -1,0 +1,18 @@
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on lo0, link-type NULL (BSD loopback), snapshot length 524288 bytes
+2026-10-11 14:12:37.706212 IP 127.0.0.1.60187 > 127.0.0.1.60116: Flags [S], seq 197459810, win 65535, options [mss 16344,nop,wscale 6,nop,nop,TS val 2794038158 ecr 0,sackOK,eol], length 0
+2026-10-11 14:12:37.706308 IP 127.0.0.1.60116 > 127.0.0.1.60187: Flags [S.], seq 1070684333, ack 197459811, win 65535, options [mss 16344,nop,wscale 6,nop,nop,TS val 3755766714 ecr 2794038158,sackOK,eol], length 0
+2026-10-11 14:12:37.706325 IP 127.0.0.1.60187 > 127.0.0.1.60116: Flags [.], ack 1070684334, win 6380, options [nop,nop,TS val 2794038158 ecr 3755766714], length 0
+2026-10-11 14:12:37.706335 IP 127.0.0.1.60116 > 127.0.0.1.60187: Flags [.], ack 197459811, win 6380, options [nop,nop,TS val 3755766714 ecr 2794038158], length 0
+2026-10-11 14:12:37.709360 IP 127.0.0.1.60187 > 127.0.0.1.60116: Flags [P.], seq 197459811:197459871, ack 1070684334, win 6380, options [nop,nop,TS val 2794038161 ecr 3755766714], length 60
+2026-10-11 14:12:37.709398 IP 127.0.0.1.60116 > 127.0.0.1.60187: Flags [.], ack 197459871, win 6380, options [nop,nop,TS val 3755766717 ecr 2794038161], length 0
+2026-10-11 14:12:37.752861 IP 127.0.0.1.60116 > 127.0.0.1.60187: Flags [P.], seq 1070684334:1070684470, ack 197459871, win 6380, options [nop,nop,TS val 3755766761 ecr 2794038161], length 136
+2026-10-11 14:12:37.752921 IP 127.0.0.1.60187 > 127.0.0.1.60116: Flags [.], ack 1070684470, win 6378, options [nop,nop,TS val 2794038205 ecr 3755766761], length 0
+2026-10-11 14:12:37.754009 IP 127.0.0.1.60116 > 127.0.0.1.60187: Flags [F.], seq 1070684470, ack 197459871, win 6380, options [nop,nop,TS val 3755766762 ecr 2794038205], length 0
+2026-10-11 14:12:37.754056 IP 127.0.0.1.60187 > 127.0.0.1.60116: Flags [.], ack 1070684471, win 6378, options [nop,nop,TS val 2794038206 ecr 3755766762], length 0
+2026-10-11 14:12:37.755833 IP 127.0.0.1.60187 > 127.0.0.1.60116: Flags [F.], seq 197459871, ack 1070684471, win 6378, options [nop,nop,TS val 2794038208 ecr 3755766762], length 0
+2026-10-11 14:12:37.755922 IP 127.0.0.1.60116 > 127.0.0.1.60187: Flags [.], ack 197459872, win 6380, options [nop,nop,TS val 3755766764 ecr 2794038208], length 0
+
+12 packets captured
+58 packets received by filter
+0 packets dropped by kernel

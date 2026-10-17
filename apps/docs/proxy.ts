@@ -1,4 +1,5 @@
-import { NextResponse, type NextRequest } from 'next/server'
+import { NextResponse, NextRequest } from 'next/server'
+import { REQUEST_ID_HEADER } from './lib/runtime-observation'
 import { getRequestBlockReason } from './lib/request-blocklist'
 import createMiddleware from 'next-intl/middleware'
 import { routing } from './shared/i18n/routing'
@@ -14,13 +15,28 @@ export function proxy(request: NextRequest) {
 
     if (!blockReason) {
         const pathname = request.nextUrl.pathname
+        const requestHeaders = new Headers(request.headers)
+        const requestId = crypto.randomUUID()
+        requestHeaders.set(REQUEST_ID_HEADER, requestId)
         if (
             /^\/(api|_next|_vercel)(\/|$)/.test(pathname) ||
             /\.[^/]+$/.test(pathname)
         ) {
-            return NextResponse.next()
+            const response = NextResponse.next({
+                request: { headers: requestHeaders },
+            })
+            if (pathname === '/api/search')
+                response.headers.set(REQUEST_ID_HEADER, requestId)
+            return response
         }
-        return handleLocale(request)
+        // Never accept an external correlation ID as our server-issued ID.
+        const response = handleLocale(
+            new NextRequest(request, { headers: requestHeaders })
+        )
+        if (/^\/docs(?:\/|$)/.test(stripLocale(pathname))) {
+            response.headers.set(REQUEST_ID_HEADER, requestId)
+        }
+        return response
     }
 
     console.warn('[docs] Blocked suspicious request.', {

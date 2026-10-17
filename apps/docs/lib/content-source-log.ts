@@ -1,4 +1,5 @@
 type ContentSourceLogPayload = {
+    requestId?: string | null
     area: 'detail' | 'index' | 'search'
     source: ContentSourceLogValue
     reason: string

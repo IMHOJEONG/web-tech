@@ -1,20 +1,14 @@
-import js from "@eslint/js";
 import pluginNext from "@next/eslint-plugin-next";
 import prettier from "eslint-config-prettier/flat";
 import pluginReact from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
 import { globalIgnores } from "eslint/config";
 import globals from "globals";
-import tseslint from "typescript-eslint";
 import baseConfig from "./base.js";
 
 export default [
   // ✅ 2️⃣ base config (default export 전제)
   ...baseConfig,
-
-  // ✅ 3️⃣ JS / TS
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
 
   // ✅ 4️⃣ Next.js 기본 ignore
   globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
