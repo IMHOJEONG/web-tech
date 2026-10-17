@@ -1,0 +1,48 @@
+{
+  "recordedAt": "2026-10-14T01:43:56.258Z",
+  "scope": "observed CLI summary; not raw command output",
+  "deployment": {
+    "url": "https://web-tech-642ctbic8-hojeong-ims-projects.vercel.app",
+    "state": "READY",
+    "target": "production",
+    "branch": "feature/docs",
+    "commit": "d8c09527f8cb9195aa16258fee9b2bec916ee818",
+    "createdAt": 1791727890436,
+    "readyAt": 1791727979396
+  },
+  "checks": {
+    "httpTypecheck": true,
+    "httpPassed": 26,
+    "httpFailed": 0,
+    "socketPassed": 11,
+    "socketFailed": 0,
+    "contentFiles": 19,
+    "threeAgentReview": true,
+    "draftViews": 4,
+    "draftFailure": null,
+    "documentation": {
+      "scope": "working tree; no staging",
+      "files": 18,
+      "issues": []
+    }
+  },
+  "drafts": [
+    {
+      "slug": "http-response-streaming-lab",
+      "status": "draft",
+      "sha256": "f1d02e0877ad496e633d88b53b5876064afe1664fe55e6eb832f418e461ac6fc"
+    },
+    {
+      "slug": "tcp-socket-endpoints-lab",
+      "status": "draft",
+      "sha256": "2b7aebacabf042e0dd01309bcf4c97541a76c511fbdd3360554f191ab0c95fff"
+    }
+  ],
+  "limitations": [
+    "Sandbox listen EPERM failed initial execution; approved rerun passed",
+    "Public fetch tool failed; approved browser verified actual body",
+    "Initial published example checker searched drained instead of actual drain; fixed checker passed"
+  ],
+  "stagedCommittedPushed": false,
+  "finalizedAt": "2026-10-14T01:59:03.667Z"
+}

@@ -1,0 +1,36 @@
+▶ bound MDX source: extraction, hidden local tooling, strict types and execution
+  ✔ exact draft code: normal, run 1 (523.361125ms)
+  ✔ exact draft code: normal, run 2 (442.626ms)
+  ✔ exact draft code: normal, run 3 (480.225667ms)
+  ✔ exact draft code: cancel, run 1 (91.160959ms)
+  ✔ exact draft code: cancel, run 2 (89.091334ms)
+  ✔ exact draft code: cancel, run 3 (83.438292ms)
+  ✔ exact draft code: comparison-streaming, run 1 (391.405958ms)
+  ✔ exact draft code: comparison-streaming, run 2 (400.458834ms)
+  ✔ exact draft code: comparison-streaming, run 3 (393.482292ms)
+  ✔ exact draft code: comparison-buffered, run 1 (387.315166ms)
+  ✔ exact draft code: comparison-buffered, run 2 (401.028958ms)
+  ✔ exact draft code: comparison-buffered, run 3 (396.343375ms)
+✔ bound MDX source: extraction, hidden local tooling, strict types and execution (8331.916125ms)
+ℹ sourceSha256=fe628d5c889c5b467c3fa9f2fcefbd9f973e7a3b6c5eced34f3cd19cb7fb50c9
+ℹ {"mode":"normal","run":1,"events":["server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"normal","run":2,"events":["server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"normal","run":3,"events":["server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"cancel","run":1,"events":["server write first","client status: 200","client data: \"first\\n\"","client deliberate cancel","client close complete=false","server close writableFinished=false","server pending timer cleared","PASS deliberate cancel: partial body, no client end, no server finish, timer cleared"]}
+ℹ {"mode":"cancel","run":2,"events":["server write first","client status: 200","client data: \"first\\n\"","client deliberate cancel","client close complete=false","server close writableFinished=false","server pending timer cleared","PASS deliberate cancel: partial body, no client end, no server finish, timer cleared"]}
+ℹ {"mode":"cancel","run":3,"events":["server write first","client status: 200","client data: \"first\\n\"","client deliberate cancel","client close complete=false","server close writableFinished=false","server pending timer cleared","PASS deliberate cancel: partial body, no client end, no server finish, timer cleared"]}
+ℹ {"mode":"comparison-streaming","run":1,"events":["server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"comparison-streaming","run":2,"events":["server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"comparison-streaming","run":3,"events":["server write first: true","client status: 200","client data: \"first\\n\"","server end second","server finish","server close writableFinished=true","client data: \"second\\n\"","client end"]}
+ℹ {"mode":"comparison-buffered","run":1,"events":["client status: 200","server end second","server finish","server close writableFinished=true","client data: \"first\\nsecond\\n\"","client end"]}
+ℹ {"mode":"comparison-buffered","run":2,"events":["client status: 200","server end second","server finish","server close writableFinished=true","client data: \"first\\nsecond\\n\"","client end"]}
+ℹ {"mode":"comparison-buffered","run":3,"events":["client status: 200","server end second","server finish","server close writableFinished=true","client data: \"first\\nsecond\\n\"","client end"]}
+✔ split article binding rejects missing, duplicated, reordered and unknown parts (1.491667ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8417.146666

@@ -53,6 +53,17 @@
 
 [브라우저 회귀 테스트](../../apps/docs/e2e/mobile-drawer-resize.spec.ts)는 경계값과 가로/세로 viewport 전환, 실제 wheel 스크롤 복구, desktop 링크 포커스 가능 여부, 모바일 복귀 후 재열기를 확인한다. 결과는 [작업 기록](../worklog/2026-09/2026-09-22-mobile-drawer-resize.md)에 남긴다.
 
+### 큰 기본 글자 설정의 헤더 (2026-10-11)
+
+- 글자 크기를 고정 px로 낮추거나 확대를 차단하지 않는다. 기본 설정에서는 기존 65px 높이를 유지한다.
+- 모바일 헤더는 메뉴·브랜드·검색/언어 버튼의 grid 영역을 분리한다. 헤더 컨테이너가 `20rem`보다 좁으면 브랜드를 첫 줄, 메뉴와 버튼을 둘째 줄에 배치한다. 기본 글자 16px에서는 320px 미만, 32px에서는 640px 미만이며 브라우저 zoom과 별개다.
+- 모바일 좌우 여백은 `min(1rem, 16px)`로 제한해 확대 시 글자와 조작 영역에 공간을 우선 배분한다. 로고 전체 이름과 기존 언어/검색 기능은 유지한다.
+- `HeaderFrame`은 높이 측정만 담당하는 작은 client boundary다. 서버 `Header`의 children을 유지하고, `ResizeObserver`로 실제 높이를 `--docs-header-height`에 반영한다. 관찰과 속성은 unmount 시 정리한다.
+- 본문 바로가기·MDX 제목의 scroll margin·고정 목차의 top/max-height는 이 속성을 사용한다. 측정 전에는 기존 rem 기준으로 fallback하며, 검색 패널은 기존처럼 헤더의 `100%` 아래에 둔다.
+- 회귀 검사는 CSS root 글자 확대와 격리 Chromium의 실제 기본 글자 설정을 구분한다. 사용자 브라우저 설정은 수정하지 않는다. 배포·설치 Chrome·실기기 검증은 별도다.
+
+[수정 검증](../verification/accessibility/2026-10-11-header-font-preference.md), [작업 기록](../worklog/2026-10/2026-10-11-header-font-preference.md).
+
 ### Initial Application
 
 현재 이 정책은 아래 shell 레이어에 먼저 적용되었다.

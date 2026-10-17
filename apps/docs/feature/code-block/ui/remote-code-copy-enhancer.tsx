@@ -1,24 +1,30 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useLocale } from 'next-intl'
+import { getCodeCopyLabels } from '../lib/code-copy-labels'
 
 const REMOTE_CODE_COPY_BUTTON_ATTRIBUTE = 'data-remote-code-copy-button'
 const COPIED_RESET_DELAY_MS = 1600
 
-function createRemoteCodeCopyButton(code: string) {
+function createRemoteCodeCopyButton(code: string, locale: string) {
     const button = document.createElement('button')
+    const labels = getCodeCopyLabels(locale)
 
     button.type = 'button'
     button.className = 'mdx-code-copy-button mdx-code-copy-button--remote'
-    button.textContent = '복사'
+    button.textContent = labels.idle.text
     button.setAttribute(REMOTE_CODE_COPY_BUTTON_ATTRIBUTE, 'true')
-    button.setAttribute('aria-label', '코드 복사')
+    button.setAttribute('aria-label', labels.idle.announcement)
+    button.setAttribute('aria-live', 'polite')
+    button.dataset.copyState = 'idle'
 
     let resetTimer: number | undefined
 
     const resetButton = () => {
-        button.textContent = '복사'
-        button.setAttribute('aria-label', '코드 복사')
+        button.textContent = labels.idle.text
+        button.setAttribute('aria-label', labels.idle.announcement)
+        button.dataset.copyState = 'idle'
     }
 
     const handleClick = async () => {
@@ -28,11 +34,13 @@ function createRemoteCodeCopyButton(code: string) {
 
         try {
             await navigator.clipboard.writeText(code)
-            button.textContent = '복사됨'
-            button.setAttribute('aria-label', '코드가 복사되었습니다')
+            button.textContent = labels.copied.text
+            button.setAttribute('aria-label', labels.copied.announcement)
+            button.dataset.copyState = 'copied'
         } catch {
-            button.textContent = '복사 실패'
-            button.setAttribute('aria-label', '코드 복사에 실패했습니다')
+            button.textContent = labels.error.text
+            button.setAttribute('aria-label', labels.error.announcement)
+            button.dataset.copyState = 'error'
         }
 
         if (resetTimer) {
@@ -58,6 +66,7 @@ function createRemoteCodeCopyButton(code: string) {
 }
 
 export function RemoteCodeCopyEnhancer() {
+    const locale = useLocale()
     useEffect(() => {
         const cleanups: Array<() => void> = []
         const codeFrames = document.querySelectorAll<HTMLElement>(
@@ -70,13 +79,14 @@ export function RemoteCodeCopyEnhancer() {
             }
 
             const codeElement = codeFrame.querySelector<HTMLElement>('pre code')
-            const code = codeElement?.innerText ?? ''
+            // The full pre precedes the preview and may be inside closed details.
+            const code = codeElement?.textContent ?? ''
 
             if (!code.trim()) {
                 return
             }
 
-            const { button, cleanup } = createRemoteCodeCopyButton(code)
+            const { button, cleanup } = createRemoteCodeCopyButton(code, locale)
 
             codeFrame.appendChild(button)
             cleanups.push(cleanup)
@@ -85,7 +95,7 @@ export function RemoteCodeCopyEnhancer() {
         return () => {
             cleanups.forEach((cleanup) => cleanup())
         }
-    }, [])
+    }, [locale])
 
     return null
 }

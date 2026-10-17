@@ -1,0 +1,150 @@
+{
+  "observedAt": "2026-10-14T03:44:04.057Z",
+  "base": "http://127.0.0.1:3005",
+  "canonical": "https://heap-forge.app/ko/docs/category/be/node-js/http-response-streaming-lab",
+  "views": [
+    {
+      "width": 1280,
+      "status": 200,
+      "first": true,
+      "last": true,
+      "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+      "h1": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+      "canonical": "https://heap-forge.app/ko/docs/category/be/node-js/http-response-streaming-lab",
+      "description": "두 조각으로 나누어 보내는 HTTP 응답을 직접 실행하며 서버의 write(), finish와 클라이언트 수신이 서로 다른 시점임을 알아봅니다.",
+      "ld": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "@id": "https://heap-forge.app/ko/docs/category/be/node-js/http-response-streaming-lab#article",
+          "url": "https://heap-forge.app/ko/docs/category/be/node-js/http-response-streaming-lab",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://heap-forge.app/ko/docs/category/be/node-js/http-response-streaming-lab"
+          },
+          "headline": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+          "description": "두 조각으로 나누어 보내는 HTTP 응답을 직접 실행하며 서버의 write(), finish와 클라이언트 수신이 서로 다른 시점임을 알아봅니다.",
+          "image": ["https://heap-forge.app/default/local-document.svg"],
+          "datePublished": "2026-10-14",
+          "dateModified": "2026-10-14",
+          "author": {
+            "@type": "Person",
+            "name": "HoJeong Im"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "HEAP-FORGE",
+            "url": "https://heap-forge.app"
+          },
+          "articleSection": "BACKEND",
+          "keywords": "nodejs, stream, http"
+        }
+      ],
+      "overflow": 0,
+      "images": [
+        {
+          "src": "/diagrams/http-response-stages-wide.png",
+          "width": 920,
+          "height": 310.5,
+          "naturalWidth": 1600
+        },
+        {
+          "src": "/diagrams/http-response-local-architecture-wide.png",
+          "width": 920,
+          "height": 425.5,
+          "naturalWidth": 1600
+        },
+        {
+          "src": "/diagrams/http-response-completion-wide.png",
+          "width": 920,
+          "height": 356.5,
+          "naturalWidth": 1600
+        },
+        {
+          "src": "/diagrams/http-response-service-infrastructure-wide.png",
+          "width": 920,
+          "height": 345,
+          "naturalWidth": 1600
+        }
+      ],
+      "nestedParagraphs": 0,
+      "typescriptBlocks": 0,
+      "pageErrors": [],
+      "previousArticle200": true
+    },
+    {
+      "width": 390,
+      "status": 200,
+      "first": true,
+      "last": true,
+      "title": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+      "h1": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+      "canonical": "https://heap-forge.app/ko/docs/category/be/node-js/http-response-streaming-lab",
+      "description": "두 조각으로 나누어 보내는 HTTP 응답을 직접 실행하며 서버의 write(), finish와 클라이언트 수신이 서로 다른 시점임을 알아봅니다.",
+      "ld": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "@id": "https://heap-forge.app/ko/docs/category/be/node-js/http-response-streaming-lab#article",
+          "url": "https://heap-forge.app/ko/docs/category/be/node-js/http-response-streaming-lab",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://heap-forge.app/ko/docs/category/be/node-js/http-response-streaming-lab"
+          },
+          "headline": "Node.js HTTP 스트리밍: 응답이 도착하는 과정",
+          "description": "두 조각으로 나누어 보내는 HTTP 응답을 직접 실행하며 서버의 write(), finish와 클라이언트 수신이 서로 다른 시점임을 알아봅니다.",
+          "image": ["https://heap-forge.app/default/local-document.svg"],
+          "datePublished": "2026-10-14",
+          "dateModified": "2026-10-14",
+          "author": {
+            "@type": "Person",
+            "name": "HoJeong Im"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "HEAP-FORGE",
+            "url": "https://heap-forge.app"
+          },
+          "articleSection": "BACKEND",
+          "keywords": "nodejs, stream, http"
+        }
+      ],
+      "overflow": 0,
+      "images": [
+        {
+          "src": "/diagrams/http-response-stages.png",
+          "width": 334,
+          "height": 508.421875,
+          "naturalWidth": 720
+        },
+        {
+          "src": "/diagrams/http-response-local-architecture.png",
+          "width": 334,
+          "height": 575.21875,
+          "naturalWidth": 720
+        },
+        {
+          "src": "/diagrams/http-response-completion.png",
+          "width": 334,
+          "height": 476.875,
+          "naturalWidth": 720
+        },
+        {
+          "src": "/diagrams/http-response-service-infrastructure.png",
+          "width": 334,
+          "height": 632.734375,
+          "naturalWidth": 720
+        }
+      ],
+      "nestedParagraphs": 0,
+      "typescriptBlocks": 0,
+      "pageErrors": [],
+      "previousArticle200": true
+    }
+  ],
+  "sitemap": {
+    "status": 200,
+    "contains": true,
+    "tcpDraftIncluded": false
+  }
+}

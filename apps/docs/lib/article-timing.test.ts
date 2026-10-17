@@ -46,3 +46,15 @@ test('a broken logger cannot break rendering', async () => {
     })
     assert.equal(await measure('navigation-load', () => 42), 42)
 })
+
+test('operation spans retain server request correlation', async () => {
+    const events: ArticleTimingEvent[] = []
+    const measure = createArticleTiming(
+        (event) => events.push(event),
+        () => 5,
+        { requestId: 'request-1' }
+    )
+    await measure('search-local', () => [])
+    assert.equal(events[0]?.requestId, 'request-1')
+    assert.equal(events[0]?.durationScope, 'operation')
+})

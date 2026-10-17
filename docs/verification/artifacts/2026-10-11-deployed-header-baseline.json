@@ -1,0 +1,860 @@
+{
+  "checkedOn": "2026-10-11",
+  "scope": "Public deployed article; Chromium headless; explicit root font size, not native browser zoom",
+  "results": [
+    {
+      "locale": "ko",
+      "width": 320,
+      "rootFontScale": 1,
+      "status": 200,
+      "rootFont": "16px",
+      "pageOverflow": false,
+      "headerHeight": 65,
+      "brandSearchOverlap": false,
+      "nodes": [
+        {
+          "name": "내비게이션 메뉴 열기",
+          "x": 16,
+          "y": 18,
+          "width": 34,
+          "height": 28
+        },
+        {
+          "name": "HEAP-FORGE",
+          "x": 62,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        {
+          "name": "문서 검색",
+          "x": 212,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "문서 검색",
+          "x": 254,
+          "y": 81,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "View in English",
+          "x": 260,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "width": 320,
+      "rootFontScale": 2,
+      "status": 200,
+      "rootFont": "32px",
+      "pageOverflow": false,
+      "headerHeight": 130,
+      "brandSearchOverlap": true,
+      "nodes": [
+        {
+          "name": "내비게이션 메뉴 열기",
+          "x": 32,
+          "y": 36,
+          "width": 43.421875,
+          "height": 56
+        },
+        {
+          "name": "HEAP-FORGE",
+          "x": 99.421875,
+          "y": 8,
+          "width": 129.953125,
+          "height": 112
+        },
+        {
+          "name": "문서 검색",
+          "x": 104,
+          "y": 20,
+          "width": 88,
+          "height": 88
+        },
+        {
+          "name": "문서 검색",
+          "x": 190,
+          "y": 162,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "View in English",
+          "x": 200,
+          "y": 20,
+          "width": 88,
+          "height": 88
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "width": 390,
+      "rootFontScale": 1,
+      "status": 200,
+      "rootFont": "16px",
+      "pageOverflow": false,
+      "headerHeight": 65,
+      "brandSearchOverlap": false,
+      "nodes": [
+        {
+          "name": "내비게이션 메뉴 열기",
+          "x": 16,
+          "y": 18,
+          "width": 34,
+          "height": 28
+        },
+        {
+          "name": "HEAP-FORGE",
+          "x": 62,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        {
+          "name": "문서 검색",
+          "x": 282,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "문서 검색",
+          "x": 324,
+          "y": 81,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "View in English",
+          "x": 330,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "width": 390,
+      "rootFontScale": 2,
+      "status": 200,
+      "rootFont": "32px",
+      "pageOverflow": false,
+      "headerHeight": 130,
+      "brandSearchOverlap": true,
+      "nodes": [
+        {
+          "name": "내비게이션 메뉴 열기",
+          "x": 32,
+          "y": 36,
+          "width": 44.3125,
+          "height": 56
+        },
+        {
+          "name": "HEAP-FORGE",
+          "x": 100.3125,
+          "y": 8,
+          "width": 132.59375,
+          "height": 112
+        },
+        {
+          "name": "문서 검색",
+          "x": 174,
+          "y": 20,
+          "width": 88,
+          "height": 88
+        },
+        {
+          "name": "문서 검색",
+          "x": 260,
+          "y": 162,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "View in English",
+          "x": 270,
+          "y": 20,
+          "width": 88,
+          "height": 88
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "width": 640,
+      "rootFontScale": 1,
+      "status": 200,
+      "rootFont": "16px",
+      "pageOverflow": false,
+      "headerHeight": 65,
+      "brandSearchOverlap": false,
+      "nodes": [
+        {
+          "name": "HEAP-FORGE",
+          "x": 24,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        {
+          "name": "Feed",
+          "x": 188.1875,
+          "y": 10,
+          "width": 47.390625,
+          "height": 44
+        },
+        {
+          "name": "Web",
+          "x": 239.578125,
+          "y": 10,
+          "width": 44.390625,
+          "height": 44
+        },
+        {
+          "name": "Mobile",
+          "x": 287.96875,
+          "y": 10,
+          "width": 59.046875,
+          "height": 44
+        },
+        {
+          "name": "UI/UX",
+          "x": 351.015625,
+          "y": 10,
+          "width": 50.828125,
+          "height": 44
+        },
+        {
+          "name": "About",
+          "x": 405.84375,
+          "y": 10,
+          "width": 55.703125,
+          "height": 44
+        },
+        {
+          "name": "문서 검색",
+          "x": 524,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "문서 검색",
+          "x": 562,
+          "y": 81,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "View in English",
+          "x": 572,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "width": 768,
+      "rootFontScale": 1,
+      "status": 200,
+      "rootFont": "16px",
+      "pageOverflow": false,
+      "headerHeight": 65,
+      "brandSearchOverlap": false,
+      "nodes": [
+        {
+          "name": "HEAP-FORGE",
+          "x": 32,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        {
+          "name": "Feed",
+          "x": 230.1875,
+          "y": 10,
+          "width": 51.390625,
+          "height": 44
+        },
+        {
+          "name": "Web",
+          "x": 285.578125,
+          "y": 10,
+          "width": 48.390625,
+          "height": 44
+        },
+        {
+          "name": "Mobile",
+          "x": 337.96875,
+          "y": 10,
+          "width": 63.046875,
+          "height": 44
+        },
+        {
+          "name": "UI/UX",
+          "x": 405.015625,
+          "y": 10,
+          "width": 54.828125,
+          "height": 44
+        },
+        {
+          "name": "About",
+          "x": 463.84375,
+          "y": 10,
+          "width": 59.703125,
+          "height": 44
+        },
+        {
+          "name": "문서 검색",
+          "x": 620,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "문서 검색",
+          "x": 682,
+          "y": 81,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "View in English",
+          "x": 668,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Switch to dark mode",
+          "x": 716,
+          "y": 22,
+          "width": 20,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "width": 1280,
+      "rootFontScale": 1,
+      "status": 200,
+      "rootFont": "16px",
+      "pageOverflow": false,
+      "headerHeight": 65,
+      "brandSearchOverlap": false,
+      "nodes": [
+        {
+          "name": "HEAP-FORGE",
+          "x": 32,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        {
+          "name": "Feed",
+          "x": 435.28125,
+          "y": 10,
+          "width": 55.390625,
+          "height": 44
+        },
+        {
+          "name": "Web",
+          "x": 498.671875,
+          "y": 10,
+          "width": 52.390625,
+          "height": 44
+        },
+        {
+          "name": "Mobile",
+          "x": 559.0625,
+          "y": 10,
+          "width": 67.046875,
+          "height": 44
+        },
+        {
+          "name": "UI/UX",
+          "x": 634.109375,
+          "y": 10,
+          "width": 58.828125,
+          "height": 44
+        },
+        {
+          "name": "About",
+          "x": 700.9375,
+          "y": 10,
+          "width": 63.703125,
+          "height": 44
+        },
+        {
+          "name": "문서 검색",
+          "x": 1066.171875,
+          "y": 10,
+          "width": 101.828125,
+          "height": 44
+        },
+        {
+          "name": "문서 검색",
+          "x": 1194,
+          "y": 81,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "View in English",
+          "x": 1176,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Switch to dark mode",
+          "x": 1228,
+          "y": 22,
+          "width": 20,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "width": 320,
+      "rootFontScale": 1,
+      "status": 200,
+      "rootFont": "16px",
+      "pageOverflow": false,
+      "headerHeight": 65,
+      "brandSearchOverlap": false,
+      "nodes": [
+        {
+          "name": "Open navigation drawer",
+          "x": 16,
+          "y": 18,
+          "width": 34,
+          "height": 28
+        },
+        {
+          "name": "HEAP-FORGE",
+          "x": 62,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        {
+          "name": "Search docs",
+          "x": 212,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Search documents",
+          "x": 254,
+          "y": 81,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "한국어로 보기",
+          "x": 260,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "width": 320,
+      "rootFontScale": 2,
+      "status": 200,
+      "rootFont": "32px",
+      "pageOverflow": false,
+      "headerHeight": 130,
+      "brandSearchOverlap": true,
+      "nodes": [
+        {
+          "name": "Open navigation drawer",
+          "x": 32,
+          "y": 36,
+          "width": 43.421875,
+          "height": 56
+        },
+        {
+          "name": "HEAP-FORGE",
+          "x": 99.421875,
+          "y": 8,
+          "width": 129.953125,
+          "height": 112
+        },
+        {
+          "name": "Search docs",
+          "x": 104,
+          "y": 20,
+          "width": 88,
+          "height": 88
+        },
+        {
+          "name": "Search documents",
+          "x": 190,
+          "y": 162,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "한국어로 보기",
+          "x": 200,
+          "y": 20,
+          "width": 88,
+          "height": 88
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "rootFontScale": 1,
+      "status": 200,
+      "rootFont": "16px",
+      "pageOverflow": false,
+      "headerHeight": 65,
+      "brandSearchOverlap": false,
+      "nodes": [
+        {
+          "name": "Open navigation drawer",
+          "x": 16,
+          "y": 18,
+          "width": 34,
+          "height": 28
+        },
+        {
+          "name": "HEAP-FORGE",
+          "x": 62,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        {
+          "name": "Search docs",
+          "x": 282,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Search documents",
+          "x": 324,
+          "y": 81,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "한국어로 보기",
+          "x": 330,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "rootFontScale": 2,
+      "status": 200,
+      "rootFont": "32px",
+      "pageOverflow": false,
+      "headerHeight": 130,
+      "brandSearchOverlap": true,
+      "nodes": [
+        {
+          "name": "Open navigation drawer",
+          "x": 32,
+          "y": 36,
+          "width": 44.3125,
+          "height": 56
+        },
+        {
+          "name": "HEAP-FORGE",
+          "x": 100.3125,
+          "y": 8,
+          "width": 132.59375,
+          "height": 112
+        },
+        {
+          "name": "Search docs",
+          "x": 174,
+          "y": 20,
+          "width": 88,
+          "height": 88
+        },
+        {
+          "name": "Search documents",
+          "x": 260,
+          "y": 162,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "한국어로 보기",
+          "x": 270,
+          "y": 20,
+          "width": 88,
+          "height": 88
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "width": 640,
+      "rootFontScale": 1,
+      "status": 200,
+      "rootFont": "16px",
+      "pageOverflow": false,
+      "headerHeight": 65,
+      "brandSearchOverlap": false,
+      "nodes": [
+        {
+          "name": "HEAP-FORGE",
+          "x": 24,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        {
+          "name": "Feed",
+          "x": 188.1875,
+          "y": 10,
+          "width": 47.390625,
+          "height": 44
+        },
+        {
+          "name": "Web",
+          "x": 239.578125,
+          "y": 10,
+          "width": 44.390625,
+          "height": 44
+        },
+        {
+          "name": "Mobile",
+          "x": 287.96875,
+          "y": 10,
+          "width": 59.046875,
+          "height": 44
+        },
+        {
+          "name": "UI/UX",
+          "x": 351.015625,
+          "y": 10,
+          "width": 50.828125,
+          "height": 44
+        },
+        {
+          "name": "About",
+          "x": 405.84375,
+          "y": 10,
+          "width": 55.703125,
+          "height": 44
+        },
+        {
+          "name": "Search docs",
+          "x": 524,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Search documents",
+          "x": 562,
+          "y": 81,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "한국어로 보기",
+          "x": 572,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "rootFontScale": 1,
+      "status": 200,
+      "rootFont": "16px",
+      "pageOverflow": false,
+      "headerHeight": 65,
+      "brandSearchOverlap": false,
+      "nodes": [
+        {
+          "name": "HEAP-FORGE",
+          "x": 32,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        {
+          "name": "Feed",
+          "x": 230.1875,
+          "y": 10,
+          "width": 51.390625,
+          "height": 44
+        },
+        {
+          "name": "Web",
+          "x": 285.578125,
+          "y": 10,
+          "width": 48.390625,
+          "height": 44
+        },
+        {
+          "name": "Mobile",
+          "x": 337.96875,
+          "y": 10,
+          "width": 63.046875,
+          "height": 44
+        },
+        {
+          "name": "UI/UX",
+          "x": 405.015625,
+          "y": 10,
+          "width": 54.828125,
+          "height": 44
+        },
+        {
+          "name": "About",
+          "x": 463.84375,
+          "y": 10,
+          "width": 59.703125,
+          "height": 44
+        },
+        {
+          "name": "Search docs",
+          "x": 620,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Search documents",
+          "x": 682,
+          "y": 81,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "한국어로 보기",
+          "x": 668,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Switch to dark mode",
+          "x": 716,
+          "y": 22,
+          "width": 20,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "width": 1280,
+      "rootFontScale": 1,
+      "status": 200,
+      "rootFont": "16px",
+      "pageOverflow": false,
+      "headerHeight": 65,
+      "brandSearchOverlap": false,
+      "nodes": [
+        {
+          "name": "HEAP-FORGE",
+          "x": 32,
+          "y": 10,
+          "width": 101.75,
+          "height": 44
+        },
+        {
+          "name": "Feed",
+          "x": 422.28125,
+          "y": 10,
+          "width": 55.390625,
+          "height": 44
+        },
+        {
+          "name": "Web",
+          "x": 485.671875,
+          "y": 10,
+          "width": 52.390625,
+          "height": 44
+        },
+        {
+          "name": "Mobile",
+          "x": 546.0625,
+          "y": 10,
+          "width": 67.046875,
+          "height": 44
+        },
+        {
+          "name": "UI/UX",
+          "x": 621.109375,
+          "y": 10,
+          "width": 58.828125,
+          "height": 44
+        },
+        {
+          "name": "About",
+          "x": 687.9375,
+          "y": 10,
+          "width": 63.703125,
+          "height": 44
+        },
+        {
+          "name": "Search docs",
+          "x": 1040.171875,
+          "y": 10,
+          "width": 127.828125,
+          "height": 44
+        },
+        {
+          "name": "Search documents",
+          "x": 1194,
+          "y": 81,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "한국어로 보기",
+          "x": 1176,
+          "y": 10,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Switch to dark mode",
+          "x": 1228,
+          "y": 22,
+          "width": 20,
+          "height": 20
+        }
+      ]
+    }
+  ]
+}

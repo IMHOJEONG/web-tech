@@ -1,0 +1,10 @@
+{
+  "recordedAt": "2026-10-10T11:24:54.606053+00:00",
+  "scope": "first lab UI integration test",
+  "expectedPOST": 200,
+  "actualPOST": 403,
+  "cause": "Origin compared with Next internal request URL hostname rather than actual Host header",
+  "correction": "compare Origin with URL using request Host header; repeat genuine POST and foreign-Origin rejection",
+  "status": "corrected; final three-width real POST and foreign-Origin rejection passed",
+  "harnessCorrection": "Scope simulated error alert to experiment section; Next route announcer also has role=alert"
+}

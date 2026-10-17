@@ -1,5 +1,7 @@
 # 2026-09 작업 기록
 
+- [복구 목표와 배포 안전 운영 기준 보강](2026-09-30-platform-recovery-policy.md)
+
 - [안내 페이지와 푸터 링크 밀도 조정](2026-09-28-static-pages-footer-density.md)
 
 - [푸터의 확인되지 않은 연도와 장식 문구 제거](2026-09-28-footer-brand-copy.md)

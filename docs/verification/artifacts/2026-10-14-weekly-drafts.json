@@ -1,0 +1,134 @@
+{
+  "observedAt": "2026-10-14T01:58:26.613Z",
+  "scope": "local development previews; unpublished drafts; no production deployment",
+  "views": [
+    {
+      "slug": "http-response-streaming-lab",
+      "width": 1280,
+      "url": "http://127.0.0.1:3001/ko/preview/category/be/node-js/http-response-streaming-lab",
+      "status": 200,
+      "sourceSha256": "f1d02e0877ad496e633d88b53b5876064afe1664fe55e6eb832f418e461ac6fc",
+      "hasUpdatedAt": true,
+      "hasCompletedFollowup": true,
+      "oldUnexecutedClaim": false,
+      "h1": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+      "robots": "noindex, nofollow",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "/diagrams/http-response-stages-wide.png",
+          "loaded": true,
+          "width": 944,
+          "naturalWidth": 1600
+        },
+        {
+          "src": "/diagrams/http-response-local-architecture-wide.png",
+          "loaded": true,
+          "width": 944,
+          "naturalWidth": 1600
+        },
+        {
+          "src": "/diagrams/http-response-completion-wide.png",
+          "loaded": true,
+          "width": 944,
+          "naturalWidth": 1600
+        },
+        {
+          "src": "/diagrams/http-response-service-infrastructure-wide.png",
+          "loaded": true,
+          "width": 944,
+          "naturalWidth": 1600
+        }
+      ],
+      "nestedParagraphs": 0,
+      "pageErrors": []
+    },
+    {
+      "slug": "http-response-streaming-lab",
+      "width": 390,
+      "url": "http://127.0.0.1:3001/ko/preview/category/be/node-js/http-response-streaming-lab",
+      "status": 200,
+      "sourceSha256": "f1d02e0877ad496e633d88b53b5876064afe1664fe55e6eb832f418e461ac6fc",
+      "hasUpdatedAt": true,
+      "hasCompletedFollowup": true,
+      "oldUnexecutedClaim": false,
+      "h1": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+      "robots": "noindex, nofollow",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "/diagrams/http-response-stages.png",
+          "loaded": true,
+          "width": 358,
+          "naturalWidth": 720
+        },
+        {
+          "src": "/diagrams/http-response-local-architecture.png",
+          "loaded": true,
+          "width": 358,
+          "naturalWidth": 720
+        },
+        {
+          "src": "/diagrams/http-response-completion.png",
+          "loaded": true,
+          "width": 358,
+          "naturalWidth": 720
+        },
+        {
+          "src": "/diagrams/http-response-service-infrastructure.png",
+          "loaded": true,
+          "width": 358,
+          "naturalWidth": 720
+        }
+      ],
+      "nestedParagraphs": 0,
+      "pageErrors": []
+    },
+    {
+      "slug": "tcp-socket-endpoints-lab",
+      "width": 1280,
+      "url": "http://127.0.0.1:3001/ko/preview/category/be/node-js/tcp-socket-endpoints-lab",
+      "status": 200,
+      "sourceSha256": "2b7aebacabf042e0dd01309bcf4c97541a76c511fbdd3360554f191ab0c95fff",
+      "hasUpdatedAt": true,
+      "hasCompletedFollowup": true,
+      "oldUnexecutedClaim": false,
+      "h1": ["HTTP 연결 안의 소켓: 주소와 포트 직접 확인하기"],
+      "robots": "noindex, nofollow",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "/_next/image",
+          "loaded": true,
+          "width": 448,
+          "naturalWidth": 853
+        }
+      ],
+      "nestedParagraphs": 0,
+      "pageErrors": []
+    },
+    {
+      "slug": "tcp-socket-endpoints-lab",
+      "width": 390,
+      "url": "http://127.0.0.1:3001/ko/preview/category/be/node-js/tcp-socket-endpoints-lab",
+      "status": 200,
+      "sourceSha256": "2b7aebacabf042e0dd01309bcf4c97541a76c511fbdd3360554f191ab0c95fff",
+      "hasUpdatedAt": true,
+      "hasCompletedFollowup": true,
+      "oldUnexecutedClaim": false,
+      "h1": ["HTTP 연결 안의 소켓: 주소와 포트 직접 확인하기"],
+      "robots": "noindex, nofollow",
+      "overflow": 0,
+      "images": [
+        {
+          "src": "/_next/image",
+          "loaded": true,
+          "width": 358,
+          "naturalWidth": 390
+        }
+      ],
+      "nestedParagraphs": 0,
+      "pageErrors": []
+    }
+  ]
+}

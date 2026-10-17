@@ -17,6 +17,7 @@ node_modules
 coverage
 playwright-report
 test-results
+**/.cache/eslint/
 
 # Turbo
 .turbo

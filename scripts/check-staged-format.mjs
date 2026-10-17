@@ -1,17 +1,22 @@
 import * as prettier from "prettier";
+import path from "node:path";
 import { snapshot, isMain } from "./git-check-snapshot.mjs";
 
 export async function checkFormat(view, cwd = process.cwd()) {
   const failures = [];
   for (const { file, status } of view.changes) {
     if (status === "D") continue;
-    const info = await prettier.getFileInfo(file, {
-      ignorePath: ".prettierignore",
+    const filepath = path.resolve(cwd, file);
+    const info = await prettier.getFileInfo(filepath, {
+      ignorePath: [
+        path.join(cwd, ".gitignore"),
+        path.join(cwd, ".prettierignore"),
+      ],
     });
     if (info.ignored || !info.inferredParser) continue;
-    const config = await prettier.resolveConfig(`${cwd}/${file}`);
+    const config = await prettier.resolveConfig(filepath);
     const text = view.read(file).toString("utf8");
-    if (!(await prettier.check(text, { ...config, filepath: file })))
+    if (!(await prettier.check(text, { ...config, filepath })))
       failures.push(file);
   }
   return failures;

@@ -49,6 +49,23 @@ async function expectCompleteArticle(
     ).toBeVisible()
     await expect(body.getByText(article.ending, { exact: true })).toBeVisible()
     await expect(page).toHaveTitle(article.title)
+    const structuredData = page.locator('script[type="application/ld+json"]')
+    await expect(structuredData).toHaveCount(1)
+    const data = JSON.parse((await structuredData.textContent()) ?? '{}')
+    const canonical = await page
+        .locator('link[rel="canonical"]')
+        .getAttribute('href')
+    expect(data['@type']).toBe('BlogPosting')
+    expect(data.headline).toBe(article.title)
+    expect(data.url).toBe(canonical)
+    expect(new URL(data.url).pathname).toBe(new URL(page.url()).pathname)
+    const sharingImage = await page
+        .locator('meta[property="og:image"]')
+        .getAttribute('content')
+    expect(new URL(sharingImage ?? '').pathname).toBe('/og/article.png')
+    expect(new URL(sharingImage ?? '').searchParams.get('title')).toBe(
+        article.title
+    )
     await expect(page.getByTestId('article-supplementary')).toHaveCount(1)
     await expect(page.getByTestId('article-supplementary-pending')).toHaveCount(
         0
@@ -99,6 +116,9 @@ for (const locale of ['ko', 'en']) {
             })
         ).toBeVisible()
         await expect(page.locator('.mdx-wrapper')).toHaveCount(0)
+        await expect(
+            page.locator('script[type="application/ld+json"]')
+        ).toHaveCount(0)
         await expect(page.getByTestId('article-pending')).toHaveCount(0)
     })
 }

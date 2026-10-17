@@ -1,0 +1,30 @@
+{
+  "observedAt": "2026-10-14T03:49:58.185Z",
+  "commit": "d5d94542019d14b6d1bfd0992a3027cc11b3ca55",
+  "deployments": [
+    {
+      "url": "https://web-tech-nd5o6hb29-hojeong-ims-projects.vercel.app",
+      "state": "BUILDING",
+      "target": "production",
+      "branch": "feature/docs",
+      "createdAt": 1791949734358,
+      "readyAt": 1791949770211
+    }
+  ],
+  "ci": [
+    {
+      "conclusion": "",
+      "databaseId": 38508180933,
+      "name": "CI",
+      "status": "in_progress",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/38508180933"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38508180937,
+      "name": "Documentation",
+      "status": "completed",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/38508180937"
+    }
+  ]
+}

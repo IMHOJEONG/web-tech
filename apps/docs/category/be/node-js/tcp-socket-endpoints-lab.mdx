@@ -1,0 +1,280 @@
+---
+title: 'HTTP 연결 안의 소켓: 주소와 포트 직접 확인하기'
+slug: tcp-socket-endpoints-lab
+date: 2026-10-10
+updatedAt: 2026-10-14
+summary: 한 프로세스의 HTTP 클라이언트와 서버에서 양쪽 주소·포트를 읽고, macOS의 소켓 목록과 대조해 TCP 연결의 구조를 확인합니다.
+authorName: 'HoJeong Im'
+authorRole: 'Web Engineer'
+readMinutes: 8
+topicLabel: 'BACKEND'
+tags:
+    - nodejs
+    - tcp
+    - http
+status: draft
+---
+
+## 서버 포트 하나로 어떻게 양쪽을 구분할까요?
+
+`localhost:3000`에 접속하면 서버는 3000번 포트에서 기다립니다. 그러면 **클라이언트 쪽 포트는 무엇일까요?** 연결을 기다리는 소켓과 응답을 보내는 소켓도 같은 것일까요?
+
+앞선 HTTP 응답 실험에서 한 단계 더 내려가 보겠습니다. 이번에는 **Node.js에서 읽은 주소·포트와 운영체제의 소켓 목록을 대조**합니다. 실험은 macOS와 Node.js v24.12.0에서 실행했습니다.
+
+## 주소·포트·소켓을 먼저 구분합니다
+
+| 용어               | 이번 실험에서의 의미                                                                                 |
+| ------------------ | ---------------------------------------------------------------------------------------------------- |
+| 주소               | 접속할 컴퓨터를 가리킵니다. `127.0.0.1`은 현재 컴퓨터로 돌아오는 루프백 주소입니다.                  |
+| 포트               | 같은 주소에서 통신 끝점을 구분하는 번호입니다. 서버와 클라이언트 양쪽에 있습니다.                    |
+| 소켓               | 프로그램이 네트워크 통신을 사용하는 끝점입니다. 여기서는 TCP 소켓을 사용합니다.                      |
+| `local` / `remote` | 해당 소켓에서 본 **내 쪽 / 상대 쪽**입니다. 서버 연결 소켓에서는 클라이언트가 상대(remote) 쪽입니다. |
+| LISTEN             | 서버 소켓이 새 연결을 기다리는 상태입니다.                                                           |
+| ESTABLISHED        | TCP 연결이 성립한 상태입니다. HTTP 응답 완료를 뜻하지는 않습니다.                                    |
+
+서버 포트를 **S**, 클라이언트 포트를 **C**라고 부르겠습니다. C는 연결할 때 운영체제가 임시로 선택하는 포트입니다. 같은 연결을 양쪽에서 보면 순서가 뒤집힙니다.
+
+<figure style={{ maxWidth: '28rem', margin: '1.5rem auto' }}>
+
+![클라이언트 local C remote S와 서버 local S remote C가 운영체제 TCP와 루프백으로 연결되며 서버 대기 소켓은 별도인 구조](../../../public/diagrams/tcp-socket-endpoints.png)
+
+</figure>
+
+대기 소켓과 서버 연결 소켓은 모두 S를 사용합니다. 연결 소켓에는 상대 주소·포트도 있으므로, TCP는 양쪽 주소·포트의 조합으로 연결을 구분할 수 있습니다. 실제 포트 번호는 실행할 때마다 달라집니다.
+
+## 짧은 코드 다섯 부분으로 실행합니다
+
+아래 1~5번 코드 블록 안의 내용만 위에서 아래 순서로 **`tcp-socket-endpoints.mts` 한 파일**에 붙여 넣어 주세요. Node.js v24.12.0에서는 이 예제의 타입 표기를 제거해 실행할 수 있습니다. 별도 변환 명령은 필요 없습니다.
+
+```sh
+node --version
+node tcp-socket-endpoints.mts
+```
+
+macOS 기본 도구인 `/usr/sbin/lsof`가 필요합니다. 이 코드는 교육용입니다. `execFileSync()`가 도구를 실행하는 동안 JavaScript 실행이 멈추므로 운영 서버의 요청 처리 함수에 넣지 마세요.
+
+### 1/5 — 연결된 소켓의 주소를 읽습니다
+
+`Endpoint`는 한 소켓의 로컬·상대 주소와 포트를 묶은 TypeScript 타입입니다. `endpoint()`는 연결된 소켓에서 네 값을 읽습니다. `assert`는 조건이 틀리면 실행을 실패시키는 검사입니다. 연결 전에는 주소·포트가 준비되지 않을 수 있어 값부터 확인합니다.
+
+```ts filename="tcp-socket-endpoints.mts" part="1/5"
+import { createServer, get } from 'node:http'
+import type { Socket, AddressInfo } from 'node:net'
+import { once } from 'node:events'
+import { execFileSync } from 'node:child_process'
+import assert from 'node:assert/strict'
+
+type Endpoint = {
+    localAddress: string
+    localPort: number
+    remoteAddress: string
+    remotePort: number
+}
+function endpoint(socket: Socket): Endpoint {
+    assert.ok(socket.localAddress && socket.remoteAddress)
+    assert.ok(socket.localPort && socket.remotePort)
+    return {
+        localAddress: socket.localAddress,
+        localPort: socket.localPort,
+        remoteAddress: socket.remoteAddress,
+        remotePort: socket.remotePort,
+    }
+}
+```
+
+### 2/5 — 요청을 받은 동안 운영체제 목록을 읽습니다
+
+요청 처리 함수에 진입하면 연결 소켓이 준비되어 있습니다. 응답을 보내기 **전에** `lsof`를 실행하여 양쪽 연결이 열려 있는 순간을 관찰합니다. `-p`는 현재 프로세스, `-a`는 조건을 모두 적용, `-i4TCP`는 IPv4 TCP만 선택합니다. `-nP`는 주소와 포트를 이름으로 바꾸지 않습니다. 마지막 필터는 이번 서버 포트가 포함된 행만 남깁니다.
+
+```ts filename="tcp-socket-endpoints.mts" part="2/5"
+const body = 'hello from TCP\n'
+let connections = 0
+let accepted: Endpoint | undefined
+let kernelSockets: string[] = []
+const server = createServer((req, res) => {
+    accepted = endpoint(req.socket)
+    const lines = execFileSync(
+        '/usr/sbin/lsof',
+        ['-nP', '-a', '-p', String(process.pid), '-i4TCP'],
+        { encoding: 'utf8', timeout: 3000 }
+    )
+        .trim()
+        .split('\n')
+    const ownPort = new RegExp(
+        `127\\.0\\.0\\.1:${accepted.localPort}(?=->|\\s|$)`
+    )
+    kernelSockets = lines.filter((line) => ownPort.test(line))
+    res.writeHead(200, {
+        'Content-Type': 'text/plain',
+        'Content-Length': Buffer.byteLength(body),
+        Connection: 'close',
+    })
+    res.end(body)
+})
+```
+
+### 3/5 — 서버 포트를 운영체제에 맡깁니다
+
+포트 `0`은 사용 가능한 포트를 운영체제가 고르게 합니다. `listening` 이벤트를 기다린 뒤 실제 번호를 읽습니다. `connection` 이벤트가 발생할 때마다 `connections`를 1씩 늘려 서버가 수락한 연결 수를 셉니다.
+
+```ts filename="tcp-socket-endpoints.mts" part="3/5"
+server.on('connection', () => {
+    connections += 1
+})
+server.listen(0, '127.0.0.1')
+await once(server, 'listening')
+const listening = server.address() as AddressInfo
+```
+
+### 4/5 — 클라이언트에서도 반대쪽을 읽습니다
+
+`agent: false`로 이번 요청에 별도 연결을 사용합니다. `connect` 이벤트에서 주소·포트를 기록하고 응답 본문을 모읍니다. 클라이언트 소켓이 닫힌 뒤 대기 소켓도 닫습니다. 이 예제는 `Connection: close`를 지정했으며 연결 재사용은 다루지 않습니다.
+
+```ts filename="tcp-socket-endpoints.mts" part="4/5"
+let client: Endpoint | undefined
+let received = ''
+let complete = false
+let statusCode: number | undefined
+await new Promise<void>((resolve, reject) => {
+    const request = get(
+        {
+            hostname: '127.0.0.1',
+            port: listening.port,
+            path: '/',
+            agent: false,
+        },
+        (response) => {
+            statusCode = response.statusCode
+            response.setEncoding('utf8')
+            response.on('data', (chunk) => {
+                received += chunk
+            })
+            response.on('error', reject)
+            response.on('end', () => {
+                complete = response.complete
+            })
+        }
+    )
+    request.on('error', reject)
+    request.once('socket', (socket) => {
+        socket.once('close', () => {
+            resolve()
+        })
+        socket.once('connect', () => {
+            client = endpoint(socket)
+        })
+    })
+})
+await new Promise<void>((resolve, reject) => {
+    server.close((error) => {
+        if (error) reject(error)
+        else resolve()
+    })
+})
+```
+
+### 5/5 — 양쪽 번호와 본문을 검사합니다
+
+클라이언트의 `local`은 서버의 `remote`와 같아야 하고, 클라이언트의 `remote`는 서버의 `local`과 같아야 합니다. 주소 대응, 연결 하나, HTTP 200, 전체 본문, HTTP 메시지 완료도 함께 확인합니다.
+
+```ts filename="tcp-socket-endpoints.mts" part="5/5"
+assert.ok(client && accepted)
+assert.equal(client.localPort, accepted.remotePort)
+assert.equal(client.remotePort, accepted.localPort)
+assert.equal(accepted.localPort, listening.port)
+assert.equal(client.localAddress, accepted.remoteAddress)
+assert.equal(client.remoteAddress, accepted.localAddress)
+assert.equal(connections, 1)
+assert.equal(received, body)
+assert.equal(statusCode, 200)
+assert.equal(complete, true)
+console.log(
+    JSON.stringify(
+        {
+            pid: process.pid,
+            listening,
+            client,
+            accepted,
+            connections,
+            statusCode,
+            received,
+            complete,
+            kernelSockets,
+        },
+        null,
+        2
+    )
+)
+```
+
+## 실행 결과는 이렇게 읽습니다
+
+프로그램은 JSON을 출력합니다. `listening`, `client`, `accepted`에서 주소·포트를 읽고, `kernelSockets` 각 행의 `TCP` 뒤 주소와 괄호 안 상태를 대조해 주세요.
+
+다음은 2026-10-10 실행 중 한 번의 결과를 **읽기 쉽게 재배열한 요약**입니다. 소켓 목록의 사용자명·내부 식별자 등은 생략했습니다.
+
+```text
+서버 대기: 127.0.0.1:55546
+클라이언트: local 127.0.0.1:55547 → remote 127.0.0.1:55546
+서버 연결: local 127.0.0.1:55546 → remote 127.0.0.1:55547
+
+LISTEN       127.0.0.1:55546
+ESTABLISHED  127.0.0.1:55547 → 127.0.0.1:55546
+ESTABLISHED  127.0.0.1:55546 → 127.0.0.1:55547
+
+HTTP 200 / complete: true / connections: 1
+본문: "hello from TCP\n"
+```
+
+**한 TCP 연결인데 ESTABLISHED 행은 두 개**입니다. 이번에는 한 프로세스가 양쪽 역할을 맡으므로 그 프로세스의 클라이언트 소켓과 서버 연결 소켓이 모두 보입니다. LISTEN 행은 계속 새 연결을 기다리는 별도 소켓입니다.
+
+여기서 `lsof`는 프로그램이 열어 둔 파일·소켓을 운영체제에서 조회하는 도구입니다. **Node.js 객체에서 읽은 값과 운영체제에서 조회한 소켓 상태를 함께 대조**한 것입니다.
+
+## 확인한 범위와 아직 모르는 것
+
+주소·포트 대응, LISTEN 하나와 ESTABLISHED 두 개, HTTP 본문 보존을 3회 반복해 확인했습니다. `lsof`는 응답 전의 한 순간을 조회했으므로 연결 전체의 시간 기록은 아닙니다.
+
+이 소켓 조회만으로 커널 버퍼 크기나 패킷 수를 알 수는 없습니다.
+
+<details>
+<summary>패킷과 ACK는 이번에 확인했나요?</summary>
+
+TCP의 **SYN → SYN-ACK → ACK**는 연결 설정을 확인하는 절차입니다. ACK는 상대 TCP의 수신 확인이며 JavaScript 처리 완료와 다릅니다. 이 순서는 [TCP 표준의 설명](https://www.rfc-editor.org/rfc/rfc9293.html#section-3.5)에 따릅니다. 10월 10일에는 권한이 없어 패킷을 관측하지 못했지만, **10월 11일에는 관리자 권한으로 같은 예제의 실제 패킷을 캡처했습니다.** 소켓 조회와 별도의 관측입니다.
+
+</details>
+
+이번에는 외부 인터넷·TLS·브라우저·CDN을 사용하지 않았습니다. 루프백으로 같은 컴퓨터에서만 통신했습니다. `lsof` 조회 시간은 네트워크 처리 성능을 나타내는 지표가 아닙니다.
+
+## 실제 패킷에서는 무엇이 보였나요?
+
+2026년 10월 11일 14:12:37에 `tcpdump`로 한 연결을 관측했습니다. 이번 실행의 클라이언트 포트는 `60187`, 서버 포트는 `60116`입니다. 앞선 소켓 출력 예시와 다른 실행이므로 포트도 다릅니다.
+
+**패킷**은 네트워크에서 전달하는 데이터 묶음입니다. 그 안의 TCP 세그먼트에는 연결 신호·순서 번호·수신 확인 번호·데이터가 들어갑니다. 아래는 원본 12행을 단계별로 요약한 내용입니다.
+
+| 단계 | 실제 관측                                             | 의미                                                            |
+| ---- | ----------------------------------------------------- | --------------------------------------------------------------- |
+| 연결 | 클라이언트 SYN → 서버 SYN+ACK → 클라이언트 ACK        | 양쪽 시작 순서 번호를 교환하고 확인합니다                       |
+| 요청 | 클라이언트 → 서버, TCP 데이터 60바이트                | 뒤따른 ACK에서 서버 TCP가 요청 데이터 수신을 확인했습니다       |
+| 응답 | 서버 → 클라이언트, TCP 데이터 136바이트               | 뒤따른 ACK에서 클라이언트 TCP가 응답 데이터 수신을 확인했습니다 |
+| 종료 | 서버 FIN → 클라이언트 ACK → 클라이언트 FIN → 서버 ACK | 각 방향에서 더 보낼 데이터가 없음을 알리고 확인합니다           |
+
+이 한 연결에서는 요청과 응답이 각각 데이터 세그먼트 하나에 실렸습니다. HTTP 응답에는 상태 줄·헤더·빈 줄이 포함되므로 **본문 `hello from TCP\n`의 15바이트와 TCP 데이터 136바이트는 다릅니다.** 다른 실행에서는 데이터가 여러 세그먼트로 나뉠 수도 있습니다.
+
+<details>
+<summary>seq와 ack 숫자는 어떻게 읽나요?</summary>
+
+`seq`는 이 방향으로 보내는 바이트의 순서 번호이고, `ack`는 상대 방향에서 **다음으로 기대하는 번호**입니다. 실제 요청의 범위는 `197459811:197459871`이었습니다. 끝 번호는 포함하지 않으므로 `197459871 - 197459811 = 60`바이트입니다. 뒤따른 서버의 `ack 197459871`도 이 범위와 맞습니다.
+
+응답은 `1070684334:1070684470`이므로 136바이트이고, 클라이언트가 `ack 1070684470`으로 확인했습니다. SYN과 FIN은 데이터 길이가 0이어도 순서 번호 하나를 차지합니다. 서버 FIN 번호 `1070684470`을 확인하는 클라이언트 ACK는 그래서 `1070684471`입니다. 순수 ACK 자체는 번호를 차지하지 않습니다. ([TCP 순서 번호](https://www.rfc-editor.org/rfc/rfc9293.html#section-3.4))
+
+</details>
+
+캡처 종료 집계는 `12 packets captured`, `0 packets dropped by kernel`이었습니다. `RST`는 캡처 행에서 관측되지 않았습니다. 양쪽 `FIN` 뒤에는 대응하는 `ACK`가 이어져 이 표본의 정상적인 종료 흐름을 확인했습니다. 연결 설정 뒤에는 데이터 없는 추가 ACK도 한 행 있었습니다. **3단계 핸드셰이크라고 해서 전체 캡처가 세 패킷이라는 뜻은 아닙니다.**
+
+본문 문자열과 HTTP 200·정상 완료는 Node.js 수신 로그에서 확인했습니다. 본문을 출력하지 않은 패킷 로그만으로 문자열을 읽었다고 주장하지는 않습니다. TCP ACK는 JavaScript 업무 처리나 사용자 화면 표시 완료를 보장하지 않습니다. 커널 버퍼의 실제 크기·커널 내부 함수·외부 운영 인프라는 이번에도 측정하지 않았습니다.
+
+## 후속 실험: CPU 작업과 콜백 실행
+
+이번에는 양쪽 통신 끝점과 운영체제 소켓을 찾았습니다. 여기서 이어지는 질문은 이렇습니다. **CPU 작업이 타이머와 수신 콜백 실행에 어떤 영향을 줄까요?** 2026-10-11에 송신자와 수신자를 별도 프로세스로 나누고, 수신자의 CPU 작업이 없을 때와 200ms 동안 계산할 때를 각각 3회 비교했습니다. 20ms 타이머는 계산 종료 뒤 실행됐고, 수신 콜백도 CPU 구간에는 실행되지 않고 종료 뒤 실행됐습니다. 전체 본문 길이와 해시는 양쪽 조건에서 같았습니다. 이는 별도 TCP 실험의 결과이며, 이번 소켓 로그나 패킷 캡처에서 CPU 작업의 영향을 측정했다는 뜻은 아닙니다.
+
+참고: [Node.js Socket 주소·포트 API](https://nodejs.org/download/release/v24.12.0/docs/api/net.html#socketlocalport), [Node.js HTTP API](https://nodejs.org/download/release/v24.12.0/docs/api/http.html#messagecomplete).

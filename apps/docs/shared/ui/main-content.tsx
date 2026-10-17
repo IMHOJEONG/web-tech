@@ -10,7 +10,10 @@ export function MainContent({
             {...props}
             id="main-content"
             tabIndex={-1}
-            className={cn('scroll-mt-20', className)}
+            className={cn(
+                'scroll-mt-[max(5rem,calc(var(--docs-header-height,4.0625rem)+1rem))]',
+                className
+            )}
         />
     )
 }

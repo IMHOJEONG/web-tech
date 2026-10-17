@@ -1,0 +1,8 @@
+{
+  "observedAt": "2026-10-14T04:48:15.580Z",
+  "scope": "Chromium mobile viewports; not physical phones",
+  "views": [],
+  "failure": {
+    "message": "The expression evaluated to a falsy value:\n\n  assert.ok(code.includes('const server = createServer'))\n"
+  }
+}

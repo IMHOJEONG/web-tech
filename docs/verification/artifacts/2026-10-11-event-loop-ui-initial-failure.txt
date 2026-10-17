@@ -1,0 +1,6 @@
+Initial browser test: expected 2 role=img nodes but observed 3.
+The query counted a non-experiment image on the shared page.
+Scoped the graph query to figure svg[role="img"]. This was a test selector failure, not a failed experiment POST.
+
+Second browser test: error query matched the Next.js route announcer (an empty role=alert) instead of the experiment error.
+Scoped the error assertion to section. Actual experiment POST and graph assertions had passed before this selector failure.

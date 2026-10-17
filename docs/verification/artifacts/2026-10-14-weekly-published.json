@@ -1,0 +1,148 @@
+{
+  "observedAt": "2026-10-14T01:27:11.413Z",
+  "url": "https://heap-forge.app/ko/docs/category/be/node-js/stream-backpressure-diagnosis",
+  "views": [
+    {
+      "width": 1280,
+      "status": 200,
+      "observedAt": "2026-10-14T01:27:18.496Z",
+      "hasFirst": true,
+      "hasLast": true,
+      "canonical": "https://heap-forge.app/ko/docs/category/be/node-js/stream-backpressure-diagnosis",
+      "title": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+      "description": "Node.js 메모리가 계속 오를 때 스트림 버퍼와 write() 신호를 관찰해 backpressure와 메모리 누수의 원인을 좁힐 단서를 살펴봅니다.",
+      "ogTitle": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+      "ogUrl": "https://heap-forge.app/ko/docs/category/be/node-js/stream-backpressure-diagnosis",
+      "ld": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "@id": "https://heap-forge.app/ko/docs/category/be/node-js/stream-backpressure-diagnosis#article",
+          "url": "https://heap-forge.app/ko/docs/category/be/node-js/stream-backpressure-diagnosis",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://heap-forge.app/ko/docs/category/be/node-js/stream-backpressure-diagnosis"
+          },
+          "headline": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+          "description": "Node.js 메모리가 계속 오를 때 스트림 버퍼와 write() 신호를 관찰해 backpressure와 메모리 누수의 원인을 좁힐 단서를 살펴봅니다.",
+          "image": ["https://heap-forge.app/default/local-document.svg"],
+          "datePublished": "2026-10-01",
+          "dateModified": "2026-10-06",
+          "author": {
+            "@type": "Person",
+            "name": "HoJeong Im"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "HEAP-FORGE",
+            "url": "https://heap-forge.app"
+          },
+          "articleSection": "BACKEND",
+          "keywords": "nodejs, stream, backpressure, memory"
+        }
+      ],
+      "h1": ["Node.js 메모리 증가, 누수일까 스트림 backpressure일까"],
+      "overflow": 0,
+      "figure": {
+        "scrollWidth": 918,
+        "clientWidth": 918,
+        "boxes": [
+          {
+            "x": 341,
+            "y": 1469.296875,
+            "width": 268.65625,
+            "height": 117.65625
+          },
+          {
+            "x": 641.65625,
+            "y": 1469.296875,
+            "width": 268.671875,
+            "height": 117.65625
+          },
+          {
+            "x": 942.328125,
+            "y": 1469.296875,
+            "width": 268.65625,
+            "height": 117.65625
+          }
+        ]
+      },
+      "codeBlocks": 7,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "status": 200,
+      "observedAt": "2026-10-14T01:27:21.930Z",
+      "hasFirst": true,
+      "hasLast": true,
+      "canonical": "https://heap-forge.app/ko/docs/category/be/node-js/stream-backpressure-diagnosis",
+      "title": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+      "description": "Node.js 메모리가 계속 오를 때 스트림 버퍼와 write() 신호를 관찰해 backpressure와 메모리 누수의 원인을 좁힐 단서를 살펴봅니다.",
+      "ogTitle": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+      "ogUrl": "https://heap-forge.app/ko/docs/category/be/node-js/stream-backpressure-diagnosis",
+      "ld": [
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "@id": "https://heap-forge.app/ko/docs/category/be/node-js/stream-backpressure-diagnosis#article",
+          "url": "https://heap-forge.app/ko/docs/category/be/node-js/stream-backpressure-diagnosis",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://heap-forge.app/ko/docs/category/be/node-js/stream-backpressure-diagnosis"
+          },
+          "headline": "Node.js 메모리 증가, 누수일까 스트림 backpressure일까",
+          "description": "Node.js 메모리가 계속 오를 때 스트림 버퍼와 write() 신호를 관찰해 backpressure와 메모리 누수의 원인을 좁힐 단서를 살펴봅니다.",
+          "image": ["https://heap-forge.app/default/local-document.svg"],
+          "datePublished": "2026-10-01",
+          "dateModified": "2026-10-06",
+          "author": {
+            "@type": "Person",
+            "name": "HoJeong Im"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "HEAP-FORGE",
+            "url": "https://heap-forge.app"
+          },
+          "articleSection": "BACKEND",
+          "keywords": "nodejs, stream, backpressure, memory"
+        }
+      ],
+      "h1": ["Node.js 메모리 증가, 누수일까 스트림 backpressure일까"],
+      "overflow": 0,
+      "figure": {
+        "scrollWidth": 332,
+        "clientWidth": 332,
+        "boxes": [
+          {
+            "x": 45,
+            "y": 2603.203125,
+            "width": 300,
+            "height": 117.65625
+          },
+          {
+            "x": 45,
+            "y": 2752.859375,
+            "width": 300,
+            "height": 117.65625
+          },
+          {
+            "x": 45,
+            "y": 2902.515625,
+            "width": 300,
+            "height": 117.65625
+          }
+        ]
+      },
+      "codeBlocks": 7,
+      "pageErrors": []
+    }
+  ],
+  "sitemap": {
+    "status": 200,
+    "includesCanonical": true,
+    "httpDraftIncluded": false,
+    "tcpDraftIncluded": false
+  }
+}

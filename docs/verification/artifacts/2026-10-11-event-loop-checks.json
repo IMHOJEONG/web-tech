@@ -1,0 +1,62 @@
+{
+  "observedAt": "2026-10-11T14:22:24.904Z",
+  "scope": "local lab; verification summary, not raw terminal transcript",
+  "node": "v24.12.0",
+  "checks": {
+    "typecheck": "passed",
+    "functional": {
+      "tests": 13,
+      "passed": 13,
+      "trials": 6
+    },
+    "ui": {
+      "widths": [1280, 670, 390],
+      "actualTrialsPerWidth": 6,
+      "retry200": true,
+      "concurrentStatuses": [200, 409],
+      "foreignOrigin403": true,
+      "get405": true,
+      "simulated500ClearsResults": true
+    },
+    "documentation": "working tree validation: 21 changed files, 0 issues"
+  },
+  "sources": [
+    {
+      "file": "lib/event-loop-result.ts",
+      "sha256": "65fa52c1741b1c5b32fc3b2bd1cdb306f77546e34c8aa80a93205f7ce4756499"
+    },
+    {
+      "file": "scripts/event-loop-cpu.mts",
+      "sha256": "ac23643b599fcfcc3cf82b87f9e1babf94dd07b5163b6941746941bf29eff79d"
+    },
+    {
+      "file": "scripts/event-loop-sender.mts",
+      "sha256": "02eab9659865efb1c2297f0d9da83556016fc84a8f0693d15c2ca9ecf5c432b9"
+    },
+    {
+      "file": "scripts/event-loop-cpu.test.mts",
+      "sha256": "cdf8a626845323ff14fa0abb1738ae0489f92073866345f04b4ebf57a4346005"
+    },
+    {
+      "file": "scripts/check-event-loop-ui.mts",
+      "sha256": "0eb0d0bd34131f506426d44c0a7d7dbf9933b0b2a81c3a5f17d15ac378650137"
+    },
+    {
+      "file": "app/event-loop/page.tsx",
+      "sha256": "aee75c9511ecc1514cee4f106090df1c110b604fd20b311465d3c1358db5b272"
+    },
+    {
+      "file": "app/event-loop/observer.tsx",
+      "sha256": "630a4a4216687ca91ab7e40244f2a94fecdfec9419eeda2fb704409e40f87278"
+    },
+    {
+      "file": "app/event-loop/observer.module.css",
+      "sha256": "250f63d7d7194012bf97a2ef7ca8ddb632acbfa266c3df486020b736faefc9cb"
+    },
+    {
+      "file": "app/api/event-loop/route.ts",
+      "sha256": "6a8fe43528012f63dbb4867cdfb88b62cbc593ddc23b1ec5aeb5a9ad511814ed"
+    }
+  ],
+  "commitPushPublish": false
+}

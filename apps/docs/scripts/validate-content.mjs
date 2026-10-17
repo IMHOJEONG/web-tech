@@ -10,7 +10,10 @@ import {
 } from '@web-tech/docs-content-contract'
 
 const NON_PUBLIC_STATUSES = new Set(['draft', 'archived'])
-const DOCS_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const DOCS_ROOT = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    '..'
+)
 const CONTENT_DIRECTORIES = ['data', 'category'].map((directory) =>
     path.join(DOCS_ROOT, directory)
 )
@@ -188,10 +191,7 @@ export function getFrontmatterIssues(frontmatter) {
             issues.push('summary is required for published content')
         }
 
-        if (
-            typeof date !== 'string' &&
-            typeof date !== 'number'
-        ) {
+        if (typeof date !== 'string' && typeof date !== 'number') {
             issues.push('date is required for published content')
         } else if (!isValidDateString(String(date))) {
             issues.push('date must be a valid date string')
@@ -265,9 +265,14 @@ export async function main() {
         process.exit(1)
     }
 
-    console.log(`[docs] Content frontmatter validation passed for ${files.length} files.`)
+    console.log(
+        `[docs] Content frontmatter validation passed for ${files.length} files.`
+    )
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (
+    process.argv[1] &&
+    import.meta.url === pathToFileURL(process.argv[1]).href
+) {
     await main()
 }

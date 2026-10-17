@@ -1,18 +1,12 @@
-import js from "@eslint/js";
 import prettier from "eslint-config-prettier/flat";
 import pluginReact from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
-import tseslint from "typescript-eslint";
 import baseConfig from "./base.js";
 
 export default [
   // ✅ 2️⃣ 공통 base config (default export 전제)
   ...baseConfig,
-
-  // ✅ 3️⃣ JS / TS 기본
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
 
   // ✅ 4️⃣ React
   {

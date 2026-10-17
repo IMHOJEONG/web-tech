@@ -4,7 +4,8 @@
 
 - 상태: 제안
 - 대상: docs Vercel 프로젝트의 운영 통제
-- 최종 검토: 2026-09-22
+- 최종 검토: 2026-10-03
+- 이번 검토 범위: 웹 푸시 실험 활성화 전 WAF와 초대 접근 제한. 기존 플랫폼 설정의 실제 적용은 별도 확인한다.
 - 최초 제안: 2026-09-11. Dashboard 기능의 활성화 여부는 운영자가 별도 확인한다.
 
 ## 배경
@@ -42,6 +43,10 @@
 Dashboard에서만 확인 가능한 활성화 상태는 코드만 보고 완료로 판단하지 않는다.
 
 ## Apply Now
+
+### 선택형 웹 푸시의 활성화 전제
+
+기본 비활성화된 푸시 실험은 [ADR-0010](adr-0010-web-push-invitation-and-waf-gate.md)에 따라 초대 세션과 전체 푸시 경로의 IP별 10회/60초 WAF를 함께 적용한다. `BLOG_PUSH_WAF_VERIFIED`는 실제 차단 검증을 마친 운영자만 설정한다. CLI 인증과 프로젝트 확인 전에는 미적용 상태를 유지하며, Hobby 규칙 한도가 기존 revalidation 보호와 충돌하면 활성화를 보류한다. [게시·검증·복구 절차](../runbooks/docs-web-push-experiment.md)를 따른다.
 
 ### 1. Revalidation Endpoint Rate Limit
 
@@ -139,7 +144,7 @@ INP 회귀를 확인하는 데 유용하다.
 4. Production과 Preview를 분리해 최소 일주일간 측정한다.
 5. 데이터 사용량이 크면 `sampleRate`를 낮춘다.
 
-현재는 정책 후보이며 패키지와 컴포넌트는 아직 추가하지 않는다.
+2026-10-03 `apps/docs`에만 패키지와 root layout 컴포넌트를 추가했다. URL 쿼리·해시 제거 및 debug 비활성화를 적용했다. 계정에서 활성화·할당량 확인·Production/Preview 실제 수집은 아직 수행하지 않았다. [측정 절차](../runbooks/docs-deployed-performance-measurement.md)를 따른다.
 
 ### 6. Function Region Near The NAS
 
@@ -167,6 +172,8 @@ Bearer token을 custom event로 보내지 않는다.
 ## Incident And Release Controls
 
 ### Instant Rollback
+
+복구 목표·판단 기준과 데이터 복원 경계는 [서비스 복구 정책](platform-recovery-policy.md)에 정리한다. 목표 수치는 제안 상태이며 Dashboard 적용·실제 복구 리허설 성공과 구분한다.
 
 Production 배포 후 5xx, hydration 오류 또는 주요 route 회귀가 발생하면
 Production Deployment의 `Instant Rollback`을 우선 복구 수단으로 사용한다.
