@@ -302,6 +302,40 @@
     "pnpm-lock.yaml": "9db1df6f8f99fbf68955bd2f00c3bba3d45ba44e435319db68a0ad4f7d3f157f",
     "scripts/security-dependencies.test.mjs": "42c1b581530afef7da5cceacef17473b30371a5e0d95e8e7f69285c2134a1695"
   },
+  "reviewReproduction": {
+    "verifiedAt": "2026-10-18T14:57:32Z",
+    "reviewComment": "https://github.com/IMHOJEONG/web-tech/pull/39#discussion_r4307316320",
+    "baselineCommit": "93fbf6da6126ddfa8b150a1ed4cd4d94a1f4002c",
+    "patchedCommit": "c1aae4c54aa98c4cf177a2eee372ebede7e83c4c",
+    "procedureSha256": "6b79fdf98ef1461ca7af73213d0072b907c5d75f607a8ef325004eff82c3fcaa",
+    "sameTestFileBothRuns": true,
+    "installFlags": ["--frozen-lockfile", "--ignore-scripts"],
+    "testCommand": "node --test --test-reporter=tap --test-name-pattern=Handlebars scripts/security-dependencies.test.mjs",
+    "before": {
+      "version": "4.7.9",
+      "exitCode": 1,
+      "tests": 6,
+      "pass": 0,
+      "fail": 6,
+      "installLogSha256": "18e9306a47ccdb4ca4a3ed20aef1195d3b71e47c9601b0f73d945de9852d1fcf",
+      "whyLogSha256": "49cd2ae6ba4cab680fbb5ea5e994e4b09c8f6b1931c23c40530924d0c64d9566",
+      "tapLogSha256": "c38f9b49661f3748a23fbb0851e138d3ff4899cf9f8a2a0fc0aa7110ec4472c8"
+    },
+    "after": {
+      "version": "4.7.10",
+      "exitCode": 0,
+      "tests": 6,
+      "pass": 6,
+      "fail": 0,
+      "installLogSha256": "72cf265d37fbd0ceee4dfe217e99509231dda2b08c522d2ec134991439443b9f",
+      "whyLogSha256": "97013600862639384e80ebce54978bc2071fecde023994e78aacbc81e17ece3d",
+      "tapLogSha256": "3b80cd29cd3ffc79885e5bdede737501f324af1b7330dde05f95bf2acec4ba63"
+    },
+    "procedureExitCode": 0,
+    "temporaryWorktreeRemoved": true,
+    "originalWorkingFilesChecked": 23,
+    "originalWorkingFilesChanged": 0
+  },
   "limitations": [
     "Full audit exit code remains 1 because braces has no published patch.",
     "Production audit is not a deployment or exploit-reachability proof.",

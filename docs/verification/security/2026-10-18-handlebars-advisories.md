@@ -11,6 +11,60 @@
 
 저장소 루트에서 실행한다. `audit`은 남은 경고 때문에 정상적으로 종료 코드 1을 반환할 수 있으므로 원문 JSON도 함께 확인한다.
 
+### 패치 전후 회귀 재현
+
+Node 24와 pnpm 11.10.0, 아래 두 커밋의 Git 이력이 필요하다. shallow checkout이면 먼저 해당 이력을 가져온다. `mise exec`는 현재 저장소의 도구 설정으로 Bash를 시작한다.
+
+현재 checkout의 lockfile만 설치하면 이미 4.7.10이므로 패치 전 실패를 재현할 수 없다. 다음 명령은 **별도 임시 작업 트리**에 기준 커밋의 lockfile로 4.7.9를 설치하고, 패치 커밋의 동일한 테스트 파일을 실행한다. 이후 override와 lockfile을 함께 복원해 4.7.10을 설치하고 같은 검사를 반복한다. 원래 checkout의 파일·의존성·브랜치는 변경하지 않는다.
+
+```bash
+mise exec -- bash <<'BASH'
+set -eu
+ROOT="$(git rev-parse --show-toplevel)"
+BASELINE=93fbf6da6126ddfa8b150a1ed4cd4d94a1f4002c
+PATCHED=c1aae4c54aa98c4cf177a2eee372ebede7e83c4c
+git cat-file -e "$BASELINE^{commit}"
+git cat-file -e "$PATCHED^{commit}"
+REPRO_DIR="$(mktemp -d "${TMPDIR:-/tmp}/web-tech-handlebars-repro.XXXXXX")"
+LOG_DIR="$(mktemp -d "${TMPDIR:-/tmp}/web-tech-handlebars-logs.XXXXXX")"
+printf 'Worktree: %s\nLogs: %s\n' "$REPRO_DIR" "$LOG_DIR"
+git worktree add --detach "$REPRO_DIR" "$BASELINE"
+git -C "$REPRO_DIR" restore --source="$PATCHED" --worktree -- scripts/security-dependencies.test.mjs
+cd "$REPRO_DIR"
+
+pnpm install --frozen-lockfile --ignore-scripts > "$LOG_DIR/before-install.log" 2>&1
+pnpm why -r handlebars > "$LOG_DIR/before-why.log"
+rg '^handlebars@4\.7\.9$' "$LOG_DIR/before-why.log"
+BEFORE_EXIT=0
+node --test --test-reporter=tap --test-name-pattern=Handlebars scripts/security-dependencies.test.mjs > "$LOG_DIR/before.tap" 2>&1 || BEFORE_EXIT=$?
+cat "$LOG_DIR/before.tap"
+test "$BEFORE_EXIT" -eq 1
+rg '^# tests 6$' "$LOG_DIR/before.tap"
+rg '^# pass 0$' "$LOG_DIR/before.tap"
+rg '^# fail 6$' "$LOG_DIR/before.tap"
+
+git restore --source="$PATCHED" --worktree -- pnpm-workspace.yaml pnpm-lock.yaml
+pnpm install --frozen-lockfile --ignore-scripts > "$LOG_DIR/after-install.log" 2>&1
+pnpm why -r handlebars > "$LOG_DIR/after-why.log"
+rg '^handlebars@4\.7\.10$' "$LOG_DIR/after-why.log"
+node --test --test-reporter=tap --test-name-pattern=Handlebars scripts/security-dependencies.test.mjs > "$LOG_DIR/after.tap" 2>&1
+cat "$LOG_DIR/after.tap"
+rg '^# tests 6$' "$LOG_DIR/after.tap"
+rg '^# pass 6$' "$LOG_DIR/after.tap"
+rg '^# fail 0$' "$LOG_DIR/after.tap"
+
+# Restore only the three files changed in this disposable baseline worktree.
+git restore --worktree -- pnpm-workspace.yaml pnpm-lock.yaml scripts/security-dependencies.test.mjs
+cd "$ROOT"
+git worktree remove "$REPRO_DIR"
+printf 'Reproduction passed. Logs retained: %s\n' "$LOG_DIR"
+BASH
+```
+
+`rg`가 필요하며, 설치 lifecycle script는 실행하지 않는다. 패치 전 종료 코드 1뿐 아니라 테스트 6개·실패 6개를 함께 검사하므로 모듈 누락 같은 준비 실패를 기대한 회귀로 오인하지 않는다. 패치 후에는 종료 코드 0·통과 6개여야 한다. 실패하면 즉시 중단하고 출력된 임시 작업 트리와 로그를 남긴다. 원인을 확인한 뒤 위 마지막 복구·제거 명령을 **그 임시 경로에서만** 수행한다. 로그 디렉터리는 성공 후에도 남으며, 원래 작업 트리에서 취약 버전으로 downgrade하지 않는다.
+
+### 현재 패치 상태의 추가 검사
+
 ```bash
 gh api repos/IMHOJEONG/web-tech/dependabot/alerts --paginate
 mise exec -- pnpm view handlebars version engines --json
@@ -19,11 +73,7 @@ mise exec -- pnpm why -r handlebars braces
 mise exec -- pnpm audit --json
 mise exec -- pnpm audit --prod --json
 
-# 패치 전/후 같은 테스트를 실행해 실제 취약 동작 차이를 확인
-mise exec -- node --test --test-name-pattern=Handlebars scripts/security-dependencies.test.mjs
-
-# override 수정 후 lockfile 생성과 재현 가능한 설치
-mise exec -- pnpm install --lockfile-only --ignore-scripts
+# 커밋된 패치 lockfile을 그대로 설치하며 다시 생성하지 않는다.
 mise exec -- pnpm install --frozen-lockfile --ignore-scripts
 mise exec -- pnpm test:repo
 mise exec -- pnpm --filter docs-backend check
@@ -68,6 +118,12 @@ Handlebars는 두 백엔드의 **개발 의존성 `ts-jest@29.4.9`**에서 해�
 
 [정제한 audit 및 로그 해시](../artifacts/2026-10-18-handlebars-security-audit.json)에 전후 결과·종료 코드·소비 경로와 실행 로그 해시를 보관했다.
 
+### PR #39 리뷰 후 재현 절차 검증
+
+2026-10-18 23:57 KST에 위 재현 명령 블록을 문서에서 그대로 추출해 실행했다. 기준 `93fbf6d`의 frozen lockfile과 패치 `c1aae4c`의 테스트 파일을 결합한 임시 작업 트리에서 4.7.9의 **0개 통과·6개 실패·종료 코드 1**을 확인했다. 같은 파일을 유지한 채 override와 lockfile을 `c1aae4c`에서 복원하고 재설치하자 4.7.10의 **6개 통과·0개 실패·종료 코드 0**으로 바뀌었다. 절차 전체는 종료 코드 0으로 완료됐으며 임시 작업 트리는 제거됐다. 기존 artifact의 `reviewReproduction`에 명령 블록과 설치·의존 경로·TAP 로그의 해시를 추가했다. 이전 검증 결과는 유지했다.
+
+리뷰 수정 전 `c1aae4c`의 [CI](https://github.com/IMHOJEONG/web-tech/actions/runs/39134000388)는 전체 성공했고, [CodeQL](https://github.com/IMHOJEONG/web-tech/actions/runs/39133998682)은 JavaScript/TypeScript 87개 규칙·Actions 17개 규칙에서 각각 탐지 0건이었다. 이는 새 문서 수정 커밋의 CI 결과와 구분한다. CI의 스트림 종료 오류 8회와 CodeRabbit의 docstring 지표 경고는 이 문서 재현성 수정으로 해결된 것으로 취급하지 않는다.
+
 | audit 범위        | 변경 전                        | 변경 후                   | 종료 코드    |
 | ----------------- | ------------------------------ | ------------------------- | ------------ |
 | 전체 의존성       | critical 2, high 1, moderate 1 | **high 1: braces만 남음** | 전/후 모두 1 |
@@ -83,7 +139,7 @@ GitHub advisory의 patched version은 `None`이며 npm registry 최신도 **3.0.
 
 ## 한계와 후속 작업
 
-- 이 결과는 패치 브랜치의 로컬 검증이다. PR CI·main 병합·배포 브랜치 전파와 실제 배포는 별도 확인한다. main에 병합되기 전에는 기본 브랜치 알림 3건의 자동 종료도 기대하지 않는다.
+- 패치 커밋 `c1aae4c`의 PR CI는 확인했지만, 리뷰 후 문서 수정 커밋의 CI·main 병합·배포 브랜치 전파와 실제 배포는 별도 확인한다. main에 병합되기 전에는 기본 브랜치 알림 3건의 자동 종료도 기대하지 않는다.
 - braces 때문에 전체 audit은 **실패 상태 1**을 유지한다. 이 PR을 전체 취약점 해결이나 audit 전체 통과로 설명하지 않는다.
 - Node 24·macOS arm64의 대표 fixture 검증이다. 모든 Handlebars API·모든 템플릿의 호환성과 Linux/NAS 이미지의 실제 설치 버전까지 보장하지 않는다.
 - 기존 [KAN-3](https://web-tech-service.atlassian.net/browse/KAN-3)의 braces 후속 과제와 연결하되, 이 PR로 해당 과제 전체를 완료 처리하지 않는다. Jira 상태·보안 경고·운영 설정은 변경하지 않았다.

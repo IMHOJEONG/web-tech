@@ -1,6 +1,6 @@
 # 검증 원본 증거
 
-- [10-18 Handlebars 보안 audit](2026-10-18-handlebars-security-audit.json): [검증 보고서](../security/2026-10-18-handlebars-advisories.md). 전체·production audit 전후, 무해한 회귀·build 결과와 로그 해시.
+- [10-18 Handlebars 보안 audit](2026-10-18-handlebars-security-audit.json): [검증 보고서](../security/2026-10-18-handlebars-advisories.md). 전체·production audit 전후, 무해한 회귀·build 결과와 로그 해시. PR #39 리뷰 후 임시 작업 트리 재현 결과도 포함.
 
 - [10-14 인덱스·검색 목록 도달 거리 기준선](2026-10-14-docs-index-density-baseline.json): [밀도 검토 보고서](../accessibility/2026-10-14-docs-index-density-review.md). 공개 사이트 네 조건의 실제 값 발췌, 개선 목표와 구분.
 
