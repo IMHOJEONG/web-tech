@@ -44,6 +44,39 @@ function assertMinimumVersion(version, minimum, name) {
 }
 
 for (const app of ["docs-backend", "vuln-radar-backend"]) {
+  const tsJest = dependencyRequire(appRequire(app), "ts-jest");
+  const handlebars = tsJest("handlebars");
+
+  test(`${app}: Handlebars denies own constructor lookup on a prototype`, () => {
+    const render = handlebars.compile(
+      '{{lookup (lookup fn "__proto__") "constructor"}}',
+    );
+    // Inspect only the lookup result; never invoke Function or run a payload.
+    assert.equal(render({ fn() {} }, { allowProtoMethodsByDefault: true }), "");
+    assertPatched(tsJest, "handlebars", "4.7.10");
+  });
+
+  test(`${app}: Handlebars rejects an invalid AST block parameter length`, () => {
+    const ast = handlebars.parse("{{#if ok}}safe{{/if}}");
+    ast.body[0].program.blockParams = { length: "not-a-number" };
+    // precompile returns source without evaluating generated JavaScript.
+    assert.throws(() => handlebars.precompile(ast));
+    assert.equal(
+      handlebars.compile("{{#if ok}}safe{{/if}}")({ ok: true }),
+      "safe",
+    );
+  });
+
+  test(`${app}: Handlebars precompiled source cannot close an inline script`, () => {
+    const template = "safe</script><script>fixture</script>";
+    assert.doesNotMatch(handlebars.precompile(template), /<\/script/i);
+    assert.equal(handlebars.compile(template)({}), template);
+    assert.equal(
+      handlebars.compile("Hello {{name}}!")({ name: "<fixture>" }),
+      "Hello &lt;fixture&gt;!",
+    );
+  });
+
   test(`${app}: mapped IPv6 proxy trust does not trust public IPv4 clients`, () => {
     const platform = dependencyRequire(
       appRequire(app),
