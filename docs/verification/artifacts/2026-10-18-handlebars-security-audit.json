@@ -1,0 +1,345 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-18",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "93fbf6da6126ddfa8b150a1ed4cd4d94a1f4002c",
+  "branch": "codex/security-dependabot-20261018",
+  "workingTreeChanges": true,
+  "environment": {
+    "node": "24.12.0",
+    "pnpm": "11.10.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "githubAlertsAtInspection": [
+    {
+      "cve": "CVE-2026-106445",
+      "firstPatchedVersion": "4.7.10",
+      "ghsa": "GHSA-p8wg-vrv2-v86f",
+      "manifest": "pnpm-lock.yaml",
+      "number": 339,
+      "package": "handlebars",
+      "scope": "runtime",
+      "severity": "critical",
+      "state": "open",
+      "summary": "Handlebars: JavaScript Injection via Own Property Check Bypass",
+      "url": "https://github.com/IMHOJEONG/web-tech/security/dependabot/339"
+    },
+    {
+      "cve": "CVE-2026-106444",
+      "firstPatchedVersion": "4.7.10",
+      "ghsa": "GHSA-xw65-4hp5-5hc7",
+      "manifest": "pnpm-lock.yaml",
+      "number": 338,
+      "package": "handlebars",
+      "scope": "runtime",
+      "severity": "medium",
+      "state": "open",
+      "summary": "Handlebars: JavaScript Injection via Unsafe Inline Embedding of Precompiled Templates",
+      "url": "https://github.com/IMHOJEONG/web-tech/security/dependabot/338"
+    },
+    {
+      "cve": "CVE-2026-106446",
+      "firstPatchedVersion": "4.7.10",
+      "ghsa": "GHSA-8r5x-fm3f-whwj",
+      "manifest": "pnpm-lock.yaml",
+      "number": 337,
+      "package": "handlebars",
+      "scope": "runtime",
+      "severity": "critical",
+      "state": "open",
+      "summary": "Handlebars: JavaScript Injection via AST Type Confusion in compile (bypass of CVE-2026-33937)",
+      "url": "https://github.com/IMHOJEONG/web-tech/security/dependabot/337"
+    },
+    {
+      "cve": "CVE-2026-93687",
+      "firstPatchedVersion": null,
+      "ghsa": "GHSA-vfj7-8cjw-p6xm",
+      "manifest": "pnpm-lock.yaml",
+      "number": 336,
+      "package": "braces",
+      "scope": "runtime",
+      "severity": "high",
+      "state": "open",
+      "summary": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "url": "https://github.com/IMHOJEONG/web-tech/security/dependabot/336"
+    }
+  ],
+  "publishedVersions": {
+    "handlebars": {
+      "before": "4.7.9",
+      "after": "4.7.10",
+      "override": "^4.7.10",
+      "registryLatest": "4.7.10"
+    },
+    "braces": {
+      "registryLatest": "3.0.3",
+      "officialFirstPatchedVersion": null,
+      "auditNonVulnerableRangeNotPublished": ">=3.0.4"
+    }
+  },
+  "audits": {
+    "before": {
+      "command": "mise exec -- pnpm audit --json",
+      "exitCode": 1,
+      "rawLogSha256": "da543c7b598c2ea57394325396d9e1279fa62dce4025bbf9fde3855a778b06d0",
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 1,
+        "high": 1,
+        "critical": 2
+      },
+      "advisories": [
+        {
+          "ghsa": "GHSA-vfj7-8cjw-p6xm",
+          "package": "braces",
+          "severity": "high",
+          "vulnerableRange": "<=3.0.3",
+          "auditPatchedRange": ">=3.0.4",
+          "findings": [
+            {
+              "version": "3.0.3",
+              "dev": true,
+              "paths": [
+                "apps__docs>eslint-config-next>@next/eslint-plugin-next>fast-glob>micromatch>braces",
+                "apps__docs-backend>ts-loader>micromatch>braces",
+                "apps__vuln-radar-backend>ts-loader>micromatch>braces",
+                "packages__eslint-config>@next/eslint-plugin-next>fast-glob>micromatch>braces"
+              ]
+            }
+          ]
+        },
+        {
+          "ghsa": "GHSA-xw65-4hp5-5hc7",
+          "package": "handlebars",
+          "severity": "moderate",
+          "vulnerableRange": ">=4.0.0 <=4.7.9",
+          "auditPatchedRange": ">=4.7.10",
+          "findings": [
+            {
+              "version": "4.7.9",
+              "dev": true,
+              "paths": [
+                "apps__docs-backend>ts-jest>handlebars",
+                "apps__vuln-radar-backend>ts-jest>handlebars"
+              ]
+            }
+          ]
+        },
+        {
+          "ghsa": "GHSA-8r5x-fm3f-whwj",
+          "package": "handlebars",
+          "severity": "critical",
+          "vulnerableRange": ">=4.0.0 <=4.7.9",
+          "auditPatchedRange": ">=4.7.10",
+          "findings": [
+            {
+              "version": "4.7.9",
+              "dev": true,
+              "paths": [
+                "apps__docs-backend>ts-jest>handlebars",
+                "apps__vuln-radar-backend>ts-jest>handlebars"
+              ]
+            }
+          ]
+        },
+        {
+          "ghsa": "GHSA-p8wg-vrv2-v86f",
+          "package": "handlebars",
+          "severity": "critical",
+          "vulnerableRange": ">=3.0.0 <=4.7.9",
+          "auditPatchedRange": ">=4.7.10",
+          "findings": [
+            {
+              "version": "4.7.9",
+              "dev": true,
+              "paths": [
+                "apps__docs-backend>ts-jest>handlebars",
+                "apps__vuln-radar-backend>ts-jest>handlebars"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "command": "mise exec -- pnpm audit --json",
+      "exitCode": 1,
+      "rawLogSha256": "ae3c0fe8c6d3da07d1f8a9af845c573fb20f3117b6e068fb5a0049aea8b5c09f",
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 1,
+        "critical": 0
+      },
+      "advisories": [
+        {
+          "ghsa": "GHSA-vfj7-8cjw-p6xm",
+          "package": "braces",
+          "severity": "high",
+          "vulnerableRange": "<=3.0.3",
+          "auditPatchedRange": ">=3.0.4",
+          "findings": [
+            {
+              "version": "3.0.3",
+              "dev": true,
+              "paths": [
+                "apps__docs>eslint-config-next>@next/eslint-plugin-next>fast-glob>micromatch>braces",
+                "apps__docs-backend>ts-loader>micromatch>braces",
+                "apps__vuln-radar-backend>ts-loader>micromatch>braces",
+                "packages__eslint-config>@next/eslint-plugin-next>fast-glob>micromatch>braces"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prodBefore": {
+      "command": "mise exec -- pnpm audit --prod --json",
+      "exitCode": 0,
+      "rawLogSha256": "fe4b2485a56180d93f4b6e8d3be7c7b10a152fe87e156fac3f7f3ab2868ce339",
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0
+      },
+      "advisories": []
+    },
+    "prodAfter": {
+      "command": "mise exec -- pnpm audit --prod --json",
+      "exitCode": 0,
+      "rawLogSha256": "fe4b2485a56180d93f4b6e8d3be7c7b10a152fe87e156fac3f7f3ab2868ce339",
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0
+      },
+      "advisories": []
+    }
+  },
+  "checks": [
+    {
+      "command": "mise exec -- node --test --test-name-pattern=Handlebars scripts/security-dependencies.test.mjs",
+      "exitCode": 1,
+      "result": "6 fail, expected red baseline on 4.7.9",
+      "logName": "web-tech-security-20261018-regression-before.log",
+      "sha256": "84d816b2b4ee66fd0aa0a74e40c99df92a2f4fe65b028194c9428c9084e43170"
+    },
+    {
+      "command": "mise exec -- node --test --test-name-pattern=Handlebars scripts/security-dependencies.test.mjs",
+      "exitCode": 0,
+      "result": "6 pass on 4.7.10",
+      "logName": "web-tech-security-20261018-regression-after.log",
+      "sha256": "83c620c0492967f07237a3d11a494e3cad21842678d3a03d996f85ac25025b01"
+    },
+    {
+      "command": "mise exec -- pnpm test:repo",
+      "exitCode": 0,
+      "result": "43 pass",
+      "logName": "web-tech-security-20261018-test-repo.log",
+      "sha256": "134b0660f73b27dc401a1a8673c0074a81955f1e1e93981c2e4effc4d2acae8c"
+    },
+    {
+      "command": "mise exec -- pnpm --filter docs-backend check",
+      "exitCode": 0,
+      "result": "Lint, types, unit 13, HTTP E2E 34, build pass",
+      "logName": "web-tech-security-20261018-docs-backend-check.log",
+      "sha256": "1b576383529ae5b1e112ee1fb496e950fa690fa85713447f2dbead27ab8d85da"
+    },
+    {
+      "command": "mise exec -- pnpm --filter vuln-radar-backend build",
+      "exitCode": 0,
+      "result": "Local Prisma generate and Nest build pass; no database migration",
+      "logName": "web-tech-security-20261018-vuln-backend-build.log",
+      "sha256": "e128663d06ee13ad3c58bb304c36a554f967a8d114551fa176904ede2b230024"
+    },
+    {
+      "command": "mise exec -- pnpm test",
+      "exitCode": 0,
+      "result": "6 task success, 0 cache; content 20, docs-backend 13, vuln-radar-backend 19, UI 5",
+      "logName": "web-tech-security-20261018-test-workspace.log",
+      "sha256": "2c2350bbb35d0a7c6baacf12e2402212cdb6d0ea097c849a604f5a5594b97d42"
+    },
+    {
+      "command": "mise exec -- pnpm lint",
+      "exitCode": 0,
+      "result": "7 task success, 3 cached",
+      "logName": "web-tech-security-20261018-lint.log",
+      "sha256": "8b2007bd4a2b2b0861fe7f927e6feac99e584fa9f3002ea8fb44f39590bb6024"
+    },
+    {
+      "command": "mise exec -- pnpm typecheck",
+      "exitCode": 0,
+      "result": "9 task success, 2 cached",
+      "logName": "web-tech-security-20261018-typecheck.log",
+      "sha256": "db9857b7487a60e29a96a838562ee08c03605a31df019d8168bec9a929f62ba7"
+    },
+    {
+      "command": "mise exec -- pnpm --filter docs test:article:prod local-content-tracing.spec.ts category-boundary.spec.ts",
+      "exitCode": 0,
+      "result": "22 pass; production traces omit removed glob packages",
+      "logName": "web-tech-security-20261018-local-content-production.log",
+      "sha256": "204a16c5174b1af1a45cd0580d13892b00bc20dd6b18c76829666108a4075fc9"
+    }
+  ],
+  "whyBefore": "braces@3.0.3\n└─┬ micromatch@4.0.8\n  ├─┬ fast-glob@3.3.1\n  │ ├─┬ @next/eslint-plugin-next@15.5.15\n  │ │ └── @web-tech/eslint-config@0.0.0 (devDependencies)\n  │ └─┬ @next/eslint-plugin-next@15.5.2\n  │   └─┬ eslint-config-next@15.5.2\n  │     └── docs@0.1.0 (devDependencies)\n  └─┬ ts-loader@9.5.7\n    ├── docs-backend@0.1.0 (devDependencies)\n    └── vuln-radar-backend@0.0.1 (devDependencies)\n\nhandlebars@4.7.9\n└─┬ ts-jest@29.4.9\n  ├── docs-backend@0.1.0 (devDependencies)\n  └── vuln-radar-backend@0.0.1 (devDependencies)\n\nFound 1 version of braces\nFound 1 version of handlebars\n",
+  "whyAfter": "braces@3.0.3\n└─┬ micromatch@4.0.8\n  ├─┬ fast-glob@3.3.1\n  │ ├─┬ @next/eslint-plugin-next@15.5.15\n  │ │ └── @web-tech/eslint-config@0.0.0 (devDependencies)\n  │ └─┬ @next/eslint-plugin-next@15.5.2\n  │   └─┬ eslint-config-next@15.5.2\n  │     └── docs@0.1.0 (devDependencies)\n  └─┬ ts-loader@9.5.7\n    ├── docs-backend@0.1.0 (devDependencies)\n    └── vuln-radar-backend@0.0.1 (devDependencies)\n\nhandlebars@4.7.10\n└─┬ ts-jest@29.4.9\n  ├── docs-backend@0.1.0 (devDependencies)\n  └── vuln-radar-backend@0.0.1 (devDependencies)\n\nFound 1 version of braces\nFound 1 version of handlebars\n",
+  "additionalChecks": [
+    {
+      "command": "mise exec -- pnpm validate:catalog",
+      "exitCode": 0,
+      "manifests": 11
+    }
+  ],
+  "sourceSha256": {
+    "pnpm-workspace.yaml": "c645e61689624c644b1c6fe0a9b91783efb91a5ddb3169e969777bc75ba7c283",
+    "pnpm-lock.yaml": "9db1df6f8f99fbf68955bd2f00c3bba3d45ba44e435319db68a0ad4f7d3f157f",
+    "scripts/security-dependencies.test.mjs": "42c1b581530afef7da5cceacef17473b30371a5e0d95e8e7f69285c2134a1695"
+  },
+  "reviewReproduction": {
+    "verifiedAt": "2026-10-18T14:57:32Z",
+    "reviewComment": "https://github.com/IMHOJEONG/web-tech/pull/39#discussion_r4307316320",
+    "baselineCommit": "93fbf6da6126ddfa8b150a1ed4cd4d94a1f4002c",
+    "patchedCommit": "c1aae4c54aa98c4cf177a2eee372ebede7e83c4c",
+    "procedureSha256": "6b79fdf98ef1461ca7af73213d0072b907c5d75f607a8ef325004eff82c3fcaa",
+    "sameTestFileBothRuns": true,
+    "installFlags": ["--frozen-lockfile", "--ignore-scripts"],
+    "testCommand": "node --test --test-reporter=tap --test-name-pattern=Handlebars scripts/security-dependencies.test.mjs",
+    "before": {
+      "version": "4.7.9",
+      "exitCode": 1,
+      "tests": 6,
+      "pass": 0,
+      "fail": 6,
+      "installLogSha256": "18e9306a47ccdb4ca4a3ed20aef1195d3b71e47c9601b0f73d945de9852d1fcf",
+      "whyLogSha256": "49cd2ae6ba4cab680fbb5ea5e994e4b09c8f6b1931c23c40530924d0c64d9566",
+      "tapLogSha256": "c38f9b49661f3748a23fbb0851e138d3ff4899cf9f8a2a0fc0aa7110ec4472c8"
+    },
+    "after": {
+      "version": "4.7.10",
+      "exitCode": 0,
+      "tests": 6,
+      "pass": 6,
+      "fail": 0,
+      "installLogSha256": "72cf265d37fbd0ceee4dfe217e99509231dda2b08c522d2ec134991439443b9f",
+      "whyLogSha256": "97013600862639384e80ebce54978bc2071fecde023994e78aacbc81e17ece3d",
+      "tapLogSha256": "3b80cd29cd3ffc79885e5bdede737501f324af1b7330dde05f95bf2acec4ba63"
+    },
+    "procedureExitCode": 0,
+    "temporaryWorktreeRemoved": true,
+    "originalWorkingFilesChecked": 23,
+    "originalWorkingFilesChanged": 0
+  },
+  "limitations": [
+    "Full audit exit code remains 1 because braces has no published patch.",
+    "Production audit is not a deployment or exploit-reachability proof.",
+    "No Function payload, shell command, browser exploit, NAS DoS, database migration, or security-alert dismissal was performed.",
+    "Local evidence precedes PR CI, merge, and deployment. Original feature/docs working tree is excluded."
+  ]
+}
