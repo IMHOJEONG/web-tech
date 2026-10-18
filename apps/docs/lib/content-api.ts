@@ -1,6 +1,10 @@
 import 'server-only'
 
-import ky from 'ky'
+import {
+    ContentApiRequestError,
+    readContentApiResponse,
+} from './content-api-request.ts'
+import { stripHtmlToText } from './remote-html-sanitizer.ts'
 import {
     joinUrl,
     getContentApiAuthHeaders,
@@ -36,21 +40,19 @@ import type {
 
 async function fetchRemoteBody(
     post: RemotePost,
-    markdownBaseUrl?: string
-): Promise<RemoteContentBody> {
+    markdownBaseUrl: string | undefined,
+    deadline: number
+): Promise<RemoteContentBody | null> {
     const inlineContentResult = getInlineContentResult(post)
 
-    if (inlineContentResult) {
+    if (inlineContentResult && hasReadableBody(inlineContentResult)) {
         return inlineContentResult
     }
 
     const markdownReference = getMarkdownReference(post)
 
     if (!markdownReference) {
-        return {
-            content: '',
-            contentFormat: 'html',
-        }
+        return null
     }
 
     const normalizedReference = normalizeRemoteReference(markdownReference)
@@ -60,10 +62,7 @@ async function fetchRemoteBody(
             '[docs] Rejected unsafe remote markdown reference:',
             markdownReference
         )
-        return {
-            content: '',
-            contentFormat: 'html',
-        }
+        return null
     }
 
     const markdownPathPrefix =
@@ -77,14 +76,11 @@ async function fetchRemoteBody(
         : null
 
     if (!markdownUrl) {
-        return {
-            content: '',
-            contentFormat: 'html',
-        }
+        return null
     }
 
     try {
-        const response = await ky.get(markdownUrl, {
+        const response = await readContentApiResponse(markdownUrl, {
             headers: {
                 Accept: 'text/html,text/plain;q=0.9,*/*;q=0.8',
                 ...getContentApiAuthHeaders(),
@@ -93,38 +89,16 @@ async function fetchRemoteBody(
                 revalidate: getContentRevalidateSeconds(),
                 tags: [REMOTE_CONTENT_CACHE_TAG],
             },
-            throwHttpErrors: false,
-            timeout: getContentApiTimeoutMs(),
+            deadline,
         })
-
-        if (!response.ok) {
-            console.warn(
-                '[docs] Failed to fetch markdown body:',
-                markdownUrl,
-                response.status
-            )
-            return {
-                content: '',
-                contentFormat: 'html',
-            }
-        }
-
-        const content = await response.text()
         const normalizedContent = normalizeRemoteContent(
-            content,
-            response.headers.get('content-type')
+            response.text,
+            response.contentType
         )
 
-        if (!normalizedContent) {
-            console.warn(
-                '[docs] Rejected non-HTML remote body:',
-                markdownUrl,
-                response.headers.get('content-type')
-            )
-            return {
-                content: '',
-                contentFormat: 'html',
-            }
+        if (!normalizedContent || !hasReadableBody(normalizedContent)) {
+            console.warn('[docs] Rejected non-HTML remote body:', markdownUrl)
+            return null
         }
 
         return normalizedContent
@@ -134,17 +108,22 @@ async function fetchRemoteBody(
             markdownUrl,
             error
         )
-        return {
-            content: '',
-            contentFormat: 'html',
-        }
+        return null
     }
+}
+
+function hasReadableBody(body: RemoteContentBody) {
+    return Boolean(
+        stripHtmlToText(body.content) ||
+        /<(?:img|video|audio)\b/i.test(body.content)
+    )
 }
 
 async function normalizeRemotePost(
     post: RemotePost,
     markdownBaseUrl?: string,
-    assetBaseUrl?: string
+    assetBaseUrl?: string,
+    deadline = Date.now() + getContentApiTimeoutMs()
 ): Promise<Partial<Metadata> | null> {
     const metadata = normalizeRemotePostMeta(post, assetBaseUrl)
 
@@ -152,19 +131,18 @@ async function normalizeRemotePost(
         return null
     }
 
-    const { content, contentFormat } = await fetchRemoteBody(
-        post,
-        markdownBaseUrl
-    )
+    const body = await fetchRemoteBody(post, markdownBaseUrl, deadline)
+    if (!body) return null
 
     return {
         ...metadata,
-        content,
-        contentFormat,
+        ...body,
     }
 }
 
-async function fetchRemotePostsPayload() {
+async function fetchRemotePostsPayload(
+    deadline = Date.now() + getContentApiTimeoutMs()
+) {
     const config = getContentApiConfig()
 
     if (!config) {
@@ -174,7 +152,7 @@ async function fetchRemotePostsPayload() {
     const url = joinUrl(config.baseUrl, config.postsPath)
 
     try {
-        const response = await ky.get(url, {
+        const response = await readContentApiResponse(url, {
             headers: {
                 Accept: 'application/json',
                 ...getContentApiAuthHeaders(),
@@ -183,17 +161,9 @@ async function fetchRemotePostsPayload() {
                 revalidate: getContentRevalidateSeconds(),
                 tags: [REMOTE_CONTENT_CACHE_TAG],
             },
-            throwHttpErrors: false,
-            timeout: getContentApiTimeoutMs(),
+            deadline,
         })
-
-        if (!response.ok) {
-            throw new Error(
-                `[docs] Remote content request failed (${config.label}): ${url} ${response.status}`
-            )
-        }
-
-        const payload = await response.json()
+        const payload: unknown = JSON.parse(response.text)
         const rawPosts = parseRemotePostsPayload(payload)
 
         if (!rawPosts) {
@@ -245,7 +215,8 @@ export async function fetchRemoteDocsData() {
 }
 
 export async function fetchRemoteDocByRoutePath(routePath: string) {
-    const payload = await fetchRemotePostsPayload()
+    const deadline = Date.now() + getContentApiTimeoutMs()
+    const payload = await fetchRemotePostsPayload(deadline)
 
     if (!payload) {
         return null
@@ -267,11 +238,14 @@ export async function fetchRemoteDocByRoutePath(routePath: string) {
         return null
     }
 
-    return normalizeRemotePost(
+    const doc = await normalizeRemotePost(
         targetPost,
         payload.config.markdownBaseUrl,
-        payload.config.assetBaseUrl
+        payload.config.assetBaseUrl,
+        deadline
     )
+    if (!doc) throw new ContentApiRequestError('empty')
+    return doc
 }
 
 export async function fetchRemoteSearchData(keyword?: string) {
