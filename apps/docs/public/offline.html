@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="robots" content="noindex,nofollow" />
+        <title>HEAP-FORGE / Offline</title>
+        <link rel="stylesheet" href="/offline-reader.css" />
+        <script src="/offline-reader.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <a href="/">HEAP-FORGE</a>
+            <p id="connection" role="status"></p>
+        </header>
+        <main>
+            <h1 id="heading">저장한 글</h1>
+            <p id="description">
+                이 브라우저에서 직접 저장한 공개 글만 볼 수 있습니다.
+            </p>
+            <p id="status" role="status" aria-live="polite"></p>
+            <ul id="articles"></ul>
+            <button id="clear" type="button" hidden>전체 삭제</button>
+            <p id="notice">
+                브라우저 데이터 삭제·저장 공간 정리 시 저장본도 사라질 수
+                있습니다.
+            </p>
+        </main>
+    </body>
+</html>

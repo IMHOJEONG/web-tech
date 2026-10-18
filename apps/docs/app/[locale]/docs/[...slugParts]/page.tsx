@@ -21,6 +21,7 @@ import { LoadingComponent } from '~/shared/loading-component'
 import { ArticleContentLayout } from '~/widgets/article-detail/ui/article-content-layout'
 import { ArticleSupplementary } from '~/widgets/article-detail/ui/article-supplementary'
 import { ArticleStructuredData } from '~/widgets/article-detail/ui/article-structured-data'
+import { OfflineSaveButton } from '~/feature/offline/ui/offline-save-button'
 
 const getCachedDocByRoutePath = cache(async (routePath: string) => {
     const { measure } = await getRequestObservation()
@@ -93,7 +94,7 @@ export default async function Page({
                 supplementary={supplementary}
                 toc={renderedArticle.toc}
             >
-                <div className="mdx-wrapper">
+                <div className="mdx-wrapper" data-offline-content>
                     {renderedArticle.mode === 'html' ? (
                         <>
                             <article
@@ -104,11 +105,23 @@ export default async function Page({
                             <RemoteCodeCopyEnhancer />
                         </>
                     ) : (
-                        <Suspense fallback={<LoadingComponent />}>
+                        <Suspense
+                            fallback={
+                                <div data-offline-loading>
+                                    <LoadingComponent />
+                                </div>
+                            }
+                        >
                             {renderedArticle.content}
                         </Suspense>
                     )}
                 </div>
+                {target.status === 'published' && (
+                    <OfflineSaveButton
+                        path={localizePath(getDocHref(target), locale)}
+                        title={target.title || 'HEAP-FORGE'}
+                    />
+                )}
             </ArticleContentLayout>
         </>
     )
