@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-18 Handlebars 보안 audit](2026-10-18-handlebars-security-audit.json): [검증 보고서](../security/2026-10-18-handlebars-advisories.md). 전체·production audit 전후, 무해한 회귀·build 결과와 로그 해시. PR #39 리뷰 후 임시 작업 트리 재현 결과도 포함.
+
 - [10-18 스트림 종료 주체 재조사](2026-10-18-stream-cause-reinvestigation.json): [재조사 보고서](../cache/2026-10-18-stream-termination-investigation.md#종료-주체와-선행-오류-재조사). 상대편/서버 종료 순서·upstream 결과·실패한 초기 대조군과 최종 검증.
 
 - [10-18 이동 검사 역할 정리](2026-10-18-navigation-test-contracts.json): [검증 보고서](../cache/2026-10-18-stream-termination-investigation.md#검사-역할-분리와-의도-보존). 기존 assertion·direct/reload 보존 비교와 Link·직접 URL 역할별 결과.

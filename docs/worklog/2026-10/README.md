@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-18 Handlebars 패치와 braces 재조사](2026-10-18-handlebars-security-patch.md)
+
 - [10-18 스트림 종료 주체 재조사](2026-10-18-stream-cause-reinvestigation.md)
 
 - [10-18 사용자 탐색·직접 URL 검사 분리](2026-10-18-navigation-test-contracts.md)
