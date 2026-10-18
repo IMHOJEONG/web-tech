@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-19 PR #39 이후 feature 동기화](2026-10-19-feature-sync-after-pr39.md)
+
 - [10-18 Handlebars 패치와 braces 재조사](2026-10-18-handlebars-security-patch.md)
 
 - [10-18 스트림 종료 주체 재조사](2026-10-18-stream-cause-reinvestigation.md)
