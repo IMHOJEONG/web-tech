@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-18 Handlebars 패치와 braces 재조사](2026-10-18-handlebars-security-patch.md)
+
 - [10-17 CodeQL script 태그 테스트 보완](2026-10-17-codeql-script-tag-assertions.md)
 
 - [10-15 보존 중이던 블로그 작업의 단위별 커밋](2026-10-15-reviewed-backlog-commits.md)
