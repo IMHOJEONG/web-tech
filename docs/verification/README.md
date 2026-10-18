@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-18 Handlebars 패치·기본 브랜치 경고 4건](security/2026-10-18-handlebars-advisories.md): Handlebars 3건 조치·전후 회귀와 audit, braces 공식 패치 미출시·개발 경로 잔여 구분.
+
 - [10-14 문서 인덱스·검색 목록 밀도 검토](accessibility/2026-10-14-docs-index-density-review.md): 공개 네 조건의 개선 전 기준선. UI 구현·개선 후 검증 미착수.
 
 - [10-14 모바일 문서 H1 크기](accessibility/2026-10-14-mobile-article-title.md)
