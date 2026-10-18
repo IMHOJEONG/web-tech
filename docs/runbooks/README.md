@@ -12,6 +12,8 @@
 
 [전체 문서 안내](../README.md)
 
+- [Docs 오프라인 저장과 네트워크 장애 점검](docs-offline-reading.md)
+
 - [Docs 웹 푸시 실험](docs-web-push-experiment.md)
 
 - [서비스 복구 리허설](platform-recovery-drill.md)

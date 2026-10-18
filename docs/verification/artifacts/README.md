@@ -1,5 +1,9 @@
 # 검증 원본 증거
 
+- [10-18 기존 상세·캐시 production 결과 발췌](2026-10-18-article-production-results.txt): [네트워크·오프라인 검증](../resilience/2026-10-17-content-network-offline.md#기존-상세캐시-production-회귀). 테스트 108개 통과와 남은 스트림 오류 12회를 별개로 기록합니다.
+
+- [10-17 콘텐츠 네트워크·Worker 검사](2026-10-17-content-network-tests.txt), [10-18 production 오프라인 브라우저 검사](2026-10-18-offline-production-browser.txt): [검증 보고서](../resilience/2026-10-17-content-network-offline.md). 모의 원격 실패와 실제 Chromium의 저장·연결 차단을 구분합니다.
+
 - [10-14 인덱스·검색 목록 도달 거리 기준선](2026-10-14-docs-index-density-baseline.json): [밀도 검토 보고서](../accessibility/2026-10-14-docs-index-density-review.md). 공개 사이트 네 조건의 실제 값 발췌, 개선 목표와 구분.
 
 - [10-14 모바일 제목 실제 측정](2026-10-14-mobile-title-local.json), [공개 사이트 측정](2026-10-14-mobile-title-public.json), [Production 상태](2026-10-14-mobile-title-production.json): [제목 검증](../accessibility/2026-10-14-mobile-article-title.md).

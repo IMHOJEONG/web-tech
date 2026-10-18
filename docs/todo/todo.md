@@ -395,6 +395,8 @@ PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 �
   - remote content 장애 시 목록/검색은 로컬 문서로 graceful degradation, 문서 상세는 동일 route 로컬 문서 fallback 후 실패하도록 정책 정리
   - source 선택 결과는 runtime log에 항상 남기되, UI에는 badge/filter를 노출하지 않음
   - 기준 문서: `docs/runbooks/content-api-auth-ops-runbook.md`
+- [x] `P1` 원격 조회 retry 0·헤더/본문 전체 deadline·빈 본문 로컬 대체와 카드 이미지 실패 처리를 보강한다. [10-17~18 검증](../verification/resilience/2026-10-17-content-network-offline.md): lib 253개, 이미지 차단·오프라인 dev/production 각각 18개, 기존 상세·캐시 108개 통과. 스트림 종료 오류와 운영 배포 확인은 별개다.
+- [-] `P2` 직접 저장한 공개 글의 오프라인 열람을 제공한다. [ADR-0015](../architecture/adr-0015-explicit-offline-article-snapshots.md)·정적 reader·저장/업데이트/삭제와 CI job은 기능 커밋에 반영했다. 완료 조건: 배포 후 HTTPS 저장·네트워크 차단·Worker 갱신과 Safari/Firefox·실기기 확인. 전체 검색·초안·API 보관은 범위에서 제외한다.
 - [x] `P0` `docs` secret/token 수명주기 정책을 확정한다.
   - Content API, revalidation, Better Stack, Cloudflare, GHCR credential inventory 정리
   - 직접 관리하는 shared secret은 90일 회전, 공급자 token은 권한/만료 기준 적용
