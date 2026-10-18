@@ -1,5 +1,11 @@
 # 2026-10 작업 기록
 
+- [10-18 스트림 종료 주체 재조사](2026-10-18-stream-cause-reinvestigation.md)
+
+- [10-18 사용자 탐색·직접 URL 검사 분리](2026-10-18-navigation-test-contracts.md)
+
+- [10-18 CI 스트림 종료 원인 추적](2026-10-18-stream-termination-investigation.md)
+
 - [10-17 콘텐츠 네트워크 실패와 오프라인 열람](2026-10-17-content-network-offline-reading.md)
 
 - [10-17 CodeQL script 태그 테스트 보완](2026-10-17-codeql-script-tag-assertions.md)

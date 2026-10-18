@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-18 CI 스트림 조기 종료 8건](cache/2026-10-18-stream-termination-investigation.md): 문서 교체와 실제 Link 클릭 비교, 실제 장애 분리와 과거 CI 판정 한계.
+
 - [10-17 콘텐츠 네트워크·오프라인 저장](resilience/2026-10-17-content-network-offline.md): 재시도·본문 지연·로컬 대체와 명시적 저장, 완전 오프라인 열람 검증. 운영 배포 미검증.
 
 - [10-14 문서 인덱스·검색 목록 밀도 검토](accessibility/2026-10-14-docs-index-density-review.md): 공개 네 조건의 개선 전 기준선. UI 구현·개선 후 검증 미착수.

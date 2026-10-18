@@ -1,5 +1,13 @@
 # 검증 원본 증거
 
+- [10-18 스트림 종료 주체 재조사](2026-10-18-stream-cause-reinvestigation.json): [재조사 보고서](../cache/2026-10-18-stream-termination-investigation.md#종료-주체와-선행-오류-재조사). 상대편/서버 종료 순서·upstream 결과·실패한 초기 대조군과 최종 검증.
+
+- [10-18 이동 검사 역할 정리](2026-10-18-navigation-test-contracts.json): [검증 보고서](../cache/2026-10-18-stream-termination-investigation.md#검사-역할-분리와-의도-보존). 기존 assertion·direct/reload 보존 비교와 Link·직접 URL 역할별 결과.
+
+- [10-18 실제 Link 이동 비교](2026-10-18-prefetch-navigation-comparison.json): [후속 비교 보고서](../cache/2026-10-18-stream-termination-investigation.md#실제-link-클릭과-문서-교체-비교). ko/en·두 화면·세 이동 방식의 3회 반복, 서버 완료와 문서 유지 증거.
+
+- [10-18 스트림 종료 조사](2026-10-18-stream-termination-investigation.json): [검증 보고서](../cache/2026-10-18-stream-termination-investigation.md). CI 8건·로컬 요청별 순서·대조군·원본 로그 해시. 취소 추정과 확정을 분리합니다.
+
 - [10-18 기존 상세·캐시 production 결과 발췌](2026-10-18-article-production-results.txt): [네트워크·오프라인 검증](../resilience/2026-10-17-content-network-offline.md#기존-상세캐시-production-회귀). 테스트 108개 통과와 남은 스트림 오류 12회를 별개로 기록합니다.
 
 - [10-17 콘텐츠 네트워크·Worker 검사](2026-10-17-content-network-tests.txt), [10-18 production 오프라인 브라우저 검사](2026-10-18-offline-production-browser.txt): [검증 보고서](../resilience/2026-10-17-content-network-offline.md). 모의 원격 실패와 실제 Chromium의 저장·연결 차단을 구분합니다.
