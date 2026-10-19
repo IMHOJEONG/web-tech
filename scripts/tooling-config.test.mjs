@@ -9,6 +9,7 @@ import {
 } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import * as prettier from "prettier";
 import { ESLint } from "eslint";
@@ -257,6 +258,93 @@ test("CLI format checks and CI changed-commit checks stay read-only", () => {
     ),
   );
   assert.doesNotMatch(workflow, /prettier --write|pnpm format\s*$/m);
+});
+
+const ciWorkflow = readFileSync(
+  path.join(root, ".github/workflows/ci.yml"),
+  "utf8",
+);
+function ciJob(name) {
+  const match = ciWorkflow.match(
+    new RegExp(
+      `^  ${name}:\\n([\\s\\S]*?)(?=^  [a-z][a-z-]*:\\n|(?![\\s\\S]))`,
+      "m",
+    ),
+  );
+  assert.ok(match, `CI job exists: ${name}`);
+  return match[1];
+}
+
+test("CI isolates browser suites from unit tests without dropping viewport coverage", () => {
+  const unit = ciJob("unit-contract-tests");
+  for (const command of [
+    "pnpm test",
+    "pnpm test:repo",
+    "pnpm --filter docs test:content",
+    "pnpm --filter docs test:lib",
+    "pnpm test:crp-lab",
+    "pnpm --filter docs-backend test:e2e --runInBand",
+  ]) {
+    assert.ok(unit.includes(`run: ${command}\n`), command);
+  }
+  assert.doesNotMatch(
+    unit,
+    /playwright install|test:article:prod|docs test:e2e/,
+  );
+  const browser = ciJob("docs-browser");
+  assert.match(browser, /fail-fast: false/);
+  assert.match(browser, /timeout-minutes: 15/);
+  const projects = readFileSync(
+    path.join(root, "apps/docs/playwright.config.ts"),
+    "utf8",
+  );
+  const projectNames = [...projects.matchAll(/name: '(chromium-[^']+)'/g)].map(
+    (match) => match[1],
+  );
+  assert.equal(projectNames.length, 3);
+  for (const project of projectNames) {
+    assert.ok(
+      browser.includes(`pnpm --filter docs test:e2e --project=${project}\n`),
+      project,
+    );
+  }
+  for (const command of [
+    "pnpm --filter docs test:article:prod",
+    "pnpm test:crp-lab:browser",
+  ]) {
+    assert.ok(browser.includes(`command: ${command}\n`), command);
+  }
+  assert.equal([...browser.matchAll(/- suite:/g)].length, 5);
+  assert.match(browser, /run: \$\{\{ matrix\.command \}\}/);
+  assert.doesNotMatch(browser, /continue-on-error/);
+});
+
+test("required Test gate fails for failed, cancelled or skipped dependencies", () => {
+  const gate = ciJob("test");
+  assert.match(gate, /name: Test\n/);
+  assert.match(gate, /if: \$\{\{ always\(\) \}\}/);
+  assert.match(gate, /needs: \[unit-contract-tests, docs-browser\]/);
+  assert.match(
+    gate,
+    /UNIT_RESULT: \$\{\{ needs.unit-contract-tests.result \}\}/,
+  );
+  assert.match(gate, /BROWSER_RESULT: \$\{\{ needs.docs-browser.result \}\}/);
+  const script = gate.match(/run: \|\n((?: {10}[^\n]*\n?)+)/)?.[1];
+  assert.ok(script);
+  for (const unit of ["success", "failure", "cancelled", "skipped"]) {
+    for (const browser of ["success", "failure", "cancelled", "skipped"]) {
+      const result = spawnSync("bash", ["-e", "-c", script], {
+        encoding: "utf8",
+        env: { ...process.env, UNIT_RESULT: unit, BROWSER_RESULT: browser },
+      });
+      assert.ifError(result.error);
+      assert.equal(
+        result.status === 0,
+        unit === "success" && browser === "success",
+        `unit=${unit}, browser=${browser}`,
+      );
+    }
+  }
 });
 
 test("ESLint content cache detects source and rule changes without rewriting source", async (t) => {
