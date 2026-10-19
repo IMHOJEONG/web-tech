@@ -32,7 +32,7 @@ docker image inspect postgres:16-alpine
 mise exec -- pnpm verify:vuln-radar:integration
 ```
 
-3. PASS 항목과 마지막 Evidence 경로를 확인한다. JSON의 baseSha·runnerSha256·cleanupRunnerSha256·results·cleanup·cleanupErrors를 검토한다. 재실행은 새 시각의 증거 파일을 생성한다.
+3. PASS 항목과 마지막 Evidence 경로를 확인한다. JSON의 baseSha·workingTreeDirty·runnerSha256·cleanupRunnerSha256·results·cleanup·cleanupErrors를 검토한다. 재실행은 새 시각의 증거 파일을 생성한다.
 4. 결과와 캡처를 확인해 verification·worklog·목차에 연결한다. 실제 env·인증 헤더를 붙이지 않는다.
 
 ### 격리 방식
@@ -46,6 +46,7 @@ mise exec -- pnpm verify:vuln-radar:integration
 - 종료 시 이 실행의 프로세스와 label이 일치하는 DB만 정리한다. 기존 서버·컨테이너·볼륨·배포 브랜치는 바꾸지 않는다.
 - [정리 실행기](../../scripts/verification-cleanup.mts)는 브라우저 종료·백엔드 종료·프론트 종료·DB 연결 해제·컨테이너 제거·임시 파일 제거를 각각 시도한다. 앞 단계가 실패해도 나머지를 계속하고, cleanup 플래그는 해당 단계 성공 시에만 true로 기록한다. 생성하지 않은 자원의 no-op도 성공으로 취급한다.
 - 최초 검증 실패는 error, 정리 실패는 cleanupErrors의 단계·메시지로 분리하고 비밀값을 가린다. 정리 후 보고서 저장을 시도하며 어느 단계든 실패하면 exit code 1이다. 저장 자체가 실패하면 REPORT FAIL로 알리고 성공으로 처리하지 않는다.
+- baseSha와 workingTreeDirty는 빌드·DB·캡처·보고서 생성 전 시작 시점에 기록한다. Git status의 tracked·untracked 변경을 함께 판단하고 파일명·diff·비밀값은 기록하지 않는다. true이면 baseSha의 커밋만 실행한 결과가 아니므로 도구 해시와 작업 트리 설명을 함께 확인한다. 검증 도구가 새로 만든 artifact 때문에 시작 상태가 true로 바뀌지는 않는다.
 
 ### Docker 없는 정리 회귀 테스트
 

@@ -863,6 +863,9 @@ async function main() {
   );
 }
 
+const baseSha = command("git", ["rev-parse", "HEAD"]);
+const workingTreeDirty = command("git", ["status", "--porcelain"]) !== "";
+
 const interrupt = () => {
   interrupted = true;
   void browser?.close().catch(() => {});
@@ -916,7 +919,8 @@ try {
       const report = {
         startedAt,
         finishedAt: new Date().toISOString(),
-        baseSha: command("git", ["rev-parse", "HEAD"]),
+        baseSha,
+        workingTreeDirty,
         runnerSha256,
         cleanupRunnerSha256,
         node: process.version,
