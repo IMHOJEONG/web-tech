@@ -100,11 +100,12 @@ for (const theme of ['light', 'dark'] as const) {
             await page.goto(path)
             await expect(page.locator('[data-page-pending]')).toHaveCount(0)
             await expect(page.locator(screen.ready).first()).toBeVisible()
-            expect(
-                await page
-                    .locator('html')
-                    .evaluate((el) => el.classList.contains('dark'))
-            ).toBe(theme === 'dark')
+            // The theme script can run after streamed content becomes visible.
+            if (theme === 'dark') {
+                await expect(page.locator('html')).toHaveClass(/\bdark\b/)
+            } else {
+                await expect(page.locator('html')).not.toHaveClass(/\bdark\b/)
+            }
             await page.evaluate(() => document.fonts.ready)
             const before = await page.locator('main').evaluate((el) => {
                 const box = el.getBoundingClientRect()
