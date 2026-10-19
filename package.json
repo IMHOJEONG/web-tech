@@ -5,6 +5,7 @@
     "build": "turbo build",
     "build:web-apps": "turbo build --filter=docs --filter=vuln-radar",
     "check:vuln-radar:dev": "bash ./scripts/check-vuln-radar-dev.sh",
+    "verify:vuln-radar:integration": "tsc -p tsconfig.vuln-integration.json && node --experimental-strip-types ./scripts/verify-vuln-radar-integration.mts",
     "check:web-apps": "pnpm lint:web-apps && pnpm typecheck:web-apps && pnpm build:web-apps",
     "dev": "turbo dev",
     "dev:vuln-radar": "turbo dev --filter=vuln-radar",

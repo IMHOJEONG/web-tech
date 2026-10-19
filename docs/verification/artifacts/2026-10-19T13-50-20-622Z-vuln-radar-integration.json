@@ -1,0 +1,139 @@
+{
+  "startedAt": "2026-10-19T13:50:20.622Z",
+  "finishedAt": "2026-10-19T13:50:31.863Z",
+  "baseSha": "d4a89c094d8d2dae87c44c9192ada42428c931cd",
+  "runnerSha256": "27884df8b1dfdd16434fdcbe20e774d0bd80113180f83b08ec853e71cb517472",
+  "node": "v24.12.0",
+  "databaseImage": "postgres:16-alpine",
+  "browser": "151.0.7922.34",
+  "endpoints": {
+    "backend": "http://127.0.0.1:4310",
+    "frontend": "http://127.0.0.1:4311"
+  },
+  "scope": "isolated PostgreSQL fixtures + compiled Nest + production Vite preview; no upstream ingestion or deployment",
+  "results": [
+    {
+      "name": "server API token is absent from built browser assets",
+      "status": "passed",
+      "durationMs": 2
+    },
+    {
+      "name": "actual Nest auth rejects absent and invalid tokens; real proxy supplies server token",
+      "status": "passed",
+      "durationMs": 72
+    },
+    {
+      "name": "Postgres feed/detail reliability and supporting endpoints match frontend contracts",
+      "status": "passed",
+      "durationMs": 72
+    },
+    {
+      "name": "real API browser feed filters, labels and detail navigation at 1280px",
+      "status": "passed",
+      "durationMs": 729
+    },
+    {
+      "name": "real API browser feed filters, labels and detail navigation at 390px",
+      "status": "passed",
+      "durationMs": 467
+    },
+    {
+      "name": "backend shutdown preserves browser cache through scheduled refresh failure",
+      "status": "passed",
+      "durationMs": 513
+    },
+    {
+      "name": "first request during a real backend outage renders full error without cache",
+      "status": "passed",
+      "durationMs": 1455
+    },
+    {
+      "name": "restarted Nest server rereads changed DB record and browser retry recovers",
+      "status": "passed",
+      "durationMs": 554
+    },
+    {
+      "name": "actual Nest no-database fallback remains explicit and renders unknown reliability",
+      "status": "passed",
+      "durationMs": 596
+    },
+    {
+      "name": "browser requests never carry the server API token",
+      "status": "passed",
+      "durationMs": 0
+    }
+  ],
+  "fixtureSummary": {
+    "count": 3,
+    "items": [
+      {
+        "cveId": "CVE-2099-91001",
+        "reliability": {
+          "level": "high",
+          "confidenceScore": 71,
+          "freshness": {
+            "status": "fresh",
+            "ingestedAt": "2026-10-19T13:50:25.332Z",
+            "upstreamModifiedAt": "2026-10-19T13:50:24.194Z",
+            "verifiedAt": "2026-10-19T13:50:25.332Z"
+          },
+          "evidenceCompleteness": {
+            "score": 71,
+            "missing": ["affected", "mitigation"]
+          },
+          "conflicts": []
+        }
+      },
+      {
+        "cveId": "CVE-2099-91003",
+        "reliability": {
+          "level": "low",
+          "confidenceScore": 43,
+          "freshness": {
+            "status": "fresh",
+            "ingestedAt": "2026-10-19T13:50:25.350Z",
+            "upstreamModifiedAt": "2026-10-19T13:50:22.194Z",
+            "verifiedAt": "2026-10-19T13:50:25.350Z"
+          },
+          "evidenceCompleteness": {
+            "score": 43,
+            "missing": ["kev", "advisory", "affected", "mitigation"]
+          },
+          "conflicts": []
+        }
+      },
+      {
+        "cveId": "CVE-2099-91002",
+        "reliability": {
+          "level": "low",
+          "confidenceScore": 0,
+          "freshness": {
+            "status": "fresh",
+            "ingestedAt": "2026-10-19T13:50:25.346Z",
+            "upstreamModifiedAt": "2026-10-19T13:50:23.194Z",
+            "verifiedAt": "2026-10-19T13:50:25.346Z"
+          },
+          "evidenceCompleteness": {
+            "score": 0,
+            "missing": [
+              "cvss",
+              "epss",
+              "kev",
+              "advisory",
+              "watchlist",
+              "affected",
+              "mitigation"
+            ]
+          },
+          "conflicts": []
+        }
+      }
+    ]
+  },
+  "cleanup": {
+    "backendStopped": true,
+    "frontendStopped": true,
+    "databaseRemoved": true,
+    "temporaryFilesRemoved": true
+  }
+}
