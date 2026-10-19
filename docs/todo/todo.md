@@ -307,8 +307,9 @@ PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 �
   - `TERMS`
   - `CHANGELOG`
   - `GITHUB`
-- [ ] `P2` empty state, loading state, error state의 시각 톤을 통일한다.
+- [-] `P2` empty state, loading state, error state의 시각 톤을 통일한다.
   - root landing은 remote latest notes 실패 시 페이지 전체를 죽이지 않고 섹션 단위 graceful degradation을 유지
+  - 10-19 로딩은 공통 상태·막대 + 도메인별 골격으로 분리했다. 검색·필터·카드·헤더 프레임을 실제 화면과 공유하고 홈은 최근 글만 대기한다. [로딩 정책](../architecture/docs-loading-ux-policy.md), [로컬 검증](../verification/accessibility/2026-10-19-page-skeletons-local.md). 운영 CLS와 데이터 의존 높이·빈 결과는 후속 점검 대상이다.
 - [-] `P2` keyboard navigation / focus ring / drawer close flow 접근성을 점검한다. 로컬 production 20개 통과와 운영 CSS 실패를 구분하며, VoiceOver/NVDA 낭독은 미검증이다. [현재 검증](../verification/accessibility/2026-09-23-deployed-shell.md).
 - [-] `P2` layout/list motion 정책을 운영한다.
   - `motion-layout`, `motion-reveal` 기반으로 시작

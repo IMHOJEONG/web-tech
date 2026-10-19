@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
-import { ContentPending } from '~/shared/ui/content-pending'
+import { WebHubPending } from '~/widgets/content-hub/ui/web-hub-pending'
 import type { HubSearchParams } from '~/widgets/content-hub/model/hub-topic-filter'
 import { getTranslations } from 'next-intl/server'
 import { buildPageMetadata } from '~/lib/localized-metadata'
@@ -24,7 +24,7 @@ export default function Page({
     searchParams: HubSearchParams
 }) {
     return (
-        <Suspense fallback={<ContentPending />}>
+        <Suspense fallback={<WebHubPending />}>
             <ChannelHubPage channel="web" searchParams={searchParams} />
         </Suspense>
     )

@@ -17,7 +17,7 @@ import {
 import { getDocByRoutePath } from '~/lib/get-document'
 import { renderArticleContent } from '~/lib/render-article-content'
 import { components } from '~/mdx-components'
-import { LoadingComponent } from '~/shared/loading-component'
+import { ArticleBodySkeleton } from '~/widgets/article-detail/ui/article-body-skeleton'
 import { ArticleContentLayout } from '~/widgets/article-detail/ui/article-content-layout'
 import { ArticleSupplementary } from '~/widgets/article-detail/ui/article-supplementary'
 import { ArticleStructuredData } from '~/widgets/article-detail/ui/article-structured-data'
@@ -108,7 +108,7 @@ export default async function Page({
                         <Suspense
                             fallback={
                                 <div data-offline-loading>
-                                    <LoadingComponent />
+                                    <ArticleBodySkeleton />
                                 </div>
                             }
                         >

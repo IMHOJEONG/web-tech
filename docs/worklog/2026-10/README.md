@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-19 페이지별 스켈레톤·도메인 재사용](2026-10-19-page-skeletons.md)
+
 - [10-19 문서 인덱스·검색 목록 우선 배치](2026-10-19-docs-index-order.md)
 
 - [10-19 PR #39 이후 feature 동기화](2026-10-19-feature-sync-after-pr39.md)
