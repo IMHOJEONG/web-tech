@@ -96,18 +96,31 @@
 
 - [ ] overview / detail에서 `왜 P0/P1인지`를 설명하는 점수 근거 UI를 추가한다.
 - [ ] `KEV`, `EPSS`, watchlist match가 priority에 어떤 영향을 줬는지 사용자에게 보여준다.
+- [ ] overview에서 low reliability / stale / conflict count를 별도 운영 지표로 보여준다.
+- [x] `P0/P1` 우선순위와 별도로 `reliability` 신뢰성 모델을 도입한다.
 
 ## 7. feed 페이지 만들기
 
-- [ ] 시간순 피드
-- [ ] priority 필터
+- [x] 시간순 피드
+- [x] priority 필터
 - [ ] source 필터
-- [ ] keyword 검색
+- [x] keyword 검색
+
+결정 메모:
+
+- `/feed` 라우트를 실제 화면으로 열고, 사이드바의 두 번째 항목을 feed 탐색으로 연결한다.
+- 현재 1차 필터는 클라이언트 상태로 시작한다. feed API가 query/filter parameter를 지원하면 URL query 기반 또는 서버 필터로 확장한다.
+- 필터 기준은 `priority`, `severity`, `KEV`, keyword이며, 최신 수정 시각 내림차순으로 정렬한다.
+- `source` 필터는 응답 모델이 item 단위 source를 아직 갖고 있지 않아 보류한다. API가 `source` 또는 `dataSource`를 item 단위로 제공하면 추가한다.
+- source 설계는 `origin source`, `evidence signal`, `runtime dataSource`를 분리한다. 기준 문서는 `docs/011_feed_source_evidence_contract.md`를 따른다.
+- 신뢰성은 `priority`와 분리해서 본다. 기준 문서는 `docs/012_vulnerability_reliability_policy.md`를 따른다.
 
 공부 포인트:
 
 - [ ] 필터 상태를 URL query string으로 둘지 local state로 둘지 판단할 수 있다.
 - [ ] 테이블과 카드 중 어떤 표현이 더 맞는지 기준을 세울 수 있다.
+- [ ] source identity와 priority evidence를 분리해서 설명할 수 있다.
+- [ ] 대응 우선순위와 판단 신뢰도를 분리해서 설명할 수 있다.
 
 ## 8. watchlist 페이지 만들기
 

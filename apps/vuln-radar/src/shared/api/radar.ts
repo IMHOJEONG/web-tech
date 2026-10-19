@@ -36,6 +36,62 @@ const overviewResponseSchema = z.object({
   highlights: z.array(z.string()),
 });
 
+const vulnerabilityReliabilitySchema = z.object({
+  level: z.enum(["verified", "high", "medium", "low", "unknown"]),
+  confidenceScore: z.number(),
+  freshness: z.object({
+    status: z.enum(["fresh", "aging", "stale", "unknown"]),
+    ingestedAt: z.string().nullable(),
+    upstreamModifiedAt: z.string().nullable(),
+    verifiedAt: z.string().nullable(),
+  }),
+  evidenceCompleteness: z.object({
+    score: z.number(),
+    missing: z.array(
+      z.enum([
+        "cvss",
+        "epss",
+        "kev",
+        "advisory",
+        "affected",
+        "watchlist",
+        "mitigation",
+      ]),
+    ),
+  }),
+  conflicts: z.array(
+    z.object({
+      type: z.enum(["severity", "affected", "alias", "status", "score"]),
+      message: z.string(),
+      sourceIds: z.array(z.string()),
+    }),
+  ),
+});
+
+const unknownReliability: z.infer<typeof vulnerabilityReliabilitySchema> = {
+  level: "unknown",
+  confidenceScore: 0,
+  freshness: {
+    status: "unknown",
+    ingestedAt: null,
+    upstreamModifiedAt: null,
+    verifiedAt: null,
+  },
+  evidenceCompleteness: {
+    score: 0,
+    missing: [
+      "cvss",
+      "epss",
+      "kev",
+      "advisory",
+      "affected",
+      "watchlist",
+      "mitigation",
+    ],
+  },
+  conflicts: [],
+};
+
 const feedItemSchema = z.object({
   cveId: z.string(),
   title: z.string(),
@@ -46,6 +102,7 @@ const feedItemSchema = z.object({
   publishedAt: z.string(),
   updatedAt: z.string(),
   matchedWatchlist: z.array(z.string()),
+  reliability: vulnerabilityReliabilitySchema.default(unknownReliability),
 });
 
 const feedResponseSchema = z.object({
@@ -80,6 +137,7 @@ const vulnerabilityDetailResponseSchema = z.object({
     publishedAt: z.string(),
     updatedAt: z.string(),
     matchedWatchlist: z.array(z.string()),
+    reliability: vulnerabilityReliabilitySchema.default(unknownReliability),
     advisories: z.array(vulnerabilityAdvisorySchema),
     references: z.object({
       nvdUrl: z.string().url(),

@@ -4,7 +4,7 @@ import type { LucideIcon } from "lucide-react";
 interface AppSidebarLinkProps {
   icon: LucideIcon;
   label: string;
-  to?: "/overview";
+  to?: "/feed" | "/overview";
 }
 
 const baseClassName =

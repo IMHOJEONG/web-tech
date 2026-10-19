@@ -7,6 +7,7 @@ import {
   redirect,
 } from "@tanstack/react-router";
 import { AppSidebar } from "@/app/ui/app-sidebar";
+import { FeedPage } from "@/pages/feed/ui/feed-page";
 import { OverviewPage } from "@/pages/overview/ui/overview-page";
 import { VulnerabilityDetailPage } from "@/pages/vulnerability-detail/ui/vulnerability-detail-page";
 import { runtimeConfig } from "@/shared/config/runtime";
@@ -47,6 +48,12 @@ const overviewRoute = createRoute({
   component: OverviewPage,
 });
 
+const feedRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/feed",
+  component: FeedPage,
+});
+
 const vulnerabilityDetailRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/vulnerabilities/$cveId",
@@ -56,6 +63,7 @@ const vulnerabilityDetailRoute = createRoute({
 const routeTree = rootRoute.addChildren([
   indexRoute,
   overviewRoute,
+  feedRoute,
   vulnerabilityDetailRoute,
 ]);
 
