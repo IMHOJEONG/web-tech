@@ -1,5 +1,7 @@
 # 운영 및 재현 절차
 
+- [vuln-radar 로컬 통합 검증](vuln-radar-local-integration-verification.md)
+
 - [테스트 직접 작성과 IDE 점검 가이드](test-authoring-ide-guide.md)
 
 - [저장소 테스트 목록과 실행 경로](repository-test-inventory.md)

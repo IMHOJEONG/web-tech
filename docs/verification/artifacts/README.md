@@ -1,5 +1,13 @@
 # 검증 원본 증거
 
+- [10-20 KST 깨끗한 커밋의 통합 검증](2026-10-19T15-15-59-845Z-vuln-radar-integration.json): [보고서](../integration/2026-10-19-vuln-radar-local-integration.md). 9fee886·workingTreeDirty=false, 통합 13개·정리 6단계 성공. [1280px](2026-10-19T15-15-59-845Z-vuln-radar-feed-1280.png)·[390px](2026-10-19T15-15-59-845Z-vuln-radar-feed-390.png). 파일명은 UTC.
+
+- [10-19 PR #46 정리 보완 재검증](2026-10-19T14-58-50-231Z-vuln-radar-integration.json): [보고서](../integration/2026-10-19-vuln-radar-local-integration.md). 통합 13개·정리 6단계 성공. [1280px](2026-10-19T14-58-50-231Z-vuln-radar-feed-1280.png)·[390px](2026-10-19T14-58-50-231Z-vuln-radar-feed-390.png).
+
+- [10-19 vuln-radar 최종 13개 통합 검사](2026-10-19T14-01-56-387Z-vuln-radar-integration.json): [보고서](../integration/2026-10-19-vuln-radar-local-integration.md). 실제 DB·API·프록시·브라우저, 토큰 미포함·정리 결과.
+- 이전 실행: [9개](2026-10-19T13-48-55-854Z-vuln-radar-integration.json), [10개](2026-10-19T13-50-20-622Z-vuln-radar-integration.json), [11개](2026-10-19T13-51-52-193Z-vuln-radar-integration.json), [13개 도입](2026-10-19T13-54-02-394Z-vuln-radar-integration.json).
+- 최종 화면: [1280px](2026-10-19T14-01-56-387Z-vuln-radar-feed-1280.png), [390px](2026-10-19T14-01-56-387Z-vuln-radar-feed-390.png). 이전 화면: [1280px](2026-10-19T13-54-02-394Z-vuln-radar-feed-1280.png), [390px](2026-10-19T13-54-02-394Z-vuln-radar-feed-390.png). 모두 합성 데이터만 표시.
+
 - [10-19 페이지별 스켈레톤 로컬 측정](2026-10-19-page-skeletons-local.json): [검증 보고서](../accessibility/2026-10-19-page-skeletons-local.md). 서버 골격 66표본의 기하·모션·넘침과 검사 시도별 결과. production CLS와 구분한다.
   - 캡처: [모바일 목록](2026-10-19-skeleton-docs-mobile-light.png), [모바일 UI/UX](2026-10-19-skeleton-uiux-mobile-light.png), [데스크톱 피드](2026-10-19-skeleton-feed-desktop-dark.png).
 

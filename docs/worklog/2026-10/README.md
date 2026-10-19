@@ -1,5 +1,9 @@
 # 2026-10 작업 기록
 
+- [10-20 PR #46 검증 실행 상태 식별](2026-10-20-vuln-radar-verification-provenance.md)
+
+- [10-19 main 기준 vuln-radar 통합 검증](2026-10-19-vuln-radar-integration.md)
+
 - [10-19 PR #40 병합 후 새 브랜치와 초안 보존](2026-10-19-post-pr40-branch-restart.md)
 
 - [10-19 PR #40 CI 시간 초과 보완](2026-10-19-pr40-ci-timeout.md)

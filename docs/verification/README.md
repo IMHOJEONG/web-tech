@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-19 vuln-radar 통합 검증](integration/2026-10-19-vuln-radar-local-integration.md): 격리 PostgreSQL·실제 Nest·Vite preview·배포 프록시 함수·Chromium 13개 통과. 운영 수집·배포 미검증.
+
 - [10-19 PR #40 CI 시간 초과 조사](cache/2026-10-19-pr40-ci-timeout.md): 단계별 시간 비교, job 예산 분리와 다크 테마 검사 race 보완. 수정 후 원격 CI는 미검증.
 
 - [10-19 페이지별 스켈레톤 로컬 검증](accessibility/2026-10-19-page-skeletons-local.md): 실제 서버 골격·완성 화면의 기하 비교와 검색·피드 회귀. 운영 CLS는 미검증.
