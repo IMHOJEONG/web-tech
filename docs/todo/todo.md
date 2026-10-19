@@ -297,9 +297,9 @@ PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 �
   - 3.5차: 문서 썸네일, 날짜, 보조 메타 pill을 shared UI로 분리 완료
   - 4차: 모바일 터치 사용성 1차 보강 완료
   - 목표: `/feed`는 발견/큐레이션, `/docs`는 빠른 검색/탐색으로 역할을 분리
-  - [x] 10-14 목록 순서·밀도 검토와 개선 전 기준선을 기록했다. UI 구현과 효과 검증은 미완료다. [검토 보고서](../verification/accessibility/2026-10-14-docs-index-density-review.md).
-  - [ ] 다음 1단계: 기본 인덱스·검색 결과의 목록 순서를 먼저 구현한다. 완료 조건: 검색·결과 수·현재 선택 다음에 실제 글 표시, 동일 viewport 첫 제목 위치의 전후 비교. [설계와 목표](../architecture/docs-search-experience-policy.md#문서-목록-순서와-밀도-보완-검토).
-  - [ ] 다음 2단계: 통계·섹션 요약 중복을 줄이고 태그·모음 탐색을 펼침/보조 영역으로 정리한다. 완료 조건: 선택과 해제·query 유지·읽기 순서·키보드 접근을 보존한다.
+  - [x] 10-14 목록 순서·밀도 검토와 개선 전 기준선을 기록했다. 당시 구현 미착수였으며 이후 진행은 아래 단계별 항목을 따른다. [검토 보고서](../verification/accessibility/2026-10-14-docs-index-density-review.md).
+  - [x] 1단계 로컬 구현·확인: 검색·결과 수·접이식 필터·현재 선택 다음에 실제 목록을 표시한다. 모바일 첫 제목은 인덱스 512px·검색 452px였다. 관련 E2E 69개(5개 제외)·목록 재검사 12개·화면 26조건 통과. 공개 배포는 미검증이다. [결과](../verification/accessibility/2026-10-19-docs-index-order-local.md).
+  - [ ] 다음 2단계: 목록 뒤로 옮긴 통계·섹션 요약의 중복과 표현을 줄이고 태그·모음의 추가 접힘을 검토한다. 배치 이동은 1단계에서 반영했다. 완료 조건: 선택과 해제·query 유지·읽기 순서·키보드 접근을 보존한다.
   - [ ] 다음 3단계: 카드 padding·중복 메타·OPEN 표시를 검토한다. 완료 조건: 제목·요약의 읽기 폭 확보, 전체 카드 클릭·검색어 강조·focus와 큰 글자 사용성 유지.
   - [ ] 다음 4단계: 반응형·검색·필터·페이지 이동 회귀와 공개 배포를 확인한다. 완료 조건: 제안 목표와 기능 계약을 검증 보고서에 기록하고 로컬 통과·공개 확인을 구분한다.
 - [x] `P1` footer 링크를 실제 라우트 또는 외부 링크와 연결한다.
@@ -307,8 +307,9 @@ PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 �
   - `TERMS`
   - `CHANGELOG`
   - `GITHUB`
-- [ ] `P2` empty state, loading state, error state의 시각 톤을 통일한다.
+- [-] `P2` empty state, loading state, error state의 시각 톤을 통일한다.
   - root landing은 remote latest notes 실패 시 페이지 전체를 죽이지 않고 섹션 단위 graceful degradation을 유지
+  - 10-19 로딩은 공통 상태·막대 + 도메인별 골격으로 분리했다. 검색·필터·카드·헤더 프레임을 실제 화면과 공유하고 홈은 최근 글만 대기한다. [로딩 정책](../architecture/docs-loading-ux-policy.md), [로컬 검증](../verification/accessibility/2026-10-19-page-skeletons-local.md). 운영 CLS와 데이터 의존 높이·빈 결과는 후속 점검 대상이다.
 - [-] `P2` keyboard navigation / focus ring / drawer close flow 접근성을 점검한다. 로컬 production 20개 통과와 운영 CSS 실패를 구분하며, VoiceOver/NVDA 낭독은 미검증이다. [현재 검증](../verification/accessibility/2026-09-23-deployed-shell.md).
 - [-] `P2` layout/list motion 정책을 운영한다.
   - `motion-layout`, `motion-reveal` 기반으로 시작
@@ -395,6 +396,8 @@ PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 �
   - remote content 장애 시 목록/검색은 로컬 문서로 graceful degradation, 문서 상세는 동일 route 로컬 문서 fallback 후 실패하도록 정책 정리
   - source 선택 결과는 runtime log에 항상 남기되, UI에는 badge/filter를 노출하지 않음
   - 기준 문서: `docs/runbooks/content-api-auth-ops-runbook.md`
+- [x] `P1` 원격 조회 retry 0·헤더/본문 전체 deadline·빈 본문 로컬 대체와 카드 이미지 실패 처리를 보강한다. [10-17~18 검증](../verification/resilience/2026-10-17-content-network-offline.md): lib 253개, 이미지 차단·오프라인 dev/production 각각 18개, 기존 상세·캐시 108개 통과. 스트림 종료 오류와 운영 배포 확인은 별개다.
+- [-] `P2` 직접 저장한 공개 글의 오프라인 열람을 제공한다. [ADR-0015](../architecture/adr-0015-explicit-offline-article-snapshots.md)·정적 reader·저장/업데이트/삭제와 CI job은 기능 커밋에 반영했다. 완료 조건: 배포 후 HTTPS 저장·네트워크 차단·Worker 갱신과 Safari/Firefox·실기기 확인. 전체 검색·초안·API 보관은 범위에서 제외한다.
 - [x] `P0` `docs` secret/token 수명주기 정책을 확정한다.
   - Content API, revalidation, Better Stack, Cloudflare, GHCR credential inventory 정리
   - 직접 관리하는 shared secret은 90일 회전, 공급자 token은 권한/만료 기준 적용

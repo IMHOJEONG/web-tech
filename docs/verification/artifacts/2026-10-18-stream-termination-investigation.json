@@ -1,0 +1,1150 @@
+{
+  "schemaVersion": 1,
+  "observedDate": "2026-10-18",
+  "timezone": "Asia/Seoul; event timestamps UTC",
+  "baseCommit": "f4b958254486c18ae1df2909fbf26595add8919f",
+  "scope": "loopback Next production 3111 and synthetic content 3112; no production NAS or webhook calls",
+  "ciRun": "https://github.com/IMHOJEONG/web-tech/actions/runs/39102318262",
+  "ciJob": "117600937450",
+  "ci": [
+    {
+      "line": 1592,
+      "utc": "2026-10-18T06:05:36.4340826Z",
+      "event": {
+        "event": "request-error",
+        "requestId": "87e9509c-dd94-4e5d-ad92-fad37636048e",
+        "correlation": "available",
+        "route": "/[locale]/docs/[...slugParts]",
+        "routeType": "render",
+        "outcome": "error",
+        "durationScope": "hook-only",
+        "durationMs": null
+      },
+      "project": "article-mobile",
+      "locale": "ko",
+      "historicalClassification": "unknown",
+      "probableMechanism": "prefetch interrupted by document navigation (local reproduction, not historical proof)"
+    },
+    {
+      "line": 1597,
+      "utc": "2026-10-18T06:05:39.0990765Z",
+      "event": {
+        "event": "request-error",
+        "requestId": "45a8b69d-f542-4ecf-9790-7e591f46faac",
+        "correlation": "available",
+        "route": "/[locale]/docs/[...slugParts]",
+        "routeType": "render",
+        "outcome": "error",
+        "durationScope": "hook-only",
+        "durationMs": null
+      },
+      "project": "article-mobile",
+      "locale": "ko",
+      "historicalClassification": "unknown",
+      "probableMechanism": "prefetch interrupted by document navigation (local reproduction, not historical proof)"
+    },
+    {
+      "line": 1603,
+      "utc": "2026-10-18T06:05:41.0531935Z",
+      "event": {
+        "event": "request-error",
+        "requestId": "51dab910-d499-4970-9e7c-7e0c9a4b88f4",
+        "correlation": "available",
+        "route": "/[locale]/docs/[...slugParts]",
+        "routeType": "render",
+        "outcome": "error",
+        "durationScope": "hook-only",
+        "durationMs": null
+      },
+      "project": "article-mobile",
+      "locale": "en",
+      "historicalClassification": "unknown",
+      "probableMechanism": "prefetch interrupted by document navigation (local reproduction, not historical proof)"
+    },
+    {
+      "line": 1608,
+      "utc": "2026-10-18T06:05:43.6461477Z",
+      "event": {
+        "event": "request-error",
+        "requestId": "64c2302a-0c77-4deb-afb9-f2974deb99b6",
+        "correlation": "available",
+        "route": "/[locale]/docs/[...slugParts]",
+        "routeType": "render",
+        "outcome": "error",
+        "durationScope": "hook-only",
+        "durationMs": null
+      },
+      "project": "article-mobile",
+      "locale": "en",
+      "historicalClassification": "unknown",
+      "probableMechanism": "prefetch interrupted by document navigation (local reproduction, not historical proof)"
+    },
+    {
+      "line": 1666,
+      "utc": "2026-10-18T06:06:02.7041288Z",
+      "event": {
+        "event": "request-error",
+        "requestId": "0af99347-80a6-45bc-9e18-6903e87d05f8",
+        "correlation": "available",
+        "route": "/[locale]/docs/[...slugParts]",
+        "routeType": "render",
+        "outcome": "error",
+        "durationScope": "hook-only",
+        "durationMs": null
+      },
+      "project": "article-desktop",
+      "locale": "ko",
+      "historicalClassification": "unknown",
+      "probableMechanism": "prefetch interrupted by document navigation (local reproduction, not historical proof)"
+    },
+    {
+      "line": 1671,
+      "utc": "2026-10-18T06:06:05.6613247Z",
+      "event": {
+        "event": "request-error",
+        "requestId": "2d7a3416-415f-43dc-82b9-9ac95960ccce",
+        "correlation": "available",
+        "route": "/[locale]/docs/[...slugParts]",
+        "routeType": "render",
+        "outcome": "error",
+        "durationScope": "hook-only",
+        "durationMs": null
+      },
+      "project": "article-desktop",
+      "locale": "ko",
+      "historicalClassification": "unknown",
+      "probableMechanism": "prefetch interrupted by document navigation (local reproduction, not historical proof)"
+    },
+    {
+      "line": 1677,
+      "utc": "2026-10-18T06:06:07.8898252Z",
+      "event": {
+        "event": "request-error",
+        "requestId": "4a57f452-641b-4a3f-a5da-338feb05d0ff",
+        "correlation": "available",
+        "route": "/[locale]/docs/[...slugParts]",
+        "routeType": "render",
+        "outcome": "error",
+        "durationScope": "hook-only",
+        "durationMs": null
+      },
+      "project": "article-desktop",
+      "locale": "en",
+      "historicalClassification": "unknown",
+      "probableMechanism": "prefetch interrupted by document navigation (local reproduction, not historical proof)"
+    },
+    {
+      "line": 1682,
+      "utc": "2026-10-18T06:06:10.7441665Z",
+      "event": {
+        "event": "request-error",
+        "requestId": "c1540fd6-9b12-4e86-a94a-f2c03d52ccb1",
+        "correlation": "available",
+        "route": "/[locale]/docs/[...slugParts]",
+        "routeType": "render",
+        "outcome": "error",
+        "durationScope": "hook-only",
+        "durationMs": null
+      },
+      "project": "article-desktop",
+      "locale": "en",
+      "historicalClassification": "unknown",
+      "probableMechanism": "prefetch interrupted by document navigation (local reproduction, not historical proof)"
+    }
+  ],
+  "baseline": {
+    "passed": "4 passed (40.9s)",
+    "streamErrorCount": 8
+  },
+  "chromiumTrace": {
+    "passed": "4 passed (41.2s)",
+    "streamErrorCount": 8,
+    "requests": [
+      {
+        "server": {
+          "schemaVersion": 1,
+          "event": "docs.request.summary",
+          "requestId": "f5c3d528-3201-4c99-b3d6-fc9062e1be99",
+          "service": "docs",
+          "environment": "test",
+          "observer": "node-fixture",
+          "clientProbeId": "14a100c3-3ce9-44d2-b858-4d0d4cd5bbf8",
+          "path": "/[locale]/docs/[...slugParts]",
+          "route": "/[locale]/docs/[...slugParts]",
+          "queryPresent": true,
+          "prefetch": true,
+          "prefetchEvidence": ["next-router-prefetch"],
+          "requestKind": "rsc",
+          "method": "GET",
+          "errorCoverage": "partial",
+          "responseFinished": false,
+          "responseClosed": true,
+          "closeBeforeFinish": true,
+          "transportClosed": null,
+          "headersSent": true,
+          "statusCode": 200,
+          "durationMs": 61.85,
+          "durationScope": "request-to-close",
+          "outcome": "unknown",
+          "reason": "prefetch-cancellation-suspected",
+          "level": "warn",
+          "precedingErrorIds": [],
+          "omittedEvents": 0,
+          "events": [
+            {
+              "eventId": "a8f21be2-8968-4a01-83cb-2a178d2afb8a",
+              "event": "started",
+              "sequence": 1,
+              "timestamp": "2026-10-18T06:36:21.477Z",
+              "elapsedMs": 0.06
+            },
+            {
+              "eventId": "20c1734d-0742-4ca5-bf26-06a4f76827cc",
+              "event": "closed",
+              "sequence": 2,
+              "timestamp": "2026-10-18T06:36:21.539Z",
+              "elapsedMs": 61.85
+            },
+            {
+              "errorId": "b90ed4c8-8470-49b1-98dc-2cb0a308c94f",
+              "errorCategory": "stream",
+              "phase": "after-headers",
+              "digest": "1853719082",
+              "eventId": "b36cff5c-41eb-4d47-abb2-0bb3a421f21b",
+              "event": "error",
+              "sequence": 3,
+              "timestamp": "2026-10-18T06:36:21.541Z",
+              "elapsedMs": 64.23
+            }
+          ]
+        },
+        "browser": [
+          {
+            "time": "2026-10-18T06:36:21.476Z",
+            "event": "correlated",
+            "networkId": "24378.230",
+            "path": "/ko/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "14a100c3-3ce9-44d2-b858-4d0d4cd5bbf8"
+          },
+          {
+            "time": "2026-10-18T06:36:21.493Z",
+            "event": "headers",
+            "networkId": "24378.230",
+            "path": "/ko/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "14a100c3-3ce9-44d2-b858-4d0d4cd5bbf8",
+            "requestId": "f5c3d528-3201-4c99-b3d6-fc9062e1be99",
+            "status": 200
+          }
+        ],
+        "nearbyNavigation": {
+          "time": "2026-10-18T06:36:21.538Z",
+          "event": "navigation",
+          "path": "/ko/docs",
+          "closeMinusNavigationMs": 1
+        },
+        "sameRequestCancellationEventObserved": false,
+        "transportDiagnosis": "navigation-associated premature close; cancellation strongly supported by paired experiment",
+        "lifecycleClassification": "unknown"
+      },
+      {
+        "server": {
+          "schemaVersion": 1,
+          "event": "docs.request.summary",
+          "requestId": "154d2416-c1b8-44c5-94d6-8f95ac3e3e79",
+          "service": "docs",
+          "environment": "test",
+          "observer": "node-fixture",
+          "clientProbeId": "ac1ddc0b-d35b-436a-ae87-a524cee5bb88",
+          "path": "/[locale]/docs/[...slugParts]",
+          "route": "/[locale]/docs/[...slugParts]",
+          "queryPresent": true,
+          "prefetch": true,
+          "prefetchEvidence": ["next-router-prefetch"],
+          "requestKind": "rsc",
+          "method": "GET",
+          "errorCoverage": "partial",
+          "responseFinished": false,
+          "responseClosed": true,
+          "closeBeforeFinish": true,
+          "transportClosed": null,
+          "headersSent": true,
+          "statusCode": 200,
+          "durationMs": 60.76,
+          "durationScope": "request-to-close",
+          "outcome": "unknown",
+          "reason": "prefetch-cancellation-suspected",
+          "level": "warn",
+          "precedingErrorIds": [],
+          "omittedEvents": 0,
+          "events": [
+            {
+              "eventId": "2cf83456-4dcb-4aa2-9f29-828681eeef01",
+              "event": "started",
+              "sequence": 1,
+              "timestamp": "2026-10-18T06:36:24.845Z",
+              "elapsedMs": 0.02
+            },
+            {
+              "eventId": "8511078d-cde0-43b7-a53a-c632f80dabdf",
+              "event": "closed",
+              "sequence": 2,
+              "timestamp": "2026-10-18T06:36:24.906Z",
+              "elapsedMs": 60.76
+            },
+            {
+              "errorId": "5ae4b558-3381-423b-a558-0b9443f7eadf",
+              "errorCategory": "stream",
+              "phase": "after-headers",
+              "digest": "1853719082",
+              "eventId": "68e5bf9c-2506-4e9d-98e0-7b856ca9ad8f",
+              "event": "error",
+              "sequence": 3,
+              "timestamp": "2026-10-18T06:36:24.906Z",
+              "elapsedMs": 61.11
+            }
+          ]
+        },
+        "browser": [
+          {
+            "time": "2026-10-18T06:36:24.842Z",
+            "event": "correlated",
+            "networkId": "24378.1287",
+            "path": "/ko/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "ac1ddc0b-d35b-436a-ae87-a524cee5bb88"
+          },
+          {
+            "time": "2026-10-18T06:36:24.862Z",
+            "event": "headers",
+            "networkId": "24378.1287",
+            "path": "/ko/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "ac1ddc0b-d35b-436a-ae87-a524cee5bb88",
+            "requestId": "154d2416-c1b8-44c5-94d6-8f95ac3e3e79",
+            "status": 200
+          }
+        ],
+        "nearbyNavigation": {
+          "time": "2026-10-18T06:36:24.893Z",
+          "event": "navigation",
+          "path": "/ko/docs",
+          "closeMinusNavigationMs": 13
+        },
+        "sameRequestCancellationEventObserved": false,
+        "transportDiagnosis": "navigation-associated premature close; cancellation strongly supported by paired experiment",
+        "lifecycleClassification": "unknown"
+      },
+      {
+        "server": {
+          "schemaVersion": 1,
+          "event": "docs.request.summary",
+          "requestId": "f723da9d-2572-45d1-99ee-497d594d437f",
+          "service": "docs",
+          "environment": "test",
+          "observer": "node-fixture",
+          "clientProbeId": "e8b5d38b-6941-48ec-8c3e-9e0bdd595220",
+          "path": "/[locale]/docs/[...slugParts]",
+          "route": "/[locale]/docs/[...slugParts]",
+          "queryPresent": true,
+          "prefetch": true,
+          "prefetchEvidence": ["next-router-prefetch"],
+          "requestKind": "rsc",
+          "method": "GET",
+          "errorCoverage": "partial",
+          "responseFinished": false,
+          "responseClosed": true,
+          "closeBeforeFinish": true,
+          "transportClosed": null,
+          "headersSent": true,
+          "statusCode": 200,
+          "durationMs": 52.22,
+          "durationScope": "request-to-close",
+          "outcome": "unknown",
+          "reason": "prefetch-cancellation-suspected",
+          "level": "warn",
+          "precedingErrorIds": [],
+          "omittedEvents": 0,
+          "events": [
+            {
+              "eventId": "408af834-b754-41aa-811a-96e724abaa09",
+              "event": "started",
+              "sequence": 1,
+              "timestamp": "2026-10-18T06:36:26.846Z",
+              "elapsedMs": 0.02
+            },
+            {
+              "eventId": "3cf214f0-009a-412c-bdf1-ef5deccbfffc",
+              "event": "closed",
+              "sequence": 2,
+              "timestamp": "2026-10-18T06:36:26.898Z",
+              "elapsedMs": 52.22
+            },
+            {
+              "errorId": "f33b02ff-5d6d-4381-b361-b4f8b1b11524",
+              "errorCategory": "stream",
+              "phase": "after-headers",
+              "digest": "1853719082",
+              "eventId": "b20a4993-3951-411e-995b-01e23cdba2d7",
+              "event": "error",
+              "sequence": 3,
+              "timestamp": "2026-10-18T06:36:26.901Z",
+              "elapsedMs": 54.51
+            }
+          ]
+        },
+        "browser": [
+          {
+            "time": "2026-10-18T06:36:26.847Z",
+            "event": "correlated",
+            "networkId": "24458.230",
+            "path": "/en/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "e8b5d38b-6941-48ec-8c3e-9e0bdd595220"
+          },
+          {
+            "time": "2026-10-18T06:36:26.860Z",
+            "event": "headers",
+            "networkId": "24458.230",
+            "path": "/en/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "e8b5d38b-6941-48ec-8c3e-9e0bdd595220",
+            "requestId": "f723da9d-2572-45d1-99ee-497d594d437f",
+            "status": 200
+          }
+        ],
+        "nearbyNavigation": {
+          "time": "2026-10-18T06:36:26.900Z",
+          "event": "navigation",
+          "path": "/en/docs",
+          "closeMinusNavigationMs": -2
+        },
+        "sameRequestCancellationEventObserved": false,
+        "transportDiagnosis": "navigation-associated premature close; cancellation strongly supported by paired experiment",
+        "lifecycleClassification": "unknown"
+      },
+      {
+        "server": {
+          "schemaVersion": 1,
+          "event": "docs.request.summary",
+          "requestId": "c1a2ac5c-59bb-476c-bf73-36b7e1fc3fc4",
+          "service": "docs",
+          "environment": "test",
+          "observer": "node-fixture",
+          "clientProbeId": "6d942fb9-c440-4649-862a-be66defd6e11",
+          "path": "/[locale]/docs/[...slugParts]",
+          "route": "/[locale]/docs/[...slugParts]",
+          "queryPresent": true,
+          "prefetch": true,
+          "prefetchEvidence": ["next-router-prefetch"],
+          "requestKind": "rsc",
+          "method": "GET",
+          "errorCoverage": "partial",
+          "responseFinished": false,
+          "responseClosed": true,
+          "closeBeforeFinish": true,
+          "transportClosed": null,
+          "headersSent": true,
+          "statusCode": 200,
+          "durationMs": 122.75,
+          "durationScope": "request-to-close",
+          "outcome": "unknown",
+          "reason": "prefetch-cancellation-suspected",
+          "level": "warn",
+          "precedingErrorIds": [],
+          "omittedEvents": 0,
+          "events": [
+            {
+              "eventId": "1aa9e42e-ad2d-450b-8c21-544ab91bc0ef",
+              "event": "started",
+              "sequence": 1,
+              "timestamp": "2026-10-18T06:36:29.557Z",
+              "elapsedMs": 0.01
+            },
+            {
+              "eventId": "1cace3fd-0486-4358-aaf8-5fc28e56ee7e",
+              "event": "closed",
+              "sequence": 2,
+              "timestamp": "2026-10-18T06:36:29.679Z",
+              "elapsedMs": 122.75
+            },
+            {
+              "errorId": "9c588a47-4feb-47e5-85f9-bfa734903fe4",
+              "errorCategory": "stream",
+              "phase": "after-headers",
+              "digest": "1853719082",
+              "eventId": "e4a5f2fe-b01a-4c75-b9a3-5f13d84145cb",
+              "event": "error",
+              "sequence": 3,
+              "timestamp": "2026-10-18T06:36:29.681Z",
+              "elapsedMs": 124.03
+            }
+          ]
+        },
+        "browser": [
+          {
+            "time": "2026-10-18T06:36:29.557Z",
+            "event": "correlated",
+            "networkId": "24458.1294",
+            "path": "/en/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "6d942fb9-c440-4649-862a-be66defd6e11"
+          },
+          {
+            "time": "2026-10-18T06:36:29.573Z",
+            "event": "headers",
+            "networkId": "24458.1294",
+            "path": "/en/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "6d942fb9-c440-4649-862a-be66defd6e11",
+            "requestId": "c1a2ac5c-59bb-476c-bf73-36b7e1fc3fc4",
+            "status": 200
+          }
+        ],
+        "nearbyNavigation": {
+          "time": "2026-10-18T06:36:29.681Z",
+          "event": "navigation",
+          "path": "/en/docs",
+          "closeMinusNavigationMs": -2
+        },
+        "sameRequestCancellationEventObserved": false,
+        "transportDiagnosis": "navigation-associated premature close; cancellation strongly supported by paired experiment",
+        "lifecycleClassification": "unknown"
+      },
+      {
+        "server": {
+          "schemaVersion": 1,
+          "event": "docs.request.summary",
+          "requestId": "c4cfcd34-677e-4774-8a6f-bdfe6016da84",
+          "service": "docs",
+          "environment": "test",
+          "observer": "node-fixture",
+          "clientProbeId": "ecbd79dd-d23c-48ae-911e-b240d44a0bce",
+          "path": "/[locale]/docs/[...slugParts]",
+          "route": "/[locale]/docs/[...slugParts]",
+          "queryPresent": true,
+          "prefetch": true,
+          "prefetchEvidence": ["next-router-prefetch"],
+          "requestKind": "rsc",
+          "method": "GET",
+          "errorCoverage": "partial",
+          "responseFinished": false,
+          "responseClosed": true,
+          "closeBeforeFinish": true,
+          "transportClosed": null,
+          "headersSent": true,
+          "statusCode": 200,
+          "durationMs": 65.75,
+          "durationScope": "request-to-close",
+          "outcome": "unknown",
+          "reason": "prefetch-cancellation-suspected",
+          "level": "warn",
+          "precedingErrorIds": [],
+          "omittedEvents": 0,
+          "events": [
+            {
+              "eventId": "92deb1b0-cc6e-4189-bae9-b4e8800b6c01",
+              "event": "started",
+              "sequence": 1,
+              "timestamp": "2026-10-18T06:36:32.272Z",
+              "elapsedMs": 0.02
+            },
+            {
+              "eventId": "78c8c83a-05cb-4bdc-9ae8-f7ce7a781268",
+              "event": "closed",
+              "sequence": 2,
+              "timestamp": "2026-10-18T06:36:32.337Z",
+              "elapsedMs": 65.75
+            },
+            {
+              "errorId": "892b96f0-4654-473e-b495-521ecf1e5dbe",
+              "errorCategory": "stream",
+              "phase": "after-headers",
+              "digest": "1853719082",
+              "eventId": "f2f293f7-0902-4dda-a649-fa2b649b0193",
+              "event": "error",
+              "sequence": 3,
+              "timestamp": "2026-10-18T06:36:32.338Z",
+              "elapsedMs": 66.67
+            }
+          ]
+        },
+        "browser": [
+          {
+            "time": "2026-10-18T06:36:32.273Z",
+            "event": "correlated",
+            "networkId": "24510.235",
+            "path": "/ko/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "ecbd79dd-d23c-48ae-911e-b240d44a0bce"
+          },
+          {
+            "time": "2026-10-18T06:36:32.290Z",
+            "event": "headers",
+            "networkId": "24510.235",
+            "path": "/ko/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "ecbd79dd-d23c-48ae-911e-b240d44a0bce",
+            "requestId": "c4cfcd34-677e-4774-8a6f-bdfe6016da84",
+            "status": 200
+          }
+        ],
+        "nearbyNavigation": {
+          "time": "2026-10-18T06:36:32.339Z",
+          "event": "navigation",
+          "path": "/ko/docs",
+          "closeMinusNavigationMs": -2
+        },
+        "sameRequestCancellationEventObserved": false,
+        "transportDiagnosis": "navigation-associated premature close; cancellation strongly supported by paired experiment",
+        "lifecycleClassification": "unknown"
+      },
+      {
+        "server": {
+          "schemaVersion": 1,
+          "event": "docs.request.summary",
+          "requestId": "ef9ab3c3-e91e-4434-b669-7047391123a1",
+          "service": "docs",
+          "environment": "test",
+          "observer": "node-fixture",
+          "clientProbeId": "ba84fb98-c3f6-4bc0-9b79-3f0c43dad4b7",
+          "path": "/[locale]/docs/[...slugParts]",
+          "route": "/[locale]/docs/[...slugParts]",
+          "queryPresent": true,
+          "prefetch": true,
+          "prefetchEvidence": ["next-router-prefetch"],
+          "requestKind": "rsc",
+          "method": "GET",
+          "errorCoverage": "partial",
+          "responseFinished": false,
+          "responseClosed": true,
+          "closeBeforeFinish": true,
+          "transportClosed": null,
+          "headersSent": true,
+          "statusCode": 200,
+          "durationMs": 76.84,
+          "durationScope": "request-to-close",
+          "outcome": "unknown",
+          "reason": "prefetch-cancellation-suspected",
+          "level": "warn",
+          "precedingErrorIds": [],
+          "omittedEvents": 0,
+          "events": [
+            {
+              "eventId": "4d207fd1-79de-4c91-b5ea-ff82c404d699",
+              "event": "started",
+              "sequence": 1,
+              "timestamp": "2026-10-18T06:36:35.414Z",
+              "elapsedMs": 0.02
+            },
+            {
+              "eventId": "5ca9707f-6b34-45cd-8531-dfaf274fd126",
+              "event": "closed",
+              "sequence": 2,
+              "timestamp": "2026-10-18T06:36:35.490Z",
+              "elapsedMs": 76.84
+            },
+            {
+              "errorId": "9073060d-2494-4a13-bf2d-838b5239577e",
+              "errorCategory": "stream",
+              "phase": "after-headers",
+              "digest": "1853719082",
+              "eventId": "322541f9-a33f-4a69-8c69-0cf35c7470dc",
+              "event": "error",
+              "sequence": 3,
+              "timestamp": "2026-10-18T06:36:35.491Z",
+              "elapsedMs": 77.16
+            }
+          ]
+        },
+        "browser": [
+          {
+            "time": "2026-10-18T06:36:35.413Z",
+            "event": "correlated",
+            "networkId": "24510.1314",
+            "path": "/ko/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "ba84fb98-c3f6-4bc0-9b79-3f0c43dad4b7"
+          },
+          {
+            "time": "2026-10-18T06:36:35.431Z",
+            "event": "headers",
+            "networkId": "24510.1314",
+            "path": "/ko/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "ba84fb98-c3f6-4bc0-9b79-3f0c43dad4b7",
+            "requestId": "ef9ab3c3-e91e-4434-b669-7047391123a1",
+            "status": 200
+          }
+        ],
+        "nearbyNavigation": {
+          "time": "2026-10-18T06:36:35.480Z",
+          "event": "navigation",
+          "path": "/ko/docs",
+          "closeMinusNavigationMs": 10
+        },
+        "sameRequestCancellationEventObserved": false,
+        "transportDiagnosis": "navigation-associated premature close; cancellation strongly supported by paired experiment",
+        "lifecycleClassification": "unknown"
+      },
+      {
+        "server": {
+          "schemaVersion": 1,
+          "event": "docs.request.summary",
+          "requestId": "13f92151-cfe9-409a-87db-aa50927c4175",
+          "service": "docs",
+          "environment": "test",
+          "observer": "node-fixture",
+          "clientProbeId": "59055438-bab8-4231-9049-1842eba5212d",
+          "path": "/[locale]/docs/[...slugParts]",
+          "route": "/[locale]/docs/[...slugParts]",
+          "queryPresent": true,
+          "prefetch": true,
+          "prefetchEvidence": ["next-router-prefetch"],
+          "requestKind": "rsc",
+          "method": "GET",
+          "errorCoverage": "partial",
+          "responseFinished": false,
+          "responseClosed": true,
+          "closeBeforeFinish": true,
+          "transportClosed": null,
+          "headersSent": true,
+          "statusCode": 200,
+          "durationMs": 62.42,
+          "durationScope": "request-to-close",
+          "outcome": "unknown",
+          "reason": "prefetch-cancellation-suspected",
+          "level": "warn",
+          "precedingErrorIds": [],
+          "omittedEvents": 0,
+          "events": [
+            {
+              "eventId": "4d33a72d-4322-42e1-8298-56f0e6f1bbd1",
+              "event": "started",
+              "sequence": 1,
+              "timestamp": "2026-10-18T06:36:37.523Z",
+              "elapsedMs": 0.01
+            },
+            {
+              "eventId": "5aab86b2-5105-417e-8115-f8935c5cc113",
+              "event": "closed",
+              "sequence": 2,
+              "timestamp": "2026-10-18T06:36:37.585Z",
+              "elapsedMs": 62.42
+            },
+            {
+              "errorId": "009b7ce4-c3f3-42e8-ab1e-babbe06620f6",
+              "errorCategory": "stream",
+              "phase": "after-headers",
+              "digest": "1853719082",
+              "eventId": "f671345b-03f1-4760-a097-2da3c8092623",
+              "event": "error",
+              "sequence": 3,
+              "timestamp": "2026-10-18T06:36:37.586Z",
+              "elapsedMs": 62.75
+            }
+          ]
+        },
+        "browser": [
+          {
+            "time": "2026-10-18T06:36:37.523Z",
+            "event": "correlated",
+            "networkId": "24618.233",
+            "path": "/en/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "59055438-bab8-4231-9049-1842eba5212d"
+          },
+          {
+            "time": "2026-10-18T06:36:37.534Z",
+            "event": "headers",
+            "networkId": "24618.233",
+            "path": "/en/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "59055438-bab8-4231-9049-1842eba5212d",
+            "requestId": "13f92151-cfe9-409a-87db-aa50927c4175",
+            "status": 200
+          }
+        ],
+        "nearbyNavigation": {
+          "time": "2026-10-18T06:36:37.584Z",
+          "event": "navigation",
+          "path": "/en/docs",
+          "closeMinusNavigationMs": 1
+        },
+        "sameRequestCancellationEventObserved": false,
+        "transportDiagnosis": "navigation-associated premature close; cancellation strongly supported by paired experiment",
+        "lifecycleClassification": "unknown"
+      },
+      {
+        "server": {
+          "schemaVersion": 1,
+          "event": "docs.request.summary",
+          "requestId": "99a500fb-43a6-4253-9c14-50916662ec55",
+          "service": "docs",
+          "environment": "test",
+          "observer": "node-fixture",
+          "clientProbeId": "0984748a-82a2-4149-8ef9-c02c80975c0d",
+          "path": "/[locale]/docs/[...slugParts]",
+          "route": "/[locale]/docs/[...slugParts]",
+          "queryPresent": true,
+          "prefetch": true,
+          "prefetchEvidence": ["next-router-prefetch"],
+          "requestKind": "rsc",
+          "method": "GET",
+          "errorCoverage": "partial",
+          "responseFinished": false,
+          "responseClosed": true,
+          "closeBeforeFinish": true,
+          "transportClosed": null,
+          "headersSent": true,
+          "statusCode": 200,
+          "durationMs": 46.64,
+          "durationScope": "request-to-close",
+          "outcome": "unknown",
+          "reason": "prefetch-cancellation-suspected",
+          "level": "warn",
+          "precedingErrorIds": [],
+          "omittedEvents": 0,
+          "events": [
+            {
+              "eventId": "3e9aece3-4092-4124-bcc1-03cc3e85a5e3",
+              "event": "started",
+              "sequence": 1,
+              "timestamp": "2026-10-18T06:36:40.625Z",
+              "elapsedMs": 0.01
+            },
+            {
+              "eventId": "08160a7f-0778-46ba-b3e5-274c4514a837",
+              "event": "closed",
+              "sequence": 2,
+              "timestamp": "2026-10-18T06:36:40.672Z",
+              "elapsedMs": 46.64
+            },
+            {
+              "errorId": "00a102cd-6fc3-44c3-b5dd-1ee433ac6bf9",
+              "errorCategory": "stream",
+              "phase": "after-headers",
+              "digest": "1853719082",
+              "eventId": "e19b8ac9-60d6-4b1f-8c9e-26fd42230c20",
+              "event": "error",
+              "sequence": 3,
+              "timestamp": "2026-10-18T06:36:40.672Z",
+              "elapsedMs": 46.9
+            }
+          ]
+        },
+        "browser": [
+          {
+            "time": "2026-10-18T06:36:40.622Z",
+            "event": "correlated",
+            "networkId": "24618.1312",
+            "path": "/en/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "0984748a-82a2-4149-8ef9-c02c80975c0d"
+          },
+          {
+            "time": "2026-10-18T06:36:40.637Z",
+            "event": "headers",
+            "networkId": "24618.1312",
+            "path": "/en/docs/web/article-e2e-remote",
+            "prefetch": true,
+            "clientProbeId": "0984748a-82a2-4149-8ef9-c02c80975c0d",
+            "requestId": "99a500fb-43a6-4253-9c14-50916662ec55",
+            "status": 200
+          }
+        ],
+        "nearbyNavigation": {
+          "time": "2026-10-18T06:36:40.663Z",
+          "event": "navigation",
+          "path": "/en/docs",
+          "closeMinusNavigationMs": 9
+        },
+        "sameRequestCancellationEventObserved": false,
+        "transportDiagnosis": "navigation-associated premature close; cancellation strongly supported by paired experiment",
+        "lifecycleClassification": "unknown"
+      }
+    ],
+    "foregroundDocuments": {
+      "count": 84,
+      "incomplete": 0
+    }
+  },
+  "prefetchBlocked": {
+    "passed": "4 passed (37.8s)",
+    "serverStreamErrorCount": 0,
+    "frameworkStreamErrorCount": 0,
+    "note": "test route fulfills prefetch with 204; diagnostic control only, not a production fix"
+  },
+  "pairedControls": {
+    "passed": "42 passed (23.5s)",
+    "summaries": [
+      {
+        "schemaVersion": 1,
+        "event": "docs.request.summary",
+        "requestId": "49dab16f-d0b2-47af-9164-b730b2a8469a",
+        "service": "docs",
+        "environment": "test",
+        "observer": "node-fixture",
+        "clientProbeId": null,
+        "path": "/[locale]/docs/[...slugParts]",
+        "route": "/[locale]/docs/[...slugParts]",
+        "queryPresent": true,
+        "prefetch": true,
+        "prefetchEvidence": ["next-router-prefetch"],
+        "requestKind": "rsc",
+        "method": "GET",
+        "errorCoverage": "partial",
+        "responseFinished": false,
+        "responseClosed": true,
+        "closeBeforeFinish": true,
+        "transportClosed": null,
+        "headersSent": true,
+        "statusCode": 200,
+        "durationMs": 53.16,
+        "durationScope": "request-to-close",
+        "outcome": "unknown",
+        "reason": "prefetch-cancellation-suspected",
+        "level": "warn",
+        "precedingErrorIds": [],
+        "omittedEvents": 0,
+        "events": [
+          {
+            "eventId": "6124026a-7107-40e4-84d8-f602f0559311",
+            "event": "started",
+            "sequence": 1,
+            "timestamp": "2026-10-18T06:40:55.538Z",
+            "elapsedMs": 0.06
+          },
+          {
+            "eventId": "d3765173-d1f7-47ee-8f73-35de9c9b47e0",
+            "event": "closed",
+            "sequence": 2,
+            "timestamp": "2026-10-18T06:40:55.592Z",
+            "elapsedMs": 53.16
+          },
+          {
+            "errorId": "54ea2bbd-346c-4be5-b5b2-e9a0ee194ea6",
+            "errorCategory": "stream",
+            "phase": "after-headers",
+            "digest": "1853719082",
+            "eventId": "6172e178-d4dc-4ba5-b068-976e940dc53d",
+            "event": "error",
+            "sequence": 3,
+            "timestamp": "2026-10-18T06:40:55.592Z",
+            "elapsedMs": 53.67
+          }
+        ]
+      },
+      {
+        "schemaVersion": 1,
+        "event": "docs.request.summary",
+        "requestId": "7bf8c33b-9e40-40d8-8d00-a4a2003d6624",
+        "service": "docs",
+        "environment": "test",
+        "observer": "node-fixture",
+        "clientProbeId": null,
+        "path": "/[locale]/docs/[...slugParts]",
+        "route": "/[locale]/docs/[...slugParts]",
+        "queryPresent": true,
+        "prefetch": true,
+        "prefetchEvidence": ["next-router-prefetch"],
+        "requestKind": "rsc",
+        "method": "GET",
+        "errorCoverage": "partial",
+        "responseFinished": false,
+        "responseClosed": true,
+        "closeBeforeFinish": true,
+        "transportClosed": null,
+        "headersSent": true,
+        "statusCode": 200,
+        "durationMs": 68.45,
+        "durationScope": "request-to-close",
+        "outcome": "unknown",
+        "reason": "prefetch-cancellation-suspected",
+        "level": "warn",
+        "precedingErrorIds": [],
+        "omittedEvents": 0,
+        "events": [
+          {
+            "eventId": "c32b81f3-aae4-4457-84de-cf0d00a5aeaa",
+            "event": "started",
+            "sequence": 1,
+            "timestamp": "2026-10-18T06:40:52.640Z",
+            "elapsedMs": 0.24
+          },
+          {
+            "eventId": "f60663f1-14dc-40be-8fb7-b6723e75907a",
+            "event": "closed",
+            "sequence": 2,
+            "timestamp": "2026-10-18T06:40:52.708Z",
+            "elapsedMs": 68.45
+          },
+          {
+            "errorId": "697ff750-e886-4adb-a32a-6125b7ca931a",
+            "errorCategory": "stream",
+            "phase": "after-headers",
+            "digest": "1853719082",
+            "eventId": "9d3203fd-22da-4bd4-90b1-d96714db1332",
+            "event": "error",
+            "sequence": 3,
+            "timestamp": "2026-10-18T06:40:52.709Z",
+            "elapsedMs": 69.48
+          }
+        ]
+      },
+      {
+        "schemaVersion": 1,
+        "event": "docs.request.summary",
+        "requestId": "82783534-e0fa-46c2-bbaf-934f10d3d4ef",
+        "service": "docs",
+        "environment": "test",
+        "observer": "node-fixture",
+        "clientProbeId": null,
+        "path": "/[locale]/docs/[...slugParts]",
+        "route": "/[locale]/docs/[...slugParts]",
+        "queryPresent": true,
+        "prefetch": true,
+        "prefetchEvidence": ["next-router-prefetch"],
+        "requestKind": "rsc",
+        "method": "GET",
+        "errorCoverage": "partial",
+        "responseFinished": true,
+        "responseClosed": true,
+        "closeBeforeFinish": false,
+        "transportClosed": null,
+        "headersSent": true,
+        "statusCode": 200,
+        "durationMs": 368.33,
+        "durationScope": "request-to-finish",
+        "outcome": "completed",
+        "reason": "server-response-finished",
+        "level": "info",
+        "precedingErrorIds": [],
+        "omittedEvents": 0,
+        "events": [
+          {
+            "eventId": "8501727a-c152-4778-b2ec-2411dfb141ac",
+            "event": "started",
+            "sequence": 1,
+            "timestamp": "2026-10-18T06:40:53.637Z",
+            "elapsedMs": 0.11
+          },
+          {
+            "eventId": "4256842f-8048-4d88-8f7a-29dc718d7263",
+            "event": "finished",
+            "sequence": 2,
+            "timestamp": "2026-10-18T06:40:54.005Z",
+            "elapsedMs": 368.33
+          },
+          {
+            "eventId": "d05669bd-fd20-4e98-b036-3a50b1a0d61b",
+            "event": "closed",
+            "sequence": 3,
+            "timestamp": "2026-10-18T06:40:54.005Z",
+            "elapsedMs": 368.64
+          }
+        ]
+      },
+      {
+        "schemaVersion": 1,
+        "event": "docs.request.summary",
+        "requestId": "a4f3c98e-ef03-457f-8df7-54e9a6b68849",
+        "service": "docs",
+        "environment": "test",
+        "observer": "node-fixture",
+        "clientProbeId": null,
+        "path": "/[locale]/docs/[...slugParts]",
+        "route": "/[locale]/docs/[...slugParts]",
+        "queryPresent": true,
+        "prefetch": true,
+        "prefetchEvidence": ["next-router-prefetch"],
+        "requestKind": "rsc",
+        "method": "GET",
+        "errorCoverage": "partial",
+        "responseFinished": true,
+        "responseClosed": true,
+        "closeBeforeFinish": false,
+        "transportClosed": null,
+        "headersSent": true,
+        "statusCode": 200,
+        "durationMs": 369.92,
+        "durationScope": "request-to-finish",
+        "outcome": "completed",
+        "reason": "server-response-finished",
+        "level": "info",
+        "precedingErrorIds": [],
+        "omittedEvents": 0,
+        "events": [
+          {
+            "eventId": "df95daf8-910c-4d96-9c8b-32a6abdc1391",
+            "event": "started",
+            "sequence": 1,
+            "timestamp": "2026-10-18T06:40:56.639Z",
+            "elapsedMs": 0.06
+          },
+          {
+            "eventId": "d018b03e-07b9-45dd-bb6e-6914dfefbb61",
+            "event": "finished",
+            "sequence": 2,
+            "timestamp": "2026-10-18T06:40:57.008Z",
+            "elapsedMs": 369.92
+          },
+          {
+            "eventId": "1ef8b647-6aa9-4ec1-be79-2472ffe4bbbb",
+            "event": "closed",
+            "sequence": 3,
+            "timestamp": "2026-10-18T06:40:57.009Z",
+            "elapsedMs": 370.29
+          }
+        ]
+      }
+    ],
+    "note": "held-body navigation triggers stream error; server finish before navigation does not; partial coverage remains unknown"
+  },
+  "initialControlFailure": {
+    "passed": "36 passed (52.3s)",
+    "failed": "2 failed",
+    "note": "first harness waited for missing browser terminal event; a subsequent case was affected by a late in-flight cache fill. Corrected to server finish polling and settling origin work before invalidation; not an application fix"
+  },
+  "fullSuite": {
+    "passed": "116 passed (1.1m)",
+    "streamErrorCount": 10
+  },
+  "sourceLogIntegrity": {
+    "ci": {
+      "temporaryFile": "/tmp/web-tech-ci-test-f4b9582.log",
+      "sha256": "bffa97ba60a0631724862e35726489fe9bce4990994570d37630d8950930d10b"
+    },
+    "baseline": {
+      "temporaryFile": "/tmp/web-tech-stream-trace-20261018-baseline.log",
+      "sha256": "0e5a2f7d17af17770879e00ff55ccdddfa75957d40f5688b7215a21456770d10"
+    },
+    "chromium": {
+      "temporaryFile": "/tmp/web-tech-stream-trace-20261018-cdp.log",
+      "sha256": "a6460a0cefd44ba44e2766c83b70e0bd98549ae3af832461538e3e431426689a"
+    },
+    "blocked": {
+      "temporaryFile": "/tmp/web-tech-stream-trace-20261018-no-prefetch.log",
+      "sha256": "5f8f4ac473499edb14ba9f510a648287764142a8563e955a4673a2cafe3750df"
+    },
+    "initialControls": {
+      "temporaryFile": "/tmp/web-tech-stream-trace-20261018-controls.log",
+      "sha256": "51fbf6e51b40992638501aaa2004831909bf9d10ed00415093b6e3a78dfdd29b"
+    },
+    "controls": {
+      "temporaryFile": "/tmp/web-tech-stream-trace-20261018-controls-final.log",
+      "sha256": "091a998325affab41427aaeb2514eb8034f3bc0a42e20a06dac50ad960f1dda7"
+    },
+    "full": {
+      "temporaryFile": "/tmp/web-tech-stream-trace-20261018-full.log",
+      "sha256": "378f7cb496d32ed32ffc7bc2a637c59a66cb039465669684475906e462860fd4"
+    }
+  },
+  "limits": [
+    "Historical CI lacks full path, prefetch and finish/close correlation; eight entries remain unknown.",
+    "Missing same-request Chromium terminal events are not replaced by ERR_ABORTED from other requests.",
+    "Paired controls identify a reproducible cancellation mechanism, not proof that every historical error was harmless.",
+    "Server finish does not prove browser consumption; observer error coverage is partial."
+  ]
+}

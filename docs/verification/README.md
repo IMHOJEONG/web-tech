@@ -1,6 +1,16 @@
 # 검증 보고서
 
+- [10-19 PR #40 CI 시간 초과 조사](cache/2026-10-19-pr40-ci-timeout.md): 단계별 시간 비교, job 예산 분리와 다크 테마 검사 race 보완. 수정 후 원격 CI는 미검증.
+
+- [10-19 페이지별 스켈레톤 로컬 검증](accessibility/2026-10-19-page-skeletons-local.md): 실제 서버 골격·완성 화면의 기하 비교와 검색·피드 회귀. 운영 CLS는 미검증.
+
+- [10-19 문서 목록 우선 배치 로컬 검증](accessibility/2026-10-19-docs-index-order-local.md): 목록 위치·선택 해제·검색/페이지 이동 회귀, 69개와 재검사 12개·화면 26조건 통과. 공개 배포 미검증.
+
 - [10-18 Handlebars 패치·기본 브랜치 경고 4건](security/2026-10-18-handlebars-advisories.md): Handlebars 3건 조치·전후 회귀와 audit, braces 공식 패치 미출시·개발 경로 잔여 구분.
+
+- [10-18 CI 스트림 조기 종료 8건](cache/2026-10-18-stream-termination-investigation.md): 문서 교체와 실제 Link 클릭 비교, 실제 장애 분리와 과거 CI 판정 한계.
+
+- [10-17 콘텐츠 네트워크·오프라인 저장](resilience/2026-10-17-content-network-offline.md): 재시도·본문 지연·로컬 대체와 명시적 저장, 완전 오프라인 열람 검증. 운영 배포 미검증.
 
 - [10-14 문서 인덱스·검색 목록 밀도 검토](accessibility/2026-10-14-docs-index-density-review.md): 공개 네 조건의 개선 전 기준선. UI 구현·개선 후 검증 미착수.
 

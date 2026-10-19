@@ -1,6 +1,23 @@
 # 검증 원본 증거
 
+- [10-19 페이지별 스켈레톤 로컬 측정](2026-10-19-page-skeletons-local.json): [검증 보고서](../accessibility/2026-10-19-page-skeletons-local.md). 서버 골격 66표본의 기하·모션·넘침과 검사 시도별 결과. production CLS와 구분한다.
+  - 캡처: [모바일 목록](2026-10-19-skeleton-docs-mobile-light.png), [모바일 UI/UX](2026-10-19-skeleton-uiux-mobile-light.png), [데스크톱 피드](2026-10-19-skeleton-feed-desktop-dark.png).
+
+- [10-19 문서 목록 순서 로컬 측정](2026-10-19-docs-index-order-local.json): [검증 보고서](../accessibility/2026-10-19-docs-index-order-local.md). 기본·검색의 네 대표 화면과 추가 조건·검사 요약. 캡처는 같은 보고서에 연결했다.
+
 - [10-18 Handlebars 보안 audit](2026-10-18-handlebars-security-audit.json): [검증 보고서](../security/2026-10-18-handlebars-advisories.md). 전체·production audit 전후, 무해한 회귀·build 결과와 로그 해시. PR #39 리뷰 후 임시 작업 트리 재현 결과도 포함.
+
+- [10-18 스트림 종료 주체 재조사](2026-10-18-stream-cause-reinvestigation.json): [재조사 보고서](../cache/2026-10-18-stream-termination-investigation.md#종료-주체와-선행-오류-재조사). 상대편/서버 종료 순서·upstream 결과·실패한 초기 대조군과 최종 검증.
+
+- [10-18 이동 검사 역할 정리](2026-10-18-navigation-test-contracts.json): [검증 보고서](../cache/2026-10-18-stream-termination-investigation.md#검사-역할-분리와-의도-보존). 기존 assertion·direct/reload 보존 비교와 Link·직접 URL 역할별 결과.
+
+- [10-18 실제 Link 이동 비교](2026-10-18-prefetch-navigation-comparison.json): [후속 비교 보고서](../cache/2026-10-18-stream-termination-investigation.md#실제-link-클릭과-문서-교체-비교). ko/en·두 화면·세 이동 방식의 3회 반복, 서버 완료와 문서 유지 증거.
+
+- [10-18 스트림 종료 조사](2026-10-18-stream-termination-investigation.json): [검증 보고서](../cache/2026-10-18-stream-termination-investigation.md). CI 8건·로컬 요청별 순서·대조군·원본 로그 해시. 취소 추정과 확정을 분리합니다.
+
+- [10-18 기존 상세·캐시 production 결과 발췌](2026-10-18-article-production-results.txt): [네트워크·오프라인 검증](../resilience/2026-10-17-content-network-offline.md#기존-상세캐시-production-회귀). 테스트 108개 통과와 남은 스트림 오류 12회를 별개로 기록합니다.
+
+- [10-17 콘텐츠 네트워크·Worker 검사](2026-10-17-content-network-tests.txt), [10-18 production 오프라인 브라우저 검사](2026-10-18-offline-production-browser.txt): [검증 보고서](../resilience/2026-10-17-content-network-offline.md). 모의 원격 실패와 실제 Chromium의 저장·연결 차단을 구분합니다.
 
 - [10-14 인덱스·검색 목록 도달 거리 기준선](2026-10-14-docs-index-density-baseline.json): [밀도 검토 보고서](../accessibility/2026-10-14-docs-index-density-review.md). 공개 사이트 네 조건의 실제 값 발췌, 개선 목표와 구분.
 

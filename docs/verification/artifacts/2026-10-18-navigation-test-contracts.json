@@ -1,0 +1,63 @@
+{
+  "observedDate": "2026-10-18",
+  "baseCommit": "f4b958254486c18ae1df2909fbf26595add8919f",
+  "scope": "Chromium ko/en mobile 390x844 and desktop 1280x800; loopback production 3111/content 3112 only; one worker, no retries",
+  "preservedContracts": {
+    "completeArticleBodyMatchesHeadTokens": true,
+    "assertionTokenCount": 429,
+    "articleCasesMatchHeadTokens": true,
+    "directAndReloadTestBodiesMatchHeadTokens": true,
+    "directPublicationScreensMatchHeadTokens": true,
+    "note": "TypeScript scanner comparison ignores comments/formatting, not string literals, operators, assertion order or arguments.",
+    "priorArticleSourceSha256": "8c556dbbfca9d8d5ee99b8911cb403282dbf9e8219f9a93b419e66c4c46423ac",
+    "sharedArticleSourceSha256": "f25a5a61a9b3314d03bdc5b3ecd9125b4b0c86bcf9a707c69cc0cf38379e04b8"
+  },
+  "results": {
+    "targeted": {
+      "result": "48 passed (1.3m)",
+      "failures": null,
+      "frameworkStreamErrors": 14,
+      "roleCounts": {
+        "articleDirect": 16,
+        "articleLink": 12,
+        "publicationDirectCache": 4,
+        "prefetchLink": 8,
+        "prefetchDirect": 4,
+        "prefetchInterruptionControl": 4
+      },
+      "sha256": "e0af00c5e7311e95afd35dd365efe408c34abcfd98e323150e4ce49e4f605371",
+      "temporaryFile": "/tmp/web-tech-navigation-contract-20261018-targeted.log"
+    },
+    "full": {
+      "result": "140 passed (1.6m)",
+      "failures": null,
+      "frameworkStreamErrors": 14,
+      "roleCounts": {
+        "articleDirect": 16,
+        "articleLink": 12,
+        "publicationDirectCache": 4,
+        "prefetchLink": 8,
+        "prefetchDirect": 4,
+        "prefetchInterruptionControl": 4
+      },
+      "sha256": "5ba5b61e11fd45756678463da95eb2d5f36f0f9da0d8e813e0065c0511c8bfed",
+      "temporaryFile": "/tmp/web-tech-navigation-contract-20261018-full.log"
+    }
+  },
+  "files": {
+    "article-fixtures.ts": "f25a5a61a9b3314d03bdc5b3ecd9125b4b0c86bcf9a707c69cc0cf38379e04b8",
+    "article-detail.spec.ts": "69bb2e7e6f0669f955c03a31575f0cb9ca0b5b2f8c31805bc8753ad015b7afeb",
+    "article-navigation.spec.ts": "04cdb91b4280f53fb6fc98f2bde82728a29f13e088b19705da8ced3087b7bb71",
+    "content-publication.spec.ts": "754d43027cb858421e10e98ce1ae90be6ae0f54c94f6fb2f0373d51b603de7da",
+    "prefetch-navigation-scenario.ts": "a0af3f6334782e6eb3a53ff5d85deb745cf735e52163c7f0cbad1b38988bb012",
+    "prefetch-navigation-client.spec.ts": "99784cdc4ed811bb55ad6cdf01002c337db4e764afea08f45a0a853bd150d092",
+    "prefetch-navigation-direct.spec.ts": "a15302bc818f8c1fcd28b2d58cf9fa579f0c26c8932e2866aadcc08f8eb6fe74",
+    "prefetch-termination.spec.ts": "4213c4d170e2ee5855415f129d220d242256cc5e10268bea53875bc3fe762fbe"
+  },
+  "limits": [
+    "Direct source-page setup remains page.goto; the tested user move is an actual Link click with window identity preservation and zero new document requests.",
+    "Publication tests intentionally keep independent document requests to verify server caches; immediate invalidation of an existing browser Router Cache is not promised.",
+    "Direct URL interruption controls intentionally produce stream errors; original logs are not filtered.",
+    "This reorganizes the article production suite, not every E2E in the monorepo or public deployment checks."
+  ]
+}

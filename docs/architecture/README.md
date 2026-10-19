@@ -20,6 +20,8 @@
 
 새 결정의 작성·대체 규칙은 [ADR 관리 규칙](../process/adr-management.md)을 참고합니다.
 
+- [ADR-0015: 명시적 공개 글 오프라인 저장](adr-0015-explicit-offline-article-snapshots.md): 적용 중. opt-in 스냅샷·정적 reader·기존 Worker 유지, 운영 배포·실기기 미검증.
+
 - [ADR-0014: 로컬 문서의 기본 파일 탐색](adr-0014-local-content-file-discovery.md): 적용 중. docs 운영 glob 경로 제거·trace 검사, 개발 도구의 braces와 운영 배포는 별도.
 
 - [ADR-0013: 공용 UI 외부 설치 계약](adr-0013-shared-ui-external-package.md): 적용 중. React peer·CSS export·tarball 검증, registry 게시와 실제 외부 앱 이전 미실행.

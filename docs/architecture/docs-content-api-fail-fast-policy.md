@@ -1,6 +1,13 @@
 # Docs Content API Fail-Fast Policy
 
-## Purpose
+## 상태와 범위
+
+- 상태: 적용 중
+- 대상: docs 서버의 원격 목록·상세 조회와 로컬 fallback
+- 최종 검토: 2026-10-18
+- 로컬 구현·회귀 검증 범위다. 이번 변경의 Vercel 배포는 미검증이다.
+
+## 배경
 
 이 문서는 `apps/docs`가 원격 content API를 호출할 때 왜 fail-fast 정책을 사용하는지 정리한다.
 
@@ -17,7 +24,7 @@ fail-fast는 실패 가능성이 높은 외부 의존성을 오래 붙잡지 않
 
 즉 원격 content API가 사이트 전체의 단일 장애점이 된다.
 
-## Policy
+## 결정
 
 `apps/docs`는 원격 content API 요청에 짧은 timeout을 적용한다.
 
@@ -29,13 +36,25 @@ BLOG_CONTENT_API_TIMEOUT_MS=2500
 
 동작:
 
-1. 원격 API가 timeout 안에 응답하면 정상 처리한다.
-2. timeout 안에 응답하지 않으면 원격 content fetch를 실패로 본다.
+1. 원격 API의 헤더뿐 아니라 응답 본문 전체를 제한 시간 안에 읽는다. 중간에 조금씩 도착해도 제한 시간을 새로 시작하지 않는다.
+2. 상세의 목록 조회와 본문 조회는 하나의 절대 deadline을 공유한다. 각각 2500ms씩 쓰지 않는다. 시간 초과 시 요청과 body reader를 취소한다.
 3. 목록/검색은 기본적으로 원격 문서를 로컬 문서와 합친다.
 4. `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`일 때만 목록/검색에서 원격 문서를 제외한다.
 5. 기본값 또는 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`이면 상세 페이지도 원격 문서를 먼저 사용한다.
 6. 원격 상세가 실패하거나 없으면 동일 route의 로컬 문서를 fallback으로 사용한다.
 7. `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`이면 로컬 문서를 먼저 사용하고, 로컬 문서가 없는 route만 원격 상세 요청을 시도한다.
+
+Ky의 `retry: 0`을 명시한다. 연결 실패·HTTP 오류에 대한 자동 재시도를 하지 않고, 다른 endpoint 후보로 우회하지 않는다. 다음 사용자 요청이나 오류 화면의 명시적인 재시도는 별도 시도다. 이것은 서버 조회 정책이며 브라우저 자체의 모든 연결 재시도를 제어하는 설정은 아니다.
+
+Ky의 네트워크 오류는 인증 헤더를 가진 Request 객체를 포함할 수 있다. 외부로 전달하기 전에 요청 객체·원본 cause가 없는 안전한 `network` 오류로 바꾼다. 로그에는 원래 Request 객체를 넘기지 않는다.
+
+본문 오류·빈 문자열·텍스트나 지원 미디어가 없는 HTML은 성공한 상세가 아니다. 같은 route의 로컬 글이 있으면 대체한다. 로컬 글도 없을 때 실제 원격 실패는 error boundary로 전달하고, 정상 목록에 대상 글이 없는 경우만 `null`/not-found로 처리한다. Next.js streaming의 HTTP 상태와 화면 판정은 [별도 검증](../runbooks/docs-article-rendering-regression.md)을 따른다.
+
+### 이전 실패 흐름과 수정 이유
+
+이전에는 `throwHttpErrors: false`와 Ky 기본 retry가 함께 있었다. 연결 오류는 재시도할 수 있었지만 HTTP 오류는 응답 객체로 돌아와 같은 방식으로 재시도되지 않았다. 따라서 모든 실패가 항상 세 번 호출됐다고 해석하면 안 된다. 지금은 두 경우 모두 한 번만 호출한다.
+
+이전 상세 처리는 본문 실패를 `content: ''` 객체로 바꿨다. 제목·slug가 있는 객체 자체는 truthy이므로 로컬 대체를 건너뛰고 빈 본문을 선택할 수 있었다. 이제 사용 가능한 본문까지 확인한 뒤 원격 상세를 성공으로 선택한다.
 
 ## Why 2500ms
 
@@ -46,11 +65,13 @@ Vercel serverless runtime에서는 요청이 오래 걸리면 전체 handler가 
 `2500ms`는 아래 균형을 위한 기본값이다.
 
 - 일시적인 네트워크 지연은 어느 정도 허용
-- Vercel 10초 제한까지 밀리지 않음
+- 원격 I/O가 배포 환경의 함수 실행 예산을 과도하게 점유하지 않음
 - 로컬 fallback으로 전환할 시간이 남음
 - 사용자에게 빈 화면이나 전체 오류를 보여줄 가능성을 줄임
 
 필요하면 운영 환경에서 더 짧게 조정할 수 있다.
+
+2500ms는 원격 I/O 예산이지 페이지 전체의 응답 보장이 아니다. JSON 파싱·HTML 변환·로컬 파일 읽기·렌더링 CPU 시간과 캐시 재생성은 별도다. 이벤트 루프가 막히면 타이머 실행도 지연될 수 있다. Vercel 실행 제한은 배포 설정·런타임·플랜에 따라 확인하며 과거 10초 관측값을 모든 배포의 고정 제한으로 취급하지 않는다.
 
 ## What Fail-Fast Is Not
 
@@ -89,7 +110,9 @@ fail-fast를 신중히 써야 하는 경우:
 - `apps/docs/lib/content-api-config.ts`
   - `getContentApiTimeoutMs()`
 - `apps/docs/lib/content-api.ts`
-  - 목록 API와 본문 API 요청에 `timeout` 적용
+  - 목록·상세 단계에 같은 deadline 전달, 빈 본문을 실패로 처리
+- `apps/docs/lib/content-api-request.ts`
+  - `retry: 0`, 헤더·본문 전체 제한, AbortController와 reader 취소
 - `apps/docs/lib/get-document.ts`
   - 기본값 또는 `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=true`일 때 상세 route도 원격 우선, 실패 시 로컬 fallback
   - `BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false`일 때 로컬 문서 우선, 로컬에 없는 route만 원격 상세 fallback
@@ -166,8 +189,13 @@ DOCS_PROD_CHECK_BASE_URL=http://localhost:3003 pnpm --filter docs check:prod-rou
 - 원격 API가 530을 즉시 반환하는지, 연결을 오래 붙잡는지
 - 목록/검색 라우트가 원격 API 실패를 기다리느라 로컬 fallback 도달이 늦어지는지
 
-## Related Docs
+## 대안과 영향
 
-- [content-api-auth-ops-runbook.md](/Users/coder/Desktop/project/web-tech/docs/runbooks/content-api-auth-ops-runbook.md)
-- [docs-local-vs-remote-content-policy.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-local-vs-remote-content-policy.md)
-- [docs-content-authoring-pipeline.md](/Users/coder/Desktop/project/web-tech/docs/architecture/docs-content-authoring-pipeline.md)
+백그라운드 재시도·circuit breaker·최근 정상 원격 데이터 보관은 이번에 도입하지 않았다. 현재는 짧은 실패 판정과 로컬 대체를 우선한다. 원격 전용 글은 서버 장애 중 읽을 수 없으며, 브라우저에서 미리 직접 저장한 공개 글만 [오프라인 저장 정책](adr-0015-explicit-offline-article-snapshots.md)으로 열람할 수 있다.
+
+## 관련 문서
+
+- [회귀 검증 결과](../verification/resilience/2026-10-17-content-network-offline.md)
+- [콘텐츠 인증·장애 대응](../runbooks/content-api-auth-ops-runbook.md)
+- [로컬·원격 선택 정책](docs-local-vs-remote-content-policy.md)
+- [콘텐츠 작성 파이프라인](docs-content-authoring-pipeline.md)

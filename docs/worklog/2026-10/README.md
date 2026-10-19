@@ -1,6 +1,24 @@
 # 2026-10 작업 기록
 
+- [10-19 PR #40 CI 시간 초과 보완](2026-10-19-pr40-ci-timeout.md)
+
+- [10-19 Squash 이후 새 브랜치 원칙과 현재 PR 정리 방안](2026-10-19-post-squash-branch-policy.md)
+
+- [10-19 페이지별 스켈레톤·도메인 재사용](2026-10-19-page-skeletons.md)
+
+- [10-19 문서 인덱스·검색 목록 우선 배치](2026-10-19-docs-index-order.md)
+
+- [10-19 PR #39 이후 feature 동기화](2026-10-19-feature-sync-after-pr39.md)
+
 - [10-18 Handlebars 패치와 braces 재조사](2026-10-18-handlebars-security-patch.md)
+
+- [10-18 스트림 종료 주체 재조사](2026-10-18-stream-cause-reinvestigation.md)
+
+- [10-18 사용자 탐색·직접 URL 검사 분리](2026-10-18-navigation-test-contracts.md)
+
+- [10-18 CI 스트림 종료 원인 추적](2026-10-18-stream-termination-investigation.md)
+
+- [10-17 콘텐츠 네트워크 실패와 오프라인 열람](2026-10-17-content-network-offline-reading.md)
 
 - [10-17 CodeQL script 태그 테스트 보완](2026-10-17-codeql-script-tag-assertions.md)
 

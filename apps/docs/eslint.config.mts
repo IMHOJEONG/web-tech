@@ -5,6 +5,10 @@ import globals from 'globals'
 export default [
     ...nextJsConfig,
     {
+        files: ['public/offline-reader.js'],
+        languageOptions: { globals: globals.browser },
+    },
+    {
         files: [
             'next.config.mjs',
             '*.config.mjs',
