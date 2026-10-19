@@ -18,6 +18,7 @@ import { format, resolveConfig } from "prettier";
 import type { Browser, Page } from "@playwright/test";
 import type { PrismaClient } from "../apps/vuln-radar-backend/generated/prisma/index.js";
 import deploymentProxy from "../apps/vuln-radar/api/proxy.ts";
+import { finishVerification } from "./verification-cleanup.mts";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const backendDir = join(root, "apps/vuln-radar-backend");
@@ -73,13 +74,7 @@ let browserVersion: string | undefined;
 let browserCredentialLeaks = 0;
 const browserErrors: string[] = [];
 const screenshots: Record<string, string> = {};
-const cleanup = {
-  backendStopped: false,
-  frontendStopped: false,
-  databaseRemoved: false,
-  temporaryFilesRemoved: false,
-};
-
+/** Executes bounded local commands, redacting credentials from failure messages. */
 function command(bin: string, args: string[], cwd = root, env = process.env) {
   const result = spawnSync(bin, args, {
     cwd,
@@ -97,6 +92,7 @@ function command(bin: string, args: string[], cwd = root, env = process.env) {
   return result.stdout.trim();
 }
 
+/** Records one assertion group before propagating a failure to the run report. */
 async function check(name: string, task: () => Promise<void>) {
   const start = performance.now();
   try {
@@ -118,6 +114,7 @@ async function check(name: string, task: () => Promise<void>) {
   }
 }
 
+/** Tracks only children created by this run and retains bounded, redacted logs. */
 function launch(args: string[], cwd: string, env: NodeJS.ProcessEnv) {
   const child = spawn(process.execPath, args, {
     cwd,
@@ -133,6 +130,7 @@ function launch(args: string[], cwd: string, env: NodeJS.ProcessEnv) {
   return child;
 }
 
+/** Stops an owned child within a bounded grace period; never searches for other PIDs. */
 async function stop(child: ChildProcess | undefined) {
   if (!child || child.exitCode !== null || child.signalCode !== null) return;
   child.kill("SIGTERM");
@@ -156,6 +154,7 @@ async function stop(child: ChildProcess | undefined) {
   );
 }
 
+/** Waits for the owned server with bounded requests and interrupt awareness. */
 async function ready(url: string, child: ChildProcess) {
   for (let attempt = 0; attempt < 100; attempt++) {
     assert.ok(!interrupted, "Integration verification interrupted");
@@ -174,6 +173,7 @@ async function ready(url: string, child: ChildProcess) {
   throw new Error(`Server readiness timed out: ${url}`);
 }
 
+/** Starts actual Nest modules on loopback and rejects an unexpected mock fallback. */
 async function startBackend(database: boolean) {
   mode = database ? "database" : "mock";
   // Use the actual compiled module/bootstrap, but bind this verification server to loopback only.
@@ -206,6 +206,7 @@ async function startBackend(database: boolean) {
   );
 }
 
+/** Checks real API responses without exposing the injected server token in evidence. */
 async function api(path: string, proxy = false) {
   const response = await fetch(
     proxy
@@ -222,6 +223,7 @@ async function api(path: string, proxy = false) {
   return JSON.parse(text);
 }
 
+/** Invokes the deployment handler locally, restoring its temporary environment overrides. */
 async function deploymentResponse(path: string, authorization?: string) {
   const previousOrigin = process.env.VULN_RADAR_BACKEND_ORIGIN;
   const previousToken = process.env.VULN_RADAR_BACKEND_API_TOKEN;
@@ -265,6 +267,7 @@ async function deploymentResponse(path: string, authorization?: string) {
   }
 }
 
+/** Creates a browser page that blocks external traffic and observes credential leaks. */
 async function page() {
   assert.ok(browser);
   const current = await browser.newPage();
@@ -295,6 +298,7 @@ const warning =
 const fullError = "취약점 피드를 불러오지 못했습니다.";
 let outagePage: Page | undefined;
 
+/** Builds isolated services and exercises real database, proxy, browser and outage flows. */
 async function main() {
   assert.equal(
     process.versions.node.split(".")[0],
@@ -873,56 +877,77 @@ try {
   console.error(logs.slice(-8).join("").slice(-4_000));
   process.exitCode = 1;
 } finally {
-  await browser?.close();
-  await stop(backend);
-  cleanup.backendStopped = true;
-  await stop(frontend);
-  cleanup.frontendStopped = true;
-  await prisma?.$disconnect();
-  if (dockerCreated) {
-    assert.equal(
-      command("docker", [
-        "inspect",
-        "--format",
-        '{{index .Config.Labels "heap-forge.verification"}}',
-        container,
-      ]),
-      runId,
-    );
-    command("docker", ["rm", "--force", "--volumes", container]);
-  }
-  cleanup.databaseRemoved = true;
-  if (temp) await rm(temp, { recursive: true, force: true });
-  cleanup.temporaryFilesRemoved = true;
-  const runnerSha256 = createHash("sha256")
-    .update(await readFile(fileURLToPath(import.meta.url)))
-    .digest("hex");
-  const report = {
-    startedAt,
-    finishedAt: new Date().toISOString(),
-    baseSha: command("git", ["rev-parse", "HEAD"]),
-    runnerSha256,
-    node: process.version,
-    databaseImage: image,
-    browser: browserVersion,
-    endpoints: { backend: backendOrigin, frontend: frontendOrigin },
-    scope:
-      "isolated PostgreSQL fixtures + compiled Nest + production Vite preview + local deployment proxy handler invocation; no upstream ingestion or deployment",
-    results,
-    fixtureSummary,
-    screenshots,
-    cleanup,
-    ...(fatal ? { error: fatal } : {}),
-  };
-  const json = await format(JSON.stringify(report), {
-    ...(await resolveConfig(artifacts)),
-    filepath: artifacts,
+  const outcome = await finishVerification({
+    fatal,
+    redact,
+    actions: {
+      browserClosed: () => browser?.close(),
+      backendStopped: () => stop(backend),
+      frontendStopped: () => stop(frontend),
+      databaseDisconnected: () => prisma?.$disconnect(),
+      databaseRemoved: () => {
+        if (!dockerCreated) return;
+        assert.equal(
+          command("docker", [
+            "inspect",
+            "--format",
+            '{{index .Config.Labels "heap-forge.verification"}}',
+            container,
+          ]),
+          runId,
+        );
+        command("docker", ["rm", "--force", "--volumes", container]);
+      },
+      temporaryFilesRemoved: async () => {
+        if (temp) await rm(temp, { recursive: true, force: true });
+      },
+    },
+    report: async (cleanupResult) => {
+      const runnerSha256 = createHash("sha256")
+        .update(await readFile(fileURLToPath(import.meta.url)))
+        .digest("hex");
+      const cleanupRunnerSha256 = createHash("sha256")
+        .update(
+          await readFile(
+            new URL("./verification-cleanup.mts", import.meta.url),
+          ),
+        )
+        .digest("hex");
+      const report = {
+        startedAt,
+        finishedAt: new Date().toISOString(),
+        baseSha: command("git", ["rev-parse", "HEAD"]),
+        runnerSha256,
+        cleanupRunnerSha256,
+        node: process.version,
+        databaseImage: image,
+        browser: browserVersion,
+        endpoints: { backend: backendOrigin, frontend: frontendOrigin },
+        scope:
+          "isolated PostgreSQL fixtures + compiled Nest + production Vite preview + local deployment proxy handler invocation; no upstream ingestion or deployment",
+        results,
+        fixtureSummary,
+        screenshots,
+        ...cleanupResult,
+      };
+      const json = await format(JSON.stringify(report), {
+        ...(await resolveConfig(artifacts)),
+        filepath: artifacts,
+      });
+      assert.ok(
+        !privateValues.some((secret) => json.includes(secret)),
+        "Do not persist verification credentials",
+      );
+      await mkdir(join(root, "docs/verification/artifacts"), {
+        recursive: true,
+      });
+      await writeFile(artifacts, json, { flag: "wx" });
+      console.log(`Evidence: ${artifacts}`);
+    },
   });
-  assert.ok(
-    !privateValues.some((secret) => json.includes(secret)),
-    "Do not persist verification credentials",
-  );
-  await mkdir(join(root, "docs/verification/artifacts"), { recursive: true });
-  await writeFile(artifacts, json, { flag: "wx" });
-  console.log(`Evidence: ${artifacts}`);
+  for (const error of outcome.cleanupErrors)
+    console.error(`[CLEANUP FAIL] ${error.step}: ${error.message}`);
+  if (outcome.reportError !== undefined)
+    console.error(`[REPORT FAIL] ${outcome.reportError}`);
+  if (outcome.failed) process.exitCode = 1;
 }

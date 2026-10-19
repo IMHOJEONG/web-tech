@@ -2,7 +2,7 @@
 
 ## 대상과 조건
 
-- 날짜: 2026-10-19. 최종 실행 23:01:56~23:02:08 KST, 원본 JSON은 UTC ISO 시각을 사용한다.
+- 날짜: 2026-10-19. 초기 제출 실행 23:01:56~23:02:08 KST, 리뷰 보완 재실행 23:58:50~23:59:03 KST. 원본 JSON은 UTC ISO 시각을 사용한다.
 - 기준 main: `d4a89c094d8d2dae87c44c9192ada42428c931cd`.
 - 브랜치: `codex/vuln-radar-integration-verification`. 기존 배포 브랜치를 재사용하지 않았다.
 - 도구: Node `24.12.0`, pnpm `11.10.0`, Chromium `151.0.7922.34`, 로컬 Docker의 `postgres:16-alpine`.
@@ -40,7 +40,7 @@ node ../../node_modules/eslint/bin/eslint.js api src vite.config.ts --max-warnin
 
 ## 결과와 증거
 
-**최종 통합 검사 13개 모두 통과.** [최종 JSON](../artifacts/2026-10-19T14-01-56-387Z-vuln-radar-integration.json)의 결과와 실행 스크립트 해시가 일치했다.
+**초기 제출 통합 검사 13개 모두 통과.** [초기 제출 JSON](../artifacts/2026-10-19T14-01-56-387Z-vuln-radar-integration.json)의 결과와 당시 실행 스크립트 해시가 일치했다. 리뷰 보완 후 현재 도구의 증거는 아래 재실행 결과를 사용한다.
 
 | 검사                  | 관측 결과                                                                                                                                                           |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -80,6 +80,16 @@ node ../../node_modules/eslint/bin/eslint.js api src vite.config.ts --max-warnin
 
 모든 실행에서 백엔드·프론트·DB·임시 파일 정리 플래그가 성공했다. Docker 이름과 4310/4311 포트도 별도 조회해 잔여 실행 자원이 없는지 확인한다. 기존 사용자 서버·DB·볼륨·stash는 변경하지 않는다.
 
+### PR #46 정리 실패 보완과 재검증
+
+- 기준 커밋 d3c6eb9의 작업 트리에서 정리 실행기를 분리하고 2026-10-19 23:58 KST에 재실행했다. [새 JSON](../artifacts/2026-10-19T14-58-50-231Z-vuln-radar-integration.json)의 runnerSha256·cleanupRunnerSha256은 각각 제출할 도구·정리 실행기와 대조한다. 기존 artifact는 덮어쓰지 않았다.
+- 통합 13개 모두 통과. browserClosed·backendStopped·frontendStopped·databaseDisconnected·databaseRemoved·temporaryFilesRemoved 6개가 true였고 cleanupErrors는 빈 배열이었다. 별도 Docker 목록과 포트 조회에도 잔여 자원이 없었다.
+- 재실행 캡처: [1280px](../artifacts/2026-10-19T14-58-50-231Z-vuln-radar-feed-1280.png), [390px](../artifacts/2026-10-19T14-58-50-231Z-vuln-radar-feed-390.png). 모바일 캡처를 직접 확인했다.
+- `mise exec -- pnpm test:repo`: 기존 45개 + 신규 정리 회귀 13개 = 58개 통과. 전용 tsconfig의 tsc 검사도 통과했다.
+- 신규 테스트는 정리 6단계 각각의 예외 이후 나머지 시도·실제 임시 JSON 저장·최초 오류 보존·단계별 성공 플래그·오류 메시지 비밀값 제거를 확인했다. 전체 단계의 비동기 거부와 보고서 저장 실패도 별도로 확인했다.
+- 실패 주입은 [정리 실행기 단위 테스트](../../../scripts/verification-cleanup.test.mts)의 콜백으로 수행했다. 실제 Docker daemon·SIGKILL·디스크 장애를 발생시킨 검증은 아니다. 전체 통합 실행은 정상 종료 정리를 확인한다.
+- 오류가 없어도 보고서 저장 실패는 성공으로 처리하지 않는다. 원래 error와 cleanupErrors를 유지하고 REPORT FAIL과 실패 상태로 알린다. 기록 장치 자체가 고장 나면 파일 보존까지 보장할 수 없다.
+
 ## 한계와 후속 작업
 
 - 외부 NVD·CISA·EPSS 수집을 실행하지 않았다. upstream의 최신 데이터·rate limit·checkpoint·장기 backfill 검증은 아니다.
@@ -87,7 +97,7 @@ node ../../node_modules/eslint/bin/eslint.js api src vite.config.ts --max-warnin
 - schema는 버려지는 빈 DB에 db push로 만들었다. 운영 migration·데이터 보존·장애조치 검증이 아니다.
 - mock은 DB 미설정 조건으로 확인했다. 연결된 DB가 질의 도중 끊기는 상황의 fallback을 보장하지 않는다. 백엔드 프로세스 중단과 DB 질의 장애는 다른 조건이다.
 - Chromium 2개 폭만 검사했다. Safari·Firefox·실기기·색 대비·접근성 전체는 미검증이다. 자동 갱신 시간은 브라우저 clock으로 진행했다.
-- 새 도구를 CI에 연결하지 않았다. NAS·Vercel 재배포나 기존 배포 브랜치 변경도 하지 않았다.
+- Docker 통합 도구는 CI에 연결하지 않았다. 정리 실행기의 독립 회귀 테스트만 기존 test:repo를 통해 CI에 포함했다. NAS·Vercel 운영 배포나 기존 배포 브랜치 변경은 하지 않았다.
 
 다음 단계는 배포 기준·환경변수를 확인하고 승인된 환경에서 같은 SHA의 운영 smoke test를 수행하는 것이다.
 

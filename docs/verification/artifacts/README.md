@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-19 PR #46 정리 보완 재검증](2026-10-19T14-58-50-231Z-vuln-radar-integration.json): [보고서](../integration/2026-10-19-vuln-radar-local-integration.md). 통합 13개·정리 6단계 성공. [1280px](2026-10-19T14-58-50-231Z-vuln-radar-feed-1280.png)·[390px](2026-10-19T14-58-50-231Z-vuln-radar-feed-390.png).
+
 - [10-19 vuln-radar 최종 13개 통합 검사](2026-10-19T14-01-56-387Z-vuln-radar-integration.json): [보고서](../integration/2026-10-19-vuln-radar-local-integration.md). 실제 DB·API·프록시·브라우저, 토큰 미포함·정리 결과.
 - 이전 실행: [9개](2026-10-19T13-48-55-854Z-vuln-radar-integration.json), [10개](2026-10-19T13-50-20-622Z-vuln-radar-integration.json), [11개](2026-10-19T13-51-52-193Z-vuln-radar-integration.json), [13개 도입](2026-10-19T13-54-02-394Z-vuln-radar-integration.json).
 - 최종 화면: [1280px](2026-10-19T14-01-56-387Z-vuln-radar-feed-1280.png), [390px](2026-10-19T14-01-56-387Z-vuln-radar-feed-390.png). 이전 화면: [1280px](2026-10-19T13-54-02-394Z-vuln-radar-feed-1280.png), [390px](2026-10-19T13-54-02-394Z-vuln-radar-feed-390.png). 모두 합성 데이터만 표시.

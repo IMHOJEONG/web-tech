@@ -32,7 +32,7 @@ docker image inspect postgres:16-alpine
 mise exec -- pnpm verify:vuln-radar:integration
 ```
 
-3. PASS 항목과 마지막 Evidence 경로를 확인한다. JSON의 baseSha·runnerSha256·results·cleanup을 검토한다. 재실행은 새 시각의 증거 파일을 생성한다.
+3. PASS 항목과 마지막 Evidence 경로를 확인한다. JSON의 baseSha·runnerSha256·cleanupRunnerSha256·results·cleanup·cleanupErrors를 검토한다. 재실행은 새 시각의 증거 파일을 생성한다.
 4. 결과와 캡처를 확인해 verification·worklog·목차에 연결한다. 실제 env·인증 헤더를 붙이지 않는다.
 
 ### 격리 방식
@@ -44,11 +44,23 @@ mise exec -- pnpm verify:vuln-radar:integration
 - Nest·Vite를 빌드하고 loopback에만 서버를 실행한다. 실제 프록시·브라우저와 별도 배포 핸들러 호출을 검사한다.
 - 검증용 Nest만 중단·복구하며 DB 미설정 fallback도 확인한다. 수집 scheduler와 startup sync는 비활성화한다.
 - 종료 시 이 실행의 프로세스와 label이 일치하는 DB만 정리한다. 기존 서버·컨테이너·볼륨·배포 브랜치는 바꾸지 않는다.
+- [정리 실행기](../../scripts/verification-cleanup.mts)는 브라우저 종료·백엔드 종료·프론트 종료·DB 연결 해제·컨테이너 제거·임시 파일 제거를 각각 시도한다. 앞 단계가 실패해도 나머지를 계속하고, cleanup 플래그는 해당 단계 성공 시에만 true로 기록한다. 생성하지 않은 자원의 no-op도 성공으로 취급한다.
+- 최초 검증 실패는 error, 정리 실패는 cleanupErrors의 단계·메시지로 분리하고 비밀값을 가린다. 정리 후 보고서 저장을 시도하며 어느 단계든 실패하면 exit code 1이다. 저장 자체가 실패하면 REPORT FAIL로 알리고 성공으로 처리하지 않는다.
+
+### Docker 없는 정리 회귀 테스트
+
+```sh
+mise exec -- pnpm test:repo
+# 정리 실패 테스트만 실행
+mise exec -- node --experimental-strip-types --test scripts/verification-cleanup.test.mts
+```
+
+정리 단계별 동기 예외·비동기 거부·최초 오류 보존·실패 플래그·비밀값 제거·보고서 파일 저장을 검사한다. 실패는 주입한 콜백으로 재현하며 실제 Docker 오류를 유발하지 않는다. 이 테스트는 기존 CI의 test:repo에도 포함된다. Docker 통합 명령 자체는 CI에 연결하지 않았다.
 
 ## 기대 결과
 
 - exit code 0, 모든 통합 항목 passed.
-- JSON에 기준 SHA·도구 해시·브라우저·fixture 결과·정리 결과가 존재한다.
+- JSON에 기준 SHA·도구 및 정리 실행기 해시·브라우저·fixture 결과·정리 6단계 결과가 존재하고 cleanupErrors가 비어 있다.
 - 화면에는 합성 데이터와 DATABASE 출처가 보인다.
 - bundle·API body·브라우저 요청과 증거에 테스트 서버 토큰·비밀번호가 남지 않는다.
 - 검증 이름의 컨테이너와 4310·4311 서버가 남지 않는다.
@@ -63,6 +75,7 @@ ECONNREFUSED·502는 의도한 중단 단계의 assertion과 함께 판단한다
 - pnpm 설치 설정 차이: 개발 서버 영향을 고려해 설치 상태를 정리한다. 이번에는 명령에만 pnpm_config_verify_deps_before_run=warn을 사용했으며 이를 전역 강제하지 않는다.
 - 강제 종료 후 자원: docker ps의 heap-forge-vuln-integration- 이름·label을 확인하고 정확한 컨테이너·PID만 정리한다. 전체 Docker prune이나 기존 DB 삭제를 하지 않는다.
 - 실패·cleanup=false는 보존하고 조치 후 새 결과를 만든다. 과거 artifact를 수정하지 않는다.
+- CLEANUP FAIL이면 cleanupErrors의 정확한 단계부터 조사한다. 컨테이너 label 불일치는 제거를 막는 안전장치이므로 우회하지 않는다. 이후 임시 파일 정리와 보고서 기록은 계속 시도한다. REPORT FAIL이면 저장 경로·디스크·권한을 확인하며 증거가 없다는 사실을 기록한다. 정리 오류로 최초 error를 덮어쓰지 않는다.
 
 도구는 커밋·push·배포·branch 삭제·stash 복원을 수행하지 않는다. 운영 검증은 별도 승인·계획으로 진행한다.
 

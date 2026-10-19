@@ -13,5 +13,9 @@
       ]
     }
   },
-  "include": ["scripts/verify-vuln-radar-integration.mts"]
+  "include": [
+    "scripts/verify-vuln-radar-integration.mts",
+    "scripts/verification-cleanup.mts",
+    "scripts/verification-cleanup.test.mts"
+  ]
 }
