@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { AppConfigService } from '../../../../config/app-config.service';
 import { KevCatalogEntry } from '../../ingest.types';
 
 const KEV_ENDPOINT =
@@ -19,9 +20,17 @@ type KevResponse = {
 
 @Injectable()
 export class KevCollector {
+  private readonly logger = new Logger(KevCollector.name);
+
+  constructor(private readonly appConfigService: AppConfigService) {}
+
   async fetchCatalog(): Promise<KevCatalogEntry[]> {
+    this.logger.log(
+      `KEV catalog request started: timeoutMs=${this.appConfigService.ingestSourceTimeoutMs}`,
+    );
+
     const response = await fetch(KEV_ENDPOINT, {
-      signal: AbortSignal.timeout(20_000),
+      signal: AbortSignal.timeout(this.appConfigService.ingestSourceTimeoutMs),
     });
 
     if (!response.ok) {
@@ -31,6 +40,10 @@ export class KevCollector {
     }
 
     const payload = (await response.json()) as KevResponse;
+
+    this.logger.log(
+      `KEV catalog request completed: received=${payload.vulnerabilities.length}`,
+    );
 
     return payload.vulnerabilities.map((entry) => ({
       cveId: entry.cveID,

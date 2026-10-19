@@ -25,7 +25,16 @@ describe('IngestController', () => {
       scheduler: {
         enabled: true,
         intervalMinutes: 60,
+        lookbackHours: 24,
+        maxLookbackHours: 240,
+        sourceTimeoutMs: 60_000,
         syncOnStartup: false,
+      },
+      nvd: {
+        requestMaxRetries: 2,
+        requestPageDelayMs: 600,
+        requestRetryDelayMs: 1_500,
+        resultsPerPage: 200,
       },
       sources: [],
       latest: {
@@ -43,9 +52,11 @@ describe('IngestController', () => {
       },
     })),
     syncRecent: jest.fn(async () => ({
+      status: 'completed' as const,
       startedAt: '2026-05-18T15:00:00.000Z',
       completedAt: '2026-05-18T15:00:10.000Z',
       lookbackHours: 6,
+      failures: [],
       sources: [],
       counts: {
         nvdVulnerabilities: 10,
