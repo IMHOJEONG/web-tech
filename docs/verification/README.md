@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-19 문서 목록 우선 배치 로컬 검증](accessibility/2026-10-19-docs-index-order-local.md): 목록 위치·선택 해제·검색/페이지 이동 회귀, 69개와 재검사 12개·화면 26조건 통과. 공개 배포 미검증.
+
 - [10-18 Handlebars 패치·기본 브랜치 경고 4건](security/2026-10-18-handlebars-advisories.md): Handlebars 3건 조치·전후 회귀와 audit, braces 공식 패치 미출시·개발 경로 잔여 구분.
 
 - [10-18 CI 스트림 조기 종료 8건](cache/2026-10-18-stream-termination-investigation.md): 문서 교체와 실제 Link 클릭 비교, 실제 장애 분리와 과거 CI 판정 한계.

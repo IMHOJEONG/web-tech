@@ -382,6 +382,8 @@
     },
     "docsIndex": {
         "discovery": {
+            "more": "Explore more documents",
+            "recommendations": "Suggested searches",
             "tags": "Browse tags",
             "allTags": "All tags",
             "moreTags": "More tags",
@@ -423,6 +425,10 @@
         "filters": {
             "eyebrow": "Browse Controls",
             "title": "{count} documents match this view",
+            "toggle": "Filter and sort",
+            "toggleSearch": "Filter",
+            "active": "Active filters",
+            "remove": "Clear {label} filter",
             "sections": {
                 "all": "All",
                 "web": "Web",

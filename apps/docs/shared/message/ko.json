@@ -382,6 +382,8 @@
     },
     "docsIndex": {
         "discovery": {
+            "more": "다른 문서 찾아보기",
+            "recommendations": "추천 검색어",
             "tags": "태그로 찾기",
             "allTags": "전체 태그",
             "moreTags": "태그 더 보기",
@@ -423,6 +425,10 @@
         "filters": {
             "eyebrow": "Browse Controls",
             "title": "현재 조건에 맞는 문서 {count}개",
+            "toggle": "필터와 정렬",
+            "toggleSearch": "필터",
+            "active": "선택한 조건",
+            "remove": "{label} 조건 해제",
             "sections": {
                 "all": "전체",
                 "web": "Web",
