@@ -1,7 +1,7 @@
 # 협업과 문서 작성 규칙
 
 - [ADR 작성과 상태 관리](adr-management.md)
-- [브랜치 정책](branch-policy.md)
+- [브랜치 정책](branch-policy.md): squash 후 최신 main에서 새 작업 브랜치 생성, 기존 이력·배포 브랜치의 안전한 정리.
 - [코드 리뷰](code-review-process.md)
 - [Jira 이슈 추적과 문서 연결](issue-tracking.md)
 - [커밋 메시지](commit-message-convention.md)

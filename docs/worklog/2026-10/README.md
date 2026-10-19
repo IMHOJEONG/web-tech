@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-19 Squash 이후 새 브랜치 원칙과 현재 PR 정리 방안](2026-10-19-post-squash-branch-policy.md)
+
 - [10-19 페이지별 스켈레톤·도메인 재사용](2026-10-19-page-skeletons.md)
 
 - [10-19 문서 인덱스·검색 목록 우선 배치](2026-10-19-docs-index-order.md)
