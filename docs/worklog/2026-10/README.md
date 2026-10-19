@@ -126,3 +126,5 @@
 - [10-05 운영 블로그 점검](2026-10-05-deployed-blog-smoke.md)
 - [10-05 카테고리 안내와 주제 설명 번역](2026-10-05-category-localization.md)
 - [10-05 OG 브라우저·Vercel 캐시 헤더 분리](2026-10-05-og-cache-header-boundary.md)
+
+- [10-19 PR #44 피드 리뷰 보완](2026-10-19-vuln-radar-feed-review.md)
