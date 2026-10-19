@@ -30,9 +30,23 @@ PR #40의 squash 결과 `8da00b3`으로 로컬 main을 fast-forward하고, 새 �
 | `feature/vuln-radar`                  | `codex/vuln-radar-feed`               | `8927b4f` | 20                  |
 | `feature/vuln-radar-backend`          | `codex/vuln-radar-ingest-reliability` | `8081121` | 25                  |
 
-네 브랜치는 모두 `8da00b34a1a2444024e8677f589d90e00faa02cb`를 유일한 부모로 하는 커밋 1개만 추가했다. `git switch --no-track -c <새 브랜치> origin/main` 후 `git merge --squash --no-commit <원본>`으로 이전했다. NAS 브랜치는 최초 자동 추적을 즉시 해제했으며, 네 브랜치 모두 `origin/main`을 push 대상으로 추적하지 않는다.
+네 브랜치는 모두 `8da00b34a1a2444024e8677f589d90e00faa02cb`를 유일한 부모로 하는 커밋 1개만 추가했다. `git switch --no-track -c <새 브랜치> origin/main` 후 `git merge --squash --no-commit <원본>`으로 이전했다. NAS 브랜치는 최초 자동 추적을 즉시 해제했다. 후속 push에서는 네 브랜치 모두 각자 이름의 origin 브랜치를 추적하도록 설정했으며, `origin/main`을 push 대상으로 추적하지 않는다.
 
 백엔드는 앱의 23개 변경 파일을 바이트 단위로 보존했다. 과거 작업 기록 하나만 백엔드 새 브랜치의 `docs/worklog/2026-09/2026-09-01-nvd-ingest-request-stability.md`로 옮겨 필수 섹션과 상대 링크를 추가하고 9월 목차에 연결했다. 이 때문에 원본 후보 24개에서 최종 변경은 25개 파일이 됐다. 당시 NVD 측정값을 새 실행 결과로 표현하지 않았으며 앱 로직은 변경하지 않았다.
+
+### 원격 게시와 PR
+
+추가 사용자 요청으로 2026-10-19에 작업 기록 브랜치와 새 브랜치 4개를 origin에 게시했다. 5개 ref를 명시한 `git -c push.followTags=false push --atomic --set-upstream origin ...`의 dry-run으로 대상을 확인한 뒤 실제 push했다. main·기존 feature·백업 ref·태그는 push 대상에서 제외했다.
+
+| 목적                  | main 대상 PR                                         |
+| --------------------- | ---------------------------------------------------- |
+| 작업 기록             | [#41](https://github.com/IMHOJEONG/web-tech/pull/41) |
+| NAS 시간대 설정       | [#42](https://github.com/IMHOJEONG/web-tech/pull/42) |
+| 공통 작업 지침        | [#43](https://github.com/IMHOJEONG/web-tech/pull/43) |
+| 피드 필터·신뢰성 표시 | [#44](https://github.com/IMHOJEONG/web-tech/pull/44) |
+| 백엔드 수집 안정성    | [#45](https://github.com/IMHOJEONG/web-tech/pull/45) |
+
+5개 PR의 base가 main이고 각각 의도한 head와 변경 파일 수를 갖는지 GitHub에서 확인했다. PR 본문에 로컬 검증·미검증 범위를 구분했다. PR을 병합하거나 자동 병합을 설정하지 않았고 기존 배포 브랜치·Production Branch 설정도 변경하지 않았다. push와 PR 생성으로 자동 시작되는 CI·Preview는 운영 배포 검증과 구분한다.
 
 ## Notes
 
@@ -42,7 +56,8 @@ PR #40의 squash 결과 `8da00b3`으로 로컬 main을 fast-forward하고, 새 �
 - 초안은 stash를 drop/pop하지 않고 남겼다. 기록 브랜치에는 이 작업 기록과 목차만 커밋하며 TCP 본문·이미지·검증 자료를 복원하거나 커밋하지 않았다. 이전 완료 후에도 원본 SHA-256과 stash 파일 23개가 모두 일치했다.
 - 각 커밋에서 정상 훅의 staged 포맷·문서 검사·commitlint를 통과했다. NAS 커밋 본문이 최초 100자 줄 길이 검사에서 거절되어 본문만 줄바꿈한 뒤 재검사했다. 검사 우회는 하지 않았다.
 - staged 파일의 고신뢰도 비밀정보 패턴 검사에서 탐지 사항이 없었다. 실제 env·인증 토큰·로컬 백업 ref를 커밋하지 않았다. 이는 외부 비밀정보 탐지 서비스의 전수 감사와 같지는 않다.
-- 이번 요청은 로컬 커밋·브랜치 이전까지 수행했다. 새 브랜치 push·PR 생성·운영 배포는 하지 않았다. 최종 작업 위치는 `codex/post-pr40-branch-cleanup`이다.
+- 최초 이전 요청은 로컬 커밋까지 수행했고, 후속 요청에서 위 5개 브랜치 push·PR 생성을 완료했다. 운영 배포·병합은 하지 않았다. 최종 작업 위치는 `codex/post-pr40-branch-cleanup`이다.
+- push 응답에 GitHub 기본 브랜치의 기존 High 취약점 1건 안내가 있었다. [Dependabot #336](https://github.com/IMHOJEONG/web-tech/security/dependabot/336)의 상세 조사·수정은 이번 브랜치 게시 범위에 섞지 않았다.
 
 ### 검증 결과와 재현 명령
 
@@ -78,9 +93,9 @@ git stash apply refs/codex-backups/2026-10-19-after-pr40/stash
 
 ## Open Questions
 
-- 새 브랜치의 원격 CI·리뷰와 프론트·백엔드 통합 E2E는 아직 실행하지 않았다. 각각 독립 main 기반이므로 API 계약 변경을 함께 사용할 때의 운영 연동은 별도 확인이 필요하다.
+- 새 PR의 원격 CI·리뷰는 시작 이후 결과 확인이 필요하며 완료로 간주하지 않는다. 프론트·백엔드 통합 E2E도 아직 수행하지 않았다. 각각 독립 main 기반이므로 API 계약 변경을 함께 사용할 때의 운영 연동은 별도 확인이 필요하다.
 - 블로그를 main Production Branch로 전환한 뒤 동일 SHA의 운영 배포와 주요 라우트를 확인해야 `feature/docs` 및 CI의 배포 브랜치 예외를 폐기할 수 있다. vuln-radar의 전환은 미반영 기능 통합 이후 별도로 판단한다.
 
 ## Next
 
-새 브랜치별 변경을 검토한 뒤 필요한 브랜치만 push하고 main 대상 PR로 검증한다. 정책과 배포 예외는 [브랜치 정책](../../process/branch-policy.md)을 따른다. 기존 원본·배포 브랜치 삭제, 운영 설정 변경과 초안 복원은 이번 작업 범위에 포함하지 않는다.
+생성한 PR별로 동일 SHA의 CI·리뷰를 확인한 뒤 main 반영 여부를 결정한다. 프론트·백엔드 통합 검증과 운영 전환은 별도로 진행한다. 정책과 배포 예외는 [브랜치 정책](../../process/branch-policy.md)을 따른다. 기존 원본·배포 브랜치 삭제, 운영 설정 변경과 초안 복원은 이번 작업 범위에 포함하지 않는다.
