@@ -13,7 +13,8 @@
 ## Notes
 
 - 첫 후속 CI의 태블릿 job은 pnpm 설치 중 ECONNRESET으로 테스트 전에 실패했다. 같은 SHA에서 해당 job과 의존 Test 게이트만 재실행해 성공했다. 코드·검사 기준은 바꾸지 않았다.
-- 기존 정리 리뷰는 CodeRabbit의 수정 확인 후 해결했다. 새 식별자 보완은 타입·회귀 검사와 깨끗한 커밋에서 실제 통합 실행으로 재검증한다. 결과는 [통합 보고서](../../verification/integration/2026-10-19-vuln-radar-local-integration.md)에 추가한다.
+- 기존 정리 리뷰는 CodeRabbit의 수정 확인 후 해결했다. 새 식별자 보완을 타입·회귀 검사와 깨끗한 9fee886에서 실제 통합 실행으로 재검증했다. 통합 13개·정리 6단계·저장소 테스트 58개가 성공했다. [통합 보고서](../../verification/integration/2026-10-19-vuln-radar-local-integration.md)에 새 JSON·캡처를 연결했다.
+- 새 증거의 baseSha·도구 해시를 대조했고 workingTreeDirty=false였다. 실행 후 생성한 JSON·캡처 때문에 시작 상태가 달라지지 않았음을 확인했다. 과거 artifact를 소급 수정하지 않았다.
 - 기존 배포 브랜치·보관 초안·운영 환경은 변경하지 않는다.
 
 ## Open Questions
@@ -22,4 +23,4 @@
 
 ## Next
 
-깨끗한 작업 트리에서 생성한 새 증거를 확인하고 문서에 연결한다. PR 설명·리뷰 답변·CI도 최신 커밋 기준으로 확인한다.
+새 증거를 별도 커밋으로 보존하고 PR 설명·리뷰 답변·CI를 최신 커밋 기준으로 확인한다. 운영 배포 전환은 하지 않는다.

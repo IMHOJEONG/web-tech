@@ -90,6 +90,14 @@ node ../../node_modules/eslint/bin/eslint.js api src vite.config.ts --max-warnin
 - 실패 주입은 [정리 실행기 단위 테스트](../../../scripts/verification-cleanup.test.mts)의 콜백으로 수행했다. 실제 Docker daemon·SIGKILL·디스크 장애를 발생시킨 검증은 아니다. 전체 통합 실행은 정상 종료 정리를 확인한다.
 - 오류가 없어도 보고서 저장 실패는 성공으로 처리하지 않는다. 원래 error와 cleanupErrors를 유지하고 REPORT FAIL과 실패 상태로 알린다. 기록 장치 자체가 고장 나면 파일 보존까지 보장할 수 없다.
 
+### 실행 상태 식별 후속 검증 (2026-10-20 KST)
+
+- 추가 리뷰에 따라 baseSha와 workingTreeDirty를 실제 작업 시작 전에 함께 읽게 했다. 시작 상태 식별자 보완을 먼저 커밋한 9fee886에서 Git status가 비어 있음을 확인하고 2026-10-20 00:15:59 KST에 실행했다.
+- [새 JSON](../artifacts/2026-10-19T15-15-59-845Z-vuln-radar-integration.json)은 baseSha가 9fee886, workingTreeDirty가 false다. 생성 이후 작업 트리에는 새 JSON·캡처 3개가 생겼지만 기록된 시작 상태는 false를 유지했다. UTC 기반 파일명은 10-19다.
+- 통합 13개·정리 6단계 모두 성공, cleanupErrors는 빈 배열이며 runnerSha256·cleanupRunnerSha256이 현재 파일과 일치했다. 같은 버전에서 저장소 테스트 58개와 전용 tsc 검사도 통과했다.
+- 캡처: [1280px](../artifacts/2026-10-19T15-15-59-845Z-vuln-radar-feed-1280.png), [390px](../artifacts/2026-10-19T15-15-59-845Z-vuln-radar-feed-390.png). 실제 운영 수집·배포 검증으로 확대하지 않는다.
+- 이전 증거의 baseSha·해시는 당시 값으로 유지했다. workingTreeDirty가 없는 과거 결과를 clean으로 해석하지 않는다. 당시 미커밋 실행 여부는 기존 보고서의 작업 트리 설명과 함께 확인한다.
+
 ## 한계와 후속 작업
 
 - 외부 NVD·CISA·EPSS 수집을 실행하지 않았다. upstream의 최신 데이터·rate limit·checkpoint·장기 backfill 검증은 아니다.
