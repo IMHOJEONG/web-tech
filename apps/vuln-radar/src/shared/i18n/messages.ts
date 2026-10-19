@@ -93,6 +93,8 @@ export const messages = {
     "feed.errorTitle": "취약점 피드를 불러오지 못했습니다.",
     "feed.errorBody":
       "백엔드 연결, 프록시 설정, API 응답 형식을 확인한 뒤 다시 시도해 주세요.",
+    "feed.refreshError":
+      "최신 정보를 가져오지 못해 마지막으로 불러온 목록을 표시합니다. 잠시 후 다시 시도해 주세요.",
     "feed.filterTitle": "탐색 조건",
     "feed.resultCount": "현재 조건에 맞는 항목 {{count}}건",
     "feed.searchPlaceholder": "CVE ID, 제품, 키워드 검색",
@@ -273,6 +275,8 @@ export const messages = {
     "feed.loadingEyebrow": "Loading feed",
     "feed.errorEyebrow": "Feed error",
     "feed.errorTitle": "The vulnerability feed could not be loaded.",
+    "feed.refreshError":
+      "The feed could not be refreshed. Showing the last loaded results. Please try again.",
     "feed.errorBody":
       "Check backend connectivity, proxy settings, and API response shape, then try again.",
     "feed.filterTitle": "Browse controls",

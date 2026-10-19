@@ -123,12 +123,12 @@ function FilterGroup({
   label: string;
 }) {
   return (
-    <div>
-      <p className="font-mono text-[0.68rem] font-bold uppercase tracking-[0.16em] text-radar-copy/56">
+    <fieldset className="min-w-0">
+      <legend className="font-mono text-[0.68rem] font-bold uppercase tracking-[0.16em] text-radar-copy/56">
         {label}
-      </p>
+      </legend>
       <div className="mt-2 flex gap-2 overflow-x-auto pb-1">{children}</div>
-    </div>
+    </fieldset>
   );
 }
 
@@ -146,6 +146,7 @@ function FilterPill({
       type="button"
       className="inline-flex min-h-9 shrink-0 items-center rounded-sm border border-radar-border bg-radar-panel-muted px-3 font-mono text-[0.72rem] text-radar-copy/72 transition hover:-translate-y-px hover:border-radar-primary/28 hover:text-radar-primary data-[active=true]:border-radar-success/36 data-[active=true]:bg-radar-success/10 data-[active=true]:text-radar-success"
       data-active={active}
+      aria-pressed={active}
       onClick={onClick}
     >
       {children}

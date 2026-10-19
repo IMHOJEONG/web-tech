@@ -84,6 +84,42 @@ test("summarizeFeedItems returns operational feed counters", () => {
   });
 });
 
+test("missing evidence does not count as a confirmed KEV search signal", () => {
+  const unknownItem = createItem({ cveId: "CVE-2026-0004" });
+  unknownItem.reliability.level = "unknown";
+  unknownItem.reliability.evidenceCompleteness.missing = ["kev", "epss"];
+
+  const filtered = filterFeedItems([...items, unknownItem], {
+    ...DEFAULT_FEED_FILTERS,
+    query: " KEV ",
+  });
+
+  assert.deepEqual(
+    filtered.map((item) => item.cveId),
+    ["CVE-2026-0001"],
+  );
+  assert.deepEqual(
+    filterFeedItems([unknownItem], { ...DEFAULT_FEED_FILTERS, query: "epss" }),
+    [],
+  );
+});
+
+test("descriptive text stays searchable even when evidence is incomplete", () => {
+  const item = createItem({ title: "KEV assessment pending vendor review" });
+  item.reliability.evidenceCompleteness.missing = ["kev"];
+  item.reliability.conflicts = [
+    { type: "status", message: "Vendor confirmation pending", sourceIds: [] },
+  ];
+
+  for (const query of ["kev", "vendor confirmation", "fresh", "medium"]) {
+    assert.equal(
+      filterFeedItems([item], { ...DEFAULT_FEED_FILTERS, query }).length,
+      1,
+      `descriptive search: ${query}`,
+    );
+  }
+});
+
 function createItem(overrides: Partial<FeedItem>): FeedItem {
   return {
     cveId: "CVE-2026-0000",

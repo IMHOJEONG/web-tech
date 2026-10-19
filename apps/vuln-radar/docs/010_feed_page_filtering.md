@@ -30,6 +30,12 @@
 - severity 필터는 `all`, `critical`, `high`, `medium`, `low`를 지원한다.
 - KEV 필터는 `all`, `kev`를 지원한다.
 
+## PR #44 후속 보완
+
+- `evidenceCompleteness.missing`은 미확인 근거이므로 keyword 검색 대상에서 제외한다. 실제 `isKev` 신호와 제목·워치리스트·충돌 설명은 계속 검색한다. keyword `kev` 검색은 전용 KEV 필터와 달리 제목의 KEV 언급도 검색할 수 있다.
+- 각 필터 그룹은 `fieldset`과 `legend`로 이름을 제공하고, 버튼은 `aria-pressed`로 선택 상태를 전달한다.
+- 최초 조회 실패로 데이터가 없을 때만 전체 오류 화면을 표시한다. 재조회 실패 시에는 캐시된 목록·현재 필터를 유지하며 경고와 재시도 버튼을 제공한다. 캐시가 빈 목록이어도 이 원칙은 같다.
+
 ## 보류한 범위
 
 `source` 필터는 아직 적용하지 않았다.
