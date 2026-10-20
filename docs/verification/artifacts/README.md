@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-20 PR #47 병합 후 운영 검증](2026-10-20-pr47-postmerge-production.json): [보고서](../deployment/2026-10-20-docs-main-production-transition.md#pr-47-병합-후-운영-검증). main 693d4e4 CI·Production·HTTP·Chromium·로그와 초안 보존 집계.
+
 - [10-20 블로그 main Production 전환](2026-10-20-docs-main-production-transition.json): [검증 보고서](../deployment/2026-10-20-docs-main-production-transition.md).
 
 - [10-20 KST 깨끗한 커밋의 통합 검증](2026-10-19T15-15-59-845Z-vuln-radar-integration.json): [보고서](../integration/2026-10-19-vuln-radar-local-integration.md). 9fee886·workingTreeDirty=false, 통합 13개·정리 6단계 성공. [1280px](2026-10-19T15-15-59-845Z-vuln-radar-feed-1280.png)·[390px](2026-10-19T15-15-59-845Z-vuln-radar-feed-390.png). 파일명은 UTC.
