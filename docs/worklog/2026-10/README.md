@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-20 블로그 main Production 전환](2026-10-20-docs-main-production-transition.md)
+
 - [10-20 PR #46 검증 실행 상태 식별](2026-10-20-vuln-radar-verification-provenance.md)
 
 - [10-19 main 기준 vuln-radar 통합 검증](2026-10-19-vuln-radar-integration.md)

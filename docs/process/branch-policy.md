@@ -3,7 +3,7 @@
 ## 상태와 범위
 
 - 대상: 모노레포 전체의 작업 브랜치·PR·배포 브랜치 예외
-- 최종 검토: 2026-10-19
+- 최종 검토: 2026-10-20
 - squash 병합 뒤에는 최신 `origin/main` 기준의 새 작업 브랜치를 사용한다. 이 문서 반영만으로 기존 PR·Git 이력·Vercel 설정을 변경하지 않는다.
 
 ## 목적
@@ -74,9 +74,21 @@ git switch -c feature/docs-search
 - CI가 통과하지 않으면 머지하지 않는다.
 - 커밋 메시지는 `type(scope): summary` 규칙을 따른다.
 
-## 현재 docs 배포 브랜치의 CI 검사
+## docs CI 검사와 배포 전환 상태
 
-2026-09-24 기준 `feature/docs`가 블로그 배포 브랜치로 사용되는 동안에는
+2026-10-20 블로그 Vercel 프로젝트 `web-tech`의 Production Branch를 `main`으로 전환하고,
+동일 main SHA의 CI·Preview·Production 환경 스테이징·운영 도메인을 확인했다.
+새 블로그 작업은 최신 main에서 짧은 브랜치를 생성하고 PR로 main에 반영한다.
+main 병합 뒤 블로그 관련 변경이 Vercel의 영향 범위에 포함되면 Production 배포가 생성된다.
+공통 패키지 변경도 영향 범위에 포함되므로 앱 디렉터리 변경 여부만으로 배포를 판단하지 않는다.
+
+- `feature/docs`는 더 이상 블로그의 Production Branch가 아니다. 직접 push를 새 운영 배포 수단으로 사용하지 않는다.
+- 기존 `feature/docs`의 로컬·원격 ref, 이전 Production 배포와 비공개 초안은 사용자 요청에 따라 그대로 보존했다. 이 문서 갱신으로 삭제·재작성하지 않는다.
+- 아래 `feature/docs` push CI 예외는 아직 workflow에 남아 있다. 기존 브랜치 보존 종료와 별도 정리 PR에서 제거한다.
+- 이번 전환은 Vercel의 CI 대기/Deployment Checks를 도입하지 않았다. main 병합 후에도 같은 SHA의 CI 성공과 배포 성공을 각각 확인한다.
+- 절차와 복구: [블로그 main 배포 운영](../runbooks/docs-main-production-deployment.md). 실제 결과: [10-20 전환 검증](../verification/deployment/2026-10-20-docs-main-production-transition.md).
+
+2026-09-24 도입한 기존 배포 브랜치 CI 보강은 다음과 같다. 당시 `feature/docs`가 블로그 배포 브랜치로 사용되는 동안에는
 `CI`와 `Documentation` 워크플로가 `main`뿐 아니라 `feature/docs` 직접 push에서도
 실행되도록 한다. 경로 필터는 두지 않아 공용 패키지·설정 변경도 검사 대상에 포함한다.
 다른 feature 브랜치의 직접 push 범위는 확대하지 않으며 기존 PR 검사는 유지한다.
@@ -89,7 +101,7 @@ git switch -c feature/docs-search
 
 이는 장기 feature 브랜치를 기본 전략으로 승인하는 변경이 아니다. squash 병합된 `feature/docs`는 다음 기능 개발에 재사용하지 않는다. 운영 배포가 아직 이 브랜치를 참조한다면 배포 연결을 확인하기 전 삭제하거나 ref를 재작성하지 않는다.
 
-docs 배포 기준을 `main`으로 옮기고 동일 커밋의 배포·CI·주요 라우트를 확인한 뒤 기존 배포 브랜치를 폐기한다. 그때 해당 push 검사 예외를 제거하며, 공통 workflow 변경도 PR로 `main`에 반영한다. 문서 변경만으로 Vercel의 Production Branch나 GitHub ruleset이 자동 변경되지는 않는다.
+docs 배포 기준 전환과 동일 커밋의 검증은 완료했지만 기존 배포 브랜치의 폐기는 별도 보존 종료 승인 뒤 진행한다. 그때 해당 push 검사 예외를 제거하며, 공통 workflow 변경도 PR로 `main`에 반영한다. 문서 변경만으로 Vercel의 Production Branch나 GitHub ruleset이 자동 변경되지는 않는다.
 원격 Actions 실행과 배포 검증은 push 이후 별도로 수행한다.
 
 관련 변경: [docs 배포 브랜치 CI 실행 범위 보강](../worklog/2026-09/2026-09-24-docs-deployment-branch-ci.md).

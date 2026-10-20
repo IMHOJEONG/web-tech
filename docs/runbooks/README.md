@@ -1,5 +1,7 @@
 # 운영 및 재현 절차
 
+- [블로그 main 배포 운영과 복구](docs-main-production-deployment.md)
+
 - [vuln-radar 로컬 통합 검증](vuln-radar-local-integration-verification.md)
 
 - [테스트 직접 작성과 IDE 점검 가이드](test-authoring-ide-guide.md)
