@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-20 PR #47 병합 후 운영 확인과 정리](2026-10-20-pr47-postmerge-closeout.md)
+
 - [10-20 PR #47 리뷰 지적 보완](2026-10-20-pr47-review-followup.md)
 
 - [10-20 PR #47 Jira·Confluence 연결과 매 작업 기록](2026-10-20-jira-confluence-work-records.md)

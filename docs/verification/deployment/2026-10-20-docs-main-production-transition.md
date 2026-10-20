@@ -77,3 +77,39 @@ Production 환경으로 만든 격리 배포가 검증된 뒤 branch를 바꾸�
 - [main 배포 운영 절차](../../runbooks/docs-main-production-deployment.md)
 - [브랜치 정책](../../process/branch-policy.md)
 - [전환 작업 기록](../../worklog/2026-10/2026-10-20-docs-main-production-transition.md)
+
+## PR #47 병합 후 운영 검증
+
+2026-10-20 KST에 병합 후의 별도 표본을 확인했다. 위 최초 전환 결과는 당시 기록으로 유지한다.
+이번 대상은 main `693d4e486667b43d290e3af95466b424c9bda66c`, Production `dpl_328DfCogmZwabpZ5CW4oRiJpsUvK`다.
+
+| 확인 항목      | 실제 결과                                                                                                                                      |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| 병합·main 검사 | PR #47 MERGED. 동일 SHA의 CI·Documentation·Push on main(CodeQL) 성공                                                                           |
+| 실제 운영 소스 | Vercel Git ref main·SHA 일치, READY, heap-forge.app alias 일치. Production Branch main·root apps/docs·Node 24.x·자동 도메인 할당 true 확인     |
+| 공개 HTTP      | 주요 경로 13/13에서 200·예상 본문·오류 화면 부재 확인. 인증 없는 revalidation POST는 401                                                       |
+| Chromium       | 1280×800 라이트·390×844 다크에서 카드→로컬 본문/코드, 검색 제출, About 이동·모바일 Drawer 닫기 통과                                            |
+| 화면           | 가로 넘침·uncaught pageerror·동일 origin 5xx 0. 화면 내 피드 이미지 데스크톱 2개·모바일 1개 로드                                               |
+| Runtime Logs   | 최근 20분 표본 50건 모두 info, 별도 error·5xx 조회 0건. source 이벤트는 0건이라 신규 origin 읽기의 근거로 사용하지 않음                        |
+| 로컬 정리      | main을 origin/main으로 fast-forward. PR head와 main의 파일 tree 전체 일치를 확인한 병합 작업 브랜치 1개만 로컬·원격 삭제                       |
+| 초안 보존      | 현재 브랜치/HEAD, 미커밋 파일 29개 해시, stash 9개·고정 스냅샷·다른 기존 브랜치 불변, staged 변경 없음                                         |
+| 이전 리뷰·보안 | 기존·후속 스레드 6개 해결, PR head GitGuardian 최종 성공. CodeRabbit 최신 head check의 rate limit은 실제 자동 재리뷰 완료가 아니라는 한계 유지 |
+
+원본: [병합 후 검증 집계](../artifacts/2026-10-20-pr47-postmerge-production.json),
+[main CI](https://github.com/IMHOJEONG/web-tech/actions/runs/39402625761),
+[Production](https://vercel.com/hojeong-ims-projects/web-tech/328DfCogmZwabpZ5CW4oRiJpsUvK),
+[정리 기록](../../worklog/2026-10/2026-10-20-pr47-postmerge-closeout.md).
+
+실행 명령(저장소 루트, Vercel CLI 53.1.1·Node 24):
+
+```bash
+gh run view 39402625761 --repo IMHOJEONG/web-tech
+vercel inspect dpl_328DfCogmZwabpZ5CW4oRiJpsUvK --scope hojeong-ims-projects
+node /tmp/pr47-postmerge-http.mts
+node /tmp/docs-main-browser-smoke.cjs post47-production
+node /tmp/docs-main-runtime-log-check.cjs post47-production dpl_328DfCogmZwabpZ5CW4oRiJpsUvK
+```
+
+임시 하네스 경로는 실행 이력이며 저장소에 설치된 테스트 명령이 아니다. 스냅샷·브라우저 원시 데이터·인증 응답은 업로드하지 않았다.
+실기기·Safari/Firefox, 정상 토큰 게시·NAS 쓰기·rollback/promote는 실행하지 않았다. 의존성 취약점 전체가 해소됐다는 검증도 아니다.
+검증 기록은 미커밋 초안과 분리한 최신 main 기준의 로컬 작업 브랜치에 보관하며 이 기록 작업으로 새 운영 배포를 만들지 않았다.
