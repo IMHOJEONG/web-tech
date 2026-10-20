@@ -18,7 +18,10 @@ Vercel 공식 [curl 문서](https://vercel.com/docs/cli/curl)에서 보호 자�
 `vercel --version`은 53.1.1이며 `vercel logs --help`에서 기존 positional deployment·`--no-follow`·`--no-branch`·`--level`·`--status-code` 옵션 지원을 확인했다.
 이 확인은 최신 CLI에서도 같은 문법이 동작한다는 의미가 아니므로 runbook을 검증 버전에 고정한다.
 
-변경 문서·포맷·민감정보 패턴 검사를 실행하고 결과를 확인한 뒤 커밋한다. 수정 커밋의 CI는 기존 `a1fdb43` 결과와 구분해 원격에서 재확인한다.
+변경 문서·포맷·고신뢰 민감정보 패턴 검사와 실제 pre-commit/commit-msg 훅을 통과했다. 셸 예시 5개는 `bash -n`으로 구문을 검사했고, 세 지침의 `진행·검증·마감 댓글` 문구와 artifact 목차 연결도 검사했다.
+첫 수정 `fe7d72f`를 푸시하고 근거 답글과 함께 기존 리뷰 스레드 5개를 해결했다. 새 CI는 기존 `a1fdb43` 결과와 구분해 원격에서 재확인한다.
+추가 비인증 요청에서 기존 `a1fdb43` Preview는 HTTP 302와 `vercel.com/sso-api` 인증 진입점으로 응답했다. 401만 기대하도록 쓴 문구를 보완해 인증 리디렉션도 목적지를 검증하도록 했다. 리디렉션 query·쿠키는 기록하지 않았다. 이 검사는 기존 Preview 표본이며 후속 수정 SHA의 콘텐츠 검증을 대신하지 않는다.
+원래 초안 작업 트리 29개 파일 해시, 브랜치/HEAD, stash 목록이 모두 그대로인 것도 확인했다.
 이번 작업은 문서 보완이며 Production 설정·보호 정책·auto-assignment·배포를 변경하거나 rollback/promote를 실행하지 않는다. 새로운 구조 결정은 없어 ADR을 추가하지 않는다.
 
 ## Open Questions
