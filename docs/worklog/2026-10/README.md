@@ -1,5 +1,13 @@
 # 2026-10 작업 기록
 
+- [10-20 PR #47 리뷰 지적 보완](2026-10-20-pr47-review-followup.md)
+
+- [10-20 PR #47 Jira·Confluence 연결과 매 작업 기록](2026-10-20-jira-confluence-work-records.md)
+
+- [10-20 main 기준 docs 작업·초안 브랜치 이전](2026-10-20-docs-main-branch-restart.md)
+
+- [10-20 블로그 main Production 전환](2026-10-20-docs-main-production-transition.md)
+
 - [10-20 PR #46 검증 실행 상태 식별](2026-10-20-vuln-radar-verification-provenance.md)
 
 - [10-19 main 기준 vuln-radar 통합 검증](2026-10-19-vuln-radar-integration.md)
