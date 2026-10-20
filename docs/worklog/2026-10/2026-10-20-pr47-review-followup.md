@@ -18,10 +18,10 @@ Vercel 공식 [curl 문서](https://vercel.com/docs/cli/curl)에서 보호 자�
 `vercel --version`은 53.1.1이며 `vercel logs --help`에서 기존 positional deployment·`--no-follow`·`--no-branch`·`--level`·`--status-code` 옵션 지원을 확인했다.
 이 확인은 최신 CLI에서도 같은 문법이 동작한다는 의미가 아니므로 runbook을 검증 버전에 고정한다.
 
-변경 문서·포맷·고신뢰 민감정보 패턴 검사와 실제 pre-commit/commit-msg 훅을 통과했다. 셸 예시 5개는 `bash -n`으로 구문을 검사했고, 세 지침의 `진행·검증·마감 댓글` 문구와 artifact 목차 연결도 검사했다.
-첫 수정 `fe7d72f`를 푸시하고 근거 답글과 함께 기존 리뷰 스레드 5개를 해결했다. 새 CI는 기존 `a1fdb43` 결과와 구분해 원격에서 재확인한다.
-추가 비인증 요청에서 기존 `a1fdb43` Preview는 HTTP 302와 `vercel.com/sso-api` 인증 진입점으로 응답했다. 401만 기대하도록 쓴 문구를 보완해 인증 리디렉션도 목적지를 검증하도록 했다. 리디렉션 query·쿠키는 기록하지 않았다. 이 검사는 기존 Preview 표본이며 후속 수정 SHA의 콘텐츠 검증을 대신하지 않는다.
-원래 초안 작업 트리 29개 파일 해시, 브랜치/HEAD, stash 목록이 모두 그대로인 것도 확인했다.
+로컬 문서·포맷·고신뢰 민감정보 패턴·커밋 훅과 셸 예시 구문 검사는 통과했고 비공개 초안 작업 트리는 보존했다.
+`fe7d72f`·`b480d59`를 푸시하고 기존 지적 5건의 [반영 근거와 해결 상태](https://github.com/IMHOJEONG/web-tech/pull/47#discussion_r4320263657)를 남겼다. Preview의 비인증 SSO 리디렉션 관측은 인증 후 콘텐츠 검증과 구분한다.
+`b480d59`의 [CI 원본](https://github.com/IMHOJEONG/web-tech/actions/runs/39397772488)과 후속 커밋의 검사는 별개다. 최초 운영 전환의 실측은 기존 [검증 보고서](../../verification/deployment/2026-10-20-docs-main-production-transition.md)와 [JSON](../../verification/artifacts/2026-10-20-docs-main-production-transition.json)이 원본이며 이번 문서 검사의 증거로 대체하지 않는다.
+후속 리뷰에서 완료한 작업이 `Next`에 남아 있다는 지적을 반영하고 검증 설명은 상태·원본 링크 중심으로 줄였다.
 이번 작업은 문서 보완이며 Production 설정·보호 정책·auto-assignment·배포를 변경하거나 rollback/promote를 실행하지 않는다. 새로운 구조 결정은 없어 ADR을 추가하지 않는다.
 
 ## Open Questions
@@ -30,5 +30,5 @@ Vercel 공식 [curl 문서](https://vercel.com/docs/cli/curl)에서 보호 자�
 
 ## Next
 
-로컬 검사 후 PR 브랜치에 커밋·푸시하고, 실제 반영한 5개 스레드만 근거와 함께 정리한다.
-Jira 기존 표 댓글과 Confluence 운영 안내에 변경 이유·원격 커밋·검증 상태를 갱신하고 재조회한다. main 병합은 수행하지 않는다.
+후속 커밋의 원격 CI·리뷰 결과와 남은 지적 여부를 확인하고 Jira 기존 표 댓글·Confluence 운영 안내의 연결과 저장 결과를 재조회한다.
+main 병합·Production 변경은 이번 작업 범위가 아니다.
