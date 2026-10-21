@@ -1,0 +1,487 @@
+{
+  "date": "2026-10-21",
+  "timezone": "Asia/Seoul",
+  "issue": "KAN-21",
+  "pr": "https://github.com/IMHOJEONG/web-tech/pull/51",
+  "remoteFailure": {
+    "head": "8a0b30dde9f830fadd6158ac5419a185bc942bb9",
+    "runId": "39548774939",
+    "jobId": "119052919931",
+    "expectedGreaterThanMs": 120,
+    "receivedMs": 105.5,
+    "artifactCount": 0,
+    "individualRemoteTimingsAvailable": false
+  },
+  "local": {
+    "baseCommit": "344fd099b6bb2dd3b594b307ae46cbfaff8b77a0",
+    "workingTreeDirty": true,
+    "node": "v24.12.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "playwright": "1.62.1",
+    "sources": [
+      {
+        "path": "apps/docs/crp-e2e/critical-rendering-path.spec.ts",
+        "sha256": "0003ae1ce671298187e63f594040572f18a1b74eccb884a83459fb891cbe5645"
+      },
+      {
+        "path": "docs/examples/critical-rendering-path-lab/assets/late-lcp.ts",
+        "sha256": "9853d4348dd4e562c077c4903cfa1e2079ffdb4355dc04b4ee0065eb18385876"
+      },
+      {
+        "path": "docs/examples/critical-rendering-path-lab/README.md",
+        "sha256": "18af16637b26708925928514d57c066df4f7ec3d6ebeaa44fa21fa140e26c939"
+      }
+    ]
+  },
+  "controlledBefore": {
+    "delayMs": 240,
+    "thresholdMs": 120,
+    "chromium": "151.0.7922.34",
+    "results": [
+      {
+        "baselineDelayMs": 0,
+        "baseline": {
+          "timeOrigin": 1792568534433.5,
+          "documentResponseStart": 21.299999952316284,
+          "heroStart": 37.200000047683716,
+          "scheduled": null,
+          "discovered": null
+        },
+        "late": {
+          "timeOrigin": 1792568534574.8,
+          "documentResponseStart": 2.200000047683716,
+          "heroStart": 263.2999999523163,
+          "scheduled": 19.799999952316284,
+          "discovered": 261
+        },
+        "oldDifferenceMs": 226.09999990463257,
+        "oldAssertionPasses": true,
+        "actualTimerWaitMs": 241.20000004768372
+      },
+      {
+        "baselineDelayMs": 500,
+        "baseline": {
+          "timeOrigin": 1792568534901,
+          "documentResponseStart": 506.09999990463257,
+          "heroStart": 512.4000000953674,
+          "scheduled": null,
+          "discovered": null
+        },
+        "late": {
+          "timeOrigin": 1792568535450.7,
+          "documentResponseStart": 1.9000000953674316,
+          "heroStart": 252.5,
+          "scheduled": 11,
+          "discovered": 251.90000009536743
+        },
+        "oldDifferenceMs": -259.90000009536743,
+        "oldAssertionPasses": false,
+        "actualTimerWaitMs": 240.90000009536743
+      },
+      {
+        "baselineDelayMs": 500,
+        "baseline": {
+          "timeOrigin": 1792568535769.3,
+          "documentResponseStart": 510.39999985694885,
+          "heroStart": 514.8999998569489,
+          "scheduled": null,
+          "discovered": null
+        },
+        "late": {
+          "timeOrigin": 1792568536316.4,
+          "documentResponseStart": 2.1000001430511475,
+          "heroStart": 257.5,
+          "scheduled": 15.100000143051147,
+          "discovered": 256.60000014305115
+        },
+        "oldDifferenceMs": -257.39999985694885,
+        "oldAssertionPasses": false,
+        "actualTimerWaitMs": 241.5
+      }
+    ]
+  },
+  "after": {
+    "stats": {
+      "startTime": "2026-10-21T07:44:31.794Z",
+      "duration": 55710.108,
+      "expected": 100,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "resultSha256": "1bf66b45cf20bdf8a0c7d9a830d66f13671fff4cb8327af043da8c9fdbecd9be",
+    "passed": 100,
+    "retries": 0,
+    "skipped": 0,
+    "baselineCases": [
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 14,
+        "scheduledMs": 12.5,
+        "discoveredMs": 254.5,
+        "heroStartMs": 256.59999990463257,
+        "timerWaitMs": 242,
+        "oldDifferenceMs": 242.59999990463257
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 512.7999999523163,
+        "scheduledMs": 10.5,
+        "discoveredMs": 252.19999980926514,
+        "heroStartMs": 252.59999990463257,
+        "timerWaitMs": 241.69999980926514,
+        "oldDifferenceMs": -260.2000000476837
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 17.200000047683716,
+        "scheduledMs": 16.09999990463257,
+        "discoveredMs": 257.89999985694885,
+        "heroStartMs": 258.5,
+        "timerWaitMs": 241.79999995231628,
+        "oldDifferenceMs": 241.29999995231628
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 516,
+        "scheduledMs": 15.400000095367432,
+        "discoveredMs": 257.2999999523163,
+        "heroStartMs": 257.90000009536743,
+        "timerWaitMs": 241.89999985694885,
+        "oldDifferenceMs": -258.09999990463257
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 11.099999904632568,
+        "scheduledMs": 10.299999952316284,
+        "discoveredMs": 251.09999990463257,
+        "heroStartMs": 251.79999995231628,
+        "timerWaitMs": 240.79999995231628,
+        "oldDifferenceMs": 240.70000004768372
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 514.7999999523163,
+        "scheduledMs": 9,
+        "discoveredMs": 251,
+        "heroStartMs": 251.59999990463257,
+        "timerWaitMs": 242,
+        "oldDifferenceMs": -263.2000000476837
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 15.799999952316284,
+        "scheduledMs": 13.199999809265137,
+        "discoveredMs": 254.29999995231628,
+        "heroStartMs": 254.89999985694885,
+        "timerWaitMs": 241.10000014305115,
+        "oldDifferenceMs": 239.09999990463257
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 514.1000001430511,
+        "scheduledMs": 8.5,
+        "discoveredMs": 250.59999990463257,
+        "heroStartMs": 251,
+        "timerWaitMs": 242.09999990463257,
+        "oldDifferenceMs": -263.10000014305115
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 11.799999952316284,
+        "scheduledMs": 12,
+        "discoveredMs": 254.19999980926514,
+        "heroStartMs": 254.79999995231628,
+        "timerWaitMs": 242.19999980926514,
+        "oldDifferenceMs": 243
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 509.39999985694885,
+        "scheduledMs": 10.799999952316284,
+        "discoveredMs": 252.09999990463257,
+        "heroStartMs": 252.5,
+        "timerWaitMs": 241.29999995231628,
+        "oldDifferenceMs": -256.89999985694885
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 15.299999952316284,
+        "scheduledMs": 20.299999952316284,
+        "discoveredMs": 261.60000014305115,
+        "heroStartMs": 262.2000000476837,
+        "timerWaitMs": 241.30000019073486,
+        "oldDifferenceMs": 246.90000009536743
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 516.4000000953674,
+        "scheduledMs": 13.200000047683716,
+        "discoveredMs": 255.20000004768372,
+        "heroStartMs": 255.80000019073486,
+        "timerWaitMs": 242,
+        "oldDifferenceMs": -260.59999990463257
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 10.299999952316284,
+        "scheduledMs": 11.700000047683716,
+        "discoveredMs": 253.5,
+        "heroStartMs": 253.90000009536743,
+        "timerWaitMs": 241.79999995231628,
+        "oldDifferenceMs": 243.60000014305115
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 513.4000000953674,
+        "scheduledMs": 8.200000047683716,
+        "discoveredMs": 249.40000009536743,
+        "heroStartMs": 250,
+        "timerWaitMs": 241.20000004768372,
+        "oldDifferenceMs": -263.40000009536743
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 15.799999952316284,
+        "scheduledMs": 18.199999809265137,
+        "discoveredMs": 260.19999980926514,
+        "heroStartMs": 260.5,
+        "timerWaitMs": 242,
+        "oldDifferenceMs": 244.70000004768372
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 514.9000000953674,
+        "scheduledMs": 12.100000143051147,
+        "discoveredMs": 253.29999995231628,
+        "heroStartMs": 253.60000014305115,
+        "timerWaitMs": 241.19999980926514,
+        "oldDifferenceMs": -261.2999999523163
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 11.199999809265137,
+        "scheduledMs": 10.700000047683716,
+        "discoveredMs": 251.5,
+        "heroStartMs": 251.89999985694885,
+        "timerWaitMs": 240.79999995231628,
+        "oldDifferenceMs": 240.70000004768372
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 511.39999985694885,
+        "scheduledMs": 9.299999952316284,
+        "discoveredMs": 251.20000004768372,
+        "heroStartMs": 251.39999985694885,
+        "timerWaitMs": 241.90000009536743,
+        "oldDifferenceMs": -260
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 13.100000143051147,
+        "scheduledMs": 11.5,
+        "discoveredMs": 253.29999995231628,
+        "heroStartMs": 253.90000009536743,
+        "timerWaitMs": 241.79999995231628,
+        "oldDifferenceMs": 240.79999995231628
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 509.59999990463257,
+        "scheduledMs": 12.799999952316284,
+        "discoveredMs": 254,
+        "heroStartMs": 254.59999990463257,
+        "timerWaitMs": 241.20000004768372,
+        "oldDifferenceMs": -255
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 19.59999990463257,
+        "scheduledMs": 12.599999904632568,
+        "discoveredMs": 254.29999995231628,
+        "heroStartMs": 254.90000009536743,
+        "timerWaitMs": 241.70000004768372,
+        "oldDifferenceMs": 235.30000019073486
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 513.8000001907349,
+        "scheduledMs": 11.600000143051147,
+        "discoveredMs": 253.60000014305115,
+        "heroStartMs": 253.90000009536743,
+        "timerWaitMs": 242,
+        "oldDifferenceMs": -259.90000009536743
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 14,
+        "scheduledMs": 13.299999952316284,
+        "discoveredMs": 254.70000004768372,
+        "heroStartMs": 255.20000004768372,
+        "timerWaitMs": 241.40000009536743,
+        "oldDifferenceMs": 241.20000004768372
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 512.2999999523163,
+        "scheduledMs": 8.700000047683716,
+        "discoveredMs": 250.79999995231628,
+        "heroStartMs": 251.20000004768372,
+        "timerWaitMs": 242.09999990463257,
+        "oldDifferenceMs": -261.09999990463257
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 16.90000009536743,
+        "scheduledMs": 18.59999990463257,
+        "discoveredMs": 259.2999999523163,
+        "heroStartMs": 259.7000000476837,
+        "timerWaitMs": 240.70000004768372,
+        "oldDifferenceMs": 242.79999995231628
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 507.89999985694885,
+        "scheduledMs": 10.099999904632568,
+        "discoveredMs": 251.59999990463257,
+        "heroStartMs": 251.90000009536743,
+        "timerWaitMs": 241.5,
+        "oldDifferenceMs": -255.99999976158142
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 19.5,
+        "scheduledMs": 11.900000095367432,
+        "discoveredMs": 253.29999995231628,
+        "heroStartMs": 253.90000009536743,
+        "timerWaitMs": 241.39999985694885,
+        "oldDifferenceMs": 234.40000009536743
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 514.9000000953674,
+        "scheduledMs": 7.599999904632568,
+        "discoveredMs": 249.59999990463257,
+        "heroStartMs": 249.79999995231628,
+        "timerWaitMs": 242,
+        "oldDifferenceMs": -265.10000014305115
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 60.299999952316284,
+        "scheduledMs": 19.59999990463257,
+        "discoveredMs": 260.7999999523163,
+        "heroStartMs": 261,
+        "timerWaitMs": 241.20000004768372,
+        "oldDifferenceMs": 200.70000004768372
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 508.30000019073486,
+        "scheduledMs": 11.099999904632568,
+        "discoveredMs": 252.20000004768372,
+        "heroStartMs": 252.39999985694885,
+        "timerWaitMs": 241.10000014305115,
+        "oldDifferenceMs": -255.900000333786
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 11.900000095367432,
+        "scheduledMs": 10.799999952316284,
+        "discoveredMs": 252.79999995231628,
+        "heroStartMs": 253.20000004768372,
+        "timerWaitMs": 242,
+        "oldDifferenceMs": 241.29999995231628
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 512.3000001907349,
+        "scheduledMs": 8.599999904632568,
+        "discoveredMs": 250,
+        "heroStartMs": 250.5,
+        "timerWaitMs": 241.40000009536743,
+        "oldDifferenceMs": -261.80000019073486
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 10.5,
+        "scheduledMs": 17.300000190734863,
+        "discoveredMs": 259,
+        "heroStartMs": 259.30000019073486,
+        "timerWaitMs": 241.69999980926514,
+        "oldDifferenceMs": 248.80000019073486
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 510.19999980926514,
+        "scheduledMs": 12.899999856948853,
+        "discoveredMs": 255.09999990463257,
+        "heroStartMs": 255.69999980926514,
+        "timerWaitMs": 242.20000004768372,
+        "oldDifferenceMs": -254.5
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 13,
+        "scheduledMs": 11.700000047683716,
+        "discoveredMs": 253.29999995231628,
+        "heroStartMs": 253.79999995231628,
+        "timerWaitMs": 241.59999990463257,
+        "oldDifferenceMs": 240.79999995231628
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 510.2000000476837,
+        "scheduledMs": 9.100000143051147,
+        "discoveredMs": 250.60000014305115,
+        "heroStartMs": 251,
+        "timerWaitMs": 241.5,
+        "oldDifferenceMs": -259.2000000476837
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 12.099999904632568,
+        "scheduledMs": 10.700000047683716,
+        "discoveredMs": 252.20000004768372,
+        "heroStartMs": 252.90000009536743,
+        "timerWaitMs": 241.5,
+        "oldDifferenceMs": 240.80000019073486
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 512.3999998569489,
+        "scheduledMs": 15.700000047683716,
+        "discoveredMs": 257.7999999523163,
+        "heroStartMs": 258.2999999523163,
+        "timerWaitMs": 242.09999990463257,
+        "oldDifferenceMs": -254.09999990463257
+      },
+      {
+        "baselineDelayMs": 0,
+        "baselineHeroStartMs": 11.899999856948853,
+        "scheduledMs": 11.800000190734863,
+        "discoveredMs": 253.70000004768372,
+        "heroStartMs": 253.90000009536743,
+        "timerWaitMs": 241.89999985694885,
+        "oldDifferenceMs": 242.00000023841858
+      },
+      {
+        "baselineDelayMs": 500,
+        "baselineHeroStartMs": 509.40000009536743,
+        "scheduledMs": 8.200000047683716,
+        "discoveredMs": 249.60000014305115,
+        "heroStartMs": 249.80000019073486,
+        "timerWaitMs": 241.40000009536743,
+        "oldDifferenceMs": -259.59999990463257
+      }
+    ],
+    "mutationRejections": 20
+  },
+  "limits": [
+    "Original CI lacks per-navigation timing and trace artifact; exact host slowdown cause is unknown.",
+    "Controlled document delay reproduces the assertion defect, not the original CI load.",
+    "Local Chromium repetitions are not a Linux CI or production rerun.",
+    "A hero request timing contract is checked, not a real-user LCP score."
+  ]
+}

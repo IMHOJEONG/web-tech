@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-21 CRP navigation 비교 측정](2026-10-21-crp-navigation-timing.json): [검증 보고서](../performance/2026-10-21-crp-navigation-timing.md). 원격 105.5ms 실패·로컬 기준 응답 지연 대조군·최종 100개 반복 결과와 소스 해시.
+
 - [10-21 콘텐츠 의존성 audit](2026-10-21-security-content-audit.json): [보안 보고서](../security/2026-10-21-vite-content-advisories.md). 전체 11건→braces high 1건·production 0건, 원격 경고 종료와 구분.
 
 - [10-21 TCP EOF 전후 재현](2026-10-21-tcp-eof-regression.json), [회귀 검사기](2026-10-21-tcp-eof-regression.test.mts), [후속 원문 검사](2026-10-21-tcp-publication-source-tests-eof.txt), [후속 공개 화면](2026-10-21-tcp-publication-local-eof.json): [게시 리뷰 보완](../content/2026-10-21-tcp-publication.md#리뷰-후-eof-회귀와-재검토). 이전 timeout과 새 EOF 종료·포트 정리, 정상 Enter 경로를 구분.
