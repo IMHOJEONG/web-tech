@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-21 TCP EOF 전후 재현](2026-10-21-tcp-eof-regression.json), [회귀 검사기](2026-10-21-tcp-eof-regression.test.mts), [후속 원문 검사](2026-10-21-tcp-publication-source-tests-eof.txt), [후속 공개 화면](2026-10-21-tcp-publication-local-eof.json): [게시 리뷰 보완](../content/2026-10-21-tcp-publication.md#리뷰-후-eof-회귀와-재검토). 이전 timeout과 새 EOF 종료·포트 정리, 정상 Enter 경로를 구분.
+
 - [10-21 TCP 게시 로컬 화면](2026-10-21-tcp-publication-local.json), [원문 검사](2026-10-21-tcp-publication-source-tests.txt), [실행 검사기](2026-10-21-tcp-publication-check.mts): [게시 보고서](../content/2026-10-21-tcp-publication.md). production 모드·두 locale·6개 화면·검색·사이트맵과 실제 MDX 검사. 운영 배포와 구분.
 
 - [10-21 TCP 모바일 도식](2026-10-21-tcp-packet-390.jpg), [데스크톱 본문](2026-10-21-tcp-top-1280.jpg): 같은 게시 로컬 검증의 실제 화면.

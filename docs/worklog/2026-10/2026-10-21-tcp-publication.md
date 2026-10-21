@@ -6,7 +6,7 @@
 
 ## Changed
 
-- 대상 문서의 상태를 published로, 발행일·수정일을 10-21로 갱신했다. 본문과 도식 내용은 바꾸지 않았다.
+- 대상 문서의 상태를 published로, 발행일·수정일을 10-21로 갱신했다. PR #49 리뷰 후 선택 캡처 예제의 EOF 종료와 안내를 보완했고, 도식·TCP 관측값은 유지했다.
 - 기존 미커밋 TCP 준비·재검증 문서와 증거만 함께 보존하고 목차에 연결했다. 과거 draft 상태 기록은 덮어쓰지 않았다.
 - 원래 `codex/docs-tcp-draft`의 미커밋 원본과 공통 지침·다른 운영 작업은 별도 보존한다. 해당 작업을 게시 PR에 섞지 않는다.
 - [KAN-17](https://web-tech-service.atlassian.net/browse/KAN-17)과 [기존 Confluence 안내](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817/web-tech+Jira)에 PR·원격 결과를 단계별로 기록한다. 이전 KAN-16의 로컬 검증 완료와 구분한다.
@@ -15,7 +15,7 @@
 
 실제 게시 MDX를 바인딩한 원문 테스트 14개, 콘텐츠 19개와 production build, 공개 상세 6개 화면 조건·도식·접기·clipboard·canonical·검색·sitemap·카드 이동, 저장소 테스트 58개를 통과했다. “임시 포트”의 placeholder 휴리스틱 경고는 기술 용어의 오탐으로 확인하고 그대로 기록했다.
 
-10-20 검토본과 본문·도식이 같으므로 기존 다중 에이전트 검토 범위를 재사용한다. 새 관리자 캡처·구조 변경은 없고 ADR 추가 대상이 아니다. 원격 CI·배포 성공은 아직 로컬 결과와 구분해 후속 확인한다.
+리뷰의 EOF 대기 문제는 이전 코드에서 timeout으로 재현했고, 보완 후 EOF 두 경우와 정상 Enter·MDX 14개 검사를 재수행했다. 세 에이전트의 기술·초보자·한국어 재검토에서 Ctrl-D의 빈 입력 줄 조건도 반영했다. 새 관리자 캡처·구조 변경은 없고 ADR 추가 대상이 아니다. 원격 CI·배포 성공은 아직 로컬 결과와 구분해 후속 확인한다. Preview 준비 오류와 raw stream 검사기의 경계 가정 실패는 검증 보고서에 별도로 남겼다.
 
 ## Open Questions
 

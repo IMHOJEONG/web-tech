@@ -216,7 +216,7 @@ const server = createServer((req, res) => {
 
 ### 3/5 — 서버 포트를 운영체제에 맡깁니다
 
-포트 `0`은 사용 가능한 포트를 운영체제가 고르게 합니다. `listening` 이벤트를 기다린 뒤 실제 번호를 읽습니다. `connection` 이벤트가 발생할 때마다 `connections`를 1씩 늘려 서버가 수락한 연결 수를 셉니다. 선택형 `CAPTURE_TCP=1`에서는 클라이언트를 연결하기 전에 Enter를 기다립니다. 기본 실행에서는 기다리지 않습니다.
+포트 `0`은 사용 가능한 포트를 운영체제가 고르게 합니다. `listening` 이벤트를 기다린 뒤 실제 번호를 읽습니다. `connection` 이벤트가 발생할 때마다 `connections`를 1씩 늘려 서버가 수락한 연결 수를 셉니다. 선택 실습에서 `CAPTURE_TCP=1`로 실행하면 클라이언트를 연결하기 전에 Enter를 기다립니다. 기본 실행에서는 기다리지 않습니다. 표준 입력(stdin)이 EOF(입력 끝)에 도달하면 대기 소켓을 닫고 종료하며, 이때는 연결이나 캡처가 성공한 것이 아니므로 결과 JSON을 출력하지 않습니다.
 
 ```ts filename="tcp-socket-endpoints.mts" part="3/5"
 server.on('connection', () => {
@@ -230,8 +230,28 @@ if (process.env.CAPTURE_TCP === '1') {
         `sudo /usr/sbin/tcpdump -i lo0 -nn -S -tttt -l 'tcp and host 127.0.0.1 and port ${listening.port}'`
     )
     console.error('캡처 준비 후 이 터미널에서 Enter를 눌러 주세요.')
-    await once(process.stdin, 'data')
+    const input = await new Promise<'data' | 'end'>((resolve) => {
+        const onData = () => {
+            process.stdin.off('end', onEnd)
+            resolve('data')
+        }
+        const onEnd = () => {
+            process.stdin.off('data', onData)
+            resolve('end')
+        }
+        process.stdin.once('data', onData)
+        process.stdin.once('end', onEnd)
+    })
     process.stdin.pause()
+    if (input === 'end') {
+        await new Promise<void>((resolve, reject) => {
+            server.close((error) => {
+                if (error) reject(error)
+                else resolve()
+            })
+        })
+        process.exit(0)
+    }
 }
 ```
 
@@ -342,6 +362,8 @@ CAPTURE_TCP=1 node tcp-socket-endpoints.mts
 **터미널 B**에 A가 출력한 명령 전체를 그대로 복사합니다. 관리자 인증은 본인 터미널에서 진행합니다. `listening on lo0`가 보이면 A에서 Enter를 눌러 연결과 요청을 시작합니다. A의 JSON 출력이 끝난 뒤 B에서 Ctrl+C로 캡처를 종료합니다. B에서 권한 오류가 나거나 캡처를 취소했다면, A에서도 Enter 대신 Ctrl+C로 종료한 뒤 처음부터 다시 실행합니다.
 
 B에서 SYN·요청·응답·종료 행과 종료 집계를 확인하고, 각 행의 포트가 A의 `client`·`accepted` 값과 맞는지 대조합니다. 다시 실행하면 포트가 바뀌므로 이전 명령을 재사용하지 마세요. 캡처가 준비되기 전에 Enter를 누르면 연결 시작 부분을 놓칠 수 있습니다.
+
+A에서 Enter를 기다리는 동안 **빈 입력 줄에서 Ctrl-D**를 누르면 표준 입력이 EOF로 끝나 대기 소켓을 정리하고 종료합니다. 이 취소 경로는 정상 종료 코드 0이어도 결과 JSON이 없으므로 캡처 성공으로 판단하지 않습니다. 이미 문자를 입력했다면 Ctrl-D가 그 문자를 전달해 요청을 시작할 수 있으므로, 확실히 취소하려면 Ctrl+C를 사용하세요.
 
 패킷 수와 순서는 그림의 12행과 다를 수 있습니다. `listening on lo0`는 준비 완료일 뿐 수집 성공을 뜻하지 않으며, 실제 행과 종료 집계까지 확인해야 합니다. A의 일반 실행 결과만으로 캡처까지 성공했다고 판단하지 않습니다.
 

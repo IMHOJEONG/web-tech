@@ -1,0 +1,33 @@
+▶ macOS fixture and actual MDX: strict types, endpoint pairing, kernel state, full response
+  ✔ fixture strict type check (444.76975ms)
+  ✔ fixture connection 1 (103.869125ms)
+  ℹ {"kind":"fixture","run":1,"listening":{"address":"127.0.0.1","family":"IPv4","port":64046},"client":{"localAddress":"127.0.0.1","localPort":64047,"remoteAddress":"127.0.0.1","remotePort":64046},"accepted":{"localAddress":"127.0.0.1","localPort":64046,"remoteAddress":"127.0.0.1","remotePort":64047},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:64046 (LISTEN)","TCP 127.0.0.1:64047->127.0.0.1:64046 (ESTABLISHED)","TCP 127.0.0.1:64046->127.0.0.1:64047 (ESTABLISHED)"]}
+  ✔ fixture connection 2 (101.369542ms)
+  ℹ {"kind":"fixture","run":2,"listening":{"address":"127.0.0.1","family":"IPv4","port":64048},"client":{"localAddress":"127.0.0.1","localPort":64049,"remoteAddress":"127.0.0.1","remotePort":64048},"accepted":{"localAddress":"127.0.0.1","localPort":64048,"remoteAddress":"127.0.0.1","remotePort":64049},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:64048 (LISTEN)","TCP 127.0.0.1:64049->127.0.0.1:64048 (ESTABLISHED)","TCP 127.0.0.1:64048->127.0.0.1:64049 (ESTABLISHED)"]}
+  ✔ fixture connection 3 (102.213166ms)
+  ℹ {"kind":"fixture","run":3,"listening":{"address":"127.0.0.1","family":"IPv4","port":64050},"client":{"localAddress":"127.0.0.1","localPort":64051,"remoteAddress":"127.0.0.1","remotePort":64050},"accepted":{"localAddress":"127.0.0.1","localPort":64050,"remoteAddress":"127.0.0.1","remotePort":64051},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:64050 (LISTEN)","TCP 127.0.0.1:64051->127.0.0.1:64050 (ESTABLISHED)","TCP 127.0.0.1:64050->127.0.0.1:64051 (ESTABLISHED)"]}
+  ✔ actual-mdx strict type check (412.586667ms)
+  ✔ actual-mdx connection 1 (102.922708ms)
+  ℹ {"kind":"actual-mdx","run":1,"listening":{"address":"127.0.0.1","family":"IPv4","port":64052},"client":{"localAddress":"127.0.0.1","localPort":64053,"remoteAddress":"127.0.0.1","remotePort":64052},"accepted":{"localAddress":"127.0.0.1","localPort":64052,"remoteAddress":"127.0.0.1","remotePort":64053},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:64052 (LISTEN)","TCP 127.0.0.1:64053->127.0.0.1:64052 (ESTABLISHED)","TCP 127.0.0.1:64052->127.0.0.1:64053 (ESTABLISHED)"]}
+  ✔ actual-mdx connection 2 (103.891791ms)
+  ℹ {"kind":"actual-mdx","run":2,"listening":{"address":"127.0.0.1","family":"IPv4","port":64054},"client":{"localAddress":"127.0.0.1","localPort":64055,"remoteAddress":"127.0.0.1","remotePort":64054},"accepted":{"localAddress":"127.0.0.1","localPort":64054,"remoteAddress":"127.0.0.1","remotePort":64055},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:64054 (LISTEN)","TCP 127.0.0.1:64055->127.0.0.1:64054 (ESTABLISHED)","TCP 127.0.0.1:64054->127.0.0.1:64055 (ESTABLISHED)"]}
+  ✔ actual-mdx connection 3 (103.258709ms)
+  ℹ {"kind":"actual-mdx","run":3,"listening":{"address":"127.0.0.1","family":"IPv4","port":64056},"client":{"localAddress":"127.0.0.1","localPort":64057,"remoteAddress":"127.0.0.1","remotePort":64056},"accepted":{"localAddress":"127.0.0.1","localPort":64056,"remoteAddress":"127.0.0.1","remotePort":64057},"statusCode":200,"received":"hello from TCP\n","complete":true,"connections":1,"kernelSockets":["TCP 127.0.0.1:64056 (LISTEN)","TCP 127.0.0.1:64057->127.0.0.1:64056 (ESTABLISHED)","TCP 127.0.0.1:64056->127.0.0.1:64057 (ESTABLISHED)"]}
+✔ macOS fixture and actual MDX: strict types, endpoint pairing, kernel state, full response (1478.685625ms)
+ℹ {"observedAt":"2026-10-21T02:26:17.776Z","node":"v24.12.0","sourceSha256":"0f9d05fdcd4b54d0a439fa79fe0a45aa07b5d114037c4b7853b131e845146019"}
+✔ wrong endpoint, missing kernel state and incomplete body fail verification (1.18525ms)
+✔ missing or reordered MDX parts fail source binding (0.3715ms)
+▶ capture mode waits before connecting, prints current filter, and completes on Enter
+  ✔ fixture (123.501542ms)
+  ℹ {"kind":"fixture","captureFilterMatches":true,"beforeEnter":{"listen":1,"established":0},"afterEnter":{"connections":1,"statusCode":200,"complete":true},"packetCaptureExecuted":false}
+  ✔ actual-mdx (123.684125ms)
+  ℹ {"kind":"actual-mdx","captureFilterMatches":true,"beforeEnter":{"listen":1,"established":0},"afterEnter":{"connections":1,"statusCode":200,"complete":true},"packetCaptureExecuted":false}
+✔ capture mode waits before connecting, prints current filter, and completes on Enter (249.169542ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1809.038958

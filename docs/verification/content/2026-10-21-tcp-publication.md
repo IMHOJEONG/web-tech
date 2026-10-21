@@ -4,7 +4,7 @@
 
 - 2026-10-21 Asia/Seoul. 사용자가 기존 미커밋 문서의 게시와 CI 통과 후 PR 병합·Production 확인까지 승인했다.
 - 최신 main `0324278c7c874ff85c045f67094fb8800bbf7234` 기반 `codex/publish-tcp-socket-lab-20261021`에서 게시 변경을 분리했다. 원래 `codex/docs-tcp-draft`의 38개 미커밋 파일과 다른 운영 작업은 변경하지 않는다.
-- [실제 MDX](../../../apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx)의 본문·실행 코드와 도식은 10-20 검토본 그대로다. `status: published`, 발행일·수정일 `2026-10-21`만 게시 메타데이터로 갱신했다. 본문 SHA-256은 `962ffe82fae3ac2ada3f064bf5c410ec6e2993949b403511f3fa4279278447ae`다.
+- [실제 MDX](../../../apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx)는 10-20 검토본을 기준으로 공개 상태와 발행일·수정일을 전환했다. 이후 PR 리뷰에서 발견한 선택 캡처의 EOF 종료 처리와 설명만 보완했다. 도식과 TCP 관측값은 유지했다. 최종 본문 SHA-256은 `fbcf7e8038cfb73c0189f9ff71c4f0cb552b99200a4c6268c305e5bcbc8803ef`다.
 - macOS, Node 24.12.0, pnpm 11.10.0, Next.js 16.3.8, Playwright Chromium. 원격 index를 끈 production 모드 서버는 격리된 `127.0.0.1:3021`에서 실행했다. 운영 비밀값·NAS 원문·기존 개발 서버를 사용하거나 변경하지 않았다.
 - 추적: [KAN-17](https://web-tech-service.atlassian.net/browse/KAN-17), [Confluence 운영 안내](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817/web-tech+Jira). KAN-16은 이전 로컬 검증 완료 이력으로 유지한다.
 
@@ -23,6 +23,7 @@ mise exec -- env BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false DOCS_SITE_URL=http://12
 
 ```bash
 mise exec -- node docs/verification/artifacts/2026-10-21-tcp-publication-check.mts http://127.0.0.1:3021 /tmp/tcp-publication-local-20261021
+mise exec -- node --test docs/verification/artifacts/2026-10-21-tcp-eof-regression.test.mts
 mise exec -- pnpm test:repo
 ```
 
@@ -41,7 +42,21 @@ mise exec -- pnpm test:repo
 
 콘텐츠 경고 1건은 본문의 “운영체제가 임시로 선택하는 포트” 중 `임시`를 placeholder 휴리스틱이 감지한 것이다. 실제 TODO나 미완성 문구가 아니므로 정확한 설명을 유지하고 검사기·경고 수준을 완화하지 않았다. 정상 종료 코드와 경고 존재를 구분한다.
 
-[데스크톱 본문](../artifacts/2026-10-21-tcp-top-1280.jpg)과 모바일 도식을 직접 시각 확인했다. 이전 다중 에이전트의 기술·독자 이해·존댓말 검토는 본문과 도식이 동일한 범위에서 재사용한다. 새 패킷 캡처나 CPU 실험을 수행했다고 주장하지 않는다.
+[데스크톱 본문](../artifacts/2026-10-21-tcp-top-1280.jpg)과 모바일 도식을 직접 시각 확인했다. 새 패킷 캡처나 CPU 실험을 수행했다고 주장하지 않는다.
+
+### 리뷰 후 EOF 회귀와 재검토
+
+[리뷰 지적](https://github.com/IMHOJEONG/web-tech/pull/49#discussion_r4332364451)은 유효했다. 이전 커밋 `f27b61e`의 실제 코드를 추출해 빈 stdin으로 실행하자 1,500ms 제한에서 `ETIMEDOUT`이 발생했다. 서버가 listening 상태인 채 `data`만 기다리던 경로다. 새 코드는 `data`와 `end`를 구분하고 반대쪽 리스너를 정리하며, EOF이면 대기 소켓의 close 완료를 기다린 뒤 JSON 없이 종료한다.
+
+[EOF 회귀 검사기](../artifacts/2026-10-21-tcp-eof-regression.test.mts)의 두 검사는 즉시 EOF와 프롬프트 후 EOF를 확인한다. 모두 종료 코드 0·JSON 없음이며, 후자는 같은 포트를 다시 listen해 소켓 정리도 확인했다. [전후 요약](../artifacts/2026-10-21-tcp-eof-regression.json)과 [보완 후 원문 14개 검사](../artifacts/2026-10-21-tcp-publication-source-tests-eof.txt)를 구분해 보관했다. 정상 Enter 경로는 기존 실제 MDX 검사에서 HTTP 200·정상 본문으로 재확인한다.
+
+기술 정확성·초보자 이해·한국어 존댓말을 세 에이전트가 다시 검토했다. 차단 사항은 없었으며, 초보자 검토의 “Ctrl-D는 빈 입력 줄에서만 취소” 조건과 용어 설명을 반영했다. 이미 문자를 입력한 경우에는 Ctrl+C로 취소하도록 명시한다. 이전 이미지·텍스트 검증은 최초 게시본의 증거이며 EOF 보완 후 화면 결과는 [후속 JSON](../artifacts/2026-10-21-tcp-publication-local-eof.json)으로 분리한다.
+
+### Preview 검사 준비 실패와 판정 범위
+
+PR `f27b61e`의 Preview는 READY이며 비인증 요청은 `302 → vercel.com/sso-api`로 보호됐다. 최초 인증 조회는 임시 작업 트리의 프로젝트 연결 부재로 중단됐고 기존 Vercel CLI 연결로 재조회했다. 원격 본문 응답에는 첫·마지막 문구와 도식이 script 바깥의 서버 마크업에 포함됐다.
+
+raw HTML 검사에서 `<article>` 경계만 찾는 가정과 스트리밍 본문 재배치를 고려하지 않은 `.mdx-wrapper` 경계 가정이 실패했다. 이는 제목·본문이 사라진 증거가 아니며, raw stream 조회를 Preview 브라우저 DOM 검증 완료로 확대하지 않는다. 실제 공개 화면은 production 모드 로컬 검사와 병합 후 Production 브라우저 검사로 별도 확인한다. 이번 작업에서 공통 게시 검증기의 계약을 변경하지 않았다.
 
 ## 한계와 후속 작업
 
