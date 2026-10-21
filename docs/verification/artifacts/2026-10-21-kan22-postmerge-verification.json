@@ -68,6 +68,14 @@
     "priorProductionComparison": "not performed",
     "physicalDeviceOrHumanBrowser": "not verified"
   },
+  "followUpInvestigation": {
+    "result": "false-positive in the diagnostic selector; search service failure was not reproduced with a unique trigger locator",
+    "rootCause": "Korean opener and submit both have accessible name 문서 검색; opening changes the broad role locator from one visible button to two",
+    "correctedFullFlowPasses": 20,
+    "browserComparison": "headless Chromium and installed headed Chrome, ko/en, 1280/390px",
+    "evidenceFile": "2026-10-21-public-search-selector-investigation.json",
+    "historicalFields": "The original observed/overall fields above preserve the earlier failed assertion interpretation, not the current service assessment. See the follow-up report for the correction."
+  },
   "notPerformed": [
     "application changes",
     "rollback",

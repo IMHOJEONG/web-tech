@@ -1,6 +1,8 @@
 # 검증 원본 증거
 
-- [10-21 KAN-22 병합 후 결과](2026-10-21-kan22-postmerge-verification.json): [검증 보고서](../resilience/2026-10-21-kan22-offline-navigation.md#pr-52-main-병합-후-확인). main 527d4b0 CI·Production·HTTP 성공과 초기 공개 검색 검사 실패를 구분.
+- [10-21 공개 검색 선택자 조사](2026-10-21-public-search-selector-investigation.json): [보고서](../resilience/2026-10-21-kan22-offline-navigation.md#공개-검색-실패의-원인-분리). 한국어 버튼 이름 충돌·두 브라우저 전체 흐름 20개 성공과 [재현 도구](../../../apps/docs/scripts/verify-public-search.ts).
+
+- [10-21 KAN-22 병합 후 결과](2026-10-21-kan22-postmerge-verification.json): [검증 보고서](../resilience/2026-10-21-kan22-offline-navigation.md#pr-52-main-병합-후-확인). main 527d4b0 CI·Production·HTTP 성공과 초기 공개 검색 검사 실패를 구분. 검색 실패 해석은 후속 선택자 조사로 정정.
 
 - [10-21 KAN-22 이동 비교](2026-10-21-kan22-offline-navigation.json): [검증 보고서](../resilience/2026-10-21-kan22-offline-navigation.md). main 첫 방문·재방문과 지연·503 대조군, 반복·집계 회귀와 소스 해시. 원래 CI 지연 원인은 미확정.
 
