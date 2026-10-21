@@ -1,5 +1,11 @@
 # 검증 보고서
 
+- [10-21 TCP 소켓 문서 게시 검증](content/2026-10-21-tcp-publication.md): 사용자 게시 승인, 실제 원문 14개·production 공개 경로·이미지·검색·목록 확인. 원격 CI·운영 반영은 별도 단계.
+
+- [10-20 TCP 초안·도식 재검증](content/2026-10-20-tcp-draft-recheck.md): 당시 draft 보존·원문 14개와 네 화면 확인. 게시 승인은 10-21 후속 기록에서 구분.
+
+- [10-16 다음 TCP 소켓 초안 준비](content/2026-10-16-tcp-draft-preparation.md): 원문 실행·패킷 도식·다중 검토의 과거 기록.
+
 - [10-20 블로그 main Production 전환](deployment/2026-10-20-docs-main-production-transition.md): CI·Preview·Production 스테이징 후 공개 도메인 검증, 기존 feature/docs·초안 보존.
 
 - [10-19 vuln-radar 통합 검증](integration/2026-10-19-vuln-radar-local-integration.md): 격리 PostgreSQL·실제 Nest·Vite preview·배포 프록시 함수·Chromium 13개 통과. 운영 수집·배포 미검증.
