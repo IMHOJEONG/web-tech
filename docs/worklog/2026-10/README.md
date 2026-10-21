@@ -12,6 +12,8 @@
 
 - [10-20 PR #47 Jira·Confluence 연결과 매 작업 기록](2026-10-20-jira-confluence-work-records.md)
 
+- [10-20 기존 docs 배포 브랜치·stash 정리와 10-21 중복 보존 후속 기록](2026-10-20-docs-legacy-branch-cleanup.md)
+
 - [10-20 main 기준 docs 작업·초안 브랜치 이전](2026-10-20-docs-main-branch-restart.md)
 
 - [10-20 블로그 main Production 전환](2026-10-20-docs-main-production-transition.md)
@@ -41,6 +43,8 @@
 - [10-18 CI 스트림 종료 원인 추적](2026-10-18-stream-termination-investigation.md)
 
 - [10-17 콘텐츠 네트워크 실패와 오프라인 열람](2026-10-17-content-network-offline-reading.md)
+
+- [10-17 PR #38 이후 feature 동기화 보존 기록](2026-10-17-feature-sync-after-pr38.md)
 
 - [10-17 CodeQL script 태그 테스트 보완](2026-10-17-codeql-script-tag-assertions.md)
 
