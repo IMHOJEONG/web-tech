@@ -25,6 +25,16 @@ mise exec -- pnpm verify:vuln-radar:integration
 
 ## 결과와 증거
 
+### 커밋 완료 후 재검증
+
+[깨끗한 커밋의 최종 통합 증거](../artifacts/2026-10-21T14-58-06-277Z-vuln-radar-integration.json)는 `99bef795f30b518c58e45df9f21aad1a2d989649`, `workingTreeDirty=false`에서 23:58:06–23:58:21 KST에 실행했다. 통계·KEV·기존 장애 회귀16개와 정리6단계가 모두 통과했다. 이전 작업 트리 결과와 구분하며, 이 이후 추가되는 커밋은 실행 결과·문서만 보관하고 런타임 코드를 바꾸지 않는다.
+
+KEV 커밋은 API `1fa7a4e`, 화면 `70ebe01`, 통합 회귀·합성 증거 `6aa03b0`, 계약·검증 문서 `99bef79`다. 같은 구현의 backend34개·frontend15개를 다시 통과했고 두 앱 lint·typecheck, 저장소 도구63개도 재검증했다. 전체 모노레포 build/lint/typecheck를 실행한 것은 아니며 원격 CI 결과는 게시 후 별도로 확인한다.
+
+최종 합성 화면: [KEV1280px](../artifacts/2026-10-21T14-58-06-277Z-vuln-radar-kev-1280.png)·[KEV390px](../artifacts/2026-10-21T14-58-06-277Z-vuln-radar-kev-390.png)·[Feed1280px](../artifacts/2026-10-21T14-58-06-277Z-vuln-radar-feed-1280.png)·[Feed390px](../artifacts/2026-10-21T14-58-06-277Z-vuln-radar-feed-390.png).
+
+### 초기 작업 트리 검사
+
 - [최종 증거](../artifacts/2026-10-21T14-35-59-158Z-vuln-radar-integration.json): 23:35 KST 시작, 16개 통과·실패0·생성 자원 정리6단계 성공.
 - [이전 실행](../artifacts/2026-10-21T14-34-05-141Z-vuln-radar-integration.json): 16개 통과. 최종 실행에 범위 밖 점수 대조군과 KEV 화면 증거를 추가했다.
 - [1280px KEV 화면](../artifacts/2026-10-21T14-35-59-158Z-vuln-radar-kev-1280.png)·[390px KEV 화면](../artifacts/2026-10-21T14-35-59-158Z-vuln-radar-kev-390.png): 공개 CVE가 아닌 합성 fixture만 사용했다. 모바일 표의 기존 가로 스크롤 구조는 유지했다.

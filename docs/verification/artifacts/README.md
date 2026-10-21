@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-21 통계·KEV 깨끗한 커밋 최종 검증](2026-10-21T14-58-06-277Z-vuln-radar-integration.json): [보고서](../integration/2026-10-21-vuln-radar-kev-evidence.md#커밋-완료-후-재검증). 99bef79·workingTreeDirty=false, 통합16개·정리6단계 통과. [KEV1280px](2026-10-21T14-58-06-277Z-vuln-radar-kev-1280.png)·[KEV390px](2026-10-21T14-58-06-277Z-vuln-radar-kev-390.png)·[Feed1280px](2026-10-21T14-58-06-277Z-vuln-radar-feed-1280.png)·[Feed390px](2026-10-21T14-58-06-277Z-vuln-radar-feed-390.png). 합성 데이터만 포함하며 파일명은 UTC다.
+
 - [10-21 KEV 최종 통합](2026-10-21T14-35-59-158Z-vuln-radar-integration.json): [보고서](../integration/2026-10-21-vuln-radar-kev-evidence.md). nullable 실제 점수·구버전/범위 오류/503 대조군 포함16개 통과. [KEV1280px](2026-10-21T14-35-59-158Z-vuln-radar-kev-1280.png)·[KEV390px](2026-10-21T14-35-59-158Z-vuln-radar-kev-390.png)·[Feed1280px](2026-10-21T14-35-59-158Z-vuln-radar-feed-1280.png)·[Feed390px](2026-10-21T14-35-59-158Z-vuln-radar-feed-390.png). 합성 데이터만 표시한다.
 - [10-21 KEV 초기 통합](2026-10-21T14-34-05-141Z-vuln-radar-integration.json): 16개 통과. [Feed1280px](2026-10-21T14-34-05-141Z-vuln-radar-feed-1280.png)·[Feed390px](2026-10-21T14-34-05-141Z-vuln-radar-feed-390.png).
 

@@ -30,6 +30,8 @@ mise exec -- pnpm verify:vuln-radar:integration
 
 ## 결과와 증거
 
+후속 KEV 수정까지 커밋한 `99bef79`의 깨끗한 작업 트리에서도 이 통계43개·Feed25개·중복/빈 DB·새로고침 회귀를 다시 통과했다. 결과는 [공동 최종 검증](2026-10-21-vuln-radar-kev-evidence.md#커밋-완료-후-재검증)과 해당 증거의 `statistics.aggregateRegression`에서 확인한다. 아래는 초기 통계 수정 당시 결과다.
+
 - [최종 통합 결과](../artifacts/2026-10-21T14-14-49-689Z-vuln-radar-integration.json): 23:14:49–23:15:00 KST, 15개 통과·실패0·정리6단계 성공.
 - [초기 통합 결과](../artifacts/2026-10-21T14-11-58-001Z-vuln-radar-integration.json): 15개 통과. 최종 실행기에서는 제한 Feed에서 얻은 잘못된 비교 집계도 증거에 추가했다. 이전 결과를 덮어쓰지 않았다.
 
