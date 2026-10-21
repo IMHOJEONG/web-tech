@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-21 기본 브랜치 취약점 조사·콘텐츠 의존성 패치](2026-10-21-security-content-patches.md)
+
 - [10-21 승인된 TCP 소켓 문서 게시](2026-10-21-tcp-publication.md)
 
 - [10-20 TCP 초안·도식 재검증](2026-10-20-tcp-draft-recheck.md)
