@@ -1,5 +1,11 @@
 # 2026-10 작업 기록
 
+- [10-21 승인된 TCP 소켓 문서 게시](2026-10-21-tcp-publication.md)
+
+- [10-20 TCP 초안·도식 재검증](2026-10-20-tcp-draft-recheck.md)
+
+- [10-16 다음 TCP 소켓 초안 준비](2026-10-16-next-tcp-draft.md)
+
 - [10-20 PR #47 병합 후 운영 확인과 정리](2026-10-20-pr47-postmerge-closeout.md)
 
 - [10-20 PR #47 리뷰 지적 보완](2026-10-20-pr47-review-followup.md)

@@ -1,5 +1,15 @@
 # 검증 원본 증거
 
+- [10-21 TCP 게시 로컬 화면](2026-10-21-tcp-publication-local.json), [원문 검사](2026-10-21-tcp-publication-source-tests.txt), [실행 검사기](2026-10-21-tcp-publication-check.mts): [게시 보고서](../content/2026-10-21-tcp-publication.md). production 모드·두 locale·6개 화면·검색·사이트맵과 실제 MDX 검사. 운영 배포와 구분.
+
+- [10-21 TCP 모바일 도식](2026-10-21-tcp-packet-390.jpg), [데스크톱 본문](2026-10-21-tcp-top-1280.jpg): 같은 게시 로컬 검증의 실제 화면.
+
+- [10-20 TCP 재검증](2026-10-20-tcp-recheck.json), [원문 테스트](2026-10-20-tcp-recheck-source-tests.txt): [당시 보고서](../content/2026-10-20-tcp-draft-recheck.md). 초기 HTTP 상태 가정 실패와 후속 본문 판정을 보존.
+
+- [10-16 TCP 후속 글 요약](2026-10-16-tcp-followup-summary.json), [질문 제거 확인](2026-10-16-tcp-tone-check.json): [초안 이력](../content/2026-10-16-tcp-draft-preparation.md).
+
+- [10-16 TCP 보강 원문 검사](2026-10-16-tcp-enrichment-source-tests.txt), [화면](2026-10-16-tcp-enrichment-ui.json), [초안 원문 검사](2026-10-16-tcp-draft-final-source-tests.txt), [초안 화면](2026-10-16-tcp-draft-ui.json): 같은 초안 준비 기록의 실제 증거.
+
 - [10-20 PR #47 병합 후 운영 검증](2026-10-20-pr47-postmerge-production.json): [보고서](../deployment/2026-10-20-docs-main-production-transition.md#pr-47-병합-후-운영-검증). main 693d4e4 CI·Production·HTTP·Chromium·로그와 초안 보존 집계.
 
 - [10-20 블로그 main Production 전환](2026-10-20-docs-main-production-transition.json): [검증 보고서](../deployment/2026-10-20-docs-main-production-transition.md).

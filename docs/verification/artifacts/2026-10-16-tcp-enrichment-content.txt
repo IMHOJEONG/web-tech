@@ -1,0 +1,5 @@
+$ pnpm --filter @web-tech/docs-content-contract build
+$ tsc -p tsconfig.build.json && tsc -p tsconfig.cjs.json && cp package.cjs.json dist/cjs/package.json
+$ node ./scripts/validate-content.mjs && node ./scripts/validate-content-style.mjs
+[docs] Content frontmatter validation passed for 19 files.
+[docs] Content style validation passed for 19 files.
