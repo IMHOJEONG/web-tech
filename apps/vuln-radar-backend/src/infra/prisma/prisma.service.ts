@@ -13,6 +13,13 @@ interface PrismaLikeClient {
   $connect(): Promise<void>;
   $disconnect(): Promise<void>;
   vulnerability: {
+    groupBy: (args: unknown) => Promise<
+      Array<{
+        priority: string;
+        isKev: boolean;
+        _count: { _all: number };
+      }>
+    >;
     findMany: (args?: unknown) => Promise<unknown[]>;
     findUnique: (args: unknown) => Promise<unknown | null>;
     upsert: (args: unknown) => Promise<unknown>;
