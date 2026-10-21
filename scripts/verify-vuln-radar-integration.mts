@@ -878,6 +878,179 @@ async function main() {
     },
   );
   await check(
+    "KEV rows use their own nullable EPSS outside the limited feed and show priority instead of workflow status",
+    async () => {
+      assert.ok(prisma);
+      const fillerIds = Array.from(
+        { length: 26 },
+        (_, index) => `CVE-2097-${10000 + index}`,
+      );
+      const evidenceIds = [
+        "CVE-2097-20000",
+        "CVE-2097-20001",
+        "CVE-2097-20002",
+      ];
+      const current = await page();
+      try {
+        await prisma.vulnerability.createMany({
+          data: fillerIds.map((cveId) => ({
+            cveId,
+            title: "Synthetic non-KEV filler",
+            description: "Isolated fixture",
+            priority: "P0",
+            publishedAt: now,
+            lastModifiedAt: now,
+          })),
+        });
+        for (const [index, epssScore] of [0, null, 0.125].entries()) {
+          await prisma.vulnerability.create({
+            data: {
+              cveId: evidenceIds[index]!,
+              title: `Synthetic KEV evidence ${index}`,
+              description: "Isolated fixture",
+              priority: "P1",
+              isKev: true,
+              epssScore,
+              publishedAt: now,
+              lastModifiedAt: now,
+              advisories: {
+                create: {
+                  source: "cisa-kev",
+                  externalId: `synthetic-kev-evidence-${index}`,
+                  publishedAt: new Date(now.getTime() + 1000 + index),
+                },
+              },
+            },
+          });
+        }
+        await prisma.advisory.create({
+          data: {
+            vulnerabilityCveId: evidenceIds[0]!,
+            source: "cisa-kev",
+            externalId: "synthetic-kev-evidence-duplicate",
+            publishedAt: new Date(now.getTime() + 2000),
+          },
+        });
+        const feed = await api("feed", true);
+        assert.equal(feed.items.length, 25);
+        assert.ok(
+          feed.items.every(
+            (item: { cveId: string }) => !evidenceIds.includes(item.cveId),
+          ),
+        );
+        const kev = await api("kev", true);
+        const scores = evidenceIds.map(
+          (cveId) =>
+            kev.items.find((item: { cveId: string }) => item.cveId === cveId)
+              ?.epssScore,
+        );
+        assert.deepEqual(scores, [0, null, 0.125]);
+        for (const width of [1280, 390]) {
+          await current.setViewportSize({ width, height: 900 });
+          await current.goto(`${frontendOrigin}/overview`);
+          const table = current.getByRole("table");
+          await expect(
+            table.getByRole("columnheader", { name: "우선순위", exact: true }),
+          ).toBeVisible();
+          const row = (cveId: string) =>
+            table.getByRole("row").filter({ hasText: cveId });
+          await expect(row(evidenceIds[0]!)).toHaveCount(1);
+          await expect(
+            row(evidenceIds[0]!).getByRole("cell").nth(2),
+          ).toHaveText("0");
+          await expect(row(evidenceIds[0]!).getByRole("meter")).toHaveAttribute(
+            "aria-valuenow",
+            "0",
+          );
+          await expect(
+            row(evidenceIds[0]!).getByRole("meter").locator("span"),
+          ).toHaveAttribute("style", "width: 0%;");
+          await expect(
+            row(evidenceIds[1]!).getByRole("cell").nth(2),
+          ).toHaveText("미확인");
+          await expect(row(evidenceIds[1]!).getByRole("meter")).toHaveCount(0);
+          await expect(
+            row(evidenceIds[2]!).getByRole("cell").nth(2),
+          ).toHaveText("0.125");
+          await expect(
+            row(evidenceIds[2]!).getByRole("cell").nth(3),
+          ).toHaveText("P1");
+          await expect(table).not.toContainText(
+            /Investigating|Monitoring|Escalated|Queued/,
+          );
+          const screenshot = `${artifactStamp}-vuln-radar-kev-${width}.png`;
+          await current.screenshot({
+            path: join(root, "docs/verification/artifacts", screenshot),
+            fullPage: true,
+          });
+          screenshots[`kev-${width}`] = screenshot;
+        }
+        await current.route("**/api/backend/kev", (route) =>
+          route.fulfill({
+            json: {
+              ...kev,
+              items: kev.items.map((item: Record<string, unknown>) => {
+                const { epssScore: _score, ...legacy } = item;
+                return legacy;
+              }),
+            },
+          }),
+        );
+        await current.reload();
+        await expect(
+          current
+            .getByRole("table")
+            .getByRole("row")
+            .filter({ hasText: ids.alpha })
+            .getByRole("cell")
+            .nth(2),
+        ).toHaveText("미확인");
+        await expect(current.getByRole("meter")).toHaveCount(0);
+        await current.unroute("**/api/backend/kev");
+        await current.route("**/api/backend/kev", (route) =>
+          route.fulfill({
+            json: { ...kev, items: [{ ...kev.items[0], epssScore: 2 }] },
+          }),
+        );
+        await current.reload();
+        await expect(
+          current.getByText("KEV 목록을 확인하지 못했습니다.", { exact: true }),
+        ).toBeVisible();
+        await expect(current.getByRole("meter")).toHaveCount(0);
+        await current.unroute("**/api/backend/kev");
+        await current.route("**/api/backend/kev", (route) =>
+          route.fulfill({
+            status: 503,
+            json: { error: "synthetic KEV failure" },
+          }),
+        );
+        await current.reload();
+        await expect(
+          current.getByText("KEV 목록을 확인하지 못했습니다.", { exact: true }),
+        ).toBeVisible();
+        await expect(current.getByRole("table").getByRole("link")).toHaveCount(
+          0,
+        );
+        fixtureSummary = {
+          statistics: fixtureSummary,
+          kevEvidence: {
+            outsideFeed: true,
+            scores,
+            duplicateAdvisoryRowsDeduplicated: true,
+            legacyUnknown: true,
+            outOfRangeRejected: true,
+            failureNotReplacedWithFeed: true,
+          },
+        };
+      } finally {
+        await current.close();
+        await prisma.vulnerability.deleteMany({
+          where: { cveId: { in: [...fillerIds, ...evidenceIds] } },
+        });
+      }
+    },
+  );
+  await check(
     "backend shutdown preserves browser cache through scheduled refresh failure",
     async () => {
       outagePage = await page();
@@ -964,6 +1137,21 @@ async function main() {
       assert.ok(
         overview.cards.every((card: { value: number }) => card.value === 0),
       );
+      const kev = await api("kev", true);
+      assert.equal(kev.dataSource.kind, "database");
+      assert.deepEqual(kev.items, []);
+      const current = await page();
+      try {
+        await current.goto(`${frontendOrigin}/overview`);
+        await expect(
+          current.getByText("표시할 KEV 항목이 없습니다.", { exact: true }),
+        ).toBeVisible();
+        await expect(current.getByRole("table").getByRole("link")).toHaveCount(
+          0,
+        );
+      } finally {
+        await current.close();
+      }
     },
   );
   await check(
