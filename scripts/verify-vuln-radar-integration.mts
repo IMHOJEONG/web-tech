@@ -752,6 +752,132 @@ async function main() {
     );
   }
   await check(
+    "overview counts all 43 database rows while feed stays limited to 25; browser refresh uses aggregates",
+    async () => {
+      assert.ok(prisma);
+      const extraIds = Array.from(
+        { length: 40 },
+        (_, index) => `CVE-2098-${String(index).padStart(5, "0")}`,
+      );
+      const current = await page();
+      try {
+        await prisma.vulnerability.createMany({
+          data: extraIds.map((cveId, index) => ({
+            cveId,
+            title: "Synthetic overview count fixture",
+            description: "Isolated test data, not a real vulnerability.",
+            priority:
+              index < 30
+                ? ("P0" as const)
+                : index < 35
+                  ? ("P1" as const)
+                  : index < 38
+                    ? ("P2" as const)
+                    : ("P3" as const),
+            isKev: index < 35,
+            publishedAt: now,
+            lastModifiedAt: now,
+          })),
+        });
+        await prisma.advisory.create({
+          data: {
+            vulnerabilityCveId: ids.alpha,
+            source: "cisa-kev",
+            externalId: "overview-count-duplicate-advisory",
+          },
+        });
+        const feed = await api("feed", true);
+        assert.equal(feed.items.length, 25);
+        assert.ok(
+          feed.items.every(
+            (item: { priority: string }) => item.priority === "P0",
+          ),
+        );
+        const overview = await api("overview", true);
+        const counts = Object.fromEntries(
+          overview.cards.map((card: { id: string; value: number }) => [
+            card.id,
+            card.value,
+          ]),
+        );
+        assert.deepEqual(counts, {
+          "p0-open": 31,
+          "p1-open": 6,
+          "kev-new": 36,
+          "total-vulnerabilities": 43,
+        });
+        assert.equal(overview.dataSource.reason, "live_read_model");
+        for (const width of [1280, 390]) {
+          await current.setViewportSize({ width, height: 900 });
+          await current.goto(`${frontendOrigin}/overview`);
+          await expect(current.getByText("43", { exact: true })).toHaveCount(2);
+          await expect(current.getByText("31", { exact: true })).toBeVisible();
+          await expect(
+            current.getByText(
+              "KEV 매치 36건과 우선 점검 P1 6건을 함께 추적합니다.",
+              { exact: true },
+            ),
+          ).toBeVisible();
+          await expect(
+            current.getByText(
+              "통계는 전체 저장 데이터 기준입니다. 목록은 우선순위순 상위 25건 중 일부를 보여줍니다.",
+              { exact: true },
+            ),
+          ).toBeVisible();
+        }
+        await prisma.vulnerability.update({
+          where: { cveId: extraIds[0] },
+          data: { priority: "P1" },
+        });
+        const refreshed = current.waitForResponse(
+          (response) =>
+            response.url().endsWith("/api/backend/overview") &&
+            response.status() === 200,
+        );
+        await current
+          .getByRole("button", { name: "새로고침", exact: true })
+          .click();
+        await refreshed;
+        await expect(current.getByText("30", { exact: true })).toBeVisible();
+        await expect(
+          current.getByText(
+            "KEV 매치 36건과 우선 점검 P1 7건을 함께 추적합니다.",
+            { exact: true },
+          ),
+        ).toBeVisible();
+        fixtureSummary = {
+          initial: fixtureSummary,
+          aggregateRegression: {
+            databaseRows: 43,
+            feedRows: feed.items.length,
+            limitedFeedCounts: {
+              p0: feed.items.filter(
+                (item: { priority: string }) => item.priority === "P0",
+              ).length,
+              p1: feed.items.filter(
+                (item: { priority: string }) => item.priority === "P1",
+              ).length,
+              kev: feed.items.filter((item: { isKev: boolean }) => item.isKev)
+                .length,
+            },
+            counts,
+            duplicateKevAdvisory: true,
+            refreshedP0: 30,
+            refreshedP1: 7,
+          },
+        };
+      } finally {
+        await current.close();
+        await prisma.advisory.deleteMany({
+          where: { externalId: "overview-count-duplicate-advisory" },
+        });
+        await prisma.vulnerability.deleteMany({
+          where: { cveId: { in: extraIds } },
+        });
+      }
+    },
+  );
+  await check(
     "backend shutdown preserves browser cache through scheduled refresh failure",
     async () => {
       outagePage = await page();
@@ -824,6 +950,20 @@ async function main() {
       await expect(outagePage.getByRole("textbox")).toHaveValue("integration");
       await outagePage.close();
       outagePage = undefined;
+    },
+  );
+  await check(
+    "connected empty Postgres returns real zero overview statistics without mock substitution",
+    async () => {
+      assert.ok(prisma);
+      await prisma.vulnerability.deleteMany();
+      const overview = await api("overview", true);
+      assert.equal(overview.dataSource.kind, "database");
+      assert.equal(overview.dataSource.reason, "live_read_model");
+      assert.equal(overview.cards.length, 4);
+      assert.ok(
+        overview.cards.every((card: { value: number }) => card.value === 0),
+      );
     },
   );
   await check(
