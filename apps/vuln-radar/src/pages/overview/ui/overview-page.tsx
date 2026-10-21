@@ -142,11 +142,9 @@ export function OverviewPage() {
       />
 
       <OverviewKevMatrixPanel
-        feed={feed}
         healthStorage={healthQuery.data?.storage}
         kev={kev}
         isLoading={kevQuery.isLoading && !kevQuery.data}
-        overview={overview}
         status={status}
       />
     </section>

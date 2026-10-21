@@ -149,6 +149,7 @@ const kevItemSchema = z.object({
   cveId: z.string(),
   title: z.string(),
   priority: radarPrioritySchema,
+  epssScore: z.number().min(0).max(1).nullable().optional(),
   sourceUrl: z.string().nullable(),
   addedAt: z.string(),
 });

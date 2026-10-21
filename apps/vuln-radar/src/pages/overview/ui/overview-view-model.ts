@@ -1,46 +1,25 @@
-import type {
-  FeedResponse,
-  IngestStatusResponse,
-  KevResponse,
-} from "@/shared/api/radar";
+import type { IngestStatusResponse, KevResponse } from "@/shared/api/radar";
 
 export interface OverviewMatrixItem {
   cveId: string;
   title: string;
   priority: "P0" | "P1" | "P2" | "P3";
-  severity: "critical" | "high" | "medium" | "low";
-  score: number;
-  statusLabel: string;
+  epssScore: number | null;
 }
 
-export function buildKevMatrixItems(feed: FeedResponse, kev?: KevResponse) {
-  const feedByCveId = new Map(feed.items.map((item) => [item.cveId, item]));
-  const kevRows =
-    kev?.items.slice(0, 6).map((item) => {
-      const feedItem = feedByCveId.get(item.cveId);
-
-      return {
-        cveId: item.cveId,
-        title: item.title,
-        priority: item.priority,
-        severity: feedItem?.severity ?? "high",
-        score: feedItem?.epssScore ?? 0.5,
-        statusLabel: getStatusLabel(item.priority),
-      } satisfies OverviewMatrixItem;
-    }) ?? [];
-
-  if (kevRows.length > 0) {
-    return kevRows;
+export function buildKevMatrixItems(kev?: KevResponse): OverviewMatrixItem[] {
+  const rows = new Map<string, OverviewMatrixItem>();
+  for (const item of kev?.items ?? []) {
+    if (rows.has(item.cveId)) continue;
+    rows.set(item.cveId, {
+      cveId: item.cveId,
+      title: item.title,
+      priority: item.priority,
+      epssScore: item.epssScore ?? null,
+    });
+    if (rows.size === 6) break;
   }
-
-  return feed.items.slice(0, 6).map((item) => ({
-    cveId: item.cveId,
-    title: item.title,
-    priority: item.priority,
-    severity: item.severity,
-    score: item.epssScore,
-    statusLabel: getStatusLabel(item.priority),
-  }));
+  return [...rows.values()];
 }
 
 export function getCriticalCount(
@@ -126,19 +105,4 @@ export function formatRelativeTime(value: string | null) {
   }
 
   return `${Math.round(deltaHours / 24)}d ago`;
-}
-
-function getStatusLabel(priority: "P0" | "P1" | "P2" | "P3") {
-  switch (priority) {
-    case "P0":
-      return "Escalated";
-    case "P1":
-      return "Investigating";
-    case "P2":
-      return "Monitoring";
-    case "P3":
-      return "Queued";
-    default:
-      return priority;
-  }
 }
