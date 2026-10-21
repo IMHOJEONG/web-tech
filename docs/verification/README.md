@@ -1,5 +1,9 @@
 # 검증 보고서
 
+- [10-21 PR #51 CRP 타이밍 비교](performance/2026-10-21-crp-navigation-timing.md): 기준 페이지 지연으로 기존 판정의 오판 재현, 동일 문서 계측과 음성 대조군, 로컬 100개 통과·원격 미검증.
+
+- [10-21 Vite·콘텐츠 의존성 패치](security/2026-10-21-vite-content-advisories.md): GitHub 5건·audit 11건 조사, 공식 패치와 전후 회귀, production 0건·전체 braces high 1건 잔여 구분.
+
 - [10-21 TCP 소켓 문서 게시 검증](content/2026-10-21-tcp-publication.md): 사용자 게시 승인, 실제 원문 14개·production 공개 경로·이미지·검색·목록 확인. 원격 CI·운영 반영은 별도 단계.
 
 - [10-20 TCP 초안·도식 재검증](content/2026-10-20-tcp-draft-recheck.md): 당시 draft 보존·원문 14개와 네 화면 확인. 게시 승인은 10-21 후속 기록에서 구분.

@@ -1,0 +1,390 @@
+{
+  "observedAt": "2026-10-21T05:12:43.953Z",
+  "baseSHA": "c3a93c9a849cf23ffe0cebab734a64ad582b1b54",
+  "branch": "codex/security-default-alerts-20261021",
+  "tools": {
+    "node": "24.12.0",
+    "pnpm": "11.10.0",
+    "typescript": "6.0.3"
+  },
+  "githubOpenAtStart": [
+    {
+      "number": 336,
+      "package": "braces",
+      "severity": "high",
+      "patchedVersion": null
+    },
+    {
+      "number": 340,
+      "package": "sanitize-html",
+      "severity": "low",
+      "patchedVersion": "2.18.0"
+    },
+    {
+      "number": 341,
+      "package": "vite",
+      "severity": "medium",
+      "patchedVersion": "8.2.4"
+    },
+    {
+      "number": 342,
+      "package": "vite",
+      "severity": "high",
+      "patchedVersion": "8.2.4"
+    },
+    {
+      "number": 343,
+      "package": "vite",
+      "severity": "medium",
+      "patchedVersion": "8.2.4"
+    }
+  ],
+  "before": {
+    "observedAt": "2026-10-21T05:02:51.352Z",
+    "exitCode": 1,
+    "metadata": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 2,
+        "moderate": 5,
+        "high": 4,
+        "critical": 0
+      },
+      "dependencies": 765,
+      "devDependencies": 669,
+      "optionalDependencies": 178,
+      "totalDependencies": 1547
+    },
+    "advisories": [
+      {
+        "module_name": "braces",
+        "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+        "vulnerable_versions": "<=3.0.3",
+        "patched_versions": ">=3.0.4",
+        "findings": [
+          {
+            "version": "3.0.3",
+            "paths": [
+              "apps__docs>eslint-config-next>@next/eslint-plugin-next>fast-glob>micromatch>braces",
+              "apps__docs-backend>ts-loader>micromatch>braces",
+              "apps__vuln-radar-backend>ts-loader>micromatch>braces",
+              "packages__eslint-config>@next/eslint-plugin-next>fast-glob>micromatch>braces"
+            ],
+            "dev": true,
+            "optional": false,
+            "bundled": false
+          }
+        ]
+      },
+      {
+        "module_name": "hono",
+        "title": "Hono: `serveStatic` decodes the request path a second time, leading to bypass of middleware on static paths",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-5r4p-p66f-jhc7",
+        "vulnerable_versions": ">=4.12.4 <4.13.11",
+        "patched_versions": ">=4.13.11",
+        "findings": [
+          {
+            "version": "4.13.7",
+            "paths": [
+              "apps__docs>better-auth>@better-auth/prisma-adapter>@prisma/client>prisma>@prisma/dev>@hono/node-server>hono",
+              "apps__docs>better-auth>@better-auth/prisma-adapter>@prisma/client>prisma>@prisma/dev>hono",
+              "apps__docs>better-auth>@better-auth/prisma-adapter>prisma>@prisma/dev>@hono/node-server>hono",
+              "apps__docs>better-auth>@better-auth/prisma-adapter>prisma>@prisma/dev>hono",
+              "apps__docs>better-auth>@prisma/client>prisma>@prisma/dev>@hono/node-server>hono",
+              "apps__docs>better-auth>@prisma/client>prisma>@prisma/dev>hono",
+              "apps__docs>better-auth>prisma>@prisma/dev>@hono/node-server>hono",
+              "apps__docs>better-auth>prisma>@prisma/dev>hono",
+              "apps__vuln-radar-backend>@prisma/client>prisma>@prisma/dev>@hono/node-server>hono",
+              "apps__vuln-radar-backend>@prisma/client>prisma>@prisma/dev>hono",
+              "apps__vuln-radar-backend>prisma>@prisma/dev>@hono/node-server>hono",
+              "apps__vuln-radar-backend>prisma>@prisma/dev>hono"
+            ],
+            "dev": false,
+            "optional": false,
+            "bundled": false
+          }
+        ]
+      },
+      {
+        "module_name": "markdown-it",
+        "title": "markdown-it: Quadratic complexity in smartquotes with unmatched closing quotes",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-r7fv-28h4-cvq7",
+        "vulnerable_versions": "<14.3.2",
+        "patched_versions": ">=14.3.2",
+        "findings": [
+          {
+            "version": "14.3.1",
+            "paths": ["apps__docs-backend>markdown-it"],
+            "dev": false,
+            "optional": false,
+            "bundled": false
+          }
+        ]
+      },
+      {
+        "module_name": "sanitize-html",
+        "title": "ApostropheCMS sanitize-html: nonTextTags discard region ends early on an implied close, letting <noscript> content render",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-x3q4-9hxx-gx8m",
+        "vulnerable_versions": "<2.18.0",
+        "patched_versions": ">=2.18.0",
+        "findings": [
+          {
+            "version": "2.17.7",
+            "paths": ["apps__docs>sanitize-html"],
+            "dev": false,
+            "optional": false,
+            "bundled": false
+          }
+        ]
+      },
+      {
+        "module_name": "vite",
+        "title": "launch-editor: escapeCmdArgs() omits % escaping on Windows",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-698v-4r3x-3vcv",
+        "vulnerable_versions": ">=8.2.0 <=8.2.3",
+        "patched_versions": ">=8.2.4",
+        "findings": [
+          {
+            "version": "8.2.1",
+            "paths": [
+              "apps__vuln-radar>@vitejs/plugin-react>vite",
+              "apps__vuln-radar>vite"
+            ],
+            "dev": true,
+            "optional": false,
+            "bundled": false
+          }
+        ]
+      },
+      {
+        "module_name": "sanitize-html",
+        "title": "ApostropheCMS sanitize-html: SMIL animation namespace-prefix bypass allows javascript: URI injection (XSS)",
+        "severity": "low",
+        "url": "https://github.com/advisories/GHSA-374f-7chj-9948",
+        "vulnerable_versions": ">=2.17.7 <2.18.0",
+        "patched_versions": ">=2.18.0",
+        "findings": [
+          {
+            "version": "2.17.7",
+            "paths": ["apps__docs>sanitize-html"],
+            "dev": false,
+            "optional": false,
+            "bundled": false
+          }
+        ]
+      },
+      {
+        "module_name": "sanitize-html",
+        "title": "ApostropheCMS: Incomplete CVE-2026-53606: `meta http-equiv=refresh` `content` still ships `javascript:` / `data:` URLs",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-cv27-6wvh-8x7j",
+        "vulnerable_versions": "<2.18.0",
+        "patched_versions": ">=2.18.0",
+        "findings": [
+          {
+            "version": "2.17.7",
+            "paths": ["apps__docs>sanitize-html"],
+            "dev": false,
+            "optional": false,
+            "bundled": false
+          }
+        ]
+      },
+      {
+        "module_name": "markdown-it",
+        "title": "markdown-it: Quadratic-time denial of service in inline HTML parsing with html enabled",
+        "severity": "low",
+        "url": "https://github.com/advisories/GHSA-vfgh-jcmw-g37q",
+        "vulnerable_versions": "<14.3.3",
+        "patched_versions": ">=14.3.3",
+        "findings": [
+          {
+            "version": "14.3.1",
+            "paths": ["apps__docs-backend>markdown-it"],
+            "dev": false,
+            "optional": false,
+            "bundled": false
+          }
+        ]
+      },
+      {
+        "module_name": "vite",
+        "title": "launch-editor: Editor CLI flag misinterpretation causing arbitrary command execution for some editors",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-r825-w8mm-5pxw",
+        "vulnerable_versions": ">=8.2.0 <=8.2.3",
+        "patched_versions": ">=8.2.4",
+        "findings": [
+          {
+            "version": "8.2.1",
+            "paths": [
+              "apps__vuln-radar>@vitejs/plugin-react>vite",
+              "apps__vuln-radar>vite"
+            ],
+            "dev": true,
+            "optional": false,
+            "bundled": false
+          }
+        ]
+      },
+      {
+        "module_name": "vite",
+        "title": "launch-editor: `fs.existsSync()` existence check can be bypassed on Windows",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-587h-7wmj-h5pm",
+        "vulnerable_versions": ">=8.2.0 <=8.2.3",
+        "patched_versions": ">=8.2.4",
+        "findings": [
+          {
+            "version": "8.2.1",
+            "paths": [
+              "apps__vuln-radar>@vitejs/plugin-react>vite",
+              "apps__vuln-radar>vite"
+            ],
+            "dev": true,
+            "optional": false,
+            "bundled": false
+          }
+        ]
+      },
+      {
+        "module_name": "markdown-it",
+        "title": "markdown-it: Quadratic-time rendering of a single multi-line link reference definition with default options (regression since 14.0)",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-gfr2-rv44-r23c",
+        "vulnerable_versions": ">=14.1.0 <14.3.3",
+        "patched_versions": ">=14.3.3",
+        "findings": [
+          {
+            "version": "14.3.1",
+            "paths": ["apps__docs-backend>markdown-it"],
+            "dev": false,
+            "optional": false,
+            "bundled": false
+          }
+        ]
+      }
+    ]
+  },
+  "after": {
+    "observedAt": "2026-10-21T05:07:59.802Z",
+    "exitCode": 1,
+    "production": false,
+    "metadata": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 1,
+        "critical": 0
+      },
+      "dependencies": 765,
+      "devDependencies": 670,
+      "optionalDependencies": 178,
+      "totalDependencies": 1548
+    },
+    "advisories": [
+      {
+        "module_name": "braces",
+        "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+        "vulnerable_versions": "<=3.0.3",
+        "patched_versions": ">=3.0.4",
+        "findings": [
+          {
+            "version": "3.0.3",
+            "paths": [
+              "apps__docs>eslint-config-next>@next/eslint-plugin-next>fast-glob>micromatch>braces",
+              "apps__docs-backend>ts-loader>micromatch>braces",
+              "apps__vuln-radar-backend>ts-loader>micromatch>braces",
+              "packages__eslint-config>@next/eslint-plugin-next>fast-glob>micromatch>braces"
+            ],
+            "dev": true,
+            "optional": false,
+            "bundled": false
+          }
+        ]
+      }
+    ]
+  },
+  "production": {
+    "observedAt": "2026-10-21T05:08:01.387Z",
+    "exitCode": 0,
+    "production": true,
+    "metadata": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0
+      },
+      "dependencies": 627,
+      "devDependencies": 0,
+      "optionalDependencies": 251,
+      "totalDependencies": 878
+    },
+    "advisories": []
+  },
+  "selectedVersions": {
+    "vite": "8.2.4",
+    "sanitize-html": "2.18.1",
+    "hono": "4.13.13",
+    "markdown-it": "14.3.3",
+    "braces": "3.0.3"
+  },
+  "regression": {
+    "before": {
+      "fail": 5,
+      "limitations": "Vite and markdown-it version gates; SMIL/noscript/Hono in-memory behavior; no editor or browser payload execution."
+    },
+    "after": {
+      "pass": 5
+    },
+    "repository": {
+      "pass": 63
+    },
+    "docsLibrary": {
+      "pass": 254
+    },
+    "docsBackend": {
+      "unit": 13,
+      "e2e": 34,
+      "lint": true,
+      "typecheck": true,
+      "build": true
+    },
+    "radar": {
+      "unit": 6,
+      "lint": true,
+      "typecheck": true,
+      "build": true
+    },
+    "radarBackend": {
+      "unit": 26,
+      "typecheck": true,
+      "build": true
+    },
+    "docsProduction": {
+      "build": true,
+      "passed": 148,
+      "isolatedWorktree": true,
+      "envCopied": false,
+      "originalDevServerPreserved": true,
+      "limitations": "Includes deliberate upstream/server failure controls; not a zero-error-log claim."
+    }
+  },
+  "limitations": [
+    "Full audit exits 1: braces has no released official patch.",
+    "GitHub alert closure requires main merge and later verification; no alerts dismissed.",
+    "Windows/WSL editor integration, NAS and production deployment not tested.",
+    "Bounded child-process completion is not a proof of asymptotic complexity."
+  ]
+}
