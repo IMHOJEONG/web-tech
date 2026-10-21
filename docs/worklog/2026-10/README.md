@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-21 KAN-22 main 기준 이동 검사 보완](2026-10-21-kan22-offline-navigation.md)
+
 - [10-21 PR #51 CRP navigation 비교 조사](2026-10-21-crp-navigation-timing.md)
 
 - [10-21 기본 브랜치 취약점 조사·콘텐츠 의존성 패치](2026-10-21-security-content-patches.md)
