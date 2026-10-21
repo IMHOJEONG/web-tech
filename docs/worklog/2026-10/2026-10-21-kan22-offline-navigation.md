@@ -23,6 +23,8 @@ KAN-22를 `검토 중`으로 전환하고 댓글 `10011`의 과거 실패 본문
 
 ## Open Questions
 
+후속 원격 반영: 세 커밋을 푸시해 [PR #52](https://github.com/IMHOJEONG/web-tech/pull/52)를 만들었다. 첫 head `50c08c3`의 [CI](https://github.com/IMHOJEONG/web-tech/actions/runs/39594550825)는 13개 job과 최종 `Test` 모두 통과했고 오프라인은 실제 22개 통과였다. 같은 head의 문서·CodeQL·미리보기도 성공했다. 리뷰의 상태 표현 모순 1건을 문서만의 네 번째 커밋으로 보완한다. 앱·테스트 소스는 바꾸지 않았으며 최종 head의 CI를 다시 확인한다.
+
 최초 CI에서 실제로 느렸던 단계와 원격 trace 보관 정책은 후속 확인이 필요하다. 이번 기능 검사에 허용한 서버 대기 시간을 사용자 성능 목표와 혼동하지 않는다.
 
 ## Next

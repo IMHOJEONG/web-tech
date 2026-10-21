@@ -106,13 +106,19 @@ Timeout: 5000ms
 
 이번에는 `offline-reading`을 `needs`와 상태 검사에 포함했다. 세 결과의 `success/failure/cancelled/skipped` 64조합을 실제 shell로 실행해 전부 `success`인 한 조합만 통과함을 확인했다. GitHub branch protection 자체의 설정이나 다른 독립 job의 필수 여부는 변경하지 않았다.
 
+### PR #52 첫 head의 원격 검증
+
+로컬 검증 이후 세 커밋을 푸시하고 [PR #52](https://github.com/IMHOJEONG/web-tech/pull/52)를 만들었다. head `50c08c32c8d21a180a3b7ba41cf50270adcafcb3`의 [CI 39594550825](https://github.com/IMHOJEONG/web-tech/actions/runs/39594550825)는 13개 job 모두 통과했다. [오프라인 job](https://github.com/IMHOJEONG/web-tech/actions/runs/39594550825/job/119203509541)의 실제 로그는 `22 passed (1.4m)`이며, 오프라인 결과를 포함한 [최종 Test](https://github.com/IMHOJEONG/web-tech/actions/runs/39594550825/job/119205691017)도 성공했다. 같은 head의 CodeQL·문서 검사·Vercel 미리보기도 성공했다. main 병합·Production 배포 결과가 아니다.
+
+리뷰에서 아래 미커밋·미푸시 표현이 현재 상태처럼 읽히는 지적을 확인해 과거형으로 보완했다. 이는 문서만 바꾸는 후속 커밋이며, 해당 커밋까지 포함한 최종 PR head의 오프라인 job·최종 `Test`·전체 CI는 다시 확인한다. 최신 실행 결과는 PR·KAN-22·Confluence에 연결하고 위 첫 head의 성공을 새 SHA의 결과로 대신하지 않는다.
+
 ## 한계와 후속 작업
 
 - 원래 CI 실패는 여전히 미확정된 서버 지연 원인을 포함한다. cold compile, runner 경합, 네트워크 등 하나로 단정하지 않는다.
 - 앱 UI·렌더러·원격 요청 정책·의존성은 변경하지 않았다. 사이트의 성능 문제가 해결됐다는 의미가 아니다. production build·Linux CI·배포·실기기는 이번에 실행하지 않았다.
 - 테스트 첨부는 reporter에서 읽을 수 있다. 현재 CI에는 이를 GitHub artifact로 업로드하는 단계가 없으므로 향후 원격 실패의 trace 보관은 별도 후속 과제다. 민감정보 수집 범위를 먼저 검토한다.
 - 기존 60초 test deadline이 서버 대기를 제한한다. 별도 성능 SLA가 필요하면 기능 검사와 독립된 production 측정으로 정의한다. 전체 deadline까지 기다려도 URL이 바뀌지 않거나 본문이 없으면 여전히 실패한다.
-- 현재 브랜치 변경은 미커밋·미푸시다. 사용자 요청 후 커밋·PR을 만들고 같은 SHA의 오프라인 job 및 최종 `Test`를 확인해야 한다. KAN-22는 원격 검증 전 완료로 닫지 않는다.
+- 최초 로컬 검사 당시 변경은 미커밋·미푸시였다. 이후 PR #52의 첫 head는 원격 검증을 통과했다. 문서 후속 커밋을 포함한 최종 head의 오프라인 job·최종 `Test`·전체 CI 확인과 main 병합 후 검증은 남아 있다. KAN-22는 아직 검토 중으로 유지한다.
 - 기존 stash·TCP 작업은 복원·삭제·커밋하지 않았다. 검증 전용 작업 트리는 결과 확보 후 제거했고 다른 작업 트리는 건드리지 않았다.
 
 ## 관련 문서
