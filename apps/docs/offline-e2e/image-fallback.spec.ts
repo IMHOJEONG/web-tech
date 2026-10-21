@@ -1,8 +1,9 @@
 import { expect, test } from '@playwright/test'
+import { openArticleFromCard } from './article-navigation'
 
 test('an image failure uses a local backup without breaking the document card', async ({
     page,
-}) => {
+}, info) => {
     await page.route('**/*', (route) => {
         if (route.request().resourceType() !== 'image') return route.continue()
         const url = new URL(route.request().url())
@@ -25,11 +26,7 @@ test('an image failure uses a local backup without breaking the document card', 
         )
         .toBe(true)
     const card = backup.locator('xpath=ancestor::a[1]')
-    const href = await card.getAttribute('href')
-    expect(href).toMatch(/^\/ko\/docs\//)
-    await card.click()
-    await expect(page).toHaveURL(new RegExp(href! + '$'))
-    await expect(page.locator('[data-offline-content]')).toBeVisible()
+    await openArticleFromCard(page, card, info)
 })
 
 test('even a failed backup leaves a usable card and does not retry forever', async ({
