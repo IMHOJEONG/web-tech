@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-21 vuln-radar 전체 통계와 Feed 분리](2026-10-21-vuln-radar-overview-statistics.md)
+
 - [10-21 KAN-22 main 기준 이동 검사 보완](2026-10-21-kan22-offline-navigation.md)
 
 - [10-21 PR #51 CRP navigation 비교 조사](2026-10-21-crp-navigation-timing.md)

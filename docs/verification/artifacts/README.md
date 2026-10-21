@@ -1,5 +1,8 @@
 # 검증 원본 증거
 
+- [10-21 vuln-radar 통계 최종 통합](2026-10-21T14-14-49-689Z-vuln-radar-integration.json): [보고서](../integration/2026-10-21-vuln-radar-overview-statistics.md). 합성 DB43개·Feed25개·통합15개·정리6단계 통과. [1280px Feed](2026-10-21T14-14-49-689Z-vuln-radar-feed-1280.png)·[390px Feed](2026-10-21T14-14-49-689Z-vuln-radar-feed-390.png)는 기존 탐색 회귀 화면이며 집계 비교값은 JSON에 있다.
+- [10-21 초기 통계 통합](2026-10-21T14-11-58-001Z-vuln-radar-integration.json): 통합15개 통과. [1280px](2026-10-21T14-11-58-001Z-vuln-radar-feed-1280.png)·[390px](2026-10-21T14-11-58-001Z-vuln-radar-feed-390.png). 파일명은 UTC다.
+
 - [10-21 KAN-22 이동 비교](2026-10-21-kan22-offline-navigation.json): [검증 보고서](../resilience/2026-10-21-kan22-offline-navigation.md). main 첫 방문·재방문과 지연·503 대조군, 반복·집계 회귀와 소스 해시. 원래 CI 지연 원인은 미확정.
 
 - [10-21 CRP navigation 비교 측정](2026-10-21-crp-navigation-timing.json): [검증 보고서](../performance/2026-10-21-crp-navigation-timing.md). 원격 105.5ms 실패·로컬 기준 응답 지연 대조군·최종 100개 반복 결과와 소스 해시.

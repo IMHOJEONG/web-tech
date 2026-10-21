@@ -162,6 +162,8 @@
 
 ## 11. feeds API 만들기
 
+2026-10-21 로컬 수정: `/api/overview`는 vulnerability 전체를 우선순위·KEV 여부별로 한 번 집계한다. `/api/feed`의 상위25개 결과를 통계로 재사용하지 않는다. [집계 계약](../../docs/architecture/vuln-radar-overview-statistics.md)과 [검증](../../docs/verification/integration/2026-10-21-vuln-radar-overview-statistics.md)을 참고한다. 운영 배포는 미검증이다.
+
 - [x] `/api/overview`
 - [x] `/api/feed`
 - [x] `/api/kev`

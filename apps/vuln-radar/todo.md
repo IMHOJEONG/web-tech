@@ -84,6 +84,7 @@
 결정 메모:
 
 - 첫 화면은 placeholder 문구보다 실데이터 상태를 우선 보여준다.
+- 2026-10-21 로컬 수정: 전체 건수·P0·P1·KEV 지표는 overview의 전체 DB 집계에서 읽고, Feed 상위25개 목록과 분리한다. [집계 계약](../../docs/architecture/vuln-radar-overview-statistics.md). 배포 미검증.
 - `health`, `ingest/status`, `overview`, `feed`, `kev`, `watchlist`를 병렬 조회한다.
 - 스케줄러 전까지는 프론트에서 60초 polling으로 freshness를 보조 확인한다.
 

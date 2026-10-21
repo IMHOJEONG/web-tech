@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-21 vuln-radar 전체 DB 통계](integration/2026-10-21-vuln-radar-overview-statistics.md): 43개 DB·25개 Feed, 중복 KEV·빈 DB·두 화면·새로고침과 기존 장애 회귀15개 통과. 운영 미배포.
+
 - [10-21 KAN-22 상세 이동 실패](resilience/2026-10-21-kan22-offline-navigation.md): 정상 RSC 전달 지연·HTTP 503 대조군, 오프라인 22개·반복 18개와 CI 집계 64조합 검증. 당시 CI 지연 원인·수정 후 원격 검증은 미확정/미완료.
 
 - [10-21 PR #51 CRP 타이밍 비교](performance/2026-10-21-crp-navigation-timing.md): 기준 페이지 지연으로 기존 판정의 오판 재현, 동일 문서 계측과 음성 대조군, 로컬 100개 통과·원격 미검증.
