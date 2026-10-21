@@ -23,10 +23,12 @@ KAN-22를 `검토 중`으로 전환하고 댓글 `10011`의 과거 실패 본문
 
 ## Open Questions
 
+22시 KST 후속: 사용자 승인으로 PR #52를 main `527d4b0`에 병합했다. 같은 SHA의 CI 13개 job·문서·보안 검사와 Production READY·공개 alias 연결·HTTP 점검을 확인했다. 공개 자동화 브라우저의 검색 상호작용 검사는 실패했으므로 운영 검증 전체를 통과로 닫지 않았다. [병합 후 결과](../../verification/resilience/2026-10-21-kan22-offline-navigation.md#pr-52-main-병합-후-확인)와 [선별 증거](../../verification/artifacts/2026-10-21-kan22-postmerge-verification.json)에 초기 실패·미검증 범위를 남긴다. 이미 병합한 브랜치를 재사용하지 않고 최신 main 기반 `codex/docs-kan22-postmerge-verification`에 기록만 미커밋으로 분리했다. 앱 코드·NAS·기존 stash는 변경하지 않았다.
+
 후속 원격 반영: 세 커밋을 푸시해 [PR #52](https://github.com/IMHOJEONG/web-tech/pull/52)를 만들었다. 첫 head `50c08c3`의 [CI](https://github.com/IMHOJEONG/web-tech/actions/runs/39594550825)는 13개 job과 최종 `Test` 모두 통과했고 오프라인은 실제 22개 통과였다. 같은 head의 문서·CodeQL·미리보기도 성공했다. 리뷰의 상태 표현 모순 1건을 문서만의 네 번째 커밋으로 보완한다. 앱·테스트 소스는 바꾸지 않았으며 최종 head의 CI를 다시 확인한다.
 
 최초 CI에서 실제로 느렸던 단계와 원격 trace 보관 정책은 후속 확인이 필요하다. 이번 기능 검사에 허용한 서버 대기 시간을 사용자 성능 목표와 혼동하지 않는다.
 
 ## Next
 
-승인된 후속 단계는 세 커밋 푸시와 main 대상 PR 준비, 동일 head SHA의 Linux 오프라인 job·최종 `Test`·전체 CI 확인이다. 실제 원격 결과와 실행 URL은 PR·KAN-22·Confluence에 연결하며, 최초 로컬 보고서의 미검증 기록을 당시 원인 확정이나 배포 성공으로 바꾸지 않는다. main 병합과 운영 배포는 이번 요청 범위가 아니다.
+PR #52의 병합·main CI·Production 확인은 위 22시 KST 후속 기록에서 구분했다. 해당 미커밋 표현은 그 시점의 상태다. 사용자 승인에 따라 병합 후 검증 기록을 먼저 커밋하고, 검색 검사 후속 조사·정정은 별도 커밋으로 분리한다. 새 PR의 최종 head CI는 별도로 확인하며 이번 요청에 새 main 병합·운영 배포는 포함하지 않는다.

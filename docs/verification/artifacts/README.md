@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-21 KAN-22 병합 후 결과](2026-10-21-kan22-postmerge-verification.json): [검증 보고서](../resilience/2026-10-21-kan22-offline-navigation.md#pr-52-main-병합-후-확인). main 527d4b0 CI·Production·HTTP 성공과 초기 공개 검색 검사 실패를 구분.
+
 - [10-21 KAN-22 이동 비교](2026-10-21-kan22-offline-navigation.json): [검증 보고서](../resilience/2026-10-21-kan22-offline-navigation.md). main 첫 방문·재방문과 지연·503 대조군, 반복·집계 회귀와 소스 해시. 원래 CI 지연 원인은 미확정.
 
 - [10-21 CRP navigation 비교 측정](2026-10-21-crp-navigation-timing.json): [검증 보고서](../performance/2026-10-21-crp-navigation-timing.md). 원격 105.5ms 실패·로컬 기준 응답 지연 대조군·최종 100개 반복 결과와 소스 해시.

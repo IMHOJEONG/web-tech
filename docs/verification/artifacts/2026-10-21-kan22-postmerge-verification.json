@@ -1,0 +1,80 @@
+{
+  "issue": "KAN-22",
+  "date": "2026-10-21",
+  "timezone": "Asia/Seoul",
+  "pullRequest": "https://github.com/IMHOJEONG/web-tech/pull/52",
+  "state": "MERGED",
+  "mergedAt": "2026-10-21T13:08:45Z",
+  "mainSha": "527d4b054b4f70137f1fb1b896d8a11ccf392b8c",
+  "ci": {
+    "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/39605425753",
+    "conclusion": "success",
+    "successfulJobs": 13,
+    "offlineJob": "https://github.com/IMHOJEONG/web-tech/actions/runs/39605425753/job/119240266605",
+    "offlineLogExcerpt": "22 passed (1.5m)",
+    "gateJob": "https://github.com/IMHOJEONG/web-tech/actions/runs/39605425753/job/119242923787",
+    "gateLogExcerpt": "unit-contract-tests=success docs-browser=success offline-reading=success",
+    "documentation": "success",
+    "codeql": "success",
+    "successfulCheckRuns": 16
+  },
+  "production": {
+    "id": "dpl_36mKXdrotfsnSPBetYgdKTDofho7",
+    "state": "READY",
+    "target": "production",
+    "gitRef": "main",
+    "gitSha": "527d4b054b4f70137f1fb1b896d8a11ccf392b8c",
+    "url": "https://web-tech-g1coh3wk7-hojeong-ims-projects.vercel.app",
+    "publicAlias": "https://heap-forge.app",
+    "aliasDeploymentIdMatches": true,
+    "vercelCli": "53.1.1",
+    "vulnRadarGithubDeploymentStatus": "success",
+    "runtimeLogSample": "No logs found for both error and 5xx queries over the previous 20 minutes; not proof of global absence of failures"
+  },
+  "httpChecks": {
+    "/ko/feed": 200,
+    "/ko/docs": 200,
+    "/ko/web": 200,
+    "/ko/mobile": 200,
+    "/ko/ui-ux": 200,
+    "/ko/about": 200,
+    "/en/feed": 200,
+    "/robots.txt": 200,
+    "/sitemap.xml": 200,
+    "unauthorized POST /api/revalidate/content": 401
+  },
+  "publicBrowser": {
+    "engine": "Playwright Chromium",
+    "firstAttempt": {
+      "viewportWidth": 1280,
+      "readiness": "DOMContentLoaded",
+      "articleBodyVisible": true,
+      "sameWindow": false,
+      "cause": "unconfirmed"
+    },
+    "diagnostic": {
+      "readiness": "networkidle",
+      "viewportWidths": [1280, 390],
+      "action": "click the header button with accessible name 문서 검색",
+      "expected": "aria-expanded=true within 10000ms",
+      "observed": "aria-expanded remained false",
+      "scriptResponseStatuses": [200],
+      "pageErrorSamples": 0,
+      "consoleErrorSamples": 0,
+      "articleClientNavigationAfterSearch": "not reached due to search assertion failure",
+      "separateErrorCollectionRun": "same outcome in both viewports"
+    },
+    "overall": "incomplete; do not treat HTTP or deployment success as successful browser interaction",
+    "priorProductionComparison": "not performed",
+    "physicalDeviceOrHumanBrowser": "not verified"
+  },
+  "notPerformed": [
+    "application changes",
+    "rollback",
+    "forced redeploy",
+    "NAS update",
+    "stash restoration or deletion",
+    "other branch synchronization"
+  ],
+  "recordStatus": "Historical snapshot recorded before the follow-up commits; original committed evidence is unchanged. Later commit, PR and CI status is tracked in KAN-22 and the linked PR."
+}
