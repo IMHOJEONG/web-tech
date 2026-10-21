@@ -6,7 +6,11 @@ import type {
   OverviewResponse,
 } from "@/shared/api/radar";
 import { useI18n } from "@/shared/i18n/i18n-provider";
-import { formatLargeMetric, getCriticalCount } from "./overview-view-model";
+import {
+  formatLargeMetric,
+  getCriticalCount,
+  getTrackedCount,
+} from "./overview-view-model";
 
 interface OverviewCriticalCorePanelProps {
   feed: FeedResponse;
@@ -21,7 +25,7 @@ export function OverviewCriticalCorePanel({
 }: OverviewCriticalCorePanelProps) {
   const { t } = useI18n();
   const criticalCount = getCriticalCount(status, overview.cards);
-  const trackedCount = status.counts.vulnerabilities;
+  const trackedCount = getTrackedCount(status, overview.cards);
   const criticalItems = feed.items.slice(0, 2);
 
   return (
@@ -32,7 +36,7 @@ export function OverviewCriticalCorePanel({
             {t("overview.coreTitle")}
           </p>
           <p className="mt-3 max-w-[30ch] text-sm leading-6 text-radar-copy/72">
-            {overview.highlights[0] ?? t("overview.heroBody")}
+            {t("overview.metricsScope", { count: feed.items.length })}
           </p>
         </div>
         <CircleAlert

@@ -45,6 +45,8 @@ export const messages = {
     "overview.realTimeTelemetry": "REAL-TIME TELEMETRY",
     "overview.activeP0Threats": "ACTIVE P0 THREATS",
     "overview.trackedVulnerabilities": "TRACKED VULNERABILITIES",
+    "overview.metricsScope":
+      "통계는 전체 저장 데이터 기준입니다. 목록은 우선순위순 상위 {{count}}건 중 일부를 보여줍니다.",
     "overview.totalVulnerabilities": "TOTAL VULNERABILITIES",
     "overview.latestIngest": "LATEST INGEST",
     "overview.statTrackedDelta":
@@ -228,6 +230,8 @@ export const messages = {
     "overview.realTimeTelemetry": "REAL-TIME TELEMETRY",
     "overview.activeP0Threats": "ACTIVE P0 THREATS",
     "overview.trackedVulnerabilities": "TRACKED VULNERABILITIES",
+    "overview.metricsScope":
+      "Metrics cover all stored data. Lists show a sample of the top {{count}} priority-ranked items.",
     "overview.totalVulnerabilities": "TOTAL VULNERABILITIES",
     "overview.latestIngest": "LATEST INGEST",
     "overview.statTrackedDelta":

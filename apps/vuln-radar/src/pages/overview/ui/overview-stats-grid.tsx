@@ -8,7 +8,8 @@ import {
   formatLargeMetric,
   formatRelativeTime,
   getP1Count,
-  getTrackedDelta,
+  getTrackedCount,
+  getKevCount,
 } from "./overview-view-model";
 
 interface OverviewStatsGridProps {
@@ -25,8 +26,8 @@ export function OverviewStatsGrid({
   watchlist,
 }: OverviewStatsGridProps) {
   const { t } = useI18n();
-  const trackedCount = status.counts.vulnerabilities;
-  const trackedDelta = getTrackedDelta(status, overview.cards);
+  const trackedCount = getTrackedCount(status, overview.cards);
+  const kevCount = getKevCount(overview.cards);
   const p1Count = getP1Count(status, overview.cards);
   const totalWatchMatches = watchlist.entries.reduce(
     (total, entry) => total + entry.matchCount,
@@ -46,7 +47,7 @@ export function OverviewStatsGrid({
           </strong>
           <p className="mt-2 text-sm leading-6 text-radar-copy/72">
             {t("overview.statTrackedDelta", {
-              count: trackedDelta,
+              count: kevCount ?? "—",
               p1: p1Count,
             })}
           </p>

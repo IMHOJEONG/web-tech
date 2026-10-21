@@ -63,14 +63,18 @@ export function getP1Count(
   );
 }
 
-export function getTrackedDelta(
+export function getTrackedCount(
   status: IngestStatusResponse,
   overviewCards: { id: string; value: number }[],
 ) {
   return (
-    overviewCards.find((card) => card.id === "kev-new")?.value ??
-    status.counts.kevAdvisories
+    overviewCards.find((card) => card.id === "total-vulnerabilities")?.value ??
+    status.counts.vulnerabilities
   );
+}
+
+export function getKevCount(overviewCards: { id: string; value: number }[]) {
+  return overviewCards.find((card) => card.id === "kev-new")?.value;
 }
 
 export function formatDataSourceLabel(source: {
