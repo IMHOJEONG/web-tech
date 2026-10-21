@@ -243,7 +243,7 @@ jobs:
   test:
     name: Test
     if: ${{ always() }}
-    needs: [unit-contract-tests, docs-browser]
+    needs: [unit-contract-tests, docs-browser, offline-reading]
     timeout-minutes: 1
     runs-on: ubuntu-latest
     steps:
@@ -251,6 +251,7 @@ jobs:
         env:
           UNIT_RESULT: ${{ needs.unit-contract-tests.result }}
           BROWSER_RESULT: ${{ needs.docs-browser.result }}
+          OFFLINE_RESULT: ${{ needs.offline-reading.result }}
         run: |
-          printf 'unit-contract-tests=%s docs-browser=%s\n' "$UNIT_RESULT" "$BROWSER_RESULT"
-          test "$UNIT_RESULT" = success && test "$BROWSER_RESULT" = success
+          printf 'unit-contract-tests=%s docs-browser=%s offline-reading=%s\n' "$UNIT_RESULT" "$BROWSER_RESULT" "$OFFLINE_RESULT"
+          test "$UNIT_RESULT" = success && test "$BROWSER_RESULT" = success && test "$OFFLINE_RESULT" = success

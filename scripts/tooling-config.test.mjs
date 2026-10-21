@@ -323,26 +323,40 @@ test("required Test gate fails for failed, cancelled or skipped dependencies", (
   const gate = ciJob("test");
   assert.match(gate, /name: Test\n/);
   assert.match(gate, /if: \$\{\{ always\(\) \}\}/);
-  assert.match(gate, /needs: \[unit-contract-tests, docs-browser\]/);
+  assert.match(
+    gate,
+    /needs: \[unit-contract-tests, docs-browser, offline-reading\]/,
+  );
   assert.match(
     gate,
     /UNIT_RESULT: \$\{\{ needs.unit-contract-tests.result \}\}/,
   );
   assert.match(gate, /BROWSER_RESULT: \$\{\{ needs.docs-browser.result \}\}/);
+  assert.match(
+    gate,
+    /OFFLINE_RESULT: \$\{\{ needs.offline-reading.result \}\}/,
+  );
   const script = gate.match(/run: \|\n((?: {10}[^\n]*\n?)+)/)?.[1];
   assert.ok(script);
   for (const unit of ["success", "failure", "cancelled", "skipped"]) {
     for (const browser of ["success", "failure", "cancelled", "skipped"]) {
-      const result = spawnSync("bash", ["-e", "-c", script], {
-        encoding: "utf8",
-        env: { ...process.env, UNIT_RESULT: unit, BROWSER_RESULT: browser },
-      });
-      assert.ifError(result.error);
-      assert.equal(
-        result.status === 0,
-        unit === "success" && browser === "success",
-        `unit=${unit}, browser=${browser}`,
-      );
+      for (const offline of ["success", "failure", "cancelled", "skipped"]) {
+        const result = spawnSync("bash", ["-e", "-c", script], {
+          encoding: "utf8",
+          env: {
+            ...process.env,
+            UNIT_RESULT: unit,
+            BROWSER_RESULT: browser,
+            OFFLINE_RESULT: offline,
+          },
+        });
+        assert.ifError(result.error);
+        assert.equal(
+          result.status === 0,
+          unit === "success" && browser === "success" && offline === "success",
+          `unit=${unit}, browser=${browser}, offline=${offline}`,
+        );
+      }
     }
   }
 });
