@@ -59,6 +59,7 @@ type DbKevAdvisory = {
     cveId: string;
     title: string;
     priority: 'P0' | 'P1' | 'P2' | 'P3';
+    epssScore: number | null;
   };
 };
 
@@ -273,16 +274,13 @@ export class FeedsRepository {
             cveId: true,
             title: true,
             priority: true,
+            epssScore: true,
           },
         },
       },
       orderBy: [{ publishedAt: 'desc' }],
       take: 25,
     })) as DbKevAdvisory[];
-
-    if (advisories.length === 0) {
-      return getKevResponse('no_database_rows');
-    }
 
     return {
       generatedAt: new Date().toISOString(),
@@ -293,6 +291,7 @@ export class FeedsRepository {
         cveId: advisory.vulnerability.cveId,
         title: advisory.vulnerability.title,
         priority: advisory.vulnerability.priority,
+        epssScore: advisory.vulnerability.epssScore ?? null,
         sourceUrl: advisory.sourceUrl,
         addedAt: (advisory.publishedAt ?? new Date()).toISOString(),
       })),

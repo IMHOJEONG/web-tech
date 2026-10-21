@@ -99,3 +99,68 @@ describe('FeedsRepository overview statistics', () => {
     );
   });
 });
+
+describe('FeedsRepository KEV evidence', () => {
+  const findMany = jest.fn();
+  const getClient = jest.fn();
+  const repository = new FeedsRepository({
+    getClient,
+  } as unknown as PrismaService);
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+    getClient.mockResolvedValue({ advisory: { findMany } });
+  });
+
+  it('reads actual nullable EPSS from the KEV vulnerability, independently of the feed', async () => {
+    findMany.mockResolvedValue(
+      [0, null, 0.125].map((epssScore, index) => ({
+        sourceUrl: null,
+        publishedAt: new Date('2026-10-21T00:00:00Z'),
+        vulnerability: {
+          cveId: `CVE-2097-${index}`,
+          title: 'Synthetic KEV',
+          priority: 'P1',
+          epssScore,
+        },
+      })),
+    );
+    const response = await repository.getKev();
+    expect(response.items.map((item) => item.epssScore)).toEqual([
+      0,
+      null,
+      0.125,
+    ]);
+    expect(findMany).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: { source: 'cisa-kev' },
+        include: {
+          vulnerability: {
+            select: {
+              cveId: true,
+              title: true,
+              priority: true,
+              epssScore: true,
+            },
+          },
+        },
+      }),
+    );
+  });
+
+  it('keeps a connected empty KEV result empty instead of inventing seed advisories', async () => {
+    findMany.mockResolvedValue([]);
+    expect(await repository.getKev()).toMatchObject({
+      dataSource: { kind: 'database' },
+      items: [],
+    });
+  });
+
+  it('keeps unavailable storage fallback explicitly marked as mock', async () => {
+    getClient.mockResolvedValue(null);
+    expect(await repository.getKev()).toMatchObject({
+      dataSource: { kind: 'mock', reason: 'database_unavailable' },
+    });
+    expect(findMany).not.toHaveBeenCalled();
+  });
+});

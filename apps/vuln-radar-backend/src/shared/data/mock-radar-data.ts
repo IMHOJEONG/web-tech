@@ -144,6 +144,9 @@ const kevItems: KevItem[] = [
     cveId: 'CVE-2026-10001',
     title: 'Citrix NetScaler gateway auth bypass under active exploitation',
     priority: 'P0',
+    epssScore:
+      vulnerabilitySeeds.find((item) => item.cveId === 'CVE-2026-10001')
+        ?.epssScore ?? null,
     sourceUrl: 'https://www.cisa.gov/known-exploited-vulnerabilities-catalog',
     addedAt: '2026-05-18T05:30:00.000Z',
   },
