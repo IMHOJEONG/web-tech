@@ -38,6 +38,8 @@
 
 ## 설계·정책 목록
 
+- [KEV 점수·우선순위 표시 계약](vuln-radar-kev-evidence.md): nullable 실제 EPSS·미확인·빈 목록과 우선순위 구분, 작업별 커밋·운영 미검증.
+
 - [vuln-radar 전체 통계와 목록 집계](vuln-radar-overview-statistics.md): 전체 DB 집계와 상위25개 Feed 분리, 로컬 적용·배포 미검증.
 
 - [서비스 복구와 배포 안전 정책](platform-recovery-policy.md): 제안. RTO/RPO와 백업·롤백·리허설 기준, 운영 적용 미검증.

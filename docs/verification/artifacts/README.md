@@ -1,5 +1,8 @@
 # 검증 원본 증거
 
+- [10-21 KEV 최종 통합](2026-10-21T14-35-59-158Z-vuln-radar-integration.json): [보고서](../integration/2026-10-21-vuln-radar-kev-evidence.md). nullable 실제 점수·구버전/범위 오류/503 대조군 포함16개 통과. [KEV1280px](2026-10-21T14-35-59-158Z-vuln-radar-kev-1280.png)·[KEV390px](2026-10-21T14-35-59-158Z-vuln-radar-kev-390.png)·[Feed1280px](2026-10-21T14-35-59-158Z-vuln-radar-feed-1280.png)·[Feed390px](2026-10-21T14-35-59-158Z-vuln-radar-feed-390.png). 합성 데이터만 표시한다.
+- [10-21 KEV 초기 통합](2026-10-21T14-34-05-141Z-vuln-radar-integration.json): 16개 통과. [Feed1280px](2026-10-21T14-34-05-141Z-vuln-radar-feed-1280.png)·[Feed390px](2026-10-21T14-34-05-141Z-vuln-radar-feed-390.png).
+
 - [10-21 vuln-radar 통계 최종 통합](2026-10-21T14-14-49-689Z-vuln-radar-integration.json): [보고서](../integration/2026-10-21-vuln-radar-overview-statistics.md). 합성 DB43개·Feed25개·통합15개·정리6단계 통과. [1280px Feed](2026-10-21T14-14-49-689Z-vuln-radar-feed-1280.png)·[390px Feed](2026-10-21T14-14-49-689Z-vuln-radar-feed-390.png)는 기존 탐색 회귀 화면이며 집계 비교값은 JSON에 있다.
 - [10-21 초기 통계 통합](2026-10-21T14-11-58-001Z-vuln-radar-integration.json): 통합15개 통과. [1280px](2026-10-21T14-11-58-001Z-vuln-radar-feed-1280.png)·[390px](2026-10-21T14-11-58-001Z-vuln-radar-feed-390.png). 파일명은 UTC다.
 

@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-21 통계 커밋 분리와 KEV 근거 표시](2026-10-21-vuln-radar-kev-evidence.md)
+
 - [10-21 vuln-radar 전체 통계와 Feed 분리](2026-10-21-vuln-radar-overview-statistics.md)
 
 - [10-21 KAN-22 main 기준 이동 검사 보완](2026-10-21-kan22-offline-navigation.md)

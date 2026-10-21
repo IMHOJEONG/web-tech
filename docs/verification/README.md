@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-21 KEV 실제 점수·우선순위](integration/2026-10-21-vuln-radar-kev-evidence.md): Feed 밖0/null/0.125·구버전/503·빈 DB·중복 행 등 로컬 통합16개 통과. 운영 배포는 미검증.
+
 - [10-21 vuln-radar 전체 DB 통계](integration/2026-10-21-vuln-radar-overview-statistics.md): 43개 DB·25개 Feed, 중복 KEV·빈 DB·두 화면·새로고침과 기존 장애 회귀15개 통과. 운영 미배포.
 
 - [10-21 KAN-22 상세 이동 실패](resilience/2026-10-21-kan22-offline-navigation.md): 정상 RSC 전달 지연·HTTP 503 대조군, 오프라인 22개·반복 18개와 CI 집계 64조합 검증. 당시 CI 지연 원인·수정 후 원격 검증은 미확정/미완료.

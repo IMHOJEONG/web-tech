@@ -162,6 +162,8 @@
 
 ## 11. feeds API 만들기
 
+KEV 후속 수정: nullable EPSS를 해당 vulnerability에서 직접 반환하고 연결된 빈 KEV는 빈 배열로 유지한다. [표시 계약](../../docs/architecture/vuln-radar-kev-evidence.md). 작업별 커밋으로 분리했으며 운영 반영은 미검증이다.
+
 2026-10-21 로컬 수정: `/api/overview`는 vulnerability 전체를 우선순위·KEV 여부별로 한 번 집계한다. `/api/feed`의 상위25개 결과를 통계로 재사용하지 않는다. [집계 계약](../../docs/architecture/vuln-radar-overview-statistics.md)과 [검증](../../docs/verification/integration/2026-10-21-vuln-radar-overview-statistics.md)을 참고한다. 운영 배포는 미검증이다.
 
 - [x] `/api/overview`
