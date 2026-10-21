@@ -10,6 +10,7 @@
 - 새 보안 회귀 5개와 실제 docs sanitizer 회귀 1개를 추가했다. 새 테스트는 TypeScript이며 기존 test:repo 및 docs test:lib 경로에 포함된다.
 - 전후 audit·도달 조건·실패·한계를 [검증 보고서](../../verification/security/2026-10-21-vite-content-advisories.md)와 [정제 증거](../../verification/artifacts/2026-10-21-security-content-audit.json)에 분리했다.
 - 기존 braces 추적은 유지하고 이번 해결과 미해결을 구분한다. 경고 dismiss·무시 설정·비공식 fork·major 전환은 추가하지 않았다. 새 ADR이 필요한 구조 변경은 없다.
+- 사용자 요청으로 PR #51 제목·본문의 담당자 실명 표기를 제거했다. 앞으로 같은 정보를 반복하지 않도록 PR 템플릿과 [추적 규칙](../../process/issue-tracking.md)에 기준을 추가했다. Jira 담당자 배정은 유지하며, 규칙 변경은 보안 패치와 별도 커밋으로 분리한다.
 
 ## Notes
 
