@@ -6,21 +6,18 @@ import type {
 import { useI18n } from "@/shared/i18n/i18n-provider";
 import {
   formatLargeMetric,
-  formatRelativeTime,
   getP1Count,
   getTrackedCount,
   getKevCount,
 } from "./overview-view-model";
 
 interface OverviewStatsGridProps {
-  latestAppliedAt: string;
   overview: OverviewResponse;
   status: IngestStatusResponse;
   watchlist: WatchlistResponse;
 }
 
 export function OverviewStatsGrid({
-  latestAppliedAt,
   overview,
   status,
   watchlist,
@@ -33,7 +30,6 @@ export function OverviewStatsGrid({
     (total, entry) => total + entry.matchCount,
     0,
   );
-  const cadenceMinutes = 1;
 
   return (
     <div className="grid gap-4 lg:grid-cols-2">
@@ -58,15 +54,14 @@ export function OverviewStatsGrid({
       <article className="grid gap-3 rounded-sm border border-radar-border/70 bg-radar-panel px-5 py-5 shadow-[0_20px_48px_rgba(0,0,0,0.28)] backdrop-blur sm:grid-cols-[minmax(0,1fr)_96px] sm:items-center">
         <div>
           <span className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-radar-copy/72">
-            {t("overview.latestIngest")}
+            {t("overview.watchlistMatches")}
           </span>
           <strong className="mt-2 block font-mono text-[2.2rem] leading-none text-white">
-            {formatRelativeTime(latestAppliedAt)}
+            {formatLargeMetric(totalWatchMatches)}
           </strong>
           <p className="mt-2 text-sm leading-6 text-radar-copy/72">
-            {t("overview.statFreshnessDelta", {
-              count: totalWatchMatches,
-              cadence: cadenceMinutes,
+            {t("overview.watchlistActive", {
+              count: watchlist.entries.length,
             })}
           </p>
         </div>

@@ -19,8 +19,8 @@ import { OverviewLoadingState } from "./overview-loading-state";
 import { OverviewStatsGrid } from "./overview-stats-grid";
 import { OverviewThreatStreamPanel } from "./overview-threat-stream-panel";
 import { OverviewWorkspaceHeader } from "./overview-workspace-header";
-
-const OVERVIEW_REFRESH_INTERVAL_MS = 60_000;
+import { OverviewIngestStatusPanel } from "./overview-ingest-status-panel";
+import { OVERVIEW_REFRESH_INTERVAL_MS } from "./overview-ingest-model";
 
 export function OverviewPage() {
   const healthQuery = useQuery({
@@ -111,13 +111,6 @@ export function OverviewPage() {
   const kev = kevQuery.data as KevResponse | undefined;
   const watchlist = watchlistQuery.data as WatchlistResponse;
   const status = statusQuery.data as IngestStatusResponse;
-  const latestAppliedAt =
-    status.latest.databaseUpdatedAt ??
-    status.latest.upstreamLastModifiedAt ??
-    status.latest.kevCatalogAddedAt ??
-    status.latest.epssObservedAt ??
-    status.checkedAt;
-
   return (
     <section className="mx-auto grid w-full max-w-[1280px] gap-6">
       <OverviewWorkspaceHeader
@@ -135,11 +128,12 @@ export function OverviewPage() {
       </div>
 
       <OverviewStatsGrid
-        latestAppliedAt={latestAppliedAt}
         overview={overview}
         status={status}
         watchlist={watchlist}
       />
+
+      <OverviewIngestStatusPanel status={status} />
 
       <OverviewKevMatrixPanel
         healthStorage={healthQuery.data?.storage}

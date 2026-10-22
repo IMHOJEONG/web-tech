@@ -79,30 +79,18 @@ export function formatLargeMetric(value: number) {
   return new Intl.NumberFormat("en-US").format(value);
 }
 
-export function formatRelativeTime(value: string | null) {
-  if (!value) {
-    return "N/A";
-  }
-
-  const timestamp = new Date(value).getTime();
-  const deltaMinutes = Math.max(
-    0,
-    Math.round((Date.now() - timestamp) / 60_000),
-  );
-
-  if (deltaMinutes < 1) {
-    return "Just now";
-  }
-
-  if (deltaMinutes < 60) {
-    return `${deltaMinutes}m ago`;
-  }
-
-  const deltaHours = Math.round(deltaMinutes / 60);
-
-  if (deltaHours < 24) {
-    return `${deltaHours}h ago`;
-  }
-
-  return `${Math.round(deltaHours / 24)}d ago`;
+export function formatRelativeTime(
+  value: string | null,
+  locale = "en",
+  now = Date.now(),
+) {
+  const elapsed = value ? now - Date.parse(value) : NaN;
+  if (!Number.isFinite(elapsed) || elapsed < 0) return "—";
+  if (elapsed < 60_000) return locale === "ko" ? "방금" : "Just now";
+  const relative = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
+  if (elapsed < 3_600_000)
+    return relative.format(-Math.floor(elapsed / 60_000), "minute");
+  if (elapsed < 86_400_000)
+    return relative.format(-Math.floor(elapsed / 3_600_000), "hour");
+  return relative.format(-Math.floor(elapsed / 86_400_000), "day");
 }
