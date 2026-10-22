@@ -4,16 +4,10 @@ import { parseLocalDocument } from './local-document-parser.ts'
 import { getDocHref } from './get-doc-route.ts'
 import { listLocalMarkdownFiles } from './local-markdown-files.ts'
 import type { SearchData } from './get-search-data'
+import { getDocumentTaxonomy } from './document-taxonomy.ts'
 
 export function inferSearchSection(fileName: string) {
-    if (fileName.startsWith('category/fe/') || fileName.startsWith('data/v8/'))
-        return 'Web'
-    if (fileName.startsWith('category/be/')) return 'Backend'
-    if (fileName.startsWith('category/computer-science/'))
-        return 'Computer Science'
-    if (fileName.startsWith('category/infra/')) return 'Infrastructure'
-    if (fileName.startsWith('data/shadcn/')) return 'UI/UX'
-    return 'Docs'
+    return getDocumentTaxonomy(fileName).section
 }
 
 export async function loadLocalSearchIndex(

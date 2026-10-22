@@ -1,7 +1,7 @@
 import { getDocChannel } from '~/lib/get-doc-channel'
 import { getDocHref } from '~/lib/get-doc-route'
 import type { Metadata } from '~/lib/get-document'
-import { normalizeDocPath } from '~/lib/normalize-doc-path'
+import { getDocumentTaxonomy } from '~/lib/document-taxonomy'
 
 export type FeedFilter = 'all' | 'web' | 'mobile' | 'uiux'
 export type FeedArticle = {
@@ -26,13 +26,21 @@ export function getFilterHref(filter: FeedFilter) {
 
 function getTopicLabel(doc: Partial<Metadata>) {
     if (doc.topicLabel?.trim()) return doc.topicLabel.trim()
-    const fileName = normalizeDocPath(doc.fileName ?? '')
-    if (fileName.includes('/category/fe/') || fileName.includes('/data/v8/'))
-        return 'WEB'
-    if (fileName.includes('/data/shadcn/')) return 'UI/UX'
-    if (fileName.includes('/category/computer-science/')) return 'SYSTEMS'
-    if (fileName.includes('/category/be/')) return 'ARCHITECTURE'
-    return 'ENGINEERING'
+    const section = getDocumentTaxonomy(doc).section
+    switch (section) {
+        case 'Web':
+            return 'WEB'
+        case 'Mobile':
+            return 'MOBILE'
+        case 'UI/UX':
+            return 'UI/UX'
+        case 'Computer Science':
+            return 'SYSTEMS'
+        case 'Backend':
+            return 'ARCHITECTURE'
+        default:
+            return 'ENGINEERING'
+    }
 }
 
 export function getFeedArticles(
@@ -43,7 +51,7 @@ export function getFeedArticles(
         const title = doc.title?.trim()
         const slug = doc.slug?.trim()
         if (!title || !slug) return []
-        const channel = getDocChannel(doc.fileName)
+        const channel = getDocChannel(doc)
         if (
             filter !== 'all' &&
             (channel === 'other' ? 'web' : channel) !== filter

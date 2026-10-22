@@ -432,6 +432,7 @@
             "sections": {
                 "all": "All",
                 "web": "Web",
+                "mobile": "Mobile",
                 "uiux": "UI/UX",
                 "backend": "Backend",
                 "infrastructure": "Infrastructure",
@@ -459,6 +460,7 @@
         },
         "sectionLabels": {
             "web": "Web",
+            "mobile": "Mobile",
             "uiux": "UI/UX",
             "backend": "Backend",
             "infrastructure": "Infrastructure",
@@ -467,6 +469,7 @@
         },
         "sectionDescriptions": {
             "web": "Documents about browsers, frontend systems, and rendering.",
+            "mobile": "Documents about mobile platforms, touch interfaces, and app development.",
             "uiux": "Documents about interface design and experience systems.",
             "backend": "Technical notes focused on server architecture and APIs.",
             "infrastructure": "Documents about containers, delivery, observability, and operations.",
