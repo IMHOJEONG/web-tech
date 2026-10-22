@@ -56,7 +56,7 @@ function getSectionLabel(
     doc: LandingDoc,
     t: Awaited<ReturnType<typeof getTranslations>>
 ) {
-    const channel = getDocChannel(doc.fileName)
+    const channel = getDocChannel(doc)
 
     switch (channel) {
         case 'mobile':

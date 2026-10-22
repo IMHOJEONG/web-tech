@@ -116,3 +116,35 @@ test('buildArticleRelatedDocuments limits result count', () => {
 
     assert.equal(related.length, 2)
 })
+
+test('related documents match local data aliases and remote canonical paths without storage-name leakage', () => {
+    for (const [legacy, canonical] of [
+        ['data/v8', 'web'],
+        ['data/shadcn', 'ui-ux'],
+        ['mobile', 'mobile'],
+    ]) {
+        const current = {
+            title: 'Current',
+            slug: 'current',
+            fileName: `${legacy}/current`,
+        }
+        const candidate = {
+            title: 'Related',
+            slug: 'next',
+            markdownPath: `${canonical}/next`,
+            fileName: 'remote/next',
+        }
+        const unrelated = {
+            title: 'Other',
+            slug: 'other',
+            markdownPath: 'feed/other',
+            fileName: `${legacy}/other`,
+        }
+        assert.deepEqual(
+            buildArticleRelatedDocuments([candidate, unrelated], current).map(
+                (doc) => doc.href
+            ),
+            [`/docs/${canonical}/next`]
+        )
+    }
+})
