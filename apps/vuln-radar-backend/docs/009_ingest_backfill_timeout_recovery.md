@@ -203,6 +203,8 @@ curl "https://<backend-host>/api/ingest/status" \
 2. 수집 상태 관측 강화
    source별 마지막 성공 시각, 마지막 실패 사유, 연속 실패 횟수를 DB에 저장한다.
 
+   2026-10-22 1차 로컬 구현은 [ADR-0016](../../../docs/architecture/adr-0016-vuln-radar-ingest-observation.md)을 따른다. 현재 프로세스의 실행 결과·소스 조회 성공/실패·연속 실패 횟수만 기록하며 DB 영속 저장은 아직 하지 않았다. `GET /api/ingest/status`의 `observation.scope`와 `observedSince`로 범위를 확인한다. 상태 조회·DB 수정·원본 날짜로 수집 성공을 추정하지 않고, 원문 실패 메시지는 새 관측 응답에 노출하지 않는다.
+
 3. 수집 실행 책임 분리
    HTTP 요청 안에서 긴 backfill을 끝까지 처리하지 않고, 별도 ingest worker/job queue로 넘긴다.
 

@@ -1,5 +1,7 @@
 # vuln-radar-backend todo
 
+- 2026-10-22 [수집 상태1차 보완](../../docs/architecture/adr-0016-vuln-radar-ingest-observation.md): 현재 프로세스의 실제 전체 성공·소스 조회 결과와 연속 실패를 status로 제공한다. 재시작 시 초기화·같은 프로세스 동시 sync409이며 DB 영속·분산 락·운영 배포는 미완료다.
+
 이 문서는 `apps/vuln-radar-backend`를 만들면서 백엔드 관점에서 무엇을 구현하고, 무엇을 깊게 공부해야 하는지 정리한 학습용 TODO다.
 
 ## 1. 런타임 기초 다지기

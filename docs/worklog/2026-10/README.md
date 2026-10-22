@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-22 수집 상태와 조회 주기 분리](2026-10-22-vuln-radar-ingest-status.md)
+
 - [10-21 통계 커밋 분리와 KEV 근거 표시](2026-10-21-vuln-radar-kev-evidence.md)
 
 - [10-21 vuln-radar 전체 통계와 Feed 분리](2026-10-21-vuln-radar-overview-statistics.md)
