@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-22 vuln-radar main Production 전환 착수](2026-10-22-vuln-radar-main-production-transition.md)
+
 - [10-22 Overview 부분 API 장애 격리](2026-10-22-vuln-radar-partial-failures.md)
 
 - [10-22 수집 상태와 조회 주기 분리](2026-10-22-vuln-radar-ingest-status.md)
