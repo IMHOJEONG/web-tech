@@ -23,32 +23,32 @@ export function buildKevMatrixItems(kev?: KevResponse): OverviewMatrixItem[] {
 }
 
 export function getCriticalCount(
-  status: IngestStatusResponse,
+  status: IngestStatusResponse | undefined,
   overviewCards: { id: string; value: number }[],
 ) {
   return (
     overviewCards.find((card) => card.id === "p0-open")?.value ??
-    status.counts.p0
+    status?.counts.p0
   );
 }
 
 export function getP1Count(
-  status: IngestStatusResponse,
+  status: IngestStatusResponse | undefined,
   overviewCards: { id: string; value: number }[],
 ) {
   return (
     overviewCards.find((card) => card.id === "p1-open")?.value ??
-    status.counts.p1
+    status?.counts.p1
   );
 }
 
 export function getTrackedCount(
-  status: IngestStatusResponse,
+  status: IngestStatusResponse | undefined,
   overviewCards: { id: string; value: number }[],
 ) {
   return (
     overviewCards.find((card) => card.id === "total-vulnerabilities")?.value ??
-    status.counts.vulnerabilities
+    status?.counts.vulnerabilities
   );
 }
 
@@ -75,7 +75,8 @@ export function formatDataSourceLabel(source: {
   return "Database";
 }
 
-export function formatLargeMetric(value: number) {
+export function formatLargeMetric(value: number | undefined) {
+  if (value === undefined) return "—";
   return new Intl.NumberFormat("en-US").format(value);
 }
 

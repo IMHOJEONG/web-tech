@@ -11,7 +11,7 @@ interface OverviewKevMatrixPanelProps {
   healthStorage: "mock" | "database" | undefined;
   isLoading: boolean;
   kev?: KevResponse;
-  status: IngestStatusResponse;
+  status?: IngestStatusResponse;
 }
 
 export function OverviewKevMatrixPanel({
@@ -35,7 +35,7 @@ export function OverviewKevMatrixPanel({
               storage: healthStorage
                 ? t(`domain.storage.${healthStorage}` as const)
                 : t("common.notAvailableYet"),
-              upstream: status.mode
+              upstream: status?.mode
                 ? t(`domain.upstream.${status.mode}` as const)
                 : t("common.notAvailableYet"),
             })}
@@ -51,7 +51,7 @@ export function OverviewKevMatrixPanel({
               : t("common.notAvailableYet")}
           </span>
           <span className="inline-flex min-h-9 items-center rounded-sm border border-radar-border bg-radar-panel-strong px-3 font-mono text-[0.72rem] text-radar-copy/78">
-            {formatDateTime(status.checkedAt)}
+            {formatDateTime(kev?.generatedAt ?? null)}
           </span>
         </div>
       </div>

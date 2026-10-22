@@ -1,10 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-  type FeedResponse,
-  type IngestStatusResponse,
-  type KevResponse,
-  type OverviewResponse,
-  type WatchlistResponse,
   getFeed,
   getHealthStatus,
   getIngestStatus,
@@ -15,14 +10,20 @@ import {
 import { OverviewCriticalCorePanel } from "./overview-critical-core-panel";
 import { OverviewErrorState, mapQueryError } from "./overview-error-state";
 import { OverviewKevMatrixPanel } from "./overview-kev-matrix-panel";
-import { OverviewLoadingState } from "./overview-loading-state";
-import { OverviewStatsGrid } from "./overview-stats-grid";
+import {
+  OverviewTotalsCard,
+  OverviewWatchlistCard,
+} from "./overview-stats-grid";
+import { OverviewQueryPanel } from "./overview-query-panel";
+import { isOverviewUnavailable } from "./overview-query-state";
+import { useI18n } from "@/shared/i18n/i18n-provider";
 import { OverviewThreatStreamPanel } from "./overview-threat-stream-panel";
 import { OverviewWorkspaceHeader } from "./overview-workspace-header";
 import { OverviewIngestStatusPanel } from "./overview-ingest-status-panel";
 import { OVERVIEW_REFRESH_INTERVAL_MS } from "./overview-ingest-model";
 
 export function OverviewPage() {
+  const { t } = useI18n();
   const healthQuery = useQuery({
     queryKey: ["radar", "health"],
     queryFn: getHealthStatus,
@@ -54,31 +55,17 @@ export function OverviewPage() {
     refetchInterval: OVERVIEW_REFRESH_INTERVAL_MS,
   });
 
-  const isLoading =
-    healthQuery.isLoading ||
-    statusQuery.isLoading ||
-    overviewQuery.isLoading ||
-    feedQuery.isLoading ||
-    watchlistQuery.isLoading;
-
   const queryStates = [
     { label: "health", query: healthQuery },
     { label: "ingest/status", query: statusQuery },
     { label: "overview", query: overviewQuery },
     { label: "feed", query: feedQuery },
+    { label: "kev", query: kevQuery },
     { label: "watchlist", query: watchlistQuery },
   ];
 
   const failedQueries = queryStates.filter(({ query }) => query.error);
-  const hasError = failedQueries.length > 0;
-  const isRefreshing =
-    !isLoading &&
-    (healthQuery.isFetching ||
-      statusQuery.isFetching ||
-      overviewQuery.isFetching ||
-      feedQuery.isFetching ||
-      kevQuery.isFetching ||
-      watchlistQuery.isFetching);
+  const isRefreshing = queryStates.some(({ query }) => query.isFetching);
 
   const refreshAll = async () => {
     await Promise.all([
@@ -91,11 +78,7 @@ export function OverviewPage() {
     ]);
   };
 
-  if (isLoading) {
-    return <OverviewLoadingState />;
-  }
-
-  if (hasError) {
+  if (isOverviewUnavailable(queryStates.map(({ query }) => query))) {
     return (
       <OverviewErrorState
         errorDetails={failedQueries.map(({ label, query }) =>
@@ -106,11 +89,6 @@ export function OverviewPage() {
     );
   }
 
-  const overview = overviewQuery.data as OverviewResponse;
-  const feed = feedQuery.data as FeedResponse;
-  const kev = kevQuery.data as KevResponse | undefined;
-  const watchlist = watchlistQuery.data as WatchlistResponse;
-  const status = statusQuery.data as IngestStatusResponse;
   return (
     <section className="mx-auto grid w-full max-w-[1280px] gap-6">
       <OverviewWorkspaceHeader
@@ -119,28 +97,82 @@ export function OverviewPage() {
       />
 
       <div className="grid gap-6 xl:grid-cols-[minmax(288px,336px)_minmax(0,1fr)]">
-        <OverviewCriticalCorePanel
-          feed={feed}
-          overview={overview}
-          status={status}
-        />
-        <OverviewThreatStreamPanel feed={feed} />
+        <OverviewQueryPanel
+          id="core"
+          title={t("overview.coreTitle")}
+          query={overviewQuery}
+          onRetry={() => overviewQuery.refetch()}
+        >
+          {(overview) => <OverviewCriticalCorePanel overview={overview} />}
+        </OverviewQueryPanel>
+        <OverviewQueryPanel
+          id="feed"
+          title={t("overview.streamTitle")}
+          query={feedQuery}
+          onRetry={() => feedQuery.refetch()}
+        >
+          {(feed) => <OverviewThreatStreamPanel feed={feed} />}
+        </OverviewQueryPanel>
       </div>
 
-      <OverviewStatsGrid
-        overview={overview}
-        status={status}
-        watchlist={watchlist}
-      />
-
-      <OverviewIngestStatusPanel status={status} />
-
-      <OverviewKevMatrixPanel
-        healthStorage={healthQuery.data?.storage}
-        kev={kev}
-        isLoading={kevQuery.isLoading && !kevQuery.data}
-        status={status}
-      />
+      <div className="grid gap-4 lg:grid-cols-2">
+        <OverviewQueryPanel
+          id="totals"
+          title={t("overview.totalVulnerabilities")}
+          query={overviewQuery}
+          onRetry={() => overviewQuery.refetch()}
+        >
+          {(overview) => <OverviewTotalsCard overview={overview} />}
+        </OverviewQueryPanel>
+        <OverviewQueryPanel
+          id="watchlist"
+          title={t("overview.watchlistMatches")}
+          query={watchlistQuery}
+          onRetry={() => watchlistQuery.refetch()}
+        >
+          {(watchlist) => <OverviewWatchlistCard watchlist={watchlist} />}
+        </OverviewQueryPanel>
+      </div>
+      <OverviewQueryPanel
+        id="ingest"
+        title={t("ingest.title")}
+        query={statusQuery}
+        onRetry={() => statusQuery.refetch()}
+      >
+        {(status) => <OverviewIngestStatusPanel status={status} />}
+      </OverviewQueryPanel>
+      <OverviewQueryPanel
+        id="kev"
+        title={t("overview.matrixTitle")}
+        unavailableMessage={t("overview.matrixUnavailable")}
+        query={kevQuery}
+        onRetry={() => kevQuery.refetch()}
+      >
+        {(kev) => (
+          <OverviewKevMatrixPanel
+            healthStorage={
+              healthQuery.error ? undefined : healthQuery.data?.storage
+            }
+            kev={kev}
+            isLoading={false}
+            status={statusQuery.error ? undefined : statusQuery.data}
+          />
+        )}
+      </OverviewQueryPanel>
+      <OverviewQueryPanel
+        id="health"
+        title={t("overview.connectionStatus")}
+        query={healthQuery}
+        onRetry={() => healthQuery.refetch()}
+      >
+        {(health) => (
+          <p className="text-sm text-radar-copy/80">
+            {t("overview.connectionAvailable", {
+              storage: t(`domain.storage.${health.storage}` as const),
+            })}
+          </p>
+        )}
+      </OverviewQueryPanel>
     </section>
   );
 }

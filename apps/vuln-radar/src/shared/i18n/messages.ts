@@ -11,6 +11,21 @@ export const messages = {
     "common.refresh": "새로고침",
     "common.refreshing": "새로고침 중...",
     "common.retry": "다시 시도",
+    "overview.panelLoading":
+      "이 영역의 데이터를 불러오고 있습니다. 다른 영역은 계속 이용할 수 있습니다.",
+    "overview.streamEmpty": "표시할 최근 취약점이 없습니다.",
+    "overview.panelUnavailable":
+      "이 영역을 불러오지 못했습니다. 다른 영역은 계속 이용할 수 있습니다.",
+    "overview.panelStale":
+      "갱신하지 못해 이전 데이터를 표시합니다. 최신 상태와 다를 수 있습니다.",
+    "overview.panelLastLoaded":
+      "이 브라우저에서 마지막으로 받은 시각: {{time}}",
+    "overview.panelRetry": "{{panel}} 다시 시도",
+    "overview.panelRetrying": "{{panel}} 다시 확인 중",
+    "overview.aggregateScope":
+      "전체 저장 데이터 기준 집계입니다. 최근 취약점은 피드에서 별도로 확인합니다.",
+    "overview.connectionStatus": "서비스 연결",
+    "overview.connectionAvailable": "서비스 응답 확인 · {{storage}} 저장소",
     "common.backToOverview": "개요로 돌아가기",
     "common.detail": "상세 정보",
     "overview.loadingEyebrow": "대시보드 불러오는 중",
@@ -231,6 +246,21 @@ export const messages = {
     "common.refresh": "Refresh",
     "common.refreshing": "Refreshing...",
     "common.retry": "Retry",
+    "overview.panelLoading":
+      "Loading this panel. Other panels remain available.",
+    "overview.streamEmpty": "There are no recent vulnerabilities to display.",
+    "overview.panelUnavailable":
+      "This panel could not be loaded. Other panels remain available.",
+    "overview.panelStale":
+      "Refresh failed. Showing previously loaded data, which may be out of date.",
+    "overview.panelLastLoaded": "Last received by this browser: {{time}}",
+    "overview.panelRetry": "Retry {{panel}}",
+    "overview.panelRetrying": "Checking {{panel}} again",
+    "overview.aggregateScope":
+      "Counts cover all stored records. The recent vulnerability list is loaded independently in the threat stream.",
+    "overview.connectionStatus": "Service connection",
+    "overview.connectionAvailable":
+      "Service response received · {{storage}} storage",
     "common.backToOverview": "Back to overview",
     "common.detail": "Detail",
     "overview.loadingEyebrow": "Loading Dashboard",

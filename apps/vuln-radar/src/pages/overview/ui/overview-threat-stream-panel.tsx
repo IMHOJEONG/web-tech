@@ -29,6 +29,11 @@ export function OverviewThreatStreamPanel({
       </div>
 
       <div className="mt-5 grid gap-3">
+        {streamItems.length === 0 && (
+          <p className="text-sm leading-6 text-radar-copy/72">
+            {t("overview.streamEmpty")}
+          </p>
+        )}
         {streamItems.map((item) => (
           <Link
             key={item.cveId}
