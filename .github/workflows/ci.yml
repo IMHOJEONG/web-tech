@@ -101,6 +101,9 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: Typecheck squash merge preflight
+        run: pnpm typecheck:squash
+
   shared-ui:
     name: Shared UI (${{ matrix.suite }})
     timeout-minutes: 20
