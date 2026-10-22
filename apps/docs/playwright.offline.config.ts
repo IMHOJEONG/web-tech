@@ -5,7 +5,11 @@ export default defineConfig({
     testDir: './offline-e2e',
     workers: 1,
     retries: 0,
-    reporter: 'list',
+    reporter: [
+        ['list'],
+        ['json', { outputFile: 'test-results/offline-report/results.json' }],
+        ['html', { outputFolder: 'playwright-report/offline', open: 'never' }],
+    ],
     timeout: 60000,
     outputDir: 'test-results/offline',
     use: {

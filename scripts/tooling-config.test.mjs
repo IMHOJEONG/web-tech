@@ -319,6 +319,59 @@ test("CI isolates browser suites from unit tests without dropping viewport cover
   assert.doesNotMatch(browser, /continue-on-error/);
 });
 
+test("offline CI preserves reports and failure traces without uploading the whole workspace", async () => {
+  const job = ciJob("offline-reading");
+  assert.match(job, /if: \$\{\{ !cancelled\(\) \}\}/);
+  assert.match(job, /uses: actions\/upload-artifact@[a-f0-9]{40} # v7\.0\.2/);
+  assert.match(
+    job,
+    /name: docs-offline-\$\{\{ github\.run_id \}\}-\$\{\{ github\.run_attempt \}\}/,
+  );
+  assert.match(job, /retention-days: 7/);
+  assert.match(job, /include-hidden-files: false/);
+  assert.match(job, /if-no-files-found: warn/);
+  const paths = job.match(/path: \|\n((?: {12}[^\n]+\n)+)/)?.[1];
+  assert.ok(paths);
+  assert.deepEqual(
+    paths
+      .trim()
+      .split("\n")
+      .map((value) => value.trim()),
+    [
+      "apps/docs/playwright-report/offline/",
+      "apps/docs/test-results/offline-report/",
+      "apps/docs/test-results/offline/",
+    ],
+  );
+  assert.doesNotMatch(job, /continue-on-error/);
+  assert.match(job, /id: offline-tests/);
+  assert.match(
+    job,
+    /!cancelled\(\) && steps\.offline-tests\.outcome != 'skipped'/,
+  );
+  assert.match(job, /run: pnpm --filter docs verify:offline-evidence/);
+  assert.equal(
+    readJson("apps/docs/package.json").scripts["verify:offline-evidence"],
+    "node --experimental-strip-types ./scripts/verify-offline-evidence.ts",
+  );
+  const { default: probe } =
+    await import("../apps/docs/playwright.evidence.config.ts");
+  assert.equal(probe.testDir, "./evidence-fixtures");
+  assert.equal(probe.use.trace, "retain-on-failure");
+  assert.equal(probe.retries, 0);
+  assert.ok(probe.outputDir.startsWith("test-results/offline/"));
+  const { default: config } =
+    await import("../apps/docs/playwright.offline.config.ts");
+  assert.deepEqual(config.reporter, [
+    ["list"],
+    ["json", { outputFile: "test-results/offline-report/results.json" }],
+    ["html", { outputFolder: "playwright-report/offline", open: "never" }],
+  ]);
+  assert.equal(config.use.trace, "retain-on-failure");
+  assert.equal(config.retries, 0);
+  assert.equal(config.timeout, 60000);
+});
+
 test("required Test gate fails for failed, cancelled or skipped dependencies", () => {
   const gate = ciJob("test");
   assert.match(gate, /name: Test\n/);
