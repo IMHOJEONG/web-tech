@@ -35,6 +35,58 @@ NODE_ENV=production mise exec -- pnpm --filter docs test:offline
 
 최초 환경은 `pnpm --filter docs exec playwright install chromium`이 필요할 수 있다. CI는 독립 `Docs Offline Reading` job에서 `test:offline`을 실행하고 기존 lib job에서 네트워크·Worker 단위 검사를 실행한다.
 
+### CI 보고서와 실패 trace 확인
+
+오프라인 job은 list·JSON·HTML 보고서를 만들고 실패한 테스트의 trace를 유지한다. 업로드 설정은 로컬 작업 트리에 추가한 상태이며, 실제 GitHub 업로드는 커밋·푸시 후 같은 head의 실행에서 확인해야 한다.
+
+위 미커밋 표기는 최초 로컬 작성 시점이다. 이후 승인된 커밋·푸시의 최종 원격 결과는 [검증 기록](../verification/resilience/2026-10-22-navigation-evidence-retention.md)과 연결된 PR·KAN-22에서 확인한다.
+
+- 보고서: `apps/docs/playwright-report/offline/`, `apps/docs/test-results/offline-report/results.json`.
+- 실패 trace·에러 문맥: `apps/docs/test-results/offline/`. 통과한 테스트의 trace가 없는 것은 정상이다.
+- artifact: `docs-offline-<run ID>-<attempt>`, 7일 보관. 테스트 실패 후에도 업로드하며 취소·runner 종료·job timeout에서는 보관을 보장하지 않는다. 테스트 시작 전에 실패해 결과가 없으면 경고만 남긴다.
+- 전체 작업 폴더나 환경 파일은 업로드하지 않는다. 다만 trace 자체에는 DOM·네트워크 정보가 포함될 수 있으므로 실제 토큰·로그인 세션·비공개 글을 테스트에 주입하지 않는다. 공개 저장소 artifact를 비밀 저장소로 취급하지 않는다.
+
+GitHub Actions 실행 화면의 Artifacts에서 내려받거나 다음 명령을 사용한다. 아래 `RUN_ID`는 실제 실행 번호로 교체한다. 재실행이면 `ATTEMPT`도 바꾼다.
+
+```bash
+RUN_ID=실제_실행_번호
+ATTEMPT=1
+gh api "repos/IMHOJEONG/web-tech/actions/runs/${RUN_ID}/artifacts" --jq '.artifacts[] | {name, expired, expires_at}'
+gh run download "$RUN_ID" --repo IMHOJEONG/web-tech --name "docs-offline-${RUN_ID}-${ATTEMPT}" --dir "/tmp/docs-offline-${RUN_ID}"
+mise exec -- pnpm --filter docs exec playwright show-report "/tmp/docs-offline-${RUN_ID}/playwright-report/offline"
+```
+
+HTML 보고서에서 테스트의 Attachments → `offline-article-navigation` JSON을 확인한다. 실패 항목의 trace도 열 수 있으며 CLI에서는 `playwright show-trace <trace.zip 경로>`를 사용한다. 만료·업로드 실패·취소로 artifact가 없다면 당시 원인을 사후 확정하지 않고, 재실행 결과는 별도 실행 ID로 기록한다.
+
+정상 회귀는 실패 trace가 없어야 하므로 CI는 별도 `verify:offline-evidence` 단계에서 보관 probe를 실행한다. 이 명령은 공개 정적 fixture의 지정 실패만 인정하며 누락·다른 오류를 무시하지 않는다. 제품 회귀 실패를 성공으로 바꾸지 않는다.
+
+- `test-results/offline-report/results.json`: 제품 회귀 결과.
+- `test-results/offline-report/retention-probe.json`: 의도적으로 실패시킨 하위 검사 결과. 이 파일의 지정 실패 1건은 제품 회귀 실패가 아니다.
+- `test-results/offline-report/retention-probe-summary.json`: 상위 검증 성공 여부와 trace 경로·크기·SHA-256.
+- `test-results/offline/retention-probe/`: 실제 실패 trace ZIP.
+- `playwright-report/offline/retention-probe/`: probe HTML. 실행 전 이 probe의 이전 결과만 삭제하며 제품 보고서는 보존한다.
+
+서버를 시작하지 않고 probe만 확인하려면 `mise exec -- pnpm --filter docs verify:offline-evidence`를 실행한다. Chromium과 `unzip`이 필요하며 제품 `.next`·NAS·실제 인증 정보를 사용하지 않는다.
+
+### 이동 계측 해석
+
+`offline-article-navigation` schema v2는 목적지 pathname과 허용한 플래그·상태만 수집한다. query·전체 헤더·쿠키·응답 본문은 이 JSON에 저장하지 않는다.
+
+| 항목                            | 의미                                                                               |
+| ------------------------------- | ---------------------------------------------------------------------------------- |
+| `request`                       | 요청 발생. `requestId`, resource type, RSC/prefetch 여부로 연결                    |
+| `response-headers`              | 응답 상태·헤더 수신. 본문 완료나 렌더 완료는 아님                                  |
+| `response-finished`             | 같은 ID 요청의 응답 본문 수신 완료. HTTP 503도 이 이벤트가 생길 수 있음            |
+| `request-failed`                | HTTP 오류 상태와 구분되는 네트워크 요청 실패                                       |
+| `url-committed`, `body-visible` | URL·본문 검사에서 확인된 시점. 정확한 paint 시각은 아님                            |
+| `pendingRequestIds`             | 측정 종료 시 아직 완료/실패 이벤트를 관측하지 못한 요청. 실패로 자동 단정하지 않음 |
+| `nprogress.samples`             | `<html>`의 busy 초기값·변화·최종값. 같은 task의 on/off도 보존                      |
+| `nprogress.status=unavailable`  | 문서 교체나 페이지 종료 등으로 관측기를 읽지 못함. 가짜 false로 바꾸지 않음        |
+
+네트워크·URL·본문의 `ms`는 Node monotonic clock, busy 표본은 브라우저 monotonic clock을 기준으로 한다. `progressInstallation`의 시작/종료 범위로 설치 구간을 확인할 수 있지만 두 clock의 값을 정확한 동일 시각으로 빼지 않는다. 이벤트와 busy 표본은 각각 100개로 제한하며 초과 수를 표시한다.
+
+본문이 먼저 보이는 스트리밍을 막지 않도록 모든 응답 종료나 busy 해제를 추가로 기다리지 않는다. 끝나지 않은 응답은 pending으로 남긴다. 이 계측은 UI 완료 판정을 대신하지 않고 기존 HTTP 오류·동일 문서·본문 검사를 유지한다. 캐시된 이동은 새 RSC 요청이 없을 수도 있다.
+
 ## 기대 결과
 
 - 저장 전에는 글 본문을 자동 보관하지 않는다. 저장 성공 뒤에만 저장한 글 목록에 나타난다.
@@ -54,5 +106,6 @@ NODE_ENV=production mise exec -- pnpm --filter docs test:offline
 
 ## 관련 검증
 
+- [CI 증거 보관·이동 계측 회귀](../verification/resilience/2026-10-22-navigation-evidence-retention.md)
 - [실제 실행 결과와 한계](../verification/resilience/2026-10-17-content-network-offline.md)
 - [저장·보안 경계 결정](../architecture/adr-0015-explicit-offline-article-snapshots.md)
