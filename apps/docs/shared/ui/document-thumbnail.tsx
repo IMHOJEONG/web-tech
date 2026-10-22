@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import { cn } from '@web-tech/ui/lib/utils'
 import Image from 'next/image'
 import {
@@ -34,25 +37,49 @@ export function DocumentThumbnail({
     thumbnail,
     unoptimized = false,
 }: DocumentThumbnailProps) {
+    const [failedSources, setFailedSources] = useState<string[]>([])
+    const primary = thumbnail ?? getFallbackThumbnail(fallback)
+    const backup = getFallbackThumbnail(fallback)
+    const src = failedSources.includes(primary) ? backup : primary
+    const unavailable = failedSources.includes(src)
     return (
         <div
+            data-thumbnail-state={
+                unavailable
+                    ? 'unavailable'
+                    : src !== primary
+                      ? 'fallback'
+                      : 'primary'
+            }
             className={cn(
                 'relative overflow-hidden bg-surface-container-high',
                 className
             )}
         >
-            <Image
-                src={thumbnail ?? getFallbackThumbnail(fallback)}
-                alt={alt ?? ''}
-                fill
-                sizes={sizes}
-                className={cn('object-cover', imageClassName)}
-                quality={90}
-                priority={priority}
-                placeholder="blur"
-                blurDataURL="/image/blur-image.webp"
-                unoptimized={unoptimized}
-            />
+            {unavailable ? (
+                <span
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-surface-container-high"
+                />
+            ) : (
+                <Image
+                    src={src}
+                    alt={alt ?? ''}
+                    fill
+                    sizes={sizes}
+                    className={cn('object-cover', imageClassName)}
+                    quality={90}
+                    priority={priority}
+                    placeholder="blur"
+                    blurDataURL="/image/blur-image.webp"
+                    unoptimized={unoptimized}
+                    onError={() =>
+                        setFailedSources((current) =>
+                            current.includes(src) ? current : [...current, src]
+                        )
+                    }
+                />
+            )}
         </div>
     )
 }

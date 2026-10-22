@@ -1,4 +1,18 @@
 {
+    "offline": {
+        "label": "Offline reading",
+        "save": "Save offline",
+        "update": "Update saved copy",
+        "saving": "Saving…",
+        "notReady": "The article is still loading. Wait for the content and save again.",
+        "saved": "Saved in this browser. Open Saved articles to read without a connection.",
+        "partial": "Text saved. {count} images could not be saved and show a placeholder instead.",
+        "library": "Saved articles",
+        "notice": "Only explicitly saved public articles are stored. Copies may be outdated or removed when browser storage is cleared.",
+        "limit": "You can save up to 10 articles. Delete a copy in Saved articles and try again.",
+        "size": "This article exceeds the offline size limit. Please read it online.",
+        "error": "Could not save. Check your connection and browser storage permissions, then try again."
+    },
     "category": {
         "index": {
             "label": "Browse by topic",
@@ -368,6 +382,8 @@
     },
     "docsIndex": {
         "discovery": {
+            "more": "Explore more documents",
+            "recommendations": "Suggested searches",
             "tags": "Browse tags",
             "allTags": "All tags",
             "moreTags": "More tags",
@@ -409,6 +425,10 @@
         "filters": {
             "eyebrow": "Browse Controls",
             "title": "{count} documents match this view",
+            "toggle": "Filter and sort",
+            "toggleSearch": "Filter",
+            "active": "Active filters",
+            "remove": "Clear {label} filter",
             "sections": {
                 "all": "All",
                 "web": "Web",

@@ -39,7 +39,7 @@ test('sitemap uses the public content pipeline', async (t) => {
                 get: async () => {
                     requests++
                     if (failure) throw new Error('Upstream unavailable')
-                    return { ok: true, json: async () => payload }
+                    return Response.json(payload)
                 },
             }
         return require(id)

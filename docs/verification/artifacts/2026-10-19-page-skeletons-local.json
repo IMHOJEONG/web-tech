@@ -1,0 +1,1723 @@
+{
+  "checkedAt": "2026-10-19T05:37:54.458Z",
+  "baseCommit": "29acd24d10b7f10bb3de06ef8bf79c2b8421fea7",
+  "state": "Uncommitted worktree; unrelated TCP draft changes excluded from this verification scope.",
+  "environment": {
+    "mode": "Next.js development",
+    "origin": "http://127.0.0.1:3011",
+    "node": "v24.12.0",
+    "next": "16.3.8",
+    "remoteIndex": false
+  },
+  "method": "Real server response markup was parsed and mounted in the test browser after measuring the ready page. This is a geometry check, not a real-time CLS or network streaming timing measurement.",
+  "scope": {
+    "themes": ["light", "dark"],
+    "reducedMotion": "reduce",
+    "viewports": [
+      {
+        "width": 390,
+        "height": 844,
+        "locale": "ko"
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "locale": "en"
+      },
+      {
+        "width": 1280,
+        "height": 800,
+        "locale": "ko"
+      }
+    ],
+    "narrowFilterViewport": {
+      "width": 320,
+      "height": 844
+    },
+    "pendingGeometrySamples": 66
+  },
+  "attempts": [
+    {
+      "tests": 33,
+      "passed": 18,
+      "failed": 15,
+      "skipped": 0,
+      "note": "Initial test selectors counted a nested empty search status and a missing data-dependent h1. Also found the ancestor category fallback instead of the child skeleton; removed category loading inheritance and used page-local boundaries."
+    },
+    {
+      "tests": 33,
+      "passed": 33,
+      "failed": 0,
+      "skipped": 0,
+      "note": "Initial boundary and test selector fixes."
+    },
+    {
+      "tests": 192,
+      "passed": 174,
+      "failed": 6,
+      "skipped": 12,
+      "note": "320px multi-filter summary wrapped to 48px while the placeholder reserved 44px. Fixed by sharing the actual control bar; count remains unknown as an ellipsis."
+    },
+    {
+      "tests": 126,
+      "passed": 117,
+      "failed": 3,
+      "skipped": 6,
+      "note": "All 69 skeleton tests passed. Existing filter helper matched current controls plus the hidden next streamed tree."
+    },
+    {
+      "tests": 192,
+      "passed": 174,
+      "failed": 6,
+      "skipped": 12,
+      "note": "A helper-only fix was insufficient: direct click/focus selectors still matched both trees. Unified all filter-operation selectors with visible scope and an exactly-one-visible assertion."
+    },
+    {
+      "tests": 27,
+      "passed": 21,
+      "failed": 0,
+      "skipped": 6,
+      "note": "Focused filter/order/navigation recheck after all selectors were aligned."
+    }
+  ],
+  "finalRun": {
+    "stats": {
+      "startTime": "2026-10-19T05:35:17.633Z",
+      "duration": 149194.523,
+      "expected": 180,
+      "skipped": 12,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "topLevelErrors": 0
+  },
+  "skipped": [
+    {
+      "title": "preserves filter and sort state in the URL",
+      "project": "chromium-tablet"
+    },
+    {
+      "title": "keeps the search query when a section filter changes",
+      "project": "chromium-tablet"
+    },
+    {
+      "title": "resets a stale page when a filter changes",
+      "project": "chromium-tablet"
+    },
+    {
+      "title": "preserves filter and sort state in the URL",
+      "project": "chromium-desktop"
+    },
+    {
+      "title": "keeps the search query when a section filter changes",
+      "project": "chromium-desktop"
+    },
+    {
+      "title": "resets a stale page when a filter changes",
+      "project": "chromium-desktop"
+    },
+    {
+      "title": "lead card stays inside the viewport at narrow and intermediate widths",
+      "project": "chromium-mobile"
+    },
+    {
+      "title": "lead card stays inside the viewport at narrow and intermediate widths",
+      "project": "chromium-tablet"
+    },
+    {
+      "title": "cards indicate interaction through title color and keyboard focus without arrows",
+      "project": "chromium-mobile"
+    },
+    {
+      "title": "cards indicate interaction through title color and keyboard focus without arrows",
+      "project": "chromium-tablet"
+    },
+    {
+      "title": "UI/UX cards fit 320px and intermediate widths",
+      "project": "chromium-mobile"
+    },
+    {
+      "title": "UI/UX cards fit 320px and intermediate widths",
+      "project": "chromium-tablet"
+    }
+  ],
+  "measurements": [
+    {
+      "path": "/ko/docs",
+      "project": "chromium-mobile",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 130
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 130,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 395,
+      "pendingAnchor": 395,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs?q=stream&tag=nodejs",
+      "project": "chromium-mobile",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 130
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 130,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 427,
+      "pendingAnchor": 427,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs?section=web&sort=title&tag=react&collection=react-boundaries",
+      "project": "chromium-mobile",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 272,
+        "top": 65,
+        "titleTop": 130
+      },
+      "after": {
+        "left": 24,
+        "width": 272,
+        "top": 65,
+        "titleTop": 130,
+        "pageWidth": 320,
+        "viewport": 320,
+        "animations": 0
+      },
+      "readyAnchor": 567,
+      "pendingAnchor": 567,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/feed",
+      "project": "chromium-mobile",
+      "theme": "light",
+      "before": {
+        "left": 0,
+        "width": 390,
+        "top": 65,
+        "titleTop": 162
+      },
+      "after": {
+        "left": 0,
+        "width": 390,
+        "top": 65,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 117,
+      "pendingAnchor": 117,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/web",
+      "project": "chromium-mobile",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 125
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 125,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 97,
+      "pendingAnchor": 97,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/mobile",
+      "project": "chromium-mobile",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 125
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 125,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 97,
+      "pendingAnchor": 97,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/ui-ux",
+      "project": "chromium-mobile",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 137.5
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 137.5,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 389.5,
+      "pendingAnchor": 389.5,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/category",
+      "project": "chromium-mobile",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 162
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 162,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 399,
+      "pendingAnchor": 399,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/category/fe",
+      "project": "chromium-mobile",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 162
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 162,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 335,
+      "pendingAnchor": 335,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/category/fe/react",
+      "project": "chromium-mobile",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 162
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 162,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 607,
+      "pendingAnchor": 579,
+      "delta": -28,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs/web/javascript-event-loop-runtime",
+      "project": "chromium-mobile",
+      "theme": "light",
+      "before": {
+        "left": 28,
+        "width": 334,
+        "top": 85,
+        "titleTop": 85
+      },
+      "after": {
+        "left": 28,
+        "width": 334,
+        "top": 85,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 85,
+      "pendingAnchor": 85,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs",
+      "project": "chromium-mobile",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 130
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 130,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 395,
+      "pendingAnchor": 395,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs?q=stream&tag=nodejs",
+      "project": "chromium-mobile",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 130
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 130,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 427,
+      "pendingAnchor": 427,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs?section=web&sort=title&tag=react&collection=react-boundaries",
+      "project": "chromium-mobile",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 272,
+        "top": 65,
+        "titleTop": 130
+      },
+      "after": {
+        "left": 24,
+        "width": 272,
+        "top": 65,
+        "titleTop": 130,
+        "pageWidth": 320,
+        "viewport": 320,
+        "animations": 0
+      },
+      "readyAnchor": 567,
+      "pendingAnchor": 567,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/feed",
+      "project": "chromium-mobile",
+      "theme": "dark",
+      "before": {
+        "left": 0,
+        "width": 390,
+        "top": 65,
+        "titleTop": 162
+      },
+      "after": {
+        "left": 0,
+        "width": 390,
+        "top": 65,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 117,
+      "pendingAnchor": 117,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/web",
+      "project": "chromium-mobile",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 125
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 125,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 97,
+      "pendingAnchor": 97,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/mobile",
+      "project": "chromium-mobile",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 125
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 125,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 97,
+      "pendingAnchor": 97,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/ui-ux",
+      "project": "chromium-mobile",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 137.5
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 137.5,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 389.5,
+      "pendingAnchor": 389.5,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/category",
+      "project": "chromium-mobile",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 162
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 162,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 399,
+      "pendingAnchor": 399,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/category/fe",
+      "project": "chromium-mobile",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 162
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 162,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 335,
+      "pendingAnchor": 335,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/category/fe/react",
+      "project": "chromium-mobile",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 162
+      },
+      "after": {
+        "left": 24,
+        "width": 342,
+        "top": 65,
+        "titleTop": 162,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 607,
+      "pendingAnchor": 579,
+      "delta": -28,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs/web/javascript-event-loop-runtime",
+      "project": "chromium-mobile",
+      "theme": "dark",
+      "before": {
+        "left": 28,
+        "width": 334,
+        "top": 85,
+        "titleTop": 85
+      },
+      "after": {
+        "left": 28,
+        "width": 334,
+        "top": 85,
+        "pageWidth": 390,
+        "viewport": 390,
+        "animations": 0
+      },
+      "readyAnchor": 85,
+      "pendingAnchor": 85,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/docs",
+      "project": "chromium-tablet",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 142
+      },
+      "after": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 142,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 383,
+      "pendingAnchor": 383,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/docs?q=stream&tag=nodejs",
+      "project": "chromium-tablet",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 142
+      },
+      "after": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 142,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 447,
+      "pendingAnchor": 447,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/docs?section=web&sort=title&tag=react&collection=react-boundaries",
+      "project": "chromium-tablet",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 272,
+        "top": 65,
+        "titleTop": 130
+      },
+      "after": {
+        "left": 24,
+        "width": 272,
+        "top": 65,
+        "titleTop": 130,
+        "pageWidth": 320,
+        "viewport": 320,
+        "animations": 0
+      },
+      "readyAnchor": 567,
+      "pendingAnchor": 567,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/feed",
+      "project": "chromium-tablet",
+      "theme": "light",
+      "before": {
+        "left": 0,
+        "width": 768,
+        "top": 65,
+        "titleTop": 166
+      },
+      "after": {
+        "left": 0,
+        "width": 768,
+        "top": 65,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 117,
+      "pendingAnchor": 117,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/web",
+      "project": "chromium-tablet",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 133
+      },
+      "after": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 133,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 105,
+      "pendingAnchor": 105,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/mobile",
+      "project": "chromium-tablet",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 133
+      },
+      "after": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 133,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 105,
+      "pendingAnchor": 105,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/ui-ux",
+      "project": "chromium-tablet",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 145.5
+      },
+      "after": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 145.5,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 393.5,
+      "pendingAnchor": 393.5,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/category",
+      "project": "chromium-tablet",
+      "theme": "light",
+      "before": {
+        "left": 280,
+        "width": 464,
+        "top": 65,
+        "titleTop": 178
+      },
+      "after": {
+        "left": 280,
+        "width": 464,
+        "top": 65,
+        "titleTop": 178,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 431,
+      "pendingAnchor": 431,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/category/fe",
+      "project": "chromium-tablet",
+      "theme": "light",
+      "before": {
+        "left": 280,
+        "width": 464,
+        "top": 65,
+        "titleTop": 178
+      },
+      "after": {
+        "left": 280,
+        "width": 464,
+        "top": 65,
+        "titleTop": 178,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 395,
+      "pendingAnchor": 395,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/category/fe/react",
+      "project": "chromium-tablet",
+      "theme": "light",
+      "before": {
+        "left": 280,
+        "width": 464,
+        "top": 65,
+        "titleTop": 178
+      },
+      "after": {
+        "left": 280,
+        "width": 464,
+        "top": 65,
+        "titleTop": 178,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 597,
+      "pendingAnchor": 549,
+      "delta": -48,
+      "errors": []
+    },
+    {
+      "path": "/en/docs/web/javascript-event-loop-runtime",
+      "project": "chromium-tablet",
+      "theme": "light",
+      "before": {
+        "left": 44,
+        "width": 680,
+        "top": 89,
+        "titleTop": 89
+      },
+      "after": {
+        "left": 44,
+        "width": 680,
+        "top": 89,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 89,
+      "pendingAnchor": 89,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/docs",
+      "project": "chromium-tablet",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 142
+      },
+      "after": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 142,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 383,
+      "pendingAnchor": 383,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/docs?q=stream&tag=nodejs",
+      "project": "chromium-tablet",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 142
+      },
+      "after": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 142,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 447,
+      "pendingAnchor": 447,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/docs?section=web&sort=title&tag=react&collection=react-boundaries",
+      "project": "chromium-tablet",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 272,
+        "top": 65,
+        "titleTop": 130
+      },
+      "after": {
+        "left": 24,
+        "width": 272,
+        "top": 65,
+        "titleTop": 130,
+        "pageWidth": 320,
+        "viewport": 320,
+        "animations": 0
+      },
+      "readyAnchor": 567,
+      "pendingAnchor": 567,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/feed",
+      "project": "chromium-tablet",
+      "theme": "dark",
+      "before": {
+        "left": 0,
+        "width": 768,
+        "top": 65,
+        "titleTop": 166
+      },
+      "after": {
+        "left": 0,
+        "width": 768,
+        "top": 65,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 117,
+      "pendingAnchor": 117,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/web",
+      "project": "chromium-tablet",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 133
+      },
+      "after": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 133,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 105,
+      "pendingAnchor": 105,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/mobile",
+      "project": "chromium-tablet",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 133
+      },
+      "after": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 133,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 105,
+      "pendingAnchor": 105,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/ui-ux",
+      "project": "chromium-tablet",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 145.5
+      },
+      "after": {
+        "left": 24,
+        "width": 720,
+        "top": 65,
+        "titleTop": 145.5,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 393.5,
+      "pendingAnchor": 393.5,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/category",
+      "project": "chromium-tablet",
+      "theme": "dark",
+      "before": {
+        "left": 280,
+        "width": 464,
+        "top": 65,
+        "titleTop": 178
+      },
+      "after": {
+        "left": 280,
+        "width": 464,
+        "top": 65,
+        "titleTop": 178,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 431,
+      "pendingAnchor": 431,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/category/fe",
+      "project": "chromium-tablet",
+      "theme": "dark",
+      "before": {
+        "left": 280,
+        "width": 464,
+        "top": 65,
+        "titleTop": 178
+      },
+      "after": {
+        "left": 280,
+        "width": 464,
+        "top": 65,
+        "titleTop": 178,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 395,
+      "pendingAnchor": 395,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/en/category/fe/react",
+      "project": "chromium-tablet",
+      "theme": "dark",
+      "before": {
+        "left": 280,
+        "width": 464,
+        "top": 65,
+        "titleTop": 178
+      },
+      "after": {
+        "left": 280,
+        "width": 464,
+        "top": 65,
+        "titleTop": 178,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 597,
+      "pendingAnchor": 549,
+      "delta": -48,
+      "errors": []
+    },
+    {
+      "path": "/en/docs/web/javascript-event-loop-runtime",
+      "project": "chromium-tablet",
+      "theme": "dark",
+      "before": {
+        "left": 44,
+        "width": 680,
+        "top": 89,
+        "titleTop": 89
+      },
+      "after": {
+        "left": 44,
+        "width": 680,
+        "top": 89,
+        "pageWidth": 768,
+        "viewport": 768,
+        "animations": 0
+      },
+      "readyAnchor": 89,
+      "pendingAnchor": 89,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs",
+      "project": "chromium-desktop",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 142
+      },
+      "after": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 142,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 309,
+      "pendingAnchor": 309,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs?q=stream&tag=nodejs",
+      "project": "chromium-desktop",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 142
+      },
+      "after": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 142,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 373,
+      "pendingAnchor": 373,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs?section=web&sort=title&tag=react&collection=react-boundaries",
+      "project": "chromium-desktop",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 272,
+        "top": 65,
+        "titleTop": 130
+      },
+      "after": {
+        "left": 24,
+        "width": 272,
+        "top": 65,
+        "titleTop": 130,
+        "pageWidth": 320,
+        "viewport": 320,
+        "animations": 0
+      },
+      "readyAnchor": 567,
+      "pendingAnchor": 567,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/feed",
+      "project": "chromium-desktop",
+      "theme": "light",
+      "before": {
+        "left": 0,
+        "width": 1280,
+        "top": 65,
+        "titleTop": 199.375
+      },
+      "after": {
+        "left": 0,
+        "width": 1280,
+        "top": 65,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 125,
+      "pendingAnchor": 125,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/web",
+      "project": "chromium-desktop",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 133
+      },
+      "after": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 133,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 105,
+      "pendingAnchor": 105,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/mobile",
+      "project": "chromium-desktop",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 133
+      },
+      "after": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 133,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 105,
+      "pendingAnchor": 105,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/ui-ux",
+      "project": "chromium-desktop",
+      "theme": "light",
+      "before": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 145.5
+      },
+      "after": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 145.5,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 405.5,
+      "pendingAnchor": 405.5,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/category",
+      "project": "chromium-desktop",
+      "theme": "light",
+      "before": {
+        "left": 280,
+        "width": 976,
+        "top": 65,
+        "titleTop": 178
+      },
+      "after": {
+        "left": 280,
+        "width": 976,
+        "top": 65,
+        "titleTop": 178,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 335,
+      "pendingAnchor": 335,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/category/fe",
+      "project": "chromium-desktop",
+      "theme": "light",
+      "before": {
+        "left": 280,
+        "width": 976,
+        "top": 65,
+        "titleTop": 178
+      },
+      "after": {
+        "left": 280,
+        "width": 976,
+        "top": 65,
+        "titleTop": 178,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 327,
+      "pendingAnchor": 327,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/category/fe/react",
+      "project": "chromium-desktop",
+      "theme": "light",
+      "before": {
+        "left": 280,
+        "width": 976,
+        "top": 65,
+        "titleTop": 178
+      },
+      "after": {
+        "left": 280,
+        "width": 976,
+        "top": 65,
+        "titleTop": 178,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 411,
+      "pendingAnchor": 403,
+      "delta": -8,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs/web/javascript-event-loop-runtime",
+      "project": "chromium-desktop",
+      "theme": "light",
+      "before": {
+        "left": 316,
+        "width": 920,
+        "top": 93,
+        "titleTop": 93
+      },
+      "after": {
+        "left": 316,
+        "width": 920,
+        "top": 93,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 93,
+      "pendingAnchor": 93,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs",
+      "project": "chromium-desktop",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 142
+      },
+      "after": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 142,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 309,
+      "pendingAnchor": 309,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs?q=stream&tag=nodejs",
+      "project": "chromium-desktop",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 142
+      },
+      "after": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 142,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 373,
+      "pendingAnchor": 373,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs?section=web&sort=title&tag=react&collection=react-boundaries",
+      "project": "chromium-desktop",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 272,
+        "top": 65,
+        "titleTop": 130
+      },
+      "after": {
+        "left": 24,
+        "width": 272,
+        "top": 65,
+        "titleTop": 130,
+        "pageWidth": 320,
+        "viewport": 320,
+        "animations": 0
+      },
+      "readyAnchor": 567,
+      "pendingAnchor": 567,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/feed",
+      "project": "chromium-desktop",
+      "theme": "dark",
+      "before": {
+        "left": 0,
+        "width": 1280,
+        "top": 65,
+        "titleTop": 199.375
+      },
+      "after": {
+        "left": 0,
+        "width": 1280,
+        "top": 65,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 125,
+      "pendingAnchor": 125,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/web",
+      "project": "chromium-desktop",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 133
+      },
+      "after": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 133,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 105,
+      "pendingAnchor": 105,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/mobile",
+      "project": "chromium-desktop",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 133
+      },
+      "after": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 133,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 105,
+      "pendingAnchor": 105,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/ui-ux",
+      "project": "chromium-desktop",
+      "theme": "dark",
+      "before": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 145.5
+      },
+      "after": {
+        "left": 24,
+        "width": 1232,
+        "top": 65,
+        "titleTop": 145.5,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 405.5,
+      "pendingAnchor": 405.5,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/category",
+      "project": "chromium-desktop",
+      "theme": "dark",
+      "before": {
+        "left": 280,
+        "width": 976,
+        "top": 65,
+        "titleTop": 178
+      },
+      "after": {
+        "left": 280,
+        "width": 976,
+        "top": 65,
+        "titleTop": 178,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 335,
+      "pendingAnchor": 335,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/category/fe",
+      "project": "chromium-desktop",
+      "theme": "dark",
+      "before": {
+        "left": 280,
+        "width": 976,
+        "top": 65,
+        "titleTop": 178
+      },
+      "after": {
+        "left": 280,
+        "width": 976,
+        "top": 65,
+        "titleTop": 178,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 327,
+      "pendingAnchor": 327,
+      "delta": 0,
+      "errors": []
+    },
+    {
+      "path": "/ko/category/fe/react",
+      "project": "chromium-desktop",
+      "theme": "dark",
+      "before": {
+        "left": 280,
+        "width": 976,
+        "top": 65,
+        "titleTop": 178
+      },
+      "after": {
+        "left": 280,
+        "width": 976,
+        "top": 65,
+        "titleTop": 178,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 411,
+      "pendingAnchor": 403,
+      "delta": -8,
+      "errors": []
+    },
+    {
+      "path": "/ko/docs/web/javascript-event-loop-runtime",
+      "project": "chromium-desktop",
+      "theme": "dark",
+      "before": {
+        "left": 316,
+        "width": 920,
+        "top": 93,
+        "titleTop": 93
+      },
+      "after": {
+        "left": 316,
+        "width": 920,
+        "top": 93,
+        "pageWidth": 1280,
+        "viewport": 1280,
+        "animations": 0
+      },
+      "readyAnchor": 93,
+      "pendingAnchor": 93,
+      "delta": 0,
+      "errors": []
+    }
+  ],
+  "limitations": [
+    "No production build, public deployment, CLS metric, real network throttling, Safari/Firefox, real device or screen-reader test.",
+    "Data-dependent filter rows, empty results, titles, images and body lengths can still change page height.",
+    "Viewport/locale samples are not a full locale by viewport Cartesian product."
+  ]
+}

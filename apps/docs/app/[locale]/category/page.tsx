@@ -9,6 +9,8 @@ import {
 import { MainCategoryCard } from '~/entities/category/ui/main-category-card'
 import { getMainCategoryOverview } from '~/lib/get-category'
 import { buildPageMetadata } from '~/lib/localized-metadata'
+import { Suspense } from 'react'
+import { CategoryIndexPending } from '~/widgets/category-browser/ui/category-pending'
 
 export async function generateMetadata(): Promise<Metadata> {
     const t = await getTranslations('metadata.pages.category')
@@ -22,7 +24,15 @@ export async function generateMetadata(): Promise<Metadata> {
     })
 }
 
-export default async function Page() {
+export default function Page() {
+    return (
+        <Suspense fallback={<CategoryIndexPending />}>
+            <CategoryIndexResults />
+        </Suspense>
+    )
+}
+
+async function CategoryIndexResults() {
     const t = await getTranslations('category')
     const summaries = await getTranslations('category.summaries')
     const mainCategories = categoryTree.map((category) => ({

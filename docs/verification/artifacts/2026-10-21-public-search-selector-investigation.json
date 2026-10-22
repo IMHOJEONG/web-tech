@@ -1,0 +1,334 @@
+{
+  "issue": "KAN-22",
+  "date": "2026-10-21",
+  "mainSha": "527d4b054b4f70137f1fb1b896d8a11ccf392b8c",
+  "deploymentId": "dpl_36mKXdrotfsnSPBetYgdKTDofho7",
+  "origin": "https://heap-forge.app",
+  "conclusion": "False negative in the diagnostic selector, not a reproduced search service outage or Chromium-specific failure.",
+  "cause": {
+    "originalLocator": "getByRole('button', { name: '문서 검색', exact: true })",
+    "koreanTriggerName": "문서 검색",
+    "koreanSubmitName": "문서 검색",
+    "visibleMatchesBefore": 1,
+    "visibleMatchesAfter": 2,
+    "actualUniqueHeaderExpanded": "true",
+    "englishTriggerName": "Search docs",
+    "englishSubmitName": "Search documents",
+    "englishMatchesAfter": 1,
+    "strictReadRejections": 10,
+    "correctedLocator": "getByRole('banner').locator('form button[type=\"button\"][aria-expanded][aria-controls]')"
+  },
+  "fullFlowPassed": 20,
+  "pageReloadChecks": "Search submission and subsequent article Link retain window identity and make zero document navigation requests in every passing full-flow case.",
+  "runs": {
+    "headless": {
+      "recordedAt": "2026-10-21T14:13:28.938Z",
+      "browser": "151.0.7922.34",
+      "elapsedClock": 129745,
+      "results": [
+        {
+          "iteration": 0,
+          "locale": "ko",
+          "width": 1280,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 2,
+          "ambiguousReadRejected": true,
+          "articlePath": "/ko/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 0,
+          "locale": "ko",
+          "width": 390,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 2,
+          "ambiguousReadRejected": true,
+          "articlePath": "/ko/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 0,
+          "locale": "en",
+          "width": 1280,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 1,
+          "articlePath": "/en/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 0,
+          "locale": "en",
+          "width": 390,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 1,
+          "articlePath": "/en/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 1,
+          "locale": "ko",
+          "width": 1280,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 2,
+          "ambiguousReadRejected": true,
+          "articlePath": "/ko/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 1,
+          "locale": "ko",
+          "width": 390,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 2,
+          "ambiguousReadRejected": true,
+          "articlePath": "/ko/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 1,
+          "locale": "en",
+          "width": 1280,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 1,
+          "articlePath": "/en/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 1,
+          "locale": "en",
+          "width": 390,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 1,
+          "articlePath": "/en/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 2,
+          "locale": "ko",
+          "width": 1280,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 2,
+          "ambiguousReadRejected": true,
+          "articlePath": "/ko/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 2,
+          "locale": "ko",
+          "width": 390,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 2,
+          "ambiguousReadRejected": true,
+          "articlePath": "/ko/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 2,
+          "locale": "en",
+          "width": 1280,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 1,
+          "articlePath": "/en/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 2,
+          "locale": "en",
+          "width": 390,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 1,
+          "articlePath": "/en/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        }
+      ],
+      "reportSha256": "7b1a916014002183dbe2754d19c63257829515b689d2e4ac94ec7456c75101f3"
+    },
+    "headed": {
+      "recordedAt": "2026-10-21T14:12:09.961Z",
+      "browser": "156.0.8078.48",
+      "elapsedClock": 47657,
+      "results": [
+        {
+          "iteration": 0,
+          "locale": "ko",
+          "width": 1280,
+          "headed": true,
+          "channel": "chrome",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 2,
+          "ambiguousReadRejected": true,
+          "articlePath": "/ko/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 0,
+          "locale": "ko",
+          "width": 390,
+          "headed": true,
+          "channel": "chrome",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 2,
+          "ambiguousReadRejected": true,
+          "articlePath": "/ko/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 0,
+          "locale": "en",
+          "width": 1280,
+          "headed": true,
+          "channel": "chrome",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 1,
+          "articlePath": "/en/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 0,
+          "locale": "en",
+          "width": 390,
+          "headed": true,
+          "channel": "chrome",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 1,
+          "articlePath": "/en/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        }
+      ],
+      "reportSha256": "103b367b12f7d334ca140b01892f1c89e9ec37ca1617f39ab5a5cfc3e0b9979c"
+    },
+    "retained": {
+      "recordedAt": "2026-10-21T14:16:40.432Z",
+      "browser": "151.0.7922.34",
+      "elapsedClock": 59569,
+      "results": [
+        {
+          "iteration": 0,
+          "locale": "ko",
+          "width": 1280,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 2,
+          "ambiguousReadRejected": true,
+          "articlePath": "/ko/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 0,
+          "locale": "ko",
+          "width": 390,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 2,
+          "ambiguousReadRejected": true,
+          "articlePath": "/ko/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 0,
+          "locale": "en",
+          "width": 1280,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 1,
+          "articlePath": "/en/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 0,
+          "locale": "en",
+          "width": 390,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 1,
+          "articlePath": "/en/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        }
+      ],
+      "reportSha256": "24d8326a5d100bea3516a0b681b36d25fc941b9a86193d83293be8569b64b27e"
+    }
+  },
+  "retainedVerifier": {
+    "path": "apps/docs/scripts/verify-public-search.ts",
+    "sha256": "bb6ad35af03913e596b657836259a3680c63554e555bda79b1de8fdc21691eef",
+    "typecheck": "passed with --ignoreConfig --strict --erasableSyntaxOnly",
+    "eslint": "passed",
+    "runtimePostMoveCases": 4
+  },
+  "environmentComparison": {
+    "headless": "Bundled Chromium 151.0.7922.34",
+    "headed": "Installed Chrome 156.0.8078.48, automation with a temporary profile; not a human-operated test",
+    "viewports": [
+      [1280, 844],
+      [390, 844]
+    ],
+    "locales": ["ko", "en"],
+    "stateChangingActions": "none beyond client-side search input and GET navigations; no authentication, publication or storage calls",
+    "directVercelAlias": {
+      "requested": "https://web-tech-log.vercel.app/ko/web",
+      "status": 307,
+      "location": "https://heap-forge.app/ko/web",
+      "independentOriginComparison": false
+    }
+  },
+  "separateWitnesses": {
+    "inputMethods": "Trusted mouse and Enter events opened search in headless Chromium and headed Chrome; an untrusted DOM click was a diagnostic control only.",
+    "unchangedOriginalProbe": "The unscoped original failed again in both viewports while the narrowed selector passed.",
+    "coldFirstCard": "The earlier DOMContentLoaded-only document replacement was not independently root-caused and is not evidence of this search-selector defect."
+  },
+  "sourceState": "At investigation time the probe and documentation changes were uncommitted. This is a historical snapshot; later commit, PR and CI status is tracked in KAN-22 and the linked PR. Runtime UI, translations, dependencies, CI and deployment are unchanged.",
+  "limitations": [
+    "No Safari/Firefox/physical-device or existing user-profile test",
+    "No conclusion about the physical cause of the original KAN-22 CI delay",
+    "Historical name-collision assertion reflects current translations and must be revisited if product labels change"
+  ],
+  "officialReference": "https://playwright.dev/docs/locators#strictness"
+}

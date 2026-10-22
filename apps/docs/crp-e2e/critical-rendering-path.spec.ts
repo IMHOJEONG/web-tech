@@ -1,9 +1,11 @@
 import { expect, test, type Page } from '@playwright/test'
 import type { Server } from 'node:http'
+import { setTimeout as wait } from 'node:timers/promises'
 
 import { createLabServer } from '../../../docs/examples/critical-rendering-path-lab/server.ts'
 
 const DELAY_MS = 240
+const TIMESTAMP_TOLERANCE_MS = 1
 
 type ResourceTimingSnapshot = {
     responseEnd: number
@@ -90,6 +92,40 @@ function readInjectedDelay(timing: ResourceTimingSnapshot) {
         ?.duration
 }
 
+async function readLateHeroTiming(page: Page) {
+    await expect(page.locator('img.hero')).toBeVisible()
+    const hero = await requireResourceTiming(page, '/assets/hero.svg')
+    const script = await requireResourceTiming(page, '/assets/late-lcp.js')
+    const marks = await page.evaluate(() => ({
+        scheduled:
+            performance.getEntriesByName('late-lcp-scheduled')[0]?.startTime,
+        discovered: performance.getEntriesByName('late-lcp-discovered')[0]
+            ?.startTime,
+    }))
+
+    if (marks.scheduled === undefined || marks.discovered === undefined) {
+        throw new Error('Missing late LCP discovery marks.')
+    }
+
+    return {
+        hero,
+        script,
+        scheduled: marks.scheduled,
+        discovered: marks.discovered,
+    }
+}
+
+function expectDelayedHero(
+    timing: Awaited<ReturnType<typeof readLateHeroTiming>>
+) {
+    expect(timing.scheduled).toBeGreaterThanOrEqual(timing.script.responseEnd)
+    // All timestamps belong to one navigation; allow only timestamp precision noise.
+    expect(timing.discovered - timing.scheduled).toBeGreaterThanOrEqual(
+        DELAY_MS - TIMESTAMP_TOLERANCE_MS
+    )
+    expect(timing.hero.startTime).toBeGreaterThanOrEqual(timing.discovered)
+}
+
 test('slow CSS finishes before the first contentful paint', async ({
     page,
 }) => {
@@ -156,20 +192,68 @@ test('a parser-blocking script executes before DOMContentLoaded', async ({
     )
 })
 
-test('late LCP discovery starts the hero request after the baseline', async ({
+for (const baselineDelayMs of [0, 500]) {
+    test(`late LCP discovery waits before requesting the hero (baseline delay ${baselineDelayMs}ms)`, async ({
+        page,
+    }, testInfo) => {
+        await page.route('**/baseline?*', async (route) => {
+            const response = await route.fetch()
+            await wait(baselineDelayMs)
+            await route.fulfill({ response })
+        })
+        await page.goto(`${baseUrl}/baseline?delay=${DELAY_MS}`, {
+            waitUntil: 'load',
+        })
+        const baselineHero = await requireResourceTiming(
+            page,
+            '/assets/hero.svg'
+        )
+        await expect(page.locator('img.hero')).toHaveAttribute(
+            'src',
+            '/assets/hero.svg'
+        )
+        await expect(page.locator('#hero-slot')).toHaveCount(0)
+
+        await page.goto(`${baseUrl}/late-lcp?delay=${DELAY_MS}`, {
+            waitUntil: 'load',
+        })
+        const late = await readLateHeroTiming(page)
+
+        await testInfo.attach('late-lcp-timing', {
+            contentType: 'application/json',
+            body: JSON.stringify({
+                baselineDelayMs,
+                baselineHero,
+                late,
+                oldCrossNavigationDifferenceMs:
+                    late.hero.startTime - baselineHero.startTime,
+            }),
+        })
+        expectDelayedHero(late)
+    })
+}
+
+test('the late LCP assertion rejects a fixture with its delay removed', async ({
     page,
 }) => {
-    await page.goto(`${baseUrl}/baseline?delay=${DELAY_MS}`, {
-        waitUntil: 'load',
+    await page.route('**/assets/late-lcp.js', async (route) => {
+        const response = await route.fetch()
+        const source = await response.text()
+        expect(source.match(/}, delayMs\);/g)).toHaveLength(1)
+        await route.fulfill({
+            response,
+            body: source.replace('}, delayMs);', '}, 0);'),
+        })
     })
-    const baselineHero = await requireResourceTiming(page, '/assets/hero.svg')
-
     await page.goto(`${baseUrl}/late-lcp?delay=${DELAY_MS}`, {
         waitUntil: 'load',
     })
-    const lateHero = await requireResourceTiming(page, '/assets/hero.svg')
 
-    expect(lateHero.startTime - baselineHero.startTime).toBeGreaterThan(
-        DELAY_MS / 2
+    const timing = await readLateHeroTiming(page)
+    expect(timing.scheduled).toBeGreaterThanOrEqual(timing.script.responseEnd)
+    expect(timing.hero.startTime).toBeGreaterThanOrEqual(timing.discovered)
+    expect(timing.discovered - timing.scheduled).toBeLessThan(
+        DELAY_MS - TIMESTAMP_TOLERANCE_MS
     )
+    expect(() => expectDelayedHero(timing)).toThrow()
 })

@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-20T13:23:41.450Z",
+  "reportingTimezone": "Asia/Seoul",
+  "mainSha": "693d4e486667b43d290e3af95466b424c9bda66c",
+  "pullRequest": {
+    "number": 47,
+    "state": "MERGED",
+    "mergedAt": "2026-10-20T09:42:15Z",
+    "headSha": "712c9d0d0ae8eff2de3409f150f7f1fbbec1c6f2"
+  },
+  "ci": [
+    {
+      "conclusion": "success",
+      "databaseId": 39402625761,
+      "name": "CI",
+      "status": "completed",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/39402625761"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 39402624999,
+      "name": "Push on main",
+      "status": "completed",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/39402624999"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 39402625691,
+      "name": "Documentation",
+      "status": "completed",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/39402625691"
+    }
+  ],
+  "review": {
+    "resolvedThreads": 6,
+    "unresolvedThreads": 0,
+    "prHeadGitGuardian": "success",
+    "lastActualCodeRabbitReviewSha": "b480d59dc9f0864cec16f3c85dcbe6d42ee15115",
+    "latestPrHeadAutomaticReview": "rate-limited, not completed"
+  },
+  "deployment": {
+    "checkedAt": "2026-10-20T13:21:24.747Z",
+    "project": {
+      "name": "web-tech",
+      "productionBranch": "main",
+      "rootDirectory": "apps/docs",
+      "nodeVersion": "24.x",
+      "autoAssignCustomDomains": true
+    },
+    "production": {
+      "id": "dpl_328DfCogmZwabpZ5CW4oRiJpsUvK",
+      "sha": "693d4e486667b43d290e3af95466b424c9bda66c",
+      "branch": "main",
+      "state": "READY",
+      "url": "web-tech-6eb677jwe-hojeong-ims-projects.vercel.app",
+      "alias": "heap-forge.app",
+      "aliasVerified": true
+    }
+  },
+  "http": {
+    "checkedAt": "2026-10-20T13:19:11.636Z",
+    "sourceSha": "693d4e486667b43d290e3af95466b424c9bda66c",
+    "base": "https://heap-forge.app",
+    "results": [
+      {
+        "route": "/ko/feed",
+        "status": 200,
+        "passed": true,
+        "headings": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 2955
+      },
+      {
+        "route": "/ko/docs",
+        "status": 200,
+        "passed": true,
+        "headings": [
+          "모든 문서를 빠르게 찾는 인덱스",
+          "모든 문서를 빠르게 찾는 인덱스"
+        ],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 1112
+      },
+      {
+        "route": "/ko/docs?q=stream",
+        "status": 200,
+        "passed": true,
+        "headings": [
+          "&quot;stream&quot;에 대한 검색 결과",
+          "&quot;stream&quot;에 대한 검색 결과"
+        ],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 1989
+      },
+      {
+        "route": "/ko/web",
+        "status": 200,
+        "passed": true,
+        "headings": ["웹 개발 이야기", "웹 개발 이야기", "웹 개발 이야기"],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 1033
+      },
+      {
+        "route": "/ko/mobile",
+        "status": 200,
+        "passed": true,
+        "headings": [
+          "모바일 개발 이야기",
+          "모바일 개발 이야기",
+          "모바일 개발 이야기"
+        ],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 1379
+      },
+      {
+        "route": "/ko/ui-ux",
+        "status": 200,
+        "passed": true,
+        "headings": ["UI/UX 설계와", "UI/UX 설계와"],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 924
+      },
+      {
+        "route": "/ko/about",
+        "status": 200,
+        "passed": true,
+        "headings": ["웹과 제품, 인터페이스를 하나의 흐름으로 설계합니다"],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 1900
+      },
+      {
+        "route": "/en/feed",
+        "status": 200,
+        "passed": true,
+        "headings": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 1311
+      },
+      {
+        "route": "/ko/docs/web/javascript-event-loop-runtime",
+        "status": 200,
+        "passed": true,
+        "headings": ["JavaScript Event Loop 런타임 노트"],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 1967
+      },
+      {
+        "route": "/ko/docs/category/be/node-js/http-response-streaming-lab",
+        "status": 200,
+        "passed": true,
+        "headings": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 1595
+      },
+      {
+        "route": "/ko/docs/web/browser",
+        "status": 200,
+        "passed": true,
+        "headings": ["Browser 동작 원리"],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 1338
+      },
+      {
+        "route": "/robots.txt",
+        "status": 200,
+        "passed": true,
+        "headings": [],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 1046
+      },
+      {
+        "route": "/sitemap.xml",
+        "status": 200,
+        "passed": true,
+        "headings": [],
+        "validBody": true,
+        "errorPanel": false,
+        "durationMs": 2144
+      }
+    ],
+    "authorization": {
+      "path": "/api/revalidate/content",
+      "authenticated": false,
+      "method": "POST",
+      "status": 401,
+      "passed": true
+    }
+  },
+  "browser": {
+    "checkedAt": "2026-10-20T13:19:17.196Z",
+    "base": "https://heap-forge.app",
+    "deployment": null,
+    "results": [
+      {
+        "width": 1280,
+        "height": 800,
+        "theme": "light",
+        "passed": true,
+        "feed": {
+          "viewport": 1280,
+          "content": 1280
+        },
+        "remote": {
+          "viewport": 1280,
+          "content": 1280
+        },
+        "visibleFeedImages": 2,
+        "cardNavigation": true,
+        "searchSubmission": true,
+        "aboutNavigation": true,
+        "pageErrors": [],
+        "serverFailures": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "theme": "dark",
+        "passed": true,
+        "feed": {
+          "viewport": 390,
+          "content": 390
+        },
+        "remote": {
+          "viewport": 390,
+          "content": 390
+        },
+        "visibleFeedImages": 1,
+        "cardNavigation": true,
+        "searchSubmission": true,
+        "aboutNavigation": true,
+        "pageErrors": [],
+        "serverFailures": []
+      }
+    ]
+  },
+  "runtime": {
+    "checkedAt": "2026-10-20T13:20:28.866Z",
+    "deployment": "dpl_328DfCogmZwabpZ5CW4oRiJpsUvK",
+    "window": "20m",
+    "limit": 200,
+    "sampled": 50,
+    "counts": {
+      "info": 50
+    },
+    "sourceEvents": {
+      "local": 0,
+      "remote": 0
+    },
+    "filtered": {
+      "error": 0,
+      "http5xx": 0
+    },
+    "issues": []
+  },
+  "localPreservation": {
+    "checkedAt": "2026-10-20T13:21:59.687Z",
+    "localMain": "693d4e486667b43d290e3af95466b424c9bda66c",
+    "draftBranchPreserved": true,
+    "draftHeadPreserved": true,
+    "uncommittedFilesUnchanged": 29,
+    "stashEntriesPreserved": 9,
+    "snapshotPreserved": true,
+    "indexUnstaged": true,
+    "otherBranchesUnchanged": true,
+    "removedBranch": "codex/docs-main-production-transition"
+  },
+  "limits": [
+    "Single-time smoke, not an availability guarantee",
+    "Chromium emulation, not physical devices or Safari/Firefox",
+    "Zero source events in runtime sample does not prove fresh local/remote origin reads",
+    "No authorized webhook, NAS content write, rollback, promote or environment changes",
+    "Private drafts and raw authenticated responses excluded"
+  ]
+}

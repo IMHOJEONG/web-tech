@@ -1,0 +1,682 @@
+{
+  "collectedAt": "2026-10-20T00:12:47.437Z",
+  "note": "Sanitized aggregates only; no raw env responses, credential values, cookies, request bodies or private draft contents.",
+  "before": {
+    "checkedAt": "2026-10-19T23:52:50.576Z",
+    "expectedSha": "ebc61ad4f0700e71437315a255872c790093bb94",
+    "project": {
+      "id": "prj_rCWTnMUWM79EGAYXsb5ps64TkgOl",
+      "name": "web-tech",
+      "rootDirectory": "apps/docs",
+      "nodeVersion": "24.x",
+      "framework": "nextjs",
+      "productionBranch": "feature/docs",
+      "autoAssignCustomDomains": true,
+      "buildCommand": null,
+      "installCommand": null,
+      "outputDirectory": null,
+      "sourceFilesOutsideRootDirectory": true,
+      "affectedProjectsDeployments": true
+    },
+    "previousProduction": {
+      "id": "dpl_3pvjKDwvTcDPhZ4Caxokprdbdno5",
+      "url": "web-tech-reliuaihc-hojeong-ims-projects.vercel.app",
+      "target": "production",
+      "readyState": "READY",
+      "branch": "feature/docs",
+      "sha": "23fcab4376f72797cd97913217569ed5c03666a5"
+    },
+    "preview": {
+      "id": "dpl_AKNA65fw26HBDydeuzV1WX8TuZ1r",
+      "url": "web-tech-jvenpx08y-hojeong-ims-projects.vercel.app",
+      "target": null,
+      "readyState": "READY",
+      "branch": "main",
+      "sha": "ebc61ad4f0700e71437315a255872c790093bb94"
+    },
+    "domains": [
+      {
+        "name": "web-tech-log.vercel.app",
+        "verified": true,
+        "gitBranch": null,
+        "redirect": "heap-forge.app",
+        "customEnvironmentId": null
+      },
+      {
+        "name": "heap-forge.app",
+        "verified": true,
+        "gitBranch": null,
+        "redirect": null,
+        "customEnvironmentId": null
+      }
+    ],
+    "envs": {
+      "productionKeys": [
+        "BLOG_CONTENT_API_BASE_URL",
+        "BLOG_CONTENT_API_POSTS_PATH",
+        "BLOG_CONTENT_API_TOKEN",
+        "BLOG_CONTENT_ASSET_BASE_URL_PUBLIC",
+        "BLOG_CONTENT_MARKDOWN_BASE_URL",
+        "BLOG_CONTENT_MARKDOWN_PATH_PREFIX",
+        "BLOG_CONTENT_REVALIDATE_TOKEN",
+        "DOCS_BETTER_STACK_ENVIRONMENT",
+        "DOCS_BETTER_STACK_INGESTING_URL",
+        "DOCS_BETTER_STACK_SOURCE_TOKEN",
+        "ENABLE_EXPERIMENTAL_COREPACK",
+        "NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC"
+      ],
+      "previewKeys": [
+        "BLOG_CONTENT_API_BASE_URL",
+        "BLOG_CONTENT_API_POSTS_PATH",
+        "BLOG_CONTENT_API_TOKEN",
+        "BLOG_CONTENT_ASSET_BASE_URL_PUBLIC",
+        "BLOG_CONTENT_MARKDOWN_BASE_URL",
+        "BLOG_CONTENT_MARKDOWN_PATH_PREFIX",
+        "ENABLE_EXPERIMENTAL_COREPACK",
+        "NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC"
+      ],
+      "branchScopedKeys": [],
+      "registeredProductionSecrets": [
+        {
+          "key": "BLOG_CONTENT_API_TOKEN",
+          "present": true
+        },
+        {
+          "key": "BLOG_CONTENT_REVALIDATE_TOKEN",
+          "present": true
+        }
+      ],
+      "publicSecretLikeKeys": []
+    }
+  },
+  "previewHttp": {
+    "checkedAt": "2026-10-19T23:57:25.472Z",
+    "phase": "main-preview",
+    "deployment": "dpl_AKNA65fw26HBDydeuzV1WX8TuZ1r",
+    "results": [
+      {
+        "route": "/ko/feed",
+        "status": 200,
+        "passed": true,
+        "durationMs": 4209,
+        "headings": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs",
+        "status": 200,
+        "passed": true,
+        "durationMs": 4273,
+        "headings": [
+          "모든 문서를 빠르게 찾는 인덱스",
+          "모든 문서를 빠르게 찾는 인덱스"
+        ],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs?q=stream",
+        "status": 200,
+        "passed": true,
+        "durationMs": 4195,
+        "headings": [
+          "&quot;stream&quot;에 대한 검색 결과",
+          "&quot;stream&quot;에 대한 검색 결과"
+        ],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/web",
+        "status": 200,
+        "passed": true,
+        "durationMs": 3711,
+        "headings": ["웹 개발 이야기", "웹 개발 이야기", "웹 개발 이야기"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/mobile",
+        "status": 200,
+        "passed": true,
+        "durationMs": 3458,
+        "headings": [
+          "모바일 개발 이야기",
+          "모바일 개발 이야기",
+          "모바일 개발 이야기"
+        ],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/ui-ux",
+        "status": 200,
+        "passed": true,
+        "durationMs": 3413,
+        "headings": ["UI/UX 설계와", "UI/UX 설계와"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/about",
+        "status": 200,
+        "passed": true,
+        "durationMs": 3533,
+        "headings": ["웹과 제품, 인터페이스를 하나의 흐름으로 설계합니다"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/en/feed",
+        "status": 200,
+        "passed": true,
+        "durationMs": 3472,
+        "headings": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs/web/javascript-event-loop-runtime",
+        "status": 200,
+        "passed": true,
+        "durationMs": 4115,
+        "headings": ["JavaScript Event Loop 런타임 노트"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs/category/be/node-js/http-response-streaming-lab",
+        "status": 200,
+        "passed": true,
+        "durationMs": 5539,
+        "headings": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs/web/browser",
+        "status": 200,
+        "passed": true,
+        "durationMs": 6571,
+        "headings": ["Browser 동작 원리"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/robots.txt",
+        "status": 200,
+        "passed": true,
+        "durationMs": 4103,
+        "headings": [],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/sitemap.xml",
+        "status": 200,
+        "passed": true,
+        "durationMs": 5383,
+        "headings": [],
+        "errorPanel": false,
+        "validBody": true
+      }
+    ]
+  },
+  "stagedHttp": {
+    "checkedAt": "2026-10-20T00:05:55.339Z",
+    "phase": "main-staged",
+    "deployment": "dpl_FnvNrJEPhWTMwtvcqAe44uXV4zDJ",
+    "results": [
+      {
+        "route": "/ko/feed",
+        "status": 200,
+        "passed": true,
+        "durationMs": 7254,
+        "headings": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs",
+        "status": 200,
+        "passed": true,
+        "durationMs": 4316,
+        "headings": [
+          "모든 문서를 빠르게 찾는 인덱스",
+          "모든 문서를 빠르게 찾는 인덱스"
+        ],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs?q=stream",
+        "status": 200,
+        "passed": true,
+        "durationMs": 5409,
+        "headings": [
+          "&quot;stream&quot;에 대한 검색 결과",
+          "&quot;stream&quot;에 대한 검색 결과"
+        ],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/web",
+        "status": 200,
+        "passed": true,
+        "durationMs": 10121,
+        "headings": ["웹 개발 이야기", "웹 개발 이야기", "웹 개발 이야기"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/mobile",
+        "status": 200,
+        "passed": true,
+        "durationMs": 7064,
+        "headings": [
+          "모바일 개발 이야기",
+          "모바일 개발 이야기",
+          "모바일 개발 이야기"
+        ],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/ui-ux",
+        "status": 200,
+        "passed": true,
+        "durationMs": 10515,
+        "headings": ["UI/UX 설계와", "UI/UX 설계와"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/about",
+        "status": 200,
+        "passed": true,
+        "durationMs": 4345,
+        "headings": ["웹과 제품, 인터페이스를 하나의 흐름으로 설계합니다"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/en/feed",
+        "status": 200,
+        "passed": true,
+        "durationMs": 10877,
+        "headings": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs/web/javascript-event-loop-runtime",
+        "status": 200,
+        "passed": true,
+        "durationMs": 6455,
+        "headings": ["JavaScript Event Loop 런타임 노트"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs/category/be/node-js/http-response-streaming-lab",
+        "status": 200,
+        "passed": true,
+        "durationMs": 4872,
+        "headings": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs/web/browser",
+        "status": 200,
+        "passed": true,
+        "durationMs": 4085,
+        "headings": ["Browser 동작 원리"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/robots.txt",
+        "status": 200,
+        "passed": true,
+        "durationMs": 3915,
+        "headings": [],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/sitemap.xml",
+        "status": 200,
+        "passed": true,
+        "durationMs": 3991,
+        "headings": [],
+        "errorPanel": false,
+        "validBody": true
+      }
+    ]
+  },
+  "stagedBrowser": {
+    "checkedAt": "2026-10-20T00:05:46.098Z",
+    "base": "https://web-tech-lhqavr14u-hojeong-ims-projects.vercel.app",
+    "deployment": "dpl_FnvNrJEPhWTMwtvcqAe44uXV4zDJ",
+    "results": [
+      {
+        "width": 1280,
+        "height": 800,
+        "theme": "light",
+        "passed": true,
+        "feed": {
+          "viewport": 1280,
+          "content": 1280
+        },
+        "remote": {
+          "viewport": 1280,
+          "content": 1280
+        },
+        "cardNavigation": true,
+        "searchSubmission": true,
+        "aboutNavigation": true,
+        "pageErrors": [],
+        "serverFailures": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "theme": "dark",
+        "passed": true,
+        "feed": {
+          "viewport": 390,
+          "content": 390
+        },
+        "remote": {
+          "viewport": 390,
+          "content": 390
+        },
+        "cardNavigation": true,
+        "searchSubmission": true,
+        "aboutNavigation": true,
+        "pageErrors": [],
+        "serverFailures": []
+      }
+    ]
+  },
+  "stagedRuntime": {
+    "checkedAt": "2026-10-20T00:06:26.975Z",
+    "deployment": "dpl_FnvNrJEPhWTMwtvcqAe44uXV4zDJ",
+    "window": "20m",
+    "limit": 200,
+    "sampled": 50,
+    "counts": {
+      "info": 50
+    },
+    "sourceEvents": {
+      "local": 0,
+      "remote": 0
+    },
+    "issues": []
+  },
+  "branchSwitch": {
+    "checkedAt": "2026-10-20T00:07:54.548Z",
+    "projectId": "prj_rCWTnMUWM79EGAYXsb5ps64TkgOl",
+    "productionBranch": "main",
+    "mainSha": "ebc61ad4f0700e71437315a255872c790093bb94",
+    "mainChecks": 17,
+    "stagedDeployment": "dpl_FnvNrJEPhWTMwtvcqAe44uXV4zDJ",
+    "oldProductionStillServing": true,
+    "otherProjectSettingsUnchanged": true
+  },
+  "after": {
+    "checkedAt": "2026-10-20T00:09:19.198Z",
+    "mainSha": "ebc61ad4f0700e71437315a255872c790093bb94",
+    "project": {
+      "id": "prj_rCWTnMUWM79EGAYXsb5ps64TkgOl",
+      "name": "web-tech",
+      "productionBranch": "main",
+      "rootDirectory": "apps/docs",
+      "nodeVersion": "24.x",
+      "autoAssignCustomDomains": true,
+      "environmentKeyNamesUnchanged": true,
+      "protectionUnchanged": true
+    },
+    "production": {
+      "id": "dpl_FnvNrJEPhWTMwtvcqAe44uXV4zDJ",
+      "url": "web-tech-lhqavr14u-hojeong-ims-projects.vercel.app",
+      "state": "READY",
+      "branch": "main",
+      "sha": "ebc61ad4f0700e71437315a255872c790093bb94",
+      "customDomain": "heap-forge.app",
+      "aliasVerified": true
+    },
+    "rollbackDeployment": {
+      "id": "dpl_3pvjKDwvTcDPhZ4Caxokprdbdno5",
+      "url": "web-tech-reliuaihc-hojeong-ims-projects.vercel.app",
+      "target": "production",
+      "readyState": "READY",
+      "branch": "feature/docs",
+      "sha": "23fcab4376f72797cd97913217569ed5c03666a5"
+    },
+    "domainsUnchanged": true,
+    "vulnRadarUnchanged": true,
+    "preserved": {
+      "featureDocsLocalAndRemote": true,
+      "featureDocsSha": "23fcab4376f72797cd97913217569ed5c03666a5",
+      "allFeatureRefs": true,
+      "stashList": true,
+      "privateDraftFiles": 23,
+      "draftHashes": true
+    }
+  },
+  "publicHttp": {
+    "checkedAt": "2026-10-20T00:08:48.296Z",
+    "phase": "main-production",
+    "deployment": "https://heap-forge.app",
+    "results": [
+      {
+        "route": "/ko/feed",
+        "status": 200,
+        "passed": true,
+        "durationMs": 3080,
+        "headings": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs",
+        "status": 200,
+        "passed": true,
+        "durationMs": 1812,
+        "headings": [
+          "모든 문서를 빠르게 찾는 인덱스",
+          "모든 문서를 빠르게 찾는 인덱스"
+        ],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs?q=stream",
+        "status": 200,
+        "passed": true,
+        "durationMs": 2737,
+        "headings": [
+          "&quot;stream&quot;에 대한 검색 결과",
+          "&quot;stream&quot;에 대한 검색 결과"
+        ],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/web",
+        "status": 200,
+        "passed": true,
+        "durationMs": 1858,
+        "headings": ["웹 개발 이야기", "웹 개발 이야기", "웹 개발 이야기"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/mobile",
+        "status": 200,
+        "passed": true,
+        "durationMs": 1407,
+        "headings": [
+          "모바일 개발 이야기",
+          "모바일 개발 이야기",
+          "모바일 개발 이야기"
+        ],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/ui-ux",
+        "status": 200,
+        "passed": true,
+        "durationMs": 1069,
+        "headings": ["UI/UX 설계와", "UI/UX 설계와"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/about",
+        "status": 200,
+        "passed": true,
+        "durationMs": 1009,
+        "headings": ["웹과 제품, 인터페이스를 하나의 흐름으로 설계합니다"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/en/feed",
+        "status": 200,
+        "passed": true,
+        "durationMs": 2095,
+        "headings": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs/web/javascript-event-loop-runtime",
+        "status": 200,
+        "passed": true,
+        "durationMs": 1291,
+        "headings": ["JavaScript Event Loop 런타임 노트"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs/category/be/node-js/http-response-streaming-lab",
+        "status": 200,
+        "passed": true,
+        "durationMs": 3132,
+        "headings": ["Node.js HTTP 스트리밍: 응답이 도착하는 과정"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/ko/docs/web/browser",
+        "status": 200,
+        "passed": true,
+        "durationMs": 1085,
+        "headings": ["Browser 동작 원리"],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/robots.txt",
+        "status": 200,
+        "passed": true,
+        "durationMs": 761,
+        "headings": [],
+        "errorPanel": false,
+        "validBody": true
+      },
+      {
+        "route": "/sitemap.xml",
+        "status": 200,
+        "passed": true,
+        "durationMs": 1075,
+        "headings": [],
+        "errorPanel": false,
+        "validBody": true
+      }
+    ]
+  },
+  "publicBrowser": {
+    "checkedAt": "2026-10-20T00:08:49.506Z",
+    "base": "https://heap-forge.app",
+    "deployment": null,
+    "results": [
+      {
+        "width": 1280,
+        "height": 800,
+        "theme": "light",
+        "passed": true,
+        "feed": {
+          "viewport": 1280,
+          "content": 1280
+        },
+        "remote": {
+          "viewport": 1280,
+          "content": 1280
+        },
+        "visibleFeedImages": 2,
+        "cardNavigation": true,
+        "searchSubmission": true,
+        "aboutNavigation": true,
+        "pageErrors": [],
+        "serverFailures": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "theme": "dark",
+        "passed": true,
+        "feed": {
+          "viewport": 390,
+          "content": 390
+        },
+        "remote": {
+          "viewport": 390,
+          "content": 390
+        },
+        "visibleFeedImages": 1,
+        "cardNavigation": true,
+        "searchSubmission": true,
+        "aboutNavigation": true,
+        "pageErrors": [],
+        "serverFailures": []
+      }
+    ]
+  },
+  "publicBoundaries": {
+    "checkedAt": "2026-10-20T00:10:05.330Z",
+    "canonical": "https://heap-forge.app/ko/docs/web/javascript-event-loop-runtime",
+    "unauthenticatedRevalidationStatus": 401,
+    "legacyDomain": {
+      "status": 307,
+      "destination": "https://heap-forge.app/ko/feed"
+    },
+    "previewUnauthenticatedStatus": 302,
+    "passed": true
+  },
+  "runtime": {
+    "checkedAt": "2026-10-20T00:11:02.520Z",
+    "deployment": "dpl_FnvNrJEPhWTMwtvcqAe44uXV4zDJ",
+    "window": "20m",
+    "limit": 200,
+    "sampled": 50,
+    "counts": {
+      "info": 50
+    },
+    "sourceEvents": {
+      "local": 0,
+      "remote": 0
+    },
+    "filtered": {
+      "error": 0,
+      "http5xx": 0
+    },
+    "issues": []
+  }
+}

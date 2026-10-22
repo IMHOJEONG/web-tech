@@ -1,6 +1,10 @@
 import { Link } from '~/shared/i18n/navigation'
 import { DocumentThumbnail } from '~/shared/ui/document-thumbnail'
 import { DocumentCardMeta } from './document-card-meta'
+import {
+    documentPreviewLayout,
+    documentPreviewThumbnailLayout,
+} from './document-preview-layout'
 
 type DocumentPreviewCardProps = {
     href: string
@@ -29,7 +33,7 @@ export function DocumentPreviewCard({
         <Link
             href={href}
             aria-label={title}
-            className="group ds-card ds-focus-ring grid min-w-0 gap-5 bg-surface-container-lowest p-5 transition-colors hover:border-primary/40 motion-reduce:transition-none sm:p-6 md:grid-cols-[minmax(0,1fr)_14rem] md:items-center md:gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]"
+            className={`group ds-card ds-focus-ring ${documentPreviewLayout} transition-colors hover:border-primary/40 motion-reduce:transition-none`}
         >
             <div className="min-w-0 space-y-4">
                 <div className="space-y-2">
@@ -51,7 +55,7 @@ export function DocumentPreviewCard({
             <DocumentThumbnail
                 thumbnail={thumbnail}
                 alt=""
-                className="h-36 w-full rounded-lg sm:h-40 md:h-48"
+                className={documentPreviewThumbnailLayout}
                 imageClassName="object-contain p-3"
                 sizes="(min-width: 1024px) 288px, (min-width: 768px) 224px, (min-width: 640px) calc(100vw - 96px), calc(100vw - 72px)"
                 unoptimized={unoptimized}

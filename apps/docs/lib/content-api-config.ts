@@ -101,7 +101,7 @@ export function shouldIncludeRemoteContentIndex() {
     return rawValue !== 'false'
 }
 
-export function getContentApiAuthHeaders() {
+export function getContentApiAuthHeaders(): Record<string, string> {
     const token = process.env.BLOG_CONTENT_API_TOKEN?.trim()
 
     if (!token) {

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
-import { ContentPending } from '~/shared/ui/content-pending'
+import { FeedPending } from '~/widgets/m/ui/feed-pending'
 import { getTranslations } from 'next-intl/server'
 import { getSortedPostsData } from '~/lib/get-document'
 import { buildPageMetadata } from '~/lib/localized-metadata'
@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function Page(props: Props) {
     return (
-        <Suspense fallback={<ContentPending />}>
+        <Suspense fallback={<FeedPending />}>
             <FeedResults {...props} />
         </Suspense>
     )

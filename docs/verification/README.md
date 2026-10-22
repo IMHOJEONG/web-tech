@@ -1,6 +1,38 @@
 # 검증 보고서
 
+- [10-22 squash 최종 메시지 사전검사](resilience/2026-10-22-squash-merge-preflight.md): main 이력 보존·실제 footer 재현·병합 요청 격리 회귀. pnpm12 전환 PR #55와의 역할 구분.
+
+- [10-22 pnpm12 툴체인·서명 검증](integration/2026-10-22-pnpm12-toolchain.md): 앱 lock 유지·설치 실패 경계·전체 검사·두 backend 이미지 검증, 운영 교체는 별도.
+
+- [10-22 CI 증거 보관·이동 계측](resilience/2026-10-22-navigation-evidence-retention.md): busy 변화·응답 수신 완료와 보고서/trace 보관. 로컬 회귀와 새 원격 업로드 검증을 구분.
+
+- [10-21 KAN-22 상세 이동 실패](resilience/2026-10-21-kan22-offline-navigation.md): 정상 RSC 전달 지연·HTTP 503 대조군, 오프라인 22개·반복 18개와 CI 집계 64조합 검증. 당시 CI 지연 원인·수정 후 원격 검증은 미확정/미완료.
+
+- [10-21 PR #51 CRP 타이밍 비교](performance/2026-10-21-crp-navigation-timing.md): 기준 페이지 지연으로 기존 판정의 오판 재현, 동일 문서 계측과 음성 대조군, 로컬 100개 통과·원격 미검증.
+
+- [10-21 Vite·콘텐츠 의존성 패치](security/2026-10-21-vite-content-advisories.md): GitHub 5건·audit 11건 조사, 공식 패치와 전후 회귀, production 0건·전체 braces high 1건 잔여 구분.
+
+- [10-21 TCP 소켓 문서 게시 검증](content/2026-10-21-tcp-publication.md): 사용자 게시 승인, 실제 원문 14개·production 공개 경로·이미지·검색·목록 확인. 원격 CI·운영 반영은 별도 단계.
+
+- [10-20 TCP 초안·도식 재검증](content/2026-10-20-tcp-draft-recheck.md): 당시 draft 보존·원문 14개와 네 화면 확인. 게시 승인은 10-21 후속 기록에서 구분.
+
+- [10-16 다음 TCP 소켓 초안 준비](content/2026-10-16-tcp-draft-preparation.md): 원문 실행·패킷 도식·다중 검토의 과거 기록.
+
+- [10-20 블로그 main Production 전환](deployment/2026-10-20-docs-main-production-transition.md): CI·Preview·Production 스테이징 후 공개 도메인 검증, 기존 feature/docs·초안 보존.
+
+- [10-19 vuln-radar 통합 검증](integration/2026-10-19-vuln-radar-local-integration.md): 격리 PostgreSQL·실제 Nest·Vite preview·배포 프록시 함수·Chromium 13개 통과. 운영 수집·배포 미검증.
+
+- [10-19 PR #40 CI 시간 초과 조사](cache/2026-10-19-pr40-ci-timeout.md): 단계별 시간 비교, job 예산 분리와 다크 테마 검사 race 보완. 수정 후 원격 CI는 미검증.
+
+- [10-19 페이지별 스켈레톤 로컬 검증](accessibility/2026-10-19-page-skeletons-local.md): 실제 서버 골격·완성 화면의 기하 비교와 검색·피드 회귀. 운영 CLS는 미검증.
+
+- [10-19 문서 목록 우선 배치 로컬 검증](accessibility/2026-10-19-docs-index-order-local.md): 목록 위치·선택 해제·검색/페이지 이동 회귀, 69개와 재검사 12개·화면 26조건 통과. 공개 배포 미검증.
+
 - [10-18 Handlebars 패치·기본 브랜치 경고 4건](security/2026-10-18-handlebars-advisories.md): Handlebars 3건 조치·전후 회귀와 audit, braces 공식 패치 미출시·개발 경로 잔여 구분.
+
+- [10-18 CI 스트림 조기 종료 8건](cache/2026-10-18-stream-termination-investigation.md): 문서 교체와 실제 Link 클릭 비교, 실제 장애 분리와 과거 CI 판정 한계.
+
+- [10-17 콘텐츠 네트워크·오프라인 저장](resilience/2026-10-17-content-network-offline.md): 재시도·본문 지연·로컬 대체와 명시적 저장, 완전 오프라인 열람 검증. 운영 배포 미검증.
 
 - [10-14 문서 인덱스·검색 목록 밀도 검토](accessibility/2026-10-14-docs-index-density-review.md): 공개 네 조건의 개선 전 기준선. UI 구현·개선 후 검증 미착수.
 
