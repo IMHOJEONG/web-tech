@@ -33,7 +33,7 @@ export function I18nProvider({
     };
 
     const formatDateTime = (value: string | null) => {
-      if (!value) {
+      if (!value || !Number.isFinite(Date.parse(value))) {
         return t("common.notAvailableYet");
       }
 

@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { AppConfigService } from '../../config/app-config.service';
 import { PrismaService } from '../../infra/prisma/prisma.service';
 import { calculateRiskScore } from '../../shared/lib/risk-score';
@@ -6,6 +11,7 @@ import type { RadarPriority } from '../../shared/types/radar';
 import { EpssCollector } from './collectors/epss/epss.collector';
 import { KevCollector } from './collectors/kev/kev.collector';
 import { NvdCollector } from './collectors/nvd/nvd.collector';
+import { IngestObservation } from './ingest-observation';
 import {
   ExternalApiSource,
   IngestSourceFailure,
@@ -49,6 +55,7 @@ type DbIngestStatusEpssScore = {
 @Injectable()
 export class IngestService {
   private readonly logger = new Logger(IngestService.name);
+  private readonly observation = new IngestObservation();
 
   constructor(
     private readonly appConfigService: AppConfigService,
@@ -72,6 +79,7 @@ export class IngestService {
 
     if (!client) {
       return {
+        observation: this.observation.snapshot(),
         checkedAt,
         mode: 'pull',
         storage: 'unavailable',
@@ -171,10 +179,11 @@ export class IngestService {
     );
 
     return {
+      observation: this.observation.snapshot(),
       checkedAt,
       mode: 'pull',
       storage: 'database',
-      note: 'Upstream sources are polled on demand right now, so freshness is near-real-time rather than push-real-time.',
+      note: 'Sources are pulled by manual or scheduled runs. Source dates, fetch results and database application are separate observations.',
       scheduler: {
         enabled: this.appConfigService.ingestSchedulerEnabled,
         intervalMinutes: this.appConfigService.ingestSyncIntervalMinutes,
@@ -206,6 +215,32 @@ export class IngestService {
   }
 
   async syncRecent(lookbackHours?: number): Promise<IngestSyncResponse> {
+    const effectiveLookbackHours =
+      lookbackHours ?? this.appConfigService.ingestLookbackHours;
+    if (effectiveLookbackHours > this.appConfigService.ingestMaxLookbackHours) {
+      throw new BadRequestException(
+        `lookbackHours must be less than or equal to ${this.appConfigService.ingestMaxLookbackHours}.`,
+      );
+    }
+    if (this.observation.running) {
+      throw new ConflictException(
+        'An ingest sync is already running in this process.',
+      );
+    }
+    this.observation.start();
+    try {
+      const result = await this.performSync(effectiveLookbackHours);
+      this.observation.finish(result.status);
+      return result;
+    } catch (error) {
+      this.observation.finish('failed');
+      throw error;
+    }
+  }
+
+  private async performSync(
+    effectiveLookbackHours: number,
+  ): Promise<IngestSyncResponse> {
     const client = await this.prismaService.getClient();
 
     if (!client) {
@@ -215,15 +250,6 @@ export class IngestService {
     }
 
     const startedAt = new Date();
-    const effectiveLookbackHours =
-      lookbackHours ?? this.appConfigService.ingestLookbackHours;
-
-    if (effectiveLookbackHours > this.appConfigService.ingestMaxLookbackHours) {
-      throw new BadRequestException(
-        `lookbackHours must be less than or equal to ${this.appConfigService.ingestMaxLookbackHours}.`,
-      );
-    }
-
     this.logger.log(
       `Ingest sync started: lookbackHours=${effectiveLookbackHours}, sourceTimeoutMs=${this.appConfigService.ingestSourceTimeoutMs}`,
     );
@@ -311,9 +337,15 @@ export class IngestService {
       });
     }
 
-    const epssResult = await this.collectSource('epss', 'fetch_scores', () =>
-      this.epssCollector.fetchScores([...vulnerabilityMap.keys()]),
-    );
+    if (vulnerabilityMap.size === 0) this.observation.sourceSkipped('epss');
+    const epssResult: SourceCollectionResult<
+      Awaited<ReturnType<EpssCollector['fetchScores']>>
+    > =
+      vulnerabilityMap.size === 0
+        ? { data: [], failure: null }
+        : await this.collectSource('epss', 'fetch_scores', () =>
+            this.epssCollector.fetchScores([...vulnerabilityMap.keys()]),
+          );
 
     if (epssResult.failure) {
       failures.push(epssResult.failure);
@@ -537,9 +569,11 @@ export class IngestService {
     task: () => Promise<T>,
   ): Promise<SourceCollectionResult<T>> {
     const startedAt = Date.now();
+    this.observation.sourceStarted(sourceId);
 
     try {
       const data = await task();
+      this.observation.sourceSucceeded(sourceId);
       this.logger.log(
         `Ingest source completed: source=${sourceId}, stage=${stage}, durationMs=${
           Date.now() - startedAt
@@ -551,6 +585,7 @@ export class IngestService {
         failure: null,
       };
     } catch (error) {
+      this.observation.sourceFailed(sourceId);
       const message =
         error instanceof Error ? error.message : 'Unknown source error';
 

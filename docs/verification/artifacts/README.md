@@ -1,5 +1,17 @@
 # 검증 원본 증거
 
+- [10-22 부분 API 장애 최종 통합](2026-10-22T04-37-18-940Z-vuln-radar-integration.json): [검증 보고서](../integration/2026-10-22-vuln-radar-partial-failures.md). 25개 그룹·정리6단계 통과. 합성 데이터이며 선행 실패 증거는 보고서에 연결한다.
+
+- [10-22 수집 상태 최종 통합](2026-10-22T03-20-18-441Z-vuln-radar-integration.json): [검증 보고서](../integration/2026-10-22-vuln-radar-ingest-status.md). 19개 그룹·정리6단계 통과. 실제 upstream 수집과 운영 검증은 제외한다.
+
+- [10-21 통계·KEV 깨끗한 커밋 최종 검증](2026-10-21T14-58-06-277Z-vuln-radar-integration.json): [보고서](../integration/2026-10-21-vuln-radar-kev-evidence.md#커밋-완료-후-재검증). 99bef79·workingTreeDirty=false, 통합16개·정리6단계 통과. [KEV1280px](2026-10-21T14-58-06-277Z-vuln-radar-kev-1280.png)·[KEV390px](2026-10-21T14-58-06-277Z-vuln-radar-kev-390.png)·[Feed1280px](2026-10-21T14-58-06-277Z-vuln-radar-feed-1280.png)·[Feed390px](2026-10-21T14-58-06-277Z-vuln-radar-feed-390.png). 합성 데이터만 포함하며 파일명은 UTC다.
+
+- [10-21 KEV 최종 통합](2026-10-21T14-35-59-158Z-vuln-radar-integration.json): [보고서](../integration/2026-10-21-vuln-radar-kev-evidence.md). nullable 실제 점수·구버전/범위 오류/503 대조군 포함16개 통과. [KEV1280px](2026-10-21T14-35-59-158Z-vuln-radar-kev-1280.png)·[KEV390px](2026-10-21T14-35-59-158Z-vuln-radar-kev-390.png)·[Feed1280px](2026-10-21T14-35-59-158Z-vuln-radar-feed-1280.png)·[Feed390px](2026-10-21T14-35-59-158Z-vuln-radar-feed-390.png). 합성 데이터만 표시한다.
+- [10-21 KEV 초기 통합](2026-10-21T14-34-05-141Z-vuln-radar-integration.json): 16개 통과. [Feed1280px](2026-10-21T14-34-05-141Z-vuln-radar-feed-1280.png)·[Feed390px](2026-10-21T14-34-05-141Z-vuln-radar-feed-390.png).
+
+- [10-21 vuln-radar 통계 최종 통합](2026-10-21T14-14-49-689Z-vuln-radar-integration.json): [보고서](../integration/2026-10-21-vuln-radar-overview-statistics.md). 합성 DB43개·Feed25개·통합15개·정리6단계 통과. [1280px Feed](2026-10-21T14-14-49-689Z-vuln-radar-feed-1280.png)·[390px Feed](2026-10-21T14-14-49-689Z-vuln-radar-feed-390.png)는 기존 탐색 회귀 화면이며 집계 비교값은 JSON에 있다.
+- [10-21 초기 통계 통합](2026-10-21T14-11-58-001Z-vuln-radar-integration.json): 통합15개 통과. [1280px](2026-10-21T14-11-58-001Z-vuln-radar-feed-1280.png)·[390px](2026-10-21T14-11-58-001Z-vuln-radar-feed-390.png). 파일명은 UTC다.
+
 - [10-22 CI 증거 보관·이동 계측](2026-10-22-navigation-evidence-retention.json): [검증 보고서](../resilience/2026-10-22-navigation-evidence-retention.md). 전체 34개·반복 36개와 의도적 실패 trace 생성, 실제 busy·헤더/본문 수신 샘플·소스 해시. 새 원격 업로드는 미검증.
 
 - [10-21 공개 검색 선택자 조사](2026-10-21-public-search-selector-investigation.json): [보고서](../resilience/2026-10-21-kan22-offline-navigation.md#공개-검색-실패의-원인-분리). 한국어 버튼 이름 충돌·두 브라우저 전체 흐름 20개 성공과 [재현 도구](../../../apps/docs/scripts/verify-public-search.ts).

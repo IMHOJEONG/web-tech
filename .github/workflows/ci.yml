@@ -219,6 +219,9 @@ jobs:
       - name: Docs lib tests
         run: pnpm --filter docs test:lib
 
+      - name: Vuln radar feed and overview metric tests
+        run: pnpm --filter vuln-radar test:lib
+
       - name: Critical rendering path lab tests
         run: pnpm test:crp-lab
 

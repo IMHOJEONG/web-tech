@@ -1,0 +1,257 @@
+{
+  "startedAt": "2026-10-22T04:37:18.940Z",
+  "finishedAt": "2026-10-22T04:38:16.788Z",
+  "baseSha": "bffcf25d8d4938b41f9bc77a70b4bca7bfc90fa2",
+  "workingTreeDirty": true,
+  "runnerSha256": "39dbe1c38fdb56a1a1289b906333e5ad090b0ec546c6bb2ecdf9f6d2befcf6fb",
+  "cleanupRunnerSha256": "7464786bfd20b1ea3a887d9fb4242682c69f75a330c35108680aa2abcfb0f60d",
+  "node": "v24.12.0",
+  "databaseImage": "postgres:16-alpine",
+  "browser": "151.0.7922.34",
+  "endpoints": {
+    "backend": "http://127.0.0.1:4310",
+    "frontend": "http://127.0.0.1:4311"
+  },
+  "scope": "isolated PostgreSQL fixtures + compiled Nest + production Vite preview + local deployment proxy handler invocation; no upstream ingestion or deployment",
+  "results": [
+    {
+      "name": "server API token is absent from built browser assets",
+      "status": "passed",
+      "durationMs": 2
+    },
+    {
+      "name": "actual Nest auth rejects absent and invalid tokens; real proxy supplies server token",
+      "status": "passed",
+      "durationMs": 60
+    },
+    {
+      "name": "Postgres feed/detail reliability and supporting endpoints match frontend contracts",
+      "status": "passed",
+      "durationMs": 57
+    },
+    {
+      "name": "deployment proxy handler maps rewritten feed/detail paths and preserves backend 401",
+      "status": "passed",
+      "durationMs": 11
+    },
+    {
+      "name": "overview parses all six real API contracts and renders the KEV matrix",
+      "status": "passed",
+      "durationMs": 418
+    },
+    {
+      "name": "overview cold failures are isolated and retries target one API at 1280px",
+      "status": "passed",
+      "durationMs": 10065
+    },
+    {
+      "name": "overview cached data survives each API failure and recovers at 1280px",
+      "status": "passed",
+      "durationMs": 10434
+    },
+    {
+      "name": "overview cold failures are isolated and retries target one API at 390px",
+      "status": "passed",
+      "durationMs": 9475
+    },
+    {
+      "name": "overview cached data survives each API failure and recovers at 390px",
+      "status": "passed",
+      "durationMs": 9837
+    },
+    {
+      "name": "slow supplementary APIs do not block healthy panels; cold total outage and recovery stay explicit",
+      "status": "passed",
+      "durationMs": 2064
+    },
+    {
+      "name": "valid empty Feed and watchlist responses remain empty states, not failures",
+      "status": "passed",
+      "durationMs": 174
+    },
+    {
+      "name": "ingest status exposes process-local unknown history without performing a sync",
+      "status": "passed",
+      "durationMs": 6
+    },
+    {
+      "name": "collection cadence, source failures and legacy unknown state at 1280px",
+      "status": "passed",
+      "durationMs": 513
+    },
+    {
+      "name": "collection cadence, source failures and legacy unknown state at 390px",
+      "status": "passed",
+      "durationMs": 429
+    },
+    {
+      "name": "real API browser feed filters, labels and detail navigation at 1280px",
+      "status": "passed",
+      "durationMs": 560
+    },
+    {
+      "name": "real API browser feed filters, labels and detail navigation at 390px",
+      "status": "passed",
+      "durationMs": 486
+    },
+    {
+      "name": "overview counts all 43 database rows while feed stays limited to 25; browser refresh uses aggregates",
+      "status": "passed",
+      "durationMs": 381
+    },
+    {
+      "name": "KEV rows use their own nullable EPSS outside the limited feed and show priority instead of workflow status",
+      "status": "passed",
+      "durationMs": 3388
+    },
+    {
+      "name": "backend shutdown preserves browser cache through scheduled refresh failure",
+      "status": "passed",
+      "durationMs": 483
+    },
+    {
+      "name": "first request during a real backend outage renders full error without cache",
+      "status": "passed",
+      "durationMs": 1438
+    },
+    {
+      "name": "restarted Nest server rereads changed DB record and browser retry recovers",
+      "status": "passed",
+      "durationMs": 656
+    },
+    {
+      "name": "connected empty Postgres returns real zero overview statistics without mock substitution",
+      "status": "passed",
+      "durationMs": 191
+    },
+    {
+      "name": "actual Nest no-database fallback remains explicit and renders unknown reliability",
+      "status": "passed",
+      "durationMs": 558
+    },
+    {
+      "name": "browser requests never carry the server API token",
+      "status": "passed",
+      "durationMs": 0
+    },
+    {
+      "name": "all browser flows complete without uncaught page errors",
+      "status": "passed",
+      "durationMs": 0
+    }
+  ],
+  "fixtureSummary": {
+    "statistics": {
+      "initial": {
+        "count": 3,
+        "items": [
+          {
+            "cveId": "CVE-2099-91001",
+            "reliability": {
+              "level": "high",
+              "confidenceScore": 71,
+              "freshness": {
+                "status": "fresh",
+                "ingestedAt": "2026-10-22T04:37:23.082Z",
+                "upstreamModifiedAt": "2026-10-22T04:37:21.999Z",
+                "verifiedAt": "2026-10-22T04:37:23.082Z"
+              },
+              "evidenceCompleteness": {
+                "score": 71,
+                "missing": ["affected", "mitigation"]
+              },
+              "conflicts": []
+            }
+          },
+          {
+            "cveId": "CVE-2099-91003",
+            "reliability": {
+              "level": "low",
+              "confidenceScore": 43,
+              "freshness": {
+                "status": "fresh",
+                "ingestedAt": "2026-10-22T04:37:23.097Z",
+                "upstreamModifiedAt": "2026-10-22T04:37:19.999Z",
+                "verifiedAt": "2026-10-22T04:37:23.097Z"
+              },
+              "evidenceCompleteness": {
+                "score": 43,
+                "missing": ["kev", "advisory", "affected", "mitigation"]
+              },
+              "conflicts": []
+            }
+          },
+          {
+            "cveId": "CVE-2099-91002",
+            "reliability": {
+              "level": "low",
+              "confidenceScore": 0,
+              "freshness": {
+                "status": "fresh",
+                "ingestedAt": "2026-10-22T04:37:23.093Z",
+                "upstreamModifiedAt": "2026-10-22T04:37:20.999Z",
+                "verifiedAt": "2026-10-22T04:37:23.093Z"
+              },
+              "evidenceCompleteness": {
+                "score": 0,
+                "missing": [
+                  "cvss",
+                  "epss",
+                  "kev",
+                  "advisory",
+                  "watchlist",
+                  "affected",
+                  "mitigation"
+                ]
+              },
+              "conflicts": []
+            }
+          }
+        ]
+      },
+      "aggregateRegression": {
+        "databaseRows": 43,
+        "feedRows": 25,
+        "limitedFeedCounts": { "p0": 25, "p1": 0, "kev": 25 },
+        "counts": {
+          "p0-open": 31,
+          "p1-open": 6,
+          "kev-new": 36,
+          "total-vulnerabilities": 43
+        },
+        "duplicateKevAdvisory": true,
+        "refreshedP0": 30,
+        "refreshedP1": 7
+      }
+    },
+    "kevEvidence": {
+      "outsideFeed": true,
+      "scores": [0, null, 0.125],
+      "duplicateAdvisoryRowsDeduplicated": true,
+      "legacyUnknown": true,
+      "outOfRangeRejected": true,
+      "failureNotReplacedWithFeed": true
+    }
+  },
+  "screenshots": {
+    "390": "2026-10-22T04-37-18-940Z-vuln-radar-feed-390.png",
+    "1280": "2026-10-22T04-37-18-940Z-vuln-radar-feed-1280.png",
+    "partial-recovered-1280": "2026-10-22T04-37-18-940Z-vuln-radar-partial-recovered-1280.png",
+    "partial-stale-1280": "2026-10-22T04-37-18-940Z-vuln-radar-partial-stale-1280.png",
+    "partial-recovered-390": "2026-10-22T04-37-18-940Z-vuln-radar-partial-recovered-390.png",
+    "partial-stale-390": "2026-10-22T04-37-18-940Z-vuln-radar-partial-stale-390.png",
+    "ingest-1280": "2026-10-22T04-37-18-940Z-vuln-radar-ingest-1280.png",
+    "ingest-390": "2026-10-22T04-37-18-940Z-vuln-radar-ingest-390.png",
+    "kev-1280": "2026-10-22T04-37-18-940Z-vuln-radar-kev-1280.png",
+    "kev-390": "2026-10-22T04-37-18-940Z-vuln-radar-kev-390.png"
+  },
+  "cleanup": {
+    "browserClosed": true,
+    "backendStopped": true,
+    "frontendStopped": true,
+    "databaseDisconnected": true,
+    "databaseRemoved": true,
+    "temporaryFilesRemoved": true
+  },
+  "cleanupErrors": []
+}

@@ -1,5 +1,13 @@
 # 2026-10 작업 기록
 
+- [10-22 Overview 부분 API 장애 격리](2026-10-22-vuln-radar-partial-failures.md)
+
+- [10-22 수집 상태와 조회 주기 분리](2026-10-22-vuln-radar-ingest-status.md)
+
+- [10-21 통계 커밋 분리와 KEV 근거 표시](2026-10-21-vuln-radar-kev-evidence.md)
+
+- [10-21 vuln-radar 전체 통계와 Feed 분리](2026-10-21-vuln-radar-overview-statistics.md)
+
 - [10-22 squash 최종 메시지 사전검사](2026-10-22-squash-merge-preflight.md)
 
 - [10-22 pnpm12 툴체인과 서명 유지](2026-10-22-pnpm12-toolchain.md)

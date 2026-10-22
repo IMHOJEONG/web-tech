@@ -126,6 +126,7 @@ export interface KevItem {
   cveId: string;
   title: string;
   priority: RadarPriority;
+  epssScore: number | null;
   sourceUrl: string | null;
   addedAt: string;
 }

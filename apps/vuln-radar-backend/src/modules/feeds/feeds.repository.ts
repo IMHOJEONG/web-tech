@@ -59,6 +59,7 @@ type DbKevAdvisory = {
     cveId: string;
     title: string;
     priority: 'P0' | 'P1' | 'P2' | 'P3';
+    epssScore: number | null;
   };
 };
 
@@ -88,24 +89,34 @@ export class FeedsRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getOverview(): Promise<OverviewResponse> {
-    const feed = await this.getFeed();
+    const client = await this.prismaService.getClient();
 
-    if (feed.dataSource.kind === 'mock') {
-      return getOverviewResponse(getMockFallbackReason(feed.dataSource.reason));
+    if (!client) {
+      return getOverviewResponse('database_unavailable');
     }
 
-    const p0Count = feed.items.filter((item) => item.priority === 'P0').length;
-    const p1Count = feed.items.filter((item) => item.priority === 'P1').length;
-    const kevCount = feed.items.filter((item) => item.isKev).length;
+    // One grouped query keeps every metric on the same DB snapshot, without the feed limit.
+    const groups = await client.vulnerability.groupBy({
+      by: ['priority', 'isKev'],
+      _count: { _all: true },
+    });
+    let totalCount = 0;
+    let p0Count = 0;
+    let p1Count = 0;
+    let kevCount = 0;
+    for (const group of groups) {
+      const count = group._count._all;
+      totalCount += count;
+      if (group.priority === 'P0') p0Count += count;
+      if (group.priority === 'P1') p1Count += count;
+      if (group.isKev) kevCount += count;
+    }
 
     return {
-      generatedAt: feed.generatedAt,
-      dataSource: {
-        kind: 'database',
-        reason: 'derived_from_feed',
-        message:
-          'Overview cards are derived from the live feed read-model stored in the database.',
-      },
+      generatedAt: new Date().toISOString(),
+      dataSource: getDatabaseDataSource(
+        'Overview metrics count all stored vulnerabilities, independently of the limited feed.',
+      ),
       cards: [
         {
           id: 'p0-open',
@@ -128,10 +139,16 @@ export class FeedsRepository {
           priority: kevCount > 0 ? 'P1' : 'P2',
           deltaLabel: `${kevCount} vulnerabilities overlap with KEV`,
         },
+        {
+          id: 'total-vulnerabilities',
+          label: 'Total vulnerabilities',
+          value: totalCount,
+          priority: 'P3',
+          deltaLabel: `${totalCount} vulnerabilities stored in the database`,
+        },
       ],
       highlights: [
-        'Overview is now derived from the feed read-model when DB data exists.',
-        'Frontend can keep the same response shape while ingest work catches up.',
+        'Metrics cover all stored vulnerabilities. The feed is a separate priority-ranked sample.',
       ],
     };
   }
@@ -257,16 +274,13 @@ export class FeedsRepository {
             cveId: true,
             title: true,
             priority: true,
+            epssScore: true,
           },
         },
       },
       orderBy: [{ publishedAt: 'desc' }],
       take: 25,
     })) as DbKevAdvisory[];
-
-    if (advisories.length === 0) {
-      return getKevResponse('no_database_rows');
-    }
 
     return {
       generatedAt: new Date().toISOString(),
@@ -277,6 +291,7 @@ export class FeedsRepository {
         cveId: advisory.vulnerability.cveId,
         title: advisory.vulnerability.title,
         priority: advisory.vulnerability.priority,
+        epssScore: advisory.vulnerability.epssScore ?? null,
         sourceUrl: advisory.sourceUrl,
         addedAt: (advisory.publishedAt ?? new Date()).toISOString(),
       })),
@@ -435,14 +450,4 @@ function getDatabaseDataSource(message: string): RadarDataSource {
     reason: 'live_read_model',
     message,
   };
-}
-
-function getMockFallbackReason(
-  reason: RadarDataSource['reason'],
-): 'database_unavailable' | 'no_database_rows' {
-  if (reason === 'no_database_rows') {
-    return reason;
-  }
-
-  return 'database_unavailable';
 }

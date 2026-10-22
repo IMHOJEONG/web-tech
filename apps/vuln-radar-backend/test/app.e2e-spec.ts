@@ -62,4 +62,22 @@ describe('HealthController (e2e)', () => {
   it('/api/feed (GET) returns 401 without authorization header', () => {
     return request(app.getHttpServer()).get('/api/feed').expect(401);
   });
+
+  it('/api/ingest/status (GET) keeps execution history unknown without a run', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/api/ingest/status')
+      .set('Authorization', `Bearer ${backendApiToken}`)
+      .expect(200);
+    expect(response.body.observation).toMatchObject({
+      scope: 'process',
+      outcome: 'unknown',
+      lastSuccessAt: null,
+    });
+    expect(response.body.observation.sources).toHaveLength(3);
+    expect(typeof response.body.scheduler.enabled).toBe('boolean');
+  });
+
+  it('/api/ingest/status (GET) stays authenticated', () => {
+    return request(app.getHttpServer()).get('/api/ingest/status').expect(401);
+  });
 });
