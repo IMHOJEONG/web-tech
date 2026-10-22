@@ -4,7 +4,10 @@ ENV PNPM_HOME=/pnpm
 ENV PATH=$PNPM_HOME:$PATH
 WORKDIR /repo
 
-RUN corepack enable
+COPY package.json ./
+COPY scripts/pnpm-bootstrap /opt/pnpm-bootstrap
+COPY scripts/install-pnpm.mts /opt/install-pnpm.mts
+RUN node --experimental-strip-types /opt/install-pnpm.mts /repo /opt/pnpm-bootstrap /pnpm
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json ./
 COPY packages/eslint-config ./packages/eslint-config

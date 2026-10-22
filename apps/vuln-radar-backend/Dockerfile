@@ -11,7 +11,11 @@ FROM node:24-bookworm-slim AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
-RUN corepack enable
+WORKDIR /repo
+COPY package.json ./
+COPY scripts/pnpm-bootstrap /opt/pnpm-bootstrap
+COPY scripts/install-pnpm.mts /opt/install-pnpm.mts
+RUN node --experimental-strip-types /opt/install-pnpm.mts /repo /opt/pnpm-bootstrap /pnpm
 
 FROM base AS build
 
