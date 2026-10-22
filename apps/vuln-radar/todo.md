@@ -182,6 +182,9 @@
 
 ## 11. 에러/로딩 UX 정리
 
+- [x] Overview의 API별 최초 로딩/실패·기존 데이터 유지·패널 단위 재시도를 분리한다. [ADR-0017](../../docs/architecture/adr-0017-vuln-radar-panel-failure-isolation.md), [로컬 회귀](../../docs/verification/integration/2026-10-22-vuln-radar-partial-failures.md). 운영 미검증.
+- [ ] 부분 장애 대응 배포 후 실제 health/status/watchlist 장애·정상 패널 유지·단일 재시도와 모바일 안내를 확인한다. 푸시/CI/배포 결과를 로컬 결과와 구분해 기록한다.
+
 - [ ] route level loading
 - [ ] widget level skeleton
 - [ ] empty state

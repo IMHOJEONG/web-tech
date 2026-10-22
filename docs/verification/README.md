@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-22 Overview 부분 API 장애 격리](integration/2026-10-22-vuln-radar-partial-failures.md): 최초 실패·캐시 갱신 실패·대상 재시도·보조 요청 대기·전체 실패/복구의 로컬 회귀.
+
 - [10-22 수집 상태와 조회 주기 분리](integration/2026-10-22-vuln-radar-ingest-status.md): 실제 실행 관측·소스별 조회/원본 날짜·구버전 미확인과 로컬 회귀. 운영 배포·영속 이력은 별도.
 
 - [10-21 KEV 실제 점수·우선순위](integration/2026-10-21-vuln-radar-kev-evidence.md): Feed 밖0/null/0.125·구버전/503·빈 DB·중복 행 등 로컬 통합16개 통과. 운영 배포는 미검증.

@@ -1,0 +1,126 @@
+{
+  "startedAt": "2026-10-22T04:30:57.094Z",
+  "finishedAt": "2026-10-22T04:31:10.316Z",
+  "baseSha": "bffcf25d8d4938b41f9bc77a70b4bca7bfc90fa2",
+  "workingTreeDirty": true,
+  "runnerSha256": "28209c4a0de8823211a2d9adfea1ecce8178fc8138a96309826c4a7967d8d547",
+  "cleanupRunnerSha256": "7464786bfd20b1ea3a887d9fb4242682c69f75a330c35108680aa2abcfb0f60d",
+  "node": "v24.12.0",
+  "databaseImage": "postgres:16-alpine",
+  "browser": "151.0.7922.34",
+  "endpoints": {
+    "backend": "http://127.0.0.1:4310",
+    "frontend": "http://127.0.0.1:4311"
+  },
+  "scope": "isolated PostgreSQL fixtures + compiled Nest + production Vite preview + local deployment proxy handler invocation; no upstream ingestion or deployment",
+  "results": [
+    {
+      "name": "server API token is absent from built browser assets",
+      "status": "passed",
+      "durationMs": 1
+    },
+    {
+      "name": "actual Nest auth rejects absent and invalid tokens; real proxy supplies server token",
+      "status": "passed",
+      "durationMs": 60
+    },
+    {
+      "name": "Postgres feed/detail reliability and supporting endpoints match frontend contracts",
+      "status": "passed",
+      "durationMs": 49
+    },
+    {
+      "name": "deployment proxy handler maps rewritten feed/detail paths and preserves backend 401",
+      "status": "passed",
+      "durationMs": 11
+    },
+    {
+      "name": "overview parses all six real API contracts and renders the KEV matrix",
+      "status": "passed",
+      "durationMs": 398
+    },
+    {
+      "name": "overview cold failures are isolated and retries target one API at 1280px",
+      "status": "failed",
+      "durationMs": 6534
+    }
+  ],
+  "fixtureSummary": {
+    "count": 3,
+    "items": [
+      {
+        "cveId": "CVE-2099-91001",
+        "reliability": {
+          "level": "high",
+          "confidenceScore": 71,
+          "freshness": {
+            "status": "fresh",
+            "ingestedAt": "2026-10-22T04:31:01.312Z",
+            "upstreamModifiedAt": "2026-10-22T04:31:00.229Z",
+            "verifiedAt": "2026-10-22T04:31:01.312Z"
+          },
+          "evidenceCompleteness": {
+            "score": 71,
+            "missing": ["affected", "mitigation"]
+          },
+          "conflicts": []
+        }
+      },
+      {
+        "cveId": "CVE-2099-91003",
+        "reliability": {
+          "level": "low",
+          "confidenceScore": 43,
+          "freshness": {
+            "status": "fresh",
+            "ingestedAt": "2026-10-22T04:31:01.326Z",
+            "upstreamModifiedAt": "2026-10-22T04:30:58.229Z",
+            "verifiedAt": "2026-10-22T04:31:01.326Z"
+          },
+          "evidenceCompleteness": {
+            "score": 43,
+            "missing": ["kev", "advisory", "affected", "mitigation"]
+          },
+          "conflicts": []
+        }
+      },
+      {
+        "cveId": "CVE-2099-91002",
+        "reliability": {
+          "level": "low",
+          "confidenceScore": 0,
+          "freshness": {
+            "status": "fresh",
+            "ingestedAt": "2026-10-22T04:31:01.323Z",
+            "upstreamModifiedAt": "2026-10-22T04:30:59.229Z",
+            "verifiedAt": "2026-10-22T04:31:01.323Z"
+          },
+          "evidenceCompleteness": {
+            "score": 0,
+            "missing": [
+              "cvss",
+              "epss",
+              "kev",
+              "advisory",
+              "watchlist",
+              "affected",
+              "mitigation"
+            ]
+          },
+          "conflicts": []
+        }
+      }
+    ]
+  },
+  "screenshots": {},
+  "cleanup": {
+    "browserClosed": true,
+    "backendStopped": true,
+    "frontendStopped": true,
+    "databaseDisconnected": true,
+    "databaseRemoved": true,
+    "temporaryFilesRemoved": true
+  },
+  "cleanupErrors": [],
+  "error": "expect(locator).toBeDisabled() failed\n\nLocator: locator('[data-overview-panel=\"health\"]').getByRole('button')\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"to.be.disabled\" with timeout 5000ms\n  - waiting for locator('[data-overview-panel=\"health\"]').getByRole('button')\n    - locator resolved to <button type=\"button\" class=\"mt-3 min-h-10 rounded-sm border border-radar-primary/40 px-3 text-radar-primary hover:bg-radar-panel-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-radar-primary disabled:cursor-wait disabled:opacity-60\">서비스 연결 다시 시도</button>\n    - unexpected value \"enabled\"\n"
+}
