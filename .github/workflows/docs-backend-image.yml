@@ -13,6 +13,8 @@ on:
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
+      - "scripts/install-pnpm.mts"
+      - "scripts/pnpm-bootstrap/**"
   pull_request:
     types: [opened, synchronize]
     paths:
@@ -25,6 +27,8 @@ on:
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
       - "turbo.json"
+      - "scripts/install-pnpm.mts"
+      - "scripts/pnpm-bootstrap/**"
   workflow_dispatch:
 
 permissions:
