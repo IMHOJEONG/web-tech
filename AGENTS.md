@@ -5,6 +5,7 @@
 - 하위 디렉터리의 `AGENTS.md`는 앱·패키지의 추가 규칙으로 함께 확인합니다. `CLAUDE.md`는 같은 내용을 참조하는 연결 파일입니다.
 - 변경 전 현재 브랜치와 작업 트리 상태를 확인하고, 사용자의 수정·미추적 파일을 명시 요청 없이 삭제하거나 되돌리지 않습니다.
 - 모노레포 루트의 package manager와 lockfile을 사용하고, 앱별 빌드·테스트는 가능한 한 workspace filter로 좁혀 실행합니다.
+- squash 병합은 [최종 메시지 사전검사](docs/process/squash-merge-preflight.md)를 따릅니다. 사용자 병합 승인 후에만 `pnpm pr:squash ... --merge`를 사용해 최종 메시지 전체를 commitlint로 재검사하고 검증한 head에 전달합니다. 직접 `gh pr merge --squash`로 우회하거나 main 이력을 재작성하지 않습니다.
 - Next.js 앱은 해당 앱의 `AGENTS.md`와 로컬 `node_modules/next/dist/docs/` 문서를 먼저 확인합니다. 최신 API·라우팅·캐싱·서버/클라이언트 경계를 기억에만 의존해 판단하지 않습니다.
 
 ## Jira·Confluence 작업 기록

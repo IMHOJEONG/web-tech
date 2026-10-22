@@ -96,6 +96,20 @@ test("repository ignores generated outputs and keeps authored formatting targets
   }
 });
 
+test("docs lint ignores Playwright bundles without excluding authored scripts", async () => {
+  const cwd = path.join(root, "apps/docs");
+  const eslint = new ESLint({ cwd });
+  for (const file of [
+    "playwright-report/offline/retention-probe/trace/assets/viewer.js",
+    "test-results/offline/attachment.js",
+  ]) {
+    assert.equal(await eslint.isPathIgnored(path.join(cwd, file)), true);
+  }
+  for (const file of ["public/offline-reader.js", "lib/search-query.ts"]) {
+    assert.equal(await eslint.isPathIgnored(path.join(cwd, file)), false);
+  }
+});
+
 test("nested docs and backend formatting styles remain independent", async () => {
   assert.deepEqual(
     await prettier.resolveConfig(
@@ -274,6 +288,23 @@ function ciJob(name) {
   assert.ok(match, `CI job exists: ${name}`);
   return match[1];
 }
+
+test("squash tooling stays check-only by default and its regression/type checks run in CI", () => {
+  const scripts = readJson("package.json").scripts;
+  assert.equal(
+    scripts["pr:squash"],
+    "node --experimental-strip-types ./scripts/squash-merge.mts",
+  );
+  assert.doesNotMatch(scripts["pr:squash"], /--merge/);
+  assert.ok(scripts["test:repo"].includes("./scripts/*.test.mts"));
+  assert.ok(ciJob("unit-contract-tests").includes("pnpm test:repo"));
+  assert.ok(ciJob("typecheck").includes("pnpm typecheck:squash"));
+  assert.ok(ciJob("typecheck").includes("pnpm typecheck:toolchain"));
+  const config = readJson("tsconfig.squash-merge.json");
+  assert.equal(config.compilerOptions.erasableSyntaxOnly, true);
+  assert.equal(config.compilerOptions.noEmit, true);
+  assert.ok(config.files.includes("scripts/squash-merge.test.mts"));
+});
 
 test("CI isolates browser suites from unit tests without dropping viewport coverage", () => {
   const unit = ciJob("unit-contract-tests");

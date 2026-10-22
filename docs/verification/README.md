@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-22 squash 최종 메시지 사전검사](resilience/2026-10-22-squash-merge-preflight.md): main 이력 보존·실제 footer 재현·병합 요청 격리 회귀. pnpm12 전환 PR #55와의 역할 구분.
+
 - [10-22 pnpm12 툴체인·서명 검증](integration/2026-10-22-pnpm12-toolchain.md): 앱 lock 유지·설치 실패 경계·전체 검사·두 backend 이미지 검증, 운영 교체는 별도.
 
 - [10-22 CI 증거 보관·이동 계측](resilience/2026-10-22-navigation-evidence-retention.md): busy 변화·응답 수신 완료와 보고서/trace 보관. 로컬 회귀와 새 원격 업로드 검증을 구분.
