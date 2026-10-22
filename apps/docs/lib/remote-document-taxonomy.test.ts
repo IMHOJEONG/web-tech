@@ -106,19 +106,9 @@ test('remote canonical taxonomy reaches search, filters and hubs without losing 
                         { filter: /(?:local-search-cache|get-category)$/ },
                         (args) => ({
                             path: args.path.endsWith('get-category')
-                                ? 'category'
-                                : 'index',
-                            namespace: 'fixture',
-                        })
-                    )
-                    builder.onLoad(
-                        { filter: /.*/, namespace: 'fixture' },
-                        (args) => ({
-                            contents:
-                                args.path === 'category'
-                                    ? `export async function getSubCategoryData(){return ${JSON.stringify([local])}}`
-                                    : `export async function getLocalSearchIndex(){return ${JSON.stringify([local])}}`,
-                            loader: 'js',
+                                ? 'taxonomy-test-local-category'
+                                : 'taxonomy-test-local-index',
+                            external: true,
                         })
                     )
                 },
@@ -139,15 +129,22 @@ test('remote canonical taxonomy reaches search, filters and hubs without losing 
     const bundledModule = { exports: {} as Api }
     const require = createRequire(import.meta.url)
     new Function('require', 'module', 'exports', bundled.outputFiles[0]!.text)(
-        (id: string) =>
-            id === 'server-only'
-                ? {}
-                : id === 'ky'
-                  ? {
-                        get: (url: string, options: object) =>
-                            ky.get(url, { ...options, fetch }),
-                    }
-                  : require(id),
+        (id: string) => {
+            if (id === 'server-only') return {}
+            if (id === 'taxonomy-test-local-index') {
+                return { getLocalSearchIndex: async () => [local] }
+            }
+            if (id === 'taxonomy-test-local-category') {
+                return { getSubCategoryData: async () => [local] }
+            }
+            if (id === 'ky') {
+                return {
+                    get: (url: string, options: object) =>
+                        ky.get(url, { ...options, fetch }),
+                }
+            }
+            return require(id)
+        },
         bundledModule,
         bundledModule.exports
     )

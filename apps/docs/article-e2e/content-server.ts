@@ -6,6 +6,15 @@ let releaseRemoteBody: (() => void) | undefined
 let remoteBodyGate: Promise<void> | undefined
 let remoteBodyStatus = 200
 
+const taxonomyBodies = new Map(
+    ['web', 'ui-ux', 'mobile'].map((channel) => [
+        `/posts/${channel}/taxonomy-fixture`,
+        `<article><h1>Taxonomy fixture ${channel}</h1>
+            <p>Synthetic canonical channel regression document.</p>
+            <h2>Fixture ending</h2><p>Taxonomy fixture body complete.</p></article>`,
+    ])
+)
+
 // Synthetic credential and content, never an operational token or NAS document.
 const server = createServer(async (request, response) => {
     response.setHeader('Cache-Control', 'private, no-store')
@@ -107,15 +116,10 @@ const server = createServer(async (request, response) => {
         )
         return
     }
-    const taxonomyChannel =
-        /^\/posts\/(web|ui-ux|mobile)\/taxonomy-fixture$/.exec(
-            request.url ?? ''
-        )?.[1]
-    if (taxonomyChannel) {
+    const taxonomyBody = taxonomyBodies.get(request.url ?? '')
+    if (taxonomyBody) {
         response.setHeader('Content-Type', 'text/html; charset=utf-8')
-        response.end(`<article><h1>Taxonomy fixture ${taxonomyChannel}</h1>
-            <p>Synthetic canonical channel regression document.</p>
-            <h2>Fixture ending</h2><p>Taxonomy fixture body complete.</p></article>`)
+        response.end(taxonomyBody)
         return
     }
     if (request.url === '/posts/web/article-e2e-publication') {

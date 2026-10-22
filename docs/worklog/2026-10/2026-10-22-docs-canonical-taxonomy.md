@@ -95,6 +95,27 @@ Jira 댓글 `10018`은 기존 표를 보존한 실제 3열 후속 표로 갱신�
 원격 CI는 새 PR의 실행 ID·head SHA·각 job 결과를 확인한 뒤 같은 Jira 표와 Confluence에 기록한다.
 이 문서는 시점별 증거이며 이후 PR 상태를 자동으로 실시간 복제하지 않는다.
 
+### PR #57 초기 원격 검사와 CodeQL 보완
+
+[Draft PR #57](https://github.com/IMHOJEONG/web-tech/pull/57)을 생성해 head `327963e`에서
+[CI](https://github.com/IMHOJEONG/web-tech/actions/runs/39746166816)와
+[Documentation](https://github.com/IMHOJEONG/web-tech/actions/runs/39746166680)이 성공했다.
+하지만 CodeQL 분석 job의 성공과 별개로 종합 security check는 신규 High 1개·Medium 2개 때문에 실패했다.
+
+- [경고 39](https://github.com/IMHOJEONG/web-tech/security/code-scanning/39), `js/reflected-xss`:
+  합성 서버가 요청 URL의 정규식 capture를 HTML에 넣었다. 실제 허용값은 세 문자열뿐이지만
+  요청에서 응답으로 이어지는 흐름이 경고 대상이었다. 요청 값을 보간하지 않고 고정 경로→고정 HTML의 Map에서 선택하도록 바꿨다.
+- [경고 40](https://github.com/IMHOJEONG/web-tech/security/code-scanning/40)·
+  [41](https://github.com/IMHOJEONG/web-tech/security/code-scanning/41), `js/bad-code-sanitization`:
+  fixture를 `JSON.stringify`로 소스 코드에 넣었다. esbuild 외부 모듈과 `require` 바인딩에 실제 객체·함수를
+  주입하도록 바꿔 데이터의 코드 문자열 생성을 제거했다. 로컬 앱 모듈을 묶어 실행한다는 테스트 의도는 유지한다.
+- 정적 허용 경로 세 개의 본문·Content-Type, 미인증 401, 미등록 경로와 script payload 경로의 404·입력 비반사를 회귀 검사한다.
+  CodeQL 경고를 dismiss하거나 검사 규칙을 완화하지 않았다. NAS나 운영 서비스에서 XSS 악용이 재현됐다는 뜻은 아니다.
+
+보완 후 집중 분류 검사 30개와 Production 빌드·브라우저 검사 10개가 통과했다.
+브라우저 10개는 기존 8개와 화면 프로젝트별 합성 서버 경계 검사 2개다. 전체 라이브러리와 타입 검사도 다시 실행한다.
+같은 PR에 별도 보완 커밋을 push한 뒤 새 head의 CodeQL 경고 해소와 CI 결과를 확인한다.
+
 ## Open Questions
 
 - 원격 본문 검색 계약과 응답 byte budget은 기존 [개선 후보](2026-10-22-docs-improvement-recheck.md)로 남긴다.
