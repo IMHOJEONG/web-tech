@@ -40,8 +40,15 @@ test("zero aggregates remain zero even when the separately polled ingest status 
   assert.equal(getKevCount(zeros), 0);
 });
 
-test("older backend total count falls back to full ingest count, never feed length", () => {
+test("legacy fallback requires explicitly passing the ingest status", () => {
   assert.equal(getTrackedCount(status, cards.slice(0, 3)), 99);
+});
+
+test("independent panels keep missing overview aggregates unknown without ingest status", () => {
+  assert.equal(getTrackedCount(undefined, cards.slice(0, 3)), undefined);
+  assert.equal(getCriticalCount(undefined, []), undefined);
+  assert.equal(getP1Count(undefined, []), undefined);
+  assert.equal(getKevCount([]), undefined);
 });
 
 test("missing KEV metrics do not substitute a count of advisory records", () => {

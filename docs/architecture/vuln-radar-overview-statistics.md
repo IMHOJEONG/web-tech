@@ -4,9 +4,9 @@
 
 - 상태: 적용 중
 - 대상: vuln-radar·vuln-radar-backend Overview
-- 최종 검토: 2026-10-21
+- 최종 검토: 2026-10-22
 
-main `527d4b0` 기준 로컬 구현을 작업별 커밋으로 분리했다. 푸시·병합·운영 배포는 미완료다. [KAN-23](https://web-tech-service.atlassian.net/browse/KAN-23)에서 추적한다.
+main `527d4b0` 기준 초기 구현을 작업별 커밋으로 분리한 뒤 PR #54에 푸시했다. 현재 PR 브랜치에서 검증 중이며 main 병합·운영 배포는 미완료다. 통계 계약은 [KAN-23](https://web-tech-service.atlassian.net/browse/KAN-23), 부분 장애의 패널 경계는 [KAN-27](https://web-tech-service.atlassian.net/browse/KAN-27)에서 추적한다.
 
 ## 배경
 
@@ -25,7 +25,7 @@ main `527d4b0` 기준 로컬 구현을 작업별 커밋으로 분리했다. 푸�
 
 기존 카드 ID 세 개를 유지하고 전체 건수 카드를 추가한다. `kev-new`는 호환용 이름이며 신규 증가량·최근 하루 KEV 추가량이 아니다. KEV 권고문이 여러 개여도 같은 취약점을 중복 집계하지 않는다. `dataSource.reason`은 `live_read_model`이다. 이 통계는 서비스에 저장한 데이터의 현황이며 전 세계 모든 CVE나 실제 조치 완료 여부를 뜻하지 않는다.
 
-프런트의 두 전체 건수 표시와 P0·P1·KEV 지표는 같은 Overview 응답을 우선 사용한다. 이전 백엔드에 전체 건수 카드가 없으면 기존 ingest/status의 전체 건수를 사용하지만 Feed 길이를 전체 건수로 대체하지 않는다. KEV 카드 누락 시 권고문 행 수로 대체하지 않고 `—`로 표시한다. 0은 누락이 아니므로 정상적인 집계 0을 유지한다.
+프런트 패널의 두 전체 건수 표시와 P0·P1·KEV 지표는 같은 Overview 응답만 사용한다. 이전 백엔드에 해당 카드가 없으면 시점이 다른 ingest/status 숫자나 Feed 길이로 대체하지 않고 `—`로 표시한다([ADR-0017](adr-0017-vuln-radar-panel-failure-isolation.md)). KEV 카드 누락 시에도 권고문 행 수로 대체하지 않는다. 0은 누락이 아니므로 정상적인 집계 0을 유지한다.
 
 `GET /api/feed`는 기존 `priority ASC, lastModifiedAt DESC` 정렬과 최대25개 제한을 유지한다. Overview 목록은 그중 일부만 표시하고 전체 통계와 표본의 차이를 안내한다. 전역 최신순 목록·전체 검색·서버 페이지네이션은 이번에 구현하지 않는다.
 
