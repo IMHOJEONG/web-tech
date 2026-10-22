@@ -28,6 +28,12 @@ docs 라이브러리 285개·docs Production build와 Nest build도 통과했다
 실제 토큰/DB 변경·main 병합·NAS 운영 이미지 교체는 하지 않는다.
 원격 PR·검사 링크는 push 이후 존재하는 SHA를 기준으로 Jira·Confluence에 연결한다.
 
+[PR #58](https://github.com/IMHOJEONG/web-tech/pull/58)을 Ready로 생성했다.
+초기 head `48d196e`의 CodeQL JS/TS·Actions 분석 결과 0건, 보안 종합 annotation 0,
+문서 검사·amd64 이미지 빌드 성공을 확인했다. main 경고는 아직 열린 상태다.
+CodeRabbit의 문서 재현 명령 지적 1건을 확인해 격리 테스트 명령을 명시하고 입력 접두부 설명도 바로잡았다.
+제품 코드 지적은 없으며 문서만 보완한 새 head의 CI는 다시 확인한다.
+
 ## Open Questions
 
 - main 경고 해소와 NAS 운영 반영은 PR 병합·이미지 교체 후 별도 검증이 필요하다.
@@ -35,5 +41,5 @@ docs 라이브러리 285개·docs Production build와 Nest build도 통과했다
 
 ## Next
 
-- 보안 수정·회귀와 문서를 독립 커밋해 push하고 main 대상 PR을 준비한다.
-- 같은 head의 CI·CodeQL 결과와 보존 검사를 Jira·Confluence에 기록하고 재조회한다.
+- 문서 재현 보완을 독립 커밋해 같은 PR에 push하고 해당 리뷰 스레드를 검증 후 해결한다.
+- 최신 head의 CI·CodeQL 결과와 보존 검사를 Jira·Confluence에 기록하고 재조회한다.

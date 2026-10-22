@@ -26,7 +26,14 @@ mise exec -- pnpm --filter docs-backend check
 mise exec -- pnpm --filter docs build
 ```
 
-수정 전에는 기준 main에 새 performance test만 추가하고 첫 명령을 실행했다.
+수정 전에는 기준 main의 `body-style.ts`를 유지한 채 새 performance test만 추가하고 아래 명령을 실행했다.
+
+```bash
+mise exec -- node --experimental-strip-types --test \
+  packages/docs-content-contract/src/body-style-performance.test.ts
+```
+
+의존성 설치 명령이 아니라 격리 performance test를 직접 실행하는 명령이다.
 테스트는 고정 코드의 별도 Node 프로세스에서 250,000개 공백이 포함된 본문을 검사한다.
 `## ` + 공백 + `word\rrest`처럼 매칭에 실패하는 입력을 앞에 두고, CR·U+2028·U+2029와
 두 공백 위치 조합 6개, 긴 정상 제목·기존 공백 전용 제목 2개를 검사한다.
@@ -59,7 +66,8 @@ H1·제목 깊이·callout·fence·메타데이터 API와 기존 실패/경고 �
 
 99,999개 대조는 별도 로컬 하네스로 원래 작업 트리의 미수정 모듈과 새 모듈을 가져와 실행했다.
 alphabet은 공백·TAB·CR·LF·U+2028·U+2029·`x`·`#`·NBSP·BOM이며
-접두부는 빈 값·`#`·`##`·`###`·`######`·`#######`·선행 공백과 `##`·TAB/공백 뒤의 `##` 조합이다.
+접두부 목록은 `""`, `"#"`, `"##"`, `"###"`, `"######"`, `"#######"`, `" ##"`, `"##\t"`, `"## "`이다.
+마지막 두 항목은 `##` 뒤에 TAB 또는 공백이 붙은 경우다.
 이는 유한 입력 집합의 호환성 증거이며 모든 문자열에 대한 수학적 증명은 아니다.
 
 로컬 콘텐츠 테스트의 최초 실행은 sandbox의 loopback `listen` 제한 `EPERM`으로 중단됐다.
@@ -67,6 +75,12 @@ alphabet은 공백·TAB·CR·LF·U+2028·U+2029·`x`·`#`·NBSP·BOM이며
 최초 sandbox 내 docs build는 컴파일 단계에서 진행하지 않아 이번에 시작한 프로세스만 종료했다.
 권한을 허용한 동일 명령은 완료됐다. 환경 차이만으로 세부 정지 원인을 확정하지 않는다.
 기존 TCP 공개 글의 placeholder 스타일 경고는 남겼으며 공개 글은 수정하지 않았다.
+
+초기 PR head `48d196e`에서 [CodeQL 분석](https://github.com/IMHOJEONG/web-tech/actions/runs/39781256438)이 완료됐고,
+같은 head의 JS/TS 분석 `2004827457`·Actions 분석 `2004824822`의 `results_count`가 모두 0이었다.
+[보안 종합 check](https://github.com/IMHOJEONG/web-tech/runs/119833071128)도 annotation 0으로 성공했다.
+[amd64 이미지 빌드](https://github.com/IMHOJEONG/web-tech/actions/runs/39781260474)는 `push: false`로 성공했다.
+이는 초기 head의 원격 결과이며 이 문서 보완 커밋의 새 SHA 검증과 main·운영 반영은 구분한다.
 
 ## 한계와 후속 작업
 
