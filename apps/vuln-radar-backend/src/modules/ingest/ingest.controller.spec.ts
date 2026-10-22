@@ -18,6 +18,15 @@ describe('IngestController', () => {
       },
     ]),
     getStatus: jest.fn(async () => ({
+      observation: {
+        scope: 'process' as const,
+        observedSince: '2026-05-18T14:00:00.000Z',
+        outcome: 'unknown' as const,
+        lastStartedAt: null,
+        lastFinishedAt: null,
+        lastSuccessAt: null,
+        sources: [],
+      },
       checkedAt: '2026-05-18T15:00:00.000Z',
       mode: 'pull' as const,
       storage: 'database' as const,
@@ -108,6 +117,7 @@ describe('IngestController', () => {
 
     expect(response.storage).toBe('database');
     expect(response.counts.vulnerabilities).toBe(10);
+    expect(response.observation.lastSuccessAt).toBeNull();
   });
 
   it('forwards sync requests', async () => {

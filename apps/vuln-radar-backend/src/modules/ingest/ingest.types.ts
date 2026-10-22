@@ -1,4 +1,5 @@
 import type { RadarPriority } from '../../shared/types/radar';
+import type { IngestObservationSnapshot } from './ingest-observation';
 
 export interface CollectedVulnerability {
   cveId: string;
@@ -63,6 +64,7 @@ export interface IngestSyncResponse {
 }
 
 export interface IngestStatusResponse {
+  observation: IngestObservationSnapshot;
   checkedAt: string;
   mode: 'pull';
   storage: 'database' | 'unavailable';
