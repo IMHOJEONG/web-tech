@@ -78,3 +78,39 @@ test("body leading horizontal rules are not mistaken for frontmatter", () => {
       .length > 0,
   );
 });
+
+test("preserves heading boundaries and whitespace semantics", () => {
+  const cases: Array<[string, boolean]> = [
+    ["## Topic", true],
+    ["###\tTopic\u00a0", true],
+    ["##\u00a0\uFEFFTopic\u2028", true],
+    ["## \rTopic", true],
+    ["## \u2028Topic", true],
+    ["## Topic\r\t", true],
+    ["##  ", true],
+    ["## \r ", true],
+    ["## \t", true],
+    ["## ", false],
+    ["## \r", false],
+    ["##\r\u2028", false],
+    ["## Topic\rMore", false],
+    ["## Topic\u2028More", false],
+    ["## Topic\u2029More", false],
+    [" ## Topic", false],
+    ["##Topic", false],
+    ["####### Topic", false],
+  ];
+
+  for (const [body, isHeading] of cases) {
+    assert.deepEqual(
+      getMarkdownBodyStyleIssues(body, published),
+      {
+        failures: [],
+        warnings: isHeading
+          ? []
+          : ["published content should include at least one heading"],
+      },
+      JSON.stringify(body),
+    );
+  }
+});
