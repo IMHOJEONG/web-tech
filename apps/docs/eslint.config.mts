@@ -5,6 +5,9 @@ import globals from 'globals'
 export default [
     ...nextJsConfig,
     {
+        ignores: ['playwright-report/**', 'test-results/**'],
+    },
+    {
         files: ['public/offline-reader.js'],
         languageOptions: { globals: globals.browser },
     },

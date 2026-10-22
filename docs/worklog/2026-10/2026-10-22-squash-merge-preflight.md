@@ -4,7 +4,7 @@
 
 main `9a208e09eed76b32a68f7f3a310a241dabaa2a50`에서 `codex/squash-merge-preflight`를 생성했다.
 PR #53 병합 메시지 실패를 재현하고, 다음 squash 요청에 최종 메시지 전체 검사와 head 고정을 추가한다.
-main 이력은 재작성하지 않으며 이번 요청은 별도 PR 준비까지다.
+main 이력은 재작성하지 않으며 초기 요청은 별도 PR 준비까지였다. 이후 사용자 승인으로 #55를 먼저 병합하고 #56에 최신 main을 반영하는 통합 검증을 수행했다. #56 병합은 승인 범위 밖이다.
 
 - Jira: [KAN-22](https://web-tech-service.atlassian.net/browse/KAN-22).
 - Confluence: [개발·운영 안내](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817/web-tech+Jira).
@@ -24,10 +24,18 @@ main 이력은 재작성하지 않으며 이번 요청은 별도 PR 준비까지
 GitHub 병합 명령은 회귀 테스트에서 격리된 대역으로 검사하며 실제 PR은 병합하지 않는다.
 기존 stash·TCP·NAS·환경 파일은 변경하지 않는다. 앱 구조·공개 계약 변경이 아닌 기존 운영 규칙의 보완이므로 새 ADR은 만들지 않는다.
 
+### PR55 병합과 통합 검증
+
+- 최종 메시지 검사 도구로 #55를 main9fb8816에 병합하고 실제 커밋 메시지와 검사 스냅샷의 동일성을 확인했다.
+- 열린 #56에 main을 no-ff 병합하며 CI·검증 목차·worklog 목차의 충돌3개를 해결했다. `typecheck:toolchain`과 `typecheck:squash`를 모두 보존하고 CI 계약 회귀도 보강했다.
+- pnpm12.14.0 frozen 설치·전용 타입 검사2종·저장소108개·강제 workspace lint/typecheck/test를 통과했다. 상세는 검증 보고서의 후속 절에 둔다.
+- 로컬에서 기존 Playwright 보고서 번들까지 lint하는 문제를 발견했다. 생성물 경로2개만 제외하고 실제 소스가 계속 포함되는 회귀를 추가했다. 보고서·trace는 보존했다.
+- #55 main CI·Production 배포와 #56 통합 head CI를 별도로 확인한다. 원격 결과는 PR·Jira·Confluence에 최종 SHA 기준으로 연결한다.
+
 ## Open Questions
 
 - GitHub UI 우회까지 막는 서버측 병합 메시지 정책은 별도 과제다.
-- 먼저 병합한 PR 이후 나머지 PR을 최신 main에 반영하며 `typecheck:toolchain`과 `typecheck:squash`를 모두 보존하고 통합 검증해야 한다.
+- #56 통합 head의 원격 CI·리뷰 확인과 이후 별도 병합 승인이 남아 있다.
 
 ## Next
 

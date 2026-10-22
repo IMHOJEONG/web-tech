@@ -8,6 +8,8 @@
 - 실제 commitlint·파일시스템·Node 자식 프로세스를 사용한다. GitHub 조회/병합은 회귀 테스트에서 주입한 대역을 사용하므로 실제 원격 쓰기는 없다.
 - 배경: [main CI의 실제 메시지 실패](https://github.com/IMHOJEONG/web-tech/actions/runs/39699972108/job/119566570905). 기존 실패 기록과 main 이력은 유지한다.
 
+이 조건과 아래98개 결과는 초기 pnpm11 검증 기록이다. 사용자 후속 승인으로 실행한 PR55 병합·pnpm12 통합 결과는 별도 절에서 구분한다.
+
 ## 재현 방법
 
 저장소 루트에서 실행한다. 버전 변경이나 전역 설치 없이 기존 의존성을 사용한다.
@@ -53,12 +55,48 @@ mise exec -- pnpm test:repo
 
 pnpm 업그레이드 절차·서명 검증·lockfile·Docker 결과는 #55의 [운영 절차](https://github.com/IMHOJEONG/web-tech/blob/7de34b3fbc11f2cb4a1f21aa35a018425b068ad8/docs/runbooks/pnpm-toolchain-upgrade.md)와 [검증 원본](https://github.com/IMHOJEONG/web-tech/blob/7de34b3fbc11f2cb4a1f21aa35a018425b068ad8/docs/verification/integration/2026-10-22-pnpm12-toolchain.md)을 참조한다. 여기에는 별도의 버전 조사·업그레이드 체크리스트를 중복 유지하지 않는다.
 
+## PR55 병합 후 pnpm12 통합 검증
+
+사용자 승인으로 PR55를 2026-10-22 10:13:14 KST에 main으로 squash 병합했다. 새 main은 `9fb8816285a9e57f1953dcde0bb5547a0023a437`이며 #56은 병합하지 않는다. 앞의 두 PR 미병합 표현은 이전 단계의 기록이다.
+
+1. #56의 `pnpm pr:squash ... --merge` 경로로 최종 메시지 전체를 검사하고 승인된 PR55 head `7de34b3fbc11f2cb4a1f21aa35a018425b068ad8`에 고정해 요청했다.
+2. 실제 main 커밋 메시지를 다시 읽어 사전검사 스냅샷과 동일함을 확인하고 commitlint를 다시 통과했다. 정규화된 전체 메시지 SHA-256은 `6dad912eacacd8ff14f46a6ce1ecdfba41abfeb28789f022ccd9465d61a89ec5`다.
+3. #56의 열린 브랜치에 `origin/main`을 no-ff 병합했다. CI와 두 문서 목차의 충돌3개를 수동으로 해결해 두 타입 검사와 양쪽 링크를 모두 보존했다. 원격 이력 재작성·force push는 하지 않는다.
+4. mise의 실제 pnpm12.14.0·Node24.12.0으로 아래 로컬 검사를 수행했다. #55의 package-manager lock과 앱 lock 내용을 추가 변경하지 않았다.
+
+```bash
+mise exec -- pnpm --version
+mise exec -- node --version
+mise exec -- pnpm install --frozen-lockfile
+mise exec -- pnpm typecheck:toolchain
+mise exec -- pnpm typecheck:squash
+mise exec -- pnpm test:repo
+mise exec -- pnpm exec turbo lint --force
+mise exec -- pnpm exec turbo typecheck --force
+mise exec -- pnpm exec turbo test --force
+```
+
+| 검사                         | 관측                                                                                                     | 판정                            |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| frozen 설치                  | pnpm12.14.0, 전체11 workspace, lockfile up to date                                                       | 통과                            |
+| 설치기·squash 전용 타입 검사 | 두 명령 모두 성공                                                                                        | 통과                            |
+| 저장소 통합 회귀             | 기존98개 + 설치기9개 + 생성물 lint 경계1개 =108개, 실패/skip0                                            | 통과                            |
+| workspace 강제 검사          | lint7/7·typecheck9/9·test6/6, 캐시 사용0                                                                 | 통과                            |
+| 실제 main 메시지             | 검사한 제목·본문·footer와 동일, commitlint 재통과                                                        | 통과                            |
+| 새 main CI·배포              | [CI39704412874](https://github.com/IMHOJEONG/web-tech/actions/runs/39704412874)와 같은 SHA의 배포를 확인 | 최종 결과는 PR·Jira 기록에 연결 |
+| 공개 검색 표본               | 새 Production에서 Chromium151·ko/en·1280/390px4흐름 통과, client-side 이동 유지                          | 통과                            |
+| #56 원격 통합 CI             | 통합 커밋 푸시 후 같은 head에서 확인                                                                     | 로컬 결과와 구분                |
+
+첫 로컬 lint는 남아 있던 `apps/docs/playwright-report/offline/retention-probe/trace/assets`의 생성 번들에서3791개 경고를 보고해 실패했다. pnpm 설치나 authored 소스의 오류가 아니다. 보고서·trace는 삭제하지 않고 docs ESLint의 전역 ignore에 `playwright-report/**`, `test-results/**`만 추가했다. 생성 JS는 제외하면서 `public/offline-reader.js`와 실제 TS 소스는 검사 대상으로 유지하는 API 회귀를 추가한 뒤 다시 전체 lint를 통과했다. 경고 한도는0 그대로다.
+
+블로그 Production 배포는 `dpl_Cw4v7kvtkUv9MamJUP18sRCZK29F`의 READY·production·main9fb8816을 API로 확인했다. `heap-forge.app` alias와 연결됐으며 이는 #55 배포다. #56의 통합 코드는 아직 운영에 반영된 것이 아니다. NAS 교체·DB 연결·서버 전체 기동은 이번 범위에 포함하지 않는다.
+
 ## 한계와 후속 작업
 
 - 이번 보완은 CLI 운영 경로다. GitHub UI를 원격 강제로 막거나 branch protection을 변경하지 않는다.
 - 원격 CI·리뷰를 확인한 뒤 별도 승인으로 실제 병합을 검증한다. 성공 응답만으로 merge queue·Production 완료를 선언하지 않는다.
 - 기존 main CI의 메시지 실패는 그대로 남으며 이력 재작성·검사 완화는 하지 않는다.
-- pnpm12 전환은 #55에서 진행한다. 이 PR은 pnpm 핀·설치기·lockfile을 변경하지 않으며 두 PR 통합 검증과 운영 배포는 별도다.
+- pnpm12 전환은 #55로 main에 반영했다. #56의 통합 회귀는 위 결과로 구분하며 #56 병합·Production 반영은 아직이다.
 
 ## 관련 문서
 
