@@ -46,6 +46,30 @@ test('a healthy delayed RSC response does not consume the post-commit UI budget'
     }
     const result = await completed
     if (result.error) throw result.error
+    const attachment = info.attachments.find(
+        ({ name }) => name === 'offline-article-navigation'
+    )
+    expect(attachment?.body).toBeDefined()
+    const report = JSON.parse(attachment!.body!.toString())
+    expect(report.nprogress.status).toBe('observed')
+    expect(
+        report.nprogress.samples.some(
+            (sample: { busy: boolean }) => sample.busy
+        )
+    ).toBe(true)
+    expect(report.nprogress.samples.at(-1).busy).toBe(false)
+    const headers = report.events.find(
+        (event: { event: string; rsc: boolean; prefetch: boolean }) =>
+            event.event === 'response-headers' && event.rsc && !event.prefetch
+    )
+    expect(headers?.status).toBe(200)
+    expect(
+        report.events.some(
+            (event: { event: string; requestId: number }) =>
+                event.event === 'response-finished' &&
+                event.requestId === headers.requestId
+        )
+    ).toBe(true)
 })
 
 test('an HTTP failure is not mistaken for successful article navigation', async ({
