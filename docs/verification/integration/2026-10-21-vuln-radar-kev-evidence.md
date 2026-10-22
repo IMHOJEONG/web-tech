@@ -53,9 +53,38 @@ KEV 커밋은 API `1fa7a4e`, 화면 `70ebe01`, 통합 회귀·합성 증거 `6aa
 
 백엔드 단위34개(이번3개 추가), 프런트 로직15개(이번5개 추가), HTTP4개가 통과했다. 두 앱 lint·typecheck와 통합 실행기 strict/erasable 타입 검사도 통과했다. 실제0·null을 반환하는 DB/API 검사와 구버전/503을 주입하는 화면 대조군을 구분한다.
 
+### PR #54 원격 CI·CodeQL·리뷰 확인
+
+2026-10-22 KST에 [PR #54](https://github.com/IMHOJEONG/web-tech/pull/54)의 head `f2241690e59ad102ea89b08bbe6ed4c8e91c752a`를 조회했다. 앞선 게시 후 확인 대기와 아래 완료 결과를 구분한다. 애플리케이션 코드를 변경하거나 CI를 재실행하지 않고 GitHub 결과·분석 기록·리뷰 스레드·실행 로그를 읽었다.
+
+| 대상             | 관측 결과                                                                      | 근거                                                                                                                                                                                               |
+| ---------------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CI               | 13개 job 모두 성공, 최종 Test 성공                                             | [run 39622450106](https://github.com/IMHOJEONG/web-tech/actions/runs/39622450106), head SHA 일치. 00:09:55 KST 완료                                                                                |
+| 회귀 검사 실행   | backend 34개·frontend test:lib 15개 통과                                       | [Unit and Contract Tests 로그](https://github.com/IMHOJEONG/web-tech/actions/runs/39622450106/job/119299188793). 최종 Test의 unit-contract-tests/docs-browser/offline-reading 모두 success         |
+| CodeQL           | Actions·JavaScript/TypeScript 분석 성공, 결과 각 0건                           | [run 39622523589](https://github.com/IMHOJEONG/web-tech/actions/runs/39622523589), analysis ID 1997501111·1997504633. `refs/pull/54/head`와 head SHA 일치, rules_count 각각 17·87, error 빈 문자열 |
+| 열린 CodeQL 경고 | 해당 PR head ref 0건                                                           | Code scanning alerts API의 state=open 조회. merge ref가 아니라 실제 분석이 등록된 head ref로 재확인                                                                                                |
+| 기타 검사        | Documentation·GitGuardian·Vercel Preview 등 포함 조회된 22개 상태 모두 SUCCESS | PR statusCheckRollup. vuln-radar·web-tech Preview 두 앱 성공. 운영 동작 검증을 의미하지 않음                                                                                                       |
+| 리뷰 지적        | 인라인 스레드 0개, 제출된 리뷰 0개                                             | reviewThreads/reviews 조회. 해결 처리할 기존 지적 없음                                                                                                                                             |
+| CodeRabbit       | 실제 리뷰 미실행                                                               | [사용량 제한 코멘트](https://github.com/IMHOJEONG/web-tech/pull/54#issuecomment-6319482864)의 Review limit reached. 상태 SUCCESS만으로 코드 리뷰 통과로 해석하지 않음                              |
+
+저장소 루트에서 GitHub 읽기 권한이 있는 `gh`로 조회한다. 아래 head가 달라지면 이전 SHA의 결과를 새 커밋의 성공으로 사용하지 않는다.
+
+```sh
+gh pr view 54 --json headRefOid,state,mergeStateStatus,statusCheckRollup,reviews
+gh run view 39622450106 --json headSha,status,conclusion,jobs
+gh run view 39622450106 --job 119299188793 --log
+gh run view 39622450106 --job 119301696139 --log
+gh run view 39622523589 --json headSha,status,conclusion,jobs
+gh api 'repos/IMHOJEONG/web-tech/code-scanning/analyses?ref=refs%2Fpull%2F54%2Fhead&per_page=20'
+gh api 'repos/IMHOJEONG/web-tech/code-scanning/alerts?ref=refs%2Fpull%2F54%2Fhead&state=open&per_page=100'
+gh api graphql -f query='query { repository(owner:"IMHOJEONG",name:"web-tech") { pullRequest(number:54) { reviewThreads(first:100) { nodes { isResolved isOutdated path line comments(first:30) { nodes { body url } } } } comments(first:50) { nodes { body url } } } } }'
+```
+
+실제 분석이 head ref에 등록되어 있으므로 merge ref 조회만 비었다는 사실은 무경고의 근거가 아니다. 해당 head 분석의 존재·SHA·오류·결과 수와 열린 경고를 함께 대조했다. 현재 지적을 수정하거나 리뷰 스레드를 해결 처리할 대상은 없다. CodeRabbit 재리뷰와 사람의 검토는 별도이며 이번에 자동 재요청·승인·병합하지 않았다.
+
 ## 한계와 후속 작업
 
-이 보고서의 초기 검사는 미커밋 작업 트리 기준이다. 후속 사용자 요청으로 KEV도 API·화면·회귀·문서 단위로 분리해 통계 수정과 함께 main 대상 PR을 준비한다. 위 결과를 아직 실행하지 않은 원격 CI·배포의 성공으로 해석하지 않는다. 운영 관측일·실기기·Safari/Firefox는 미검증이다. 503/범위 밖 점수·백엔드 중단 시 오류 로그는 의도한 대조 조건이며 전체 콘솔 오류0을 주장하지 않는다. 통합의 브라우저 예외 검사는 uncaught pageerror를 대상으로 한다.
+이 보고서의 초기 검사는 미커밋 작업 트리 기준이다. 후속 사용자 요청으로 KEV도 API·화면·회귀·문서 단위로 분리해 통계 수정과 함께 main 대상 PR #54를 생성했다. 로컬 검증·위 head의 원격 CI 성공·Preview 빌드 성공·운영 동작 검증은 서로 다르다. Production Branch 변경·main 병합·Railway의 신규 API 배포 검증은 이번에 하지 않았다. 운영 관측일·실기기·Safari/Firefox는 미검증이다. 503/범위 밖 점수·백엔드 중단 시 오류 로그는 의도한 대조 조건이며 전체 콘솔 오류0을 주장하지 않는다. 통합의 브라우저 예외 검사는 uncaught pageerror를 대상으로 한다.
 
 EPSS는 저장값이며 최신 FIRST 데이터와 동기화됐음을 검사하지 않았다. 모바일 카드 전환·전체 컬럼의 동시 노출·다른 API 부분 장애를 해결한 것은 아니다.
 
