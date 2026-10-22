@@ -146,6 +146,8 @@ Next.js 스트리밍에서 not-found는 HTTP `200`으로 나갈 수 있다. 오�
 ## Classification Contract
 
 2026-10-22 `codex/vuln-production-main`에서 분류 수정 `6f6974e`와 브라우저 회귀 `3f8bf5e`로 분리했다.
+CI용으로는 main `4e61767` 기반 `codex/docs-canonical-taxonomy-kan29`에 블로그 변경만 옮겼다.
+기존 운영 문서·브랜치는 보존하며 이 PR에 함께 포함하지 않는다.
 로컬 검증 결과이며 원격 CI·운영 배포 여부는 [작업 기록](../worklog/2026-10/2026-10-22-docs-canonical-taxonomy.md)에서 구분한다.
 기존 공개 URL과 backend route 검증 계약은 변경하지 않는다.
 
