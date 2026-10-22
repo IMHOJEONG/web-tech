@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-22 블로그 개선 후보 재점검](2026-10-22-docs-improvement-recheck.md)
+
 - [10-22 Railway 자격 증명 교체 계획](2026-10-22-railway-credential-rotation-plan.md)
 
 - [10-22 vuln-radar main Production 전환 착수](2026-10-22-vuln-radar-main-production-transition.md)
