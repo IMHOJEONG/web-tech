@@ -8,6 +8,12 @@
 
 - [10-21 vuln-radar 전체 통계와 Feed 분리](2026-10-21-vuln-radar-overview-statistics.md)
 
+- [10-22 squash 최종 메시지 사전검사](2026-10-22-squash-merge-preflight.md)
+
+- [10-22 pnpm12 툴체인과 서명 유지](2026-10-22-pnpm12-toolchain.md)
+
+- [10-22 KAN-22 CI 증거 보관·이동 계측](2026-10-22-navigation-evidence-retention.md)
+
 - [10-21 KAN-22 main 기준 이동 검사 보완](2026-10-21-kan22-offline-navigation.md)
 
 - [10-21 PR #51 CRP navigation 비교 조사](2026-10-21-crp-navigation-timing.md)

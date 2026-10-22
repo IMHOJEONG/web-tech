@@ -1,5 +1,7 @@
 # 운영 및 재현 절차
 
+- [pnpm 툴체인 업그레이드와 서명 검증](pnpm-toolchain-upgrade.md)
+
 - [블로그 main 배포 운영과 복구](docs-main-production-deployment.md)
 
 - [vuln-radar 로컬 통합 검증](vuln-radar-local-integration-verification.md)

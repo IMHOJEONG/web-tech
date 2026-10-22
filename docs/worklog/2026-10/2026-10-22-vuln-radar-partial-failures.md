@@ -18,6 +18,8 @@
 
 ## Open Questions
 
+후속 승인으로 먼저7개 커밋을 PR #54에 푸시했다. `29f5c44`의 CodeQL 두 분석은 성공·결과0건이지만 main과 목차3개가 충돌해 일반 CI는 생성되지 않았다. 사용자가 추가 승인한 main 동기화는 `00ed493`을 병합하고 양쪽 verification/artifacts/worklog 목차를 보존한다. 이때 이미 main에 병합된 PR #55의 pnpm12 툴체인을 상속하며 별도 pnpm 작업 트리의 미커밋 문서는 가져오지 않는다. 일반 CI·CodeQL은 병합한 새 head로 다시 확인하고 Jira/Confluence에 구분해 기록한다. GitHub 연결 앱의 PR 본문 쓰기는403이었으며 CLI의 기존 사용자 권한으로 갱신 가능 여부를 별도 확인한다.
+
 장기 장애의 polling/backoff, 서버 snapshot 일관성, 영속 오프라인 캐시는 이번 범위 밖이다. 사용자에게 마지막 응답 시각과 최신 보장 아님을 알리되 stale 허용 기간에 따른 추가 제한이 필요한지는 운영 후 검토한다. 기존 backend는 빈 DB Feed와 빈 watchlist에 mock fallback을 반환하므로, 빈 응답 UI는 route 주입으로 별도 검증한다. 이 기존 fallback 정책을 실제 빈 결과로 바꾸는 것은 별도 과제이며 이번에 backend를 수정하지 않는다.
 
 ## Next

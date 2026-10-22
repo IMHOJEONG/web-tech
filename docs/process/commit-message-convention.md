@@ -163,10 +163,16 @@ fix(vuln-radar-app): add skeleton in overview
 
 ## 자동 검사
 
-이 저장소는 아래 두 경로에서 커밋 메시지를 검사한다.
+이 저장소는 아래 경로에서 커밋 메시지를 검사한다.
 
 1. 로컬 `commit-msg` hook
 2. GitHub Actions `Commit Messages` job
+3. 실제 squash 병합 직전 `pnpm pr:squash`의 최종 제목·본문·footer 검사
+
+PR의 개별 커밋이 통과해도 squash 과정에서 새로 작성한 설명은 검사된 것이 아니다.
+본문·footer의 줄 길이도 기본 규칙에 포함되므로 `KAN-22: ...` 같은 긴 설명을 한 줄로 넣지 않는다.
+단순 개행을 포함한 최종 메시지 파일을 만들고 [squash 사전검사 절차](squash-merge-preflight.md)를 따른다.
+기존 main 메시지는 재작성하지 않으며 검사 규칙을 완화해 과거 실패를 숨기지 않는다.
 
 사용 도구:
 

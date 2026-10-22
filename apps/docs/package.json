@@ -27,6 +27,7 @@
         "test:article:prod": "playwright test --config=playwright.article.config.ts",
         "test:code-block": "playwright test --config=playwright.code-block.config.ts",
         "test:offline": "playwright test --config=playwright.offline.config.ts",
+        "verify:offline-evidence": "node --experimental-strip-types ./scripts/verify-offline-evidence.ts",
         "check:prod-routes": "node ./scripts/check-prod-routes.mjs",
         "pretest:better-stack:local": "pnpm --filter @web-tech/docs-content-contract build",
         "test:better-stack:local": "node ./scripts/test-better-stack-local.mjs",

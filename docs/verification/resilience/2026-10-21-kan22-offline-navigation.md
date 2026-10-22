@@ -112,6 +112,87 @@ Timeout: 5000ms
 
 리뷰에서 아래 미커밋·미푸시 표현이 현재 상태처럼 읽히는 지적을 확인해 과거형으로 보완했다. 이는 문서만 바꾸는 후속 커밋이며, 해당 커밋까지 포함한 최종 PR head의 오프라인 job·최종 `Test`·전체 CI는 다시 확인한다. 최신 실행 결과는 PR·KAN-22·Confluence에 연결하고 위 첫 head의 성공을 새 SHA의 결과로 대신하지 않는다.
 
+### PR #52 main 병합 후 확인
+
+사용자 승인으로 PR #52를 2026-10-21 22:08:45 KST에 squash 병합했다. 병합 SHA는 `527d4b054b4f70137f1fb1b896d8a11ccf392b8c`다. 아래 결과는 PR head의 성공이 아니라 새 main SHA를 다시 조회한 것이다.
+
+| 대상                               | 결과               | 근거와 한계                                                                                                                                                                   |
+| ---------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| main CI                            | 13개 job 모두 통과 | [CI 39605425753](https://github.com/IMHOJEONG/web-tech/actions/runs/39605425753). 오프라인 실제 `22 passed (1.5m)`                                                            |
+| 최종 Test                          | 통과               | [집계 job](https://github.com/IMHOJEONG/web-tech/actions/runs/39605425753/job/119242923787)의 `unit-contract-tests=success docs-browser=success offline-reading=success` 확인 |
+| 별도 검사                          | 통과               | 같은 SHA의 Documentation·CodeQL 두 언어 포함 GitHub check run 16개 성공                                                                                                       |
+| 블로그 배포                        | Production READY   | `dpl_36mKXdrotfsnSPBetYgdKTDofho7`, API의 Git ref `main`·SHA 일치 및 공개 alias `heap-forge.app`의 동일 배포 연결 확인                                                        |
+| 공개 HTTP                          | 통과               | 주요 목록·About·영문 피드·robots·sitemap 9개 경로 200, 미인증 revalidation webhook 401. 인증된 게시 요청은 하지 않음                                                          |
+| 운영 로그 표본                     | 결과 없음          | Vercel CLI 53.1.1의 최근 20분 error·5xx 조회가 `No logs found`. 전체 기간 무장애의 근거는 아님                                                                                |
+| 공개 브라우저 검색·클라이언트 이동 | 미완료             | 아래 초기 클릭과 검색 상호작용 실패를 성공으로 처리하지 않음                                                                                                                  |
+
+공개 Chromium 1280px에서 DOMContentLoaded 직후 첫 카드 클릭은 상세 URL과 본문까지 도달했지만 `window` 식별자가 사라졌다. 전체 문서 이동이 관측된 것이며, 이를 곧바로 링크 장애나 hydration 지연으로 확정하지 않았다. 뒤이은 두 화면(1280/390px)의 별도 진단은 network idle 이후 검색 버튼을 클릭하고 `aria-expanded=true`를 기대했지만 10초 안에 열리지 않았다. 별도의 실행 오류 수집에서도 같은 결과였고, 수집된 script 응답은 모두 200, pageerror·console error 표본은 0이었다. 검색 검사가 실패해 그 뒤 카드의 클라이언트 이동 검사는 실행하지 못했다.
+
+**후속 정정:** 위의 “열리지 않았다”는 당시 assertion 실패를 실제 UI 상태로 오해한 기록이다. 아래 조사에서 실제 헤더 버튼은 열렸고, 열린 뒤 같은 이름의 제출 버튼이 추가돼 검사 선택자가 모호해졌음을 확인했다. 과거 실패 출력은 보존하되 서비스 장애의 증거로 사용하지 않는다.
+
+따라서 **CI·배포·HTTP 성공과 공개 브라우저 상호작용 성공을 구분**한다. 이 PR은 테스트·CI·문서만 바꿨으나, 이전 Production 비교나 실제 사용자 브라우저 검증은 하지 않아 새 배포의 회귀 또는 자동화 환경 문제 중 하나로 단정하지 않는다. 추가 앱 수정·롤백·강제 재배포·NAS 교체는 하지 않았다. KAN-22는 이 운영 확인 경계를 기록하고 검토 중으로 유지한다.
+
+배포 상태와 브라우저 실패의 선별 증거는 [병합 후 결과](../artifacts/2026-10-21-kan22-postmerge-verification.json)에 보관한다. 재조회한 주요 명령은 아래와 같다. 공개 브라우저 진단은 저장소 변경 없이 임시 Playwright 스크립트로 수행했으며 실기기 검사가 아니다.
+
+```bash
+gh pr view 52 --repo IMHOJEONG/web-tech --json state,mergedAt,mergeCommit
+gh run view 39605425753 --repo IMHOJEONG/web-tech --json headSha,status,conclusion,jobs
+gh api repos/IMHOJEONG/web-tech/actions/jobs/119240266605/logs
+gh api repos/IMHOJEONG/web-tech/actions/jobs/119242923787/logs
+vercel inspect dpl_36mKXdrotfsnSPBetYgdKTDofho7 --scope hojeong-ims-projects
+vercel inspect https://heap-forge.app --format=json --scope hojeong-ims-projects
+```
+
+### 공개 검색 실패의 원인 분리
+
+2026-10-21 같은 main SHA와 Production 배포에서 원래 스크립트를 그대로 재실행하면 두 화면 모두 다시 실패했다. 그러나 헤더 토글만 고르는 선택자로는 같은 공개 사이트의 마우스·Enter 입력이 성공했다. 화면을 띄운 설치 Chrome에서도 동일했다. **이 검색 실패는 headless Chromium 자체의 문제나 재현된 서비스 장애가 아니라 진단 스크립트의 선택자 충돌이었다.**
+
+원인은 [한국어 번역](../../../apps/docs/shared/message/ko.json)의 `triggerLabel`과 `submitAriaLabel`이 모두 `문서 검색`인 점이다. 닫힌 동안 다음 선택자는 보이는 토글 하나에 일치하지만, 검색 패널을 열면 제출 버튼까지 두 개에 일치한다. `exact: true`는 이름의 정확한 일치이지 결과 하나를 보장하는 옵션이 아니다.
+
+```ts
+const ambiguous = page.getByRole("button", {
+  name: "문서 검색",
+  exact: true,
+});
+```
+
+실제 토글의 `aria-expanded`는 `true`, 패널은 visible, 입력창은 focused였다. 그 상태에서 모호한 선택자의 `getAttribute`는 `strict mode violation`으로 거부됐다. 영어는 토글 `Search docs`, 제출 `Search documents`로 이름이 달라 같은 선택자의 결과가 계속 하나였다. [Playwright 공식 문서](https://playwright.dev/docs/locators#strictness)도 locator가 사용 시 DOM을 다시 찾으며 단일 대상 작업의 모호성을 허용하지 않음을 설명한다.
+
+교정한 검사는 기존 앱 E2E처럼 헤더 안의 토글 계약으로 대상을 한정한다. `.first()`로 모호성을 숨기거나 서비스 번역을 바꿔 검사를 맞추지 않는다.
+
+```ts
+const trigger = page
+  .getByRole("banner")
+  .locator('form button[type="button"][aria-expanded][aria-controls]');
+await expect(trigger).toHaveCount(1);
+await trigger.click();
+await expect(trigger).toHaveAttribute("aria-expanded", "true");
+```
+
+| 비교                             | 결과                                                                                                                        |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| 수정하지 않은 원래 공개 진단     | 한국어 두 화면에서 실패 재현                                                                                                |
+| 마우스·Enter·DOM click 원인 분리 | Chromium headless와 Chrome headed에서 실제 헤더 열림. DOM click은 비신뢰 이벤트 대조군이며 사용자 입력 검증을 대체하지 않음 |
+| Chromium 151.0.7922.34 headless  | 두 언어 × 두 화면 × 3회, 전체 흐름 12개 통과                                                                                |
+| 설치 Chrome 156.0.8078.48 headed | 두 언어 × 두 화면, 전체 흐름 4개 통과. 임시 프로필의 자동화이며 사람의 수동 검사 아님                                       |
+| 최종 보관 스크립트 재실행        | 전체 흐름 4개 추가 통과                                                                                                     |
+| 모호한 선택자 음성 대조군        | 한국어 10회 모두 두 대상·strict read 거부 확인. 실제 토글은 계속 정상                                                       |
+
+총 20개 전체 흐름은 클릭으로 열기 → 입력 포커스 → Escape 닫기·포커스 복귀 → Enter 재열기 → React 검색 제출 → 결과 카드 Link → 상세 본문 표시를 확인했다. 검색과 상세 이동 모두 같은 `window`를 유지했고 document navigation 요청은 0개였다. 자동 재시도로 실패를 숨기지 않았다. 공개 원격 API나 페이지 응답을 mock하지 않았고, UI·번역·의존성·CI·운영 배포는 변경하지 않았다.
+
+읽기 전용 재현 도구는 [verify-public-search.ts](../../../apps/docs/scripts/verify-public-search.ts), 실행 결과·브라우저 버전·원인 대조군·보관 소스 해시는 [선별 증거](../artifacts/2026-10-21-public-search-selector-investigation.json)에 있다. 루트에서 다음 명령으로 실행한다. Chromium이 설치돼 있어야 하며 `--chrome --headed`는 설치 Chrome과 화면 접근 권한이 필요하다. 실제 사용자 프로필·쿠키는 쓰지 않는다.
+
+```bash
+mise exec -- node --experimental-strip-types apps/docs/scripts/verify-public-search.ts --repeat=3
+mise exec -- node --experimental-strip-types apps/docs/scripts/verify-public-search.ts --chrome --headed
+mise exec -- pnpm --filter docs exec tsc --ignoreConfig --noEmit --strict --skipLibCheck --target ES2022 --module NodeNext --moduleResolution NodeNext --erasableSyntaxOnly --types node scripts/verify-public-search.ts
+mise exec -- pnpm --filter docs exec eslint scripts/verify-public-search.ts --max-warnings 0
+```
+
+타입 검사와 lint도 통과했다. 초기 단일 파일 타입 검사는 TS6의 `--ignoreConfig` 누락과 node_modules 직접 경로 타입 해석 때문에 실패했으며, 정상 앱 패키지 import로 정리한 최종 도구에서 통과했다. 이 원인 분리용 음성 대조군은 현재 한국어 문구의 관측을 재현한다. 나중에 제품의 접근성 이름을 다르게 바꾸면 대조군도 재검토해야 하며 범용 상시 운영 모니터로 간주하지 않는다.
+
+Vercel 공개 alias는 307로 `heap-forge.app/ko/web`에 돌아왔으므로 독립 origin 비교로 계산하지 않았다. 보호를 우회하거나 WAF를 끄지 않았다. 초기 DOMContentLoaded 직후 카드의 문서 교체 원인은 이번 검색 선택자 결함과 별도로 미확정이며, 준비 상태를 확인한 뒤의 검색·상세 클라이언트 이동은 위 검사에서 정상임을 확인했다. Safari·Firefox·실기기·기존 사용자 프로필의 전체 동작을 일반화하지 않는다.
+
 ## 한계와 후속 작업
 
 - 원래 CI 실패는 여전히 미확정된 서버 지연 원인을 포함한다. cold compile, runner 경합, 네트워크 등 하나로 단정하지 않는다.

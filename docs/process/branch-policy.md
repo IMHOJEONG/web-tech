@@ -73,6 +73,7 @@ git switch -c feature/docs-search
 - 리뷰 스레드는 resolve 후 머지한다.
 - CI가 통과하지 않으면 머지하지 않는다.
 - 커밋 메시지는 `type(scope): summary` 규칙을 따른다.
+- squash 전에 [최종 메시지 사전검사](squash-merge-preflight.md)를 실행한다. PR 커밋 검사 통과만으로 새 squash 메시지도 유효하다고 판단하지 않는다. 실제 병합은 승인 후 같은 명령의 `--merge` 경로로 다시 검사한다.
 
 ## docs CI 검사와 배포 전환 상태
 
