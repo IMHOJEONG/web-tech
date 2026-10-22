@@ -43,14 +43,18 @@ PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 �
 ## 2026-10-22 블로그 재점검
 
 [KAN-29](https://web-tech-service.atlassian.net/browse/KAN-29)에서 main `4e61767`의 코드와
-격리 fixture를 대조했다. 아래는 새 개선 후보이며 구현·운영 배포 완료가 아니다.
+격리 fixture를 대조했다. 첫 분류 수정은 아래 기록처럼 로컬 구현·검증했고, 나머지는 개선 후보로 유지한다.
+운영 배포 완료를 의미하지 않는다.
 [재현 결과와 한계](../worklog/2026-10/2026-10-22-docs-improvement-recheck.md)를 따른다.
 
-- [ ] `P1` **canonical 경로의 분류를 공통화한다.** `web/…`, `ui-ux/…`, `mobile/…`가
+- [x] `P1` **canonical 경로의 분류를 공통화한다.** `web/…`, `ui-ux/…`, `mobile/…`가
       검색 section에서는 `Docs`, channel에서는 `other`로 분류되는 경계를 확인했다.
-      로컬 디렉터리 이름과 공개 canonical 경로의 매핑을 하나로 정하고 `/docs` 필터·허브·관련 글에서 공유한다.
+      로컬 디렉터리 이름과 공개 canonical 경로의 매핑을 하나로 정하고 `/docs` 필터·허브·Feed에 적용했다.
+      관련 글은 기존 canonical URL 기반의 세부 카테고리 점수를 유지하며 회귀 검사했다.
       완료 조건: 원격 경로 세 종류와 로컬 legacy 경로의 매핑, 선행 slash·파일 확장자,
-      원격/로컬 동일 route 중복 제거를 유닛·혼합 목록 E2E로 검증한다. 실제 운영 영향 문서 수는 미조사다.
+      원격/로컬 동일 route 중복 제거를 유닛·통합 검사하고, 혼합 목록 필터·허브를 두 언어와 두 화면 크기의 E2E로 검증했다.
+      [로컬 구현·검증 기록](../worklog/2026-10/2026-10-22-docs-canonical-taxonomy.md).
+      구현 `6f6974e`·브라우저 회귀 `3f8bf5e`로 분리했다. 원격 CI·운영 배포와 실제 운영 영향 문서 수는 별도 확인한다.
 - [ ] `P1` **원격 본문 검색의 계약을 결정한다.** 현재 원격 metadata의 `content`는 비워지고
       중복 canonical route는 원격 우선이므로 본문 전용 검색어가 local-only 1건에서 원격 활성화 시 0건으로 바뀐다.
       원격 published 본문에서 검색용 텍스트를 생성·제공할지, metadata-only 검색을 명시할지 결정한다.

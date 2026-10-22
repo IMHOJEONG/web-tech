@@ -143,6 +143,41 @@ Next.js 스트리밍에서 not-found는 HTTP `200`으로 나갈 수 있다. 오�
 
 즉 `slug`는 마지막 fallback이고, 공개 URL의 주 source는 `markdownPath`다.
 
+## Classification Contract
+
+2026-10-22 `codex/vuln-production-main`에서 분류 수정 `6f6974e`와 브라우저 회귀 `3f8bf5e`로 분리했다.
+로컬 검증 결과이며 원격 CI·운영 배포 여부는 [작업 기록](../worklog/2026-10/2026-10-22-docs-canonical-taxonomy.md)에서 구분한다.
+기존 공개 URL과 backend route 검증 계약은 변경하지 않는다.
+
+검색 section과 채널 판별은 `apps/docs/lib/document-taxonomy.ts`의 공용 분류기를 사용한다.
+메타데이터 객체에서는 비어 있지 않은 `markdownPath` → canonical `href` → `fileName` → `path` 순서로 선택한다.
+앞선 경로가 `feed/…`처럼 일반 문서인 경우에도 저장용 `fileName`으로 다시 추측하지 않는다.
+검색 항목에는 `markdownPath`가 없으므로 이미 계산한 canonical `href`를 사용한다.
+
+| 경로                                                                        | 검색 section     | 채널   |
+| --------------------------------------------------------------------------- | ---------------- | ------ |
+| `web/…`, `category/fe/…`, `data/v8/…`                                       | Web              | web    |
+| `ui-ux/…`, `data/shadcn/…`                                                  | UI/UX            | uiux   |
+| `mobile/…`, `category/mobile/…`, `category/fe/{react-native,ios,android}/…` | Mobile           | mobile |
+| `category/be/…`                                                             | Backend          | other  |
+| `category/infra/…`                                                          | Infrastructure   | other  |
+| `category/computer-science/…`                                               | Computer Science | other  |
+| `feed/…`, 미분류 경로                                                       | Docs             | other  |
+
+Mobile의 명시적 로컬 경로는 일반 `category/fe/…`보다 먼저 검사한다.
+`web/android/…`는 명시적인 Web 문서이며 파일명 중간의 단어만 보고 Mobile로 바꾸지 않는다.
+선행·후행 slash, Windows 구분자, `.md`·`.mdx`·`.html`, legacy `apps/docs/` 경로와
+한국어·영어 canonical 링크를 분류 전에 정리한다. 이 정리는 분류용이며 입력 허용·경로 접근 권한 검증을 대체하지 않는다.
+
+- `/docs`의 Mobile 요약·필터와 두 언어 문구를 함께 제공한다.
+- 허브는 공개 인덱스를 한 번 받아 같은 분류기로 필터링한다. Web만 로컬 카테고리를 다시 조회해 합치지 않는다.
+  인덱스가 선택한 원격 우선·canonical route 중복 제거를 그대로 유지한다.
+- Feed와 랜딩의 채널 판별도 같은 메타데이터를 전달한다. 명시한 `topicLabel`은 보존한다.
+- 관련 글은 이미 `getDocHref`를 사용한다. 카테고리별 세부 추천 점수는 유지하고 로컬 alias·원격 canonical 경로의
+  일치와 저장 경로 충돌을 회귀 검사한다. 모든 Web 문서를 같은 추천 카테고리로 합치지 않는다.
+
+변경과 검증 범위는 [분류 불일치 수정 기록](../worklog/2026-10/2026-10-22-docs-canonical-taxonomy.md)을 따른다.
+
 ## Decision Summary
 
 1. 채널 허브와 상세 route는 역할을 분리한다.
