@@ -1,0 +1,564 @@
+{
+  "issue": "KAN-22",
+  "date": "2026-10-22",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "5f2f699f6398d70a06de33b3a952947657b0a1ba",
+  "state": "local uncommitted changes; no new remote CI or upload performed",
+  "environment": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "node": "24.12.0",
+    "pnpm": "11.10.0",
+    "playwright": "1.62.1",
+    "chromium": "151.0.7922.34",
+    "headless": true,
+    "viewports": [
+      [1280, 800],
+      [390, 844]
+    ],
+    "workers": 1,
+    "retries": 0,
+    "isolatedCopy": true,
+    "realEnvCopied": false,
+    "remoteIndex": false
+  },
+  "fullSuite": {
+    "startTime": "2026-10-21T15:05:00.794Z",
+    "duration": 51586.845,
+    "expected": 34,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "observerRepeat": {
+    "startTime": "2026-10-21T15:06:39.799Z",
+    "duration": 13202.612000000001,
+    "expected": 36,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "repoTestsPassed": 64,
+  "appTypecheck": "passed",
+  "changedEslint": "passed",
+  "failureProbe": {
+    "expectedExitCode": 1,
+    "observedExitCode": 1,
+    "stats": {
+      "startTime": "2026-10-21T15:09:42.388Z",
+      "duration": 9993.574999999999,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "actualStatus": "failed",
+    "intentionalMissingAttribute": true,
+    "committedToRepository": false,
+    "jsonReport": true,
+    "htmlReport": true,
+    "navigationAttachment": true,
+    "trace": {
+      "bytes": 5540575,
+      "sha256": "751132cb0602b4c6906f2efd6481b588e6aefefe07692348a34fddf231e6db3b",
+      "zipIntegrity": "unzip -t passed"
+    },
+    "result": "Expected failure demonstrates local retention, not a product regression or successful GitHub upload."
+  },
+  "upload": {
+    "scope": "Docs Offline Reading only",
+    "action": "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+    "version": "v7.0.2",
+    "retentionDays": 7,
+    "condition": "!cancelled()",
+    "timeoutMinutes": 2,
+    "paths": [
+      "apps/docs/playwright-report/offline/",
+      "apps/docs/test-results/offline-report/",
+      "apps/docs/test-results/offline/"
+    ],
+    "remoteStatus": "not executed"
+  },
+  "samples": [
+    {
+      "title": "a healthy delayed RSC response does not consume the post-commit UI budget",
+      "project": "offline-desktop",
+      "status": "passed",
+      "attachments": [
+        {
+          "name": "offline-article-navigation",
+          "data": {
+            "schemaVersion": 2,
+            "path": "/ko/docs/category/fe/browser/critical-rendering-path-diagnosis",
+            "clock": "node performance.now since observation start",
+            "progressInstallation": {
+              "startedMs": 0.007292000000234111,
+              "finishedMs": 19.069582999999966
+            },
+            "events": [
+              {
+                "event": "request",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": true,
+                "prefetch": false,
+                "ms": 62.95358299999998
+              },
+              {
+                "event": "response-headers",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": true,
+                "prefetch": false,
+                "status": 200,
+                "ms": 7408.013292
+              },
+              {
+                "event": "response-finished",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": true,
+                "prefetch": false,
+                "ms": 7424.647708
+              },
+              {
+                "event": "url-committed",
+                "ms": 7449.613708000001
+              },
+              {
+                "event": "body-visible",
+                "ms": 7520.361167000001
+              }
+            ],
+            "droppedEvents": 0,
+            "pendingRequestIds": [],
+            "nprogress": {
+              "status": "observed",
+              "clock": "browser performance.now since observer installation",
+              "samples": [
+                {
+                  "event": "initial",
+                  "ms": 0,
+                  "busy": false
+                },
+                {
+                  "event": "change",
+                  "ms": 44.10000014305115,
+                  "busy": true
+                },
+                {
+                  "event": "change",
+                  "ms": 7455.600000143051,
+                  "busy": false
+                },
+                {
+                  "event": "final",
+                  "ms": 7508.600000143051,
+                  "busy": false
+                }
+              ],
+              "droppedSamples": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "records rapid progress changes and removes observation listeners",
+      "project": "offline-desktop",
+      "status": "passed",
+      "attachments": [
+        {
+          "name": "observer-regression",
+          "data": {
+            "schemaVersion": 2,
+            "path": "/failed",
+            "clock": "node performance.now since observation start",
+            "progressInstallation": {
+              "startedMs": 0.006208000000697211,
+              "finishedMs": 2.4505000000008295
+            },
+            "events": [],
+            "droppedEvents": 0,
+            "pendingRequestIds": [],
+            "nprogress": {
+              "status": "observed",
+              "clock": "browser performance.now since observer installation",
+              "samples": [
+                {
+                  "event": "initial",
+                  "ms": 0.09999990463256836,
+                  "busy": false
+                },
+                {
+                  "event": "change",
+                  "ms": 2.200000047683716,
+                  "busy": true
+                },
+                {
+                  "event": "change",
+                  "ms": 2.200000047683716,
+                  "busy": false
+                },
+                {
+                  "event": "final",
+                  "ms": 4.799999952316284,
+                  "busy": false
+                }
+              ],
+              "droppedSamples": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "distinguishes response headers from body completion without recording content",
+      "project": "offline-desktop",
+      "status": "passed",
+      "attachments": [
+        {
+          "name": "observer-regression",
+          "data": {
+            "schemaVersion": 2,
+            "path": "/stream",
+            "clock": "node performance.now since observation start",
+            "progressInstallation": {
+              "startedMs": 0.008583000000726315,
+              "finishedMs": 2.5948330000010174
+            },
+            "events": [
+              {
+                "event": "request",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": true,
+                "prefetch": true,
+                "ms": 7.849541000001409
+              },
+              {
+                "event": "response-headers",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": true,
+                "prefetch": true,
+                "status": 200,
+                "ms": 8.927458000000115
+              },
+              {
+                "event": "response-finished",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": true,
+                "prefetch": true,
+                "ms": 107.8817909999998
+              }
+            ],
+            "droppedEvents": 0,
+            "pendingRequestIds": [],
+            "nprogress": {
+              "status": "observed",
+              "clock": "browser performance.now since observer installation",
+              "samples": [
+                {
+                  "event": "initial",
+                  "ms": 0,
+                  "busy": false
+                },
+                {
+                  "event": "final",
+                  "ms": 108.59999990463257,
+                  "busy": false
+                }
+              ],
+              "droppedSamples": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "HTTP errors can finish downloading without becoming successful navigation",
+      "project": "offline-desktop",
+      "status": "passed",
+      "attachments": [
+        {
+          "name": "observer-regression",
+          "data": {
+            "schemaVersion": 2,
+            "path": "/failed",
+            "clock": "node performance.now since observation start",
+            "progressInstallation": {
+              "startedMs": 0.008583999999245862,
+              "finishedMs": 2.3586670000004233
+            },
+            "events": [
+              {
+                "event": "request",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": false,
+                "prefetch": false,
+                "ms": 4.808875000000626
+              },
+              {
+                "event": "response-headers",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": false,
+                "prefetch": false,
+                "status": 503,
+                "ms": 5.508583999999246
+              },
+              {
+                "event": "response-finished",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": false,
+                "prefetch": false,
+                "ms": 5.95508399999926
+              }
+            ],
+            "droppedEvents": 0,
+            "pendingRequestIds": [],
+            "nprogress": {
+              "status": "observed",
+              "clock": "browser performance.now since observer installation",
+              "samples": [
+                {
+                  "event": "initial",
+                  "ms": 0,
+                  "busy": false
+                },
+                {
+                  "event": "final",
+                  "ms": 5.900000095367432,
+                  "busy": false
+                }
+              ],
+              "droppedSamples": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "network failure is recorded without a fabricated completion",
+      "project": "offline-desktop",
+      "status": "passed",
+      "attachments": [
+        {
+          "name": "observer-regression",
+          "data": {
+            "schemaVersion": 2,
+            "path": "/abort",
+            "clock": "node performance.now since observation start",
+            "progressInstallation": {
+              "startedMs": 0.008750000000873115,
+              "finishedMs": 2.1066659999996773
+            },
+            "events": [
+              {
+                "event": "request",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": false,
+                "prefetch": false,
+                "ms": 4.615707999999358
+              },
+              {
+                "event": "request-failed",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": false,
+                "prefetch": false,
+                "ms": 6.783750000000509
+              }
+            ],
+            "droppedEvents": 0,
+            "pendingRequestIds": [],
+            "nprogress": {
+              "status": "observed",
+              "clock": "browser performance.now since observer installation",
+              "samples": [
+                {
+                  "event": "initial",
+                  "ms": 0,
+                  "busy": false
+                },
+                {
+                  "event": "final",
+                  "ms": 7.300000190734863,
+                  "busy": false
+                }
+              ],
+              "droppedSamples": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "ending observation reports a pending stream instead of waiting for it",
+      "project": "offline-desktop",
+      "status": "passed",
+      "attachments": [
+        {
+          "name": "observer-regression",
+          "data": {
+            "schemaVersion": 2,
+            "path": "/stream",
+            "clock": "node performance.now since observation start",
+            "progressInstallation": {
+              "startedMs": 0.008958000000347965,
+              "finishedMs": 2.8062910000007832
+            },
+            "events": [
+              {
+                "event": "request",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": false,
+                "prefetch": false,
+                "ms": 7.684750000000349
+              },
+              {
+                "event": "response-headers",
+                "requestId": 1,
+                "type": "fetch",
+                "rsc": false,
+                "prefetch": false,
+                "status": 200,
+                "ms": 8.123665999999503
+              }
+            ],
+            "droppedEvents": 0,
+            "pendingRequestIds": [1],
+            "nprogress": {
+              "status": "observed",
+              "clock": "browser performance.now since observer installation",
+              "samples": [
+                {
+                  "event": "initial",
+                  "ms": 0.20000004768371582,
+                  "busy": false
+                },
+                {
+                  "event": "final",
+                  "ms": 105.29999995231628,
+                  "busy": false
+                }
+              ],
+              "droppedSamples": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "document replacement is explicit rather than a fake progress sample",
+      "project": "offline-desktop",
+      "status": "passed",
+      "attachments": [
+        {
+          "name": "observer-regression",
+          "data": {
+            "schemaVersion": 2,
+            "path": "/next",
+            "clock": "node performance.now since observation start",
+            "progressInstallation": {
+              "startedMs": 0.011791999999331892,
+              "finishedMs": 2.3400839999994787
+            },
+            "events": [
+              {
+                "event": "request",
+                "requestId": 1,
+                "type": "document",
+                "rsc": false,
+                "prefetch": false,
+                "ms": 5.616208999999799
+              },
+              {
+                "event": "response-headers",
+                "requestId": 1,
+                "type": "document",
+                "rsc": false,
+                "prefetch": false,
+                "status": 200,
+                "ms": 6.591458999999304
+              },
+              {
+                "event": "response-finished",
+                "requestId": 1,
+                "type": "document",
+                "rsc": false,
+                "prefetch": false,
+                "ms": 9.809959000000163
+              }
+            ],
+            "droppedEvents": 0,
+            "pendingRequestIds": [],
+            "nprogress": {
+              "status": "unavailable",
+              "reason": "observer missing, including document replacement"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "initialHashScope": "sourceSha256 belongs to the initial local inspection before the follow-up CI probe. Original measurements and hashes are preserved.",
+  "followUpProbeLocal": {
+    "summary": {
+      "verifiedAt": "2026-10-22T00:08:11.127Z",
+      "expectedFailureVerified": true,
+      "childExitCode": 1,
+      "productRegression": false,
+      "tracePath": "test-results/offline/retention-probe/trace-retention-controlled-trace-retention-failure/trace.zip",
+      "traceBytes": 12652,
+      "traceSha256": "4a7ed31cd67eeb436cf8cddbe32053c46f8bdd9b3c57db230ad3559223c1e426",
+      "zipIntegrity": "passed",
+      "jsonReport": true,
+      "htmlReport": true,
+      "navigationAttachment": true
+    },
+    "sourceSha256": {
+      ".github/workflows/ci.yml": "588b7975e3d3a62ccb72f61130db1373df558783c11e1f9706a76571f1b3c0d5",
+      "apps/docs/package.json": "aa2d03fafef5c7dd3758cc6a0317a108a59d599d57516adc8f74f2a8bae2edbb",
+      "apps/docs/playwright.offline.config.ts": "19908f9c19dcfa63a5f5efeef65717b472348d01b00aaf8db05d71686ea9f37e",
+      "apps/docs/playwright.evidence.config.ts": "e12f3bdc76de847604bc2abed2c004c07147ee6a085f6f2ec884be1fad09770a",
+      "apps/docs/evidence-fixtures/trace-retention.spec.ts": "33f1548c1cb5beda6248dfbf055e30496a7eadb4c6cac2b0922a5c50c3d7f994",
+      "apps/docs/scripts/verify-offline-evidence.ts": "c7db1d2f5b2ed85f1b896479db8bdf20efbbc1494b988d3e38bb74d974b3fb11",
+      "scripts/tooling-config.test.mjs": "6e8b7cdbc0f5b20429db3f1f6b9d793f9195b3904770ab9b9a59572352fe2843"
+    },
+    "negativeControl": {
+      "missingBrowserRejected": true,
+      "parentExitCode": 1,
+      "acceptedAsExpectedFailure": false
+    },
+    "productSuite": "unchanged; CI will run the same head after push"
+  },
+  "sourceSha256": {
+    ".github/workflows/ci.yml": "1223fe973dcbccd36166255db8135e8b7fb8758edf4ce55225ef2fb1f14d90c5",
+    "apps/docs/playwright.offline.config.ts": "19908f9c19dcfa63a5f5efeef65717b472348d01b00aaf8db05d71686ea9f37e",
+    "apps/docs/offline-e2e/article-navigation.ts": "562044df5c225875444b3de95d63ea8b589839d5b97d8b0c4959445ff1794813",
+    "apps/docs/offline-e2e/article-navigation.spec.ts": "d19e7af4e9b2b631c1125e12895899070e010398652f8488c4f795bd61aaaec9",
+    "apps/docs/offline-e2e/navigation-observer.ts": "a19600cf56d977a29dcafe7c4c7c6f0e5045f81d705d40e6d85796524c210671",
+    "apps/docs/offline-e2e/navigation-observer.spec.ts": "284e2edc8c54c7ea4b4c733c21ca015cd41e956ffd8953d87c82a61a83739ca6",
+    "scripts/tooling-config.test.mjs": "52f1badf791664c52ab73da890d80dbf96bc44f5d2c0b1d97d2beed1d25bb745"
+  },
+  "rawReportSha256": {
+    "full": "5410a087c95fb9ab6a873be4f092d44a7db7a9c0036b1b3460bd8f6285eb3a44",
+    "repeat": "747ff2c826088d0368e4b961cd1f49bf74ee2d2d91070c2eb5b9dbfe01d944db"
+  },
+  "limitations": [
+    "Original failed CI cannot be reconstructed from missing artifacts.",
+    "Node and browser monotonic clocks are separate; progressInstallation brackets observer setup.",
+    "Observation ends after body assertions and does not wait for every stream; pending IDs are not automatic failures.",
+    "Trace contents may contain DOM/network data; only public fixtures were used.",
+    "Local .next, .env, stash and unrelated TCP work were untouched.",
+    "Initial pnpm/symlink setup and NodeNext standalone typecheck failed before being corrected; final suite and app typecheck passed.",
+    "Full raw reports and trace remain temporary local data, not durable GitHub artifacts."
+  ]
+}
