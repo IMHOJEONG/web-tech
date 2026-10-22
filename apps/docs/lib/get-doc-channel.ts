@@ -1,39 +1,18 @@
-import { normalizeDocPath } from '~/lib/normalize-doc-path'
+import {
+    getDocumentTaxonomy,
+    type DocChannel,
+    type DocumentTaxonomySource,
+} from './document-taxonomy.ts'
 
-export type DocChannel = 'web' | 'mobile' | 'uiux' | 'other'
+export type { DocChannel } from './document-taxonomy.ts'
 
-export function getDocChannel(fileName?: string | null): DocChannel {
-    const normalizedFileName = normalizeDocPath(fileName ?? '')
-
-    if (
-        normalizedFileName.includes('/mobile/') ||
-        normalizedFileName.includes('/react-native/') ||
-        normalizedFileName.includes('/ios/') ||
-        normalizedFileName.includes('/android/')
-    ) {
-        return 'mobile'
-    }
-
-    if (
-        normalizedFileName.includes('/data/shadcn/') ||
-        normalizedFileName.includes('/ui-ux/')
-    ) {
-        return 'uiux'
-    }
-
-    if (
-        normalizedFileName.includes('/category/fe/') ||
-        normalizedFileName.includes('/data/v8/')
-    ) {
-        return 'web'
-    }
-
-    return 'other'
+export function getDocChannel(source?: DocumentTaxonomySource): DocChannel {
+    return getDocumentTaxonomy(source).channel
 }
 
 export function isDocInChannel(
     channel: Extract<DocChannel, 'web' | 'mobile' | 'uiux'>,
-    fileName?: string | null
+    source?: DocumentTaxonomySource
 ) {
-    return getDocChannel(fileName) === channel
+    return getDocChannel(source) === channel
 }

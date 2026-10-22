@@ -2,6 +2,7 @@ import type { SearchData } from '~/lib/get-search-data'
 
 export const DOCS_INDEX_SECTION_ORDER = [
     'Web',
+    'Mobile',
     'UI/UX',
     'Backend',
     'Infrastructure',
@@ -13,6 +14,7 @@ export type DocsIndexSectionKey = (typeof DOCS_INDEX_SECTION_ORDER)[number]
 
 export const DOCS_INDEX_SECTION_HREFS = {
     Web: '/web',
+    Mobile: '/mobile',
     'UI/UX': '/ui-ux',
     Backend: '/category/be',
     Infrastructure: '/category/infra',
@@ -24,6 +26,8 @@ export function getDocsIndexSectionMessageKey(section: DocsIndexSectionKey) {
     switch (section) {
         case 'Web':
             return 'web'
+        case 'Mobile':
+            return 'mobile'
         case 'UI/UX':
             return 'uiux'
         case 'Backend':

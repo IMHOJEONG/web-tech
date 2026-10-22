@@ -9,7 +9,7 @@ import {
     resolveCollectionContentSource,
 } from '~/lib/content-source-log'
 import { getLocalSearchIndex } from './local-search-cache'
-import { inferSearchSection } from './local-search-index'
+import { getDocumentTaxonomy } from './document-taxonomy'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
 import { rankSearchDocs } from '~/lib/search-ranking'
 import { normalizeSearchQuery } from '~/shared/lib/search-query'
@@ -67,7 +67,7 @@ function normalizeRemoteSearchDoc(doc: Partial<Metadata>): SearchData | null {
         updatedAt: doc.updatedAt,
         thumbnail: doc.thumbnail ?? null,
         href,
-        section: inferSearchSection(fileName),
+        section: getDocumentTaxonomy({ ...doc, href }).section,
         contentSource: 'remote',
         readMinutes: doc.readMinutes,
         topicLabel: doc.topicLabel,
