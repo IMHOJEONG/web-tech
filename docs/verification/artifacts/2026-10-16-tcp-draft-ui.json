@@ -1,0 +1,77 @@
+{
+  "observedAt": "2026-10-16T02:24:27.151Z",
+  "url": "http://127.0.0.1:3001/ko/preview/category/be/node-js/tcp-socket-endpoints-lab",
+  "scope": "development draft, Chromium viewport, not physical devices; packet capture is historical",
+  "views": [
+    {
+      "width": 320,
+      "status": 200,
+      "overflow": 0,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-endpoints.png&w=3840&q=75",
+          "naturalWidth": 320,
+          "width": 288,
+          "height": 301.5
+        },
+        {
+          "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-packet-flow.png&w=3840&q=75",
+          "naturalWidth": 320,
+          "width": 288,
+          "height": 486
+        }
+      ],
+      "nestedP": 0,
+      "pageErrors": [],
+      "codeDisclosure": true,
+      "noindex": true
+    },
+    {
+      "width": 390,
+      "status": 200,
+      "overflow": 0,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-endpoints.png&w=3840&q=75",
+          "naturalWidth": 390,
+          "width": 358,
+          "height": 374.78125
+        },
+        {
+          "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-packet-flow.png&w=3840&q=75",
+          "naturalWidth": 390,
+          "width": 358,
+          "height": 604.125
+        }
+      ],
+      "nestedP": 0,
+      "pageErrors": [],
+      "codeDisclosure": true,
+      "noindex": true
+    },
+    {
+      "width": 1280,
+      "status": 200,
+      "overflow": 0,
+      "images": [
+        {
+          "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-endpoints.png&w=3840&q=75",
+          "naturalWidth": 853,
+          "width": 448,
+          "height": 469
+        },
+        {
+          "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-packet-flow.png&w=3840&q=75",
+          "naturalWidth": 853,
+          "width": 448,
+          "height": 756
+        }
+      ],
+      "nestedP": 0,
+      "pageErrors": [],
+      "codeDisclosure": true,
+      "noindex": true
+    }
+  ],
+  "failure": null
+}

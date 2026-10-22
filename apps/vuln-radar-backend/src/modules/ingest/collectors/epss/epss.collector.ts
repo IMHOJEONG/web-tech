@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { AppConfigService } from '../../../../config/app-config.service';
 import { EpssScoreEntry } from '../../ingest.types';
 
 const EPSS_ENDPOINT = 'https://api.first.org/data/v1/epss';
@@ -15,6 +16,10 @@ type EpssResponse = {
 
 @Injectable()
 export class EpssCollector {
+  private readonly logger = new Logger(EpssCollector.name);
+
+  constructor(private readonly appConfigService: AppConfigService) {}
+
   async fetchScores(cveIds: string[]): Promise<EpssScoreEntry[]> {
     if (cveIds.length === 0) {
       return [];
@@ -23,12 +28,22 @@ export class EpssCollector {
     const chunks = chunkCveIds(cveIds);
     const allScores: EpssScoreEntry[] = [];
 
-    for (const chunk of chunks) {
+    this.logger.log(
+      `EPSS batch requests started: cveIds=${cveIds.length}, chunks=${chunks.length}, timeoutMs=${this.appConfigService.ingestSourceTimeoutMs}`,
+    );
+
+    for (const [index, chunk] of chunks.entries()) {
       const requestUrl = new URL(EPSS_ENDPOINT);
       requestUrl.searchParams.set('cve', chunk.join(','));
 
+      this.logger.log(
+        `EPSS batch request started: chunk=${index + 1}/${chunks.length}, cveIds=${chunk.length}`,
+      );
+
       const response = await fetch(requestUrl, {
-        signal: AbortSignal.timeout(20_000),
+        signal: AbortSignal.timeout(
+          this.appConfigService.ingestSourceTimeoutMs,
+        ),
       });
 
       if (!response.ok) {
@@ -38,6 +53,11 @@ export class EpssCollector {
       }
 
       const payload = (await response.json()) as EpssResponse;
+
+      this.logger.log(
+        `EPSS batch request completed: chunk=${index + 1}/${chunks.length}, received=${payload.data.length}`,
+      );
+
       allScores.push(
         ...payload.data.map((entry) => ({
           cveId: entry.cve,

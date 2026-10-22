@@ -1,0 +1,28 @@
+{
+  "observedAt": "2026-10-16T04:25:21.400Z",
+  "sourceSha256": "3488475d321a517d3adecb0a2a41915da7353dd382aecc28144ecb35a46a50b0",
+  "executableCodeSha256": "c5383a1d62d6c09c128c1d806733fc060ee78e81af3f228d2019c05d069b3c17",
+  "executableBlocks": 5,
+  "sourceBindingMatches": true,
+  "scope": "text edit; no new runtime/socket/capture experiment",
+  "views": [
+    {
+      "width": 390,
+      "status": 200,
+      "followupSummary": true,
+      "quizRemoved": true,
+      "declarativeHeadings": true,
+      "overflow": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 1280,
+      "status": 200,
+      "followupSummary": true,
+      "quizRemoved": true,
+      "declarativeHeadings": true,
+      "overflow": 0,
+      "pageErrors": []
+    }
+  ]
+}

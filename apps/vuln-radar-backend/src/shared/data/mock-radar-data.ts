@@ -19,6 +19,7 @@ import {
   vulnerabilitySeeds,
   watchMatchSeeds,
 } from './radar-seed-data';
+import { buildVulnerabilityReliability } from '../lib/vulnerability-reliability';
 
 const GENERATED_AT = radarGeneratedAt;
 
@@ -57,6 +58,7 @@ const feedItems: FeedItem[] = [
     publishedAt: '2026-05-18T02:12:00.000Z',
     updatedAt: '2026-05-18T06:40:00.000Z',
     matchedWatchlist: ['citrix', 'gateway'],
+    reliability: buildSeedReliability('CVE-2026-10001'),
   },
   {
     cveId: 'CVE-2026-10019',
@@ -68,6 +70,7 @@ const feedItems: FeedItem[] = [
     publishedAt: '2026-05-17T18:30:00.000Z',
     updatedAt: '2026-05-18T05:15:00.000Z',
     matchedWatchlist: ['kubernetes'],
+    reliability: buildSeedReliability('CVE-2026-10019'),
   },
   {
     cveId: 'CVE-2026-10044',
@@ -79,6 +82,7 @@ const feedItems: FeedItem[] = [
     publishedAt: '2026-05-17T22:50:00.000Z',
     updatedAt: '2026-05-18T04:02:00.000Z',
     matchedWatchlist: ['postgresql'],
+    reliability: buildSeedReliability('CVE-2026-10044'),
   },
 ];
 
@@ -258,12 +262,57 @@ export function getVulnerabilityDetailResponse(
       publishedAt: vulnerability.publishedAt.toISOString(),
       updatedAt: vulnerability.lastModifiedAt.toISOString(),
       matchedWatchlist,
+      reliability: buildVulnerabilityReliability({
+        advisorySources: advisories.map((advisory) => advisory.source),
+        cvssScore: vulnerability.cvssScore ?? null,
+        epssPercentile: vulnerability.epssPercentile ?? null,
+        epssScore: vulnerability.epssScore ?? null,
+        ingestedAt: vulnerability.lastModifiedAt,
+        isKev: vulnerability.isKev,
+        matchedWatchlist,
+        runtimeKind: 'mock',
+        upstreamModifiedAt: vulnerability.lastModifiedAt,
+      }),
       advisories,
       references: {
         nvdUrl: `https://nvd.nist.gov/vuln/detail/${vulnerability.cveId}`,
       },
     },
   };
+}
+
+function buildSeedReliability(cveId: string) {
+  const vulnerability = vulnerabilitySeeds.find((item) => item.cveId === cveId);
+
+  if (!vulnerability) {
+    return buildVulnerabilityReliability({
+      advisorySources: [],
+      cvssScore: null,
+      epssPercentile: null,
+      epssScore: null,
+      ingestedAt: null,
+      isKev: false,
+      matchedWatchlist: [],
+      runtimeKind: 'mock',
+      upstreamModifiedAt: null,
+    });
+  }
+
+  return buildVulnerabilityReliability({
+    advisorySources: advisorySeeds
+      .filter((item) => item.vulnerabilityCveId === cveId)
+      .map((item) => item.source),
+    cvssScore: vulnerability.cvssScore ?? null,
+    epssPercentile: vulnerability.epssPercentile ?? null,
+    epssScore: vulnerability.epssScore ?? null,
+    ingestedAt: vulnerability.lastModifiedAt,
+    isKev: vulnerability.isKev,
+    matchedWatchlist: watchMatchSeeds
+      .filter((item) => item.vulnerabilityCveId === cveId)
+      .map((item) => item.matchedValue),
+    runtimeKind: 'mock',
+    upstreamModifiedAt: vulnerability.lastModifiedAt,
+  });
 }
 
 function normalizeSeverity(

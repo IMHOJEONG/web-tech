@@ -1,1 +1,1 @@
-export { ContentPending as default } from '~/shared/ui/content-pending'
+export { UiUxHubPending as default } from '~/widgets/content-hub/ui/uiux-hub-pending'

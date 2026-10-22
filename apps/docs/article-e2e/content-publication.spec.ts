@@ -6,6 +6,7 @@ import {
     type Request,
 } from '@playwright/test'
 import { randomUUID } from 'node:crypto'
+import { traceBrowserNetwork } from './browser-network-trace.ts'
 
 const origin = 'http://127.0.0.1:3112'
 const documentPath = '/docs/web/article-e2e-publication'
@@ -65,14 +66,16 @@ async function expectArticle(page: Page, version: 1 | 2) {
     ).toBeVisible()
     await expect(page).toHaveTitle(`Publication cache probe V${version}`)
     await expect(page.getByTestId('article-pending')).toHaveCount(0)
-    // Do not abort the supplementary stream when moving to the next screen.
+    // Wait for this article's supplementary DOM; related-link prefetches
+    // are separate requests and may still be pending on the next navigation.
     await expect(page.getByTestId('article-supplementary')).toHaveCount(1)
     await expect(page.getByTestId('article-supplementary-pending')).toHaveCount(
         0
     )
 }
 
-async function expectScreens(page: Page, locale: string, version: 1 | 2) {
+// Fresh document requests verify server caches, not the browser's Router Cache.
+async function expectDirectScreens(page: Page, locale: string, version: 1 | 2) {
     for (const suffix of ['', '?q=Publication%20cache%20probe']) {
         await page.goto(`/${locale}/docs${suffix}`)
         const card = page.locator(`main a[href="/${locale}${documentPath}"]`)
@@ -87,7 +90,7 @@ async function expectScreens(page: Page, locale: string, version: 1 | 2) {
 }
 
 for (const locale of ['ko', 'en']) {
-    test(`${locale}: publication refreshes index, search and article only after an authorized webhook`, async ({
+    test(`direct URL cache: ${locale} publication refreshes index, search and article only after an authorized webhook`, async ({
         page,
         request,
     }) => {
@@ -97,6 +100,7 @@ for (const locale of ['ko', 'en']) {
         page.on('pageerror', (error) => errors.push(error.message))
         // Opt-in diagnostics only: never log auth headers or query values.
         if (traceRequests) {
+            await traceBrowserNetwork(page)
             const responseIds = new WeakMap<Request, string>()
             page.on('response', (response) => {
                 const id = response.headers()['x-article-request-id']
@@ -186,11 +190,11 @@ for (const locale of ['ko', 'en']) {
             await test.step('Warm V1 in the real index, search and detail screens', async () => {
                 await changeOrigin(request, 1)
                 await invalidate(request, revalidationToken)
-                await expectScreens(page, locale, 1)
+                await expectDirectScreens(page, locale, 1)
             })
             await test.step('Origin is V2 but cached screens stay V1', async () => {
                 await changeOrigin(request, 2)
-                await expectScreens(page, locale, 1)
+                await expectDirectScreens(page, locale, 1)
             })
             await test.step('Missing, invalid and read-only tokens cannot invalidate', async () => {
                 for (const token of [
@@ -199,7 +203,7 @@ for (const locale of ['ko', 'en']) {
                     readToken,
                 ]) {
                     await invalidate(request, token)
-                    await expectScreens(page, locale, 1)
+                    await expectDirectScreens(page, locale, 1)
                 }
             })
             await test.step('Authorized webhook updates the next request, not the already open DOM', async () => {
@@ -207,7 +211,7 @@ for (const locale of ['ko', 'en']) {
                 await expectArticle(page, 1)
                 await page.reload()
                 await expectArticle(page, 2)
-                await expectScreens(page, locale, 2)
+                await expectDirectScreens(page, locale, 2)
             })
             await test.step('Search uses the new summary, not the old index entry', async () => {
                 await page.goto(`/${locale}/docs?q=PUBLICATION_SUMMARY_V2`)

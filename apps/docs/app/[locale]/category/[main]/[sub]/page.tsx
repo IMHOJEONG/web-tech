@@ -6,6 +6,8 @@ import { getCategoryTopic } from '~/entities/category/model/category'
 import { CategoryDocumentCard } from '~/entities/category/ui/category-document-card'
 import { getSubCategoryData } from '~/lib/get-category'
 import { buildPageMetadata } from '~/lib/localized-metadata'
+import { Suspense } from 'react'
+import { CategorySubPending } from '~/widgets/category-browser/ui/category-pending'
 
 function findCategoryLabels(main: string, sub: string) {
     const match = getCategoryTopic(main, sub)
@@ -45,7 +47,17 @@ export async function generateMetadata({
     })
 }
 
-export default async function Page({
+export default function Page(props: {
+    params: Promise<{ main: string; sub: string }>
+}) {
+    return (
+        <Suspense fallback={<CategorySubPending />}>
+            <CategorySubResults {...props} />
+        </Suspense>
+    )
+}
+
+async function CategorySubResults({
     params,
 }: {
     params: Promise<{ main: string; sub: string }>

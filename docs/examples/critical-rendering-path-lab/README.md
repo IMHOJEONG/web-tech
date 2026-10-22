@@ -36,9 +36,13 @@ pnpm test:crp-lab:browser
 
 - render-blocking CSS 응답이 끝난 뒤 FCP가 발생하는가
 - parser-blocking script가 실행된 뒤 `DOMContentLoaded`가 발생하는가
-- JavaScript로 늦게 추가한 hero image가 baseline보다 늦게 요청되는가
+- baseline은 HTML의 이미지로 렌더링되고, 늦은 이미지는 같은 navigation에서 `late-lcp-scheduled` → `late-lcp-discovered` → hero 요청 순서를 지키는가
+- 기준 페이지의 HTML 응답이 500ms 늦어져도 실제 타이머 대기 240ms를 올바르게 판정하는가
+- 테스트에서 타이머 지연을 제거한 변형을 같은 assertion이 거부하는가
 
-테스트는 고정된 FCP·LCP 점수를 성능 예산으로 사용하지 않는다. 실행 환경에 따라 달라지는 절대 시간 대신 resource timing, `Server-Timing`, browser milestone 사이의 순서를 검증한다.
+테스트는 고정된 FCP·LCP 점수를 성능 예산으로 사용하지 않는다. 실행 환경에 따라 달라지는 절대 시간 대신 resource timing, `Server-Timing`, browser milestone 사이의 순서를 검증한다. 서로 다른 navigation의 `startTime` 차이는 초기 요청·브라우저 처리 비용까지 섞이므로 성공 조건으로 사용하지 않는다. 타이머 대기는 같은 문서의 두 mark로 검사하며 Chromium timestamp 정밀도·타이머 반올림에만 1ms 허용 오차를 둔다. 상한은 강제하지 않으며 재시도나 skip으로 실패를 숨기지 않는다.
+
+늦은 이미지 검사는 성공·실패 시 `late-lcp-timing` JSON을 Playwright 결과에 첨부한다. 로컬 HTML 리포트는 `pnpm --filter docs exec playwright test --config=playwright.crp.config.ts --reporter=html`로 만들 수 있다. 현재 CI는 이 리포트를 원격 artifact로 업로드하지 않으므로 로그만으로 당시 개별 타이밍이나 호스트 부하의 원인을 확정할 수 없다. 조사와 대조군 결과는 [PR #51 검증 보고서](../../verification/performance/2026-10-21-crp-navigation-timing.md)에 기록한다.
 
 브라우저에서는 DevTools의 Network에서 `Disable cache`를 켜고 Performance reload recording을 mode별로 최소 세 번 실행한다.
 

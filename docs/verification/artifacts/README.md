@@ -1,6 +1,59 @@
 # 검증 원본 증거
 
+- [10-22 CI 증거 보관·이동 계측](2026-10-22-navigation-evidence-retention.json): [검증 보고서](../resilience/2026-10-22-navigation-evidence-retention.md). 전체 34개·반복 36개와 의도적 실패 trace 생성, 실제 busy·헤더/본문 수신 샘플·소스 해시. 새 원격 업로드는 미검증.
+
+- [10-21 공개 검색 선택자 조사](2026-10-21-public-search-selector-investigation.json): [보고서](../resilience/2026-10-21-kan22-offline-navigation.md#공개-검색-실패의-원인-분리). 한국어 버튼 이름 충돌·두 브라우저 전체 흐름 20개 성공과 [재현 도구](../../../apps/docs/scripts/verify-public-search.ts).
+
+- [10-21 KAN-22 병합 후 결과](2026-10-21-kan22-postmerge-verification.json): [검증 보고서](../resilience/2026-10-21-kan22-offline-navigation.md#pr-52-main-병합-후-확인). main 527d4b0 CI·Production·HTTP 성공과 초기 공개 검색 검사 실패를 구분. 검색 실패 해석은 후속 선택자 조사로 정정.
+
+- [10-21 KAN-22 이동 비교](2026-10-21-kan22-offline-navigation.json): [검증 보고서](../resilience/2026-10-21-kan22-offline-navigation.md). main 첫 방문·재방문과 지연·503 대조군, 반복·집계 회귀와 소스 해시. 원래 CI 지연 원인은 미확정.
+
+- [10-21 CRP navigation 비교 측정](2026-10-21-crp-navigation-timing.json): [검증 보고서](../performance/2026-10-21-crp-navigation-timing.md). 원격 105.5ms 실패·로컬 기준 응답 지연 대조군·최종 100개 반복 결과와 소스 해시.
+
+- [10-21 콘텐츠 의존성 audit](2026-10-21-security-content-audit.json): [보안 보고서](../security/2026-10-21-vite-content-advisories.md). 전체 11건→braces high 1건·production 0건, 원격 경고 종료와 구분.
+
+- [10-21 TCP EOF 전후 재현](2026-10-21-tcp-eof-regression.json), [회귀 검사기](2026-10-21-tcp-eof-regression.test.mts), [후속 원문 검사](2026-10-21-tcp-publication-source-tests-eof.txt), [후속 공개 화면](2026-10-21-tcp-publication-local-eof.json): [게시 리뷰 보완](../content/2026-10-21-tcp-publication.md#리뷰-후-eof-회귀와-재검토). 이전 timeout과 새 EOF 종료·포트 정리, 정상 Enter 경로를 구분.
+
+- [10-21 TCP 게시 로컬 화면](2026-10-21-tcp-publication-local.json), [원문 검사](2026-10-21-tcp-publication-source-tests.txt), [실행 검사기](2026-10-21-tcp-publication-check.mts): [게시 보고서](../content/2026-10-21-tcp-publication.md). production 모드·두 locale·6개 화면·검색·사이트맵과 실제 MDX 검사. 운영 배포와 구분.
+
+- [10-21 TCP 모바일 도식](2026-10-21-tcp-packet-390.jpg), [데스크톱 본문](2026-10-21-tcp-top-1280.jpg): 같은 게시 로컬 검증의 실제 화면.
+
+- [10-20 TCP 재검증](2026-10-20-tcp-recheck.json), [원문 테스트](2026-10-20-tcp-recheck-source-tests.txt): [당시 보고서](../content/2026-10-20-tcp-draft-recheck.md). 초기 HTTP 상태 가정 실패와 후속 본문 판정을 보존.
+
+- [10-16 TCP 후속 글 요약](2026-10-16-tcp-followup-summary.json), [질문 제거 확인](2026-10-16-tcp-tone-check.json): [초안 이력](../content/2026-10-16-tcp-draft-preparation.md).
+
+- [10-16 TCP 보강 원문 검사](2026-10-16-tcp-enrichment-source-tests.txt), [화면](2026-10-16-tcp-enrichment-ui.json), [초안 원문 검사](2026-10-16-tcp-draft-final-source-tests.txt), [초안 화면](2026-10-16-tcp-draft-ui.json): 같은 초안 준비 기록의 실제 증거.
+
+- [10-20 PR #47 병합 후 운영 검증](2026-10-20-pr47-postmerge-production.json): [보고서](../deployment/2026-10-20-docs-main-production-transition.md#pr-47-병합-후-운영-검증). main 693d4e4 CI·Production·HTTP·Chromium·로그와 초안 보존 집계.
+
+- [10-20 블로그 main Production 전환](2026-10-20-docs-main-production-transition.json): [검증 보고서](../deployment/2026-10-20-docs-main-production-transition.md).
+
+- [10-20 KST 깨끗한 커밋의 통합 검증](2026-10-19T15-15-59-845Z-vuln-radar-integration.json): [보고서](../integration/2026-10-19-vuln-radar-local-integration.md). 9fee886·workingTreeDirty=false, 통합 13개·정리 6단계 성공. [1280px](2026-10-19T15-15-59-845Z-vuln-radar-feed-1280.png)·[390px](2026-10-19T15-15-59-845Z-vuln-radar-feed-390.png). 파일명은 UTC.
+
+- [10-19 PR #46 정리 보완 재검증](2026-10-19T14-58-50-231Z-vuln-radar-integration.json): [보고서](../integration/2026-10-19-vuln-radar-local-integration.md). 통합 13개·정리 6단계 성공. [1280px](2026-10-19T14-58-50-231Z-vuln-radar-feed-1280.png)·[390px](2026-10-19T14-58-50-231Z-vuln-radar-feed-390.png).
+
+- [10-19 vuln-radar 최종 13개 통합 검사](2026-10-19T14-01-56-387Z-vuln-radar-integration.json): [보고서](../integration/2026-10-19-vuln-radar-local-integration.md). 실제 DB·API·프록시·브라우저, 토큰 미포함·정리 결과.
+- 이전 실행: [9개](2026-10-19T13-48-55-854Z-vuln-radar-integration.json), [10개](2026-10-19T13-50-20-622Z-vuln-radar-integration.json), [11개](2026-10-19T13-51-52-193Z-vuln-radar-integration.json), [13개 도입](2026-10-19T13-54-02-394Z-vuln-radar-integration.json).
+- 최종 화면: [1280px](2026-10-19T14-01-56-387Z-vuln-radar-feed-1280.png), [390px](2026-10-19T14-01-56-387Z-vuln-radar-feed-390.png). 이전 화면: [1280px](2026-10-19T13-54-02-394Z-vuln-radar-feed-1280.png), [390px](2026-10-19T13-54-02-394Z-vuln-radar-feed-390.png). 모두 합성 데이터만 표시.
+
+- [10-19 페이지별 스켈레톤 로컬 측정](2026-10-19-page-skeletons-local.json): [검증 보고서](../accessibility/2026-10-19-page-skeletons-local.md). 서버 골격 66표본의 기하·모션·넘침과 검사 시도별 결과. production CLS와 구분한다.
+  - 캡처: [모바일 목록](2026-10-19-skeleton-docs-mobile-light.png), [모바일 UI/UX](2026-10-19-skeleton-uiux-mobile-light.png), [데스크톱 피드](2026-10-19-skeleton-feed-desktop-dark.png).
+
+- [10-19 문서 목록 순서 로컬 측정](2026-10-19-docs-index-order-local.json): [검증 보고서](../accessibility/2026-10-19-docs-index-order-local.md). 기본·검색의 네 대표 화면과 추가 조건·검사 요약. 캡처는 같은 보고서에 연결했다.
+
 - [10-18 Handlebars 보안 audit](2026-10-18-handlebars-security-audit.json): [검증 보고서](../security/2026-10-18-handlebars-advisories.md). 전체·production audit 전후, 무해한 회귀·build 결과와 로그 해시. PR #39 리뷰 후 임시 작업 트리 재현 결과도 포함.
+
+- [10-18 스트림 종료 주체 재조사](2026-10-18-stream-cause-reinvestigation.json): [재조사 보고서](../cache/2026-10-18-stream-termination-investigation.md#종료-주체와-선행-오류-재조사). 상대편/서버 종료 순서·upstream 결과·실패한 초기 대조군과 최종 검증.
+
+- [10-18 이동 검사 역할 정리](2026-10-18-navigation-test-contracts.json): [검증 보고서](../cache/2026-10-18-stream-termination-investigation.md#검사-역할-분리와-의도-보존). 기존 assertion·direct/reload 보존 비교와 Link·직접 URL 역할별 결과.
+
+- [10-18 실제 Link 이동 비교](2026-10-18-prefetch-navigation-comparison.json): [후속 비교 보고서](../cache/2026-10-18-stream-termination-investigation.md#실제-link-클릭과-문서-교체-비교). ko/en·두 화면·세 이동 방식의 3회 반복, 서버 완료와 문서 유지 증거.
+
+- [10-18 스트림 종료 조사](2026-10-18-stream-termination-investigation.json): [검증 보고서](../cache/2026-10-18-stream-termination-investigation.md). CI 8건·로컬 요청별 순서·대조군·원본 로그 해시. 취소 추정과 확정을 분리합니다.
+
+- [10-18 기존 상세·캐시 production 결과 발췌](2026-10-18-article-production-results.txt): [네트워크·오프라인 검증](../resilience/2026-10-17-content-network-offline.md#기존-상세캐시-production-회귀). 테스트 108개 통과와 남은 스트림 오류 12회를 별개로 기록합니다.
+
+- [10-17 콘텐츠 네트워크·Worker 검사](2026-10-17-content-network-tests.txt), [10-18 production 오프라인 브라우저 검사](2026-10-18-offline-production-browser.txt): [검증 보고서](../resilience/2026-10-17-content-network-offline.md). 모의 원격 실패와 실제 Chromium의 저장·연결 차단을 구분합니다.
 
 - [10-14 인덱스·검색 목록 도달 거리 기준선](2026-10-14-docs-index-density-baseline.json): [밀도 검토 보고서](../accessibility/2026-10-14-docs-index-density-review.md). 공개 사이트 네 조건의 실제 값 발췌, 개선 목표와 구분.
 

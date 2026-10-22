@@ -1,0 +1,2090 @@
+{
+  "schemaVersion": 1,
+  "inspectedAt": "2026-10-18",
+  "timezone": "Asia/Seoul",
+  "sourceCommit": "f4b958254486c18ae1df2909fbf26595add8919f",
+  "workingTreeChanges": true,
+  "environment": {
+    "node": "24.12.0",
+    "undici": "7.16.0",
+    "next": "16.3.8",
+    "playwright": "1.62.1",
+    "worker": 1,
+    "retries": 0,
+    "nextPort": 3111,
+    "contentPort": 3112
+  },
+  "historicalCI": {
+    "run": "39102318262",
+    "job": "117600937450",
+    "errorCount": 8,
+    "verdict": "unknown",
+    "reason": "No per-request transport or upstream ordering was captured in the historical run.",
+    "rawLogSHA256": "bffa97ba60a0631724862e35726489fe9bce4990994570d37630d8950930d10b"
+  },
+  "naturalScenario": {
+    "browserInterception": false,
+    "tracedRequestCount": 77,
+    "streamErrorCount": 8,
+    "transportFinding": "peer-end-before-server-end-and-destroy",
+    "contentFinding": "origin-body-completed-200-after-stream-error",
+    "automaticOutcome": "unknown; lifecycle error coverage remains partial",
+    "traces": [
+      {
+        "requestId": "1f57177f-9bfa-4943-af7e-c04c37aa926b",
+        "socketId": "ceb0cf0d-f0ec-4283-a48b-1c9f11cef419",
+        "path": "/ko/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": false,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:13:12.728Z",
+            "elapsedMs": 0.01,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:13:12.753Z",
+            "elapsedMs": 24.95,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:13:12.784Z",
+            "elapsedMs": 55.87,
+            "event": "socket-end",
+            "detail": {}
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:13:12.786Z",
+            "elapsedMs": 57.81,
+            "event": "socket-end-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": [
+                "node:_http_server:858:12",
+                "node:internal/streams/readable:1701:12"
+              ]
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:13:12.786Z",
+            "elapsedMs": 58.59,
+            "event": "socket-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/writable:966:14"]
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:13:12.787Z",
+            "elapsedMs": 59.13,
+            "event": "socket-close",
+            "detail": {
+              "hadError": false
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:13:12.788Z",
+            "elapsedMs": 60.02,
+            "event": "response-close",
+            "detail": {}
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:13:12.790Z",
+            "elapsedMs": 62.62,
+            "event": "framework-stream-error",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/destroy:148:10"]
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:13:12.793Z",
+            "elapsedMs": 64.93,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "431f0f7e-39b5-42aa-aa54-8a37ee0130de"
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:13:13.106Z",
+            "elapsedMs": 377.79,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:13:13.106Z",
+            "elapsedMs": 378.51,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          }
+        ]
+      },
+      {
+        "requestId": "2fd25bb2-fca5-4eeb-a21c-c4017a1ea9e1",
+        "socketId": "3d025b04-1a7e-43db-ab67-977054d3f364",
+        "path": "/ko/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": false,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:13:14.970Z",
+            "elapsedMs": 0.01,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:13:14.981Z",
+            "elapsedMs": 11.1,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:13:15.040Z",
+            "elapsedMs": 69.89,
+            "event": "socket-end",
+            "detail": {}
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:13:15.041Z",
+            "elapsedMs": 70.47,
+            "event": "socket-end-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": [
+                "node:_http_server:858:12",
+                "node:internal/streams/readable:1701:12"
+              ]
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:13:15.042Z",
+            "elapsedMs": 71.5,
+            "event": "socket-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/writable:966:14"]
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:13:15.042Z",
+            "elapsedMs": 71.9,
+            "event": "socket-close",
+            "detail": {
+              "hadError": false
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:13:15.043Z",
+            "elapsedMs": 72.88,
+            "event": "response-close",
+            "detail": {}
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:13:15.044Z",
+            "elapsedMs": 73.86,
+            "event": "framework-stream-error",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/destroy:148:10"]
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:13:15.045Z",
+            "elapsedMs": 74.84,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "4d649e20-3b42-404e-bb95-9ce4ec11a198"
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:13:15.338Z",
+            "elapsedMs": 367.64,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:13:15.338Z",
+            "elapsedMs": 368.09,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          }
+        ]
+      },
+      {
+        "requestId": "61addf72-3af8-4b83-b0c5-b95c8b9368d8",
+        "socketId": "5ffd644a-455d-41d5-ae26-bfc7741cdc23",
+        "path": "/en/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": false,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:13:18.718Z",
+            "elapsedMs": 0.01,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:13:18.728Z",
+            "elapsedMs": 10.03,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:13:18.771Z",
+            "elapsedMs": 52.96,
+            "event": "socket-end",
+            "detail": {}
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:13:18.772Z",
+            "elapsedMs": 53.58,
+            "event": "socket-end-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": [
+                "node:_http_server:858:12",
+                "node:internal/streams/readable:1701:12"
+              ]
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:13:18.773Z",
+            "elapsedMs": 54.22,
+            "event": "socket-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/writable:966:14"]
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:13:18.773Z",
+            "elapsedMs": 54.58,
+            "event": "socket-close",
+            "detail": {
+              "hadError": false
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:13:18.774Z",
+            "elapsedMs": 55.63,
+            "event": "response-close",
+            "detail": {}
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:13:18.775Z",
+            "elapsedMs": 56.72,
+            "event": "framework-stream-error",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/destroy:148:10"]
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:13:18.776Z",
+            "elapsedMs": 57.36,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "79c60700-074f-48cd-a344-c39e1f3c1b99"
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:13:19.079Z",
+            "elapsedMs": 360.93,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:13:19.080Z",
+            "elapsedMs": 361.69,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          }
+        ]
+      },
+      {
+        "requestId": "6bc0b97a-c305-43fa-8d89-7fd959c6af60",
+        "socketId": "01c8321a-21e6-45f7-b8dc-1f802c9f0c2b",
+        "path": "/en/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": false,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:13:24.855Z",
+            "elapsedMs": 0,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:13:24.866Z",
+            "elapsedMs": 11.46,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:13:24.905Z",
+            "elapsedMs": 50.4,
+            "event": "socket-end",
+            "detail": {}
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:13:24.906Z",
+            "elapsedMs": 50.93,
+            "event": "socket-end-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": [
+                "node:_http_server:858:12",
+                "node:internal/streams/readable:1701:12"
+              ]
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:13:24.906Z",
+            "elapsedMs": 51.42,
+            "event": "socket-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/writable:966:14"]
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:13:24.907Z",
+            "elapsedMs": 51.68,
+            "event": "socket-close",
+            "detail": {
+              "hadError": false
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:13:24.907Z",
+            "elapsedMs": 52.22,
+            "event": "response-close",
+            "detail": {}
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:13:24.908Z",
+            "elapsedMs": 53.05,
+            "event": "framework-stream-error",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/destroy:148:10"]
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:13:24.909Z",
+            "elapsedMs": 53.77,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "7852d237-04c8-48de-b0a8-d0846a8a5f15"
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:13:25.217Z",
+            "elapsedMs": 362.07,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:13:25.218Z",
+            "elapsedMs": 362.68,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          }
+        ]
+      },
+      {
+        "requestId": "908ae74c-624c-4443-8e56-1b3133273eae",
+        "socketId": "631cea07-43b9-41bc-9d7e-5c90d88c410b",
+        "path": "/en/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": false,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:13:16.626Z",
+            "elapsedMs": 0.01,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:13:16.636Z",
+            "elapsedMs": 9.6,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:13:16.695Z",
+            "elapsedMs": 69.21,
+            "event": "socket-end",
+            "detail": {}
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:13:16.696Z",
+            "elapsedMs": 70.03,
+            "event": "socket-end-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": [
+                "node:_http_server:858:12",
+                "node:internal/streams/readable:1701:12"
+              ]
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:13:16.697Z",
+            "elapsedMs": 70.67,
+            "event": "socket-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/writable:966:14"]
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:13:16.697Z",
+            "elapsedMs": 71.33,
+            "event": "socket-close",
+            "detail": {
+              "hadError": false
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:13:16.698Z",
+            "elapsedMs": 72.13,
+            "event": "response-close",
+            "detail": {}
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:13:16.701Z",
+            "elapsedMs": 74.47,
+            "event": "framework-stream-error",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/destroy:148:10"]
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:13:16.702Z",
+            "elapsedMs": 75.93,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "87e17ddf-0b3f-4bdd-ae0a-0014d80c681a"
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:13:16.988Z",
+            "elapsedMs": 361.84,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:13:16.989Z",
+            "elapsedMs": 362.46,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          }
+        ]
+      },
+      {
+        "requestId": "a6ec8350-8e04-4553-b811-2a7f03caf78d",
+        "socketId": "de457968-b4fc-4c46-b5d9-74e199fe6b7e",
+        "path": "/ko/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": false,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:13:23.095Z",
+            "elapsedMs": 0.01,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:13:23.106Z",
+            "elapsedMs": 10.95,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:13:23.185Z",
+            "elapsedMs": 89.94,
+            "event": "socket-end",
+            "detail": {}
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:13:23.186Z",
+            "elapsedMs": 90.7,
+            "event": "socket-end-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": [
+                "node:_http_server:858:12",
+                "node:internal/streams/readable:1701:12"
+              ]
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:13:23.186Z",
+            "elapsedMs": 91.08,
+            "event": "socket-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/writable:966:14"]
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:13:23.186Z",
+            "elapsedMs": 91.65,
+            "event": "socket-close",
+            "detail": {
+              "hadError": false
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:13:23.188Z",
+            "elapsedMs": 92.82,
+            "event": "response-close",
+            "detail": {}
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:13:23.189Z",
+            "elapsedMs": 93.99,
+            "event": "framework-stream-error",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/destroy:148:10"]
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:13:23.190Z",
+            "elapsedMs": 94.8,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "e50b2e44-2b70-4446-857b-730c48c6d99f"
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:13:23.475Z",
+            "elapsedMs": 379.96,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:13:23.475Z",
+            "elapsedMs": 380.48,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          }
+        ]
+      },
+      {
+        "requestId": "b86d3692-c168-4add-bc82-e5f07f4f665c",
+        "socketId": "7dcd0f3c-38b1-472c-98a2-86564b2634db",
+        "path": "/ko/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": false,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:13:20.865Z",
+            "elapsedMs": 0,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:13:20.876Z",
+            "elapsedMs": 11.2,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:13:20.922Z",
+            "elapsedMs": 57.56,
+            "event": "socket-end",
+            "detail": {}
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:13:20.924Z",
+            "elapsedMs": 58.86,
+            "event": "socket-end-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": [
+                "node:_http_server:858:12",
+                "node:internal/streams/readable:1701:12"
+              ]
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:13:20.926Z",
+            "elapsedMs": 60.9,
+            "event": "socket-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/writable:966:14"]
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:13:20.927Z",
+            "elapsedMs": 61.85,
+            "event": "socket-close",
+            "detail": {
+              "hadError": false
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:13:20.928Z",
+            "elapsedMs": 62.84,
+            "event": "response-close",
+            "detail": {}
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:13:20.929Z",
+            "elapsedMs": 63.79,
+            "event": "framework-stream-error",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/destroy:148:10"]
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:13:20.929Z",
+            "elapsedMs": 64.45,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "5dc4f90e-2f65-4b0c-bc3a-9fea74aeafd0"
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:13:21.233Z",
+            "elapsedMs": 367.72,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:13:21.234Z",
+            "elapsedMs": 368.8,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          }
+        ]
+      },
+      {
+        "requestId": "e22ef728-eae3-4a6a-af6f-1bb7fa27b7ae",
+        "socketId": "68e248e4-a804-4026-af31-20a9763c766c",
+        "path": "/en/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": false,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:13:26.945Z",
+            "elapsedMs": 0.01,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:13:26.956Z",
+            "elapsedMs": 11.66,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:13:27.019Z",
+            "elapsedMs": 74.77,
+            "event": "socket-end",
+            "detail": {}
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:13:27.020Z",
+            "elapsedMs": 75.76,
+            "event": "socket-end-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": [
+                "node:_http_server:858:12",
+                "node:internal/streams/readable:1701:12"
+              ]
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:13:27.021Z",
+            "elapsedMs": 76.27,
+            "event": "socket-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/writable:966:14"]
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:13:27.022Z",
+            "elapsedMs": 76.99,
+            "event": "socket-close",
+            "detail": {
+              "hadError": false
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:13:27.023Z",
+            "elapsedMs": 78.03,
+            "event": "response-close",
+            "detail": {}
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:13:27.024Z",
+            "elapsedMs": 79.36,
+            "event": "framework-stream-error",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/destroy:148:10"]
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:13:27.025Z",
+            "elapsedMs": 80.3,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "1238ba4e-28a8-494c-8bb6-1bec47c7a403"
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:13:27.311Z",
+            "elapsedMs": 366.52,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:13:27.312Z",
+            "elapsedMs": 367.21,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "preliminaryTrace": {
+    "streamErrorCount": 9,
+    "limitation": "Socket end() call and timeout instrumentation were added for the final run."
+  },
+  "controls": {
+    "browserInterception": "Isolate one real RSC prefetch; unrelated prefetches return 204 in controls only. Upstream-503 uses a direct HTML request.",
+    "cases": [
+      {
+        "ending": "upstream-503",
+        "requestId": "0cd207bf-12c6-458d-8bc7-1f7440b0eb2a",
+        "socketId": "94577f6b-cba9-4c93-8867-fb0506913a9f",
+        "path": "/ko/docs/web/article-e2e-remote",
+        "prefetch": false,
+        "status": 200,
+        "responseFinished": true,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:12:29.720Z",
+            "elapsedMs": 0.01,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:12:29.729Z",
+            "elapsedMs": 9.13,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/api/posts"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:12:29.733Z",
+            "elapsedMs": 13.39,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/api/posts",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:12:29.734Z",
+            "elapsedMs": 13.92,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/api/posts"
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:12:29.735Z",
+            "elapsedMs": 15.13,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:12:29.736Z",
+            "elapsedMs": 16.3,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 503
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:12:29.736Z",
+            "elapsedMs": 16.59,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:12:29.737Z",
+            "elapsedMs": 17.09,
+            "event": "console-warning",
+            "detail": {
+              "code": null,
+              "kind": "http",
+              "status": 503,
+              "frames": []
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:12:29.738Z",
+            "elapsedMs": 18,
+            "event": "console-warning",
+            "detail": {
+              "code": null,
+              "kind": "empty",
+              "status": null,
+              "frames": []
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:12:29.739Z",
+            "elapsedMs": 19.28,
+            "event": "console-error",
+            "detail": {
+              "code": null,
+              "kind": "empty",
+              "status": null,
+              "frames": []
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:12:29.740Z",
+            "elapsedMs": 19.83,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "7766d07a-1d95-4bf7-a38c-4d303007b93c"
+            }
+          },
+          {
+            "sequence": 12,
+            "time": "2026-10-18T13:12:29.741Z",
+            "elapsedMs": 20.85,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "7766d07a-1d95-4bf7-a38c-4d303007b93c"
+            }
+          },
+          {
+            "sequence": 13,
+            "time": "2026-10-18T13:12:29.743Z",
+            "elapsedMs": 23.23,
+            "event": "response-end-call",
+            "detail": {}
+          },
+          {
+            "sequence": 14,
+            "time": "2026-10-18T13:12:29.744Z",
+            "elapsedMs": 24.08,
+            "event": "response-finish",
+            "detail": {}
+          },
+          {
+            "sequence": 15,
+            "time": "2026-10-18T13:12:29.744Z",
+            "elapsedMs": 24.78,
+            "event": "response-close",
+            "detail": {}
+          }
+        ]
+      },
+      {
+        "ending": "complete",
+        "requestId": "4d25ace6-6f23-4b8b-8110-76e3c5aa6d2c",
+        "socketId": "f5a43dae-20c5-4014-9c01-f51ebded971e",
+        "path": "/ko/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": true,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:12:26.959Z",
+            "elapsedMs": 0.01,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:12:26.969Z",
+            "elapsedMs": 10.18,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:12:27.329Z",
+            "elapsedMs": 370.51,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:12:27.332Z",
+            "elapsedMs": 373.19,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:12:27.339Z",
+            "elapsedMs": 379.71,
+            "event": "response-end-call",
+            "detail": {}
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:12:27.340Z",
+            "elapsedMs": 381.52,
+            "event": "response-finish",
+            "detail": {}
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:12:27.341Z",
+            "elapsedMs": 382.47,
+            "event": "response-close",
+            "detail": {}
+          }
+        ]
+      },
+      {
+        "ending": "client-abort",
+        "requestId": "62df7cf6-8369-437b-ae35-926a5020dc66",
+        "socketId": "dd0dd81c-19d7-4b4f-973f-5b1e54a031d4",
+        "path": "/ko/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": false,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:12:24.216Z",
+            "elapsedMs": 0.02,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:12:24.228Z",
+            "elapsedMs": 12.1,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:12:24.270Z",
+            "elapsedMs": 53.69,
+            "event": "socket-end",
+            "detail": {}
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:12:24.271Z",
+            "elapsedMs": 54.95,
+            "event": "socket-end-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": [
+                "node:_http_server:858:12",
+                "node:internal/streams/readable:1701:12"
+              ]
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:12:24.272Z",
+            "elapsedMs": 55.51,
+            "event": "socket-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/writable:966:14"]
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:12:24.272Z",
+            "elapsedMs": 55.83,
+            "event": "socket-close",
+            "detail": {
+              "hadError": false
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:12:24.274Z",
+            "elapsedMs": 57.32,
+            "event": "response-close",
+            "detail": {}
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:12:24.275Z",
+            "elapsedMs": 59.01,
+            "event": "framework-stream-error",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/destroy:148:10"]
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:12:24.278Z",
+            "elapsedMs": 61.6,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "a02075a3-94ed-4cef-81ef-c19e01ab98f2"
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:12:24.833Z",
+            "elapsedMs": 617.03,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:12:24.834Z",
+            "elapsedMs": 618.13,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          }
+        ]
+      },
+      {
+        "ending": "complete",
+        "requestId": "73457cde-2786-420d-9c0f-f74fd855b0aa",
+        "socketId": "123a535d-4399-403e-8d47-af399577d604",
+        "path": "/ko/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": true,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:12:22.756Z",
+            "elapsedMs": 0.06,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:12:22.772Z",
+            "elapsedMs": 15.93,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:12:23.132Z",
+            "elapsedMs": 375.11,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:12:23.133Z",
+            "elapsedMs": 376.73,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:12:23.139Z",
+            "elapsedMs": 382.6,
+            "event": "response-end-call",
+            "detail": {}
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:12:23.141Z",
+            "elapsedMs": 384.44,
+            "event": "response-finish",
+            "detail": {}
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:12:23.142Z",
+            "elapsedMs": 385.45,
+            "event": "response-close",
+            "detail": {}
+          }
+        ]
+      },
+      {
+        "ending": "server-destroy",
+        "requestId": "75c54824-115b-489e-86f8-e36ff805d875",
+        "socketId": "7ca1413a-214a-444b-a9bc-18059141ccc6",
+        "path": "/ko/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": false,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:12:29.167Z",
+            "elapsedMs": 0.01,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:12:29.177Z",
+            "elapsedMs": 10.13,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:12:29.210Z",
+            "elapsedMs": 43.33,
+            "event": "controlled-server-destroy",
+            "detail": {}
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:12:29.211Z",
+            "elapsedMs": 44.01,
+            "event": "response-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": []
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:12:29.212Z",
+            "elapsedMs": 44.5,
+            "event": "socket-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": []
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:12:29.212Z",
+            "elapsedMs": 44.96,
+            "event": "socket-close",
+            "detail": {
+              "hadError": false
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:12:29.213Z",
+            "elapsedMs": 45.93,
+            "event": "response-close",
+            "detail": {}
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:12:29.214Z",
+            "elapsedMs": 46.78,
+            "event": "framework-stream-error",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/destroy:148:10"]
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:12:29.215Z",
+            "elapsedMs": 47.74,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "01904b4b-8466-440f-a949-b299cf7c006a"
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:12:29.641Z",
+            "elapsedMs": 473.75,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:12:29.642Z",
+            "elapsedMs": 475.03,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          }
+        ]
+      },
+      {
+        "ending": "client-abort",
+        "requestId": "7942594b-0436-43a2-b90e-72b206629d9a",
+        "socketId": "7147a7bc-cad5-466a-8e97-c0122113e66d",
+        "path": "/ko/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": false,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:12:28.220Z",
+            "elapsedMs": 0.02,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:12:28.232Z",
+            "elapsedMs": 11.62,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:12:28.262Z",
+            "elapsedMs": 42.2,
+            "event": "socket-end",
+            "detail": {}
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:12:28.263Z",
+            "elapsedMs": 42.79,
+            "event": "socket-end-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": [
+                "node:_http_server:858:12",
+                "node:internal/streams/readable:1701:12"
+              ]
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:12:28.263Z",
+            "elapsedMs": 43.12,
+            "event": "socket-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/writable:966:14"]
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:12:28.266Z",
+            "elapsedMs": 45.58,
+            "event": "socket-close",
+            "detail": {
+              "hadError": false
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:12:28.267Z",
+            "elapsedMs": 46.49,
+            "event": "response-close",
+            "detail": {}
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:12:28.267Z",
+            "elapsedMs": 47.28,
+            "event": "framework-stream-error",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/destroy:148:10"]
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:12:28.268Z",
+            "elapsedMs": 47.86,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "71cd90a6-6f68-4703-b4d3-1808f813f146"
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:12:28.769Z",
+            "elapsedMs": 548.86,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:12:28.770Z",
+            "elapsedMs": 549.68,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          }
+        ]
+      },
+      {
+        "ending": "server-destroy",
+        "requestId": "7e592e46-6f8a-4131-98ff-3c8b72b163a4",
+        "socketId": "cfa425d3-66a8-439b-ad0b-fb26cc0add98",
+        "path": "/ko/docs/web/article-e2e-remote",
+        "prefetch": true,
+        "status": 200,
+        "responseFinished": false,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:12:25.202Z",
+            "elapsedMs": 0.01,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:12:25.213Z",
+            "elapsedMs": 11.26,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:12:25.247Z",
+            "elapsedMs": 45.01,
+            "event": "controlled-server-destroy",
+            "detail": {}
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:12:25.248Z",
+            "elapsedMs": 45.88,
+            "event": "response-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": []
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:12:25.249Z",
+            "elapsedMs": 46.6,
+            "event": "socket-destroy-call",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": []
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:12:25.249Z",
+            "elapsedMs": 47.05,
+            "event": "socket-close",
+            "detail": {
+              "hadError": false
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:12:25.251Z",
+            "elapsedMs": 48.46,
+            "event": "response-close",
+            "detail": {}
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:12:25.252Z",
+            "elapsedMs": 49.89,
+            "event": "framework-stream-error",
+            "detail": {
+              "code": null,
+              "kind": null,
+              "status": null,
+              "frames": ["node:internal/streams/destroy:148:10"]
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:12:25.253Z",
+            "elapsedMs": 50.72,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "76e667d2-333d-456d-857e-a54c80fe14a1"
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:12:25.681Z",
+            "elapsedMs": 478.43,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:12:25.682Z",
+            "elapsedMs": 479.41,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          }
+        ]
+      },
+      {
+        "ending": "upstream-503",
+        "requestId": "9478dc15-ed7c-4070-8d1e-416df572393c",
+        "socketId": "f94a1c7c-0456-4a5f-99d8-2615d955a005",
+        "path": "/ko/docs/web/article-e2e-remote",
+        "prefetch": false,
+        "status": 200,
+        "responseFinished": true,
+        "omitted": 0,
+        "deliveryFailures": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "time": "2026-10-18T13:12:25.744Z",
+            "elapsedMs": 0.01,
+            "event": "request-start",
+            "detail": {}
+          },
+          {
+            "sequence": 2,
+            "time": "2026-10-18T13:12:25.754Z",
+            "elapsedMs": 9.5,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/api/posts"
+            }
+          },
+          {
+            "sequence": 3,
+            "time": "2026-10-18T13:12:25.759Z",
+            "elapsedMs": 14.21,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/api/posts",
+              "status": 200
+            }
+          },
+          {
+            "sequence": 4,
+            "time": "2026-10-18T13:12:25.759Z",
+            "elapsedMs": 14.7,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/api/posts"
+            }
+          },
+          {
+            "sequence": 5,
+            "time": "2026-10-18T13:12:25.760Z",
+            "elapsedMs": 15.81,
+            "event": "upstream-start",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 6,
+            "time": "2026-10-18T13:12:25.761Z",
+            "elapsedMs": 16.93,
+            "event": "upstream-headers",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote",
+              "status": 503
+            }
+          },
+          {
+            "sequence": 7,
+            "time": "2026-10-18T13:12:25.762Z",
+            "elapsedMs": 17.23,
+            "event": "upstream-complete",
+            "detail": {
+              "path": "/posts/web/article-e2e-remote"
+            }
+          },
+          {
+            "sequence": 8,
+            "time": "2026-10-18T13:12:25.762Z",
+            "elapsedMs": 18.06,
+            "event": "console-warning",
+            "detail": {
+              "code": null,
+              "kind": "http",
+              "status": 503,
+              "frames": []
+            }
+          },
+          {
+            "sequence": 9,
+            "time": "2026-10-18T13:12:25.764Z",
+            "elapsedMs": 19.15,
+            "event": "console-warning",
+            "detail": {
+              "code": null,
+              "kind": "empty",
+              "status": null,
+              "frames": []
+            }
+          },
+          {
+            "sequence": 10,
+            "time": "2026-10-18T13:12:25.765Z",
+            "elapsedMs": 20.79,
+            "event": "console-error",
+            "detail": {
+              "code": null,
+              "kind": "empty",
+              "status": null,
+              "frames": []
+            }
+          },
+          {
+            "sequence": 11,
+            "time": "2026-10-18T13:12:25.766Z",
+            "elapsedMs": 21.43,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "955efd59-d4df-4d0f-95e9-34d661954485"
+            }
+          },
+          {
+            "sequence": 12,
+            "time": "2026-10-18T13:12:25.767Z",
+            "elapsedMs": 22.53,
+            "event": "runtime-hook",
+            "detail": {
+              "applicationRequestId": "955efd59-d4df-4d0f-95e9-34d661954485"
+            }
+          },
+          {
+            "sequence": 13,
+            "time": "2026-10-18T13:12:25.770Z",
+            "elapsedMs": 25.42,
+            "event": "response-end-call",
+            "detail": {}
+          },
+          {
+            "sequence": 14,
+            "time": "2026-10-18T13:12:25.771Z",
+            "elapsedMs": 26.17,
+            "event": "response-finish",
+            "detail": {}
+          },
+          {
+            "sequence": 15,
+            "time": "2026-10-18T13:12:25.771Z",
+            "elapsedMs": 26.74,
+            "event": "response-close",
+            "detail": {}
+          }
+        ]
+      }
+    ]
+  },
+  "runs": [
+    {
+      "command": "ARTICLE_CAUSE_TRACE=1 mise exec -- pnpm --filter docs test:article:prod content-publication.spec.ts",
+      "logName": "web-tech-stream-cause-20261018-publication.log",
+      "sha256": "f450f741f8539c5c1b6e2e54d7ea9039b19c8d59892d63a9f48daa22e0a39317",
+      "passed": 4,
+      "failed": 0,
+      "reportedDuration": "35.5s",
+      "streamErrorCount": 9
+    },
+    {
+      "command": "ARTICLE_CAUSE_TRACE=1 mise exec -- pnpm --filter docs test:article:prod content-publication.spec.ts",
+      "logName": "web-tech-stream-cause-20261018-publication-final.log",
+      "sha256": "519973c5d7b5b62fd72c9a4d73ce7d9ee51ab77deb3c78d5f4fcb8911f84075b",
+      "passed": 4,
+      "failed": 0,
+      "reportedDuration": "34.3s",
+      "streamErrorCount": 8
+    },
+    {
+      "command": "mise exec -- pnpm --filter docs test:article:prod request-cause-next.spec.ts",
+      "logName": "web-tech-stream-cause-20261018-controls.log",
+      "sha256": "6450f8507f96ba97575e0afea1a4e588d1d12318344b042c7a9e68eef1292548",
+      "passed": 2,
+      "failed": 6,
+      "reportedDuration": "1.1m",
+      "streamErrorCount": 0,
+      "status": "harness-failure",
+      "reason": "Bare RSC request completed as shell without reaching held body."
+    },
+    {
+      "command": "mise exec -- pnpm --filter docs test:article:prod request-cause-next.spec.ts",
+      "logName": "web-tech-stream-cause-20261018-controls-final.log",
+      "sha256": "2d29601f9993365531dd2cc287fc0567f829b9c395b1cbe1e6a204217a268eab",
+      "passed": 4,
+      "failed": 4,
+      "reportedDuration": "1.1m",
+      "streamErrorCount": 0,
+      "status": "harness-failure",
+      "reason": "HTML did not flush before held body; client/server interruption happened after upstream timeout."
+    },
+    {
+      "command": "mise exec -- pnpm --filter docs test:article:prod request-cause-next.spec.ts",
+      "logName": "web-tech-stream-cause-20261018-controls-browser.log",
+      "sha256": "1dd92a4c121f79aa858c37c7b059225e196fc05826e2d67644d389fd01cd67d5",
+      "passed": 8,
+      "failed": 0,
+      "reportedDuration": "25.9s",
+      "streamErrorCount": 4
+    },
+    {
+      "command": "mise exec -- pnpm --filter docs test:article:prod",
+      "logName": "web-tech-stream-cause-20261018-full.log",
+      "sha256": "14d5f0a834bfae3b359fef4176ba40edb75a0735c8ec3c3ea7c15a9962e43ff6",
+      "passed": 148,
+      "failed": 0,
+      "reportedDuration": "1.6m",
+      "streamErrorCount": 18
+    }
+  ],
+  "fullNavigationComparison": [
+    {
+      "locale": "ko",
+      "method": "menu-link",
+      "project": "article-mobile",
+      "sameDocument": true,
+      "browserErrorCount": 0,
+      "prefetchResponseFinished": true,
+      "streamErrorCount": 0
+    },
+    {
+      "locale": "ko",
+      "method": "prefetched-link",
+      "project": "article-mobile",
+      "sameDocument": true,
+      "browserErrorCount": 0,
+      "prefetchResponseFinished": true,
+      "streamErrorCount": 0
+    },
+    {
+      "locale": "en",
+      "method": "menu-link",
+      "project": "article-mobile",
+      "sameDocument": true,
+      "browserErrorCount": 0,
+      "prefetchResponseFinished": true,
+      "streamErrorCount": 0
+    },
+    {
+      "locale": "en",
+      "method": "prefetched-link",
+      "project": "article-mobile",
+      "sameDocument": true,
+      "browserErrorCount": 0,
+      "prefetchResponseFinished": true,
+      "streamErrorCount": 0
+    },
+    {
+      "locale": "ko",
+      "method": "document-replacement",
+      "project": "article-mobile",
+      "sameDocument": false,
+      "browserErrorCount": 0,
+      "prefetchResponseFinished": false,
+      "streamErrorCount": 1
+    },
+    {
+      "locale": "en",
+      "method": "document-replacement",
+      "project": "article-mobile",
+      "sameDocument": false,
+      "browserErrorCount": 0,
+      "prefetchResponseFinished": false,
+      "streamErrorCount": 1
+    },
+    {
+      "locale": "ko",
+      "method": "menu-link",
+      "project": "article-desktop",
+      "sameDocument": true,
+      "browserErrorCount": 0,
+      "prefetchResponseFinished": true,
+      "streamErrorCount": 0
+    },
+    {
+      "locale": "ko",
+      "method": "prefetched-link",
+      "project": "article-desktop",
+      "sameDocument": true,
+      "browserErrorCount": 0,
+      "prefetchResponseFinished": true,
+      "streamErrorCount": 0
+    },
+    {
+      "locale": "en",
+      "method": "menu-link",
+      "project": "article-desktop",
+      "sameDocument": true,
+      "browserErrorCount": 0,
+      "prefetchResponseFinished": true,
+      "streamErrorCount": 0
+    },
+    {
+      "locale": "en",
+      "method": "prefetched-link",
+      "project": "article-desktop",
+      "sameDocument": true,
+      "browserErrorCount": 0,
+      "prefetchResponseFinished": true,
+      "streamErrorCount": 0
+    },
+    {
+      "locale": "ko",
+      "method": "document-replacement",
+      "project": "article-desktop",
+      "sameDocument": false,
+      "browserErrorCount": 0,
+      "prefetchResponseFinished": false,
+      "streamErrorCount": 1
+    },
+    {
+      "locale": "en",
+      "method": "document-replacement",
+      "project": "article-desktop",
+      "sameDocument": false,
+      "browserErrorCount": 0,
+      "prefetchResponseFinished": false,
+      "streamErrorCount": 1
+    }
+  ],
+  "security": {
+    "rawHeaders": false,
+    "cookies": false,
+    "queryValues": false,
+    "body": false,
+    "rawExceptionMessages": false,
+    "rawStacks": false,
+    "paths": "Fixed public synthetic article and loopback upstream paths only."
+  },
+  "limitations": [
+    "Test-only wrappers and synchronous file writes affect timing.",
+    "No historical CI per-request socket evidence.",
+    "Peer end does not by itself prove user intent or no preceding unobserved fault.",
+    "Shared fetch can be correlated to its first owner rather than all consumers.",
+    "No production deployment, Vercel transport probe, packet capture, blanket error suppression, or application prefetch change."
+  ],
+  "sourceHashes": {
+    "apps/docs/article-e2e/request-cause-trace.ts": "ff4ef3740fa326c058187769341dc4bad359578bec188b405cd12ed3fbaa029e",
+    "apps/docs/article-e2e/request-cause-next.spec.ts": "5a6a5da6976597cad3c9270fb438ca00a01e4110bcfb556dff642e2191eb2851",
+    "apps/docs/article-e2e/request-lifecycle-probe.ts": "831de75f332eaa7c532db06f10b5d4795bacc13e5debf9732a2df13600cc5155",
+    "apps/docs/article-e2e/content-server.ts": "347c02f54219da0a2688a0657b9e6f9a698433d69a8be6efdee7a359516c3817"
+  }
+}

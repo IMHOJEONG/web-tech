@@ -1,5 +1,11 @@
 # 운영 및 재현 절차
 
+- [pnpm 툴체인 업그레이드와 서명 검증](pnpm-toolchain-upgrade.md)
+
+- [블로그 main 배포 운영과 복구](docs-main-production-deployment.md)
+
+- [vuln-radar 로컬 통합 검증](vuln-radar-local-integration-verification.md)
+
 - [테스트 직접 작성과 IDE 점검 가이드](test-authoring-ide-guide.md)
 
 - [저장소 테스트 목록과 실행 경로](repository-test-inventory.md)
@@ -11,6 +17,8 @@
 로컬 실행, 배포, 장애 대응과 반복 가능한 검증 절차입니다. 실행 후 결과는 [검증 보고서](../verification/README.md)에 기록합니다.
 
 [전체 문서 안내](../README.md)
+
+- [Docs 오프라인 저장과 네트워크 장애 점검](docs-offline-reading.md)
 
 - [Docs 웹 푸시 실험](docs-web-push-experiment.md)
 
