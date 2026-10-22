@@ -38,46 +38,27 @@ mise exec -- pnpm test:repo
 
 초기 구현에서 설치된 commitlint CLI가 `--default-ignores` 인수를 지원하지 않아 정상 대조군이 실패했다. CLI 인수를 제거하고 루트 규칙을 공유하는 전용 설정의 `defaultIgnores: false`로 수정한 뒤 위 결과를 다시 확인했다. 따라서 단순히 예외가 발생했다는 이유만으로 음성 대조군을 통과시키지 않으며 PR 상태 거부 사유도 검사한다.
 
-## pnpm 안정판 조사
+## pnpm 업그레이드와 PR 범위 구분
 
-이번 PR에서는 설치·버전 핀·lockfile을 바꾸지 않는다. 2026-10-22에 공식 원격 메타데이터를 읽었다.
+사용자 결정은 **11계열 중간 갱신 없이 `12.14.0`으로 전환**이다. 초기의 `11.28.6` 우선 권고는 철회한다. 업그레이드 구현·검증 원본은 이미 열린 [PR #55 / KAN-25](https://github.com/IMHOJEONG/web-tech/pull/55)를 사용하고, #56에 같은 변경을 다시 만들지 않는다.
 
-```bash
-gh api repos/pnpm/pnpm/releases/latest \
-  --jq '{tag_name,published_at,prerelease,draft,html_url}'
-curl -fsS https://registry.npmjs.org/pnpm \
-  | jq '."dist-tags" | {latest,"latest-11","latest-12","next-11","next-12"}'
-```
+| PR  | 핵심 변경                                                | 조회한 head와 검증                                                                                    |
+| --- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| #55 | pnpm12.14.0 루트/mise 핀, 검증된 설치·CI·Docker·lockfile | `7de34b3fbc11f2cb4a1f21aa35a018425b068ad8`. CI13개·CodeQL·Docker 검사·두 앱 Preview 성공              |
+| #56 | 최종 squash 메시지 전체 검사·스냅샷/head 고정·회귀       | `7898a373b1342c49f64a00cdf67b45ec81433201`. 기존 CI13개·저장소98개 성공. 이번 범위 정정은 문서만 변경 |
 
-| 항목                   | 실제 조회값                  | 해석                                              |
-| ---------------------- | ---------------------------- | ------------------------------------------------- |
-| 저장소 packageManager  | `11.10.0` + SHA-512 핀       | 현재 검증 환경                                    |
-| GitHub latest          | `v12.14.0`, prerelease=false | 공식 최신 안정 릴리스                             |
-| npm latest / latest-12 | `12.14.0`                    | 12계열 전환 후보                                  |
-| npm latest-11          | `11.28.6`                    | 동일 메이저의 우선 검증 후보                      |
-| npm next-11 / next-12  | `11.28.7` / `12.15.0`        | 더 높은 숫자만 보고 안정 기본값으로 선택하지 않음 |
+겹치는 파일은 `.github/workflows/ci.yml`, `package.json`, 검증·worklog 목차 4개지만 구현은 중복되지 않는다. #55의 `typecheck:toolchain`은 pnpm 설치기를 검사하고, #56의 `typecheck:squash`는 병합 도구를 검사한다. 두 PR 모두 같은 CI 타입 검사 다음 위치에 단계를 추가하므로, 먼저 병합한 뒤 다른 PR을 최신 main에 반영할 때 두 검사를 모두 보존해야 한다.
 
-이 저장소는 여러 모노레포가 아니라 하나의 pnpm workspace다. `apps/*`, `packages/*`에서 별도의 packageManager 핀은 발견되지 않았고, 루트 `package.json`의 단일 핀과 루트 lockfile을 공유한다. 다른 독립 저장소는 각 루트에서 별도 버전을 고정할 수 있지만 이 workspace의 앱별로 pnpm 버전을 나누지 않는다. GitHub Actions는 별도 version 값을 지정하지 않고 루트 핀을 사용하며 backend Docker도 Corepack을 사용한다.
+이 PR의 위 로컬 결과는 pnpm11.10.0에서 실행한 당시 증거다. 이를 pnpm12에서 두 PR을 통합 검증한 결과로 바꾸어 쓰지 않는다. 둘을 합친 회귀·배포는 아직 미검증이다. 병합 승인은 별도이며 두 PR 모두 이번 확인에서 병합하지 않았다.
 
-**권장:** 우선 별도 PR에서 `11.28.6`을 정확한 버전·integrity로 고정해 검증한다. `12.14.0`도 안정판이지만 Rust 재작성과 동작 차이가 있으므로 독립 검증 대상으로 둔다. `latest` 범위를 그대로 핀하거나 두 변경을 squash 보완 PR에 섞지 않는다.
-
-12계열은 공식 문서상 기존 lockfile·대부분의 명령과 설정을 유지한다. 다만 순환 peer 재해석의 최초 lockfile 차이, Linux hardlink 우선순위, 알 수 없는 workspace 설정 오류, Git dependency 해석·일부 CLI 플래그 차이를 확인해야 한다. 현재 workflow/scripts/Docker에서 `--resolution-only`나 `--frozen-lockfile false/true` 사용은 발견하지 않았다. 이는 전체 호환성 검증 통과를 의미하지 않는다.
-
-업그레이드 PR의 완료 조건:
-
-1. 루트 packageManager/integrity만 후보 버전으로 고정하고 독립 checkout·store에서 Node24의 frozen 설치를 확인한다. 전역 pnpm·기존 node_modules를 먼저 바꾸지 않는다.
-2. 재설치 뒤 lockfile이 그대로인지 확인하고, 재해석이 필요하면 의도한 변경과 peer 변화를 검토한다. install script 허용 정책·서명/TLS 검증을 끄지 않는다.
-3. 기존 계약·보안·lint·typecheck·각 앱 build/브라우저·공용 UI 검사와 backend Docker 빌드를 확인한다. Vercel과 NAS의 amd64 환경도 구분한다.
-4. 로컬과 같은 SHA의 원격 CI·배포를 확인하고, 실패하면 버전 핀/lockfile 변경 PR을 되돌린다. pnpm 자체의 서명 오류를 검증 우회로 해결하지 않는다.
-
-공식 근거: [12.14 릴리스](https://github.com/pnpm/pnpm/releases/tag/v12.14.0), [npm 태그 원본](https://registry.npmjs.org/pnpm), [pnpm 12 차이](https://pnpm.io/blog/whats-different-in-pnpm-12), [workspace](https://pnpm.io/workspaces). 설명 문서의 오래된 태그 안내보다 이 날짜의 registry/GitHub 조회값을 버전 선택 근거로 삼았다.
+pnpm 업그레이드 절차·서명 검증·lockfile·Docker 결과는 #55의 [운영 절차](https://github.com/IMHOJEONG/web-tech/blob/7de34b3fbc11f2cb4a1f21aa35a018425b068ad8/docs/runbooks/pnpm-toolchain-upgrade.md)와 [검증 원본](https://github.com/IMHOJEONG/web-tech/blob/7de34b3fbc11f2cb4a1f21aa35a018425b068ad8/docs/verification/integration/2026-10-22-pnpm12-toolchain.md)을 참조한다. 여기에는 별도의 버전 조사·업그레이드 체크리스트를 중복 유지하지 않는다.
 
 ## 한계와 후속 작업
 
 - 이번 보완은 CLI 운영 경로다. GitHub UI를 원격 강제로 막거나 branch protection을 변경하지 않는다.
 - 원격 CI·리뷰를 확인한 뒤 별도 승인으로 실제 병합을 검증한다. 성공 응답만으로 merge queue·Production 완료를 선언하지 않는다.
 - 기존 main CI의 메시지 실패는 그대로 남으며 이력 재작성·검사 완화는 하지 않는다.
-- pnpm 업그레이드 호환성은 조사만 했고 새 버전 설치·frozen install·빌드·배포 실험은 하지 않았다.
+- pnpm12 전환은 #55에서 진행한다. 이 PR은 pnpm 핀·설치기·lockfile을 변경하지 않으며 두 PR 통합 검증과 운영 배포는 별도다.
 
 ## 관련 문서
 
