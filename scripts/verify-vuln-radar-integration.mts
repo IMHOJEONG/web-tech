@@ -648,6 +648,331 @@ async function main() {
     },
   );
 
+  for (const width of [1280, 390]) {
+    await check(
+      `overview cold failures are isolated and retries target one API at ${width}px`,
+      async () => {
+        for (const [endpoint, panel] of [
+          ["health", "health"],
+          ["ingest/status", "ingest"],
+          ["overview", "core"],
+          ["feed", "feed"],
+          ["kev", "kev"],
+          ["watchlist", "watchlist"],
+        ] as const) {
+          const current = await page();
+          let failing = true;
+          let release: (() => void) | undefined;
+          let holdRetry: Promise<void> | undefined;
+          const calls: Record<string, number> = {};
+          try {
+            await current.setViewportSize({ width, height: 900 });
+            await current.route("**/api/backend/**", async (route) => {
+              const path = new URL(route.request().url()).pathname.replace(
+                "/api/backend/",
+                "",
+              );
+              calls[path] = (calls[path] ?? 0) + 1;
+              if (path === endpoint) {
+                if (failing) {
+                  // Exercise transport failures as well as ordinary HTTP errors.
+                  if (endpoint === "feed")
+                    return route.abort("internetdisconnected");
+                  return route.fulfill({
+                    status: 503,
+                    json: { error: "synthetic panel failure" },
+                  });
+                }
+                if (holdRetry) await holdRetry;
+              }
+              return route.continue();
+            });
+            await current.goto(`${frontendOrigin}/overview`);
+            const failedPanel = current.locator(
+              `[data-overview-panel="${panel}"]`,
+            );
+            await expect(failedPanel.getByRole("alert")).toBeVisible();
+            const healthy = endpoint === "kev" ? "feed" : "kev";
+            await expect(
+              current
+                .locator(`[data-overview-panel="${healthy}"]`)
+                .getByRole("link")
+                .first(),
+            ).toBeVisible();
+            await expect(
+              current.getByRole("heading", {
+                name: "대시보드 데이터를 불러오지 못했습니다.",
+                exact: true,
+              }),
+            ).toHaveCount(0);
+            await expect(failedPanel.locator("strong")).toHaveCount(0);
+            await expect(
+              current.getByRole("button", { name: "새로고침", exact: true }),
+            ).toBeEnabled();
+            const before = { ...calls };
+            failing = false;
+            holdRetry = new Promise<void>((resolve) => {
+              release = resolve;
+            });
+            const retry = failedPanel.getByRole("button");
+            await retry.click();
+            await expect(retry).toBeDisabled();
+            release!();
+            await expect(failedPanel.getByRole("alert")).toHaveCount(0);
+            assert.equal(
+              calls[endpoint],
+              before[endpoint]! + 1,
+              "One successful targeted retry",
+            );
+            for (const key of Object.keys(before).filter(
+              (key) => key !== endpoint,
+            )) {
+              assert.equal(
+                calls[key],
+                before[key],
+                `Retry must not refetch ${key}`,
+              );
+            }
+            if (endpoint === "watchlist") {
+              const screenshot = `${artifactStamp}-vuln-radar-partial-recovered-${width}.png`;
+              await current.screenshot({
+                path: join(root, "docs/verification/artifacts", screenshot),
+                fullPage: true,
+              });
+              screenshots[`partial-recovered-${width}`] = screenshot;
+            }
+          } finally {
+            release?.();
+            await current.close();
+          }
+        }
+      },
+    );
+
+    await check(
+      `overview cached data survives each API failure and recovers at ${width}px`,
+      async () => {
+        for (const [endpoint, panel] of [
+          ["health", "health"],
+          ["ingest/status", "ingest"],
+          ["overview", "core"],
+          ["feed", "feed"],
+          ["kev", "kev"],
+          ["watchlist", "watchlist"],
+        ] as const) {
+          const current = await page();
+          let failing = false;
+          const calls: Record<string, number> = {};
+          try {
+            await current.setViewportSize({ width, height: 900 });
+            await current.route("**/api/backend/**", (route) => {
+              const path = new URL(route.request().url()).pathname.replace(
+                "/api/backend/",
+                "",
+              );
+              calls[path] = (calls[path] ?? 0) + 1;
+              if (failing && path === endpoint) {
+                // A 200 with an invalid contract is not a successful empty watchlist.
+                if (endpoint === "watchlist")
+                  return route.fulfill({ json: { entries: "invalid" } });
+                return route.fulfill({
+                  status: 503,
+                  json: { error: "synthetic refetch failure" },
+                });
+              }
+              return route.continue();
+            });
+            await current.goto(`${frontendOrigin}/overview`);
+            const refresh = current.getByRole("button", {
+              name: "새로고침",
+              exact: true,
+            });
+            await expect(refresh).toBeEnabled();
+            await expect(
+              current
+                .locator('[data-overview-panel="kev"]')
+                .getByRole("link")
+                .first(),
+            ).toBeVisible();
+            const target = current.locator(`[data-overview-panel="${panel}"]`);
+            const content = target.locator("[data-overview-content]");
+            const cachedText = await content.innerText();
+            assert.ok(cachedText.length > 0);
+            failing = true;
+            await refresh.click();
+            await expect(
+              target.getByText(
+                "갱신하지 못해 이전 데이터를 표시합니다. 최신 상태와 다를 수 있습니다.",
+                { exact: true },
+              ),
+            ).toBeVisible();
+            await expect(content).toHaveText(cachedText, {
+              useInnerText: true,
+            });
+            await expect(
+              target.getByText(/이 브라우저에서 마지막으로 받은 시각:/),
+            ).toBeVisible();
+            await expect(
+              current.getByRole("heading", {
+                name: "대시보드 데이터를 불러오지 못했습니다.",
+                exact: true,
+              }),
+            ).toHaveCount(0);
+            await expect(refresh).toBeEnabled();
+            if (endpoint === "watchlist") {
+              assert.equal(
+                await current.evaluate(
+                  () =>
+                    document.documentElement.scrollWidth <= window.innerWidth,
+                ),
+                true,
+                "Partial failure must not create page-level horizontal overflow",
+              );
+              const screenshot = `${artifactStamp}-vuln-radar-partial-stale-${width}.png`;
+              await current.screenshot({
+                path: join(root, "docs/verification/artifacts", screenshot),
+                fullPage: true,
+              });
+              screenshots[`partial-stale-${width}`] = screenshot;
+            }
+            const before = { ...calls };
+            failing = false;
+            await target.getByRole("button").click();
+            await expect(target.getByRole("status")).toHaveCount(0);
+            await expect(content).not.toHaveText("");
+            assert.equal(calls[endpoint], before[endpoint]! + 1);
+            for (const key of Object.keys(before).filter(
+              (key) => key !== endpoint,
+            ))
+              assert.equal(calls[key], before[key]);
+          } finally {
+            await current.close();
+          }
+        }
+      },
+    );
+  }
+
+  await check(
+    "slow supplementary APIs do not block healthy panels; cold total outage and recovery stay explicit",
+    async () => {
+      const current = await page();
+      let release: (() => void) | undefined;
+      const gate = new Promise<void>((resolve) => {
+        release = resolve;
+      });
+      let failingAll = false;
+      try {
+        await current.route("**/api/backend/**", async (route) => {
+          if (failingAll)
+            return route.fulfill({
+              status: 503,
+              json: { error: "synthetic complete outage" },
+            });
+          if (
+            /\/(health|watchlist|ingest\/status)$/.test(
+              new URL(route.request().url()).pathname,
+            )
+          )
+            await gate;
+          return route.continue();
+        });
+        await current.goto(`${frontendOrigin}/overview`);
+        await expect(
+          current
+            .locator('[data-overview-panel="core"]')
+            .getByText("3", { exact: true }),
+        ).toBeVisible();
+        await expect(
+          current
+            .locator('[data-overview-panel="kev"]')
+            .getByRole("link")
+            .first(),
+        ).toBeVisible();
+        await expect(
+          current
+            .locator('[data-overview-panel="watchlist"]')
+            .getByRole("status"),
+        ).toBeVisible();
+        await expect(
+          current.locator('[data-overview-panel="ingest"]').getByRole("status"),
+        ).toBeVisible();
+        release!();
+        await expect(
+          current.getByRole("button", { name: "새로고침", exact: true }),
+        ).toBeEnabled();
+        failingAll = true;
+        await current.reload();
+        await expect(
+          current.getByRole("heading", {
+            name: "대시보드 데이터를 불러오지 못했습니다.",
+            exact: true,
+          }),
+        ).toBeVisible();
+        await expect(current.locator("[data-overview-panel]")).toHaveCount(0);
+        failingAll = false;
+        await current
+          .getByRole("button", { name: "다시 시도", exact: true })
+          .click();
+        await expect(
+          current
+            .locator('[data-overview-panel="kev"]')
+            .getByRole("link")
+            .first(),
+        ).toBeVisible();
+        await expect(
+          current.getByRole("heading", {
+            name: "대시보드 데이터를 불러오지 못했습니다.",
+            exact: true,
+          }),
+        ).toHaveCount(0);
+      } finally {
+        release?.();
+        await current.close();
+      }
+    },
+  );
+
+  await check(
+    "valid empty Feed and watchlist responses remain empty states, not failures",
+    async () => {
+      const current = await page();
+      try {
+        const feed = await api("feed", true);
+        const watchlist = await api("watchlist", true);
+        await current.setViewportSize({ width: 390, height: 900 });
+        await current.route("**/api/backend/feed", (route) =>
+          route.fulfill({ json: { ...feed, items: [] } }),
+        );
+        await current.route("**/api/backend/watchlist", (route) =>
+          route.fulfill({ json: { ...watchlist, entries: [] } }),
+        );
+        await current.goto(`${frontendOrigin}/overview`);
+        await expect(
+          current.getByText("표시할 최근 취약점이 없습니다.", { exact: true }),
+        ).toBeVisible();
+        await expect(
+          current
+            .locator('[data-overview-panel="watchlist"]')
+            .getByText("0", { exact: true }),
+        ).toBeVisible();
+        await expect(
+          current.getByRole("button", { name: "새로고침", exact: true }),
+        ).toBeEnabled();
+        await expect(
+          current.locator('[data-overview-panel="feed"]').getByRole("alert"),
+        ).toHaveCount(0);
+        await expect(
+          current
+            .locator('[data-overview-panel="watchlist"]')
+            .getByRole("alert"),
+        ).toHaveCount(0);
+      } finally {
+        await current.close();
+      }
+    },
+  );
+
   await check(
     "ingest status exposes process-local unknown history without performing a sync",
     async () => {
@@ -984,7 +1309,7 @@ async function main() {
           ).toBeVisible();
           await expect(
             current.getByText(
-              "통계는 전체 저장 데이터 기준입니다. 목록은 우선순위순 상위 25건 중 일부를 보여줍니다.",
+              "전체 저장 데이터 기준 집계입니다. 최근 취약점은 피드에서 별도로 확인합니다.",
               { exact: true },
             ),
           ).toBeVisible();
@@ -1310,6 +1635,14 @@ async function main() {
         await expect(
           current.getByText("표시할 KEV 항목이 없습니다.", { exact: true }),
         ).toBeVisible();
+        await expect(
+          current
+            .locator('[data-overview-panel="core"]')
+            .getByText("0", { exact: true }),
+        ).toHaveCount(2);
+        await expect(
+          current.locator('[data-overview-panel="feed"]').getByRole("alert"),
+        ).toHaveCount(0);
         await expect(current.getByRole("table").getByRole("link")).toHaveCount(
           0,
         );
