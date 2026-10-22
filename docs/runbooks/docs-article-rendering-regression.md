@@ -33,6 +33,35 @@ NAS와 Better Stack에는 요청하지 않는다. 원격 fixture는 목록과 �
 
 ## 기대 결과
 
+### 이동 방식별 검사 역할
+
+사용자 탐색과 직접 URL 접근을 같은 의미의 `navigation`으로 부르지 않는다.
+
+| 검사                           | 파일                                                                 | 이동과 검증                                                                              |
+| ------------------------------ | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| 사용자 카드 탐색               | `article-navigation.spec.ts`                                         | 검색 목록의 실제 Link 클릭, 같은 document 유지·새 document 요청 없음, 본문·metadata 완성 |
+| 직접 URL·새로고침·없는 문서    | `article-detail.spec.ts`                                             | `page.goto()`와 `page.reload()`, HTTP 상태·canonical·본문·not-found                      |
+| 서버 게시 캐시·웹훅 인증       | `content-publication.spec.ts`                                        | 독립 문서 요청으로 V1/V2·401·웹훅 후 reload를 검사, Router Cache와 분리                  |
+| 진행 중 prefetch의 사용자 탐색 | `prefetch-navigation-client.spec.ts`                                 | 실제 메뉴·관련 글 Link 클릭, 원래 응답 완료와 문서 유지                                  |
+| 직접 URL 문서 교체 대조        | `prefetch-navigation-direct.spec.ts`, `prefetch-termination.spec.ts` | 의도적 문서 교체·중단 또는 서버 완료 후 이동, 로그를 숨기지 않음                         |
+
+사용자 탐색 spec의 최초 `page.goto()`는 출발 화면 준비에만 사용한다. 검증할 이동은
+실제 클릭이며 `router.push()`나 DOM 주입 링크로 대체하지 않는다. 공유
+`article-fixtures.ts`가 직접 접근과 클릭 검사의 동일한 본문·metadata assertion을 제공한다.
+prefetch 계측은 `prefetch-navigation-scenario.ts`를 공유하고, 실행 방식은 각 spec에서 정한다.
+
+```bash
+# 실제 사용자 Link 탐색
+mise exec -- pnpm --filter docs test:article:prod article-navigation.spec.ts prefetch-navigation-client.spec.ts
+
+# 직접 접근·새로고침과 서버 캐시 계약
+mise exec -- pnpm --filter docs test:article:prod article-detail.spec.ts content-publication.spec.ts
+```
+
+게시 캐시 검사의 `page.goto()`를 전부 Link로 바꾸지 않는다. 이미 열린 브라우저의
+Router Cache가 서버의 새 응답 검사를 대신하면 캐시 무효화 회귀를 놓칠 수 있다.
+웹훅이 기존 탭의 내용을 자동 갱신한다는 계약도 새로 만들지 않는다.
+
 | 대상          | 상세 경로                                                  | 확인할 내용                                           |
 | ------------- | ---------------------------------------------------------- | ----------------------------------------------------- |
 | 로컬 data     | `/docs/web/javascript-event-loop-runtime`                  | MDX 첫 heading, 본문 문장, 마지막 참고 섹션           |
@@ -41,13 +70,13 @@ NAS와 Better Stack에는 요청하지 않는다. 원격 fixture는 목록과 �
 | 없는 문서     | `/docs/web/article-e2e-missing`                            | not-found heading 표시, 본문과 loading UI 부재        |
 
 각 경로는 `/ko`, `/en`과 모바일 390px, 데스크톱 1280px 조합에서 검사한다.
-이 문서의 범위는 상세 렌더링 16개와 아래 게시 갱신 4개다. 다른 spec이 추가되면
-전체 suite 개수는 달라질 수 있다. 정상 문서는 직접 접근과 새로고침 모두 검증한다.
+직접 접근·새로고침과 Link 탐색의 본문 검사는 서로 분리해 실행한다. 다른 spec이 추가되면
+전체 suite 개수는 달라질 수 있다. 정상 문서는 두 방식 모두 검증한다.
 영어 route에서도 로컬 원문은 한국어이므로 UI locale과 문서 언어를 혼동하지 않는다.
 
 정상 상세의 통과 조건:
 
-- HTTP `200` 및 요청한 canonical URL 유지
+- 직접 URL에서는 HTTP `200`, 두 방식 모두 요청한 canonical URL 유지
 - 본문 내부의 시작 heading, 고유 문장, 마지막 heading 및 끝 문장 표시
 - metadata 제목 일치
 - route skeleton과 본문 `Loading...` 제거
@@ -61,7 +90,7 @@ NAS와 Better Stack에는 요청하지 않는다. 원격 fixture는 목록과 �
 
 ## 게시 후 화면 갱신
 
-`content-publication.spec.ts`는 `/docs/web/article-e2e-publication` 전용 fixture로
+`content-publication.spec.ts`는 직접 URL의 서버 캐시 계약이다. `/docs/web/article-e2e-publication` 전용 fixture로
 다음 순서를 검증한다. 운영 파일이나 NAS 콘텐츠는 수정하지 않는다.
 
 1. 목록, 검색, 상세에서 V1을 읽어 캐시를 채운다.
@@ -94,6 +123,8 @@ ARTICLE_STREAM_TRACE=1 ARTICLE_DISABLE_PREFETCH=1 pnpm --filter docs test:articl
 ```
 
 첫 명령은 동일 origin의 document/fetch 요청 시작·완료·실패와 prefetch 여부를 기록한다.
+Chromium에서는 합성 상세 경로의 CDP 기록도 추가한다. `clientProbeId`·응답 UUID가
+일치하는 요청끼리만 연결하고, 다른 요청의 `ERR_ABORTED`로 취소를 확정하지 않는다.
 원본 헤더, 토큰, query 값, 응답 본문은 출력하지 않는다. 두 번째 명령은 prefetch 헤더가
 있는 요청만 서버에 보내지 않고 테스트 브라우저에 204로 응답하는 진단 대조군이다.
 일반 페이지 요청과 webhook은 그대로 실행하지만 실제 prefetch 기능 검증은 아니므로
@@ -106,6 +137,31 @@ ARTICLE_STREAM_TRACE=1 ARTICLE_DISABLE_PREFETCH=1 pnpm --filter docs test:articl
 `ERR_ABORTED`인 prefetch와 실제 document 실패를 구분하고, 화면 이동 시점과 서버
 로그를 대조한다. 취소와 관련 없는 본문 실패·지속 timeout은 별도 장애로 조사한다.
 이 메시지를 전역 catch나 로그 필터로 일괄 숨기지 않는다.
+
+페이지 이동의 영향을 고립시키려면 다음 대조 검사를 실행한다.
+
+```bash
+mise exec -- pnpm --filter docs test:article:prod prefetch-termination.spec.ts request-lifecycle.spec.ts
+```
+
+합성 콘텐츠 본문을 보류하고 HTTP 200·서버 미완료를 확인한 뒤, 이동으로 끊는 경우와
+본문을 해제해 서버 finish를 확인한 뒤 이동하는 경우를 비교한다. 전자는 의도적으로
+스트림 오류 로그를 발생시키며, 이를 숨기지 않는다. 후자는 서버 완료를 뜻할 뿐 브라우저
+소비까지 보장하지 않는다. 실제 render/upstream/timeout/500 오류가 취소로 오판되지
+않는 검사도 포함한다. 자세한 결과는 [10-18 조사](../verification/cache/2026-10-18-stream-termination-investigation.md)를 본다.
+
+실제 앱의 Link 클릭과 문서 전체 교체를 비교하려면 다음 검사를 사용한다.
+
+```bash
+mise exec -- pnpm --filter docs test:article:prod prefetch-navigation-client.spec.ts prefetch-navigation-direct.spec.ts --repeat-each=3
+```
+
+같은 원격 글의 prefetch를 보류한 뒤, 동일 Web 목적지로 `page.goto()` 또는 실제 메뉴 클릭,
+그리고 보류 중인 글의 실제 Link 클릭을 비교한다. 문서 UUID 유지·새 document 요청 여부와
+기존 prefetch의 finish/close를 확인하며, 클릭 성공은 URL뿐 아니라 목적지 콘텐츠로 검사한다.
+관련 글 클릭은 본문을 표시할 수 있도록 클릭 직후 보류를 해제한다. 로그를 지우거나 Link를
+테스트용 anchor로 바꾸지 않는다. 정상 클릭에서 재현되지 않아도 새로고침·탭 종료까지 정상으로
+단정하지 않는다. [비교 결과와 이유](../verification/cache/2026-10-18-stream-termination-investigation.md#실제-link-클릭과-문서-교체-비교)를 참고한다.
 
 ## 실패 대응과 복구
 
@@ -131,12 +187,25 @@ mise exec -- pnpm --filter docs test:article:prod request-lifecycle --project=ar
 
 판정 계약은 [요청 생명주기 로그 정책](../architecture/docs-request-lifecycle-logging-policy.md)을 따른다. 종료 누락·프로세스 강제 종료·운영 로그 보관/전송은 이 로컬 계측의 보장 범위 밖이다.
 
+### 종료 주체와 upstream 순서 확인
+
+```bash
+ARTICLE_CAUSE_TRACE=1 mise exec -- pnpm --filter docs test:article:prod content-publication.spec.ts
+mise exec -- pnpm --filter docs test:article:prod request-cause-next.spec.ts
+```
+
+순차 실행하며 첫 결과의 `apps/docs/test-results/request-cause/*.json`은 다음 검사 전에 보관한다. 첫 명령은 브라우저 요청을 가로채지 않고 고정된 합성 상세 경로의 소켓·응답 종료, loopback upstream, warning/error 순서와 runtime UUID를 추가 기록한다. 일반 lifecycle JSON의 판정·coverage를 자동 변경하지 않는다.
+
+`socket-end`와 서버의 `socket-end-call`, `socket-destroy-call`, `response-destroy-call` 중 무엇이 먼저인지 확인한다. peer 종료가 먼저여도 사용자 의도까지 증명하지는 않는다. 같은 요청의 선행 오류와 뒤늦은 upstream 완료도 확인하고 HTTP 200·finish만으로 본문 성공을 판정하지 않는다.
+
+두 번째 명령은 완료·직접 URL 이동 중단·서버 강제 종료·upstream 503 대조다. 강제 종료 헤더는 테스트 preload만 처리하고 앱 라우트로 노출하지 않는다. 해당 대조군의 prefetch 일부는 조건 고립을 위해 대체하므로 자연 발생 재현과 분리한다. 기록은 최대 64개 이벤트이며 생략·기록 실패와 부분 관측 한계를 확인한다. Node 소켓 wrapper와 동기 파일 쓰기는 운영 계측으로 복사하지 않는다. [재조사 증거와 한계](../verification/cache/2026-10-18-stream-termination-investigation.md#종료-주체와-선행-오류-재조사)를 따른다.
+
 `apps/docs/test-results`의 screenshot, error context와 Playwright trace를 확인한다.
 본문 assertion 실패는 로컬 탐색 누락, 원격 본문 반환 실패 또는 Suspense
 미완료를 의미할 수 있다. timeout만 늘리기 전에 실제 DOM과 서버 로그를 확인한다.
 
 본문 편집이나 번역 변경으로 기대 문구가 낡은 경우도 구분한다. 로컬 글의 문장을
-바꿀 때는 `article-detail.spec.ts`의 고유 문장과 마지막 본문 표식을 함께 확인한다.
+바꿀 때는 `article-fixtures.ts`의 고유 문장과 마지막 본문 표식을 함께 확인한다.
 검색 빈 화면은 `content-publication.spec.ts`에서도 UI locale별 제목을 검사한다.
 기대값만 갱신할 때에도 본문 시작·끝, loading 종료, V1 검색 카드 부재와 V2 반영
 검사를 제거하지 않는다. production suite를 다시 실행한 뒤 실제 회귀와 구분한다.

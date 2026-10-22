@@ -49,6 +49,32 @@ test('lifecycle: late render error overrides finish and cancellation', () => {
     assert.deepEqual(result.precedingErrorIds, [])
 })
 
+test('lifecycle: stream error after close does not prove harmless cancellation', () => {
+    const state = new RequestLifecycle('/ko/docs', 'GET', {
+        'next-router-prefetch': '1',
+    })
+    state.close(200, true)
+    state.error('stream')
+    const result = state.snapshot()
+    assert.equal(result.outcome, 'unknown')
+    assert.equal(result.reason, 'prefetch-cancellation-suspected')
+    assert.deepEqual(
+        result.events.map((event) => event.event),
+        ['started', 'closed', 'error']
+    )
+})
+
+test('lifecycle: cancellation and a stream error do not mask an upstream fault', () => {
+    const state = new RequestLifecycle('/ko/docs', 'GET', {}, 'complete')
+    const fault = state.error('upstream')
+    state.controlledCancel()
+    state.close(200, true)
+    state.error('stream')
+    const result = state.snapshot()
+    assert.equal(result.outcome, 'failed')
+    assert.ok(result.precedingErrorIds.includes(fault))
+})
+
 test('lifecycle: recovered timeout is degraded, missing completion remains unknown', () => {
     const state = new RequestLifecycle('/ko/docs', 'GET', {})
     const id = state.error('timeout')

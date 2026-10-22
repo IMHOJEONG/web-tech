@@ -1,7 +1,9 @@
 const slot = document.querySelector<HTMLElement>("#hero-slot");
 const delayMs = Number.parseInt(slot?.dataset.delay ?? "0", 10);
 
+performance.mark("late-lcp-scheduled");
 window.setTimeout(() => {
+  performance.mark("late-lcp-discovered");
   const image = new Image(1200, 600);
   image.alt = "Layered browser rendering pipeline illustration";
   image.className = "hero";

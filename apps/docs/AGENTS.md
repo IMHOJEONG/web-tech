@@ -8,6 +8,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+## Monorepo Rules
+
+Also follow the workspace-level guide at `../../AGENTS.md`.
+
 ## 블로그 기고의 로컬 검증
 
 - 글을 새로 작성하거나 예제를 수정할 때마다 주제에 맞는 로컬 테스트 저장소와

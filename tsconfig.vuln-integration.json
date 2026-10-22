@@ -1,0 +1,21 @@
+{
+  "extends": "./packages/typescript-config/base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true,
+    "paths": {
+      "@playwright/test": ["./apps/docs/node_modules/@playwright/test"],
+      "@prisma/adapter-pg": [
+        "./apps/vuln-radar-backend/node_modules/@prisma/adapter-pg"
+      ]
+    }
+  },
+  "include": [
+    "scripts/verify-vuln-radar-integration.mts",
+    "scripts/verification-cleanup.mts",
+    "scripts/verification-cleanup.test.mts"
+  ]
+}

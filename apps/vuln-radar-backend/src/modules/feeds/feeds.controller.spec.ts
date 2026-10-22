@@ -54,6 +54,12 @@ describe('FeedsController', () => {
 
     expect(response.items.length).toBeGreaterThan(0);
     expect(response.items[0]?.cveId).toBe('CVE-2026-10001');
+    expect(response.items[0]?.reliability).toMatchObject({
+      level: 'unknown',
+      freshness: {
+        status: 'stale',
+      },
+    });
   });
 
   it('returns kev items', async () => {

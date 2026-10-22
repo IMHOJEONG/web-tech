@@ -1,0 +1,171 @@
+{
+  "issue": "KAN-22",
+  "verifiedAt": "2026-10-21T19:23:00+09:00",
+  "baseCommit": "5b0faa24e3f28c6018f1219d0d64357f63f51559",
+  "branch": "codex/docs-kan22-offline-navigation",
+  "workingTreeDirty": true,
+  "environment": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "node": "24.12.0",
+    "pnpm": "11.10.0",
+    "next": "16.3.8",
+    "playwright": "1.62.1",
+    "typescript": "6.0.3",
+    "chromium": "151.0.7922.34",
+    "remoteIndexEnabled": false,
+    "realEnvCopied": false,
+    "viewports": [
+      [1280, 800],
+      [390, 844]
+    ]
+  },
+  "remoteFailure": {
+    "runUrl": "https://github.com/IMHOJEONG/web-tech/actions/runs/39580315781",
+    "jobUrl": "https://github.com/IMHOJEONG/web-tech/actions/runs/39580315781/job/119156014820",
+    "passed": 17,
+    "failed": 1,
+    "project": "offline-desktop",
+    "assertion": "image-fallback.spec.ts:31 toHaveURL",
+    "timeoutMs": 5000,
+    "expectedPath": "/ko/docs/category/fe/react/nextjs",
+    "actualPath": "/ko/web",
+    "observedHtmlClass": "size-full nprogress-busy",
+    "fallbackImageAssertionsPassed": true,
+    "matchingMobileCasePassed": true,
+    "artifacts": 0,
+    "physicalSlowdownCause": "unknown: no per-request timing or trace retained",
+    "aggregateTestJob": "success despite offline-reading failure"
+  },
+  "unmodifiedMainBaseline": {
+    "startTime": "2026-10-21T10:14:11.960Z",
+    "samplePairs": 1,
+    "temporaryDiagnosticOnly": true,
+    "originalFiveSecondAssertionFailedLocally": false,
+    "path": "/ko/docs/category/fe/react/nextjs",
+    "cold": {
+      "requestMs": 90.42,
+      "responseMs": 1789.4,
+      "status": 200,
+      "urlMs": 1906.62,
+      "bodyMs": 1911.68,
+      "serverLog": "200 in 1753ms (next.js: 1630ms, proxy: 5ms, application-code: 119ms)"
+    },
+    "warm": {
+      "requestMs": 24.26,
+      "responseMs": 52.85,
+      "status": 200,
+      "urlMs": 217.9,
+      "bodyMs": 221.01
+    }
+  },
+  "executions": [
+    {
+      "name": "initial desktop controls",
+      "startTime": "2026-10-21T10:17:15.592Z",
+      "durationMs": 20360.966,
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "name": "full offline suite",
+      "startTime": "2026-10-21T10:20:26.512Z",
+      "durationMs": 39932.541,
+      "passed": 22,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0
+    },
+    {
+      "name": "three scenarios, two viewports, three repetitions",
+      "startTime": "2026-10-21T10:21:50.936Z",
+      "durationMs": 54676.148,
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0
+    }
+  ],
+  "controlledDelay": {
+    "path": "/ko/docs/category/fe/browser/critical-rendering-path-diagnosis",
+    "method": "fetch real healthy RSC response; hold delivery until old 5000ms URL expectation rejects; release and verify Link navigation",
+    "repeatOldAssertionRejections": 6,
+    "repeatNewHelperPasses": 6,
+    "repeatUrlCommitMs": [
+      5817.176167, 5178.366541, 5172.5765, 5203.845125, 5172.177292, 5166.230625
+    ],
+    "repeatBodyVisibleMs": [
+      5879.045959, 5239.772125, 5229.584917, 5262.726625, 5221.863542,
+      5218.65875
+    ],
+    "fullSuiteSamples": [
+      {
+        "project": "offline-desktop",
+        "requestMs": 96.64,
+        "responseMs": 5739.71,
+        "status": 200,
+        "urlMs": 5780.77,
+        "bodyMs": 5853.27
+      },
+      {
+        "project": "offline-mobile",
+        "requestMs": 51.14,
+        "responseMs": 5152.09,
+        "status": 200,
+        "urlMs": 5195.69,
+        "bodyMs": 5265.93
+      }
+    ],
+    "originalCiEnvironmentReproduced": false
+  },
+  "httpFailureControl": {
+    "status": 503,
+    "interceptedRequestTypes": ["RSC", "document"],
+    "repeatHelperRejections": 6,
+    "rejectionMessagePattern": "HTTP error",
+    "documentFallbackObserved": true,
+    "successfulArticleNavigationReported": false
+  },
+  "contractChecks": {
+    "repoTestsPassed": 63,
+    "aggregateGateStateCombinations": 64,
+    "aggregateGatePassingCombinations": 1,
+    "requiredDependencies": [
+      "unit-contract-tests",
+      "docs-browser",
+      "offline-reading"
+    ],
+    "docsTypecheck": "passed",
+    "changedOfflineTestsEslint": "passed",
+    "testTimeoutMsUnchanged": 60000,
+    "expectTimeoutMsUnchanged": 5000,
+    "serverWaitNowUsesRemainingTestDeadline": true,
+    "sameWindowAndNoDocumentNavigationRequiredForSuccess": true
+  },
+  "sourceSha256": {
+    "apps/docs/offline-e2e/article-navigation.ts": "8353d4df948f36836226fe43fa533063241f8c485a6ce2c76acf52401d16a5e8",
+    "apps/docs/offline-e2e/article-navigation.spec.ts": "03abe52f60ce5c1e5ad968d6678a2cb8e24df6bdc9f0d0d75d4053056bbc3bec",
+    "apps/docs/offline-e2e/image-fallback.spec.ts": "3ca05879274087b805c66cc6310e723bd50f3969f7f06cbaae20324ff9b13f31",
+    ".github/workflows/ci.yml": "9057913aa3c078a174eef33f35f7a5ecc48282794cccb940d955a8164d38071b",
+    "scripts/tooling-config.test.mjs": "026899d3eac450ea82aae3f60ea15b6d04c380b4d252032cd21106620ba43ee0"
+  },
+  "localReporterSha256": {
+    "kan22-cold-baseline.json": "43e64e485d8321ce4eda2cf902cc3211d67159d8452519a12d69934c2833d261",
+    "kan22-controls.json": "8632d5a66f2fbeaa0a68146020394e3c7846743442a69acde6fdcd274136573b",
+    "kan22-offline-full.json": "b2cb8d58ad6bbd32d487a5364d2d20188055ae139d354e08524c011a6235878a",
+    "kan22-navigation-repeat.json": "0e8091f730dfbb0ead21bd22820a2176a42adb105233bc41ed46ebf914340ca9"
+  },
+  "retention": "Curated evidence only. Full JSON reporter files remain temporary local files; hashes identify those observations, not durable remote artifacts.",
+  "notPerformed": [
+    "production build",
+    "Linux CI rerun",
+    "commit",
+    "push",
+    "PR",
+    "deployment",
+    "NAS change",
+    "restore or discard preexisting stash"
+  ]
+}

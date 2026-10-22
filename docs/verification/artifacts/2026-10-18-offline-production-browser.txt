@@ -1,0 +1,32 @@
+$ playwright test --config=playwright.offline.config.ts
+[WebServer] (node:53860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:53862) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 18 tests using 1 worker
+
+(node:53874) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [offline-desktop] › offline-e2e/image-fallback.spec.ts:3:1 › an image failure uses a local backup without breaking the document card (1.3s)
+  ✓   2 [offline-desktop] › offline-e2e/image-fallback.spec.ts:35:1 › even a failed backup leaves a usable card and does not retry forever (300ms)
+  ✓   3 [offline-desktop] › offline-e2e/offline-reading.spec.ts:30:1 › only explicit saves persist; stored articles survive a completely offline navigation (600ms)
+  ✓   4 [offline-desktop] › offline-e2e/offline-reading.spec.ts:70:1 › saved copies update only after a second explicit save and exclude executable DOM (366ms)
+  ✓   5 [offline-desktop] › offline-e2e/offline-reading.spec.ts:107:1 › blocked images degrade to an explanation while small same-origin images remain available offline (477ms)
+  ✓   6 [offline-desktop] › offline-e2e/offline-reading.spec.ts:143:1 › failed storage never reports success or destroys the previously saved version (348ms)
+  ✓   7 [offline-desktop] › offline-e2e/offline-reading.spec.ts:164:1 › worker refuses API, preview, query and cross-origin keys; unsaved routes show the library offline (413ms)
+  ✓   8 [offline-desktop] › offline-e2e/offline-reading.spec.ts:225:1 › English saved reader works offline and clears every saved copy only after confirmation (569ms)
+  ✓   9 [offline-desktop] › offline-e2e/offline-reading.spec.ts:261:1 › an unresolved article body cannot be saved as a loading placeholder (424ms)
+(node:53954) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 [offline-mobile] › offline-e2e/image-fallback.spec.ts:3:1 › an image failure uses a local backup without breaking the document card (1.2s)
+  ✓  11 [offline-mobile] › offline-e2e/image-fallback.spec.ts:35:1 › even a failed backup leaves a usable card and does not retry forever (287ms)
+  ✓  12 [offline-mobile] › offline-e2e/offline-reading.spec.ts:30:1 › only explicit saves persist; stored articles survive a completely offline navigation (457ms)
+  ✓  13 [offline-mobile] › offline-e2e/offline-reading.spec.ts:70:1 › saved copies update only after a second explicit save and exclude executable DOM (399ms)
+  ✓  14 [offline-mobile] › offline-e2e/offline-reading.spec.ts:107:1 › blocked images degrade to an explanation while small same-origin images remain available offline (487ms)
+  ✓  15 [offline-mobile] › offline-e2e/offline-reading.spec.ts:143:1 › failed storage never reports success or destroys the previously saved version (375ms)
+  ✓  16 [offline-mobile] › offline-e2e/offline-reading.spec.ts:164:1 › worker refuses API, preview, query and cross-origin keys; unsaved routes show the library offline (392ms)
+  ✓  17 [offline-mobile] › offline-e2e/offline-reading.spec.ts:225:1 › English saved reader works offline and clears every saved copy only after confirmation (559ms)
+  ✓  18 [offline-mobile] › offline-e2e/offline-reading.spec.ts:261:1 › an unresolved article body cannot be saved as a loading placeholder (381ms)
+
+  18 passed (11.4s)

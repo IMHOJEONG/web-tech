@@ -33,8 +33,16 @@ export class AppConfigService {
     return this.config.ingestLookbackHours;
   }
 
+  get ingestMaxLookbackHours() {
+    return this.config.ingestMaxLookbackHours;
+  }
+
   get ingestSchedulerEnabled() {
     return this.config.ingestSchedulerEnabled;
+  }
+
+  get ingestSourceTimeoutMs() {
+    return this.config.ingestSourceTimeoutMs;
   }
 
   get ingestSyncIntervalMinutes() {
@@ -47,6 +55,22 @@ export class AppConfigService {
 
   get nvdApiKey() {
     return this.config.nvdApiKey;
+  }
+
+  get nvdRequestMaxRetries() {
+    return this.config.nvdRequestMaxRetries;
+  }
+
+  get nvdRequestPageDelayMs() {
+    return this.config.nvdRequestPageDelayMs;
+  }
+
+  get nvdRequestRetryDelayMs() {
+    return this.config.nvdRequestRetryDelayMs;
+  }
+
+  get nvdResultsPerPage() {
+    return this.config.nvdResultsPerPage;
   }
 
   get serviceName() {

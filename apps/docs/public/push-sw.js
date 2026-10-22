@@ -1,4 +1,5 @@
-// Push-only worker: no fetch handler or offline cache.
+// Keep this URL stable so existing push subscriptions retain their registration.
+importScripts('/offline-worker.js')
 self.addEventListener('push', (event) => {
     if (!event.data) return
     let data

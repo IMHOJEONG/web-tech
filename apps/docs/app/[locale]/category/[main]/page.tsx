@@ -10,6 +10,8 @@ import {
 import { SubCategoryCard } from '~/entities/category/ui/sub-category-card'
 import { getSubCategoryOverview } from '~/lib/get-category'
 import { buildPageMetadata } from '~/lib/localized-metadata'
+import { Suspense } from 'react'
+import { CategoryMainPending } from '~/widgets/category-browser/ui/category-pending'
 
 export async function generateMetadata({
     params,
@@ -31,7 +33,22 @@ export async function generateMetadata({
     })
 }
 
-export default async function Page({
+export default async function Page(props: {
+    params: Promise<{ main: string }>
+}) {
+    const { main } = await props.params
+    const category = categoryTree.find((item) => item.url === main)
+    if (!category) notFound()
+    return (
+        <Suspense
+            fallback={<CategoryMainPending categoryTitle={category.title} />}
+        >
+            <CategoryMainResults {...props} />
+        </Suspense>
+    )
+}
+
+async function CategoryMainResults({
     params,
 }: {
     params: Promise<{ main: string }>

@@ -8,6 +8,7 @@ import {
   getVulnerabilityDetailResponse,
   getWatchlistResponse,
 } from '../../shared/data/mock-radar-data';
+import { buildVulnerabilityReliability } from '../../shared/lib/vulnerability-reliability';
 import {
   AlertsResponse,
   FeedResponse,
@@ -18,7 +19,7 @@ import {
   WatchlistResponse,
 } from '../../shared/types/radar';
 
-type DbVulnerability = {
+type DbVulnerabilityBase = {
   cveId: string;
   title: string;
   description: string;
@@ -31,8 +32,15 @@ type DbVulnerability = {
   priority: 'P0' | 'P1' | 'P2' | 'P3';
   publishedAt: Date;
   lastModifiedAt: Date;
+  updatedAt: Date;
   watchMatches: Array<{
     matchedValue: string;
+  }>;
+};
+
+type DbFeedVulnerability = DbVulnerabilityBase & {
+  advisories: Array<{
+    source: string;
   }>;
 };
 
@@ -54,7 +62,7 @@ type DbKevAdvisory = {
   };
 };
 
-type DbVulnerabilityDetail = DbVulnerability & {
+type DbVulnerabilityDetail = DbVulnerabilityBase & {
   advisories: Array<{
     source: string;
     title: string | null;
@@ -143,9 +151,14 @@ export class FeedsRepository {
             matchedValue: true,
           },
         },
+        advisories: {
+          select: {
+            source: true,
+          },
+        },
       },
       take: 25,
-    })) as DbVulnerability[];
+    })) as DbFeedVulnerability[];
 
     if (vulnerabilities.length === 0) {
       return getFeedResponse('no_database_rows');
@@ -156,19 +169,37 @@ export class FeedsRepository {
       dataSource: getDatabaseDataSource(
         'Feed is reading the current vulnerability read-model from the database.',
       ),
-      items: vulnerabilities.map((vulnerability) => ({
-        cveId: vulnerability.cveId,
-        title: vulnerability.title,
-        priority: vulnerability.priority,
-        severity: normalizeSeverity(vulnerability.severity),
-        epssScore: vulnerability.epssScore ?? 0,
-        isKev: vulnerability.isKev,
-        publishedAt: vulnerability.publishedAt.toISOString(),
-        updatedAt: vulnerability.lastModifiedAt.toISOString(),
-        matchedWatchlist: vulnerability.watchMatches.map(
+      items: vulnerabilities.map((vulnerability) => {
+        const matchedWatchlist = vulnerability.watchMatches.map(
           (match) => match.matchedValue,
-        ),
-      })),
+        );
+        const advisorySources = vulnerability.advisories.map(
+          (advisory) => advisory.source,
+        );
+
+        return {
+          cveId: vulnerability.cveId,
+          title: vulnerability.title,
+          priority: vulnerability.priority,
+          severity: normalizeSeverity(vulnerability.severity),
+          epssScore: vulnerability.epssScore ?? 0,
+          isKev: vulnerability.isKev,
+          publishedAt: vulnerability.publishedAt.toISOString(),
+          updatedAt: vulnerability.lastModifiedAt.toISOString(),
+          matchedWatchlist,
+          reliability: buildVulnerabilityReliability({
+            advisorySources,
+            cvssScore: vulnerability.cvssScore ?? null,
+            epssPercentile: vulnerability.epssPercentile ?? null,
+            epssScore: vulnerability.epssScore ?? null,
+            ingestedAt: vulnerability.updatedAt,
+            isKev: vulnerability.isKev,
+            matchedWatchlist,
+            runtimeKind: 'database',
+            upstreamModifiedAt: vulnerability.lastModifiedAt,
+          }),
+        };
+      }),
     };
   }
 
@@ -351,6 +382,21 @@ export class FeedsRepository {
         matchedWatchlist: vulnerability.watchMatches.map(
           (match) => match.matchedValue,
         ),
+        reliability: buildVulnerabilityReliability({
+          advisorySources: vulnerability.advisories.map(
+            (advisory) => advisory.source,
+          ),
+          cvssScore: vulnerability.cvssScore ?? null,
+          epssPercentile: vulnerability.epssPercentile ?? null,
+          epssScore: vulnerability.epssScore ?? null,
+          ingestedAt: vulnerability.updatedAt,
+          isKev: vulnerability.isKev,
+          matchedWatchlist: vulnerability.watchMatches.map(
+            (match) => match.matchedValue,
+          ),
+          runtimeKind: 'database',
+          upstreamModifiedAt: vulnerability.lastModifiedAt,
+        }),
         advisories: vulnerability.advisories.map((advisory) => ({
           source: advisory.source,
           title: advisory.title ?? null,

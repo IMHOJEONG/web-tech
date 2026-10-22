@@ -9,6 +9,7 @@ import {
 } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import * as prettier from "prettier";
 import { ESLint } from "eslint";
@@ -92,6 +93,20 @@ test("repository ignores generated outputs and keeps authored formatting targets
     });
     assert.equal(info.ignored, false, file);
     assert.ok(info.inferredParser, file);
+  }
+});
+
+test("docs lint ignores Playwright bundles without excluding authored scripts", async () => {
+  const cwd = path.join(root, "apps/docs");
+  const eslint = new ESLint({ cwd });
+  for (const file of [
+    "playwright-report/offline/retention-probe/trace/assets/viewer.js",
+    "test-results/offline/attachment.js",
+  ]) {
+    assert.equal(await eslint.isPathIgnored(path.join(cwd, file)), true);
+  }
+  for (const file of ["public/offline-reader.js", "lib/search-query.ts"]) {
+    assert.equal(await eslint.isPathIgnored(path.join(cwd, file)), false);
   }
 });
 
@@ -257,6 +272,177 @@ test("CLI format checks and CI changed-commit checks stay read-only", () => {
     ),
   );
   assert.doesNotMatch(workflow, /prettier --write|pnpm format\s*$/m);
+});
+
+const ciWorkflow = readFileSync(
+  path.join(root, ".github/workflows/ci.yml"),
+  "utf8",
+);
+function ciJob(name) {
+  const match = ciWorkflow.match(
+    new RegExp(
+      `^  ${name}:\\n([\\s\\S]*?)(?=^  [a-z][a-z-]*:\\n|(?![\\s\\S]))`,
+      "m",
+    ),
+  );
+  assert.ok(match, `CI job exists: ${name}`);
+  return match[1];
+}
+
+test("squash tooling stays check-only by default and its regression/type checks run in CI", () => {
+  const scripts = readJson("package.json").scripts;
+  assert.equal(
+    scripts["pr:squash"],
+    "node --experimental-strip-types ./scripts/squash-merge.mts",
+  );
+  assert.doesNotMatch(scripts["pr:squash"], /--merge/);
+  assert.ok(scripts["test:repo"].includes("./scripts/*.test.mts"));
+  assert.ok(ciJob("unit-contract-tests").includes("pnpm test:repo"));
+  assert.ok(ciJob("typecheck").includes("pnpm typecheck:squash"));
+  assert.ok(ciJob("typecheck").includes("pnpm typecheck:toolchain"));
+  const config = readJson("tsconfig.squash-merge.json");
+  assert.equal(config.compilerOptions.erasableSyntaxOnly, true);
+  assert.equal(config.compilerOptions.noEmit, true);
+  assert.ok(config.files.includes("scripts/squash-merge.test.mts"));
+});
+
+test("CI isolates browser suites from unit tests without dropping viewport coverage", () => {
+  const unit = ciJob("unit-contract-tests");
+  for (const command of [
+    "pnpm test",
+    "pnpm test:repo",
+    "pnpm --filter docs test:content",
+    "pnpm --filter docs test:lib",
+    "pnpm test:crp-lab",
+    "pnpm --filter docs-backend test:e2e --runInBand",
+  ]) {
+    assert.ok(unit.includes(`run: ${command}\n`), command);
+  }
+  assert.doesNotMatch(
+    unit,
+    /playwright install|test:article:prod|docs test:e2e/,
+  );
+  const browser = ciJob("docs-browser");
+  assert.match(browser, /fail-fast: false/);
+  assert.match(browser, /timeout-minutes: 15/);
+  const projects = readFileSync(
+    path.join(root, "apps/docs/playwright.config.ts"),
+    "utf8",
+  );
+  const projectNames = [...projects.matchAll(/name: '(chromium-[^']+)'/g)].map(
+    (match) => match[1],
+  );
+  assert.equal(projectNames.length, 3);
+  for (const project of projectNames) {
+    assert.ok(
+      browser.includes(`pnpm --filter docs test:e2e --project=${project}\n`),
+      project,
+    );
+  }
+  for (const command of [
+    "pnpm --filter docs test:article:prod",
+    "pnpm test:crp-lab:browser",
+  ]) {
+    assert.ok(browser.includes(`command: ${command}\n`), command);
+  }
+  assert.equal([...browser.matchAll(/- suite:/g)].length, 5);
+  assert.match(browser, /run: \$\{\{ matrix\.command \}\}/);
+  assert.doesNotMatch(browser, /continue-on-error/);
+});
+
+test("offline CI preserves reports and failure traces without uploading the whole workspace", async () => {
+  const job = ciJob("offline-reading");
+  assert.match(job, /if: \$\{\{ !cancelled\(\) \}\}/);
+  assert.match(job, /uses: actions\/upload-artifact@[a-f0-9]{40} # v7\.0\.2/);
+  assert.match(
+    job,
+    /name: docs-offline-\$\{\{ github\.run_id \}\}-\$\{\{ github\.run_attempt \}\}/,
+  );
+  assert.match(job, /retention-days: 7/);
+  assert.match(job, /include-hidden-files: false/);
+  assert.match(job, /if-no-files-found: warn/);
+  const paths = job.match(/path: \|\n((?: {12}[^\n]+\n)+)/)?.[1];
+  assert.ok(paths);
+  assert.deepEqual(
+    paths
+      .trim()
+      .split("\n")
+      .map((value) => value.trim()),
+    [
+      "apps/docs/playwright-report/offline/",
+      "apps/docs/test-results/offline-report/",
+      "apps/docs/test-results/offline/",
+    ],
+  );
+  assert.doesNotMatch(job, /continue-on-error/);
+  assert.match(job, /id: offline-tests/);
+  assert.match(
+    job,
+    /!cancelled\(\) && steps\.offline-tests\.outcome != 'skipped'/,
+  );
+  assert.match(job, /run: pnpm --filter docs verify:offline-evidence/);
+  assert.equal(
+    readJson("apps/docs/package.json").scripts["verify:offline-evidence"],
+    "node --experimental-strip-types ./scripts/verify-offline-evidence.ts",
+  );
+  const { default: probe } =
+    await import("../apps/docs/playwright.evidence.config.ts");
+  assert.equal(probe.testDir, "./evidence-fixtures");
+  assert.equal(probe.use.trace, "retain-on-failure");
+  assert.equal(probe.retries, 0);
+  assert.ok(probe.outputDir.startsWith("test-results/offline/"));
+  const { default: config } =
+    await import("../apps/docs/playwright.offline.config.ts");
+  assert.deepEqual(config.reporter, [
+    ["list"],
+    ["json", { outputFile: "test-results/offline-report/results.json" }],
+    ["html", { outputFolder: "playwright-report/offline", open: "never" }],
+  ]);
+  assert.equal(config.use.trace, "retain-on-failure");
+  assert.equal(config.retries, 0);
+  assert.equal(config.timeout, 60000);
+});
+
+test("required Test gate fails for failed, cancelled or skipped dependencies", () => {
+  const gate = ciJob("test");
+  assert.match(gate, /name: Test\n/);
+  assert.match(gate, /if: \$\{\{ always\(\) \}\}/);
+  assert.match(
+    gate,
+    /needs: \[unit-contract-tests, docs-browser, offline-reading\]/,
+  );
+  assert.match(
+    gate,
+    /UNIT_RESULT: \$\{\{ needs.unit-contract-tests.result \}\}/,
+  );
+  assert.match(gate, /BROWSER_RESULT: \$\{\{ needs.docs-browser.result \}\}/);
+  assert.match(
+    gate,
+    /OFFLINE_RESULT: \$\{\{ needs.offline-reading.result \}\}/,
+  );
+  const script = gate.match(/run: \|\n((?: {10}[^\n]*\n?)+)/)?.[1];
+  assert.ok(script);
+  for (const unit of ["success", "failure", "cancelled", "skipped"]) {
+    for (const browser of ["success", "failure", "cancelled", "skipped"]) {
+      for (const offline of ["success", "failure", "cancelled", "skipped"]) {
+        const result = spawnSync("bash", ["-e", "-c", script], {
+          encoding: "utf8",
+          env: {
+            ...process.env,
+            UNIT_RESULT: unit,
+            BROWSER_RESULT: browser,
+            OFFLINE_RESULT: offline,
+          },
+        });
+        assert.ifError(result.error);
+        assert.equal(
+          result.status === 0,
+          unit === "success" && browser === "success" && offline === "success",
+          `unit=${unit}, browser=${browser}, offline=${offline}`,
+        );
+      }
+    }
+  }
 });
 
 test("ESLint content cache detects source and rule changes without rewriting source", async (t) => {

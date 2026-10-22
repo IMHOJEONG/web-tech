@@ -32,7 +32,7 @@ export function FeedPage() {
     return <FeedLoadingState />;
   }
 
-  if (feedQuery.error || !feedQuery.data) {
+  if (!feedQuery.data) {
     return <FeedErrorState onRetry={feedQuery.refetch} />;
   }
 
@@ -65,6 +65,22 @@ export function FeedPage() {
           </span>
         </div>
       </header>
+
+      {feedQuery.error && (
+        <aside className="flex flex-col gap-3 rounded-sm border border-radar-warning/35 bg-radar-warning/10 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+          <p role="status" className="text-sm leading-6 text-radar-warning">
+            {t("feed.refreshError")}
+          </p>
+          <button
+            type="button"
+            disabled={feedQuery.isFetching}
+            onClick={() => void feedQuery.refetch()}
+            className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-sm border border-radar-warning/40 px-3 text-sm text-radar-warning transition hover:bg-radar-warning/10 disabled:cursor-wait disabled:opacity-60"
+          >
+            {feedQuery.isFetching ? t("common.refreshing") : t("common.retry")}
+          </button>
+        </aside>
+      )}
 
       <FeedFilterBar
         filters={filters}

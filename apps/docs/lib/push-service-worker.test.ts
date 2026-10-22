@@ -17,6 +17,8 @@ function worker() {
         readFileSync(new URL('../public/push-sw.js', import.meta.url), 'utf8'),
         {
             URL,
+            importScripts: (script: string) =>
+                assert.equal(script, '/offline-worker.js'),
             self: {
                 location: { origin: 'https://heap-forge.app' },
                 addEventListener: (
@@ -39,7 +41,7 @@ function worker() {
     return { handlers, shown, opened }
 }
 
-test('push-only worker shows valid payloads and never intercepts document fetch', async () => {
+test('push handlers retain their behavior alongside the separately tested offline extension', async () => {
     const { handlers, shown } = worker()
     assert.deepEqual([...handlers.keys()], ['push', 'notificationclick'])
     const tasks: Promise<unknown>[] = []

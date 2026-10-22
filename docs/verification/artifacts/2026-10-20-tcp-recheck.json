@@ -1,0 +1,178 @@
+{
+  "observedAt": "2026-10-20T14:57:08.452747+00:00",
+  "head": "ebc61ad4f0700e71437315a255872c790093bb94",
+  "branch": "codex/docs-tcp-draft",
+  "draftAndDiagramsUnchanged": {
+    "apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx": "3488475d321a517d3adecb0a2a41915da7353dd382aecc28144ecb35a46a50b0",
+    "apps/docs/public/diagrams/tcp-socket-endpoints.svg": "e93bcbd69f11ca911e9aceba5c91e85230833535f6f8859adfb9cd37bd27ef8e",
+    "apps/docs/public/diagrams/tcp-socket-endpoints.png": "4596ebc64239c7dda674750333eee96cabb91f73b18c60129d6e4702b5c070d8",
+    "apps/docs/public/diagrams/tcp-socket-packet-flow.svg": "68e4ea5376947417ce24cc5a30e2798bcbaf5d8ea7b16ecae3d942edddfb37de",
+    "apps/docs/public/diagrams/tcp-socket-packet-flow.png": "5095d446f0855b7ee40b4aca3ff9573057291b346f13610a7468130349fb4c26"
+  },
+  "matches20261016Source": true,
+  "indexEmpty": true,
+  "status": "draft",
+  "previewObservation": {
+    "observedAt": "2026-10-20T14:55:35.293Z",
+    "views": [
+      {
+        "width": 320,
+        "status": 200,
+        "noindex": true,
+        "quizAbsent": true,
+        "firstAndLastText": true,
+        "disclosures": [
+          "단계별 관측 기록 펼치기",
+          "seq와 ack 숫자 해석",
+          "실행 코드 다섯 부분 펼치기",
+          "macOS의 두 터미널에서 캡처하기"
+        ],
+        "overflow": 0,
+        "nestedParagraphs": 0,
+        "images": [
+          {
+            "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-endpoints.png&w=3840&q=75",
+            "decoded": true,
+            "width": 288,
+            "height": 301.5
+          },
+          {
+            "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-packet-flow.png&w=3840&q=75",
+            "decoded": true,
+            "width": 288,
+            "height": 486
+          }
+        ],
+        "headingSizes": ["26.4px"],
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "status": 200,
+        "noindex": true,
+        "quizAbsent": true,
+        "firstAndLastText": true,
+        "disclosures": [
+          "단계별 관측 기록 펼치기",
+          "seq와 ack 숫자 해석",
+          "실행 코드 다섯 부분 펼치기",
+          "macOS의 두 터미널에서 캡처하기"
+        ],
+        "overflow": 0,
+        "nestedParagraphs": 0,
+        "images": [
+          {
+            "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-endpoints.png&w=3840&q=75",
+            "decoded": true,
+            "width": 358,
+            "height": 374.78125
+          },
+          {
+            "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-packet-flow.png&w=3840&q=75",
+            "decoded": true,
+            "width": 358,
+            "height": 604.125
+          }
+        ],
+        "headingSizes": ["26.4px"],
+        "pageErrors": []
+      },
+      {
+        "width": 670,
+        "status": 200,
+        "noindex": true,
+        "quizAbsent": true,
+        "firstAndLastText": true,
+        "disclosures": [
+          "단계별 관측 기록 펼치기",
+          "seq와 ack 숫자 해석",
+          "실행 코드 다섯 부분 펼치기",
+          "macOS의 두 터미널에서 캡처하기"
+        ],
+        "overflow": 0,
+        "nestedParagraphs": 0,
+        "images": [
+          {
+            "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-endpoints.png&w=3840&q=75",
+            "decoded": true,
+            "width": 448,
+            "height": 468.90625
+          },
+          {
+            "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-packet-flow.png&w=3840&q=75",
+            "decoded": true,
+            "width": 448,
+            "height": 756.21875
+          }
+        ],
+        "headingSizes": ["26.4px"],
+        "pageErrors": []
+      },
+      {
+        "width": 1280,
+        "status": 200,
+        "noindex": true,
+        "quizAbsent": true,
+        "firstAndLastText": true,
+        "disclosures": [
+          "단계별 관측 기록 펼치기",
+          "seq와 ack 숫자 해석",
+          "실행 코드 다섯 부분 펼치기",
+          "macOS의 두 터미널에서 캡처하기"
+        ],
+        "overflow": 0,
+        "nestedParagraphs": 0,
+        "images": [
+          {
+            "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-endpoints.png&w=3840&q=75",
+            "decoded": true,
+            "width": 448,
+            "height": 469
+          },
+          {
+            "src": "/_next/image?url=%2Fdiagrams%2Ftcp-socket-packet-flow.png&w=3840&q=75",
+            "decoded": true,
+            "width": 448,
+            "height": 756
+          }
+        ],
+        "headingSizes": ["34.56px"],
+        "pageErrors": []
+      }
+    ]
+  },
+  "ordinaryRoute": {
+    "observedAt": "2026-10-20T14:56:36.691Z",
+    "status": 200,
+    "title": "HeapForge - 기술을 구조로 쌓아 올리는 아카이브",
+    "headings": ["요청한 문서를 찾지 못했습니다"],
+    "robots": ["noindex", "noindex"],
+    "mdxCount": 0,
+    "text": "본문으로 바로가기\nHEAP-FORGE\nFeed\nWeb\nMobile\nUI/UX\nAbout\n문서 검색\nEN\n\n페이지를 찾을 수 없음\n\n요청한 문서를 찾지 못했습니다\n\n문서가 삭제되었거나 주소가 바뀌었을 수 있습니다. 피드나 문서 인덱스에서 다시 찾아보세요.\n\n피드로 이동\nHEAP-FORGE\nPRIVACY\nTERMS\nCHANGELOG\nGITHUB"
+  },
+  "initialCheckerAssumption": {
+    "expected": 404,
+    "actual": 200,
+    "reason": "Next.js streamed not-found returns 200; rendered not-found UI, noindex, no MDX are checked instead",
+    "applicationChanged": false
+  },
+  "packetCaptureExecuted": false,
+  "productionVerified": false,
+  "records": {
+    "verifiedAt": "2026-10-20T15:00:34.413655+00:00",
+    "jira": {
+      "key": "KAN-16",
+      "status": "완료",
+      "commentId": "10006",
+      "commentCount": 1,
+      "threeColumnTableReadback": true
+    },
+    "confluence": {
+      "pageId": "65817",
+      "version": 13,
+      "readbackVerified": true
+    },
+    "privateDraftUploaded": false,
+    "remoteDocumentLinksCreated": false
+  }
+}

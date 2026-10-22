@@ -192,6 +192,7 @@ export async function getDocByRoutePath(
     const includeRemote = shouldIncludeRemoteContentIndex()
 
     if (includeRemote) {
+        let remoteFailure: unknown
         try {
             const remoteDoc = await (measure
                 ? measure('remote-detail', () =>
@@ -211,6 +212,7 @@ export async function getDocByRoutePath(
                 return remoteDoc
             }
         } catch (error) {
+            remoteFailure = error
             console.warn(
                 '[docs] Remote document detail unavailable. Trying local document fallback.',
                 routePath,
@@ -234,6 +236,7 @@ export async function getDocByRoutePath(
             includeRemote,
         })
 
+        if (!selectedDoc && remoteFailure) throw remoteFailure
         return selectedDoc
     }
 
@@ -277,6 +280,14 @@ export async function getDocByRoutePath(
             routePath,
             error
         )
+        logContentSource({
+            area: 'detail',
+            source: 'none',
+            reason: 'local-and-remote-unavailable',
+            routePath,
+            includeRemote,
+        })
+        throw error
     }
 
     logContentSource({
