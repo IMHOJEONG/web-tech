@@ -508,6 +508,91 @@
       ]
     }
   ],
+  "bodyReadinessReview": {
+    "review": "https://github.com/IMHOJEONG/web-tech/pull/53#discussion_r4338274582",
+    "productSuite": {
+      "startTime": "2026-10-22T00:15:52.147Z",
+      "duration": 59452.374,
+      "expected": 38,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "publicSite": {
+      "recordedAt": "2026-10-22T00:16:26.601Z",
+      "browser": "151.0.7922.34",
+      "elapsedClock": 32301,
+      "results": [
+        {
+          "iteration": 0,
+          "locale": "ko",
+          "width": 1280,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 2,
+          "ambiguousReadRejected": true,
+          "articlePath": "/ko/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 0,
+          "locale": "ko",
+          "width": 390,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 2,
+          "ambiguousReadRejected": true,
+          "articlePath": "/ko/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 0,
+          "locale": "en",
+          "width": 1280,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 1,
+          "articlePath": "/en/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        },
+        {
+          "iteration": 0,
+          "locale": "en",
+          "width": 390,
+          "headed": false,
+          "channel": "bundled-chromium",
+          "broadMatchesBeforeOpen": 1,
+          "broadMatchesAfterOpen": 1,
+          "articlePath": "/en/docs/category/fe/react/server-client-component-boundary",
+          "searchAndArticleStayClientSide": true,
+          "status": "passed"
+        }
+      ]
+    },
+    "sourceSha256": {
+      "apps/docs/offline-e2e/article-navigation.ts": "6c32d43a9b352cee9acbac1a9fe475a9db19dedaba4c7c5fad93b2c2f708704d",
+      "apps/docs/offline-e2e/navigation-observer.spec.ts": "a77cf1424518d5e9b4a997e393a2e411681ca8c702d2c2e5049e75cf398edbd4",
+      "apps/docs/scripts/verify-public-search.ts": "ae7bf19186c5a235aa98e450f8f8f30c02402fe0dfd72d9710d8cb10adc72657"
+    },
+    "assertions": "visible wrapper, no data-offline-loading descendants, non-whitespace body; wrapper-only and empty-body controls",
+    "historicalBoundary": "Earlier body-visible observations established wrapper visibility only; new results strengthen content readiness without changing the confirmed search locator root cause.",
+    "firstRemoteAttempt": {
+      "runId": 39698192407,
+      "headSha": "6db191abcfafd8b67adda27072d4a11defd3299f",
+      "offlineJobId": 119560655054,
+      "failureStage": "Install Playwright Chromium",
+      "error": "ERR_TLS_CERT_ALTNAME_INVALID: cdn.playwright.dev certificate mismatch",
+      "testsStarted": false,
+      "artifactCount": 0,
+      "tlsValidationDisabled": false
+    }
+  },
   "initialHashScope": "sourceSha256 belongs to the initial local inspection before the follow-up CI probe. Original measurements and hashes are preserved.",
   "followUpProbeLocal": {
     "summary": {

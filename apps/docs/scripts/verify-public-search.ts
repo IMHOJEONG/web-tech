@@ -118,6 +118,14 @@ try {
                     await expect(
                         page.locator('[data-offline-content]')
                     ).toBeVisible()
+                    await expect(
+                        page.locator(
+                            '[data-offline-content] [data-offline-loading]'
+                        )
+                    ).toHaveCount(0)
+                    await expect(
+                        page.locator('[data-offline-content]')
+                    ).toContainText(/\S/)
                     assert.equal(
                         await page.evaluate(
                             (value) =>

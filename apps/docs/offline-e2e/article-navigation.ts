@@ -36,6 +36,10 @@ export async function openArticleFromCard(
         ).toEqual([])
         await expect(page).toHaveURL(destination.href)
         await expect(page.locator('[data-offline-content]')).toBeVisible()
+        await expect(
+            page.locator('[data-offline-content] [data-offline-loading]')
+        ).toHaveCount(0)
+        await expect(page.locator('[data-offline-content]')).toContainText(/\S/)
         expect(
             observation.documentRequests,
             'The card must use client-side navigation'

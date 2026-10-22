@@ -1,6 +1,7 @@
 import { createServer, type ServerResponse } from 'node:http'
 import { expect, test } from '@playwright/test'
 import { observeNavigation } from './navigation-observer'
+import { openArticleFromCard } from './article-navigation'
 
 async function createFixture() {
     let stream: ServerResponse | undefined
@@ -44,6 +45,67 @@ test.beforeEach(async ({ page }) => {
     await page.goto(fixture.origin)
 })
 test.afterEach(async () => fixture.close())
+
+for (const state of ['loading', 'empty']) {
+    test(`a visible ${state} article wrapper is not body completion`, async ({
+        page,
+    }, info) => {
+        await page.setContent('<a href="/ko/docs/body-fixture">Article</a>')
+        await page.evaluate((state) => {
+            document.querySelector('a')!.addEventListener('click', (event) => {
+                event.preventDefault()
+                history.pushState(null, '', '/ko/docs/body-fixture')
+                const body = document.createElement('div')
+                body.dataset.offlineContent = ''
+                body.style.minHeight = '20px'
+                body.style.minWidth = '20px'
+                if (state === 'loading') {
+                    const pending = document.createElement('div')
+                    pending.dataset.offlineLoading = ''
+                    pending.textContent = 'Loading'
+                    body.append(pending)
+                }
+                document.body.append(body)
+            })
+        }, state)
+        let settled = false
+        const completed = openArticleFromCard(
+            page,
+            page.getByRole('link'),
+            info
+        ).then(
+            () => {
+                settled = true
+                return { error: undefined }
+            },
+            (error: unknown) => {
+                settled = true
+                return { error }
+            }
+        )
+        try {
+            await expect(page).toHaveURL(
+                `${fixture.origin}/ko/docs/body-fixture`
+            )
+            await expect(page.locator('[data-offline-content]')).toBeVisible()
+            await expect(
+                expect.poll(() => settled, { timeout: 250 }).toBe(true)
+            ).rejects.toThrow()
+        } finally {
+            await page.locator('[data-offline-content]').evaluate((body) => {
+                body.textContent = 'Ready article body'
+            })
+        }
+        const result = await completed
+        if (result.error) throw result.error
+        const attachment = info.attachments.find(
+            ({ name }) => name === 'offline-article-navigation'
+        )
+        expect(attachment?.body).toBeDefined()
+        const report = JSON.parse(attachment!.body!.toString())
+        expect(report.events.at(-1).event).toBe('body-visible')
+    })
+}
 
 test('records rapid progress changes and removes observation listeners', async ({
     page,
