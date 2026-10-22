@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { AppConfigService } from '../../../../config/app-config.service';
 import { CollectedVulnerability } from '../../ingest.types';
 
@@ -24,6 +24,8 @@ type NvdResponse = {
 
 @Injectable()
 export class NvdCollector {
+  private readonly logger = new Logger(NvdCollector.name);
+
   constructor(private readonly appConfigService: AppConfigService) {}
 
   async fetchRecent(lookbackHours: number): Promise<CollectedVulnerability[]> {
@@ -34,7 +36,7 @@ export class NvdCollector {
 
     const allVulnerabilities: CollectedVulnerability[] = [];
     let startIndex = 0;
-    const resultsPerPage = 2000;
+    const resultsPerPage = this.appConfigService.nvdResultsPerPage;
 
     while (true) {
       const requestUrl = new URL(NVD_ENDPOINT);
@@ -43,22 +45,15 @@ export class NvdCollector {
       requestUrl.searchParams.set('resultsPerPage', String(resultsPerPage));
       requestUrl.searchParams.set('startIndex', String(startIndex));
 
-      const response = await fetch(requestUrl, {
-        headers: this.appConfigService.nvdApiKey
-          ? {
-              apiKey: this.appConfigService.nvdApiKey,
-            }
-          : undefined,
-        signal: AbortSignal.timeout(20_000),
-      });
+      this.logger.log(
+        `NVD page request started: lookbackHours=${lookbackHours}, startIndex=${startIndex}, resultsPerPage=${resultsPerPage}, timeoutMs=${this.appConfigService.ingestSourceTimeoutMs}`,
+      );
 
-      if (!response.ok) {
-        throw new Error(
-          `NVD request failed: ${response.status} ${response.statusText}`,
-        );
-      }
+      const payload = await this.fetchPageWithRetry(requestUrl);
 
-      const payload = (await response.json()) as NvdResponse;
+      this.logger.log(
+        `NVD page request completed: startIndex=${startIndex}, received=${payload.vulnerabilities.length}, total=${payload.totalResults}, resultsPerPage=${payload.resultsPerPage}`,
+      );
 
       allVulnerabilities.push(
         ...payload.vulnerabilities.map((item) => mapNvdVulnerability(item.cve)),
@@ -69,6 +64,8 @@ export class NvdCollector {
       if (startIndex >= payload.totalResults) {
         break;
       }
+
+      await sleep(this.appConfigService.nvdRequestPageDelayMs);
     }
 
     return allVulnerabilities;
@@ -83,6 +80,110 @@ export class NvdCollector {
       note: 'Recent updates are pulled by last modified window.',
     };
   }
+
+  private async fetchPageWithRetry(requestUrl: URL): Promise<NvdResponse> {
+    const maxAttempts = this.appConfigService.nvdRequestMaxRetries + 1;
+    let lastError: unknown;
+
+    for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+      const startedAt = Date.now();
+
+      try {
+        const response = await fetch(requestUrl, {
+          headers: this.appConfigService.nvdApiKey
+            ? {
+                apiKey: this.appConfigService.nvdApiKey,
+              }
+            : undefined,
+          signal: AbortSignal.timeout(
+            this.appConfigService.ingestSourceTimeoutMs,
+          ),
+        });
+
+        if (!response.ok) {
+          const apiMessage = response.headers.get('message');
+          const messageSuffix = apiMessage ? ` message=${apiMessage}` : '';
+
+          throw new NvdRequestError(
+            `NVD request failed: ${response.status} ${response.statusText}${messageSuffix}`,
+            isRetryableStatus(response.status),
+          );
+        }
+
+        return (await response.json()) as NvdResponse;
+      } catch (error) {
+        lastError = error;
+
+        const retryable = isRetryableNvdError(error);
+        const shouldRetry = retryable && attempt < maxAttempts;
+
+        this.logger.warn(
+          `NVD page request ${
+            shouldRetry ? 'will retry' : 'failed'
+          }: attempt=${attempt}/${maxAttempts}, durationMs=${
+            Date.now() - startedAt
+          }, retryable=${retryable}, error=${formatErrorMessage(error)}`,
+        );
+
+        if (!shouldRetry) {
+          break;
+        }
+
+        await sleep(this.appConfigService.nvdRequestRetryDelayMs * attempt);
+      }
+    }
+
+    throw lastError instanceof Error
+      ? lastError
+      : new Error('NVD request failed with an unknown error');
+  }
+}
+
+class NvdRequestError extends Error {
+  constructor(
+    message: string,
+    readonly retryable: boolean,
+  ) {
+    super(message);
+  }
+}
+
+function isRetryableStatus(statusCode: number) {
+  return statusCode === 429 || statusCode >= 500;
+}
+
+function isRetryableNvdError(error: unknown) {
+  if (error instanceof NvdRequestError) {
+    return error.retryable;
+  }
+
+  const message = formatErrorMessage(error).toLowerCase();
+
+  return (
+    message.includes('terminated') ||
+    message.includes('timeout') ||
+    message.includes('fetch failed') ||
+    message.includes('econnreset') ||
+    message.includes('etimedout')
+  );
+}
+
+function formatErrorMessage(error: unknown) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return String(error);
+}
+
+function sleep(durationMs: number) {
+  if (durationMs <= 0) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve) => {
+    setTimeout(resolve, durationMs);
+  });
 }
 
 function mapNvdVulnerability(

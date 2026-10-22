@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { openDocsIndexFilters } from './helpers/docs-index'
 
 function getSearchParams(url: URL, keys: readonly string[]) {
     return Object.fromEntries(
@@ -17,11 +18,13 @@ test.describe('docs index mobile navigation', () => {
     test('preserves filter and sort state in the URL', async ({ page }) => {
         await page.goto('/docs')
 
+        await openDocsIndexFilters(page)
         await page.locator('a[href*="section=web"]').first().click()
         await expect
             .poll(() => new URL(page.url()).search)
             .toContain('section=web')
 
+        await openDocsIndexFilters(page)
         await page.locator('a[href*="sort=title"]').first().click()
         await expect
             .poll(() =>
@@ -46,6 +49,7 @@ test.describe('docs index mobile navigation', () => {
             .poll(() => new URL(page.url()).searchParams.get('q'))
             .toBe('React')
 
+        await openDocsIndexFilters(page)
         await page.locator('a[href*="section=web"]').first().click()
         await expect
             .poll(() => getSearchParams(new URL(page.url()), ['q', 'section']))
@@ -55,6 +59,7 @@ test.describe('docs index mobile navigation', () => {
     test('resets a stale page when a filter changes', async ({ page }) => {
         await page.goto('/docs?page=2&sort=title')
 
+        await openDocsIndexFilters(page)
         await page.locator('a[href*="section=web"]').first().click()
         await expect
             .poll(() =>

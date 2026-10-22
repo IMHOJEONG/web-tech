@@ -6,6 +6,8 @@ import { getDocHref, getDocRoutePath } from '~/lib/get-doc-route'
 import { LandingHero } from './landing-hero'
 import { LatestNotes } from './latest-notes'
 import { ThematicFoundations } from './thematic-foundations'
+import { Suspense } from 'react'
+import { LatestNotesPending } from './latest-notes-pending'
 
 type LandingDoc = Partial<Metadata> & {
     title: string
@@ -68,7 +70,7 @@ function getSectionLabel(
     }
 }
 
-export async function RootLandingPage() {
+async function LandingLatestNotes() {
     const t = await getTranslations('rootLanding')
     let docs: LandingDoc[] = []
 
@@ -84,6 +86,29 @@ export async function RootLandingPage() {
         )
     }
 
+    const latestItems = docs.map((doc) => ({
+        id: String(doc.id ?? getDocRoutePath(doc) ?? doc.slug),
+        href: getDocHref(doc),
+        title: doc.title,
+        summary: doc.summary,
+        date: doc.date,
+        sectionLabel: getSectionLabel(doc, t),
+    }))
+    return (
+        <LatestNotes
+            eyebrow={t('latestNotes.eyebrow')}
+            title={t('latestNotes.title')}
+            viewAllLabel={t('latestNotes.viewAll')}
+            openLabel={t('latestNotes.open')}
+            items={latestItems}
+            unavailableTitle={t('latestNotes.unavailableTitle')}
+            unavailableDescription={t('latestNotes.unavailableDescription')}
+        />
+    )
+}
+
+export async function RootLandingPage() {
+    const t = await getTranslations('rootLanding')
     const foundationItems = [
         {
             area: 'AREA_01',
@@ -111,15 +136,6 @@ export async function RootLandingPage() {
         },
     ]
 
-    const latestItems = docs.map((doc) => ({
-        id: String(doc.id ?? getDocRoutePath(doc) ?? doc.slug),
-        href: getDocHref(doc),
-        title: doc.title,
-        summary: doc.summary,
-        date: doc.date,
-        sectionLabel: getSectionLabel(doc, t),
-    }))
-
     return (
         <MainContent>
             <LandingHero />
@@ -129,15 +145,9 @@ export async function RootLandingPage() {
                 countLabel={t('foundations.countLabel')}
                 items={foundationItems}
             />
-            <LatestNotes
-                eyebrow={t('latestNotes.eyebrow')}
-                title={t('latestNotes.title')}
-                viewAllLabel={t('latestNotes.viewAll')}
-                openLabel={t('latestNotes.open')}
-                items={latestItems}
-                unavailableTitle={t('latestNotes.unavailableTitle')}
-                unavailableDescription={t('latestNotes.unavailableDescription')}
-            />
+            <Suspense fallback={<LatestNotesPending />}>
+                <LandingLatestNotes />
+            </Suspense>
         </MainContent>
     )
 }

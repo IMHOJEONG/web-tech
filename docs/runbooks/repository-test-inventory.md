@@ -147,9 +147,10 @@ CI 연결 판단은 [CI 워크플로](../../.github/workflows/ci.yml), [Document
 
 #### Docs 상세 페이지 E2E
 
-13개 · Playwright · `pnpm --filter docs test:article:prod` · CI 호출 있음. 로컬 production 빌드와 콘텐츠 fixture 서버를 사용하며 운영 사이트 직접 검사가 아님.
+Playwright · `pnpm --filter docs test:article:prod` · CI 호출 있음. 로컬 production 빌드와 콘텐츠 fixture 서버를 사용하며 운영 사이트 직접 검사가 아님. 10-18 사용자 Link 이동과 직접 URL 접근을 분리했으며 [역할과 실행 방법](docs-article-rendering-regression.md#이동-방식별-검사-역할)을 따른다.
 
 - [apps/docs/article-e2e/article-detail.spec.ts](../../apps/docs/article-e2e/article-detail.spec.ts)
+- [apps/docs/article-e2e/article-navigation.spec.ts](../../apps/docs/article-e2e/article-navigation.spec.ts)
 - [apps/docs/article-e2e/article-legacy-redirect.spec.ts](../../apps/docs/article-e2e/article-legacy-redirect.spec.ts)
 - [apps/docs/article-e2e/article-sharing.spec.ts](../../apps/docs/article-e2e/article-sharing.spec.ts)
 - [apps/docs/article-e2e/article-streaming.spec.ts](../../apps/docs/article-e2e/article-streaming.spec.ts)
@@ -159,7 +160,11 @@ CI 연결 판단은 [CI 워크플로](../../.github/workflows/ci.yml), [Document
 - [apps/docs/article-e2e/local-content-tracing.spec.ts](../../apps/docs/article-e2e/local-content-tracing.spec.ts)
 - [apps/docs/article-e2e/local-document-reads.spec.ts](../../apps/docs/article-e2e/local-document-reads.spec.ts)
 - [apps/docs/article-e2e/local-index-consistency.spec.ts](../../apps/docs/article-e2e/local-index-consistency.spec.ts)
+- [apps/docs/article-e2e/prefetch-navigation-client.spec.ts](../../apps/docs/article-e2e/prefetch-navigation-client.spec.ts)
+- [apps/docs/article-e2e/prefetch-navigation-direct.spec.ts](../../apps/docs/article-e2e/prefetch-navigation-direct.spec.ts)
+- [apps/docs/article-e2e/prefetch-termination.spec.ts](../../apps/docs/article-e2e/prefetch-termination.spec.ts)
 - [apps/docs/article-e2e/request-lifecycle-next.spec.ts](../../apps/docs/article-e2e/request-lifecycle-next.spec.ts)
+- [apps/docs/article-e2e/request-cause-next.spec.ts](../../apps/docs/article-e2e/request-cause-next.spec.ts): 완료·클라이언트/서버 종료·upstream 503의 요청별 순서 대조. 테스트 preload 전용이며 운영 오류 필터가 아님.
 - [apps/docs/article-e2e/request-lifecycle.spec.ts](../../apps/docs/article-e2e/request-lifecycle.spec.ts)
 - [apps/docs/article-e2e/runtime-observation.spec.ts](../../apps/docs/article-e2e/runtime-observation.spec.ts)
 

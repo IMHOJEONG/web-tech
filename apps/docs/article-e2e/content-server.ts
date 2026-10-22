@@ -2,12 +2,46 @@ import { createServer } from 'node:http'
 import { setTimeout } from 'node:timers/promises'
 
 let publicationVersion = 1
+let releaseRemoteBody: (() => void) | undefined
+let remoteBodyGate: Promise<void> | undefined
+let remoteBodyStatus = 200
 
 // Synthetic credential and content, never an operational token or NAS document.
 const server = createServer(async (request, response) => {
     response.setHeader('Cache-Control', 'private, no-store')
     if (request.url === '/health') {
         response.end('ready')
+        return
+    }
+    if (request.url?.startsWith('/__test/remote-body/')) {
+        if (
+            request.method !== 'POST' ||
+            request.headers.authorization !== 'Bearer article-e2e-only-control'
+        ) {
+            response.writeHead(401).end('Unauthorized')
+            return
+        }
+        if (request.url === '/__test/remote-body/hold') {
+            remoteBodyStatus = 200
+            releaseRemoteBody?.()
+            remoteBodyGate = new Promise<void>((resolve) => {
+                releaseRemoteBody = resolve
+            })
+        } else if (request.url === '/__test/remote-body/release') {
+            remoteBodyStatus = 200
+            releaseRemoteBody?.()
+            releaseRemoteBody = undefined
+            remoteBodyGate = undefined
+        } else if (request.url === '/__test/remote-body/fail-503') {
+            remoteBodyStatus = 503
+            releaseRemoteBody?.()
+            releaseRemoteBody = undefined
+            remoteBodyGate = undefined
+        } else {
+            response.writeHead(404).end('Not found')
+            return
+        }
+        response.writeHead(204).end()
         return
     }
     // Test-only control plane, bound to loopback and never mounted in Next.js.
@@ -73,7 +107,12 @@ const server = createServer(async (request, response) => {
         return
     }
     if (request.url === '/posts/web/article-e2e-remote') {
+        if (remoteBodyStatus === 503) {
+            response.writeHead(503).end('Synthetic upstream unavailable')
+            return
+        }
         // Exercise async server rendering; the index never contains body text.
+        await remoteBodyGate
         await setTimeout(350)
         response.setHeader('Content-Type', 'text/html; charset=utf-8')
         response.end(`<article>

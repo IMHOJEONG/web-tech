@@ -20,9 +20,11 @@ describe('IngestSchedulerService', () => {
   const createIngestService = () =>
     ({
       syncRecent: jest.fn(async () => ({
+        status: 'completed' as const,
         startedAt: '2026-05-20T00:00:00.000Z',
         completedAt: '2026-05-20T00:00:10.000Z',
         lookbackHours: 24,
+        failures: [],
         sources: [],
         counts: {
           nvdVulnerabilities: 10,

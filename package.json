@@ -5,6 +5,7 @@
     "build": "turbo build",
     "build:web-apps": "turbo build --filter=docs --filter=vuln-radar",
     "check:vuln-radar:dev": "bash ./scripts/check-vuln-radar-dev.sh",
+    "verify:vuln-radar:integration": "tsc -p tsconfig.vuln-integration.json && node --experimental-strip-types ./scripts/verify-vuln-radar-integration.mts",
     "check:web-apps": "pnpm lint:web-apps && pnpm typecheck:web-apps && pnpm build:web-apps",
     "dev": "turbo dev",
     "dev:vuln-radar": "turbo dev --filter=vuln-radar",
@@ -29,11 +30,14 @@
     "validate:docs": "node ./scripts/check-documentation.mjs",
     "lint": "turbo lint",
     "lint:web-apps": "turbo lint --filter=docs --filter=vuln-radar",
-    "test:repo": "node --test ./scripts/*.test.mjs",
+    "test:repo": "node --experimental-strip-types --test ./scripts/*.test.mjs ./scripts/*.test.mts",
     "branch:sync-feature": "bash ./scripts/sync-feature-branches.sh",
     "branch:sync-feature:apply": "bash ./scripts/sync-feature-branches.sh --apply",
     "branch:sync-feature:push": "bash ./scripts/sync-feature-branches.sh --apply --push",
     "lint:commit:head": "commitlint --from HEAD~1 --to HEAD --verbose",
+    "pr:squash": "node --experimental-strip-types ./scripts/squash-merge.mts",
+    "test:squash": "node --experimental-strip-types --test ./scripts/squash-merge.test.mts",
+    "typecheck:squash": "tsc -p tsconfig.squash-merge.json",
     "typecheck:web-apps": "turbo typecheck --filter=docs --filter=vuln-radar",
     "validate:catalog": "node ./scripts/validate-catalog-references.mjs",
     "rm:pnpm-store": "rm -rf \"$(pnpm store path)\"",
@@ -42,6 +46,7 @@
     "test:crp-lab": "pnpm typecheck:crp-lab && node --experimental-strip-types --test docs/examples/critical-rendering-path-lab/server.test.ts",
     "test:crp-lab:browser": "pnpm --filter docs test:crp-lab:browser",
     "typecheck": "turbo typecheck",
+    "typecheck:toolchain": "tsc -p tsconfig.toolchain.json",
     "typecheck:crp-lab": "tsc -p docs/examples/critical-rendering-path-lab/tsconfig.json",
     "vercel:deploy:vuln-radar": "vercel --cwd apps/vuln-radar && vercel deploy",
     "vercel:deploy:docs": "vercel --cwd apps/docs && vercel deploy",
@@ -65,5 +70,5 @@
   "engines": {
     "node": "24.x"
   },
-  "packageManager": "pnpm@11.10.0+sha512.0b7f8b98060031904c017e3a41eb187a16d40eeb829b95c4f8cb03681761fc4ab53dd219115b9b447f4dce1a05a214764461e7d3703392a9f32f9511ce8c86c8"
+  "packageManager": "pnpm@12.14.0"
 }

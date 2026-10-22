@@ -1,0 +1,16 @@
+{
+  "observedAt": "2026-10-21T02:25:43.071Z",
+  "beforeCommit": "f27b61ef408bc6bc0f5360e739b1ef274ae44482",
+  "before": {
+    "stdin": "EOF without data",
+    "timeoutMs": 1500,
+    "errorCode": "ETIMEDOUT",
+    "stdoutBytes": 0
+  },
+  "after": {
+    "command": "node --test docs/verification/artifacts/2026-10-21-tcp-eof-regression.test.mts",
+    "tests": 2,
+    "pass": 2,
+    "fail": 0
+  }
+}

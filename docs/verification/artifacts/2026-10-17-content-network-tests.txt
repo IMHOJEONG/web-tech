@@ -1,0 +1,39 @@
+✔ network failure never retries and does not expose authentication (5.864292ms)
+✔ HTTP failures including authentication and throttling never retry (3.637292ms)
+✔ deadline aborts a connection that never sends headers (42.298291ms)
+✔ deadline includes a stalled body after successful headers and cancels it (45.202542ms)
+✔ slow chunks cannot reset the total body deadline (86.359625ms)
+✔ one deadline is shared by index and body and expired requests do not start (81.33425ms)
+✔ successful UTF-8 content is preserved and blank bodies fail (1.587625ms)
+▶ real content selection and search isolate remote failures from local documents
+  ✔ connection failure keeps both local list and local search usable, without retries (54.109667ms)
+  ✔ body-error: local detail replaces unusable remote body (23.363667ms)
+  ✔ empty: local detail replaces unusable remote body (10.933375ms)
+  ✔ markup-empty: local detail replaces unusable remote body (9.638209ms)
+  ✔ stalled: local detail replaces unusable remote body (113.436708ms)
+  ✔ bad-json: local detail replaces unusable remote body (10.696833ms)
+  ✔ known remote body failure without a local copy is an error, not a fake 404 (6.883292ms)
+  ✔ a genuinely absent route still returns null (4.263875ms)
+  ✔ healthy remote detail remains preferred (5.024625ms)
+✔ real content selection and search isolate remote failures from local documents (513.022292ms)
+✔ offline storage requires an explicit matching public-article source and excludes unsafe keys (42.167625ms)
+✔ concurrent explicit saves respect the ten-article cap; updates, deletion and clear remain available (126.096958ms)
+✔ worker upgrades preserve saved articles and unrelated application caches (5.80025ms)
+✔ offline navigation serves only saved snapshots or the library, never caches API or RSC responses (6.972583ms)
+✔ push handlers retain their behavior alongside the separately tested offline extension (4.357083ms)
+✔ notification clicks cannot open an external URL or unrelated route (0.987167ms)
+▶ sitemap uses the public content pipeline
+  ✔ includes remote articles, modified dates and locale alternates (40.501625ms)
+  ✔ deduplicates local and remote routes using remote metadata (11.296959ms)
+  ✔ keeps local and static URLs available on upstream failure (6.738416ms)
+  ✔ does not call the upstream when remote indexing is disabled (15.475709ms)
+  ✔ works without a configured remote API (7.940292ms)
+✔ sitemap uses the public content pipeline (379.92175ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 942.00175

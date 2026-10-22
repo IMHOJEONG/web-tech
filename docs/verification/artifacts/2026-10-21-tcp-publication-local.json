@@ -1,0 +1,139 @@
+{
+  "observedAt": "2026-10-21T02:09:12.538Z",
+  "origin": "http://127.0.0.1:3021",
+  "views": [
+    {
+      "locale": "ko",
+      "width": 320,
+      "status": 200,
+      "indexable": true,
+      "disclosureChecks": 4,
+      "clipboard": true,
+      "pageErrors": [],
+      "overflow": 0,
+      "nestedParagraphs": 0,
+      "images": [
+        {
+          "decoded": true,
+          "width": 264
+        },
+        {
+          "decoded": true,
+          "width": 264
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "width": 390,
+      "status": 200,
+      "indexable": true,
+      "disclosureChecks": 4,
+      "clipboard": true,
+      "pageErrors": [],
+      "overflow": 0,
+      "nestedParagraphs": 0,
+      "images": [
+        {
+          "decoded": true,
+          "width": 334
+        },
+        {
+          "decoded": true,
+          "width": 334
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "width": 670,
+      "status": 200,
+      "indexable": true,
+      "disclosureChecks": 4,
+      "clipboard": true,
+      "pageErrors": [],
+      "overflow": 0,
+      "nestedParagraphs": 0,
+      "images": [
+        {
+          "decoded": true,
+          "width": 448
+        },
+        {
+          "decoded": true,
+          "width": 448
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "width": 1280,
+      "status": 200,
+      "indexable": true,
+      "disclosureChecks": 4,
+      "clipboard": true,
+      "pageErrors": [],
+      "overflow": 0,
+      "nestedParagraphs": 0,
+      "images": [
+        {
+          "decoded": true,
+          "width": 448
+        },
+        {
+          "decoded": true,
+          "width": 448
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "status": 200,
+      "indexable": true,
+      "disclosureChecks": 4,
+      "clipboard": true,
+      "pageErrors": [],
+      "overflow": 0,
+      "nestedParagraphs": 0,
+      "images": [
+        {
+          "decoded": true,
+          "width": 334
+        },
+        {
+          "decoded": true,
+          "width": 334
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "width": 1280,
+      "status": 200,
+      "indexable": true,
+      "disclosureChecks": 4,
+      "clipboard": true,
+      "pageErrors": [],
+      "overflow": 0,
+      "nestedParagraphs": 0,
+      "images": [
+        {
+          "decoded": true,
+          "width": 448
+        },
+        {
+          "decoded": true,
+          "width": 448
+        }
+      ]
+    }
+  ],
+  "discovery": {
+    "search": true,
+    "uniqueSearchResult": true,
+    "sitemapLocales": ["ko", "en"],
+    "listLinkNavigation": true
+  },
+  "failure": null
+}

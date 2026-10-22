@@ -63,6 +63,19 @@ test('sanitizeRemoteHtml emits one safe rel attribute for blank-target links', (
     assert.doesNotMatch(sanitized, /\bopener\b/)
 })
 
+test('sanitizeRemoteHtml rejects namespaced SVG animation and refresh metadata', () => {
+    const sanitized = sanitizeRemoteHtml(
+        '<svg><svg:animate attributeName="href" values="javascript:void(0)" /></svg>' +
+            '<meta http-equiv="refresh" content="0;url=javascript:void(0)">' +
+            '<figure><img src="https://assets.heap-forge.app/fixture.webp" alt="fixture"><figcaption>Caption</figcaption></figure>'
+    )
+
+    assert.doesNotMatch(sanitized, /javascript:|<svg|<meta/i)
+    assert.match(sanitized, /<figure>/)
+    assert.match(sanitized, /<figcaption>Caption<\/figcaption>/)
+    assert.match(sanitized, /alt="fixture"/)
+})
+
 test('plain and code text extraction cannot reconstruct executable markup', () => {
     const craftedHtml = `<scr<!-- -->ipt>alert('text-boundary')</script><strong>Safe</strong>`
 
