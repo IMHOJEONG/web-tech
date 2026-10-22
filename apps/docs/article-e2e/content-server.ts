@@ -71,6 +71,17 @@ const server = createServer(async (request, response) => {
         response.end(
             JSON.stringify({
                 results: [
+                    ...['web', 'ui-ux', 'mobile'].map((channel) => ({
+                        id: `${channel}/taxonomy-fixture`,
+                        slug: 'taxonomy-fixture',
+                        markdownPath: `${channel}/taxonomy-fixture`,
+                        fileName: `remote/${channel}/taxonomy-fixture`,
+                        title: `Taxonomy fixture ${channel}`,
+                        summary:
+                            'Synthetic canonical channel regression document.',
+                        date: '2099-01-02',
+                        status: 'published',
+                    })),
                     {
                         id: 'article-e2e-remote',
                         slug: 'article-e2e-remote',
@@ -94,6 +105,17 @@ const server = createServer(async (request, response) => {
                 ],
             })
         )
+        return
+    }
+    const taxonomyChannel =
+        /^\/posts\/(web|ui-ux|mobile)\/taxonomy-fixture$/.exec(
+            request.url ?? ''
+        )?.[1]
+    if (taxonomyChannel) {
+        response.setHeader('Content-Type', 'text/html; charset=utf-8')
+        response.end(`<article><h1>Taxonomy fixture ${taxonomyChannel}</h1>
+            <p>Synthetic canonical channel regression document.</p>
+            <h2>Fixture ending</h2><p>Taxonomy fixture body complete.</p></article>`)
         return
     }
     if (request.url === '/posts/web/article-e2e-publication') {
