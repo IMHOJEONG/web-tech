@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-22 원격·로컬 canonical 분류 통일](2026-10-22-docs-canonical-taxonomy.md)
+
 - [10-22 블로그 개선 후보 재점검](2026-10-22-docs-improvement-recheck.md)
 
 - [10-22 Overview 부분 API 장애 격리](2026-10-22-vuln-radar-partial-failures.md)
