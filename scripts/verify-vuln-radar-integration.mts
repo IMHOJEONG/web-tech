@@ -648,6 +648,170 @@ async function main() {
     },
   );
 
+  await check(
+    "ingest status exposes process-local unknown history without performing a sync",
+    async () => {
+      const status = await api("ingest/status", true);
+      assert.equal(status.observation.scope, "process");
+      assert.equal(status.observation.outcome, "unknown");
+      assert.equal(status.observation.lastSuccessAt, null);
+      assert.equal(status.observation.sources.length, 3);
+      assert.ok(
+        status.latest.databaseUpdatedAt,
+        "Seeded records exist, but do not prove an observed sync",
+      );
+    },
+  );
+
+  for (const width of [1280, 390]) {
+    await check(
+      `collection cadence, source failures and legacy unknown state at ${width}px`,
+      async () => {
+        const current = await page();
+        try {
+          await current.setViewportSize({ width, height: 900 });
+          const actual = await api("ingest/status", true);
+          const lastSuccess = new Date(
+            Date.now() - 9 * 3_600_000,
+          ).toISOString();
+          const snapshot = {
+            ...actual,
+            scheduler: {
+              ...actual.scheduler,
+              enabled: true,
+              intervalMinutes: 1440,
+            },
+            observation: {
+              scope: "process",
+              observedSince: new Date(
+                Date.now() - 10 * 3_600_000,
+              ).toISOString(),
+              outcome: "completed",
+              lastStartedAt: lastSuccess,
+              lastFinishedAt: lastSuccess,
+              lastSuccessAt: lastSuccess,
+              sources: ["nvd", "kev", "epss"].map((id) => ({
+                id,
+                outcome: "succeeded",
+                lastAttemptAt: lastSuccess,
+                lastFetchSuccessAt: lastSuccess,
+                lastFailureAt: null as string | null,
+                consecutiveFailures: 0,
+              })),
+            },
+          };
+          let response: unknown = snapshot;
+          await current.route("**/api/backend/ingest/status", (route) =>
+            route.fulfill({ json: response }),
+          );
+          await current.goto(`${frontendOrigin}/overview`);
+          const panel = current.getByRole("region", {
+            name: "수집 상태",
+            exact: true,
+          });
+          await expect(
+            panel.getByText("1분마다", { exact: true }),
+          ).toBeVisible();
+          await expect(
+            panel.getByText("1440분마다", { exact: true }),
+          ).toBeVisible();
+          await expect(
+            panel.getByText("최근 실행 완료", { exact: true }),
+          ).toBeVisible();
+          await expect(
+            panel.getByText("수집 주기 확인 권장", { exact: true }),
+          ).toHaveCount(0);
+          await expect(
+            current.getByText("REAL-TIME TELEMETRY", { exact: true }),
+          ).toHaveCount(0);
+          const lastSuccessValue = panel
+            .getByText("마지막 전체 수집 성공", { exact: true })
+            .locator("..")
+            .locator("dd");
+          await expect(lastSuccessValue).not.toHaveText("아직 확인되지 않음");
+
+          snapshot.observation.outcome = "partial";
+          snapshot.observation.lastStartedAt = new Date(
+            Date.now() - 60_000,
+          ).toISOString();
+          snapshot.observation.lastFinishedAt = new Date().toISOString();
+          for (const source of snapshot.observation.sources) {
+            source.lastAttemptAt = snapshot.observation.lastStartedAt;
+            if (source.id !== "epss")
+              source.lastFetchSuccessAt = snapshot.observation.lastFinishedAt;
+          }
+          Object.assign(snapshot.observation.sources[2]!, {
+            outcome: "failed",
+            lastFailureAt: new Date().toISOString(),
+            consecutiveFailures: 3,
+          });
+          await current.reload();
+          await expect(
+            panel.getByText("일부 소스 조회 실패", { exact: true }),
+          ).toBeVisible();
+          await expect(
+            panel
+              .getByText("최근 실행 종료", { exact: true })
+              .locator("..")
+              .locator("dd"),
+          ).not.toHaveText(await lastSuccessValue.innerText());
+          const epss = panel.getByRole("listitem").filter({
+            has: current.getByRole("heading", { name: "EPSS", exact: true }),
+          });
+          await expect(
+            epss.getByText("조회 실패", { exact: true }),
+          ).toBeVisible();
+          await expect(
+            epss.getByText("연속 조회 실패", { exact: true }),
+          ).toBeVisible();
+          const screenshot = `${artifactStamp}-vuln-radar-ingest-${width}.png`;
+          await panel.screenshot({
+            path: join(root, "docs/verification/artifacts", screenshot),
+          });
+          screenshots[`ingest-${width}`] = screenshot;
+          assert.ok(
+            await panel.evaluate(
+              (element) => element.scrollWidth <= element.clientWidth,
+            ),
+          );
+
+          snapshot.scheduler.intervalMinutes = 1.5;
+          await current.reload();
+          await expect(
+            panel.getByText("1.5분마다", { exact: true }),
+          ).toBeVisible();
+
+          response = Object.fromEntries(
+            Object.entries(actual).filter(
+              ([key]) => key !== "observation" && key !== "scheduler",
+            ),
+          );
+          await current.reload();
+          await expect(
+            panel.getByText("실행 이력 미확인", { exact: true }),
+          ).toBeVisible();
+          await expect(lastSuccessValue).toHaveText("아직 확인되지 않음");
+          await expect(
+            panel.getByText("조회 이력 미확인", { exact: true }),
+          ).toHaveCount(3);
+          response = {
+            ...(response as Record<string, unknown>),
+            checkedAt: "invalid-date",
+          };
+          await current.reload();
+          await expect(
+            panel
+              .getByText("상태 조회 시각", { exact: true })
+              .locator("..")
+              .locator("dd"),
+          ).toHaveText("아직 확인되지 않음");
+        } finally {
+          await current.close();
+        }
+      },
+    );
+  }
+
   for (const width of [1280, 390]) {
     await check(
       `real API browser feed filters, labels and detail navigation at ${width}px`,
