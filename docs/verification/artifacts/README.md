@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-23 실제 탐색 모션](2026-10-23-content-interaction-motion.json)·[390px](2026-10-23-content-motion-390.png)·[데스크톱](2026-10-23-content-motion-desktop.png): [실행 보고서](../performance/2026-10-23-content-interaction-motion.md). 모션 회귀 28개·실제 animationstart·duration/delay·소스 해시. 메인 영상 제거, 운영 미배포.
+
 - [10-22 부분 API 장애 최종 통합](2026-10-22T04-37-18-940Z-vuln-radar-integration.json): [검증 보고서](../integration/2026-10-22-vuln-radar-partial-failures.md). 25개 그룹·정리6단계 통과. 합성 데이터이며 선행 실패 증거는 보고서에 연결한다.
 
 - [10-22 수집 상태 최종 통합](2026-10-22T03-20-18-441Z-vuln-radar-integration.json): [검증 보고서](../integration/2026-10-22-vuln-radar-ingest-status.md). 19개 그룹·정리6단계 통과. 실제 upstream 수집과 운영 검증은 제외한다.

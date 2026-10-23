@@ -1,0 +1,343 @@
+{
+  "commit": "16c51e9911f041b125a445b3939966986426a0b4",
+  "workingTreeDirty": true,
+  "mode": "next-dev-loopback",
+  "stats": {
+    "startTime": "2026-10-23T06:32:31.608Z",
+    "duration": 32651.197999999997,
+    "expected": 28,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "landing and feed have no demo section and fetch no pilot media",
+      "project": "motion-chromium-320",
+      "status": "expected",
+      "durationMs": 1401
+    },
+    {
+      "title": "a keyboard filter navigation replays only the result entries and preserves the focused filter",
+      "project": "motion-chromium-320",
+      "status": "expected",
+      "durationMs": 1038
+    },
+    {
+      "title": "hover lift is fine-pointer only and keyboard focus never moves a card",
+      "project": "motion-chromium-320",
+      "status": "expected",
+      "durationMs": 774
+    },
+    {
+      "title": "reduced motion removes entries and transitions without removing selected or focused states",
+      "project": "motion-chromium-320",
+      "status": "expected",
+      "durationMs": 785
+    },
+    {
+      "title": "web and docs filters reuse result entry motion with no narrow or large-text overflow",
+      "project": "motion-chromium-320",
+      "status": "expected",
+      "durationMs": 2004
+    },
+    {
+      "title": "a live reduced-motion change settles an in-flight entry",
+      "project": "motion-chromium-320",
+      "status": "expected",
+      "durationMs": 828
+    },
+    {
+      "title": "landing keyboard feedback stays visible and static in reduced motion across both themes",
+      "project": "motion-chromium-320",
+      "status": "expected",
+      "durationMs": 811
+    },
+    {
+      "title": "landing and feed have no demo section and fetch no pilot media",
+      "project": "motion-chromium-390",
+      "status": "expected",
+      "durationMs": 1060
+    },
+    {
+      "title": "a keyboard filter navigation replays only the result entries and preserves the focused filter",
+      "project": "motion-chromium-390",
+      "status": "expected",
+      "durationMs": 897
+    },
+    {
+      "title": "hover lift is fine-pointer only and keyboard focus never moves a card",
+      "project": "motion-chromium-390",
+      "status": "expected",
+      "durationMs": 634
+    },
+    {
+      "title": "reduced motion removes entries and transitions without removing selected or focused states",
+      "project": "motion-chromium-390",
+      "status": "expected",
+      "durationMs": 685
+    },
+    {
+      "title": "web and docs filters reuse result entry motion with no narrow or large-text overflow",
+      "project": "motion-chromium-390",
+      "status": "expected",
+      "durationMs": 1764
+    },
+    {
+      "title": "a live reduced-motion change settles an in-flight entry",
+      "project": "motion-chromium-390",
+      "status": "expected",
+      "durationMs": 693
+    },
+    {
+      "title": "landing keyboard feedback stays visible and static in reduced motion across both themes",
+      "project": "motion-chromium-390",
+      "status": "expected",
+      "durationMs": 740
+    },
+    {
+      "title": "landing and feed have no demo section and fetch no pilot media",
+      "project": "motion-chromium-desktop",
+      "status": "expected",
+      "durationMs": 930
+    },
+    {
+      "title": "a keyboard filter navigation replays only the result entries and preserves the focused filter",
+      "project": "motion-chromium-desktop",
+      "status": "expected",
+      "durationMs": 984
+    },
+    {
+      "title": "hover lift is fine-pointer only and keyboard focus never moves a card",
+      "project": "motion-chromium-desktop",
+      "status": "expected",
+      "durationMs": 1449
+    },
+    {
+      "title": "reduced motion removes entries and transitions without removing selected or focused states",
+      "project": "motion-chromium-desktop",
+      "status": "expected",
+      "durationMs": 735
+    },
+    {
+      "title": "web and docs filters reuse result entry motion with no narrow or large-text overflow",
+      "project": "motion-chromium-desktop",
+      "status": "expected",
+      "durationMs": 1894
+    },
+    {
+      "title": "a live reduced-motion change settles an in-flight entry",
+      "project": "motion-chromium-desktop",
+      "status": "expected",
+      "durationMs": 725
+    },
+    {
+      "title": "landing keyboard feedback stays visible and static in reduced motion across both themes",
+      "project": "motion-chromium-desktop",
+      "status": "expected",
+      "durationMs": 825
+    },
+    {
+      "title": "landing and feed have no demo section and fetch no pilot media",
+      "project": "motion-webkit-390",
+      "status": "expected",
+      "durationMs": 1493
+    },
+    {
+      "title": "a keyboard filter navigation replays only the result entries and preserves the focused filter",
+      "project": "motion-webkit-390",
+      "status": "expected",
+      "durationMs": 1223
+    },
+    {
+      "title": "hover lift is fine-pointer only and keyboard focus never moves a card",
+      "project": "motion-webkit-390",
+      "status": "expected",
+      "durationMs": 971
+    },
+    {
+      "title": "reduced motion removes entries and transitions without removing selected or focused states",
+      "project": "motion-webkit-390",
+      "status": "expected",
+      "durationMs": 1071
+    },
+    {
+      "title": "web and docs filters reuse result entry motion with no narrow or large-text overflow",
+      "project": "motion-webkit-390",
+      "status": "expected",
+      "durationMs": 1956
+    },
+    {
+      "title": "a live reduced-motion change settles an in-flight entry",
+      "project": "motion-webkit-390",
+      "status": "expected",
+      "durationMs": 940
+    },
+    {
+      "title": "landing keyboard feedback stays visible and static in reduced motion across both themes",
+      "project": "motion-webkit-390",
+      "status": "expected",
+      "durationMs": 1061
+    }
+  ],
+  "entries": [
+    {
+      "project": "motion-chromium-320",
+      "events": [
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        },
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        },
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        },
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        }
+      ],
+      "entries": [
+        {
+          "duration": "0.28s",
+          "delay": "0s"
+        },
+        {
+          "duration": "0.28s",
+          "delay": "0.035s"
+        },
+        {
+          "duration": "0.28s",
+          "delay": "0.07s"
+        },
+        {
+          "duration": "0.28s",
+          "delay": "0.105s"
+        }
+      ]
+    },
+    {
+      "project": "motion-chromium-390",
+      "events": [
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        },
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        },
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        }
+      ],
+      "entries": [
+        {
+          "duration": "0.28s",
+          "delay": "0s"
+        },
+        {
+          "duration": "0.28s",
+          "delay": "0.035s"
+        },
+        {
+          "duration": "0.28s",
+          "delay": "0.07s"
+        },
+        {
+          "duration": "0.28s",
+          "delay": "0.105s"
+        }
+      ]
+    },
+    {
+      "project": "motion-chromium-desktop",
+      "events": [
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        },
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        },
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        },
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        }
+      ],
+      "entries": [
+        {
+          "duration": "0.28s",
+          "delay": "0s"
+        },
+        {
+          "duration": "0.28s",
+          "delay": "0.035s"
+        },
+        {
+          "duration": "0.28s",
+          "delay": "0.07s"
+        },
+        {
+          "duration": "0.28s",
+          "delay": "0.105s"
+        }
+      ]
+    },
+    {
+      "project": "motion-webkit-390",
+      "events": [
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        },
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        },
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        },
+        {
+          "name": "docs-motion-reveal",
+          "collection": "web"
+        }
+      ],
+      "entries": [
+        {
+          "duration": "0.28s",
+          "delay": "0s"
+        },
+        {
+          "duration": "0.28s",
+          "delay": "0.035s"
+        },
+        {
+          "duration": "0.28s",
+          "delay": "0.07s"
+        },
+        {
+          "duration": "0.28s",
+          "delay": "0.105s"
+        }
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "app/css/animation.css": "53a71f47016ed6b9f75495ce7fa1e002c6462a34996529e97edebd530428dc2d",
+    "widgets/m/ui/feed-recent-articles.tsx": "cdb16f5867dd8d3a71f9098b0f26b9957745b6bf2d08b1458d042685b5017633",
+    "entities/document/ui/document-preview-card.tsx": "11fed519f482a13f3e2dd9e0acd5661d78a057d95f53dd3a12857444d5a50e81",
+    "widgets/docs-index/ui/docs-index.tsx": "70e05739871e4387e07bb5947be5c498d5dab4954602cfc85c152b5bb29bd008"
+  }
+}
