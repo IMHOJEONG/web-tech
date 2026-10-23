@@ -26,6 +26,7 @@
         "test:push:local": "node ./scripts/verify-web-push-local.ts",
         "test:article:prod": "playwright test --config=playwright.article.config.ts",
         "test:code-block": "playwright test --config=playwright.code-block.config.ts",
+        "test:motion": "playwright test --config=playwright.motion.config.ts",
         "test:offline": "playwright test --config=playwright.offline.config.ts",
         "verify:offline-evidence": "node --experimental-strip-types ./scripts/verify-offline-evidence.ts",
         "check:prod-routes": "node ./scripts/check-prod-routes.mjs",
