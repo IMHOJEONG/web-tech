@@ -33,7 +33,7 @@ export function DocumentPreviewCard({
         <Link
             href={href}
             aria-label={title}
-            className={`group ds-card ds-focus-ring ${documentPreviewLayout} transition-colors hover:border-primary/40 motion-reduce:transition-none`}
+            className={`group ds-card ds-focus-ring motion-interactive-card ${documentPreviewLayout} hover:border-primary/40`}
         >
             <div className="min-w-0 space-y-4">
                 <div className="space-y-2">

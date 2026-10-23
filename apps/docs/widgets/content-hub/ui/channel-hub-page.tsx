@@ -59,6 +59,7 @@ export async function ChannelHubPage({
                 },
             ]}
             docs={docs}
+            resultsKey={selected?.value ?? 'all'}
             filters={
                 showFilters || selected ? (
                     <HubTopicFilters

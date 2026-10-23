@@ -43,14 +43,14 @@ export function ThematicFoundations({
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className="group flex min-h-72 flex-col justify-between px-6 py-8 transition-colors hover:bg-surface-container-low/50"
+                                className="group ds-focus-ring motion-interactive-row flex min-h-72 flex-col justify-between px-6 py-8 hover:bg-surface-container-low/50"
                             >
                                 <div className="space-y-5">
                                     <p className="text-xs font-semibold tracking-[0.18em] text-outline uppercase">
                                         {item.area}
                                     </p>
                                     <div className="space-y-4">
-                                        <h3 className="text-2xl font-semibold tracking-[-0.03em] text-on-surface transition-colors group-hover:text-primary">
+                                        <h3 className="text-2xl font-semibold tracking-[-0.03em] text-on-surface transition-colors group-hover:text-primary group-focus-visible:text-primary motion-reduce:transition-none">
                                             {item.title}
                                         </h3>
                                         <p className="text-sm leading-7 text-on-surface-variant">
@@ -58,7 +58,7 @@ export function ThematicFoundations({
                                         </p>
                                     </div>
                                 </div>
-                                <span className="mt-10 inline-block h-px w-10 bg-primary transition-all group-hover:w-16" />
+                                <span className="mt-10 inline-block h-px w-16 origin-left scale-x-[0.625] bg-primary transition-transform duration-[240ms] group-hover:scale-x-100 group-focus-visible:scale-x-100 motion-reduce:transition-none" />
                             </Link>
                         ))}
                     </div>

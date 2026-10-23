@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import { MainContent } from '~/shared/ui/main-content'
 import { Link } from '~/shared/i18n/navigation'
 import MainCard from '~/entities/document/ui/main-card'
@@ -13,6 +13,7 @@ type HubPageProps = {
     docs: SearchData[]
     filters: ReactNode
     resultsTitle: string
+    resultsKey: string
     emptyTitle: string
     emptyDescription: string
 }
@@ -25,6 +26,7 @@ export function HubPage({
     docs,
     filters,
     resultsTitle,
+    resultsKey,
     emptyTitle,
     emptyDescription,
 }: HubPageProps) {
@@ -52,14 +54,24 @@ export function HubPage({
                     </h2>
                     {docs.length > 0 ? (
                         <ul
+                            key={resultsKey}
+                            data-motion-results={resultsKey}
                             data-testid="hub-results"
-                            className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+                            className="motion-collection grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
                         >
-                            {docs.map((doc) => (
-                                <li key={doc.href} className="min-w-0">
+                            {docs.map((doc, index) => (
+                                <li
+                                    key={doc.href}
+                                    className="motion-reveal min-w-0"
+                                    style={
+                                        {
+                                            '--motion-order': index,
+                                        } as CSSProperties
+                                    }
+                                >
                                     <Link
                                         href={doc.href}
-                                        className="group ds-card ds-focus-ring block h-full min-w-0 bg-surface-container-lowest p-3.5"
+                                        className="group ds-card ds-focus-ring motion-interactive-card block h-full min-w-0 bg-surface-container-lowest p-3.5"
                                     >
                                         <MainCard doc={doc} />
                                     </Link>

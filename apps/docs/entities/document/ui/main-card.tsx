@@ -10,7 +10,6 @@ const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
                 thumbnail={thumbnail}
                 alt={title}
                 className="aspect-video w-full rounded-xl"
-                imageClassName="transition-transform duration-300 group-hover:scale-[1.03]"
             />
 
             <div className="flex flex-1 flex-col gap-2 text-wrap">

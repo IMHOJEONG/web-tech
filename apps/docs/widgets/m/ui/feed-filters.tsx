@@ -18,9 +18,10 @@ export function FeedFilters({ activeFilter }: { activeFilter: FeedFilter }) {
                 <Link
                     key={key}
                     href={getFilterHref(key)}
+                    scroll={false}
                     aria-current={activeFilter === key ? 'page' : undefined}
                     className={cn(
-                        'ds-outline-button ds-focus-ring min-h-11 px-4 py-2 text-sm',
+                        'ds-outline-button ds-focus-ring motion-filter min-h-11 px-4 py-2 text-sm',
                         activeFilter === key
                             ? 'border-primary bg-primary/10 text-primary'
                             : 'text-on-surface-variant hover:text-on-surface'

@@ -124,15 +124,26 @@ export async function DocsIndex({
                             keyword={keyword}
                         />
                     ) : (
-                        <div className="motion-layout grid grid-cols-1 gap-3">
+                        <div
+                            key={JSON.stringify([
+                                keyword ?? '',
+                                activeControls,
+                                pagination.page,
+                            ])}
+                            data-motion-results="docs"
+                            className="motion-collection grid grid-cols-1 gap-3"
+                        >
                             {resultDocs.map((doc, index) => (
-                                <DocsIndexCard
+                                <div
                                     key={doc.id}
-                                    doc={doc}
-                                    keyword={keyword}
                                     className="motion-reveal"
                                     style={getMotionOrderStyle(index)}
-                                />
+                                >
+                                    <DocsIndexCard
+                                        doc={doc}
+                                        keyword={keyword}
+                                    />
+                                </div>
                             ))}
                         </div>
                     )}

@@ -36,7 +36,7 @@ export function HubTopicFilters({
                 key={topic.value}
                 className={cn(
                     buttonVariants({ variant: 'ghost' }),
-                    'ds-focus-ring h-auto min-h-11 min-w-0 max-w-full justify-start rounded-full border px-3 py-2 text-sm shadow-none transition-colors motion-reduce:transition-none',
+                    'ds-focus-ring motion-filter h-auto min-h-11 min-w-0 max-w-full justify-start rounded-full border px-3 py-2 text-sm shadow-none',
                     active
                         ? 'border-primary/40 bg-primary/10 text-primary hover:bg-primary/15 hover:text-primary dark:hover:bg-primary/15'
                         : 'border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface dark:hover:bg-surface-container'

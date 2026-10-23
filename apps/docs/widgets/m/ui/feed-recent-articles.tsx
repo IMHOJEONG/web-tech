@@ -39,7 +39,11 @@ export function FeedRecentArticles({
                     <FeedFilters activeFilter={activeFilter} />
                 </div>
                 {articles.length > 0 ? (
-                    <ul className="grid gap-4">
+                    <ul
+                        key={activeFilter}
+                        data-motion-results={activeFilter}
+                        className="motion-collection grid gap-4"
+                    >
                         {articles.map(({ readMinutes, ...article }, index) => (
                             <li
                                 key={article.href}
@@ -59,7 +63,10 @@ export function FeedRecentArticles({
                         ))}
                     </ul>
                 ) : (
-                    <p className="rounded-xl border border-outline-variant bg-surface-container-low p-6 text-sm text-on-surface-variant">
+                    <p
+                        key={activeFilter}
+                        className="motion-reveal rounded-xl border border-outline-variant bg-surface-container-low p-6 text-sm text-on-surface-variant"
+                    >
                         {t('empty')}
                     </p>
                 )}
