@@ -142,6 +142,8 @@ NAS 게시·외부 백업은 기존 사용자 보류 결정으로 유지한다.
 
 ## Dependency Security
 
+- [ ] `P0` Vite+ 실험에서 보존한 기존 audit 13건은 [KAN-35](https://web-tech-service.atlassian.net/browse/KAN-35)에서 별도 처리한다. 2026-10-24 스냅샷은 critical 2·high 7·moderate 2·low 2이며 next·toml·zod·body-parser·multer·fast-uri가 대상이다. 이번 실험 커밋에 이 경고들의 보안 패치는 포함하지 않는다. 완료 조건: 착수 시 최신 main·공식 advisory·전체/production 경로 재확인, 독립 보안 브랜치의 패치·회귀·잔여 경고 검증, 승인된 PR/배포 결과 기록. 운영 악용이나 현재 배포 버전을 입증한 수치가 아니다. [당시 증거](../verification/artifacts/2026-10-24-viteplus-override-audit.json), [작업 경계](../worklog/2026-10/2026-10-24-viteplus-local-commits.md).
+
 - [-] `P0` proxy-addr·sharp·source-map-js·seroval·KaTeX·selector parser 보안 패치를 main에 전달한다. 10-09 별도 보안 작업 트리의 패치·회귀·production 빌드를 통과했다. 완료 조건: 커밋·PR CI·main 병합·배포 브랜치 동기화·Linux 배포 검증. braces high 1개가 남아 전체 보안 조치 완료는 아니다. [검증 보고서](../verification/security/2026-10-09-security-patches.md).
 - [x] `P1` main에 병합된 fast-glob 운영 경로 제거를 재검증했다. 10-18 `origin/main` `93fbf6d` 기반 production audit 0건·파일 trace/카테고리 22개를 통과했다. 개발 도구의 braces 경고 해소와 실제 배포는 별도다. [현재 결과](../verification/security/2026-10-18-handlebars-advisories.md#미해결-braces와-기존-완화-조치).
 - [ ] `P2` rehype-katex·Typography의 공식 보안 의존성 지원 후 scoped override를 제거할 수 있는지 재검토한다. KaTeX 0.18.2는 이번에 검증한 임시 고정이며, 0.19 전환은 별도 수식 호환성 검증 후 결정한다. [선택 이유](../verification/security/2026-10-09-security-patches.md#패치한-패키지).

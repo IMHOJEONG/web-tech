@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-24 Vite+ 로컬 커밋과 보안 후속 분리](2026-10-24-viteplus-local-commits.md)
+
 - [10-24 Vite+ 의존성 보완·override 정리](2026-10-24-viteplus-dependency-remediation.md)
 
 - [10-24 Vite+ peer·lockfile 영향 조사](2026-10-24-viteplus-peer-lockfile-impact.md)
