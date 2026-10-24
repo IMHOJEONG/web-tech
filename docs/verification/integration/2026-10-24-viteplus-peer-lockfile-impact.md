@@ -15,8 +15,8 @@
 ```sh
 mise exec -- pnpm peers check
 mise exec -- node --experimental-strip-types --test scripts/analyze-vuln-radar-lockfile.test.mts
-mise exec -- node --experimental-strip-types scripts/analyze-vuln-radar-lockfile.mts
-mise exec -- node --experimental-strip-types scripts/verify-viteplus-consumer-impact.mts
+mise exec -- node --experimental-strip-types scripts/analyze-vuln-radar-lockfile.mts --base 16c51e9911f041b125a445b3939966986426a0b4
+mise exec -- node --experimental-strip-types scripts/verify-viteplus-consumer-impact.mts --base 16c51e9911f041b125a445b3939966986426a0b4
 mise exec -- pnpm exec tsc -p tsconfig.vuln-integration.json
 mise exec -- pnpm --filter docs test:lib
 mise exec -- pnpm --filter docs-backend build

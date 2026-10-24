@@ -6,9 +6,9 @@
 - 대상: `apps/vuln-radar`의 로컬 개발·빌드와 결과물 미리보기
 - 최종 검토: 2026-10-24
 - 추적: [KAN-34](https://web-tech-service.atlassian.net/browse/KAN-34)
-- 적용 위치: `codex/vuln-radar-viteplus-experiment-20261024`의 로컬 커밋. main 반영·배포 결정이 아니며 원격에 푸시하지 않는다.
+- 적용 위치: `codex/vuln-radar-viteplus-experiment-20261024` 브랜치의 [PR #59](https://github.com/IMHOJEONG/web-tech/pull/59). 원격 검토 중이며 main 미병합이다. main 채택과 운영 배포는 별도 결정이다.
 
-Railway 보안 재개 조건인 [KAN-32](https://web-tech-service.atlassian.net/browse/KAN-32)는 유지한다. 사용자가 승인한 예외는 이 로컬 툴체인 실험뿐이다. 실제 수집·운영 DB 접근·배포·토큰 변경은 포함하지 않는다.
+Railway 보안 재개 조건인 [KAN-32](https://web-tech-service.atlassian.net/browse/KAN-32)는 유지한다. 사용자가 승인한 예외는 툴체인 실험·회귀 검사와 PR 검토다. 실제 수집·운영 DB 접근·Railway 배포·토큰 변경은 포함하지 않는다.
 
 ## 배경
 
@@ -23,6 +23,7 @@ Railway 보안 재개 조건인 [KAN-32](https://web-tech-service.atlassian.net/
 5. 기존 통합검사는 Vite core의 실행 파일 위치만 구분한다. 보안 회귀는 alias의 패키지명 대신 실제 내장 Vite 버전과 패치된 launch-editor를 확인한다. node:test·Jest·Playwright, ESLint·Prettier, mise Node 24, pnpm 12.14.0, 공용 UI 빌드 방식은 유지한다.
 6. 루트의 Vite/Vitest override나 카탈로그를 바꾸지 않는다. `vp migrate`, `vp test`, `vp check`, `vp run`, `vp env`로 기존 도구를 대체하지 않는다.
 7. 조사 후 승인된 호환성 보완으로 전역 PostCSS 강제는 제거하고 Babel/nanoid는 호환 범위의 convergence 규칙으로 좁힌다. styled-jsx 5.1.6의 Babel 7 peer와 정확한 세 소비자의 Vite alias 예외만 보완한다. 미승인 core·내장 Vite 버전은 회귀 검사에서 거부한다. 다른 보안 override는 일괄 제거하지 않는다.
+8. 비교 도구 3개에는 `--base <commit-or-ref>`를 필수로 지정한다. 시작 시 한 번 확정한 SHA로 파일·트리·대조군 복사와 보고서 식별자를 공유한다. 원래 실험을 재현할 때는 main의 고정 SHA `16c51e9911f041b125a445b3939966986426a0b4`를 사용하고, 현재 HEAD나 이동 가능한 원격 ref를 자동 기준으로 쓰지 않는다.
 
 Vite+ 1.4.0의 지원 Node 범위는 `^22.18.0 || ^24.11.0 || >=26.0.0`이다. 이번 검증은 기존 mise의 Node 24.12.0으로 실행했다. 임의의 오래된 Node 24 버전까지 지원한다는 뜻은 아니다.
 
@@ -41,7 +42,7 @@ pnpm이 lockfile의 다른 workspace peer 연결 문맥도 다시 계산한다. 
 
 본 도입 전에는 Linux/CI·실제 배포 호환성, lockfile의 전체 소비자 회귀, peer 경고 처리와 보안 경고를 별도로 검토한다. 장기 도입을 결정할 때 ADR을 작성한다. 이번 실험만으로 배포 보류를 해제하지 않는다.
 
-후속 [peer·lockfile 조사](../verification/integration/2026-10-24-viteplus-peer-lockfile-impact.md)에서 발견한 PostCSS 요청 범위와 Babel 호환 문제는 [후속 보완](../verification/integration/2026-10-24-viteplus-dependency-remediation.md)에서 해결했다. 실제 Next production·화면·UI 외부 소비자까지 로컬 회귀를 통과했으나 기존 audit·Linux/원격 CI·운영 채택은 별도다. 실험 상태는 유지한다.
+후속 [peer·lockfile 조사](../verification/integration/2026-10-24-viteplus-peer-lockfile-impact.md)에서 발견한 PostCSS 요청 범위와 Babel 호환 문제는 [후속 보완](../verification/integration/2026-10-24-viteplus-dependency-remediation.md)에서 해결했다. 초기 PR head `096aad7`의 CI·CodeQL과 Vercel Linux `vp build`는 [원격 점검](../verification/integration/2026-10-24-pr59-ci-review.md)에서 확인했다. 기준선 리뷰 보완과 새 head의 검증은 [후속 기록](../verification/integration/2026-10-24-pr59-baseline-fixes.md)으로 구분한다. 기존 audit·운영 채택·Railway 배포는 별도이며 실험 제안 상태를 유지한다.
 
 ## 관련 문서
 

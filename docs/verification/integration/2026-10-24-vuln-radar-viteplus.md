@@ -22,7 +22,7 @@ mise exec -- pnpm --filter vuln-radar test:lib
 mise exec -- pnpm --filter vuln-radar-backend test --runInBand
 mise exec -- pnpm test:repo
 mise exec -- pnpm exec tsc -p tsconfig.vuln-integration.json
-mise exec -- node --experimental-strip-types scripts/verify-vuln-radar-viteplus.mts
+mise exec -- node --experimental-strip-types scripts/verify-vuln-radar-viteplus.mts --base 16c51e9911f041b125a445b3939966986426a0b4
 mise exec -- pnpm verify:vuln-radar:integration
 mise exec -- pnpm exec turbo run build --filter=vuln-radar --force --summarize
 ```

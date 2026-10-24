@@ -16,9 +16,9 @@
 mise exec -- pnpm install --frozen-lockfile --ignore-scripts
 mise exec -- pnpm peers check
 mise exec -- node --experimental-strip-types --test scripts/viteplus-dependency-policy.test.mts
-mise exec -- node --experimental-strip-types scripts/verify-vuln-radar-viteplus.mts
-mise exec -- node --experimental-strip-types scripts/analyze-vuln-radar-lockfile.mts
-mise exec -- node --experimental-strip-types scripts/verify-viteplus-consumer-impact.mts
+mise exec -- node --experimental-strip-types scripts/verify-vuln-radar-viteplus.mts --base 16c51e9911f041b125a445b3939966986426a0b4
+mise exec -- node --experimental-strip-types scripts/analyze-vuln-radar-lockfile.mts --base 16c51e9911f041b125a445b3939966986426a0b4
+mise exec -- node --experimental-strip-types scripts/verify-viteplus-consumer-impact.mts --base 16c51e9911f041b125a445b3939966986426a0b4
 mise exec -- pnpm exec tsc -p tsconfig.vuln-integration.json
 mise exec -- pnpm test:repo
 mise exec -- pnpm --filter vuln-radar build

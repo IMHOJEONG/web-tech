@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-24T12:23:25.448Z",
+  "baseSha": "16c51e9911f041b125a445b3939966986426a0b4",
+  "baselineRef": "16c51e9911f041b125a445b3939966986426a0b4",
+  "runnerSha256": "15527c880e9fe4b00c9c7c63e6104104c561a2994ccab817ef583bb030b97d20",
+  "node": "v24.12.0",
+  "vitePlus": "1.4.0",
+  "results": [
+    {
+      "name": "existing tooling and test scripts are unchanged",
+      "durationMs": 41
+    },
+    {
+      "name": "dependency policy changes stay bounded and retain compatible consumers",
+      "durationMs": 399
+    },
+    {
+      "name": "app, React plugin and Vite+ use one matching Vite core",
+      "durationMs": 3
+    },
+    {
+      "name": "other workspace direct dependencies change only the reviewed PostCSS resolution",
+      "durationMs": 391
+    },
+    {
+      "name": "vp dev starts on loopback and transforms React entry",
+      "durationMs": 1516
+    },
+    {
+      "name": "dev proxy rewrites path and replaces browser authorization",
+      "durationMs": 31
+    },
+    {
+      "name": "vp build succeeds without exposing the server token",
+      "durationMs": 736
+    },
+    {
+      "name": "vp preview preserves SPA fallback, assets and private proxy",
+      "durationMs": 265
+    }
+  ],
+  "peerContextChanges": [
+    ".",
+    "apps/docs",
+    "apps/docs-backend",
+    "apps/vuln-radar-backend",
+    "packages/api",
+    "packages/docs-content-contract",
+    "packages/eslint-config",
+    "packages/tailwind-config",
+    "packages/ui"
+  ],
+  "cleanupErrors": []
+}

@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-24 PR #59 기준선 리뷰 수정·회귀](integration/2026-10-24-pr59-baseline-fixes.md): 명시 ref·고정 SHA 공유, 실제 커밋 후 회귀 9개·전체129개, 원래 그래프/Babel 대조 재현과 정리 실패/후속 성공 보존.
+
 - [10-24 PR #59 CI·CodeQL·리뷰 점검](integration/2026-10-24-pr59-ci-review.md): CI 13개·CodeQL 통과, 커밋 후 HEAD 자기 비교 재현과 미해결 리뷰 구분, Vercel Linux 빌드 로그 확인.
 
 - [10-24 Vite+ 호환성 보완·override 정리](integration/2026-10-24-viteplus-dependency-remediation.md): PostCSS 강제 제거·Babel/nanoid 범위 보완, peer 0건·Next production/화면·외부 UI 소비자 통과. 기존 audit·Linux/배포는 별도.

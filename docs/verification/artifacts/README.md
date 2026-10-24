@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-24 명시 main 그래프 재현](2026-10-24T12-22-01-870Z-viteplus-lockfile-impact.json), [동일 baseline 소비자 대조](2026-10-24T12-22-21-670Z-viteplus-consumer-control.json), [CLI 정리 실패](2026-10-24T12-22-04-534Z-vuln-radar-viteplus.json), [CLI 재실행 성공](2026-10-24T12-23-21-834Z-vuln-radar-viteplus.json): [PR #59 후속 검증](../integration/2026-10-24-pr59-baseline-fixes.md). 실제 비밀값·운영 데이터·Railway 배포 없음.
+
 - [10-24 최종 CLI 8개](2026-10-24T07-08-35-791Z-vuln-radar-viteplus.json), [수정 후 그래프](2026-10-24T07-01-06-763Z-viteplus-lockfile-impact.json), [Babel 오류 해소 대조](2026-10-24T07-05-39-300Z-viteplus-consumer-control.json), [통합 25개](2026-10-24T07-03-22-206Z-vuln-radar-integration.json), [audit 잔여](2026-10-24-viteplus-override-audit.json): [보완 보고서](../integration/2026-10-24-viteplus-dependency-remediation.md). 원격 배포 없음.
 
 - [10-24 Vite+ 연결 그래프](2026-10-24T06-22-13-436Z-viteplus-lockfile-impact.json), [기준 main 소비자 대조](2026-10-24T06-25-28-202Z-viteplus-consumer-control.json): [검증 보고서](../integration/2026-10-24-viteplus-peer-lockfile-impact.md). offline/frozen 기준선·동일 Babel 오류와 내장 Babel 성공, PostCSS 범위 불일치. 배포 검증 아님.

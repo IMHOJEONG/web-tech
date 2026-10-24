@@ -15,7 +15,7 @@
 
 Node 24.12.0·pnpm 12.14.0에서 새 회귀 9개, 저장소 총 129개, 검증 도구 타입, peer 0건을 확인했다. 명시한 원래 main `16c51e9911f041b125a445b3939966986426a0b4`로 분석기·소비자 대조·loopback CLI를 재실행했다. 원본 lockfile 그래프와 해시는 동일했고 Babel 대조도 재현했다.
 
-첫 CLI 검사는 기능 8개 통과 후 임시 Node compile-cache 삭제의 `ENOTEMPTY`로 종료 1이었다. 실패 JSON은 보존했다. 동일 명령 재실행은 기능 8개·cleanupErrors 빈 배열·종료 0이며, 첫 실행이 만든 잔여 임시 폴더만 정리했다. 삭제 오류를 숨기거나 운영 파일을 제거하지 않았다. 자세한 실행 명령과 증거는 후속 검증 문서에 연결한다.
+첫 CLI 검사는 기능 8개 통과 후 임시 Node compile-cache 삭제의 `ENOTEMPTY`로 종료 1이었다. 실패 JSON은 보존했다. 동일 명령 재실행은 기능 8개·cleanupErrors 빈 배열·종료 0이며, 첫 실행이 만든 잔여 임시 폴더만 정리했다. 삭제 오류를 숨기거나 운영 파일을 제거하지 않았다. 자세한 실행 명령과 증거는 [후속 검증](../../verification/integration/2026-10-24-pr59-baseline-fixes.md)에 연결한다.
 
 ## Open Questions
 
