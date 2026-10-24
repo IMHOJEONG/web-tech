@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-24 메인 최근 글 한국어 문구](2026-10-24-landing-korean-copy.md)
+
 - [10-23 메인 시연 제거와 탐색 모션 보완](2026-10-23-content-interaction-motion.md)
 
 - [10-22 CodeQL High #38 제목 검사 보완](2026-10-22-codeql38-heading-redos.md)

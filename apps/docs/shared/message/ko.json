@@ -345,8 +345,8 @@
             }
         },
         "latestNotes": {
-            "eyebrow": "최근 글",
-            "title": "최근에 정리한 글",
+            "eyebrow": "기술 기록",
+            "title": "새로 올라온 글",
             "viewAll": "피드 전체 보기",
             "open": "OPEN",
             "unavailableTitle": "최근 글을 지금은 불러오지 못했습니다",
