@@ -42,6 +42,8 @@
 
 ## 설계·정책 목록
 
+- [vuln-radar Vite+ 개발·빌드 실험](vuln-radar-viteplus-experiment.md): 제안. 앱 한정 CLI/core 별칭, 기존 도구 유지·로컬 검증, 운영 채택·Railway 배포 제외.
+
 - [KEV 점수·우선순위 표시 계약](vuln-radar-kev-evidence.md): nullable 실제 EPSS·미확인·빈 목록과 우선순위 구분, 작업별 커밋·운영 미검증.
 
 - [vuln-radar 전체 통계와 목록 집계](vuln-radar-overview-statistics.md): 전체 DB 집계와 상위25개 Feed 분리, 로컬 적용·배포 미검증.

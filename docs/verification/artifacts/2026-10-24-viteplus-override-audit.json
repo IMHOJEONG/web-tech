@@ -1,0 +1,92 @@
+{
+  "checkedAt": "2026-10-24T07:08:38.976Z",
+  "exitCode": 1,
+  "vulnerabilities": {
+    "info": 0,
+    "low": 2,
+    "moderate": 2,
+    "high": 7,
+    "critical": 2
+  },
+  "advisories": [
+    {
+      "id": "GHSA-2464-fhr4-w9xw",
+      "package": "next",
+      "severity": "critical",
+      "url": "https://github.com/advisories/GHSA-2464-fhr4-w9xw"
+    },
+    {
+      "id": "GHSA-p3m5-59mp-jv5r",
+      "package": "next",
+      "severity": "high",
+      "url": "https://github.com/advisories/GHSA-p3m5-59mp-jv5r"
+    },
+    {
+      "id": "GHSA-673q-mjm6-r5xr",
+      "package": "next",
+      "severity": "critical",
+      "url": "https://github.com/advisories/GHSA-673q-mjm6-r5xr"
+    },
+    {
+      "id": "GHSA-4qx8-w7c3-pj3p",
+      "package": "toml",
+      "severity": "high",
+      "url": "https://github.com/advisories/GHSA-4qx8-w7c3-pj3p"
+    },
+    {
+      "id": "GHSA-9j65-hcg3-gc64",
+      "package": "toml",
+      "severity": "high",
+      "url": "https://github.com/advisories/GHSA-9j65-hcg3-gc64"
+    },
+    {
+      "id": "GHSA-9qmh-m7c6-f92p",
+      "package": "toml",
+      "severity": "high",
+      "url": "https://github.com/advisories/GHSA-9qmh-m7c6-f92p"
+    },
+    {
+      "id": "GHSA-mrhx-c7xc-m3w5",
+      "package": "zod",
+      "severity": "high",
+      "url": "https://github.com/advisories/GHSA-mrhx-c7xc-m3w5"
+    },
+    {
+      "id": "GHSA-27r3-jxmh-p828",
+      "package": "body-parser",
+      "severity": "high",
+      "url": "https://github.com/advisories/GHSA-27r3-jxmh-p828"
+    },
+    {
+      "id": "GHSA-q7qp-rjg7-q26m",
+      "package": "multer",
+      "severity": "high",
+      "url": "https://github.com/advisories/GHSA-q7qp-rjg7-q26m"
+    },
+    {
+      "id": "GHSA-w74x-v6f9-j3xg",
+      "package": "fast-uri",
+      "severity": "moderate",
+      "url": "https://github.com/advisories/GHSA-w74x-v6f9-j3xg"
+    },
+    {
+      "id": "GHSA-xhq7-xmqj-769h",
+      "package": "fast-uri",
+      "severity": "low",
+      "url": "https://github.com/advisories/GHSA-xhq7-xmqj-769h"
+    },
+    {
+      "id": "GHSA-wjr9-j795-jxcr",
+      "package": "fast-uri",
+      "severity": "moderate",
+      "url": "https://github.com/advisories/GHSA-wjr9-j795-jxcr"
+    },
+    {
+      "id": "GHSA-333x-w4r6-6crp",
+      "package": "fast-uri",
+      "severity": "low",
+      "url": "https://github.com/advisories/GHSA-333x-w4r6-6crp"
+    }
+  ],
+  "note": "PostCSS, nanoid, Babel compatibility override changes do not resolve the pre-existing separate workspace advisories."
+}
