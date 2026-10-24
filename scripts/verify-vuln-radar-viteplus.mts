@@ -9,8 +9,14 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { setTimeout as delay } from "node:timers/promises";
+import {
+  assertBaselineAppScriptsUnchanged,
+  assertBaselineFilesUnchanged,
+  resolveVerificationBaseline,
+} from "./verification-baseline.mts";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
+const baseline = resolveVerificationBaseline(root, process.argv.slice(2));
 const app = join(root, "apps/vuln-radar");
 const require = createRequire(join(app, "package.json"));
 const backendRequire = createRequire(
@@ -138,33 +144,17 @@ async function start(command: "dev" | "preview", env: NodeJS.ProcessEnv) {
 
 try {
   await check("existing tooling and test scripts are unchanged", async () => {
-    for (const file of [".mise.toml", "turbo.json", "package.json"]) {
-      const baseline = spawnSync("git", ["show", `HEAD:${file}`], {
-        cwd: root,
-        encoding: "utf8",
-      });
-      assert.equal(baseline.status, 0);
-      assert.equal(
-        await readFile(join(root, file), "utf8"),
-        baseline.stdout,
-        file,
-      );
-    }
-    const manifest = require("./package.json");
-    const previous = JSON.parse(
-      spawnSync("git", ["show", "HEAD:apps/vuln-radar/package.json"], {
-        cwd: root,
-        encoding: "utf8",
-      }).stdout,
+    assertBaselineFilesUnchanged(baseline, root, [
+      ".mise.toml",
+      "turbo.json",
+      "package.json",
+    ]);
+    assertBaselineAppScriptsUnchanged(
+      baseline,
+      root,
+      "apps/vuln-radar/package.json",
+      ["predev", "prebuild", "test:lib", "lint", "typecheck"],
     );
-    for (const script of [
-      "predev",
-      "prebuild",
-      "test:lib",
-      "lint",
-      "typecheck",
-    ])
-      assert.equal(manifest.scripts[script], previous.scripts[script], script);
     for (const file of [
       ".env",
       ".env.local",
@@ -220,12 +210,7 @@ try {
       };
       const parse = (text: string) =>
         parseAllDocuments(text).at(-1)!.toJSON() as Lock;
-      const baseline = spawnSync("git", ["show", "HEAD:pnpm-lock.yaml"], {
-        cwd: root,
-        encoding: "utf8",
-      });
-      assert.equal(baseline.status, 0);
-      const before = parse(baseline.stdout);
+      const before = parse(baseline.readFile("pnpm-lock.yaml").toString());
       const after = parse(await readFile(join(root, "pnpm-lock.yaml"), "utf8"));
       for (const [workspace, importer] of Object.entries(before.importers)) {
         if (workspace === "apps/vuln-radar") continue;
@@ -411,10 +396,8 @@ try {
     JSON.stringify(
       {
         checkedAt: new Date().toISOString(),
-        baseSha: spawnSync("git", ["rev-parse", "HEAD"], {
-          cwd: root,
-          encoding: "utf8",
-        }).stdout.trim(),
+        baseSha: baseline.sha,
+        baselineRef: baseline.ref,
         runnerSha256: createHash("sha256")
           .update(await readFile(fileURLToPath(import.meta.url)))
           .digest("hex"),

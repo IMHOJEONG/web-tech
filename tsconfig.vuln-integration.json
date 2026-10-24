@@ -20,6 +20,8 @@
     "scripts/analyze-vuln-radar-lockfile.test.mts",
     "scripts/verify-viteplus-consumer-impact.mts",
     "scripts/viteplus-dependency-policy.test.mts",
+    "scripts/verification-baseline.mts",
+    "scripts/verification-baseline.test.mts",
     "scripts/verification-cleanup.mts",
     "scripts/verification-cleanup.test.mts"
   ]

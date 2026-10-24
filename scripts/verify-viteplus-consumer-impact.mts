@@ -1,11 +1,15 @@
 import assert from "node:assert/strict";
 import { execFileSync, spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  copyBaselineManifests,
+  resolveVerificationBaseline,
+} from "./verification-baseline.mts";
 
 const script = fileURLToPath(import.meta.url);
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -63,6 +67,7 @@ function probe(directory: string) {
 }
 
 async function main() {
+  const baseline = resolveVerificationBaseline(root, process.argv.slice(2));
   const temp = await mkdtemp(join(tmpdir(), "viteplus-baseline-peers-"));
   const currentLock = await readFile(join(root, "pnpm-lock.yaml"));
   const sha256 = (content: Uint8Array) =>
@@ -70,31 +75,13 @@ async function main() {
   const hash = sha256(currentLock);
   const report: Record<string, unknown> = {
     checkedAt: new Date().toISOString(),
-    baseSha: execFileSync("git", ["rev-parse", "HEAD"], {
-      cwd: root,
-      encoding: "utf8",
-    }).trim(),
+    baseSha: baseline.sha,
+    baselineRef: baseline.ref,
     currentLockSha256: hash,
   };
   let failed = false;
   try {
-    const files = execFileSync("git", ["ls-files", "-z"], {
-      cwd: root,
-      encoding: "utf8",
-    })
-      .split("\0")
-      .filter((file) =>
-        /^(?:package\.json|pnpm-workspace\.yaml|pnpm-lock\.yaml|\.mise\.toml|(?:apps|packages)\/[^/]+\/package\.json)$/.test(
-          file,
-        ),
-      );
-    for (const file of files) {
-      await mkdir(dirname(join(temp, file)), { recursive: true });
-      await writeFile(
-        join(temp, file),
-        execFileSync("git", ["show", `HEAD:${file}`], { cwd: root }),
-      );
-    }
+    await copyBaselineManifests(baseline, temp);
     const store = execFileSync("pnpm", ["store", "path"], {
       cwd: root,
       encoding: "utf8",
@@ -124,9 +111,7 @@ async function main() {
     );
     assert.equal(
       sha256(await readFile(join(temp, "pnpm-lock.yaml"))),
-      sha256(
-        execFileSync("git", ["show", "HEAD:pnpm-lock.yaml"], { cwd: root }),
-      ),
+      sha256(baseline.readFile("pnpm-lock.yaml")),
       "Baseline lockfile changed",
     );
     for (const [label, directory] of [

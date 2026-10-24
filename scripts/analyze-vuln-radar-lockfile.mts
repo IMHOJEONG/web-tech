@@ -1,9 +1,9 @@
-import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { join, posix, relative } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { resolveVerificationBaseline } from "./verification-baseline.mts";
 
 type Dependencies = Record<string, string>;
 type Importer = Record<
@@ -166,6 +166,7 @@ export function compareGraphs(
 
 async function main() {
   const root = fileURLToPath(new URL("../", import.meta.url));
+  const baseline = resolveVerificationBaseline(root, process.argv.slice(2));
   const yamlRequire = createRequire(
     join(root, "apps/docs-backend/package.json"),
   );
@@ -174,10 +175,7 @@ async function main() {
   };
   const parse = (text: string) =>
     parseAllDocuments(text).at(-1)!.toJSON() as Lock;
-  const base = execFileSync("git", ["show", "HEAD:pnpm-lock.yaml"], {
-    cwd: root,
-    encoding: "utf8",
-  });
+  const base = baseline.readFile("pnpm-lock.yaml").toString();
   const current = await readFile(join(root, "pnpm-lock.yaml"), "utf8");
   const before = parse(base);
   const after = parse(current);
@@ -204,10 +202,8 @@ async function main() {
   const coreRequire = createRequire(appRequire.resolve("vite"));
   const report = {
     checkedAt: new Date().toISOString(),
-    baseline: execFileSync("git", ["rev-parse", "HEAD"], {
-      cwd: root,
-      encoding: "utf8",
-    }).trim(),
+    baseline: baseline.sha,
+    baselineRef: baseline.ref,
     lockfileHashes: {
       before: createHash("sha256").update(base).digest("hex"),
       after: createHash("sha256").update(current).digest("hex"),

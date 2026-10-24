@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-24 PR #59 기준선 회귀·리뷰 보완](2026-10-24-viteplus-review-fixes.md)
+
 - [10-24 PR #59 CI와 리뷰 지적 재현](2026-10-24-pr59-ci-review.md)
 
 - [10-24 Vite+ 로컬 커밋과 보안 후속 분리](2026-10-24-viteplus-local-commits.md)
