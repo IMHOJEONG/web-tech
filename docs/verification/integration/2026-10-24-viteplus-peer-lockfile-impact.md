@@ -27,7 +27,7 @@ mise exec -- pnpm --filter @web-tech/ui typecheck
 mise exec -- pnpm test:repo
 ```
 
-기준선 대조기는 HEAD의 manifest·workspace 설정·lockfile만 임시 디렉터리에 복제한다. pnpm store의 기존 패키지로 `--offline --frozen-lockfile --ignore-scripts` 설치 후 동일한 합성 JSX 변환을 두 환경에서 실행한다. 실제 `.env`·콘텐츠·인증 값은 복제하지 않는다. 임시 기준선을 정리하고 실험 lockfile이 그대로인지 검사한다. 캐시에 패키지가 없으면 실패하며 온라인 설치로 우회하지 않는다.
+기준선 대조기는 `--base`로 지정해 한 번 고정한 커밋의 manifest·workspace 설정·lockfile만 임시 디렉터리에 복제한다. 당시 실행 시 HEAD가 기준 main이었던 사실과 커밋 후 재현 명령의 명시 SHA를 구분한다. pnpm store의 기존 패키지로 `--offline --frozen-lockfile --ignore-scripts` 설치 후 동일한 합성 JSX 변환을 두 환경에서 실행한다. 실제 `.env`·콘텐츠·인증 값은 복제하지 않는다. 임시 기준선을 정리하고 실험 lockfile이 그대로인지 검사한다. 캐시에 패키지가 없으면 실패하며 온라인 설치로 우회하지 않는다.
 
 ## 결과와 증거
 

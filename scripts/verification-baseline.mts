@@ -4,6 +4,12 @@ import { readFileSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 
+export function verificationGitEnvironment(source = process.env) {
+  return Object.fromEntries(
+    Object.entries(source).filter(([key]) => !/^GIT_/i.test(key)),
+  );
+}
+
 /** Resolve once: later commits or moving branch refs cannot change this snapshot. */
 export function resolveVerificationBaseline(root: string, args: string[]) {
   if (
@@ -16,9 +22,11 @@ export function resolveVerificationBaseline(root: string, args: string[]) {
       "Usage: --base <commit-or-ref> (explicit baseline required)",
     );
   const ref = args[1];
+  const env = verificationGitEnvironment();
   const git = (...parameters: string[]) =>
     execFileSync("git", parameters, {
       cwd: root,
+      env,
       maxBuffer: 64 * 1024 * 1024,
       stdio: ["pipe", "pipe", "pipe"],
     });

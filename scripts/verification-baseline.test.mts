@@ -17,6 +17,7 @@ import {
   assertBaselineFilesUnchanged,
   copyBaselineManifests,
   resolveVerificationBaseline,
+  verificationGitEnvironment,
 } from "./verification-baseline.mts";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -24,8 +25,9 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 function fixture(t: TestContext) {
   const directory = mkdtempSync(join(tmpdir(), "verification-baseline-test-"));
   t.after(() => rmSync(directory, { recursive: true, force: true }));
+  const env = verificationGitEnvironment();
   const git = (...args: string[]) =>
-    execFileSync("git", args, { cwd: directory, encoding: "utf8" }).trim();
+    execFileSync("git", args, { cwd: directory, encoding: "utf8", env }).trim();
   const write = (file: string, text: string) => {
     mkdirSync(dirname(join(directory, file)), { recursive: true });
     writeFileSync(join(directory, file), text);
@@ -182,6 +184,63 @@ test("a missing baseline file fails instead of reading the current tree", (t) =>
     f.baseSha,
   ]);
   assert.throws(() => baseline.readFile("packages/new/package.json"));
+});
+
+test("Git subprocesses discard inherited repository, index and config selectors", () => {
+  assert.deepEqual(
+    verificationGitEnvironment({
+      PATH: "fixture-path",
+      HOME: "fixture-home",
+      GIT_DIR: "caller-repository",
+      GIT_WORK_TREE: "caller-tree",
+      GIT_INDEX_FILE: "caller-index",
+      GIT_COMMON_DIR: "caller-common-dir",
+      GIT_CONFIG_PARAMETERS: "caller-parameters",
+      GIT_CONFIG_COUNT: "1",
+      GIT_CONFIG_KEY_0: "core.worktree",
+      GIT_CONFIG_VALUE_0: "caller-tree",
+      git_object_directory: "caller-objects",
+    }),
+    { PATH: "fixture-path", HOME: "fixture-home" },
+  );
+});
+
+test("a contaminated caller cannot redirect fixture commits or baseline reads", (t) => {
+  const caller = fixture(t);
+  caller.write("caller-only.txt", "keep this distinct from child fixtures");
+  caller.commit("distinct caller repository");
+  caller.git("branch", "-f", "fixture-base", "HEAD");
+  const index = join(caller.directory, ".git/index");
+  const before = {
+    head: caller.git("rev-parse", "HEAD"),
+    status: caller.git("status", "--porcelain"),
+    index: readFileSync(index),
+  };
+  const result = spawnSync(
+    process.execPath,
+    [
+      "--experimental-strip-types",
+      "--test",
+      "--test-name-pattern=^the ref is resolved once and survives later commits and a moved branch$",
+      fileURLToPath(import.meta.url),
+    ],
+    {
+      cwd: root,
+      encoding: "utf8",
+      timeout: 15_000,
+      env: {
+        ...process.env,
+        GIT_DIR: join(caller.directory, ".git"),
+        GIT_WORK_TREE: caller.directory,
+        GIT_INDEX_FILE: index,
+        GIT_COMMON_DIR: join(caller.directory, ".git"),
+      },
+    },
+  );
+  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+  assert.equal(caller.git("rev-parse", "HEAD"), before.head);
+  assert.equal(caller.git("status", "--porcelain"), before.status);
+  assert.deepEqual(readFileSync(index), before.index);
 });
 
 for (const script of [

@@ -49,6 +49,18 @@ mise exec -- node --experimental-strip-types scripts/verify-vuln-radar-viteplus.
 
 [첫 CLI 실행](../artifacts/2026-10-24T12-22-04-534Z-vuln-radar-viteplus.json)은 8개 기능을 통과했으나 임시 Node compile-cache 삭제의 `ENOTEMPTY`로 종료 1이었다. 이 결과를 성공으로 바꾸거나 실패 artifact를 제거하지 않았다. 동일 명령 재실행은 정리까지 성공했다. 첫 실행이 생성한 잔여 임시 폴더만 삭제 재시도로 정리했으며 운영 파일·다른 세션 폴더는 건드리지 않았다. 영구적인 cleanup 경합 보완은 별도 후속으로 남긴다.
 
+### 추가 리뷰: 호출자의 Git 환경 격리
+
+후속 [리뷰](https://github.com/IMHOJEONG/web-tech/pull/59#discussion_r4367128566)는 `cwd`만 지정해도 상속된 `GIT_DIR`·`GIT_WORK_TREE`·`GIT_INDEX_FILE` 등이 다른 저장소와 인덱스를 선택할 수 있다고 지적했다. 기존 4건과 별도로 이번에 추가한 helper·fixture의 안전성을 보완한다.
+
+- `verificationGitEnvironment`가 대소문자 구분 없이 `GIT_*` 키를 제외한 자식 환경 사본을 반환한다. 기준선 helper의 모든 Git 조회와 fixture의 init/add/commit/branch 호출에 같은 함수를 적용했다. 부모 `process.env`나 사용자 Git 설정 파일은 수정하지 않는다.
+- 필터 회귀는 저장소·공통 Git 디렉터리·인덱스·object directory·config 주입 변수를 제외하고 `PATH`·`HOME`을 보존하는지 검사한다.
+- 실제 자식 테스트에는 별도로 만든 임시 caller 저장소의 Git 환경을 주입한다. fixture 커밋과 baseline 조회가 자신의 임시 저장소를 사용하고, caller의 HEAD·worktree status·인덱스 bytes가 그대로인지 확인한다. 운영 저장소를 오염 대조군으로 사용하지 않는다.
+- 위 재현 명령으로 관련 테스트 11개(기존 9+환경 격리 2), 전체 저장소 131개, 검증 도구 타입 검사를 통과했다. `--base` 파일 복사를 설명하는 기존 보고서의 현재 동작 문구도 보완했다.
+- 이는 상속된 Git 선택/설정 변수의 격리다. `HOME`의 Git 설정·사용자 hook까지 포함하는 OS sandbox를 구현했다는 뜻은 아니다. 새 패키지/lockfile·운영 환경·보안 경고 13건은 변경하지 않았다.
+
+선행 baseline 수정 head `5a1ea5f829ad92ec77fd647a315222869fea132b`는 [CI 13개 job](https://github.com/IMHOJEONG/web-tech/actions/runs/40094043724)과 [CodeQL 두 분석](https://github.com/IMHOJEONG/web-tech/actions/runs/40094041032)을 통과했다. 위 Git 환경 격리 후속 커밋은 새 head의 CI·CodeQL·리뷰 해결 여부를 따로 확인한다. 선행 성공을 후속 코드의 원격 검증으로 간주하지 않는다.
+
 ## 한계와 후속 작업
 
 - 커밋·push 후 새 PR head의 CI·CodeQL·리뷰를 별도로 확인한다. 초기 head `096aad7`의 성공을 후속 head에 그대로 적용하지 않는다. 원격 검증 완료 기록은 Jira·Confluence의 동일 작업 표에 새 SHA/run으로 연결한다.

@@ -17,9 +17,15 @@ Node 24.12.0·pnpm 12.14.0에서 새 회귀 9개, 저장소 총 129개, 검증 �
 
 첫 CLI 검사는 기능 8개 통과 후 임시 Node compile-cache 삭제의 `ENOTEMPTY`로 종료 1이었다. 실패 JSON은 보존했다. 동일 명령 재실행은 기능 8개·cleanupErrors 빈 배열·종료 0이며, 첫 실행이 만든 잔여 임시 폴더만 정리했다. 삭제 오류를 숨기거나 운영 파일을 제거하지 않았다. 자세한 실행 명령과 증거는 [후속 검증](../../verification/integration/2026-10-24-pr59-baseline-fixes.md)에 연결한다.
 
+### Git 환경 격리 후속
+
+CodeRabbit 재검토에서 추가된 Git 환경 상속 지적을 별도 후속 커밋으로 보완한다. 기준선 helper와 fixture의 Git 자식 프로세스에서 `GIT_*`를 제외한 환경 사본을 사용한다. 부모 환경이나 실제 저장소 설정·인덱스를 수정하지 않는다. 오염된 임시 caller 환경에서 자식 fixture/조회가 잘못된 저장소로 향하지 않고 HEAD·작업 트리·인덱스가 그대로인 회귀를 추가했다.
+
+관련 11개·전체 131개·타입 검사 통과를 확인했고, 기준선 대조기의 파일 복사를 설명한 본문도 명시 `--base` 커밋으로 정정했다. 코드 2개와 이 작업에 직접 연결된 기존 문서 3개만 포함한다. 상세 명령·결과·격리 한계는 위 후속 검증의 추가 리뷰 항목에 기록한다.
+
 ## Open Questions
 
-현재 원격 CI·CodeQL은 수정 전 head `096aad7`의 성공 기록이다. 후속 push 뒤 새 head를 다시 확인해야 한다. 기존 audit 13건은 [KAN-35](https://web-tech-service.atlassian.net/browse/KAN-35)에서 별도 미조치 상태로 유지한다. 임시 compile-cache 정리 경합의 영구 개선은 이번 기준선 수정과 별개다.
+선행 baseline 수정 head `5a1ea5f`는 CI·CodeQL을 통과했다. Git 환경 격리 후속은 push 뒤 새 head의 검사를 다시 확인해야 한다. 기존 audit 13건은 [KAN-35](https://web-tech-service.atlassian.net/browse/KAN-35)에서 별도 미조치 상태로 유지한다. 임시 compile-cache 정리 경합의 영구 개선은 이번 기준선 수정과 별개다.
 
 ## Next
 
