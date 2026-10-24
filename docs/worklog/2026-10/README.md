@@ -1,5 +1,11 @@
 # 2026-10 작업 기록
 
+- [10-24 Vite+ 의존성 보완·override 정리](2026-10-24-viteplus-dependency-remediation.md)
+
+- [10-24 Vite+ peer·lockfile 영향 조사](2026-10-24-viteplus-peer-lockfile-impact.md)
+
+- [10-24 vuln-radar Vite+ 개발·빌드 실험](2026-10-24-vuln-radar-viteplus.md)
+
 - [10-22 CodeQL High #38 제목 검사 보완](2026-10-22-codeql38-heading-redos.md)
 
 - [10-22 원격·로컬 canonical 분류 통일](2026-10-22-docs-canonical-taxonomy.md)

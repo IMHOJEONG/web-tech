@@ -1,5 +1,11 @@
 # 검증 원본 증거
 
+- [10-24 최종 CLI 8개](2026-10-24T07-08-35-791Z-vuln-radar-viteplus.json), [수정 후 그래프](2026-10-24T07-01-06-763Z-viteplus-lockfile-impact.json), [Babel 오류 해소 대조](2026-10-24T07-05-39-300Z-viteplus-consumer-control.json), [통합 25개](2026-10-24T07-03-22-206Z-vuln-radar-integration.json), [audit 잔여](2026-10-24-viteplus-override-audit.json): [보완 보고서](../integration/2026-10-24-viteplus-dependency-remediation.md). 원격 배포 없음.
+
+- [10-24 Vite+ 연결 그래프](2026-10-24T06-22-13-436Z-viteplus-lockfile-impact.json), [기준 main 소비자 대조](2026-10-24T06-25-28-202Z-viteplus-consumer-control.json): [검증 보고서](../integration/2026-10-24-viteplus-peer-lockfile-impact.md). offline/frozen 기준선·동일 Babel 오류와 내장 Babel 성공, PostCSS 범위 불일치. 배포 검증 아님.
+
+- [10-24 Vite+ CLI·경계 검사](2026-10-24T05-34-00-240Z-vuln-radar-viteplus.json), [기존 화면 통합](2026-10-24T05-30-25-335Z-vuln-radar-integration.json), [audit 요약](2026-10-24-viteplus-dependency-audit.json): [검증 보고서](../integration/2026-10-24-vuln-radar-viteplus.md). 합성 데이터·로컬 실행만 포함. 초기 실패·후속 통과·미해결 경고는 보고서에서 구분한다.
+
 - [10-22 부분 API 장애 최종 통합](2026-10-22T04-37-18-940Z-vuln-radar-integration.json): [검증 보고서](../integration/2026-10-22-vuln-radar-partial-failures.md). 25개 그룹·정리6단계 통과. 합성 데이터이며 선행 실패 증거는 보고서에 연결한다.
 
 - [10-22 수집 상태 최종 통합](2026-10-22T03-20-18-441Z-vuln-radar-integration.json): [검증 보고서](../integration/2026-10-22-vuln-radar-ingest-status.md). 19개 그룹·정리6단계 통과. 실제 upstream 수집과 운영 검증은 제외한다.

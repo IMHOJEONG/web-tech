@@ -1,5 +1,11 @@
 # 검증 보고서
 
+- [10-24 Vite+ 호환성 보완·override 정리](integration/2026-10-24-viteplus-dependency-remediation.md): PostCSS 강제 제거·Babel/nanoid 범위 보완, peer 0건·Next production/화면·외부 UI 소비자 통과. 기존 audit·Linux/배포는 별도.
+
+- [10-24 Vite+ peer·lockfile 소비자 영향](integration/2026-10-24-viteplus-peer-lockfile-impact.md): 별칭 버전 경고·optional 연결·PostCSS 범위 불일치, 기준 main 오프라인 대조와 소비자 검사.
+
+- [10-24 vuln-radar Vite+ 로컬 실험](integration/2026-10-24-vuln-radar-viteplus.md): CLI·프록시 7개와 기존 통합 25개, 기존 도구 유지. peer·보안 경고와 배포 미검증 범위 구분.
+
 - [10-22 CodeQL High #38 제목 검사 ReDoS](security/2026-10-22-codeql38-heading-redos.md): 긴 입력 격리 회귀·기존 판정 호환·로컬/NestJS 소비자 검증. main·NAS 운영 해소는 별도.
 
 - [10-22 Overview 부분 API 장애 격리](integration/2026-10-22-vuln-radar-partial-failures.md): 최초 실패·캐시 갱신 실패·대상 재시도·보조 요청 대기·전체 실패/복구의 로컬 회귀.
