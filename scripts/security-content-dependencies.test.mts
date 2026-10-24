@@ -4,7 +4,7 @@ import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import test from "node:test";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const docs = createRequire(join(root, "apps/docs/package.json"));
@@ -89,8 +89,24 @@ test("sanitize-html does not emit noscript discard content or unsafe refresh URL
   );
 });
 
-test("Vite stays on the patched 8.2 release lane", () => {
-  const version = packageVersion(radar, "vite");
+test("Vite retains the reviewed launch-editor patch lane, including the Vite+ experiment", async () => {
+  const metadata = radar("vite/package.json");
+  const { version } = await import(pathToFileURL(radar.resolve("vite")).href);
+  if (metadata.name === "@voidzero-dev/vite-plus-core") {
+    assert.equal(metadata.version, "1.4.0");
+    assert.equal(version, "8.3.5");
+    assert.equal(metadata.bundledVersions.vite, version);
+    const source = readFileSync(
+      join(dirname(radar.resolve("vite")), "chunks/node.js"),
+      "utf8",
+    );
+    assert.match(
+      source,
+      /launch-editor@2\.14\.2\//,
+      "The reviewed core must retain the patched bundled editor",
+    );
+    return;
+  }
   const [major, minor, patch] = version.split(".").map(Number);
   assert.equal(major, 8);
   assert.equal(minor, 2);
