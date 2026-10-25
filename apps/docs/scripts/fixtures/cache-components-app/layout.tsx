@@ -1,5 +1,9 @@
 import { Suspense, type ReactNode } from 'react'
 
+export function generateStaticParams() {
+    return [{ locale: 'en' }, { locale: 'ko' }]
+}
+
 export default function Layout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
