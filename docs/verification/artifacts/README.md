@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-25 Primary 대비 측정](2026-10-25-primary-action-contrast.json)·[Mobile Dark](2026-10-25-primary-contrast-mobile-dark.png)·[Desktop Light](2026-10-25-primary-contrast-desktop-light.png): [검증 보고서](../accessibility/2026-10-25-primary-action-contrast.md). 수정 전 실패·computed 대비·브라우저 회귀·Figma outline 재조회.
+
 - [10-23 실제 탐색 모션](2026-10-23-content-interaction-motion.json)·[390px](2026-10-23-content-motion-390.png)·[데스크톱](2026-10-23-content-motion-desktop.png): [실행 보고서](../performance/2026-10-23-content-interaction-motion.md). 모션 회귀 28개·실제 animationstart·duration/delay·소스 해시. 메인 영상 제거, 운영 미배포.
 
 - [10-22 부분 API 장애 최종 통합](2026-10-22T04-37-18-940Z-vuln-radar-integration.json): [검증 보고서](../integration/2026-10-22-vuln-radar-partial-failures.md). 25개 그룹·정리6단계 통과. 합성 데이터이며 선행 실패 증거는 보고서에 연결한다.

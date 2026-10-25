@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-25 Primary 글자 대비와 브라우저 접근성](2026-10-25-primary-action-contrast.md)
+
 - [10-24 메인 최근 글 한국어 문구](2026-10-24-landing-korean-copy.md)
 
 - [10-23 메인 시연 제거와 탐색 모션 보완](2026-10-23-content-interaction-motion.md)

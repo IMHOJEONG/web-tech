@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-25 Primary 대비·브라우저 접근성](accessibility/2026-10-25-primary-action-contrast.md): 주황 배경 유지·짙은 글자·명시적 focus, UI58개+실제 화면12개. 전체 WCAG/타 브라우저 미검증.
+
 - [10-23 실제 탐색 모션](performance/2026-10-23-content-interaction-motion.md): 메인 시연 제거 후 필터 전환·등장·hover/focus·reduced-motion의 로컬 회귀. 운영 미배포.
 
 - [10-22 CodeQL High #38 제목 검사 ReDoS](security/2026-10-22-codeql38-heading-redos.md): 긴 입력 격리 회귀·기존 판정 호환·로컬/NestJS 소비자 검증. main·NAS 운영 해소는 별도.

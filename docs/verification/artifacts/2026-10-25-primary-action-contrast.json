@@ -1,0 +1,1303 @@
+{
+  "date": "2026-10-25",
+  "timezone": "Asia/Seoul",
+  "issue": "KAN-36",
+  "head": "ddce1ec34d287732d4dc0661fa2db5e2ad1d8a40",
+  "workingTreeDirty": true,
+  "committed": false,
+  "deployed": false,
+  "environment": {
+    "node": "24.12.0",
+    "playwright": "1.62.1",
+    "browser": "Chromium headless shell revision 1234",
+    "remoteContent": false
+  },
+  "decision": {
+    "primary": "#f97316",
+    "oldForeground": "#fff7ed",
+    "newForeground": "#171717",
+    "focusOutlinePx": 2,
+    "focusOffsetPx": 3,
+    "forcedColors": "Highlight"
+  },
+  "baseline": {
+    "solidBrowserRatio": 2.640102644607792,
+    "expectedFailures": 2,
+    "focusOutlineBefore": "none",
+    "initialAttempts": [
+      "Browser sandbox denied launch; authorized local retry",
+      "Fixture body gradient rejected by solid-color helper; matched actual app's solid body before baseline",
+      "Intermediate transition frame was measured before settle; wait-for-animation added",
+      "Concurrent dev:e2e UI rebuild removed dist during test import; reran after build completion"
+    ]
+  },
+  "ui": {
+    "stats": {
+      "startTime": "2026-10-25T12:28:09.250Z",
+      "duration": 34163.736000000004,
+      "expected": 58,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "name": "cn compatibility: conditional inputs",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: spacing override",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: directional spacing",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: size override",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: one dimension override",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: responsive",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: dark mode",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: data attributes",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: important modifiers",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: arbitrary widths",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: CSS variable width",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: SVG selector",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: surface tokens",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: focus ring",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: non-Tailwind classes",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: conditional inputs",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: spacing override",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: directional spacing",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: size override",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: one dimension override",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: responsive",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: dark mode",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: data attributes",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: important modifiers",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: arbitrary widths",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: CSS variable width",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: SVG selector",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: surface tokens",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: focus ring",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cn compatibility: non-Tailwind classes",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "primary text retains AA contrast in default and hover states",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "primary actions retain keyboard focus, activation and disabled semantics",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "primary text retains AA contrast in default and hover states",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "primary actions retain keyboard focus, activation and disabled semantics",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "shared UI uses Base UI subpaths without direct Radix primitives",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "Button sizes retain defaults and allow explicit touch target overrides",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "Button preserves keyboard activation and disabled semantics while styled links stay links",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "render composes refs and click handlers without accidental form submission",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "controlled Tooltip preserves existing descriptions and cleans its relation on close",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "cancelled and disabled Tooltips do not expose a dangling description",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "Badge exposes variants and preserves token colors and link semantics",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "Tooltip respects the outer provider hover delay",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "Tooltip supports immediate default hover and keyboard focus",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "Sidebar supplies the Tooltip provider for collapsed menu buttons",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "Sidebar render preserves anchor semantics without nested buttons",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "Input, Collapsible and Separator retain public behavior",
+        "project": "light",
+        "status": "expected"
+      },
+      {
+        "name": "shared UI uses Base UI subpaths without direct Radix primitives",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "Button sizes retain defaults and allow explicit touch target overrides",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "Button preserves keyboard activation and disabled semantics while styled links stay links",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "render composes refs and click handlers without accidental form submission",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "controlled Tooltip preserves existing descriptions and cleans its relation on close",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "cancelled and disabled Tooltips do not expose a dangling description",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "Badge exposes variants and preserves token colors and link semantics",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "Tooltip respects the outer provider hover delay",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "Tooltip supports immediate default hover and keyboard focus",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "Sidebar supplies the Tooltip provider for collapsed menu buttons",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "Sidebar render preserves anchor semantics without nested buttons",
+        "project": "dark",
+        "status": "expected"
+      },
+      {
+        "name": "Input, Collapsible and Separator retain public behavior",
+        "project": "dark",
+        "status": "expected"
+      }
+    ],
+    "measurements": [
+      {
+        "project": "light",
+        "name": "computed-contrast.json",
+        "values": [
+          {
+            "selector": "#primary",
+            "state": "default",
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#primary",
+            "state": "hover",
+            "ratio": 7.011415932023308,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "oklab(0.704878 0.125924 0.137906 / 0.9)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#small",
+            "state": "default",
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#small",
+            "state": "hover",
+            "ratio": 7.011415932023308,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "oklab(0.704878 0.125924 0.137906 / 0.9)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#cta",
+            "state": "default",
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#cta",
+            "state": "hover",
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#badge",
+            "state": "default",
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#badge",
+            "state": "hover",
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#badge-anchor",
+            "state": "default",
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#badge-anchor",
+            "state": "hover",
+            "ratio": 7.011415932023308,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "oklab(0.704878 0.125924 0.137906 / 0.9)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          }
+        ]
+      },
+      {
+        "project": "light",
+        "name": "focus.json",
+        "values": {
+          "ratio": 17.9278402530276,
+          "color": "rgb(23, 23, 23)",
+          "backgroundColor": "rgb(249, 115, 22)",
+          "opacity": 1,
+          "outlineColor": "rgb(23, 23, 23)",
+          "outlineStyle": "solid",
+          "outlineWidth": "2px",
+          "outlineOffset": "3px"
+        }
+      },
+      {
+        "project": "dark",
+        "name": "computed-contrast.json",
+        "values": [
+          {
+            "selector": "#primary",
+            "state": "default",
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#primary",
+            "state": "hover",
+            "ratio": 5.326434087184626,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "oklab(0.704878 0.125924 0.137906 / 0.9)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#small",
+            "state": "default",
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#small",
+            "state": "hover",
+            "ratio": 5.326434087184626,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "oklab(0.704878 0.125924 0.137906 / 0.9)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#cta",
+            "state": "default",
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#cta",
+            "state": "hover",
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#badge",
+            "state": "default",
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#badge",
+            "state": "hover",
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#badge-anchor",
+            "state": "default",
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          {
+            "selector": "#badge-anchor",
+            "state": "hover",
+            "ratio": 5.326434087184626,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "oklab(0.704878 0.125924 0.137906 / 0.9)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          }
+        ]
+      },
+      {
+        "project": "dark",
+        "name": "focus.json",
+        "values": {
+          "ratio": 16.91088278219183,
+          "color": "rgb(23, 23, 23)",
+          "backgroundColor": "rgb(249, 115, 22)",
+          "opacity": 1,
+          "outlineColor": "rgb(237, 237, 237)",
+          "outlineStyle": "solid",
+          "outlineWidth": "2px",
+          "outlineOffset": "3px"
+        }
+      }
+    ]
+  },
+  "app": {
+    "stats": {
+      "startTime": "2026-10-25T12:28:12.048Z",
+      "duration": 13611.335000000001,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "name": "light: landing primary CTA contrast and keyboard navigation",
+        "project": "chromium-mobile",
+        "status": "expected"
+      },
+      {
+        "name": "dark: landing primary CTA contrast and keyboard navigation",
+        "project": "chromium-mobile",
+        "status": "expected"
+      },
+      {
+        "name": "light: landing primary CTA contrast and keyboard navigation",
+        "project": "chromium-tablet",
+        "status": "expected"
+      },
+      {
+        "name": "dark: landing primary CTA contrast and keyboard navigation",
+        "project": "chromium-tablet",
+        "status": "expected"
+      },
+      {
+        "name": "light: landing primary CTA contrast and keyboard navigation",
+        "project": "chromium-desktop",
+        "status": "expected"
+      },
+      {
+        "name": "dark: landing primary CTA contrast and keyboard navigation",
+        "project": "chromium-desktop",
+        "status": "expected"
+      },
+      {
+        "name": "light: shell focus, contrast and landmark names",
+        "project": "chromium-mobile",
+        "status": "expected"
+      },
+      {
+        "name": "dark: shell focus, contrast and landmark names",
+        "project": "chromium-mobile",
+        "status": "expected"
+      },
+      {
+        "name": "light: shell focus, contrast and landmark names",
+        "project": "chromium-tablet",
+        "status": "expected"
+      },
+      {
+        "name": "dark: shell focus, contrast and landmark names",
+        "project": "chromium-tablet",
+        "status": "expected"
+      },
+      {
+        "name": "light: shell focus, contrast and landmark names",
+        "project": "chromium-desktop",
+        "status": "expected"
+      },
+      {
+        "name": "dark: shell focus, contrast and landmark names",
+        "project": "chromium-desktop",
+        "status": "expected"
+      }
+    ],
+    "measurements": [
+      {
+        "project": "chromium-mobile",
+        "name": "primary-cta.json",
+        "values": {
+          "theme": "light",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "normal": {
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "hover": {
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "focus": {
+            "ratio": 16.239884181860916,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          },
+          "focusText": {
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          }
+        }
+      },
+      {
+        "project": "chromium-mobile",
+        "name": "primary-cta.json",
+        "values": {
+          "theme": "dark",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "normal": {
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "hover": {
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "focus": {
+            "ratio": 15.559587016098694,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(237, 237, 237)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          },
+          "focusText": {
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(237, 237, 237)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          }
+        }
+      },
+      {
+        "project": "chromium-tablet",
+        "name": "primary-cta.json",
+        "values": {
+          "theme": "light",
+          "viewport": {
+            "width": 768,
+            "height": 1024
+          },
+          "normal": {
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "hover": {
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "focus": {
+            "ratio": 16.239884181860916,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          },
+          "focusText": {
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          }
+        }
+      },
+      {
+        "project": "chromium-tablet",
+        "name": "primary-cta.json",
+        "values": {
+          "theme": "dark",
+          "viewport": {
+            "width": 768,
+            "height": 1024
+          },
+          "normal": {
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "hover": {
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "focus": {
+            "ratio": 15.559587016098694,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(237, 237, 237)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          },
+          "focusText": {
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(237, 237, 237)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          }
+        }
+      },
+      {
+        "project": "chromium-desktop",
+        "name": "primary-cta.json",
+        "values": {
+          "theme": "light",
+          "viewport": {
+            "width": 1280,
+            "height": 800
+          },
+          "normal": {
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "hover": {
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "focus": {
+            "ratio": 16.239884181860916,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          },
+          "focusText": {
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          }
+        }
+      },
+      {
+        "project": "chromium-desktop",
+        "name": "primary-cta.json",
+        "values": {
+          "theme": "dark",
+          "viewport": {
+            "width": 1280,
+            "height": 800
+          },
+          "normal": {
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "hover": {
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "focus": {
+            "ratio": 15.559587016098694,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(237, 237, 237)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          },
+          "focusText": {
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(237, 237, 237)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          }
+        }
+      }
+    ]
+  },
+  "figma": {
+    "fileKey": "1G0NGpk3l75cOnCCZr2J6q",
+    "sessionId": "5a135946-5bc6-411d-8932-6d292e6e183a",
+    "light": {
+      "createdNodeIds": ["91:339", "91:340", "91:341", "91:342"],
+      "mutatedNodeIds": [],
+      "mutatedVariableIds": ["VariableID:2:20"],
+      "before": {
+        "2:0": {
+          "r": 1,
+          "g": 0.9686274528503418,
+          "b": 0.929411768913269,
+          "a": 1
+        }
+      },
+      "after": {
+        "2:0": {
+          "r": 0.09019608050584793,
+          "g": 0.09019608050584793,
+          "b": 0.09019608050584793,
+          "a": 1
+        }
+      },
+      "outlines": [
+        {
+          "id": "91:339",
+          "parent": "7:304",
+          "x": -5,
+          "y": -5,
+          "width": 88,
+          "height": 46,
+          "strokeWeight": 2
+        },
+        {
+          "id": "91:340",
+          "parent": "7:308",
+          "x": -5,
+          "y": -5,
+          "width": 88,
+          "height": 46,
+          "strokeWeight": 2
+        },
+        {
+          "id": "91:341",
+          "parent": "8:234",
+          "x": -5,
+          "y": -5,
+          "width": 61,
+          "height": 32,
+          "strokeWeight": 2
+        },
+        {
+          "id": "91:342",
+          "parent": "8:238",
+          "x": -5,
+          "y": -5,
+          "width": 61,
+          "height": 32,
+          "strokeWeight": 2
+        }
+      ],
+      "pageId": "2:2"
+    },
+    "dark": {
+      "createdNodeIds": ["91:549", "91:550", "91:551", "91:552"],
+      "mutatedNodeIds": [],
+      "mutatedVariableIds": ["VariableID:81:149"],
+      "before": {
+        "81:0": {
+          "r": 1,
+          "g": 0.9686274528503418,
+          "b": 0.929411768913269,
+          "a": 1
+        }
+      },
+      "after": {
+        "81:0": {
+          "r": 0.09019608050584793,
+          "g": 0.09019608050584793,
+          "b": 0.09019608050584793,
+          "a": 1
+        }
+      },
+      "outlines": [
+        {
+          "id": "91:549",
+          "parent": "82:355",
+          "x": -5,
+          "y": -5,
+          "width": 88,
+          "height": 46,
+          "strokeWeight": 2
+        },
+        {
+          "id": "91:550",
+          "parent": "82:361",
+          "x": -5,
+          "y": -5,
+          "width": 88,
+          "height": 46,
+          "strokeWeight": 2
+        },
+        {
+          "id": "91:551",
+          "parent": "83:248",
+          "x": -5,
+          "y": -5,
+          "width": 61,
+          "height": 32,
+          "strokeWeight": 2
+        },
+        {
+          "id": "91:552",
+          "parent": "83:254",
+          "x": -5,
+          "y": -5,
+          "width": 61,
+          "height": 32,
+          "strokeWeight": 2
+        }
+      ],
+      "pageId": "81:131"
+    },
+    "outlineAudits": [
+      {
+        "pageId": "2:2",
+        "boardId": "10:185",
+        "outlines": [
+          {
+            "id": "I10:274;91:339",
+            "parent": "10:274",
+            "width": 68,
+            "parentWidth": 58,
+            "height": 46,
+            "parentHeight": 36,
+            "x": -5,
+            "y": -5,
+            "strokeWeight": 2,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "ok": true
+          },
+          {
+            "id": "I10:280;91:340",
+            "parent": "10:280",
+            "width": 68,
+            "parentWidth": 58,
+            "height": 46,
+            "parentHeight": 36,
+            "x": -5,
+            "y": -5,
+            "strokeWeight": 2,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "ok": true
+          },
+          {
+            "id": "I10:503;91:341",
+            "parent": "10:503",
+            "width": 61,
+            "parentWidth": 51,
+            "height": 32,
+            "parentHeight": 22,
+            "x": -5,
+            "y": -5,
+            "strokeWeight": 2,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "ok": true
+          },
+          {
+            "id": "I10:509;91:342",
+            "parent": "10:509",
+            "width": 61,
+            "parentWidth": 51,
+            "height": 32,
+            "parentHeight": 22,
+            "x": -5,
+            "y": -5,
+            "strokeWeight": 2,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "ok": true
+          }
+        ],
+        "issues": []
+      },
+      {
+        "pageId": "81:131",
+        "boardId": "83:312",
+        "outlines": [
+          {
+            "id": "I83:374;91:549",
+            "parent": "83:374",
+            "width": 68,
+            "parentWidth": 58,
+            "height": 46,
+            "parentHeight": 36,
+            "x": -5,
+            "y": -5,
+            "strokeWeight": 2,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "ok": true
+          },
+          {
+            "id": "I83:378;91:550",
+            "parent": "83:378",
+            "width": 68,
+            "parentWidth": 58,
+            "height": 46,
+            "parentHeight": 36,
+            "x": -5,
+            "y": -5,
+            "strokeWeight": 2,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "ok": true
+          },
+          {
+            "id": "I83:547;91:551",
+            "parent": "83:547",
+            "width": 61,
+            "parentWidth": 51,
+            "height": 32,
+            "parentHeight": 22,
+            "x": -5,
+            "y": -5,
+            "strokeWeight": 2,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "ok": true
+          },
+          {
+            "id": "I83:551;91:552",
+            "parent": "83:551",
+            "width": 61,
+            "parentWidth": 51,
+            "height": 32,
+            "parentHeight": 22,
+            "x": -5,
+            "y": -5,
+            "strokeWeight": 2,
+            "constraints": {
+              "horizontal": "STRETCH",
+              "vertical": "STRETCH"
+            },
+            "ok": true
+          }
+        ],
+        "issues": []
+      }
+    ],
+    "visualReviewed": true,
+    "initialFix": "Focus outline stretched to label-overridden instance; not fixed to master width",
+    "officialMapping": false,
+    "extraPayment": false
+  },
+  "checks": {
+    "uiBuild": "pass",
+    "uiTypecheck": "pass",
+    "uiE2eTypecheck": "pass",
+    "changedTestLint": "pass",
+    "changedUiLint": "pass",
+    "fullNextBuild": "not run",
+    "otherBrowsers": "not run",
+    "screenReader": "not run",
+    "fullWCAG": "not certified",
+    "documentationDelta": {
+      "changedDocs": 53,
+      "errors": []
+    }
+  },
+  "screenshots": [
+    "2026-10-25-primary-contrast-mobile-dark.png",
+    "2026-10-25-primary-contrast-desktop-light.png"
+  ],
+  "sources": [
+    "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+    "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html",
+    "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"
+  ],
+  "sourceHashes": {
+    "packages/tailwind-config/shared-styles.css": "d0f39ab01be8f9e994d40dbc799764e4aa2e45aa98ceba659ee2e3438170c468",
+    "packages/ui/lib/button-variants.ts": "5a1d64a3d84bc67c2eb31d03f1eda8552c6a403b0d36f2c63eca7aea1b0fc427",
+    "packages/ui/components/ui/badge.tsx": "2064e3cd4fccd6a8670cca0ca6e17462b2e4bf526d27fd9b4b1390e3e8217184",
+    "apps/docs/ui-e2e/helpers/solid-contrast.ts": "782ccec0b84419cf2df5648e013555dd290165778f20e09d84a33d5e23c6028c",
+    "apps/docs/ui-e2e/fixtures/primary-contrast.tsx": "98871fb36da028a727de9a87aa6bd14143eb141c41cc3ec95fb2590c75b6dee5",
+    "apps/docs/ui-e2e/primary-contrast.spec.ts": "cf9d14e18753ba116fccd7365526de709baee64cdf8be51f5cd107ef905ca9f5",
+    "apps/docs/e2e/primary-action-contrast.spec.ts": "8a7b7c4279ac22cfab8337c6e83cd7a485cab13a5f0688dfc42695a2e38b5519"
+  }
+}
