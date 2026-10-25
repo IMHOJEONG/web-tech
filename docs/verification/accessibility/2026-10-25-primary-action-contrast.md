@@ -54,6 +54,21 @@ Chromium의 위 대상에 대한 회귀이며 전 사이트 WCAG 인증이나 �
 
 일반 작은 글자4.5:1과 의미 있는 비텍스트 상태 표시3:1 기준은 [W3C Contrast Minimum](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)·[Non-text Contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html)을 따른다. [Focus Visible](https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html)의 목적을 실제 키보드 동작과 함께 확인했다. 다른 색상·variant의 대비는 별도 점검한다.
 
+## Main 기반 PR 분리·후속 검증
+
+원래 모션 브랜치를 main과 비교하면41개 파일이 포함돼, 최신 main `4e80275`에서 새 `codex/docs-primary-contrast-20261025` 브랜치에 이번 커밋만 옮겼다. 분리한 코드 커밋은 `2902044779b81a884206bbd0efbe282c910a2af1`이다. 코드/테스트7개는 원래 `d660f4bc`와 동일하며 목차3개만 main의 최신 항목을 유지하도록 충돌을 해결했다. 다른 모션·최근 글 문구·미디어·초안은 포함하지 않았다.
+
+main의 lockfile 그대로 frozen 설치하고 깨끗한 코드 커밋에서 공용 UI 전체68개(외부 설치 소비자·Sidebar hydration 포함)와 실제 블로그12개, 총80개를 다시 통과했다. UI build/typecheck·UI E2E 타입과 변경 파일 ESLint도 통과했다. 실제 앱 검사는 별도3123 포트를 사용하고 종료했으며, 사용자가 보고 있던 기존3001 서버는 건드리지 않았다.
+
+```sh
+mise exec -- pnpm install --frozen-lockfile --ignore-scripts
+mise exec -- pnpm --filter @web-tech/ui build
+mise exec -- pnpm --filter docs exec playwright test --config=playwright.ui.config.ts --reporter=json
+DOCS_E2E_PORT=3123 mise exec -- pnpm --filter docs exec playwright test primary-action-contrast.spec.ts shell-focus-contrast.spec.ts --reporter=json
+```
+
+새 표본·테스트 목록·대비 값은 같은 artifact의 `mainBasedPrVerification`에 별도 보존한다. 앞선70개와 캡처는 원래 작업 트리에서의 결과로 유지하며 main 검증으로 바꾸지 않는다. 이 후속 검사도 Chromium이며 production 빌드·운영 배포·전체 WCAG 인증은 아니다. 원격 CI는 PR의 같은 head SHA에서 별도로 확인한다.
+
 ## 관련 문서
 
 - [토큰 사용 정책](../../architecture/docs-design-token-usage-policy.md#primary-대비-기준)

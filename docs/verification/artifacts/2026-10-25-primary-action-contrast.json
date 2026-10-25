@@ -1,5 +1,734 @@
 {
   "date": "2026-10-25",
+  "mainBasedPrVerification": {
+    "base": "4e80275e5f78863687b78e237c4c6c5e1577641c",
+    "sourceCommit": "2902044779b81a884206bbd0efbe282c910a2af1",
+    "originalCommit": "d660f4bcaf7a6f3f37afe0073ae22cb072bfee5e",
+    "branch": "codex/docs-primary-contrast-20261025",
+    "workingTreeCleanBeforeTests": true,
+    "sourceAndTestFilesIdenticalToOriginal": true,
+    "port": 3123,
+    "remoteApiDisabled": true,
+    "ui": {
+      "stats": {
+        "startTime": "2026-10-25T13:32:20.762Z",
+        "duration": 56447.968,
+        "expected": 68,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "cases": [
+        {
+          "name": "cn compatibility: conditional inputs",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: spacing override",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: directional spacing",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: size override",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: one dimension override",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: responsive",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: dark mode",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: data attributes",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: important modifiers",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: arbitrary widths",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: CSS variable width",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: SVG selector",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: surface tokens",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: focus ring",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: non-Tailwind classes",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: conditional inputs",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: spacing override",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: directional spacing",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: size override",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: one dimension override",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: responsive",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: dark mode",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: data attributes",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: important modifiers",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: arbitrary widths",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: CSS variable width",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: SVG selector",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: surface tokens",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: focus ring",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cn compatibility: non-Tailwind classes",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "packed UI retains theme, keyboard, tooltip relation and panel focus",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "packed UI retains theme, keyboard, tooltip relation and panel focus",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "primary text retains AA contrast in default and hover states",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "primary actions retain keyboard focus, activation and disabled semantics",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "primary text retains AA contrast in default and hover states",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "primary actions retain keyboard focus, activation and disabled semantics",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "shared UI uses Base UI subpaths without direct Radix primitives",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "Button sizes retain defaults and allow explicit touch target overrides",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "Button preserves keyboard activation and disabled semantics while styled links stay links",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "render composes refs and click handlers without accidental form submission",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "controlled Tooltip preserves existing descriptions and cleans its relation on close",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "cancelled and disabled Tooltips do not expose a dangling description",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "Badge exposes variants and preserves token colors and link semantics",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "Tooltip respects the outer provider hover delay",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "Tooltip supports immediate default hover and keyboard focus",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "Sidebar supplies the Tooltip provider for collapsed menu buttons",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "Sidebar render preserves anchor semantics without nested buttons",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "Input, Collapsible and Separator retain public behavior",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "shared UI uses Base UI subpaths without direct Radix primitives",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "Button sizes retain defaults and allow explicit touch target overrides",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "Button preserves keyboard activation and disabled semantics while styled links stay links",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "render composes refs and click handlers without accidental form submission",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "controlled Tooltip preserves existing descriptions and cleans its relation on close",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "cancelled and disabled Tooltips do not expose a dangling description",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "Badge exposes variants and preserves token colors and link semantics",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "Tooltip respects the outer provider hover delay",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "Tooltip supports immediate default hover and keyboard focus",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "Sidebar supplies the Tooltip provider for collapsed menu buttons",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "Sidebar render preserves anchor semantics without nested buttons",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "Input, Collapsible and Separator retain public behavior",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "Sidebar hydrates without mismatch at 390px and tracks breakpoint changes",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "Sidebar hydrates without mismatch at 767px and tracks breakpoint changes",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "Sidebar hydrates without mismatch at 768px and tracks breakpoint changes",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "Sidebar hydrates without mismatch at 1280px and tracks breakpoint changes",
+          "project": "light",
+          "status": "expected"
+        },
+        {
+          "name": "Sidebar hydrates without mismatch at 390px and tracks breakpoint changes",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "Sidebar hydrates without mismatch at 767px and tracks breakpoint changes",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "Sidebar hydrates without mismatch at 768px and tracks breakpoint changes",
+          "project": "dark",
+          "status": "expected"
+        },
+        {
+          "name": "Sidebar hydrates without mismatch at 1280px and tracks breakpoint changes",
+          "project": "dark",
+          "status": "expected"
+        }
+      ]
+    },
+    "app": {
+      "stats": {
+        "startTime": "2026-10-25T13:34:23.157Z",
+        "duration": 29391.221999999998,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "name": "light: landing primary CTA contrast and keyboard navigation",
+          "project": "chromium-mobile",
+          "status": "expected"
+        },
+        {
+          "name": "dark: landing primary CTA contrast and keyboard navigation",
+          "project": "chromium-mobile",
+          "status": "expected"
+        },
+        {
+          "name": "light: landing primary CTA contrast and keyboard navigation",
+          "project": "chromium-tablet",
+          "status": "expected"
+        },
+        {
+          "name": "dark: landing primary CTA contrast and keyboard navigation",
+          "project": "chromium-tablet",
+          "status": "expected"
+        },
+        {
+          "name": "light: landing primary CTA contrast and keyboard navigation",
+          "project": "chromium-desktop",
+          "status": "expected"
+        },
+        {
+          "name": "dark: landing primary CTA contrast and keyboard navigation",
+          "project": "chromium-desktop",
+          "status": "expected"
+        },
+        {
+          "name": "light: shell focus, contrast and landmark names",
+          "project": "chromium-mobile",
+          "status": "expected"
+        },
+        {
+          "name": "dark: shell focus, contrast and landmark names",
+          "project": "chromium-mobile",
+          "status": "expected"
+        },
+        {
+          "name": "light: shell focus, contrast and landmark names",
+          "project": "chromium-tablet",
+          "status": "expected"
+        },
+        {
+          "name": "dark: shell focus, contrast and landmark names",
+          "project": "chromium-tablet",
+          "status": "expected"
+        },
+        {
+          "name": "light: shell focus, contrast and landmark names",
+          "project": "chromium-desktop",
+          "status": "expected"
+        },
+        {
+          "name": "dark: shell focus, contrast and landmark names",
+          "project": "chromium-desktop",
+          "status": "expected"
+        }
+      ],
+      "measurements": [
+        {
+          "project": "chromium-mobile",
+          "theme": "light",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "normal": {
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "hover": {
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "focus": {
+            "ratio": 16.239884181860916,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          },
+          "focusText": {
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          }
+        },
+        {
+          "project": "chromium-mobile",
+          "theme": "dark",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "normal": {
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "hover": {
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "focus": {
+            "ratio": 15.559587016098694,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(237, 237, 237)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          },
+          "focusText": {
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(237, 237, 237)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          }
+        },
+        {
+          "project": "chromium-tablet",
+          "theme": "light",
+          "viewport": {
+            "width": 768,
+            "height": 1024
+          },
+          "normal": {
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "hover": {
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "focus": {
+            "ratio": 16.239884181860916,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          },
+          "focusText": {
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          }
+        },
+        {
+          "project": "chromium-tablet",
+          "theme": "dark",
+          "viewport": {
+            "width": 768,
+            "height": 1024
+          },
+          "normal": {
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "hover": {
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "focus": {
+            "ratio": 15.559587016098694,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(237, 237, 237)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          },
+          "focusText": {
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(237, 237, 237)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          }
+        },
+        {
+          "project": "chromium-desktop",
+          "theme": "light",
+          "viewport": {
+            "width": 1280,
+            "height": 800
+          },
+          "normal": {
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "hover": {
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "focus": {
+            "ratio": 16.239884181860916,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          },
+          "focusText": {
+            "ratio": 6.0106464535636075,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          }
+        },
+        {
+          "project": "chromium-desktop",
+          "theme": "dark",
+          "viewport": {
+            "width": 1280,
+            "height": 800
+          },
+          "normal": {
+            "ratio": 6.395822224701173,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 1,
+            "outlineColor": "oklab(0.704878 0.125924 0.137906 / 0.160784)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "hover": {
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(23, 23, 23)",
+            "outlineStyle": "none",
+            "outlineWidth": "3px",
+            "outlineOffset": "0px"
+          },
+          "focus": {
+            "ratio": 15.559587016098694,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(237, 237, 237)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          },
+          "focusText": {
+            "ratio": 5.972458496887835,
+            "color": "rgb(23, 23, 23)",
+            "backgroundColor": "rgb(249, 115, 22)",
+            "opacity": 0.96,
+            "outlineColor": "rgb(237, 237, 237)",
+            "outlineStyle": "solid",
+            "outlineWidth": "2px",
+            "outlineOffset": "3px"
+          }
+        }
+      ]
+    },
+    "typecheck": "UI and UI E2E passed",
+    "changedFileLint": "passed",
+    "productionBuild": "not run",
+    "remoteCI": "not yet run"
+  },
   "timezone": "Asia/Seoul",
   "issue": "KAN-36",
   "head": "ddce1ec34d287732d4dc0661fa2db5e2ad1d8a40",
