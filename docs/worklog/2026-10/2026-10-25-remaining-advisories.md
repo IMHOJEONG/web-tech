@@ -33,3 +33,11 @@ PR #60과 이번 패치를 결합한 lockfile·audit 및 Linux/운영 검증은 
 ## Next
 
 이번 별도 PR의 새 head 기준 CI·CodeQL·리뷰를 확인한다. PR #60 병합 뒤에는 기준선 갱신과 lock 재검증이 필요하며 병합·배포는 별도 승인 전 실행하지 않는다.
+
+### 후속 승인과 두 패치 통합
+
+사용자가 두 PR 병합과 자동 운영 배포·이미지 게시를 후속 승인했다. PR #60을 main `51cdb40`에 squash 병합한 뒤 PR #61에 main을 통합했고 TODO·목차 4곳의 충돌은 두 기록을 보존해 해결했다. 최초 분리 검증·미배포 기록은 과거 상태로 유지한다. 수동 배포·NAS 교체는 승인 범위에서 제외한다.
+
+결합 lock은 변경 없이 frozen 공급망 검사를 통과했고 전체/production audit 0건, repo 153·docs lib 285·콘텐츠 계약 22·radar lib 32·radar backend 48·docs backend 13+34·production E2E 154개와 peer/catalog 검사를 통과했다. 오프라인 metadata 부족·sandbox loopback EPERM의 최초 실패와 후속 성공은 검증 보고서에 구분했다. 새 구조·공개 계약 변경이 아니므로 ADR을 추가하지 않는다.
+
+PR #60의 자동 배포·Railway 공개 health·이미지 게시를 확인했다. PR #61은 통합 커밋을 푸시해 새 CI·CodeQL·리뷰를 확인한 후 같은 squash 사전검사로 병합한다. 실제 최종 main·배포와 NAS 미교체 경계는 기존 Jira·Confluence에 후속 기록·재조회하며 현재 로컬 결과만으로 전체 운영 해소를 선언하지 않는다.

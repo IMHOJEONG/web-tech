@@ -112,6 +112,27 @@ PR #61 최초 head `a0c728e`의 CI 13개 job은 성공했으나 CodeQL 집계는
 
 커밋 분리 중에도 신규 16개·저장소 147개를 재실행해 통과했다. 기존 pre-commit의 읽기 전용 포맷·문서 검사와 commit-msg 검사를 유지했고, 설치 시 prepare 안내와 실제 커밋 훅 동작은 구분한다. 사용자 승인은 해당 브랜치 푸시·main 대상 별도 PR 생성까지다. 자동 Preview·PR build와 운영 배포를 구분하며, 새 head의 원격 CI·CodeQL·리뷰는 실제 결과를 확인하기 전까지 미검증이다. 원격 커밋·PR 연결은 Jira·Confluence의 같은 작업 기록에 남긴다.
 
+### 승인된 main 병합과 결합 검증
+
+후속 사용자 승인은 PR #60·#61의 squash 병합과 그에 따른 Vercel·Railway 자동 배포·docs-backend 이미지 게시까지다. 수동 배포·NAS 컨테이너 교체는 제외한다. 앞선 미병합·배포 보류 기록은 당시 범위이며 이번 승인으로 자동 실행 범위만 변경됐다.
+
+PR #60은 `51cdb40de7577090950d0c6b3024bee6fdb2222c`로 main에 실제 병합됐다. PR #61의 기존 head `9c7ce8c`에 이 main을 통합했다. 충돌은 TODO·검증/증거/월별 목차 4곳으로 양쪽 문서 링크를 보존했고, 자동 병합된 workspace·lock은 frozen install로 검증했다. 의존성 재해석이나 추가 버전 변경은 하지 않았다. [결합 검사 원본](../artifacts/2026-10-25-security-combined.json)에 입력 SHA·lock hash·감사 metadata·실행 결과를 남겼다.
+
+| 결합 검사             | 결과                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| 전체·production audit | 각각 종료 0, Critical·High·Moderate·Low 모두 0건. 기존 분리 감사 13→3과 구분               |
+| frozen install        | 1,643개 lock entry 공급망 검사 통과·해석 생략·lock 변경 없음                               |
+| 저장소·콘텐츠         | repo 153개, docs lib 285개, 콘텐츠 계약 22개, vuln-radar lib 32개 통과                     |
+| 백엔드                | docs-backend check 성공(단위 13·API 34·lint·타입·build), vuln-radar-backend 단위 48개 성공 |
+| production E2E        | 결합된 Next 16.4.3에서 모바일/데스크톱 154개 통과(1.6분)                                   |
+| 의존성 계약           | peer 0건·catalog 11개 manifest 검사 통과                                                   |
+
+재현은 위 명령에서 기준 main을 `51cdb40`과 결합된 작업 트리로 바꾸고 실행했다. 첫 `install --frozen-lockfile --offline`은 @next/env 캐시 metadata 부족으로 실패했고 온라인 frozen 설치에서 공급망 검증을 그대로 유지해 통과했다. 제한된 sandbox의 최초 production E2E도 loopback listen EPERM으로 시작하지 못했다. 허용된 로컬 listener에서 같은 검사로 재실행했으며 assertion·timeout·retry를 바꾸지 않았다. 기존 콘텐츠 경고·의도적 503 대조 로그를 숨기지 않았다.
+
+PR #61의 통합 전 head는 CI 13개 job·CodeQL이 성공했고, High #42는 fixed·관련 스레드 자동 해결 상태를 확인했다. CodeRabbit은 실제 `9c7ce8c`까지 검토해 actionable 0개였으며 lockfile 제외·주석 비율 권고는 한계로 유지한다. **통합 커밋의 새 CI·CodeQL·리뷰는 별도 재검증 대상**이며 이 로컬 결과로 대체하지 않는다.
+
+PR #60의 자동 실행에서는 GitHub의 `Production – web-tech`·`Production – vuln-radar` 환경 배포 성공과 Railway development 서비스의 동일 SHA·SUCCESS/RUNNING·`GET /api/health` status ok를 확인했다. 최초 `/health` 요청은 전역 `/api` prefix를 누락해 404였으며 실제 라우트 재조회와 구분한다. [main 이미지 workflow](https://github.com/IMHOJEONG/web-tech/actions/runs/40159712576)는 linux/amd64 이미지 `sha-51cdb40de7577090950d0c6b3024bee6fdb2222c`의 게시와 digest `sha256:b4cf6670fc0facc8b9678ff03064690c863090a2a8caad188607923ef77bb393`를 기록했다. 이는 NAS의 실행 이미지 교체나 PR #61 운영 적용을 뜻하지 않는다. 두 번째 PR의 실제 병합·새 main CI·배포 식별자는 Jira·Confluence의 같은 KAN-35 기록에서 후속 확인한다.
+
 ## 관련 문서
 
 - [작업 기록](../../worklog/2026-10/2026-10-25-remaining-advisories.md)

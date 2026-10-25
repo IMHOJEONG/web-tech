@@ -25,9 +25,19 @@ test('a healthy delayed RSC response does not consume the post-commit UI budget'
             )
                 return route.continue()
             const response = await route.fetch()
+            const body = await response.body()
+            const headers = { ...response.headers() }
+            // APIResponse exposes decoded bytes, not the upstream wire framing.
+            for (const name of [
+                'content-encoding',
+                'content-length',
+                'transfer-encoding',
+                'connection',
+            ])
+                delete headers[name]
             observed()
             await gate
-            await route.fulfill({ response })
+            await route.fulfill({ status: response.status(), headers, body })
         }
     )
     const navigation = openArticleFromCard(page, card, info)
