@@ -1,0 +1,23 @@
+{
+  "checkedOn": "2026-10-25",
+  "timezone": "Asia/Seoul",
+  "baselineCommit": "4e80275e5f78863687b78e237c4c6c5e1577641c",
+  "changedBodyStyleBlob": "f05b7cb8a03b42036ab6aec3ca1cad7b3ceada48",
+  "input": {
+    "body": "# Original title",
+    "metadata": { "status": "published" }
+  },
+  "baselineResult": {
+    "failures": [
+      "line 1: h1 is reserved for frontmatter title",
+      "first heading should start at h2 or h3"
+    ],
+    "warnings": []
+  },
+  "changedEsmResult": {
+    "failures": [],
+    "warnings": [
+      "line 1: body h1 may duplicate frontmatter title; prefer h2 or h3"
+    ]
+  }
+}

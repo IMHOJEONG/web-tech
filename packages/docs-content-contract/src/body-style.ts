@@ -142,7 +142,9 @@ export function getMarkdownBodyStyleIssues(
     headings.push({ level, line: index + 1 });
 
     if (level === 1) {
-      failures.push(`line ${index + 1}: h1 is reserved for frontmatter title`);
+      warnings.push(
+        `line ${index + 1}: body h1 may duplicate frontmatter title; prefer h2 or h3`,
+      );
     }
   }
 
@@ -160,7 +162,7 @@ export function getMarkdownBodyStyleIssues(
     if (isPublished) {
       warnings.push("published content should include at least one heading");
     }
-  } else if (headings[0]!.level !== 2 && headings[0]!.level !== 3) {
+  } else if (headings[0]!.level > 3) {
     failures.push("first heading should start at h2 or h3");
   }
 

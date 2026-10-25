@@ -1,4 +1,18 @@
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
+import {
+    copyFile,
+    mkdir,
+    mkdtemp,
+    readFile,
+    realpath,
+    rm,
+    symlink,
+    writeFile,
+} from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import test from 'node:test'
 import { getContentStyleIssues } from './validate-content-style.mjs'
 import { getMarkdownBodyStyleIssues } from '@web-tech/docs-content-contract/body-style'
@@ -45,16 +59,87 @@ console.log('ok')
     assert.deepEqual(issues.warnings, [])
 })
 
-test('rejects h1 headings and heading level jumps', () => {
+test('warns for body h1 without blocking or rewriting local content', () => {
+    const source =
+        '---\ntitle: Metadata title\nstatus: published\n---\n# Original title\n\n## Section\n'
+    const issues = getContentStyleIssues(source, { status: 'published' })
+    assert.deepEqual(issues.failures, [])
+    assert.deepEqual(issues.warnings, [
+        'line 1: body h1 may duplicate frontmatter title; prefer h2 or h3',
+    ])
+    assert.match(source, /\n# Original title\n/)
+    assert.doesNotMatch(source, /\n## Original title\n/)
+})
+
+test('real local CLI exits zero for h1 warnings but still fails on HTML comments', async () => {
+    const root = await realpath(await mkdtemp(join(tmpdir(), 'docs-h1-style-')))
+    try {
+        for (const directory of ['scripts', 'data', 'category']) {
+            await mkdir(join(root, directory))
+        }
+        for (const name of [
+            'validate-content-style.mjs',
+            'validate-content.mjs',
+        ]) {
+            await copyFile(
+                new URL(name, import.meta.url),
+                join(root, 'scripts', name)
+            )
+        }
+        await symlink(
+            fileURLToPath(new URL('../node_modules', import.meta.url)),
+            join(root, 'node_modules'),
+            'dir'
+        )
+        const file = join(root, 'data', 'body-title.mdx')
+        const source =
+            '---\ntitle: Metadata title\nslug: body-title\nstatus: published\n---\n# Original title\n\n## Section\n'
+        await writeFile(file, source)
+        const run = () =>
+            spawnSync(
+                process.execPath,
+                [join(root, 'scripts', 'validate-content-style.mjs')],
+                {
+                    cwd: root,
+                    encoding: 'utf8',
+                    timeout: 10000,
+                    maxBuffer: 64 * 1024,
+                }
+            )
+        const warningOnly = run()
+        assert.ifError(warningOnly.error)
+        assert.equal(warningOnly.status, 0, warningOnly.stderr)
+        assert.match(
+            warningOnly.stderr,
+            /body h1 may duplicate frontmatter title/
+        )
+        assert.match(
+            warningOnly.stdout,
+            /Content style validation passed for 1 files/
+        )
+        assert.equal(await readFile(file, 'utf8'), source)
+
+        await writeFile(file, source + '<!-- writing -->\n')
+        const invalid = run()
+        assert.ifError(invalid.error)
+        assert.equal(invalid.status, 1, invalid.stderr)
+        assert.match(invalid.stderr, /HTML comments are not allowed/)
+    } finally {
+        await rm(root, { recursive: true, force: true })
+    }
+})
+
+test('h1 warnings preserve heading level jump failures', () => {
     const issues = getContentStyleIssues(`# 제목
 
 #### 너무 깊은 제목
 `)
 
     assert.deepEqual(issues.failures, [
-        'line 1: h1 is reserved for frontmatter title',
-        'first heading should start at h2 or h3',
         'line 3: heading level jumps from h1 to h4',
+    ])
+    assert.deepEqual(issues.warnings, [
+        'line 1: body h1 may duplicate frontmatter title; prefer h2 or h3',
     ])
 })
 

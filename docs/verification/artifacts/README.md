@@ -1,5 +1,6 @@
 # 검증 원본 증거
 
+- [10-25 H1 동일 입력 전후 판정](2026-10-25-body-h1-warning.json): [검증 보고서](../content/2026-10-25-body-h1-warning.md). 기준 main의 차단 2개와 수정본의 경고 1개 대조, 운영 미배포.
 - [10-25 UI·전송 계약 분리](2026-10-25-ui-transport-contract.json): [보안 PR 후속 검증](../security/2026-10-25-remaining-advisories.md#승인된-ui전송-검사-분리). 로컬 44개 통과·본문 표시 중 pending·200 이후 중단·완료 대조. 실제 중단 호출자 해소를 뜻하지 않음.
 
 - [10-25 두 보안 PR 결합 감사·회귀](2026-10-25-security-combined.json): [통합 검증](../security/2026-10-25-remaining-advisories.md#승인된-main-병합과-결합-검증). Next main 병합 후 전체/production audit 0건·회귀 153개·production E2E 154개, PR #61 병합 전 로컬 증거.
