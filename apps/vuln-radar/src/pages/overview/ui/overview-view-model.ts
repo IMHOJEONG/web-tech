@@ -1,76 +1,59 @@
-import type {
-  FeedResponse,
-  IngestStatusResponse,
-  KevResponse,
-} from "@/shared/api/radar";
+import type { IngestStatusResponse, KevResponse } from "@/shared/api/radar";
 
 export interface OverviewMatrixItem {
   cveId: string;
   title: string;
   priority: "P0" | "P1" | "P2" | "P3";
-  severity: "critical" | "high" | "medium" | "low";
-  score: number;
-  statusLabel: string;
+  epssScore: number | null;
 }
 
-export function buildKevMatrixItems(feed: FeedResponse, kev?: KevResponse) {
-  const feedByCveId = new Map(feed.items.map((item) => [item.cveId, item]));
-  const kevRows =
-    kev?.items.slice(0, 6).map((item) => {
-      const feedItem = feedByCveId.get(item.cveId);
-
-      return {
-        cveId: item.cveId,
-        title: item.title,
-        priority: item.priority,
-        severity: feedItem?.severity ?? "high",
-        score: feedItem?.epssScore ?? 0.5,
-        statusLabel: getStatusLabel(item.priority),
-      } satisfies OverviewMatrixItem;
-    }) ?? [];
-
-  if (kevRows.length > 0) {
-    return kevRows;
+export function buildKevMatrixItems(kev?: KevResponse): OverviewMatrixItem[] {
+  const rows = new Map<string, OverviewMatrixItem>();
+  for (const item of kev?.items ?? []) {
+    if (rows.has(item.cveId)) continue;
+    rows.set(item.cveId, {
+      cveId: item.cveId,
+      title: item.title,
+      priority: item.priority,
+      epssScore: item.epssScore ?? null,
+    });
+    if (rows.size === 6) break;
   }
-
-  return feed.items.slice(0, 6).map((item) => ({
-    cveId: item.cveId,
-    title: item.title,
-    priority: item.priority,
-    severity: item.severity,
-    score: item.epssScore,
-    statusLabel: getStatusLabel(item.priority),
-  }));
+  return [...rows.values()];
 }
 
 export function getCriticalCount(
-  status: IngestStatusResponse,
+  status: IngestStatusResponse | undefined,
   overviewCards: { id: string; value: number }[],
 ) {
   return (
     overviewCards.find((card) => card.id === "p0-open")?.value ??
-    status.counts.p0
+    status?.counts.p0
   );
 }
 
 export function getP1Count(
-  status: IngestStatusResponse,
+  status: IngestStatusResponse | undefined,
   overviewCards: { id: string; value: number }[],
 ) {
   return (
     overviewCards.find((card) => card.id === "p1-open")?.value ??
-    status.counts.p1
+    status?.counts.p1
   );
 }
 
-export function getTrackedDelta(
-  status: IngestStatusResponse,
+export function getTrackedCount(
+  status: IngestStatusResponse | undefined,
   overviewCards: { id: string; value: number }[],
 ) {
   return (
-    overviewCards.find((card) => card.id === "kev-new")?.value ??
-    status.counts.kevAdvisories
+    overviewCards.find((card) => card.id === "total-vulnerabilities")?.value ??
+    status?.counts.vulnerabilities
   );
+}
+
+export function getKevCount(overviewCards: { id: string; value: number }[]) {
+  return overviewCards.find((card) => card.id === "kev-new")?.value;
 }
 
 export function formatDataSourceLabel(source: {
@@ -92,49 +75,23 @@ export function formatDataSourceLabel(source: {
   return "Database";
 }
 
-export function formatLargeMetric(value: number) {
+export function formatLargeMetric(value: number | undefined) {
+  if (value === undefined) return "—";
   return new Intl.NumberFormat("en-US").format(value);
 }
 
-export function formatRelativeTime(value: string | null) {
-  if (!value) {
-    return "N/A";
-  }
-
-  const timestamp = new Date(value).getTime();
-  const deltaMinutes = Math.max(
-    0,
-    Math.round((Date.now() - timestamp) / 60_000),
-  );
-
-  if (deltaMinutes < 1) {
-    return "Just now";
-  }
-
-  if (deltaMinutes < 60) {
-    return `${deltaMinutes}m ago`;
-  }
-
-  const deltaHours = Math.round(deltaMinutes / 60);
-
-  if (deltaHours < 24) {
-    return `${deltaHours}h ago`;
-  }
-
-  return `${Math.round(deltaHours / 24)}d ago`;
-}
-
-function getStatusLabel(priority: "P0" | "P1" | "P2" | "P3") {
-  switch (priority) {
-    case "P0":
-      return "Escalated";
-    case "P1":
-      return "Investigating";
-    case "P2":
-      return "Monitoring";
-    case "P3":
-      return "Queued";
-    default:
-      return priority;
-  }
+export function formatRelativeTime(
+  value: string | null,
+  locale = "en",
+  now = Date.now(),
+) {
+  const elapsed = value ? now - Date.parse(value) : NaN;
+  if (!Number.isFinite(elapsed) || elapsed < 0) return "—";
+  if (elapsed < 60_000) return locale === "ko" ? "방금" : "Just now";
+  const relative = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
+  if (elapsed < 3_600_000)
+    return relative.format(-Math.floor(elapsed / 60_000), "minute");
+  if (elapsed < 86_400_000)
+    return relative.format(-Math.floor(elapsed / 3_600_000), "hour");
+  return relative.format(-Math.floor(elapsed / 86_400_000), "day");
 }

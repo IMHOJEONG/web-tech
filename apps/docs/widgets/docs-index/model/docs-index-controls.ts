@@ -9,6 +9,7 @@ import {
 export const DOCS_INDEX_SECTION_FILTERS = [
     { value: 'all', section: null, messageKey: 'all' },
     { value: 'web', section: 'Web', messageKey: 'web' },
+    { value: 'mobile', section: 'Mobile', messageKey: 'mobile' },
     { value: 'uiux', section: 'UI/UX', messageKey: 'uiux' },
     { value: 'backend', section: 'Backend', messageKey: 'backend' },
     {

@@ -90,9 +90,7 @@ for (const ending of [
                 .poll(async () => {
                     const result = await summary()
                     return ending === 'navigate-pending'
-                        ? result.events.some(
-                              (event) => event.errorCategory === 'stream'
-                          )
+                        ? result.responseClosed
                         : result.responseFinished
                 })
                 .toBe(true)

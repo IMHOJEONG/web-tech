@@ -11,7 +11,7 @@ interface OverviewThreatStreamPanelProps {
 export function OverviewThreatStreamPanel({
   feed,
 }: OverviewThreatStreamPanelProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const streamItems = feed.items.slice(0, 4);
 
   return (
@@ -24,11 +24,16 @@ export function OverviewThreatStreamPanel({
           <Radar size={18} strokeWidth={1.9} className="text-radar-success" />
         </div>
         <span className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-radar-copy/72">
-          {t("overview.realTimeTelemetry")}
+          {t("overview.polledUpdates")}
         </span>
       </div>
 
       <div className="mt-5 grid gap-3">
+        {streamItems.length === 0 && (
+          <p className="text-sm leading-6 text-radar-copy/72">
+            {t("overview.streamEmpty")}
+          </p>
+        )}
         {streamItems.map((item) => (
           <Link
             key={item.cveId}
@@ -41,7 +46,7 @@ export function OverviewThreatStreamPanel({
               <span className={getSeverityClassName(item.severity)}>
                 {getSeverityLabel(t, item.severity)}
               </span>
-              <span>{formatRelativeTime(item.updatedAt)}</span>
+              <span>{formatRelativeTime(item.updatedAt, locale)}</span>
             </div>
             <strong className="mt-2 block text-[0.98rem] leading-6 text-white">
               {item.title}

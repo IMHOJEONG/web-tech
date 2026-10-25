@@ -27,23 +27,30 @@ const overviewCards: OverviewCard[] = [
   {
     id: 'p0-open',
     label: 'Open P0',
-    value: 2,
+    value: vulnerabilitySeeds.filter((item) => item.priority === 'P0').length,
     priority: 'P0',
-    deltaLabel: '+1 since last sync',
+    deltaLabel: 'Example P0 count, not database statistics',
   },
   {
     id: 'p1-open',
     label: 'Open P1',
-    value: 5,
+    value: vulnerabilitySeeds.filter((item) => item.priority === 'P1').length,
     priority: 'P1',
-    deltaLabel: '+2 since last sync',
+    deltaLabel: 'Example P1 count, not database statistics',
   },
   {
     id: 'kev-new',
-    label: 'New KEV',
-    value: 1,
+    label: 'KEV Matches',
+    value: vulnerabilitySeeds.filter((item) => item.isKev).length,
     priority: 'P1',
-    deltaLabel: 'CISA catalog changed today',
+    deltaLabel: 'Example KEV vulnerability count, not database statistics',
+  },
+  {
+    id: 'total-vulnerabilities',
+    label: 'Total vulnerabilities',
+    value: vulnerabilitySeeds.length,
+    priority: 'P3',
+    deltaLabel: 'Example data, not database statistics',
   },
 ];
 
@@ -137,6 +144,9 @@ const kevItems: KevItem[] = [
     cveId: 'CVE-2026-10001',
     title: 'Citrix NetScaler gateway auth bypass under active exploitation',
     priority: 'P0',
+    epssScore:
+      vulnerabilitySeeds.find((item) => item.cveId === 'CVE-2026-10001')
+        ?.epssScore ?? null,
     sourceUrl: 'https://www.cisa.gov/known-exploited-vulnerabilities-catalog',
     addedAt: '2026-05-18T05:30:00.000Z',
   },

@@ -5,6 +5,7 @@ import {
 } from '~/lib/editorial-metadata'
 import { getDocHref, getDocRoutePath } from '~/lib/get-doc-route'
 import { normalizeDocPath } from '~/lib/normalize-doc-path'
+import { getDocumentTaxonomy } from '~/lib/document-taxonomy'
 import { normalizeRemoteContent } from '~/lib/content-api-html'
 import {
     remoteMarkdownPathSchema,
@@ -280,16 +281,6 @@ export function normalizeRemoteSearchResult(
             fileName,
         }),
         contentSource: 'remote',
-        section: fileName.startsWith('data/shadcn/')
-            ? 'UI/UX'
-            : fileName.startsWith('category/fe/')
-              ? 'Web'
-              : fileName.startsWith('category/be/')
-                ? 'Backend'
-                : fileName.startsWith('category/computer-science/')
-                  ? 'Computer Science'
-                  : fileName.startsWith('category/infra/')
-                    ? 'Infrastructure'
-                    : 'Docs',
+        section: getDocumentTaxonomy(post).section,
     }
 }

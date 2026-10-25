@@ -1,5 +1,9 @@
 import { z } from "zod";
 import { getJson } from "@/shared/api/client";
+import {
+  ingestObservationSchema,
+  ingestSchedulerSchema,
+} from "./ingest-status";
 
 const radarPrioritySchema = z.enum(["P0", "P1", "P2", "P3"]);
 const radarDataSourceSchema = z.object({
@@ -149,6 +153,7 @@ const kevItemSchema = z.object({
   cveId: z.string(),
   title: z.string(),
   priority: radarPrioritySchema,
+  epssScore: z.number().min(0).max(1).nullable().optional(),
   sourceUrl: z.string().nullable(),
   addedAt: z.string(),
 });
@@ -181,6 +186,8 @@ const ingestSourceSchema = z.object({
 });
 
 const ingestStatusResponseSchema = z.object({
+  observation: ingestObservationSchema.optional(),
+  scheduler: ingestSchedulerSchema.optional(),
   checkedAt: z.string(),
   mode: z.literal("pull"),
   storage: z.enum(["database", "unavailable"]),

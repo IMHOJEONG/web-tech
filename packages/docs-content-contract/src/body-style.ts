@@ -8,12 +8,29 @@ export interface BodyStyleIssues {
   warnings: string[];
 }
 
-const HEADING_PATTERN = /^(#{1,6})\s+(.+?)\s*$/;
+const HEADING_PREFIX_PATTERN = /^(#{1,6})\s/;
 const CALLOUT_MARKER_PATTERN = /\[!([A-Za-z][A-Za-z0-9_-]*)\]/;
 const CALLOUT_BLOCKQUOTE_PATTERN = /^\s*>\s*\[!([A-Za-z][A-Za-z0-9_-]*)\]/;
 const SUPPORTED_CALLOUT_MARKERS = new Set(["NOTE", "TIP", "WARNING"]);
 const PLACEHOLDER_PATTERN = /\b(TODO|FIXME|lorem ipsum)\b|임시|테스트용/i;
 const PLACEHOLDER_SLUGS = new Set(["test", "sample", "todo", "draft"]);
+
+function getHeadingLevel(line: string): number | null {
+  const prefix = line.match(HEADING_PREFIX_PATTERN);
+  if (!prefix) return null;
+
+  // Trim separately so separator, content and trailing spaces never backtrack together.
+  const remainder = line.slice(prefix[0].length);
+  const content = remainder.trim();
+  if (content) {
+    if (/[\r\n\u2028\u2029]/.test(content)) return null;
+  } else {
+    // The old content group accepted whitespace, but not JS line terminators alone.
+    if (!/[^\r\n\u2028\u2029]/.test(remainder)) return null;
+  }
+
+  return prefix[1]!.length;
+}
 
 export function getMarkdownBodyStyleIssues(
   body: string,
@@ -116,13 +133,11 @@ export function getMarkdownBodyStyleIssues(
       }
     }
 
-    const headingMatch = line.match(HEADING_PATTERN);
+    const level = getHeadingLevel(line);
 
-    if (!headingMatch) {
+    if (level === null) {
       continue;
     }
-
-    const level = headingMatch[1]!.length;
 
     headings.push({ level, line: index + 1 });
 

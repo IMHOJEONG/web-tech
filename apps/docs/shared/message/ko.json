@@ -432,6 +432,7 @@
             "sections": {
                 "all": "전체",
                 "web": "Web",
+                "mobile": "Mobile",
                 "uiux": "UI/UX",
                 "backend": "Backend",
                 "infrastructure": "Infrastructure",
@@ -459,6 +460,7 @@
         },
         "sectionLabels": {
             "web": "Web",
+            "mobile": "Mobile",
             "uiux": "UI/UX",
             "backend": "Backend",
             "infrastructure": "Infrastructure",
@@ -467,6 +469,7 @@
         },
         "sectionDescriptions": {
             "web": "브라우저, 프론트엔드, 렌더링 관련 문서",
+            "mobile": "모바일 플랫폼, 터치 인터페이스와 앱 개발 관련 문서",
             "uiux": "인터페이스와 경험 설계 관련 문서",
             "backend": "서버 구조와 API 관점의 기술 노트",
             "infrastructure": "컨테이너, 배포, 관측성과 운영 관련 문서",

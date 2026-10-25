@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { openArticleFromCard } from './article-navigation'
 
-test('a healthy delayed RSC response does not consume the post-commit UI budget', async ({
+test('a delayed RSC navigation completes the UI independently of transport completion', async ({
     page,
 }, info) => {
     await page.goto('/ko/web')
@@ -25,9 +25,19 @@ test('a healthy delayed RSC response does not consume the post-commit UI budget'
             )
                 return route.continue()
             const response = await route.fetch()
+            const body = await response.body()
+            const headers = { ...response.headers() }
+            // APIResponse exposes decoded bytes, not the upstream wire framing.
+            for (const name of [
+                'content-encoding',
+                'content-length',
+                'transfer-encoding',
+                'connection',
+            ])
+                delete headers[name]
             observed()
             await gate
-            await route.fulfill({ response })
+            await route.fulfill({ status: response.status(), headers, body })
         }
     )
     const navigation = openArticleFromCard(page, card, info)
@@ -63,13 +73,17 @@ test('a healthy delayed RSC response does not consume the post-commit UI budget'
             event.event === 'response-headers' && event.rsc && !event.prefetch
     )
     expect(headers?.status).toBe(200)
-    expect(
-        report.events.some(
-            (event: { event: string; requestId: number }) =>
-                event.event === 'response-finished' &&
-                event.requestId === headers.requestId
-        )
-    ).toBe(true)
+    const committed = report.events.find(
+        (event: { event: string }) => event.event === 'url-committed'
+    )
+    const visible = report.events.find(
+        (event: { event: string }) => event.event === 'body-visible'
+    )
+    expect(committed).toBeDefined()
+    expect(visible).toBeDefined()
+    expect(visible.ms).toBeGreaterThanOrEqual(committed.ms)
+    // The unchanged report retains finished, failed and pending transport evidence.
+    expect(report.droppedEvents).toBe(0)
 })
 
 test('an HTTP failure is not mistaken for successful article navigation', async ({

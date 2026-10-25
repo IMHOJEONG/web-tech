@@ -1,0 +1,133 @@
+{
+  "startedAt": "2026-10-22T04:32:34.466Z",
+  "finishedAt": "2026-10-22T04:32:59.485Z",
+  "baseSha": "bffcf25d8d4938b41f9bc77a70b4bca7bfc90fa2",
+  "workingTreeDirty": true,
+  "runnerSha256": "28209c4a0de8823211a2d9adfea1ecce8178fc8138a96309826c4a7967d8d547",
+  "cleanupRunnerSha256": "7464786bfd20b1ea3a887d9fb4242682c69f75a330c35108680aa2abcfb0f60d",
+  "node": "v24.12.0",
+  "databaseImage": "postgres:16-alpine",
+  "browser": "151.0.7922.34",
+  "endpoints": {
+    "backend": "http://127.0.0.1:4310",
+    "frontend": "http://127.0.0.1:4311"
+  },
+  "scope": "isolated PostgreSQL fixtures + compiled Nest + production Vite preview + local deployment proxy handler invocation; no upstream ingestion or deployment",
+  "results": [
+    {
+      "name": "server API token is absent from built browser assets",
+      "status": "passed",
+      "durationMs": 2
+    },
+    {
+      "name": "actual Nest auth rejects absent and invalid tokens; real proxy supplies server token",
+      "status": "passed",
+      "durationMs": 68
+    },
+    {
+      "name": "Postgres feed/detail reliability and supporting endpoints match frontend contracts",
+      "status": "passed",
+      "durationMs": 60
+    },
+    {
+      "name": "deployment proxy handler maps rewritten feed/detail paths and preserves backend 401",
+      "status": "passed",
+      "durationMs": 13
+    },
+    {
+      "name": "overview parses all six real API contracts and renders the KEV matrix",
+      "status": "passed",
+      "durationMs": 499
+    },
+    {
+      "name": "overview cold failures are isolated and retries target one API at 1280px",
+      "status": "passed",
+      "durationMs": 9765
+    },
+    {
+      "name": "overview cached data survives each API failure and recovers at 1280px",
+      "status": "failed",
+      "durationMs": 8180
+    }
+  ],
+  "fixtureSummary": {
+    "count": 3,
+    "items": [
+      {
+        "cveId": "CVE-2099-91001",
+        "reliability": {
+          "level": "high",
+          "confidenceScore": 71,
+          "freshness": {
+            "status": "fresh",
+            "ingestedAt": "2026-10-22T04:32:38.587Z",
+            "upstreamModifiedAt": "2026-10-22T04:32:37.504Z",
+            "verifiedAt": "2026-10-22T04:32:38.587Z"
+          },
+          "evidenceCompleteness": {
+            "score": 71,
+            "missing": ["affected", "mitigation"]
+          },
+          "conflicts": []
+        }
+      },
+      {
+        "cveId": "CVE-2099-91003",
+        "reliability": {
+          "level": "low",
+          "confidenceScore": 43,
+          "freshness": {
+            "status": "fresh",
+            "ingestedAt": "2026-10-22T04:32:38.602Z",
+            "upstreamModifiedAt": "2026-10-22T04:32:35.504Z",
+            "verifiedAt": "2026-10-22T04:32:38.602Z"
+          },
+          "evidenceCompleteness": {
+            "score": 43,
+            "missing": ["kev", "advisory", "affected", "mitigation"]
+          },
+          "conflicts": []
+        }
+      },
+      {
+        "cveId": "CVE-2099-91002",
+        "reliability": {
+          "level": "low",
+          "confidenceScore": 0,
+          "freshness": {
+            "status": "fresh",
+            "ingestedAt": "2026-10-22T04:32:38.598Z",
+            "upstreamModifiedAt": "2026-10-22T04:32:36.504Z",
+            "verifiedAt": "2026-10-22T04:32:38.598Z"
+          },
+          "evidenceCompleteness": {
+            "score": 0,
+            "missing": [
+              "cvss",
+              "epss",
+              "kev",
+              "advisory",
+              "watchlist",
+              "affected",
+              "mitigation"
+            ]
+          },
+          "conflicts": []
+        }
+      }
+    ]
+  },
+  "screenshots": {
+    "partial-recovered-1280": "2026-10-22T04-32-34-466Z-vuln-radar-partial-recovered-1280.png"
+  },
+  "cleanup": {
+    "browserClosed": true,
+    "backendStopped": true,
+    "frontendStopped": true,
+    "databaseDisconnected": true,
+    "databaseRemoved": true,
+    "temporaryFilesRemoved": true
+  },
+  "cleanupErrors": [],
+  "error": "expect(locator).toContainText(expected) failed\n\nLocator: locator('[data-overview-panel=\"ingest\"]')\nTimeout: 5000ms\n- Expected substring  - 32\n+ Received string     +  1\n\n- 수집 상태\n- 실행 이력 미확인\n- 화면 조회 주기\n- 1분마다\n- 자동 수집 주기\n- 자동 수집 꺼짐 · 수동 실행\n- 마지막 전체 수집 성공\n- 아직 확인되지 않음\n- 상태 조회 시각\n- 2026. 10. 22. 오후 1:32\n- 최근 실행 종료\n- 아직 확인되지 않음\n- NVD\n- 조회 이력 미확인\n- 마지막 소스 조회 성공\n- 아직 확인되지 않음\n- 저장된 NVD 원본 수정 시각\n- 2026. 10. 22. 오후 1:32\n- CISA KEV\n- 조회 이력 미확인\n- 마지막 소스 조회 성공\n- 아직 확인되지 않음\n- 저장된 KEV 최신 등록일\n- 2026. 10. 22.\n- EPSS\n- 조회 이력 미확인\n- 마지막 소스 조회 성공\n- 아직 확인되지 않음\n- 저장된 EPSS 관측일\n- 아직 확인되지 않음\n-\n- 실행 이력은 현재 서버 프로세스에서 관측한 값이며 재시작하면 초기화됩니다. 소스 조회 성공과 DB 반영 완료는 다릅니다. 원본 날짜는 수집 성공 시각이 아닙니다. 시각은 기기 시간대, KEV·EPSS 기준일은 원본 UTC 날짜입니다.\n+ 수집 상태갱신하지 못해 이전 데이터를 표시합니다. 최신 상태와 다를 수 있습니다.이 브라우저에서 마지막으로 받은 시각: 2026. 10. 22. 오후 1:32수집 상태 다시 시도수집 상태실행 이력 미확인화면 조회 주기1분마다자동 수집 주기자동 수집 꺼짐 · 수동 실행마지막 전체 수집 성공아직 확인되지 않음상태 조회 시각2026. 10. 22. 오후 1:32최근 실행 종료아직 확인되지 않음NVD조회 이력 미확인마지막 소스 조회 성공아직 확인되지 않음저장된 NVD 원본 수정 시각2026. 10. 22. 오후 1:32CISA KEV조회 이력 미확인마지막 소스 조회 성공아직 확인되지 않음저장된 KEV 최신 등록일2026. 10. 22.EPSS조회 이력 미확인마지막 소스 조회 성공아직 확인되지 않음저장된 EPSS 관측일아직 확인되지 않음실행 이력은 현재 서버 프로세스에서 관측한 값이며 재시작하면 초기화됩니다. 소스 조회 성공과 DB 반영 완료는 다릅니다. 원본 날짜는 수집 성공 시각이 아닙니다. 시각은 기기 시간대, KEV·EPSS 기준일은 원본 UTC 날짜입니다.\n\nCall log:\n  - Expect \"to.have.text\" with timeout 5000ms\n  - waiting for locator('[data-overview-panel=\"ingest\"]')\n    14 × locator resolved to <div data-overview-panel=\"ingest\" class=\"grid min-w-0 content-start gap-3\">…</div>\n       - unexpected value \"수집 상태갱신하지 못해 이전 데이터를 표시합니다. 최신 상태와 다를 수 있습니다.이 브라우저에서 마지막으로 받은 시각: 2026. 10. 22. 오후 1:32수집 상태 다시 시도수집 상태실행 이력 미확인화면 조회 주기1분마다자동 수집 주기자동 수집 꺼짐 · 수동 실행마지막 전체 수집 성공아직 확인되지 않음상태 조회 시각2026. 10. 22. 오후 1:32최근 실행 종료아직 확인되지 않음NVD조회 이력 미확인마지막 소스 조회 성공아직 확인되지 않음저장된 NVD 원본 수정 시각2026. 10. 22. 오후 1:32CISA KEV조회 이력 미확인마지막 소스 조회 성공아직 확인되지 않음저장된 KEV 최신 등록일2026. 10. 22.EPSS조회 이력 미확인마지막 소스 조회 성공아직 확인되지 않음저장된 EPSS 관측일아직 확인되지 않음실행 이력은 현재 서버 프로세스에서 관측한 값이며 재시작하면 초기화됩니다. 소스 조회 성공과 DB 반영 완료는 다릅니다. 원본 날짜는 수집 성공 시각이 아닙니다. 시각은 기기 시간대, KEV·EPSS 기준일은 원본 UTC 날짜입니다.\"\n"
+}

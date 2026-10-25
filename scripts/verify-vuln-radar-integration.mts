@@ -484,7 +484,9 @@ async function main() {
   await startBackend(true);
   const vite = join(
     dirname(frontendRequire.resolve("vite/package.json")),
-    "bin/vite.js",
+    frontendRequire("vite/package.json").name === "@voidzero-dev/vite-plus-core"
+      ? "dist/vite/bin/vite.js"
+      : "bin/vite.js",
   );
   const frontendEnv = {
     ...process.env,
@@ -650,6 +652,495 @@ async function main() {
 
   for (const width of [1280, 390]) {
     await check(
+      `overview cold failures are isolated and retries target one API at ${width}px`,
+      async () => {
+        for (const [endpoint, panel] of [
+          ["health", "health"],
+          ["ingest/status", "ingest"],
+          ["overview", "core"],
+          ["feed", "feed"],
+          ["kev", "kev"],
+          ["watchlist", "watchlist"],
+        ] as const) {
+          const current = await page();
+          let failing = true;
+          let release: (() => void) | undefined;
+          let holdRetry: Promise<void> | undefined;
+          const calls: Record<string, number> = {};
+          try {
+            await current.setViewportSize({ width, height: 900 });
+            await current.route("**/api/backend/**", async (route) => {
+              const path = new URL(route.request().url()).pathname.replace(
+                "/api/backend/",
+                "",
+              );
+              calls[path] = (calls[path] ?? 0) + 1;
+              if (path === endpoint) {
+                if (failing) {
+                  // Exercise transport failures as well as ordinary HTTP errors.
+                  if (endpoint === "feed")
+                    return route.abort("internetdisconnected");
+                  return route.fulfill({
+                    status: 503,
+                    json: { error: "synthetic panel failure" },
+                  });
+                }
+                if (holdRetry) await holdRetry;
+              }
+              return route.continue();
+            });
+            await current.goto(`${frontendOrigin}/overview`);
+            const failedPanel = current.locator(
+              `[data-overview-panel="${panel}"]`,
+            );
+            await expect(failedPanel.getByRole("alert")).toBeVisible();
+            const healthy = endpoint === "kev" ? "feed" : "kev";
+            await expect(
+              current
+                .locator(`[data-overview-panel="${healthy}"]`)
+                .getByRole("link")
+                .first(),
+            ).toBeVisible();
+            await expect(
+              current.getByRole("heading", {
+                name: "대시보드 데이터를 불러오지 못했습니다.",
+                exact: true,
+              }),
+            ).toHaveCount(0);
+            await expect(failedPanel.locator("strong")).toHaveCount(0);
+            await expect(
+              current.getByRole("button", { name: "새로고침", exact: true }),
+            ).toBeEnabled();
+            const before = { ...calls };
+            failing = false;
+            holdRetry = new Promise<void>((resolve) => {
+              release = resolve;
+            });
+            const retry = failedPanel.getByRole("button");
+            await retry.click();
+            await expect(retry).toBeDisabled();
+            release!();
+            await expect(failedPanel.getByRole("alert")).toHaveCount(0);
+            assert.equal(
+              calls[endpoint],
+              before[endpoint]! + 1,
+              "One successful targeted retry",
+            );
+            for (const key of Object.keys(before).filter(
+              (key) => key !== endpoint,
+            )) {
+              assert.equal(
+                calls[key],
+                before[key],
+                `Retry must not refetch ${key}`,
+              );
+            }
+            if (endpoint === "watchlist") {
+              const screenshot = `${artifactStamp}-vuln-radar-partial-recovered-${width}.png`;
+              await current.screenshot({
+                path: join(root, "docs/verification/artifacts", screenshot),
+                fullPage: true,
+              });
+              screenshots[`partial-recovered-${width}`] = screenshot;
+            }
+          } finally {
+            release?.();
+            await current.close();
+          }
+        }
+      },
+    );
+
+    await check(
+      `overview cached data survives each API failure and recovers at ${width}px`,
+      async () => {
+        for (const [endpoint, panel] of [
+          ["health", "health"],
+          ["ingest/status", "ingest"],
+          ["overview", "core"],
+          ["feed", "feed"],
+          ["kev", "kev"],
+          ["watchlist", "watchlist"],
+        ] as const) {
+          const current = await page();
+          let failing = false;
+          const calls: Record<string, number> = {};
+          try {
+            await current.setViewportSize({ width, height: 900 });
+            await current.route("**/api/backend/**", (route) => {
+              const path = new URL(route.request().url()).pathname.replace(
+                "/api/backend/",
+                "",
+              );
+              calls[path] = (calls[path] ?? 0) + 1;
+              if (failing && path === endpoint) {
+                // A 200 with an invalid contract is not a successful empty watchlist.
+                if (endpoint === "watchlist")
+                  return route.fulfill({ json: { entries: "invalid" } });
+                return route.fulfill({
+                  status: 503,
+                  json: { error: "synthetic refetch failure" },
+                });
+              }
+              return route.continue();
+            });
+            await current.goto(`${frontendOrigin}/overview`);
+            const refresh = current.getByRole("button", {
+              name: "새로고침",
+              exact: true,
+            });
+            await expect(refresh).toBeEnabled();
+            await expect(
+              current
+                .locator('[data-overview-panel="kev"]')
+                .getByRole("link")
+                .first(),
+            ).toBeVisible();
+            const target = current.locator(`[data-overview-panel="${panel}"]`);
+            const content = target.locator("[data-overview-content]");
+            const cachedText = await content.innerText();
+            assert.ok(cachedText.length > 0);
+            failing = true;
+            await refresh.click();
+            await expect(
+              target.getByText(
+                "갱신하지 못해 이전 데이터를 표시합니다. 최신 상태와 다를 수 있습니다.",
+                { exact: true },
+              ),
+            ).toBeVisible();
+            await expect(content).toHaveText(cachedText, {
+              useInnerText: true,
+            });
+            await expect(
+              target.getByText(/이 브라우저에서 마지막으로 받은 시각:/),
+            ).toBeVisible();
+            await expect(
+              current.getByRole("heading", {
+                name: "대시보드 데이터를 불러오지 못했습니다.",
+                exact: true,
+              }),
+            ).toHaveCount(0);
+            await expect(refresh).toBeEnabled();
+            if (endpoint === "watchlist") {
+              assert.equal(
+                await current.evaluate(
+                  () =>
+                    document.documentElement.scrollWidth <= window.innerWidth,
+                ),
+                true,
+                "Partial failure must not create page-level horizontal overflow",
+              );
+              const screenshot = `${artifactStamp}-vuln-radar-partial-stale-${width}.png`;
+              await current.screenshot({
+                path: join(root, "docs/verification/artifacts", screenshot),
+                fullPage: true,
+              });
+              screenshots[`partial-stale-${width}`] = screenshot;
+            }
+            const before = { ...calls };
+            failing = false;
+            await target.getByRole("button").click();
+            await expect(target.getByRole("status")).toHaveCount(0);
+            await expect(content).not.toHaveText("");
+            assert.equal(calls[endpoint], before[endpoint]! + 1);
+            for (const key of Object.keys(before).filter(
+              (key) => key !== endpoint,
+            ))
+              assert.equal(calls[key], before[key]);
+          } finally {
+            await current.close();
+          }
+        }
+      },
+    );
+  }
+
+  await check(
+    "slow supplementary APIs do not block healthy panels; cold total outage and recovery stay explicit",
+    async () => {
+      const current = await page();
+      let release: (() => void) | undefined;
+      const gate = new Promise<void>((resolve) => {
+        release = resolve;
+      });
+      let failingAll = false;
+      try {
+        await current.route("**/api/backend/**", async (route) => {
+          if (failingAll)
+            return route.fulfill({
+              status: 503,
+              json: { error: "synthetic complete outage" },
+            });
+          if (
+            /\/(health|watchlist|ingest\/status)$/.test(
+              new URL(route.request().url()).pathname,
+            )
+          )
+            await gate;
+          return route.continue();
+        });
+        await current.goto(`${frontendOrigin}/overview`);
+        await expect(
+          current
+            .locator('[data-overview-panel="core"]')
+            .getByText("3", { exact: true }),
+        ).toBeVisible();
+        await expect(
+          current
+            .locator('[data-overview-panel="kev"]')
+            .getByRole("link")
+            .first(),
+        ).toBeVisible();
+        await expect(
+          current
+            .locator('[data-overview-panel="watchlist"]')
+            .getByRole("status"),
+        ).toBeVisible();
+        await expect(
+          current.locator('[data-overview-panel="ingest"]').getByRole("status"),
+        ).toBeVisible();
+        release!();
+        await expect(
+          current.getByRole("button", { name: "새로고침", exact: true }),
+        ).toBeEnabled();
+        failingAll = true;
+        await current.reload();
+        await expect(
+          current.getByRole("heading", {
+            name: "대시보드 데이터를 불러오지 못했습니다.",
+            exact: true,
+          }),
+        ).toBeVisible();
+        await expect(current.locator("[data-overview-panel]")).toHaveCount(0);
+        failingAll = false;
+        await current
+          .getByRole("button", { name: "다시 시도", exact: true })
+          .click();
+        await expect(
+          current
+            .locator('[data-overview-panel="kev"]')
+            .getByRole("link")
+            .first(),
+        ).toBeVisible();
+        await expect(
+          current.getByRole("heading", {
+            name: "대시보드 데이터를 불러오지 못했습니다.",
+            exact: true,
+          }),
+        ).toHaveCount(0);
+      } finally {
+        release?.();
+        await current.close();
+      }
+    },
+  );
+
+  await check(
+    "valid empty Feed and watchlist responses remain empty states, not failures",
+    async () => {
+      const current = await page();
+      try {
+        const feed = await api("feed", true);
+        const watchlist = await api("watchlist", true);
+        await current.setViewportSize({ width: 390, height: 900 });
+        await current.route("**/api/backend/feed", (route) =>
+          route.fulfill({ json: { ...feed, items: [] } }),
+        );
+        await current.route("**/api/backend/watchlist", (route) =>
+          route.fulfill({ json: { ...watchlist, entries: [] } }),
+        );
+        await current.goto(`${frontendOrigin}/overview`);
+        await expect(
+          current.getByText("표시할 최근 취약점이 없습니다.", { exact: true }),
+        ).toBeVisible();
+        await expect(
+          current
+            .locator('[data-overview-panel="watchlist"]')
+            .getByText("0", { exact: true }),
+        ).toBeVisible();
+        await expect(
+          current.getByRole("button", { name: "새로고침", exact: true }),
+        ).toBeEnabled();
+        await expect(
+          current.locator('[data-overview-panel="feed"]').getByRole("alert"),
+        ).toHaveCount(0);
+        await expect(
+          current
+            .locator('[data-overview-panel="watchlist"]')
+            .getByRole("alert"),
+        ).toHaveCount(0);
+      } finally {
+        await current.close();
+      }
+    },
+  );
+
+  await check(
+    "ingest status exposes process-local unknown history without performing a sync",
+    async () => {
+      const status = await api("ingest/status", true);
+      assert.equal(status.observation.scope, "process");
+      assert.equal(status.observation.outcome, "unknown");
+      assert.equal(status.observation.lastSuccessAt, null);
+      assert.equal(status.observation.sources.length, 3);
+      assert.ok(
+        status.latest.databaseUpdatedAt,
+        "Seeded records exist, but do not prove an observed sync",
+      );
+    },
+  );
+
+  for (const width of [1280, 390]) {
+    await check(
+      `collection cadence, source failures and legacy unknown state at ${width}px`,
+      async () => {
+        const current = await page();
+        try {
+          await current.setViewportSize({ width, height: 900 });
+          const actual = await api("ingest/status", true);
+          const lastSuccess = new Date(
+            Date.now() - 9 * 3_600_000,
+          ).toISOString();
+          const snapshot = {
+            ...actual,
+            scheduler: {
+              ...actual.scheduler,
+              enabled: true,
+              intervalMinutes: 1440,
+            },
+            observation: {
+              scope: "process",
+              observedSince: new Date(
+                Date.now() - 10 * 3_600_000,
+              ).toISOString(),
+              outcome: "completed",
+              lastStartedAt: lastSuccess,
+              lastFinishedAt: lastSuccess,
+              lastSuccessAt: lastSuccess,
+              sources: ["nvd", "kev", "epss"].map((id) => ({
+                id,
+                outcome: "succeeded",
+                lastAttemptAt: lastSuccess,
+                lastFetchSuccessAt: lastSuccess,
+                lastFailureAt: null as string | null,
+                consecutiveFailures: 0,
+              })),
+            },
+          };
+          let response: unknown = snapshot;
+          await current.route("**/api/backend/ingest/status", (route) =>
+            route.fulfill({ json: response }),
+          );
+          await current.goto(`${frontendOrigin}/overview`);
+          const panel = current.getByRole("region", {
+            name: "수집 상태",
+            exact: true,
+          });
+          await expect(
+            panel.getByText("1분마다", { exact: true }),
+          ).toBeVisible();
+          await expect(
+            panel.getByText("1440분마다", { exact: true }),
+          ).toBeVisible();
+          await expect(
+            panel.getByText("최근 실행 완료", { exact: true }),
+          ).toBeVisible();
+          await expect(
+            panel.getByText("수집 주기 확인 권장", { exact: true }),
+          ).toHaveCount(0);
+          await expect(
+            current.getByText("REAL-TIME TELEMETRY", { exact: true }),
+          ).toHaveCount(0);
+          const lastSuccessValue = panel
+            .getByText("마지막 전체 수집 성공", { exact: true })
+            .locator("..")
+            .locator("dd");
+          await expect(lastSuccessValue).not.toHaveText("아직 확인되지 않음");
+
+          snapshot.observation.outcome = "partial";
+          snapshot.observation.lastStartedAt = new Date(
+            Date.now() - 60_000,
+          ).toISOString();
+          snapshot.observation.lastFinishedAt = new Date().toISOString();
+          for (const source of snapshot.observation.sources) {
+            source.lastAttemptAt = snapshot.observation.lastStartedAt;
+            if (source.id !== "epss")
+              source.lastFetchSuccessAt = snapshot.observation.lastFinishedAt;
+          }
+          Object.assign(snapshot.observation.sources[2]!, {
+            outcome: "failed",
+            lastFailureAt: new Date().toISOString(),
+            consecutiveFailures: 3,
+          });
+          await current.reload();
+          await expect(
+            panel.getByText("일부 소스 조회 실패", { exact: true }),
+          ).toBeVisible();
+          await expect(
+            panel
+              .getByText("최근 실행 종료", { exact: true })
+              .locator("..")
+              .locator("dd"),
+          ).not.toHaveText(await lastSuccessValue.innerText());
+          const epss = panel.getByRole("listitem").filter({
+            has: current.getByRole("heading", { name: "EPSS", exact: true }),
+          });
+          await expect(
+            epss.getByText("조회 실패", { exact: true }),
+          ).toBeVisible();
+          await expect(
+            epss.getByText("연속 조회 실패", { exact: true }),
+          ).toBeVisible();
+          const screenshot = `${artifactStamp}-vuln-radar-ingest-${width}.png`;
+          await panel.screenshot({
+            path: join(root, "docs/verification/artifacts", screenshot),
+          });
+          screenshots[`ingest-${width}`] = screenshot;
+          assert.ok(
+            await panel.evaluate(
+              (element) => element.scrollWidth <= element.clientWidth,
+            ),
+          );
+
+          snapshot.scheduler.intervalMinutes = 1.5;
+          await current.reload();
+          await expect(
+            panel.getByText("1.5분마다", { exact: true }),
+          ).toBeVisible();
+
+          response = Object.fromEntries(
+            Object.entries(actual).filter(
+              ([key]) => key !== "observation" && key !== "scheduler",
+            ),
+          );
+          await current.reload();
+          await expect(
+            panel.getByText("실행 이력 미확인", { exact: true }),
+          ).toBeVisible();
+          await expect(lastSuccessValue).toHaveText("아직 확인되지 않음");
+          await expect(
+            panel.getByText("조회 이력 미확인", { exact: true }),
+          ).toHaveCount(3);
+          response = {
+            ...(response as Record<string, unknown>),
+            checkedAt: "invalid-date",
+          };
+          await current.reload();
+          await expect(
+            panel
+              .getByText("상태 조회 시각", { exact: true })
+              .locator("..")
+              .locator("dd"),
+          ).toHaveText("아직 확인되지 않음");
+        } finally {
+          await current.close();
+        }
+      },
+    );
+  }
+
+  for (const width of [1280, 390]) {
+    await check(
       `real API browser feed filters, labels and detail navigation at ${width}px`,
       async () => {
         const current = await page();
@@ -752,6 +1243,305 @@ async function main() {
     );
   }
   await check(
+    "overview counts all 43 database rows while feed stays limited to 25; browser refresh uses aggregates",
+    async () => {
+      assert.ok(prisma);
+      const extraIds = Array.from(
+        { length: 40 },
+        (_, index) => `CVE-2098-${String(index).padStart(5, "0")}`,
+      );
+      const current = await page();
+      try {
+        await prisma.vulnerability.createMany({
+          data: extraIds.map((cveId, index) => ({
+            cveId,
+            title: "Synthetic overview count fixture",
+            description: "Isolated test data, not a real vulnerability.",
+            priority:
+              index < 30
+                ? ("P0" as const)
+                : index < 35
+                  ? ("P1" as const)
+                  : index < 38
+                    ? ("P2" as const)
+                    : ("P3" as const),
+            isKev: index < 35,
+            publishedAt: now,
+            lastModifiedAt: now,
+          })),
+        });
+        await prisma.advisory.create({
+          data: {
+            vulnerabilityCveId: ids.alpha,
+            source: "cisa-kev",
+            externalId: "overview-count-duplicate-advisory",
+          },
+        });
+        const feed = await api("feed", true);
+        assert.equal(feed.items.length, 25);
+        assert.ok(
+          feed.items.every(
+            (item: { priority: string }) => item.priority === "P0",
+          ),
+        );
+        const overview = await api("overview", true);
+        const counts = Object.fromEntries(
+          overview.cards.map((card: { id: string; value: number }) => [
+            card.id,
+            card.value,
+          ]),
+        );
+        assert.deepEqual(counts, {
+          "p0-open": 31,
+          "p1-open": 6,
+          "kev-new": 36,
+          "total-vulnerabilities": 43,
+        });
+        assert.equal(overview.dataSource.reason, "live_read_model");
+        for (const width of [1280, 390]) {
+          await current.setViewportSize({ width, height: 900 });
+          await current.goto(`${frontendOrigin}/overview`);
+          await expect(current.getByText("43", { exact: true })).toHaveCount(2);
+          await expect(current.getByText("31", { exact: true })).toBeVisible();
+          await expect(
+            current.getByText(
+              "KEV 매치 36건과 우선 점검 P1 6건을 함께 추적합니다.",
+              { exact: true },
+            ),
+          ).toBeVisible();
+          await expect(
+            current.getByText(
+              "전체 저장 데이터 기준 집계입니다. 최근 취약점은 피드에서 별도로 확인합니다.",
+              { exact: true },
+            ),
+          ).toBeVisible();
+        }
+        await prisma.vulnerability.update({
+          where: { cveId: extraIds[0] },
+          data: { priority: "P1" },
+        });
+        const refreshed = current.waitForResponse(
+          (response) =>
+            response.url().endsWith("/api/backend/overview") &&
+            response.status() === 200,
+        );
+        await current
+          .getByRole("button", { name: "새로고침", exact: true })
+          .click();
+        await refreshed;
+        await expect(current.getByText("30", { exact: true })).toBeVisible();
+        await expect(
+          current.getByText(
+            "KEV 매치 36건과 우선 점검 P1 7건을 함께 추적합니다.",
+            { exact: true },
+          ),
+        ).toBeVisible();
+        fixtureSummary = {
+          initial: fixtureSummary,
+          aggregateRegression: {
+            databaseRows: 43,
+            feedRows: feed.items.length,
+            limitedFeedCounts: {
+              p0: feed.items.filter(
+                (item: { priority: string }) => item.priority === "P0",
+              ).length,
+              p1: feed.items.filter(
+                (item: { priority: string }) => item.priority === "P1",
+              ).length,
+              kev: feed.items.filter((item: { isKev: boolean }) => item.isKev)
+                .length,
+            },
+            counts,
+            duplicateKevAdvisory: true,
+            refreshedP0: 30,
+            refreshedP1: 7,
+          },
+        };
+      } finally {
+        await current.close();
+        await prisma.advisory.deleteMany({
+          where: { externalId: "overview-count-duplicate-advisory" },
+        });
+        await prisma.vulnerability.deleteMany({
+          where: { cveId: { in: extraIds } },
+        });
+      }
+    },
+  );
+  await check(
+    "KEV rows use their own nullable EPSS outside the limited feed and show priority instead of workflow status",
+    async () => {
+      assert.ok(prisma);
+      const fillerIds = Array.from(
+        { length: 26 },
+        (_, index) => `CVE-2097-${10000 + index}`,
+      );
+      const evidenceIds = [
+        "CVE-2097-20000",
+        "CVE-2097-20001",
+        "CVE-2097-20002",
+      ];
+      const current = await page();
+      try {
+        await prisma.vulnerability.createMany({
+          data: fillerIds.map((cveId) => ({
+            cveId,
+            title: "Synthetic non-KEV filler",
+            description: "Isolated fixture",
+            priority: "P0",
+            publishedAt: now,
+            lastModifiedAt: now,
+          })),
+        });
+        for (const [index, epssScore] of [0, null, 0.125].entries()) {
+          await prisma.vulnerability.create({
+            data: {
+              cveId: evidenceIds[index]!,
+              title: `Synthetic KEV evidence ${index}`,
+              description: "Isolated fixture",
+              priority: "P1",
+              isKev: true,
+              epssScore,
+              publishedAt: now,
+              lastModifiedAt: now,
+              advisories: {
+                create: {
+                  source: "cisa-kev",
+                  externalId: `synthetic-kev-evidence-${index}`,
+                  publishedAt: new Date(now.getTime() + 1000 + index),
+                },
+              },
+            },
+          });
+        }
+        await prisma.advisory.create({
+          data: {
+            vulnerabilityCveId: evidenceIds[0]!,
+            source: "cisa-kev",
+            externalId: "synthetic-kev-evidence-duplicate",
+            publishedAt: new Date(now.getTime() + 2000),
+          },
+        });
+        const feed = await api("feed", true);
+        assert.equal(feed.items.length, 25);
+        assert.ok(
+          feed.items.every(
+            (item: { cveId: string }) => !evidenceIds.includes(item.cveId),
+          ),
+        );
+        const kev = await api("kev", true);
+        const scores = evidenceIds.map(
+          (cveId) =>
+            kev.items.find((item: { cveId: string }) => item.cveId === cveId)
+              ?.epssScore,
+        );
+        assert.deepEqual(scores, [0, null, 0.125]);
+        for (const width of [1280, 390]) {
+          await current.setViewportSize({ width, height: 900 });
+          await current.goto(`${frontendOrigin}/overview`);
+          const table = current.getByRole("table");
+          await expect(
+            table.getByRole("columnheader", { name: "우선순위", exact: true }),
+          ).toBeVisible();
+          const row = (cveId: string) =>
+            table.getByRole("row").filter({ hasText: cveId });
+          await expect(row(evidenceIds[0]!)).toHaveCount(1);
+          await expect(
+            row(evidenceIds[0]!).getByRole("cell").nth(2),
+          ).toHaveText("0");
+          await expect(row(evidenceIds[0]!).getByRole("meter")).toHaveAttribute(
+            "aria-valuenow",
+            "0",
+          );
+          await expect(
+            row(evidenceIds[0]!).getByRole("meter").locator("span"),
+          ).toHaveAttribute("style", "width: 0%;");
+          await expect(
+            row(evidenceIds[1]!).getByRole("cell").nth(2),
+          ).toHaveText("미확인");
+          await expect(row(evidenceIds[1]!).getByRole("meter")).toHaveCount(0);
+          await expect(
+            row(evidenceIds[2]!).getByRole("cell").nth(2),
+          ).toHaveText("0.125");
+          await expect(
+            row(evidenceIds[2]!).getByRole("cell").nth(3),
+          ).toHaveText("P1");
+          await expect(table).not.toContainText(
+            /Investigating|Monitoring|Escalated|Queued/,
+          );
+          const screenshot = `${artifactStamp}-vuln-radar-kev-${width}.png`;
+          await current.screenshot({
+            path: join(root, "docs/verification/artifacts", screenshot),
+            fullPage: true,
+          });
+          screenshots[`kev-${width}`] = screenshot;
+        }
+        await current.route("**/api/backend/kev", (route) =>
+          route.fulfill({
+            json: {
+              ...kev,
+              items: kev.items.map((item: Record<string, unknown>) => {
+                const { epssScore: _score, ...legacy } = item;
+                return legacy;
+              }),
+            },
+          }),
+        );
+        await current.reload();
+        await expect(
+          current
+            .getByRole("table")
+            .getByRole("row")
+            .filter({ hasText: ids.alpha })
+            .getByRole("cell")
+            .nth(2),
+        ).toHaveText("미확인");
+        await expect(current.getByRole("meter")).toHaveCount(0);
+        await current.unroute("**/api/backend/kev");
+        await current.route("**/api/backend/kev", (route) =>
+          route.fulfill({
+            json: { ...kev, items: [{ ...kev.items[0], epssScore: 2 }] },
+          }),
+        );
+        await current.reload();
+        await expect(
+          current.getByText("KEV 목록을 확인하지 못했습니다.", { exact: true }),
+        ).toBeVisible();
+        await expect(current.getByRole("meter")).toHaveCount(0);
+        await current.unroute("**/api/backend/kev");
+        await current.route("**/api/backend/kev", (route) =>
+          route.fulfill({
+            status: 503,
+            json: { error: "synthetic KEV failure" },
+          }),
+        );
+        await current.reload();
+        await expect(
+          current.getByText("KEV 목록을 확인하지 못했습니다.", { exact: true }),
+        ).toBeVisible();
+        await expect(current.getByRole("table").getByRole("link")).toHaveCount(
+          0,
+        );
+        fixtureSummary = {
+          statistics: fixtureSummary,
+          kevEvidence: {
+            outsideFeed: true,
+            scores,
+            duplicateAdvisoryRowsDeduplicated: true,
+            legacyUnknown: true,
+            outOfRangeRejected: true,
+            failureNotReplacedWithFeed: true,
+          },
+        };
+      } finally {
+        await current.close();
+        await prisma.vulnerability.deleteMany({
+          where: { cveId: { in: [...fillerIds, ...evidenceIds] } },
+        });
+      }
+    },
+  );
+  await check(
     "backend shutdown preserves browser cache through scheduled refresh failure",
     async () => {
       outagePage = await page();
@@ -824,6 +1614,43 @@ async function main() {
       await expect(outagePage.getByRole("textbox")).toHaveValue("integration");
       await outagePage.close();
       outagePage = undefined;
+    },
+  );
+  await check(
+    "connected empty Postgres returns real zero overview statistics without mock substitution",
+    async () => {
+      assert.ok(prisma);
+      await prisma.vulnerability.deleteMany();
+      const overview = await api("overview", true);
+      assert.equal(overview.dataSource.kind, "database");
+      assert.equal(overview.dataSource.reason, "live_read_model");
+      assert.equal(overview.cards.length, 4);
+      assert.ok(
+        overview.cards.every((card: { value: number }) => card.value === 0),
+      );
+      const kev = await api("kev", true);
+      assert.equal(kev.dataSource.kind, "database");
+      assert.deepEqual(kev.items, []);
+      const current = await page();
+      try {
+        await current.goto(`${frontendOrigin}/overview`);
+        await expect(
+          current.getByText("표시할 KEV 항목이 없습니다.", { exact: true }),
+        ).toBeVisible();
+        await expect(
+          current
+            .locator('[data-overview-panel="core"]')
+            .getByText("0", { exact: true }),
+        ).toHaveCount(2);
+        await expect(
+          current.locator('[data-overview-panel="feed"]').getByRole("alert"),
+        ).toHaveCount(0);
+        await expect(current.getByRole("table").getByRole("link")).toHaveCount(
+          0,
+        );
+      } finally {
+        await current.close();
+      }
     },
   );
   await check(

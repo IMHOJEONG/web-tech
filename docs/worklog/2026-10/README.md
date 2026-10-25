@@ -1,5 +1,34 @@
 # 2026-10 작업 기록
 
+- [10-25 나머지 보안 경고 10건 분리 조치](2026-10-25-remaining-advisories.md)
+- [10-25 Next.js Critical 패치·회귀](2026-10-25-next-critical.md)
+
+- [10-24 PR #59 기준선 회귀·리뷰 보완](2026-10-24-viteplus-review-fixes.md)
+
+- [10-24 PR #59 CI와 리뷰 지적 재현](2026-10-24-pr59-ci-review.md)
+
+- [10-24 Vite+ 로컬 커밋과 보안 후속 분리](2026-10-24-viteplus-local-commits.md)
+
+- [10-24 Vite+ 의존성 보완·override 정리](2026-10-24-viteplus-dependency-remediation.md)
+
+- [10-24 Vite+ peer·lockfile 영향 조사](2026-10-24-viteplus-peer-lockfile-impact.md)
+
+- [10-24 vuln-radar Vite+ 개발·빌드 실험](2026-10-24-vuln-radar-viteplus.md)
+
+- [10-22 CodeQL High #38 제목 검사 보완](2026-10-22-codeql38-heading-redos.md)
+
+- [10-22 원격·로컬 canonical 분류 통일](2026-10-22-docs-canonical-taxonomy.md)
+
+- [10-22 블로그 개선 후보 재점검](2026-10-22-docs-improvement-recheck.md)
+
+- [10-22 Overview 부분 API 장애 격리](2026-10-22-vuln-radar-partial-failures.md)
+
+- [10-22 수집 상태와 조회 주기 분리](2026-10-22-vuln-radar-ingest-status.md)
+
+- [10-21 통계 커밋 분리와 KEV 근거 표시](2026-10-21-vuln-radar-kev-evidence.md)
+
+- [10-21 vuln-radar 전체 통계와 Feed 분리](2026-10-21-vuln-radar-overview-statistics.md)
+
 - [10-22 squash 최종 메시지 사전검사](2026-10-22-squash-merge-preflight.md)
 
 - [10-22 pnpm12 툴체인과 서명 유지](2026-10-22-pnpm12-toolchain.md)

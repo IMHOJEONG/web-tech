@@ -1,0 +1,48 @@
+{
+  "checkedAt": "2026-10-24T05:34:05.059Z",
+  "baseSha": "16c51e9911f041b125a445b3939966986426a0b4",
+  "runnerSha256": "d80d5900b39972860972e803c9215061dbd290c5f85696b1764e85376fb6f241",
+  "node": "v24.12.0",
+  "vitePlus": "1.4.0",
+  "results": [
+    {
+      "name": "existing tooling and test scripts are unchanged",
+      "durationMs": 65
+    },
+    {
+      "name": "app, React plugin and Vite+ use one matching Vite core",
+      "durationMs": 4
+    },
+    {
+      "name": "other workspaces keep their declared and resolved direct versions",
+      "durationMs": 493
+    },
+    {
+      "name": "vp dev starts on loopback and transforms React entry",
+      "durationMs": 2716
+    },
+    {
+      "name": "dev proxy rewrites path and replaces browser authorization",
+      "durationMs": 109
+    },
+    {
+      "name": "vp build succeeds without exposing the server token",
+      "durationMs": 874
+    },
+    {
+      "name": "vp preview preserves SPA fallback, assets and private proxy",
+      "durationMs": 330
+    }
+  ],
+  "peerContextChanges": [
+    ".",
+    "apps/docs",
+    "apps/docs-backend",
+    "apps/vuln-radar-backend",
+    "packages/api",
+    "packages/docs-content-contract",
+    "packages/eslint-config",
+    "packages/ui"
+  ],
+  "cleanupErrors": []
+}

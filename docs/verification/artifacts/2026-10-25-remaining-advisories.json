@@ -1,0 +1,646 @@
+{
+  "checkedAt": "2026-10-25 03:02:39 UTC",
+  "baseline": "d0b25a5122fd9b4377b559270c10680c984e2aed",
+  "branch": "codex/security-remaining-advisories-20261025",
+  "scope": "local patch of the 10 non-Next advisories; PR60 and deployment kept separate",
+  "before": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 2,
+      "moderate": 2,
+      "high": 7,
+      "critical": 2
+    },
+    "advisories": [
+      {
+        "id": "GHSA-2464-fhr4-w9xw",
+        "package": "next",
+        "severity": "critical",
+        "patched": ">=16.4.1",
+        "versions": ["16.3.8"],
+        "workspaces": ["apps__docs"]
+      },
+      {
+        "id": "GHSA-p3m5-59mp-jv5r",
+        "package": "next",
+        "severity": "high",
+        "patched": ">=16.4.1",
+        "versions": ["16.3.8"],
+        "workspaces": ["apps__docs"]
+      },
+      {
+        "id": "GHSA-673q-mjm6-r5xr",
+        "package": "next",
+        "severity": "critical",
+        "patched": ">=16.4.1",
+        "versions": ["16.3.8"],
+        "workspaces": ["apps__docs"]
+      },
+      {
+        "id": "GHSA-4qx8-w7c3-pj3p",
+        "package": "toml",
+        "severity": "high",
+        "patched": ">=5.0.1",
+        "versions": ["5.0.0"],
+        "workspaces": ["apps__docs"]
+      },
+      {
+        "id": "GHSA-9j65-hcg3-gc64",
+        "package": "toml",
+        "severity": "high",
+        "patched": ">=5.0.1",
+        "versions": ["5.0.0"],
+        "workspaces": ["apps__docs"]
+      },
+      {
+        "id": "GHSA-9qmh-m7c6-f92p",
+        "package": "toml",
+        "severity": "high",
+        "patched": ">=5.0.1",
+        "versions": ["5.0.0"],
+        "workspaces": ["apps__docs"]
+      },
+      {
+        "id": "GHSA-mrhx-c7xc-m3w5",
+        "package": "zod",
+        "severity": "high",
+        "patched": ">=4.6.6",
+        "versions": ["4.4.2"],
+        "workspaces": [
+          "apps__vuln-radar",
+          "packages__eslint-config",
+          "apps__docs",
+          "apps__docs-backend",
+          "packages__docs-content-contract"
+        ]
+      },
+      {
+        "id": "GHSA-27r3-jxmh-p828",
+        "package": "body-parser",
+        "severity": "high",
+        "patched": ">=2.4.0",
+        "versions": ["2.3.0"],
+        "workspaces": ["apps__vuln-radar-backend", "apps__docs-backend"]
+      },
+      {
+        "id": "GHSA-q7qp-rjg7-q26m",
+        "package": "multer",
+        "severity": "high",
+        "patched": ">=2.5.0",
+        "versions": ["2.4.0"],
+        "workspaces": ["apps__vuln-radar-backend", "apps__docs-backend"]
+      },
+      {
+        "id": "GHSA-w74x-v6f9-j3xg",
+        "package": "fast-uri",
+        "severity": "moderate",
+        "patched": ">=4.2.3",
+        "versions": ["4.2.1"],
+        "workspaces": [
+          ".",
+          "apps__vuln-radar-backend",
+          "apps__docs",
+          "apps__docs-backend"
+        ]
+      },
+      {
+        "id": "GHSA-xhq7-xmqj-769h",
+        "package": "fast-uri",
+        "severity": "low",
+        "patched": ">=4.2.3",
+        "versions": ["4.2.1"],
+        "workspaces": [
+          ".",
+          "apps__vuln-radar-backend",
+          "apps__docs",
+          "apps__docs-backend"
+        ]
+      },
+      {
+        "id": "GHSA-wjr9-j795-jxcr",
+        "package": "fast-uri",
+        "severity": "moderate",
+        "patched": ">=4.2.3",
+        "versions": ["4.2.1"],
+        "workspaces": [
+          ".",
+          "apps__vuln-radar-backend",
+          "apps__docs",
+          "apps__docs-backend"
+        ]
+      },
+      {
+        "id": "GHSA-333x-w4r6-6crp",
+        "package": "fast-uri",
+        "severity": "low",
+        "patched": ">=4.2.3",
+        "versions": ["4.2.1"],
+        "workspaces": [
+          ".",
+          "apps__vuln-radar-backend",
+          "apps__docs",
+          "apps__docs-backend"
+        ]
+      }
+    ]
+  },
+  "after": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 1,
+      "critical": 2
+    },
+    "advisories": [
+      {
+        "id": "GHSA-2464-fhr4-w9xw",
+        "package": "next",
+        "severity": "critical",
+        "patched": ">=16.4.1",
+        "versions": ["16.3.8"],
+        "workspaces": ["apps__docs"]
+      },
+      {
+        "id": "GHSA-p3m5-59mp-jv5r",
+        "package": "next",
+        "severity": "high",
+        "patched": ">=16.4.1",
+        "versions": ["16.3.8"],
+        "workspaces": ["apps__docs"]
+      },
+      {
+        "id": "GHSA-673q-mjm6-r5xr",
+        "package": "next",
+        "severity": "critical",
+        "patched": ">=16.4.1",
+        "versions": ["16.3.8"],
+        "workspaces": ["apps__docs"]
+      }
+    ]
+  },
+  "productionAfter": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 1,
+      "critical": 2
+    },
+    "advisories": [
+      {
+        "id": "GHSA-2464-fhr4-w9xw",
+        "package": "next",
+        "severity": "critical",
+        "patched": ">=16.4.1",
+        "versions": ["16.3.8"],
+        "workspaces": ["apps__docs"]
+      },
+      {
+        "id": "GHSA-p3m5-59mp-jv5r",
+        "package": "next",
+        "severity": "high",
+        "patched": ">=16.4.1",
+        "versions": ["16.3.8"],
+        "workspaces": ["apps__docs"]
+      },
+      {
+        "id": "GHSA-673q-mjm6-r5xr",
+        "package": "next",
+        "severity": "critical",
+        "patched": ">=16.4.1",
+        "versions": ["16.3.8"],
+        "workspaces": ["apps__docs"]
+      }
+    ]
+  },
+  "removed": [
+    "GHSA-4qx8-w7c3-pj3p",
+    "GHSA-9j65-hcg3-gc64",
+    "GHSA-9qmh-m7c6-f92p",
+    "GHSA-mrhx-c7xc-m3w5",
+    "GHSA-27r3-jxmh-p828",
+    "GHSA-q7qp-rjg7-q26m",
+    "GHSA-w74x-v6f9-j3xg",
+    "GHSA-xhq7-xmqj-769h",
+    "GHSA-wjr9-j795-jxcr",
+    "GHSA-333x-w4r6-6crp"
+  ],
+  "graph": {
+    "baseline": "d0b25a5122fd9b4377b559270c10680c984e2aed",
+    "added": [
+      "body-parser@2.4.0",
+      "content-type@2.1.0",
+      "fast-uri@4.2.3",
+      "multer@2.5.0",
+      "toml@5.0.1",
+      "zod@4.6.7"
+    ],
+    "removed": [
+      "body-parser@2.3.0",
+      "fast-uri@4.2.1",
+      "multer@2.4.0",
+      "toml@5.0.0",
+      "zod@4.4.2"
+    ],
+    "metadataChanged": ["better-call@1.4.0", "zod-validation-error@4.0.2"],
+    "workspaces": [
+      {
+        "workspace": ".",
+        "beforePackages": 162,
+        "afterPackages": 162,
+        "beforeContexts": 162,
+        "afterContexts": 162,
+        "added": ["fast-uri@4.2.3"],
+        "removed": ["fast-uri@4.2.1"],
+        "changedEdges": [
+          {
+            "package": "ajv@8.20.0",
+            "changes": [
+              {
+                "edge": "dependencies:fast-uri",
+                "before": ["fast-uri@4.2.1"],
+                "after": ["fast-uri@4.2.3"]
+              }
+            ],
+            "examplePath": [
+              ".:devDependencies",
+              "@commitlint/cli@21.2.1",
+              "@commitlint/load@21.2.0",
+              "@commitlint/config-validator@21.2.0",
+              "ajv@8.20.0"
+            ]
+          }
+        ],
+        "unresolvedBefore": [],
+        "unresolvedAfter": []
+      },
+      {
+        "workspace": "apps/docs",
+        "beforePackages": 1015,
+        "afterPackages": 1015,
+        "beforeContexts": 1015,
+        "afterContexts": 1015,
+        "added": ["fast-uri@4.2.3", "toml@5.0.1", "zod@4.6.7"],
+        "removed": ["fast-uri@4.2.1", "toml@5.0.0", "zod@4.4.2"],
+        "changedEdges": [
+          {
+            "package": "@better-auth/core@1.7.0",
+            "changes": [
+              {
+                "edge": "dependencies:zod",
+                "before": ["zod@4.4.2"],
+                "after": ["zod@4.6.7"]
+              }
+            ],
+            "examplePath": [
+              "apps/docs:dependencies",
+              "better-auth@1.7.0",
+              "@better-auth/core@1.7.0"
+            ]
+          },
+          {
+            "package": "ajv@8.20.0",
+            "changes": [
+              {
+                "edge": "dependencies:fast-uri",
+                "before": ["fast-uri@4.2.1"],
+                "after": ["fast-uri@4.2.3"]
+              }
+            ],
+            "examplePath": [
+              "apps/docs:dependencies",
+              "@mdx-js/loader@3.1.1",
+              "webpack@5.106.0",
+              "schema-utils@4.3.3",
+              "ajv@8.20.0"
+            ]
+          },
+          {
+            "package": "better-auth@1.7.0",
+            "changes": [
+              {
+                "edge": "dependencies:zod",
+                "before": ["zod@4.4.2"],
+                "after": ["zod@4.6.7"]
+              }
+            ],
+            "examplePath": ["apps/docs:dependencies", "better-auth@1.7.0"]
+          },
+          {
+            "package": "better-call@1.4.0",
+            "changes": [
+              {
+                "edge": "optionalDependencies:zod",
+                "before": ["zod@4.4.2"],
+                "after": ["zod@4.6.7"]
+              }
+            ],
+            "examplePath": [
+              "apps/docs:dependencies",
+              "better-auth@1.7.0",
+              "@better-auth/core@1.7.0",
+              "better-call@1.4.0"
+            ]
+          },
+          {
+            "package": "remark-mdx-frontmatter@4.0.0",
+            "changes": [
+              {
+                "edge": "dependencies:toml",
+                "before": ["toml@5.0.0"],
+                "after": ["toml@5.0.1"]
+              }
+            ],
+            "examplePath": [
+              "apps/docs:dependencies",
+              "mdx-bundler@10.1.1",
+              "remark-mdx-frontmatter@4.0.0"
+            ]
+          }
+        ],
+        "unresolvedBefore": [],
+        "unresolvedAfter": []
+      },
+      {
+        "workspace": "apps/docs-backend",
+        "beforePackages": 730,
+        "afterPackages": 731,
+        "beforeContexts": 732,
+        "afterContexts": 733,
+        "added": [
+          "body-parser@2.4.0",
+          "content-type@2.1.0",
+          "fast-uri@4.2.3",
+          "multer@2.5.0",
+          "zod@4.6.7"
+        ],
+        "removed": [
+          "body-parser@2.3.0",
+          "fast-uri@4.2.1",
+          "multer@2.4.0",
+          "zod@4.4.2"
+        ],
+        "changedEdges": [
+          {
+            "package": "@nestjs/platform-express@11.1.19",
+            "changes": [
+              {
+                "edge": "dependencies:multer",
+                "before": ["multer@2.4.0"],
+                "after": ["multer@2.5.0"]
+              }
+            ],
+            "examplePath": [
+              "apps/docs-backend:dependencies",
+              "@nestjs/core@11.1.19",
+              "@nestjs/platform-express@11.1.19"
+            ]
+          },
+          {
+            "package": "ajv@8.20.0",
+            "changes": [
+              {
+                "edge": "dependencies:fast-uri",
+                "before": ["fast-uri@4.2.1"],
+                "after": ["fast-uri@4.2.3"]
+              }
+            ],
+            "examplePath": [
+              "apps/docs-backend:devDependencies",
+              "@nestjs/cli@11.0.21",
+              "@angular-devkit/core@19.2.24",
+              "ajv@8.20.0"
+            ]
+          },
+          {
+            "package": "express@5.2.1",
+            "changes": [
+              {
+                "edge": "dependencies:body-parser",
+                "before": ["body-parser@2.3.0"],
+                "after": ["body-parser@2.4.0"]
+              }
+            ],
+            "examplePath": [
+              "apps/docs-backend:dependencies",
+              "@nestjs/core@11.1.19",
+              "@nestjs/platform-express@11.1.19",
+              "express@5.2.1"
+            ]
+          }
+        ],
+        "unresolvedBefore": [],
+        "unresolvedAfter": []
+      },
+      {
+        "workspace": "apps/vuln-radar",
+        "beforePackages": 485,
+        "afterPackages": 485,
+        "beforeContexts": 485,
+        "afterContexts": 485,
+        "added": ["zod@4.6.7"],
+        "removed": ["zod@4.4.2"],
+        "changedEdges": [],
+        "unresolvedBefore": [],
+        "unresolvedAfter": []
+      },
+      {
+        "workspace": "apps/vuln-radar-backend",
+        "beforePackages": 803,
+        "afterPackages": 804,
+        "beforeContexts": 805,
+        "afterContexts": 806,
+        "added": [
+          "body-parser@2.4.0",
+          "content-type@2.1.0",
+          "fast-uri@4.2.3",
+          "multer@2.5.0"
+        ],
+        "removed": ["body-parser@2.3.0", "fast-uri@4.2.1", "multer@2.4.0"],
+        "changedEdges": [
+          {
+            "package": "@nestjs/platform-express@11.1.19",
+            "changes": [
+              {
+                "edge": "dependencies:multer",
+                "before": ["multer@2.4.0"],
+                "after": ["multer@2.5.0"]
+              }
+            ],
+            "examplePath": [
+              "apps/vuln-radar-backend:dependencies",
+              "@nestjs/core@11.1.19",
+              "@nestjs/platform-express@11.1.19"
+            ]
+          },
+          {
+            "package": "ajv@8.20.0",
+            "changes": [
+              {
+                "edge": "dependencies:fast-uri",
+                "before": ["fast-uri@4.2.1"],
+                "after": ["fast-uri@4.2.3"]
+              }
+            ],
+            "examplePath": [
+              "apps/vuln-radar-backend:dependencies",
+              "@prisma/client@7.8.0",
+              "prisma@7.8.0",
+              "@prisma/dev@0.24.3",
+              "@prisma/streams-local@0.1.2",
+              "ajv@8.20.0"
+            ]
+          },
+          {
+            "package": "express@5.2.1",
+            "changes": [
+              {
+                "edge": "dependencies:body-parser",
+                "before": ["body-parser@2.3.0"],
+                "after": ["body-parser@2.4.0"]
+              }
+            ],
+            "examplePath": [
+              "apps/vuln-radar-backend:dependencies",
+              "@nestjs/core@11.1.19",
+              "@nestjs/platform-express@11.1.19",
+              "express@5.2.1"
+            ]
+          }
+        ],
+        "unresolvedBefore": [],
+        "unresolvedAfter": []
+      },
+      {
+        "workspace": "packages/api",
+        "beforePackages": 153,
+        "afterPackages": 153,
+        "beforeContexts": 153,
+        "afterContexts": 153,
+        "added": [],
+        "removed": [],
+        "changedEdges": [],
+        "unresolvedBefore": [],
+        "unresolvedAfter": []
+      },
+      {
+        "workspace": "packages/docs-content-contract",
+        "beforePackages": 91,
+        "afterPackages": 91,
+        "beforeContexts": 91,
+        "afterContexts": 91,
+        "added": ["zod@4.6.7"],
+        "removed": ["zod@4.4.2"],
+        "changedEdges": [],
+        "unresolvedBefore": [],
+        "unresolvedAfter": []
+      },
+      {
+        "workspace": "packages/eslint-config",
+        "beforePackages": 300,
+        "afterPackages": 300,
+        "beforeContexts": 300,
+        "afterContexts": 300,
+        "added": ["zod@4.6.7"],
+        "removed": ["zod@4.4.2"],
+        "changedEdges": [
+          {
+            "package": "eslint-plugin-react-hooks@7.1.1",
+            "changes": [
+              {
+                "edge": "dependencies:zod",
+                "before": ["zod@4.4.2"],
+                "after": ["zod@4.6.7"]
+              }
+            ],
+            "examplePath": [
+              "packages/eslint-config:devDependencies",
+              "eslint-plugin-react-hooks@7.1.1"
+            ]
+          },
+          {
+            "package": "zod-validation-error@4.0.2",
+            "changes": [
+              {
+                "edge": "dependencies:zod",
+                "before": ["zod@4.4.2"],
+                "after": ["zod@4.6.7"]
+              }
+            ],
+            "examplePath": [
+              "packages/eslint-config:devDependencies",
+              "eslint-plugin-react-hooks@7.1.1",
+              "zod-validation-error@4.0.2"
+            ]
+          }
+        ],
+        "unresolvedBefore": [],
+        "unresolvedAfter": []
+      },
+      {
+        "workspace": "packages/tailwind-config",
+        "beforePackages": 5,
+        "afterPackages": 5,
+        "beforeContexts": 5,
+        "afterContexts": 5,
+        "added": [],
+        "removed": [],
+        "changedEdges": [],
+        "unresolvedBefore": [],
+        "unresolvedAfter": []
+      },
+      {
+        "workspace": "packages/typescript-config",
+        "beforePackages": 0,
+        "afterPackages": 0,
+        "beforeContexts": 0,
+        "afterContexts": 0,
+        "added": [],
+        "removed": [],
+        "changedEdges": [],
+        "unresolvedBefore": [],
+        "unresolvedAfter": []
+      },
+      {
+        "workspace": "packages/ui",
+        "beforePackages": 306,
+        "afterPackages": 306,
+        "beforeContexts": 306,
+        "afterContexts": 306,
+        "added": [],
+        "removed": [],
+        "changedEdges": [],
+        "unresolvedBefore": [],
+        "unresolvedAfter": []
+      }
+    ]
+  },
+  "regressionHistory": {
+    "beforePatchInstall": {
+      "tests": 15,
+      "passed": 4,
+      "failed": 11,
+      "note": "Lockfile/config had been updated, but installed packages were still baseline. Later one installed-version gate was added and one relative-normalization expectation corrected.",
+      "observations": [
+        "TOML oversized integer reached guarded BigInt in an isolated child",
+        "four Zod consumer version floors rejected 4.4.2; this was not an OOM reproduction",
+        "four fast-uri behavior regressions failed",
+        "two isolated multer children exited with unhandled Unexpected end of form",
+        "bounded body-parser deflate compatibility passed on both old and patched versions; not a direct crash reproduction"
+      ]
+    },
+    "afterPatchInstall": {
+      "tests": 16,
+      "passed": 16,
+      "failed": 0
+    },
+    "initialHarnessIssue": "@nestjs/cli has no resolvable default entry; use its package.json to resolve installed Ajv. This setup error is not a vulnerability.",
+    "initialCorrectedExpectation": "fast-uri 4.2.3 normalizes a/../b to b, preserving its resolution target. It must not be asserted identical to the input."
+  },
+  "limits": [
+    "macOS arm64 Node24; Linux/NAS/Railway runtime and full attacker workload unverified",
+    "audit exit 1 is expected while main's three Next advisories remain pending PR60",
+    "bounded local denial-of-service regressions only; no RCE payload, remote service attack, DB migration, publication or production deployment"
+  ]
+}

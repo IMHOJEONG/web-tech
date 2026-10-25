@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-10-24T07:02:40.325Z",
+  "baseSha": "16c51e9911f041b125a445b3939966986426a0b4",
+  "runnerSha256": "74aeb55c5451c1fde46b0565b0252909477e01610702674c3c6fb46c09ee2d2a",
+  "node": "v24.12.0",
+  "vitePlus": "1.4.0",
+  "results": [
+    {
+      "name": "existing tooling and test scripts are unchanged",
+      "durationMs": 44
+    },
+    {
+      "name": "dependency policy changes stay bounded and retain compatible consumers",
+      "durationMs": 381
+    },
+    {
+      "name": "app, React plugin and Vite+ use one matching Vite core",
+      "durationMs": 3
+    }
+  ],
+  "peerContextChanges": ["."],
+  "cleanupErrors": [],
+  "failure": "apps/docs:postcss\n+ actual - expected\n\n+ 'catalog:'\n- '>=8.5.23'\n",
+  "logs": []
+}

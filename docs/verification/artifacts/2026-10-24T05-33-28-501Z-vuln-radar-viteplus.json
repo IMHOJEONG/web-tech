@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-24T05:33:28.569Z",
+  "baseSha": "16c51e9911f041b125a445b3939966986426a0b4",
+  "runnerSha256": "f7734986e005772ca2d52ea1deb9a388fd53b17646d1d852e5a994ebbf65ef25",
+  "node": "v24.12.0",
+  "vitePlus": "1.4.0",
+  "results": [
+    {
+      "name": "existing tooling and test scripts are unchanged",
+      "durationMs": 61
+    },
+    {
+      "name": "app, React plugin and Vite+ use one matching Vite core",
+      "durationMs": 3
+    }
+  ],
+  "peerContextChanges": [],
+  "cleanupErrors": [],
+  "failure": "Cannot find module 'yaml'\nRequire stack:\n- /private/tmp/web-tech-vuln-stats-20261021/apps/vuln-radar-backend/package.json",
+  "logs": []
+}

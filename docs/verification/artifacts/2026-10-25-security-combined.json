@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "checkedDate": "2026-10-25",
+  "timezone": "Asia/Seoul",
+  "scope": "Local PR 61 integration before its merge; not proof of NAS deployment",
+  "inputs": {
+    "mainAfterPr60": "51cdb40de7577090950d0c6b3024bee6fdb2222c",
+    "pr61BeforeIntegration": "9c7ce8c56af20a54c4dfc350ab187c99567726f4",
+    "lockfileSha256": "4b63166c3fcae9a769b37d90a5b65d4a02a81e6e2c4237d945cf7b26ad8f3089"
+  },
+  "environment": {
+    "platform": "macOS arm64",
+    "node": "24.12.0",
+    "pnpm": "12.14.0",
+    "network": "Local tests use loopback/mock data; audit and install use the public registry"
+  },
+  "audit": {
+    "all": {
+      "command": "mise exec -- pnpm audit --json",
+      "exitCode": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0
+      },
+      "totalDependencies": 1658
+    },
+    "production": {
+      "command": "mise exec -- pnpm audit --prod --json",
+      "exitCode": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0
+      },
+      "totalDependencies": 913
+    }
+  },
+  "regression": {
+    "repo": { "passed": 153, "failed": 0 },
+    "docsLib": { "passed": 285, "failed": 0 },
+    "contentContract": { "passed": 22, "failed": 0 },
+    "vulnRadarLib": { "passed": 32, "failed": 0 },
+    "vulnRadarBackendUnit": { "passed": 48, "failed": 0 },
+    "docsBackend": { "unitPassed": 13, "apiPassed": 34, "checkExitCode": 0 },
+    "docsProduction": { "passed": 154, "failed": 0, "duration": "1.6m" },
+    "peerIssues": 0,
+    "catalogManifests": 11,
+    "frozenInstallExitCode": 0
+  },
+  "preservedFailures": [
+    "Offline install lacked @next/env registry metadata; online frozen install passed supply-chain policy without lockfile changes.",
+    "Restricted execution prevented loopback listening (EPERM); the same tests passed after allowing local listeners. No assertions or retries were relaxed."
+  ],
+  "remaining": [
+    "Fresh PR 61 CI and CodeQL after integration",
+    "PR 61 main merge and automatic deployment verification",
+    "NAS image replacement is excluded from the approval"
+  ]
+}

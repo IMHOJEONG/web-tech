@@ -1,0 +1,136 @@
+{
+  "checkedAt": "2026-10-25T01:56:17.235Z",
+  "version": "16.4.3",
+  "phase": "before E2E compatibility correction",
+  "result": {
+    "passed": 144,
+    "failed": 10,
+    "total": 154
+  },
+  "failures": [
+    {
+      "case": "prefetch-navigation-direct-a7bc9-terrupts-a-pending-response-article-desktop",
+      "error": "Expected: true\nReceived: false",
+      "waitingFor": "mandatory framework stream-error log"
+    },
+    {
+      "case": "prefetch-navigation-direct-a7bc9-terrupts-a-pending-response-article-mobile",
+      "error": "Expected: true\nReceived: false",
+      "waitingFor": "mandatory framework stream-error log"
+    },
+    {
+      "case": "prefetch-navigation-direct-cce46-terrupts-a-pending-response-article-desktop",
+      "error": "Expected: true\nReceived: false",
+      "waitingFor": "mandatory framework stream-error log"
+    },
+    {
+      "case": "prefetch-navigation-direct-cce46-terrupts-a-pending-response-article-mobile",
+      "error": "Expected: true\nReceived: false",
+      "waitingFor": "mandatory framework stream-error log"
+    },
+    {
+      "case": "prefetch-termination-prefe-c588e-on-control-navigate-pending-article-desktop",
+      "error": "Expected: true\nReceived: false",
+      "waitingFor": "mandatory framework stream-error log"
+    },
+    {
+      "case": "prefetch-termination-prefe-c588e-on-control-navigate-pending-article-mobile",
+      "error": "Expected: true\nReceived: false",
+      "waitingFor": "mandatory framework stream-error log"
+    },
+    {
+      "case": "request-cause-next-request-cause-control-client-abort-article-desktop",
+      "error": "Expected: true\nReceived: false",
+      "waitingFor": "mandatory framework stream-error log"
+    },
+    {
+      "case": "request-cause-next-request-cause-control-client-abort-article-mobile",
+      "error": "Expected: true\nReceived: false",
+      "waitingFor": "mandatory framework stream-error log"
+    },
+    {
+      "case": "request-cause-next-request-cause-control-server-destroy-article-desktop",
+      "error": "Expected: true\nReceived: false",
+      "waitingFor": "mandatory framework stream-error log"
+    },
+    {
+      "case": "request-cause-next-request-cause-control-server-destroy-article-mobile",
+      "error": "Expected: true\nReceived: false",
+      "waitingFor": "mandatory framework stream-error log"
+    }
+  ],
+  "traces": [
+    {
+      "requestId": "73d6fd70-b3de-4d72-a18d-2f9e94e50f94",
+      "responseFinished": false,
+      "omitted": 0,
+      "deliveryFailures": 0,
+      "events": [
+        "request-start",
+        "upstream-start",
+        "socket-end",
+        "socket-end-call",
+        "socket-destroy-call",
+        "socket-close",
+        "response-close",
+        "upstream-error",
+        "console-warning",
+        "console-warning"
+      ]
+    },
+    {
+      "requestId": "9ec0571c-8a4b-4403-9b21-1bf0c76ecff5",
+      "responseFinished": false,
+      "omitted": 0,
+      "deliveryFailures": 0,
+      "events": [
+        "request-start",
+        "upstream-start",
+        "socket-end",
+        "socket-end-call",
+        "socket-destroy-call",
+        "socket-close",
+        "response-close",
+        "upstream-error",
+        "console-warning",
+        "console-warning"
+      ]
+    },
+    {
+      "requestId": "a91c5612-e7f8-4156-b9fc-0d33aeb120c0",
+      "responseFinished": false,
+      "omitted": 0,
+      "deliveryFailures": 0,
+      "events": [
+        "request-start",
+        "upstream-start",
+        "controlled-server-destroy",
+        "response-destroy-call",
+        "socket-destroy-call",
+        "socket-close",
+        "response-close",
+        "upstream-error",
+        "console-warning",
+        "console-warning"
+      ]
+    },
+    {
+      "requestId": "cfa27e5d-e23b-4471-8b53-d9b1193cf94d",
+      "responseFinished": false,
+      "omitted": 0,
+      "deliveryFailures": 0,
+      "events": [
+        "request-start",
+        "upstream-start",
+        "controlled-server-destroy",
+        "response-destroy-call",
+        "socket-destroy-call",
+        "socket-close",
+        "response-close",
+        "upstream-error",
+        "console-warning",
+        "console-warning"
+      ]
+    }
+  ]
+}

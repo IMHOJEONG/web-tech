@@ -6,6 +6,10 @@
 
 ## ADR 상태
 
+- [ADR-0017: Overview 부분 API 장애 격리](adr-0017-vuln-radar-panel-failure-isolation.md): 적용 중. API별 로딩·캐시 유지·경고/재시도, 로컬 작업 트리·운영 미검증.
+
+- [ADR-0016: 수집 실행 관측과 데이터 기준일 분리](adr-0016-vuln-radar-ingest-observation.md): 적용 중. 로컬 process-local 이력·조회/수집 주기·구버전 미확인 구분, 영속 이력 미구현·운영 배포 미검증.
+
 2026-09-23에 ADR의 상태와 대체 관계를 확인했다. `적용 중`은 해당 범위의 결정이 현재 코드에 반영되었다는 의미이며 운영 배포·외부 소비처까지 검증 완료했다는 의미는 아니다. 상태의 원본은 각 ADR의 `상태와 범위`이며 전환할 때 이 목록도 함께 갱신한다.
 
 | 결정                                                                            | 상태    | 범위 또는 후속 결정                                                          |
@@ -34,9 +38,15 @@
 
 - [ADR-0009: 선택형 웹 푸시 실험](adr-0009-docs-web-push-experiment.md): 적용 중. 기본 비활성화 MVP, 실제 기기 수신·NAS 활성화는 미검증.
 
-- [ADR-0008: 요청별 증거로 스트림 종료 판정](adr-0008-request-lifecycle-observability.md): 제안. 2026-09-24 로컬 fixture 계측·테스트 추가, 운영 적용은 미구현.
+- [ADR-0008: 요청별 증거로 스트림 종료 판정](adr-0008-request-lifecycle-observability.md): 제안. 로컬 fixture·앱 부분 계측·UI/전송 검사 분리 반영, 전체 운영 종료 판정은 미완료.
 
 ## 설계·정책 목록
+
+- [vuln-radar Vite+ 개발·빌드 실험](vuln-radar-viteplus-experiment.md): 제안. 앱 한정 CLI/core 별칭, 기존 도구 유지·로컬 검증, 운영 채택·Railway 배포 제외.
+
+- [KEV 점수·우선순위 표시 계약](vuln-radar-kev-evidence.md): nullable 실제 EPSS·미확인·빈 목록과 우선순위 구분, 작업별 커밋·운영 미검증.
+
+- [vuln-radar 전체 통계와 목록 집계](vuln-radar-overview-statistics.md): 전체 DB 집계와 상위25개 Feed 분리, 로컬 적용·배포 미검증.
 
 - [서비스 복구와 배포 안전 정책](platform-recovery-policy.md): 제안. RTO/RPO와 백업·롤백·리허설 기준, 운영 적용 미검증.
 

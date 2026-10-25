@@ -1,0 +1,38 @@
+{
+  "checkedAt": "2026-10-24T07:05:22.350Z",
+  "baseSha": "16c51e9911f041b125a445b3939966986426a0b4",
+  "currentLockSha256": "1c6c01d289f320b2cabb6aa3dcc0528fb455b1dc4da46b011aec7fb060ed230d",
+  "baselineInstall": {
+    "status": 0,
+    "offline": true,
+    "frozenLockfile": true,
+    "ignoreScripts": true
+  },
+  "baseline": {
+    "optionalBabel": {
+      "version": "8.0.1",
+      "succeeded": false,
+      "code": "BABEL_VERSION_UNSUPPORTED",
+      "requiredRange": "^7.0.0-0"
+    },
+    "bundledBabel": {
+      "version": "7.26.10",
+      "succeeded": true
+    },
+    "customBabelConfig": false
+  },
+  "experiment": {
+    "optionalBabel": {
+      "version": "7.29.6",
+      "succeeded": true
+    },
+    "bundledBabel": {
+      "version": "7.26.10",
+      "succeeded": true
+    },
+    "customBabelConfig": false
+  },
+  "fixturesOnly": true,
+  "temporaryBaselineRemoved": true,
+  "experimentLockUnchanged": true
+}

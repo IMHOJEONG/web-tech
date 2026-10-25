@@ -1,5 +1,28 @@
 # 검증 보고서
 
+- [10-25 나머지 의존성 보안 경고 10건](security/2026-10-25-remaining-advisories.md): main 기반 분리 패치·16개 신규 회귀·production 문서154개 성공. 감사13→3, Next는 PR #60에 유지·미배포.
+- [10-25 Next.js Critical 우선 패치](security/2026-10-25-next-critical.md): Next/MDX 16.4.3·Critical 0·잔여 10건, 보안/함수 캐시·production E2E와 종료 증거 호환 보완. 작업별 커밋, 운영 미배포.
+
+- [10-24 PR #59 기준선 리뷰 수정·회귀](integration/2026-10-24-pr59-baseline-fixes.md): 명시 ref·고정 SHA 공유, 실제 커밋 후 회귀 9개·전체129개, 원래 그래프/Babel 대조 재현과 정리 실패/후속 성공 보존.
+
+- [10-24 PR #59 CI·CodeQL·리뷰 점검](integration/2026-10-24-pr59-ci-review.md): CI 13개·CodeQL 통과, 커밋 후 HEAD 자기 비교 재현과 미해결 리뷰 구분, Vercel Linux 빌드 로그 확인.
+
+- [10-24 Vite+ 호환성 보완·override 정리](integration/2026-10-24-viteplus-dependency-remediation.md): PostCSS 강제 제거·Babel/nanoid 범위 보완, peer 0건·Next production/화면·외부 UI 소비자 통과. 기존 audit·Linux/배포는 별도.
+
+- [10-24 Vite+ peer·lockfile 소비자 영향](integration/2026-10-24-viteplus-peer-lockfile-impact.md): 별칭 버전 경고·optional 연결·PostCSS 범위 불일치, 기준 main 오프라인 대조와 소비자 검사.
+
+- [10-24 vuln-radar Vite+ 로컬 실험](integration/2026-10-24-vuln-radar-viteplus.md): CLI·프록시 7개와 기존 통합 25개, 기존 도구 유지. peer·보안 경고와 배포 미검증 범위 구분.
+
+- [10-22 CodeQL High #38 제목 검사 ReDoS](security/2026-10-22-codeql38-heading-redos.md): 긴 입력 격리 회귀·기존 판정 호환·로컬/NestJS 소비자 검증. main·NAS 운영 해소는 별도.
+
+- [10-22 Overview 부분 API 장애 격리](integration/2026-10-22-vuln-radar-partial-failures.md): 최초 실패·캐시 갱신 실패·대상 재시도·보조 요청 대기·전체 실패/복구의 로컬 회귀.
+
+- [10-22 수집 상태와 조회 주기 분리](integration/2026-10-22-vuln-radar-ingest-status.md): 실제 실행 관측·소스별 조회/원본 날짜·구버전 미확인과 로컬 회귀. 운영 배포·영속 이력은 별도.
+
+- [10-21 KEV 실제 점수·우선순위](integration/2026-10-21-vuln-radar-kev-evidence.md): Feed 밖0/null/0.125·구버전/503·빈 DB·중복 행 등 로컬 통합16개 통과. 운영 배포는 미검증.
+
+- [10-21 vuln-radar 전체 DB 통계](integration/2026-10-21-vuln-radar-overview-statistics.md): 43개 DB·25개 Feed, 중복 KEV·빈 DB·두 화면·새로고침과 기존 장애 회귀15개 통과. 운영 미배포.
+
 - [10-22 squash 최종 메시지 사전검사](resilience/2026-10-22-squash-merge-preflight.md): main 이력 보존·실제 footer 재현·병합 요청 격리 회귀. pnpm12 전환 PR #55와의 역할 구분.
 
 - [10-22 pnpm12 툴체인·서명 검증](integration/2026-10-22-pnpm12-toolchain.md): 앱 lock 유지·설치 실패 경계·전체 검사·두 backend 이미지 검증, 운영 교체는 별도.

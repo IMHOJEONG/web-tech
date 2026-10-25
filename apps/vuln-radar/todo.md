@@ -84,8 +84,10 @@
 결정 메모:
 
 - 첫 화면은 placeholder 문구보다 실데이터 상태를 우선 보여준다.
+- 2026-10-21 로컬 수정: 전체 건수·P0·P1·KEV 지표는 overview의 전체 DB 집계에서 읽고, Feed 상위25개 목록과 분리한다. [집계 계약](../../docs/architecture/vuln-radar-overview-statistics.md). 배포 미검증.
+- 후속 KEV 수정: 실제 nullable EPSS와 우선순위를 표시하고 Feed 점수/추정 대응 상태로 채우지 않는다. [표시 계약](../../docs/architecture/vuln-radar-kev-evidence.md). 작업별 커밋으로 분리했으며 운영 반영은 미검증.
 - `health`, `ingest/status`, `overview`, `feed`, `kev`, `watchlist`를 병렬 조회한다.
-- 스케줄러 전까지는 프론트에서 60초 polling으로 freshness를 보조 확인한다.
+- 화면60초 조회와 API scheduler의 실제 수집 주기는 별개다. [수집 관측 결정](../../docs/architecture/adr-0016-vuln-radar-ingest-observation.md)에 따라 process-local 실행 이력과 원본 날짜를 구분하고, 구버전·재시작 이력은 미확인으로 표시한다. 로컬 적용·운영 미검증.
 
 공부 포인트:
 
@@ -93,6 +95,9 @@
 - [ ] 정보가 많을 때 summary > list > detail 순서가 왜 중요한지 이해한다.
 
 후속 TODO:
+
+- [ ] 일부 API 실패 시 Overview 전체가 아닌 해당 패널만 경고·재시도하고 기존 데이터를 유지한다(개선4번).
+- [ ] 수집 관측 이력의 DB 영속 저장·재시작 복구와 다중 replica의 공유 실행 제어를 설계한다.
 
 - [ ] overview / detail에서 `왜 P0/P1인지`를 설명하는 점수 근거 UI를 추가한다.
 - [ ] `KEV`, `EPSS`, watchlist match가 priority에 어떤 영향을 줬는지 사용자에게 보여준다.
@@ -176,6 +181,9 @@
 - [ ] 현재 앱에서 왜 SSE를 우선 추천하는지 설명할 수 있다.
 
 ## 11. 에러/로딩 UX 정리
+
+- [x] Overview의 API별 최초 로딩/실패·기존 데이터 유지·패널 단위 재시도를 분리한다. [ADR-0017](../../docs/architecture/adr-0017-vuln-radar-panel-failure-isolation.md), [로컬 회귀](../../docs/verification/integration/2026-10-22-vuln-radar-partial-failures.md). 운영 미검증.
+- [ ] 부분 장애 대응 배포 후 실제 health/status/watchlist 장애·정상 패널 유지·단일 재시도와 모바일 안내를 확인한다. 푸시/CI/배포 결과를 로컬 결과와 구분해 기록한다.
 
 - [ ] route level loading
 - [ ] widget level skeleton
