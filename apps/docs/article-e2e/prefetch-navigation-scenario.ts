@@ -156,9 +156,7 @@ export async function expectPrefetchNavigation(
                 const result = await summary()
                 return (
                     result.responseFinished === true ||
-                    result.events.some(
-                        (event) => event.errorCategory === 'stream'
-                    )
+                    result.responseClosed === true
                 )
             })
             .toBe(true)
@@ -167,9 +165,19 @@ export async function expectPrefetchNavigation(
         expect(after.responseFinished).toBe(!replacedDocument)
         expect(after.closeBeforeFinish).toBe(replacedDocument)
         expect(after.outcome).toBe(replacedDocument ? 'unknown' : 'completed')
-        expect(
-            after.events.filter((event) => event.errorCategory === 'stream')
-        ).toHaveLength(replacedDocument ? 1 : 0)
+        const streamErrors = after.events.filter(
+            (event) => event.errorCategory === 'stream'
+        )
+        if (!replacedDocument) expect(streamErrors).toHaveLength(0)
+        else {
+            // Cancellation is a transport observation, not a guaranteed log.
+            const closed = after.events.find(
+                (event) => event.event === 'closed'
+            )
+            expect(closed).toBeDefined()
+            for (const error of streamErrors)
+                expect(error.sequence).toBeGreaterThan(closed!.sequence)
+        }
         const sameDocument = await page.evaluate(
             (value) =>
                 Reflect.get(window, '__articleNavigationIdentity') === value,
