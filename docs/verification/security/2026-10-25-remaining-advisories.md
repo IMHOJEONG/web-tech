@@ -133,6 +133,37 @@ PR #61의 통합 전 head는 CI 13개 job·CodeQL이 성공했고, High #42는 f
 
 PR #60의 자동 실행에서는 GitHub의 `Production – web-tech`·`Production – vuln-radar` 환경 배포 성공과 Railway development 서비스의 동일 SHA·SUCCESS/RUNNING·`GET /api/health` status ok를 확인했다. 최초 `/health` 요청은 전역 `/api` prefix를 누락해 404였으며 실제 라우트 재조회와 구분한다. [main 이미지 workflow](https://github.com/IMHOJEONG/web-tech/actions/runs/40159712576)는 linux/amd64 이미지 `sha-51cdb40de7577090950d0c6b3024bee6fdb2222c`의 게시와 digest `sha256:b4cf6670fc0facc8b9678ff03064690c863090a2a8caad188607923ef77bb393`를 기록했다. 이는 NAS의 실행 이미지 교체나 PR #61 운영 적용을 뜻하지 않는다. 두 번째 PR의 실제 병합·새 main CI·배포 식별자는 Jira·Confluence의 같은 KAN-35 기록에서 후속 확인한다.
 
+### main 오프라인 실패 재발과 미채택 대조
+
+PR #60의 자동 배포는 성공했지만 [main CI 40159712630](https://github.com/IMHOJEONG/web-tech/actions/runs/40159712630)은 오프라인 desktop 1건 실패·37건 통과였다. PR #61 통합 head `f63aa05`에서도 같은 suite 실패를 확인했다. 따라서 앞선 헤더 보정의 로컬·PR 통과를 안정적 해소나 main CI 성공으로 확대하지 않는다. 다른 job과 배포 성공은 실패한 오프라인 검사를 대체하지 않는다.
+
+main의 `docs-offline-40159712630-1` artifact에서 지연된 HTTP 200 RSC 요청은 9,521ms에 헤더, 9,632ms에 `request-failed`, 9,702ms에 URL commit, 10,060ms에 본문 표시를 기록했다. trace에는 `net::ERR_ABORTED`가 있어 단순 관측 종료 race로 분류하지 않는다. gzip 제거 이후에도 재발했으므로 압축 헤더만을 유일 원인으로 판단하지 않는다.
+
+이 검사는 **지연된 실제 Link 응답이 본문 표시 이후의 UI 검사 시간을 소비하지 않는지**와 같은 요청의 `response-finished` 관측을 함께 요구한다. 둘 중 어느 계약을 바꿀지 결정하기 전에 다음을 임시 대조했다. 아래 실험은 안정적 해결을 입증하지 못해 전부 폐기했으며, 앱·관측 helper·assertion·timeout·retry와 테스트 위치는 기존 head 상태로 복구했다.
+
+| 임시 대조                                            | 실제 관측과 한계                                                                                                                       |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `route.fetch/fulfill` 대신 원래 요청 dispatch만 지연 | 단독 반복 10/10 성공, 전체 suite는 다시 37/38. 본문 재생만이 원인이라는 가설 불충분                                                    |
+| 서버 컴파일 선행·브라우저 reload                     | 전체 suite 37/38. 냉간 개발 컴파일만의 문제라고 확정하지 못함                                                                          |
+| 브라우저 AbortController/stream cancel 임시 계측     | 해당 실행은 단독·전체 모두 성공하고 취소 호출 스택이 없었음. 실패 경로의 호출자를 찾았다는 근거가 아니며 timing 영향 배제 못함         |
+| production build/start로 같은 assertion 이동         | 첫 반복 1/6만 성공. 나머지는 선행 prefetch가 지연 gate를 우회해 URL이 먼저 바뀜. 새로운 fixture 조건 문제와 기존 전송 완료 실패를 구분 |
+| production에서 prefetch까지 gate 또는 명시 차단      | 각각 반복 5/6 성공, 같은 전송 완료 assertion 1개 실패. dev/HMR 전용 문제라는 결론도 불충분                                             |
+
+본문이 표시됐다는 사실을 전송 완료 증거로 쓰지 않는다. `request-failed`를 `response-finished`로 바꾸거나 관측된 취소를 정상으로 분류하지 않는다. 반대로 위 결과만으로 운영 사용자에게 본문 표시 장애가 발생했다고 단정하지 않는다. 알려진 사실은 HTTP 200·본문 표시 이후에도 동일 요청의 완료 이벤트를 요구한 검사가 실패했다는 점이며, 중단 호출자·항상 같은 단일 원인·프레임워크 정상 동작 여부는 미확정이다.
+
+```sh
+gh run download 40159712630 --repo IMHOJEONG/web-tech \
+  --name docs-offline-40159712630-1 \
+  --dir /tmp/web-tech-pr60-main-offline-failure-20261025
+mise exec -- pnpm --filter docs test:offline \
+  --grep 'healthy delayed' --repeat-each=5
+mise exec -- pnpm --filter docs test:offline
+mise exec -- pnpm --filter docs typecheck:node-test
+mise exec -- pnpm --filter docs exec eslint offline-e2e/article-navigation.spec.ts
+```
+
+위 재현 명령은 현재 유지한 원래 fixture를 실행한다. 임시 production 실험 파일·컴파일 warmup·브라우저 계측은 남기지 않았다. 사용자에게 UI 완료와 전송 완료·중단 검사를 별도 계약으로 분리할지, 기존 엄격한 조건을 유지하고 중단 원인 조사를 계속할지 재확인했다. 그 결정과 필수 검사 해소 전에는 PR #61을 병합하지 않는다. 실패한 main 이력·원격 artifact는 삭제·재작성하거나 강제 통과시키지 않는다. 결합 audit 0건·기존 production 154개 성공과 이번 미해결 검사는 별개다.
+
 ## 관련 문서
 
 - [작업 기록](../../worklog/2026-10/2026-10-25-remaining-advisories.md)
