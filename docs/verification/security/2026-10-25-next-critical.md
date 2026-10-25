@@ -1,4 +1,4 @@
-# Next.js Critical 2건 패치와 로컬 회귀 검증
+# Next.js Critical 2건 패치와 로컬·PR 회귀 검증
 
 ## 대상과 조건
 
@@ -79,12 +79,44 @@ mise exec -- pnpm audit --prod --json
 
 같은 코드 내용의 저장소 137개 검사를 커밋 분리 중에도 재실행해 통과했다. 원격 PR·CI 결과는 Jira·Confluence의 같은 작업 기록에 실제 SHA/run으로 연결하며, 로컬 성공을 원격 검증으로 간주하지 않는다.
 
+### PR #60 원격 검사와 리뷰 확인
+
+2026-10-25 11:20 KST 이후 [PR #60](https://github.com/IMHOJEONG/web-tech/pull/60)의 head `c906573284072efcb8aee8bada6b25be4c9c1058`를 기준으로 조회했다. base는 여전히 `d0b25a5122fd9b4377b559270c10680c984e2aed`이며 PR은 OPEN·미병합이다. 이번 독립 검증은 아래 명령으로 수행했다. `gh run watch`는 상태 조회이며 재실행 요청이 아니다.
+
+```sh
+gh run watch 40153711040 --repo IMHOJEONG/web-tech --interval 30 --exit-status
+gh run view 40153711040 --repo IMHOJEONG/web-tech --json status,conclusion,headSha,jobs
+gh run view 40153709339 --repo IMHOJEONG/web-tech --json status,conclusion,headSha,jobs
+gh api 'repos/IMHOJEONG/web-tech/code-scanning/alerts?ref=refs/pull/60/merge&state=open&per_page=100' --paginate
+gh api 'repos/IMHOJEONG/web-tech/pulls/60/reviews?per_page=100'
+gh api 'repos/IMHOJEONG/web-tech/issues/60/comments?per_page=100'
+gh api graphql -f query='query {repository(owner:"IMHOJEONG",name:"web-tech"){pullRequest(number:60){reviewThreads(first:100){pageInfo{hasNextPage} nodes{isResolved path line comments(first:20){nodes{body url}}}}}}}'
+gh run view 40153711040 --repo IMHOJEONG/web-tech --job 121050424312 --log
+gh run view 40153711040 --repo IMHOJEONG/web-tech --job 121050424282 --log
+mise exec -- node --experimental-strip-types --test scripts/security-next-critical.test.mts
+```
+
+| 검사                | 결과와 근거                                                                                                                                                                                                                                                                                         |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CI                  | [run 40153711040](https://github.com/IMHOJEONG/web-tech/actions/runs/40153711040) SUCCESS, 13개 job 모두 성공. 최종 완료 2026-10-25T02:20:45Z. 커밋 메시지·lint·타입·UI 2종·오프라인·단위/계약·브라우저 5종·최종 Test 포함                                                                          |
+| Linux 실행 증거     | 단위 job에서 저장소 137개·docs lib 285개 성공과 신규 Next 보안 검사 실행을 확인. production job의 `154 passed (2.7m)` 확인. 해당 job 로그에서 `destination stream closed` 오류는 관측되지 않음                                                                                                      |
+| CodeQL              | [run 40153709339](https://github.com/IMHOJEONG/web-tech/actions/runs/40153709339) 동일 head에서 actions·javascript-typescript 모두 SUCCESS. PR merge ref 열린 code-scanning 경고 0건. 의존성 audit 잔여 10건과 다른 검사임                                                                          |
+| CodeRabbit          | [완료 댓글](https://github.com/IMHOJEONG/web-tech/pull/60#issuecomment-6392347256)에 actionable comment 없음. inline review thread 0개·정식 review API 0개, status SUCCESS. 사람의 APPROVED 리뷰가 있다는 뜻은 아님                                                                                 |
+| 봇의 비차단 경고    | 변경 함수 10개/8파일 대상 Docstring Coverage 20%가 기본 권장 80%보다 낮다는 경고 1건. 함수별 결함 지적이나 보안 실패가 아니며 CI는 통과. 저장소 정책·워크플로에서 이 비율을 강제하는 규칙은 찾지 못함. 임계값만 맞추는 일괄 주석 생성은 실행하지 않음                                               |
+| 리뷰 범위           | 봇은 17개 파일을 선택하고 `pnpm-lock.yaml`은 기본 필터로 제외. 따라서 봇 성공만으로 lockfile을 검증했다고 하지 않음. 앞선 graph/audit 비교, 설치·peer 검사와 이번 Linux 회귀 결과를 별도 근거로 사용                                                                                                |
+| 문서·이미지·Preview | Documentation·GitGuardian·Vercel web-tech/vuln-radar Preview 모두 SUCCESS. [docs-backend image PR run](https://github.com/IMHOJEONG/web-tech/actions/runs/40153711038) 성공은 linux/amd64 build-only다. workflow의 `push: github.event_name != 'pull_request'` 조건상 이미지 게시나 NAS 교체가 아님 |
+| 재확인과 경계       | 신규 보안 검사 6개 로컬 재통과. 코드·설정·리뷰 상태 수정, workflow 재실행, commit/push, main 병합·Railway/운영/수동 배포는 하지 않음. 이번 후속 기록은 로컬 문서 변경이며 기존 PR head에 포함되지 않음                                                                                              |
+
+변경된 E2E와 보안 검사를 대조한 범위에서 추가로 재현된 결함은 없다. 봇의 주석 비율 경고는 선택적 문서 품질 제안으로 남기고, 별도 수정·해결 처리는 하지 않았다. 기존 취소/장애 판정과 실제 `response-close` 원인 순서 검사는 유지된다. 신규 검사는 안전 버전 하한과 정상 동작 회귀이며 공격 차단의 직접 증명은 아니다.
+
+후속 사용자 승인으로 이 보고서와 worklog 2개만 별도 문서 커밋·푸시 대상으로 삼았다. 위 결과는 검증 당시 head `c906573`의 증거이며, 문서 커밋 후 자동 실행되는 새 CI·리뷰 결과로 간주하지 않는다. 나머지 보안 경고 10건과 main 병합·운영 배포 보류는 유지한다.
+
 ## 한계와 후속 작업
 
 - 보안 확인은 공식 패치 버전·audit 경고 제거·정상 기능 및 경계 회귀다. RCE payload를 실행하거나 실제 공격 차단을 재현한 결과가 아니다. macOS 검사는 glibc Linux 네이티브 이미지 처리 검증을 대신하지 않는다.
 - 나머지 10건은 production 감사에도 남아 있다. 개발 전용 경고라고 일괄 분류하지 않으며 실제 도달성·개별 패치는 후속 작업이다. unused `web` catalog의 기존 Next 값은 실제 설치/소비자가 아니어서 이번 활성 docs 범위에서 변경하지 않았다.
 - 기존 Next-intl webpack cache 경고와 TCP 글의 placeholder-like 문구 경고는 이번 보안 패치와 별개로 유지했다. 검증 실패를 무시한 것이 아니라 후속 실행의 종료 0·실제 결과를 확인했다.
-- 원격 CI·CodeQL·Linux build·운영 배포는 로컬 검사와 별도로 확인해야 한다. lock/workspace 변경은 추후 main 병합 시 Railway·docs-backend 이미지 게시에 영향을 줄 수 있으므로 병합·배포 승인은 별도로 확인한다. Vercel Git 연동은 작업 브랜치 푸시·PR에서도 Preview를 생성할 수 있어 이를 운영 배포와 구분하고 허용 범위를 확인한다.
+- 위 head의 원격 CI·CodeQL·Linux 회귀·PR 이미지 build와 자동 Preview는 후속 확인했다. 운영 배포와 운영 환경의 취약점 해소는 여전히 미검증이다. lock/workspace 변경은 추후 main 병합 시 Railway·docs-backend 이미지 게시에 영향을 줄 수 있으므로 병합·배포 승인은 별도로 확인한다. 이번 확인에서는 병합·운영 배포를 하지 않았다.
 
 ## 관련 문서
 
