@@ -111,6 +111,20 @@ mise exec -- node --experimental-strip-types --test scripts/security-next-critic
 
 후속 사용자 승인으로 이 보고서와 worklog 2개만 별도 문서 커밋·푸시 대상으로 삼았다. 위 결과는 검증 당시 head `c906573`의 증거이며, 문서 커밋 후 자동 실행되는 새 CI·리뷰 결과로 간주하지 않는다. 나머지 보안 경고 10건과 main 병합·운영 배포 보류는 유지한다.
 
+### 문서 커밋 35a9fcd의 새 head 재검증
+
+2026-10-25 KST에 새 head `35a9fcda83b2bfc3a8db01ad1426b85d63091323`를 별도로 확인했다. 이전 head와의 차이는 이 보고서·worklog 2개뿐이다. 위 재현 명령에서 CI run은 `40155360368`, CodeQL run은 `40155358267`로 바꾸어 조회했다. production E2E 로그의 job은 `121055502277`, 단위 검사 로그의 job은 `121055502263`이다.
+
+| 검사           | 새 head에서 관측한 결과                                                                                                                                                                                                                                                                                                                                   |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CI             | [run 40155360368](https://github.com/IMHOJEONG/web-tech/actions/runs/40155360368) SUCCESS, 13개 job 모두 성공. 최종 완료 2026-10-25T02:45:25Z. production E2E `154 passed (2.2m)`, 저장소 137개·docs lib 285개 성공과 신규 보안 검사 실행 확인. 해당 production job 로그에서 destination stream 오류는 관측되지 않음                                      |
+| CodeQL         | [run 40155358267](https://github.com/IMHOJEONG/web-tech/actions/runs/40155358267) 동일 head의 actions·javascript-typescript 모두 SUCCESS, PR merge ref 열린 code-scanning 경고 0건                                                                                                                                                                        |
+| 리뷰           | 새 head의 CodeRabbit status는 SUCCESS지만 description은 **Review rate limited**. [봇 댓글](https://github.com/IMHOJEONG/web-tech/pull/60#issuecomment-6392347256)의 무료 OSS 리뷰 한도 소진 안내와 `coveredCommitId: c906573…`를 확인. 새 head 재리뷰 완료로 표기하지 않음. inline thread 0개·정식 review API 0개이며 이전의 주석 비율 경고는 그대로 유지 |
+| 나머지 검사    | Documentation·GitGuardian·Vercel Preview 2개 성공. [docs-backend PR build](https://github.com/IMHOJEONG/web-tech/actions/runs/40155360259) 성공은 이미지 게시·NAS 배포가 아님                                                                                                                                                                             |
+| 로컬 문서 대조 | `git show --format= --name-status 35a9fcda83b2bfc3a8db01ad1426b85d63091323`로 문서 2개만 변경됨을 확인. `pnpm validate:docs --base c906573284072efcb8aee8bada6b25be4c9c1058`·`pnpm format:changed:check --base c906573284072efcb8aee8bada6b25be4c9c1058` 통과. 코드 수정 지적 없음                                                                        |
+
+초록 상태만 보고 새 리뷰가 수행됐다고 해석하지 않는다. 새 문서는 직접 대조했고 추가 결함은 발견하지 못했으나, 봇의 새 head 검토는 한도 해제 후 별도로 확인할 수 있다. 재리뷰 요청·설정 변경·검사 우회는 하지 않았다. PR은 OPEN·미병합이며 이번 재검증 기록은 로컬 미커밋 변경이다. 나머지 보안 경고 10건과 병합·운영 배포 보류는 유지한다.
+
 ## 한계와 후속 작업
 
 - 보안 확인은 공식 패치 버전·audit 경고 제거·정상 기능 및 경계 회귀다. RCE payload를 실행하거나 실제 공격 차단을 재현한 결과가 아니다. macOS 검사는 glibc Linux 네이티브 이미지 처리 검증을 대신하지 않는다.

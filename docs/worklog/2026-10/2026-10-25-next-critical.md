@@ -29,9 +29,15 @@ CodeRabbit 완료 댓글에는 actionable 지적이 없고 inline thread도 0개
 
 후속 사용자 승인으로 검증 보고서와 이 worklog 2개만 별도 커밋·푸시한다. 새 커밋의 CI 결과를 기존 `c906573`의 성공으로 대체하지 않는다. 코드·의존성·설정과 나머지 경고 10건은 변경하지 않으며, 자동 Preview 외 main 병합·운영·수동 배포는 하지 않는다. 저장소의 기존 포맷·문서·commitlint 훅을 유지하고 Jira·Confluence의 같은 기록에 실제 원격 커밋을 연결한다.
 
+### 새 head 재검증
+
+문서 커밋 `35a9fcd`가 PR #60에 반영된 뒤 새 CI 13개 job·CodeQL 2종·문서·PR 이미지 build·자동 Preview 성공을 확인했다. 새 production E2E 154개·repo 137개·docs lib 285개 성공과 열린 CodeQL 경고 0건을 원격 결과로 확인했다. 이전 head의 결과를 재사용하지 않았으며 run·명령은 검증 보고서에 연결했다.
+
+CodeRabbit 새 status는 SUCCESS지만 description이 `Review rate limited`이고 완료 리뷰의 기준은 이전 `c906573`다. 따라서 새 head 봇 리뷰는 미실행이며 새 지적 0개와 구분한다. 새 문서 2개의 내용·문서/포맷 검사는 직접 대조했고 추가 결함은 발견하지 못했다. 재리뷰 요청이나 한도 우회는 하지 않았다. 이번 결과는 기존 Jira·Confluence 기록을 갱신·재조회하고 로컬 문서 2개에 미커밋으로 남긴다. 추가 commit/push·병합·운영 배포는 하지 않는다.
+
 ## Open Questions
 
-나머지 10건은 KAN-35의 별도 미조치 범위다. 원격 Linux 회귀·CI/CodeQL은 확인했으나 악성 입력 차단과 운영 적용은 미검증이다. Docstring Coverage 경고의 채택 여부는 후속 선택 사항이다. 설치 시 worktree hook prepare 경고가 있었으나 실제 커밋의 기존 훅은 정상 실행됐다.
+나머지 10건은 KAN-35의 별도 미조치 범위다. 원격 Linux 회귀·CI/CodeQL은 확인했으나 악성 입력 차단과 운영 적용은 미검증이다. 새 head 봇 리뷰는 사용량 제한으로 미실행이며 이전 Docstring Coverage 경고의 채택 여부는 후속 선택 사항이다. 설치 시 worktree hook prepare 경고가 있었으나 실제 커밋의 기존 훅은 정상 실행됐다.
 
 ## Next
 
