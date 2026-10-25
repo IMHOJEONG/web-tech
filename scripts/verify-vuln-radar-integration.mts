@@ -484,7 +484,9 @@ async function main() {
   await startBackend(true);
   const vite = join(
     dirname(frontendRequire.resolve("vite/package.json")),
-    "bin/vite.js",
+    frontendRequire("vite/package.json").name === "@voidzero-dev/vite-plus-core"
+      ? "dist/vite/bin/vite.js"
+      : "bin/vite.js",
   );
   const frontendEnv = {
     ...process.env,

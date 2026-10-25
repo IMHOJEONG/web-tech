@@ -1,0 +1,124 @@
+{
+  "checkedAt": "2026-10-24T05:34:33.685Z",
+  "scope": "workspace audit, not deployment verification",
+  "exitCode": 1,
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 2,
+      "moderate": 2,
+      "high": 7,
+      "critical": 2
+    },
+    "dependencies": 786,
+    "devDependencies": 746,
+    "optionalDependencies": 242,
+    "totalDependencies": 1659
+  },
+  "advisories": [
+    {
+      "id": "GHSA-2464-fhr4-w9xw",
+      "pkg": "next",
+      "severity": "critical",
+      "versions": ["16.3.8"],
+      "url": "https://github.com/advisories/GHSA-2464-fhr4-w9xw",
+      "vitePlusPaths": []
+    },
+    {
+      "id": "GHSA-p3m5-59mp-jv5r",
+      "pkg": "next",
+      "severity": "high",
+      "versions": ["16.3.8"],
+      "url": "https://github.com/advisories/GHSA-p3m5-59mp-jv5r",
+      "vitePlusPaths": []
+    },
+    {
+      "id": "GHSA-673q-mjm6-r5xr",
+      "pkg": "next",
+      "severity": "critical",
+      "versions": ["16.3.8"],
+      "url": "https://github.com/advisories/GHSA-673q-mjm6-r5xr",
+      "vitePlusPaths": []
+    },
+    {
+      "id": "GHSA-4qx8-w7c3-pj3p",
+      "pkg": "toml",
+      "severity": "high",
+      "versions": ["5.0.0"],
+      "url": "https://github.com/advisories/GHSA-4qx8-w7c3-pj3p",
+      "vitePlusPaths": []
+    },
+    {
+      "id": "GHSA-9j65-hcg3-gc64",
+      "pkg": "toml",
+      "severity": "high",
+      "versions": ["5.0.0"],
+      "url": "https://github.com/advisories/GHSA-9j65-hcg3-gc64",
+      "vitePlusPaths": []
+    },
+    {
+      "id": "GHSA-9qmh-m7c6-f92p",
+      "pkg": "toml",
+      "severity": "high",
+      "versions": ["5.0.0"],
+      "url": "https://github.com/advisories/GHSA-9qmh-m7c6-f92p",
+      "vitePlusPaths": []
+    },
+    {
+      "id": "GHSA-mrhx-c7xc-m3w5",
+      "pkg": "zod",
+      "severity": "high",
+      "versions": ["4.4.2"],
+      "url": "https://github.com/advisories/GHSA-mrhx-c7xc-m3w5",
+      "vitePlusPaths": []
+    },
+    {
+      "id": "GHSA-27r3-jxmh-p828",
+      "pkg": "body-parser",
+      "severity": "high",
+      "versions": ["2.3.0"],
+      "url": "https://github.com/advisories/GHSA-27r3-jxmh-p828",
+      "vitePlusPaths": []
+    },
+    {
+      "id": "GHSA-q7qp-rjg7-q26m",
+      "pkg": "multer",
+      "severity": "high",
+      "versions": ["2.4.0"],
+      "url": "https://github.com/advisories/GHSA-q7qp-rjg7-q26m",
+      "vitePlusPaths": []
+    },
+    {
+      "id": "GHSA-w74x-v6f9-j3xg",
+      "pkg": "fast-uri",
+      "severity": "moderate",
+      "versions": ["4.2.1"],
+      "url": "https://github.com/advisories/GHSA-w74x-v6f9-j3xg",
+      "vitePlusPaths": []
+    },
+    {
+      "id": "GHSA-xhq7-xmqj-769h",
+      "pkg": "fast-uri",
+      "severity": "low",
+      "versions": ["4.2.1"],
+      "url": "https://github.com/advisories/GHSA-xhq7-xmqj-769h",
+      "vitePlusPaths": []
+    },
+    {
+      "id": "GHSA-wjr9-j795-jxcr",
+      "pkg": "fast-uri",
+      "severity": "moderate",
+      "versions": ["4.2.1"],
+      "url": "https://github.com/advisories/GHSA-wjr9-j795-jxcr",
+      "vitePlusPaths": []
+    },
+    {
+      "id": "GHSA-333x-w4r6-6crp",
+      "pkg": "fast-uri",
+      "severity": "low",
+      "versions": ["4.2.1"],
+      "url": "https://github.com/advisories/GHSA-333x-w4r6-6crp",
+      "vitePlusPaths": []
+    }
+  ]
+}

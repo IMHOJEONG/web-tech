@@ -1,5 +1,17 @@
 # 2026-10 작업 기록
 
+- [10-24 PR #59 기준선 회귀·리뷰 보완](2026-10-24-viteplus-review-fixes.md)
+
+- [10-24 PR #59 CI와 리뷰 지적 재현](2026-10-24-pr59-ci-review.md)
+
+- [10-24 Vite+ 로컬 커밋과 보안 후속 분리](2026-10-24-viteplus-local-commits.md)
+
+- [10-24 Vite+ 의존성 보완·override 정리](2026-10-24-viteplus-dependency-remediation.md)
+
+- [10-24 Vite+ peer·lockfile 영향 조사](2026-10-24-viteplus-peer-lockfile-impact.md)
+
+- [10-24 vuln-radar Vite+ 개발·빌드 실험](2026-10-24-vuln-radar-viteplus.md)
+
 - [10-22 CodeQL High #38 제목 검사 보완](2026-10-22-codeql38-heading-redos.md)
 
 - [10-22 원격·로컬 canonical 분류 통일](2026-10-22-docs-canonical-taxonomy.md)
