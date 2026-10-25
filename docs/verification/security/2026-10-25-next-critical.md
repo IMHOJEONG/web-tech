@@ -125,6 +125,30 @@ mise exec -- node --experimental-strip-types --test scripts/security-next-critic
 
 초록 상태만 보고 새 리뷰가 수행됐다고 해석하지 않는다. 새 문서는 직접 대조했고 추가 결함은 발견하지 못했으나, 봇의 새 head 검토는 한도 해제 후 별도로 확인할 수 있다. 재리뷰 요청·설정 변경·검사 우회는 하지 않았다. PR은 OPEN·미병합이며 이번 재검증 기록은 로컬 미커밋 변경이다. 나머지 보안 경고 10건과 병합·운영 배포 보류는 유지한다.
 
+### 병합 사전검사에서 발견한 오프라인 CI 실패
+
+사용자의 PR #60·#61 병합 요청 후 최신 head `e14bfe760abbc37fa478aef80c9dcc2d8ad4ef31`를 다시 검사했다. [CI 40156066599](https://github.com/IMHOJEONG/web-tech/actions/runs/40156066599)의 오프라인 job은 37개 통과·모바일 지연 RSC 검사 1개 실패였다. 이전 head의 성공으로 이 실패를 덮거나 병합 검사를 우회하지 않는다.
+
+실패 artifact `docs-offline-40156066599-1`의 JSON과 trace를 함께 확인했다. 요청 1은 76ms에 시작해 5,285ms에 HTTP 200 헤더를 받았지만 5,330ms에 `request-failed`와 `net::ERR_ABORTED`를 기록했다. 이후 URL commit은 5,377ms, 본문 표시는 5,504ms였다. 단순한 완료 이벤트 누락으로 보는 초기 가설과 달리 실제 요청 실패 증거가 있으므로, 실패를 정상 완료로 인정하도록 assertion을 완화하지 않았다.
+
+해당 검사는 `route.fetch()`의 APIResponse를 지연 후 `route.fulfill({ response })`로 재사용했다. trace에는 gzip·chunked 헤더가 남아 있었다. fixture를 명시적 decoded body로 바꾸고 `content-encoding`, `content-length`, `transfer-encoding`, `connection`을 제거해 원본 전송 형식과 재응답 본문이 섞이지 않게 했다. 이는 fixture 경계를 보정한 것이며 Linux 최초 중단의 유일한 원인을 확정한 것은 아니다. 기존 HTTP 200·전송 완료·본문 표시·진행 표시 종료 검사는 유지하고 관측 helper, 앱 코드, timeout·retry·오류 필터는 바꾸지 않았다.
+
+```sh
+gh run view 40156066599 --repo IMHOJEONG/web-tech
+gh run download 40156066599 --repo IMHOJEONG/web-tech \
+  --name docs-offline-40156066599-1 \
+  --dir /tmp/web-tech-pr60-offline-failure-20261025
+mise exec -- pnpm --filter docs test:offline \
+  --project=offline-mobile --grep 'healthy delayed' --repeat-each=5
+mise exec -- pnpm --filter docs test:offline
+mise exec -- pnpm --filter docs typecheck:node-test
+mise exec -- pnpm --filter docs exec eslint offline-e2e/article-navigation.spec.ts
+```
+
+로컬 모바일 반복 5/5, 전체 오프라인 38/38, node-test 타입 검사·대상 ESLint는 통과했다. 최초 실패 artifact는 CI의 보존 기간 안에서 내려받을 수 있으며 원본 trace·스크린샷·헤더 전체는 저장소에 복제하지 않았다. 이번 수정 후 Linux 새 head CI는 별도 확인 대상이다. 검증 중 `next dev`가 설치된 generator와 동일하게 `apps/docs/AGENTS.md` 관리 블록의 제목을 H2로 갱신했으며, 다른 지침은 변경하지 않았다.
+
+두 PR의 병합 요청은 받았지만 기존 운영 배포 보류와 main 병합의 Vercel Production·Railway 자동 배포·이미지 게시 영향은 재확인 중이다. 자동 배포 허용 답변과 최신 head의 필수 검사 성공 전에는 main 병합을 실행하지 않는다. 이번 보완은 새 ADR이 필요한 구조·공개 계약 변경이 아니다.
+
 ## 한계와 후속 작업
 
 - 보안 확인은 공식 패치 버전·audit 경고 제거·정상 기능 및 경계 회귀다. RCE payload를 실행하거나 실제 공격 차단을 재현한 결과가 아니다. macOS 검사는 glibc Linux 네이티브 이미지 처리 검증을 대신하지 않는다.

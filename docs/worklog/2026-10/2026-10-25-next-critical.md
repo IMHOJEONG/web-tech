@@ -35,6 +35,12 @@ CodeRabbit 완료 댓글에는 actionable 지적이 없고 inline thread도 0개
 
 CodeRabbit 새 status는 SUCCESS지만 description이 `Review rate limited`이고 완료 리뷰의 기준은 이전 `c906573`다. 따라서 새 head 봇 리뷰는 미실행이며 새 지적 0개와 구분한다. 새 문서 2개의 내용·문서/포맷 검사는 직접 대조했고 추가 결함은 발견하지 못했다. 재리뷰 요청이나 한도 우회는 하지 않았다. 이번 결과는 기존 Jira·Confluence 기록을 갱신·재조회하고 로컬 문서 2개에 미커밋으로 남긴다. 추가 commit/push·병합·운영 배포는 하지 않는다.
 
+### 병합 전 지연 응답 fixture 보완
+
+두 보안 PR 병합 요청의 사전검사에서 PR #60 최신 head의 오프라인 CI 실패를 발견했다. 모바일 지연 RSC의 실제 `net::ERR_ABORTED` 증거를 보존하고, decoded 응답 본문에 원본 gzip·chunked framing이 남지 않도록 테스트 fixture만 수정했다. 정상 전송 완료 assertion·관측 helper·앱 동작·timeout·retry는 유지한다. 자세한 CI 식별자·관측 순서·재현 명령은 검증 보고서에 연결한다.
+
+로컬 모바일 5회 반복과 전체 오프라인 38개, node-test 타입·대상 ESLint가 통과했다. `next dev`가 자동 갱신한 AGENTS 관리 블록의 H2도 설치된 generator와 대조했다. Linux 새 head CI와 운영 자동 배포 허용 여부는 아직 확인 대상이며 main 병합·수동 배포·NAS 교체는 실행하지 않았다.
+
 ## Open Questions
 
 나머지 10건은 KAN-35의 별도 미조치 범위다. 원격 Linux 회귀·CI/CodeQL은 확인했으나 악성 입력 차단과 운영 적용은 미검증이다. 새 head 봇 리뷰는 사용량 제한으로 미실행이며 이전 Docstring Coverage 경고의 채택 여부는 후속 선택 사항이다. 설치 시 worktree hook prepare 경고가 있었으나 실제 커밋의 기존 훅은 정상 실행됐다.
