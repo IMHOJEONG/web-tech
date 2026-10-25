@@ -58,12 +58,17 @@ if (mode === "toml") {
   const tail = Buffer.alloc(1024);
   let client: ReturnType<typeof httpRequest>;
   const server = createServer((req, res) => {
+    res.setHeader("Content-Type", "application/json; charset=utf-8");
+    res.setHeader("X-Content-Type-Options", "nosniff");
     parser(req, res, (error: Error | undefined) => {
       assert.ifError(error);
       // Send the tail only after the decoder has finished the valid frame.
-      req.once("end", () =>
-        res.end(JSON.stringify((req as typeof req & { body: unknown }).body)),
-      );
+      req.once("end", () => {
+        assert.deepEqual((req as typeof req & { body: unknown }).body, {
+          fixture: true,
+        });
+        res.end('{"fixture":true}');
+      });
       client.end(tail);
     });
   });
@@ -89,6 +94,11 @@ if (mode === "toml") {
           },
         },
         (res) => {
+          assert.equal(
+            res.headers["content-type"],
+            "application/json; charset=utf-8",
+          );
+          assert.equal(res.headers["x-content-type-options"], "nosniff");
           let body = "";
           res.setEncoding("utf8");
           res.on("data", (chunk) => {

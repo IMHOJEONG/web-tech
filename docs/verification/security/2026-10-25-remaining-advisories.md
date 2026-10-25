@@ -89,6 +89,14 @@ mise exec -- pnpm audit --prod --json
 
 ## 한계와 후속 작업
 
+### 병합 전 CodeQL #42 보완
+
+PR #61 최초 head `a0c728e`의 CI 13개 job은 성공했으나 CodeQL 집계는 High 1건으로 실패했다. [경고 #42](https://github.com/IMHOJEONG/web-tech/security/code-scanning/42)는 테스트 fixture `request-parsers.mts`가 파싱한 요청 값을 HTTP 응답으로 반사하고 JSON Content-Type을 명시하지 않은 경로다. loopback 자식 프로세스 전용 코드로 운영 endpoint는 아니지만 경고를 dismiss하거나 검사에서 제외하지 않았다.
+
+파싱한 요청의 정확한 값을 assert하는 검증은 유지하고 응답은 고정 JSON으로 변경했다. `Content-Type: application/json; charset=utf-8`·`X-Content-Type-Options: nosniff`를 명시하고 클라이언트 fixture에서도 두 헤더를 검사한다. 원격 CodeQL 재검사로 해소를 확인하기 전에는 해결 완료로 표시하지 않는다. 로컬 신규 16개가 통과했고 저장소 회귀를 함께 재검사한다.
+
+`refs/pull/61/merge` 조회가 0건이어도 집계 상태와 `refs/pull/61/head`의 결과가 다를 수 있다. 이번 경고의 most_recent_instance는 head ref였다. 따라서 집계 check의 annotation, 경고 번호와 대상 ref·commit을 함께 확인한다. 재현 명령은 `gh api repos/IMHOJEONG/web-tech/check-runs/121061928469/annotations`와 `gh api repos/IMHOJEONG/web-tech/code-scanning/alerts/42`다. merge ref의 0건만으로 PR 전체에 경고가 없다고 판단하지 않는다.
+
 - 최초 검증은 별도 브랜치의 로컬 미커밋 변경으로 수행했다. 후속 사용자 승인으로 패치·회귀·문서를 작업별 커밋하고 main 대상 별도 PR로 검토한다. main 병합·Railway/NAS·운영/수동 배포는 승인 범위가 아니며 KAN-35 전체를 완료로 바꾸지 않는다.
 - macOS의 제한된 회귀와 패치 하한·audit 제거가 모든 공격 도달성·OOM 방어를 증명하지 않는다. Linux 이미지·실제 운영 API·운영 DB·배포는 미검증이다. 프런트·백엔드 보안 경고가 단순 개발 전용이라고 일괄 분류하지 않았다.
 - PR #60 병합 후에는 이 브랜치 기준 갱신과 lockfile 재해석·audit·통합 회귀가 필요하다. 두 패치가 각자 통과했다는 사실만으로 결합 audit 0건·동시 배포 성공을 확정하지 않는다. 겹치는 목차·TODO·workspace/lock 변경도 그때 검토한다.
