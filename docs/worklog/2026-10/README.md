@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-25 Primary 글자 대비와 브라우저 접근성](2026-10-25-primary-action-contrast.md)
+
 - [10-25 나머지 보안 경고 10건 분리 조치](2026-10-25-remaining-advisories.md)
 - [10-25 Next.js Critical 패치·회귀](2026-10-25-next-critical.md)
 

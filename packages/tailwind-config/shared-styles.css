@@ -184,7 +184,7 @@
   --popover: rgba(255, 255, 255, 0.88);
   --popover-foreground: #171717;
   --primary: #f97316;
-  --primary-foreground: #fff7ed;
+  --primary-foreground: #171717;
   --primary-container: #ffedd5;
   --on-primary-container: #9a3412;
   --primary-fixed: #fb923c;
@@ -275,7 +275,7 @@
   --popover: rgba(10, 10, 10, 0.86);
   --popover-foreground: #ededed;
   --primary: #f97316;
-  --primary-foreground: #fff7ed;
+  --primary-foreground: #171717;
   --primary-container: #7c2d12;
   --on-primary-container: #fdba74;
   --primary-fixed: #fb923c;
@@ -522,6 +522,17 @@
     outline: none;
     box-shadow: var(--shadow-glow-primary);
     opacity: 0.96;
+  }
+
+  .ds-button-primary:focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 3px;
+  }
+
+  @media (forced-colors: active) {
+    .ds-button-primary:focus-visible {
+      outline-color: Highlight;
+    }
   }
 
   .ds-button-secondary {
