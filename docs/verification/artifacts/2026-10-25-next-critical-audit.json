@@ -1,0 +1,272 @@
+{
+  "checkedAt": "2026-10-25T01:57:11.950Z",
+  "baseline": "d0b25a5122fd9b4377b559270c10680c984e2aed",
+  "next": "16.4.3",
+  "scope": "local lockfile audits and graph comparison; no deployment or exploit reproduction",
+  "packageChanges": {
+    "added": [
+      "@next/env@16.4.3",
+      "@next/mdx@16.4.3",
+      "@next/swc-darwin-arm64@16.4.3",
+      "@next/swc-darwin-x64@16.4.3",
+      "@next/swc-linux-arm64-gnu@16.4.3",
+      "@next/swc-linux-arm64-musl@16.4.3",
+      "@next/swc-linux-x64-gnu@16.4.3",
+      "@next/swc-linux-x64-musl@16.4.3",
+      "@next/swc-win32-arm64-msvc@16.4.3",
+      "@next/swc-win32-x64-msvc@16.4.3",
+      "next@16.4.3"
+    ],
+    "removed": [
+      "@next/env@16.3.8",
+      "@next/mdx@16.3.8",
+      "@next/swc-darwin-arm64@16.3.8",
+      "@next/swc-darwin-x64@16.3.8",
+      "@next/swc-linux-arm64-gnu@16.3.8",
+      "@next/swc-linux-arm64-musl@16.3.8",
+      "@next/swc-linux-x64-gnu@16.3.8",
+      "@next/swc-linux-x64-musl@16.3.8",
+      "@next/swc-win32-arm64-msvc@16.3.8",
+      "@next/swc-win32-x64-msvc@16.3.8",
+      "next@16.3.8"
+    ],
+    "otherPackageMetadataUnchanged": true,
+    "otherImportersUnchanged": true
+  },
+  "workspaces": [
+    {
+      "workspace": ".",
+      "added": [],
+      "removed": [],
+      "changedEdges": 0
+    },
+    {
+      "workspace": "apps/docs",
+      "added": [
+        "@next/env@16.4.3",
+        "@next/mdx@16.4.3",
+        "@next/swc-darwin-arm64@16.4.3",
+        "@next/swc-darwin-x64@16.4.3",
+        "@next/swc-linux-arm64-gnu@16.4.3",
+        "@next/swc-linux-arm64-musl@16.4.3",
+        "@next/swc-linux-x64-gnu@16.4.3",
+        "@next/swc-linux-x64-musl@16.4.3",
+        "@next/swc-win32-arm64-msvc@16.4.3",
+        "@next/swc-win32-x64-msvc@16.4.3",
+        "next@16.4.3"
+      ],
+      "removed": [
+        "@next/env@16.3.8",
+        "@next/mdx@16.3.8",
+        "@next/swc-darwin-arm64@16.3.8",
+        "@next/swc-darwin-x64@16.3.8",
+        "@next/swc-linux-arm64-gnu@16.3.8",
+        "@next/swc-linux-arm64-musl@16.3.8",
+        "@next/swc-linux-x64-gnu@16.3.8",
+        "@next/swc-linux-x64-musl@16.3.8",
+        "@next/swc-win32-arm64-msvc@16.3.8",
+        "@next/swc-win32-x64-msvc@16.3.8",
+        "next@16.3.8"
+      ],
+      "changedEdges": 5
+    },
+    {
+      "workspace": "apps/docs-backend",
+      "added": [],
+      "removed": [],
+      "changedEdges": 0
+    },
+    {
+      "workspace": "apps/vuln-radar",
+      "added": [],
+      "removed": [],
+      "changedEdges": 0
+    },
+    {
+      "workspace": "apps/vuln-radar-backend",
+      "added": [],
+      "removed": [],
+      "changedEdges": 0
+    },
+    {
+      "workspace": "packages/api",
+      "added": [],
+      "removed": [],
+      "changedEdges": 0
+    },
+    {
+      "workspace": "packages/docs-content-contract",
+      "added": [],
+      "removed": [],
+      "changedEdges": 0
+    },
+    {
+      "workspace": "packages/eslint-config",
+      "added": [],
+      "removed": [],
+      "changedEdges": 0
+    },
+    {
+      "workspace": "packages/tailwind-config",
+      "added": [],
+      "removed": [],
+      "changedEdges": 0
+    },
+    {
+      "workspace": "packages/typescript-config",
+      "added": [],
+      "removed": [],
+      "changedEdges": 0
+    },
+    {
+      "workspace": "packages/ui",
+      "added": [],
+      "removed": [],
+      "changedEdges": 0
+    }
+  ],
+  "all": {
+    "exitCode": 1,
+    "vulnerabilities": {
+      "info": 0,
+      "low": 2,
+      "moderate": 2,
+      "high": 6,
+      "critical": 0
+    },
+    "advisories": [
+      {
+        "id": "GHSA-4qx8-w7c3-pj3p",
+        "package": "toml",
+        "severity": "high",
+        "versions": ["5.0.0"]
+      },
+      {
+        "id": "GHSA-9j65-hcg3-gc64",
+        "package": "toml",
+        "severity": "high",
+        "versions": ["5.0.0"]
+      },
+      {
+        "id": "GHSA-9qmh-m7c6-f92p",
+        "package": "toml",
+        "severity": "high",
+        "versions": ["5.0.0"]
+      },
+      {
+        "id": "GHSA-mrhx-c7xc-m3w5",
+        "package": "zod",
+        "severity": "high",
+        "versions": ["4.4.2"]
+      },
+      {
+        "id": "GHSA-27r3-jxmh-p828",
+        "package": "body-parser",
+        "severity": "high",
+        "versions": ["2.3.0"]
+      },
+      {
+        "id": "GHSA-q7qp-rjg7-q26m",
+        "package": "multer",
+        "severity": "high",
+        "versions": ["2.4.0"]
+      },
+      {
+        "id": "GHSA-w74x-v6f9-j3xg",
+        "package": "fast-uri",
+        "severity": "moderate",
+        "versions": ["4.2.1"]
+      },
+      {
+        "id": "GHSA-xhq7-xmqj-769h",
+        "package": "fast-uri",
+        "severity": "low",
+        "versions": ["4.2.1"]
+      },
+      {
+        "id": "GHSA-wjr9-j795-jxcr",
+        "package": "fast-uri",
+        "severity": "moderate",
+        "versions": ["4.2.1"]
+      },
+      {
+        "id": "GHSA-333x-w4r6-6crp",
+        "package": "fast-uri",
+        "severity": "low",
+        "versions": ["4.2.1"]
+      }
+    ]
+  },
+  "production": {
+    "exitCode": 1,
+    "vulnerabilities": {
+      "info": 0,
+      "low": 2,
+      "moderate": 2,
+      "high": 6,
+      "critical": 0
+    },
+    "advisories": [
+      {
+        "id": "GHSA-4qx8-w7c3-pj3p",
+        "package": "toml",
+        "severity": "high",
+        "versions": ["5.0.0"]
+      },
+      {
+        "id": "GHSA-9j65-hcg3-gc64",
+        "package": "toml",
+        "severity": "high",
+        "versions": ["5.0.0"]
+      },
+      {
+        "id": "GHSA-9qmh-m7c6-f92p",
+        "package": "toml",
+        "severity": "high",
+        "versions": ["5.0.0"]
+      },
+      {
+        "id": "GHSA-mrhx-c7xc-m3w5",
+        "package": "zod",
+        "severity": "high",
+        "versions": ["4.4.2"]
+      },
+      {
+        "id": "GHSA-27r3-jxmh-p828",
+        "package": "body-parser",
+        "severity": "high",
+        "versions": ["2.3.0"]
+      },
+      {
+        "id": "GHSA-q7qp-rjg7-q26m",
+        "package": "multer",
+        "severity": "high",
+        "versions": ["2.4.0"]
+      },
+      {
+        "id": "GHSA-w74x-v6f9-j3xg",
+        "package": "fast-uri",
+        "severity": "moderate",
+        "versions": ["4.2.1"]
+      },
+      {
+        "id": "GHSA-xhq7-xmqj-769h",
+        "package": "fast-uri",
+        "severity": "low",
+        "versions": ["4.2.1"]
+      },
+      {
+        "id": "GHSA-wjr9-j795-jxcr",
+        "package": "fast-uri",
+        "severity": "moderate",
+        "versions": ["4.2.1"]
+      },
+      {
+        "id": "GHSA-333x-w4r6-6crp",
+        "package": "fast-uri",
+        "severity": "low",
+        "versions": ["4.2.1"]
+      }
+    ]
+  }
+}

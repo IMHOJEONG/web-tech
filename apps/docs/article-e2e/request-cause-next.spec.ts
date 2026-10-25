@@ -93,7 +93,7 @@ for (const ending of ['complete', 'client-abort', 'server-destroy'] as const) {
                             event.event ===
                             (ending === 'complete'
                                 ? 'response-finish'
-                                : 'framework-stream-error')
+                                : 'response-close')
                     )
                 )
                 .toBe(true)
@@ -106,9 +106,12 @@ for (const ending of ['complete', 'client-abort', 'server-destroy'] as const) {
             if (ending === 'complete') {
                 expect(names).not.toContain('framework-stream-error')
             } else {
-                expect(position('response-close')).toBeLessThan(
-                    position('framework-stream-error')
-                )
+                expect(position('response-close')).toBeGreaterThan(-1)
+                // Patched Next need not log an error for a closed destination.
+                if (names.includes('framework-stream-error'))
+                    expect(position('response-close')).toBeLessThan(
+                        position('framework-stream-error')
+                    )
                 if (ending === 'client-abort') {
                     expect(position('socket-end')).toBeGreaterThan(-1)
                     expect(position('socket-end')).toBeLessThan(

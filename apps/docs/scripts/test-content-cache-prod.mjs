@@ -377,6 +377,12 @@ try {
         const data = await response.json()
         assert.equal(data.index[0].title, `CACHE_TITLE_V${expected}`)
         assert.ok(data.document.content.includes(`CACHE_BODY_V${expected}`))
+        if (cacheComponents) {
+            assert.deepEqual(data.typedArrays, {
+                bytes: [11, 22, 33],
+                words: [256, 512],
+            })
+        }
     }
     function holdOrigin() {
         blockedRequests = 0
