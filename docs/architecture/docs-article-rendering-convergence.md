@@ -133,8 +133,8 @@ article renderer가 source와 관계없이 맞춰야 하는 최소 계약은 다
 
 ### Heading
 
-- `h1`은 frontmatter title이 담당한다.
-- 본문 heading은 `h2` 또는 `h3`부터 시작한다.
+- 페이지 제목은 frontmatter title을 기본으로 하고 본문 heading은 `h2` 또는 `h3`부터 시작하도록 권장한다.
+- 본문 `h1`은 편집 경고이며 원문·HTML을 자동으로 `h2`로 바꾸거나 H1만으로 게시를 차단하지 않는다. [작성 검증 경계](docs-content-authoring-markup-policy.md#본문-제목-계층)를 따른다.
 - heading에는 anchor 이동을 위한 `id`가 있어야 한다.
 - TOC는 heading id와 같은 href를 사용한다.
 

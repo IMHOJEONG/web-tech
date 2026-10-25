@@ -36,3 +36,9 @@ Figma의 승인된 primary 토큰과8개 focus master만 보완했으며 짧은 
 분리한 소스에서 전체 UI68개+실제 앱12개 재검증과 타입/변경 파일 ESLint를 통과했다. 명령·관측값은 [보고서의 후속 검증](../../verification/accessibility/2026-10-25-primary-action-contrast.md#main-기반-pr-분리후속-검증)과 기존 artifact에 이어 기록했다. lockfile·의존성·공통 설정·앱 기능은 추가 변경하지 않았다. 공개 계약 변경이 아니므로 새 ADR은 필요하지 않다.
 
 이번 단계는 PR 생성·리뷰·원격 CI 확인까지만이며 main 병합·Production 배포는 사용자 승인 전 실행하지 않는다. PR과 실제 검사 URL은 Jira KAN-36·Confluence의 같은 기록에 연결하고 재조회한다.
+
+## PR #62·#63 병합 승인 후 통합
+
+사용자가 두 PR 병합을 승인했다. #62는 최종 squash 메시지 전체 사전검사 후 main `f8fbc068d633796d64343ea01aabee0e35a3f32c`로 병합했다. #63의 기존 head `54ed9a9`는 CI·문서·CodeQL·Preview를 통과했지만 CodeRabbit은 사용량 제한으로 실제 리뷰를 수행하지 않았다. 미해결 리뷰 스레드는 두 PR 모두 0개였으며 자동 체크 성공을 실제 리뷰 승인으로 간주하지 않았다.
+
+#62 병합 직후 #63은 문서 목차 3개 충돌로 사전검사가 중단됐다. 최신 main을 merge로 통합하고 양쪽 목차 링크를 모두 보존했다. 코드 충돌·자동 원문 변환·의존성 변경은 없고 기존 브랜치·미커밋·stash는 수정하지 않았다. 새 head의 CI 재검증 이후에만 다시 최종 메시지를 검사해 #63 병합을 요청한다. main CI·Vercel Production·NAS 이미지 게시/컨테이너 교체는 각각 별도 결과로 구분한다.

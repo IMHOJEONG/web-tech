@@ -1,6 +1,6 @@
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, Logger } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import request from 'supertest';
@@ -52,6 +52,7 @@ summary: Draft content
 date: 2026-09-08
 status: draft
 ---
+# Draft title
 Not published.
 `,
       'utf8',
@@ -63,6 +64,7 @@ title: Archived note
 slug: archived-note
 status: archived
 ---
+# Archived title
 Not published.
 `,
       'utf8',
@@ -168,7 +170,9 @@ Not published because metadata is incomplete.
     ['unclosed-comment', '## Topic\n<!-- private-editorial-note →'],
     ['multiline-comment', '## Topic\n<!-- private-editorial-note\nmore -->'],
     ['orphan-comment', '## Topic\n-->'],
-    ['body-title', '# Duplicate title'],
+    ['h1-comment', '# Original title\n<!-- private-editorial-note -->'],
+    ['deep-first-heading', '#### Too deep'],
+    ['h1-heading-jump', '# Original title\n#### Skipped'],
     ['heading-jump', '## Topic\n#### Skipped'],
     ['missing-language', '## Topic\n```\ncode\n```'],
     ['unclosed-fence', '## Topic\n```js\ncode'],
@@ -197,6 +201,46 @@ Not published because metadata is incomplete.
       }
     },
   );
+
+  it.each([
+    '# Original title',
+    '# Original title\n\n## Section',
+    '## Intro\n\n# Original title\n\n## Section',
+  ])('publishes body h1 unchanged and logs a warning: %s', async (body) => {
+    const file = join(temporaryRoot, 'posts', 'web', 'body-title.md');
+    const source = publishedSource('body-title', body);
+    const warning = jest
+      .spyOn(Logger.prototype, 'warn')
+      .mockImplementation(() => {});
+    try {
+      await writeFile(file, source);
+      const list = await request(app.getHttpServer())
+        .get('/api/posts')
+        .set('Authorization', 'Bearer test-content-token')
+        .expect(200);
+      expect(
+        list.body.results.map((post: { slug: string }) => post.slug),
+      ).toEqual(['body-title', 'event-loop']);
+      const detail = await request(app.getHttpServer())
+        .get('/posts/web/body-title')
+        .set('Authorization', 'Bearer test-content-token')
+        .expect(200)
+        .expect('Content-Type', /text\/html/);
+      expect(detail.text).toContain('<h1>Original title</h1>');
+      expect(detail.text).not.toContain('<h2>Original title</h2>');
+      expect(detail.headers['cache-control']).toBe('private, no-store');
+      expect(detail.headers.vary).toContain('Authorization');
+      expect(warning).toHaveBeenCalledWith(
+        expect.stringMatching(
+          /Content style warning: web\/body-title \(line \d+: body h1 may duplicate frontmatter title; prefer h2 or h3\)/,
+        ),
+      );
+      expect(await readFile(file, 'utf8')).toBe(source);
+    } finally {
+      warning.mockRestore();
+      await rm(file, { force: true });
+    }
+  });
 
   it.each(['```', '````', '~~~'])(
     'keeps comments in %s code examples and escapes raw HTML',
