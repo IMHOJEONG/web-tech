@@ -1,5 +1,10 @@
 # 검증 원본 증거
 
+- [10-25 UI·전송 계약 분리](2026-10-25-ui-transport-contract.json): [보안 PR 후속 검증](../security/2026-10-25-remaining-advisories.md#승인된-ui전송-검사-분리). 로컬 44개 통과·본문 표시 중 pending·200 이후 중단·완료 대조. 실제 중단 호출자 해소를 뜻하지 않음.
+
+- [10-25 두 보안 PR 결합 감사·회귀](2026-10-25-security-combined.json): [통합 검증](../security/2026-10-25-remaining-advisories.md#승인된-main-병합과-결합-검증). Next main 병합 후 전체/production audit 0건·회귀 153개·production E2E 154개, PR #61 병합 전 로컬 증거.
+
+- [10-25 나머지 보안 경고 감사·그래프](2026-10-25-remaining-advisories.json): [보고서](../security/2026-10-25-remaining-advisories.md). main 감사13→3·대상10건 제거·패치 전후 회귀, Next PR #60과 분리·운영 미배포.
 - [10-25 Next 패치 audit·그래프 범위](2026-10-25-next-critical-audit.json), [초기 E2E 실패·종료 trace](2026-10-25-next-e2e-before-compatibility.json): [보안 검증](../security/2026-10-25-next-critical.md). Critical 0·잔여 10건과 144/154 초기 결과를 보존하며 로컬 실행·미배포다.
 
 - [10-24 명시 main 그래프 재현](2026-10-24T12-22-01-870Z-viteplus-lockfile-impact.json), [동일 baseline 소비자 대조](2026-10-24T12-22-21-670Z-viteplus-consumer-control.json), [CLI 정리 실패](2026-10-24T12-22-04-534Z-vuln-radar-viteplus.json), [CLI 재실행 성공](2026-10-24T12-23-21-834Z-vuln-radar-viteplus.json): [PR #59 후속 검증](../integration/2026-10-24-pr59-baseline-fixes.md). 실제 비밀값·운영 데이터·Railway 배포 없음.

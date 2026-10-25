@@ -1,5 +1,6 @@
 # 2026-10 작업 기록
 
+- [10-25 나머지 보안 경고 10건 분리 조치](2026-10-25-remaining-advisories.md)
 - [10-25 Next.js Critical 패치·회귀](2026-10-25-next-critical.md)
 
 - [10-24 PR #59 기준선 회귀·리뷰 보완](2026-10-24-viteplus-review-fixes.md)

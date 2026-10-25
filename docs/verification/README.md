@@ -1,5 +1,6 @@
 # 검증 보고서
 
+- [10-25 나머지 의존성 보안 경고 10건](security/2026-10-25-remaining-advisories.md): main 기반 분리 패치·16개 신규 회귀·production 문서154개 성공. 감사13→3, Next는 PR #60에 유지·미배포.
 - [10-25 Next.js Critical 우선 패치](security/2026-10-25-next-critical.md): Next/MDX 16.4.3·Critical 0·잔여 10건, 보안/함수 캐시·production E2E와 종료 증거 호환 보완. 작업별 커밋, 운영 미배포.
 
 - [10-24 PR #59 기준선 리뷰 수정·회귀](integration/2026-10-24-pr59-baseline-fixes.md): 명시 ref·고정 SHA 공유, 실제 커밋 후 회귀 9개·전체129개, 원래 그래프/Babel 대조 재현과 정리 실패/후속 성공 보존.

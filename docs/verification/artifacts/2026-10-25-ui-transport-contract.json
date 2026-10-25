@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 1,
+  "scope": "Local UI/transport contract separation before PR 61 merge; not evidence of a real cancellation cause",
+  "baseline": "502d8e195f39fae4f00f27bdad4d170c1792081b",
+  "codeBlobs": {
+    "apps/docs/offline-e2e/article-navigation.spec.ts": "33754195ee443a30a00c5cfaeff28ea15ce7d3df",
+    "apps/docs/offline-e2e/navigation-observer.spec.ts": "c611ae4a5a5a918486984976221c20697de27ce7"
+  },
+  "command": "mise exec -- pnpm --filter docs test:offline",
+  "stats": {
+    "startTime": "2026-10-25T05:51:03.135Z",
+    "duration": 41755.986,
+    "expected": 44,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "title": "a delayed RSC navigation completes the UI independently of transport completion",
+      "project": "offline-desktop",
+      "status": "passed",
+      "retry": 0,
+      "events": [
+        {
+          "event": "request",
+          "requestId": 1
+        },
+        {
+          "event": "response-headers",
+          "requestId": 1,
+          "status": 200
+        },
+        {
+          "event": "response-finished",
+          "requestId": 1
+        },
+        {
+          "event": "url-committed"
+        },
+        {
+          "event": "body-visible"
+        }
+      ],
+      "pendingRequestIds": []
+    },
+    {
+      "title": "a delayed RSC navigation completes the UI independently of transport completion",
+      "project": "offline-mobile",
+      "status": "passed",
+      "retry": 0,
+      "events": [
+        {
+          "event": "request",
+          "requestId": 1
+        },
+        {
+          "event": "response-headers",
+          "requestId": 1,
+          "status": 200
+        },
+        {
+          "event": "response-finished",
+          "requestId": 1
+        },
+        {
+          "event": "url-committed"
+        },
+        {
+          "event": "body-visible"
+        }
+      ],
+      "pendingRequestIds": []
+    },
+    {
+      "title": "article UI can complete while its response stream is still pending",
+      "project": "offline-desktop",
+      "status": "passed",
+      "retry": 0,
+      "events": [
+        {
+          "event": "request",
+          "requestId": 1
+        },
+        {
+          "event": "response-headers",
+          "requestId": 1,
+          "status": 200
+        },
+        {
+          "event": "url-committed"
+        },
+        {
+          "event": "body-visible"
+        }
+      ],
+      "pendingRequestIds": [1]
+    },
+    {
+      "title": "distinguishes response headers from body completion without recording content (navigation)",
+      "project": "offline-desktop",
+      "status": "passed",
+      "retry": 0,
+      "events": [
+        {
+          "event": "request",
+          "requestId": 1
+        },
+        {
+          "event": "response-headers",
+          "requestId": 1,
+          "status": 200
+        },
+        {
+          "event": "response-finished",
+          "requestId": 1
+        }
+      ],
+      "pendingRequestIds": []
+    },
+    {
+      "title": "distinguishes response headers from body completion without recording content (prefetch)",
+      "project": "offline-desktop",
+      "status": "passed",
+      "retry": 0,
+      "events": [
+        {
+          "event": "request",
+          "requestId": 1
+        },
+        {
+          "event": "response-headers",
+          "requestId": 1,
+          "status": 200
+        },
+        {
+          "event": "response-finished",
+          "requestId": 1
+        }
+      ],
+      "pendingRequestIds": []
+    },
+    {
+      "title": "an interrupted RSC body after HTTP 200 is never recorded as completed",
+      "project": "offline-desktop",
+      "status": "passed",
+      "retry": 0,
+      "events": [
+        {
+          "event": "request",
+          "requestId": 1
+        },
+        {
+          "event": "response-headers",
+          "requestId": 1,
+          "status": 200
+        },
+        {
+          "event": "request-failed",
+          "requestId": 1
+        }
+      ],
+      "pendingRequestIds": []
+    },
+    {
+      "title": "article UI can complete while its response stream is still pending",
+      "project": "offline-mobile",
+      "status": "passed",
+      "retry": 0,
+      "events": [
+        {
+          "event": "request",
+          "requestId": 1
+        },
+        {
+          "event": "response-headers",
+          "requestId": 1,
+          "status": 200
+        },
+        {
+          "event": "url-committed"
+        },
+        {
+          "event": "body-visible"
+        }
+      ],
+      "pendingRequestIds": [1]
+    },
+    {
+      "title": "distinguishes response headers from body completion without recording content (navigation)",
+      "project": "offline-mobile",
+      "status": "passed",
+      "retry": 0,
+      "events": [
+        {
+          "event": "request",
+          "requestId": 1
+        },
+        {
+          "event": "response-headers",
+          "requestId": 1,
+          "status": 200
+        },
+        {
+          "event": "response-finished",
+          "requestId": 1
+        }
+      ],
+      "pendingRequestIds": []
+    },
+    {
+      "title": "distinguishes response headers from body completion without recording content (prefetch)",
+      "project": "offline-mobile",
+      "status": "passed",
+      "retry": 0,
+      "events": [
+        {
+          "event": "request",
+          "requestId": 1
+        },
+        {
+          "event": "response-headers",
+          "requestId": 1,
+          "status": 200
+        },
+        {
+          "event": "response-finished",
+          "requestId": 1
+        }
+      ],
+      "pendingRequestIds": []
+    },
+    {
+      "title": "an interrupted RSC body after HTTP 200 is never recorded as completed",
+      "project": "offline-mobile",
+      "status": "passed",
+      "retry": 0,
+      "events": [
+        {
+          "event": "request",
+          "requestId": 1
+        },
+        {
+          "event": "response-headers",
+          "requestId": 1,
+          "status": 200
+        },
+        {
+          "event": "request-failed",
+          "requestId": 1
+        }
+      ],
+      "pendingRequestIds": []
+    }
+  ],
+  "additionalChecks": {
+    "focusedRepetitions": { "passed": 30, "failed": 0, "retries": 0 },
+    "controlledFailureEvidenceRetained": true,
+    "repoTestsPassed": 153,
+    "docsTypecheckExitCode": 0,
+    "targetedEslintExitCode": 0,
+    "allAuditAdvisories": 0,
+    "productionAuditAdvisories": 0
+  },
+  "limits": [
+    "Only event metadata is retained; no article body, URL query or raw headers.",
+    "UI readiness does not imply transport completion. Failed and pending events are not relabeled.",
+    "The actual main CI cancellation caller remains unknown; this changes the test contract with user approval."
+  ]
+}

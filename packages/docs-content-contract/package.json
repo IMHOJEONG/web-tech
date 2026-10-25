@@ -31,7 +31,7 @@
     "typecheck:test": "tsc -p tsconfig.test.json"
   },
   "dependencies": {
-    "zod": "^4.4.2"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@web-tech/eslint-config": "workspace:*",

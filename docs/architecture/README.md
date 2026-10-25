@@ -38,7 +38,7 @@
 
 - [ADR-0009: 선택형 웹 푸시 실험](adr-0009-docs-web-push-experiment.md): 적용 중. 기본 비활성화 MVP, 실제 기기 수신·NAS 활성화는 미검증.
 
-- [ADR-0008: 요청별 증거로 스트림 종료 판정](adr-0008-request-lifecycle-observability.md): 제안. 2026-09-24 로컬 fixture 계측·테스트 추가, 운영 적용은 미구현.
+- [ADR-0008: 요청별 증거로 스트림 종료 판정](adr-0008-request-lifecycle-observability.md): 제안. 로컬 fixture·앱 부분 계측·UI/전송 검사 분리 반영, 전체 운영 종료 판정은 미완료.
 
 ## 설계·정책 목록
 
