@@ -47,3 +47,9 @@ PR #60의 자동 배포·Railway 공개 health·이미지 게시를 확인했다
 PR #60 main과 PR #61 통합 head의 오프라인 suite에서 지연 RSC 전송 완료 assertion이 다시 실패했다. main artifact의 실제 ERR_ABORTED를 확인했으며 단순 이벤트 누락·헤더 보정 완료로 취급하지 않는다. native dispatch 지연·서버 warmup·임시 브라우저 계측·production 전환과 prefetch 통제도 대조했지만 안정적 해결을 입증하지 못했다. 상세 성공·실패 수와 한계는 검증 보고서에 둔다.
 
 미채택 실험 파일·계측·warmup을 제거하고 원래 테스트·assertion·관측 helper·timeout/retry·위치를 복구했다. 사용자에게 UI 완료와 전송 완료 검사를 별도로 분리할지, 엄격한 조건을 유지하고 원인을 계속 조사할지 재확인했다. PR #60 병합·자동 배포는 완료됐지만 main CI 실패와 PR #61 미병합을 명확히 구분한다. 검사 우회·실패 이력 수정·수동 배포·NAS 교체는 하지 않는다.
+
+### 승인된 UI·전송 계약 분리와 병합 재개
+
+사용자가 UI 완료와 전송 완료·중단 검사를 분리해 보완한 뒤 PR #61을 병합하도록 승인했다. 실제 Link 지연 검사는 본문·로딩 제거·동일 document·진행 표시 종료를 요구하고 전송 완료와 결합하지 않는다. 전송 완료 assertion은 별도 navigation/prefetch fixture에 유지하며 열린 스트림의 UI 완료와 200 이후 중단 회귀를 추가했다. 관측기·운영 분류기·timeout·retry 0·CI 필수 범위는 그대로다.
+
+전체 오프라인 44개·핵심 반복 30개·저장소 153개·docs 타입·대상 lint와 실패 증거 보존 검사가 통과했다. 전체/production audit 0건도 재확인했다. 기존 ADR-0008의 두 상태 분리 원칙과 검증 보고서·원본 event metadata·목차를 연결했다. 새 head의 CI/CodeQL·리뷰를 확인해 병합하며 실제 main·자동 배포는 Jira·Confluence에 후속 기록·재조회한다. 실제 ERR_ABORTED 호출자 해소나 NAS 이미지 교체를 선언하지 않는다.

@@ -5,7 +5,7 @@
 - 상태: 제안
 - 대상: apps/docs 요청 생명주기 관측
 - 결정일: 2026-09-24
-- 최종 검토: 2026-10-03
+- 최종 검토: 2026-10-25
 
 ## 배경
 
@@ -16,6 +16,8 @@
 오류 문구 대신 요청별 전송 상태·선행 오류·취소 증거를 조합해 completed, cancelled, degraded, failed, unknown으로 판정한다. 관측할 수 없는 값과 정상값을 구분하고 서버 전송 완료와 사용자 화면 완성을 분리한다.
 
 상세 계약은 [요청 생명주기 로그 정책](docs-request-lifecycle-logging-policy.md)에 둔다. 로컬 fixture 계측·테스트를 추가했으며 [실행 결과](../verification/cache/2026-09-24-local-request-lifecycle.md)를 기록한다. 2026-10-03 앱 코드에 요청 ID·operation span·서버 오류 hook을 부분 반영했다. 전송 완료·취소 판정과 Preview 관측은 남아 있어 전체 결정은 제안 상태를 유지한다.
+
+2026-10-25 후속 사용자 승인으로 E2E의 UI 완료 계약과 전송 계약을 분리했다. 실제 Link의 본문·로딩·진행 표시 검사는 사용자 화면 준비를 판단하며 `response-finished`를 UI의 필수 조건으로 삼지 않는다. 전송 완료는 별도 제어 fixture의 실제 body drain·동일 요청 완료 이벤트로 확인한다. 열린 스트림은 pending, 200 뒤 중단은 request-failed로 보존한다. 관측기나 운영 판정을 변경하거나 실제 취소 원인을 해결한 것은 아니므로 ADR 전체 상태는 바꾸지 않는다. [계약 분리 검증](../verification/security/2026-10-25-remaining-advisories.md#승인된-ui전송-검사-분리)에 코드·원본 증거·실행 범위를 연결한다.
 
 ## 대안과 영향
 

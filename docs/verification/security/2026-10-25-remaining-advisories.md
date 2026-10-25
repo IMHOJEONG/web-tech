@@ -164,6 +164,28 @@ mise exec -- pnpm --filter docs exec eslint offline-e2e/article-navigation.spec.
 
 위 재현 명령은 현재 유지한 원래 fixture를 실행한다. 임시 production 실험 파일·컴파일 warmup·브라우저 계측은 남기지 않았다. 사용자에게 UI 완료와 전송 완료·중단 검사를 별도 계약으로 분리할지, 기존 엄격한 조건을 유지하고 중단 원인 조사를 계속할지 재확인했다. 그 결정과 필수 검사 해소 전에는 PR #61을 병합하지 않는다. 실패한 main 이력·원격 artifact는 삭제·재작성하거나 강제 통과시키지 않는다. 결합 audit 0건·기존 production 154개 성공과 이번 미해결 검사는 별개다.
 
+### 승인된 UI·전송 검사 분리
+
+후속 사용자 승인으로 UI 완료와 전송 완료·중단을 서로 다른 계약으로 검사한다. 실제 Link 지연 검사는 URL commit 뒤 비어 있지 않은 본문·로딩 제거·동일 document 유지·진행 표시 시작/종료를 계속 요구한다. 단, 같은 요청의 `response-finished`가 있어야 UI가 준비됐다고 간주하는 잘못된 결합 조건을 제거했다. raw 관측 보고서의 `request-failed`·`pendingRequestIds`는 그대로 남으며 UI 통과를 전송 성공이나 취소 원인 확인으로 바꾸지 않는다.
+
+전송 완료 조건은 별도 loopback fixture로 유지·보강했다. navigation RSC와 prefetch 각각 HTTP 200 헤더만으로는 완료가 아니며 실제 body drain 뒤 동일 request ID의 `response-finished`를 요구한다. UI는 준비됐지만 스트림이 열린 대조에서 pending `[1]`·완료 없음·실패 없음, 200 이후 강제 중단 대조에서 동일 request ID의 `request-failed`·완료 없음·pending 없음도 검사한다. 기존 503·헤더 이전 네트워크 실패·로딩/빈 본문·관측 종료 시 pending·document 교체 검사는 유지한다.
+
+`navigation-observer.ts`, 앱 코드, 운영 분류기, timeout·retry 0·CI 필수 job은 변경하지 않았다. 테스트를 다른 suite로 옮기거나 production 전용 조건으로 숨기지 않는다. [ADR-0008](../../architecture/adr-0008-request-lifecycle-observability.md)의 화면 완성과 전송 상태 분리 원칙을 테스트에 적용한 것이며 앞선 실제 ERR_ABORTED의 내부 호출자는 여전히 미확정이다.
+
+```sh
+mise exec -- pnpm --filter docs test:offline
+mise exec -- pnpm --filter docs test:offline \
+  --grep 'independently|stream is still pending|interrupted RSC|distinguishes response headers' \
+  --repeat-each=3
+mise exec -- pnpm --filter docs verify:offline-evidence
+mise exec -- pnpm --filter docs typecheck
+mise exec -- pnpm --filter docs exec eslint \
+  offline-e2e/article-navigation.spec.ts offline-e2e/navigation-observer.spec.ts
+mise exec -- pnpm test:repo
+```
+
+로컬 전체 오프라인 44개·핵심 반복 30개·저장소 153개·docs 타입·대상 lint를 통과했다. 제어된 실패의 JSON/HTML·관측 attachment·trace 보존 검사도 성공했고 전체/production audit은 0건이다. [44개 실행과 핵심 관측 원본](../artifacts/2026-10-25-ui-transport-contract.json)에 기준 head·수정 코드 blob hash·본문 표시 중 pending·200 뒤 중단·정상 완료의 실제 event metadata를 보존했다. 새 PR head CI·CodeQL·리뷰·병합·자동 배포는 각각 실제 결과를 확인한 후 별도 기록한다. 과거 main/통합 CI 실패는 이 새 계약의 성공으로 재작성하지 않는다.
+
 ## 관련 문서
 
 - [작업 기록](../../worklog/2026-10/2026-10-25-remaining-advisories.md)

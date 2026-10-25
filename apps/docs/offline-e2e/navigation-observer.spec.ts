@@ -12,7 +12,7 @@ async function createFixture() {
             response.writeHead(503)
             return response.end('controlled failure')
         }
-        if (path === '/stream') {
+        if (path === '/stream' || path === '/ko/docs/stream') {
             stream = response
             response.writeHead(200, { 'Content-Type': 'text/plain' })
             response.write('fixture content not for metadata\n')
@@ -30,6 +30,7 @@ async function createFixture() {
     return {
         origin: `http://127.0.0.1:${address.port}`,
         release: () => stream?.end('fixture complete'),
+        abort: () => stream?.destroy(),
         close: async () => {
             server.closeAllConnections()
             await new Promise<void>((resolve, reject) =>
@@ -154,67 +155,163 @@ test('records rapid progress changes and removes observation listeners', async (
     })
 })
 
-test('distinguishes response headers from body completion without recording content', async ({
+test('article UI can complete while its response stream is still pending', async ({
+    page,
+}, info) => {
+    await page.setContent('<a href="/ko/docs/stream">Article</a>')
+    await page.evaluate(() => {
+        document
+            .querySelector('a')!
+            .addEventListener('click', async (event) => {
+                event.preventDefault()
+                const response = await fetch('/ko/docs/stream', {
+                    headers: { RSC: '1' },
+                })
+                Reflect.set(window, '__fixtureDownload', response.text())
+                history.pushState(null, '', '/ko/docs/stream')
+                const body = document.createElement('article')
+                body.dataset.offlineContent = ''
+                body.textContent = 'Ready article body'
+                document.body.append(body)
+            })
+    })
+    try {
+        await openArticleFromCard(page, page.getByRole('link'), info)
+        const attachment = info.attachments.find(
+            ({ name }) => name === 'offline-article-navigation'
+        )
+        expect(attachment?.body).toBeDefined()
+        const report = JSON.parse(attachment!.body!.toString())
+        expect(report.events.at(-1).event).toBe('body-visible')
+        expect(report.pendingRequestIds).toEqual([1])
+        expect(
+            report.events.find(
+                ({ event }: { event: string }) => event === 'response-headers'
+            )?.status
+        ).toBe(200)
+        expect(
+            report.events.some(
+                ({ event }: { event: string }) =>
+                    event === 'response-finished' || event === 'request-failed'
+            )
+        ).toBe(false)
+    } finally {
+        fixture.release()
+        await page.evaluate(() => Reflect.get(window, '__fixtureDownload'))
+    }
+})
+
+for (const prefetch of [false, true]) {
+    test(`distinguishes response headers from body completion without recording content (${prefetch ? 'prefetch' : 'navigation'})`, async ({
+        page,
+    }, info) => {
+        const observation = await observeNavigation(
+            page,
+            new URL('/stream', fixture.origin)
+        )
+        const download = page.evaluate(
+            async ({ url, prefetch }) => {
+                const headers: Record<string, string> = {
+                    RSC: '1',
+                    'X-Fixture-Private': 'not-for-metadata',
+                }
+                if (prefetch) headers['Next-Router-Prefetch'] = '1'
+                return (await fetch(url, { headers })).text()
+            },
+            {
+                url: `${fixture.origin}/stream?private=not-for-metadata`,
+                prefetch,
+            }
+        )
+        try {
+            await expect
+                .poll(
+                    () =>
+                        observation.events.filter(
+                            ({ event }) => event === 'response-headers'
+                        ).length
+                )
+                .toBe(1)
+            expect(
+                observation.events.some(
+                    ({ event }) => event === 'response-finished'
+                )
+            ).toBe(false)
+        } finally {
+            fixture.release()
+        }
+        await download
+        await expect
+            .poll(
+                () =>
+                    observation.events.filter(
+                        ({ event }) => event === 'response-finished'
+                    ).length
+            )
+            .toBe(1)
+        const report = await observation.stop()
+        expect(report.events.map(({ event }) => event)).toEqual([
+            'request',
+            'response-headers',
+            'response-finished',
+        ])
+        expect(report.events.map(({ requestId }) => requestId)).toEqual([
+            1, 1, 1,
+        ])
+        expect(
+            report.events.every(
+                ({ rsc, prefetch: observedPrefetch }) =>
+                    rsc && observedPrefetch === prefetch
+            )
+        ).toBe(true)
+        expect(report.events[1]?.status).toBe(200)
+        expect(report.pendingRequestIds).toEqual([])
+        expect(JSON.stringify(report)).not.toMatch(
+            /not-for-metadata|fixture content|private=|X-Fixture-Private/
+        )
+        await info.attach('observer-regression', {
+            body: JSON.stringify(report),
+            contentType: 'application/json',
+        })
+    })
+}
+
+test('an interrupted RSC body after HTTP 200 is never recorded as completed', async ({
     page,
 }, info) => {
     const observation = await observeNavigation(
         page,
         new URL('/stream', fixture.origin)
     )
-    const download = page.evaluate(
-        async (url) =>
-            (
-                await fetch(url, {
-                    headers: {
-                        RSC: '1',
-                        'Next-Router-Prefetch': '1',
-                        'X-Fixture-Private': 'not-for-metadata',
-                    },
-                })
-            ).text(),
-        `${fixture.origin}/stream?private=not-for-metadata`
-    )
-    try {
-        await expect
-            .poll(
-                () =>
-                    observation.events.filter(
-                        ({ event }) => event === 'response-headers'
-                    ).length
-            )
-            .toBe(1)
-        expect(
-            observation.events.some(
-                ({ event }) => event === 'response-finished'
-            )
-        ).toBe(false)
-    } finally {
-        fixture.release()
-    }
-    await download
+    const download = page.evaluate(async (url) => {
+        try {
+            await (await fetch(url, { headers: { RSC: '1' } })).text()
+            return true
+        } catch {
+            return false
+        }
+    }, `${fixture.origin}/stream`)
     await expect
-        .poll(
-            () =>
-                observation.events.filter(
-                    ({ event }) => event === 'response-finished'
-                ).length
+        .poll(() =>
+            observation.events.some(({ event }) => event === 'response-headers')
         )
-        .toBe(1)
+        .toBe(true)
+    fixture.abort()
+    expect(await download).toBe(false)
+    await expect
+        .poll(() =>
+            observation.events.some(({ event }) => event === 'request-failed')
+        )
+        .toBe(true)
     const report = await observation.stop()
     expect(report.events.map(({ event }) => event)).toEqual([
         'request',
         'response-headers',
-        'response-finished',
+        'request-failed',
     ])
     expect(report.events.map(({ requestId }) => requestId)).toEqual([1, 1, 1])
-    expect(report.events.every(({ rsc, prefetch }) => rsc && prefetch)).toBe(
-        true
-    )
     expect(report.events[1]?.status).toBe(200)
     expect(report.pendingRequestIds).toEqual([])
-    expect(JSON.stringify(report)).not.toMatch(
-        /not-for-metadata|fixture content|private=|X-Fixture-Private/
-    )
     await info.attach('observer-regression', {
         body: JSON.stringify(report),
         contentType: 'application/json',
