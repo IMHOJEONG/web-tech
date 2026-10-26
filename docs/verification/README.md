@@ -1,5 +1,13 @@
 # 검증 보고서
 
+- [10-27 검색·응답 제한/Content-Type 결합](integration/2026-10-27-search-response-pr-integration.md): PR #64 병합·HTML 헤더의 budget 이후 설정·상한/JSON 오류 결합·원래 미커밋 보존, 이후 CI/배포는 별도 기록.
+
+- [10-26 상세 HTML byte budget](content/2026-10-26-html-response-budget.md): 최종 렌더 UTF-8 경계·긴 코드/1000행 표·로컬 대체/원격전용 오류·목록 정상 유지, 운영 미검증.
+
+- [10-26 원격 검색 목록 byte budget·규모별 비용](performance/2026-10-26-search-payload-budget.md): UTF-8 경고512KiB·상한1MiB 양쪽 경계, 합성9조건·끝 키워드·로컬 fallback·production162개, 운영 미검증.
+
+- [10-26 로컬·원격 본문 검색](content/2026-10-26-remote-body-search.md): published searchText·fallback·웹훅 캐시와 실제 폼/Link 검색 동선8개 추가 후 production162개 통과, 운영 미배포.
+
 - [10-26 상세 오류 Content-Type](content/2026-10-26-content-response-type.md): 경고 재현7개 실패→집중10개 통과, 정상 HTML·오류 JSON 및 기존 계약 유지. 운영 미배포.
 - [10-25 Primary 대비·브라우저 접근성](accessibility/2026-10-25-primary-action-contrast.md): 주황 배경 유지·짙은 글자·명시적 focus, UI58개+실제 화면12개. 전체 WCAG/타 브라우저 미검증.
 - [10-25 본문 H1 경고 전환](content/2026-10-25-body-h1-warning.md): 공용·로컬 CLI·원격 API의 경고/게시·원문 H1 보존 회귀, 운영 미배포.

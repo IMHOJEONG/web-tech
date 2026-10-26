@@ -10,6 +10,7 @@ export interface Metadata {
     readonly summary: string
     readonly slug: string
     readonly content: string
+    readonly searchText?: string
     readonly fileName: string
     readonly contentFormat?: ContentFormat
     readonly contentSource?: ContentSource

@@ -12,6 +12,7 @@ const origin = 'http://127.0.0.1:3112'
 const documentPath = '/docs/web/article-e2e-publication'
 const readToken = 'article-e2e-only-token'
 const revalidationToken = 'article-e2e-only-revalidation'
+const bodyKeyword = (version: 1 | 2) => `bodyonlypublicationv${version}needle`
 // These diagnostics run via Playwright directly, not a cached Turbo task.
 // eslint-disable-next-line turbo/no-undeclared-env-vars
 const traceRequests = process.env.ARTICLE_STREAM_TRACE === '1'
@@ -30,13 +31,27 @@ async function changeOrigin(request: APIRequestContext, version: 1 | 2) {
         headers: { Authorization: `Bearer ${readToken}` },
     })
     expect(index.status()).toBe(200)
-    expect((await index.json()).results).toEqual(
+    const payload = await index.json()
+    expect(payload.results).toEqual(
         expect.arrayContaining([
             expect.objectContaining({
                 title: `Publication cache probe V${version}`,
+                searchText: expect.stringContaining(bodyKeyword(version)),
             }),
         ])
     )
+    const post = payload.results.find(
+        (entry: { slug: string }) => entry.slug === 'article-e2e-publication'
+    )
+    expect(
+        JSON.stringify([
+            post.id,
+            post.slug,
+            post.markdownPath,
+            post.title,
+            post.summary,
+        ])
+    ).not.toContain(bodyKeyword(version))
 }
 
 async function invalidate(request: APIRequestContext, token?: string) {
@@ -62,6 +77,9 @@ async function expectArticle(page: Page, version: 1 | 2) {
         body.getByText(`PUBLICATION_BODY_V${version}`, { exact: true })
     ).toBeVisible()
     await expect(
+        body.getByText(bodyKeyword(version), { exact: true })
+    ).toBeVisible()
+    await expect(
         body.getByText(`PUBLICATION_END_V${version}`, { exact: true })
     ).toBeVisible()
     await expect(page).toHaveTitle(`Publication cache probe V${version}`)
@@ -75,7 +93,69 @@ async function expectArticle(page: Page, version: 1 | 2) {
 }
 
 // Fresh document requests verify server caches, not the browser's Router Cache.
-async function expectDirectScreens(page: Page, locale: string, version: 1 | 2) {
+async function expectBodySearch(
+    page: Page,
+    request: APIRequestContext,
+    locale: string,
+    version: 1 | 2
+) {
+    const otherVersion = version === 1 ? 2 : 1
+    for (const candidate of [version, otherVersion] as const) {
+        const keyword = bodyKeyword(candidate)
+        const matches = candidate === version
+        const response = await request.get('/api/search', {
+            params: { q: keyword },
+        })
+        expect(response.status()).toBe(200)
+        const payload = await response.json()
+        expect(payload.query).toBe(keyword)
+        expect(payload.count).toBe(matches ? 1 : 0)
+        expect(payload.results).toHaveLength(matches ? 1 : 0)
+        if (matches) {
+            expect(payload.results[0]).toEqual(
+                expect.objectContaining({
+                    href: documentPath,
+                    title: `Publication cache probe V${version}`,
+                    summary: `PUBLICATION_SUMMARY_V${version}`,
+                })
+            )
+            expect(payload.results[0].content).toContain(keyword)
+            expect(payload.results[0].content).not.toContain(
+                bodyKeyword(otherVersion)
+            )
+            expect(payload.results[0].preview.excerptHtml).toContain(keyword)
+        }
+
+        await page.goto(`/${locale}/docs?q=${keyword}`)
+        const card = page.locator(`main a[href="/${locale}${documentPath}"]`)
+        if (matches) {
+            await expect(card).toHaveCount(1)
+            await expect(card.getByRole('heading')).toHaveText(
+                `Publication cache probe V${version}`
+            )
+            await expect(card).toContainText(keyword)
+        } else {
+            await expect(
+                page.getByRole('main').getByRole('heading', {
+                    level: 1,
+                    name:
+                        locale === 'ko'
+                            ? '검색 결과가 없어요'
+                            : 'No matching documents',
+                    exact: true,
+                })
+            ).toBeVisible()
+            await expect(card).toHaveCount(0)
+        }
+    }
+}
+
+async function expectDirectScreens(
+    page: Page,
+    request: APIRequestContext,
+    locale: string,
+    version: 1 | 2
+) {
     for (const suffix of ['', '?q=Publication%20cache%20probe']) {
         await page.goto(`/${locale}/docs${suffix}`)
         const card = page.locator(`main a[href="/${locale}${documentPath}"]`)
@@ -85,6 +165,7 @@ async function expectDirectScreens(page: Page, locale: string, version: 1 | 2) {
         )
         await expect(card).toContainText(`PUBLICATION_SUMMARY_V${version}`)
     }
+    await expectBodySearch(page, request, locale, version)
     await page.goto(`/${locale}${documentPath}`)
     await expectArticle(page, version)
 }
@@ -190,11 +271,11 @@ for (const locale of ['ko', 'en']) {
             await test.step('Warm V1 in the real index, search and detail screens', async () => {
                 await changeOrigin(request, 1)
                 await invalidate(request, revalidationToken)
-                await expectDirectScreens(page, locale, 1)
+                await expectDirectScreens(page, request, locale, 1)
             })
             await test.step('Origin is V2 but cached screens stay V1', async () => {
                 await changeOrigin(request, 2)
-                await expectDirectScreens(page, locale, 1)
+                await expectDirectScreens(page, request, locale, 1)
             })
             await test.step('Missing, invalid and read-only tokens cannot invalidate', async () => {
                 for (const token of [
@@ -203,7 +284,7 @@ for (const locale of ['ko', 'en']) {
                     readToken,
                 ]) {
                     await invalidate(request, token)
-                    await expectDirectScreens(page, locale, 1)
+                    await expectDirectScreens(page, request, locale, 1)
                 }
             })
             await test.step('Authorized webhook updates the next request, not the already open DOM', async () => {
@@ -211,7 +292,7 @@ for (const locale of ['ko', 'en']) {
                 await expectArticle(page, 1)
                 await page.reload()
                 await expectArticle(page, 2)
-                await expectDirectScreens(page, locale, 2)
+                await expectDirectScreens(page, request, locale, 2)
             })
             await test.step('Search uses the new summary, not the old index entry', async () => {
                 await page.goto(`/${locale}/docs?q=PUBLICATION_SUMMARY_V2`)

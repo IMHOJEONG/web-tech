@@ -1,0 +1,256 @@
+{
+  "date": "2026-10-26",
+  "timezone": "Asia/Seoul",
+  "base": "3609ff2b170ce25d0fa1b9ad54aa616fffed61ce",
+  "state": "local-uncommitted-test-followup",
+  "sourceBlobs": {
+    "apps/docs/article-e2e/content-publication.spec.ts": "92538d087b5d10afbbcd7e86099e4b35682425c9",
+    "apps/docs/article-e2e/content-server.ts": "f319c5c66ea6e896f0ebde95f4347e5103c54a63"
+  },
+  "productionBuildId": "Ms8Igaw5sI0Gvjzgkwgkz",
+  "fullSuite": {
+    "passed": 154,
+    "exitCode": 0,
+    "consoleDuration": "1.5m",
+    "includesFocusedTests": true
+  },
+  "focused": {
+    "stats": {
+      "startTime": "2026-10-26T11:21:04.304Z",
+      "duration": 30990,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": 0,
+    "tests": [
+      {
+        "file": "content-publication-cli.spec.ts",
+        "title": "publication CLI rejects stale Next.js pages and verifies the authorized refresh",
+        "project": "article-mobile",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 1198
+          }
+        ]
+      },
+      {
+        "file": "content-publication-cli.spec.ts",
+        "title": "publication CLI rejects stale Next.js pages and verifies the authorized refresh",
+        "project": "article-desktop",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 871
+          }
+        ]
+      },
+      {
+        "file": "content-publication.spec.ts",
+        "title": "direct URL cache: ko publication refreshes index, search and article only after an authorized webhook",
+        "project": "article-mobile",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 4668,
+            "steps": [
+              {
+                "title": "Warm V1 in the real index, search and detail screens",
+                "duration": 1044
+              },
+              {
+                "title": "Origin is V2 but cached screens stay V1",
+                "duration": 611
+              },
+              {
+                "title": "Missing, invalid and read-only tokens cannot invalidate",
+                "duration": 1683
+              },
+              {
+                "title": "Authorized webhook updates the next request, not the already open DOM",
+                "duration": 988
+              },
+              {
+                "title": "Search uses the new summary, not the old index entry",
+                "duration": 167
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "content-publication.spec.ts",
+        "title": "direct URL cache: en publication refreshes index, search and article only after an authorized webhook",
+        "project": "article-mobile",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 3710,
+            "steps": [
+              {
+                "title": "Warm V1 in the real index, search and detail screens",
+                "duration": 659
+              },
+              {
+                "title": "Origin is V2 but cached screens stay V1",
+                "duration": 521
+              },
+              {
+                "title": "Missing, invalid and read-only tokens cannot invalidate",
+                "duration": 1595
+              },
+              {
+                "title": "Authorized webhook updates the next request, not the already open DOM",
+                "duration": 681
+              },
+              {
+                "title": "Search uses the new summary, not the old index entry",
+                "duration": 165
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "content-publication.spec.ts",
+        "title": "direct URL cache: ko publication refreshes index, search and article only after an authorized webhook",
+        "project": "article-desktop",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 4477,
+            "steps": [
+              {
+                "title": "Warm V1 in the real index, search and detail screens",
+                "duration": 942
+              },
+              {
+                "title": "Origin is V2 but cached screens stay V1",
+                "duration": 573
+              },
+              {
+                "title": "Missing, invalid and read-only tokens cannot invalidate",
+                "duration": 1671
+              },
+              {
+                "title": "Authorized webhook updates the next request, not the already open DOM",
+                "duration": 988
+              },
+              {
+                "title": "Search uses the new summary, not the old index entry",
+                "duration": 187
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "content-publication.spec.ts",
+        "title": "direct URL cache: en publication refreshes index, search and article only after an authorized webhook",
+        "project": "article-desktop",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 4030,
+            "steps": [
+              {
+                "title": "Warm V1 in the real index, search and detail screens",
+                "duration": 918
+              },
+              {
+                "title": "Origin is V2 but cached screens stay V1",
+                "duration": 541
+              },
+              {
+                "title": "Missing, invalid and read-only tokens cannot invalidate",
+                "duration": 1601
+              },
+              {
+                "title": "Authorized webhook updates the next request, not the already open DOM",
+                "duration": 690
+              },
+              {
+                "title": "Search uses the new summary, not the old index entry",
+                "duration": 175
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "commands": {
+    "initialFailed": "mise exec -- pnpm --filter docs test:article:prod -- content-publication.spec.ts",
+    "initialSuccessfulFull": "mise exec -- pnpm --filter docs test:article:prod -- content-publication.spec.ts content-publication-cli.spec.ts",
+    "selectedListing": "mise exec -- pnpm --filter docs exec playwright test --config=playwright.article.config.ts content-publication.spec.ts content-publication-cli.spec.ts --list",
+    "selectedJson": "mise exec -- pnpm --filter docs exec playwright test --config=playwright.article.config.ts content-publication.spec.ts content-publication-cli.spec.ts --reporter=json"
+  },
+  "initialFailure": {
+    "stage": "Next production typecheck; browser tests had not started",
+    "error": "TS2345: array element inferred as number, not 1 | 2",
+    "fix": "readonly literal tuple via as const",
+    "noGateRelaxation": true
+  },
+  "assertions": {
+    "bodyKeywordNotInMetadata": true,
+    "initialV1": {
+      "uiV1Matches": 1,
+      "uiV2Matches": 0,
+      "apiV1Count": 1,
+      "apiV2Count": 0
+    },
+    "originV2BeforeWebhook": {
+      "uiV1Matches": 1,
+      "uiV2Matches": 0,
+      "apiV1Count": 1,
+      "apiV2Count": 0
+    },
+    "rejectedWebhooks": {
+      "cases": ["missing", "invalid", "read-only content token"],
+      "status": 401,
+      "cachedBodyVersion": 1
+    },
+    "authorizedWebhook": {
+      "status": 200,
+      "alreadyOpenDomVersion": 1,
+      "nextRequestVersion": 2,
+      "uiV2Matches": 1,
+      "uiV1Matches": 0,
+      "apiV2Count": 1,
+      "apiV1Count": 0
+    },
+    "previewContainsBodyKeyword": true,
+    "existingSummarySearchRetained": true,
+    "resetsFixtureInFinally": true,
+    "publicationBrowserPageErrors": 0
+  },
+  "isolation": {
+    "origins": ["http://127.0.0.1:3111", "http://127.0.0.1:3112"],
+    "syntheticCredentialsOnly": true,
+    "retries": 0,
+    "workers": 1,
+    "publicationTimeoutMs": 60000,
+    "upstreamTtlSeconds": 3600,
+    "productionRequests": false,
+    "nasAccess": false
+  },
+  "limitations": [
+    "Focused six are included in the full 154, not 160 distinct tests.",
+    "Direct URL tests verify server caches, not browser Router Cache or real NAS/Vercel publication.",
+    "No backend image rollout, remote CI, commit or push in this followup."
+  ]
+}

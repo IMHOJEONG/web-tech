@@ -1,0 +1,165 @@
+{
+  "date": "2026-10-26",
+  "timezone": "Asia/Seoul",
+  "base": "3609ff2b170ce25d0fa1b9ad54aa616fffed61ce",
+  "state": "local-uncommitted",
+  "sourceBlobs": {
+    "packages/docs-content-contract/src/index.ts": "168d66be6e87c7a3738c26bb26dba8d04458f8bd",
+    "apps/docs-backend/src/modules/content/content.controller.ts": "50b962429f50f4cb2750e82621df147cff041115",
+    "apps/docs-backend/src/modules/content/content-html-budget.spec.ts": "353e933807e9dd6cb126622f29139a3c42a80e40",
+    "apps/docs-backend/test/html-budget.e2e-spec.ts": "8ce5c4a6e61d5d6f296eeb5bd6dcb3a4daa9d4cd",
+    "apps/docs/lib/content-api.ts": "5399f6243d43969f36cddb401ada8abd0911460c",
+    "apps/docs/lib/content-api-resilience.test.ts": "e20fc3f9a20c84d1070758c443880782ff0316e6",
+    "apps/docs/lib/content-api-request.ts": "73b7c370aaa9bc4c90aa8f6c873620a1f92f24bb",
+    "apps/docs/lib/content-api-request.test.ts": "4369226d47b8b08751b5640a70e32977f8a83753"
+  },
+  "policy": {
+    "warnBytes": 524288,
+    "maxBytes": 1048576,
+    "unit": "UTF-8 complete rendered HTML before compression, including wrapper",
+    "producer": "warning or503, no body truncation; numeric-only budget diagnostics",
+    "consumer": "bound raw decoded response stream before normalize; propagate too-large to existing source fallback"
+  },
+  "boundaries": [
+    {
+      "bytes": 524288,
+      "status": 200,
+      "warn": false
+    },
+    {
+      "bytes": 524289,
+      "status": 200,
+      "warn": true
+    },
+    {
+      "bytes": 1048576,
+      "status": 200,
+      "warn": true
+    },
+    {
+      "bytes": 1048577,
+      "status": 503,
+      "bodyOmitted": true
+    }
+  ],
+  "examples": {
+    "backend": "actual AppModule/MarkdownIt; <>& repeated20000 times expands after escape; table1000 rows preserves last row",
+    "frontend": "real selection/normalization; code2048 lines and table1000 rows preserve endings",
+    "detailVsIndex": "oversized rendered detail503 can coexist with valid list200 and searchable metadata"
+  },
+  "selectedBackend": {
+    "unit": {
+      "success": true,
+      "passed": 5,
+      "failed": 0,
+      "pending": 0,
+      "tests": [
+        {
+          "title": "rendered HTML byte budget returns all HTML at 524288 UTF-8 bytes with correct warning threshold",
+          "status": "passed",
+          "duration": 6
+        },
+        {
+          "title": "rendered HTML byte budget returns all HTML at 524289 UTF-8 bytes with correct warning threshold",
+          "status": "passed",
+          "duration": 1
+        },
+        {
+          "title": "rendered HTML byte budget returns all HTML at 1048576 UTF-8 bytes with correct warning threshold",
+          "status": "passed",
+          "duration": 2
+        },
+        {
+          "title": "rendered HTML byte budget rejects the whole HTML at one byte over the cap with no path or body in diagnostics",
+          "status": "passed",
+          "duration": 2
+        },
+        {
+          "title": "rendered HTML byte budget keeps invalid paths as not-found without reading or rendering content",
+          "status": "passed",
+          "duration": 0
+        }
+      ]
+    },
+    "http": {
+      "success": true,
+      "passed": 3,
+      "failed": 0,
+      "pending": 0,
+      "tests": [
+        {
+          "title": "real Markdown-to-HTML budget over HTTP measures final escaped HTML, accepts its exact cap and rejects one byte more",
+          "status": "passed",
+          "duration": 105
+        },
+        {
+          "title": "real Markdown-to-HTML budget over HTTP preserves a long valid table rather than truncating its last row",
+          "status": "passed",
+          "duration": 12
+        },
+        {
+          "title": "real Markdown-to-HTML budget over HTTP checks authentication before reading and preserves real missing-document 404",
+          "status": "passed",
+          "duration": 3
+        }
+      ]
+    }
+  },
+  "frontendAssertions": [
+    "absent/oversized/encoded-small Content-Length do not bypass cap",
+    "same-canonical local copy used for oversized detail",
+    "remote-only too-large stays an error, not null/false404",
+    "one list plus selected detail only; no retries or detail fan-out",
+    "list and metadata search remain usable without fetching an oversized detail",
+    "too-large error has no Request/auth header; existing reader cancellation/real gzip tests retained"
+  ],
+  "compressionScope": "HTML integration simulates decoded chunks with gzip headers; actual gzip decompression is tested by the unchanged shared reader regression, not a live gzip NAS transfer",
+  "regressions": {
+    "shared": 28,
+    "backendUnit": 31,
+    "backendHttp": 45,
+    "docsLibrary": 307,
+    "repository": 153,
+    "production": {
+      "stats": {
+        "startTime": "2026-10-26T14:32:40.968Z",
+        "duration": 98928.338,
+        "expected": 162,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "count": 162,
+      "runnerErrors": 0,
+      "retried": 0,
+      "nonPassing": 0,
+      "buildId": "c35jCG57uBhhuZH17-PLo",
+      "exitCode": 0
+    }
+  },
+  "counting": "Selected backend5+3 are subsets of full unit31/HTTP45, not additional unique tests.",
+  "checks": {
+    "sharedBuildLint": "passed",
+    "backendLintTypeBuild": "passed",
+    "docsTypeAndChangedLint": "passed",
+    "listeners3111And3112Remaining": 0
+  },
+  "initialFailures": [],
+  "limitations": [
+    "no production/NAS requests or deploy/credential/webhook changes",
+    "no bound on backend raw file reading/parsing/rendering before output measurement",
+    "no bound on already allocated chunks/Next internal buffering/post-normalize markup or DOM",
+    "external media, local MDX and public search-result payload not limited here",
+    "no real corpus/concurrency/peak memory/SLO measurement",
+    "passing the suite does not classify all existing intentional upstream/abort logs as harmless"
+  ],
+  "rawResultsLocalOnly": [
+    "/private/tmp/html-budget-backend-check-20261026.log",
+    "/private/tmp/html-budget-docs-tests-20261026.log",
+    "/private/tmp/html-budget-repo-tests-20261026.log",
+    "/private/tmp/html-budget-unit-20261026.json",
+    "/private/tmp/html-budget-http-20261026.json",
+    "/private/tmp/html-budget-production-20261026.json"
+  ],
+  "noCommitPushOrDeployment": true
+}

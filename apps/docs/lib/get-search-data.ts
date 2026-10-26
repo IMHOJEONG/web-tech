@@ -60,7 +60,7 @@ function normalizeRemoteSearchDoc(doc: Partial<Metadata>): SearchData | null {
         id: String(doc.id ?? routeKey ?? doc.slug),
         title: doc.title ?? doc.slug,
         summary: doc.summary ?? '',
-        content: doc.content ?? '',
+        content: doc.searchText ?? '',
         slug: doc.slug,
         fileName,
         date: doc.date,

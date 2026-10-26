@@ -10,7 +10,17 @@
 - ranking / preview / count 계산 기준을 route handler 바깥에서 공통 helper로 고정한다.
 - 이후 search consumer가 늘어나도 응답 형태를 안정적으로 유지한다.
 
+## 본문 검색과 원본 선택
+
+2026-10-26 로컬 구현에서 원격 목록의 `searchText`를 검색용 `SearchData.content`에 연결했다. 로컬은 기존 공개 MDX의 본문 인덱스를 유지하며 두 소스 모두 기존 ranking·preview를 사용한다. 문서 metadata의 렌더링용 `content`는 이 필드와 별개다. 같은 URL은 원격 published 글 하나만 선택하고 과거 로컬 본문은 합치지 않는다.
+
+원격 필드가 누락/null/빈 문자열인 구형 생산자는 제목·요약 등 metadata만 검색한다. 원격 요청/스키마 오류 때는 로컬 본문 검색으로 대체한다. 원격에서 빠진 route의 로컬 published 글은 기존 fallback 정책대로 남으며 원격 draft를 통해 로컬 글을 삭제하는 계약은 아니다. 검색 중 문서 상세를 일괄 조회하지 않는다. title > summary > taxonomy > content 순위와 HTML escape·40 code point 입력 규칙은 바꾸지 않는다.
+
+현재 TTL·태그·인증된 게시 갱신 웹훅을 유지한다. 모의 응답의 V1→V2 검사는 새 목록을 읽은 뒤의 검색 갱신만 증명하며 실제 NAS 변경·Vercel 무효화 검증을 대체하지 않는다. [ADR-0019](adr-0019-remote-body-search.md)와 [로컬 검증](../verification/content/2026-10-26-remote-body-search.md)을 따른다.
+
 ## Current Route
+
+원격 인덱스 입력 `GET /api/posts`는 [목록 byte budget](blog-content-api-contract.md#목록-응답-크기-제한)을 적용한다. 상한 초과는 부분 검색 성공이 아니라 기존 원격 실패/로컬 fallback 경로다. 이1MiB는 아래 공개 `/api/search` 결과 자체의 상한을 뜻하지 않는다.
 
 - endpoint: `/api/search`
 - method: `GET`

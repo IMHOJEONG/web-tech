@@ -92,6 +92,7 @@ Authorization: Bearer <shared-secret>
       "slug": "event-loop",
       "title": "Event Loop",
       "summary": "브라우저 이벤트 루프의 실행 순서를 정리합니다.",
+      "searchText": "Event Loop Promise microtask와 task의 실행 순서를 확인합니다.",
       "date": "2026-09-09",
       "updatedAt": "2026-09-09",
       "status": "published",
@@ -107,6 +108,20 @@ Authorization: Bearer <shared-secret>
 ```
 
 `apps/docs-backend`는 반환 직전에 `canonicalPostsPayloadSchema`로 응답을 검증한다. 잘못된 개별 파일은 목록에서 제외하고 서버 로그에 경로와 검증 실패를 남긴다.
+
+## 본문 검색 텍스트
+
+`searchText`는 검증된 published 본문의 검색 전용 문자열이다. 새 NestJS 목록은 매 문서에 생성하며 비어 있는 본문은 `""`로 보낸다. frontmatter·draft·archived·본문 검증 실패 파일의 텍스트는 포함하지 않는다. 표시 텍스트·링크 라벨·이미지 alt·인라인/블록 코드는 포함하고 Markdown 구문·링크 destination·이미지 경로는 제외한다. 토큰 기반 추출 후 NFC·공백을 정리한다. 코드의 줄바꿈·서식 복원용 데이터가 아니다.
+
+이관 중 구형 생산자도 허용하도록 공유 스키마는 이 필드를 선택적으로 유지한다. 프론트 호환 입력은 누락/null/빈 문자열을 허용하지만 숫자·객체 등은 오류다. 필드가 없는 목록은 metadata-only 검색이며 임의로 HTML/body alias나 과거 로컬 본문을 대신 검색하지 않는다. 렌더링용 `content`와 구분하고 HTML로 실행하지 않는다. 인증·`private, no-store`·`Vary: Authorization`·공개 상태 규칙은 유지한다. 상세 API에서 별도로 가져오는 본문 계약은 바꾸지 않는다.
+
+선택 이유·배포 및 캐시 경계는 [ADR-0019](adr-0019-remote-body-search.md)를 따른다. 목록 크기 제한은 다음 정책을 따른다.
+
+## 목록 응답 크기 제한
+
+2026-10-26 로컬 구현에서 공유 `CONTENT_POSTS_WARN_BYTES`(512KiB)·`CONTENT_POSTS_MAX_BYTES`(1MiB)를 사용한다. 대상은 인증된 `GET /api/posts`의 전체 JSON이며 압축 전 UTF-8 바이트다. 정확히512KiB까지 정상, 초과~1MiB까지 전체 응답과 수치 경고, 1MiB 초과는503이다. 문서 수·searchText 글자 수나 gzip 크기 기준이 아니다. 일부 글·본문을 자르거나 metadata-only로 바꾸지 않는다.
+
+프론트는 목록 스트림 누적 바이트를 JSON.parse 전에 제한한다. identity의 과대한 Content-Length는 미리 거절하지만 헤더만 신뢰하지 않는다. 압축 해제 후 상한 초과도 abort/cancel·`too-large`로 실패시켜 기존 로컬 fallback을 사용한다. deadline·retry0·TTL·태그·웹훅은 유지한다. 원격 전용 결과와 목록 의존 상세의 가용성 영향, 초기 수치 선택 이유·한계는 [ADR-0020](adr-0020-content-posts-byte-budget.md)을 따른다. 운영 배포·실제 NAS corpus는 미검증이다. 상세 HTML 제한은 아래 별도 정책이며 공개 검색 결과 자체의 byte budget은 아직 없다.
 
 ## Legacy Input Compatibility
 
@@ -143,19 +158,26 @@ Content-Type: text/html; charset=utf-8
 
 백엔드는 Markdown을 안전하게 escape한 baseline HTML과 `language-*` 정보만 만든다. Shiki highlighting, copy button, language badge, 최종 sanitize/normalize는 프론트가 담당한다.
 
+## 상세 HTML 응답 크기 제한
+
+공유 `CONTENT_HTML_WARN_BYTES`(512KiB)·`CONTENT_HTML_MAX_BYTES`(1MiB)는 목록과 독립된 상수다. 전체 렌더 결과의 압축 전 UTF-8 bytes를 사용하며 doctype·wrapper·escape된 코드·표도 센다. 외부 이미지/영상 파일 크기는 포함하지 않는다. 정확히512KiB는 정상, 초과~1MiB는 전체 HTML과 생산자 수치 경고, 1MiB 초과는503이다. 일부 HTML을 잘라 성공 응답으로 보내지 않는다.
+
+프론트는 스트림에서 같은 상한을 normalize/sanitize 전에 검사하고 `too-large`를 로더까지 전달한다. 로컬 사본이 있으면 기존 상세 fallback, 없으면 오류이며404/null로 바꾸지 않는다. 목록 inline body는 기존 목록 상한의 보호를 받으며 우선순위·별도 endpoint 조회 여부는 바꾸지 않는다. 초기 값·선택 이유·처리 단계별 한계는 [ADR-0021](adr-0021-content-html-byte-budget.md), 실행 결과는 [HTML 경계 검증](../verification/content/2026-10-26-html-response-budget.md)을 따른다.
+
 ## Error Contract
 
 - `401`: 토큰 누락 또는 불일치
 - `404`: 존재하지 않음, 비공개 상태, 잘못된 route, 유효하지 않은 published metadata 또는 차단 대상 본문 규칙 실패
+- `503`: 목록 JSON 또는 상세 HTML의 응답 byte budget 초과 (부분 응답 없음)
 - `5xx`: filesystem 또는 예상하지 못한 서버 장애
 
 ### Content-Type과 오류 처리
 
 - 정상 목록은 `application/json; charset=utf-8`, 정상 상세는 `text/html; charset=utf-8`이다.
-- 상세의 `401`·`404`·기본 `500` 오류는 Nest의 JSON 응답을 사용한다. HTML을 기대하는 경로라는 이유로 오류까지 HTML로 표시하거나 상태 코드를 200으로 바꾸지 않는다.
-- 상세 controller는 문서 조회와 HTML 렌더링이 성공한 뒤에만 HTML Content-Type을 설정한다. 오류가 날 수 있는 작업 전에 정적 HTML 헤더를 지정하지 않는다.
+- 상세의 `401`·`404`·기본 `500`·응답 크기 초과 `503` 오류는 Nest의 JSON 응답을 사용한다. HTML을 기대하는 경로라는 이유로 오류까지 HTML로 표시하거나 상태 코드를 200으로 바꾸지 않는다.
+- 상세 controller는 문서 조회·HTML 렌더링·byte budget 검사가 성공한 뒤에만 HTML Content-Type을 설정한다. 오류가 날 수 있는 작업 전에 정적 HTML 헤더를 지정하지 않는다.
 - `@Res({ passthrough: true })`로 성공 헤더만 설정하고 전송·기본 예외 처리는 Nest에 남긴다. `send`/`end`로 응답을 수동 종료하거나 global ExceptionFilter로 오류 계약을 덮어쓰지 않는다.
-- 인증 후 controller에 도달한 상세의 성공·404·500은 기존 `Cache-Control: private, no-store`와 `Vary: Authorization`을 유지한다. controller 전에 거부되는 인증 오류의 헤더 정책은 이번에 변경하지 않는다.
+- 인증 후 controller에 도달한 상세의 성공·404·500·503은 기존 `Cache-Control: private, no-store`와 `Vary: Authorization`을 유지한다. controller 전에 거부되는 인증 오류의 헤더 정책은 이번에 변경하지 않는다.
 - 비공개·검증 실패는 일반 `Post not found` 응답으로 통일하며 원문·검증 상세·토큰은 응답에 포함하지 않는다. 경고를 없애려고 오류 로그나 콘텐츠 검증 로그를 일괄 비활성화하지 않는다.
 
 이 계약 보완은 로컬 수정이며 NAS에는 변경된 백엔드 이미지를 배포한 뒤 적용된다. [회귀 검증](../verification/content/2026-10-26-content-response-type.md)에서 실제 응답과 경고 부재를 확인한다.
