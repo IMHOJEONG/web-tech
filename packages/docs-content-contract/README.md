@@ -7,6 +7,7 @@
 - `published` frontmatter 필수 metadata와 `YYYY-MM-DD` 날짜
 - legacy-compatible remote payload parsing
 - 신규 NestJS API의 canonical response schema
+- published 본문 검색 전용 선택 필드 `searchText` (렌더링 content와 분리, 구형 생산자 호환)
 - 로컬·원격이 공유하는 본문 작성 규칙 (`@web-tech/docs-content-contract/body-style`)
 
 소비 앱은 경로 정규식이나 상태 enum을 다시 선언하지 않고 이 패키지를 사용한다.

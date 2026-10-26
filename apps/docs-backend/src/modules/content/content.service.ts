@@ -30,7 +30,14 @@ export class ContentService {
     const posts = files.flatMap((file) => {
       try {
         const document = this.parsePublishedDocument(file);
-        return document ? [document.metadata] : [];
+        return document
+          ? [
+              {
+                ...document.metadata,
+                searchText: this.renderer.extractSearchText(document.body),
+              },
+            ]
+          : [];
       } catch (error) {
         this.logger.warn(
           `Skipping invalid content document: ${file.markdownPath} (${getErrorMessage(error)})`,

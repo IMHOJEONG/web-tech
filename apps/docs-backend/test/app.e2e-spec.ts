@@ -150,6 +150,114 @@ Not published because metadata is incomplete.
     expect(response.headers['cache-control']).toBe('private, no-store');
   });
 
+  it('publishes current body search text only after validation, without metadata or drafts', async () => {
+    const directory = join(temporaryRoot, 'posts', 'web');
+    const makeArticle = (slug: string, status: string, body: string) => `---
+title: Search notebook
+slug: ${slug}
+summary: Overview
+date: 2026-10-26
+updatedAt: 2026-10-26
+status: ${status}
+authorName: Writer
+authorRole: Engineer
+readMinutes: 2
+topicLabel: WEB
+tags: []
+---
+${body}
+`;
+    const files = [
+      'search-note',
+      'search-draft',
+      'search-archived',
+      'search-invalid',
+    ];
+    const body =
+      '## Details\n\nA **quasarneedle** [label](https://destination.invalid).\n\n```ts\nconst task = true;\n```';
+    try {
+      for (const [slug, status, text] of [
+        ['search-note', 'published', body],
+        ['search-draft', 'draft', '## Details\nsecretDraftNeedle'],
+        ['search-archived', 'archived', '## Details\nsecretArchivedNeedle'],
+        [
+          'search-invalid',
+          'published',
+          '## Details\n<!-- secretInvalidNeedle -->',
+        ],
+      ]) {
+        await writeFile(
+          join(directory, `${slug}.md`),
+          makeArticle(slug!, status!, text!),
+          'utf8',
+        );
+      }
+      const readIndex = async () => {
+        const response = await request(app.getHttpServer())
+          .get('/api/posts')
+          .set('Authorization', 'Bearer test-content-token')
+          .expect(200);
+        return response.body.results as { slug: string; searchText?: string }[];
+      };
+      const first = await readIndex();
+      const note = first.find((post) => post.slug === 'search-note');
+      expect(note?.searchText).toBe(
+        'Details A quasarneedle label. const task = true;',
+      );
+      expect(note?.searchText).not.toMatch(
+        /Search notebook|Overview|destination.invalid|```/,
+      );
+      expect(JSON.stringify(first)).not.toMatch(
+        /secretDraftNeedle|secretArchivedNeedle|secretInvalidNeedle/,
+      );
+      expect(first.map((post) => post.slug)).not.toEqual(
+        expect.arrayContaining(['search-draft']),
+      );
+      expect(first.map((post) => post.slug)).not.toEqual(
+        expect.arrayContaining(['search-archived']),
+      );
+      expect(first.map((post) => post.slug)).not.toEqual(
+        expect.arrayContaining(['search-invalid']),
+      );
+
+      await request(app.getHttpServer()).get('/api/posts').expect(401);
+      const detail = await request(app.getHttpServer())
+        .get('/posts/web/search-note')
+        .set('Authorization', 'Bearer test-content-token')
+        .expect(200);
+      expect(detail.text).toContain('<strong>quasarneedle</strong>');
+
+      await writeFile(
+        join(directory, 'search-note.md'),
+        makeArticle(
+          'search-note',
+          'published',
+          body.replace('quasarneedle', 'plasmanoodle'),
+        ),
+        'utf8',
+      );
+      const second = await readIndex();
+      expect(
+        second.find((post) => post.slug === 'search-note')?.searchText,
+      ).toContain('plasmanoodle');
+      expect(
+        second.find((post) => post.slug === 'search-note')?.searchText,
+      ).not.toContain('quasarneedle');
+      await writeFile(
+        join(directory, 'search-note.md'),
+        makeArticle('search-note', 'draft', body),
+        'utf8',
+      );
+      expect(
+        (await readIndex()).some((post) => post.slug === 'search-note'),
+      ).toBe(false);
+    } finally {
+      await Promise.all(
+        files.map((slug) => rm(join(directory, `${slug}.md`), { force: true })),
+      );
+    }
+  });
+
   it('does not expose drafts or traversal paths', async () => {
     await request(app.getHttpServer())
       .get('/posts/feed/private-note')
