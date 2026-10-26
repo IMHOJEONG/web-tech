@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-27 검색/응답 제한 PR 결합](2026-10-27-search-response-pr-integration.json): [보고서](../integration/2026-10-27-search-response-pr-integration.md). #64 공식 squash·실제 main/배포 조회·충돌 보존·검색 어댑터 전후·소스9blob·production162개.
+
 - [10-26 상세 HTML 응답 제한](2026-10-26-html-response-budget.json): [보고서](../content/2026-10-26-html-response-budget.md). 렌더 결과 경계·길고 유효한 코드/표·선택 JSON 재검사·소스8blob·production162개·미검증 범위.
 
 - [10-26 검색 목록 byte budget](2026-10-26-search-payload-budget.json): [성능·경계 보고서](../performance/2026-10-26-search-payload-budget.md). 합성9조건 raw/gzip·순위 비용·소스11blob·회귀·초기 실패, 운영 corpus 미사용.
@@ -10,6 +12,7 @@
 
 - [10-26 원격 본문 검색](2026-10-26-remote-body-search.json): [보고서](../content/2026-10-26-remote-body-search.md). 소스 hash·공용/백엔드/docs/저장소 회귀·요청 수·초기 실패와 후속 성공, 운영 미검증.
 
+- [10-26 상세 오류 Content-Type 전후](2026-10-26-content-response-type.json): [검증 보고서](../content/2026-10-26-content-response-type.md). 실제 adapter 경고 재현과 수정 후 경고0·응답 계약 대조.
 - [10-25 Primary 대비 측정](2026-10-25-primary-action-contrast.json)·[Mobile Dark](2026-10-25-primary-contrast-mobile-dark.png)·[Desktop Light](2026-10-25-primary-contrast-desktop-light.png): [검증 보고서](../accessibility/2026-10-25-primary-action-contrast.md). 수정 전 실패·computed 대비·브라우저 회귀·Figma outline 재조회.
 - [10-25 H1 동일 입력 전후 판정](2026-10-25-body-h1-warning.json): [검증 보고서](../content/2026-10-25-body-h1-warning.md). 기준 main의 차단 2개와 수정본의 경고 1개 대조, 운영 미배포.
 - [10-25 UI·전송 계약 분리](2026-10-25-ui-transport-contract.json): [보안 PR 후속 검증](../security/2026-10-25-remaining-advisories.md#승인된-ui전송-검사-분리). 로컬 44개 통과·본문 표시 중 pending·200 이후 중단·완료 대조. 실제 중단 호출자 해소를 뜻하지 않음.

@@ -60,7 +60,7 @@
 
 아래 일반 정책 전체의 최신성을 이번 ADR 점검에서 검증한 것은 아니다. 관련 작업을 할 때 각 문서의 적용 범위·상태·검토일을 실제 코드와 대조한다.
 
-- [Blog Content API Contract](blog-content-api-contract.md)
+- [Blog Content API Contract](blog-content-api-contract.md): 정상 상세 HTML·오류 JSON 경계와 Content-Type 설정 시점.
 - [Blog Markdown DB Recommendation](blog-content-database-recommendation.md)
 - [Blog Content Delivery: HTML vs Markdown](blog-content-html-vs-markdown.md)
 - [Docs App FSD Guide](docs-app-fsd.md)

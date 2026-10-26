@@ -133,7 +133,7 @@ test('local and remote body search share source selection, ranking and failure b
             query?: string,
             options?: { includeRemote?: boolean }
         ): Promise<SearchData[]>
-        fetchRemoteSearchData(): Promise<SearchData[]>
+        fetchRemoteSearchData(query?: string): Promise<SearchData[]>
         fetchRemoteDocsData(): Promise<Partial<Metadata>[]>
     }
     const bundledModule = { exports: {} as Api }
@@ -203,6 +203,14 @@ test('local and remote body search share source selection, ranking and failure b
             assert.equal((await search('legacybodyneedle')).length, 0)
             const adapterResults = await api.fetchRemoteSearchData()
             assert.match(adapterResults[0]?.content ?? '', /remotebodyneedle/)
+            const bodyMatches =
+                await api.fetchRemoteSearchData('remotebodyneedle')
+            assert.equal(bodyMatches.length, 1)
+            assert.equal(bodyMatches[0]?.href, '/docs/web/shared')
+            assert.equal(
+                (await api.fetchRemoteSearchData('legacybodyneedle')).length,
+                0
+            )
         }
     )
     await t.test(

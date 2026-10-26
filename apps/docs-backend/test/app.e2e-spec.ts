@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import request from 'supertest';
 
 import { AppModule } from '../src/app.module';
+import { ContentService } from '../src/modules/content/content.service';
 
 describe('Docs content API', () => {
   let app: INestApplication;
@@ -116,7 +117,8 @@ Not published because metadata is incomplete.
     const response = await request(app.getHttpServer())
       .get('/api/posts')
       .set('Authorization', 'Bearer test-content-token')
-      .expect(200);
+      .expect(200)
+      .expect('Content-Type', /application\/json; charset=utf-8/);
 
     expect(response.body.results).toEqual([
       expect.objectContaining({
@@ -271,6 +273,142 @@ ${body}
       .get('/posts/web/..%2Fprivate-note')
       .set('Authorization', 'Bearer test-content-token')
       .expect(404);
+  });
+
+  describe('detail response content types', () => {
+    let warnings: jest.SpyInstance;
+
+    beforeEach(() => {
+      warnings = jest.spyOn(Logger.prototype, 'warn');
+    });
+
+    afterEach(() => {
+      try {
+        expect(
+          warnings.mock.calls.filter(
+            ([message]) =>
+              typeof message === 'string' &&
+              message.includes("Content-Type doesn't match Reply body"),
+          ),
+        ).toEqual([]);
+      } finally {
+        warnings.mockRestore();
+      }
+    });
+
+    it('returns HTML only after a successful article render', async () => {
+      const response = await request(app.getHttpServer())
+        .get('/posts/web/event-loop')
+        .set('Authorization', 'Bearer test-content-token')
+        .expect(200)
+        .expect('Content-Type', /text\/html; charset=utf-8/);
+
+      expect(response.text).toContain('<article>');
+      expect(response.text).toContain('<h2>Event Loop</h2>');
+      expect(response.headers['cache-control']).toBe('private, no-store');
+      expect(response.headers.vary).toContain('Authorization');
+    });
+
+    it.each([
+      '/posts/web/missing',
+      '/posts/web/invalid.slug',
+      '/posts/web/incomplete',
+      '/posts/feed/private-note',
+      '/posts/feed/archived-note',
+    ])(
+      'returns a generic JSON 404 without a header warning: %s',
+      async (url) => {
+        const response = await request(app.getHttpServer())
+          .get(url)
+          .set('Authorization', 'Bearer test-content-token')
+          .expect(404)
+          .expect('Content-Type', /application\/json; charset=utf-8/);
+
+        expect(response.body).toEqual({
+          message: 'Post not found',
+          error: 'Not Found',
+          statusCode: 404,
+        });
+        expect(response.headers['cache-control']).toBe('private, no-store');
+        expect(response.headers.vary).toContain('Authorization');
+        expect(response.text).not.toContain('Skipping invalid');
+        expect(response.text).not.toContain('test-content-token');
+      },
+    );
+
+    it('keeps body validation failures private in a JSON 404', async () => {
+      const file = join(temporaryRoot, 'posts', 'web', 'invalid-body.md');
+      await writeFile(
+        file,
+        publishedSource(
+          'invalid-body',
+          '## Topic\n<!-- private-editorial-note -->',
+        ),
+      );
+      try {
+        const response = await request(app.getHttpServer())
+          .get('/posts/web/invalid-body')
+          .set('Authorization', 'Bearer test-content-token')
+          .expect(404)
+          .expect('Content-Type', /application\/json; charset=utf-8/);
+
+        expect(response.body.message).toBe('Post not found');
+        expect(response.headers['cache-control']).toBe('private, no-store');
+        expect(response.headers.vary).toContain('Authorization');
+        expect(response.text).not.toContain('private-editorial-note');
+        expect(response.text).not.toContain('body validation');
+        expect(warnings).toHaveBeenCalledWith(
+          expect.stringContaining(
+            'Rejected invalid content document: web/invalid-body',
+          ),
+        );
+      } finally {
+        await rm(file, { force: true });
+      }
+    });
+
+    it.each([undefined, 'Bearer invalid-test-token'])(
+      'returns JSON 401 for missing or invalid credentials: %s',
+      async (authorization) => {
+        const pending = request(app.getHttpServer()).get(
+          '/posts/web/event-loop',
+        );
+        if (authorization) pending.set('Authorization', authorization);
+        const response = await pending
+          .expect(401)
+          .expect('Content-Type', /application\/json; charset=utf-8/);
+
+        expect(response.body.statusCode).toBe(401);
+        expect(response.text).not.toContain('<article>');
+        expect(response.text).not.toContain('test-content-token');
+      },
+    );
+
+    it('does not set an HTML header before a renderer error', async () => {
+      const render = jest
+        .spyOn(app.get(ContentService), 'renderPost')
+        .mockImplementationOnce(() => {
+          throw new Error('private-render-failure');
+        });
+      try {
+        const response = await request(app.getHttpServer())
+          .get('/posts/web/event-loop')
+          .set('Authorization', 'Bearer test-content-token')
+          .expect(500)
+          .expect('Content-Type', /application\/json; charset=utf-8/);
+
+        expect(render).toHaveBeenCalledTimes(1);
+        expect(response.body).toEqual({
+          statusCode: 500,
+          message: 'Internal server error',
+        });
+        expect(response.headers['cache-control']).toBe('private, no-store');
+        expect(response.headers.vary).toContain('Authorization');
+        expect(response.text).not.toContain('private-render-failure');
+      } finally {
+        render.mockRestore();
+      }
+    });
   });
 
   it.each([

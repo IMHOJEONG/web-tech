@@ -5,12 +5,15 @@ import {
 } from '@web-tech/docs-content-contract';
 import { ContentController } from './content.controller';
 import { ContentService } from './content.service';
+import type { Response } from 'express';
 
 describe('rendered HTML byte budget', () => {
   const service = { getPublishedPost: jest.fn(), renderPost: jest.fn() };
   const controller = new ContentController(
     service as unknown as ContentService,
   );
+  const responseType = jest.fn();
+  const response = { type: responseType } as unknown as Response;
   const prefix =
     '<!doctype html><html><body><article><pre><code>한글😀 &lt;tag&gt;';
   const suffix = 'tail-marker</code></pre></article></body></html>';
@@ -36,7 +39,8 @@ describe('rendered HTML byte budget', () => {
     async (bytes) => {
       const html = htmlAt(bytes);
       service.renderPost.mockReturnValue(html);
-      expect(await controller.getPost('web', 'probe')).toBe(html);
+      expect(await controller.getPost('web', 'probe', response)).toBe(html);
+      expect(responseType).toHaveBeenCalledWith('html');
       expect(warn).toHaveBeenCalledTimes(
         bytes > CONTENT_HTML_WARN_BYTES ? 1 : 0,
       );
@@ -52,7 +56,9 @@ describe('rendered HTML byte budget', () => {
 
   it('rejects the whole HTML at one byte over the cap with no path or body in diagnostics', async () => {
     service.renderPost.mockReturnValue(htmlAt(CONTENT_HTML_MAX_BYTES + 1));
-    await expect(controller.getPost('web', 'probe')).rejects.toMatchObject({
+    await expect(
+      controller.getPost('web', 'probe', response),
+    ).rejects.toMatchObject({
       status: 503,
     });
     expect(error).toHaveBeenCalledWith({
@@ -61,10 +67,13 @@ describe('rendered HTML byte budget', () => {
       limitBytes: CONTENT_HTML_MAX_BYTES,
     });
     expect(warn).not.toHaveBeenCalled();
+    expect(responseType).not.toHaveBeenCalled();
   });
 
   it('keeps invalid paths as not-found without reading or rendering content', async () => {
-    await expect(controller.getPost('web', '..')).rejects.toMatchObject({
+    await expect(
+      controller.getPost('web', '..', response),
+    ).rejects.toMatchObject({
       status: 404,
     });
     expect(service.getPublishedPost).not.toHaveBeenCalled();

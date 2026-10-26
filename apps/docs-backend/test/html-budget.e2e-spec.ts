@@ -66,12 +66,8 @@ tags: []
   });
 
   it('measures final escaped HTML, accepts its exact cap and rejects one byte more', async () => {
-    const warn = jest
-      .spyOn(Logger.prototype, 'warn')
-      .mockImplementation(() => {});
-    const error = jest
-      .spyOn(Logger.prototype, 'error')
-      .mockImplementation(() => {});
+    const warn = jest.spyOn(Logger.prototype, 'warn');
+    const error = jest.spyOn(Logger.prototype, 'error');
     try {
       const baseline = await get().expect(200);
       const baseBytes = Buffer.byteLength(baseline.text);
@@ -93,6 +89,9 @@ tags: []
         expect(response.headers['cache-control']).toBe('private, no-store');
         expect(response.headers.vary).toContain('Authorization');
         if (bytes > CONTENT_HTML_MAX_BYTES) {
+          expect(response.headers['content-type']).toContain(
+            'application/json',
+          );
           expect(response.body).toEqual({
             statusCode: 503,
             error: 'Service Unavailable',
@@ -123,6 +122,13 @@ tags: []
       expect(index.body.results).toHaveLength(1);
       expect(index.body.results[0].markdownPath).toBe('web/probe');
       expect(index.body.results[0].searchText).toContain('tail-marker');
+      expect(
+        warn.mock.calls.filter(
+          ([message]) =>
+            typeof message === 'string' &&
+            message.includes("Content-Type doesn't match Reply body"),
+        ),
+      ).toEqual([]);
     } finally {
       warn.mockRestore();
       error.mockRestore();

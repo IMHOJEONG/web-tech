@@ -5,6 +5,7 @@ import {
   Logger,
   NotFoundException,
   Param,
+  Res,
   ServiceUnavailableException,
   UseGuards,
 } from '@nestjs/common';
@@ -15,6 +16,7 @@ import {
   CONTENT_POSTS_MAX_BYTES,
   CONTENT_POSTS_WARN_BYTES,
 } from '@web-tech/docs-content-contract';
+import type { Response } from 'express';
 
 import { ContentTokenGuard } from '../../common/guards/content-token.guard';
 import { isValidMarkdownPath, normalizeMarkdownPath } from './content-path';
@@ -59,11 +61,11 @@ export class ContentController {
 
   @Get('posts/:channel/:slug')
   @Header('Cache-Control', 'private, no-store')
-  @Header('Content-Type', 'text/html; charset=utf-8')
   @Header('Vary', 'Authorization')
   async getPost(
     @Param('channel') channel: string,
     @Param('slug') slug: string,
+    @Res({ passthrough: true }) response: Response,
   ): Promise<string> {
     const markdownPath = normalizeMarkdownPath([channel, slug]);
 
@@ -89,6 +91,7 @@ export class ContentController {
         limitBytes: CONTENT_HTML_MAX_BYTES,
       });
     }
+    response.type('html');
     return html;
   }
 }

@@ -271,7 +271,12 @@ export async function fetchRemoteSearchData(keyword?: string) {
     const filtered = !normalizedKeyword
         ? docs
         : docs.filter((doc) => {
-              const haystack = [doc.title, doc.summary, doc.slug, doc.content]
+              const haystack = [
+                  doc.title,
+                  doc.summary,
+                  doc.slug,
+                  doc.searchText,
+              ]
                   .filter(Boolean)
                   .join(' ')
                   .toLowerCase()
