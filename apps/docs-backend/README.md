@@ -65,6 +65,8 @@ curl -H "Authorization: Bearer $CONTENT_API_TOKEN" \
 
 `/health`만 공개하고 콘텐츠 endpoint는 Bearer token을 요구한다. TLS는 NestJS가 아니라 reverse proxy 또는 배포 플랫폼에서 종료한다.
 
+정상 목록은 JSON, 정상 상세는 HTML이며 상세의 인증 실패·404·기본500은 JSON 오류다. HTML Content-Type은 조회·렌더링 성공 후에만 설정해 JSON 오류와 충돌하지 않도록 한다. 본문 검증 경고·실제 서버 오류 로그를 숨기는 변경은 아니다. [응답 계약](../../docs/architecture/blog-content-api-contract.md#content-type과-오류-처리)과 [회귀 검증](../../docs/verification/content/2026-10-26-content-response-type.md)을 참고한다.
+
 ## Verification
 
 ```bash

@@ -4,9 +4,11 @@ import {
   Header,
   NotFoundException,
   Param,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 import { canonicalPostsPayloadSchema } from '@web-tech/docs-content-contract';
+import type { Response } from 'express';
 
 import { ContentTokenGuard } from '../../common/guards/content-token.guard';
 import { isValidMarkdownPath, normalizeMarkdownPath } from './content-path';
@@ -28,11 +30,11 @@ export class ContentController {
 
   @Get('posts/:channel/:slug')
   @Header('Cache-Control', 'private, no-store')
-  @Header('Content-Type', 'text/html; charset=utf-8')
   @Header('Vary', 'Authorization')
   async getPost(
     @Param('channel') channel: string,
     @Param('slug') slug: string,
+    @Res({ passthrough: true }) response: Response,
   ): Promise<string> {
     const markdownPath = normalizeMarkdownPath([channel, slug]);
 
@@ -41,6 +43,8 @@ export class ContentController {
     }
 
     const document = await this.contentService.getPublishedPost(markdownPath);
-    return this.contentService.renderPost(document);
+    const html = this.contentService.renderPost(document);
+    response.type('html');
+    return html;
   }
 }

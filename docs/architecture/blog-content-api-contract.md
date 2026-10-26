@@ -146,8 +146,19 @@ Content-Type: text/html; charset=utf-8
 ## Error Contract
 
 - `401`: 토큰 누락 또는 불일치
-- `404`: 존재하지 않음, 비공개 상태, 잘못된 route, 유효하지 않은 published metadata
+- `404`: 존재하지 않음, 비공개 상태, 잘못된 route, 유효하지 않은 published metadata 또는 차단 대상 본문 규칙 실패
 - `5xx`: filesystem 또는 예상하지 못한 서버 장애
+
+### Content-Type과 오류 처리
+
+- 정상 목록은 `application/json; charset=utf-8`, 정상 상세는 `text/html; charset=utf-8`이다.
+- 상세의 `401`·`404`·기본 `500` 오류는 Nest의 JSON 응답을 사용한다. HTML을 기대하는 경로라는 이유로 오류까지 HTML로 표시하거나 상태 코드를 200으로 바꾸지 않는다.
+- 상세 controller는 문서 조회와 HTML 렌더링이 성공한 뒤에만 HTML Content-Type을 설정한다. 오류가 날 수 있는 작업 전에 정적 HTML 헤더를 지정하지 않는다.
+- `@Res({ passthrough: true })`로 성공 헤더만 설정하고 전송·기본 예외 처리는 Nest에 남긴다. `send`/`end`로 응답을 수동 종료하거나 global ExceptionFilter로 오류 계약을 덮어쓰지 않는다.
+- 인증 후 controller에 도달한 상세의 성공·404·500은 기존 `Cache-Control: private, no-store`와 `Vary: Authorization`을 유지한다. controller 전에 거부되는 인증 오류의 헤더 정책은 이번에 변경하지 않는다.
+- 비공개·검증 실패는 일반 `Post not found` 응답으로 통일하며 원문·검증 상세·토큰은 응답에 포함하지 않는다. 경고를 없애려고 오류 로그나 콘텐츠 검증 로그를 일괄 비활성화하지 않는다.
+
+이 계약 보완은 로컬 수정이며 NAS에는 변경된 백엔드 이미지를 배포한 뒤 적용된다. [회귀 검증](../verification/content/2026-10-26-content-response-type.md)에서 실제 응답과 경고 부재를 확인한다.
 
 원격 목록/본문 실패는 `apps/docs` 전체 장애로 전파하지 않는다. 로컬 문서가 있으면 로컬 목록과 상세 fallback을 계속 제공한다.
 
