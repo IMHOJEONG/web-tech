@@ -2,6 +2,8 @@
 
 - [10-27 오프라인 UTF-8 입력 계약 수정](2026-10-27-offline-utf8-input-guard.md)
 
+- [10-27 오프라인 byte 계약 수정과 ADR 부분 대체 연결](2026-10-27-offline-byte-contract-and-adr-followup.md)
+
 - [10-27 검색·응답 제한 PR 결합](2026-10-27-search-response-pr-integration.md): #64 선병합·기존 미커밋 격리·충돌 보존·동일 head 검증 후 후속 PR/공식 squash.
 
 - [10-26 상세 HTML 응답 제한](2026-10-26-html-response-budget.md): 독립 상수·최종 렌더 크기·스트림 중단·로컬 fallback, ADR-0021·회귀.

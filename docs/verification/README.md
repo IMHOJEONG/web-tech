@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-27 오프라인 byte 계약과 ADR 후속 관계](governance/2026-10-27-offline-byte-contract-and-adr-followup.md): 수정 전 실패·UTF-8 경계·저장본 보존, 부분 대체·작업 지침 연결. 로컬 검증·미배포.
+
 - [10-27 검색·응답 제한/Content-Type 결합](integration/2026-10-27-search-response-pr-integration.md): PR #64 병합·HTML 헤더의 budget 이후 설정·상한/JSON 오류 결합·원래 미커밋 보존, 이후 CI/배포는 별도 기록.
 
 - [10-26 상세 HTML byte budget](content/2026-10-26-html-response-budget.md): 최종 렌더 UTF-8 경계·긴 코드/1000행 표·로컬 대체/원격전용 오류·목록 정상 유지, 운영 미검증.

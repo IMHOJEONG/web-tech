@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-27",
+  "timezone": "Asia/Seoul",
+  "baseSha": "e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e",
+  "branch": "codex/docs-adr-contract-20261027",
+  "scope": "local-uncommitted",
+  "node": "24.12.0",
+  "pnpm": "12.14.0",
+  "next": "16.4.3",
+  "inputLimitBytes": 1048576,
+  "beforeFix": {
+    "focusedBrowserFailed": 1,
+    "observedOverflowAcceptedBytes": 1048577,
+    "expected": "size error",
+    "actual": "save success"
+  },
+  "afterFix": {
+    "inputBudgetUnitPassed": 12,
+    "docsLibraryPassed": 319,
+    "docsLibraryFailed": 0,
+    "adrWorkflowPassed": 3,
+    "repositoryPassed": 156,
+    "repositoryFailed": 0,
+    "developmentBrowserPassed": 50,
+    "developmentBrowserFailed": 0,
+    "productionBoundaryBrowserPassed": 6,
+    "productionBoundaryBrowserFailed": 0,
+    "browserRetries": 0,
+    "productionBuild": "passed",
+    "typecheck": "passed",
+    "changedFileLint": "passed",
+    "historicalDecisionBodiesUnchanged": true
+  },
+  "initialSandboxRepositoryRun": {
+    "passed": 154,
+    "failed": 2,
+    "cause": "localhost listen EPERM",
+    "sameCommandApprovedRerun": "156 passed"
+  },
+  "existingBuildWarnings": ["published TCP article placeholder-like text"],
+  "sourceSha256": {
+    "apps/docs/feature/offline/model/offline-input-budget.ts": "f1cf48d63fe2dd80ca01ce66124d3b4e25f0eaea16a5d986ae9733466223f5bd",
+    "apps/docs/feature/offline/model/offline-snapshot.ts": "a17e3891b4e30e4f1504ac2e41a6c600efbe64231f628a17d1949d358481a0e3",
+    "apps/docs/lib/offline-input-budget.test.ts": "31b597bf2b5674853c7aed0ec120f4c42c5a8bab9ed973dd245430d03dd12730",
+    "apps/docs/offline-e2e/snapshot-budget.spec.ts": "19d36ebd60f5b7207be94581fc4f96011585dac79d745a7d9af32d2678b5e93a",
+    "docs/architecture/adr-0009-docs-web-push-experiment.md": "8632cd31c74e1e89c3bf684cc3116e95df2d41b11a01b081eff235f028476a2a",
+    "docs/architecture/adr-0015-explicit-offline-article-snapshots.md": "c32736e4f8339fb446a7552e65b7435bb514cd6413f0fb453ffea79413dcdf61",
+    "docs/process/adr-management.md": "da699e3b5895deac4d15a5f1b97b6e606b29b96df290355ee1f5eae5ac5b61e3",
+    "AGENTS.md": "9ba12a1779d497b6725c1b17390f54beac7e9e54551e8f58e68a8740e908c87f",
+    ".github/pull_request_template.md": "3c20e19a5ed80a39194a5af150780feb3eb0fc8e6533d448e2110e1da92b1c41",
+    "scripts/adr-workflow.test.mts": "4415be57082d7eaa0b7293f5ece9f1d463b8fe3f2108831985af3d5d517997a4"
+  },
+  "deploymentAndNasChanges": false,
+  "committedOrPushed": false
+}
