@@ -3,6 +3,14 @@ import { z } from "zod";
 export const CONTENT_CHANNELS = ["feed", "web", "mobile", "ui-ux"] as const;
 export const EDITORIAL_STATUSES = ["draft", "published", "archived"] as const;
 
+// UTF-8 JSON bytes, before compression. Never truncate a searchable corpus.
+export const CONTENT_POSTS_WARN_BYTES = 512 * 1024;
+export const CONTENT_POSTS_MAX_BYTES = 1024 * 1024;
+
+// Full rendered HTML response (including its document wrapper), not Markdown size.
+export const CONTENT_HTML_WARN_BYTES = 512 * 1024;
+export const CONTENT_HTML_MAX_BYTES = 1024 * 1024;
+
 export const LEAF_SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 export const MARKDOWN_PATH_PATTERN =
   /^(feed|web|mobile|ui-ux)\/[a-z0-9]+(?:-[a-z0-9]+)*$/;

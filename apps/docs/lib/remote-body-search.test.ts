@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url'
 import test from 'node:test'
 import { build } from 'esbuild'
 import ky from 'ky'
+import { CONTENT_POSTS_MAX_BYTES } from '@web-tech/docs-content-contract'
 import { loadLocalSearchIndex } from './local-search-index.ts'
 import type { SearchData } from './get-search-data'
 import type { Metadata } from './document.types.ts'
@@ -76,6 +77,7 @@ test('local and remote body search share source selection, ranking and failure b
         },
     ]
     let failure = false
+    let oversized = false
     const requests: string[] = []
     const fetch: typeof globalThis.fetch = async (input) => {
         const url = new URL((input as Request).url)
@@ -86,6 +88,15 @@ test('local and remote body search share source selection, ranking and failure b
             'search must never fan out to body endpoints'
         )
         if (failure) throw new TypeError('fixture network failure')
+        if (oversized)
+            return Response.json({
+                results: [
+                    {
+                        ...remote[0],
+                        searchText: 'x'.repeat(CONTENT_POSTS_MAX_BYTES),
+                    },
+                ],
+            })
         return Response.json({ results: remote })
     }
     const root = fileURLToPath(new URL('..', import.meta.url))
@@ -244,6 +255,21 @@ test('local and remote body search share source selection, ranking and failure b
                 (await search('localbodyneedle'))[0]?.contentSource,
                 'local'
             )
+        }
+    )
+    await t.test(
+        'oversized list fails as a whole and keeps local body search without fan-out or retry',
+        async () => {
+            oversized = true
+            try {
+                assert.equal(
+                    (await search('localbodyneedle'))[0]?.contentSource,
+                    'local'
+                )
+                await assert.rejects(api.fetchRemoteDocsData())
+            } finally {
+                oversized = false
+            }
         }
     )
     await t.test(

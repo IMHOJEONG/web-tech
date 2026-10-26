@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
+import { inspect } from 'node:util'
 import test from 'node:test'
 import { build } from 'esbuild'
 import ky from 'ky'
+import { CONTENT_HTML_MAX_BYTES } from '@web-tech/docs-content-contract'
 import type { Metadata } from './document.types.ts'
 
 test('real content selection and search isolate remote failures from local documents', async (t) => {
@@ -33,7 +35,7 @@ test('real content selection and search isolate remote failures from local docum
     delete process.env.BLOG_CONTENT_MARKDOWN_BASE_URL_PUBLIC
     delete process.env.DOCS_BETTER_STACK_SOURCE_TOKEN
     process.env.BLOG_CONTENT_API_TIMEOUT_MS = '100'
-    t.mock.method(console, 'warn', () => {})
+    const warn = t.mock.method(console, 'warn', () => {})
     t.mock.method(console, 'info', () => {})
 
     let mode:
@@ -43,6 +45,10 @@ test('real content selection and search isolate remote failures from local docum
         | 'markup-empty'
         | 'stalled'
         | 'bad-json'
+        | 'oversized-body'
+        | 'oversized-headers'
+        | 'oversized-compressed'
+        | 'long-body'
         | 'success'
         | 'missing' = 'network'
     let requests: string[] = []
@@ -79,6 +85,37 @@ test('real content selection and search isolate remote failures from local docum
             return new Response('Unavailable', { status: 503 })
         if (mode === 'stalled')
             return new Response(new ReadableStream({ start() {} }))
+        if (mode.startsWith('oversized-')) {
+            const headers: Record<string, string> = {
+                'Content-Type': 'text/html',
+            }
+            if (mode === 'oversized-headers') {
+                headers['Content-Length'] = String(CONTENT_HTML_MAX_BYTES + 1)
+            }
+            if (mode === 'oversized-compressed') {
+                // Fetch exposes decompressed chunks while these headers may remain encoded.
+                headers['Content-Encoding'] = 'gzip'
+                headers['Content-Length'] = '100'
+            }
+            return new Response(
+                '<article>' + 'x'.repeat(CONTENT_HTML_MAX_BYTES) + '</article>',
+                { headers }
+            )
+        }
+        if (mode === 'long-body')
+            return new Response(
+                '<article><h2>Long detail</h2><pre><code class="language-tsx">' +
+                    'const value = &lt;T&gt;();\n'.repeat(2048) +
+                    'CODE_TAIL' +
+                    '</code></pre><table><tbody>' +
+                    Array.from(
+                        { length: 1000 },
+                        (_, i) =>
+                            `<tr><td>한글 ${i}</td><td>VALUE_${i}</td></tr>`
+                    ).join('') +
+                    '</tbody></table></article>',
+                { headers: { 'Content-Type': 'text/html' } }
+            )
         return new Response(
             mode === 'empty'
                 ? '  '
@@ -138,20 +175,79 @@ test('real content selection and search isolate remote failures from local docum
         'markup-empty',
         'stalled',
         'bad-json',
+        'oversized-body',
+        'oversized-headers',
+        'oversized-compressed',
     ] as const) {
         await t.test(
             `${failure}: local detail replaces unusable remote body`,
             async () => {
                 mode = failure
+                requests = []
                 const doc = await api.getDocByRoutePath(
                     'web/javascript-event-loop-runtime'
                 )
                 assert.ok(doc)
                 assert.ok(doc.content?.trim())
                 assert.equal(doc.contentSource, 'local')
+                if (failure.startsWith('oversized-')) {
+                    assert.deepEqual(requests, [
+                        '/api/posts',
+                        '/posts/web/javascript-event-loop-runtime',
+                    ])
+                }
             }
         )
     }
+    await t.test(
+        'an oversized detail does not prevent loading its list and search metadata',
+        async () => {
+            mode = 'oversized-body'
+            requests = []
+            const docs = await api.getDocsData()
+            assert.ok(docs.some((doc) => doc.slug === 'remote-only'))
+            const results = await api.getSearchData('Remote')
+            assert.equal(
+                results.filter((doc) => doc.contentSource === 'remote').length,
+                2
+            )
+            assert.deepEqual(requests, ['/api/posts', '/api/posts'])
+        }
+    )
+    await t.test(
+        'over-budget remote-only detail is an error, not null or a false 404',
+        async () => {
+            for (const failure of [
+                'oversized-body',
+                'oversized-headers',
+                'oversized-compressed',
+            ] as const) {
+                mode = failure
+                requests = []
+                await assert.rejects(api.getDocByRoutePath('web/remote-only'), {
+                    kind: 'too-large',
+                })
+                assert.deepEqual(requests, [
+                    '/api/posts',
+                    '/posts/web/remote-only',
+                ])
+            }
+            const sizeErrors = warn.mock.calls.filter(
+                (call) =>
+                    call.arguments[0] ===
+                        '[docs] Failed to fetch markdown body:' &&
+                    (call.arguments[2] as { kind?: string })?.kind ===
+                        'too-large'
+            )
+            assert.ok(sizeErrors.length >= 3)
+            for (const call of sizeErrors) {
+                assert.doesNotMatch(
+                    inspect(call.arguments[2], { depth: 10 }),
+                    /Authorization|Bearer|test-only/i
+                )
+            }
+        }
+    )
     await t.test(
         'known remote body failure without a local copy is an error, not a fake 404',
         async () => {
@@ -171,4 +267,16 @@ test('real content selection and search isolate remote failures from local docum
         assert.equal(doc?.contentSource, 'remote')
         assert.match(doc.content!, /Remote body/)
     })
+    await t.test(
+        'long code and a thousand table rows below the cap keep their ending',
+        async () => {
+            mode = 'long-body'
+            requests = []
+            const doc = await api.getDocByRoutePath('web/remote-only')
+            assert.equal(doc?.contentSource, 'remote')
+            assert.match(doc.content!, /CODE_TAIL/)
+            assert.match(doc.content!, /VALUE_999/)
+            assert.deepEqual(requests, ['/api/posts', '/posts/web/remote-only'])
+        }
+    )
 })

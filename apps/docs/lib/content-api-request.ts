@@ -1,13 +1,10 @@
 import ky from 'ky'
 
 export class ContentApiRequestError extends Error {
-    readonly kind: 'timeout' | 'http' | 'empty' | 'network'
+    readonly kind: 'timeout' | 'http' | 'empty' | 'network' | 'too-large'
     readonly status?: number
 
-    constructor(
-        kind: 'timeout' | 'http' | 'empty' | 'network',
-        status?: number
-    ) {
+    constructor(kind: ContentApiRequestError['kind'], status?: number) {
         super(
             `Content API request failed: ${kind}${status ? ` (${status})` : ''}`
         )
@@ -22,6 +19,7 @@ type ContentApiReadOptions = {
     headers?: Record<string, string>
     next?: { revalidate: number; tags: string[] }
     fetch?: typeof globalThis.fetch
+    maxBytes?: number
 }
 
 // One deadline covers headers and the entire body, not an idle timeout per chunk.
@@ -31,6 +29,12 @@ export async function readContentApiResponse(
 ): Promise<{ text: string; contentType: string | null }> {
     const remaining = options.deadline - Date.now()
     if (remaining <= 0) throw new ContentApiRequestError('timeout')
+    if (
+        options.maxBytes !== undefined &&
+        (!Number.isSafeInteger(options.maxBytes) || options.maxBytes <= 0)
+    ) {
+        throw new RangeError('maxBytes must be a positive safe integer')
+    }
 
     const controller = new AbortController()
     let response: Response | undefined
@@ -58,13 +62,34 @@ export async function readContentApiResponse(
             throw new ContentApiRequestError('http', response.status)
         }
 
+        // Encoded Content-Length may describe compressed bytes, not decoded bytes.
+        const length = response.headers.get('content-length')
+        const encoding = response.headers.get('content-encoding')
+        if (
+            options.maxBytes !== undefined &&
+            (!encoding || encoding.toLowerCase() === 'identity') &&
+            length !== null &&
+            /^\d+$/.test(length) &&
+            Number(length) > options.maxBytes
+        ) {
+            throw new ContentApiRequestError('too-large')
+        }
+
         reader = response.body?.getReader()
         const decoder = new TextDecoder()
         let text = ''
+        let bytes = 0
         if (reader) {
             for (;;) {
                 const chunk = await reader.read()
                 if (chunk.done) break
+                bytes += chunk.value.byteLength
+                if (
+                    options.maxBytes !== undefined &&
+                    bytes > options.maxBytes
+                ) {
+                    throw new ContentApiRequestError('too-large')
+                }
                 text += decoder.decode(chunk.value, { stream: true })
             }
             text += decoder.decode()
