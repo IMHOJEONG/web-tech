@@ -1,5 +1,6 @@
 # 검증 원본 증거
 
+- [10-26 상세 오류 Content-Type 전후](2026-10-26-content-response-type.json): [검증 보고서](../content/2026-10-26-content-response-type.md). 실제 adapter 경고 재현과 수정 후 경고0·응답 계약 대조.
 - [10-25 Primary 대비 측정](2026-10-25-primary-action-contrast.json)·[Mobile Dark](2026-10-25-primary-contrast-mobile-dark.png)·[Desktop Light](2026-10-25-primary-contrast-desktop-light.png): [검증 보고서](../accessibility/2026-10-25-primary-action-contrast.md). 수정 전 실패·computed 대비·브라우저 회귀·Figma outline 재조회.
 - [10-25 H1 동일 입력 전후 판정](2026-10-25-body-h1-warning.json): [검증 보고서](../content/2026-10-25-body-h1-warning.md). 기준 main의 차단 2개와 수정본의 경고 1개 대조, 운영 미배포.
 - [10-25 UI·전송 계약 분리](2026-10-25-ui-transport-contract.json): [보안 PR 후속 검증](../security/2026-10-25-remaining-advisories.md#승인된-ui전송-검사-분리). 로컬 44개 통과·본문 표시 중 pending·200 이후 중단·완료 대조. 실제 중단 호출자 해소를 뜻하지 않음.
