@@ -1,4 +1,5 @@
 import type { OfflineSnapshot } from './offline-client.ts'
+import { isOfflineInputWithinBudget } from './offline-input-budget.ts'
 
 const tags = new Set(
     'p article section div span h1 h2 h3 h4 h5 h6 ul ol li pre code strong em b i u s del blockquote aside br hr table thead tbody tfoot tr th td figure figcaption a details summary small sub sup'.split(
@@ -89,7 +90,10 @@ export async function buildOfflineSnapshot(
     metadata: Pick<OfflineSnapshot, 'path' | 'title' | 'locale'>
 ): Promise<OfflineSnapshot> {
     if (root.querySelector('[data-offline-loading]')) throw new Error('loading')
-    if (!root.textContent?.trim() || root.innerHTML.length > 1024 * 1024)
+    if (
+        !root.textContent?.trim() ||
+        !isOfflineInputWithinBudget(root.innerHTML)
+    )
         throw new Error('size')
     let missingImages = 0
     let imageCount = 0
