@@ -20,6 +20,8 @@
 
 ## Current Route
 
+원격 인덱스 입력 `GET /api/posts`는 [목록 byte budget](blog-content-api-contract.md#목록-응답-크기-제한)을 적용한다. 상한 초과는 부분 검색 성공이 아니라 기존 원격 실패/로컬 fallback 경로다. 이1MiB는 아래 공개 `/api/search` 결과 자체의 상한을 뜻하지 않는다.
+
 - endpoint: `/api/search`
 - method: `GET`
 - query param: `q`

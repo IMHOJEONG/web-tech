@@ -33,6 +33,7 @@ docs의 문서 metadata에는 `searchText`를 별도 보관하고 렌더링용 `
 
 ## 관련 문서
 
+- [후속 ADR-0020: 비절단 목록 byte budget](adr-0020-content-posts-byte-budget.md)
 - [API 계약](blog-content-api-contract.md#본문-검색-텍스트)
 - [검색 API와 호환 경계](docs-search-api-contract.md#본문-검색과-원본-선택)
 - [검증](../verification/content/2026-10-26-remote-body-search.md)

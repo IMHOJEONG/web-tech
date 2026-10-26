@@ -115,7 +115,13 @@ Authorization: Bearer <shared-secret>
 
 이관 중 구형 생산자도 허용하도록 공유 스키마는 이 필드를 선택적으로 유지한다. 프론트 호환 입력은 누락/null/빈 문자열을 허용하지만 숫자·객체 등은 오류다. 필드가 없는 목록은 metadata-only 검색이며 임의로 HTML/body alias나 과거 로컬 본문을 대신 검색하지 않는다. 렌더링용 `content`와 구분하고 HTML로 실행하지 않는다. 인증·`private, no-store`·`Vary: Authorization`·공개 상태 규칙은 유지한다. 상세 API에서 별도로 가져오는 본문 계약은 바꾸지 않는다.
 
-선택 이유·배포 및 캐시 경계는 [ADR-0019](adr-0019-remote-body-search.md)를 따른다. 목록이 커지는 영향과 응답 크기 제한은 별도 점검 과제다.
+선택 이유·배포 및 캐시 경계는 [ADR-0019](adr-0019-remote-body-search.md)를 따른다. 목록 크기 제한은 다음 정책을 따른다.
+
+## 목록 응답 크기 제한
+
+2026-10-26 로컬 구현에서 공유 `CONTENT_POSTS_WARN_BYTES`(512KiB)·`CONTENT_POSTS_MAX_BYTES`(1MiB)를 사용한다. 대상은 인증된 `GET /api/posts`의 전체 JSON이며 압축 전 UTF-8 바이트다. 정확히512KiB까지 정상, 초과~1MiB까지 전체 응답과 수치 경고, 1MiB 초과는503이다. 문서 수·searchText 글자 수나 gzip 크기 기준이 아니다. 일부 글·본문을 자르거나 metadata-only로 바꾸지 않는다.
+
+프론트는 목록 스트림 누적 바이트를 JSON.parse 전에 제한한다. identity의 과대한 Content-Length는 미리 거절하지만 헤더만 신뢰하지 않는다. 압축 해제 후 상한 초과도 abort/cancel·`too-large`로 실패시켜 기존 로컬 fallback을 사용한다. deadline·retry0·TTL·태그·웹훅은 유지한다. 원격 전용 결과와 목록 의존 상세의 가용성 영향, 초기 수치 선택 이유·한계는 [ADR-0020](adr-0020-content-posts-byte-budget.md)을 따른다. 운영 배포·실제 NAS corpus는 미검증이다. 상세 HTML 제한은 아래 별도 정책이며 공개 검색 결과 자체의 byte budget은 아직 없다.
 
 ## Legacy Input Compatibility
 
@@ -152,10 +158,17 @@ Content-Type: text/html; charset=utf-8
 
 백엔드는 Markdown을 안전하게 escape한 baseline HTML과 `language-*` 정보만 만든다. Shiki highlighting, copy button, language badge, 최종 sanitize/normalize는 프론트가 담당한다.
 
+## 상세 HTML 응답 크기 제한
+
+공유 `CONTENT_HTML_WARN_BYTES`(512KiB)·`CONTENT_HTML_MAX_BYTES`(1MiB)는 목록과 독립된 상수다. 전체 렌더 결과의 압축 전 UTF-8 bytes를 사용하며 doctype·wrapper·escape된 코드·표도 센다. 외부 이미지/영상 파일 크기는 포함하지 않는다. 정확히512KiB는 정상, 초과~1MiB는 전체 HTML과 생산자 수치 경고, 1MiB 초과는503이다. 일부 HTML을 잘라 성공 응답으로 보내지 않는다.
+
+프론트는 스트림에서 같은 상한을 normalize/sanitize 전에 검사하고 `too-large`를 로더까지 전달한다. 로컬 사본이 있으면 기존 상세 fallback, 없으면 오류이며404/null로 바꾸지 않는다. 목록 inline body는 기존 목록 상한의 보호를 받으며 우선순위·별도 endpoint 조회 여부는 바꾸지 않는다. 초기 값·선택 이유·처리 단계별 한계는 [ADR-0021](adr-0021-content-html-byte-budget.md), 실행 결과는 [HTML 경계 검증](../verification/content/2026-10-26-html-response-budget.md)을 따른다.
+
 ## Error Contract
 
 - `401`: 토큰 누락 또는 불일치
 - `404`: 존재하지 않음, 비공개 상태, 잘못된 route, 유효하지 않은 published metadata
+- `503`: 목록 JSON 또는 상세 HTML의 응답 byte budget 초과 (부분 응답 없음)
 - `5xx`: filesystem 또는 예상하지 못한 서버 장애
 
 원격 목록/본문 실패는 `apps/docs` 전체 장애로 전파하지 않는다. 로컬 문서가 있으면 로컬 목록과 상세 fallback을 계속 제공한다.

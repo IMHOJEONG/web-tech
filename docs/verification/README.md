@@ -1,6 +1,10 @@
 # 검증 보고서
 
-- [10-26 로컬·원격 본문 검색](content/2026-10-26-remote-body-search.md): published searchText·원격 우선·구형 API·갱신·로컬 fallback, 운영 미배포.
+- [10-26 상세 HTML byte budget](content/2026-10-26-html-response-budget.md): 최종 렌더 UTF-8 경계·긴 코드/1000행 표·로컬 대체/원격전용 오류·목록 정상 유지, 운영 미검증.
+
+- [10-26 원격 검색 목록 byte budget·규모별 비용](performance/2026-10-26-search-payload-budget.md): UTF-8 경고512KiB·상한1MiB 양쪽 경계, 합성9조건·끝 키워드·로컬 fallback·production162개, 운영 미검증.
+
+- [10-26 로컬·원격 본문 검색](content/2026-10-26-remote-body-search.md): published searchText·fallback·웹훅 캐시와 실제 폼/Link 검색 동선8개 추가 후 production162개 통과, 운영 미배포.
 
 - [10-25 Primary 대비·브라우저 접근성](accessibility/2026-10-25-primary-action-contrast.md): 주황 배경 유지·짙은 글자·명시적 focus, UI58개+실제 화면12개. 전체 WCAG/타 브라우저 미검증.
 - [10-25 본문 H1 경고 전환](content/2026-10-25-body-h1-warning.md): 공용·로컬 CLI·원격 API의 경고/게시·원문 H1 보존 회귀, 운영 미배포.

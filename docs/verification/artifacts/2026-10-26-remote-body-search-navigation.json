@@ -1,0 +1,329 @@
+{
+  "date": "2026-10-26",
+  "timezone": "Asia/Seoul",
+  "base": "3609ff2b170ce25d0fa1b9ad54aa616fffed61ce",
+  "state": "local-uncommitted-test-followup",
+  "sourceBlobs": {
+    "apps/docs/article-e2e/body-search-navigation.spec.ts": "36115ab89ac77d848f5cac5096203e0c5934b615",
+    "apps/docs/article-e2e/content-publication.spec.ts": "92538d087b5d10afbbcd7e86099e4b35682425c9",
+    "apps/docs/article-e2e/content-server.ts": "f319c5c66ea6e896f0ebde95f4347e5103c54a63"
+  },
+  "productionBuildId": "Tfx1dQ5AG2pr5YF6_QXBt",
+  "initialRun": {
+    "expected": 0,
+    "unexpected": 8,
+    "skipped": 0,
+    "flaky": 0,
+    "cause": "Empty-result screen exposes a recovery Link, not an index search form; waiting for the nonexistent input timed out.",
+    "secondaryError": "Fixture cleanup after timeout found the API context already closed.",
+    "fix": "Test clicks the localized recovery Link and checks its href; no product UI, retries, timeout or prefetch settings changed."
+  },
+  "fullSuite": {
+    "stats": {
+      "startTime": "2026-10-26T13:11:56.705Z",
+      "duration": 98765.411,
+      "expected": 162,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": 0,
+    "testCount": 162,
+    "nonPassing": [],
+    "retried": [],
+    "exitCode": 0,
+    "includesFocusedTests": true
+  },
+  "focused": {
+    "stats": {
+      "startTime": "2026-10-26T13:11:04.251Z",
+      "duration": 24311.532,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": 0,
+    "tests": [
+      {
+        "file": "body-search-navigation.spec.ts",
+        "title": "user search: ko/header finds a remote body and opens its card without document reload",
+        "project": "article-mobile",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 1907,
+            "steps": [
+              {
+                "title": "Submit a real form and clear prior browse controls",
+                "duration": 166
+              },
+              {
+                "title": "Read the body match and open its card with Link",
+                "duration": 858
+              },
+              {
+                "title": "Back restores the body search and its input",
+                "duration": 25
+              },
+              {
+                "title": "The empty-result recovery link returns to the index",
+                "duration": 130
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "body-search-navigation.spec.ts",
+        "title": "user search: ko/index finds a remote body and opens its card without document reload",
+        "project": "article-mobile",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 1081,
+            "steps": [
+              {
+                "title": "Submit a real form and clear prior browse controls",
+                "duration": 93
+              },
+              {
+                "title": "Read the body match and open its card with Link",
+                "duration": 529
+              },
+              {
+                "title": "Back restores the body search and its input",
+                "duration": 19
+              },
+              {
+                "title": "The empty-result recovery link returns to the index",
+                "duration": 145
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "body-search-navigation.spec.ts",
+        "title": "user search: en/header finds a remote body and opens its card without document reload",
+        "project": "article-mobile",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 1195,
+            "steps": [
+              {
+                "title": "Submit a real form and clear prior browse controls",
+                "duration": 125
+              },
+              {
+                "title": "Read the body match and open its card with Link",
+                "duration": 527
+              },
+              {
+                "title": "Back restores the body search and its input",
+                "duration": 19
+              },
+              {
+                "title": "The empty-result recovery link returns to the index",
+                "duration": 152
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "body-search-navigation.spec.ts",
+        "title": "user search: en/index finds a remote body and opens its card without document reload",
+        "project": "article-mobile",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 1244,
+            "steps": [
+              {
+                "title": "Submit a real form and clear prior browse controls",
+                "duration": 81
+              },
+              {
+                "title": "Read the body match and open its card with Link",
+                "duration": 582
+              },
+              {
+                "title": "Back restores the body search and its input",
+                "duration": 22
+              },
+              {
+                "title": "The empty-result recovery link returns to the index",
+                "duration": 222
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "body-search-navigation.spec.ts",
+        "title": "user search: ko/header finds a remote body and opens its card without document reload",
+        "project": "article-desktop",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 1728,
+            "steps": [
+              {
+                "title": "Submit a real form and clear prior browse controls",
+                "duration": 104
+              },
+              {
+                "title": "Read the body match and open its card with Link",
+                "duration": 911
+              },
+              {
+                "title": "Back restores the body search and its input",
+                "duration": 25
+              },
+              {
+                "title": "The empty-result recovery link returns to the index",
+                "duration": 207
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "body-search-navigation.spec.ts",
+        "title": "user search: ko/index finds a remote body and opens its card without document reload",
+        "project": "article-desktop",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 1185,
+            "steps": [
+              {
+                "title": "Submit a real form and clear prior browse controls",
+                "duration": 103
+              },
+              {
+                "title": "Read the body match and open its card with Link",
+                "duration": 536
+              },
+              {
+                "title": "Back restores the body search and its input",
+                "duration": 27
+              },
+              {
+                "title": "The empty-result recovery link returns to the index",
+                "duration": 157
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "body-search-navigation.spec.ts",
+        "title": "user search: en/header finds a remote body and opens its card without document reload",
+        "project": "article-desktop",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 1635,
+            "steps": [
+              {
+                "title": "Submit a real form and clear prior browse controls",
+                "duration": 134
+              },
+              {
+                "title": "Read the body match and open its card with Link",
+                "duration": 895
+              },
+              {
+                "title": "Back restores the body search and its input",
+                "duration": 21
+              },
+              {
+                "title": "The empty-result recovery link returns to the index",
+                "duration": 141
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "body-search-navigation.spec.ts",
+        "title": "user search: en/index finds a remote body and opens its card without document reload",
+        "project": "article-desktop",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "duration": 1144,
+            "steps": [
+              {
+                "title": "Submit a real form and clear prior browse controls",
+                "duration": 95
+              },
+              {
+                "title": "Read the body match and open its card with Link",
+                "duration": 544
+              },
+              {
+                "title": "Back restores the body search and its input",
+                "duration": 20
+              },
+              {
+                "title": "The empty-result recovery link returns to the index",
+                "duration": 127
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "exitCode": 0
+  },
+  "assertions": [
+    "ko/en x header/index x mobile/desktop",
+    "body-only query normalized; previous browse controls removed",
+    "one result card includes the body excerpt",
+    "real form submit, card Link, browser back and empty-result recovery Link",
+    "same window identity and zero main-frame document requests after initial bootstrap",
+    "no unhandled browser pageerrors"
+  ],
+  "checks": {
+    "typecheck": "passed",
+    "changedFileEslint": "passed",
+    "testListenersRemaining": 0
+  },
+  "scope": {
+    "network": "loopback fixture only; no production or NAS calls",
+    "noCommitPushOrDeployment": true,
+    "notVerified": [
+      "post-webhook refresh of an already open Router Cache view",
+      "Vercel/NAS deployment and production webhook",
+      "Safari/Firefox",
+      "payload byte budget or large-corpus performance"
+    ]
+  },
+  "rawReportsLocalOnly": [
+    "/private/tmp/remote-body-search-navigation-initial-20261026.json",
+    "/private/tmp/remote-body-search-navigation-20261026.json",
+    "/private/tmp/remote-body-search-navigation-full-20261026.json"
+  ],
+  "counting": "The focused eight are included in the full 162; do not sum as 170 distinct tests.",
+  "logCaveat": "Passing tests do not classify every intentional upstream/abort control log as harmless."
+}

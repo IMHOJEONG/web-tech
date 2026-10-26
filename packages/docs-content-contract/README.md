@@ -8,6 +8,8 @@
 - legacy-compatible remote payload parsing
 - 신규 NestJS API의 canonical response schema
 - published 본문 검색 전용 선택 필드 `searchText` (렌더링 content와 분리, 구형 생산자 호환)
+- 전체 목록 JSON의 UTF-8 byte budget 상수 (경고512KiB·상한1MiB, [ADR-0020](../../docs/architecture/adr-0020-content-posts-byte-budget.md)). 스키마 자체가 아닌 생산자 직렬화·소비자 스트림 경계에서 검사한다.
+- 상세 HTML의 독립된 UTF-8 byte budget 상수 (경고512KiB·상한1MiB, [ADR-0021](../../docs/architecture/adr-0021-content-html-byte-budget.md)). 전체 렌더 응답·소비자 스트림을 제한하며 HTML을 절단하지 않는다.
 - 로컬·원격이 공유하는 본문 작성 규칙 (`@web-tech/docs-content-contract/body-style`)
 
 소비 앱은 경로 정규식이나 상태 enum을 다시 선언하지 않고 이 패키지를 사용한다.

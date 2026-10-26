@@ -1,6 +1,10 @@
 # 2026-10 작업 기록
 
-- [10-26 원격 본문 검색 계약과 회귀](2026-10-26-remote-body-search.md)
+- [10-26 상세 HTML 응답 제한](2026-10-26-html-response-budget.md): 독립 상수·최종 렌더 크기·스트림 중단·로컬 fallback, ADR-0021·회귀.
+
+- [10-26 검색 목록 byte budget·대규모 비용](2026-10-26-search-payload-budget.md): 양쪽 비절단 거절·경고·로컬 대체, 합성9조건·회귀·ADR-0020, 운영 미배포.
+
+- [10-26 원격 본문 검색 계약과 회귀](2026-10-26-remote-body-search.md): 본문 키워드·웹훅 캐시·실제 폼/Link 검색 동선8개와 전체 production162개 검증.
 
 - [10-25 Primary 글자 대비와 브라우저 접근성](2026-10-25-primary-action-contrast.md)
 - [10-25 로컬·원격 본문 H1 경고 전환](2026-10-25-body-h1-warning.md)

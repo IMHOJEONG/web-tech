@@ -1,5 +1,13 @@
 # 검증 원본 증거
 
+- [10-26 상세 HTML 응답 제한](2026-10-26-html-response-budget.json): [보고서](../content/2026-10-26-html-response-budget.md). 렌더 결과 경계·길고 유효한 코드/표·선택 JSON 재검사·소스8blob·production162개·미검증 범위.
+
+- [10-26 검색 목록 byte budget](2026-10-26-search-payload-budget.json): [성능·경계 보고서](../performance/2026-10-26-search-payload-budget.md). 합성9조건 raw/gzip·순위 비용·소스11blob·회귀·초기 실패, 운영 corpus 미사용.
+
+- [10-26 본문 검색 사용자 동선](2026-10-26-remote-body-search-navigation.json): [후속 보고서](../content/2026-10-26-remote-body-search.md#실제-검색-제출카드-이동-production-e2e-후속). 실제 폼·카드 Link·뒤로 가기·빈 결과 복귀8조건, 전체 production162개 통과와 최초 테스트 가정 오류 기록.
+
+- [10-26 본문 검색 캐시 E2E](2026-10-26-remote-body-search-cache-e2e.json): [후속 보고서](../content/2026-10-26-remote-body-search.md#본문-검색웹훅-캐시-production-e2e-후속). 로컬 production154개·대상6개 재검사, source hash·JSON 단계 결과·초기 타입 오류와 후속 성공.
+
 - [10-26 원격 본문 검색](2026-10-26-remote-body-search.json): [보고서](../content/2026-10-26-remote-body-search.md). 소스 hash·공용/백엔드/docs/저장소 회귀·요청 수·초기 실패와 후속 성공, 운영 미검증.
 
 - [10-25 Primary 대비 측정](2026-10-25-primary-action-contrast.json)·[Mobile Dark](2026-10-25-primary-contrast-mobile-dark.png)·[Desktop Light](2026-10-25-primary-contrast-desktop-light.png): [검증 보고서](../accessibility/2026-10-25-primary-action-contrast.md). 수정 전 실패·computed 대비·브라우저 회귀·Figma outline 재조회.
