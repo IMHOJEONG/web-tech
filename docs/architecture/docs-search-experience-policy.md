@@ -63,6 +63,8 @@
 
 ## Search Scope
 
+본문 검색의 원격 계약은 [ADR-0019](adr-0019-remote-body-search.md)를 따른다. 새 API의 published `searchText`를 사용하며 구형 API에는 제목·요약 검색만 제공한다. 같은 URL의 원격 글과 오래된 로컬 본문을 합치지 않고 원격 장애 때는 기존 로컬 검색으로 복구한다. Markdown 렌더링이나 상세 페이지를 검색 시 일괄 실행하지 않는다. 로컬 MDX 추출 표현과 원격 Markdown 표현 전체가 같아지는 변경은 아니다.
+
 권장 검색 범위는 아래와 같습니다.
 
 ### Primary Scope

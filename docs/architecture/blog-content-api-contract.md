@@ -92,6 +92,7 @@ Authorization: Bearer <shared-secret>
       "slug": "event-loop",
       "title": "Event Loop",
       "summary": "브라우저 이벤트 루프의 실행 순서를 정리합니다.",
+      "searchText": "Event Loop Promise microtask와 task의 실행 순서를 확인합니다.",
       "date": "2026-09-09",
       "updatedAt": "2026-09-09",
       "status": "published",
@@ -107,6 +108,14 @@ Authorization: Bearer <shared-secret>
 ```
 
 `apps/docs-backend`는 반환 직전에 `canonicalPostsPayloadSchema`로 응답을 검증한다. 잘못된 개별 파일은 목록에서 제외하고 서버 로그에 경로와 검증 실패를 남긴다.
+
+## 본문 검색 텍스트
+
+`searchText`는 검증된 published 본문의 검색 전용 문자열이다. 새 NestJS 목록은 매 문서에 생성하며 비어 있는 본문은 `""`로 보낸다. frontmatter·draft·archived·본문 검증 실패 파일의 텍스트는 포함하지 않는다. 표시 텍스트·링크 라벨·이미지 alt·인라인/블록 코드는 포함하고 Markdown 구문·링크 destination·이미지 경로는 제외한다. 토큰 기반 추출 후 NFC·공백을 정리한다. 코드의 줄바꿈·서식 복원용 데이터가 아니다.
+
+이관 중 구형 생산자도 허용하도록 공유 스키마는 이 필드를 선택적으로 유지한다. 프론트 호환 입력은 누락/null/빈 문자열을 허용하지만 숫자·객체 등은 오류다. 필드가 없는 목록은 metadata-only 검색이며 임의로 HTML/body alias나 과거 로컬 본문을 대신 검색하지 않는다. 렌더링용 `content`와 구분하고 HTML로 실행하지 않는다. 인증·`private, no-store`·`Vary: Authorization`·공개 상태 규칙은 유지한다. 상세 API에서 별도로 가져오는 본문 계약은 바꾸지 않는다.
+
+선택 이유·배포 및 캐시 경계는 [ADR-0019](adr-0019-remote-body-search.md)를 따른다. 목록이 커지는 영향과 응답 크기 제한은 별도 점검 과제다.
 
 ## Legacy Input Compatibility
 

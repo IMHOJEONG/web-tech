@@ -55,11 +55,13 @@ PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 �
       원격/로컬 동일 route 중복 제거를 유닛·통합 검사하고, 혼합 목록 필터·허브를 두 언어와 두 화면 크기의 E2E로 검증했다.
       [로컬 구현·검증 기록](../worklog/2026-10/2026-10-22-docs-canonical-taxonomy.md).
       구현 `6f6974e`·브라우저 회귀 `3f8bf5e`로 분리했다. 원격 CI·운영 배포와 실제 운영 영향 문서 수는 별도 확인한다.
-- [ ] `P1` **원격 본문 검색의 계약을 결정한다.** 현재 원격 metadata의 `content`는 비워지고
-      중복 canonical route는 원격 우선이므로 본문 전용 검색어가 local-only 1건에서 원격 활성화 시 0건으로 바뀐다.
-      원격 published 본문에서 검색용 텍스트를 생성·제공할지, metadata-only 검색을 명시할지 결정한다.
-      검색 요청마다 모든 원격 본문을 fetch하거나 오래된 로컬 본문을 새 원격 본문과 섞지 않는다.
-      완료 조건: 제목·요약·본문 전용 일치, 동일 route의 원본 선택, 갱신·draft 제외·로컬 fallback을 함께 검사한다.
+- [-] `P1` **원격 본문 검색의 계약을 결정한다.** 최초 원격 metadata의 `content`는 비워지고
+  중복 canonical route는 원격 우선이므로 본문 전용 검색어가 local-only 1건에서 원격 활성화 시 0건으로 바뀐다.
+  원격 published 본문에서 검색용 텍스트를 생성·제공할지, metadata-only 검색을 명시할지 결정한다.
+  검색 요청마다 모든 원격 본문을 fetch하거나 오래된 로컬 본문을 새 원격 본문과 섞지 않는다.
+  완료 조건: 제목·요약·본문 전용 일치, 동일 route의 원본 선택, 갱신·draft 제외·로컬 fallback을 함께 검사한다.
+  10-26 후속: [ADR-0019](../architecture/adr-0019-remote-body-search.md)의 published `searchText` 계약·양쪽 어댑터·로컬 회귀를 구현했다.
+  [검증 기록](../verification/content/2026-10-26-remote-body-search.md). 후속 승인으로 코드·정책 커밋/푸시를 분리하며, CI·NAS 이미지·Vercel 운영 배포 및 실제 게시 갱신은 미검증으로 완료 처리하지 않는다.
 - [ ] `P2` **원격 응답에 byte budget을 추가한다.** 전체 deadline·retry 0은 구현됐지만 크기 제한은 없고
       격리 fetch에서 8MiB 응답이 수락됐다. 목록과 본문의 상한을 정하고 읽는 중 누적 byte 수를 검사한다.
       완료 조건: Content-Length 누락/오류, chunk 분할·멀티바이트·상한 초과 취소,
