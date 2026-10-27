@@ -91,6 +91,10 @@ mise exec node@24.12.0 -- node scripts/check-node-runtime.mts
 
 Jira 댓글 10034를 PR·실제 원격 커밋·검사 URL이 있는 3열 표로 갱신하고 재조회했다. Confluence v172에 같은 PR과 원격 원본 링크를 추가했으며 기존 본문 보존을 확인했다. 전체 원격 검사 종료 결과는 같은 기록에서 후속 갱신한다.
 
+최종 코드가 같은 기록 head `617cf03532d8189fe8522683b20bbf2034afc43e`의 CI 최초 실행에서는 데스크톱 job이 Ubuntu 시스템 의존성 17.6MB 다운로드에 13분 22초(21.9kB/s)를 사용했다. 12:58:53 UTC에 138개 검사를 시작했지만 12:59:34에 job 제한으로 취소돼 종합 Test도 실패했다. 다른 11개 job과 문서·CodeQL·PR 이미지 빌드는 통과했다. 같은 head의 데스크톱 job과 종속 Test만 attempt2로 재실행했다. 제한 시간·assertion·기존 필터 코드는 바꾸지 않았다. 이는 job 재실행이며 테스트가 최초부터 전부 통과한 결과가 아니다.
+
+CodeRabbit의 NAS 명령 범위 지적을 확인해 gate뿐 아니라 `node --version`도 env-file·Compose-file을 명시한 `exec -T docs-backend` 명령으로 고쳤다. 문서 shell 구문의 정적 검사는 실제 NAS 명령 실행이나 운영 이미지 교체를 뜻하지 않는다. 후속 문서 수정 head의 원격 결과는 PR·Jira에서 앞선 head와 구분한다.
+
 ## 한계와 후속 작업
 
 - 보안 버전 gate와 정상 API 회귀이며, 악성 Brotli·RCE exploit을 실행하거나 모든 CVE 경로를 재현한 검사가 아니다.
