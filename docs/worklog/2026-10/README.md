@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-27 모바일 메뉴·카테고리 탐색 검사 동기화](2026-10-27-navigation-readiness.md)
+
 - [10-27 반응형 스켈레톤 검사 격리](2026-10-27-skeleton-hydration-isolation.md)
 
 - [10-27 오프라인 UTF-8 입력 계약 수정](2026-10-27-offline-utf8-input-guard.md)

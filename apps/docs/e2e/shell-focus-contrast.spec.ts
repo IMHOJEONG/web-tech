@@ -79,8 +79,12 @@ for (const theme of ['light', 'dark']) {
         expect(await contrast(skip)).toBeGreaterThanOrEqual(4.5)
 
         const mobile = page.viewportSize()!.width < 640
-        if (mobile)
-            await page.getByTestId('mobile-nav-drawer-trigger').press('Enter')
+        if (mobile) {
+            const trigger = page.getByTestId('mobile-nav-drawer-trigger')
+            // Keyboard press does not wait for the SSR-disabled trigger to hydrate.
+            await expect(trigger).toBeEnabled()
+            await trigger.press('Enter')
+        }
         const nav = page.getByRole('navigation', {
             name: '주요 메뉴',
             exact: true,

@@ -1,0 +1,103 @@
+{
+  "basisHead": "edd297a52f8f2104b126646b5c3da043cbdb2ee3",
+  "implementationState": "local-uncommitted",
+  "generatedAt": "2026-10-27T06:09:09.961Z",
+  "normalization": "Checkout path -> <workspace>, personal home -> <home>, and Prettier JSON whitespace formatting only. All focused reporter fields, individual results and inline JSON attachment bodies retained and structurally compared. PNG/trace path references are not uploaded files.",
+  "sourceFiles": [
+    {
+      "file": "apps/docs/e2e/helpers/follow-link.ts",
+      "sha256": "f1590c9466965c0838cb25f6ff51d11eaa317298f9b1998b7aa1c3a3d0333e79"
+    },
+    {
+      "file": "apps/docs/e2e/navigation-readiness.spec.ts",
+      "sha256": "e4f0b10bbbeb7b29b31534838eefcbe3eb922b78df7cab7b69d4b2decf0a7b1f"
+    },
+    {
+      "file": "apps/docs/e2e/category-localization.spec.ts",
+      "sha256": "d7ff20ba2ca54e13ba6aff16082562865f32a6ba99e2412b3da3313474a0b7d7"
+    },
+    {
+      "file": "apps/docs/e2e/shell-focus-contrast.spec.ts",
+      "sha256": "a67e6e65facc45a915ff8ce0949301d188549bde1e443528de31c569c4d91e68"
+    }
+  ],
+  "runs": [
+    {
+      "kind": "focused-repeat",
+      "sourceFileName": "interaction-navigation-repeat.json",
+      "sourceSha256": "e57afff5b641cd0938d0dca185d6950f4da993ffb2d856c1a6bacfca497b8c06",
+      "sourceBytes": 172638,
+      "stats": {
+        "startTime": "2026-10-27T06:02:04.674Z",
+        "duration": 68364.45400000001,
+        "expected": 90,
+        "skipped": 36,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "projects": {
+        "chromium-mobile": {
+          "passed": 39,
+          "skipped": 3,
+          "failed": 0,
+          "retries": 0
+        },
+        "chromium-tablet": {
+          "passed": 24,
+          "skipped": 18,
+          "failed": 0,
+          "retries": 0
+        },
+        "chromium-desktop": {
+          "passed": 27,
+          "skipped": 15,
+          "failed": 0,
+          "retries": 0
+        }
+      },
+      "individualResults": 126,
+      "attachmentReferences": 6,
+      "storedReport": "2026-10-27-navigation-readiness.playwright.json",
+      "storedSha256": "b3dd0937d8d77829ae146514df1d655f4dbed4871f5f7811464d3c2ad9e2ac3d",
+      "storedBytes": 169952
+    },
+    {
+      "kind": "full-responsive",
+      "sourceFileName": "interaction-responsive-full.json",
+      "sourceSha256": "45ab55ca3e31625bdaa56cc82b634c034814879c092b7cf612a0d5fb8714143f",
+      "sourceBytes": 1260944,
+      "stats": {
+        "startTime": "2026-10-27T06:03:48.460Z",
+        "duration": 259122.94999999998,
+        "expected": 372,
+        "skipped": 54,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "projects": {
+        "chromium-mobile": {
+          "passed": 131,
+          "skipped": 11,
+          "failed": 0,
+          "retries": 0
+        },
+        "chromium-tablet": {
+          "passed": 116,
+          "skipped": 26,
+          "failed": 0,
+          "retries": 0
+        },
+        "chromium-desktop": {
+          "passed": 125,
+          "skipped": 17,
+          "failed": 0,
+          "retries": 0
+        }
+      },
+      "individualResults": 426,
+      "attachmentReferences": 93,
+      "storedReport": null,
+      "retentionNote": "Full JSON exceeds repository 1 MiB artifact policy; original remains in local temporary storage only, not uploaded, split or compressed. This entry is a derived summary, not the raw report. Temporary retention is not guaranteed."
+    }
+  ]
+}
