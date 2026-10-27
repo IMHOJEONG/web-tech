@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-27 스켈레톤 hydration 격리 집계](2026-10-27-skeleton-hydration-isolation.json): [보고서](../accessibility/2026-10-27-skeleton-hydration-isolation.md). 분리 전후 재현·225개 무재시도 검사, 원격 후속 미검증.
+
 - [10-27 오프라인 byte 계약·ADR 후속 검증 집계](2026-10-27-offline-byte-contract-and-adr-followup.json)
 
 - [10-27 검색/응답 제한 PR 결합](2026-10-27-search-response-pr-integration.json): [보고서](../integration/2026-10-27-search-response-pr-integration.md). #64 공식 squash·실제 main/배포 조회·충돌 보존·검색 어댑터 전후·소스9blob·production162개.

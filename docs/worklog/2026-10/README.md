@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-27 반응형 스켈레톤 검사 격리](2026-10-27-skeleton-hydration-isolation.md)
+
 - [10-27 오프라인 UTF-8 입력 계약 수정](2026-10-27-offline-utf8-input-guard.md)
 
 - [10-27 오프라인 byte 계약 수정과 ADR 부분 대체 연결](2026-10-27-offline-byte-contract-and-adr-followup.md)
