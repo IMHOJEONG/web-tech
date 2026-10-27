@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.md): main 별도 브랜치·필터 보존·CI gate·두 backend digest pin·회귀.
+
 - [10-27 검색·응답 제한 PR 결합](2026-10-27-search-response-pr-integration.md): #64 선병합·기존 미커밋 격리·충돌 보존·동일 head 검증 후 후속 PR/공식 squash.
 
 - [10-26 상세 HTML 응답 제한](2026-10-26-html-response-budget.md): 독립 상수·최종 렌더 크기·스트림 중단·로컬 fallback, ADR-0021·회귀.

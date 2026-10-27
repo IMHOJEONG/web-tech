@@ -350,6 +350,8 @@ curl --fail \
 
 ## Update And Rollback
 
+Node 보안 patch는 [툴체인 갱신 절차](pnpm-toolchain-upgrade.md#node-보안-patch-갱신)에 따라 builder/runtime base와 이미지를 새로 만든다. GHCR에 게시된 새 tag/digest를 선택한 후 아래 교체 절차를 수행한다. 기존 컨테이너의 `restart`만으로 Node 바이너리는 변경되지 않는다. `docker compose ... exec -T docs-backend node /opt/check-node-runtime.mts`와 `node --version`으로 실제 실행 버전을 확인한다. 이 gate는 새 보안 이미지에 포함되며 기존 이미지에는 없을 수 있다. 공개 API에 버전 조회 endpoint를 추가하거나 `.env.nas`/token 파일을 출력하지 않는다.
+
 복구 목표·백업 보관·중단 기준은 [서비스 복구 정책](../architecture/platform-recovery-policy.md)을 따른다. 현재는 단일 컨테이너 교체로, 무중단 롤링 배포가 아니다. 실제 운영 적용 전 [격리 리허설](platform-recovery-drill.md)에서 이전 digest와 콘텐츠 호환성을 확인한다.
 
 업데이트 전 content volume을 별도로 백업한다. 운영에서는 immutable GHCR 이미지를 pull하고 콘텐츠는 read-only volume으로 유지한다.

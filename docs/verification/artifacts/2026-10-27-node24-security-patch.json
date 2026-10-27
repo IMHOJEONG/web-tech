@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-27",
+  "timezone": "Asia/Seoul",
+  "issue": "KAN-43",
+  "branch": "codex/security-node24-20261027",
+  "baseMain": "e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e",
+  "state": "local-uncommitted",
+  "node": "24.22.1",
+  "pnpm": "12.14.0",
+  "securityFloor": "24.22.1",
+  "source": "https://nodejs.org/en/blog/release/v24.22.1",
+  "preservation": {
+    "originalModifiedOrUntrackedFiles": 15,
+    "sha256SnapshotEqual": true,
+    "filterChangesImported": false
+  },
+  "lockfilesChanged": false,
+  "regressions": {
+    "newRuntimePolicy": { "passed": 12, "includedInRepoTests": true },
+    "repo": { "passed": 165, "failed": 0, "skipped": 0 },
+    "docsBackend": {
+      "unit": 31,
+      "httpE2e": 55,
+      "lint": "passed",
+      "typecheck": "passed",
+      "build": "passed"
+    },
+    "vulnBackend": {
+      "unit": 48,
+      "typecheck": "passed",
+      "containerBuild": "passed"
+    },
+    "docsLib": { "passed": 307, "failed": 0, "skipped": 0 },
+    "docsArticleProduction": {
+      "passed": 162,
+      "failed": 0,
+      "retries": 0,
+      "durationReported": "2.3m"
+    },
+    "vulnFrontendBuild": "passed",
+    "workspaceLintTasks": { "passed": 7, "cached": 0 },
+    "workspaceTypecheckTasks": { "passed": 9, "cached": 0 },
+    "toolchainTypecheck": "passed",
+    "oldNodeNegativeControl": {
+      "node": "24.12.0",
+      "exitCode": 1,
+      "expected": "rejected"
+    }
+  },
+  "imageBase": {
+    "tag": "node:24.22.1-bookworm-slim",
+    "multiArchIndexDigest": "sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205",
+    "amd64Manifest": "sha256:2dd9a4f758e173b65fee15388f7706af6fb01ef50cf7a2c0538711d67a6981ae"
+  },
+  "localImages": {
+    "docsBackend": {
+      "tag": "web-tech/docs-backend:node24-security-local",
+      "digest": "sha256:f7c42c1f97d15d6f7529c7172b53dc4af7779ddbccef2c2ced4efb511eae5586"
+    },
+    "vulnBackend": {
+      "tag": "web-tech/vuln-radar-backend:node24-security-local",
+      "digest": "sha256:52222106a6f2e185de8879fb0bd0fc28db9258bc751269565a15b1940f624b49"
+    },
+    "platform": "linux/amd64",
+    "node": "v24.22.1",
+    "openssl": "3.5.9",
+    "brotli": "1.2.0",
+    "undici": "7.30.1",
+    "published": false,
+    "gateSha256BothMatchHost": "8c8fd16c0371899697aa2ae13139959938f26f9ab1981f99dca1866b4b22f13b"
+  },
+  "docsContainerSmoke": {
+    "network": "none",
+    "platform": "linux/amd64",
+    "health": 200,
+    "unauthorized": 401,
+    "posts": 200,
+    "documents": 1,
+    "html": 200,
+    "realCredentialsOrNasData": false,
+    "script": "scripts/smoke-docs-container.mts"
+  },
+  "intermediateFailures": [
+    "strict TypeScript fixture/index diagnostics fixed without relaxing config",
+    "Docker daemon initially stopped; started before building",
+    "initial docs image superseded after final gate source",
+    "initial smoke fixture omitted required metadata; kept count=1 and fixed fixture"
+  ],
+  "remainingWarnings": [
+    "simple-git-hooks prepare ENOTDIR in linked worktree",
+    "Prisma system libssl detection in vuln image",
+    "legacy pnpm deploy and existing stale convergence override warning"
+  ],
+  "trackingReadback": {
+    "jira": "KAN-43",
+    "status": "검토 중",
+    "commentId": "10034",
+    "commentTableColumns": 3,
+    "confluencePageId": "65817",
+    "confluenceVersion": 171,
+    "previousBodyPreserved": true
+  },
+  "notPerformed": [
+    "commit",
+    "push",
+    "new remote CI",
+    "PR",
+    "registry publish",
+    "production deploy",
+    "production DB test",
+    "credential rotation",
+    "malicious exploit"
+  ]
+}

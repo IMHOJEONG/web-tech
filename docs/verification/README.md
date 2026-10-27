@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-27 Node 24 보안 patch·CI·Docker](security/2026-10-27-node24-security-patch.md): main 기반 격리·pin/floor·amd64 이미지와 실제 Node·앱 회귀. 운영 미배포.
+
 - [10-27 검색·응답 제한/Content-Type 결합](integration/2026-10-27-search-response-pr-integration.md): PR #64 병합·HTML 헤더의 budget 이후 설정·상한/JSON 오류 결합·원래 미커밋 보존, 이후 CI/배포는 별도 기록.
 
 - [10-26 상세 HTML byte budget](content/2026-10-26-html-response-budget.md): 최종 렌더 UTF-8 경계·긴 코드/1000행 표·로컬 대체/원격전용 오류·목록 정상 유지, 운영 미검증.
