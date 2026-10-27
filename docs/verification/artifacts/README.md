@@ -1,5 +1,8 @@
 # 검증 원본 증거
 
+- [10-27 스켈레톤 런타임 격리](2026-10-27-skeleton-runtime-isolation.json): [보고서](../resilience/2026-10-27-skeleton-runtime-isolation.md). 수정 전 실패·반복 검사·기하 기준과 한계.
+- [10-27 live DOM 방식의 진단 패치](2026-10-27-skeleton-live-dom-diagnostic.patch): 같은 보고서의 별도 worktree 재현에 사용한다. 운영 코드/기준을 변경하지 않는다.
+
 - [10-27 검색/응답 제한 PR 결합](2026-10-27-search-response-pr-integration.json): [보고서](../integration/2026-10-27-search-response-pr-integration.md). #64 공식 squash·실제 main/배포 조회·충돌 보존·검색 어댑터 전후·소스9blob·production162개.
 
 - [10-26 상세 HTML 응답 제한](2026-10-26-html-response-budget.json): [보고서](../content/2026-10-26-html-response-budget.md). 렌더 결과 경계·길고 유효한 코드/표·선택 JSON 재검사·소스8blob·production162개·미검증 범위.
