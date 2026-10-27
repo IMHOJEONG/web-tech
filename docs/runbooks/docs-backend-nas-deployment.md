@@ -350,9 +350,26 @@ curl --fail \
 
 ## Update And Rollback
 
-Node 보안 patch는 [툴체인 갱신 절차](pnpm-toolchain-upgrade.md#node-보안-patch-갱신)에 따라 builder/runtime base와 이미지를 새로 만든다. GHCR에 게시된 새 tag/digest를 선택한 후 아래 교체 절차를 수행한다. 기존 컨테이너의 `restart`만으로 Node 바이너리는 변경되지 않는다. 교체 후 저장소 루트에서 아래 두 명령을 실행해 **컨테이너 내부**의 gate와 실제 Node 버전을 확인한다. NAS 호스트의 Node 버전을 확인하는 명령이 아니다.
+Node 보안 patch는 [툴체인 갱신 절차](pnpm-toolchain-upgrade.md#node-보안-patch-갱신)에 따라 builder/runtime base와 이미지를 새로 만든다. GHCR에 게시된 새 tag/digest를 선택한 후 아래 교체 절차를 수행한다. 기존 컨테이너의 `restart`만으로 Node 바이너리는 변경되지 않는다.
+
+복구 목표·백업 보관·중단 기준은 [서비스 복구 정책](../architecture/platform-recovery-policy.md)을 따른다. 현재는 단일 컨테이너 교체로, 무중단 롤링 배포가 아니다. 실제 운영 적용 전 [격리 리허설](platform-recovery-drill.md)에서 이전 digest와 콘텐츠 호환성을 확인한다.
+
+업데이트 전 content volume을 별도로 백업한다. 운영에서는 immutable GHCR 이미지를 pull하고 콘텐츠는 read-only volume으로 유지한다.
+
+먼저 `apps/docs-backend/.env.nas`의 `DOCS_BACKEND_IMAGE`를 선택한 immutable tag 또는 digest로 설정한다. 기존 값 그대로 pull/up하면 이전 이미지가 다시 사용될 수 있다. 셸의 같은 이름 환경변수가 env-file보다 우선하므로 아래에서는 해당 셸 변수만 해제한다. `.env.nas`와 token 파일 전체를 출력하거나 기록하지 않는다.
+
+저장소 루트에서 아래 순서대로 실행한다. **pull → 컨테이너 교체 → 교체된 컨테이너 내부 gate·Node 버전 확인** 순서다. NAS 호스트의 Node 버전을 확인하는 명령이 아니다.
 
 ```bash
+unset DOCS_BACKEND_IMAGE
+docker compose \
+  --env-file apps/docs-backend/.env.nas \
+  -f apps/docs-backend/docker-compose.yml \
+  pull docs-backend
+docker compose \
+  --env-file apps/docs-backend/.env.nas \
+  -f apps/docs-backend/docker-compose.yml \
+  up -d --no-build docs-backend
 docker compose \
   --env-file apps/docs-backend/.env.nas \
   -f apps/docs-backend/docker-compose.yml \
@@ -363,21 +380,6 @@ docker compose \
   exec -T docs-backend node --version
 ```
 
-이 gate는 새 보안 이미지에 포함되며 기존 이미지에는 없을 수 있다. 공개 API에 버전 조회 endpoint를 추가하거나 `.env.nas`/token 파일을 출력하지 않는다.
-
-복구 목표·백업 보관·중단 기준은 [서비스 복구 정책](../architecture/platform-recovery-policy.md)을 따른다. 현재는 단일 컨테이너 교체로, 무중단 롤링 배포가 아니다. 실제 운영 적용 전 [격리 리허설](platform-recovery-drill.md)에서 이전 digest와 콘텐츠 호환성을 확인한다.
-
-업데이트 전 content volume을 별도로 백업한다. 운영에서는 immutable GHCR 이미지를 pull하고 콘텐츠는 read-only volume으로 유지한다.
-
-```bash
-docker compose \
-  --env-file apps/docs-backend/.env.nas \
-  -f apps/docs-backend/docker-compose.yml \
-  pull docs-backend
-docker compose \
-  --env-file apps/docs-backend/.env.nas \
-  -f apps/docs-backend/docker-compose.yml \
-  up -d --no-build docs-backend
-```
+이 gate는 새 보안 이미지에 포함되며 기존 이미지에는 없을 수 있다. 공개 API에 버전 조회 endpoint를 추가하지 않는다. 교체 후 health와 콘텐츠 응답도 앞의 검증 절차로 확인한다.
 
 문제가 있으면 `DOCS_BACKEND_IMAGE`를 이전 immutable tag 또는 digest로 되돌린 뒤 같은 명령으로 재기동한다. NAS에서의 source build는 registry를 사용할 수 없는 fallback 절차로만 사용한다. token file과 content volume은 이미지 rollback과 분리한다.

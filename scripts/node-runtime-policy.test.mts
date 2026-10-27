@@ -193,6 +193,46 @@ test("image publication pulls the pinned base and observes policy inputs", () =>
   }
 });
 
+test("NAS rollout selects the immutable image and checks only the replaced container", () => {
+  const source = read("docs/runbooks/docs-backend-nas-deployment.md");
+  function assertRollout(document: string) {
+    const section = document.split("## Update And Rollback")[1];
+    assert.ok(section);
+    assert.match(section, /\.env\.nas`의 `DOCS_BACKEND_IMAGE`.*immutable/);
+    const block = section.match(/```bash\n([\s\S]*?)```/)?.[1];
+    assert.ok(block);
+    const commands = block
+      .replace(/\s*\\\r?\n\s*/g, " ")
+      .trim()
+      .split("\n")
+      .map((line) => line.trim());
+    const compose =
+      "docker compose --env-file apps/docs-backend/.env.nas -f apps/docs-backend/docker-compose.yml";
+    assert.deepEqual(commands, [
+      "unset DOCS_BACKEND_IMAGE",
+      `${compose} pull docs-backend`,
+      `${compose} up -d --no-build docs-backend`,
+      `${compose} exec -T docs-backend node /opt/check-node-runtime.mts`,
+      `${compose} exec -T docs-backend node --version`,
+    ]);
+  }
+  assertRollout(source);
+  assert.throws(() =>
+    assertRollout(source.replaceAll("`DOCS_BACKEND_IMAGE`", "`OTHER_IMAGE`")),
+  );
+  assert.throws(() =>
+    assertRollout(source.replace("unset DOCS_BACKEND_IMAGE\n", "")),
+  );
+  assert.throws(() =>
+    assertRollout(
+      source
+        .replaceAll("pull docs-backend", "__PULL__")
+        .replaceAll("up -d --no-build docs-backend", "pull docs-backend")
+        .replaceAll("__PULL__", "up -d --no-build docs-backend"),
+    ),
+  );
+});
+
 for (const denied of [false, true]) {
   test(`local hook wrapper prefers mise and ${denied ? "stops on failed" : "passes the"} runtime gate`, (t) => {
     const directory = mkdtempSync(join(tmpdir(), "node-hook-gate-"));
