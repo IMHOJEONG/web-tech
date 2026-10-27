@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.json): [보고서](../security/2026-10-27-node24-security-patch.md). 버전 경계·회귀·로컬 이미지 digest/gate hash·원본 15파일 보존·미배포 구분.
+
 - [10-27 검색/응답 제한 PR 결합](2026-10-27-search-response-pr-integration.json): [보고서](../integration/2026-10-27-search-response-pr-integration.md). #64 공식 squash·실제 main/배포 조회·충돌 보존·검색 어댑터 전후·소스9blob·production162개.
 
 - [10-26 상세 HTML 응답 제한](2026-10-26-html-response-budget.json): [보고서](../content/2026-10-26-html-response-budget.md). 렌더 결과 경계·길고 유효한 코드/표·선택 JSON 재검사·소스8blob·production162개·미검증 범위.

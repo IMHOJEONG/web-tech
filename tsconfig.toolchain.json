@@ -6,5 +6,11 @@
     "allowImportingTsExtensions": true,
     "erasableSyntaxOnly": true
   },
-  "include": ["scripts/install-pnpm.mts", "scripts/install-pnpm.test.mts"]
+  "include": [
+    "scripts/install-pnpm.mts",
+    "scripts/install-pnpm.test.mts",
+    "scripts/check-node-runtime.mts",
+    "scripts/node-runtime-policy.test.mts",
+    "scripts/smoke-docs-container.mts"
+  ]
 }

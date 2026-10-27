@@ -2,6 +2,7 @@
   "name": "web-tech",
   "private": true,
   "scripts": {
+    "check:node": "node ./scripts/check-node-runtime.mts",
     "build": "turbo build",
     "build:web-apps": "turbo build --filter=docs --filter=vuln-radar",
     "check:vuln-radar:dev": "bash ./scripts/check-vuln-radar-dev.sh",

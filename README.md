@@ -97,7 +97,7 @@ NestJS 기반의 취약점 수집/정규화 백엔드입니다.
 
 ### 1. Select Runtime
 
-이 저장소는 루트 `.mise.toml`을 기준으로 Node.js 24를 사용합니다. 전역 Node.js 버전은 변경되지 않습니다.
+이 저장소는 Node.js **24.22.1**을 사용합니다. 로컬 `.mise.toml`과 CI의 `.node-version`을 같은 patch로 유지하고, `pnpm check:node`로 stable Node 24의 보안 최소 버전을 검사합니다. 전역 Node.js 버전은 변경되지 않습니다.
 
 최초 한 번 `~/.zshrc`에 mise를 활성화합니다.
 
@@ -114,9 +114,12 @@ mise trust
 mise install
 node --version
 mise current node
+mise exec -- pnpm check:node
 ```
 
 `mise` shell activation이 설정되어 있으면 저장소 디렉터리에 들어올 때 Node.js 24가 자동으로 선택됩니다.
+
+Node 보안 업데이트는 [툴체인 갱신 절차](docs/runbooks/pnpm-toolchain-upgrade.md#node-보안-patch-갱신)를 따릅니다. 예전 컨테이너의 단순 restart는 Node를 업데이트하지 않습니다.
 
 ### 2. Install
 
