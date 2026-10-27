@@ -85,6 +85,12 @@ mise exec node@24.12.0 -- node scripts/check-node-runtime.mts
 
 사용자 승인 후 Node 실행 정책 `3493e63`과 CI·Docker·회귀 `9827277`을 별도 커밋했다. 실제 pre-commit의 포맷·문서 검사와 commit-msg의 commitlint를 우회 없이 통과했다. 따라서 설치 시의 linked worktree hooks prepare 경고를 실제 커밋 훅 미실행으로 혼동하지 않는다. 커밋 직전 저장소 회귀 165개와 toolchain 타입 검사도 재통과했다. 원격 CI는 이 로컬 검사와 분리해 확인한다.
 
+운영·검증 문서 `7efc5715d1b5c5b167b0cda84685012fb3aa442f`까지 3개 커밋을 전용 브랜치에 푸시하고 [PR #68](https://github.com/IMHOJEONG/web-tech/pull/68)을 생성했다. 연결 앱의 PR 쓰기 403은 중복 PR이 없음을 확인한 뒤 기존 인증 CLI로 복구했다. PR의 head·base main·본문·검사 시작을 재조회했다. 기존 필터 15파일은 다시 해시가 같고 보안 작업 트리는 세 커밋 직후 clean이었다.
+
+최초 원격 head `7efc5715d1b5c5b167b0cda84685012fb3aa442f`의 [CI](https://github.com/IMHOJEONG/web-tech/actions/runs/40505633372), [문서](https://github.com/IMHOJEONG/web-tech/actions/runs/40505633397), [CodeQL](https://github.com/IMHOJEONG/web-tech/actions/runs/40505630551), [PR 이미지 빌드](https://github.com/IMHOJEONG/web-tech/actions/runs/40505633515)를 확인했다. 이 기록 작성 시점에 commitlint·문서·lint·타입·CRP·CodeQL은 통과했고 나머지는 진행 중이었다. PR 이미지 빌드의 게시 조건은 false이며 main 병합·운영 배포는 하지 않았다. 후속 기록 커밋의 최신 검사는 PR의 Checks와 Jira 구현 댓글에서 head를 구분해 확인한다. 앞선 SHA의 통과를 후속 SHA의 통과로 간주하지 않는다.
+
+Jira 댓글 10034를 PR·실제 원격 커밋·검사 URL이 있는 3열 표로 갱신하고 재조회했다. Confluence v172에 같은 PR과 원격 원본 링크를 추가했으며 기존 본문 보존을 확인했다. 전체 원격 검사 종료 결과는 같은 기록에서 후속 갱신한다.
+
 ## 한계와 후속 작업
 
 - 보안 버전 gate와 정상 API 회귀이며, 악성 Brotli·RCE exploit을 실행하거나 모든 CVE 경로를 재현한 검사가 아니다.

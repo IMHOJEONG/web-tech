@@ -100,7 +100,24 @@
     "confluenceVersion": 171,
     "previousBodyPreserved": true
   },
-  "notPerformed": [
+  "publicationFollowup": {
+    "branch": "codex/security-node24-20261027",
+    "initialRemoteHead": "7efc5715d1b5c5b167b0cda84685012fb3aa442f",
+    "pr": "https://github.com/IMHOJEONG/web-tech/pull/68",
+    "initialRuns": {
+      "ci": 40505633372,
+      "documentation": 40505633397,
+      "codeql": 40505630551,
+      "image": 40505633515
+    },
+    "snapshotScope": "Initial remote run in progress; final results and later heads are tracked separately in PR checks and KAN-43 comment 10034.",
+    "confluenceReadbackVersion": 172,
+    "githubAppCreatePr403RecoveredWithAuthenticatedCli": true,
+    "originalUncommittedFilesStillPreserved": 15,
+    "merged": false,
+    "productionDeployed": false
+  },
+  "notPerformedDuringInitialLocalVerification": [
     "commit",
     "push",
     "new remote CI",
