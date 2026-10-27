@@ -1,6 +1,7 @@
 # 검증 원본 증거
 
-- [10-27 스켈레톤 hydration 격리 집계](2026-10-27-skeleton-hydration-isolation.json): [보고서](../accessibility/2026-10-27-skeleton-hydration-isolation.md). 분리 전후 재현·225개 무재시도 검사, 원격 후속 미검증.
+- [10-27 스켈레톤 hydration 격리 집계](2026-10-27-skeleton-hydration-isolation.json): [보고서](../accessibility/2026-10-27-skeleton-hydration-isolation.md). 분리 전후 재현·225개 무재시도 검사의 당시 로컬 집계. 원격 후속은 보고서에서 별도 연결한다.
+- 스켈레톤 Playwright 원본 정제본: [baseline45](2026-10-27-skeleton-before.playwright.json), [초기 격리69](2026-10-27-skeleton-initial-isolation.playwright.json), [반복225](2026-10-27-skeleton-repeat-isolation.playwright.json). 전체 개별 결과·인라인 측정 첨부를 보존하며 [원본/정제본 해시·정제 범위](2026-10-27-skeleton-playwright-report-provenance.json)를 함께 기록한다.
 
 - [10-27 오프라인 byte 계약·ADR 후속 검증 집계](2026-10-27-offline-byte-contract-and-adr-followup.json)
 

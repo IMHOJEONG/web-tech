@@ -2,7 +2,7 @@
 
 ## 대상과 조건
 
-- 2026-10-27 KST, PR #66 head `5e230da7ac6f6493fe0a5c0684ab61dd2ebc14d7` 기반 로컬 미커밋 수정.
+- 2026-10-27 KST, PR #66 head `5e230da7ac6f6493fe0a5c0684ab61dd2ebc14d7` 기반으로 검증 당시 로컬 미커밋 수정을 검사했다.
 - Node.js 24.12.0·pnpm 12.14.0·Next.js 16.4.3·Playwright 1.62.1 Chromium, 원격 콘텐츠 인덱스를 끈 loopback 개발 서버.
 - 모바일 390×844 ko·태블릿 768×1024 en·데스크톱 1280×800 ko와 두 테마. 복합 검색 조건은 기존처럼 320px다.
 - [KAN-39](https://web-tech-service.atlassian.net/browse/KAN-39), [PR #66](https://github.com/IMHOJEONG/web-tech/pull/66)의 재시도 7건을 조사했다. 이전 CI 성공과 flaky 기록은 보존한다.
@@ -87,9 +87,25 @@ DOCS_E2E_PORT=3047 mise exec -- pnpm --filter docs exec node --experimental-stri
 
 [집계 artifact](../artifacts/2026-10-27-skeleton-hydration-isolation.json)에 조건과 결과를 보관한다. 초기 서버 재사용 실행은 서버 종료로 11통과/34실패였으며 연결 초기화·거절·탐색 실패가 섞였다. 이를 hydration 재현이나 제품 실패 증거로 쓰지 않고 독립 서버로 다시 실행했다. 최초 타입 검사도 UI dist 생성과 겹친 모듈 누락이었으며 생성 완료 후 같은 명령은 통과했다. 제품 코드나 검사 기준을 바꿔 숨기지 않았다.
 
+### 보관한 원본 보고서
+
+집계와 별도로 당시 Playwright JSON reporter가 출력한 전체 보고서를 다음 상대 링크로 보관한다. 테스트를 다시 실행하거나 집계값으로 개별 결과를 만들어 채운 파일이 아니다.
+
+| 실행 단계               | 원본 보고서의 정제본                                                                         | 개별 결과 | 인라인 측정 첨부 |
+| ----------------------- | -------------------------------------------------------------------------------------------- | --------- | ---------------- |
+| 수정 전 전용 서버 반복  | [baseline JSON](../artifacts/2026-10-27-skeleton-before.playwright.json)                     | 45        | 45               |
+| 초기 격리 구현          | [initial isolation JSON](../artifacts/2026-10-27-skeleton-initial-isolation.playwright.json) | 69        | 66               |
+| 최종 격리 구현 3회 반복 | [repeated isolation JSON](../artifacts/2026-10-27-skeleton-repeat-isolation.playwright.json) | 225       | 198              |
+
+절대 checkout 경로만 `<workspace>`, Node 실행 파일의 개인 홈 경로만 `<home>`으로 치환했다. 필드·통계·개별 결과·시작 시각·소요 시간·오류·재시도 번호와 base64 측정 첨부는 삭제하거나 바꾸지 않았다. 첨부를 디코딩한 내용까지 비밀정보·인증 헤더·이메일·내부 IP·개인 경로를 검사했다. 원본은 그대로 두고 정제본도 각각 1MiB 미만으로 유지했다.
+
+[출처·무결성 기록](../artifacts/2026-10-27-skeleton-playwright-report-provenance.json)에는 원본 파일명·SHA-256, 정제본 SHA-256·크기, 결과와 첨부 수 및 치환 범위를 기록한다. 원본과 정제본의 모든 개별 결과·첨부가 동일한지 검사했다. 원본 경로 대신 파일명만 기록하며 이 해시는 출처 추적용이지 외부 서명이나 공증은 아니다.
+
+위 세 JSON은 로컬 성공 실행의 원본이다. 원격 최초 실패 7건은 [모바일 job](https://github.com/IMHOJEONG/web-tech/actions/runs/40428722970/job/121940898877), [태블릿 job](https://github.com/IMHOJEONG/web-tech/actions/runs/40428722970/job/121940898821), [데스크톱 job](https://github.com/IMHOJEONG/web-tech/actions/runs/40428722970/job/121940898695)의 당시 로그로 확인한다. 서버 재사용 중단 실행은 별도 원본 JSON을 보관하지 못했으므로 11통과/34실패의 전체 보고서를 사후 생성하지 않았다. 인라인 JSON 첨부 외 스크린샷·trace가 이 세 파일에 포함됐다는 의미도 아니다.
+
 ## 한계와 후속 작업
 
-- 로컬 미커밋 수정이다. PR #66 원격 head와 CI는 아직 이전 코드이며 새 원격 성공으로 표시하지 않는다.
+- 위 표는 커밋 전 로컬 검증 당시 기록이다. 이후 수정 커밋 `2c5227e`의 [원격 CI](https://github.com/IMHOJEONG/web-tech/actions/runs/40438309042)에서는 반응형 모바일130·태블릿116·데스크톱124개가 최초 실패·재시도·flaky0으로 통과했다. 로컬 원본을 원격 보고서처럼 표시하지 않는다.
 - 정적 골격 표현 검사이지 실제 느린 네트워크의 로딩 노출 시간·hydration 전환·운영 CLS·Safari/Firefox·실기기 검증이 아니다.
 - 앱 런타임·CSS·스켈레톤 UI·공통 패키지 빌드 정책은 변경하지 않았다.
 - ADR-0003·0005와 로딩 UX 정책의 기존 결정을 유지하는 테스트 수정이므로 새 ADR은 추가하지 않았다.

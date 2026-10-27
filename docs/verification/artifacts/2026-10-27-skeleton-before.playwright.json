@@ -1,0 +1,1907 @@
+{
+  "config": {
+    "argv": [
+      "<home>/.local/share/mise/installs/node/24.12.0/bin/node",
+      "<workspace>/node_modules/.pnpm/@playwright+test@1.62.1/node_modules/@playwright/test/cli.js",
+      "test",
+      "page-skeletons.spec.ts",
+      "--grep",
+      "light /(feed|web|mobile|ui-ux):|dark /feed:",
+      "--retries=0",
+      "--repeat-each=3",
+      "--workers=3",
+      "--reporter=json"
+    ],
+    "configFile": "<workspace>/apps/docs/playwright.config.ts",
+    "rootDir": "<workspace>/apps/docs/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": { "actualWorkers": 3 },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "<workspace>/apps/docs/test-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": { "actualWorkers": 3 },
+        "id": "chromium-mobile",
+        "name": "chromium-mobile",
+        "testDir": "<workspace>/apps/docs/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "<workspace>/apps/docs/test-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": { "actualWorkers": 3 },
+        "id": "chromium-tablet",
+        "name": "chromium-tablet",
+        "testDir": "<workspace>/apps/docs/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "<workspace>/apps/docs/test-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": { "actualWorkers": 3 },
+        "id": "chromium-desktop",
+        "name": "chromium-desktop",
+        "testDir": "<workspace>/apps/docs/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [["json"]],
+    "reportSlowTests": { "max": 5, "threshold": 300000 },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 3,
+    "webServer": {
+      "command": "pnpm dev:e2e",
+      "url": "http://127.0.0.1:3047",
+      "reuseExistingServer": false,
+      "timeout": 120000,
+      "env": {
+        "BLOG_CONTENT_INCLUDE_REMOTE_INDEX": "false",
+        "BLOG_CONTENT_API_BASE_URL": "",
+        "BLOG_CONTENT_API_BASE_URL_INTERNAL": "",
+        "BLOG_CONTENT_API_BASE_URL_PUBLIC": ""
+      }
+    }
+  },
+  "suites": [
+    {
+      "title": "page-skeletons.spec.ts",
+      "file": "page-skeletons.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "light /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2046,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:36.974Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS1tb2JpbGUiLAogICJ0aGVtZSI6ICJsaWdodCIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMCwKICAgICJ3aWR0aCI6IDM5MCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDE2MgogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogMzkwLAogICAgInRvcCI6IDY1LAogICAgInBhZ2VXaWR0aCI6IDM5MCwKICAgICJ2aWV3cG9ydCI6IDM5MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTE3LAogICJwZW5kaW5nQW5jaG9yIjogMTE3LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-dcf0a9b71b4b9439942e",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /web: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2036,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:36.978Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby93ZWIiLAogICJwcm9qZWN0IjogImNocm9taXVtLW1vYmlsZSIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDM0MiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEyNQogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDM0MiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEyNSwKICAgICJwYWdlV2lkdGgiOiAzOTAsCiAgICAidmlld3BvcnQiOiAzOTAsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDk3LAogICJwZW5kaW5nQW5jaG9yIjogOTcsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-ab93baeb75ded00d7d5f",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /mobile: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 3081,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:36.978Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9tb2JpbGUiLAogICJwcm9qZWN0IjogImNocm9taXVtLW1vYmlsZSIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDM0MiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEyNQogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDM0MiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEyNSwKICAgICJwYWdlV2lkdGgiOiAzOTAsCiAgICAidmlld3BvcnQiOiAzOTAsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDk3LAogICJwZW5kaW5nQW5jaG9yIjogOTcsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-eeb51a3152d0cd5142af",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /ui-ux: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3017,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:39.181Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby91aS11eCIsCiAgInByb2plY3QiOiAiY2hyb21pdW0tbW9iaWxlIiwKICAidGhlbWUiOiAibGlnaHQiLAogICJiZWZvcmUiOiB7CiAgICAibGVmdCI6IDI0LAogICAgIndpZHRoIjogMzQyLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTM3LjUKICB9LAogICJhZnRlciI6IHsKICAgICJsZWZ0IjogMjQsCiAgICAid2lkdGgiOiAzNDIsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxMzcuNSwKICAgICJwYWdlV2lkdGgiOiAzOTAsCiAgICAidmlld3BvcnQiOiAzOTAsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDM4OS41LAogICJwZW5kaW5nQW5jaG9yIjogMzg5LjUsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-eecd45e79c17404e75b5",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "dark /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 927,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:39.189Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS1tb2JpbGUiLAogICJ0aGVtZSI6ICJkYXJrIiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogMzkwLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTYyCiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDAsCiAgICAid2lkdGgiOiAzOTAsCiAgICAidG9wIjogNjUsCiAgICAicGFnZVdpZHRoIjogMzkwLAogICAgInZpZXdwb3J0IjogMzkwLAogICAgImFuaW1hdGlvbnMiOiAwCiAgfSwKICAicmVhZHlBbmNob3IiOiAxMTcsCiAgInBlbmRpbmdBbmNob3IiOiAxMTcsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-ad8b092fa258ce58e576",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1634,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:40.442Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS1tb2JpbGUiLAogICJ0aGVtZSI6ICJsaWdodCIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMCwKICAgICJ3aWR0aCI6IDM5MCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDE2MgogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogMzkwLAogICAgInRvcCI6IDY1LAogICAgInBhZ2VXaWR0aCI6IDM5MCwKICAgICJ2aWV3cG9ydCI6IDM5MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTE3LAogICJwZW5kaW5nQW5jaG9yIjogMTE3LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-cdb69ec22d603b17ffa0",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /web: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1532,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:40.520Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby93ZWIiLAogICJwcm9qZWN0IjogImNocm9taXVtLW1vYmlsZSIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDM0MiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEyNQogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDM0MiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEyNSwKICAgICJwYWdlV2lkdGgiOiAzOTAsCiAgICAidmlld3BvcnQiOiAzOTAsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDk3LAogICJwZW5kaW5nQW5jaG9yIjogOTcsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-fd1c805ca9af7d77aed8",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /mobile: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1202,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:42.198Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9tb2JpbGUiLAogICJwcm9qZWN0IjogImNocm9taXVtLW1vYmlsZSIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDM0MiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEyNQogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDM0MiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEyNSwKICAgICJwYWdlV2lkdGgiOiAzOTAsCiAgICAidmlld3BvcnQiOiAzOTAsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDk3LAogICJwZW5kaW5nQW5jaG9yIjogOTcsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-b7d98bc15068c941d8bf",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /ui-ux: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 837,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:42.542Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby91aS11eCIsCiAgInByb2plY3QiOiAiY2hyb21pdW0tbW9iaWxlIiwKICAidGhlbWUiOiAibGlnaHQiLAogICJiZWZvcmUiOiB7CiAgICAibGVmdCI6IDI0LAogICAgIndpZHRoIjogMzQyLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTM3LjUKICB9LAogICJhZnRlciI6IHsKICAgICJsZWZ0IjogMjQsCiAgICAid2lkdGgiOiAzNDIsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxMzcuNSwKICAgICJwYWdlV2lkdGgiOiAzOTAsCiAgICAidmlld3BvcnQiOiAzOTAsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDM4OS41LAogICJwZW5kaW5nQW5jaG9yIjogMzg5LjUsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-425bff9dfc905a7bdc4d",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "dark /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1226,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:42.209Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS1tb2JpbGUiLAogICJ0aGVtZSI6ICJkYXJrIiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogMzkwLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTYyCiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDAsCiAgICAid2lkdGgiOiAzOTAsCiAgICAidG9wIjogNjUsCiAgICAicGFnZVdpZHRoIjogMzkwLAogICAgInZpZXdwb3J0IjogMzkwLAogICAgImFuaW1hdGlvbnMiOiAwCiAgfSwKICAicmVhZHlBbmNob3IiOiAxMTcsCiAgInBlbmRpbmdBbmNob3IiOiAxMTcsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-67ac282c06b2ccbe5752",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1468,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:43.732Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS1tb2JpbGUiLAogICJ0aGVtZSI6ICJsaWdodCIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMCwKICAgICJ3aWR0aCI6IDM5MCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDE2MgogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogMzkwLAogICAgInRvcCI6IDY1LAogICAgInBhZ2VXaWR0aCI6IDM5MCwKICAgICJ2aWV3cG9ydCI6IDM5MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTE3LAogICJwZW5kaW5nQW5jaG9yIjogMTE3LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-beb8df1c77d74bced32a",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /web: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1444,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:43.746Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby93ZWIiLAogICJwcm9qZWN0IjogImNocm9taXVtLW1vYmlsZSIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDM0MiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEyNQogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDM0MiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEyNSwKICAgICJwYWdlV2lkdGgiOiAzOTAsCiAgICAidmlld3BvcnQiOiAzOTAsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDk3LAogICJwZW5kaW5nQW5jaG9yIjogOTcsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-f1af45f40a2354880e11",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /mobile: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1227,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:43.958Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9tb2JpbGUiLAogICJwcm9qZWN0IjogImNocm9taXVtLW1vYmlsZSIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDM0MiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEyNQogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDM0MiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEyNSwKICAgICJwYWdlV2lkdGgiOiAzOTAsCiAgICAidmlld3BvcnQiOiAzOTAsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDk3LAogICJwZW5kaW5nQW5jaG9yIjogOTcsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-3922bb0e6d191d23ef30",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /ui-ux: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1141,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:45.310Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby91aS11eCIsCiAgInByb2plY3QiOiAiY2hyb21pdW0tbW9iaWxlIiwKICAidGhlbWUiOiAibGlnaHQiLAogICJiZWZvcmUiOiB7CiAgICAibGVmdCI6IDI0LAogICAgIndpZHRoIjogMzQyLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTM3LjUKICB9LAogICJhZnRlciI6IHsKICAgICJsZWZ0IjogMjQsCiAgICAid2lkdGgiOiAzNDIsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxMzcuNSwKICAgICJwYWdlV2lkdGgiOiAzOTAsCiAgICAidmlld3BvcnQiOiAzOTAsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDM4OS41LAogICJwZW5kaW5nQW5jaG9yIjogMzg5LjUsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-f3d8e4741dcfdd324477",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "dark /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1156,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:45.315Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS1tb2JpbGUiLAogICJ0aGVtZSI6ICJkYXJrIiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogMzkwLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTYyCiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDAsCiAgICAid2lkdGgiOiAzOTAsCiAgICAidG9wIjogNjUsCiAgICAicGFnZVdpZHRoIjogMzkwLAogICAgInZpZXdwb3J0IjogMzkwLAogICAgImFuaW1hdGlvbnMiOiAwCiAgfSwKICAicmVhZHlBbmNob3IiOiAxMTcsCiAgInBlbmRpbmdBbmNob3IiOiAxMTcsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-342b8f1736dce59061bc",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 934,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:45.626Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS10YWJsZXQiLAogICJ0aGVtZSI6ICJsaWdodCIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMCwKICAgICJ3aWR0aCI6IDc2OCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDE2NgogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogNzY4LAogICAgInRvcCI6IDY1LAogICAgInBhZ2VXaWR0aCI6IDc2OCwKICAgICJ2aWV3cG9ydCI6IDc2OCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTE3LAogICJwZW5kaW5nQW5jaG9yIjogMTE3LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-62e5e195f6f4dca8fa90",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /web: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1079,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:46.861Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi93ZWIiLAogICJwcm9qZWN0IjogImNocm9taXVtLXRhYmxldCIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDcyMCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMwogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDcyMCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMywKICAgICJwYWdlV2lkdGgiOiA3NjgsCiAgICAidmlld3BvcnQiOiA3NjgsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDEwNSwKICAicGVuZGluZ0FuY2hvciI6IDEwNSwKICAiZGVsdGEiOiAwLAogICJlcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-0027d5f42456c335cdd7",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /mobile: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1063,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:46.861Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi9tb2JpbGUiLAogICJwcm9qZWN0IjogImNocm9taXVtLXRhYmxldCIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDcyMCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMwogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDcyMCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMywKICAgICJwYWdlV2lkdGgiOiA3NjgsCiAgICAidmlld3BvcnQiOiA3NjgsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDEwNSwKICAicGVuZGluZ0FuY2hvciI6IDEwNSwKICAiZGVsdGEiOiAwLAogICJlcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-5c325f638e3bd8e5660b",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /ui-ux: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1086,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:46.787Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi91aS11eCIsCiAgInByb2plY3QiOiAiY2hyb21pdW0tdGFibGV0IiwKICAidGhlbWUiOiAibGlnaHQiLAogICJiZWZvcmUiOiB7CiAgICAibGVmdCI6IDI0LAogICAgIndpZHRoIjogNzIwLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTQ1LjUKICB9LAogICJhZnRlciI6IHsKICAgICJsZWZ0IjogMjQsCiAgICAid2lkdGgiOiA3MjAsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxNDUuNSwKICAgICJwYWdlV2lkdGgiOiA3NjgsCiAgICAidmlld3BvcnQiOiA3NjgsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDM5My41LAogICJwZW5kaW5nQW5jaG9yIjogMzkzLjUsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-6719897ace8031c7064b",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "dark /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 762,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:47.884Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS10YWJsZXQiLAogICJ0aGVtZSI6ICJkYXJrIiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogNzY4LAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTY2CiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDAsCiAgICAid2lkdGgiOiA3NjgsCiAgICAidG9wIjogNjUsCiAgICAicGFnZVdpZHRoIjogNzY4LAogICAgInZpZXdwb3J0IjogNzY4LAogICAgImFuaW1hdGlvbnMiOiAwCiAgfSwKICAicmVhZHlBbmNob3IiOiAxMTcsCiAgInBlbmRpbmdBbmNob3IiOiAxMTcsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-55fe7fddd2be79174975",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1321,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:48.437Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS10YWJsZXQiLAogICJ0aGVtZSI6ICJsaWdodCIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMCwKICAgICJ3aWR0aCI6IDc2OCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDE2NgogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogNzY4LAogICAgInRvcCI6IDY1LAogICAgInBhZ2VXaWR0aCI6IDc2OCwKICAgICJ2aWV3cG9ydCI6IDc2OCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTE3LAogICJwZW5kaW5nQW5jaG9yIjogMTE3LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-72070696854c39bb528b",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /web: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1298,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:48.451Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi93ZWIiLAogICJwcm9qZWN0IjogImNocm9taXVtLXRhYmxldCIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDcyMCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMwogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDcyMCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMywKICAgICJwYWdlV2lkdGgiOiA3NjgsCiAgICAidmlld3BvcnQiOiA3NjgsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDEwNSwKICAicGVuZGluZ0FuY2hvciI6IDEwNSwKICAiZGVsdGEiOiAwLAogICJlcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-80ea6a854cfaa4512e47",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /mobile: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 952,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:48.949Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi9tb2JpbGUiLAogICJwcm9qZWN0IjogImNocm9taXVtLXRhYmxldCIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDcyMCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMwogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDcyMCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMywKICAgICJwYWdlV2lkdGgiOiA3NjgsCiAgICAidmlld3BvcnQiOiA3NjgsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDEwNSwKICAicGVuZGluZ0FuY2hvciI6IDEwNSwKICAiZGVsdGEiOiAwLAogICJlcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-2df88446973aeb7c124f",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /ui-ux: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 930,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:49.894Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi91aS11eCIsCiAgInByb2plY3QiOiAiY2hyb21pdW0tdGFibGV0IiwKICAidGhlbWUiOiAibGlnaHQiLAogICJiZWZvcmUiOiB7CiAgICAibGVmdCI6IDI0LAogICAgIndpZHRoIjogNzIwLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTQ1LjUKICB9LAogICJhZnRlciI6IHsKICAgICJsZWZ0IjogMjQsCiAgICAid2lkdGgiOiA3MjAsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxNDUuNSwKICAgICJwYWdlV2lkdGgiOiA3NjgsCiAgICAidmlld3BvcnQiOiA3NjgsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDM5My41LAogICJwZW5kaW5nQW5jaG9yIjogMzkzLjUsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-1abab065a07c4b346658",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "dark /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 923,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:49.916Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS10YWJsZXQiLAogICJ0aGVtZSI6ICJkYXJrIiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogNzY4LAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTY2CiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDAsCiAgICAid2lkdGgiOiA3NjgsCiAgICAidG9wIjogNjUsCiAgICAicGFnZVdpZHRoIjogNzY4LAogICAgInZpZXdwb3J0IjogNzY4LAogICAgImFuaW1hdGlvbnMiOiAwCiAgfSwKICAicmVhZHlBbmNob3IiOiAxMTcsCiAgInBlbmRpbmdBbmNob3IiOiAxMTcsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-9f61404d74d73c852367",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 767,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:50.369Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS10YWJsZXQiLAogICJ0aGVtZSI6ICJsaWdodCIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMCwKICAgICJ3aWR0aCI6IDc2OCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDE2NgogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogNzY4LAogICAgInRvcCI6IDY1LAogICAgInBhZ2VXaWR0aCI6IDc2OCwKICAgICJ2aWV3cG9ydCI6IDc2OCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTE3LAogICJwZW5kaW5nQW5jaG9yIjogMTE3LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-b0be1b08690b5073e849",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /web: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1309,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:51.224Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi93ZWIiLAogICJwcm9qZWN0IjogImNocm9taXVtLXRhYmxldCIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDcyMCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMwogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDcyMCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMywKICAgICJwYWdlV2lkdGgiOiA3NjgsCiAgICAidmlld3BvcnQiOiA3NjgsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDEwNSwKICAicGVuZGluZ0FuY2hvciI6IDEwNSwKICAiZGVsdGEiOiAwLAogICJlcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-c273336f5a739faeb4d8",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /mobile: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1438,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:51.239Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi9tb2JpbGUiLAogICJwcm9qZWN0IjogImNocm9taXVtLXRhYmxldCIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDcyMCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMwogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDcyMCwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMywKICAgICJwYWdlV2lkdGgiOiA3NjgsCiAgICAidmlld3BvcnQiOiA3NjgsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDEwNSwKICAicGVuZGluZ0FuY2hvciI6IDEwNSwKICAiZGVsdGEiOiAwLAogICJlcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-d7c24bfecc08a8ab35aa",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /ui-ux: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1333,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:51.450Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi91aS11eCIsCiAgInByb2plY3QiOiAiY2hyb21pdW0tdGFibGV0IiwKICAidGhlbWUiOiAibGlnaHQiLAogICJiZWZvcmUiOiB7CiAgICAibGVmdCI6IDI0LAogICAgIndpZHRoIjogNzIwLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTQ1LjUKICB9LAogICJhZnRlciI6IHsKICAgICJsZWZ0IjogMjQsCiAgICAid2lkdGgiOiA3MjAsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxNDUuNSwKICAgICJwYWdlV2lkdGgiOiA3NjgsCiAgICAidmlld3BvcnQiOiA3NjgsCiAgICAiYW5pbWF0aW9ucyI6IDAKICB9LAogICJyZWFkeUFuY2hvciI6IDM5My41LAogICJwZW5kaW5nQW5jaG9yIjogMzkzLjUsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-2d8ca655c63f36169a8f",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "dark /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 721,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:52.684Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9lbi9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS10YWJsZXQiLAogICJ0aGVtZSI6ICJkYXJrIiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogNzY4LAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTY2CiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDAsCiAgICAid2lkdGgiOiA3NjgsCiAgICAidG9wIjogNjUsCiAgICAicGFnZVdpZHRoIjogNzY4LAogICAgInZpZXdwb3J0IjogNzY4LAogICAgImFuaW1hdGlvbnMiOiAwCiAgfSwKICAicmVhZHlBbmNob3IiOiAxMTcsCiAgInBlbmRpbmdBbmNob3IiOiAxMTcsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-b480dbd809081efc1629",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1352,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:53.192Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS1kZXNrdG9wIiwKICAidGhlbWUiOiAibGlnaHQiLAogICJiZWZvcmUiOiB7CiAgICAibGVmdCI6IDAsCiAgICAid2lkdGgiOiAxMjgwLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTk5LjM3NQogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogMTI4MCwKICAgICJ0b3AiOiA2NSwKICAgICJwYWdlV2lkdGgiOiAxMjgwLAogICAgInZpZXdwb3J0IjogMTI4MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTI1LAogICJwZW5kaW5nQW5jaG9yIjogMTI1LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-4037da78afeec1e4eaaa",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /web: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1364,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:53.165Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby93ZWIiLAogICJwcm9qZWN0IjogImNocm9taXVtLWRlc2t0b3AiLAogICJ0aGVtZSI6ICJsaWdodCIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMjQsCiAgICAid2lkdGgiOiAxMjMyLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTMzCiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDI0LAogICAgIndpZHRoIjogMTIzMiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMywKICAgICJwYWdlV2lkdGgiOiAxMjgwLAogICAgInZpZXdwb3J0IjogMTI4MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTA1LAogICJwZW5kaW5nQW5jaG9yIjogMTA1LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-17fc34a3319538ea7ea7",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /mobile: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 984,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:53.706Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9tb2JpbGUiLAogICJwcm9qZWN0IjogImNocm9taXVtLWRlc2t0b3AiLAogICJ0aGVtZSI6ICJsaWdodCIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMjQsCiAgICAid2lkdGgiOiAxMjMyLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTMzCiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDI0LAogICAgIndpZHRoIjogMTIzMiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMywKICAgICJwYWdlV2lkdGgiOiAxMjgwLAogICAgInZpZXdwb3J0IjogMTI4MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTA1LAogICJwZW5kaW5nQW5jaG9yIjogMTA1LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-22cf6a5031ea8bf97465",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /ui-ux: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 966,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:54.677Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby91aS11eCIsCiAgInByb2plY3QiOiAiY2hyb21pdW0tZGVza3RvcCIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDEyMzIsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxNDUuNQogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDEyMzIsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxNDUuNSwKICAgICJwYWdlV2lkdGgiOiAxMjgwLAogICAgInZpZXdwb3J0IjogMTI4MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogNDA1LjUsCiAgInBlbmRpbmdBbmNob3IiOiA0MDUuNSwKICAiZGVsdGEiOiAwLAogICJlcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-0c33341394fcc40a0e5c",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "dark /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1005,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:54.710Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS1kZXNrdG9wIiwKICAidGhlbWUiOiAiZGFyayIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMCwKICAgICJ3aWR0aCI6IDEyODAsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxOTkuMzc1CiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDAsCiAgICAid2lkdGgiOiAxMjgwLAogICAgInRvcCI6IDY1LAogICAgInBhZ2VXaWR0aCI6IDEyODAsCiAgICAidmlld3BvcnQiOiAxMjgwLAogICAgImFuaW1hdGlvbnMiOiAwCiAgfSwKICAicmVhZHlBbmNob3IiOiAxMjUsCiAgInBlbmRpbmdBbmNob3IiOiAxMjUsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-e107094f6a9bf30b067d",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 714,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:55.227Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS1kZXNrdG9wIiwKICAidGhlbWUiOiAibGlnaHQiLAogICJiZWZvcmUiOiB7CiAgICAibGVmdCI6IDAsCiAgICAid2lkdGgiOiAxMjgwLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTk5LjM3NQogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogMTI4MCwKICAgICJ0b3AiOiA2NSwKICAgICJwYWdlV2lkdGgiOiAxMjgwLAogICAgInZpZXdwb3J0IjogMTI4MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTI1LAogICJwZW5kaW5nQW5jaG9yIjogMTI1LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-252e36911968f871e266",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /web: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1309,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:56.046Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby93ZWIiLAogICJwcm9qZWN0IjogImNocm9taXVtLWRlc2t0b3AiLAogICJ0aGVtZSI6ICJsaWdodCIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMjQsCiAgICAid2lkdGgiOiAxMjMyLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTMzCiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDI0LAogICAgIndpZHRoIjogMTIzMiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMywKICAgICJwYWdlV2lkdGgiOiAxMjgwLAogICAgInZpZXdwb3J0IjogMTI4MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTA1LAogICJwZW5kaW5nQW5jaG9yIjogMTA1LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-7ce1865d5f8bef3ed460",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /mobile: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 23,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1196,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:56.111Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9tb2JpbGUiLAogICJwcm9qZWN0IjogImNocm9taXVtLWRlc2t0b3AiLAogICJ0aGVtZSI6ICJsaWdodCIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMjQsCiAgICAid2lkdGgiOiAxMjMyLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTMzCiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDI0LAogICAgIndpZHRoIjogMTIzMiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMywKICAgICJwYWdlV2lkdGgiOiAxMjgwLAogICAgInZpZXdwb3J0IjogMTI4MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTA1LAogICJwZW5kaW5nQW5jaG9yIjogMTA1LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-919bc55b68bfd9bfb84c",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /ui-ux: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1298,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:56.176Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby91aS11eCIsCiAgInByb2plY3QiOiAiY2hyb21pdW0tZGVza3RvcCIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDEyMzIsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxNDUuNQogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDEyMzIsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxNDUuNSwKICAgICJwYWdlV2lkdGgiOiAxMjgwLAogICAgInZpZXdwb3J0IjogMTI4MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogNDA1LjUsCiAgInBlbmRpbmdBbmNob3IiOiA0MDUuNSwKICAiZGVsdGEiOiAwLAogICJlcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-755e674adb66331c9038",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "dark /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 23,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 663,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:57.472Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS1kZXNrdG9wIiwKICAidGhlbWUiOiAiZGFyayIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMCwKICAgICJ3aWR0aCI6IDEyODAsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxOTkuMzc1CiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDAsCiAgICAid2lkdGgiOiAxMjgwLAogICAgInRvcCI6IDY1LAogICAgInBhZ2VXaWR0aCI6IDEyODAsCiAgICAidmlld3BvcnQiOiAxMjgwLAogICAgImFuaW1hdGlvbnMiOiAwCiAgfSwKICAicmVhZHlBbmNob3IiOiAxMjUsCiAgInBlbmRpbmdBbmNob3IiOiAxMjUsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-632a6ff4b8ca3ef52da2",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1270,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:57.856Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS1kZXNrdG9wIiwKICAidGhlbWUiOiAibGlnaHQiLAogICJiZWZvcmUiOiB7CiAgICAibGVmdCI6IDAsCiAgICAid2lkdGgiOiAxMjgwLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTk5LjM3NQogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAwLAogICAgIndpZHRoIjogMTI4MCwKICAgICJ0b3AiOiA2NSwKICAgICJwYWdlV2lkdGgiOiAxMjgwLAogICAgInZpZXdwb3J0IjogMTI4MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTI1LAogICJwZW5kaW5nQW5jaG9yIjogMTI1LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-92d50b981ad5dfb47fac",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /web: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1272,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:57.872Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby93ZWIiLAogICJwcm9qZWN0IjogImNocm9taXVtLWRlc2t0b3AiLAogICJ0aGVtZSI6ICJsaWdodCIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMjQsCiAgICAid2lkdGgiOiAxMjMyLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTMzCiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDI0LAogICAgIndpZHRoIjogMTIzMiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMywKICAgICJwYWdlV2lkdGgiOiAxMjgwLAogICAgInZpZXdwb3J0IjogMTI4MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTA1LAogICJwZW5kaW5nQW5jaG9yIjogMTA1LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-8da51ad99b1bd8a14489",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /mobile: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 26,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 806,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:58.434Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9tb2JpbGUiLAogICJwcm9qZWN0IjogImNocm9taXVtLWRlc2t0b3AiLAogICJ0aGVtZSI6ICJsaWdodCIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMjQsCiAgICAid2lkdGgiOiAxMjMyLAogICAgInRvcCI6IDY1LAogICAgInRpdGxlVG9wIjogMTMzCiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDI0LAogICAgIndpZHRoIjogMTIzMiwKICAgICJ0b3AiOiA2NSwKICAgICJ0aXRsZVRvcCI6IDEzMywKICAgICJwYWdlV2lkdGgiOiAxMjgwLAogICAgInZpZXdwb3J0IjogMTI4MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogMTA1LAogICJwZW5kaW5nQW5jaG9yIjogMTA1LAogICJkZWx0YSI6IDAsCiAgImVycm9ycyI6IFtdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-49d8a887fbb3cb5868e3",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "light /ui-ux: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 826,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:59.298Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby91aS11eCIsCiAgInByb2plY3QiOiAiY2hyb21pdW0tZGVza3RvcCIsCiAgInRoZW1lIjogImxpZ2h0IiwKICAiYmVmb3JlIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDEyMzIsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxNDUuNQogIH0sCiAgImFmdGVyIjogewogICAgImxlZnQiOiAyNCwKICAgICJ3aWR0aCI6IDEyMzIsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxNDUuNSwKICAgICJwYWdlV2lkdGgiOiAxMjgwLAogICAgInZpZXdwb3J0IjogMTI4MCwKICAgICJhbmltYXRpb25zIjogMAogIH0sCiAgInJlYWR5QW5jaG9yIjogNDA1LjUsCiAgInBlbmRpbmdBbmNob3IiOiA0MDUuNSwKICAiZGVsdGEiOiAwLAogICJlcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-1b30a593b6d2943a58d6",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        },
+        {
+          "title": "dark /feed: domain skeleton preserves page geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 856,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T01:00:59.298Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "skeleton-layout",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYXRoIjogIi9rby9mZWVkIiwKICAicHJvamVjdCI6ICJjaHJvbWl1bS1kZXNrdG9wIiwKICAidGhlbWUiOiAiZGFyayIsCiAgImJlZm9yZSI6IHsKICAgICJsZWZ0IjogMCwKICAgICJ3aWR0aCI6IDEyODAsCiAgICAidG9wIjogNjUsCiAgICAidGl0bGVUb3AiOiAxOTkuMzc1CiAgfSwKICAiYWZ0ZXIiOiB7CiAgICAibGVmdCI6IDAsCiAgICAid2lkdGgiOiAxMjgwLAogICAgInRvcCI6IDY1LAogICAgInBhZ2VXaWR0aCI6IDEyODAsCiAgICAidmlld3BvcnQiOiAxMjgwLAogICAgImFuaW1hdGlvbnMiOiAwCiAgfSwKICAicmVhZHlBbmNob3IiOiAxMjUsCiAgInBlbmRpbmdBbmNob3IiOiAxMjUsCiAgImRlbHRhIjogMCwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2b724bba07812a12c242-eb3e944c2bc8e7341a51",
+          "file": "page-skeletons.spec.ts",
+          "line": 75,
+          "column": 9
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-27T01:00:30.897Z",
+    "duration": 29374.502999999997,
+    "expected": 45,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
