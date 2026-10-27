@@ -69,6 +69,8 @@
 
 ## 먼저 보면 좋은 문서
 
+- [화면 표시·hydration·DOM 소유권](hydration-readiness-and-dom-ownership.md): 시점 차이와 테스트 경합을 그림으로 설명하며, 확인 사실과 일반 원리를 구분한다.
+
 - [UI/UX 자료 조사와 콘텐츠 방향](uiux-resource-research.md)
 
 - `docs/architecture/docs-app-information-architecture.md`

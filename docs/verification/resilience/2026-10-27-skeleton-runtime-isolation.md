@@ -62,9 +62,13 @@ DOCS_E2E_PORT=3029 DOCS_SKELETON_CPU_RATE=6 mise exec -- pnpm --filter docs exec
 
 ## 한계와 후속 작업
 
+이 보고서와 artifact의 `local-uncommitted`는 실험 당시의 관측 상태다. 후속 작업별 커밋 단계에서는 [테스트 커밋 7a5ecae](https://github.com/IMHOJEONG/web-tech/commit/7a5ecae329d03fb0901ca5ed825b95ef5f0a094e)의 소스4개 blob 일치·핵심4개 재검사·타입/lint/훅 통과를 확인했다. 원격 CI 결과를 앞선 로컬 실행 수치로 대체하지 않고 PR·Jira·Confluence에 별도로 기록한다.
+
 로컬 검증과 새 원격 CI·병합·배포를 구분한다. 실제 사용자 전환의 모든 hydration 문제·운영 CLS·Safari/Firefox·실기기까지 해결했다고 주장하지 않는다. 앱 코드·원문·캐시·공용 UI·CI 기준·의존성/lockfile은 변경하지 않는다.
 
 ## 관련 문서
+
+- [그림으로 보는 hydration과 DOM 소유권](../../knowledge/docs-app/hydration-readiness-and-dom-ownership.md): 화면 표시/폰트/React 준비의 차이와 일반 원인·확인 사실 구분.
 
 - [로딩 정책](../../architecture/docs-loading-ux-policy.md)
 - [기존 골격 기하 검사](../accessibility/2026-10-19-page-skeletons-local.md)
