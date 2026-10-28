@@ -1,5 +1,9 @@
 # 검증 원본 증거
 
+- [10-28 필터 main 재검증](2026-10-28-docs-filter-main-recheck.json): [보고서](../resilience/2026-10-27-docs-filter-readiness.md). 핵심 36통과·관련 65통과/기존10제외, retry0과 관측 경고 분리.
+
+- [10-27 문서 필터 준비 상태](2026-10-27-docs-filter-readiness.json): [보고서](../resilience/2026-10-27-docs-filter-readiness.md)의 중간 실패·최종 반복·음성 대조 원본.
+
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.json): [보고서](../security/2026-10-27-node24-security-patch.md). 버전 경계·회귀·로컬 이미지 digest/gate hash·원본 15파일 보존·미배포 구분.
 
 - [10-27 검색/응답 제한 PR 결합](2026-10-27-search-response-pr-integration.json): [보고서](../integration/2026-10-27-search-response-pr-integration.md). #64 공식 squash·실제 main/배포 조회·충돌 보존·검색 어댑터 전후·소스9blob·production162개.

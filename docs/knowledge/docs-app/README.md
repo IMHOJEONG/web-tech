@@ -1,5 +1,7 @@
 # Docs App 지식 정리
 
+- [스트리밍 인덱스 준비 상태](streamed-index-readiness.md): visible fallback과 최종 결과 범위, native details 상태·검사 선행 조건 구분.
+
 ## 배운 점
 
 - `/feed`와 `/docs`는 같은 목록이 아니라 서로 다른 목적의 화면이다.

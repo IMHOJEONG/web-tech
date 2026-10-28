@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-27 문서 필터 준비 상태](2026-10-27-docs-filter-readiness.md): 로딩 골격 selector 결함·실제 스트림 회귀·10-28 독립 PR 준비.
+
 - [10-28 Node 보안 PR 병합·운영 확인](2026-10-28-node24-security-merge.md): 공식 squash 사전검사·리뷰 재요청·NAS 이미지 선택과 교체 순서 회귀, 필터 보존.
 
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.md): main 별도 브랜치·필터 보존·CI gate·두 backend digest pin·회귀.

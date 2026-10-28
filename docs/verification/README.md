@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-27 문서 필터 준비 상태](resilience/2026-10-27-docs-filter-readiness.md): 실제 스트림 보류·골격/완성 결과 구분·ko/en 클릭/키보드 회귀, 10-28 main 기반 분리.
+
 - [10-27 Node 24 보안 patch·CI·Docker](security/2026-10-27-node24-security-patch.md): main 기반 격리·pin/floor·amd64 이미지와 실제 Node·앱 회귀. 운영 미배포.
 
 - [10-27 검색·응답 제한/Content-Type 결합](integration/2026-10-27-search-response-pr-integration.md): PR #64 병합·HTML 헤더의 budget 이후 설정·상한/JSON 오류 결합·원래 미커밋 보존, 이후 CI/배포는 별도 기록.
