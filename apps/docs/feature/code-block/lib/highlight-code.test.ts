@@ -129,6 +129,49 @@ test('triple-marker lines inside hunks are changes, with headers reset for the n
 })
 
 for (const language of ['diff', 'patch']) {
+    test(`${language} resets completed hunks before header-only file boundaries`, () => {
+        const source = [
+            '--- a/one',
+            '+++ b/one',
+            '@@ -1 +1 @@',
+            '--- source',
+            '+++ source',
+            '\\ No newline at end of file',
+            '--- a/two',
+            '+++ b/two',
+            '@@ -0,0 +1,2 @@',
+            '+++ inserted',
+            '+second',
+            '--- a/three',
+            '+++ b/three',
+            '@@ -1,2 +0,0 @@',
+            '--- removed',
+            '-second',
+            '--- a/four',
+            '+++ b/four',
+            '@@ -1,2 +1,2 @@',
+            ' context',
+            '-old',
+            '+new',
+            '--- a/empty',
+            '+++ b/empty',
+            '@@ -0,0 +0,0 @@',
+            '--- a/next',
+            '+++ b/next',
+            '',
+        ].join('\n')
+        const html = highlightCode(source, language)
+        assert.equal((html.match(/mdx-code-diff-line--meta/g) || []).length, 18)
+        assert.equal((html.match(/mdx-code-diff-line--added/g) || []).length, 4)
+        assert.equal(
+            (html.match(/mdx-code-diff-line--removed/g) || []).length,
+            4
+        )
+        assert.match(html, /mdx-code-diff-line--added">\+\+\+ inserted/)
+        assert.match(html, /mdx-code-diff-line--removed">--- removed/)
+        assert.equal(decodeHTML(html.replace(/<\/?span\b[^>]*>/g, '')), source)
+    })
+
     test(`remote ${language} preserves boundary context markers in full code and preview`, () => {
         const source = [
             ' +context',

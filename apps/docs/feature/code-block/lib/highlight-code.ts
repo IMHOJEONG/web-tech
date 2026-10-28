@@ -216,6 +216,8 @@ export function isDiffLanguage(language: string) {
 
 function highlightDiff(code: string) {
     let inHunk = false
+    let oldRemaining = 0
+    let newRemaining = 0
     // Keep separators outside spans so textContent and clipboard retain the source.
     return code
         .split(/(\r\n|\n|\r)/)
@@ -231,7 +233,14 @@ function highlightDiff(code: string) {
                     /^(?:diff(?: |$)|index |---(?:[ \t]|$)|\+\+\+(?:[ \t]|$))/.test(
                         line
                     ))
-            if (hunkHeader) inHunk = true
+            if (hunkHeader) {
+                const counts = line.match(
+                    /^@@ -\d+(?:,(\d+))? \+\d+(?:,(\d+))? @@/
+                )
+                oldRemaining = counts ? Number(counts[1] ?? 1) : Infinity
+                newRemaining = counts ? Number(counts[2] ?? 1) : Infinity
+                inHunk = oldRemaining > 0 || newRemaining > 0
+            }
             const kind = metadata
                 ? 'meta'
                 : line.startsWith('+')
@@ -239,6 +248,15 @@ function highlightDiff(code: string) {
                   : line.startsWith('-')
                     ? 'removed'
                     : 'context'
+
+            // Unified patches may start the next file without a diff --git line.
+            if (inHunk && !metadata) {
+                if (line.startsWith('-') || line.startsWith(' '))
+                    oldRemaining -= 1
+                if (line.startsWith('+') || line.startsWith(' '))
+                    newRemaining -= 1
+                inHunk = oldRemaining > 0 || newRemaining > 0
+            }
 
             return `<span class="mdx-code-diff-line mdx-code-diff-line--${kind}">${escapeHtml(line)}</span>`
         })
