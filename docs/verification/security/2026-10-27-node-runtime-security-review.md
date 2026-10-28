@@ -16,8 +16,9 @@
 ```bash
 mise exec -- node -p 'JSON.stringify({node:process.version,openssl:process.versions.openssl,brotli:process.versions.brotli,undici:process.versions.undici})'
 mise exec -- node docs/examples/node-runtime-security/safe-brotli-probe.mts
-gh run view 40352593284 --repo IMHOJEONG/web-tech --log > /private/tmp/node-security-main-ci.log
-rg 'Found in cache|node: v24\.' /private/tmp/node-security-main-ci.log
+ci_log="$(mktemp "${TMPDIR:-/tmp}/node-security-main-ci.XXXXXX")"
+gh run view 40352593284 --repo IMHOJEONG/web-tech --log > "$ci_log"
+rg 'Found in cache|node: v24\.' "$ci_log"
 ```
 
 NAS 실행 버전은 사용자가 기존 배포 checkout에서 다음 읽기 전용 명령으로 확인할 수 있다. `.env.nas` 내용이나 인증 헤더를 출력하지 않는다. 이 명령은 이번 조사에서 NAS에 실행하지 않았다.

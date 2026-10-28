@@ -1,7 +1,5 @@
 # 2026-10 작업 기록
 
-- [10-27 Node 런타임 보안 선행 조사](2026-10-27-node-runtime-security-review.md): 패치 이전 관측과 정상 Brotli 진단 예제, 10-28 별도 게시 준비.
-
 - [10-28 Node 보안 PR 병합·운영 확인](2026-10-28-node24-security-merge.md): 공식 squash 사전검사·리뷰 재요청·NAS 이미지 선택과 교체 순서 회귀, 필터 보존.
 
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.md): main 별도 브랜치·필터 보존·CI gate·두 backend digest pin·회귀.
@@ -49,6 +47,8 @@
 - [10-22 squash 최종 메시지 사전검사](2026-10-22-squash-merge-preflight.md)
 
 - [10-22 pnpm12 툴체인과 서명 유지](2026-10-22-pnpm12-toolchain.md)
+
+- [10-27 Node 런타임 보안 선행 조사](2026-10-27-node-runtime-security-review.md): 패치 이전 관측과 정상 Brotli 진단 예제, 10-28 별도 게시 준비.
 
 - [10-22 KAN-22 CI 증거 보관·이동 계측](2026-10-22-navigation-evidence-retention.md)
 

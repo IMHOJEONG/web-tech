@@ -1,9 +1,5 @@
 # 검증 원본 증거
 
-- [10-28 정상 Brotli 재검증](2026-10-28-node-brotli-safe-probe.json): [선행 조사](../security/2026-10-27-node-runtime-security-review.md)의 후속. 패치된 Node 24.22.1에서 처리 순서 확인, 악용 검증 아님.
-
-- [10-27 Node 런타임 보안 조사](2026-10-27-node-runtime-security-review.json): [선행 조사](../security/2026-10-27-node-runtime-security-review.md)의 당시 버전·소스 경로. 실행 진단기는 [예제](../../examples/node-runtime-security/README.md)로 분리.
-
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.json): [보고서](../security/2026-10-27-node24-security-patch.md). 버전 경계·회귀·로컬 이미지 digest/gate hash·원본 15파일 보존·미배포 구분.
 
 - [10-27 검색/응답 제한 PR 결합](2026-10-27-search-response-pr-integration.json): [보고서](../integration/2026-10-27-search-response-pr-integration.md). #64 공식 squash·실제 main/배포 조회·충돌 보존·검색 어댑터 전후·소스9blob·production162개.
@@ -27,6 +23,10 @@
 
 - [10-25 나머지 보안 경고 감사·그래프](2026-10-25-remaining-advisories.json): [보고서](../security/2026-10-25-remaining-advisories.md). main 감사13→3·대상10건 제거·패치 전후 회귀, Next PR #60과 분리·운영 미배포.
 - [10-25 Next 패치 audit·그래프 범위](2026-10-25-next-critical-audit.json), [초기 E2E 실패·종료 trace](2026-10-25-next-e2e-before-compatibility.json): [보안 검증](../security/2026-10-25-next-critical.md). Critical 0·잔여 10건과 144/154 초기 결과를 보존하며 로컬 실행·미배포다.
+
+- [10-28 정상 Brotli 재검증](2026-10-28-node-brotli-safe-probe.json): [선행 조사](../security/2026-10-27-node-runtime-security-review.md)의 후속. 패치된 Node 24.22.1에서 처리 순서 확인, 악용 검증 아님.
+
+- [10-27 Node 런타임 보안 조사](2026-10-27-node-runtime-security-review.json): [선행 조사](../security/2026-10-27-node-runtime-security-review.md)의 당시 버전·소스 경로. 실행 진단기는 [예제](../../examples/node-runtime-security/README.md)로 분리.
 
 - [10-24 명시 main 그래프 재현](2026-10-24T12-22-01-870Z-viteplus-lockfile-impact.json), [동일 baseline 소비자 대조](2026-10-24T12-22-21-670Z-viteplus-consumer-control.json), [CLI 정리 실패](2026-10-24T12-22-04-534Z-vuln-radar-viteplus.json), [CLI 재실행 성공](2026-10-24T12-23-21-834Z-vuln-radar-viteplus.json): [PR #59 후속 검증](../integration/2026-10-24-pr59-baseline-fixes.md). 실제 비밀값·운영 데이터·Railway 배포 없음.
 
