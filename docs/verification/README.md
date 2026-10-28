@@ -1,6 +1,6 @@
 # 검증 보고서
 
-- [10-27 스켈레톤 런타임 경합](resilience/2026-10-27-skeleton-runtime-isolation.md): live DOM 교체와 hydration 충돌 재현·별도 측정 페이지, 기존 검사 기준 유지.
+- [10-27 Node 24 보안 patch·CI·Docker](security/2026-10-27-node24-security-patch.md): main 기반 격리·pin/floor·amd64 이미지와 실제 Node·앱 회귀. 운영 미배포.
 
 - [10-27 검색·응답 제한/Content-Type 결합](integration/2026-10-27-search-response-pr-integration.md): PR #64 병합·HTML 헤더의 budget 이후 설정·상한/JSON 오류 결합·원래 미커밋 보존, 이후 CI/배포는 별도 기록.
 
@@ -61,6 +61,8 @@
 - [10-19 PR #40 CI 시간 초과 조사](cache/2026-10-19-pr40-ci-timeout.md): 단계별 시간 비교, job 예산 분리와 다크 테마 검사 race 보완. 수정 후 원격 CI는 미검증.
 
 - [10-19 페이지별 스켈레톤 로컬 검증](accessibility/2026-10-19-page-skeletons-local.md): 실제 서버 골격·완성 화면의 기하 비교와 검색·피드 회귀. 운영 CLS는 미검증.
+
+- [10-27 스켈레톤 런타임 경합](resilience/2026-10-27-skeleton-runtime-isolation.md): live DOM 교체와 hydration 충돌 재현·별도 측정 페이지, 기존 검사 기준 유지.
 
 - [10-19 문서 목록 우선 배치 로컬 검증](accessibility/2026-10-19-docs-index-order-local.md): 목록 위치·선택 해제·검색/페이지 이동 회귀, 69개와 재검사 12개·화면 26조건 통과. 공개 배포 미검증.
 

@@ -1,0 +1,22 @@
+{
+  "checkedOn": "2026-10-28",
+  "pr": 67,
+  "originalHead": "9923d815fb48220b3c95f01784c6a452567e4470",
+  "integratedMain": "e2126a40c02694d968f62ce0e236ec0945a57d7b",
+  "node": "24.22.1",
+  "pnpm": "12.14.0",
+  "command": "DOCS_E2E_PORT=3038 mise exec -- pnpm --filter docs exec playwright test e2e/page-skeletons.spec.ts e2e/skeleton-snapshot.spec.ts --workers=2 --retries=0",
+  "result": {
+    "passed": 75,
+    "failed": 0,
+    "skipped": 0,
+    "retries": 0
+  },
+  "checks": {
+    "appTypecheck": "passed",
+    "changedFourFilesEslint": "passed",
+    "testSourceComparedToOriginalHead": "unchanged"
+  },
+  "mergeResolution": "Three documentation indexes only; preserve both sides and group related evidence. Main reference is not modified.",
+  "limits": "Chromium emulation only; not production CLS, all hydration failures, real-device or deployment verification. Existing uncommitted files remain in original worktrees."
+}

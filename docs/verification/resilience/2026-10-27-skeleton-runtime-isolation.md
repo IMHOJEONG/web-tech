@@ -68,6 +68,12 @@ DOCS_E2E_PORT=3029 DOCS_SKELETON_CPU_RATE=6 mise exec -- pnpm --filter docs exec
 
 ## 관련 문서
 
+### 2026-10-28 최신 main 통합 재검증
+
+사용자의 잔여 PR 정리 요청으로 기존 PR #67에 main `e2126a40`을 통합할 준비를 했다. 원본 dirty 작업 트리는 건드리지 않고 별도 준비 브랜치에서 목차 3곳의 충돌만 양쪽 보존으로 해결했다. 스켈레톤 테스트 4파일은 원래 `9923d815`와 같고, 다른 미커밋 필터 소스는 포함하지 않았다.
+
+Node 24.22.1에서 모바일·태블릿·데스크톱, 라이트/다크 기하와 격리 두 spec이 **75 통과·실패/skip/retry 0**이었다. 앱 타입 검사·변경 파일 ESLint도 통과했다. [실행 명령·결과](../artifacts/2026-10-28-skeleton-main-recheck.json)는 앞선 10-27 원본을 대체하지 않는다. 원격 CI·실기기·Production/CLS 검증과 main 병합은 별도다.
+
 - [그림으로 보는 hydration과 DOM 소유권](../../knowledge/docs-app/hydration-readiness-and-dom-ownership.md): 화면 표시/폰트/React 준비의 차이와 일반 원인·확인 사실 구분.
 
 - [로딩 정책](../../architecture/docs-loading-ux-policy.md)

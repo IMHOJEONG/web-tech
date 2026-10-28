@@ -1,7 +1,6 @@
 # 검증 원본 증거
 
-- [10-27 스켈레톤 런타임 격리](2026-10-27-skeleton-runtime-isolation.json): [보고서](../resilience/2026-10-27-skeleton-runtime-isolation.md). 수정 전 실패·반복 검사·기하 기준과 한계.
-- [10-27 live DOM 방식의 진단 패치](2026-10-27-skeleton-live-dom-diagnostic.patch): 같은 보고서의 별도 worktree 재현에 사용한다. 운영 코드/기준을 변경하지 않는다.
+- [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.json): [보고서](../security/2026-10-27-node24-security-patch.md). 버전 경계·회귀·로컬 이미지 digest/gate hash·원본 15파일 보존·미배포 구분.
 
 - [10-27 검색/응답 제한 PR 결합](2026-10-27-search-response-pr-integration.json): [보고서](../integration/2026-10-27-search-response-pr-integration.md). #64 공식 squash·실제 main/배포 조회·충돌 보존·검색 어댑터 전후·소스9blob·production162개.
 
@@ -82,6 +81,11 @@
 - 최종 화면: [1280px](2026-10-19T14-01-56-387Z-vuln-radar-feed-1280.png), [390px](2026-10-19T14-01-56-387Z-vuln-radar-feed-390.png). 이전 화면: [1280px](2026-10-19T13-54-02-394Z-vuln-radar-feed-1280.png), [390px](2026-10-19T13-54-02-394Z-vuln-radar-feed-390.png). 모두 합성 데이터만 표시.
 
 - [10-19 페이지별 스켈레톤 로컬 측정](2026-10-19-page-skeletons-local.json): [검증 보고서](../accessibility/2026-10-19-page-skeletons-local.md). 서버 골격 66표본의 기하·모션·넘침과 검사 시도별 결과. production CLS와 구분한다.
+
+- [10-27 스켈레톤 런타임 격리](2026-10-27-skeleton-runtime-isolation.json): [보고서](../resilience/2026-10-27-skeleton-runtime-isolation.md). 수정 전 실패·반복 검사·기하 기준과 한계.
+- [10-27 live DOM 방식의 진단 패치](2026-10-27-skeleton-live-dom-diagnostic.patch): 같은 보고서의 별도 worktree 재현에 사용한다. 운영 코드/기준을 변경하지 않는다.
+
+- [10-28 스켈레톤 main 통합 재검증](2026-10-28-skeleton-main-recheck.json): [보고서](../resilience/2026-10-27-skeleton-runtime-isolation.md). 테스트 원본 동일·75통과/retry0·목차 충돌만 해소, main 미병합.
   - 캡처: [모바일 목록](2026-10-19-skeleton-docs-mobile-light.png), [모바일 UI/UX](2026-10-19-skeleton-uiux-mobile-light.png), [데스크톱 피드](2026-10-19-skeleton-feed-desktop-dark.png).
 
 - [10-19 문서 목록 순서 로컬 측정](2026-10-19-docs-index-order-local.json): [검증 보고서](../accessibility/2026-10-19-docs-index-order-local.md). 기본·검색의 네 대표 화면과 추가 조건·검사 요약. 캡처는 같은 보고서에 연결했다.
