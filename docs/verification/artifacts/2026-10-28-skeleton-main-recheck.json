@@ -18,5 +18,11 @@
     "testSourceComparedToOriginalHead": "unchanged"
   },
   "mergeResolution": "Three documentation indexes only; preserve both sides and group related evidence. Main reference is not modified.",
-  "limits": "Chromium emulation only; not production CLS, all hydration failures, real-device or deployment verification. Existing uncommitted files remain in original worktrees."
+  "limits": "Chromium emulation only; not production CLS, all hydration failures, real-device or deployment verification. Existing uncommitted files remain in original worktrees.",
+  "reviewProcedureChecks": {
+    "bashSyntaxBlocks": 2,
+    "worktreeSetupFailure": { "exit": 17, "installOrTestRan": false },
+    "changeDirectoryFailure": { "exit": 23, "installOrTestRan": false },
+    "scope": "Controlled shell function stubs only; no real worktree creation or baseline install/test rerun."
+  }
 }

@@ -3,7 +3,7 @@
 ## 대상과 조건
 
 - 날짜: 2026-10-27 Asia/Seoul. [KAN-40](https://web-tech-service.atlassian.net/browse/KAN-40).
-- 기준: main `e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e`, 별도 `codex/docs-skeleton-stability-20261027`의 로컬 미커밋 보완. 기존 NAS/H1/대비 작업은 원래 작업 트리에 보존했다.
+- 기준: main `e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e`, 별도 `codex/docs-skeleton-stability-20261027`에서 10-27 실험 당시의 로컬 미커밋 보완. 이후 저장소 커밋·main 통합 준비는 아래 후속 기록에서 구분한다. 기존 NAS/H1/대비 작업은 원래 작업 트리에 보존했다.
 - 원격 관측: [main CI 40352593284 desktop](https://github.com/IMHOJEONG/web-tech/actions/runs/40352593284/job/121676369322)의 light `/feed`·`/mobile` 2 flaky. 각각 주입한 pending을 기다리는 `evaluate`와 비어 있지 않은 상태 안내 검사에서 요소가 사라졌다. workflow는 재시도 후 성공했다.
 - 로컬: Node 24.12.0·pnpm 12.14.0·Playwright 1.62.1·Next 16.4.3 development, 원격 목록 비활성화, loopback 3027. CPU 6배 지연은 DevTools의 인위적인 스케줄링 실험이며 NAS/Production 성능 측정이 아니다.
 
@@ -21,15 +21,23 @@ DOCS_E2E_PORT=3027 DOCS_SKELETON_CPU_RATE=6 mise exec -- pnpm --filter docs exec
 수정 전 방식의 진단을 반복하려면 별도 디렉터리에서 기준 커밋과 [진단 패치](../artifacts/2026-10-27-skeleton-live-dom-diagnostic.patch)를 사용한다. 원본 작업 트리를 되돌리지 않는다. 저장소 루트에서 시작하며 아래 3029 포트를 비워둔다.
 
 ```bash
-SOURCE_ROOT="$PWD"
-git worktree add --detach /private/tmp/web-tech-skeleton-baseline e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e
-git -C /private/tmp/web-tech-skeleton-baseline apply --unidiff-zero "$SOURCE_ROOT/docs/verification/artifacts/2026-10-27-skeleton-live-dom-diagnostic.patch"
-cd /private/tmp/web-tech-skeleton-baseline
-mise exec -- pnpm install --frozen-lockfile --ignore-scripts
-DOCS_E2E_PORT=3029 DOCS_SKELETON_CPU_RATE=6 mise exec -- pnpm --filter docs exec playwright test e2e/page-skeletons.spec.ts --project=chromium-desktop --repeat-each=3 --workers=2 --retries=0
+(
+  set -eu
+  SOURCE_ROOT="$(git rev-parse --show-toplevel)"
+  TEMP_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/web-tech-skeleton-baseline.XXXXXX")"
+  BASELINE="$TEMP_ROOT/worktree"
+  printf '진단 worktree: %s\n' "$BASELINE"
+  git worktree add --detach "$BASELINE" e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e
+  git -C "$BASELINE" apply --unidiff-zero "$SOURCE_ROOT/docs/verification/artifacts/2026-10-27-skeleton-live-dom-diagnostic.patch"
+  cd "$BASELINE"
+  mise exec -- pnpm install --frozen-lockfile --ignore-scripts
+  DOCS_E2E_PORT=3029 DOCS_SKELETON_CPU_RATE=6 mise exec -- pnpm --filter docs exec playwright test e2e/page-skeletons.spec.ts --project=chromium-desktop --repeat-each=3 --workers=2 --retries=0
+)
 ```
 
 진단 패치는 첫 import만 바꾸는 0-context hunk이므로 `--unidiff-zero`가 필요하다. e8ab3bd의 임시 worktree에서 이 옵션을 포함한 `git apply --check`를 통과했다. 정확히 7건의 실패를 보장하는 재현기가 아니라 스케줄링 경합을 관측하는 반복 실험이다.
+
+괄호 안의 `set -eu`는 저장소 조회·임시 디렉터리·worktree 생성·패치·이동 중 실패 시 설치/테스트 전에 중단한다. 부모 셸의 디렉터리·옵션은 유지한다. 진단 디렉터리는 결과 확인을 위해 보존하며 자동 삭제하지 않는다.
 
 ## 결과와 증거
 
