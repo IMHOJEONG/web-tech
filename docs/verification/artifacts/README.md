@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-28 diff 코드 블록](2026-10-28-diff-code-block.json): [검증](../accessibility/2026-10-28-diff-code-block.md)의 조건·실행 결과·중간 실패, 미커밋.
+
 - [10-28 PR #68 보류](2026-10-28-pr68-merge-hold.json) · [재개·병합 후](2026-10-28-pr68-postmerge.json): [보안 패치 보고서](../security/2026-10-27-node24-security-patch.md). 취소·재시도와 main CI/게시/배포 분리, NAS 교체 미확인.
 
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.json): [보고서](../security/2026-10-27-node24-security-patch.md). 버전 경계·회귀·로컬 이미지 digest/gate hash·원본 15파일 보존·미배포 구분.

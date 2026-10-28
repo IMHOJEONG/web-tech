@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-28 diff 코드 블록 표시](2026-10-28-diff-code-block.md): 공통 행 하이라이터·언어 보존·로컬/원격/모바일 복사·접기 회귀, 로컬-only.
+
 - [10-28 Node 보안 PR 병합·운영 확인](2026-10-28-node24-security-merge.md): 보류·재개·공식 squash·main CI/이미지 게시/배포 증거. NAS 교체·flaky·rollback 후속 분리, 필터 보존.
 
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.md): main 별도 브랜치·필터 보존·CI gate·두 backend digest pin·회귀.
