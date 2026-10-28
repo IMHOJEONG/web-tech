@@ -97,3 +97,18 @@ test('code text extraction decodes named, decimal, hexadecimal, and double-encod
         '<main><span><strong><em>'
     )
 })
+
+test('code whitespace preservation is opt-in and retains sanitization and LF normalization', () => {
+    const source = ' +context\r\n<script>bad()</script>\r\n \r\n'
+    assert.equal(stripHtmlToCodeText(source), '+context')
+    assert.equal(
+        stripHtmlToCodeText(source, { preserveWhitespace: true }),
+        ' +context\n\n \n'
+    )
+    assert.equal(
+        stripHtmlToCodeText('&lt;strong&gt;\r\n ', {
+            preserveWhitespace: true,
+        }),
+        '<strong>\n '
+    )
+})

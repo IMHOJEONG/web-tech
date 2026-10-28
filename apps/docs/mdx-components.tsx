@@ -9,7 +9,10 @@ import {
     stripCalloutMarkerFromNode,
 } from '~/feature/callout/model/react-callout'
 import { getCalloutLabel } from '~/feature/callout/model/callout'
-import { highlightCode } from '~/feature/code-block/lib/highlight-code'
+import {
+    highlightCode,
+    isDiffLanguage,
+} from '~/feature/code-block/lib/highlight-code'
 import { CodeBlockFrame } from '~/feature/code-block/ui/code-block-frame'
 import { slugifyHeading } from '~/lib/slugify-heading'
 
@@ -148,7 +151,7 @@ export const components = {
         const code = getCodeText(children)
         const language = getCodeLanguage(children)
 
-        if (className?.includes('shiki')) {
+        if (className?.includes('shiki') && !isDiffLanguage(language)) {
             return (
                 <CodeBlockFrame code={code} language={language}>
                     <pre {...props} className={className}>
@@ -160,7 +163,13 @@ export const components = {
 
         return (
             <CodeBlockFrame code={code} language={language}>
-                <pre {...props} className={cn('mdx-code-block', commonCss)}>
+                <pre
+                    {...props}
+                    className={cn('mdx-code-block', commonCss)}
+                    style={
+                        className?.includes('shiki') ? undefined : props.style
+                    }
+                >
                     <code
                         className="mdx-code-block__code"
                         dangerouslySetInnerHTML={{

@@ -132,9 +132,13 @@ export function stripHtmlToText(content: string) {
         .trim()
 }
 
-export function stripHtmlToCodeText(content: string) {
-    return extractSafeText(content)
+export function stripHtmlToCodeText(
+    content: string,
+    options: { preserveWhitespace?: boolean } = {}
+) {
+    const normalized = extractSafeText(content)
         .replace(/\u00a0/g, ' ')
         .replace(/\r\n?/g, '\n')
-        .trim()
+
+    return options.preserveWhitespace ? normalized : normalized.trim()
 }
