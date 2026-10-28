@@ -4,7 +4,10 @@ import {
     getCalloutVariantFromText,
     type CalloutVariant,
 } from '../../../feature/callout/model/callout.ts'
-import { highlightCode } from '../../../feature/code-block/lib/highlight-code.ts'
+import {
+    highlightCode,
+    isDiffLanguage,
+} from '../../../feature/code-block/lib/highlight-code.ts'
 import {
     getCodeDisclosure,
     getCodeDisclosureSummary,
@@ -26,8 +29,10 @@ function toPlainText(value: string) {
     return normalizePlainText(stripHtmlToText(value))
 }
 
-function toCodeText(value: string) {
-    return stripHtmlToCodeText(value)
+function toCodeText(value: string, language: string) {
+    return stripHtmlToCodeText(value, {
+        preserveWhitespace: isDiffLanguage(language),
+    })
 }
 
 function escapeAttribute(value: string) {
@@ -73,7 +78,7 @@ function normalizeRemoteCodeBlocks(content: string) {
                 `${preAttributes} ${codeAttributes}`
             )
             const normalizedLanguage = normalizeCodeLanguage(language) || 'code'
-            const code = toCodeText(innerHtml)
+            const code = toCodeText(innerHtml, normalizedLanguage)
 
             const highlightedCode = highlightCode(code, normalizedLanguage)
             const languageLabel = escapeAttribute(
