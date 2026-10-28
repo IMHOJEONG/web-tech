@@ -1,5 +1,9 @@
 # 검증 원본 증거
 
+- [10-28 정상 Brotli 재검증](2026-10-28-node-brotli-safe-probe.json): [선행 조사](../security/2026-10-27-node-runtime-security-review.md)의 후속. 패치된 Node 24.22.1에서 처리 순서 확인, 악용 검증 아님.
+
+- [10-27 Node 런타임 보안 조사](2026-10-27-node-runtime-security-review.json): [선행 조사](../security/2026-10-27-node-runtime-security-review.md)의 당시 버전·소스 경로. 실행 진단기는 [예제](../../examples/node-runtime-security/README.md)로 분리.
+
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.json): [보고서](../security/2026-10-27-node24-security-patch.md). 버전 경계·회귀·로컬 이미지 digest/gate hash·원본 15파일 보존·미배포 구분.
 
 - [10-27 검색/응답 제한 PR 결합](2026-10-27-search-response-pr-integration.json): [보고서](../integration/2026-10-27-search-response-pr-integration.md). #64 공식 squash·실제 main/배포 조회·충돌 보존·검색 어댑터 전후·소스9blob·production162개.

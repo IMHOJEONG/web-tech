@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-27 Node 런타임 보안 선행 조사](security/2026-10-27-node-runtime-security-review.md): 패치 이전의 관측·정상 Brotli 진단, 후속 PR #68과 시점 구분.
+
 - [10-27 Node 24 보안 patch·CI·Docker](security/2026-10-27-node24-security-patch.md): main 기반 격리·pin/floor·amd64 이미지와 실제 Node·앱 회귀. 운영 미배포.
 
 - [10-27 검색·응답 제한/Content-Type 결합](integration/2026-10-27-search-response-pr-integration.md): PR #64 병합·HTML 헤더의 budget 이후 설정·상한/JSON 오류 결합·원래 미커밋 보존, 이후 CI/배포는 별도 기록.
