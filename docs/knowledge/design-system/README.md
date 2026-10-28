@@ -22,7 +22,7 @@
 - content density 기준 breakpoint: `lg`
 - 코드 표면은 라이트/다크 모두에서 직접 대비를 확인
 - 원격 HTML은 필요한 경우 프론트에서 후처리한다.
-- 코드 블록은 현재 Shiki 기반을 기본 전제로 본다.
+- 일반 상세의 코드 표면은 경량 하이라이터를 사용하며, Shiki 경로도 함께 지원한다. diff/patch는 공통 행 하이라이터로 표시하고 Shiki의 언어 정보 제거·span 색상 강제 덮어쓰기를 주의한다.
 - 원격 HTML 이미지 캡션은 `figure/figcaption`으로 정규화한다.
 - 문서 읽기 화면은 과한 overlay보다 단단한 background/surface 구성이 우선이다.
 
@@ -62,6 +62,9 @@
     를 같은 파일에서 섞어 쓰는지 먼저 점검
 
 ## 먼저 보면 좋은 문서
+
+- [diff/patch 코드 작성 규칙](../../architecture/docs-content-authoring-markup-policy.md#코드-변경분-표시)
+- [diff 코드 블록 검증](../../verification/accessibility/2026-10-28-diff-code-block.md)
 
 - `docs/architecture/docs-design-token-usage-policy.md`
 - `docs/architecture/docs-responsive-policy.md`
