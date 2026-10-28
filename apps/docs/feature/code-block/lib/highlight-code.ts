@@ -210,8 +210,65 @@ function highlightCss(code: string) {
     return highlighted
 }
 
+export function isDiffLanguage(language: string) {
+    return ['diff', 'patch'].includes(language.trim().toLowerCase())
+}
+
+function highlightDiff(code: string) {
+    let inHunk = false
+    let oldRemaining = 0
+    let newRemaining = 0
+    // Keep separators outside spans so textContent and clipboard retain the source.
+    return code
+        .split(/(\r\n|\n|\r)/)
+        .map((line, index) => {
+            if (index % 2 || !line) return line
+
+            if (/^diff(?: |$)/.test(line)) inHunk = false
+            const hunkHeader = line.startsWith('@@')
+            const metadata =
+                hunkHeader ||
+                /^\\ No newline at end of file/.test(line) ||
+                (!inHunk &&
+                    /^(?:diff(?: |$)|index |---(?:[ \t]|$)|\+\+\+(?:[ \t]|$))/.test(
+                        line
+                    ))
+            if (hunkHeader) {
+                const counts = line.match(
+                    /^@@ -\d+(?:,(\d+))? \+\d+(?:,(\d+))? @@/
+                )
+                oldRemaining = counts ? Number(counts[1] ?? 1) : Infinity
+                newRemaining = counts ? Number(counts[2] ?? 1) : Infinity
+                inHunk = oldRemaining > 0 || newRemaining > 0
+            }
+            const kind = metadata
+                ? 'meta'
+                : line.startsWith('+')
+                  ? 'added'
+                  : line.startsWith('-')
+                    ? 'removed'
+                    : 'context'
+
+            // Unified patches may start the next file without a diff --git line.
+            if (inHunk && !metadata) {
+                if (line.startsWith('-') || line.startsWith(' '))
+                    oldRemaining -= 1
+                if (line.startsWith('+') || line.startsWith(' '))
+                    newRemaining -= 1
+                inHunk = oldRemaining > 0 || newRemaining > 0
+            }
+
+            return `<span class="mdx-code-diff-line mdx-code-diff-line--${kind}">${escapeHtml(line)}</span>`
+        })
+        .join('')
+}
+
 export function highlightCode(code: string, language: string) {
-    const normalizedLanguage = language.toLowerCase()
+    const normalizedLanguage = language.trim().toLowerCase()
+
+    if (isDiffLanguage(normalizedLanguage)) {
+        return highlightDiff(code)
+    }
 
     if (['html', 'mdx', 'xml'].includes(normalizedLanguage)) {
         return highlightHtml(code)
