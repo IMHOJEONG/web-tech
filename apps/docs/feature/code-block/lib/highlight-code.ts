@@ -210,8 +210,40 @@ function highlightCss(code: string) {
     return highlighted
 }
 
+export function isDiffLanguage(language: string) {
+    return ['diff', 'patch'].includes(language.trim().toLowerCase())
+}
+
+function highlightDiff(code: string) {
+    // Keep separators outside spans so textContent and clipboard retain the source.
+    return code
+        .split(/(\r\n|\n|\r)/)
+        .map((line, index) => {
+            if (index % 2 || !line) return line
+
+            const metadata =
+                /^(?:diff(?: |$)|index |---(?:[ \t]|$)|\+\+\+(?:[ \t]|$)|@@|\\ No newline at end of file)/.test(
+                    line
+                )
+            const kind = metadata
+                ? 'meta'
+                : line.startsWith('+')
+                  ? 'added'
+                  : line.startsWith('-')
+                    ? 'removed'
+                    : 'context'
+
+            return `<span class="mdx-code-diff-line mdx-code-diff-line--${kind}">${escapeHtml(line)}</span>`
+        })
+        .join('')
+}
+
 export function highlightCode(code: string, language: string) {
-    const normalizedLanguage = language.toLowerCase()
+    const normalizedLanguage = language.trim().toLowerCase()
+
+    if (isDiffLanguage(normalizedLanguage)) {
+        return highlightDiff(code)
+    }
 
     if (['html', 'mdx', 'xml'].includes(normalizedLanguage)) {
         return highlightHtml(code)

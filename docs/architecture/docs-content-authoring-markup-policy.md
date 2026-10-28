@@ -131,6 +131,23 @@ pnpm --filter docs test:content
 
 본문을 고치면 백엔드는 다음 요청에서 다시 읽고 검사한다. Vercel에 이미 캐시된 목록·상세를 소급 삭제하지는 않으므로 기존 인증된 revalidation 절차도 수행해야 한다. 이번 작업에서 NAS 파일·컨테이너·운영 캐시를 변경하지 않았다.
 
+## 코드 변경분 표시
+
+추가·삭제를 비교하는 예제는 펜스 언어를 `diff` 또는 `patch`로 지정한다. `c`·`tsx`·언어 없는 블록의 연산자를 diff로 자동 추측하지 않는다.
+
+````markdown
+```diff
+if (max_block_type <= 1) {
+-    return BROTLI_FALSE;
++    return BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH;
+}
+```
+````
+
+추가는 초록색, 삭제는 붉은색의 행 배경·왼쪽 경계선으로 구분하며 원문의 `+`·`-`도 유지한다. `--- a/file`, `+++ b/file`, `@@` 등의 patch 메타데이터는 변경 행과 다르게 표시한다. 원문 표시는 모두 HTML escape 후 생성하고, 전체 복사에는 표시용 문구나 가상 기호를 추가하지 않는다.
+
+로컬 MDX와 원격 HTML은 같은 경량 행 하이라이터를 사용한다. Shiki를 사용하는 로컬 경로에서도 언어 클래스를 보존해 전체·접힌 미리보기를 동일하게 처리한다. 원격 서버가 언어를 제거한 경우에는 `language-diff` 클래스 또는 `data-language="diff"`를 제공해야 하며 코드 내용만 보고 추측하지 않는다. 기능은 프론트 로컬 작업 트리 반영 상태이며 운영 배포는 별도다.
+
 ## Review Checklist
 
 1. 공개 상태가 frontmatter `status`에만 표현되어 있는지 확인한다.

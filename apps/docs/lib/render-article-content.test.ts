@@ -42,6 +42,20 @@ test('remote title detection preserves h1 but excludes escaped code', async () =
 })
 
 for (const codeHighlight of [false, true]) {
+    test(`diff language survives the real MDX pipeline with codeHighlight=${codeHighlight}`, async () => {
+        const rendered = await renderArticleContent(
+            { contentFormat: 'mdx', content: '```diff\n- old\n+ new\n```' },
+            { codeHighlight }
+        )
+        assert.equal(rendered.mode, 'mdx')
+        const markup = renderToStaticMarkup(
+            createElement(Fragment, null, rendered.content)
+        )
+        assert.match(markup, /<code class="language-diff">/)
+        assert.match(markup, /- old/)
+        assert.match(markup, /\+ new/)
+    })
+
     test(`local GFM tables render with codeHighlight=${codeHighlight}`, async () => {
         const rendered = await renderArticleContent(
             {

@@ -4,4 +4,12 @@ export const shikiRehypeOptions = {
         light: 'github-dark',
         dark: 'github-dark',
     },
+    transformers: [
+        {
+            name: 'preserve-code-language',
+            code(node) {
+                this.addClassToHast(node, `language-${this.options.lang}`)
+            },
+        },
+    ],
 }
