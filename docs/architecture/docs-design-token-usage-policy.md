@@ -13,7 +13,7 @@
 
 ## Source Of Truth
 
-디자인 원본 의도는 [apps/docs/.stitch/design.md](/Users/coder/Desktop/project/web-tech/apps/docs/.stitch/design.md:1)에 있고, 실제 런타임 토큰은 [packages/tailwind-config/shared-styles.css](/Users/coder/Desktop/project/web-tech/packages/tailwind-config/shared-styles.css:443)에 있다.
+디자인 원본 의도는 [design.md](../../apps/docs/.stitch/design.md)에 있고, 실제 런타임 토큰은 [shared-styles.css](../../packages/tailwind-config/shared-styles.css)에 있다.
 
 외부 레퍼런스 기반 조정이 필요한 경우에는, 화면 레이아웃을 바로 복제하지 않고 먼저 `shared-styles.css`의 token 계층을 조정한 뒤 shell/component가 그 값을 따르게 한다.
 
@@ -67,12 +67,22 @@
 - primary 기반 bottom border
 - `focus-visible` 시 전체 border + glow
 
+### Primary 대비 기준
+
+2026-10-25 로컬 구현부터 브랜드 주황 `--primary: #f97316`은 유지하고, 그 위의 작은 글자는 라이트·다크 모두 `--primary-foreground: #171717`을 사용한다. 밝은 foreground를 유지하려고 브랜드·링크 색 전체를 바꾸지 않는다. Button 기본 variant, Badge 기본 variant와 링크, 활성 필터·페이지 번호 등 같은 역할의 소비자는 이 토큰을 공유한다.
+
+활성 텍스트는 기본·hover·focus 상태에서 최소4.5:1을 검사한다. primary Button·링크 Badge와 `.ds-button-primary`는 foreground 기반2px 외곽선·3px offset을 제공하고, 강제 색상 모드에서는 시스템 `Highlight`를 사용한다. 기존 반투명 glow만으로 포커스 가시성을 보장하지 않는다. Disabled 상태는 비활성 요소 예외이며 키보드 건너뛰기·비활성 동작을 별도로 검사한다.
+
+검사는 최종 computed style과 투명도 합성을 사용한다. 전환 도중 색상을 최종 상태처럼 판정하지 않으며, 그라데이션·사진 배경을 단색으로 가정해 통과시키지 않는다. 최소 기준을 반올림해 판정하지 않는다. [실제 브라우저 검증](../verification/accessibility/2026-10-25-primary-action-contrast.md)의 범위·한계를 함께 확인한다. 모든 variant나 페이지 전체의 WCAG 적합성을 보장하는 정책은 아니다.
+
 ### 4. Focus Ring
 
 포커스 처리의 기본은 `:focus-visible`이다.
 
 - 카드 링크, 아이콘 버튼, 커스텀 입력 래퍼는 `ds-focus-ring` 사용
 - 자체 컴포넌트 유틸(`ds-card`, `ds-button-*`, `ds-input`)은 내부적으로 동일 glow 기준 사용
+
+Primary 동작에는 위의 명시적 외곽선을 추가로 사용한다. 다른 컴포넌트에 적용된 기존 glow와 별개의 대비 확인 대상이다.
 
 즉, 앞으로 `focus:border-*`, `focus:ring-*`, 임의 shadow를 화면마다 따로 쓰지 않고 `--shadow-glow-primary` 중심으로 맞춘다.
 

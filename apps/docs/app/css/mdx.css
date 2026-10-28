@@ -458,6 +458,8 @@
 .mdx-code-frame {
     position: relative;
     --mdx-code-control-height: 2.75rem;
+    --mdx-code-diff-added: #7ee787;
+    --mdx-code-diff-removed: #ffa198;
     --mdx-code-token-attribute: color-mix(
         in srgb,
         var(--hf-accent-cold) 64%,
@@ -733,6 +735,47 @@ html[lang='en'] .mdx-code-disclosure [data-code-locale='ko'] {
     font-size: inherit;
     line-height: inherit;
     white-space: pre;
+}
+
+.mdx-code-diff-line {
+    display: inline-block;
+    box-sizing: border-box;
+    min-width: 100%;
+    padding-inline: 0.5rem;
+    border-inline-start: 2px solid transparent;
+    vertical-align: top;
+}
+
+.mdx-code-diff-line--added {
+    color: var(--mdx-code-diff-added);
+    border-inline-start-color: currentColor;
+    background: color-mix(in srgb, var(--mdx-code-diff-added) 10%, transparent);
+}
+
+.mdx-code-diff-line--removed {
+    color: var(--mdx-code-diff-removed);
+    border-inline-start-color: currentColor;
+    background: color-mix(
+        in srgb,
+        var(--mdx-code-diff-removed) 10%,
+        transparent
+    );
+}
+
+.mdx-code-diff-line--meta {
+    color: var(--mdx-code-token-attribute);
+    background: rgb(255 255 255 / 4%);
+}
+
+@media (forced-colors: active) {
+    .mdx-code-diff-line--added {
+        border-inline-start-style: double;
+        border-inline-start-width: 3px;
+    }
+
+    .mdx-code-diff-line--removed {
+        border-inline-start-style: dashed;
+    }
 }
 
 .mdx-code-token--comment {

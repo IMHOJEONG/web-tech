@@ -219,8 +219,7 @@ remote renderer는 보안을 위해 raw HTML을 비활성화한다. 이 때문�
 Hard fail:
 
 - `apps/docs/data`, `apps/docs/category` 아래에는 `md`, `mdx` 문서만 둔다.
-- `# h1`은 사용하지 않는다. 페이지 제목은 frontmatter `title`이 담당한다.
-- 첫 heading은 `##` 또는 `###`로 시작한다.
+- 첫 heading이 H4~H6으로 시작하면 실패한다. H1은 아래 Warning 규칙을 따른다.
 - heading level을 한 번에 두 단계 이상 건너뛰지 않는다.
 - 코드 블록은 언어를 명시한다.
 - 코드 블록은 반드시 닫는다.
@@ -230,9 +229,12 @@ Hard fail:
 
 Warning:
 
+- 코드 블록 밖의 본문 H1. frontmatter `title`과 중복될 수 있으므로 H2/H3 시작을 권장하지만, H1만으로 게시를 차단하거나 자동 H2 변환하지 않는다. 첫 heading이 H1이라는 이유로 다시 실패시키지 않는다.
 - published 문서 본문이 비어 있는 경우
 - published 문서에 `TODO`, `FIXME`, `임시`, `테스트용` 같은 placeholder 표현이 남은 경우
 - published 문서 slug가 `test`, `sample`, `todo`, `draft` 같은 임시값인 경우
+
+H1과 다른 hard fail이 함께 있으면 해당 실패를 해결해야 게시할 수 있다. 이 정책을 NAS에도 적용하려면 변경된 공용 패키지가 포함된 새 백엔드 이미지를 배포해야 한다. 기존 이미지의 규칙은 NAS 원문 수정만으로 변경되지 않는다.
 
 ## Local Validation Commands
 

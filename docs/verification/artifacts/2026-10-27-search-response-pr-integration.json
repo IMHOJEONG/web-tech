@@ -1,0 +1,93 @@
+{
+  "checkedOn": "2026-10-27",
+  "timezone": "Asia/Seoul",
+  "state": "local-uncommitted-merge-resolution",
+  "parents": {
+    "search": "f153027b821f0e5c2723a902c78a99ed8b70ca0b",
+    "main": "f8409413ef19520db08a01ae6cac417f3bbcadab"
+  },
+  "pr64": {
+    "number": 64,
+    "head": "363e90a72f20c44e665893419ae8b219610ffe35",
+    "mergeCommit": "f8409413ef19520db08a01ae6cac417f3bbcadab",
+    "mergedAt": "2026-10-26T15:03:31Z",
+    "reviewThreadsUnresolved": 0,
+    "messageSha256": "6d52c3d8acdddea8e6c5964552690767588c47ba042f82c7f6d0d2110908d53e",
+    "productionDeployment": {
+      "id": 7335363298,
+      "state": "success",
+      "environment": "Production – web-tech"
+    },
+    "mainCi": {
+      "id": 40345556499,
+      "lastObserved": "in_progress"
+    }
+  },
+  "sourceBlobs": {
+    "apps/docs-backend/src/modules/content/content.controller.ts": "9fe9c6ad31547b2fad267ff38dd0aa92a6fa4dcb",
+    "apps/docs-backend/src/modules/content/content-html-budget.spec.ts": "cbe3b86df002c2b7497f97664fa7a763b8b5d054",
+    "apps/docs-backend/test/html-budget.e2e-spec.ts": "8a6902c2e4d3e6289cc8a204f50a2951cee84b0f",
+    "apps/docs-backend/test/app.e2e-spec.ts": "638cd7769a2cfbe7a957854cffc1d18220be8988",
+    "apps/docs/lib/content-api.ts": "a2353320799ca9a95dc2b73cbf0edeee285782c1",
+    "apps/docs/lib/remote-body-search.test.ts": "49df8a874000cb1036f2bf90c31476de79c7ba12",
+    "packages/docs-content-contract/src/index.ts": "168d66be6e87c7a3738c26bb26dba8d04458f8bd",
+    "apps/docs-backend/src/modules/content/content.service.ts": "f5ea1926b5345d699127af2c1b0514d2c9feaa76",
+    "apps/docs-backend/src/modules/content/markdown-renderer.service.ts": "e12098886a60c6c0bc95ac6ee157672fb9c21434"
+  },
+  "resolution": [
+    "retain Res/passthrough plus index and HTML budgets",
+    "set HTML type only after render and budget success; keep503 JSON with zero mismatch warnings",
+    "preserve both API contracts and all README entries",
+    "adapt unit Response stub, keep original logger calls in HTTP assertions"
+  ],
+  "adapterFix": {
+    "before": "direct body-only keyword returns0 instead of1",
+    "after": "targeted10 tests pass; raw legacy HTML keyword remains0",
+    "change": "filter searchText instead of empty rendering content",
+    "scope": "legacy helper path, distinct from the main getSearchData path"
+  },
+  "regressions": {
+    "backendUnit": 31,
+    "backendHttp": 55,
+    "docsLibrary": 307,
+    "shared": 28,
+    "repository": 153,
+    "production": {
+      "stats": {
+        "startTime": "2026-10-26T15:13:14.288Z",
+        "duration": 99776.31999999999,
+        "expected": 162,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "count": 162,
+      "errors": 0,
+      "retries": 0,
+      "buildId": "diBgeaKgGvJLrJfNHRxB2",
+      "exitCode": 0
+    }
+  },
+  "initialFailure": {
+    "type": "missing-generated-prerequisite",
+    "message": "TS2307: @web-tech/ui/lib/utils",
+    "resolution": "build shared UI dist from unchanged sources; no rule, lockfile, exports or CI modifications"
+  },
+  "preservation": {
+    "originalWorktreeUntouched": true,
+    "noStashOrForcePush": true,
+    "credentialsOrPrivateDraftsCopied": false
+  },
+  "limitations": [
+    "new PR CI/reviews and final main deployment must be checked on their actual SHAs",
+    "NAS container replacement, live corpus and webhook not performed",
+    "test success does not classify every existing intentional stream/upstream log as harmless"
+  ],
+  "rawResultsLocalOnly": [
+    "/private/tmp/pr65-integrated-backend-20261027.log",
+    "/private/tmp/pr65-integrated-docs-lib-20261027.log",
+    "/private/tmp/pr65-integrated-production-20261027.json",
+    "/private/tmp/pr65-adapter-before-20261027.log",
+    "/private/tmp/pr65-adapter-after-20261027.log"
+  ]
+}

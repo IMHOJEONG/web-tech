@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-26",
+  "timezone": "Asia/Seoul",
+  "base": "c1e2850cbfdf50bd7761729b32d1af5ffe045596",
+  "branch": "codex/docs-remote-body-search-20261026",
+  "state": "local-uncommitted",
+  "sourceBlobs": {
+    "packages/docs-content-contract/src/index.ts": "9be1d363e728f32cd91d9c5b2c4219425301613b",
+    "packages/docs-content-contract/src/index.test.ts": "bd4354661c1f524cabf762ef2756f468c53f985e",
+    "apps/docs-backend/src/modules/content/content.service.ts": "f5ea1926b5345d699127af2c1b0514d2c9feaa76",
+    "apps/docs-backend/src/modules/content/markdown-renderer.service.ts": "e12098886a60c6c0bc95ac6ee157672fb9c21434",
+    "apps/docs-backend/src/modules/content/markdown-renderer.service.spec.ts": "1e5c9f1ab25364a8f557bcf9aa352e93a9f9bec6",
+    "apps/docs-backend/test/app.e2e-spec.ts": "86942132707ee81a964b10d3a8e35d46bf715e88",
+    "apps/docs/lib/document.types.ts": "cd3997bacaef9d169541c97a2a132338df0cc936",
+    "apps/docs/lib/content-api-normalize.ts": "f473900496f141337b6d95edfbefebd98948200a",
+    "apps/docs/lib/get-search-data.ts": "13225e24e995f14c01b89e261db956f31d3ce8ef",
+    "apps/docs/lib/remote-body-search.test.ts": "a8ca6804ff7de7d28707acee649f543c185517a3"
+  },
+  "checks": {
+    "sharedContract": {
+      "passed": 28,
+      "failed": 0
+    },
+    "backendUnit": {
+      "passed": 22,
+      "failed": 0
+    },
+    "backendHttp": {
+      "passed": 40,
+      "failed": 0
+    },
+    "docsLibrary": {
+      "passed": 294,
+      "failed": 0
+    },
+    "repository": {
+      "passed": 153,
+      "failed": 0
+    },
+    "backendBuild": "passed",
+    "sharedEsmCjsBuild": "passed",
+    "docsTypecheck": "passed",
+    "docsNodeTestTypecheck": "passed",
+    "changedDocsEslint": "passed",
+    "backendLint": "passed",
+    "sharedLint": "passed",
+    "documentationWorkingTreeDelta": "passed (read-only, existing validator, index unchanged)",
+    "changedFilePrettier": "passed",
+    "gitDiffCheck": "passed"
+  },
+  "initialFailures": [
+    {
+      "kind": "lint",
+      "reason": "Next no-assign-module-variable warning for test fixture variable module",
+      "resolution": "renamed to bundledModule without changing lint rules"
+    },
+    {
+      "kind": "sandbox",
+      "reason": "repository body-parser fixtures: 2 listen EPERM failures out of 153",
+      "resolution": "same suite passed 153 with local listeners allowed; no assertions or retry rules changed"
+    }
+  ],
+  "observations": {
+    "remoteBodyOnlyMatch": 1,
+    "canonicalDuplicateCount": 1,
+    "staleLocalBodyMatchWithHealthyRemote": 0,
+    "oldApiStaleLocalBodyMatch": 0,
+    "searchRequestCountPerQuery": 1,
+    "searchRequestEndpoint": "/api/posts",
+    "detailRequestsDuringSearch": 0,
+    "localOnlySearchRemoteRequests": 0,
+    "ranking": ["title", "summary", "body"],
+    "unpublishedBodyExcluded": true,
+    "bodyUpdateObservedFromFreshList": true,
+    "bodyToDraftRemovesRemoteMetadata": true,
+    "renderingContentKeptSeparate": true,
+    "previewEscapesMarkup": true
+  },
+  "notPerformed": [
+    "NAS writes or reads",
+    "production credentials or API requests",
+    "webhook invalidation",
+    "Next production build",
+    "browser UI E2E",
+    "remote CI",
+    "commit, push or deployment"
+  ],
+  "next": "Backend image and frontend rollout plus authorized publication/cache verification; byte budget remains separate."
+}

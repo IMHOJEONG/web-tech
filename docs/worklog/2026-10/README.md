@@ -1,5 +1,22 @@
 # 2026-10 작업 기록
 
+- [10-28 diff 코드 블록 표시](2026-10-28-diff-code-block.md): 공통 행 하이라이터·언어 보존·로컬/원격/모바일 복사·접기 회귀, 로컬-only.
+
+- [10-28 Node 보안 PR 병합·운영 확인](2026-10-28-node24-security-merge.md): 공식 squash 사전검사·리뷰 재요청·NAS 이미지 선택과 교체 순서 회귀, 필터 보존.
+
+- [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.md): main 별도 브랜치·필터 보존·CI gate·두 backend digest pin·회귀.
+
+- [10-27 검색·응답 제한 PR 결합](2026-10-27-search-response-pr-integration.md): #64 선병합·기존 미커밋 격리·충돌 보존·동일 head 검증 후 후속 PR/공식 squash.
+
+- [10-26 상세 HTML 응답 제한](2026-10-26-html-response-budget.md): 독립 상수·최종 렌더 크기·스트림 중단·로컬 fallback, ADR-0021·회귀.
+
+- [10-26 검색 목록 byte budget·대규모 비용](2026-10-26-search-payload-budget.md): 양쪽 비절단 거절·경고·로컬 대체, 합성9조건·회귀·ADR-0020, 운영 미배포.
+
+- [10-26 원격 본문 검색 계약과 회귀](2026-10-26-remote-body-search.md): 본문 키워드·웹훅 캐시·실제 폼/Link 검색 동선8개와 전체 production162개 검증.
+
+- [10-26 상세 오류 Content-Type 보완](2026-10-26-content-response-type.md)
+- [10-25 Primary 글자 대비와 브라우저 접근성](2026-10-25-primary-action-contrast.md)
+- [10-25 로컬·원격 본문 H1 경고 전환](2026-10-25-body-h1-warning.md)
 - [10-25 나머지 보안 경고 10건 분리 조치](2026-10-25-remaining-advisories.md)
 - [10-25 Next.js Critical 패치·회귀](2026-10-25-next-critical.md)
 

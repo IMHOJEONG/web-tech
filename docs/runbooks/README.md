@@ -1,6 +1,6 @@
 # 운영 및 재현 절차
 
-- [pnpm 툴체인 업그레이드와 서명 검증](pnpm-toolchain-upgrade.md)
+- [pnpm 툴체인 업그레이드와 서명 검증](pnpm-toolchain-upgrade.md): Node patch pin·보안 floor·Docker base 갱신과 pnpm 서명 검증.
 
 - [블로그 main 배포 운영과 복구](docs-main-production-deployment.md)
 

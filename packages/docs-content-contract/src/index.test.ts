@@ -97,3 +97,46 @@ test("rejects impossible calendar dates and incomplete published metadata", () =
 
   assert.equal(result.success, false);
 });
+
+test("search text is an optional, typed additive field with empty-body compatibility", () => {
+  for (const searchText of [undefined, null, "", "  body-only needle  "]) {
+    const posts = parseRemotePostsPayload({
+      results: [{ slug: "note", title: "Note", searchText }],
+    });
+    assert.ok(posts);
+    assert.equal(
+      posts[0]?.searchText,
+      typeof searchText === "string" ? searchText.trim() : searchText,
+    );
+  }
+  assert.equal(
+    parseRemotePostsPayload({
+      results: [{ slug: "note", title: "Note", searchText: 42 }],
+    }),
+    null,
+  );
+});
+
+test("canonical output preserves search text without requiring it from older producers", () => {
+  const post = {
+    authorName: "Writer",
+    authorRole: "Engineer",
+    date: "2026-10-26",
+    id: "web/note",
+    markdownPath: "web/note",
+    readMinutes: 2,
+    slug: "note",
+    status: "published",
+    summary: "Overview",
+    tags: [],
+    title: "Note",
+    topicLabel: "WEB",
+    updatedAt: "2026-10-26",
+  };
+  for (const searchText of [undefined, "", "searchable body"]) {
+    const parsed = canonicalPostsPayloadSchema.parse({
+      results: [{ ...post, searchText }],
+    });
+    assert.equal(parsed.results[0]?.searchText, searchText);
+  }
+});

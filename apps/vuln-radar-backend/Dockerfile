@@ -6,7 +6,10 @@
 #   docker build -f apps/vuln-radar-backend/Dockerfile .
 # - Railway service root must also point to the repo root if this Dockerfile is used
 
-FROM node:24-bookworm-slim AS base
+FROM node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205 AS base
+
+COPY scripts/check-node-runtime.mts /opt/check-node-runtime.mts
+RUN node /opt/check-node-runtime.mts
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -31,7 +34,10 @@ RUN pnpm install --filter vuln-radar-backend... --frozen-lockfile
 RUN pnpm --filter vuln-radar-backend build
 RUN pnpm --filter vuln-radar-backend deploy --prod --legacy /prod/vuln-radar-backend
 
-FROM node:24-bookworm-slim AS runtime
+FROM node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205 AS runtime
+
+COPY scripts/check-node-runtime.mts /opt/check-node-runtime.mts
+RUN node /opt/check-node-runtime.mts
 
 WORKDIR /app
 

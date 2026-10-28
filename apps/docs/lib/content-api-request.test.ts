@@ -1,12 +1,171 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { inspect } from 'node:util'
+import { gzipSync } from 'node:zlib'
 import {
     ContentApiRequestError,
     readContentApiResponse,
 } from './content-api-request.ts'
 
 const url = 'https://content.example.test/api/posts'
+
+test('byte budget counts decoded UTF-8 chunks and accepts the exact boundary', async () => {
+    const bytes = new TextEncoder().encode('한글😀')
+    for (const maxBytes of [bytes.length, bytes.length - 1]) {
+        let cancelled = false
+        let calls = 0
+        const result = readContentApiResponse(url, {
+            deadline: Date.now() + 1000,
+            maxBytes,
+            fetch: async () => {
+                calls++
+                let offset = 0
+                return new Response(
+                    new ReadableStream<Uint8Array>({
+                        pull(controller) {
+                            if (offset < bytes.length) {
+                                controller.enqueue(
+                                    bytes.slice(offset, ++offset)
+                                )
+                            } else if (maxBytes === bytes.length)
+                                controller.close()
+                        },
+                        cancel() {
+                            cancelled = true
+                        },
+                    })
+                )
+            },
+        })
+        if (maxBytes === bytes.length)
+            assert.equal((await result).text, '한글😀')
+        else {
+            await assert.rejects(result, { kind: 'too-large' })
+            assert.equal(cancelled, true)
+        }
+        assert.equal(calls, 1)
+    }
+})
+
+test('a small gzip transfer still rejects when its decompressed body exceeds the budget', async () => {
+    const text = '한글'.repeat(100)
+    const compressed = Uint8Array.from(gzipSync(text))
+    assert.ok(compressed.byteLength < Buffer.byteLength(text))
+    await assert.rejects(
+        readContentApiResponse(url, {
+            deadline: Date.now() + 1000,
+            maxBytes: Buffer.byteLength(text) - 1,
+            fetch: async () =>
+                new Response(
+                    new Response(compressed).body!.pipeThrough(
+                        new DecompressionStream('gzip')
+                    ),
+                    {
+                        headers: {
+                            'Content-Encoding': 'gzip',
+                            'Content-Length': String(compressed.byteLength),
+                        },
+                    }
+                ),
+        }),
+        { kind: 'too-large' }
+    )
+})
+
+test('missing, invalid, understated and compressed lengths cannot bypass the byte budget', async () => {
+    const headerCases: Record<string, string>[] = [
+        {},
+        { 'Content-Length': 'invalid' },
+        { 'Content-Length': '-1' },
+        { 'Content-Length': '1' },
+        { 'Content-Length': '1', 'Content-Encoding': 'gzip' },
+    ]
+    for (const headers of headerCases) {
+        let cancelled = false
+        await assert.rejects(
+            readContentApiResponse(url, {
+                deadline: Date.now() + 1000,
+                maxBytes: 8,
+                headers: { Authorization: 'Bearer private-fixture' },
+                fetch: async () =>
+                    new Response(
+                        new ReadableStream({
+                            start(controller) {
+                                controller.enqueue(new Uint8Array(9))
+                            },
+                            cancel() {
+                                cancelled = true
+                            },
+                        }),
+                        { headers }
+                    ),
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof ContentApiRequestError)
+                assert.equal(error.kind, 'too-large')
+                assert.doesNotMatch(
+                    inspect(error),
+                    /private-fixture|Authorization/
+                )
+                return true
+            }
+        )
+        assert.equal(cancelled, true)
+    }
+})
+
+test('oversized identity Content-Length rejects before reading and cancels the body', async () => {
+    let cancelled = false
+    await assert.rejects(
+        readContentApiResponse(url, {
+            deadline: Date.now() + 1000,
+            maxBytes: 8,
+            fetch: async () =>
+                new Response(
+                    new ReadableStream({
+                        start() {},
+                        cancel() {
+                            cancelled = true
+                        },
+                    }),
+                    { headers: { 'Content-Length': '9' } }
+                ),
+        }),
+        { kind: 'too-large' }
+    )
+    assert.equal(cancelled, true)
+})
+
+test('encoded lengths are not compared to decoded lengths; invalid budgets never fetch', async () => {
+    assert.equal(
+        (
+            await readContentApiResponse(url, {
+                deadline: Date.now() + 1000,
+                maxBytes: 8,
+                fetch: async () =>
+                    new Response('OK', {
+                        headers: {
+                            'Content-Encoding': 'gzip',
+                            'Content-Length': '99',
+                        },
+                    }),
+            })
+        ).text,
+        'OK'
+    )
+    for (const maxBytes of [0, -1, 1.5, NaN, Infinity]) {
+        await assert.rejects(
+            readContentApiResponse(url, {
+                deadline: Date.now() + 1000,
+                maxBytes,
+                fetch: async () => {
+                    assert.fail('invalid budget must not fetch')
+                },
+            }),
+            RangeError
+        )
+    }
+})
 
 test('network failure never retries and does not expose authentication', async () => {
     let calls = 0

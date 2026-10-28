@@ -29,7 +29,10 @@ for (const body of [
 for (const fence of ["```", "````", "~~~", "~~~~"]) {
   test(`allows comment examples inside ${fence} fences`, () => {
     const body = `## Example\n${fence}html\n<!-- comment -->\n# code\n[!INFO]\n${fence}\n`;
-    assert.deepEqual(getMarkdownBodyStyleIssues(body, published).failures, []);
+    assert.deepEqual(getMarkdownBodyStyleIssues(body, published), {
+      failures: [],
+      warnings: [],
+    });
   });
 }
 
@@ -41,12 +44,51 @@ test("a shorter or different fence does not close an example", () => {
   ]);
 });
 
-test("reports heading, callout and code language errors", () => {
-  assert.deepEqual(getMarkdownBodyStyleIssues("# Title\n#### Skip").failures, [
-    "line 1: h1 is reserved for frontmatter title",
+for (const status of ["published", "draft"]) {
+  test(`body h1 only warns for ${status} content without changing the source`, () => {
+    const body = "# Original title\n## Section\n# Another title\n## Details";
+    assert.deepEqual(getMarkdownBodyStyleIssues(body, { status }), {
+      failures: [],
+      warnings: [
+        "line 1: body h1 may duplicate frontmatter title; prefer h2 or h3",
+        "line 3: body h1 may duplicate frontmatter title; prefer h2 or h3",
+      ],
+    });
+    assert.equal(
+      body,
+      "# Original title\n## Section\n# Another title\n## Details",
+    );
+  });
+}
+
+test("a standalone h1 does not fail the first-heading rule", () => {
+  assert.deepEqual(getMarkdownBodyStyleIssues("# Title", published), {
+    failures: [],
+    warnings: [
+      "line 1: body h1 may duplicate frontmatter title; prefer h2 or h3",
+    ],
+  });
+});
+
+test("h1 warnings do not suppress unrelated heading or comment failures", () => {
+  assert.deepEqual(getMarkdownBodyStyleIssues("# Title\n#### Skip"), {
+    failures: ["line 2: heading level jumps from h1 to h4"],
+    warnings: [
+      "line 1: body h1 may duplicate frontmatter title; prefer h2 or h3",
+    ],
+  });
+  assert.deepEqual(getMarkdownBodyStyleIssues("#### Too deep").failures, [
     "first heading should start at h2 or h3",
-    "line 2: heading level jumps from h1 to h4",
   ]);
+  assert.deepEqual(
+    getMarkdownBodyStyleIssues("# Title\n<!-- writing -->").failures,
+    [
+      "line 2: HTML comments are not allowed; use frontmatter status: draft for unfinished content",
+    ],
+  );
+});
+
+test("reports callout and code language errors", () => {
   assert.equal(getMarkdownBodyStyleIssues("> [!INFO]").failures.length, 1);
   assert.equal(getMarkdownBodyStyleIssues("[!NOTE]").failures.length, 1);
   assert.deepEqual(getMarkdownBodyStyleIssues("~~~\ncode").failures, [

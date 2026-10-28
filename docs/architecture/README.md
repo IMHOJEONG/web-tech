@@ -6,6 +6,12 @@
 
 ## ADR 상태
 
+- [ADR-0021: 상세 HTML byte budget](adr-0021-content-html-byte-budget.md): 적용 중. 별도 상수·렌더 결과 UTF-8 경계·비절단 실패/로컬 fallback, 로컬 구현·운영 미배포.
+
+- [ADR-0020: 원격 검색 목록 byte budget](adr-0020-content-posts-byte-budget.md): 적용 중. UTF-8 경고512KiB·상한1MiB, 비절단 실패·로컬 fallback, 로컬 구현·운영 미배포.
+
+- [ADR-0019: 원격 본문 검색 텍스트 계약](adr-0019-remote-body-search.md): 적용 중. 검증된 published 목록의 searchText·원격 우선·구형 metadata-only·장애 fallback, 로컬 회귀·운영 미배포.
+
 - [ADR-0017: Overview 부분 API 장애 격리](adr-0017-vuln-radar-panel-failure-isolation.md): 적용 중. API별 로딩·캐시 유지·경고/재시도, 로컬 작업 트리·운영 미검증.
 
 - [ADR-0016: 수집 실행 관측과 데이터 기준일 분리](adr-0016-vuln-radar-ingest-observation.md): 적용 중. 로컬 process-local 이력·조회/수집 주기·구버전 미확인 구분, 영속 이력 미구현·운영 배포 미검증.
@@ -54,7 +60,7 @@
 
 아래 일반 정책 전체의 최신성을 이번 ADR 점검에서 검증한 것은 아니다. 관련 작업을 할 때 각 문서의 적용 범위·상태·검토일을 실제 코드와 대조한다.
 
-- [Blog Content API Contract](blog-content-api-contract.md)
+- [Blog Content API Contract](blog-content-api-contract.md): 정상 상세 HTML·오류 JSON 경계와 Content-Type 설정 시점.
 - [Blog Markdown DB Recommendation](blog-content-database-recommendation.md)
 - [Blog Content Delivery: HTML vs Markdown](blog-content-html-vs-markdown.md)
 - [Docs App FSD Guide](docs-app-fsd.md)
@@ -66,7 +72,7 @@
 - [Computer Science Channel Evaluation](docs-computer-science-channel-evaluation.md)
 - [Docs Content API Fail-Fast Policy](docs-content-api-fail-fast-policy.md)
 - [Docs Content Asset Exposure Strategy](docs-content-asset-exposure-strategy.md)
-- [Docs Content Authoring Markup Policy](docs-content-authoring-markup-policy.md)
+- [Docs Content Authoring Markup Policy](docs-content-authoring-markup-policy.md): H1 공통 경고·원문 유지와 diff/patch 코드 작성 규칙. 프론트 로컬 구현과 NAS 이미지/운영 배포 검증은 구분한다.
 - [Docs Content Authoring Pipeline](docs-content-authoring-pipeline.md)
 - [콘텐츠 캐시 개선 우선순위](docs-content-cache-improvement-backlog.md)
 - [Docs Content Cache Revalidation Policy](docs-content-cache-revalidation-policy.md)

@@ -1,11 +1,12 @@
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, Logger } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import request from 'supertest';
 
 import { AppModule } from '../src/app.module';
+import { ContentService } from '../src/modules/content/content.service';
 
 describe('Docs content API', () => {
   let app: INestApplication;
@@ -52,6 +53,7 @@ summary: Draft content
 date: 2026-09-08
 status: draft
 ---
+# Draft title
 Not published.
 `,
       'utf8',
@@ -63,6 +65,7 @@ title: Archived note
 slug: archived-note
 status: archived
 ---
+# Archived title
 Not published.
 `,
       'utf8',
@@ -114,7 +117,8 @@ Not published because metadata is incomplete.
     const response = await request(app.getHttpServer())
       .get('/api/posts')
       .set('Authorization', 'Bearer test-content-token')
-      .expect(200);
+      .expect(200)
+      .expect('Content-Type', /application\/json; charset=utf-8/);
 
     expect(response.body.results).toEqual([
       expect.objectContaining({
@@ -148,6 +152,114 @@ Not published because metadata is incomplete.
     expect(response.headers['cache-control']).toBe('private, no-store');
   });
 
+  it('publishes current body search text only after validation, without metadata or drafts', async () => {
+    const directory = join(temporaryRoot, 'posts', 'web');
+    const makeArticle = (slug: string, status: string, body: string) => `---
+title: Search notebook
+slug: ${slug}
+summary: Overview
+date: 2026-10-26
+updatedAt: 2026-10-26
+status: ${status}
+authorName: Writer
+authorRole: Engineer
+readMinutes: 2
+topicLabel: WEB
+tags: []
+---
+${body}
+`;
+    const files = [
+      'search-note',
+      'search-draft',
+      'search-archived',
+      'search-invalid',
+    ];
+    const body =
+      '## Details\n\nA **quasarneedle** [label](https://destination.invalid).\n\n```ts\nconst task = true;\n```';
+    try {
+      for (const [slug, status, text] of [
+        ['search-note', 'published', body],
+        ['search-draft', 'draft', '## Details\nsecretDraftNeedle'],
+        ['search-archived', 'archived', '## Details\nsecretArchivedNeedle'],
+        [
+          'search-invalid',
+          'published',
+          '## Details\n<!-- secretInvalidNeedle -->',
+        ],
+      ]) {
+        await writeFile(
+          join(directory, `${slug}.md`),
+          makeArticle(slug!, status!, text!),
+          'utf8',
+        );
+      }
+      const readIndex = async () => {
+        const response = await request(app.getHttpServer())
+          .get('/api/posts')
+          .set('Authorization', 'Bearer test-content-token')
+          .expect(200);
+        return response.body.results as { slug: string; searchText?: string }[];
+      };
+      const first = await readIndex();
+      const note = first.find((post) => post.slug === 'search-note');
+      expect(note?.searchText).toBe(
+        'Details A quasarneedle label. const task = true;',
+      );
+      expect(note?.searchText).not.toMatch(
+        /Search notebook|Overview|destination.invalid|```/,
+      );
+      expect(JSON.stringify(first)).not.toMatch(
+        /secretDraftNeedle|secretArchivedNeedle|secretInvalidNeedle/,
+      );
+      expect(first.map((post) => post.slug)).not.toEqual(
+        expect.arrayContaining(['search-draft']),
+      );
+      expect(first.map((post) => post.slug)).not.toEqual(
+        expect.arrayContaining(['search-archived']),
+      );
+      expect(first.map((post) => post.slug)).not.toEqual(
+        expect.arrayContaining(['search-invalid']),
+      );
+
+      await request(app.getHttpServer()).get('/api/posts').expect(401);
+      const detail = await request(app.getHttpServer())
+        .get('/posts/web/search-note')
+        .set('Authorization', 'Bearer test-content-token')
+        .expect(200);
+      expect(detail.text).toContain('<strong>quasarneedle</strong>');
+
+      await writeFile(
+        join(directory, 'search-note.md'),
+        makeArticle(
+          'search-note',
+          'published',
+          body.replace('quasarneedle', 'plasmanoodle'),
+        ),
+        'utf8',
+      );
+      const second = await readIndex();
+      expect(
+        second.find((post) => post.slug === 'search-note')?.searchText,
+      ).toContain('plasmanoodle');
+      expect(
+        second.find((post) => post.slug === 'search-note')?.searchText,
+      ).not.toContain('quasarneedle');
+      await writeFile(
+        join(directory, 'search-note.md'),
+        makeArticle('search-note', 'draft', body),
+        'utf8',
+      );
+      expect(
+        (await readIndex()).some((post) => post.slug === 'search-note'),
+      ).toBe(false);
+    } finally {
+      await Promise.all(
+        files.map((slug) => rm(join(directory, `${slug}.md`), { force: true })),
+      );
+    }
+  });
+
   it('does not expose drafts or traversal paths', async () => {
     await request(app.getHttpServer())
       .get('/posts/feed/private-note')
@@ -163,12 +275,150 @@ Not published because metadata is incomplete.
       .expect(404);
   });
 
+  describe('detail response content types', () => {
+    let warnings: jest.SpyInstance;
+
+    beforeEach(() => {
+      warnings = jest.spyOn(Logger.prototype, 'warn');
+    });
+
+    afterEach(() => {
+      try {
+        expect(
+          warnings.mock.calls.filter(
+            ([message]) =>
+              typeof message === 'string' &&
+              message.includes("Content-Type doesn't match Reply body"),
+          ),
+        ).toEqual([]);
+      } finally {
+        warnings.mockRestore();
+      }
+    });
+
+    it('returns HTML only after a successful article render', async () => {
+      const response = await request(app.getHttpServer())
+        .get('/posts/web/event-loop')
+        .set('Authorization', 'Bearer test-content-token')
+        .expect(200)
+        .expect('Content-Type', /text\/html; charset=utf-8/);
+
+      expect(response.text).toContain('<article>');
+      expect(response.text).toContain('<h2>Event Loop</h2>');
+      expect(response.headers['cache-control']).toBe('private, no-store');
+      expect(response.headers.vary).toContain('Authorization');
+    });
+
+    it.each([
+      '/posts/web/missing',
+      '/posts/web/invalid.slug',
+      '/posts/web/incomplete',
+      '/posts/feed/private-note',
+      '/posts/feed/archived-note',
+    ])(
+      'returns a generic JSON 404 without a header warning: %s',
+      async (url) => {
+        const response = await request(app.getHttpServer())
+          .get(url)
+          .set('Authorization', 'Bearer test-content-token')
+          .expect(404)
+          .expect('Content-Type', /application\/json; charset=utf-8/);
+
+        expect(response.body).toEqual({
+          message: 'Post not found',
+          error: 'Not Found',
+          statusCode: 404,
+        });
+        expect(response.headers['cache-control']).toBe('private, no-store');
+        expect(response.headers.vary).toContain('Authorization');
+        expect(response.text).not.toContain('Skipping invalid');
+        expect(response.text).not.toContain('test-content-token');
+      },
+    );
+
+    it('keeps body validation failures private in a JSON 404', async () => {
+      const file = join(temporaryRoot, 'posts', 'web', 'invalid-body.md');
+      await writeFile(
+        file,
+        publishedSource(
+          'invalid-body',
+          '## Topic\n<!-- private-editorial-note -->',
+        ),
+      );
+      try {
+        const response = await request(app.getHttpServer())
+          .get('/posts/web/invalid-body')
+          .set('Authorization', 'Bearer test-content-token')
+          .expect(404)
+          .expect('Content-Type', /application\/json; charset=utf-8/);
+
+        expect(response.body.message).toBe('Post not found');
+        expect(response.headers['cache-control']).toBe('private, no-store');
+        expect(response.headers.vary).toContain('Authorization');
+        expect(response.text).not.toContain('private-editorial-note');
+        expect(response.text).not.toContain('body validation');
+        expect(warnings).toHaveBeenCalledWith(
+          expect.stringContaining(
+            'Rejected invalid content document: web/invalid-body',
+          ),
+        );
+      } finally {
+        await rm(file, { force: true });
+      }
+    });
+
+    it.each([undefined, 'Bearer invalid-test-token'])(
+      'returns JSON 401 for missing or invalid credentials: %s',
+      async (authorization) => {
+        const pending = request(app.getHttpServer()).get(
+          '/posts/web/event-loop',
+        );
+        if (authorization) pending.set('Authorization', authorization);
+        const response = await pending
+          .expect(401)
+          .expect('Content-Type', /application\/json; charset=utf-8/);
+
+        expect(response.body.statusCode).toBe(401);
+        expect(response.text).not.toContain('<article>');
+        expect(response.text).not.toContain('test-content-token');
+      },
+    );
+
+    it('does not set an HTML header before a renderer error', async () => {
+      const render = jest
+        .spyOn(app.get(ContentService), 'renderPost')
+        .mockImplementationOnce(() => {
+          throw new Error('private-render-failure');
+        });
+      try {
+        const response = await request(app.getHttpServer())
+          .get('/posts/web/event-loop')
+          .set('Authorization', 'Bearer test-content-token')
+          .expect(500)
+          .expect('Content-Type', /application\/json; charset=utf-8/);
+
+        expect(render).toHaveBeenCalledTimes(1);
+        expect(response.body).toEqual({
+          statusCode: 500,
+          message: 'Internal server error',
+        });
+        expect(response.headers['cache-control']).toBe('private, no-store');
+        expect(response.headers.vary).toContain('Authorization');
+        expect(response.text).not.toContain('private-render-failure');
+      } finally {
+        render.mockRestore();
+      }
+    });
+  });
+
   it.each([
     ['comment', '## Topic\n<!-- private-editorial-note -->'],
     ['unclosed-comment', '## Topic\n<!-- private-editorial-note →'],
     ['multiline-comment', '## Topic\n<!-- private-editorial-note\nmore -->'],
     ['orphan-comment', '## Topic\n-->'],
-    ['body-title', '# Duplicate title'],
+    ['h1-comment', '# Original title\n<!-- private-editorial-note -->'],
+    ['deep-first-heading', '#### Too deep'],
+    ['h1-heading-jump', '# Original title\n#### Skipped'],
     ['heading-jump', '## Topic\n#### Skipped'],
     ['missing-language', '## Topic\n```\ncode\n```'],
     ['unclosed-fence', '## Topic\n```js\ncode'],
@@ -197,6 +447,46 @@ Not published because metadata is incomplete.
       }
     },
   );
+
+  it.each([
+    '# Original title',
+    '# Original title\n\n## Section',
+    '## Intro\n\n# Original title\n\n## Section',
+  ])('publishes body h1 unchanged and logs a warning: %s', async (body) => {
+    const file = join(temporaryRoot, 'posts', 'web', 'body-title.md');
+    const source = publishedSource('body-title', body);
+    const warning = jest
+      .spyOn(Logger.prototype, 'warn')
+      .mockImplementation(() => {});
+    try {
+      await writeFile(file, source);
+      const list = await request(app.getHttpServer())
+        .get('/api/posts')
+        .set('Authorization', 'Bearer test-content-token')
+        .expect(200);
+      expect(
+        list.body.results.map((post: { slug: string }) => post.slug),
+      ).toEqual(['body-title', 'event-loop']);
+      const detail = await request(app.getHttpServer())
+        .get('/posts/web/body-title')
+        .set('Authorization', 'Bearer test-content-token')
+        .expect(200)
+        .expect('Content-Type', /text\/html/);
+      expect(detail.text).toContain('<h1>Original title</h1>');
+      expect(detail.text).not.toContain('<h2>Original title</h2>');
+      expect(detail.headers['cache-control']).toBe('private, no-store');
+      expect(detail.headers.vary).toContain('Authorization');
+      expect(warning).toHaveBeenCalledWith(
+        expect.stringMatching(
+          /Content style warning: web\/body-title \(line \d+: body h1 may duplicate frontmatter title; prefer h2 or h3\)/,
+        ),
+      );
+      expect(await readFile(file, 'utf8')).toBe(source);
+    } finally {
+      warning.mockRestore();
+      await rm(file, { force: true });
+    }
+  });
 
   it.each(['```', '````', '~~~'])(
     'keeps comments in %s code examples and escapes raw HTML',

@@ -230,6 +230,7 @@ export function normalizeRemotePostMeta(
         summary,
         date,
         content: '',
+        searchText: post.searchText ?? '',
         fileName,
         contentFormat: 'html',
         contentSource: 'remote',
@@ -255,7 +256,7 @@ export function normalizeRemoteSearchResult(
         return null
     }
 
-    const content = post.content ?? ''
+    const content = post.searchText ?? ''
     const summary = post.summary || content.slice(0, 200)
     const fileName = normalizeDocPath(
         post.markdownPath ?? post.fileName ?? `remote/${post.slug}`

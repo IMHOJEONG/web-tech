@@ -55,15 +55,22 @@ PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 �
       원격/로컬 동일 route 중복 제거를 유닛·통합 검사하고, 혼합 목록 필터·허브를 두 언어와 두 화면 크기의 E2E로 검증했다.
       [로컬 구현·검증 기록](../worklog/2026-10/2026-10-22-docs-canonical-taxonomy.md).
       구현 `6f6974e`·브라우저 회귀 `3f8bf5e`로 분리했다. 원격 CI·운영 배포와 실제 운영 영향 문서 수는 별도 확인한다.
-- [ ] `P1` **원격 본문 검색의 계약을 결정한다.** 현재 원격 metadata의 `content`는 비워지고
-      중복 canonical route는 원격 우선이므로 본문 전용 검색어가 local-only 1건에서 원격 활성화 시 0건으로 바뀐다.
-      원격 published 본문에서 검색용 텍스트를 생성·제공할지, metadata-only 검색을 명시할지 결정한다.
-      검색 요청마다 모든 원격 본문을 fetch하거나 오래된 로컬 본문을 새 원격 본문과 섞지 않는다.
-      완료 조건: 제목·요약·본문 전용 일치, 동일 route의 원본 선택, 갱신·draft 제외·로컬 fallback을 함께 검사한다.
-- [ ] `P2` **원격 응답에 byte budget을 추가한다.** 전체 deadline·retry 0은 구현됐지만 크기 제한은 없고
-      격리 fetch에서 8MiB 응답이 수락됐다. 목록과 본문의 상한을 정하고 읽는 중 누적 byte 수를 검사한다.
-      완료 조건: Content-Length 누락/오류, chunk 분할·멀티바이트·상한 초과 취소,
-      초과 응답의 로컬 대체와 비밀값 없는 로그를 검증한다. 실제 공격·운영 OOM을 확인한 것은 아니다.
+- [-] `P1` **원격 본문 검색의 계약을 결정한다.** 최초 원격 metadata의 `content`는 비워지고
+  중복 canonical route는 원격 우선이므로 본문 전용 검색어가 local-only 1건에서 원격 활성화 시 0건으로 바뀐다.
+  원격 published 본문에서 검색용 텍스트를 생성·제공할지, metadata-only 검색을 명시할지 결정한다.
+  검색 요청마다 모든 원격 본문을 fetch하거나 오래된 로컬 본문을 새 원격 본문과 섞지 않는다.
+  완료 조건: 제목·요약·본문 전용 일치, 동일 route의 원본 선택, 갱신·draft 제외·로컬 fallback을 함께 검사한다.
+  10-26 후속: [ADR-0019](../architecture/adr-0019-remote-body-search.md)의 published `searchText` 계약·양쪽 어댑터·로컬 회귀를 구현했다.
+  [검증 기록](../verification/content/2026-10-26-remote-body-search.md). 후속 승인으로 코드·정책 커밋/푸시를 분리하며, CI·NAS 이미지·Vercel 운영 배포 및 실제 게시 갱신은 미검증으로 완료 처리하지 않는다.
+- [-] `P2` **원격 응답에 byte budget을 추가한다.** 최초에는 전체 deadline·retry 0만 있고 크기 제한은 없어
+  격리 fetch에서 8MiB 응답이 수락됐다. 목록과 본문의 상한을 정하고 읽는 중 누적 byte 수를 검사한다.
+  완료 조건: Content-Length 누락/오류, chunk 분할·멀티바이트·상한 초과 취소,
+  초과 응답의 로컬 대체와 비밀값 없는 로그를 검증한다. 실제 공격·운영 OOM을 확인한 것은 아니다.
+  10-26 목록 후속: [ADR-0020](../architecture/adr-0020-content-posts-byte-budget.md)의 경고512KiB·상한1MiB·양쪽 비절단 거절을 로컬 구현했다.
+  [검증 기록](../verification/performance/2026-10-26-search-payload-budget.md)에 합성10/100/1000개 비용과 경계 검사를 남긴다.
+  상세 후속: [ADR-0021](../architecture/adr-0021-content-html-byte-budget.md)의 독립 HTML 상수·최종 렌더 bytes·스트림 제한과 로컬 fallback/원격전용 오류 경계를 로컬 구현했다.
+  [HTML 검증](../verification/content/2026-10-26-html-response-budget.md)에 긴 코드·1000행 표·정확한 상한과 초과 거절을 연결한다.
+  실제 NAS corpus·배포·동시부하·원문 읽기/파싱 단계의 선제 제한은 남아 있으므로 전체 완료로 표시하지 않는다.
 
 권장 순서는 분류 일치 → 검색 계약 → byte budget이다. 이미 구현된 입력 제한·캐시·오프라인 저장을
 다시 만드는 과제로 확대하지 않는다. 실기기·Safari/Firefox와 운영 Worker 갱신은 기존 검증 과제,

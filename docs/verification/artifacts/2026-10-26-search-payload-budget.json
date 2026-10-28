@@ -1,0 +1,462 @@
+{
+  "date": "2026-10-26",
+  "timezone": "Asia/Seoul",
+  "base": "3609ff2b170ce25d0fa1b9ad54aa616fffed61ce",
+  "state": "local-uncommitted",
+  "sourceBlobs": {
+    "packages/docs-content-contract/src/index.ts": "9d41ef5ce9a59662ed8a4af4421771841da4b06c",
+    "apps/docs-backend/src/modules/content/content.controller.ts": "441ad8ca50e32575b0445433af21df6e4219cbe2",
+    "apps/docs-backend/src/modules/content/content.controller.spec.ts": "8447f823c6016f13312fa3a949a0a2b1f30d6c9c",
+    "apps/docs-backend/test/posts-budget.e2e-spec.ts": "7fe0c73b2d7cff87e70fbd6e2aa1aa9833508e79",
+    "apps/docs/lib/content-api-request.ts": "73b7c370aaa9bc4c90aa8f6c873620a1f92f24bb",
+    "apps/docs/lib/content-api-request.test.ts": "4369226d47b8b08751b5640a70e32977f8a83753",
+    "apps/docs/lib/content-api.ts": "55113b85389aa2367d5365594d649f4f4151787f",
+    "apps/docs/lib/remote-body-search.test.ts": "85154bb3d00bb593d1c920fe270528b6c365a5fd",
+    "apps/docs/lib/search-payload-fixture.ts": "888140014ce6dea7b5f62930739dfb489d6dc686",
+    "apps/docs/lib/search-payload-scale.test.ts": "0c7423a49f5f59460b21cfd0632b864a27a86218",
+    "apps/docs/scripts/measure-search-payload.ts": "5a19f6f92eb67099c166de944368c0666cd659e7"
+  },
+  "policy": {
+    "warnBytes": 524288,
+    "maxBytes": 1048576,
+    "unit": "UTF-8 JSON bytes before compression",
+    "overLimit": "producer HTTP503; consumer too-large, abort/cancel; whole-list failure, existing local fallback, no truncation"
+  },
+  "cost": {
+    "date": "2026-10-26",
+    "node": "v24.12.0",
+    "cpu": "Apple M1 Pro",
+    "maxBytes": 1048576,
+    "warnBytes": 524288,
+    "samples": "one warmup excluded, five measured samples; median and maximum, not p95",
+    "scope": "synthetic UTF-8 JSON, real schema/normalizer/ranker; no HTTP, NAS, Markdown parse, cache or concurrency; rejected cases measured offline only",
+    "compressionCaveat": "repeated synthetic text compresses unusually well; gzip bytes are not the acceptance budget",
+    "cases": [
+      {
+        "count": 10,
+        "bodyBytes": 512,
+        "jsonBytes": 8103,
+        "metadataBytes": 2823,
+        "gzipBytes": 514,
+        "budget": "accept",
+        "serialize": {
+          "medianMs": 0.01,
+          "maxMs": 0.01
+        },
+        "parseAndValidate": {
+          "medianMs": 0.259,
+          "maxMs": 0.329
+        },
+        "normalize": {
+          "medianMs": 0.075,
+          "maxMs": 0.104
+        },
+        "rank": [
+          {
+            "query": "event loop",
+            "matches": 10,
+            "medianMs": 0.057,
+            "maxMs": 0.068
+          },
+          {
+            "query": "lastbodyneedle",
+            "matches": 1,
+            "medianMs": 0.039,
+            "maxMs": 0.049
+          },
+          {
+            "query": "absentuniqueneedle",
+            "matches": 0,
+            "medianMs": 0.035,
+            "maxMs": 0.045
+          }
+        ]
+      },
+      {
+        "count": 10,
+        "bodyBytes": 8192,
+        "jsonBytes": 84903,
+        "metadataBytes": 2823,
+        "gzipBytes": 816,
+        "budget": "accept",
+        "serialize": {
+          "medianMs": 0.04,
+          "maxMs": 0.04
+        },
+        "parseAndValidate": {
+          "medianMs": 0.155,
+          "maxMs": 0.165
+        },
+        "normalize": {
+          "medianMs": 0.069,
+          "maxMs": 0.071
+        },
+        "rank": [
+          {
+            "query": "event loop",
+            "matches": 10,
+            "medianMs": 0.442,
+            "maxMs": 0.659
+          },
+          {
+            "query": "lastbodyneedle",
+            "matches": 1,
+            "medianMs": 0.362,
+            "maxMs": 1.303
+          },
+          {
+            "query": "absentuniqueneedle",
+            "matches": 0,
+            "medianMs": 0.374,
+            "maxMs": 0.412
+          }
+        ]
+      },
+      {
+        "count": 10,
+        "bodyBytes": 32768,
+        "jsonBytes": 330663,
+        "metadataBytes": 2823,
+        "gzipBytes": 3123,
+        "budget": "accept",
+        "serialize": {
+          "medianMs": 0.163,
+          "maxMs": 0.164
+        },
+        "parseAndValidate": {
+          "medianMs": 0.274,
+          "maxMs": 0.324
+        },
+        "normalize": {
+          "medianMs": 0.066,
+          "maxMs": 0.105
+        },
+        "rank": [
+          {
+            "query": "event loop",
+            "matches": 10,
+            "medianMs": 1.643,
+            "maxMs": 1.836
+          },
+          {
+            "query": "lastbodyneedle",
+            "matches": 1,
+            "medianMs": 1.408,
+            "maxMs": 1.659
+          },
+          {
+            "query": "absentuniqueneedle",
+            "matches": 0,
+            "medianMs": 1.398,
+            "maxMs": 1.647
+          }
+        ]
+      },
+      {
+        "count": 100,
+        "bodyBytes": 512,
+        "jsonBytes": 81273,
+        "metadataBytes": 28473,
+        "gzipBytes": 2016,
+        "budget": "accept",
+        "serialize": {
+          "medianMs": 0.094,
+          "maxMs": 0.115
+        },
+        "parseAndValidate": {
+          "medianMs": 0.956,
+          "maxMs": 1.721
+        },
+        "normalize": {
+          "medianMs": 0.409,
+          "maxMs": 0.514
+        },
+        "rank": [
+          {
+            "query": "event loop",
+            "matches": 100,
+            "medianMs": 0.46,
+            "maxMs": 0.526
+          },
+          {
+            "query": "lastbodyneedle",
+            "matches": 1,
+            "medianMs": 0.347,
+            "maxMs": 0.914
+          },
+          {
+            "query": "absentuniqueneedle",
+            "matches": 0,
+            "medianMs": 0.382,
+            "maxMs": 0.427
+          }
+        ]
+      },
+      {
+        "count": 100,
+        "bodyBytes": 8192,
+        "jsonBytes": 849273,
+        "metadataBytes": 28473,
+        "gzipBytes": 4688,
+        "budget": "warn",
+        "serialize": {
+          "medianMs": 0.509,
+          "maxMs": 0.565
+        },
+        "parseAndValidate": {
+          "medianMs": 1.334,
+          "maxMs": 1.779
+        },
+        "normalize": {
+          "medianMs": 0.238,
+          "maxMs": 0.259
+        },
+        "rank": [
+          {
+            "query": "event loop",
+            "matches": 100,
+            "medianMs": 3.754,
+            "maxMs": 3.875
+          },
+          {
+            "query": "lastbodyneedle",
+            "matches": 1,
+            "medianMs": 4.034,
+            "maxMs": 4.153
+          },
+          {
+            "query": "absentuniqueneedle",
+            "matches": 0,
+            "medianMs": 3.647,
+            "maxMs": 3.759
+          }
+        ]
+      },
+      {
+        "count": 100,
+        "bodyBytes": 32768,
+        "jsonBytes": 3306873,
+        "metadataBytes": 28473,
+        "gzipBytes": 29783,
+        "budget": "reject",
+        "serialize": {
+          "medianMs": 1.61,
+          "maxMs": 3.108
+        },
+        "parseAndValidate": {
+          "medianMs": 1.865,
+          "maxMs": 2.49
+        },
+        "normalize": {
+          "medianMs": 0.252,
+          "maxMs": 0.265
+        },
+        "rank": [
+          {
+            "query": "event loop",
+            "matches": 100,
+            "medianMs": 13.669,
+            "maxMs": 14.223
+          },
+          {
+            "query": "lastbodyneedle",
+            "matches": 1,
+            "medianMs": 14.095,
+            "maxMs": 14.557
+          },
+          {
+            "query": "absentuniqueneedle",
+            "matches": 0,
+            "medianMs": 13.781,
+            "maxMs": 14.158
+          }
+        ]
+      },
+      {
+        "count": 1000,
+        "bodyBytes": 512,
+        "jsonBytes": 816573,
+        "metadataBytes": 288573,
+        "gzipBytes": 16954,
+        "budget": "warn",
+        "serialize": {
+          "medianMs": 0.966,
+          "maxMs": 0.989
+        },
+        "parseAndValidate": {
+          "medianMs": 3.741,
+          "maxMs": 7.573
+        },
+        "normalize": {
+          "medianMs": 2.055,
+          "maxMs": 2.449
+        },
+        "rank": [
+          {
+            "query": "event loop",
+            "matches": 1000,
+            "medianMs": 4.232,
+            "maxMs": 5.738
+          },
+          {
+            "query": "lastbodyneedle",
+            "matches": 1,
+            "medianMs": 3.781,
+            "maxMs": 4.482
+          },
+          {
+            "query": "absentuniqueneedle",
+            "matches": 0,
+            "medianMs": 3.449,
+            "maxMs": 3.788
+          }
+        ]
+      },
+      {
+        "count": 1000,
+        "bodyBytes": 8192,
+        "jsonBytes": 8496573,
+        "metadataBytes": 288573,
+        "gzipBytes": 42964,
+        "budget": "reject",
+        "serialize": {
+          "medianMs": 4.937,
+          "maxMs": 5.156
+        },
+        "parseAndValidate": {
+          "medianMs": 10.32,
+          "maxMs": 12.281
+        },
+        "normalize": {
+          "medianMs": 1.805,
+          "maxMs": 2.306
+        },
+        "rank": [
+          {
+            "query": "event loop",
+            "matches": 1000,
+            "medianMs": 35.953,
+            "maxMs": 38.122
+          },
+          {
+            "query": "lastbodyneedle",
+            "matches": 1,
+            "medianMs": 38.919,
+            "maxMs": 40.026
+          },
+          {
+            "query": "absentuniqueneedle",
+            "matches": 0,
+            "medianMs": 35.749,
+            "maxMs": 36.873
+          }
+        ]
+      },
+      {
+        "count": 1000,
+        "bodyBytes": 32768,
+        "jsonBytes": 33072573,
+        "metadataBytes": 288573,
+        "gzipBytes": 297234,
+        "budget": "reject",
+        "serialize": {
+          "medianMs": 18.186,
+          "maxMs": 21.511
+        },
+        "parseAndValidate": {
+          "medianMs": 22.192,
+          "maxMs": 24.859
+        },
+        "normalize": {
+          "medianMs": 1.66,
+          "maxMs": 5.44
+        },
+        "rank": [
+          {
+            "query": "event loop",
+            "matches": 1000,
+            "medianMs": 139.628,
+            "maxMs": 140.28
+          },
+          {
+            "query": "lastbodyneedle",
+            "matches": 1,
+            "medianMs": 140.309,
+            "maxMs": 152.109
+          },
+          {
+            "query": "absentuniqueneedle",
+            "matches": 0,
+            "medianMs": 138.852,
+            "maxMs": 141.745
+          }
+        ]
+      }
+    ]
+  },
+  "regressions": {
+    "shared": 28,
+    "backendUnit": 26,
+    "backendHttp": 42,
+    "docsLibrary": 301,
+    "repository": 153,
+    "production": {
+      "stats": {
+        "startTime": "2026-10-26T13:48:31.899Z",
+        "duration": 106802.07,
+        "expected": 162,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "runnerErrors": 0,
+      "buildId": "Dz1btVUQ8s01yiPA1jB0Q",
+      "exitCode": 0,
+      "retries": 0
+    }
+  },
+  "checks": {
+    "backendLintTypecheckBuild": "passed",
+    "docsTypecheckAndChangedEslint": "passed",
+    "sharedBuildLint": "passed",
+    "listeners3111And3112Remaining": 0
+  },
+  "boundaryEvidence": [
+    "exactly512KiB accepts without warning,512KiB+1 warns,exactly1MiB accepts,1MiB+1 rejects",
+    "UTF-8 byte-split Korean/emoji; missing/invalid/understated Content-Length; actual gzip decompression",
+    "active over-limit stream cancelled and request never retried",
+    "oversized index fails wholly; real search pipeline retains local body search without detail fan-out",
+    "1000x8KiB offline corpus finds the tail keyword in probe-999; no match remains empty"
+  ],
+  "initialFailures": [
+    {
+      "kind": "typecheck",
+      "cause": "heterogeneous header cases inferred optional undefined keys",
+      "fix": "explicit Record<string,string>[] fixture"
+    },
+    {
+      "kind": "lint",
+      "cause": "unused destructured searchText in metadata-only measurement",
+      "fix": "copy and delete the property; no rule suppression"
+    },
+    {
+      "kind": "test-fixture",
+      "cause": "completed stream was already closed before cancel callback assertion",
+      "fix": "keep over-limit fixture open to observe active cancellation; exact-boundary success still closes normally"
+    }
+  ],
+  "limitations": [
+    "no production/NAS requests, credential or webhook changes",
+    "no NAS IO/Markdown parse/concurrent load/cold start or peak memory benchmark",
+    "decoded chunk allocation and Next internal fetch/cache buffering are not bounded by this application reader",
+    "detail HTML and public search results have no new byte budget",
+    "no commit, push, PR or deployment"
+  ],
+  "rawResultsLocalOnly": [
+    "/private/tmp/search-payload-cost-20261026.json",
+    "/private/tmp/search-budget-production-20261026.json",
+    "/private/tmp/search-budget-docs-tests-20261026.log",
+    "/private/tmp/search-budget-backend-check-20261026.log",
+    "/private/tmp/search-budget-repo-tests-20261026.log"
+  ]
+}

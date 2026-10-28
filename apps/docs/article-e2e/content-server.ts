@@ -107,6 +107,7 @@ const server = createServer(async (request, response) => {
                         markdownPath: 'web/article-e2e-publication',
                         title: `Publication cache probe V${publicationVersion}`,
                         summary: `PUBLICATION_SUMMARY_V${publicationVersion}`,
+                        searchText: `Publication cache probe V${publicationVersion} PUBLICATION_BODY_V${publicationVersion} bodyonlypublicationv${publicationVersion}needle Publication ending PUBLICATION_END_V${publicationVersion}`,
                         // Keep the synthetic document on the first index page.
                         date: '2099-01-01',
                         status: 'published',
@@ -127,6 +128,7 @@ const server = createServer(async (request, response) => {
         response.end(`<article>
             <h1>Publication cache probe V${publicationVersion}</h1>
             <p>PUBLICATION_BODY_V${publicationVersion}</p>
+            <p>bodyonlypublicationv${publicationVersion}needle</p>
             <h2>Publication ending</h2>
             <p>PUBLICATION_END_V${publicationVersion}</p>
         </article>`)
@@ -137,7 +139,7 @@ const server = createServer(async (request, response) => {
             response.writeHead(503).end('Synthetic upstream unavailable')
             return
         }
-        // Exercise async server rendering; the index never contains body text.
+        // This gated article intentionally has no search text in its index entry.
         await remoteBodyGate
         await setTimeout(350)
         response.setHeader('Content-Type', 'text/html; charset=utf-8')

@@ -1,4 +1,8 @@
 import 'server-only'
+import {
+    CONTENT_HTML_MAX_BYTES,
+    CONTENT_POSTS_MAX_BYTES,
+} from '@web-tech/docs-content-contract'
 
 import {
     ContentApiRequestError,
@@ -90,6 +94,7 @@ async function fetchRemoteBody(
                 tags: [REMOTE_CONTENT_CACHE_TAG],
             },
             deadline,
+            maxBytes: CONTENT_HTML_MAX_BYTES,
         })
         const normalizedContent = normalizeRemoteContent(
             response.text,
@@ -108,6 +113,12 @@ async function fetchRemoteBody(
             markdownUrl,
             error
         )
+        if (
+            error instanceof ContentApiRequestError &&
+            error.kind === 'too-large'
+        ) {
+            throw error
+        }
         return null
     }
 }
@@ -162,6 +173,7 @@ async function fetchRemotePostsPayload(
                 tags: [REMOTE_CONTENT_CACHE_TAG],
             },
             deadline,
+            maxBytes: CONTENT_POSTS_MAX_BYTES,
         })
         const payload: unknown = JSON.parse(response.text)
         const rawPosts = parseRemotePostsPayload(payload)
@@ -259,7 +271,12 @@ export async function fetchRemoteSearchData(keyword?: string) {
     const filtered = !normalizedKeyword
         ? docs
         : docs.filter((doc) => {
-              const haystack = [doc.title, doc.summary, doc.slug, doc.content]
+              const haystack = [
+                  doc.title,
+                  doc.summary,
+                  doc.slug,
+                  doc.searchText,
+              ]
                   .filter(Boolean)
                   .join(' ')
                   .toLowerCase()
