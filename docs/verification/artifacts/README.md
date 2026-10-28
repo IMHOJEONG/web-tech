@@ -1,9 +1,5 @@
 # 검증 원본 증거
 
-- [10-28 필터 main 재검증](2026-10-28-docs-filter-main-recheck.json): [보고서](../resilience/2026-10-27-docs-filter-readiness.md). 핵심 36통과·관련 65통과/기존10제외, retry0과 관측 경고 분리.
-
-- [10-27 문서 필터 준비 상태](2026-10-27-docs-filter-readiness.json): [보고서](../resilience/2026-10-27-docs-filter-readiness.md)의 중간 실패·최종 반복·음성 대조 원본.
-
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.json): [보고서](../security/2026-10-27-node24-security-patch.md). 버전 경계·회귀·로컬 이미지 digest/gate hash·원본 15파일 보존·미배포 구분.
 
 - [10-27 검색/응답 제한 PR 결합](2026-10-27-search-response-pr-integration.json): [보고서](../integration/2026-10-27-search-response-pr-integration.md). #64 공식 squash·실제 main/배포 조회·충돌 보존·검색 어댑터 전후·소스9blob·production162개.
@@ -88,6 +84,10 @@
   - 캡처: [모바일 목록](2026-10-19-skeleton-docs-mobile-light.png), [모바일 UI/UX](2026-10-19-skeleton-uiux-mobile-light.png), [데스크톱 피드](2026-10-19-skeleton-feed-desktop-dark.png).
 
 - [10-19 문서 목록 순서 로컬 측정](2026-10-19-docs-index-order-local.json): [검증 보고서](../accessibility/2026-10-19-docs-index-order-local.md). 기본·검색의 네 대표 화면과 추가 조건·검사 요약. 캡처는 같은 보고서에 연결했다.
+
+- [10-28 필터 main 재검증](2026-10-28-docs-filter-main-recheck.json): [보고서](../resilience/2026-10-27-docs-filter-readiness.md). 핵심 36통과·관련 65통과/기존10제외, retry0과 관측 경고 분리.
+
+- [10-27 문서 필터 준비 상태](2026-10-27-docs-filter-readiness.json): [보고서](../resilience/2026-10-27-docs-filter-readiness.md)의 중간 실패·최종 반복·음성 대조 원본.
 
 - [10-18 Handlebars 보안 audit](2026-10-18-handlebars-security-audit.json): [검증 보고서](../security/2026-10-18-handlebars-advisories.md). 전체·production audit 전후, 무해한 회귀·build 결과와 로그 해시. PR #39 리뷰 후 임시 작업 트리 재현 결과도 포함.
 

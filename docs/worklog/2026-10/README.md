@@ -1,11 +1,5 @@
 # 2026-10 작업 기록
 
-- [10-27 문서 필터 준비 상태](2026-10-27-docs-filter-readiness.md): 로딩 골격 selector 결함·실제 스트림 회귀·10-28 독립 PR 준비.
-
-- [10-28 Node 보안 PR 병합·운영 확인](2026-10-28-node24-security-merge.md): 공식 squash 사전검사·리뷰 재요청·NAS 이미지 선택과 교체 순서 회귀, 필터 보존.
-
-- [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.md): main 별도 브랜치·필터 보존·CI gate·두 backend digest pin·회귀.
-
 - [10-27 검색·응답 제한 PR 결합](2026-10-27-search-response-pr-integration.md): #64 선병합·기존 미커밋 격리·충돌 보존·동일 head 검증 후 후속 PR/공식 squash.
 
 - [10-26 상세 HTML 응답 제한](2026-10-26-html-response-budget.md): 독립 상수·최종 렌더 크기·스트림 중단·로컬 fallback, ADR-0021·회귀.
@@ -89,6 +83,12 @@
 - [10-19 페이지별 스켈레톤·도메인 재사용](2026-10-19-page-skeletons.md)
 
 - [10-19 문서 인덱스·검색 목록 우선 배치](2026-10-19-docs-index-order.md)
+
+- [10-27 문서 필터 준비 상태](2026-10-27-docs-filter-readiness.md): 로딩 골격 selector 결함·실제 스트림 회귀·10-28 독립 PR 준비.
+
+- [10-28 Node 보안 PR 병합·운영 확인](2026-10-28-node24-security-merge.md): 공식 squash 사전검사·리뷰 재요청·NAS 이미지 선택과 교체 순서 회귀, 필터 보존.
+
+- [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.md): main 별도 브랜치·필터 보존·CI gate·두 backend digest pin·회귀.
 
 - [10-19 PR #39 이후 feature 동기화](2026-10-19-feature-sync-after-pr39.md)
 
