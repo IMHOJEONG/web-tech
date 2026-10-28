@@ -35,6 +35,26 @@ mise exec -- pnpm --filter docs exec eslint mdx-components.tsx lib/shiki-options
 
 공개 데이터 계약·컴포넌트 책임·캐싱은 바꾸지 않는 표시 보완으로 새 ADR을 추가하지 않는다.
 
+## 실제 개발 서버 후속 확인
+
+사용자의 로컬 화면 확인 요청으로 커밋 `a2e2f271` 이후 실제 Next.js 개발 서버도 실행했다. 독립 컴포넌트 브라우저 검사와 달리 최초 서버는 MDX loader 옵션의 transformer 함수 때문에 Turbopack 직렬화 오류로 종료됐다. 빌드용 Shiki 옵션은 순수 데이터로 유지하고, 본문 평가 경로만 함수가 있는 runtime 옵션을 사용하도록 로컬에서 분리했다. `next.config.mjs`는 변경하지 않았다. loader 옵션의 structured clone·JSON roundtrip 회귀도 추가했다.
+
+- 기존 다른 작업 폴더의 3001 서버는 보존하고 3039에 별도 서버를 실행했다. 원격 목록은 이 서버에서만 비활성화했다.
+- 개발 전용 draft preview 경로를 실제 `ArticleContentLayout`으로 렌더링했고 HTTP 200을 확인했다. 임시 문서는 공개 목록·검색에서 제외되며 커밋 대상도 아니다.
+- Playwright Chromium으로 1280px·390px × 라이트·다크 4조합을 확인했다. 추가·삭제 구분, patch 언어, 일반 JS 비오인, 긴 코드 키보드 접기·펼치기, 짧은/긴 코드 전체 복사가 통과했다. 복사는 테스트 컨텍스트 메모리로 검증해 OS 클립보드를 읽거나 바꾸지 않았다.
+- 페이지 전체 가로 넘침과 브라우저 실행 오류가 없었다. 코드 블록 내부의 긴 줄은 기존 내부 가로 스크롤을 유지한다.
+- 후속 Node 회귀는 **316 통과**, 실패·skip 0이다. 앱 typecheck와 변경 3파일 ESLint도 통과했다. 실행 결과 JSON과 4개 화면 캡처는 로컬 임시 경로에 보관했다. production build·배포 성공을 의미하지 않는다.
+
+이 후속 수정은 화면 확인 시점의 미커밋 변경이다. [PR #74](https://github.com/IMHOJEONG/web-tech/pull/74)의 기존 푸시 결과와 구분하며, 원격 CI 결과는 아직 확인 전이다.
+
+## 후속 수정 게시 전 재검증
+
+사용자가 로컬 화면 확인 후 후속 수정의 커밋·푸시를 승인했다. 위 개발 서버 확인은 당시 기록으로 유지한다. 이번 커밋은 loader/runtime 옵션 분리, 직렬화 회귀와 이 검증·작업 기록만 포함하며, 임시 preview draft와 다른 작업 트리의 변경은 제외한다.
+
+`test:lib` 316개·앱 typecheck·변경 3파일 ESLint를 다시 통과했다. 코드 블록 브라우저 재검사 최초 실행은 macOS 샌드박스의 Chromium MachPort 권한 거부로 테스트 시작 전 22개가 실패했다. 앱 표시 실패와 구분하며, 승인된 실행 환경에서 같은 명령·기준으로 재검사해 **22 통과**, 실패·skip·retry 0을 확인했다.
+
+이전 커밋의 [CI 실행 40637088564](https://github.com/IMHOJEONG/web-tech/actions/runs/40637088564)에서는 반응형 3종·오프라인·상세 production·공용 UI consumer가 같은 loader 직렬화 오류로 서버 시작에 실패했다. Unit and Contract Tests는 공용 UI 생성기의 `turbo gen` 하위 프로세스 `ETIMEDOUT`으로 별도 실패했다. 이 후속 수정이 생성기 타임아웃까지 해결한다고 간주하지 않으며, 새 SHA의 CI로 재확인한다. timeout·retry·공통 CI 설정은 변경하지 않는다.
+
 ## 관련 문서
 
 - [작성 규칙](../../architecture/docs-content-authoring-markup-policy.md#코드-변경분-표시)

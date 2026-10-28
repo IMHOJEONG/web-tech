@@ -4,7 +4,7 @@ import { evaluate, type EvaluateOptions } from 'next-mdx-remote-client/rsc'
 import type { ReactNode } from 'react'
 import remarkGfm from 'remark-gfm'
 import remarkFlexibleToc, { type TocItem } from 'remark-flexible-toc'
-import { shikiRehypeOptions } from './shiki-options.js'
+import { runtimeShikiRehypeOptions } from './shiki-options.js'
 import { rehypeArticleTitle } from './rehype-article-title.ts'
 import { rehypePublicImages } from './rehype-public-images.ts'
 import { normalizeRemoteArticleHtml } from '../widgets/article-detail/model/normalize-remote-article-html.ts'
@@ -51,7 +51,7 @@ function createMdxEvaluateOptions({
                 ? [
                       rehypeArticleTitle,
                       rehypePublicImages,
-                      [rehypeShiki, shikiRehypeOptions],
+                      [rehypeShiki, runtimeShikiRehypeOptions],
                   ]
                 : [rehypeArticleTitle, rehypePublicImages],
         },

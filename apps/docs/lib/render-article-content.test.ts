@@ -5,6 +5,25 @@ import { Fragment, createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { normalizeRemoteContent } from './content-api-html.ts'
 import { renderArticleContent } from './render-article-content.ts'
+import {
+    runtimeShikiRehypeOptions,
+    shikiRehypeOptions,
+} from './shiki-options.js'
+
+test('Turbopack loader options stay serializable while runtime keeps the language callback', () => {
+    assert.deepEqual(structuredClone(shikiRehypeOptions), shikiRehypeOptions)
+    assert.deepEqual(
+        JSON.parse(JSON.stringify(shikiRehypeOptions)),
+        shikiRehypeOptions
+    )
+    assert.equal(
+        typeof runtimeShikiRehypeOptions.transformers?.[0]?.code,
+        'function'
+    )
+    assert.throws(() => structuredClone(runtimeShikiRehypeOptions), {
+        name: 'DataCloneError',
+    })
+})
 
 for (const [name, content, hasTitle] of [
     ['markdown h1', '# Existing title\n\n## Body', true],
