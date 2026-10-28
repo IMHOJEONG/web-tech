@@ -71,6 +71,10 @@ DOCS_E2E_PORT=3123 mise exec -- pnpm --filter docs exec playwright test primary-
 
 ## 관련 문서
 
+### 2026-10-28 병합 후 기록 연결
+
+대비 소스는 PR #63으로 main `c1e2850cbfdf50bd7761729b32d1af5ffe045596`에 반영됐다. 당시 CI·공개 CSS·Production 연동 관측은 [작업 기록의 병합 실행 결과](../../worklog/2026-10/2026-10-25-primary-action-contrast.md#승인된-병합-실행-결과)에 보존했다. 숫자 7314181802·7314175335는 [별도 API 재조회](../artifacts/2026-10-28-primary-deployment-identifiers.json)로 GitHub Deployment ID임을 확인했다. Vercel 자체 배포 ID나 현재 Production 재검증으로 혼동하지 않는다. 이번 정리는 실행 코드·디자인 토큰을 다시 바꾸지 않으며 전체 WCAG·실기기 검증도 아니다.
+
 - [토큰 사용 정책](../../architecture/docs-design-token-usage-policy.md#primary-대비-기준)
 - [작업 기록](../../worklog/2026-10/2026-10-25-primary-action-contrast.md)
 - [KAN-36](https://web-tech-service.atlassian.net/browse/KAN-36)
