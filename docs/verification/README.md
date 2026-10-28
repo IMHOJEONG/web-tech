@@ -12,7 +12,7 @@
 
 - [10-26 상세 오류 Content-Type](content/2026-10-26-content-response-type.md): 경고 재현7개 실패→집중10개 통과, 정상 HTML·오류 JSON 및 기존 계약 유지. 운영 미배포.
 - [10-25 Primary 대비·브라우저 접근성](accessibility/2026-10-25-primary-action-contrast.md): 주황 배경 유지·짙은 글자·명시적 focus, UI58개+실제 화면12개. 전체 WCAG/타 브라우저 미검증.
-- [10-25 본문 H1 경고 전환](content/2026-10-25-body-h1-warning.md): 공용·로컬 CLI·원격 API의 경고/게시·원문 H1 보존 회귀, 운영 미배포.
+- [10-25 본문 H1 경고 전환](content/2026-10-25-body-h1-warning.md): 공통 경고 회귀와 NAS 재기동 후 외부 읽기 전용 관측. 사용자 제공 태그·독립 digest/실제 H1 표본 미검증 구분.
 - [10-25 나머지 의존성 보안 경고 10건](security/2026-10-25-remaining-advisories.md): main 기반 분리 패치·16개 신규 회귀·production 문서154개 성공. 감사13→3, Next는 PR #60에 유지·미배포.
 - [10-25 Next.js Critical 우선 패치](security/2026-10-25-next-critical.md): Next/MDX 16.4.3·Critical 0·잔여 10건, 보안/함수 캐시·production E2E와 종료 증거 호환 보완. 작업별 커밋, 운영 미배포.
 

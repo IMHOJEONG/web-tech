@@ -52,6 +52,39 @@ mise exec -- pnpm validate:docs
 - 전체 Next production build·브라우저 E2E·원격 CI·CodeQL·NAS 배포는 미실행이다. 앞선 404의 Content-Type 경고는 별도 후속이며 이번에 수정하지 않았다.
 - 최초 검증 시점에는 커밋·푸시·PR·병합·배포를 실행하지 않았다. 후속 사용자 승인은 이번 변경의 커밋과 작업 브랜치 푸시까지이며 PR·병합·운영 배포는 제외한다. 실제 원격 SHA는 같은 KAN-37 기록에서 확인한다.
 
+## NAS 재기동 후 외부 읽기 전용 점검
+
+**10월 25일 당시 관측이다.** 아래 기대 태그·image ID는 역사적 비교값이며 현재 권장 이미지나 안전한 rollback 대상으로 사용하지 않는다. 이후 Node 보안 패치는 PR #68로 main에 병합됐고, 실제 NAS 교체 여부는 [현재 배포 절차](../../runbooks/docs-backend-nas-deployment.md#update-and-rollback)에 따라 별도로 확인해야 한다. 10월 28일 기록 분리에서는 새 운영 요청·NAS 접속·파일 수정·재배포를 하지 않았다.
+
+사용자의 재기동 완료 요청 후 2026-10-25 23:21 KST부터 공개 `api.heap-forge.app`를 조회했다. 로컬의 기존 `BLOG_CONTENT_API_TOKEN`은 메모리 내 요청 헤더로만 사용했으며 값·인증 헤더·원문은 출력하거나 저장하지 않았다. 자동 재시도·리디렉션·NAS 변경·웹훅 호출 없이 GET 7개와 health 확인 1개를 수행했다. [관측 증거](../artifacts/2026-10-25-nas-restart-readonly.json)는 이전 로컬 검증과 별도다.
+
+| 검사                              | 실제 결과                                                      | 판정                                             |
+| --------------------------------- | -------------------------------------------------------------- | ------------------------------------------------ |
+| 토큰 없음·임의 잘못된 토큰의 목록 | 각각 401 JSON                                                  | 인증 차단 확인                                   |
+| 정상 토큰의 목록                  | 200 JSON, `feed/pna` 1개                                       | 서비스 응답 확인, 전체 기대 문서 수는 미확인     |
+| `feed/pna` 상세                   | 200 HTML, article 1개 이상·H1 0개·pre 3개                      | 기존 글 응답 확인, H1 경고 정책 검증 표본은 아님 |
+| `web/browser` 상세                | 404 JSON, 목록에도 없음                                        | 정상 공개 기대 여부·제외 원인 미확정             |
+| 존재하지 않는 점검용 slug         | 404 JSON                                                       | 관측한 오류 응답 형식 정상                       |
+| 인증된 목록·상세·404 헤더         | `private, no-store`, `Vary: Authorization`, Cloudflare DYNAMIC | 인증 콘텐츠의 관측된 캐시 헤더 정상              |
+| 외부 `/health`                    | 200 JSON, service/status만 반환                                | 기존 외부 403/404 차단 정책과 불일치             |
+
+NAS 내부 컨테이너·이미지 digest·파일·로그에는 접근하지 않았다. 기대 이미지는 PR #62의 `ghcr.io/imhojeong/web-tech-docs-backend:sha-f8fbc068d633796d64343ea01aabee0e35a3f32c`, 게시 digest는 `sha256:301b9290d059a5f4da6053a61f56735ee56223925edd9c7046f2785711b36609`다. **재시작 사실이나 health 200만으로 이 이미지 적용을 확정할 수 없다.** `web/browser` 404도 구버전·다른 작성 규칙 실패·상태/파일/볼륨 문제를 구분하지 못한다. H1 없는 `feed/pna`의 200을 H1 정책 반영 증거로 사용하지 않는다.
+
+NAS의 기존 Compose 실행 옵션을 동일하게 붙여 다음 읽기 전용 명령으로 이미지와 제외 이유를 확인한다. 출력에 토큰·환경 파일 본문을 포함하지 않는다.
+
+```sh
+docker compose images docs-backend
+docker compose logs --since=10m docs-backend | grep -E 'web/browser|Skipping invalid content|Rejected invalid content|Content style warning'
+```
+
+사용자에게 이미지 조회 결과를 요청했다. `docker compose restart`만 한 경우 새 이미지를 pull하거나 컨테이너를 재생성하지는 않으므로 실제 이미지 확인이 먼저다. 외부 health는 응답에 비밀정보가 관측되지는 않았지만 reverse proxy/Tunnel에서 경로를 차단하는 기존 절차를 따라야 한다. 이번에는 정책·네트워크·운영 파일을 수정하거나 원문을 자동 보정하지 않았고 새 ADR을 추가하지 않았다. 상세 API 관측과 Vercel 캐시 갱신·프론트 화면 검증도 구분한다.
+
+후속으로 사용자가 `docker compose images docs-backend` 결과를 제공했다. 컨테이너 `docs-backend-docs-backend-1`의 이미지 태그는 기대한 `sha-f8fbc068d633796d64343ea01aabee0e35a3f32c`, 플랫폼은 `linux/amd64`, 로컬 image ID는 `068f637c1e1d`다. **사용자 제공 출력상 대상 태그·플랫폼은 일치한다.** 짧은 로컬 image ID는 registry manifest digest와 다른 식별자이므로 위 게시 digest와 직접 비교하지 않는다. 독립적인 digest 검증·H1 표본 통과를 뜻하지 않으며 앞선 외부 조회 결과도 덮어쓰지 않는다. #63은 공용 UI 변경이므로 백엔드 이미지에 최종 main `c1e2850` 태그가 없다는 이유만으로 구버전으로 판단하지 않는다.
+
+다음 점검은 `web/browser`의 본문 검증 경고·실패 로그다. 다른 작성 규칙 실패나 공개 상태, 파일/볼륨 경로 문제는 새 이미지에서도 404를 만들 수 있다. 기존 파일이 없거나 draft이면 경고 없이 404일 수도 있으므로 로그가 없다고 정상으로 간주하지 않는다. 직접 API의 404는 Vercel 화면 캐시만으로 설명되지 않으며 이번에 캐시 만료를 호출하지 않는다.
+
+실제 조회 명령은 `mise exec -- node /private/tmp/docs-nas-readonly-check-20261025.ts`였다. 이는 이 머신의 임시 검사기이며 저장소 CI 도구가 아니다. 기존 로컬 환경 파일에서 토큰을 읽고 고정된 공개 API host에만 GET하며 리디렉션·재시도를 하지 않는다. 다른 머신에서는 [NAS 배포 가이드의 외부 endpoint 검증](../../runbooks/docs-backend-nas-deployment.md#verification)으로 목록/상세·무인증·health를 같은 조건으로 대조한다. 임시 검사기와 artifact에는 토큰 값을 포함하지 않았다.
+
 ## 관련 문서
 
 - [본문 작성 정책](../../architecture/docs-content-authoring-markup-policy.md#본문-제목-계층)
