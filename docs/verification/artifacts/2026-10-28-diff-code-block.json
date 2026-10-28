@@ -1,0 +1,41 @@
+{
+  "checkedOn": "2026-10-28",
+  "baseCommit": "e2126a40c02694d968f62ce0e236ec0945a57d7b",
+  "branch": "codex/docs-diff-code-block-20261028",
+  "state": "local-uncommitted",
+  "stateMeaning": "At the original local measurement, before the subsequent commit/push/PR approval. Remote results are tracked separately under KAN-45.",
+  "node": "24.22.1",
+  "pnpm": "12.14.0",
+  "tests": [
+    {
+      "command": "mise exec -- pnpm --filter docs test:lib",
+      "passed": 315,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "mise exec -- pnpm --filter docs test:code-block",
+      "passed": 22,
+      "failed": 0,
+      "skipped": 0,
+      "retries": 0,
+      "desktopMobileThemes": true,
+      "noJavaScript320px": true
+    }
+  ],
+  "checks": {
+    "typecheck": "passed",
+    "changedFilesEslint": "passed"
+  },
+  "intermediateFailures": [
+    "3 initial source-comparison tests incorrectly used the normalizing remote sanitizer; replaced comparison with span removal and entity decode to preserve original CRLF/trailing whitespace.",
+    "4 initial browser fixtures failed before render because bundled Next Image referenced process.env; fixed test-only build define.",
+    "2 ESLint regex-spacing warnings corrected."
+  ],
+  "limits": [
+    "No production build or deployment",
+    "No Safari/Firefox or real-device verification",
+    "No automatic diff inference",
+    "Existing remote sanitizer whitespace policy unchanged"
+  ]
+}
