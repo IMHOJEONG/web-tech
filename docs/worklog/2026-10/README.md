@@ -13,7 +13,7 @@
 - [10-26 원격 본문 검색 계약과 회귀](2026-10-26-remote-body-search.md): 본문 키워드·웹훅 캐시·실제 폼/Link 검색 동선8개와 전체 production162개 검증.
 
 - [10-26 상세 오류 Content-Type 보완](2026-10-26-content-response-type.md)
-- [10-25 Primary 글자 대비와 브라우저 접근성](2026-10-25-primary-action-contrast.md) [병합·배포 후속](../../verification/accessibility/2026-10-25-primary-action-contrast.md)에 별도 관측을 연결.
+- [10-25 Primary 글자 대비와 브라우저 접근성](2026-10-25-primary-action-contrast.md)
 - [10-25 로컬·원격 본문 H1 경고 전환](2026-10-25-body-h1-warning.md)
 - [10-25 나머지 보안 경고 10건 분리 조치](2026-10-25-remaining-advisories.md)
 - [10-25 Next.js Critical 패치·회귀](2026-10-25-next-critical.md)
@@ -208,3 +208,7 @@
 - [10-05 OG 브라우저·Vercel 캐시 헤더 분리](2026-10-05-og-cache-header-boundary.md)
 
 - [10-19 PR #44 피드 리뷰 보완](2026-10-19-vuln-radar-feed-review.md)
+
+## 병합 후 검증 연결
+
+- [10-28 대비 병합·배포 후속](2026-10-25-primary-action-contrast.md#2026-10-28-독립-기록-pr-준비): 기존 #62/#63 병합·배포 증거와 GitHub Deployment ID 정정, 독립 기록 PR.
