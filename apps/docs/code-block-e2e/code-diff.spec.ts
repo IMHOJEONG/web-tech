@@ -25,6 +25,7 @@ const encoded = code
 const remoteHtml = normalizeRemoteArticleHtml(
     `<pre><code class="language-diff">${encoded}</code></pre>`
 ).content
+const normalizedRemoteCode = code.replace(/\r\n?/g, '\n')
 let bundle: string
 let css: string
 
@@ -101,7 +102,7 @@ for (const dark of [false, true]) {
                 .getByRole('button', { name: '코드 복사', exact: true })
                 .click()
             expect(await page.evaluate(() => window.copiedCode)).toBe(
-                source === 'remote' ? code.trim() : code
+                source === 'remote' ? normalizedRemoteCode : code
             )
             const details = frame.locator('details')
             const summary = details.locator('summary')
@@ -111,7 +112,7 @@ for (const dark of [false, true]) {
             await expect(preview).toBeHidden()
             const full = details.locator('code')
             expect(await full.textContent()).toBe(
-                source === 'remote' ? code.trim() : code
+                source === 'remote' ? normalizedRemoteCode : code
             )
             // One row per source line: block spans must not introduce blank visual rows.
             const geometry = await full
@@ -159,6 +160,64 @@ for (const dark of [false, true]) {
     })
 }
 
+for (const language of ['diff', 'patch']) {
+    test(`remote ${language} keeps first context markers and hunk changes through copy and disclosure`, async ({
+        page,
+    }) => {
+        const source = [
+            ' +context',
+            ' -context',
+            '@@ -1 +1 @@',
+            '--- source',
+            '+++ source',
+            ...Array.from({ length: 22 }, (_, i) => ` context ${i}`),
+            ' ',
+            '',
+        ].join('\n')
+        const remote = normalizeRemoteArticleHtml(
+            `<pre><code class="language-${language}">${source}</code></pre>`
+        ).content
+        await page.setContent(
+            `<html lang="ko"><head><style>${css}</style></head><body><div id="fixture"></div></body></html>`
+        )
+        await page.evaluate(
+            (config) => {
+                window.diffFixture = config
+                Object.defineProperty(navigator, 'clipboard', {
+                    configurable: true,
+                    value: {
+                        writeText: async (value: string) => {
+                            window.copiedCode = value
+                        },
+                    },
+                })
+            },
+            { code: source, remoteHtml: remote }
+        )
+        await page.addScriptTag({ content: bundle })
+        const frame = page.getByTestId('remote').locator('.mdx-code-frame')
+        const preview = frame.locator('.mdx-code-preview')
+        await expect(
+            preview.locator('.mdx-code-diff-line--context').first()
+        ).toHaveText(' +context')
+        await expect(preview.locator('.mdx-code-diff-line--added')).toHaveText(
+            '+++ source'
+        )
+        await expect(
+            preview.locator('.mdx-code-diff-line--removed')
+        ).toHaveText('--- source')
+        await frame
+            .getByRole('button', { name: '코드 복사', exact: true })
+            .click()
+        expect(await page.evaluate(() => window.copiedCode)).toBe(source)
+        const details = frame.locator('details')
+        await details.locator('summary').focus()
+        await page.keyboard.press('Enter')
+        await expect(details).toHaveAttribute('open')
+        expect(await details.locator('code').textContent()).toBe(source)
+    })
+}
+
 test('diff markers, styling and disclosure work without JavaScript at 320px', async ({
     browser,
 }) => {
@@ -177,7 +236,9 @@ test('diff markers, styling and disclosure work without JavaScript at 320px', as
         const details = page.locator('details')
         await details.locator('summary').click()
         await expect(details.locator('pre')).toBeVisible()
-        expect(await details.locator('code').textContent()).toBe(code.trim())
+        expect(await details.locator('code').textContent()).toBe(
+            normalizedRemoteCode
+        )
         expect(
             await page.evaluate(
                 () => document.documentElement.scrollWidth <= innerWidth

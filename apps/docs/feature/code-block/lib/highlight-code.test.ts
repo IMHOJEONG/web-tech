@@ -102,6 +102,68 @@ test('ordinary code and unspecified language never infer diff from operators', (
     }
 })
 
+test('triple-marker lines inside hunks are changes, with headers reset for the next file', () => {
+    const source = [
+        'diff --git a/one b/one',
+        '--- a/one',
+        '+++ b/one',
+        '@@ -1 +1 @@',
+        '--- source',
+        '+++ source',
+        '@@ -3 +3 @@',
+        '+++ another',
+        'diff --git a/two b/two',
+        '--- a/two',
+        '+++ b/two',
+        '@@ -1 +1 @@',
+        '--- source',
+        '+++ source',
+    ].join('\r\n')
+    const html = highlightCode(source, 'diff')
+    assert.equal((html.match(/mdx-code-diff-line--meta/g) || []).length, 9)
+    assert.equal((html.match(/mdx-code-diff-line--added/g) || []).length, 3)
+    assert.equal((html.match(/mdx-code-diff-line--removed/g) || []).length, 2)
+    assert.match(html, /mdx-code-diff-line--added">\+\+\+ source/)
+    assert.match(html, /mdx-code-diff-line--removed">--- source/)
+    assert.equal(decodeHTML(html.replace(/<\/?span\b[^>]*>/g, '')), source)
+})
+
+for (const language of ['diff', 'patch']) {
+    test(`remote ${language} preserves boundary context markers in full code and preview`, () => {
+        const source = [
+            ' +context',
+            ' -context',
+            '@@ -1 +1 @@',
+            '--- removed source',
+            '+++ added source',
+            ...Array.from({ length: 22 }, (_, i) => ` context ${i}`),
+            ' ',
+            '',
+        ].join('\r\n')
+        const { content } = normalizeRemoteArticleHtml(
+            `<pre><code class="language-${language}">${source}</code></pre>`
+        )
+        const blocks = [...content.matchAll(/<code[^>]*>([\s\S]*?)<\/code>/g)]
+        assert.equal(blocks.length, 2)
+        assert.equal(
+            decodeHTML(blocks[0]![1]!.replace(/<\/?span\b[^>]*>/g, '')),
+            source.replace(/\r\n/g, '\n')
+        )
+        for (const block of blocks) {
+            assert.match(block[1]!, /mdx-code-diff-line--context"> \+context/)
+            assert.match(block[1]!, /mdx-code-diff-line--context"> -context/)
+            assert.match(
+                block[1]!,
+                /mdx-code-diff-line--added">\+\+\+ added source/
+            )
+            assert.match(
+                block[1]!,
+                /mdx-code-diff-line--removed">--- removed source/
+            )
+        }
+    })
+}
+
 test('remote diff blocks and their folded preview use the shared highlighting', () => {
     const source = [
         diff,

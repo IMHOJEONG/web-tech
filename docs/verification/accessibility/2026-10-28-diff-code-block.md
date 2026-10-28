@@ -21,7 +21,7 @@ mise exec -- pnpm --filter docs exec eslint mdx-components.tsx lib/shiki-options
 
 - Node 라이브러리·콘텐츠 회귀 **315 통과**, 실패/skip 0. diff/patch·대소문자·CRLF/빈 행·HTML escape·일반 연산자 비오인·파일 헤더·hunk·전체/미리보기를 포함한다.
 - 실제 MDX 파이프라인은 codeHighlight false/true 모두 언어 클래스가 남는지 검사했다. Shiki가 언어 클래스를 제거하는 기존 동작을 별도 실행으로 확인한 뒤 transformer로 보존했다.
-- 코드 블록 브라우저 회귀 **22 통과**, 실패/skip/retry 0. 새 diff 6개와 기존 접기/복사/320px 글자 확대 16개를 함께 실행했다. 로컬·Shiki·원격의 색/배경·기호·행 간격·원문 복사·키보드 접기·고대비 경계선·페이지 가로 넘침을 검사했다.
+- 코드 블록 브라우저 회귀 **22 통과**, 실패/skip/retry 0. 새 diff 6개와 기존 접기/복사/320px 글자 확대 16개를 함께 실행했다. 로컬·Shiki는 원문 복사, 원격은 당시 sanitizer가 LF·trim 정규화한 소스 복사를 검증했다. 색/배경·기호·행 간격·키보드 접기·고대비 경계선·페이지 가로 넘침도 검사했다. 원격의 원래 CRLF·경계 공백까지 보존했다는 의미는 아니다.
 - 앱 typecheck와 변경 TS/TSX/JS 7파일 ESLint 경고0 통과. 전역 포맷·공통 설정·새 의존성은 변경하지 않았다.
 - [정제 결과](../artifacts/2026-10-28-diff-code-block.json)에 조건·명령·중간 실패를 보존했다. PNG는 Playwright의 로컬 test-results에 생성했고 desktop/mobile을 직접 확인했다.
 
@@ -54,6 +54,18 @@ mise exec -- pnpm --filter docs exec eslint mdx-components.tsx lib/shiki-options
 `test:lib` 316개·앱 typecheck·변경 3파일 ESLint를 다시 통과했다. 코드 블록 브라우저 재검사 최초 실행은 macOS 샌드박스의 Chromium MachPort 권한 거부로 테스트 시작 전 22개가 실패했다. 앱 표시 실패와 구분하며, 승인된 실행 환경에서 같은 명령·기준으로 재검사해 **22 통과**, 실패·skip·retry 0을 확인했다.
 
 이전 커밋의 [CI 실행 40637088564](https://github.com/IMHOJEONG/web-tech/actions/runs/40637088564)에서는 반응형 3종·오프라인·상세 production·공용 UI consumer가 같은 loader 직렬화 오류로 서버 시작에 실패했다. Unit and Contract Tests는 공용 UI 생성기의 `turbo gen` 하위 프로세스 `ETIMEDOUT`으로 별도 실패했다. 이 후속 수정이 생성기 타임아웃까지 해결한다고 간주하지 않으며, 새 SHA의 CI로 재확인한다. timeout·retry·공통 CI 설정은 변경하지 않는다.
+
+## 병합 전 리뷰 보완
+
+검사22개 성공과 별개로 미해결 리뷰3건이 있어 병합을 중단했다. 현재 코드에서 hunk 내부의 `+++ source`·`--- source`가 메타데이터가 되고, 원격의 첫 문맥 행 ` +context`가 trim으로 추가 행으로 바뀌는 것을 직접 재현했다.
+
+- 하이라이터는 hunk 진입 이후 파일 헤더처럼 보이는 행도 추가·삭제로 분류한다. 다음 `diff` 파일 헤더에서 상태를 초기화한다. 여러 hunk·여러 파일과 CRLF 원문 보존을 회귀로 검사한다.
+- 원격 `diff`·`patch`만 경계 공백·끝 개행을 보존한다. LF·NBSP 정규화와 HTML 안전 처리는 유지하며, 다른 언어의 기존 trim 계약은 그대로다. 빈 문맥 행의 공백도 의미가 있어 diff에는 trimEnd도 적용하지 않는다.
+- 복사 충실도를 로컬 원문과 원격 정규화 소스로 구분했다. 원격 LF 정규화는 유지되므로 원본 byte 동일성을 주장하지 않는다. 초기 검증 수와 중간 실패 기록도 유지한다.
+
+Node·브라우저·타입·lint의 새 결과 및 최종 head는 같은 KAN-45와 PR #74에 후속 기록한다. 최종 메시지 사전검사 전에 미해결 스레드·최신 head CI를 다시 확인하며, 기존 draft·다른 작업 트리는 변경하지 않는다.
+
+리뷰 보완 후 로컬 `test:lib` **320 통과**, `test:code-block` **26 통과**(실패·skip·retry0), 앱 typecheck 및 변경 코드6파일 ESLint 경고0을 확인했다. 기존316/22 결과에 추가한 검사이며 누적 합산하지 않는다. 전용 브라우저26개는 로컬 실행이고 원격 CI의 라이브러리·앱 검사와 구분한다.
 
 ## 관련 문서
 

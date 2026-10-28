@@ -215,16 +215,23 @@ export function isDiffLanguage(language: string) {
 }
 
 function highlightDiff(code: string) {
+    let inHunk = false
     // Keep separators outside spans so textContent and clipboard retain the source.
     return code
         .split(/(\r\n|\n|\r)/)
         .map((line, index) => {
             if (index % 2 || !line) return line
 
+            if (/^diff(?: |$)/.test(line)) inHunk = false
+            const hunkHeader = line.startsWith('@@')
             const metadata =
-                /^(?:diff(?: |$)|index |---(?:[ \t]|$)|\+\+\+(?:[ \t]|$)|@@|\\ No newline at end of file)/.test(
-                    line
-                )
+                hunkHeader ||
+                /^\\ No newline at end of file/.test(line) ||
+                (!inHunk &&
+                    /^(?:diff(?: |$)|index |---(?:[ \t]|$)|\+\+\+(?:[ \t]|$))/.test(
+                        line
+                    ))
+            if (hunkHeader) inHunk = true
             const kind = metadata
                 ? 'meta'
                 : line.startsWith('+')
