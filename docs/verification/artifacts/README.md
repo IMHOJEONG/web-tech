@@ -1,5 +1,9 @@
 # 검증 원본 증거
 
+- [10-28 diff 코드 블록](2026-10-28-diff-code-block.json): [검증](../accessibility/2026-10-28-diff-code-block.md)의 조건·실행 결과·중간 실패, 미커밋.
+
+- [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.json): [보고서](../security/2026-10-27-node24-security-patch.md). 버전 경계·회귀·로컬 이미지 digest/gate hash·원본 15파일 보존·미배포 구분.
+
 - 모바일 메뉴·카테고리 탐색: [관련 반복 원본 정제본](2026-10-27-navigation-readiness.playwright.json), [출처·해시와 전체 검사 파생 집계](2026-10-27-navigation-readiness-provenance.json). [보고서](../accessibility/2026-10-27-navigation-readiness.md). 관련90통과·36제외/전체372통과·54제외, 재시도0. 용량 초과 전체 원본은 저장소에 보관하지 않았다.
 
 - [10-27 스켈레톤 hydration 격리 집계](2026-10-27-skeleton-hydration-isolation.json): [보고서](../accessibility/2026-10-27-skeleton-hydration-isolation.md). 분리 전후 재현·225개 무재시도 검사의 당시 로컬 집계. 원격 후속은 보고서에서 별도 연결한다.

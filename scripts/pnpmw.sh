@@ -1,14 +1,16 @@
 #!/bin/sh
 
-if command -v pnpm >/dev/null 2>&1; then
-    exec pnpm "$@"
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd) || exit 1
+
+if command -v mise >/dev/null 2>&1; then
+    mise exec -- node "$SCRIPT_DIR/check-node-runtime.mts" || exit $?
+    exec mise exec -- pnpm "$@"
 fi
 
-PNPM_MISE_BIN_DIR="$HOME/.local/share/mise/installs/node/24.12.0/bin"
+node "$SCRIPT_DIR/check-node-runtime.mts" || exit $?
 
-if [ -x "$PNPM_MISE_BIN_DIR/pnpm" ]; then
-    export PATH="$PNPM_MISE_BIN_DIR:$PATH"
-    exec "$PNPM_MISE_BIN_DIR/pnpm" "$@"
+if command -v pnpm >/dev/null 2>&1; then
+    exec pnpm "$@"
 fi
 
 if command -v corepack >/dev/null 2>&1; then

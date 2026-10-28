@@ -1,5 +1,9 @@
 # 검증 보고서
 
+- [10-28 diff 코드 블록](accessibility/2026-10-28-diff-code-block.md): Node315·브라우저22, 두 테마·실제 MDX/Shiki·원격·고대비·JS 비활성, 운영 미검증.
+
+- [10-27 Node 24 보안 patch·CI·Docker](security/2026-10-27-node24-security-patch.md): main 기반 격리·pin/floor·amd64 이미지와 실제 Node·앱 회귀. 운영 미배포.
+
 - [10-27 모바일 메뉴·카테고리 탐색 준비 시점](accessibility/2026-10-27-navigation-readiness.md): disabled Enter·RSC 응답 보류 음성 대조, 관련90개·전체372개 무재시도 통과. 원본 정제본·해시 연결, 미푸시.
 
 - [10-27 스켈레톤 hydration 격리](accessibility/2026-10-27-skeleton-hydration-isolation.md): CI 재시도7건·실제 hydration 제거·빈 스타일 오판 재현, 별도 문서와 음성 대조·225개 무재시도 통과. 원격 후속 미검증.

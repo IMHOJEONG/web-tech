@@ -72,7 +72,7 @@
 - [Computer Science Channel Evaluation](docs-computer-science-channel-evaluation.md)
 - [Docs Content API Fail-Fast Policy](docs-content-api-fail-fast-policy.md)
 - [Docs Content Asset Exposure Strategy](docs-content-asset-exposure-strategy.md)
-- [Docs Content Authoring Markup Policy](docs-content-authoring-markup-policy.md): 본문 H1은 로컬·원격 공통 경고로 처리하고 자동 H2 변환 없이 원문을 유지한다. 운영 적용은 새 이미지 배포 후 별도 확인한다.
+- [Docs Content Authoring Markup Policy](docs-content-authoring-markup-policy.md): H1 공통 경고·원문 유지와 diff/patch 코드 작성 규칙. 프론트 로컬 구현과 NAS 이미지/운영 배포 검증은 구분한다.
 - [Docs Content Authoring Pipeline](docs-content-authoring-pipeline.md)
 - [콘텐츠 캐시 개선 우선순위](docs-content-cache-improvement-backlog.md)
 - [Docs Content Cache Revalidation Policy](docs-content-cache-revalidation-policy.md)

@@ -1,4 +1,7 @@
-FROM node:24-bookworm-slim AS builder
+FROM node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205 AS builder
+
+COPY scripts/check-node-runtime.mts /opt/check-node-runtime.mts
+RUN node /opt/check-node-runtime.mts
 
 ENV PNPM_HOME=/pnpm
 ENV PATH=$PNPM_HOME:$PATH
@@ -19,7 +22,10 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm --filter docs-backend build
 RUN pnpm --filter docs-backend deploy --legacy --prod /prod/docs-backend
 
-FROM node:24-bookworm-slim AS runtime
+FROM node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205 AS runtime
+
+COPY scripts/check-node-runtime.mts /opt/check-node-runtime.mts
+RUN node /opt/check-node-runtime.mts
 
 ENV NODE_ENV=production
 ENV PORT=8000
