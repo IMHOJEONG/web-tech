@@ -1,5 +1,19 @@
 # 검증 원본 증거
 
+- [10-29 Brotli 게시 상태 로컬 화면](2026-10-29-brotli-publication-local.json)·[빌드 재실행 로그](2026-10-29-brotli-publication-build.log): [게시 검증](../content/2026-10-29-brotli-publication.md). 네 화면·복사·검색 Link·사이트맵, 운영 미검증.
+
+- [10-28 Brotli 초안의 최신 main 기반 로컬 화면](2026-10-28-brotli-main-preview.json): [기존 보고서의 후속 검증](../content/2026-10-28-brotli-security-article.md).
+
+- [10-28 Brotli 참고자료·저작권 화면](2026-10-28-brotli-references-ui.json), [원문 검사](2026-10-28-brotli-references-source-tests.txt): [기존 보고서의 후속 검증](../content/2026-10-28-brotli-security-article.md).
+
+- [10-28 Brotli 기고 재편집 화면](2026-10-28-brotli-editorial-ui.json), [원문 검사](2026-10-28-brotli-editorial-source-tests.txt): [기존 보고서의 후속 검증](../content/2026-10-28-brotli-security-article.md).
+
+- [10-28 Brotli 버퍼·원인 코드 소스](2026-10-28-brotli-decoder-sources.json), [16개 검사](2026-10-28-brotli-decoder-source-tests.txt), [화면](2026-10-28-brotli-decoder-ui.json): [기존 보고서의 후속 검증](../content/2026-10-28-brotli-security-article.md).
+
+- [10-28 Brotli 아키텍처 보강 화면](2026-10-28-brotli-architecture-ui.json), [원문 검사](2026-10-28-brotli-architecture-source-tests.txt): [기존 보고서의 후속 구역](../content/2026-10-28-brotli-security-article.md).
+
+- [10-28 Brotli 기고 검사·근거](2026-10-28-brotli-article-checks.json), [원문 실행](2026-10-28-brotli-article-source-tests.txt), [화면 관측](2026-10-28-brotli-article-ui.json): [기존 보고서의 후속 검증](../content/2026-10-28-brotli-security-article.md).
+
 - [10-28 diff 코드 블록](2026-10-28-diff-code-block.json): [검증](../accessibility/2026-10-28-diff-code-block.md)의 조건·실행 결과·중간 실패, 미커밋.
 
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.json): [보고서](../security/2026-10-27-node24-security-patch.md). 버전 경계·회귀·로컬 이미지 digest/gate hash·원본 15파일 보존·미배포 구분.

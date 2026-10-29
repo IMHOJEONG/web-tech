@@ -1,0 +1,491 @@
+{
+  "observedAt": "2026-10-28T00:26:54.516Z",
+  "svgChecks": [
+    {
+      "name": "node-brotli-service-runtime-architecture",
+      "height": 1250,
+      "bounds": [
+        {
+          "text": "요청과 외부 응답은 다른 길로 들어옵니다",
+          "x": 126.3984375,
+          "y": 23,
+          "width": 547.203125,
+          "height": 38
+        },
+        {
+          "text": "서비스 구성 + Node.js 프로세스 내부",
+          "x": 214.0078125,
+          "y": 73,
+          "width": 371.984375,
+          "height": 28.26123046875
+        },
+        {
+          "text": "외부 사용자",
+          "x": 140.953125,
+          "y": 145,
+          "width": 138.09375,
+          "height": 33
+        },
+        {
+          "text": "A · Brotli 요청 본문",
+          "x": 104.73388671875,
+          "y": 187,
+          "width": 210.49267578125,
+          "height": 30
+        },
+        {
+          "text": "외부 API·파일 서버",
+          "x": 473.8125,
+          "y": 145,
+          "width": 232.375,
+          "height": 33
+        },
+        {
+          "text": "B · Brotli 응답 제공",
+          "x": 484.0234375,
+          "y": 187,
+          "width": 211.953125,
+          "height": 30
+        },
+        {
+          "text": "Vercel Network / WAF",
+          "x": 56.5947265625,
+          "y": 297,
+          "width": 306.7958984375,
+          "height": 33
+        },
+        {
+          "text": "알려진 패턴 대상 차단 규칙",
+          "x": 77.1640625,
+          "y": 338,
+          "width": 265.671875,
+          "height": 28
+        },
+        {
+          "text": "이 구성은 선택한 예시입니다",
+          "x": 69.828125,
+          "y": 369,
+          "width": 280.34375,
+          "height": 28
+        },
+        {
+          "text": "외부에서 온 응답",
+          "x": 457.8359375,
+          "y": 297,
+          "width": 198.328125,
+          "height": 33
+        },
+        {
+          "text": "Content-Encoding: br",
+          "x": 438.8671875,
+          "y": 338,
+          "width": 236.5966796875,
+          "height": 28.26123046875
+        },
+        {
+          "text": "요청 WAF를 거치지 않음",
+          "x": 432.7734375,
+          "y": 369,
+          "width": 248.453125,
+          "height": 28
+        },
+        {
+          "text": "Node.js 프로세스",
+          "x": 275.0546875,
+          "y": 467,
+          "width": 249.890625,
+          "height": 38.1552734375
+        },
+        {
+          "text": "요청 처리 코드",
+          "x": 126.8125,
+          "y": 560,
+          "width": 172.375,
+          "height": 33
+        },
+        {
+          "text": "앱·미들웨어",
+          "x": 150.109375,
+          "y": 605,
+          "width": 125.78125,
+          "height": 30
+        },
+        {
+          "text": "Brotli 해제 여부 확인",
+          "x": 109.2265625,
+          "y": 643,
+          "width": 207.546875,
+          "height": 28
+        },
+        {
+          "text": "HTTP 클라이언트",
+          "x": 479.0625,
+          "y": 560,
+          "width": 215.875,
+          "height": 33
+        },
+        {
+          "text": "fetch · 일부 라이브러리",
+          "x": 460.234375,
+          "y": 605,
+          "width": 253.53125,
+          "height": 30
+        },
+        {
+          "text": "자동 해제 여부 확인",
+          "x": 490.078125,
+          "y": 643,
+          "width": 193.84375,
+          "height": 28
+        },
+        {
+          "text": "요청 ↑",
+          "x": 670.6484375,
+          "y": 413,
+          "width": 62.703125,
+          "height": 28.23681640625
+        },
+        {
+          "text": "JavaScript API / 네이티브 바인딩",
+          "x": 188.0078125,
+          "y": 812,
+          "width": 423.984375,
+          "height": 33
+        },
+        {
+          "text": "node:zlib 등 · 라이브러리의 실제 경로 확인",
+          "x": 184.3984375,
+          "y": 856,
+          "width": 431.203125,
+          "height": 28
+        },
+        {
+          "text": "Node.js에 포함된 Brotli 디코더",
+          "x": 203.328125,
+          "y": 965,
+          "width": 393.34375,
+          "height": 33.3134765625
+        },
+        {
+          "text": "C/C++ 코드 · 같은 프로세스의 메모리",
+          "x": 197.6015625,
+          "y": 1010,
+          "width": 404.796875,
+          "height": 30
+        },
+        {
+          "text": "CVE-2026-111497 수정 대상",
+          "x": 248.109375,
+          "y": 1050,
+          "width": 303.78125,
+          "height": 28
+        },
+        {
+          "text": "실선: 들어오는 데이터 · 점선: 요청 또는 조건부 해제",
+          "x": 144.8515625,
+          "y": 1151,
+          "width": 510.296875,
+          "height": 28
+        },
+        {
+          "text": "대표 개념도 · 실제 배치·공격 성공을 관측한 그림 아님",
+          "x": 136.828125,
+          "y": 1190,
+          "width": 526.34375,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "name": "node-brotli-runtime-deployment",
+      "height": 1220,
+      "bounds": [
+        {
+          "text": "수정된 런타임이 운영에 도달하는 경로",
+          "x": 145.8203125,
+          "y": 23,
+          "width": 508.359375,
+          "height": 38
+        },
+        {
+          "text": "개발·빌드·운영은 서로 다른 실행 환경입니다",
+          "x": 183.15625,
+          "y": 75,
+          "width": 433.6875,
+          "height": 28
+        },
+        {
+          "text": "개발 PC",
+          "x": 159.0390625,
+          "y": 152,
+          "width": 101.921875,
+          "height": 33
+        },
+        {
+          "text": "로컬 Node.js 교체",
+          "x": 110.0078125,
+          "y": 198,
+          "width": 199.984375,
+          "height": 30
+        },
+        {
+          "text": "운영 교체의 증거는 아님",
+          "x": 91.453125,
+          "y": 240,
+          "width": 237.09375,
+          "height": 28
+        },
+        {
+          "text": "CI 빌드·테스트",
+          "x": 500.9609375,
+          "y": 152,
+          "width": 178.078125,
+          "height": 33
+        },
+        {
+          "text": "CI가 선택한 Node.js 확인",
+          "x": 449.40625,
+          "y": 198,
+          "width": 281.1875,
+          "height": 30
+        },
+        {
+          "text": "빌드 성공 ≠ 운영 패치",
+          "x": 482.7421875,
+          "y": 240,
+          "width": 214.515625,
+          "height": 28
+        },
+        {
+          "text": "운영 런타임 제공 방식에 따라 경로가 갈립니다",
+          "x": 155.6171875,
+          "y": 312,
+          "width": 488.765625,
+          "height": 30
+        },
+        {
+          "text": "운영 대상에 맞는 경로를 적용합니다",
+          "x": 223.9140625,
+          "y": 397,
+          "width": 352.171875,
+          "height": 28
+        },
+        {
+          "text": "직접 관리하는 환경",
+          "x": 103.859375,
+          "y": 462,
+          "width": 224.28125,
+          "height": 33
+        },
+        {
+          "text": "Docker 이미지·서버",
+          "x": 106.6015625,
+          "y": 510,
+          "width": 218.796875,
+          "height": 30
+        },
+        {
+          "text": "수정된 Node.js 포함",
+          "x": 104.3359375,
+          "y": 552,
+          "width": 223.328125,
+          "height": 30
+        },
+        {
+          "text": "이미지 빌드·실행 파일 교체",
+          "x": 82.4765625,
+          "y": 598,
+          "width": 267.046875,
+          "height": 28
+        },
+        {
+          "text": "관리형 플랫폼",
+          "x": 501.9765625,
+          "y": 462,
+          "width": 164.046875,
+          "height": 33
+        },
+        {
+          "text": "공급자의 런타임 정책",
+          "x": 471.3984375,
+          "y": 510,
+          "width": 225.203125,
+          "height": 30
+        },
+        {
+          "text": "패치 제공 상태 확인",
+          "x": 479.3203125,
+          "y": 552,
+          "width": 209.359375,
+          "height": 30
+        },
+        {
+          "text": "공급자 안내에 따라 재배포",
+          "x": 454.640625,
+          "y": 598,
+          "width": 258.71875,
+          "height": 28
+        },
+        {
+          "text": "새 운영 프로세스로 교체",
+          "x": 257.7421875,
+          "y": 796,
+          "width": 284.515625,
+          "height": 33
+        },
+        {
+          "text": "재배포·재시작 → 새 프로세스 기동",
+          "x": 215.1875,
+          "y": 842,
+          "width": 369.625,
+          "height": 30
+        },
+        {
+          "text": "기존 프로세스 종료 여부·배포 ID 대조",
+          "x": 214.59375,
+          "y": 882,
+          "width": 370.8125,
+          "height": 28
+        },
+        {
+          "text": "요청을 처리하는 프로세스 확인",
+          "x": 218.8203125,
+          "y": 998,
+          "width": 362.359375,
+          "height": 33
+        },
+        {
+          "text": "새 셸의 node 버전만으로 완료 판정하지 않음",
+          "x": 178.3515625,
+          "y": 1042,
+          "width": 443.296875,
+          "height": 28
+        },
+        {
+          "text": "npm update · lockfile 변경은 Node 실행 파일 교체와 다릅니다",
+          "x": 82.5625,
+          "y": 1120,
+          "width": 634.875,
+          "height": 28
+        },
+        {
+          "text": "운영 절차의 개념도 · 실제 배포·패치 적용은 미검증",
+          "x": 151.109375,
+          "y": 1158,
+          "width": 497.78125,
+          "height": 28
+        }
+      ]
+    }
+  ],
+  "views": [
+    {
+      "width": 320,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "bodyStartAndEnd": true,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-service-runtime-architecture.png&w=640&q=75",
+          "width": 288,
+          "height": 450,
+          "naturalWidth": 320,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-runtime-deployment.png&w=640&q=75",
+          "width": 288,
+          "height": 439.1875,
+          "naturalWidth": 320,
+          "decoded": true
+        }
+      ],
+      "overflow": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "bodyStartAndEnd": true,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-service-runtime-architecture.png&w=640&q=75",
+          "width": 358,
+          "height": 559.375,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-runtime-deployment.png&w=640&q=75",
+          "width": 358,
+          "height": 545.9375,
+          "naturalWidth": 390,
+          "decoded": true
+        }
+      ],
+      "overflow": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 1280,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "bodyStartAndEnd": true,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-service-runtime-architecture.png&w=1920&q=75",
+          "width": 704,
+          "height": 1100,
+          "naturalWidth": 1066,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-runtime-deployment.png&w=1920&q=75",
+          "width": 704,
+          "height": 1073.59375,
+          "naturalWidth": 1066,
+          "decoded": true
+        }
+      ],
+      "overflow": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "colorScheme": "dark",
+      "status": 200,
+      "noindex": true,
+      "bodyStartAndEnd": true,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-service-runtime-architecture.png&w=640&q=75",
+          "width": 358,
+          "height": 559.375,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-runtime-deployment.png&w=640&q=75",
+          "width": 358,
+          "height": 545.9375,
+          "naturalWidth": 390,
+          "decoded": true
+        }
+      ],
+      "overflow": 0,
+      "pageErrors": []
+    }
+  ],
+  "files": {
+    "apps/docs/category/be/node-js/node-brotli-runtime-security.mdx": "08a8ed447d66455e0d705d94ac0832e0cf780a24e15c1950fa540a145e5329be",
+    "apps/docs/public/diagrams/node-brotli-service-runtime-architecture.svg": "93f90f28620594ce881faa3d85ac63509d4cc96ed4577e4378fad149a15f5147",
+    "apps/docs/public/diagrams/node-brotli-service-runtime-architecture.png": "2f1c9149af542990c42bfed809fc79873119d39528b877f520fcec2e2323e639",
+    "apps/docs/public/diagrams/node-brotli-runtime-deployment.svg": "11f84908ae3cb1f8242924bc6a751a58205ccf4ff787e82ad5d668b1df80b954",
+    "apps/docs/public/diagrams/node-brotli-runtime-deployment.png": "53b34036c5ce5c832444bf7e56f08c1677a24443eff6ad319aed8e26070f3085"
+  },
+  "failure": null
+}
