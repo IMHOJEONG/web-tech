@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-29 승인된 Brotli 기고 게시](2026-10-29-brotli-publication.md): 본문 보존·게시 metadata·로컬 production 검증, NAS/다른 작업 제외.
+
 - [10-28 Brotli 보안 기고 초안](2026-10-28-brotli-security-article.md)
 
 - [10-28 diff 코드 블록 표시](2026-10-28-diff-code-block.md): 공통 행 하이라이터·언어 보존·로컬/원격/모바일 복사·접기 회귀, 로컬-only.

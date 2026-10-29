@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-29 Brotli 글 게시 전 검증](content/2026-10-29-brotli-publication.md): 게시 상태 실제 원문16개·production 빌드·네 화면과 검색 Link, 원격 게시는 별도 단계.
+
 - [10-28 Brotli 보안 글 근거·예제·화면 검증](content/2026-10-28-brotli-security-article.md): 공식 공지·원문 검사·preview 조건, 운영/공격 차단 미검증.
 
 - [10-28 diff 코드 블록](accessibility/2026-10-28-diff-code-block.md): Node315·브라우저22, 두 테마·실제 MDX/Shiki·원격·고대비·JS 비활성, 운영 미검증.
