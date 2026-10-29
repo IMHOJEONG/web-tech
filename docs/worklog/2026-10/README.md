@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-29 블로그 출처·저작권 작성 지침 분리](2026-10-29-blog-source-license-rules.md)
+
 - [10-29 CodeRabbit 한도 예외·무료 대안](2026-10-29-coderabbit-rate-limit.md): 공식 App/head/정확한 한도만 감사 예외, 다른 CI·리뷰·메시지 게이트 유지.
 
 - [10-29 승인된 Brotli 기고 게시](2026-10-29-brotli-publication.md): 본문 보존·게시 metadata·로컬 production 검증, NAS/다른 작업 제외.
