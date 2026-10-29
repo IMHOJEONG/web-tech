@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-27 개발 이력과 ADR 관리 점검](2026-10-27-adr-governance-audit.md)
+
 - [10-29 블로그 출처·저작권 작성 지침 분리](2026-10-29-blog-source-license-rules.md)
 
 - [10-29 CodeRabbit 한도 예외·무료 대안](2026-10-29-coderabbit-rate-limit.md): 공식 App/head/정확한 한도만 감사 예외, 다른 CI·리뷰·메시지 게이트 유지.

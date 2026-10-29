@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-27 ADR 관리 점검](governance/2026-10-27-adr-governance-audit.md): 당시 main 스냅샷 대조와 상태·계약 불일치 기록. 현재 구현 재감사가 아니다.
+
 - [10-29 CodeRabbit 리뷰 한도 예외](resilience/2026-10-29-coderabbit-rate-limit.md): 회귀65개·타입·실제 동일 head check-only·신원/사유 음성 검증, main 전파 별도.
 
 - [10-29 Brotli 글 게시 전 검증](content/2026-10-29-brotli-publication.md): 게시 상태 실제 원문16개·production 빌드·네 화면과 검색 Link, 원격 게시는 별도 단계.

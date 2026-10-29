@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-27 ADR 관리 점검 집계](2026-10-27-adr-governance-audit.json): [검증 보고서](../governance/2026-10-27-adr-governance-audit.md).
+
 - [10-29 CodeRabbit 한도 예외 회귀](2026-10-29-coderabbit-rate-limit-tests.txt)·[실제 PR76 check-only](2026-10-29-coderabbit-rate-limit-live.json): [검증](../resilience/2026-10-29-coderabbit-rate-limit.md). 리뷰 미수행 감사와 기존 게이트 보존, 실제 병합은 별도.
 
 - [10-29 CodeRabbit 정책 전체 저장소 회귀198개](2026-10-29-coderabbit-rate-limit-repo-tests.txt)·[Brotli 게시 후 공개 Chromium](2026-10-29-brotli-publication-production.json): 같은 검증의 후속 적용 결과. 최초 로컬 포트 권한 제한과 재실행은 보고서에서 구분한다.
