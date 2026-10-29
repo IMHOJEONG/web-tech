@@ -1,0 +1,9 @@
+$ pnpm --filter @web-tech/docs-content-contract build
+$ tsc -p tsconfig.build.json && tsc -p tsconfig.cjs.json && cp package.cjs.json dist/cjs/package.json
+$ node ./scripts/validate-content.mjs && node ./scripts/validate-content-style.mjs
+[docs] Content frontmatter validation passed for 20 files.
+[docs] Content style validation warnings.
+
+- /Users/coder/Desktop/project/web-tech/apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx: published content contains placeholder-like text
+
+[docs] Content style validation passed for 20 files.

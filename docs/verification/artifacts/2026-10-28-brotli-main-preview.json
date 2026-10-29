@@ -1,0 +1,62 @@
+{
+  "observedAt": "2026-10-28T09:19:31.953Z",
+  "gitHead": "0da7979b1d43c80ed28873a66fa9be222b2534d4",
+  "articleSha256": "f622dc9eeabc872f069bae0e04a4cc309115155a225d3adf196fefd99811ee31",
+  "views": [
+    {
+      "width": 390,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "added": {
+        "color": "rgb(126, 231, 135)",
+        "background": "color(srgb 0.494118 0.905882 0.529412 / 0.1)",
+        "border": "2px"
+      },
+      "removed": {
+        "color": "rgb(255, 161, 152)",
+        "background": "color(srgb 1 0.631373 0.596078 / 0.1)"
+      },
+      "copyMatches": true,
+      "overflow": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 1280,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "added": {
+        "color": "rgb(126, 231, 135)",
+        "background": "color(srgb 0.494118 0.905882 0.529412 / 0.1)",
+        "border": "2px"
+      },
+      "removed": {
+        "color": "rgb(255, 161, 152)",
+        "background": "color(srgb 1 0.631373 0.596078 / 0.1)"
+      },
+      "copyMatches": true,
+      "overflow": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "colorScheme": "dark",
+      "status": 200,
+      "noindex": true,
+      "added": {
+        "color": "rgb(126, 231, 135)",
+        "background": "color(srgb 0.494118 0.905882 0.529412 / 0.1)",
+        "border": "2px"
+      },
+      "removed": {
+        "color": "rgb(255, 161, 152)",
+        "background": "color(srgb 1 0.631373 0.596078 / 0.1)"
+      },
+      "copyMatches": true,
+      "overflow": 0,
+      "pageErrors": []
+    }
+  ],
+  "failure": null
+}
