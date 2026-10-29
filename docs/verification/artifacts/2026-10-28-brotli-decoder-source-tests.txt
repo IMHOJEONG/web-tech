@@ -1,0 +1,34 @@
+$ node --test scripts/brotli-article-source.test.mts scripts/brotli-decoder-source.test.mts
+▶ benign Brotli fixture and actual MDX: binding, strict types, roundtrip, runtime output
+  ✔ fixture strict type check (564.695416ms)
+  ✔ fixture roundtrip 1 (77.775541ms)
+  ℹ {"kind":"fixture","run":1,"output":{"node":"24.22.1","brotli":"1.2.0","inputBytes":624,"compressedBytes":54,"restored":true}}
+  ✔ fixture roundtrip 2 (77.618583ms)
+  ℹ {"kind":"fixture","run":2,"output":{"node":"24.22.1","brotli":"1.2.0","inputBytes":624,"compressedBytes":54,"restored":true}}
+  ✔ fixture roundtrip 3 (76.609291ms)
+  ℹ {"kind":"fixture","run":3,"output":{"node":"24.22.1","brotli":"1.2.0","inputBytes":624,"compressedBytes":54,"restored":true}}
+  ✔ actual-mdx strict type check (986.344041ms)
+  ✔ actual-mdx roundtrip 1 (74.0405ms)
+  ℹ {"kind":"actual-mdx","run":1,"output":{"node":"24.22.1","brotli":"1.2.0","inputBytes":624,"compressedBytes":54,"restored":true}}
+  ✔ actual-mdx roundtrip 2 (75.15025ms)
+  ℹ {"kind":"actual-mdx","run":2,"output":{"node":"24.22.1","brotli":"1.2.0","inputBytes":624,"compressedBytes":54,"restored":true}}
+  ✔ actual-mdx roundtrip 3 (74.403167ms)
+  ℹ {"kind":"actual-mdx","run":3,"output":{"node":"24.22.1","brotli":"1.2.0","inputBytes":624,"compressedBytes":54,"restored":true}}
+✔ benign Brotli fixture and actual MDX: binding, strict types, roundtrip, runtime output (2011.836416ms)
+ℹ {"observedAt":"2026-10-28T00:53:00.226Z","node":"v24.22.1","sourceSha256":"d2e91edcfa225bd3ba62b7819294467cbe1ac95ffb290f03a2f1b148309dcca3","scope":"benign locally generated input; not CVE exploit or patch acceptance test"}
+✔ missing, duplicate, reordered and unregistered executable blocks are rejected (1.352542ms)
+✔ incomplete or false success output is rejected (0.402292ms)
+✔ pinned upstream source snapshots retain content hashes, refs and canonical URLs (2.542458ms)
+✔ actual MDX C/diff excerpts match pinned upstream sources after declared whitespace normalization (3.329792ms)
+ℹ {"observedAt":"2026-10-28T00:53:00.235Z","sourceSha256":"d2e91edcfa225bd3ba62b7819294467cbe1ac95ffb290f03a2f1b148309dcca3","before":"34f020fa9daba975747b29885314c2545b7aa040","after":"0ed4268a4401abcb4472096340477cf4af7d1a2b","checkedExcerpts":6,"scope":"read-only source comparison; partial C not compiled; no vulnerable input or exploit executed"}
+✔ missing, duplicated, unregistered and untagged source blocks fail binding (1.262208ms)
+✔ wrong predicates, append expressions and error propagation are rejected (2.767625ms)
+✔ tampered upstream snapshot and wrong commit pin are rejected (0.560667ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2154.911375

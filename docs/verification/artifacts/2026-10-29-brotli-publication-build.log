@@ -1,0 +1,185 @@
+$ pnpm --filter @web-tech/docs-content-contract build && pnpm --filter @web-tech/ui build && pnpm validate:content
+$ tsc -p tsconfig.build.json && tsc -p tsconfig.cjs.json && cp package.cjs.json dist/cjs/package.json
+$ node scripts/build.mts
+$ pnpm --filter @web-tech/docs-content-contract build
+$ tsc -p tsconfig.build.json && tsc -p tsconfig.cjs.json && cp package.cjs.json dist/cjs/package.json
+$ node ./scripts/validate-content.mjs && node ./scripts/validate-content-style.mjs
+[docs] Content frontmatter validation passed for 20 files.
+[docs] Content style validation warnings.
+
+- /private/tmp/brotli-publication-build-20261029/apps/docs/category/be/node-js/node-brotli-runtime-security.mdx: published content contains placeholder-like text
+- /private/tmp/brotli-publication-build-20261029/apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx: published content contains placeholder-like text
+
+[docs] Content style validation passed for 20 files.
+$ next build
+▲ Next.js 16.4.3 (Turbopack)
+✓ Running next.config.mjs took 82ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1316ms
+  Running TypeScript ...
+  Finished TypeScript in 5.1s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/33) ...
+[docs.search_index_build] { documentCount: 14 }
+[docs.search_index_build] { documentCount: 14 }
+[docs.search_index_build] { documentCount: 14 }
+[docs.search_index_build] { documentCount: 14 }
+[docs.article_timing] {"traceId":"78022967-de64-4d99-9cc5-6139485d42e6","requestId":null,"durationScope":"operation","stage":"search-local","outcome":"success","durationMs":68.83}
+[docs.content_source] {
+  requestId: null,
+  area: 'search',
+  source: 'local',
+  reason: 'remote-index-disabled',
+  keyword: undefined,
+  includeRemote: false,
+  localCount: 14,
+  remoteCount: 0,
+  totalCount: 14
+}
+[docs.article_timing] {"traceId":"9496422b-f948-4cde-8431-9d9a5c6cdd5a","requestId":null,"durationScope":"operation","stage":"search-local","outcome":"success","durationMs":91.08}
+[docs.content_source] {
+  requestId: null,
+  area: 'search',
+  source: 'local',
+  reason: 'remote-index-disabled',
+  keyword: undefined,
+  includeRemote: false,
+  localCount: 14,
+  remoteCount: 0,
+  totalCount: 14
+}
+[docs.article_timing] {"traceId":"a822099b-89f4-45f0-9569-72913535372c","requestId":null,"durationScope":"operation","stage":"search-local","outcome":"success","durationMs":66.68}
+[docs.content_source] {
+  requestId: null,
+  area: 'search',
+  source: 'local',
+  reason: 'remote-index-disabled',
+  keyword: undefined,
+  includeRemote: false,
+  localCount: 14,
+  remoteCount: 0,
+  totalCount: 14
+}
+[docs.article_timing] {"traceId":"408f577f-186c-45af-b953-5923049307f0","requestId":null,"durationScope":"operation","stage":"search-local","outcome":"success","durationMs":96.09}
+[docs.content_source] {
+  requestId: null,
+  area: 'search',
+  source: 'local',
+  reason: 'remote-index-disabled',
+  keyword: undefined,
+  includeRemote: false,
+  localCount: 14,
+  remoteCount: 0,
+  totalCount: 14
+}
+  Generating static pages using 7 workers (8/33) 
+  Generating static pages using 7 workers (16/33) 
+  Generating static pages using 7 workers (24/33) 
+[docs.search_index_build] { documentCount: 14 }
+[docs.article_timing] {"traceId":"3e7de593-4795-4427-b7e4-40f7650018d7","requestId":null,"durationScope":"operation","stage":"search-local","outcome":"success","durationMs":27.2}
+[docs.content_source] {
+  requestId: null,
+  area: 'search',
+  source: 'local',
+  reason: 'remote-index-disabled',
+  keyword: undefined,
+  includeRemote: false,
+  localCount: 14,
+  remoteCount: 0,
+  totalCount: 14
+}
+[docs.content_source] {
+  area: 'index',
+  source: 'local',
+  reason: 'remote-index-disabled',
+  includeRemote: false,
+  localCount: 14,
+  remoteCount: 0,
+  totalCount: 14
+}
+[docs.content_source] {
+  area: 'index',
+  source: 'local',
+  reason: 'remote-index-disabled',
+  includeRemote: false,
+  localCount: 14,
+  remoteCount: 0,
+  totalCount: 14
+}
+[docs.article_timing] {"traceId":"4d346f44-4687-4510-8ac2-9ccadee3ef5c","requestId":null,"durationScope":"operation","stage":"search-local","outcome":"success","durationMs":50.19}
+[docs.content_source] {
+  requestId: null,
+  area: 'search',
+  source: 'local',
+  reason: 'remote-index-disabled',
+  keyword: undefined,
+  includeRemote: false,
+  localCount: 14,
+  remoteCount: 0,
+  totalCount: 14
+}
+[docs.article_timing] {"traceId":"79c07b04-aeb5-4cea-b03d-a0e162cb3954","requestId":null,"durationScope":"operation","stage":"search-local","outcome":"success","durationMs":47.86}
+[docs.content_source] {
+  requestId: null,
+  area: 'search',
+  source: 'local',
+  reason: 'remote-index-disabled',
+  keyword: undefined,
+  includeRemote: false,
+  localCount: 14,
+  remoteCount: 0,
+  totalCount: 14
+}
+✓ Generating static pages using 7 workers (33/33) in 595ms
+  Finalizing page optimization ...
+
+Route (app)                                 Revalidate  Expire
+┌ ○ /_not-found
+├   /[locale]
+│ ├ ● /ko
+│ └ ● /en
+├   /[locale]/about
+│ ├ ● /ko/about
+│ └ ● /en/about
+├   /[locale]/category
+│ ├ ● /ko/category
+│ └ ● /en/category
+├ ƒ /[locale]/category/[main]
+├ ƒ /[locale]/category/[main]/[sub]
+├ ƒ /[locale]/category/[main]/[sub]/[slug]
+├   /[locale]/changelog
+│ ├ ● /ko/changelog
+│ └ ● /en/changelog
+├ ƒ /[locale]/docs
+├ ƒ /[locale]/docs/[...slugParts]
+├ ƒ /[locale]/feed
+├ ƒ /[locale]/mobile
+├ ƒ /[locale]/preview/[...slugParts]
+├   /[locale]/privacy
+│ ├ ● /ko/privacy
+│ └ ● /en/privacy
+├   /[locale]/terms
+│ ├ ● /ko/terms
+│ └ ● /en/terms
+├   /[locale]/ui-ux
+│ ├ ● /ko/ui-ux                                     5m      1y
+│ └ ● /en/ui-ux                                     5m      1y
+├ ƒ /[locale]/web
+├ ƒ /api/push
+├ ƒ /api/push/access
+├ ƒ /api/push/subscriptions
+├ ƒ /api/revalidate/content
+├ ƒ /api/search
+├ ○ /manifest.webmanifest
+├ ƒ /og/article.png
+├ ○ /robots.txt
+└ ○ /sitemap.xml                                    5m      1y
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

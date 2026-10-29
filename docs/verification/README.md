@@ -2,6 +2,10 @@
 
 - [10-29 CodeRabbit 리뷰 한도 예외](resilience/2026-10-29-coderabbit-rate-limit.md): 회귀65개·타입·실제 동일 head check-only·신원/사유 음성 검증, main 전파 별도.
 
+- [10-29 Brotli 글 게시 전 검증](content/2026-10-29-brotli-publication.md): 게시 상태 실제 원문16개·production 빌드·네 화면과 검색 Link, 원격 게시는 별도 단계.
+
+- [10-28 Brotli 보안 글 근거·예제·화면 검증](content/2026-10-28-brotli-security-article.md): 공식 공지·원문 검사·preview 조건, 운영/공격 차단 미검증.
+
 - [10-28 diff 코드 블록](accessibility/2026-10-28-diff-code-block.md): Node315·브라우저22, 두 테마·실제 MDX/Shiki·원격·고대비·JS 비활성, 운영 미검증.
 
 - [10-27 Node 24 보안 patch·CI·Docker](security/2026-10-27-node24-security-patch.md): main 기반 격리·pin/floor·amd64 이미지와 실제 Node·앱 회귀. 운영 미배포.

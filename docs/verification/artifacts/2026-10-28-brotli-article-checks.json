@@ -1,0 +1,81 @@
+{
+  "observedAt": "2026-10-27T23:29:03.249573+00:00",
+  "subject": "CVE-2026-111497",
+  "nodePublicReleaseDate": "2026-10-21",
+  "vercelAdvisoryDate": "2026-10-26",
+  "reviewDateAsiaSeoul": "2026-10-28",
+  "head": "61a778c5d7b083aec8bfd671c65523494921d5c9",
+  "branch": "codex/squash-merge-preflight",
+  "files": {
+    "apps/docs/category/be/node-js/node-brotli-runtime-security.mdx": "074e30cc210f266e32f6917bbce9315e62050395de97f72ec5a01fa4fd37f7eb",
+    "apps/docs/public/diagrams/node-brotli-waf-boundary.svg": "570b2ef70214e88d22b2e30c9db213777fe3c40ce7dc62adfad0d26c1b12cf09",
+    "apps/docs/public/diagrams/node-brotli-waf-boundary.png": "d275c6ca4fa8abea112ff14667c516819221bf31ee29089ce7139a46fb33a7fd"
+  },
+  "runtimeObservation": {
+    "node": "24.22.1",
+    "brotli": "1.2.0",
+    "inputBytes": 624,
+    "compressedBytes": 54,
+    "restored": true
+  },
+  "examples": {
+    "strictTypes": 2,
+    "fixtureRuns": 3,
+    "mdxRuns": 3,
+    "testsPassed": 11,
+    "exploitExecuted": false,
+    "applicationInputPathsVerified": false
+  },
+  "sources": [
+    {
+      "url": "https://nodejs.org/en/blog/vulnerability/october-2026-security-releases",
+      "purpose": "Node High severity, affected lines and attacker-controlled decompression condition"
+    },
+    {
+      "url": "https://nodejs.org/en/blog/release/v22.23.4",
+      "purpose": "fixed 22.x release"
+    },
+    {
+      "url": "https://nodejs.org/en/blog/release/v24.22.1",
+      "purpose": "fixed 24.x and cherry-picked Brotli patch"
+    },
+    {
+      "url": "https://nodejs.org/en/blog/release/v26.12.1",
+      "purpose": "fixed 26.x release"
+    },
+    {
+      "url": "https://github.com/google/brotli/commit/0ed4268a4401abcb4472096340477cf4af7d1a2b",
+      "purpose": "distinct format error and needs-more-input result"
+    },
+    {
+      "url": "https://vercel.com/kb/bulletin/node-js-security-advisory",
+      "purpose": "WAF request scope, outbound-response runtime mitigation, redeploy and provider responsibility"
+    }
+  ],
+  "limits": [
+    "benign roundtrip is not CVE acceptance proof",
+    "conceptual diagram, not production topology",
+    "managed runtime/production patch not verified",
+    "Chromium viewports, not physical devices"
+  ],
+  "issue": "KAN-44",
+  "articleStatus": "draft",
+  "staged": false,
+  "committed": false,
+  "published": false,
+  "records": {
+    "jira": {
+      "key": "KAN-44",
+      "status": "검토 중",
+      "commentId": "10035",
+      "commentCount": 1,
+      "threeColumnTableReadback": true
+    },
+    "confluence": {
+      "pageId": "65817",
+      "version": 175,
+      "readback": true
+    },
+    "privateDraftUploaded": false
+  }
+}

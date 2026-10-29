@@ -1,0 +1,148 @@
+{
+  "observedAt": "2026-10-27T23:27:12.902Z",
+  "sourceSha256": "074e30cc210f266e32f6917bbce9315e62050395de97f72ec5a01fa4fd37f7eb",
+  "scope": "local development draft; Chromium viewports; no exploit, production patch or network attack",
+  "diagramTextBounds": [
+    {
+      "text": "Brotli 압축 해제로 이어지는 경로",
+      "x": 134.9609375,
+      "width": 450.078125
+    },
+    {
+      "text": "서로 다른 두 입력 경로의 개념도",
+      "x": 176.8046875,
+      "width": 366.390625
+    },
+    {
+      "text": "A · 외부에서 받은 요청",
+      "x": 206.15625,
+      "width": 307.6875
+    },
+    {
+      "text": "외부 사용자 → HTTP 요청 본문",
+      "x": 155.7265625,
+      "width": 408.546875
+    },
+    {
+      "text": "앱·미들웨어가 Brotli 압축 해제",
+      "x": 166.4765625,
+      "width": 387.046875
+    },
+    {
+      "text": "Vercel WAF 경유 요청:",
+      "x": 221.734375,
+      "width": 276.53125
+    },
+    {
+      "text": "알려진 패턴 차단 규칙 대상",
+      "x": 205.9140625,
+      "width": 308.171875
+    },
+    {
+      "text": "B · 앱이 가져온 외부 응답",
+      "x": 186.09375,
+      "width": 347.8125
+    },
+    {
+      "text": "외부 서버 → HTTP 응답 데이터",
+      "x": 155.7265625,
+      "width": 408.546875
+    },
+    {
+      "text": "일부 HTTP 클라이언트가 자동 해제",
+      "x": 134.6484375,
+      "width": 450.703125
+    },
+    {
+      "text": "Vercel WAF 요청 규칙의 범위 밖",
+      "x": 167.5390625,
+      "width": 384.921875
+    },
+    {
+      "text": "두 경로 모두 런타임 확인",
+      "x": 194.0546875,
+      "width": 331.890625
+    },
+    {
+      "text": "Node.js 내장 Brotli 디코더 사용 가능",
+      "x": 122.5078125,
+      "width": 474.984375
+    },
+    {
+      "text": "실제 배치·공격 성공을 측정한 그림 아님",
+      "x": 134.34375,
+      "width": 451.3125
+    }
+  ],
+  "views": [
+    {
+      "width": 320,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "firstAndLastText": true,
+      "overflow": 0,
+      "image": {
+        "decoded": true,
+        "width": 288,
+        "height": 448.1875
+      },
+      "headingTop": 73,
+      "headerBottom": 65,
+      "nestedParagraphs": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "firstAndLastText": true,
+      "overflow": 0,
+      "image": {
+        "decoded": true,
+        "width": 358,
+        "height": 557.125
+      },
+      "headingTop": 73,
+      "headerBottom": 65,
+      "nestedParagraphs": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 1280,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "firstAndLastText": true,
+      "overflow": 0,
+      "image": {
+        "decoded": true,
+        "width": 480,
+        "height": 746.65625
+      },
+      "headingTop": 81,
+      "headerBottom": 65,
+      "nestedParagraphs": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "colorScheme": "dark",
+      "status": 200,
+      "noindex": true,
+      "firstAndLastText": true,
+      "overflow": 0,
+      "image": {
+        "decoded": true,
+        "width": 358,
+        "height": 557.125
+      },
+      "headingTop": 73,
+      "headerBottom": 65,
+      "nestedParagraphs": 0,
+      "pageErrors": []
+    }
+  ],
+  "failure": null
+}

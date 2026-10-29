@@ -1,0 +1,174 @@
+{
+  "observedAt": "2026-10-28T04:41:30.703Z",
+  "svgChecks": [],
+  "views": [
+    {
+      "width": 320,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "bodyStartAndEnd": true,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-service-runtime-architecture.png&w=640&q=75",
+          "width": 288,
+          "height": 450,
+          "naturalWidth": 320,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-buffer-boundary.png&w=640&q=75",
+          "width": 288,
+          "height": 290.25,
+          "naturalWidth": 320,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-decoder-flow-comparison.png&w=640&q=75",
+          "width": 288,
+          "height": 434.25,
+          "naturalWidth": 320,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-runtime-deployment.png&w=640&q=75",
+          "width": 288,
+          "height": 439.1875,
+          "naturalWidth": 320,
+          "decoded": true
+        }
+      ],
+      "overflow": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "bodyStartAndEnd": true,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-service-runtime-architecture.png&w=640&q=75",
+          "width": 358,
+          "height": 559.375,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-buffer-boundary.png&w=640&q=75",
+          "width": 358,
+          "height": 360.796875,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-decoder-flow-comparison.png&w=640&q=75",
+          "width": 358,
+          "height": 539.796875,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-runtime-deployment.png&w=640&q=75",
+          "width": 358,
+          "height": 545.9375,
+          "naturalWidth": 390,
+          "decoded": true
+        }
+      ],
+      "overflow": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 1280,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "bodyStartAndEnd": true,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-service-runtime-architecture.png&w=1920&q=75",
+          "width": 704,
+          "height": 1100,
+          "naturalWidth": 1066,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-buffer-boundary.png&w=1920&q=75",
+          "width": 704,
+          "height": 709.265625,
+          "naturalWidth": 1066,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-decoder-flow-comparison.png&w=1920&q=75",
+          "width": 704,
+          "height": 1061.265625,
+          "naturalWidth": 1066,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-runtime-deployment.png&w=1920&q=75",
+          "width": 704,
+          "height": 1073.59375,
+          "naturalWidth": 1066,
+          "decoded": true
+        }
+      ],
+      "overflow": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "colorScheme": "dark",
+      "status": 200,
+      "noindex": true,
+      "bodyStartAndEnd": true,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-service-runtime-architecture.png&w=640&q=75",
+          "width": 358,
+          "height": 559.375,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-buffer-boundary.png&w=640&q=75",
+          "width": 358,
+          "height": 360.796875,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-decoder-flow-comparison.png&w=640&q=75",
+          "width": 358,
+          "height": 539.796875,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-runtime-deployment.png&w=640&q=75",
+          "width": 358,
+          "height": 545.9375,
+          "naturalWidth": 390,
+          "decoded": true
+        }
+      ],
+      "overflow": 0,
+      "pageErrors": []
+    }
+  ],
+  "files": {
+    "apps/docs/category/be/node-js/node-brotli-runtime-security.mdx": "f622dc9eeabc872f069bae0e04a4cc309115155a225d3adf196fefd99811ee31",
+    "apps/docs/public/diagrams/node-brotli-service-runtime-architecture.svg": "93f90f28620594ce881faa3d85ac63509d4cc96ed4577e4378fad149a15f5147",
+    "apps/docs/public/diagrams/node-brotli-service-runtime-architecture.png": "2f1c9149af542990c42bfed809fc79873119d39528b877f520fcec2e2323e639",
+    "apps/docs/public/diagrams/node-brotli-buffer-boundary.svg": "beccdd38af3c688276073da0e690a229fd0616b47d4b75f5670a959e02f617d7",
+    "apps/docs/public/diagrams/node-brotli-buffer-boundary.png": "aaa44edd6c31b587ea1fcc6d7c12a8cd3a30ce63fc35a59b1c15a5b6bfcc7143",
+    "apps/docs/public/diagrams/node-brotli-decoder-flow-comparison.svg": "444f67fca7de6f2f12c27a40085f311623df82176b3555fe81d0bcbb92ffb095",
+    "apps/docs/public/diagrams/node-brotli-decoder-flow-comparison.png": "c3b4840466e0dceaf62dbc128f3c0377154e5a7ba06b70b9f0ae1316ecd16088",
+    "apps/docs/public/diagrams/node-brotli-runtime-deployment.svg": "11f84908ae3cb1f8242924bc6a751a58205ccf4ff787e82ad5d668b1df80b954",
+    "apps/docs/public/diagrams/node-brotli-runtime-deployment.png": "53b34036c5ce5c832444bf7e56f08c1677a24443eff6ad319aed8e26070f3085"
+  },
+  "failure": null
+}
