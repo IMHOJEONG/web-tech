@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-29 옛 백프레셔 초안 정리 기록](2026-10-29-retired-backpressure-draft.md): 게시본과 중복 확인·비공개 사본 보존, drain 예외 경로는 별도 검토.
+
 - [10-28 게시 글 주간 점검 기록 분리](2026-10-28-weekly-article-maintenance.md): 당시 검사·실패 후 보완·현재 게시 상태 구분, 원시 자료 제외.
 
 - [10-27 개발 이력과 ADR 관리 점검](2026-10-27-adr-governance-audit.md)
