@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-28 게시 글 세 편 주간 점검](content/2026-10-28-weekly-article-maintenance.md): 당시 본문·두 화면 폭·원문 실행과 TCP 복제본 보완의 정제 기록. 현재 재검증 아님.
+
 - [10-27 ADR 관리 점검](governance/2026-10-27-adr-governance-audit.md): 당시 main 스냅샷 대조와 상태·계약 불일치 기록. 현재 구현 재감사가 아니다.
 
 - [10-29 CodeRabbit 리뷰 한도 예외](resilience/2026-10-29-coderabbit-rate-limit.md): 회귀65개·타입·실제 동일 head check-only·신원/사유 음성 검증, main 전파 별도.

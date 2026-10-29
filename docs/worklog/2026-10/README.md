@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-28 게시 글 주간 점검 기록 분리](2026-10-28-weekly-article-maintenance.md): 당시 검사·실패 후 보완·현재 게시 상태 구분, 원시 자료 제외.
+
 - [10-27 개발 이력과 ADR 관리 점검](2026-10-27-adr-governance-audit.md)
 
 - [10-29 블로그 출처·저작권 작성 지침 분리](2026-10-29-blog-source-license-rules.md)
