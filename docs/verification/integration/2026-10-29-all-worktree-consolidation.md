@@ -10,14 +10,32 @@
 
 ## 재현 방법
 
-원래 저장소에서 읽기 전용으로 등록·미커밋·인덱스·stash를 기록했다. 원시 출력과 개인 경로는 저장소에 포함하지 않는다.
+원래 저장소에서 읽기 전용으로 등록·미커밋·인덱스·stash를 기록했다. 아래는 그 점검 범위를 재현하도록 10-29에 보완한 명령이다. Bash와 `--porcelain -z`를 지원하는 Git이 필요하다. 원시 출력에는 개인 경로·파일명이 포함되므로 로컬에서만 확인하고 저장소나 외부 기록에 복사하지 않는다.
 
 ```bash
+set -e
 git worktree list --porcelain
-git status --porcelain=v1 -z --untracked-files=all
-git ls-files --stage -z
+bash <<'BASH'
+set -euo pipefail
+inventory=$(mktemp)
+trap 'rm -f "$inventory"' EXIT
+git worktree list --porcelain -z > "$inventory"
+while IFS= read -r -d '' field; do
+  case "$field" in
+    'worktree '*)
+      wt=${field#worktree }
+      printf '\nWORKTREE %q\nSTATUS (NUL delimited):\n' "$wt"
+      git -C "$wt" status --porcelain=v1 -z --untracked-files=all
+      printf '\nINDEX (NUL delimited):\n'
+      git -C "$wt" ls-files --stage -z
+      ;;
+  esac
+done < "$inventory"
+BASH
 git stash list --format=%H
 ```
+
+NUL 구분 경로를 `git -C`에 그대로 전달하므로 공백·줄바꿈이 있는 경로도 분리하지 않는다. 등록 조회 또는 개별 명령이 실패하면 중단하며 실패한 작업 트리를 clean으로 판정하지 않는다. 임시 등록 목록만 만들고 종료 시 지우며 작업 파일·인덱스·stash는 변경하지 않는다. 각 `STATUS`가 비어 있는지와 이전 `INDEX`·stash 사본을 대조해야 한다. 이 조회만으로 원본/사본 해시 일치나 과거 HEAD 보존까지 증명하지는 않는다. 재실행은 그 시점의 등록 수·미커밋 상태를 보여 주며, 과거의 18곳 clean 결과를 소급 변경하지 않는다.
 
 파일별 SHA-256, 실행 권한·심볼릭 링크, HEAD·논리 인덱스·Git 연결을 기록한 뒤 모든 165개 원본과 Git admin 정보를 저장소 밖 소유자 전용 폴더에 백업했다. 사본과 원본을 다시 해시 대조했다. 분석·복구 manifest와 원시 로그는 비공개 보관한다.
 

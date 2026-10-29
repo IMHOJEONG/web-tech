@@ -12,7 +12,9 @@
 
 당시 [정기 점검 절차](../../runbooks/docs-article-rendering-regression.md)에 따라 canonical URL의 본문·metadata·sitemap·이미지 decode와 두 화면 폭을 확인했다. HTTP 200만으로 성공을 판단하지 않았다.
 
-아래는 별도 로컬 실험 공간에서 실행했던 명령이다. 이 모노레포에 같은 이름의 스크립트가 있다는 뜻은 아니며 실험 공간의 실제 경로는 공개하지 않는다.
+### 비공개 실험의 재현 경계
+
+아래는 별도 로컬 실험 공간에서 실행했던 명령이며 **이 checkout에서는 재현할 수 없다**. 루트와 각 workspace에 같은 이름의 스크립트가 없으므로 저장소 루트에서 실행하면 missing-script 오류가 난다. 실험 공간의 실제 경로와 비공개 원본은 공개하지 않는다.
 
 ```bash
 pnpm typecheck:http
@@ -20,7 +22,21 @@ pnpm test:http
 pnpm test:sockets
 ```
 
+당시 실험을 다시 실행하려면 Node.js 24.22.1·pnpm, 위 세 스크립트와 의존성이 정의된 별도 실험실 manifest·lockfile·fixture·테스트 소스, 대조할 당시 게시 MDX가 필요하다. HTTP·TCP 테스트에는 loopback listen 권한도 필요하다. 이 준비물이 없는 공개 checkout만으로 아래 표의 HTTP 26개·백프레셔 9회·TCP 14개 결과를 재생산할 수 있다고 안내하지 않는다.
+
 백프레셔 MDX의 실제 TypeScript 세 블록을 추출하여 strict 타입과 각 3회 동작을 확인했다. TSX 블록은 원문이 설명한 개념 구조이며 독립 앱 실행 대상으로 집계하지 않았다. 소켓 원문과 테스트 복제본을 대조하고 게시 원문의 EOF 회귀를 별도로 실행했다.
+
+### 공개 저장소에서 실행할 수 있는 별도 검사
+
+저장소 루트에서 Node.js 24.22.1·pnpm 12.14.0과 루트 lockfile의 의존성을 준비한 뒤 다음 명령으로 실제 렌더링 회귀를 실행할 수 있다. Chromium 설치에는 네트워크가 필요하며, 3111·3112 포트가 비어 있어야 한다. 같은 checkout의 개발 서버나 build를 중지하고 실행한다.
+
+```bash
+pnpm install --frozen-lockfile
+pnpm --filter docs exec playwright install chromium
+pnpm --filter docs test:article:prod
+```
+
+이 명령은 [렌더링 회귀 절차](../../runbooks/docs-article-rendering-regression.md)의 production build·fixture 기반 본문/metadata/이동 검사를 실행한다. **비공개 HTTP·소켓 실험이나 10-28 공개 도메인 검증의 대체 명령은 아니다.** 10-29의 문서 보완에서는 명령과 manifest의 연결만 확인했으며 이 브라우저 검사를 새로 실행하지 않았다.
 
 ## 결과와 증거
 

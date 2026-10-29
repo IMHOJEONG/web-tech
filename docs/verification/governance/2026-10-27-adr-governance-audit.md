@@ -4,7 +4,7 @@
 
 - 점검일: 2026-10-27 KST.
 - 기준: `origin/main`의 `e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e`. 원격 참조만 fetch하고 브랜치·작업 트리의 코드는 전환하지 않았다.
-- 현재 checkout은 `codex/squash-merge-preflight`, `61a778c5d7b083aec8bfd671c65523494921d5c9`다. 이 브랜치의 ADR 15개를 최신 전체로 오인하지 않고 Git blob으로 main의 20개를 읽었다.
+- 당시 checkout은 `codex/squash-merge-preflight`, `61a778c5d7b083aec8bfd671c65523494921d5c9`였다. 이 브랜치의 ADR 15개를 최신 전체로 오인하지 않고 Git blob으로 main의 20개를 읽었다.
 - 대상은 ADR 상태·대체 관계·목차·개발 결정의 추적과 관련 코드다. 앱 전체 실행·보안 감사나 운영 환경 재검증이 아니다.
 - 추적: [KAN-39](https://web-tech-service.atlassian.net/browse/KAN-39), [Confluence 운영 안내](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817).
 - 결론: 작성 체계는 작동하지만, 결정의 후속 관계와 병합 이후 현재 상태를 유지하는 과정은 보완이 필요하다. 점검 결과만 기록했으며 기존 결정이나 제품 코드를 수정하지 않았다.
@@ -36,6 +36,95 @@ node -e 'const s="<p>"+"가".repeat(400000)+"</p>"; console.log({codeUnits:s.len
 ```
 
 전체 ADR 파일명을 집계하고 번호 중복, 목차 포함, 상대 파일 링크의 존재, 결정일·검토일의 유효성을 Node 메모리 검사로 확인했다. `scripts/check-documentation.mjs`의 `linkTargets`를 재사용했으며 링크 anchor나 외부 HTTP 응답은 검사하지 않았다. 동일 검사기의 `validate`에는 ADR 번호가 같은 두 개의 합성 문서와 ADR 규칙에 없는 `보류` 상태를 전달했다. 원본 파일·인덱스는 변경하지 않았다.
+
+### 집계와 합성 입력 재실행
+
+당시 일회성 검사 스크립트 원문은 보고서에 이관되지 않았다. 아래는 같은 기준 커밋과 입력 조건으로 재구성한 공개 재현 명령이다. 2026-10-29에 다시 실행해 아래 구조 집계와 오류 배열 `[]`를 대조했다. 과거 artifact를 이번 출력으로 덮어쓰지 않는다.
+
+준비 조건은 Git, Node.js 24.22.1, 기준 커밋 `e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e`의 Git 객체다. 저장소 루트에서 실행하며 객체가 없으면 먼저 `git fetch origin main`을 실행한다. 작업 트리를 전환하거나 파일·인덱스를 쓰지 않는다. 현재 checkout의 검사기가 아니라 **기준 커밋의 `linkTargets`와 `validate`**를 읽어 사용한다.
+
+```bash
+node --input-type=module <<'NODE'
+import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
+import { readFileSync } from "node:fs";
+
+const ref = "e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e";
+const git = (...args) => execFileSync("git", args, {
+  encoding: "utf8", maxBuffer: 64 * 1024 * 1024,
+});
+const read = (file) => git("show", `${ref}:${file}`);
+const dataUrl = (source) => `data:text/javascript;base64,${Buffer.from(source).toString("base64")}`;
+const snapshotUrl = dataUrl(read("scripts/git-check-snapshot.mjs"));
+const validator = read("scripts/check-documentation.mjs").replace(
+  '"./git-check-snapshot.mjs"', JSON.stringify(snapshotUrl),
+);
+const { linkTargets, validate } = await import(dataUrl(validator));
+const files = new Set(git("ls-tree", "-r", "--name-only", "-z", ref).split("\0").filter(Boolean));
+const adrs = [...files].filter((file) => /^docs\/architecture\/adr-\d{4}-.+\.md$/.test(file));
+const index = new Set(linkTargets("docs/architecture/README.md", read("docs/architecture/README.md")).map((link) => link.target));
+const statuses = {}, ids = new Map();
+const structuralChecks = {
+  duplicateIds: [], missingIndexLinks: [], brokenRelativeFileLinks: [],
+  invalidDecisionOrReviewDates: [], externalUrlsAndAnchors: "not-tested",
+};
+for (const file of adrs) {
+  const body = read(file);
+  const id = file.match(/adr-(\d{4})-/)[1];
+  ids.set(id, (ids.get(id) ?? 0) + 1);
+  const status = body.match(/^- 상태: (.+)$/m)?.[1].trim() ?? "missing";
+  statuses[status] = (statuses[status] ?? 0) + 1;
+  if (!index.has(file)) structuralChecks.missingIndexLinks.push(file);
+  for (const link of linkTargets(file, body)) {
+    const exists = link.target && (files.has(link.target) || [...files].some((f) => f.startsWith(`${link.target}/`)));
+    if (link.error || !exists) structuralChecks.brokenRelativeFileLinks.push({ file, ...link });
+  }
+  for (const field of ["결정일", "최종 검토"]) {
+    const date = body.match(new RegExp(`^- ${field}: (\\d{4}-\\d{2}-\\d{2})\\s*$`, "m"))?.[1];
+    if (!date || Number.isNaN(Date.parse(date)) || new Date(date).toISOString().slice(0, 10) !== date) {
+      structuralChecks.invalidDecisionOrReviewDates.push({ file, field });
+    }
+  }
+}
+structuralChecks.duplicateIds = [...ids].filter(([, count]) => count > 1).map(([id]) => id);
+
+const syntheticPaths = ["docs/architecture/adr-9999-one.md", "docs/architecture/adr-9999-two.md"];
+const syntheticBody = `# ADR-9999: 합성 입력
+
+## 상태와 범위
+- 상태: 보류
+- 대상: 문서 검사 재현
+- 결정일: 2026-10-27
+- 최종 검토: 2026-10-27
+
+## 배경
+합성 입력.
+## 결정
+합성 입력.
+## 대안과 영향
+합성 입력.
+## 관련 문서
+없음.
+`;
+const documents = new Map(syntheticPaths.map((file) => [file, syntheticBody]));
+documents.set("docs/architecture/README.md", "# 합성 목차\n" + syntheticPaths.map((file) => `- [합성](${file.split("/").at(-1)})`).join("\n"));
+const errors = validate({
+  files: new Set(documents.keys()), oldFiles: new Set(),
+  changes: [...documents.keys()].map((file) => ({ status: "A", file })),
+  read: (file, before = false) => !before && documents.has(file) ? Buffer.from(documents.get(file)) : null,
+});
+const recorded = JSON.parse(readFileSync("docs/verification/artifacts/2026-10-27-adr-governance-audit.json", "utf8"));
+assert.equal(adrs.length, recorded.adrCount);
+assert.deepEqual(statuses, recorded.statuses);
+assert.deepEqual(structuralChecks, recorded.structuralChecks);
+assert.deepEqual(errors, []);
+console.log(JSON.stringify({ ref, adrCount: adrs.length, statuses, structuralChecks, syntheticPaths, syntheticBody, errors }, null, 2));
+NODE
+```
+
+기준 커밋에는 이 감사의 후속 artifact가 없으므로 마지막 대조용 집계 파일만 현재 checkout에서 읽는다. ADR 원문·목차·검사기는 모두 고정된 Git 객체에서 읽는다.
+
+기대 결과는 ADR 20개·상태 17/1/2, 네 구조 오류 목록이 모두 빈 배열, 합성 `보류`·중복 `9999` 두 문서의 `validate` 결과 `[]`다. 마지막 결과는 현재 규칙의 **검출 공백을 재현하는 음성 대조군**이지 ADR 규칙 준수를 뜻하지 않는다. anchor·외부 HTTP와 대체 관계의 의미 대조는 이 명령의 검사 범위가 아니다.
 
 ## 결과와 증거
 
@@ -97,7 +186,7 @@ ADR-0018이 main에 없는 사실만으로 번호 재사용이나 누락 결정�
 - GitHub combined status의 success는 check-run 전체·Production alias·기능 검증을 독립적으로 입증하지 않는다. 기존 배포 보고서와 Confluence 기록의 범위를 함께 표시했다.
 - ADR-0018의 실제 미공개 제안 내용과 타 작업 트리의 미커밋 변경은 검사·게시하지 않았다. 공백 번호만으로 새 번호를 재사용하지 않는다.
 - 수정 권장 순서는 F1 계약 회귀, F2 부분 대체 연결, F3 채택 범위 정리, F4 현재 상태 갱신, F5 검사 보강이다. 이번 요청은 감사이므로 어느 결정도 자동 승인·대체하지 않았다.
-- 이 보고서는 현재 checkout의 로컬 미커밋 문서다. 최신 main의 파일을 이 브랜치로 병합·복사한 것은 아니며 보고서 자체의 원격 링크는 아직 없다.
+- 10-27 관측 당시에는 로컬 미커밋 문서였으며 main의 파일을 당시 checkout으로 병합·복사하지 않았다. 이후 정제된 보고서를 [PR #78](https://github.com/IMHOJEONG/web-tech/pull/78)로 올렸지만 당시 관측을 현재 상태의 재감사 결과로 바꾸지는 않는다.
 
 ## 관련 문서
 
