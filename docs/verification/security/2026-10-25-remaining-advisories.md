@@ -186,6 +186,72 @@ mise exec -- pnpm test:repo
 
 로컬 전체 오프라인 44개·핵심 반복 30개·저장소 153개·docs 타입·대상 lint를 통과했다. 제어된 실패의 JSON/HTML·관측 attachment·trace 보존 검사도 성공했고 전체/production audit은 0건이다. [44개 실행과 핵심 관측 원본](../artifacts/2026-10-25-ui-transport-contract.json)에 기준 head·수정 코드 blob hash·본문 표시 중 pending·200 뒤 중단·정상 완료의 실제 event metadata를 보존했다. 새 PR head CI·CodeQL·리뷰·병합·자동 배포는 각각 실제 결과를 확인한 후 별도 기록한다. 과거 main/통합 CI 실패는 이 새 계약의 성공으로 재작성하지 않는다.
 
+### NAS 적용 후 외부 재검증
+
+**2026-10-25 당시의 관측 기록입니다.** 아래 이미지 ID·태그·digest와 교체 안내는 당시 비교 과정의 증거이며, 현재 권장 이미지나 안전한 rollback 대상으로 사용하지 않습니다. 이후 Node 보안 패치와 실제 실행 이미지의 안전성은 [현재 NAS 배포 절차](../../runbooks/docs-backend-nas-deployment.md#update-and-rollback)에 따라 별도로 확인해야 합니다. 2026-10-29에는 보존된 기록만 이식했으며 새 API 조회·NAS 접속·파일 수정·이미지 교체·운영 검증을 수행하지 않았습니다.
+
+2026-10-25 KST 사용자로부터 NAS 이미지 교체와 읽기 전용 조회 결과 `image=ghcr.io/imhojeong/web-tech-docs-backend:latest revision= health=healthy`를 전달받았다. 이는 내부 healthcheck 성공을 뜻하지만 mutable `latest`와 빈 revision으로 실행 이미지의 main 커밋을 확정하지 않는다. NAS SSH·Docker 원격 제어·설정 변경·재배포는 수행하지 않았다.
+
+| 확인 항목      | 결과                                                                                           |
+| -------------- | ---------------------------------------------------------------------------------------------- |
+| 인증 없는 목록 | `GET https://api.heap-forge.app/api/posts`는 401                                               |
+| 인증된 목록    | 200, canonical 응답 schema 통과, 문서 1개                                                      |
+| 인증된 본문    | `/posts/web/browser` 200, HTML article 존재, frontmatter 노출 없음                             |
+| 보호 응답 캐시 | 목록·본문 모두 `Cache-Control: private, no-store`, `Vary: Authorization`, Cloudflare `DYNAMIC` |
+| 외부 health    | `/health` 200, JSON `service=docs-backend`, `status=ok`                                        |
+| 실행 버전      | 미확인. 사용자 제공 healthy와 registry 게시 성공을 동일 이미지 실행 증거로 대체하지 않음       |
+
+기존 서버 전용 토큰은 프로세스 내부에서만 읽어 고정 HTTPS API origin으로 전송했고 redirect를 거부했다. 토큰·인증 헤더·본문 원문은 출력·저장하지 않았다. 호출별 12초 제한을 적용했으며 목록과 공개 문서 1개만 읽었다. 본문에 코드 블록이 없어 코드 하이라이팅 동작은 이번 표본으로 검사하지 않았다. 앞선 sandbox fetch의 TypeError는 네트워크 허용 후 동일 health GET으로 재검사해 실제 JSON 200과 구분했다.
+
+공개 health 200은 [NAS 운영 절차](../../runbooks/docs-backend-nas-deployment.md)의 외부 403/404 조건과 다르다. 비밀 노출이나 패치 실패를 의미한다고 단정하지 않지만 perimeter 정책의 후속 조치 대상으로 남긴다. 내부 healthcheck는 유지하고 외부 reverse proxy/Tunnel 경로에서만 차단 여부를 검토해야 하며 이번에는 변경하지 않았다.
+
+NAS에서 다음 읽기 전용 명령으로 **컨테이너가 실제 실행 중인 이미지 ID**의 RepoDigests를 확인한다. `docker image inspect ...:latest`만 조회하면 실행 컨테이너와 다른 이미지를 볼 수 있다. 아래 명령은 토큰·환경 변수를 출력하지 않는다.
+
+```sh
+docker image inspect "$(docker inspect docs-backend-docs-backend-1 --format '{{.Image}}')" \
+  --format 'id={{.Id}} digests={{json .RepoDigests}} revision={{index .Config.Labels "org.opencontainers.image.revision"}}'
+```
+
+기대 게시 이미지의 index digest는 `sha256:cecbee82ff2ced023c7caedfc5dc1dfc45e9d185632722ad7caefc943e46e8a2`, linux/amd64 manifest digest는 `sha256:ca68b61b95d34e9180dbe26d1955dc07843a8142024f490abc9c744a55dcbf23`다. image config ID와 manifest digest는 서로 다른 식별자이므로 직접 같은 값으로 비교하지 않는다. RepoDigests가 비어 있거나 다른 경우 추가 식별이 필요하며, 현재는 새 이미지 실행 및 NAS의 해당 취약점 패치 적용을 확정하지 않는다.
+
+후속으로 사용자는 필드 이름 없는 해시 `63a0c214f3aa5a2a346f54a1fc3ad1c3c8530491813c522d8880bf70ace005e4`를 제공했다. 기대 linux/amd64 manifest를 `docker buildx imagetools inspect --raw ghcr.io/imhojeong/web-tech-docs-backend@sha256:ca68b61b95d34e9180dbe26d1955dc07843a8142024f490abc9c744a55dcbf23`로 직접 읽었으며 `config.digest`는 `sha256:fc93f615edd8dc4d5e5a70c824d93ca79216b4f4fead765c0405ba521de2d60f`다. 두 해시는 다르지만 사용자가 제공한 값의 필드가 확정되지 않아 이미지 불일치나 이전 버전 실행으로 단정하지 않는다. `id=... digests=...` 전체 한 줄을 재요청했다. 최초 sandbox DNS 실패 후 네트워크 허용 재조회는 종료 0이며 NAS를 제어하거나 이미지를 pull하지 않았다.
+
+최종 사용자 출력은 `id=sha256:63a0c214f3aa5a2a346f54a1fc3ad1c3c8530491813c522d8880bf70ace005e4 digests=[]`다. 이제 제공 값이 실제 실행 이미지의 config ID임을 확인했으므로 **검증한 main4e80275 게시 이미지와 실행 이미지가 다르다**고 판정한다. RepoDigests가 없다는 사실만으로 로컬 빌드·파일 load·구버전 여부를 확정하지 않으며, 다른 config ID 역시 패치 누락이나 취약점 존재 자체의 증거는 아니다. NAS의 동일 보안 패치 적용은 미확인으로 유지한다. 앞선 healthy·API 정상은 이 버전 판정을 대체하지 않는다.
+
+운영자 후속으로 [기존 업데이트 절차](../../runbooks/docs-backend-nas-deployment.md#update-and-rollback)에 따라 콘텐츠 백업·기존 이미지 보존 후 `DOCS_BACKEND_IMAGE`를 검증한 `sha-4e80275e5f78863687b78e237c4c6c5e1577641c` 태그 또는 위 immutable manifest digest로 고정하고, 같은 환경 파일·Compose 프로젝트·볼륨 설정을 유지해 pull과 `up -d --no-build docs-backend`를 수행하도록 안내한다. 단일 컨테이너 교체 중 잠깐 중단될 수 있다. pull만으로 실행 컨테이너는 교체되지 않는다. 에이전트는 이 교체를 실행하지 않았으며 완료 후 실행 이미지 ID·health·인증 API를 다시 확인해야 한다.
+
+#### 재교체 후 이미지 일치와 문서 0개
+
+사용자가 재교체 후 실제 실행 이미지의 `id=sha256:fc93f615edd8dc4d5e5a70c824d93ca79216b4f4fead765c0405ba521de2d60f`, RepoDigests의 `ghcr.io/imhojeong/web-tech-docs-backend@sha256:cecbee82ff2ced023c7caedfc5dc1dfc45e9d185632722ad7caefc943e46e8a2`를 제공했다. 기대 config ID와 index digest가 모두 일치하므로 사용자 제공 실행 정보 기준으로 main4e80275 게시 이미지 적용을 확인한다. 이전 ID 불일치 기록은 교체 전 상태로 유지한다. NAS에 직접 접속한 검증이나 새 컨테이너 healthy 확인으로 확대하지 않는다.
+
+같은 고정 HTTPS origin·기존 서버 토큰·redirect 거부·호출별 12초 제한으로 다시 읽었다. 무인증 목록401, health200 JSON status ok, 인증 목록200·canonical schema 통과·private,no-store·Vary Authorization·CF DYNAMIC은 유지되지만 **목록은 이전 1개에서 현재 0개**다. 상세 조회 표본이 없어 새 컨테이너의 본문 정상 여부는 미검증이다. 이미지 적용 성공과 콘텐츠 제공 정상화를 분리하며 전체 운영 완료로 표시하지 않는다. 공개 health 정책 차이도 유지한다.
+
+문서 삭제가 의도됐는지 사용자에게 확인하고, 아래 읽기 전용 파일 개수 조회를 요청했다. 콘텐츠 mount 누락·다른 host 경로·draft·frontmatter/본문 검증 제외는 가능성이며 현재 원인 확정이 아니다. 파일·토큰·환경 변수 내용은 출력하지 않는다.
+
+```sh
+docker exec docs-backend-docs-backend-1 node -e 'const fs=require("node:fs"); console.log("markdownFiles="+fs.readdirSync("/app/content/posts",{recursive:true,withFileTypes:true}).filter(e=>e.isFile()&&e.name.endsWith(".md")).length)'
+```
+
+후속 NAS 파일 개수 조회는 사용자 제공 `markdownFiles=2`다. 재귀 조회로 `.md` 2개가 보인다는 뜻이며 백엔드가 읽는 채널 직하에 있거나 이전과 같은 볼륨이라는 증거는 아니다. `ContentRepository.findInChannel`은 정해진 채널의 직하 `.md`만 읽고 하위 폴더를 재귀 탐색하지 않는다. `parseDocumentFrontmatter`는 status 생략 시 draft로 처리하며 `ContentService`는 published만 반환한다. 필수 frontmatter·파일명과 slug 일치·본문 hard failure 검증도 별도 제외 조건이다. NAS 파일 경로와 최근 `Skipping invalid content document` 경고를 요청했으며 실제 제외 원인은 미확정이다. 경고가 없다는 사실로 draft나 미탐색 경로를 배제하지 않고 사용자 승인 없이 공개 상태를 바꾸지 않는다.
+
+후속 사용자 출력에서 `/app/content/posts/feed/pna.md`와 `/app/content/posts/web/browser.md`는 모두 지원하는 채널 직하 경로임을 확인했다. `ContentService` 경고는 `web/browser`의 body validation 실패를 명시한다. 본문 기준 line 2의 H1, line 16·49·82·131의 HTML 주석이 이유다. validator 호출 입력이 frontmatter를 제외한 content이므로 이 번호는 원본 파일 전체 줄 번호와 다를 수 있다. 서비스는 `issues.failures.slice(0, 5)`만 로그에 넣으므로 표시된 다섯 건이 전부라는 보장도 없다.
+
+운영자에게 NAS 원문에서 frontmatter title과 중복하는 본문 제목을 직접 제거하고, 작성 메모용 HTML 주석은 제거하거나 미완성 글이라면 draft를 유지하도록 안내한다. HTML 주석 자체를 설명하는 코드 예시는 언어를 지정한 fenced code block으로 표현해야 하며 검사 우회를 위한 일괄 감싸기는 하지 않는다. 에이전트의 H1 자동 H2 변환·본문 변경·검증 완화는 없다. `feed/pna`는 이번 경고에 없으므로 draft나 다른 원인으로 확정하지 않고 frontmatter status 확인을 후속으로 남긴다. 원문 변경은 API 요청 시 다시 읽으므로 NAS 문서 수정만으로 컨테이너 재빌드는 필요하지 않다. 수정 후 목록·본문과 프론트 캐시 반영은 별도 검증이다.
+
+사용자는 `feed/pna`의 status 누락을 확인하고 추가했다고 보고했다. 이후 같은 인증 API를 다시 조회했지만 목록200·schema 통과·0개(pna/browser 모두 없음), `/posts/feed/pna`는404였다. 두 보호 응답의 private,no-store·Vary Authorization·CF DYNAMIC과 무인증 목록401은 유지된다. 따라서 status 수정 보고만으로 문서 공개 정상화를 선언하지 않는다. 새 요청이 생성한 pna 전용 Skipping/Rejected 경고를 요청했고, 경고가 없으면 실제 status 값과 실행 컨테이너에 마운트된 파일 수정 여부를 확인해야 한다. 추가된 값·파일 반영·다음 검증 실패는 아직 직접 확인하지 못했으며 원인을 추정 확정하지 않는다. NAS 파일·설정·캐시를 변경하지 않았다.
+
+이후 사용자 경고는 pna의 `updatedAt`이 undefined여서 published frontmatter schema가 거부한 사실을 명시했다. 사용자가 이를 추가한 뒤 재검증했지만 목록200/schema통과/0개·pna상세404는 유지됐다. 무인증401과 보호응답 캐시정책은 정상이다. 따라서 알려진 updatedAt 누락과 수정 이후 남은 제외 원인을 구분한다. 실행 컨테이너에서 pna 원문을 읽어 배포된 `parseDocumentFrontmatter`·공용 본문 검증기를 직접 호출하고 status·slug 일치·issue path/code/message·본문 규칙 결과만 출력하는 읽기 전용 명령을 요청했다. 본문·토큰·환경 변수 전체는 출력하지 않으며 검증완화·파일변경·재배포는 하지 않는다. 추가 오류 또는 수정 반영 문제 중 실제 원인은 결과 대기다.
+
+사용자가 위 컨테이너 검사 결과 `status=published`, `slugMatchesFile=false`, 본문 failures `line 2: h1 is reserved for frontmatter title`와 `first heading should start at h2 or h3`를 제공했다. 해당 실행에서는 frontmatter 파싱이 통과했으므로 updatedAt을 포함한 메타데이터 schema 문제와 이후의 slug 일치·본문 정책 실패를 구분한다. 서비스는 schema 이후 slug를 먼저 검사하므로 실제 API 경고는 우선 파일명 불일치로 나타날 수 있다. 파일명 pna.md를 유지하면 frontmatter slug는 pna여야 하고, 본문의 중복 H1은 운영자가 직접 제거하며 실제 첫 섹션은 H2/H3로 작성한다. 같은 H1이 두 실패를 유발할 수 있어 세 독립 원인으로 집계하지 않는다. 수정·수정 후 API 성공은 아직 확인하지 않았으며 에이전트의 자동 제목 변환·NAS 문서 수정은 없다.
+
+사용자가 pna slug·본문 H1을 수정했다고 보고한 뒤 원격 API를 다시 조회했다. 인증 목록은200·schema통과지만0개(pna/browser 없음), pna 상세404이며 무인증401·보호응답 private,no-store/Vary Authorization/CF DYNAMIC은 유지된다. 이는 프론트 화면 확인이 아니라 원격 API 직접 조회 결과다. 수정 반영 또는 추가 검증 실패의 실제 원인은 새 pna 제외 경고로 확인하도록 요청했고, 사용자 수정 보고만으로 해결 처리하지 않는다. NAS 파일 변경·재배포·웹훅 호출은 하지 않았다.
+
+사용자 후속 경고는 pna의 `body validation failed: line 2: h1 is reserved for frontmatter title; first heading should start at h2 or h3`다. 해당 요청은 ContentService의 published frontmatter·slug 일치 검사를 통과하고 본문 검증까지 도달했으므로 이전 slug 불일치와 구분한다. 로그 시점의 본문 H1은 여전히 남은 차단 원인이며 현재 파일이나 수정 성공으로 추정하지 않는다. 실제 편집 파일과 mount source 일치 여부도 확인 대상이다.
+
+동시에 보인 ExpressAdapter의 `Content-Type doesn't match Reply body`는 별도 응답 헤더 경로다. ContentController 상세 메서드는 `@Header('Content-Type', 'text/html; charset=utf-8')`를 선언하지만 검증 실패 시 NotFoundException이 JSON 오류 객체를 만든다. 설치된 `@nestjs/platform-express/adapters/express-adapter.js` line 61~67에서 비JSON Content-Type과 statusCode>=400을 감지해 경고 후 application/json으로 보정하는 코드를 확인했다. 따라서 이 경고가 문서 제외를 유발한 것은 아니며 custom ExceptionFilter가 반드시 필요하다는 의미도 아니다. 성공 응답에만 HTML 헤더를 설정하는 보완과 HTML200/JSON404 회귀는 별도 후속으로 남긴다. 이번에는 앱 코드·검증 규칙·NAS 문서를 바꾸지 않았다.
+
+사용자 재조회 요청으로 2026-10-25 21:29:36 KST(12:29:36 UTC)에 다시 확인했다. 목록200/schema통과/0개·pna상세404·무인증401이며 보호응답 private,no-store/Vary Authorization/CF DYNAMIC이 유지된다. 본문 article은 없고 수정 반영 성공은 아직 확인되지 않았다. 새 NAS 경고나 mount 조회를 직접 수행한 결과는 아니므로 과거 H1 로그만으로 이번 요청의 원인을 확정하지 않는다. 서버·파일·자격증명·캐시 변경은 없다.
+
 ## 관련 문서
 
 - [작업 기록](../../worklog/2026-10/2026-10-25-remaining-advisories.md)

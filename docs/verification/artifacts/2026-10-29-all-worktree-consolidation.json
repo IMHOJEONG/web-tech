@@ -1,0 +1,58 @@
+{
+  "observedAt": "2026-10-29T07:03:07.988Z",
+  "timezone": "Asia/Seoul",
+  "baselineMain": "42e48b42822f7276b5eaa8d25e496915b4151e28",
+  "registeredWorktrees": 18,
+  "initialDirtyWorktrees": 11,
+  "originalFiles": 165,
+  "initialByteClassification": {
+    "exactMain": 57,
+    "exactOtherPreservedRef": 42,
+    "requiringFurtherReview": 66
+  },
+  "preservedOriginalBytes": 5501172,
+  "restoredTrackedPaths": 55,
+  "archivedUntrackedPaths": 110,
+  "cleanOriginalWorktrees": 18,
+  "headsBranchesGitLinksUnchanged": true,
+  "logicalIndexesUnchanged": true,
+  "stashOidsAndOrderUnchanged": 10,
+  "privateRecoveryRefsAdded": 18,
+  "ignoredFilesDeleted": 0,
+  "blanketCleanOrResetUsed": false,
+  "gitWritersPausedByHuman": true,
+  "sourceCommits": [
+    "0e90d426127cff350f781d1a5b7a2bfafea53b64",
+    "f2ab344b9e79a1c9a919297aee93a44890e36852",
+    "c14c01ce2e01a718353a08ebc5e5ec2974335157",
+    "c845092ce37d700fbe2472119ed9755c4d3593fc",
+    "adff700533e3d8dd0f4da8686048f635b65f3a42",
+    "1744290d5b21b0828d5d211c3f30872fe4fc3a92"
+  ],
+  "repoRegression": {
+    "head": "1744290d5b21b0828d5d211c3f30872fe4fc3a92",
+    "node": "24.22.1",
+    "testFiles": 14,
+    "initialRestrictedRun": {
+      "passed": 196,
+      "failed": 2,
+      "reason": "local listen EPERM"
+    },
+    "authorizedRerun": {
+      "passed": 198,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0
+    }
+  },
+  "limitedRecoverySearch": {
+    "unreachableBlobsScanned": 1031,
+    "namedMissingComponentVersionsRecovered": 0,
+    "completeForensicSearch": false
+  },
+  "partialMediaImplementationKeptPrivate": true,
+  "rawDesignRecordsKeptPrivate": true,
+  "newArticleDraftsCommitted": false,
+  "newCommitsPushed": false,
+  "productionChanged": false
+}

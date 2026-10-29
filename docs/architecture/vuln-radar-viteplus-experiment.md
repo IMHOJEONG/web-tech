@@ -2,13 +2,15 @@
 
 ## 상태와 범위
 
-- 상태: 제안
+- 상태: 적용 중
 - 대상: `apps/vuln-radar`의 로컬 개발·빌드와 결과물 미리보기
-- 최종 검토: 2026-10-24
+- 최종 검토: 2026-10-25
 - 추적: [KAN-34](https://web-tech-service.atlassian.net/browse/KAN-34)
-- 적용 위치: `codex/vuln-radar-viteplus-experiment-20261024` 브랜치의 [PR #59](https://github.com/IMHOJEONG/web-tech/pull/59). 원격 검토 중이며 main 미병합이다. main 채택과 운영 배포는 별도 결정이다.
+- 적용 위치: [PR #59](https://github.com/IMHOJEONG/web-tech/pull/59)를 명시 승인으로 main `d0b25a5122fd9b4377b559270c10680c984e2aed`에 squash 병합했다. vuln-radar 개발·빌드 경로에 한정하며 다른 앱의 도구 전환은 포함하지 않는다.
 
-Railway 보안 재개 조건인 [KAN-32](https://web-tech-service.atlassian.net/browse/KAN-32)는 유지한다. 사용자가 승인한 예외는 툴체인 실험·회귀 검사와 PR 검토다. 실제 수집·운영 DB 접근·Railway 배포·토큰 변경은 포함하지 않는다.
+Railway 보안 재개 조건인 [KAN-32](https://web-tech-service.atlassian.net/browse/KAN-32)는 유지한다. 10-25에 PR 병합과 이에 따른 Railway 자동 배포·docs-backend 이미지 게시 확인을 별도로 승인받았다. 같은 main SHA의 배포·게시 성공은 [배포 검증](../verification/deployment/2026-10-25-pr59-main-autodeploy.md)에 연결한다. 전체 보안 재개·실제 수집·운영 DB·토큰 변경 승인은 아니다.
+
+2026-10-29에는 보존된 2026-10-25 병합·배포 기록에 맞춰 이 상태 설명만 정리했습니다. 이번 이식은 새로운 원격 상태 조회나 운영 재검증이 아니며 당시 승인·검증 범위를 확대하지 않습니다.
 
 ## 배경
 
@@ -40,9 +42,9 @@ Vite+ 1.4.0의 지원 Node 범위는 `^22.18.0 || ^24.11.0 || >=26.0.0`이다. �
 
 pnpm이 lockfile의 다른 workspace peer 연결 문맥도 다시 계산한다. 기존 도구·원래 의존성 범위를 유지하되 PostCSS 보완 등 의도된 해석 차이는 허용하고 검사한다. 모든 전이 그래프와 출력이 불변이라고 주장하지 않는다. alias 패키지 버전 `1.4.0`과 내장 Vite semver의 차이는 정확한 버전에 한정한 호환 예외와 실제 core 회귀로 관리한다. `allowAny`나 전역 peer 해석 비활성화는 사용하지 않는다.
 
-본 도입 전에는 Linux/CI·실제 배포 호환성, lockfile의 전체 소비자 회귀, peer 경고 처리와 보안 경고를 별도로 검토한다. 장기 도입을 결정할 때 ADR을 작성한다. 이번 실험만으로 배포 보류를 해제하지 않는다.
+Linux/CI·실제 배포 호환성, lockfile의 소비자 회귀와 peer 경고를 검토한 뒤 main 반영을 승인받았다. 전체 도구 교체나 다른 앱 확장은 별도 결정이며 그때 장기 도입 ADR을 검토한다. 이번 범위의 배포 성공으로 전체 보안 보류가 해제되는 것은 아니다.
 
-후속 [peer·lockfile 조사](../verification/integration/2026-10-24-viteplus-peer-lockfile-impact.md)에서 발견한 PostCSS 요청 범위와 Babel 호환 문제는 [후속 보완](../verification/integration/2026-10-24-viteplus-dependency-remediation.md)에서 해결했다. 초기 PR head `096aad7`의 CI·CodeQL과 Vercel Linux `vp build`는 [원격 점검](../verification/integration/2026-10-24-pr59-ci-review.md)에서 확인했다. 기준선 리뷰 보완과 새 head의 검증은 [후속 기록](../verification/integration/2026-10-24-pr59-baseline-fixes.md)으로 구분한다. 기존 audit·운영 채택·Railway 배포는 별도이며 실험 제안 상태를 유지한다.
+후속 [peer·lockfile 조사](../verification/integration/2026-10-24-viteplus-peer-lockfile-impact.md)에서 발견한 PostCSS 요청 범위와 Babel 호환 문제는 [후속 보완](../verification/integration/2026-10-24-viteplus-dependency-remediation.md)에서 해결했다. 초기 PR head `096aad7`의 CI·CodeQL과 Vercel Linux `vp build`는 [원격 점검](../verification/integration/2026-10-24-pr59-ci-review.md)에서 확인했다. 기준선 리뷰 보완과 새 head의 검증은 [후속 기록](../verification/integration/2026-10-24-pr59-baseline-fixes.md), main 병합과 자동 배포·이미지 게시 결과는 위 배포 검증으로 구분한다. 기존 audit 13건은 미조치 별도 작업이다.
 
 ## 관련 문서
 

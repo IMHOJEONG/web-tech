@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-27",
+  "timezone": "Asia/Seoul",
+  "reference": "origin/main",
+  "referenceSha": "e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e",
+  "checkoutBranch": "codex/squash-merge-preflight",
+  "checkoutSha": "61a778c5d7b083aec8bfd671c65523494921d5c9",
+  "adrCount": 20,
+  "statuses": { "대체됨": 2, "적용 중": 17, "제안": 1 },
+  "structuralChecks": {
+    "duplicateIds": [],
+    "missingIndexLinks": [],
+    "brokenRelativeFileLinks": [],
+    "invalidDecisionOrReviewDates": [],
+    "externalUrlsAndAnchors": "not-tested"
+  },
+  "offlineInputGuardProbe": {
+    "utf16CodeUnits": 400007,
+    "utf8Bytes": 1200007,
+    "declaredLimitBytes": 1048576,
+    "currentLengthGuardAccepts": true,
+    "exceedsDeclaredByteLimit": true,
+    "fullDomTransformationAndStorage": "not-tested"
+  },
+  "documentationValidatorNegativeControl": {
+    "syntheticDuplicateNumberAndOnHoldAccepted": true,
+    "errors": [],
+    "repositoryFilesOrIndexModified": false
+  },
+  "mainCombinedStatus": { "Vercel – web-tech": "success" },
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "P2",
+      "topic": "offline-input-byte-contract-mismatch"
+    },
+    {
+      "id": "F2",
+      "priority": "P2",
+      "topic": "worker-partial-supersession-unlinked"
+    },
+    {
+      "id": "F3",
+      "priority": "P2",
+      "topic": "viteplus-adoption-state-not-updated"
+    },
+    {
+      "id": "F4",
+      "priority": "P2",
+      "topic": "merge-and-deployment-evidence-not-linked"
+    },
+    { "id": "F5", "priority": "P2", "topic": "adr-specific-validation-gap" }
+  ],
+  "applicationOrPolicyChanges": false,
+  "runtimeBrowserNasVerification": "not-run"
+}

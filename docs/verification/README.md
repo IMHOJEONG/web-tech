@@ -1,5 +1,13 @@
 # 검증 보고서
 
+- [10-29 전체 작업 트리 미커밋 정리](integration/2026-10-29-all-worktree-consolidation.md): 원본 사본·경로 한정 정리·18곳 clean과 회귀198개, 불완전 구현은 비공개 보존.
+
+- [10-25 PR #59 main·자동 배포](deployment/2026-10-25-pr59-main-autodeploy.md): 당시 승인된 병합·Railway·이미지 게시 관측과 보류 조건을 구분한 기록. 현재 재검증 아님.
+
+- [10-28 게시 글 세 편 주간 점검](content/2026-10-28-weekly-article-maintenance.md): 당시 본문·두 화면 폭·원문 실행과 TCP 복제본 보완의 정제 기록. 현재 재검증 아님.
+
+- [10-27 ADR 관리 점검](governance/2026-10-27-adr-governance-audit.md): 당시 main 스냅샷 대조와 상태·계약 불일치 기록. 현재 구현 재감사가 아니다.
+
 - [10-29 CodeRabbit 리뷰 한도 예외](resilience/2026-10-29-coderabbit-rate-limit.md): 회귀65개·타입·실제 동일 head check-only·신원/사유 음성 검증, main 전파 별도.
 
 - [10-29 Brotli 글 게시 전 검증](content/2026-10-29-brotli-publication.md): 게시 상태 실제 원문16개·production 빌드·네 화면과 검색 Link, 원격 게시는 별도 단계.

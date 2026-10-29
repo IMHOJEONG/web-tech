@@ -1,5 +1,17 @@
 # 2026-10 작업 기록
 
+- [10-29 전체 미커밋 정리와 작업별 커밋](2026-10-29-all-worktree-consolidation.md): 중복·고유 기록·비공개 자료 분리, 원래 HEAD와 stash 유지.
+
+- [10-25 PR #59 main·자동 배포 기록](2026-10-25-pr59-main-autodeploy.md): 승인 범위·기준 SHA·운영 관측 한계의 정제 이관.
+
+- [10-29 옛 백프레셔 초안 정리 기록](2026-10-29-retired-backpressure-draft.md): 게시본과 중복 확인·비공개 사본 보존, drain 예외 경로는 별도 검토.
+
+- [10-28 게시 글 주간 점검 기록 분리](2026-10-28-weekly-article-maintenance.md): 당시 검사·실패 후 보완·현재 게시 상태 구분, 원시 자료 제외.
+
+- [10-27 개발 이력과 ADR 관리 점검](2026-10-27-adr-governance-audit.md)
+
+- [10-29 블로그 출처·저작권 작성 지침 분리](2026-10-29-blog-source-license-rules.md)
+
 - [10-29 CodeRabbit 한도 예외·무료 대안](2026-10-29-coderabbit-rate-limit.md): 공식 App/head/정확한 한도만 감사 예외, 다른 CI·리뷰·메시지 게이트 유지.
 
 - [10-29 승인된 Brotli 기고 게시](2026-10-29-brotli-publication.md): 본문 보존·게시 metadata·로컬 production 검증, NAS/다른 작업 제외.
