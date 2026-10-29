@@ -1,6 +1,6 @@
 # 검증 원본 증거
 
-- [10-29 Brotli 게시 상태 로컬 화면](2026-10-29-brotli-publication-local.json): [게시 검증](../content/2026-10-29-brotli-publication.md). 네 화면·복사·검색 Link·사이트맵, 운영 미검증.
+- [10-29 Brotli 게시 상태 로컬 화면](2026-10-29-brotli-publication-local.json)·[빌드 재실행 로그](2026-10-29-brotli-publication-build.log): [게시 검증](../content/2026-10-29-brotli-publication.md). 네 화면·복사·검색 Link·사이트맵, 운영 미검증.
 
 - [10-28 Brotli 초안의 최신 main 기반 로컬 화면](2026-10-28-brotli-main-preview.json): [기존 보고서의 후속 검증](../content/2026-10-28-brotli-security-article.md).
 
