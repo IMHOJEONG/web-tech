@@ -128,13 +128,76 @@ type PullRequest = {
   reviewDecision: string | null;
   statusCheckRollup: Array<{
     __typename: string;
+    name?: string;
     status?: string;
     conclusion?: string;
     state?: string;
   }>;
 };
 
-function assertReady(pr: PullRequest, expectedHead: string) {
+function isSuccessfulCheck(check: PullRequest["statusCheckRollup"][number]) {
+  return check.__typename === "CheckRun"
+    ? check.status === "COMPLETED" && check.conclusion === "SUCCESS"
+    : check.__typename === "StatusContext" && check.state === "SUCCESS";
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function verifyRateLimit(repo: string, head: string, run: Runner) {
+  const pages: unknown = JSON.parse(
+    run("gh", [
+      "api",
+      `repos/${repo}/commits/${head}/check-runs?filter=latest&per_page=100`,
+      "--paginate",
+      "--slurp",
+    ]),
+  );
+  if (!Array.isArray(pages) || pages.length === 0)
+    throw new Error("Cannot verify CodeRabbit rate-limit evidence.");
+  const checks: unknown[] = pages.flatMap((page: unknown) => {
+    if (!isRecord(page) || !Array.isArray(page.check_runs))
+      throw new Error("Cannot verify CodeRabbit rate-limit evidence.");
+    return page.check_runs as unknown[];
+  });
+  const matches = checks.filter(
+    (check) => isRecord(check) && check.name === "CodeRabbit",
+  );
+  const check = matches[0];
+  if (
+    matches.length !== 1 ||
+    !isRecord(check) ||
+    typeof check.id !== "number" ||
+    !Number.isSafeInteger(check.id) ||
+    check.id <= 0 ||
+    check.head_sha !== head ||
+    check.status !== "completed" ||
+    check.conclusion !== "neutral" ||
+    !isRecord(check.app) ||
+    check.app.id !== 347564 ||
+    check.app.slug !== "coderabbitai" ||
+    !isRecord(check.app.owner) ||
+    check.app.owner.login !== "coderabbitai" ||
+    !isRecord(check.output) ||
+    check.output.title !== "Review rate limited" ||
+    typeof check.output.summary !== "string" ||
+    check.output.summary.split("\n")[0] !==
+      "Result: Rate limited - Review rate limited"
+  ) {
+    throw new Error("Cannot verify CodeRabbit rate-limit evidence.");
+  }
+  return {
+    checkName: "CodeRabbit",
+    checkRunId: check.id,
+    headSha: head,
+    reason: "coderabbit-review-rate-limit",
+    reviewPerformed: false,
+  };
+}
+
+function assertReady(pr: PullRequest, options: Options, run: Runner) {
+  const expectedHead = options.expectedHead;
   if (pr.headRefOid !== expectedHead)
     throw new Error("PR head changed; review the new SHA.");
   if (
@@ -147,17 +210,24 @@ function assertReady(pr: PullRequest, expectedHead: string) {
   ) {
     throw new Error("PR must be open, ready and clean against main.");
   }
-  if (
-    !Array.isArray(pr.statusCheckRollup) ||
-    pr.statusCheckRollup.length === 0 ||
-    !pr.statusCheckRollup.every((check) =>
-      check.__typename === "CheckRun"
-        ? check.status === "COMPLETED" && check.conclusion === "SUCCESS"
-        : check.__typename === "StatusContext" && check.state === "SUCCESS",
-    )
-  ) {
+  if (!Array.isArray(pr.statusCheckRollup) || pr.statusCheckRollup.length === 0)
     throw new Error("Every reported CI/status check must have succeeded.");
-  }
+  const blocked = pr.statusCheckRollup.filter(
+    (check) => !isSuccessfulCheck(check),
+  );
+  if (blocked.length === 0) return [];
+  // Only the official app's exact quota result can be advisory, not a generic skip.
+  const candidate = blocked[0];
+  if (
+    blocked.length !== 1 ||
+    candidate.__typename !== "CheckRun" ||
+    candidate.name !== "CodeRabbit" ||
+    candidate.status !== "COMPLETED" ||
+    candidate.conclusion !== "NEUTRAL" ||
+    !pr.statusCheckRollup.some(isSuccessfulCheck)
+  )
+    throw new Error("Every reported CI/status check must have succeeded.");
+  return [verifyRateLimit(options.repo, expectedHead, run)];
 }
 
 export function executeSquash(options: Options, run: Runner = runCommand) {
@@ -176,7 +246,7 @@ export function executeSquash(options: Options, run: Runner = runCommand) {
       "state,baseRefName,headRefOid,isDraft,mergeable,mergeStateStatus,reviewDecision,statusCheckRollup",
     ]),
   );
-  assertReady(pr, options.expectedHead);
+  const checkExceptions = assertReady(pr, options, run);
   const digest = createHash("sha256").update(message).digest("hex");
   if (options.merge) {
     const directory = mkdtempSync(join(tmpdir(), "squash-message-"));
@@ -208,6 +278,7 @@ export function executeSquash(options: Options, run: Runner = runCommand) {
     expectedHead: options.expectedHead,
     messageSha256: digest,
     subject,
+    checkExceptions,
   };
 }
 

@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-29 CodeRabbit 한도 예외 회귀](2026-10-29-coderabbit-rate-limit-tests.txt)·[실제 PR76 check-only](2026-10-29-coderabbit-rate-limit-live.json): [검증](../resilience/2026-10-29-coderabbit-rate-limit.md). 리뷰 미수행 감사와 기존 게이트 보존, 실제 병합은 별도.
+
 - [10-28 diff 코드 블록](2026-10-28-diff-code-block.json): [검증](../accessibility/2026-10-28-diff-code-block.md)의 조건·실행 결과·중간 실패, 미커밋.
 
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.json): [보고서](../security/2026-10-27-node24-security-patch.md). 버전 경계·회귀·로컬 이미지 digest/gate hash·원본 15파일 보존·미배포 구분.

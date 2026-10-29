@@ -6,6 +6,8 @@
 
 ## ADR 상태
 
+- [ADR-0024: 보조 리뷰 한도 예외](adr-0024-advisory-review-rate-limit.md): 적용 중. 사용자 승인·공식 App/head/사유 검증·감사 출력, 로컬 구현·main 전파는 별도.
+
 - [ADR-0021: 상세 HTML byte budget](adr-0021-content-html-byte-budget.md): 적용 중. 별도 상수·렌더 결과 UTF-8 경계·비절단 실패/로컬 fallback, 로컬 구현·운영 미배포.
 
 - [ADR-0020: 원격 검색 목록 byte budget](adr-0020-content-posts-byte-budget.md): 적용 중. UTF-8 경고512KiB·상한1MiB, 비절단 실패·로컬 fallback, 로컬 구현·운영 미배포.
