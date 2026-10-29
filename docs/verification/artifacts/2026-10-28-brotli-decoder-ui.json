@@ -1,0 +1,628 @@
+{
+  "observedAt": "2026-10-28T00:53:53.844Z",
+  "svgChecks": [
+    {
+      "name": "node-brotli-buffer-boundary",
+      "height": 806,
+      "bounds": [
+        {
+          "text": "디코더의 임시 입력 버퍼 · 8바이트",
+          "x": 170.1015625,
+          "y": 23,
+          "width": 459.796875,
+          "height": 38
+        },
+        {
+          "text": "늘어나는 공간이 아니라 고정된 여덟 칸입니다",
+          "x": 177.1953125,
+          "y": 75,
+          "width": 445.609375,
+          "height": 28
+        },
+        {
+          "text": "정상 예시 · 읽다 남은 입력 일부를 보관",
+          "x": 171.203125,
+          "y": 146,
+          "width": 457.59375,
+          "height": 33
+        },
+        {
+          "text": "●",
+          "x": 67.5390625,
+          "y": 224,
+          "width": 16.921875,
+          "height": 31
+        },
+        {
+          "text": "0",
+          "x": 68.2109375,
+          "y": 280,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "●",
+          "x": 143.5390625,
+          "y": 224,
+          "width": 16.921875,
+          "height": 31
+        },
+        {
+          "text": "1",
+          "x": 144.2109375,
+          "y": 280,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "●",
+          "x": 219.5390625,
+          "y": 224,
+          "width": 16.921875,
+          "height": 31
+        },
+        {
+          "text": "2",
+          "x": 220.2109375,
+          "y": 280,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "·",
+          "x": 299.3359375,
+          "y": 224,
+          "width": 9.328125,
+          "height": 31
+        },
+        {
+          "text": "3",
+          "x": 296.2109375,
+          "y": 280,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "·",
+          "x": 375.3359375,
+          "y": 224,
+          "width": 9.328125,
+          "height": 31
+        },
+        {
+          "text": "4",
+          "x": 372.2109375,
+          "y": 280,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "·",
+          "x": 451.3359375,
+          "y": 224,
+          "width": 9.328125,
+          "height": 31
+        },
+        {
+          "text": "5",
+          "x": 448.2109375,
+          "y": 280,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "·",
+          "x": 527.3359375,
+          "y": 224,
+          "width": 9.328125,
+          "height": 31
+        },
+        {
+          "text": "6",
+          "x": 524.2109375,
+          "y": 280,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "·",
+          "x": 603.3359375,
+          "y": 224,
+          "width": 9.328125,
+          "height": 31
+        },
+        {
+          "text": "7",
+          "x": 600.2109375,
+          "y": 280,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "유효한 칸 번호 0~7 · 채움과 길이는 설명용",
+          "x": 188.1328125,
+          "y": 314,
+          "width": 423.734375,
+          "height": 28
+        },
+        {
+          "text": "취약 경로 · 상태 진전 없이 보충이 이어지면",
+          "x": 145.25,
+          "y": 402,
+          "width": 509.5,
+          "height": 33
+        },
+        {
+          "text": "●",
+          "x": 67.5390625,
+          "y": 481,
+          "width": 16.921875,
+          "height": 31
+        },
+        {
+          "text": "0",
+          "x": 68.2109375,
+          "y": 535,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "●",
+          "x": 143.5390625,
+          "y": 481,
+          "width": 16.921875,
+          "height": 31
+        },
+        {
+          "text": "1",
+          "x": 144.2109375,
+          "y": 535,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "●",
+          "x": 219.5390625,
+          "y": 481,
+          "width": 16.921875,
+          "height": 31
+        },
+        {
+          "text": "2",
+          "x": 220.2109375,
+          "y": 535,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "●",
+          "x": 295.5390625,
+          "y": 481,
+          "width": 16.921875,
+          "height": 31
+        },
+        {
+          "text": "3",
+          "x": 296.2109375,
+          "y": 535,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "●",
+          "x": 371.5390625,
+          "y": 481,
+          "width": 16.921875,
+          "height": 31
+        },
+        {
+          "text": "4",
+          "x": 372.2109375,
+          "y": 535,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "●",
+          "x": 447.5390625,
+          "y": 481,
+          "width": 16.921875,
+          "height": 31
+        },
+        {
+          "text": "5",
+          "x": 448.2109375,
+          "y": 535,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "●",
+          "x": 523.5390625,
+          "y": 481,
+          "width": 16.921875,
+          "height": 31
+        },
+        {
+          "text": "6",
+          "x": 524.2109375,
+          "y": 535,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "●",
+          "x": 599.5390625,
+          "y": 481,
+          "width": 16.921875,
+          "height": 31
+        },
+        {
+          "text": "7",
+          "x": 600.2109375,
+          "y": 535,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "!",
+          "x": 717,
+          "y": 479,
+          "width": 10,
+          "height": 33
+        },
+        {
+          "text": "8",
+          "x": 714.2109375,
+          "y": 535,
+          "width": 15.578125,
+          "height": 31
+        },
+        {
+          "text": "길이 8에서 u8[8]에 쓰면 배열 범위 밖",
+          "x": 192.4140625,
+          "y": 581,
+          "width": 415.171875,
+          "height": 31
+        },
+        {
+          "text": "배열 크기가 늘어난 것이 아니라, 경계를 넘어선 쓰기",
+          "x": 114.5703125,
+          "y": 654,
+          "width": 570.859375,
+          "height": 31
+        },
+        {
+          "text": "8바이트 입력 자체가 취약점을 뜻하는 것은 아닙니다",
+          "x": 145.140625,
+          "y": 702,
+          "width": 509.71875,
+          "height": 28
+        },
+        {
+          "text": "실제 메모리 배치·손상 값·공격 바이트를 표시한 그림 아님",
+          "x": 118.671875,
+          "y": 742,
+          "width": 562.65625,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "name": "node-brotli-decoder-flow-comparison",
+      "height": 1206,
+      "bounds": [
+        {
+          "text": "입력 부족과 형식 오류를 구분해야 합니다",
+          "x": 126.3984375,
+          "y": 23,
+          "width": 547.203125,
+          "height": 38
+        },
+        {
+          "text": "정상 입력 · 수정 전 오류 · 수정 후 오류의 비교",
+          "x": 173.1328125,
+          "y": 75,
+          "width": 453.734375,
+          "height": 28
+        },
+        {
+          "text": "1 · 정상적인 입력 부족",
+          "x": 266.1875,
+          "y": 148,
+          "width": 267.625,
+          "height": 33
+        },
+        {
+          "text": "아직 덜 도착한 데이터",
+          "x": 88.3359375,
+          "y": 230,
+          "width": 241.328125,
+          "height": 31
+        },
+        {
+          "text": "NEEDS_MORE_INPUT",
+          "x": 453.0234375,
+          "y": 232,
+          "width": 263.953125,
+          "height": 28
+        },
+        {
+          "text": "추가 바이트 → 읽기 재시도 · 조건이 맞으면 진행",
+          "x": 160.921875,
+          "y": 305,
+          "width": 478.15625,
+          "height": 28
+        },
+        {
+          "text": "2 · 수정 전의 잘못된 블록 전환",
+          "x": 218.9296875,
+          "y": 408,
+          "width": 362.140625,
+          "height": 33
+        },
+        {
+          "text": "더 받아도 해결되지 않는",
+          "x": 90.453125,
+          "y": 478,
+          "width": 237.09375,
+          "height": 28
+        },
+        {
+          "text": "형식 오류",
+          "x": 152.9296875,
+          "y": 512,
+          "width": 112.140625,
+          "height": 33
+        },
+        {
+          "text": "BROTLI_FALSE",
+          "x": 491.2421875,
+          "y": 497,
+          "width": 187.515625,
+          "height": 28
+        },
+        {
+          "text": "NEEDS_MORE_INPUT으로 오분류",
+          "x": 187.75,
+          "y": 623,
+          "width": 424.5,
+          "height": 31
+        },
+        {
+          "text": "조건이 이어지면 보충 반복 → 배열 범위 밖 쓰기 위험",
+          "x": 139.9921875,
+          "y": 691,
+          "width": 520.015625,
+          "height": 28
+        },
+        {
+          "text": "3 · 수정 후의 잘못된 블록 전환",
+          "x": 218.9296875,
+          "y": 794,
+          "width": 362.140625,
+          "height": 33
+        },
+        {
+          "text": "더 받아도 해결되지 않는",
+          "x": 90.453125,
+          "y": 866,
+          "width": 237.09375,
+          "height": 28
+        },
+        {
+          "text": "형식 오류",
+          "x": 152.9296875,
+          "y": 900,
+          "width": 112.140625,
+          "height": 33
+        },
+        {
+          "text": "FORMAT_BLOCK_SWITCH",
+          "x": 424.8203125,
+          "y": 885,
+          "width": 320.359375,
+          "height": 28
+        },
+        {
+          "text": "형식 오류를 상위 호출자로 그대로 전달",
+          "x": 186.7890625,
+          "y": 967,
+          "width": 426.421875,
+          "height": 31
+        },
+        {
+          "text": "디코더 오류로 중단 · 해당 입력 보충 반복을 막음",
+          "x": 162.609375,
+          "y": 1017,
+          "width": 474.78125,
+          "height": 28
+        },
+        {
+          "text": "상태 변화의 개념도 · 전체 디코더를 그린 것은 아닙니다",
+          "x": 130.171875,
+          "y": 1102,
+          "width": 539.65625,
+          "height": 28
+        },
+        {
+          "text": "실제 악성 입력·메모리 손상·공격 성공은 미재현",
+          "x": 168.8671875,
+          "y": 1143,
+          "width": 462.265625,
+          "height": 28
+        }
+      ]
+    }
+  ],
+  "views": [
+    {
+      "width": 320,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "bodyStartAndEnd": true,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-service-runtime-architecture.png&w=640&q=75",
+          "width": 288,
+          "height": 450,
+          "naturalWidth": 320,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-buffer-boundary.png&w=640&q=75",
+          "width": 288,
+          "height": 290.25,
+          "naturalWidth": 320,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-decoder-flow-comparison.png&w=640&q=75",
+          "width": 288,
+          "height": 434.25,
+          "naturalWidth": 320,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-runtime-deployment.png&w=640&q=75",
+          "width": 288,
+          "height": 439.1875,
+          "naturalWidth": 320,
+          "decoded": true
+        }
+      ],
+      "overflow": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "bodyStartAndEnd": true,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-service-runtime-architecture.png&w=640&q=75",
+          "width": 358,
+          "height": 559.375,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-buffer-boundary.png&w=640&q=75",
+          "width": 358,
+          "height": 360.796875,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-decoder-flow-comparison.png&w=640&q=75",
+          "width": 358,
+          "height": 539.796875,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-runtime-deployment.png&w=640&q=75",
+          "width": 358,
+          "height": 545.9375,
+          "naturalWidth": 390,
+          "decoded": true
+        }
+      ],
+      "overflow": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 1280,
+      "colorScheme": "light",
+      "status": 200,
+      "noindex": true,
+      "bodyStartAndEnd": true,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-service-runtime-architecture.png&w=1920&q=75",
+          "width": 704,
+          "height": 1100,
+          "naturalWidth": 1066,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-buffer-boundary.png&w=1920&q=75",
+          "width": 704,
+          "height": 709.265625,
+          "naturalWidth": 1066,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-decoder-flow-comparison.png&w=1920&q=75",
+          "width": 704,
+          "height": 1061.265625,
+          "naturalWidth": 1066,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-runtime-deployment.png&w=1920&q=75",
+          "width": 704,
+          "height": 1073.59375,
+          "naturalWidth": 1066,
+          "decoded": true
+        }
+      ],
+      "overflow": 0,
+      "pageErrors": []
+    },
+    {
+      "width": 390,
+      "colorScheme": "dark",
+      "status": 200,
+      "noindex": true,
+      "bodyStartAndEnd": true,
+      "images": [
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-service-runtime-architecture.png&w=640&q=75",
+          "width": 358,
+          "height": 559.375,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-buffer-boundary.png&w=640&q=75",
+          "width": 358,
+          "height": 360.796875,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-decoder-flow-comparison.png&w=640&q=75",
+          "width": 358,
+          "height": 539.796875,
+          "naturalWidth": 390,
+          "decoded": true
+        },
+        {
+          "src": "http://127.0.0.1:3001/_next/image?url=%2Fdiagrams%2Fnode-brotli-runtime-deployment.png&w=640&q=75",
+          "width": 358,
+          "height": 545.9375,
+          "naturalWidth": 390,
+          "decoded": true
+        }
+      ],
+      "overflow": 0,
+      "pageErrors": []
+    }
+  ],
+  "files": {
+    "apps/docs/category/be/node-js/node-brotli-runtime-security.mdx": "d2e91edcfa225bd3ba62b7819294467cbe1ac95ffb290f03a2f1b148309dcca3",
+    "apps/docs/public/diagrams/node-brotli-service-runtime-architecture.svg": "93f90f28620594ce881faa3d85ac63509d4cc96ed4577e4378fad149a15f5147",
+    "apps/docs/public/diagrams/node-brotli-service-runtime-architecture.png": "2f1c9149af542990c42bfed809fc79873119d39528b877f520fcec2e2323e639",
+    "apps/docs/public/diagrams/node-brotli-buffer-boundary.svg": "beccdd38af3c688276073da0e690a229fd0616b47d4b75f5670a959e02f617d7",
+    "apps/docs/public/diagrams/node-brotli-buffer-boundary.png": "aaa44edd6c31b587ea1fcc6d7c12a8cd3a30ce63fc35a59b1c15a5b6bfcc7143",
+    "apps/docs/public/diagrams/node-brotli-decoder-flow-comparison.svg": "444f67fca7de6f2f12c27a40085f311623df82176b3555fe81d0bcbb92ffb095",
+    "apps/docs/public/diagrams/node-brotli-decoder-flow-comparison.png": "c3b4840466e0dceaf62dbc128f3c0377154e5a7ba06b70b9f0ae1316ecd16088",
+    "apps/docs/public/diagrams/node-brotli-runtime-deployment.svg": "11f84908ae3cb1f8242924bc6a751a58205ccf4ff787e82ad5d668b1df80b954",
+    "apps/docs/public/diagrams/node-brotli-runtime-deployment.png": "53b34036c5ce5c832444bf7e56f08c1677a24443eff6ad319aed8e26070f3085"
+  },
+  "failure": null
+}

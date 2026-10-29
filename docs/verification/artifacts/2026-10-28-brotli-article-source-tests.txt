@@ -1,0 +1,28 @@
+$ node --test scripts/brotli-article-source.test.mts
+▶ benign Brotli fixture and actual MDX: binding, strict types, roundtrip, runtime output
+  ✔ fixture strict type check (646.586833ms)
+  ✔ fixture roundtrip 1 (76.7055ms)
+  ℹ {"kind":"fixture","run":1,"output":{"node":"24.22.1","brotli":"1.2.0","inputBytes":624,"compressedBytes":54,"restored":true}}
+  ✔ fixture roundtrip 2 (76.629625ms)
+  ℹ {"kind":"fixture","run":2,"output":{"node":"24.22.1","brotli":"1.2.0","inputBytes":624,"compressedBytes":54,"restored":true}}
+  ✔ fixture roundtrip 3 (73.793334ms)
+  ℹ {"kind":"fixture","run":3,"output":{"node":"24.22.1","brotli":"1.2.0","inputBytes":624,"compressedBytes":54,"restored":true}}
+  ✔ actual-mdx strict type check (587.440292ms)
+  ✔ actual-mdx roundtrip 1 (85.934208ms)
+  ℹ {"kind":"actual-mdx","run":1,"output":{"node":"24.22.1","brotli":"1.2.0","inputBytes":624,"compressedBytes":54,"restored":true}}
+  ✔ actual-mdx roundtrip 2 (79.810625ms)
+  ℹ {"kind":"actual-mdx","run":2,"output":{"node":"24.22.1","brotli":"1.2.0","inputBytes":624,"compressedBytes":54,"restored":true}}
+  ✔ actual-mdx roundtrip 3 (86.74325ms)
+  ℹ {"kind":"actual-mdx","run":3,"output":{"node":"24.22.1","brotli":"1.2.0","inputBytes":624,"compressedBytes":54,"restored":true}}
+✔ benign Brotli fixture and actual MDX: binding, strict types, roundtrip, runtime output (1719.003083ms)
+ℹ {"observedAt":"2026-10-27T23:27:16.961Z","node":"v24.22.1","sourceSha256":"074e30cc210f266e32f6917bbce9315e62050395de97f72ec5a01fa4fd37f7eb","scope":"benign locally generated input; not CVE exploit or patch acceptance test"}
+✔ missing, duplicate, reordered and unregistered executable blocks are rejected (1.506167ms)
+✔ incomplete or false success output is rejected (0.3815ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1893.460416

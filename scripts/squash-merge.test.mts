@@ -52,12 +52,16 @@ function fixture(t: TestContext, content: string | Buffer = valid): Options {
   };
 }
 
-function runner(pr: object = ready) {
+function runner(pr: object = ready, pages?: unknown) {
   const calls: Array<{ command: string; args: string[]; input?: string }> = [];
   const run: Runner = (command, args, input) => {
     calls.push({ command, args, input });
     if (command === process.execPath) return runCommand(command, args, input);
     assert.equal(command, "gh");
+    if (args[0] === "api") {
+      assert.notEqual(pages, undefined, "unexpected rate-limit lookup");
+      return JSON.stringify(pages);
+    }
     if (args[1] === "view") return JSON.stringify(pr);
     assert.equal(args[1], "merge");
     return "";
@@ -120,6 +124,7 @@ test("check-only lints the complete snapshot before querying the explicit PR", (
   const { run, calls } = runner();
   const result = executeSquash(options, run);
   assert.equal(result.action, "check-only");
+  assert.deepEqual(result.checkExceptions, []);
   assert.equal(calls.length, 2);
   assert.equal(calls[0].input, valid);
   assert.equal(calls[1].command, "gh");
@@ -128,6 +133,206 @@ test("check-only lints the complete snapshot before querying the explicit PR", (
   assert.equal(
     result.messageSha256,
     createHash("sha256").update(valid).digest("hex"),
+  );
+});
+
+const quotaCheck = {
+  __typename: "CheckRun",
+  name: "CodeRabbit",
+  status: "COMPLETED",
+  conclusion: "NEUTRAL",
+};
+const limited = {
+  ...ready,
+  statusCheckRollup: [...ready.statusCheckRollup, quotaCheck],
+};
+const rateLimitedRun = {
+  id: 123211021536,
+  name: "CodeRabbit",
+  head_sha: sha,
+  status: "completed",
+  conclusion: "neutral",
+  app: {
+    id: 347564,
+    slug: "coderabbitai",
+    owner: { login: "coderabbitai" },
+  },
+  output: {
+    title: "Review rate limited",
+    summary:
+      "Result: Rate limited - Review rate limited\nRun ID: diagnostic-fixture",
+  },
+};
+
+test("official rate-limit evidence is checked across pages and recorded without claiming review success", (t) => {
+  const options = fixture(t);
+  const { run, calls } = runner(limited, [
+    { check_runs: [{ name: "Lint", conclusion: "success" }] },
+    { check_runs: [rateLimitedRun] },
+  ]);
+  const result = executeSquash({ ...options, merge: true }, run);
+  assert.equal(result.action, "merge-requested");
+  assert.deepEqual(result.checkExceptions, [
+    {
+      checkName: "CodeRabbit",
+      checkRunId: rateLimitedRun.id,
+      headSha: sha,
+      reason: "coderabbit-review-rate-limit",
+      reviewPerformed: false,
+    },
+  ]);
+  assert.deepEqual(calls.find((call) => call.args[0] === "api")?.args, [
+    "api",
+    `repos/${options.repo}/commits/${sha}/check-runs?filter=latest&per_page=100`,
+    "--paginate",
+    "--slurp",
+  ]);
+  const merge = calls.find((call) => call.args[1] === "merge")!;
+  assert.equal(merge.args[merge.args.indexOf("--match-head-commit") + 1], sha);
+  assert.ok(!merge.args.includes("--admin") && !merge.args.includes("--auto"));
+});
+
+for (const [label, patch] of Object.entries({
+  "untrusted app id": { app: { ...rateLimitedRun.app, id: 1 } },
+  "untrusted app slug": { app: { ...rateLimitedRun.app, slug: "impostor" } },
+  "untrusted owner": {
+    app: { ...rateLimitedRun.app, owner: { login: "impostor" } },
+  },
+  "missing app": { app: null },
+  "stale API head": { head_sha: "b".repeat(40) },
+  "unfinished review": { status: "in_progress" },
+  "failed review": { conclusion: "failure" },
+  "skipped review": { conclusion: "skipped" },
+  "generic neutral": {
+    output: { title: "Review skipped", summary: rateLimitedRun.output.summary },
+  },
+  "untrusted summary": {
+    output: {
+      ...rateLimitedRun.output,
+      summary: "Unrelated text mentions Review rate limited",
+    },
+  },
+  "missing evidence": { output: null },
+  "missing run id": { id: undefined },
+  "invalid run id": { id: 1.5 },
+})) {
+  test(`rate-limit exception rejects ${label}`, (t) => {
+    const { run, calls } = runner(limited, [
+      { check_runs: [{ ...rateLimitedRun, ...patch }] },
+    ]);
+    assert.throws(
+      () => executeSquash({ ...fixture(t), merge: true }, run),
+      /Cannot verify/,
+    );
+    assert.equal(
+      calls.some((call) => call.args[1] === "merge"),
+      false,
+    );
+  });
+}
+
+for (const [label, pages] of Object.entries({
+  "empty response": [],
+  "missing check": [{ check_runs: [] }],
+  "wrong response shape": {},
+  "missing page runs": [{ other: [] }],
+  "malformed later page": [{ check_runs: [rateLimitedRun] }, null],
+  "duplicate app checks": [
+    { check_runs: [rateLimitedRun, { ...rateLimitedRun, id: 2 }] },
+  ],
+})) {
+  test(`rate-limit evidence fails closed for ${label}`, (t) => {
+    const { run, calls } = runner(limited, pages);
+    assert.throws(
+      () => executeSquash({ ...fixture(t), merge: true }, run),
+      /Cannot verify/,
+    );
+    assert.equal(
+      calls.some((call) => call.args[1] === "merge"),
+      false,
+    );
+  });
+}
+
+for (const [label, checks] of Object.entries({
+  "neutral other tool": [
+    ...ready.statusCheckRollup,
+    { ...quotaCheck, name: "Other" },
+  ],
+  "CodeRabbit failure": [
+    ...ready.statusCheckRollup,
+    { ...quotaCheck, conclusion: "FAILURE" },
+  ],
+  "CodeRabbit skipped": [
+    ...ready.statusCheckRollup,
+    { ...quotaCheck, conclusion: "SKIPPED" },
+  ],
+  "CodeRabbit pending": [
+    ...ready.statusCheckRollup,
+    { ...quotaCheck, status: "IN_PROGRESS" },
+  ],
+  "another CI failed": [
+    quotaCheck,
+    { ...ready.statusCheckRollup[0], conclusion: "FAILURE" },
+  ],
+  "another context pending": [
+    quotaCheck,
+    { __typename: "StatusContext", state: "PENDING" },
+  ],
+  "only unavailable review": [quotaCheck],
+  "duplicate review names": [
+    ...ready.statusCheckRollup,
+    quotaCheck,
+    quotaCheck,
+  ],
+})) {
+  test(`quota never excuses ${label}`, (t) => {
+    const { run, calls } = runner({ ...limited, statusCheckRollup: checks });
+    assert.throws(
+      () => executeSquash({ ...fixture(t), merge: true }, run),
+      /Every reported CI/,
+    );
+    assert.equal(
+      calls.some((call) => call.args[0] === "api" || call.args[1] === "merge"),
+      false,
+    );
+  });
+}
+
+for (const problem of [
+  "authentication failed",
+  "request timeout",
+  "invalid JSON",
+]) {
+  test(`quota lookup ${problem} never merges`, (t) => {
+    const { run: normal, calls } = runner(limited);
+    const run: Runner = (command, args, input) => {
+      if (command === "gh" && args[0] === "api") {
+        if (problem === "invalid JSON") return "not JSON";
+        throw new Error(problem);
+      }
+      return normal(command, args, input);
+    };
+    assert.throws(() => executeSquash({ ...fixture(t), merge: true }, run));
+    assert.equal(
+      calls.some((call) => call.args[1] === "merge"),
+      false,
+    );
+  });
+}
+
+test("changes requested still block even when the review service is rate limited", (t) => {
+  const { run, calls } = runner({
+    ...limited,
+    reviewDecision: "CHANGES_REQUESTED",
+  });
+  assert.throws(
+    () => executeSquash({ ...fixture(t), merge: true }, run),
+    /PR must be open/,
+  );
+  assert.equal(
+    calls.some((call) => call.args[0] === "api" || call.args[1] === "merge"),
+    false,
   );
 });
 

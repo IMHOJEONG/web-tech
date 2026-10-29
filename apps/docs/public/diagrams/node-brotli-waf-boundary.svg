@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1120" viewBox="0 0 720 1120" role="img" aria-labelledby="title desc">
+<title id="title">Brotli 압축 해제로 이어지는 대표 입력 경로</title>
+<desc id="desc">경로 A는 외부 사용자의 요청을 앱이나 미들웨어가 해제하는 경우입니다. 경로 B는 외부 서버 응답을 HTTP 클라이언트가 자동 해제하는 경우입니다. 두 경로는 별개이며 Node.js 내장 Brotli 디코더에 도달할 수 있습니다. Vercel WAF의 알려진 패턴 차단 규칙은 해당 요청 경로를 대상으로 하며 가져온 외부 응답에는 적용되지 않습니다.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#475569"/></marker></defs>
+<style>text{font-family:Arial,'Apple SD Gothic Neo',sans-serif;fill:#172033;text-anchor:middle}.title{font-size:34px;font-weight:700}.label{font-size:32px}.small{font-size:29px}.arrow{stroke:#475569;stroke-width:3;marker-end:url(#arrow)}</style>
+<rect width="720" height="1120" rx="24" fill="#f8fafc"/>
+<text x="360" y="54" class="title">Brotli 압축 해제로 이어지는 경로</text>
+<text x="360" y="96" class="small">서로 다른 두 입력 경로의 개념도</text>
+<rect x="28" y="126" width="664" height="354" rx="20" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+<text x="360" y="174" class="title">A · 외부에서 받은 요청</text>
+<rect x="56" y="200" width="608" height="76" rx="14" fill="#dbeafe"/>
+<text x="360" y="248" class="label">외부 사용자 → HTTP 요청 본문</text>
+<path d="M360 288 V332" class="arrow"/>
+<text x="360" y="375" class="label">앱·미들웨어가 Brotli 압축 해제</text>
+<text x="360" y="420" class="small">Vercel WAF 경유 요청:</text>
+<text x="360" y="457" class="small">알려진 패턴 차단 규칙 대상</text>
+<rect x="28" y="514" width="664" height="354" rx="20" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+<text x="360" y="562" class="title">B · 앱이 가져온 외부 응답</text>
+<rect x="56" y="588" width="608" height="76" rx="14" fill="#dcfce7"/>
+<text x="360" y="636" class="label">외부 서버 → HTTP 응답 데이터</text>
+<path d="M360 676 V720" class="arrow"/>
+<text x="360" y="763" class="label">일부 HTTP 클라이언트가 자동 해제</text>
+<text x="360" y="815" class="small">Vercel WAF 요청 규칙의 범위 밖</text>
+<rect x="28" y="912" width="664" height="172" rx="20" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+<text x="360" y="961" class="title">두 경로 모두 런타임 확인</text>
+<text x="360" y="1008" class="label">Node.js 내장 Brotli 디코더 사용 가능</text>
+<text x="360" y="1052" class="small">실제 배치·공격 성공을 측정한 그림 아님</text>
+</svg>
