@@ -25,8 +25,14 @@ CodeRabbit 재검토에서 추가된 Git 환경 상속 지적을 별도 후속 �
 
 ## Open Questions
 
-선행 baseline 수정 head `5a1ea5f`는 CI·CodeQL을 통과했다. Git 환경 격리 후속은 push 뒤 새 head의 검사를 다시 확인해야 한다. 기존 audit 13건은 [KAN-35](https://web-tech-service.atlassian.net/browse/KAN-35)에서 별도 미조치 상태로 유지한다. 임시 compile-cache 정리 경합의 영구 개선은 이번 기준선 수정과 별개다.
+### 2026-10-24 병합 전 판단
+
+최종 head `8ec9372`의 CI·CodeQL·두 Preview는 성공했고 리뷰 5건 모두 해결됐다. 병합 전 `check-only` 검사도 통과했다. 다만 Railway 현재 main 트리거·감시 경로 제한 없음·Wait for CI 꺼짐을 읽기 전용으로 확인해 **배포 보류 중 병합도 보류**로 판단했다. 공유 lock/workspace 변경은 별도로 docs-backend 이미지 게시도 유발한다. 상세 설정·명령·한계는 위 후속 검증의 최종 점검에 연결한다.
+
+이번 최종 점검은 기존 검증/작업 기록 2개만 로컬 갱신한다. 커밋·push·병합·배포·설정 변경은 하지 않았다. 기존 audit 13건은 [KAN-35](https://web-tech-service.atlassian.net/browse/KAN-35)에서 별도 미조치 상태로 유지한다. 임시 compile-cache 정리 경합의 영구 개선은 이번 기준선 수정과 별개다.
 
 ## Next
 
-승인된 작업별 커밋·push 후 같은 head의 CI·CodeQL을 확인하고 수정 근거로 리뷰 스레드를 갱신한다. main 병합·Railway 배포·실제 수집·운영 DB·토큰 변경은 하지 않으며 [KAN-32](https://web-tech-service.atlassian.net/browse/KAN-32)의 보류 조건을 유지한다.
+다음 계획은 위 병합 전 점검 당시의 상태입니다. 2026-10-25 후속 승인과 실제 main `d0b25a5122fd9b4377b559270c10680c984e2aed` 병합·배포 결과는 [별도 작업 기록](2026-10-25-pr59-main-autodeploy.md)을 따릅니다. 2026-10-29에는 보존된 기록만 이식했으며 새 검사·병합·배포·설정 변경은 하지 않았습니다.
+
+사용자의 자동 배포 비활성화 또는 배포 승인 결정을 기다린다. 승인 전에는 main 병합·Railway 배포·실제 수집·운영 DB·토큰 변경을 하지 않으며 [KAN-32](https://web-tech-service.atlassian.net/browse/KAN-32)의 보류 조건을 유지한다.

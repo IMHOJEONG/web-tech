@@ -61,6 +61,73 @@ mise exec -- node --experimental-strip-types scripts/verify-vuln-radar-viteplus.
 
 선행 baseline 수정 head `5a1ea5f829ad92ec77fd647a315222869fea132b`는 [CI 13개 job](https://github.com/IMHOJEONG/web-tech/actions/runs/40094043724)과 [CodeQL 두 분석](https://github.com/IMHOJEONG/web-tech/actions/runs/40094041032)을 통과했다. 위 Git 환경 격리 후속 커밋은 새 head의 CI·CodeQL·리뷰 해결 여부를 따로 확인한다. 선행 성공을 후속 코드의 원격 검증으로 간주하지 않는다.
 
+### 최종 병합 전 점검과 Railway 자동 배포 경계
+
+아래의 현재 설정·미승인·병합 보류 판단은 **2026-10-24 당시**에 한정합니다. 이후 2026-10-25에는 별도 승인으로 main `d0b25a5122fd9b4377b559270c10680c984e2aed`에 병합했으며 [후속 병합·배포 기록](../deployment/2026-10-25-pr59-main-autodeploy.md)을 따릅니다. 2026-10-29에는 이 과거 기록만 이식했고 새로운 GitHub·Railway 조회나 설정 변경은 하지 않았습니다.
+
+2026-10-24 22:50 KST, head `8ec93728e29346de705c8297c1141d44e51137e7` / base `16c51e9911f041b125a445b3939966986426a0b4`를 읽기 전용으로 다시 확인했다. 사용자는 병합·배포를 승인하지 않았다.
+
+| 대상              | 관측 결과                                                                                                                                                                                              | 판단                                                                                                                      |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| GitHub            | OPEN·MERGEABLE·CLEAN, 모든 상태 검사 SUCCESS                                                                                                                                                           | 코드 검사 기준 병합 준비. `reviewDecision`은 빈 값이며 APPROVED로 바꾸어 해석하지 않음                                    |
+| CI·CodeQL         | [CI 13개 job](https://github.com/IMHOJEONG/web-tech/actions/runs/40095715718)·[CodeQL 두 분석](https://github.com/IMHOJEONG/web-tech/actions/runs/40095713638) 성공, PR merge ref의 열린 분석 경고 0건 | 최신 head 대상. 기존 dependency audit 13건과 별도                                                                         |
+| 리뷰·Preview      | 스레드 5개 전부 resolved·미해결 0, vuln-radar·web-tech Preview SUCCESS                                                                                                                                 | Preview 성공이 Railway 배포 검증은 아님                                                                                   |
+| squash 사전검사   | 예상 head 고정·메시지 전체 검사 후 `action: check-only`, 종료 0                                                                                                                                        | 실제 병합하지 않음                                                                                                        |
+| Railway 현재 연결 | 프로젝트 `vuln-radar-service`, 환경 `development`, 서비스 `web-tech/vuln-radar-backend`의 GitHub `repoTriggers`에 `IMHOJEONG/web-tech` / `main` 존재                                                   | 과거 배포 이력이 아닌 현재 트리거 조회. main 병합은 자동 배포를 유발할 설정으로 판단하며 배포 없는 병합으로 승인하지 않음 |
+| Railway 현재 제한 | `watchPatterns: []`, root `/`, 트리거 `checkSuites: false`                                                                                                                                             | 경로 제외·Wait for CI로 보호되지 않음. CI 대기 자체도 자동 배포 차단과 다름                                               |
+| 별도 이미지 게시  | `docs-backend-image.yml`은 main push의 lockfile·workspace 변경에 반응하고 PR이 아니면 image push                                                                                                       | PR #59 병합 시 docs-backend GHCR 빌드·게시도 실행 대상. Railway 배포나 NAS 재시작과 구분                                  |
+
+Railway 최신 배포는 `b98c29f5-8e6d-483d-a469-29f8244de688`, SUCCESS, 생성 시각 `2026-10-21T04:45:51.340Z`였다. 이 과거 성공을 이번 PR의 배포 성공으로 사용하지 않았다. GitHub 연동 권한·웹훅 전달·실제 빌드 성공까지 시험하지 않았으므로 다음 배포의 완료를 보장하는 결과도 아니다.
+
+실행한 GitHub 읽기 명령과 병합하지 않는 사전검사:
+
+```sh
+gh pr view 59 --repo IMHOJEONG/web-tech \
+  --json headRefOid,baseRefOid,state,mergeable,mergeStateStatus,reviewDecision,statusCheckRollup
+gh api 'repos/IMHOJEONG/web-tech/code-scanning/alerts?ref=refs/pull/59/merge&state=open&per_page=100' \
+  --paginate --jq '{count:length,alerts:[.[]|{number,state}]}'
+mise exec -- pnpm pr:squash --repo IMHOJEONG/web-tech --pr 59 \
+  --expected-head 8ec93728e29346de705c8297c1141d44e51137e7 \
+  --message-file "$MESSAGE_FILE"
+```
+
+`MESSAGE_FILE`은 당시 준비한 최종 메시지 파일의 경로를 뜻한다. 머신별 임시 경로는 이 기록에 보관하지 않는다. 제목은 `build(vuln-radar-app): adopt Vite+ development and build tooling`이며 `Refs: KAN-34`를 포함했다. 최초 임시 제목의 미허용 scope `vuln-radar`는 commitlint가 거부했고, 임시 메시지만 허용 scope로 수정해 전체 검사를 재실행했다. PR 제목·커밋·설정은 수정하지 않았다. 재실행 시 [사전검사 절차](../../process/squash-merge-preflight.md)에 따라 메시지를 준비하고 `--merge`를 붙이지 않는다.
+
+현재 Railway 설정은 기존 로그인 권한으로 [공식 GraphQL API](https://docs.railway.com/integrations/api)에 아래 명시적 읽기 query를 전달해 확인했다. 인증값·환경변수 값은 출력하거나 저장하지 않았고 mutation은 실행하지 않았다. `railway status`의 과거 manifest만으로 현재 자동 배포 설정을 추정하지 않는다.
+
+```graphql
+query InspectCurrentAutodeploy {
+  service(id: "f587ac0c-f2b6-44a8-93c2-13cedaf443f3") {
+    name
+    repoTriggers {
+      edges {
+        node {
+          branch
+          repository
+          environmentId
+          checkSuites
+        }
+      }
+    }
+  }
+  serviceInstance(
+    serviceId: "f587ac0c-f2b6-44a8-93c2-13cedaf443f3"
+    environmentId: "2102cd4d-3c08-4ae9-b76e-dd620606778f"
+  ) {
+    serviceName
+    rootDirectory
+    watchPatterns
+    latestDeployment {
+      id
+      status
+      createdAt
+    }
+  }
+}
+```
+
+**판정: 검사 기준은 통과했지만, 배포 보류 요구를 유지하려면 지금은 병합 보류다.** 먼저 사용자가 Railway Service Settings의 자동 배포 비활성화를 승인·확인하거나 이번 배포를 별도로 승인해야 한다. 설정 변경·disconnect/reconnect·`railway link`·배포 호출·DB 접근은 하지 않았다. [공식 자동 배포 안내](https://docs.railway.com/deployments/github-autodeploys)의 Disable과 Wait for CI는 서로 다른 제어다. main 병합은 Vite+의 기본 dev/build 채택이기도 하므로 실험 브랜치 보존과 구분한다. KAN-32 보안 재개 조건과 KAN-35 audit 13건은 별도로 유지한다.
+
 ## 한계와 후속 작업
 
 - 커밋·push 후 새 PR head의 CI·CodeQL·리뷰를 별도로 확인한다. 초기 head `096aad7`의 성공을 후속 head에 그대로 적용하지 않는다. 원격 검증 완료 기록은 Jira·Confluence의 동일 작업 표에 새 SHA/run으로 연결한다.
@@ -71,3 +138,4 @@ mise exec -- node --experimental-strip-types scripts/verify-vuln-radar-viteplus.
 
 - [실험 설계와 현재 적용 범위](../../architecture/vuln-radar-viteplus-experiment.md)
 - [리뷰 수정 작업 기록](../../worklog/2026-10/2026-10-24-viteplus-review-fixes.md)
+- [2026-10-25 승인 후 병합·배포 기록](../deployment/2026-10-25-pr59-main-autodeploy.md)
