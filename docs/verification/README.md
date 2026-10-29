@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-29 CodeRabbit 리뷰 한도 예외](resilience/2026-10-29-coderabbit-rate-limit.md): 회귀65개·타입·실제 동일 head check-only·신원/사유 음성 검증, main 전파 별도.
+
 - [10-29 Brotli 글 게시 전 검증](content/2026-10-29-brotli-publication.md): 게시 상태 실제 원문16개·production 빌드·네 화면과 검색 Link, 원격 게시는 별도 단계.
 
 - [10-28 Brotli 보안 글 근거·예제·화면 검증](content/2026-10-28-brotli-security-article.md): 공식 공지·원문 검사·preview 조건, 운영/공격 차단 미검증.

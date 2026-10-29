@@ -32,9 +32,22 @@ BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false DOCS_ENABLE_REACT_INSPECTION=false \
 
 ## 한계와 후속 작업
 
-현재 결과는 로컬 production이다. 원격 PR CI·main 병합·Vercel Production 확인은 별도 단계이며, 아직 완료로 간주하지 않는다. 악성 입력·취약점 악용·실제 NAS 런타임 패치·WAF 차단을 검증한 결과가 아니다. upstream C 발췌는 고정 소스 대조이며 부분 C를 컴파일하지 않았다. 본문에서 별도로 명시한 Vercel 확인일 10-28은 과거 확인 시점으로 유지했다.
+위 결과는 게시 전 로컬 production 시점이다. 후속 main·Production 결과는 아래 구역과 구분한다. 악성 입력·취약점 악용·실제 NAS 런타임 패치·WAF 차단을 검증한 결과가 아니다. upstream C 발췌는 고정 소스 대조이며 부분 C를 컴파일하지 않았다. 본문에서 별도로 명시한 Vercel 확인일 10-28은 과거 확인 시점으로 유지했다.
 
 PR #76의 초기 게시 커밋 `2ac0f1d`는 [원격 CI](https://github.com/IMHOJEONG/web-tech/actions/runs/40799988279) 13개 job·종합 Test가 모두 통과했다. CodeQL·두 Vercel Preview도 통과했다. CodeRabbit의 문서 보완 두 건(격리 빌드 기준 커밋·보존 transcript)에 따라 위 식별자를 명시하고 빌드를 재실행했다. 이 문서 보완 후 새 head의 CI·리뷰를 재확인해야 하며 이전 성공을 새 head의 결과로 간주하지 않는다.
+
+### Main 병합과 Production 확인
+
+최종 게시 head `3e33e4ce6abf36878594b96dc390dc298bf90413`의 [CI](https://github.com/IMHOJEONG/web-tech/actions/runs/40801677127)·CodeQL·Documentation·GitGuardian·Preview가 모두 성공했다. CodeRabbit의 두 문서 지적은 반영했고 미해결 리뷰 스레드는0개였다. 새 head의 재리뷰는 시간당 한도 NEUTRAL이었으며 리뷰 성공으로 바꾸지 않았다.
+
+사용자가 한도 초과 예외 정책을 승인한 뒤, 검증한 `8fc3621`의 공식 squash 도구를 사용했다. 예외 원본 check-run `123211021536`의 신원·head·한도 사유를 다시 확인하고 최종 메시지 SHA-256 `3bf11591e90be70069487cd48edb5c0e10039ccb94f01f64f2425580bcad13ed`와 expected-head를 고정해 병합했다. [정책·검증 경계](../resilience/2026-10-29-coderabbit-rate-limit.md)를 참조한다.
+
+- PR #76: MERGED, 2026-10-29 11:01 KST. main SHA `7f06a3af2fb75f492661ceb6301b9f200da2a415`.
+- [같은 SHA main CI](https://github.com/IMHOJEONG/web-tech/actions/runs/40803846511): success. Documentation도 success다.
+- Production – web-tech GitHub 배포 `7402086810`: 같은 SHA, success, [배포 식별 URL](https://web-tech-mxtjxwe7h-hojeong-ims-projects.vercel.app).
+- 11:04 KST [공개 Chromium 결과](../artifacts/2026-10-29-brotli-publication-production.json): 390/1280 × light/dark 네 조건, 본문과 이미지 네 개·diff·정확한 클립보드·가로 넘침0·실제 검색 Link·ko/en feed·사이트맵 통과. ko/en canonical도 공개 응답에서 각 언어의 정확한 상세 URL과 일치했다.
+
+[공개 글](https://heap-forge.app/ko/docs/category/be/node-js/node-brotli-runtime-security)에서 게시를 확인했다. NAS 컨테이너·다른 초안·새 리뷰 봇은 변경하지 않았다. 정책 PR #77 자체의 main 반영은 이 글 게시와 별도다.
 
 ## 관련 문서
 

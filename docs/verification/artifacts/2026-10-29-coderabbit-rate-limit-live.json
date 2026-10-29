@@ -1,0 +1,17 @@
+{
+  "action": "check-only",
+  "repo": "IMHOJEONG/web-tech",
+  "pr": "76",
+  "expectedHead": "3e33e4ce6abf36878594b96dc390dc298bf90413",
+  "messageSha256": "3bf11591e90be70069487cd48edb5c0e10039ccb94f01f64f2425580bcad13ed",
+  "subject": "docs(docs-content): publish the reviewed Brotli security article",
+  "checkExceptions": [
+    {
+      "checkName": "CodeRabbit",
+      "checkRunId": 123211021536,
+      "headSha": "3e33e4ce6abf36878594b96dc390dc298bf90413",
+      "reason": "coderabbit-review-rate-limit",
+      "reviewPerformed": false
+    }
+  ]
+}
