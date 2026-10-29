@@ -20,8 +20,12 @@
 
 ## Open Questions
 
-게시 PR의 원격 검사·리뷰 및 운영 반영 확인이 남았다. NAS 변경은 수행하지 않는다.
+게시 범위의 남은 질문은 없다. CodeRabbit 한도 예외 정책의 main 전파는 별도 KAN-48/PR #77이다. NAS 변경은 수행하지 않았다.
+
+### 게시 완료
+
+사용자가 승인한 좁은 한도 예외를 독립 검증한 뒤 공식 squash 도구로 #76을 병합했다. 실제 main `7f06a3af2fb75f492661ceb6301b9f200da2a415`의 CI 성공, 같은 SHA Production 배포 성공과 공개 Chromium 네 조건·검색/목록/사이트맵·canonical을 확인했다. [후속 검증](../../verification/content/2026-10-29-brotli-publication.md#main-병합과-production-확인)에 실제 ID·시각·한도를 연결한다. CodeRabbit 한도 결과를 실제 리뷰 수행으로 기록하지 않는다.
 
 ## Next
 
-게시 변경만 push·PR로 검증한 뒤 사용자 게시 승인 범위에서 최종 메시지 사전검사·main 병합을 진행한다. 같은 SHA의 CI·Production과 공개 글·목록·검색·사이트맵을 확인한다.
+이번 기고 게시와 검증은 완료했다. 별도 정책 PR의 main 전파와 drain 예제 수정은 각각 독립 작업으로 추적한다.

@@ -14,6 +14,8 @@
 
 회귀65개·strict 타입 검사·독립 읽기 전용 검토·#76 실제 check-only 검증이 통과했다. 실제 한도 예외의 감사 출력은 리뷰 성공을 뜻하지 않는다. `--admin`·직접 gh merge·범용 skip flag·원격 보호 규칙 변경은 추가하지 않았다. 새 앱 설치·권한 부여·비밀값·과금은 없다.
 
+전체 저장소 회귀198개도 통과했다. 최초 두 포트 검사 EPERM과 허용된 환경에서 동일 검사 재실행 성공을 보고서에 구분했다. 정책 코드를 독립 커밋 `8fc3621`로 보존한 뒤, 이전부터 승인된 Brotli PR #76의 공식 squash 병합에 사용했다. 해당 main CI·Production과 공개 네 화면을 확인했다. 최신 main은 양쪽 목차를 보존해 병합했고 정책 diff만 [PR #77](https://github.com/IMHOJEONG/web-tech/pull/77)에 올렸다. 사용자가 #77도 CI·리뷰·최종 메시지 검사 후 main 반영하도록 별도 승인했다. 정책 PR의 최종 결과는 실제 확인한 뒤 연결한다.
+
 [KAN-48](https://web-tech-service.atlassian.net/browse/KAN-48)을 제목 중복 검색 후 생성했다. [Confluence 운영 안내](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817)에 결정 요약·실제 원격 링크와 미전파 범위를 구분해 연결한다. 저장 후 재조회한다.
 
 ## Open Questions
