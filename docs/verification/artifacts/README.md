@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [10-29 전체 미커밋 정리 집계](2026-10-29-all-worktree-consolidation.json): [보고서](../integration/2026-10-29-all-worktree-consolidation.md). 원시 목록·사본·회귀 로그는 비공개 보존.
+
 - [10-28 주간 점검 정제 집계](2026-10-28-weekly-maintenance-summary.json): [보고서](../content/2026-10-28-weekly-article-maintenance.md). 원시 로그·개인 경로·캡처는 비공개 보존, 재실행 없음.
 
 - [10-27 ADR 관리 점검 집계](2026-10-27-adr-governance-audit.json): [검증 보고서](../governance/2026-10-27-adr-governance-audit.md).

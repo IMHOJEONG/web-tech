@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-29 전체 작업 트리 미커밋 정리](integration/2026-10-29-all-worktree-consolidation.md): 원본 사본·경로 한정 정리·18곳 clean과 회귀198개, 불완전 구현은 비공개 보존.
+
 - [10-25 PR #59 main·자동 배포](deployment/2026-10-25-pr59-main-autodeploy.md): 당시 승인된 병합·Railway·이미지 게시 관측과 보류 조건을 구분한 기록. 현재 재검증 아님.
 
 - [10-28 게시 글 세 편 주간 점검](content/2026-10-28-weekly-article-maintenance.md): 당시 본문·두 화면 폭·원문 실행과 TCP 복제본 보완의 정제 기록. 현재 재검증 아님.

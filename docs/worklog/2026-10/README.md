@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-29 전체 미커밋 정리와 작업별 커밋](2026-10-29-all-worktree-consolidation.md): 중복·고유 기록·비공개 자료 분리, 원래 HEAD와 stash 유지.
+
 - [10-25 PR #59 main·자동 배포 기록](2026-10-25-pr59-main-autodeploy.md): 승인 범위·기준 SHA·운영 관측 한계의 정제 이관.
 
 - [10-29 옛 백프레셔 초안 정리 기록](2026-10-29-retired-backpressure-draft.md): 게시본과 중복 확인·비공개 사본 보존, drain 예외 경로는 별도 검토.
