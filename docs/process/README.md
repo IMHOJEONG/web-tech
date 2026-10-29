@@ -1,5 +1,7 @@
 # 협업과 문서 작성 규칙
 
+- [공통 설정의 사람 승인](shared-configuration-approval.md): CODEOWNERS·서버 ruleset·AI 신원 분리와 활성화 조건.
+
 - [ADR 작성과 상태 관리](adr-management.md)
 - [브랜치 정책](branch-policy.md): squash 후 최신 main에서 새 작업 브랜치 생성, 기존 이력·배포 브랜치의 안전한 정리.
 - [코드 리뷰](code-review-process.md)

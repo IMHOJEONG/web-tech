@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-24 공통 설정 소유권·승인 정책](security/2026-10-24-shared-config-approval.md): 정책11개·저장소119개·타입 검사, 원격/신원 분리 미적용 경계.
+
 - [10-22 CodeQL High #38 제목 검사 ReDoS](security/2026-10-22-codeql38-heading-redos.md): 긴 입력 격리 회귀·기존 판정 호환·로컬/NestJS 소비자 검증. main·NAS 운영 해소는 별도.
 
 - [10-22 Overview 부분 API 장애 격리](integration/2026-10-22-vuln-radar-partial-failures.md): 최초 실패·캐시 갱신 실패·대상 재시도·보조 요청 대기·전체 실패/복구의 로컬 회귀.

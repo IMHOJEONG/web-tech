@@ -47,3 +47,4 @@
 - `pnpm format:staged:check`와 `pnpm validate:docs --staged`는 인덱스만 읽습니다. 검사 실패 시 파일이나 인덱스를 자동 수정하지 않습니다.
 - 부분 스테이징 파일은 전체를 다시 add하지 말고 의도한 변경 범위를 재검토합니다.
 - 문서 상태, 검토일, 증거 보관과 CI 범위는 [문서 품질 검사](docs/process/documentation-quality-gates.md)를 따릅니다.
+- 공통 설정 변경은 [사람 승인 정책](docs/process/shared-configuration-approval.md)을 따릅니다. 일반 기능 승인으로 workspace·CI·의존성·에이전트 지침 변경까지 승인됐다고 해석하지 않습니다. AI는 보호 규칙 완화·자기 승인·관리자 자격 증명 재사용으로 게이트를 우회하지 않습니다. CODEOWNERS 존재와 서버 강제화·실제 신원 분리 완료를 구분합니다.

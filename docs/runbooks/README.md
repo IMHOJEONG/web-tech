@@ -1,5 +1,7 @@
 # 운영 및 재현 절차
 
+- [AI 신원 분리와 공통 설정 승인](ai-github-identity-isolation.md): App 최소 권한·관리자 환경 격리·bootstrap·규칙 활성화·복구.
+
 - [pnpm 툴체인 업그레이드와 서명 검증](pnpm-toolchain-upgrade.md)
 
 - [블로그 main 배포 운영과 복구](docs-main-production-deployment.md)

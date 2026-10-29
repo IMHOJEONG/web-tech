@@ -1,0 +1,145 @@
+{
+  "date": "2026-10-24",
+  "timezone": "Asia/Seoul",
+  "branch": "codex/shared-config-approval-20261024",
+  "dirty": true,
+  "node": "24.12.0",
+  "base": "16c51e9911f041b125a445b3939966986426a0b4",
+  "hashes": {
+    ".github/CODEOWNERS": "6e3ecc20d4caad15c5a9394104735edd47da0a55e78ff65abe44ad4aea73d39c",
+    ".github/shared-config-policy.json": "9a9274957654ea042c5660ddb1fb8a5fd5c1a2410e59aede0f849ae75cf2d6f6",
+    ".github/rulesets/shared-configuration-human-approval.json": "3945fd6e993f3a526d51823e1288c3b12f1282f162b9c78d2bb6472158f66b43",
+    ".github/workflows/shared-config-policy.yml": "8616cf9fb7ff438da61775ae78c53c8d867d42ede859553719ccc35419f82184",
+    "scripts/shared-config-policy.mts": "7d4c32fc2deb2d444bd6eba8d3dbb988ca95651d37bc9af60311753c6a76c619",
+    "scripts/shared-config-policy.test.mts": "30e1b14918eb48c6ba023a9f9a6530c2af312d9921aadffbbb8319a1596dbb74",
+    "tsconfig.shared-config.json": "793e6207ddfd7455a9d634749df7eeff0b4f54c3d693b35dd3061ad36d82cf1b"
+  },
+  "localTests": {
+    "command": "node --experimental-strip-types --test scripts/*.test.mjs scripts/*.test.mts",
+    "tests": 119,
+    "pass": 119,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "durationMs": 9012.443833,
+    "policyTests": 11
+  },
+  "typecheck": {
+    "command": "node node_modules/typescript/bin/tsc -p tsconfig.shared-config.json",
+    "exitCode": 0
+  },
+  "remote": {
+    "readOnly": true,
+    "existingRulesetId": 16880032,
+    "existingRuleset": {
+      "bypass_actors": [],
+      "conditions": {
+        "ref_name": {
+          "exclude": [],
+          "include": ["~DEFAULT_BRANCH"]
+        }
+      },
+      "enforcement": "active",
+      "name": "main-ruleset",
+      "rules": [
+        {
+          "type": "deletion"
+        },
+        {
+          "type": "non_fast_forward"
+        },
+        {
+          "parameters": {
+            "allowed_merge_methods": ["merge", "squash", "rebase"],
+            "dismiss_stale_reviews_on_push": false,
+            "require_code_owner_review": false,
+            "require_extra_approval_for_unattributed_changes": true,
+            "require_last_push_approval": false,
+            "required_approving_review_count": 0,
+            "required_review_thread_resolution": true,
+            "required_reviewers": []
+          },
+          "type": "pull_request"
+        },
+        {
+          "parameters": {
+            "do_not_enforce_on_create": false,
+            "required_status_checks": [
+              {
+                "context": "Test",
+                "integration_id": 15368
+              },
+              {
+                "context": "Analyze (javascript-typescript)",
+                "integration_id": 15368
+              },
+              {
+                "context": "Typecheck",
+                "integration_id": 15368
+              },
+              {
+                "context": "Lint",
+                "integration_id": 15368
+              },
+              {
+                "context": "Analyze (actions)",
+                "integration_id": 15368
+              }
+            ],
+            "strict_required_status_checks_policy": false
+          },
+          "type": "required_status_checks"
+        }
+      ],
+      "target": "branch"
+    },
+    "mainCodeownersStatus": 404,
+    "codeownersMerged": false,
+    "activation": false,
+    "agentIdentitySeparated": false,
+    "deniedMergeTested": false
+  },
+  "revalidation20261029": {
+    "node": "24.22.1",
+    "pnpm": "12.14.0",
+    "base": "16c51e9911f041b125a445b3939966986426a0b4",
+    "scopeFiles": 21,
+    "adrNumberCorrection": {
+      "from": "0019",
+      "to": "0022",
+      "reason": "0019 is already used on main for remote body search"
+    },
+    "policyTests": { "tests": 11, "pass": 11, "fail": 0, "skipped": 0 },
+    "repositoryTests": {
+      "tests": 119,
+      "pass": 119,
+      "fail": 0,
+      "skipped": 0,
+      "durationMs": 7504.580458,
+      "environment": "Isolated dependency clone at the same base with scoped changes mirrored"
+    },
+    "typecheck": { "project": "tsconfig.shared-config.json", "exitCode": 0 },
+    "generatedCodeownersCheck": { "exitCode": 0 },
+    "disabledRulesetAudit": {
+      "expectedExitCode": 1,
+      "actualExitCode": 1,
+      "message": "Ruleset is not active."
+    },
+    "dependencyPreparation": {
+      "initialFullRunFailedForMissingDependencies": true,
+      "frozenLockfile": true,
+      "ignoreScripts": true,
+      "reused": 1394,
+      "downloaded": 0,
+      "sharedDependencyTargetModified": false,
+      "originalDependencyLinkPreserved": true
+    },
+    "remoteEnforcementRechecked": false,
+    "pushAuthorized": false,
+    "activationAuthorized": false
+  },
+  "limits": [
+    "No remote ruleset mutation, merge, push, token rotation or application registration performed.",
+    "Unit fixtures do not prove GitHub enforcement or credential isolation."
+  ]
+}

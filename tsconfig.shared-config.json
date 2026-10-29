@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.squash-merge.json",
+  "files": [
+    "scripts/shared-config-policy.mts",
+    "scripts/shared-config-policy.test.mts"
+  ]
+}

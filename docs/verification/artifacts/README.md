@@ -1,5 +1,9 @@
 # 검증 원본 증거
 
+- [10-24 AI 신원 분리 사전 점검](2026-10-24-ai-github-isolation-preflight.json): [후속 검증](../security/2026-10-24-shared-config-approval.md#app-등록-후-신원-분리-준비-점검). App 설치 사용자 보고·조회404/403과 미완료 경계, 키/토큰 발급 없음.
+
+- [10-24 공통 설정 승인 정책](2026-10-24-shared-config-approval.json): [검증 보고서](../security/2026-10-24-shared-config-approval.md). 로컬119개·소스 해시·기존 서버 설정과 미완료 상태.
+
 - [10-22 부분 API 장애 최종 통합](2026-10-22T04-37-18-940Z-vuln-radar-integration.json): [검증 보고서](../integration/2026-10-22-vuln-radar-partial-failures.md). 25개 그룹·정리6단계 통과. 합성 데이터이며 선행 실패 증거는 보고서에 연결한다.
 
 - [10-22 수집 상태 최종 통합](2026-10-22T03-20-18-441Z-vuln-radar-integration.json): [검증 보고서](../integration/2026-10-22-vuln-radar-ingest-status.md). 19개 그룹·정리6단계 통과. 실제 upstream 수집과 운영 검증은 제외한다.

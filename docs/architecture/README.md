@@ -6,6 +6,8 @@
 
 ## ADR 상태
 
+- [ADR-0022: 공통 설정 승인과 AI 신원 분리](adr-0022-shared-configuration-approval.md): 적용 중. 로컬 소유권·회귀 준비, main/원격 강제화·전용 신원은 미완료.
+
 - [ADR-0017: Overview 부분 API 장애 격리](adr-0017-vuln-radar-panel-failure-isolation.md): 적용 중. API별 로딩·캐시 유지·경고/재시도, 로컬 작업 트리·운영 미검증.
 
 - [ADR-0016: 수집 실행 관측과 데이터 기준일 분리](adr-0016-vuln-radar-ingest-observation.md): 적용 중. 로컬 process-local 이력·조회/수집 주기·구버전 미확인 구분, 영속 이력 미구현·운영 배포 미검증.

@@ -1,5 +1,7 @@
 # 2026-10 작업 기록
 
+- [10-24 공통 설정 승인 게이트와 AI 권한 분리 준비](2026-10-24-shared-config-approval.md)
+
 - [10-22 CodeQL High #38 제목 검사 보완](2026-10-22-codeql38-heading-redos.md)
 
 - [10-22 원격·로컬 canonical 분류 통일](2026-10-22-docs-canonical-taxonomy.md)

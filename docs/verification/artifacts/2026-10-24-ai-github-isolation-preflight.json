@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-24",
+  "timezone": "Asia/Seoul",
+  "branch": "codex/shared-config-approval-20261024",
+  "base": "16c51e9911f041b125a445b3939966986426a0b4",
+  "userReported": {
+    "appName": "web-tech-github-app",
+    "installedRepository": "IMHOJEONG/web-tech",
+    "privateKeyGenerated": false
+  },
+  "selectedExecutionEnvironment": "Separate macOS standard user account",
+  "readOnlyChecks": [
+    {
+      "endpoint": "GET /apps/web-tech-github-app",
+      "status": 404,
+      "meaning": "App existence, slug and visibility not independently verified."
+    },
+    {
+      "endpoint": "GET /user/installations",
+      "status": 403,
+      "meaning": "Endpoint requires a token authorized to a GitHub App; current authentication cannot verify installation permissions."
+    }
+  ],
+  "pending": [
+    "Standard account creation, session transition and isolation",
+    "Actual App permissions and repository selection",
+    "Human-only private key custody and token broker",
+    "Short-lived installation identity and denied administrator access",
+    "Main CODEOWNERS bootstrap and server approval gate activation"
+  ],
+  "mutations": {
+    "osAccountCreated": false,
+    "adminAuthenticationChanged": false,
+    "keyOrTokenIssued": false,
+    "rulesetActivated": false,
+    "commitOrPush": false
+  }
+}
