@@ -234,7 +234,7 @@ export function checkRange(
   const headOid = git(cwd, "rev-parse", "--verify", `${head}^{commit}`)
     .toString()
     .trim();
-  if (newRef) git(cwd, "merge-base", "--is-ancestor", baseOid, headOid);
+  git(cwd, "merge-base", "--is-ancestor", baseOid, headOid);
   const commits = git(cwd, "rev-list", "--reverse", `${baseOid}..${headOid}`)
     .toString()
     .trim()
@@ -310,8 +310,10 @@ export function checkPush(
       if (hasCredential(parts[0]!) || hasCredential(parts[2]!))
         return [finding("push-ref", "credential-ref")];
       git(cwd, "merge-base", "--is-ancestor", baseline, head);
-      if (!/^0+$/.test(remote))
+      if (!/^0+$/.test(remote)) {
         git(cwd, "rev-parse", "--verify", `${remote}^{commit}`);
+        git(cwd, "merge-base", "--is-ancestor", remote, head);
+      }
       const annotations = inspectTagChain(cwd, head);
       const commits = git(
         cwd,

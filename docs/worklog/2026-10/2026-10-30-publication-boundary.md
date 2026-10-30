@@ -55,3 +55,7 @@ Node.js 24.22.1·pnpm 12.14.0에서 현재 브랜치의 작업 파일·인덱스
 Node.js 24.22.1·pnpm 12.14.0에서 `pnpm test:repo` 226/226(fail·skip·cancel 0)을 확인했다. 공개 경계 회귀는 기존 20개에 8개를 추가해 28개다. 최초 타입 검사에서는 셸 대조 runner의 반환형 추론 오류가 발생해 `SpawnSyncReturns<string>`를 명시했고 `pnpm typecheck:toolchain` 재검사가 통과했다. 검사 기준이나 비밀 패턴을 완화하지 않았다.
 
 변경한 검수 절차·작업 기록 2개만 이번 사용자 요청 범위에서 직접 확인하고 `.publication-review.json`의 해시를 갱신한다. 다른 승인 항목과 비공개 사본은 유지한다. 인덱스·메시지·푸시 검사와 포맷·문서·commitlint를 적용한 뒤 원격 head의 근거로 리뷰를 해결 처리하고 CI를 재조회한다. main 병합은 이번 요청 범위가 아니다.
+
+`641c877` 푸시 후 기존 리뷰 3건은 수정·검증 답글과 함께 해결 상태를 재조회했다. 같은 head의 CI 13개 작업·문서·CodeQL·두 Preview 및 자동 리뷰 검사가 성공했으나, 새 리뷰가 일반 범위의 non-ancestor 허용 1건을 추가했다. 일반 `--base`와 기존 remote ref의 pre-push도 기준 조상을 검증하도록 보완하고, 정상/동일·뒤로 이동·갈라진 이력을 회귀로 분리했다. 이 후속 보완도 변경 문서 2개의 공개 해시를 갱신해 별도 커밋으로 검증한다.
+
+후속 보완의 `pnpm test:repo`는 227/227(fail·skip·cancel 0), 공개 경계 회귀 29개이며 `pnpm typecheck:toolchain`도 통과했다. 실제 강제 push나 원격 태그 변경으로 시험하지 않고 임시 Git 저장소에서만 이력을 구성했다.

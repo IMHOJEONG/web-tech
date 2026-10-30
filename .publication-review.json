@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/process/publication-review.md",
-      "sha256": "37fe6cce78e8291f69b5c486af49bab9bcd14a2eca46c8a26b09f7d5af5ee48b",
+      "sha256": "81883dad4950d0fd03356862d71fe9c4213e0e327ad2c30045b73d63afb95115",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-30",
@@ -59,7 +59,7 @@
     },
     {
       "path": "docs/worklog/2026-10/2026-10-30-publication-boundary.md",
-      "sha256": "8dc7901011ac73409a0636867ccb1f5e73b4bc3409b385695404f9b941b6dcf4",
+      "sha256": "4601373454c11cc8b5f365471b57e53d2a7e5653009ae7feb2c8dd2fa88730d0",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-30",

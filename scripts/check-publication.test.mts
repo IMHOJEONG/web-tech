@@ -472,6 +472,29 @@ test("new-ref scan keeps the 1000 commit limit", (t) => {
   assert.throws(() => checkRange(cwd, "0".repeat(40), head, base));
 });
 
+test("backward and divergent ranges fail instead of reporting an unchecked empty range", (t) => {
+  const { cwd, put, git, base } = fixture(t);
+  put("first.ts", code.toString());
+  git("add", "first.ts");
+  git("commit", "-qm", "first");
+  const ahead = git("rev-parse", "HEAD").trim();
+  assert.deepEqual(checkRange(cwd, base, ahead), []);
+  assert.deepEqual(checkRange(cwd, ahead, ahead), []);
+  assert.throws(() => checkRange(cwd, ahead, base));
+  assert.throws(() =>
+    checkPush(cwd, `refs/heads/work ${base} refs/heads/work ${ahead}\n`, base),
+  );
+  git("checkout", "-qb", "other", base);
+  put("other.ts", code.toString());
+  git("add", "other.ts");
+  git("commit", "-qm", "other");
+  const other = git("rev-parse", "HEAD").trim();
+  assert.throws(() => checkRange(cwd, ahead, other));
+  assert.throws(() =>
+    checkPush(cwd, `refs/heads/work ${other} refs/heads/work ${ahead}\n`, base),
+  );
+});
+
 test("canonical test data locations require matching synthetic-fixture reviews", () => {
   for (const path of [
     "apps/docs/e2e/data/input.json",
