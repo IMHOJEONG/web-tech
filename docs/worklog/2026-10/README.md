@@ -108,6 +108,8 @@
 
 - [10-19 문서 인덱스·검색 목록 우선 배치](2026-10-19-docs-index-order.md)
 
+- [10-27 문서 필터 준비 상태](2026-10-27-docs-filter-readiness.md): 로딩 골격 selector 결함·실제 스트림 회귀·10-28 독립 PR 준비.
+
 - [10-19 PR #39 이후 feature 동기화](2026-10-19-feature-sync-after-pr39.md)
 
 - [10-18 Handlebars 패치와 braces 재조사](2026-10-18-handlebars-security-patch.md)
