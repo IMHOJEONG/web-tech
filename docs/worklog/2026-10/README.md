@@ -228,3 +228,7 @@
 - [10-05 OG 브라우저·Vercel 캐시 헤더 분리](2026-10-05-og-cache-header-boundary.md)
 
 - [10-19 PR #44 피드 리뷰 보완](2026-10-19-vuln-radar-feed-review.md)
+
+## 병합 후 검증 연결
+
+- [10-28 대비 병합·배포 후속](2026-10-25-primary-action-contrast.md#2026-10-28-독립-기록-pr-준비): 기존 #62/#63 병합·배포 증거와 GitHub Deployment ID 정정, 독립 기록 PR.
