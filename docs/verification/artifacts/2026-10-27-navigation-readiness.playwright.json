@@ -1,0 +1,5183 @@
+{
+  "config": {
+    "argv": [
+      "<home>/.local/share/mise/installs/node/24.12.0/bin/node",
+      "<workspace>/node_modules/.pnpm/@playwright+test@1.62.1/node_modules/@playwright/test/cli.js",
+      "test",
+      "category-localization.spec.ts",
+      "shell-focus-contrast.spec.ts",
+      "mobile-drawer-close.spec.ts",
+      "navigation-readiness.spec.ts",
+      "--retries=0",
+      "--repeat-each=3",
+      "--workers=3",
+      "--reporter=json"
+    ],
+    "configFile": "<workspace>/apps/docs/playwright.config.ts",
+    "rootDir": "<workspace>/apps/docs/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 3
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "<workspace>/apps/docs/test-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "chromium-mobile",
+        "name": "chromium-mobile",
+        "testDir": "<workspace>/apps/docs/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "<workspace>/apps/docs/test-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "chromium-tablet",
+        "name": "chromium-tablet",
+        "testDir": "<workspace>/apps/docs/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "<workspace>/apps/docs/test-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "chromium-desktop",
+        "name": "chromium-desktop",
+        "testDir": "<workspace>/apps/docs/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [["json"]],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 3,
+    "webServer": {
+      "command": "pnpm dev:e2e",
+      "url": "http://127.0.0.1:3057",
+      "reuseExistingServer": false,
+      "timeout": 120000,
+      "env": {
+        "BLOG_CONTENT_INCLUDE_REMOTE_INDEX": "false",
+        "BLOG_CONTENT_API_BASE_URL": "",
+        "BLOG_CONTENT_API_BASE_URL_INTERNAL": "",
+        "BLOG_CONTENT_API_BASE_URL_PUBLIC": ""
+      }
+    }
+  },
+  "suites": [
+    {
+      "title": "category-localization.spec.ts",
+      "file": "category-localization.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ko: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2729,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:10.014Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-514a3250077bed15b1dd",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "ko: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3543,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:10.014Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-6ac723c4b7ef801562a5",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "ko: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 2580,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:10.021Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-bfd77bfce74e1af31bb7",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "en: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1852,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:12.921Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-d2402f07a4222a29c209",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "en: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2457,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:13.068Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-a0508868f4c4e02a7e04",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "en: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1176,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:13.890Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-bf7af615abca814477f9",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "ko: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 846,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:19.967Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-b97db215a57de066e1e5",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "ko: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1883,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:20.839Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-c5d8342bb720df340dee",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "ko: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1412,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:20.874Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-799dc599b69040fa9ee3",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "en: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1570,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:21.011Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-9e114b981d963d10203f",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "en: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1809,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:22.462Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-d62314929b7c50c29983",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "en: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1285,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:22.588Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-acf89baa3dfce7f3516b",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "ko: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1218,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:27.610Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-6684a153e43c82548ac9",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "ko: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1518,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:27.713Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-a416325f19953915a556",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "ko: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1380,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:28.758Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-5d2a52f41e1a1dc989e5",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "en: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1472,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:28.949Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-228b7074955448f1aa94",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "en: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1613,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:29.372Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-62f6e4a71faf739a5a11",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "en: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1307,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:30.321Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-1bcfa1bbe79adcab3375",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "ko: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1279,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:35.024Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-85aef7850b761e3282a0",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "ko: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2012,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:35.128Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-1407c836ae6d60f5cb51",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "ko: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1196,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:36.017Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-dba103f6ff16ac6e4fde",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "en: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1177,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:36.419Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-8b92ab0470520d0efff8",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "en: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2327,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:37.274Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-553c444bcdbefce0af18",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "en: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1996,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:37.433Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-5b6e69b826c3e8f8fbc0",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "ko: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2042,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:40.005Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-3f9fc7dec1c010d9d4e7",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "ko: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2416,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:40.177Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-b60df7d88e47c78ac5cf",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "ko: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 2015,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:40.702Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-d7cece6ed8a3439b6daf",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "en: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1960,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:42.242Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-71be4b881fca0d3167bb",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "en: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2086,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:42.755Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-8ba44cc865980f019cda",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "en: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1488,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:43.003Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-be9e444340d3c76c0f36",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "ko: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1128,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:45.604Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-f8ae4668fb7b909cff2d",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "ko: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2905,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:46.152Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-bd9ab43e5049d29e1668",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "ko: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1982,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:46.123Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-8834648accb9e5e60809",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "en: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1768,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:46.889Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-f9b09ed84cc6131cb8a8",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "en: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1868,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:48.281Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-38f73d26d12026003d09",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "en: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1111,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:48.679Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-c2454398b0652fc2c91f",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "ko: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1219,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:50.746Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-163caa1a392708a30aa2",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "ko: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2218,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:51.278Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-2da9ae6fe36299b0e17d",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "ko: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1741,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:51.290Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-6b409da72ed9bc6fee86",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "en: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1660,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:52.107Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-7402a784d98635d3c994",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "en: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1890,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:53.190Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-d52bc716941aee4d538b",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "en: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1271,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:53.663Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-791de3986ae5fe71c6b7",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "ko: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1351,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:56.269Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-5f09be2a5d4662a815f4",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "ko: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2106,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:56.285Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-fb2344eec7e32da9e37e",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "ko: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 664,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:57.748Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-7de45e6e2cc74ee4687c",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "en: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1072,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:58.422Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-d3a6309ac07867522551",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "en: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1099,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:58.503Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-b16af49d2bedcc67b2e9",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "en: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 904,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:59.515Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-24df7f908ff629f40972",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "ko: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 848,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:01.611Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-fbf0c14a01ab991b5386",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "ko: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1315,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:02.587Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-e2c811e034ee473537b2",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "ko: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 971,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:02.641Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-36b29b277405b8a17a96",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "en: category index localizes navigation and summaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1224,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:03.621Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-5150826ee56056c9d563",
+          "file": "category-localization.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "en: technical topics localize summaries and keep document titles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1227,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:04.042Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-61904c4536412889c638",
+          "file": "category-localization.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "en: topic statistics localize labels but preserve article language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 838,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:04.852Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e7214ffae47ea1ea4b6a-84d9efcba12a93be203f",
+          "file": "category-localization.spec.ts",
+          "line": 72,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "mobile-drawer-close.spec.ts",
+      "file": "mobile-drawer-close.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "light/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 4644,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:14.806Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-fe671e210a0c491b50f9",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2346,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:15.085Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-1ccf782461ad3771fbd9",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3856,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:15.537Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-78cbdc517ed76df5e33a",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 877,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:17.441Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-95c03c8537ec108e8e9a",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 3349,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:22.897Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-95adff2d3a51bafb8261",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1041,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:23.883Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-9e0d2343fd55d6582bfa",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3792,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:24.285Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-e1c2aaffd77476957a35",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 920,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:24.931Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-822fe992e63ca488a573",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 3235,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:30.437Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-510a86dc386d1c1f1707",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1264,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:31.007Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-5a15b3210273d5bccce5",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3795,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:31.639Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-473b89208fabb39de74a",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 895,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:32.282Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-6a24facf43b2023d4014",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 60,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:37.611Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-b46ae35a8362dd62b136",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 121,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:37.678Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-2db8c8ca90df0e61a98d",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 85,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:37.812Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-10e3deb5f6f952ca1d5d",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 55,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:37.904Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-fe18d264a25765c0960b",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 78,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:44.221Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-62dee5da3058817e4db1",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 59,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:44.325Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-5fa8d2f522786d8fdff0",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 78,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:44.395Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-57e134bd6479d36bd999",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 90,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:44.486Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-3b1ec7979cd2b3d7ab49",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 69,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:49.316Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-1b792a4ad8140da92d91",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 64,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:49.396Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-23b8ffe829944afb4b25",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 91,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:49.476Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-bab33b70f1c7db73b54e",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 68,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:49.575Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-d5f2706432a5cf21a4e5",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 43,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:53.787Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-b3f029e0a1f4735b2110",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 128,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:53.840Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-7b9bb44e3244aff24289",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 75,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:53.981Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-492d6b3f241bb644ecf5",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 89,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:54.104Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-95935658ae032954b114",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 49,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:59.611Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-75e5a5af03534a5c38dd",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 73,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:59.671Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-d00f78af90a43bbd73c5",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 89,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:59.755Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-490860e21083b2c1cd62",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 104,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:59.865Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-c5d72e554e15c5adaaae",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 117,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:05.287Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-a1d4d78fcea3917d210b",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "light/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 49,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:05.413Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-6a120d4bd4a6a5c82f5a",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/no-preference: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 65,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:05.469Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-d570ab0d37276f995726",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        },
+        {
+          "title": "dark/reduce: mobile drawer has one custom close button and restores focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer coverage.",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                    "line": 8,
+                    "column": 18
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 47,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:05.541Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer coverage.",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/mobile-drawer-close.spec.ts",
+                        "line": 8,
+                        "column": 18
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b5394c943211dd7e2d-76ba7e30a3b1ea0ed7fc",
+          "file": "mobile-drawer-close.spec.ts",
+          "line": 5,
+          "column": 9
+        }
+      ]
+    },
+    {
+      "title": "navigation-readiness.spec.ts",
+      "file": "navigation-readiness.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "mobile keyboard activation waits for the hydrated drawer trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1190,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:18.327Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "drawer-readiness",
+                      "contentType": "application/json",
+                      "body": "eyJkaXNhYmxlZEVudGVyT3BlbnNNZW51IjpmYWxzZSwiaHlkcmF0ZWRFbnRlck9wZW5zTWVudSI6dHJ1ZSwiZXNjYXBlUmVzdG9yZXNGb2N1cyI6dHJ1ZX0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-bdf6d5caf82f35b10bc8",
+          "file": "navigation-readiness.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "category navigation waits for the route response, not the UI assertion deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Desktop route race",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                    "line": 54,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 51,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:19.407Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Desktop route race",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                        "line": 54,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-df5c04249baec011902b",
+          "file": "navigation-readiness.spec.ts",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "mobile keyboard activation waits for the hydrated drawer trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 634,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:25.861Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "drawer-readiness",
+                      "contentType": "application/json",
+                      "body": "eyJkaXNhYmxlZEVudGVyT3BlbnNNZW51IjpmYWxzZSwiaHlkcmF0ZWRFbnRlck9wZW5zTWVudSI6dHJ1ZSwiZXNjYXBlUmVzdG9yZXNGb2N1cyI6dHJ1ZX0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-97601a40f6884f2e30c7",
+          "file": "navigation-readiness.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "category navigation waits for the route response, not the UI assertion deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Desktop route race",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                    "line": 54,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 44,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:26.262Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Desktop route race",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                        "line": 54,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-3407ea81cc1137889f30",
+          "file": "navigation-readiness.spec.ts",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "mobile keyboard activation waits for the hydrated drawer trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 730,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:33.189Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "drawer-readiness",
+                      "contentType": "application/json",
+                      "body": "eyJkaXNhYmxlZEVudGVyT3BlbnNNZW51IjpmYWxzZSwiaHlkcmF0ZWRFbnRlck9wZW5zTWVudSI6dHJ1ZSwiZXNjYXBlUmVzdG9yZXNGb2N1cyI6dHJ1ZX0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-a98cdb41caeb86dc3c22",
+          "file": "navigation-readiness.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "category navigation waits for the route response, not the UI assertion deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Desktop route race",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                    "line": 54,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 41,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:33.683Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Desktop route race",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                        "line": 54,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-943562f1d4f72ac49e1a",
+          "file": "navigation-readiness.spec.ts",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "mobile keyboard activation waits for the hydrated drawer trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer keyboard contract",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                    "line": 9,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 73,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:37.987Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer keyboard contract",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                        "line": 9,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-542cc260c9a0e657117c",
+          "file": "navigation-readiness.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "category navigation waits for the route response, not the UI assertion deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Desktop route race",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                    "line": 54,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 64,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:38.071Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Desktop route race",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                        "line": 54,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-56b6184ac05c2d71308e",
+          "file": "navigation-readiness.spec.ts",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "mobile keyboard activation waits for the hydrated drawer trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer keyboard contract",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                    "line": 9,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 81,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:44.516Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer keyboard contract",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                        "line": 9,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-1fad05d12927700389fc",
+          "file": "navigation-readiness.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "category navigation waits for the route response, not the UI assertion deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Desktop route race",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                    "line": 54,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 60,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:44.599Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Desktop route race",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                        "line": 54,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-3ed75d139bc7a2edd3d9",
+          "file": "navigation-readiness.spec.ts",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "mobile keyboard activation waits for the hydrated drawer trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer keyboard contract",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                    "line": 9,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 83,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:49.671Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer keyboard contract",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                        "line": 9,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-56d073184e6b043b6f5a",
+          "file": "navigation-readiness.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "category navigation waits for the route response, not the UI assertion deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Desktop route race",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                    "line": 54,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 80,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:49.762Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Desktop route race",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                        "line": 54,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-409e84f715944e0bf1af",
+          "file": "navigation-readiness.spec.ts",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "mobile keyboard activation waits for the hydrated drawer trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer keyboard contract",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                    "line": 9,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 67,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:54.212Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer keyboard contract",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                        "line": 9,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-7b52dba946b4db19fe9e",
+          "file": "navigation-readiness.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "category navigation waits for the route response, not the UI assertion deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 18,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 6609,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:54.296Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "category-route-readiness",
+                      "contentType": "application/json",
+                      "body": "eyJyc2NSZXF1ZXN0T2JzZXJ2ZWQiOnRydWUsInBlbmRpbmdVcmxJc1ByZXZpb3VzUm91dGUiOnRydWUsIm9sZFVybEFzc2VydGlvbkV4cGlyZWQiOnRydWUsImhlbGRNaWxsaXNlY29uZHMiOjUwMTcuODY0NzUwMDAwMDAxLCJuYXZpZ2F0aW9uQ29tcGxldGVkIjp0cnVlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-6c181edadb2705246d4f",
+          "file": "navigation-readiness.spec.ts",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "mobile keyboard activation waits for the hydrated drawer trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer keyboard contract",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                    "line": 9,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 49,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:59.985Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer keyboard contract",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                        "line": 9,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-39e18e7e7889504a259a",
+          "file": "navigation-readiness.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "category navigation waits for the route response, not the UI assertion deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 22,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7289,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:00.041Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "category-route-readiness",
+                      "contentType": "application/json",
+                      "body": "eyJyc2NSZXF1ZXN0T2JzZXJ2ZWQiOnRydWUsInBlbmRpbmdVcmxJc1ByZXZpb3VzUm91dGUiOnRydWUsIm9sZFVybEFzc2VydGlvbkV4cGlyZWQiOnRydWUsImhlbGRNaWxsaXNlY29uZHMiOjUyMzYuMzc2NDE2LCJuYXZpZ2F0aW9uQ29tcGxldGVkIjp0cnVlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-9cd7fb528fcd1b0328ae",
+          "file": "navigation-readiness.spec.ts",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "mobile keyboard activation waits for the hydrated drawer trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "Mobile drawer keyboard contract",
+                  "location": {
+                    "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                    "line": 9,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 2,
+                  "status": "skipped",
+                  "duration": 43,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:05.597Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Mobile drawer keyboard contract",
+                      "location": {
+                        "file": "<workspace>/apps/docs/e2e/navigation-readiness.spec.ts",
+                        "line": 9,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-fdf70903efea631236ab",
+          "file": "navigation-readiness.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "category navigation waits for the route response, not the UI assertion deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 25,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 7294,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:05.647Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "category-route-readiness",
+                      "contentType": "application/json",
+                      "body": "eyJyc2NSZXF1ZXN0T2JzZXJ2ZWQiOnRydWUsInBlbmRpbmdVcmxJc1ByZXZpb3VzUm91dGUiOnRydWUsIm9sZFVybEFzc2VydGlvbkV4cGlyZWQiOnRydWUsImhlbGRNaWxsaXNlY29uZHMiOjUwMDkuOTAzMTI1LCJuYXZpZ2F0aW9uQ29tcGxldGVkIjp0cnVlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b92492feb3156ce59fdd-a73918b13442e8b30972",
+          "file": "navigation-readiness.spec.ts",
+          "line": 51,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "shell-focus-contrast.spec.ts",
+      "file": "shell-focus-contrast.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 886,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:19.466Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-ed0b6e3ff3ad78bba54b",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 923,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:19.470Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-8e1cd8bc1536a71797ad",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 969,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:26.315Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-732d488d4bb5445884aa",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 896,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:26.505Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-25305bf4154168896327",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 986,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:33.733Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-8802b2a54cfe723b4230",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-mobile",
+              "projectName": "chromium-mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 917,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:33.929Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-be12e32947747bfcdca4",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1244,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:38.164Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-cae8693f58848aaa54b2",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 733,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:39.418Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-64e55c5f9910e2d48a41",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1030,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:44.609Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-7b9c35d3bce1c1fd9e7a",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 958,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:44.676Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-7e117bfbf50999013f6f",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 960,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:49.817Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-c4fe5fd36769517f521f",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-tablet",
+              "projectName": "chromium-tablet",
+              "results": [
+                {
+                  "workerIndex": 16,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 950,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:49.851Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-20f0b6db33f951c8237a",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 19,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1046,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:54.947Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-25af7bd5ef4dd06b4256",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 20,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 901,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:02:55.107Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-0c54ebb27bda292ff6db",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 21,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 835,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:00.442Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-e317aa853700e9b8b261",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 23,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 780,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:01.363Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-6f791fc04ec5f4834059",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "light: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 24,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1941,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:05.698Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-cc19fbf1a0bdd3046700",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "dark: shell focus, contrast and landmark names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-desktop",
+              "projectName": "chromium-desktop",
+              "results": [
+                {
+                  "workerIndex": 26,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 644,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-27T06:03:07.820Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b76d40ffc31dbe982b3-8273768fe4ea45e5be05",
+          "file": "shell-focus-contrast.spec.ts",
+          "line": 59,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-27T06:02:04.674Z",
+    "duration": 68364.45400000001,
+    "expected": 90,
+    "skipped": 36,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

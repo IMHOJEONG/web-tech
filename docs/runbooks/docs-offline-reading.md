@@ -106,6 +106,8 @@ HTML 보고서에서 테스트의 Attachments → `offline-article-navigation` J
 
 ## 관련 검증
 
+- [UTF-8 1MiB 경계·저장본 보존과 ADR 후속 검증](../verification/governance/2026-10-27-offline-byte-contract-and-adr-followup.md)
+
 - [CI 증거 보관·이동 계측 회귀](../verification/resilience/2026-10-22-navigation-evidence-retention.md)
 - [실제 실행 결과와 한계](../verification/resilience/2026-10-17-content-network-offline.md)
 - [저장·보안 경계 결정](../architecture/adr-0015-explicit-offline-article-snapshots.md)

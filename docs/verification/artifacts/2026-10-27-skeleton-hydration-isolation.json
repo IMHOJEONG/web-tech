@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-27",
+  "timezone": "Asia/Seoul",
+  "baseSha": "5e230da7ac6f6493fe0a5c0684ab61dd2ebc14d7",
+  "scope": "local-uncommitted",
+  "node": "24.12.0",
+  "pnpm": "12.14.0",
+  "next": "16.4.3",
+  "playwright": "1.62.1",
+  "ciBaselineRun": "40428722970",
+  "ciBaselineFlaky": { "mobile": 2, "tablet": 2, "desktop": 3 },
+  "baselineControlled": { "passed": 45, "failed": 0, "retries": 0 },
+  "afterInitial": { "passed": 69, "failed": 0, "retries": 0 },
+  "afterRepeated": {
+    "passed": 225,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "repeatEach": 3,
+    "workers": 3,
+    "retries": 0
+  },
+  "hydrationProbe": {
+    "successfulRuns": 2,
+    "before": { "connected": true, "children": 48, "animations": 0 },
+    "after": {
+      "connected": false,
+      "children": 48,
+      "animations": 48,
+      "computedAnimationNames": [""]
+    },
+    "hydrationErrorObserved": true
+  },
+  "invalidSharedServerAttempt": {
+    "passed": 11,
+    "failed": 34,
+    "cause": "server closed during reused-server run",
+    "usedAsHydrationEvidence": false
+  },
+  "initialTypecheck": "overlapped UI dist rebuild; same command passed after generation",
+  "changedFileLint": "passed",
+  "typecheck": "passed",
+  "diagnosticMtsTypecheck": "passed with ignoreConfig and erasableSyntaxOnly",
+  "repositoryTests": { "passed": 156, "failed": 0 },
+  "sourceSha256": {
+    "apps/docs/e2e/helpers/frozen-skeleton.ts": "12ab62fa0a8cd71ede27c5065386334efb573b3f3636b94c5f94c44d4d034078",
+    "apps/docs/e2e/page-skeletons.spec.ts": "008776fecaae463b435acb16e9076f6566bada0f07fbd92c64dd4204c896815d",
+    "apps/docs/e2e/frozen-skeleton.spec.ts": "eeaa7172a8487a780fc898977998f1847b3b33ab5bbad5cac88139ee4ada0749",
+    "apps/docs/scripts/diagnose-skeleton-hydration.mts": "0c77285f5c3207436399ff0445eae7db2ab7852e2ed8aee0e249192f54b25a48"
+  },
+  "runtimeUiChanged": false,
+  "timeoutOrToleranceRelaxed": false,
+  "remoteCiOfFixVerified": false,
+  "committedOrPushed": false
+}

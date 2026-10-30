@@ -28,6 +28,13 @@
 
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.json): [보고서](../security/2026-10-27-node24-security-patch.md). 버전 경계·회귀·로컬 이미지 digest/gate hash·원본 15파일 보존·미배포 구분.
 
+- 모바일 메뉴·카테고리 탐색: [관련 반복 원본 정제본](2026-10-27-navigation-readiness.playwright.json), [출처·해시와 전체 검사 파생 집계](2026-10-27-navigation-readiness-provenance.json). [보고서](../accessibility/2026-10-27-navigation-readiness.md). 관련90통과·36제외/전체372통과·54제외, 재시도0. 용량 초과 전체 원본은 저장소에 보관하지 않았다.
+
+- [10-27 스켈레톤 hydration 격리 집계](2026-10-27-skeleton-hydration-isolation.json): [보고서](../accessibility/2026-10-27-skeleton-hydration-isolation.md). 분리 전후 재현·225개 무재시도 검사의 당시 로컬 집계. 원격 후속은 보고서에서 별도 연결한다.
+- 스켈레톤 Playwright 원본 정제본: [baseline45](2026-10-27-skeleton-before.playwright.json), [초기 격리69](2026-10-27-skeleton-initial-isolation.playwright.json), [반복225](2026-10-27-skeleton-repeat-isolation.playwright.json). 전체 개별 결과·인라인 측정 첨부를 보존하며 [원본/정제본 해시·정제 범위](2026-10-27-skeleton-playwright-report-provenance.json)를 함께 기록한다.
+
+- [10-27 오프라인 byte 계약·ADR 후속 검증 집계](2026-10-27-offline-byte-contract-and-adr-followup.json)
+
 - [10-27 검색/응답 제한 PR 결합](2026-10-27-search-response-pr-integration.json): [보고서](../integration/2026-10-27-search-response-pr-integration.md). #64 공식 squash·실제 main/배포 조회·충돌 보존·검색 어댑터 전후·소스9blob·production162개.
 
 - [10-26 상세 HTML 응답 제한](2026-10-26-html-response-budget.json): [보고서](../content/2026-10-26-html-response-budget.md). 렌더 결과 경계·길고 유효한 코드/표·선택 JSON 재검사·소스8blob·production162개·미검증 범위.

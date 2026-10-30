@@ -18,6 +18,12 @@
 
 - [10-27 Node 24 보안 patch·CI·Docker](security/2026-10-27-node24-security-patch.md): main 기반 격리·pin/floor·amd64 이미지와 실제 Node·앱 회귀. 운영 미배포.
 
+- [10-27 모바일 메뉴·카테고리 탐색 준비 시점](accessibility/2026-10-27-navigation-readiness.md): disabled Enter·RSC 응답 보류 음성 대조, 관련90개·전체372개 무재시도 통과. 원본 정제본·해시 연결, 미푸시.
+
+- [10-27 스켈레톤 hydration 격리](accessibility/2026-10-27-skeleton-hydration-isolation.md): CI 재시도7건·실제 hydration 제거·빈 스타일 오판 재현, 별도 문서와 음성 대조·225개 무재시도 통과. 원격 후속 미검증.
+
+- [10-27 오프라인 byte 계약과 ADR 후속 관계](governance/2026-10-27-offline-byte-contract-and-adr-followup.md): 수정 전 실패·UTF-8 경계·저장본 보존, 부분 대체·작업 지침 연결. 로컬 검증·미배포.
+
 - [10-27 검색·응답 제한/Content-Type 결합](integration/2026-10-27-search-response-pr-integration.md): PR #64 병합·HTML 헤더의 budget 이후 설정·상한/JSON 오류 결합·원래 미커밋 보존, 이후 CI/배포는 별도 기록.
 
 - [10-26 상세 HTML byte budget](content/2026-10-26-html-response-budget.md): 최종 렌더 UTF-8 경계·긴 코드/1000행 표·로컬 대체/원격전용 오류·목록 정상 유지, 운영 미검증.

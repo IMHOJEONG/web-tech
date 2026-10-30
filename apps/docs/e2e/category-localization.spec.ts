@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 import ko from '../shared/message/ko.json' with { type: 'json' }
 import en from '../shared/message/en.json' with { type: 'json' }
+import { followLink } from './helpers/follow-link'
 
 for (const [locale, { category: copy }] of [
     ['ko', ko],
@@ -25,7 +26,7 @@ for (const [locale, { category: copy }] of [
         ).toBeVisible()
         const link = main.locator(`a[href="/${locale}/category/fe"]`)
         await expect(link).toHaveCount(1)
-        await link.click()
+        await followLink(page, link, `/${locale}/category/fe`)
         await expect(page).toHaveURL(`/${locale}/category/fe`)
         await expect(main.getByRole('heading', { level: 1 })).toHaveText(
             copy.main.title
@@ -43,7 +44,11 @@ for (const [locale, { category: copy }] of [
         await expect(
             main.getByText(copy.summaries.topics.react, { exact: true })
         ).toBeVisible()
-        await main.locator(`a[href="/${locale}/category/fe/react"]`).click()
+        await followLink(
+            page,
+            main.locator(`a[href="/${locale}/category/fe/react"]`),
+            `/${locale}/category/fe/react`
+        )
         await expect(page).toHaveURL(`/${locale}/category/fe/react`)
         await expect(main.getByRole('heading', { level: 1 })).toHaveText(
             copy.sub.title

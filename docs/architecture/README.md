@@ -44,7 +44,7 @@
 
 - [ADR-0010: 웹 푸시 초대 세션과 WAF 활성화 게이트](adr-0010-web-push-invitation-and-waf-gate.md): 적용 중. 코드 접근 제한 반영, Production WAF 게시·검증은 미완료.
 
-- [ADR-0009: 선택형 웹 푸시 실험](adr-0009-docs-web-push-experiment.md): 적용 중. 기본 비활성화 MVP, 실제 기기 수신·NAS 활성화는 미검증.
+- [ADR-0009: 선택형 웹 푸시 실험](adr-0009-docs-web-push-experiment.md): 적용 중. Worker의 fetch·오프라인 캐시 책임만 ADR-0015로 부분 대체했다. 구독·저장·발송과 기본 비활성화는 유지하며 실제 기기 수신·NAS 활성화는 미검증.
 
 - [ADR-0008: 요청별 증거로 스트림 종료 판정](adr-0008-request-lifecycle-observability.md): 제안. 로컬 fixture·앱 부분 계측·UI/전송 검사 분리 반영, 전체 운영 종료 판정은 미완료.
 

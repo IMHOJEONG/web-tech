@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-27",
+  "purpose": "Original Playwright JSON reporter outputs, sanitized for publication; no test rerun",
+  "sourceSummary": "2026-10-27-skeleton-hydration-isolation.json",
+  "sanitization": {
+    "replaced": "Absolute checkout prefix in config, argv and output paths -> <workspace>; personal home prefix in the Node executable path -> <home>",
+    "omittedFields": [],
+    "preserved": "All report fields, stats, individual results, timestamps, durations, retries, errors and inline base64 measurement attachments",
+    "sensitiveDataScan": "Headers, credentials, email addresses, internal IPs and unredacted host paths checked, including decoded measurement attachments",
+    "originalFilesModified": false
+  },
+  "reports": [
+    {
+      "artifact": "2026-10-27-skeleton-before.playwright.json",
+      "sourceFile": "skeleton-before-20261027.json",
+      "stage": "baseline HEAD 5e230da",
+      "sourceBytes": 84106,
+      "sourceSha256": "2cc8c3e645319224ff5e12ec458a09f60fc78c658e61749835cfd2d3e428f7ed",
+      "sanitizedBytes": 83644,
+      "sanitizedSha256": "6b0ab5473ce481987480ead2dffa896674f2ff7f0167de82da58c255d316b231",
+      "stats": {
+        "startTime": "2026-10-27T01:00:30.897Z",
+        "duration": 29374.502999999997,
+        "expected": 45,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": 45,
+      "resultAttempts": 45,
+      "nonzeroRetryAttempts": 0,
+      "inlineMeasurementAttachments": 45,
+      "individualResultsUnchanged": true
+    },
+    {
+      "artifact": "2026-10-27-skeleton-initial-isolation.playwright.json",
+      "sourceFile": "skeleton-after-first-20261027.json",
+      "stage": "intermediate isolated fixture, uncommitted at execution",
+      "sourceBytes": 131058,
+      "sourceSha256": "c5d802914855b456dc315aa9784a2e045ff5ffa8a98013fe56d749b69267f050",
+      "sanitizedBytes": 130596,
+      "sanitizedSha256": "3580f49ed800d6c3f28fe6ad0aed7c94d8dbd7b29efa11478b7733b6ecb12a17",
+      "stats": {
+        "startTime": "2026-10-27T01:03:07.181Z",
+        "duration": 93936.66399999999,
+        "expected": 69,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": 69,
+      "resultAttempts": 69,
+      "nonzeroRetryAttempts": 0,
+      "inlineMeasurementAttachments": 66,
+      "individualResultsUnchanged": true
+    },
+    {
+      "artifact": "2026-10-27-skeleton-repeat-isolation.playwright.json",
+      "sourceFile": "skeleton-after-repeat-20261027.json",
+      "stage": "final isolated fixture, uncommitted at execution; source hashes in original summary",
+      "sourceBytes": 406675,
+      "sourceSha256": "ea5d0a1cc7c8a87fe4aabc3674d2da1d1547058e26424b38a135dcfe4bf1de24",
+      "sanitizedBytes": 406213,
+      "sanitizedSha256": "8db1c30d40d0e282dac56153341823b325fa65596c2da1f99ceb5dc22ffebedd",
+      "stats": {
+        "startTime": "2026-10-27T01:05:49.608Z",
+        "duration": 259611.286,
+        "expected": 225,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": 225,
+      "resultAttempts": 225,
+      "nonzeroRetryAttempts": 0,
+      "inlineMeasurementAttachments": 198,
+      "individualResultsUnchanged": true
+    }
+  ]
+}

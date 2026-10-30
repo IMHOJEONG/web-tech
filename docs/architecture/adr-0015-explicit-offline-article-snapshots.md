@@ -5,7 +5,10 @@
 - 상태: 적용 중
 - 대상: docs 공개 상세, 브라우저 CacheStorage, 기존 푸시 Service Worker
 - 결정일: 2026-10-17
-- 최종 검토: 2026-10-18
+- 최종 검토: 2026-10-27
+- 부분 대체 대상: [ADR-0009](adr-0009-docs-web-push-experiment.md)
+- 부분 대체 범위: 같은 `/push-sw.js`의 fetch·오프라인 캐시 책임에 한정한다. 푸시 구독·저장·발송과 기본 비활성화는 ADR-0009·ADR-0010을 유지한다.
+- 이번 검토: 기존 1MiB 입력 계약의 UTF-8 구현·경계 회귀와 부분 대체 연결. 새 한도나 새로운 저장 정책을 채택한 것이 아니다.
 - 로컬 구현과 Chromium 검사 범위다. 운영 배포·실제 Safari/Firefox·기기는 미검증이다.
 
 ## 배경
@@ -39,6 +42,10 @@
 HTTPS 또는 localhost가 필요하다. 저장본은 해당 브라우저·프로필·출처에만 남으며 동기화·백업하지 않는다. 브라우저의 공간 회수·데이터 삭제로 사라질 수 있고 사용자가 이후 비공개로 바꾼 글의 기존 복사본을 강제 회수할 수 없다. 공개 글의 다운로드 성격을 전제로 한다. Worker 갱신 때 같은 형식의 글 캐시는 유지하고 이전 reader shell만 정리한다.
 
 ## 관련 문서
+
+- [ADR-0009: 유지되는 푸시 결정과 부분 대체 범위](adr-0009-docs-web-push-experiment.md)
+- [ADR-0010: 유지되는 초대·WAF 접근 제한](adr-0010-web-push-invitation-and-waf-gate.md)
+- [UTF-8 입력 계약 수정·검증](../verification/governance/2026-10-27-offline-byte-contract-and-adr-followup.md)
 
 - [원격 요청 실패 정책](docs-content-api-fail-fast-policy.md)
 - [사용·검증·복구 절차](../runbooks/docs-offline-reading.md)
