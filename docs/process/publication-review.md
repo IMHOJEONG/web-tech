@@ -38,7 +38,9 @@ pnpm --filter docs validate:content
 pnpm publication:check --base origin/main
 ```
 
-commit-msg 훅도 메시지의 대표 비밀 패턴을 검사한 뒤 기존 commitlint를 실행한다. 푸시 범위 검사에서는 변경 blob뿐 아니라 커밋 메시지와 ref 이름의 대표 비밀 패턴도 확인한다. 원격 검사는 커밋된 이력만 보며 아직 stage하지 않은 작업 파일까지 검수하지 않는다.
+commit-msg 훅도 메시지의 대표 비밀 패턴을 검사한 뒤 기존 commitlint를 실행한다. 푸시 범위 검사에서는 변경 blob뿐 아니라 커밋 메시지·ref 이름·annotated tag 객체의 설명문도 확인한다. 중첩 annotated tag는 각 태그 객체를 따라 검사하며, 새 커밋이 없는 태그도 예외가 아니다. 원격 검사는 커밋된 이력만 보며 아직 stage하지 않은 작업 파일까지 검수하지 않는다.
+
+CI의 새 `main`/`feature/docs` ref에서 `before`가 40자리 zero이면 publication 검사는 도입 기준 커밋부터 실행한다. 포맷·문서 delta 검사만 별도로 생성한 빈 tree 객체를 사용한다. publication 검사에 tree를 commit인 것처럼 전달하거나 모든 과거 이력을 자동 승인하지 않는다. 도입 기준의 Git 객체·조상 관계가 확인되지 않으면 실패하며 최대 1,000개 커밋 제한은 유지한다.
 
 검수 항목의 모양은 아래와 같다. 해시와 설명은 예시이며 실제 공개 승인 자료가 아니다. 실제 항목은 사용자가 승인한 파일만 작성한다. 검수일은 실제 확인 날짜, 설명에는 무엇을 익명화/직접 확인했는지 적고 사람의 이름·비밀값은 적지 않는다.
 
@@ -64,7 +66,17 @@ commit-msg 훅도 메시지의 대표 비밀 패턴을 검사한 뒤 기존 comm
 }
 ```
 
-`kind`는 `article`, `asset`, `document`, `sanitized-evidence`, `synthetic-fixture`다. 검사 대상은 docs의 `data/category` Markdown, `apps/docs/public/` 전체, `docs/`의 Markdown(목차·운영 문서·검증 보고서·작업 기록 포함), 정제 artifact, 데이터 fixture와 비텍스트 파일이다. 예를 들어 다음 명령은 Git에 stage된 공개본의 해시만 표시한다.
+`kind`는 `article`, `asset`, `document`, `sanitized-evidence`, `synthetic-fixture`다. 검사 대상은 docs의 `data/category` Markdown, `apps/docs/public/` 전체, `docs/`의 Markdown(목차·운영 문서·검증 보고서·작업 기록 포함), 정제 artifact, 데이터 fixture와 비텍스트 파일이다.
+
+데이터 fixture의 자동 분류 위치는 다음과 같이 한정한다. JS/TS 실행 소스(`js/jsx/mjs/cjs/ts/tsx/mts/cts`)는 이 데이터 분류에서 제외하지만 대표 비밀 패턴 검사는 그대로 적용한다. 글·공개 에셋·운영 Markdown·정제 증거의 분류가 먼저 적용되는 경로는 해당 종류의 검수 기록을 사용한다.
+
+- 경로의 디렉터리 중 `fixtures`, `test-data`, `experiment-data`가 있는 비소스 파일.
+- `test`, `tests`, `e2e`, 소문자 영문/숫자/하이픈의 `*-e2e` 디렉터리 아래에 있는 `data/`의 비소스 파일. 중간 디렉터리가 있어도 포함한다.
+- 예: `apps/docs/e2e/data/input.json`, `apps/docs/article-e2e/data/input.csv`, `apps/docs/e2e/scenarios/data/input.yaml`, `apps/docs-backend/test/data/input.json`, `packages/ui/tests/data/input.txt`.
+
+모든 JSON·텍스트를 fixture라고 간주하지는 않는다. `apps/docs/tsconfig.activity-e2e.json`, `apps/vuln-radar-backend/test/jest-e2e.json` 같은 일반 설정은 위 위치에 없으면 fixture 해시를 요구하지 않는다. 다른 위치의 데이터가 자동으로 안전해지는 것은 아니다. 새 fixture 위치를 채택할 때 검사기·이 목록·회귀를 함께 갱신하고, 실제 응답/개인 데이터를 설정 파일이나 코드로 위장하지 않는다.
+
+예를 들어 다음 명령은 Git에 stage된 공개본의 해시만 표시한다.
 
 ```sh
 git show ':apps/docs/category/web/my-post.mdx' | shasum -a 256

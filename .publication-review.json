@@ -45,11 +45,11 @@
     },
     {
       "path": "docs/process/publication-review.md",
-      "sha256": "61c88262f5fad1a769b5781cb92e4ea2764069bdb14d3f5f770d324fdbe5c445",
+      "sha256": "37fe6cce78e8291f69b5c486af49bab9bcd14a2eca46c8a26b09f7d5af5ee48b",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-30",
-      "note": "사용자 10-30 커밋·푸시 요청 범위. 자체 작성 절차·무효 예시·공식 자료 링크를 검토했으며 실토큰·내부 실험 경로·제3자 매체를 포함하지 않음.",
+      "note": "사용자 PR79 리뷰 보완·해시 갱신·커밋·푸시 요청 범위. 새 ref·fixture 위치·태그 설명문 절차를 검토했으며 실제 비밀값·원시 실험 자료·제3자 매체를 추가하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -59,11 +59,11 @@
     },
     {
       "path": "docs/worklog/2026-10/2026-10-30-publication-boundary.md",
-      "sha256": "03d9a4a5734e5856bce0e8430e50ecca92beb281ae62a0c62c0317e8bb1e4cc1",
+      "sha256": "8dc7901011ac73409a0636867ccb1f5e73b4bc3409b385695404f9b941b6dcf4",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-30",
-      "note": "사용자 10-30 커밋·푸시 요청 범위. 정제한 구현·로컬 검사 결과와 한계만 기록하며 원시 출력·복구 사본·실험 데이터는 제외함.",
+      "note": "사용자 PR79 리뷰 보완·해시 갱신·커밋·푸시 요청 범위. 수정 이유·정제한 검사 결과·한계만 갱신하며 원시 출력·복구 사본·실험 데이터는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

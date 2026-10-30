@@ -49,6 +49,22 @@ function hasCredential(text: string): boolean {
   );
 }
 
+function isFixtureData(path: string): boolean {
+  if (/\.(?:[cm]?[jt]sx?)$/.test(path)) return false;
+  const segments = path.split("/").slice(0, -1);
+  let inTestDirectory = false;
+  for (const part of segments) {
+    if (
+      ["fixtures", "test-data", "experiment-data"].includes(part) ||
+      (part === "data" && inTestDirectory)
+    )
+      return true;
+    inTestDirectory ||=
+      ["test", "tests", "e2e"].includes(part) || /^[a-z0-9-]+-e2e$/.test(part);
+  }
+  return false;
+}
+
 export function readReviews(bytes: Buffer): Review[] {
   if (bytes.length > maxBytes || !isUtf8(bytes)) throw Error();
   const value = JSON.parse(bytes.toString("utf8"));
@@ -138,11 +154,7 @@ export function inspect(
     kind = "sanitized-evidence";
   else if (path.startsWith("docs/") && /\.(?:md|mdx)$/i.test(path))
     kind = "document";
-  else if (
-    /(^|\/)(?:fixtures|test-data|experiment-data)(\/|$)/.test(path) &&
-    !/\.(?:[cm]?[jt]sx?)$/.test(path)
-  )
-    kind = "synthetic-fixture";
+  else if (isFixtureData(path)) kind = "synthetic-fixture";
   if (
     kind &&
     !reviews.some(
@@ -208,19 +220,45 @@ export function checkRange(
   cwd: string,
   base: string,
   head = "HEAD",
+  baseline = ADOPTION_BASE,
 ): Finding[] {
-  const baseOid = git(cwd, "rev-parse", "--verify", `${base}^{commit}`)
+  const newRef = /^0{40}$/.test(base);
+  const baseOid = git(
+    cwd,
+    "rev-parse",
+    "--verify",
+    `${newRef ? baseline : base}^{commit}`,
+  )
     .toString()
     .trim();
   const headOid = git(cwd, "rev-parse", "--verify", `${head}^{commit}`)
     .toString()
     .trim();
+  if (newRef) git(cwd, "merge-base", "--is-ancestor", baseOid, headOid);
   const commits = git(cwd, "rev-list", "--reverse", `${baseOid}..${headOid}`)
     .toString()
     .trim()
     .split("\n")
     .filter(Boolean);
   return checkCommits(cwd, commits);
+}
+
+function inspectTagChain(cwd: string, object: string): Finding[] {
+  const findings: Finding[] = [];
+  const visited = new Set<string>();
+  while (git(cwd, "cat-file", "-t", object).toString().trim() === "tag") {
+    if (visited.has(object) || visited.size >= 100) throw Error();
+    visited.add(object);
+    const bytes = git(cwd, "cat-file", "tag", object);
+    findings.push(...inspect("tag-annotation", bytes, "100644", []));
+    if (bytes.length > maxBytes) return findings;
+    const target = bytes
+      .toString("utf8")
+      .match(/^object ([a-f0-9]{40})\n/)?.[1];
+    if (!target) throw Error();
+    object = target;
+  }
+  return findings;
 }
 function checkCommits(cwd: string, commits: string[]): Finding[] {
   if (commits.length > 1000) throw Error();
@@ -274,6 +312,7 @@ export function checkPush(
       git(cwd, "merge-base", "--is-ancestor", baseline, head);
       if (!/^0+$/.test(remote))
         git(cwd, "rev-parse", "--verify", `${remote}^{commit}`);
+      const annotations = inspectTagChain(cwd, head);
       const commits = git(
         cwd,
         "rev-list",
@@ -287,7 +326,7 @@ export function checkPush(
         .trim()
         .split("\n")
         .filter(Boolean);
-      return checkCommits(cwd, commits);
+      return [...annotations, ...checkCommits(cwd, commits)];
     });
 }
 export function main(args: string[], cwd = process.cwd()): number {

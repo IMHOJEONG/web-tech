@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import type { TestContext } from "node:test";
 import { execFileSync, spawnSync } from "node:child_process";
+import type { SpawnSyncReturns } from "node:child_process";
 import {
   mkdtempSync,
   mkdirSync,
@@ -228,6 +229,7 @@ function fixture(t: TestContext) {
   git("config", "user.name", "Fixture");
   git("config", "user.email", "fixture@example.invalid");
   git("config", "commit.gpgsign", "false");
+  git("config", "tag.gpgsign", "false");
   put(REVIEW_FILE, JSON.stringify({ version: 1, entries: [] }));
   git("add", REVIEW_FILE);
   git("commit", "-qm", "baseline");
@@ -365,7 +367,7 @@ test("hooks and CI keep staged, history and artifact privacy checks connected", 
     readFileSync(
       join(root, ".github/workflows/documentation.yml"),
       "utf8",
-    ).includes('pnpm publication:check --base "$BASE_SHA"'),
+    ).includes('pnpm publication:check --base "$PUBLICATION_BASE"'),
   );
   assert(
     readFileSync(join(root, ".github/workflows/ci.yml"), "utf8").includes(
@@ -391,4 +393,196 @@ test("CLI failures redact content and reject unknown options", (t) => {
     assert(!result.stderr.includes(value));
     assert(!result.stderr.includes("secret-private-name.txt"));
   }
+});
+
+test("new-ref zero before scans from adoption without reapproving legacy files", (t) => {
+  const { cwd, put, git, base } = fixture(t);
+  put(article, published.toString());
+  git("add", article);
+  git("commit", "-qm", "legacy");
+  const adoption = git("rev-parse", "HEAD").trim();
+  put("current.ts", code.toString());
+  git("add", "current.ts");
+  git("commit", "-qm", "current");
+  assert.deepEqual(checkRange(cwd, "0".repeat(40), "HEAD", adoption), []);
+  put("secret.txt", "gh" + "p_" + "Z".repeat(36));
+  git("add", "secret.txt");
+  git("commit", "-qm", "synthetic secret");
+  const secretCommit = git("rev-parse", "HEAD").trim();
+  git("rm", "secret.txt");
+  git("commit", "-qm", "remove");
+  assert(
+    checkRange(cwd, "0".repeat(40), "HEAD", adoption).some(
+      (issue) =>
+        issue.commit === secretCommit && issue.rule === "credential-pattern",
+    ),
+  );
+  assert.throws(() => checkRange(cwd, "0".repeat(40), base, adoption));
+});
+
+test("new-ref workflow preserves zero for publication and creates a real empty tree for delta checks", (t) => {
+  const { cwd, git } = fixture(t);
+  const root = fileURLToPath(new URL("..", import.meta.url));
+  const workflow = readFileSync(
+    join(root, ".github/workflows/documentation.yml"),
+    "utf8",
+  );
+  const block = workflow.match(
+    /        run: \|\n((?: {10}[^\n]*(?:\n|$))+)/,
+  )?.[1];
+  assert(block);
+  const bin = join(cwd, "bin");
+  mkdirSync(bin);
+  writeFileSync(join(bin, "pnpm"), '#!/bin/sh\nprintf "%s\\n" "$*"\n', {
+    mode: 0o755,
+  });
+  for (const before of ["", "0".repeat(40)]) {
+    const result: SpawnSyncReturns<string> = spawnSync("bash", ["-e", "-s"], {
+      cwd,
+      input: block,
+      env: {
+        ...process.env,
+        BASE_SHA: before,
+        PATH: bin + ":" + process.env.PATH,
+      },
+      encoding: "utf8",
+    });
+    assert.equal(result.status, 0, result.stderr);
+    const lines = result.stdout.trim().split("\n");
+    const tree = lines[0]!.split(" ").at(-1)!;
+    assert.equal(git("cat-file", "-t", tree).trim(), "tree");
+    assert.equal(lines[1], `validate:docs --base ${tree}`);
+    assert.equal(lines[2], `publication:check --base ${"0".repeat(40)}`);
+  }
+});
+
+test("new-ref scan keeps the 1000 commit limit", (t) => {
+  const { cwd, base, git } = fixture(t);
+  const input = Array.from(
+    { length: 1001 },
+    (_, i) =>
+      `commit refs/heads/long\nmark :${i + 1}\ncommitter Fixture <fixture@example.invalid> 1600000000 +0000\ndata 4\ntest\nfrom ${i === 0 ? base : ":" + i}\n\n`,
+  ).join("");
+  execFileSync("git", ["fast-import", "--quiet"], {
+    cwd,
+    input,
+    stdio: ["pipe", "pipe", "pipe"],
+  });
+  const head = git("rev-parse", "refs/heads/long").trim();
+  assert.throws(() => checkRange(cwd, "0".repeat(40), head, base));
+});
+
+test("canonical test data locations require matching synthetic-fixture reviews", () => {
+  for (const path of [
+    "apps/docs/e2e/data/input.json",
+    "apps/docs/article-e2e/data/input.csv",
+    "apps/docs/e2e/scenarios/data/input.yaml",
+    "apps/docs-backend/test/data/input.json",
+    "packages/ui/tests/data/input.txt",
+    "test/data/input.json",
+  ]) {
+    assert(rules(path).includes("public-review-required"), path);
+    assert.deepEqual(
+      rules(
+        path,
+        code,
+        "100644",
+        reviews(approval(path, code, "synthetic-fixture")),
+      ),
+      [],
+    );
+    assert(
+      rules(
+        path,
+        code,
+        "100644",
+        reviews(approval(path, code, "document")),
+      ).includes("public-review-required"),
+    );
+  }
+});
+
+test("test configuration and source code are not classified as fixture data", () => {
+  for (const path of [
+    "apps/docs/tsconfig.activity-e2e.json",
+    "apps/vuln-radar-backend/test/jest-e2e.json",
+    "apps/docs/e2e/playwright.config.json",
+    "apps/docs/e2e/data/input.ts",
+    "apps/docs/fixtures/helper.mts",
+    "apps/service/data/config.json",
+  ]) {
+    assert.deepEqual(rules(path), [], path);
+  }
+});
+
+test("annotated tag secrets are blocked even with no new commits", (t) => {
+  const { cwd, git, base } = fixture(t);
+  const value = "gh" + "p_" + "A".repeat(36);
+  git("tag", "-a", "unsafe", "-m", value, base);
+  const tag = git("rev-parse", "refs/tags/unsafe").trim();
+  for (const remote of [base, "0".repeat(40)]) {
+    const result = checkPush(
+      cwd,
+      `refs/tags/unsafe ${tag} refs/tags/unsafe ${remote}\n`,
+      base,
+    );
+    assert(
+      result.some(
+        (issue) =>
+          issue.fileId === digest("tag-annotation") &&
+          issue.rule === "credential-pattern",
+      ),
+    );
+    assert(!JSON.stringify(result).includes(value));
+  }
+});
+
+test("nested annotated tags also inspect inner tag metadata", (t) => {
+  const { cwd, git, base } = fixture(t);
+  git("tag", "-a", "inner", "-m", "Bearer " + "Q".repeat(40), base);
+  git("tag", "-a", "outer", "-m", "safe outer", "refs/tags/inner");
+  const tag = git("rev-parse", "refs/tags/outer").trim();
+  assert(
+    checkPush(
+      cwd,
+      `refs/tags/outer ${tag} refs/tags/outer ${"0".repeat(40)}\n`,
+      base,
+    ).some((issue) => issue.rule === "credential-pattern"),
+  );
+});
+
+test("safe annotated tags, lightweight tags, branch pushes and deletions retain existing behavior", (t) => {
+  const { cwd, git, base } = fixture(t);
+  git("tag", "-a", "safe", "-m", "public release summary", base);
+  const tag = git("rev-parse", "refs/tags/safe").trim();
+  assert.deepEqual(
+    checkPush(
+      cwd,
+      `refs/tags/safe ${tag} refs/tags/safe ${"0".repeat(40)}\n`,
+      base,
+    ),
+    [],
+  );
+  git("tag", "light", base);
+  const light = git("rev-parse", "refs/tags/light").trim();
+  assert.deepEqual(
+    checkPush(
+      cwd,
+      `refs/tags/light ${light} refs/tags/light ${"0".repeat(40)}\n`,
+      base,
+    ),
+    [],
+  );
+  assert.deepEqual(
+    checkPush(cwd, `refs/heads/main ${base} refs/heads/main ${base}\n`, base),
+    [],
+  );
+  assert.deepEqual(
+    checkPush(
+      cwd,
+      `refs/tags/safe ${"0".repeat(40)} refs/tags/safe ${tag}\n`,
+      base,
+    ),
+    [],
+  );
 });
