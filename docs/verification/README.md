@@ -16,7 +16,7 @@
 
 - [10-28 diff 코드 블록](accessibility/2026-10-28-diff-code-block.md): Node315·브라우저22, 두 테마·실제 MDX/Shiki·원격·고대비·JS 비활성, 운영 미검증.
 
-- [10-27 Node 24 보안 patch·CI·Docker](security/2026-10-27-node24-security-patch.md): main 기반 격리·pin/floor·amd64 이미지와 실제 Node·앱 회귀. 운영 미배포.
+- [10-27 Node 24 보안 patch·CI·Docker](security/2026-10-27-node24-security-patch.md): pin/floor·amd64 회귀와 10-28 보류·재개·main CI/GHCR/Vercel/Railway 후속 증거. NAS 교체 미확인.
 
 - [10-27 검색·응답 제한/Content-Type 결합](integration/2026-10-27-search-response-pr-integration.md): PR #64 병합·HTML 헤더의 budget 이후 설정·상한/JSON 오류 결합·원래 미커밋 보존, 이후 CI/배포는 별도 기록.
 
