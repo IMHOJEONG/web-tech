@@ -106,6 +106,8 @@
 
 - [10-19 페이지별 스켈레톤·도메인 재사용](2026-10-19-page-skeletons.md)
 
+- [10-27 스켈레톤 기하 검사 런타임 격리](2026-10-27-skeleton-runtime-isolation.md): 기존 DOM 경합 재현·정적 측정·기준 유지·반복 회귀.
+
 - [10-19 문서 인덱스·검색 목록 우선 배치](2026-10-19-docs-index-order.md)
 
 - [10-19 PR #39 이후 feature 동기화](2026-10-19-feature-sync-after-pr39.md)

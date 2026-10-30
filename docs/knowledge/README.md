@@ -29,6 +29,10 @@
 
 ## 작성 기준
 
+주제별 설명:
+
+- [화면 표시와 hydration, DOM 소유권](docs-app/hydration-readiness-and-dom-ownership.md): SSR 화면이 보인 뒤에도 React 작업이 남을 수 있는 이유와 스켈레톤 검사 사례.
+
 각 파트 문서는 아래 정도를 기본 구조로 권장합니다.
 
 - 배운 점
