@@ -352,7 +352,10 @@ test("CI isolates browser suites from unit tests without dropping viewport cover
 
 test("offline CI preserves reports and failure traces without uploading the whole workspace", async () => {
   const job = ciJob("offline-reading");
-  assert.match(job, /if: \$\{\{ !cancelled\(\) \}\}/);
+  assert.match(
+    job,
+    /if: \$\{\{ !cancelled\(\) && vars\.DOCS_ALLOW_PUBLIC_SYNTHETIC_EVIDENCE == 'true' \}\}/,
+  );
   assert.match(job, /uses: actions\/upload-artifact@[a-f0-9]{40} # v7\.0\.2/);
   assert.match(
     job,

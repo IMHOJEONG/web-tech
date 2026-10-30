@@ -1,5 +1,7 @@
 # 협업과 문서 작성 규칙
 
+- [공개 Git·블로그 업로드 검수](publication-review.md): 비공개 기본 보관, 파일 해시 검수와 중간 커밋 검사, 사람 승인·NAS 경계의 한계.
+
 - [ADR 작성과 상태 관리](adr-management.md)
 - [브랜치 정책](branch-policy.md): squash 후 최신 main에서 새 작업 브랜치 생성, 기존 이력·배포 브랜치의 안전한 정리.
 - [코드 리뷰](code-review-process.md)

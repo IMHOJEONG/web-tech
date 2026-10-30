@@ -38,3 +38,4 @@ jobs:
           fi
           pnpm format:changed:check --base "$BASE_SHA"
           pnpm validate:docs --base "$BASE_SHA"
+          pnpm publication:check --base "$BASE_SHA"
