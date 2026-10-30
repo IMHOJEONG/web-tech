@@ -34,7 +34,7 @@
 
 - [10-26 상세 오류 Content-Type 보완](2026-10-26-content-response-type.md)
 - [10-25 Primary 글자 대비와 브라우저 접근성](2026-10-25-primary-action-contrast.md)
-- [10-25 로컬·원격 본문 H1 경고 전환](2026-10-25-body-h1-warning.md)
+- [10-25 본문 H1 경고 전환](2026-10-25-body-h1-warning.md): 공용 경고 회귀·NAS 외부 관측 기록과 실제 이미지/H1 확인 한계. 10-28 별도 기록 PR 준비.
 - [10-25 나머지 보안 경고 10건 분리 조치](2026-10-25-remaining-advisories.md)
 - [10-25 Next.js Critical 패치·회귀](2026-10-25-next-critical.md)
 
