@@ -29,6 +29,10 @@
     "format:changed:check": "node ./scripts/check-staged-format.mjs",
     "format:staged:check": "node ./scripts/check-staged-format.mjs --staged",
     "validate:docs": "node ./scripts/check-documentation.mjs",
+    "publication:check": "node ./scripts/check-publication.mts",
+    "publication:staged": "node ./scripts/check-publication.mts --staged",
+    "publication:push": "node ./scripts/check-publication.mts --pre-push",
+    "publication:message": "node ./scripts/check-publication.mts --message",
     "lint": "turbo lint",
     "lint:web-apps": "turbo lint --filter=docs --filter=vuln-radar",
     "test:repo": "node --experimental-strip-types --test ./scripts/*.test.mjs ./scripts/*.test.mts",
@@ -65,8 +69,9 @@
     "typescript": "catalog:"
   },
   "simple-git-hooks": {
-    "commit-msg": "./scripts/pnpmw.sh exec commitlint --edit \"$1\"",
-    "pre-commit": "./scripts/pnpmw.sh format:staged:check && ./scripts/pnpmw.sh validate:docs --staged"
+    "commit-msg": "./scripts/pnpmw.sh publication:message \"$1\" && ./scripts/pnpmw.sh exec commitlint --edit \"$1\"",
+    "pre-commit": "./scripts/pnpmw.sh format:staged:check && ./scripts/pnpmw.sh validate:docs --staged && ./scripts/pnpmw.sh publication:staged",
+    "pre-push": "./scripts/pnpmw.sh publication:push"
   },
   "engines": {
     "node": "24.x"

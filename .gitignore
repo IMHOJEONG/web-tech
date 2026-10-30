@@ -43,6 +43,14 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+.private/
+private/
+secrets/
+raw-data/
+recordings/
+*.har
+*.pcap
+*.pcapng
 
 apps/vuln-radar-backend/config/watchlist.entries.json
 

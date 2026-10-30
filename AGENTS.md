@@ -44,6 +44,7 @@
 ## 변경 범위와 검사
 
 - 커밋 시 다른 작업의 변경을 포함하거나 전체 저장소를 자동 포맷하지 않습니다. 필요한 파일만 명시적으로 포맷하고 diff를 확인합니다.
+- 공개 Git·블로그 업로드는 [공개 검수 절차](docs/process/publication-review.md)를 따릅니다. 원시 실험 자료와 비밀값은 저장소 밖에 보관하고 공개 자료의 실제 승인 기록을 에이전트가 임의로 만들지 않습니다.
 - `pnpm format:staged:check`와 `pnpm validate:docs --staged`는 인덱스만 읽습니다. 검사 실패 시 파일이나 인덱스를 자동 수정하지 않습니다.
 - 부분 스테이징 파일은 전체를 다시 add하지 말고 의도한 변경 범위를 재검토합니다.
 - 문서 상태, 검토일, 증거 보관과 CI 범위는 [문서 품질 검사](docs/process/documentation-quality-gates.md)를 따릅니다.

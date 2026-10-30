@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "path": "docs/architecture/README.md",
+      "sha256": "aacbbbfec5f458bec0453febe853ad5fbdc3985b922a69e23326c8330cc31a62",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-30",
+      "note": "사용자 10-30 커밋·푸시 요청 범위. 공개 정책 목차와 링크만 추가했으며 원시 데이터·비밀값·제3자 매체를 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/adr-0025-publication-boundary.md",
+      "sha256": "68d550c26c6a2115efbc64d0513cb0d99b0148362b2244adfae6ef86577c9fd0",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-30",
+      "note": "사용자 10-30 커밋·푸시 요청 범위. 자체 작성한 공개 경계 결정·대안·한계이며 비공개 초안·실제 실험 원본·비밀값을 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/process/README.md",
+      "sha256": "f05a46f771e2ce0a851a3404e77e0046220695caecaed82e30077b4c6e720213",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-30",
+      "note": "사용자 10-30 커밋·푸시 요청 범위. 공개 검수 절차의 목차 링크만 추가하며 실제 개인 자료·토큰·원시 로그가 없음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/process/publication-review.md",
+      "sha256": "81883dad4950d0fd03356862d71fe9c4213e0e327ad2c30045b73d63afb95115",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-30",
+      "note": "사용자 PR79 리뷰 보완·해시 갱신·커밋·푸시 요청 범위. 새 ref·fixture 위치·태그 설명문 절차를 검토했으며 실제 비밀값·원시 실험 자료·제3자 매체를 추가하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-30-publication-boundary.md",
+      "sha256": "4601373454c11cc8b5f365471b57e53d2a7e5653009ae7feb2c8dd2fa88730d0",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-30",
+      "note": "사용자 PR79 리뷰 보완·해시 갱신·커밋·푸시 요청 범위. 수정 이유·정제한 검사 결과·한계만 갱신하며 원시 출력·복구 사본·실험 데이터는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-10/README.md",
+      "sha256": "863d61424ba3a4408f51fa2c59a1054ad4d902dfab427656a577c436685f634a",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-30",
+      "note": "사용자 10-30 커밋·푸시 요청 범위. 정제된 작업 기록의 목차 링크와 짧은 요약만 추가하며 비공개 자료를 복사하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    }
+  ]
+}

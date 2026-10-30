@@ -11,6 +11,8 @@
     "scripts/install-pnpm.test.mts",
     "scripts/check-node-runtime.mts",
     "scripts/node-runtime-policy.test.mts",
-    "scripts/smoke-docs-container.mts"
+    "scripts/smoke-docs-container.mts",
+    "scripts/check-publication.mts",
+    "scripts/check-publication.test.mts"
   ]
 }
