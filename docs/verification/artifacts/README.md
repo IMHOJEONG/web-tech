@@ -50,6 +50,10 @@
 - [10-25 나머지 보안 경고 감사·그래프](2026-10-25-remaining-advisories.json): [보고서](../security/2026-10-25-remaining-advisories.md). main 감사13→3·대상10건 제거·패치 전후 회귀, Next PR #60과 분리·운영 미배포.
 - [10-25 Next 패치 audit·그래프 범위](2026-10-25-next-critical-audit.json), [초기 E2E 실패·종료 trace](2026-10-25-next-e2e-before-compatibility.json): [보안 검증](../security/2026-10-25-next-critical.md). Critical 0·잔여 10건과 144/154 초기 결과를 보존하며 로컬 실행·미배포다.
 
+- [10-28 정상 Brotli 재검증](2026-10-28-node-brotli-safe-probe.json): [선행 조사](../security/2026-10-27-node-runtime-security-review.md)의 후속. 패치된 Node 24.22.1에서 처리 순서 확인, 악용 검증 아님.
+
+- [10-27 Node 런타임 보안 조사](2026-10-27-node-runtime-security-review.json): [선행 조사](../security/2026-10-27-node-runtime-security-review.md)의 당시 버전·소스 경로. 실행 진단기는 [예제](../../examples/node-runtime-security/README.md)로 분리.
+
 - [10-24 명시 main 그래프 재현](2026-10-24T12-22-01-870Z-viteplus-lockfile-impact.json), [동일 baseline 소비자 대조](2026-10-24T12-22-21-670Z-viteplus-consumer-control.json), [CLI 정리 실패](2026-10-24T12-22-04-534Z-vuln-radar-viteplus.json), [CLI 재실행 성공](2026-10-24T12-23-21-834Z-vuln-radar-viteplus.json): [PR #59 후속 검증](../integration/2026-10-24-pr59-baseline-fixes.md). 실제 비밀값·운영 데이터·Railway 배포 없음.
 
 - [10-24 최종 CLI 8개](2026-10-24T07-08-35-791Z-vuln-radar-viteplus.json), [수정 후 그래프](2026-10-24T07-01-06-763Z-viteplus-lockfile-impact.json), [Babel 오류 해소 대조](2026-10-24T07-05-39-300Z-viteplus-consumer-control.json), [통합 25개](2026-10-24T07-03-22-206Z-vuln-radar-integration.json), [audit 잔여](2026-10-24-viteplus-override-audit.json): [보완 보고서](../integration/2026-10-24-viteplus-dependency-remediation.md). 원격 배포 없음.

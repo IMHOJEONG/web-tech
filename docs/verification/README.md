@@ -32,6 +32,8 @@
 - [10-25 나머지 의존성 보안 경고 10건](security/2026-10-25-remaining-advisories.md): main 기반 분리 패치·16개 신규 회귀·production 문서154개 성공. 감사13→3, Next는 PR #60에 유지·미배포.
 - [10-25 Next.js Critical 우선 패치](security/2026-10-25-next-critical.md): Next/MDX 16.4.3·Critical 0·잔여 10건, 보안/함수 캐시·production E2E와 종료 증거 호환 보완. 작업별 커밋, 운영 미배포.
 
+- [10-27 Node 런타임 보안 선행 조사](security/2026-10-27-node-runtime-security-review.md): 패치 이전의 관측·정상 Brotli 진단, 후속 PR #68과 시점 구분.
+
 - [10-24 PR #59 기준선 리뷰 수정·회귀](integration/2026-10-24-pr59-baseline-fixes.md): 명시 ref·고정 SHA 공유, 실제 커밋 후 회귀 9개·전체129개, 원래 그래프/Babel 대조 재현과 정리 실패/후속 성공 보존.
 
 - [10-24 PR #59 CI·CodeQL·리뷰 점검](integration/2026-10-24-pr59-ci-review.md): CI 13개·CodeQL 통과, 커밋 후 HEAD 자기 비교 재현과 미해결 리뷰 구분, Vercel Linux 빌드 로그 확인.
