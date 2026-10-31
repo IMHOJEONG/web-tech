@@ -52,6 +52,8 @@
 
 ## 설계·정책 목록
 
+- [블로그 전면 UI 개선 제안](docs-blog-redesign-proposal.md): 적용 중. 글 중심 저널의 조판·탐색·목록·상세를 로컬 구현. 운영 배포·실제 독자 검증은 미실행.
+
 - [vuln-radar Vite+ 개발·빌드 실험](vuln-radar-viteplus-experiment.md): 적용 중. PR #59의 앱 한정 채택과 10-25 승인된 자동 배포 기록을 연결한다. 다른 앱 전환·전체 보안 재개 승인은 아니다.
 
 - [KEV 점수·우선순위 표시 계약](vuln-radar-kev-evidence.md): nullable 실제 EPSS·미확인·빈 목록과 우선순위 구분, 작업별 커밋·운영 미검증.
