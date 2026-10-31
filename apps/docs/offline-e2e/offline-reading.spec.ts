@@ -1,4 +1,8 @@
 import { expect, test, type Page } from '@playwright/test'
+import {
+    observeOfflineListeners,
+    waitForOfflineListenerCleanup,
+} from './offline-listener-observer'
 
 const article = '/ko/docs/web/javascript-event-loop-runtime'
 async function openArticle(page: Page) {
@@ -210,11 +214,26 @@ test('a shell page without the current article listener cannot forge an offline 
     page,
     context,
 }) => {
+    await observeOfflineListeners(page)
     await openArticle(page)
     await save(page)
     const before = await savedHtml(page)
-    await page.getByRole('link', { name: 'Feed', exact: true }).first().click()
+    const origin = await page.evaluate(() => performance.timeOrigin)
+    if ((page.viewportSize()?.width ?? 0) < 640) {
+        await page.getByTestId('mobile-nav-drawer-trigger').click()
+        await page
+            .getByRole('dialog')
+            .getByRole('link', { name: 'Feed', exact: true })
+            .click()
+    } else {
+        await page
+            .getByRole('banner')
+            .getByRole('link', { name: 'Feed', exact: true })
+            .click()
+    }
     await expect(page).toHaveURL(/\/ko\/feed$/)
+    expect(await page.evaluate(() => performance.timeOrigin)).toBe(origin)
+    await waitForOfflineListenerCleanup(page)
     const result = await page.evaluate(async () => {
         const worker = (await navigator.serviceWorker.getRegistration('/'))!
             .active!
@@ -305,7 +324,10 @@ for (const locale of ['ko', 'en']) {
             Object.defineProperty(navigator.serviceWorker, 'register', {
                 configurable: true,
                 value: async () => {
-                    throw new TypeError('synthetic private registration detail')
+                    throw new DOMException(
+                        'synthetic private registration detail',
+                        'SecurityError'
+                    )
                 },
             })
         })

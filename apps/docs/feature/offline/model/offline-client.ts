@@ -3,7 +3,6 @@ import {
     getDocsServiceWorkerRegistration,
 } from '../../../shared/lib/docs-service-worker.ts'
 import {
-    getOfflineFailure,
     isOfflineErrorCode,
     isOfflineErrorStage,
     OfflineOperationError,
@@ -67,11 +66,7 @@ export async function sendOfflineMessage(
                     ? 'registration'
                     : 'activation'
             )
-        const failure = getOfflineFailure(error, 'registration')
-        throw new OfflineOperationError(
-            failure.code === 'unknown' ? 'registration' : failure.code,
-            failure.stage
-        )
+        throw new OfflineOperationError('registration', 'registration')
     }
     const worker = registration?.active
     if (!worker) {
@@ -114,7 +109,7 @@ export async function sendOfflineMessage(
                         reply.error,
                         isOfflineErrorStage(reply.stage)
                             ? reply.stage
-                            : 'message'
+                            : 'unknown'
                     )
                 )
             } else

@@ -23,6 +23,7 @@ const messageKeys = {
 
 export type OfflineErrorCode = keyof typeof messageKeys
 const stages = [
+    'unknown',
     'snapshot',
     'registration',
     'activation',

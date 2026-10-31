@@ -76,7 +76,9 @@ test('first worker activation timeout remains bounded and distinguishable', asyn
 
 test('registration errors preserve only safe categories, not browser exception text', async () => {
     for (const [name, code] of [
-        ['SecurityError', 'storage-denied'],
+        ['SecurityError', 'registration'],
+        ['NotAllowedError', 'registration'],
+        ['QuotaExceededError', 'registration'],
         ['TypeError', 'registration'],
     ]) {
         const restore = browser({
@@ -131,7 +133,13 @@ test('worker replies validate shape and expose only allowlisted error codes and 
             'storage-denied',
             'storage-open',
         ],
-        [{ ok: false, error: 'storage' }, 'storage', 'message'],
+        [{ ok: false, error: 'storage' }, 'storage', 'unknown'],
+        [{ ok: false, error: 'source' }, 'source', 'unknown'],
+        [
+            { ok: false, error: 'source', stage: 'untrusted stage' },
+            'source',
+            'unknown',
+        ],
         [
             { ok: false, error: 'untrusted exception', stage: 'private value' },
             'message-invalid',
