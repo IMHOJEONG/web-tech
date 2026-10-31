@@ -1,4 +1,5 @@
 import { defineConfig } from '@playwright/test'
+import { articleFixtureCredentials } from './article-e2e/fixture-credentials.ts'
 
 const baseURL = 'http://127.0.0.1:3111'
 const contentURL = 'http://127.0.0.1:3112'
@@ -44,8 +45,9 @@ export default defineConfig({
                 NEXT_PUBLIC_BLOG_CONTENT_ASSET_BASE_URL_PUBLIC: '',
                 BLOG_CONTENT_API_POSTS_PATH: '/api/posts',
                 BLOG_CONTENT_MARKDOWN_PATH_PREFIX: '/posts',
-                BLOG_CONTENT_API_TOKEN: 'article-e2e-only-token',
-                BLOG_CONTENT_REVALIDATE_TOKEN: 'article-e2e-only-revalidation',
+                BLOG_CONTENT_API_TOKEN: articleFixtureCredentials.content,
+                BLOG_CONTENT_REVALIDATE_TOKEN:
+                    articleFixtureCredentials.revalidation,
                 BLOG_CONTENT_INCLUDE_REMOTE_INDEX: 'true',
                 // Avoid a natural TTL expiry masking a broken webhook assertion.
                 BLOG_CONTENT_REVALIDATE_SECONDS: '3600',

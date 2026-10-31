@@ -7,6 +7,7 @@ import {
     type TestInfo,
 } from '@playwright/test'
 import type { LifecycleSummary } from './request-lifecycle.ts'
+import { articleFixtureAuthorization } from './fixture-credentials.ts'
 
 export async function expectPrefetchNavigation(
     {
@@ -27,15 +28,14 @@ export async function expectPrefetchNavigation(
     const origin = 'http://127.0.0.1:3112'
     const remotePath = `/${locale}/docs/web/article-e2e-remote`
     const control = async (state: 'hold' | 'release') => {
-        const response = await request.post(
-            `${origin}/__test/remote-body/${state}`,
-            {
-                headers: {
-                    Authorization: 'Bearer article-e2e-only-control',
-                },
-            }
-        )
-        expect(response.status()).toBe(204)
+        const response = await fetch(`${origin}/__test/remote-body/${state}`, {
+            method: 'POST',
+            signal: AbortSignal.timeout(3000),
+            headers: {
+                Authorization: articleFixtureAuthorization('control'),
+            },
+        })
+        expect(response.status).toBe(204)
     }
     await control('release')
     const settled = await request.get(remotePath)
@@ -45,7 +45,7 @@ export async function expectPrefetchNavigation(
     )
     const invalidated = await request.post('/api/revalidate/content', {
         headers: {
-            Authorization: 'Bearer article-e2e-only-revalidation',
+            Authorization: articleFixtureAuthorization('revalidation'),
         },
     })
     expect(invalidated.status()).toBe(200)
@@ -74,6 +74,8 @@ export async function expectPrefetchNavigation(
         }
     })
     await control('hold')
+    let failed = false
+    let cleanupFailure: { error: unknown } | undefined
     try {
         const prefetched = page.waitForResponse(
             (response) =>
@@ -82,6 +84,11 @@ export async function expectPrefetchNavigation(
         )
         // Bootstrap only; the spec supplies the actual move under test.
         await page.goto(`/${locale}/docs/web/article-e2e-publication`)
+        // Normal Link prefetch is viewport-driven, not an above-the-fold contract.
+        await page
+            .locator(`a[href="${remotePath}"]`)
+            .first()
+            .scrollIntoViewIfNeeded()
         const response = await prefetched
         expect(response.status()).toBe(200)
         const id = response.headers()['x-article-request-id']
@@ -207,7 +214,22 @@ export async function expectPrefetchNavigation(
             body: JSON.stringify(result, null, 2),
             contentType: 'application/json',
         })
+    } catch (error) {
+        failed = true
+        throw error
     } finally {
-        await control('release')
+        try {
+            await control('release')
+        } catch (error) {
+            if (!failed) cleanupFailure = { error }
+            else {
+                testInfo.annotations.push({
+                    type: 'cleanup-failed',
+                    description:
+                        'Synthetic held-body cleanup also failed; primary error is preserved.',
+                })
+            }
+        }
     }
+    if (cleanupFailure) throw cleanupFailure.error
 }

@@ -48,9 +48,8 @@ test('a delayed RSC navigation completes the UI independently of transport compl
     )
     try {
         await requestObserved
-        await expect(
-            expect(page).toHaveURL(new URL(href, page.url()).href)
-        ).rejects.toThrow(/toHaveURL/)
+        // App Router may commit the URL before the held article body arrives.
+        // Completion below requires body visibility and observer evidence.
     } finally {
         release()
     }

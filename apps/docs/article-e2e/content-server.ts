@@ -1,5 +1,6 @@
 import { createServer } from 'node:http'
 import { setTimeout } from 'node:timers/promises'
+import { articleFixtureAuthorization } from './fixture-credentials.ts'
 
 let publicationVersion = 1
 let releaseRemoteBody: (() => void) | undefined
@@ -25,7 +26,8 @@ const server = createServer(async (request, response) => {
     if (request.url?.startsWith('/__test/remote-body/')) {
         if (
             request.method !== 'POST' ||
-            request.headers.authorization !== 'Bearer article-e2e-only-control'
+            request.headers.authorization !==
+                articleFixtureAuthorization('control')
         ) {
             response.writeHead(401).end('Unauthorized')
             return
@@ -57,7 +59,8 @@ const server = createServer(async (request, response) => {
     if (request.url?.startsWith('/__test/publication/')) {
         if (
             request.method !== 'POST' ||
-            request.headers.authorization !== 'Bearer article-e2e-only-control'
+            request.headers.authorization !==
+                articleFixtureAuthorization('control')
         ) {
             response.writeHead(401).end('Unauthorized')
             return
@@ -71,7 +74,9 @@ const server = createServer(async (request, response) => {
         response.writeHead(204).end()
         return
     }
-    if (request.headers.authorization !== 'Bearer article-e2e-only-token') {
+    if (
+        request.headers.authorization !== articleFixtureAuthorization('content')
+    ) {
         response.writeHead(401).end('Unauthorized')
         return
     }
