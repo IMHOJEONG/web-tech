@@ -2,7 +2,7 @@
 
 ## 대상과 조건
 
-- 검증일: 2026-10-31 KST. 기준 main `92e424dcff16bc159421b2bcf0fae4b2c295175b`, 수정 브랜치 `codex/docs-offline-save-diagnostics-20261031`의 미커밋 작업 트리.
+- 검증일: 2026-10-31 KST. 기준 main `92e424dcff16bc159421b2bcf0fae4b2c295175b`. 최초 검증 코드의 확정 리비전은 [af6cc95](https://github.com/IMHOJEONG/web-tech/commit/af6cc95bd6680b881c0cd8637520f00bdd1c08b5)이며 공개본의 bytes는 [e940e143의 승인 manifest](https://github.com/IMHOJEONG/web-tech/blob/e940e143c05c3365b88e6e6a01c58fb33a6b9290/.publication-review.json)에 연결한다. 당시 미커밋 상태로 실행한 결과와 이후 확정 리비전을 구분한다.
 - [KAN-57](https://web-tech-service.atlassian.net/browse/KAN-57): 운영 Brotli 글 저장 실패 신고. 사용 환경은 Chrome 일반 창이다.
 - 운영 대상: `https://heap-forge.app/ko/docs/category/be/node-js/node-brotli-runtime-security`. Event Loop 공개 글도 대조했다.
 - 운영 검사는 사용자의 기존 프로필을 열지 않는 Chrome/Chromium 격리 환경, 390px·1440px에서 수행했다. 최종 원인 대조는 임시 디렉터리의 새 Chrome persistent profile을 일반 모드로 실행했다. 기존 저장본·사이트 권한·Worker를 일괄 삭제하거나 운영 서버에 장애를 주입하지 않았다.
@@ -53,10 +53,38 @@ NODE_ENV=production pnpm --filter docs test:offline --reporter=list
 ## 한계와 후속 작업
 
 - 운영 Chrome에서 실제 카드 이동의 `source` 거절은 재현했지만, 사용자 기존 프로필 내부의 다른 권한·확장 상태까지 조사한 것은 아니다. 수정 후 같은 사용자 탭의 운영 검증은 배포 이후에 수행한다.
-- 공개·커밋·푸시·PR·운영 배포는 아직 하지 않았다. 배포 후 같은 기존 프로필에서 **오류 자세히**의 코드·단계를 확인하는 절차가 필요하다.
+- 최초 수정과 문서는 공개 승인 후 커밋·푸시하고 [PR #81](https://github.com/IMHOJEONG/web-tech/pull/81)을 생성했다. main 병합·운영 배포는 하지 않았다. 배포 후 같은 기존 프로필에서 **오류 자세히**의 코드·단계를 확인하는 절차가 필요하다.
 - 원시 예외·본문·URL query·토큰·프로필을 수집하지 않고 UI에 allowlist 코드·단계만 노출한다. 브라우저 내부 실패를 Vercel Runtime Logs에서 직접 볼 수 있는 서버 수집 API는 추가하지 않았다.
 - 알림 권한 요청·Worker URL/scope 변경·자동 저장 재시도·캐시 일괄 삭제는 하지 않았다. 기존 공개 경로/발신 client 검증과 저장본 보존을 유지했다.
 - 실기기·Safari·실제 확장 프로그램 조합과 사용자 기존 데이터 상태는 미검증이다. 별도 원본 artifact 링크는 없으며 원시 자료는 비공개 로컬에만 보관한다.
+
+## PR #81 후속 검증
+
+- 검증 코드: 오프라인 진단·CI 안정화 [d2949a8](https://github.com/IMHOJEONG/web-tech/commit/d2949a853f0c358319fccf984c295edc36bf5e8c), 목차 수정 [3a65604](https://github.com/IMHOJEONG/web-tech/commit/3a6560411853f6447280041d280203fab73cecc1). 최종 검증 소스는 두 번째 커밋과 일치한다. 후속 문서 공개본의 검수 해시는 [현재 승인 manifest](../../../.publication-review.json)에서 확인한다.
+- 기존 원격 실행 [41201077212](https://github.com/IMHOJEONG/web-tech/actions/runs/41201077212)의 head는 `e940e143`다. 오프라인 62개 중 61개가 통과했고 모바일 Feed 클릭을 개발 오버레이가 차단해 60초 후 실패했다. 집계 `Test`도 이 결과에 따라 실패했다. 동일 `next dev` 조건의 로컬 단일 검사에서 같은 클릭 차단을 재현했다. 기존 production 62/62 성공과 실행 조건을 구분한다.
+- 강제 클릭·오버레이 숨김·skip·timeout 확대 대신 모바일에서는 실제 Drawer 메뉴, 데스크톱에서는 배너의 Feed 링크를 선택한다. 같은 document임을 확인하고 실제 `removeEventListener` 관측으로 현재 글 listener 해제를 기다린 뒤 위조 저장 거부를 검사한다. URL 변경과 effect cleanup 사이의 잠재 race는 CI에서 관측한 클릭 차단과 다른 문제다.
+- 구형 Worker의 단계 없는 응답은 `unknown`으로 남기고 유효한 단계는 보존한다. Worker 등록의 `SecurityError`는 저장소 작업 이전의 실패이므로 `registration`으로 분류한다. 실제 저장소 접근 거부 분류는 유지한다.
+- 추가 목차 신고는 `1/2 — 압축할 바이트 만들기`, `2/2 — 복원 결과와 실행 버전 출력`을 대상으로 확인했다. TOC의 GitHub slug와 제목 컴포넌트의 자체 ID가 달랐다. runtime MDX에 `rehype-slug`를 적용하고 컴포넌트에서 전달받은 ID를 보존한다. 문장부호·inline markup·중복 제목·h5/h6의 단위 회귀를 추가했다. 이 단위 회귀는 수정 전 실패하고 수정 후 성공했다.
+
+| 후속 검사           | 실제 결과                    | 범위                                                                                                                                                |
+| ------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 전체 라이브러리     | 347개 통과                   | 최초 346개에 목차 ID 회귀 1개 추가.                                                                                                                 |
+| 개발 서버 오프라인  | 62개 통과                    | CI와 같은 `next dev`, desktop/mobile 각 31개.                                                                                                       |
+| production 오프라인 | 62개 통과                    | 같은 소스의 성공한 production build로 실행. 개발 결과와 합산하지 않음.                                                                              |
+| 목차 클릭           | 개발 3개·production 3개 통과 | 390/768/1280px, 신고된 두 링크의 ID·해시·헤더 아래 스크롤 위치 및 모바일 포커스/목차 닫힘.                                                          |
+| 타입·lint·build     | 통과                         | 새 관측 helper의 전역 타입 선언 오류로 최초 typecheck/build가 실패했다. 선언을 바로잡아 재검사했으며 검사 완화는 없었다. 기존 글 2개의 경고는 유지. |
+
+후속 재현 명령은 저장소 루트 기준이다. production 실행 전에는 위의 원격 조회 비활성 build를 먼저 수행한다. 브라우저 원시 trace는 저장소 밖의 비공개 출력 디렉터리를 사용한다.
+
+```sh
+pnpm --filter docs test:lib
+pnpm --filter docs test:offline --reporter=list --output=/tmp/docs-offline-dev-review
+NODE_ENV=production pnpm --filter docs test:offline --reporter=list --output=/tmp/docs-offline-prod-review
+DOCS_E2E_PORT=3018 pnpm --filter docs test:e2e e2e/article-anchor-scroll.spec.ts --grep 'Brotli numbered' --workers=1 --reporter=list --output=/tmp/docs-toc-dev-review
+NODE_ENV=production DOCS_E2E_PORT=3018 pnpm --filter docs test:e2e e2e/article-anchor-scroll.spec.ts --grep 'Brotli numbered' --workers=1 --reporter=list --output=/tmp/docs-toc-prod-review
+```
+
+새 head의 원격 CI·CodeRabbit 결과는 PR과 Jira의 해당 SHA 기록으로 확인한다. 여기의 로컬 성공을 원격 CI 성공이나 운영 배포 성공으로 바꾸어 적지 않는다. 후속 소스/문서의 푸시·리뷰 스레드 정리와 재검증은 별도 단계다.
 
 ## 관련 문서
 

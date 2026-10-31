@@ -17,11 +17,11 @@
     },
     {
       "path": "docs/runbooks/docs-offline-reading.md",
-      "sha256": "d135cfbb853e04e06f641b0746a40b67601a03feafd1368c428be48dc94f9f48",
+      "sha256": "70f30b0bceb953a8f0fdedd5a23c403c58b8c447b5078c6219a3565545eeb68a",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 오류 코드별 운영 절차이며 원시 브라우저 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "note": "사용자가 PR81 보완 최종 문서 3개와 승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 오류 단계·등록 오류·source-check 운영 절차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -31,11 +31,11 @@
     },
     {
       "path": "docs/verification/resilience/2026-10-31-offline-save-diagnostics.md",
-      "sha256": "b22d8d61afead820630feb0e4a8ab4bc426e7535282dd7d0355f1e7cdf5758ea",
+      "sha256": "512cb4d69a866986112632fd39d2d161b0a5c94c449417b97adf52d1a5770f13",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 정제 검증 요약과 한계이며 원시 브라우저 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "note": "사용자가 PR81 보완 최종 문서 3개와 승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 커밋별 검증·실패 이력·목차 회귀의 정제 요약이며 원시 trace·프로필·캡처·초안·비밀값은 제외함. main 병합·배포는 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -45,11 +45,11 @@
     },
     {
       "path": "docs/worklog/2026-10/2026-10-31-offline-save-diagnostics.md",
-      "sha256": "54a5125f79c4caa9e357bb04c46ab524dc1fee68d687f51cff78211b5935d5f3",
+      "sha256": "d7710530212587cdb752b75440ba0662465821e580b08462cab41f614a5b7f70",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 변경 기록이며 원시 브라우저 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "note": "사용자가 PR81 보완 최종 문서 3개와 승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 리뷰·CI·목차 수정 작업 기록이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
