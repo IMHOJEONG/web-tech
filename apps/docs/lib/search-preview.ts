@@ -1,4 +1,5 @@
 import type { SearchData } from './get-search-data'
+import { getSearchPreviewText } from './search-preview-text.ts'
 
 const SEARCH_PREVIEW_FALLBACK_LIMIT = 180
 const SEARCH_PREVIEW_CONTEXT_LIMIT = 180
@@ -94,25 +95,27 @@ export function highlightSearchText(value: string, keyword?: string) {
 
 export function buildSearchPreview(doc: SearchData, keyword?: string) {
     const tokens = tokenizeKeyword(keyword ?? '')
+    const summary = getSearchPreviewText(doc.summary ?? '')
 
     if (!tokens.length) {
         return {
             titleHtml: escapeHtml(doc.title ?? doc.slug),
             excerptHtml: escapeHtml(
-                (doc.summary ?? doc.content)
-                    .trim()
-                    .slice(0, SEARCH_PREVIEW_FALLBACK_LIMIT)
+                (summary || getSearchPreviewText(doc.content)).slice(
+                    0,
+                    SEARCH_PREVIEW_FALLBACK_LIMIT
+                )
             ),
         }
     }
 
     const title = doc.title ?? doc.slug
-    const summary = doc.summary?.trim() ?? ''
-    const content = doc.content.trim()
 
     const summaryMatchIndex = summary
         ? findFirstMatchIndex(summary, tokens)
         : -1
+    const content =
+        summaryMatchIndex === -1 ? getSearchPreviewText(doc.content) : ''
     const contentMatchIndex = content
         ? findFirstMatchIndex(content, tokens)
         : -1

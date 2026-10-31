@@ -3,6 +3,10 @@ import { MainContent } from '~/shared/ui/main-content'
 import { PendingStatus } from '~/shared/ui/pending-status'
 import { SkeletonBlock } from '~/shared/ui/skeleton-block'
 import { HubHeader } from './hub-header'
+import {
+    journalPageLayout,
+    journalListLayout,
+} from '~/shared/ui/journal-layout'
 
 export async function ChannelHubPending({
     channel,
@@ -15,7 +19,7 @@ export async function ChannelHubPending({
             aria-busy="true"
             data-testid="content-pending"
             data-page-pending={channel}
-            className="docs-shell min-w-0 px-4 py-8 sm:px-6 sm:py-10 lg:px-8"
+            className={journalPageLayout}
         >
             <PendingStatus />
             <div className="min-w-0 space-y-6">
@@ -58,15 +62,11 @@ export async function ChannelHubPending({
                     <SkeletonBlock className="h-6 w-40" />
                     <div
                         aria-hidden="true"
-                        className="grid min-w-0 grid-cols-1 gap-3 motion-safe:animate-pulse sm:grid-cols-2 lg:grid-cols-3"
+                        className={`${journalListLayout} motion-safe:animate-pulse`}
                     >
                         {[0, 1, 2].map((i) => (
-                            <div
-                                key={i}
-                                className="ds-card min-w-0 bg-surface-container-lowest p-3.5"
-                            >
+                            <div key={i} className="min-w-0 py-6">
                                 <div className="flex flex-col gap-3">
-                                    <SkeletonBlock className="aspect-video w-full rounded-xl" />
                                     <div className="space-y-2">
                                         <SkeletonBlock className="h-10 w-full" />
                                         <SkeletonBlock className="h-10 w-4/5" />

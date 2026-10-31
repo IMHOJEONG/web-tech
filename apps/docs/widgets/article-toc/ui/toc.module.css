@@ -15,10 +15,10 @@
     cursor: pointer;
     list-style: none;
     font-family: var(--font-display);
-    font-size: 0.625rem;
-    line-height: 1;
-    letter-spacing: 0.2em;
-    color: var(--outline);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    color: var(--on-surface-variant);
     text-transform: uppercase;
 }
 
@@ -65,15 +65,15 @@
     text-decoration: none;
     display: block;
     padding: 0.15rem 0;
-    color: var(--outline);
+    color: var(--on-surface-variant);
     font-family: var(--font-display);
-    font-size: 1rem;
-    line-height: 1.45;
+    font-size: 0.875rem;
+    line-height: 1.6;
     transition: color 0.2s ease;
 }
 
 .toc-list a:hover {
-    color: var(--primary);
+    color: var(--docs-interactive-text);
 }
 
 .toc-list span.numbering {
@@ -86,9 +86,17 @@
 }
 
 .toc-list li:first-child a {
-    color: var(--primary);
+    color: var(--docs-interactive-text);
 }
 
 .toc-list span.href {
     display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toc-container,
+    .toc-container.close,
+    .toc-list a {
+        transition: none;
+    }
 }

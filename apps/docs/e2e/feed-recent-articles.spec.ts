@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { expectEditorialPreview } from './helpers/document-preview'
 
 for (const locale of ['ko', 'en']) {
     for (const theme of ['light', 'dark']) {
@@ -31,17 +32,10 @@ for (const locale of ['ko', 'en']) {
                 await expect(card).toHaveAccessibleName(title)
                 await expect(card.locator('a, button')).toHaveCount(0)
                 await expect(card.locator('svg')).toHaveCount(0)
-                await expect(card.locator('img')).toHaveCount(1)
+                await expectEditorialPreview(card)
                 const href = await card.getAttribute('href')
                 expect(href).not.toBe(leadHref)
                 hrefs.push(href)
-                expect(
-                    await card
-                        .locator('img')
-                        .evaluate(
-                            (element) => element.getBoundingClientRect().height
-                        )
-                ).toBeLessThanOrEqual(192)
                 expect(
                     await card.evaluate(
                         (element) => element.scrollWidth <= element.clientWidth
@@ -54,16 +48,17 @@ for (const locale of ['ko', 'en']) {
             ).toHaveCount(0)
             const first = cards.first()
             await first.scrollIntoViewIfNeeded()
-            await expect
-                .poll(() =>
-                    first
-                        .locator('img')
-                        .evaluate(
-                            (img: HTMLImageElement) =>
-                                img.complete && img.naturalWidth > 0
-                        )
-                )
-                .toBe(true)
+            if (await first.locator('img').count())
+                await expect
+                    .poll(() =>
+                        first
+                            .locator('img')
+                            .evaluate(
+                                (img: HTMLImageElement) =>
+                                    img.complete && img.naturalWidth > 0
+                            )
+                    )
+                    .toBe(true)
             await first.screenshot({
                 path: testInfo.outputPath('recent-card.png'),
             })
@@ -71,7 +66,7 @@ for (const locale of ['ko', 'en']) {
             await first.click({ position: { x: 8, y: 8 } })
             await expect(page).toHaveURL(new URL(href, page.url()).href)
             await page.goBack()
-            await first.locator('img').click()
+            await first.getByRole('heading').click()
             await expect(page).toHaveURL(new URL(href, page.url()).href)
             await page.goBack()
             await first.focus()
@@ -112,7 +107,7 @@ test('cards indicate interaction through title color and keyboard focus without 
         expect(
             await card.evaluate((element) => element.matches(':focus-visible'))
         ).toBe(true)
-        await expect(card).not.toHaveCSS('box-shadow', 'none')
+        await expect(card).not.toHaveCSS('outline-style', 'none')
         await card.press('Tab')
     }
 })

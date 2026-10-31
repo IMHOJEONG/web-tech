@@ -7,6 +7,10 @@ import type { DocsIndexControls } from '../model/docs-index-controls'
 import { DocsSearchPanel } from './docs-search-panel'
 import { DocsIndexActiveFilters } from './docs-index-active-filters'
 import { DocsIndexControlsBar } from './docs-index-controls-bar'
+import {
+    journalPageLayout,
+    journalListLayout,
+} from '~/shared/ui/journal-layout'
 
 export async function DocsIndexPending({
     keyword,
@@ -24,7 +28,7 @@ export async function DocsIndexPending({
             aria-busy="true"
             data-testid="content-pending"
             data-page-pending="docs"
-            className="docs-shell px-4 py-6 sm:px-6 sm:py-8 lg:px-8"
+            className={journalPageLayout}
         >
             <PendingStatus />
             <div className="space-y-5">
@@ -70,13 +74,10 @@ export async function DocsIndexPending({
                     </div>
                     <div
                         aria-hidden="true"
-                        className="grid gap-3 motion-safe:animate-pulse"
+                        className={`${journalListLayout} motion-safe:animate-pulse`}
                     >
                         {[0, 1, 2].map((i) => (
-                            <div
-                                key={i}
-                                className="rounded-2xl border border-border bg-surface-container-lowest p-4"
-                            >
+                            <div key={i} className="py-6">
                                 <div className="flex flex-col gap-4 md:flex-row md:justify-between">
                                     <div className="min-w-0 flex-1 space-y-3">
                                         <SkeletonBlock className="h-4 w-36" />
@@ -87,7 +88,6 @@ export async function DocsIndexPending({
                                         </div>
                                         <SkeletonBlock className="h-7 w-3/4" />
                                     </div>
-                                    <SkeletonBlock className="h-8 w-16 rounded-full" />
                                 </div>
                             </div>
                         ))}

@@ -7,6 +7,7 @@ import { UiUxHubFeaturedSection } from './uiux-hub-featured-section'
 import { UiUxHubHero } from './uiux-hub-hero'
 import { UiUxHubMoreArticlesSection } from './uiux-hub-more-articles-section'
 import { UiUxHubTutorialSection } from './uiux-hub-tutorial-section'
+import { journalPageLayout } from '~/shared/ui/journal-layout'
 
 export async function UiUxHubPage() {
     const t = await getTranslations('uiuxHub')
@@ -15,8 +16,8 @@ export async function UiUxHubPage() {
     )
 
     return (
-        <MainContent className="docs-shell overflow-x-clip px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-            <div className="space-y-10 lg:space-y-14">
+        <MainContent className={journalPageLayout}>
+            <div className="space-y-6">
                 <UiUxHubHero
                     eyebrow={t('hero.eyebrow')}
                     titleLineOne={t('hero.titleLineOne')}

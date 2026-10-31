@@ -4,6 +4,11 @@ import { Link } from '~/shared/i18n/navigation'
 import MainCard from '~/entities/document/ui/main-card'
 import type { SearchData } from '~/lib/get-search-data'
 import { HubHeader } from './hub-header'
+import {
+    journalPageLayout,
+    journalListLayout,
+} from '~/shared/ui/journal-layout'
+import { useTranslations } from 'next-intl'
 
 type HubPageProps = {
     eyebrow: string
@@ -28,8 +33,9 @@ export function HubPage({
     emptyTitle,
     emptyDescription,
 }: HubPageProps) {
+    const t = useTranslations('feedDiscovery')
     return (
-        <MainContent className="docs-shell min-w-0 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+        <MainContent className={journalPageLayout}>
             <div className="min-w-0 space-y-6">
                 <HubHeader
                     eyebrow={eyebrow}
@@ -53,13 +59,13 @@ export function HubPage({
                     {docs.length > 0 ? (
                         <ul
                             data-testid="hub-results"
-                            className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+                            className={journalListLayout}
                         >
                             {docs.map((doc) => (
                                 <li key={doc.href} className="min-w-0">
                                     <Link
                                         href={doc.href}
-                                        className="group ds-card ds-focus-ring block h-full min-w-0 bg-surface-container-lowest p-3.5"
+                                        className="group ds-focus-ring block min-w-0 rounded-sm py-6"
                                     >
                                         <MainCard doc={doc} />
                                     </Link>
@@ -67,13 +73,19 @@ export function HubPage({
                             ))}
                         </ul>
                     ) : (
-                        <div className="rounded-xl border border-outline-variant p-6">
+                        <div className="border-l-2 border-border px-5 py-3">
                             <h3 className="text-lg font-semibold text-on-surface">
                                 {emptyTitle}
                             </h3>
                             <p className="mt-2 max-w-2xl text-sm leading-7 text-on-surface-variant">
                                 {emptyDescription}
                             </p>
+                            <Link
+                                href="/docs"
+                                className="ds-focus-ring mt-4 inline-flex min-h-11 items-center rounded-sm text-sm text-[var(--docs-interactive-text)] underline underline-offset-4"
+                            >
+                                {t('browse')}
+                            </Link>
                         </div>
                     )}
                 </section>

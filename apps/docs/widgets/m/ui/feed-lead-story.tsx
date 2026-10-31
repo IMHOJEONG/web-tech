@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl'
 import { DocumentPreviewCard } from '~/entities/document/ui/document-preview-card'
 import type { FeedArticle } from '../model/feed-document'
+import { journalEyebrow } from '~/shared/ui/journal-layout'
 
 export function FeedLeadStory({ readMinutes, ...article }: FeedArticle) {
     const t = useTranslations('feedLeadStory')
@@ -8,12 +9,10 @@ export function FeedLeadStory({ readMinutes, ...article }: FeedArticle) {
     return (
         <section
             data-testid="feed-lead-story"
-            className="motion-layout border-b border-outline-variant bg-surface-container-lowest px-4 py-6 sm:px-6 md:px-8 lg:py-8"
+            className="motion-layout border-b border-border"
         >
             <div className="mx-auto max-w-page space-y-3">
-                <p className="text-xs font-semibold tracking-wide text-on-surface-variant">
-                    {t('label')}
-                </p>
+                <p className={journalEyebrow}>{t('label')}</p>
                 <DocumentPreviewCard
                     {...article}
                     headingLevel="h1"

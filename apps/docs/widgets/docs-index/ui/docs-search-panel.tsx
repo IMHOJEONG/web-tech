@@ -1,5 +1,6 @@
 import { useLocale, useTranslations } from 'next-intl'
 import { DocumentSearchForm } from '~/feature/search/ui/document-search-form'
+import { JournalPageHeader } from '~/shared/ui/journal-page-header'
 import {
     isLocale,
     defaultLocale,
@@ -24,18 +25,11 @@ export function DocsSearchPanel({
     const locale = useLocale()
     const t = useTranslations('common')
     return (
-        <section className="motion-layout max-w-full rounded-xl border border-border bg-surface-container-lowest p-4 sm:p-5">
-            <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.72fr)] lg:items-end">
-                <div className="min-w-0 space-y-2">
-                    <p className="text-xs font-semibold tracking-[0.2em] text-outline uppercase">
-                        {eyebrow}
-                    </p>
-                    <h1 className="max-w-full break-keep text-2xl font-bold tracking-tight text-on-surface [overflow-wrap:anywhere] sm:text-3xl">
-                        {title}
-                    </h1>
-                </div>
-
-                <div className="min-w-0 space-y-3">
+        <section className="motion-layout max-w-full">
+            <JournalPageHeader
+                eyebrow={eyebrow}
+                title={title}
+                trailing={
                     <DocumentSearchForm
                         key={keyword ?? ''}
                         keyword={keyword}
@@ -47,8 +41,8 @@ export function DocsSearchPanel({
                         placeholder={placeholder}
                         submitLabel={submitLabel}
                     />
-                </div>
-            </div>
+                }
+            />
         </section>
     )
 }

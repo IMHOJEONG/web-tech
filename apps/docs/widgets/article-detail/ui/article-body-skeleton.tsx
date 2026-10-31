@@ -8,6 +8,9 @@ export function ArticleBodySkeleton() {
             className="min-w-0 space-y-8 motion-safe:animate-pulse"
         >
             <SkeletonBlock className="h-10 w-3/4" />
+            <div className="border-b border-border pb-2 lg:hidden">
+                <SkeletonBlock className="my-3 h-5 w-28" />
+            </div>
             {[0, 1, 2].map((section) => (
                 <div key={section} className="space-y-4">
                     <SkeletonBlock className="h-6 w-1/2" />

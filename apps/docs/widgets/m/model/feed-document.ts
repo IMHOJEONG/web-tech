@@ -12,6 +12,7 @@ export type FeedArticle = {
     thumbnail?: string | null
     authorName: string
     readMinutes: number
+    date?: string
 }
 
 export function normalizeFeedFilter(value?: string): FeedFilter {
@@ -71,6 +72,7 @@ export function getFeedArticles(
                 summary,
                 topic: getTopicLabel(doc),
                 thumbnail: doc.thumbnail,
+                date: doc.date,
                 authorName: doc.authorName?.trim() || 'coder',
                 readMinutes:
                     typeof doc.readMinutes === 'number' && doc.readMinutes > 0

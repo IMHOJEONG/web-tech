@@ -1,8 +1,9 @@
 import { expect, test } from '@playwright/test'
+import { expectEditorialPreview } from './helpers/document-preview'
 
 for (const locale of ['ko', 'en']) {
     for (const theme of ['light', 'dark']) {
-        test(`${locale}/${theme}: compact lead card opens through image, whitespace and keyboard`, async ({
+        test(`${locale}/${theme}: journal lead opens through title, whitespace and keyboard`, async ({
             page,
         }, testInfo) => {
             await page.addInitScript(
@@ -32,16 +33,16 @@ for (const locale of ['ko', 'en']) {
                     { exact: true }
                 )
             ).toBeVisible()
-            await expect(thumbnail).toHaveCount(1)
-            await expect(thumbnail).toHaveAttribute('alt', '')
-            await expect
-                .poll(() =>
-                    thumbnail.evaluate(
-                        (img: HTMLImageElement) =>
-                            img.complete && img.naturalWidth > 0
+            await expectEditorialPreview(card)
+            if (await thumbnail.count())
+                await expect
+                    .poll(() =>
+                        thumbnail.evaluate(
+                            (img: HTMLImageElement) =>
+                                img.complete && img.naturalWidth > 0
+                        )
                     )
-                )
-                .toBe(true)
+                    .toBe(true)
             if (theme === 'dark') {
                 await expect(page.locator('html')).toHaveClass(/\bdark\b/)
             } else {
@@ -49,18 +50,19 @@ for (const locale of ['ko', 'en']) {
             }
 
             const width = page.viewportSize()!.width
-            const imageBounds = (await thumbnail.boundingBox())!
+            const imageBounds = (await thumbnail.count())
+                ? await thumbnail.boundingBox()
+                : null
             const cardBounds = (await card.boundingBox())!
             const headingBounds = (await heading.boundingBox())!
-            expect(imageBounds.height).toBeLessThanOrEqual(192)
             expect(cardBounds.x).toBeGreaterThanOrEqual(0)
             expect(cardBounds.x + cardBounds.width).toBeLessThanOrEqual(width)
-            if (width >= 768) {
+            if (imageBounds && width >= 768) {
                 expect(imageBounds.x).toBeGreaterThan(
                     headingBounds.x + headingBounds.width
                 )
                 expect(imageBounds.width).toBeLessThanOrEqual(288)
-            } else {
+            } else if (imageBounds) {
                 expect(imageBounds.y).toBeGreaterThan(
                     headingBounds.y + headingBounds.height
                 )
@@ -74,7 +76,7 @@ for (const locale of ['ko', 'en']) {
             await card.click({ position: { x: 8, y: 8 } })
             await expect(page).toHaveURL(new URL(href!, page.url()).href)
             await page.goBack()
-            await thumbnail.click()
+            await heading.click()
             await expect(page).toHaveURL(new URL(href!, page.url()).href)
             await page.goBack()
             await card.focus()
@@ -102,11 +104,7 @@ test('lead card stays inside the viewport at narrow and intermediate widths', as
         ).toBe(true)
         const bounds = (await card.boundingBox())!
         expect(bounds.x + bounds.width).toBeLessThanOrEqual(width)
-        expect(
-            await section
-                .locator('img')
-                .evaluate((element) => element.getBoundingClientRect().height)
-        ).toBeLessThanOrEqual(192)
+        await expectEditorialPreview(card)
     }
     await page.getByRole('link', { name: 'WEB', exact: true }).click()
     await expect(page).toHaveURL(/\/ko\/feed\?topic=web$/)

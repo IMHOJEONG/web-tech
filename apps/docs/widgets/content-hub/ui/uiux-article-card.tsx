@@ -2,13 +2,7 @@ import { useTranslations } from 'next-intl'
 import { DocumentPreviewCard } from '~/entities/document/ui/document-preview-card'
 import type { UiUxDoc } from '../model/uiux-hub-docs'
 
-export function UiUxArticleCard({
-    doc,
-    fallbackImage,
-}: {
-    doc: UiUxDoc
-    fallbackImage: string
-}) {
+export function UiUxArticleCard({ doc }: { doc: UiUxDoc }) {
     const t = useTranslations('uiuxHub')
     const readingTime =
         typeof doc.readMinutes === 'number' && doc.readMinutes > 0
@@ -21,7 +15,8 @@ export function UiUxArticleCard({
             title={doc.title}
             summary={doc.summary}
             topic={doc.topicLabel?.trim() || 'UI/UX'}
-            thumbnail={doc.thumbnail ?? fallbackImage}
+            thumbnail={doc.thumbnail}
+            date={doc.date}
             readingTime={readingTime}
         />
     )

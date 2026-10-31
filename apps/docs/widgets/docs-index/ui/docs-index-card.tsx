@@ -5,7 +5,7 @@ import type { CSSProperties } from 'react'
 import type { SearchData } from '~/lib/get-search-data'
 import { buildSearchResultItem } from '~/lib/search-result-contract'
 import { DocumentDateText } from '~/shared/ui/document-date-text'
-import { DocumentMetaPills } from '~/shared/ui/document-meta-pills'
+import { DocumentMetaText } from '~/shared/ui/document-meta-text'
 
 type DocsIndexCardProps = {
     className?: string
@@ -22,30 +22,15 @@ export async function DocsIndexCard({
 }: DocsIndexCardProps) {
     const t = await getTranslations('docsIndex')
     const resultItem = buildSearchResultItem(doc, keyword)
-    const metaPills = [
+    const meta = [
         ...(doc.readMinutes
-            ? [
-                  {
-                      key: 'read-minutes',
-                      label: t('card.readMinutes', {
-                          count: doc.readMinutes,
-                      }),
-                  },
-              ]
+            ? [t('card.readMinutes', { count: doc.readMinutes })]
             : []),
-        ...(doc.topicLabel
-            ? [
-                  {
-                      key: 'topic',
-                      label: doc.topicLabel,
-                  },
-              ]
+        ...(doc.topicLabel &&
+        doc.topicLabel.toLowerCase() !== doc.section.toLowerCase()
+            ? [doc.topicLabel]
             : []),
-        ...(doc.tags?.slice(0, 3).map((tag, index) => ({
-            key: `tag:${tag}:${index}`,
-            label: `#${tag}`,
-            tone: 'tag' as const,
-        })) ?? []),
+        ...(doc.tags?.slice(0, 2).map((tag) => `#${tag}`) ?? []),
     ]
 
     return (
@@ -54,14 +39,14 @@ export async function DocsIndexCard({
             style={style}
             data-touch-target="docs-index"
             className={cn(
-                'ds-focus-ring motion-layout group block rounded-2xl border border-border bg-surface-container-lowest p-4 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-deep',
+                'ds-focus-ring motion-layout group block min-w-0 rounded-sm py-6',
                 className
             )}
         >
-            <article className="flex min-w-0 flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <article className="min-w-0">
                 <div className="min-w-0 flex-1 space-y-3">
                     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                        <span className="font-display text-[0.68rem] font-semibold tracking-[0.16em] text-primary uppercase">
+                        <span className="font-mono text-xs font-medium tracking-wide text-[var(--docs-interactive-text)] uppercase">
                             {doc.section}
                         </span>
                         {doc.date && (
@@ -69,7 +54,7 @@ export async function DocsIndexCard({
                                 <span className="text-xs text-outline">/</span>
                                 <DocumentDateText
                                     date={doc.date}
-                                    className="text-xs text-outline"
+                                    className="font-mono text-xs text-on-surface-variant"
                                 />
                             </>
                         )}
@@ -92,12 +77,8 @@ export async function DocsIndexCard({
                         )}
                     </div>
 
-                    <DocumentMetaPills items={metaPills} />
+                    <DocumentMetaText items={meta} />
                 </div>
-
-                <span className="shrink-0 self-start rounded-full border border-border px-3 py-1.5 font-display text-[0.65rem] font-semibold tracking-[0.14em] text-outline uppercase transition-colors group-hover:border-primary/40 group-hover:text-primary">
-                    {t('card.open')}
-                </span>
             </article>
         </Link>
     )

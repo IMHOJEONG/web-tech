@@ -28,6 +28,19 @@ export async function ArticleContentLayout({
                         {fallbackTitle}
                     </h1>
                 )}
+                {toc && toc.length > 0 && (
+                    <div
+                        data-testid="article-mobile-toc"
+                        className="mb-6 border-b border-border pb-2 lg:hidden"
+                    >
+                        <Toc
+                            toc={toc}
+                            title={t('sidebar.tocTitle')}
+                            defaultOpen={false}
+                            closeOnNavigate
+                        />
+                    </div>
+                )}
                 {children}
                 {supplementary && (
                     <ArticleSupplementaryBoundary

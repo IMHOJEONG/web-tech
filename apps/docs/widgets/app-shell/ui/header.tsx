@@ -20,7 +20,7 @@ export default function Header() {
 
 function HeaderContent() {
     return (
-        <div className="mx-auto grid min-h-16 w-full max-w-page grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 px-[min(1rem,16px)] py-2 sm:px-6 md:gap-x-4 md:px-8">
+        <div className="mx-auto grid min-h-16 w-full max-w-6xl grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 px-[min(1rem,16px)] py-2 sm:px-6 md:gap-x-4 md:px-8">
             <MobileNavDrawer />
 
             <div className="hidden min-w-0 items-center justify-start sm:flex">

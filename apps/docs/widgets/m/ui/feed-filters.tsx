@@ -20,10 +20,10 @@ export function FeedFilters({ activeFilter }: { activeFilter: FeedFilter }) {
                     href={getFilterHref(key)}
                     aria-current={activeFilter === key ? 'page' : undefined}
                     className={cn(
-                        'ds-outline-button ds-focus-ring min-h-11 px-4 py-2 text-sm',
+                        'ds-focus-ring inline-flex min-h-11 items-center border-b-2 px-2 py-2 font-mono text-xs transition-colors',
                         activeFilter === key
-                            ? 'border-primary bg-primary/10 text-primary'
-                            : 'text-on-surface-variant hover:text-on-surface'
+                            ? 'border-primary text-[var(--docs-interactive-text)]'
+                            : 'border-transparent text-on-surface-variant hover:text-on-surface'
                     )}
                 >
                     {label}
