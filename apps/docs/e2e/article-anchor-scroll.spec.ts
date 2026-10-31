@@ -13,9 +13,19 @@ test.describe('docs article anchor navigation', () => {
         page,
     }) => {
         await page.emulateMedia({ reducedMotion: 'reduce' })
+        // This header has no behavior unless the separate test server loads its probe.
+        await page.setExtraHTTPHeaders({
+            'x-article-heading-fixture': 'synthetic-headings',
+        })
         await page.goto(
             '/ko/docs/category/be/node-js/node-brotli-runtime-security'
         )
+        await expect(
+            page.getByRole('heading', {
+                name: 'Authored introduction',
+                exact: true,
+            })
+        ).toHaveCount(0)
         const mobile = (page.viewportSize()?.width ?? 0) < 1024
         const toc = mobile
             ? page.getByTestId('article-mobile-toc').locator('details')

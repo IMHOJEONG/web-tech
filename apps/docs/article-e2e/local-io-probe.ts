@@ -4,10 +4,12 @@ import path from 'node:path'
 import { AsyncLocalStorage } from 'node:async_hooks'
 import { IncomingMessage, Server, ServerResponse } from 'node:http'
 import { mock } from 'node:test'
+import { withHeadingFixture } from './heading-fixture.ts'
 
 interface LocalIoCounters {
     reads: Map<string, number>
     directoryReads: number
+    headingFixture: boolean
 }
 
 const storage = new AsyncLocalStorage<LocalIoCounters>()
@@ -32,7 +34,16 @@ mock.method(
         if (counters && isContentPath(file) && /\.(md|mdx)$/.test(file)) {
             counters.reads.set(file, (counters.reads.get(file) ?? 0) + 1)
         }
-        return originalRead(...args)
+        const result = originalRead(...args)
+        if (
+            counters?.headingFixture &&
+            isContentPath(file) &&
+            path.basename(file) === 'node-brotli-runtime-security.mdx'
+        ) {
+            const fixture = withHeadingFixture(result.toString())
+            return typeof result === 'string' ? fixture : Buffer.from(fixture)
+        }
+        return result
     }
 )
 
@@ -55,30 +66,37 @@ mock.method(
             response instanceof ServerResponse
         ) {
             const id = request.headers['x-article-io-probe']
-            if (typeof id === 'string' && /^[a-f0-9-]{36}$/.test(id)) {
+            const observeIo =
+                typeof id === 'string' && /^[a-f0-9-]{36}$/.test(id)
+            const headingFixture =
+                request.headers['x-article-heading-fixture'] ===
+                'synthetic-headings'
+            if (observeIo || headingFixture) {
                 const counters: LocalIoCounters = {
                     reads: new Map(),
                     directoryReads: 0,
+                    headingFixture,
                 }
-                response.once('finish', () => {
-                    const output = path.resolve('test-results/local-io')
-                    fs.mkdirSync(output, { recursive: true })
-                    fs.writeFileSync(
-                        path.join(output, `${id}.json`),
-                        JSON.stringify({
-                            uniqueFiles: counters.reads.size,
-                            totalReads: [...counters.reads.values()].reduce(
-                                (sum, count) => sum + count,
-                                0
-                            ),
-                            maxReadsPerFile: Math.max(
-                                0,
-                                ...counters.reads.values()
-                            ),
-                            directoryReads: counters.directoryReads,
-                        })
-                    )
-                })
+                if (observeIo)
+                    response.once('finish', () => {
+                        const output = path.resolve('test-results/local-io')
+                        fs.mkdirSync(output, { recursive: true })
+                        fs.writeFileSync(
+                            path.join(output, `${id}.json`),
+                            JSON.stringify({
+                                uniqueFiles: counters.reads.size,
+                                totalReads: [...counters.reads.values()].reduce(
+                                    (sum, count) => sum + count,
+                                    0
+                                ),
+                                maxReadsPerFile: Math.max(
+                                    0,
+                                    ...counters.reads.values()
+                                ),
+                                directoryReads: counters.directoryReads,
+                            })
+                        )
+                    })
                 return storage.run(counters, () =>
                     Reflect.apply(originalEmit, this, [event, ...args])
                 )
