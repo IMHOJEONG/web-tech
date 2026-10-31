@@ -8,6 +8,7 @@ const articleCache = 'heap-forge-offline-articles-v1'
 type Reply = {
     ok: boolean
     error?: string
+    stage?: string
     articles?: { path: string; title: string }[]
 }
 type WorkerEvent = {
@@ -21,24 +22,39 @@ type WorkerEvent = {
 
 function worker() {
     const handlers = new Map<string, (event: WorkerEvent) => void>()
-    const clients = new Map<string, { url: string }>()
+    const clients = new Map<
+        string,
+        { url: string; postMessage(data: unknown, ports: MessagePort[]): void }
+    >()
     const stores = new Map<string, Map<string, Response>>()
     let offline = false
     let networkStatus = 200
+    let failure: { method: string; name: string } | undefined
+    const failIf = (method: string) => {
+        if (failure?.method === method)
+            throw new DOMException(
+                'Private storage exception text',
+                failure.name
+            )
+    }
     const key = (input: string | Request) =>
         new URL(typeof input === 'string' ? input : input.url, origin).href
     const caches = {
         keys: async () => [...stores.keys()],
         delete: async (name: string) => stores.delete(name),
         open: async (name: string) => {
+            failIf('open')
             if (!stores.has(name)) stores.set(name, new Map())
             const store = stores.get(name)!
             return {
-                keys: async () =>
-                    [...store.keys()].map((url) => new Request(url)),
+                keys: async () => {
+                    failIf('keys')
+                    return [...store.keys()].map((url) => new Request(url))
+                },
                 match: async (input: string | Request) =>
                     store.get(key(input))?.clone(),
                 put: async (input: string | Request, response: Response) => {
+                    failIf('put')
                     store.set(key(input), response.clone())
                 },
                 delete: async (input: string | Request) =>
@@ -59,6 +75,9 @@ function worker() {
             URL,
             Response,
             TextEncoder,
+            MessageChannel,
+            setTimeout,
+            clearTimeout,
             caches,
             fetch: async () => {
                 if (offline) throw new TypeError('offline')
@@ -87,10 +106,25 @@ function worker() {
         action: string,
         path = '/ko/docs/web/test',
         source = origin + path,
-        body = '<p>Saved text</p>'
+        body = '<p>Saved text</p>',
+        currentPath?: string
     ) {
         const id = String(clients.size)
-        clients.set(id, { url: source })
+        clients.set(id, {
+            url: source,
+            postMessage(_data, ports) {
+                ports[0]!.postMessage({
+                    ok: Boolean(
+                        currentPath ??
+                        (source === origin + path ? path : undefined)
+                    ),
+                    path:
+                        currentPath ??
+                        (source === origin + path ? path : undefined),
+                })
+                ports[0]!.close()
+            },
+        })
         let reply: Reply | undefined
         const tasks: Promise<unknown>[] = []
         handlers.get('message')!({
@@ -141,8 +175,100 @@ function worker() {
         status: (value: number) => {
             networkStatus = value
         },
+        fail: (method?: string, name = 'Error') => {
+            failure = method ? { method, name } : undefined
+        },
     }
 }
+
+test('SPA saves verify the current article with the originating client, not its initial Feed URL', async () => {
+    const w = worker()
+    const path = '/ko/docs/category/be/node-js/node-brotli-runtime-security'
+    const source = origin + '/ko/feed'
+    assert.equal((await w.send('save', path, source)).ok, false)
+    assert.equal((await w.send('save', path, source, undefined, path)).ok, true)
+    assert.equal(
+        (await w.send('list', path, source, undefined, path)).articles!.length,
+        1
+    )
+    for (const currentPath of [
+        '/ko/docs/other',
+        '/api/private',
+        'https://evil.example/ko/docs/test',
+    ]) {
+        assert.equal(
+            (await w.send('save', path, source, undefined, currentPath)).error,
+            'source'
+        )
+    }
+    assert.equal(
+        (
+            await w.send(
+                'save',
+                path,
+                'https://evil.example/ko/feed',
+                undefined,
+                path
+            )
+        ).error,
+        'source'
+    )
+    assert.equal(
+        (await w.send('save', path, origin + '/api/private', undefined, path))
+            .error,
+        'source'
+    )
+    assert.equal((await w.send('list', path, source)).ok, false)
+    assert.equal((await w.send('clear', path, source)).ok, false)
+    assert.equal((await w.send('list')).articles!.length, 1)
+})
+
+test('storage errors identify quota, denial and operation stage without exposing raw text', async () => {
+    const w = worker()
+    await w.send('save')
+    const cache = await w.caches.open(articleCache)
+    const before = await (await cache.match(
+        origin + '/ko/docs/web/test'
+    ))!.text()
+    for (const [method, name, code, stage] of [
+        ['put', 'QuotaExceededError', 'storage-quota', 'storage-write'],
+        ['open', 'SecurityError', 'storage-denied', 'storage-open'],
+        ['keys', 'NotAllowedError', 'storage-denied', 'storage-read'],
+        ['put', 'Error', 'storage', 'storage-write'],
+    ]) {
+        w.fail(method, name)
+        const reply = await w.send(method === 'keys' ? 'list' : 'save')
+        assert.equal(reply.ok, false)
+        assert.equal(reply.error, code)
+        assert.equal(reply.stage, stage)
+        assert.doesNotMatch(JSON.stringify(reply), /Private storage/)
+        w.fail()
+        assert.equal(
+            await (await cache.match(origin + '/ko/docs/web/test'))!.text(),
+            before
+        )
+    }
+})
+
+test('a failed confirmation read is distinguished from a failed write', async () => {
+    const w = worker()
+    await w.send('save')
+    w.fail('keys', 'SecurityError')
+    const reply = await w.send(
+        'save',
+        undefined,
+        undefined,
+        '<p>Updated copy</p>'
+    )
+    assert.equal(reply.ok, false)
+    assert.equal(reply.error, 'storage-denied')
+    assert.equal(reply.stage, 'storage-confirmation')
+    w.fail()
+    const saved = await (
+        await w.caches.open(articleCache)
+    ).match(origin + '/ko/docs/web/test')
+    assert.match(await saved!.text(), /Updated copy/)
+})
 
 test('offline storage requires an explicit matching public-article source and excludes unsafe keys', async () => {
     const w = worker()

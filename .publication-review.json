@@ -2,6 +2,20 @@
   "version": 1,
   "entries": [
     {
+      "path": "apps/docs/public/offline-worker.js",
+      "sha256": "3c05d6c71e6b68067745690317efb233aed627f5958cec1d32e81613fbd409b9",
+      "kind": "asset",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-31",
+      "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 Worker 코드이며 원시 브라우저 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/architecture/README.md",
       "sha256": "fe4c47284d32b48a861af224ed640dd4a7499d61dc5df603bc74a1d3d10f2cb4",
       "kind": "document",

@@ -158,7 +158,263 @@ test('failed storage never reports success or destroys the previously saved vers
     await expect(page.getByRole('status').last()).toContainText(
         '저장하지 못했습니다'
     )
+    await expect(
+        page.locator('[data-offline-error-code="storage-quota"]')
+    ).toHaveAttribute('data-offline-error-stage', 'storage-write')
     expect(await savedHtml(page)).toBe(before)
+})
+
+test('the reported Brotli article can be explicitly saved and read offline', async ({
+    page,
+    context,
+}) => {
+    const path = '/ko/docs/category/be/node-js/node-brotli-runtime-security'
+    await page.goto(path)
+    await save(page)
+    await context.setOffline(true)
+    await page.goto(`/offline.html?article=${encodeURIComponent(path)}`)
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(
+        'Brotli'
+    )
+    await expect(
+        page.getByText('오프라인 저장본이며 최신 원문과 다를 수 있습니다', {
+            exact: false,
+        })
+    ).toBeVisible()
+})
+
+test('Feed card navigation saves the current Brotli article even when the Worker sees the initial Feed URL', async ({
+    page,
+    context,
+}) => {
+    const path = '/ko/docs/category/be/node-js/node-brotli-runtime-security'
+    await page.goto('/ko/feed')
+    const origin = await page.evaluate(() => performance.timeOrigin)
+    await page.locator(`main a[href="${path}"]`).first().click()
+    await expect(page).toHaveURL(new RegExp(path + '$'))
+    await expect(
+        page.locator('[data-offline-content] h2').first()
+    ).toBeVisible()
+    await expect(page.locator('[data-offline-loading]')).toHaveCount(0)
+    expect(await page.evaluate(() => performance.timeOrigin)).toBe(origin)
+    await save(page)
+    await expect(page.locator('[data-offline-error-code]')).toHaveCount(0)
+    await context.setOffline(true)
+    await page.goto(`/offline.html?article=${encodeURIComponent(path)}`)
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(
+        'Brotli'
+    )
+})
+
+test('a shell page without the current article listener cannot forge an offline save', async ({
+    page,
+    context,
+}) => {
+    await openArticle(page)
+    await save(page)
+    const before = await savedHtml(page)
+    await page.getByRole('link', { name: 'Feed', exact: true }).first().click()
+    await expect(page).toHaveURL(/\/ko\/feed$/)
+    const result = await page.evaluate(async () => {
+        const worker = (await navigator.serviceWorker.getRegistration('/'))!
+            .active!
+        return new Promise((resolve) => {
+            const channel = new MessageChannel()
+            channel.port1.onmessage = (event) => {
+                resolve(event.data)
+                channel.port1.close()
+            }
+            worker.postMessage(
+                {
+                    channel: 'heap-forge-offline-v1',
+                    action: 'save',
+                    snapshot: {
+                        path: '/ko/docs/web/javascript-event-loop-runtime',
+                        title: 'Synthetic forged request',
+                        body: '<p>Synthetic text</p>',
+                        locale: 'ko',
+                        missingImages: 0,
+                    },
+                },
+                [channel.port2]
+            )
+        })
+    })
+    expect(result).toEqual({
+        ok: false,
+        error: 'context-timeout',
+        stage: 'source-check',
+    })
+    const worker = context.serviceWorkers()[0]!
+    expect(
+        await worker.evaluate(
+            async () =>
+                (
+                    await (
+                        await caches.open('heap-forge-offline-articles-v1')
+                    ).keys()
+                ).length
+        )
+    ).toBe(1)
+    expect(await savedHtml(page)).toBe(before)
+})
+
+test('a waiting update never blocks a usable active worker or removes saved articles', async ({
+    page,
+}) => {
+    await openArticle(page)
+    await save(page)
+    await page.evaluate(() => {
+        const register = navigator.serviceWorker.register.bind(
+            navigator.serviceWorker
+        )
+        Object.defineProperty(navigator.serviceWorker, 'register', {
+            configurable: true,
+            value: async (
+                ...args: Parameters<ServiceWorkerContainer['register']>
+            ) => {
+                const registration = await register(...args)
+                const waiting = new EventTarget()
+                Object.assign(waiting, { state: 'installed' })
+                return new Proxy(registration, {
+                    get(target, key) {
+                        if (key === 'installing') return null
+                        if (key === 'waiting') return waiting
+                        const value = Reflect.get(target, key, target)
+                        return typeof value === 'function'
+                            ? value.bind(target)
+                            : value
+                    },
+                })
+            },
+        })
+        const marker = document.createElement('p')
+        marker.textContent = 'waiting-update-saved'
+        document.querySelector('[data-offline-content]')!.append(marker)
+    })
+    await save(page)
+    await expect(page.locator('[data-offline-error-code]')).toHaveCount(0)
+    expect(await savedHtml(page)).toContain('waiting-update-saved')
+})
+
+for (const locale of ['ko', 'en']) {
+    test(`${locale}: registration failures expose a safe code and stage instead of blaming storage`, async ({
+        page,
+    }) => {
+        await page.addInitScript(() => {
+            Object.defineProperty(navigator.serviceWorker, 'register', {
+                configurable: true,
+                value: async () => {
+                    throw new TypeError('synthetic private registration detail')
+                },
+            })
+        })
+        await page.goto(article.replace('/ko/', `/${locale}/`))
+        await page
+            .getByRole('button', {
+                name: locale === 'ko' ? '오프라인 저장' : 'Save offline',
+                exact: true,
+            })
+            .click()
+        const failure = page.locator('[data-offline-error-code="registration"]')
+        await expect(failure).toHaveAttribute(
+            'data-offline-error-stage',
+            'registration'
+        )
+        await expect(failure).toContainText(
+            locale === 'ko' ? '준비하지 못했습니다' : 'Could not prepare'
+        )
+        const details = page.getByText(
+            locale === 'ko' ? '오류 자세히' : 'Error details',
+            { exact: true }
+        )
+        await details.focus()
+        await details.press('Enter')
+        await expect(
+            page.getByTestId('offline-error-details').locator('code').first()
+        ).toHaveText('registration')
+        await expect(page.locator('main')).not.toContainText(
+            'synthetic private registration detail'
+        )
+        expect(await savedHtml(page)).toBeUndefined()
+    })
+}
+
+test('storage denial identifies the failed open and retains the previous copy', async ({
+    page,
+    context,
+}) => {
+    await openArticle(page)
+    await save(page)
+    const before = await savedHtml(page)
+    await context.serviceWorkers()[0]!.evaluate(() => {
+        CacheStorage.prototype.open = async () => {
+            throw new DOMException(
+                'synthetic private storage detail',
+                'SecurityError'
+            )
+        }
+    })
+    await page
+        .getByRole('button', { name: '저장본 업데이트', exact: true })
+        .click()
+    await expect(
+        page.locator('[data-offline-error-code="storage-denied"]')
+    ).toHaveAttribute('data-offline-error-stage', 'storage-open')
+    await expect(page.getByRole('status').last()).toContainText('차단')
+    expect(await savedHtml(page)).toBe(before)
+    await expect(page.locator('main')).not.toContainText(
+        'synthetic private storage detail'
+    )
+})
+
+test('a missing response does not claim the save failed and tells readers to verify their copies', async ({
+    page,
+}) => {
+    await openArticle(page)
+    await save(page)
+    const before = await savedHtml(page)
+    await page.evaluate(() => {
+        ServiceWorker.prototype.postMessage = () => {}
+    })
+    await page
+        .getByRole('button', { name: '저장본 업데이트', exact: true })
+        .click()
+    const failure = page.locator('[data-offline-error-code="message-timeout"]')
+    await expect(failure).toBeVisible({ timeout: 10_000 })
+    await expect(failure).toHaveAttribute('data-offline-error-stage', 'message')
+    await expect(failure).toContainText('저장 여부를 먼저 확인')
+    expect(await savedHtml(page)).toBe(before)
+})
+
+test('a write followed by a failed confirmation read never says the data was not saved', async ({
+    page,
+    context,
+}) => {
+    await openArticle(page)
+    await save(page)
+    await page.evaluate(() => {
+        const marker = document.createElement('p')
+        marker.textContent = 'write-succeeded-confirmation-failed'
+        document.querySelector('[data-offline-content]')!.append(marker)
+    })
+    await context.serviceWorkers()[0]!.evaluate(() => {
+        Cache.prototype.keys = async () => {
+            throw new DOMException('synthetic confirmation', 'SecurityError')
+        }
+    })
+    await page
+        .getByRole('button', { name: '저장본 업데이트', exact: true })
+        .click()
+    const failure = page.locator('[data-offline-error-code="storage-denied"]')
+    await expect(failure).toHaveAttribute(
+        'data-offline-error-stage',
+        'storage-confirmation'
+    )
+    await expect(failure).toContainText('저장 결과를 확인하지 못했습니다')
+    expect(await savedHtml(page)).toContain(
+        'write-succeeded-confirmation-failed'
+    )
 })
 
 test('worker refuses API, preview, query and cross-origin keys; unsaved routes show the library offline', async ({

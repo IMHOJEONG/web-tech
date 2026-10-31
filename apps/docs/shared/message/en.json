@@ -11,7 +11,21 @@
         "notice": "Only explicitly saved public articles are stored. Copies may be outdated or removed when browser storage is cleared.",
         "limit": "You can save up to 10 articles. Delete a copy in Saved articles and try again.",
         "size": "This article exceeds the offline size limit. Please read it online.",
-        "error": "Could not save. Check your connection and browser storage permissions, then try again."
+        "error": "Could not save. Check the code and stage in Error details, then try again.",
+        "workerRegistrationError": "Could not prepare offline reading. Check your connection, reload the page, and try again.",
+        "workerActivationError": "Could not confirm offline reading has started. Close other blog tabs and reload before trying again. You do not need to delete saved articles.",
+        "workerUnavailable": "Offline saving is not ready yet. Reload the page and try again.",
+        "responseTimeout": "No response confirmed the save result. Check Saved articles first. You do not need to delete saved copies.",
+        "responseError": "Could not confirm the save result. Check Saved articles, reload the page, and try again.",
+        "storageDenied": "Your browser blocked storage access. Check this site's storage settings or security extensions.",
+        "storageQuota": "There is not enough browser storage to save this article. Remove unneeded copies in Saved articles, then try again.",
+        "storageError": "Could not read or write browser storage. Check the failed stage in Error details. Do not clear all saved copies.",
+        "snapshotError": "Could not prepare the article content for saving. Wait for the full article and try again.",
+        "sourceError": "The current article URL could not be verified as the save target. Try again from the original article URL.",
+        "sourceContextError": "No response confirmed the current article URL. Reload the page and try again. You do not need to delete saved copies.",
+        "errorDetails": "Error details",
+        "errorCode": "Error code",
+        "errorStage": "Failed stage"
     },
     "category": {
         "index": {
