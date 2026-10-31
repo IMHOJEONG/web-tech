@@ -275,3 +275,113 @@ test('renderArticleContent renders mdx content and exposes toc data', async () =
     assert.match(markup, /Search Ranking/)
     assert.match(markup, /Weighted search improves discovery\./)
 })
+
+test('heading anchors match TOC for punctuation, inline markup and duplicate titles', async () => {
+    const rendered = await renderArticleContent(
+        {
+            contentFormat: 'mdx',
+            content: [
+                '# Repeated title',
+                '## Repeated title',
+                '#### 1/2 — 압축할 바이트 만들기',
+                '#### 2/2 — 복원 결과와 실행 버전 출력',
+                '## `inline` **markup**',
+                '## Repeated title',
+                '##### Level five',
+                '###### Level six',
+            ].join('\n\n'),
+        },
+        { codeHighlight: false }
+    )
+    assert.equal(rendered.mode, 'mdx')
+    const markup = renderToStaticMarkup(
+        createElement(Fragment, null, rendered.content)
+    )
+    const ids = rendered.toc!.map((heading) =>
+        decodeURIComponent(heading.href.slice(1))
+    )
+    assert.equal(ids.length, 7)
+    assert.equal(new Set(ids).size, ids.length)
+    for (const id of ids) assert.ok(markup.includes(`id="${id}"`), id)
+})
+
+test('generated heading anchors reserve authored IDs before and after the heading', async () => {
+    const rendered = await renderArticleContent(
+        {
+            contentFormat: 'mdx',
+            content:
+                '<h2 id="intro">Authored introduction</h2>\n\n## Intro\n\n<div id={"intro-1"} />',
+        },
+        { codeHighlight: false }
+    )
+    assert.equal(rendered.mode, 'mdx')
+    const markup = renderToStaticMarkup(
+        createElement(Fragment, null, rendered.content)
+    )
+    const ids = [...markup.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1])
+    assert.equal(new Set(ids).size, ids.length)
+    assert.ok(ids.includes('intro'))
+    assert.ok(ids.includes('intro-1'))
+    const target = rendered.toc![0]!.href.slice(1)
+    assert.notEqual(target, 'intro')
+    assert.notEqual(target, 'intro-1')
+    assert.ok(markup.includes(`<h2 id="${target}">`))
+})
+
+test('changed static heading slugs retain unambiguous legacy anchors', async () => {
+    const rendered = await renderArticleContent(
+        {
+            contentFormat: 'mdx',
+            content:
+                '## 정상 1/5 — 준비와 시간 기록\n\n## Foo_bar\n\n## foo*bar*',
+        },
+        { codeHighlight: false }
+    )
+    const markup = renderToStaticMarkup(
+        createElement(Fragment, null, rendered.content)
+    )
+    assert.ok(markup.includes('id="정상-15--준비와-시간-기록"'))
+    assert.ok(markup.includes('id="정상-15-준비와-시간-기록"'))
+    assert.ok(markup.includes('id="foo-bar"'))
+    assert.match(markup, /<h2 id="foo_bar"><span[^>]*id="foobar"/)
+    const ids = [...markup.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1])
+    assert.equal(new Set(ids).size, ids.length)
+    assert.equal(ids.filter((id) => id === 'foobar').length, 1)
+    assert.match(markup, /aria-hidden="true"/)
+})
+
+test('implicit authored headings participate in collision allocation without entering the markdown TOC', async () => {
+    const rendered = await renderArticleContent(
+        { contentFormat: 'mdx', content: '<h2>Intro</h2>\n\n## Intro' },
+        { codeHighlight: false }
+    )
+    const markup = renderToStaticMarkup(
+        createElement(Fragment, null, rendered.content)
+    )
+    assert.match(markup, /<h2 id="intro">Intro<\/h2>/)
+    assert.match(markup, /<h2 id="intro-1">Intro<\/h2>/)
+    assert.equal(rendered.toc?.length, 1)
+    assert.equal(rendered.toc?.[0]?.href, '#intro-1')
+})
+
+test('static JSX numeric and template IDs reserve their heading targets', async () => {
+    for (const [element, title] of [
+        ['<div id={0} />', '0'],
+        ['<div id={`intro`} />', 'Intro'],
+    ] as const) {
+        const rendered = await renderArticleContent(
+            { contentFormat: 'mdx', content: `${element}\n\n## ${title}` },
+            { codeHighlight: false }
+        )
+        const reserved = title.toLowerCase()
+        assert.notEqual(rendered.toc?.[0]?.href, `#${reserved}`)
+        const markup = renderToStaticMarkup(
+            createElement(Fragment, null, rendered.content)
+        )
+        const ids = [...markup.matchAll(/\bid="([^"]+)"/g)].map(
+            (match) => match[1]
+        )
+        assert.ok(ids.includes(reserved))
+        assert.equal(new Set(ids).size, ids.length)
+    }
+})

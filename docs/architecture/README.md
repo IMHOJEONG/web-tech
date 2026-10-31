@@ -6,6 +6,8 @@
 
 ## ADR 상태
 
+- [ADR-0026: SPA 오프라인 현재 글 확인](adr-0026-offline-spa-article-context.md): 적용 중. browser 발신 client와 현재 글 응답 확인·기존 공개 경로 검증 유지. 운영 재현 원인 보완, 수정 배포는 별도.
+
 - [ADR-0025: 공개 검수 경계](adr-0025-publication-boundary.md): 적용 중. 로컬 Git 업로드 검사·명시적 해시 검수·원시 증거 비공개 기본값. main·원격 CI·NAS 적용은 별도.
 
 - [ADR-0024: 보조 리뷰 한도 예외](adr-0024-advisory-review-rate-limit.md): 적용 중. 사용자 승인·공식 App/head/사유 검증·감사 출력, 로컬 구현·main 전파는 별도.

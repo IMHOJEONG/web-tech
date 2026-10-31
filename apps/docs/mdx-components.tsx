@@ -41,34 +41,34 @@ function getCodeLanguage(node: ReactNode): string {
 }
 
 export const components = {
-    h1: ({ children }) => (
+    h1: ({ children, id }) => (
         <h1
             className={cn('mdx-h1 scroll-mt-24', ...commonCss)}
-            id={slugifyHeading(children)}
+            id={id ?? slugifyHeading(children)}
         >
             {children}
         </h1>
     ),
-    h2: ({ children }) => (
+    h2: ({ children, id }) => (
         <h2
             className={cn('mdx-h2 scroll-mt-24', ...commonCss)}
-            id={slugifyHeading(children)}
+            id={id ?? slugifyHeading(children)}
         >
             {children}
         </h2>
     ),
-    h3: ({ children }) => (
+    h3: ({ children, id }) => (
         <h3
             className={cn('mdx-h3 scroll-mt-24', ...commonCss)}
-            id={slugifyHeading(children)}
+            id={id ?? slugifyHeading(children)}
         >
             {children}
         </h3>
     ),
-    h4: ({ children }) => (
+    h4: ({ children, id }) => (
         <h4
             className={cn('mdx-h4 scroll-mt-24', ...commonCss)}
-            id={slugifyHeading(children)}
+            id={id ?? slugifyHeading(children)}
         >
             {children}
         </h4>

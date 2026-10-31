@@ -2,12 +2,82 @@
   "version": 1,
   "entries": [
     {
-      "path": "docs/architecture/README.md",
-      "sha256": "fe4c47284d32b48a861af224ed640dd4a7499d61dc5df603bc74a1d3d10f2cb4",
+      "path": "docs/architecture/adr-0026-offline-spa-article-context.md",
+      "sha256": "914a3cf742de2c50a602e390d64eef1dc1eabeb89298ec3d07b46aeda7f8be1f",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 최종 70개 파일의 공개 검수 목록과 main 병합·배포를 명시 승인함. 자체 작성한 설계·집계 검증·작업 기록·목차이며 원시 캡처·초안·비밀값·제3자 매체는 제외함.",
+      "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 설계 결정과 신뢰 경계이며 원시 브라우저 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/runbooks/docs-offline-reading.md",
+      "sha256": "70f30b0bceb953a8f0fdedd5a23c403c58b8c447b5078c6219a3565545eeb68a",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-31",
+      "note": "사용자가 PR81 보완 최종 문서 3개와 승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 오류 단계·등록 오류·source-check 운영 절차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/resilience/2026-10-31-offline-save-diagnostics.md",
+      "sha256": "512cb4d69a866986112632fd39d2d161b0a5c94c449417b97adf52d1a5770f13",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-31",
+      "note": "사용자가 PR81 보완 최종 문서 3개와 승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 커밋별 검증·실패 이력·목차 회귀의 정제 요약이며 원시 trace·프로필·캡처·초안·비밀값은 제외함. main 병합·배포는 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-31-offline-save-diagnostics.md",
+      "sha256": "d7710530212587cdb752b75440ba0662465821e580b08462cab41f614a5b7f70",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-31",
+      "note": "사용자가 PR81 보완 최종 문서 3개와 승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 리뷰·CI·목차 수정 작업 기록이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "apps/docs/public/offline-worker.js",
+      "sha256": "3c05d6c71e6b68067745690317efb233aed627f5958cec1d32e81613fbd409b9",
+      "kind": "asset",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-31",
+      "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 Worker 코드이며 원시 브라우저 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/README.md",
+      "sha256": "f986b53eb81f085f27b712f782f9e2c08841aa747dbc2365aebae34e1680535d",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-31",
+      "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 ADR 목차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -73,11 +143,11 @@
     },
     {
       "path": "docs/worklog/2026-10/README.md",
-      "sha256": "201003e1e643584d2e3f11f5aff5939be7bf46c92f82871f3a2ab27096e7df3d",
+      "sha256": "d48773b7d02adca83afc707441bff1c621cfd99b814d6dbdc12b7311146f6ae6",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 최종 70개 파일의 공개 검수 목록과 main 병합·배포를 명시 승인함. 자체 작성한 설계·집계 검증·작업 기록·목차이며 원시 캡처·초안·비밀값·제3자 매체는 제외함.",
+      "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 월별 작업 목차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -101,11 +171,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "49349decab6d34763cb63bcaf27b4580a5312a02d316934706c2bc342c614809",
+      "sha256": "5f3a6c6bf112f42ddddd2e233373ee29b86adca3d9096964a407b327886006e8",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 최종 70개 파일의 공개 검수 목록과 main 병합·배포를 명시 승인함. 자체 작성한 설계·집계 검증·작업 기록·목차이며 원시 캡처·초안·비밀값·제3자 매체는 제외함.",
+      "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 검증 목차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
