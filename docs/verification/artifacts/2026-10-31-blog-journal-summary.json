@@ -112,8 +112,7 @@
       [160, 112],
       [136, 88]
     ],
-    "flattenedFullPageImages": 0,
-    "fontDecision": "사용자가 원본 폰트 유지·설치 후 편집 선택. Pretendard·JetBrains Mono 설치와 CSS alias 재연결 필요."
+    "flattenedFullPageImages": 0
   },
   "limitations": [
     "묶음 간 중복 회귀가 있으므로 고유 테스트 수로 합산하지 않음.",

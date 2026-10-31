@@ -40,6 +40,23 @@ test('even a failed backup leaves a usable card and does not retry forever', asy
     })
     // Text-only Feed rows omit thumbnails; Web exercises real image failures.
     await page.goto('/ko/web')
+    const thumbnails = page.locator('[data-thumbnail-state]')
+    await expect(thumbnails.first()).toBeAttached()
+    const thumbnailCount = await thumbnails.count()
+    // Include offscreen cards in the failure cycle before measuring retries.
+    await thumbnails.locator('img').evaluateAll((images) => {
+        for (const image of images)
+            (image as HTMLImageElement).loading = 'eager'
+    })
+    await expect(
+        page.locator(
+            '[data-thumbnail-state]:not([data-thumbnail-state="unavailable"])'
+        )
+    ).toHaveCount(0)
+    await expect(
+        page.locator('[data-thumbnail-state="unavailable"]')
+    ).toHaveCount(thumbnailCount)
+    expect(requests).toBeGreaterThan(0)
     await expect(
         page.locator('[data-thumbnail-state="unavailable"]').first()
     ).toBeVisible()

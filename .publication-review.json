@@ -115,11 +115,11 @@
     },
     {
       "path": "docs/verification/accessibility/2026-10-31-blog-journal-implementation.md",
-      "sha256": "aacb73731e1f4de69fcb0b86ce3b5879b5e4fd9a11602476881bfe5ad06f70c5",
+      "sha256": "673cf5716b74fcca620f7d2dd8152926c84bfcf51f12ba0fc567d421f61df234",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 PR #80 후속 26개 파일의 최종 공개 목록·해시와 main 병합·배포를 명시 승인함. 자체 작성한 정제 집계·재현 조건·보고서·목차이며 원시 캡처·trace·인증 헤더·운영 비밀값은 제외함.",
+      "note": "사용자가 PR #80 최종 추가 리뷰 8개 파일의 공개 목록·해시와 main 병합·배포를 명시 승인함. 자체 작성한 정제 기록이며 원시 캡처·trace·초안·비밀값은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -157,11 +157,11 @@
     },
     {
       "path": "docs/worklog/2026-10/2026-10-31-blog-journal-implementation.md",
-      "sha256": "9b8d5929acb5afafa04eeeb1b0b077124700323b4a47bde2638d2530724a7fa2",
+      "sha256": "570d3cee55174929bc3c588dfa82ef0f4e6aa953025712fff873a9848db1f46b",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 최종 70개 파일의 공개 검수 목록과 main 병합·배포를 명시 승인함. 자체 작성한 설계·집계 검증·작업 기록·목차이며 원시 캡처·초안·비밀값·제3자 매체는 제외함.",
+      "note": "사용자가 PR #80 최종 추가 리뷰 8개 파일의 공개 목록·해시와 main 병합·배포를 명시 승인함. 자체 작성한 정제 기록이며 원시 캡처·trace·초안·비밀값은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -185,11 +185,11 @@
     },
     {
       "path": "docs/verification/artifacts/2026-10-31-blog-journal-summary.json",
-      "sha256": "d2a3f5aff144c627a68db36483badcc2e6ce9634e1995343216374766ef1db11",
+      "sha256": "7a19d28b1a5c26512e89588a7e370ed661ae15d844ebf696e4ffe9c4d1522fe0",
       "kind": "sanitized-evidence",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 PR #80 후속 26개 파일의 최종 공개 목록·해시와 main 병합·배포를 명시 승인함. 자체 작성한 정제 집계·재현 조건·보고서·목차이며 원시 캡처·trace·인증 헤더·운영 비밀값은 제외함.",
+      "note": "사용자가 PR #80 최종 추가 리뷰 8개 파일의 공개 목록·해시와 main 병합·배포를 명시 승인함. 자체 작성한 정제 기록이며 원시 캡처·trace·초안·비밀값은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

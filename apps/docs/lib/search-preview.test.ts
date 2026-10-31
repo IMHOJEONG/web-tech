@@ -128,3 +128,36 @@ test('preview normalization is bounded while a late body match still gets contex
     assert.match(preview.excerptHtml, /React<\/mark>/)
     assert.match(preview.excerptHtml, /late-body-match/)
 })
+
+test('a preview starting inside a long code fence preserves escaped JSX', () => {
+    for (const fence of ['```', '~~~']) {
+        const preview = buildSearchPreview(
+            createDoc({
+                summary: '',
+                content: `${fence}tsx\n${'x'.repeat(SEARCH_PREVIEW_INPUT_LIMIT * 2)}\n<Button>late-code-match</Button>\n${fence}`,
+            }),
+            'button'
+        )
+        assert.match(preview.excerptHtml, /&lt;<mark[^>]*>Button<\/mark>&gt;/)
+        assert.match(preview.excerptHtml, /late-code-match/)
+        assert.doesNotMatch(preview.excerptHtml, /<Button>/)
+    }
+})
+
+test('hidden link destinations cannot displace a later visible search match', () => {
+    for (const link of [
+        '<a href="/react">Unrelated link</a>',
+        '[Unrelated link](/react)',
+        '<script>React hidden</script>',
+    ]) {
+        const preview = buildSearchPreview(
+            createDoc({
+                summary: '',
+                content: `${link} ${'x'.repeat(SEARCH_PREVIEW_INPUT_LIMIT * 2)} React visible-match`,
+            }),
+            'react'
+        )
+        assert.match(preview.excerptHtml, /React<\/mark>/)
+        assert.match(preview.excerptHtml, /visible-match/)
+    }
+})

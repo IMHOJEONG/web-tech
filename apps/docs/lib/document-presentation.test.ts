@@ -13,7 +13,10 @@ test('document dates reject normalized impossible days and retain calendar dates
         getDocumentCalendarDate('2026-10-31T23:00:00-05:00'),
         '2026-10-31'
     )
-    assert.equal(getDocumentCalendarDate('October 31, 2026'), undefined)
+    assert.equal(getDocumentCalendarDate('October 31, 2026'), '2026-10-31')
+    assert.equal(getDocumentCalendarDate('2026-10'), '2026-10-01')
+    assert.equal(getDocumentCalendarDate('2026'), '2026-01-01')
+    assert.equal(getDocumentCalendarDate('not a date'), undefined)
     assert.equal(getDocumentCalendarDate(), undefined)
 })
 

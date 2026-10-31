@@ -31,3 +31,9 @@
 ## Next
 
 로컬 화면을 사용자와 확인한 뒤 필요하면 간격·밀도를 조정한다. 커밋·공개 Git 업로드·PR·배포는 별도 요청과 공개 검수 후 진행한다.
+
+## 후속 승인·리뷰 경과
+
+- 사용자가 70개 최초 파일과 26개 후속 파일을 순차 승인했다. 별도 6개 커밋의 최종 head `4320250`을 [PR #80](https://github.com/IMHOJEONG/web-tech/pull/80)에 푸시했다. 기존 checkout의 초안·stash·NAS 작업은 유지했다.
+- CI·프리뷰·CodeRabbit check 성공 뒤 추가 스레드 5개가 나와 병합을 보류했다. 긴 검색 미리보기의 코드·가시 텍스트 선택, 허용된 날짜 호환성, 이미지 실패 테스트의 전체 카드 완료 대기, artifact 역할 분리를 보완했다.
+- 재현 실패와 후속 로컬 검사는 [검증 보고서](../../verification/accessibility/2026-10-31-blog-journal-implementation.md#최종-리뷰의-추가-경계-조건)에 연결한다. 새 bytes는 추가 공개 검수를 거치며 최종 커밋·배포 결과는 [KAN-56](https://web-tech-service.atlassian.net/browse/KAN-56)에서 실제 SHA와 함께 관리한다.

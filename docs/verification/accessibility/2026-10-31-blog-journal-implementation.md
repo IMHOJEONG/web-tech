@@ -134,6 +134,16 @@ BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false BLOG_CONTENT_API_BASE_URL= \
 - 공용 UI build와 동시에 시작한 첫 typecheck는 갱신 중인 dist를 찾지 못해 실패했다. build 종료 후 단독 재실행은 통과했다. 이는 소스 타입 오류를 무시한 성공 판정이 아니다. 최종 CI는 별도 head에서 다시 확인한다.
 - 최종 소스에서 `pnpm --filter docs test:article:prod --reporter=list --output=/tmp/blog-journal-article-results`로 합성 콘텐츠 기반 production E2E 전체 162개를 실행해 모두 통과했다. 해당 명령은 전용 fixture 서버를 시작하고 앱을 다시 빌드한다. lint warnings 0과 단독 typecheck도 통과했으며 실제 NAS·Vercel 운영 결과와는 구분한다.
 
+### 최종 리뷰의 추가 경계 조건
+
+- `4320250`의 CI와 CodeRabbit check는 성공했지만 추가 미해결 스레드 5개가 생성되어 병합하지 않았다. check 성공과 리뷰 지적 해결을 구분한다.
+- 긴 fence 안에서 시작하는 검색 미리보기의 JSX 손실, 앞쪽 HTML/Markdown 링크의 보이지 않는 목적지가 뒤쪽 본문 매치를 가리는 문제, 허용된 영문 날짜가 카드에서 사라지는 문제를 회귀 테스트로 재현했다. 수정 전 12개 중 3개 실패, 수정 후 12개 모두 통과했다.
+- 검색은 각 32,768자 창을 정규화한 다음 보이는 텍스트에서 토큰을 찾고, 겹치는 창을 순차 탐색한다. fence 상태를 앞으로 전달해 코드 문맥을 유지한다. 전체 본문을 한 번에 HTML 정규화하거나 전체 소문자 복사하지 않는다. 여전히 검색 요약용이며 완전한 MDX 렌더러는 아니다.
+- 날짜는 기존 ISO 달력 날짜 검사를 유지하면서 `October 31, 2026`, `2026-10`, `2026` 같은 기존 로컬 입력도 표시한다. ISO date-only의 UTC와 prose의 로컬 달력 부분을 구분했다. UTC·Asia/Seoul·America/Los_Angeles에서 동일 회귀를 통과했다.
+- 이중 이미지 실패 테스트는 viewport 밖 카드도 eager로 요청하고, 모든 카드가 `unavailable`에 도달한 후에 기준 요청 수를 기록한다. 초기 preload·공유 backup 요청 수를 카드별 두 번으로 단정한 첫 보완은 실패해 제거했다. 원래의 기준 이후 추가 요청 없음·이미지 제거·넘침 없음·실제 상세 이동 검사는 유지한다.
+- 정제 JSON에서 사용자 폰트 선택 설명만 제거하고 측정값은 보존했다. 폰트 결정과 설치할 항목은 위 Figma 문단에 그대로 둔다.
+- 추가 수정의 라이브러리 전체 333개, 빌드·타입·lint가 통과했다. 기존 글 2개의 스타일 경고는 유지한다. 이미지 반복 검사 결과와 최종 공개 승인·원격 head·배포 결과는 KAN-56에 연결하며 운영 완료를 선기록하지 않는다.
+
 ## 원본 artifact 상대 링크
 
 - [정제 집계](../artifacts/2026-10-31-blog-journal-summary.json). raw 캡처·trace·전체 로그는 비공개 로컬 자료로 유지한다.

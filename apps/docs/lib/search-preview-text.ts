@@ -3,32 +3,6 @@ import { decodeHTML } from 'entities'
 
 export const SEARCH_PREVIEW_INPUT_LIMIT = 32_768
 
-function previewWindow(value: string, tokens: readonly string[]) {
-    if (value.length <= SEARCH_PREVIEW_INPUT_LIMIT) return value
-    let offset = 0
-    const overlap = Math.min(
-        SEARCH_PREVIEW_INPUT_LIMIT,
-        Math.max(0, ...tokens.map((token) => token.length))
-    )
-    for (
-        let start = 0;
-        tokens.length && start < value.length;
-        start += SEARCH_PREVIEW_INPUT_LIMIT
-    ) {
-        const chunk = value
-            .slice(start, start + SEARCH_PREVIEW_INPUT_LIMIT + overlap)
-            .toLowerCase()
-        const matches = tokens
-            .map((token) => chunk.indexOf(token))
-            .filter((index) => index >= 0)
-        if (matches.length) {
-            offset = Math.max(0, start + Math.min(...matches) - 512)
-            break
-        }
-    }
-    return value.slice(offset, offset + SEARCH_PREVIEW_INPUT_LIMIT)
-}
-
 function escapeCode(value: string) {
     return value
         .replaceAll('&', '&amp;')
@@ -36,12 +10,8 @@ function escapeCode(value: string) {
         .replaceAll('>', '&gt;')
 }
 
-// Preview text only: never render Markdown or execute MDX in a result list.
-export function getSearchPreviewText(
-    value: string,
-    tokens: readonly string[] = []
-) {
-    const input = previewWindow(value, tokens)
+function normalizePreviewWindow(value: string) {
+    const input = value
         .replace(
             /(^|\n) {0,3}(`{3,}|~{3,})[^\n]*\n([\s\S]*?)(?:\n {0,3}\2[\t ]*(?=\n|$)|$)/g,
             (_match, boundary: string, _fence: string, body: string) =>
@@ -66,4 +36,44 @@ export function getSearchPreviewText(
         .replace(/(^|\s)_([^_\n]{1,512})_(?=\W|$)/g, '$1$2')
         .replace(/\s+/g, ' ')
         .trim()
+}
+
+// Normalize bounded windows before matching: attributes are not visible text.
+// Carry fence state forward so windows cut inside code still escape JSX.
+export function getSearchPreviewText(
+    value: string,
+    tokens: readonly string[] = []
+) {
+    const fences = value.matchAll(/^ {0,3}(`{3,}|~{3,})/gm)
+    const closingSuffix = /[\t ]*(?:\r?\n|$)/y
+    let nextFence = fences.next()
+    let openFence = ''
+    let fallback = ''
+    const step = SEARCH_PREVIEW_INPUT_LIMIT - 1024
+
+    for (let start = 0; start < value.length; start += step) {
+        while (!nextFence.done && nextFence.value.index < start) {
+            const marker = nextFence.value[1]!
+            closingSuffix.lastIndex =
+                nextFence.value.index + nextFence.value[0].length
+            if (!openFence) openFence = marker
+            else if (
+                marker[0] === openFence[0] &&
+                marker.length >= openFence.length &&
+                closingSuffix.test(value)
+            ) {
+                openFence = ''
+            }
+            nextFence = fences.next()
+        }
+        const window = value.slice(start, start + SEARCH_PREVIEW_INPUT_LIMIT)
+        const text = normalizePreviewWindow(
+            openFence ? `${openFence}\n${window}` : window
+        )
+        if (start === 0) fallback = text
+        if (!tokens.length) return text
+        const lowerText = text.toLowerCase()
+        if (tokens.some((token) => lowerText.includes(token))) return text
+    }
+    return fallback
 }
