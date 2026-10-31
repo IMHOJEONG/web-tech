@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-31",
+  "timezone": "Asia/Seoul",
+  "evidenceType": "manually-sanitized-summary",
+  "report": "../accessibility/2026-10-31-blog-journal-implementation.md",
+  "baseCommit": "7b40457d7bceab051196a0fdd658a4b792b41340",
+  "initialPrHead": "83b96bc50276bf15c71e3e57470e3aae29de5b41",
+  "pullRequest": "https://github.com/IMHOJEONG/web-tech/pull/80",
+  "followupScope": "동일 브랜치의 리뷰 보완 작업 트리. 후속 결과를 initialPrHead의 결과로 표시하지 않음.",
+  "containsRawCaptures": false,
+  "containsRequestBodiesOrHeaders": false,
+  "containsOperationalCredentials": false,
+  "environment": {
+    "node": "24.22.1",
+    "pnpm": "12.14.0",
+    "next": "16.4.3",
+    "browser": "Playwright Chromium",
+    "content": "local published documents and deterministic loopback fixtures, never NAS credentials"
+  },
+  "checks": {
+    "initialLibrary": { "passed": 327 },
+    "initialProductionBuild": {
+      "exitCode": 0,
+      "staticPages": 33,
+      "existingStyleWarnings": 2
+    },
+    "localProductionSmoke": {
+      "routes": 10,
+      "widths": [390, 1440],
+      "http200": 20,
+      "pageErrors": 0,
+      "overflowPixels": 0,
+      "captureScripts": 0
+    },
+    "landingObservation": {
+      "requests": 12,
+      "widths": [320, 390, 1440],
+      "locales": ["ko", "en"],
+      "themes": ["light", "dark"],
+      "http200": 12,
+      "overflowPixels": 0
+    },
+    "initialPrCi": {
+      "outcome": "failed",
+      "suites": ["offline", "responsive", "article-production"]
+    },
+    "offlineBefore": {
+      "passed": 41,
+      "failed": 3,
+      "reasons": [
+        "text-only Feed has no failed image state",
+        "URL can commit before body readiness"
+      ]
+    },
+    "offlineAfter": { "passed": 44, "failed": 0 },
+    "shellAndFrozenSkeletons": {
+      "passed": 87,
+      "failed": 0,
+      "locales": ["ko", "en"],
+      "themes": ["light", "dark"]
+    },
+    "englishMobilePrefetchBefore": {
+      "failed": 1,
+      "timeoutMs": 30000,
+      "reason": "related link below viewport, so normal Link prefetch had not started"
+    },
+    "prefetchAfter": {
+      "passed": 12,
+      "failed": 0,
+      "locales": ["ko", "en"],
+      "profiles": ["mobile", "desktop"],
+      "methods": ["menu-link", "prefetched-link", "document-replacement"]
+    },
+    "reviewedProductionArticles": {
+      "passed": 162,
+      "failed": 0,
+      "fixtureContentOnly": true
+    },
+    "reviewedLibrary": { "passed": 331, "failed": 0 },
+    "reviewedUi": { "passed": 39, "failed": 0, "conditionalSkips": 3 },
+    "english640Header": {
+      "navigationWidth": 359.625,
+      "availableTrackWidth": 374.25,
+      "navigationRight": 504.6875,
+      "controlsLeft": 524,
+      "overlap": false
+    },
+    "typecheck": {
+      "concurrentUiBuildAttempt": "failed: dist was being regenerated",
+      "serialRerun": "passed"
+    }
+  },
+  "layoutSamples": {
+    "feedFirstRecentCardTop": { "desktop1440": 434, "mobile390": 562 },
+    "homeFirstCardTop": {
+      "koDesktop1440": 434,
+      "koMobile390": 396,
+      "enDesktop1440": 434,
+      "enMobile390": 461
+    },
+    "articleParagraphWidth": { "desktop1440": 784, "mobile390": 334 },
+    "meaning": "첫 카드 컨테이너/문단의 geometry 표본. 이전 운영과 동일 조건 A/B, LCP, CLS 또는 고객 만족도 결과가 아님."
+  },
+  "figma": {
+    "url": "https://www.figma.com/design/TZNgMFGeYfNpVCtAgdnDMr",
+    "desktopKoViews": 8,
+    "width": 1512,
+    "textCountsByView": [44, 65, 237, 69, 25, 28, 36, 143],
+    "contentImageSizes": [
+      [160, 112],
+      [160, 112],
+      [136, 88]
+    ],
+    "flattenedFullPageImages": 0
+  },
+  "limitations": [
+    "묶음 간 중복 회귀가 있으므로 고유 테스트 수로 합산하지 않음.",
+    "과거 운영 조사 원시 probe는 공개하지 않았으며 fresh checkout에서 그 과거 관측을 그대로 재현할 수 있다고 주장하지 않음.",
+    "실기기 Safari·스크린리더·독자 과제·모든 Figma 상태는 미검증.",
+    "이 집계는 Vercel 운영 배포의 완료 증거가 아니며 최종 CI·배포 SHA는 KAN-56에서 연결."
+  ]
+}

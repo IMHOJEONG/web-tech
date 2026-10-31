@@ -31,14 +31,32 @@ test('an image failure uses a local backup without breaking the document card', 
 
 test('even a failed backup leaves a usable card and does not retry forever', async ({
     page,
-}) => {
+}, info) => {
     let requests = 0
     await page.route('**/*', (route) => {
         if (route.request().resourceType() !== 'image') return route.continue()
         requests++
         return route.abort('failed')
     })
-    await page.goto('/ko/feed')
+    // Text-only Feed rows omit thumbnails; Web exercises real image failures.
+    await page.goto('/ko/web')
+    const thumbnails = page.locator('[data-thumbnail-state]')
+    await expect(thumbnails.first()).toBeAttached()
+    const thumbnailCount = await thumbnails.count()
+    // Include offscreen cards in the failure cycle before measuring retries.
+    await thumbnails.locator('img').evaluateAll((images) => {
+        for (const image of images)
+            (image as HTMLImageElement).loading = 'eager'
+    })
+    await expect(
+        page.locator(
+            '[data-thumbnail-state]:not([data-thumbnail-state="unavailable"])'
+        )
+    ).toHaveCount(0)
+    await expect(
+        page.locator('[data-thumbnail-state="unavailable"]')
+    ).toHaveCount(thumbnailCount)
+    expect(requests).toBeGreaterThan(0)
     await expect(
         page.locator('[data-thumbnail-state="unavailable"]').first()
     ).toBeVisible()
@@ -53,4 +71,9 @@ test('even a failed backup leaves a usable card and does not retry forever', asy
             () => document.documentElement.scrollWidth <= innerWidth
         )
     ).toBe(true)
+    const card = page
+        .locator('[data-thumbnail-state="unavailable"]')
+        .first()
+        .locator('xpath=ancestor::a[1]')
+    await openArticleFromCard(page, card, info)
 })

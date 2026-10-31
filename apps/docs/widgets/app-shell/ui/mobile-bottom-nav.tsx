@@ -35,7 +35,8 @@ function ActiveMobileNav() {
 }
 
 function MobileNavItems({ pathname = '' }: { pathname?: string }) {
-    const activeKey = getActiveNavigationKey(pathname)
+    const activeKey =
+        pathname === '/docs' ? undefined : getActiveNavigationKey(pathname)
     const value = useLocale()
     const locale = isLocale(value) ? value : defaultLocale
     const t = useTranslations('navigation')
@@ -58,15 +59,19 @@ function MobileNavItems({ pathname = '' }: { pathname?: string }) {
                             aria-current={isActive ? 'page' : undefined}
                             aria-label={t(item.key)}
                             className={cn(
-                                'ds-focus-ring flex min-h-12 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-surface-container-low hover:text-on-surface',
+                                'ds-focus-ring flex min-h-12 flex-col items-center justify-center gap-1 rounded-md text-muted-foreground transition-colors hover:bg-surface-container-low hover:text-on-surface',
                                 isActive &&
-                                    'bg-primary/10 text-(--docs-interactive-text) shadow-glow-primary'
+                                    'bg-primary/10 text-(--docs-interactive-text)'
                             )}
                         >
                             <Icon
+                                aria-hidden="true"
                                 className="size-[1.05rem]"
                                 strokeWidth={1.8}
                             />
+                            <span className="text-[0.6875rem] leading-none">
+                                {t(item.key)}
+                            </span>
                         </Link>
                     )
                 })}

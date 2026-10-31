@@ -1,59 +1,37 @@
-import { getLocale, getTranslations } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import { Link } from '~/shared/i18n/navigation'
+import { journalEyebrow } from '~/shared/ui/journal-layout'
 
 export async function LandingHero() {
-    const locale = await getLocale()
     const t = await getTranslations('rootLanding')
-    const isKorean = locale.startsWith('ko')
 
     return (
-        <section className="border-b border-outline-variant/70">
-            <div className="mx-auto w-full max-w-page px-4 py-12 sm:px-6 sm:py-16 md:px-8 lg:py-20">
-                <div className="max-w-5xl space-y-7">
-                    <div className="inline-flex items-center gap-3 text-sm font-semibold tracking-[0.2em] text-primary uppercase">
-                        <span className="inline-block size-2 rounded-full bg-primary" />
-                        <span>{t('hero.eyebrow')}</span>
-                    </div>
-
-                    <div className="space-y-3">
-                        <h1
-                            lang={isKorean ? 'ko' : undefined}
-                            className={`max-w-5xl text-5xl font-semibold text-on-surface sm:text-6xl lg:text-7xl ${
-                                isKorean
-                                    ? 'break-keep leading-[1.02] tracking-[-0.03em]'
-                                    : 'leading-[0.92] tracking-tighter'
-                            }`}
-                        >
-                            <span className="block">
-                                {t('hero.titleLineOne')}
-                            </span>
-                            <span className="block text-primary">
-                                {t('hero.titleLineTwo')}
-                            </span>
-                            <span className="block">
-                                {t('hero.titleLineThree')}
-                            </span>
-                        </h1>
-
-                        <p
-                            lang={isKorean ? 'ko' : undefined}
-                            className={`max-w-3xl text-base leading-8 text-on-surface-variant sm:text-lg ${
-                                isKorean ? 'break-keep' : ''
-                            }`}
-                        >
-                            {t('hero.description')}
-                        </p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-3 pt-2">
-                        <Link href="/feed" className="ds-button-primary">
-                            {t('hero.primaryCta')}
-                        </Link>
-                        <Link href="/about" className="ds-outline-button">
-                            {t('hero.secondaryCta')}
-                        </Link>
-                    </div>
-                </div>
+        <section
+            data-testid="landing-introduction"
+            className="space-y-5 border-b border-border pb-8"
+        >
+            <p className={journalEyebrow}>{t('hero.eyebrow')}</p>
+            <div className="max-w-3xl space-y-3">
+                <h1 className="font-display break-keep text-3xl font-bold leading-tight tracking-tight text-on-surface [overflow-wrap:anywhere] sm:text-4xl lg:text-5xl">
+                    {t('hero.title')}
+                </h1>
+                <p className="max-w-2xl break-keep text-sm leading-7 text-on-surface-variant sm:text-base">
+                    {t('hero.description')}
+                </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+                <Link
+                    href="/docs"
+                    className="ds-button-primary ds-focus-ring min-h-11 px-5 py-2.5 text-sm"
+                >
+                    {t('hero.primaryCta')}
+                </Link>
+                <Link
+                    href="/about"
+                    className="ds-focus-ring inline-flex min-h-11 items-center rounded-sm px-2 text-sm text-on-surface-variant underline underline-offset-4 hover:text-[var(--docs-interactive-text)]"
+                >
+                    {t('hero.secondaryCta')}
+                </Link>
             </div>
         </section>
     )

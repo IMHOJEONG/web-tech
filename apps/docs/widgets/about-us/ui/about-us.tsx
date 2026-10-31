@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server'
 import { MainContent } from '~/shared/ui/main-content'
 import { AboutAuthor } from './about-author'
 import { PushSubscriptionPanel } from '~/feature/web-push/ui/push-subscription-panel'
+import { journalPageLayout } from '~/shared/ui/journal-layout'
 
 function PillBadge({
     label,
@@ -55,10 +56,9 @@ export async function AboutUs() {
     ]
 
     return (
-        <MainContent className="docs-shell px-4 py-8 text-on-surface sm:px-6 sm:py-10 lg:px-8">
+        <MainContent className={`${journalPageLayout} text-on-surface`}>
             <div className="space-y-7">
-                <section className="ds-panel relative overflow-hidden p-5 sm:p-6 lg:p-7">
-                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,107,31,0.12),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(34,211,238,0.1),transparent_34%)]" />
+                <section className="border-b border-border pb-8">
                     <div className="relative grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.38fr)] lg:items-end">
                         <div className="max-w-4xl space-y-4">
                             <p className="font-display text-xs font-semibold tracking-wide text-on-surface-variant">
@@ -66,7 +66,7 @@ export async function AboutUs() {
                             </p>
 
                             <div className="space-y-3">
-                                <h1 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-on-surface sm:text-4xl lg:text-[2.7rem]">
+                                <h1 className="font-display text-2xl font-bold leading-tight tracking-tight text-on-surface sm:text-4xl">
                                     {t('hero.titleLead')}{' '}
                                     <span className="text-primary">
                                         {t('hero.titleAccentOne')}
@@ -81,7 +81,7 @@ export async function AboutUs() {
                             </div>
                         </div>
 
-                        <aside className="rounded-3xl border border-border bg-surface-container-lowest/85 p-4 backdrop-blur">
+                        <aside className="border-l-2 border-border pl-5">
                             <p className="font-display text-xs font-semibold tracking-[0.16em] text-outline uppercase">
                                 {t('hero.asideTitle')}
                             </p>
@@ -92,11 +92,11 @@ export async function AboutUs() {
                     </div>
                 </section>
 
-                <section className="grid gap-3 lg:grid-cols-3">
+                <section className="grid gap-6 lg:grid-cols-3">
                     {pillarCards.map((card, index) => (
                         <article
                             key={card.title}
-                            className="rounded-3xl border border-border bg-surface-container-lowest p-4 transition hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-deep"
+                            className="border-t border-border py-5"
                         >
                             <div className="flex items-center justify-between gap-3">
                                 <PillBadge

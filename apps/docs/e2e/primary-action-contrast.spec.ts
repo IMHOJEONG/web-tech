@@ -20,7 +20,7 @@ for (const theme of ['light', 'dark']) {
         await page.evaluate(() => document.fonts.ready)
         const action = page.locator('main a.ds-button-primary').first()
         await expect(action).toHaveAccessibleName(/.+/)
-        await expect(action).toHaveAttribute('href', '/ko/feed')
+        await expect(action).toHaveAttribute('href', '/ko/docs')
         const normal = await solidContrast(action)
         expect(normal.ratio).toBeGreaterThanOrEqual(4.5)
         await action.hover()
@@ -78,7 +78,7 @@ for (const theme of ['light', 'dark']) {
             contentType: 'image/png',
         })
         await page.keyboard.press('Enter')
-        await expect(page).toHaveURL(/\/ko\/feed$/)
+        await expect(page).toHaveURL(/\/ko\/docs$/)
         await expect(page.locator('main')).toBeVisible()
     })
 }

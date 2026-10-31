@@ -22,7 +22,7 @@ export default async function Footer() {
 
     return (
         <footer className="relative z-20 w-full border-t border-header-border bg-surface-container-low px-4 pt-8 pb-24 sm:px-6 sm:pb-10 lg:px-8 lg:py-10">
-            <div className="mx-auto flex max-w-page flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="mx-auto flex max-w-6xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                     <div className="font-display text-lg font-bold leading-7 tracking-[0.1em] text-on-surface uppercase">
                         {commonT('brand')}

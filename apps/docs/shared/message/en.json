@@ -104,6 +104,18 @@
         "label": "Featured article",
         "readingTime": "{count} min read"
     },
+    "feedDiscovery": {
+        "title": "Browse by topic",
+        "browse": "Browse all articles",
+        "topics": {
+            "web": { "title": "Web", "description": "Browsers · React" },
+            "backend": { "title": "Backend", "description": "Node.js · HTTP" },
+            "uiux": {
+                "title": "UI/UX",
+                "description": "Accessibility · Interaction"
+            }
+        }
+    },
     "metadata": {
         "site": {
             "title": "HeapForge - Where memory meets mastery.",
@@ -163,6 +175,7 @@
         }
     },
     "navigation": {
+        "docs": "All articles",
         "primaryAriaLabel": "Primary navigation",
         "mobileAriaLabel": "Mobile primary navigation",
         "feed": "Feed",
@@ -313,42 +326,32 @@
     },
     "rootLanding": {
         "hero": {
-            "eyebrow": "SYSTEM ENGINEERING & DESIGN",
-            "titleLineOne": "Forging technical",
-            "titleLineTwo": "systems with",
-            "titleLineThree": "precision",
-            "description": "At the point where software craftsmanship meets systems thinking, this landing page distills web engineering and interface structure into a slower, more readable editorial flow.",
-            "primaryCta": "Browse the feed",
-            "secondaryCta": "Read about the project"
+            "eyebrow": "ENGINEERING NOTES",
+            "title": "Notes from building software",
+            "description": "Problems solved and behavior explored while building for the web and running servers.",
+            "primaryCta": "Browse all articles",
+            "secondaryCta": "About this blog"
         },
         "foundations": {
-            "eyebrow": "THEMATIC FOUNDATIONS",
-            "title": "Core exploration areas",
-            "countLabel": "04 AREAS",
+            "title": "Browse by topic",
             "items": {
                 "web": {
-                    "title": "Scalable Systems",
-                    "description": "Browser rendering, component structure, and performance bottlenecks documented in real code context."
+                    "title": "Web",
+                    "description": "Browsers, React and rendering performance."
                 },
-                "product": {
-                    "title": "Product Logic",
-                    "description": "Curated writing that connects technical constraints with user-facing product thinking."
+                "backend": {
+                    "title": "Backend",
+                    "description": "Node.js, HTTP and server operations."
                 },
                 "interface": {
-                    "title": "Interface DNA",
-                    "description": "Information hierarchy, typography, and interaction patterns examined through a UI/UX systems lens."
-                },
-                "mobile": {
-                    "title": "Mobile Runtime",
-                    "description": "A closer look at mobile constraints, touch-first interaction, and platform-specific runtime behavior."
+                    "title": "UI/UX",
+                    "description": "Accessibility and usable interfaces."
                 }
             }
         },
         "latestNotes": {
-            "eyebrow": "LATEST NOTES",
-            "title": "Recently refined articles",
-            "viewAll": "OPEN FEED",
-            "open": "OPEN",
+            "title": "Recent articles",
+            "viewAll": "More in the feed",
             "unavailableTitle": "Recent notes are temporarily unavailable",
             "unavailableDescription": "You can keep exploring the landing page for now, or jump into the feed and come back in a moment.",
             "sectionLabels": {

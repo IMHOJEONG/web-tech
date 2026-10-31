@@ -2,6 +2,7 @@ import { getDocChannel } from '~/lib/get-doc-channel'
 import { getDocHref } from '~/lib/get-doc-route'
 import type { Metadata } from '~/lib/get-document'
 import { getDocumentTaxonomy } from '~/lib/document-taxonomy'
+import { getDocumentCalendarDate } from '~/shared/lib/document-date'
 
 export type FeedFilter = 'all' | 'web' | 'mobile' | 'uiux'
 export type FeedArticle = {
@@ -12,6 +13,7 @@ export type FeedArticle = {
     thumbnail?: string | null
     authorName: string
     readMinutes: number
+    date?: string
 }
 
 export function normalizeFeedFilter(value?: string): FeedFilter {
@@ -71,6 +73,7 @@ export function getFeedArticles(
                 summary,
                 topic: getTopicLabel(doc),
                 thumbnail: doc.thumbnail,
+                date: getDocumentCalendarDate(doc.date),
                 authorName: doc.authorName?.trim() || 'coder',
                 readMinutes:
                     typeof doc.readMinutes === 'number' && doc.readMinutes > 0

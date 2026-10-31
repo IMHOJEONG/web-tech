@@ -5,6 +5,7 @@ import { DocumentPreviewCard } from '~/entities/document/ui/document-preview-car
 import { Link } from '~/shared/i18n/navigation'
 import type { FeedArticle, FeedFilter } from '../model/feed-document'
 import { FeedFilters } from './feed-filters'
+import { journalListLayout } from '~/shared/ui/journal-layout'
 
 type FeedRecentArticlesProps = {
     articles: FeedArticle[]
@@ -21,7 +22,7 @@ export function FeedRecentArticles({
         <section
             data-testid="feed-recent-articles"
             aria-labelledby="feed-recent-title"
-            className="motion-layout px-4 py-8 sm:px-6 md:px-8 lg:py-10"
+            className="motion-layout py-8"
         >
             <div className="mx-auto max-w-page space-y-6">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -39,7 +40,7 @@ export function FeedRecentArticles({
                     <FeedFilters activeFilter={activeFilter} />
                 </div>
                 {articles.length > 0 ? (
-                    <ul className="grid gap-4">
+                    <ul className={journalListLayout}>
                         {articles.map(({ readMinutes, ...article }, index) => (
                             <li
                                 key={article.href}
@@ -63,7 +64,7 @@ export function FeedRecentArticles({
                         {t('empty')}
                     </p>
                 )}
-                <div className="flex justify-center pt-2">
+                <div className="flex pt-2">
                     <Link
                         href={activeFilter === 'all' ? '/docs' : '/feed'}
                         className="ds-outline-button ds-focus-ring min-h-11 gap-3 px-5 py-2 text-sm"

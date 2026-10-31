@@ -104,6 +104,15 @@
         "label": "먼저 읽어볼 글",
         "readingTime": "{count}분 읽기"
     },
+    "feedDiscovery": {
+        "title": "주제로 찾아보기",
+        "browse": "모든 글 보기",
+        "topics": {
+            "web": { "title": "Web", "description": "브라우저 · React" },
+            "backend": { "title": "Backend", "description": "Node.js · HTTP" },
+            "uiux": { "title": "UI/UX", "description": "접근성 · 인터랙션" }
+        }
+    },
     "metadata": {
         "site": {
             "title": "HeapForge - 기술을 구조로 쌓아 올리는 아카이브",
@@ -163,6 +172,7 @@
         }
     },
     "navigation": {
+        "docs": "모든 글",
         "primaryAriaLabel": "주요 메뉴",
         "mobileAriaLabel": "모바일 주요 내비게이션",
         "feed": "Feed",
@@ -313,42 +323,32 @@
     },
     "rootLanding": {
         "hero": {
-            "eyebrow": "시스템 엔지니어링과 인터페이스 설계",
-            "titleLineOne": "기술과 경험을",
-            "titleLineTwo": "오래 쓰이는 구조로",
-            "titleLineThree": "다듬어 갑니다",
-            "description": "웹 엔지니어링, 제품 인터페이스, 시스템 설계를 한 흐름으로 정리합니다. 구현 과정에서 얻은 판단과 구조를 오래 읽을 수 있는 기록으로 남깁니다.",
-            "primaryCta": "피드 둘러보기",
-            "secondaryCta": "프로젝트 소개 보기"
+            "eyebrow": "개발 기록",
+            "title": "개발하며 배운 것들",
+            "description": "웹과 서버를 만들며 해결한 문제, 직접 확인한 동작을 정리합니다.",
+            "primaryCta": "모든 글 보기",
+            "secondaryCta": "블로그 소개"
         },
         "foundations": {
-            "eyebrow": "핵심 주제",
-            "title": "지금 살펴볼 주제",
-            "countLabel": "4개 주제",
+            "title": "주제로 찾아보기",
             "items": {
                 "web": {
-                    "title": "확장 가능한 웹 시스템",
-                    "description": "브라우저 렌더링, 컴포넌트 구조, 성능 병목을 실제 코드 흐름에 맞춰 정리합니다."
+                    "title": "Web",
+                    "description": "브라우저 동작, React와 화면 성능."
                 },
-                "product": {
-                    "title": "제품을 움직이는 로직",
-                    "description": "기술 제약과 사용자 경험 사이를 잇는 제품 관점의 글과 큐레이션을 모읍니다."
+                "backend": {
+                    "title": "Backend",
+                    "description": "Node.js, HTTP와 서버 운영."
                 },
                 "interface": {
-                    "title": "인터페이스 설계 원리",
-                    "description": "정보 계층, 타이포그래피, 상호작용 패턴을 UI/UX 시스템 관점에서 살펴봅니다."
-                },
-                "mobile": {
-                    "title": "모바일 실행 환경",
-                    "description": "모바일 제약, 터치 중심 상호작용, 플랫폼별 런타임 차이를 더 촘촘하게 살핍니다."
+                    "title": "UI/UX",
+                    "description": "접근성과 인터페이스의 사용성."
                 }
             }
         },
         "latestNotes": {
-            "eyebrow": "최근 글",
-            "title": "최근에 정리한 글",
-            "viewAll": "피드 전체 보기",
-            "open": "OPEN",
+            "title": "최근 글",
+            "viewAll": "피드에서 더 보기",
             "unavailableTitle": "최근 글을 지금은 불러오지 못했습니다",
             "unavailableDescription": "홈 화면은 계속 둘러볼 수 있습니다. 잠시 후 다시 시도하거나 피드에서 다른 문서를 먼저 살펴보세요.",
             "sectionLabels": {
@@ -735,7 +735,7 @@
             }
         },
         "sidebar": {
-            "tocTitle": "TABLE OF CONTENTS",
+            "tocTitle": "이 글의 목차",
             "joinTitle": "JOIN THE SYSTEM"
         },
         "readingNavigation": {

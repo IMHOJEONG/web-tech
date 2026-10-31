@@ -1,15 +1,12 @@
 import { SkeletonBlock } from '~/shared/ui/skeleton-block'
-import {
-    documentPreviewLayout,
-    documentPreviewThumbnailLayout,
-} from './document-preview-layout'
+import { documentPreviewLayout } from './document-preview-layout'
 
 export function DocumentPreviewSkeleton() {
     return (
         <div
             aria-hidden="true"
             data-skeleton-anchor="preview-card"
-            className={`ds-card ${documentPreviewLayout}`}
+            className={documentPreviewLayout}
         >
             <div className="min-w-0 space-y-4">
                 <div className="space-y-2">
@@ -22,7 +19,6 @@ export function DocumentPreviewSkeleton() {
                 </div>
                 <SkeletonBlock className="h-5 w-2/3" />
             </div>
-            <SkeletonBlock className={documentPreviewThumbnailLayout} />
         </div>
     )
 }

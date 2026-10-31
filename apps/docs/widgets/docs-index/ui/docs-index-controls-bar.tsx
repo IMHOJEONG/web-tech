@@ -26,7 +26,7 @@ export function DocsIndexControlsBar({
     return (
         <details
             data-testid="docs-index-filters"
-            className="group motion-layout max-w-full rounded-xl border border-border bg-surface-container-lowest p-3"
+            className="group motion-layout max-w-full border-b border-border pb-3"
         >
             <summary className="ds-focus-ring flex min-h-11 cursor-pointer list-none flex-wrap items-center justify-between gap-2 rounded-md [&::-webkit-details-marker]:hidden">
                 <span className="break-keep text-sm font-semibold text-on-surface [overflow-wrap:anywhere]">

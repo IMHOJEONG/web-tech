@@ -1,0 +1,39 @@
+# 글 중심 저널의 실제 앱 적용
+
+## Summary
+
+사용자의 실제 앱 적용 요청에 따라 조사 브랜치에서 UI를 구현했다. 기존 데이터·링크·검색·필터를 유지하면서 제목 중심 목록, 공통 조판, 읽기 보조를 적용했다. 운영 배포·커밋·푸시는 하지 않았다.
+
+## Changed
+
+- 공통 표시: `JournalPageHeader`, journal layout, `DocumentMetaText`. 도메인 데이터 조회와 번역은 호출 화면에 둔다.
+- 문서 미리보기: 단일 링크·키보드 이동 유지, 기본 썸네일 생략, 실제 이미지만 작은 보조 크기로 표시, 날짜·제목·요약 위계 정리.
+- Feed: 추천·최근 목록 밀도 조정, 실제 Backend 문서 목록으로 연결하는 주제 탐색 추가.
+- Docs: 결과 행, 중복 분류·OPEN 표시 축소, 미리보기 텍스트 정리 후 하이라이트. 원문·MDX 렌더러·API 인증 계약은 유지.
+- Web/Mobile/UI/UX: 제목·목록·바깥 간격 정렬, 빈 주제에 모든 글 이동 제공. About의 큰 패널·그라디언트·비동작 카드 hover 축소.
+- 공용 셸: 모든 글 메뉴 진입, 모바일 하단 아이콘의 텍스트 라벨, 헤더/푸터 폭 정렬. 기존 목적지와 모바일 바는 유지.
+- 상세: 읽기 폭·제목 크기 조정, 제목 아래 접이식 모바일 TOC, desktop TOC 유지. 기존 항목 모델·ID·스크롤 offset과 reduced-motion 정책 재사용.
+- 로딩: 변경된 화면과 같은 공용 레이아웃으로 스켈레톤 보완. 기존 [ADR-0005](../../architecture/adr-0005-document-preview-card-boundary.md)의 화면 목적별 재사용 경계를 유지하며 새 공용 패키지 API나 별도 렌더링 아키텍처를 만들지 않았다.
+
+## Notes
+
+- [KAN-56](https://web-tech-service.atlassian.net/browse/KAN-56)을 같은 작업으로 이어서 관리한다. Jira 제목은 조사/실제 앱 적용 범위에 맞게 갱신했다.
+- 결과와 실제 명령은 [검증 보고서](../../verification/accessibility/2026-10-31-blog-journal-implementation.md)에 둔다. 원시 캡처·전체 로그는 저장소 밖에 유지한다.
+- Node 24에서 앱 타입·린트, 라이브러리 327개, 브라우저 회귀 38개/80개/34개가 통과했다. 각 묶음은 일부 중복 재검증이며 고유 테스트 수로 더하지 않는다. 최종 검색 수정 후 원격 계약 포함 18개 회귀와 lint도 재검사했다.
+- 공개 검수 승인 기록을 임의 생성하지 않는다. 로컬 서버는 별도 작업 공간의 loopback 3031에서 실행 중이다.
+- 원본 checkout의 branch/HEAD/stash가 그대로이고 기존 변경 4개의 bytes가 동일함을 재확인했다. 변경 파일 포맷과 문서 구조 검사도 통과했다. 공개 검수 manifest·인덱스는 변경하지 않았다.
+
+## Open Questions
+
+- 실제 독자의 탐색/독서 과제와 Safari·실기기 검증이 필요하다.
+- 기존 Confluence 안내의 collaborative draft 저장은 구현 단계에서도 `snapshot_stale`로 거절됐다. 다른 미게시 내용을 공개하거나 덮어쓰지 않았고 구현 요약도 기록 대기로 남겼다.
+
+## Next
+
+로컬 화면을 사용자와 확인한 뒤 필요하면 간격·밀도를 조정한다. 커밋·공개 Git 업로드·PR·배포는 별도 요청과 공개 검수 후 진행한다.
+
+## 후속 승인·리뷰 경과
+
+- 사용자가 70개 최초 파일과 26개 후속 파일을 순차 승인했다. 별도 6개 커밋의 최종 head `4320250`을 [PR #80](https://github.com/IMHOJEONG/web-tech/pull/80)에 푸시했다. 기존 checkout의 초안·stash·NAS 작업은 유지했다.
+- CI·프리뷰·CodeRabbit check 성공 뒤 추가 스레드 5개가 나와 병합을 보류했다. 긴 검색 미리보기의 코드·가시 텍스트 선택, 허용된 날짜 호환성, 이미지 실패 테스트의 전체 카드 완료 대기, artifact 역할 분리를 보완했다.
+- 재현 실패와 후속 로컬 검사는 [검증 보고서](../../verification/accessibility/2026-10-31-blog-journal-implementation.md#최종-리뷰의-추가-경계-조건)에 연결한다. 새 bytes는 추가 공개 검수를 거치며 최종 커밋·배포 결과는 [KAN-56](https://web-tech-service.atlassian.net/browse/KAN-56)에서 실제 SHA와 함께 관리한다.

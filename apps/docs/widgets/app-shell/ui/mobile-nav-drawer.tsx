@@ -174,8 +174,16 @@ function MobileNavDrawerContent({ pathname }: { pathname: string }) {
 
                 <div className="flex flex-1 flex-col overflow-y-auto">
                     <nav aria-label={navT('primaryAriaLabel')} className="py-4">
+                        <DrawerLink
+                            href="/docs"
+                            label={navT('docs')}
+                            icon={BookOpenText}
+                            isActive={pathname === '/docs'}
+                            onNavigate={() => setOpen(false)}
+                        />
                         {drawerLinks.map((item) => {
-                            const isActive = activeKey === item.key
+                            const isActive =
+                                pathname !== '/docs' && activeKey === item.key
 
                             return (
                                 <DrawerLink

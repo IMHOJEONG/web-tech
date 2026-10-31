@@ -5,6 +5,8 @@ import { MouseEvent, useCallback, useState } from 'react'
 import type { HeadingDepth, HeadingParent, TocItem } from 'remark-flexible-toc'
 
 import styles from './toc.module.css'
+import { ChevronDown } from 'lucide-react'
+import { filterTocItems } from '../model/toc-items'
 
 // toc - an array of table of contents items provided by the remark plugin "remark-flexible-toc"
 // maxDepth (default: 6) — max heading depth to include in the table of contents; this is inclusive: when set to 3, level three headings are included
@@ -24,6 +26,8 @@ type Props = {
     exclude?: string | string[]
     skipLevels?: HeadingDepth[]
     skipParents?: Exclude<HeadingParent, 'root'>[]
+    defaultOpen?: boolean
+    closeOnNavigate?: boolean
 }
 
 const Toc = ({
@@ -36,11 +40,20 @@ const Toc = ({
     exclude,
     skipLevels = [1],
     skipParents = [],
+    defaultOpen = true,
+    closeOnNavigate = false,
 }: Props) => {
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(defaultOpen)
     const handleAnchorClick = useCallback(
         (event: MouseEvent<HTMLAnchorElement>, href: string) => {
-            if (!href.startsWith('#')) {
+            if (
+                !href.startsWith('#') ||
+                event.metaKey ||
+                event.ctrlKey ||
+                event.shiftKey ||
+                event.altKey ||
+                event.button !== 0
+            ) {
                 return
             }
 
@@ -53,61 +66,72 @@ const Toc = ({
 
             event.preventDefault()
 
-            window.history.replaceState(null, '', href)
+            window.history.replaceState(window.history.state, '', href)
 
             const prefersReducedMotion = window.matchMedia(
                 '(prefers-reduced-motion: reduce)'
             ).matches
 
-            target.scrollIntoView({
-                behavior: prefersReducedMotion ? 'auto' : 'smooth',
-                block: 'start',
-            })
+            const scrollToHeading = () => {
+                target.scrollIntoView({
+                    behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                    block: 'start',
+                })
+                if (closeOnNavigate) {
+                    const addedTabIndex = !target.hasAttribute('tabindex')
+                    if (addedTabIndex) target.tabIndex = -1
+                    target.classList.add('toc-focus-target')
+                    target.addEventListener(
+                        'blur',
+                        () => {
+                            if (addedTabIndex)
+                                target.removeAttribute('tabindex')
+                            target.classList.remove('toc-focus-target')
+                        },
+                        { once: true }
+                    )
+                    target.focus({ preventScroll: true })
+                }
+            }
+
+            if (closeOnNavigate) {
+                setIsOpen(false)
+                requestAnimationFrame(scrollToHeading)
+            } else {
+                scrollToHeading()
+            }
 
             event.currentTarget.blur()
         },
-        []
+        [closeOnNavigate]
     )
 
     if (!toc) return null
 
-    // ********* filters **************
-    const exludeRegexFilter = exclude
-        ? Array.isArray(exclude)
-            ? new RegExp(exclude.join('|'), 'i')
-            : new RegExp(exclude, 'i')
-        : new RegExp('(?!.*)')
-
-    const skipLevelsFilter = (depth: TocItem['depth']): boolean =>
-        skipLevels.includes(depth)
-
-    const skipParentsFilter = (parent: TocItem['parent']): boolean =>
-        parent !== 'root' && skipParents.includes(parent)
-
-    const maxDepthFilter = (depth: TocItem['depth']): boolean =>
-        depth > maxDepth
-    // ********************************
-
-    const filteredToc = toc.filter(
-        (heading) =>
-            !maxDepthFilter(heading.depth) &&
-            !skipLevelsFilter(heading.depth) &&
-            !skipParentsFilter(heading.parent) &&
-            !exludeRegexFilter.test(heading.value)
-    )
+    const filteredToc = filterTocItems(toc, {
+        maxDepth,
+        exclude,
+        skipLevels,
+        skipParents,
+    })
+    if (filteredToc.length === 0) return null
     return (
         <details
             className={clsx(styles['toc-container'], !isOpen && styles.close)}
             open={isOpen}
         >
             <summary
-                className={styles['toc-title']}
+                className={`${styles['toc-title']} ds-focus-ring flex min-h-11 items-center justify-between gap-3 rounded-sm`}
                 onClick={(event) => {
                     event.preventDefault()
                     setIsOpen((current) => !current)
                 }}
             >
                 <strong>{title}</strong>
+                <ChevronDown
+                    aria-hidden="true"
+                    className={clsx('size-4 shrink-0', isOpen && 'rotate-180')}
+                />
             </summary>
             <ul className={styles['toc-list']}>
                 {filteredToc.map((heading) => (

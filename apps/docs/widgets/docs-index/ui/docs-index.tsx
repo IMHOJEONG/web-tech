@@ -27,6 +27,10 @@ import { DocsIndexStats } from './docs-index-stats'
 import { getMotionOrderStyle } from './docs-index-motion'
 import { ContentTagFilters } from './content-tag-filters'
 import { ContentCollectionNavigation } from './content-collection-navigation'
+import {
+    journalPageLayout,
+    journalListLayout,
+} from '~/shared/ui/journal-layout'
 
 type DocsIndexProps = {
     docs: SearchData[]
@@ -65,7 +69,7 @@ export async function DocsIndex({
           )
 
     return (
-        <MainContent className="docs-shell motion-layout px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+        <MainContent className={`${journalPageLayout} motion-layout`}>
             <div className="space-y-5">
                 <DocsSearchPanel
                     keyword={keyword}
@@ -124,7 +128,7 @@ export async function DocsIndex({
                             keyword={keyword}
                         />
                     ) : (
-                        <div className="motion-layout grid grid-cols-1 gap-3">
+                        <div className={`${journalListLayout} motion-layout`}>
                             {resultDocs.map((doc, index) => (
                                 <DocsIndexCard
                                     key={doc.id}

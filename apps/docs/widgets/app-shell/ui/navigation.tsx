@@ -8,7 +8,13 @@ import { APP_NAVIGATION, getActiveNavigationKey } from '../model/app-navigation'
 export const Navigation = () => {
     const pathname = usePathname()
     const activeKey = getActiveNavigationKey(pathname)
+    const isDocsIndex = pathname === '/docs'
     const t = useTranslations('navigation')
+    const items = [
+        APP_NAVIGATION[0],
+        { href: '/docs', key: 'docs' } as const,
+        ...APP_NAVIGATION.slice(1),
+    ]
 
     return (
         <nav
@@ -16,8 +22,11 @@ export const Navigation = () => {
             data-testid="desktop-navigation"
             className="hidden min-w-0 items-center gap-1 sm:flex lg:gap-2"
         >
-            {APP_NAVIGATION.map(({ href, key }) => {
-                const isActive = activeKey === key
+            {items.map(({ href, key }) => {
+                const isActive =
+                    key === 'docs'
+                        ? isDocsIndex
+                        : !isDocsIndex && activeKey === key
 
                 return (
                     <Link

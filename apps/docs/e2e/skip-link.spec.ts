@@ -55,7 +55,7 @@ for (const locale of ['ko', 'en']) {
             expect(mainTop).toBeGreaterThanOrEqual(headerBottom - 1)
             const firstControl = main
                 .locator(
-                    'a[href]:visible, button:visible, input:visible, [tabindex="0"]:visible'
+                    'a[href]:visible, button:visible, input:visible, summary:visible, [tabindex="0"]:visible'
                 )
                 .first()
             if (await firstControl.count()) {

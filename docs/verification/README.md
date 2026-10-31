@@ -1,5 +1,9 @@
 # 검증 보고서
 
+- [10-31 글 중심 저널 실제 앱 검증](accessibility/2026-10-31-blog-journal-implementation.md): 로컬 UI·검색·목차·로딩/목록 회귀, 운영 배포·실기기 검증과 구분.
+
+- [10-31 블로그 UI·탐색·읽기 점검](accessibility/2026-10-31-blog-ui-review.md): 운영 8개 URL·2개 뷰포트 관측과 검색·모바일 장문 점검. 실제 사용자·실기기·배포 SHA 대조는 미검증.
+
 - [10-29 전체 작업 트리 미커밋 정리](integration/2026-10-29-all-worktree-consolidation.md): 원본 사본·경로 한정 정리·18곳 clean과 회귀198개, 불완전 구현은 비공개 보존.
 
 - [10-25 PR #59 main·자동 배포](deployment/2026-10-25-pr59-main-autodeploy.md): 당시 승인된 병합·Railway·이미지 게시 관측과 보류 조건을 구분한 기록. 현재 재검증 아님.

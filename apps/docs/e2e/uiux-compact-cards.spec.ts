@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { expectEditorialPreview } from './helpers/document-preview'
 
 for (const locale of ['ko', 'en']) {
     for (const theme of ['light', 'dark']) {
@@ -42,15 +43,12 @@ for (const locale of ['ko', 'en']) {
                     'href',
                     new RegExp(`^/${locale}/docs/ui-ux/`)
                 )
-                await expect(card.locator('img')).toHaveCount(1)
+                await expectEditorialPreview(card)
                 await expect(card.locator('svg, button, a')).toHaveCount(0)
                 const heading = card.getByRole('heading', { level: 2 })
                 await expect(card).toHaveAccessibleName(
                     await heading.innerText()
                 )
-                const image = (await card.locator('img').boundingBox())!
-                expect(image.height).toBeLessThanOrEqual(192)
-                if (width >= 768) expect(image.width).toBeLessThanOrEqual(288)
                 const bounds = (await card.boundingBox())!
                 expect(bounds.x).toBeGreaterThanOrEqual(0)
                 expect(bounds.x + bounds.width).toBeLessThanOrEqual(width)
@@ -66,16 +64,17 @@ for (const locale of ['ko', 'en']) {
 
             const first = featured.getByRole('link').first()
             await first.scrollIntoViewIfNeeded()
-            await expect
-                .poll(() =>
-                    first
-                        .locator('img')
-                        .evaluate(
-                            (img: HTMLImageElement) =>
-                                img.complete && img.naturalWidth > 0
-                        )
-                )
-                .toBe(true)
+            if (await first.locator('img').count())
+                await expect
+                    .poll(() =>
+                        first
+                            .locator('img')
+                            .evaluate(
+                                (img: HTMLImageElement) =>
+                                    img.complete && img.naturalWidth > 0
+                            )
+                    )
+                    .toBe(true)
             await first.screenshot({
                 path: testInfo.outputPath('uiux-card.png'),
             })
