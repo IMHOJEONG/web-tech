@@ -1,13 +1,15 @@
 import { getTranslations } from 'next-intl/server'
 import { MainContent } from '~/shared/ui/main-content'
 import { getSortedPostsData, type Metadata } from '~/lib/get-document'
-import { getDocChannel } from '~/lib/get-doc-channel'
+import { getDocumentTaxonomy } from '~/lib/document-taxonomy'
+import { getSearchPreviewText } from '~/lib/search-preview-text'
 import { getDocHref, getDocRoutePath } from '~/lib/get-doc-route'
 import { LandingHero } from './landing-hero'
 import { LatestNotes } from './latest-notes'
 import { ThematicFoundations } from './thematic-foundations'
 import { Suspense } from 'react'
 import { LatestNotesPending } from './latest-notes-pending'
+import { journalPageLayout } from '~/shared/ui/journal-layout'
 
 type LandingDoc = Partial<Metadata> & {
     title: string
@@ -15,20 +17,13 @@ type LandingDoc = Partial<Metadata> & {
     summary: string
 }
 
-function stripMarkup(text: string) {
-    return text
-        .replace(/<[^>]+>/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim()
-}
-
 function getDocSummary(doc: Partial<Metadata>) {
     const summary = doc.summary?.trim()
     if (summary) {
-        return summary
+        return getSearchPreviewText(summary)
     }
 
-    const content = stripMarkup(doc.content ?? '')
+    const content = getSearchPreviewText(doc.content ?? '')
     if (content) {
         return content.slice(0, 150)
     }
@@ -49,24 +44,6 @@ function toLandingDoc(doc: Partial<Metadata>): LandingDoc | null {
         title,
         slug,
         summary: getDocSummary(doc),
-    }
-}
-
-function getSectionLabel(
-    doc: LandingDoc,
-    t: Awaited<ReturnType<typeof getTranslations>>
-) {
-    const channel = getDocChannel(doc)
-
-    switch (channel) {
-        case 'mobile':
-            return t('latestNotes.sectionLabels.mobile')
-        case 'uiux':
-            return t('latestNotes.sectionLabels.uiux')
-        case 'web':
-            return t('latestNotes.sectionLabels.web')
-        default:
-            return t('latestNotes.sectionLabels.systems')
     }
 }
 
@@ -92,14 +69,13 @@ async function LandingLatestNotes() {
         title: doc.title,
         summary: doc.summary,
         date: doc.date,
-        sectionLabel: getSectionLabel(doc, t),
+        sectionLabel:
+            doc.topicLabel?.trim() || getDocumentTaxonomy(doc).section,
     }))
     return (
         <LatestNotes
-            eyebrow={t('latestNotes.eyebrow')}
             title={t('latestNotes.title')}
             viewAllLabel={t('latestNotes.viewAll')}
-            openLabel={t('latestNotes.open')}
             items={latestItems}
             unavailableTitle={t('latestNotes.unavailableTitle')}
             unavailableDescription={t('latestNotes.unavailableDescription')}
@@ -111,43 +87,32 @@ export async function RootLandingPage() {
     const t = await getTranslations('rootLanding')
     const foundationItems = [
         {
-            area: 'AREA_01',
             title: t('foundations.items.web.title'),
             description: t('foundations.items.web.description'),
             href: '/web',
         },
         {
-            area: 'AREA_02',
-            title: t('foundations.items.product.title'),
-            description: t('foundations.items.product.description'),
-            href: '/feed',
+            title: t('foundations.items.backend.title'),
+            description: t('foundations.items.backend.description'),
+            href: '/docs?section=backend',
         },
         {
-            area: 'AREA_03',
             title: t('foundations.items.interface.title'),
             description: t('foundations.items.interface.description'),
             href: '/ui-ux',
         },
-        {
-            area: 'AREA_04',
-            title: t('foundations.items.mobile.title'),
-            description: t('foundations.items.mobile.description'),
-            href: '/mobile',
-        },
     ]
 
     return (
-        <MainContent>
+        <MainContent className={`${journalPageLayout} space-y-8 sm:space-y-10`}>
             <LandingHero />
-            <ThematicFoundations
-                eyebrow={t('foundations.eyebrow')}
-                title={t('foundations.title')}
-                countLabel={t('foundations.countLabel')}
-                items={foundationItems}
-            />
             <Suspense fallback={<LatestNotesPending />}>
                 <LandingLatestNotes />
             </Suspense>
+            <ThematicFoundations
+                title={t('foundations.title')}
+                items={foundationItems}
+            />
         </MainContent>
     )
 }
