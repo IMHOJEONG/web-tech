@@ -275,3 +275,32 @@ test('renderArticleContent renders mdx content and exposes toc data', async () =
     assert.match(markup, /Search Ranking/)
     assert.match(markup, /Weighted search improves discovery\./)
 })
+
+test('heading anchors match TOC for punctuation, inline markup and duplicate titles', async () => {
+    const rendered = await renderArticleContent(
+        {
+            contentFormat: 'mdx',
+            content: [
+                '# Repeated title',
+                '## Repeated title',
+                '#### 1/2 — 압축할 바이트 만들기',
+                '#### 2/2 — 복원 결과와 실행 버전 출력',
+                '## `inline` **markup**',
+                '## Repeated title',
+                '##### Level five',
+                '###### Level six',
+            ].join('\n\n'),
+        },
+        { codeHighlight: false }
+    )
+    assert.equal(rendered.mode, 'mdx')
+    const markup = renderToStaticMarkup(
+        createElement(Fragment, null, rendered.content)
+    )
+    const ids = rendered.toc!.map((heading) =>
+        decodeURIComponent(heading.href.slice(1))
+    )
+    assert.equal(ids.length, 7)
+    assert.equal(new Set(ids).size, ids.length)
+    for (const id of ids) assert.ok(markup.includes(`id="${id}"`), id)
+})

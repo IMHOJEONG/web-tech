@@ -9,6 +9,54 @@ type HeadingPosition = {
 }
 
 test.describe('docs article anchor navigation', () => {
+    test('Brotli numbered part links reach the matching headings on every viewport', async ({
+        page,
+    }) => {
+        await page.emulateMedia({ reducedMotion: 'reduce' })
+        await page.goto(
+            '/ko/docs/category/be/node-js/node-brotli-runtime-security'
+        )
+        const mobile = (page.viewportSize()?.width ?? 0) < 1024
+        const toc = mobile
+            ? page.getByTestId('article-mobile-toc').locator('details')
+            : page.locator('aside details').first()
+
+        for (const title of [
+            '1/2 — 압축할 바이트 만들기',
+            '2/2 — 복원 결과와 실행 버전 출력',
+        ]) {
+            const heading = page.getByRole('heading', {
+                name: title,
+                exact: true,
+            })
+            await expect(heading).toBeVisible()
+            if (mobile) await toc.locator('summary').click()
+            const link = toc.getByRole('link', { name: title, exact: true })
+            const href = await link.getAttribute('href')
+            const id = decodeURIComponent(href!.slice(1))
+            await expect(heading).toHaveAttribute('id', id)
+            await link.click()
+            await expect
+                .poll(() =>
+                    heading.evaluate((element) => {
+                        const top = element.getBoundingClientRect().top
+                        const bottom = document
+                            .querySelector('header')!
+                            .getBoundingClientRect().bottom
+                        return top >= bottom + 8 && top < innerHeight * 0.75
+                    })
+                )
+                .toBe(true)
+            expect(decodeURIComponent(new URL(page.url()).hash.slice(1))).toBe(
+                id
+            )
+            if (mobile) {
+                await expect(toc).not.toHaveAttribute('open')
+                await expect(heading).toBeFocused()
+            }
+        }
+    })
+
     test('desktop toc keeps the target heading below the sticky header', async ({
         page,
     }) => {
