@@ -30,6 +30,9 @@ for (const locale of ['ko', 'en']) {
             )
             const results = page.getByTestId('docs-index-results')
             await expect(results.locator('article').first()).toBeVisible()
+            for (const article of await results.locator('article').all()) {
+                await expect(article).toContainText('Backend')
+            }
             await expect(results.getByText(/^(OPEN|열기)$/)).toHaveCount(0)
             expect(
                 await page.evaluate(
@@ -81,4 +84,7 @@ test('mobile table of contents opens and reaches an unobscured heading', async (
         )
     }, href)
     expect(offset).toBeGreaterThanOrEqual(8)
+    const heading = page.locator(`[id="${decodeURIComponent(href.slice(1))}"]`)
+    await expect(heading).toBeFocused()
+    await expect(heading).toHaveCSS('outline-style', 'solid')
 })

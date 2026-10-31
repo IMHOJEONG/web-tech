@@ -890,3 +890,8 @@ html.dark .mdx-wrapper .shiki span {
     line-height: 1.6;
     text-align: center;
 }
+/* A mobile TOC destination remains visible to keyboard and screen-reader users. */
+.mdx-wrapper .toc-focus-target:focus {
+    outline: 2px solid var(--docs-interactive-text);
+    outline-offset: 0.25rem;
+}

@@ -95,7 +95,7 @@ export function highlightSearchText(value: string, keyword?: string) {
 
 export function buildSearchPreview(doc: SearchData, keyword?: string) {
     const tokens = tokenizeKeyword(keyword ?? '')
-    const summary = getSearchPreviewText(doc.summary ?? '')
+    const summary = getSearchPreviewText(doc.summary ?? '', tokens)
 
     if (!tokens.length) {
         return {
@@ -115,7 +115,9 @@ export function buildSearchPreview(doc: SearchData, keyword?: string) {
         ? findFirstMatchIndex(summary, tokens)
         : -1
     const content =
-        summaryMatchIndex === -1 ? getSearchPreviewText(doc.content) : ''
+        summaryMatchIndex === -1
+            ? getSearchPreviewText(doc.content, tokens)
+            : ''
     const contentMatchIndex = content
         ? findFirstMatchIndex(content, tokens)
         : -1

@@ -2,7 +2,10 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { buildSearchPreview, highlightSearchText } from './search-preview.ts'
 import type { SearchData } from './get-search-data'
-import { getSearchPreviewText } from './search-preview-text.ts'
+import {
+    getSearchPreviewText,
+    SEARCH_PREVIEW_INPUT_LIMIT,
+} from './search-preview-text.ts'
 
 function createDoc(overrides: Partial<SearchData> = {}): SearchData {
     return {
@@ -90,4 +93,38 @@ test('preview text remains inert after stripping markup and decoding entities', 
 
 test('large malformed Markdown does not discard searchable text', () => {
     assert.match(getSearchPreviewText('['.repeat(20_000) + ' React'), /React$/)
+})
+
+test('raw angle brackets in Markdown code remain visible but never become HTML', () => {
+    const preview = buildSearchPreview(
+        createDoc({
+            summary: '',
+            content: 'Use `<Button>` and `useState<State>`.',
+        }),
+        'button'
+    )
+    assert.match(preview.excerptHtml, /&lt;<mark[^>]*>Button<\/mark>&gt;/)
+    assert.doesNotMatch(preview.excerptHtml, /<Button>/)
+    assert.equal(
+        getSearchPreviewText('```html\n<Button>safe</Button>\n```'),
+        '<Button>safe</Button>'
+    )
+})
+
+test('preview normalization is bounded while a late body match still gets context', () => {
+    assert.equal(
+        getSearchPreviewText('x'.repeat(SEARCH_PREVIEW_INPUT_LIMIT * 4)).length,
+        SEARCH_PREVIEW_INPUT_LIMIT
+    )
+    const preview = buildSearchPreview(
+        createDoc({
+            summary: 'Overview',
+            content:
+                'x'.repeat(SEARCH_PREVIEW_INPUT_LIMIT * 4) +
+                ' React late-body-match',
+        }),
+        'react'
+    )
+    assert.match(preview.excerptHtml, /React<\/mark>/)
+    assert.match(preview.excerptHtml, /late-body-match/)
 })

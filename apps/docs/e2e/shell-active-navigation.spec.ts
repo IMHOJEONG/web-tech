@@ -7,6 +7,10 @@ async function expectActiveSection(
 ) {
     for (const id of ['desktop-navigation', 'mobile-bottom-nav']) {
         const active = page.getByTestId(id).locator('a[aria-current="page"]')
+        if (id === 'mobile-bottom-nav' && section === 'docs') {
+            await expect(active).toHaveCount(0)
+            continue
+        }
         await expect(active).toHaveCount(1)
         await expect(active).toHaveAttribute('href', `/${locale}/${section}`)
     }
@@ -45,7 +49,7 @@ for (const locale of ['ko', 'en']) {
         await page.emulateMedia({ reducedMotion: 'reduce' })
 
         for (const [path, section] of [
-            ['/docs?q=React', 'feed'],
+            ['/docs?q=React', 'docs'],
             ['/docs/ui-ux/focus-management-checklist', 'ui-ux'],
             ['/docs/category/fe/react/server-client-component-boundary', 'web'],
             ['/category/fe/react/server-client-component-boundary', 'web'],
@@ -57,7 +61,7 @@ for (const locale of ['ko', 'en']) {
                 )
             }
             await expect(
-                page.locator(section === 'feed' ? 'main' : '.mdx-wrapper')
+                page.locator(section === 'docs' ? 'main' : '.mdx-wrapper')
             ).toBeVisible()
             await expectActiveSection(page, locale, section)
         }

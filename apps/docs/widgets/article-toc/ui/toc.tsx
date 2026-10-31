@@ -6,6 +6,7 @@ import type { HeadingDepth, HeadingParent, TocItem } from 'remark-flexible-toc'
 
 import styles from './toc.module.css'
 import { ChevronDown } from 'lucide-react'
+import { filterTocItems } from '../model/toc-items'
 
 // toc - an array of table of contents items provided by the remark plugin "remark-flexible-toc"
 // maxDepth (default: 6) — max heading depth to include in the table of contents; this is inclusive: when set to 3, level three headings are included
@@ -71,11 +72,27 @@ const Toc = ({
                 '(prefers-reduced-motion: reduce)'
             ).matches
 
-            const scrollToHeading = () =>
+            const scrollToHeading = () => {
                 target.scrollIntoView({
                     behavior: prefersReducedMotion ? 'auto' : 'smooth',
                     block: 'start',
                 })
+                if (closeOnNavigate) {
+                    const addedTabIndex = !target.hasAttribute('tabindex')
+                    if (addedTabIndex) target.tabIndex = -1
+                    target.classList.add('toc-focus-target')
+                    target.addEventListener(
+                        'blur',
+                        () => {
+                            if (addedTabIndex)
+                                target.removeAttribute('tabindex')
+                            target.classList.remove('toc-focus-target')
+                        },
+                        { once: true }
+                    )
+                    target.focus({ preventScroll: true })
+                }
+            }
 
             if (closeOnNavigate) {
                 setIsOpen(false)
@@ -91,30 +108,12 @@ const Toc = ({
 
     if (!toc) return null
 
-    // ********* filters **************
-    const exludeRegexFilter = exclude
-        ? Array.isArray(exclude)
-            ? new RegExp(exclude.join('|'), 'i')
-            : new RegExp(exclude, 'i')
-        : new RegExp('(?!.*)')
-
-    const skipLevelsFilter = (depth: TocItem['depth']): boolean =>
-        skipLevels.includes(depth)
-
-    const skipParentsFilter = (parent: TocItem['parent']): boolean =>
-        parent !== 'root' && skipParents.includes(parent)
-
-    const maxDepthFilter = (depth: TocItem['depth']): boolean =>
-        depth > maxDepth
-    // ********************************
-
-    const filteredToc = toc.filter(
-        (heading) =>
-            !maxDepthFilter(heading.depth) &&
-            !skipLevelsFilter(heading.depth) &&
-            !skipParentsFilter(heading.parent) &&
-            !exludeRegexFilter.test(heading.value)
-    )
+    const filteredToc = filterTocItems(toc, {
+        maxDepth,
+        exclude,
+        skipLevels,
+        skipParents,
+    })
     if (filteredToc.length === 0) return null
     return (
         <details

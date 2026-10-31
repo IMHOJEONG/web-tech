@@ -35,7 +35,8 @@ function ActiveMobileNav() {
 }
 
 function MobileNavItems({ pathname = '' }: { pathname?: string }) {
-    const activeKey = getActiveNavigationKey(pathname)
+    const activeKey =
+        pathname === '/docs' ? undefined : getActiveNavigationKey(pathname)
     const value = useLocale()
     const locale = isLocale(value) ? value : defaultLocale
     const t = useTranslations('navigation')
