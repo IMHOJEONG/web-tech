@@ -43,6 +43,8 @@ DOCS_E2E_PORT=3031 pnpm --filter docs exec playwright test \
 
 ## 결과와 증거
 
+공개 가능한 집계·조건과 최초 CI 실패/후속 보완은 [정제 증거](../artifacts/2026-10-31-blog-journal-summary.json)에 연결한다. 실제 커밋·배포 완료 여부는 이 집계와 구분한다.
+
 | 검사                     | 실제 결과                             | 해석                                                                                                                         |
 | ------------------------ | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | 타입 검사                | 통과                                  | 앱 전체 `tsc --noEmit`                                                                                                       |
@@ -116,7 +118,25 @@ BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false BLOG_CONTENT_API_BASE_URL= \
 - 실제 Safari/Firefox·iOS/Android·스크린리더·가상 키보드·회전·실제 독자 과제 테스트는 남아 있다. 헤드리스 Chromium 통과를 접근성 인증이나 고객 만족도 결과로 표현하지 않는다.
 - Markdown 요약 정리는 미리보기 전용의 제한된 정규화다. 복잡한 사용자 정의 MDX 컴포넌트를 완전한 문법 트리로 해석하는 렌더러가 아니다. 원문과 코드 복사 내용을 변경하지 않는다.
 - 기존 메뉴·Mobile URL·하단 바는 유지했다. `모든 글`의 추가 진입은 제공하지만 전체 정보 구조 개편과 빈 주제 노출 정책은 별도 결정이다.
-- 구현 파일·정제 문서는 아직 커밋·푸시·PR·공개 승인 manifest에 넣지 않았다. 원본 checkout의 미커밋 초안과 NAS 자동화 작업은 건드리지 않았다.
+- 최초 로컬 검증 시점에는 구현 파일·정제 문서를 커밋·푸시·PR·공개 승인 manifest에 넣지 않았다. 이후 승인·PR·보완 경과는 아래에 구분한다. 원본 checkout의 미커밋 초안과 NAS 자동화 작업은 건드리지 않았다.
+
+### 최초 PR CI와 리뷰 보완
+
+- 사용자의 최종 70개 파일 공개 승인 후 공통 UI·메인·정제 기록의 3개 커밋을 푸시해 [PR #80](https://github.com/IMHOJEONG/web-tech/pull/80)을 생성했다. 첫 head `83b96bc`의 CI는 성공하지 않았다. 앞선 로컬 묶음 통과를 전체 CI 통과로 확대하지 않는다.
+- Feed에서 기본 썸네일을 생략하므로 이미지의 이중 실패는 실제 썸네일이 있는 Web 카드에서 검사하도록 바꿨다. 실패 이미지 제거·요청 횟수·가로 넘침과 카드의 실제 상세 이동 검사는 유지했다. URL이 선반영될 수 있는 App Router 동작을 본문 완료와 분리해 오프라인 회귀 44개가 통과했다.
+- `모든 글`이 있는 desktop/Drawer와 없는 하단 바의 목적지를 구분했다. `/docs`에서 하단 Feed에 잘못된 현재 페이지 표시를 하지 않으며 다른 경로의 기존 의미는 유지한다. 본문 바로가기 검사에는 새 모바일 목차의 native `summary`도 포함했다.
+- 스켈레톤 측정은 살아 있는 React DOM에 `replaceWith`하지 않고, 같은 CSS·테마·폰트·viewport를 쓰는 JS 없는 독립 context에서 서버 pending markup을 렌더한다. live DOM을 React가 복구하면서 status 누락·detached 노드의 animation 오판·hydration 오류가 나던 측정 간섭을 제거했다. 최초 보완 묶음 87개가 통과했다.
+- 영어 모바일 prefetch는 링크가 화면 아래에 있어 대기하던 30초 실패를 단독 재현했다. 관련 Link를 스크롤해 보이게 한 뒤 정상 prefetch를 기다리도록 바꿔 12개 조합이 통과했다. mock control cleanup은 3초로 제한한 독립 요청을 쓰고 최초 실패를 보존한다. fixture 자격 증명은 기존 공개 합성 값 그대로 순수 모듈로 공유하며 실제 운영 값·인증 정책·검사 예외를 도입하지 않았다.
+- 검색 정규화 입력은 최대 32,768자 문맥으로 제한하고, raw code span/fence의 `<Button>` 같은 표기를 HTML 태그로 버리지 않도록 보존한 뒤 최종 출력에서 escape한다. 늦은 본문 매치·불가능한 날짜·서버/클라이언트 공통 TOC 필터를 포함한 라이브러리 331개가 통과했다.
+- 모바일 목차에서 절을 선택하면 스크롤 후 해당 heading으로 focus를 이동하고 보이는 outline을 제공한다. 빈 TOC wrapper는 클라이언트와 같은 필터를 통과한 항목이 있을 때만 그린다.
+- 최종 UI 보완 묶음은 39개 통과·3개 폭 조건 skip이었다. Backend 분류의 실제 결과, 목차 target focus·outline, 모든 셸 현재 위치, 본문 바로가기의 native summary 진입, 한·영/테마·헤더 폭 sweep을 포함한다.
+- 영어 640px 헤더의 실제 nav 폭은 약 360px, 가용 가운데 영역은 약 374px였고 로고·컨트롤과 겹치지 않았다. 조건부 리뷰 가설만으로 breakpoint·폰트·줄 배치를 바꾸지 않았다.
+- 공용 UI build와 동시에 시작한 첫 typecheck는 갱신 중인 dist를 찾지 못해 실패했다. build 종료 후 단독 재실행은 통과했다. 이는 소스 타입 오류를 무시한 성공 판정이 아니다. 최종 CI는 별도 head에서 다시 확인한다.
+- 최종 소스에서 `pnpm --filter docs test:article:prod --reporter=list --output=/tmp/blog-journal-article-results`로 합성 콘텐츠 기반 production E2E 전체 162개를 실행해 모두 통과했다. 해당 명령은 전용 fixture 서버를 시작하고 앱을 다시 빌드한다. lint warnings 0과 단독 typecheck도 통과했으며 실제 NAS·Vercel 운영 결과와는 구분한다.
+
+## 원본 artifact 상대 링크
+
+- [정제 집계](../artifacts/2026-10-31-blog-journal-summary.json). raw 캡처·trace·전체 로그는 비공개 로컬 자료로 유지한다.
 
 ## 관련 문서
 

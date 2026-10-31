@@ -115,11 +115,11 @@
     },
     {
       "path": "docs/verification/accessibility/2026-10-31-blog-journal-implementation.md",
-      "sha256": "54f5afd8ca57c9d4660844ff0508d5893b0b8bec7db9b52849d1f43a629fe025",
+      "sha256": "aacb73731e1f4de69fcb0b86ce3b5879b5e4fd9a11602476881bfe5ad06f70c5",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 최종 70개 파일의 공개 검수 목록과 main 병합·배포를 명시 승인함. 자체 작성한 설계·집계 검증·작업 기록·목차이며 원시 캡처·초안·비밀값·제3자 매체는 제외함.",
+      "note": "사용자가 PR #80 후속 26개 파일의 최종 공개 목록·해시와 main 병합·배포를 명시 승인함. 자체 작성한 정제 집계·재현 조건·보고서·목차이며 원시 캡처·trace·인증 헤더·운영 비밀값은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -129,11 +129,11 @@
     },
     {
       "path": "docs/verification/accessibility/2026-10-31-blog-ui-review.md",
-      "sha256": "db065f8449020118d3634a4469fc7e6a5bc0e1572c9c8533c829d91800f28de4",
+      "sha256": "339dbd1b997da2ea9d48d002d32294a5035cbd928bc1bc70df7c7ad7f7c27a25",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 최종 70개 파일의 공개 검수 목록과 main 병합·배포를 명시 승인함. 자체 작성한 설계·집계 검증·작업 기록·목차이며 원시 캡처·초안·비밀값·제3자 매체는 제외함.",
+      "note": "사용자가 PR #80 후속 26개 파일의 최종 공개 목록·해시와 main 병합·배포를 명시 승인함. 자체 작성한 정제 집계·재현 조건·보고서·목차이며 원시 캡처·trace·인증 헤더·운영 비밀값은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -176,6 +176,34 @@
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
       "note": "사용자가 최종 70개 파일의 공개 검수 목록과 main 병합·배포를 명시 승인함. 자체 작성한 설계·집계 검증·작업 기록·목차이며 원시 캡처·초안·비밀값·제3자 매체는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-10-31-blog-journal-summary.json",
+      "sha256": "d2a3f5aff144c627a68db36483badcc2e6ce9634e1995343216374766ef1db11",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-31",
+      "note": "사용자가 PR #80 후속 26개 파일의 최종 공개 목록·해시와 main 병합·배포를 명시 승인함. 자체 작성한 정제 집계·재현 조건·보고서·목차이며 원시 캡처·trace·인증 헤더·운영 비밀값은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/README.md",
+      "sha256": "e5766e6f4e74b35896bad29c7b259d0635cc9a3058600427b828e5f285630d29",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-31",
+      "note": "사용자가 PR #80 후속 26개 파일의 최종 공개 목록·해시와 main 병합·배포를 명시 승인함. 자체 작성한 정제 집계·재현 조건·보고서·목차이며 원시 캡처·trace·인증 헤더·운영 비밀값은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

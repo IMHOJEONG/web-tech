@@ -11,12 +11,22 @@
 
 ## 재현 방법
 
-실행한 로컬 명령은 다음과 같다. probe는 이번 작업의 임시 파일이므로 다른 환경에 이미 설치돼 있다고 가정하지 않는다.
+당시 운영 baseline은 저장소 밖 임시 probe 두 개로 조사했다. 해당 원본 스크립트·캡처는 공개하지 않았으므로, fresh checkout에서 아래 표의 과거 16회 관측을 그대로 재실행할 수 있다고 주장하지 않는다. 당시 probe는 아래의 측정 식과 조건을 사용했으며 배포 SHA 대조도 하지 않았다.
+
+현재 구현의 관련 회귀는 Node 24·pnpm·Chromium 준비 후 저장소 루트에서 실행할 수 있다. 다음은 과거 운영 조사 스크립트의 배포가 아니라 공개된 실제 테스트를 이용한 로컬 재검증이다.
 
 ```sh
-# 임시 점검 스크립트 실행. 공개 URL만 조회하며 사이트를 변경하지 않는다.
-node /tmp/blog-ui-review-20261031.cjs
-node /tmp/blog-ui-followup-20261031.cjs
+pnpm install --frozen-lockfile
+pnpm --filter docs exec playwright install chromium
+# 첫 터미널: 실제 NAS나 운영 토큰 없이 로컬 문서만 사용한다.
+DOCS_E2E_PORT=3031 BLOG_CONTENT_INCLUDE_REMOTE_INDEX=false \
+  BLOG_CONTENT_API_BASE_URL= BLOG_CONTENT_API_BASE_URL_PUBLIC= \
+  BLOG_CONTENT_API_BASE_URL_INTERNAL= pnpm --filter docs dev:e2e
+# 별도 터미널: 실행 중인 개발 서버를 재사용한다.
+DOCS_E2E_PORT=3031 pnpm --filter docs exec playwright test \
+  e2e/journal-design.spec.ts e2e/header-clarity.spec.ts \
+  e2e/horizontal-overflow.spec.ts --workers=1 --reporter=list \
+  --output=/tmp/blog-ui-review-results
 ```
 
 주 probe는 `page.goto(..., { waitUntil: 'domcontentloaded' })`, `document.fonts.ready` 후 다음을 측정했다.
@@ -79,8 +89,13 @@ Browser Use는 공개 내비게이션, React 검색, Brotli 글의 목차·코�
 - 원시 캡처와 probe는 로컬 임시 자료다. 공개 저장소·Jira·Confluence에 첨부하지 않았다. 승인된 정제 증거 업로드와 보관 정책은 별도 검토한다.
 - 다음은 검색 요약·모바일 목차 우선 보완, Feed/Docs/상세 시안 합의, 3–5명 과제형 관찰이다. 세부 순서는 [설계안](../../architecture/docs-blog-redesign-proposal.md)을 따른다.
 
+## 원본 artifact 상대 링크
+
+- [후속 정제 집계](../artifacts/2026-10-31-blog-journal-summary.json). 과거 운영 조사 원시 캡처·probe의 공개 사본은 아니며, 공개하지 않은 원시 자료까지 재실행 가능하다고 표시하지 않는다.
+
 ## 관련 문서
 
+- [후속 정제 증거](../artifacts/2026-10-31-blog-journal-summary.json): 실제 앱 적용 후 결과이며 과거 운영 관측의 원시 자료를 대신한 것은 아니다.
 - [개선 설계안](../../architecture/docs-blog-redesign-proposal.md)
 - [작업 기록](../../worklog/2026-10/2026-10-31-blog-ui-review.md)
 - [과거 밀도 점검: 현재 수치가 아님](2026-10-14-docs-index-density-review.md)
