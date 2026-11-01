@@ -2,6 +2,76 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/verification/deployment/2026-11-01-pr81-offline-toc-production.md",
+      "sha256": "755dd3201d4cb6e62ae1aa6a328293ac4bfa35f15dccd89bdb3a43e9c31dfbe8",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-01",
+      "note": "사용자가 PR82 리뷰 보완 최종 문서 3개·승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 PR81 배포 보고서에 artifact 해당 없음 사유·공개 증거 한계만 추가했으며 원시 로그·프로필·응답·초안·비밀값은 제외함. main 병합·운영 배포는 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/resilience/2026-11-01-publication-cache-request-cause.md",
+      "sha256": "89917608ae6571fbf25806ee4fbe97b4a9257dc32de94f6352f9d44ce3a361b2",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-01",
+      "note": "사용자가 PR82 리뷰 보완 최종 문서 3개·승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 조사 보고서에 artifact 미보관·집계와 원시 증거 구분·재현 한계만 추가했으며 원시 trace·HTML·응답·진단 preload·비밀값은 제외함. main 병합·운영 배포는 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-01-pr81-deploy-cache-diagnostics.md",
+      "sha256": "e400193978ccc96628fcd6c40c3e5aba63a3b3fba43df7c1e93cdfdaeb6ffa99",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-01",
+      "note": "사용자가 PR82 리뷰 보완 최종 문서 3개·승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 작업 기록에 리뷰 2건의 문서 보완·로컬 검사·공개 승인 경계만 추가했으며 원시 자료·비공개 초안·비밀값은 제외함. main 병합·운영 배포는 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/README.md",
+      "sha256": "81f02cedc10f946d7584242403464a1c99dc1035422ea5ef180423721adc4828",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-01",
+      "note": "사용자가 KAN58 후속 테스트 1개·문서 6개와 승인 해시 6개 갱신의 공개·커밋·브랜치 푸시를 명시 승인함. 자체 작성한 11월 작업 목차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. 후속 main 병합·추가 배포는 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/README.md",
+      "sha256": "8c1b372be8eee5a58a335ddd9018a6b5a14f122fd661ebff2e8b26ef51608de8",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-01",
+      "note": "사용자가 KAN58 후속 테스트 1개·문서 6개와 승인 해시 6개 갱신의 공개·커밋·브랜치 푸시를 명시 승인함. 자체 작성한 월별 작업 목차에 11월 링크만 추가하며 원시 자료·초안·비밀값은 제외함. 후속 main 병합·추가 배포는 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/architecture/adr-0026-offline-spa-article-context.md",
       "sha256": "914a3cf742de2c50a602e390d64eef1dc1eabeb89298ec3d07b46aeda7f8be1f",
       "kind": "document",
@@ -185,11 +255,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "5f3a6c6bf112f42ddddd2e233373ee29b86adca3d9096964a407b327886006e8",
+      "sha256": "ce48cbef6d7b428f4c649440b567591ca96e6247c4e76a9ce6c11ace35abc37a",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-10-31",
-      "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 검증 목차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "reviewedOn": "2026-11-01",
+      "note": "사용자가 KAN58 후속 테스트 1개·문서 6개와 승인 해시 6개 갱신의 공개·커밋·브랜치 푸시를 명시 승인함. 자체 작성한 운영 배포·간헐 조사 검증 목차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. 후속 main 병합·추가 배포는 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,

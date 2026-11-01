@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import { expect, test, type APIRequestContext } from '@playwright/test'
+import { articleFixtureAuthorization } from './fixture-credentials.ts'
 
 type CauseTrace = {
     requestId: string
@@ -16,7 +17,7 @@ async function control(
     const response = await request.post(
         `http://127.0.0.1:3112/__test/remote-body/${mode}`,
         {
-            headers: { Authorization: 'Bearer article-e2e-only-control' },
+            headers: { Authorization: articleFixtureAuthorization('control') },
         }
     )
     expect(response.status()).toBe(204)
@@ -30,7 +31,7 @@ async function prepare(request: APIRequestContext) {
         'The remote article has finished rendering.'
     )
     const invalidated = await request.post('/api/revalidate/content', {
-        headers: { Authorization: 'Bearer article-e2e-only-revalidation' },
+        headers: { Authorization: articleFixtureAuthorization('revalidation') },
     })
     expect(invalidated.status()).toBe(200)
 }
@@ -170,13 +171,19 @@ test('request cause control: upstream-503 without navigation', async ({
                     event.detail.status === 503
             )
         ).toBe(true)
+        // A background 503 can coexist with a stale successful response. Prove
+        // the render actually failed before diagnosing missing error telemetry.
+        const renderedSuccessfulBody = (await response.text()).includes(
+            'The remote article has finished rendering.'
+        )
+        expect(
+            renderedSuccessfulBody,
+            'The 503 control must fail the render, not return a stale successful article'
+        ).toBe(false)
         const names = result.events.map((event) => event.event)
         expect(names).toContain('console-warning')
         expect(names).toContain('console-error')
         expect(names).not.toContain('framework-stream-error')
-        expect(await response.text()).not.toContain(
-            'The remote article has finished rendering.'
-        )
         await testInfo.attach('request-cause', {
             body: JSON.stringify(
                 { ending: 'upstream-503', ...result },
