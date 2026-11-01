@@ -34,3 +34,11 @@
 - runbook은 `source-check`의 `source`를 주소 불일치만으로 단정하지 않게 보완했다. 검증 보고서는 최초/후속 코드 커밋·승인 manifest·실행 조건을 연결한다.
 - 후속 검증은 라이브러리 347개, 개발/production 오프라인 각각 62개, 개발/production 목차 각각 3개와 type/lint/build 통과다. helper 타입 선언 때문에 최초 타입/빌드 검사는 실패했으며 수정 후 재검사했다. 상세 명령·실패 이력·한계는 [검증 보고서](../../verification/resilience/2026-10-31-offline-save-diagnostics.md)의 후속 검증에 둔다.
 - 후속 문서의 공개 검수, PR에 대한 푸시·해결된 스레드 정리·원격 CI 재확인은 다음 단계다. 로컬 통과만으로 운영 검증 완료나 이슈 완료로 표시하지 않는다. 기존 초안·stash·NAS는 보존했다.
+
+## 추가 재리뷰 4건
+
+- 사용자가 같은 PR #81에서 h5/h6 여백·기존 fragment 호환·작성자 ID 충돌·실제 커스텀 렌더러 중복 제목 검사를 보완하도록 승인했다. main 병합·운영 배포 승인은 포함하지 않는다.
+- [521d004](https://github.com/IMHOJEONG/web-tech/commit/521d004cec5eb4ac89ab669c5ec375f5072058e7)는 제목 할당·TOC 연결·호환 앵커·깊은 제목 스크롤 여백과 단위 회귀다. 명시 ID → 기존 fragment 첫 대상 → 새 canonical ID 우선순위와 정적 분석의 한계는 [ADR-0027](../../architecture/adr-0027-article-heading-anchor-compatibility.md)에 분리했다.
+- [b4811d6](https://github.com/IMHOJEONG/web-tech/commit/b4811d663ae8a19ab1d1c23522d1161513290587)는 실제 production 상세의 회귀다. 합성 MDX를 테스트 preload의 요청 범위에만 주입한다. 공개 글 파일을 바꾸지 않고 다음 일반 요청과 preload 없는 서버에서 원문이 유지되는지 검사했다. 두 커밋을 같은 수정 브랜치에 푸시했다.
+- 최종 로컬 결과는 라이브러리 351개, production 상세 176개(신규 목차 14개 포함), 개발/production 오프라인 각각 62개, 일반 서버 목차 각각 3개와 타입·lint·build·포맷 통과다. 초기 실패 대조·명령·기존 hydration 경고·미검증 범위는 [검증 보고서](../../verification/resilience/2026-10-31-offline-save-diagnostics.md)의 추가 재리뷰 절을 따른다.
+- 문서 공개 해시는 별도 사용자 검수 후 갱신한다. 최신 원격 CI·CodeRabbit 및 스레드 상태는 PR과 Jira·Confluence에 기준 SHA를 함께 기록한다. 로컬 성공을 운영 배포 완료로 표시하지 않으며 기존 초안·stash·NAS 작업을 유지한다.

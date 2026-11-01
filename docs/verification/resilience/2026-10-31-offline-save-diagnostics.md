@@ -86,6 +86,40 @@ NODE_ENV=production DOCS_E2E_PORT=3018 pnpm --filter docs test:e2e e2e/article-a
 
 새 head의 원격 CI·CodeRabbit 결과는 PR과 Jira의 해당 SHA 기록으로 확인한다. 여기의 로컬 성공을 원격 CI 성공이나 운영 배포 성공으로 바꾸어 적지 않는다. 후속 소스/문서의 푸시·리뷰 스레드 정리와 재검증은 별도 단계다.
 
+## 추가 재리뷰 4건의 호환성 검증
+
+사용자가 같은 PR에서의 보완을 승인한 범위다. 구현은 [521d004](https://github.com/IMHOJEONG/web-tech/commit/521d004cec5eb4ac89ab669c5ec375f5072058e7), 실제 production 렌더러 회귀는 [b4811d6](https://github.com/IMHOJEONG/web-tech/commit/b4811d663ae8a19ab1d1c23522d1161513290587)으로 나눴다. 아래 결과는 두 번째 커밋과 같은 소스의 로컬 결과이며 이전 head의 원격 CI 성공을 새 코드의 성공으로 대체하지 않는다.
+
+- h5·h6와 호환 앵커에도 기존 header 기반 스크롤 여백을 적용했다.
+- 기존 h1~h4 fragment를 숨은 앵커로 보존한다. 명시 ID, 기존 fragment의 첫 대상, 새 canonical ID 순으로 우선한다. 새 제목의 canonical ID가 기존 링크의 대상을 빼앗는 경우도 검사했다.
+- 문서 뒤쪽의 정적 JSX ID까지 먼저 예약한다. 자동 ID만 충돌을 회피하며 작성자 ID를 바꾸거나 JavaScript를 평가하지 않는다. 이미 중복된 명시 ID·동적 DOM ID·제목 자체의 변경까지 자동 보존하지는 않는다.
+- Node 기본 렌더링뿐 아니라 실제 상세 라우트의 커스텀 h1~h4 렌더러로 중복 제목을 검사했다. 테스트 전용 preload의 요청별 메모리 fixture만 사용하며 공개 글 파일·운영 라우트·환경변수는 수정하지 않았다. 다음 일반 요청과 preload 없는 일반 서버에서 fixture가 나타나지 않는 대조도 수행했다.
+
+할당 규칙과 한계는 [ADR-0027](../../architecture/adr-0027-article-heading-anchor-compatibility.md)에 둔다. 원격 HTML 경로와 정적 `@next/mdx` loader는 이번 변경 대상이 아니다.
+
+| 검사                         | 실제 결과                    | 조건과 범위                                                                                                                                |
+| ---------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| 전체 라이브러리              | 351개 통과                   | 이전 347개에 회귀 4개 추가. 명시 ID 충돌·기존 fragment 회귀는 수정 전 실패, 수정 후 성공.                                                  |
+| 전체 production 상세         | 176개 통과                   | 모바일·데스크톱. 아래 새 목차 14개를 포함하며 합산하지 않는다.                                                                             |
+| 새 production 목차 집중 검사 | 14개 통과                    | 실제 h1~h4 중복·명시 ID·h5/h6·이전 hash 직접 진입 및 reload·모바일 포커스/닫힘. 최종 전체 실행에는 다음 일반 요청의 원문 복원 검사도 포함. |
+| 개발·production 오프라인     | 각각 62개 통과               | 실행 조건별 결과이며 합산하지 않는다.                                                                                                      |
+| 일반 서버 원문 대조          | 개발 3개·production 3개 통과 | 신고된 Brotli 두 링크 정상. 테스트 헤더만 보내도 원문이 바뀌지 않음.                                                                       |
+| 타입·lint·build·포맷         | 통과                         | 최초 VFileData 타입 호환 오류를 런타임 검증과 Record 타입으로 수정. 타입 억제·검사 완화 없음.                                              |
+
+추가 재현 명령은 저장소 루트 기준이다. Node 24와 설치된 의존성을 사용한다. 상세 production 설정은 자체 build와 합성 loopback content 서버를 기동하며 NAS를 호출하지 않는다. 일반 production 오프라인·목차 대조는 앞 절의 원격 조회 비활성 build 절차를 따른다. 출력 디렉터리는 공개 artifact로 업로드하지 않는다.
+
+```sh
+pnpm --filter docs test:lib
+pnpm --filter docs test:article:prod --reporter=list --output=/tmp/docs-article-compat-review
+pnpm --filter docs test:article:prod article-e2e/article-heading-anchors.spec.ts --reporter=list --output=/tmp/docs-heading-compat-review
+pnpm --filter docs test:offline --reporter=list --output=/tmp/docs-offline-compat-dev
+NODE_ENV=production pnpm --filter docs test:offline --reporter=list --output=/tmp/docs-offline-compat-prod
+pnpm --filter docs typecheck
+pnpm --filter docs lint
+```
+
+전체 상세 검사의 의도적인 upstream 503 출력은 장애 음성 대조이며 실제 NAS 장애를 주입한 것이 아니다. 기존 published 글 2개의 스타일 경고는 유지됐다. 개발 오프라인 검사에서는 이전 리뷰 수정 CI에서도 보였던 thumbnail의 `loading=eager/lazy` hydration 경고가 남았다. 테스트 통과와 경고 해소를 동일시하지 않으며 이 경고의 production 발생 여부·별도 원인은 이번에 조사하지 않았다. 실제 사용자 Chrome 프로필·실기기·Safari와 운영 배포 후 검증은 여전히 미수행이다.
+
 ## 관련 문서
 
 - [저장·보안 경계 ADR-0015](../../architecture/adr-0015-explicit-offline-article-snapshots.md)

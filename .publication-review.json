@@ -31,11 +31,11 @@
     },
     {
       "path": "docs/verification/resilience/2026-10-31-offline-save-diagnostics.md",
-      "sha256": "512cb4d69a866986112632fd39d2d161b0a5c94c449417b97adf52d1a5770f13",
+      "sha256": "9119f5327afbf6c265baf07e87ba89ed3bb12a73d74cd49e3030b93d8dd64b74",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 PR81 보완 최종 문서 3개와 승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 커밋별 검증·실패 이력·목차 회귀의 정제 요약이며 원시 trace·프로필·캡처·초안·비밀값은 제외함. main 병합·배포는 승인 범위가 아님.",
+      "note": "사용자가 PR81 추가 목차 보완 최종 문서 4개와 승인 해시 4개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 커밋별 검증·실패 이력·호환성 회귀의 정제 요약이며 원시 trace·프로필·캡처·초안·비밀값은 제외함. main 병합·배포는 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -45,11 +45,11 @@
     },
     {
       "path": "docs/worklog/2026-10/2026-10-31-offline-save-diagnostics.md",
-      "sha256": "d7710530212587cdb752b75440ba0662465821e580b08462cab41f614a5b7f70",
+      "sha256": "d5578ecefc06cb706b899b5683dcb0d1885bcf9b8b00822ccf1ee4921c3848c1",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 PR81 보완 최종 문서 3개와 승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 리뷰·CI·목차 수정 작업 기록이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "note": "사용자가 PR81 추가 목차 보완 최종 문서 4개와 승인 해시 4개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 리뷰·검증·목차 호환성 작업 기록이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -73,11 +73,25 @@
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "f986b53eb81f085f27b712f782f9e2c08841aa747dbc2365aebae34e1680535d",
+      "sha256": "cde7851ce7f22a15f2a45c662c49c14bc371b9f2c2f12a1c8ae37b868614fb96",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
-      "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 ADR 목차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "note": "사용자가 PR81 추가 목차 보완 최종 문서 4개와 승인 해시 4개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 ADR 목차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/adr-0027-article-heading-anchor-compatibility.md",
+      "sha256": "e1cf5b8b0ca3a0d1b093ac7d3ef46ff21b5b60ed103b5127f231389c0d8d9f32",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-10-31",
+      "note": "사용자가 PR81 추가 목차 보완 최종 문서 4개와 승인 해시 4개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 제목 ID 우선순위·기존 fragment 호환·정적 분석 한계의 설계 결정이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
