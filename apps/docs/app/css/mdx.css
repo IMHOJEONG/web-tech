@@ -225,6 +225,21 @@
     margin: 1rem 0;
 }
 
+.mdx-wrapper h5,
+.mdx-wrapper h6,
+.mdx-heading-alias {
+    scroll-margin-top: max(
+        6rem,
+        calc(var(--docs-header-height, 4.0625rem) + 1.5rem)
+    );
+}
+
+.mdx-heading-alias {
+    display: block;
+    height: 0;
+    pointer-events: none;
+}
+
 .mdx-wrapper ul,
 .mdx-wrapper ol,
 .mdx-ul,

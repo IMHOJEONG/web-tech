@@ -3,7 +3,17 @@
 import { useEffect, useState, useSyncExternalStore } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { buildOfflineSnapshot } from '../model/offline-snapshot'
-import { sendOfflineMessage } from '../model/offline-client'
+import {
+    listenForOfflineArticleContext,
+    sendOfflineMessage,
+} from '../model/offline-client'
+import {
+    getOfflineFailure,
+    getOfflineErrorMessageKey,
+    OfflineOperationError,
+    type OfflineFailure,
+} from '../model/offline-error'
+import { OfflineErrorDetails } from './offline-error-details'
 
 const subscribe = () => () => {}
 const capabilities = () =>
@@ -27,8 +37,12 @@ export function OfflineSaveButton({
     const [saved, setSaved] = useState(false)
     const [busy, setBusy] = useState(false)
     const [message, setMessage] = useState('')
+    const [failure, setFailure] = useState<OfflineFailure | null>(null)
     useEffect(() => {
         let active = true
+        const stopContext = supported
+            ? listenForOfflineArticleContext(path)
+            : undefined
         if (supported)
             void sendOfflineMessage('list')
                 .then((articles) => {
@@ -40,17 +54,19 @@ export function OfflineSaveButton({
                 .catch(() => {})
         return () => {
             active = false
+            stopContext?.()
         }
     }, [path, supported])
     async function save() {
         if (busy || !supported) return
         setBusy(true)
         setMessage('')
+        setFailure(null)
         try {
             const root = document.querySelector<HTMLElement>(
                 '[data-offline-content]'
             )
-            if (!root) throw new Error('snapshot')
+            if (!root) throw new OfflineOperationError('snapshot', 'snapshot')
             const snapshot = await buildOfflineSnapshot(root, {
                 path,
                 title,
@@ -62,7 +78,10 @@ export function OfflineSaveButton({
                 true
             )
             if (!articles.some((article) => article.path === path))
-                throw new Error('storage')
+                throw new OfflineOperationError(
+                    'confirmation',
+                    'storage-confirmation'
+                )
             setSaved(true)
             setMessage(
                 snapshot.missingImages
@@ -70,16 +89,14 @@ export function OfflineSaveButton({
                     : t('saved')
             )
         } catch (error) {
-            if (error instanceof Error && error.message === 'loading') {
-                setMessage(t('notReady'))
-                return
-            }
+            const problem = getOfflineFailure(error, 'snapshot')
+            setFailure(problem)
             setMessage(
-                error instanceof Error && error.message === 'limit'
-                    ? t('limit')
-                    : error instanceof Error && error.message === 'size'
-                      ? t('size')
-                      : t('error')
+                t(
+                    problem.stage === 'storage-confirmation'
+                        ? 'responseError'
+                        : getOfflineErrorMessageKey(problem.code)
+                )
             )
         } finally {
             setBusy(false)
@@ -111,9 +128,12 @@ export function OfflineSaveButton({
                 role="status"
                 aria-live="polite"
                 className="mt-1 text-on-surface-variant"
+                data-offline-error-code={failure?.code}
+                data-offline-error-stage={failure?.stage}
             >
                 {message}
             </p>
+            {failure && <OfflineErrorDetails failure={failure} />}
         </section>
     )
 }

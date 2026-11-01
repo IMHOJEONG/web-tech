@@ -97,7 +97,29 @@ HTML 보고서에서 테스트의 Attachments → `offline-article-navigation` J
 
 ## 실패 대응과 복구
 
-- 저장 실패: 연결·저장 권한·HTTPS·Application → Service Workers 상태를 확인한다. 정상 연결 후 명시적으로 다시 저장한다. 원문 서버 장애와 브라우저 오프라인은 서로 다른 원인이다.
+- 2026-10-31 추가 진단은 로컬 수정 상태다. 아래 새 안내·코드는 해당 변경의 배포 후 사용할 수 있으며 기존 운영의 공통 실패 안내만으로 원인을 단정하지 않는다.
+- 글의 실패 안내 아래 **오류 자세히**를 열면 오류 코드와 실패 단계가 나온다. 같은 값은 status 요소의 `data-offline-error-code`, `data-offline-error-stage`에서도 확인한다. 코드·단계만 공유하고 저장한 본문·원시 오류·쿠키·브라우저 프로필은 업로드하지 않는다.
+- 브라우저 저장소·Worker 내부 오류는 Vercel 서버 로그만으로 알 수 없다. 이번 진단은 UI에만 표시하며 원시 예외 출력·새 수집 API·자동 telemetry를 추가하지 않는다.
+
+| 코드/단계                                                   | 의미와 다음 행동                                                                                                                                                    |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `registration` / `registration`                             | Worker 등록을 완료하지 못함. HTTPS·스크립트 응답·연결을 확인한다. 이것만으로 저장 용량 문제라고 판단하지 않는다.                                                    |
+| 허용된 오류 코드 / `unknown`                                | 구형 Worker가 실패 단계를 보내지 않았거나 단계가 알려진 값이 아님. 메시지·저장소 단계로 추정하지 말고 새로고침 후 코드와 단계를 다시 확인한다.                      |
+| `activation`, `activation-timeout` / `activation`           | 첫 Worker의 활성화 실패 또는 8초 내 미완료. 다른 블로그 탭을 닫고 새로고침해 확인한다. 이미 사용 가능한 active Worker가 있으면 대기 중 업데이트 때문에 막지 않는다. |
+| `worker-unavailable` / `registration`                       | 동작할 active Worker가 없음. 새로고침 후 재시도하며 등록 상태를 확인한다.                                                                                           |
+| `message-timeout` / `message`                               | 8초 내 결과 응답이 없음. 저장이 실제로 실패했다고 확정할 수 없으므로 ‘저장한 글’을 먼저 확인한다. 자동 저장 재시도나 전체 캐시 삭제는 하지 않는다.                  |
+| `message-send`, `message-invalid` / `message`               | 메시지 전송 또는 응답 형식 확인 실패. 원시 메시지를 노출하지 않고 새로고침 후 확인한다.                                                                             |
+| `storage-denied`                                            | 브라우저가 해당 단계의 접근을 거부함. 사이트 저장 설정·보안 확장 프로그램을 확인한다. 일반 Chrome에서도 발생할 수 있으며 시크릿 모드로 단정하지 않는다.             |
+| `storage-quota` / `storage-write`                           | 저장소 쓰기 용량 부족. 필요 없는 저장본을 개별 정리한 뒤 재시도한다.                                                                                                |
+| `storage` / `storage-open`, `storage-read`, `storage-write` | 저장소 열기·읽기·쓰기 중 실패. 표시된 단계로 조사 범위를 좁힌다.                                                                                                    |
+| 모든 코드 / `storage-confirmation`                          | 쓰기는 끝났지만 목록으로 결과를 확인하지 못함. 저장본이 바뀌었을 수 있으므로 ‘저장한 글’을 먼저 확인한다.                                                           |
+| `source`, `path` / `validation`                             | 현재 공개 글과 저장 대상 경로가 맞지 않음. 원문 주소에서 재시도하고 경로 검증을 우회하지 않는다.                                                                    |
+| `loading`, `snapshot`, `size` / `snapshot`                  | 본문 로딩 중·스냅샷 생성 실패·본문 크기 초과. 본문 완료 후 재시도하거나 온라인에서 읽는다.                                                                          |
+
+- 저장 실패의 대조 순서: 동일 글·브라우저 종류·일반/보호 모드·기존 프로필과 새 격리 프로필을 구분한다. 새 프로필의 성공은 사용자 기존 프로필의 권한·Worker·확장 프로그램 상태가 정상이라는 증거가 아니다. 원문 서버 장애와 브라우저 오프라인도 서로 다른 원인이다.
+- 등록 단계의 `SecurityError`·`NotAllowedError`는 `registration`으로 표시한다. 저장소를 아직 열지 않은 등록 실패를 `storage-denied`로 단정하지 않는다. 저장소 접근 거부는 실제 저장소 작업의 단계와 함께 판단한다.
+- `context-timeout` / `source-check`: 요청한 탭이 1.5초 안에 현재 글 주소를 확인하지 못했다. 페이지를 한 번 새로고침한 뒤 재시도한다. 구형 탭에는 새 listener가 없을 수 있다. `source` / `source-check`는 주소 불일치뿐 아니라 `ok`가 아닌 응답·유효하지 않은 경로·메시지 송수신 실패도 포함한다. 현재 주소와 저장 대상의 경로를 대조하되 이 코드만으로 주소 불일치를 확정하거나 원시 메시지를 공개하지 않는다. [SPA 문맥 확인 결정](../architecture/adr-0026-offline-spa-article-context.md)을 따른다.
+- Feed→글 이동과 직접 URL 진입을 따로 확인한다. `WindowClient.url`은 SPA 이동 뒤에도 최초 Feed URL일 수 있다. 이 값만 보고 저장 권한 문제로 판단하거나 출처 검증을 삭제하지 않는다. 같은 탭 새로고침은 진단 대조이며 저장본·사이트 데이터를 지우는 절차가 아니다.
 - 10개 한도: 목록에서 불필요한 저장본을 지운 뒤 다시 저장한다. 공간 부족은 브라우저가 앱 한도 이전에 거부할 수도 있다.
 - 저장본 누락: 출처·프로필과 사이트 데이터 삭제 여부를 확인한다. 서버 백업에서 복구하는 기능은 없으므로 온라인 원문에서 다시 저장한다.
 - Worker 설치 실패: `/push-sw.js`와 `/offline-worker.js`가 JS로 응답하는지, reader 파일 3개가 같은 출처에서 200인지, CSP가 같은 출처 연결을 허용하는지 확인한다.
@@ -106,6 +128,7 @@ HTML 보고서에서 테스트의 Attachments → `offline-article-navigation` J
 
 ## 관련 검증
 
+- [10-31 운영 대조와 저장 실패 진단](../verification/resilience/2026-10-31-offline-save-diagnostics.md)
 - [CI 증거 보관·이동 계측 회귀](../verification/resilience/2026-10-22-navigation-evidence-retention.md)
 - [실제 실행 결과와 한계](../verification/resilience/2026-10-17-content-network-offline.md)
 - [저장·보안 경계 결정](../architecture/adr-0015-explicit-offline-article-snapshots.md)

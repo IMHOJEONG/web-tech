@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [10-31 오프라인 저장 실패 진단](resilience/2026-10-31-offline-save-diagnostics.md): 운영 Chrome 카드 진입의 source 거절·새로고침 성공 대조, 현재 글 확인·진단과 production 62개 회귀. 수정 배포는 별도.
+
 - [10-31 글 중심 저널 실제 앱 검증](accessibility/2026-10-31-blog-journal-implementation.md): 로컬 UI·검색·목차·로딩/목록 회귀, 운영 배포·실기기 검증과 구분.
 
 - [10-31 블로그 UI·탐색·읽기 점검](accessibility/2026-10-31-blog-ui-review.md): 운영 8개 URL·2개 뷰포트 관측과 검색·모바일 장문 점검. 실제 사용자·실기기·배포 SHA 대조는 미검증.

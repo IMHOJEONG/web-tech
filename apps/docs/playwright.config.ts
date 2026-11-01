@@ -22,9 +22,13 @@ export default defineConfig({
         trace: 'on-first-retry',
     },
     webServer: {
-        command: 'pnpm dev:e2e',
+        command:
+            process.env.NODE_ENV === 'production'
+                ? `pnpm exec next start --port ${port} --hostname 127.0.0.1`
+                : 'pnpm dev:e2e',
         url: baseURL,
-        reuseExistingServer: !process.env.CI,
+        reuseExistingServer:
+            process.env.NODE_ENV !== 'production' && !process.env.CI,
         timeout: 120_000,
         env: {
             BLOG_CONTENT_INCLUDE_REMOTE_INDEX: 'false',

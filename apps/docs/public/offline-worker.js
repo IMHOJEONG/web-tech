@@ -40,6 +40,66 @@ function offlineEscape(value) {
     )
 }
 
+function offlineErrorCode(error) {
+    if (error?.name === 'QuotaExceededError') return 'storage-quota'
+    if (['SecurityError', 'NotAllowedError'].includes(error?.name))
+        return 'storage-denied'
+    return [
+        'source',
+        'path',
+        'snapshot',
+        'limit',
+        'size',
+        'action',
+        'context-timeout',
+    ].includes(error?.message)
+        ? error.message
+        : 'storage'
+}
+
+function offlineAppEntry(path) {
+    return (
+        /^\/(?:ko|en)(?:\/(?:feed|docs|web|mobile|ui-ux|about))?\/?$/.test(
+            path
+        ) || /^\/(?:ko|en)\/category(?:\/[a-z0-9_-]+){0,3}\/?$/.test(path)
+    )
+}
+
+function offlineCurrentArticlePath(client) {
+    return new Promise((resolve, reject) => {
+        const channel = new MessageChannel()
+        const finish = (path, error) => {
+            clearTimeout(timer)
+            channel.port1.onmessage = null
+            channel.port1.onmessageerror = null
+            channel.port1.close()
+            if (error) reject(new Error(error))
+            else resolve(path)
+        }
+        const timer = setTimeout(() => finish(null, 'context-timeout'), 1500)
+        channel.port1.onmessage = (event) => {
+            const path =
+                event.data?.ok === true
+                    ? offlineArticlePath(event.data.path)
+                    : null
+            finish(path, path ? null : 'source')
+        }
+        channel.port1.onmessageerror = () => finish(null, 'source')
+        try {
+            client.postMessage(
+                {
+                    channel: 'heap-forge-offline-context-v1',
+                    action: 'current-article',
+                },
+                [channel.port2]
+            )
+        } catch {
+            channel.port2.close()
+            finish(null, 'source')
+        }
+    })
+}
+
 function offlineSnapshotDocument(snapshot, savedAt) {
     const english = snapshot.locale === 'en'
     const heading = /<h1(?:\s|>)/i.test(snapshot.body)
@@ -105,23 +165,40 @@ self.addEventListener('message', (event) => {
         return
     const port = event.ports[0]
     const run = async () => {
+        let stage = 'validation'
         try {
             const client = event.source?.id
                 ? await self.clients.get(event.source.id)
                 : null
             if (!client) throw new Error('source')
             const source = new URL(client.url)
-            const sourcePath = offlineArticlePath(
-                source.origin + source.pathname
-            )
+            let sourcePath = offlineArticlePath(source.origin + source.pathname)
             if (
                 source.origin !== self.location.origin ||
-                (!sourcePath && source.pathname !== '/offline.html')
+                (!sourcePath &&
+                    source.pathname !== '/offline.html' &&
+                    !offlineAppEntry(source.pathname))
             )
                 throw new Error('source')
-            const cache = await caches.open(OFFLINE_ARTICLES)
             const { action, snapshot, path } = event.data
+            if (action === 'save') {
+                const target = offlineArticlePath(snapshot?.path)
+                if (!target) throw new Error('snapshot')
+                if (!sourcePath && !offlineAppEntry(source.pathname))
+                    throw new Error('source')
+                // WindowClient.url can retain the initial URL after an SPA navigation.
+                // Ask this browser-issued client, never trust a URL supplied in the save request.
+                stage = 'source-check'
+                sourcePath = await offlineCurrentArticlePath(client)
+                if (sourcePath !== target) throw new Error('source')
+            } else if (!sourcePath && source.pathname !== '/offline.html') {
+                stage = 'source-check'
+                sourcePath = await offlineCurrentArticlePath(client)
+            }
+            stage = 'storage-open'
+            const cache = await caches.open(OFFLINE_ARTICLES)
             if (action === 'list') {
+                stage = 'storage-read'
                 port.postMessage({
                     ok: true,
                     articles: await offlineList(cache),
@@ -129,13 +206,17 @@ self.addEventListener('message', (event) => {
                 return
             }
             if (action === 'clear') {
+                stage = 'storage-write'
                 for (const request of await cache.keys())
                     await cache.delete(request)
             } else if (action === 'delete') {
+                stage = 'validation'
                 const safePath = offlineArticlePath(path)
                 if (!safePath) throw new Error('path')
+                stage = 'storage-write'
                 await cache.delete(self.location.origin + safePath)
             } else if (action === 'save') {
+                stage = 'validation'
                 const safePath = offlineArticlePath(snapshot?.path)
                 if (
                     !safePath ||
@@ -152,6 +233,7 @@ self.addEventListener('message', (event) => {
                 )
                     throw new Error('snapshot')
                 const key = self.location.origin + safePath
+                stage = 'storage-read'
                 if (
                     !(await cache.match(key)) &&
                     (await cache.keys()).length >= OFFLINE_LIMIT
@@ -161,6 +243,7 @@ self.addEventListener('message', (event) => {
                 const html = offlineSnapshotDocument(snapshot, savedAt)
                 if (new TextEncoder().encode(html).length > OFFLINE_BYTES)
                     throw new Error('size')
+                stage = 'storage-write'
                 await cache.put(
                     key,
                     new Response(html, {
@@ -178,21 +261,13 @@ self.addEventListener('message', (event) => {
                     })
                 )
             } else throw new Error('action')
+            stage = action === 'save' ? 'storage-confirmation' : 'storage-read'
             port.postMessage({ ok: true, articles: await offlineList(cache) })
         } catch (error) {
-            const known = [
-                'source',
-                'path',
-                'snapshot',
-                'limit',
-                'size',
-                'action',
-            ]
             port.postMessage({
                 ok: false,
-                error: known.includes(error.message)
-                    ? error.message
-                    : 'storage',
+                error: offlineErrorCode(error),
+                stage,
             })
         }
     }
