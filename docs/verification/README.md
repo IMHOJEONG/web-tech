@@ -1,5 +1,9 @@
 # 검증 보고서
 
+- [11-01 PR #81 운영 배포](deployment/2026-11-01-pr81-offline-toc-production.md): 같은 main SHA의 CI·Production alias, Chrome 두 폭의 SPA 저장·오프라인 읽기·목차 확인. 기존 사용자 프로필·실기기 검증과 구분.
+
+- [11-01 게시 캐시·503 관측 조사](resilience/2026-11-01-publication-cache-request-cause.md): 실제 정상 본문 반환과 console 누락을 구분하고 반복·강제 stale 대조를 기록. 최초 간헐 원인은 미확정, KAN-58 진행 중.
+
 - [10-31 오프라인 저장 실패 진단](resilience/2026-10-31-offline-save-diagnostics.md): 운영 Chrome 카드 진입의 source 거절·새로고침 성공 대조, 현재 글 확인·진단과 production 62개 회귀. 수정 배포는 별도.
 
 - [10-31 글 중심 저널 실제 앱 검증](accessibility/2026-10-31-blog-journal-implementation.md): 로컬 UI·검색·목차·로딩/목록 회귀, 운영 배포·실기기 검증과 구분.
