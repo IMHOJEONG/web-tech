@@ -333,7 +333,7 @@ test('changed static heading slugs retain unambiguous legacy anchors', async () 
         {
             contentFormat: 'mdx',
             content:
-                '## 정상 1/5 — 준비와 시간 기록\n\n## Foo_bar\n\n## foo*bar*',
+                '<h2 id="authored">Authored heading first</h2>\n\n## 정상 1/5 — 준비와 시간 기록\n\n## Foo_bar\n\n## foo*bar*',
         },
         { codeHighlight: false }
     )
@@ -344,10 +344,42 @@ test('changed static heading slugs retain unambiguous legacy anchors', async () 
     assert.ok(markup.includes('id="정상-15-준비와-시간-기록"'))
     assert.ok(markup.includes('id="foo-bar"'))
     assert.match(markup, /<h2 id="foo_bar"><span[^>]*id="foobar"/)
+    assert.match(
+        markup,
+        /<h2 id="정상-15--준비와-시간-기록"><span[^>]*id="정상-15-준비와-시간-기록"/
+    )
+    assert.match(markup, /<h2 id="foobar-1"><span[^>]*id="foo-bar"/)
+    assert.match(
+        markup,
+        /<h2 id="authored"><span[^>]*id="authored-heading-first"/
+    )
     const ids = [...markup.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1])
     assert.equal(new Set(ids).size, ids.length)
     assert.equal(ids.filter((id) => id === 'foobar').length, 1)
     assert.match(markup, /aria-hidden="true"/)
+})
+
+test('JSX expression children do not get invented or partially derived static IDs', async () => {
+    const rendered = await renderArticleContent(
+        {
+            contentFormat: 'mdx',
+            content: [
+                '<h2>{"Introduction"}</h2>',
+                '<h2>Mixed {"runtime"} title</h2>',
+                '<h2><em>{"Nested expression"}</em></h2>',
+                '<h2 id="explicit">{"Authored expression"}</h2>',
+            ].join('\n\n'),
+        },
+        { codeHighlight: false }
+    )
+    const markup = renderToStaticMarkup(
+        createElement(Fragment, null, rendered.content)
+    )
+    assert.match(markup, /<h2>Introduction<\/h2>/)
+    assert.match(markup, /<h2>Mixed runtime title<\/h2>/)
+    assert.match(markup, /<h2><em>Nested expression<\/em><\/h2>/)
+    assert.match(markup, /<h2 id="explicit">Authored expression<\/h2>/)
+    assert.doesNotMatch(markup, /id="section"|mdx-heading-alias/)
 })
 
 test('implicit authored headings participate in collision allocation without entering the markdown TOC', async () => {

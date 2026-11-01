@@ -94,7 +94,19 @@ export function rehypeArticleHeadings() {
                 jsx &&
                 !id &&
                 node.attributes?.some((attribute) => attribute.name === 'id')
-            if (markdown || (jsx && !dynamicId)) {
+            let expressionChildren = false
+            if (jsx) {
+                visit(node, (child) => {
+                    if (
+                        child.type === 'mdxTextExpression' ||
+                        child.type === 'mdxFlowExpression'
+                    )
+                        expressionChildren = true
+                })
+            }
+            // Expression children are only known by the runtime heading renderer.
+            const staticJsx = jsx && !dynamicId && !expressionChildren
+            if (markdown || staticJsx) {
                 headings.push({
                     node,
                     depth: Number(depth),
@@ -102,7 +114,7 @@ export function rehypeArticleHeadings() {
                     markdown,
                 })
             }
-            if (Number(depth) <= 4 && (markdown || (jsx && !dynamicId))) {
+            if (Number(depth) <= 4 && (markdown || staticJsx)) {
                 legacy.push({
                     node,
                     id: slugifyHeading(node.children?.map(legacyChildren)),

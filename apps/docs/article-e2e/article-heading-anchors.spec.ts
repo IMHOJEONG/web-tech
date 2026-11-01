@@ -123,6 +123,21 @@ test('h5 and h6 TOC targets stay below the sticky header', async ({ page }) => {
     await followToc(page, 'Deep six')
 })
 
+test('JSX expression titles do not get invented static fragment targets', async ({
+    page,
+}) => {
+    await openFixture(page)
+    for (const title of [
+        'Expression introduction',
+        'Mixed runtime title',
+        'Nested expression',
+    ]) {
+        const heading = page.getByRole('heading', { name: title, exact: true })
+        await expect(heading).not.toHaveAttribute('id')
+        await expect(heading.locator('.mdx-heading-alias')).toHaveCount(0)
+    }
+})
+
 test('a legacy fragment works on a direct request and reload through the real MDX route', async ({
     page,
 }) => {
