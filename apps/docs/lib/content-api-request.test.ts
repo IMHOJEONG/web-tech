@@ -9,6 +9,82 @@ import {
 
 const url = 'https://content.example.test/api/posts'
 
+test('network diagnostics retain only an allowlisted cause code and failure phase', async () => {
+    for (const phase of ['headers', 'body'] as const) {
+        let calls = 0
+        const failure = Object.assign(
+            new Error('private response and credential'),
+            {
+                cause: {
+                    cause: {
+                        code: 'UND_ERR_CONNECT_TIMEOUT',
+                        request: 'private request',
+                    },
+                },
+            }
+        )
+        await assert.rejects(
+            readContentApiResponse(url, {
+                deadline: Date.now() + 1000,
+                fetch: async () => {
+                    calls++
+                    if (phase === 'headers') throw failure
+                    return new Response(
+                        new ReadableStream({
+                            start(controller) {
+                                controller.error(failure)
+                            },
+                        })
+                    )
+                },
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof ContentApiRequestError)
+                assert.equal(error.kind, 'network')
+                assert.equal(error.phase, phase)
+                assert.equal(error.causeCode, 'UND_ERR_CONNECT_TIMEOUT')
+                assert.equal('cause' in error || 'request' in error, false)
+                assert.doesNotMatch(
+                    inspect(error),
+                    /private response|private request|credential/
+                )
+                return true
+            }
+        )
+        assert.equal(calls, 1)
+    }
+})
+
+test('unknown, cyclic and throwing network causes cannot leak or mask errors', async () => {
+    const cycle: { cause?: unknown } = {}
+    cycle.cause = cycle
+    const throwing = {
+        get code(): string {
+            throw new Error('private accessor')
+        },
+    }
+    for (const failure of [{ code: 'private-value' }, cycle, throwing]) {
+        await assert.rejects(
+            readContentApiResponse(url, {
+                deadline: Date.now() + 1000,
+                fetch: async () => {
+                    throw failure
+                },
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof ContentApiRequestError)
+                assert.equal(error.kind, 'network')
+                assert.equal(error.causeCode, undefined)
+                assert.doesNotMatch(
+                    inspect(error),
+                    /private-value|private accessor/
+                )
+                return true
+            }
+        )
+    }
+})
+
 test('byte budget counts decoded UTF-8 chunks and accepts the exact boundary', async () => {
     const bytes = new TextEncoder().encode('한글😀')
     for (const maxBytes of [bytes.length, bytes.length - 1]) {
