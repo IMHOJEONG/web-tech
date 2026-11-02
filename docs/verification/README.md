@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-03 캐시·원격 오류·브라우저·권한 순차 점검](resilience/2026-11-03-docs-sequential-followups.md): 늦은 cache write 통제 재현·안전한 원인 코드·실행 환경별 검사와 미확정 범위. 원시 자료 비공개·운영 변경 없음.
+
 - [11-01 PR #81 운영 배포](deployment/2026-11-01-pr81-offline-toc-production.md): 같은 main SHA의 CI·Production alias, Chrome 두 폭의 SPA 저장·오프라인 읽기·목차 확인. 기존 사용자 프로필·실기기 검증과 구분.
 
 - [11-01 게시 캐시·503 관측 조사](resilience/2026-11-01-publication-cache-request-cause.md): 실제 정상 본문 반환과 console 누락을 구분하고 반복·강제 stale 대조를 기록. 최초 간헐 원인은 미확정, KAN-58 진행 중.

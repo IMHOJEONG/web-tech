@@ -40,6 +40,17 @@
 
 PR #36은 main `742707e`에 병합되고 feature 8개에 전달됐다. 아래 과거 보안 항목의 미완료 체크만 보고 동일 패치를 다시 구현하지 않는다. CI·실제 배포는 KAN-2, main의 잔여 운영 glob 경로는 KAN-3에서 추적한다. 작업 등록을 구현·배포 검증 완료로 간주하지 않는다.
 
+## 2026-11-03 순차 개선 후속
+
+KAN-58 → KAN-5 → KAN-6 → KAN-33 순서로 점검했다. 상태 원본은 각 Jira에 유지하고,
+명령·정제 결과는 [검증 보고서](../verification/resilience/2026-11-03-docs-sequential-followups.md)에 연결한다.
+이 절의 결과는 병합 전 로컬 검증이며 Production의 새 코드 적용 증거는 별도로 확인한다.
+
+- **KAN-58:** 응답 보류와 웹훅의 경계를 넘는 늦은 cache write를 통제 재현했다. 과거 간헐 실패의 최초 트리거는 미확정이며 게시 revision·캐시 세대는 다음 설계 검토 대상이다.
+- **KAN-5:** 허용된 네트워크 원인 코드와 headers/body 단계 진단을 추가했다. 과거 로그 재조회 실패로 기존 fetch 실패 2건은 원인 미확정이다. 새 코드를 배포한 뒤 실제 표본과 대조해야 한다.
+- **KAN-6:** 기존 키보드 회귀와 가능한 headed 브라우저 검사를 진행했다. Safari·실기기·보조공학을 전체 성공으로 묶지 않는다.
+- **KAN-33:** 별도 macOS 계정은 미준비다. [준비 절차](../runbooks/github-app-isolated-macos-account.md)만 작성했으며 App 키·토큰 발급·보호 규칙 적용과 PR #75 충돌 해결은 수행하지 않았다.
+
 ## 2026-10-22 블로그 재점검
 
 [KAN-29](https://web-tech-service.atlassian.net/browse/KAN-29)에서 main `4e61767`의 코드와

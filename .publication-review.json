@@ -2,6 +2,76 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/runbooks/README.md",
+      "sha256": "c7a6d0e9efe1ebd3867d1bb8e9e0d2bec479e1c38f102b3d23f42796ec2e43cb",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-03",
+      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/runbooks/github-app-isolated-macos-account.md",
+      "sha256": "6687c84c655cd235cab86594e90f9bd43781e74a4e37a13e761887db676f7930",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-03",
+      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/todo/todo.md",
+      "sha256": "3ea99ddda845cbcc1d236223a2783d938df303c61acce93e6322a23c9221c7de",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-03",
+      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/resilience/2026-11-03-docs-sequential-followups.md",
+      "sha256": "9af6189948f8c57d105a21b9b468ba52842994254db885e74c8cd6524fa06803",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-03",
+      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-03-docs-sequential-followups.md",
+      "sha256": "701177c8c2abb076603ca14c895c2b32b1c123bb69031bfce00f4afce8aecf96",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-03",
+      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/verification/deployment/2026-11-01-pr81-offline-toc-production.md",
       "sha256": "755dd3201d4cb6e62ae1aa6a328293ac4bfa35f15dccd89bdb3a43e9c31dfbe8",
       "kind": "document",
@@ -45,11 +115,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "81f02cedc10f946d7584242403464a1c99dc1035422ea5ef180423721adc4828",
+      "sha256": "1140dc7a759850c12da61cd8cdc703a4721291aa55f12fe66126b43036567b5c",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-01",
-      "note": "사용자가 KAN58 후속 테스트 1개·문서 6개와 승인 해시 6개 갱신의 공개·커밋·브랜치 푸시를 명시 승인함. 자체 작성한 11월 작업 목차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. 후속 main 병합·추가 배포는 승인 범위가 아님.",
+      "reviewedOn": "2026-11-03",
+      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -255,11 +325,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "ce48cbef6d7b428f4c649440b567591ca96e6247c4e76a9ce6c11ace35abc37a",
+      "sha256": "df8a90cdda576096d837d7dda8f9fb408a8321d2de6a6c50f5b0a66c3ee44bc2",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-01",
-      "note": "사용자가 KAN58 후속 테스트 1개·문서 6개와 승인 해시 6개 갱신의 공개·커밋·브랜치 푸시를 명시 승인함. 자체 작성한 운영 배포·간헐 조사 검증 목차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. 후속 main 병합·추가 배포는 승인 범위가 아님.",
+      "reviewedOn": "2026-11-03",
+      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
