@@ -3,6 +3,10 @@ import { setTimeout } from 'node:timers/promises'
 import { articleFixtureAuthorization } from './fixture-credentials.ts'
 
 let publicationVersion = 1
+let publicationGate: Promise<void> | undefined
+let releasePublication: (() => void) | undefined
+let publicationPending = 0
+let publicationReceived = 0
 let releaseRemoteBody: (() => void) | undefined
 let remoteBodyGate: Promise<void> | undefined
 let remoteBodyStatus = 200
@@ -58,6 +62,22 @@ const server = createServer(async (request, response) => {
     // Test-only control plane, bound to loopback and never mounted in Next.js.
     if (request.url?.startsWith('/__test/publication/')) {
         if (
+            request.url === '/__test/publication/state' &&
+            request.method === 'GET' &&
+            request.headers.authorization ===
+                articleFixtureAuthorization('control')
+        ) {
+            response.setHeader('Content-Type', 'application/json')
+            response.end(
+                JSON.stringify({
+                    publicationVersion,
+                    pending: publicationPending,
+                    received: publicationReceived,
+                })
+            )
+            return
+        }
+        if (
             request.method !== 'POST' ||
             request.headers.authorization !==
                 articleFixtureAuthorization('control')
@@ -66,6 +86,18 @@ const server = createServer(async (request, response) => {
             return
         }
         const version = request.url.slice('/__test/publication/'.length)
+        if (version === 'hold-body' || version === 'release-body') {
+            releasePublication?.()
+            publicationGate =
+                version === 'hold-body'
+                    ? new Promise<void>((resolve) => {
+                          releasePublication = resolve
+                      })
+                    : undefined
+            if (version === 'release-body') releasePublication = undefined
+            response.writeHead(204).end()
+            return
+        }
         if (version !== '1' && version !== '2') {
             response.writeHead(400).end('Invalid version')
             return
@@ -129,13 +161,21 @@ const server = createServer(async (request, response) => {
         return
     }
     if (request.url === '/posts/web/article-e2e-publication') {
+        const version = publicationVersion
+        publicationReceived++
+        publicationPending++
+        try {
+            await publicationGate
+        } finally {
+            publicationPending--
+        }
         response.setHeader('Content-Type', 'text/html; charset=utf-8')
         response.end(`<article>
-            <h1>Publication cache probe V${publicationVersion}</h1>
-            <p>PUBLICATION_BODY_V${publicationVersion}</p>
-            <p>bodyonlypublicationv${publicationVersion}needle</p>
+            <h1>Publication cache probe V${version}</h1>
+            <p>PUBLICATION_BODY_V${version}</p>
+            <p>bodyonlypublicationv${version}needle</p>
             <h2>Publication ending</h2>
-            <p>PUBLICATION_END_V${publicationVersion}</p>
+            <p>PUBLICATION_END_V${version}</p>
         </article>`)
         return
     }
