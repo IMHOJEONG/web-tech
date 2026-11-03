@@ -86,6 +86,14 @@ const server = createServer(async (request, response) => {
             return
         }
         const version = request.url.slice('/__test/publication/'.length)
+        if (version === 'reset') {
+            releasePublication?.()
+            publicationGate = undefined
+            releasePublication = undefined
+            publicationVersion = 1
+            response.writeHead(204).end()
+            return
+        }
         if (version === 'hold-body' || version === 'release-body') {
             releasePublication?.()
             publicationGate =

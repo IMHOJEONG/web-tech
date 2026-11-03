@@ -1,8 +1,8 @@
 // Loopback process only; no cache keys, headers, URLs or response bodies are saved.
-import { createHash } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import { AsyncLocalStorage } from 'node:async_hooks'
 import { mkdirSync, renameSync, writeFileSync } from 'node:fs'
-import { IncomingMessage, Server } from 'node:http'
+import { IncomingMessage, Server, ServerResponse } from 'node:http'
 import { createRequire } from 'node:module'
 import { isAbsolute, join } from 'node:path'
 import { mock } from 'node:test'
@@ -20,6 +20,7 @@ if (directory) {
             prototype: Record<'get' | 'set' | 'revalidateTag', Operation>
         }
     const events: object[] = []
+    const runId = randomUUID()
     const scope = new AsyncLocalStorage<number>()
     let probeSequence = 0
     const emit = Server.prototype.emit
@@ -34,9 +35,29 @@ if (directory) {
                 request.socket.localPort === 3111 &&
                 request.headers['x-article-cache-probe'] === '1'
             ) {
-                return scope.run(++probeSequence, () =>
-                    Reflect.apply(emit, this, [event, ...args])
-                )
+                return scope.run(++probeSequence, () => {
+                    const response = args[1]
+                    if (
+                        request.method === 'GET' &&
+                        request.url ===
+                            '/__test/cache-observation/checkpoint' &&
+                        response instanceof ServerResponse
+                    ) {
+                        record('checkpoint', 'end', null)
+                        response.setHeader('Content-Type', 'application/json')
+                        response.end(
+                            JSON.stringify({
+                                runId,
+                                probeId: scope.getStore(),
+                                sequence: events.length,
+                                omitted,
+                                deliveryFailures,
+                            })
+                        )
+                        return true
+                    }
+                    return Reflect.apply(emit, this, [event, ...args])
+                })
             }
             return Reflect.apply(emit, this, [event, ...args])
         }
@@ -83,7 +104,7 @@ if (directory) {
             const file = join(directory!, 'cache-events.json')
             writeFileSync(
                 `${file}.tmp`,
-                JSON.stringify({ events, omitted, deliveryFailures }),
+                JSON.stringify({ runId, events, omitted, deliveryFailures }),
                 { mode: 0o600 }
             )
             renameSync(`${file}.tmp`, file)
