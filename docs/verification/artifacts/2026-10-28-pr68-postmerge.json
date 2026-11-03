@@ -1,0 +1,397 @@
+{
+  "observedDate": "2026-10-28",
+  "timeZone": "Asia/Seoul",
+  "pr": "https://github.com/IMHOJEONG/web-tech/pull/68",
+  "merge": {
+    "head": "05aa729fa456ac043dadcad20f1e7fa6fe70e2d9",
+    "mergeSha": "e2126a40c02694d968f62ce0e236ec0945a57d7b",
+    "mergedAt": "2026-10-27T23:25:08Z",
+    "messageSha256": "c8191f829146fe3d6a129118134f16006ff69314a9e404e51148c703ff6e7a44",
+    "reviewId": 5675711261,
+    "reviewCheckId": 122526683712,
+    "ciRunId": 40541395799,
+    "ciAttempt": 2,
+    "desktopJobId": 122527545001,
+    "desktop": {
+      "passed": 120,
+      "flaky": 2,
+      "skipped": 16,
+      "internalRetry": 1
+    },
+    "minorReply": "https://github.com/IMHOJEONG/web-tech/pull/68#discussion_r4395284068",
+    "state": "MERGED",
+    "mergedAtKst": "2026-10-28T08:25:08+09:00",
+    "method": "approved pnpm pr:squash --merge; no admin/auto/force"
+  },
+  "review": {
+    "head": "05aa729fa456ac043dadcad20f1e7fa6fe70e2d9",
+    "checkId": 122526683712,
+    "reviewId": 5675711261,
+    "conclusion": "SUCCESS",
+    "threadsResolved": 4,
+    "minor": {
+      "commentId": 4395245778,
+      "reply": "https://github.com/IMHOJEONG/web-tech/pull/68#discussion_r4395284068",
+      "implemented": false,
+      "reason": "Automatic gate bypass rejected against the existing security floor; gate-less rollback validation/documentation remains follow-up"
+    }
+  },
+  "prCi": {
+    "runId": 40541395799,
+    "attempt": 2,
+    "conclusion": "success",
+    "selectiveRerun": "desktop job and dependent Test; prior successful jobs reused",
+    "desktop": {
+      "passed": 120,
+      "flaky": 2,
+      "skipped": 16,
+      "firstRetryTests": [
+        "light /feed domain skeleton",
+        "light /ui-ux domain skeleton"
+      ]
+    },
+    "criteriaChanged": false
+  },
+  "mainCi": {
+    "attempt": 1,
+    "conclusion": "success",
+    "headSha": "e2126a40c02694d968f62ce0e236ec0945a57d7b",
+    "jobs": [
+      {
+        "conclusion": "success",
+        "databaseId": 122532150815,
+        "name": "Docs Browser (responsive-tablet)",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150815"
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 122532150876,
+        "name": "Docs Browser (responsive-desktop)",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150876"
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 122532150906,
+        "name": "Typecheck",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150906"
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 122532150962,
+        "name": "Shared UI (test:ui:consumer)",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150962"
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 122532150980,
+        "name": "Docs Browser (article-production)",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150980"
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 122532150987,
+        "name": "Unit and Contract Tests",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150987"
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 122532150994,
+        "name": "Docs Browser (responsive-mobile)",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150994"
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 122532151050,
+        "name": "Docs Offline Reading",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532151050"
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 122532151069,
+        "name": "Shared UI (test:ui)",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532151069"
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 122532151119,
+        "name": "Commit Messages",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532151119"
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 122532151125,
+        "name": "Lint",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532151125"
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 122532151163,
+        "name": "Docs Browser (crp-lab)",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532151163"
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 122534092344,
+        "name": "Test",
+        "status": "completed",
+        "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122534092344"
+      }
+    ],
+    "status": "completed"
+  },
+  "mainChecks": {
+    "checks": [
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122534092344",
+        "name": "Test",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997272/job/122532154827",
+        "name": "Analyze (javascript-typescript)",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997272/job/122532154401",
+        "name": "Analyze (actions)",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997769/job/122532151569",
+        "name": "Build And Publish",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532151163",
+        "name": "Docs Browser (crp-lab)",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532151125",
+        "name": "Lint",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532151119",
+        "name": "Commit Messages",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532151069",
+        "name": "Shared UI (test:ui)",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532151050",
+        "name": "Docs Offline Reading",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150994",
+        "name": "Docs Browser (responsive-mobile)",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150987",
+        "name": "Unit and Contract Tests",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150980",
+        "name": "Docs Browser (article-production)",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150962",
+        "name": "Shared UI (test:ui:consumer)",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150906",
+        "name": "Typecheck",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150876",
+        "name": "Docs Browser (responsive-desktop)",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997663/job/122532150815",
+        "name": "Docs Browser (responsive-tablet)",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "details_url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40601997562/job/122532150474",
+        "name": "Documentation delta checks",
+        "status": "completed"
+      }
+    ],
+    "total_count": 17
+  },
+  "mainTestSummaries": {
+    "desktop": {
+      "passed": 119,
+      "flaky": 3,
+      "skipped": 16
+    },
+    "mobile": {
+      "passed": 126,
+      "flaky": 2,
+      "skipped": 10
+    },
+    "tablet": {
+      "passed": 114,
+      "skipped": 24
+    },
+    "articleProduction": {
+      "passed": 162
+    },
+    "sharedUi": {
+      "passed": 68
+    },
+    "uiConsumer": {
+      "passed": 16
+    },
+    "offline": {
+      "passed": 44
+    },
+    "crpLab": {
+      "passed": 5
+    }
+  },
+  "image": {
+    "workflowRunId": 40601997769,
+    "conclusion": "success",
+    "tag": "ghcr.io/imhojeong/web-tech-docs-backend:sha-e2126a40c02694d968f62ce0e236ec0945a57d7b",
+    "digest": "sha256:3167e80350bb00edcceb39890181b24ce5aad7faf90421895234938414ac4265",
+    "platform": "linux/amd64",
+    "pull": true,
+    "push": true,
+    "sbom": true,
+    "provenance": "mode=max",
+    "buildGateNode": "v24.22.1",
+    "evidence": "workflow push-manifest and containerimage.digest log",
+    "independentRegistryRead": false,
+    "nasPulledOrReplaced": false
+  },
+  "vercel": {
+    "id": "dpl_FRZ6Ht4yFyC12Dev5HAth9GAcqnY",
+    "url": "web-tech-2owbeloqs-hojeong-ims-projects.vercel.app",
+    "target": "production",
+    "readyState": "READY",
+    "gitSource": {
+      "ref": "main",
+      "repoId": 828425495,
+      "sha": "e2126a40c02694d968f62ce0e236ec0945a57d7b",
+      "type": "github",
+      "prId": null
+    },
+    "aliases": [
+      "heap-forge.app",
+      "web-tech-log.vercel.app",
+      "web-tech-hojeong-ims-projects.vercel.app",
+      "web-tech-git-main-hojeong-ims-projects.vercel.app"
+    ],
+    "nodeVersion": "24.x"
+  },
+  "railway": {
+    "id": "0ba8ae87-54f2-4bcc-8e7b-a90393d76051",
+    "status": "SUCCESS",
+    "createdAt": "2026-10-27T23:25:10.875Z",
+    "commit": "e2126a40c02694d968f62ce0e236ec0945a57d7b",
+    "branch": "main",
+    "imageDigest": "sha256:86515692bc437028a382615f6d5c82bf6059a5b15a2c34945492e9d26ec035f8",
+    "rootDirectory": "/",
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "/apps/vuln-radar-backend/Dockerfile",
+    "healthcheckPath": null,
+    "buildKeys": [
+      "buildCommand",
+      "buildEnvironment",
+      "builder",
+      "dockerfilePath",
+      "nixpacksConfigPath",
+      "nixpacksPlan",
+      "watchPatterns"
+    ],
+    "nodeBuildGate": "Node.js v24.22.1: security floor 24.22.1 verified",
+    "manualRedeploy": false,
+    "runtimeProcessVersionDirectlyQueried": false
+  },
+  "http": {
+    "exitCode": 0,
+    "results": [
+      {
+        "url": "https://heap-forge.app/ko/feed",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "url": "https://heap-forge.app/ko/docs",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "url": "https://heap-forge.app/robots.txt",
+        "status": 200,
+        "contentType": "text/plain; charset=utf-8"
+      },
+      {
+        "url": "https://heap-forge.app/sitemap.xml",
+        "status": 200,
+        "contentType": "application/xml"
+      },
+      {
+        "url": "https://vuln-radar-service.vercel.app/api/backend/health",
+        "status": 200,
+        "contentType": "application/json; charset=utf-8",
+        "health": "ok",
+        "storage": "database"
+      }
+    ],
+    "scope": "public unauthenticated GET only; no ingestion, DB mutation or credentials"
+  },
+  "preservation": {
+    "filterModifiedAndUntrackedFiles": 15,
+    "sha256SnapshotUnchanged": true,
+    "previousHoldArtifactPreserved": true,
+    "localDocumentationNotUploaded": true
+  },
+  "limitations": [
+    "NAS image replacement and runtime verification remain manual/unverified",
+    "Vercel reports Node24.x; exact managed runtime patch not queried",
+    "main browser jobs succeeded with desktop3 and mobile2 flaky tests; no criteria relaxation",
+    "gate-less rollback documentation/secure validation follow-up; no bypass implemented",
+    "postmerge verification documents are local uncommitted records"
+  ]
+}

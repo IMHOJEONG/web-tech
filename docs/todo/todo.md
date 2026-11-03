@@ -20,6 +20,20 @@
 - `P1` 가까운 시일 내 반영 권장
 - `P2` 품질 향상용 중기 과제
 
+## 2026-10-28 잔여 작업 분리
+
+최신 main `e2126a40`에서 남은 미커밋을 작업별 PR로 준비한다. 이 목록은 운영 완료 선언이 아니며 상세 상태는 연결 이슈에서 관리한다. [병합 후 증거](../verification/security/2026-10-27-node24-security-patch.md#2026-10-28-재개와-병합-후-검증)를 기준으로 한다.
+
+| 우선순위 | 작업·추적                                                                                    | 완료 조건과 제약                                                                                                                            |
+| -------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| P1       | Node 선행 조사·병합 후 기록 · [KAN-43](https://web-tech-service.atlassian.net/browse/KAN-43) | 과거 버전/취소와 현재 패치/재시도를 분리한 독립 PR, 원본 기록·파일 보존. 운영 교체와 별개.                                                  |
+| P1       | 스켈레톤 flaky · [기존 PR #67](https://github.com/IMHOJEONG/web-tech/pull/67)                | 새 중복 PR을 만들지 않고 해당 PR에서 retry 없는 결과를 확인. main의 기존 5건을 안정화 완료로 표시하지 않음.                                 |
+| P1       | 스트리밍 필터 준비 상태 · [KAN-42](https://web-tech-service.atlassian.net/browse/KAN-42)     | fallback/완성 결과를 분리한 회귀 PR, ko/en·mobile/tablet/desktop 검증. timeout/retry/기대값 완화 금지.                                      |
+| P1       | NAS 보안 이미지 교체 · KAN-43                                                                | 사용자 승인한 운영 단계에서 새 tag/digest·실행 Node·health/content 확인. 과거 이미지 단순 restart는 완료가 아님. 이번 PR에서 실행하지 않음. |
+| P1       | NAS H1 표본·외부 health · [KAN-37](https://web-tech-service.atlassian.net/browse/KAN-37)     | 10-25 읽기 전용 관측을 보존하고 실제 H1 문서·제외 로그·파일/공개 상태·health 차단 확인. NAS 접근 전까지 미확인.                             |
+| P2       | gate 없는 rollback 대상의 수동 검증 설명 · KAN-43                                            | 검증 가능한 patched 이미지와 보안 floor를 유지하는 절차를 별도 검토. gate 생략·취약 이미지 자동 rollback은 허용하지 않음.                   |
+| P2       | 대비 변경의 병합·배포 기록 · [KAN-36](https://web-tech-service.atlassian.net/browse/KAN-36)  | PR #62/#63 원본 CI·배포 증거 연결. 전체 WCAG/실기기 검증과 구분한 독립 기록 PR.                                                             |
+
 ## Jira 우선 과제
 
 2026-10-09부터 아래 등록 과제의 진행 상태·보류 사유는 Jira에서 관리한다. 이 표는 상태를 복제하지 않는 연결 목차이며, 나머지 TODO 후보는 기존 목록에서 유지한다. [이슈 추적 규칙](../process/issue-tracking.md)을 따른다.
