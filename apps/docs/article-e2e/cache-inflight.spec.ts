@@ -79,6 +79,28 @@ async function cleanupPublication(actions: {
     if (errors.length)
         throw new AggregateError(errors, 'Publication cleanup failed')
 }
+
+async function retainBodyFailure(
+    bodyErrors: unknown[],
+    cleanup: () => Promise<void>
+) {
+    try {
+        await cleanup()
+    } catch (cleanupError) {
+        if (!bodyErrors.length) throw cleanupError
+        const body = bodyErrors[0]
+        const bodyMessage =
+            body instanceof Error ? body.message : 'non-Error body failure'
+        const cleanupMessage =
+            cleanupError instanceof Error
+                ? cleanupError.message
+                : 'non-Error cleanup failure'
+        throw new AggregateError(
+            [...bodyErrors, cleanupError],
+            `Publication body failed: ${bodyMessage}\nCleanup also failed: ${cleanupMessage}`
+        )
+    }
+}
 async function control(request: APIRequestContext, action: string) {
     const response = await request.post(
         `${origin}/__test/publication/${action}`,
@@ -103,6 +125,7 @@ test('publication diagnostic: invalidation overlaps a captured origin response',
 }, testInfo) => {
     // This is an ordering diagnostic, not a claim about the historical failure.
     let pending: ReturnType<APIRequestContext['get']> | undefined
+    const bodyErrors: unknown[] = []
     try {
         await control(request, '1')
         await invalidate(request)
@@ -170,16 +193,51 @@ test('publication diagnostic: invalidation overlaps a captured origin response',
             contentType: 'application/json',
         })
         console.info('[cache-inflight-summary]', JSON.stringify(result))
+    } catch (error) {
+        bodyErrors.push(error)
+        throw error
     } finally {
-        await cleanupPublication({
-            release: () => control(request, 'release-body'),
-            reset: () => control(request, 'reset'),
-            drain: async () => {
-                await pending?.catch(() => {})
-            },
-            invalidate: () => invalidate(request),
-        })
+        await retainBodyFailure(bodyErrors, () =>
+            cleanupPublication({
+                release: () => control(request, 'release-body'),
+                reset: () => control(request, 'reset'),
+                drain: async () => {
+                    await pending?.catch(() => {})
+                },
+                invalidate: () => invalidate(request),
+            })
+        )
     }
+})
+
+test('body and cleanup failures remain visible without replacing either cause', async () => {
+    const body = new Error('synthetic cache assertion')
+    const cleanup = new AggregateError(
+        [new Error('synthetic release')],
+        'synthetic cleanup failure'
+    )
+    try {
+        await retainBodyFailure([body], async () => {
+            throw cleanup
+        })
+        throw new Error('Expected combined failure')
+    } catch (error) {
+        expect(error).toBeInstanceOf(AggregateError)
+        expect((error as AggregateError).errors).toEqual([body, cleanup])
+        expect((error as Error).message).toContain(body.message)
+        expect((error as Error).message).toContain(cleanup.message)
+    }
+    await expect(
+        retainBodyFailure([], async () => {
+            throw cleanup
+        })
+    ).rejects.toBe(cleanup)
+    await retainBodyFailure([body], async () => {})
+    await expect(
+        retainBodyFailure([undefined], async () => {
+            throw cleanup
+        })
+    ).rejects.toMatchObject({ errors: [undefined, cleanup] })
 })
 
 for (const failures of [['release'], ['reset'], ['release', 'reset']]) {
