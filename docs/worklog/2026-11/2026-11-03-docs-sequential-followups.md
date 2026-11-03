@@ -34,6 +34,18 @@ loopback listen EPERM이었으며 같은 전체 검사를 허용 환경에서 �
 [Confluence 후속 댓글](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817?focusedCommentId=14188545)에 결정과 남은 범위를 연결했다.
 페이지 본문과 사용자의 미게시 변경은 수정하지 않았다.
 
+### PR #83 리뷰 후속
+
+최초 3커밋을 푸시해 [PR #83](https://github.com/IMHOJEONG/web-tech/pull/83)을 만들었다.
+첫 head의 CI·문서·보안·두 Preview 검사는 통과했다. 리뷰의 Minor 4건을 대조해
+준비 실패와 release 실패의 정리 범위를 보완하고, live checkpoint와 같은 실행의 저장 marker를 검사한다.
+실패 경로·오래된 계측 거절을 포함한 집중 66개와 production 전체 188개, lint·타입 검사가 통과했다.
+보고서의 기준선 작업 트리·실행 위치를 보완했다. 사용자가 같은 범위의 리뷰 보완과
+변경된 보고서·worklog 두 문서의 공개 재검수·해시 갱신 및 검증 후 병합·배포 계속을 승인했다.
+첫 Preview는 비인증 SSO 리디렉션과 공식 CLI 인증의 목록·검색·본문 표시를 분리 확인했다.
+CLI에 필요한 로컬 프로젝트 연결만 만들었으며 로컬 소스·환경 파일의 배포 업로드는 하지 않았다.
+새 head의 CI·리뷰·main 병합·운영 검증 결과는 실제 리비전과 함께 후속 연결한다.
+
 ## Open Questions
 
 - 통제한 in-flight 늦은 쓰기는 관측했지만 과거 최초 stale 진입 계기는 미확정이다. 게시 revision 설계가 필요한지 추가 검토한다.

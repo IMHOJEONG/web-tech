@@ -45,11 +45,11 @@
     },
     {
       "path": "docs/verification/resilience/2026-11-03-docs-sequential-followups.md",
-      "sha256": "9af6189948f8c57d105a21b9b468ba52842994254db885e74c8cd6524fa06803",
+      "sha256": "8bbb7282ef702c6bd037a0a352c339a399fb1e3e7967b881c724a7313ae72140",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-03",
-      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
+      "note": "사용자가 PR83 리뷰 보완의 동일 범위 코드·보고서·worklog 2개 재검수와 해시 갱신 후 검증·병합·배포 계속을 명시 승인함. 기준선 작업 트리 재현 절차와 정리·계측 회귀 66개/전체188개 결과만 추가하며 원시 자료·식별자·초안·비밀값은 공개하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -59,11 +59,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-03-docs-sequential-followups.md",
-      "sha256": "701177c8c2abb076603ca14c895c2b32b1c123bb69031bfce00f4afce8aecf96",
+      "sha256": "bfa3da338f390f14007c1b71262243fbc1476396a155bd9b9c151008f0ac35f3",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-03",
-      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
+      "note": "사용자가 PR83 리뷰 보완의 동일 범위 코드·보고서·worklog 2개 재검수와 해시 갱신 후 검증·병합·배포 계속을 명시 승인함. 기준선 작업 트리 재현 절차와 정리·계측 회귀 66개/전체188개 결과만 추가하며 원시 자료·식별자·초안·비밀값은 공개하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,

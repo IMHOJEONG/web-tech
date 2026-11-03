@@ -10,13 +10,23 @@ Node 24.22.1·pnpm 12.14.0·Next 16.4.3, 합성 loopback production 서버와 �
 
 ## 재현 방법
 
-루트에서 Node 24 도구를 사용한다. 계측 경로와 Playwright output은 저장소 밖 제한된 임시 디렉터리로 지정한다.
-기존 개발 서버와 같은 포트의 서버를 임의 종료하지 않는다.
+Node 24 도구와 frozen lockfile 의존성을 준비한다. 기준선은 아래의 별도 main 리비전 작업 트리 루트에서,
+수정 후 검사는 원래 이번 변경 checkout 루트로 돌아와 실행한다. 두 실행을 같은 수정 소스로 대체하지 않는다.
+계측 경로와 Playwright output은 저장소 밖 제한된 임시 디렉터리로 지정한다.
+기존 개발 서버와 같은 포트의 서버를 임의 종료하지 않는다. 예시 경로가 이미 있으면 새 경로를 선택한다.
 
 ```sh
+CURRENT_ROOT="$(git rev-parse --show-toplevel)"
+BASE_DIR="$(mktemp -d "${TMPDIR:-/tmp}/docs-followup-base.XXXXXX")"
+git worktree add --detach "$BASE_DIR" 0cd27ae405b653785fd0bcbe55e507907e53fe59
+cd "$BASE_DIR"
+pnpm install --frozen-lockfile
 pnpm --filter docs test:article:prod \
   article-e2e/content-publication.spec.ts article-e2e/request-cause-next.spec.ts \
   --repeat-each=3 --output=/tmp/docs-followup-baseline --reporter=list
+
+cd "$CURRENT_ROOT"
+pnpm install --frozen-lockfile
 ARTICLE_CACHE_OBSERVATION_DIR=/tmp/docs-followup-cache \
   pnpm --filter docs test:article:prod article-e2e/cache-inflight.spec.ts \
   article-e2e/content-publication.spec.ts article-e2e/request-cause-next.spec.ts \
@@ -76,6 +86,23 @@ JavaScript 전체를 보류한 시험에서는 헤더 검색이 DOM에 생성되
 목차는 1024px 미만에서 `article-mobile-toc`, 그 외 `aside details`로 한정하며,
 `decodeURIComponent(new URL(page.url()).hash)`와 디코딩한 링크 fragment를 비교한다.
 이 검사는 영구 회귀 코드의 추가가 아니라 이번 운영 표본 검사다.
+
+### PR #83 리뷰 후속
+
+최초 head `7d63e9e`의 CI·문서·보안·두 Preview 검사는 통과했다. CodeRabbit의 Minor 4건은
+실패 시 fixture 정리 두 경로, 마지막 계측 쓰기의 완결성, 기준선 실행 위치였다.
+기준선 명령을 별도 base 작업 트리로 분리하고 원래 checkout으로 돌아오는 절차를 명시했다.
+
+코드는 준비 단계부터 정리 범위에 포함하고 독립 reset이 gate 해제·V1 원복을 수행한다.
+release/reset 오류를 보존하면서 가능한 요청 drain과 최종 무효화를 시도한다.
+둘 다 실패하면 held 응답을 무한 대기하지 않으며 정리 실패 자체는 검사 실패다.
+계측 수락은 같은 실행의 live checkpoint와 저장 파일의 marker·sequence·실행 식별자를 대조한다.
+마지막 파일 쓰기가 실패해 저장된 오류 수가 0으로 남아 있어도 live 오류·누락 marker로 거절한다.
+원시 이벤트·실행 식별자는 공개하지 않으며 checkpoint 이후 모든 비동기 작업까지 완결됐다는 의미는 아니다.
+
+보완 후 집중 66/66(3회 반복), 상세 production 전체 188/188, lint·타입 검사가 통과했다.
+추가된 실패 정리 세 조건과 오래된/불완전 계측 거절을 두 화면 project에서 검사했다.
+이 수치는 최초 42/180 기록을 덮어쓰지 않는 후속 결과이며 새 head의 원격 CI는 별도로 확인한다.
 
 ## 한계와 후속 작업
 
