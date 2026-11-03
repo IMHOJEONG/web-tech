@@ -1,0 +1,33 @@
+{
+  "checkedOn": "2026-10-28",
+  "baseCommit": "e2126a40c02694d968f62ce0e236ec0945a57d7b",
+  "node": "24.22.1",
+  "pnpm": "12.14.0",
+  "scope": "Chromium emulation only; no deployment or NAS changes",
+  "runs": [
+    {
+      "command": "DOCS_E2E_PORT=3038 mise exec -- pnpm --filter docs exec playwright test e2e/docs-index-order.spec.ts e2e/docs-index-readiness.spec.ts --grep 'collapsed filters|filter readiness' --repeat-each=3 --workers=2 --retries=0",
+      "passed": 36,
+      "failed": 0,
+      "skipped": 0,
+      "retries": 0
+    },
+    {
+      "command": "DOCS_E2E_PORT=3038 mise exec -- pnpm --filter docs exec playwright test e2e/docs-index-order.spec.ts e2e/docs-index-readiness.spec.ts e2e/docs-index-navigation.spec.ts e2e/docs-index-pagination.spec.ts e2e/docs-touch-target.spec.ts e2e/hub-topic-filters.spec.ts --workers=2 --retries=0",
+      "passed": 65,
+      "failed": 0,
+      "skipped": 10,
+      "retries": 0,
+      "skipReason": "Existing mobile-only navigation and touch tests on tablet/desktop"
+    }
+  ],
+  "checks": {
+    "appTypecheck": "passed",
+    "changedFourFilesEslint": "passed"
+  },
+  "warnings": [
+    "React hydration attribute warning mentioning details open observed in related run; native fallback opened before stream completion; not treated as pageerror or proof that all hydration warnings are resolved."
+  ],
+  "overlap": "Runs overlap; do not sum as unique coverage.",
+  "remoteCi": "not yet verified"
+}

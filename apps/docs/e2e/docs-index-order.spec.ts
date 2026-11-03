@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 import {
     openDocsIndexFilters,
+    readyDocsIndex,
     visibleDocsIndexFilters,
 } from './helpers/docs-index'
 
@@ -58,8 +59,8 @@ for (const locale of ['ko', 'en']) {
         await page.goto(
             `/${locale}/docs?section=web&sort=title&tag=react&collection=react-boundaries`
         )
-        const active = page.locator(
-            '[data-testid="docs-index-active-filters"]:visible'
+        const active = readyDocsIndex(page).getByTestId(
+            'docs-index-active-filters'
         )
         await expect(active.getByRole('link')).toHaveCount(4)
         await expect(visibleDocsIndexFilters(page)).not.toHaveAttribute('open')
@@ -73,10 +74,18 @@ for (const locale of ['ko', 'en']) {
                 sort: 'title',
                 collection: 'react-boundaries',
             })
+        await expect(active.getByRole('link')).toHaveCount(3)
+        await expect(active.getByRole('link', { name: /#react/ })).toHaveCount(
+            0
+        )
         await active.getByRole('link', { name: /React.*Next.js/ }).click()
         await expect
             .poll(() => Object.fromEntries(new URL(page.url()).searchParams))
             .toEqual({ section: 'web', sort: 'title' })
+        await expect(active.getByRole('link')).toHaveCount(2)
+        await expect(
+            active.getByRole('link', { name: /React.*Next.js/ })
+        ).toHaveCount(0)
         await openDocsIndexFilters(page)
         await visibleDocsIndexFilters(page)
             .locator('a[href*="sort=section"]')
@@ -84,8 +93,14 @@ for (const locale of ['ko', 'en']) {
         await expect
             .poll(() => new URL(page.url()).searchParams.get('sort'))
             .toBe('section')
+        await expect(active.getByRole('link')).toHaveText([
+            'Web',
+            locale === 'ko' ? '섹션순' : 'Section',
+        ])
+        await openDocsIndexFilters(page)
         const summary = visibleDocsIndexFilters(page).locator('summary')
         await summary.focus()
+        await expect(summary).toBeFocused()
         await page.keyboard.press('Enter')
         await expect(visibleDocsIndexFilters(page)).not.toHaveAttribute('open')
         await expect(active.getByRole('link')).toHaveCount(2)
