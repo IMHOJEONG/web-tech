@@ -1,16 +1,60 @@
 import ky from 'ky'
 
+const networkCodes = [
+    'ECONNREFUSED',
+    'ECONNRESET',
+    'ENOTFOUND',
+    'EAI_AGAIN',
+    'ETIMEDOUT',
+    'UND_ERR_CONNECT_TIMEOUT',
+    'UND_ERR_HEADERS_TIMEOUT',
+    'UND_ERR_BODY_TIMEOUT',
+    'UND_ERR_SOCKET',
+    'ABORT_ERR',
+] as const
+type NetworkCode = (typeof networkCodes)[number]
+
+function readNetworkCode(error: unknown): NetworkCode | undefined {
+    const visited = new Set<unknown>()
+    try {
+        for (let depth = 0; depth < 5; depth++) {
+            if (
+                typeof error !== 'object' ||
+                error === null ||
+                visited.has(error)
+            )
+                break
+            visited.add(error)
+            const candidate = error as { code?: unknown; cause?: unknown }
+            const code = networkCodes.find((value) => value === candidate.code)
+            if (code) return code
+            error = candidate.cause
+        }
+    } catch {
+        // Untrusted accessors must not replace the original request failure.
+    }
+    return undefined
+}
+
 export class ContentApiRequestError extends Error {
     readonly kind: 'timeout' | 'http' | 'empty' | 'network' | 'too-large'
     readonly status?: number
+    readonly phase?: 'headers' | 'body'
+    readonly causeCode?: NetworkCode
 
-    constructor(kind: ContentApiRequestError['kind'], status?: number) {
+    constructor(
+        kind: ContentApiRequestError['kind'],
+        status?: number,
+        diagnostics?: { phase: 'headers' | 'body'; causeCode?: NetworkCode }
+    ) {
         super(
             `Content API request failed: ${kind}${status ? ` (${status})` : ''}`
         )
         this.name = 'ContentApiRequestError'
         this.kind = kind
         this.status = status
+        this.phase = diagnostics?.phase
+        this.causeCode = diagnostics?.causeCode
     }
 }
 
@@ -42,7 +86,11 @@ export async function readContentApiResponse(
     let timer: ReturnType<typeof setTimeout> | undefined
     const timeout = new Promise<never>((_, reject) => {
         timer = setTimeout(() => {
-            reject(new ContentApiRequestError('timeout'))
+            reject(
+                new ContentApiRequestError('timeout', undefined, {
+                    phase: response ? 'body' : 'headers',
+                })
+            )
             controller.abort()
             void reader?.cancel().catch(() => {})
         }, remaining)
@@ -103,7 +151,10 @@ export async function readContentApiResponse(
     } catch (error) {
         // Ky network errors carry a Request (including auth headers). Do not log it.
         if (error instanceof ContentApiRequestError) throw error
-        throw new ContentApiRequestError('network')
+        throw new ContentApiRequestError('network', undefined, {
+            phase: response ? 'body' : 'headers',
+            causeCode: readNetworkCode(error),
+        })
     } finally {
         clearTimeout(timer)
         // Do not let stream cancellation prolong the caller's deadline.
