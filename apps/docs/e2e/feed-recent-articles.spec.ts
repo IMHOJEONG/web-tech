@@ -112,7 +112,7 @@ test('cards indicate interaction through title color and keyboard focus without 
     }
 })
 
-test('empty topic keeps filters and returns to actual recent articles', async ({
+test('mobile topic opens its published article and returns to all recent articles', async ({
     page,
 }) => {
     await page.goto('/ko/feed?topic=mobile')
@@ -120,12 +120,11 @@ test('empty topic keeps filters and returns to actual recent articles', async ({
     await expect(
         recent.getByRole('link', { name: 'MOBILE', exact: true })
     ).toHaveAttribute('aria-current', 'page')
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-        '아직 이 주제에 올라온 글이 없습니다'
-    )
-    await expect(recent.locator('li')).toHaveCount(0)
     await expect(
-        recent.getByText('이 주제의 다른 글은 아직 없습니다.')
+        page.getByRole('heading', {
+            name: '모바일 화면 높이: 100vh를 써도 버튼이 가려지는 이유',
+            level: 1,
+        })
     ).toBeVisible()
     await recent.getByRole('link', { name: 'ALL', exact: true }).click()
     await expect(page).toHaveURL(/\/ko\/feed$/)

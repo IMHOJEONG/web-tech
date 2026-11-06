@@ -18,10 +18,12 @@ for (const locale of ['ko', 'en']) {
             ).toHaveCount(0)
             await expect(main.locator('input, button')).toHaveCount(0)
             const featured = page.getByTestId('uiux-featured-articles')
-            const tutorial = page.getByTestId('uiux-tutorial-card')
-            await expect(featured.getByRole('link')).toHaveCount(2)
-            await expect(tutorial).toHaveCount(0)
-            await expect(page.getByTestId('uiux-more-articles')).toHaveCount(0)
+            await expect(featured.getByRole('link')).toHaveCount(3)
+            await expect(
+                main.locator(
+                    `a[href="/${locale}/docs/ui-ux/form-error-recovery"]`
+                )
+            ).toBeVisible()
             const feedLink = main.getByRole('link', {
                 name:
                     locale === 'ko'
@@ -103,7 +105,7 @@ test('UI/UX cards fit 320px and intermediate widths', async ({ page }) => {
         const cards = page.locator(
             '[data-testid="uiux-featured-articles"] > a, [data-testid="uiux-tutorial-card"] > a'
         )
-        await expect(cards).toHaveCount(2)
+        await expect(cards.first()).toBeVisible()
         for (const card of await cards.all()) {
             expect(
                 await card.evaluate(

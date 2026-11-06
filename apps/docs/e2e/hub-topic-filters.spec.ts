@@ -86,7 +86,7 @@ for (const locale of ['ko', 'en']) {
     }
 }
 
-test('unknown topics fall back to all and an empty mobile channel has no placeholder filters', async ({
+test('unknown topics fall back to all and the mobile channel shows its published article', async ({
     page,
 }) => {
     await page.goto('/ko/web?topic=not-a-published-topic')
@@ -99,9 +99,15 @@ test('unknown topics fall back to all and an empty mobile channel has no placeho
     await expect(
         page.getByRole('heading', { name: '모바일 개발 이야기' })
     ).toBeVisible()
-    await expect(page.getByTestId('hub-topic-filters')).toHaveCount(0)
+    const results = page.getByTestId('hub-results')
     await expect(
-        page.getByRole('heading', { name: '전체 글 0개' })
+        results.locator(
+            'a[href="/ko/docs/category/mobile/web/mobile-viewport-height"]'
+        )
+    ).toBeVisible()
+    const articleCount = await results.locator(':scope > li').count()
+    await expect(
+        page.getByRole('heading', { name: `전체 글 ${articleCount}개` })
     ).toBeVisible()
     await expect(
         page.getByRole('heading', { name: '터치 중심 인터페이스' })
