@@ -1,5 +1,9 @@
 # 2026-11 작업 기록
 
+- [11-06 공용 게시 무결성 계약](2026-11-06-publication-integrity-contract.md): revision·manifest·포인터 스키마와 순수 SHA-256 검증·경계 회귀. 사용자 승인 후 구현·정제 문서를 분리 커밋하며 실제 NAS·API·배포는 미변경.
+
+- [11-06 NAS revision 검증 설계](2026-11-06-nas-revision-design.md): 불변 스냅샷·현재 포인터·원본 bytes 검증의 제안 ADR. 실험 공개 커밋과 분리하고 공용 계약의 근거로 후속 검수하며 운영 미적용.
+
 - [11-06 게시 revision·캐시 세대 실험](2026-11-06-publication-generation-experiment.md): test-only 키 격리·이전 쓰기 거절·실제 Next 대조 검사. 사용자 승인 후 실험·정제 문서만 공개 검수·로컬 커밋하며 NAS 후속 설계·운영 반영과 분리.
 
 - [11-03 캐시 만료 시각 경계](2026-11-03-cache-expiry-boundary-audit.md): PR #83 병합 후 읽기 전용 시각 관측·엄격 비교 회귀. 11-06 정제본 공개 검수·로컬 커밋과 원격 반영을 구분하며 실제 최초 원인은 미확정.

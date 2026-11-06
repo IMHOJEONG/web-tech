@@ -49,6 +49,7 @@ KAN-58 → KAN-5 → KAN-6 → KAN-33 순서로 점검했다. 상태 원본은 �
 - **KAN-58:** 응답 보류와 웹훅의 경계를 넘는 늦은 cache write를 통제 재현했다. 과거 간헐 실패의 최초 트리거는 미확정이며 게시 revision·캐시 세대는 다음 설계 검토 대상이다.
 - **KAN-58 후속 로컬 조사:** PR #83 병합 후 만료·저장·관측 시각의 숫자 요약을 추가했다. 의존성의 동일 시각 비교 경계는 확인했지만 실제 실패 원인으로 재현하지 못했다. [후속 결과](../verification/resilience/2026-11-03-docs-sequential-followups.md#pr-83-병합-후-시각-경계-감사). 11-06 사용자 승인으로 계측·회귀와 정제 문서만 공개 검수·로컬 커밋 대상으로 확정했다. 최초 원인 조사 완료와 원격 푸시·배포는 별도다.
 - **KAN-58 세대 격리 실험:** 별도 test-only 계층에서 이전 응답을 보류한 채 세대를 전환하고 새 요청 B의 V2를 엄격 검사했다. [비교 결과와 한계](../verification/cache/2026-11-06-publication-generation-experiment.md). 사용자 승인으로 이번 실험·정제 문서만 공개 검수·로컬 커밋하며 운영 채택·원격 반영과 구분한다. NAS revision 스냅샷·공유 세대의 원자적 전환·중복 웹훅/장애/정리 정책은 후속 설계 대상이다.
+- **KAN-58 NAS revision 설계:** [ADR-0028](../architecture/adr-0028-nas-content-revision-snapshots.md)은 불변 목록·HTML 스냅샷, NAS 현재 포인터, manifest/응답 해시 검증을 제안한다. 공용 스키마·순수 validator를 로컬 구현하고 [회귀](../verification/content/2026-11-06-publication-integrity-contract.md)를 확인했다. 구현은 로컬 `cdf47ec`이며 관련 정제 문서를 별도 검수·커밋한다. 기존 API·NAS는 미변경이다. 다음은 격리 snapshot builder·승격 잠금·포인터 교체 설계/검증이며 NAS 잠금/복구·네트워크 비용·철회/보관 정책 검증 전 운영 활성화하지 않는다.
 - **KAN-5:** 허용된 네트워크 원인 코드와 headers/body 단계 진단을 추가했다. 과거 로그 재조회 실패로 기존 fetch 실패 2건은 원인 미확정이다. 새 코드를 배포한 뒤 실제 표본과 대조해야 한다.
 - **KAN-6:** 기존 키보드 회귀와 가능한 headed 브라우저 검사를 진행했다. Safari·실기기·보조공학을 전체 성공으로 묶지 않는다.
 - **KAN-33:** 별도 macOS 계정은 미준비다. [준비 절차](../runbooks/github-app-isolated-macos-account.md)만 작성했으며 App 키·토큰 발급·보호 규칙 적용과 PR #75 충돌 해결은 수행하지 않았다.
