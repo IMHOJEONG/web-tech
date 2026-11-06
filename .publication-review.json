@@ -434,6 +434,34 @@
         "rights": true,
         "publicIntent": true
       }
+    },
+    {
+      "path": "apps/docs/category/mobile/web/mobile-viewport-height.mdx",
+      "sha256": "5bd01f4a8bc934c7233a60ec5d10311893a5df9506b85003f846bc09cacf1bfc",
+      "kind": "article",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 모바일·UI/UX 두 글의 공개 커밋과 운영 배포를 승인함. 자체 작성한 예제·도식과 출처 링크, 이용 조건 안내를 확인함. 비공개 실험 경로·원시 자료·인증 정보가 없는 공개 본문으로 검수함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "apps/docs/data/shadcn/form-error-recovery.mdx",
+      "sha256": "65066954bec350ce6ca64c4b9a6f1c8fdf896f038dd597afba2e876a6fc3767c",
+      "kind": "article",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 모바일·UI/UX 두 글의 공개 커밋과 운영 배포를 승인함. 자체 작성한 예제·도식과 출처 링크, 이용 조건 안내를 확인함. 비공개 실험 경로·원시 자료·인증 정보가 없는 공개 본문으로 검수함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
     }
   ]
 }
