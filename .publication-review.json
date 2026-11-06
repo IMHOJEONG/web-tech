@@ -2,6 +2,20 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/worklog/2026-11/2026-11-03-cache-expiry-boundary-audit.md",
+      "sha256": "0fbcf030b96a0dfd0dca9c3d1eb25ed0b8e910df85d1c5587cb582bb20f715b5",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 캐시 계측·회귀 테스트와 정제 문서만 공개 검수·로컬 커밋하도록 명시 승인함. 자체 작성한 코드·합성 입력·정제 집계·절차·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·기존 초안·개인 경로는 제외하며 원인 미확정과 과거 검증을 구분함. 푸시·PR·병합·배포는 이번 승인 대상이 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/runbooks/README.md",
       "sha256": "c7a6d0e9efe1ebd3867d1bb8e9e0d2bec479e1c38f102b3d23f42796ec2e43cb",
       "kind": "document",
@@ -31,11 +45,11 @@
     },
     {
       "path": "docs/todo/todo.md",
-      "sha256": "3ea99ddda845cbcc1d236223a2783d938df303c61acce93e6322a23c9221c7de",
+      "sha256": "a181180e51c838bf7d5dfe57814e723b6312f1c8f0e78adfac93895cac62136b",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-03",
-      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 캐시 계측·회귀 테스트와 정제 문서만 공개 검수·로컬 커밋하도록 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하며 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·기존 초안·개인 경로는 제외함. 푸시·PR·병합·배포는 이번 승인 대상이 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -45,11 +59,11 @@
     },
     {
       "path": "docs/verification/resilience/2026-11-03-docs-sequential-followups.md",
-      "sha256": "8bbb7282ef702c6bd037a0a352c339a399fb1e3e7967b881c724a7313ae72140",
+      "sha256": "8b921a41052077e12e4d598fa0171f8a8e736a22fabb379143673f422157fed2",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-03",
-      "note": "사용자가 PR83 리뷰 보완의 동일 범위 코드·보고서·worklog 2개 재검수와 해시 갱신 후 검증·병합·배포 계속을 명시 승인함. 기준선 작업 트리 재현 절차와 정리·계측 회귀 66개/전체188개 결과만 추가하며 원시 자료·식별자·초안·비밀값은 공개하지 않음.",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 캐시 계측·회귀 테스트와 정제 문서만 공개 검수·로컬 커밋하도록 명시 승인함. 자체 작성한 시각 경계 재현 절차·집계·한계와 11-06 재검증 결과를 검수하고 과거 결과를 보존함. 비밀값·개인정보·개인 경로·원시 자료·식별자·초안은 제외하며 권리·공개 의도를 확인함. 푸시·PR·병합·배포는 이번 승인 대상이 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -115,11 +129,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "1140dc7a759850c12da61cd8cdc703a4721291aa55f12fe66126b43036567b5c",
+      "sha256": "f1fe60ddc2622c9fb8bb33a71700bfddc3b1cac2bfec6a0ab20e00c278795026",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-03",
-      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 캐시 계측·회귀 테스트와 정제 문서만 공개 검수·로컬 커밋하도록 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하며 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·기존 초안·개인 경로는 제외함. 푸시·PR·병합·배포는 이번 승인 대상이 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -325,11 +339,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "df8a90cdda576096d837d7dda8f9fb408a8321d2de6a6c50f5b0a66c3ee44bc2",
+      "sha256": "0560a681121bc4239e43e8a64ab361eece0015c34214ddf296b802e981c2c392",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-03",
-      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 캐시 계측·회귀 테스트와 정제 문서만 공개 검수·로컬 커밋하도록 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하며 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·기존 초안·개인 경로는 제외함. 푸시·PR·병합·배포는 이번 승인 대상이 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
