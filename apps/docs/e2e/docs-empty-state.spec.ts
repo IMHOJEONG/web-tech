@@ -41,7 +41,7 @@ for (const locale of ['ko', 'en']) {
     test(`${locale}: long empty query stays readable without page overflow`, async ({
         page,
     }) => {
-        const keyword = 'no-match-'.repeat(30)
+        const keyword = 'qzxjvkwpnz'.repeat(30)
         await page.goto(`/${locale}/docs?q=${keyword}`)
         const main = page.getByRole('main')
         await expect(main.getByRole('heading', { level: 1 })).toHaveText(
