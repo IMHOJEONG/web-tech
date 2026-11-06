@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-06 게시 세대 격리 실험](cache/2026-11-06-publication-generation-experiment.md): 실제 Next 지연 대조·새 세대 B의 V2 필수 조건·원본 미게시 음성 대조. 로컬 실험이며 운영 revision·분산 CAS는 미구현.
+
 - [11-03 캐시·원격 오류·브라우저·권한 순차 점검](resilience/2026-11-03-docs-sequential-followups.md): 늦은 cache write 통제 재현·안전한 원인 코드·실행 환경별 검사와 미확정 범위. PR #83 병합 후 시각 경계 로컬 관측을 구분해 추가. 원시 자료 비공개·운영 변경 없음.
 
 - [11-01 PR #81 운영 배포](deployment/2026-11-01-pr81-offline-toc-production.md): 같은 main SHA의 CI·Production alias, Chrome 두 폭의 SPA 저장·오프라인 읽기·목차 확인. 기존 사용자 프로필·실기기 검증과 구분.

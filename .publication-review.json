@@ -2,6 +2,62 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/knowledge/content-platform/README.md",
+      "sha256": "e0d5d4929a14fb14b6b925978e05ee4b22044c7fcec0fd419b9c3fa58f869da5",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 게시 세대 실험 코드 5개와 정제 문서 7개만 공개 검수·작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 개념·합성 fixture·정제 집계·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·초안·개인 경로는 제외함. 후속 NAS 설계·푸시·PR·병합·배포는 이 승인 범위에 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/knowledge/content-platform/docs-cache-structure.md",
+      "sha256": "5671029b6798d1337a2262dc6330e81aedab17dfd84539876cf70f3c13ed0ef3",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 게시 세대 실험 코드 5개와 정제 문서 7개만 공개 검수·작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 개념·합성 fixture·정제 집계·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·초안·개인 경로는 제외함. 후속 NAS 설계·푸시·PR·병합·배포는 이 승인 범위에 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/cache/2026-11-06-publication-generation-experiment.md",
+      "sha256": "f2049fa041f98cb456cdabf0c22affc0dcae591e1b1489fb4356a7b40ef66b89",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 게시 세대 실험 코드 5개와 정제 문서 7개만 공개 검수·작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 실패 대조·반복 결과·재현 절차·한계를 검수하며 실제 비밀값·개인정보·권리·공개 의도를 확인함. 원시 trace·로그·이벤트·녹화본·초안·개인 경로는 제외함. 후속 NAS 설계·푸시·PR·병합·배포는 이 승인 범위에 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-06-publication-generation-experiment.md",
+      "sha256": "45ec85146bb901bdcc8105a873eaa384b0884080f8728cc46079437df1fb8bb7",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 게시 세대 실험 코드 5개와 정제 문서 7개만 공개 검수·작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 작업·검증·공개 범위와 미구현 경계를 검수하며 실제 비밀값·개인정보·권리·공개 의도를 확인함. 원시 trace·로그·이벤트·녹화본·초안·개인 경로는 제외함. 후속 NAS 설계·푸시·PR·병합·배포는 이 승인 범위에 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/worklog/2026-11/2026-11-03-cache-expiry-boundary-audit.md",
       "sha256": "0fbcf030b96a0dfd0dca9c3d1eb25ed0b8e910df85d1c5587cb582bb20f715b5",
       "kind": "document",
@@ -45,11 +101,11 @@
     },
     {
       "path": "docs/todo/todo.md",
-      "sha256": "a181180e51c838bf7d5dfe57814e723b6312f1c8f0e78adfac93895cac62136b",
+      "sha256": "6cba1705dd1781e61b6d042d800d368d7d0d67c6839d29c5a0417725bb17c625",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-06",
-      "note": "사용자가 이번 캐시 계측·회귀 테스트와 정제 문서만 공개 검수·로컬 커밋하도록 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하며 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·기존 초안·개인 경로는 제외함. 푸시·PR·병합·배포는 이번 승인 대상이 아님.",
+      "note": "사용자가 이번 게시 세대 실험 코드 5개와 정제 문서 7개만 공개 검수·작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 개념·정제 집계·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·초안·개인 경로는 제외함. 후속 NAS 설계·푸시·PR·병합·배포는 이 승인 범위에 포함하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -129,11 +185,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "f1fe60ddc2622c9fb8bb33a71700bfddc3b1cac2bfec6a0ab20e00c278795026",
+      "sha256": "60f8e78e3b08c426279cc5dbaad71c57855557d7ca227e6d440559a3c968f206",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-06",
-      "note": "사용자가 이번 캐시 계측·회귀 테스트와 정제 문서만 공개 검수·로컬 커밋하도록 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하며 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·기존 초안·개인 경로는 제외함. 푸시·PR·병합·배포는 이번 승인 대상이 아님.",
+      "note": "사용자가 이번 게시 세대 실험 코드 5개와 정제 문서 7개만 공개 검수·작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 개념·정제 집계·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·초안·개인 경로는 제외함. 후속 NAS 설계·푸시·PR·병합·배포는 이 승인 범위에 포함하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -339,11 +395,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "0560a681121bc4239e43e8a64ab361eece0015c34214ddf296b802e981c2c392",
+      "sha256": "fa5a19d83ad0b9d2894e6eb0317d442ed4f74fecb994a329c75612aa8f2898a1",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-06",
-      "note": "사용자가 이번 캐시 계측·회귀 테스트와 정제 문서만 공개 검수·로컬 커밋하도록 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하며 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·기존 초안·개인 경로는 제외함. 푸시·PR·병합·배포는 이번 승인 대상이 아님.",
+      "note": "사용자가 이번 게시 세대 실험 코드 5개와 정제 문서 7개만 공개 검수·작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 개념·정제 집계·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·초안·개인 경로는 제외함. 후속 NAS 설계·푸시·PR·병합·배포는 이 승인 범위에 포함하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
