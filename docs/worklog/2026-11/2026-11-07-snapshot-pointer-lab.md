@@ -34,6 +34,18 @@
 전체 backend66개·타입·lint·Nest build를 다시 통과했고, 최종 커밋 SHA와 범위 검사는 기존 원격 댓글에 추가한다.
 로컬 커밋만 수행하며 푸시·PR·배포·실제 NAS 조치는 계속 제외한다.
 
+### 후속 PR·원격 검증 기록
+
+사용자가 관련 커밋의 푸시·PR 준비·원격 CI 확인을 요청해 작업 브랜치의 8개 커밋을 푸시하고
+[PR #86](https://github.com/IMHOJEONG/web-tech/pull/86)을 생성했다. 기존 main 게시 글과 충돌이 없었고 이력은 유지했다.
+head `eff33b2`의 전체 CI·문서 검사·CodeQL·PR 이미지 빌드와 두 Vercel Preview가 성공했다.
+모바일 접근성 1건은 재시도 후 통과했으며 CodeRabbit은 무료 OSS 한도로 NEUTRAL이다.
+테스트 수·실패 위치·미검증 범위·원본 run은 [검증 보고서](../../verification/content/2026-11-07-snapshot-pointer-lab.md#pr-86-최초-원격-검증)에 정리한다.
+
+후속 사용자 승인 범위는 이 검증 보고서와 현재 작업 기록 두 문서의 정제 결과·검수 해시·커밋/푸시뿐이다.
+원시 CI 로그·trace·실제 응답·새 초안은 제외한다. 문서 커밋 이후 새 head 검사는 최초 성공과 구분해 원격 기록에 연결한다.
+실제 NAS 설정·컨테이너·자격 증명·Production 변경과 병합은 하지 않는다.
+
 ## Open Questions
 
 - 실제 NAS 볼륨에서 잠금·원자적 교체·sync·전원 장애 내구성을 어떤 격리 환경에서 시험할 것인가?

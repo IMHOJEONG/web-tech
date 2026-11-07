@@ -113,6 +113,36 @@ nlink>1은 포인터에서도 계속 거절한다. 불변 release 파일은 nlin
 로컬 커밋과 미커밋 실험·실패/성공·남은 NAS 범위를 추가하고 실제 3열 표와 기존 이력 보존을 재조회했다.
 Confluence 페이지 본문의 미게시 편집은 변경하지 않았다.
 
+### PR #86 최초 원격 검증
+
+후속 사용자 승인으로 관련 8개 커밋을 작업 브랜치에 푸시하고 [PR #86](https://github.com/IMHOJEONG/web-tech/pull/86)을 생성했다.
+검증 head는 `eff33b22197c7a8e80b9682e2973614c063c6f65`, base는 `51be11cf7f62f8c32e9c2f1b60fb68ff9205c9f3`다.
+최신 main의 별도 게시 글과 merge-tree 충돌이 없음을 확인했으며 기존 이력을 재작성하지 않았다.
+
+| 검사                                                                          | 관측 결과                                                                                             |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| [CI 269](https://github.com/IMHOJEONG/web-tech/actions/runs/42322865354)      | 전체 13개 job 성공. Linux에서 공용83개·backend 단위66개·docs lib354개·backend HTTP55개 통과 확인      |
+| 브라우저                                                                      | article198개·offline62개·CRP5개 통과. 반응형은 아래 재시도/skip 내역과 함께 해석                      |
+| 반응형 모바일                                                                 | 137 passed·1 flaky·11 skipped. flaky는 첫 재시도에 통과했으며 무재시도 성공이 아님                    |
+| 반응형 태블릿/데스크톱                                                        | 각각 124 passed/25 skipped, 132 passed/17 skipped. skip을 통과로 합산하지 않음                        |
+| [문서 검사](https://github.com/IMHOJEONG/web-tech/actions/runs/42322865396)   | 성공. 공개 경계·format·문서 delta 포함                                                                |
+| [CodeQL](https://github.com/IMHOJEONG/web-tech/actions/runs/42322862560)      | Actions·JavaScript/TypeScript 분석 성공. 저장소 전체 취약점 0건의 증명은 아님                         |
+| [이미지 빌드](https://github.com/IMHOJEONG/web-tech/actions/runs/42322865386) | 성공. PR 조건으로 GHCR 로그인 skipped·push:false. NAS pull/restart나 실제 배포를 실행하지 않음        |
+| 보조 상태                                                                     | GitGuardian·두 Vercel Preview 성공. CodeRabbit은 무료 OSS 리뷰 한도 댓글과 NEUTRAL로 코드 리뷰 미완료 |
+
+모바일 실패 위치는 기존 `shell-focus-contrast.spec.ts:88`이다. 모바일 trigger의 Enter 입력 뒤
+이름이 `주요 메뉴`인 navigation 1개를 기대했지만 5초 동안 0개로 관측했고 첫 재시도에 통과했다.
+이 관측만으로 hydration·네트워크·서비스 장애 중 원인을 확정하지 않는다. 기준 완화·무관한 테스트 수정·재실행으로 최초 결과를 덮지 않았다.
+전용 세대 실험 36개는 별도 로컬 설정의 선행 결과이며 이번 기본 CI가 이를 새로 실행했다고 표시하지 않는다.
+
+원시 CI 로그·trace·error-context·artifact를 저장소나 PR에 복사하지 않았다. offline 증거 업로드 단계도 skipped임을 확인했다.
+외부 원본 run 링크와 필요한 숫자·실패 위치만 기록한다. GitHub 연결 도구의 PR 수정은 권한 부족 403을 반환해
+별도 승인한 CLI 인증으로 본문의 결과를 갱신했다. 인증값이나 권한 설정 자체는 변경하지 않았다.
+
+이 두 문서의 정제 결과 추가·검수 해시 갱신·후속 커밋/푸시는 별도로 사용자 승인받았다.
+위 성공은 최초 head `eff33b2`의 결과다. 문서 커밋 이후 새 head의 CI는 별도로 확인해 PR·Jira·Confluence에 연결한다.
+PR 병합·main 변경·Production·실제 NAS 설정·컨테이너 교체는 수행하지 않는다.
+
 ## 관련 문서
 
 - [ADR-0028](../../architecture/adr-0028-nas-content-revision-snapshots.md)
