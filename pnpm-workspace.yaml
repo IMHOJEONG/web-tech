@@ -36,6 +36,7 @@ overrides:
   handlebars: "^4.7.10"
   picomatch: "^4.0.4"
   minimatch: "^11.0.1"
+  "babel-plugin-istanbul@7.0.1>test-exclude": "^8.0.0"
   rollup: "^4.59.0"
   flatted: "^3.4.2"
   "@tootallnate/once": "^3.0.1"
