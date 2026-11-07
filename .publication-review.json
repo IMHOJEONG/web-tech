@@ -73,11 +73,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "dd952272c663ee7bf1f9ea2bd6a4b8c49f62c6dae8bb4bcee7934a2006afb785",
+      "sha256": "9df937a29530e82c36e617ec34b18e0ff1f1de23e49ada245a06a951f9ec32dc",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-07",
-      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
+      "note": "사용자가 이번 Dependabot 보안 수정과 정제 문서의 커밋·푸시를 승인함. 기존 목차 본문을 보존하고 신규 보안 보고서 연결과 미배포 범위만 추가함. 비밀값·개인정보·권리·공개 의도를 검수했으며 원시 로그·실제 응답·비공개 자료·NAS 설정은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -129,11 +129,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "09a442e0aaa6fa85db021e7987d01185f36946f5929bf2ba86759d780c28faf6",
+      "sha256": "65511bbf358a1b4c1c8cbfc233838f44d7c91e62914893bfbc1f7211707f17dc",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-07",
-      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
+      "note": "사용자가 이번 Dependabot 보안 수정과 정제 문서의 커밋·푸시를 승인함. 기존 월별 목차 본문을 보존하고 보안 작업 연결만 추가함. 비밀값·개인정보·권리·공개 의도를 검수했으며 다른 작업 기록·원시 자료·실제 응답·NAS 설정은 새 공개 범위에서 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -610,6 +610,34 @@
       "decision": "public-approved",
       "reviewedOn": "2026-11-06",
       "note": "사용자가 모바일·UI/UX 두 글의 공개 커밋과 운영 배포를 승인함. 자체 작성한 예제·도식과 출처 링크, 이용 조건 안내를 확인함. 비공개 실험 경로·원시 자료·인증 정보가 없는 공개 본문으로 검수함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/security/2026-11-07-dependabot-advisories.md",
+      "sha256": "a6afc6f99b19a914d581f0f07f9b47712d2c881ec1acae1a1678c15dbeec738c",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 PR88 리뷰 보완과 같은 정제 문서 2개의 공개 검수·작업별 커밋·푸시를 승인함. 공식 근거·직접 작성한 재현 코드·이전 실패와 새 성공·CI/로컬 구분·태블릿 한계를 검수함. 비밀값·개인정보·권리·공개 의도를 확인하고 원시 로그·trace·실제 응답·coverage 산출물·개인 경로·NAS 설정은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-07-dependabot-advisories.md",
+      "sha256": "79a039551be4a35690b34396745d2faf1a662d35c67f787d2e50159774e398d7",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 PR88 리뷰 보완과 같은 정제 문서 2개의 공개 검수·작업별 커밋·푸시를 승인함. 변경 이유·소비자 범위·실패/성공 이력·검증 경계·승인 범위를 검수함. 비밀값·개인정보·권리·공개 의도를 확인하고 다른 미커밋 작업·원시 자료·실제 응답·coverage 산출물·개인 경로·NAS 설정은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

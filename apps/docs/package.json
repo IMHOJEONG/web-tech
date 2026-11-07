@@ -55,7 +55,6 @@
         "@web-tech/docs-content-contract": "workspace:*",
         "@web-tech/ui": "workspace:*",
         "@xyflow/react": "catalog:docs",
-        "better-auth": "catalog:docs",
         "clsx": "catalog:",
         "entities": "catalog:docs",
         "esbuild": "^0.28.0",
