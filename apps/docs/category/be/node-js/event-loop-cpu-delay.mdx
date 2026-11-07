@@ -1,0 +1,350 @@
+---
+title: 'Node.js 이벤트 루프가 바쁠 때: 타이머와 수신 콜백의 지연'
+slug: event-loop-cpu-delay
+date: 2026-10-30
+updatedAt: 2026-11-06
+summary: 동기 CPU 작업이 이벤트 루프를 차지할 때 타이머와 TCP 수신 콜백이 언제 실행되는지 로컬 실험으로 확인합니다.
+authorName: 'HoJeong Im'
+authorRole: 'Web Engineer'
+readMinutes: 8
+topicLabel: 'BACKEND'
+tags:
+    - nodejs
+    - event-loop
+    - tcp
+    - performance
+status: published
+---
+
+## 요청이 왔는데 왜 바로 처리하지 못할까요?
+
+서버가 네트워크에서 데이터를 기다리는 동안에도 계산을 할 수 있습니다. 하지만 JavaScript에서 오래 걸리는 계산을 한 번에 실행하면, 그 계산이 끝날 때까지 다른 JavaScript 콜백은 기다려야 합니다. 콜백은 어떤 일이 일어난 뒤 실행하도록 등록한 함수입니다.
+
+[앞선 소켓 실험](/ko/docs/category/be/node-js/tcp-socket-endpoints-lab)에서 주소와 포트를 살펴봤습니다. 이번에는 수신 프로그램을 일부러 바쁘게 만들어 타이머와 데이터 수신 콜백이 언제 실행되는지 확인합니다. 비교 결과는 한 컴퓨터에서 측정한 값이며 모든 서버에서 같은 지연이 발생한다는 뜻은 아닙니다.
+
+## 10월 11일 TCP 실험의 구조
+
+송신자와 수신자를 서로 다른 Node.js 프로세스로 띄우고, 같은 컴퓨터의 TCP 연결로 데이터를 보냈습니다. **프로세스**는 운영체제에서 실행 중인 프로그램의 단위입니다. 송신자와 수신자가 별도 프로세스이므로 수신자의 동기 계산이 송신자 JavaScript 실행을 직접 막지는 않습니다. 두 프로세스 모두 운영체제의 스케줄링 영향은 받을 수 있습니다.
+
+<figure style={{ margin: '1.5rem 0' }}>
+    <div
+        style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'stretch',
+            gap: '0.75rem',
+        }}
+    >
+        <div
+            style={{
+                flex: '1 1 13rem',
+                border: '1px solid currentColor',
+                borderRadius: '0.75rem',
+                padding: '1rem',
+            }}
+        >
+            <strong>1. 송신자 프로세스 →</strong>
+            <div style={{ marginTop: '0.5rem' }}>
+                시작 신호를 받은 뒤 40ms와 80ms 타이머에서 각각 8,192바이트를
+                쓰도록 예약합니다.
+            </div>
+        </div>
+        <div
+            style={{
+                flex: '1 1 13rem',
+                border: '1px solid currentColor',
+                borderRadius: '0.75rem',
+                padding: '1rem',
+            }}
+        >
+            <strong>2. 운영체제의 TCP 연결 →</strong>
+            <div style={{ marginTop: '0.5rem' }}>
+                같은 컴퓨터의 루프백 주소로 바이트를 전달합니다. 실제 패킷 도착
+                시각은 측정하지 않았습니다.
+            </div>
+        </div>
+        <div
+            style={{
+                flex: '1 1 13rem',
+                border: '1px solid currentColor',
+                borderRadius: '0.75rem',
+                padding: '1rem',
+            }}
+        >
+            <strong>3. 수신자 프로세스</strong>
+            <div style={{ marginTop: '0.5rem' }}>
+                20ms 타이머를 예약하고, CPU 작업을 0ms 또는 약 200ms 실행한 뒤
+                콜백의 실행 시각을 기록합니다.
+            </div>
+        </div>
+    </div>
+    <figcaption>
+        송신자 → TCP 연결 → 수신자 순서의 실험 구성입니다. 시각 비교는 수신자
+        기준으로 합니다.
+    </figcaption>
+</figure>
+
+비교 조건은 수신자의 CPU 작업 시간 하나입니다. 각 조건을 세 번씩 실행했고, 수신된 전체 16,384바이트의 길이와 해시를 대조했습니다. **해시**는 데이터가 같은지 비교하는 데 쓰는 요약값입니다. 수신 길이와 해시는 두 조건에서 같았습니다.
+
+## 타이머가 늦게 실행되는 이유
+
+이벤트 루프는 Node.js가 실행할 콜백을 처리하도록 진행하는 반복 과정입니다. 다만 현재 JavaScript 함수가 동기적으로 실행되는 동안에는 같은 JavaScript 실행 흐름에서 다른 콜백을 끼워 넣어 실행할 수 없습니다. 운영체제가 네트워크 처리를 계속하는 것과 JavaScript 수신 콜백이 실행되는 것은 별개의 일입니다.
+
+`setTimeout`의 시간은 **지정한 지연을 기준으로 콜백 실행을 예약하는 값이며, 정확한 실행 시각은 보장하지 않습니다.** 예를 들어 20ms 타이머를 예약해도 같은 실행 흐름에서 200ms짜리 계산이 계속되면 타이머 콜백은 계산이 끝날 때까지 기다립니다. 이후 정확히 언제 실행되는지는 다른 작업과 운영체제 스케줄링 등에도 영향을 받습니다.
+
+<figure style={{ margin: '1.5rem 0' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+        <div
+            style={{
+                flex: '1 1 14rem',
+                border: '1px solid currentColor',
+                borderRadius: '0.75rem',
+                padding: '1rem',
+            }}
+        >
+            <strong>CPU 작업 없음</strong>
+            <div style={{ marginTop: '0.5rem' }}>
+                타이머 예약 → 약 20ms에 타이머 실행 → 수신 콜백 실행
+            </div>
+        </div>
+        <div
+            style={{
+                flex: '1 1 14rem',
+                border: '1px solid currentColor',
+                borderRadius: '0.75rem',
+                padding: '1rem',
+            }}
+        >
+            <strong>CPU 작업 약 200ms</strong>
+            <div style={{ marginTop: '0.5rem' }}>
+                타이머 예약 → 동기 계산 중 대기 → 계산 종료 후 타이머와 수신
+                콜백 실행
+            </div>
+        </div>
+    </div>
+    <figcaption>
+        10월 11일 TCP 실험에서 관측한 흐름입니다. 타이머와 수신 콜백 사이의
+        순서를 일반적인 실행 규칙으로 보장하지는 않습니다.
+    </figcaption>
+</figure>
+
+## 먼저 타이머만 실행해 보기
+
+아래 코드는 동기 계산과 타이머의 관계만 살펴보는 별도의 짧은 예제입니다. 두 코드 블록을 순서대로 `event-loop-timer.mts` 한 파일에 붙인 뒤 Node.js 24에서 `node event-loop-timer.mts`를 실행해 보세요. `performance.now()`는 실행 시간 차이를 밀리초로 재는 데 사용합니다.
+
+```ts filename="event-loop-timer.mts" part="1/2"
+import { performance } from 'node:perf_hooks'
+
+const start = performance.now()
+setTimeout(() => {
+    console.log(`타이머: ${(performance.now() - start).toFixed(1)}ms`)
+}, 20)
+```
+
+이어서 같은 파일에 아래 코드를 붙입니다. 반복문은 실무에 쓸 계산이 아니라 200ms 동안 JavaScript 실행 흐름을 바쁘게 만드는 장치입니다.
+
+```ts filename="event-loop-timer.mts" part="2/2"
+while (performance.now() - start < 200) {
+    // 동기 계산이 오래 걸리는 상황을 흉내 냅니다.
+}
+console.log(`계산 종료: ${(performance.now() - start).toFixed(1)}ms`)
+```
+
+2026년 10월 30일 macOS와 Node.js v24.22.1에서 한 번 실행한 결과는 다음과 같습니다. 정확한 숫자는 실행할 때마다 달라집니다.
+
+```text
+계산 종료: 200.0ms
+타이머: 210.7ms
+```
+
+이 짧은 예제는 타이머만 관찰합니다. 다음 예제에서는 별도 송신·수신 프로세스를 연결합니다.
+
+## 직접 실행하는 TCP 송신·수신 예제
+
+이번에는 송신자와 수신자를 각각 실행합니다. 아래 예제는 앞에서 소개한 10월 11일 실험을 이해하기 쉽게 줄인 **별도 실험**입니다. 원래 실험의 프로세스 간 준비 절차와 지연 측정기는 포함하지 않으므로 바로 아래에 나오는 새 결과와 기존 3회 비교 표를 구분해 주세요.
+
+먼저 두 블록을 순서대로 `sender.mts`에 붙입니다. 이 프로그램은 한 연결만 받아 시작 신호 `G`를 기다립니다. 신호는 한 바이트이므로 여러 `data` 이벤트에 나눌 수 없습니다. 40ms와 80ms 타이머에서 각각 8,192바이트를 쓰고 두 번째 쓰기와 함께 송신을 끝냅니다.
+
+```ts filename="sender.mts" part="1/2"
+import { createServer } from 'node:net'
+
+const requestedPort = Number(process.argv[2] ?? 4040)
+const server = createServer((socket) => {
+    server.close() // 실험당 연결 하나만 받습니다.
+    socket.on('error', (error) => {
+        console.error('연결 오류:', error.message)
+        process.exitCode = 1
+    })
+    socket.once('data', (chunk) => {
+        if (chunk.length !== 1 || chunk[0] !== 71) {
+            console.error('예상하지 못한 시작 신호')
+            socket.destroy()
+            process.exitCode = 1
+            return
+        }
+        setTimeout(() => socket.write(Buffer.alloc(8192, 'A')), 40)
+        setTimeout(() => socket.end(Buffer.alloc(8192, 'B')), 80)
+    })
+    socket.setTimeout(5000, () =>
+        socket.destroy(new Error('시작 신호 대기 시간 초과'))
+    )
+})
+```
+
+두 번째 블록은 지정한 포트에서 대기하고 서버 오류를 표시합니다. 포트 `0`을 입력하면 운영체제가 빈 포트를 정합니다.
+
+```ts filename="sender.mts" part="2/2"
+server.on('error', (error) => {
+    console.error('서버 오류:', error.message)
+    process.exitCode = 1
+})
+server.listen(requestedPort, '127.0.0.1', () => {
+    const address = server.address()
+    if (address && typeof address !== 'string')
+        console.log(`대기 포트: ${address.port}`)
+})
+```
+
+이제 다음 세 블록을 순서대로 `receiver.mts`에 붙입니다. 수신자는 데이터를 모아 전체 내용이 예상한 A와 B에 일치하는지 확인합니다. `data`는 네트워크의 패킷 하나가 아니라 Node.js가 전달한 데이터 조각입니다.
+
+```ts filename="receiver.mts" part="1/3"
+import { createConnection } from 'node:net'
+import { performance } from 'node:perf_hooks'
+import { createHash } from 'node:crypto'
+
+const cpuMs = Number(process.argv[2] ?? 0)
+const port = Number(process.argv[3] ?? 4040)
+if (![0, 200].includes(cpuMs))
+    throw new Error('CPU 시간은 0 또는 200을 입력하세요.')
+const socket = createConnection({ host: '127.0.0.1', port })
+const chunks: Buffer[] = []
+let start = 0
+let receivedEnd = false
+const elapsed = () => (performance.now() - start).toFixed(1)
+
+socket.on('error', (error) => {
+    console.error('연결 오류:', error.message)
+    process.exitCode = 1
+})
+socket.setTimeout(5000, () => socket.destroy(new Error('수신 대기 시간 초과')))
+socket.on('data', (chunk: Buffer) => {
+    chunks.push(chunk)
+    console.log(`data: ${elapsed()}ms, ${chunk.length}바이트`)
+})
+```
+
+`end`에서는 전체 바이트와 내용을 확인하고, 완료 전에 연결이 닫히면 오류를 표시합니다.
+
+```ts filename="receiver.mts" part="2/3"
+socket.on('end', () => {
+    receivedEnd = true
+    const body = Buffer.concat(chunks)
+    const expected = Buffer.concat([
+        Buffer.alloc(8192, 'A'),
+        Buffer.alloc(8192, 'B'),
+    ])
+    console.log(
+        `end: ${elapsed()}ms, 총 ${body.length}바이트, 일치=${body.equals(expected)}`
+    )
+    console.log(`SHA-256: ${createHash('sha256').update(body).digest('hex')}`)
+    if (!body.equals(expected)) process.exitCode = 1
+})
+
+socket.on('close', () => {
+    if (!receivedEnd) {
+        console.error('전체 데이터를 받기 전에 연결이 닫혔습니다.')
+        process.exitCode = 1
+    }
+})
+```
+
+마지막 블록은 연결 직후 타이머를 예약하고 송신자에게 신호를 보냅니다. 이어서 동기 반복문을 실행한 뒤 종료 시각을 기록합니다. 송신자의 타이머는 송신자가 신호를 처리한 시점부터 시작합니다.
+
+```ts filename="receiver.mts" part="3/3"
+socket.on('connect', () => {
+    start = performance.now()
+    setTimeout(() => console.log(`타이머: ${elapsed()}ms`), 20)
+    socket.write('G') // 단일 바이트 시작 신호
+    const cpuStart = performance.now()
+    while (performance.now() - cpuStart < cpuMs) {
+        // 이벤트 루프를 바쁘게 만드는 동기 계산의 모형입니다.
+    }
+    console.log(`동기 작업 종료: ${elapsed()}ms`)
+})
+```
+
+Node.js 24가 설치된 터미널 두 개를 준비하고, 예제를 저장한 같은 폴더에서 다음 순서로 실행합니다.
+
+1. 터미널 A: `node sender.mts 0`을 실행하고 `대기 포트`에 표시된 숫자를 확인합니다.
+2. 터미널 B: `node receiver.mts 0 <대기 포트>`를 실행합니다. 꺾쇠를 포함한 `<대기 포트>`는 실제 숫자로 바꿔 입력하는 자리입니다. 예를 들어 출력이 54321이면 `node receiver.mts 0 54321`입니다.
+3. 두 프로그램이 종료되면 터미널 A에서 송신자를 다시 실행합니다. 새로 표시된 포트로 터미널 B에서 `node receiver.mts 200 <대기 포트>`를 실행합니다.
+
+송신자는 연결 하나만 처리하고 종료하므로 각 조건을 실행하기 전에 다시 켜야 합니다. 연결하지 않고 대기 중인 송신자는 Ctrl+C로 종료할 수 있습니다. 포트를 직접 지정해 이미 사용 중이라는 오류가 나면 `0`으로 실행해 빈 포트를 받으세요.
+
+2026년 10월 31일 macOS, Node.js v24.22.1에서 조건별 한 번 실행한 예시입니다. 표시된 시각은 수신자 기준이며 각 실행에서 달라질 수 있습니다.
+
+```text
+CPU 0ms
+동기 작업 종료: 0.4ms
+타이머: 21.2ms
+data: 42.7ms, 8192바이트
+data: 83.0ms, 8192바이트
+end: 83.5ms, 총 16384바이트, 일치=true
+SHA-256: 786a9f42b2dc7208710ecf3bf24194736ec7b57f97eb8c99231c9f50dafc54bd
+
+CPU 200ms
+동기 작업 종료: 225.0ms
+타이머: 227.5ms
+data: 227.9ms, 16384바이트
+end: 230.6ms, 총 16384바이트, 일치=true
+SHA-256: 786a9f42b2dc7208710ecf3bf24194736ec7b57f97eb8c99231c9f50dafc54bd
+```
+
+두 실행의 전체 바이트와 SHA-256 해시는 같았습니다. 200ms 조건의 `225.0ms`는 연결 콜백에서 시계를 시작한 뒤 타이머 예약, 시작 신호 쓰기, 반복문을 거쳐 종료 로그를 찍기까지의 시간입니다. 반복문만의 경과 시간은 별도로 기록하지 않았습니다. `data`와 `end`의 시각도 콜백 안에서 데이터를 모으거나 비교할 버퍼를 준비한 뒤 찍은 값입니다.
+
+## 네트워크가 느리면 결과가 달라질까요?
+
+네. 외부 네트워크에서는 전송 지연, 혼잡, 패킷 손실과 재전송, 큰 데이터의 경우 대역폭 등이 데이터 준비 시점에 영향을 줍니다. 수신자가 바쁘지 않아도 데이터가 늦게 준비되면 `data` 콜백도 늦어질 수 있습니다. 반대로 데이터가 준비됐더라도 수신자의 JavaScript가 동기 작업으로 바쁘면 콜백은 실행 흐름이 돌아올 때까지 기다립니다.
+
+20ms 타이머는 네트워크 데이터를 기다리는 타이머가 아니므로 네트워크 전송 지연 자체를 재는 값이 아닙니다. 다만 타이머에도 다른 콜백과 운영체제 스케줄링 등이 영향을 줄 수 있습니다. 타이머와 `data` 시각을 함께 보면 실마리는 얻을 수 있지만, 그것만으로 각각의 지연 원인을 확정할 수는 없습니다.
+
+이 예제는 `127.0.0.1` 루프백을 사용하므로 Wi-Fi나 인터넷 회선을 통과하지 않습니다. 실제 패킷 도착 시각도 측정하지 않았습니다. 외부 네트워크의 영향은 별도 측정이 필요하며, `write()` 호출은 상대방이 데이터를 받았다는 확인이 아닙니다.
+
+## 10월 11일 TCP 실험의 3회 측정 결과
+
+2026년 10월 11일 macOS와 Node.js v24.12.0에서 각 조건을 세 번 실행했습니다. 수신자는 송신자의 준비 완료를 받은 뒤, 20ms 타이머를 예약하기 직전에 시계를 시작했습니다. 표에는 그 시점부터의 경과 시간을 담았습니다. CPU 작업 시간은 `performance.now()`로 측정한 동기 반복문의 경과 시간이며 CPU 사용률이 아닙니다.
+
+작은 화면에서는 표를 좌우로 밀어 나머지 열을 볼 수 있습니다.
+
+| 수신자 CPU 작업 | 20ms 타이머 실행 | 첫 `data` 콜백 실행 | `end` 콜백 실행 |
+| --------------- | ---------------- | ------------------- | --------------- |
+| 없음            | 19.63~20.83ms    | 41.04~41.91ms       | 80.73~81.43ms   |
+| 약 200ms        | 200.09~200.17ms  | 200.14~200.24ms     | 200.21~200.33ms |
+
+`data` 콜백은 수신 프로그램이 읽을 수 있는 데이터 조각을 처리하고, `end` 콜백은 상대가 송신을 끝내 소켓의 읽기 스트림이 종료될 때 실행됩니다. 이번 표본에서 CPU 작업이 있을 때 두 콜백 모두 계산 종료 뒤 실행됐습니다. 20ms보다 조금 이르게 기록된 표본의 원인은 따로 측정하지 않았습니다. Node.js 타이머는 정확한 실행 시각을 보장하지 않습니다.
+
+송신자는 자신의 시작 신호를 받은 시점부터 40ms와 80ms를 셌고, 수신자는 별도의 기준 시점을 사용했습니다. 두 숫자를 빼서 전송 지연을 계산할 수는 없습니다. 패킷이 계산 중에 커널에 도착했는지도 측정하지 않았습니다. 이 실험에서 확인한 것은 **수신자 JavaScript 콜백이 실행된 시각**입니다.
+
+CPU 작업이 없는 세 번에서는 `data` 콜백이 각각 두 번, 작업이 있는 세 번에서는 한 번씩 실행됐습니다. TCP는 바이트 스트림이므로 송신자가 두 번 썼다고 수신 콜백도 반드시 두 번 호출되지는 않습니다. 조각 수가 달라도 이 실험의 최종 본문 길이와 해시는 같았습니다.
+
+## 지연을 볼 때 함께 살펴볼 점
+
+이번 실험에서는 `monitorEventLoopDelay()`도 사용했습니다. 이벤트 루프가 예정된 시간보다 늦게 진행되는 정도를 표본화하는 Node.js API입니다. 측정기를 예열한 뒤 실험과 종료 대기까지 포함한 전체 구간을 측정했습니다. CPU 작업이 없는 세 번의 최대 지연은 1.49~1.78ms, 약 200ms 작업을 넣은 세 번은 각각 약 200.67ms였습니다. 이 값은 해당 실행의 관측치이며 평상시 서비스 지연을 대표하지 않습니다.
+
+타이머가 늦게 실행됐다면 동기 계산뿐 아니라 다른 콜백, 가비지 컬렉션, 운영체제 스케줄링 등도 확인해야 합니다. 오래 걸리는 계산이 원인이라면 작업을 나누거나 워커 스레드로 옮기는 방법을 검토할 수 있습니다. 어느 방법이 적합한지는 작업 특성과 별도 측정이 필요합니다. 이번에는 개선 전후 성능을 비교하지 않았습니다.
+
+## 정리
+
+이번 실험에서는 수신자의 동기 계산이 끝난 뒤에야 타이머와 수신 콜백이 실행됐습니다. 네트워크가 느린지 판단하기 전에 **데이터가 도착한 시점과 JavaScript가 처리한 시점은 다를 수 있다**는 점을 기억해 두면 좋겠습니다. 실제 패킷 도착 시각, HTTP 파서, TLS와 프록시의 영향은 이번 측정 범위 밖입니다.
+
+## 참고 자료
+
+- [Node.js: 이벤트 루프와 타이머 설명](https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick)
+- [Node.js v24.12.0: 타이머 API](https://nodejs.org/download/release/v24.12.0/docs/api/timers.html#settimeoutcallback-delay-args)
+- [Node.js v24.12.0: 이벤트 루프 지연 측정](https://nodejs.org/download/release/v24.12.0/docs/api/perf_hooks.html#perf_hooksmonitoreventloopdelayoptions)
+- [Node.js v24.12.0: TCP 소켓 API](https://nodejs.org/download/release/v24.12.0/docs/api/net.html)
+- [RFC 9293: TCP](https://www.rfc-editor.org/rfc/rfc9293.html)
+
+## 저작권 안내
+
+공식 문서와 표준은 개념 확인을 위해 참고했고, 설명과 도식은 이 글을 위해 작성했습니다. 자료와 코드를 재사용할 때는 각 원문의 저작권과 라이선스 조건을 확인해 주세요.
