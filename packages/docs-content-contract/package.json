@@ -9,6 +9,12 @@
     "README.md"
   ],
   "exports": {
+    "./publication": {
+      "types": "./dist/esm/publication.d.ts",
+      "import": "./dist/esm/publication.js",
+      "require": "./dist/cjs/publication.js",
+      "default": "./dist/esm/publication.js"
+    },
     "./body-style": {
       "types": "./dist/esm/body-style.d.ts",
       "import": "./dist/esm/body-style.js",

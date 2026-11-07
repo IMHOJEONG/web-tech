@@ -6,6 +6,8 @@
 
 ## ADR 상태
 
+- [ADR-0028: NAS 불변 게시 스냅샷·revision 검증](adr-0028-nas-content-revision-snapshots.md): 제안. 공용 계약과 임시 snapshot·포인터 교체 실험을 로컬 구현·검증. 실제 NAS·운영 API·프론트 lease·캐시는 미연결이며 운영 정책 미적용.
+
 - [ADR-0027: 본문 제목 앵커 호환성](adr-0027-article-heading-anchor-compatibility.md): 적용 중. 명시 ID·기존 fragment 우선 예약, 충돌 없는 canonical·호환 앵커·h5/h6 스크롤 여백. runtime MDX 로컬 검증 범위이며 운영 미배포.
 
 - [ADR-0026: SPA 오프라인 현재 글 확인](adr-0026-offline-spa-article-context.md): 적용 중. browser 발신 client와 현재 글 응답 확인·기존 공개 경로 검증 유지. 운영 재현 원인 보완, 수정 배포는 별도.

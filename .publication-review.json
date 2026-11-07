@@ -2,6 +2,216 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/verification/content/2026-11-07-snapshot-pointer-lab.md",
+      "sha256": "191d495b03f122758e35afe3903eedb398a9022746d56535e80d812e4852e947",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 PR #86 리뷰 보완에 필요한 기존 운영 문서 4개의 정제 갱신·재검수·해시 갱신과 커밋·푸시를 명시 승인함. 자체 작성한 실패 재현·회귀 수·검사 명령·운영 미연결 경계와 동일 Confluence 페이지의 비개인 경로를 확인함. 원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정·토큰·병합·Production 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-07-snapshot-pointer-lab.md",
+      "sha256": "ae5d2b441ca9778118b04ff5dfd5d3b359b1e037cb6a130415d2aa2344da2e44",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 PR #86 리뷰 보완에 필요한 기존 운영 문서 4개의 정제 갱신·재검수·해시 갱신과 커밋·푸시를 명시 승인함. 자체 작성한 실패 재현·회귀 수·검사 명령·운영 미연결 경계와 동일 Confluence 페이지의 비개인 경로를 확인함. 원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정·토큰·병합·Production 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/README.md",
+      "sha256": "098fde915399ce529d459ca31018acdb30a3d04b7f1c06b0b23f4951f1bb263e",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/adr-0028-nas-content-revision-snapshots.md",
+      "sha256": "6c1cf0792d87551f44eb88a68eb447cf05acefae6962948623615dd7d56be9c6",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/todo/todo.md",
+      "sha256": "94bf5796f2010686a50a98d1a78ebe0c4162222ce6d103cddef4b90f43530c69",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 PR #86 리뷰 보완에 필요한 기존 운영 문서 4개의 정제 갱신·재검수·해시 갱신과 커밋·푸시를 명시 승인함. 자체 작성한 실패 재현·회귀 수·검사 명령·운영 미연결 경계와 동일 Confluence 페이지의 비개인 경로를 확인함. 원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정·토큰·병합·Production 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/README.md",
+      "sha256": "dd952272c663ee7bf1f9ea2bd6a4b8c49f62c6dae8bb4bcee7934a2006afb785",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/content/2026-11-06-publication-integrity-contract.md",
+      "sha256": "1fdeb30d79e8a716cdfa97b405c77b03fc277fd614c01ddc38c7ebf2cb8bfdcb",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 공용 계약 구현과 관련 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀 결과·절차·작업 기록·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·기존 초안·개인 경로·실제 응답·NAS 설정·푸시·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-06-nas-revision-design.md",
+      "sha256": "4053c0734152866c094ff65a21ff6099c03610f569649e3c936a0fbca64c8360",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 PR #86 리뷰 보완에 필요한 기존 운영 문서 4개의 정제 갱신·재검수·해시 갱신과 커밋·푸시를 명시 승인함. 자체 작성한 실패 재현·회귀 수·검사 명령·운영 미연결 경계와 동일 Confluence 페이지의 비개인 경로를 확인함. 원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정·토큰·병합·Production 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-06-publication-integrity-contract.md",
+      "sha256": "6f4c93e8c14cd1f5f578e82ce4fe662c86dee03c075805c35b55f2eab0fe5b57",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 공용 계약 구현과 관련 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀 결과·절차·작업 기록·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·기존 초안·개인 경로·실제 응답·NAS 설정·푸시·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/README.md",
+      "sha256": "09a442e0aaa6fa85db021e7987d01185f36946f5929bf2ba86759d780c28faf6",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/knowledge/content-platform/README.md",
+      "sha256": "e0d5d4929a14fb14b6b925978e05ee4b22044c7fcec0fd419b9c3fa58f869da5",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 게시 세대 실험 코드 5개와 정제 문서 7개만 공개 검수·작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 개념·합성 fixture·정제 집계·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·초안·개인 경로는 제외함. 후속 NAS 설계·푸시·PR·병합·배포는 이 승인 범위에 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/knowledge/content-platform/docs-cache-structure.md",
+      "sha256": "5671029b6798d1337a2262dc6330e81aedab17dfd84539876cf70f3c13ed0ef3",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 게시 세대 실험 코드 5개와 정제 문서 7개만 공개 검수·작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 개념·합성 fixture·정제 집계·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·초안·개인 경로는 제외함. 후속 NAS 설계·푸시·PR·병합·배포는 이 승인 범위에 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/cache/2026-11-06-publication-generation-experiment.md",
+      "sha256": "f2049fa041f98cb456cdabf0c22affc0dcae591e1b1489fb4356a7b40ef66b89",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 게시 세대 실험 코드 5개와 정제 문서 7개만 공개 검수·작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 실패 대조·반복 결과·재현 절차·한계를 검수하며 실제 비밀값·개인정보·권리·공개 의도를 확인함. 원시 trace·로그·이벤트·녹화본·초안·개인 경로는 제외함. 후속 NAS 설계·푸시·PR·병합·배포는 이 승인 범위에 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-06-publication-generation-experiment.md",
+      "sha256": "45ec85146bb901bdcc8105a873eaa384b0884080f8728cc46079437df1fb8bb7",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 게시 세대 실험 코드 5개와 정제 문서 7개만 공개 검수·작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 작업·검증·공개 범위와 미구현 경계를 검수하며 실제 비밀값·개인정보·권리·공개 의도를 확인함. 원시 trace·로그·이벤트·녹화본·초안·개인 경로는 제외함. 후속 NAS 설계·푸시·PR·병합·배포는 이 승인 범위에 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-03-cache-expiry-boundary-audit.md",
+      "sha256": "0fbcf030b96a0dfd0dca9c3d1eb25ed0b8e910df85d1c5587cb582bb20f715b5",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 캐시 계측·회귀 테스트와 정제 문서만 공개 검수·로컬 커밋하도록 명시 승인함. 자체 작성한 코드·합성 입력·정제 집계·절차·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 trace·로그·이벤트·녹화본·기존 초안·개인 경로는 제외하며 원인 미확정과 과거 검증을 구분함. 푸시·PR·병합·배포는 이번 승인 대상이 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/runbooks/README.md",
       "sha256": "c7a6d0e9efe1ebd3867d1bb8e9e0d2bec479e1c38f102b3d23f42796ec2e43cb",
       "kind": "document",
@@ -30,26 +240,12 @@
       }
     },
     {
-      "path": "docs/todo/todo.md",
-      "sha256": "3ea99ddda845cbcc1d236223a2783d938df303c61acce93e6322a23c9221c7de",
-      "kind": "document",
-      "decision": "public-approved",
-      "reviewedOn": "2026-11-03",
-      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
-      "checks": {
-        "secrets": true,
-        "personalData": true,
-        "rights": true,
-        "publicIntent": true
-      }
-    },
-    {
       "path": "docs/verification/resilience/2026-11-03-docs-sequential-followups.md",
-      "sha256": "8bbb7282ef702c6bd037a0a352c339a399fb1e3e7967b881c724a7313ae72140",
+      "sha256": "8b921a41052077e12e4d598fa0171f8a8e736a22fabb379143673f422157fed2",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-03",
-      "note": "사용자가 PR83 리뷰 보완의 동일 범위 코드·보고서·worklog 2개 재검수와 해시 갱신 후 검증·병합·배포 계속을 명시 승인함. 기준선 작업 트리 재현 절차와 정리·계측 회귀 66개/전체188개 결과만 추가하며 원시 자료·식별자·초안·비밀값은 공개하지 않음.",
+      "reviewedOn": "2026-11-06",
+      "note": "사용자가 이번 캐시 계측·회귀 테스트와 정제 문서만 공개 검수·로컬 커밋하도록 명시 승인함. 자체 작성한 시각 경계 재현 절차·집계·한계와 11-06 재검증 결과를 검수하고 과거 결과를 보존함. 비밀값·개인정보·개인 경로·원시 자료·식별자·초안은 제외하며 권리·공개 의도를 확인함. 푸시·PR·병합·배포는 이번 승인 대상이 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -106,20 +302,6 @@
       "decision": "public-approved",
       "reviewedOn": "2026-11-01",
       "note": "사용자가 PR82 리뷰 보완 최종 문서 3개·승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 작업 기록에 리뷰 2건의 문서 보완·로컬 검사·공개 승인 경계만 추가했으며 원시 자료·비공개 초안·비밀값은 제외함. main 병합·운영 배포는 승인 범위가 아님.",
-      "checks": {
-        "secrets": true,
-        "personalData": true,
-        "rights": true,
-        "publicIntent": true
-      }
-    },
-    {
-      "path": "docs/worklog/2026-11/README.md",
-      "sha256": "1140dc7a759850c12da61cd8cdc703a4721291aa55f12fe66126b43036567b5c",
-      "kind": "document",
-      "decision": "public-approved",
-      "reviewedOn": "2026-11-03",
-      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -204,20 +386,6 @@
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
       "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 Worker 코드이며 원시 브라우저 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
-      "checks": {
-        "secrets": true,
-        "personalData": true,
-        "rights": true,
-        "publicIntent": true
-      }
-    },
-    {
-      "path": "docs/architecture/README.md",
-      "sha256": "cde7851ce7f22a15f2a45c662c49c14bc371b9f2c2f12a1c8ae37b868614fb96",
-      "kind": "document",
-      "decision": "public-approved",
-      "reviewedOn": "2026-10-31",
-      "note": "사용자가 PR81 추가 목차 보완 최종 문서 4개와 승인 해시 4개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 ADR 목차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -316,20 +484,6 @@
       "decision": "public-approved",
       "reviewedOn": "2026-10-31",
       "note": "사용자가 최종 70개 파일의 공개 검수 목록과 main 병합·배포를 명시 승인함. 자체 작성한 설계·집계 검증·작업 기록·목차이며 원시 캡처·초안·비밀값·제3자 매체는 제외함.",
-      "checks": {
-        "secrets": true,
-        "personalData": true,
-        "rights": true,
-        "publicIntent": true
-      }
-    },
-    {
-      "path": "docs/verification/README.md",
-      "sha256": "df8a90cdda576096d837d7dda8f9fb408a8321d2de6a6c50f5b0a66c3ee44bc2",
-      "kind": "document",
-      "decision": "public-approved",
-      "reviewedOn": "2026-11-03",
-      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,

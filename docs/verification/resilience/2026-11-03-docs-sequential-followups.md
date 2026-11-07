@@ -104,6 +104,102 @@ release/reset 오류를 보존하면서 가능한 요청 drain과 최종 무효�
 추가된 실패 정리 세 조건과 오래된/불완전 계측 거절을 두 화면 project에서 검사했다.
 이 수치는 최초 42/180 기록을 덮어쓰지 않는 후속 결과이며 새 head의 원격 CI는 별도로 확인한다.
 
+### PR #83 병합 후 시각 경계 감사
+
+2026-11-03 KST, main `8514b0973567b67ccb495aa33010fdb0d2995c39`에서 분리한
+`codex/docs-cache-expiry-audit-20261103`의 **미커밋 로컬 변경**을 검사했다.
+앞 절의 병합 전 결과와 구분한다. 이번 후속 변경의 공개 검수 해시·커밋·푸시·배포는 수행하지 않았다.
+
+설치된 Next 16.4.3의 `tags-manifest.external.js`는 다음 두 조건을 모두 만족할 때
+tag 만료로 판정한다. `file-system-cache.js`는 무효화·저장 시각에 `Date.now()`를 쓰지만,
+만료 도달 여부는 `performance.timeOrigin + performance.now()`와 비교한다.
+이는 로컬 의존성 구현의 관측이며 Vercel의 모든 캐시 계층을 설명하는 계약은 아니다.
+
+```text
+expiredAt <= 관측 시각
+expiredAt > cache.lastModified
+```
+
+따라서 두 시각이 같은 경우에는 이 비교만으로 만료가 되지 않는다. 과거 값 1000을 쓰는
+독립 테스트 worker의 합성 tag로 저장 시각 999 / 1000 / 1001을 대입해 각각
+만료 / 미만료 / 미만료를 확인했다. 이 테스트는 서버 시계나 실제 요청의 캐시 값을 변경하지 않고,
+worker의 합성 tag도 `finally`에서 복원한다. **같은 밀리초 경계가 과거 실패의 원인이라는 증거는 아니다.**
+
+기존 loopback probe에 관련 tag의 최대 만료 시각, `lastModified - expiredAt`, 단조 시계 기반
+epoch 관측값과 wall clock 차이만 추가했다. tag·원본 key·URL·헤더·본문은 새 필드에 보관하지 않는다.
+기존 key 해시·실행 식별자를 포함한 원시 이벤트도 비공개다. 잘못된 입력·접근자 예외는 null로 처리하며,
+유한한 두 수의 차이가 Infinity가 되는 합성 경계도 실패를 먼저 확인한 뒤 null 처리로 보완했다.
+이 수치 보호 수정은 새 진단 코드의 결함을 고친 것이며 운영 캐시 원인 수정이 아니다.
+
+재현은 저장소 루트에서 같은 Node·pnpm과 의존성을 준비한 뒤 실행한다. 관측 모드는 기본 설정을
+상속하고 loopback 진단 헤더만 추가한다. `mktemp`로 만든 저장소 밖 디렉터리는 접근 권한을 제한하고,
+trace·로그·계측 원문을 공개 Git에 추가하지 않는다. 기존 3111·3112 서버가 있으면 먼저 소유자를 확인한다.
+
+```sh
+EVIDENCE_DIR="$(mktemp -d "${TMPDIR:-/tmp}/docs-expiry-audit.XXXXXX")"
+chmod 700 "$EVIDENCE_DIR"
+pnpm --filter docs test:article:prod \
+  --output="$EVIDENCE_DIR/normal" --reporter=list
+ARTICLE_CACHE_OBSERVATION_DIR="$EVIDENCE_DIR/cache" \
+  pnpm --filter docs exec playwright test \
+  --config=playwright.cache-observation.config.ts \
+  article-e2e/content-publication.spec.ts \
+  article-e2e/request-cause-next.spec.ts \
+  article-e2e/tag-expiry-observation.spec.ts \
+  --output="$EVIDENCE_DIR/observed" --reporter=list
+```
+
+| 검사                      | 실제 결과                                     | 해석                                                                             |
+| ------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------- |
+| 일반 모드 집중 검사       | 18/18 통과                                    | opt-in 환경 변수가 없을 때 checkpoint는 404, JSON 미노출                         |
+| 일반 모드 전체 production | 196/196 통과, retry 0                         | 기존 190개에 새 경계·안전성·checkpoint 검사 6개 추가. 판정 기준·제한 시간 미변경 |
+| 관측 모드 1차             | 18/18 통과                                    | 독립 서버 프로세스, 저장 파일과 live checkpoint 일치                             |
+| 관측 이벤트 1차           | 1,706건, 누락 0·저장 실패 0                   | checkpoint 2회. 캐시 get 종료 748회 중 실제 반환 662회                           |
+| 반환된 항목의 저장 시각   | 662회 모두 최대 만료 시각보다 뒤              | 같은 시각·더 이른 저장 항목 반환은 이 표본에서 0회                               |
+| 시계 차이 1차             | wall minus monotonic epoch 약 -0.964~+0.250ms | 큰 시계 점프나 만료 시각이 관측 시각보다 미래인 반환은 관측되지 않음             |
+
+관측 검사는 매번 새 `mktemp` 디렉터리와 새 서버 프로세스로 두 번 실행했다.
+파일을 덮어써 첫 실행을 잃거나 4,096건 상한을 높여 반복 결과를 합치지 않았다.
+
+| 후속 검사                   | 실제 결과                                     | 해석                                                                                        |
+| --------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| 관측 모드 2차               | 18/18 통과                                    | 새 서버·새 증거 경로, 저장 파일과 live checkpoint 일치                                      |
+| 관측 이벤트 2차             | 1,710건, 누락 0·저장 실패 0                   | checkpoint 2회. 캐시 get 종료 747회 중 실제 반환 658회                                      |
+| 반환된 항목의 저장 시각 2차 | 658회 모두 최대 만료 시각보다 뒤              | 두 실행 합계 1,320회에서 같은 시각·더 이른 저장 항목 반환 0회                               |
+| 시계 차이 2차               | wall minus monotonic epoch 약 -0.993~+0.035ms | 만료 시각이 관측 시각보다 미래인 반환 0회. 두 실행의 새 메타데이터는 모두 유한 수 또는 null |
+| 코드·문서 검사              | lint·TypeScript·문서 구조 검사 통과           | 문서 검사는 HEAD와 작업 파일을 읽는 방식이며 stage·검수 해시 갱신 없음                      |
+
+관측 모드의 최초 실행 시도는 sandbox의 `listen EPERM`으로 테스트 시작 전에 종료됐다.
+로컬 listen을 허용한 동일 검사에서 위 18개가 통과했으며, 이를 앱 장애 재현으로 세지 않는다.
+빌드 중 기존 게시 글 두 편의 placeholder 경고는 남아 있고 이번 범위에서 수정하지 않았다.
+
+최대 tag 만료 시각은 판정에 사용된 tag 전체를 보존하지 않는 요약값이다. `get` 시작·종료 사이에
+다른 무효화가 끼어들 수 있고 계측 자체도 실행 시간을 바꾼다. 이 값만으로 Next 내부 판정 순간을
+복원하거나 캐시 정합성 전체를 증명할 수 없다. 시계가 서로 다르다는 사실만으로 장애를 확정하지 않는다.
+현재까지 확인한 실제 메커니즘은 앞 절의 통제된 in-flight 늦은 쓰기이며, 과거 최초 진입 계기는 미확정이다.
+시각 경계는 후속 관측 대상이고 `>`를 `>=`로 바꾸거나 TTL·retry·timeout을 늘리는 우회는 하지 않았다.
+
+### 2026-11-06 공개 검수 재확인
+
+사용자가 이번 계측·회귀 테스트와 정제 문서만 공개 검수하고 로컬 커밋하도록 승인했다.
+기준 main·Node·pnpm·Next 버전과 검사 조건은 11-03 후속 감사와 같다.
+TypeScript 진단·테스트·앱 전용 설정 4개는 로컬 `2f5b1997a5af552912b368e609a1f86e92250fd5`에 커밋했다.
+운영 문서·목차 5개와 대응 검수 해시만 후속 문서 커밋에 포함한다. 원시 이벤트·trace·로그·초안은 제외한다.
+새 원격 커밋·PR·CI·배포 결과는 없으며 앞 절의 과거 공개 승인과 이번 승인을 구분한다.
+
+재실행은 앞 절과 같은 명령에 새 제한된 증거 디렉터리를 지정했다. 이번 재확인 결과는 다음과 같다.
+
+| 검사                 | 결과                                             | 범위와 한계                                                                        |
+| -------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| 일반 production 전체 | 196/196 통과, retry 0                            | 본문·검색·게시·503·스트림 기존 판정 유지                                           |
+| opt-in 관측 집중     | 18/18 통과, retry 0                              | 두 화면 project의 게시·원인 대조·시각 경계·checkpoint                              |
+| 관측 완결성          | 이벤트 1,714건·누락 0·저장 실패 0·checkpoint 2회 | get 종료 751회 중 만료 시각을 요약한 반환 664회. 같거나 더 이른 저장 항목 반환 0회 |
+| 코드 검수            | lint·TypeScript 통과                             | 소스 변경은 계측·회귀 4개에 한정. 운영 코드·의존성·공통 설정 미변경                |
+
+이번 실행도 최초 간헐 실패를 재현하지 못했다. 이 표본을 원인 해결이나 Vercel 운영 계측으로 확대하지 않는다.
+합성 입력·자체 작성 코드·정제 집계와 공개 링크만 남겼으며 개인 경로·원시 응답·실제 인증값은 추가하지 않았다.
+공개 검수 기록은 최종 문서 bytes만 대상으로 하며 푸시·PR·배포는 별도다.
+
 ## 한계와 후속 작업
 
 - 통제한 늦은 응답 쓰기는 재현했지만 과거 V1/V2 검사가 최초 이상 상태에 진입한 계기는 미확정이다.
@@ -118,4 +214,5 @@ release/reset 오류를 보존하면서 가능한 요청 drain과 최종 무효�
 - [기존 간헐 조사](2026-11-01-publication-cache-request-cause.md)
 - [macOS 계정 준비](../../runbooks/github-app-isolated-macos-account.md)
 - [작업 기록](../../worklog/2026-11/2026-11-03-docs-sequential-followups.md)
+- [시각 경계 후속 작업 기록](../../worklog/2026-11/2026-11-03-cache-expiry-boundary-audit.md)
 - [KAN-58](https://web-tech-service.atlassian.net/browse/KAN-58) · [KAN-5](https://web-tech-service.atlassian.net/browse/KAN-5) · [KAN-6](https://web-tech-service.atlassian.net/browse/KAN-6) · [KAN-33](https://web-tech-service.atlassian.net/browse/KAN-33)

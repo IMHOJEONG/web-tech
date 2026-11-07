@@ -1,0 +1,197 @@
+# 임시 게시 스냅샷 생성·포인터 교체 검증
+
+## 대상과 조건
+
+- 검증일: 2026-11-06~07 KST. 공용 계약 `cdf47ec`·정제 문서 `6b80476` 위 미커밋 로컬 실험.
+- Node 24.22.1·pnpm 12.14.0·macOS 로컬 파일시스템과 Jest. 실제 NAS·Docker·운영 API·네트워크는 사용하지 않았다.
+- [실험 구현](../../../apps/docs-backend/src/publication-lab/snapshot-lab.ts)과 [회귀](../../../apps/docs-backend/src/publication-lab/snapshot-lab.spec.ts)는 공용 publication 계약을 사용한다. Nest 모듈·컨트롤러·기존 repository에는 연결하지 않았다.
+- factory가 새 OS 임시 디렉터리만 생성한다. 외부 root 경로·CONTENT_DIR·토큰을 받지 않는다. 입력은 합성 published metadata와 완성 HTML bytes다.
+- 후속 사용자 승인으로 동일 구현·회귀를 로컬 `97709cc`에 커밋했다. 관련 정제 문서·목차 7개는 별도 검수·커밋하며 이번 작업에서 원격 푸시·배포는 하지 않는다.
+
+## 재현 방법
+
+프로젝트 Node·pnpm과 의존성이 준비된 저장소 루트에서 실행한다. 별도 개발 서버나 NAS 접속은 필요하지 않다.
+
+```sh
+pnpm --filter @web-tech/docs-content-contract build
+pnpm --filter docs-backend exec jest --runInBand --runTestsByPath src/publication-lab/snapshot-lab.spec.ts
+pnpm --filter docs-backend test --runInBand
+pnpm --filter docs-backend typecheck
+pnpm --filter docs-backend lint
+pnpm --filter docs-backend build
+```
+
+최종 집중 검사는 같은 명령을 별도 프로세스로 5회 연속 실행했다. 테스트는 factory가 만든 root만 사용하고
+afterEach에서 정리한다. 별도 child process는 이 root의 잠금 파일을 만든 뒤 강제 종료하며 NAS 컨테이너를 종료하지 않는다.
+기존 개발 서버·다른 작업 트리·stash·원시 자료는 정리 대상으로 삼지 않았다.
+
+## 결과와 증거
+
+### 공용 계약 커밋과 공개 검수
+
+| 작업                            | 결과                                                                                                                                            |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| 공용 스키마·순수 validator·회귀 | 로컬 `cdf47ec`. 공용 83개 재통과. 기존 소비자 프론트354개·backend31개 결과는 [선행 보고서](2026-11-06-publication-integrity-contract.md)에 보존 |
+| 정제 설계·검증·기록·목차        | 로컬 `6b80476`. 승인한 8개 문서의 최종 bytes를 검수하고 해시 기록. 원시 자료·실제 응답·비밀값 제외                                              |
+| 검수 중 수정                    | 최초 문서 커밋의 검수 경로 4개 중복을 확인했다. 사용자 승인 후 그 미푸시 문서 커밋 1개만 재작성했으며 기존 사용자 이력은 유지                   |
+| 최종 커밋 범위                  | 기준 `fa583dd` 이후 두 커밋의 publication·format·문서 delta·commitlint 통과. 현재 실험은 이 커밋에 포함하지 않음                                |
+
+### 파일 기반 게시 흐름
+
+```text
+완성 index·HTML의 소유 복사본
+  → 공용 strict 계약·길이·해시·UTF-8·문서 집합 검사
+  → 임시 candidate에 파일 쓰기·파일/디렉터리 sync
+  → 디스크에서 실제 candidate bytes 재검증
+  → releases/<revision>으로 rename (기존 동일 revision은 검증 후 재사용)
+  → 독점 잠금 안에서 expected generation 대조
+  → 검증한 release를 가리키는 임시 pointer 쓰기·sync
+  → current.json으로 rename·부모 디렉터리 sync
+```
+
+build만으로 current가 바뀌지 않는다. index/HTML을 다시 렌더링하지 않으며 실제 Markdown 수집·공개 승인·asset 승격은 구현하지 않았다.
+새 generation은 매 promote/rollback마다 발급하며, 이전 revision 복귀도 이전 generation을 재사용하지 않는다.
+
+| 회귀                            | 관측 결과                                                                                                                                                   |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 최초 게시·동일 산출물·빈 게시본 | 명시적 bootstrap만 최초 포인터 생성. 동일 revision은 검증 뒤 재사용하고 빈 게시본도 허용                                                                    |
+| 버전 고정·복귀                  | V2 승격 뒤 이전 lease는 V1, 새 current 읽기는 V2. 새 인스턴스는 디스크에서 재조회. rollback은 같은 V1 revision/새 generation                                |
+| 입력 오류                       | draft·누락·중복·추가 문서·경로 우회·잘못된 UTF-8·index/HTML 크기 초과는 candidate 노출 전 실패                                                              |
+| 디스크 변조                     | 같은 길이의 HTML 변조·manifest 변경·누락·추가 파일·symlink·hardlink·크기 초과를 거절하고 기존 pointer bytes 유지                                            |
+| candidate 재검증                | 쓰기 후 변조를 주입하면 release로 노출하지 않음                                                                                                             |
+| 교체 전 중단                    | candidate 기록·release rename·pointer sync 뒤 주입 오류에서도 기존 포인터 유지. 완성된 미게시 release는 남을 수 있음                                        |
+| 교체 후 중단                    | pointer rename 뒤 오류는 commit-uncertain. 실패했다고 과거 상태로 단정하거나 자동 rollback하지 않고 디스크 재조회에서 V2 확인                               |
+| 동시 읽기·쓰기                  | 교체 전 보류 중 12개 읽기는 V1, 교체와 겹친 24개 읽기는 완전한 V1/V2만 반환. 두 번째 writer는 locked, 나중의 이전 expected generation은 generation-conflict |
+| 별도 프로세스 잠금              | 다른 프로세스가 잡은 잠금을 존중. 그 프로세스를 SIGKILL해도 남은 파일을 자동 삭제·탈취하지 않음                                                             |
+| 유실·재초기화                   | initialized marker 이후 포인터 누락·파손·초과·link를 실패 처리. 첫 포인터 쓰기 중단도 초기화 의도를 남기며 bootstrap:true만으로 다시 초기화하지 않음        |
+| 안전한 오류                     | 고정 code만 노출하고 원시 예외·개인 경로·입력 bytes를 오류 원인으로 포함하지 않음                                                                           |
+
+### 동시 읽기에서 발견한 오판과 수정
+
+처음에는 rename과 실제 읽기를 겹친 회귀가 unsafe-file로 실패했다. 이전 포인터를 열어 둔 뒤 교체하면
+이전 inode가 연결 해제되어 nlink=0이 될 수 있는데, 단일 link만 허용한 검사가 이를 훼손으로 오판했다.
+pointer-opened barrier로 `이전 파일 open → 새 포인터 rename → 이전 fd stat/read` 순서를 고정했고 수정 전 실패를 재현했다.
+
+fd stat만 보완한 뒤에도 반복 3회 중 마지막 실행에서 path stat 단계가 같은 이유로 실패했다.
+최종적으로 **포인터 읽기에만** 두 stat 단계의 nlink=0을 허용했다. O_NOFOLLOW·일반 파일 검사·byte 상한·strict JSON은 유지하며
+nlink>1은 포인터에서도 계속 거절한다. 불변 release 파일은 nlink=1 조건을 유지한다.
+열린 이전 pointer는 완전한 V1 읽기로 마무리하고, 새 current 요청은 V2를 읽는 계약이다.
+
+최종 집중 35개 × 5회 = 175회 실행이 모두 통과했다. 이는 고유 테스트 175개라는 뜻이 아니다.
+최종 전체 backend 단위66개(신규35개+기존31개)·타입·lint·Nest build가 통과했다.
+실험 root 잔여 수는 0개였으며 인덱스는 비어 있다. 실제 NAS·HTTP·Next 앱 동선 E2E를 새로 실행한 결과는 아니다.
+실험 오류를 모두 정상 취소로 처리하거나 과거 CI의 최초 원인으로 확정하지 않았다.
+
+이 동작의 API 근거는 [Node 24 파일 API](https://nodejs.org/download/release/v24.22.1/docs/api/fs.html#filehandlesync)와
+[Linux rename의 열린 파일 설명](https://man7.org/linux/man-pages/man2/rename.2.html)이다. 로컬 회귀로 관측한 범위와 NAS 실제 볼륨 보장은 구분한다.
+원시 로그·실제 응답·캡처·trace는 공개 문서나 artifact에 복사하지 않았다.
+
+## 한계와 후속 작업
+
+- 이 파일은 로컬 실험이며 NAS용 publisher가 아니다. 실제 NAS 파일시스템·volume·mount·전원 차단 내구성·권한 분리는 미검증이다.
+- checkpoint 오류는 주입된 예외다. 실제 SIGKILL은 잠금 소유 프로세스에만 적용했으며 publisher의 모든 쓰기 경계에서 crash/reboot를 시험한 것은 아니다.
+- readCurrent/reopen은 요청별 새 디스크 조회를 보여 주지만 네트워크 API·Next metadata/검색/본문 lease 공유·캐시 세대 전환을 검증하지 않는다.
+- 일반 writer는 module의 잠금·불변 release 계약을 지킨다고 가정한다. 동일 OS 계정·관리자가 검증과 사용 사이에 디렉터리를 바꾸는 공격까지 방어하는 openat 기반 sandbox나 서명 검증은 아니다.
+- stale lock·초기화 intent만 남은 경우는 fail-closed다. 자동 복구·owner 사망 판정·잠금 탈취·구세대 삭제·철회 정책은 구현하지 않았다.
+- sync/rename 성공은 해당 OS 호출의 성공이다. 실제 NAS의 journal·전원 장애 내구성·분산 CAS 보장은 별도 시험이 필요하다.
+- 최초 실험 종료 때는 코드·보고서·기록을 미커밋으로 보존했다. 이후의 공개 검수·커밋은 아래 후속 승인 범위로만 진행하며 공용 계약의 기존 승인을 자동 확대하지 않는다.
+- 실제 NAS 설정·컨테이너·환경 변수·자격 증명·웹훅·푸시·배포는 변경하지 않았다.
+
+### 후속 공개 검수·커밋 승인
+
+사용자가 이 실험 구현·회귀와 정제 문서의 공개 검수·작업별 로컬 커밋을 명시 승인했다.
+선행 미커밋 보존 결정은 아래 승인 범위에서만 갱신한다.
+
+- 소스 2개는 합성 입력·격리 파일 조작·자체 작성 회귀이며 실제 문서·API 응답·계정 정보·비밀값을 포함하지 않는다.
+- 문서 7개는 ADR·검증·작업 기록·목차·TODO다. 실패 이력·표본 수·미검증 경계·재현 명령은 유지하고 개인 경로·원시 로그·trace·녹화본은 제외한다.
+- 최종 문서를 stage한 뒤 인덱스 bytes의 SHA-256을 검수 기록에 저장한다. 기존 경로는 항목을 갱신하고 중복 경로를 추가하지 않는다.
+- `97709cc`와 동일 소스의 전체 backend66개·타입·lint·Nest build를 11-07 다시 통과했다. 이전 집중35개 5회 결과를 새 실행 횟수로 중복 합산하지 않는다.
+- 실제 NAS 설정·컨테이너·웹훅·자격 증명·푸시·PR·배포는 이번 승인 범위가 아니다. 최종 로컬 커밋 SHA와 범위 검사 결과는 기존 Jira·Confluence 댓글에 추가한다.
+
+[KAN-58 댓글](https://web-tech-service.atlassian.net/browse/KAN-58?focusedCommentId=10085)과
+[Confluence 댓글 v7](https://web-tech-service.atlassian.net/wiki/pages/viewpage.action?pageId=65817&focusedCommentId=14581761)에
+로컬 커밋과 미커밋 실험·실패/성공·남은 NAS 범위를 추가하고 실제 3열 표와 기존 이력 보존을 재조회했다.
+Confluence 페이지 본문의 미게시 편집은 변경하지 않았다.
+
+### PR #86 최초 원격 검증
+
+후속 사용자 승인으로 관련 8개 커밋을 작업 브랜치에 푸시하고 [PR #86](https://github.com/IMHOJEONG/web-tech/pull/86)을 생성했다.
+검증 head는 `eff33b22197c7a8e80b9682e2973614c063c6f65`, base는 `51be11cf7f62f8c32e9c2f1b60fb68ff9205c9f3`다.
+최신 main의 별도 게시 글과 merge-tree 충돌이 없음을 확인했으며 기존 이력을 재작성하지 않았다.
+
+| 검사                                                                          | 관측 결과                                                                                             |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| [CI 269](https://github.com/IMHOJEONG/web-tech/actions/runs/42322865354)      | 전체 13개 job 성공. Linux에서 공용83개·backend 단위66개·docs lib354개·backend HTTP55개 통과 확인      |
+| 브라우저                                                                      | article198개·offline62개·CRP5개 통과. 반응형은 아래 재시도/skip 내역과 함께 해석                      |
+| 반응형 모바일                                                                 | 137 passed·1 flaky·11 skipped. flaky는 첫 재시도에 통과했으며 무재시도 성공이 아님                    |
+| 반응형 태블릿/데스크톱                                                        | 각각 124 passed/25 skipped, 132 passed/17 skipped. skip을 통과로 합산하지 않음                        |
+| [문서 검사](https://github.com/IMHOJEONG/web-tech/actions/runs/42322865396)   | 성공. 공개 경계·format·문서 delta 포함                                                                |
+| [CodeQL](https://github.com/IMHOJEONG/web-tech/actions/runs/42322862560)      | Actions·JavaScript/TypeScript 분석 성공. 저장소 전체 취약점 0건의 증명은 아님                         |
+| [이미지 빌드](https://github.com/IMHOJEONG/web-tech/actions/runs/42322865386) | 성공. PR 조건으로 GHCR 로그인 skipped·push:false. NAS pull/restart나 실제 배포를 실행하지 않음        |
+| 보조 상태                                                                     | GitGuardian·두 Vercel Preview 성공. CodeRabbit은 무료 OSS 리뷰 한도 댓글과 NEUTRAL로 코드 리뷰 미완료 |
+
+모바일 실패 위치는 기존 `shell-focus-contrast.spec.ts:88`이다. 모바일 trigger의 Enter 입력 뒤
+이름이 `주요 메뉴`인 navigation 1개를 기대했지만 5초 동안 0개로 관측했고 첫 재시도에 통과했다.
+이 관측만으로 hydration·네트워크·서비스 장애 중 원인을 확정하지 않는다. 기준 완화·무관한 테스트 수정·재실행으로 최초 결과를 덮지 않았다.
+전용 세대 실험 36개는 별도 로컬 설정의 선행 결과이며 이번 기본 CI가 이를 새로 실행했다고 표시하지 않는다.
+
+원시 CI 로그·trace·error-context·artifact를 저장소나 PR에 복사하지 않았다. offline 증거 업로드 단계도 skipped임을 확인했다.
+외부 원본 run 링크와 필요한 숫자·실패 위치만 기록한다. GitHub 연결 도구의 PR 수정은 권한 부족 403을 반환해
+별도 승인한 CLI 인증으로 본문의 결과를 갱신했다. 인증값이나 권한 설정 자체는 변경하지 않았다.
+
+이 두 문서의 정제 결과 추가·검수 해시 갱신·후속 커밋/푸시는 별도로 사용자 승인받았다.
+위 성공은 최초 head `eff33b2`의 결과다. 문서 커밋 이후 새 head의 CI는 별도로 확인해 PR·Jira·Confluence에 연결한다.
+PR 병합·main 변경·Production·실제 NAS 설정·컨테이너 교체는 수행하지 않는다.
+
+### PR #86 CodeRabbit 보완
+
+`e80579a`에 대한 [리뷰](https://github.com/IMHOJEONG/web-tech/pull/86#pullrequestreview-5809960677)의
+인라인 7건과 테스트 보강 3건을 코드와 대조했다. 아래는 같은 브랜치의 후속 로컬 검증이며
+앞선 CI 269·271, 기존 35개 반복 결과와 합산하지 않는다.
+
+| 지적                                | 보완과 회귀                                                                                                                                                                                                                     |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 작은 파일의 큰 backing buffer 유지  | 4바이트 파일 32개의 보유 buffer 합계가 수정 전 33,554,464바이트로 실패했다. 정확한 길이의 독립 buffer를 반환해 128바이트로 통과했다. 디스크 읽기도 검증한 manifest의 선언 길이로 제한해 작은 선언 뒤 큰 본문을 누적하지 않는다. |
+| 잠금 정리 오류가 게시 결과를 가림   | rename 여부를 잠금 close/unlink 이후까지 유지한다. 두 정리 지점의 주입 오류는 교체 후 commit-uncertain, 교체 전 io-failure로 구분한다. 불확정이면 새 포인터를 재조회하며 자동 rollback하지 않는다.                              |
+| 최대 길이 slug의 파일명 초과        | 논리 경로 256자는 유지하고 실험 내부 파일명만 경로 SHA-256과 .html로 매핑한다. 서로 다른 최대 경로 두 개의 저장·재조회·재시작을 확인한다. NAS 저장 규격이나 공용 manifest 형식을 변경한 것은 아니다.                            |
+| 첫 게시와 current 읽기의 경합       | 포인터 없음 → 첫 게시 완료 → marker 읽기의 순서를 barrier로 고정한다. marker만 보고 누락으로 단정하기 전에 포인터를 다시 읽는다. 실제 포인터 유실·깨짐의 fail-closed 조건은 유지한다.                                           |
+| 전체 validator의 지연 복사          | 수정 전 index·HTML을 첫 await 직후 바꾸면 원래 유효한 입력이 실패했다. pointer·manifest·index·모든 HTML을 await 전에 소유 복사하고 실제 payload 합계 64MiB를 복사 전 제한한다. subview·누락·개별/총량 초과도 검사한다.          |
+| 겹친 B의 도달 지점·동일 세대 재사용 | HTTP 시작 카운터 대신 B의 본문 FETCH lookup 시작을 기다린 뒤 A를 해제한다. 같은 세대의 후속 요청은 같은 키로 hit하고 원본 본문 수신 횟수가 증가하지 않아야 한다.                                                                |
+| 실제 만료 계측 누락 가능성          | opt-in 실행에서 인증된 무효화 → tagged refill → 같은 키의 후속 get hit에 유한 tagExpiredAt/entryMinusExpiryMs가 있어야 한다. 전부 null이면 실패하며 기본 비활성화 checkpoint 검사도 유지한다.                                   |
+| TODO·추적 링크                      | 완료한 임시 실험과 남은 운영 연결을 구분했다. Confluence의 동일 페이지 ID·댓글을 유지하면서 개인 공간 식별자가 없는 링크로 바꿨다. 계정·공유 권한·본문은 변경하지 않는다.                                                       |
+
+공용 테스트 85개·backend 단위73개(파일 실험42개 포함)·HTTP55개가 통과했다.
+공용 ESM/CJS 빌드·타입·lint, backend 타입·lint·Nest build, docs 타입·lint·lib354개도 통과했다.
+기본 article 회귀는 198개 통과·opt-in 관측 2개 skipped이며 재시도는 0회다.
+세대 실험은 6개 시나리오 × 두 프로젝트 × 3회 = 36회,
+만료 관측은 4개 시나리오 × 두 프로젝트 × 3회 = 24회 통과했다.
+후자는 ARTICLE_CACHE_OBSERVATION_DIR에 저장소 밖 비공개 절대 경로를 지정한 실행이다.
+관측한 경합은 통제 실험이며 과거 CI 간헐 실패의 최초 원인을 확정한 것이 아니다.
+
+저장소 루트에서 다음을 실행한다. 의존성 설치와 공용 패키지 빌드가 선행 조건이며
+3111·3112 포트는 비어 있어야 한다. 기본 개발 서버와 실제 NAS는 사용하지 않는다.
+
+```sh
+pnpm --filter @web-tech/docs-content-contract test
+pnpm --filter docs-backend check
+pnpm --filter docs exec playwright test --config=playwright.cache-generation.config.ts --repeat-each=3
+# 아래 변수는 저장소 밖 소유자 전용 절대 경로로 직접 지정한다.
+ARTICLE_CACHE_OBSERVATION_DIR="$PRIVATE_OBSERVATION_DIR" pnpm --filter docs exec playwright test --config=playwright.cache-observation.config.ts tag-expiry-observation.spec.ts --repeat-each=3
+pnpm --filter docs test:article:prod
+```
+
+샌드박스의 listen EPERM은 서비스 회귀와 구분한다. 로컬 HTTP 검사는 승인된 loopback 실행으로 다시 수행했다.
+Next 실험 빌드와 동시에 typecheck를 실행했을 때 UI의 생성 선언을 찾지 못한 첫 실행도 있었으며,
+빌드 완료 후 순차 검사로 통과했다. 기존 공개 글의 placeholder 스타일 경고 2건은 이 작업에서 수정하지 않는다.
+
+리뷰의 docstring 비율 안내는 저장소 필수 CI가 아니다. 공개·비자명 API의 설명은 보완하지만
+전역 기준을 바꾸거나 설명용 주석을 일괄 삽입하지 않는다. 구현 경계가 유지되어 새 ADR은 만들지 않는다.
+사용자가 승인한 운영 문서 4개만 정제 갱신하고 최종 bytes의 검수 해시를 다시 기록한다.
+원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정은 공개 커밋에서 제외한다.
+이후 원격 head와 CI 결과는 PR·Jira·Confluence의 기존 기록에 연결한다. 병합·운영 배포 승인은 포함하지 않는다.
+
+## 관련 문서
+
+- [ADR-0028](../../architecture/adr-0028-nas-content-revision-snapshots.md)
+- [공용 계약 검증](2026-11-06-publication-integrity-contract.md)
+- [작업 기록](../../worklog/2026-11/2026-11-07-snapshot-pointer-lab.md)

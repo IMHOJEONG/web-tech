@@ -6,6 +6,7 @@ import { IncomingMessage, Server, ServerResponse } from 'node:http'
 import { createRequire } from 'node:module'
 import { isAbsolute, join } from 'node:path'
 import { mock } from 'node:test'
+import { observeCacheExpiry } from './cache-expiry-observation.ts'
 
 // eslint-disable-next-line turbo/no-undeclared-env-vars
 const directory = process.env.ARTICLE_CACHE_OBSERVATION_DIR
@@ -18,6 +19,10 @@ if (directory) {
         require('next/dist/server/lib/incremental-cache/file-system-cache')
             .default as {
             prototype: Record<'get' | 'set' | 'revalidateTag', Operation>
+        }
+    const { tagsManifest } =
+        require('next/dist/server/lib/incremental-cache/tags-manifest.external') as {
+            tagsManifest: ReadonlyMap<string, { expired?: unknown }>
         }
     const events: object[] = []
     const runId = randomUUID()
@@ -69,20 +74,26 @@ if (directory) {
         operation: string,
         phase: string,
         key: unknown,
-        value?: unknown
+        value?: unknown,
+        context?: unknown
     ) {
         const entry = value as {
             lastModified?: unknown
             isStale?: unknown
         } | null
+        const observedMonotonicEpochMs =
+            performance.timeOrigin + performance.now()
         if (events.length >= 4096) omitted++
         else
             events.push({
                 probeId: scope.getStore() ?? null,
                 sequence: events.length + 1,
                 elapsedMs: performance.now() - started,
+                observedMonotonicEpochMs,
+                wallMinusMonotonicMs: Date.now() - observedMonotonicEpochMs,
                 operation,
                 phase,
+                ...observeCacheExpiry(value, context, tagsManifest),
                 keyHash:
                     typeof key === 'string'
                         ? createHash('sha256')
@@ -123,7 +134,9 @@ if (directory) {
                 record(
                     operation,
                     'start',
-                    operation === 'revalidateTag' ? null : args[0]
+                    operation === 'revalidateTag' ? null : args[0],
+                    undefined,
+                    operation === 'get' ? args[1] : undefined
                 )
                 try {
                     const result: unknown = await Reflect.apply(
@@ -135,7 +148,8 @@ if (directory) {
                         operation,
                         'end',
                         operation === 'revalidateTag' ? null : args[0],
-                        result
+                        result,
+                        operation === 'get' ? args[1] : undefined
                     )
                     return result
                 } catch (error) {
