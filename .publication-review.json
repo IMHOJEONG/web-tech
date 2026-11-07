@@ -3,11 +3,11 @@
   "entries": [
     {
       "path": "docs/verification/content/2026-11-07-snapshot-pointer-lab.md",
-      "sha256": "7076475b7234e1be34ce7fe9a263273e1c1bd89be34ce85c21a6e18a2c70086f",
+      "sha256": "191d495b03f122758e35afe3903eedb398a9022746d56535e80d812e4852e947",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-07",
-      "note": "사용자가 PR #86 생성·원격 CI의 정제 결과만 기존 snapshot 검증 보고서와 작업 기록 두 문서에 추가하고 검수 해시 갱신·커밋·푸시하도록 명시 승인함. 자체 작성한 head/run 링크·성공 수·모바일 재시도 1건·CodeRabbit 한도·미검증 범위를 검수함. 원시 로그·trace·artifact·실제 응답·개인 경로·NAS 설정·병합·Production 변경은 제외함.",
+      "note": "사용자가 PR #86 리뷰 보완에 필요한 기존 운영 문서 4개의 정제 갱신·재검수·해시 갱신과 커밋·푸시를 명시 승인함. 자체 작성한 실패 재현·회귀 수·검사 명령·운영 미연결 경계와 동일 Confluence 페이지의 비개인 경로를 확인함. 원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정·토큰·병합·Production 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -17,11 +17,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-07-snapshot-pointer-lab.md",
-      "sha256": "44ac38d1d3383905fd9d5fe2d14a205bf5c54870e8acdf51057309775d8431b9",
+      "sha256": "ae5d2b441ca9778118b04ff5dfd5d3b359b1e037cb6a130415d2aa2344da2e44",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-07",
-      "note": "사용자가 PR #86 생성·원격 CI의 정제 결과만 기존 snapshot 검증 보고서와 작업 기록 두 문서에 추가하고 검수 해시 갱신·커밋·푸시하도록 명시 승인함. 자체 작성한 head/run 링크·성공 수·모바일 재시도 1건·CodeRabbit 한도·미검증 범위를 검수함. 원시 로그·trace·artifact·실제 응답·개인 경로·NAS 설정·병합·Production 변경은 제외함.",
+      "note": "사용자가 PR #86 리뷰 보완에 필요한 기존 운영 문서 4개의 정제 갱신·재검수·해시 갱신과 커밋·푸시를 명시 승인함. 자체 작성한 실패 재현·회귀 수·검사 명령·운영 미연결 경계와 동일 Confluence 페이지의 비개인 경로를 확인함. 원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정·토큰·병합·Production 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -59,11 +59,11 @@
     },
     {
       "path": "docs/todo/todo.md",
-      "sha256": "618ddc9b08764df3ff15029cfb14096e8070e1a87ea3b77e2cc12160229de7a7",
+      "sha256": "94bf5796f2010686a50a98d1a78ebe0c4162222ce6d103cddef4b90f43530c69",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-07",
-      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
+      "note": "사용자가 PR #86 리뷰 보완에 필요한 기존 운영 문서 4개의 정제 갱신·재검수·해시 갱신과 커밋·푸시를 명시 승인함. 자체 작성한 실패 재현·회귀 수·검사 명령·운영 미연결 경계와 동일 Confluence 페이지의 비개인 경로를 확인함. 원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정·토큰·병합·Production 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -101,11 +101,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-06-nas-revision-design.md",
-      "sha256": "20390c62d85287c66d17a379daf1d3fe27f52107775db1e7ed4dc108441f0eb2",
+      "sha256": "4053c0734152866c094ff65a21ff6099c03610f569649e3c936a0fbca64c8360",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-06",
-      "note": "사용자가 이번 공용 계약 구현과 관련 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀 결과·절차·작업 기록·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·기존 초안·개인 경로·실제 응답·NAS 설정·푸시·배포는 제외함.",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 PR #86 리뷰 보완에 필요한 기존 운영 문서 4개의 정제 갱신·재검수·해시 갱신과 커밋·푸시를 명시 승인함. 자체 작성한 실패 재현·회귀 수·검사 명령·운영 미연결 경계와 동일 Confluence 페이지의 비개인 경로를 확인함. 원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정·토큰·병합·Production 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

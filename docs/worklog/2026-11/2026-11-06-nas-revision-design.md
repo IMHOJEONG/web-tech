@@ -30,7 +30,7 @@ Node 24 파일 API와 Linux rename/fsync의 원자성·내구성을 구분해 �
 원시 증거·실제 NAS 설정·푸시·배포는 여전히 제외한다.
 
 [KAN-58 검증 댓글](https://web-tech-service.atlassian.net/browse/KAN-58?focusedCommentId=10085)과
-[Confluence 댓글](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817?focusedCommentId=14581761)에
+[Confluence 댓글](https://web-tech-service.atlassian.net/wiki/pages/viewpage.action?pageId=65817&focusedCommentId=14581761)에
 로컬 커밋과 미커밋 제안을 구분해 기록하고 3열 표·SHA·기존 이력 보존을 재조회했다. 페이지 본문은 보존했다.
 설계 문서 5개의 역할·상태·상대 링크 검사를 통과했으며 원격 동작 검증으로 표시하지 않는다.
 

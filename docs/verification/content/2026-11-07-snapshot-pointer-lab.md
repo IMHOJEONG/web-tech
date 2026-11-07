@@ -109,7 +109,7 @@ nlink>1은 포인터에서도 계속 거절한다. 불변 release 파일은 nlin
 - 실제 NAS 설정·컨테이너·웹훅·자격 증명·푸시·PR·배포는 이번 승인 범위가 아니다. 최종 로컬 커밋 SHA와 범위 검사 결과는 기존 Jira·Confluence 댓글에 추가한다.
 
 [KAN-58 댓글](https://web-tech-service.atlassian.net/browse/KAN-58?focusedCommentId=10085)과
-[Confluence 댓글 v7](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817?focusedCommentId=14581761)에
+[Confluence 댓글 v7](https://web-tech-service.atlassian.net/wiki/pages/viewpage.action?pageId=65817&focusedCommentId=14581761)에
 로컬 커밋과 미커밋 실험·실패/성공·남은 NAS 범위를 추가하고 실제 3열 표와 기존 이력 보존을 재조회했다.
 Confluence 페이지 본문의 미게시 편집은 변경하지 않았다.
 
@@ -142,6 +142,53 @@ Confluence 페이지 본문의 미게시 편집은 변경하지 않았다.
 이 두 문서의 정제 결과 추가·검수 해시 갱신·후속 커밋/푸시는 별도로 사용자 승인받았다.
 위 성공은 최초 head `eff33b2`의 결과다. 문서 커밋 이후 새 head의 CI는 별도로 확인해 PR·Jira·Confluence에 연결한다.
 PR 병합·main 변경·Production·실제 NAS 설정·컨테이너 교체는 수행하지 않는다.
+
+### PR #86 CodeRabbit 보완
+
+`e80579a`에 대한 [리뷰](https://github.com/IMHOJEONG/web-tech/pull/86#pullrequestreview-5809960677)의
+인라인 7건과 테스트 보강 3건을 코드와 대조했다. 아래는 같은 브랜치의 후속 로컬 검증이며
+앞선 CI 269·271, 기존 35개 반복 결과와 합산하지 않는다.
+
+| 지적                                | 보완과 회귀                                                                                                                                                                                                                     |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 작은 파일의 큰 backing buffer 유지  | 4바이트 파일 32개의 보유 buffer 합계가 수정 전 33,554,464바이트로 실패했다. 정확한 길이의 독립 buffer를 반환해 128바이트로 통과했다. 디스크 읽기도 검증한 manifest의 선언 길이로 제한해 작은 선언 뒤 큰 본문을 누적하지 않는다. |
+| 잠금 정리 오류가 게시 결과를 가림   | rename 여부를 잠금 close/unlink 이후까지 유지한다. 두 정리 지점의 주입 오류는 교체 후 commit-uncertain, 교체 전 io-failure로 구분한다. 불확정이면 새 포인터를 재조회하며 자동 rollback하지 않는다.                              |
+| 최대 길이 slug의 파일명 초과        | 논리 경로 256자는 유지하고 실험 내부 파일명만 경로 SHA-256과 .html로 매핑한다. 서로 다른 최대 경로 두 개의 저장·재조회·재시작을 확인한다. NAS 저장 규격이나 공용 manifest 형식을 변경한 것은 아니다.                            |
+| 첫 게시와 current 읽기의 경합       | 포인터 없음 → 첫 게시 완료 → marker 읽기의 순서를 barrier로 고정한다. marker만 보고 누락으로 단정하기 전에 포인터를 다시 읽는다. 실제 포인터 유실·깨짐의 fail-closed 조건은 유지한다.                                           |
+| 전체 validator의 지연 복사          | 수정 전 index·HTML을 첫 await 직후 바꾸면 원래 유효한 입력이 실패했다. pointer·manifest·index·모든 HTML을 await 전에 소유 복사하고 실제 payload 합계 64MiB를 복사 전 제한한다. subview·누락·개별/총량 초과도 검사한다.          |
+| 겹친 B의 도달 지점·동일 세대 재사용 | HTTP 시작 카운터 대신 B의 본문 FETCH lookup 시작을 기다린 뒤 A를 해제한다. 같은 세대의 후속 요청은 같은 키로 hit하고 원본 본문 수신 횟수가 증가하지 않아야 한다.                                                                |
+| 실제 만료 계측 누락 가능성          | opt-in 실행에서 인증된 무효화 → tagged refill → 같은 키의 후속 get hit에 유한 tagExpiredAt/entryMinusExpiryMs가 있어야 한다. 전부 null이면 실패하며 기본 비활성화 checkpoint 검사도 유지한다.                                   |
+| TODO·추적 링크                      | 완료한 임시 실험과 남은 운영 연결을 구분했다. Confluence의 동일 페이지 ID·댓글을 유지하면서 개인 공간 식별자가 없는 링크로 바꿨다. 계정·공유 권한·본문은 변경하지 않는다.                                                       |
+
+공용 테스트 85개·backend 단위73개(파일 실험42개 포함)·HTTP55개가 통과했다.
+공용 ESM/CJS 빌드·타입·lint, backend 타입·lint·Nest build, docs 타입·lint·lib354개도 통과했다.
+기본 article 회귀는 198개 통과·opt-in 관측 2개 skipped이며 재시도는 0회다.
+세대 실험은 6개 시나리오 × 두 프로젝트 × 3회 = 36회,
+만료 관측은 4개 시나리오 × 두 프로젝트 × 3회 = 24회 통과했다.
+후자는 ARTICLE_CACHE_OBSERVATION_DIR에 저장소 밖 비공개 절대 경로를 지정한 실행이다.
+관측한 경합은 통제 실험이며 과거 CI 간헐 실패의 최초 원인을 확정한 것이 아니다.
+
+저장소 루트에서 다음을 실행한다. 의존성 설치와 공용 패키지 빌드가 선행 조건이며
+3111·3112 포트는 비어 있어야 한다. 기본 개발 서버와 실제 NAS는 사용하지 않는다.
+
+```sh
+pnpm --filter @web-tech/docs-content-contract test
+pnpm --filter docs-backend check
+pnpm --filter docs exec playwright test --config=playwright.cache-generation.config.ts --repeat-each=3
+# 아래 변수는 저장소 밖 소유자 전용 절대 경로로 직접 지정한다.
+ARTICLE_CACHE_OBSERVATION_DIR="$PRIVATE_OBSERVATION_DIR" pnpm --filter docs exec playwright test --config=playwright.cache-observation.config.ts tag-expiry-observation.spec.ts --repeat-each=3
+pnpm --filter docs test:article:prod
+```
+
+샌드박스의 listen EPERM은 서비스 회귀와 구분한다. 로컬 HTTP 검사는 승인된 loopback 실행으로 다시 수행했다.
+Next 실험 빌드와 동시에 typecheck를 실행했을 때 UI의 생성 선언을 찾지 못한 첫 실행도 있었으며,
+빌드 완료 후 순차 검사로 통과했다. 기존 공개 글의 placeholder 스타일 경고 2건은 이 작업에서 수정하지 않는다.
+
+리뷰의 docstring 비율 안내는 저장소 필수 CI가 아니다. 공개·비자명 API의 설명은 보완하지만
+전역 기준을 바꾸거나 설명용 주석을 일괄 삽입하지 않는다. 구현 경계가 유지되어 새 ADR은 만들지 않는다.
+사용자가 승인한 운영 문서 4개만 정제 갱신하고 최종 bytes의 검수 해시를 다시 기록한다.
+원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정은 공개 커밋에서 제외한다.
+이후 원격 head와 CI 결과는 PR·Jira·Confluence의 기존 기록에 연결한다. 병합·운영 배포 승인은 포함하지 않는다.
 
 ## 관련 문서
 

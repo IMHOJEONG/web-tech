@@ -24,7 +24,7 @@
 새 실험의 stage·공개 검수 해시·커밋은 수행하지 않았다.
 최종 전체 backend66개·타입·lint·Nest build가 통과했고 실험 root는 0개가 남았다.
 [KAN-58 댓글](https://web-tech-service.atlassian.net/browse/KAN-58?focusedCommentId=10085)과
-[Confluence 댓글 v7](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817?focusedCommentId=14581761)에
+[Confluence 댓글 v7](https://web-tech-service.atlassian.net/wiki/pages/viewpage.action?pageId=65817&focusedCommentId=14581761)에
 로컬 두 커밋·미커밋 실험·실패와 한계를 추가하고 3열 표·기존 댓글 이력 보존을 재조회했다.
 페이지 본문의 미게시 편집은 보존하며 KAN-58은 과거 최초 원인 미확정·운영 미검증으로 진행 중이다.
 
@@ -45,6 +45,19 @@ head `eff33b2`의 전체 CI·문서 검사·CodeQL·PR 이미지 빌드와 두 V
 후속 사용자 승인 범위는 이 검증 보고서와 현재 작업 기록 두 문서의 정제 결과·검수 해시·커밋/푸시뿐이다.
 원시 CI 로그·trace·실제 응답·새 초안은 제외한다. 문서 커밋 이후 새 head 검사는 최초 성공과 구분해 원격 기록에 연결한다.
 실제 NAS 설정·컨테이너·자격 증명·Production 변경과 병합은 하지 않는다.
+
+### CodeRabbit 보완
+
+`e80579a`의 인라인 7건과 테스트 의견 3건을 확인해 전체 bytes 선점 복사·실제 총량 제한,
+정확한 크기 buffer·내부 파일명 매핑·첫 게시 경합·잠금 정리 후 불확정성 처리를 보완했다.
+세대 B의 본문 lookup barrier·동일 세대 cache hit/원본 재호출 금지·실제 태그 만료 시각 회귀도 추가했다.
+수정 전 실패와 명령·표본·한계는 [보고서의 후속 검증](../../verification/content/2026-11-07-snapshot-pointer-lab.md#pr-86-coderabbit-보완)에 보존한다.
+
+사용자는 기존 운영 문서 4개의 정제 보완·재검수와 해시 갱신을 승인했다.
+TODO의 완료/미완료를 정정하고 동일 Confluence 페이지 ID의 비개인 경로로 연결한다.
+공용 계약·파일 실험·계측 회귀·문서 검수를 작업별 커밋으로 나눠 PR #86에 푸시한다.
+원시 자료·새 문서·실제 NAS·운영 설정·토큰은 제외하며 페이지 본문의 미게시 변경은 보존한다.
+이전 CI 성공을 새 커밋 성공으로 대신하지 않고 새 head의 CI를 별도로 확인한다.
 
 ## Open Questions
 
