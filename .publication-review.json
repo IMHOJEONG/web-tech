@@ -619,11 +619,11 @@
     },
     {
       "path": "apps/docs/category/be/node-js/event-loop-cpu-delay.mdx",
-      "sha256": "1c6b3580e8bb55f92ecf8e1118752530516b4a2f6d529877c31be36ab1ffc0d2",
+      "sha256": "c3d9cea72b1f0b4e755740cb3320d61741cc2bafd41220ecc89c94a063d3dbf0",
       "kind": "article",
       "decision": "public-approved",
       "reviewedOn": "2026-11-07",
-      "note": "사용자가 날짜를 뺀 이벤트 루프 글 수정본의 공개를 승인함. 실험 날짜 대신 실험 구조와 반복 횟수를 표시함. 기존 코드와 관측값, 출처 및 저작권 안내를 대조함.",
+      "note": "사용자가 날짜를 뺀 이벤트 루프 글 수정본의 공개를 승인함. 실험 날짜 대신 실험 구조와 반복 횟수를 표시함. 기존 코드와 관측값, 출처 및 저작권 안내를 대조함. 이전 목차 주소도 연결되도록 화면에 표시되지 않는 앵커를 유지함.",
       "checks": {
         "secrets": true,
         "personalData": true,
