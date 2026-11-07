@@ -619,11 +619,11 @@
     },
     {
       "path": "docs/verification/security/2026-11-07-dependabot-advisories.md",
-      "sha256": "f475a55cc59fbcee8dfa5e7a7348bde3a99f8688b05ff2638244383776c1043c",
+      "sha256": "a6afc6f99b19a914d581f0f07f9b47712d2c881ec1acae1a1678c15dbeec738c",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-07",
-      "note": "사용자가 이번 보안 수정과 정제 검증 문서의 커밋·푸시를 승인함. 직접 작성한 공식 advisory 요약·합성 회귀 결과·재현 명령·철회 근거와 기존 빌드 실패를 검수함. 비밀값·개인정보·권리·공개 의도를 확인했으며 원시 로그·trace·실제 응답·개인 경로·NAS 설정은 제외함.",
+      "note": "사용자가 PR88 리뷰 보완과 같은 정제 문서 2개의 공개 검수·작업별 커밋·푸시를 승인함. 공식 근거·직접 작성한 재현 코드·이전 실패와 새 성공·CI/로컬 구분·태블릿 한계를 검수함. 비밀값·개인정보·권리·공개 의도를 확인하고 원시 로그·trace·실제 응답·coverage 산출물·개인 경로·NAS 설정은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -633,11 +633,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-07-dependabot-advisories.md",
-      "sha256": "7be2cc832bc335377bfb1a108cb0094d9bab2413ea02b68fc2e336819ccad22b",
+      "sha256": "79a039551be4a35690b34396745d2faf1a662d35c67f787d2e50159774e398d7",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-07",
-      "note": "사용자가 이번 보안 수정과 정제 작업 기록의 커밋·푸시를 승인함. 직접 작성한 변경 이유·검사 범위·승인 경계·미배포와 기존 실패를 검수함. 비밀값·개인정보·권리·공개 의도를 확인했으며 기존 미커밋 문서·원시 자료·실제 응답·개인 경로·NAS 설정은 제외함.",
+      "note": "사용자가 PR88 리뷰 보완과 같은 정제 문서 2개의 공개 검수·작업별 커밋·푸시를 승인함. 변경 이유·소비자 범위·실패/성공 이력·검증 경계·승인 범위를 검수함. 비밀값·개인정보·권리·공개 의도를 확인하고 다른 미커밋 작업·원시 자료·실제 응답·coverage 산출물·개인 경로·NAS 설정은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

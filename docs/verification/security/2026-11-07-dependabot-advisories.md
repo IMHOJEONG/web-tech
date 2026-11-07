@@ -83,6 +83,45 @@ production E2E는 3111·3112 포트를 비워 두고 실행한다. 기존 설정
 
 실제 검사는 [보안 회귀](../../../scripts/security-november-advisories.test.mts)와 [격리된 parser 재현](../../../scripts/security-fixtures/november-parsers.mts)에 있다. 증폭 검사는 상속 환경을 제한한 자식 프로세스에서 heap 128MiB·8초·출력 64KiB로 제한한다. 모든 파일 입력은 직접 만든 임시 fixture이며 직렬화한 공격 문자열을 실행하지 않는다. 원시 실행 로그를 공개 artifact로 추가하지 않았다.
 
+### PR #88 원격 검사와 리뷰 확인
+
+사용자 승인 후 [PR #88](https://github.com/IMHOJEONG/web-tech/pull/88)을 생성했다. base `932ee082`, head `42f4740`은 그대로이며 충돌이 없다. [CI 42362817794](https://github.com/IMHOJEONG/web-tech/actions/runs/42362817794)는 13개 job 모두 성공했고, 최종 check 23개도 SUCCESS다. CodeQL은 변경 코드의 신규 경고가 없다고 보고했다. 원시 CI 로그·trace는 공개 파일로 추가하지 않았다.
+
+- production 본문 198 passed·기존 opt-in 2 skipped, 오프라인 62 passed, 공용 UI 68/16 passed를 확인했다.
+- 태블릿은 123 passed·1 flaky·25 skipped다. `docs-index-order.spec.ts:83`의 정렬 링크 클릭이 element not visible로 최초 실패하고 재시도로 통과했다. 단일 원인은 미확정이며 안정화 완료로 표시하지 않는다. 검사 기준·timeout·retry는 변경하지 않았다.
+- 문서 검사·linux/amd64 이미지 빌드·Vercel Preview 2건이 성공했다. PR 이미지 모드는 `push: false`이며 GHCR 게시·NAS 교체·Production 검증이 아니다.
+- CodeRabbit은 head `42f4740` 검토를 완료했지만 보완 2건은 미해결이다. SUCCESS는 리뷰 실행 완료이며 지적 해소·병합 승인이 아니다. 잠금 파일은 기본 필터로 리뷰에서 제외돼 자체 그래프·감사 검사와 구분한다.
+
+| 리뷰                                                                                                | 대조 결과와 남은 작업                                                                                                                                                                                                                                                                                                                                                |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Major: coverage 소비자 호환](https://github.com/IMHOJEONG/web-tech/pull/88#discussion_r4501285186) | `mise exec -- pnpm --filter vuln-radar-backend test:cov --runInBand --no-cache`에서 test-exclude 6.0.0이 glob 모듈 객체를 promisify에 전달하는 TypeError를 재현했다. 13개 suite 실행 실패·tests 0이다. 일반 CI는 이 coverage 경로를 검사하지 않아 CI 통과와 모순되지 않는다. 보안 하한을 유지한 소비자 보완이 필요하며 main의 발생 여부·최초 도입 커밋은 미확정이다. |
+| [Minor: 패키지명 오탐](https://github.com/IMHOJEONG/web-tech/pull/88#discussion_r4501285192)        | 현재 정규식은 합성 `better-auth-foo@1.0.0`도 제거 대상으로 매칭한다. 실제 better-auth 및 scoped adapter 검사는 유지하면서 완전한 이름 경계를 보완해야 한다.                                                                                                                                                                                                          |
+
+CodeRabbit의 Docstring Coverage 권고는 Jest 실행 커버리지와 다른 검사다. 최초 확인에서는 source·의존성·검사 기준을 수정하거나 스레드를 해결 처리하지 않았다. 후속 사용자 요청에 따른 보완은 아래에 구분한다. 처음에는 로컬에만 기록했고, 이후 사용자가 이번 보완과 정제 문서 2개의 공개 검수·작업별 커밋·푸시를 승인했다. 원시 자료는 공개 범위에 포함하지 않는다.
+
+### 미해결 리뷰 2건의 로컬 보완
+
+공식 [test-exclude 구현](https://github.com/istanbuljs/test-exclude/blob/master/index.js)·[패키지 metadata](https://registry.npmjs.org/test-exclude/8.0.0)와 실제 설치본을 대조했다. 6.0.0은 glob 모듈 전체를 `promisify`에 전달하고 minimatch도 함수로 직접 호출한다. 8.0.0은 두 모듈의 named 함수를 사용하고 Node 20 또는 >=22를 지원해 프로젝트 Node 24와 호환된다. 설치한 8.0.0 소스에서도 같은 구현을 확인했다.
+
+- `babel-plugin-istanbul@7.0.1>test-exclude: ^8.0.0`으로 확인한 소비 경로만 상향했다. glob 14.0.4·minimatch 11.0.5와 기존 보안 하한은 유지하며 lock의 패키지 교체는 test-exclude 6.0.0 → 8.0.0 한 개다. 전역 test-exclude override·임시 소스 패치·coverage provider 변경은 없다.
+- 패키지명 matcher를 `better-auth@`와 `@better-auth/`로 구분했다. 실제 패키지 3개는 탐지하고 `better-auth-foo`·`better-authenticate`·다른 scope의 동명 패키지는 거부하는 양성/음성 대조를 추가했다.
+- 각 백엔드가 실제로 설치한 Jest/Istanbul 경로로 새 프로세스를 실행한다. include/exclude·동기/비동기 glob·node_modules/외부 경로 제외, cache 없는 Babel 계측, 실제 coverage 파일의 경로·양수 hit·미실행 코드의 비어 있지 않은 0 hit를 검사한다. 종료 코드만으로 커버리지 성공을 판정하지 않는다.
+- Jest 자체에 cache 비활성화·runInBand를 적용하며 합성 테스트만 임시 디렉터리에 만든다. 바깥 프로세스는 128MiB·30초, 안쪽 Jest는 512MiB·20초·출력 64KiB로 제한한다. 기존 증폭 입력의 8초 제한은 그대로다. 임시 파일과 보고서는 finally에서 정리하며 상속 runtime hook·자격 증명은 전달하지 않는다.
+- 최초 새 회귀는 정규식 1개·양쪽 coverage 2개가 실패했고, 수정 후 보안 회귀는 12/12 통과했다. 새 fixture의 macOS 임시 경로 별칭 차이는 생성 직후 realpath로 정규화해 고쳤다. 파일 목록·hit 검사는 제거하지 않았다.
+- 전체 저장소 239/239, 신규 소스 strict·erasable 타입, 양쪽 backend lint·catalog 검사 통과. 실제 cache 없는 coverage도 docs-backend 7 suite/73 tests, vuln-radar-backend 13 suite/48 tests가 통과했다. 이는 높은 coverage 비율을 보장하는 결과가 아니라 계측 경로 복구의 증거다.
+- production audit 0건, 전체 audit는 이전과 같은 철회된 deepmerge Low 1건만 남는다. raw coverage JSON·실행 로그는 공개 검수 자료로 추가하지 않았다.
+
+추가 재현 명령은 저장소 루트에서 실행한다. 두 번째 앱에는 `test:cov` script가 있고, docs-backend는 설치된 Jest를 직접 실행한다.
+
+```sh
+mise exec -- pnpm --filter vuln-radar-backend test:cov --runInBand --no-cache
+mise exec -- pnpm --filter docs-backend exec jest --coverage --runInBand --no-cache
+mise exec -- node --experimental-strip-types --test scripts/security-november-advisories.test.mts
+mise exec -- pnpm test:repo
+```
+
+위 보완은 원격 `42f4740`과 구분한 로컬 검증 결과다. 사용자가 공개 검수 후 작업별 커밋·푸시와 새 head의 CI·재리뷰 확인을 승인했으며 최종 커밋·원격 결과는 연결된 KAN-64·Confluence 기록에 남긴다. 두 GitHub 스레드는 실제 반영·검증 후 처리한다. 태블릿 flaky와 Docstring Coverage 권고는 별도 과제이며 이번 보완으로 해결했다고 표시하지 않는다. main 병합·운영 배포는 이번 승인 범위가 아니다.
+
 ## 한계와 후속 작업
 
 - 변경 전·후 Vite+ 빌드 실패의 단일 원인은 미확정이다. 해당 앱의 별도 빌드 경로 조사와 원격 CI에서 확인해야 한다. source 파일 누락이나 운영 장애로 단정하지 않는다.
