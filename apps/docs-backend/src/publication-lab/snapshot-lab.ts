@@ -43,7 +43,10 @@ export type SnapshotCheckpoint =
   | 'release-renamed'
   | 'pointer-synced'
   | 'pointer-renamed'
-  | 'pointer-opened';
+  | 'pointer-opened'
+  | 'pointer-missing-read'
+  | 'lock-closing'
+  | 'lock-unlinking';
 type Checkpoint = (phase: SnapshotCheckpoint) => Promise<void>;
 type LabCode =
   | 'invalid-input'
@@ -71,6 +74,11 @@ const descriptor = (body: Uint8Array) => ({
   bytes: body.byteLength,
   sha256: createHash('sha256').update(body).digest('hex'),
 });
+const documentFile = (markdownPath: string) =>
+  join(
+    markdownPath.split('/')[0]!,
+    `${createHash('sha256').update(markdownPath).digest('hex')}.html`,
+  );
 const isMissing = (error: unknown) =>
   (error as NodeJS.ErrnoException)?.code === 'ENOENT';
 
@@ -98,7 +106,8 @@ async function writeNew(path: string, body: Uint8Array) {
     await handle.close();
   }
 }
-async function readBounded(
+/** Internal lab reader, exported only for bounded-allocation regression checks. */
+export async function readBounded(
   path: string,
   max: number,
   afterOpen?: () => Promise<void>,
@@ -132,7 +141,9 @@ async function readBounded(
       length += result.bytesRead;
     }
     if (length > max) reject('too-large');
-    return buffer.subarray(0, length);
+    const owned = Buffer.alloc(length);
+    buffer.copy(owned, 0, 0, length);
+    return owned;
   } finally {
     await handle.close();
   }
@@ -176,8 +187,16 @@ class PublicationSnapshotLab {
     try {
       return await action();
     } finally {
-      await lock.close();
-      await unlink(path);
+      try {
+        try {
+          await this.checkpoint?.('lock-closing');
+        } finally {
+          await lock.close();
+        }
+      } finally {
+        await this.checkpoint?.('lock-unlinking');
+        await unlink(path);
+      }
     }
   }
 
@@ -270,7 +289,7 @@ class PublicationSnapshotLab {
           );
           for (const document of documents)
             await writeNew(
-              join(candidate, 'documents', `${document.markdownPath}.html`),
+              join(candidate, 'documents', documentFile(document.markdownPath)),
               document.body,
             );
           for (const channel of channels)
@@ -368,22 +387,22 @@ class PublicationSnapshotLab {
       await directory(path);
       const expected = manifest.value.documents
         .filter((document) => document.markdownPath.startsWith(`${channel}/`))
-        .map((document) => `${document.markdownPath.split('/')[1]}.html`)
+        .map((document) => documentFile(document.markdownPath).split('/')[1]!)
         .sort();
       if ((await readdir(path)).sort().join(',') !== expected.join(','))
         return reject('integrity-failure');
     }
     const index = await readBounded(
       join(release, 'index.json'),
-      CONTENT_POSTS_MAX_BYTES,
+      manifest.value.index.bytes,
     );
     const documents: { markdownPath: string; body: Uint8Array }[] = [];
     for (const document of manifest.value.documents)
       documents.push({
         markdownPath: document.markdownPath,
         body: await readBounded(
-          join(documentsDir, `${document.markdownPath}.html`),
-          CONTENT_HTML_MAX_BYTES,
+          join(documentsDir, documentFile(document.markdownPath)),
+          document.bytes,
         ),
       });
     const verified = await verifyPublicationSnapshot({
@@ -399,8 +418,11 @@ class PublicationSnapshotLab {
   async readCurrent() {
     return guarded(async () => {
       await this.assertRoot();
-      const pointer = await this.pointer();
+      let pointer = await this.pointer();
+      if (!pointer) await this.checkpoint?.('pointer-missing-read');
       const initialized = await this.initialized();
+      // A first publisher may have installed the pointer since the initial missing read.
+      if (!pointer && initialized) pointer = await this.pointer();
       if (!pointer && initialized) return reject('pointer-missing');
       if (pointer && !initialized) return reject('integrity-failure');
       return pointer ? this.readSnapshot(pointer) : null;
@@ -420,49 +442,51 @@ class PublicationSnapshotLab {
           !publicationGenerationSchema.safeParse(expectedGeneration).success)
       )
         return reject('invalid-input');
-      return this.locked(async () => {
-        const current = await this.pointer();
-        const initialized = await this.initialized();
-        if (current && !initialized) return reject('integrity-failure');
-        if (
-          !current &&
-          (initialized || !options.bootstrap || expectedGeneration !== null)
-        )
-          return reject('pointer-missing');
-        if ((current?.generation ?? null) !== expectedGeneration)
-          return reject('generation-conflict');
-        let generation = randomUUID();
-        while (generation === current?.generation) generation = randomUUID();
-        const pointer: PublicationPointer = {
-          schemaVersion: 1,
-          revision: revision.data,
-          generation,
-          previousGeneration: current?.generation ?? null,
-        };
-        await this.readSnapshot(pointer);
-        // Retain initialization intent if the first pointer write is interrupted.
-        if (!initialized) {
-          await writeNew(join(this.root, 'initialized'), Buffer.from('1\n'));
-          await syncDirectory(this.root);
-        }
-        const temporary = join(this.root, `.pointer-${randomUUID()}`);
-        let renamed = false;
-        try {
-          await writeNew(temporary, bytes(pointer));
-          await this.checkpoint?.('pointer-synced');
-          await rename(temporary, join(this.root, 'current.json'));
-          renamed = true;
-          await syncDirectory(this.root);
-          await this.checkpoint?.('pointer-renamed');
-          return pointer;
-        } catch (error) {
-          // Rename may already be visible: do not report an unchanged pointer or blindly roll it back.
-          if (renamed) return reject('commit-uncertain');
-          throw error;
-        } finally {
-          if (!renamed) await rm(temporary, { force: true });
-        }
-      });
+      let renamed = false;
+      try {
+        return await this.locked(async () => {
+          const current = await this.pointer();
+          const initialized = await this.initialized();
+          if (current && !initialized) return reject('integrity-failure');
+          if (
+            !current &&
+            (initialized || !options.bootstrap || expectedGeneration !== null)
+          )
+            return reject('pointer-missing');
+          if ((current?.generation ?? null) !== expectedGeneration)
+            return reject('generation-conflict');
+          let generation = randomUUID();
+          while (generation === current?.generation) generation = randomUUID();
+          const pointer: PublicationPointer = {
+            schemaVersion: 1,
+            revision: revision.data,
+            generation,
+            previousGeneration: current?.generation ?? null,
+          };
+          await this.readSnapshot(pointer);
+          // Retain initialization intent if the first pointer write is interrupted.
+          if (!initialized) {
+            await writeNew(join(this.root, 'initialized'), Buffer.from('1\n'));
+            await syncDirectory(this.root);
+          }
+          const temporary = join(this.root, `.pointer-${randomUUID()}`);
+          try {
+            await writeNew(temporary, bytes(pointer));
+            await this.checkpoint?.('pointer-synced');
+            await rename(temporary, join(this.root, 'current.json'));
+            renamed = true;
+            await syncDirectory(this.root);
+            await this.checkpoint?.('pointer-renamed');
+            return pointer;
+          } finally {
+            if (!renamed) await rm(temporary, { force: true });
+          }
+        });
+      } catch (error) {
+        // Lock close/unlink errors are also uncertain once the pointer became visible.
+        if (renamed) return reject('commit-uncertain');
+        throw error;
+      }
     });
   }
 

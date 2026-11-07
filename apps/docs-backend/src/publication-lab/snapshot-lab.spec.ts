@@ -1,5 +1,6 @@
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
+import { createHash } from 'node:crypto';
 import {
   lstat,
   readFile,
@@ -22,6 +23,7 @@ import {
 } from '@web-tech/docs-content-contract/publication';
 import {
   createPublicationSnapshotLab,
+  readBounded,
   SnapshotLabError,
   type SnapshotCheckpoint,
 } from './snapshot-lab';
@@ -60,7 +62,14 @@ function input(version = 'V1', path = 'web/note') {
 const code = (value: string) =>
   expect.objectContaining({ name: 'SnapshotLabError', code: value });
 const bodyPath = (lab: Lab, revision: string) =>
-  join(lab.root, 'releases', revision, 'documents', 'web', 'note.html');
+  join(
+    lab.root,
+    'releases',
+    revision,
+    'documents',
+    'web',
+    `${createHash('sha256').update('web/note').digest('hex')}.html`,
+  );
 async function published(lab: Lab, version = 'V1') {
   const revision = await lab.build(input(version));
   const pointer = await lab.promote(revision, null, { bootstrap: true });
@@ -137,6 +146,115 @@ describe('isolated publication snapshot lab', () => {
     expect((await lab.readCurrent())?.documents).toEqual([]);
   });
 
+  it('retains only exact-size backing buffers for bounded file reads', async () => {
+    lab = await createPublicationSnapshotLab();
+    const file = join(lab.root, 'synthetic-small');
+    await writeFile(file, 'tiny');
+    const reads = await Promise.all(
+      Array.from({ length: 32 }, () =>
+        readBounded(file, CONTENT_HTML_MAX_BYTES),
+      ),
+    );
+    expect(reads.every((body) => body.toString() === 'tiny')).toBe(true);
+    expect(reads.reduce((sum, body) => sum + body.buffer.byteLength, 0)).toBe(
+      32 * 4,
+    );
+    await writeFile(file, Buffer.alloc(16, 97));
+    expect((await readBounded(file, 16)).byteLength).toBe(16);
+    await writeFile(file, Buffer.alloc(17, 97));
+    await expect(readBounded(file, 16)).rejects.toEqual(code('too-large'));
+  });
+
+  it('round trips maximum-length logical paths using bounded distinct filenames', async () => {
+    lab = await createPublicationSnapshotLab();
+    const paths = [`web/${'a'.repeat(252)}`, `web/${'a'.repeat(251)}b`];
+    const values = paths.map((path) => input('LONG', path));
+    const revision = await lab.build({
+      index: { results: values.flatMap((value) => value.index.results) },
+      documents: values.flatMap((value) => value.documents),
+    });
+    const names = await readdir(
+      join(lab.root, 'releases', revision, 'documents', 'web'),
+    );
+    expect(new Set(names).size).toBe(2);
+    expect(names.every((name) => Buffer.byteLength(name) <= 255)).toBe(true);
+    await lab.promote(revision, null, { bootstrap: true });
+    expect(
+      (await lab.reopen().readCurrent())?.documents.map(
+        (document) => document.markdownPath,
+      ),
+    ).toEqual(paths);
+  });
+
+  it('rechecks a missing pointer if the first publication completes during the read', async () => {
+    const missing = barrier();
+    const resume = barrier();
+    let armed = false;
+    lab = await createPublicationSnapshotLab(async (phase) => {
+      if (armed && phase === 'pointer-missing-read') {
+        armed = false;
+        missing.resolve();
+        await resume.promise;
+      }
+    });
+    const revision = await lab.build(input());
+    armed = true;
+    const pending = lab.readCurrent().then(
+      (value) => ({ value }),
+      (error: unknown) => ({ error }),
+    );
+    let pointer;
+    try {
+      await missing.promise;
+      pointer = await lab.promote(revision, null, { bootstrap: true });
+    } finally {
+      resume.resolve();
+    }
+    const result = await pending;
+    if ('error' in result) throw result.error;
+    expect(result.value?.pointer).toEqual(pointer);
+    expect(result.value?.documents[0]?.html).toContain('V1');
+  });
+
+  it.each(['lock-closing', 'lock-unlinking'] as SnapshotCheckpoint[])(
+    'preserves post-rename uncertainty when cleanup fails at %s',
+    async (phase) => {
+      let armed = false;
+      lab = await createPublicationSnapshotLab(async (point) => {
+        if (armed && point === phase) throw new Error('synthetic-cleanup');
+      });
+      const v1 = await published(lab);
+      const revision = await lab.build(input('V2'));
+      armed = true;
+      try {
+        await expect(
+          lab.promote(revision, v1.pointer.generation),
+        ).rejects.toEqual(code('commit-uncertain'));
+        const current = await lab.reopen().readCurrent();
+        expect(current?.pointer.revision).toBe(revision);
+        expect(current?.documents[0]?.html).toContain('V2');
+      } finally {
+        armed = false;
+        await unlink(join(lab.root, '.publisher.lock')).catch(() => undefined);
+      }
+    },
+  );
+
+  it('does not report commit uncertainty for cleanup failure before a pointer rename', async () => {
+    let armed = false;
+    lab = await createPublicationSnapshotLab(async (phase) => {
+      if (armed && (phase === 'pointer-synced' || phase === 'lock-closing'))
+        throw new Error('synthetic-cleanup');
+    });
+    const v1 = await published(lab);
+    const revision = await lab.build(input('V2'));
+    armed = true;
+    await expect(lab.promote(revision, v1.pointer.generation)).rejects.toEqual(
+      code('io-failure'),
+    );
+    expect((await lab.readCurrent())?.pointer).toEqual(v1.pointer);
+  });
+
   it.each([
     'draft',
     'missing',
@@ -194,6 +312,7 @@ describe('isolated publication snapshot lab', () => {
     'hardlink',
     'directory-symlink',
     'oversized-body',
+    'grown-body',
     'oversized-manifest',
   ])(
     'rejects %s release corruption without changing the current pointer',
@@ -232,6 +351,9 @@ describe('isolated publication snapshot lab', () => {
         }
         case 'oversized-body':
           await truncate(body, CONTENT_HTML_MAX_BYTES + 1);
+          break;
+        case 'grown-body':
+          await writeFile(body, encode('<article>V2 가나다</article>!'));
           break;
         case 'oversized-manifest':
           await truncate(
@@ -292,7 +414,13 @@ describe('isolated publication snapshot lab', () => {
           name.startsWith('.candidate-'),
         )!;
         await writeFile(
-          join(lab.root, candidate, 'documents', 'web', 'note.html'),
+          join(
+            lab.root,
+            candidate,
+            'documents',
+            'web',
+            `${createHash('sha256').update('web/note').digest('hex')}.html`,
+          ),
           'synthetic-tamper',
         );
       }
