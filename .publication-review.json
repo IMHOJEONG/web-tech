@@ -619,11 +619,11 @@
     },
     {
       "path": "apps/docs/category/be/node-js/event-loop-cpu-delay.mdx",
-      "sha256": "0728f6c300e20f2d5d90365713739e3013d38ba89cb1cfa302fb189d1b5a676a",
+      "sha256": "1c6b3580e8bb55f92ecf8e1118752530516b4a2f6d529877c31be36ab1ffc0d2",
       "kind": "article",
       "decision": "public-approved",
       "reviewedOn": "2026-11-07",
-      "note": "사용자가 이벤트 루프 글의 공개 커밋과 운영 배포를 승인함. 자체 작성한 예제와 도식, 공식 참고 링크와 저작권 안내를 확인함. 로컬 실험실 경로와 인증 정보는 포함하지 않음.",
+      "note": "사용자가 날짜를 뺀 이벤트 루프 글 수정본의 공개를 승인함. 실험 날짜 대신 실험 구조와 반복 횟수를 표시함. 기존 코드와 관측값, 출처 및 저작권 안내를 대조함.",
       "checks": {
         "secrets": true,
         "personalData": true,
