@@ -4,6 +4,7 @@ import {
   PUBLICATION_MANIFEST_MAX_BYTES,
   PUBLICATION_MAX_DOCUMENTS,
   PUBLICATION_POINTER_MAX_BYTES,
+  PUBLICATION_SNAPSHOT_MAX_BYTES,
   publicationIndexSchema,
   publicationManifestSchema,
   publicationPathSchema,
@@ -60,17 +61,26 @@ function parse<T>(
   }
 }
 
-function copyBytes(
+function boundedBytes(
   input: unknown,
   max: number,
   kind: PublicationArtifact,
-): PublicationVerification<Uint8Array<ArrayBuffer>> {
+): PublicationVerification<Uint8Array> {
   if (input == null) return fail("missing-artifact", kind);
   try {
     if (!(input instanceof Uint8Array)) return fail("invalid-bytes", kind);
     if (input.byteLength > max) return fail("too-large", kind);
-    // Own a stable bounded copy before the first asynchronous digest.
-    return pass(new Uint8Array(input));
+    return pass(input);
+  } catch {
+    return fail("invalid-bytes", kind);
+  }
+}
+
+function copyBytes(input: unknown, max: number, kind: PublicationArtifact) {
+  const checked = boundedBytes(input, max, kind);
+  if (!checked.ok) return checked;
+  try {
+    return pass(new Uint8Array(checked.value));
   } catch {
     return fail("invalid-bytes", kind);
   }
@@ -273,28 +283,59 @@ const snapshotInputSchema = z
   })
   .strict();
 
-// Verifies the complete chain; individual artifact helpers assume trusted metadata.
+/** Verifies the complete chain using bounded owned bytes captured before any await. */
 export async function verifyPublicationSnapshot(input: unknown) {
   const parsed = parse(snapshotInputSchema, input, "snapshot");
   if (!parsed.ok) return parsed;
   const pointer = verifyPublicationPointer(parsed.value.pointer);
   if (!pointer.ok) return pointer;
-  const manifest = await verifyPublicationManifest(
+  const manifestBytes = copyBytes(
     parsed.value.manifest,
-    pointer.value.revision,
+    PUBLICATION_MANIFEST_MAX_BYTES,
+    "manifest",
   );
-  if (!manifest.ok) return manifest;
-  const index = await verifyPublicationIndex(
+  if (!manifestBytes.ok) return manifestBytes;
+  const indexInput = boundedBytes(
     parsed.value.index,
-    manifest.value,
+    CONTENT_POSTS_MAX_BYTES,
+    "index",
   );
-  if (!index.ok) return index;
-  const bodies = new Map<string, unknown>();
+  if (!indexInput.ok) return indexInput;
+  const bodies = new Map<string, Uint8Array>();
+  let total = indexInput.value.byteLength;
+  // Check the actual aggregate before allocating copies, not only declared manifest sizes.
   for (const document of parsed.value.documents) {
     if (bodies.has(document.markdownPath))
       return fail("duplicate-artifact", "snapshot");
-    bodies.set(document.markdownPath, document.body);
+    const body = boundedBytes(
+      document.body,
+      CONTENT_HTML_MAX_BYTES,
+      "document",
+    );
+    if (!body.ok) return body;
+    total += body.value.byteLength;
+    if (total > PUBLICATION_SNAPSHOT_MAX_BYTES)
+      return fail("too-large", "snapshot");
+    bodies.set(document.markdownPath, body.value);
   }
+  const indexBytes = copyBytes(
+    indexInput.value,
+    CONTENT_POSTS_MAX_BYTES,
+    "index",
+  );
+  if (!indexBytes.ok) return indexBytes;
+  for (const [path, body] of bodies) {
+    const owned = copyBytes(body, CONTENT_HTML_MAX_BYTES, "document");
+    if (!owned.ok) return owned;
+    bodies.set(path, owned.value);
+  }
+  const manifest = await verifyPublicationManifest(
+    manifestBytes.value,
+    pointer.value.revision,
+  );
+  if (!manifest.ok) return manifest;
+  const index = await verifyPublicationIndex(indexBytes.value, manifest.value);
+  if (!index.ok) return index;
   const expected = new Set(
     manifest.value.documents.map((document) => document.markdownPath),
   );

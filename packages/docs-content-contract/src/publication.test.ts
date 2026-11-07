@@ -626,6 +626,74 @@ test("verification owns bytes across awaits and respects a Uint8Array subview", 
   if (result.ok) assert.equal(result.value.html, f.html);
 });
 
+test("whole snapshot owns every byte view before its first await", async () => {
+  const f = fixture();
+  const view = (bytes: Uint8Array) => {
+    const padded = new Uint8Array(bytes.length + 10);
+    padded.set(bytes, 5);
+    return padded.subarray(5, -5);
+  };
+  const input = {
+    pointer: view(f.snapshot.pointer),
+    manifest: view(f.snapshot.manifest),
+    index: view(f.snapshot.index),
+    documents: [{ markdownPath: "web/note", body: view(f.body) }],
+  };
+  const pending = verifyPublicationSnapshot(input);
+  for (const bytes of [
+    input.pointer,
+    input.manifest,
+    input.index,
+    input.documents[0]!.body,
+  ])
+    bytes.fill(0);
+  input.documents[0]!.markdownPath = "web/changed";
+  const result = await pending;
+  assert.equal(result.ok, true);
+  if (result.ok) {
+    assert.equal(result.value.documents[0]?.html, f.html);
+    assert.equal(result.value.index.results[0]?.markdownPath, "web/note");
+  }
+});
+
+test("whole snapshot bounds actual aggregate bytes before copying or hashing", async (t) => {
+  const digest = t.mock.method(globalThis.crypto.subtle, "digest", async () => {
+    throw new Error("must not hash oversized input");
+  });
+  const f = fixture();
+  const body = new Uint8Array(CONTENT_HTML_MAX_BYTES);
+  failed(
+    await verifyPublicationSnapshot({
+      ...f.snapshot,
+      documents: Array.from({ length: 64 }, (_, i) => ({
+        markdownPath: `web/n-${i}`,
+        body,
+      })),
+    }),
+    "too-large",
+    "snapshot",
+  );
+  failed(
+    await verifyPublicationSnapshot({
+      ...f.snapshot,
+      documents: [
+        {
+          markdownPath: "web/note",
+          body: new Uint8Array(CONTENT_HTML_MAX_BYTES + 1),
+        },
+      ],
+    }),
+    "too-large",
+    "document",
+  );
+  failed(
+    await verifyPublicationSnapshot({ ...f.snapshot, index: null }),
+    "missing-artifact",
+    "index",
+  );
+  assert.equal(digest.mock.callCount(), 0);
+});
+
 test("failures contain no input bytes, paths, metadata or accessor exceptions", async () => {
   const f = fixture();
   const marker = "synthetic-confidential-marker";
