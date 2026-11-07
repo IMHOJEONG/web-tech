@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-07 Dependabot 신규 경고](security/2026-11-07-dependabot-advisories.md): 10건 패치·미사용 인증 제거, 철회된 1건 승인 후 오탐 처리, 실제 소비자·합성 회귀와 기존 Vite+ 빌드 실패 구분. 사용자 커밋·푸시 승인 범위이며 main 미반영·운영 미배포.
+
 - [11-07 임시 snapshot·포인터 교체](content/2026-11-07-snapshot-pointer-lab.md): 공용 계약 커밋 검수·합성 파일 승격·새 세대·동시 읽기와 실패/남은 잠금 검사. 사용자 승인으로 구현·정제 문서를 분리 커밋하며 실제 NAS·API·캐시는 미연결.
 
 - [11-06 공용 게시 무결성 계약](content/2026-11-06-publication-integrity-contract.md): 합성 bytes의 변조·누락·상한·전체 체인과 ESM/CJS 소비자 호환. 로컬 패키지 검증이며 실제 NAS·최신성·승격은 미검증.
