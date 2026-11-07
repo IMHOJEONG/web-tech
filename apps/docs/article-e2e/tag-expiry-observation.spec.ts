@@ -3,6 +3,7 @@ import { createRequire } from 'node:module'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { observeCacheExpiry } from './cache-expiry-observation.ts'
+import { articleFixtureAuthorization } from './fixture-credentials.ts'
 
 test('expiry observations contain only finite timing and ignore unsafe inputs', () => {
     const manifest = new Map<string, { expired?: unknown }>([
@@ -126,4 +127,104 @@ test('expiry checkpoint is opt-in and persisted when enabled', async ({
                 event.phase === 'end'
         )
     ).toBe(true)
+})
+
+test('live tagged refill exposes finite expiry timing on a later cache hit', async ({
+    request,
+}) => {
+    // eslint-disable-next-line turbo/no-undeclared-env-vars
+    const directory = process.env.ARTICLE_CACHE_OBSERVATION_DIR
+    test.skip(!directory, 'Explicit private observation mode only')
+    const auth = { Authorization: articleFixtureAuthorization('control') }
+    const control = async (action: string) => {
+        expect(
+            (
+                await request.post(
+                    `http://127.0.0.1:3112/__test/publication/${action}`,
+                    { headers: auth }
+                )
+            ).status()
+        ).toBe(204)
+    }
+    const invalidate = async () => {
+        expect(
+            (
+                await request.post('/api/revalidate/content', {
+                    headers: {
+                        Authorization:
+                            articleFixtureAuthorization('revalidation'),
+                    },
+                })
+            ).status()
+        ).toBe(200)
+    }
+    try {
+        await control('reset')
+        await control('2')
+        const initial = await request.get(
+            '/__test/cache-observation/checkpoint'
+        )
+        expect(initial.status()).toBe(200)
+        const start = (await initial.json()).sequence as number
+        await invalidate()
+        for (let i = 0; i < 2; i++) {
+            const response = await request.get(
+                '/ko/docs/web/article-e2e-publication'
+            )
+            expect(response.status()).toBe(200)
+            expect(await response.text()).toContain('PUBLICATION_END_V2')
+        }
+        const checkpoint = await request.get(
+            '/__test/cache-observation/checkpoint'
+        )
+        expect(checkpoint.status()).toBe(200)
+        const saved = JSON.parse(
+            await readFile(join(directory!, 'cache-events.json'), 'utf8')
+        ) as {
+            omitted: number
+            deliveryFailures: number
+            events: {
+                sequence: number
+                operation: string
+                phase: string
+                keyHash: string | null
+                found: boolean | null
+                tagExpiredAt: number | null
+                entryMinusExpiryMs: number | null
+            }[]
+        }
+        expect(saved.omitted).toBe(0)
+        expect(saved.deliveryFailures).toBe(0)
+        const events = saved.events.filter((event) => event.sequence > start)
+        const invalidated = events.find(
+            (event) =>
+                event.operation === 'revalidateTag' && event.phase === 'end'
+        )
+        expect(invalidated).toBeDefined()
+        const hit = events.find(
+            (event) =>
+                event.operation === 'get' &&
+                event.phase === 'end' &&
+                event.found === true &&
+                event.tagExpiredAt !== null &&
+                Number.isFinite(event.tagExpiredAt) &&
+                event.entryMinusExpiryMs !== null &&
+                Number.isFinite(event.entryMinusExpiryMs) &&
+                events.some(
+                    (write) =>
+                        write.operation === 'set' &&
+                        write.phase === 'end' &&
+                        write.keyHash === event.keyHash &&
+                        write.sequence > invalidated!.sequence &&
+                        write.sequence < event.sequence
+                )
+        )
+        expect(
+            hit,
+            'A live tagged refill must subsequently expose non-null finite expiry timing'
+        ).toBeDefined()
+    } finally {
+        await control('reset')
+        await invalidate()
+    }
 })

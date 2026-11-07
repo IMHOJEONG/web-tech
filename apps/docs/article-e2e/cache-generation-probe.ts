@@ -22,6 +22,14 @@ const counters = () => ({
     writes: 0,
     lateWrites: 0,
     rejectedWrites: 0,
+    lookups: [] as {
+        requestId: number
+        generation: number
+        resource: 'body' | 'other'
+        keyHash: string
+        phase: 'start' | 'end'
+        hit: boolean | null
+    }[],
 })
 type Session = ReturnType<typeof createGenerationSession>
 type Counters = ReturnType<typeof counters>
@@ -31,6 +39,7 @@ const scope = new AsyncLocalStorage<{
     session: Session
     lease: Lease
     counts: Counters
+    requestId: number
 }>()
 const emit = Server.prototype.emit
 mock.method(
@@ -101,8 +110,12 @@ mock.method(
         }
         if (request.headers['x-article-generation-probe'] !== '1')
             return Reflect.apply(emit, this, [event, ...args])
-        const captured = { session, lease: session.current(), counts }
-        captured.counts.requests++
+        const captured = {
+            session,
+            lease: session.current(),
+            counts,
+            requestId: ++counts.requests,
+        }
         captured.counts.activeRequests++
         let ended = false
         const end = () => {
@@ -140,10 +153,31 @@ for (const operation of ['get', 'set'] as const) {
                     }
                 }
                 const key = owner.keyFor(args[0], lease)
-                return await Reflect.apply(original, this, [
+                const lookup = (phase: 'start' | 'end', result?: unknown) => {
+                    if (own.lookups.length >= 4096)
+                        throw new Error(
+                            'Generation lookup observation overflow'
+                        )
+                    own.lookups.push({
+                        requestId: captured.requestId,
+                        generation: lease.generation,
+                        resource:
+                            (args[1] as { fetchUrl?: unknown }).fetchUrl ===
+                            'http://127.0.0.1:3112/posts/web/article-e2e-publication'
+                                ? 'body'
+                                : 'other',
+                        keyHash: key,
+                        phase,
+                        hit: phase === 'end' ? result != null : null,
+                    })
+                }
+                if (operation === 'get') lookup('start')
+                const result = await Reflect.apply(original, this, [
                     key,
                     ...args.slice(1),
                 ])
+                if (operation === 'get') lookup('end', result)
+                return result
             } finally {
                 own.activeOperations--
             }

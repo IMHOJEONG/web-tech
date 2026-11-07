@@ -17,6 +17,14 @@ type State = {
     activeOperations: number
     lateWrites: number
     rejectedWrites: number
+    lookups: {
+        requestId: number
+        generation: number
+        resource: string
+        keyHash: string
+        phase: string
+        hit: boolean | null
+    }[]
 }
 async function control(request: APIRequestContext, action: string) {
     const result = await request.post(
@@ -139,8 +147,16 @@ async function race(
             pending.push(b)
             void b.catch(() => {})
             await expect
-                .poll(async () => (await state(request)).requests)
-                .toBe(2)
+                .poll(async () =>
+                    (await state(request)).lookups.some(
+                        (lookup) =>
+                            lookup.requestId === 2 &&
+                            lookup.generation === 2 &&
+                            lookup.resource === 'body' &&
+                            lookup.phase === 'start'
+                    )
+                )
+                .toBe(true)
         }
         await control(request, 'release-body')
         const old = await a
@@ -172,6 +188,41 @@ async function race(
         expect(observed.rejectedWrites).toBe(
             mode === 'generation' ? observed.lateWrites : 0
         )
+        if (mode === 'generation') {
+            const before = await request.get(
+                `${origin}/__test/publication/state`,
+                { headers: auth }
+            )
+            expect(before.status()).toBe(200)
+            const received = (await before.json()).received
+            const repeat = await request.get(article, { headers: marked })
+            expect(repeat.status()).toBe(200)
+            expect(await repeat.text()).toContain('PUBLICATION_END_V2')
+            const reused = await state(request)
+            const bodyLookups = reused.lookups.filter(
+                (lookup) =>
+                    lookup.resource === 'body' && lookup.generation === 2
+            )
+            const key = bodyLookups.find(
+                (lookup) => lookup.requestId === 2
+            )?.keyHash
+            expect(key).toBeTruthy()
+            expect(
+                bodyLookups.some(
+                    (lookup) =>
+                        lookup.requestId === 3 &&
+                        lookup.phase === 'end' &&
+                        lookup.hit === true &&
+                        lookup.keyHash === key
+                )
+            ).toBe(true)
+            const after = await request.get(
+                `${origin}/__test/publication/state`,
+                { headers: auth }
+            )
+            expect(after.status()).toBe(200)
+            expect((await after.json()).received).toBe(received)
+        }
     } catch (error) {
         bodyErrors.push(error)
         throw error
@@ -202,6 +253,9 @@ test('revision may repeat but generation cannot roll back or accept stale publis
     expect(session.advance(1, 'r1')).toBeNull()
     expect(session.advance(2, 'r1')).toEqual({ generation: 3, revision: 'r1' })
     expect(first).toEqual({ generation: 1, revision: 'r1' })
+    expect(session.keyFor('synthetic-key', first)).toBe(
+        session.keyFor('synthetic-key', first)
+    )
     expect(session.keyFor('synthetic-key', first)).not.toBe(
         session.keyFor('synthetic-key', session.current())
     )
