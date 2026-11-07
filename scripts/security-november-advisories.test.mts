@@ -22,6 +22,8 @@ const floors = {
   qs: ">=6.16.1 <7",
   "@hono/node-server": ">=2.1.3 <3",
 };
+const isBetterAuthPackage = (key: string) =>
+  /^(?:better-auth@|@better-auth\/)/.test(key);
 
 function version(request: NodeJS.Require, name: string): string {
   let directory = dirname(request.resolve(name));
@@ -61,6 +63,22 @@ test("November advisory floors reject vulnerable releases and prereleases in eve
     for (const key of copies)
       assert.ok(semver.satisfies(key.slice(name.length + 1), range), key);
   }
+  assert.ok(
+    semver.subset(
+      workspace.overrides["babel-plugin-istanbul@7.0.1>test-exclude"],
+      ">=8.0.0 <9",
+    ),
+  );
+  assert.equal(workspace.overrides["test-exclude"], undefined);
+  const coverageCopies = Object.keys(lock.packages).filter((key) =>
+    key.startsWith("test-exclude@"),
+  );
+  assert.ok(coverageCopies.length);
+  for (const key of coverageCopies)
+    assert.ok(
+      semver.satisfies(key.slice("test-exclude@".length), ">=8.0.0 <9"),
+      key,
+    );
 });
 
 test("unused Better Auth and adapters have no importer, source or locked package remaining", () => {
@@ -72,12 +90,7 @@ test("unused Better Auth and adapters have no importer, source or locked package
     .parseAllDocuments(readFileSync(join(root, "pnpm-lock.yaml"), "utf8"))
     .at(-1)!
     .toJSON();
-  assert.equal(
-    Object.keys(lock.packages).some((key) =>
-      /^(?:better-auth|@better-auth\/)@?/.test(key),
-    ),
-    false,
-  );
+  assert.equal(Object.keys(lock.packages).some(isBetterAuthPackage), false);
   const files = execFileSync("git", ["ls-files", "-z", "apps/docs"], {
     cwd: root,
     encoding: "utf8",
@@ -90,6 +103,21 @@ test("unused Better Auth and adapters have no importer, source or locked package
       /["']better-auth(?:\/[^"']*)?["']/,
       file,
     );
+});
+
+test("Better Auth detection matches complete package identities, not unrelated prefixes", () => {
+  for (const key of [
+    "better-auth@1.7.0",
+    "@better-auth/core@1.7.0",
+    "@better-auth/drizzle-adapter@1.7.0",
+  ])
+    assert.equal(isBetterAuthPackage(key), true, key);
+  for (const key of [
+    "better-auth-foo@1.0.0",
+    "better-authenticate@1.0.0",
+    "@example/better-auth@1.7.0",
+  ])
+    assert.equal(isBetterAuthPackage(key), false, key);
 });
 
 for (const app of ["docs-backend", "vuln-radar-backend"]) {
@@ -202,30 +230,41 @@ test("Prisma's actual node static adapter does not decode into a protected prefi
   }
 });
 
+/** Bound synthetic inputs and discard inherited runtime hooks and credentials. */
+function runFixture(mode: string, app = "docs-backend") {
+  const result = spawnSync(
+    process.execPath,
+    [
+      "--experimental-strip-types",
+      "--max-old-space-size=128",
+      join(root, "scripts/security-fixtures/november-parsers.mts"),
+      mode,
+      join(root, "apps", app, "package.json"),
+    ],
+    {
+      timeout: mode === "coverage" ? 30_000 : 8000,
+      encoding: "utf8",
+      maxBuffer: 64 * 1024,
+      env: Object.fromEntries(
+        Object.entries(process.env).filter(([key]) =>
+          /^(PATH|HOME|TMPDIR|LANG|LC_ALL|SystemRoot)$/.test(key),
+        ),
+      ),
+    },
+  );
+  assert.ifError(result.error);
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /bounded fixture completed/);
+}
+
 for (const mode of ["minimatch", "glob"]) {
   test(`${mode}: bounded isolated regression rejects amplification or post-abort traversal`, () => {
-    const result = spawnSync(
-      process.execPath,
-      [
-        "--experimental-strip-types",
-        "--max-old-space-size=128",
-        join(root, "scripts/security-fixtures/november-parsers.mts"),
-        mode,
-        join(root, "apps/docs-backend/package.json"),
-      ],
-      {
-        timeout: 8000,
-        encoding: "utf8",
-        maxBuffer: 64 * 1024,
-        env: Object.fromEntries(
-          Object.entries(process.env).filter(([key]) =>
-            /^(PATH|HOME|TMPDIR|LANG|LC_ALL|SystemRoot)$/.test(key),
-          ),
-        ),
-      },
-    );
-    assert.ifError(result.error);
-    assert.equal(result.status, 0, result.stderr);
-    assert.match(result.stdout, /bounded fixture completed/);
+    runFixture(mode);
+  });
+}
+
+for (const app of ["docs-backend", "vuln-radar-backend"]) {
+  test(`${app}: installed Jest collects cold coverage and retains file exclusions`, () => {
+    runFixture("coverage", app);
   });
 }
