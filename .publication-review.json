@@ -2,12 +2,40 @@
   "version": 1,
   "entries": [
     {
-      "path": "docs/architecture/README.md",
-      "sha256": "d43121941fa210d80cb2f03f1588211fb4d008745bef5cae41e9090fc874d16d",
+      "path": "docs/verification/content/2026-11-07-snapshot-pointer-lab.md",
+      "sha256": "8d3982294cd49a07e88c806d76ab24b4c6c9157dc74997ed8c70e87fcee11e69",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-06",
-      "note": "사용자가 이번 공용 계약 구현과 관련 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀 결과·절차·작업 기록·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·기존 초안·개인 경로·실제 응답·NAS 설정·푸시·배포는 제외함.",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-07-snapshot-pointer-lab.md",
+      "sha256": "f14b0ca9c06722eaafcf29d030bede497ffd5388143453e36d1f1b472ad9b1e7",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/README.md",
+      "sha256": "098fde915399ce529d459ca31018acdb30a3d04b7f1c06b0b23f4951f1bb263e",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -17,11 +45,11 @@
     },
     {
       "path": "docs/architecture/adr-0028-nas-content-revision-snapshots.md",
-      "sha256": "2ca5e29f7ae66ddd5025322a9b276d09e1bed8c03245ae5acad6d1eafeb6348f",
+      "sha256": "6c1cf0792d87551f44eb88a68eb447cf05acefae6962948623615dd7d56be9c6",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-06",
-      "note": "사용자가 이번 공용 계약 구현과 관련 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀 결과·절차·작업 기록·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·기존 초안·개인 경로·실제 응답·NAS 설정·푸시·배포는 제외함.",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -31,11 +59,11 @@
     },
     {
       "path": "docs/todo/todo.md",
-      "sha256": "93dc9e1a9089c6491d8653660b1d08678850317dcb234ece9eee0400ec454e4c",
+      "sha256": "618ddc9b08764df3ff15029cfb14096e8070e1a87ea3b77e2cc12160229de7a7",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-06",
-      "note": "사용자가 이번 공용 계약 구현과 관련 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀 결과·절차·작업 기록·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·기존 초안·개인 경로·실제 응답·NAS 설정·푸시·배포는 제외함.",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -45,11 +73,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "7d67b04939d228b17ecce4df8b7852a69cc1f30f903f595ca0f7efe31a0f58d2",
+      "sha256": "dd952272c663ee7bf1f9ea2bd6a4b8c49f62c6dae8bb4bcee7934a2006afb785",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-06",
-      "note": "사용자가 이번 공용 계약 구현과 관련 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀 결과·절차·작업 기록·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·기존 초안·개인 경로·실제 응답·NAS 설정·푸시·배포는 제외함.",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -101,11 +129,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "f33864d2cf34202168083cea78bc1e1a614a9f9bd8e30acc4b2469dc597602fc",
+      "sha256": "09a442e0aaa6fa85db021e7987d01185f36946f5929bf2ba86759d780c28faf6",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-06",
-      "note": "사용자가 이번 공용 계약 구현과 관련 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀 결과·절차·작업 기록·목차의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·기존 초안·개인 경로·실제 응답·NAS 설정·푸시·배포는 제외함.",
+      "reviewedOn": "2026-11-07",
+      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

@@ -1,5 +1,7 @@
 # 2026-11 작업 기록
 
+- [11-07 snapshot·포인터 임시 실험](2026-11-07-snapshot-pointer-lab.md): 새 임시 root의 파일 승격·실패·동시 읽기 검증 후 사용자 승인으로 구현·정제 문서를 분리 커밋. 원시 자료 제외·NAS 미변경·미푸시.
+
 - [11-06 공용 게시 무결성 계약](2026-11-06-publication-integrity-contract.md): revision·manifest·포인터 스키마와 순수 SHA-256 검증·경계 회귀. 사용자 승인 후 구현·정제 문서를 분리 커밋하며 실제 NAS·API·배포는 미변경.
 
 - [11-06 NAS revision 검증 설계](2026-11-06-nas-revision-design.md): 불변 스냅샷·현재 포인터·원본 bytes 검증의 제안 ADR. 실험 공개 커밋과 분리하고 공용 계약의 근거로 후속 검수하며 운영 미적용.

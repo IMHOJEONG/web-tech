@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-07 임시 snapshot·포인터 교체](content/2026-11-07-snapshot-pointer-lab.md): 공용 계약 커밋 검수·합성 파일 승격·새 세대·동시 읽기와 실패/남은 잠금 검사. 사용자 승인으로 구현·정제 문서를 분리 커밋하며 실제 NAS·API·캐시는 미연결.
+
 - [11-06 공용 게시 무결성 계약](content/2026-11-06-publication-integrity-contract.md): 합성 bytes의 변조·누락·상한·전체 체인과 ESM/CJS 소비자 호환. 로컬 패키지 검증이며 실제 NAS·최신성·승격은 미검증.
 
 - [11-06 게시 세대 격리 실험](cache/2026-11-06-publication-generation-experiment.md): 실제 Next 지연 대조·새 세대 B의 V2 필수 조건·원본 미게시 음성 대조. 로컬 실험이며 운영 revision·분산 CAS는 미구현.

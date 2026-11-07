@@ -5,7 +5,7 @@
 - 상태: 제안
 - 대상: docs-backend 게시 산출물·docs 원격 읽기·공용 콘텐츠 계약
 - 결정일: 2026-11-06
-- 최종 검토: 2026-11-06
+- 최종 검토: 2026-11-07
 
 전체 게시 흐름은 아직 채택·배포하지 않은 로컬 설계안이다. 첫 단계의 공용 스키마·순수 validator만
 로컬 커밋 `cdf47ec`에 구현했다. 기존 NAS 볼륨·API·웹훅·자격 증명은 변경하지 않았다.
@@ -192,7 +192,14 @@ UUID만으로 이전/미래 게시를 판정하지 않는다. 발행자는 현�
 첫 단계는 [공용 publication subpath](../../packages/docs-content-contract/README.md#publication-integrity)에
 로컬 구현했다. [검증 결과](../verification/content/2026-11-06-publication-integrity-contract.md)는 변조·누락·
 상한과 기존 ESM/CJS 소비자 호환 범위다. 이 사실만으로 NAS 게시·최신 포인터·캐시 격리 검증을 완료 처리하지 않는다.
-단계 2~6과 전체 정책 채택은 아직 진행하지 않았다.
+단계 2~6의 운영 연결과 전체 정책 채택은 아직 진행하지 않았다.
+
+11-07 후속으로 [임시 파일 실험](../verification/content/2026-11-07-snapshot-pointer-lab.md)을 수행했다.
+사용자 승인으로 실험 구현·회귀는 로컬 `97709cc`에 커밋하고 관련 정제 문서는 별도 검수·커밋한다.
+새 OS 임시 root에서 pre-rendered 합성 입력만 사용하며 기존 NAS·Nest API에 연결하지 않았다.
+독점 파일 잠금·candidate 재검증·포인터 rename·동시 읽기·초기화 marker와 실패 경계를 검사했지만
+실제 NAS publisher의 공개 입력 고정·잠금 복구·전원 장애 내구성은 미구현/미검증이다.
+이 실험만으로 단계 2 전체나 운영 정책 채택을 완료 처리하지 않는다.
 
 ## 관련 문서
 
