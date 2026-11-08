@@ -2,6 +2,34 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/verification/resilience/2026-11-08-docs-tablet-filter-readiness.md",
+      "sha256": "49a7cf64b971e2fc9731ae14b8498da5e42154c4af943f84c484e9508a024164",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-08",
+      "note": "사용자가 이번 태블릿 필터 수정의 코드·정제 문서 공개 검수·작업별 커밋·푸시와 기존 PR #71 반영을 승인함. 수정 전 실패·180회 통합 반복·관련81개와 기존 제외·native hydration 경고·원격 미검증 경계를 직접 읽고 비밀값·원시 응답·개인 경로·캡처가 없음을 검수함. 기존 공개 자료 재검수와 옛 head 백업 후 PR #71만 lease 갱신하는 승인 범위를 구분함. 다른 미커밋·원시 자료·NAS·토큰·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-08-docs-tablet-filter-readiness.md",
+      "sha256": "8e1e39f6a5001b2b16fc3097ad9101f78a1c1997798c6625083bda2adf654c18",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-08",
+      "note": "사용자가 이번 태블릿 필터 수정의 코드·정제 문서 공개 검수·작업별 커밋·푸시와 기존 PR #71 반영을 승인함. 수정 전 실패·180회 통합 반복·관련81개와 기존 제외·native hydration 경고·원격 미검증 경계를 직접 읽고 비밀값·원시 응답·개인 경로·캡처가 없음을 검수함. 기존 공개 자료 재검수와 옛 head 백업 후 PR #71만 lease 갱신하는 승인 범위를 구분함. 다른 미커밋·원시 자료·NAS·토큰·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/knowledge/docs-app/README.md",
       "sha256": "014c033aee4a685c923f80758605ccd851e5506536a1fc81931af70f3de690cf",
       "kind": "document",
@@ -157,11 +185,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "42932c4cbfd72e0ae2b7fdca6ee2eaf71a390b29ecc191c3d1e59d02371dca74",
+      "sha256": "40c1bce78553d4cd65f5752160579f531c2c17aa985a2205d1d485ab8c1331fa",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-08",
-      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
+      "note": "사용자가 이번 태블릿 필터 수정의 코드·정제 문서 공개 검수·작업별 커밋·푸시와 기존 PR #71 반영을 승인함. 수정 전 실패·180회 통합 반복·관련81개와 기존 제외·native hydration 경고·원격 미검증 경계를 직접 읽고 비밀값·원시 응답·개인 경로·캡처가 없음을 검수함. 기존 공개 자료 재검수와 옛 head 백업 후 PR #71만 lease 갱신하는 승인 범위를 구분함. 다른 미커밋·원시 자료·NAS·토큰·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -213,11 +241,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "65511bbf358a1b4c1c8cbfc233838f44d7c91e62914893bfbc1f7211707f17dc",
+      "sha256": "d5b06aa0fcfe1fea76746de1d6aaad24c7103bf7a876af356a0ceed9f9eee376",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-07",
-      "note": "사용자가 이번 Dependabot 보안 수정과 정제 문서의 커밋·푸시를 승인함. 기존 월별 목차 본문을 보존하고 보안 작업 연결만 추가함. 비밀값·개인정보·권리·공개 의도를 검수했으며 다른 작업 기록·원시 자료·실제 응답·NAS 설정은 새 공개 범위에서 제외함.",
+      "reviewedOn": "2026-11-08",
+      "note": "사용자가 이번 태블릿 필터 수정의 코드·정제 문서 공개 검수·작업별 커밋·푸시와 기존 PR #71 반영을 승인함. 수정 전 실패·180회 통합 반복·관련81개와 기존 제외·native hydration 경고·원격 미검증 경계를 직접 읽고 비밀값·원시 응답·개인 경로·캡처가 없음을 검수함. 기존 공개 자료 재검수와 옛 head 백업 후 PR #71만 lease 갱신하는 승인 범위를 구분함. 다른 미커밋·원시 자료·NAS·토큰·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

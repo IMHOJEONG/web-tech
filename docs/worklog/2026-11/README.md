@@ -1,5 +1,7 @@
 # 2026-11 작업 기록
 
+- [11-08 태블릿 필터 후속 안정화](2026-11-08-docs-tablet-filter-readiness.md): pending selector 재현·main 대조·기존 PR #71 통합과 공개 검수. 원시 자료·다른 미커밋·NAS 보존.
+
 - [11-07 Dependabot 신규 경고 보완](2026-11-07-dependabot-advisories.md): 보안 하한·미사용 인증 경로 제거·합성 회귀, CVE 철회 근거와 #351 승인 처리. 사용자 승인에 따른 패치·검사·정제 문서 커밋·푸시와 기존 Vite+ 실패, 운영 미배포를 구분.
 
 - [11-07 snapshot·포인터 임시 실험](2026-11-07-snapshot-pointer-lab.md): 새 임시 root의 파일 승격·실패·동시 읽기 검증 후 사용자 승인으로 구현·정제 문서를 분리 커밋. 원시 자료 제외·NAS 미변경·미푸시.
