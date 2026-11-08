@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-08 태블릿 필터 준비 상태](resilience/2026-11-08-docs-tablet-filter-readiness.md): 실제 streaming 보류·닫힌 fallback 오판, 기존 PR #71의 더 강한 회귀 보존과 후속 통합 검증. 로컬·원격 결과를 구분.
+
 - [11-07 Dependabot 신규 경고](security/2026-11-07-dependabot-advisories.md): 10건 패치·미사용 인증 제거, 철회된 1건 승인 후 오탐 처리, 실제 소비자·합성 회귀와 기존 Vite+ 빌드 실패 구분. 사용자 커밋·푸시 승인 범위이며 main 미반영·운영 미배포.
 
 - [11-07 임시 snapshot·포인터 교체](content/2026-11-07-snapshot-pointer-lab.md): 공용 계약 커밋 검수·합성 파일 승격·새 세대·동시 읽기와 실패/남은 잠금 검사. 사용자 승인으로 구현·정제 문서를 분리 커밋하며 실제 NAS·API·캐시는 미연결.
@@ -99,6 +101,8 @@
 - [10-19 페이지별 스켈레톤 로컬 검증](accessibility/2026-10-19-page-skeletons-local.md): 실제 서버 골격·완성 화면의 기하 비교와 검색·피드 회귀. 운영 CLS는 미검증.
 
 - [10-19 문서 목록 우선 배치 로컬 검증](accessibility/2026-10-19-docs-index-order-local.md): 목록 위치·선택 해제·검색/페이지 이동 회귀, 69개와 재검사 12개·화면 26조건 통과. 공개 배포 미검증.
+
+- [10-27 문서 필터 준비 상태](resilience/2026-10-27-docs-filter-readiness.md): 실제 스트림 보류·골격/완성 결과 구분·ko/en 클릭/키보드 회귀, 10-28 main 기반 분리.
 
 - [10-18 Handlebars 패치·기본 브랜치 경고 4건](security/2026-10-18-handlebars-advisories.md): Handlebars 3건 조치·전후 회귀와 audit, braces 공식 패치 미출시·개발 경로 잔여 구분.
 

@@ -1,8 +1,14 @@
 import { expect, type Page } from '@playwright/test'
 
 export function visibleDocsIndexFilters(page: Page) {
-    // Streaming can keep the next tree hidden while the current controls remain visible.
-    return page.locator('[data-testid="docs-index-filters"]:visible')
+    // The fallback has identical controls but is replaced when the results arrive.
+    return readyDocsIndex(page).getByTestId('docs-index-filters')
+}
+
+export function readyDocsIndex(page: Page) {
+    return page.locator('main:visible').filter({
+        has: page.getByTestId('docs-index-results'),
+    })
 }
 
 export async function openDocsIndexFilters(page: Page) {
@@ -15,4 +21,5 @@ export async function openDocsIndexFilters(page: Page) {
     ) {
         await filters.locator('summary').click()
     }
+    await expect(filters).toHaveAttribute('open')
 }
