@@ -1,0 +1,159 @@
+{
+  "date": "2026-10-27",
+  "timezone": "Asia/Seoul",
+  "issue": "KAN-42",
+  "state": "local-uncommitted",
+  "baseCommit": "9923d815fb48220b3c95f01784c6a452567e4470",
+  "remoteObservation": {
+    "run": "https://github.com/IMHOJEONG/web-tech/actions/runs/40438706168/job/121973567506",
+    "project": "chromium-desktop",
+    "locale": "en",
+    "line": "e2e/docs-index-order.spec.ts:83",
+    "action": "sort=section link click",
+    "observedSequence": ["not stable", "detached from DOM", "not visible"],
+    "testTimeoutMs": 30000,
+    "firstAttemptTraceAvailable": false,
+    "status": "flaky: retry passed"
+  },
+  "environment": {
+    "node": "24.12.0",
+    "pnpm": "12.14.0",
+    "next": "16.4.3",
+    "playwright": "1.62.1",
+    "mode": "development",
+    "remoteIndex": false,
+    "viewports": [
+      [390, 844],
+      [768, 1024],
+      [1280, 800]
+    ]
+  },
+  "investigation": {
+    "ordinaryBaseline": { "passed": 20, "failed": 0, "retries": 0 },
+    "readOnlyCpu6Probe": {
+      "samples": 8,
+      "functionalFailures": 0,
+      "samplesWithPendingControls": 3
+    },
+    "realHtmlReplay": {
+      "fallbackOpenBeforeRelease": true,
+      "fallbackConnectedAfterRelease": false,
+      "replacementOpenAttribute": null,
+      "htmlOrReactDomModified": false
+    },
+    "causalLimit": "CI first-attempt DOM replacement caller is unknown; local replay establishes the fallback-readiness defect, not the exact remote scheduling."
+  },
+  "intermediateRuns": [
+    {
+      "name": "initial focused suite",
+      "passed": 27,
+      "skipped": 6,
+      "failed": 0,
+      "flaky": 0,
+      "durationMs": 20522.024
+    },
+    {
+      "name": "Flight-boundary and post-sort open assumption",
+      "passed": 107,
+      "failed": 13,
+      "skipped": 0,
+      "flaky": 0,
+      "durationMs": 167127.346,
+      "notes": "5 prefix-order failures, 7 new post-sort open assertions, 1 timeout; cleanup errors can accompany a failed test."
+    },
+    {
+      "name": "hidden-segment boundary",
+      "passed": 35,
+      "failed": 1,
+      "skipped": 0,
+      "flaky": 0,
+      "durationMs": 65324.411,
+      "notes": "One native pointer stability wait in a deliberately unfinished document; the new fallback-only demonstration uses focused keyboard activation, while final UI and existing scenarios retain real clicks."
+    }
+  ],
+  "finalRuns": [
+    {
+      "name": "ko/en original filters and real HTML stream, three viewports, repeat 10",
+      "passed": 120,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0,
+      "runnerErrors": 0,
+      "durationMs": 137179.792
+    },
+    {
+      "name": "related seven specs after restoring fixed selector",
+      "passed": 122,
+      "failed": 0,
+      "skipped": 10,
+      "flaky": 0,
+      "retries": 0,
+      "runnerErrors": 0,
+      "durationMs": 82146.182,
+      "passedByScope": {
+        "skeletonAndIsolation": 75,
+        "indexOrderAndFilters": 18,
+        "newStreamReadiness": 6,
+        "mobileNavigation": 3,
+        "mobileTouchTargets": 2,
+        "hubFilters": 18
+      },
+      "existingSkips": { "nonMobileNavigation": 6, "nonMobileTouchTargets": 4 },
+      "overlapsRepeatRun": true
+    }
+  ],
+  "sourceBlobs": {
+    "apps/docs/e2e/docs-index-order.spec.ts": "dfdec9e50de46a3ee2fafa5c0d92f18cd4a93f90",
+    "apps/docs/e2e/helpers/docs-index.ts": "037d500dddf88834633b6bb2be8651fb5c757fb3",
+    "apps/docs/e2e/docs-index-readiness.spec.ts": "861cf94a218c9db3244e80327d68f844783f4d05",
+    "apps/docs/e2e/helpers/streamed-docs-index.ts": "bfefb0ffa9fe451fd1376af7ef292c49957e62b6"
+  },
+  "negativeControl": {
+    "mutation": "restore only the old visible filter selector",
+    "tests": 1,
+    "failedAsExpected": 1,
+    "assertion": "filter readiness expected 0, received 1 (fallback)",
+    "expectTimeoutMs": 5000,
+    "durationMs": 5992.014,
+    "retries": 0,
+    "fixedSelectorRestored": true,
+    "earlierEmptyGrepRunExcluded": true
+  },
+  "unchangedCriteria": {
+    "testTimeoutMs": 30000,
+    "expectTimeoutMs": 5000,
+    "ciRetries": 2,
+    "localValidationRetries": 0,
+    "urlAndChipAndEnterAssertions": "retained and supplemented with rendered selections, intermediate chip counts, explicit open/focus",
+    "productCodeOrStylesOrDependenciesOrCiChanged": false
+  },
+  "checks": {
+    "typecheck": "passed",
+    "changedTypeScriptEslintZeroWarnings": "passed",
+    "temporaryIndexDocumentationDelta": "passed",
+    "temporaryIndexFormattingReadOnly": "passed",
+    "diffCheck": "passed",
+    "realIndexStagedFiles": 0,
+    "preservedNasH1ContrastBlobsMatched": 4
+  },
+  "tracking": {
+    "jira": "KAN-42",
+    "status": "검토 중",
+    "commentId": "10032",
+    "commentReadBackEqual": true,
+    "tableColumnsByRow": [3, 3, 3, 3, 3],
+    "confluencePageId": "65817",
+    "confluenceVersion": 166,
+    "priorBodyPreservedOnReadBack": true,
+    "appendedSections": 1
+  },
+  "unverified": [
+    "new remote CI",
+    "merge",
+    "deployment",
+    "Safari",
+    "Firefox",
+    "physical devices"
+  ]
+}

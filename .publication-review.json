@@ -2,6 +2,90 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/knowledge/docs-app/README.md",
+      "sha256": "014c033aee4a685c923f80758605ccd851e5506536a1fc81931af70f3de690cf",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-08",
+      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/knowledge/docs-app/streamed-index-readiness.md",
+      "sha256": "a2d5222cd159618cf904d5325ba4a18bef692ba7b4e49d71f6154e85bf7b38b6",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-08",
+      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-10-27-docs-filter-readiness.json",
+      "sha256": "348f8b214cff6bb59f442fd1bc9697696ffbe8b0b46ef77da0d67abbb9c77184",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-08",
+      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-10-28-docs-filter-main-recheck.json",
+      "sha256": "b8186c40addd14a55515774d3db18ac384725e31c2d8f55b8d95351545ea3b52",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-08",
+      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/resilience/2026-10-27-docs-filter-readiness.md",
+      "sha256": "d787a15d046e61629c4f7770b362bb142e0c0ea75792b2218cbabcf96ae524e2",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-08",
+      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-27-docs-filter-readiness.md",
+      "sha256": "0849767c122e2f75c503ec77071fa6c6a15e83c7313d3e95ff5708a70cbc91e5",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-08",
+      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/verification/content/2026-11-07-snapshot-pointer-lab.md",
       "sha256": "191d495b03f122758e35afe3903eedb398a9022746d56535e80d812e4852e947",
       "kind": "document",
@@ -73,11 +157,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "9df937a29530e82c36e617ec34b18e0ff1f1de23e49ada245a06a951f9ec32dc",
+      "sha256": "42932c4cbfd72e0ae2b7fdca6ee2eaf71a390b29ecc191c3d1e59d02371dca74",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-07",
-      "note": "사용자가 이번 Dependabot 보안 수정과 정제 문서의 커밋·푸시를 승인함. 기존 목차 본문을 보존하고 신규 보안 보고서 연결과 미배포 범위만 추가함. 비밀값·개인정보·권리·공개 의도를 검수했으며 원시 로그·실제 응답·비공개 자료·NAS 설정은 제외함.",
+      "reviewedOn": "2026-11-08",
+      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -465,11 +549,11 @@
     },
     {
       "path": "docs/worklog/2026-10/README.md",
-      "sha256": "d48773b7d02adca83afc707441bff1c621cfd99b814d6dbdc12b7311146f6ae6",
+      "sha256": "669e9095ff8681aac8106532f8ff7338381bead5cef42b02384270389c4c92e6",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-10-31",
-      "note": "사용자가 오프라인 저장 수정 최종 18개 파일과 8개 승인 해시 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 월별 작업 목차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "reviewedOn": "2026-11-08",
+      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -577,11 +661,11 @@
     },
     {
       "path": "docs/verification/artifacts/README.md",
-      "sha256": "e5766e6f4e74b35896bad29c7b259d0635cc9a3058600427b828e5f285630d29",
+      "sha256": "07537c38ab79dd9b886ec87a306f5217c89220a28923c0dd40a918727f7871a1",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-10-31",
-      "note": "사용자가 PR #80 후속 26개 파일의 최종 공개 목록·해시와 main 병합·배포를 명시 승인함. 자체 작성한 정제 집계·재현 조건·보고서·목차이며 원시 캡처·trace·인증 헤더·운영 비밀값은 제외함.",
+      "reviewedOn": "2026-11-08",
+      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
