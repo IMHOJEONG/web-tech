@@ -9,11 +9,33 @@
 
 ## 재현 방법
 
-저장소 루트에서 실행한다. 기존 서버와 겹치지 않는 전용 포트를 사용하고 원시 Playwright 출력은 checkout 밖 임시 위치에 둔다. `DOCS_E2E_PORT`와 출력 경로만 달리했으며 기존 test30초·expect5초, CI의 retry 설정은 변경하지 않았다. 아래 실행에서는 재시도를0으로 명시했다.
+완성된 checkout의 helper는 이미 수정되어 있으므로 아래 red 명령만 실행하면 실패하지 않는다. 기존 미커밋 작업을 건드리지 않도록 검증한 PR 커밋에서 별도 detached worktree를 만든다. 아래 경로가 이미 존재하면 덮어쓰지 말고 새 임시 경로를 선택한다. Node 24.22.1·pnpm 12.14.0과 Playwright Chromium 설치를 먼저 확인한다.
 
 ```sh
+git worktree add --detach /tmp/docs-filter-red-green 12a0a3a5ed83a232590016397e23d5e1b81ca135
+cd /tmp/docs-filter-red-green
 mise exec -- pnpm install --frozen-lockfile --ignore-scripts
+```
+
+이 격리 worktree의 `apps/docs/e2e/helpers/docs-index.ts`에서 **반환문 한 줄만** 다음 diff처럼 변경한다. 기존 main의 helper 파일 전체로 교체하면 새 spec이 import하는 `readyDocsIndex`가 없어져 컴파일 오류가 나므로 올바른 음성 대조가 아니다. 함수 export·테스트·앱·assertion은 유지한다.
+
+```diff
+-    return readyDocsIndex(page).getByTestId('docs-index-filters')
++    return page.locator('[data-testid="docs-index-filters"]:visible')
+```
+
+격리 worktree 루트에서 red를 실행한다. 기존 서버와 겹치지 않는 전용 포트와 checkout 밖 출력 경로를 사용한다. test30초·expect5초는 그대로이며 재시도는0이다.
+
+```sh
 DOCS_E2E_PORT=3047 mise exec -- pnpm --filter docs test:e2e docs-index-readiness.spec.ts --project=chromium-tablet --grep 'ko:' --retries=0 --workers=1 --output=/tmp/docs-tablet-red
+```
+
+기대 결과는 두 ko 사례가 `toHaveCount(0)`에서 `Received: 1`로 실패하는 것이다. 현재 통합본에는 열린 fallback·닫힌 fallback 사례가 각각 있어 최초 조사본의 red1과 개수가 다르다. 서버 시작·컴파일·브라우저 실행 오류 또는 테스트0개는 재현 성공이 아니다. red가 통과하면 기존 selector로 변경했는지 확인한다.
+
+green 전에 **격리 worktree에서 자신이 변경한 한 줄만** 위 diff의 반대로 되돌린다. `git diff -- apps/docs/e2e/helpers/docs-index.ts`가 비어 있어야 한다. 사용자 작업 트리나 기존 미커밋 파일을 복원 대상으로 삼지 않는다. 먼저 같은 ko 명령을 출력 경로만 `/tmp/docs-tablet-green-same`으로 바꿔 실행하고, 이어서 전체 태블릿 및 관련 회귀를 실행한다.
+
+```sh
+DOCS_E2E_PORT=3047 mise exec -- pnpm --filter docs test:e2e docs-index-readiness.spec.ts --project=chromium-tablet --grep 'ko:' --retries=0 --workers=1 --output=/tmp/docs-tablet-green-same
 DOCS_E2E_PORT=3047 mise exec -- pnpm --filter docs test:e2e docs-index-readiness.spec.ts docs-index-order.spec.ts --project=chromium-tablet --retries=0 --workers=1 --output=/tmp/docs-tablet-green
 DOCS_E2E_PORT=3047 mise exec -- pnpm --filter docs test:e2e docs-index-readiness.spec.ts docs-index-order.spec.ts --grep 'fallback filters|collapsed filters' --repeat-each=10 --workers=2 --retries=0 --output=/tmp/docs-tablet-repeat
 mise exec -- pnpm --filter docs typecheck
@@ -63,6 +85,12 @@ DOCS_E2E_PORT=3047 mise exec -- pnpm --filter docs test:e2e docs-index-navigatio
 - 이력 통합·과거 자료 검수, 추가 회귀, 이번 정제 문서·해시를 작업별 커밋으로 분리한다. 소스 조사본과 기존 보안·snapshot 미커밋은 원래 위치에 그대로 둔다. 추가 원시 artifact는 공개하지 않는다.
 - 결합 상태에서 ko/en × 세 viewport × 기존/닫힌 fallback·선택 해제3동선 × 10회, 핵심180개가 retry0·실패0·skip0으로 통과했다. 관련5개 spec은81개 통과·기존 모바일 전용6개 skip·retry0·실패0이다. 타입·변경4파일 lint도 통과했다. 앞선 main 조사본120/75와 실행 범위를 합산하지 않는다.
 - 통합 대조본과 새 기준 커밋의 tree 동일성, 추가 회귀 소스의 bytes 동일성을 확인해 재구성이 검사한 런타임 파일을 바꾸지 않았음을 대조한다. 최종 bytes 검수와 staged·전체 전송 이력 검사를 마친 뒤 옛 head를 정확히 지정한 lease로 PR #71만 갱신한다. main 병합·운영 배포는 하지 않으며 최종 커밋·원격 CI·리뷰 결과는 연결된 KAN-42·Confluence에서 실제 SHA로 구분한다.
+
+### 재현 절차 리뷰 후 재검증
+
+CodeRabbit의 [재현 선행 조건 보완 의견](https://github.com/IMHOJEONG/web-tech/pull/71#discussion_r4506585653)에 따라 red용 selector 변경과 green 전 복원을 명시했다. `12a0a3a`의 격리 worktree에서 실제로 한 줄만 변경해 동일한 tablet/ko 명령으로 두 assertion 실패(`Expected: 0 / Received: 1`)를 확인했고, 한 줄 복원 후 같은 두 사례가 retry0으로 통과했다. 이어서 위 전체 태블릿 green 명령도10개 통과·retry0·실패0을 확인했다. helper diff는 비어 있으며 테스트·앱·assertion 변경은 없다. 최초 sandbox의 loopback listen 권한 오류는 테스트 미실행으로 구분하고 권한 승인 후 실행한 결과만 대조했다. 원시 출력은 checkout 밖에 보관했다.
+
+첫 원격 검증은 [CI 42490307701](https://github.com/IMHOJEONG/web-tech/actions/runs/42490307701)과 같은 head `12a0a3a`의 문서·CodeQL·CodeRabbit·두 Preview를 포함한22개 검사 모두 성공이다. 데스크톱136개·태블릿128개·모바일142개가 통과했고 기존 조건부 제외는 각각17/25/11개다. 해당 CI의 flaky·실패 집계는0이지만 hydration 경고는 남아 있다. 이 결과를 후속 문서 커밋의 새 CI나 production 검증으로 대체하지 않는다.
 
 ## 한계와 후속 작업
 

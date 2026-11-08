@@ -23,12 +23,13 @@ main `d04a7da`의 별도 작업 공간에서 PR #88의 tablet/ko 정렬 클릭 �
 - 반복 중 native details의 hydration attribute mismatch 경고를 별도로 관측했다. 결과 DOM 준비와 React hydration 완료는 다르며 console 오류0이나 제품 경고 해결까지 완료했다고 주장하지 않는다.
 - 기존 PR의 더 강한 회귀와 결합한 핵심180회·관련81개도 재시도 없이 통과했다. 관련6개 skip은 기존 모바일 전용 조건이다. 이는 앞선 main 조사본120회·관련75회와 다른 통합본 검사이며 중복 합산하지 않는다. 옛 head `e8c6fff8`은 `codex/archive-pr71-before-rebuild-20261108`로 보관한다.
 - 실제 원격 API·NAS·토큰을 사용하지 않는다. 원시 로그·error-context·캡처는 checkout 밖에 보관하고 공개 artifact로 추가하지 않는다.
+- 재구성한3커밋을 PR #71에 푸시했고 첫 head `12a0a3a`의22개 원격 검사는 모두 성공했다. CodeRabbit의 유효한 문서 의견1건에 따라 격리 worktree에서 red용 한 줄 변경·green 전 복원을 명시하고 두 실패→같은 두 통과를 재검증했다. 상세 조건과 한계는 검증 보고서에 남긴다. 후속 문서 커밋의 새 CI·리뷰는 별도로 확인한다.
 - 구조·데이터 흐름·공개 계약·공용 UI 책임은 달라지지 않아 새 ADR은 만들지 않는다. 테스트의 준비 판정과 기존 검증 강화 범위다.
 
 ## Open Questions
 
-원래 CI에서 DOM 교체를 일으킨 특정 호출자는 trace 부재로 미확정이다. 이미 열려 있는 PR #71의 같은 helper·spec과 이번 후속을 어디에서 최종 통합할지는 커밋·푸시 요청 시 대조해야 한다.
+원래 CI에서 DOM 교체를 일으킨 특정 호출자는 trace 부재로 미확정이다. PR #71 통합·푸시는 완료했으며 native details hydration 경고는 별도 후속이다.
 
 ## Next
 
-통합본의 관련 회귀를 완료한 뒤 검수한 해시와 작업별 커밋을 기존 PR #71에 승인받은 정확한 lease로 푸시하고 같은 head의 원격 CI·CodeRabbit을 확인한다. native details hydration 경고와 최초 원격 교체 호출자는 미해결 범위로 유지한다. 운영 배포·NAS 변경은 하지 않으며 기존 다른 작업의 미커밋 문서4개·조사본·stash는 원래 위치에 보존한다.
+재현 절차 보완도 재검수·해시 갱신 후 별도 커밋으로 일반 fast-forward 푸시하고 새 head의 원격 CI·CodeRabbit을 확인한다. 비조상 예외는 앞선 PR #71 갱신1회에만 적용했으며 반복하지 않는다. 운영 배포·NAS 변경은 하지 않으며 기존 다른 작업의 미커밋 문서4개·조사본·stash는 원래 위치에 보존한다.

@@ -3,11 +3,11 @@
   "entries": [
     {
       "path": "docs/verification/resilience/2026-11-08-docs-tablet-filter-readiness.md",
-      "sha256": "49a7cf64b971e2fc9731ae14b8498da5e42154c4af943f84c484e9508a024164",
+      "sha256": "f6523a6803c2c2dfedba29ac1d0a3b1e31e14328e75badc6760a2acf992ee256",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-08",
-      "note": "사용자가 이번 태블릿 필터 수정의 코드·정제 문서 공개 검수·작업별 커밋·푸시와 기존 PR #71 반영을 승인함. 수정 전 실패·180회 통합 반복·관련81개와 기존 제외·native hydration 경고·원격 미검증 경계를 직접 읽고 비밀값·원시 응답·개인 경로·캡처가 없음을 검수함. 기존 공개 자료 재검수와 옛 head 백업 후 PR #71만 lease 갱신하는 승인 범위를 구분함. 다른 미커밋·원시 자료·NAS·토큰·main 병합·운영 배포는 제외함.",
+      "note": "사용자가 이번 태블릿 필터 수정의 코드·정제 문서 공개 검수·작업별 커밋·푸시와 기존 PR #71 반영을 승인함. 같은 보고서의 리뷰 보완으로 격리 red용 selector 한 줄·복원 조건, 실제 두 실패→두 통과·전체 태블릿10개 통과와 첫 head22검사 성공을 정제 추가해 재검수함. 직접 작성한 명령·기대 assertion·집계이며 비밀값·원시 응답·개인 경로·캡처는 없음. 과거 결과와 후속 CI·hydration 경고·미검증 경계를 구분함. 다른 미커밋·원시 자료·NAS·토큰·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -17,11 +17,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-08-docs-tablet-filter-readiness.md",
-      "sha256": "8e1e39f6a5001b2b16fc3097ad9101f78a1c1997798c6625083bda2adf654c18",
+      "sha256": "e97147aedd79ab36765ce2581b41929018f78d750b831cd55f452652d96f06c2",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-08",
-      "note": "사용자가 이번 태블릿 필터 수정의 코드·정제 문서 공개 검수·작업별 커밋·푸시와 기존 PR #71 반영을 승인함. 수정 전 실패·180회 통합 반복·관련81개와 기존 제외·native hydration 경고·원격 미검증 경계를 직접 읽고 비밀값·원시 응답·개인 경로·캡처가 없음을 검수함. 기존 공개 자료 재검수와 옛 head 백업 후 PR #71만 lease 갱신하는 승인 범위를 구분함. 다른 미커밋·원시 자료·NAS·토큰·main 병합·운영 배포는 제외함.",
+      "note": "사용자가 이번 태블릿 필터 수정의 코드·정제 문서 공개 검수·작업별 커밋·푸시와 기존 PR #71 반영을 승인함. 같은 작업 기록의 리뷰 재현 절차 보완·첫 head22검사 성공·격리 red/green 집계·일반 fast-forward 후속과 남은 hydration 경고를 직접 읽고 재검수함. 직접 작성한 정제 요약과 실제 공개 링크이며 비밀값·원시 응답·개인 경로·캡처는 없음. 기존 공개 자료 및 이번1회 승인된 PR71 이력 갱신과 후속 CI를 구분함. 다른 미커밋·원시 자료·NAS·토큰·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
