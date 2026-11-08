@@ -80,4 +80,62 @@ for (const locale of ['ko', 'en']) {
             await stream.dispose()
         }
     })
+
+    test(`${locale}: fallback filters cannot satisfy readiness before streamed results`, async ({
+        page,
+        baseURL,
+    }) => {
+        const target = new URL(
+            `/${locale}/docs?section=web&sort=title`,
+            baseURL
+        ).href
+        const stream = await holdDocsIndexCompletion(page, target)
+        try {
+            await page.goto(target, { waitUntil: 'commit' })
+            const pending = page.getByTestId('content-pending')
+            const fallback = pending.getByTestId('docs-index-filters')
+            await expect(fallback).toBeVisible()
+            await expect(fallback).not.toHaveAttribute('open')
+            await expect(
+                pending
+                    .getByTestId('docs-index-active-filters')
+                    .getByRole('link')
+            ).toHaveCount(2)
+            // An unchanged visible skeleton must not pass the production helper.
+            await expect(visibleDocsIndexFilters(page)).toHaveCount(0)
+            const fallbackNode = await fallback.elementHandle()
+            expect(fallbackNode).not.toBeNull()
+            stream.release()
+            await openDocsIndexFilters(page)
+            await expect(pending).toHaveCount(0)
+            expect(
+                await fallbackNode!.evaluate((node) => node.isConnected)
+            ).toBe(false)
+            await visibleDocsIndexFilters(page)
+                .locator('a[href*="sort=section"]')
+                .click()
+            await expect
+                .poll(() =>
+                    Object.fromEntries(new URL(page.url()).searchParams)
+                )
+                .toEqual({ section: 'web', sort: 'section' })
+            const active = page.locator(
+                'main:visible [data-testid="docs-index-active-filters"]'
+            )
+            await expect(active.getByRole('link')).toHaveText([
+                'Web',
+                locale === 'ko' ? '섹션순' : 'Section',
+            ])
+            await openDocsIndexFilters(page)
+            const summary = visibleDocsIndexFilters(page).locator('summary')
+            await summary.focus()
+            await expect(summary).toBeFocused()
+            await page.keyboard.press('Enter')
+            await expect(visibleDocsIndexFilters(page)).not.toHaveAttribute(
+                'open'
+            )
+        } finally {
+            await stream.dispose()
+        }
+    })
 }
