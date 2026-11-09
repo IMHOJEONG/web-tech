@@ -64,6 +64,8 @@ git diff --check
 
 ## 한계와 후속 작업
 
+2026-10-27에는 이 검사의 live React DOM 직접 교체가 늦은 hydration과 충돌하는 사례를 재현했다. 당시 결과는 그대로 보존하며 [격리 보완과 반복 검사](../resilience/2026-10-27-skeleton-runtime-isolation.md)를 후속 근거로 연결한다.
+
 production build·공개 배포·실제 느린 연결·Safari/Firefox·실기기·스크린 리더·Web Vitals CLS는 미검증이다. `pageerror` 0은 모든 console 경고가 없다는 뜻이 아니다. 캡처의 Next 개발 표시기는 운영 UI가 아니다.
 
 결과 수·빈 결과·제목 줄 수·필터 줄 수·이미지와 본문 길이에 따라 높이 차이는 남는다. 본문 전체나 푸터의 위치가 움직이지 않는다고 보장하지 않는다. 운영 전환에서 중요한 앵커가 계속 움직인다면 실제 데이터가 필요한 영역만 더 작은 경계로 나누는 후속 검토가 필요하다.

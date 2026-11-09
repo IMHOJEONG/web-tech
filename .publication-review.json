@@ -2,6 +2,160 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/architecture/docs-loading-ux-policy.md",
+      "sha256": "868a17dd0c06234743d8deb5d73b3773730edf7762e2b2afb60dfb7b8792aad6",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 문서·목차의 재검수·해시 등록을 명시 승인함. 기존 설명·실패 이력과 최신 main 통합·75개 기하 및 CPU 반복·관련 최초1실패와 재실행·경고·미검증 범위를 직접 검수함. 원시 로그·실제 응답·개인 경로·비밀값·캡처 없음. PR67 이력 재구성·1회 비조상 예외는 별도 승인 범위이며 다른 WIP·NAS·자격증명은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/knowledge/README.md",
+      "sha256": "ca09e7c3e44b296a69ed7cf470b3ba33aae90b6d4da6b61d4ea4fcf0bdd395c8",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 문서·목차의 재검수·해시 등록을 명시 승인함. 기존 설명·실패 이력과 최신 main 통합·75개 기하 및 CPU 반복·관련 최초1실패와 재실행·경고·미검증 범위를 직접 검수함. 원시 로그·실제 응답·개인 경로·비밀값·캡처 없음. PR67 이력 재구성·1회 비조상 예외는 별도 승인 범위이며 다른 WIP·NAS·자격증명은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/knowledge/docs-app/assets/hydration-dom-ownership.svg",
+      "sha256": "bd262e956cdcd42872024c9582473e315abafcb4c55b66013d5a2b66a6b4c027",
+      "kind": "asset",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 SVG의 재검수·해시 등록을 명시 승인함. 직접 만든 개념 도식이며 렌더·육안·title/desc·외부 참조0 확인. 실제 캡처·측정 시간표·원시 데이터·개인정보·비밀값 없음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/knowledge/docs-app/assets/hydration-readiness-timeline.svg",
+      "sha256": "be82c57ae8db97ef0469eaa5da6d96840d46ec2793987ad28f5557cbd73754cc",
+      "kind": "asset",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 SVG의 재검수·해시 등록을 명시 승인함. 직접 만든 개념 도식이며 렌더·육안·title/desc·외부 참조0 확인. 실제 캡처·측정 시간표·원시 데이터·개인정보·비밀값 없음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/knowledge/docs-app/hydration-readiness-and-dom-ownership.md",
+      "sha256": "306a1615855fa918fad55df2a135f414d6368fd15cd9aaebc517870174c0b555",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 문서·목차의 재검수·해시 등록을 명시 승인함. 기존 설명·실패 이력과 최신 main 통합·75개 기하 및 CPU 반복·관련 최초1실패와 재실행·경고·미검증 범위를 직접 검수함. 원시 로그·실제 응답·개인 경로·비밀값·캡처 없음. PR67 이력 재구성·1회 비조상 예외는 별도 승인 범위이며 다른 WIP·NAS·자격증명은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-10-19-page-skeletons-local.md",
+      "sha256": "4af8a691b2e5cde5c57565cc80ff7681ba647cc7a94752a2dd66ac2081d8d9dd",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 문서·목차의 재검수·해시 등록을 명시 승인함. 기존 설명·실패 이력과 최신 main 통합·75개 기하 및 CPU 반복·관련 최초1실패와 재실행·경고·미검증 범위를 직접 검수함. 원시 로그·실제 응답·개인 경로·비밀값·캡처 없음. PR67 이력 재구성·1회 비조상 예외는 별도 승인 범위이며 다른 WIP·NAS·자격증명은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-10-27-skeleton-live-dom-diagnostic.patch",
+      "sha256": "ec2531831d894a166d562c41571588a91af7d13ffb6cec65d0e035d86b07688b",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 정제 집계·직접 작성한 재현 patch의 재검수·해시 등록을 명시 승인함. 과거 수치·실패·한계와 짧게 정제된 합성 loopback 진단 서명을 확인함. 원본 전체 로그·trace·실제 API 응답·개인 경로·인증값·캡처는 없으며 새 원시 자료는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-10-27-skeleton-runtime-isolation.json",
+      "sha256": "4cdf10bf11cb8e595d7e7003a229e1c3e7727af62a978633288bcaa94111e01f",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 정제 집계·직접 작성한 재현 patch의 재검수·해시 등록을 명시 승인함. 과거 수치·실패·한계와 짧게 정제된 합성 loopback 진단 서명을 확인함. 원본 전체 로그·trace·실제 API 응답·개인 경로·인증값·캡처는 없으며 새 원시 자료는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-10-28-skeleton-main-recheck.json",
+      "sha256": "2ceee1904389e509daf427a4df4475590a7978ffbd89d13aafe9f57e5bffff14",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 정제 집계·직접 작성한 재현 patch의 재검수·해시 등록을 명시 승인함. 과거 수치·실패·한계와 짧게 정제된 합성 loopback 진단 서명을 확인함. 원본 전체 로그·trace·실제 API 응답·개인 경로·인증값·캡처는 없으며 새 원시 자료는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/resilience/2026-10-27-skeleton-runtime-isolation.md",
+      "sha256": "09c505db57cca617c7aa6a2c83375d28a04e431c8b42754686962b69cf17e4b5",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 문서·목차의 재검수·해시 등록을 명시 승인함. 기존 설명·실패 이력과 최신 main 통합·75개 기하 및 CPU 반복·관련 최초1실패와 재실행·경고·미검증 범위를 직접 검수함. 원시 로그·실제 응답·개인 경로·비밀값·캡처 없음. PR67 이력 재구성·1회 비조상 예외는 별도 승인 범위이며 다른 WIP·NAS·자격증명은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-27-skeleton-runtime-isolation.md",
+      "sha256": "0301217642b8c2b43de2e3770389f8458fe3a9880f43b7f6ea665fe3c958d4cf",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 문서·목차의 재검수·해시 등록을 명시 승인함. 기존 설명·실패 이력과 최신 main 통합·75개 기하 및 CPU 반복·관련 최초1실패와 재실행·경고·미검증 범위를 직접 검수함. 원시 로그·실제 응답·개인 경로·비밀값·캡처 없음. PR67 이력 재구성·1회 비조상 예외는 별도 승인 범위이며 다른 WIP·NAS·자격증명은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/verification/resilience/2026-11-08-docs-tablet-filter-readiness.md",
       "sha256": "f6523a6803c2c2dfedba29ac1d0a3b1e31e14328e75badc6760a2acf992ee256",
       "kind": "document",
@@ -31,11 +185,11 @@
     },
     {
       "path": "docs/knowledge/docs-app/README.md",
-      "sha256": "014c033aee4a685c923f80758605ccd851e5506536a1fc81931af70f3de690cf",
+      "sha256": "0ca45553add65a839c56c3517d40eabaf96ebcffe28f73ee9754f54ff3fc9a4f",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-08",
-      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 문서·목차의 재검수·해시 등록을 명시 승인함. 기존 설명·실패 이력과 최신 main 통합·75개 기하 및 CPU 반복·관련 최초1실패와 재실행·경고·미검증 범위를 직접 검수함. 원시 로그·실제 응답·개인 경로·비밀값·캡처 없음. PR67 이력 재구성·1회 비조상 예외는 별도 승인 범위이며 다른 WIP·NAS·자격증명은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -185,11 +339,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "40c1bce78553d4cd65f5752160579f531c2c17aa985a2205d1d485ab8c1331fa",
+      "sha256": "e6f63c4e9086cbd9cf8ba72305dcc4687e04c152bafc3e176a1277be6e9d3b5a",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-08",
-      "note": "사용자가 이번 태블릿 필터 수정의 코드·정제 문서 공개 검수·작업별 커밋·푸시와 기존 PR #71 반영을 승인함. 수정 전 실패·180회 통합 반복·관련81개와 기존 제외·native hydration 경고·원격 미검증 경계를 직접 읽고 비밀값·원시 응답·개인 경로·캡처가 없음을 검수함. 기존 공개 자료 재검수와 옛 head 백업 후 PR #71만 lease 갱신하는 승인 범위를 구분함. 다른 미커밋·원시 자료·NAS·토큰·main 병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 문서·목차의 재검수·해시 등록을 명시 승인함. 기존 설명·실패 이력과 최신 main 통합·75개 기하 및 CPU 반복·관련 최초1실패와 재실행·경고·미검증 범위를 직접 검수함. 원시 로그·실제 응답·개인 경로·비밀값·캡처 없음. PR67 이력 재구성·1회 비조상 예외는 별도 승인 범위이며 다른 WIP·NAS·자격증명은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -577,11 +731,11 @@
     },
     {
       "path": "docs/worklog/2026-10/README.md",
-      "sha256": "669e9095ff8681aac8106532f8ff7338381bead5cef42b02384270389c4c92e6",
+      "sha256": "cc239f4f09a3dddd4a077dd3b713895416cd9fbb25a054b375da34b86009818b",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-08",
-      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 문서·목차의 재검수·해시 등록을 명시 승인함. 기존 설명·실패 이력과 최신 main 통합·75개 기하 및 CPU 반복·관련 최초1실패와 재실행·경고·미검증 범위를 직접 검수함. 원시 로그·실제 응답·개인 경로·비밀값·캡처 없음. PR67 이력 재구성·1회 비조상 예외는 별도 승인 범위이며 다른 WIP·NAS·자격증명은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -689,11 +843,11 @@
     },
     {
       "path": "docs/verification/artifacts/README.md",
-      "sha256": "07537c38ab79dd9b886ec87a306f5217c89220a28923c0dd40a918727f7871a1",
+      "sha256": "b255be93e7536ecb353530d2a1d69b7bde09de58515e3060900a39bd0f082f61",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-08",
-      "note": "사용자가 PR #71의 기존 공개 문서와 정제 집계 JSON도 재검수·해시 등록하도록 명시 승인함. 직접 작성한 합성 회귀의 집계·실패 이력·명령·지식·목차를 읽고 비밀값·개인 실험 경로·원시 응답·캡처가 없음을 확인함. 기존 내용과 한계를 보존하고 Confluence는 같은 페이지의 비개인 경로로 연결함. 실제 NAS·토큰·원시 자료·다른 미커밋과 운영 변경은 제외함.",
+      "reviewedOn": "2026-11-09",
+      "note": "사용자가 PR #67 기존 공개 문서·목차의 재검수·해시 등록을 명시 승인함. 기존 설명·실패 이력과 최신 main 통합·75개 기하 및 CPU 반복·관련 최초1실패와 재실행·경고·미검증 범위를 직접 검수함. 원시 로그·실제 응답·개인 경로·비밀값·캡처 없음. PR67 이력 재구성·1회 비조상 예외는 별도 승인 범위이며 다른 WIP·NAS·자격증명은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

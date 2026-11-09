@@ -1,4 +1,5 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './helpers/skeleton-diagnostic'
+import { openSkeletonSnapshot } from './helpers/skeleton-snapshot'
 
 const screens = [
     {
@@ -74,7 +75,6 @@ for (const theme of ['light', 'dark'] as const) {
     for (const screen of screens) {
         test(`${theme} ${screen.path}: domain skeleton preserves page geometry`, async ({
             page,
-            browser,
         }, testInfo) => {
             const locale =
                 testInfo.project.name === 'chromium-tablet' ? 'en' : 'ko'
@@ -122,53 +122,14 @@ for (const theme of ['light', 'dark'] as const) {
                 .locator(screen.ready)
                 .first()
                 .evaluate((el) => el.getBoundingClientRect().top)
-            // Render a detached snapshot so React cannot repair test-only DOM edits.
-            const frozenHtml = await page.evaluate(
-                ({ html, kind }) => {
-                    const parsed = new DOMParser().parseFromString(
-                        html,
-                        'text/html'
-                    )
-                    const pending = parsed.querySelector(
-                        `[data-page-pending="${kind}"]`
-                    )
-                    if (!pending)
-                        throw new Error(`Missing server skeleton: ${kind}`)
-                    const snapshot = new DOMParser().parseFromString(
-                        document.documentElement.outerHTML,
-                        'text/html'
-                    )
-                    const main = snapshot.querySelector('main')!
-                    const target =
-                        kind === 'article' ? main.parentElement! : main
-                    target.replaceWith(snapshot.importNode(pending, true))
-                    snapshot
-                        .querySelectorAll('script')
-                        .forEach((s) => s.remove())
-                    return (
-                        '<!doctype html>' + snapshot.documentElement.outerHTML
-                    )
-                },
-                { html, kind: screen.kind }
+            const frozen = await openSkeletonSnapshot(
+                page,
+                html,
+                screen.kind,
+                theme
             )
-            const context = await browser.newContext({
-                viewport: page.viewportSize()!,
-                colorScheme: theme,
-                reducedMotion: 'reduce',
-                javaScriptEnabled: false,
-            })
+            frozen.on('pageerror', (error) => errors.push(error.message))
             try {
-                const frozen = await context.newPage()
-                await frozen.route(
-                    (url) => url.href === page.url(),
-                    (route) =>
-                        route.fulfill({
-                            contentType: 'text/html',
-                            body: frozenHtml,
-                        })
-                )
-                await frozen.goto(page.url())
-                await frozen.evaluate(() => document.fonts.ready)
                 const pending = frozen.locator(
                     `[data-page-pending="${screen.kind}"]`
                 )
@@ -259,7 +220,7 @@ for (const theme of ['light', 'dark'] as const) {
                         caret: 'initial',
                     })
             } finally {
-                await context.close()
+                await frozen.close()
             }
         })
     }

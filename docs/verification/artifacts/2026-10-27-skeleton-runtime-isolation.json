@@ -1,0 +1,724 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "timezone": "Asia/Seoul",
+  "state": "local-uncommitted",
+  "issue": "KAN-40",
+  "baseCommit": "e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e",
+  "branch": "codex/docs-skeleton-stability-20261027",
+  "environment": {
+    "node": "24.12.0",
+    "pnpm": "12.14.0",
+    "next": "16.4.3",
+    "playwright": "1.62.1",
+    "server": "development",
+    "remoteIndex": false,
+    "workers": 2,
+    "retries": 0
+  },
+  "upstreamEvidence": {
+    "run": 40352593284,
+    "job": 121676369322,
+    "desktop": {
+      "passed": 120,
+      "skipped": 16,
+      "flaky": 2
+    },
+    "flakyCases": ["light /feed", "light /mobile"],
+    "originalFailureTraceAvailable": false
+  },
+  "unchangedCriteria": {
+    "testTimeoutMs": 30000,
+    "expectTimeoutMs": 5000,
+    "overflowTolerancePx": 1,
+    "mainLeftWidthTitleTolerancePx": 1,
+    "constrainedAnchorTolerancePx": 2,
+    "reducedMotionAnimationCount": 0,
+    "statusCount": 1,
+    "nonEmptyStatus": true,
+    "pageErrors": 0,
+    "appCodeChanged": false,
+    "ciConfigChanged": false,
+    "dependenciesChanged": false
+  },
+  "sourceGitBlobs": {
+    "apps/docs/e2e/page-skeletons.spec.ts": "945dce3a76d38a70085ce6650d7344a39869e0eb",
+    "apps/docs/e2e/helpers/skeleton-diagnostic.ts": "49bf0d12b9a1cc53c010bf4522ced08b00a7e3de",
+    "apps/docs/e2e/helpers/skeleton-snapshot.ts": "1846a9f44906c38147ffd4fe4ed2be8049c02905",
+    "apps/docs/e2e/skeleton-snapshot.spec.ts": "95c60c627e9df8295bc4aa77fee7904f5caf8992"
+  },
+  "reproductionPatchCheck": {
+    "baseCommit": "e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e",
+    "command": "git apply --unidiff-zero --check 2026-10-27-skeleton-live-dom-diagnostic.patch",
+    "result": "passed",
+    "isolatedWorktreeRemoved": true
+  },
+  "runs": [
+    {
+      "name": "baseline-two-routes",
+      "rawReportSha256": "8ea15b2aa67dacd7ac7669b8a8fb63fd0171d368331f5b8682552d86676daa4c",
+      "stats": {
+        "startTime": "2026-10-27T00:42:17.215Z",
+        "duration": 26948.253,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "retries": 0,
+      "attempts": 20,
+      "runnerErrors": 0,
+      "byProject": {
+        "chromium-desktop": {
+          "expected": 20,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        }
+      },
+      "failures": [],
+      "geometry": {
+        "samples": 20,
+        "maxLeftDelta": 0,
+        "maxWidthDelta": 0,
+        "maxOverflow": 0,
+        "maxAnimations": 0,
+        "maxConstrainedAnchorDelta": null
+      }
+    },
+    {
+      "name": "baseline-two-routes-cpu6",
+      "rawReportSha256": "ef1c853e4c43330822f1dcd98a0b11588ca253deb0e3a0b5e41aed70defdaaca",
+      "stats": {
+        "startTime": "2026-10-27T00:44:43.100Z",
+        "duration": 35951.16299999999,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "retries": 0,
+      "attempts": 20,
+      "runnerErrors": 0,
+      "byProject": {
+        "chromium-desktop": {
+          "expected": 20,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        }
+      },
+      "failures": [],
+      "geometry": {
+        "samples": 20,
+        "maxLeftDelta": 0,
+        "maxWidthDelta": 0,
+        "maxOverflow": 0,
+        "maxAnimations": 0,
+        "maxConstrainedAnchorDelta": null
+      }
+    },
+    {
+      "name": "baseline-cross-route-cpu6",
+      "rawReportSha256": "1ed2d543b48563bc4514e8479b740752e2e9788286ce042eeb72e73ff0b7079f",
+      "stats": {
+        "startTime": "2026-10-27T00:46:01.994Z",
+        "duration": 120922.80900000001,
+        "expected": 62,
+        "skipped": 0,
+        "unexpected": 7,
+        "flaky": 0
+      },
+      "retries": 0,
+      "attempts": 69,
+      "runnerErrors": 0,
+      "byProject": {
+        "chromium-desktop": {
+          "expected": 62,
+          "unexpected": 7,
+          "skipped": 0,
+          "flaky": 0
+        }
+      },
+      "failures": [
+        {
+          "title": "dark /mobile: domain skeleton preserves page geometry",
+          "project": "chromium-desktop",
+          "status": "failed",
+          "signature": "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  -  1\n+ Received  + 44\n\n- Array []\n+ Array [\n+   \"Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on",
+          "hydrationReferencesInjectedPending": true,
+          "resourceWait": null,
+          "observation": {
+            "events": [
+              "[HMR] connected",
+              "[Fast Refresh] rebuilding",
+              "[Fast Refresh] done in 121ms"
+            ],
+            "pending": 0,
+            "main": true,
+            "removedAtMs": [
+              310.7999999523163, 310.7999999523163, 311.2999999523163, 2018
+            ]
+          }
+        },
+        {
+          "title": "light /category/fe: domain skeleton preserves page geometry",
+          "project": "chromium-desktop",
+          "status": "timedOut",
+          "signature": "Test timeout of 30000ms exceeded.\nError: locator.evaluate: Test timeout of 30000ms exceeded.\nCall log:\n  - waiting for locator('[data-page-pending=\"category-main\"]').locator('[data-skeleton-anchor=\"category-results\"]').first()\n\n\n  182 |    ",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": null,
+          "observation": {
+            "events": [
+              "[HMR] connected",
+              "[Fast Refresh] rebuilding",
+              "[Fast Refresh] done in 210ms",
+              "[Fast Refresh] rebuilding",
+              "[Fast Refresh] done in 159ms"
+            ],
+            "pending": 0,
+            "main": true,
+            "removedAtMs": [218.90000009536743, 1965.4000000953674]
+          }
+        },
+        {
+          "title": "light /category/fe/react: domain skeleton preserves page geometry",
+          "project": "chromium-desktop",
+          "status": "failed",
+          "signature": "Error: expect(locator).toHaveAttribute(expected) failed\n\nLocator: locator('[data-page-pending=\"category-sub\"]')\nExpected: \"true\"\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toHaveAttribute\" with timeout 5000ms\n  - wai",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": null,
+          "observation": {
+            "events": ["[HMR] connected"],
+            "pending": 0,
+            "main": true,
+            "removedAtMs": [377.90000009536743, 1840.5999999046326]
+          }
+        },
+        {
+          "title": "dark /mobile: domain skeleton preserves page geometry",
+          "project": "chromium-desktop",
+          "status": "failed",
+          "signature": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: 0\nReceived: 42\n\n  171 |             })\n  172 |             expect(after.pageWidth).toBeLessThanOrEqual(after.viewport + 1)\n> 173 |             expect(after.animations).",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": null,
+          "observation": {
+            "events": ["[HMR] connected"],
+            "pending": 0,
+            "main": true,
+            "removedAtMs": [
+              220.69999980926514, 221.79999995231628, 221.79999995231628,
+              1809.3999998569489
+            ]
+          }
+        },
+        {
+          "title": "dark /ui-ux: domain skeleton preserves page geometry",
+          "project": "chromium-desktop",
+          "status": "failed",
+          "signature": "Error: expect(received).toBeLessThanOrEqual(expected)\n\nExpected: <= 2\nReceived:    405\n\n  189 |                 screen.kind === 'category-index'\n  190 |             )\n> 191 |                 expect(Math.abs(delta)).toBeLessThanOrEqual(2)\n  ",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": null,
+          "observation": {
+            "events": ["[HMR] connected"],
+            "pending": 0,
+            "main": true,
+            "removedAtMs": [154.59999990463257, 1865]
+          }
+        },
+        {
+          "title": "dark /mobile: domain skeleton preserves page geometry",
+          "project": "chromium-desktop",
+          "status": "failed",
+          "signature": "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  -  1\n+ Received  + 44\n\n- Array []\n+ Array [\n+   \"Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on",
+          "hydrationReferencesInjectedPending": true,
+          "resourceWait": null,
+          "observation": {
+            "events": ["[HMR] connected"],
+            "pending": 0,
+            "main": true,
+            "removedAtMs": [
+              216.29999995231628, 217.29999995231628, 217.40000009536743,
+              1887.2999999523163
+            ]
+          }
+        },
+        {
+          "title": "dark /ui-ux: domain skeleton preserves page geometry",
+          "project": "chromium-desktop",
+          "status": "failed",
+          "signature": "Error: expect(received).toBeLessThanOrEqual(expected)\n\nExpected: <= 2\nReceived:    405\n\n  189 |                 screen.kind === 'category-index'\n  190 |             )\n> 191 |                 expect(Math.abs(delta)).toBeLessThanOrEqual(2)\n  ",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": null,
+          "observation": {
+            "events": ["[HMR] connected"],
+            "pending": 0,
+            "main": true,
+            "removedAtMs": [217, 1948.7000000476837]
+          }
+        }
+      ],
+      "geometry": {
+        "samples": 59,
+        "maxLeftDelta": 0,
+        "maxWidthDelta": 0,
+        "maxOverflow": 0,
+        "maxAnimations": 0,
+        "maxConstrainedAnchorDelta": 0
+      }
+    },
+    {
+      "name": "initial-isolation",
+      "rawReportSha256": "de9c51dd12350642201164fe1f3028da871d03582b65799924be3215d4451488",
+      "stats": {
+        "startTime": "2026-10-27T00:49:21.908Z",
+        "duration": 118187.844,
+        "expected": 72,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "retries": 0,
+      "attempts": 75,
+      "runnerErrors": 0,
+      "byProject": {
+        "chromium-desktop": {
+          "expected": 72,
+          "unexpected": 3,
+          "skipped": 0,
+          "flaky": 0
+        }
+      },
+      "failures": [
+        {
+          "title": "dark /docs/web/javascript-event-loop-runtime: domain skeleton preserves page geometry",
+          "project": "chromium-desktop",
+          "status": "timedOut",
+          "signature": "Test timeout of 30000ms exceeded.\nError: page.goto: Test timeout of 30000ms exceeded.\nCall log:\n  - navigating to \"http://127.0.0.1:3027/ko/docs/web/javascript-event-loop-runtime\", waiting until \"load\"\n\n\n   at helpers/skeleton-snapshot.ts:5",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": null,
+          "observation": {
+            "events": ["[HMR] connected"],
+            "pending": 0,
+            "main": true,
+            "removedAtMs": [256.59999990463257]
+          }
+        },
+        {
+          "title": "server skeleton snapshot survives source updates without running app scripts",
+          "project": "chromium-desktop",
+          "status": "failed",
+          "signature": "Error: expect(locator).toHaveJSProperty(expected) failed\n\nLocator:  locator('main')\nExpected: \"<main id=\\\"main-content\\\" tabindex=\\\"-1\\\" class=\\\"scroll-mt-[max(5rem,calc(var(--docs-header-height,4.0625rem)+1rem))] motion-layout w-full bg-[l",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": null,
+          "observation": null
+        },
+        {
+          "title": "server skeleton snapshot survives source updates without running app scripts",
+          "project": "chromium-desktop",
+          "status": "failed",
+          "signature": "Error: expect(locator).toHaveJSProperty(expected) failed\n\nLocator:  locator('main')\nExpected: \"<main id=\\\"main-content\\\" tabindex=\\\"-1\\\" class=\\\"scroll-mt-[max(5rem,calc(var(--docs-header-height,4.0625rem)+1rem))] motion-layout w-full bg-[l",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": null,
+          "observation": null
+        }
+      ],
+      "geometry": {
+        "samples": 65,
+        "maxLeftDelta": 0,
+        "maxWidthDelta": 0,
+        "maxOverflow": 0,
+        "maxAnimations": 0,
+        "maxConstrainedAnchorDelta": 0
+      }
+    },
+    {
+      "name": "pre-cssom-cpu6",
+      "rawReportSha256": "d4f891b4264b8428fc39f08b09862b2c6323c5c96b09e24788fffc2888d5e428",
+      "stats": {
+        "startTime": "2026-10-27T00:52:05.684Z",
+        "duration": 94377.899,
+        "expected": 75,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "retries": 0,
+      "attempts": 75,
+      "runnerErrors": 0,
+      "byProject": {
+        "chromium-desktop": {
+          "expected": 75,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        }
+      },
+      "failures": [],
+      "geometry": {
+        "samples": 66,
+        "maxLeftDelta": 0,
+        "maxWidthDelta": 0,
+        "maxOverflow": 0,
+        "maxAnimations": 0,
+        "maxConstrainedAnchorDelta": 0
+      }
+    },
+    {
+      "name": "pre-cssom-related",
+      "rawReportSha256": "df38d52575385e22cd2aee37ac880973b6740f46576e37a0aaac936213d237ec",
+      "stats": {
+        "startTime": "2026-10-27T00:54:57.356Z",
+        "duration": 161736.093,
+        "expected": 184,
+        "skipped": 12,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "retries": 0,
+      "attempts": 198,
+      "runnerErrors": 0,
+      "byProject": {
+        "chromium-mobile": {
+          "expected": 63,
+          "unexpected": 0,
+          "skipped": 3,
+          "flaky": 0
+        },
+        "chromium-tablet": {
+          "expected": 60,
+          "unexpected": 0,
+          "skipped": 6,
+          "flaky": 0
+        },
+        "chromium-desktop": {
+          "expected": 61,
+          "unexpected": 2,
+          "skipped": 3,
+          "flaky": 0
+        }
+      },
+      "failures": [
+        {
+          "title": "light /docs: domain skeleton preserves page geometry",
+          "project": "chromium-desktop",
+          "status": "timedOut",
+          "signature": "Test timeout of 30000ms exceeded.\nError: page.goto: Test timeout of 30000ms exceeded.\nCall log:\n  - navigating to \"http://127.0.0.1:3027/ko/docs\", waiting until \"load\"\n\n\n   at helpers/skeleton-snapshot.ts:63\n\n  61 |             { times: 1 }",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": null,
+          "observation": {
+            "events": ["[HMR] connected"],
+            "pending": 0,
+            "main": true,
+            "removedAtMs": [466.60000014305115]
+          }
+        },
+        {
+          "title": "light /docs?q=stream&tag=nodejs: domain skeleton preserves page geometry",
+          "project": "chromium-desktop",
+          "status": "timedOut",
+          "signature": "Test timeout of 30000ms exceeded.\nError: page.goto: Test timeout of 30000ms exceeded.\nCall log:\n  - navigating to \"http://127.0.0.1:3027/ko/docs?q=stream&tag=nodejs\", waiting until \"load\"\n\n\n   at helpers/skeleton-snapshot.ts:63\n\n  61 |     ",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": null,
+          "observation": {
+            "events": ["[HMR] connected"],
+            "pending": 0,
+            "main": true,
+            "removedAtMs": [358.7000000476837]
+          }
+        }
+      ],
+      "geometry": {
+        "samples": 64,
+        "maxLeftDelta": 0,
+        "maxWidthDelta": 0,
+        "maxOverflow": 0,
+        "maxAnimations": 0,
+        "maxConstrainedAnchorDelta": 0
+      }
+    },
+    {
+      "name": "css-request-diagnostic",
+      "rawReportSha256": "b812ae24afb14c12c1762eb65740ecbbbf584af0e49e3b97baaef94814d696bd",
+      "stats": {
+        "startTime": "2026-10-27T00:59:00.595Z",
+        "duration": 48228.18,
+        "expected": 45,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "retries": 0,
+      "attempts": 46,
+      "runnerErrors": 0,
+      "byProject": {
+        "chromium-desktop": {
+          "expected": 45,
+          "unexpected": 1,
+          "skipped": 0,
+          "flaky": 0
+        }
+      },
+      "failures": [
+        {
+          "title": "dark /ui-ux: domain skeleton preserves page geometry",
+          "project": "chromium-desktop",
+          "status": "timedOut",
+          "signature": "Test timeout of 30000ms exceeded.\nError: Skeleton snapshot failed; outstanding resources: [\"stylesheet:/_next/static/chunks/apps_docs_0r62bz0_6vso1._.css\"]\n\n   at helpers/skeleton-snapshot.ts:75\n\n  73 |         await frozen.goto(source.url(",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": "[\"stylesheet:/_next/static/chunks/apps_docs_0r62bz0_6vso1._.css\"]",
+          "observation": {
+            "events": ["[HMR] connected"],
+            "pending": 0,
+            "main": true,
+            "removedAtMs": [213.09999990463257]
+          }
+        }
+      ],
+      "geometry": {
+        "samples": 43,
+        "maxLeftDelta": 0,
+        "maxWidthDelta": 0,
+        "maxOverflow": 0,
+        "maxAnimations": 0,
+        "maxConstrainedAnchorDelta": 0
+      }
+    },
+    {
+      "name": "final-cssom-cpu6",
+      "rawReportSha256": "5ebf58a57c78ddec46dec00e58e20ccb052112a6a35039eaac4533fdc847eed8",
+      "stats": {
+        "startTime": "2026-10-27T01:01:58.248Z",
+        "duration": 132856.843,
+        "expected": 75,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "retries": 0,
+      "attempts": 75,
+      "runnerErrors": 0,
+      "byProject": {
+        "chromium-desktop": {
+          "expected": 75,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        }
+      },
+      "failures": [],
+      "geometry": {
+        "samples": 66,
+        "maxLeftDelta": 0,
+        "maxWidthDelta": 0,
+        "maxOverflow": 0,
+        "maxAnimations": 0,
+        "maxConstrainedAnchorDelta": 0
+      }
+    },
+    {
+      "name": "final-related",
+      "rawReportSha256": "b3c4d2f1d641869f2b8bb6554aec873888ee8e1804776e97dc567aef523d0c38",
+      "stats": {
+        "startTime": "2026-10-27T01:05:21.791Z",
+        "duration": 274434.06,
+        "expected": 184,
+        "skipped": 12,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "retries": 0,
+      "attempts": 198,
+      "runnerErrors": 0,
+      "byProject": {
+        "chromium-mobile": {
+          "expected": 63,
+          "unexpected": 0,
+          "skipped": 3,
+          "flaky": 0
+        },
+        "chromium-tablet": {
+          "expected": 59,
+          "unexpected": 1,
+          "skipped": 6,
+          "flaky": 0
+        },
+        "chromium-desktop": {
+          "expected": 62,
+          "unexpected": 1,
+          "skipped": 3,
+          "flaky": 0
+        }
+      },
+      "failures": [
+        {
+          "title": "en: collapsed filters keep selections visible and independently clearable",
+          "project": "chromium-tablet",
+          "status": "failed",
+          "signature": "Error: expect(locator).not.toHaveAttribute() failed\n\nLocator:  locator('[data-testid=\"docs-index-filters\"]:visible')\nExpected: not have attribute\nReceived: have attribute\nTimeout:  5000ms\n\nCall log:\n  - Expect \"not toHaveAttribute\" with tim",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": null,
+          "observation": null
+        },
+        {
+          "title": "light /docs?section=web&sort=title&tag=react&collection=react-boundaries: domain skeleton preserves page geometry",
+          "project": "chromium-desktop",
+          "status": "timedOut",
+          "signature": "Test timeout of 30000ms exceeded.\nError: Skeleton snapshot failed; outstanding resources: [\"font:/_next/static/media/PretendardVariable-s.p.2w7us7zar3i7_.woff2\"]\n\n   at helpers/skeleton-snapshot.ts:117\n\n  115 |         const resources = [..",
+          "hydrationReferencesInjectedPending": false,
+          "resourceWait": "[\"font:/_next/static/media/PretendardVariable-s.p.2w7us7zar3i7_.woff2\"]",
+          "observation": {
+            "events": ["[HMR] connected"],
+            "pending": 0,
+            "main": true,
+            "removedAtMs": [735]
+          }
+        }
+      ],
+      "geometry": {
+        "samples": 65,
+        "maxLeftDelta": 0,
+        "maxWidthDelta": 0,
+        "maxOverflow": 0,
+        "maxAnimations": 0,
+        "maxConstrainedAnchorDelta": 0
+      }
+    },
+    {
+      "name": "final-font-replay-matrix",
+      "rawReportSha256": "6e06a8f4fc257a6e62874f33d7bec5d98816e022a84be2d1514cfe5662e96a59",
+      "stats": {
+        "startTime": "2026-10-27T01:12:28.650Z",
+        "duration": 51899.123999999996,
+        "expected": 75,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "retries": 0,
+      "attempts": 75,
+      "runnerErrors": 0,
+      "byProject": {
+        "chromium-mobile": {
+          "expected": 25,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        },
+        "chromium-tablet": {
+          "expected": 25,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        },
+        "chromium-desktop": {
+          "expected": 25,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        }
+      },
+      "failures": [],
+      "geometry": {
+        "samples": 66,
+        "maxLeftDelta": 0,
+        "maxWidthDelta": 0,
+        "maxOverflow": 0,
+        "maxAnimations": 0,
+        "maxConstrainedAnchorDelta": 0
+      }
+    },
+    {
+      "name": "final-font-replay-related",
+      "rawReportSha256": "cbc34a65bf8f5949a50e509aa963ba808bb19a5f60bbc8d2ae2281494f60262d",
+      "stats": {
+        "startTime": "2026-10-27T01:14:17.260Z",
+        "duration": 130887.23499999999,
+        "expected": 186,
+        "skipped": 12,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "retries": 0,
+      "attempts": 198,
+      "runnerErrors": 0,
+      "byProject": {
+        "chromium-mobile": {
+          "expected": 63,
+          "unexpected": 0,
+          "skipped": 3,
+          "flaky": 0
+        },
+        "chromium-tablet": {
+          "expected": 60,
+          "unexpected": 0,
+          "skipped": 6,
+          "flaky": 0
+        },
+        "chromium-desktop": {
+          "expected": 63,
+          "unexpected": 0,
+          "skipped": 3,
+          "flaky": 0
+        }
+      },
+      "failures": [],
+      "geometry": {
+        "samples": 66,
+        "maxLeftDelta": 0,
+        "maxWidthDelta": 0,
+        "maxOverflow": 0,
+        "maxAnimations": 0,
+        "maxConstrainedAnchorDelta": 0
+      }
+    },
+    {
+      "name": "final-font-replay-cpu6",
+      "rawReportSha256": "de6d391d477b4210c48919a137e9616f091f4afc90e24f90955f2e50e0ec178e",
+      "stats": {
+        "startTime": "2026-10-27T01:17:06.582Z",
+        "duration": 102244.94,
+        "expected": 75,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "retries": 0,
+      "attempts": 75,
+      "runnerErrors": 0,
+      "byProject": {
+        "chromium-desktop": {
+          "expected": 75,
+          "unexpected": 0,
+          "skipped": 0,
+          "flaky": 0
+        }
+      },
+      "failures": [],
+      "geometry": {
+        "samples": 66,
+        "maxLeftDelta": 0,
+        "maxWidthDelta": 0,
+        "maxOverflow": 0,
+        "maxAnimations": 0,
+        "maxConstrainedAnchorDelta": 0
+      }
+    }
+  ],
+  "limits": [
+    "Local hydration failure explicitly includes test-injected pending/status markup; exact upstream mutator stack was not captured.",
+    "CPU throttling is a scheduling experiment, not production performance.",
+    "Geometry attachments exist only after the full assertion block succeeds; failures are retained separately.",
+    "Pre-CSSOM 75-pass run is intermediate, not the final implementation result.",
+    "Initial source HTML string-equality failures included legitimate Next Image placeholder changes; main node identity now verifies non-destructive cloning.",
+    "No remote CI rerun, commit, push, PR, deployment, NAS operation, or credential change in this task.",
+    "An unchanged tablet filter Enter assertion failed once in intermediate expanded testing and passed in final expanded testing; its root cause remains a separate follow-up."
+  ],
+  "validation": {
+    "typecheck": "passed",
+    "changedFileEslint": "passed --max-warnings=0",
+    "standardIndexModified": false,
+    "protectedOriginalFilesMatched": true,
+    "docAndFormatChecks": "passed via isolated GIT_INDEX_FILE; actual index unchanged"
+  }
+}
