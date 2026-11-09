@@ -100,6 +100,8 @@
 
 - [10-19 페이지별 스켈레톤 로컬 검증](accessibility/2026-10-19-page-skeletons-local.md): 실제 서버 골격·완성 화면의 기하 비교와 검색·피드 회귀. 운영 CLS는 미검증.
 
+- [10-27 스켈레톤 런타임 경합](resilience/2026-10-27-skeleton-runtime-isolation.md): live DOM 교체와 hydration 충돌 재현·별도 측정 페이지, 기존 검사 기준 유지.
+
 - [10-19 문서 목록 우선 배치 로컬 검증](accessibility/2026-10-19-docs-index-order-local.md): 목록 위치·선택 해제·검색/페이지 이동 회귀, 69개와 재검사 12개·화면 26조건 통과. 공개 배포 미검증.
 
 - [10-27 문서 필터 준비 상태](resilience/2026-10-27-docs-filter-readiness.md): 실제 스트림 보류·골격/완성 결과 구분·ko/en 클릭/키보드 회귀, 10-28 main 기반 분리.
