@@ -363,7 +363,12 @@ async function main() {
     assert.ok(attempt < 100, "Postgres readiness timed out");
     await delay(100);
   }
-  const databaseUrl = `postgresql://postgres:${password}@127.0.0.1:${databasePort}/integration_fixture`;
+  const databaseAddress = new URL(
+    `postgresql://127.0.0.1:${databasePort}/integration_fixture`,
+  );
+  databaseAddress.username = "postgres";
+  databaseAddress.password = password;
+  const databaseUrl = databaseAddress.toString();
   backendEnv = {
     ...process.env,
     DATABASE_URL: databaseUrl,
@@ -1285,6 +1290,79 @@ async function main() {
           ),
         );
         const overview = await api("overview", true);
+        await check(
+          "full DB feed search, literal query and stable server pages beyond legacy 25",
+          async () => {
+            const first = await api("feed/search?page=1", true);
+            const second = await api("feed/search?page=2", true);
+            assert.equal(first.pagination.total, 43);
+            assert.equal(first.items.length, 25);
+            assert.equal(second.items.length, 18);
+            assert.equal(second.pagination.totalPages, 2);
+            const seen = new Set(
+              first.items.map((item: { cveId: string }) => item.cveId),
+            );
+            assert.ok(
+              second.items.every(
+                (item: { cveId: string }) => !seen.has(item.cveId),
+              ),
+            );
+            const outside = await api("feed/search?q=" + ids.beta, true);
+            assert.equal(outside.pagination.total, 1);
+            assert.equal(outside.items[0].cveId, ids.beta);
+            const empty = await api(
+              "feed/search?q=nonexistent-synthetic-needle",
+              true,
+            );
+            assert.equal(empty.pagination.total, 0);
+            assert.equal(empty.dataSource.kind, "database");
+            assert.deepEqual(empty.items, []);
+            await prisma!.vulnerability.update({
+              where: { cveId: extraIds[0] },
+              data: { title: "Literal 100%_marker" },
+            });
+            for (const literal of ["%", "_", "%_"]) {
+              const result = await api(
+                "feed/search?q=" + encodeURIComponent(literal),
+                true,
+              );
+              assert.equal(result.pagination.total, 1);
+              assert.equal(result.items[0].cveId, extraIds[0]);
+            }
+            for (const width of [1280, 390]) {
+              await current.setViewportSize({ width, height: 900 });
+              await current.goto(frontendOrigin + "/feed?page=2");
+              const pages = current.getByRole("navigation", {
+                name: "검색 결과 페이지",
+              });
+              await expect(pages.getByRole("status")).toContainText("2 / 2");
+              await expect(
+                pages.getByRole("button", { name: "다음", exact: true }),
+              ).toBeDisabled();
+              await pages
+                .getByRole("button", { name: "이전", exact: true })
+                .click();
+              await expect(pages.getByRole("status")).toContainText("1 / 2");
+              await current.getByRole("textbox").fill(ids.beta);
+              await expect(
+                current.getByText(ids.beta, { exact: true }),
+              ).toBeVisible();
+              await expect(current).toHaveURL(/page=1/);
+              await current.reload();
+              await expect(current.getByRole("textbox")).toHaveValue(ids.beta);
+              await expect(
+                current.getByText(ids.beta, { exact: true }),
+              ).toBeVisible();
+              await current.goBack();
+              await expect(pages.getByRole("status")).toContainText("2 / 2");
+              assert.ok(
+                await current.evaluate(
+                  () => document.documentElement.scrollWidth <= innerWidth,
+                ),
+              );
+            }
+          },
+        );
         const counts = Object.fromEntries(
           overview.cards.map((card: { id: string; value: number }) => [
             card.id,
@@ -1551,10 +1629,21 @@ async function main() {
         outagePage.getByText(ids.alpha, { exact: true }),
       ).toBeVisible();
       await outagePage.getByRole("textbox").fill("integration");
+      const searched = outagePage.waitForResponse(
+        (response) =>
+          new URL(response.url()).pathname === "/api/backend/feed/search" &&
+          new URL(response.url()).searchParams.get("q") === "integration" &&
+          response.status() === 200,
+      );
+      await outagePage.clock.runFor(350);
+      await searched;
+      await expect(
+        outagePage.getByText(ids.alpha, { exact: true }),
+      ).toBeVisible();
       let failures = 0;
       outagePage.on("response", (response) => {
         if (
-          response.url().endsWith("/api/backend/feed") &&
+          new URL(response.url()).pathname === "/api/backend/feed/search" &&
           response.status() >= 500
         )
           failures++;
@@ -1567,7 +1656,9 @@ async function main() {
       await expect.poll(() => failures).toBe(1);
       await outagePage.clock.runFor(2_000);
       await expect.poll(() => failures).toBe(2);
-      await expect(outagePage.getByRole("status")).toHaveText(warning);
+      await expect(
+        outagePage.getByRole("status").filter({ hasText: warning }),
+      ).toHaveText(warning);
       await expect(
         outagePage.getByText(ids.alpha, { exact: true }),
       ).toBeVisible();
@@ -1610,7 +1701,9 @@ async function main() {
           exact: true,
         }),
       ).toBeVisible();
-      await expect(outagePage.getByRole("status")).toHaveCount(0);
+      await expect(
+        outagePage.getByRole("status").filter({ hasText: warning }),
+      ).toHaveCount(0);
       await expect(outagePage.getByRole("textbox")).toHaveValue("integration");
       await outagePage.close();
       outagePage = undefined;
@@ -1654,7 +1747,7 @@ async function main() {
     },
   );
   await check(
-    "actual Nest no-database fallback remains explicit and renders unknown reliability",
+    "legacy no-database fallback stays explicit while full search refuses fabricated results",
     async () => {
       await stop(backend);
       await startBackend(false);
@@ -1670,10 +1763,13 @@ async function main() {
       const current = await page();
       try {
         await current.goto(`${frontendOrigin}/feed`);
-        await expect(current.getByText("MOCK", { exact: true })).toBeVisible();
+        await expect(
+          current.getByRole("heading", { name: fullError, exact: true }),
+        ).toBeVisible();
+        await expect(current.getByText("MOCK", { exact: true })).toHaveCount(0);
         await expect(
           current.getByText(feed.items[0].cveId, { exact: true }),
-        ).toBeVisible();
+        ).toHaveCount(0);
       } finally {
         await current.close();
       }
