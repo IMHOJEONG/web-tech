@@ -7,6 +7,8 @@ import type {
 } from "../model/feed-filters";
 
 interface FeedFilterBarProps {
+  pending?: boolean;
+  pendingLabel?: string;
   filters: FeedFilters;
   onFiltersChange: (filters: FeedFilters) => void;
   resultCount: number;
@@ -26,6 +28,8 @@ const severityOptions = ["all", "critical", "high", "medium", "low"] as const;
 const kevOptions = ["all", "kev"] as const;
 
 export function FeedFilterBar({
+  pending,
+  pendingLabel,
   filters,
   labels,
   onFiltersChange,
@@ -39,13 +43,16 @@ export function FeedFilterBar({
             {labels.title}
           </p>
           <p className="mt-2 font-mono text-xs text-radar-copy/62">
-            {labels.resultCount.replace("{{count}}", String(resultCount))}
+            {pending
+              ? pendingLabel
+              : labels.resultCount.replace("{{count}}", String(resultCount))}
           </p>
         </div>
 
         <label className="grid w-full gap-2 lg:max-w-[360px]">
           <span className="sr-only">{labels.searchPlaceholder}</span>
           <input
+            maxLength={120}
             value={filters.query}
             onChange={(event) =>
               onFiltersChange({

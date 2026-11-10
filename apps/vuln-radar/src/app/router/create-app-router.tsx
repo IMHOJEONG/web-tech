@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-router";
 import { AppSidebar } from "@/app/ui/app-sidebar";
 import { FeedPage } from "@/pages/feed/ui/feed-page";
+import { parseFeedSearch } from "@/pages/feed/model/feed-search";
 import { OverviewPage } from "@/pages/overview/ui/overview-page";
 import { VulnerabilityDetailPage } from "@/pages/vulnerability-detail/ui/vulnerability-detail-page";
 import { runtimeConfig } from "@/shared/config/runtime";
@@ -51,6 +52,7 @@ const overviewRoute = createRoute({
 const feedRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/feed",
+  validateSearch: parseFeedSearch,
   component: FeedPage,
 });
 

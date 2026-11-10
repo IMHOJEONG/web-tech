@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { feedSearchPath, type FeedSearch } from "./feed-search";
 import { getJson } from "@/shared/api/client";
 import {
   ingestObservationSchema,
@@ -114,6 +115,19 @@ const feedResponseSchema = z.object({
   dataSource: radarDataSourceSchema,
   items: z.array(feedItemSchema),
 });
+
+const feedPageResponseSchema = feedResponseSchema.extend({
+  pagination: z.object({
+    page: z.number().int().min(1),
+    pageSize: z.number().int().min(1).max(100),
+    total: z.number().int().min(0),
+    totalPages: z.number().int().min(0),
+  }),
+});
+
+export function searchFeed(search: FeedSearch) {
+  return getJson(feedSearchPath(search), feedPageResponseSchema);
+}
 
 const vulnerabilityAdvisorySchema = z.object({
   source: z.string(),
