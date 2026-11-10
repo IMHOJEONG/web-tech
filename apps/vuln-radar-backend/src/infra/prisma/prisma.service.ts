@@ -10,9 +10,14 @@ import { join } from 'node:path';
 import { resolveDirectDatabaseUrl } from './direct-connection';
 
 interface PrismaLikeClient {
+  $transaction<T>(
+    task: (tx: Pick<PrismaLikeClient, 'vulnerability'>) => Promise<T>,
+    options: { isolationLevel: 'RepeatableRead' },
+  ): Promise<T>;
   $connect(): Promise<void>;
   $disconnect(): Promise<void>;
   vulnerability: {
+    count: (args?: unknown) => Promise<number>;
     groupBy: (args: unknown) => Promise<
       Array<{
         priority: string;

@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ServiceUnavailableException,
+} from '@nestjs/common';
+import { feedWhere, type FeedQuery } from './feed-query';
 import { PrismaService } from '../../infra/prisma/prisma.service';
 import {
   getAlertsResponse,
@@ -186,38 +191,43 @@ export class FeedsRepository {
       dataSource: getDatabaseDataSource(
         'Feed is reading the current vulnerability read-model from the database.',
       ),
-      items: vulnerabilities.map((vulnerability) => {
-        const matchedWatchlist = vulnerability.watchMatches.map(
-          (match) => match.matchedValue,
-        );
-        const advisorySources = vulnerability.advisories.map(
-          (advisory) => advisory.source,
-        );
-
-        return {
-          cveId: vulnerability.cveId,
-          title: vulnerability.title,
-          priority: vulnerability.priority,
-          severity: normalizeSeverity(vulnerability.severity),
-          epssScore: vulnerability.epssScore ?? 0,
-          isKev: vulnerability.isKev,
-          publishedAt: vulnerability.publishedAt.toISOString(),
-          updatedAt: vulnerability.lastModifiedAt.toISOString(),
-          matchedWatchlist,
-          reliability: buildVulnerabilityReliability({
-            advisorySources,
-            cvssScore: vulnerability.cvssScore ?? null,
-            epssPercentile: vulnerability.epssPercentile ?? null,
-            epssScore: vulnerability.epssScore ?? null,
-            ingestedAt: vulnerability.updatedAt,
-            isKev: vulnerability.isKev,
-            matchedWatchlist,
-            runtimeKind: 'database',
-            upstreamModifiedAt: vulnerability.lastModifiedAt,
-          }),
-        };
-      }),
+      items: vulnerabilities.map(mapFeedVulnerability),
     };
+  }
+
+  async searchFeed(query: FeedQuery) {
+    const client = await this.prismaService.getClient();
+    if (!client)
+      throw new ServiceUnavailableException(
+        'Feed search requires database storage',
+      );
+    const where = feedWhere(query);
+    return client.$transaction(
+      async (tx) => {
+        const total = await tx.vulnerability.count({ where });
+        const totalPages = Math.ceil(total / query.pageSize);
+        const page = Math.min(query.page, Math.max(1, totalPages));
+        const rows = await tx.vulnerability.findMany({
+          where,
+          orderBy: [{ lastModifiedAt: 'desc' }, { cveId: 'asc' }],
+          skip: (page - 1) * query.pageSize,
+          take: query.pageSize,
+          include: {
+            watchMatches: { select: { matchedValue: true } },
+            advisories: { select: { source: true } },
+          },
+        });
+        return {
+          generatedAt: new Date().toISOString(),
+          dataSource: getDatabaseDataSource(
+            'Search covers all stored vulnerabilities.',
+          ),
+          items: (rows as DbFeedVulnerability[]).map(mapFeedVulnerability),
+          pagination: { page, pageSize: query.pageSize, total, totalPages },
+        };
+      },
+      { isolationLevel: 'RepeatableRead' },
+    );
   }
 
   async getWatchlist(): Promise<WatchlistResponse> {
@@ -426,6 +436,36 @@ export class FeedsRepository {
       },
     };
   }
+}
+
+function mapFeedVulnerability(vulnerability: DbFeedVulnerability) {
+  const matchedWatchlist = vulnerability.watchMatches.map(
+    (match) => match.matchedValue,
+  );
+  return {
+    cveId: vulnerability.cveId,
+    title: vulnerability.title,
+    priority: vulnerability.priority,
+    severity: normalizeSeverity(vulnerability.severity),
+    epssScore: vulnerability.epssScore ?? 0,
+    isKev: vulnerability.isKev,
+    publishedAt: vulnerability.publishedAt.toISOString(),
+    updatedAt: vulnerability.lastModifiedAt.toISOString(),
+    matchedWatchlist,
+    reliability: buildVulnerabilityReliability({
+      advisorySources: vulnerability.advisories.map(
+        (advisory) => advisory.source,
+      ),
+      cvssScore: vulnerability.cvssScore ?? null,
+      epssPercentile: vulnerability.epssPercentile ?? null,
+      epssScore: vulnerability.epssScore ?? null,
+      ingestedAt: vulnerability.updatedAt,
+      isKev: vulnerability.isKev,
+      matchedWatchlist,
+      runtimeKind: 'database',
+      upstreamModifiedAt: vulnerability.lastModifiedAt,
+    }),
+  };
 }
 
 function normalizeSeverity(

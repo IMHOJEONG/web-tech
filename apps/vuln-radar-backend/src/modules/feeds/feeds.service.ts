@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FeedsRepository } from './feeds.repository';
+import type { FeedQuery } from './feed-query';
 
 @Injectable()
 export class FeedsService {
@@ -11,6 +12,10 @@ export class FeedsService {
 
   getFeed() {
     return this.feedsRepository.getFeed();
+  }
+
+  searchFeed(query: FeedQuery) {
+    return this.feedsRepository.searchFeed(query);
   }
 
   getKev() {
