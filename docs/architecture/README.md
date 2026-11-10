@@ -6,6 +6,8 @@
 
 ## ADR 상태
 
+- [ADR-0029: Feed 전체 검색·페이지네이션](adr-0029-vuln-radar-feed-search.md): 적용 중. 기존 Overview 표본과 별도 인증 검색·동일 snapshot count/page·URL 상태를 로컬 구현. 운영 미배포.
+
 - [ADR-0028: NAS 불변 게시 스냅샷·revision 검증](adr-0028-nas-content-revision-snapshots.md): 제안. 공용 계약과 임시 snapshot·포인터 교체 실험을 로컬 구현·검증. 실제 NAS·운영 API·프론트 lease·캐시는 미연결이며 운영 정책 미적용.
 
 - [ADR-0027: 본문 제목 앵커 호환성](adr-0027-article-heading-anchor-compatibility.md): 적용 중. 명시 ID·기존 fragment 우선 예약, 충돌 없는 canonical·호환 앵커·h5/h6 스크롤 여백. runtime MDX 로컬 검증 범위이며 운영 미배포.

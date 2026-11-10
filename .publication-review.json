@@ -2,12 +2,40 @@
   "version": 1,
   "entries": [
     {
-      "path": "docs/verification/README.md",
-      "sha256": "94483a1a67717bc09316d662b0577553848db262c8d632c313de509ff9f8d71e",
+      "path": "apps/vuln-radar/todo.md",
+      "sha256": "aeb789aa00266f3f2099d5b58ec8ce9400efcc95c5340dc32da1362c0a875244",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-10",
-      "note": "사용자가 이번 검증 문서의 선행 커밋을 명시 승인함. 집계·배포 식별자와 미검증 한계만 정제하고 원시 본문·토큰·개인정보를 제외함.",
+      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/README.md",
+      "sha256": "55b2adf93473b4d7aeefcca95a5d1ccac45a6e9e95c88a8c9c036b0f71217e55",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-10",
+      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/README.md",
+      "sha256": "2c12ef927379ce5f8024b431ce315a30dc3bef5de38dc7bfd4abba031676d21b",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-10",
+      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -17,11 +45,11 @@
     },
     {
       "path": "docs/verification/artifacts/README.md",
-      "sha256": "cdb39112f17960dce55164647bfa196bc2ef0acd4b9906d05180c1b377e8c7fe",
+      "sha256": "ca89eb2eb0820a6d4ee25741cc2f59e4bc2675429e6c85ac9ac343d4152f52f2",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-10",
-      "note": "사용자가 이번 검증 문서의 선행 커밋을 명시 승인함. 집계·배포 식별자와 미검증 한계만 정제하고 원시 본문·토큰·개인정보를 제외함.",
+      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -31,11 +59,67 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "3d48d6a626176454bc9a5229e93cd2038af2bd2e58f7fc885f176ea51053d9e7",
+      "sha256": "07e256ebe255a18314823acd420ee7a24f107ab0ff36c810ee95a31010bac5c6",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-10",
-      "note": "사용자가 이번 검증 문서의 선행 커밋을 명시 승인함. 집계·배포 식별자와 미검증 한계만 정제하고 원시 본문·토큰·개인정보를 제외함.",
+      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/adr-0029-vuln-radar-feed-search.md",
+      "sha256": "138b6efc548c245882346922f2922265042a21e21348ae9a2892d506350a237c",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-10",
+      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-10-vuln-radar-feed-search-summary.json",
+      "sha256": "d91b290bc1554d19e8f3fcade60048296712f2fc795312ccef55f58b43eaf68d",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-10",
+      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/integration/2026-11-10-vuln-radar-feed-search.md",
+      "sha256": "8e0e0a1ad200d0de545aeb315482c93e79f947fc9c77e52bc9a5a5f3734a5af8",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-10",
+      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-10-vuln-radar-feed-search.md",
+      "sha256": "abc6af763934c1afdc1c95537d8a88452035b571e47794a437f8ac673cefe68f",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-10",
+      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -372,20 +456,6 @@
       "decision": "public-approved",
       "reviewedOn": "2026-11-07",
       "note": "사용자가 PR #86 리뷰 보완에 필요한 기존 운영 문서 4개의 정제 갱신·재검수·해시 갱신과 커밋·푸시를 명시 승인함. 자체 작성한 실패 재현·회귀 수·검사 명령·운영 미연결 경계와 동일 Confluence 페이지의 비개인 경로를 확인함. 원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정·토큰·병합·Production 변경은 제외함.",
-      "checks": {
-        "secrets": true,
-        "personalData": true,
-        "rights": true,
-        "publicIntent": true
-      }
-    },
-    {
-      "path": "docs/architecture/README.md",
-      "sha256": "098fde915399ce529d459ca31018acdb30a3d04b7f1c06b0b23f4951f1bb263e",
-      "kind": "document",
-      "decision": "public-approved",
-      "reviewedOn": "2026-11-07",
-      "note": "사용자가 이번 snapshot builder·포인터 교체 실험과 정제 문서만 공개 검수 후 작업별 로컬 커밋하도록 명시 승인함. 자체 작성한 ADR·합성 회귀의 실패/성공·재현 절차·작업 기록·목차·TODO의 비밀값·개인정보·권리·공개 의도를 검수함. 원시 로그·trace·실제 응답·개인 경로·초안·NAS 설정·푸시·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

@@ -1,5 +1,7 @@
 # 2026-11 작업 기록
 
+- [11-10 vuln-radar 전체 검색](2026-11-10-vuln-radar-feed-search.md): 운영 문서 선행 커밋 후 서버 필터·페이지·URL 복원·회귀와 빌드 경로 보완. 배포 없음.
+
 - [11-10 vuln-radar 운영 확인](2026-11-10-vuln-radar-operational.md): 읽기 전용 배포·통계·수집 상태 대조와 전체 검색 후속 분리.
 
 - [11-08 태블릿 필터 후속 안정화](2026-11-08-docs-tablet-filter-readiness.md): pending selector 재현·main 대조·기존 PR #71 통합과 공개 검수. 원시 자료·다른 미커밋·NAS 보존.

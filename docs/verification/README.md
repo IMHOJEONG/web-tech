@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-10 vuln-radar 전체 검색·페이지](integration/2026-11-10-vuln-radar-feed-search.md): 합성 PostgreSQL 43개와 두 화면의 URL·필터·페이지·실패 복구, 단위·HTTP 회귀와 기존 빌드 경로 보완.
+
 - [11-10 vuln-radar 운영 반영](deployment/2026-11-10-vuln-radar-operational.md): 동일 main 배포·공개 GET·집계 대조. 브라우저·장애 주입·보안 재개 미검증.
 
 - [11-08 태블릿 필터 준비 상태](resilience/2026-11-08-docs-tablet-filter-readiness.md): 실제 streaming 보류·닫힌 fallback 오판, 기존 PR #71의 더 강한 회귀 보존과 후속 통합 검증. 로컬·원격 결과를 구분.
