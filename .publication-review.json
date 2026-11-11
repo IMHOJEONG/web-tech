@@ -17,11 +17,11 @@
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "55b2adf93473b4d7aeefcca95a5d1ccac45a6e9e95c88a8c9c036b0f71217e55",
+      "sha256": "291193d6a78b0daa518315f0af47b52c25fb1b4156f254a50023392b8e5d6500",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-10",
-      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
+      "reviewedOn": "2026-11-11",
+      "note": "사용자가 CI 보완과 미커밋 운영 기록의 커밋·푸시·PR을 승인함. 배포 식별자·정제된 검증 요약만 포함하고 원시 응답·로그·개인정보·비밀값을 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -59,11 +59,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "07e256ebe255a18314823acd420ee7a24f107ab0ff36c810ee95a31010bac5c6",
+      "sha256": "f42c16d4b20ac8fff522fbef98ad01cb9e7c48aee36f42686953894e78aa328d",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-10",
-      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
+      "reviewedOn": "2026-11-11",
+      "note": "사용자가 CI 보완과 미커밋 운영 기록의 커밋·푸시·PR을 승인함. 배포 식별자·정제된 검증 요약만 포함하고 원시 응답·로그·개인정보·비밀값을 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -73,11 +73,11 @@
     },
     {
       "path": "docs/architecture/adr-0029-vuln-radar-feed-search.md",
-      "sha256": "138b6efc548c245882346922f2922265042a21e21348ae9a2892d506350a237c",
+      "sha256": "6e6fa4bc895a0980dd4de75f1cd2a467df5d908ae7f035bce69be1faa96485d7",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-10",
-      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
+      "reviewedOn": "2026-11-11",
+      "note": "사용자가 CI 보완과 미커밋 운영 기록의 커밋·푸시·PR을 승인함. 배포 식별자·정제된 검증 요약만 포함하고 원시 응답·로그·개인정보·비밀값을 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -115,11 +115,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-10-vuln-radar-feed-search.md",
-      "sha256": "17e1db9b39387e71200c45e3d2a5a84ebba40f33a273b6259290fb4fea2d6999",
+      "sha256": "8195b3306147f71196452c1eec418c81c3cfad5aea9d77353b628c77d40925e0",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-11",
-      "note": "사용자가 PR #89 리뷰 후속 문서 수정·커밋·푸시를 승인함. 읽기 전용 배포 SHA 대조와 화면/API 표기를 보완했으며 원시 응답·비밀값은 포함하지 않음.",
+      "note": "사용자가 CI 보완과 미커밋 운영 기록의 커밋·푸시·PR을 승인함. 배포 식별자·정제된 검증 요약만 포함하고 원시 응답·로그·개인정보·비밀값을 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

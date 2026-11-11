@@ -6,7 +6,7 @@
 
 ## ADR 상태
 
-- [ADR-0029: Feed 전체 검색·페이지네이션](adr-0029-vuln-radar-feed-search.md): 적용 중. 기존 Overview 표본과 별도 인증 검색·동일 snapshot count/page·URL 상태를 로컬 구현. 운영 미배포.
+- [ADR-0029: Feed 전체 검색·페이지네이션](adr-0029-vuln-radar-feed-search.md): 적용 중. PR #89 main 병합·Vercel/Railway 자동 배포·공개 검색/페이지와 Chromium 두 폭 검증. main CI 설치 장애·운영 부하는 후속.
 
 - [ADR-0028: NAS 불변 게시 스냅샷·revision 검증](adr-0028-nas-content-revision-snapshots.md): 제안. 공용 계약과 임시 snapshot·포인터 교체 실험을 로컬 구현·검증. 실제 NAS·운영 API·프론트 lease·캐시는 미연결이며 운영 정책 미적용.
 
