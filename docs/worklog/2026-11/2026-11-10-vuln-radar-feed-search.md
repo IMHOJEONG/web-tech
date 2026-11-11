@@ -22,6 +22,8 @@
 
 [검증 보고서](../../verification/integration/2026-11-10-vuln-radar-feed-search.md)에 명령·최초 실패·최종 결과와 미검증 범위를 기록했다. [KAN-67](https://web-tech-service.atlassian.net/browse/KAN-67) 댓글 10096과 [Confluence 후속 기록](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817/web-tech+Jira?focusedCommentId=16580609)을 저장·재조회했다. 미푸시 파일을 원격 링크로 표시하지 않는다.
 
+2026-11-11 리뷰 후속: [PR #89의 Minor](https://github.com/IMHOJEONG/web-tech/pull/89#discussion_r4521455112)에 따라 [운영 검증 보고서](../../verification/deployment/2026-11-10-vuln-radar-operational.md)의 배포 SHA 대조 절차를 보완했다. GitHub의 배포 레코드 두 개가 고정 SHA와 일치하고 각각 성공 이력이 있음을 읽기 전용으로 재확인했다. 합성 SHA 불일치에서 종료 코드 1도 확인했다. TODO는 화면과 API 경로를 구분했다. 과거 운영 표본과 앱 동작은 변경하지 않았다.
+
 ## Open Questions
 
 깊은 offset·substring 검색 성능은 운영 규모의 부하 검증 전이다. 실행 중 수집으로 요청 간 페이지 경계가 움직이는 경우 cursor 전환이 필요한지 실측해야 한다.

@@ -3,11 +3,11 @@
   "entries": [
     {
       "path": "apps/vuln-radar/todo.md",
-      "sha256": "aeb789aa00266f3f2099d5b58ec8ce9400efcc95c5340dc32da1362c0a875244",
+      "sha256": "f245521c2380f570897d384bc69525688e4ca13b18c434c8ddc932c4da91801c",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-10",
-      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
+      "reviewedOn": "2026-11-11",
+      "note": "사용자가 PR #89 리뷰 후속 문서 수정·커밋·푸시를 승인함. 읽기 전용 배포 SHA 대조와 화면/API 표기를 보완했으며 원시 응답·비밀값은 포함하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -115,11 +115,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-10-vuln-radar-feed-search.md",
-      "sha256": "abc6af763934c1afdc1c95537d8a88452035b571e47794a437f8ac673cefe68f",
+      "sha256": "aa58f29cb9fb4c5cb876fdeb31dc74945ac396f487edf9bb210cc5edae1e1368",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-10",
-      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
+      "reviewedOn": "2026-11-11",
+      "note": "사용자가 PR #89 리뷰 후속 문서 수정·커밋·푸시를 승인함. 읽기 전용 배포 SHA 대조와 화면/API 표기를 보완했으며 원시 응답·비밀값은 포함하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -143,11 +143,11 @@
     },
     {
       "path": "docs/verification/deployment/2026-11-10-vuln-radar-operational.md",
-      "sha256": "41ed841f9c60f0ae8aeaa8a39f295881151e7a935911f35e7b0ed38d02623015",
+      "sha256": "8326801710e7d487e0701dbc78c71501e6d37191fed9707d70378d859d7ccb73",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-10",
-      "note": "사용자가 이번 검증 문서의 선행 커밋을 명시 승인함. 집계·배포 식별자와 미검증 한계만 정제하고 원시 본문·토큰·개인정보를 제외함.",
+      "reviewedOn": "2026-11-11",
+      "note": "사용자가 PR #89 리뷰 후속 문서 수정·커밋·푸시를 승인함. 읽기 전용 배포 SHA 대조와 화면/API 표기를 보완했으며 원시 응답·비밀값은 포함하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,

@@ -114,7 +114,7 @@
 결정 메모:
 
 - `/feed` 라우트를 실제 화면으로 열고, 사이드바의 두 번째 항목을 feed 탐색으로 연결한다.
-- 2026-11-10 로컬 구현: Feed 탐색은 별도 /feed/search의 전체 DB 검색·서버 페이지네이션을 사용한다. URL에 q/priority/severity/kev/page를 보존한다. 기존 /feed는 Overview 표본용으로 유지한다. [ADR-0029](../../docs/architecture/adr-0029-vuln-radar-feed-search.md), [회귀](../../docs/verification/integration/2026-11-10-vuln-radar-feed-search.md). 운영 미배포.
+- 2026-11-10 로컬 구현: `/feed` 화면은 `GET /api/feed/search`로 전체 DB 검색·서버 페이지네이션을 요청한다. URL에 `q/priority/severity/kev/page`를 보존한다. 기존 `GET /api/feed`는 Overview 표본용으로 유지한다. [ADR-0029](../../docs/architecture/adr-0029-vuln-radar-feed-search.md), [회귀](../../docs/verification/integration/2026-11-10-vuln-radar-feed-search.md). 운영 미배포.
 - 필터 기준은 `priority`, `severity`, `KEV`, keyword이며, 최신 수정 시각 내림차순으로 정렬한다.
 - `source` 필터는 응답 모델이 item 단위 source를 아직 갖고 있지 않아 보류한다. API가 `source` 또는 `dataSource`를 item 단위로 제공하면 추가한다.
 - source 설계는 `origin source`, `evidence signal`, `runtime dataSource`를 분리한다. 기준 문서는 `docs/011_feed_source_evidence_contract.md`를 따른다.

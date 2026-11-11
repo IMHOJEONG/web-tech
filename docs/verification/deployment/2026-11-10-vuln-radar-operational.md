@@ -10,12 +10,32 @@
 
 ## 재현 방법
 
-저장소 루트에서 인증된 GitHub CLI로 배포 기록을 확인한다. GitHub 자격 증명을 공개 API 요청에 전달하지 않는다.
+저장소 루트에서 인증된 GitHub CLI로 두 배포 레코드의 SHA를 위에 기록한 고정 기준과 비교하고, 각 배포의 성공 이력을 확인한다. 현재 `main`이 전진해도 검증 기준은 바뀌지 않는다. 성공 이력은 현재 실행 중인 배포를 의미하지 않는다.
 
 ```sh
-gh api repos/IMHOJEONG/web-tech/commits/main --jq .sha
-gh api repos/IMHOJEONG/web-tech/deployments/7646792732/statuses
-gh api repos/IMHOJEONG/web-tech/deployments/7646777937/statuses
+(
+  set -eu
+  expected_sha=09bf9389729fe335133873775777da5083b1b94c
+  for id in 7646792732 7646777937; do
+    deployment="repos/IMHOJEONG/web-tech/deployments/$id"
+    actual_sha=$(gh api "$deployment" --jq .sha)
+    if [ "$actual_sha" != "$expected_sha" ]; then
+      printf 'Deployment %s SHA mismatch: expected %s, got %s\n' "$id" "$expected_sha" "$actual_sha" >&2
+      exit 1
+    fi
+    succeeded_at=$(gh api "$deployment/statuses" --jq '[.[] | select(.state == "success")][0].created_at // empty')
+    if [ -z "$succeeded_at" ]; then
+      printf 'Deployment %s has no recorded success\n' "$id" >&2
+      exit 1
+    fi
+    printf 'Deployment %s: SHA %s, recorded success at %s\n' "$id" "$actual_sha" "$succeeded_at"
+  done
+)
+```
+
+기준 커밋의 CI와 현재 공개 health는 별도로 조회한다. GitHub 자격 증명을 공개 API 요청에 전달하지 않는다.
+
+```sh
 gh run list --commit 09bf9389729fe335133873775777da5083b1b94c --limit 10 --json name,status,conclusion,url
 curl --max-time 20 -sS -D - https://vuln-radar-service.vercel.app/api/backend/health
 ```
