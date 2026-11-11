@@ -120,6 +120,9 @@ jobs:
     name: Shared UI (${{ matrix.suite }})
     timeout-minutes: 20
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+      options: --init --ipc=host
     strategy:
       fail-fast: false
       matrix:
@@ -144,8 +147,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright Chromium
-        run: pnpm --filter docs exec playwright install --with-deps chromium
+      - name: Verify preinstalled Chromium
+        timeout-minutes: 2
+        run: node scripts/check-browser-runtime.mts
 
       - name: Run shared UI regression tests
         run: pnpm --filter docs ${{ matrix.suite }}
@@ -154,6 +158,9 @@ jobs:
     name: Docs Offline Reading
     timeout-minutes: 15
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+      options: --init --ipc=host
     steps:
       - name: Check out code
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -174,8 +181,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright Chromium
-        run: pnpm --filter docs exec playwright install --with-deps chromium
+      - name: Verify preinstalled Chromium
+        timeout-minutes: 2
+        run: node scripts/check-browser-runtime.mts
 
       - name: Test explicit offline saving and disconnected reading
         id: offline-tests
@@ -253,6 +261,9 @@ jobs:
     name: Docs Browser (${{ matrix.suite }})
     timeout-minutes: 15
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+      options: --init --ipc=host
     strategy:
       fail-fast: false
       matrix:
@@ -287,8 +298,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright Chromium
-        run: pnpm --filter docs exec playwright install --with-deps chromium
+      - name: Verify preinstalled Chromium
+        timeout-minutes: 2
+        run: node scripts/check-browser-runtime.mts
 
       - name: Run browser suite
         run: ${{ matrix.command }}

@@ -2,6 +2,48 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/architecture/adr-0030-browser-ci-runtime-image.md",
+      "sha256": "1df316cad9b94844e818a0179ce4a611575be67184927d695e819d95d1799e13",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-12",
+      "note": "사용자가 CI 보완 브랜치의 커밋·푸시·PR 및 정제 문서 공개를 승인함. 공식 이미지 결정·합성 회귀와 한계만 포함하며 원시 로그·실제 응답·개인정보·비밀값은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/resilience/2026-11-11-ci-browser-runtime.md",
+      "sha256": "6c373ea9f267067b197813f68648ddf5e3c09ff5e0feeb042ce655644ead48a7",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-12",
+      "note": "사용자가 CI 보완 브랜치의 커밋·푸시·PR 및 정제 문서 공개를 승인함. 공식 이미지 결정·합성 회귀와 한계만 포함하며 원시 로그·실제 응답·개인정보·비밀값은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-11-ci-browser-runtime.md",
+      "sha256": "b6ef0ae71905dfb97b5a86bcd89b488a8f47a1c9497f89f09d57e06f6cbe424a",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-12",
+      "note": "사용자가 CI 보완 브랜치의 커밋·푸시·PR 및 정제 문서 공개를 승인함. 공식 이미지 결정·합성 회귀와 한계만 포함하며 원시 로그·실제 응답·개인정보·비밀값은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "apps/vuln-radar/todo.md",
       "sha256": "f245521c2380f570897d384bc69525688e4ca13b18c434c8ddc932c4da91801c",
       "kind": "document",
@@ -17,10 +59,10 @@
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "291193d6a78b0daa518315f0af47b52c25fb1b4156f254a50023392b8e5d6500",
+      "sha256": "070a0ee46b350a12f8a23711bb776e64fbb0cd84fa69196a75ddce5850b59366",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-11",
+      "reviewedOn": "2026-11-12",
       "note": "사용자가 CI 보완과 미커밋 운영 기록의 커밋·푸시·PR을 승인함. 배포 식별자·정제된 검증 요약만 포함하고 원시 응답·로그·개인정보·비밀값을 제외함.",
       "checks": {
         "secrets": true,
@@ -31,11 +73,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "2c12ef927379ce5f8024b431ce315a30dc3bef5de38dc7bfd4abba031676d21b",
+      "sha256": "683de7e68d1e208542efff6cff62703bed9c72dd3c73cf4af9b78481c6f9eac2",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-10",
-      "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
+      "reviewedOn": "2026-11-12",
+      "note": "사용자가 CI 보완 브랜치의 커밋·푸시·PR 및 정제 문서 공개를 승인함. 공식 이미지 결정·합성 회귀와 한계만 포함하며 원시 로그·실제 응답·개인정보·비밀값은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -59,10 +101,10 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "f42c16d4b20ac8fff522fbef98ad01cb9e7c48aee36f42686953894e78aa328d",
+      "sha256": "41558f666dd4c48009f26230ff17bfb422ab6b01f34400bbc3a3a8b1903f9c07",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-11",
+      "reviewedOn": "2026-11-12",
       "note": "사용자가 CI 보완과 미커밋 운영 기록의 커밋·푸시·PR을 승인함. 배포 식별자·정제된 검증 요약만 포함하고 원시 응답·로그·개인정보·비밀값을 제외함.",
       "checks": {
         "secrets": true,
