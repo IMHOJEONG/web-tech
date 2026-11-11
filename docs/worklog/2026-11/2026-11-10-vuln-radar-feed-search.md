@@ -24,6 +24,8 @@
 
 2026-11-11 리뷰 후속: [PR #89의 Minor](https://github.com/IMHOJEONG/web-tech/pull/89#discussion_r4521455112)에 따라 [운영 검증 보고서](../../verification/deployment/2026-11-10-vuln-radar-operational.md)의 배포 SHA 대조 절차를 보완했다. GitHub의 배포 레코드 두 개가 고정 SHA와 일치하고 각각 성공 이력이 있음을 읽기 전용으로 재확인했다. 합성 SHA 불일치에서 종료 코드 1도 확인했다. TODO는 화면과 API 경로를 구분했다. 과거 운영 표본과 앱 동작은 변경하지 않았다.
 
+2026-11-11 병합 전 재검토: [추가 Minor](https://github.com/IMHOJEONG/web-tech/pull/89#discussion_r4532621082)에 따라 같은 보고서의 명령에 watchlist·기록된 `CVE-2023-4911` 상세·`/overview`와 `/feed` HTML 검사를 명시했다. 문서의 Node 명령을 그대로 추출해 실행하여 집계 대조와 모든 GET 검사의 통과를 확인했다. 현재 첫 Feed 항목 대신 기록된 상세 ID를 사용하고, 과거 집계값·수집 시각 재현 및 브라우저 렌더링은 검사 범위 밖임을 구분했다. 기존 시점 표본과 정제 artifact는 유지한다.
+
 ## Open Questions
 
 깊은 offset·substring 검색 성능은 운영 규모의 부하 검증 전이다. 실행 중 수집으로 요청 간 페이지 경계가 움직이는 경우 cursor 전환이 필요한지 실측해야 한다.

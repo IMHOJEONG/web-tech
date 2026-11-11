@@ -115,7 +115,7 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-10-vuln-radar-feed-search.md",
-      "sha256": "aa58f29cb9fb4c5cb876fdeb31dc74945ac396f487edf9bb210cc5edae1e1368",
+      "sha256": "17e1db9b39387e71200c45e3d2a5a84ebba40f33a273b6259290fb4fea2d6999",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-11",
@@ -143,7 +143,7 @@
     },
     {
       "path": "docs/verification/deployment/2026-11-10-vuln-radar-operational.md",
-      "sha256": "8326801710e7d487e0701dbc78c71501e6d37191fed9707d70378d859d7ccb73",
+      "sha256": "45c497ad775545327909829f464d8b23a8e30d74b0e0b0ecc5e9273e6f433f16",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-11",

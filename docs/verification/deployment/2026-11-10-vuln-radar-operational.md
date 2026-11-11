@@ -40,7 +40,7 @@ gh run list --commit 09bf9389729fe335133873775777da5083b1b94c --limit 10 --json 
 curl --max-time 20 -sS -D - https://vuln-radar-service.vercel.app/api/backend/health
 ```
 
-실행한 API 대조와 동일한 조건은 아래처럼 재검사한다. 각 요청은 15초 제한·리디렉션 거절·GET만 사용한다. 결과는 시점에 따라 바뀌며, 두 응답 사이에 수집이 완료되면 통계 불일치가 발생할 수 있다. 실패를 임의로 허용하지 말고 시각을 대조한다.
+Node.js 24와 공개 도메인 연결이 가능한 환경에서 저장소 루트의 아래 명령으로 API 대조·watchlist·기록된 CVE 상세와 SPA 직접 URL을 재검사한다. 각 요청은 15초 제한·리디렉션 거절·GET만 사용한다. 결과는 시점에 따라 바뀌며, 두 응답 사이에 수집이 완료되면 통계 불일치가 발생할 수 있다. 실패를 임의로 허용하지 말고 시각을 대조한다. 과거의 문서 수·EPSS 표본·수집 시각을 재현하거나 SPA의 브라우저 렌더링을 검사하는 명령은 아니다.
 
 ```sh
 node --input-type=module <<'NODE'
@@ -57,6 +57,7 @@ const overview = await read('overview');
 const status = await read('ingest/status');
 const feed = await read('feed');
 const kev = await read('kev');
+await read('watchlist');
 const cards = Object.fromEntries(overview.cards.map(x => [x.id, x.value]));
 assert.equal(cards['total-vulnerabilities'], status.counts.vulnerabilities);
 assert.equal(cards['p0-open'], status.counts.p0);
@@ -65,8 +66,16 @@ assert.ok(cards['total-vulnerabilities'] > feed.items.length);
 assert.ok(kev.items.every(x => x.epssScore === null ||
   (Number.isFinite(x.epssScore) && x.epssScore >= 0 && x.epssScore <= 1)));
 assert.ok(feed.items.length > 0);
-await read('vulnerabilities/' + encodeURIComponent(feed.items[0].cveId));
-console.log('PASS: aggregate consistency, separate feed, KEV range, detail GET');
+await read('vulnerabilities/CVE-2023-4911');
+for (const path of ['/overview', '/feed']) {
+  const response = await fetch(new URL(path, base), {
+    signal: AbortSignal.timeout(15000), redirect: 'error',
+  });
+  assert.equal(response.status, 200, path);
+  assert.match(response.headers.get('content-type') ?? '', /text\/html/i, path);
+  await response.text();
+}
+console.log('PASS: aggregate consistency, separate feed, KEV range, watchlist, recorded CVE detail, SPA HTML');
 NODE
 ```
 
