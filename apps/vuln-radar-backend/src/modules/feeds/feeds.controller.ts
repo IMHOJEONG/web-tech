@@ -1,4 +1,5 @@
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
+import { parseFeedQuery } from './feed-query';
 import { FeedsService } from './feeds.service';
 import { BackendAuthGuard } from '../../shared/guards/backend-auth.guard';
 
@@ -20,6 +21,11 @@ export class FeedsController {
   @Get('kev')
   getKev() {
     return this.feedsService.getKev();
+  }
+
+  @Get('feed/search')
+  searchFeed(@Query() query: Record<string, unknown>) {
+    return this.feedsService.searchFeed(parseFeedQuery(query));
   }
 
   @Get('watchlist')

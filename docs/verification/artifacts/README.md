@@ -1,5 +1,9 @@
 # 검증 원본 증거
 
+- [11-10 Feed 검색 정제 집계](2026-11-10-vuln-radar-feed-search-summary.json): [보고서](../integration/2026-11-10-vuln-radar-feed-search.md). 원시 캡처·로그 제외, 합성 회귀·최초 실패와 최종 정리 상태만 기록.
+
+- [11-10 vuln-radar 운영 관측값](2026-11-10-vuln-radar-operational.json): [보고서](../deployment/2026-11-10-vuln-radar-operational.md). 집계·배포 기록만 보관하며 원시 본문·인증정보 제외.
+
 - [10-31 저널 UI 정제 집계](2026-10-31-blog-journal-summary.json): [검증 보고서](../accessibility/2026-10-31-blog-journal-implementation.md). 로컬 회귀·프로덕션 smoke·최초 CI 실패와 보완을 구분하며 원시 캡처·trace·인증 헤더는 포함하지 않음.
 
 - [10-29 전체 미커밋 정리 집계](2026-10-29-all-worktree-consolidation.json): [보고서](../integration/2026-10-29-all-worktree-consolidation.md). 원시 목록·사본·회귀 로그는 비공개 보존.

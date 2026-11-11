@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-10",
+  "baseSha": "5ec2afabb5e51ebde1b112cb1f194bbd6469a69a",
+  "workingTreeDirty": true,
+  "finalRunnerSha256": "7952cec094c9b302e71f856e7e58b77e87f923d9583014112e01363c948326ac",
+  "finalStartedAt": "2026-11-10T04:15:49.493Z",
+  "finalFinishedAt": "2026-11-10T04:17:03.210Z",
+  "browser": "151.0.7922.34",
+  "initialIntegration": {
+    "passed": 19,
+    "failed": 1,
+    "cause": "outage assertion watched legacy feed rather than search endpoint"
+  },
+  "finalIntegration": { "passed": 26, "failed": 0 },
+  "frontendModelTests": 36,
+  "backendUnitTests": 67,
+  "backendHttpTests": 12,
+  "databaseFixtureRows": 43,
+  "pageSizes": [25, 18],
+  "pageOverlap": 0,
+  "viewportWidths": [1280, 390],
+  "cleanup": {
+    "browserClosed": true,
+    "backendStopped": true,
+    "frontendStopped": true,
+    "databaseDisconnected": true,
+    "databaseRemoved": true,
+    "temporaryFilesRemoved": true
+  },
+  "cleanupErrors": [],
+  "deployed": false,
+  "rawEvidencePublished": false,
+  "commitRecheck": {
+    "baseSha": "d449a0b71eb7892586682748045e42e920a37a49",
+    "runnerSha256": "c3420af53882e508b71db825634e5f0acaa493abb7d9d5ef92042cb6b2142a4c",
+    "startedAt": "2026-11-10T04:58:37.612Z",
+    "finishedAt": "2026-11-10T04:59:45.063Z",
+    "passed": 26,
+    "failed": 0,
+    "cleanup": {
+      "browserClosed": true,
+      "backendStopped": true,
+      "frontendStopped": true,
+      "databaseDisconnected": true,
+      "databaseRemoved": true,
+      "temporaryFilesRemoved": true
+    },
+    "cleanupErrors": []
+  }
+}

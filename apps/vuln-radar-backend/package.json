@@ -28,6 +28,7 @@
     "start:prod": "node dist/src/main.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --max-warnings 0 --cache --cache-strategy content --cache-location .cache/eslint/",
     "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "pretest": "prisma generate",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",

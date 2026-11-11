@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { dirname } from "node:path";
+import { dirname, join } from "node:path";
 import { defineConfig, loadEnv } from "vite-plus";
 import viteReact from "@vitejs/plugin-react";
 import { viteServerEnvSchema } from "./src/shared/config/env.shared.ts";
@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [viteReact()],
     resolve: {
+      alias: { "@": join(currentDirectory, "src") },
       tsconfigPaths: true,
     },
     server: {

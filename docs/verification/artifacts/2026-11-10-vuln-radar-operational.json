@@ -1,0 +1,38 @@
+{
+  "checkedAt": "2026-11-10T02:07:36.803Z",
+  "baseSha": "09bf9389729fe335133873775777da5083b1b94c",
+  "origin": "https://vuln-radar-service.vercel.app",
+  "vercelDeployment": { "id": 7646792732, "state": "success" },
+  "railwayDeployment": {
+    "id": 7646777937,
+    "state": "success",
+    "environment": "development"
+  },
+  "aggregateConsistency": "passed",
+  "counts": { "total": 92476, "p0": 326, "p1": 861, "kev": 1769 },
+  "feedCount": 25,
+  "kevCount": 25,
+  "watchlistCount": 1,
+  "kevEpssRangeValid": true,
+  "kevNullEpssCount": 0,
+  "detailId": "CVE-2023-4911",
+  "detailStatus": 200,
+  "observation": {
+    "scope": "process",
+    "outcome": "completed",
+    "lastSuccessAt": "2026-11-09T04:12:09.607Z",
+    "intervalMinutes": 1440,
+    "ageHours": 21.92422138888889,
+    "consecutiveFailures": { "nvd": 0, "kev": 0, "epss": 0 }
+  },
+  "limitations": [
+    "no_direct_database_query",
+    "no_browser_checks",
+    "no_fault_injection",
+    "no_runtime_sha_attestation",
+    "security_resume_conditions_not_verified"
+  ],
+  "deploymentChanged": false,
+  "credentialsChanged": false,
+  "ingestTriggered": false
+}
