@@ -3,7 +3,7 @@
   "entries": [
     {
       "path": "docs/architecture/adr-0030-browser-ci-runtime-image.md",
-      "sha256": "1df316cad9b94844e818a0179ce4a611575be67184927d695e819d95d1799e13",
+      "sha256": "b4a474e4d9d50b6f18cafa3b0fc80916f0a661fdd2603e8cd24df7f8b66e9e2a",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-12",
@@ -17,7 +17,7 @@
     },
     {
       "path": "docs/verification/resilience/2026-11-11-ci-browser-runtime.md",
-      "sha256": "6c373ea9f267067b197813f68648ddf5e3c09ff5e0feeb042ce655644ead48a7",
+      "sha256": "f59b337e251412e0695cb8eb9d4d3aafe0923b074f68f674f20030722e4d8809",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-12",
@@ -31,7 +31,7 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-11-ci-browser-runtime.md",
-      "sha256": "b6ef0ae71905dfb97b5a86bcd89b488a8f47a1c9497f89f09d57e06f6cbe424a",
+      "sha256": "403944979ee614fd7bae0cc3801d7612f9a9b0d6bf81fd60383f0c1d25f85622",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-12",

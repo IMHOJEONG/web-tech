@@ -5,7 +5,7 @@
 - 상태: 적용 중
 - 대상: CI의 shared-ui·offline-reading·docs-browser 작업. 전용 브랜치 로컬 구현이며 main 반영은 별도 승인.
 - 결정일: 2026-11-11
-- 최종 검토: 2026-11-11
+- 최종 검토: 2026-11-12
 - 추적: [KAN-67 후속](https://web-tech-service.atlassian.net/browse/KAN-67).
 
 ## 배경
@@ -18,6 +18,7 @@ main CI의 브라우저 작업 8개가 테스트 실행 전에 Ubuntu 패키지 
 - 호스트 `ubuntu-latest`는 유지한다. 앱의 OS 라이브러리 환경은 컨테이너에 고정되지만 호스트 커널·실행기의 DNS까지 고정하거나 수리하는 것은 아니다.
 - 매 작업에서 apt·브라우저 재설치 대신 Chromium을 실제 실행해 합성 HTML을 렌더링한다. 누락·라이브러리 오류·렌더링 실패·정리 실패는 job 실패이며 다운로드 fallback은 없다.
 - 기존 테스트 8개 실행, 실패 집계, timeout, Node 24 보안 하한과 공개 증거 제한을 유지한다. 사전 검사는 본 테스트를 대체하지 않는다.
+- 오프라인 trace ZIP 검사는 이미지에 없는 `unzip` 대신 내장 Python 3의 표준 `zipfile.testzip()`으로 모든 멤버와 CRC를 읽기 검증한다. TypeScript가 `python3 -I`를 인수 배열로 실행하며 파일을 추출하지 않는다. Python·ZIP 누락/손상·timeout도 실패한다. apt나 새 npm 패키지로 보충하지 않는다.
 - `test:repo`가 설치된 Playwright 버전과 모든 이미지 태그 일치·digest 고정·사전 검사 순서를 검사한다. 의존성 갱신 때 공식 이미지 버전과 digest도 검증하고 함께 갱신한다.
 
 ## 대안과 영향

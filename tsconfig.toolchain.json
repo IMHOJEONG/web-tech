@@ -13,6 +13,7 @@
     "scripts/node-runtime-policy.test.mts",
     "scripts/check-browser-runtime.mts",
     "scripts/browser-ci.test.mts",
+    "scripts/trace-zip-integrity.test.mts",
     "scripts/smoke-docs-container.mts",
     "scripts/check-publication.mts",
     "scripts/check-publication.test.mts"
