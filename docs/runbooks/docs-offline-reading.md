@@ -66,7 +66,7 @@ HTML 보고서에서 테스트의 Attachments → `offline-article-navigation` J
 - `test-results/offline/retention-probe/`: 실제 실패 trace ZIP.
 - `playwright-report/offline/retention-probe/`: probe HTML. 실행 전 이 probe의 이전 결과만 삭제하며 제품 보고서는 보존한다.
 
-서버를 시작하지 않고 probe만 확인하려면 `mise exec -- pnpm --filter docs verify:offline-evidence`를 실행한다. Chromium과 `unzip`이 필요하며 제품 `.next`·NAS·실제 인증 정보를 사용하지 않는다.
+서버를 시작하지 않고 probe만 확인하려면 `mise exec -- pnpm --filter docs verify:offline-evidence`를 실행한다. Chromium과 Python 3 표준 `zipfile` 모듈이 필요하며 제품 `.next`·NAS·실제 인증 정보를 사용하지 않는다. CI의 고정 Playwright 이미지는 이 준비 조건을 제공한다. ZIP의 모든 멤버·CRC를 파일 추출 없이 검사하며 손상·빈 ZIP·파일/도구 누락은 실패한다. `unzip`이나 실행 중 apt 설치는 필요하지 않다. 이미지 버전·digest 갱신과 실제 검증 범위는 [ADR-0030](../architecture/adr-0030-browser-ci-runtime-image.md) 및 [검증 기록](../verification/resilience/2026-11-11-ci-browser-runtime.md)을 따른다.
 
 ### 이동 계측 해석
 

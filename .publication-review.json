@@ -17,7 +17,7 @@
     },
     {
       "path": "docs/verification/resilience/2026-11-11-ci-browser-runtime.md",
-      "sha256": "f59b337e251412e0695cb8eb9d4d3aafe0923b074f68f674f20030722e4d8809",
+      "sha256": "7b3595dbe737e79732f388841f0e6bad975e33eb67e61c370ede7a087a4bd9b0",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-12",
@@ -31,7 +31,7 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-11-ci-browser-runtime.md",
-      "sha256": "403944979ee614fd7bae0cc3801d7612f9a9b0d6bf81fd60383f0c1d25f85622",
+      "sha256": "c17588a6ea981edb2499b223f30439d550f69f9e1e0bb4a3f706fad9dfa06f31",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-12",
@@ -773,11 +773,11 @@
     },
     {
       "path": "docs/runbooks/docs-offline-reading.md",
-      "sha256": "70f30b0bceb953a8f0fdedd5a23c403c58b8c447b5078c6219a3565545eeb68a",
+      "sha256": "253c002733b996a0faf3ce0aa874f84a8fc6f2dd6d2f2654b76d81127a1d670e",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-10-31",
-      "note": "사용자가 PR81 보완 최종 문서 3개와 승인 해시 3개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 오류 단계·등록 오류·source-check 운영 절차이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "reviewedOn": "2026-11-12",
+      "note": "사용자가 CI 보완·검증 문서의 커밋·푸시·PR을 승인함. 이미지 내 Python 표준 ZIP 검사 준비 조건과 실패 유지 절차만 보완하고 원시 자료·비밀값·개인정보는 제외함. main 병합·운영 배포는 하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,

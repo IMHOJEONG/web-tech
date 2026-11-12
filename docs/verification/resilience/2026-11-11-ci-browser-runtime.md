@@ -61,7 +61,13 @@ docker run --rm --platform linux/arm64 --network none --read-only \
 
 이미지에 존재하는 Python 3 표준 라이브러리의 `zipfile.testzip()`으로 모든 멤버·CRC를 검사하도록 TypeScript 실행기를 보완했다. 정상·CRC 변조·잘린 ZIP·비 ZIP·빈 ZIP·파일 및 Python 누락 거부를 검사하는 6개 회귀가 로컬과 network-none Linux에서 모두 통과했다. 기존 JSON·HTML·trace·navigation 검사를 그대로 둔 실제 `verify:offline-evidence`도 통과했다. 보완 후 `test:repo`는 251개 통과·skip 0이며 타입·변경 스크립트 ESLint도 통과했다. 단순 파일 존재 확인이나 ZIP 헤더 확인으로 약화하지 않았다.
 
-Python은 고정 이미지에 포함된 도구이며 새 패키지·apt 설치·Playwright 내부 ZIP API에 의존하지 않는다. [Python 공식 검사 계약](https://docs.python.org/3/library/zipfile.html#zipfile.ZipFile.testzip)을 따르며, 격리 모드 `-I`·30초 제한·인수 배열 실행·비추출을 사용한다. 후속 head의 원격 결과는 다음 검증 단계다.
+Python은 고정 이미지에 포함된 도구이며 새 패키지·apt 설치·Playwright 내부 ZIP API에 의존하지 않는다. [Python 공식 검사 계약](https://docs.python.org/3/library/zipfile.html#zipfile.ZipFile.testzip)을 따르며, 격리 모드 `-I`·30초 제한·인수 배열 실행·비추출을 사용한다.
+
+### ZIP 보완 구현 head의 원격 재검증
+
+- 기준 `55ecf03e9edb60ba0c08c08cc71a1d1fbc830707`: [CI 43120233857](https://github.com/IMHOJEONG/web-tech/actions/runs/43120233857)의 13개 job 전부 success. 오프라인 제품 회귀·지정 실패 trace/JSON/HTML/CRC 검사·성공 집계도 success다. 실패 작업을 건너뛰거나 assertion을 바꾸지 않았다.
+- 같은 head의 [CodeQL 43120228224](https://github.com/IMHOJEONG/web-tech/actions/runs/43120228224)·[Documentation 43120233869](https://github.com/IMHOJEONG/web-tech/actions/runs/43120233869)·두 Vercel Preview가 성공했고 PR head/merge의 열린 CodeQL 경고는 각각 0건이다.
+- 이 후속 기록과 runbook 준비 조건 수정은 별도 문서 커밋이며, 문서 head의 CI 상태는 PR의 최신 head 검사로 별도 확인한다. 위 실행은 구현 SHA의 증거로 보존한다. main의 최초 실패를 성공으로 다시 기록하거나 이 PR을 병합하지 않았다.
 
 ## 한계와 후속 작업
 
