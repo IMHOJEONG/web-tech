@@ -3,9 +3,9 @@
 ## 상태와 범위
 
 - 상태: 적용 중
-- 대상: vuln-radar 프론트·백엔드의 로컬 구현. 운영 미배포.
+- 대상: vuln-radar 프론트·백엔드. PR #89로 main `3408b19` 병합, 같은 SHA의 Vercel·Railway 자동 배포 및 공개 GET·Chromium 두 폭 검증. main CI의 브라우저 설치 장애와 운영 부하 검증은 별도 후속.
 - 결정일: 2026-11-10
-- 최종 검토: 2026-11-10
+- 최종 검토: 2026-11-11
 - 추적: [KAN-67](https://web-tech-service.atlassian.net/browse/KAN-67).
 
 ## 배경

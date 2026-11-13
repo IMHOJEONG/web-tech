@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
-import { execFileSync, spawnSync } from 'node:child_process'
+import { spawnSync } from 'node:child_process'
 import { readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { assertTraceZipIntegrity } from './trace-zip-integrity.ts'
 
 type Result = {
     status: string
@@ -88,7 +89,7 @@ assert.ok(
         `test-results${path.sep}offline${path.sep}retention-probe${path.sep}`
     )
 )
-execFileSync('unzip', ['-t', trace], { stdio: 'pipe' })
+assertTraceZipIntegrity(trace)
 assert.ok(
     statSync(
         path.join(app, 'playwright-report/offline/retention-probe/index.html')

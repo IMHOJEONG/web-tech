@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-11 main CI 브라우저 런타임](resilience/2026-11-11-ci-browser-runtime.md): 성공·실패 이미지 대조, apt DNS 실패와 원인 미확정 범위, 공식 이미지·네트워크 차단 Linux 양성/음성 및 기존 suite 유지 회귀.
+
 - [11-10 vuln-radar 전체 검색·페이지](integration/2026-11-10-vuln-radar-feed-search.md): 합성 PostgreSQL 43개와 두 화면의 URL·필터·페이지·실패 복구, 단위·HTTP 회귀와 기존 빌드 경로 보완.
 
 - [11-10 vuln-radar 운영 반영](deployment/2026-11-10-vuln-radar-operational.md): 동일 main 배포·공개 GET·집계 대조. 브라우저·장애 주입·보안 재개 미검증.

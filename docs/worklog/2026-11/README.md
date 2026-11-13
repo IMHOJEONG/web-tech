@@ -1,6 +1,8 @@
 # 2026-11 작업 기록
 
-- [11-10 vuln-radar 전체 검색](2026-11-10-vuln-radar-feed-search.md): 운영 문서 선행 커밋 후 서버 필터·페이지·URL 복원·회귀와 빌드 경로 보완. 배포 없음.
+- [11-11 main CI 브라우저 준비 격리](2026-11-11-ci-browser-runtime.md): 같은 Ubuntu 이미지의 성공·DNS 실패 대조, 사전 설치 이미지·실제 렌더/실패 회귀. 기존 미커밋 운영 기록 정리와 분리.
+
+- [11-10 vuln-radar 전체 검색](2026-11-10-vuln-radar-feed-search.md): 초기 구현·회귀 이후 PR #89 병합·운영 배포·두 화면 검증. main CI 설치 장애와 배포 성공을 구분.
 
 - [11-10 vuln-radar 운영 확인](2026-11-10-vuln-radar-operational.md): 읽기 전용 배포·통계·수집 상태 대조와 전체 검색 후속 분리.
 

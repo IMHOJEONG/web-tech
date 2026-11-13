@@ -2,7 +2,7 @@
 
 ## Summary
 
-운영 검증 문서를 먼저 커밋한 뒤 기존 25개 표본 검색을 서버 전체 DB 검색으로 분리했다. 이후 사용자 승인으로 빌드 보완·서버·프론트·회귀·문서를 작업별 로컬 커밋으로 정리했다. 푸시·배포하지 않았다.
+운영 검증 문서를 먼저 커밋한 뒤 기존 25개 표본 검색을 서버 전체 DB 검색으로 분리했다. 초기 구현은 작업별 로컬 커밋으로 정리했고, 이후 별도 승인으로 PR #89의 검증·병합·자동 운영 배포를 진행했다. 초기 미배포 기록과 후속 운영 결과는 아래 Notes에서 구분한다.
 
 ## Changed
 
@@ -26,10 +26,20 @@
 
 2026-11-11 병합 전 재검토: [추가 Minor](https://github.com/IMHOJEONG/web-tech/pull/89#discussion_r4532621082)에 따라 같은 보고서의 명령에 watchlist·기록된 `CVE-2023-4911` 상세·`/overview`와 `/feed` HTML 검사를 명시했다. 문서의 Node 명령을 그대로 추출해 실행하여 집계 대조와 모든 GET 검사의 통과를 확인했다. 현재 첫 Feed 항목 대신 기록된 상세 ID를 사용하고, 과거 집계값·수집 시각 재현 및 브라우저 렌더링은 검사 범위 밖임을 구분했다. 기존 시점 표본과 정제 artifact는 유지한다.
 
+### 2026-11-11 병합·운영 검증
+
+- 후속 문서 커밋 `f2db82d`의 [PR CI](https://github.com/IMHOJEONG/web-tech/actions/runs/43031357715)·[CodeQL](https://github.com/IMHOJEONG/web-tech/actions/runs/43031350598)·CodeRabbit 검사가 모두 통과했다. 리뷰 스레드 2개 해결·미해결 0건을 재조회했다. 최종 메시지 사전검사 후 사용자 승인에 따라 PR #89를 squash 병합했다. 실제 main은 `3408b1950d340d814bf671412d1519f2b753a761`, 병합 시각은 22:49:51 KST다.
+- 같은 SHA의 Vercel Production deployment `7711853000`과 Railway GitHub deployment `7711844811`이 성공했다. Railway CLI에서도 실제 배포 `fbd2d321-7d89-4575-9769-d9eac02f2166`의 main·commitHash 일치·SUCCESS·중지 false·인스턴스 RUNNING을 확인했다. 환경 이름 `development`와 health의 기존 메타데이터는 변경하지 않았다.
+- 23:04 KST 공개 프록시 GET 표본: database 95,970건·3,839페이지, 첫 두 페이지 각 25개·중복 0, 기존 25개 표본 밖 `CVE-2026-97185` 검색·상세 성공. P0/KEV 필터 328건·실제 빈 결과·잘못된 page/중복 page의 400·overview/status 집계 일치를 확인했다. 수집에 따라 건수는 바뀔 수 있다.
+- 같은 공개 도메인의 Chromium 1280px·390px에서 다음 페이지 클릭·리로드 복원·검색 시 페이지 초기화·상세 Link·뒤로가기 query 복원을 검사했다. 검사 중 pageerror·backend 5xx·페이지 가로 넘침은 각각 0이다. 실기기·다른 브라우저 엔진·운영 부하는 검증하지 않았다.
+- [main CI](https://github.com/IMHOJEONG/web-tech/actions/runs/43032686880) attempt 1은 브라우저 설치 7개 실패·matrix 1개 취소·집계 실패다. 같은 SHA의 실패 작업만 attempt 2로 재실행했으나 브라우저 8개 모두 `Install Playwright Chromium`에서 DNS 실패·설치 종료 코드 100으로 다시 중단됐다. 두 실행 모두 이 작업들의 assertion 실행 전 실패다. 최종 CI는 failure이며 통과로 기록하지 않는다. 타입·lint·커밋·단위/HTTP 계약 검사는 성공했다. DNS 장애의 더 깊은 원인과 실행기/패키지 서버 복구는 미확정이며, 기존 PR의 `responseFinished=false` 실패와 혼동하지 않는다.
+- [main CodeQL](https://github.com/IMHOJEONG/web-tech/actions/runs/43032687538)·[Documentation](https://github.com/IMHOJEONG/web-tech/actions/runs/43032687256)은 성공했고 main의 열린 CodeQL 경고는 0건이다. 배포 성공·운영 표본 통과를 main 전체 CI 성공으로 바꿔 기록하지 않는다.
+- 운영 DB·토큰·환경변수·수집·배포 설정 변경, 수동 재배포 및 NAS 접속은 하지 않았다. 원시 HTTP 응답·실행 로그·캡처는 공개하지 않는다. Jira KAN-67 댓글 10096과 Confluence 댓글 16580609에 같은 결과와 미검증 범위를 기록하고 재조회했다. 이 병합 후 작업 기록은 후속 CI 보완 브랜치에서 별도 문서 커밋으로 정리하며, 실제 main 반영과 구분한다.
+
 ## Open Questions
 
 깊은 offset·substring 검색 성능은 운영 규모의 부하 검증 전이다. 실행 중 수집으로 요청 간 페이지 경계가 움직이는 경우 cursor 전환이 필요한지 실측해야 한다.
 
 ## Next
 
-푸시·PR·배포는 별도 승인 후 진행한다. backend 선배포와 frontend 후배포가 필요하다. 운영 데이터·자격 증명·Railway·Vercel은 이번 작업에서 변경하지 않았다.
+초기 구현 후 푸시·PR·병합·자동 운영 배포는 각각 후속 승인을 받아 진행했다. 위 운영 검증 당시에는 CI 실행기 설정·검사 조건을 변경하지 않았으며, 패키지 서버 DNS 실패 조사는 별도 후속 작업으로 분리했다. 운영 규모 검색 부하와 깊은 offset 비용도 별도 과제로 남긴다. 운영 데이터·자격 증명·수집 설정은 변경하지 않았다.
