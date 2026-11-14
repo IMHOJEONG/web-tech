@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-14 본문 공통 목차 UI/UX](accessibility/2026-11-14-article-toc-ux.md): 현재 위치·계층·접기·앵커/포커스의 로컬 회귀. 운영 반영과 구분.
+
 - [11-11 main CI 브라우저 런타임](resilience/2026-11-11-ci-browser-runtime.md): 성공·실패 이미지 대조, apt DNS 실패와 원인 미확정 범위, 공식 이미지·네트워크 차단 Linux 양성/음성 및 기존 suite 유지 회귀.
 
 - [11-10 vuln-radar 전체 검색·페이지](integration/2026-11-10-vuln-radar-feed-search.md): 합성 PostgreSQL 43개와 두 화면의 URL·필터·페이지·실패 복구, 단위·HTTP 회귀와 기존 빌드 경로 보완.

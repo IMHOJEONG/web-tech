@@ -161,6 +161,10 @@ remote renderer는 보안을 위해 raw HTML을 비활성화한다. 이 때문�
 
 본문 요소는 local MDX와 remote HTML/markdown의 최종 UI가 달라지지 않도록 아래 문법을 우선 사용한다.
 
+### 본문 목차
+
+목차는 본문의 제목에서 자동 생성한다. 작성자는 frontmatter `title`과 H2/H3/H4 계층을 정리하고, 글 안에 별도의 수동 목차를 중복 작성하지 않는다. 로컬·원격 공통 범위, 기존 앵커 보존, 모바일 접기 및 검증 코드는 [본문 목차 작성·연결 가이드](docs-article-toc-guide.md)를 따른다.
+
 ### Callout
 
 주의, 팁, 참고 박스는 blockquote marker 문법으로 작성한다.
