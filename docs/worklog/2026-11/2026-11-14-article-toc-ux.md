@@ -12,6 +12,7 @@
 - 순수 함수와 실제 세 화면 회귀를 추가했다. 상세 결과와 처음 발생한 실패는 [검증 보고서](../../verification/accessibility/2026-11-14-article-toc-ux.md)를 원본으로 사용한다.
 - [기존 UI 재사용 정책](../../architecture/docs-document-ui-reuse-policy.md)에 책임 경계를 추가했다. 데이터/공개 계약 변경이 아니므로 새 ADR은 해당 없음이다.
 - 사용자 로컬 확인 후 [본문 목차 작성·연결 가이드](../../runbooks/docs-article-toc-guide.md), [합성 예제와 옵션 코드](../../../apps/docs/widgets/article-toc/examples/README.md)를 추가하고 기고 가이드에서 연결했다. 원격 H5/H6 미추출 등 현재 차이를 숨기지 않으며 실제 예제 파일을 읽는 회귀를 추가했다.
+- [PR #91](https://github.com/IMHOJEONG/web-tech/pull/91) 리뷰 2건에 따라 위치 판정 테스트를 기존 CI glob에 포함되는 `lib`로 이동하고, 보고서의 전체 SHA·최초 미커밋 검증·후속 검증 기준을 분리했다. 공통 설정 변경이나 검사 기준 완화 없이 반영했다.
 
 ## Notes
 
@@ -30,4 +31,4 @@
 
 ## Next
 
-동일 브라우저 회귀와 로컬 화면 확인을 마쳤고 사용자도 로컬 확인 완료를 알렸다. 이번 승인 범위의 작업별 커밋·푸시 결과는 Jira·Confluence에서 실제 원격 SHA로 연결한다. PR 생성·main 병합·배포는 별도 승인 후 진행한다.
+사용자가 PR #91 병합·배포와 같은 범위의 리뷰 보완·공개 해시 갱신을 승인했다. 기준 `b382b96a9b553a2450c028842b43cbf0edf9e89b`의 원격 CI는 통과했으며 후속 검증과 구분한다. 보완한 head의 CI·리뷰를 재확인한 뒤 최종 squash 메시지 사전검사를 거쳐 main에 병합하고, 같은 병합 SHA의 CI·Production 결과를 별도로 확인한다.

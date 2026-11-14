@@ -73,11 +73,11 @@
     },
     {
       "path": "docs/verification/accessibility/2026-11-14-article-toc-ux.md",
-      "sha256": "9b3af64e11b03fb4a1cbe604f7083169dbbda4d656620d2584c72ec878efcd75",
+      "sha256": "0a29b83c21fb406df77dff7a43f5bc3c390bc88acdf0dee77434bfa1864d55ad",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-14",
-      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
+      "note": "사용자가 PR91 기존 테스트 이동과 정제 검증 보고서·작업 기록 2개의 보완·공개 해시 갱신 후 병합·배포를 명시 승인함. 최초 미커밋 검증·전체 기준 SHA·CI 편입과 364개 검사를 구분해 검수함. 원시 로그·캡처·실제 응답·비밀값·개인정보·기존 미커밋은 제외하며 NAS·공통 검사 설정은 변경하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -87,11 +87,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-14-article-toc-ux.md",
-      "sha256": "f1a11f171962fc4e88655e0b3aa388464bdf6354df07addc2a5e09fc80d24dfc",
+      "sha256": "821ad008b23681ef8ccd3396eaa2893f881f8ce617a0ff2e358c8ce9818eafc3",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-14",
-      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
+      "note": "사용자가 PR91 기존 테스트 이동과 정제 검증 보고서·작업 기록 2개의 보완·공개 해시 갱신 후 병합·배포를 명시 승인함. 최초 미커밋 검증·전체 기준 SHA·CI 편입과 364개 검사를 구분해 검수함. 원시 로그·캡처·실제 응답·비밀값·개인정보·기존 미커밋은 제외하며 NAS·공통 검사 설정은 변경하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,

@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { findActiveHeading, getHeadingId } from './active-heading.ts'
+import {
+    findActiveHeading,
+    getHeadingId,
+} from '../widgets/article-toc/model/active-heading.ts'
 
 test('heading IDs preserve numbered and percent-encoded anchors', () => {
     assert.equal(getHeadingId('#1-2-compress'), '1-2-compress')
