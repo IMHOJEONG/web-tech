@@ -1,0 +1,21 @@
+{
+  "checkedOn": "2026-10-28",
+  "baseCommit": "e2126a40c02694d968f62ce0e236ec0945a57d7b",
+  "observations": [
+    {
+      "command": "gh api repos/IMHOJEONG/web-tech/deployments/7314181802 --jq '{id,sha,environment,description}'",
+      "id": 7314181802,
+      "environment": "Production – web-tech",
+      "sha": "c1e2850cbfdf50bd7761729b32d1af5ffe045596",
+      "description": null
+    },
+    {
+      "command": "gh api repos/IMHOJEONG/web-tech/deployments/7314175335 --jq '{id,sha,environment,description}'",
+      "id": 7314175335,
+      "environment": "Production – vuln-radar",
+      "sha": "c1e2850cbfdf50bd7761729b32d1af5ffe045596",
+      "description": null
+    }
+  ],
+  "limit": "GitHub deployment identifiers only; not Vercel deployment IDs, current production verification, new deployment or full accessibility audit"
+}
