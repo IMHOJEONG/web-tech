@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-27",
+  "timezone": "Asia/Seoul",
+  "issue": "KAN-43",
+  "sourceCommit": "9923d815fb48220b3c95f01784c6a452567e4470",
+  "scope": "runtime inventory and benign framework behavior review; no runtime/config/deployment change",
+  "sources": [
+    "https://nodejs.org/en/blog/vulnerability/october-2026-security-releases",
+    "https://nodejs.org/en/blog/release/v24.22.1",
+    "https://vercel.com/kb/bulletin/node-js-security-advisory",
+    "https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#check-latest-version"
+  ],
+  "securityRelease": {
+    "date": "2026-10-21",
+    "node24MinimumPatchedRelease": "24.22.1",
+    "primaryConcern": "CVE-2026-111497",
+    "nodeAdvisorySeverity": "high"
+  },
+  "localRuntime": {
+    "node": "v24.12.0",
+    "openssl": "3.5.4",
+    "brotli": "1.1.0",
+    "undici": "7.16.0"
+  },
+  "mainCi": {
+    "runId": 40352593284,
+    "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40352593284",
+    "headSha": "e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e",
+    "createdAt": "2026-10-26T15:46:19Z",
+    "conclusion": "success",
+    "nodeVersion": "v24.21.0",
+    "jobsWithObservedNodeVersion": 12,
+    "cachePath": "/opt/hostedtoolcache/node/24.21.0/x64",
+    "checkLatestExplicitlyEnabledInRepository": false,
+    "runtimePatchedByTestSuccess": false
+  },
+  "benignNestProbe": {
+    "node": "v24.12.0",
+    "nest": "11.1.19",
+    "installedBodyParser": "2.4.0",
+    "payload": "valid Brotli-compressed JSON only",
+    "host": "127.0.0.1",
+    "port": "ephemeral",
+    "status": 403,
+    "guardCalls": 1,
+    "decodedBeforeDenial": true,
+    "malformedInputOrExploit": false,
+    "realAppModuleOrSecretsLoaded": false,
+    "entryPoint": "docs/verification/artifacts/2026-10-27-node-brotli-safe-probe.mts"
+  },
+  "staticEvidence": {
+    "nestBodyParserEnabled": [
+      "apps/docs-backend/src/main.ts",
+      "apps/vuln-radar-backend/src/main.ts"
+    ],
+    "node24DockerStages": [
+      "apps/docs-backend/Dockerfile",
+      "apps/vuln-radar-backend/Dockerfile"
+    ],
+    "docsFetch": "apps/docs/lib/content-api-request.ts",
+    "nextImageBrotliDecoderInInstalledSource": true,
+    "backendWorkflowPullTrue": false,
+    "explicitNodePermissionSnapshotDnsResolveOrZipFileInOwnSourceFound": false
+  },
+  "notPerformed": [
+    "Node update",
+    "shared config change",
+    "Docker build/pull/push",
+    "deployment",
+    "NAS SSH",
+    "malicious payload",
+    "token read or rotation",
+    "production runtime version verification"
+  ],
+  "productionRuntimePatchStatus": {
+    "NAS": "unknown",
+    "Railway": "unknown",
+    "Vercel": "unknown; managed mitigation documented, activation not verified"
+  },
+  "priorFilterWorkPreserved": true,
+  "safeProbeSourceBlob": "9cbe12ad2526cd2ea7780678708049a476ed6f3e",
+  "checks": {
+    "safeProbeRerun": "passed",
+    "probeTypecheck": "passed",
+    "temporaryIndexDocumentationDelta": "passed",
+    "temporaryIndexFormatting": "passed",
+    "diffCheck": "passed",
+    "preservedFilterSourceBlobsMatched": 4,
+    "realIndexStagedFiles": 0
+  },
+  "tracking": {
+    "jira": "KAN-43",
+    "status": "검토 중",
+    "commentId": "10033",
+    "commentReadBackEqual": true,
+    "tableColumnsByRow": [3, 3, 3, 3, 3],
+    "confluencePageId": "65817",
+    "confluenceVersion": 170,
+    "priorBodyPreserved": true,
+    "appendedSections": 1
+  }
+}

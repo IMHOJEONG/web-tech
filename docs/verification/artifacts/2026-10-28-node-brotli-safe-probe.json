@@ -1,0 +1,16 @@
+{
+  "checkedOn": "2026-10-28",
+  "baseCommit": "e2126a40c02694d968f62ce0e236ec0945a57d7b",
+  "command": "mise exec -- node docs/examples/node-runtime-security/safe-brotli-probe.mts",
+  "typecheck": "mise exec -- pnpm exec tsc -p docs/examples/node-runtime-security/tsconfig.json",
+  "result": {
+    "node": "v24.22.1",
+    "brotli": "1.2.0",
+    "nest": "11.1.19",
+    "status": 403,
+    "guardCalls": 1,
+    "decodedBeforeDenial": true,
+    "payload": "valid Brotli JSON only; no exploit or malformed input"
+  },
+  "scope": "loopback isolated Nest app only; no secrets, production requests or exploit"
+}
