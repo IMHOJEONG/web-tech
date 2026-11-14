@@ -2,6 +2,104 @@
   "version": 1,
   "entries": [
     {
+      "path": "apps/docs/widgets/article-toc/examples/README.md",
+      "sha256": "d2ca66755a39a2ce12ef8dc1e816efe3f5e2fbca9616d0d858783c7481a95c62",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "apps/docs/widgets/article-toc/examples/article.md",
+      "sha256": "a01905bb8ac31fcda722d4be9628eaab61616f217ea92d966c755dc7958b8d1b",
+      "kind": "synthetic-fixture",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/docs-document-ui-reuse-policy.md",
+      "sha256": "a3b1978cdbbf947979699118f7cceb89dfa516800ee06414f19ced1320394713",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/runbooks/docs-article-toc-guide.md",
+      "sha256": "418ebff67c08f69867f5b8c8a72c63be1c446e0bf83000c751f150b191e1c89b",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/runbooks/docs-contributor-guide.md",
+      "sha256": "158ad87c056fdf82241547918cc43ab05ed4aeb07116dcc482844a2c74754165",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-11-14-article-toc-ux.md",
+      "sha256": "0a29b83c21fb406df77dff7a43f5bc3c390bc88acdf0dee77434bfa1864d55ad",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 PR91 기존 테스트 이동과 정제 검증 보고서·작업 기록 2개의 보완·공개 해시 갱신 후 병합·배포를 명시 승인함. 최초 미커밋 검증·전체 기준 SHA·CI 편입과 364개 검사를 구분해 검수함. 원시 로그·캡처·실제 응답·비밀값·개인정보·기존 미커밋은 제외하며 NAS·공통 검사 설정은 변경하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-14-article-toc-ux.md",
+      "sha256": "821ad008b23681ef8ccd3396eaa2893f881f8ce617a0ff2e358c8ce9818eafc3",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 PR91 기존 테스트 이동과 정제 검증 보고서·작업 기록 2개의 보완·공개 해시 갱신 후 병합·배포를 명시 승인함. 최초 미커밋 검증·전체 기준 SHA·CI 편입과 364개 검사를 구분해 검수함. 원시 로그·캡처·실제 응답·비밀값·개인정보·기존 미커밋은 제외하며 NAS·공통 검사 설정은 변경하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/architecture/adr-0030-browser-ci-runtime-image.md",
       "sha256": "b4a474e4d9d50b6f18cafa3b0fc80916f0a661fdd2603e8cd24df7f8b66e9e2a",
       "kind": "document",
@@ -73,11 +171,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "683de7e68d1e208542efff6cff62703bed9c72dd3c73cf4af9b78481c6f9eac2",
+      "sha256": "e6359abb8cb75588a19ae9671b675c4b146662800c9821e262c66827bac403fb",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-12",
-      "note": "사용자가 CI 보완 브랜치의 커밋·푸시·PR 및 정제 문서 공개를 승인함. 공식 이미지 결정·합성 회귀와 한계만 포함하며 원시 로그·실제 응답·개인정보·비밀값은 제외함.",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -101,11 +199,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "41558f666dd4c48009f26230ff17bfb422ab6b01f34400bbc3a3a8b1903f9c07",
+      "sha256": "54222d9152fadd139b7cef126b6c71d54998aae5abd320b518faf1c22f6e29cc",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-12",
-      "note": "사용자가 CI 보완과 미커밋 운영 기록의 커밋·푸시·PR을 승인함. 배포 식별자·정제된 검증 요약만 포함하고 원시 응답·로그·개인정보·비밀값을 제외함.",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -647,11 +745,11 @@
     },
     {
       "path": "docs/runbooks/README.md",
-      "sha256": "c7a6d0e9efe1ebd3867d1bb8e9e0d2bec479e1c38f102b3d23f42796ec2e43cb",
+      "sha256": "dd9ffc6e097503e262f08df0873665a7664387836ab9f7312586ad72e44b13ed",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-03",
-      "note": "사용자가 순차 개선 진단·테스트 6개와 운영 문서 7개의 공개·검수 해시 기록·커밋·푸시 및 CI·리뷰 확인 후 main 병합·배포를 명시 승인함. 자체 작성한 정제 결과·절차·목차만 포함하고 원시 trace·로그·프로필·초안·비밀값은 제외함. 실제 계정·키·토큰·보호 설정은 변경하지 않음.",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,

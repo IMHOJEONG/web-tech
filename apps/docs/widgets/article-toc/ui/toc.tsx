@@ -1,41 +1,30 @@
 'use client'
 
-import { clsx } from 'clsx'
-import { MouseEvent, useCallback, useState } from 'react'
-import type { HeadingDepth, HeadingParent, TocItem } from 'remark-flexible-toc'
+import { type MouseEvent, useState } from 'react'
+import type { TocItem } from 'remark-flexible-toc'
 
-import styles from './toc.module.css'
-import { ChevronDown } from 'lucide-react'
-import { filterTocItems } from '../model/toc-items'
+import { filterTocItems, type TocFilters } from '../model/toc-items'
+import { getHeadingId } from '../model/active-heading'
+import { useActiveHeading } from '../model/use-active-heading'
+import { TocSummary } from './toc-summary'
+import { TocLinks } from './toc-links'
 
-// toc - an array of table of contents items provided by the remark plugin "remark-flexible-toc"
-// maxDepth (default: 6) — max heading depth to include in the table of contents; this is inclusive: when set to 3, level three headings are included
-// indented (default: false) — whether to add indent to list items according to heading levels
-// ordered (default: false) — whether to add numbering to list items as an ordered list
-// tight (default: false) — whether to compile list items tightly, otherwise space is added around items
-// exclude — headings to skip, wrapped in new RegExp('^(' + value + ')$', 'i'); any heading matching this expression will not be present in the table of contents
-// skipLevels (default: [1]) — disallowed heading levels, by default the article h1 is not expected to be in the TOC
-// skipParents — disallow headings to be children of certain node types,(if the parent is "root", it is not skipped)
-type Props = {
+type Props = TocFilters & {
     toc?: TocItem[]
     title?: string
-    maxDepth?: HeadingDepth
     indented?: boolean
     ordered?: boolean
     tight?: boolean
-    exclude?: string | string[]
-    skipLevels?: HeadingDepth[]
-    skipParents?: Exclude<HeadingParent, 'root'>[]
     defaultOpen?: boolean
     closeOnNavigate?: boolean
 }
 
 const Toc = ({
     toc,
-    title = 'TABLE OF CONTENTS',
+    title = 'On this page',
     maxDepth = 6,
     ordered = false,
-    indented = false,
+    indented = true,
     tight = false,
     exclude,
     skipLevels = [1],
@@ -44,132 +33,104 @@ const Toc = ({
     closeOnNavigate = false,
 }: Props) => {
     const [isOpen, setIsOpen] = useState(defaultOpen)
-    const handleAnchorClick = useCallback(
-        (event: MouseEvent<HTMLAnchorElement>, href: string) => {
-            if (
-                !href.startsWith('#') ||
-                event.metaKey ||
-                event.ctrlKey ||
-                event.shiftKey ||
-                event.altKey ||
-                event.button !== 0
-            ) {
-                return
-            }
-
-            const id = decodeURIComponent(href.slice(1))
-            const target = document.getElementById(id)
-
-            if (!target) {
-                return
-            }
-
-            event.preventDefault()
-
-            window.history.replaceState(window.history.state, '', href)
-
-            const prefersReducedMotion = window.matchMedia(
-                '(prefers-reduced-motion: reduce)'
-            ).matches
-
-            const scrollToHeading = () => {
-                target.scrollIntoView({
-                    behavior: prefersReducedMotion ? 'auto' : 'smooth',
-                    block: 'start',
-                })
-                if (closeOnNavigate) {
-                    const addedTabIndex = !target.hasAttribute('tabindex')
-                    if (addedTabIndex) target.tabIndex = -1
-                    target.classList.add('toc-focus-target')
-                    target.addEventListener(
-                        'blur',
-                        () => {
-                            if (addedTabIndex)
-                                target.removeAttribute('tabindex')
-                            target.classList.remove('toc-focus-target')
-                        },
-                        { once: true }
-                    )
-                    target.focus({ preventScroll: true })
-                }
-            }
-
-            if (closeOnNavigate) {
-                setIsOpen(false)
-                requestAnimationFrame(scrollToHeading)
-            } else {
-                scrollToHeading()
-            }
-
-            event.currentTarget.blur()
-        },
-        [closeOnNavigate]
-    )
-
-    if (!toc) return null
-
     const filteredToc = filterTocItems(toc, {
         maxDepth,
         exclude,
         skipLevels,
         skipParents,
     })
+    const activeHref = useActiveHeading(
+        JSON.stringify(filteredToc.map((heading) => heading.href))
+    )
+    const handleAnchorClick = (
+        event: MouseEvent<HTMLAnchorElement>,
+        href: string
+    ) => {
+        if (
+            !href.startsWith('#') ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey ||
+            event.button !== 0
+        ) {
+            return
+        }
+
+        const id = getHeadingId(href)
+        const target = id ? document.getElementById(id) : null
+
+        if (!target) {
+            return
+        }
+
+        event.preventDefault()
+
+        window.history.replaceState(window.history.state, '', href)
+
+        const prefersReducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches
+
+        const scrollToHeading = () => {
+            target.scrollIntoView({
+                behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                block: 'start',
+            })
+            if (closeOnNavigate) {
+                const addedTabIndex = !target.hasAttribute('tabindex')
+                if (addedTabIndex) target.tabIndex = -1
+                target.classList.add('toc-focus-target')
+                target.addEventListener(
+                    'blur',
+                    () => {
+                        if (addedTabIndex) target.removeAttribute('tabindex')
+                        target.classList.remove('toc-focus-target')
+                    },
+                    { once: true }
+                )
+                target.focus({ preventScroll: true })
+            }
+        }
+
+        if (closeOnNavigate) {
+            setIsOpen(false)
+            requestAnimationFrame(scrollToHeading)
+        } else {
+            scrollToHeading()
+        }
+    }
     if (filteredToc.length === 0) return null
     return (
         <details
-            className={clsx(styles['toc-container'], !isOpen && styles.close)}
+            className="group min-w-0"
             open={isOpen}
-        >
-            <summary
-                className={`${styles['toc-title']} ds-focus-ring flex min-h-11 items-center justify-between gap-3 rounded-sm`}
-                onClick={(event) => {
+            onKeyDown={(event) => {
+                if (event.key === 'Escape' && isOpen && closeOnNavigate) {
                     event.preventDefault()
-                    setIsOpen((current) => !current)
-                }}
-            >
-                <strong>{title}</strong>
-                <ChevronDown
-                    aria-hidden="true"
-                    className={clsx('size-4 shrink-0', isOpen && 'rotate-180')}
+                    setIsOpen(false)
+                    event.currentTarget.querySelector('summary')?.focus()
+                }
+            }}
+        >
+            <TocSummary
+                title={title}
+                count={filteredToc.length}
+                currentTitle={
+                    filteredToc.find((item) => item.href === activeHref)?.value
+                }
+                onToggle={() => setIsOpen((current) => !current)}
+            />
+            <nav aria-label={title} className="min-w-0 pb-2 pt-2">
+                <TocLinks
+                    items={filteredToc}
+                    activeHref={activeHref}
+                    indented={indented}
+                    ordered={ordered}
+                    tight={tight}
+                    onNavigate={handleAnchorClick}
                 />
-            </summary>
-            <ul className={styles['toc-list']}>
-                {filteredToc.map((heading) => (
-                    <li
-                        key={heading.href}
-                        className={clsx(
-                            indented && styles[`h${heading.depth}indent`],
-                            tight && styles['tight']
-                        )}
-                    >
-                        <a
-                            href={heading.href}
-                            onClick={(event) =>
-                                handleAnchorClick(event, heading.href)
-                            }
-                        >
-                            <div className={`h${heading.depth}`}>
-                                {ordered ? (
-                                    <strong>
-                                        <span className={styles['numbering']}>
-                                            {heading.numbering
-                                                .slice(1)
-                                                .join('.')}
-                                            .
-                                        </span>
-                                    </strong>
-                                ) : null}
-                                <span className={styles['heading']}>
-                                    {heading.value}
-                                </span>
-                                <span className={styles['href']}>
-                                    {heading.href}
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                ))}
-            </ul>
+            </nav>
         </details>
     )
 }
