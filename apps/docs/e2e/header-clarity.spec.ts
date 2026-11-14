@@ -17,10 +17,8 @@ for (const locale of ['ko', 'en']) {
                 await expect(page.locator('html')).not.toHaveClass(/\bdark\b/)
             }
             const header = page.getByRole('banner')
-            const trigger = header.locator(
-                'form button[aria-expanded][aria-controls]'
-            )
-            const input = header.getByRole('textbox')
+            const trigger = page.getByTestId('search-drawer-trigger')
+            const input = page.getByRole('dialog').getByRole('combobox')
             const width = page.viewportSize()!.width
             await expect(trigger).toBeVisible()
             await expect(trigger).toHaveAccessibleName(
@@ -91,11 +89,9 @@ test('header and expanded search fit narrow and breakpoint widths', async ({
     for (const width of [320, 390, 640, 768, 1024, 1280]) {
         await page.setViewportSize({ width, height: 844 })
         const header = page.getByRole('banner')
-        const trigger = header.locator(
-            'form button[aria-expanded][aria-controls]'
-        )
+        const trigger = page.getByTestId('search-drawer-trigger')
         await trigger.click()
-        const input = header.getByRole('textbox')
+        const input = page.getByRole('dialog').getByRole('combobox')
         await expect(input).toBeVisible()
         const panelId = await trigger.getAttribute('aria-controls')
         const bounds = await page.locator(`[id="${panelId}"]`).boundingBox()

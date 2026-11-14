@@ -5,11 +5,12 @@ for (const locale of ['ko', 'en']) {
         page,
     }) => {
         await page.goto(`/${locale}/about`)
-        const form = page.locator('header form')
-        const trigger = form.locator('button[aria-expanded][aria-controls]')
-        const input = form.getByRole('textbox')
+        const form = page.getByRole('dialog').getByRole('search')
+        const trigger = page.getByTestId('search-drawer-trigger')
+        const input = form.getByRole('combobox')
+        await expect(trigger).toBeEnabled()
 
-        for (const target of ['input', 'clear', 'submit', 'trigger']) {
+        for (const target of ['input', 'clear', 'submit', 'close']) {
             await trigger.press('Enter')
             await expect(input).toBeFocused()
             await input.fill('react')
@@ -25,9 +26,13 @@ for (const locale of ['ko', 'en']) {
                     form.locator('button[type="submit"]')
                 ).toBeFocused()
             }
-            if (target === 'trigger') {
+            if (target === 'close') {
                 await page.keyboard.press('Shift+Tab')
-                await expect(trigger).toBeFocused()
+                await expect(
+                    page.getByRole('dialog').getByRole('button', {
+                        name: locale === 'ko' ? '검색 닫기' : 'Close search',
+                    })
+                ).toBeFocused()
             }
             await page.keyboard.press('Escape')
             await expect(trigger).toHaveAttribute('aria-expanded', 'false')

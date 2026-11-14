@@ -14,11 +14,19 @@ import {
 export function useSearchKeyword(initialValue = '') {
     const [keyword, setKeyword] = useState(normalizeSearchQuery(initialValue))
     const composing = useRef(false)
+    const [isComposing, setIsComposing] = useState(false)
+    const finishComposition = (value = keyword) => {
+        composing.current = false
+        setIsComposing(false)
+        setKeyword(limitSearchInput(value))
+    }
 
     return {
         keyword,
         setKeyword,
         composing,
+        isComposing,
+        finishComposition,
         inputProps: {
             value: keyword,
             onChange: (event: ChangeEvent<HTMLInputElement>) => {
@@ -27,10 +35,10 @@ export function useSearchKeyword(initialValue = '') {
             },
             onCompositionStart: () => {
                 composing.current = true
+                setIsComposing(true)
             },
             onCompositionEnd: (event: CompositionEvent<HTMLInputElement>) => {
-                composing.current = false
-                setKeyword(limitSearchInput(event.currentTarget.value))
+                finishComposition(event.currentTarget.value)
             },
             onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
                 if (

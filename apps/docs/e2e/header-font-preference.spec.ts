@@ -71,17 +71,17 @@ for (const locale of ['ko', 'en']) {
         for (const width of [320, 390, 500]) {
             await page.setViewportSize({ width, height: 900 })
             await expectHeaderFits(page)
-            const header = page.getByRole('banner')
-            const trigger = header.locator('form button[aria-controls]')
+            const trigger = page.getByTestId('search-drawer-trigger')
             await trigger.click()
-            const input = header.getByRole('textbox')
+            const input = page.getByRole('dialog').getByRole('combobox')
             await expect(input).toBeFocused()
             const panel = page.locator(
                 `[id="${await trigger.getAttribute('aria-controls')}"]`
             )
-            expect((await panel.boundingBox())!.y).toBeGreaterThanOrEqual(
-                (await header.boundingBox())!.height
-            )
+            const bounds = (await panel.boundingBox())!
+            expect(bounds.y).toBeGreaterThanOrEqual(0)
+            expect(bounds.width).toBeLessThanOrEqual(width)
+            expect(bounds.height).toBeLessThanOrEqual(900)
             await input.press('Escape')
             await expect(trigger).toBeFocused()
             await page.getByTestId('mobile-nav-drawer-trigger').click()

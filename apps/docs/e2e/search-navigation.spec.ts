@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test'
 
 function searchForm(page: Page, location: 'header' | 'index') {
     return location === 'header'
-        ? page.locator('header form[role="search"]')
+        ? page.getByRole('dialog').getByRole('search')
         : page.getByRole('main').getByRole('search')
 }
 
@@ -14,7 +14,7 @@ for (const locale of ['ko', 'en']) {
             await page.goto(`/${locale}/docs?section=web&sort=latest&page=2`)
             const form = searchForm(page, location)
             if (location === 'header')
-                await form.locator('button[aria-expanded]').click()
+                await page.getByTestId('search-drawer-trigger').click()
             const input = form.locator('input')
             await input.fill('  React  ')
             await page.evaluate(() => {
@@ -40,7 +40,7 @@ for (const locale of ['ko', 'en']) {
             expect(documentRequests).toEqual([])
 
             if (location === 'header')
-                await form.locator('button[aria-expanded]').click()
+                await page.getByTestId('search-drawer-trigger').click()
             await input.fill(' React ')
             const historyLength = await page.evaluate(() => history.length)
             await form.locator('button[type="submit"]').click()
@@ -72,7 +72,7 @@ for (const locale of ['ko', 'en']) {
             await page.goto(`/${locale}/docs`)
             const form = searchForm(page, location)
             if (location === 'header')
-                await form.locator('button[aria-expanded]').click()
+                await page.getByTestId('search-drawer-trigger').click()
             const input = form.locator('input')
             const submit = form.locator('button[type="submit"]')
             await input.fill('component')
@@ -82,10 +82,28 @@ for (const locale of ['ko', 'en']) {
                 release = resolve
             })
             let held = 0
+            const requests: {
+                path: string
+                prefetch: string | undefined
+                rsc: string | undefined
+            }[] = []
             await page.route('**/docs?**', async (route) => {
+                const url = new URL(route.request().url())
+                url.searchParams.delete('_rsc')
+                const path = `${url.pathname}${url.search}`
+                const prefetch = route.request().headers()[
+                    'next-router-prefetch'
+                ]
+                if (url.searchParams.get('q') === 'component') {
+                    requests.push({
+                        path,
+                        prefetch,
+                        rsc: route.request().headers().rsc,
+                    })
+                }
                 if (
-                    new URL(route.request().url()).searchParams.get('q') ===
-                    'component'
+                    path === `/${locale}/docs?q=component` &&
+                    prefetch !== '1'
                 ) {
                     held++
                     await gate
@@ -115,11 +133,15 @@ for (const locale of ['ko', 'en']) {
             await expect(page).toHaveURL(
                 new RegExp(`/${locale}/docs\\?q=component$`)
             )
-            await expect(searchForm(page, location)).toHaveAttribute(
-                'aria-busy',
-                'false'
-            )
-            expect(held).toBe(1)
+            if (location === 'header') {
+                await expect(page.getByRole('dialog')).toBeHidden()
+            } else {
+                await expect(searchForm(page, location)).toHaveAttribute(
+                    'aria-busy',
+                    'false'
+                )
+            }
+            expect(held, JSON.stringify(requests)).toBe(1)
         })
     }
 

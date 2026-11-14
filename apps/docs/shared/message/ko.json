@@ -374,6 +374,22 @@
         }
     },
     "search": {
+        "drawer": {
+            "title": "문서 찾기",
+            "description": "찾고 싶은 주제를 입력하면 관련 문서를 바로 보여드려요.",
+            "close": "검색 닫기",
+            "suggestions": "추천 검색어",
+            "recent": "최근 문서",
+            "results": "관련 문서",
+            "count": "{count}개 문서",
+            "readMinutes": "{count}분 읽기",
+            "loading": "관련 문서를 찾고 있어요",
+            "empty": "일치하는 문서가 없어요. 다른 검색어를 입력해보세요.",
+            "error": "검색 결과를 불러오지 못했어요. 잠시 후 다시 시도해주세요.",
+            "retry": "다시 시도",
+            "viewAll": "전체 검색 결과 보기",
+            "keyboardHint": "↑ ↓ 문서 선택 · Enter 이동 · Esc 닫기"
+        },
         "input": {
             "triggerLabel": "문서 검색",
             "placeholder": "문서를 검색해보세요",

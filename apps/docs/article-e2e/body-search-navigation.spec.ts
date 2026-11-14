@@ -5,6 +5,7 @@ import {
     type APIRequestContext,
     type Page,
 } from '@playwright/test'
+import { articleFixtureAuthorization } from './fixture-credentials.ts'
 
 const documentPath = '/docs/web/article-e2e-publication'
 const keyword = 'bodyonlypublicationv1needle'
@@ -14,19 +15,19 @@ async function resetPublication(request: APIRequestContext) {
     const origin = await request.post(
         'http://127.0.0.1:3112/__test/publication/1',
         {
-            headers: { Authorization: 'Bearer article-e2e-only-control' },
+            headers: { Authorization: articleFixtureAuthorization('control') },
         }
     )
     expect(origin.status()).toBe(204)
     const invalidated = await request.post('/api/revalidate/content', {
-        headers: { Authorization: 'Bearer article-e2e-only-revalidation' },
+        headers: { Authorization: articleFixtureAuthorization('revalidation') },
     })
     expect(invalidated.status()).toBe(200)
 }
 
 function searchForm(page: Page, location: 'header' | 'index') {
     return location === 'header'
-        ? page.locator('header form[role="search"]')
+        ? page.getByRole('dialog').getByRole('search')
         : page.getByRole('main').getByRole('search')
 }
 
@@ -49,14 +50,19 @@ for (const locale of ['ko', 'en']) {
                 ).toBeEnabled()
                 const form = searchForm(page, location)
                 if (location === 'header') {
-                    await form.locator('button[aria-expanded]').click()
+                    await page.getByTestId('search-drawer-trigger').click()
                     await expect(
-                        form.locator('button[aria-expanded]')
+                        page.getByTestId('search-drawer-trigger')
                     ).toHaveAttribute('aria-expanded', 'true')
                 }
                 const input = form.locator('input[name="q"]')
                 await expect(input).toBeVisible()
                 await input.fill(`  ${keyword}  `)
+                if (location === 'header') {
+                    await expect(
+                        page.getByRole('dialog').getByRole('option')
+                    ).toContainText('Publication cache probe V1')
+                }
 
                 const identity = randomUUID()
                 await page.evaluate(
@@ -87,9 +93,7 @@ for (const locale of ['ko', 'en']) {
                     )
                     if (location === 'header') {
                         await expect(
-                            searchForm(page, 'header').locator(
-                                'button[aria-expanded]'
-                            )
+                            page.getByTestId('search-drawer-trigger')
                         ).toHaveAttribute('aria-expanded', 'false')
                     }
                 })

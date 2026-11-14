@@ -9,9 +9,15 @@ type Props = {
     isPending: boolean
     label: string
     variant: 'icon' | 'text'
+    className?: string
 }
 
-export function SearchSubmitButton({ isPending, label, variant }: Props) {
+export function SearchSubmitButton({
+    isPending,
+    label,
+    variant,
+    className,
+}: Props) {
     const t = useTranslations('search.input')
     return (
         <>
@@ -26,7 +32,8 @@ export function SearchSubmitButton({ isPending, label, variant }: Props) {
                     'ds-focus-ring relative inline-flex shrink-0 items-center justify-center transition disabled:cursor-wait',
                     variant === 'icon'
                         ? 'size-8 rounded-full bg-primary/10 text-(--docs-interactive-text) hover:bg-primary/15'
-                        : 'min-h-11 rounded-xl bg-(--docs-interactive-text) px-4 py-2 text-sm font-semibold text-background hover:brightness-95'
+                        : 'min-h-11 rounded-xl bg-(--docs-interactive-text) px-4 py-2 text-sm font-semibold text-background hover:brightness-95',
+                    className
                 )}
             >
                 <span className={isPending ? 'invisible' : undefined}>
