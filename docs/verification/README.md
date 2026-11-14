@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-14 검색 Drawer·자동완성](accessibility/2026-11-14-search-drawer.md): 폭 토큰 결함·수화/animation 검사 보완과 두 폭의 입력·키보드·오류·경합 회귀. 로컬 검증·운영 미배포.
+
 - [11-14 본문 공통 목차 UI/UX](accessibility/2026-11-14-article-toc-ux.md): 현재 위치·계층·접기·앵커/포커스의 로컬 회귀. 운영 반영과 구분.
 
 - [11-11 main CI 브라우저 런타임](resilience/2026-11-11-ci-browser-runtime.md): 성공·실패 이미지 대조, apt DNS 실패와 원인 미확정 범위, 공식 이미지·네트워크 차단 Linux 양성/음성 및 기존 suite 유지 회귀.

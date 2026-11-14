@@ -2,6 +2,118 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/architecture/README.md",
+      "sha256": "68f010c5d6ec9fab4d9da1281d00ffd5973ab7fccd0ab7692f8887e8a69f8543",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 최종 28개 파일 검수 목록의 공개·작업 단위 커밋·현재 브랜치 푸시와 문서 8개 해시 기록을 명시 승인함. 직접 작성한 검색 Drawer 설계·계약·정제 검증 집계·실패·한계와 목차를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·PR 생성·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/adr-0031-docs-search-drawer.md",
+      "sha256": "fe59dee49ec081a8a9a257226c717f724d0a9572560eb551305d008f8a418b73",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 최종 28개 파일 검수 목록의 공개·작업 단위 커밋·현재 브랜치 푸시와 문서 8개 해시 기록을 명시 승인함. 직접 작성한 검색 Drawer 설계·계약·정제 검증 집계·실패·한계와 목차를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·PR 생성·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/docs-search-api-contract.md",
+      "sha256": "9c382b6df5b4921cfb386bccc38595742562ded9600d11eb1acf5e826136155b",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 최종 28개 파일 검수 목록의 공개·작업 단위 커밋·현재 브랜치 푸시와 문서 8개 해시 기록을 명시 승인함. 직접 작성한 검색 Drawer 설계·계약·정제 검증 집계·실패·한계와 목차를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·PR 생성·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/docs-search-experience-policy.md",
+      "sha256": "264c9e092e3c32cc8b82653d494de6c2f64608398dcff60377b67cd2f971c7a9",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 최종 28개 파일 검수 목록의 공개·작업 단위 커밋·현재 브랜치 푸시와 문서 8개 해시 기록을 명시 승인함. 직접 작성한 검색 Drawer 설계·계약·정제 검증 집계·실패·한계와 목차를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·PR 생성·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/README.md",
+      "sha256": "88faecb0754366ea98867e914b29f5d7d0a0ed0004fca95c6adda11d03c30bfc",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 최종 28개 파일 검수 목록의 공개·작업 단위 커밋·현재 브랜치 푸시와 문서 8개 해시 기록을 명시 승인함. 직접 작성한 검색 Drawer 설계·계약·정제 검증 집계·실패·한계와 목차를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·PR 생성·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-11-14-search-drawer.md",
+      "sha256": "678912c30e0cfb87f1bd5af2afea31e20d2387e8aa17985fee88f8206a484a73",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 최종 28개 파일 검수 목록의 공개·작업 단위 커밋·현재 브랜치 푸시와 문서 8개 해시 기록을 명시 승인함. 직접 작성한 검색 Drawer 설계·계약·정제 검증 집계·실패·한계와 목차를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·PR 생성·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-14-search-drawer.md",
+      "sha256": "0be602ad18f30e6cf9e4839590d6caa06540c2272191ac61e77449b59a976dff",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 최종 28개 파일 검수 목록의 공개·작업 단위 커밋·현재 브랜치 푸시와 문서 8개 해시 기록을 명시 승인함. 직접 작성한 검색 Drawer 설계·계약·정제 검증 집계·실패·한계와 목차를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·PR 생성·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/README.md",
+      "sha256": "a675a5fa14ebadedafeb3c2ee382dc7a4dcda82efd800bb7129b4df4aa53d751",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-14",
+      "note": "사용자가 최종 28개 파일 검수 목록의 공개·작업 단위 커밋·현재 브랜치 푸시와 문서 8개 해시 기록을 명시 승인함. 직접 작성한 검색 Drawer 설계·계약·정제 검증 집계·실패·한계와 목차를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·PR 생성·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "apps/docs/widgets/article-toc/examples/README.md",
       "sha256": "d2ca66755a39a2ce12ef8dc1e816efe3f5e2fbca9616d0d858783c7481a95c62",
       "kind": "document",
@@ -156,54 +268,12 @@
       }
     },
     {
-      "path": "docs/architecture/README.md",
-      "sha256": "070a0ee46b350a12f8a23711bb776e64fbb0cd84fa69196a75ddce5850b59366",
-      "kind": "document",
-      "decision": "public-approved",
-      "reviewedOn": "2026-11-12",
-      "note": "사용자가 CI 보완과 미커밋 운영 기록의 커밋·푸시·PR을 승인함. 배포 식별자·정제된 검증 요약만 포함하고 원시 응답·로그·개인정보·비밀값을 제외함.",
-      "checks": {
-        "secrets": true,
-        "personalData": true,
-        "rights": true,
-        "publicIntent": true
-      }
-    },
-    {
-      "path": "docs/verification/README.md",
-      "sha256": "e6359abb8cb75588a19ae9671b675c4b146662800c9821e262c66827bac403fb",
-      "kind": "document",
-      "decision": "public-approved",
-      "reviewedOn": "2026-11-14",
-      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
-      "checks": {
-        "secrets": true,
-        "personalData": true,
-        "rights": true,
-        "publicIntent": true
-      }
-    },
-    {
       "path": "docs/verification/artifacts/README.md",
       "sha256": "ca89eb2eb0820a6d4ee25741cc2f59e4bc2675429e6c85ac9ac343d4152f52f2",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-10",
       "note": "사용자가 검색·페이지네이션 구현·회귀·정제 문서의 작업별 커밋을 명시 승인함. 비밀값·개인정보·원시 캡처/응답을 제외하고 합성 검사 결과·실패 이력·미배포 범위만 검수함.",
-      "checks": {
-        "secrets": true,
-        "personalData": true,
-        "rights": true,
-        "publicIntent": true
-      }
-    },
-    {
-      "path": "docs/worklog/2026-11/README.md",
-      "sha256": "54222d9152fadd139b7cef126b6c71d54998aae5abd320b518faf1c22f6e29cc",
-      "kind": "document",
-      "decision": "public-approved",
-      "reviewedOn": "2026-11-14",
-      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
       "checks": {
         "secrets": true,
         "personalData": true,

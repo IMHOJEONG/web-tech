@@ -34,6 +34,8 @@
 
 ## Response Shape
 
+아래 형태와 count 의미는 기존 `/api/search`의 계약이다. Drawer용 경량 endpoint와 혼동하지 않는다.
+
 현재 응답 shape:
 
 ```json
@@ -141,6 +143,20 @@ preview는 page와 API가 같은 helper를 사용한다.
 - contract version field
 
 필요할 때만 추가한다.
+
+## Drawer 자동완성 endpoint
+
+2026-11-14 로컬 구현이며 운영 미배포다. `GET /api/search/suggestions?q=...`는 같은 입력 정규화와 `getSearchData` 관련도를 사용한다. 기존 `/api/search`의 응답·consumer는 변경하지 않는다.
+
+- `query`: 실제 적용한 정규화 검색어.
+- `count`: 전체 일치 수. 최대 8개인 `results.length`와 다를 수 있다.
+- `results`: `id`, `href`, `title`(최대160 code point), `summary`(최대180 code point), `section`, 선택적 `readMinutes`. 본문·preview HTML·출처 정보는 전송하지 않는다.
+- `suggestions`: 기존 추천어와 상위8개 문서 태그에서 중복 제거·검색어 포함 비교로 최대5개. 오타 자동 교정이나 인기 순위가 아니다.
+- 빈 q는 최근 문서를 최대8개 보여주며, 반복 q는 첫 값만 사용한다. 원격 실패 시 기존 로컬 fallback을 유지한다.
+- 응답은 `Cache-Control: no-store`이며 서버 내부 검색 인덱스의 기존 캐시·게시 갱신 정책은 유지한다. 클라이언트는 응답 형태와 현재 query를 확인하고 잘못된 응답도 재시도 가능한 오류로 처리한다.
+- 공개 문서의 읽기 전용 endpoint다. 접근 로그에 GET 검색어가 남을 수 있으며 인증·rate limit·원격 장애 SLA를 이번 변경에서 새로 보장하지 않는다.
+
+[설계 결정](adr-0031-docs-search-drawer.md)과 [검증](../verification/accessibility/2026-11-14-search-drawer.md)을 참고한다.
 
 ## Related Docs
 
