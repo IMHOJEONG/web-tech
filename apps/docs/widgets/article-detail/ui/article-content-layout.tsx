@@ -18,13 +18,19 @@ export async function ArticleContentLayout({
 
     return (
         <ArticleContentGrid>
-            <aside className="hidden lg:block">
-                <div className="sticky top-[calc(var(--docs-header-height,4.0625rem)+0.6875rem)] max-h-[calc(100dvh-var(--docs-header-height,4.0625rem)-1.4375rem)] overflow-y-auto rounded-xl border border-outline-variant/60 bg-background/98 px-5 py-4">
-                    <Toc toc={toc} title={t('sidebar.tocTitle')} />
-                </div>
-            </aside>
+            {visibleToc.length > 0 && (
+                <aside className="hidden min-w-0 lg:block">
+                    <div className="sticky top-[calc(var(--docs-header-height,4.0625rem)+0.6875rem)] min-w-0 py-2 pe-3">
+                        <Toc toc={toc} title={t('sidebar.tocTitle')} />
+                    </div>
+                </aside>
+            )}
 
-            <MainContent className="min-w-0">
+            <MainContent
+                className={
+                    visibleToc.length ? 'min-w-0' : 'min-w-0 lg:col-span-2'
+                }
+            >
                 {fallbackTitle && (
                     <h1 className="mdx-h1 mb-6 font-display text-on-surface">
                         {fallbackTitle}
@@ -33,7 +39,7 @@ export async function ArticleContentLayout({
                 {visibleToc.length > 0 && (
                     <div
                         data-testid="article-mobile-toc"
-                        className="mb-6 border-b border-border pb-2 lg:hidden"
+                        className="mb-6 min-w-0 rounded-xl border border-outline-variant/60 bg-surface-container-lowest px-4 py-1 lg:hidden"
                     >
                         <Toc
                             toc={toc}
