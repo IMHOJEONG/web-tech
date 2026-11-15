@@ -16,18 +16,19 @@ export function useSearchNavigation(
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        if (input.composing.current || isPending) return
+        if (input.composing.current || isPending) return 'blocked'
 
         const query = normalizeSearchQuery(input.keyword)
         input.setKeyword(query)
         const targetHref = getSearchHref(query)
         const params = searchParams.toString()
         const currentHref = params ? `${pathname}?${params}` : pathname
-        if (targetHref === currentHref) return
+        if (targetHref === currentHref) return 'unchanged'
 
         startTransition(() => {
             router.push(targetHref)
         })
+        return 'navigating'
     }
 
     return { isPending, handleSubmit }

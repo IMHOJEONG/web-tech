@@ -66,7 +66,7 @@ export function buildSearchSuggestions(
         count: docs.length,
         results: docs.slice(0, SEARCH_SUGGESTION_LIMIT).map((doc) => ({
             id: doc.id,
-            href: doc.href,
+            href: doc.href.replaceAll(' ', '%20'),
             title: Array.from(doc.title || doc.slug)
                 .slice(0, 160)
                 .join(''),

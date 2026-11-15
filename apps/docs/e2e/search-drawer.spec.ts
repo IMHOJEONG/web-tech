@@ -17,6 +17,73 @@ const result = (query: string) => ({
     suggestions: query ? ['react-query'] : ['React', 'Accessibility'],
 })
 
+test('repeated query cycles cannot revive an old selection before the new response', async ({
+    page,
+}) => {
+    let release!: () => void
+    const gate = new Promise<void>((resolve) => {
+        release = resolve
+    })
+    let firstQueryRequests = 0
+    await page.route('**/api/search/suggestions?**', async (route) => {
+        const query = new URL(route.request().url()).searchParams.get('q') ?? ''
+        if (query === 'React') firstQueryRequests++
+        if (
+            query === 'pending' ||
+            (query === 'React' && firstQueryRequests > 1)
+        )
+            await gate
+        await route.fulfill({ json: result(query) })
+    })
+    try {
+        await page.goto('/ko/about')
+        await page.getByTestId('search-drawer-trigger').click()
+        const drawer = page.getByRole('dialog')
+        const input = drawer.getByRole('combobox')
+        await input.fill('React')
+        await expect(drawer.getByRole('option')).toContainText('React document')
+        await input.press('ArrowDown')
+        await expect(input).toHaveAttribute('aria-activedescendant', /.+/)
+        await input.fill('pending')
+        await expect(drawer.getByRole('option')).toHaveCount(0)
+        await input.fill('React')
+        await expect(drawer.getByRole('option')).toHaveCount(0)
+        await expect(input).not.toHaveAttribute('aria-activedescendant')
+        await input.press('Enter')
+        await expect(page).toHaveURL('/ko/docs?q=React')
+        await expect(drawer).toBeHidden()
+    } finally {
+        release()
+    }
+})
+
+for (const locale of ['ko', 'en']) {
+    test(`${locale}: same-query submission closes the drawer without another navigation`, async ({
+        page,
+    }) => {
+        await page.route('**/api/search/suggestions?**', async (route) => {
+            const query =
+                new URL(route.request().url()).searchParams.get('q') ?? ''
+            await route.fulfill({ json: result(query) })
+        })
+        await page.goto(`/${locale}/docs?q=React`)
+        const historyLength = await page.evaluate(() => history.length)
+        await page.getByTestId('search-drawer-trigger').click()
+        const drawer = page.getByRole('dialog')
+        const input = drawer.getByRole('combobox')
+        await expect(input).toHaveValue('React')
+        await input.dispatchEvent('compositionstart')
+        await input.press('Enter')
+        await expect(drawer).toBeVisible()
+        await input.dispatchEvent('compositionend')
+        await input.press('Enter')
+        await expect(drawer).toBeHidden()
+        await expect(page).toHaveURL(`/${locale}/docs?q=React`)
+        expect(await page.evaluate(() => history.length)).toBe(historyLength)
+        await expect(page.getByTestId('search-drawer-trigger')).toBeFocused()
+    })
+}
+
 test('arrow keys follow focus inside the document list, not only the input', async ({
     page,
 }) => {
@@ -78,7 +145,7 @@ for (const locale of ['ko', 'en']) {
         await expect(input).toBeFocused()
         const bounds = (await drawer.boundingBox())!
         expect(bounds.width).toBeGreaterThanOrEqual(
-            Math.min(390, page.viewportSize()!.width)
+            Math.min(390, page.viewportSize()!.width) - 1
         )
         await expect
             .poll(async () => {

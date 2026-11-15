@@ -80,3 +80,22 @@ test('malformed or external navigation responses fail validation', () => {
         assert.equal(isSearchSuggestionsResponse(invalid), false)
     }
 })
+
+test('space-containing document paths remain valid without double encoding', () => {
+    const docs = [
+        { ...doc(0), href: '/docs/web/space in name' },
+        { ...doc(1), href: '/docs/web/already%20encoded' },
+        { ...doc(2), href: '/docs/web/한글 이름' },
+    ]
+    const response = buildSearchSuggestions(docs)
+    assert.equal(isSearchSuggestionsResponse(response), true)
+    assert.deepEqual(
+        response.results.map((item) => item.href),
+        [
+            '/docs/web/space%20in%20name',
+            '/docs/web/already%20encoded',
+            '/docs/web/한글%20이름',
+        ]
+    )
+    assert.equal(docs[0]?.href, '/docs/web/space in name')
+})

@@ -44,6 +44,13 @@ for (const locale of ['ko', 'en']) {
             await input.fill(' React ')
             const historyLength = await page.evaluate(() => history.length)
             await form.locator('button[type="submit"]').click()
+            if (location === 'header') {
+                await expect(page.getByRole('dialog')).toBeHidden()
+                expect(await page.evaluate(() => history.length)).toBe(
+                    historyLength
+                )
+                await page.getByTestId('search-drawer-trigger').click()
+            }
             await expect(input).toHaveValue('React')
             await expect(form).toHaveAttribute('aria-busy', 'false')
             expect(await page.evaluate(() => history.length)).toBe(

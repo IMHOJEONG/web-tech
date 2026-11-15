@@ -76,7 +76,9 @@ export function SearchDrawerContent({
                     aria-busy={isPending}
                     action={getPathname({ locale, href: '/docs' })}
                     method="get"
-                    onSubmit={handleSubmit}
+                    onSubmit={(event) => {
+                        if (handleSubmit(event) === 'unchanged') onNavigate()
+                    }}
                     className="mt-5 flex min-h-14 items-center gap-2 rounded-xl border border-outline-variant bg-surface-container-low px-3 focus-within:border-primary/60"
                 >
                     <Search

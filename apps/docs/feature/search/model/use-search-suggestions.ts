@@ -6,7 +6,7 @@ import { isSearchSuggestionsResponse } from '~/lib/search-suggestions'
 import { normalizeSearchQuery } from '~/shared/lib/search-query'
 
 type Outcome = {
-    key: string
+    generation: number
     status: 'ready' | 'error'
     data?: SearchSuggestionsResponse
 }
@@ -16,6 +16,11 @@ export function useSearchSuggestions(keyword: string, enabled: boolean) {
     const [attempt, setAttempt] = useState(0)
     const [outcome, setOutcome] = useState<Outcome | null>(null)
     const key = `${query}:${attempt}`
+    const [cycle, setCycle] = useState({ key, enabled, generation: 0 })
+    // Returning to a query or reopening the drawer starts a new request cycle.
+    if (cycle.key !== key || cycle.enabled !== enabled)
+        setCycle({ key, enabled, generation: cycle.generation + 1 })
+    const generation = cycle.generation
     useEffect(() => {
         if (!enabled) return
         let current = true
@@ -36,9 +41,10 @@ export function useSearchSuggestions(keyword: string, enabled: boolean) {
                         data.query !== query
                     )
                         throw new Error('Invalid search response')
-                    if (current) setOutcome({ key, status: 'ready', data })
+                    if (current)
+                        setOutcome({ generation, status: 'ready', data })
                 } catch {
-                    if (current) setOutcome({ key, status: 'error' })
+                    if (current) setOutcome({ generation, status: 'error' })
                 } finally {
                     clearTimeout(timeout)
                 }
@@ -51,8 +57,9 @@ export function useSearchSuggestions(keyword: string, enabled: boolean) {
             clearTimeout(timeout)
             controller.abort()
         }
-    }, [enabled, query, key])
-    const visible = enabled && outcome?.key === key ? outcome : null
+    }, [enabled, query, key, generation])
+    const visible =
+        enabled && outcome?.generation === generation ? outcome : null
     return {
         query,
         status: !enabled ? 'idle' : (visible?.status ?? 'loading'),

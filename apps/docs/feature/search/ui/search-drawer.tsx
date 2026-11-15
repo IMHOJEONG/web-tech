@@ -24,7 +24,7 @@ export function SearchDrawer({ initialKeyword }: { initialKeyword: string }) {
         () => false
     )
     const changeOpen = (nextOpen: boolean) => {
-        if (!nextOpen) input.finishComposition()
+        if (!nextOpen && input.composing.current) input.finishComposition()
         setOpen(nextOpen)
     }
     return (
