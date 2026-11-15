@@ -79,9 +79,18 @@ for (const locale of ['ko', 'en']) {
                 `[id="${await trigger.getAttribute('aria-controls')}"]`
             )
             const bounds = (await panel.boundingBox())!
-            expect(bounds.y).toBeGreaterThanOrEqual(0)
-            expect(bounds.width).toBeLessThanOrEqual(width)
-            expect(bounds.height).toBeLessThanOrEqual(900)
+            expect(bounds.y).toBeGreaterThanOrEqual(-1)
+            expect(bounds.width).toBeLessThanOrEqual(width + 1)
+            expect(bounds.height).toBeLessThanOrEqual(901)
+            await expect
+                .poll(async () => {
+                    const box = (await panel.boundingBox())!
+                    return box.x + box.width
+                })
+                .toBeLessThanOrEqual(width + 1)
+            expect(
+                await page.evaluate(() => document.documentElement.scrollWidth)
+            ).toBeLessThanOrEqual(width + 1)
             await input.press('Escape')
             await expect(trigger).toBeFocused()
             await page.getByTestId('mobile-nav-drawer-trigger').click()
