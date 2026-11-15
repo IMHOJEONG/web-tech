@@ -93,13 +93,13 @@ for (const theme of ['light', 'dark']) {
         await expect(active).toHaveCSS('outline-width', '2px')
         if (mobile) await page.keyboard.press('Escape')
 
-        const search = page.getByRole('search', {
+        await page.getByTestId('search-drawer-trigger').press('Enter')
+        const search = page.getByRole('dialog').getByRole('search', {
             name: '문서 검색',
             exact: true,
         })
         await expect(search).toHaveCount(1)
-        await search.locator('button[aria-expanded]').press('Enter')
-        const input = search.getByRole('textbox', {
+        const input = search.getByRole('combobox', {
             name: '문서를 검색해보세요',
         })
         await expect(input).toBeFocused()

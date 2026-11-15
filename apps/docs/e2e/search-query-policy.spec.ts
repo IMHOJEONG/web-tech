@@ -13,8 +13,8 @@ test('direct URL and API use the first query, collapse whitespace and cap length
     expect(response.ok()).toBe(true)
     expect((await response.json()).query).toBe('가'.repeat(40))
     await page.goto(`/ko/docs?${params}`)
-    const header = page.getByRole('search', { name: '문서 검색', exact: true })
-    await header.locator('button[aria-expanded]').click()
+    await page.getByTestId('search-drawer-trigger').click()
+    const header = page.getByRole('dialog').getByRole('search')
     await expect(header.locator('input')).toHaveValue('가'.repeat(40))
     await page.goto(`/ko/docs?q=%20React%20%20Suspense%20&q=ignored`)
     await expect(page.getByRole('main')).toContainText('React Suspense')
@@ -31,10 +31,10 @@ for (const location of ['header', 'index'] as const) {
         await page.goto('/ko/docs')
         const form =
             location === 'header'
-                ? page.getByRole('search', { name: '문서 검색', exact: true })
+                ? page.getByRole('dialog').getByRole('search')
                 : page.getByRole('main').getByRole('search')
         if (location === 'header')
-            await form.locator('button[aria-expanded]').click()
+            await page.getByTestId('search-drawer-trigger').click()
         const input = form.locator('input')
         await input.fill('🙂'.repeat(41))
         await expect(input).toHaveValue('🙂'.repeat(40))

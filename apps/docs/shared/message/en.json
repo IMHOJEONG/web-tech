@@ -377,6 +377,22 @@
         }
     },
     "search": {
+        "drawer": {
+            "title": "Find a document",
+            "description": "Start typing a topic to find relevant documents.",
+            "close": "Close search",
+            "suggestions": "Suggested searches",
+            "recent": "Recent documents",
+            "results": "Related documents",
+            "count": "{count} documents",
+            "readMinutes": "{count} min read",
+            "loading": "Finding related documents",
+            "empty": "No matching documents. Try another search term.",
+            "error": "Search results could not be loaded. Please try again.",
+            "retry": "Try again",
+            "viewAll": "View all search results",
+            "keyboardHint": "↑ ↓ Select · Enter Open · Esc Close"
+        },
         "input": {
             "triggerLabel": "Search docs",
             "placeholder": "Search the docs",
