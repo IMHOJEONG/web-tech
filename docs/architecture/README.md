@@ -6,7 +6,7 @@
 
 ## ADR 상태
 
-- [ADR-0031: 검색 Drawer·경량 자동완성](adr-0031-docs-search-drawer.md): 적용 중. 공통 Sheet·입력 계약, 최대8개 metadata·debounce·IME·경합 처리. 로컬 구현·운영 미배포.
+- [ADR-0031: 검색 Drawer·경량 자동완성](adr-0031-docs-search-drawer.md): 적용 중. PR #92 main 병합·동일 SHA Production 및 운영 두 폭 검증. main CI의 글꼴 기하 비교는 후속 보완.
 
 - [ADR-0030: 브라우저 CI 런타임 이미지](adr-0030-browser-ci-runtime-image.md): 적용 중. 공식 Playwright 버전·digest 고정과 실제 렌더링 준비 검사, 기존 suite 유지. 전용 브랜치 구현이며 main 반영은 별도.
 

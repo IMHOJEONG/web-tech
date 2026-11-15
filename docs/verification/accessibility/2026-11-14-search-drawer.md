@@ -104,6 +104,33 @@ pnpm --filter docs lint
 
 최초 Preview 배포 `dpl_7VSsfTitXxxLndg2amQzLDLUTjY3`는 같은 head·READY 상태다. 비인증 요청은 Vercel SSO 진입점으로302였고, 이를 확인한 뒤 공식 인증 요청의 React 검색 결과6개·본문 필드 제외를 확인했다. 프로젝트 Root Directory `apps/docs`·Node24도 확인했다. 후속 수정의 원격 CI·리뷰·main 병합·Production 배포는 이 로컬 결과와 별도로 확인해야 한다. 사용자 개발 서버·기존 초안·stash·NAS는 변경하지 않았다.
 
+## main·Production 검증과 기하 비교 후속
+
+2026-11-15 KST, PR #92의 최종 head `bfa27e653f6dcb1b05d51b76440600c837ac1c2a`는 검사22개 성공·미해결 리뷰 스레드0개였다. 저장소 squash 도구의 check-only와 merge 모두 예외 없이 통과했고 main 병합 SHA는 `e26ad94281de63857775c498dfd785eb1847a80f`다.
+
+- Vercel Production `dpl_DySKD3F5f569rebrpmCvH1tpcHy7`: 같은 SHA·main·READY와 `heap-forge.app` alias를 확인했다. 로컬 파일 업로드나 NAS 재배포는 하지 않았다.
+- 일반 Chromium 새 세션: ko/en ×390/1280px의4조합에서 Drawer·관련 문서·입력창/목록 방향키·Enter 상세 진입·같은 URL 제출 닫힘·재열기 정규화·Escape/트리거 복귀가 통과했고 pageerror는0개였다. 모바일 라이트·데스크톱 다크를 나눴으며 테마와 폭의 모든 교차 조합/실기기 검사는 아니다.
+- `/ko/feed`, `/ko/docs`, `/ko/web`, `/ko/mobile`, `/ko/ui-ux`, `/ko/about`, `/en/feed`, `/robots.txt`, `/sitemap.xml`은 GET200이다. 응답은 끝까지 소비했고 원문은 기록하지 않았다.
+- 인증 없는 `POST /api/revalidate/content`는401이다. 실제 토큰·캐시 갱신은 사용하지 않았다.
+- 해당 배포의 최근30분 Vercel 오류/5xx 조회가 각각 성공했고 JSON 로그 레코드는0개였다. 이는 해당 필터·조회 구간 표본이지 전체 기간 무장애나 로그 수집 완전성 보장은 아니다.
+
+main Documentation 실행 `43660178266`·CodeQL `43660178344`는 성공했지만 CI `43660178246`는 실패했다. 원인은 desktop 확대 글꼴1개로, 실제 폭390.0000305px(재시도320.0000153/320.0000305px)을 정수 viewport와 엄격 비교한 assertion이었다. browser 결과는152통과·기존18skip·1실패이며 집계 Test도 이 실패를 그대로 전파했다. PR CI 성공을 main CI 성공으로 표시하지 않는다.
+
+후속은 main 기준 새 브랜치에서 제품 코드 대신 해당 테스트만 보완한다. 기존 경계와 같은1px 이내 오차만 허용하고 패널의 우측 경계와 문서 scrollWidth도 확인한다. timeout·재시도·skip 설정을 늘리지 않았다. 로컬 한/영 확대 글꼴·브라우저 기본 글꼴 검사는 **3개 통과**했고 후속 CI·병합은 아직 확인 전이다.
+
+```sh
+gh run view 43660178246 --log-failed
+DOCS_E2E_PORT=3041 pnpm --filter docs test:e2e \
+  e2e/header-font-preference.spec.ts --project chromium-desktop --workers 1
+vercel inspect heap-forge.app --scope hojeong-ims-projects
+vercel logs dpl_DySKD3F5f569rebrpmCvH1tpcHy7 --no-follow --no-branch \
+  --level error --since 30m --json --scope hojeong-ims-projects
+vercel logs dpl_DySKD3F5f569rebrpmCvH1tpcHy7 --no-follow --no-branch \
+  --status-code 5xx --since 30m --json --scope hojeong-ims-projects
+```
+
+CLI는 운영 절차와 같은53.1.1이다. 운영 브라우저 검사는 별도 비공개 TS 실행 파일로 실행했고 원시 응답·로그·캡처는 Git에 추가하지 않았다. 공개 artifact는 해당 없음이며, 후속 승인·CI 결과는 Jira·Confluence에서 이 검증 시점과 구분한다.
+
 ## 관련 문서
 
 - [ADR-0031](../../architecture/adr-0031-docs-search-drawer.md)
