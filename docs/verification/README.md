@@ -1,6 +1,6 @@
 # 검증 보고서
 
-- [11-14 검색 Drawer·자동완성](accessibility/2026-11-14-search-drawer.md): 폭 토큰 결함·수화/animation 검사 보완과 두 폭의 입력·키보드·오류·경합 회귀. 로컬 검증·운영 미배포.
+- [11-14 검색 Drawer·자동완성](accessibility/2026-11-14-search-drawer.md): 로컬·PR #92 검증과 main/Production 운영 결과. main CI의 미세 기하 비교 실패 및 후속 로컬 검사를 구분.
 
 - [11-14 본문 공통 목차 UI/UX](accessibility/2026-11-14-article-toc-ux.md): 현재 위치·계층·접기·앵커/포커스의 로컬 회귀. 운영 반영과 구분.
 
