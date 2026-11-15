@@ -4,14 +4,7 @@ import path from 'path'
 import process from 'node:process'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { collectMarkdownFiles, parseFrontmatter } from './validate-content.mjs'
-
-const DOCS_ROOT = path.resolve(
-    path.dirname(fileURLToPath(import.meta.url)),
-    '..'
-)
-const CONTENT_DIRECTORIES = ['data', 'category'].map((directory) =>
-    path.join(DOCS_ROOT, directory)
-)
+import { resolveLocalContentRoot } from '../lib/local-content-paths.ts'
 
 function getBody(source) {
     if (!source.startsWith('---')) {
@@ -55,11 +48,18 @@ export function getContentStyleIssues(source, frontmatter = {}) {
 }
 
 export async function main() {
+    const docsRoot = resolveLocalContentRoot(
+        fileURLToPath(new URL('../', import.meta.url))
+    )
+    const contentDirectories = ['data', 'category'].map((directory) =>
+        path.join(docsRoot, directory)
+    )
+
     const [markdownFiles, nonMarkdownFiles] = await Promise.all([
-        Promise.all(CONTENT_DIRECTORIES.map(collectMarkdownFiles)).then(
+        Promise.all(contentDirectories.map(collectMarkdownFiles)).then(
             (files) => files.flat()
         ),
-        Promise.all(CONTENT_DIRECTORIES.map(collectNonMarkdownFiles)).then(
+        Promise.all(contentDirectories.map(collectNonMarkdownFiles)).then(
             (files) => files.flat()
         ),
     ])

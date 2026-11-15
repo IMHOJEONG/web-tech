@@ -8,13 +8,29 @@ function hasLocalContentDirectory(root: string) {
     )
 }
 
-export function resolveLocalContentRoot(cwd = process.cwd()) {
+export function getPrivateContentRoot(root: string, revision: string) {
+    if (!/^[a-f0-9]{40}$/.test(revision))
+        throw new Error('Invalid content revision')
+
+    return path.join(root, '.private-content', revision)
+}
+
+export function resolveLocalContentRoot(
+    cwd = process.cwd(),
+    revision = process.env.DOCS_PRIVATE_CONTENT_REVISION
+) {
     const candidates = [cwd, path.join(cwd, 'apps/docs')]
 
-    return (
-        candidates.find((candidate) => hasLocalContentDirectory(candidate)) ??
-        cwd
-    )
+    if (revision) {
+        const contentRoot = candidates
+            .map((candidate) => getPrivateContentRoot(candidate, revision))
+            .find(hasLocalContentDirectory)
+        if (!contentRoot)
+            throw new Error(`Prepared content is missing for ${revision}`)
+        return contentRoot
+    }
+
+    return candidates.find(hasLocalContentDirectory) ?? cwd
 }
 
 export function getLocalDataDirectory() {

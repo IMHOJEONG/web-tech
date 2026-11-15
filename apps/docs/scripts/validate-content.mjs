@@ -9,15 +9,9 @@ import {
     editorialStatusSchema,
 } from '@web-tech/docs-content-contract'
 import { getDocHref } from '../lib/get-doc-route.ts'
+import { resolveLocalContentRoot } from '../lib/local-content-paths.ts'
 
 const NON_PUBLIC_STATUSES = new Set(['draft', 'archived'])
-const DOCS_ROOT = path.resolve(
-    path.dirname(fileURLToPath(import.meta.url)),
-    '..'
-)
-const CONTENT_DIRECTORIES = ['data', 'category'].map((directory) =>
-    path.join(DOCS_ROOT, directory)
-)
 
 export function normalizeOptionalString(value) {
     if (typeof value !== 'string') {
@@ -235,8 +229,15 @@ export function getFrontmatterIssues(frontmatter) {
 }
 
 export async function main() {
+    const docsRoot = resolveLocalContentRoot(
+        fileURLToPath(new URL('../', import.meta.url))
+    )
+    const contentDirectories = ['data', 'category'].map((directory) =>
+        path.join(docsRoot, directory)
+    )
+
     const files = (
-        await Promise.all(CONTENT_DIRECTORIES.map(collectMarkdownFiles))
+        await Promise.all(contentDirectories.map(collectMarkdownFiles))
     ).flat()
 
     const failures = []
@@ -261,7 +262,7 @@ export async function main() {
 
         if (normalizeStatus(frontmatter.status) !== 'published') continue
 
-        const relativePath = path.relative(DOCS_ROOT, filePath)
+        const relativePath = path.relative(docsRoot, filePath)
         const href = getDocHref({
             slug: frontmatter.slug,
             fileName: relativePath,

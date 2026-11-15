@@ -4,9 +4,15 @@ import createNextIntlPlugin from 'next-intl/plugin'
 import { fileURLToPath } from 'node:url'
 
 import { shikiRehypeOptions } from './lib/shiki-options.js'
+import { resolveLocalContentRoot } from './lib/local-content-paths.ts'
 import { getLocalSearchRevision } from './lib/local-search-revision.ts'
 
 const { env } = process
+const appRoot = fileURLToPath(new URL('.', import.meta.url))
+const contentRevision = env.DOCS_PRIVATE_CONTENT_REVISION ?? ''
+const contentTraceRoot = contentRevision
+    ? `./.private-content/${contentRevision}`
+    : '.'
 
 function toRemotePattern(value) {
     const trimmedValue = value?.trim()
@@ -63,8 +69,10 @@ function getRemoteImagePatterns() {
 const nextConfig = {
     env: {
         // A non-secret content digest prevents Data Cache reuse across changed builds.
+        DOCS_PRIVATE_CONTENT_REVISION: contentRevision,
         DOCS_LOCAL_SEARCH_REVISION: getLocalSearchRevision(
-            fileURLToPath(new URL('.', import.meta.url))
+            resolveLocalContentRoot(appRoot, contentRevision),
+            contentRevision
         ),
     },
     // Configure `pageExtensions` to include markdown and MDX files
@@ -75,12 +83,22 @@ const nextConfig = {
     outputFileTracingIncludes: {
         '/og/article.png': ['./public/fonts/Pretendard-Bold.otf'],
         '/*': [
-            './data/**/*.md',
-            './data/**/*.mdx',
-            './category/**/*.md',
-            './category/**/*.mdx',
+            `${contentTraceRoot}/data/**/*.md`,
+            `${contentTraceRoot}/data/**/*.mdx`,
+            `${contentTraceRoot}/category/**/*.md`,
+            `${contentTraceRoot}/category/**/*.mdx`,
         ],
     },
+    outputFileTracingExcludes: contentRevision
+        ? {
+              '/*': [
+                  './data/**/*.md',
+                  './data/**/*.mdx',
+                  './category/**/*.md',
+                  './category/**/*.mdx',
+              ],
+          }
+        : undefined,
     headers() {
         return [
             ...[

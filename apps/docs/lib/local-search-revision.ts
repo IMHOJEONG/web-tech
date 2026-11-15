@@ -4,8 +4,9 @@ import path from 'node:path'
 import { listLocalMarkdownFiles } from './local-markdown-files.ts'
 
 // Runs when Next config is loaded, not on each search request.
-export function getLocalSearchRevision(root: string) {
+export function getLocalSearchRevision(root: string, revision = '') {
     const hash = createHash('sha256')
+    if (revision) hash.update(revision)
     for (const file of listLocalMarkdownFiles(root)) {
         const body = readFileSync(file)
         const relative = path.relative(root, file).split(path.sep).join('/')
