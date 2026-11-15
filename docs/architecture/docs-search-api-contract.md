@@ -151,6 +151,7 @@ preview는 page와 API가 같은 helper를 사용한다.
 - `query`: 실제 적용한 정규화 검색어.
 - `count`: 전체 일치 수. 최대 8개인 `results.length`와 다를 수 있다.
 - `results`: `id`, `href`, `title`(최대160 code point), `summary`(최대180 code point), `section`, 선택적 `readMinutes`. 본문·preview HTML·출처 정보는 전송하지 않는다.
+- 자동완성 projection은 문서 href의 공백을 `%20`으로 바꾸고 기존 percent encoding은 유지한다. 공통 `getDocHref`와 엄격한 응답 검증기는 완화하지 않는다.
 - `suggestions`: 기존 추천어와 상위8개 문서 태그에서 중복 제거·검색어 포함 비교로 최대5개. 오타 자동 교정이나 인기 순위가 아니다.
 - 빈 q는 최근 문서를 최대8개 보여주며, 반복 q는 첫 값만 사용한다. 원격 실패 시 기존 로컬 fallback을 유지한다.
 - 응답은 `Cache-Control: no-store`이며 서버 내부 검색 인덱스의 기존 캐시·게시 갱신 정책은 유지한다. 클라이언트는 응답 형태와 현재 query를 확인하고 잘못된 응답도 재시도 가능한 오류로 처리한다.

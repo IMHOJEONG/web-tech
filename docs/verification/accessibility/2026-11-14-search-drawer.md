@@ -68,10 +68,41 @@ artifact 상대 링크는 해당 없음이다. 원시 실패 context·캡처는 
 
 ## 한계와 후속 작업
 
-- 커밋·푸시·원격 CI·배포·실제 NAS 연결 검증은 하지 않았다. 의존성은 frozen lockfile 설치이며 새 패키지는 추가하지 않았다.
+- 초기 로컬 검증 단계에서는 커밋·푸시·원격 CI·배포·실제 NAS 연결 검증을 하지 않았다. 11-15 후속의 공개·CI 범위는 아래에 구분한다. 의존성은 frozen lockfile 설치이며 새 패키지는 추가하지 않았다.
 - 네이티브 IME·모바일 주소창/소프트 키보드·실기기·Safari·Firefox는 후속 검증이 필요하다. 타입·lint·로컬 Chromium 통과를 이를 대신하는 결과로 쓰지 않는다.
 - debounce·최대8개 응답·클라이언트8초 취소는 서버 부하 제한·강제 중단·WAF rate limit을 보장하지 않는다.
 - 설치 prepare는 worktree의 `.git` 파일을 폴더로 가정해 hook 설치 경고를 냈다. 이번에는 커밋하지 않으며 향후 커밋 전 훅 적용 상태·공개 승인을 별도로 검증해야 한다.
+
+## 2026-11-15 PR #92 후속
+
+기준은 최초 공개 head `d863c21f9724386f285005cdfc1021d659798abf`와 그 후속 미커밋 보완이다. 최초 head의 CI 실행 `43604678477`, Documentation·CodeQL·GitGuardian·CodeRabbit 체크와 Vercel Preview는 성공했다. 다만 CodeRabbit이 남긴 실제 인라인 3건은 미해결이므로 성공 체크만으로 병합하지 않았다.
+
+| 검사                             | 실제 결과              | 판단                                                                     |
+| -------------------------------- | ---------------------- | ------------------------------------------------------------------------ |
+| 수정 전 반복 query·같은 URL 제출 | 데스크톱3개 실패       | A→B→A에서 과거 선택 복원, 한/영 같은 URL 제출 후 Drawer 잔류 재현        |
+| 수정 전 공백 문서 경로           | 단위1개 실패           | 단일 공백 href 때문에 전체 응답 검증 실패 재현                           |
+| 첫 넓은 회귀                     | 78통과·6실패           | 같은 URL 제출 뒤 닫힌 입력을 찾는 기존 테스트 조건을 보완                |
+| 재열기 포함 중간 회귀            | 76통과·8실패           | 닫기에서 정규화 입력을 덮는 제품 결함6개와 389.999969px의 폭 비교2개     |
+| 최종 회귀                        | 84통과                 | 모바일·태블릿·데스크톱, 입력·history·중복 제출·IME·키보드·오류·경합 유지 |
+| 라이브러리·정적 검사             | 370통과·타입/lint 성공 | 공백/기존 encoding/한글 경로, 엄격한 응답 검증 유지                      |
+
+요청 결과는 query 문자열만이 아니라 새 요청 세대로 구분한다. 같은 URL의 제출 결과를 이동 훅에서 식별해 Drawer만 닫고, 조합 중이 아닌 입력을 닫기에서 재설정하지 않는다. 새 URL 이동의 pending 안내와 기존 중복 제출 차단은 유지한다. 폭 비교는 앞서 상한에 적용한 것과 같은1px 이내 소수점 오차만 하한에도 허용한다. timeout 증가·강제 클릭·새 skip은 없다.
+
+```sh
+DOCS_E2E_PORT=3041 pnpm --filter docs test:e2e e2e/search-drawer.spec.ts \
+  --grep 'repeated query|same-query' --project chromium-desktop --workers 1
+pnpm --filter docs exec node --experimental-strip-types --test \
+  --test-name-pattern='space-containing' lib/search-suggestions.test.ts
+DOCS_E2E_PORT=3041 pnpm --filter docs test:e2e \
+  e2e/search-drawer.spec.ts e2e/search-navigation.spec.ts \
+  e2e/search-query-policy.spec.ts e2e/keyboard-accessibility.spec.ts \
+  --workers 1 --reporter list
+pnpm --filter docs test:lib
+pnpm --filter docs typecheck
+pnpm --filter docs lint
+```
+
+최초 Preview 배포 `dpl_7VSsfTitXxxLndg2amQzLDLUTjY3`는 같은 head·READY 상태다. 비인증 요청은 Vercel SSO 진입점으로302였고, 이를 확인한 뒤 공식 인증 요청의 React 검색 결과6개·본문 필드 제외를 확인했다. 프로젝트 Root Directory `apps/docs`·Node24도 확인했다. 후속 수정의 원격 CI·리뷰·main 병합·Production 배포는 이 로컬 결과와 별도로 확인해야 한다. 사용자 개발 서버·기존 초안·stash·NAS는 변경하지 않았다.
 
 ## 관련 문서
 
