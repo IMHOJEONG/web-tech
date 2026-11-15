@@ -1,0 +1,25 @@
+{
+    "repository": "https://github.com/IMHOJEONG/heap-forge-content.git",
+    "revision": "cc3a6f9b93b47d1d53ae6ba40f70c3544a8b1a66",
+    "sourceAppRevision": "3b5444edabe021dc18b62baa7e7060c9353c9c3a",
+    "routes": [
+        "/docs/category/be/node-js/event-loop-cpu-delay",
+        "/docs/category/be/node-js/http-response-streaming-lab",
+        "/docs/category/be/node-js/http-timeout-retry-boundary",
+        "/docs/category/be/node-js/node-brotli-runtime-security",
+        "/docs/category/be/node-js/stream-backpressure-diagnosis",
+        "/docs/category/be/node-js/tcp-socket-endpoints-lab",
+        "/docs/category/computer-science/os/process-thread-scheduler",
+        "/docs/category/fe/browser/critical-rendering-path-diagnosis",
+        "/docs/category/fe/react/nextjs",
+        "/docs/category/fe/react/server-client-component-boundary",
+        "/docs/category/mobile/web/mobile-viewport-height",
+        "/docs/html-in-canvas-paint-record",
+        "/docs/ui-ux/blocked-aria-hidden",
+        "/docs/ui-ux/focus-management-checklist",
+        "/docs/ui-ux/form-error-recovery",
+        "/docs/web/bytecode",
+        "/docs/web/javascript-event-loop-runtime"
+    ],
+    "retainedRemoteRoutes": ["/docs/feed/pna"]
+}

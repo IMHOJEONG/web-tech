@@ -8,6 +8,7 @@ import {
     contentDateSchema,
     editorialStatusSchema,
 } from '@web-tech/docs-content-contract'
+import { getDocHref } from '../lib/get-doc-route.ts'
 
 const NON_PUBLIC_STATUSES = new Set(['draft', 'archived'])
 const DOCS_ROOT = path.resolve(
@@ -239,6 +240,7 @@ export async function main() {
     ).flat()
 
     const failures = []
+    const publishedRoutes = new Map()
 
     for (const filePath of files) {
         const source = await fs.readFile(filePath, 'utf8')
@@ -254,11 +256,29 @@ export async function main() {
 
         if (issues.length > 0) {
             failures.push(`${filePath}: ${issues.join('; ')}`)
+            continue
+        }
+
+        if (normalizeStatus(frontmatter.status) !== 'published') continue
+
+        const relativePath = path.relative(DOCS_ROOT, filePath)
+        const href = getDocHref({
+            slug: frontmatter.slug,
+            fileName: relativePath,
+        })
+        const previous = publishedRoutes.get(href)
+
+        if (previous) {
+            failures.push(
+                `Duplicate published URL ${href}: ${previous}, ${relativePath}`
+            )
+        } else {
+            publishedRoutes.set(href, relativePath)
         }
     }
 
     if (failures.length > 0) {
-        console.error('[docs] Content frontmatter validation failed.\n')
+        console.error('[docs] Content validation failed.\n')
         for (const failure of failures) {
             console.error(`- ${failure}`)
         }
