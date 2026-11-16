@@ -50,6 +50,7 @@ const attempt = z
                 'other',
             ])
             .default('none'),
+        failureLine: z.number().int().positive().max(1_000_000).optional(),
     })
     .strict()
 export const sampleIds = [

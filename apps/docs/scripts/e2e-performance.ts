@@ -31,6 +31,7 @@ export type Attempt = {
         | 'network'
         | 'network-suspended'
         | 'other'
+    failureLine?: number
     phases: Partial<Record<Phase, Measurement>>
     api: Record<string, Measurement>
 }

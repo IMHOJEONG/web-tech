@@ -151,6 +151,20 @@ test("source, independent runner, resource class and unchanged retry/timeout con
 
 test("public summary accepts only allowlisted counters and hashes, never raw diagnostics", () => {
   const value = fixtures()[0]!;
+  assert.equal(
+    parsePublicSample({
+      ...value,
+      attempts: [{ ...value.attempts[0], failureLine: 17 }],
+    }).attempts[0]!.failureLine,
+    17,
+  );
+  for (const failureLine of [-1, 0, 1.5, 1_000_001, "private-path:17"])
+    assert.throws(() =>
+      parsePublicSample({
+        ...value,
+        attempts: [{ ...value.attempts[0], failureLine }],
+      }),
+    );
   for (const key of ["stdout", "url", "error", "attachments", "headers"])
     assert.throws(
       () => parsePublicSample({ ...value, [key]: "sensitive-value" }),

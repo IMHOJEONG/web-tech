@@ -131,6 +131,7 @@ const sample = parsePublicSample({
         durationMs: entry.durationMs,
         workerIndex: entry.workerIndex,
         failureKind: entry.failureKind ?? 'none',
+        failureLine: entry.failureLine,
     })),
     status: timing?.status === 'passed' ? 'passed' : 'failed',
     globalErrors: timing?.globalErrors ?? 1,

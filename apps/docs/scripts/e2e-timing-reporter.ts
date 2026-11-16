@@ -110,6 +110,16 @@ export default class TimingReporter implements Reporter {
                       : /expect\(|AssertionError/.test(message)
                         ? 'assertion'
                         : 'other'
+        const location = result.errors?.find(
+            (error) => error.location?.file === test.location.file
+        )?.location
+        if (
+            attempt.failureKind !== 'none' &&
+            Number.isInteger(location?.line) &&
+            location!.line > 0 &&
+            location!.line <= 1_000_000
+        )
+            attempt.failureLine = location!.line
         this.report.attempts.push(attempt)
     }
 

@@ -192,10 +192,28 @@ test("reporter strips titles, URLs, errors, attachments and stdout from private 
     const failure = {
       ...result,
       status: "failed",
-      errors: [{ message: "expect(locator) private-token" }],
+      errors: [
+        {
+          message: "expect(locator) private-token",
+          location: { file: sample.location.file, line: 17, column: 2 },
+        },
+      ],
     };
     reporter.onTestBegin(sample as never, failure as never);
     reporter.onTestEnd(sample as never, failure as never);
+    for (const location of [
+      { file: "/private/other.spec.ts", line: 18 },
+      { file: sample.location.file, line: -1 },
+      { file: sample.location.file, line: 1.5 },
+      { file: sample.location.file, line: 1_000_001 },
+    ]) {
+      const invalid = {
+        ...failure,
+        errors: [{ message: "private-token", location }],
+      };
+      reporter.onTestBegin(sample as never, invalid as never);
+      reporter.onTestEnd(sample as never, invalid as never);
+    }
     await reporter.onEnd({ status: "passed", duration: 30 } as never);
     const bytes = readFileSync(file, "utf8");
     assert.ok(!/private|token|stdout|attachments|error\.message/.test(bytes));
@@ -203,6 +221,12 @@ test("reporter strips titles, URLs, errors, attachments and stdout from private 
     assert.equal(report.attempts[0]!.phases.fonts!.totalMs, 10);
     assert.equal(report.attempts[0]!.api.navigation!.totalMs, 5);
     assert.equal(report.attempts[1]!.failureKind, "assertion");
+    assert.equal(report.attempts[1]!.failureLine, 17);
+    assert.ok(
+      report.attempts
+        .slice(2)
+        .every((attempt) => attempt.failureLine === undefined),
+    );
     assert.equal(statSync(file).mode & 0o777, 0o600);
     assert.deepEqual(
       await reporter.onEnd({ status: "passed", duration: 30 } as never),
