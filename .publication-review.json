@@ -2,6 +2,48 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/runbooks/docs-e2e-performance.md",
+      "sha256": "35c285bd8e1bc5e117e5da1ecb1f061b2027724149b2b2961e124dc1f3fadf03",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-16",
+      "note": "사용자가 앞선 계측 코드·회귀 검사·독립 CI 샤딩 실험 전용 workflow와 관련 운영 문서 6개만 공개 검수 후 전용 브랜치 커밋·푸시·Draft PR 및 CI 실행하도록 명시 승인함. 직접 작성한 절차·정제 숫자·실패·한계·목차를 검수하고 고정 스키마 합성 집계만 CI에서 공개함. 원시 로그·trace·화면·실제 응답·비밀값·개인 경로·기존 다른 작업·main 병합·Production 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/performance/2026-11-15-desktop-e2e-duration.md",
+      "sha256": "840e7775fb6641935d30752555b9a3e39baae47f6da88a47c8132bd3bf741d4e",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-16",
+      "note": "사용자가 앞선 계측 코드·회귀 검사·독립 CI 샤딩 실험 전용 workflow와 관련 운영 문서 6개만 공개 검수 후 전용 브랜치 커밋·푸시·Draft PR 및 CI 실행하도록 명시 승인함. 직접 작성한 절차·정제 숫자·실패·한계·목차를 검수하고 고정 스키마 합성 집계만 CI에서 공개함. 원시 로그·trace·화면·실제 응답·비밀값·개인 경로·기존 다른 작업·main 병합·Production 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-15-desktop-e2e-duration.md",
+      "sha256": "1d429459e3426b95d720c5658ebf3e1045f219239c35892d4cadc5c00d16b23c",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-16",
+      "note": "사용자가 앞선 계측 코드·회귀 검사·독립 CI 샤딩 실험 전용 workflow와 관련 운영 문서 6개만 공개 검수 후 전용 브랜치 커밋·푸시·Draft PR 및 CI 실행하도록 명시 승인함. 직접 작성한 절차·정제 숫자·실패·한계·목차를 검수하고 고정 스키마 합성 집계만 CI에서 공개함. 원시 로그·trace·화면·실제 응답·비밀값·개인 경로·기존 다른 작업·main 병합·Production 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/architecture/README.md",
       "sha256": "de012b5b290752242b87ea97063adf05b5bfc1bfabfd6fec851a3bc3691adbde",
       "kind": "document",
@@ -59,11 +101,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "0a0a9b4320eef75f6017c923a4315d1b27bdc19cae7284a03d61c927935a7843",
+      "sha256": "f4a8932287a1b0f69d51b6cd4c09cb91901ecd7e47361a9b477b55d9ad429c15",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-15",
-      "note": "사용자가 PR #92 배포 기록·CI 기하 비교 후속의 최종 7개 파일과 문서 6개 해시 갱신을 공개·커밋·푸시하고 새 main 기반 후속 PR 검증 후 병합·배포하도록 명시 승인함. 운영 검증 정제 집계와 기존 main CI 실패·후속 로컬 검사를 구분해 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·이력 재작성·브랜치 정리는 제외함.",
+      "reviewedOn": "2026-11-16",
+      "note": "사용자가 앞선 계측 코드·회귀 검사·독립 CI 샤딩 실험 전용 workflow와 관련 운영 문서 6개만 공개 검수 후 전용 브랜치 커밋·푸시·Draft PR 및 CI 실행하도록 명시 승인함. 직접 작성한 절차·정제 숫자·실패·한계·목차를 검수하고 고정 스키마 합성 집계만 CI에서 공개함. 원시 로그·trace·화면·실제 응답·비밀값·개인 경로·기존 다른 작업·main 병합·Production 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -101,11 +143,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "8621f1d963597b2c6ea589b230cf1382fcfea2141e97cad59180628006b79de5",
+      "sha256": "7805c481b5f333d6b80287db7d3f40a1e80a5842e5254aa63987fb9447c0ae45",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-15",
-      "note": "사용자가 PR #92 배포 기록·CI 기하 비교 후속의 최종 7개 파일과 문서 6개 해시 갱신을 공개·커밋·푸시하고 새 main 기반 후속 PR 검증 후 병합·배포하도록 명시 승인함. 운영 검증 정제 집계와 기존 main CI 실패·후속 로컬 검사를 구분해 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·이력 재작성·브랜치 정리는 제외함.",
+      "reviewedOn": "2026-11-16",
+      "note": "사용자가 앞선 계측 코드·회귀 검사·독립 CI 샤딩 실험 전용 workflow와 관련 운영 문서 6개만 공개 검수 후 전용 브랜치 커밋·푸시·Draft PR 및 CI 실행하도록 명시 승인함. 직접 작성한 절차·정제 숫자·실패·한계·목차를 검수하고 고정 스키마 합성 집계만 CI에서 공개함. 원시 로그·trace·화면·실제 응답·비밀값·개인 경로·기존 다른 작업·main 병합·Production 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -815,11 +857,11 @@
     },
     {
       "path": "docs/runbooks/README.md",
-      "sha256": "dd9ffc6e097503e262f08df0873665a7664387836ab9f7312586ad72e44b13ed",
+      "sha256": "e04c86bfe69618f9ee37ed98cff5e98ec76eed9f8230cd845eddd3269d1f4e76",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-14",
-      "note": "사용자가 이번 목차 UI·회귀·작성 가이드·합성 예제만 공개 검수 후 작업별 커밋·푸시하도록 명시 승인함. 직접 작성한 코드·문서·합성 Markdown과 정제 검사 결과·한계를 검수함. 원시 로그·캡처·녹화·실제 응답·비밀값·개인정보·기존 진단 작업은 제외함. main 병합·배포·NAS 변경은 승인 범위가 아님.",
+      "reviewedOn": "2026-11-16",
+      "note": "사용자가 앞선 계측 코드·회귀 검사·독립 CI 샤딩 실험 전용 workflow와 관련 운영 문서 6개만 공개 검수 후 전용 브랜치 커밋·푸시·Draft PR 및 CI 실행하도록 명시 승인함. 직접 작성한 절차·정제 숫자·실패·한계·목차를 검수하고 고정 스키마 합성 집계만 CI에서 공개함. 원시 로그·trace·화면·실제 응답·비밀값·개인 경로·기존 다른 작업·main 병합·Production 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-15 데스크톱 E2E 시간 조사·계측](performance/2026-11-15-desktop-e2e-duration.md): 기존 CI 비용 분해와 로컬 단계 계측·샤드 범위·worker 탐색 대조. 실패·절전 영향·CI 채택 미검증을 구분.
+
 - [11-14 검색 Drawer·자동완성](accessibility/2026-11-14-search-drawer.md): 로컬·PR #92 검증과 main/Production 운영 결과. main CI의 미세 기하 비교 실패 및 후속 로컬 검사를 구분.
 
 - [11-14 본문 공통 목차 UI/UX](accessibility/2026-11-14-article-toc-ux.md): 현재 위치·계층·접기·앵커/포커스의 로컬 회귀. 운영 반영과 구분.
