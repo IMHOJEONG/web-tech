@@ -2,6 +2,34 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/verification/security/2026-11-17-hono-advisories.md",
+      "sha256": "4de775cfcca45abb011c8cdaba58488866768236ee3a863ab8c290ec0f998003",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-17",
+      "note": "사용자가 최종 Hono 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 공식 권고·정제 검증 집계·구버전 대조·실패 이력·잔여 경고·최초 로컬 검증 범위를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-17-hono-advisories.md",
+      "sha256": "850a98f56b331d532b97d96db59c184f435677092739ba53e102191b727dd674",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-17",
+      "note": "사용자가 최종 Hono 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 변경 이유·정제 검사 요약·ADR 검토·추적 연결·후속 범위를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/architecture/README.md",
       "sha256": "de012b5b290752242b87ea97063adf05b5bfc1bfabfd6fec851a3bc3691adbde",
       "kind": "document",
@@ -59,11 +87,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "0a0a9b4320eef75f6017c923a4315d1b27bdc19cae7284a03d61c927935a7843",
+      "sha256": "a58a22b9d407de84478dafccced4550da7bda07c3030c9e32d842308939aadb2",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-15",
-      "note": "사용자가 PR #92 배포 기록·CI 기하 비교 후속의 최종 7개 파일과 문서 6개 해시 갱신을 공개·커밋·푸시하고 새 main 기반 후속 PR 검증 후 병합·배포하도록 명시 승인함. 운영 검증 정제 집계와 기존 main CI 실패·후속 로컬 검사를 구분해 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·이력 재작성·브랜치 정리는 제외함.",
+      "reviewedOn": "2026-11-17",
+      "note": "사용자가 최종 Hono 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 기존 목차를 유지하고 Hono 검증 보고서의 로컬 검사·잔여 경고·미반영 범위를 연결한 최종 bytes를 검수함. 원시 자료·비밀값·기존 초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -101,11 +129,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "8621f1d963597b2c6ea589b230cf1382fcfea2141e97cad59180628006b79de5",
+      "sha256": "a238d909916d68937ab792c04ac877e56494eb9968e1968087a5d2f1982e3f80",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-15",
-      "note": "사용자가 PR #92 배포 기록·CI 기하 비교 후속의 최종 7개 파일과 문서 6개 해시 갱신을 공개·커밋·푸시하고 새 main 기반 후속 PR 검증 후 병합·배포하도록 명시 승인함. 운영 검증 정제 집계와 기존 main CI 실패·후속 로컬 검사를 구분해 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·이력 재작성·브랜치 정리는 제외함.",
+      "reviewedOn": "2026-11-17",
+      "note": "사용자가 최종 Hono 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 기존 목차를 유지하고 Hono 작업 기록의 patch·합성 회귀·로컬 검증 범위를 연결한 최종 bytes를 검수함. 원시 자료·비밀값·기존 초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
