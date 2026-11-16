@@ -17,7 +17,7 @@
     },
     {
       "path": "docs/verification/performance/2026-11-15-desktop-e2e-duration.md",
-      "sha256": "5528fb940c9b6958c5ff20a4c96c7ce9abdf54bc6db9ebac0ef6b1802b6dffe8",
+      "sha256": "6c6ff33c64d4a557b2d1f1f3ae3797f047f291b64a643a021c442e8d2f20e103",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-17",
@@ -30,12 +30,40 @@
       }
     },
     {
+      "path": "docs/verification/security/2026-11-17-hono-advisories.md",
+      "sha256": "4de775cfcca45abb011c8cdaba58488866768236ee3a863ab8c290ec0f998003",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-17",
+      "note": "사용자가 최종 Hono 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 공식 권고·정제 검증 집계·구버전 대조·실패 이력·잔여 경고·최초 로컬 검증 범위를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/worklog/2026-11/2026-11-15-desktop-e2e-duration.md",
-      "sha256": "7552b9a578156a16a830551b841018e0218126c689d12bdf848c90abc89d6f1a",
+      "sha256": "ad60d9ac94c570f5329e657916d02bb52f0f8e0d19ea05ddb108b9a01373f605",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-17",
       "note": "사용자가 앞선 계측 코드·회귀 검사·독립 CI 샤딩 실험 전용 workflow와 관련 운영 문서 6개만 공개 검수 후 전용 브랜치 커밋·푸시·Draft PR 및 CI 실행하도록 명시 승인함. 직접 작성한 절차·정제 숫자·실패·한계·목차를 검수하고 고정 스키마 합성 집계만 CI에서 공개함. 원시 로그·trace·화면·실제 응답·비밀값·개인 경로·기존 다른 작업·main 병합·Production 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-17-hono-advisories.md",
+      "sha256": "850a98f56b331d532b97d96db59c184f435677092739ba53e102191b727dd674",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-17",
+      "note": "사용자가 최종 Hono 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 변경 이유·정제 검사 요약·ADR 검토·추적 연결·후속 범위를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -101,11 +129,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "e750c282cee1553509af0ddd2ed820bb253b80f704c11e345232def738f7425e",
+      "sha256": "6850b1febf9e9e5edda3dd872703809794852c177375f1cf8c9025857a8c2767",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-16",
-      "note": "사용자가 앞선 계측 코드·회귀 검사·독립 CI 샤딩 실험 전용 workflow와 관련 운영 문서 6개만 공개 검수 후 전용 브랜치 커밋·푸시·Draft PR 및 CI 실행하도록 명시 승인함. 직접 작성한 절차·정제 숫자·실패·한계·목차를 검수하고 고정 스키마 합성 집계만 CI에서 공개함. 원시 로그·trace·화면·실제 응답·비밀값·개인 경로·기존 다른 작업·main 병합·Production 배포는 제외함.",
+      "reviewedOn": "2026-11-17",
+      "note": "사용자가 PR #94에 최신 main 보안 PR #95를 반영하고 목차·검수 목록 충돌을 양쪽 보존으로 해결해 CI·샤드 실험을 새 기준에서 재검증하도록 승인함. 기존 Hono 보고서와 E2E 정제 조사 링크를 함께 유지한 목차만 재검수함. 원시 자료·비밀값·기존 미커밋·main 병합·Production 배포·NAS 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -143,11 +171,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "5e79082084ba9373cc13e758a522a6ae32b4ec06aaecf7ea1127c0e5ac0e4389",
+      "sha256": "5f6bbffc37f12e0a9ba43264b589dc5c38ee9282d81178601b4b5ff1ec382a60",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-16",
-      "note": "사용자가 앞선 계측 코드·회귀 검사·독립 CI 샤딩 실험 전용 workflow와 관련 운영 문서 6개만 공개 검수 후 전용 브랜치 커밋·푸시·Draft PR 및 CI 실행하도록 명시 승인함. 직접 작성한 절차·정제 숫자·실패·한계·목차를 검수하고 고정 스키마 합성 집계만 CI에서 공개함. 원시 로그·trace·화면·실제 응답·비밀값·개인 경로·기존 다른 작업·main 병합·Production 배포는 제외함.",
+      "reviewedOn": "2026-11-17",
+      "note": "사용자가 PR #94에 최신 main 보안 PR #95를 반영하고 목차·검수 목록 충돌을 양쪽 보존으로 해결해 CI·샤드 실험을 새 기준에서 재검증하도록 승인함. Hono 보안 작업과 기존 E2E 조사 작업의 목차 링크를 모두 보존한 최종 bytes만 재검수함. 원시 자료·비밀값·기존 미커밋·main 병합·Production 배포·NAS 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

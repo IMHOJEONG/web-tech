@@ -318,6 +318,14 @@ DOCS_E2E_SOURCE_SHA=e7ef7e233afe090a52e829a335309f0224a2efbc \
 
 `PRIVATE_RESULTS`와 `COUNTERS`는 위 재현 절차와 [runbook](../../runbooks/docs-e2e-performance.md)의 `mktemp` 준비를 따른다. 기존 표본은 덮어쓰지 않는다. 다음은 별도 스켈레톤 HTTP 실패 분리와 캐시 준비 지연의 재현 조건 조사다. 키보드 실패를 다시 focus 문제로 묶거나, 기존 timeout·retry·채택 gate를 낮추는 근거로 쓰지 않는다.
 
+### 새 main 기준 재검증 착수
+
+결과 문서 head `081916dc`를 푸시한 뒤 별도 보안 PR #95가 main `6b807f26fd878af38bdc144fdfe8f4af02585281`에 반영됐다. 공개 검수 목록·검증 목차·월별 작업 목차3개가 충돌해 후속 PR CI는 실행되지 않았다. 작업 트리를 바꾸지 않는 merge-tree로 먼저 확인했으며, 기존 코드 head의 CI 성공을 문서 head의 성공으로 쓰지 않는다.
+
+사용자가 최신 main 병합·충돌 해결·새 의존성 기준 CI/샤드 재검증을 승인했다. 양쪽 고유 검수 항목과 목차 링크를 보존하고 바뀐 목차 bytes만 재검수했다. main의 보안 patch·lockfile·합성 회귀는 그대로 받아들이며 테스트 기준·실험 workflow를 변경하지 않는다. 이후 측정은 새 SHA로 분리하고 앞선3회 결과와 합쳐 평균 내거나 실패를 교체하지 않는다. 새 기준의 원격 결과는 실행 후 기록하며 main 병합·배포·기존 미커밋 변경은 여전히 제외한다.
+
+커밋 전 통합본의 저장소 회귀276개는 모두 통과했다. 고정 lockfile 설치 후 제한 환경의 pnpm 포맷 명령이 다른 store를 선택해 DNS 실패·링크 미완성을 보였으나, 그 명령을 중단하고 승인된 정상 store에서 같은 lockfile로 재설치한 뒤 명시 문서 포맷을 통과했다. 의존성·공통 설정을 임의 변경하지 않았다. worktree의 `.git` 파일을 디렉터리로 가정한 prepare 훅 경고도 별도 확인했으며 기존 공통 Git hooks 경로는 유지했다. 환경 복구를 제품 테스트 성공으로 대신하지 않는다.
+
 ## 관련 문서
 
 - [작업 기록](../../worklog/2026-11/2026-11-15-desktop-e2e-duration.md)
