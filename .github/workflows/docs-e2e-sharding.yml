@@ -13,9 +13,31 @@ permissions:
   contents: read
 
 jobs:
+  preflight:
+    if: github.head_ref == 'codex/docs-desktop-e2e-timing-20261115' && github.event.pull_request.head.repo.full_name == github.repository
+    name: E2E sharding checkout preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+      options: --init --ipc=host
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Verify exact checkout with the container Git
+        env:
+          EXPECTED_SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          checkout="$(pwd -P)"
+          actual="$(git -c "safe.directory=$checkout" rev-parse HEAD)"
+          test "$actual" = "$EXPECTED_SOURCE_SHA"
+
   sample:
     if: github.head_ref == 'codex/docs-desktop-e2e-timing-20261115' && github.event.pull_request.head.repo.full_name == github.repository
     name: E2E shard probe (${{ matrix.id }})
+    needs: preflight
     runs-on: ubuntu-latest
     timeout-minutes: 15
     container:

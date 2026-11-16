@@ -112,6 +112,10 @@ test("source, independent runner, resource class and unchanged retry/timeout con
     "rev-parse",
     "HEAD",
   ]);
+  assert.deepEqual(
+    checkoutRevisionArguments("/__w/project/project/"),
+    checkoutRevisionArguments("/__w/project/project"),
+  );
   for (const invalid of ["relative", "/", "*", "/tmp/*", "/tmp/\nrepo"])
     assert.throws(() => checkoutRevisionArguments(invalid));
   for (const change of [
@@ -187,6 +191,11 @@ test("experiment workflow pins independent jobs and leaves the existing CI matri
   );
   assert.deepEqual(workflow.jobs.sample.strategy.matrix.id, [...sampleIds]);
   assert.equal(workflow.jobs.sample.strategy["fail-fast"], false);
+  assert.equal(workflow.jobs.sample.needs, "preflight");
+  assert.equal(
+    workflow.jobs.preflight.container.image,
+    existing.jobs["docs-browser"].container.image,
+  );
   assert.equal(workflow.jobs.sample.strategy["max-parallel"], 3);
   assert.equal(workflow.jobs.sample["runs-on"], "ubuntu-latest");
   assert.equal(

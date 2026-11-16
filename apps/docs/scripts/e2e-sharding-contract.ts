@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { isAbsolute, parse } from 'node:path'
+import { isAbsolute, parse, resolve } from 'node:path'
 import {
     assertComparable,
     assertShardCoverage,
@@ -11,15 +11,16 @@ import {
 const hash = z.string().regex(/^[a-f0-9]{64}$/)
 
 export function checkoutRevisionArguments(workspace: string) {
+    const normalized = resolve(workspace)
     if (
         !isAbsolute(workspace) ||
-        workspace === parse(workspace).root ||
+        normalized === parse(normalized).root ||
         /[\r\n\0*]/.test(workspace)
     )
         throw new Error('Expected one explicit checkout directory')
     // Container bind mounts can have a different UID. Trust only this command,
     // never the host configuration or every repository.
-    return ['-c', `safe.directory=${workspace}`, 'rev-parse', 'HEAD']
+    return ['-c', `safe.directory=${normalized}`, 'rev-parse', 'HEAD']
 }
 const duration = z.number().finite().nonnegative()
 const item = z
