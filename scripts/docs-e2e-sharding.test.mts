@@ -193,7 +193,11 @@ test("experiment workflow pins independent jobs and leaves the existing CI matri
   const upload = workflow.jobs.sample.steps.find((step: any) =>
     step.uses?.startsWith("actions/upload-artifact@"),
   );
-  assert.equal(upload.with.path, "${{ runner.temp }}/e2e-public/sample.json");
+  assert.equal(upload.with.path, "${{ steps.measure.outputs.summary }}");
+  const measure = workflow.jobs.sample.steps.find(
+    (step: any) => step.id === "measure",
+  );
+  assert.ok(measure.run.includes("summary=%s/e2e-public/sample.json"));
   assert.equal(upload.with["if-no-files-found"], "error");
   assert.ok(upload.with.name.includes("${{ github.run_attempt }}"));
   assert.ok(workflow.jobs.compare.if.includes("always()"));

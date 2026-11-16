@@ -55,16 +55,19 @@ jobs:
         timeout-minutes: 2
         run: node scripts/check-browser-runtime.mts
       - name: Measure unchanged desktop suite
+        id: measure
         env:
           SAMPLE_ID: ${{ matrix.id }}
           DOCS_E2E_SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
-        run: node apps/docs/scripts/ci-e2e-sample.ts "$SAMPLE_ID" "$RUNNER_TEMP/e2e-private" "$RUNNER_TEMP/e2e-public" "$RUNNER_NAME"
+        run: |
+          printf 'summary=%s/e2e-public/sample.json\n' "$RUNNER_TEMP" >> "$GITHUB_OUTPUT"
+          node apps/docs/scripts/ci-e2e-sample.ts "$SAMPLE_ID" "$RUNNER_TEMP/e2e-private" "$RUNNER_TEMP/e2e-public" "$RUNNER_NAME"
       - name: Upload allowlisted synthetic counters only
         if: ${{ always() && !cancelled() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: e2e-shard-${{ matrix.id }}-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/e2e-public/sample.json
+          path: ${{ steps.measure.outputs.summary }}
           retention-days: 7
           if-no-files-found: error
           include-hidden-files: false
