@@ -1,5 +1,7 @@
 # 2026-11 작업 기록
 
+- [11-17 Hono Dependabot 보완](2026-11-17-hono-advisories.md): 실제 Prisma 의존성 patch·합성 보안 회귀·KAN-79 연결. 로컬 검증이며 공개 승인·커밋·푸시·PR·배포는 별도.
+
 - [11-14 검색 Drawer·자동완성](2026-11-14-search-drawer.md): PR #92 main 병합·운영 검증과 새 main 기준 CI 기하 비교 보완. 초안·stash·NAS 유지.
 
 - [11-14 블로그 공통 목차 UI/UX](2026-11-14-article-toc-ux.md): 읽기 위치·계층·모바일 접기와 로컬 회귀. 기존 작업 보존·미푸시.
