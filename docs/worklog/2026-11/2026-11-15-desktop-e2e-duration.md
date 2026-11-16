@@ -16,7 +16,7 @@
 
 ## Notes
 
-[KAN-78](https://web-tech-service.atlassian.net/browse/KAN-78)에서 추적하며 상태는 검토 중이다. 기존 관련 과제를 검색했으며 같은 성능 조사 이슈가 없어 분리했다. [Confluence 정제 요약](https://web-tech-service.atlassian.net/wiki/pages/viewpage.action?pageId=65817&focusedCommentId=17825826)을 별도 댓글로 기록하고 재조회했다. 기존 페이지 본문과 다른 작업 댓글은 변경하지 않았다.
+[KAN-78](https://web-tech-service.atlassian.net/browse/KAN-78)에서 추적한다. 최초 조사 검토 후11-17 원인 추적을 재개하며 진행 중으로 전환했다. 기존 관련 과제를 검색했으며 같은 성능 조사 이슈가 없어 분리했다. [Confluence 정제 요약](https://web-tech-service.atlassian.net/wiki/pages/viewpage.action?pageId=65817&focusedCommentId=17825826)을 별도 댓글로 기록하고 재조회했다. 기존 페이지 본문과 다른 작업 댓글은 변경하지 않았다.
 
 11-16 후속 결과도 같은 Confluence 댓글v2와 Jira 기존3열 요약에 갱신하고 재조회했다. 기존 작업 트리 두 곳의 HEAD·미커밋 파일 hash·상태와 stash가 시작 스냅샷과 일치했다. 문서 검사·명시 파일 포맷·diff 검사를 통과했으며 검사 전용3078 포트는 실행 종료 후 해제됐다.
 
@@ -45,10 +45,12 @@ worker1/2/4 탐색 실행도 모두 원래171개와153통과·18skip을 유지�
 - 이동 시간이 큰 것은 확인했지만 Next 서버 대기·전송·브라우저 load 중 어느 부분이 CI 차이를 설명하는가?
 - 계측 wrapper가 없는 기존 readiness의 전체 병렬 실행 실패가 어떤 조건에서 재현되는가?
 - 같은 범위를 분산했을 때 전체 CI 시간뿐 아니라 비용·실패율도 개선되는가?
-- 영문 Escape/포커스 검사가 샤드2에서 반복 재시도되는 조건은 무엇이며, 어느 assertion이 최초로 실패하는가?
+- 마지막 URL matcher의 실패는 확인했지만, 원격 응답 지연의 내부 원인과 준비 후 독립 샤드의 반복 안정성도 확인됐는가?
 
 ## Next
 
 11-16 승인한 전용 workflow·fixed-schema 합성 집계·기존 운영 문서6개만 공개한다. 원격 결과와 실제 다운로드의 재검증은 위 보고서에서 코드 SHA별로 기록한다. 원시 자료·다른 작업·main 병합·Production 배포는 제외한다.
 
-이번 결과는 샤딩 채택 보류다. 다음은 샤드/비샤드의 영문 키보드 검사 원인 분리·기준 유지형 안정화와 동일 자원 조건의 새3회 대조다. 기존 CI worker·샤드·캐시 설정과 검사 기준은 완화하지 않는다. 공개 반영은 이번 승인 범위로 한정하고 main 병합·Production 배포는 진행하지 않는다.
+11-17 수정 head `e7ef7e23`의 독립3회 대조도 완료했다. 영문 키보드는 기준·샤드2 총6회 모두 첫 시도 통과했고 원래171개 ID와 최종 상태가 일치했다. 별도 스켈레톤 HTTP 요청 재시도1건과 캐시 준비 지연 뒤15분 job 제한 초과는 유지해 실험 전체는 실패로 남겼다. 같은 head의 일반 CI13job·문서·CodeQL·보안 검사는 성공했다. [Confluence 후속](https://web-tech-service.atlassian.net/wiki/pages/viewpage.action?pageId=65817&focusedCommentId=18153493)과 기존 Jira3열 댓글에 조사 범위·원격 head·로컬 결과를 갱신하고 재조회했다. 기존 두 작업 트리의 HEAD·미커밋 파일 hash·상태·stash도 시작 값과 일치했다.
+
+이번 결과는 여전히 샤딩 채택 보류다. 다음은 키보드와 분리된 스켈레톤 HTTP 실패 및 캐시 준비 지연 조사다. 기존 CI worker·샤드·캐시 설정과 검사 기준은 완화하지 않는다. 공개 반영은 이번 승인 범위로 한정하고 main 병합·Production 배포는 진행하지 않는다.

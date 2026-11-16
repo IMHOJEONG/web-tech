@@ -285,7 +285,38 @@ gh api 'repos/IMHOJEONG/web-tech/actions/runs/43827088181/jobs?per_page=100' \
 
 로컬 검증은 키보드4개×3개 화면×5회 **60통과·retry0**, 기존 Drawer/검색 이동 **63통과·retry0**, 저장소 **265통과**, docs 타입·변경 파일 ESLint 통과다. 최초 타입 검사에서 locale 배열이 넓은 string으로 추론된 오류는 `as const`로 실제 ko/en 집합에 맞춰 바로잡고 재검증했다. runtime 동작·경로는 바뀌지 않는다.
 
-기본 CI와 앱은 변경하지 않았다. 목적지 준비 요청과 추가 회귀가 실행 시간에 포함되므로 이 수정 전후의 시간을 같은 작업량의 최적화 수치로 비교하지 않는다. 수정본의 독립 CI와 로컬 전체 샤드3회는 별도 결과로 이어 기록한다. 공개 원시 자료·실제 NAS 변경·main 병합·Production 배포는 없다.
+기본 CI와 앱은 변경하지 않았다. 목적지 준비 요청과 추가 회귀가 실행 시간에 포함되므로 이 수정 전후의 시간을 같은 작업량의 최적화 수치로 비교하지 않는다. 수정본의 로컬 전체 샤드2도3회 각각85개·74통과/11skip·retry0으로 완료했다. 명령 시간은71.6/77.3/69.0초였으며 Linux 독립 CI 성능으로 일반화하지 않는다. 공개 원시 자료·실제 NAS 변경·main 병합·Production 배포는 없다.
+
+### 안정화 후 독립 CI 결과 · 2026-11-17
+
+수정 head `e7ef7e233afe090a52e829a335309f0224a2efbc`의 [실험43898644783](https://github.com/IMHOJEONG/web-tech/actions/runs/43898644783)에서9개 합성 artifact를 다운로드했다. 엄격한 공개 schema·source SHA·원래171개 ID·샤드86+85 합집합·최종 status/expectedStatus·기존 skip은3회 모두 일치했다. runner hash9개가 서로 다르며 Node24.22.1·Playwright1.62.1·CPU4개·메모리 GiB 등급16도 같았다. JSON은61,392~92,354bytes, 선언1026개·시도1027개다. 원시 로그·trace·화면·실제 응답은 추가하지 않았다.
+
+| 회차 | 기준 전체                         | 샤드1               | 샤드2                              | 영문 키보드 검사             |
+| ---- | --------------------------------- | ------------------- | ---------------------------------- | ---------------------------- |
+| 1    | 153통과/18skip·retry0             | 79통과/7skip·retry0 | 최종74통과/11skip·다른 검사 retry1 | 기준·샤드2 모두 첫 시도 통과 |
+| 2    | 153통과/18skip·retry0, job은 취소 | 79통과/7skip·retry0 | 74통과/11skip·retry0               | 기준·샤드2 모두 첫 시도 통과 |
+| 3    | 153통과/18skip·retry0             | 79통과/7skip·retry0 | 74통과/11skip·retry0               | 기준·샤드2 모두 첫 시도 통과 |
+
+대상 영문 검사는 기준3회와 샤드2의3회, 총6회 첫 시도 성공했다. 이는 이번 조건의 안정화 근거이며 모든 환경에서 간헐 실패가 사라졌다는 보장은 아니다. 전체8개 측정 집계는 eligible이고, 샤드2의1회차만 별도 스켈레톤 검사 재시도로 거부됐다. 구체적인 남은 실패는 다음과 같다.
+
+- `page-skeletons.spec.ts`의96번 `page.request.get(path)`에서 분류 `other`·134ms 실패 후 retry1 통과했다. 키보드 matcher가 아니며 원격 원시 오류 본문은 공개 계측에 포함하지 않아 연결 종료·앱 응답·실행 환경 중 정확한 원인은 미확정이다. 이 실패를 무해한 요청 취소로 간주하거나 숨기지 않는다.
+- r2 기준 job의 `setup-node`는10분5초 걸렸고 캐시 복원 응답의 `Egress is over the account limit` 경고가 관측됐다. 실제 측정과 합성 업로드는 성공했지만 post-cache 단계에서 job의15분 제한을 초과해 취소됐다. 어느 계정의 자원 제한인지는 이 메시지만으로 확정하지 않는다. 측정 JSON의 성공과 GitHub job 성공을 구분하며 제한 시간을 늘리지 않았다.
+- 원격·로컬 aggregator는 모두 `Failed sample or inconsistent environment`로 종료1이다. 이번에는 자원 등급은 맞지만 재시도 표본 때문에 실패한다. workflow도 취소된 job을 포함해 실패로 완료됐으며 전체 성공·샤딩 채택으로 바꾸지 않았다. 녹색이 될 때까지 임의 재실행하거나 실패 표본을 교체하지 않는다.
+
+같은 head의 [일반 CI43898644670](https://github.com/IMHOJEONG/web-tech/actions/runs/43898644670)는13개 job 모두 성공했고, [문서43898644616](https://github.com/IMHOJEONG/web-tech/actions/runs/43898644616)·CodeQL·보안 검사도 성공했다. 일반 CI의 성공은 위 실험 실패를 대체하지 않는다. Draft PR #94와 기본 worker2를 유지한다.
+
+재현 명령은 저장소 루트 기준이다. 출력 경로는 저장소 밖 새 임시 디렉터리를 사용한다. 마지막 집계의 기대 결과는 이번 표본에서 종료1이다.
+
+```sh
+CI=true node apps/docs/scripts/measure-e2e.ts run "$PRIVATE_RESULTS/keyboard-shard2" \
+  --workers 2 --shard 2/2 --repeat 3
+gh run download 43898644783 --repo IMHOJEONG/web-tech \
+  --pattern 'e2e-shard-*-1' --dir "$COUNTERS"
+DOCS_E2E_SOURCE_SHA=e7ef7e233afe090a52e829a335309f0224a2efbc \
+  node apps/docs/scripts/ci-e2e-aggregate.ts "$COUNTERS" "$COUNTERS/summary.md" 1
+```
+
+`PRIVATE_RESULTS`와 `COUNTERS`는 위 재현 절차와 [runbook](../../runbooks/docs-e2e-performance.md)의 `mktemp` 준비를 따른다. 기존 표본은 덮어쓰지 않는다. 다음은 별도 스켈레톤 HTTP 실패 분리와 캐시 준비 지연의 재현 조건 조사다. 키보드 실패를 다시 focus 문제로 묶거나, 기존 timeout·retry·채택 gate를 낮추는 근거로 쓰지 않는다.
 
 ## 관련 문서
 
