@@ -22,6 +22,7 @@ import {
     parsePublicSample,
     redactInventory,
     sampleIds,
+    checkoutRevisionArguments,
 } from './e2e-sharding-contract.ts'
 
 const [id, privateRoot, exportRoot, runnerName] = process.argv.slice(2)
@@ -36,7 +37,7 @@ if (
 )
     throw new Error('Invalid CI sample arguments')
 const root = fileURLToPath(new URL('../../..', import.meta.url))
-const sourceSha = execFileSync('git', ['rev-parse', 'HEAD'], {
+const sourceSha = execFileSync('git', checkoutRevisionArguments(root), {
     cwd: root,
     encoding: 'utf8',
 }).trim()

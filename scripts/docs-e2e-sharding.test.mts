@@ -8,6 +8,7 @@ import {
   redactInventory,
   sampleIds,
   summarizeSamples,
+  checkoutRevisionArguments,
   type PublicSample,
 } from "../apps/docs/scripts/e2e-sharding-contract.ts";
 
@@ -105,6 +106,14 @@ test("failed, missing, duplicate and retried samples are never silently ranked",
 });
 
 test("source, independent runner, resource class and unchanged retry/timeout contract are required", () => {
+  assert.deepEqual(checkoutRevisionArguments("/__w/project/project"), [
+    "-c",
+    "safe.directory=/__w/project/project",
+    "rev-parse",
+    "HEAD",
+  ]);
+  for (const invalid of ["relative", "/", "*", "/tmp/*", "/tmp/\nrepo"])
+    assert.throws(() => checkoutRevisionArguments(invalid));
   for (const change of [
     (s: PublicSample[]) => {
       s[1]!.runner = s[0]!.runner;

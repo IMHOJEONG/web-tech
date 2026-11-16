@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { isAbsolute, parse } from 'node:path'
 import {
     assertComparable,
     assertShardCoverage,
@@ -8,6 +9,18 @@ import {
 } from './e2e-performance.ts'
 
 const hash = z.string().regex(/^[a-f0-9]{64}$/)
+
+export function checkoutRevisionArguments(workspace: string) {
+    if (
+        !isAbsolute(workspace) ||
+        workspace === parse(workspace).root ||
+        /[\r\n\0*]/.test(workspace)
+    )
+        throw new Error('Expected one explicit checkout directory')
+    // Container bind mounts can have a different UID. Trust only this command,
+    // never the host configuration or every repository.
+    return ['-c', `safe.directory=${workspace}`, 'rev-parse', 'HEAD']
+}
 const duration = z.number().finite().nonnegative()
 const item = z
     .object({ id: hash, file: hash, project: z.literal('chromium-desktop') })
