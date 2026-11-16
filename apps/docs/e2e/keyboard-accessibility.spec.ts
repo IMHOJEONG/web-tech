@@ -1,9 +1,11 @@
 import { expect, test } from '@playwright/test'
+import { prepareSearchDestination } from './helpers/docs-index'
 
-for (const locale of ['ko', 'en']) {
+for (const locale of ['ko', 'en'] as const) {
     test(`${locale}: Escape closes search from every control and restores focus`, async ({
         page,
     }) => {
+        await prepareSearchDestination(page.request, locale, 'react')
         await page.goto(`/${locale}/about`)
         const form = page.getByRole('dialog').getByRole('search')
         const trigger = page.getByTestId('search-drawer-trigger')
@@ -45,6 +47,41 @@ for (const locale of ['ko', 'en']) {
         await expect(input).toHaveValue('react')
         await input.press('Enter')
         await expect(page).toHaveURL(new RegExp(`/${locale}/docs\\?q=react$`))
+
+        let release!: () => void
+        const gate = new Promise<void>((resolve) => {
+            release = resolve
+        })
+        let held = 0
+        const destination = (url: URL) =>
+            url.pathname === `/${locale}/docs` &&
+            url.searchParams.get('q') === 'keyboard-pending'
+        await page.route(destination, async (route) => {
+            held++
+            await gate
+            await route.continue()
+        })
+        try {
+            await trigger.press('Enter')
+            await expect(input).toBeFocused()
+            await input.fill('keyboard-pending')
+            await input.press('Enter')
+            await expect.poll(() => held).toBe(1)
+            await expect(form).toHaveAttribute('aria-busy', 'true')
+            await expect(form.locator('button[type="submit"]')).toBeDisabled()
+            await expect(page).toHaveURL(
+                new RegExp(`/${locale}/docs\\?q=react$`)
+            )
+            await input.press('Enter')
+            expect(held).toBe(1)
+        } finally {
+            release()
+        }
+        await expect(page).toHaveURL(
+            new RegExp(`/${locale}/docs\\?q=keyboard-pending$`)
+        )
+        await expect(page.getByRole('dialog')).toBeHidden()
+        await page.unroute(destination)
     })
 
     test(`${locale}: local article exposes a main landmark and one visible title`, async ({
