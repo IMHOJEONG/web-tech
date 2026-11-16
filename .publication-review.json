@@ -17,10 +17,10 @@
     },
     {
       "path": "docs/verification/performance/2026-11-15-desktop-e2e-duration.md",
-      "sha256": "cbfebdc67118c731ab2a932f0dd3a4e3d632211bac06e433491988d80757128f",
+      "sha256": "c4bb4097992e8a55c7d78e83b0c722ee99017dae029286b1bc05356a22471bef",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-16",
+      "reviewedOn": "2026-11-17",
       "note": "사용자가 앞선 계측 코드·회귀 검사·독립 CI 샤딩 실험 전용 workflow와 관련 운영 문서 6개만 공개 검수 후 전용 브랜치 커밋·푸시·Draft PR 및 CI 실행하도록 명시 승인함. 직접 작성한 절차·정제 숫자·실패·한계·목차를 검수하고 고정 스키마 합성 집계만 CI에서 공개함. 원시 로그·trace·화면·실제 응답·비밀값·개인 경로·기존 다른 작업·main 병합·Production 배포는 제외함.",
       "checks": {
         "secrets": true,
@@ -31,10 +31,10 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-15-desktop-e2e-duration.md",
-      "sha256": "b4dcc341cd4d2ae875faabc78b388c92ae64e322ee9886c1d377a22ba4f0f83f",
+      "sha256": "2804db5f48d859c3639c53532ed1abbba14ace4fef840104cd09d39106230f77",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-16",
+      "reviewedOn": "2026-11-17",
       "note": "사용자가 앞선 계측 코드·회귀 검사·독립 CI 샤딩 실험 전용 workflow와 관련 운영 문서 6개만 공개 검수 후 전용 브랜치 커밋·푸시·Draft PR 및 CI 실행하도록 명시 승인함. 직접 작성한 절차·정제 숫자·실패·한계·목차를 검수하고 고정 스키마 합성 집계만 CI에서 공개함. 원시 로그·trace·화면·실제 응답·비밀값·개인 경로·기존 다른 작업·main 병합·Production 배포는 제외함.",
       "checks": {
         "secrets": true,
