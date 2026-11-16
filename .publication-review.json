@@ -3,7 +3,7 @@
   "entries": [
     {
       "path": "docs/runbooks/docs-e2e-performance.md",
-      "sha256": "35c285bd8e1bc5e117e5da1ecb1f061b2027724149b2b2961e124dc1f3fadf03",
+      "sha256": "9d95648d79be4b8853f6852e2c7ab2c35fa638ee8b89af12280fc42dbdaabf4a",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-16",
@@ -17,7 +17,7 @@
     },
     {
       "path": "docs/verification/performance/2026-11-15-desktop-e2e-duration.md",
-      "sha256": "840e7775fb6641935d30752555b9a3e39baae47f6da88a47c8132bd3bf741d4e",
+      "sha256": "cbfebdc67118c731ab2a932f0dd3a4e3d632211bac06e433491988d80757128f",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-16",
@@ -31,7 +31,7 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-15-desktop-e2e-duration.md",
-      "sha256": "1d429459e3426b95d720c5658ebf3e1045f219239c35892d4cadc5c00d16b23c",
+      "sha256": "b4dcc341cd4d2ae875faabc78b388c92ae64e322ee9886c1d377a22ba4f0f83f",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-16",
@@ -101,7 +101,7 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "f4a8932287a1b0f69d51b6cd4c09cb91901ecd7e47361a9b477b55d9ad429c15",
+      "sha256": "e750c282cee1553509af0ddd2ed820bb253b80f704c11e345232def738f7425e",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-16",
@@ -143,7 +143,7 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "7805c481b5f333d6b80287db7d3f40a1e80a5842e5254aa63987fb9447c0ae45",
+      "sha256": "5e79082084ba9373cc13e758a522a6ae32b4ec06aaecf7ea1127c0e5ac0e4389",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-16",

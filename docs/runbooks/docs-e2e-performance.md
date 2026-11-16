@@ -64,6 +64,7 @@ node apps/docs/scripts/measure-e2e.ts compare "$PRIVATE_RESULTS/worker-check" \
 실험 전용 `Docs E2E Sharding Experiment`는 승인한 `codex/docs-desktop-e2e-timing-20261115`의 같은 저장소 Draft PR에만 실행한다. 기존 `CI`의 모바일·태블릿·데스크톱·article·CRP matrix와 종합 Test gate는 그대로 둔다. 실험 workflow를 main의 필수 검사로 활성화하거나 Production 배포를 실행하지 않는다.
 
 - PR head SHA를 모든 job에서 동일하게 checkout한다. 공식 Playwright 이미지 digest·Node 보안 pin·frozen lockfile·기존 pnpm cache를 유지하고 `.next`는 공유하지 않는다.
+- 같은 이미지의 사전검사 job에서 정규화한 실제 checkout 경로와 정확한 head SHA 읽기를 먼저 확인한다. 컨테이너 UID가 다른 경우에도 SHA 조회 명령 한 번에만 해당 경로를 허용한다. 특히 Git2.43의 경로 끝 `/` 비교 차이를 정규화하며 전역 Git 설정·전체 경로 허용은 사용하지 않는다. 준비 실패에서는9개 측정을 시작하지 않는다.
 - 기준 전체와 shard1/2·2/2를 각각3회, 총9개 독립 `ubuntu-latest` job에서 실행한다. worker2·CI retry2·timeout30초·expect5초·서버 준비120초·기존 케이스별120초 예외·trace 계약은 그대로다.
 - 동시 job은 최대3개다. matrix 순서는 회차별로 바꾸지만 스케줄러의 동시 시작·정확한 순서까지 보장하지 않는다. 실제 queue와 job 시작/종료 시각은 GitHub API로 별도 확인한다.
 - 원시 콘솔·HTML report·trace·화면은 runner 임시 경로에만 남고 업로드하지 않는다. 공개 승인한 이 실험에서만 엄격한 스키마로 새로 만든 ID/파일 hash·고정 상태/실패 분류·숫자·도구 버전·자원 등급 집계를 전달한다. 기존 원시 증거 업로드 변수는 활성화하지 않는다. 오류 본문·URL·선택자·응답·사용자 입력은 포함하지 않는다.
