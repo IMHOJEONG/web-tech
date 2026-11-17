@@ -2,6 +2,7 @@ import { chromium, expect, test, type Page } from '@playwright/test'
 import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
+import { performanceStep } from './helpers/performance-step'
 
 async function expectHeaderFits(page: Page) {
     const header = page.getByRole('banner')
@@ -70,7 +71,7 @@ for (const locale of ['ko', 'en']) {
         })
         for (const width of [320, 390, 500]) {
             await page.setViewportSize({ width, height: 900 })
-            await expectHeaderFits(page)
+            await performanceStep('geometry', () => expectHeaderFits(page))
             const trigger = page.getByTestId('search-drawer-trigger')
             await trigger.click()
             const input = page.getByRole('dialog').getByRole('combobox')
@@ -146,18 +147,20 @@ test('native browser default font respects layout without a CSS override', async
     )
     try {
         for (const width of [500, 640, 1280]) {
-            const context = await chromium.launchPersistentContext(
-                join(directory, `profile-${width}`),
-                {
-                    channel: 'chromium',
-                    headless: true,
-                    viewport: null,
-                    args: [
-                        `--disable-extensions-except=${extension}`,
-                        `--load-extension=${extension}`,
-                        `--window-size=${width},900`,
-                    ],
-                }
+            const context = await performanceStep('profile-launch', () =>
+                chromium.launchPersistentContext(
+                    join(directory, `profile-${width}`),
+                    {
+                        channel: 'chromium',
+                        headless: true,
+                        viewport: null,
+                        args: [
+                            `--disable-extensions-except=${extension}`,
+                            `--load-extension=${extension}`,
+                            `--window-size=${width},900`,
+                        ],
+                    }
+                )
             )
             try {
                 const worker =
@@ -183,8 +186,12 @@ test('native browser default font respects layout without a CSS override', async
                     for (const locale of ['ko', 'en']) {
                         const page = await context.newPage()
                         try {
-                            await page.goto(`${baseURL}/${locale}/web`)
-                            await page.evaluate(() => document.fonts.ready)
+                            await performanceStep('navigation', () =>
+                                page.goto(`${baseURL}/${locale}/web`)
+                            )
+                            await performanceStep('fonts', () =>
+                                page.evaluate(() => document.fonts.ready)
+                            )
                             expect(await page.evaluate(() => innerWidth)).toBe(
                                 width
                             )
@@ -201,7 +208,9 @@ test('native browser default font respects layout without a CSS override', async
                                     .locator('html')
                                     .evaluate((node) => node.style.fontSize)
                             ).toBe('')
-                            await expectHeaderFits(page)
+                            await performanceStep('geometry', () =>
+                                expectHeaderFits(page)
+                            )
                             results.push({
                                 width,
                                 fontSize,
@@ -210,18 +219,20 @@ test('native browser default font respects layout without a CSS override', async
                                     .getByRole('banner')
                                     .boundingBox())!.height,
                             })
-                            await page.getByRole('banner').screenshot({
-                                path: testInfo.outputPath(
-                                    `header-${locale}-${width}-font${fontSize}.png`
-                                ),
-                            })
+                            await performanceStep('screenshot', () =>
+                                page.getByRole('banner').screenshot({
+                                    path: testInfo.outputPath(
+                                        `header-${locale}-${width}-font${fontSize}.png`
+                                    ),
+                                })
+                            )
                         } finally {
                             await page.close()
                         }
                     }
                 }
             } finally {
-                await context.close()
+                await performanceStep('profile-close', () => context.close())
             }
         }
     } finally {

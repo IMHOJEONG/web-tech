@@ -1,5 +1,7 @@
 # 운영 및 재현 절차
 
+- [Docs E2E 계측·성능 대조](docs-e2e-performance.md): 검사 범위·상태를 유지하는 단계 계측, 샤드·worker 비교와 비공개 증거 관리.
+
 - [블로그 본문 목차 작성·연결 가이드](docs-article-toc-guide.md): 제목 계층·로컬/원격 추출 차이·타입 검사되는 옵션 예제와 검증 절차.
 
 - [GitHub App 전용 macOS 계정 준비](github-app-isolated-macos-account.md): 별도 실행 환경·사람 전용 키 발급·단기 토큰·승인 게이트 검증. 현재 설정 적용 결과가 아닌 준비 절차.

@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { performanceStep } from './helpers/performance-step'
 
 for (const locale of ['ko', 'en']) {
     test(`${locale}: first Tab skips the shell on public pages`, async ({
@@ -22,7 +23,9 @@ for (const locale of ['ko', 'en']) {
             '/privacy',
             '/docs/missing-accessibility-check',
         ]) {
-            await page.goto(`/${locale}${route}`)
+            await performanceStep('navigation', () =>
+                page.goto(`/${locale}${route}`)
+            )
             const main = page.getByRole('main')
             await expect(
                 main,

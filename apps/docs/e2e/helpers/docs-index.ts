@@ -1,4 +1,17 @@
-import { expect, type Page } from '@playwright/test'
+import { expect, type APIRequestContext, type Page } from '@playwright/test'
+
+export async function prepareSearchDestination(
+    request: Pick<APIRequestContext, 'get'>,
+    locale: 'ko' | 'en',
+    query: string
+) {
+    // Keep the keyboard contract separate from first-route dev compilation.
+    const response = await request.get(
+        `/${locale}/docs?${new URLSearchParams({ q: query })}`
+    )
+    expect(response.status()).toBe(200)
+    expect(await response.text()).toContain('data-testid="docs-index-results"')
+}
 
 export function visibleDocsIndexFilters(page: Page) {
     // The fallback has identical controls but is replaced when the results arrive.

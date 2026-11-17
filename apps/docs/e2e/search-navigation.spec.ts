@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test'
+import { performanceStep } from './helpers/performance-step'
 
 function searchForm(page: Page, location: 'header' | 'index') {
     return location === 'header'
@@ -11,7 +12,9 @@ for (const locale of ['ko', 'en']) {
         test(`${locale}/${location}: searches without a document reload and preserves history`, async ({
             page,
         }) => {
-            await page.goto(`/${locale}/docs?section=web&sort=latest&page=2`)
+            await performanceStep('navigation', () =>
+                page.goto(`/${locale}/docs?section=web&sort=latest&page=2`)
+            )
             const form = searchForm(page, location)
             if (location === 'header')
                 await page.getByTestId('search-drawer-trigger').click()
@@ -76,7 +79,9 @@ for (const locale of ['ko', 'en']) {
             page,
         }) => {
             await page.emulateMedia({ reducedMotion: 'reduce' })
-            await page.goto(`/${locale}/docs`)
+            await performanceStep('navigation', () =>
+                page.goto(`/${locale}/docs`)
+            )
             const form = searchForm(page, location)
             if (location === 'header')
                 await page.getByTestId('search-drawer-trigger').click()
@@ -157,7 +162,7 @@ for (const locale of ['ko', 'en']) {
         baseURL,
         page,
     }) => {
-        await page.goto(`/${locale}/docs`)
+        await performanceStep('navigation', () => page.goto(`/${locale}/docs`))
         const markup = await page
             .getByRole('main')
             .getByRole('search')

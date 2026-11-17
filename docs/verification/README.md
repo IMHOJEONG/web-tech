@@ -2,6 +2,8 @@
 
 - [11-17 Hono Dependabot 5건](security/2026-11-17-hono-advisories.md): patch 전후 11개 대조·Prisma 소비자·저장소 262개 검사. 기존 deepmerge Low와 미커밋·미병합·미배포 범위 구분.
 
+- [11-15 데스크톱 E2E 시간 조사·계측](performance/2026-11-15-desktop-e2e-duration.md): 기존 CI·로컬 계측과 독립9job·artifact 재검증. 반복 재시도·자원 차이로 샤딩 채택 보류, 준비 실패·절전 영향 보존.
+
 - [11-14 검색 Drawer·자동완성](accessibility/2026-11-14-search-drawer.md): 로컬·PR #92 검증과 main/Production 운영 결과. main CI의 미세 기하 비교 실패 및 후속 로컬 검사를 구분.
 
 - [11-14 본문 공통 목차 UI/UX](accessibility/2026-11-14-article-toc-ux.md): 현재 위치·계층·접기·앵커/포커스의 로컬 회귀. 운영 반영과 구분.

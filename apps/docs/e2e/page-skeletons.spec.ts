@@ -1,5 +1,6 @@
 import { expect, test } from './helpers/skeleton-diagnostic'
 import { openSkeletonSnapshot } from './helpers/skeleton-snapshot'
+import { performanceStep } from './helpers/performance-step'
 
 const screens = [
     {
@@ -91,14 +92,16 @@ for (const theme of ['light', 'dark'] as const) {
                 (value) => localStorage.setItem('theme', value),
                 theme
             )
-            const response = await page.request.get(path)
+            const response = await performanceStep('server-html', () =>
+                page.request.get(path)
+            )
             expect(response.ok()).toBe(true)
             const html = await response.text()
             expect(
                 html.includes(`data-page-pending="${screen.kind}"`),
                 `server emits ${screen.kind}`
             ).toBe(true)
-            await page.goto(path)
+            await performanceStep('navigation', () => page.goto(path))
             await expect(page.locator('[data-page-pending]')).toHaveCount(0)
             await expect(page.locator(screen.ready).first()).toBeVisible()
             // The theme script can run after streamed content becomes visible.
@@ -107,17 +110,22 @@ for (const theme of ['light', 'dark'] as const) {
             } else {
                 await expect(page.locator('html')).not.toHaveClass(/\bdark\b/)
             }
-            await page.evaluate(() => document.fonts.ready)
-            const before = await page.locator('main').evaluate((el) => {
-                const box = el.getBoundingClientRect()
-                return {
-                    left: box.left,
-                    width: box.width,
-                    top: box.top,
-                    titleTop: el.querySelector('h1')?.getBoundingClientRect()
-                        .top,
-                }
-            })
+            await performanceStep('fonts', () =>
+                page.evaluate(() => document.fonts.ready)
+            )
+            const before = await performanceStep('geometry', () =>
+                page.locator('main').evaluate((el) => {
+                    const box = el.getBoundingClientRect()
+                    return {
+                        left: box.left,
+                        width: box.width,
+                        top: box.top,
+                        titleTop: el
+                            .querySelector('h1')
+                            ?.getBoundingClientRect().top,
+                    }
+                })
+            )
             const readyAnchor = await page
                 .locator(screen.ready)
                 .first()
@@ -147,23 +155,28 @@ for (const theme of ['light', 'dark'] as const) {
                               '[data-skeleton-anchor="article-body"]'
                           )
                         : pending
-                const after = await geometry.evaluate((el) => {
-                    const box = el.getBoundingClientRect()
-                    return {
-                        left: box.left,
-                        width: box.width,
-                        top: box.top,
-                        titleTop: el
-                            .querySelector('h1')
-                            ?.getBoundingClientRect().top,
-                        pageWidth: document.documentElement.scrollWidth,
-                        viewport: innerWidth,
-                        animations: Array.from(el.querySelectorAll('*')).filter(
-                            (node) =>
-                                getComputedStyle(node).animationName !== 'none'
-                        ).length,
-                    }
-                })
+                const after = await performanceStep('geometry', () =>
+                    geometry.evaluate((el) => {
+                        const box = el.getBoundingClientRect()
+                        return {
+                            left: box.left,
+                            width: box.width,
+                            top: box.top,
+                            titleTop: el
+                                .querySelector('h1')
+                                ?.getBoundingClientRect().top,
+                            pageWidth: document.documentElement.scrollWidth,
+                            viewport: innerWidth,
+                            animations: Array.from(
+                                el.querySelectorAll('*')
+                            ).filter(
+                                (node) =>
+                                    getComputedStyle(node).animationName !==
+                                    'none'
+                            ).length,
+                        }
+                    })
+                )
                 expect(after.pageWidth).toBeLessThanOrEqual(after.viewport + 1)
                 expect(after.animations).toBe(0)
                 expect(Math.abs(after.left - before.left)).toBeLessThanOrEqual(
@@ -215,10 +228,12 @@ for (const theme of ['light', 'dark'] as const) {
                     screen.kind === 'feed' ||
                     screen.kind === 'ui-ux'
                 )
-                    await frozen.screenshot({
-                        path: testInfo.outputPath('pending.png'),
-                        caret: 'initial',
-                    })
+                    await performanceStep('screenshot', () =>
+                        frozen.screenshot({
+                            path: testInfo.outputPath('pending.png'),
+                            caret: 'initial',
+                        })
+                    )
             } finally {
                 await frozen.close()
             }
@@ -229,13 +244,15 @@ for (const theme of ['light', 'dark'] as const) {
 test('landing only suspends latest notes and keeps its introduction visible', async ({
     page,
 }) => {
-    const response = await page.request.get('/ko')
+    const response = await performanceStep('server-html', () =>
+        page.request.get('/ko')
+    )
     const html = await response.text()
     expect(html).toContain('data-page-pending="landing-notes"')
     expect(html.indexOf('<h1')).toBeLessThan(
         html.indexOf('data-page-pending="landing-notes"')
     )
-    await page.goto('/ko')
+    await performanceStep('navigation', () => page.goto('/ko'))
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     await expect(page.locator('[data-page-pending]')).toHaveCount(0)
 })
