@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { prepareSearchDestination } from './helpers/docs-index'
 import { observeArticleMainAssertion } from './helpers/article-main-diagnostic'
+import { waitForArticleBody } from './helpers/article-ready'
 
 for (const locale of ['ko', 'en'] as const) {
     test(`${locale}: Escape closes search from every control and restores focus`, async ({
@@ -91,6 +92,7 @@ for (const locale of ['ko', 'en'] as const) {
         await page.goto(
             `/${locale}/docs/category/fe/react/server-client-component-boundary`
         )
+        await waitForArticleBody(page)
         const main = page.getByRole('main')
         await observeArticleMainAssertion(page, testInfo, () =>
             expect(main).toHaveCount(1)
