@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-17 Next.js root-param 캐시 권고](security/2026-11-17-next-cache-advisory.md): 16.4.6 patch·전후 감사·본문 production·검색 캐시 회귀. 기존 Cache Components 실험 실패·운영 기본 설정과 후속 PR·배포 범위를 구분.
+
 - [11-17 Hono Dependabot 5건](security/2026-11-17-hono-advisories.md): patch 전후 11개 대조·Prisma 소비자·저장소 262개 검사. 기존 deepmerge Low와 미커밋·미병합·미배포 범위 구분.
 
 - [11-14 검색 Drawer·자동완성](accessibility/2026-11-14-search-drawer.md): 로컬·PR #92 검증과 main/Production 운영 결과. main CI의 미세 기하 비교 실패 및 후속 로컬 검사를 구분.
