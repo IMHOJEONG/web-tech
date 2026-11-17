@@ -326,6 +326,22 @@ DOCS_E2E_SOURCE_SHA=e7ef7e233afe090a52e829a335309f0224a2efbc \
 
 커밋 전 통합본의 저장소 회귀276개는 모두 통과했다. 고정 lockfile 설치 후 제한 환경의 pnpm 포맷 명령이 다른 store를 선택해 DNS 실패·링크 미완성을 보였으나, 그 명령을 중단하고 승인된 정상 store에서 같은 lockfile로 재설치한 뒤 명시 문서 포맷을 통과했다. 의존성·공통 설정을 임의 변경하지 않았다. worktree의 `.git` 파일을 디렉터리로 가정한 prepare 훅 경고도 별도 확인했으며 기존 공통 Git hooks 경로는 유지했다. 환경 복구를 제품 테스트 성공으로 대신하지 않는다.
 
+### 새 main 통합 후 결과
+
+통합 head `4ad450ee7cc0572410723eb69a7fd31a58af22ec`의 [실험43972552555](https://github.com/IMHOJEONG/web-tech/actions/runs/43972552555)도3회·9개 측정을 완주했다. 다운로드한9개 합성 JSON의 strict schema·source SHA·독립 runner9개·원래171개 ID·각 회차86+85의 합집합·최종 status/expectedStatus·기존 skip을 다시 대조했다. JSON은61,384~92,346bytes이며 선언1026개·시도1027개다.
+
+대상인 **영문 Escape·검색 이동 검사는 기준3회와 샤드2의3회 모두 첫 시도 통과**다. 앞선 안정화 head의6회와 이번6회를 같은 의존성 조건의 성능 표본으로 섞지 않는다. 기준은 각각153통과/18skip, 샤드1은79/7, 샤드2는최종74/11이다.
+
+실험 전체의 채택 실패는 유지한다.
+
+- 샤드2의1회차는 같은 `keyboard-accessibility.spec.ts` 안의 **별도 로컬 글 본문 테스트**가94번 `expect(main).toHaveCount(1)`에서 첫 실패·retry1 통과했다. 대상 Escape/검색 이동의 실패가 아니다. 추가 계측은 원문·실제 count를 보관하지 않으므로 main이0개였는지 중복이었는지 단정하지 않는다. selector·기대 개수·timeout은 바꾸지 않고 별도 조사로 남긴다.
+- r1 기준과 r2 샤드2의 메모리 GiB 등급은15, 나머지는16이다. Node24.22.1·Playwright1.62.1·CPU4개는 같지만 동일 자원 조건이 아니므로 허용 오차를 늘리지 않는다.
+- 8개 측정은 eligible, 나머지1개는 재시도로 거부됐다. 원격 집계도 실패다. 이전 스켈레톤 HTTP 오류·캐시 취소 이력과 이번 main landmark 실패를 서로 다른 관측으로 보존하며 실패가 안 나올 때까지 재실행하지 않는다.
+
+같은 head의 [일반 CI43972552679](https://github.com/IMHOJEONG/web-tech/actions/runs/43972552679)는13job 모두 성공했고 [문서43972552620](https://github.com/IMHOJEONG/web-tech/actions/runs/43972552620)·CodeQL·보안 검사도 성공했다. PR #94는 main 충돌이 해소됐지만 실험 gate가 남아 Draft·채택 보류 상태를 유지한다. main 병합·Production 배포는 수행하지 않았다.
+
+재검증은 위 다운로드/집계 명령에서 실행 ID를 `43972552555`, `DOCS_E2E_SOURCE_SHA`를 `4ad450ee7cc0572410723eb69a7fd31a58af22ec`로 바꾼다. 저장소 밖 새 디렉터리를 사용하며 이번 표본도 집계 종료1이 기대 결과다.
+
 ## 관련 문서
 
 - [작업 기록](../../worklog/2026-11/2026-11-15-desktop-e2e-duration.md)
