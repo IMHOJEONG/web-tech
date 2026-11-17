@@ -6,43 +6,65 @@ import { dirname, join, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const root = process.env.NEXT_SECURITY_WORKSPACE
+  ? resolve(process.env.NEXT_SECURITY_WORKSPACE)
+  : resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const docsPackage = join(root, "apps/docs/package.json");
 const docs = createRequire(docsPackage);
 const next = createRequire(docs.resolve("next/package.json"));
 const semver = docs("next/dist/compiled/semver");
 
-// Both Critical advisories share the stable Next 16.4.1 patch floor.
+// Preserve the Critical fixes and the later GHSA-mfr8-8qww-v76h cache fix.
 function assertPatchedNext(version: string): void {
   assert.ok(
-    semver.satisfies(version, ">=16.4.1 <17"),
+    semver.satisfies(version, ">=16.4.5 <17"),
     `Next ${version} must remain on the patched stable Next 16 lane`,
   );
 }
 
-test("Next Critical gate rejects affected and prerelease versions", () => {
-  for (const version of ["16.3.8", "16.4.0", "16.4.1-canary.0", "invalid"])
+test("Next security gate rejects affected and prerelease versions", () => {
+  for (const version of [
+    "16.3.8",
+    "16.4.0",
+    "16.4.1",
+    "16.4.3",
+    "16.4.4",
+    "16.4.5-canary.0",
+    "invalid",
+  ])
     assert.throws(() => assertPatchedNext(version));
-  for (const version of ["16.4.1", "16.4.2", "16.5.0"])
+  for (const version of ["16.4.5", "16.4.6", "16.5.0"])
     assertPatchedNext(version);
 });
 
 test("docs resolves patched Next and the matching MDX plugin", () => {
-  const version = docs("next/package.json").version;
+  const metadata = docs("next/package.json");
+  const version = metadata.version;
   assertPatchedNext(version);
+  assert.ok(semver.satisfies(process.versions.node, metadata.engines.node));
   assert.equal(docs("@next/mdx/package.json").version, version);
+  assert.equal(next("@next/env/package.json").version, version);
 });
 
-test("docs catalog cannot reinstall the affected Next lane", () => {
+test("no catalog or locked Next runtime can reinstall the affected lane", () => {
   const yaml = createRequire(join(root, "apps/docs-backend/package.json"))(
     "yaml",
   );
   const workspace = yaml.parse(
     readFileSync(join(root, "pnpm-workspace.yaml"), "utf8"),
   );
-  for (const name of ["next", "@next/mdx"]) {
-    const range = workspace.catalogs.docs[name];
-    assert.ok(semver.subset(range, ">=16.4.1 <17"), `${name}: ${range}`);
+  for (const [catalog, definitions] of Object.entries(workspace.catalogs) as [
+    string,
+    Record<string, string>,
+  ][]) {
+    for (const name of ["next", "@next/mdx"]) {
+      const range = definitions[name];
+      if (range !== undefined)
+        assert.ok(
+          semver.subset(range, ">=16.4.5 <17"),
+          `${catalog}.${name}: ${range}`,
+        );
+    }
   }
   const documents = yaml.parseAllDocuments(
     readFileSync(join(root, "pnpm-lock.yaml"), "utf8"),
@@ -50,8 +72,8 @@ test("docs catalog cannot reinstall the affected Next lane", () => {
   for (const document of documents) assert.deepEqual(document.errors, []);
   const lock = documents.at(-1).toJSON();
   const versions = Object.keys(lock.packages)
-    .filter((key) => key.startsWith("next@"))
-    .map((key) => key.slice("next@".length));
+    .filter((key) => /^(?:next|@next\/(?:env|mdx|swc-[^@]+))@/.test(key))
+    .map((key) => key.slice(key.lastIndexOf("@") + 1));
   assert.ok(versions.length > 0);
   versions.forEach(assertPatchedNext);
 });

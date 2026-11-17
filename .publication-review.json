@@ -2,6 +2,34 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/verification/security/2026-11-17-next-cache-advisory.md",
+      "sha256": "c739e446c2618e50a2035bf911fe4a302acc53539bc681072ea1375e4b0925c5",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-17",
+      "note": "사용자가 최종 Next.js 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 공식 권고·정제 검사 집계·구버전 대조·실험 실패·검증 한계의 최종 bytes를 검수함. 원시 로그·실제 응답·비밀값·기존 Hono 기록·초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-17-next-cache-advisory.md",
+      "sha256": "5586b00c0a4faf8c92ecc00333597c2b3b314fca1510a54690bcd7bd699a654f",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-17",
+      "note": "사용자가 최종 Next.js 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 변경 의도·정제 검증 요약·ADR 검토·추적 연결·후속 범위의 최종 bytes를 검수함. 원시 자료·비밀값·기존 Hono 기록·초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/verification/security/2026-11-17-hono-advisories.md",
       "sha256": "4de775cfcca45abb011c8cdaba58488866768236ee3a863ab8c290ec0f998003",
       "kind": "document",
@@ -87,11 +115,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "a58a22b9d407de84478dafccced4550da7bda07c3030c9e32d842308939aadb2",
+      "sha256": "7db830861ec6ccedfd8c6637f5d850148c56779dc3b1440e175d6bb7aac8e4bf",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-17",
-      "note": "사용자가 최종 Hono 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 기존 목차를 유지하고 Hono 검증 보고서의 로컬 검사·잔여 경고·미반영 범위를 연결한 최종 bytes를 검수함. 원시 자료·비밀값·기존 초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
+      "note": "사용자가 최종 Next.js 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 기존 Hono 항목을 유지하고 Next.js 검증 보고서를 연결한 최종 목차 bytes를 검수함. 원시 자료·비밀값·기존 Hono 사후 기록·초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -129,11 +157,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "a238d909916d68937ab792c04ac877e56494eb9968e1968087a5d2f1982e3f80",
+      "sha256": "0150f9b715b70bb12c857b0486368cb93bbb680990b0973e6e2972a3c1fe8edc",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-17",
-      "note": "사용자가 최종 Hono 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 기존 목차를 유지하고 Hono 작업 기록의 patch·합성 회귀·로컬 검증 범위를 연결한 최종 bytes를 검수함. 원시 자료·비밀값·기존 초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
+      "note": "사용자가 최종 Next.js 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 기존 Hono 항목을 유지하고 Next.js 작업 기록을 연결한 최종 목차 bytes를 검수함. 원시 자료·비밀값·기존 Hono 사후 기록·초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
