@@ -17,7 +17,7 @@
     },
     {
       "path": "docs/verification/performance/2026-11-15-desktop-e2e-duration.md",
-      "sha256": "6285d50f9dfb85b9c90eb6b023e146e7c2913356a38ee672af46929525a3f42f",
+      "sha256": "73b6b8d481fb9c084dc4eff4ac34d72194a9bfe6d6c2c8060a61e00a7a8fd6ed",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-17",
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-15-desktop-e2e-duration.md",
-      "sha256": "4b0d4292730e3cbfe5ba08db9bebb42329363a1e4d837e81667b9dec6498d383",
+      "sha256": "0d4e3a29df3771dda5a5b2e83c8da94ec756117e1ddf8635ebad0a099fbb6b08",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-17",
