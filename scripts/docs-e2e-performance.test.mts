@@ -192,6 +192,19 @@ test("reporter strips titles, URLs, errors, attachments and stdout from private 
     const failure = {
       ...result,
       status: "failed",
+      annotations: [
+        {
+          type: "article-main-failure-v1",
+          description: JSON.stringify({
+            actualCount: 2,
+            roleCount: 1,
+            domCount: 2,
+            pendingCount: 0,
+            bodyCount: 1,
+            bodyVisible: true,
+          }),
+        },
+      ],
       errors: [
         {
           message: "expect(locator) private-token",
@@ -201,6 +214,27 @@ test("reporter strips titles, URLs, errors, attachments and stdout from private 
     };
     reporter.onTestBegin(sample as never, failure as never);
     reporter.onTestEnd(sample as never, failure as never);
+    for (const description of [
+      "unstructured-private-text",
+      JSON.stringify({
+        actualCount: 2,
+        roleCount: 1,
+        domCount: 2,
+        pendingCount: 0,
+        bodyCount: 1,
+        bodyVisible: true,
+        message: "private-response",
+      }),
+      "x".repeat(513),
+    ]) {
+      const invalid = {
+        ...failure,
+        errors: [],
+        annotations: [{ type: "article-main-failure-v1", description }],
+      };
+      reporter.onTestBegin(sample as never, invalid as never);
+      reporter.onTestEnd(sample as never, invalid as never);
+    }
     for (const location of [
       { file: "/private/other.spec.ts", line: 18 },
       { file: sample.location.file, line: -1 },
@@ -218,6 +252,11 @@ test("reporter strips titles, URLs, errors, attachments and stdout from private 
     const bytes = readFileSync(file, "utf8");
     assert.ok(!/private|token|stdout|attachments|error\.message/.test(bytes));
     const report = JSON.parse(bytes) as TimingReport;
+    assert.equal(report.attempts[0]!.failureMain, undefined);
+    assert.equal(report.attempts[1]!.failureMain?.actualCount, 2);
+    assert.ok(
+      report.attempts.slice(2, 5).every((attempt) => !attempt.failureMain),
+    );
     assert.equal(report.attempts[0]!.phases.fonts!.totalMs, 10);
     assert.equal(report.attempts[0]!.api.navigation!.totalMs, 5);
     assert.equal(report.attempts[1]!.failureKind, "assertion");

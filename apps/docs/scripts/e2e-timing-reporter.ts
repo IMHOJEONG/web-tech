@@ -11,6 +11,10 @@ import type {
     TestStep,
 } from '@playwright/test/reporter'
 import {
+    articleMainAnnotation,
+    parseArticleMainFailure,
+} from './article-main-diagnostic.ts'
+import {
     apiCategory,
     opaqueId,
     phaseFromTitle,
@@ -120,6 +124,19 @@ export default class TimingReporter implements Reporter {
             location!.line <= 1_000_000
         )
             attempt.failureLine = location!.line
+        if (attempt.failureKind !== 'none') {
+            const raw = result.annotations?.find(
+                (item) => item.type === articleMainAnnotation
+            )?.description
+            if (raw && raw.length <= 512) {
+                try {
+                    const value = parseArticleMainFailure(JSON.parse(raw))
+                    if (value) attempt.failureMain = value
+                } catch {
+                    // Annotation text and malformed payloads are never exported.
+                }
+            }
+        }
         this.report.attempts.push(attempt)
     }
 

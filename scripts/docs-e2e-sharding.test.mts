@@ -184,6 +184,34 @@ test("public summary accepts only allowlisted counters and hashes, never raw dia
     },
   ]);
   assert.ok(!JSON.stringify(redacted).includes("sensitive"));
+  const main = {
+    actualCount: 2,
+    roleCount: 1,
+    domCount: 2,
+    pendingCount: 0,
+    bodyCount: 1,
+    bodyVisible: true,
+  };
+  const withMain = {
+    ...value,
+    attempts: [{ ...value.attempts[0], failureMain: main }],
+  };
+  assert.deepEqual(parsePublicSample(withMain).attempts[0]!.failureMain, main);
+  for (const invalid of [
+    { ...main, actualCount: 1001 },
+    { ...main, roleCount: -1 },
+    { ...main, message: "sensitive-value" },
+    { ...main, bodyVisible: "true" },
+  ]) {
+    assert.throws(
+      () =>
+        parsePublicSample({
+          ...withMain,
+          attempts: [{ ...withMain.attempts[0], failureMain: invalid }],
+        }),
+      (error: Error) => !error.message.includes("sensitive-value"),
+    );
+  }
 });
 
 test("experiment workflow pins independent jobs and leaves the existing CI matrix and gates intact", () => {

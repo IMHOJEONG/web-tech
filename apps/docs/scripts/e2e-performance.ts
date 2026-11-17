@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto'
+import type { ArticleMainFailure } from './article-main-diagnostic.ts'
 
 export const phases = [
     'server-html',
@@ -32,6 +33,7 @@ export type Attempt = {
         | 'network-suspended'
         | 'other'
     failureLine?: number
+    failureMain?: ArticleMainFailure
     phases: Partial<Record<Phase, Measurement>>
     api: Record<string, Measurement>
 }

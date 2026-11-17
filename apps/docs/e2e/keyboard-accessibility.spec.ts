@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { prepareSearchDestination } from './helpers/docs-index'
+import { observeArticleMainAssertion } from './helpers/article-main-diagnostic'
 
 for (const locale of ['ko', 'en'] as const) {
     test(`${locale}: Escape closes search from every control and restores focus`, async ({
@@ -86,12 +87,14 @@ for (const locale of ['ko', 'en'] as const) {
 
     test(`${locale}: local article exposes a main landmark and one visible title`, async ({
         page,
-    }) => {
+    }, testInfo) => {
         await page.goto(
             `/${locale}/docs/category/fe/react/server-client-component-boundary`
         )
         const main = page.getByRole('main')
-        await expect(main).toHaveCount(1)
+        await observeArticleMainAssertion(page, testInfo, () =>
+            expect(main).toHaveCount(1)
+        )
         await expect(main.locator('.mdx-wrapper')).toBeVisible()
         const title = main.getByRole('heading', { level: 1 })
         await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)

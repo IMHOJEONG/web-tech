@@ -51,6 +51,17 @@ const attempt = z
             ])
             .default('none'),
         failureLine: z.number().int().positive().max(1_000_000).optional(),
+        failureMain: z
+            .object({
+                actualCount: z.number().int().min(0).max(1000).nullable(),
+                roleCount: z.number().int().min(0).max(1000),
+                domCount: z.number().int().min(0).max(1000),
+                pendingCount: z.number().int().min(0).max(1000),
+                bodyCount: z.number().int().min(0).max(1000),
+                bodyVisible: z.boolean(),
+            })
+            .strict()
+            .optional(),
     })
     .strict()
 export const sampleIds = [
