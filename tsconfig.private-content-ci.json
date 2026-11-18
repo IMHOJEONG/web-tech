@@ -1,0 +1,17 @@
+{
+  "extends": "./packages/typescript-config/base.json",
+  "compilerOptions": {
+    "incremental": false,
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "erasableSyntaxOnly": true
+  },
+  "include": [
+    "scripts/prepare-ci-docs-content.mts",
+    "scripts/private-content-ci-policy.mts",
+    "scripts/private-content-ci.test.mts",
+    "scripts/verify-private-content-ci.mts"
+  ],
+  "exclude": ["node_modules", "apps/docs/.next"]
+}

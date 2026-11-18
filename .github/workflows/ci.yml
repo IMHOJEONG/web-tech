@@ -9,6 +9,10 @@ on:
 permissions:
   contents: read
 
+env:
+  DOCS_CI_SYNTHETIC: "1"
+  DOCS_CONTENT_SOURCE: legacy
+
 jobs:
   commit-messages:
     name: Commit Messages
@@ -31,6 +35,9 @@ jobs:
 
       - name: Verify Node security floor
         run: node scripts/check-node-runtime.mts
+
+      - name: Prepare synthetic documents without private credentials
+        run: node scripts/prepare-ci-docs-content.mts
 
       - name: Install dependencies
         run: pnpm install
@@ -73,6 +80,9 @@ jobs:
       - name: Verify Node security floor
         run: node scripts/check-node-runtime.mts
 
+      - name: Prepare synthetic documents without private credentials
+        run: node scripts/prepare-ci-docs-content.mts
+
       - name: Install dependencies
         run: pnpm install
 
@@ -104,6 +114,9 @@ jobs:
       - name: Verify Node security floor
         run: node scripts/check-node-runtime.mts
 
+      - name: Prepare synthetic documents without private credentials
+        run: node scripts/prepare-ci-docs-content.mts
+
       - name: Install dependencies
         run: pnpm install
 
@@ -115,6 +128,9 @@ jobs:
 
       - name: Typecheck squash merge preflight
         run: pnpm typecheck:squash
+
+      - name: Typecheck private content CI isolation
+        run: pnpm exec tsc -p tsconfig.private-content-ci.json
 
   shared-ui:
     name: Shared UI (${{ matrix.suite }})
@@ -143,6 +159,9 @@ jobs:
 
       - name: Verify Node security floor
         run: node scripts/check-node-runtime.mts
+
+      - name: Prepare synthetic documents without private credentials
+        run: node scripts/prepare-ci-docs-content.mts
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -177,6 +196,9 @@ jobs:
 
       - name: Verify Node security floor
         run: node scripts/check-node-runtime.mts
+
+      - name: Prepare synthetic documents without private credentials
+        run: node scripts/prepare-ci-docs-content.mts
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -229,6 +251,9 @@ jobs:
 
       - name: Verify Node security floor
         run: node scripts/check-node-runtime.mts
+
+      - name: Prepare synthetic documents without private credentials
+        run: node scripts/prepare-ci-docs-content.mts
 
       - name: Install dependencies
         run: pnpm install
@@ -294,6 +319,9 @@ jobs:
 
       - name: Verify Node security floor
         run: node scripts/check-node-runtime.mts
+
+      - name: Prepare synthetic documents without private credentials
+        run: node scripts/prepare-ci-docs-content.mts
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
