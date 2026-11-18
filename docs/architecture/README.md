@@ -1,5 +1,7 @@
 # 설계와 정책
 
+- [ADR-0033: 합성 PR 검사와 승인된 비공개 콘텐츠 검증 분리](adr-0033-content-ci-trust-boundary.md)
+
 현재 구조, 기술 선택 이유, 계약과 정책을 찾는 목록입니다. 특정 시점의 실행 결과는 [검증 보고서](../verification/README.md)를 확인합니다.
 
 [전체 문서 안내](../README.md)
