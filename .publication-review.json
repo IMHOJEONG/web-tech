@@ -17,7 +17,7 @@
     },
     {
       "path": "docs/runbooks/docs-private-content-ci.md",
-      "sha256": "f916918522dc7c924fe93abe900732bc153f79b9d195ea0ffbcef8f5c31b105a",
+      "sha256": "47cbbf65827cbdf46d6ffc55e6fdc78434451f024059ed3026e25811ac7103aa",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
@@ -31,7 +31,7 @@
     },
     {
       "path": "docs/verification/content/2026-11-18-content-ci-isolation.md",
-      "sha256": "9b9e32bbeb96b8f43574539e71f2805a5ba14028b036dfd34d2e92c26437b7ae",
+      "sha256": "dc40d86ebbb151ce10ec7636b73cba658d95bd2909f5c8fde90ae897996b116a",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-18-content-ci-isolation.md",
-      "sha256": "fde4f8be13c5f0d96a238dab63590fdc1cc62be46a19a14d78beefe4197649b4",
+      "sha256": "849fae8f689a8f7daf2a00e7c4b16ccb85f3f6595af163bf63471aaebacd9750",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
@@ -115,7 +115,7 @@
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "d84fa5293d4e3d66f6de94701bb5f2d1f00b1f9fea7fde6b7d522237313da33d",
+      "sha256": "320122f16a43b7aa45a0456df849cd5cc71dcbd044c25f8afcddd0b292699033",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",

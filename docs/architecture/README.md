@@ -1,12 +1,12 @@
 # 설계와 정책
 
-- [ADR-0033: 합성 PR 검사와 승인된 비공개 콘텐츠 검증 분리](adr-0033-content-ci-trust-boundary.md)
-
 현재 구조, 기술 선택 이유, 계약과 정책을 찾는 목록입니다. 특정 시점의 실행 결과는 [검증 보고서](../verification/README.md)를 확인합니다.
 
 [전체 문서 안내](../README.md)
 
 ## ADR 상태
+
+- [ADR-0033: 합성 PR 검사와 승인된 비공개 콘텐츠 검증 분리](adr-0033-content-ci-trust-boundary.md): 적용 중. CI 전용 PR의 합성 입력·정확한 승인 SHA·키 없는 사전 차단 구현. 콘텐츠 이전 구현·보호 Environment·실제 인증 검증·운영 전환은 별도.
 
 - [ADR-0031: 검색 Drawer·경량 자동완성](adr-0031-docs-search-drawer.md): 적용 중. PR #92 main 병합·동일 SHA Production 및 운영 두 폭 검증. main CI의 글꼴 기하 비교는 후속 보완.
 

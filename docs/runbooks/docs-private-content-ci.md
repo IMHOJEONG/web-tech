@@ -25,7 +25,27 @@ pnpm exec tsc -p tsconfig.private-content-ci.json
 pnpm test:repo
 ```
 
-로컬 원본 작업 트리에 hosted corpus 교체 명령을 실행하지 않는다. 로컬 합성 검사는 비밀 파일과 원문을 제외한 임시 사본에서 `writeSyntheticCorpus`로 준비한다.
+로컬 원본 작업 트리에 hosted corpus 교체 명령을 실행하지 않는다. 아래는 저장소 루트에서 실행하는 **공개 검수·커밋 완료 후**의 재현 절차다. `git archive HEAD`는 미커밋·미추적 파일을 읽지 않으며 개인 키·원시 자료를 포함한 checkout을 rsync로 통째로 복제하지 않는다. 추적된 public 에셋·합성 예제 코드는 기존 회귀에 필요하므로 유지한다. 운영 `.env`·Git·이전 출력물과 원문 두 디렉터리는 가져오지 않는다.
+
+```sh
+# 시작 위치: 공개 코드 저장소 루트. POSIX shell과 tar가 필요하다.
+FIXTURE=$(mktemp -d)
+git archive --format=tar HEAD | tar -xf - -C "$FIXTURE" \
+  --exclude='apps/docs/data' --exclude='apps/docs/category' \
+  --exclude='*/.env' --exclude='*/.env.*' --exclude='.env*' \
+  --exclude='*/.next' --exclude='*/.vercel' --exclude='*/node_modules'
+
+# 아래 명령은 반드시 생성한 임시 사본 안에서 실행한다.
+cd "$FIXTURE"
+export DOCS_CONTENT_SOURCE=legacy
+node --input-type=module -e 'import {writeSyntheticCorpus} from "./scripts/prepare-ci-docs-content.mts"; console.info({documents:writeSyntheticCorpus("apps/docs")});'
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm --filter @web-tech/ui build
+pnpm --filter docs test:content
+pnpm --filter docs test:lib
+```
+
+`documents: 17`과 archived 1개, 총 18개의 frontmatter·본문 검사 통과를 확인한다. 임시 사본에 `.git`이 없으므로 Git 이력·staged 검사는 원래 코드 저장소 루트에서 실행한다. 위 로컬 export 함수를 쓰는 경로에는 hosted 환경 변수를 위조할 필요가 없다. 실제 CI CLI만 `GITHUB_ACTIONS=true`, `RUNNER_ENVIRONMENT=github-hosted`, `DOCS_CI_SYNTHETIC=1`, 정확한 `GITHUB_WORKSPACE`와 그 밖의 `RUNNER_TEMP`를 요구한다.
 
 ## 실패 대응과 복구
 
