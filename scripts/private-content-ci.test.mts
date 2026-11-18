@@ -319,6 +319,26 @@ test("hosted ephemeral preparation replaces discovered inputs but preserves orig
     );
 });
 
+test("synthetic cards retain a real non-default thumbnail for image failure contracts", (t) => {
+  const directory = fs.mkdtempSync(
+    path.join(os.tmpdir(), "ci-image-contract-"),
+  );
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  writeSyntheticCorpus(directory);
+  const thumbnail = "/diagrams/http-response-stages.png";
+  assert.ok(
+    fs.statSync(new URL(`apps/docs/public${thumbnail}`, root)).size > 0,
+  );
+  assert.equal(thumbnail.startsWith("/default/"), false);
+  for (const [file] of syntheticDocuments) {
+    const content = fs.readFileSync(path.join(directory, file), "utf8");
+    assert.match(
+      content,
+      /^thumbnail: \/diagrams\/http-response-stages\.png$/m,
+    );
+  }
+});
+
 test("cross-mount backup preserves bytes and symlinks before removing hosted originals", (t) => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "ci-cross-mount-"));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));

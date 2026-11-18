@@ -135,7 +135,7 @@ export function writeSyntheticCorpus(appRoot: string) {
       : "Synthetic public regression example.";
     fs.writeFileSync(
       target,
-      `---\nstatus: published\ntitle: ${JSON.stringify(title)}\nslug: ${slug}\nsummary: ${JSON.stringify(summary)}\ndate: ${file.includes("node-brotli") ? "2026-11-18" : "2026-11-17"}\nupdatedAt: 2026-11-18\nauthorName: Synthetic CI\nauthorRole: Test fixture\nreadMinutes: 3\ntopicLabel: ${tags.split(",")[0]}\ntags: ${JSON.stringify(tags.split(","))}\n---\n\n${body(file)}`,
+      `---\nstatus: published\ntitle: ${JSON.stringify(title)}\nslug: ${slug}\nsummary: ${JSON.stringify(summary)}\nthumbnail: /diagrams/http-response-stages.png\ndate: ${file.includes("node-brotli") ? "2026-11-18" : "2026-11-17"}\nupdatedAt: 2026-11-18\nauthorName: Synthetic CI\nauthorRole: Test fixture\nreadMinutes: 3\ntopicLabel: ${tags.split(",")[0]}\ntags: ${JSON.stringify(tags.split(","))}\n---\n\n${body(file)}`,
     );
   }
   fs.writeFileSync(
