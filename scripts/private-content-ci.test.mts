@@ -16,6 +16,7 @@ import {
 } from "./private-content-ci-policy.mts";
 import {
   prepareCiDocsContent,
+  preserveCiDirectory,
   syntheticDocuments,
   writeSyntheticCorpus,
 } from "./prepare-ci-docs-content.mts";
@@ -316,6 +317,74 @@ test("hosted ephemeral preparation replaces discovered inputs but preserves orig
       fs.readFileSync(path.join(directory, "apps/docs", file), "utf8"),
       /Synthetic|synthetic/,
     );
+});
+
+test("cross-mount backup preserves bytes and symlinks before removing hosted originals", (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "ci-cross-mount-"));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const source = path.join(root, "source");
+  const destination = path.join(root, "backup");
+  fs.mkdirSync(source);
+  fs.writeFileSync(
+    path.join(source, "article.md"),
+    "synthetic preserved bytes",
+  );
+  fs.symlinkSync("article.md", path.join(source, "relative-link"));
+  preserveCiDirectory(source, destination, {
+    ...fs,
+    renameSync() {
+      throw Object.assign(new Error("synthetic mount boundary"), {
+        code: "EXDEV",
+      });
+    },
+  });
+  assert.equal(fs.existsSync(source), false);
+  assert.equal(
+    fs.readFileSync(path.join(destination, "article.md"), "utf8"),
+    "synthetic preserved bytes",
+  );
+  assert.equal(
+    fs.readlinkSync(path.join(destination, "relative-link")),
+    "article.md",
+  );
+});
+
+test("failed or mismatched cross-mount copies retain original input and unrelated errors do not fallback", (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "ci-copy-failure-"));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  for (const mode of ["copy-failed", "mismatch", "permission"]) {
+    const source = path.join(root, mode);
+    fs.mkdirSync(source);
+    fs.writeFileSync(path.join(source, "article.md"), "retain synthetic bytes");
+    let copies = 0;
+    assert.throws(() =>
+      preserveCiDirectory(source, source + "-backup", {
+        ...fs,
+        renameSync() {
+          throw Object.assign(new Error("synthetic denied"), {
+            code: mode === "permission" ? "EACCES" : "EXDEV",
+          });
+        },
+        cpSync(from, to, options) {
+          copies++;
+          if (mode === "copy-failed") throw new Error("synthetic failed copy");
+          fs.cpSync(from, to, options);
+          fs.writeFileSync(
+            path.join(String(to), "article.md"),
+            "mismatched synthetic bytes",
+          );
+        },
+        rmSync() {
+          assert.fail("must not remove unverified source");
+        },
+      }),
+    );
+    assert.equal(copies, mode === "permission" ? 0 : 1);
+    assert.equal(
+      fs.readFileSync(path.join(source, "article.md"), "utf8"),
+      "retain synthetic bytes",
+    );
+  }
 });
 
 test("denied guard CLI has sanitized errors and never starts build commands", () => {

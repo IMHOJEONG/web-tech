@@ -145,7 +145,53 @@ export function writeSyntheticCorpus(appRoot: string) {
   return syntheticDocuments.length;
 }
 
-export function prepareCiDocsContent(env: NodeJS.ProcessEnv, cwd: string) {
+export function preserveCiDirectory(
+  source: string,
+  destination: string,
+  io: Pick<typeof fs, "renameSync" | "cpSync" | "rmSync"> = fs,
+) {
+  try {
+    io.renameSync(source, destination);
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "EXDEV") throw error;
+    // Container bind mounts can prohibit rename even on the same host disk.
+    io.cpSync(source, destination, {
+      recursive: true,
+      errorOnExist: true,
+      force: false,
+      verbatimSymlinks: true,
+    });
+    const verify = (from: string, to: string) => {
+      const a = fs.lstatSync(from);
+      const b = fs.lstatSync(to);
+      assert.equal(a.isDirectory(), b.isDirectory());
+      assert.equal(a.isFile(), b.isFile());
+      assert.equal(a.isSymbolicLink(), b.isSymbolicLink());
+      if (a.isDirectory()) {
+        const names = fs.readdirSync(from).sort();
+        assert.deepEqual(fs.readdirSync(to).sort(), names);
+        for (const name of names)
+          verify(path.join(from, name), path.join(to, name));
+      } else if (a.isFile()) {
+        assert.ok(fs.readFileSync(from).equals(fs.readFileSync(to)));
+      } else {
+        assert.ok(a.isSymbolicLink());
+        assert.equal(fs.readlinkSync(from), fs.readlinkSync(to));
+      }
+    };
+    verify(source, destination);
+    // Only a guarded ephemeral hosted checkout reaches this operation.
+    io.rmSync(source, { recursive: true });
+  }
+}
+
+type PreparationPhase = "authorization" | "paths" | "backup" | "synthetic";
+export function prepareCiDocsContent(
+  env: NodeJS.ProcessEnv,
+  cwd: string,
+  reportPhase: (phase: PreparationPhase) => void = () => {},
+) {
+  reportPhase("authorization");
   assert.equal(
     env.GITHUB_ACTIONS,
     "true",
@@ -160,6 +206,7 @@ export function prepareCiDocsContent(env: NodeJS.ProcessEnv, cwd: string) {
     "private credentials must never reach general PR checks",
   );
   assert.ok(env.GITHUB_WORKSPACE && env.RUNNER_TEMP);
+  reportPhase("paths");
   const workspace = fs.realpathSync(env.GITHUB_WORKSPACE);
   assert.equal(fs.realpathSync(cwd), workspace);
   const temporary = fs.realpathSync(env.RUNNER_TEMP);
@@ -179,14 +226,16 @@ export function prepareCiDocsContent(env: NodeJS.ProcessEnv, cwd: string) {
       assert.equal(entry.isDirectory() && !entry.isSymbolicLink(), true);
   }
   // Preserve the checkout's original roots outside every build/test discovery path.
+  reportPhase("backup");
   const backup = fs.mkdtempSync(path.join(temporary, "original-docs-"));
   fs.chmodSync(backup, 0o700);
   for (const name of ["data", "category"]) {
     const from = path.join(app, name);
     if (!fs.existsSync(from)) continue;
     assert.equal(fs.lstatSync(from).isSymbolicLink(), false);
-    fs.renameSync(from, path.join(backup, name));
+    preserveCiDirectory(from, path.join(backup, name));
   }
+  reportPhase("synthetic");
   return writeSyntheticCorpus(app);
 }
 
@@ -194,11 +243,21 @@ if (
   process.argv[1] &&
   import.meta.url === pathToFileURL(process.argv[1]).href
 ) {
+  let phase: PreparationPhase = "authorization";
   try {
     console.info("[docs.ci_synthetic]", {
-      documents: prepareCiDocsContent(process.env, process.cwd()),
+      documents: prepareCiDocsContent(process.env, process.cwd(), (value) => {
+        phase = value;
+      }),
     });
-  } catch {
+  } catch (error) {
+    const code = (error as NodeJS.ErrnoException).code;
+    console.error("[docs.ci_preparation_denied]", {
+      phase,
+      code: ["EXDEV", "EACCES", "ENOENT", "ERR_ASSERTION"].includes(code ?? "")
+        ? code
+        : "other",
+    });
     console.error(
       "Synthetic CI preparation denied; original local content must not be replaced.",
     );
