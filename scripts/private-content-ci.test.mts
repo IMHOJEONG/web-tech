@@ -339,6 +339,58 @@ test("synthetic cards retain a real non-default thumbnail for image failure cont
   }
 });
 
+test("synthetic dates retain the held remote article in real related-link ranking", async (t) => {
+  const directory = fs.mkdtempSync(
+    path.join(os.tmpdir(), "ci-prefetch-contract-"),
+  );
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  writeSyntheticCorpus(directory);
+  const moduleURL = new URL(
+    "../apps/docs/lib/article-related-documents.ts",
+    import.meta.url,
+  ).href;
+  const { buildArticleRelatedDocuments } = await import(moduleURL);
+  const docs = syntheticDocuments.map(([file, title, slug, tags]) => {
+    const source = fs.readFileSync(path.join(directory, file), "utf8");
+    return {
+      fileName: file,
+      title,
+      slug,
+      tags: tags.split(","),
+      topicLabel: tags.split(",")[0],
+      date: source.match(/^date: (.+)$/m)![1],
+    };
+  });
+  const publication = {
+    markdownPath: "web/article-e2e-publication",
+    title: "Synthetic publication",
+    date: "2099-01-01",
+  };
+  const remote = {
+    markdownPath: "web/article-e2e-remote",
+    title: "Synthetic held remote",
+    date: "2026-09-18",
+  };
+  const taxonomy = {
+    markdownPath: "web/taxonomy-fixture",
+    title: "Synthetic taxonomy",
+    date: "2099-01-02",
+  };
+  const hasRemote = (values: typeof docs) =>
+    buildArticleRelatedDocuments(
+      [taxonomy, publication, remote, ...values],
+      publication,
+    ).some(
+      (value: { href: string }) =>
+        value.href === "/docs/web/article-e2e-remote",
+    );
+  assert.equal(hasRemote(docs), true);
+  assert.equal(
+    hasRemote(docs.map((doc) => ({ ...doc, date: "2026-11-17" }))),
+    false,
+  );
+});
+
 test("cross-mount backup preserves bytes and symlinks before removing hosted originals", (t) => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "ci-cross-mount-"));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));

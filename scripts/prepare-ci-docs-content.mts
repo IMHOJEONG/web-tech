@@ -130,12 +130,14 @@ export function writeSyntheticCorpus(appRoot: string) {
   for (const [file, title, slug, tags] of syntheticDocuments) {
     const target = path.join(appRoot, file);
     fs.mkdirSync(path.dirname(target), { recursive: true });
+    // Keep the gated remote fixture in related links; prefetch tests use it.
+    const date = file.includes("node-brotli") ? "2026-11-18" : "2026-08-23";
     const summary = file.includes("server-client-component")
       ? "React 기반 앱에서 서버 컴포넌트와 클라이언트 컴포넌트를 나눌 때의 판단 기준을 정리합니다."
       : "Synthetic public regression example.";
     fs.writeFileSync(
       target,
-      `---\nstatus: published\ntitle: ${JSON.stringify(title)}\nslug: ${slug}\nsummary: ${JSON.stringify(summary)}\nthumbnail: /diagrams/http-response-stages.png\ndate: ${file.includes("node-brotli") ? "2026-11-18" : "2026-11-17"}\nupdatedAt: 2026-11-18\nauthorName: Synthetic CI\nauthorRole: Test fixture\nreadMinutes: 3\ntopicLabel: ${tags.split(",")[0]}\ntags: ${JSON.stringify(tags.split(","))}\n---\n\n${body(file)}`,
+      `---\nstatus: published\ntitle: ${JSON.stringify(title)}\nslug: ${slug}\nsummary: ${JSON.stringify(summary)}\nthumbnail: /diagrams/http-response-stages.png\ndate: ${date}\nupdatedAt: ${date}\nauthorName: Synthetic CI\nauthorRole: Test fixture\nreadMinutes: 3\ntopicLabel: ${tags.split(",")[0]}\ntags: ${JSON.stringify(tags.split(","))}\n---\n\n${body(file)}`,
     );
   }
   fs.writeFileSync(
