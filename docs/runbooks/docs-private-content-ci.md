@@ -86,6 +86,7 @@ pnpm --filter docs test:lib
 ## 관련 검증
 
 - [ADR-0033](../architecture/adr-0033-content-ci-trust-boundary.md)
+- [ADR-0034: 실행·승인 신원 고정과 신규 dispatch](../architecture/adr-0034-content-ci-identity-approval.md)
 - [검증 결과와 미검증 범위](../verification/content/2026-11-18-content-ci-isolation.md)
 - [작업 기록](../worklog/2026-11/2026-11-18-content-ci-isolation.md)
 - [공개 검수](../process/publication-review.md)

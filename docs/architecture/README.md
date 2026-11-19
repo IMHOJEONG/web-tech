@@ -8,7 +8,9 @@
 
 - [ADR-0032: 비공개 Git 발행본을 빌드 입력으로 사용](adr-0032-private-git-build-content.md): 적용 중. PR #98 main 병합과 동일 SHA의 Production 전환·공개 독자 검증 완료. 고정 발행본 17개 글·15개 자산을 사용하며 인증 CI 활성화·NAS 전용 글 이전은 후속. 이전 완료 공개 사본 정리는 별도 브랜치의 로컬 커밋·검증이며 main 미반영이다.
 
-- [ADR-0033: 합성 PR 검사와 승인된 비공개 콘텐츠 검증 분리](adr-0033-content-ci-trust-boundary.md): 적용 중. 합성 CI는 main 반영. 실행 Bot·사람 승인 ID, 코드/콘텐츠 SHA와 실제 승인 이력의 재검사는 전용 PR 보완이며 main 미반영. 보호 Environment·신원 변수는 조회·정책 검사 통과, 실행 환경 분리·키·실제 인증 활성화는 대기. Vercel 운영 콘텐츠 공급과 구분한다.
+- [ADR-0033: 합성 PR 검사와 승인된 비공개 콘텐츠 검증 분리](adr-0033-content-ci-trust-boundary.md): 적용 중. 기존 결정은 main 반영된 합성/인증 경로 분리이며 원래 본문을 보존한다. 실행 신원 고정·새 dispatch 요구는 ADR-0034로 보완한다.
+
+- [ADR-0034: 인증 콘텐츠 CI의 실행 Bot과 사람 승인 신원 고정](adr-0034-content-ci-identity-approval.md): 적용 중. PR #101의 신원·두 SHA·실제 승인 이력·재실행 금지 보완이며 main 미반영. 보호 Environment·신원 변수는 조회·정책 검사 통과, 실행 환경 분리·키·실제 인증 활성화는 대기. ADR-0033의 경로 분리는 유지한다.
 
 - [ADR-0031: 검색 Drawer·경량 자동완성](adr-0031-docs-search-drawer.md): 적용 중. PR #92 main 병합·동일 SHA Production 및 운영 두 폭 검증. main CI의 글꼴 기하 비교는 후속 보완.
 

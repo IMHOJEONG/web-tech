@@ -46,6 +46,8 @@ workflow의 비밀이 아닌 네 신원 변수와 콘텐츠 승인 revision 입�
 
 사용자가 CI 코드·workflow 4개와 위 기존 문서 8개의 공개 검수·해시 등록·커밋·푸시·PR 준비를 승인했다. 코드·회귀와 정책·정제 기록을 나눠 커밋하며 승인된 문서 8개의 최종 인덱스 해시만 등록한다. 범위 밖 원문·키·원시 자료·초안·다른 작업 트리·stash는 포함하지 않는다. 실제 원격 head와 CI 결과는 KAN-80의 기존 3열 표와 PR에서 추적한다. 이번 승인에 main 병합·키 생성/등록·실제 인증 workflow 실행은 포함되지 않는다.
 
+[PR #101](https://github.com/IMHOJEONG/web-tech/pull/101)의 최초 head `a4feed93`는 일반 CI 13개 job·문서·CodeQL·보안·두 Preview를 통과했다. CodeRabbit 문서 의견 2건 중 설정 상태 목차를 보완했고, 사용자 추가 공개 승인에 따라 [후속 ADR-0034](../../architecture/adr-0034-content-ci-identity-approval.md)를 추가한다. 기존 ADR-0033의 결정 본문은 변경 전대로 보존하며 경로 분리 결정을 폐기하지 않는다. 관련 승인 문서·목차만 재검수하고 보완 head를 다시 확인한다. 실제 키·인증 실행·main 병합·배포는 계속 제외한다.
+
 ## Next
 
 이미지 보완 head의 원격 CI에서는 오프라인을 포함한 나머지 suite는 통과했지만 상세 production 22건이 관련 글/prefetch 대기에서 실패했다. 합성 날짜가 원격 fixture보다 새로워 링크가 관련 글 3개에서 탈락하는 것을 실제 정렬 함수로 재현했다. 기본 합성 날짜만 고정해 최신 Brotli fixture와 기존 검사 기준은 유지했다. 로컬 production 전체는 200개 대상 중 198개 통과·기존 opt-in 2개 skip·실패 0개(2.3분), 저장소 276개와 타입 통과. 원격 성공은 최종 head CI에서 별도로 확인한다. 원시 자료·기존 콘텐츠 이전 변경은 계속 제외한다.

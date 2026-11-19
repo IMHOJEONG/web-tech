@@ -130,6 +130,12 @@ node --test scripts/private-content-ci.test.mts scripts/browser-ci.test.mts
 
 커밋 전 전체 298개를 다시 실행했다. 첫 샌드박스 실행은 기존 보안 검사 두 개가 `127.0.0.1` listen `EPERM`으로 실패했고, 포트 사용을 허용한 동일 명령에서 298개 전부 통과했다. 전용 타입·문서 delta·stage 포맷·코드 공개 검사를 통과했으며 검사 기준·timeout·retry·의존성은 변경하지 않았다.
 
+### PR #101 첫 원격 검증과 문서 리뷰 보완
+
+코드·회귀 `31b45634`와 정제 문서·검수 해시 `a4feed93`를 분리해 푸시했다. head `a4feed936e14002ece65c417b4dbea64dbc710b7`의 [일반 CI](https://github.com/IMHOJEONG/web-tech/actions/runs/44543884457)는 attempt 1에서 13개 job 모두 성공했다. [문서 검사](https://github.com/IMHOJEONG/web-tech/actions/runs/44543884328), [CodeQL 분석](https://github.com/IMHOJEONG/web-tech/actions/runs/44543877449), 보안 검사·두 Preview도 성공했다. 이는 일반 합성 CI 결과이며 실제 인증 콘텐츠 workflow 실행은 아니다. job 재실행은 없었으나 이 메타데이터만으로 개별 E2E 내부 재시도 0회를 주장하지 않는다.
+
+CodeRabbit 첫 리뷰는 완료했고 문서 보완 2건을 남겼다. 검증 목차의 Environment·신원 변수 상태를 실제 조회 결과에 맞췄다. 사용자 추가 승인 후 새 [ADR-0034](../../architecture/adr-0034-content-ci-identity-approval.md)에 신원 고정·재실행 금지 결정을 분리하고 ADR-0033의 기존 결정 본문은 보존한다. ADR-0033의 경로 분리는 유지하므로 대체됨으로 표시하지 않는다. 보완 후 head의 CI·리뷰는 별도 확인하며 최초 head의 성공을 재사용하지 않는다.
+
 인증 사전 검사는 별도 이전 구현이 main에 반영되기 전에는 의도적으로 실패한다. 파일 존재·빌드 명령·lock 검사만으로 코드의 안전성을 증명하지 않으며, 승인된 main 검토와 사람 승인이 별도로 필요하다. 자기 승인을 금지하므로 실행자와 승인자가 다른 신원이어야 한다. 공유 관리자 계정의 사용자·AI 권한 분리도 별도 과제다.
 
 이번 범위에는 main 병합·수동 인증 CI 실행·운영 전환·NAS 변경이 없다. 원시 로그·trace·실제 응답·키는 공개하지 않는다. 기존 미커밋과 stash를 보존하고, CI 전용 브랜치에서만 공개 검수와 커밋을 수행한다.
@@ -137,6 +143,7 @@ node --test scripts/private-content-ci.test.mts scripts/browser-ci.test.mts
 ## 관련 문서
 
 - [ADR-0033](../../architecture/adr-0033-content-ci-trust-boundary.md)
+- [ADR-0034](../../architecture/adr-0034-content-ci-identity-approval.md)
 - [CI 실행 절차](../../runbooks/docs-private-content-ci.md)
 - [작업 기록](../../worklog/2026-11/2026-11-18-content-ci-isolation.md)
 - [KAN-80](https://web-tech-service.atlassian.net/browse/KAN-80)

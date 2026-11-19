@@ -2,6 +2,20 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/architecture/adr-0034-content-ci-identity-approval.md",
+      "sha256": "3c6b992b9f7c1490858873a349cb79fa8626667d00481d049f7d13fbc70ad99e",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/process/issue-tracking.md",
       "sha256": "4db9990e14d7675068af5c1aec3b3a24854c139e842805d5804509b7bc486987",
       "kind": "document",
@@ -437,11 +451,11 @@
     },
     {
       "path": "docs/architecture/adr-0033-content-ci-trust-boundary.md",
-      "sha256": "be16fcc0ef669c6db6990bf1425398378dedf0caaf5f7945bdcb93085c6b87f6",
+      "sha256": "54f32f195f86174f367cfaac7dd9942e3ec3d4f5249d528628d700d99b35582d",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 코드·workflow 4개와 기존 문서 8개의 공개 검수·커밋·푸시·PR 준비를 승인함. 실행 Bot·사람 승인 경계·키 없는 보호 설정 조회·합성 회귀와 실제 미검증 범위를 검수함. 원문·키·원시 응답/로그·다른 미커밋·stash·main 병합·운영 배포는 제외함.",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -451,11 +465,11 @@
     },
     {
       "path": "docs/runbooks/docs-private-content-ci.md",
-      "sha256": "131e3bbb145feef1e951cac51af293de856bee9ff36460b6724011befa164465",
+      "sha256": "3ff5ede7d7bc6332cb2059a01cfdcafa86ddad7305a8ffe3ff47b549e8048f14",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 코드·workflow 4개와 기존 문서 8개의 공개 검수·커밋·푸시·PR 준비를 승인함. 실행 Bot·사람 승인 경계·키 없는 보호 설정 조회·합성 회귀와 실제 미검증 범위를 검수함. 원문·키·원시 응답/로그·다른 미커밋·stash·main 병합·운영 배포는 제외함.",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -465,11 +479,11 @@
     },
     {
       "path": "docs/verification/content/2026-11-18-content-ci-isolation.md",
-      "sha256": "c0d145c2f3a19a3132736f895bb70ae209ac5c60110b50c7927eee525066d57d",
+      "sha256": "fcef3b454c7293c4affac95435f1b0a4ac973e63af254568544b7aa5234c3dce",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 코드·workflow 4개와 기존 문서 8개의 공개 검수·커밋·푸시·PR 준비를 승인함. 실행 Bot·사람 승인 경계·키 없는 보호 설정 조회·합성 회귀와 실제 미검증 범위를 검수함. 원문·키·원시 응답/로그·다른 미커밋·stash·main 병합·운영 배포는 제외함.",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -479,11 +493,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-18-content-ci-isolation.md",
-      "sha256": "0ee9c6c88c1c5921c8411788f29c36c287f48dc8ffccde6384da8c16c7f59685",
+      "sha256": "1f92c7ed9f89338deec25c3cd2f1ecca3edd7ca42ebc3cdb48b0cdf77efc4fae",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 코드·workflow 4개와 기존 문서 8개의 공개 검수·커밋·푸시·PR 준비를 승인함. 실행 Bot·사람 승인 경계·키 없는 보호 설정 조회·합성 회귀와 실제 미검증 범위를 검수함. 원문·키·원시 응답/로그·다른 미커밋·stash·main 병합·운영 배포는 제외함.",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -549,11 +563,11 @@
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "9316631a2b7d3999fca84ecec85a6a94f31896320d78bc9b635481e692cf11f5",
+      "sha256": "31c54031f69fd084c46959007c35bbfe8c30af5bed49d530ae33e053215e3b81",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 코드·workflow 4개와 기존 문서 8개의 공개 검수·커밋·푸시·PR 준비를 승인함. 실행 Bot·사람 승인 경계·키 없는 보호 설정 조회·합성 회귀와 실제 미검증 범위를 검수함. 원문·키·원시 응답/로그·다른 미커밋·stash·main 병합·운영 배포는 제외함.",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -605,11 +619,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "58cda2c472f6fcbfbcb75ebb5541f05f8874a23bc76b691fb001920dbc64ad7e",
+      "sha256": "ce3f05a46eacffb5a387a7c8624672ce0b3853d90f5af3e432e18e4e68de18a5",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 코드·workflow 4개와 기존 문서 8개의 공개 검수·커밋·푸시·PR 준비를 승인함. 실행 Bot·사람 승인 경계·키 없는 보호 설정 조회·합성 회귀와 실제 미검증 범위를 검수함. 원문·키·원시 응답/로그·다른 미커밋·stash·main 병합·운영 배포는 제외함.",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

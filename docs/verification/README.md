@@ -2,7 +2,7 @@
 
 - [비공개 Git 콘텐츠 공급 검증](content/2026-11-17-private-git-content.md)
 
-- [합성 PR·인증 콘텐츠 CI 분리](content/2026-11-18-content-ci-isolation.md): 실행 Bot·사람 승인, 두 SHA·승인 이력의 로컬 회귀. 실제 신원·Environment·키 설정과 인증 CI 활성화는 대기.
+- [합성 PR·인증 콘텐츠 CI 분리](content/2026-11-18-content-ci-isolation.md): 실행 Bot·사람 승인, 두 SHA·승인 이력의 로컬 회귀. Environment와 Bot·사람 신원 변수는 조회·정책 검사 통과. App 설치·권한의 독립 대조, 분리된 실행 환경·런처·키와 실제 인증 CI 활성화는 대기.
 
 - [11-17 Next.js root-param 캐시 권고](security/2026-11-17-next-cache-advisory.md): 16.4.6 patch·전후 감사·본문 production·검색 캐시 회귀. 기존 Cache Components 실험 실패·운영 기본 설정과 후속 PR·배포 범위를 구분.
 
