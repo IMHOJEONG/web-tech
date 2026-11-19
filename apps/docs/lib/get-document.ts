@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { cache } from 'react'
+import { getContentDeliveryMode } from './content-delivery-mode'
 import { parseLocalDocument } from './local-document-parser'
 import type { Metadata } from './document.types'
 import type { ArticleTimingMeasure } from './article-timing.types'
@@ -132,7 +133,9 @@ type DocsDataOptions = {
 export async function getDocsData(options: DocsDataOptions = {}) {
     const localDocs = getLocalDocsData()
     const includeRemote =
-        options.includeRemote ?? shouldIncludeRemoteContentIndex()
+        getContentDeliveryMode() === 'private-git'
+            ? false
+            : (options.includeRemote ?? shouldIncludeRemoteContentIndex())
 
     if (!includeRemote) {
         logContentSource({
@@ -189,6 +192,17 @@ export async function getDocByRoutePath(
     const localDoc = getLocalDocsData().find((doc) =>
         isDocRouteMatch(doc, routePath)
     )
+    // A Git release is a complete snapshot: misses must not contact NAS.
+    if (getContentDeliveryMode() === 'private-git') {
+        logContentSource({
+            area: 'detail',
+            source: localDoc ? 'local' : 'none',
+            reason: 'private-git-release',
+            routePath,
+            includeRemote: false,
+        })
+        return localDoc ?? null
+    }
     const includeRemote = shouldIncludeRemoteContentIndex()
 
     if (includeRemote) {

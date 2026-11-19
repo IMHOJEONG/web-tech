@@ -1,4 +1,5 @@
 import type { ContentApiConfig } from '~/lib/content-api-types'
+import { getContentDeliveryMode } from './content-delivery-mode.ts'
 
 function trimTrailingSlash(value: string) {
     return value.replace(/\/+$/, '')
@@ -39,6 +40,7 @@ function createContentApiConfig(
 }
 
 export function getContentApiConfig() {
+    if (getContentDeliveryMode() === 'private-git') return null
     return (
         createContentApiConfig(
             'public',
@@ -95,6 +97,7 @@ export function getContentApiTimeoutMs() {
 }
 
 export function shouldIncludeRemoteContentIndex() {
+    if (getContentDeliveryMode() === 'private-git') return false
     const rawValue =
         process.env.BLOG_CONTENT_INCLUDE_REMOTE_INDEX?.trim().toLowerCase()
 
