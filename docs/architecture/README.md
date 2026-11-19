@@ -6,6 +6,8 @@
 
 ## ADR 상태
 
+- [ADR-0033: 합성 PR 검사와 승인된 비공개 콘텐츠 검증 분리](adr-0033-content-ci-trust-boundary.md): 적용 중. CI 전용 PR의 합성 입력·정확한 승인 SHA·키 없는 사전 차단 구현. 콘텐츠 이전 구현·보호 Environment·실제 인증 검증·운영 전환은 별도.
+
 - [ADR-0031: 검색 Drawer·경량 자동완성](adr-0031-docs-search-drawer.md): 적용 중. PR #92 main 병합·동일 SHA Production 및 운영 두 폭 검증. main CI의 글꼴 기하 비교는 후속 보완.
 
 - [ADR-0030: 브라우저 CI 런타임 이미지](adr-0030-browser-ci-runtime-image.md): 적용 중. 공식 Playwright 버전·digest 고정과 실제 렌더링 준비 검사, 기존 suite 유지. 전용 브랜치 구현이며 main 반영은 별도.

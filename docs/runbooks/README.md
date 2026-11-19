@@ -1,5 +1,7 @@
 # 운영 및 재현 절차
 
+- [합성 PR 검사와 승인 콘텐츠 CI 실행](docs-private-content-ci.md): 키 없는 일반 CI와 승인 main 전용 검증의 준비 조건·차단·미활성 범위.
+
 - [블로그 본문 목차 작성·연결 가이드](docs-article-toc-guide.md): 제목 계층·로컬/원격 추출 차이·타입 검사되는 옵션 예제와 검증 절차.
 
 - [GitHub App 전용 macOS 계정 준비](github-app-isolated-macos-account.md): 별도 실행 환경·사람 전용 키 발급·단기 토큰·승인 게이트 검증. 현재 설정 적용 결과가 아닌 준비 절차.

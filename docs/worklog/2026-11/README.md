@@ -1,5 +1,7 @@
 # 2026-11 작업 기록
 
+- [일반 PR과 승인된 콘텐츠 CI 분리](2026-11-18-content-ci-isolation.md)
+
 - [11-17 Next.js 보안 업데이트](2026-11-17-next-cache-advisory.md): 신규 #362·KAN-82 분리, 안정 patch·보안 하한·본문/캐시 회귀와 기존 실험 실패 대조. 기존 Hono 사후 기록 보존과 후속 커밋·PR 요청·운영 미배포 범위를 구분.
 
 - [11-17 Hono Dependabot 보완](2026-11-17-hono-advisories.md): 실제 Prisma 의존성 patch·합성 보안 회귀·KAN-79 연결. 로컬 검증이며 공개 승인·커밋·푸시·PR·배포는 별도.
