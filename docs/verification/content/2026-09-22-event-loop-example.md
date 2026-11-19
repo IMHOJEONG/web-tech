@@ -31,6 +31,6 @@ Chrome classic script의 콜백 순서 검사다. DevTools Snippets UI 자체, �
 
 ## 관련 문서
 
-- [검증 대상 글](../../../apps/docs/data/v8/javascript-event-loop-runtime.mdx)
+- [검증 대상 글](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/data/v8/javascript-event-loop-runtime.mdx)
 - [최초 독해 검토](2026-09-20-content-readability-review.md)
 - [작업 기록](../../worklog/2026-09/2026-09-22-event-loop-content-clarification.md)

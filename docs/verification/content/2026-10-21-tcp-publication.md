@@ -4,7 +4,7 @@
 
 - 2026-10-21 Asia/Seoul. 사용자가 기존 미커밋 문서의 게시와 CI 통과 후 PR 병합·Production 확인까지 승인했다.
 - 최신 main `0324278c7c874ff85c045f67094fb8800bbf7234` 기반 `codex/publish-tcp-socket-lab-20261021`에서 게시 변경을 분리했다. 원래 `codex/docs-tcp-draft`의 38개 미커밋 파일과 다른 운영 작업은 변경하지 않는다.
-- [실제 MDX](../../../apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx)는 10-20 검토본을 기준으로 공개 상태와 발행일·수정일을 전환했다. 이후 PR 리뷰에서 발견한 선택 캡처의 EOF 종료 처리와 설명만 보완했다. 도식과 TCP 관측값은 유지했다. 최종 본문 SHA-256은 `fbcf7e8038cfb73c0189f9ff71c4f0cb552b99200a4c6268c305e5bcbc8803ef`다.
+- [실제 MDX](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx)는 10-20 검토본을 기준으로 공개 상태와 발행일·수정일을 전환했다. 이후 PR 리뷰에서 발견한 선택 캡처의 EOF 종료 처리와 설명만 보완했다. 도식과 TCP 관측값은 유지했다. 최종 본문 SHA-256은 `fbcf7e8038cfb73c0189f9ff71c4f0cb552b99200a4c6268c305e5bcbc8803ef`다.
 - macOS, Node 24.12.0, pnpm 11.10.0, Next.js 16.3.8, Playwright Chromium. 원격 index를 끈 production 모드 서버는 격리된 `127.0.0.1:3021`에서 실행했다. 운영 비밀값·NAS 원문·기존 개발 서버를 사용하거나 변경하지 않았다.
 - 추적: [KAN-17](https://web-tech-service.atlassian.net/browse/KAN-17), [Confluence 운영 안내](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817/web-tech+Jira). KAN-16은 이전 로컬 검증 완료 이력으로 유지한다.
 

@@ -2,6 +2,300 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/knowledge/docs-app/uiux-resource-research.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "a1decab7b4e3405ea9136a6f89251bf12afe67a7ecbb7adf41f19cc1cd846d22",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/knowledge/infra-tooling/node-http-kernel-path.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "b919806ad8ce982ebf2d3832cb7224e9d5362d9033c8d5a33d91889059744566",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-09-20-content-readability-review.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "e0db411199f8d08d1d3580302e958d4823fc884a02e77d134b4f72ebbc0c9e90",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-09-22-event-loop-example.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "933b7ffa9a85beebed2704b1593d1ea37bd5845387fc393fb744329aa48b1cd8",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-14-http-streaming-publication.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "8654ca34213025fb46ea718ee9aea2ffa843ce9a8f698f2224dd6d5a3815e2b1",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-14-weekly-article-maintenance.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "fb548afb53e57f5b1dfe1bd190dc9ec8683fd6a156995dff5d01bf4d4abd3a82",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-16-tcp-draft-preparation.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "fe740f2ecf29c737184f1e043b3d58f40a744800bbb2fc08627402ed980ad4d0",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-20-tcp-draft-recheck.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "6cab4dc8fe73757b1e7f48652db18c3c61afd686a870442eaffa2ebaf51d0052",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-21-tcp-publication.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "3eeef78627e25f46b366a2bb112af4ec715cbcf9cf21bbfb1c37e17391fe9bf6",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-28-brotli-security-article.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "44d6d3f0b4962c28437fb9e743e3395043a7b5b38850d341a058464ff0a47210",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-29-brotli-publication.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "3d0c15ba19ab5a94c197c1995c4904b719d8f5d6b55885c1bd76bd3ed51a1d94",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-04-v8-bytecode-example.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "79c8d508ee0f7351a97d999b50d672711d837ca6dc247200d4db8d5e7e8c64cc",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-06-weekly-article-publication.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "7661ee786e2925121ed72fce204443c5609c675d4a65aa74681d669ff2bd1632",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-08-weekly-article-maintenance.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "c6c1a1f0bdd3aaa7253d920da997b692d3aebb91cca66172b3d983ad7bacee07",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-09-http-article-tests-diagrams.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "94650941fafa13b13ff45204ff334ae363c6c0b16fa69ae4ae139d5b8ecee0e0",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-09-http-kernel-learning-roadmap.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "958cdca3d9a5a38ebf6ca2159f178ea67acf48c9a4eb31458e2573f4230c870c",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-10-tcp-socket-learning-experiment.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "4030fdd15f101e6769ad45b5fbf1d15fbb877262873d3893bca7d4ed1182c306",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-14-http-streaming-publication.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "09e04ffc1f2adcaeefb55bf9c8bb12b283300a762e68f2c8406707f5800977bf",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-14-weekly-article-maintenance.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "c43c90d0e9b1e2a9431a0f5224199ac537e99aa98246bc56aa2e9cb70d464378",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-16-next-tcp-draft.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "4adb0f85f8e70f5c82f1f304c9b6ecad80cacbb668e5b2255fb4d4905a379a43",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-28-brotli-security-article.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "f96940d6e5ae32b7cbfa2ebb56c1750c0b8f76bfb837ef741e796ae579179318",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
       "path": "docs/architecture/adr-0032-private-git-build-content.md",
       "sha256": "3bdf54e95ca307d39c1f14e9bb1af479a9d54a493eee4c4f7f43d091dcd9983e",
       "kind": "document",
@@ -857,11 +1151,11 @@
     },
     {
       "path": "docs/todo/todo.md",
-      "sha256": "94bf5796f2010686a50a98d1a78ebe0c4162222ce6d103cddef4b90f43530c69",
+      "sha256": "ce0672b475a62e60fd4b11f4669e16a16c9a80120696510dbc355e1912e40a76",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-07",
-      "note": "사용자가 PR #86 리뷰 보완에 필요한 기존 운영 문서 4개의 정제 갱신·재검수·해시 갱신과 커밋·푸시를 명시 승인함. 자체 작성한 실패 재현·회귀 수·검사 명령·운영 미연결 경계와 동일 Confluence 페이지의 비개인 경로를 확인함. 원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정·토큰·병합·Production 변경은 제외함.",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존.",
       "checks": {
         "secrets": true,
         "personalData": true,

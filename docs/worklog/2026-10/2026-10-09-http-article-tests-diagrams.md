@@ -8,7 +8,7 @@ HTTP 초안을 기술·독자·존댓말 세 에이전트로 다시 검토하고
 
 ## Changed
 
-- [초안](../../../apps/docs/category/be/node-js/http-response-streaming-lab.mdx)에
+- [초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/http-response-streaming-lab.mdx)에
   서버와 클라이언트를 나눈 정상·취소 흐름 도식을 추가했다.
   헤더 확정과 실제 전송을 구분하고 용어·어투와 반복을 다듬었다.
 - [MDX 스타일](../../../apps/docs/app/css/mdx.css)에 두 열의 세로 흐름을 표현하는
