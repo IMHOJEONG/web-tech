@@ -31,7 +31,7 @@
     },
     {
       "path": "docs/verification/content/2026-11-18-content-ci-isolation.md",
-      "sha256": "dc40d86ebbb151ce10ec7636b73cba658d95bd2909f5c8fde90ae897996b116a",
+      "sha256": "595c36d10a3590881ff84eb2c7cddd134b2ff7e73130f2f010278229eeff4f6b",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-18-content-ci-isolation.md",
-      "sha256": "849fae8f689a8f7daf2a00e7c4b16ccb85f3f6595af163bf63471aaebacd9750",
+      "sha256": "7276f3c3253389c24a7312550cb833e8026926ebd3613bae122f3554781b1f0f",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
