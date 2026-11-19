@@ -8,7 +8,10 @@
 
 저장소 의존성과 로컬 Google Chrome이 필요하다. 저장소 루트에서 실행한다.
 
+2026-11-19 공개 사본 삭제 후에는 현재 작업 파일 대신 삭제 전 공개 커밋 `53ab14e54d2a892cb1cd64544965d00c185ccab9`의 Git 객체를 읽는다. 다음 선행 검사가 실패하는 shallow clone에서는 해당 공개 커밋을 별도로 준비한 후 실행해야 한다. 스크립트는 자동 fetch를 하지 않으며 비공개 Git·운영 발행본·합성 원문을 읽지 않는다. 원문을 현재 Git 트리에 복원할 필요는 없다.
+
 ```sh
+git cat-file -e 53ab14e54d2a892cb1cd64544965d00c185ccab9:apps/docs/data/v8/javascript-event-loop-runtime.mdx
 mise exec -- node --test docs/verification/artifacts/2026-09-22-event-loop-browser.test.mjs
 mise exec -- pnpm --filter docs test:content
 ```

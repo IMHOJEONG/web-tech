@@ -54,9 +54,10 @@ Canvas 글, 연결된 HTML 실험 파일, 이벤트 루프와 운영체제 글�
 
 2026-09-20 후속 작업에서 Canvas 글만 수정했다. 앞선 검토의 "원문 미수정"은 검토 당시 상태다. 크기 640×360, transform-origin, 반환 행렬 적용을 명시하고 해결 코드를 독립적으로 실행하도록 정리했다. paint 리스너 중복 등록은 제거하고 미지원 환경에서 명시적으로 중단한다. 연결된 효과 데모 자체는 변경하지 않았다.
 
-저장소 루트에서 다음 명령으로 재현한다.
+저장소 루트에서 다음 명령으로 재현한다. 2026-11-19 공개 사본 삭제 후 아래 예제·브라우저 스크립트는 현재 작업 파일 대신 삭제 전 공개 커밋 `53ab14e54d2a892cb1cd64544965d00c185ccab9`의 Git 객체를 읽는다. 선행 검사가 실패하는 shallow clone에서는 해당 공개 커밋을 별도로 준비한다. 자동 fetch 없이 실패하며 비공개 Git·운영 발행본·합성 원문을 읽지 않는다. 현재 Git 트리에 원문을 복원하지 않는다. 아래의 기존 관측 결과는 당시 실행 기록이며 현재 브라우저에서의 재측정을 뜻하지 않는다.
 
 ```sh
+git cat-file -e 53ab14e54d2a892cb1cd64544965d00c185ccab9:apps/docs/data/canvas/readme.md
 mise exec -- node --test docs/verification/artifacts/2026-09-20-canvas-snippet.test.mjs
 mise exec -- pnpm --filter docs test:content
 ```

@@ -149,7 +149,7 @@ Production 전용으로 읽기 키를 sensitive, 콘텐츠 모드를 private-git
 | 미이전 원문    | NAS 전용 PNA 경로는 실제 MDX를 반환하지 않음. 사용자 승인대로 수동 이전 대상이며 자동 NAS fallback은 없음.                                                                            |
 | 복구·보존      | 이전 정상 배포 `dpl_8fkApminwQYtqrFANAX8HL3WbuLi`를 유지. NAS·공개 원문·과거 Git 이력·기존 미커밋·stash는 삭제하지 않음.                                                              |
 
-재현 기준은 [runbook](../../runbooks/docs-private-git-content.md#4-production-전환)의 고정 main 후보·목록/본문 검색/상세/자산/비공개 경로·승격 후 익명 검증이다. 실제 키·인증·원시 로그·응답·브라우저 자료와 실행 helper는 저장소 밖에만 보관한다. 이 결과를 플랫폼 전체 외부 요청 계측·완전한 키 격리·일반 PR의 실제 콘텐츠 인증 CI 성공으로 확대하지 않는다. 새 글 반영에는 비공개 저장소 검수·커밋, 앱 lock의 SHA/URL 집합 갱신과 새 빌드가 필요하며 NAS 웹훅만으로 이 발행본이 바뀌지 않는다.
+재현 기준은 [runbook](../../runbooks/docs-private-git-content.md#4-운영-전환)의 고정 main 후보·목록/본문 검색/상세/자산/비공개 경로·승격 후 익명 검증이다. 실제 키·인증·원시 로그·응답·브라우저 자료와 실행 helper는 저장소 밖에만 보관한다. 이 결과를 플랫폼 전체 외부 요청 계측·완전한 키 격리·일반 PR의 실제 콘텐츠 인증 CI 성공으로 확대하지 않는다. 새 글 반영에는 비공개 저장소 검수·커밋, 앱 lock의 SHA/URL 집합 갱신과 새 빌드가 필요하며 NAS 웹훅만으로 이 발행본이 바뀌지 않는다.
 
 최종 별칭·코드 SHA·기존 보호 설정·다른 환경 변수 보존도 대조했다. 첫 메타데이터 비교는 JSON 저장 시 생략된 undefined 속성과 배열 순서를 그대로 비교해 실패했다. 비교 도구에서 이 표현 차이만 정규화한 뒤 기존 변수 ID·키·target·branch·type과 보호 설정의 일치를 확인했다. 운영 값을 바꾸거나 보호 기준을 낮춘 조치는 아니다.
 
@@ -193,3 +193,28 @@ pnpm publication:check --base origin/main
 기존 수정·깨끗한 트리를 합친 18개 작업 트리의 HEAD·status·인덱스·추적/미추적 파일 해시, stash 10개를 시작 상태와 대조해 모두 동일함을 확인했다. 마지막 검증 사본은 삭제 완료 HEAD에서 생성했으며, 삭제 커밋이 링크 검사로 차단된 시점의 앞선 export는 최종 증거에서 제외했다. 커밋 완료 여부를 먼저 검증한 뒤 export하도록 로컬 helper를 보완했다. 원시 자료·helper·실제 발행본은 공개 커밋에 넣지 않는다.
 
 이 검증은 로컬 정리 브랜치와 격리 사본 기준이다. 새 푸시·PR·원격 CI·main 병합·Production 재배포는 실행하지 않았다. 운영은 앞서 검증한 main `53ab14e5`와 같은 고정 발행본을 유지한다. GitHub 인증 CI 활성화·NAS 전용 글 수동 이전·미이전 6개 원문과 나머지 자산 이전은 후속이며 이번에 완료로 바꾸지 않는다.
+
+## 2026-11-19 PR #99 재현 절차 리뷰 보완
+
+기준 head `7b05fb3a`, Node 24.22.1·pnpm 12.14.0·macOS에서 [PR #99](https://github.com/IMHOJEONG/web-tech/pull/99)의 의견 3건을 대조했다. runbook의 운영 전환 앵커를 실제 제목에 맞췄고, 과거 Canvas·이벤트 루프 재현 스크립트 3개는 삭제 전 공개 커밋의 원문을 읽도록 수정했다. 글·자산을 다시 추적하거나 비공개 Git·NAS·운영 발행본을 호출하지 않는다. 과거 관측 결과는 보존한다.
+
+[공용 과거 원문 reader](../../../scripts/historical-article-source.mts)는 고정 공개 커밋 `53ab14e54d2a892cb1cd64544965d00c185ccab9`과 허용한 두 경로에만 `git show`를 실행한다. 누락·빈 원문·8 MiB 초과는 실패하며 자동 fetch·현재 파일·합성 문서로 fallback하지 않는다. 일반 CI의 새 회귀는 합성 reader로 검사하므로 실제 과거 원문 객체나 콘텐츠 키가 필요하지 않다. 과거 실험을 직접 실행할 때만 로컬 Git 객체가 필요하며 두 기존 보고서에 선행 확인 명령을 추가했다.
+
+저장소 루트의 명령:
+
+```sh
+pnpm test:repo
+node --test scripts/historical-article-source.test.mts docs/verification/artifacts/2026-09-20-canvas-snippet.test.mjs
+node --test docs/verification/artifacts/2026-09-22-event-loop-browser.test.mjs
+pnpm exec tsc --ignoreConfig --noEmit --types node --module NodeNext --moduleResolution NodeNext --target ES2023 --strict --skipLibCheck --allowImportingTsExtensions --erasableSyntaxOnly scripts/historical-article-source.mts scripts/historical-article-source.test.mts
+```
+
+| 범위             | 결과와 한계                                                                                                                                                                            |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 합성 회귀        | 새 7개 통과. 고정 SHA·두 경로·탐색 경로 차단·누락 시 단일 실패/오류 비노출·byte 크기 제한·스크립트 연결·보고서 선행 조건·운영 앵커를 검사. 저장소 전체 288개 통과.                     |
+| 과거 Canvas 예제 | 기존 4개 모두 통과. HTML/해결 코드 추출과 스크립트 문법 확인. 실제 headed Canvas 실험 API 화면·paint 재측정은 미실행이며 과거 관측값을 새 성공으로 계산하지 않음.                      |
+| 이벤트 루프      | Chrome 157.0.8103.80, headless 새 페이지 10개 모두 기존 예상 순서 일치·pageerror 0. 브라우저 테스트 1개 통과.                                                                          |
+| 초기 환경 실패   | 첫 브라우저 실행이 샌드박스에서 종료되고 저장소 검사 2개가 localhost listen EPERM으로 실패. 같은 코드·조건을 권한 허용 환경에서 재실행해 위 성공을 확인. 기준·timeout·retry 변경 없음. |
+| 공개·운영 경계   | 실행 소스와 기존 보고서·worklog의 정제 내용만 재검수. 원시 결과·로그·실제 원문·화면은 저장소 밖에 유지. 앱 콘텐츠 공급 경로·공통 설정·NAS·키 변경 없음.                                |
+
+이 결과는 리뷰 보완의 로컬 검증이며 새 head의 원격 CI·재리뷰는 푸시 후 별도로 확인한다. main 병합·Production 배포는 이번 범위가 아니다. ADR-0032/0033의 콘텐츠 공급·인증 결정은 변경하지 않았다.

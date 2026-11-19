@@ -2,6 +2,48 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/verification/artifacts/2026-09-20-canvas-snippet.test.mjs",
+      "sha256": "12348d20d991677d30fc52e73afe71157d1359697eeee9f33f0db26ea91ac3a8",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: PR #99 과거 재현 코드의 원문 로딩만 고정 공개 Git reader로 전환. 기존 모의 검사와 기대값 보존. 실행 결과·원문·비밀값·개인 경로는 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-09-20-canvas-browser.mjs",
+      "sha256": "5e50f1a18d2a6369aea69e3fdfeefd29c57e390c9179bca3521397302e4668f8",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: PR #99 과거 재현 코드의 원문 로딩만 고정 공개 Git reader로 전환. 기존 브라우저 조건과 기대값 보존. 실행 결과·원문·비밀값·개인 경로는 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-09-22-event-loop-browser.test.mjs",
+      "sha256": "eedb4de0bdea010d45f09d1121acdaeb577797dcd2829e05aef399a66b719da0",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: PR #99 과거 재현 코드의 원문 로딩만 고정 공개 Git reader로 전환. 기존 새 페이지 10개와 기대 순서 보존. 실행 결과·원문·비밀값·개인 경로는 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/knowledge/docs-app/uiux-resource-research.md",
       "kind": "document",
       "decision": "public-approved",
@@ -39,9 +81,9 @@
         "rights": true,
         "publicIntent": true
       },
-      "sha256": "e0db411199f8d08d1d3580302e958d4823fc884a02e77d134b4f72ebbc0c9e90",
+      "sha256": "efec5d7b70d8d910d86084f6f4752a123344c49fc741f5dac1a2dd744910c26d",
       "reviewedOn": "2026-11-19",
-      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+      "note": "사용자 승인: PR #99 리뷰 보완의 고정 공개 Git 원문 재현 선행 조건만 추가. 과거 결과 보존, 실제 원문·원시 로그·화면·비밀값 제외."
     },
     {
       "path": "docs/verification/content/2026-09-22-event-loop-example.md",
@@ -53,9 +95,9 @@
         "rights": true,
         "publicIntent": true
       },
-      "sha256": "933b7ffa9a85beebed2704b1593d1ea37bd5845387fc393fb744329aa48b1cd8",
+      "sha256": "293e154e8b11be3424881eca03f2285d6e0781422f7d231a754394e4761f8096",
       "reviewedOn": "2026-11-19",
-      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+      "note": "사용자 승인: PR #99 리뷰 보완의 고정 공개 Git 원문 재현 선행 조건만 추가. 과거 결과 보존, 실제 원문·원시 로그·화면·비밀값 제외."
     },
     {
       "path": "docs/verification/content/2026-10-14-http-streaming-publication.md",
@@ -325,11 +367,11 @@
     },
     {
       "path": "docs/verification/content/2026-11-17-private-git-content.md",
-      "sha256": "79d516a932655af3d886d56d45cc3cb5957464b6977fbf25adf68a7d3514eab6",
+      "sha256": "c71f77127c5e50dd5ee970d3cdd9eaf5353d1921701bbff8b2e33ae03479dcc9",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자 승인: 기존 문서 6개의 운영 완료·이전 완료 공개 사본 정리·합성 검사와 실제 발행본 검증·범위·한계만 정제하여 재검수. 원문·초안·원시 자료·실제 비밀값·stash 본문은 제외.",
+      "note": "사용자 승인: PR #99 리뷰 3건의 앵커·고정 Git 원문 재현·합성 회귀와 실제 실행 결과·실패·미검증 범위만 정제하여 재검수. 원문·초안·원시 로그·화면·비밀값·stash 본문 제외.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -339,11 +381,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-17-private-git-content.md",
-      "sha256": "f54487dedeb6b37c84d0f11362c68f0f25f040c14d1b12dfe9e0cccc0fd6c8fe",
+      "sha256": "34552800f5e8659e17a0aad3f05d1314e4d3907dc56ca060206ff638670c8a9e",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자 승인: 기존 문서 6개의 운영 완료·이전 완료 공개 사본 정리·합성 검사와 실제 발행본 검증·범위·한계만 정제하여 재검수. 원문·초안·원시 자료·실제 비밀값·stash 본문은 제외.",
+      "note": "사용자 승인: PR #99 리뷰 보완의 변경 이유·검증 연결·공개 범위와 남은 작업만 정제하여 재검수. 원문·초안·원시 로그·화면·비밀값·stash 본문 제외.",
       "checks": {
         "secrets": true,
         "personalData": true,
