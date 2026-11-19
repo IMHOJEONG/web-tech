@@ -2,6 +2,62 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/architecture/adr-0032-private-git-build-content.md",
+      "sha256": "007d0e52f5a420292d6335d60bfec051cad48ffea56f28f56c4a835a8f35a9ce",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/runbooks/docs-private-git-content.md",
+      "sha256": "efd31b22fd0d4abbd6183d0b557c8f5b08796afda69e7475b49b6cf4dc3d86da",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/content/2026-11-17-private-git-content.md",
+      "sha256": "53ca06681938b9da37c6913472074d3cfdf5b1adff8bb3a7aeb1cc5a22763b42",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-17-private-git-content.md",
+      "sha256": "b66a961da1c968699752f7be2c76c2462c636bc79cc1f1e2368cd6b4dfb7b564",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/architecture/adr-0033-content-ci-trust-boundary.md",
       "sha256": "ec7a6d636f1a364d9289f474b28bffea0845a18b80a4eee9ee2431a888f08d63",
       "kind": "document",
@@ -115,11 +171,11 @@
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "320122f16a43b7aa45a0456df849cd5cc71dcbd044c25f8afcddd0b292699033",
+      "sha256": "9567f5d15f7ec4daf5a91d11ce28b07c7311a2b6eec45e4fb25351aca064ffe5",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 인증 분리 코드·회귀와 정제 정책·절차·결과·목차의 공개 검수 후 작업별 커밋·푸시·PR·원격 CI 확인을 승인함. 최종 bytes의 비밀정보·개인 경로·권리·공개 의도를 검수함. 원시 자료·실제 원문·별도 이전 구현·기존 미커밋·stash·키·NAS·운영 전환은 제외함.",
+      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -171,11 +227,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "110e1c23d1ea4507e6b34d1bccfccf46c5b48d93a571f0a895dd002c954f4c77",
+      "sha256": "9eeb0329e5f1ce74ea30eafbbf06b0c63c2d161a217780bbf09db31ab6b90836",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 인증 분리 코드·회귀와 정제 정책·절차·결과·목차의 공개 검수 후 작업별 커밋·푸시·PR·원격 CI 확인을 승인함. 최종 bytes의 비밀정보·개인 경로·권리·공개 의도를 검수함. 원시 자료·실제 원문·별도 이전 구현·기존 미커밋·stash·키·NAS·운영 전환은 제외함.",
+      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -213,11 +269,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "c5048bf883fc2774ad3bd12774c442ae4536c1f2aaacc0c22e29e0bc41a5ac5d",
+      "sha256": "aada732eeb91d2ae6841dace171b100965eac1bc48bf98b67d4b96afbe713131",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 인증 분리 코드·회귀와 정제 정책·절차·결과·목차의 공개 검수 후 작업별 커밋·푸시·PR·원격 CI 확인을 승인함. 최종 bytes의 비밀정보·개인 경로·권리·공개 의도를 검수함. 원시 자료·실제 원문·별도 이전 구현·기존 미커밋·stash·키·NAS·운영 전환은 제외함.",
+      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -927,11 +983,11 @@
     },
     {
       "path": "docs/runbooks/README.md",
-      "sha256": "71c3b7b3a92278cd15c8fe57992f6160502756502f42ad13f111a48973ffc773",
+      "sha256": "a28afdb2f79c3740acaea08d448e0ca1871b50f1b1a8e25466438f1aa8e637e9",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 인증 분리 코드·회귀와 정제 정책·절차·결과·목차의 공개 검수 후 작업별 커밋·푸시·PR·원격 CI 확인을 승인함. 최종 bytes의 비밀정보·개인 경로·권리·공개 의도를 검수함. 원시 자료·실제 원문·별도 이전 구현·기존 미커밋·stash·키·NAS·운영 전환은 제외함.",
+      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
       "checks": {
         "secrets": true,
         "personalData": true,

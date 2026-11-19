@@ -1,5 +1,7 @@
 # 운영 및 재현 절차
 
+- [비공개 Git 콘텐츠 전환과 복구](docs-private-git-content.md): 검수된 고정 발행본·Vercel 전환·이전 배포 복구, 일반 PR과 비밀정보 분리.
+
 - [합성 PR 검사와 승인 콘텐츠 CI 실행](docs-private-content-ci.md): 키 없는 일반 CI와 승인 main 전용 검증의 준비 조건·차단·미활성 범위.
 
 - [블로그 본문 목차 작성·연결 가이드](docs-article-toc-guide.md): 제목 계층·로컬/원격 추출 차이·타입 검사되는 옵션 예제와 검증 절차.
