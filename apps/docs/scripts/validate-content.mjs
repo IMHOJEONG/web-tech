@@ -8,14 +8,12 @@ import {
     contentDateSchema,
     editorialStatusSchema,
 } from '@web-tech/docs-content-contract'
+import { resolveLocalContentRoot } from '../lib/local-content-paths.ts'
 
 const NON_PUBLIC_STATUSES = new Set(['draft', 'archived'])
 const DOCS_ROOT = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)),
     '..'
-)
-const CONTENT_DIRECTORIES = ['data', 'category'].map((directory) =>
-    path.join(DOCS_ROOT, directory)
 )
 
 export function normalizeOptionalString(value) {
@@ -234,8 +232,12 @@ export function getFrontmatterIssues(frontmatter) {
 }
 
 export async function main() {
+    const root = resolveLocalContentRoot(DOCS_ROOT)
+    const contentDirectories = ['data', 'category'].map((directory) =>
+        path.join(root, directory)
+    )
     const files = (
-        await Promise.all(CONTENT_DIRECTORIES.map(collectMarkdownFiles))
+        await Promise.all(contentDirectories.map(collectMarkdownFiles))
     ).flat()
 
     const failures = []

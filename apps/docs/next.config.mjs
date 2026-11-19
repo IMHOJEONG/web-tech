@@ -2,11 +2,41 @@
 import createMDX from '@next/mdx'
 import createNextIntlPlugin from 'next-intl/plugin'
 import { fileURLToPath } from 'node:url'
+import { readFileSync } from 'node:fs'
 
 import { shikiRehypeOptions } from './lib/shiki-options.js'
 import { getLocalSearchRevision } from './lib/local-search-revision.ts'
+import {
+    getContentDeliveryMode,
+    getPrivateContentRevision,
+} from './lib/content-delivery-mode.ts'
+import { resolveLocalContentRoot } from './lib/local-content-paths.ts'
 
 const { env } = process
+const appRoot = fileURLToPath(new URL('.', import.meta.url))
+const contentMode = getContentDeliveryMode()
+const contentRevision =
+    contentMode === 'private-git'
+        ? getPrivateContentRevision({
+              DOCS_CONTENT_SOURCE: contentMode,
+              DOCS_PRIVATE_CONTENT_REVISION: JSON.parse(
+                  readFileSync(
+                      new URL('./content-release.lock.json', import.meta.url),
+                      'utf8'
+                  )
+              ).revision,
+          })
+        : ''
+if (
+    contentMode === 'private-git' &&
+    env.DOCS_PRIVATE_CONTENT_REVISION &&
+    env.DOCS_PRIVATE_CONTENT_REVISION !== contentRevision
+) {
+    throw new Error('Prepared content differs from the release lock')
+}
+const contentTraceRoot = contentRevision
+    ? `./.generated-content/${contentRevision}`
+    : '.'
 
 function toRemotePattern(value) {
     const trimmedValue = value?.trim()
@@ -62,9 +92,12 @@ function getRemoteImagePatterns() {
 
 const nextConfig = {
     env: {
+        DOCS_CONTENT_SOURCE: contentMode,
+        DOCS_PRIVATE_CONTENT_REVISION: contentRevision,
         // A non-secret content digest prevents Data Cache reuse across changed builds.
         DOCS_LOCAL_SEARCH_REVISION: getLocalSearchRevision(
-            fileURLToPath(new URL('.', import.meta.url))
+            resolveLocalContentRoot(appRoot, contentRevision || undefined),
+            contentRevision
         ),
     },
     // Configure `pageExtensions` to include markdown and MDX files
@@ -75,12 +108,22 @@ const nextConfig = {
     outputFileTracingIncludes: {
         '/og/article.png': ['./public/fonts/Pretendard-Bold.otf'],
         '/*': [
-            './data/**/*.md',
-            './data/**/*.mdx',
-            './category/**/*.md',
-            './category/**/*.mdx',
+            `${contentTraceRoot}/data/**/*.md`,
+            `${contentTraceRoot}/data/**/*.mdx`,
+            `${contentTraceRoot}/category/**/*.md`,
+            `${contentTraceRoot}/category/**/*.mdx`,
         ],
     },
+    outputFileTracingExcludes: contentRevision
+        ? {
+              '/*': [
+                  './data/**',
+                  './category/**',
+                  './.generated-content/**/ready.json',
+                  './.generated-content/assets.json',
+              ],
+          }
+        : undefined,
     headers() {
         return [
             ...[

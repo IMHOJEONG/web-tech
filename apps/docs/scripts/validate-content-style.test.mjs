@@ -74,8 +74,17 @@ test('warns for body h1 without blocking or rewriting local content', () => {
 test('real local CLI exits zero for h1 warnings but still fails on HTML comments', async () => {
     const root = await realpath(await mkdtemp(join(tmpdir(), 'docs-h1-style-')))
     try {
-        for (const directory of ['scripts', 'data', 'category']) {
+        for (const directory of ['scripts', 'lib', 'data', 'category']) {
             await mkdir(join(root, directory))
+        }
+        for (const name of [
+            'local-content-paths.ts',
+            'content-delivery-mode.ts',
+        ]) {
+            await copyFile(
+                new URL(`../lib/${name}`, import.meta.url),
+                join(root, 'lib', name)
+            )
         }
         for (const name of [
             'validate-content-style.mjs',

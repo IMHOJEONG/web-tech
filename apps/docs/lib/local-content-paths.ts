@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { getPrivateContentRevision } from './content-delivery-mode.ts'
 
 function hasLocalContentDirectory(root: string) {
     return (
@@ -8,8 +9,26 @@ function hasLocalContentDirectory(root: string) {
     )
 }
 
-export function resolveLocalContentRoot(cwd = process.cwd()) {
+export function getPrivateContentRoot(root: string, revision: string) {
+    if (!/^[a-f0-9]{40}$/.test(revision)) {
+        throw new Error('Invalid content revision')
+    }
+    return path.join(root, '.generated-content', revision)
+}
+
+export function resolveLocalContentRoot(
+    cwd = process.cwd(),
+    revision = getPrivateContentRevision()
+) {
     const candidates = [cwd, path.join(cwd, 'apps/docs')]
+
+    if (revision) {
+        const root = candidates
+            .map((candidate) => getPrivateContentRoot(candidate, revision))
+            .find(hasLocalContentDirectory)
+        if (!root) throw new Error('Prepared private content is missing')
+        return root
+    }
 
     return (
         candidates.find((candidate) => hasLocalContentDirectory(candidate)) ??

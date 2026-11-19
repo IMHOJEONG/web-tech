@@ -1,0 +1,24 @@
+{
+    "version": 1,
+    "repository": "https://github.com/IMHOJEONG/heap-forge-content.git",
+    "revision": "8e53eabbfcaa139a1b9b66af4647aa230f8adab1",
+    "routes": [
+        "/docs/category/be/node-js/event-loop-cpu-delay",
+        "/docs/category/be/node-js/http-response-streaming-lab",
+        "/docs/category/be/node-js/http-timeout-retry-boundary",
+        "/docs/category/be/node-js/node-brotli-runtime-security",
+        "/docs/category/be/node-js/stream-backpressure-diagnosis",
+        "/docs/category/be/node-js/tcp-socket-endpoints-lab",
+        "/docs/category/computer-science/os/process-thread-scheduler",
+        "/docs/category/fe/browser/critical-rendering-path-diagnosis",
+        "/docs/category/fe/react/nextjs",
+        "/docs/category/fe/react/server-client-component-boundary",
+        "/docs/category/mobile/web/mobile-viewport-height",
+        "/docs/html-in-canvas-paint-record",
+        "/docs/ui-ux/blocked-aria-hidden",
+        "/docs/ui-ux/focus-management-checklist",
+        "/docs/ui-ux/form-error-recovery",
+        "/docs/web/bytecode",
+        "/docs/web/javascript-event-loop-runtime"
+    ]
+}

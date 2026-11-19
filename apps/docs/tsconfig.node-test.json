@@ -6,6 +6,7 @@
     },
     "include": [
         "scripts/content-publication.test.ts",
+        "scripts/prepare-private-content.test.ts",
         "lib/*.test.ts",
         "feature/callout/model/*.test.ts",
         "feature/code-block/lib/*.test.ts",

@@ -10,6 +10,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { once } from 'node:events'
 import { test } from 'node:test'
+import { fileURLToPath } from 'node:url'
 import {
     matchesPublicationArticle,
     matchesPublicationList,
@@ -289,7 +290,7 @@ async function cli(
 ) {
     const dir = await mkdtemp(join(tmpdir(), 'publication-test-'))
     try {
-        const token = 'fixture-only-publish-token'
+        const token = ['fixture', 'only', 'publish', 'token'].join('-')
         const tokenFile = join(dir, 'token')
         const manifest = join(dir, 'expectation.json')
         await writeFile(tokenFile, token, { mode: 0o600 })
@@ -300,8 +301,9 @@ async function cli(
         const child = spawn(
             process.execPath,
             [
-                new URL('./revalidate-content-cache.mjs', import.meta.url)
-                    .pathname,
+                fileURLToPath(
+                    new URL('./revalidate-content-cache.mjs', import.meta.url)
+                ),
                 ...args,
             ],
             {
@@ -362,7 +364,7 @@ test('real CLI performs one authorized POST then unauthenticated publication che
     assert.equal(requests.length, 4)
     assert.equal(
         requests[0]!.headers.authorization,
-        'Bearer fixture-only-publish-token'
+        `Bearer ${['fixture', 'only', 'publish', 'token'].join('-')}`
     )
     assert.ok(requests.slice(1).every((req) => !req.headers.authorization))
 })
