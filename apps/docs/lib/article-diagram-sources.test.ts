@@ -2,8 +2,15 @@ import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 import { getArticleDiagramSources } from './article-diagram-sources.ts'
+import fs from 'node:fs'
+import os from 'node:os'
+import path from 'node:path'
+import { writeSyntheticImages } from '../../../scripts/synthetic-docs-media.mts'
 
-test('responsive diagrams have real portrait and landscape files', async () => {
+test('responsive diagrams preserve portrait and landscape dimensions with synthetic files', async (t) => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'synthetic-diagrams-'))
+    t.after(() => fs.rmSync(root, { recursive: true, force: true }))
+    writeSyntheticImages(root)
     for (const name of [
         'stages',
         'completion',
@@ -15,10 +22,10 @@ test('responsive diagrams have real portrait and landscape files', async () => {
         )
         assert.ok(sources)
         const portrait = await readFile(
-            new URL(`../public${sources.portrait}`, import.meta.url)
+            path.join(root, 'public', sources.portrait)
         )
         const landscape = await readFile(
-            new URL(`../public${sources.landscape}`, import.meta.url)
+            path.join(root, 'public', sources.landscape)
         )
         assert.equal(portrait.readUInt32BE(16), 720)
         assert.equal(portrait.readUInt32BE(20), sources.portraitHeight)

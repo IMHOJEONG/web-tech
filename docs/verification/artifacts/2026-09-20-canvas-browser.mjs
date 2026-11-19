@@ -1,11 +1,12 @@
 import { createRequire } from "node:module";
 import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { createServer } from "node:http";
+import { readHistoricalArticle } from "../../../scripts/historical-article-source.mts";
 
 const root = process.cwd();
 const require = createRequire(`${root}/apps/docs/package.json`);
 const { chromium } = require("@playwright/test");
-const article = readFileSync(`${root}/apps/docs/data/canvas/readme.md`, "utf8");
+const article = readHistoricalArticle("apps/docs/data/canvas/readme.md");
 const html = article.match(/```html\n([\s\S]*?)```/)[1];
 const solution = article
   .split("### 해결 방법")[1]

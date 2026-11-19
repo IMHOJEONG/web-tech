@@ -4,7 +4,7 @@
 
 - 관측: 2026-10-20 23:49~23:58 Asia/Seoul. 세부 UTC 시각은 각 artifact에 있습니다.
 - 기준: `codex/docs-tcp-draft`, HEAD `ebc61ad4f0700e71437315a255872c790093bb94` 위의 미커밋 작업 트리. 이 HEAD의 원격 CI·배포 성공을 주장하지 않습니다.
-- 대상: [TCP MDX](../../../apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx), 소켓 끝점과 새 패킷 흐름도의 SVG·PNG.
+- 대상: [TCP MDX](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx), 소켓 끝점과 새 패킷 흐름도의 SVG·PNG.
 - 환경: macOS, Node.js v24.12.0, pnpm 11.10.0, Next.js 16.3.8, Playwright Chromium. viewport 320/390/670/1280×1000, 실기기 아님.
 - [KAN-16](https://web-tech-service.atlassian.net/browse/KAN-16), [Confluence 운영 안내](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817/web-tech+Jira)에 검증 상태와 로컬-only 범위를 연결합니다. 비공개 원문·화면·원시 로그는 외부 기록에 올리지 않습니다.
 

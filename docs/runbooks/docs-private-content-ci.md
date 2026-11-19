@@ -8,8 +8,8 @@ Node 24.22.1·pnpm 12.14.0과 고정 lockfile을 사용한다. 이번 작업에�
 
 ## 실행 순서
 
-1. 일반 PR은 기존 CI를 실행한다. 각 코드 job은 의존성 설치 전에 hosted checkout의 콘텐츠를 공개 합성 corpus로 교체한다. 이전 checkout 입력은 runner 임시 공간에 보존하고 키 혼입·로컬 실행·연결 경로는 거절한다. 기존 검사 명령과 timeout·retry는 유지한다.
-2. 콘텐츠 이전 구현을 별도 PR에서 검수한다. 승인된 main에 `apps/docs/scripts/build.ts`, `prepare-private-content.ts`, `content-release.lock.json`과 해당 빌드 명령이 있어야 한다. 이 CI 전용 PR은 해당 구현과 원문을 포함하지 않는다. 준비되지 않은 현재 main에서는 승인 사전 검사가 실패하는 것이 기대 동작이다.
+1. 일반 PR은 기존 CI를 실행한다. 각 코드 job은 의존성 설치 전에 hosted checkout의 콘텐츠를 공개 합성 corpus로 교체한다. 이전 checkout 입력과 대체할 그림은 runner 임시 공간에 보존하고 키 혼입·로컬 실행·연결 경로는 거절한다. 글 17개·archived 1개와 유효한 합성 PNG 9개를 코드에서 만들며 실제 원문·그림을 복제하지 않는다. 기존 검사 명령과 timeout·retry는 유지한다.
+2. 승인된 main에 `apps/docs/scripts/build.ts`, `prepare-private-content.ts`, `content-release.lock.json`과 해당 빌드 명령이 있어야 한다. PR #98로 이 통합은 반영됐다. 다만 보호 Environment와 별도 승인 신원은 후속이며, 준비되지 않은 보호 정책에서는 인증 사전 검사가 계속 실패해야 한다. Vercel Production 검증과 GitHub 인증 CI 성공을 혼동하지 않는다.
 3. 관리자가 별도 승인으로 `docs-private-content` Environment를 준비한다. required reviewer, 자기 승인 금지, 관리자 우회 금지와 정확히 main branch만 허용하는 custom deployment branch 정책이 필요하다. 실행자와 승인자가 달라야 하며 해당 요금제·저장소에서 정책을 실제 사용할 수 있는지 확인한다. 자동 생성·완화하지 않는다.
 4. 콘텐츠 저장소 하나의 읽기 전용 SSH 키만 해당 Environment의 `DOCS_PRIVATE_CONTENT_SSH_KEY`로 등록한다. 실제 값을 문서·PR·일반 repository secret에 넣지 않는다. 키 발급·등록은 이번 범위 밖이다.
 5. main에 반영된 `docs-private-content.yml`의 수동 실행에서 `approved_sha`에 실행할 main의 전체 40자리 SHA를 지정한다. workflow ref도 main이어야 한다. 선행 job은 입력·실행 SHA 일치와 콘텐츠 통합 준비 상태·원격 보호 정책을 키 없이 검사한다. PR 코드·태그·다른 SHA·정책 조회 실패는 거절한다.
@@ -25,15 +25,18 @@ pnpm exec tsc -p tsconfig.private-content-ci.json
 pnpm test:repo
 ```
 
-로컬 원본 작업 트리에 hosted corpus 교체 명령을 실행하지 않는다. 아래는 저장소 루트에서 실행하는 **공개 검수·커밋 완료 후**의 재현 절차다. `git archive HEAD`는 미커밋·미추적 파일을 읽지 않으며 개인 키·원시 자료를 포함한 checkout을 rsync로 통째로 복제하지 않는다. 추적된 public 에셋·합성 예제 코드는 기존 회귀에 필요하므로 유지한다. 운영 `.env`·Git·이전 출력물과 원문 두 디렉터리는 가져오지 않는다.
+로컬 원본 작업 트리에 hosted corpus 교체 명령을 실행하지 않는다. 아래는 저장소 루트에서 실행하는 **공개 검수·커밋 완료 후**의 재현 절차다. `git archive HEAD`는 미커밋·미추적 파일을 읽지 않으며 개인 키·원시 자료를 포함한 checkout을 rsync로 통째로 복제하지 않는다. 앱 공용 public 에셋·합성 예제 코드는 유지하되 합성 PNG와 같은 경로의 원본은 export에서 제외한다. 운영 `.env`·Git·이전 출력물과 원문 두 디렉터리는 가져오지 않는다. 임시 디렉터리에는 소유자 전용 권한을 사용한다.
 
 ```sh
 # 시작 위치: 공개 코드 저장소 루트. POSIX shell과 tar가 필요하다.
 FIXTURE=$(mktemp -d)
+chmod 700 "$FIXTURE"
 git archive --format=tar HEAD | tar -xf - -C "$FIXTURE" \
   --exclude='apps/docs/data' --exclude='apps/docs/category' \
   --exclude='*/.env' --exclude='*/.env.*' --exclude='.env*' \
-  --exclude='*/.next' --exclude='*/.vercel' --exclude='*/node_modules'
+  --exclude='*/.next' --exclude='*/.vercel' --exclude='*/node_modules' \
+  --exclude='apps/docs/public/diagrams/http-response-*.png' \
+  --exclude='apps/docs/public/diagrams/tcp-socket-endpoints.png'
 
 # 아래 명령은 반드시 생성한 임시 사본 안에서 실행한다.
 cd "$FIXTURE"
@@ -45,7 +48,7 @@ pnpm --filter docs test:content
 pnpm --filter docs test:lib
 ```
 
-`documents: 17`과 archived 1개, 총 18개의 frontmatter·본문 검사 통과를 확인한다. 임시 사본에 `.git`이 없으므로 Git 이력·staged 검사는 원래 코드 저장소 루트에서 실행한다. 위 로컬 export 함수를 쓰는 경로에는 hosted 환경 변수를 위조할 필요가 없다. 실제 CI CLI만 `GITHUB_ACTIONS=true`, `RUNNER_ENVIRONMENT=github-hosted`, `DOCS_CI_SYNTHETIC=1`, 정확한 `GITHUB_WORKSPACE`와 그 밖의 `RUNNER_TEMP`를 요구한다.
+`documents: 17`과 archived 1개, 총 18개의 frontmatter·본문 검사 통과를 확인한다. PNG는 CRC·압축 이미지 데이터를 가진 체커보드이며 반응형 폭·높이와 44px 등 기존 UI 검사 기준을 줄이지 않는다. 로컬 이미지 생성은 기존 파일·심볼릭 링크를 덮어쓰지 않는다. 임시 사본에 `.git`이 없으므로 Git 이력·staged 및 원문 재추적 방지 검사는 원래 코드 저장소 루트에서 실행한다. 위 로컬 export 함수를 쓰는 경로에는 hosted 환경 변수를 위조할 필요가 없다. 실제 CI CLI만 `GITHUB_ACTIONS=true`, `RUNNER_ENVIRONMENT=github-hosted`, `DOCS_CI_SYNTHETIC=1`, 정확한 `GITHUB_WORKSPACE`와 그 밖의 `RUNNER_TEMP`를 요구한다.
 
 ## 실패 대응과 복구
 

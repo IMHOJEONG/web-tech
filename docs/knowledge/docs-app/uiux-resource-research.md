@@ -112,5 +112,5 @@ Dialog를 닫은 뒤 포커스를 잃는 상황을 재현하고 복귀 위치를
 - [조사 작업 기록](../../worklog/2026-09/2026-09-21-uiux-resource-research.md)
 - [피드와 문서 역할 ADR](../../architecture/adr-0003-feed-and-docs-roles.md)
 - [문서 UI 재사용 정책](../../architecture/docs-document-ui-reuse-policy.md)
-- [현재 포커스 체크리스트](../../../apps/docs/data/shadcn/focus-management-checklist.mdx)
-- [현재 ARIA 사례](../../../apps/docs/data/shadcn/blocked-aria-hidden.mdx)
+- [현재 포커스 체크리스트](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/data/shadcn/focus-management-checklist.mdx)
+- [현재 ARIA 사례](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/data/shadcn/blocked-aria-hidden.mdx)

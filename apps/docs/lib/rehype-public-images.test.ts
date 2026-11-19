@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFile } from 'node:fs/promises'
+import fs from 'node:fs'
+import os from 'node:os'
+import path from 'node:path'
+import { pathToFileURL } from 'node:url'
+import { writeSyntheticCorpus } from '../../../scripts/prepare-ci-docs-content.mts'
 import { rehypePublicImages } from './rehype-public-images.ts'
 
 test('file-relative public diagrams render at their website URL', () => {
@@ -29,10 +34,14 @@ test('existing URLs and paths escaping public remain unchanged', () => {
     }
 })
 
-test('HTTP draft images exist for both file preview and public serving', async () => {
-    const articleUrl = new URL(
-        '../category/be/node-js/http-response-streaming-lab.mdx',
-        import.meta.url
+test('synthetic HTTP images exist for both file preview and public serving', async (t) => {
+    const root = fs.mkdtempSync(
+        path.join(os.tmpdir(), 'synthetic-image-paths-')
+    )
+    t.after(() => fs.rmSync(root, { recursive: true, force: true }))
+    writeSyntheticCorpus(root)
+    const articleUrl = pathToFileURL(
+        path.join(root, 'category/be/node-js/http-response-streaming-lab.mdx')
     )
     const article = await readFile(articleUrl, 'utf8')
     const images = [...article.matchAll(/!\[[^\]]*\]\(([^)]+)\)/g)]
@@ -43,9 +52,8 @@ test('HTTP draft images exist for both file preview and public serving', async (
         const image = { type: 'element', tagName: 'img', properties: { src } }
         rehypePublicImages()(image)
         const fileUrl = new URL(src, articleUrl)
-        const publicUrl = new URL(
-            `../public${image.properties.src}`,
-            import.meta.url
+        const publicUrl = pathToFileURL(
+            path.join(root, 'public', image.properties.src)
         )
         assert.equal(fileUrl.href, publicUrl.href)
         const bytes = await readFile(fileUrl)

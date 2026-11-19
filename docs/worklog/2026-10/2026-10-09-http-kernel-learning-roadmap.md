@@ -12,7 +12,7 @@ HTTP 클라이언트와 서버 사이의 커널 경로를 학습 문서로 정�
   도식과 용어, 관측 한계와 공식 참고 자료를 정리했습니다.
 - [학습 로드맵](../../todo/todo.md#nodejs에서-운영-인프라까지-학습-로드맵): 기존 글에서 출발하는 9단계의 질문·실험·상태·완료 조건을 기록했습니다.
   관련 목차와 [반복 절차](../../runbooks/docs-article-rendering-regression.md)도 연결했습니다.
-- [HTTP 초안](../../../apps/docs/category/be/node-js/http-response-streaming-lab.mdx): 운영체제 5단계 설명을 details로 추가했습니다.
+- [HTTP 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/http-response-streaming-lab.mdx): 운영체제 5단계 설명을 details로 추가했습니다.
   실행 코드와 이미지·공개 상태는 변경하지 않았습니다.
 
 ## Notes

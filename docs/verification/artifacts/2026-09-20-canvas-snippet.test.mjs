@@ -1,12 +1,9 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { runInNewContext } from "node:vm";
+import { readHistoricalArticle } from "../../../scripts/historical-article-source.mts";
 
-const article = readFileSync(
-  new URL("../../../apps/docs/data/canvas/readme.md", import.meta.url),
-  "utf8",
-);
+const article = readHistoricalArticle("apps/docs/data/canvas/readme.md");
 const solution = article
   .split("### 해결 방법")[1]
   .match(/```js\n([\s\S]*?)```/)[1];

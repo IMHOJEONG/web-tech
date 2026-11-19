@@ -3,7 +3,7 @@
 ## 대상과 조건
 
 - 검증: 2026-10-29 KST. 사용자 게시 승인 후 최신 main `0da7979b1d43c80ed28873a66fa9be222b2534d4`에서 Brotli 기고 커밋만 분리했다.
-- 글: [Node.js Brotli 취약점, 실행 중인 런타임까지 확인하기](../../../apps/docs/category/be/node-js/node-brotli-runtime-security.mdx). `status: published`, 게시일·갱신일 2026-10-29. 기존 본문·출처·도식은 유지한다.
+- 글: [Node.js Brotli 취약점, 실행 중인 런타임까지 확인하기](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/node-brotli-runtime-security.mdx). `status: published`, 게시일·갱신일 2026-10-29. 기존 본문·출처·도식은 유지한다.
 - 게시 상태의 MDX SHA-256: `d160b25a174df4d1ae66b50cef7ffab633f5341302d974adfb9a197c961d3e4b`.
 - 격리 빌드의 checkout은 `a86ecbfebd77fdac462569025258b8ecd144edc3`이며 미커밋 차이는 이 글의 `status`·두 날짜 세 필드뿐이었다. 이 변경을 포함한 게시 커밋은 `2ac0f1d84058098c7c3d31a0057429b9488c1ccc`다. checkout·MDX hash·세 필드 차이를 함께 확인해 같은 게시 상태를 검사했다. 위 hash는 실제 빌드 디렉터리에서도 일치했다. 두 커밋 간 나머지 변경은 운영 검증 문서·증거·목차이며 앱 실행 코드는 같다.
 - Node 24.22.1, pnpm 12.14.0, Next.js 16.4.3, Playwright 1.62.1. 원격 목록과 개발 검사 UI를 끈 격리 production 서버, 390/1280px × light/dark 4조건.

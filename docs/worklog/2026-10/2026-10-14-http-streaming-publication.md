@@ -6,7 +6,7 @@
 
 ## Changed
 
-- [게시 원문](../../../apps/docs/category/be/node-js/http-response-streaming-lab.mdx): 게시 상태와 게시일을 2026-10-14로 전환했습니다.
+- [게시 원문](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/http-response-streaming-lab.mdx): 게시 상태와 게시일을 2026-10-14로 전환했습니다.
 - 네 도식의 SVG·PNG 원본과 모바일/데스크톱 그림, 상대 public 이미지 경로 변환과 대응하는 렌더러·검사를 포함합니다.
 - TCP 초안, 개발 preview 라우트·제목 스타일, 다른 학습 문서와 작업 변경은 포함하지 않습니다.
 

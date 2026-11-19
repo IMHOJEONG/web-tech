@@ -6,7 +6,7 @@
 
 ## Changed
 
-- [TCP 초안](../../../apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx): 용어·결과를 앞에 배치하고 실행 코드 5개를 접었습니다. 오늘 소켓 출력, ACK와 캡처 통계의 한계, 다음 CPU 실험 질문을 정리했습니다.
+- [TCP 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx): 용어·결과를 앞에 배치하고 실행 코드 5개를 접었습니다. 오늘 소켓 출력, ACK와 캡처 통계의 한계, 다음 CPU 실험 질문을 정리했습니다.
 - [패킷 도식 원본](../../../apps/docs/public/diagrams/tcp-socket-packet-flow.svg)과 PNG: 10월 11일 별도 캡처의 실제 12행을 표현합니다.
 - [검증 보고서](../../verification/content/2026-10-16-tcp-draft-preparation.md), 원본 증거와 역할별 목차를 연결했습니다.
 

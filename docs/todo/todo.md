@@ -574,15 +574,15 @@ CPU 0/200ms를 각각 3회 실행하고 실험실 화면과 학습 문서에 반
 
 ### 1. 스트림
 
-- 기존 [백프레셔 글](../../apps/docs/category/be/node-js/stream-backpressure-diagnosis.mdx)의 API 동작을 이해합니다. 완료 조건: `write() === false` 이후 추가 쓰기를 멈추고 `drain` 이후 재개하는 흐름과 최종 데이터 보존을 기존 검사로 확인합니다.
+- 기존 [백프레셔 글](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/stream-backpressure-diagnosis.mdx)의 API 동작을 이해합니다. 완료 조건: `write() === false` 이후 추가 쓰기를 멈추고 `drain` 이후 재개하는 흐름과 최종 데이터 보존을 기존 검사로 확인합니다.
 
 ### 2. HTTP 수신
 
-- 기존 [HTTP 초안](../../apps/docs/category/be/node-js/http-response-streaming-lab.mdx)의 정상·버퍼링·취소를 각 3회 실행합니다. 전체 본문 보존, 정상 완료와 미완료 취소의 차이를 검사합니다. 실행 검증은 완료했고 10-14 사용자 승인으로 게시했습니다. [Production·공개 본문·그림·sitemap 검증](../verification/content/2026-10-14-http-streaming-publication.md#production-배포-후-확인)을 완료했습니다.
+- 기존 [HTTP 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/http-response-streaming-lab.mdx)의 정상·버퍼링·취소를 각 3회 실행합니다. 전체 본문 보존, 정상 완료와 미완료 취소의 차이를 검사합니다. 실행 검증은 완료했고 10-14 사용자 승인으로 게시했습니다. [Production·공개 본문·그림·sitemap 검증](../verification/content/2026-10-14-http-streaming-publication.md#production-배포-후-확인)을 완료했습니다.
 
 ### 3. 소켓·TCP
 
-- [소켓 초안](../../apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx)의 서버 대기·양쪽 연결 주소와 포트를 관측했습니다. fixture와 실제 MDX를 각각 3회 실행해 클라이언트 localPort = 서버 연결 remotePort, 클라이언트 remotePort = 서버 연결 localPort = 대기 포트를 검사했습니다.
+- [소켓 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx)의 서버 대기·양쪽 연결 주소와 포트를 관측했습니다. fixture와 실제 MDX를 각각 3회 실행해 클라이언트 localPort = 서버 연결 remotePort, 클라이언트 remotePort = 서버 연결 localPort = 대기 포트를 검사했습니다.
 - macOS `lsof`에서 같은 프로세스의 LISTEN 1개와 ESTABLISHED 2개를 대조했습니다. 원문 바인딩·strict 타입·동작·음성 검사 11개 통과. [실행 증거와 한계](../verification/content/2026-10-10-node-socket-kernel-observation.md)를 확인합니다.
 - 10-11 관리자 권한으로 한 연결의 SYN·ACK·요청/응답·양방향 FIN·최종 ACK까지 캡처했습니다. 순서 번호·ACK 대조와 drop 0을 확인했습니다. [실제 패킷 검증](../verification/content/2026-10-11-node-tcp-packet-capture.md)과 [재현 절차](../runbooks/node-tcp-local-observation.md)를 확인합니다. 커널 버퍼 크기·내부 함수는 미계측이며 사용자 검토 후 다음 단계로 진행합니다.
 
@@ -622,7 +622,7 @@ CPU 0/200ms를 각각 3회 실행하고 실험실 화면과 학습 문서에 반
 
 ### 9. 종료·시간 제한·장애 관측
 
-- 기존 [Timeout·Retry 글](../../apps/docs/category/be/node-js/http-timeout-retry-boundary.mdx)을 기반으로 정상 완료·명시적 취소·응답 지연에 의한 시간 제한·상대 연결 중단을 로컬 시험 서버에서 각 3회 주입합니다. 주입한 원인·요청 ID·본문 완료·종료·분류 로그를 대조합니다. 주입 원인과 분류가 같고 취소 후 타이머·연결이 정리되어야 합니다. 운영의 close만으로 원인을 단정하지 않습니다.
+- 기존 [Timeout·Retry 글](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/http-timeout-retry-boundary.mdx)을 기반으로 정상 완료·명시적 취소·응답 지연에 의한 시간 제한·상대 연결 중단을 로컬 시험 서버에서 각 3회 주입합니다. 주입한 원인·요청 ID·본문 완료·종료·분류 로그를 대조합니다. 주입 원인과 분류가 같고 취소 후 타이머·연결이 정리되어야 합니다. 운영의 close만으로 원인을 단정하지 않습니다.
 
 ### 매 단계의 진행 방식
 

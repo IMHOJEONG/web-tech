@@ -6,7 +6,7 @@
 
 ## Changed
 
-- [Node.js backpressure 글](../../../apps/docs/category/be/node-js/stream-backpressure-diagnosis.mdx): 기초 용어, 실행 결과, Next.js 스트리밍 연결과 관찰 절차를 포함한다.
+- [Node.js backpressure 글](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/stream-backpressure-diagnosis.mdx): 기초 용어, 실행 결과, Next.js 스트리밍 연결과 관찰 절차를 포함한다.
 - Codex 자동 실행 `heapforge-2`: 승인된 글 한 편을 검사하고 기존 배포 경로로 커밋·푸시한 뒤 운영 글과 사이트맵을 확인한다. 승인된 글이 없으면 초안을 작성해 검토를 요청한다.
 - 후속 사용자 지시로 커밋을 보류했다. 자동 실행에도 커밋·푸시·배포 재승인 전까지 로컬 준비만 수행하도록 반영했다.
 - 실행 예제를 `.mts`와 TypeScript 코드 블록으로 바꾸고 `Writable`, `Iterable<Buffer>`, `Promise<void>`, 쓰기 콜백 타입을 명시했다.

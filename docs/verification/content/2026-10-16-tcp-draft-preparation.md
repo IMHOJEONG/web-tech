@@ -3,7 +3,7 @@
 ## 대상과 조건
 
 - 날짜: 2026-10-16 Asia/Seoul. 기준 커밋 `2a0ec98` 위의 미커밋 작업입니다.
-- 대상: [기존 TCP 초안](../../../apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx). HTTP 글 다음 순서이며 새 초안을 중복 생성하지 않았습니다.
+- 대상: [기존 TCP 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx). HTTP 글 다음 순서이며 새 초안을 중복 생성하지 않았습니다.
 - macOS, Node.js v24.12.0, Chromium의 320/390/1280px viewport입니다. 실기기 검사는 아닙니다.
 - 글은 `status: draft`로 유지합니다. 초기 편집에서는 코드 5개가 변경 전후 동일했고, 이후 사용자 승인에 따른 보강에서 3/5 블록에 선택형 캡처 대기를 추가했습니다. 기존 로컬 실험실의 원문 바인딩을 재사용합니다.
 

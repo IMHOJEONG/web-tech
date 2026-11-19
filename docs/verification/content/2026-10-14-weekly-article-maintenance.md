@@ -90,5 +90,5 @@ HTTP 코드 조립 안내의 중복과 TCP의 local/remote 조사를 정리하�
 ## 관련 문서
 
 - [이번 작업 기록](../../worklog/2026-10/2026-10-14-weekly-article-maintenance.md)
-- [HTTP 초안](../../../apps/docs/category/be/node-js/http-response-streaming-lab.mdx)
-- [소켓 초안](../../../apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx)
+- [HTTP 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/http-response-streaming-lab.mdx)
+- [소켓 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx)
