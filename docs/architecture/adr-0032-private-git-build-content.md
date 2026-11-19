@@ -38,6 +38,8 @@
 
 이 ADR은 `private-git` 모드에만 적용한다. NAS snapshot 계약과 기존 fail-fast 정책은 삭제하지 않는다. 2026-11-19 Production 전환·공개 접속 검증 결과는 [검증 보고서](../verification/content/2026-11-17-private-git-content.md#2026-11-19-production-전환-완료)에 연결하며 GitHub 인증 CI 활성화와 NAS 전용 글 이전은 후속으로 남긴다.
 
+후속 사용자 승인으로 공개 사본 정리 브랜치에서는 운영 고정 커밋·검수 해시·공개 사본 bytes가 일치한 글 17개·자산 15개만 제거한다. 미이전 draft/archived 6개와 그 밖의 앱 공용·미참조 자산은 유지한다. 단위·일반 CI는 합성 글과 합성 그림을 사용하고, 실제 발행본 검증은 별도 경로로 분리한다. 과거 기록은 삭제 전 공개 커밋의 permalink를 유지하며 과거 Git 이력·stash는 재작성하지 않는다. 이 정리의 로컬 커밋·검증과 main 반영·운영 배포를 구분한다.
+
 ## 관련 문서
 
 - [전환·복구 절차](../runbooks/docs-private-git-content.md)
