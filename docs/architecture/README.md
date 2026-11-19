@@ -6,7 +6,7 @@
 
 ## ADR 상태
 
-- [ADR-0032: 비공개 Git 발행본을 빌드 입력으로 사용](adr-0032-private-git-build-content.md): 적용 중. 선택형 로더·검수·고정 revision·NAS 차단을 운영 전환 전용 PR로 검증. 승인된 main의 Vercel 전환은 후속 실행하며 인증 CI 활성화·공개 원문 삭제는 별도.
+- [ADR-0032: 비공개 Git 발행본을 빌드 입력으로 사용](adr-0032-private-git-build-content.md): 적용 중. PR #98 main 병합과 동일 SHA의 Production 전환·공개 독자 검증 완료. 고정 발행본 17개 글·15개 자산을 사용하며 인증 CI 활성화·NAS 전용 글 이전은 후속. 공개 사본 삭제는 별도 검수한다.
 
 - [ADR-0033: 합성 PR 검사와 승인된 비공개 콘텐츠 검증 분리](adr-0033-content-ci-trust-boundary.md): 적용 중. CI 전용 PR의 합성 입력·정확한 승인 SHA·키 없는 사전 차단 구현. 콘텐츠 이전 구현·보호 Environment·실제 인증 검증·운영 전환은 별도.
 

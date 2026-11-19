@@ -3,7 +3,7 @@
   "entries": [
     {
       "path": "docs/architecture/adr-0032-private-git-build-content.md",
-      "sha256": "007d0e52f5a420292d6335d60bfec051cad48ffea56f28f56c4a835a8f35a9ce",
+      "sha256": "3bdf54e95ca307d39c1f14e9bb1af479a9d54a493eee4c4f7f43d091dcd9983e",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
@@ -31,7 +31,7 @@
     },
     {
       "path": "docs/verification/content/2026-11-17-private-git-content.md",
-      "sha256": "6a896357ca4e87a886337f438c00f924c319b96987b228f5a86d470a0481e20e",
+      "sha256": "839e314a708b6f9fcd36694edf1953388a94a6a6bb0797324f64e655a5735b0e",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-17-private-git-content.md",
-      "sha256": "71eae3e5a8913eb20f556b85e1688d12c20a4032cfd7c559ba406451db0b4a65",
+      "sha256": "b71f2fe5fd317dccfa54ee51b4a0e7811af8a27d672240418296f5785fa4e1eb",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
@@ -171,7 +171,7 @@
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "9567f5d15f7ec4daf5a91d11ce28b07c7311a2b6eec45e4fb25351aca064ffe5",
+      "sha256": "06ea376f61f6baba30ed4d3f91103b920e417c76b004ef1b2670624a377867f8",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
