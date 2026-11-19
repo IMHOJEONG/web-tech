@@ -6,7 +6,7 @@
 - 대상: docs의 GitHub Actions 콘텐츠 입력과 자격 증명 경계
 - 결정일: 2026-11-18
 - 최종 검토: 2026-11-19
-- 적용 위치: KAN-80의 CI 전용 브랜치. Environment/secret 설정·main 병합·운영 전환은 미실행이다.
+- 적용 위치: 일반 합성 CI와 기존 수동 인증 workflow는 main에 반영됐다. 실행 Bot·사람 승인 ID와 실제 승인 이력 검사는 2026-11-19 전용 PR의 보완이며 main 미반영이다. 사용자가 설정한 보호 Environment와 네 신원 변수는 조회·정책 검사를 통과했다. secret·실행 환경 분리·실제 인증 CI는 미준비이며, Vercel Production의 비공개 Git 공급 전환과는 별개다.
 
 ## 배경
 
@@ -17,12 +17,15 @@
 ## 결정
 
 1. 일반 CI는 비공개 콘텐츠 키와 보호 Environment를 참조하지 않는다. Node 준비 후 의존성 설치 전에 임시 hosted checkout의 `data/category`를 합성 문서로 교체한다. checkout의 원본은 runner 임시 공간에 보존하며 로컬 실행·연결 경로·자격 증명 혼입은 거절한다. 기존 테스트 명령·timeout·retry·뷰포트 조건은 유지한다.
-2. 실제 원문은 별도 수동 workflow에서만 읽는다. `workflow_dispatch`, 원본 코드 저장소, `refs/heads/main`, branch 종류, 40자리 `approved_sha == github.sha`를 요구한다. 입력으로 다른 PR·브랜치·태그·가변 ref를 checkout하지 않는다.
+2. 실제 원문은 별도 수동 dispatch workflow에서만 읽는다. `workflow_dispatch`, 원본 코드 저장소, `refs/heads/main`, branch 종류, 40자리 `approved_sha == github.sha == github.workflow_sha`와 고정 workflow 경로를 요구한다. `approved_content_revision`은 같은 코드의 release lock revision과 같아야 한다. 입력으로 다른 PR·브랜치·태그·가변 ref를 checkout하지 않는다.
 3. secret이 없는 선행 job이 콘텐츠 통합 파일·빌드 명령·고정 lock 준비 상태를 확인한 뒤 원격 Environment를 조회한다. 별도 전환 구현이 아직 main에 없거나 지정 reviewer, 자기 승인 금지, 관리자 bypass 금지, 정확히 main branch만 허용하는 정책이 없거나 조회에 실패하면 다음 job은 시작하지 않는다. Environment를 코드가 자동 생성·완화하지 않는다.
-4. 후속 job은 `docs-private-content` Environment 승인을 받고 같은 SHA를 checkout한다. 콘텐츠 저장소 하나의 읽기 전용 키는 검증 step에만 전달한다. 의존성 설치에는 키가 없고, 설치 훅도 실행하지 않는다. 검증은 승인된 main의 코드를 실행하며 private Git SHA는 release lock으로 고정한다.
-5. 인증 job은 공유 캐시·빌드 산출물·원문·로그·화면을 업로드하지 않는다. 빌드 출력은 메모리에서 검사하고 키를 제거한 뒤 로컬 production 서버의 목록·검색·한/영 상세를 검증한다. Vercel·NAS·운영 배포 권한은 부여하지 않는다.
+4. 허용한 GitHub App Bot의 login·숫자 ID를 `github.actor`, `actor_id`, event sender, 실제 run API의 actor/triggering_actor와 대조한다. 사람 승인자도 별도의 login·숫자 ID로 고정한다. Environment reviewer는 이 사람 한 명이어야 하며 다른 사용자·Bot·Team을 허용하지 않는다. `run_attempt == 1`만 허용하고 사람이나 Bot의 재실행은 새 dispatch·새 승인으로 대체한다.
+5. 후속 job은 `docs-private-content` Environment 승인을 받고 같은 SHA를 checkout한다. 키 없이 의존성을 설치한 뒤 현재 보호 정책과 해당 run의 approval history를 다시 읽는다. 정확한 Environment ID·이름에 지정된 사람이 남긴 단일 `approved` 이력이 있어야 한다. 콘텐츠 저장소 하나의 읽기 전용 키는 마지막 검증 step에만 전달한다. 설치 훅은 실행하지 않고, 검증은 승인된 main 코드와 고정 release lock을 사용한다.
+6. 인증 job은 공유 캐시·빌드 산출물·원문·로그·화면을 업로드하지 않는다. 빌드 출력은 메모리에서 검사하고 키를 제거한 뒤 로컬 production 서버의 목록·검색·한/영 상세를 검증한다. Vercel·NAS·운영 배포 권한은 부여하지 않는다.
 
 GitHub Environment 승인은 코드가 생성하는 사람이 아니다. 한 계정을 사용자와 AI가 함께 쓰면 플랫폼 설정을 바꿀 권한까지 분리되지 않는다. 자기 승인을 막은 현재 결정에서는 실행 주체와 승인 주체를 분리해야 한다. 준비되지 않았다고 승인 기준을 낮추지 않는다.
+
+App의 설치 토큰은 공개 `web-tech` 저장소의 dispatch에만 사용하고, CI 전용 콘텐츠 read-only 키와 Vercel Production 키를 분리한다. 실제 App 키·권한·설치 범위·Environment·변수/secret 설정은 사용자 승인 후 별도 활성화한다. 설정 누락이나 메타데이터 조회 오류는 키 접근 전 실패로 유지한다. 해시 검수는 사람이 공개를 승인했다는 암호학적 증명이 아니며, 기존 공개 검수와 플랫폼 승인·자격 증명 분리를 함께 사용한다.
 
 ## 대안과 영향
 
@@ -40,3 +43,5 @@ GitHub Environment 승인은 코드가 생성하는 사람이 아니다. 한 계
 - [작업 기록](../worklog/2026-11/2026-11-18-content-ci-isolation.md)
 - [GitHub Environment 관리](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments): reviewer·자기 승인·branch 정책과 secret 접근 조건.
 - [GitHub의 pull_request_target 보안 경계](https://docs.github.com/en/actions/reference/security/securely-using-pull_request_target): 비신뢰 PR 코드를 권한 있는 문맥에서 실행하는 위험.
+- [GitHub 실행자·재실행 주체](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#github-context) · [실제 승인 이력 API](https://docs.github.com/en/rest/actions/workflow-runs#get-the-review-history-for-a-workflow-run).
+- [Confluence 지식: 실행 봇과 사람 승인](https://web-tech-service.atlassian.net/wiki/pages/19922945): 실행 기록과 구분한 개념·판단 기준. 실제 인증 활성화는 미완료다.

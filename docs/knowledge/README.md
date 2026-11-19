@@ -17,6 +17,7 @@
 - [웹 현대화 판단: Baseline·타입 설정·런타임](https://web-tech-service.atlassian.net/wiki/pages/19464193)
 - [보안 업데이트 운영: 패치·병합·배포·알림 해소](https://web-tech-service.atlassian.net/wiki/pages/19496961)
 - [콘텐츠 캐시 운영: 무효화와 최신 게시 완료](https://web-tech-service.atlassian.net/wiki/pages/19234822)
+- [인증 CI 권한 분리: 실행 봇과 사람 승인](https://web-tech-service.atlassian.net/wiki/pages/19922945): 실제 자격 증명 분리·두 SHA의 승인·재실행 경계. 원격 활성화는 미완료다.
 
 - 구현 중 반복적으로 설명하게 되는 내용은 여기에 승격합니다.
 - 단발성 메모는 `worklog`에 남기고, 재사용 가치가 생기면 여기로 옮깁니다.
