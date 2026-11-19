@@ -31,7 +31,7 @@
     },
     {
       "path": "docs/verification/content/2026-11-17-private-git-content.md",
-      "sha256": "53ca06681938b9da37c6913472074d3cfdf5b1adff8bb3a7aeb1cc5a22763b42",
+      "sha256": "6a896357ca4e87a886337f438c00f924c319b96987b228f5a86d470a0481e20e",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
@@ -45,7 +45,7 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-17-private-git-content.md",
-      "sha256": "b66a961da1c968699752f7be2c76c2462c636bc79cc1f1e2368cd6b4dfb7b564",
+      "sha256": "71eae3e5a8913eb20f556b85e1688d12c20a4032cfd7c559ba406451db0b4a65",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",

@@ -119,3 +119,13 @@ Next.js의 보안 종료를 해소하고 표준 빌드의 exit 0을 확인해야
 | 원격·운영       | 이 시점은 전환 PR 생성 전이다. 운영 baseline·브랜치 main·콘텐츠 변수 메타데이터를 비공개 보관했고 Production 변수·도메인·NAS는 아직 변경하지 않았다. 원격 결과는 실제 PR·배포 SHA와 함께 후속 기록한다. |
 
 재현은 위 공통 명령과 runbook의 로컬 준비·운영 전환 절차를 따른다. 실제 로컬 사본·키 경로·환경 값·원시 로그는 공개하지 않는다. 빌드·검증 산출물도 공개 Git과 PR 첨부에서 제외한다.
+
+## PR #98 리뷰 보완과 초기 CI
+
+[PR #98](https://github.com/IMHOJEONG/web-tech/pull/98)의 최초 head `63025553`에서 [CI 44438757533](https://github.com/IMHOJEONG/web-tech/actions/runs/44438757533)은 모바일 태그·모음 이동 2건으로 실패했다. 상세 production·데스크톱·태블릿·오프라인·공용 UI·단위 검사와 별도 문서·CodeQL 검사는 통과했다. 모바일 결과는 158개 통과·11개 기존 skip·2개 실패이며, 실패한 실행을 성공으로 바꾸어 기록하지 않는다. 태그 해제·모음 선택 등에서 URL이 이전 값에 머물렀지만, 기존 로그만으로 hydration·서버 지연·prefetch 중 하나를 근본 원인으로 확정할 수 없다.
+
+같은 모바일 파일을 `DOCS_CONTENT_SOURCE=legacy DOCS_E2E_PORT=3948 pnpm --filter docs test:e2e content-discovery.spec.ts --project=chromium-mobile --repeat-each=3`으로 실행해 9회 모두 통과했다. 로컬 미재현을 원격 문제 해결로 간주하지 않으며 테스트 기준·timeout·retry는 변경하지 않았다.
+
+리뷰에서는 명시한 revision이 lock과 달라도 빌드 wrapper가 덮어쓰는 경로를 보완했다. 누락·일치 값은 허용하고, 다른 SHA·빈 값·mutable ref는 인증·Git·생성 쓰기 전에 거절한다. 생성 자산의 중간 쓰기 실패 때 이번 시도가 만든 동일 inode 파일만 정리해 재시도 후 소유 기록에서 누락되지 않게 했다. 기존 앱 파일은 보존한다. 소유 자산의 같은 URL 덮어쓰기를 허용하자는 제안은 runbook의 불변 자산 정책과 충돌하므로 채택하지 않고, 같은 경로 교체 거절·버전 경로 성공 회귀로 정책을 고정했다.
+
+보완 후 콘텐츠 50개와 Node 테스트 타입·변경 코드 lint를 통과했다. localhost 합성 서버가 필요한 첫 샌드박스 실행의 EPERM은 별도로 보존했고, 승인된 재실행에서 통과했다. 앞선 PR #97의 main CI도 최초 upstream-503 probe 응답 완료 검사 실패 후 동일 SHA의 실패 job만 재실행한 2차 실행에서 성공했다. 이를 이번 공급 경로의 인증 검사나 원인 확정으로 확대하지 않는다. 원격 재검증과 운영 전환 결과는 별도 확인 단계다.
