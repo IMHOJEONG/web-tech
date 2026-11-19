@@ -2,6 +2,48 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/process/issue-tracking.md",
+      "sha256": "4db9990e14d7675068af5c1aec3b3a24854c139e842805d5804509b7bc486987",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자가 최종 공통 지침·색인·작업 기록 6개 파일과 문서 5개 승인 해시 기록의 공개·커밋·푸시·PR 생성을 명시 승인함. 작업/지식 분리·승격 조건·원본 책임·정제 검증 요약과 실제 지식 링크의 최종 bytes를 검수함. 기존 MWG 설치·스캔·초안·stash·NAS·원시 자료·비밀값·Confluence 전문·공유 권한 변경·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/process/codex-documentation-policy.md",
+      "sha256": "19f526e764d38fee504278ec58431bb4fa7ce27f0164e7d2e388d29aa265f1d0",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자가 최종 공통 지침·색인·작업 기록 6개 파일과 문서 5개 승인 해시 기록의 공개·커밋·푸시·PR 생성을 명시 승인함. 작업/지식 분리·승격 조건·원본 책임·정제 검증 요약과 실제 지식 링크의 최종 bytes를 검수함. 기존 MWG 설치·스캔·초안·stash·NAS·원시 자료·비밀값·Confluence 전문·공유 권한 변경·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-19-confluence-knowledge-separation.md",
+      "sha256": "5884497f88726c9b6996ddd109d6dda76d55196d19386660152bb556c68a87cc",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자가 최종 공통 지침·색인·작업 기록 6개 파일과 문서 5개 승인 해시 기록의 공개·커밋·푸시·PR 생성을 명시 승인함. 작업/지식 분리·승격 조건·원본 책임·정제 검증 요약과 실제 지식 링크의 최종 bytes를 검수함. 기존 MWG 설치·스캔·초안·stash·NAS·원시 자료·비밀값·Confluence 전문·공유 권한 변경·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/architecture/adr-0032-private-git-build-content.md",
       "sha256": "007d0e52f5a420292d6335d60bfec051cad48ffea56f28f56c4a835a8f35a9ce",
       "kind": "document",
@@ -269,11 +311,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "aada732eeb91d2ae6841dace171b100965eac1bc48bf98b67d4b96afbe713131",
+      "sha256": "c26f60a908b44113d8608c429fd8e48748f0520cbcba52b9cddaa7dc81228fc8",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
+      "note": "사용자가 최종 공통 지침·색인·작업 기록 6개와 문서 5개 승인 해시의 공개·커밋·푸시·PR 생성을 명시 승인함. 기존 월별 목차를 보존하고 지식·작업 기록 분리의 정제 기록 링크만 추가한 최종 bytes를 검수함. MWG·초안·stash·NAS·원시 자료·비밀값·Confluence 전문·공유 권한 변경·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -563,11 +605,11 @@
     },
     {
       "path": "docs/knowledge/README.md",
-      "sha256": "ca09e7c3e44b296a69ed7cf470b3ba33aae90b6d4da6b61d4ea4fcf0bdd395c8",
+      "sha256": "0ab7f85ac1ee68256d826f12f9b946ed95d8be7ed5e3b93906f358ce64ff0d61",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-09",
-      "note": "사용자가 PR #67 기존 공개 문서·목차의 재검수·해시 등록을 명시 승인함. 기존 설명·실패 이력과 최신 main 통합·75개 기하 및 CPU 반복·관련 최초1실패와 재실행·경고·미검증 범위를 직접 검수함. 원시 로그·실제 응답·개인 경로·비밀값·캡처 없음. PR67 이력 재구성·1회 비조상 예외는 별도 승인 범위이며 다른 WIP·NAS·자격증명은 제외함.",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자가 최종 공통 지침·색인·작업 기록 6개와 문서 5개 승인 해시의 공개·커밋·푸시·PR 생성을 명시 승인함. 기존 지식 색인을 보존하고 생성된 Confluence 주제 3개 링크·원본 역할을 연결한 최종 bytes를 검수함. MWG·초안·stash·NAS·원시 자료·비밀값·Confluence 전문·공유 권한 변경·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

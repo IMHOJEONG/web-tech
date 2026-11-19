@@ -12,6 +12,12 @@
 
 ## 운영 규칙
 
+작업 실행 이력과 배운 지식은 [분리 기준](../process/issue-tracking.md#작업-기록과-배운-지식의-분리)을 따릅니다. Confluence에는 재사용할 개념·교훈을 주제별로 설명하고 이 저장소에는 구현에 결합된 원본과 탐색 링크를 유지합니다. 아래 지식 페이지는 실제 생성된 문서이며, 이 색인과 공통 지침의 main 반영 여부는 작업 기록과 구분합니다.
+
+- [웹 현대화 판단: Baseline·타입 설정·런타임](https://web-tech-service.atlassian.net/wiki/pages/19464193)
+- [보안 업데이트 운영: 패치·병합·배포·알림 해소](https://web-tech-service.atlassian.net/wiki/pages/19496961)
+- [콘텐츠 캐시 운영: 무효화와 최신 게시 완료](https://web-tech-service.atlassian.net/wiki/pages/19234822)
+
 - 구현 중 반복적으로 설명하게 되는 내용은 여기에 승격합니다.
 - 단발성 메모는 `worklog`에 남기고, 재사용 가치가 생기면 여기로 옮깁니다.
 - 문서는 파트 기준으로 나눕니다.
