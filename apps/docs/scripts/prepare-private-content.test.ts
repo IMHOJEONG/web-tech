@@ -315,6 +315,137 @@ test('an existing application asset cannot be overwritten by the content reposit
     )
 })
 
+test('owned generated assets remain immutable and approved changes need a versioned path', async (t) => {
+    const directory = root(t)
+    const first = {
+        'data/v8/demo.mdx': published('![Figure](/images/figure-v1.png)'),
+        'public/images/figure-v1.png': 'synthetic first image',
+    }
+    await stagePrivateContent(
+        directory,
+        release,
+        reader(first),
+        reviewed(first)
+    )
+    const ownership = fs.readFileSync(
+        path.join(directory, '.generated-content/assets.json'),
+        'utf8'
+    )
+    const replacement = {
+        ...first,
+        'public/images/figure-v1.png': 'synthetic changed image',
+    }
+    await assert.rejects(
+        stagePrivateContent(
+            directory,
+            release,
+            reader(replacement),
+            reviewed(replacement)
+        ),
+        /conflicts/
+    )
+    assert.equal(
+        fs.readFileSync(
+            path.join(directory, 'public/images/figure-v1.png'),
+            'utf8'
+        ),
+        first['public/images/figure-v1.png']
+    )
+    assert.equal(
+        fs.readFileSync(
+            path.join(directory, '.generated-content/assets.json'),
+            'utf8'
+        ),
+        ownership
+    )
+    const second = {
+        'data/v8/demo.mdx': published('![Figure](/images/figure-v2.png)'),
+        'public/images/figure-v2.png': 'synthetic changed image',
+    }
+    await stagePrivateContent(
+        directory,
+        release,
+        reader(second),
+        reviewed(second)
+    )
+    assert.equal(
+        fs.existsSync(path.join(directory, 'public/images/figure-v1.png')),
+        false
+    )
+    assert.equal(
+        fs.readFileSync(
+            path.join(directory, 'public/images/figure-v2.png'),
+            'utf8'
+        ),
+        second['public/images/figure-v2.png']
+    )
+})
+
+test('failed ownership writes remove only newly created assets and retries retain ownership', async (t) => {
+    const directory = root(t)
+    fs.mkdirSync(path.join(directory, 'public/images'), { recursive: true })
+    fs.writeFileSync(
+        path.join(directory, 'public/images/application.png'),
+        'application image'
+    )
+    const files = {
+        'data/v8/demo.mdx': published(
+            '![A](/images/application.png)\n![B](/images/generated.png)'
+        ),
+        'public/images/application.png': 'application image',
+        'public/images/generated.png': 'generated image',
+    }
+    const write = fs.writeFileSync
+    const failure = t.mock.method(
+        fs,
+        'writeFileSync',
+        (...args: Parameters<typeof write>) => {
+            if (
+                args[0] ===
+                path.join(directory, '.generated-content/assets.json')
+            ) {
+                throw new Error('synthetic ledger failure')
+            }
+            return write(...args)
+        }
+    )
+    await assert.rejects(
+        stagePrivateContent(directory, release, reader(files), reviewed(files)),
+        /synthetic ledger failure/
+    )
+    failure.mock.restore()
+    assert.equal(
+        fs.existsSync(path.join(directory, 'public/images/generated.png')),
+        false
+    )
+    assert.equal(
+        fs.readFileSync(
+            path.join(directory, 'public/images/application.png'),
+            'utf8'
+        ),
+        'application image'
+    )
+    await stagePrivateContent(
+        directory,
+        release,
+        reader(files),
+        reviewed(files)
+    )
+    const next = { 'data/v8/demo.mdx': published() }
+    await stagePrivateContent(directory, release, reader(next), reviewed(next))
+    assert.equal(
+        fs.existsSync(path.join(directory, 'public/images/generated.png')),
+        false
+    )
+    assert.equal(
+        fs.readFileSync(
+            path.join(directory, 'public/images/application.png'),
+            'utf8'
+        ),
+        'application image'
+    )
+})
+
 test('referenced but unreviewed assets and target symlinks are rejected', async (t) => {
     const directory = root(t)
     const files = {
@@ -387,6 +518,36 @@ test('legacy builds do not fetch private Git; private mode without a key fails c
     )
 })
 
+test('a configured mismatched revision fails before credentials, Git or generated writes', async (t) => {
+    const directory = root(t)
+    fs.writeFileSync(
+        path.join(directory, 'content-release.lock.json'),
+        JSON.stringify(release)
+    )
+    let calls = 0
+    for (const requested of ['b'.repeat(40), '', 'main']) {
+        await assert.rejects(
+            preparePrivateContent(
+                directory,
+                {
+                    DOCS_CONTENT_SOURCE: 'private-git',
+                    DOCS_PRIVATE_CONTENT_REVISION: requested,
+                },
+                () => {
+                    calls++
+                    throw new Error('must not run Git')
+                }
+            ),
+            /Configured content revision does not match the lock/
+        )
+    }
+    assert.equal(calls, 0)
+    assert.equal(
+        fs.existsSync(path.join(directory, '.generated-content')),
+        false
+    )
+})
+
 test('fetch uses a pinned SHA, isolated credentials and cleans up temporary keys', async (t) => {
     const directory = root(t)
     fs.writeFileSync(
@@ -449,6 +610,16 @@ test('fetch uses a pinned SHA, isolated credentials and cleans up temporary keys
     }
     assert.equal(await preparePrivateContent(directory, env, git), revision)
     assert.equal(fetched, 1)
+    assert.equal(fs.existsSync(checkout), false)
+    assert.equal(
+        await preparePrivateContent(
+            directory,
+            { ...env, DOCS_PRIVATE_CONTENT_REVISION: revision },
+            git
+        ),
+        revision
+    )
+    assert.equal(fetched, 2)
     assert.equal(fs.existsSync(checkout), false)
     await assert.rejects(
         preparePrivateContent(directory, env, (args, options) => {

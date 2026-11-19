@@ -311,6 +311,7 @@ export async function stagePrivateContent(
     safeTarget(appRoot, `.generated-content/${release.revision}/ready.json`)
     fs.mkdirSync(path.dirname(root), { recursive: true })
     const temporary = fs.mkdtempSync(path.join(path.dirname(root), 'staging-'))
+    const created: { target: string; dev: number; ino: number }[] = []
     try {
         for (const directory of ['data', 'category']) {
             fs.mkdirSync(path.join(temporary, directory))
@@ -342,10 +343,26 @@ export async function stagePrivateContent(
             const target = safeTarget(appRoot, name)
             if (fs.existsSync(target)) continue
             fs.mkdirSync(path.dirname(target), { recursive: true })
-            fs.writeFileSync(target, bytes, { flag: 'wx' })
+            const descriptor = fs.openSync(target, 'wx')
+            try {
+                const { dev, ino } = fs.fstatSync(descriptor)
+                created.push({ target, dev, ino })
+                fs.writeFileSync(descriptor, bytes)
+            } finally {
+                fs.closeSync(descriptor)
+            }
             nextOwned.push({ path: name, sha256: hash(bytes) })
         }
         fs.writeFileSync(ownershipFile, JSON.stringify(nextOwned))
+    } catch (error) {
+        // Never remove a pre-existing file or a path replaced by another writer.
+        for (const { target, dev, ino } of created) {
+            const current = fs.lstatSync(target, { throwIfNoEntry: false })
+            if (current?.dev === dev && current.ino === ino) {
+                fs.unlinkSync(target)
+            }
+        }
+        throw error
     } finally {
         fs.rmSync(temporary, { recursive: true, force: true })
     }
@@ -366,6 +383,12 @@ export async function preparePrivateContent(
             )
         )
     )
+    if (
+        env.DOCS_PRIVATE_CONTENT_REVISION !== undefined &&
+        env.DOCS_PRIVATE_CONTENT_REVISION !== release.revision
+    ) {
+        throw new Error('Configured content revision does not match the lock')
+    }
     const key = env.DOCS_PRIVATE_CONTENT_SSH_KEY?.trim()
     if (!key)
         throw new Error('Private content read-only deploy key is required')
