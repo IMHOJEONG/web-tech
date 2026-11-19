@@ -1,5 +1,7 @@
 # 2026-11 작업 기록
 
+- [11-19 Confluence 지식·작업 기록 분리](2026-11-19-confluence-knowledge-separation.md): 주제별 지식 3개 게시와 공통 승격·마감 기준의 로컬 반영. 기존 MWG·초안·NAS 작업 유지.
+
 - [비공개 Git 콘텐츠 공급과 운영 전환](2026-11-17-private-git-content.md)
 
 - [일반 PR과 승인된 콘텐츠 CI 분리](2026-11-18-content-ci-isolation.md)
