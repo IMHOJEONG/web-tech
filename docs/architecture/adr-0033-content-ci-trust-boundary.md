@@ -6,7 +6,7 @@
 - 대상: docs의 GitHub Actions 콘텐츠 입력과 자격 증명 경계
 - 결정일: 2026-11-18
 - 최종 검토: 2026-11-19
-- 적용 위치: KAN-80의 CI 전용 브랜치. Environment/secret 설정·main 병합·운영 전환은 미실행이다.
+- 적용 위치: 일반 합성 CI와 기존 수동 인증 workflow는 main에 반영됐다. 원래 결정 본문은 유지하며 실행 신원 고정·재실행 금지는 [후속 ADR-0034](adr-0034-content-ci-identity-approval.md)로 분리한다. 후속 구현은 PR #101에서 검증하며 main 미반영이다. 사용자가 설정한 보호 Environment와 네 신원 변수는 조회·정책 검사를 통과했다. secret·실행 환경 분리·실제 인증 CI는 미준비이며, Vercel Production의 비공개 Git 공급 전환과는 별개다.
 
 ## 배경
 
@@ -35,8 +35,11 @@ GitHub Environment 승인은 코드가 생성하는 사람이 아니다. 한 계
 
 ## 관련 문서
 
+- [ADR-0034: 실행 Bot·사람 승인 신원 고정](adr-0034-content-ci-identity-approval.md): 이 ADR의 합성/인증 경로 분리는 유지하고 새 권한 정책만 보완한다. 원래 결정을 폐기하거나 대체하지 않는다.
 - [CI 실행 절차](../runbooks/docs-private-content-ci.md)
 - [이번 로컬 회귀 결과](../verification/content/2026-11-18-content-ci-isolation.md)
 - [작업 기록](../worklog/2026-11/2026-11-18-content-ci-isolation.md)
 - [GitHub Environment 관리](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments): reviewer·자기 승인·branch 정책과 secret 접근 조건.
 - [GitHub의 pull_request_target 보안 경계](https://docs.github.com/en/actions/reference/security/securely-using-pull_request_target): 비신뢰 PR 코드를 권한 있는 문맥에서 실행하는 위험.
+- [GitHub 실행자·재실행 주체](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#github-context) · [실제 승인 이력 API](https://docs.github.com/en/rest/actions/workflow-runs#get-the-review-history-for-a-workflow-run).
+- [Confluence 지식: 실행 봇과 사람 승인](https://web-tech-service.atlassian.net/wiki/pages/19922945): 실행 기록과 구분한 개념·판단 기준. 실제 인증 활성화는 미완료다.

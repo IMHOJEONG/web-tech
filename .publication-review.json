@@ -2,6 +2,20 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/architecture/adr-0034-content-ci-identity-approval.md",
+      "sha256": "3c6b992b9f7c1490858873a349cb79fa8626667d00481d049f7d13fbc70ad99e",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/process/issue-tracking.md",
       "sha256": "4db9990e14d7675068af5c1aec3b3a24854c139e842805d5804509b7bc486987",
       "kind": "document",
@@ -437,11 +451,11 @@
     },
     {
       "path": "docs/architecture/adr-0033-content-ci-trust-boundary.md",
-      "sha256": "ec7a6d636f1a364d9289f474b28bffea0845a18b80a4eee9ee2431a888f08d63",
+      "sha256": "54f32f195f86174f367cfaac7dd9942e3ec3d4f5249d528628d700d99b35582d",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 인증 분리 코드·회귀와 정제 정책·절차·결과·목차의 공개 검수 후 작업별 커밋·푸시·PR·원격 CI 확인을 승인함. 최종 bytes의 비밀정보·개인 경로·권리·공개 의도를 검수함. 원시 자료·실제 원문·별도 이전 구현·기존 미커밋·stash·키·NAS·운영 전환은 제외함.",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -451,11 +465,11 @@
     },
     {
       "path": "docs/runbooks/docs-private-content-ci.md",
-      "sha256": "c94d2c37c67f73cfdcda40f3edb44c0efff7a4726044e52361cc400852d02d46",
+      "sha256": "3ff5ede7d7bc6332cb2059a01cfdcafa86ddad7305a8ffe3ff47b549e8048f14",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자 승인: 기존 문서 6개의 운영 완료·이전 완료 공개 사본 정리·합성 검사와 실제 발행본 검증·범위·한계만 정제하여 재검수. 원문·초안·원시 자료·실제 비밀값·stash 본문은 제외.",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -465,11 +479,11 @@
     },
     {
       "path": "docs/verification/content/2026-11-18-content-ci-isolation.md",
-      "sha256": "595c36d10a3590881ff84eb2c7cddd134b2ff7e73130f2f010278229eeff4f6b",
+      "sha256": "fcef3b454c7293c4affac95435f1b0a4ac973e63af254568544b7aa5234c3dce",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 인증 분리 코드·회귀와 정제 정책·절차·결과·목차의 공개 검수 후 작업별 커밋·푸시·PR·원격 CI 확인을 승인함. 최종 bytes의 비밀정보·개인 경로·권리·공개 의도를 검수함. 원시 자료·실제 원문·별도 이전 구현·기존 미커밋·stash·키·NAS·운영 전환은 제외함.",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -479,11 +493,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-18-content-ci-isolation.md",
-      "sha256": "7276f3c3253389c24a7312550cb833e8026926ebd3613bae122f3554781b1f0f",
+      "sha256": "1f92c7ed9f89338deec25c3cd2f1ecca3edd7ca42ebc3cdb48b0cdf77efc4fae",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 인증 분리 코드·회귀와 정제 정책·절차·결과·목차의 공개 검수 후 작업별 커밋·푸시·PR·원격 CI 확인을 승인함. 최종 bytes의 비밀정보·개인 경로·권리·공개 의도를 검수함. 원시 자료·실제 원문·별도 이전 구현·기존 미커밋·stash·키·NAS·운영 전환은 제외함.",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -549,11 +563,11 @@
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "e61daa0f2f36f3d40b8db654f475eceb0891d554bd9830e0cd8e11738fbbdd28",
+      "sha256": "31c54031f69fd084c46959007c35bbfe8c30af5bed49d530ae33e053215e3b81",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자 승인: 기존 문서 6개의 운영 완료·이전 완료 공개 사본 정리·합성 검사와 실제 발행본 검증·범위·한계만 정제하여 재검수. 원문·초안·원시 자료·실제 비밀값·stash 본문은 제외.",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -605,11 +619,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "9eeb0329e5f1ce74ea30eafbbf06b0c63c2d161a217780bbf09db31ab6b90836",
+      "sha256": "ce3f05a46eacffb5a387a7c8624672ce0b3853d90f5af3e432e18e4e68de18a5",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
+      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -647,11 +661,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "c26f60a908b44113d8608c429fd8e48748f0520cbcba52b9cddaa7dc81228fc8",
+      "sha256": "0e770fec4a3ff6e3aa9def70ddd8ee3e730b1c7f2eba099e153183d305746109",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 최종 공통 지침·색인·작업 기록 6개와 문서 5개 승인 해시의 공개·커밋·푸시·PR 생성을 명시 승인함. 기존 월별 목차를 보존하고 지식·작업 기록 분리의 정제 기록 링크만 추가한 최종 bytes를 검수함. MWG·초안·stash·NAS·원시 자료·비밀값·Confluence 전문·공유 권한 변경·main 병합·운영 배포는 제외함.",
+      "note": "사용자가 CI 코드·workflow 4개와 기존 문서 8개의 공개 검수·커밋·푸시·PR 준비를 승인함. 실행 Bot·사람 승인 경계·키 없는 보호 설정 조회·합성 회귀와 실제 미검증 범위를 검수함. 원문·키·원시 응답/로그·다른 미커밋·stash·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -941,11 +955,11 @@
     },
     {
       "path": "docs/knowledge/README.md",
-      "sha256": "0ab7f85ac1ee68256d826f12f9b946ed95d8be7ed5e3b93906f358ce64ff0d61",
+      "sha256": "4aa5f1afd51c0369de052b1cfd2f19df75fb540b0267f39bde5edd6c319cb334",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 최종 공통 지침·색인·작업 기록 6개와 문서 5개 승인 해시의 공개·커밋·푸시·PR 생성을 명시 승인함. 기존 지식 색인을 보존하고 생성된 Confluence 주제 3개 링크·원본 역할을 연결한 최종 bytes를 검수함. MWG·초안·stash·NAS·원시 자료·비밀값·Confluence 전문·공유 권한 변경·main 병합·운영 배포는 제외함.",
+      "note": "사용자가 CI 코드·workflow 4개와 기존 문서 8개의 공개 검수·커밋·푸시·PR 준비를 승인함. 실행 Bot·사람 승인 경계·키 없는 보호 설정 조회·합성 회귀와 실제 미검증 범위를 검수함. 원문·키·원시 응답/로그·다른 미커밋·stash·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

@@ -70,6 +70,72 @@ pnpm --filter docs exec playwright test --config=playwright.offline.config.ts of
 
 ## 한계와 후속 작업
 
+### 2026-11-19 실행 Bot·사람 승인 분리 보완
+
+기준 main `7fc4d12785059c3baade6fbfee92b3d1f41d11b3`, Node 24.22.1·pnpm 12.14.0의 별도 로컬 브랜치에서 검사했다. 기존 미커밋 작업 트리는 전환하거나 복사하지 않았다. 이 절은 실제 인증 CI 활성화 결과가 아니라 미커밋 코드의 합성 회귀 결과다.
+
+```sh
+node --test scripts/private-content-ci.test.mts scripts/browser-ci.test.mts
+pnpm exec tsc -p tsconfig.private-content-ci.json
+pnpm test:repo
+```
+
+| 검사                  | 관측 결과                                                                                                                                                                                                                                                                                             |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 인증 경계 회귀        | 27개 통과. 기존 입력·합성 corpus·runtime 검사를 유지하고 실행 Bot/사람 ID 누락·혼동, 다른 sender/실행자, 재실행, workflow SHA/경로 불일치, 콘텐츠 revision 불일치, 다른 reviewer/Team/Bot, 승인 누락·거절·중복·다른 Environment, 원격 run 교체, 403/404·네트워크 오류, 승인 후 정책 약화를 거절한다.  |
+| 기존 브라우저 CI 계약 | 6개 통과. 일반 CI에는 키·Environment를 추가하지 않았고 기존 이미지·실행 기준도 유지했다. 위 경계와 합쳐 33개이며 저장소 전체에 포함되므로 중복 합산하지 않는다.                                                                                                                                       |
+| 저장소 전체·타입      | 298개 통과, 전용 TypeScript 검사 통과. 최초 타입 검사는 합성 fixture의 배열 요소 nullability 한 건을 지적했고 검사를 낮추지 않고 fixture의 존재를 명시해 수정했다.                                                                                                                                    |
+| 설치 조건             | 격리 작업 트리의 첫 offline 설치는 캐시에 없는 tarball로 실패. 동일 frozen lockfile·ignore-scripts 온라인 설치 후 검증. package/lockfile 변경이나 새 의존성·설치 훅 승인 없음.                                                                                                                        |
+| 공개 경계             | 합성 입력과 정제 절차·결과만 변경. 실제 원문·키·API 응답·원시 로그·화면은 공개 파일에 추가하지 않는다. 바뀐 문서는 새 공개 승인을 받아 해시를 갱신하기 전 업로드하지 않는다.                                                                                                                          |
+| 실제 플랫폼           | 미실행. App 메타데이터는 404여서 소유자·설치 범위·권한은 미확인이다. 별도 공개 사용자 API에서는 실행 Bot과 소유자 User의 실제 login·숫자 ID를 확인했다. 보호 Environment·non-secret 변수·전용 키 설정은 사용자 승인 대기이며 실제 Bot dispatch·사람 승인·private fetch·빌드 성공으로 계산하지 않는다. |
+
+최초 로컬 점검에서 변경 12개 파일의 bytes를 공개 검사기의 `inspect`로 읽기 전용 검사했다. 결과는 정제 Markdown 8개의 `public-review-required`뿐이며 당시 공개 승인은 없었다. 기존 manifest를 자동 갱신하지 않고 업로드 차단을 유지했다. 이는 대표 패턴·변경 파일 검사이며 전체 비밀 전수 감사가 아니다. 기존 작업 트리 20곳의 HEAD·인덱스·status·수정 파일 해시와 작업 시작 시 stash 목록도 모두 동일했다.
+
+별도 지식 문서 [실행 봇과 사람 승인](https://web-tech-service.atlassian.net/wiki/pages/19922945)의 본문과 상위 경로를 확인하고 로컬 정책 원본과 연결한다. 지식 게시와 코드 원격 반영은 다르며 아직 새 커밋·푸시·PR·원격 CI·배포는 하지 않았다. 필요한 실제 변경의 최소 범위와 요금제 제약은 [runbook](../../runbooks/docs-private-content-ci.md#승인-전-확인할-최소-설정)을 따른다.
+
+### 2026-11-19 사용자 설정 후 실제 Environment 대조
+
+사용자가 Environment와 Repository variables를 직접 설정한 뒤 비밀값 없는 메타데이터만 조회했다. 첫 조회에서는 `prevent_self_review: false`여서 로컬 정책 검사기가 거절했다. 메모리 사본에서 그 필드만 `true`로 바꾸면 통과해 차단 지점을 확인했다. 원격 설정을 코드로 수정하거나 임시 승인 이력을 만들지 않았다.
+
+사용자가 `Prevent self-review`를 켜고 저장한 뒤 같은 API를 다시 조회했다. `readContentCiIdentity`와 `assertProtectedContentEnvironment`에 실제 응답을 메모리에서 전달해 전체 검사를 통과했다. 실제 응답·원문·비밀값은 파일이나 artifact로 저장하지 않았다.
+
+| 항목               | 최종 관측                                                                        |
+| ------------------ | -------------------------------------------------------------------------------- |
+| 신원 변수          | Bot·사람 login/숫자 ID 네 개가 기존 확인한 공개 신원과 일치.                     |
+| 승인 정책          | 지정한 사람 한 명, 자기 승인 금지, 관리자 우회 금지.                             |
+| 브랜치 제한        | custom 정책 한 개: `main`, 종류 `branch`. 태그·wildcard 없음.                    |
+| Environment secret | 목록 조회 결과 0개. 키 생성·등록·기존 Vercel 키 재사용 없음.                     |
+| 로컬 회귀          | 같은 경계·브라우저 CI 33개 재실행 통과. 검사 기준·timeout·retry 유지.            |
+| 실제 인증 CI       | 미실행. 이번 조회 성공은 Bot dispatch·사람 승인·콘텐츠 fetch 성공을 뜻하지 않음. |
+
+조회 명령은 코드 저장소 루트에서 실행한다. 아래는 설정 메타데이터와 비밀이 아닌 변수만 읽으며 secret의 값은 읽지 않는다.
+
+```sh
+gh api repos/IMHOJEONG/web-tech/environments/docs-private-content \
+  --jq '{name,can_admins_bypass,protection_rules,deployment_branch_policy}'
+gh api repos/IMHOJEONG/web-tech/environments/docs-private-content/deployment-branch-policies \
+  --jq '{total_count,branch_policies:[.branch_policies[]|{name,type}]}'
+gh api repos/IMHOJEONG/web-tech/actions/variables \
+  --jq '[.variables[]|select(.name|startswith("DOCS_CONTENT_CI_"))|{name,value}]'
+gh api repos/IMHOJEONG/web-tech/environments/docs-private-content/secrets \
+  --jq '{total_count,names:[.secrets[].name]}'
+node --test scripts/private-content-ci.test.mts scripts/browser-ci.test.mts
+```
+
+다음 단계는 로컬 보완 코드의 공개 검수·PR·main 반영과 소유자 인증에 접근하지 않는 실행 환경·런처 준비다. App 개인키와 CI 전용 read-only deploy key는 별개이며 아직 생성하지 않는다. 실제 키 사용과 인증 CI는 준비가 끝난 뒤 검증한다.
+
+### 2026-11-19 공개 승인 후 PR 준비 범위
+
+사용자가 CI 코드·workflow 4개와 기존 정제 문서 8개만 공개 검수·해시 등록·작업별 커밋·푸시·PR 준비하도록 명시 승인했다. 검수 목록은 이 문서 8개의 최종 인덱스 bytes에만 갱신한다. 실제 키·원문·원시 자료·다른 미커밋은 제외하며 main 병합과 실제 인증 CI 실행은 별도 승인 대상이다. 검사와 커밋·PR 결과는 KAN-80과 해당 PR에서 기준 head에 연결하고, 이전 로컬 결과를 원격 CI 성공으로 대체하지 않는다.
+
+커밋 전 전체 298개를 다시 실행했다. 첫 샌드박스 실행은 기존 보안 검사 두 개가 `127.0.0.1` listen `EPERM`으로 실패했고, 포트 사용을 허용한 동일 명령에서 298개 전부 통과했다. 전용 타입·문서 delta·stage 포맷·코드 공개 검사를 통과했으며 검사 기준·timeout·retry·의존성은 변경하지 않았다.
+
+### PR #101 첫 원격 검증과 문서 리뷰 보완
+
+코드·회귀 `31b45634`와 정제 문서·검수 해시 `a4feed93`를 분리해 푸시했다. head `a4feed936e14002ece65c417b4dbea64dbc710b7`의 [일반 CI](https://github.com/IMHOJEONG/web-tech/actions/runs/44543884457)는 attempt 1에서 13개 job 모두 성공했다. [문서 검사](https://github.com/IMHOJEONG/web-tech/actions/runs/44543884328), [CodeQL 분석](https://github.com/IMHOJEONG/web-tech/actions/runs/44543877449), 보안 검사·두 Preview도 성공했다. 이는 일반 합성 CI 결과이며 실제 인증 콘텐츠 workflow 실행은 아니다. job 재실행은 없었으나 이 메타데이터만으로 개별 E2E 내부 재시도 0회를 주장하지 않는다.
+
+CodeRabbit 첫 리뷰는 완료했고 문서 보완 2건을 남겼다. 검증 목차의 Environment·신원 변수 상태를 실제 조회 결과에 맞췄다. 사용자 추가 승인 후 새 [ADR-0034](../../architecture/adr-0034-content-ci-identity-approval.md)에 신원 고정·재실행 금지 결정을 분리하고 ADR-0033의 기존 결정 본문은 보존한다. ADR-0033의 경로 분리는 유지하므로 대체됨으로 표시하지 않는다. 보완 후 head의 CI·리뷰는 별도 확인하며 최초 head의 성공을 재사용하지 않는다.
+
 인증 사전 검사는 별도 이전 구현이 main에 반영되기 전에는 의도적으로 실패한다. 파일 존재·빌드 명령·lock 검사만으로 코드의 안전성을 증명하지 않으며, 승인된 main 검토와 사람 승인이 별도로 필요하다. 자기 승인을 금지하므로 실행자와 승인자가 다른 신원이어야 한다. 공유 관리자 계정의 사용자·AI 권한 분리도 별도 과제다.
 
 이번 범위에는 main 병합·수동 인증 CI 실행·운영 전환·NAS 변경이 없다. 원시 로그·trace·실제 응답·키는 공개하지 않는다. 기존 미커밋과 stash를 보존하고, CI 전용 브랜치에서만 공개 검수와 커밋을 수행한다.
@@ -77,6 +143,7 @@ pnpm --filter docs exec playwright test --config=playwright.offline.config.ts of
 ## 관련 문서
 
 - [ADR-0033](../../architecture/adr-0033-content-ci-trust-boundary.md)
+- [ADR-0034](../../architecture/adr-0034-content-ci-identity-approval.md)
 - [CI 실행 절차](../../runbooks/docs-private-content-ci.md)
 - [작업 기록](../../worklog/2026-11/2026-11-18-content-ci-isolation.md)
 - [KAN-80](https://web-tech-service.atlassian.net/browse/KAN-80)
