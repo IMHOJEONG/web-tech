@@ -1,5 +1,8 @@
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { readFileSync, mkdtempSync, rmSync } from 'node:fs'
+import os from 'node:os'
+import path from 'node:path'
+import { writeSyntheticCorpus } from '../../../scripts/prepare-ci-docs-content.mts'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import { test } from 'node:test'
@@ -9,6 +12,16 @@ import { matter } from 'vfile-matter'
 import type { MetadataRoute } from 'next'
 
 test('sitemap uses the public content pipeline', async (t) => {
+    const originalCwd = process.cwd()
+    const contentRoot = mkdtempSync(
+        path.join(os.tmpdir(), 'sitemap-synthetic-')
+    )
+    writeSyntheticCorpus(contentRoot)
+    process.chdir(contentRoot)
+    t.after(() => {
+        process.chdir(originalCwd)
+        rmSync(contentRoot, { recursive: true, force: true })
+    })
     // Bundle aliases for Node; mock only HTTP and the server-only marker so
     // normalization, publication filtering and local MDX loading stay real.
     const result = await build({
@@ -51,6 +64,8 @@ test('sitemap uses the public content pipeline', async (t) => {
     )
     const sitemap = compiledModule.exports.default
     const environmentKeys = [
+        'DOCS_CONTENT_SOURCE',
+        'DOCS_PRIVATE_CONTENT_REVISION',
         'DOCS_SITE_URL',
         'BLOG_CONTENT_INCLUDE_REMOTE_INDEX',
         'BLOG_CONTENT_API_BASE_URL_PUBLIC',
@@ -70,6 +85,8 @@ test('sitemap uses the public content pipeline', async (t) => {
     t.mock.method(console, 'info', () => {})
     t.mock.method(console, 'warn', () => {})
     process.env.DOCS_SITE_URL = 'https://docs.example.com'
+    process.env.DOCS_CONTENT_SOURCE = 'legacy'
+    delete process.env.DOCS_PRIVATE_CONTENT_REVISION
     process.env.BLOG_CONTENT_API_BASE_URL_PUBLIC = 'https://content.example.com'
     delete process.env.BLOG_CONTENT_API_BASE_URL_INTERNAL
     delete process.env.BLOG_CONTENT_API_BASE_URL
@@ -129,7 +146,7 @@ test('sitemap uses the public content pipeline', async (t) => {
             assert.ok(local)
             const source = new VFile(
                 readFileSync(
-                    new URL('../data/canvas/readme.md', import.meta.url),
+                    path.join(contentRoot, 'data/canvas/readme.md'),
                     'utf8'
                 )
             )

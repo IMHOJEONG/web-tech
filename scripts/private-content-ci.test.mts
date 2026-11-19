@@ -5,6 +5,12 @@ import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
 import test from "node:test";
+import { inflateSync } from "node:zlib";
+import {
+  syntheticImages,
+  syntheticPng,
+  writeSyntheticImages,
+} from "./synthetic-docs-media.mts";
 import {
   assertProtectedContentEnvironment,
   assertTrustedContentRun,
@@ -319,16 +325,14 @@ test("hosted ephemeral preparation replaces discovered inputs but preserves orig
     );
 });
 
-test("synthetic cards retain a real non-default thumbnail for image failure contracts", (t) => {
+test("synthetic cards generate their own non-default thumbnail without article assets", (t) => {
   const directory = fs.mkdtempSync(
     path.join(os.tmpdir(), "ci-image-contract-"),
   );
   t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   writeSyntheticCorpus(directory);
   const thumbnail = "/diagrams/http-response-stages.png";
-  assert.ok(
-    fs.statSync(new URL(`apps/docs/public${thumbnail}`, root)).size > 0,
-  );
+  assert.ok(fs.statSync(path.join(directory, "public", thumbnail)).size > 0);
   assert.equal(thumbnail.startsWith("/default/"), false);
   for (const [file] of syntheticDocuments) {
     const content = fs.readFileSync(path.join(directory, file), "utf8");
@@ -337,6 +341,96 @@ test("synthetic cards retain a real non-default thumbnail for image failure cont
       /^thumbnail: \/diagrams\/http-response-stages\.png$/m,
     );
   }
+});
+
+test("synthetic PNGs decode at the unchanged responsive image dimensions", (t) => {
+  const directory = fs.mkdtempSync(
+    path.join(os.tmpdir(), "ci-synthetic-media-"),
+  );
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  writeSyntheticImages(directory);
+  for (const image of syntheticImages) {
+    const bytes = fs.readFileSync(
+      path.join(directory, "public", image.pathname),
+    );
+    assert.deepEqual(
+      [...bytes.subarray(0, 8)],
+      [137, 80, 78, 71, 13, 10, 26, 10],
+    );
+    assert.equal(bytes.readUInt32BE(16), image.width);
+    assert.equal(bytes.readUInt32BE(20), image.height);
+    const compressed: Buffer[] = [];
+    for (let offset = 8; offset < bytes.length; ) {
+      const length = bytes.readUInt32BE(offset);
+      if (bytes.toString("ascii", offset + 4, offset + 8) === "IDAT")
+        compressed.push(bytes.subarray(offset + 8, offset + 8 + length));
+      offset += 12 + length;
+    }
+    assert.equal(
+      inflateSync(Buffer.concat(compressed)).length,
+      image.height * (image.width * 3 + 1),
+    );
+  }
+  assert.throws(() => syntheticPng(0, 1));
+  assert.throws(() => syntheticPng(1, 1601));
+});
+
+test("local synthetic media refuses real files and linked parent directories before any writes", (t) => {
+  const directory = fs.mkdtempSync(
+    path.join(os.tmpdir(), "ci-media-preserve-"),
+  );
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  fs.mkdirSync(path.join(directory, "public/diagrams"), { recursive: true });
+  const target = path.join(directory, "public", syntheticImages[0]!.pathname);
+  fs.writeFileSync(target, "retain application media");
+  assert.throws(() => writeSyntheticImages(directory));
+  assert.equal(fs.readFileSync(target, "utf8"), "retain application media");
+  assert.equal(fs.readdirSync(path.dirname(target)).length, 1);
+  const other = path.join(directory, "other");
+  fs.mkdirSync(other);
+  const app = path.join(directory, "linked");
+  fs.mkdirSync(path.join(app, "public"), { recursive: true });
+  fs.symlinkSync(other, path.join(app, "public/diagrams"));
+  assert.throws(() => writeSyntheticImages(app));
+  assert.deepEqual(fs.readdirSync(other), []);
+});
+
+test("hosted CI preserves application image bytes before substituting generated media", (t) => {
+  const directory = fs.realpathSync(
+    fs.mkdtempSync(path.join(os.tmpdir(), "ci-media-backup-")),
+  );
+  const temporary = fs.realpathSync(
+    fs.mkdtempSync(path.join(os.tmpdir(), "ci-media-private-")),
+  );
+  t.after(() => {
+    fs.rmSync(directory, { recursive: true, force: true });
+    fs.rmSync(temporary, { recursive: true, force: true });
+  });
+  const app = path.join(directory, "apps/docs");
+  const image = syntheticImages[0]!.pathname;
+  const target = path.join(app, "public", image);
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.writeFileSync(target, "preserve original image bytes");
+  prepareCiDocsContent(
+    {
+      GITHUB_ACTIONS: "true",
+      RUNNER_ENVIRONMENT: "github-hosted",
+      DOCS_CI_SYNTHETIC: "1",
+      DOCS_CONTENT_SOURCE: "legacy",
+      GITHUB_WORKSPACE: directory,
+      RUNNER_TEMP: temporary,
+    },
+    directory,
+  );
+  const backup = fs.readdirSync(temporary)[0]!;
+  assert.equal(
+    fs.readFileSync(path.join(temporary, backup, "public", image), "utf8"),
+    "preserve original image bytes",
+  );
+  assert.deepEqual(
+    [...fs.readFileSync(target).subarray(0, 8)],
+    [137, 80, 78, 71, 13, 10, 26, 10],
+  );
 });
 
 test("synthetic dates retain the held remote article in real related-link ranking", async (t) => {

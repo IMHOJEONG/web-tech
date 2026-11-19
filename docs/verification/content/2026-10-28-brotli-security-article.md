@@ -4,7 +4,7 @@
 
 - 날짜: 2026-10-28 Asia/Seoul. Node 보안 공개일 10-21, Vercel 안내 게시일 10-26과 확인일을 구분합니다.
 - 기준: `codex/squash-merge-preflight`, HEAD `61a778c5d7b083aec8bfd671c65523494921d5c9` 위의 미커밋 작업입니다. 별도 ADR 거버넌스 변경과 기존 글은 보존했습니다.
-- 대상: [새 MDX](../../../apps/docs/category/be/node-js/node-brotli-runtime-security.mdx), [SVG 원본](../../../apps/docs/public/diagrams/node-brotli-waf-boundary.svg)과 PNG.
+- 대상: [새 MDX](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/node-brotli-runtime-security.mdx), [SVG 원본](../../../apps/docs/public/diagrams/node-brotli-waf-boundary.svg)과 PNG.
 - macOS, Node.js v24.22.1, Brotli 버전 문자열 1.2.0, TypeScript 6.0.3, Next.js 16.3.8, Playwright Chromium입니다. 320/390/1280px 라이트와 390px 다크의 개발 preview 4조건이며 실기기가 아닙니다.
 - [KAN-44](https://web-tech-service.atlassian.net/browse/KAN-44), [기존 운영 안내](https://web-tech-service.atlassian.net/wiki/spaces/~5d12f74be69c1c0c88af2afa/pages/65817/web-tech+Jira)에 로컬-only 범위를 연결합니다. 운영 패치 작업 KAN-43과 별개이며 해당 과제를 완료하거나 운영 복구로 확대하지 않습니다.
 
@@ -56,7 +56,7 @@
 고정 8바이트 임시 입력 배열과 정상 입력 부족·수정 전 형식 오류·수정 후 오류 전파를 비교하는 그림 두 장을 추가했습니다. 질문형 소제목은 사용자의 기존 선호에 맞춰 설명형으로 썼습니다. 실제 메모리 배치나 특정 인접 필드 손상, 공격 성공을 관측한 그림이 아닙니다.
 
 - [버퍼 구조 SVG](../../../apps/docs/public/diagrams/node-brotli-buffer-boundary.svg), [정상/오류 비교 SVG](../../../apps/docs/public/diagrams/node-brotli-decoder-flow-comparison.svg), [모바일 버퍼](../artifacts/2026-10-28-brotli-decoder-buffer-390.jpg), [모바일 흐름](../artifacts/2026-10-28-brotli-decoder-flows-390.jpg).
-- C 발췌 5개와 diff 1개는 저장소 `google/brotli`의 부모 `34f020fa9daba975747b29885314c2545b7aa040`와 수정 `0ed4268a4401abcb4472096340477cf4af7d1a2b`에 고정했습니다. 상태 구조체·매크로 정의·한 바이트 보충·형식 오류 결과·상태 전파를 [읽기 전용 소스 snapshot](../artifacts/2026-10-28-brotli-decoder-sources.json)의 경로·행·SHA-256과 대조합니다. GitHub 연결 도구로 파일을 읽었고 commit permalink·파일 라이선스를 확인했습니다. 저작권·허가문을 포함한 [MIT 전문](../../../apps/docs/public/licenses/brotli-MIT.txt)을 함께 두고 본문에서 연결했습니다.
+- C 발췌 5개와 diff 1개는 저장소 `google/brotli`의 부모 `34f020fa9daba975747b29885314c2545b7aa040`와 수정 `0ed4268a4401abcb4472096340477cf4af7d1a2b`에 고정했습니다. 상태 구조체·매크로 정의·한 바이트 보충·형식 오류 결과·상태 전파를 [읽기 전용 소스 snapshot](../artifacts/2026-10-28-brotli-decoder-sources.json)의 경로·행·SHA-256과 대조합니다. GitHub 연결 도구로 파일을 읽었고 commit permalink·파일 라이선스를 확인했습니다. 저작권·허가문을 포함한 [MIT 전문](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/public/licenses/brotli-MIT.txt)을 함께 두고 본문에서 연결했습니다.
 - 실험실의 새 `brotli-decoder-source.json`과 `scripts/brotli-decoder-source.test.mts`를 기존 `test:security:brotli` 명령에 연결했습니다. C/diff 누락·중복·미등록·잘못된 조건/길이/오류 전파·소스 hash/commit 변조를 거부합니다. C 발췌는 줄 연결 기호·들여쓰기만 정규화하며 부분 코드라 컴파일하지 않습니다. 정상 입력 TS의 strict 타입·fixture/원문 각 3회 실행과 합쳐 [16개 검사](../artifacts/2026-10-28-brotli-decoder-source-tests.txt)를 통과했습니다. [새 검사 자체의 strict 타입](../artifacts/2026-10-28-brotli-decoder-test-types.txt)도 종료 코드 0입니다.
 - [최종 화면 JSON·원문 및 자산 해시](../artifacts/2026-10-28-brotli-decoder-ui.json): 320/390/1280px 라이트와 390px 다크의 네 조건에서 전체 그림 4개 decode, SVG 글자 경계, 코드 블록 11개, 본문·noindex·가로 넘침·중첩 문단·pageerror를 확인했습니다. MIT 텍스트의 HTTP 200·허가문도 대조했습니다. [모바일 C 코드](../artifacts/2026-10-28-brotli-decoder-code-390.jpg)를 시각 확인했습니다.
 - [콘텐츠 검사](../artifacts/2026-10-28-brotli-decoder-content.txt)는 20개 통과이며 기존 TCP 글의 placeholder-like 경고는 그대로입니다. 본문에서 영문 괄호 뒤 조사 때문에 `**`가 그대로 표시되던 강조 세 곳을 원문에서 정리하고 화면 재검사했습니다. 공용 렌더러나 기존 게시 글은 바꾸지 않았습니다.
@@ -81,7 +81,7 @@ Confluence v183의 후속 구역과 이전 기록 보존, Jira 댓글 10035의 �
 
 ### 사용자 요청 후 참고자료·저작권 및 초보자 재검토
 
-공식 자료와 학습 자료를 글 끝에 목적별로 정리하고, C 코드 원본 파일의 Google Inc. 저작권 고지와 Brotli Authors의 프로젝트 MIT 라이선스를 분리했습니다. 매크로 발췌의 편집 범위와 [라이선스 전문](../../../apps/docs/public/licenses/brotli-MIT.txt)을 명시하며 직접 제작한 개념도와 외부 자료를 구분합니다. 앞으로 새로 쓰거나 본문·예제를 갱신하는 글에도 출처·저작권을 표시하도록 [앱 기고 지침](../../../apps/docs/AGENTS.md)을 보강했습니다. 기존 게시 글에 이 지침을 소급 적용했다고 주장하지 않습니다.
+공식 자료와 학습 자료를 글 끝에 목적별로 정리하고, C 코드 원본 파일의 Google Inc. 저작권 고지와 Brotli Authors의 프로젝트 MIT 라이선스를 분리했습니다. 매크로 발췌의 편집 범위와 [라이선스 전문](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/public/licenses/brotli-MIT.txt)을 명시하며 직접 제작한 개념도와 외부 자료를 구분합니다. 앞으로 새로 쓰거나 본문·예제를 갱신하는 글에도 출처·저작권을 표시하도록 [앱 기고 지침](../../../apps/docs/AGENTS.md)을 보강했습니다. 기존 게시 글에 이 지침을 소급 적용했다고 주장하지 않습니다.
 
 기술·독자 이해·존댓말 다중 검토에서 실질적인 보강 대상으로 HTTP의 `Accept-Encoding`/`Content-Encoding` 차이와 자동 해제의 구현별 차이, 스트리밍 내부 구현을 JavaScript 스트림 API만의 노출로 일반화하지 않는 점, 공식 지원이 끝난 Node.js 20 계열과 공급자 유지보수 빌드의 차이를 선정했습니다. 공식 Node.js 보안 공지·릴리스, Vercel 안내, Node.js 스트림·zlib API, RFC 9110·7932 및 고정 Brotli 커밋을 대조했습니다. 서론은 영향과 조치를 별도 문단으로 나눴습니다. 원문 코드·그림은 수정하지 않았습니다.
 

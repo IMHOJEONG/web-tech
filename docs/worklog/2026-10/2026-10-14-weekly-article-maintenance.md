@@ -7,7 +7,7 @@
 
 ## Changed
 
-- [HTTP 초안](../../../apps/docs/category/be/node-js/http-response-streaming-lab.mdx)과 [소켓 초안](../../../apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx):
+- [HTTP 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/http-response-streaming-lab.mdx)과 [소켓 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx):
   10-11 이벤트 루프 후속 실험 완료와 해당 글의 관측 범위를 구분하고 안내 문장·수정일을 정리했습니다.
 - [주간 검증 보고서](../../verification/content/2026-10-14-weekly-article-maintenance.md)와 날짜별 artifact, 역할·월별 목차를 추가했습니다.
 - 새 글을 만들거나 공개 글·서비스 코드·예제 코드·배포 설정을 변경하지 않았습니다.

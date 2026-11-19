@@ -6,7 +6,7 @@ V8 입문 글에 직접 싣기보다, 실제 실행 결과와 재현 스크립�
 
 ## Changed
 
-- [V8 입문 글](../../../apps/docs/data/v8/bytecode.mdx)은 개념과 실험 시 주의점만 남겼다.
+- [V8 입문 글](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/data/v8/bytecode.mdx)은 개념과 실험 시 주의점만 남겼다.
 - `/Users/coder/Desktop/project/labs/v8-bytecode-lab`에 독립 실험 README와 실행 스크립트를 추가했다. 서비스 저장소의 V8 검증 보고서는 중복을 피하려고 제거했다.
 - [TODO](../../todo/todo.md)에서 V8 실험 항목만 완료로 표시하고 ARIA 재현 과제는 남겼다.
 

@@ -2,12 +2,348 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/verification/artifacts/2026-09-20-canvas-snippet.test.mjs",
+      "sha256": "12348d20d991677d30fc52e73afe71157d1359697eeee9f33f0db26ea91ac3a8",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: PR #99 과거 재현 코드의 원문 로딩만 고정 공개 Git reader로 전환. 기존 모의 검사와 기대값 보존. 실행 결과·원문·비밀값·개인 경로는 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-09-20-canvas-browser.mjs",
+      "sha256": "5e50f1a18d2a6369aea69e3fdfeefd29c57e390c9179bca3521397302e4668f8",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: PR #99 과거 재현 코드의 원문 로딩만 고정 공개 Git reader로 전환. 기존 브라우저 조건과 기대값 보존. 실행 결과·원문·비밀값·개인 경로는 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-09-22-event-loop-browser.test.mjs",
+      "sha256": "eedb4de0bdea010d45f09d1121acdaeb577797dcd2829e05aef399a66b719da0",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: PR #99 과거 재현 코드의 원문 로딩만 고정 공개 Git reader로 전환. 기존 새 페이지 10개와 기대 순서 보존. 실행 결과·원문·비밀값·개인 경로는 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/knowledge/docs-app/uiux-resource-research.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "a1decab7b4e3405ea9136a6f89251bf12afe67a7ecbb7adf41f19cc1cd846d22",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/knowledge/infra-tooling/node-http-kernel-path.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "b919806ad8ce982ebf2d3832cb7224e9d5362d9033c8d5a33d91889059744566",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-09-20-content-readability-review.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "efec5d7b70d8d910d86084f6f4752a123344c49fc741f5dac1a2dd744910c26d",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: PR #99 리뷰 보완의 고정 공개 Git 원문 재현 선행 조건만 추가. 과거 결과 보존, 실제 원문·원시 로그·화면·비밀값 제외."
+    },
+    {
+      "path": "docs/verification/content/2026-09-22-event-loop-example.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "293e154e8b11be3424881eca03f2285d6e0781422f7d231a754394e4761f8096",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: PR #99 리뷰 보완의 고정 공개 Git 원문 재현 선행 조건만 추가. 과거 결과 보존, 실제 원문·원시 로그·화면·비밀값 제외."
+    },
+    {
+      "path": "docs/verification/content/2026-10-14-http-streaming-publication.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "8654ca34213025fb46ea718ee9aea2ffa843ce9a8f698f2224dd6d5a3815e2b1",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-14-weekly-article-maintenance.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "fb548afb53e57f5b1dfe1bd190dc9ec8683fd6a156995dff5d01bf4d4abd3a82",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-16-tcp-draft-preparation.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "fe740f2ecf29c737184f1e043b3d58f40a744800bbb2fc08627402ed980ad4d0",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-20-tcp-draft-recheck.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "6cab4dc8fe73757b1e7f48652db18c3c61afd686a870442eaffa2ebaf51d0052",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-21-tcp-publication.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "3eeef78627e25f46b366a2bb112af4ec715cbcf9cf21bbfb1c37e17391fe9bf6",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-28-brotli-security-article.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "44d6d3f0b4962c28437fb9e743e3395043a7b5b38850d341a058464ff0a47210",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/verification/content/2026-10-29-brotli-publication.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "3d0c15ba19ab5a94c197c1995c4904b719d8f5d6b55885c1bd76bd3ed51a1d94",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-04-v8-bytecode-example.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "79c8d508ee0f7351a97d999b50d672711d837ca6dc247200d4db8d5e7e8c64cc",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-06-weekly-article-publication.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "7661ee786e2925121ed72fce204443c5609c675d4a65aa74681d669ff2bd1632",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-08-weekly-article-maintenance.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "c6c1a1f0bdd3aaa7253d920da997b692d3aebb91cca66172b3d983ad7bacee07",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-09-http-article-tests-diagrams.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "94650941fafa13b13ff45204ff334ae363c6c0b16fa69ae4ae139d5b8ecee0e0",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-09-http-kernel-learning-roadmap.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "958cdca3d9a5a38ebf6ca2159f178ea67acf48c9a4eb31458e2573f4230c870c",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-10-tcp-socket-learning-experiment.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "4030fdd15f101e6769ad45b5fbf1d15fbb877262873d3893bca7d4ed1182c306",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-14-http-streaming-publication.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "09e04ffc1f2adcaeefb55bf9c8bb12b283300a762e68f2c8406707f5800977bf",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-14-weekly-article-maintenance.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "c43c90d0e9b1e2a9431a0f5224199ac537e99aa98246bc56aa2e9cb70d464378",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-16-next-tcp-draft.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "4adb0f85f8e70f5c82f1f304c9b6ecad80cacbb668e5b2255fb4d4905a379a43",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-28-brotli-security-article.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "f96940d6e5ae32b7cbfa2ebb56c1750c0b8f76bfb837ef741e796ae579179318",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존."
+    },
+    {
       "path": "docs/architecture/adr-0032-private-git-build-content.md",
-      "sha256": "007d0e52f5a420292d6335d60bfec051cad48ffea56f28f56c4a835a8f35a9ce",
+      "sha256": "231c8036c55fe6d4d7c28bcd55ad3bd1601e09048aefd284222adf5e0ac370b0",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
+      "note": "사용자 승인: 기존 문서 6개의 운영 완료·이전 완료 공개 사본 정리·합성 검사와 실제 발행본 검증·범위·한계만 정제하여 재검수. 원문·초안·원시 자료·실제 비밀값·stash 본문은 제외.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -17,11 +353,11 @@
     },
     {
       "path": "docs/runbooks/docs-private-git-content.md",
-      "sha256": "efd31b22fd0d4abbd6183d0b557c8f5b08796afda69e7475b49b6cf4dc3d86da",
+      "sha256": "fd2017db6a333241196e2a21f06b22ada035f3d612d5b6cf9bbc5f43113cc31a",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
+      "note": "사용자 승인: 기존 문서 6개의 운영 완료·이전 완료 공개 사본 정리·합성 검사와 실제 발행본 검증·범위·한계만 정제하여 재검수. 원문·초안·원시 자료·실제 비밀값·stash 본문은 제외.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -31,11 +367,11 @@
     },
     {
       "path": "docs/verification/content/2026-11-17-private-git-content.md",
-      "sha256": "6a896357ca4e87a886337f438c00f924c319b96987b228f5a86d470a0481e20e",
+      "sha256": "c71f77127c5e50dd5ee970d3cdd9eaf5353d1921701bbff8b2e33ae03479dcc9",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
+      "note": "사용자 승인: PR #99 리뷰 3건의 앵커·고정 Git 원문 재현·합성 회귀와 실제 실행 결과·실패·미검증 범위만 정제하여 재검수. 원문·초안·원시 로그·화면·비밀값·stash 본문 제외.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -45,11 +381,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-17-private-git-content.md",
-      "sha256": "71eae3e5a8913eb20f556b85e1688d12c20a4032cfd7c559ba406451db0b4a65",
+      "sha256": "34552800f5e8659e17a0aad3f05d1314e4d3907dc56ca060206ff638670c8a9e",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
+      "note": "사용자 승인: PR #99 리뷰 보완의 변경 이유·검증 연결·공개 범위와 남은 작업만 정제하여 재검수. 원문·초안·원시 로그·화면·비밀값·stash 본문 제외.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -73,11 +409,11 @@
     },
     {
       "path": "docs/runbooks/docs-private-content-ci.md",
-      "sha256": "47cbbf65827cbdf46d6ffc55e6fdc78434451f024059ed3026e25811ac7103aa",
+      "sha256": "c94d2c37c67f73cfdcda40f3edb44c0efff7a4726044e52361cc400852d02d46",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 인증 분리 코드·회귀와 정제 정책·절차·결과·목차의 공개 검수 후 작업별 커밋·푸시·PR·원격 CI 확인을 승인함. 최종 bytes의 비밀정보·개인 경로·권리·공개 의도를 검수함. 원시 자료·실제 원문·별도 이전 구현·기존 미커밋·stash·키·NAS·운영 전환은 제외함.",
+      "note": "사용자 승인: 기존 문서 6개의 운영 완료·이전 완료 공개 사본 정리·합성 검사와 실제 발행본 검증·범위·한계만 정제하여 재검수. 원문·초안·원시 자료·실제 비밀값·stash 본문은 제외.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -171,11 +507,11 @@
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "9567f5d15f7ec4daf5a91d11ce28b07c7311a2b6eec45e4fb25351aca064ffe5",
+      "sha256": "e61daa0f2f36f3d40b8db654f475eceb0891d554bd9830e0cd8e11738fbbdd28",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-19",
-      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
+      "note": "사용자 승인: 기존 문서 6개의 운영 완료·이전 완료 공개 사본 정리·합성 검사와 실제 발행본 검증·범위·한계만 정제하여 재검수. 원문·초안·원시 자료·실제 비밀값·stash 본문은 제외.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -857,11 +1193,11 @@
     },
     {
       "path": "docs/todo/todo.md",
-      "sha256": "94bf5796f2010686a50a98d1a78ebe0c4162222ce6d103cddef4b90f43530c69",
+      "sha256": "ce0672b475a62e60fd4b11f4669e16a16c9a80120696510dbc355e1912e40a76",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-07",
-      "note": "사용자가 PR #86 리뷰 보완에 필요한 기존 운영 문서 4개의 정제 갱신·재검수·해시 갱신과 커밋·푸시를 명시 승인함. 자체 작성한 실패 재현·회귀 수·검사 명령·운영 미연결 경계와 동일 Confluence 페이지의 비개인 경로를 확인함. 원시 로그·trace·계측 JSON·실제 응답·새 문서·NAS 설정·토큰·병합·Production 변경은 제외함.",
+      "reviewedOn": "2026-11-19",
+      "note": "사용자 승인: 기존 공개 문서의 삭제 대상 링크만 고정 커밋으로 보정하고 본문과 결과를 보존.",
       "checks": {
         "secrets": true,
         "personalData": true,

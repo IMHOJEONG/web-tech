@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import path from 'node:path'
+import fs from 'node:fs'
+import os from 'node:os'
+import { writeSyntheticCorpus } from '../../../../../scripts/prepare-ci-docs-content.mts'
 import { loadLocalSearchIndex } from '../../../lib/local-search-index.ts'
 import {
     CONTENT_COLLECTIONS,
@@ -83,10 +86,13 @@ test('collections retain editorial order and omit unavailable articles', () => {
     assert.deepEqual(getContentCollections(docs.slice(0, 1)), [])
 })
 
-test('every current collection targets distinct published canonical documents', async () => {
-    const docs = await loadLocalSearchIndex(
-        path.resolve(import.meta.dirname, '../../..')
+test('every current collection targets distinct published canonical documents', async (t) => {
+    const root = fs.mkdtempSync(
+        path.join(os.tmpdir(), 'collections-synthetic-')
     )
+    t.after(() => fs.rmSync(root, { recursive: true, force: true }))
+    writeSyntheticCorpus(root)
+    const docs = await loadLocalSearchIndex(root)
     const hrefs = new Set(docs.map((item) => item.href))
     assert.equal(
         new Set(CONTENT_COLLECTIONS.map(({ id }) => id)).size,

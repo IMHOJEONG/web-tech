@@ -2,6 +2,11 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import {
+  assertSyntheticImageTargets,
+  syntheticImages,
+  writeSyntheticImages,
+} from "./synthetic-docs-media.mts";
 
 // This corpus is authored test input, never copied from a content checkout.
 export const syntheticDocuments = [
@@ -120,25 +125,30 @@ function body(file: string) {
   return "## Synthetic example\n\nDeterministic public test input, not a published blog article.\n";
 }
 
+export function syntheticDocumentSource(file: string) {
+  const entry = syntheticDocuments.find(([name]) => name === file);
+  assert.ok(entry, "unknown synthetic document");
+  const [, title, slug, tags] = entry;
+  const date = file.includes("node-brotli") ? "2026-11-18" : "2026-08-23";
+  const summary = file.includes("server-client-component")
+    ? "React 기반 앱에서 서버 컴포넌트와 클라이언트 컴포넌트를 나눌 때의 판단 기준을 정리합니다."
+    : "Synthetic public regression example.";
+  return `---\nstatus: published\ntitle: ${JSON.stringify(title)}\nslug: ${slug}\nsummary: ${JSON.stringify(summary)}\nthumbnail: /diagrams/http-response-stages.png\ndate: ${date}\nupdatedAt: ${date}\nauthorName: Synthetic CI\nauthorRole: Test fixture\nreadMinutes: 3\ntopicLabel: ${tags.split(",")[0]}\ntags: ${JSON.stringify(tags.split(","))}\n---\n\n${body(file)}`;
+}
+
 export function writeSyntheticCorpus(appRoot: string) {
+  appRoot = path.resolve(appRoot);
   for (const name of ["data", "category"])
     assert.equal(
       fs.existsSync(path.join(appRoot, name)),
       false,
       "only write into empty fixture roots",
     );
-  for (const [file, title, slug, tags] of syntheticDocuments) {
+  writeSyntheticImages(appRoot);
+  for (const [file] of syntheticDocuments) {
     const target = path.join(appRoot, file);
     fs.mkdirSync(path.dirname(target), { recursive: true });
-    // Keep the gated remote fixture in related links; prefetch tests use it.
-    const date = file.includes("node-brotli") ? "2026-11-18" : "2026-08-23";
-    const summary = file.includes("server-client-component")
-      ? "React 기반 앱에서 서버 컴포넌트와 클라이언트 컴포넌트를 나눌 때의 판단 기준을 정리합니다."
-      : "Synthetic public regression example.";
-    fs.writeFileSync(
-      target,
-      `---\nstatus: published\ntitle: ${JSON.stringify(title)}\nslug: ${slug}\nsummary: ${JSON.stringify(summary)}\nthumbnail: /diagrams/http-response-stages.png\ndate: ${date}\nupdatedAt: ${date}\nauthorName: Synthetic CI\nauthorRole: Test fixture\nreadMinutes: 3\ntopicLabel: ${tags.split(",")[0]}\ntags: ${JSON.stringify(tags.split(","))}\n---\n\n${body(file)}`,
-    );
+    fs.writeFileSync(target, syntheticDocumentSource(file));
   }
   fs.writeFileSync(
     path.join(appRoot, "category/fe/react/test.mdx"),
@@ -228,6 +238,7 @@ export function prepareCiDocsContent(
       assert.equal(entry.isDirectory() && !entry.isSymbolicLink(), true);
   }
   // Preserve the checkout's original roots outside every build/test discovery path.
+  assertSyntheticImageTargets(app, true);
   reportPhase("backup");
   const backup = fs.mkdtempSync(path.join(temporary, "original-docs-"));
   fs.chmodSync(backup, 0o700);
@@ -236,6 +247,14 @@ export function prepareCiDocsContent(
     if (!fs.existsSync(from)) continue;
     assert.equal(fs.lstatSync(from).isSymbolicLink(), false);
     preserveCiDirectory(from, path.join(backup, name));
+  }
+  for (const { pathname } of syntheticImages) {
+    const from = path.join(app, "public", pathname);
+    if (!fs.existsSync(from)) continue;
+    assert.equal(fs.lstatSync(from).isSymbolicLink(), false);
+    const destination = path.join(backup, "public", pathname);
+    fs.mkdirSync(path.dirname(destination), { recursive: true });
+    preserveCiDirectory(from, destination);
   }
   reportPhase("synthetic");
   return writeSyntheticCorpus(app);

@@ -9,7 +9,7 @@
 ## Changed
 
 - 자동 실행 `heapforge-2`를 갱신했다. 게시 글 수정 권한과 새 글 검토 승인을 구분했다.
-- [HTTP 응답 스트리밍 초안](../../../apps/docs/category/be/node-js/http-response-streaming-lab.mdx)에
+- [HTTP 응답 스트리밍 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/http-response-streaming-lab.mdx)에
   req/res, 청크, 소켓, 응답 이벤트, Next.js 연결 설명과 실제 `.mts` 로그를 작성했다.
 - [게시 글 점검 절차](../../runbooks/docs-article-rendering-regression.md)를 기존 문서에 추가했다.
 - 기술 정확성·독자 관심도·존댓말 어투의 세 에이전트 검토를 반영했다.

@@ -34,7 +34,7 @@ Production 배포는 이 게시 전 기록 시점에 아직 실행하지 않았�
 ## 관련 문서
 
 - [게시 작업 기록](../../worklog/2026-10/2026-10-14-http-streaming-publication.md)
-- [HTTP 스트리밍 글](../../../apps/docs/category/be/node-js/http-response-streaming-lab.mdx)
+- [HTTP 스트리밍 글](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/http-response-streaming-lab.mdx)
 
 ## Production 배포 후 확인
 

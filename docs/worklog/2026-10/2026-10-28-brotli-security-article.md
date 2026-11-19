@@ -6,7 +6,7 @@
 
 ## Changed
 
-- [새 draft](../../../apps/docs/category/be/node-js/node-brotli-runtime-security.mdx): 정상 입력 .mts 두 조각과 실제 출력, 수정 버전·확인 절차를 포함합니다. 질문·퀴즈를 넣지 않았습니다.
+- [새 draft](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/node-brotli-runtime-security.mdx): 정상 입력 .mts 두 조각과 실제 출력, 수정 버전·확인 절차를 포함합니다. 질문·퀴즈를 넣지 않았습니다.
 - [개념도](../../../apps/docs/public/diagrams/node-brotli-waf-boundary.svg)와 PNG: 별도 입력 경로와 Vercel WAF 규칙 범위를 표현합니다.
 - 로컬 실험실의 `brotli-article-source.json`, fixture·정식 테스트·전용 명령을 연결했습니다. 공개 본문에 실험실 이름·경로·검사 명령은 넣지 않았습니다.
 - [검증 보고서](../../verification/content/2026-10-28-brotli-security-article.md), 실행 증거와 역할별 목차를 연결했습니다.

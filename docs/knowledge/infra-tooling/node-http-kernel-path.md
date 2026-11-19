@@ -6,7 +6,7 @@
 - 최종 검토: 2026-10-11
 - 상태: 로컬 소켓·2026-10-11 한 연결의 TCP 패킷·동기 CPU 0/200ms 콜백 비교 관측 완료. 커널 내부 함수·버퍼 크기 계측은 미완료입니다.
 
-이 문서는 [HTTP 스트리밍 초안](../../../apps/docs/category/be/node-js/http-response-streaming-lab.mdx)의
+이 문서는 [HTTP 스트리밍 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/http-response-streaming-lab.mdx)의
 서비스 구조 그림에서 생긴 질문을 한 단계 더 설명합니다. 클라이언트와 서버가 같은
 Node.js 프로세스 안에 있어도 TCP 소켓으로 통신하면 운영체제를 거칩니다.
 
@@ -186,7 +186,7 @@ LISTEN 하나와 ESTABLISHED 두 개가 나타났습니다. fixture와 실제 MD
 상세 행·순서 번호 계산·종료 집계는
 [10-11 실제 캡처 보고서](../../verification/content/2026-10-11-node-tcp-packet-capture.md)에 유지합니다.
 
-- [소켓 학습 초안](../../../apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx)
+- [소켓 학습 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx)
 - [관측 조건·반복 검사·권한 한계](../../verification/content/2026-10-10-node-socket-kernel-observation.md)
 - [재실행과 선택적 패킷 캡처 절차](../../runbooks/node-tcp-local-observation.md)
 
@@ -335,7 +335,7 @@ SYN은 데이터 길이가 0이어도 순서 번호 하나를 차지하므로 `1
 ## 관련 정책과 절차
 
 - [깊이를 쌓는 학습 로드맵](../../todo/todo.md#nodejs에서-운영-인프라까지-학습-로드맵): 다음 실험과 완료 조건의 원본입니다.
-- [HTTP 스트리밍 초안](../../../apps/docs/category/be/node-js/http-response-streaming-lab.mdx): 실행 코드와 기존 관측 로그의 원본입니다.
+- [HTTP 스트리밍 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/http-response-streaming-lab.mdx): 실행 코드와 기존 관측 로그의 원본입니다.
 - [기고 검증과 개발 서버 미리보기](../../runbooks/docs-article-rendering-regression.md): 테스트 연결·화면 검사·사용자 검토 절차입니다.
 - [이번 문서 정리 기록](../../worklog/2026-10/2026-10-09-http-kernel-learning-roadmap.md)
 

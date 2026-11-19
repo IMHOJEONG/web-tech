@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict'
-import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 import { Fragment, createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { normalizeRemoteContent } from './content-api-html.ts'
 import { renderArticleContent } from './render-article-content.ts'
+import { syntheticDocumentSource } from '../../../scripts/prepare-ci-docs-content.mts'
 import {
     runtimeShikiRehypeOptions,
     shikiRehypeOptions,
@@ -108,13 +108,9 @@ for (const codeHighlight of [false, true]) {
     })
 }
 
-test('critical rendering path article renders its resource comparison as a table', async () => {
-    const content = await readFile(
-        new URL(
-            '../category/fe/browser/critical-rendering-path-diagnosis.mdx',
-            import.meta.url
-        ),
-        'utf8'
+test('synthetic critical rendering comparison renders its resource table', async () => {
+    const content = syntheticDocumentSource(
+        'category/fe/browser/critical-rendering-path-diagnosis.mdx'
     )
     const rendered = await renderArticleContent(
         { contentFormat: 'mdx', content },

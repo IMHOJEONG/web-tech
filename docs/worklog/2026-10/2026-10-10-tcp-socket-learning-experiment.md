@@ -10,7 +10,7 @@ Node.js의 양쪽 끝점과 macOS의 소켓 상태를 대조했습니다.
 ## Changed
 
 - 새 `.mts` 예제·5분할 코드·요청/응답 구조 그림을 포함한
-  [소켓 초안](../../../apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx)을 추가했습니다.
+  [소켓 초안](https://github.com/IMHOJEONG/web-tech/blob/53ab14e54d2a892cb1cd64544965d00c185ccab9/apps/docs/category/be/node-js/tcp-socket-endpoints-lab.mdx)을 추가했습니다.
 - 기존 로컬 실험실에 독립 원문 바인딩·strict 타입·반복·음성 검사를 연결했습니다.
   기존 HTTP 바인딩은 유지했습니다. 공개 본문에 실험실 경로를 노출하지 않았습니다.
 - [학습 문서](../../knowledge/infra-tooling/node-http-kernel-path.md),

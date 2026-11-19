@@ -7,9 +7,25 @@ import { build } from 'esbuild'
 import ky from 'ky'
 import { CONTENT_HTML_MAX_BYTES } from '@web-tech/docs-content-contract'
 import type { Metadata } from './document.types.ts'
+import fs from 'node:fs'
+import os from 'node:os'
+import path from 'node:path'
+import { writeSyntheticCorpus } from '../../../scripts/prepare-ci-docs-content.mts'
 
 test('real content selection and search isolate remote failures from local documents', async (t) => {
+    const originalCwd = process.cwd()
+    const contentRoot = fs.mkdtempSync(
+        path.join(os.tmpdir(), 'resilience-synthetic-')
+    )
+    writeSyntheticCorpus(contentRoot)
+    process.chdir(contentRoot)
+    t.after(() => {
+        process.chdir(originalCwd)
+        fs.rmSync(contentRoot, { recursive: true, force: true })
+    })
     const keys: string[] = [
+        'DOCS_CONTENT_SOURCE',
+        'DOCS_PRIVATE_CONTENT_REVISION',
         'NODE_ENV',
         'BLOG_CONTENT_INCLUDE_REMOTE_INDEX',
         'BLOG_CONTENT_API_BASE_URL_PUBLIC',
@@ -27,6 +43,8 @@ test('real content selection and search isolate remote failures from local docum
         }
     })
     Object.assign(process.env, { NODE_ENV: 'development' })
+    process.env.DOCS_CONTENT_SOURCE = 'legacy'
+    delete process.env.DOCS_PRIVATE_CONTENT_REVISION
     process.env.BLOG_CONTENT_INCLUDE_REMOTE_INDEX = 'true'
     process.env.BLOG_CONTENT_API_BASE_URL_PUBLIC =
         'https://content.example.test'
