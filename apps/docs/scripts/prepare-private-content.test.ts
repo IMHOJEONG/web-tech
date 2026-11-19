@@ -446,6 +446,70 @@ test('failed ownership writes remove only newly created assets and retries retai
     )
 })
 
+test('a partial asset write closes its descriptor and removes only the new file before retry', async (t) => {
+    const directory = root(t)
+    fs.mkdirSync(path.join(directory, 'public/images'), { recursive: true })
+    const application = path.join(directory, 'public/images/application.png')
+    fs.writeFileSync(application, 'application image')
+    const files = {
+        'data/v8/demo.mdx': published('![Figure](/images/generated.png)'),
+        'public/images/generated.png': 'generated image',
+    }
+    let descriptor: number | undefined
+    const write = fs.writeFileSync
+    const failure = t.mock.method(
+        fs,
+        'writeFileSync',
+        (...args: Parameters<typeof write>) => {
+            if (typeof args[0] === 'number') {
+                descriptor = args[0]
+                write(descriptor, 'partial')
+                throw new Error('synthetic partial asset failure')
+            }
+            return write(...args)
+        }
+    )
+    await assert.rejects(
+        stagePrivateContent(directory, release, reader(files), reviewed(files)),
+        /synthetic partial asset failure/
+    )
+    failure.mock.restore()
+    assert.equal(typeof descriptor, 'number')
+    assert.throws(() => fs.fstatSync(descriptor!), { code: 'EBADF' })
+    assert.equal(
+        fs.existsSync(path.join(directory, 'public/images/generated.png')),
+        false
+    )
+    assert.equal(fs.readFileSync(application, 'utf8'), 'application image')
+    await stagePrivateContent(
+        directory,
+        release,
+        reader(files),
+        reviewed(files)
+    )
+    assert.equal(
+        fs.readFileSync(
+            path.join(directory, 'public/images/generated.png'),
+            'utf8'
+        ),
+        'generated image'
+    )
+    assert.deepEqual(
+        JSON.parse(
+            fs.readFileSync(
+                path.join(directory, '.generated-content/assets.json'),
+                'utf8'
+            )
+        ),
+        [
+            {
+                path: 'public/images/generated.png',
+                sha256: digest('generated image'),
+            },
+        ]
+    )
+})
+
 test('referenced but unreviewed assets and target symlinks are rejected', async (t) => {
     const directory = root(t)
     const files = {
