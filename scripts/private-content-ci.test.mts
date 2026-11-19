@@ -429,6 +429,7 @@ test("failed or mismatched cross-mount copies retain original input and unrelate
     fs.mkdirSync(source);
     fs.writeFileSync(path.join(source, "article.md"), "retain synthetic bytes");
     let copies = 0;
+    let removals = 0;
     assert.throws(() =>
       preserveCiDirectory(source, source + "-backup", {
         ...fs,
@@ -447,11 +448,12 @@ test("failed or mismatched cross-mount copies retain original input and unrelate
           );
         },
         rmSync() {
-          assert.fail("must not remove unverified source");
+          removals++;
         },
       }),
     );
     assert.equal(copies, mode === "permission" ? 0 : 1);
+    assert.equal(removals, 0, "must not attempt to remove unverified source");
     assert.equal(
       fs.readFileSync(path.join(source, "article.md"), "utf8"),
       "retain synthetic bytes",
