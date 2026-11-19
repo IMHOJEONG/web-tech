@@ -19,6 +19,10 @@ import {
   assertPrivateIntegration,
   parsePrivateRelease,
   PRIVATE_CONTENT_ENVIRONMENT,
+  readContentCiIdentity,
+  assertHumanContentApproval,
+  assertApprovedContentRevision,
+  verifyContentAuthorization,
 } from "./private-content-ci-policy.mts";
 import {
   prepareCiDocsContent,
@@ -41,11 +45,25 @@ const env = {
   GITHUB_REF_TYPE: "branch",
   GITHUB_SHA: sha,
   GITHUB_REPOSITORY: "IMHOJEONG/web-tech",
+  GITHUB_ACTOR: "synthetic-content-ci[bot]",
+  GITHUB_ACTOR_ID: "1001",
+  GITHUB_TRIGGERING_ACTOR: "synthetic-content-ci[bot]",
+  GITHUB_RUN_ID: "4004",
+  GITHUB_RUN_ATTEMPT: "1",
+  GITHUB_WORKFLOW_SHA: sha,
+  GITHUB_WORKFLOW_REF:
+    "IMHOJEONG/web-tech/.github/workflows/docs-private-content.yml@refs/heads/main",
+  DOCS_CONTENT_CI_EXECUTOR_LOGIN: "synthetic-content-ci[bot]",
+  DOCS_CONTENT_CI_EXECUTOR_ID: "1001",
+  DOCS_CONTENT_CI_REVIEWER_LOGIN: "synthetic-reviewer",
+  DOCS_CONTENT_CI_REVIEWER_ID: "2002",
 };
 const event = {
-  inputs: { approved_sha: sha },
+  inputs: { approved_sha: sha, approved_content_revision: sha },
   repository: { full_name: env.GITHUB_REPOSITORY },
+  sender: { type: "Bot", login: env.GITHUB_ACTOR, id: 1001 },
 };
+const identity = readContentCiIdentity(env);
 
 const release = {
   version: 1,
@@ -146,12 +164,15 @@ test("private runtime rejects a stale build, synthetic/legacy mode and serialize
 });
 
 const protection = {
+  id: 3003,
   name: PRIVATE_CONTENT_ENVIRONMENT,
   can_admins_bypass: false,
   protection_rules: [
     {
       type: "required_reviewers",
-      reviewers: [{ type: "User", reviewer: { id: 1 } }],
+      reviewers: [
+        { type: "User", reviewer: { ...identity.reviewer, type: "User" } },
+      ],
       prevent_self_review: true,
     },
   ],
@@ -160,9 +181,12 @@ const protection = {
     custom_branch_policies: true,
   },
 };
-const policies = { branch_policies: [{ name: "main", type: "branch" }] };
+const policies = {
+  total_count: 1,
+  branch_policies: [{ name: "main", type: "branch" }],
+};
 test("environment must have non-self approval, no admin bypass and exactly the main branch", () => {
-  assertProtectedContentEnvironment(protection, policies);
+  assertProtectedContentEnvironment(protection, policies, identity);
   for (const patch of [
     { name: "Preview" },
     { can_admins_bypass: true },
@@ -178,7 +202,11 @@ test("environment must have non-self approval, no admin bypass and exactly the m
     { deployment_branch_policy: null },
   ])
     assert.throws(() =>
-      assertProtectedContentEnvironment({ ...protection, ...patch }, policies),
+      assertProtectedContentEnvironment(
+        { ...protection, ...patch },
+        policies,
+        identity,
+      ),
     );
   for (const branch_policies of [
     [],
@@ -187,8 +215,276 @@ test("environment must have non-self approval, no admin bypass and exactly the m
     [...policies.branch_policies, { name: "feature/*", type: "branch" }],
   ])
     assert.throws(() =>
-      assertProtectedContentEnvironment(protection, { branch_policies }),
+      assertProtectedContentEnvironment(
+        protection,
+        { total_count: branch_policies.length, branch_policies },
+        identity,
+      ),
     );
+});
+
+test("configured bot and human identities must be present, valid and distinct", () => {
+  for (const key of [
+    "DOCS_CONTENT_CI_EXECUTOR_LOGIN",
+    "DOCS_CONTENT_CI_EXECUTOR_ID",
+    "DOCS_CONTENT_CI_REVIEWER_LOGIN",
+    "DOCS_CONTENT_CI_REVIEWER_ID",
+  ])
+    assert.throws(() => readContentCiIdentity({ ...env, [key]: "" }));
+  for (const patch of [
+    { DOCS_CONTENT_CI_EXECUTOR_LOGIN: "synthetic-user" },
+    { DOCS_CONTENT_CI_REVIEWER_LOGIN: "synthetic-reviewer[bot]" },
+    { DOCS_CONTENT_CI_REVIEWER_ID: env.DOCS_CONTENT_CI_EXECUTOR_ID },
+    { DOCS_CONTENT_CI_EXECUTOR_ID: "01" },
+    { DOCS_CONTENT_CI_REVIEWER_ID: "2e3" },
+    { DOCS_CONTENT_CI_REVIEWER_ID: "9007199254740992" },
+  ])
+    assert.throws(() => readContentCiIdentity({ ...env, ...patch }));
+});
+
+test("humans, other bots, mismatched senders, stale workflow code and all reruns are denied", () => {
+  for (const patch of [
+    { GITHUB_ACTOR: env.DOCS_CONTENT_CI_REVIEWER_LOGIN },
+    { GITHUB_ACTOR_ID: env.DOCS_CONTENT_CI_REVIEWER_ID },
+    { GITHUB_TRIGGERING_ACTOR: env.DOCS_CONTENT_CI_REVIEWER_LOGIN },
+    { GITHUB_RUN_ATTEMPT: "2" },
+    { GITHUB_RUN_ATTEMPT: "" },
+    { GITHUB_RUN_ID: "../other" },
+    { GITHUB_WORKFLOW_SHA: "b".repeat(40) },
+    { GITHUB_WORKFLOW_REF: env.GITHUB_WORKFLOW_REF.replace("main", "feature") },
+  ])
+    assert.throws(() => assertTrustedContentRun({ ...env, ...patch }, event));
+  for (const sender of [
+    undefined,
+    { ...event.sender, type: "User" },
+    { ...event.sender, id: 1002 },
+    { ...event.sender, login: "another-bot[bot]" },
+  ])
+    assert.throws(() => assertTrustedContentRun(env, { ...event, sender }));
+});
+
+test("review must bind the exact locked content revision as well as the code SHA", () => {
+  assertApprovedContentRevision(event, release);
+  for (const approved_content_revision of [
+    undefined,
+    "main",
+    "b".repeat(40),
+    `${sha}\n`,
+  ])
+    assert.throws(() =>
+      assertApprovedContentRevision(
+        { ...event, inputs: { ...event.inputs, approved_content_revision } },
+        release,
+      ),
+    );
+});
+
+test("Environment reviewers cannot be bots, teams, extra accounts or another human", () => {
+  for (const reviewers of [
+    [{ type: "User", reviewer: { ...identity.executor, type: "Bot" } }],
+    [{ type: "Team", reviewer: { id: 2002 } }],
+    [
+      {
+        type: "User",
+        reviewer: { ...identity.reviewer, id: 2003, type: "User" },
+      },
+    ],
+    [
+      ...protection.protection_rules[0]!.reviewers,
+      { type: "User", reviewer: { id: 2003 } },
+    ],
+  ])
+    assert.throws(() =>
+      assertProtectedContentEnvironment(
+        {
+          ...protection,
+          protection_rules: [{ ...protection.protection_rules[0], reviewers }],
+        },
+        policies,
+        identity,
+      ),
+    );
+  assert.throws(() =>
+    assertProtectedContentEnvironment(
+      protection,
+      { ...policies, total_count: 101 },
+      identity,
+    ),
+  );
+  assert.throws(() =>
+    assertProtectedContentEnvironment(
+      { ...protection, id: 0 },
+      policies,
+      identity,
+    ),
+  );
+});
+
+const approval = {
+  state: "approved",
+  user: { ...identity.reviewer, type: "User" },
+  environments: [{ id: protection.id, name: protection.name }],
+};
+test("only one actual approval from the pinned human for this Environment is accepted", () => {
+  assertHumanContentApproval([approval], protection, identity);
+  for (const history of [
+    null,
+    {},
+    [],
+    [approval, approval],
+    [{ ...approval, state: "rejected" }],
+    [{ ...approval, user: { ...identity.executor, type: "Bot" } }],
+    [{ ...approval, user: { ...approval.user, id: 2003 } }],
+    [{ ...approval, user: { ...approval.user, login: "another-reviewer" } }],
+    [
+      {
+        ...approval,
+        environments: [{ id: protection.id + 1, name: protection.name }],
+      },
+    ],
+    [
+      {
+        ...approval,
+        environments: [{ id: protection.id, name: "another-environment" }],
+      },
+    ],
+    [{ ...approval, environments: null }],
+  ])
+    assert.throws(() =>
+      assertHumanContentApproval(history, protection, identity),
+    );
+});
+
+const runMetadata = {
+  id: Number(env.GITHUB_RUN_ID),
+  head_sha: sha,
+  head_branch: "main",
+  event: "workflow_dispatch",
+  run_attempt: 1,
+  actor: event.sender,
+  triggering_actor: event.sender,
+};
+const policyResponses: Record<string, unknown> = {
+  [`actions/runs/${env.GITHUB_RUN_ID}`]: runMetadata,
+  [`environments/${PRIVATE_CONTENT_ENVIRONMENT}`]: protection,
+  [`environments/${PRIVATE_CONTENT_ENVIRONMENT}/deployment-branch-policies?per_page=100`]:
+    policies,
+  [`actions/runs/${env.GITHUB_RUN_ID}/approvals`]: [approval],
+};
+test("keyless policy gates query trusted metadata and approval only after the human gate", async () => {
+  for (const afterApproval of [false, true]) {
+    const calls: string[] = [];
+    await verifyContentAuthorization(
+      env,
+      event,
+      async (path) => {
+        calls.push(path);
+        return policyResponses[path];
+      },
+      afterApproval,
+    );
+    assert.equal(calls.length, afterApproval ? 4 : 3);
+    assert.equal(
+      calls.some((path) => path.endsWith("/approvals")),
+      afterApproval,
+    );
+  }
+});
+
+test("untrusted callers or an early content key fail before any metadata request", async () => {
+  let calls = 0;
+  for (const patch of [
+    { GITHUB_ACTOR: "synthetic-reviewer" },
+    { GITHUB_RUN_ATTEMPT: "2" },
+    { DOCS_PRIVATE_CONTENT_SSH_KEY: "synthetic-rejected-input" },
+  ])
+    await assert.rejects(
+      verifyContentAuthorization({ ...env, ...patch }, event, async () => {
+        calls++;
+        return null;
+      }),
+    );
+  assert.equal(calls, 0);
+});
+
+test("remote run metadata cannot substitute another SHA, run, actor or dispatch", async () => {
+  for (const patch of [
+    { id: 4005 },
+    { head_sha: "b".repeat(40) },
+    { head_branch: "feature" },
+    { event: "pull_request" },
+    { run_attempt: 2 },
+    { actor: { ...event.sender, id: 1002 } },
+    { triggering_actor: { ...approval.user } },
+  ])
+    await assert.rejects(
+      verifyContentAuthorization(
+        env,
+        event,
+        async (path) =>
+          path === `actions/runs/${env.GITHUB_RUN_ID}`
+            ? { ...runMetadata, ...patch }
+            : policyResponses[path],
+        true,
+      ),
+    );
+});
+
+test("missing policies, 403/404, network failures and absent approval stop before key access", async () => {
+  for (const failure of [
+    new Error("synthetic 403"),
+    new Error("synthetic 404"),
+    new Error("synthetic network failure"),
+  ]) {
+    await assert.rejects(
+      verifyContentAuthorization(
+        env,
+        event,
+        async (path) => {
+          if (path.startsWith("environments/")) throw failure;
+          return policyResponses[path];
+        },
+        true,
+      ),
+    );
+  }
+  for (const path of Object.keys(policyResponses))
+    await assert.rejects(
+      verifyContentAuthorization(
+        env,
+        event,
+        async (p) => (p === path ? null : policyResponses[p]),
+        true,
+      ),
+    );
+  await assert.rejects(
+    verifyContentAuthorization(
+      env,
+      event,
+      async (path) =>
+        path.endsWith("/approvals") ? [] : policyResponses[path],
+      true,
+    ),
+  );
+});
+
+test("the post-approval gate rechecks weakened protection rather than reusing authorization", async () => {
+  await verifyContentAuthorization(
+    env,
+    event,
+    async (path) => policyResponses[path],
+  );
+  await assert.rejects(
+    verifyContentAuthorization(
+      env,
+      event,
+      async (path) =>
+        path === `environments/${PRIVATE_CONTENT_ENVIRONMENT}`
+          ? { ...protection, can_admins_bypass: true }
+          : policyResponses[path],
+      true,
+    ),
+  );
 });
 
 test("general CI has no private key/environment and prepares the same synthetic input in every code job", () => {
@@ -215,6 +511,20 @@ test("general CI has no private key/environment and prepares the same synthetic 
 test("credential workflow is manual main only, pinned and separates policy approval from secrets", () => {
   const wf = workflow("docs-private-content.yml");
   assert.deepEqual(Object.keys(wf.on), ["workflow_dispatch"]);
+  assert.deepEqual(Object.keys(wf.on.workflow_dispatch.inputs), [
+    "approved_sha",
+    "approved_content_revision",
+  ]);
+  for (const name of [
+    "EXECUTOR_LOGIN",
+    "EXECUTOR_ID",
+    "REVIEWER_LOGIN",
+    "REVIEWER_ID",
+  ])
+    assert.equal(
+      wf.env[`DOCS_CONTENT_CI_${name}`],
+      `\x24{{ vars.DOCS_CONTENT_CI_${name} }}`,
+    );
   assert.equal(wf.jobs.authorize.environment, undefined);
   assert.doesNotMatch(JSON.stringify(wf.jobs.authorize), /secrets\./);
   const job = wf.jobs.content;
@@ -243,6 +553,21 @@ test("credential workflow is manual main only, pinned and separates policy appro
     JSON.stringify(s).includes("secrets."),
   );
   assert.equal(steps.length, 1);
+  const recheck = job.steps.findIndex(
+    (s: any) =>
+      s.run === "node scripts/private-content-ci-policy.mts --after-approval",
+  );
+  const install = job.steps.findIndex(
+    (s: any) => s.run === "pnpm install --frozen-lockfile --ignore-scripts",
+  );
+  const credential = job.steps.indexOf(steps[0]);
+  assert.ok(install >= 0 && recheck > install && recheck < credential);
+  assert.doesNotMatch(JSON.stringify(job.steps[recheck]), /secrets\./);
+  assert.deepEqual(job.permissions, {
+    contents: "read",
+    actions: "read",
+    deployments: "read",
+  });
   assert.equal(steps[0].run, "node scripts/verify-private-content-ci.mts");
   assert.equal(
     steps[0].env.DOCS_PRIVATE_CONTENT_SSH_KEY,

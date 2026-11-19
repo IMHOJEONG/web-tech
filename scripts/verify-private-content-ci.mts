@@ -9,6 +9,8 @@ import { pathToFileURL } from "node:url";
 import {
   assertPrivateBuild,
   assertPrivateIntegration,
+  assertTrustedContentRun,
+  assertApprovedContentRevision,
   assertPrivateSearch,
   parsePrivateRelease,
 } from "./private-content-ci-policy.mts";
@@ -115,11 +117,16 @@ if (
   import.meta.url === pathToFileURL(process.argv[1]).href
 ) {
   try {
-    assert.equal(process.env.GITHUB_EVENT_NAME, "workflow_dispatch");
-    assert.equal(process.env.GITHUB_REF, "refs/heads/main");
+    const event = JSON.parse(
+      fs.readFileSync(process.env.GITHUB_EVENT_PATH!, "utf8"),
+    );
+    assertTrustedContentRun(process.env, event);
     assert.equal(process.env.DOCS_CONTENT_SOURCE, "private-git");
     assert.ok(process.env.DOCS_PRIVATE_CONTENT_SSH_KEY);
-    assertPrivateIntegration((file) => fs.readFileSync(file, "utf8"));
+    const release = assertPrivateIntegration((file) =>
+      fs.readFileSync(file, "utf8"),
+    );
+    assertApprovedContentRevision(event, release);
     // Capture output in memory: even build failures must not publish source text.
     const build = spawnSync("pnpm", ["--filter", "docs", "build"], {
       cwd: process.cwd(),
