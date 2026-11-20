@@ -2,6 +2,20 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/worklog/2026-11/2026-11-20-toc-row-alignment.md",
+      "sha256": "615e92a7baba1f30e1f512c522bf25761fdf1f218d8842f39064b91faea04ab4",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 로컬 목차 수정본 확인 후 코드·회귀 2개와 정제 문서 3개만 공개 검수·해시 등록·작업별 커밋·푸시하도록 명시 승인함. 항목 박스/텍스트 중심의 4px 차이·최소 터치 높이 보존·합성 회귀 20개 통과와 화면 조건 skip 1개·원격 미검증 범위·사용자 확인·서버 종료·합성 입력 정리의 정제 결과를 검수함. 원시 화면·로그·실제 글·미리보기 입력·비밀값·다른 미커밋/stash·PR 생성·병합·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/verification/security/2026-11-20-effect-redos.md",
       "sha256": "75e8c05505ff3fae070433cc705a93d7067ac87bfa3b320434f5e66a093b1348",
       "kind": "document",
@@ -689,11 +703,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "d55226c1ed1afd870698561a24b7db055e29dad75a24bff887329645f0ed31da",
+      "sha256": "ba3cc7629811fcb72ff003b97edb6d34f53927f881b268db52275c2ccf58e978",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-20",
-      "note": "사용자가 PR #103 병합 전 최신 main의 Effect 보안 기록과 초안 작성 지침 항목을 모두 보존하는 충돌 해결과 합쳐진 월별 목차의 재검수·해시 갱신·커밋·푸시·CI 재검증을 명시 승인함. 두 기존 항목 외 본문·원문·비밀값·다른 미커밋·운영 설정은 변경하지 않음.",
+      "note": "사용자가 로컬 목차 수정본 확인 후 코드·회귀 2개와 정제 문서 3개만 공개 검수·해시 등록·작업별 커밋·푸시하도록 명시 승인함. 항목 박스/텍스트 중심의 4px 차이·최소 터치 높이 보존·합성 회귀 20개 통과와 화면 조건 skip 1개·원격 미검증 범위·사용자 확인·서버 종료·합성 입력 정리의 정제 결과를 검수함. 원시 화면·로그·실제 글·미리보기 입력·비밀값·다른 미커밋/stash·PR 생성·병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -773,11 +787,11 @@
     },
     {
       "path": "docs/verification/accessibility/2026-11-14-article-toc-ux.md",
-      "sha256": "0a29b83c21fb406df77dff7a43f5bc3c390bc88acdf0dee77434bfa1864d55ad",
+      "sha256": "4d9ee2615c01634a94403de62d2ef29865181049de557d6ab3f0dec03b65e681",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-14",
-      "note": "사용자가 PR91 기존 테스트 이동과 정제 검증 보고서·작업 기록 2개의 보완·공개 해시 갱신 후 병합·배포를 명시 승인함. 최초 미커밋 검증·전체 기준 SHA·CI 편입과 364개 검사를 구분해 검수함. 원시 로그·캡처·실제 응답·비밀값·개인정보·기존 미커밋은 제외하며 NAS·공통 검사 설정은 변경하지 않음.",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 로컬 목차 수정본 확인 후 코드·회귀 2개와 정제 문서 3개만 공개 검수·해시 등록·작업별 커밋·푸시하도록 명시 승인함. 항목 박스/텍스트 중심의 4px 차이·최소 터치 높이 보존·합성 회귀 20개 통과와 화면 조건 skip 1개·원격 미검증 범위·사용자 확인·서버 종료·합성 입력 정리의 정제 결과를 검수함. 원시 화면·로그·실제 글·미리보기 입력·비밀값·다른 미커밋/stash·PR 생성·병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
