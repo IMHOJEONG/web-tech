@@ -1,7 +1,7 @@
 {
     "version": 1,
     "repository": "https://github.com/IMHOJEONG/heap-forge-content.git",
-    "revision": "8e53eabbfcaa139a1b9b66af4647aa230f8adab1",
+    "revision": "e07988e9cf6a899d750445b1cf14d7e10d1aca8d",
     "routes": [
         "/docs/category/be/node-js/event-loop-cpu-delay",
         "/docs/category/be/node-js/http-response-streaming-lab",
@@ -9,6 +9,7 @@
         "/docs/category/be/node-js/node-brotli-runtime-security",
         "/docs/category/be/node-js/stream-backpressure-diagnosis",
         "/docs/category/be/node-js/tcp-socket-endpoints-lab",
+        "/docs/category/be/node-js/worker-pool-queue-limit",
         "/docs/category/computer-science/os/process-thread-scheduler",
         "/docs/category/fe/browser/critical-rendering-path-diagnosis",
         "/docs/category/fe/react/nextjs",
