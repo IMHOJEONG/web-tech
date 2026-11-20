@@ -2,6 +2,34 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/verification/security/2026-11-20-effect-redos.md",
+      "sha256": "75e8c05505ff3fae070433cc705a93d7067ac87bfa3b320434f5e66a093b1348",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 Effect #363의 최종 정제 문서 4개와 승인 해시 등록·갱신의 공개·커밋·푸시를 명시 승인함. 공식 권고·직접/간접 patch·제한된 합성 회귀·정상 대조·감사와 소비자 검사 집계·설치 환경 복구·미검증 범위 및 실제 Jira/Confluence 링크를 검수함. 원시 로그·응답·인증 값·개인 경로·기존 초안/MWG/NAS 작업·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-20-effect-redos.md",
+      "sha256": "f2169c2c5c9dbc199efbaa7fad309cedea47d581c9b503c54c884c7c3fe5de40",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 Effect #363의 최종 정제 문서 4개와 승인 해시 등록·갱신의 공개·커밋·푸시를 명시 승인함. 변경 요약·정제 검사 결과·실제 Jira/Confluence 연결·후속 커밋/PR 요청과 main/운영 미반영 상태를 검수함. 원시 자료·비밀값·기존 초안/MWG/NAS 작업·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/architecture/adr-0034-content-ci-identity-approval.md",
       "sha256": "3c6b992b9f7c1490858873a349cb79fa8626667d00481d049f7d13fbc70ad99e",
       "kind": "document",
@@ -619,11 +647,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "ce3f05a46eacffb5a387a7c8624672ce0b3853d90f5af3e432e18e4e68de18a5",
+      "sha256": "82b1735dd4d53c2d85a01823d516c060ee2adbe06a44716013ac568de7a133e7",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-19",
-      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 Effect #363의 최종 정제 문서 4개와 승인 해시 등록·갱신의 공개·커밋·푸시를 명시 승인함. 기존 항목을 보존하고 검증 보고서 항목 1개만 추가한 최종 목차를 검수함. 원시 자료·비밀값·기존 초안/MWG/NAS 작업·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -661,11 +689,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "0e770fec4a3ff6e3aa9def70ddd8ee3e730b1c7f2eba099e153183d305746109",
+      "sha256": "00bdb11a44436a91408b25595e6b16798ffa6f99960050f71d091aeeb981fb9e",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-19",
-      "note": "사용자가 CI 코드·workflow 4개와 기존 문서 8개의 공개 검수·커밋·푸시·PR 준비를 승인함. 실행 Bot·사람 승인 경계·키 없는 보호 설정 조회·합성 회귀와 실제 미검증 범위를 검수함. 원문·키·원시 응답/로그·다른 미커밋·stash·main 병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 Effect #363의 최종 정제 문서 4개와 승인 해시 등록·갱신의 공개·커밋·푸시를 명시 승인함. 기존 항목을 보존하고 보안 작업 기록 항목 1개만 추가한 최종 월별 목차를 검수함. 원시 자료·비밀값·기존 초안/MWG/NAS 작업·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
