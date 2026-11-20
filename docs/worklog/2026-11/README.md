@@ -1,5 +1,7 @@
 # 2026-11 작업 기록
 
+- [11-20 Effect 보안 패치](2026-11-20-effect-redos.md): #363·KAN-85 분리, 3.x 하한·직접/간접 사본 통합과 격리 회귀. 로컬 검증이며 공개 승인·커밋·PR·배포는 별도.
+
 - [11-19 Confluence 지식·작업 기록 분리](2026-11-19-confluence-knowledge-separation.md): 주제별 지식 3개 게시와 공통 승격·마감 기준의 로컬 반영. 기존 MWG·초안·NAS 작업 유지.
 
 - [비공개 Git 콘텐츠 공급과 운영 전환](2026-11-17-private-git-content.md)

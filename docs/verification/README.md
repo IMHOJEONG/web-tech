@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-20 Effect TemplateLiteral ReDoS](security/2026-11-20-effect-redos.md): 직접·Prisma 간접 사본 3.22.4 통합, 구버전 격리 timeout 대조와 수정본 6개 회귀·소비자 호환·감사 0건. main·운영 반영은 별도.
+
 - [비공개 Git 콘텐츠 공급 검증](content/2026-11-17-private-git-content.md)
 
 - [합성 PR·인증 콘텐츠 CI 분리](content/2026-11-18-content-ci-isolation.md): 실행 Bot·사람 승인, 두 SHA·승인 이력의 로컬 회귀. Environment와 Bot·사람 신원 변수는 조회·정책 검사 통과. App 설치·권한의 독립 대조, 분리된 실행 환경·런처·키와 실제 인증 CI 활성화는 대기.
