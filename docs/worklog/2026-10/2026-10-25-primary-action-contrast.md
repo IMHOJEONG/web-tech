@@ -42,3 +42,16 @@ Figma의 승인된 primary 토큰과8개 focus master만 보완했으며 짧은 
 사용자가 두 PR 병합을 승인했다. #62는 최종 squash 메시지 전체 사전검사 후 main `f8fbc068d633796d64343ea01aabee0e35a3f32c`로 병합했다. #63의 기존 head `54ed9a9`는 CI·문서·CodeQL·Preview를 통과했지만 CodeRabbit은 사용량 제한으로 실제 리뷰를 수행하지 않았다. 미해결 리뷰 스레드는 두 PR 모두 0개였으며 자동 체크 성공을 실제 리뷰 승인으로 간주하지 않았다.
 
 #62 병합 직후 #63은 문서 목차 3개 충돌로 사전검사가 중단됐다. 최신 main을 merge로 통합하고 양쪽 목차 링크를 모두 보존했다. 코드 충돌·자동 원문 변환·의존성 변경은 없고 기존 브랜치·미커밋·stash는 수정하지 않았다. 새 head의 CI 재검증 이후에만 다시 최종 메시지를 검사해 #63 병합을 요청한다. main CI·Vercel Production·NAS 이미지 게시/컨테이너 교체는 각각 별도 결과로 구분한다.
+
+## 승인된 병합 실행 결과
+
+- [PR #62](https://github.com/IMHOJEONG/web-tech/pull/62): main `f8fbc068d633796d64343ea01aabee0e35a3f32c`. 같은 SHA의 [main CI](https://github.com/IMHOJEONG/web-tech/actions/runs/40199771212)·문서·두 Production 배포가 성공했다. [NAS용 이미지 게시](https://github.com/IMHOJEONG/web-tech/actions/runs/40199771196)도 성공했지만 NAS 컨테이너 교체나 운영 API H1 정책 검증은 수행하지 않았다.
+- [PR #63](https://github.com/IMHOJEONG/web-tech/pull/63): main 통합 커밋 `a80a5f0f441e2305b53f832e99bd6baff81a9bbc`의 [전체 CI](https://github.com/IMHOJEONG/web-tech/actions/runs/40200038826)·[CodeQL](https://github.com/IMHOJEONG/web-tech/actions/runs/40200036215)·문서·Preview 성공 후 최종 메시지를 다시 검사해 `c1e2850cbfdf50bd7761729b32d1af5ffe045596`로 병합했다. CodeRabbit은 한도로 실제 리뷰를 수행하지 않았으며 사람 승인으로 간주하지 않았다.
+- 충돌 해결은 목차 3곳만이며 대비 소스/테스트 7개는 `54ed9a9`와 같았다. 첫 통합 커밋 메시지의 허용되지 않은 `docs` scope는 commitlint가 거절했고, `docs-arch`로 고쳐 정상 훅을 통과했다. 이력 재작성·보호 우회 없음.
+- 최종 main의 Vercel 연동 GitHub Deployment 기록 `Production – web-tech` ID `7314181802`와 `Production – vuln-radar` ID `7314175335`가 모두 success이고 `curl -L https://heap-forge.app/ko`의 최종 응답은 HTTP 200이었다. 같은 SHA의 [최종 main CI](https://github.com/IMHOJEONG/web-tech/actions/runs/40200549172) 13개 job·문서 검사·Push on main 워크플로도 모두 성공했다. 공개 화면이 참조한 CSS 두 파일 중 앱 스타일에서 두 테마의 `--primary-foreground:#171717` 및 primary CTA의 2px outline·3px offset·forced-colors 규칙을 확인했다. 실제 브라우저 전체 WCAG 재검사를 뜻하지 않는다.
+
+이번 후속 기록은 병합 이후 로컬 문서 변경으로, 이미 병합한 PR head에 포함되지 않는다. KAN-36·KAN-37 및 Confluence의 기존 기록을 갱신하고 재조회한다. 공용 UI 공식 매핑·다른 브랜치 동기화·기존 미커밋/초안 게시·NAS 컨테이너 교체는 실행하지 않는다.
+
+## 2026-10-28 독립 기록 PR 준비
+
+대비 구현은 이미 PR #63으로 병합됐다. 이번에는 당시 병합·CI·공개 CSS 확인 기록만 최신 main에서 분리한다. 두 숫자 식별자는 GitHub Deployments API로 SHA·environment를 재조회해 GitHub Deployment ID임을 확인했으며 Vercel의 `dpl_...` ID와 구분했다. [재조회 메타데이터](../../verification/artifacts/2026-10-28-primary-deployment-identifiers.json)는 현재 Production 화면 재검사나 전체 WCAG 평가를 뜻하지 않는다. 원본 작업 트리·기록·다른 기능은 유지한다.
