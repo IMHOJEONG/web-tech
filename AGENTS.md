@@ -7,6 +7,7 @@
 - 모노레포 루트의 package manager와 lockfile을 사용하고, 앱별 빌드·테스트는 가능한 한 workspace filter로 좁혀 실행합니다.
 - squash 병합은 [최종 메시지 사전검사](docs/process/squash-merge-preflight.md)를 따릅니다. 사용자 병합 승인 후에만 `pnpm pr:squash ... --merge`를 사용해 최종 메시지 전체를 commitlint로 재검사하고 검증한 head에 전달합니다. 직접 `gh pr merge --squash`로 우회하거나 main 이력을 재작성하지 않습니다.
 - Next.js 앱은 해당 앱의 `AGENTS.md`와 로컬 `node_modules/next/dist/docs/` 문서를 먼저 확인합니다. 최신 API·라우팅·캐싱·서버/클라이언트 경계를 기억에만 의존해 판단하지 않습니다.
+- 블로그 초안·발행 원문·글 전용 자산의 기본 작성 위치는 비공개 `IMHOJEONG/heap-forge-content`입니다. 공개 `web-tech`에는 앱·공용 패키지·합성 테스트·정제 운영 문서만 추가합니다. 초안은 비공개 Git에서 `status: draft`로 유지하며, 비공개 커밋과 공개 게시 승인을 구분합니다. 커밋·푸시는 사용자의 명시 요청 범위에서만 수행하고 [기고 가이드](docs/runbooks/docs-contributor-guide.md)를 따릅니다. 기존 원문·stash의 자동 이전·삭제나 과거 이력 재작성은 하지 않습니다.
 
 ## Jira·Confluence 작업 기록
 
