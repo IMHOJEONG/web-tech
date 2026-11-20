@@ -2,7 +2,7 @@
 
 ## Purpose
 
-이 문서는 `apps/docs` 블로그 글을 새로 추가하거나 수정할 때 따라야 하는 contributor 기준을 정리한다.
+이 문서는 비공개 `IMHOJEONG/heap-forge-content`에서 `apps/docs` 블로그의 초안·발행 원문을 작성할 때 따라야 하는 기준이다. 공개 `web-tech`는 앱 코드·합성 검사·정제 운영 문서의 저장소이며 새 글 원문의 작성 위치가 아니다. 2026-11-20의 지침 변경은 전용 PR로 검토하며 main 반영·게시·운영 검증과 구분한다.
 
 핵심 목표:
 
@@ -12,27 +12,22 @@
 
 ## Content Placement
 
-문서는 현재 두 계층에서 관리한다.
+새 초안·발행 원문과 글 전용 자산은 비공개 콘텐츠 저장소의 다음 위치에서 관리한다. 초안 전용 `drafts/` 디렉터리를 새로 만들지 않고 상태를 frontmatter로 구분한다.
 
-- `apps/docs/data/*`
-  - 현재 메인 docs 채널에서 직접 노출되는 문서
-  - 원격 문서 서버 장애 시에도 보여줄 evergreen fallback 문서
-  - 예: browser runtime, accessibility, rendering, UI behavior
-- `apps/docs/category/*`
-  - taxonomy 실험 또는 세부 카테고리 문서
-  - FE / BE / Computer Science 같은 학습 축의 기준 문서
-- remote content server
-  - 앱 배포 없이 운영 중 추가/수정할 문서
-  - 최신 글, 실험 기록, 이미지가 자주 바뀌는 글
+| 비공개 저장소 경로                  | 역할                                                                                        |
+| ----------------------------------- | ------------------------------------------------------------------------------------------- |
+| `category/be/node-js/<slug>.mdx` 등 | 주제별 초안·발행 원문. 기존 taxonomy와 canonical 경로를 유지                                |
+| `data/v8/`, `data/shadcn/` 등       | 기존 경로를 유지하는 콘텐츠. 새 분류가 필요한 글은 `category/` 우선                         |
+| `public/<topic>/<slug>/` 등         | 글 전용 이미지·도식·필요한 라이선스. 검수된 published 글이 참조하는 자산만 발행 입력에 포함 |
+
+공개 코드의 `apps/docs/data`·`category`에 실제 초안을 복사하거나 새 글 이미지를 `apps/docs/public`에 넣지 않는다. 테스트에는 합성 문서를 사용한다. 기존 공개 원문·초안·stash는 별도 이전·삭제 승인 전 보존하고 과거 이력도 재작성하지 않는다.
 
 기본 원칙:
 
-- 파일명보다 `frontmatter.slug`가 leaf slug의 기준이다.
-- 실제 canonical route 계산은 파일 경로와 `slug`를 함께 사용하므로, 임시 폴더명이나 테스트용 구조를 오래 유지하지 않는다.
+- `frontmatter.slug`는 문서 메타데이터이며 실제 canonical route는 구조화된 파일 경로를 우선한다. 제목·상태를 바꾼다고 파일 위치까지 자동 변경하지 않는다.
 - published 문서는 가능한 한 실제 채널 의미가 드러나는 폴더에 둔다.
-- 앱 코드와 함께 리뷰되어야 하거나 원격 장애 시에도 반드시 보여야 하는 글은 local에 둔다.
-- 빠르게 발행/수정해야 하거나 asset 변경이 잦은 글은 remote에 둔다.
-- 같은 route의 local/remote 문서가 동시에 있으면 remote 문서를 우선 노출한다.
+- 초안과 발행본의 작성 원본은 모두 비공개 Git에 둔다. NAS는 기존 글의 수동 이전 대상이며 신규 초안의 기본 저장소가 아니다.
+- 운영은 승인된 콘텐츠 SHA의 빌드 스냅샷을 사용한다. 비공개 push·원격 API 변경만으로 새 글이 게시되지는 않는다.
 
 ## Naming Rules
 
@@ -65,7 +60,7 @@ slug: "rendering-pipeline"
 summary: "브라우저 렌더링 파이프라인을 단계별로 정리한다."
 date: "2026-08-08"
 updatedAt: "2026-08-08"
-thumbnail: "web/rendering-pipeline/hero.webp"
+thumbnail: "/web/rendering-pipeline/hero.webp"
 authorName: "HoJeong Im"
 authorRole: "Web Engineer"
 readMinutes: 7
@@ -103,7 +98,7 @@ status: "published"
 
 ## Draft Content Rules
 
-초안 문서는 아래처럼 더 가볍게 시작해도 된다.
+비공개 콘텐츠 저장소에서 초안은 아래처럼 시작할 수 있다. 다음 예시는 작성 형식이며 실제 새 글을 만들거나 게시하라는 명령이 아니다.
 
 ```md
 ---
@@ -120,6 +115,12 @@ status: "draft"
 - `status`
 
 초안이 published로 올라가기 전에는 published 필수 메타를 모두 채운다.
+
+비공개 초안의 수정 이력은 Git으로 관리할 수 있다. 다만 `git add .`·`git push --all`로 다른 변경을 포함하지 않고 사용자에게 요청받은 저장소·파일만 커밋·푸시한다. 비공개 커밋은 공개 검수나 게시 승인이 아니므로 이 단계에서 release lock·게시 검수 해시를 자동 갱신하지 않는다.
+
+게시 순서는 사람 검수·명시적 게시 승인 → `published` 전환과 원문/참조 자산의 검수 해시 등록 → 비공개 콘텐츠 커밋 → 검증된 SHA의 release lock PR → 사람 병합 → 배포·공개 URL/사이트맵 확인이다. [발행 준비 절차](docs-private-git-content.md#초안의-기본-작성-위치)와 [합성/인증 CI 경계](docs-private-content-ci.md)를 따른다. lock PR 자동화는 별도 미푸시 작업이므로 이 지침 PR에 포함하거나 이미 활성화됐다고 안내하지 않는다.
+
+비공개 Git에도 비밀값·실제 API 응답·원시 로그·HAR/pcap·원본 캡처·녹화본·DB dump는 넣지 않는다. 필요한 공개 도식·검증 요약은 원시 자료와 분리하고 별도 검수한다.
 
 ### Unfinished Work Markers
 
@@ -147,7 +148,7 @@ remote renderer는 보안을 위해 raw HTML을 비활성화한다. 이 때문�
 
 - 콘텐츠 이미지
   - 글 본문과 함께 배포되는 asset
-  - remote content asset base 또는 글 전용 asset storage에서 관리
+  - 기본 위치는 비공개 콘텐츠 저장소의 `public/`. 기존 외부 미디어는 공개 범위·권리를 별도 확인
 - 앱 UI 이미지
   - 로고, 기본 OG, placeholder, shell 장식
   - `apps/docs/public` 또는 프론트 자산 체계에서 관리
@@ -218,11 +219,11 @@ remote renderer는 보안을 위해 raw HTML을 비활성화한다. 이 때문�
 
 `apps/docs`는 frontmatter 외에도 최소한의 문서 형식을 검사한다.
 
-로컬 CLI와 NestJS `docs-backend`는 `@web-tech/docs-content-contract/body-style`의 같은 본문 검증기를 사용한다. 새 백엔드 이미지에서는 published 문서의 hard fail이 목록 제외·상세 404로 이어진다. warning만 있는 문서는 공개를 유지한다. [배포 전 점검과 캐시 주의점](../architecture/docs-content-authoring-markup-policy.md#배포-영향)을 확인한다.
+private-git 발행 준비와 로컬 CLI는 기존 frontmatter·본문 규칙을 사용한다. 레거시 NestJS `docs-backend`도 `@web-tech/docs-content-contract/body-style`의 본문 검증기를 공유하지만, 그 API/이미지의 배포는 현재 Git 발행과 별개다. 기존 NAS 경로의 영향은 [배포 전 점검과 캐시 주의점](../architecture/docs-content-authoring-markup-policy.md#배포-영향)을 확인한다.
 
 Hard fail:
 
-- `apps/docs/data`, `apps/docs/category` 아래에는 `md`, `mdx` 문서만 둔다.
+- 비공개 `data/`, `category/` 아래에는 `md`, `mdx` 문서만 둔다. 코드 저장소 검사·manifest에서 이 위치는 `apps/docs/data`, `apps/docs/category`라는 논리 경로로 표시될 수 있다.
 - 첫 heading이 H4~H6으로 시작하면 실패한다. H1은 아래 Warning 규칙을 따른다.
 - heading level을 한 번에 두 단계 이상 건너뛰지 않는다.
 - 코드 블록은 언어를 명시한다.
@@ -238,11 +239,11 @@ Warning:
 - published 문서에 `TODO`, `FIXME`, `임시`, `테스트용` 같은 placeholder 표현이 남은 경우
 - published 문서 slug가 `test`, `sample`, `todo`, `draft` 같은 임시값인 경우
 
-H1과 다른 hard fail이 함께 있으면 해당 실패를 해결해야 게시할 수 있다. 이 정책을 NAS에도 적용하려면 변경된 공용 패키지가 포함된 새 백엔드 이미지를 배포해야 한다. 기존 이미지의 규칙은 NAS 원문 수정만으로 변경되지 않는다.
+H1과 다른 hard fail이 함께 있으면 해당 실패를 해결해야 게시할 수 있다. 레거시 NAS에도 변경된 규칙을 적용하려면 공용 패키지가 포함된 백엔드 이미지의 별도 배포가 필요하다. 비공개 Git 신규 글의 게시를 위해 NAS를 수정하라는 뜻은 아니다.
 
 ## Local Validation Commands
 
-로컬에서 최소 아래 명령을 권장한다.
+다음 명령은 콘텐츠 저장소가 아니라 공개 코드 저장소 `web-tech` 루트에서 실행한다. 합성 검사 통과를 비공개 초안의 직접 검수 완료로 보지 않는다.
 
 ```bash
 pnpm --filter docs test:content
@@ -257,7 +258,9 @@ pnpm --filter docs dev
 - `test:lib`
   - route/search/render 관련 회귀 검증
 - `dev`
-  - 실제 카드/상세/검색 노출 확인
+  - 준비된 콘텐츠의 카드/상세/검색 노출 확인. private-git 발행 입력에서 제외된 draft의 미리보기를 보장하지 않음
+
+현재 고정 release 검증기는 published 글만 준비한다. 비공개 Git의 draft를 원본 상태로 읽는 개발 전용 연결은 아직 없다. 초안을 공개 코드 디렉터리로 복사하거나 `published`로 바꿔 이 제한을 우회하지 않는다. [기존 draft 미리보기의 적용 범위](docs-article-rendering-regression.md#개발-서버에서-draft-보기)를 확인하고 연결 기능은 별도 과제로 검토한다.
 
 ## Common Mistakes
 
@@ -269,6 +272,8 @@ pnpm --filter docs dev
 
 ## Related Docs
 
+- [비공개 Git 작성·발행 절차](docs-private-git-content.md)
+- [초안 작성 위치 결정](../architecture/adr-0036-private-git-draft-authoring.md)
 - [docs-resource-content-roadmap.md](../architecture/docs-resource-content-roadmap.md)
 - [docs-content-authoring-markup-policy.md](../architecture/docs-content-authoring-markup-policy.md)
 - [docs-content-authoring-pipeline.md](../architecture/docs-content-authoring-pipeline.md)

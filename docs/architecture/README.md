@@ -6,6 +6,8 @@
 
 ## ADR 상태
 
+- [ADR-0036: 비공개 콘텐츠 Git의 초안 작성](adr-0036-private-git-draft-authoring.md): 적용 중. 초안·발행 원문 위치와 비공개 저장/공개 게시 승인 경계를 지침 전용 PR에서 검토. 기본 브랜치 반영·초안 이전·개발 preview 연결·운영 변경은 미실행.
+
 - [ADR-0032: 비공개 Git 발행본을 빌드 입력으로 사용](adr-0032-private-git-build-content.md): 적용 중. PR #98 main 병합과 동일 SHA의 Production 전환·공개 독자 검증 완료. 고정 발행본 17개 글·15개 자산을 사용하며 인증 CI 활성화·NAS 전용 글 이전은 후속. 이전 완료 공개 사본 정리는 별도 브랜치의 로컬 커밋·검증이며 main 미반영이다.
 
 - [ADR-0033: 합성 PR 검사와 승인된 비공개 콘텐츠 검증 분리](adr-0033-content-ci-trust-boundary.md): 적용 중. 기존 결정은 main 반영된 합성/인증 경로 분리이며 원래 본문을 보존한다. 실행 신원 고정·새 dispatch 요구는 ADR-0034로 보완한다.

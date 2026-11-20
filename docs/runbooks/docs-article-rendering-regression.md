@@ -220,6 +220,8 @@ CI의 `Docs production article rendering tests` 단계에서 같은 명령을 �
 
 ## 게시 글의 정기 점검과 수정 배포
 
+새 초안·발행 원문의 작성 위치는 비공개 `heap-forge-content`다. 아래 주간 점검 설명은 기존 실행 운영 기록이며 이 문서 변경으로 예약이나 자동 업로드를 새로 설정하지 않는다. 기존 예약 프롬프트가 공개 `apps/docs`에 원문을 작성하도록 되어 있다면 새 지침에 맞춘 별도 점검 전에는 그 지시를 실행하지 않는다. 현재 절차는 [기고 가이드](docs-contributor-guide.md)와 [비공개 Git 발행 준비](docs-private-git-content.md)를 우선한다.
+
 주간 기고 자동 실행은 매주 수요일 오전 9시(Asia/Seoul)에 기존 게시 글부터
 점검한다. 로컬 실행 장치와 네트워크·배포 권한이 필요하다. 정상 기준은 위의
 본문 시작·끝, metadata, loading 종료 조건을 따르며 공개 canonical URL의
@@ -239,7 +241,9 @@ CI의 `Docs production article rendering tests` 단계에서 같은 명령을 �
    실패 시 반복 푸시하지 않고 원인과 영향을 보고한다.
 
 새 글의 게시 승인은 별개다. 새 글은 `status: draft`로 유지하며 사용자 검토와
-해당 글의 명시적인 게시 승인 전에는 스테이징·커밋·푸시·원격 게시하지 않는다.
+해당 글의 명시적인 게시 승인 전에는 공개 Git 업로드·원격 Preview·게시를 하지 않는다.
+지정 비공개 콘텐츠 Git의 초안 커밋·푸시는 사용자가 요청한 범위에서 가능하지만
+게시 승인이나 release lock 갱신의 근거는 아니다.
 정상 글은 중복 배포하지 않고, 오류·접근 실패·수정 완료 등 의미 있는 결과만
 알린다. 권한이 없어 실행하지 못한 검사를 통과로 기록하지 않는다.
 
@@ -272,8 +276,9 @@ HTTP·Node.js 학습의 다음 단계는 [기존 학습 로드맵](../todo/todo.
 
 Codex 같은 파일 미리보기에서는 앱의 HTML 도식과 전용 CSS가 동일하게
 표시되지 않을 수 있다. 리뷰에 필요한 핵심 도식은 실제 이미지로 제공한다.
-현재 HTTP 초안은 `apps/docs/public/diagrams/`의 PNG를 Markdown 상대 경로로
-참조한다. MDX 평가기는 상대 `public` 이미지 경로를 웹의 루트 주소로 변환한다.
+새 도식은 비공개 콘텐츠 저장소의 `public/diagrams/` 같은 글 자산 경로에서 관리한다.
+공개 `apps/docs/public`에 실제 초안 자산을 추가하지 않는다. MDX 평가기는
+상대 `public` 이미지 경로를 웹의 루트 주소로 변환한다.
 이 규칙은 로컬 MDX 이미지에만 적용하며 원격 HTML은 별도 경로를 유지한다.
 
 SVG 원본을 수정하면 대응 PNG도 다시 생성한다. 표시 폭의 두 배 해상도로
@@ -284,11 +289,14 @@ SVG 원본을 수정하면 대응 PNG도 다시 생성한다. 표시 폭의 두 
 
 ## 개발 서버에서 draft 보기
 
+아래는 원문 디렉터리에 직접 접근할 수 있었던 기존 local/legacy 개발 경로의 설명이다. 현재 private-git 준비기는 draft를 제외하므로 비공개 저장소의 원본 draft checkout을 이 route에 연결하는 기능은 아직 없다. 실제 초안을 공개 앱 디렉터리에 복사하거나 `published`로 전환해 우회하지 않는다. 새 연결은 별도 구현·검증 후 이 절차를 갱신한다.
+
 기존 개발 서버가 있으면 해당 포트를 재사용한다. 새 서버가 필요하면
 `pnpm --filter docs dev`를 실행하고 출력된 포트를 확인한다.
 초안의 `data/` 또는 `category/` 상대 경로에서 확장자를 제외해
-`/[locale]/preview/<상대 경로>`에 접속한다. HTTP 글의 현재 로컬 주소는
-`http://127.0.0.1:3001/ko/preview/category/be/node-js/http-response-streaming-lab`다.
+`/[locale]/preview/<상대 경로>`에 접속한다. 이전 HTTP 초안의 주소 예시는
+`http://127.0.0.1:3001/ko/preview/category/be/node-js/http-response-streaming-lab`이며
+현재 비공개 원본 draft의 연결이나 해당 글이 아직 draft라는 증거는 아니다.
 
 이 경로는 `NODE_ENV=development`에서 draft만 표시한다. published·archived,
 경로 이탈·심볼릭 링크는 허용하지 않고 production/test에서는 조회를 거부한다.

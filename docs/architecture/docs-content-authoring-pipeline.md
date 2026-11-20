@@ -1,5 +1,15 @@
 # Docs Content Authoring Pipeline
 
+## 상태와 범위
+
+- 상태: 적용 중
+- 대상: docs의 원문 작성과 게시 경계
+- 최종 검토: 2026-11-20
+
+현재 발행 공급원은 [ADR-0032](adr-0032-private-git-build-content.md)의 비공개 Git 고정 스냅샷이다. 새 초안·발행 원문은 [ADR-0036](adr-0036-private-git-draft-authoring.md)에 따라 비공개 `heap-forge-content`에서 작성한다. 초안은 `draft`로 비공개 저장할 수 있지만 공개 검수·게시·release lock 갱신 승인은 별도다. 원시 자료·비밀값은 공개·비공개 Git 모두의 밖에 둔다. 실행 절차의 원본은 [기고 가이드](../runbooks/docs-contributor-guide.md)와 [비공개 Git runbook](../runbooks/docs-private-git-content.md)이다.
+
+아래 hybrid/NAS 설명은 이전 설계 기록으로 보존한다. 현재 신규 글의 작성·게시 지시나 NAS 설정 변경 절차로 사용하지 않는다. 기존 NAS 자료의 수동 이전과 현재 운영 검증은 별도다.
+
 ## Purpose
 
 이 문서는 `apps/docs`에 노출될 글을 어떤 경로로 작성하고, 어떤 경로로 원격 저장소에 올릴지 정리합니다.
@@ -9,7 +19,7 @@
 1. 작성자는 로컬 환경에서 글을 안전하게 작성하고 검증할 수 있어야 한다.
 2. 앱 런타임의 읽기 경로와 글 업로드 경로를 분리해 운영 리스크를 줄여야 한다.
 
-## Core Decision
+## 이전 NAS 설계의 Core Decision
 
 글 작성/업로드는 `로컬에서 원격에 직접 접근하는 authoring pipeline`으로 두는 것이 맞다.
 
@@ -42,7 +52,7 @@
 
 ### Runtime Read Path
 
-`apps/docs`는 현재처럼 원격 콘텐츠를 읽는다.
+이전 NAS 설계에서 `apps/docs`는 원격 콘텐츠를 읽는다.
 
 - 목록 메타데이터: content API
 - 본문 HTML: content body endpoint

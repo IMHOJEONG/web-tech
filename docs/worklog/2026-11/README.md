@@ -1,5 +1,7 @@
 # 2026-11 작업 기록
 
+- [11-20 비공개 Git 초안 작성 규칙](2026-11-20-private-draft-authoring-policy.md): 공개/비공개 작성 위치·저장과 게시 승인 경계를 저장소별 지침 PR로 분리. 원문 이전·기본 브랜치 반영·키·배포 미실행.
+
 - [11-19 Confluence 지식·작업 기록 분리](2026-11-19-confluence-knowledge-separation.md): 주제별 지식 3개 게시와 공통 승격·마감 기준의 로컬 반영. 기존 MWG·초안·NAS 작업 유지.
 
 - [비공개 Git 콘텐츠 공급과 운영 전환](2026-11-17-private-git-content.md)
