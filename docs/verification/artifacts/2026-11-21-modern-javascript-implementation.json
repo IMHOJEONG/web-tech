@@ -297,14 +297,6 @@
     "integrationFile": "2026-11-21T02-02-23-490Z-vuln-radar-integration.json",
     "screenshots": 10
   },
-  "notPerformed": [
-    "commit",
-    "push",
-    "PR",
-    "deployment",
-    "non-Chromium browser verification",
-    "performance benchmark"
-  ],
   "prCandidate": {
     "baseSha": "2cf837f04954d05d5ff409bdec6794ec28fd7f07",
     "branch": "codex/modern-javascript-implementation-20261121",
@@ -331,5 +323,24 @@
     "appModelTestsPassed": 36,
     "appLint": "passed",
     "rawEvidenceOutsideRepository": true
+  },
+  "notPerformedDuringInitialVerification": [
+    "commit",
+    "push",
+    "PR",
+    "deployment",
+    "non-Chromium browser verification",
+    "performance benchmark"
+  ],
+  "publication": {
+    "pullRequest": "https://github.com/IMHOJEONG/web-tech/pull/106",
+    "codeCommit": "905b57fd892e10dcc4af2df728e2c22704de03f6",
+    "base": "main",
+    "publicReviewedDocumentCount": 14,
+    "changedFileCountIncludingManifest": 23,
+    "originalWorktreeFilesPreserved": 248,
+    "mainMerged": false,
+    "productionDeployed": false,
+    "ciResults": "https://github.com/IMHOJEONG/web-tech/pull/106/checks"
   }
 }

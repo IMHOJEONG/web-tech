@@ -4,7 +4,7 @@
 
 - 대상: `scripts/verify-vuln-radar-integration.mts`의 API 응답 대기·해제 제어 2곳.
 - 최종 검토: 2026-11-21.
-- 상태: 통합 검증 스크립트 2곳에 `Promise.withResolvers<void>()` 로컬 적용. 타입 검사와 실제 Postgres·브라우저 통합 26그룹·정리 6단계 통과. [적용 검증](../../verification/integration/2026-11-21-modern-javascript-implementation.md)은 원격 Git·운영 배포와 별개다.
+- 상태: 통합 검증 스크립트 2곳에 `Promise.withResolvers<void>()` 로컬 적용. 타입 검사와 실제 Postgres·브라우저 통합 26그룹·정리 6단계 통과. [적용 검증](../../verification/integration/2026-11-21-modern-javascript-implementation.md)은 [PR #106](https://github.com/IMHOJEONG/web-tech/pull/106)의 원격 브랜치 반영과 main·운영 배포를 구분한다.
 - 관리: [KAN-83](https://web-tech-service.atlassian.net/browse/KAN-83). 공통 호환성 판단은 [웹 현대화 판단](https://web-tech-service.atlassian.net/wiki/pages/19464193).
 - Confluence 주제: [외부 Promise 완료 제어](https://web-tech-service.atlassian.net/wiki/pages/20250653).
 

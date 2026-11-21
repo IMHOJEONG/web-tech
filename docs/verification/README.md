@@ -1,6 +1,6 @@
 # 검증 보고서
 
-- [11-21 JavaScript 현대화 실제 적용](integration/2026-11-21-modern-javascript-implementation.md): 4곳 교체·Set 유지, 실제 타입 3진입점·API Chromium 7조건·전체 통합 26그룹 통과. 로컬 미커밋·운영 미배포.
+- [11-21 JavaScript 현대화 실제 적용](integration/2026-11-21-modern-javascript-implementation.md): 4곳 교체·Set 유지, 실제 타입 3진입점·API Chromium 7조건·전체 통합 26그룹 통과. [PR #106](https://github.com/IMHOJEONG/web-tech/pull/106) 검토 중·운영 미배포.
 - [11-20 JavaScript 현대화 5개 후보 재검증](integration/2026-11-20-modern-javascript-guidance.md): 실제 소스의 후보 4건·Set 오탐 1건과 Node·격리 타입 16조건. 앱 적용·브라우저 회귀는 미실행.
 
 - [11-20 Effect TemplateLiteral ReDoS](security/2026-11-20-effect-redos.md): 직접·Prisma 간접 사본 3.22.4 통합, 구버전 격리 timeout 대조와 수정본 6개 회귀·소비자 호환·감사 0건. main·운영 반영은 별도.

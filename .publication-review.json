@@ -647,11 +647,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "55ce4151e4dcb6b1148bfb6b0f23c6da2d9ec1780f2c435bc8b796f69164bba7",
+      "sha256": "75b7f5b5ff788235c079cd46f07bd3e04c59a93a4e8b0b4bbebaa50c4b0f9da8",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-21",
-      "note": "사용자가 이번 JavaScript 개선과 관련 문서만 분리해 공개 검수 후 커밋·푸시·PR 생성과 CI 확인을 명시 요청함. 코드·합성 재현·판정·조건·실패·한계·관련 목차의 최종 bytes를 검수함. 개인 경로·비밀값·원고·원시 캡처/로그·외부 스킬·다른 작업 변경·병합·운영 배포는 제외함.",
+      "note": "사용자가 승인한 이번 JavaScript 개선·관련 문서의 공개·커밋·푸시·PR 범위에서 실제 PR #106·검증 원본·반영 상태와 기존 실행 이력의 구분만 갱신함. 최종 bytes의 비밀값·개인 경로·권리·공개 의도를 재검수함. 다른 작업·원시 자료·병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -983,11 +983,11 @@
     },
     {
       "path": "docs/knowledge/README.md",
-      "sha256": "417214e4787af6bef49a5effa8268575b659de0e19b356848d6d7442ace44d5a",
+      "sha256": "a40af4271f3cfe698d95b6dea6ab857cabdff20c709047184995224cc401782a",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-21",
-      "note": "사용자가 이번 JavaScript 개선과 관련 문서만 분리해 공개 검수 후 커밋·푸시·PR 생성과 CI 확인을 명시 요청함. 코드·합성 재현·판정·조건·실패·한계·관련 목차의 최종 bytes를 검수함. 개인 경로·비밀값·원고·원시 캡처/로그·외부 스킬·다른 작업 변경·병합·운영 배포는 제외함.",
+      "note": "사용자가 승인한 이번 JavaScript 개선·관련 문서의 공개·커밋·푸시·PR 범위에서 실제 PR #106·검증 원본·반영 상태와 기존 실행 이력의 구분만 갱신함. 최종 bytes의 비밀값·개인 경로·권리·공개 의도를 재검수함. 다른 작업·원시 자료·병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -1907,11 +1907,11 @@
     },
     {
       "path": "docs/knowledge/infra-tooling/javascript-abort-timeout.md",
-      "sha256": "7b1e20ab0aebcfd18f5e565053b765c1a8509898572aa2e3bce41cc61491309d",
+      "sha256": "a6a63a3a6361110f19e96c3cc8fe773962902542050e9d54e26e012bfb9629ea",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-21",
-      "note": "사용자가 이번 JavaScript 개선과 관련 문서만 분리해 공개 검수 후 커밋·푸시·PR 생성과 CI 확인을 명시 요청함. 코드·합성 재현·판정·조건·실패·한계·관련 목차의 최종 bytes를 검수함. 개인 경로·비밀값·원고·원시 캡처/로그·외부 스킬·다른 작업 변경·병합·운영 배포는 제외함.",
+      "note": "사용자가 승인한 이번 JavaScript 개선·관련 문서의 공개·커밋·푸시·PR 범위에서 실제 PR #106·검증 원본·반영 상태와 기존 실행 이력의 구분만 갱신함. 최종 bytes의 비밀값·개인 경로·권리·공개 의도를 재검수함. 다른 작업·원시 자료·병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -1921,11 +1921,11 @@
     },
     {
       "path": "docs/knowledge/infra-tooling/javascript-copying-arrays.md",
-      "sha256": "f0c602525059699c3a62f526408afd6c95860cf5a4c17bd033541bef499afe65",
+      "sha256": "0ae31b7c0d01d89d17f33c12f77696db1ea0a628b5bacb8d4b3004c1a0db877d",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-21",
-      "note": "사용자가 이번 JavaScript 개선과 관련 문서만 분리해 공개 검수 후 커밋·푸시·PR 생성과 CI 확인을 명시 요청함. 코드·합성 재현·판정·조건·실패·한계·관련 목차의 최종 bytes를 검수함. 개인 경로·비밀값·원고·원시 캡처/로그·외부 스킬·다른 작업 변경·병합·운영 배포는 제외함.",
+      "note": "사용자가 승인한 이번 JavaScript 개선·관련 문서의 공개·커밋·푸시·PR 범위에서 실제 PR #106·검증 원본·반영 상태와 기존 실행 이력의 구분만 갱신함. 최종 bytes의 비밀값·개인 경로·권리·공개 의도를 재검수함. 다른 작업·원시 자료·병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -1935,11 +1935,11 @@
     },
     {
       "path": "docs/knowledge/infra-tooling/javascript-promise-with-resolvers.md",
-      "sha256": "c35eca813c6675b92385eec8392b25f4293278ea245ac035ca16f5b95b9b5a4d",
+      "sha256": "6e472a6f332bf2be6ed7d366dde8485914150898dc13433cf2c234e3f8bcf13e",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-21",
-      "note": "사용자가 이번 JavaScript 개선과 관련 문서만 분리해 공개 검수 후 커밋·푸시·PR 생성과 CI 확인을 명시 요청함. 코드·합성 재현·판정·조건·실패·한계·관련 목차의 최종 bytes를 검수함. 개인 경로·비밀값·원고·원시 캡처/로그·외부 스킬·다른 작업 변경·병합·운영 배포는 제외함.",
+      "note": "사용자가 승인한 이번 JavaScript 개선·관련 문서의 공개·커밋·푸시·PR 범위에서 실제 PR #106·검증 원본·반영 상태와 기존 실행 이력의 구분만 갱신함. 최종 bytes의 비밀값·개인 경로·권리·공개 의도를 재검수함. 다른 작업·원시 자료·병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -1963,11 +1963,11 @@
     },
     {
       "path": "docs/verification/integration/2026-11-21-modern-javascript-implementation.md",
-      "sha256": "edf0e256d671a4c3b967567029825d824c4b60a77f0b0651cbea6568c19a19fb",
+      "sha256": "d57aa23807ef346deb1233b6cfe3e40b74b1b4df8ae160b0a91d4c2371141aed",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-21",
-      "note": "사용자가 이번 JavaScript 개선과 관련 문서만 분리해 공개 검수 후 커밋·푸시·PR 생성과 CI 확인을 명시 요청함. 코드·합성 재현·판정·조건·실패·한계·관련 목차의 최종 bytes를 검수함. 개인 경로·비밀값·원고·원시 캡처/로그·외부 스킬·다른 작업 변경·병합·운영 배포는 제외함.",
+      "note": "사용자가 승인한 이번 JavaScript 개선·관련 문서의 공개·커밋·푸시·PR 범위에서 실제 PR #106·검증 원본·반영 상태와 기존 실행 이력의 구분만 갱신함. 최종 bytes의 비밀값·개인 경로·권리·공개 의도를 재검수함. 다른 작업·원시 자료·병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -1991,11 +1991,11 @@
     },
     {
       "path": "docs/verification/artifacts/2026-11-21-modern-javascript-implementation.json",
-      "sha256": "77a6b89d17c19a91e90d4c8c596720100f79cab2ebf5ed18fe9761ecb0161c77",
+      "sha256": "d67ed873a7564ef6df7ebff6d63aa5d53d704a74956691f9d65adec31e88fca1",
       "kind": "sanitized-evidence",
       "decision": "public-approved",
       "reviewedOn": "2026-11-21",
-      "note": "사용자가 이번 JavaScript 개선과 관련 문서만 분리해 공개 검수 후 커밋·푸시·PR 생성과 CI 확인을 명시 요청함. 코드·합성 재현·판정·조건·실패·한계·관련 목차의 최종 bytes를 검수함. 개인 경로·비밀값·원고·원시 캡처/로그·외부 스킬·다른 작업 변경·병합·운영 배포는 제외함.",
+      "note": "사용자가 승인한 이번 JavaScript 개선·관련 문서의 공개·커밋·푸시·PR 범위에서 실제 PR #106·검증 원본·반영 상태와 기존 실행 이력의 구분만 갱신함. 최종 bytes의 비밀값·개인 경로·권리·공개 의도를 재검수함. 다른 작업·원시 자료·병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -2019,11 +2019,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-21-modern-javascript-implementation.md",
-      "sha256": "d21b277fa4e81c73aa7ebdec754b10ac5c6277b31b292558c8f8ecef92458e89",
+      "sha256": "c5ecd80aa7bad903f210d13fb1b24f04e4bf01c3398e7e3e85643007cebbad84",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-21",
-      "note": "사용자가 이번 JavaScript 개선과 관련 문서만 분리해 공개 검수 후 커밋·푸시·PR 생성과 CI 확인을 명시 요청함. 코드·합성 재현·판정·조건·실패·한계·관련 목차의 최종 bytes를 검수함. 개인 경로·비밀값·원고·원시 캡처/로그·외부 스킬·다른 작업 변경·병합·운영 배포는 제외함.",
+      "note": "사용자가 승인한 이번 JavaScript 개선·관련 문서의 공개·커밋·푸시·PR 범위에서 실제 PR #106·검증 원본·반영 상태와 기존 실행 이력의 구분만 갱신함. 최종 bytes의 비밀값·개인 경로·권리·공개 의도를 재검수함. 다른 작업·원시 자료·병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

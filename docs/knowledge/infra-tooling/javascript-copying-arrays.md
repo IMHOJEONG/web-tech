@@ -4,7 +4,7 @@
 
 - 대상: lockfile 그래프 직렬화와 비공개 콘텐츠 경로 비교 스크립트의 정렬 패턴.
 - 최종 검토: 2026-11-21.
-- 상태: `routes.toSorted()` 로컬 적용, 동결한 역순 입력의 순서 무관 비교·원본 보존과 기존 음성 회귀 통과. Set 정렬은 유지하며 공통 타입 설정·원격 Git·운영 배포는 미변경.
+- 상태: `routes.toSorted()` 로컬 적용, 동결한 역순 입력의 순서 무관 비교·원본 보존과 기존 음성 회귀 통과. Set 정렬과 공통 타입 설정은 유지했다. [PR #106](https://github.com/IMHOJEONG/web-tech/pull/106) 검토 중이며 main·운영 배포는 미반영.
 - 관리: [KAN-83](https://web-tech-service.atlassian.net/browse/KAN-83). 공통 호환성 판단은 [웹 현대화 판단](https://web-tech-service.atlassian.net/wiki/pages/19464193).
 - Confluence 주제: [배열 현대화와 Set 변환](https://web-tech-service.atlassian.net/wiki/pages/20119630).
 

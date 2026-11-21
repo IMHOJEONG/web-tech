@@ -4,7 +4,7 @@
 
 - 대상: `apps/vuln-radar/src/shared/api/client.ts`의 브라우저 GET 요청과 취소 가능한 비동기 API.
 - 최종 검토: 2026-11-21.
-- 상태: `AbortSignal.timeout(8_000)`을 앱에 로컬 적용. 실제 클라이언트를 번들한 Chromium GET·오류·헤더/본문 timeout 7조건 통과. 원격 반영·운영 배포와 다른 브라우저는 미검증.
+- 상태: `AbortSignal.timeout(8_000)`을 앱에 로컬 적용. 실제 클라이언트를 번들한 Chromium GET·오류·헤더/본문 timeout 7조건 통과. [PR #106](https://github.com/IMHOJEONG/web-tech/pull/106)의 원격 브랜치에 반영했으며 main·운영 배포와 다른 브라우저는 미검증.
 - 관리: [KAN-83](https://web-tech-service.atlassian.net/browse/KAN-83). 상위 개념은 [웹 현대화 판단](https://web-tech-service.atlassian.net/wiki/pages/19464193).
 - Confluence 주제: [시간 제한과 취소](https://web-tech-service.atlassian.net/wiki/pages/20676655).
 

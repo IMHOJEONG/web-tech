@@ -24,10 +24,14 @@
 - 공개 준비 후속: 사용자가 이번 개선과 관련 문서만 분리해 공개 검수 후 커밋·푸시·PR 생성과 CI 확인을 명시 요청했다. 최신 main `2cf837f04954d05d5ff409bdec6794ec28fd7f07` 기반 `codex/modern-javascript-implementation-20261121`의 별도 worktree에서 코드·설정·검사 8파일과 관련 문서·정제 증거·목차 14파일을 선택했다. 원본 작업 트리의 다른 변경과 인덱스는 보존한다. 분리한 후보에서도 타입 3진입점·관련 46개·앱 36개·API 7조건·통합 26그룹·정리 6단계·의미 비교 16조건·앱 lint가 통과했다.
 - 공개 검수: 실제 비밀값·개인 경로·원고·스크린샷·실제 서비스 응답을 제외하고 합성 재현 코드·판정·조건·실패·한계만 확인했다. 비공개 원시 자료의 로컬 위치는 공개본에서 제거했다. 사용자 승인 범위와 최종 staged bytes의 SHA-256을 `.publication-review.json`에 기록한다. 외부 스킬·기존 다른 작업의 코드/문서·원시 자료는 포함하지 않는다. 첫 공개 검사에서 artifact README를 증거 종류로 분류한 불일치를 확인해 Markdown 문서 종류로 바로잡았다. 검수 대상 bytes나 검사 규칙을 우회하지 않았다.
 
+- 원격 반영: 코드·검증·문서 22파일과 공개 검수 manifest만 `905b57fd892e10dcc4af2df728e2c22704de03f6`로 커밋·푸시하고 [PR #106](https://github.com/IMHOJEONG/web-tech/pull/106)을 생성했다. GitHub 연결 도구의 생성 권한 403은 기존 GitHub CLI로 복구했고 원격 PR head·main base·Jira/Confluence 연결·23개 diff 경로를 재조회했다.
+- 커밋 전 공개·staged 포맷·문서·diff와 커밋 훅, 실제 pre-push 공개 검사가 통과했다. 원본 작업 트리 파일 248개의 해시와 인덱스가 분리 전과 같음을 확인했다.
+- PR 생성 시점 CI는 실행 중이었다. 최종 head의 원격 결과는 [PR checks](https://github.com/IMHOJEONG/web-tech/pull/106/checks)와 [Jira 실제 적용 댓글](https://web-tech-service.atlassian.net/browse/KAN-83?focusedCommentId=10124)의 마감 표에서 확인한다. 이전 SHA의 성공을 새 head 결과로 대신하지 않는다.
+
 ## Open Questions
 
 - 다른 브라우저·모바일 실기기·bfcache와 실제 운영 적용은 이번 검증 범위 밖이다.
 
 ## Next
 
-- 이번 로컬 변경을 원격에 반영할 때는 공개 검수와 필요한 커밋·PR 절차를 수행하고, 기준 SHA와 운영 적용 상태를 별도로 갱신한다.
+- main 병합과 운영 배포는 이번 사용자 승인 범위에 포함하지 않았다. 원격 CI·리뷰 결과는 같은 PR과 Jira에서 관리하고 실제 병합·배포 시 적용 상태를 별도로 갱신한다.
