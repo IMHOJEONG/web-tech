@@ -1,0 +1,124 @@
+{
+  "observedAt": "2026-11-20T11:36:37.792Z",
+  "timezone": "Asia/Seoul",
+  "head": "c6465f48c96aef681a42de77a584b25e69fd8525",
+  "node": "v24.22.1",
+  "typescript": "6.0.3",
+  "scope": "synthetic Node semantics and isolated TypeScript lib comparison; not browser or application regression",
+  "sources": {
+    "apps/vuln-radar/src/shared/api/client.ts": "47fd8f6f3f0fc34ca4137a54b37e1c3a91c63878c275d83c0dea5c7e9d64e086",
+    "scripts/analyze-vuln-radar-lockfile.mts": "fd5ec6fcbaacad53c84bce2f9aeba1300f484c4bff06be86cd76d2da4a407714",
+    "scripts/private-content-ci-policy.mts": "2079db5e7b1902bc1311dcfd12b44f3b8debd2e40c0394b80582ae932b92e195",
+    "scripts/verify-vuln-radar-integration.mts": "c3420af53882e508b71db825634e5f0acaa493abb7d9d5ef92042cb6b2142a4c",
+    "packages/typescript-config/base.json": "e992dc9749a7657f9f97d9d60c8d316245b267ecbd1d24743282843cba0644e0",
+    "tsconfig.vuln-integration.json": "7956db6aa9e15cb0941b517ec0777e68be810ab015aa3098de52dcf4c4ea4ff4",
+    "package.json": "bf3147b23c7871188e3f94049370b66a5039b5af41ffefc72bc0bfdd54c8864a",
+    ".node-version": "d9f318747a126ce2247661af67852b185def7789492eabfad7bba322be087c33"
+  },
+  "passed": 16,
+  "failed": 0,
+  "results": [
+    {
+      "name": "abort-default-reason",
+      "status": "pass",
+      "observed": "AbortError"
+    },
+    {
+      "name": "timeout-reason-and-fetch-rejection",
+      "status": "pass",
+      "observed": {
+        "reason": "TimeoutError",
+        "fetch": "rejected before request"
+      }
+    },
+    {
+      "name": "composite-first-reason",
+      "status": "pass",
+      "observed": "first reason retained"
+    },
+    {
+      "name": "finished-work-does-not-cancel-timeout-signal",
+      "status": "pass",
+      "observed": "signal still expires after work completes"
+    },
+    {
+      "name": "timeout-alone-does-not-keep-node-alive",
+      "status": "pass",
+      "observed": "child exits without waiting for timeout"
+    },
+    {
+      "name": "copy-sort-preserves-source-and-order",
+      "status": "pass",
+      "observed": ["/a", "/a", "/b"]
+    },
+    {
+      "name": "set-conversion-is-not-array-copy",
+      "status": "pass",
+      "observed": {
+        "directMethod": "absent",
+        "converted": ["a", "b"]
+      }
+    },
+    {
+      "name": "map-sort-does-not-mutate-input",
+      "status": "pass",
+      "observed": null
+    },
+    {
+      "name": "array-and-typedarray-default-order-differ",
+      "status": "pass",
+      "observed": {
+        "array": [10, 2],
+        "typed": [2, 10]
+      }
+    },
+    {
+      "name": "sparse-slice-and-copying-method-differ",
+      "status": "pass",
+      "observed": "slice preserves holes; spread and toSorted materialize undefined"
+    },
+    {
+      "name": "reverse-search-index-and-miss",
+      "status": "pass",
+      "observed": {
+        "reversedIndex": 0,
+        "originalIndex": 2,
+        "miss": -1
+      }
+    },
+    {
+      "name": "promise-executor-is-synchronous",
+      "status": "pass",
+      "observed": null
+    },
+    {
+      "name": "withresolvers-gate-release-and-repeat",
+      "status": "pass",
+      "observed": "pending until release; first settlement retained"
+    },
+    {
+      "name": "executor-throw-versus-external-setup-throw",
+      "status": "pass",
+      "observed": "executor rejects; external setup throws synchronously"
+    },
+    {
+      "name": "typescript-isolated-es2022-lib",
+      "status": "pass",
+      "observed": [
+        {
+          "code": 2550,
+          "message": "Property 'toSorted' does not exist on type 'number[]'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2023' or later."
+        },
+        {
+          "code": 2550,
+          "message": "Property 'withResolvers' does not exist on type 'PromiseConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2024' or later."
+        }
+      ]
+    },
+    {
+      "name": "typescript-isolated-es2024-lib-es2022-target",
+      "status": "pass",
+      "observed": []
+    }
+  ]
+}

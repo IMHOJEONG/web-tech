@@ -134,11 +134,12 @@ test("approved content rejects PRs, tags, alternate refs/repos and mismatched or
 });
 
 test("private runtime search rejects missing, duplicate, foreign and stale release routes", () => {
-  const routes = ["/docs/web/one", "/docs/web/two"];
+  const routes = Object.freeze(["/docs/web/two", "/docs/web/one"]);
   assertPrivateSearch(
-    { count: 2, results: routes.map((href) => ({ href })) },
+    { count: 2, results: routes.toReversed().map((href) => ({ href })) },
     routes,
   );
+  assert.deepEqual(routes, ["/docs/web/two", "/docs/web/one"]);
   for (const value of [
     null,
     {},

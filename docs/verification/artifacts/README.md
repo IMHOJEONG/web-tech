@@ -1,5 +1,8 @@
 # 검증 원본 증거
 
+- [11-21 JavaScript 실제 적용 정제 증거](2026-11-21-modern-javascript-implementation.json): 타입·소스 해시·실제 API 7조건과 통합 26그룹·정리 결과. [조건과 한계](../integration/2026-11-21-modern-javascript-implementation.md). 원시 출력·스크린샷은 저장소 밖 보존.
+- [11-20 JavaScript 현대화 재검증](2026-11-20-modern-javascript-guidance.json): 합성 16조건·타입 비교와 검토 소스 해시. [검증 조건과 한계](../integration/2026-11-20-modern-javascript-guidance.md).
+
 - [11-10 Feed 검색 정제 집계](2026-11-10-vuln-radar-feed-search-summary.json): [보고서](../integration/2026-11-10-vuln-radar-feed-search.md). 원시 캡처·로그 제외, 합성 회귀·최초 실패와 최종 정리 상태만 기록.
 
 - [11-10 vuln-radar 운영 관측값](2026-11-10-vuln-radar-operational.json): [보고서](../deployment/2026-11-10-vuln-radar-operational.md). 집계·배포 기록만 보관하며 원시 본문·인증정보 제외.

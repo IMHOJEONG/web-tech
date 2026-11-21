@@ -36,6 +36,14 @@
 
 ## 작성 기준
 
+JavaScript 현대화의 항목별 원본:
+
+- [시간 제한과 취소 신호](infra-tooling/javascript-abort-timeout.md): 개념·배경과 `vuln-radar` 적용 조건. [Confluence 개념 문서](https://web-tech-service.atlassian.net/wiki/pages/20676655).
+- [배열 복사·정렬과 iterable 변환](infra-tooling/javascript-copying-arrays.md): 배열 후보와 Set 오탐의 구분. [Confluence 개념 문서](https://web-tech-service.atlassian.net/wiki/pages/20119630).
+- [외부 Promise 완료 제어](infra-tooling/javascript-promise-with-resolvers.md): 대기·해제·예외 계약과 타입 조건. [Confluence 개념 문서](https://web-tech-service.atlassian.net/wiki/pages/20250653).
+
+항목별 상태와 최종 검토일은 각 원본에서 관리하며, 상위 개념은 기존 웹 현대화 판단 페이지에 연결한다. [11-21 실제 적용·회귀](../verification/integration/2026-11-21-modern-javascript-implementation.md)는 분석 단계와 구분하며 원격 Git·운영 배포는 미반영이다.
+
 주제별 설명:
 
 - [화면 표시와 hydration, DOM 소유권](docs-app/hydration-readiness-and-dom-ownership.md): SSR 화면이 보인 뒤에도 React 작업이 남을 수 있는 이유와 스켈레톤 검사 사례.

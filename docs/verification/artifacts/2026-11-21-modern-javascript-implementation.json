@@ -1,0 +1,335 @@
+{
+  "observedAt": "2026-11-21T02:04:07.628629+00:00",
+  "dateKst": "2026-11-21",
+  "baseSha": "c6465f48c96aef681a42de77a584b25e69fd8525",
+  "workingTreeDirty": true,
+  "node": "v24.22.1",
+  "sources": {
+    "apps/vuln-radar/src/shared/api/client.ts": "e0cd74b2761f9ac9e745f9d1017ed0d28dad176f3567ea66a462d213c1ac68aa",
+    "scripts/private-content-ci-policy.mts": "9fb163910915c95982f8a79875b19a5af9782d079483fc7b91ed2dcc7a0f25fe",
+    "scripts/private-content-ci.test.mts": "bd5cb87c6827e2b0e0d8da1cb4c3a6b2f0fbc8ae0bddf3f060f573f9b289e64e",
+    "scripts/verify-vuln-radar-integration.mts": "3d1e0fd21c430a1c00ac47fdd86b11ab105eafa8feed3a8e9541f4d7971bded9",
+    "tsconfig.vuln-integration.json": "fea9fa34a70dea5055b3feb3daa51841f6b72c2d746efaac9b4d329c6224b03c",
+    "tsconfig.private-content-ci.json": "38226d1591bc07ab64a22661e3e5498bef1e9e93f73950c364b8e561f31f814b",
+    "scripts/verify-vuln-radar-api-client.mjs": "a074496a7d18ea221799278c2279b95da250af16e2ed4d38b6fb1741d6785862",
+    "scripts/analyze-vuln-radar-lockfile.mts": "fd5ec6fcbaacad53c84bce2f9aeba1300f484c4bff06be86cd76d2da4a407714",
+    "packages/typescript-config/base.json": "e992dc9749a7657f9f97d9d60c8d316245b267ecbd1d24743282843cba0644e0"
+  },
+  "unchanged": {
+    "scripts/analyze-vuln-radar-lockfile.mts": true,
+    "packages/typescript-config/base.json": true
+  },
+  "typechecks": {
+    "app": "passed",
+    "vulnIntegration": "passed",
+    "privateContentCi": "passed"
+  },
+  "regression": {
+    "targetedNodeTests": {
+      "passed": 46,
+      "failed": 0
+    },
+    "appModelTests": {
+      "passed": 36,
+      "failed": 0
+    },
+    "appLint": "passed",
+    "semanticChecks": {
+      "passed": 16,
+      "failed": 0
+    },
+    "actualApiClient": {
+      "observedAt": "2026-11-21T02:02:41.001Z",
+      "node": "v24.22.1",
+      "browser": "151.0.7922.34",
+      "scope": "actual bundled getJson + Zod + native Chromium fetch against local HTTP fixtures; no deployment or upstream requests",
+      "clientSha256": "e0cd74b2761f9ac9e745f9d1017ed0d28dad176f3567ea66a462d213c1ac68aa",
+      "results": [
+        {
+          "path": "/success",
+          "status": "passed",
+          "durationMs": 11,
+          "observed": {
+            "data": {
+              "value": "ready"
+            },
+            "code": null
+          }
+        },
+        {
+          "path": "http",
+          "status": "passed",
+          "durationMs": 4,
+          "observed": {
+            "isApiError": true,
+            "code": "http",
+            "status": 503,
+            "hasDetails": false
+          }
+        },
+        {
+          "path": "schema",
+          "status": "passed",
+          "durationMs": 4,
+          "observed": {
+            "isApiError": true,
+            "code": "parse",
+            "status": null,
+            "hasDetails": true
+          }
+        },
+        {
+          "path": "malformed",
+          "status": "passed",
+          "durationMs": 2,
+          "observed": {
+            "isApiError": true,
+            "code": "network",
+            "status": null,
+            "hasDetails": false
+          }
+        },
+        {
+          "path": "network",
+          "status": "passed",
+          "durationMs": 6,
+          "observed": {
+            "isApiError": true,
+            "code": "network",
+            "status": null,
+            "hasDetails": false
+          }
+        },
+        {
+          "path": "timeout-headers",
+          "status": "passed",
+          "durationMs": 8009,
+          "observed": {
+            "isApiError": true,
+            "code": "network",
+            "status": null,
+            "hasDetails": false,
+            "signalReason": "TimeoutError"
+          }
+        },
+        {
+          "path": "timeout-body",
+          "status": "passed",
+          "durationMs": 8016,
+          "observed": {
+            "isApiError": true,
+            "code": "network",
+            "status": null,
+            "hasDetails": false,
+            "signalReason": "TimeoutError"
+          }
+        }
+      ]
+    },
+    "fullIntegration": {
+      "startedAt": "2026-11-21T02:02:23.490Z",
+      "finishedAt": "2026-11-21T02:03:35.840Z",
+      "baseSha": "c6465f48c96aef681a42de77a584b25e69fd8525",
+      "workingTreeDirty": true,
+      "runnerSha256": "3d1e0fd21c430a1c00ac47fdd86b11ab105eafa8feed3a8e9541f4d7971bded9",
+      "cleanupRunnerSha256": "7464786bfd20b1ea3a887d9fb4242682c69f75a330c35108680aa2abcfb0f60d",
+      "node": "v24.22.1",
+      "databaseImage": "postgres:16-alpine",
+      "browser": "151.0.7922.34",
+      "scope": "isolated PostgreSQL fixtures + compiled Nest + production Vite preview + local deployment proxy handler invocation; no upstream ingestion or deployment",
+      "results": [
+        {
+          "name": "server API token is absent from built browser assets",
+          "status": "passed",
+          "durationMs": 2
+        },
+        {
+          "name": "actual Nest auth rejects absent and invalid tokens; real proxy supplies server token",
+          "status": "passed",
+          "durationMs": 82
+        },
+        {
+          "name": "Postgres feed/detail reliability and supporting endpoints match frontend contracts",
+          "status": "passed",
+          "durationMs": 62
+        },
+        {
+          "name": "deployment proxy handler maps rewritten feed/detail paths and preserves backend 401",
+          "status": "passed",
+          "durationMs": 16
+        },
+        {
+          "name": "overview parses all six real API contracts and renders the KEV matrix",
+          "status": "passed",
+          "durationMs": 464
+        },
+        {
+          "name": "overview cold failures are isolated and retries target one API at 1280px",
+          "status": "passed",
+          "durationMs": 10159
+        },
+        {
+          "name": "overview cached data survives each API failure and recovers at 1280px",
+          "status": "passed",
+          "durationMs": 10094
+        },
+        {
+          "name": "overview cold failures are isolated and retries target one API at 390px",
+          "status": "passed",
+          "durationMs": 9834
+        },
+        {
+          "name": "overview cached data survives each API failure and recovers at 390px",
+          "status": "passed",
+          "durationMs": 10463
+        },
+        {
+          "name": "slow supplementary APIs do not block healthy panels; cold total outage and recovery stay explicit",
+          "status": "passed",
+          "durationMs": 1749
+        },
+        {
+          "name": "valid empty Feed and watchlist responses remain empty states, not failures",
+          "status": "passed",
+          "durationMs": 205
+        },
+        {
+          "name": "ingest status exposes process-local unknown history without performing a sync",
+          "status": "passed",
+          "durationMs": 5
+        },
+        {
+          "name": "collection cadence, source failures and legacy unknown state at 1280px",
+          "status": "passed",
+          "durationMs": 579
+        },
+        {
+          "name": "collection cadence, source failures and legacy unknown state at 390px",
+          "status": "passed",
+          "durationMs": 541
+        },
+        {
+          "name": "real API browser feed filters, labels and detail navigation at 1280px",
+          "status": "passed",
+          "durationMs": 2646
+        },
+        {
+          "name": "real API browser feed filters, labels and detail navigation at 390px",
+          "status": "passed",
+          "durationMs": 2510
+        },
+        {
+          "name": "full DB feed search, literal query and stable server pages beyond legacy 25",
+          "status": "passed",
+          "durationMs": 3994
+        },
+        {
+          "name": "overview counts all 43 database rows while feed stays limited to 25; browser refresh uses aggregates",
+          "status": "passed",
+          "durationMs": 4409
+        },
+        {
+          "name": "KEV rows use their own nullable EPSS outside the limited feed and show priority instead of workflow status",
+          "status": "passed",
+          "durationMs": 3561
+        },
+        {
+          "name": "backend shutdown preserves browser cache through scheduled refresh failure",
+          "status": "passed",
+          "durationMs": 637
+        },
+        {
+          "name": "first request during a real backend outage renders full error without cache",
+          "status": "passed",
+          "durationMs": 1465
+        },
+        {
+          "name": "restarted Nest server rereads changed DB record and browser retry recovers",
+          "status": "passed",
+          "durationMs": 767
+        },
+        {
+          "name": "connected empty Postgres returns real zero overview statistics without mock substitution",
+          "status": "passed",
+          "durationMs": 259
+        },
+        {
+          "name": "legacy no-database fallback stays explicit while full search refuses fabricated results",
+          "status": "passed",
+          "durationMs": 1867
+        },
+        {
+          "name": "browser requests never carry the server API token",
+          "status": "passed",
+          "durationMs": 0
+        },
+        {
+          "name": "all browser flows complete without uncaught page errors",
+          "status": "passed",
+          "durationMs": 0
+        }
+      ],
+      "cleanup": {
+        "browserClosed": true,
+        "backendStopped": true,
+        "frontendStopped": true,
+        "databaseDisconnected": true,
+        "databaseRemoved": true,
+        "temporaryFilesRemoved": true
+      },
+      "cleanupErrors": []
+    }
+  },
+  "initialFailures": {
+    "beforeScopedLibs": {
+      "vulnIntegration": ["TS2550 withResolvers x2"],
+      "privateContentCi": [
+        "TS2339 toSorted",
+        "TS2339 toReversed",
+        "TS7006 href secondary diagnostic"
+      ]
+    },
+    "browserHarness": "First sandboxed server startup failed; cleanup raised ERR_SERVER_NOT_RUNNING. Guarded cleanup with server.listening, then authorized browser run passed.",
+    "docker": "Daemon initially not running, then Docker Desktop started; socket access required authorized integration execution."
+  },
+  "rawEvidence": {
+    "outsideRepository": true,
+    "integrationFile": "2026-11-21T02-02-23-490Z-vuln-radar-integration.json",
+    "screenshots": 10
+  },
+  "notPerformed": [
+    "commit",
+    "push",
+    "PR",
+    "deployment",
+    "non-Chromium browser verification",
+    "performance benchmark"
+  ],
+  "prCandidate": {
+    "baseSha": "2cf837f04954d05d5ff409bdec6794ec28fd7f07",
+    "branch": "codex/modern-javascript-implementation-20261121",
+    "integrationStartedAt": "2026-11-21T02:17:20.011Z",
+    "integrationFinishedAt": "2026-11-21T02:18:34.074Z",
+    "integrationGroupsPassed": 26,
+    "integrationFailed": 0,
+    "cleanup": {
+      "browserClosed": true,
+      "backendStopped": true,
+      "frontendStopped": true,
+      "databaseDisconnected": true,
+      "databaseRemoved": true,
+      "temporaryFilesRemoved": true
+    },
+    "apiConditionsPassed": 7,
+    "timeoutDurationsMs": {
+      "timeout-headers": 8004,
+      "timeout-body": 8005
+    },
+    "semanticConditionsPassed": 16,
+    "typecheckEntryPointsPassed": 3,
+    "relatedNodeTestsPassed": 46,
+    "appModelTestsPassed": 36,
+    "appLint": "passed",
+    "rawEvidenceOutsideRepository": true
+  }
+}

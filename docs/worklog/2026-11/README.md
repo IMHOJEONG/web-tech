@@ -1,5 +1,8 @@
 # 2026-11 작업 기록
 
+- [11-21 JavaScript 현대화 실제 적용](2026-11-21-modern-javascript-implementation.md): 4곳 교체·오탐 유지·타입 선언 범위 한정, 실제 클라이언트와 통합 회귀 및 지식 문서 갱신.
+- [11-20 JavaScript 현대화 항목별 지식](2026-11-20-modern-javascript-guidance.md): 5곳 소스 대조·16조건 합성 검증과 개념·원리 문서 3종, KAN-83·Confluence 연결.
+
 - [11-20 비공개 Git 초안 작성 규칙](2026-11-20-private-draft-authoring-policy.md): 공개/비공개 작성 위치·저장과 게시 승인 경계를 저장소별 지침 PR로 분리. 원문 이전·기본 브랜치 반영·키·배포 미실행.
 
 - [11-20 Effect 보안 패치](2026-11-20-effect-redos.md): #363·KAN-85 분리, 3.x 하한·직접/간접 사본 통합과 격리 회귀. 로컬 검증이며 공개 승인·커밋·PR·배포는 별도.

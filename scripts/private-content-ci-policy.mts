@@ -91,11 +91,11 @@ export function assertPrivateBuild(
     false,
   );
 }
-export function assertPrivateSearch(value: unknown, routes: string[]) {
+export function assertPrivateSearch(value: unknown, routes: readonly string[]) {
   const data = value as { results: { href: string }[]; count: number };
   assert.ok(Array.isArray(data.results));
   assert.equal(data.count, routes.length);
-  assert.deepEqual(data.results.map((r) => r.href).sort(), [...routes].sort());
+  assert.deepEqual(data.results.map((r) => r.href).sort(), routes.toSorted());
 }
 export function assertTrustedContentRun(
   env: NodeJS.ProcessEnv,

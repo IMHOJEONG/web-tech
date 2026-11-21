@@ -32,16 +32,13 @@ export async function getJson<T>(
   path: string,
   schema: z.ZodType<T>,
 ): Promise<T> {
-  const controller = new AbortController();
-  const timeoutId = window.setTimeout(() => controller.abort(), API_TIMEOUT_MS);
-
   try {
     const response = await fetch(buildApiUrl(path), {
       method: "GET",
       headers: {
         Accept: "application/json",
       },
-      signal: controller.signal,
+      signal: AbortSignal.timeout(API_TIMEOUT_MS),
     });
 
     if (!response.ok) {
@@ -93,8 +90,6 @@ export async function getJson<T>(
           : "Unknown network error while loading data.",
       code: "network",
     });
-  } finally {
-    window.clearTimeout(timeoutId);
   }
 }
 
