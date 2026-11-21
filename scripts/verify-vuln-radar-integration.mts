@@ -669,7 +669,8 @@ async function main() {
         ] as const) {
           const current = await page();
           let failing = true;
-          let release: (() => void) | undefined;
+          const { promise: retryGate, resolve: release } =
+            Promise.withResolvers<void>();
           let holdRetry: Promise<void> | undefined;
           const calls: Record<string, number> = {};
           try {
@@ -718,13 +719,11 @@ async function main() {
             ).toBeEnabled();
             const before = { ...calls };
             failing = false;
-            holdRetry = new Promise<void>((resolve) => {
-              release = resolve;
-            });
+            holdRetry = retryGate;
             const retry = failedPanel.getByRole("button");
             await retry.click();
             await expect(retry).toBeDisabled();
-            release!();
+            release();
             await expect(failedPanel.getByRole("alert")).toHaveCount(0);
             assert.equal(
               calls[endpoint],
@@ -749,7 +748,7 @@ async function main() {
               screenshots[`partial-recovered-${width}`] = screenshot;
             }
           } finally {
-            release?.();
+            release();
             await current.close();
           }
         }
@@ -864,10 +863,7 @@ async function main() {
     "slow supplementary APIs do not block healthy panels; cold total outage and recovery stay explicit",
     async () => {
       const current = await page();
-      let release: (() => void) | undefined;
-      const gate = new Promise<void>((resolve) => {
-        release = resolve;
-      });
+      const { promise: gate, resolve: release } = Promise.withResolvers<void>();
       let failingAll = false;
       try {
         await current.route("**/api/backend/**", async (route) => {
@@ -904,7 +900,7 @@ async function main() {
         await expect(
           current.locator('[data-overview-panel="ingest"]').getByRole("status"),
         ).toBeVisible();
-        release!();
+        release();
         await expect(
           current.getByRole("button", { name: "새로고침", exact: true }),
         ).toBeEnabled();
@@ -934,7 +930,7 @@ async function main() {
           }),
         ).toHaveCount(0);
       } finally {
-        release?.();
+        release();
         await current.close();
       }
     },

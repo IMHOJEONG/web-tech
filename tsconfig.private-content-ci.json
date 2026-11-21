@@ -1,6 +1,7 @@
 {
   "extends": "./packages/typescript-config/base.json",
   "compilerOptions": {
+    "lib": ["ES2022", "ES2023.Array", "DOM", "DOM.Iterable"],
     "incremental": false,
     "types": ["node"],
     "allowImportingTsExtensions": true,

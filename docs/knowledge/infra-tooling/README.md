@@ -2,6 +2,10 @@
 
 ## 학습 문서
 
+- [JavaScript 요청 시간 제한과 취소 신호](javascript-abort-timeout.md): 로컬 적용·실제 Chromium 헤더/본문 timeout과 오류 이유, 적용 제외 조건.
+- [JavaScript 배열 복사·정렬과 iterable 변환](javascript-copying-arrays.md): `toSorted` 로컬 적용과 Set 유지, readonly·정렬·슬롯·인덱스 계약.
+- [JavaScript 외부 Promise 완료 제어](javascript-promise-with-resolvers.md): `withResolvers` 2곳 로컬 적용·실제 gate 회귀·executor 예외와 타입 조건.
+
 - [Node.js HTTP 요청의 운영체제 내부 경로](node-http-kernel-path.md): 소켓·버퍼·TCP·이벤트 루프의 책임과 관측 한계, 실제 CPU 0/200ms 비교와 흐름도입니다.
 
 ## 배운 점
