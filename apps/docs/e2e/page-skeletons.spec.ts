@@ -191,6 +191,38 @@ for (const theme of ['light', 'dark'] as const) {
                     screen.kind === 'category-index'
                 )
                     expect(Math.abs(delta)).toBeLessThanOrEqual(2)
+                if (screen.kind === 'docs') {
+                    const results = page.getByTestId('docs-index-results')
+                    const cards = results.locator('[data-docs-index-card]')
+                    if ((await cards.count()) === 0) {
+                        await expect(
+                            results.getByRole('heading', {
+                                level: 3,
+                                name:
+                                    locale === 'ko'
+                                        ? '조건에 맞는 문서가 없어요'
+                                        : 'No documents match these filters',
+                                exact: true,
+                            })
+                        ).toBeVisible()
+                        await expect(results.locator('article')).toHaveCount(0)
+                    } else {
+                        const cardSpacing = await cards
+                            .first()
+                            .evaluate((el) => {
+                                const style = getComputedStyle(el)
+                                return [style.paddingTop, style.paddingBottom]
+                            })
+                        const skeletonSpacing = await pending
+                            .locator('[data-skeleton-anchor="docs-card"]')
+                            .first()
+                            .evaluate((el) => {
+                                const style = getComputedStyle(el)
+                                return [style.paddingTop, style.paddingBottom]
+                            })
+                        expect(skeletonSpacing).toEqual(cardSpacing)
+                    }
+                }
                 expect(errors).toEqual([])
                 await testInfo.attach('skeleton-layout', {
                     body: JSON.stringify(
