@@ -1,0 +1,128 @@
+{
+  "dateKst": "2026-11-23",
+  "baseCommit": "fe88de8eb19d442657328dc9977bf3df3c5f59fe",
+  "pullRequest": "https://github.com/IMHOJEONG/web-tech/pull/111",
+  "environment": {
+    "node": "24.22.1",
+    "pnpm": "12.14.0",
+    "next": "16.4.6",
+    "playwright": "1.62.1",
+    "content": "17 authored synthetic documents + 1 archived entry + 9 synthetic PNGs; no private authoring checkout"
+  },
+  "sourceSha256": {
+    "apps/docs/app/[locale]/docs/[...slugParts]/page.tsx": "957230824e7e7b44067f5e7fd85ff493e674f8c6573481ef8dea29af1550712f",
+    "apps/docs/article-e2e/article-heading-anchors.spec.ts": "d66a08ff2bd3a244861c58ebb901fceecf4e7bc7a370a435c7342c7f215497bc",
+    "apps/docs/article-e2e/request-cause-next.spec.ts": "0072176cfd0a6dac120c0f32967cc11ec38d5b4fc43402aaaba8313389236374",
+    "apps/docs/e2e/docs-index-readiness.spec.ts": "6eb8e734814e7010f0339919173840a49ee85f6fa5f2d1563c51a4f266335985",
+    "apps/docs/e2e/drawer-hydration-readiness.spec.ts": "14f0460b26a442398a7905452e1c38422a984ee02defb5fc2ba6b8e1ebe543c4",
+    "apps/docs/e2e/search-navigation.spec.ts": "f23e20d0d869bd4fe2e3b65622c3c48184842118446657e2c21c8c48eb6d2eaf",
+    "apps/docs/feature/search/ui/document-search-form.tsx": "befbf1a3c1f2a9ba51c278ace2f367ffd1e00cb8c2b34f2ab1919d7890680ee6",
+    "apps/docs/lib/rehype-image-dimensions.ts": "9734d0b63f14602f0ade4b5a0eea46c40063bdc9c9618437e2f0e8a46b92e07c",
+    "apps/docs/widgets/docs-index/ui/docs-index-pending.tsx": "13d4a902a826016ab361454fc813347b9f46e11617cfc8ebac29388ef7b88ef7",
+    "apps/docs/widgets/docs-index/ui/docs-search-panel.tsx": "0800959b043cf44143332616dc503804ea61b539f126356b7d48894024128a03",
+    "apps/docs/widgets/article-detail/ui/article-fragment-restore.tsx": "594be100389526f4e731a252c67ad8c63c1d2d11d7565842ba2234c068cf32d3",
+    "apps/docs/article-e2e/prefetch-termination.spec.ts": "0517acb2e6d27b62ea97e6d5d7577fb4884a991f299c5bd778a57ca664022e1e",
+    "apps/docs/article-e2e/category-boundary.spec.ts": "493b5c84663aa636eb968c99d0d52c8baa352db17697ad9fb4fa9a02b6676dc4"
+  },
+  "baselineCi": {
+    "run": 45040120701,
+    "result": "failure",
+    "responsiveHydrationFailures": 6,
+    "articleProductionFailures": [
+      "ko/index body search submit",
+      "mobile request complete timeout",
+      "desktop legacy fragment after reload"
+    ]
+  },
+  "tracing": {
+    "baseline": {
+      "input": "6 committed local documents",
+      "total": 1431,
+      "nonDependency": 687,
+      "testFiles": 87,
+      "wholeProjectWarnings": 2
+    },
+    "sameLocalInputPlusSyntheticNodeDocument": {
+      "total": 876,
+      "nonDependency": 132,
+      "testFiles": 0,
+      "wholeProjectWarnings": 0
+    },
+    "fullSyntheticCorpus": {
+      "total": 892,
+      "nonDependency": 148,
+      "testFiles": 0,
+      "wholeProjectWarnings": 0
+    },
+    "limits": "corpora differ; file-count reduction is not a measured latency/memory improvement or evidence of secret disclosure"
+  },
+  "local": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "lib": {
+      "passed": 385,
+      "failed": 0
+    },
+    "productionArticle": {
+      "passed": 18,
+      "failed": 0
+    },
+    "responsive": {
+      "projects": 3,
+      "passed": 99,
+      "failed": 0
+    },
+    "intermediateRuns": [
+      {
+        "scope": "initial focused article after first fixes",
+        "passed": 17,
+        "failed": 1,
+        "cause": "503 finish-event persistence race; final poll preserves all assertions"
+      },
+      {
+        "scope": "initial responsive sweep",
+        "passed": 95,
+        "failed": 4,
+        "cause": "native GET consumer captured disabled fallback; wait for ready form before isolating markup"
+      }
+    ],
+    "fullArticleIntermediate": {
+      "passed": 196,
+      "failed": 2,
+      "skipped": 2,
+      "cause": "category main h1 selected hidden fallback and ready heading"
+    },
+    "fullArticleFinal": {
+      "passed": 198,
+      "failed": 0,
+      "skipped": 2,
+      "scope": "complete unchanged article-production suite, both viewports; existing two skips retained"
+    },
+    "consumerAuthFollowup": {
+      "passed": 10,
+      "failed": 0,
+      "scope": "both viewport consumers after migration to shared fixture authorization helper"
+    }
+  },
+  "remoteFollowup": {
+    "priorCommit": "ec45bffdad87bfff0a096cbe657547b91e6dee0d",
+    "priorRun": 45043022524,
+    "responsive": "all 3 jobs passed",
+    "article": {
+      "passed": 197,
+      "failed": 1,
+      "skipped": 2,
+      "cause": "second viewport-dependent Link consumer"
+    },
+    "state": "follow-up consumer fixes locally verified; next committed head CI must be checked after push"
+  },
+  "excluded": [
+    "raw logs",
+    "screenshots",
+    "traces",
+    "credentials",
+    "private articles",
+    "VoiceOver follow-up"
+  ],
+  "publicationFollowup": "existing inline synthetic authorization strings migrated to the shared fixture credential helper after the changed-blob scanner blocked them"
+}

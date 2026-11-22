@@ -11,7 +11,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { PerformanceInsights } from '~/widgets/app-shell/ui/performance-insights'
 import { cn } from '@web-tech/ui/lib/utils'
 import { getMetadataBase } from '~/lib/seo'
-import { mono, pretendard, spaceGrotesk } from '~/shared/config/fonts'
+import { mono, notoSansKr, spaceGrotesk } from '~/shared/config/fonts'
 import {
     REACT_GRAB_SCRIPT_SRC,
     REACT_SCAN_SCRIPT_SRC,
@@ -86,7 +86,7 @@ export default async function Layout({
                     className={cn(
                         'flex w-full min-h-screen flex-col',
                         mono.variable,
-                        pretendard.variable,
+                        notoSansKr.variable,
                         spaceGrotesk.variable
                     )}
                 >

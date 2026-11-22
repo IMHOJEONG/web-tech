@@ -13,6 +13,7 @@ type DocsSearchPanelProps = {
     title: string
     placeholder: string
     submitLabel: string
+    disabled?: boolean
 }
 
 export function DocsSearchPanel({
@@ -21,6 +22,7 @@ export function DocsSearchPanel({
     title,
     placeholder,
     submitLabel,
+    disabled,
 }: DocsSearchPanelProps) {
     const locale = useLocale()
     const t = useTranslations('common')
@@ -33,6 +35,7 @@ export function DocsSearchPanel({
                     <DocumentSearchForm
                         key={keyword ?? ''}
                         keyword={keyword}
+                        disabled={disabled}
                         label={t('documentIndexSearch')}
                         action={localizePath(
                             '/docs',

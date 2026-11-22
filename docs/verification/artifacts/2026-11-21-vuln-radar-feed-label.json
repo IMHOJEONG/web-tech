@@ -1,0 +1,136 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "4a610395cb6e33c035748ec229fe7f5ded1974c1",
+  "environment": {
+    "app": "Actual local Vite+ Feed page with synthetic API response",
+    "language": "ko",
+    "viewportsPx": [390, 1280]
+  },
+  "sourceHashes": {
+    "apps/vuln-radar/src/pages/feed/ui/feed-filter-bar.tsx": {
+      "before": "0e1422ae7bb124bd4b35f68d9eaff572435822ea2767abe1d56d0ca739461816",
+      "after": "ac62ba29a2df624bfba7d645c84e58c07021ae0a1d7e96e82e0e89a795e52ecc"
+    },
+    "apps/vuln-radar/src/pages/feed/ui/feed-page.tsx": {
+      "before": "dde03d1bfef4c75fc1bef68daca9dcae3be489b137f661ab20537af212b13ac1",
+      "after": "67111b985d1af8dcbfacc846da4fa6522ca8cdf2a3aae0bad9112b31fd0e095d"
+    },
+    "apps/vuln-radar/src/shared/i18n/messages.ts": {
+      "before": "0cf4ace5944f1f3c3771cab72e681a42cb88bfd74378f1c6bc89e57265549b6d",
+      "after": "33660e58e8eb39ab58085938aef9ab45f5a1ac8ea0d7cc3d0136f801bd631103"
+    }
+  },
+  "before": {
+    "type": "text",
+    "text": "CVE ID, 제품, 키워드 검색",
+    "labelIsVisuallyHidden": true,
+    "placeholder": "CVE ID, 제품, 키워드 검색",
+    "autocomplete": null,
+    "autocorrect": null,
+    "autocapitalize": null,
+    "spellcheck": null,
+    "enterkeyhint": null,
+    "formAssociated": false,
+    "lang": "ko"
+  },
+  "after": {
+    "type": "text",
+    "text": "피드 검색",
+    "labelIsVisuallyHidden": false,
+    "placeholder": "CVE ID, 제품, 키워드 검색",
+    "autocomplete": null,
+    "autocorrect": "off",
+    "autocapitalize": "none",
+    "spellcheck": "false",
+    "enterkeyhint": null,
+    "formAssociated": false,
+    "lang": "ko"
+  },
+  "browserMatrix": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "queryBeforeEnterBeforeChange": true,
+      "queryBeforeEnterAfterChange": true,
+      "enterRequestDeltaBefore": 0,
+      "enterRequestDeltaAfter": 0,
+      "labelVisibleAfterInput": true,
+      "focusOutlineRetained": true,
+      "filtersPagingAndBack": true
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "queryBeforeEnterBeforeChange": true,
+      "queryBeforeEnterAfterChange": true,
+      "enterRequestDeltaBefore": 0,
+      "enterRequestDeltaAfter": 0,
+      "labelVisibleAfterInput": true,
+      "focusOutlineRetained": true,
+      "filtersPagingAndBack": true
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "queryBeforeEnterBeforeChange": true,
+      "queryBeforeEnterAfterChange": true,
+      "enterRequestDeltaBefore": 0,
+      "enterRequestDeltaAfter": 0,
+      "labelVisibleAfterInput": true,
+      "focusOutlineRetained": true,
+      "filtersPagingAndBack": true
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "queryBeforeEnterBeforeChange": true,
+      "queryBeforeEnterAfterChange": true,
+      "enterRequestDeltaBefore": 0,
+      "enterRequestDeltaAfter": 0,
+      "labelVisibleAfterInput": true,
+      "focusOutlineRetained": true,
+      "filtersPagingAndBack": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "queryBeforeEnterBeforeChange": true,
+      "queryBeforeEnterAfterChange": true,
+      "enterRequestDeltaBefore": 0,
+      "enterRequestDeltaAfter": 0,
+      "labelVisibleAfterInput": true,
+      "focusOutlineRetained": true,
+      "filtersPagingAndBack": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "queryBeforeEnterBeforeChange": true,
+      "queryBeforeEnterAfterChange": true,
+      "enterRequestDeltaBefore": 0,
+      "enterRequestDeltaAfter": 0,
+      "labelVisibleAfterInput": true,
+      "focusOutlineRetained": true,
+      "filtersPagingAndBack": true
+    }
+  ],
+  "checks": {
+    "libraryTestsPassed": 36,
+    "typecheck": "passed",
+    "lint": "passed"
+  },
+  "unverified": [
+    "mobile OS keyboard and IME",
+    "English UI runtime",
+    "native Safari app",
+    "real backend integration after this label change",
+    "production"
+  ]
+}

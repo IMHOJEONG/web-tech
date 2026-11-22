@@ -15,7 +15,6 @@ type DocumentThumbnailProps = {
     className?: string
     fallback?: DocumentThumbnailFallback
     imageClassName?: string
-    priority?: boolean
     sizes?: string
     thumbnail?: string | null
     unoptimized?: boolean
@@ -32,7 +31,6 @@ export function DocumentThumbnail({
     className,
     fallback = 'default',
     imageClassName,
-    priority = false,
     sizes = '(max-width: 768px) 100vw, 360px',
     thumbnail,
     unoptimized = false,
@@ -69,7 +67,6 @@ export function DocumentThumbnail({
                     sizes={sizes}
                     className={cn('object-cover', imageClassName)}
                     quality={90}
-                    priority={priority}
                     placeholder="blur"
                     blurDataURL="/image/blur-image.webp"
                     unoptimized={unoptimized}

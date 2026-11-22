@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "base": "f36db6decac2a0c051bec9443075c3dc506cf256",
+  "scope": "Local search Drawer link focus implementation",
+  "sourceSha256": {
+    "apps/docs/article-e2e/body-search-navigation.spec.ts": "b710c0632d90e4a0e171db922594650b9f791ff41171930109ee35bba28c090e",
+    "apps/docs/e2e/header-clarity.spec.ts": "db368bdf61a6d1731e2cbe0ae78271a3db5e1217505aca5f06dc26a3871dfbfb",
+    "apps/docs/e2e/header-font-preference.spec.ts": "9ad7bedd7ac3ed4b25b6e7cb7936196051844866bd5c95270aa573b2cec62cdc",
+    "apps/docs/e2e/keyboard-accessibility.spec.ts": "0632033c7270e4f7fc5443516507a90ea1c6a2afccb269fd1cff997e6e93c115",
+    "apps/docs/e2e/search-drawer.spec.ts": "ca6abd69b21a1e02ac6453ce6f7ce26b40b0581192ee6a58e4d4b31eeada1d51",
+    "apps/docs/e2e/shell-focus-contrast.spec.ts": "49a6f2566b862009442ff27932b358273b50b5f45407d473c9bd5997a7b9cee5",
+    "apps/docs/feature/search/ui/search-drawer-content.tsx": "2d4c6320df4953536f2259b4517504a5eaf5aee2298f8d44e0717ae41744bd1d",
+    "apps/docs/feature/search/ui/search-drawer.tsx": "f1b2fc3df38e94349a42cb1e02db8dcca4391cd0f75ae7be308e7325dd6ccaa3",
+    "apps/docs/feature/search/ui/search-suggestion-list.tsx": "0992f1c025f20fd29c90910c5b407f09b9775f9d753d149446a23c54a5c9617c",
+    "apps/docs/shared/message/en.json": "582b629d7c4df710560252c9b3f3381423f0e3757253c420cbc616ba1091a716",
+    "apps/docs/shared/message/ko.json": "1f9f0dcc281f0c225b41058d337ec3846e30ec34ddae85baaeddf93e6b9c7696"
+  },
+  "typecheck": "passed",
+  "lint": "passed",
+  "runs": {
+    "chromiumSearch": {
+      "widths": [390, 1280],
+      "passed": 63,
+      "skipped": 1
+    },
+    "firefoxAndWebkitKeyboard": {
+      "widths": [390],
+      "initialPassed": 21,
+      "rechecked": ["Firefox composition passed after fixture correction"],
+      "all22ConditionsCovered": true
+    },
+    "compositionRecheck": {
+      "engines": ["chromium", "firefox", "webkit"],
+      "passed": 3
+    },
+    "localProductionBodySearch": {
+      "project": "article-desktop",
+      "passed": 2
+    }
+  },
+  "behavior": [
+    "Native result links in Tab order",
+    "Arrow navigation moves DOM focus and wraps between links",
+    "Enter after Tab round trip submits the query",
+    "Enter on a result navigates to the document",
+    "Dismiss restores trigger focus",
+    "If focused result is removed, focus returns to input",
+    "Composition preserves the open Drawer and blocks submit"
+  ],
+  "diagnostics": [
+    "Broad first Chromium run did not have MDX needed by 4 local article and 2 enlarged text tests. One English search history timeout passed in the focused rerun.",
+    "Firefox fill used its own native composition end. The final IME test uses an explicit composing input event.",
+    "macOS WebKit sequential link checks use Option-Tab.",
+    "Headless Chromium modified and middle click popup probes timed out; new tab behavior not confirmed."
+  ],
+  "limitations": [
+    "No physical device, OS IME, screen reader, or deployed environment verification"
+  ]
+}

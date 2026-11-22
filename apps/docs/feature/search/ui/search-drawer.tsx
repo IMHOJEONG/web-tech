@@ -28,7 +28,19 @@ export function SearchDrawer({ initialKeyword }: { initialKeyword: string }) {
         setOpen(nextOpen)
     }
     return (
-        <Sheet open={open} onOpenChange={changeOpen}>
+        <Sheet
+            open={open}
+            onOpenChange={(nextOpen, details) => {
+                if (
+                    details.reason === 'escape-key' &&
+                    input.composing.current
+                ) {
+                    details.cancel()
+                    return
+                }
+                changeOpen(nextOpen)
+            }}
+        >
             <SheetTrigger
                 data-testid="search-drawer-trigger"
                 disabled={!hydrated}

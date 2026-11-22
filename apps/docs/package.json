@@ -79,6 +79,7 @@
         "remark-toc": "catalog:docs",
         "sanitize-html": "catalog:docs",
         "sass": "catalog:",
+        "sharp": "catalog:",
         "shiki": "^4.0.2",
         "to-vfile": "catalog:docs",
         "tw-animate-css": "catalog:",

@@ -55,7 +55,7 @@ for (const locale of ['ko', 'en']) {
                         ).toHaveCount(1)
                     } else {
                         await expect(
-                            page.getByRole('dialog').getByRole('combobox')
+                            page.getByRole('dialog').getByRole('searchbox')
                         ).toBeFocused()
                     }
                     await page.keyboard.press('Escape')

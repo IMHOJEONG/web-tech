@@ -18,6 +18,7 @@ import { getDocByRoutePath } from '~/lib/get-document'
 import { renderArticleContent } from '~/lib/render-article-content'
 import { components } from '~/mdx-components'
 import { ArticleBodySkeleton } from '~/widgets/article-detail/ui/article-body-skeleton'
+import { ArticleFragmentRestore } from '~/widgets/article-detail/ui/article-fragment-restore'
 import { ArticleContentLayout } from '~/widgets/article-detail/ui/article-content-layout'
 import { ArticleSupplementary } from '~/widgets/article-detail/ui/article-supplementary'
 import { ArticleStructuredData } from '~/widgets/article-detail/ui/article-structured-data'
@@ -116,6 +117,7 @@ export default async function Page({
                         </Suspense>
                     )}
                 </div>
+                <ArticleFragmentRestore />
                 {target.status === 'published' && (
                     <OfflineSaveButton
                         path={localizePath(getDocHref(target), locale)}

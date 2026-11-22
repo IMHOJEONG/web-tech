@@ -1,0 +1,912 @@
+{
+  "date": "2026-11-22",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "7f97904044992b8fd8c42a62e5aa034abeb28924",
+  "source": {
+    "repository": "google/fonts",
+    "path": "ofl/notosanskr/NotoSansKR[wght].ttf",
+    "commit": "4efc2774c63917927efe769ca845def6bd6debae",
+    "gitBlob": "b386890ba945e1f39448a6b59f20c5d194f58808",
+    "sha256": "194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252"
+  },
+  "toolVersions": {
+    "fontTools": "4.68.0",
+    "brotli": "1.2.1",
+    "next": "16.4.6",
+    "bundler": "webpack"
+  },
+  "subset": {
+    "originalTTFBytes": 10414588,
+    "fullWoff2Bytes": 3907892,
+    "subsetWoff2Bytes": 1053064,
+    "baselineWoff2Bytes": 1756652,
+    "baselineCodepoints": 11682,
+    "notoCodepoints": 23174,
+    "subsetCodepoints": 11628,
+    "hangulSyllables": 11172,
+    "missingVsPretendard": [
+      "U+2000",
+      "U+2001",
+      "U+2004",
+      "U+2005",
+      "U+2006",
+      "U+2007",
+      "U+2008",
+      "U+2009",
+      "U+200A",
+      "U+200B",
+      "U+200C",
+      "U+200D",
+      "U+2017",
+      "U+201B",
+      "U+201F",
+      "U+2023",
+      "U+2024",
+      "U+202F",
+      "U+2031",
+      "U+2034",
+      "U+2036",
+      "U+2037",
+      "U+2038",
+      "U+203D",
+      "U+203E",
+      "U+203F",
+      "U+2040",
+      "U+2041",
+      "U+2043",
+      "U+2044",
+      "U+2045",
+      "U+2046",
+      "U+204A",
+      "U+204B",
+      "U+204C",
+      "U+204D",
+      "U+204E",
+      "U+204F",
+      "U+2050",
+      "U+2052",
+      "U+2053",
+      "U+2054",
+      "U+2055",
+      "U+2056",
+      "U+2057",
+      "U+2058",
+      "U+2059",
+      "U+205A",
+      "U+205B",
+      "U+205C",
+      "U+205D",
+      "U+205E",
+      "U+205F",
+      "U+2060"
+    ],
+    "outlineComparisons": 162,
+    "weightsChecked": [400, 600, 700]
+  },
+  "sourceHashes": {
+    "apps/docs/shared/config/fonts.ts": "51e80fe062e9dc1f0fe95d008d06efddbf835bc77ae16898812e9ed63465b55d",
+    "apps/docs/app/[locale]/layout.tsx": "80737eb380d16cb9ea45dbefad65471f0a57bb89edc75b7f929c429601849502",
+    "apps/docs/public/fonts/NotoSansKRVariable.woff2": "ab8429c627b959cc2e1b7a543ebb34baaf37be15958c19996c4b13d7cfe5e6b3",
+    "apps/docs/public/fonts/NotoSansKR-LICENSE.txt": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+    "apps/docs/public/fonts/PretendardVariable.woff2": "844d8fd4dc44c28f8710dc3ac02c517b0a61d6cc32310693a0ee3de68fc88fb4"
+  },
+  "slow": {
+    "browser": "151.0.7922.34",
+    "network": {
+      "latencyMs": 150,
+      "downloadBytesPerSecond": 200000,
+      "uploadBytesPerSecond": 93750,
+      "cpuSlowdown": 4
+    },
+    "results": [
+      {
+        "font": "Pretendard",
+        "repetition": 0,
+        "width": 390,
+        "locale": "ko",
+        "bodyTextPaintMs": 736,
+        "lcpMs": 736,
+        "fontsReadyMs": 10119.799999713898,
+        "cls": 0,
+        "pHeight": 264.515625,
+        "fontBytes": 1781928
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 0,
+        "width": 390,
+        "locale": "en",
+        "bodyTextPaintMs": 492,
+        "lcpMs": 492,
+        "fontsReadyMs": 753.9000000953674,
+        "cls": 0,
+        "pHeight": 235.125,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 0,
+        "width": 1280,
+        "locale": "ko",
+        "bodyTextPaintMs": 572,
+        "lcpMs": 572,
+        "fontsReadyMs": 10094.599999904633,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 1781928
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 0,
+        "width": 1280,
+        "locale": "en",
+        "bodyTextPaintMs": 492,
+        "lcpMs": 492,
+        "fontsReadyMs": 753.5999999046326,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 0,
+        "width": 390,
+        "locale": "ko",
+        "bodyTextPaintMs": 560,
+        "lcpMs": 560,
+        "fontsReadyMs": 6559,
+        "cls": 0.005075129708668166,
+        "pHeight": 293.90625,
+        "fontBytes": 1078340
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 0,
+        "width": 390,
+        "locale": "en",
+        "bodyTextPaintMs": 492,
+        "lcpMs": 492,
+        "fontsReadyMs": 759,
+        "cls": 0,
+        "pHeight": 235.125,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 0,
+        "width": 1280,
+        "locale": "ko",
+        "bodyTextPaintMs": 636,
+        "lcpMs": 636,
+        "fontsReadyMs": 6554.300000190735,
+        "cls": 0.0022852603858116113,
+        "pHeight": 117.5625,
+        "fontBytes": 1078340
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 0,
+        "width": 1280,
+        "locale": "en",
+        "bodyTextPaintMs": 500,
+        "lcpMs": 500,
+        "fontsReadyMs": 757,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 1,
+        "width": 390,
+        "locale": "ko",
+        "bodyTextPaintMs": 552,
+        "lcpMs": 552,
+        "fontsReadyMs": 6574.900000095367,
+        "cls": 0.005075129708668166,
+        "pHeight": 293.90625,
+        "fontBytes": 1078340
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 1,
+        "width": 390,
+        "locale": "en",
+        "bodyTextPaintMs": 488,
+        "lcpMs": 488,
+        "fontsReadyMs": 755,
+        "cls": 0,
+        "pHeight": 235.125,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 1,
+        "width": 1280,
+        "locale": "ko",
+        "bodyTextPaintMs": 580,
+        "lcpMs": 580,
+        "fontsReadyMs": 6584.099999904633,
+        "cls": 0.0022852603858116113,
+        "pHeight": 117.5625,
+        "fontBytes": 1078340
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 1,
+        "width": 1280,
+        "locale": "en",
+        "bodyTextPaintMs": 492,
+        "lcpMs": 492,
+        "fontsReadyMs": 751.0999999046326,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 1,
+        "width": 390,
+        "locale": "ko",
+        "bodyTextPaintMs": 572,
+        "lcpMs": 572,
+        "fontsReadyMs": 10077.900000095367,
+        "cls": 0,
+        "pHeight": 264.515625,
+        "fontBytes": 1781928
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 1,
+        "width": 390,
+        "locale": "en",
+        "bodyTextPaintMs": 500,
+        "lcpMs": 500,
+        "fontsReadyMs": 764.1999998092651,
+        "cls": 0,
+        "pHeight": 235.125,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 1,
+        "width": 1280,
+        "locale": "ko",
+        "bodyTextPaintMs": 560,
+        "lcpMs": 560,
+        "fontsReadyMs": 10083.199999809265,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 1781928
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 1,
+        "width": 1280,
+        "locale": "en",
+        "bodyTextPaintMs": 492,
+        "lcpMs": 492,
+        "fontsReadyMs": 754.5999999046326,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 2,
+        "width": 390,
+        "locale": "ko",
+        "bodyTextPaintMs": 552,
+        "lcpMs": 552,
+        "fontsReadyMs": 10080.199999809265,
+        "cls": 0,
+        "pHeight": 264.515625,
+        "fontBytes": 1781928
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 2,
+        "width": 390,
+        "locale": "en",
+        "bodyTextPaintMs": 488,
+        "lcpMs": 488,
+        "fontsReadyMs": 756.8000001907349,
+        "cls": 0,
+        "pHeight": 235.125,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 2,
+        "width": 1280,
+        "locale": "ko",
+        "bodyTextPaintMs": 608,
+        "lcpMs": 608,
+        "fontsReadyMs": 10092.400000095367,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 1781928
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 2,
+        "width": 1280,
+        "locale": "en",
+        "bodyTextPaintMs": 496,
+        "lcpMs": 496,
+        "fontsReadyMs": 751.5999999046326,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 2,
+        "width": 390,
+        "locale": "ko",
+        "bodyTextPaintMs": 568,
+        "lcpMs": 568,
+        "fontsReadyMs": 6557.800000190735,
+        "cls": 0.005075129708668166,
+        "pHeight": 293.90625,
+        "fontBytes": 1078340
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 2,
+        "width": 390,
+        "locale": "en",
+        "bodyTextPaintMs": 488,
+        "lcpMs": 488,
+        "fontsReadyMs": 753.5999999046326,
+        "cls": 0,
+        "pHeight": 235.125,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 2,
+        "width": 1280,
+        "locale": "ko",
+        "bodyTextPaintMs": 556,
+        "lcpMs": 556,
+        "fontsReadyMs": 6544.599999904633,
+        "cls": 0.0022852603858116113,
+        "pHeight": 117.5625,
+        "fontBytes": 1078340
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 2,
+        "width": 1280,
+        "locale": "en",
+        "bodyTextPaintMs": 480,
+        "lcpMs": 480,
+        "fontsReadyMs": 747.3000001907349,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 25276
+      }
+    ]
+  },
+  "fast": {
+    "browser": "151.0.7922.34",
+    "network": {
+      "latencyMs": 0,
+      "downloadBytesPerSecond": "unlimited",
+      "uploadBytesPerSecond": "unlimited",
+      "cpuSlowdown": 1
+    },
+    "results": [
+      {
+        "font": "Pretendard",
+        "repetition": 0,
+        "width": 390,
+        "locale": "ko",
+        "bodyTextPaintMs": 92,
+        "lcpMs": 92,
+        "fontsReadyMs": 130.69999980926514,
+        "cls": 0,
+        "pHeight": 264.515625,
+        "fontBytes": 1781928
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 0,
+        "width": 390,
+        "locale": "en",
+        "bodyTextPaintMs": 32,
+        "lcpMs": 32,
+        "fontsReadyMs": 56.90000009536743,
+        "cls": 0,
+        "pHeight": 235.125,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 0,
+        "width": 1280,
+        "locale": "ko",
+        "bodyTextPaintMs": 48,
+        "lcpMs": 48,
+        "fontsReadyMs": 106,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 1781928
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 0,
+        "width": 1280,
+        "locale": "en",
+        "bodyTextPaintMs": 28,
+        "lcpMs": 28,
+        "fontsReadyMs": 51.69999980926514,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 0,
+        "width": 390,
+        "locale": "ko",
+        "bodyTextPaintMs": 60,
+        "lcpMs": 60,
+        "fontsReadyMs": 108.7000002861023,
+        "cls": 0.005075129708668166,
+        "pHeight": 293.90625,
+        "fontBytes": 1078340
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 0,
+        "width": 390,
+        "locale": "en",
+        "bodyTextPaintMs": 32,
+        "lcpMs": 32,
+        "fontsReadyMs": 69.80000019073486,
+        "cls": 0,
+        "pHeight": 235.125,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 0,
+        "width": 1280,
+        "locale": "ko",
+        "bodyTextPaintMs": 68,
+        "lcpMs": 68,
+        "fontsReadyMs": 120.5,
+        "cls": 0.0022852603858116113,
+        "pHeight": 117.5625,
+        "fontBytes": 1078340
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 0,
+        "width": 1280,
+        "locale": "en",
+        "bodyTextPaintMs": 28,
+        "lcpMs": 28,
+        "fontsReadyMs": 52.30000019073486,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 1,
+        "width": 390,
+        "locale": "ko",
+        "bodyTextPaintMs": 60,
+        "lcpMs": 60,
+        "fontsReadyMs": 107.5,
+        "cls": 0.005075129708668166,
+        "pHeight": 293.90625,
+        "fontBytes": 1078340
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 1,
+        "width": 390,
+        "locale": "en",
+        "bodyTextPaintMs": 32,
+        "lcpMs": 32,
+        "fontsReadyMs": 71.10000038146973,
+        "cls": 0,
+        "pHeight": 235.125,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 1,
+        "width": 1280,
+        "locale": "ko",
+        "bodyTextPaintMs": 64,
+        "lcpMs": 64,
+        "fontsReadyMs": 108.7999997138977,
+        "cls": 0.0022852603858116113,
+        "pHeight": 117.5625,
+        "fontBytes": 1078340
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 1,
+        "width": 1280,
+        "locale": "en",
+        "bodyTextPaintMs": 28,
+        "lcpMs": 28,
+        "fontsReadyMs": 56.40000009536743,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 1,
+        "width": 390,
+        "locale": "ko",
+        "bodyTextPaintMs": 52,
+        "lcpMs": 52,
+        "fontsReadyMs": 110.09999990463257,
+        "cls": 0,
+        "pHeight": 264.515625,
+        "fontBytes": 1781928
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 1,
+        "width": 390,
+        "locale": "en",
+        "bodyTextPaintMs": 28,
+        "lcpMs": 28,
+        "fontsReadyMs": 52.5,
+        "cls": 0,
+        "pHeight": 235.125,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 1,
+        "width": 1280,
+        "locale": "ko",
+        "bodyTextPaintMs": 64,
+        "lcpMs": 64,
+        "fontsReadyMs": 101.7000002861023,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 1781928
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 1,
+        "width": 1280,
+        "locale": "en",
+        "bodyTextPaintMs": 28,
+        "lcpMs": 28,
+        "fontsReadyMs": 51,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 2,
+        "width": 390,
+        "locale": "ko",
+        "bodyTextPaintMs": 92,
+        "lcpMs": 92,
+        "fontsReadyMs": 134.59999990463257,
+        "cls": 0,
+        "pHeight": 264.515625,
+        "fontBytes": 1781928
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 2,
+        "width": 390,
+        "locale": "en",
+        "bodyTextPaintMs": 28,
+        "lcpMs": 28,
+        "fontsReadyMs": 51.5,
+        "cls": 0,
+        "pHeight": 235.125,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 2,
+        "width": 1280,
+        "locale": "ko",
+        "bodyTextPaintMs": 56,
+        "lcpMs": 56,
+        "fontsReadyMs": 96.09999990463257,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 1781928
+      },
+      {
+        "font": "Pretendard",
+        "repetition": 2,
+        "width": 1280,
+        "locale": "en",
+        "bodyTextPaintMs": 28,
+        "lcpMs": 28,
+        "fontsReadyMs": 56.69999980926514,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 2,
+        "width": 390,
+        "locale": "ko",
+        "bodyTextPaintMs": 64,
+        "lcpMs": 64,
+        "fontsReadyMs": 111.19999980926514,
+        "cls": 0.005075129708668166,
+        "pHeight": 293.90625,
+        "fontBytes": 1078340
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 2,
+        "width": 390,
+        "locale": "en",
+        "bodyTextPaintMs": 76,
+        "lcpMs": 76,
+        "fontsReadyMs": 97.30000019073486,
+        "cls": 0,
+        "pHeight": 235.125,
+        "fontBytes": 25276
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 2,
+        "width": 1280,
+        "locale": "ko",
+        "bodyTextPaintMs": 60,
+        "lcpMs": 60,
+        "fontsReadyMs": 98.09999990463257,
+        "cls": 0.0022852603858116113,
+        "pHeight": 117.5625,
+        "fontBytes": 1078340
+      },
+      {
+        "font": "Noto Sans KR subset",
+        "repetition": 2,
+        "width": 1280,
+        "locale": "en",
+        "bodyTextPaintMs": 28,
+        "lcpMs": 28,
+        "fontsReadyMs": 52.80000019073486,
+        "cls": 0,
+        "pHeight": 88.171875,
+        "fontBytes": 25276
+      }
+    ]
+  },
+  "readability": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "fontsLoaded": true,
+      "overflow": false,
+      "panels": [
+        {
+          "label": "Pretendard",
+          "bodyWidth": 316,
+          "bodyHeight": 176.34375,
+          "lineCount": 6,
+          "overflow": false
+        },
+        {
+          "label": "Noto Sans KR",
+          "bodyWidth": 316,
+          "bodyHeight": 176.34375,
+          "lineCount": 6,
+          "overflow": false
+        }
+      ],
+      "symbolFonts": [
+        [
+          {
+            "familyName": "Pretendard Variable",
+            "isCustomFont": true,
+            "glyphCount": 45
+          },
+          {
+            "familyName": "Arial",
+            "isCustomFont": false,
+            "glyphCount": 1
+          }
+        ],
+        [
+          {
+            "familyName": "Arial",
+            "isCustomFont": false,
+            "glyphCount": 2
+          },
+          {
+            "familyName": "Noto Sans KR Thin",
+            "isCustomFont": true,
+            "glyphCount": 42
+          },
+          {
+            "familyName": "Helvetica",
+            "isCustomFont": false,
+            "glyphCount": 2
+          }
+        ]
+      ]
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "fontsLoaded": true,
+      "overflow": false,
+      "panels": [
+        {
+          "label": "Pretendard",
+          "bodyWidth": 556,
+          "bodyHeight": 88.171875,
+          "lineCount": 3,
+          "overflow": false
+        },
+        {
+          "label": "Noto Sans KR",
+          "bodyWidth": 556,
+          "bodyHeight": 117.5625,
+          "lineCount": 4,
+          "overflow": false
+        }
+      ],
+      "symbolFonts": [
+        [
+          {
+            "familyName": "Pretendard Variable",
+            "isCustomFont": true,
+            "glyphCount": 46
+          },
+          {
+            "familyName": "Arial",
+            "isCustomFont": false,
+            "glyphCount": 1
+          }
+        ],
+        [
+          {
+            "familyName": "Arial",
+            "isCustomFont": false,
+            "glyphCount": 2
+          },
+          {
+            "familyName": "Noto Sans KR Thin",
+            "isCustomFont": true,
+            "glyphCount": 43
+          },
+          {
+            "familyName": "Helvetica",
+            "isCustomFont": false,
+            "glyphCount": 2
+          }
+        ]
+      ]
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "fontsLoaded": true,
+      "overflow": false,
+      "panels": [
+        {
+          "label": "Pretendard",
+          "bodyWidth": 316,
+          "bodyHeight": 176.39999389648438,
+          "lineCount": 6,
+          "overflow": false
+        },
+        {
+          "label": "Noto Sans KR",
+          "bodyWidth": 316,
+          "bodyHeight": 176.40000915527344,
+          "lineCount": 6,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "fontsLoaded": true,
+      "overflow": false,
+      "panels": [
+        {
+          "label": "Pretendard",
+          "bodyWidth": 556,
+          "bodyHeight": 88.19999694824219,
+          "lineCount": 3,
+          "overflow": false
+        },
+        {
+          "label": "Noto Sans KR",
+          "bodyWidth": 556,
+          "bodyHeight": 117.60000610351562,
+          "lineCount": 4,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "fontsLoaded": true,
+      "overflow": false,
+      "panels": [
+        {
+          "label": "Pretendard",
+          "bodyWidth": 316,
+          "bodyHeight": 176.34375,
+          "lineCount": 6,
+          "overflow": false
+        },
+        {
+          "label": "Noto Sans KR",
+          "bodyWidth": 316,
+          "bodyHeight": 176.34375,
+          "lineCount": 6,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "fontsLoaded": true,
+      "overflow": false,
+      "panels": [
+        {
+          "label": "Pretendard",
+          "bodyWidth": 556,
+          "bodyHeight": 88.171875,
+          "lineCount": 3,
+          "overflow": false
+        },
+        {
+          "label": "Noto Sans KR",
+          "bodyWidth": 556,
+          "bodyHeight": 88.171875,
+          "lineCount": 3,
+          "overflow": false
+        }
+      ]
+    }
+  ],
+  "captures": {
+    "readability-390.png": "ce79eb2deb67e25dba1df675c09cc0a72992136e852a7e94522f4c2649bcffdb",
+    "readability-1280.png": "fdfc15df1ac6cf98fc529970d24e5976a3f618fc4162bc026c56e3655ba7433a"
+  },
+  "checks": {
+    "hangulSyllables": 11172,
+    "outlineComparisons": 162,
+    "validPerformanceRuns": 48,
+    "renderConditions": 6,
+    "typecheck": "passed",
+    "lint": "passed"
+  },
+  "unverified": [
+    "Production field CWV",
+    "Full application route performance",
+    "Physical devices and other OS fallback fonts",
+    "Native Safari CWV",
+    "User reading-speed study"
+  ]
+}

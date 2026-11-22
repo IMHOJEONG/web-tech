@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import { expect, test } from '@playwright/test'
 import type { LifecycleSummary } from './request-lifecycle.ts'
+import { articleFixtureAuthorization } from './fixture-credentials.ts'
 
 // Direct URL interruption control, not a simulated user Link click.
 // Only the loopback content fixture can hold a body; no operational API is used.
@@ -17,7 +18,7 @@ for (const ending of [
                 `http://127.0.0.1:3112/__test/remote-body/${state}`,
                 {
                     headers: {
-                        Authorization: 'Bearer article-e2e-only-control',
+                        Authorization: articleFixtureAuthorization('control'),
                     },
                 }
             )
@@ -32,7 +33,9 @@ for (const ending of [
             'The remote article has finished rendering.'
         )
         const invalidated = await request.post('/api/revalidate/content', {
-            headers: { Authorization: 'Bearer article-e2e-only-revalidation' },
+            headers: {
+                Authorization: articleFixtureAuthorization('revalidation'),
+            },
         })
         expect(invalidated.status()).toBe(200)
         await control('hold')
@@ -64,6 +67,11 @@ for (const ending of [
                     response.request().headers()['next-router-prefetch'] === '1'
             )
             await page.goto('/ko/docs/web/article-e2e-publication')
+            // Link prefetch starts only when the real target enters the viewport.
+            await page
+                .locator('a[href="/ko/docs/web/article-e2e-remote"]')
+                .first()
+                .scrollIntoViewIfNeeded()
             const response = await prefetched
             expect(response.status()).toBe(200)
             const id = response.headers()['x-article-request-id']

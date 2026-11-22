@@ -182,6 +182,10 @@ export const components = {
     },
 
     img: (props) => {
+        const imageProps = props as ImageProps
+        const loading =
+            props.loading ??
+            (props.fetchPriority === 'high' ? 'eager' : undefined)
         const diagram = getArticleDiagramSources(props.src)
         if (diagram) {
             return (
@@ -199,22 +203,34 @@ export const components = {
                         height={diagram.portraitHeight}
                         style={{ width: '100%', height: 'auto' }}
                         unoptimized
-                        loading="eager"
+                        loading={loading}
                     />
                 </picture>
+            )
+        }
+        // Preserve old remote Markdown images whose intrinsic size is unknown.
+        if (
+            typeof imageProps.src !== 'object' &&
+            !(Number(props.width) > 0 && Number(props.height) > 0)
+        ) {
+            return (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                    className={cn('mdx-img', ...commonCss)}
+                    decoding="async"
+                    style={{ width: '100%', height: 'auto' }}
+                    {...props}
+                    loading={loading ?? 'lazy'}
+                />
             )
         }
         return (
             <Image
                 className={cn('mdx-img', ...commonCss)}
-                sizes="100vw"
-                width={0}
-                height={0}
+                sizes="auto, (min-width: 1088px) 1024px, (min-width: 768px) calc(100vw - 64px), (min-width: 640px) calc(100vw - 48px), calc(100vw - 32px)"
                 style={{ width: '100%', height: 'auto' }}
-                priority
-                placeholder="blur"
-                blurDataURL="/image/blur-image.webp"
-                {...(props as ImageProps)}
+                {...imageProps}
+                loading={loading}
             />
         )
     },
