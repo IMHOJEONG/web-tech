@@ -20,7 +20,9 @@
     "apps/docs/lib/rehype-image-dimensions.ts": "9734d0b63f14602f0ade4b5a0eea46c40063bdc9c9618437e2f0e8a46b92e07c",
     "apps/docs/widgets/docs-index/ui/docs-index-pending.tsx": "13d4a902a826016ab361454fc813347b9f46e11617cfc8ebac29388ef7b88ef7",
     "apps/docs/widgets/docs-index/ui/docs-search-panel.tsx": "0800959b043cf44143332616dc503804ea61b539f126356b7d48894024128a03",
-    "apps/docs/widgets/article-detail/ui/article-fragment-restore.tsx": "594be100389526f4e731a252c67ad8c63c1d2d11d7565842ba2234c068cf32d3"
+    "apps/docs/widgets/article-detail/ui/article-fragment-restore.tsx": "594be100389526f4e731a252c67ad8c63c1d2d11d7565842ba2234c068cf32d3",
+    "apps/docs/article-e2e/prefetch-termination.spec.ts": "0517acb2e6d27b62ea97e6d5d7577fb4884a991f299c5bd778a57ca664022e1e",
+    "apps/docs/article-e2e/category-boundary.spec.ts": "493b5c84663aa636eb968c99d0d52c8baa352db17697ad9fb4fa9a02b6676dc4"
   },
   "baselineCi": {
     "run": 45040120701,
@@ -83,11 +85,36 @@
         "failed": 4,
         "cause": "native GET consumer captured disabled fallback; wait for ready form before isolating markup"
       }
-    ]
+    ],
+    "fullArticleIntermediate": {
+      "passed": 196,
+      "failed": 2,
+      "skipped": 2,
+      "cause": "category main h1 selected hidden fallback and ready heading"
+    },
+    "fullArticleFinal": {
+      "passed": 198,
+      "failed": 0,
+      "skipped": 2,
+      "scope": "complete unchanged article-production suite, both viewports; existing two skips retained"
+    },
+    "consumerAuthFollowup": {
+      "passed": 10,
+      "failed": 0,
+      "scope": "both viewport consumers after migration to shared fixture authorization helper"
+    }
   },
   "remoteFollowup": {
-    "state": "awaiting commit and push",
-    "scope": "verify new head, keep draft, no main merge or production verification"
+    "priorCommit": "ec45bffdad87bfff0a096cbe657547b91e6dee0d",
+    "priorRun": 45043022524,
+    "responsive": "all 3 jobs passed",
+    "article": {
+      "passed": 197,
+      "failed": 1,
+      "skipped": 2,
+      "cause": "second viewport-dependent Link consumer"
+    },
+    "state": "follow-up consumer fixes locally verified; next committed head CI must be checked after push"
   },
   "excluded": [
     "raw logs",
@@ -96,5 +123,6 @@
     "credentials",
     "private articles",
     "VoiceOver follow-up"
-  ]
+  ],
+  "publicationFollowup": "existing inline synthetic authorization strings migrated to the shared fixture credential helper after the changed-blob scanner blocked them"
 }

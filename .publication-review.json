@@ -3405,11 +3405,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-23-frontend-modernization-main-pr.md",
-      "sha256": "0bcc1e1c0ef7f0257493d9081bf9b7d8918ce93562dd6dc3301d1008ce8347e5",
+      "sha256": "0b19ec10e11a17c11285b8e29965cf04fb54f241248f839732a831d6a1efd34b",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
-      "note": "사용자가 PR #111 리뷰2건과 나머지 CI 실패 원인의 수정·정제 검증 기록 반영·커밋·푸시·새 CI 확인을 명시 요청했다. 해당 범위의 원인·기존 실패 이력·최종 로컬 집계·실제 근거 링크·소스 해시·정책 보완을 검수했다. 원시 로그·trace·캡처·실제 응답·키·개인 경로·비공개 글·다른 작업은 제외했다. 원격 CI 확인은 새 head로 구분하며 main 병합·운영 배포 승인은 아니다.",
+      "note": "사용자가 PR111 리뷰·나머지 CI 실패 해결과 검증 기록의 커밋·푸시·새 CI 확인을 명시 요청한 범위. ec45bffd 원격 CI의197통과/프리페치1실패, 전체 로컬196통과/hidden fallback 선택2실패, 최종198통과/기존2생략의 정제 이력과 검사 소비자 보완을 검수했다. 원시 자료·비밀값·다른 작업·main 병합·운영 배포는 제외한다.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -3419,11 +3419,11 @@
     },
     {
       "path": "docs/verification/artifacts/2026-11-23-frontend-modernization-pr-review.json",
-      "sha256": "306369fa15c19b591401f1c5c8ce18174c4fafd680d98aef1f1ebf3f52da0549",
+      "sha256": "b3970b00a6558f6fc86310ae69e1fba59324e159a5d42c17026c312a9aaffe48",
       "kind": "sanitized-evidence",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
-      "note": "사용자가 PR #111 리뷰2건과 나머지 CI 실패 원인의 수정·정제 검증 기록 반영·커밋·푸시·새 CI 확인을 명시 요청했다. 해당 범위의 원인·기존 실패 이력·최종 로컬 집계·실제 근거 링크·소스 해시·정책 보완을 검수했다. 원시 로그·trace·캡처·실제 응답·키·개인 경로·비공개 글·다른 작업은 제외했다. 원격 CI 확인은 새 head로 구분하며 main 병합·운영 배포 승인은 아니다.",
+      "note": "사용자가 PR111 리뷰·나머지 CI 실패 해결과 검증 기록의 커밋·푸시·새 CI 확인을 명시 요청한 범위. ec45bffd 원격 CI의197통과/프리페치1실패, 전체 로컬196통과/hidden fallback 선택2실패, 최종198통과/기존2생략의 정제 이력과 검사 소비자 보완을 검수했다. 원시 자료·비밀값·다른 작업·main 병합·운영 배포는 제외한다.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -3433,11 +3433,11 @@
     },
     {
       "path": "docs/verification/integration/2026-11-23-frontend-modernization-pr-review.md",
-      "sha256": "7ad4c670ab3448e066fa770aef679924a66868584bf18da648ad528edf98252d",
+      "sha256": "f5a2da16bc7f19585dada8a4fd2f20c36f82a9fc58a428ba2627d2db6de05431",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
-      "note": "사용자가 PR #111 리뷰2건과 나머지 CI 실패 원인의 수정·정제 검증 기록 반영·커밋·푸시·새 CI 확인을 명시 요청했다. 해당 범위의 원인·기존 실패 이력·최종 로컬 집계·실제 근거 링크·소스 해시·정책 보완을 검수했다. 원시 로그·trace·캡처·실제 응답·키·개인 경로·비공개 글·다른 작업은 제외했다. 원격 CI 확인은 새 head로 구분하며 main 병합·운영 배포 승인은 아니다.",
+      "note": "사용자가 PR111 리뷰·나머지 CI 실패 해결과 검증 기록의 커밋·푸시·새 CI 확인을 명시 요청한 범위. ec45bffd 원격 CI의197통과/프리페치1실패, 전체 로컬196통과/hidden fallback 선택2실패, 최종198통과/기존2생략의 정제 이력과 검사 소비자 보완을 검수했다. 원시 자료·비밀값·다른 작업·main 병합·운영 배포는 제외한다.",
       "checks": {
         "secrets": true,
         "personalData": true,

@@ -39,6 +39,12 @@ article 설정의 기본 Turbopack 프로덕션 빌드 경고와 preview page의
 
 수정 커밋·푸시 후 새 SHA의 CI를 재조회하며 최종 원격 결과는 같은 PR·Jira·Confluence에 연결한다. 이 문서의 로컬 통과를 원격 CI 성공으로 추정하지 않는다. [정제 요약](../artifacts/2026-11-23-frontend-modernization-pr-review.json)
 
+### 첫 수정 푸시 후 전체 소비자 재검증
+
+ec45bffd의 [CI359](https://github.com/IMHOJEONG/web-tech/actions/runs/45043022524)에서 반응형 세 작업과 문서·컨테이너·Preview·lint/typecheck/단위·공용 UI·오프라인·CRP가 성공했다. article-production은197통과·프리페치1실패·2생략이었다. 별도 prefetch-termination 검사에도 실제 Link의 viewport 조건이 빠져 같은 방식으로 보완했다. 프리페치 HTTP 재현 대조는 기존 범위를 유지한다.
+
+이후 전체 합성 본문 suite의 첫 로컬 실행은196통과·2실패·2생략이었다. 카테고리의 `main h1` 선택자가 스트리밍 동안 남은 hidden fallback과 실제 제목을 동시에 골라 strict 오류를 냈다. 검증 대상을 노출된 main의 의미 있는 h1로 한정하고 잘못된 카테고리·정상 상태·noindex 판정은 유지했다. 보완 후 전체 합성 프로덕션 본문 suite는198통과·0실패·기존2생략으로 종료됐다. 새 SHA의 CI는 푸시 후 별도로 확인한다. 이 후속은 검사 소비자 보완이며 제품 동작·timeout·retry의 추가 변경이 아니다. 후속 커밋의 공개 검사에서 기존 합성 인증 리터럴이 변경 blob 검사에 차단돼 공통 fixture 인증 helper로 교체했다. 차단을 우회하지 않았으며 해당 소비자10개도 두 폭에서 모두 통과했다.
+
 ## 한계와 후속 작업
 
 PR의 실제 운영 배포·필드 CWV·실기기·VoiceOver 후속은 수행하지 않는다. VoiceOver 생략은 사용자 요청을 유지한다. 임시 설정·합성 입력·원시 로그·trace·캡처는 PR에 포함하지 않는다. 초기 fragment 복구는 위치 손실을 보완하며 일반 스크롤이나 이력 이동 전체를 재구현하지 않는다.
