@@ -2,7 +2,7 @@
   "version": 1,
   "entries": [
     {
-      "path": "docs/verification/resilience/2026-11-22-drawer-hydration-readiness.md",
+      "path": "docs/verification/resilience/2026-11-22-uiux-stream-readiness.md",
       "kind": "document",
       "decision": "public-approved",
       "checks": {
@@ -11,12 +11,12 @@
         "rights": true,
         "publicIntent": true
       },
-      "sha256": "d760106c86777a08cb1894758642ea34dc3c8e07c736595b38208596c76dc850",
+      "sha256": "e46faccf73453e0ad96c6c3cdaf3ad95d74b88809cbc09fc1ec55ab6698f99ab",
       "reviewedOn": "2026-11-22",
-      "note": "사용자가 PR #107·#109 재시도 안정화의 코드·회귀 7개, 정제 보고서·worklog 4개와 목차 2개·검수 해시의 공개·커밋·푸시·재검증과 세 PR 순차 병합을 승인함. 모바일 준비 상태 결함의 통제 재현·기준 유지 회귀·최초 타입 실패와 호환 수정·자연 실패 원인 미확정을 검수함. 원문·원시 자료·화면·키·다른 미커밋·stash는 제외함."
+      "note": "사용자가 PR #107·#109 재시도 안정화의 코드·회귀 7개, 정제 보고서·worklog 4개와 목차 2개·검수 해시의 공개·커밋·푸시·재검증과 세 PR 순차 병합을 승인함. UI/UX fallback 준비 상태 오판·동일 selector red/green·기준 유지 회귀·서버 시작 미실행/자연 실패 원인 미확정의 구분을 검수함. 원문·원시 자료·화면·키·다른 미커밋·stash는 제외함."
     },
     {
-      "path": "docs/worklog/2026-11/2026-11-22-drawer-hydration-readiness.md",
+      "path": "docs/worklog/2026-11/2026-11-22-uiux-stream-readiness.md",
       "kind": "document",
       "decision": "public-approved",
       "checks": {
@@ -25,9 +25,9 @@
         "rights": true,
         "publicIntent": true
       },
-      "sha256": "27097f2a08133ebcf94c034e684ab2205cff909ffec236e9855d664d3e6f295e",
+      "sha256": "4950259b8f7efc0b9012c21505f470274866a7af2372f0556c4eba4a03ad542d",
       "reviewedOn": "2026-11-22",
-      "note": "사용자가 PR #107·#109 재시도 안정화의 코드·회귀 7개, 정제 보고서·worklog 4개와 목차 2개·검수 해시의 공개·커밋·푸시·재검증과 세 PR 순차 병합을 승인함. 모바일 준비 상태 결함의 통제 재현·기준 유지 회귀·최초 타입 실패와 호환 수정·자연 실패 원인 미확정을 검수함. 원문·원시 자료·화면·키·다른 미커밋·stash는 제외함."
+      "note": "사용자가 PR #107·#109 재시도 안정화의 코드·회귀 7개, 정제 보고서·worklog 4개와 목차 2개·검수 해시의 공개·커밋·푸시·재검증과 세 PR 순차 병합을 승인함. UI/UX fallback 준비 상태 오판·동일 selector red/green·기준 유지 회귀·서버 시작 미실행/자연 실패 원인 미확정의 구분을 검수함. 원문·원시 자료·화면·키·다른 미커밋·stash는 제외함."
     },
     {
       "path": "docs/verification/security/2026-11-20-effect-redos.md",
@@ -675,11 +675,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "a6709d9abcd6ce8f0d41de47815af9bc0bef94d82bfd27df063b6cb23a158d73",
+      "sha256": "0437cff201bb286d1b6cc54323774b1f78d4c315db0df3b58822838c6677df91",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-22",
-      "note": "사용자가 PR #107·#109 재시도 안정화의 코드·회귀 7개, 정제 보고서·worklog 4개와 목차 2개·검수 해시의 공개·커밋·푸시·재검증과 세 PR 순차 병합을 승인함. 모바일 준비 상태 결함의 통제 재현·기준 유지 회귀·최초 타입 실패와 호환 수정·자연 실패 원인 미확정을 검수함. 원문·원시 자료·화면·키·다른 미커밋·stash는 제외함.",
+      "note": "사용자가 세 PR 순차 병합을 위해 공통 목차2개와 검수 목록의 양쪽 링크·승인 항목 보존 병합, 최종 SHA-256 재계산·공개 재검수·CI 확인을 승인함. 기존 본문·과거 관측·원문·원시 자료·키·다른 미커밋·stash는 변경하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -717,11 +717,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "00a481fb033f6381960f401d5b811a8912b3a7b4680e6c2df5222bb7e6c456ad",
+      "sha256": "19dddadd5c4738da195c23c19743d5a2d4ddf3c004aac3fc426e66ed7fa29acb",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-22",
-      "note": "사용자가 PR #107·#109 재시도 안정화의 코드·회귀 7개, 정제 보고서·worklog 4개와 목차 2개·검수 해시의 공개·커밋·푸시·재검증과 세 PR 순차 병합을 승인함. 모바일 준비 상태 결함의 통제 재현·기준 유지 회귀·최초 타입 실패와 호환 수정·자연 실패 원인 미확정을 검수함. 원문·원시 자료·화면·키·다른 미커밋·stash는 제외함.",
+      "note": "사용자가 세 PR 순차 병합을 위해 공통 목차2개와 검수 목록의 양쪽 링크·승인 항목 보존 병합, 최종 SHA-256 재계산·공개 재검수·CI 확인을 승인함. 기존 본문·과거 관측·원문·원시 자료·키·다른 미커밋·stash는 변경하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -787,11 +787,11 @@
     },
     {
       "path": "docs/runbooks/docs-contributor-guide.md",
-      "sha256": "8bb974e53bcdc52634080a1be418724da8edd6264612e6093a405fd14dee7874",
+      "sha256": "713bef67a92bc2df71920f4121c67867f67e02417fdca1527f4476b78d60b557",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-20",
-      "note": "사용자가 이번 초안 작성 규칙·가이드만 저장소별 커밋·푸시하고 공개 검수 후 PR/CI 확인을 명시 승인함. 비공개 초안 저장과 사람 공개/게시 승인, 레거시 안내 구분, preview 미연결 및 정제 결과를 최종 인덱스 bytes로 검수함. 실제 원문·자산·원시 자료·키·다른 미커밋/stash·미푸시 자동화·기본 브랜치 병합·운영 변경은 제외함.",
+      "note": "사용자가 외부 초안 미리보기 코드·회귀2개, 앱 작성 지침·기고 가이드2개, 정제 보고서·작업 기록·두 목차4개만 공개 검수·해시 등록·작업별 로컬 커밋하도록 승인함. 개발/운영 root 경계·합성 회귀와 최초 준비 실패/최종 결과·noindex의 한계·실제 추적 링크·로컬 커밋 상태를 검수함. root 지침·패키지·CI 설정·실제 초안·키·원시 자료·실제 경로·다른 미커밋/stash·푸시·운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -2072,6 +2072,62 @@
         "rights": true,
         "publicIntent": true
       }
+    },
+    {
+      "path": "docs/verification/content/2026-11-20-external-draft-preview.md",
+      "sha256": "0bde76421b1f11d3938865631c25bc1f0ff2074ca6881012257fe04df7cdabc0",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 정리한 승인 커밋의 작업별 통합·푸시·PR/CI 검증과 기존 목차4개·보고서/worklog6개의 정제 보완·재검수·해시 갱신을 명시 승인함. 새 main과 원본의 링크·관측/실패/한계를 보존하고 로컬 재검증 결과만 최종 bytes로 검수함. 원문·초안·원시 자료·키·기존 PR 종료·main 병합·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-20-external-draft-preview.md",
+      "sha256": "aa0f7c0deb6217ca4c5474f8f87cb6c19dadef74cf34c6ae13b6ee21704d9c54",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 정리한 승인 커밋의 작업별 통합·푸시·PR/CI 검증과 기존 목차4개·보고서/worklog6개의 정제 보완·재검수·해시 갱신을 명시 승인함. 새 main과 원본의 링크·관측/실패/한계를 보존하고 로컬 재검증 결과만 최종 bytes로 검수함. 원문·초안·원시 자료·키·기존 PR 종료·main 병합·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/resilience/2026-11-22-drawer-hydration-readiness.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "d760106c86777a08cb1894758642ea34dc3c8e07c736595b38208596c76dc850",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 PR #107·#109 재시도 안정화의 코드·회귀 7개, 정제 보고서·worklog 4개와 목차 2개·검수 해시의 공개·커밋·푸시·재검증과 세 PR 순차 병합을 승인함. 모바일 준비 상태 결함의 통제 재현·기준 유지 회귀·최초 타입 실패와 호환 수정·자연 실패 원인 미확정을 검수함. 원문·원시 자료·화면·키·다른 미커밋·stash는 제외함."
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-22-drawer-hydration-readiness.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "27097f2a08133ebcf94c034e684ab2205cff909ffec236e9855d664d3e6f295e",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 PR #107·#109 재시도 안정화의 코드·회귀 7개, 정제 보고서·worklog 4개와 목차 2개·검수 해시의 공개·커밋·푸시·재검증과 세 PR 순차 병합을 승인함. 모바일 준비 상태 결함의 통제 재현·기준 유지 회귀·최초 타입 실패와 호환 수정·자연 실패 원인 미확정을 검수함. 원문·원시 자료·화면·키·다른 미커밋·stash는 제외함."
     },
     {
       "path": "docs/verification/accessibility/2026-11-20-docs-index-card-density.md",
