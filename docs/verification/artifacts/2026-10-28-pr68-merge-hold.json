@@ -1,0 +1,265 @@
+{
+  "observedDate": "2026-10-28",
+  "timeZone": "Asia/Seoul",
+  "sourceHead": "05aa729fa456ac043dadcad20f1e7fa6fe70e2d9",
+  "baseMain": "e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e",
+  "pr": {
+    "url": "https://github.com/IMHOJEONG/web-tech/pull/68",
+    "state": "OPEN",
+    "mergedAt": null
+  },
+  "decision": {
+    "policyUnchanged": true,
+    "userRequestedMergeHold": true,
+    "automaticResumeConfigured": false
+  },
+  "finalMessage": {
+    "sha256": "c8191f829146fe3d6a129118134f16006ff69314a9e404e51148c703ff6e7a44",
+    "commitlint": {
+      "problems": 0,
+      "warnings": 0
+    },
+    "mergePreflight": "blocked; --merge not executed"
+  },
+  "review": {
+    "previousHead": "96a1250da82079c2de9c51c016c422623bef7734",
+    "retryReviewId": 5670610515,
+    "retryConclusion": "SUCCESS",
+    "additionalFindings": 2,
+    "fixCommit": "05aa729fa456ac043dadcad20f1e7fa6fe70e2d9",
+    "allThreeThreadsResolved": true,
+    "currentCheckId": 122321026074,
+    "currentConclusion": "NEUTRAL",
+    "reason": "Review rate limited"
+  },
+  "localVerification": {
+    "node": "24.22.1",
+    "runtimePolicyPassed": 13,
+    "repositoryPassed": 166,
+    "failed": 0,
+    "skipped": 0,
+    "toolchainTypecheck": "passed",
+    "initialFailures": [
+      "negative order fixture mutated earlier commands rather than target section; fixed without lowering assertions",
+      "sandbox loopback listen EPERM; same suite passed with approved loopback access"
+    ]
+  },
+  "currentCi": {
+    "runId": 40541395799,
+    "attempt": 1,
+    "conclusion": "cancelled",
+    "passedJobs": 11,
+    "cancelledJobs": 1,
+    "failedAggregateJobs": 1,
+    "desktop": {
+      "jobId": 122320421464,
+      "dependencyFetch": {
+        "megabytes": 25.9,
+        "seconds": 570,
+        "kilobytesPerSecond": 45.5
+      },
+      "testsStartedUtc": "2026-10-27T16:40:32.6649894Z",
+      "cancelledUtc": "2026-10-27T16:44:39.2908022Z",
+      "hydrationWarningsObserved": true,
+      "observedRetryTests": [
+        "light /feed domain skeleton preserves page geometry",
+        "light /mobile domain skeleton preserves page geometry",
+        "light /docs/web/javascript-event-loop-runtime domain skeleton preserves page geometry"
+      ],
+      "onlyDownloadCauseConfirmed": false,
+      "fullSuiteCompleted": false
+    }
+  },
+  "checks": [
+    {
+      "name": "Commit Messages",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122320420681"
+    },
+    {
+      "name": "Analyze (actions)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541387766/job/122320399804"
+    },
+    {
+      "name": "Build And Publish",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395791/job/122320421976"
+    },
+    {
+      "name": "Documentation delta checks",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395793/job/122320419321"
+    },
+    {
+      "name": "Analyze (javascript-typescript)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541387766/job/122320400263"
+    },
+    {
+      "name": "Lint",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122320421506"
+    },
+    {
+      "name": "Typecheck",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122320421240"
+    },
+    {
+      "name": "Shared UI (test:ui)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122320422633"
+    },
+    {
+      "name": "Shared UI (test:ui:consumer)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122320421576"
+    },
+    {
+      "name": "Docs Offline Reading",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122320421975"
+    },
+    {
+      "name": "Unit and Contract Tests",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122320421169"
+    },
+    {
+      "name": "Docs Browser (responsive-mobile)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122320421848"
+    },
+    {
+      "name": "Docs Browser (responsive-tablet)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122320421250"
+    },
+    {
+      "name": "Docs Browser (responsive-desktop)",
+      "status": "COMPLETED",
+      "conclusion": "CANCELLED",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122320421464"
+    },
+    {
+      "name": "Docs Browser (article-production)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122320421430"
+    },
+    {
+      "name": "Docs Browser (crp-lab)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122320421626"
+    },
+    {
+      "name": "Test",
+      "status": "COMPLETED",
+      "conclusion": "FAILURE",
+      "url": "https://github.com/IMHOJEONG/web-tech/actions/runs/40541395799/job/122329284040"
+    },
+    {
+      "name": "CodeRabbit",
+      "status": "COMPLETED",
+      "conclusion": "NEUTRAL",
+      "url": "https://coderabbit.ai?utm_source=cr_app&utm_medium=github"
+    },
+    {
+      "name": "CodeQL",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/IMHOJEONG/web-tech/runs/122320770458"
+    },
+    {
+      "name": "GitGuardian Security Checks",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://dashboard.gitguardian.com"
+    },
+    {
+      "name": "Vercel Preview Comments",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://vercel.com/github"
+    },
+    {
+      "name": "Vercel – vuln-radar",
+      "status": "SUCCESS",
+      "conclusion": "SUCCESS",
+      "url": "https://vercel.com/hojeong-ims-projects/vuln-radar/EzNotW1jno2d76EJGuDGiUTTuD1q"
+    },
+    {
+      "name": "Vercel – web-tech",
+      "status": "SUCCESS",
+      "conclusion": "SUCCESS",
+      "url": "https://vercel.com/hojeong-ims-projects/web-tech/uVtVADgbjEm4Nn5KgLEh6Yxigzhu"
+    }
+  ],
+  "productionBaseline": {
+    "vercel": {
+      "id": "dpl_7KbEZhr19kgVe6q5zza9YZzAr2BW",
+      "commit": "e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e",
+      "nodeVersion": "24.x",
+      "target": "production",
+      "readyState": "READY",
+      "alias": "heap-forge.app"
+    },
+    "railway": {
+      "id": "bd91384d-b32f-4aaf-8ff1-26e968fb4fa7",
+      "status": "SUCCESS",
+      "createdAt": "2026-10-26T15:46:18.582Z",
+      "commit": "e8ab3bd6bc6c0f6ee890b05fa244cf9d040dc16e",
+      "branch": "main",
+      "imageDigest": "sha256:70c72cdb491cd6106891f780e04248e7f1fbea1ca579954cfd42d11c432b818b",
+      "metaKeys": [
+        "branch",
+        "buildOnly",
+        "commitAuthor",
+        "commitHash",
+        "commitMessage",
+        "fileServiceManifest",
+        "imageDigest",
+        "logsV2",
+        "nixpacksProviders",
+        "plan",
+        "propertyFileMapping",
+        "reason",
+        "repo",
+        "rootDirectory",
+        "runtime",
+        "serviceManifest",
+        "volumeMounts"
+      ]
+    }
+  },
+  "preservation": {
+    "originalModifiedAndUntrackedFiles": 15,
+    "sha256SnapshotUnchanged": true,
+    "filterChangesIncluded": false
+  },
+  "notPerformed": [
+    "main merge",
+    "main postmerge CI",
+    "new main image publication",
+    "NAS pull/up or SSH",
+    "Railway manual redeploy",
+    "credential or DB changes",
+    "automatic resume",
+    "CI criteria relaxation"
+  ]
+}
