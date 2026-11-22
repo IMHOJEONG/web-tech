@@ -6,6 +6,8 @@
 
 ## ADR 상태
 
+- [ADR-0035: 검색 결과의 실제 링크 포커스](adr-0035-docs-search-drawer-link-focus.md): 적용 중. ADR-0031의 combobox·결과 포커스 항목을 부분 대체하며 입력 Enter와 링크 탐색을 분리한다. main·운영 반영은 이 PR 이후 확인한다.
+
 - [ADR-0036: 비공개 콘텐츠 Git의 초안 작성](adr-0036-private-git-draft-authoring.md): 적용 중. 초안·발행 원문 위치와 비공개 저장/공개 게시 승인 경계를 지침 전용 PR에서 검토. 기본 브랜치 반영·초안 이전·개발 preview 연결·운영 변경은 미실행.
 
 - [ADR-0032: 비공개 Git 발행본을 빌드 입력으로 사용](adr-0032-private-git-build-content.md): 적용 중. PR #98 main 병합과 동일 SHA의 Production 전환·공개 독자 검증 완료. 고정 발행본 17개 글·15개 자산을 사용하며 인증 CI 활성화·NAS 전용 글 이전은 후속. 이전 완료 공개 사본 정리는 별도 브랜치의 로컬 커밋·검증이며 main 미반영이다.

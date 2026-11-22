@@ -1,9 +1,11 @@
 import localFont from 'next/font/local'
 
-export const pretendard = localFont({
-    src: '../../public/fonts/PretendardVariable.woff2',
+export const notoSansKr = localFont({
+    src: '../../public/fonts/NotoSansKRVariable.woff2',
+    // Let the active locale's font family request the Korean font.
+    preload: false,
     display: 'swap',
-    weight: '45 920',
+    weight: '100 900',
     variable: '--font-body-ko',
 })
 

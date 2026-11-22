@@ -7,10 +7,16 @@ import {
 } from '@web-tech/ui/components/sheet'
 import { Search, X } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
-import { useEffect, useId, useState, type RefObject } from 'react'
-import { getPathname, Link, useRouter } from '~/shared/i18n/navigation'
+import {
+    useCallback,
+    useId,
+    useLayoutEffect,
+    useRef,
+    type KeyboardEvent,
+    type RefObject,
+} from 'react'
+import { getPathname, Link } from '~/shared/i18n/navigation'
 import { getSearchHref } from '~/shared/lib/search-query'
-import type { SearchSuggestion } from '~/lib/search-suggestions'
 import type { useSearchKeyword } from '../model/use-search-keyword'
 import { useSearchNavigation } from '../model/use-search-navigation'
 import { useSearchSuggestions } from '../model/use-search-suggestions'
@@ -32,27 +38,67 @@ export function SearchDrawerContent({
 }: Props) {
     const t = useTranslations('search')
     const locale = useLocale()
-    const router = useRouter()
-    const listId = useId()
+    const inputId = useId()
     const { isPending, handleSubmit } = useSearchNavigation(input)
     const search = useSearchSuggestions(
         input.keyword,
         open && !input.isComposing
     )
-    const [selection, setSelection] = useState<{
-        results: SearchSuggestion[]
-        index: number
-    } | null>(null)
-    const results = search.data?.results
-    const activeIndex =
-        results && results === selection?.results ? selection.index : -1
-    const activeId = activeIndex >= 0 ? `${listId}-${activeIndex}` : undefined
-    useEffect(() => {
-        if (activeId)
-            document
-                .getElementById(activeId)
-                ?.scrollIntoView({ block: 'nearest' })
-    }, [activeId])
+    const resultList = useRef<HTMLUListElement | null>(null)
+    const removedFocusedLink = useRef<Element | null>(null)
+    const setResultList = useCallback((list: HTMLUListElement | null) => {
+        const active = document.activeElement
+        // Capture focus before the list is removed during a search refresh.
+        if (!list && resultList.current?.contains(active))
+            removedFocusedLink.current = active
+        resultList.current = list
+    }, [])
+    useLayoutEffect(() => {
+        const removedLink = removedFocusedLink.current
+        removedFocusedLink.current = null
+        if (
+            open &&
+            removedLink &&
+            !removedLink.isConnected &&
+            document.activeElement === document.body
+        )
+            inputRef.current?.focus()
+    }, [inputRef, open, search.status])
+
+    const moveResultFocus = (event: KeyboardEvent<HTMLElement>) => {
+        if (
+            (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') ||
+            event.defaultPrevented ||
+            event.altKey ||
+            event.ctrlKey ||
+            event.metaKey ||
+            event.shiftKey ||
+            input.composing.current ||
+            event.nativeEvent.isComposing ||
+            event.nativeEvent.keyCode === 229
+        )
+            return
+
+        const list = resultList.current
+        if (!list) return
+
+        const links = Array.from(
+            list.querySelectorAll<HTMLAnchorElement>('a[href]')
+        )
+        const forward = event.key === 'ArrowDown'
+        const current = links.findIndex((link) => link === event.target)
+        if (current < 0 && event.target !== inputRef.current) return
+
+        let next = forward ? 0 : links.length - 1
+        if (current >= 0)
+            next = (current + (forward ? 1 : -1) + links.length) % links.length
+        const link = links[next]
+        if (!link || link === event.target) return
+
+        event.preventDefault()
+        link.focus({ preventScroll: true })
+        link.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+    }
     return (
         <>
             <div className="shrink-0 border-b border-outline-variant px-5 pb-5 pt-[max(1.25rem,env(safe-area-inset-top))] sm:px-7">
@@ -70,6 +116,12 @@ export function SearchDrawerContent({
                 <SheetDescription className="text-sm leading-6 text-on-surface-variant">
                     {t('drawer.description')}
                 </SheetDescription>
+                <label
+                    htmlFor={inputId}
+                    className="mt-5 mb-1.5 block text-sm font-medium text-on-surface"
+                >
+                    {t('input.queryLabel')}
+                </label>
                 <form
                     role="search"
                     aria-label={t('input.triggerLabel')}
@@ -79,7 +131,7 @@ export function SearchDrawerContent({
                     onSubmit={(event) => {
                         if (handleSubmit(event) === 'unchanged') onNavigate()
                     }}
-                    className="mt-5 flex min-h-14 items-center gap-2 rounded-xl border border-outline-variant bg-surface-container-low px-3 focus-within:border-primary/60"
+                    className="flex min-h-14 items-center gap-2 rounded-xl border border-outline-variant bg-surface-container-low px-3 focus-within:border-primary/60"
                 >
                     <Search
                         aria-hidden="true"
@@ -88,53 +140,16 @@ export function SearchDrawerContent({
                     <input
                         ref={inputRef}
                         {...input.inputProps}
-                        role="combobox"
-                        aria-autocomplete="list"
-                        aria-expanded={Boolean(results?.length)}
-                        aria-controls={results?.length ? listId : undefined}
-                        aria-activedescendant={activeId}
-                        aria-busy={search.status === 'loading'}
+                        id={inputId}
                         onKeyDown={(event) => {
                             input.inputProps.onKeyDown(event)
-                            if (
-                                event.defaultPrevented ||
-                                input.composing.current ||
-                                !results?.length
-                            )
-                                return
-                            if (
-                                event.key === 'ArrowDown' ||
-                                event.key === 'ArrowUp'
-                            ) {
-                                event.preventDefault()
-                                const direction =
-                                    event.key === 'ArrowDown' ? 1 : -1
-                                const index =
-                                    activeIndex < 0
-                                        ? direction > 0
-                                            ? 0
-                                            : results.length - 1
-                                        : (activeIndex +
-                                              direction +
-                                              results.length) %
-                                          results.length
-                                setSelection({ results, index })
-                            } else if (
-                                event.key === 'Enter' &&
-                                activeIndex >= 0
-                            ) {
-                                event.preventDefault()
-                                router.push(results[activeIndex]!.href)
-                                onNavigate()
-                            }
+                            moveResultFocus(event)
                         }}
-                        type="text"
+                        type="search"
                         name="q"
                         autoComplete="off"
-                        spellCheck={false}
                         placeholder={t('input.placeholder')}
-                        aria-label={t('input.placeholder')}
-                        className="ds-focus-ring h-11 min-w-0 flex-1 rounded-md border-0 bg-transparent px-1 text-base text-on-surface placeholder:text-on-surface-variant"
+                        className="ds-focus-ring h-11 min-w-0 flex-1 rounded-md border-0 bg-transparent px-1 text-base text-on-surface placeholder:text-on-surface-variant [&::-webkit-search-cancel-button]:hidden"
                     />
                     {input.keyword && (
                         <button
@@ -160,11 +175,8 @@ export function SearchDrawerContent({
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-6 sm:px-7">
                 <SearchSuggestionList
                     search={search}
-                    listId={listId}
-                    activeIndex={activeIndex}
-                    onActiveChange={(index) => {
-                        if (results) setSelection({ results, index })
-                    }}
+                    listRef={setResultList}
+                    onListKeyDown={moveResultFocus}
                     onNavigate={onNavigate}
                     onSuggestion={(term) => {
                         input.finishComposition(term)

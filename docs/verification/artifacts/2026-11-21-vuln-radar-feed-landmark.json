@@ -1,0 +1,118 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "52167f254ce819decbf83f08458b41bb6fae575e",
+  "source": "apps/vuln-radar/src/pages/feed/ui/feed-filter-bar.tsx",
+  "sourceSha256": {
+    "before": "ac62ba29a2df624bfba7d645c84e58c07021ae0a1d7e96e82e0e89a795e52ecc",
+    "after": "03f937095bd8508504e5800557565d0e86d7f9051c08c487410f4d659d771433"
+  },
+  "environment": {
+    "app": "Actual local Vite+ Feed route with synthetic API responses",
+    "language": "ko",
+    "viewportsPx": [390, 1280]
+  },
+  "browserMatrix": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "landmarkCountBefore": 0,
+      "landmarkCountAfter": 1,
+      "landmarkName": "탐색 조건",
+      "filterGroupsInsideLandmark": ["우선순위", "심각도", "KEV"],
+      "paginationOutsideLandmark": true,
+      "chromiumAccessibilityTreeVerified": true,
+      "queryUpdatedWithoutEnter": true,
+      "enterRequestDelta": 0,
+      "focusOutlineRetained": true,
+      "filtersPagingAndBack": true
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "landmarkCountBefore": 0,
+      "landmarkCountAfter": 1,
+      "landmarkName": "탐색 조건",
+      "filterGroupsInsideLandmark": ["우선순위", "심각도", "KEV"],
+      "paginationOutsideLandmark": true,
+      "chromiumAccessibilityTreeVerified": true,
+      "queryUpdatedWithoutEnter": true,
+      "enterRequestDelta": 0,
+      "focusOutlineRetained": true,
+      "filtersPagingAndBack": true
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "landmarkCountBefore": 0,
+      "landmarkCountAfter": 1,
+      "landmarkName": "탐색 조건",
+      "filterGroupsInsideLandmark": ["우선순위", "심각도", "KEV"],
+      "paginationOutsideLandmark": true,
+      "chromiumAccessibilityTreeVerified": null,
+      "queryUpdatedWithoutEnter": true,
+      "enterRequestDelta": 0,
+      "focusOutlineRetained": true,
+      "filtersPagingAndBack": true
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "landmarkCountBefore": 0,
+      "landmarkCountAfter": 1,
+      "landmarkName": "탐색 조건",
+      "filterGroupsInsideLandmark": ["우선순위", "심각도", "KEV"],
+      "paginationOutsideLandmark": true,
+      "chromiumAccessibilityTreeVerified": null,
+      "queryUpdatedWithoutEnter": true,
+      "enterRequestDelta": 0,
+      "focusOutlineRetained": true,
+      "filtersPagingAndBack": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "landmarkCountBefore": 0,
+      "landmarkCountAfter": 1,
+      "landmarkName": "탐색 조건",
+      "filterGroupsInsideLandmark": ["우선순위", "심각도", "KEV"],
+      "paginationOutsideLandmark": true,
+      "chromiumAccessibilityTreeVerified": null,
+      "queryUpdatedWithoutEnter": true,
+      "enterRequestDelta": 0,
+      "focusOutlineRetained": true,
+      "filtersPagingAndBack": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "landmarkCountBefore": 0,
+      "landmarkCountAfter": 1,
+      "landmarkName": "탐색 조건",
+      "filterGroupsInsideLandmark": ["우선순위", "심각도", "KEV"],
+      "paginationOutsideLandmark": true,
+      "chromiumAccessibilityTreeVerified": null,
+      "queryUpdatedWithoutEnter": true,
+      "enterRequestDelta": 0,
+      "focusOutlineRetained": true,
+      "filtersPagingAndBack": true
+    }
+  ],
+  "checks": {
+    "libraryTestsPassed": 36,
+    "typecheck": "passed",
+    "lint": "passed"
+  },
+  "unverified": [
+    "native Safari and VoiceOver landmark navigation",
+    "Windows screen readers",
+    "mobile physical devices",
+    "live backend and production"
+  ]
+}

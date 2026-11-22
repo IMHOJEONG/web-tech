@@ -8,6 +8,7 @@ import remarkFlexibleToc, { type TocItem } from 'remark-flexible-toc'
 import { runtimeShikiRehypeOptions } from './shiki-options.js'
 import { rehypeArticleTitle } from './rehype-article-title.ts'
 import { rehypePublicImages } from './rehype-public-images.ts'
+import { rehypeImageDimensions } from './rehype-image-dimensions.ts'
 import { normalizeRemoteArticleHtml } from '../widgets/article-detail/model/normalize-remote-article-html.ts'
 
 type Scope = {
@@ -53,12 +54,14 @@ function createMdxEvaluateOptions({
                       rehypeArticleHeadings,
                       rehypeArticleTitle,
                       rehypePublicImages,
+                      rehypeImageDimensions,
                       [rehypeShiki, runtimeShikiRehypeOptions],
                   ]
                 : [
                       rehypeArticleHeadings,
                       rehypeArticleTitle,
                       rehypePublicImages,
+                      rehypeImageDimensions,
                   ],
         },
         parseFrontmatter: true,

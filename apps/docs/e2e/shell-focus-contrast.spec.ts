@@ -102,8 +102,8 @@ for (const theme of ['light', 'dark']) {
             exact: true,
         })
         await expect(search).toHaveCount(1)
-        const input = search.getByRole('combobox', {
-            name: '문서를 검색해보세요',
+        const input = search.getByRole('searchbox', {
+            name: '검색어',
         })
         await expect(input).toBeFocused()
         await expect(input).toHaveCSS('outline-style', 'solid')

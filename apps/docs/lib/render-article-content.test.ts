@@ -1,14 +1,43 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { mkdir, mkdtemp, writeFile, rm } from 'node:fs/promises'
+import os from 'node:os'
+import path from 'node:path'
 import { Fragment, createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { normalizeRemoteContent } from './content-api-html.ts'
 import { renderArticleContent } from './render-article-content.ts'
 import { syntheticDocumentSource } from '../../../scripts/prepare-ci-docs-content.mts'
+import { syntheticPng } from '../../../scripts/synthetic-docs-media.mts'
 import {
     runtimeShikiRehypeOptions,
     shikiRehypeOptions,
 } from './shiki-options.js'
+
+test('the real MDX pipeline resolves public paths before adding image dimensions', async (t) => {
+    const root = await mkdtemp(path.join(os.tmpdir(), 'mdx-image-pipeline-'))
+    const cwd = process.cwd()
+    t.after(async () => {
+        process.chdir(cwd)
+        await rm(root, { recursive: true, force: true })
+    })
+    await mkdir(path.join(root, 'public'))
+    await writeFile(
+        path.join(root, 'public/article.png'),
+        syntheticPng(120, 80)
+    )
+    process.chdir(root)
+    const rendered = await renderArticleContent(
+        { content: '![Synthetic article](../../../public/article.png)' },
+        { codeHighlight: false }
+    )
+    const markup = renderToStaticMarkup(
+        createElement(Fragment, null, rendered.content)
+    )
+    assert.match(markup, /src="\/article.png"/)
+    assert.match(markup, /width="120"/)
+    assert.match(markup, /height="80"/)
+})
 
 test('Turbopack loader options stay serializable while runtime keeps the language callback', () => {
     assert.deepEqual(structuredClone(shikiRehypeOptions), shikiRehypeOptions)

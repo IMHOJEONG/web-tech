@@ -1,0 +1,213 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "5ef22d86c7328afef9f68221a5259c48abee2120",
+  "source": "apps/vuln-radar/src/pages/feed/ui/feed-page.tsx",
+  "sourceHashes": {
+    "before": "2bf74914ca31b3ff20f12dcca398f017c105e6fedf14633a73c9cd07db9092fe",
+    "after": "bc5f4a6069015408c1bb96eb34f83f005ec00396efcfa06990bc2fc12fea0941"
+  },
+  "environment": "Actual Vite Feed route with delayed synthetic API response",
+  "before": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "reducedMotion": false,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "reducedMotion": true,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "reducedMotion": false,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "reducedMotion": true,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "reducedMotion": false,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "reducedMotion": true,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "reducedMotion": false,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "reducedMotion": true,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "reducedMotion": false,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "reducedMotion": true,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "reducedMotion": false,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "reducedMotion": true,
+      "skeletonCount": 18,
+      "animated": 18
+    }
+  ],
+  "after": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "reducedMotion": false,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "reducedMotion": true,
+      "skeletonCount": 18,
+      "animated": 0
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "reducedMotion": false,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "reducedMotion": true,
+      "skeletonCount": 18,
+      "animated": 0
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "reducedMotion": false,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "reducedMotion": true,
+      "skeletonCount": 18,
+      "animated": 0
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "reducedMotion": false,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "reducedMotion": true,
+      "skeletonCount": 18,
+      "animated": 0
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "reducedMotion": false,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "reducedMotion": true,
+      "skeletonCount": 18,
+      "animated": 0
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "reducedMotion": false,
+      "skeletonCount": 18,
+      "animated": 18
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "reducedMotion": true,
+      "skeletonCount": 18,
+      "animated": 0
+    }
+  ],
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "loadCompletionAndSearch": "passed in all 12 conditions"
+  },
+  "unverified": ["physical mobile device", "native Safari", "production"]
+}

@@ -1,0 +1,250 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "7f5863a292096eb3e7ddc97c55807df875a76c10",
+  "environment": {
+    "app": "Actual local Vite+ Feed route with synthetic API responses",
+    "language": "ko",
+    "viewportsPx": [390, 1280]
+  },
+  "sourceHashes": {
+    "apps/vuln-radar/src/pages/feed/ui/feed-page.tsx": {
+      "before": "67111b985d1af8dcbfacc846da4fa6522ca8cdf2a3aae0bad9112b31fd0e095d",
+      "after": "6ef9629df84e03c1da876d10a7f541b370d2d84b20a06552b0c214f7afcc03ed"
+    },
+    "apps/vuln-radar/src/pages/feed/ui/feed-pagination.tsx": {
+      "before": "fd67ff6fc5448f6e8bfb2dfaa4752fb3b4d39e6af9f73fff0b156193a4411f46",
+      "after": "49fc1ab94398f1fc01c3af37ecfde016a6a3ef75330687231a63644a524d0ea8"
+    }
+  },
+  "browserMatrix": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "before": {
+        "pendingNodeReused": false,
+        "completionNodeReused": false
+      },
+      "after": {
+        "pendingNodeReused": true,
+        "completionNodeReused": true,
+        "zeroResultNodeReused": true,
+        "statusCount": 1,
+        "atomic": true,
+        "focusRetained": true,
+        "filtersPagingBackAndEnter": true
+      }
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "before": {
+        "pendingNodeReused": false,
+        "completionNodeReused": false
+      },
+      "after": {
+        "pendingNodeReused": true,
+        "completionNodeReused": true,
+        "zeroResultNodeReused": true,
+        "statusCount": 1,
+        "atomic": true,
+        "focusRetained": true,
+        "filtersPagingBackAndEnter": true
+      }
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "before": {
+        "pendingNodeReused": false,
+        "completionNodeReused": false
+      },
+      "after": {
+        "pendingNodeReused": true,
+        "completionNodeReused": true,
+        "zeroResultNodeReused": true,
+        "statusCount": 1,
+        "atomic": true,
+        "focusRetained": true,
+        "filtersPagingBackAndEnter": true
+      }
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "before": {
+        "pendingNodeReused": false,
+        "completionNodeReused": false
+      },
+      "after": {
+        "pendingNodeReused": true,
+        "completionNodeReused": true,
+        "zeroResultNodeReused": true,
+        "statusCount": 1,
+        "atomic": true,
+        "focusRetained": true,
+        "filtersPagingBackAndEnter": true
+      }
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "before": {
+        "pendingNodeReused": false,
+        "completionNodeReused": false
+      },
+      "after": {
+        "pendingNodeReused": true,
+        "completionNodeReused": true,
+        "zeroResultNodeReused": true,
+        "statusCount": 1,
+        "atomic": true,
+        "focusRetained": true,
+        "filtersPagingBackAndEnter": true
+      }
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "before": {
+        "pendingNodeReused": false,
+        "completionNodeReused": false
+      },
+      "after": {
+        "pendingNodeReused": true,
+        "completionNodeReused": true,
+        "zeroResultNodeReused": true,
+        "statusCount": 1,
+        "atomic": true,
+        "focusRetained": true,
+        "filtersPagingBackAndEnter": true
+      }
+    }
+  ],
+  "finalStatusExamples": {
+    "search": "전체 31건 · 1 / 2 페이지",
+    "page": "전체 31건 · 2 / 2 페이지",
+    "empty": "현재 조건에 맞는 항목 0건"
+  },
+  "checks": {
+    "libraryTestsPassed": 36,
+    "typecheck": "passed",
+    "lint": "passed"
+  },
+  "unverified": [
+    "screen reader speech and timing",
+    "physical mobile devices",
+    "actual API failure and production"
+  ],
+  "safariFollowUp": {
+    "observedCommit": "573e9595e0b26de75046663862064a0e87eb0a93",
+    "platform": "macOS 26.6.2",
+    "browser": "Safari 26.6.2",
+    "api": "loopback synthetic Feed endpoint",
+    "hadExistingApiClientWorktreeChange": true,
+    "accessibilityTree": {
+      "searchContainerName": "탐색 조건",
+      "searchFieldName": "피드 검색"
+    },
+    "initialCount": 26,
+    "matchingQuery": {
+      "term": "voiceover",
+      "count": 31,
+      "firstPage": "전체 31건 · 1 / 2 페이지",
+      "nextPage": "전체 31건 · 2 / 2 페이지"
+    },
+    "emptyQuery": {
+      "term": "missing-fixture",
+      "count": 0,
+      "status": "현재 조건에 맞는 항목 0건"
+    },
+    "focusedFieldAfterQueries": true,
+    "voiceOver": {
+      "runningBeforeHandoff": false,
+      "physicalTestRequested": true,
+      "rotor": "user confirmed search container in Landmarks",
+      "speech": "user reported that 31 results and 0 results were not announced"
+    }
+  },
+  "voiceOverRetry": {
+    "baselineCommit": "573e9595e0b26de75046663862064a0e87eb0a93",
+    "source": "apps/vuln-radar/src/pages/feed/ui/feed-page.tsx",
+    "revisedSourceSha256": "2bf74914ca31b3ff20f12dcca398f017c105e6fedf14633a73c9cd07db9092fe",
+    "voiceOverLiveRegionsSetting": "enabled",
+    "firstRequestStatusStartsEmpty": true,
+    "explicitLive": "polite",
+    "browserMatrix": [
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "width": 390,
+        "coldLoadNodeReused": true,
+        "pendingNodeReused": true,
+        "completionNodeReused": true,
+        "zeroResultNodeReused": true,
+        "searchAndPagingRegression": true
+      },
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "width": 1280,
+        "coldLoadNodeReused": true,
+        "pendingNodeReused": true,
+        "completionNodeReused": true,
+        "zeroResultNodeReused": true,
+        "searchAndPagingRegression": true
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "width": 390,
+        "coldLoadNodeReused": true,
+        "pendingNodeReused": true,
+        "completionNodeReused": true,
+        "zeroResultNodeReused": true,
+        "searchAndPagingRegression": true
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "width": 1280,
+        "coldLoadNodeReused": true,
+        "pendingNodeReused": true,
+        "completionNodeReused": true,
+        "zeroResultNodeReused": true,
+        "searchAndPagingRegression": true
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "width": 390,
+        "coldLoadNodeReused": true,
+        "pendingNodeReused": true,
+        "completionNodeReused": true,
+        "zeroResultNodeReused": true,
+        "searchAndPagingRegression": true
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "width": 1280,
+        "coldLoadNodeReused": true,
+        "pendingNodeReused": true,
+        "completionNodeReused": true,
+        "zeroResultNodeReused": true,
+        "searchAndPagingRegression": true
+      }
+    ],
+    "safariAXText": ["전체 31건 · 1 / 2 페이지", "현재 조건에 맞는 항목 0건"],
+    "speechAfterChange": "passed by user confirmation: 31 results and 0 results were announced",
+    "libraryTestsPassed": 36,
+    "typecheck": "passed",
+    "lint": "passed"
+  }
+}

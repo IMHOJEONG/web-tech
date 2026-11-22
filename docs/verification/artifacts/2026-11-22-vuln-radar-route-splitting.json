@@ -1,0 +1,1318 @@
+{
+  "date": "2026-11-22",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "f05f7f5fe3edb75a8c2124c8150564a260317008",
+  "decision": "not-adopted",
+  "reason": "Small gzip savings with slower cold-route LCP in controlled tests",
+  "productRouterRestored": true,
+  "sourceHashes": {
+    "baselineRouter": "87c62b97bb503a3c5c73423f54ed6e2ecf4f3756001f2fbcaae4382c06f22838",
+    "candidateRouter": "612d2b071579fc9c3178581fbfd48e385ab4b36ce4e66b305a0e619536471a47",
+    "finalRouter": "87c62b97bb503a3c5c73423f54ed6e2ecf4f3756001f2fbcaae4382c06f22838",
+    "existingApiClient": "e0cd74b2761f9ac9e745f9d1017ed0d28dad176f3567ea66a462d213c1ac68aa",
+    "packageJson": "76ecd127708bc2a9ce9884e19201a38f7de9eed94db8aaf857925754d57d0542"
+  },
+  "toolVersions": {
+    "tanstackRouter": "1.169.1",
+    "vite": "1.4.0"
+  },
+  "builds": {
+    "before": [
+      {
+        "file": "index-BQZ3Vssk.js",
+        "bytes": 483101,
+        "gzipBytes": 141662,
+        "sha256": "101997f56023809a7520d87abf8afa3879e18807ebe730d008a1e56952a4a0a4"
+      },
+      {
+        "file": "index-Daj1VcGj.css",
+        "bytes": 37415,
+        "gzipBytes": 6748,
+        "sha256": "6e501d75378f45b8e2bcdfce522130332332b2fd93749976a65d1e0e31d72dde"
+      }
+    ],
+    "after": [
+      {
+        "file": "feed-page-D3jz3woH.js",
+        "bytes": 18668,
+        "gzipBytes": 5097,
+        "sha256": "c03230607bc662b7f74c1d7e97c13b5de596403a79fb119baa46fa8446d372a6"
+      },
+      {
+        "file": "i18n-provider-ClkSaiW9.js",
+        "bytes": 161316,
+        "gzipBytes": 48869,
+        "sha256": "9ff3eafbb51724b81bdb6011aab57a79ee9de95e08524a23910fc5d1c83ae83c"
+      },
+      {
+        "file": "index-BmT_WAjN.js",
+        "bytes": 257274,
+        "gzipBytes": 80598,
+        "sha256": "809740232ec4166fc0b1319f97481e51a9a395d40883a1137fdfec8d8ccdb242"
+      },
+      {
+        "file": "index-Daj1VcGj.css",
+        "bytes": 37415,
+        "gzipBytes": 6748,
+        "sha256": "6e501d75378f45b8e2bcdfce522130332332b2fd93749976a65d1e0e31d72dde"
+      },
+      {
+        "file": "overview-page-Bg0zSp_Q.js",
+        "bytes": 24168,
+        "gzipBytes": 6104,
+        "sha256": "97544415a5722561f3b87f23ac6232eac2a733875b5c44130f97ad8f39a31d3a"
+      },
+      {
+        "file": "radar-BjelM7TN.js",
+        "bytes": 13913,
+        "gzipBytes": 5157,
+        "sha256": "4b42e0276ba2870daa8e6427f4153f87ddf7ae8baae6d4fde2282fc3e7483f26"
+      },
+      {
+        "file": "vulnerability-detail-page-TDWs66Au.js",
+        "bytes": 12104,
+        "gzipBytes": 2686,
+        "sha256": "0fc1afb318e10c5c8c544b749d7bcd01fb87a8a6358f381d195975cbf3b490dd"
+      }
+    ]
+  },
+  "profiles": {
+    "fast": {
+      "latencyMs": 0,
+      "cpu": 1
+    },
+    "slow": {
+      "latencyMs": 150,
+      "downloadBytesPerSecond": 200000,
+      "uploadBytesPerSecond": 93750,
+      "cpu": 4
+    }
+  },
+  "performance": [
+    {
+      "variant": "before",
+      "profile": "fast",
+      "route": "/feed",
+      "repetition": 0,
+      "browser": "151.0.7922.34",
+      "lcp": 228,
+      "cls": 0,
+      "longTaskMs": 0,
+      "ready": 214.7000002861023,
+      "resources": [
+        {
+          "path": "/assets/index-BQZ3Vssk.js",
+          "encoded": 141662,
+          "decoded": 483101
+        }
+      ],
+      "scriptDurationMs": 92.979,
+      "taskDurationMs": 199.87
+    },
+    {
+      "variant": "before",
+      "profile": "fast",
+      "route": "/overview",
+      "repetition": 0,
+      "browser": "151.0.7922.34",
+      "lcp": 136,
+      "cls": 0.14175701002572977,
+      "longTaskMs": 0,
+      "ready": 88.40000009536743,
+      "resources": [
+        {
+          "path": "/assets/index-BQZ3Vssk.js",
+          "encoded": 141662,
+          "decoded": 483101
+        }
+      ],
+      "scriptDurationMs": 59.939,
+      "taskDurationMs": 121.209
+    },
+    {
+      "variant": "after",
+      "profile": "fast",
+      "route": "/feed",
+      "repetition": 0,
+      "browser": "151.0.7922.34",
+      "lcp": 136,
+      "cls": 0,
+      "longTaskMs": 0,
+      "ready": 120.40000009536743,
+      "resources": [
+        {
+          "path": "/assets/index-BmT_WAjN.js",
+          "encoded": 80598,
+          "decoded": 257274
+        },
+        {
+          "path": "/assets/i18n-provider-ClkSaiW9.js",
+          "encoded": 48869,
+          "decoded": 161316
+        },
+        {
+          "path": "/assets/feed-page-D3jz3woH.js",
+          "encoded": 5097,
+          "decoded": 18668
+        },
+        {
+          "path": "/assets/radar-BjelM7TN.js",
+          "encoded": 5157,
+          "decoded": 13913
+        }
+      ],
+      "scriptDurationMs": 53.366,
+      "taskDurationMs": 112.515
+    },
+    {
+      "variant": "after",
+      "profile": "fast",
+      "route": "/overview",
+      "repetition": 0,
+      "browser": "151.0.7922.34",
+      "lcp": 132,
+      "cls": 0.14175701002572977,
+      "longTaskMs": 0,
+      "ready": 85.7000002861023,
+      "resources": [
+        {
+          "path": "/assets/index-BmT_WAjN.js",
+          "encoded": 80598,
+          "decoded": 257274
+        },
+        {
+          "path": "/assets/i18n-provider-ClkSaiW9.js",
+          "encoded": 48869,
+          "decoded": 161316
+        },
+        {
+          "path": "/assets/overview-page-Bg0zSp_Q.js",
+          "encoded": 6104,
+          "decoded": 24168
+        },
+        {
+          "path": "/assets/radar-BjelM7TN.js",
+          "encoded": 5157,
+          "decoded": 13913
+        }
+      ],
+      "scriptDurationMs": 53.644999999999996,
+      "taskDurationMs": 113.592
+    },
+    {
+      "variant": "after",
+      "profile": "fast",
+      "route": "/feed",
+      "repetition": 1,
+      "browser": "151.0.7922.34",
+      "lcp": 128,
+      "cls": 0,
+      "longTaskMs": 0,
+      "ready": 113.5,
+      "resources": [
+        {
+          "path": "/assets/i18n-provider-ClkSaiW9.js",
+          "encoded": 48869,
+          "decoded": 161316
+        },
+        {
+          "path": "/assets/index-BmT_WAjN.js",
+          "encoded": 80598,
+          "decoded": 257274
+        },
+        {
+          "path": "/assets/feed-page-D3jz3woH.js",
+          "encoded": 5097,
+          "decoded": 18668
+        },
+        {
+          "path": "/assets/radar-BjelM7TN.js",
+          "encoded": 5157,
+          "decoded": 13913
+        }
+      ],
+      "scriptDurationMs": 54.299,
+      "taskDurationMs": 113.937
+    },
+    {
+      "variant": "after",
+      "profile": "fast",
+      "route": "/overview",
+      "repetition": 1,
+      "browser": "151.0.7922.34",
+      "lcp": 128,
+      "cls": 0.14175701002572977,
+      "longTaskMs": 0,
+      "ready": 82.40000009536743,
+      "resources": [
+        {
+          "path": "/assets/index-BmT_WAjN.js",
+          "encoded": 80598,
+          "decoded": 257274
+        },
+        {
+          "path": "/assets/i18n-provider-ClkSaiW9.js",
+          "encoded": 48869,
+          "decoded": 161316
+        },
+        {
+          "path": "/assets/overview-page-Bg0zSp_Q.js",
+          "encoded": 6104,
+          "decoded": 24168
+        },
+        {
+          "path": "/assets/radar-BjelM7TN.js",
+          "encoded": 5157,
+          "decoded": 13913
+        }
+      ],
+      "scriptDurationMs": 54.838,
+      "taskDurationMs": 110.36999999999999
+    },
+    {
+      "variant": "before",
+      "profile": "fast",
+      "route": "/feed",
+      "repetition": 1,
+      "browser": "151.0.7922.34",
+      "lcp": 128,
+      "cls": 0,
+      "longTaskMs": 0,
+      "ready": 113,
+      "resources": [
+        {
+          "path": "/assets/index-BQZ3Vssk.js",
+          "encoded": 141662,
+          "decoded": 483101
+        }
+      ],
+      "scriptDurationMs": 54.788000000000004,
+      "taskDurationMs": 109.612
+    },
+    {
+      "variant": "before",
+      "profile": "fast",
+      "route": "/overview",
+      "repetition": 1,
+      "browser": "151.0.7922.34",
+      "lcp": 132,
+      "cls": 0.14175701002572977,
+      "longTaskMs": 0,
+      "ready": 85.90000009536743,
+      "resources": [
+        {
+          "path": "/assets/index-BQZ3Vssk.js",
+          "encoded": 141662,
+          "decoded": 483101
+        }
+      ],
+      "scriptDurationMs": 58.827,
+      "taskDurationMs": 114.565
+    },
+    {
+      "variant": "before",
+      "profile": "fast",
+      "route": "/feed",
+      "repetition": 2,
+      "browser": "151.0.7922.34",
+      "lcp": 128,
+      "cls": 0,
+      "longTaskMs": 0,
+      "ready": 111.7999997138977,
+      "resources": [
+        {
+          "path": "/assets/index-BQZ3Vssk.js",
+          "encoded": 141662,
+          "decoded": 483101
+        }
+      ],
+      "scriptDurationMs": 55.058,
+      "taskDurationMs": 106.551
+    },
+    {
+      "variant": "before",
+      "profile": "fast",
+      "route": "/overview",
+      "repetition": 2,
+      "browser": "151.0.7922.34",
+      "lcp": 152,
+      "cls": 0.14175701002572977,
+      "longTaskMs": 0,
+      "ready": 101.30000019073486,
+      "resources": [
+        {
+          "path": "/assets/index-BQZ3Vssk.js",
+          "encoded": 141662,
+          "decoded": 483101
+        }
+      ],
+      "scriptDurationMs": 59.206,
+      "taskDurationMs": 123.738
+    },
+    {
+      "variant": "after",
+      "profile": "fast",
+      "route": "/feed",
+      "repetition": 2,
+      "browser": "151.0.7922.34",
+      "lcp": 124,
+      "cls": 0,
+      "longTaskMs": 0,
+      "ready": 110.40000009536743,
+      "resources": [
+        {
+          "path": "/assets/index-BmT_WAjN.js",
+          "encoded": 80598,
+          "decoded": 257274
+        },
+        {
+          "path": "/assets/i18n-provider-ClkSaiW9.js",
+          "encoded": 48869,
+          "decoded": 161316
+        },
+        {
+          "path": "/assets/feed-page-D3jz3woH.js",
+          "encoded": 5097,
+          "decoded": 18668
+        },
+        {
+          "path": "/assets/radar-BjelM7TN.js",
+          "encoded": 5157,
+          "decoded": 13913
+        }
+      ],
+      "scriptDurationMs": 53.04,
+      "taskDurationMs": 111.633
+    },
+    {
+      "variant": "after",
+      "profile": "fast",
+      "route": "/overview",
+      "repetition": 2,
+      "browser": "151.0.7922.34",
+      "lcp": 136,
+      "cls": 0.14175701002572977,
+      "longTaskMs": 0,
+      "ready": 88,
+      "resources": [
+        {
+          "path": "/assets/index-BmT_WAjN.js",
+          "encoded": 80598,
+          "decoded": 257274
+        },
+        {
+          "path": "/assets/i18n-provider-ClkSaiW9.js",
+          "encoded": 48869,
+          "decoded": 161316
+        },
+        {
+          "path": "/assets/overview-page-Bg0zSp_Q.js",
+          "encoded": 6104,
+          "decoded": 24168
+        },
+        {
+          "path": "/assets/radar-BjelM7TN.js",
+          "encoded": 5157,
+          "decoded": 13913
+        }
+      ],
+      "scriptDurationMs": 54.248999999999995,
+      "taskDurationMs": 115.275
+    },
+    {
+      "variant": "before",
+      "profile": "slow",
+      "route": "/feed",
+      "repetition": 0,
+      "browser": "151.0.7922.34",
+      "lcp": 1636,
+      "cls": 0,
+      "longTaskMs": 353,
+      "ready": 1628.6999998092651,
+      "resources": [
+        {
+          "path": "/assets/index-BQZ3Vssk.js",
+          "encoded": 141662,
+          "decoded": 483101
+        }
+      ],
+      "scriptDurationMs": 299.58299999999997,
+      "taskDurationMs": 604.292
+    },
+    {
+      "variant": "before",
+      "profile": "slow",
+      "route": "/overview",
+      "repetition": 0,
+      "browser": "151.0.7922.34",
+      "lcp": 1400,
+      "cls": 0.14175701002572977,
+      "longTaskMs": 365,
+      "ready": 1425.6999998092651,
+      "resources": [
+        {
+          "path": "/assets/index-BQZ3Vssk.js",
+          "encoded": 141662,
+          "decoded": 483101
+        }
+      ],
+      "scriptDurationMs": 307.407,
+      "taskDurationMs": 597.112
+    },
+    {
+      "variant": "after",
+      "profile": "slow",
+      "route": "/feed",
+      "repetition": 0,
+      "browser": "151.0.7922.34",
+      "lcp": 1728,
+      "cls": 0,
+      "longTaskMs": 268,
+      "ready": 1721.0999999046326,
+      "resources": [
+        {
+          "path": "/assets/index-BmT_WAjN.js",
+          "encoded": 80598,
+          "decoded": 257274
+        },
+        {
+          "path": "/assets/i18n-provider-ClkSaiW9.js",
+          "encoded": 48869,
+          "decoded": 161316
+        },
+        {
+          "path": "/assets/feed-page-D3jz3woH.js",
+          "encoded": 5097,
+          "decoded": 18668
+        },
+        {
+          "path": "/assets/radar-BjelM7TN.js",
+          "encoded": 5157,
+          "decoded": 13913
+        }
+      ],
+      "scriptDurationMs": 267.055,
+      "taskDurationMs": 607.822
+    },
+    {
+      "variant": "after",
+      "profile": "slow",
+      "route": "/overview",
+      "repetition": 0,
+      "browser": "151.0.7922.34",
+      "lcp": 1520,
+      "cls": 0.11041465841540236,
+      "longTaskMs": 284,
+      "ready": 1527.5999999046326,
+      "resources": [
+        {
+          "path": "/assets/index-BmT_WAjN.js",
+          "encoded": 80598,
+          "decoded": 257274
+        },
+        {
+          "path": "/assets/i18n-provider-ClkSaiW9.js",
+          "encoded": 48869,
+          "decoded": 161316
+        },
+        {
+          "path": "/assets/overview-page-Bg0zSp_Q.js",
+          "encoded": 6104,
+          "decoded": 24168
+        },
+        {
+          "path": "/assets/radar-BjelM7TN.js",
+          "encoded": 5157,
+          "decoded": 13913
+        }
+      ],
+      "scriptDurationMs": 269.988,
+      "taskDurationMs": 562.2239999999999
+    },
+    {
+      "variant": "after",
+      "profile": "slow",
+      "route": "/feed",
+      "repetition": 1,
+      "browser": "151.0.7922.34",
+      "lcp": 1688,
+      "cls": 0,
+      "longTaskMs": 203,
+      "ready": 1682.7000002861023,
+      "resources": [
+        {
+          "path": "/assets/index-BmT_WAjN.js",
+          "encoded": 80598,
+          "decoded": 257274
+        },
+        {
+          "path": "/assets/i18n-provider-ClkSaiW9.js",
+          "encoded": 48869,
+          "decoded": 161316
+        },
+        {
+          "path": "/assets/feed-page-D3jz3woH.js",
+          "encoded": 5097,
+          "decoded": 18668
+        },
+        {
+          "path": "/assets/radar-BjelM7TN.js",
+          "encoded": 5157,
+          "decoded": 13913
+        }
+      ],
+      "scriptDurationMs": 252.166,
+      "taskDurationMs": 502.929
+    },
+    {
+      "variant": "after",
+      "profile": "slow",
+      "route": "/overview",
+      "repetition": 1,
+      "browser": "151.0.7922.34",
+      "lcp": 1520,
+      "cls": 0.11041465841540236,
+      "longTaskMs": 331,
+      "ready": 1527.2999997138977,
+      "resources": [
+        {
+          "path": "/assets/index-BmT_WAjN.js",
+          "encoded": 80598,
+          "decoded": 257274
+        },
+        {
+          "path": "/assets/i18n-provider-ClkSaiW9.js",
+          "encoded": 48869,
+          "decoded": 161316
+        },
+        {
+          "path": "/assets/overview-page-Bg0zSp_Q.js",
+          "encoded": 6104,
+          "decoded": 24168
+        },
+        {
+          "path": "/assets/radar-BjelM7TN.js",
+          "encoded": 5157,
+          "decoded": 13913
+        }
+      ],
+      "scriptDurationMs": 286.33799999999997,
+      "taskDurationMs": 607.22
+    },
+    {
+      "variant": "before",
+      "profile": "slow",
+      "route": "/feed",
+      "repetition": 1,
+      "browser": "151.0.7922.34",
+      "lcp": 1596,
+      "cls": 0,
+      "longTaskMs": 283,
+      "ready": 1587.4000000953674,
+      "resources": [
+        {
+          "path": "/assets/index-BQZ3Vssk.js",
+          "encoded": 141662,
+          "decoded": 483101
+        }
+      ],
+      "scriptDurationMs": 283.721,
+      "taskDurationMs": 531.1320000000001
+    },
+    {
+      "variant": "before",
+      "profile": "slow",
+      "route": "/overview",
+      "repetition": 1,
+      "browser": "151.0.7922.34",
+      "lcp": 1372,
+      "cls": 0.14175701002572977,
+      "longTaskMs": 284,
+      "ready": 1394.8000001907349,
+      "resources": [
+        {
+          "path": "/assets/index-BQZ3Vssk.js",
+          "encoded": 141662,
+          "decoded": 483101
+        }
+      ],
+      "scriptDurationMs": 283.422,
+      "taskDurationMs": 556.195
+    },
+    {
+      "variant": "before",
+      "profile": "slow",
+      "route": "/feed",
+      "repetition": 2,
+      "browser": "151.0.7922.34",
+      "lcp": 1576,
+      "cls": 0,
+      "longTaskMs": 260,
+      "ready": 1568.2999997138977,
+      "resources": [
+        {
+          "path": "/assets/index-BQZ3Vssk.js",
+          "encoded": 141662,
+          "decoded": 483101
+        }
+      ],
+      "scriptDurationMs": 259.957,
+      "taskDurationMs": 515.212
+    },
+    {
+      "variant": "before",
+      "profile": "slow",
+      "route": "/overview",
+      "repetition": 2,
+      "browser": "151.0.7922.34",
+      "lcp": 1388,
+      "cls": 0.14175701002572977,
+      "longTaskMs": 273,
+      "ready": 1386.2000002861023,
+      "resources": [
+        {
+          "path": "/assets/index-BQZ3Vssk.js",
+          "encoded": 141662,
+          "decoded": 483101
+        }
+      ],
+      "scriptDurationMs": 285.264,
+      "taskDurationMs": 553.02
+    },
+    {
+      "variant": "after",
+      "profile": "slow",
+      "route": "/feed",
+      "repetition": 2,
+      "browser": "151.0.7922.34",
+      "lcp": 1684,
+      "cls": 0,
+      "longTaskMs": 202,
+      "ready": 1679.5999999046326,
+      "resources": [
+        {
+          "path": "/assets/index-BmT_WAjN.js",
+          "encoded": 80598,
+          "decoded": 257274
+        },
+        {
+          "path": "/assets/i18n-provider-ClkSaiW9.js",
+          "encoded": 48869,
+          "decoded": 161316
+        },
+        {
+          "path": "/assets/feed-page-D3jz3woH.js",
+          "encoded": 5097,
+          "decoded": 18668
+        },
+        {
+          "path": "/assets/radar-BjelM7TN.js",
+          "encoded": 5157,
+          "decoded": 13913
+        }
+      ],
+      "scriptDurationMs": 245.546,
+      "taskDurationMs": 497.75399999999996
+    },
+    {
+      "variant": "after",
+      "profile": "slow",
+      "route": "/overview",
+      "repetition": 2,
+      "browser": "151.0.7922.34",
+      "lcp": 1504,
+      "cls": 0.14175701002572977,
+      "longTaskMs": 279,
+      "ready": 1511.8000001907349,
+      "resources": [
+        {
+          "path": "/assets/index-BmT_WAjN.js",
+          "encoded": 80598,
+          "decoded": 257274
+        },
+        {
+          "path": "/assets/i18n-provider-ClkSaiW9.js",
+          "encoded": 48869,
+          "decoded": 161316
+        },
+        {
+          "path": "/assets/overview-page-Bg0zSp_Q.js",
+          "encoded": 6104,
+          "decoded": 24168
+        },
+        {
+          "path": "/assets/radar-BjelM7TN.js",
+          "encoded": 5157,
+          "decoded": 13913
+        }
+      ],
+      "scriptDurationMs": 269.52,
+      "taskDurationMs": 556.6229999999999
+    }
+  ],
+  "navigation": [
+    {
+      "variant": "before",
+      "repetition": 0,
+      "profile": "slow",
+      "width": 390,
+      "detailReadyMs": 242.5,
+      "overviewReadyMs": 142.90000009536743,
+      "preloaded": true
+    },
+    {
+      "variant": "after",
+      "repetition": 0,
+      "profile": "slow",
+      "width": 390,
+      "detailReadyMs": 223.5,
+      "overviewReadyMs": 116.5,
+      "preloaded": true
+    },
+    {
+      "variant": "after",
+      "repetition": 1,
+      "profile": "slow",
+      "width": 390,
+      "detailReadyMs": 228,
+      "overviewReadyMs": 162,
+      "preloaded": true
+    },
+    {
+      "variant": "before",
+      "repetition": 1,
+      "profile": "slow",
+      "width": 390,
+      "detailReadyMs": 219.2000002861023,
+      "overviewReadyMs": 123.30000019073486,
+      "preloaded": true
+    },
+    {
+      "variant": "before",
+      "repetition": 2,
+      "profile": "slow",
+      "width": 390,
+      "detailReadyMs": 231.80000019073486,
+      "overviewReadyMs": 150.5,
+      "preloaded": true
+    },
+    {
+      "variant": "after",
+      "repetition": 2,
+      "profile": "slow",
+      "width": 390,
+      "detailReadyMs": 222.80000019073486,
+      "overviewReadyMs": 212.09999990463257,
+      "preloaded": true
+    }
+  ],
+  "functional": [
+    {
+      "variant": "before",
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "direct": [
+        {
+          "route": "/feed?q=alpha&priority=P2&page=2",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/overview",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/vulnerabilities/CVE-2026-0001",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        }
+      ],
+      "searchAndHistory": true,
+      "focusPreload": true,
+      "hoverPreload": true,
+      "keyboardNavigation": true,
+      "zeroResults": true,
+      "pageErrors": []
+    },
+    {
+      "variant": "before",
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "direct": [
+        {
+          "route": "/feed?q=alpha&priority=P2&page=2",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/overview",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/vulnerabilities/CVE-2026-0001",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        }
+      ],
+      "searchAndHistory": true,
+      "focusPreload": true,
+      "hoverPreload": true,
+      "keyboardNavigation": true,
+      "zeroResults": true,
+      "pageErrors": []
+    },
+    {
+      "variant": "after",
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "direct": [
+        {
+          "route": "/feed?q=alpha&priority=P2&page=2",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/feed-page-D3jz3woH.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/overview",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/overview-page-Bg0zSp_Q.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/vulnerabilities/CVE-2026-0001",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/vulnerability-detail-page-TDWs66Au.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/overview-page-Bg0zSp_Q.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        }
+      ],
+      "searchAndHistory": true,
+      "focusPreload": true,
+      "hoverPreload": true,
+      "keyboardNavigation": true,
+      "zeroResults": true,
+      "pageErrors": []
+    },
+    {
+      "variant": "after",
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "direct": [
+        {
+          "route": "/feed?q=alpha&priority=P2&page=2",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/feed-page-D3jz3woH.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/overview",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/overview-page-Bg0zSp_Q.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/vulnerabilities/CVE-2026-0001",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/vulnerability-detail-page-TDWs66Au.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/overview-page-Bg0zSp_Q.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        }
+      ],
+      "searchAndHistory": true,
+      "focusPreload": true,
+      "hoverPreload": true,
+      "keyboardNavigation": true,
+      "zeroResults": true,
+      "pageErrors": []
+    },
+    {
+      "variant": "before",
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "direct": [
+        {
+          "route": "/feed?q=alpha&priority=P2&page=2",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/overview",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/vulnerabilities/CVE-2026-0001",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        }
+      ],
+      "searchAndHistory": true,
+      "focusPreload": true,
+      "hoverPreload": true,
+      "keyboardNavigation": true,
+      "zeroResults": true,
+      "pageErrors": []
+    },
+    {
+      "variant": "before",
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "direct": [
+        {
+          "route": "/feed?q=alpha&priority=P2&page=2",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/overview",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/vulnerabilities/CVE-2026-0001",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        }
+      ],
+      "searchAndHistory": true,
+      "focusPreload": true,
+      "hoverPreload": true,
+      "keyboardNavigation": true,
+      "zeroResults": true,
+      "pageErrors": []
+    },
+    {
+      "variant": "after",
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "direct": [
+        {
+          "route": "/feed?q=alpha&priority=P2&page=2",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/feed-page-D3jz3woH.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/overview",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/overview-page-Bg0zSp_Q.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/vulnerabilities/CVE-2026-0001",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/vulnerability-detail-page-TDWs66Au.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/overview-page-Bg0zSp_Q.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        }
+      ],
+      "searchAndHistory": true,
+      "focusPreload": true,
+      "hoverPreload": true,
+      "keyboardNavigation": true,
+      "zeroResults": true,
+      "pageErrors": []
+    },
+    {
+      "variant": "after",
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "direct": [
+        {
+          "route": "/feed?q=alpha&priority=P2&page=2",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/feed-page-D3jz3woH.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/overview",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/overview-page-Bg0zSp_Q.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/vulnerabilities/CVE-2026-0001",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/vulnerability-detail-page-TDWs66Au.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/overview-page-Bg0zSp_Q.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        }
+      ],
+      "searchAndHistory": true,
+      "focusPreload": true,
+      "hoverPreload": true,
+      "keyboardNavigation": true,
+      "zeroResults": true,
+      "pageErrors": []
+    },
+    {
+      "variant": "before",
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "direct": [
+        {
+          "route": "/feed?q=alpha&priority=P2&page=2",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/overview",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/vulnerabilities/CVE-2026-0001",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        }
+      ],
+      "searchAndHistory": true,
+      "focusPreload": true,
+      "hoverPreload": true,
+      "keyboardNavigation": true,
+      "zeroResults": true,
+      "pageErrors": []
+    },
+    {
+      "variant": "before",
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "direct": [
+        {
+          "route": "/feed?q=alpha&priority=P2&page=2",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/overview",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/vulnerabilities/CVE-2026-0001",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        },
+        {
+          "route": "/",
+          "scripts": ["/assets/index-BQZ3Vssk.js"]
+        }
+      ],
+      "searchAndHistory": true,
+      "focusPreload": true,
+      "hoverPreload": true,
+      "keyboardNavigation": true,
+      "zeroResults": true,
+      "pageErrors": []
+    },
+    {
+      "variant": "after",
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "direct": [
+        {
+          "route": "/feed?q=alpha&priority=P2&page=2",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/feed-page-D3jz3woH.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/overview",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/overview-page-Bg0zSp_Q.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/vulnerabilities/CVE-2026-0001",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/vulnerability-detail-page-TDWs66Au.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/overview-page-Bg0zSp_Q.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        }
+      ],
+      "searchAndHistory": true,
+      "focusPreload": true,
+      "hoverPreload": true,
+      "keyboardNavigation": true,
+      "zeroResults": true,
+      "pageErrors": []
+    },
+    {
+      "variant": "after",
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "direct": [
+        {
+          "route": "/feed?q=alpha&priority=P2&page=2",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/feed-page-D3jz3woH.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/overview",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/overview-page-Bg0zSp_Q.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/vulnerabilities/CVE-2026-0001",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/vulnerability-detail-page-TDWs66Au.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        },
+        {
+          "route": "/",
+          "scripts": [
+            "/assets/index-BmT_WAjN.js",
+            "/assets/i18n-provider-ClkSaiW9.js",
+            "/assets/overview-page-Bg0zSp_Q.js",
+            "/assets/radar-BjelM7TN.js"
+          ]
+        }
+      ],
+      "searchAndHistory": true,
+      "focusPreload": true,
+      "hoverPreload": true,
+      "keyboardNavigation": true,
+      "zeroResults": true,
+      "pageErrors": []
+    }
+  ],
+  "chunkRecovery": {
+    "failedChunkResponses": 1,
+    "documentRequests": 2,
+    "recovered": true
+  },
+  "checks": {
+    "builds": 2,
+    "performanceRuns": 24,
+    "navigationRuns": 6,
+    "functionalConditions": 12,
+    "unitTests": 36,
+    "typecheck": "passed",
+    "lint": "passed",
+    "routerBaselineBytesRestored": true
+  },
+  "initialHarnessFailures": [
+    "Overview H1 was initially inferred from an unused translation; corrected to actual Global Vuln Radar H1.",
+    "Search input was initially assumed to have searchbox role; corrected to actual named textbox."
+  ],
+  "unverified": [
+    "production deployment",
+    "physical devices",
+    "native Safari app",
+    "field CWV",
+    "real backend latency",
+    "real interaction INP"
+  ]
+}

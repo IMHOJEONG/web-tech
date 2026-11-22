@@ -1,5 +1,5 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { type ReactNode, useEffect } from "react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useDebounce } from "use-debounce";
 import { searchFeed } from "@/shared/api/radar";
@@ -29,7 +29,7 @@ export function FeedPage() {
   };
   const feedQuery = useQuery({
     queryKey: ["radar", "feed", "search", request],
-    queryFn: () => searchFeed(request),
+    queryFn: ({ signal }) => searchFeed(request, signal),
     placeholderData: keepPreviousData,
     refetchInterval: FEED_REFRESH_INTERVAL_MS,
   });
@@ -55,18 +55,48 @@ export function FeedPage() {
     navigate,
   ]);
 
+  const updatingResults =
+    feedQuery.isPlaceholderData || search.q !== debouncedQuery;
+  const currentPagination = feedQuery.data?.pagination;
+  const pageStatus = currentPagination
+    ? t("feed.pageStatus", {
+        page: currentPagination.page,
+        pages: Math.max(1, currentPagination.totalPages),
+        total: currentPagination.total,
+      })
+    : "";
+  const resultStatus =
+    currentPagination?.total === 0
+      ? t("feed.resultCount", { count: 0 })
+      : pageStatus;
+
+  // Mount the live region before the first result is available.
+  const withResultStatus = (content: ReactNode) => (
+    <>
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {updatingResults ? "" : resultStatus}
+      </div>
+      {content}
+    </>
+  );
+
   if (feedQuery.isLoading) {
-    return <FeedLoadingState />;
+    return withResultStatus(<FeedLoadingState />);
   }
 
   if (!feedQuery.data) {
-    return <FeedErrorState onRetry={feedQuery.refetch} />;
+    return withResultStatus(<FeedErrorState onRetry={feedQuery.refetch} />);
   }
 
-  const filteredItems = feedQuery.data.items;
+  const { items: filteredItems, pagination } = feedQuery.data;
   const stats = summarizeFeedItems(filteredItems);
 
-  return (
+  return withResultStatus(
     <section className="mx-auto grid w-full max-w-[1280px] gap-5">
       <header className="flex flex-col items-start justify-between gap-4 rounded-sm border border-radar-border/70 bg-radar-panel px-5 py-5 shadow-[0_20px_48px_rgba(0,0,0,0.22)] backdrop-blur lg:flex-row lg:items-end">
         <div>
@@ -110,94 +140,89 @@ export function FeedPage() {
       )}
 
       <FeedFilterBar
-        pending={feedQuery.isPlaceholderData || search.q !== debouncedQuery}
+        pending={updatingResults}
         pendingLabel={t("common.refreshing")}
         filters={filters}
         labels={{
           all: t("feed.filterAll"),
           kevOnly: t("feed.filterKevOnly"),
           priority: t("feed.filterPriority"),
+          searchLabel: t("feed.searchLabel"),
           searchPlaceholder: t("feed.searchPlaceholder"),
           severity: t("feed.filterSeverity"),
           title: t("feed.filterTitle"),
           resultCount: t("feed.resultCount"),
         }}
         onFiltersChange={setFilters}
-        resultCount={feedQuery.data.pagination.total}
+        resultCount={pagination.total}
       />
 
-      {feedQuery.isPlaceholderData || search.q !== debouncedQuery ? (
-        <p role="status" className="text-sm text-radar-copy/70">
-          {t("common.refreshing")}
-        </p>
-      ) : (
-        <>
-          <FeedSummaryStrip
-            labels={{
-              total: t("feed.summaryTotal"),
-              p0: t("feed.summaryP0"),
-              kev: t("feed.summaryKev"),
-              watchlistMatches: t("feed.summaryWatchlistMatches"),
-            }}
-            stats={stats}
-          />
-
-          <FeedPagination
-            pagination={feedQuery.data.pagination}
-            busy={feedQuery.isFetching || search.q !== debouncedQuery}
-            onPageChange={(page) =>
-              void navigate({ search: { ...search, page } })
-            }
-          />
-
-          {filteredItems.length > 0 ? (
-            <div className="grid gap-3">
-              {filteredItems.map((item) => (
-                <FeedVulnerabilityCard
-                  key={item.cveId}
-                  item={item}
-                  formatDateTime={formatDateTime}
-                  labels={{
-                    detail: t("common.detail"),
-                    epss: t("feed.epss"),
-                    freshness: t("feed.freshness"),
-                    freshnessStatuses: {
-                      aging: t("domain.freshness.aging"),
-                      fresh: t("domain.freshness.fresh"),
-                      stale: t("domain.freshness.stale"),
-                      unknown: t("domain.freshness.unknown"),
-                    },
-                    kev: t("feed.kev"),
-                    noWatchlistMatch: t("feed.noWatchlistMatch"),
-                    reliability: t("feed.reliability"),
-                    reliabilityLevels: {
-                      high: t("domain.reliability.high"),
-                      low: t("domain.reliability.low"),
-                      medium: t("domain.reliability.medium"),
-                      unknown: t("domain.reliability.unknown"),
-                      verified: t("domain.reliability.verified"),
-                    },
-                    updated: t("feed.updated"),
-                  }}
-                />
-              ))}
-            </div>
-          ) : (
-            <article className="rounded-sm border border-radar-border/70 bg-radar-panel px-5 py-8 text-center">
-              <p className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-radar-copy/60">
-                {t("feed.emptyEyebrow")}
-              </p>
-              <h2 className="mt-3 font-display text-2xl font-semibold tracking-[-0.04em] text-white">
-                {t("feed.emptyTitle")}
-              </h2>
-              <p className="mx-auto mt-3 max-w-[52ch] text-sm leading-6 text-radar-copy/70">
-                {t("feed.emptyBody")}
-              </p>
-            </article>
-          )}
-        </>
+      {!updatingResults && (
+        <FeedSummaryStrip
+          labels={{
+            total: t("feed.summaryTotal"),
+            p0: t("feed.summaryP0"),
+            kev: t("feed.summaryKev"),
+            watchlistMatches: t("feed.summaryWatchlistMatches"),
+          }}
+          stats={stats}
+        />
       )}
-    </section>
+
+      <FeedPagination
+        pagination={pagination}
+        busy={updatingResults || feedQuery.isFetching}
+        statusLabel={updatingResults ? t("common.refreshing") : pageStatus}
+        onPageChange={(page) => void navigate({ search: { ...search, page } })}
+      />
+
+      {!updatingResults &&
+        (filteredItems.length > 0 ? (
+          <div className="grid gap-3">
+            {filteredItems.map((item) => (
+              <FeedVulnerabilityCard
+                key={item.cveId}
+                item={item}
+                formatDateTime={formatDateTime}
+                labels={{
+                  detail: t("common.detail"),
+                  epss: t("feed.epss"),
+                  freshness: t("feed.freshness"),
+                  freshnessStatuses: {
+                    aging: t("domain.freshness.aging"),
+                    fresh: t("domain.freshness.fresh"),
+                    stale: t("domain.freshness.stale"),
+                    unknown: t("domain.freshness.unknown"),
+                  },
+                  kev: t("feed.kev"),
+                  noWatchlistMatch: t("feed.noWatchlistMatch"),
+                  reliability: t("feed.reliability"),
+                  reliabilityLevels: {
+                    high: t("domain.reliability.high"),
+                    low: t("domain.reliability.low"),
+                    medium: t("domain.reliability.medium"),
+                    unknown: t("domain.reliability.unknown"),
+                    verified: t("domain.reliability.verified"),
+                  },
+                  updated: t("feed.updated"),
+                }}
+              />
+            ))}
+          </div>
+        ) : (
+          <article className="rounded-sm border border-radar-border/70 bg-radar-panel px-5 py-8 text-center">
+            <p className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-radar-copy/60">
+              {t("feed.emptyEyebrow")}
+            </p>
+            <h2 className="mt-3 font-display text-2xl font-semibold tracking-[-0.04em] text-white">
+              {t("feed.emptyTitle")}
+            </h2>
+            <p className="mx-auto mt-3 max-w-[52ch] text-sm leading-6 text-radar-copy/70">
+              {t("feed.emptyBody")}
+            </p>
+          </article>
+        ))}
+    </section>,
   );
 }
 
@@ -210,8 +235,8 @@ function FeedLoadingState() {
         <p className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-radar-copy/70">
           {t("feed.loadingEyebrow")}
         </p>
-        <div className="mt-4 h-10 w-full max-w-[640px] animate-pulse rounded-sm bg-radar-panel-muted" />
-        <div className="mt-3 h-4 w-full max-w-[520px] animate-pulse rounded-sm bg-radar-panel-muted" />
+        <div className="mt-4 h-10 w-full max-w-[640px] motion-safe:animate-pulse rounded-sm bg-radar-panel-muted" />
+        <div className="mt-3 h-4 w-full max-w-[520px] motion-safe:animate-pulse rounded-sm bg-radar-panel-muted" />
       </article>
       {Array.from({ length: 4 }, (_, index) => (
         <article
@@ -219,11 +244,11 @@ function FeedLoadingState() {
           className="rounded-sm border border-radar-border/70 bg-radar-panel px-4 py-4"
         >
           <div className="flex gap-2">
-            <div className="h-8 w-14 animate-pulse rounded-sm bg-radar-panel-muted" />
-            <div className="h-8 w-24 animate-pulse rounded-sm bg-radar-panel-muted" />
+            <div className="h-8 w-14 motion-safe:animate-pulse rounded-sm bg-radar-panel-muted" />
+            <div className="h-8 w-24 motion-safe:animate-pulse rounded-sm bg-radar-panel-muted" />
           </div>
-          <div className="mt-4 h-6 w-[72%] animate-pulse rounded-sm bg-radar-panel-muted" />
-          <div className="mt-3 h-4 w-36 animate-pulse rounded-sm bg-radar-panel-muted" />
+          <div className="mt-4 h-6 w-[72%] motion-safe:animate-pulse rounded-sm bg-radar-panel-muted" />
+          <div className="mt-3 h-4 w-36 motion-safe:animate-pulse rounded-sm bg-radar-panel-muted" />
         </article>
       ))}
     </section>
@@ -251,7 +276,7 @@ function FeedErrorState({
         </p>
         <button
           type="button"
-          className="mt-5 inline-flex min-h-10 items-center justify-center rounded-sm border border-radar-primary/26 bg-radar-critical/10 px-4 text-sm font-medium text-radar-primary transition hover:-translate-y-px hover:bg-radar-critical/15"
+          className="mt-5 inline-flex min-h-10 items-center justify-center rounded-sm border border-radar-primary/26 bg-radar-critical/10 px-4 text-sm font-medium text-radar-primary transition-colors motion-safe:transition motion-safe:hover:-translate-y-px hover:bg-radar-critical/15"
           onClick={() => void onRetry()}
         >
           {t("common.retry")}

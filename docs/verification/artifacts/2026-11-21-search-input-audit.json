@@ -1,0 +1,236 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "base": "a2c6505eda9b8555e033bbac629c84b687ba3b87",
+  "status": "audit-complete-no-search-code-edits",
+  "cardCommit": {
+    "sha": "a2c6505e",
+    "files": 12,
+    "sourceFiles": 5,
+    "recordFiles": 6,
+    "manifest": true,
+    "hooks": "passed",
+    "publicationRange": "passed",
+    "commitlint": {
+      "problems": 0,
+      "warnings": 0
+    },
+    "firstAttempt": "scope docs rejected; corrected to docs-ui without bypass",
+    "pushed": false
+  },
+  "guides": ["forms", "ime-safe-enter-submit", "accessibility"],
+  "cliVersion": "1.0.1",
+  "sourceSha256": {
+    "apps/docs/feature/search/ui/document-search-form.tsx": "cbffdc3f66a5298ff27b5e4a9143681dc9d75ece660dcb4f19e61c316531ce1a",
+    "apps/docs/feature/search/ui/search-drawer.tsx": "fd37ffcf533efc45add003c19e56a8642937f40eaae5d43e2d6b4de908ee5317",
+    "apps/docs/feature/search/ui/search-drawer-content.tsx": "0d07e950acd1aced71e1b4789542b4dd0e0d6c95c2892d7dc2abbbbdb6e50f41",
+    "apps/docs/feature/search/ui/search-suggestion-list.tsx": "fdeb7729f6af320b54ca49ac2275871d082db2c199a1f0a24e61f0cf14b3359d",
+    "apps/docs/feature/search/model/use-search-keyword.ts": "bc395dd02ec08718ed8ccb89f64efa07c6733aacae690b47514c890d807b58b1",
+    "apps/docs/feature/search/model/use-search-navigation.ts": "b5e3f927af175343a1eeb6d8b3fc47b32dc3c9f1351c91d21e88acc2ea414bb8",
+    "apps/docs/feature/search/model/use-search-suggestions.ts": "22e6c6c13cc24fc1921ef2b93bb3553c23b672ec64f67bed2ebff4ddbec27d25",
+    "apps/docs/feature/search/ui/search-submit-button.tsx": "782dbe96d1fc769a066f6f505dee7b1f0290c8f04f469cc16082f3ac2c69f0df",
+    "apps/docs/widgets/docs-index/ui/docs-search-panel.tsx": "068d6e50ea9ea7bf926890271476706f8bb2bd12c246d965650f895b5e16e16b",
+    "apps/docs/widgets/docs-index/ui/docs-empty-page.tsx": "274fe8fe4d5f6b5a3995cb452642cbc4ed8cec87fe6e23768db4d54a4a384e7d",
+    "apps/docs/shared/message/ko.json": "45d04a28fa21bfdd61e50c222c5cce262763bb0ef0d413124ba6d64fcfc65e33",
+    "apps/docs/shared/message/en.json": "084bbecc363f67dab13ade9368e3923bb4fb172c7b8fa180d012be43f329aee7",
+    "apps/docs/app/css/global.css": "4aa70c8d764b26e62e6999c1485141c5d5fc43495cd8b81bbeef590e218e51e5",
+    "packages/ui/components/ui/sheet.tsx": "f28d150b9b14ccc07fe404832f75e10d0b2cdf7d3c3255811d57cc79a98b6f08"
+  },
+  "browser": {
+    "scope": "Actual local Next development routes and drawer with synthetic SSR content and synthetic suggestion responses; no OS IME or screen reader",
+    "environments": 12,
+    "next": "16.4.6",
+    "widths": [390, 1280],
+    "locales": ["ko", "en"],
+    "theme": "light",
+    "reducedMotion": "reduce",
+    "byEngine": {
+      "chromium": {
+        "version": "151.0.7922.34",
+        "environments": 4
+      },
+      "firefox": {
+        "version": "153.0",
+        "environments": 4
+      },
+      "webkit": {
+        "version": "26.5",
+        "environments": 4
+      }
+    },
+    "checks": {
+      "initialFocus": 12,
+      "activeDescendant": 12,
+      "isComposingEnterBlocked": 12,
+      "keyCode229EnterBlocked": 12,
+      "compositionEnterEscapeBlocked": 12,
+      "optionArrowNavigation": 12,
+      "escapeRestoresTrigger": 12,
+      "emptyRelationsCleared": 12,
+      "focusPreservedDuringUpdates": 12,
+      "indexIMEGuards": 12,
+      "nativeGetContract": 12,
+      "explicitSearchNavigation": 12
+    },
+    "pageErrors": 0,
+    "representative": [
+      {
+        "locale": "ko",
+        "index": {
+          "name": "React, V8, ARIA...",
+          "labels": 0,
+          "id": "",
+          "type": "search",
+          "nameAttr": "q",
+          "autoCorrect": null,
+          "autoCapitalize": null,
+          "spellcheck": null,
+          "enterKeyHint": null,
+          "fontSize": "14px",
+          "height": 44,
+          "outline": "solid",
+          "outlineWidth": "2px",
+          "formMethod": "get",
+          "formAction": "/ko/docs"
+        },
+        "drawer": {
+          "name": "문서를 검색해보세요",
+          "labels": 0,
+          "id": "",
+          "type": "text",
+          "autoCorrect": null,
+          "autoCapitalize": null,
+          "spellcheck": "false",
+          "enterKeyHint": null,
+          "fontSize": "16px",
+          "height": 44,
+          "outline": "solid",
+          "outlineWidth": "2px",
+          "controlsResolved": true
+        },
+        "optionTabIndex": [0, 0],
+        "optionInTabOrder": true,
+        "readyStatus": ["2개 문서"],
+        "emptyStatus": ["0개 문서"],
+        "errorStatusPresent": true
+      },
+      {
+        "locale": "en",
+        "index": {
+          "name": "React, V8, ARIA...",
+          "labels": 0,
+          "id": "",
+          "type": "search",
+          "nameAttr": "q",
+          "autoCorrect": null,
+          "autoCapitalize": null,
+          "spellcheck": null,
+          "enterKeyHint": null,
+          "fontSize": "13.3333px",
+          "height": 21,
+          "outline": "none",
+          "outlineWidth": "3px",
+          "formMethod": "get",
+          "formAction": "/en/docs"
+        },
+        "drawer": {
+          "name": "Search the docs",
+          "labels": 0,
+          "id": "",
+          "type": "text",
+          "autoCorrect": null,
+          "autoCapitalize": null,
+          "spellcheck": "false",
+          "enterKeyHint": null,
+          "fontSize": "16px",
+          "height": 44,
+          "outline": "solid",
+          "outlineWidth": "2px",
+          "controlsResolved": true
+        },
+        "optionTabIndex": [0, 0],
+        "optionInTabOrder": true,
+        "readyStatus": ["2 documents"],
+        "emptyStatus": ["0 documents"],
+        "errorStatusPresent": true
+      }
+    ]
+  },
+  "focusGuardFollowup": {
+    "engine": "webkit",
+    "width": 390,
+    "locale": "ko",
+    "keys": ["Tab", "Alt+Tab"],
+    "stepsPerKey": 18,
+    "settle": "two animation frames",
+    "dialogRemainedOpen": true,
+    "stableBackgroundFocus": 0,
+    "transientObservationExcluded": true
+  },
+  "findings": [
+    {
+      "id": "focus-model",
+      "state": "verified-APG-pattern-difference",
+      "description": "aria-activedescendant combobox combined with tabbable A role=option; not a proven assistive-technology failure"
+    },
+    {
+      "id": "labels",
+      "state": "improvement-candidate",
+      "description": "aria-label names exist; no associated label/id; index name repeats examples"
+    },
+    {
+      "id": "input-hints",
+      "state": "improvement-candidate",
+      "description": "Explicit autocorrect/autocapitalize/enterkeyhint absent; index spellcheck default and font-size14px; iOS zoom not tested"
+    }
+  ],
+  "falsePositivesExcluded": [
+    "missing accessible name",
+    "missing focus outline",
+    "missing IME guard",
+    "missing result status",
+    "stable WebKit background focus leak"
+  ],
+  "harnessCorrections": [
+    "No published local documents rendered DocsEmptyPage; reused existing synthetic loopback content server",
+    "Bound standalone action waits and recorded stages",
+    "Waited for settled zero-result count instead of transient loading options=0",
+    "Waited two animation frames after focus guards"
+  ],
+  "plan": [
+    "Persistent labels and search input hints with existing query/IME/GET contract retained",
+    "Resolve focus model while preserving direct document-link navigation; update ADR-0031 before behavioral change",
+    "Real OS IME and calibrated screen-reader testing"
+  ],
+  "tracking": {
+    "jira": "KAN-6",
+    "summaryComment": "10128",
+    "cardIssue": "KAN-83",
+    "cardComment": "10127",
+    "knowledgePage": "19464193",
+    "operationsComment": "20250739",
+    "knowledgeVersion": 10,
+    "operationsVersion": 4,
+    "knowledgeAndOperationsReRead": true
+  },
+  "limitations": [
+    "No physical mobile, Safari app, OS IME or screen reader",
+    "No forced colors/dark theme/zoom/contrast/performance or production validation",
+    "No live announcement speech verification or real search ranking evaluation"
+  ],
+  "references": [
+    "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/",
+    "https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html",
+    "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html",
+    "https://support.apple.com/guide/safari/keyboard-shortcuts-and-gestures-cpsh003/mac"
+  ],
+  "preservation": {
+    "baselineFiles": 2342,
+    "changedExistingFiles": 5,
+    "newRecordFiles": 3,
+    "otherExistingFilesUnchanged": 2337,
+    "sourceHashesPreserved": 14,
+    "indexEmpty": true,
+    "head": "a2c6505eda9b8555e033bbac629c84b687ba3b87"
+  }
+}

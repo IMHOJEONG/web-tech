@@ -23,7 +23,7 @@ export const CategoryDocumentCard = ({
     return (
         <Link
             href={getDocHref(data)}
-            className="ds-card flex size-full flex-col gap-3 bg-surface-container-lowest p-4 hover:-translate-y-1"
+            className="ds-card flex size-full flex-col gap-3 bg-surface-container-lowest p-4 motion-safe:hover:-translate-y-1"
         >
             <DocumentThumbnail
                 thumbnail={thumbnail}

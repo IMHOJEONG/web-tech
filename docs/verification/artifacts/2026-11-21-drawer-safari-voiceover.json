@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "commit": "bbe6acae04c8d687a5632329297cec7a8b538cc9",
+  "environment": {
+    "os": "macOS 26.6.2",
+    "browser": "Safari 26.6.2",
+    "app": "Local Next development server with loopback synthetic content",
+    "locale": "ko",
+    "query": "fixture"
+  },
+  "commitChecks": {
+    "verifiedBlobs": 11,
+    "hooks": "passed",
+    "publicationRange": "passed",
+    "commitlint": "passed"
+  },
+  "safari": {
+    "resultLinkRoles": 3,
+    "arrowFocus": ["Web taxonomy fixture", "UI/UX taxonomy fixture"],
+    "enterOpened": "/ko/docs/ui-ux/taxonomy-fixture",
+    "closedTestTab": true
+  },
+  "voiceOver": {
+    "switchBefore": "off",
+    "switchAfterEnable": "on",
+    "switchAtEnd": "off",
+    "rotor": "unverified",
+    "speech": "unverified",
+    "diagnostics": [
+      "App-targeted Control+Option+U entered a control character rather than opening the rotor",
+      "VoiceOver control surface lookup timed out"
+    ]
+  },
+  "retry": {
+    "welcomeDialogSetting": "enabled",
+    "captionPanelSetting": "enabled",
+    "voiceOverProcessAppearedAfterEnable": true,
+    "welcomeWindowLookup": "timed out",
+    "afterPhysicalInputRequest": "/ko/docs/mobile/taxonomy-fixture",
+    "activationMethod": "unverified",
+    "rotorOpened": "confirmed by user",
+    "rotorInitialCategory": "Window Spots",
+    "selectionInWindowSpots": false,
+    "linksRotor": "unverified",
+    "speech": "unverified",
+    "closedTestTab": true,
+    "switchAtEnd": "off"
+  },
+  "linksRotorFollowUp": {
+    "safariResultsPrepared": 3,
+    "physicalRotorNavigationRequested": true,
+    "linksRotor": {
+      "status": "confirmed",
+      "evidence": "user-provided photo of VoiceOver rotor",
+      "category": "링크",
+      "visibleDocumentLinks": 5,
+      "visibleFixtureLinks": [
+        "Taxonomy fixture web",
+        "Taxonomy fixture ui-ux",
+        "Taxonomy fixture mobile"
+      ],
+      "selectedFixtureLinkInPhoto": "Taxonomy fixture web",
+      "fullSearchLinkVisible": true
+    },
+    "speech": {
+      "status": "confirmed from VoiceOver caption",
+      "evidence": "user-provided Safari screenshot",
+      "result": "Taxonomy fixture ui-ux",
+      "resultFocusOutlineVisible": true,
+      "caption": "방문함, 링크, UI/UX Taxonomy fixture ui-ux Synthetic canonical channel regression document."
+    },
+    "activation": {
+      "status": "confirmed",
+      "interactionEvidence": "user reported completing the rotor navigation and activation steps",
+      "destinationEvidence": "observed directly in Safari after user confirmation",
+      "destination": "/ko/docs/mobile/taxonomy-fixture",
+      "documentHeading": "Taxonomy fixture mobile"
+    }
+  }
+}

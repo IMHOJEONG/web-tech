@@ -29,6 +29,10 @@ export function useSearchKeyword(initialValue = '') {
         finishComposition,
         inputProps: {
             value: keyword,
+            autoCorrect: 'off',
+            autoCapitalize: 'none',
+            spellCheck: false,
+            enterKeyHint: 'search' as const,
             onChange: (event: ChangeEvent<HTMLInputElement>) => {
                 const value = event.currentTarget.value
                 setKeyword(composing.current ? value : limitSearchInput(value))

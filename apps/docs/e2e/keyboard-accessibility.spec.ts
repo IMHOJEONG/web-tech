@@ -3,11 +3,14 @@ import { expect, test } from '@playwright/test'
 for (const locale of ['ko', 'en']) {
     test(`${locale}: Escape closes search from every control and restores focus`, async ({
         page,
+        browserName,
     }) => {
         await page.goto(`/${locale}/about`)
         const form = page.getByRole('dialog').getByRole('search')
         const trigger = page.getByTestId('search-drawer-trigger')
-        const input = form.getByRole('combobox')
+        const input = form.getByRole('searchbox')
+        const tab = browserName === 'webkit' ? 'Alt+Tab' : 'Tab'
+        const back = browserName === 'webkit' ? 'Alt+Shift+Tab' : 'Shift+Tab'
         await expect(trigger).toBeEnabled()
 
         for (const target of ['input', 'clear', 'submit', 'close']) {
@@ -15,19 +18,19 @@ for (const locale of ['ko', 'en']) {
             await expect(input).toBeFocused()
             await input.fill('react')
             if (target === 'clear' || target === 'submit') {
-                await page.keyboard.press('Tab')
+                await page.keyboard.press(tab)
                 await expect(
                     form.locator('button[type="button"]').last()
                 ).toBeFocused()
             }
             if (target === 'submit') {
-                await page.keyboard.press('Tab')
+                await page.keyboard.press(tab)
                 await expect(
                     form.locator('button[type="submit"]')
                 ).toBeFocused()
             }
             if (target === 'close') {
-                await page.keyboard.press('Shift+Tab')
+                await page.keyboard.press(back)
                 await expect(
                     page.getByRole('dialog').getByRole('button', {
                         name: locale === 'ko' ? '검색 닫기' : 'Close search',

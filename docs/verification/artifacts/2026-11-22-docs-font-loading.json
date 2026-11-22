@@ -1,0 +1,1192 @@
+{
+  "date": "2026-11-22",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "775eb593",
+  "next": "16.4.6",
+  "loader": "webpack",
+  "environment": "Isolated Next production fixture, actual fonts.ts and font files, synthetic multilingual text, Chromium fresh contexts, DPR 1",
+  "sourceHashes": {
+    "apps/docs/shared/config/fonts.ts": "3227719aad0efb8fabf874ba7cda8964ace10e33ac74e6b5690581167371f74a",
+    "apps/docs/app/[locale]/layout.tsx": "9d27df4405f6aec40b9a6f2f6c7aed06834adc1539c02508a36e5fbe82fb2d46",
+    "apps/docs/app/css/global.css": "4aa70c8d764b26e62e6999c1485141c5d5fc43495cd8b81bbeef590e218e51e5",
+    "packages/tailwind-config/shared-styles.css": "d0f39ab01be8f9e994d40dbc799764e4aa2e45aa98ceba659ee2e3438170c468"
+  },
+  "baseline": [
+    {
+      "locale": "ko",
+      "width": 390,
+      "code": false,
+      "preloads": 2,
+      "bodyFont": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "bodyText": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 1756652,
+          "transferSize": 1756952
+        }
+      ],
+      "pHeight": 64,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "PretendardVariable.woff2",
+          "bytes": 1756652
+        }
+      ],
+      "totalFontBytes": 1781928
+    },
+    {
+      "locale": "ko",
+      "width": 390,
+      "code": true,
+      "preloads": 2,
+      "bodyFont": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "bodyText": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 1756652,
+          "transferSize": 1756952
+        },
+        {
+          "encodedBodySize": 92164,
+          "transferSize": 92464
+        }
+      ],
+      "pHeight": 64,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "JetBrainsMono-Regular.woff2",
+          "bytes": 92164
+        },
+        {
+          "font": "PretendardVariable.woff2",
+          "bytes": 1756652
+        }
+      ],
+      "totalFontBytes": 1874092
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "code": false,
+      "preloads": 2,
+      "bodyFont": "Inter, sans-serif, sans-serif",
+      "bodyText": "Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 1756652,
+          "transferSize": 1756952
+        }
+      ],
+      "pHeight": 96,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "PretendardVariable.woff2",
+          "bytes": 1756652
+        }
+      ],
+      "totalFontBytes": 1781928
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "code": true,
+      "preloads": 2,
+      "bodyFont": "Inter, sans-serif, sans-serif",
+      "bodyText": "Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 1756652,
+          "transferSize": 1756952
+        },
+        {
+          "encodedBodySize": 92164,
+          "transferSize": 92464
+        }
+      ],
+      "pHeight": 96,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "JetBrainsMono-Regular.woff2",
+          "bytes": 92164
+        },
+        {
+          "font": "PretendardVariable.woff2",
+          "bytes": 1756652
+        }
+      ],
+      "totalFontBytes": 1874092
+    },
+    {
+      "locale": "ko",
+      "width": 1280,
+      "code": false,
+      "preloads": 2,
+      "bodyFont": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "bodyText": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 1756652,
+          "transferSize": 1756952
+        }
+      ],
+      "pHeight": 32,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "PretendardVariable.woff2",
+          "bytes": 1756652
+        }
+      ],
+      "totalFontBytes": 1781928
+    },
+    {
+      "locale": "ko",
+      "width": 1280,
+      "code": true,
+      "preloads": 2,
+      "bodyFont": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "bodyText": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 1756652,
+          "transferSize": 1756952
+        },
+        {
+          "encodedBodySize": 92164,
+          "transferSize": 92464
+        }
+      ],
+      "pHeight": 32,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "JetBrainsMono-Regular.woff2",
+          "bytes": 92164
+        },
+        {
+          "font": "PretendardVariable.woff2",
+          "bytes": 1756652
+        }
+      ],
+      "totalFontBytes": 1874092
+    },
+    {
+      "locale": "en",
+      "width": 1280,
+      "code": false,
+      "preloads": 2,
+      "bodyFont": "Inter, sans-serif, sans-serif",
+      "bodyText": "Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 1756652,
+          "transferSize": 1756952
+        }
+      ],
+      "pHeight": 32,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "PretendardVariable.woff2",
+          "bytes": 1756652
+        }
+      ],
+      "totalFontBytes": 1781928
+    },
+    {
+      "locale": "en",
+      "width": 1280,
+      "code": true,
+      "preloads": 2,
+      "bodyFont": "Inter, sans-serif, sans-serif",
+      "bodyText": "Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 1756652,
+          "transferSize": 1756952
+        },
+        {
+          "encodedBodySize": 92164,
+          "transferSize": 92464
+        }
+      ],
+      "pHeight": 32,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "JetBrainsMono-Regular.woff2",
+          "bytes": 92164
+        },
+        {
+          "font": "PretendardVariable.woff2",
+          "bytes": 1756652
+        }
+      ],
+      "totalFontBytes": 1874092
+    }
+  ],
+  "experiment": [
+    {
+      "locale": "ko",
+      "width": 390,
+      "code": false,
+      "preloads": 1,
+      "bodyFont": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "bodyText": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 1756652,
+          "transferSize": 1756952
+        }
+      ],
+      "pHeight": 64,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "PretendardVariable.woff2",
+          "bytes": 1756652
+        }
+      ],
+      "totalFontBytes": 1781928
+    },
+    {
+      "locale": "ko",
+      "width": 390,
+      "code": true,
+      "preloads": 1,
+      "bodyFont": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "bodyText": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 1756652,
+          "transferSize": 1756952
+        },
+        {
+          "encodedBodySize": 92164,
+          "transferSize": 92464
+        }
+      ],
+      "pHeight": 64,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "JetBrainsMono-Regular.woff2",
+          "bytes": 92164
+        },
+        {
+          "font": "PretendardVariable.woff2",
+          "bytes": 1756652
+        }
+      ],
+      "totalFontBytes": 1874092
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "code": false,
+      "preloads": 1,
+      "bodyFont": "Inter, sans-serif, sans-serif",
+      "bodyText": "Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        }
+      ],
+      "pHeight": 96,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        }
+      ],
+      "totalFontBytes": 25276
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "code": true,
+      "preloads": 1,
+      "bodyFont": "Inter, sans-serif, sans-serif",
+      "bodyText": "Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 92164,
+          "transferSize": 92464
+        }
+      ],
+      "pHeight": 96,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "JetBrainsMono-Regular.woff2",
+          "bytes": 92164
+        }
+      ],
+      "totalFontBytes": 117440
+    },
+    {
+      "locale": "ko",
+      "width": 1280,
+      "code": false,
+      "preloads": 1,
+      "bodyFont": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "bodyText": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 1756652,
+          "transferSize": 1756952
+        }
+      ],
+      "pHeight": 32,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "PretendardVariable.woff2",
+          "bytes": 1756652
+        }
+      ],
+      "totalFontBytes": 1781928
+    },
+    {
+      "locale": "ko",
+      "width": 1280,
+      "code": true,
+      "preloads": 1,
+      "bodyFont": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "bodyText": "pretendard, \"pretendard Fallback\", Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 1756652,
+          "transferSize": 1756952
+        },
+        {
+          "encodedBodySize": 92164,
+          "transferSize": 92464
+        }
+      ],
+      "pHeight": 32,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "JetBrainsMono-Regular.woff2",
+          "bytes": 92164
+        },
+        {
+          "font": "PretendardVariable.woff2",
+          "bytes": 1756652
+        }
+      ],
+      "totalFontBytes": 1874092
+    },
+    {
+      "locale": "en",
+      "width": 1280,
+      "code": false,
+      "preloads": 1,
+      "bodyFont": "Inter, sans-serif, sans-serif",
+      "bodyText": "Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        }
+      ],
+      "pHeight": 32,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        }
+      ],
+      "totalFontBytes": 25276
+    },
+    {
+      "locale": "en",
+      "width": 1280,
+      "code": true,
+      "preloads": 1,
+      "bodyFont": "Inter, sans-serif, sans-serif",
+      "bodyText": "Inter, sans-serif, sans-serif",
+      "resourceBytes": [
+        {
+          "encodedBodySize": 25276,
+          "transferSize": 25576
+        },
+        {
+          "encodedBodySize": 92164,
+          "transferSize": 92464
+        }
+      ],
+      "pHeight": 32,
+      "fonts": [
+        {
+          "font": "SpaceGroteskVariable.woff2",
+          "bytes": 25276
+        },
+        {
+          "font": "JetBrainsMono-Regular.woff2",
+          "bytes": 92164
+        }
+      ],
+      "totalFontBytes": 117440
+    }
+  ],
+  "experimentOnly": "Pretendard preload:false in isolated copy",
+  "productFontCodeChanged": false,
+  "cleanup": true,
+  "unverified": [
+    "Production LCP and CLS",
+    "Cold Korean text timing",
+    "Locale switching",
+    "Firefox and WebKit",
+    "Default Turbopack loader"
+  ],
+  "application": {
+    "date": "2026-11-22",
+    "baseCommit": "06adc7a0",
+    "setting": "Pretendard preload:false",
+    "sourceHashes": {
+      "apps/docs/shared/config/fonts.ts": "d37d3e8814ca0b4b1be4ff1d6f2f5f31df4d38ead5ec42ae41cb75d7baeff43c"
+    },
+    "slow": {
+      "browser": "151.0.7922.34",
+      "network": {
+        "latencyMs": 150,
+        "downloadBytesPerSecond": 200000,
+        "uploadBytesPerSecond": 93750,
+        "cpuSlowdown": 4
+      },
+      "results": [
+        {
+          "version": "baseline",
+          "repetition": 0,
+          "width": 390,
+          "locale": "ko",
+          "bodyTextPaintMs": 568,
+          "lcpMs": 568,
+          "fontsReadyMs": 10108.800000190735,
+          "cls": 0,
+          "pHeight": 64,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 0,
+          "width": 390,
+          "locale": "en",
+          "bodyTextPaintMs": 508,
+          "lcpMs": 508,
+          "fontsReadyMs": 880.8000001907349,
+          "cls": 0,
+          "pHeight": 96,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 0,
+          "width": 1280,
+          "locale": "ko",
+          "bodyTextPaintMs": 508,
+          "lcpMs": 508,
+          "fontsReadyMs": 10076.39999961853,
+          "cls": 0,
+          "pHeight": 32,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 0,
+          "width": 1280,
+          "locale": "en",
+          "bodyTextPaintMs": 484,
+          "lcpMs": 484,
+          "fontsReadyMs": 865.0999999046326,
+          "cls": 0,
+          "pHeight": 32,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 0,
+          "width": 390,
+          "locale": "ko",
+          "bodyTextPaintMs": 512,
+          "lcpMs": 512,
+          "fontsReadyMs": 10198.199999809265,
+          "cls": 0,
+          "pHeight": 64,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 0,
+          "width": 390,
+          "locale": "en",
+          "bodyTextPaintMs": 496,
+          "lcpMs": 496,
+          "fontsReadyMs": 750.5999999046326,
+          "cls": 0,
+          "pHeight": 96,
+          "fontBytes": 25276
+        },
+        {
+          "version": "candidate",
+          "repetition": 0,
+          "width": 1280,
+          "locale": "ko",
+          "bodyTextPaintMs": 504,
+          "lcpMs": 504,
+          "fontsReadyMs": 10077.199999809265,
+          "cls": 0,
+          "pHeight": 32,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 0,
+          "width": 1280,
+          "locale": "en",
+          "bodyTextPaintMs": 500,
+          "lcpMs": 500,
+          "fontsReadyMs": 755.5999999046326,
+          "cls": 0,
+          "pHeight": 32,
+          "fontBytes": 25276
+        },
+        {
+          "version": "candidate",
+          "repetition": 1,
+          "width": 390,
+          "locale": "ko",
+          "bodyTextPaintMs": 464,
+          "lcpMs": 464,
+          "fontsReadyMs": 10075.699999809265,
+          "cls": 0,
+          "pHeight": 64,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 1,
+          "width": 390,
+          "locale": "en",
+          "bodyTextPaintMs": 492,
+          "lcpMs": 492,
+          "fontsReadyMs": 767.6000003814697,
+          "cls": 0,
+          "pHeight": 96,
+          "fontBytes": 25276
+        },
+        {
+          "version": "candidate",
+          "repetition": 1,
+          "width": 1280,
+          "locale": "ko",
+          "bodyTextPaintMs": 500,
+          "lcpMs": 500,
+          "fontsReadyMs": 10080.299999713898,
+          "cls": 0,
+          "pHeight": 32,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 1,
+          "width": 1280,
+          "locale": "en",
+          "bodyTextPaintMs": 496,
+          "lcpMs": 496,
+          "fontsReadyMs": 756.5,
+          "cls": 0,
+          "pHeight": 32,
+          "fontBytes": 25276
+        },
+        {
+          "version": "baseline",
+          "repetition": 1,
+          "width": 390,
+          "locale": "ko",
+          "bodyTextPaintMs": 500,
+          "lcpMs": 500,
+          "fontsReadyMs": 10074.5,
+          "cls": 0,
+          "pHeight": 64,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 1,
+          "width": 390,
+          "locale": "en",
+          "bodyTextPaintMs": 512,
+          "lcpMs": 512,
+          "fontsReadyMs": 881.4000000953674,
+          "cls": 0,
+          "pHeight": 96,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 1,
+          "width": 1280,
+          "locale": "ko",
+          "bodyTextPaintMs": 512,
+          "lcpMs": 512,
+          "fontsReadyMs": 10075.099999904633,
+          "cls": 0,
+          "pHeight": 32,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 1,
+          "width": 1280,
+          "locale": "en",
+          "bodyTextPaintMs": 500,
+          "lcpMs": 500,
+          "fontsReadyMs": 884.6000003814697,
+          "cls": 0,
+          "pHeight": 32,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 2,
+          "width": 390,
+          "locale": "ko",
+          "bodyTextPaintMs": 496,
+          "lcpMs": 496,
+          "fontsReadyMs": 10096.299999713898,
+          "cls": 0,
+          "pHeight": 64,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 2,
+          "width": 390,
+          "locale": "en",
+          "bodyTextPaintMs": 500,
+          "lcpMs": 500,
+          "fontsReadyMs": 880.7000002861023,
+          "cls": 0,
+          "pHeight": 96,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 2,
+          "width": 1280,
+          "locale": "ko",
+          "bodyTextPaintMs": 504,
+          "lcpMs": 504,
+          "fontsReadyMs": 10080.300000190735,
+          "cls": 0,
+          "pHeight": 32,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 2,
+          "width": 1280,
+          "locale": "en",
+          "bodyTextPaintMs": 504,
+          "lcpMs": 504,
+          "fontsReadyMs": 907.0999999046326,
+          "cls": 0,
+          "pHeight": 32,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 2,
+          "width": 390,
+          "locale": "ko",
+          "bodyTextPaintMs": 500,
+          "lcpMs": 500,
+          "fontsReadyMs": 10076.599999904633,
+          "cls": 0,
+          "pHeight": 64,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 2,
+          "width": 390,
+          "locale": "en",
+          "bodyTextPaintMs": 488,
+          "lcpMs": 488,
+          "fontsReadyMs": 750.4000000953674,
+          "cls": 0,
+          "pHeight": 96,
+          "fontBytes": 25276
+        },
+        {
+          "version": "candidate",
+          "repetition": 2,
+          "width": 1280,
+          "locale": "ko",
+          "bodyTextPaintMs": 484,
+          "lcpMs": 484,
+          "fontsReadyMs": 10066.5,
+          "cls": 0,
+          "pHeight": 32,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 2,
+          "width": 1280,
+          "locale": "en",
+          "bodyTextPaintMs": 496,
+          "lcpMs": 496,
+          "fontsReadyMs": 750.5999999046326,
+          "cls": 0,
+          "pHeight": 32,
+          "fontBytes": 25276
+        }
+      ]
+    },
+    "fastLongBody": {
+      "browser": "151.0.7922.34",
+      "network": {
+        "latencyMs": 0,
+        "downloadBytesPerSecond": "unlimited",
+        "uploadBytesPerSecond": "unlimited",
+        "cpuSlowdown": 1
+      },
+      "content": "Identical longer server-rendered synthetic body text",
+      "results": [
+        {
+          "version": "baseline",
+          "repetition": 0,
+          "width": 390,
+          "locale": "ko",
+          "bodyTextPaintMs": 116,
+          "lcpMs": 116,
+          "fontsReadyMs": 119.2999997138977,
+          "cls": 0,
+          "pHeight": 288,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 0,
+          "width": 390,
+          "locale": "en",
+          "bodyTextPaintMs": 76,
+          "lcpMs": 76,
+          "fontsReadyMs": 77,
+          "cls": 0,
+          "pHeight": 416,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 0,
+          "width": 1280,
+          "locale": "ko",
+          "bodyTextPaintMs": 92,
+          "lcpMs": 92,
+          "fontsReadyMs": 89.60000038146973,
+          "cls": 0,
+          "pHeight": 96,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 0,
+          "width": 1280,
+          "locale": "en",
+          "bodyTextPaintMs": 80,
+          "lcpMs": 80,
+          "fontsReadyMs": 83.39999961853027,
+          "cls": 0,
+          "pHeight": 160,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 0,
+          "width": 390,
+          "locale": "ko",
+          "bodyTextPaintMs": 44,
+          "lcpMs": 44,
+          "fontsReadyMs": 95,
+          "cls": 0,
+          "pHeight": 288,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 0,
+          "width": 390,
+          "locale": "en",
+          "bodyTextPaintMs": 32,
+          "lcpMs": 32,
+          "fontsReadyMs": 58.5,
+          "cls": 0,
+          "pHeight": 416,
+          "fontBytes": 25276
+        },
+        {
+          "version": "candidate",
+          "repetition": 0,
+          "width": 1280,
+          "locale": "ko",
+          "bodyTextPaintMs": 32,
+          "lcpMs": 32,
+          "fontsReadyMs": 75.40000009536743,
+          "cls": 0,
+          "pHeight": 96,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 0,
+          "width": 1280,
+          "locale": "en",
+          "bodyTextPaintMs": 28,
+          "lcpMs": 28,
+          "fontsReadyMs": 58.80000019073486,
+          "cls": 0,
+          "pHeight": 160,
+          "fontBytes": 25276
+        },
+        {
+          "version": "candidate",
+          "repetition": 1,
+          "width": 390,
+          "locale": "ko",
+          "bodyTextPaintMs": 36,
+          "lcpMs": 36,
+          "fontsReadyMs": 88.2999997138977,
+          "cls": 0,
+          "pHeight": 288,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 1,
+          "width": 390,
+          "locale": "en",
+          "bodyTextPaintMs": 28,
+          "lcpMs": 28,
+          "fontsReadyMs": 61.299999713897705,
+          "cls": 0,
+          "pHeight": 416,
+          "fontBytes": 25276
+        },
+        {
+          "version": "candidate",
+          "repetition": 1,
+          "width": 1280,
+          "locale": "ko",
+          "bodyTextPaintMs": 32,
+          "lcpMs": 32,
+          "fontsReadyMs": 82.09999990463257,
+          "cls": 0,
+          "pHeight": 96,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 1,
+          "width": 1280,
+          "locale": "en",
+          "bodyTextPaintMs": 32,
+          "lcpMs": 32,
+          "fontsReadyMs": 60.700000286102295,
+          "cls": 0,
+          "pHeight": 160,
+          "fontBytes": 25276
+        },
+        {
+          "version": "baseline",
+          "repetition": 1,
+          "width": 390,
+          "locale": "ko",
+          "bodyTextPaintMs": 96,
+          "lcpMs": 96,
+          "fontsReadyMs": 91.30000019073486,
+          "cls": 0,
+          "pHeight": 288,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 1,
+          "width": 390,
+          "locale": "en",
+          "bodyTextPaintMs": 72,
+          "lcpMs": 72,
+          "fontsReadyMs": 73.69999980926514,
+          "cls": 0,
+          "pHeight": 416,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 1,
+          "width": 1280,
+          "locale": "ko",
+          "bodyTextPaintMs": 88,
+          "lcpMs": 88,
+          "fontsReadyMs": 94.59999990463257,
+          "cls": 0,
+          "pHeight": 96,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 1,
+          "width": 1280,
+          "locale": "en",
+          "bodyTextPaintMs": 72,
+          "lcpMs": 72,
+          "fontsReadyMs": 72.5,
+          "cls": 0,
+          "pHeight": 160,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 2,
+          "width": 390,
+          "locale": "ko",
+          "bodyTextPaintMs": 92,
+          "lcpMs": 92,
+          "fontsReadyMs": 96.5,
+          "cls": 0,
+          "pHeight": 288,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 2,
+          "width": 390,
+          "locale": "en",
+          "bodyTextPaintMs": 72,
+          "lcpMs": 72,
+          "fontsReadyMs": 74.09999990463257,
+          "cls": 0,
+          "pHeight": 416,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 2,
+          "width": 1280,
+          "locale": "ko",
+          "bodyTextPaintMs": 80,
+          "lcpMs": 80,
+          "fontsReadyMs": 88.30000019073486,
+          "cls": 0,
+          "pHeight": 96,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "baseline",
+          "repetition": 2,
+          "width": 1280,
+          "locale": "en",
+          "bodyTextPaintMs": 76,
+          "lcpMs": 76,
+          "fontsReadyMs": 74.59999990463257,
+          "cls": 0,
+          "pHeight": 160,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 2,
+          "width": 390,
+          "locale": "ko",
+          "bodyTextPaintMs": 32,
+          "lcpMs": 32,
+          "fontsReadyMs": 82.80000019073486,
+          "cls": 0,
+          "pHeight": 288,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 2,
+          "width": 390,
+          "locale": "en",
+          "bodyTextPaintMs": 28,
+          "lcpMs": 28,
+          "fontsReadyMs": 54.09999990463257,
+          "cls": 0,
+          "pHeight": 416,
+          "fontBytes": 25276
+        },
+        {
+          "version": "candidate",
+          "repetition": 2,
+          "width": 1280,
+          "locale": "ko",
+          "bodyTextPaintMs": 36,
+          "lcpMs": 36,
+          "fontsReadyMs": 92.09999990463257,
+          "cls": 0,
+          "pHeight": 96,
+          "fontBytes": 1781928
+        },
+        {
+          "version": "candidate",
+          "repetition": 2,
+          "width": 1280,
+          "locale": "en",
+          "bodyTextPaintMs": 32,
+          "lcpMs": 32,
+          "fontsReadyMs": 54.200000286102295,
+          "cls": 0,
+          "pHeight": 160,
+          "fontBytes": 25276
+        }
+      ]
+    },
+    "validRuns": 48,
+    "excludedRuns": 24,
+    "excludedReason": "Client mutation produced unequal text; replaced with identical server-rendered text in both builds",
+    "checks": {
+      "typecheck": "passed",
+      "lint": "passed"
+    },
+    "cleanup": {
+      "browsersClosed": true,
+      "serversStopped": true,
+      "fixturesRetainedOutsideRepository": true
+    },
+    "unverified": [
+      "Production field CWV",
+      "Full application route performance",
+      "Physical devices and other OS fallback fonts",
+      "Native Safari and Firefox CWV"
+    ],
+    "alternatives": [
+      {
+        "name": "SUIT",
+        "license": "OFL-1.1",
+        "source": "https://github.com/sun-typeface/SUIT",
+        "licenseSource": "https://raw.githubusercontent.com/sun-typeface/SUIT/main/LICENSE"
+      },
+      {
+        "name": "Wanted Sans",
+        "license": "OFL-1.1",
+        "source": "https://github.com/wanteddev/wanted-sans",
+        "licenseSource": "https://raw.githubusercontent.com/wanteddev/wanted-sans/main/OFL.txt"
+      },
+      {
+        "name": "Spoqa Han Sans Neo",
+        "license": "OFL-1.1",
+        "source": "https://github.com/spoqa/spoqa-han-sans",
+        "licenseSource": "https://raw.githubusercontent.com/spoqa/spoqa-han-sans/main/LICENSE"
+      },
+      {
+        "name": "Noto Sans KR",
+        "license": "OFL-1.1",
+        "source": "https://github.com/google/fonts/tree/main/ofl/notosanskr",
+        "licenseSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanskr/OFL.txt"
+      }
+    ],
+    "productFontCodeChanged": true
+  }
+}

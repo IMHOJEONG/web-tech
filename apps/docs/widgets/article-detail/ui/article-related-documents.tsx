@@ -65,7 +65,7 @@ export function ArticleRelatedDocuments({
                     <Link
                         key={item.href}
                         href={item.href}
-                        className="group grid min-w-0 gap-3 rounded-2xl border border-border bg-background/80 p-4 transition duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-surface-container-low focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary md:grid-cols-[minmax(0,1fr)_auto] md:items-center"
+                        className="group grid min-w-0 gap-3 rounded-2xl border border-border bg-background/80 p-4 transition-colors motion-safe:transition duration-200 motion-safe:hover:-translate-y-0.5 hover:border-primary/45 hover:bg-surface-container-low focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary md:grid-cols-[minmax(0,1fr)_auto] md:items-center"
                     >
                         <span className="min-w-0">
                             <span className="line-clamp-2 text-lg font-semibold leading-tight text-on-surface transition-colors group-hover:text-primary">

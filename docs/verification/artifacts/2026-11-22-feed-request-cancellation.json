@@ -1,0 +1,807 @@
+{
+  "date": "2026-11-22",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "f05f7f5fe3edb75a8c2124c8150564a260317008",
+  "status": "local-uncommitted",
+  "sourceHashes": {
+    "apps/vuln-radar/src/shared/api/client.ts": "dfa1b057b5d09bcdd2935fe2cc3f50419aa46daf6fbab2d8cc672b8c047d90ac",
+    "apps/vuln-radar/src/shared/api/radar.ts": "de48707da94fdfbf050824abc8aee832009788e7776f0718228ad4236aad79fd",
+    "apps/vuln-radar/src/pages/feed/ui/feed-page.tsx": "c62189f8a459304a6bc030fb78a40bda216c0fcab93d3746a459cb75b4740ea4",
+    "scripts/verify-vuln-radar-request-cancellation.mjs": "6bc642402bb00786d6a0f7e9ef3a30d6981df5be685d513f9e379baf64764a27"
+  },
+  "baselineHashes": {
+    "client-before.ts": "e0cd74b2761f9ac9e745f9d1017ed0d28dad176f3567ea66a462d213c1ac68aa",
+    "radar-before.ts": "4879afe528bde1e0ecb862546326ed8d12a468dd439a161eb70d74de03be038d",
+    "feed-before.tsx": "fc192d226ca9cd127f4bc783ed9fdb5af6016959e66344b28df106e618f35ba9"
+  },
+  "api": {
+    "sourceSha256": "dfa1b057b5d09bcdd2935fe2cc3f50419aa46daf6fbab2d8cc672b8c047d90ac",
+    "node": "v24.22.1",
+    "results": [
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "name": "success-legacy",
+        "durationMs": 9,
+        "observed": {
+          "ok": true,
+          "data": {
+            "value": "ready"
+          },
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "name": "success-signal",
+        "durationMs": 5,
+        "observed": {
+          "ok": true,
+          "data": {
+            "value": "ready"
+          },
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "name": "pre-aborted",
+        "durationMs": 4,
+        "observed": {
+          "ok": false,
+          "isApiError": false,
+          "name": "Error",
+          "sameCallerReason": true,
+          "receivedHeaders": false,
+          "callerAborted": true,
+          "reason": "Error"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "name": "caller-headers",
+        "durationMs": 106,
+        "observed": {
+          "ok": false,
+          "isApiError": false,
+          "name": "AbortError",
+          "code": 20,
+          "sameCallerReason": true,
+          "receivedHeaders": false,
+          "callerAborted": true,
+          "reason": "AbortError"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "name": "caller-body",
+        "durationMs": 6,
+        "observed": {
+          "ok": false,
+          "isApiError": false,
+          "name": "AbortError",
+          "code": 20,
+          "sameCallerReason": true,
+          "receivedHeaders": true,
+          "callerAborted": true,
+          "reason": "AbortError"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "name": "caller-custom",
+        "durationMs": 105,
+        "observed": {
+          "ok": false,
+          "isApiError": false,
+          "name": "Error",
+          "sameCallerReason": true,
+          "receivedHeaders": false,
+          "callerAborted": true,
+          "reason": "Error"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "name": "http",
+        "durationMs": 5,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "http",
+          "status": 503,
+          "sameCallerReason": false,
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "name": "schema",
+        "durationMs": 7,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "parse",
+          "status": null,
+          "sameCallerReason": false,
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "name": "malformed",
+        "durationMs": 5,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "network",
+          "status": null,
+          "cause": "SyntaxError",
+          "sameCallerReason": false,
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "name": "network",
+        "durationMs": 10,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "network",
+          "status": null,
+          "cause": "TypeError",
+          "sameCallerReason": false,
+          "receivedHeaders": false,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "name": "timeout-headers",
+        "durationMs": 8008,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "network",
+          "status": null,
+          "cause": "TimeoutError",
+          "sameCallerReason": false,
+          "receivedHeaders": false,
+          "callerAborted": false,
+          "reason": "TimeoutError"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "name": "timeout-body",
+        "durationMs": 8009,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "network",
+          "status": null,
+          "cause": "AbortError",
+          "sameCallerReason": false,
+          "receivedHeaders": true,
+          "callerAborted": false,
+          "reason": "TimeoutError"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "name": "success-legacy",
+        "durationMs": 13,
+        "observed": {
+          "ok": true,
+          "data": {
+            "value": "ready"
+          },
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "name": "success-signal",
+        "durationMs": 4,
+        "observed": {
+          "ok": true,
+          "data": {
+            "value": "ready"
+          },
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "name": "pre-aborted",
+        "durationMs": 3,
+        "observed": {
+          "ok": false,
+          "isApiError": false,
+          "name": "Error",
+          "sameCallerReason": true,
+          "receivedHeaders": false,
+          "callerAborted": true,
+          "reason": "Error"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "name": "caller-headers",
+        "durationMs": 111,
+        "observed": {
+          "ok": false,
+          "isApiError": false,
+          "name": "AbortError",
+          "code": 20,
+          "sameCallerReason": true,
+          "receivedHeaders": false,
+          "callerAborted": true,
+          "reason": "AbortError"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "name": "caller-body",
+        "durationMs": 10,
+        "observed": {
+          "ok": false,
+          "isApiError": false,
+          "name": "AbortError",
+          "code": 20,
+          "sameCallerReason": true,
+          "receivedHeaders": true,
+          "callerAborted": true,
+          "reason": "AbortError"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "name": "caller-custom",
+        "durationMs": 107,
+        "observed": {
+          "ok": false,
+          "isApiError": false,
+          "name": "Error",
+          "sameCallerReason": true,
+          "receivedHeaders": false,
+          "callerAborted": true,
+          "reason": "Error"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "name": "http",
+        "durationMs": 9,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "http",
+          "status": 503,
+          "sameCallerReason": false,
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "name": "schema",
+        "durationMs": 4,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "parse",
+          "status": null,
+          "sameCallerReason": false,
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "name": "malformed",
+        "durationMs": 8,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "network",
+          "status": null,
+          "cause": "SyntaxError",
+          "sameCallerReason": false,
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "name": "network",
+        "durationMs": 11,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "network",
+          "status": null,
+          "cause": "TypeError",
+          "sameCallerReason": false,
+          "receivedHeaders": false,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "name": "timeout-headers",
+        "durationMs": 8006,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "network",
+          "status": null,
+          "cause": "TimeoutError",
+          "sameCallerReason": false,
+          "receivedHeaders": false,
+          "callerAborted": false,
+          "reason": "TimeoutError"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "153.0",
+        "name": "timeout-body",
+        "durationMs": 8006,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "network",
+          "status": null,
+          "cause": "AbortError",
+          "sameCallerReason": false,
+          "receivedHeaders": true,
+          "callerAborted": false,
+          "reason": "TimeoutError"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "name": "success-legacy",
+        "durationMs": 9,
+        "observed": {
+          "ok": true,
+          "data": {
+            "value": "ready"
+          },
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "name": "success-signal",
+        "durationMs": 5,
+        "observed": {
+          "ok": true,
+          "data": {
+            "value": "ready"
+          },
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "name": "pre-aborted",
+        "durationMs": 4,
+        "observed": {
+          "ok": false,
+          "isApiError": false,
+          "name": "Error",
+          "sameCallerReason": true,
+          "receivedHeaders": false,
+          "callerAborted": true,
+          "reason": "Error"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "name": "caller-headers",
+        "durationMs": 107,
+        "observed": {
+          "ok": false,
+          "isApiError": false,
+          "name": "AbortError",
+          "code": 20,
+          "sameCallerReason": true,
+          "receivedHeaders": false,
+          "callerAborted": true,
+          "reason": "AbortError"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "name": "caller-body",
+        "durationMs": 6,
+        "observed": {
+          "ok": false,
+          "isApiError": false,
+          "name": "AbortError",
+          "code": 20,
+          "sameCallerReason": true,
+          "receivedHeaders": true,
+          "callerAborted": true,
+          "reason": "AbortError"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "name": "caller-custom",
+        "durationMs": 104,
+        "observed": {
+          "ok": false,
+          "isApiError": false,
+          "name": "Error",
+          "sameCallerReason": true,
+          "receivedHeaders": false,
+          "callerAborted": true,
+          "reason": "Error"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "name": "http",
+        "durationMs": 4,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "http",
+          "status": 503,
+          "sameCallerReason": false,
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "name": "schema",
+        "durationMs": 6,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "parse",
+          "status": null,
+          "sameCallerReason": false,
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "name": "malformed",
+        "durationMs": 6,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "network",
+          "status": null,
+          "cause": "SyntaxError",
+          "sameCallerReason": false,
+          "receivedHeaders": true,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "name": "network",
+        "durationMs": 8,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "network",
+          "status": null,
+          "cause": "TypeError",
+          "sameCallerReason": false,
+          "receivedHeaders": false,
+          "callerAborted": false
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "name": "timeout-headers",
+        "durationMs": 8007,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "network",
+          "status": null,
+          "cause": "AbortError",
+          "sameCallerReason": false,
+          "receivedHeaders": false,
+          "callerAborted": false,
+          "reason": "TimeoutError"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.5",
+        "name": "timeout-body",
+        "durationMs": 8007,
+        "observed": {
+          "ok": false,
+          "isApiError": true,
+          "name": "ApiError",
+          "code": "network",
+          "status": null,
+          "cause": "AbortError",
+          "sameCallerReason": false,
+          "receivedHeaders": true,
+          "callerAborted": false,
+          "reason": "TimeoutError"
+        }
+      }
+    ],
+    "passed": 36
+  },
+  "ui": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "variant": "before",
+      "searchCancellation": false,
+      "leaveCancellation": false,
+      "filterCancellation": false,
+      "revisitPendingRequests": 1,
+      "completedCacheRequests": 1,
+      "httpAttempts": 2,
+      "lateResponseDidNotReplaceCurrent": true,
+      "pendingFeedback": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "variant": "before",
+      "searchCancellation": false,
+      "leaveCancellation": false,
+      "filterCancellation": false,
+      "revisitPendingRequests": 1,
+      "completedCacheRequests": 1,
+      "httpAttempts": 2,
+      "lateResponseDidNotReplaceCurrent": true,
+      "pendingFeedback": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "variant": "after",
+      "searchCancellation": true,
+      "leaveCancellation": true,
+      "filterCancellation": true,
+      "revisitPendingRequests": 2,
+      "completedCacheRequests": 1,
+      "httpAttempts": 2,
+      "lateResponseDidNotReplaceCurrent": true,
+      "pendingFeedback": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "variant": "after",
+      "searchCancellation": true,
+      "leaveCancellation": true,
+      "filterCancellation": true,
+      "revisitPendingRequests": 2,
+      "completedCacheRequests": 1,
+      "httpAttempts": 2,
+      "lateResponseDidNotReplaceCurrent": true,
+      "pendingFeedback": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "variant": "before",
+      "searchCancellation": false,
+      "leaveCancellation": false,
+      "filterCancellation": false,
+      "revisitPendingRequests": 1,
+      "completedCacheRequests": 1,
+      "httpAttempts": 2,
+      "lateResponseDidNotReplaceCurrent": true,
+      "pendingFeedback": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "variant": "before",
+      "searchCancellation": false,
+      "leaveCancellation": false,
+      "filterCancellation": false,
+      "revisitPendingRequests": 1,
+      "completedCacheRequests": 1,
+      "httpAttempts": 2,
+      "lateResponseDidNotReplaceCurrent": true,
+      "pendingFeedback": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "variant": "after",
+      "searchCancellation": true,
+      "leaveCancellation": true,
+      "filterCancellation": true,
+      "revisitPendingRequests": 2,
+      "completedCacheRequests": 1,
+      "httpAttempts": 2,
+      "lateResponseDidNotReplaceCurrent": true,
+      "pendingFeedback": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "variant": "after",
+      "searchCancellation": true,
+      "leaveCancellation": true,
+      "filterCancellation": true,
+      "revisitPendingRequests": 2,
+      "completedCacheRequests": 1,
+      "httpAttempts": 2,
+      "lateResponseDidNotReplaceCurrent": true,
+      "pendingFeedback": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "variant": "before",
+      "searchCancellation": false,
+      "leaveCancellation": false,
+      "filterCancellation": false,
+      "revisitPendingRequests": 1,
+      "completedCacheRequests": 1,
+      "httpAttempts": 2,
+      "lateResponseDidNotReplaceCurrent": true,
+      "pendingFeedback": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "variant": "before",
+      "searchCancellation": false,
+      "leaveCancellation": false,
+      "filterCancellation": false,
+      "revisitPendingRequests": 1,
+      "completedCacheRequests": 1,
+      "httpAttempts": 2,
+      "lateResponseDidNotReplaceCurrent": true,
+      "pendingFeedback": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "variant": "after",
+      "searchCancellation": true,
+      "leaveCancellation": true,
+      "filterCancellation": true,
+      "revisitPendingRequests": 2,
+      "completedCacheRequests": 1,
+      "httpAttempts": 2,
+      "lateResponseDidNotReplaceCurrent": true,
+      "pendingFeedback": true,
+      "pageErrors": []
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "variant": "after",
+      "searchCancellation": true,
+      "leaveCancellation": true,
+      "filterCancellation": true,
+      "revisitPendingRequests": 2,
+      "completedCacheRequests": 1,
+      "httpAttempts": 2,
+      "lateResponseDidNotReplaceCurrent": true,
+      "pendingFeedback": true,
+      "pageErrors": []
+    }
+  ],
+  "checks": {
+    "productionBuild": "passed",
+    "typecheck": "passed",
+    "lint": "passed",
+    "existingUnitTests": 36,
+    "apiConditions": 36,
+    "uiConditions": 12,
+    "earlyConnectionClosureAssertions": 15,
+    "baselineCssBytes": 37415,
+    "finalCssBytes": 37415,
+    "cssSha256": "6e501d75378f45b8e2bcdfce522130332332b2fd93749976a65d1e0e31d72dde"
+  },
+  "initialHarnessCorrections": [
+    "Assert existing refreshing feedback instead of assuming previous cards remain visible.",
+    "Align app working directory and Vite build options; verify matching CSS before final comparison."
+  ],
+  "voiceOver": "skipped-at-user-request-unverified",
+  "unverified": [
+    "production deployment",
+    "physical devices",
+    "native Safari application",
+    "real API or database",
+    "server job cancellation or rollback",
+    "field CWV improvements"
+  ]
+}

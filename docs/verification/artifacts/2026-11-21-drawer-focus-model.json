@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "commit": "f36db6decac2a0c051bec9443075c3dc506cf256",
+  "scope": "Local Next development routes with synthetic search suggestions, keyboard observations",
+  "sourceSha256": {
+    "apps/docs/feature/search/ui/search-drawer.tsx": "fd37ffcf533efc45add003c19e56a8642937f40eaae5d43e2d6b4de908ee5317",
+    "apps/docs/feature/search/ui/search-drawer-content.tsx": "2f278f0b7244e8fe0d51d5689128d13bdbbfc07e3c8d6ba1e32cda16f69b225d",
+    "apps/docs/feature/search/ui/search-suggestion-list.tsx": "fdeb7729f6af320b54ca49ac2275871d082db2c199a1f0a24e61f0cf14b3359d"
+  },
+  "rows": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "viewport": 390,
+      "locale": "ko",
+      "virtualFocus": true,
+      "tabResult": true,
+      "semanticLinkCount": 0,
+      "arrowFromLink": true,
+      "escapeRestored": true,
+      "focusedLinkEnter": "document",
+      "returnedInputEnter": "previously focused document",
+      "freshInputEnter": "search results",
+      "pageErrors": 0,
+      "developmentErrors": []
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "viewport": 390,
+      "locale": "ko",
+      "virtualFocus": true,
+      "tabResult": true,
+      "semanticLinkCount": 0,
+      "arrowFromLink": true,
+      "escapeRestored": true,
+      "focusedLinkEnter": "document",
+      "returnedInputEnter": "previously focused document",
+      "freshInputEnter": "search results",
+      "pageErrors": 0,
+      "developmentErrors": []
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "viewport": 390,
+      "locale": "ko",
+      "virtualFocus": true,
+      "tabResult": true,
+      "semanticLinkCount": 0,
+      "arrowFromLink": true,
+      "escapeRestored": true,
+      "focusedLinkEnter": "document",
+      "returnedInputEnter": "previously focused document",
+      "freshInputEnter": "search results",
+      "pageErrors": 1,
+      "developmentErrors": ["Next.js development stack-frame access check"]
+    }
+  ],
+  "initialCheck": "WebKit met keyboard assertions but the zero page errors assertion failed on development diagnostic access and Load failed. Final run separates keyboard assertions from developer diagnostics.",
+  "limitations": [
+    "Screen-reader speech, actual OS IME, Safari app, and physical devices were not tested",
+    "Proposed model is pending implementation"
+  ]
+}

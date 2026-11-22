@@ -1,0 +1,579 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "head": "c6465f48c96aef681a42de77a584b25e69fd8525",
+  "scope": "Existing dirty working tree; scan and plan only; no product source or config edits",
+  "cli": {
+    "version": "1.0.1",
+    "activeGuides": 38,
+    "activeRules": 52,
+    "approximateCorpusCoverage": "20%",
+    "rootFindings": 5,
+    "appsFindings": 0,
+    "packagesFindings": 0,
+    "keptRootFindings": 0,
+    "excludedRootFindings": [
+      {
+        "file": "scripts/analyze-vuln-radar-lockfile.mts",
+        "line": 116,
+        "reason": "Set conversion is required; non-Array rubric exclusion"
+      },
+      {
+        "file": "scripts/verify-modern-javascript-guidance.mjs",
+        "lines": [77, 103, 105, 126],
+        "reason": "Intentional semantic comparison fixtures, including sparse holes and executor synchrony"
+      }
+    ]
+  },
+  "browserObservations": {
+    "browser": "151.0.7922.34",
+    "scope": "isolated DOM with real source classes and compiled app CSS; not full route or OS assistive technology QA",
+    "focusNormal": {
+      "focused": true,
+      "outlineStyle": "none",
+      "outlineWidth": "1px",
+      "outlineColor": "rgb(153, 200, 255)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(255, 179, 179, 0.08) 0px 0px 0px 3px",
+      "borderColor": "oklab(0.838503 0.0841945 0.0291719 / 0.5)",
+      "fontSize": "14px"
+    },
+    "forcedBlur": {
+      "focused": false,
+      "outlineStyle": "none",
+      "outlineWidth": "3px",
+      "outlineColor": "rgb(0, 0, 0)",
+      "boxShadow": "none",
+      "borderColor": "rgb(0, 0, 0)",
+      "fontSize": "14px"
+    },
+    "forcedFocus": {
+      "focused": true,
+      "outlineStyle": "none",
+      "outlineWidth": "1px",
+      "outlineColor": "rgba(55, 0, 110, 0.8)",
+      "boxShadow": "none",
+      "borderColor": "rgba(55, 0, 110, 0.8)",
+      "fontSize": "14px"
+    },
+    "reducedMotion": [
+      {
+        "id": "skeleton",
+        "animationName": "pulse",
+        "animationDuration": "2s",
+        "transitionProperty": "all",
+        "transitionDuration": "0s"
+      },
+      {
+        "id": "gap",
+        "animationName": "none",
+        "animationDuration": "0s",
+        "transitionProperty": "width",
+        "transitionDuration": "0.2s"
+      },
+      {
+        "id": "sidebar",
+        "animationName": "none",
+        "animationDuration": "0s",
+        "transitionProperty": "left, right, width",
+        "transitionDuration": "0.2s"
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "M1",
+      "location": "packages/ui/components/ui/sidebar.tsx:225,236",
+      "status": "confirmed in actual app CSS isolated DOM",
+      "proposal": "Opt in to spatial transitions only for no-preference",
+      "reachability": "Docs category layout imports Sidebar; keyboard toggle changes state"
+    },
+    {
+      "id": "M2",
+      "location": "packages/ui/components/ui/skeleton.tsx:7",
+      "status": "confirmed package-level motion behavior",
+      "proposal": "motion-safe:animate-pulse; static default",
+      "reachability": "Exported package primitive; internal SidebarMenuSkeleton use; no direct current app rendering found"
+    },
+    {
+      "id": "M3",
+      "location": "apps/docs/shared/ui/document-thumbnail.tsx:18,35,72",
+      "status": "deprecation confirmed by installed Next docs and official documentation",
+      "proposal": "Remove unused priority wrapper prop or migrate explicit purpose; preserve lazy default",
+      "reachability": "All found callers omit priority; no measured LCP claim"
+    }
+  ],
+  "focusDecision": "Do not report complete focus loss: forced-colors removes shadow but UA border color still changes on focus. Explicit outline is optional hardening.",
+  "sourcePreservation": {
+    "filesHashed": 690,
+    "changed": [],
+    "selectedSha256": {
+      "packages/ui/components/ui/sidebar.tsx": "a1a97c1ad7a722f9091bb2d9a1670c2d5aca289f1e23a3cbc4a34c463e86ac0e",
+      "packages/ui/components/ui/skeleton.tsx": "5d56e13b440b4a07f40516c225038ba4b51682cd4c7368ecd0ae0ca49775494c",
+      "apps/docs/shared/ui/document-thumbnail.tsx": "98a3483fcc6da054943ede41f2fe5137d7c957138adc8bdd9a6415789e2c5c07",
+      "apps/vuln-radar/src/pages/feed/ui/feed-filter-bar.tsx": "790a0144209c97636a46b2b7d80b30d6b005016bc6f6c196b0f74587f0f7d70c",
+      "apps/vuln-radar/src/app/styles/global.css": "29ccd7058716429fa0f5019041c72cec5c680cf346d7b61d7cdd136252fe994c",
+      "apps/docs/app/css/global.css": "4aa70c8d764b26e62e6999c1485141c5d5fc43495cd8b81bbeef590e218e51e5",
+      "apps/docs/widgets/article-toc/model/use-active-heading.ts": "fe79093d2cf8f472aea80e558939c9d3042a9e3ed85baf8cdee58da72f3bb141"
+    }
+  },
+  "limitations": [
+    "Isolated DOM, not rendered React routes",
+    "Other engines, OS high contrast, assistive technology and physical devices not tested",
+    "No app build or full lint/typecheck rerun",
+    "No LCP/INP/CLS measurement",
+    "Scanner is partial and skips docs/tests/generated inputs"
+  ],
+  "initialFailure": "Chromium sandbox Mach port permission denied; completed after approved browser execution",
+  "records": {
+    "jira": "https://web-tech-service.atlassian.net/browse/KAN-83",
+    "jiraComment": "10125",
+    "confluenceKnowledge": "https://web-tech-service.atlassian.net/wiki/pages/19464193",
+    "knowledgeVersion": 5,
+    "operationsComment": "20250739"
+  },
+  "implementationStatus": "Proposed, not applied",
+  "implementation": {
+    "status": "locally applied and verified; uncommitted, unpushed, undeployed",
+    "date": "2026-11-21",
+    "authorizedBy": "User follow-up requesting implementation of the recommended plan",
+    "head": "c6465f48c96aef681a42de77a584b25e69fd8525",
+    "sourceSha256": {
+      "packages/ui/components/ui/sidebar.tsx": {
+        "before": "a1a97c1ad7a722f9091bb2d9a1670c2d5aca289f1e23a3cbc4a34c463e86ac0e",
+        "after": "df5dc27d18cbfcac000ee2dc00b788d86cc2ca726d333fa445fb9a3d18cc00fb"
+      },
+      "packages/ui/components/ui/skeleton.tsx": {
+        "before": "5d56e13b440b4a07f40516c225038ba4b51682cd4c7368ecd0ae0ca49775494c",
+        "after": "0a9e4f0dce6be36d5385d31cff2728308700f287a96d6da784e51db65e09fc2e"
+      },
+      "apps/docs/shared/ui/document-thumbnail.tsx": {
+        "before": "98a3483fcc6da054943ede41f2fe5137d7c957138adc8bdd9a6415789e2c5c07",
+        "after": "2a180c5a62b09d3ae99d953ea141531a77f5b230792382593c83e0ccb6441c8d"
+      }
+    },
+    "toolInstallation": {
+      "skillPath": ".agents/skills/modern-web-guidance/SKILL.md",
+      "source": "GoogleChrome/modern-web-guidance",
+      "sourceCommit": "64a6d708f5a43f2cd3fde5d4d7db3905ba1bdf65",
+      "cliVersion": "1.0.1",
+      "runner": "pnpx; tool cache, not app runtime dependency"
+    },
+    "checks": {
+      "uiBuild": "passed",
+      "uiTypecheck": "passed",
+      "uiLint": "passed",
+      "docsTypecheck": "passed",
+      "docsLint": "passed",
+      "finalPrimitiveHydrationTests": 32,
+      "finalPrimitiveHydrationStatus": "passed",
+      "intermediateUiSuiteTests": 68,
+      "intermediateUiSuiteStatus": "passed; before final duration condition refinement, not additive",
+      "finalLegacyScans": {
+        "packages/ui/components/ui": 0,
+        "apps/docs/shared/ui": 0,
+        "activeGuides": 38,
+        "activeRules": 52
+      },
+      "formatFiles": 9,
+      "formatStatus": "passed",
+      "documentationFiles": 6,
+      "documentationErrors": 0,
+      "documentationMode": "working-tree view; no staging",
+      "diffCheck": "passed"
+    },
+    "browserScope": "Real React source components and Next Image with actual app CSS; intercepted synthetic images, not full Next routes or physical devices",
+    "browserExecutions": 36,
+    "beforeAfterComparisons": [
+      {
+        "engine": "chromium",
+        "width": 390,
+        "preference": "no-preference",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "chromium",
+        "width": 390,
+        "preference": "reduce",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "chromium",
+        "width": 768,
+        "preference": "no-preference",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "chromium",
+        "width": 768,
+        "preference": "reduce",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "chromium",
+        "width": 1280,
+        "preference": "no-preference",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "chromium",
+        "width": 1280,
+        "preference": "reduce",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "firefox",
+        "width": 390,
+        "preference": "no-preference",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "firefox",
+        "width": 390,
+        "preference": "reduce",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "firefox",
+        "width": 768,
+        "preference": "no-preference",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "firefox",
+        "width": 768,
+        "preference": "reduce",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "firefox",
+        "width": 1280,
+        "preference": "no-preference",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "firefox",
+        "width": 1280,
+        "preference": "reduce",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "webkit",
+        "width": 390,
+        "preference": "no-preference",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "webkit",
+        "width": 390,
+        "preference": "reduce",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "webkit",
+        "width": 768,
+        "preference": "no-preference",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "webkit",
+        "width": 768,
+        "preference": "reduce",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "webkit",
+        "width": 1280,
+        "preference": "no-preference",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      },
+      {
+        "engine": "webkit",
+        "width": 1280,
+        "preference": "reduce",
+        "imageContractEqual": true,
+        "behaviorPassed": true
+      }
+    ],
+    "representativeReducedMotion": [
+      {
+        "phase": "before",
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "styles": [
+          {
+            "slot": "sidebar-gap",
+            "property": "width",
+            "duration": "0.2s"
+          },
+          {
+            "slot": "sidebar-container",
+            "property": "left, right, width",
+            "duration": "0.2s"
+          },
+          {
+            "slot": "sidebar-group-label",
+            "property": "margin, opacity",
+            "duration": "0.2s"
+          },
+          {
+            "slot": "sidebar-menu-button",
+            "property": "width, height, padding",
+            "duration": "0.15s"
+          },
+          {
+            "slot": "trigger-icon",
+            "property": "all",
+            "duration": "0s"
+          }
+        ],
+        "skeleton": {
+          "name": "pulse",
+          "count": 1
+        }
+      },
+      {
+        "phase": "after",
+        "engine": "chromium",
+        "version": "151.0.7922.34",
+        "styles": [
+          {
+            "slot": "sidebar-gap",
+            "property": "all",
+            "duration": "0s"
+          },
+          {
+            "slot": "sidebar-container",
+            "property": "all",
+            "duration": "0s"
+          },
+          {
+            "slot": "sidebar-group-label",
+            "property": "opacity",
+            "duration": "0.2s"
+          },
+          {
+            "slot": "sidebar-menu-button",
+            "property": "all",
+            "duration": "0s"
+          },
+          {
+            "slot": "trigger-icon",
+            "property": "all",
+            "duration": "0s"
+          }
+        ],
+        "skeleton": {
+          "name": "none",
+          "count": 0
+        }
+      },
+      {
+        "phase": "before",
+        "engine": "firefox",
+        "version": "153.0",
+        "styles": [
+          {
+            "slot": "sidebar-gap",
+            "property": "width",
+            "duration": "0.2s"
+          },
+          {
+            "slot": "sidebar-container",
+            "property": "left, right, width",
+            "duration": "0.2s"
+          },
+          {
+            "slot": "sidebar-group-label",
+            "property": "margin, opacity",
+            "duration": "0.2s"
+          },
+          {
+            "slot": "sidebar-menu-button",
+            "property": "width, height, padding",
+            "duration": "0.15s"
+          },
+          {
+            "slot": "trigger-icon",
+            "property": "all",
+            "duration": "0s"
+          }
+        ],
+        "skeleton": {
+          "name": "pulse",
+          "count": 1
+        }
+      },
+      {
+        "phase": "after",
+        "engine": "firefox",
+        "version": "153.0",
+        "styles": [
+          {
+            "slot": "sidebar-gap",
+            "property": "all",
+            "duration": "0s"
+          },
+          {
+            "slot": "sidebar-container",
+            "property": "all",
+            "duration": "0s"
+          },
+          {
+            "slot": "sidebar-group-label",
+            "property": "opacity",
+            "duration": "0.2s"
+          },
+          {
+            "slot": "sidebar-menu-button",
+            "property": "all",
+            "duration": "0s"
+          },
+          {
+            "slot": "trigger-icon",
+            "property": "all",
+            "duration": "0s"
+          }
+        ],
+        "skeleton": {
+          "name": "none",
+          "count": 0
+        }
+      },
+      {
+        "phase": "before",
+        "engine": "webkit",
+        "version": "26.5",
+        "styles": [
+          {
+            "slot": "sidebar-gap",
+            "property": "width",
+            "duration": "0.2s"
+          },
+          {
+            "slot": "sidebar-container",
+            "property": "left, right, width",
+            "duration": "0.2s"
+          },
+          {
+            "slot": "sidebar-group-label",
+            "property": "margin, opacity",
+            "duration": "0.2s"
+          },
+          {
+            "slot": "sidebar-menu-button",
+            "property": "width, height, padding",
+            "duration": "0.15s"
+          },
+          {
+            "slot": "trigger-icon",
+            "property": "all",
+            "duration": "0s"
+          }
+        ],
+        "skeleton": {
+          "name": "pulse",
+          "count": 1
+        }
+      },
+      {
+        "phase": "after",
+        "engine": "webkit",
+        "version": "26.5",
+        "styles": [
+          {
+            "slot": "sidebar-gap",
+            "property": "all",
+            "duration": "0s"
+          },
+          {
+            "slot": "sidebar-container",
+            "property": "all",
+            "duration": "0s"
+          },
+          {
+            "slot": "sidebar-group-label",
+            "property": "opacity",
+            "duration": "0.2s"
+          },
+          {
+            "slot": "sidebar-menu-button",
+            "property": "all",
+            "duration": "0s"
+          },
+          {
+            "slot": "trigger-icon",
+            "property": "all",
+            "duration": "0s"
+          }
+        ],
+        "skeleton": {
+          "name": "none",
+          "count": 0
+        }
+      }
+    ],
+    "imageContract": {
+      "comparedCases": 18,
+      "equalCases": 18,
+      "loading": "lazy",
+      "sizes": "192px",
+      "renderedSize": [192, 128],
+      "imagePreloads": 0,
+      "successAndFallbackDecoded": true,
+      "fallbackFailureRemovesImage": true,
+      "allPageErrors": 0
+    },
+    "harnessCorrections": [
+      "Next build-time environment injection and official ESM Image entry point required for standalone bundling",
+      "Use a correctly sized synthetic image: srcset density correction makes a 1px image report naturalWidth 0",
+      "Compare final no-rotation geometry: Motion may serialize identity as none and CSS as an identity matrix"
+    ],
+    "limitations": [
+      "Playwright WebKit is not physical Safari or an iOS device",
+      "Synthetic intercepted images and components, not complete Next routes or production deployment",
+      "No LCP/INP/CLS or real screen-reader/OS high-contrast measurement"
+    ],
+    "commonInstructions": "Unchanged locally; no remote instruction change performed",
+    "workRecords": {
+      "jiraComment": "10126",
+      "operationsComment": "20250739",
+      "knowledgePage": "19464193",
+      "knowledgeVersion": 8,
+      "operationsCommentVersion": 2,
+      "knowledgeReRead": true
+    },
+    "preservation": {
+      "existingFiles": 2339,
+      "intendedChanges": 9,
+      "otherFilesUnchanged": 2330,
+      "unexpectedChanges": [],
+      "indexUnchanged": true,
+      "headUnchanged": true
+    },
+    "localCommit": {
+      "source": "545428a4",
+      "sourceFiles": 3,
+      "authorizedBy": "User requested committing the current work before the next task",
+      "scope": "Current frontend code and six related sanitized record/index files only",
+      "push": "not performed",
+      "commitChecks": "staged format/docs/publication and actual hooks passed; prior browser results were not rerun for commit"
+    }
+  }
+}

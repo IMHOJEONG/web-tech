@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { type ReactNode, useId } from "react";
 import type {
   FeedFilters,
   FeedKevFilter,
@@ -16,6 +16,7 @@ interface FeedFilterBarProps {
     all: string;
     kevOnly: string;
     priority: string;
+    searchLabel: string;
     searchPlaceholder: string;
     severity: string;
     title: string;
@@ -35,11 +36,19 @@ export function FeedFilterBar({
   onFiltersChange,
   resultCount,
 }: FeedFilterBarProps) {
+  const titleId = useId();
+
   return (
-    <section className="rounded-sm border border-radar-border/70 bg-radar-panel px-4 py-4 shadow-[0_20px_48px_rgba(0,0,0,0.22)] backdrop-blur">
+    <search
+      aria-labelledby={titleId}
+      className="rounded-sm border border-radar-border/70 bg-radar-panel px-4 py-4 shadow-[0_20px_48px_rgba(0,0,0,0.22)] backdrop-blur"
+    >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <p className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-radar-copy/70">
+          <p
+            id={titleId}
+            className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-radar-copy/70"
+          >
             {labels.title}
           </p>
           <p className="mt-2 font-mono text-xs text-radar-copy/62">
@@ -50,9 +59,14 @@ export function FeedFilterBar({
         </div>
 
         <label className="grid w-full gap-2 lg:max-w-[360px]">
-          <span className="sr-only">{labels.searchPlaceholder}</span>
+          <span className="text-sm font-medium text-radar-copy">
+            {labels.searchLabel}
+          </span>
           <input
             maxLength={120}
+            autoCorrect="off"
+            autoCapitalize="none"
+            spellCheck={false}
             value={filters.query}
             onChange={(event) =>
               onFiltersChange({
@@ -61,7 +75,7 @@ export function FeedFilterBar({
               })
             }
             placeholder={labels.searchPlaceholder}
-            className="min-h-11 rounded-sm border border-radar-border bg-radar-panel-strong px-3 text-sm text-white outline-none transition placeholder:text-radar-copy/38 focus:border-radar-primary/50 focus:shadow-[0_0_0_3px_rgba(255,179,179,0.08)]"
+            className="min-h-11 rounded-sm border border-radar-border bg-radar-panel-strong px-3 text-sm text-white transition placeholder:text-radar-copy/38 focus:border-radar-primary/50 focus:shadow-[0_0_0_3px_rgba(255,179,179,0.08)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-radar-primary forced-colors:focus-visible:outline-[CanvasText]"
           />
         </label>
       </div>
@@ -118,7 +132,7 @@ export function FeedFilterBar({
           ))}
         </FilterGroup>
       </div>
-    </section>
+    </search>
   );
 }
 
@@ -151,7 +165,7 @@ function FilterPill({
   return (
     <button
       type="button"
-      className="inline-flex min-h-9 shrink-0 items-center rounded-sm border border-radar-border bg-radar-panel-muted px-3 font-mono text-[0.72rem] text-radar-copy/72 transition hover:-translate-y-px hover:border-radar-primary/28 hover:text-radar-primary data-[active=true]:border-radar-success/36 data-[active=true]:bg-radar-success/10 data-[active=true]:text-radar-success"
+      className="inline-flex min-h-9 shrink-0 items-center rounded-sm border border-radar-border bg-radar-panel-muted px-3 font-mono text-[0.72rem] text-radar-copy/72 transition-colors motion-safe:transition motion-safe:hover:-translate-y-px hover:border-radar-primary/28 hover:text-radar-primary data-[active=true]:border-radar-success/36 data-[active=true]:bg-radar-success/10 data-[active=true]:text-radar-success"
       data-active={active}
       aria-pressed={active}
       onClick={onClick}
