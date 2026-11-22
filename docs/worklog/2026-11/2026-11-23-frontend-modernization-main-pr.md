@@ -49,10 +49,26 @@ GitHub 연결 도구의 리뷰 작성403은 CLI로 처리하고 실제 두 인�
 
 ec45bffd 푸시·훅 통과와 두 리뷰 스레드의 해결 상태를 재조회했다. CI359의 반응형 세 작업은 모두 성공했지만 본문 프리페치 소비자1개가 viewport 조건을 빠뜨려 추가 보완했다. 로컬 전체 본문 검사에서 hidden fallback h1까지 고르는 카테고리 선택자2개도 발견해 노출된 의미 구조로 좁혔다. 보완 후 전체 합성 본문 suite는198통과·0실패·기존2생략이다. 첫 후속 커밋은 기존 합성 인증 리터럴이 공개 검사에 걸려 생성되지 않았고, 해당 테스트를 공통 fixture helper로 정리한 뒤 소비자10개도 통과했다. 새 커밋/푸시·최종 원격 판정은 [같은 보고서](../../verification/integration/2026-11-23-frontend-modernization-pr-review.md)에 연결한다.
 
+### 사용자 승인 후 squash 병합 사전검사
+
+2026-11-23 KST에 사용자가 PR111의 최종 확인과 main squash 병합을 승인했다. 최종 head a490e7f1·CI360/문서/컨테이너/CodeQL/보안/Preview 성공, 기존 리뷰2건 해결과 CLEAN을 확인하고 Draft를 해제했다. GitHub 연결 도구의 쓰기 권한 오류는 CLI ready 전환으로 처리했다. 최종 메시지 전체의 strict commitlint는 통과했다.
+
+Ready 전환 뒤 공식 CodeRabbit App347564의 check137279377986이 같은 head에서 SKIPPED가 됐다. 제목은 `Review skipped: 116 files exceed the limit of 100`이다. 기존 [squash 사전검사](../../process/squash-merge-preflight.md)는 정확한 quota NEUTRAL만 예외로 허용하고 일반 SKIPPED는 차단한다. `pnpm pr:squash` check-only가 이 조건에서 중단됐으며 --merge·직접 gh merge·규칙 변경은 실행하지 않았다. PR은 OPEN/Ready, main 미병합이다. 파일 수 제한의 명시적 예외 보완 또는 PR 분할에 대한 사용자 판단이 필요하다.
+
+새 개념이 아니라 기존 병합 정책의 적용이며 별도 지식 문서를 만들지 않는다. Jira·Confluence에 실제 차단 조건과 PR/head를 연결한다. 공통 지침의 새 로컬/원격 변경은 없다. 이 병합 시도 기록만 로컬 미커밋으로 남겨 검증한 head를 변경하지 않는다.
+
+### 승인된 파일 수 제한 예외 보완
+
+사용자가 공식 CodeRabbit의 파일 수 제한만 검증된 예외로 추가하고 병합을 계속하도록 승인했다. App347564·현재 head·단일 체크·완료 SKIPPED·정확한 제목과 summary를 검증한다. 100보다 큰 안전한 정수 보고 수가 PR 전체 변경 수 이하인지 확인하고 실제116/118을 따로 감사한다. 기존 quota NEUTRAL·다른 CI·전체 메시지·head 고정과 보호 규칙을 유지한다. [ADR-0037](../../architecture/adr-0037-coderabbit-file-limit-exception.md)과 [정제 검증](../../verification/resilience/2026-11-23-coderabbit-file-limit.md)에 결정·근거를 연결한다.
+
+전용 회귀96개·저장소 회귀339개 모두 통과, 실패·생략0개이며 타입 검사도 통과했다. a490e7f1 읽기 전용 사전검사에서 실제 공식 체크137279377986·보고116/전체118을 검증했다. 봇 리뷰는 수행되지 않았다. 새 커밋 푸시 후 같은 head의 CI·병합 사전검사·실제 main 병합을 순서대로 확인한다. 이 기록 시점에는 main 미병합이며 운영 검증·VoiceOver는 수행하지 않았다.
+
+새 운영 판단은 기존 Confluence의 리뷰 한도 주제를 우선 찾아 갱신한다. 공통 AGENTS 지침은 바꾸지 않으며 squash 운영 절차와 부분 대체 ADR을 이번 브랜치에서 변경한다. 원격 반영은 푸시·병합 후 별도로 확인한다.
+
 ## Open Questions
 
-리뷰와 로컬 회귀를 보완한 후 새 원격 SHA의 CI 결과를 확인한다. main 병합·운영 배포·실서비스 CWV·실기기·VoiceOver 후속은 이번 준비 범위 밖이다. 기존 PR의 종료·브랜치 삭제·원본 이력 재작성은 수행하지 않는다.
+새 원격 head의 CI와 실제 main 병합·같은 SHA의 main CI 및 배포 상태를 구분해 확인한다. 운영 smoke·실서비스 CWV·실기기·VoiceOver 후속은 미검증으로 남긴다. 기존 PR 종료·브랜치 삭제·원본 이력 재작성은 수행하지 않는다.
 
 ## Next
 
-사용자 요청 범위의 수정·정제 기록만 커밋·푸시하고 새 SHA의 CI를 확인한다. 원격 결과는 PR·Jira·Confluence에서 동일 SHA로 연결한다. 병합은 별도 사용자 승인 후 저장소의 squash 사전검사를 따른다.
+승인 범위의 수정·정제 기록을 커밋·푸시하고 새 SHA의 CI를 확인한다. 사용자 병합 승인에 따라 저장소의 squash 사전검사를 거쳐 main에 병합하고 원격 결과를 PR·Jira·Confluence에 연결한다.

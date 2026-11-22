@@ -58,9 +58,21 @@ mise exec -- pnpm pr:squash \
 - 해당 체크의 제목이 정확히 `Review rate limited`, summary 첫 줄이 `Result: Rate limited - Review rate limited`다. PR 댓글의 문구나 체크 이름만으로 판정하지 않는다.
 - 출력의 `checkExceptions`에 check-run ID·head·사유·`reviewPerformed: false`를 기록한다. 리뷰가 성공하거나 실제 수행됐다고 표시하지 않는다.
 
-다른 CI·보안 검사·리뷰의 FAILURE, 일반 SKIPPED, 다른 사유의 NEUTRAL, 조회 권한/네트워크/JSON 오류는 여전히 차단한다. 공식 App이나 보고 형식이 바뀌면 자동으로 허용하지 않고 실제 원본을 다시 확인해 테스트와 정책을 갱신한다. GitHub branch protection·required checks·리뷰 승인 요건을 변경하거나 우회하지 않는다. 서버의 필수 규칙은 이 로컬 예외보다 우선한다.
+아래의 검증된 파일 수 제한 외에 다른 CI·보안 검사·리뷰의 FAILURE, 일반 SKIPPED, 다른 사유의 NEUTRAL, 조회 권한/네트워크/JSON 오류는 여전히 차단한다. 공식 App이나 보고 형식이 바뀌면 자동으로 허용하지 않고 실제 원본을 다시 확인해 테스트와 정책을 갱신한다. GitHub branch protection·required checks·리뷰 승인 요건을 변경하거나 우회하지 않는다. 서버의 필수 규칙은 이 로컬 예외보다 우선한다.
 
 리뷰 한도는 자동 코드 검토가 **수행되지 않았음**을 뜻한다. 실제 지적 사항은 기존 검토·수동 코드 리뷰로 확인해야 하고, 사람의 변경 요청이나 미해결 리뷰를 무시할 근거가 아니다. 결정 배경은 [ADR-0024](../architecture/adr-0024-advisory-review-rate-limit.md)를 따른다.
+
+### CodeRabbit 파일 수 제한 예외
+
+2026-11-23 사용자 승인으로 공식 CodeRabbit의 파일 수 제한도 좁은 예외로 추가한다. PR #111의 실제 SKIPPED를 확인한 후 승인한 범위이며 임의 skip 허용이 아니다.
+
+- 비성공 항목이 정확히 하나이며 이름 CodeRabbit·상태 COMPLETED·결론 SKIPPED여야 한다. 다른 독립 검사는 모두 성공해야 한다.
+- 동일 head의 REST check-runs 모든 페이지에서 단일 체크·양의 정수 ID·공식 App347564/slug·owner coderabbitai를 확인한다. quota 예외와 동일한 신원 검증을 유지한다.
+- 제목은 정확히 `Review skipped: N files exceed the limit of 100`, summary 첫 줄은 정확히 `Result: Skipped - Review skipped: N files exceed the limit of 100`이어야 한다.
+- N은 안전한 정수이며 100보다 커야 한다. PR head와 함께 조회한 전체 changedFiles도 안전한 정수이며 N 이상이어야 한다. 실제 관측은 서비스116개·전체118개로 두 집계를 같다고 가정하지 않는다. 문구의 숫자만 신뢰하거나 미래의 다른 제한을 자동 허용하지 않는다.
+- checkExceptions에 check-run ID·head·reason=coderabbit-review-file-limit·reportedFiles·changedFiles·fileLimit=100·reviewPerformed=false를 기록한다. 일반 SKIPPED·다른 실패/neutral·중복 체크·조회 오류는 차단한다.
+
+최종 메시지·검토한 head 고정·승인/리뷰·보호 규칙과 기존 quota NEUTRAL 검증은 그대로다. 새 무시 flag·admin·auto merge를 추가하지 않는다. [ADR-0037](../architecture/adr-0037-coderabbit-file-limit-exception.md) · [검증](../verification/resilience/2026-11-23-coderabbit-file-limit.md)
 
 ### 무료 대체 리뷰 도구
 

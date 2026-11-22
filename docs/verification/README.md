@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-23 CodeRabbit 파일 수 제한 예외](resilience/2026-11-23-coderabbit-file-limit.md) — 엄격한 증거 검증과 일반 skip 차단 유지.
+
 - [11-23 프런트엔드 현대화 PR 리뷰 보완](integration/2026-11-23-frontend-modernization-pr-review.md) — CI 실패 원인·리뷰 수정·새 head 재검증.
 
 - [11-22 Feed 렌더링 지연 실험](performance/2026-11-22-feed-offscreen-rendering.md) — 초기/스크롤 trace·키보드 비교 후 적용 보류.

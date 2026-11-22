@@ -591,11 +591,11 @@
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "db770cce25d173b852480f01118d0250c9ebccc950e9a430ab3cba7a9a674719",
+      "sha256": "2bed4736c1f700739a3e9b09ee45067a46302f73fd28be0539e51214f1e3f5f7",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
-      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -647,11 +647,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "bdc09b0f93f397468ff01bc18b24697fa1f83b51a91c25da2840542a10bb8f69",
+      "sha256": "3e2e704c3d952838157f7ea2754742086e996a93357c2655eb2704871e46eb9d",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
-      "note": "사용자가 PR #111 리뷰2건과 나머지 CI 실패 원인의 수정·정제 검증 기록 반영·커밋·푸시·새 CI 확인을 명시 요청했다. 해당 범위의 원인·기존 실패 이력·최종 로컬 집계·실제 근거 링크·소스 해시·정책 보완을 검수했다. 원시 로그·trace·캡처·실제 응답·키·개인 경로·비공개 글·다른 작업은 제외했다. 원격 CI 확인은 새 head로 구분하며 main 병합·운영 배포 승인은 아니다.",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -857,11 +857,11 @@
     },
     {
       "path": "docs/verification/artifacts/README.md",
-      "sha256": "a94292a30822e95305cc7b44a1f578c473e4200adbd5826d2dc838f6b012deab",
+      "sha256": "f4c71eee6d2fee97c59e28daf6cd1ab99bf39ef321f1cc2ce9bb7a47ee0cb669",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
-      "note": "사용자가 PR #111 리뷰2건과 나머지 CI 실패 원인의 수정·정제 검증 기록 반영·커밋·푸시·새 CI 확인을 명시 요청했다. 해당 범위의 원인·기존 실패 이력·최종 로컬 집계·실제 근거 링크·소스 해시·정책 보완을 검수했다. 원시 로그·trace·캡처·실제 응답·키·개인 경로·비공개 글·다른 작업은 제외했다. 원격 CI 확인은 새 head로 구분하며 main 병합·운영 배포 승인은 아니다.",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -3405,11 +3405,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-23-frontend-modernization-main-pr.md",
-      "sha256": "0b19ec10e11a17c11285b8e29965cf04fb54f241248f839732a831d6a1efd34b",
+      "sha256": "b85604dc1e918ab6cba86ed26a13e314a7518a1ce4c7a188638854522077234a",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
-      "note": "사용자가 PR111 리뷰·나머지 CI 실패 해결과 검증 기록의 커밋·푸시·새 CI 확인을 명시 요청한 범위. ec45bffd 원격 CI의197통과/프리페치1실패, 전체 로컬196통과/hidden fallback 선택2실패, 최종198통과/기존2생략의 정제 이력과 검사 소비자 보완을 검수했다. 원시 자료·비밀값·다른 작업·main 병합·운영 배포는 제외한다.",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -3438,6 +3438,76 @@
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
       "note": "사용자가 PR111 리뷰·나머지 CI 실패 해결과 검증 기록의 커밋·푸시·새 CI 확인을 명시 요청한 범위. ec45bffd 원격 CI의197통과/프리페치1실패, 전체 로컬196통과/hidden fallback 선택2실패, 최종198통과/기존2생략의 정제 이력과 검사 소비자 보완을 검수했다. 원시 자료·비밀값·다른 작업·main 병합·운영 배포는 제외한다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/adr-0024-advisory-review-rate-limit.md",
+      "sha256": "c568d260336619f244ccdc42d2ec6a052392d3d4e52f0244d3ffa7ffe54b8a12",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/adr-0037-coderabbit-file-limit-exception.md",
+      "sha256": "e5518981fac6175169b8202b5d749d00edfcc88cde99aee6da4b2c286f435f47",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/process/squash-merge-preflight.md",
+      "sha256": "9c97bd1e82d2c65b41ae9517125ff973c307c0c15a1196295a57b8a00116c3eb",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/resilience/2026-11-23-coderabbit-file-limit.md",
+      "sha256": "3d107eb313dadaed4324c73f3e064c84a0ed63b9b9bb12fe292bc2240a02d4f9",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-23-coderabbit-file-limit.json",
+      "sha256": "c2ed3aa0d1a813846f2a0375d76252c37908f63c764aa9014f6e0805cff7181f",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [11-23 CodeRabbit 파일 수 제한](2026-11-23-coderabbit-file-limit.json) — 공식 체크·두 파일 집계·사전검사·회귀와 소스 해시.
+
 - [11-23 프런트엔드 현대화 PR 리뷰 보완](2026-11-23-frontend-modernization-pr-review.json) — 정제된 원인·검사·소스 해시.
 
 - [11-22 Feed 화면 밖 렌더링](2026-11-22-feed-offscreen-rendering.json) — 보정·20실행·12조건·소스와 trace 해시.

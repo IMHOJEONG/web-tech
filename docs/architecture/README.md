@@ -6,6 +6,8 @@
 
 ## ADR 상태
 
+- [ADR-0037: CodeRabbit 파일 수 제한 예외](adr-0037-coderabbit-file-limit-exception.md): PR 브랜치 적용. 공식 App·동일 head·PR 파일 수와 정확한 제한 응답의 상관 검증.
+
 - [ADR-0035: 검색 결과의 실제 링크 포커스](adr-0035-docs-search-drawer-link-focus.md): 적용 중. ADR-0031의 combobox·결과 포커스 항목을 부분 대체하며 입력 Enter와 링크 탐색을 분리한다. main·운영 반영은 이 PR 이후 확인한다.
 
 - [ADR-0036: 비공개 콘텐츠 Git의 초안 작성](adr-0036-private-git-draft-authoring.md): 적용 중. 초안·발행 원문 위치와 비공개 저장/공개 게시 승인 경계를 지침 전용 PR에서 검토. 기본 브랜치 반영·초안 이전·개발 preview 연결·운영 변경은 미실행.
