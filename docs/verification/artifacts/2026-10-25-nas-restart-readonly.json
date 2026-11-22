@@ -1,0 +1,127 @@
+{
+  "checkedAt": "2026-10-25T14:21:48.279Z",
+  "base": "https://api.heap-forge.app",
+  "tokenConfigured": true,
+  "mode": "read-only; no redirects, retries, cache invalidation or NAS writes",
+  "checks": [
+    {
+      "path": "/api/posts",
+      "status": 401,
+      "milliseconds": 3822,
+      "contentType": "application/json; charset=utf-8",
+      "cacheControl": null,
+      "vary": null,
+      "cfCacheStatus": "DYNAMIC",
+      "bytes": 66,
+      "authorizationMode": "none"
+    },
+    {
+      "path": "/api/posts",
+      "status": 401,
+      "milliseconds": 822,
+      "contentType": "application/json; charset=utf-8",
+      "cacheControl": null,
+      "vary": null,
+      "cfCacheStatus": "DYNAMIC",
+      "bytes": 66,
+      "authorizationMode": "invalid-test-token"
+    },
+    {
+      "path": "/health",
+      "status": 200,
+      "milliseconds": 421,
+      "contentType": "application/json; charset=utf-8",
+      "cacheControl": null,
+      "vary": null,
+      "cfCacheStatus": "DYNAMIC",
+      "bytes": 40,
+      "authorizationMode": "none"
+    },
+    {
+      "path": "/api/posts",
+      "status": 200,
+      "milliseconds": 749,
+      "contentType": "application/json; charset=utf-8",
+      "cacheControl": "private, no-store",
+      "vary": "Authorization",
+      "cfCacheStatus": "DYNAMIC",
+      "bytes": 364,
+      "resultsCount": 1,
+      "publishedPaths": ["feed/pna"],
+      "authorizationMode": "configured-token"
+    },
+    {
+      "path": "/posts/web/browser",
+      "status": 404,
+      "milliseconds": 447,
+      "contentType": "application/json; charset=utf-8",
+      "cacheControl": "private, no-store",
+      "vary": "Authorization",
+      "cfCacheStatus": "DYNAMIC",
+      "bytes": 65,
+      "authorizationMode": "configured-token"
+    },
+    {
+      "path": "/posts/feed/pna",
+      "status": 200,
+      "milliseconds": 443,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "private, no-store",
+      "vary": "Authorization",
+      "cfCacheStatus": "DYNAMIC",
+      "bytes": 8490,
+      "articleElement": true,
+      "h1Count": 0,
+      "codeBlocks": 3,
+      "authorizationMode": "configured-token"
+    },
+    {
+      "path": "/posts/web/nas-readonly-verification-not-found-20261025",
+      "status": 404,
+      "milliseconds": 434,
+      "contentType": "application/json; charset=utf-8",
+      "cacheControl": "private, no-store",
+      "vary": "Authorization",
+      "cfCacheStatus": "DYNAMIC",
+      "bytes": 65,
+      "authorizationMode": "configured-token"
+    }
+  ],
+  "healthFollowup": {
+    "checkedAt": "2026-10-25",
+    "status": 200,
+    "body": {
+      "service": "docs-backend",
+      "status": "ok"
+    }
+  },
+  "assessment": {
+    "serviceResponding": true,
+    "authenticatedIndexCount": 1,
+    "h1PolicyVerified": false,
+    "runningImageRevisionVerified": false,
+    "externalHealthBlocked": false,
+    "expectedImageTag": "ghcr.io/imhojeong/web-tech-docs-backend:sha-f8fbc068d633796d64343ea01aabee0e35a3f32c",
+    "expectedImageDigest": "sha256:301b9290d059a5f4da6053a61f56735ee56223925edd9c7046f2785711b36609",
+    "limitations": [
+      "No NAS SSH, container inspect or private logs available.",
+      "No document modification or revalidation webhook performed.",
+      "web/browser 404 alone cannot determine whether the image is old, content fails validation, or file/volume is missing.",
+      "External health exposes service/status only in this response; still conflicts with existing reverse-proxy policy."
+    ]
+  },
+  "operatorReportedImageFollowup": {
+    "date": "2026-10-25",
+    "source": "user-provided docker compose images docs-backend output",
+    "container": "docs-backend-docs-backend-1",
+    "repository": "ghcr.io/imhojeong/web-tech-docs-backend",
+    "tag": "sha-f8fbc068d633796d64343ea01aabee0e35a3f32c",
+    "platform": "linux/amd64",
+    "localImageId": "068f637c1e1d",
+    "expectedTagMatches": true,
+    "expectedPlatformMatches": true,
+    "registryManifestDigestIndependentlyVerified": false,
+    "h1PolicyRuntimeSampleVerified": false,
+    "next": "Inspect web/browser rejection warnings and content status/file/volume; do not infer an old image or Vercel cache as the cause from HTTP 404 alone."
+  }
+}
