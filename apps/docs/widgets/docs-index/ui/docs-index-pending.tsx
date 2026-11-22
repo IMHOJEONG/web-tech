@@ -8,6 +8,10 @@ import { DocsSearchPanel } from './docs-search-panel'
 import { DocsIndexActiveFilters } from './docs-index-active-filters'
 import { DocsIndexControlsBar } from './docs-index-controls-bar'
 import {
+    docsIndexCardContent,
+    docsIndexCardSpacing,
+} from './docs-index-card-layout'
+import {
     journalPageLayout,
     journalListLayout,
 } from '~/shared/ui/journal-layout'
@@ -77,17 +81,19 @@ export async function DocsIndexPending({
                         className={`${journalListLayout} motion-safe:animate-pulse`}
                     >
                         {[0, 1, 2].map((i) => (
-                            <div key={i} className="py-6">
-                                <div className="flex flex-col gap-4 md:flex-row md:justify-between">
-                                    <div className="min-w-0 flex-1 space-y-3">
-                                        <SkeletonBlock className="h-4 w-36" />
-                                        <SkeletonBlock className="h-12 w-4/5 md:h-7" />
-                                        <div className="space-y-2">
-                                            <SkeletonBlock className="h-4 w-full" />
-                                            <SkeletonBlock className="h-4 w-4/5" />
-                                        </div>
-                                        <SkeletonBlock className="h-7 w-3/4" />
+                            <div
+                                key={i}
+                                className={docsIndexCardSpacing}
+                                data-skeleton-anchor="docs-card"
+                            >
+                                <div className={docsIndexCardContent}>
+                                    <SkeletonBlock className="h-4 w-36" />
+                                    <SkeletonBlock className="h-12 w-4/5 md:h-7" />
+                                    <div className="space-y-2">
+                                        <SkeletonBlock className="h-4 w-full" />
+                                        <SkeletonBlock className="h-4 w-4/5" />
                                     </div>
+                                    <SkeletonBlock className="h-7 w-3/4" />
                                 </div>
                             </div>
                         ))}

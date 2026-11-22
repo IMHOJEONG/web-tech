@@ -122,6 +122,30 @@ status: "draft"
 
 비공개 Git에도 비밀값·실제 API 응답·원시 로그·HAR/pcap·원본 캡처·녹화본·DB dump는 넣지 않는다. 필요한 공개 도식·검증 요약은 원시 자료와 분리하고 별도 검수한다.
 
+### 저장소 밖 초안의 로컬 미리보기
+
+초안과 원고는 비공개 `heap-forge-content` 폴더에서 작성하고 그 폴더의 `AGENTS.md`를 먼저 확인한다. 공개 앱 checkout으로 원문을 복사하지 않는다. 콘텐츠 폴더 아래의 `category/...` 또는 `data/...` 구조를 유지하고 개발 서버에만 절대 경로를 전달한다.
+
+```sh
+DOCS_LOCAL_DRAFT_ROOT="$DRAFT_CONTENT_ROOT" \
+pnpm --filter docs dev --hostname 127.0.0.1
+```
+
+`/ko/preview/category/...` 또는 `/ko/preview/data/...`에서 확인한다. `DRAFT_CONTENT_ROOT`는 실제 콘텐츠 폴더의 절대 경로이며 이 값을 공개 로그·문서·채팅에 기록하지 않는다. 서버를 다시 실행할 때 경로를 다시 전달한다. 설정이 없으면 기존 콘텐츠 root 해석을 유지하고 상대 경로는 오류로 중단한다.
+
+이 설정은 development의 draft 미리보기에만 적용된다. production·test에서는 root를 해석하기 전에 미리보기를 거부한다. published·archived·경로 순회·심볼릭 링크 파일은 허용하지 않는다. 공개 목록·검색·사이트맵·운영의 고정 발행본·검수 목록은 바뀌지 않으며 미리보기 확인이 게시 승인을 뜻하지 않는다.
+
+`private-git` 모드의 앱 부팅에는 기존대로 검증된 발행본 준비가 필요하다. 외부 초안 root는 이 준비 절차를 대체하지 않는다. 발행본이 없는 합성 검사에서는 별도의 legacy 개발 모드와 합성 초안만 사용하며 운영 설정을 변경해 해결하지 않는다.
+
+원고가 앱 폴더 밖에 있으면 Prettier가 앱과 다른 설정을 찾을 수 있다. 본문 코드의 원문 보존이 필요하면 앱 설정을 명시하고 내장 언어 포맷만 끈 뒤 원문 바인딩·타입·실행 검사를 다시 한다.
+
+```sh
+pnpm exec prettier --config "$APP_PRETTIER_CONFIG" \
+  --embedded-language-formatting off --write "$ARTICLE_FILE"
+```
+
+`APP_PRETTIER_CONFIG`는 앱의 `.prettierrc.yaml`을 가리킨다. 이 옵션은 코드 검사나 공개 검수를 생략하는 설정이 아니다.
+
 ### Unfinished Work Markers
 
 작성 중인 상태는 본문에 `작성중`, `WIP`, `TODO` 같은 편집 메모를 넣어 표현하지 않는다. frontmatter의 `status`가 문서 공개 상태의 유일한 기준이다.

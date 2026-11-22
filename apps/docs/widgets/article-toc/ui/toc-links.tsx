@@ -36,7 +36,7 @@ export function TocLinks({
                             data-toc-depth={heading.depth}
                             onClick={(event) => onNavigate(event, heading.href)}
                             className={cn(
-                                'ds-focus-ring relative -ms-px flex min-h-11 items-start gap-2 border-s-2 border-transparent pe-2 font-body text-[0.8125rem] leading-6 text-on-surface-variant no-underline transition-colors duration-150 hover:bg-surface-container-low hover:text-on-surface motion-reduce:transition-none motion-reduce:duration-0 lg:min-h-9',
+                                'ds-focus-ring relative -ms-px flex min-h-11 items-center gap-2 border-s-2 border-transparent pe-2 font-body text-[0.8125rem] leading-6 text-on-surface-variant no-underline transition-colors duration-150 hover:bg-surface-container-low hover:text-on-surface motion-reduce:transition-none motion-reduce:duration-0 lg:min-h-9',
                                 indentation[level],
                                 tight ? 'py-0.5' : 'py-1.5',
                                 active &&

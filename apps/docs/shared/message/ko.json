@@ -413,6 +413,7 @@
     "docsIndex": {
         "discovery": {
             "more": "다른 문서 찾아보기",
+            "description": "분류, 태그, 문서 모음으로 찾아보세요.",
             "recommendations": "추천 검색어",
             "tags": "태그로 찾기",
             "allTags": "전체 태그",
@@ -448,8 +449,8 @@
         },
         "stats": {
             "totalDocs": "Total Docs",
-            "sections": "Sections",
-            "latestUpdate": "Latest Update",
+            "sections": "분류",
+            "latestUpdate": "최근 수정",
             "pending": "업데이트 준비 중"
         },
         "filters": {
@@ -484,7 +485,7 @@
         "sections": {
             "eyebrow": "Section Overview",
             "title": "주제별 문서 모음",
-            "toCategory": "category 보기",
+            "toCategory": "전체 분류 보기",
             "documentCount": "문서 {count}개",
             "latestPrefix": "최근"
         },

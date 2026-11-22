@@ -82,6 +82,25 @@ PR #91 리뷰에서 위치 판정 6개가 표준 CI 대상에서 빠진 점과 �
 
 후속 검사는 `b382b96a9b553a2450c028842b43cbf0edf9e89b` 위에 테스트 위치와 이 정제 문서만 보완한 **미커밋 작업 트리**에서 실행했다. `pnpm --filter docs test:lib`는 기존 358개와 위치 판정 6개를 합친 364개 모두 통과했고, 해당 테스트 ESLint도 통과했다. 이 후속 결과를 앞선 SHA에서 실행한 것처럼 소급 기록하지 않는다. 보완 커밋의 원격 CI와 main 병합·Production 배포는 이후 실제 SHA로 Jira·Confluence에 연결한다.
 
+## 2026-11-20 후속: 항목 내 텍스트 세로 정렬
+
+기준 main `2728665e5c8aca9496471fda100999c3f8dda0b6` 위의 별도 `codex/docs-toc-alignment-20261120` 미커밋 수정본이다. 공개 운영 글의 Chromium DOM을 390·768·1280px 폭에서 읽기 전용으로 측정했다. 같은 계층의 텍스트 시작 좌표는 일치했지만 모바일·태블릿 한 줄 항목의 텍스트 박스 중심이 링크 박스 중심보다 4px 위에 있었다. `min-height: 44px`·24px line-height·위아래 padding 각 6px에 `align-items: flex-start`가 적용돼 남는 8px이 아래에만 놓인 결과다. 글꼴의 광학적 중심이나 모든 기기의 픽셀을 일반화한 측정은 아니다.
+
+`TocLinks`의 `items-start`를 `items-center`로 바꾸고 색·padding·최소 높이·계층별 들여쓰기·앵커 동작은 유지했다. 실제 NAS·비공개 원문·키 없이 기존 합성 입력 생성기에서 테스트가 쓰는 문서 2개만 빈 경로에 생성해 확인했다. 처음 전체 corpus 생성은 기존 디렉터리 보호 검사에서 쓰기 전에 차단됐으며 이를 우회하거나 기존 문서를 이동하지 않았다. 준비가 되지 않은 첫 서버 실행은 중지했으며 제품 assertion 실패로 분류하지 않는다. 완료 후 두 생성 파일의 bytes 일치를 확인해 정리했다.
+
+```sh
+DOCS_E2E_PORT=3076 DOCS_CONTENT_SOURCE=legacy pnpm --filter docs test:e2e article-toc-navigation.spec.ts --workers=2 --retries=0 --output=/private/tmp/docs-toc-alignment-results-20261120
+pnpm --filter docs exec eslint widgets/article-toc/ui/toc-links.tsx e2e/article-toc-navigation.spec.ts --max-warnings 0
+```
+
+브라우저 명령에는 기존 합성 corpus의 event-loop·Brotli 문서가 필요하다. CI는 기존 준비 단계를 사용하며, 로컬에서는 생성기의 `syntheticDocumentSource`를 쓰되 대상이 없음을 먼저 검사하고 기존 파일을 덮어쓰지 않는다. 생성·검사 입력은 게시 대상이나 콘텐츠 이전이 아니다.
+
+기본 root 16px·큰 글자 24px에서 새 정렬 검사 6개와 기존 목차 검사를 합쳐 **20개 통과·1개 화면 범위 skip**, 실패·retry 0개, 31.6초였다. skip은 기존 데스크톱의 모바일 Escape 검사다. 각 링크/텍스트 박스 중심 차이 1px 이하·모바일 44px/데스크톱 36px의 rem 비례 최소 높이·동일 계층 시작선·H3 들여쓰기·가로 넘침을 검사했다. 라이트/다크·앵커·현재 항목·스크롤·Escape·reduced-motion의 기존 검사도 유지했다. 변경 코드 lint는 경고 0개로 통과했고 테스트 파일 포맷만 정리했다.
+
+공통 설정·검사 timeout/retry·기존 미커밋·stash·콘텐츠 lock은 변경하지 않았다. Safari/Firefox·실기기·광학적 글꼴 중심 검증과 원격 CI·커밋·푸시·배포는 미실행이다. 원시 화면·로그는 저장소 밖에 두며 공개 검수 해시는 갱신하지 않는다. [후속 작업 기록](../../worklog/2026-11/2026-11-20-toc-row-alignment.md)을 따른다.
+
+이후 사용자가 로컬 합성 문서 화면을 확인하고 이번 코드·회귀와 정제 문서 3개만 공개 검수·작업별 커밋·푸시하도록 승인했다. 검증 시점의 미실행 범위는 위와 같이 보존하며, 실제 커밋·푸시 결과는 연결된 작업 기록·KAN-72에서 구분한다. 3076 미리보기 서버 종료와 합성 입력 2개 정리를 확인했다. 새 원시 자료·실제 글·공통 설정은 포함하지 않고 PR 생성·병합·배포는 하지 않는다.
+
 ## 관련 문서
 
 - [작성·연결 가이드](../../runbooks/docs-article-toc-guide.md)

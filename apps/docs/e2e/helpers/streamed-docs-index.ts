@@ -3,7 +3,11 @@ import type { AddressInfo } from 'node:net'
 import { expect, type Page, type Route } from '@playwright/test'
 
 /** Replay real HTML unchanged, holding streamed segments and Flight completion. */
-export async function holdDocsIndexCompletion(page: Page, target: string) {
+export async function holdPageCompletion(
+    page: Page,
+    target: string,
+    markers: { pending: string; ready: string }
+) {
     let release!: () => void
     const gate = new Promise<void>((resolve) => {
         release = resolve
@@ -34,9 +38,9 @@ export async function holdDocsIndexCompletion(page: Page, target: string) {
         expect(boundary).toBeGreaterThan(0)
         prefix = html.slice(0, boundary)
         suffix = html.slice(boundary)
-        expect(prefix).toContain('data-page-pending="docs"')
-        expect(prefix).not.toContain('data-testid="docs-index-results"')
-        expect(suffix).toContain('data-testid="docs-index-results"')
+        expect(prefix).toContain(`data-page-pending="${markers.pending}"`)
+        expect(prefix).not.toContain(`data-testid="${markers.ready}"`)
+        expect(suffix).toContain(`data-testid="${markers.ready}"`)
         await route.continue({ url: `http://127.0.0.1:${port}/` })
     }
     await page.route(match, handler, { times: 1 })
@@ -54,4 +58,11 @@ export async function holdDocsIndexCompletion(page: Page, target: string) {
             }
         },
     }
+}
+
+export function holdDocsIndexCompletion(page: Page, target: string) {
+    return holdPageCompletion(page, target, {
+        pending: 'docs',
+        ready: 'docs-index-results',
+    })
 }
