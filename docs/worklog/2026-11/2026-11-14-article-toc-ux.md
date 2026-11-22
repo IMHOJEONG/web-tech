@@ -32,3 +32,11 @@
 ## Next
 
 사용자가 PR #91 병합·배포와 같은 범위의 리뷰 보완·공개 해시 갱신을 승인했다. 기준 `b382b96a9b553a2450c028842b43cbf0edf9e89b`의 원격 CI는 통과했으며 후속 검증과 구분한다. 보완한 head의 CI·리뷰를 재확인한 뒤 최종 squash 메시지 사전검사를 거쳐 main에 병합하고, 같은 병합 SHA의 CI·Production 결과를 별도로 확인한다.
+
+## 병합·배포 후속 기록
+
+[PR #91](https://github.com/IMHOJEONG/web-tech/pull/91)은 리뷰 보완 `1a5e27d2dc309b1da90424457b04e40da9527918`에서 사전검사를 거쳐 main `42a26e371c88f74844ad28d5bc9fc5a46482bfbf`로 병합했다. CodeRabbit 한도 초과는 기존 정책대로 재리뷰 미수행 예외로 구분했고, 다른 검사와 해결된 리뷰 스레드를 확인했다.
+
+동일 병합 SHA의 main CI·문서·CodeQL 성공과 docs Production READY·운영 도메인 일치를 확인했다. 공개 화면의 목차 회귀 14개와 주요 경로·인증 차단·Runtime Logs 결과는 [검증 보고서의 후속 절](../../verification/accessibility/2026-11-14-article-toc-ux.md#병합production-후속-확인)에서 관리한다. 이전 Next의 검증 대기는 이 결과로 갱신한다.
+
+사용자가 기존 문서 2개에 정제 결과만 로컬 기록하도록 승인했으므로 이 후속 내용은 새 커밋·푸시하지 않는다. 공개 검수 해시도 임의로 갱신하지 않으며 다음 공개 반영에는 재검수가 필요하다. 원시 자료·NAS 설정·기존 Atlassian 진단 작업·stash는 보존한다.

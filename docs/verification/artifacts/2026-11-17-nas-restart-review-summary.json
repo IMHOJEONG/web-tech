@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "historicalObservedOn": "2026-10-25",
+  "reviewedOn": "2026-11-17",
+  "sourcePr": 72,
+  "sourceHead": "676de559debe3f74617b003fd11168735ffa97de",
+  "sourceBlob": "6a5465892f39f03097a1c33f3df2aa757289fd32",
+  "classification": "derived historical counters; no response bodies or request headers",
+  "observations": {
+    "unauthenticatedListStatus": 401,
+    "invalidCredentialListStatus": 401,
+    "authenticatedListStatus": 200,
+    "listedDocuments": 1,
+    "existingArticleStatus": 200,
+    "existingArticleH1Count": 0,
+    "existingArticleCodeBlocks": 3,
+    "excludedDocumentStatus": 404,
+    "absentDocumentStatus": 404,
+    "authenticatedCacheWasPrivateNoStore": true,
+    "externalHealthStatus": 200
+  },
+  "operatorReportedImage": {
+    "platform": "linux/amd64",
+    "expectedTagMatched": true,
+    "registryDigestIndependentlyVerified": false
+  },
+  "limitations": [
+    "Historical observations only; no new NAS, API or deployment operation in this consolidation.",
+    "An article without H1 does not prove the H1 warning policy is deployed.",
+    "A 404 does not identify the image, authoring rejection or missing file as the cause.",
+    "The original is preserved separately; this is not a byte-identical replacement or a new runtime verification."
+  ]
+}

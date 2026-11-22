@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-11-21",
+  "classification": "derived historical verification summary; no article excerpts, raw response bodies or request headers",
+  "sourceSha256": "a016b17748a42da954800503250001422b07da28e7affe8516d5c0fd9d273c57",
+  "omittedFields": ["deployment.id", "articles[].bodySha256", "knowledgePages"],
+  "operationalRequestsPerformed": false,
+  "observation": {
+    "date": "2026-11-20",
+    "timezone": "Asia/Seoul",
+    "contentRevision": "f30b4e3a8877554d502bdc7846df29e883d83a59",
+    "appMain": "2cf837f04954d05d5ff409bdec6794ec28fd7f07",
+    "pullRequest": 105,
+    "deployment": {
+      "state": "READY",
+      "target": "production",
+      "alias": "heap-forge.app",
+      "matchesMain": true
+    },
+    "tests": {
+      "source": 2,
+      "content": 51,
+      "toc": 10,
+      "docsTypecheck": "passed",
+      "productionBuild": "passed",
+      "documents": 19,
+      "assets": 15,
+      "mainCI": "success",
+      "articleProductionCI": "passed"
+    },
+    "articles": [
+      {
+        "locale": "ko",
+        "url": "https://heap-forge.app/ko/docs/category/be/node-js/worker-thread-tcp-delay",
+        "status": 200,
+        "canonical": "https://heap-forge.app/ko/docs/category/be/node-js/worker-thread-tcp-delay",
+        "noindex": false,
+        "h1Count": 1,
+        "matchesLocalBuild": true,
+        "diagrams": ["architecture", "callback-flow"],
+        "freshResults": true,
+        "observedAt": "2026-11-20T11:35:14.308278+00:00"
+      },
+      {
+        "locale": "en",
+        "url": "https://heap-forge.app/en/docs/category/be/node-js/worker-thread-tcp-delay",
+        "status": 200,
+        "canonical": "https://heap-forge.app/en/docs/category/be/node-js/worker-thread-tcp-delay",
+        "noindex": false,
+        "h1Count": 1,
+        "matchesLocalBuild": true,
+        "diagrams": ["architecture", "callback-flow"],
+        "freshResults": true,
+        "observedAt": "2026-11-20T11:35:15.871587+00:00"
+      }
+    ],
+    "sitemap": {
+      "status": 200,
+      "count": 60,
+      "articleEntries": [
+        "https://heap-forge.app/ko/docs/category/be/node-js/worker-thread-tcp-delay",
+        "https://heap-forge.app/en/docs/category/be/node-js/worker-thread-tcp-delay"
+      ],
+      "occurrences": [1, 1]
+    },
+    "listing": {
+      "status": 200,
+      "newArticlePresent": true
+    },
+    "browser": {
+      "desktop": {
+        "width": 1280,
+        "height": 900,
+        "targetTop": 95.7734375,
+        "pageOverflow": false,
+        "diagramWidths": [784, 784]
+      },
+      "mobile": {
+        "width": 390,
+        "height": 844,
+        "targetTop": 95.9765625,
+        "pageOverflow": false,
+        "diagramWidths": [334, 334],
+        "tableContainerWidth": 332,
+        "tableScrollWidth": 576,
+        "tocCollapseAndHeadingFocus": true,
+        "code23LinesExpanded": true
+      },
+      "missingTocTargets": 0
+    },
+    "unverified": [
+      "physical devices",
+      "external network speed",
+      "production load",
+      "new kernel trace"
+    ],
+    "rawEvidenceIncluded": false
+  }
+}

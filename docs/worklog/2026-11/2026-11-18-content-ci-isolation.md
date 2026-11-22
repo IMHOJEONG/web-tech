@@ -48,6 +48,14 @@ workflow의 비밀이 아닌 네 신원 변수와 콘텐츠 승인 revision 입�
 
 [PR #101](https://github.com/IMHOJEONG/web-tech/pull/101)의 최초 head `a4feed93`는 일반 CI 13개 job·문서·CodeQL·보안·두 Preview를 통과했다. CodeRabbit 문서 의견 2건 중 설정 상태 목차를 보완했고, 사용자 추가 공개 승인에 따라 [후속 ADR-0034](../../architecture/adr-0034-content-ci-identity-approval.md)를 추가한다. 기존 ADR-0033의 결정 본문은 변경 전대로 보존하며 경로 분리 결정을 폐기하지 않는다. 관련 승인 문서·목차만 재검수하고 보완 head를 다시 확인한다. 실제 키·인증 실행·main 병합·배포는 계속 제외한다.
 
+### 11-20 PR #101 병합과 배포 확인
+
+사용자 승인 후 최종 메시지 전체·예상 head·공식 CodeRabbit 한도 예외를 `pr:squash`로 재검사해 [PR #101](https://github.com/IMHOJEONG/web-tech/pull/101)을 main `c6465f48`로 병합했다. 실제 메시지 해시도 일치한다. 동일 SHA의 일반 CI 13개 job·문서·CodeQL과 블로그 Production READY·공개 도메인 연결, 인증 없는 목록·검색·한영 상세·자산·실제 Chromium 4조건 검증이 통과했다. [조건·명령·결과·한계](../../verification/content/2026-11-18-content-ci-isolation.md#2026-11-20-pr-101-병합일반-ciproduction-확인)에 상세를 남겼다.
+
+키 생성·등록·실제 인증 workflow 실행·NAS·GitHub 보호 설정은 변경하지 않았다. 인증 workflow와 Environment secret은 각각 0개를 재조회했다. 다른 작업 트리 20곳과 시작 stash 목록도 동일하다. 사용자 승인에 따라 보고서와 이 worklog 두 파일만 로컬 갱신하며 새 검수 해시·커밋·푸시는 하지 않는다. 공통 AGENTS/CLAUDE도 변경하지 않는다.
+
+이번에는 기존 권한 분리 결정의 병합·운영 확인이므로 새 지식 페이지는 만들지 않는다. [기존 Confluence 주제](https://web-tech-service.atlassian.net/wiki/pages/19922945)에 main 반영과 실제 인증 CI 미활성 상태·원본 링크를 구분해 갱신하고, 실행 이력은 KAN-80의 3열 표와 기존 운영 댓글에서 추적한다. 실제 실행 환경·런처·전용 키는 사용자 준비·승인 후 검증할 후속이다.
+
 ## Next
 
 이미지 보완 head의 원격 CI에서는 오프라인을 포함한 나머지 suite는 통과했지만 상세 production 22건이 관련 글/prefetch 대기에서 실패했다. 합성 날짜가 원격 fixture보다 새로워 링크가 관련 글 3개에서 탈락하는 것을 실제 정렬 함수로 재현했다. 기본 합성 날짜만 고정해 최신 Brotli fixture와 기존 검사 기준은 유지했다. 로컬 production 전체는 200개 대상 중 198개 통과·기존 opt-in 2개 skip·실패 0개(2.3분), 저장소 276개와 타입 통과. 원격 성공은 최종 head CI에서 별도로 확인한다. 원시 자료·기존 콘텐츠 이전 변경은 계속 제외한다.

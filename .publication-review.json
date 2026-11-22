@@ -2,34 +2,6 @@
   "version": 1,
   "entries": [
     {
-      "path": "docs/verification/resilience/2026-11-22-uiux-stream-readiness.md",
-      "kind": "document",
-      "decision": "public-approved",
-      "checks": {
-        "secrets": true,
-        "personalData": true,
-        "rights": true,
-        "publicIntent": true
-      },
-      "sha256": "e46faccf73453e0ad96c6c3cdaf3ad95d74b88809cbc09fc1ec55ab6698f99ab",
-      "reviewedOn": "2026-11-22",
-      "note": "사용자가 PR #107·#109 재시도 안정화의 코드·회귀 7개, 정제 보고서·worklog 4개와 목차 2개·검수 해시의 공개·커밋·푸시·재검증과 세 PR 순차 병합을 승인함. UI/UX fallback 준비 상태 오판·동일 selector red/green·기준 유지 회귀·서버 시작 미실행/자연 실패 원인 미확정의 구분을 검수함. 원문·원시 자료·화면·키·다른 미커밋·stash는 제외함."
-    },
-    {
-      "path": "docs/worklog/2026-11/2026-11-22-uiux-stream-readiness.md",
-      "kind": "document",
-      "decision": "public-approved",
-      "checks": {
-        "secrets": true,
-        "personalData": true,
-        "rights": true,
-        "publicIntent": true
-      },
-      "sha256": "4950259b8f7efc0b9012c21505f470274866a7af2372f0556c4eba4a03ad542d",
-      "reviewedOn": "2026-11-22",
-      "note": "사용자가 PR #107·#109 재시도 안정화의 코드·회귀 7개, 정제 보고서·worklog 4개와 목차 2개·검수 해시의 공개·커밋·푸시·재검증과 세 PR 순차 병합을 승인함. UI/UX fallback 준비 상태 오판·동일 selector red/green·기준 유지 회귀·서버 시작 미실행/자연 실패 원인 미확정의 구분을 검수함. 원문·원시 자료·화면·키·다른 미커밋·stash는 제외함."
-    },
-    {
       "path": "docs/verification/security/2026-11-20-effect-redos.md",
       "sha256": "75e8c05505ff3fae070433cc705a93d7067ac87bfa3b320434f5e66a093b1348",
       "kind": "document",
@@ -479,11 +451,11 @@
     },
     {
       "path": "docs/verification/content/2026-11-17-private-git-content.md",
-      "sha256": "c71f77127c5e50dd5ee970d3cdd9eaf5353d1921701bbff8b2e33ae03479dcc9",
+      "sha256": "5a096b784bc927e07041553415119b460f4d2c0afbd0c33c797380015ac8d47d",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-19",
-      "note": "사용자 승인: PR #99 리뷰 3건의 앵커·고정 Git 원문 재현·합성 회귀와 실제 실행 결과·실패·미검증 범위만 정제하여 재검수. 원문·초안·원시 로그·화면·비밀값·stash 본문 제외.",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 병합 후 기록 통합의 정제 문서15개·합성 판정 회귀1개와 검수 목록만 공개 검수·작업별 로컬 커밋하도록 승인함. 과거 관측·실패·당시 미검증 범위와 오늘의 로컬 검사를 구분하고 원시 자료·원문·응답·비밀값·불필요한 provider ID·개인 scope를 제외해 최종 bytes를 검수함. main 반영 기록3개·다른 미커밋·stash·푸시·병합·운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -493,11 +465,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-17-private-git-content.md",
-      "sha256": "34552800f5e8659e17a0aad3f05d1314e4d3907dc56ca060206ff638670c8a9e",
+      "sha256": "09f0c05c4eda21d91f187f8c905becbd5235042c7c8dd87b748c4a925cfda4db",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-19",
-      "note": "사용자 승인: PR #99 리뷰 보완의 변경 이유·검증 연결·공개 범위와 남은 작업만 정제하여 재검수. 원문·초안·원시 로그·화면·비밀값·stash 본문 제외.",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 병합 후 기록 통합의 정제 문서15개·합성 판정 회귀1개와 검수 목록만 공개 검수·작업별 로컬 커밋하도록 승인함. 과거 관측·실패·당시 미검증 범위와 오늘의 로컬 검사를 구분하고 원시 자료·원문·응답·비밀값·불필요한 provider ID·개인 scope를 제외해 최종 bytes를 검수함. main 반영 기록3개·다른 미커밋·stash·푸시·병합·운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -535,11 +507,11 @@
     },
     {
       "path": "docs/verification/content/2026-11-18-content-ci-isolation.md",
-      "sha256": "fcef3b454c7293c4affac95435f1b0a4ac973e63af254568544b7aa5234c3dce",
+      "sha256": "c652f24acea1bdb2d69d1e3405c87466d96443a18857b107c76cabb1bd9bd354",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-19",
-      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 병합 후 기록 통합의 정제 문서15개·합성 판정 회귀1개와 검수 목록만 공개 검수·작업별 로컬 커밋하도록 승인함. 과거 관측·실패·당시 미검증 범위와 오늘의 로컬 검사를 구분하고 원시 자료·원문·응답·비밀값·불필요한 provider ID·개인 scope를 제외해 최종 bytes를 검수함. main 반영 기록3개·다른 미커밋·stash·푸시·병합·운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -549,11 +521,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-18-content-ci-isolation.md",
-      "sha256": "1f92c7ed9f89338deec25c3cd2f1ecca3edd7ca42ebc3cdb48b0cdf77efc4fae",
+      "sha256": "9ba4ed6c9c3f574b85b0c231ee5cce49acf9b330a3cf7d8f0c011262726dbc42",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-19",
-      "note": "사용자가 PR #101 리뷰 보완으로 후속 ADR 1개 추가와 기존 관련 목차·기록의 공개 재검수·해시 등록·PR 보완을 승인함. 기존 ADR 결정 보존·신원/재실행 정책·실제 설정과 일반 CI/미실행 인증 CI의 구분을 검수함. 키·원문·원시 자료·다른 미커밋/stash·main 병합·배포는 제외함.",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 병합 후 기록 통합의 정제 문서15개·합성 판정 회귀1개와 검수 목록만 공개 검수·작업별 로컬 커밋하도록 승인함. 과거 관측·실패·당시 미검증 범위와 오늘의 로컬 검사를 구분하고 원시 자료·원문·응답·비밀값·불필요한 provider ID·개인 scope를 제외해 최종 bytes를 검수함. main 반영 기록3개·다른 미커밋·stash·푸시·병합·운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -563,11 +535,11 @@
     },
     {
       "path": "docs/verification/security/2026-11-17-next-cache-advisory.md",
-      "sha256": "c739e446c2618e50a2035bf911fe4a302acc53539bc681072ea1375e4b0925c5",
+      "sha256": "d88c76275185a7a78d0c895dd55d862166169a67d21d7e6e3495a6ac36e4c50f",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-17",
-      "note": "사용자가 최종 Next.js 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 공식 권고·정제 검사 집계·구버전 대조·실험 실패·검증 한계의 최종 bytes를 검수함. 원시 로그·실제 응답·비밀값·기존 Hono 기록·초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 병합 후 기록 통합의 정제 문서15개·합성 판정 회귀1개와 검수 목록만 공개 검수·작업별 로컬 커밋하도록 승인함. 과거 관측·실패·당시 미검증 범위와 오늘의 로컬 검사를 구분하고 원시 자료·원문·응답·비밀값·불필요한 provider ID·개인 scope를 제외해 최종 bytes를 검수함. main 반영 기록3개·다른 미커밋·stash·푸시·병합·운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -577,11 +549,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-17-next-cache-advisory.md",
-      "sha256": "5586b00c0a4faf8c92ecc00333597c2b3b314fca1510a54690bcd7bd699a654f",
+      "sha256": "50036bde0a7f3b89d51724ebae9307b62c3ac7bf641ee66fadb3fac0a0c5c610",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-17",
-      "note": "사용자가 최종 Next.js 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 변경 의도·정제 검증 요약·ADR 검토·추적 연결·후속 범위의 최종 bytes를 검수함. 원시 자료·비밀값·기존 Hono 기록·초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 병합 후 기록 통합의 정제 문서15개·합성 판정 회귀1개와 검수 목록만 공개 검수·작업별 로컬 커밋하도록 승인함. 과거 관측·실패·당시 미검증 범위와 오늘의 로컬 검사를 구분하고 원시 자료·원문·응답·비밀값·불필요한 provider ID·개인 scope를 제외해 최종 bytes를 검수함. main 반영 기록3개·다른 미커밋·stash·푸시·병합·운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -591,11 +563,11 @@
     },
     {
       "path": "docs/verification/security/2026-11-17-hono-advisories.md",
-      "sha256": "4de775cfcca45abb011c8cdaba58488866768236ee3a863ab8c290ec0f998003",
+      "sha256": "f8595a5ce3efc95c39c746904f988954e0ba440d6a13f499bb1fa85ea52b4160",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-17",
-      "note": "사용자가 최종 Hono 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 공식 권고·정제 검증 집계·구버전 대조·실패 이력·잔여 경고·최초 로컬 검증 범위를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 병합 후 기록 통합의 정제 문서15개·합성 판정 회귀1개와 검수 목록만 공개 검수·작업별 로컬 커밋하도록 승인함. 과거 관측·실패·당시 미검증 범위와 오늘의 로컬 검사를 구분하고 원시 자료·원문·응답·비밀값·불필요한 provider ID·개인 scope를 제외해 최종 bytes를 검수함. main 반영 기록3개·다른 미커밋·stash·푸시·병합·운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -605,11 +577,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-17-hono-advisories.md",
-      "sha256": "850a98f56b331d532b97d96db59c184f435677092739ba53e102191b727dd674",
+      "sha256": "f7c0d44f7676c77a7db00abea3444f70a08db7dbf530c51005ac4de0b3fea90f",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-17",
-      "note": "사용자가 최종 Hono 보안 문서 4개와 승인 해시 기록의 공개·별도 커밋·푸시 및 같은 PR 포함을 명시 승인함. 변경 이유·정제 검사 요약·ADR 검토·추적 연결·후속 범위를 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·main 병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 병합 후 기록 통합의 정제 문서15개·합성 판정 회귀1개와 검수 목록만 공개 검수·작업별 로컬 커밋하도록 승인함. 과거 관측·실패·당시 미검증 범위와 오늘의 로컬 검사를 구분하고 원시 자료·원문·응답·비밀값·불필요한 provider ID·개인 scope를 제외해 최종 bytes를 검수함. main 반영 기록3개·다른 미커밋·stash·푸시·병합·운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -675,11 +647,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "0437cff201bb286d1b6cc54323774b1f78d4c315db0df3b58822838c6677df91",
+      "sha256": "6fb2c128015a940c906d4cdf8786fe7785c9485ebb1f8645bdbe4d48f967d936",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-22",
-      "note": "사용자가 세 PR 순차 병합을 위해 공통 목차2개와 검수 목록의 양쪽 링크·승인 항목 보존 병합, 최종 SHA-256 재계산·공개 재검수·CI 확인을 승인함. 기존 본문·과거 관측·원문·원시 자료·키·다른 미커밋·stash는 변경하지 않음.",
+      "note": "사용자가 세 PR 순차 병합을 위해 공통 목차2개·자동 병합된 TODO/기존 목차 검증 보고서2개와 검수 목록의 양쪽 내용·승인 항목 보존 병합, 최종 SHA-256 재계산·공개 재검수·CI 확인을 승인함. 기존 본문·과거 관측·원문·원시 자료·키·다른 미커밋·stash는 변경하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -717,11 +689,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "19dddadd5c4738da195c23c19743d5a2d4ddf3c004aac3fc426e66ed7fa29acb",
+      "sha256": "beb21f55e50ba53ab1c940f755a7c62205f7a52a1836cdb3f9bf2562ba3b0a6f",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-22",
-      "note": "사용자가 세 PR 순차 병합을 위해 공통 목차2개와 검수 목록의 양쪽 링크·승인 항목 보존 병합, 최종 SHA-256 재계산·공개 재검수·CI 확인을 승인함. 기존 본문·과거 관측·원문·원시 자료·키·다른 미커밋·stash는 변경하지 않음.",
+      "note": "사용자가 세 PR 순차 병합을 위해 공통 목차2개·자동 병합된 TODO/기존 목차 검증 보고서2개와 검수 목록의 양쪽 내용·승인 항목 보존 병합, 최종 SHA-256 재계산·공개 재검수·CI 확인을 승인함. 기존 본문·과거 관측·원문·원시 자료·키·다른 미커밋·stash는 변경하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -801,11 +773,11 @@
     },
     {
       "path": "docs/verification/accessibility/2026-11-14-article-toc-ux.md",
-      "sha256": "4d9ee2615c01634a94403de62d2ef29865181049de557d6ab3f0dec03b65e681",
+      "sha256": "ef0cb0fb0ea70acf8558ad7b54f7b6cffb8fe700b8380c1aae62095ff19fa3b8",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-20",
-      "note": "사용자가 로컬 목차 수정본 확인 후 코드·회귀 2개와 정제 문서 3개만 공개 검수·해시 등록·작업별 커밋·푸시하도록 명시 승인함. 항목 박스/텍스트 중심의 4px 차이·최소 터치 높이 보존·합성 회귀 20개 통과와 화면 조건 skip 1개·원격 미검증 범위·사용자 확인·서버 종료·합성 입력 정리의 정제 결과를 검수함. 원시 화면·로그·실제 글·미리보기 입력·비밀값·다른 미커밋/stash·PR 생성·병합·배포는 제외함.",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 세 PR 순차 병합을 위해 공통 목차2개·자동 병합된 TODO/기존 목차 검증 보고서2개와 검수 목록의 양쪽 내용·승인 항목 보존 병합, 최종 SHA-256 재계산·공개 재검수·CI 확인을 승인함. 기존 본문·과거 관측·원문·원시 자료·키·다른 미커밋·stash는 변경하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -815,11 +787,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-14-article-toc-ux.md",
-      "sha256": "821ad008b23681ef8ccd3396eaa2893f881f8ce617a0ff2e358c8ce9818eafc3",
+      "sha256": "b0ef4079a120f3dd8b7f6e56baa5ce2f1696cb719b256040fb1f7c8ba696bc48",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-14",
-      "note": "사용자가 PR91 기존 테스트 이동과 정제 검증 보고서·작업 기록 2개의 보완·공개 해시 갱신 후 병합·배포를 명시 승인함. 최초 미커밋 검증·전체 기준 SHA·CI 편입과 364개 검사를 구분해 검수함. 원시 로그·캡처·실제 응답·비밀값·개인정보·기존 미커밋은 제외하며 NAS·공통 검사 설정은 변경하지 않음.",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 병합 후 기록 통합의 정제 문서15개·합성 판정 회귀1개와 검수 목록만 공개 검수·작업별 로컬 커밋하도록 승인함. 과거 관측·실패·당시 미검증 범위와 오늘의 로컬 검사를 구분하고 원시 자료·원문·응답·비밀값·불필요한 provider ID·개인 scope를 제외해 최종 bytes를 검수함. main 반영 기록3개·다른 미커밋·stash·푸시·병합·운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -885,11 +857,11 @@
     },
     {
       "path": "docs/verification/artifacts/README.md",
-      "sha256": "d43c57fc2d36aba40d4d14848eb7e959863a27fc84497e421512adafb8ac2abd",
+      "sha256": "24307a167bb8b9d01cf970c4c75e40b23ecc5e533466afb8669a04eeb6bf6032",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-21",
-      "note": "사용자가 이번 JavaScript 개선과 관련 문서만 분리해 공개 검수 후 커밋·푸시·PR 생성과 CI 확인을 명시 요청함. 코드·합성 재현·판정·조건·실패·한계·관련 목차의 최종 bytes를 검수함. 개인 경로·비밀값·원고·원시 캡처/로그·외부 스킬·다른 작업 변경·병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 정리한 승인 커밋의 작업별 통합·푸시·PR/CI 검증과 기존 목차4개·보고서/worklog6개의 정제 보완·재검수·해시 갱신을 명시 승인함. 새 main과 원본의 링크·관측/실패/한계를 보존하고 로컬 재검증 결과만 최종 bytes로 검수함. 원문·초안·원시 자료·키·기존 PR 종료·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -1305,11 +1277,11 @@
     },
     {
       "path": "docs/todo/todo.md",
-      "sha256": "03e8d56785b565bedffac48e471beee9ef839aa384715802652563163dbbc130",
+      "sha256": "e5f12e192faed7beb67af05c5f3763de2c0e14700f1e1eef54888c2bca6cdf6a",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-20",
-      "note": "사용자가 카드 밀도 코드·회귀 7개와 정제 문서 6개만 공개 검수·해시 등록·작업별 로컬 커밋하도록 승인함. 간격·중복 메타·기존 글자 크기 유지 정책, 합성 회귀의 최초 실패/수정과 최종 결과·관측 한계, 실제 추적 링크·로컬 커밋 상태를 검수함. 원시 로그·화면·합성 입력·비공개 원문·키·다른 작업·stash·푸시·PR·운영 변경은 제외함.",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 세 PR 순차 병합을 위해 공통 목차2개·자동 병합된 TODO/기존 목차 검증 보고서2개와 검수 목록의 양쪽 내용·승인 항목 보존 병합, 최종 SHA-256 재계산·공개 재검수·CI 확인을 승인함. 기존 본문·과거 관측·원문·원시 자료·키·다른 미커밋·stash는 변경하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -1683,11 +1655,11 @@
     },
     {
       "path": "docs/worklog/2026-10/README.md",
-      "sha256": "cc239f4f09a3dddd4a077dd3b713895416cd9fbb25a054b375da34b86009818b",
+      "sha256": "b4286b2d106578511125954f958b699fd4fd2cd57a8286b1fc5ed6e9c2d6cf34",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-09",
-      "note": "사용자가 PR #67 기존 공개 문서·목차의 재검수·해시 등록을 명시 승인함. 기존 설명·실패 이력과 최신 main 통합·75개 기하 및 CPU 반복·관련 최초1실패와 재실행·경고·미검증 범위를 직접 검수함. 원시 로그·실제 응답·개인 경로·비밀값·캡처 없음. PR67 이력 재구성·1회 비조상 예외는 별도 승인 범위이며 다른 WIP·NAS·자격증명은 제외함.",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 정리한 승인 커밋의 작업별 통합·푸시·PR/CI 검증과 기존 목차4개·보고서/worklog6개의 정제 보완·재검수·해시 갱신을 명시 승인함. 새 main과 원본의 링크·관측/실패/한계를 보존하고 로컬 재검증 결과만 최종 bytes로 검수함. 원문·초안·원시 자료·키·기존 PR 종료·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -1921,11 +1893,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-20-private-draft-authoring-policy.md",
-      "sha256": "89b13a0eba48d2e36fbc2cf8776c3326620435c72577d92df007d45957c2c641",
+      "sha256": "ab6c68a5d61fe77c2fabdec4e2c7febbcb53590547b27d0a18f2e968b60db21f",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-20",
-      "note": "사용자가 이번 초안 작성 규칙·가이드만 저장소별 커밋·푸시하고 공개 검수 후 PR/CI 확인을 명시 승인함. 비공개 초안 저장과 사람 공개/게시 승인, 레거시 안내 구분, preview 미연결 및 정제 결과를 최종 인덱스 bytes로 검수함. 실제 원문·자산·원시 자료·키·다른 미커밋/stash·미푸시 자동화·기본 브랜치 병합·운영 변경은 제외함.",
+      "note": "사용자가 병합 후 기록 통합의 정제 문서15개·합성 판정 회귀1개와 검수 목록만 공개 검수·작업별 로컬 커밋하도록 승인함. 과거 관측·실패·당시 미검증 범위와 오늘의 로컬 검사를 구분하고 원시 자료·원문·응답·비밀값·불필요한 provider ID·개인 scope를 제외해 최종 bytes를 검수함. main 반영 기록3개·다른 미커밋·stash·푸시·병합·운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -2072,6 +2044,468 @@
         "rights": true,
         "publicIntent": true
       }
+    },
+    {
+      "path": "docs/examples/node-runtime-security/README.md",
+      "sha256": "6c0876d8a155c75ec578663f96f485e89239588f791eb1668cc9824805a9aaab",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합의 정제 기록21개·합성 진단 예제3개와 검수 해시의 작업별 로컬 커밋을 승인함. 과거 관측·실패·한계와 오늘의 로컬 검증을 구분하고 실제 응답 본문·불필요한 provider 식별자·비밀값·개인 경로를 제외해 최종 bytes를 검수함. 원시 자료·다른 미커밋·stash·푸시·PR 종료·병합·운영 조치는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-10-25-primary-action-contrast.md",
+      "sha256": "d6b026c628a6b91748f39aed282b9bc418501b308c157c7d4f95a12384b55b2a",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합의 정제 기록21개·합성 진단 예제3개와 검수 해시의 작업별 로컬 커밋을 승인함. 과거 관측·실패·한계와 오늘의 로컬 검증을 구분하고 실제 응답 본문·불필요한 provider 식별자·비밀값·개인 경로를 제외해 최종 bytes를 검수함. 원시 자료·다른 미커밋·stash·푸시·PR 종료·병합·운영 조치는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-10-27-node-runtime-security-review.json",
+      "sha256": "1d767f80567e8959807ac5748033da206e0bf9f1cc6ba4726c1196fa4a716475",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합24개 범위의 로컬 커밋을 승인함. 과거 관측의 고정 필드 정제 집계임을 검수하고 실제 응답 본문·인증 헤더·비밀값·불필요한 provider 식별자를 제외함. 원본과 대조해 실패·재시도·제약을 보존하며 PR68의 두 파생 JSON은 원본 blob과 제외 필드를 명시함. 새 운영 검증·푸시·병합 승인이 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-10-28-node-brotli-safe-probe.json",
+      "sha256": "80a692bd1715845a46f0d53f4dd24456f185e2f6bffed9d2bec47f4913733ab4",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합24개 범위의 로컬 커밋을 승인함. 과거 관측의 고정 필드 정제 집계임을 검수하고 실제 응답 본문·인증 헤더·비밀값·불필요한 provider 식별자를 제외함. 원본과 대조해 실패·재시도·제약을 보존하며 PR68의 두 파생 JSON은 원본 blob과 제외 필드를 명시함. 새 운영 검증·푸시·병합 승인이 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-10-28-pr68-merge-hold.json",
+      "sha256": "f20330c4e881251a7491a21444ff4092540b3ab1036e768cf7c945134c5d024a",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합24개 범위의 로컬 커밋을 승인함. 과거 관측의 고정 필드 정제 집계임을 검수하고 실제 응답 본문·인증 헤더·비밀값·불필요한 provider 식별자를 제외함. 원본과 대조해 실패·재시도·제약을 보존하며 PR68의 두 파생 JSON은 원본 blob과 제외 필드를 명시함. 새 운영 검증·푸시·병합 승인이 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-10-28-pr68-postmerge.json",
+      "sha256": "2e3ae29e3f632b7741aaeff878b92475a0eab306ac646724ee84817e351f4749",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합24개 범위의 로컬 커밋을 승인함. 과거 관측의 고정 필드 정제 집계임을 검수하고 실제 응답 본문·인증 헤더·비밀값·불필요한 provider 식별자를 제외함. 원본과 대조해 실패·재시도·제약을 보존하며 PR68의 두 파생 JSON은 원본 blob과 제외 필드를 명시함. 새 운영 검증·푸시·병합 승인이 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-10-28-primary-deployment-identifiers.json",
+      "sha256": "4e246d0e2a4f754dbb3f8cca6a816cc7c06ef9f4ebe10be47df1ffeac4746e1d",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합24개 범위의 로컬 커밋을 승인함. 과거 관측의 고정 필드 정제 집계임을 검수하고 실제 응답 본문·인증 헤더·비밀값·불필요한 provider 식별자를 제외함. 원본과 대조해 실패·재시도·제약을 보존하며 PR68의 두 파생 JSON은 원본 blob과 제외 필드를 명시함. 새 운영 검증·푸시·병합 승인이 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-17-nas-restart-review-summary.json",
+      "sha256": "0d830ebebe6be103615887f2ecc9952f90336388bd486afd0f09eec855313468",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합24개 범위의 로컬 커밋을 승인함. 과거 관측의 고정 필드 정제 집계임을 검수하고 실제 응답 본문·인증 헤더·비밀값·불필요한 provider 식별자를 제외함. 원본과 대조해 실패·재시도·제약을 보존하며 PR68의 두 파생 JSON은 원본 blob과 제외 필드를 명시함. 새 운영 검증·푸시·병합 승인이 아님.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-worker-pool-publication-summary.json",
+      "sha256": "45fec8958f38335230d06264e68fdcb6a80deba13b77648cf446c63ef2af445f",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-21",
+      "note": "사용자가 워커13개와 해당 검수 목록만 공개 검수 후 로컬 커밋하도록 승인함. 과거 관측·집계와 이번 기록 검사를 구분하고 원문·본문 발췌·원시 응답/로그·키·불필요한 provider ID·본문 fingerprint를 제외해 최종 bytes를 검수함. 요약3개는 원본 SHA-256과 제외 필드를 보존하고 나머지 값의 일치를 대조함. 발췌 포함 원본 JSON·다른 미커밋·stash·푸시·PR·배포·원본 삭제는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-worker-thread-draft-review-summary.json",
+      "sha256": "a9ca10dc7fe909f64e3e0381ab2139aa8f4eb9b4ba5a1a6496608baefcdf255f",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-21",
+      "note": "사용자가 워커13개와 해당 검수 목록만 공개 검수 후 로컬 커밋하도록 승인함. 과거 관측·집계와 이번 기록 검사를 구분하고 원문·본문 발췌·원시 응답/로그·키·불필요한 provider ID·본문 fingerprint를 제외해 최종 bytes를 검수함. 요약3개는 원본 SHA-256과 제외 필드를 보존하고 나머지 값의 일치를 대조함. 발췌 포함 원본 JSON·다른 미커밋·stash·푸시·PR·배포·원본 삭제는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-worker-thread-publication-summary.json",
+      "sha256": "416a4b5c90ebd9a2a733b065cba73c6adf2582a61b2a991fc88b4f281cd5288d",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-21",
+      "note": "사용자가 워커13개와 해당 검수 목록만 공개 검수 후 로컬 커밋하도록 승인함. 과거 관측·집계와 이번 기록 검사를 구분하고 원문·본문 발췌·원시 응답/로그·키·불필요한 provider ID·본문 fingerprint를 제외해 최종 bytes를 검수함. 요약3개는 원본 SHA-256과 제외 필드를 보존하고 나머지 값의 일치를 대조함. 발췌 포함 원본 JSON·다른 미커밋·stash·푸시·PR·배포·원본 삭제는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/content/2026-10-25-body-h1-warning.md",
+      "sha256": "274681758a1c39837cd2090c146f1ee778a4f34cc24ba6fbb01a171e3a03b68e",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합의 정제 기록21개·합성 진단 예제3개와 검수 해시의 작업별 로컬 커밋을 승인함. 과거 관측·실패·한계와 오늘의 로컬 검증을 구분하고 실제 응답 본문·불필요한 provider 식별자·비밀값·개인 경로를 제외해 최종 bytes를 검수함. 원시 자료·다른 미커밋·stash·푸시·PR 종료·병합·운영 조치는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/content/2026-11-20-worker-pool-publication.md",
+      "sha256": "381e9a1db4c9b2b1c3b49beb47614a5aa40a203512524dc93a7c89d12446885d",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-21",
+      "note": "사용자가 워커13개와 해당 검수 목록만 공개 검수 후 로컬 커밋하도록 승인함. 과거 관측·집계와 이번 기록 검사를 구분하고 원문·본문 발췌·원시 응답/로그·키·불필요한 provider ID·본문 fingerprint를 제외해 최종 bytes를 검수함. 요약3개는 원본 SHA-256과 제외 필드를 보존하고 나머지 값의 일치를 대조함. 발췌 포함 원본 JSON·다른 미커밋·stash·푸시·PR·배포·원본 삭제는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/content/2026-11-20-worker-thread-draft-review.md",
+      "sha256": "579fb26dd0b9524bd2fd0185880024edd02cc5ca0f912c4c3aa76955dafd6383",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-21",
+      "note": "사용자가 워커13개와 해당 검수 목록만 공개 검수 후 로컬 커밋하도록 승인함. 과거 관측·집계와 이번 기록 검사를 구분하고 원문·본문 발췌·원시 응답/로그·키·불필요한 provider ID·본문 fingerprint를 제외해 최종 bytes를 검수함. 요약3개는 원본 SHA-256과 제외 필드를 보존하고 나머지 값의 일치를 대조함. 발췌 포함 원본 JSON·다른 미커밋·stash·푸시·PR·배포·원본 삭제는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/content/2026-11-20-worker-thread-publication.md",
+      "sha256": "00f65a88c8c9ec678f4d4676afa2a2512d94ae6d99891c0642b2015971470f8c",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-21",
+      "note": "사용자가 워커13개와 해당 검수 목록만 공개 검수 후 로컬 커밋하도록 승인함. 과거 관측·집계와 이번 기록 검사를 구분하고 원문·본문 발췌·원시 응답/로그·키·불필요한 provider ID·본문 fingerprint를 제외해 최종 bytes를 검수함. 요약3개는 원본 SHA-256과 제외 필드를 보존하고 나머지 값의 일치를 대조함. 발췌 포함 원본 JSON·다른 미커밋·stash·푸시·PR·배포·원본 삭제는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/integration/2026-11-11-atlassian-widget-timeout.md",
+      "sha256": "6c682ba345dda9ec436db4b3d70bcfd01ee1f157675fa2af5fcff0f4613bae93",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-21",
+      "note": "사용자가 Atlassian4개와 해당 검수 목록만 공개 검수 후 로컬 커밋하도록 승인함. 과거 앱/OS 버전·정제 시각/집계·정정·승인 댓글 이력과 원인 미확정 조건을 확인함. 실제 Jira 응답·원시 앱 로그·HAR·화면·계정/세션 식별자·개인 경로·비밀값은 포함하지 않음. 원본·다른 미커밋·stash·새 진단·제공자 댓글 재게시·푸시·PR·배포·원본 삭제는 제외하고 이 작업에서 종료함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/integration/2026-11-17-open-records-pr-consolidation.md",
+      "sha256": "71c09f7a05862335cb9b712dd438f3d2c962cfa67bb1537a020dacff70c31ece",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합의 정제 기록21개·합성 진단 예제3개와 검수 해시의 작업별 로컬 커밋을 승인함. 과거 관측·실패·한계와 오늘의 로컬 검증을 구분하고 실제 응답 본문·불필요한 provider 식별자·비밀값·개인 경로를 제외해 최종 bytes를 검수함. 원시 자료·다른 미커밋·stash·푸시·PR 종료·병합·운영 조치는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/integration/2026-11-20-postmerge-records-consolidation.md",
+      "sha256": "e34d9495df38688615e6f958599b2cf221f16c5decec03120cdbc4349aa3bc7c",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 정리한 승인 커밋의 작업별 통합·푸시·PR/CI 검증과 기존 목차4개·보고서/worklog6개의 정제 보완·재검수·해시 갱신을 명시 승인함. 새 main과 원본의 링크·관측/실패/한계를 보존하고 로컬 재검증 결과만 최종 bytes로 검수함. 원문·초안·원시 자료·키·기존 PR 종료·main 병합·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/security/2026-10-27-node-runtime-security-review.md",
+      "sha256": "11da8bfe4ba543528ba8719866d85c66c069f8b4ba997e6f59438ca4e5df0de2",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합의 정제 기록21개·합성 진단 예제3개와 검수 해시의 작업별 로컬 커밋을 승인함. 과거 관측·실패·한계와 오늘의 로컬 검증을 구분하고 실제 응답 본문·불필요한 provider 식별자·비밀값·개인 경로를 제외해 최종 bytes를 검수함. 원시 자료·다른 미커밋·stash·푸시·PR 종료·병합·운영 조치는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/security/2026-10-27-node24-security-patch.md",
+      "sha256": "8b85edcdc6ba240e4b8a3c77b05e1c8b49e06593fd0b9a9a85c5b4d3c6718e93",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합의 정제 기록21개·합성 진단 예제3개와 검수 해시의 작업별 로컬 커밋을 승인함. 과거 관측·실패·한계와 오늘의 로컬 검증을 구분하고 실제 응답 본문·불필요한 provider 식별자·비밀값·개인 경로를 제외해 최종 bytes를 검수함. 원시 자료·다른 미커밋·stash·푸시·PR 종료·병합·운영 조치는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-25-body-h1-warning.md",
+      "sha256": "9a3b16eddfa48b12b2a22ac448cf3be244c4ac020a9fd3bf36681b7c4da99480",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합의 정제 기록21개·합성 진단 예제3개와 검수 해시의 작업별 로컬 커밋을 승인함. 과거 관측·실패·한계와 오늘의 로컬 검증을 구분하고 실제 응답 본문·불필요한 provider 식별자·비밀값·개인 경로를 제외해 최종 bytes를 검수함. 원시 자료·다른 미커밋·stash·푸시·PR 종료·병합·운영 조치는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-25-primary-action-contrast.md",
+      "sha256": "9632eb452ec5913b4bfc7a6a3bdefa8c11b957951009eb8456120f2e7feda1af",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합의 정제 기록21개·합성 진단 예제3개와 검수 해시의 작업별 로컬 커밋을 승인함. 과거 관측·실패·한계와 오늘의 로컬 검증을 구분하고 실제 응답 본문·불필요한 provider 식별자·비밀값·개인 경로를 제외해 최종 bytes를 검수함. 원시 자료·다른 미커밋·stash·푸시·PR 종료·병합·운영 조치는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-27-node-runtime-security-review.md",
+      "sha256": "ef8db0f5709f7f271a68a751ae7188dbce157a4675c80c6cb09d52621cd55729",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합의 정제 기록21개·합성 진단 예제3개와 검수 해시의 작업별 로컬 커밋을 승인함. 과거 관측·실패·한계와 오늘의 로컬 검증을 구분하고 실제 응답 본문·불필요한 provider 식별자·비밀값·개인 경로를 제외해 최종 bytes를 검수함. 원시 자료·다른 미커밋·stash·푸시·PR 종료·병합·운영 조치는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-10/2026-10-28-node24-security-merge.md",
+      "sha256": "b5340e665fce7ed4e8bbc1dea75ce13c2dd9d5ab763e2df059232142c06d9f9b",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합의 정제 기록21개·합성 진단 예제3개와 검수 해시의 작업별 로컬 커밋을 승인함. 과거 관측·실패·한계와 오늘의 로컬 검증을 구분하고 실제 응답 본문·불필요한 provider 식별자·비밀값·개인 경로를 제외해 최종 bytes를 검수함. 원시 자료·다른 미커밋·stash·푸시·PR 종료·병합·운영 조치는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-11-atlassian-widget-timeout.md",
+      "sha256": "63639b2ccb837437d03d85fd35880285b5df73914e08d2a75de6d675714e514c",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-21",
+      "note": "사용자가 Atlassian4개와 해당 검수 목록만 공개 검수 후 로컬 커밋하도록 승인함. 과거 앱/OS 버전·정제 시각/집계·정정·승인 댓글 이력과 원인 미확정 조건을 확인함. 실제 Jira 응답·원시 앱 로그·HAR·화면·계정/세션 식별자·개인 경로·비밀값은 포함하지 않음. 원본·다른 미커밋·stash·새 진단·제공자 댓글 재게시·푸시·PR·배포·원본 삭제는 제외하고 이 작업에서 종료함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-17-open-records-pr-consolidation.md",
+      "sha256": "eda732a5fb4432d04c021fd24c2fc529e3b16635a029046e0563dde6269aecf2",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-20",
+      "note": "사용자가 운영 기록 통합의 정제 기록21개·합성 진단 예제3개와 검수 해시의 작업별 로컬 커밋을 승인함. 과거 관측·실패·한계와 오늘의 로컬 검증을 구분하고 실제 응답 본문·불필요한 provider 식별자·비밀값·개인 경로를 제외해 최종 bytes를 검수함. 원시 자료·다른 미커밋·stash·푸시·PR 종료·병합·운영 조치는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-20-postmerge-records-consolidation.md",
+      "sha256": "19fee28098e18817cd80a2205d58c4a1ad33db196029e7eadbf22e566706bbfa",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 정리한 승인 커밋의 작업별 통합·푸시·PR/CI 검증과 기존 목차4개·보고서/worklog6개의 정제 보완·재검수·해시 갱신을 명시 승인함. 새 main과 원본의 링크·관측/실패/한계를 보존하고 로컬 재검증 결과만 최종 bytes로 검수함. 원문·초안·원시 자료·키·기존 PR 종료·main 병합·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-20-worker-pool-local-preview.md",
+      "sha256": "02ec5035d20eb73e593f2897eaf5f71f4079dd696388c675f2f6162d4f09fc39",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-21",
+      "note": "사용자가 워커13개와 해당 검수 목록만 공개 검수 후 로컬 커밋하도록 승인함. 과거 관측·집계와 이번 기록 검사를 구분하고 원문·본문 발췌·원시 응답/로그·키·불필요한 provider ID·본문 fingerprint를 제외해 최종 bytes를 검수함. 요약3개는 원본 SHA-256과 제외 필드를 보존하고 나머지 값의 일치를 대조함. 발췌 포함 원본 JSON·다른 미커밋·stash·푸시·PR·배포·원본 삭제는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-20-worker-pool-publication.md",
+      "sha256": "80438acf5cb690a1807c6313d48198a627b2df0a707ad618e92f9df6efe93696",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-21",
+      "note": "사용자가 워커13개와 해당 검수 목록만 공개 검수 후 로컬 커밋하도록 승인함. 과거 관측·집계와 이번 기록 검사를 구분하고 원문·본문 발췌·원시 응답/로그·키·불필요한 provider ID·본문 fingerprint를 제외해 최종 bytes를 검수함. 요약3개는 원본 SHA-256과 제외 필드를 보존하고 나머지 값의 일치를 대조함. 발췌 포함 원본 JSON·다른 미커밋·stash·푸시·PR·배포·원본 삭제는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-20-worker-thread-draft-review.md",
+      "sha256": "681c1e3b8bb5652b81f2799ccf7fce6c6b224534bb8eb3378c62e68b2e0f560f",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-21",
+      "note": "사용자가 워커13개와 해당 검수 목록만 공개 검수 후 로컬 커밋하도록 승인함. 과거 관측·집계와 이번 기록 검사를 구분하고 원문·본문 발췌·원시 응답/로그·키·불필요한 provider ID·본문 fingerprint를 제외해 최종 bytes를 검수함. 요약3개는 원본 SHA-256과 제외 필드를 보존하고 나머지 값의 일치를 대조함. 발췌 포함 원본 JSON·다른 미커밋·stash·푸시·PR·배포·원본 삭제는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-20-worker-thread-publication.md",
+      "sha256": "c3cfe9e29896e56928a018c33ebc97d96d7887db9f3701fa9f57dc4a7d5380c7",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-21",
+      "note": "사용자가 워커13개와 해당 검수 목록만 공개 검수 후 로컬 커밋하도록 승인함. 과거 관측·집계와 이번 기록 검사를 구분하고 원문·본문 발췌·원시 응답/로그·키·불필요한 provider ID·본문 fingerprint를 제외해 최종 bytes를 검수함. 요약3개는 원본 SHA-256과 제외 필드를 보존하고 나머지 값의 일치를 대조함. 발췌 포함 원본 JSON·다른 미커밋·stash·푸시·PR·배포·원본 삭제는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/resilience/2026-11-22-uiux-stream-readiness.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "e46faccf73453e0ad96c6c3cdaf3ad95d74b88809cbc09fc1ec55ab6698f99ab",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 PR #107·#109 재시도 안정화의 코드·회귀 7개, 정제 보고서·worklog 4개와 목차 2개·검수 해시의 공개·커밋·푸시·재검증과 세 PR 순차 병합을 승인함. UI/UX fallback 준비 상태 오판·동일 selector red/green·기준 유지 회귀·서버 시작 미실행/자연 실패 원인 미확정의 구분을 검수함. 원문·원시 자료·화면·키·다른 미커밋·stash는 제외함."
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-22-uiux-stream-readiness.md",
+      "kind": "document",
+      "decision": "public-approved",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      },
+      "sha256": "4950259b8f7efc0b9012c21505f470274866a7af2372f0556c4eba4a03ad542d",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 PR #107·#109 재시도 안정화의 코드·회귀 7개, 정제 보고서·worklog 4개와 목차 2개·검수 해시의 공개·커밋·푸시·재검증과 세 PR 순차 병합을 승인함. UI/UX fallback 준비 상태 오판·동일 selector red/green·기준 유지 회귀·서버 시작 미실행/자연 실패 원인 미확정의 구분을 검수함. 원문·원시 자료·화면·키·다른 미커밋·stash는 제외함."
     },
     {
       "path": "docs/verification/content/2026-11-20-external-draft-preview.md",

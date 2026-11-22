@@ -4,6 +4,12 @@
 
 - [11-21 JavaScript 현대화 실제 적용](integration/2026-11-21-modern-javascript-implementation.md): 4곳 교체·Set 유지, 실제 타입 3진입점·API Chromium 7조건·전체 통합 26그룹 통과. [PR #106](https://github.com/IMHOJEONG/web-tech/pull/106) 검토 중·운영 미배포.
 - [11-20 JavaScript 현대화 5개 후보 재검증](integration/2026-11-20-modern-javascript-guidance.md): 실제 소스의 후보 4건·Set 오탐 1건과 Node·격리 타입 16조건. 앱 적용·브라우저 회귀는 미실행.
+- [11-17 운영 기록 PR 통합 준비](integration/2026-11-17-open-records-pr-consolidation.md): 11-20 최신 main 위의 재구성과 실제 응답 필드 제외. 원본4개 PR·이전 준비 보존, 공개·병합·배포는 별도.
+- [11-20 병합 후 기록 통합](integration/2026-11-20-postmerge-records-consolidation.md): 원본17개와 main을 대조해 중복3개를 제외한 로컬 준비. 합성 판정 회귀·보존·공개 범위와 과거 운영 결과를 구분.
+- [11-20 워커 풀 발행](content/2026-11-20-worker-pool-publication.md): 당시 고정 발행본·검색/상세·사이트맵·화면 관측과 초기 실패. 본문 발췌 없는 11-21 정제 요약으로 보존하며 새 배포 아님.
+- [11-20 워커 스레드 초안 검토](content/2026-11-20-worker-thread-draft-review.md): 조건별9회 집계·코드 바인딩·미리보기의 과거 관측. 실제 원문·원시 자료는 제외.
+- [11-20 워커 스레드 발행](content/2026-11-20-worker-thread-publication.md): PR #105 당시 main/운영·사이트맵·브라우저 결과. 초안 단계와 발행을 구분하며 현재 운영 재검증 아님.
+- [11-11 Atlassian 결과 카드 초기화 진단](integration/2026-11-11-atlassian-widget-timeout.md): 당시 데이터 응답 성공과 위젯 초기화 시간 초과를 분리한 정제 기록. 버전 중복 경고의 인과관계·현재 수정 여부는 미확정.
 - [11-20 외부 초안 개발 미리보기](content/2026-11-20-external-draft-preview.md): 개발 전용 root·파일 상태·경로 경계와 합성 화면/noindex 확인. 사용자 승인 후 작업별 로컬 커밋이며 원격 반영은 별도.
 - [11-22 모바일 Drawer hydration 준비 상태](resilience/2026-11-22-drawer-hydration-readiness.md): 최초 CI의 재시도 통과와 통제 재현·기준 유지 회귀를 구분한다. 원격 재검증·병합은 별도.
 
@@ -19,7 +25,7 @@
 
 - [11-17 Next.js root-param 캐시 권고](security/2026-11-17-next-cache-advisory.md): 16.4.6 patch·전후 감사·본문 production·검색 캐시 회귀. 기존 Cache Components 실험 실패·운영 기본 설정과 후속 PR·배포 범위를 구분.
 
-- [11-17 Hono Dependabot 5건](security/2026-11-17-hono-advisories.md): patch 전후 11개 대조·Prisma 소비자·저장소 262개 검사. 기존 deepmerge Low와 미커밋·미병합·미배포 범위 구분.
+- [11-17 Hono Dependabot 5건](security/2026-11-17-hono-advisories.md): patch 전후 11개 대조 후 PR #95 main·세 서비스 배포·HTTP 표본·5건 fixed의 과거 확인. 기존 deepmerge Low·당시 NAS 미교체와 새 운영 검증 아님을 구분.
 
 - [11-14 검색 Drawer·자동완성](accessibility/2026-11-14-search-drawer.md): 로컬·PR #92 검증과 main/Production 운영 결과. main CI의 미세 기하 비교 실패 및 후속 로컬 검사를 구분.
 
@@ -69,7 +75,7 @@
 
 - [10-28 diff 코드 블록](accessibility/2026-10-28-diff-code-block.md): Node315·브라우저22, 두 테마·실제 MDX/Shiki·원격·고대비·JS 비활성, 운영 미검증.
 
-- [10-27 Node 24 보안 patch·CI·Docker](security/2026-10-27-node24-security-patch.md): main 기반 격리·pin/floor·amd64 이미지와 실제 Node·앱 회귀. 운영 미배포.
+- [10-27 Node 24 보안 patch·CI·Docker](security/2026-10-27-node24-security-patch.md): pin/floor·amd64 회귀와 10-28 보류·재개·main CI/GHCR/배포의 역사적 후속 증거. 현재 운영 확인과 구분.
 
 - [10-27 검색·응답 제한/Content-Type 결합](integration/2026-10-27-search-response-pr-integration.md): PR #64 병합·HTML 헤더의 budget 이후 설정·상한/JSON 오류 결합·원래 미커밋 보존, 이후 CI/배포는 별도 기록.
 
@@ -81,7 +87,9 @@
 
 - [10-26 상세 오류 Content-Type](content/2026-10-26-content-response-type.md): 경고 재현7개 실패→집중10개 통과, 정상 HTML·오류 JSON 및 기존 계약 유지. 운영 미배포.
 - [10-25 Primary 대비·브라우저 접근성](accessibility/2026-10-25-primary-action-contrast.md): 주황 배경 유지·짙은 글자·명시적 focus, UI58개+실제 화면12개. 전체 WCAG/타 브라우저 미검증.
-- [10-25 본문 H1 경고 전환](content/2026-10-25-body-h1-warning.md): 공용·로컬 CLI·원격 API의 경고/게시·원문 H1 보존 회귀, 운영 미배포.
+- [10-25 본문 H1 경고 전환](content/2026-10-25-body-h1-warning.md): 공통 경고 회귀와 당시 NAS 재기동 후 관측. 사용자 제공 태그·독립 digest/H1 표본 미검증 구분.
+
+- [10-27 Node 런타임 보안 선행 조사](security/2026-10-27-node-runtime-security-review.md): 패치 이전 관측·정상 Brotli 진단과 한계, 후속 PR #68의 결과와 구분.
 - [10-25 나머지 의존성 보안 경고 10건](security/2026-10-25-remaining-advisories.md): main 기반 분리 패치·16개 신규 회귀·production 문서154개 성공. 감사13→3, Next는 PR #60에 유지·미배포.
 - [10-25 Next.js Critical 우선 패치](security/2026-10-25-next-critical.md): Next/MDX 16.4.3·Critical 0·잔여 10건, 보안/함수 캐시·production E2E와 종료 증거 호환 보완. 작업별 커밋, 운영 미배포.
 
@@ -265,3 +273,7 @@
 [artifacts 목록](artifacts/README.md)에서 JSON 측정값을 찾을 수 있습니다. 각 결과의 환경·표본·한계는 연결된 보고서와 함께 확인해야 합니다. 이 폴더의 결과만으로 현재 배포가 통과했다고 판단하지 않습니다.
 
 보고서 작성과 이동 기준은 [문서 역할과 구조](../process/documentation-organization.md)를 따릅니다.
+
+## 병합 후 검증 연결
+
+- [10-28 대비 병합·배포 후속](accessibility/2026-10-25-primary-action-contrast.md#2026-10-28-병합-후-기록-연결): PR #63 원본 CI·공개 CSS와 GitHub Deployment 식별자 재조회. 현재 운영/WCAG 검사와 구분.

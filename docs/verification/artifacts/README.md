@@ -2,6 +2,10 @@
 
 - [11-21 JavaScript 실제 적용 정제 증거](2026-11-21-modern-javascript-implementation.json): 타입·소스 해시·실제 API 7조건과 통합 26그룹·정리 결과. [조건과 한계](../integration/2026-11-21-modern-javascript-implementation.md). 원시 출력·스크린샷은 저장소 밖 보존.
 - [11-20 JavaScript 현대화 재검증](2026-11-20-modern-javascript-guidance.json): 합성 16조건·타입 비교와 검토 소스 해시. [검증 조건과 한계](../integration/2026-11-20-modern-javascript-guidance.md).
+- 11-20 운영 기록 재검토: PR #68 보류·병합 후 JSON은 역사적 집계만 재구성하고 `publicReview`에 원본 blob·제외 필드를 기록했다. health/storage 응답 본문 필드와 불필요한 provider ID·별칭은 새 통합본에서 제외한다. 원본 stage·과거 커밋은 보존하며 현재 운영 재검증이 아니다.
+- [11-21 워커 풀 발행 정제 요약](2026-11-21-worker-pool-publication-summary.json): [11-20 보고서](../content/2026-11-20-worker-pool-publication.md). 본문 발췌·설명·개별 provider ID 제외, 원본 SHA-256과 제외 필드 보존.
+- [11-21 워커 스레드 초안 정제 요약](2026-11-21-worker-thread-draft-review-summary.json): [11-20 보고서](../content/2026-11-20-worker-thread-draft-review.md). 원시 실행별 데이터가 아닌 기존27회 합성 실험의 집계이며 새 측정 아님.
+- [11-21 워커 스레드 발행 정제 요약](2026-11-21-worker-thread-publication-summary.json): [11-20 보고서](../content/2026-11-20-worker-thread-publication.md). 본문 fingerprint·provider ID·불필요한 지식 페이지 ID를 제외한 과거 관측 요약.
 
 - [11-10 Feed 검색 정제 집계](2026-11-10-vuln-radar-feed-search-summary.json): [보고서](../integration/2026-11-10-vuln-radar-feed-search.md). 원시 캡처·로그 제외, 합성 회귀·최초 실패와 최종 정리 상태만 기록.
 
@@ -35,6 +39,8 @@
 
 - [10-28 diff 코드 블록](2026-10-28-diff-code-block.json): [검증](../accessibility/2026-10-28-diff-code-block.md)의 조건·실행 결과·중간 실패, 미커밋.
 
+- [10-28 PR #68 보류](2026-10-28-pr68-merge-hold.json) · [재개·병합 후](2026-10-28-pr68-postmerge.json): [보안 패치 보고서](../security/2026-10-27-node24-security-patch.md). 취소·재시도와 main CI/게시/배포 분리, NAS 교체 미확인.
+
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.json): [보고서](../security/2026-10-27-node24-security-patch.md). 버전 경계·회귀·로컬 이미지 digest/gate hash·원본 15파일 보존·미배포 구분.
 
 - [10-27 검색/응답 제한 PR 결합](2026-10-27-search-response-pr-integration.json): [보고서](../integration/2026-10-27-search-response-pr-integration.md). #64 공식 squash·실제 main/배포 조회·충돌 보존·검색 어댑터 전후·소스9blob·production162개.
@@ -51,13 +57,21 @@
 
 - [10-26 상세 오류 Content-Type 전후](2026-10-26-content-response-type.json): [검증 보고서](../content/2026-10-26-content-response-type.md). 실제 adapter 경고 재현과 수정 후 경고0·응답 계약 대조.
 - [10-25 Primary 대비 측정](2026-10-25-primary-action-contrast.json)·[Mobile Dark](2026-10-25-primary-contrast-mobile-dark.png)·[Desktop Light](2026-10-25-primary-contrast-desktop-light.png): [검증 보고서](../accessibility/2026-10-25-primary-action-contrast.md). 수정 전 실패·computed 대비·브라우저 회귀·Figma outline 재조회.
+
+- [10-28 대비 배포 식별자 재조회](2026-10-28-primary-deployment-identifiers.json): [작업 기록](../../worklog/2026-10/2026-10-25-primary-action-contrast.md#2026-10-28-독립-기록-pr-준비). GitHub Deployment ID·당시 SHA를 확인, 현재 Production 재검사 아님.
 - [10-25 H1 동일 입력 전후 판정](2026-10-25-body-h1-warning.json): [검증 보고서](../content/2026-10-25-body-h1-warning.md). 기준 main의 차단 2개와 수정본의 경고 1개 대조, 운영 미배포.
+
+- [11-17 NAS 과거 관측 정제 요약](2026-11-17-nas-restart-review-summary.json): [H1 후속 관측](../content/2026-10-25-body-h1-warning.md#nas-재기동-후-외부-읽기-전용-점검). 실제 health 본문을 제외하고10-25의 상태·개수·미검증만 분리. 원본과 다른 bytes이며 현재 배포 확인이 아님.
 - [10-25 UI·전송 계약 분리](2026-10-25-ui-transport-contract.json): [보안 PR 후속 검증](../security/2026-10-25-remaining-advisories.md#승인된-ui전송-검사-분리). 로컬 44개 통과·본문 표시 중 pending·200 이후 중단·완료 대조. 실제 중단 호출자 해소를 뜻하지 않음.
 
 - [10-25 두 보안 PR 결합 감사·회귀](2026-10-25-security-combined.json): [통합 검증](../security/2026-10-25-remaining-advisories.md#승인된-main-병합과-결합-검증). Next main 병합 후 전체/production audit 0건·회귀 153개·production E2E 154개, PR #61 병합 전 로컬 증거.
 
 - [10-25 나머지 보안 경고 감사·그래프](2026-10-25-remaining-advisories.json): [보고서](../security/2026-10-25-remaining-advisories.md). main 감사13→3·대상10건 제거·패치 전후 회귀, Next PR #60과 분리·운영 미배포.
 - [10-25 Next 패치 audit·그래프 범위](2026-10-25-next-critical-audit.json), [초기 E2E 실패·종료 trace](2026-10-25-next-e2e-before-compatibility.json): [보안 검증](../security/2026-10-25-next-critical.md). Critical 0·잔여 10건과 144/154 초기 결과를 보존하며 로컬 실행·미배포다.
+
+- [10-28 정상 Brotli 재검증](2026-10-28-node-brotli-safe-probe.json): [선행 조사](../security/2026-10-27-node-runtime-security-review.md)의 후속. 패치된 Node 24.22.1에서 처리 순서 확인, 악용 검증 아님.
+
+- [10-27 Node 런타임 보안 조사](2026-10-27-node-runtime-security-review.json): [선행 조사](../security/2026-10-27-node-runtime-security-review.md)의 당시 버전·소스 경로. 실행 진단기는 [예제](../../examples/node-runtime-security/README.md)로 분리.
 
 - [10-24 명시 main 그래프 재현](2026-10-24T12-22-01-870Z-viteplus-lockfile-impact.json), [동일 baseline 소비자 대조](2026-10-24T12-22-21-670Z-viteplus-consumer-control.json), [CLI 정리 실패](2026-10-24T12-22-04-534Z-vuln-radar-viteplus.json), [CLI 재실행 성공](2026-10-24T12-23-21-834Z-vuln-radar-viteplus.json): [PR #59 후속 검증](../integration/2026-10-24-pr59-baseline-fixes.md). 실제 비밀값·운영 데이터·Railway 배포 없음.
 
