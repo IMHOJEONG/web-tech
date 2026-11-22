@@ -2,6 +2,13 @@
 
 - [11-21 JavaScript 현대화 실제 적용](2026-11-21-modern-javascript-implementation.md): 4곳 교체·오탐 유지·타입 선언 범위 한정, 실제 클라이언트와 통합 회귀 및 지식 문서 갱신.
 - [11-20 JavaScript 현대화 항목별 지식](2026-11-20-modern-javascript-guidance.md): 5곳 소스 대조·16조건 합성 검증과 개념·원리 문서 3종, KAN-83·Confluence 연결.
+- [11-17 운영 기록 PR 통합 준비](2026-11-17-open-records-pr-consolidation.md): 11-20 최신 main 위에서 #69·#70·#72·#73의 고유 기록을 재구성. 원본 stage 보존·응답 필드 정제, 공개·기존 PR 종료는 미실행.
+- [11-20 병합 후 기록 통합 준비](2026-11-20-postmerge-records-consolidation.md): 이미 main인3개를 제외하고 고유 후속 기록·합성 판정 회귀를 보존형 통합. 공개 검수·커밋·운영 조치는 별도.
+- [11-20 워커 풀 로컬 미리보기](2026-11-20-worker-pool-local-preview.md): 당시 미리보기·초안 작성 위치 확정 기록. 미반영 로더 기능을 main 완료로 표시하지 않음.
+- [11-20 워커 풀 발행](2026-11-20-worker-pool-publication.md): 당시 게시·main CI·사이트맵 관측. 원문·원시 증거는 제외하고 실행 이력만 보존.
+- [11-20 워커 스레드 초안 검토](2026-11-20-worker-thread-draft-review.md): 이전·관측27회·포맷 실패와 보완의 과거 기록.
+- [11-20 워커 스레드 발행·11-21 기록 정리](2026-11-20-worker-thread-publication.md): 발행 이력과 별도 요약3개의 정제·보존·공개 검수 범위를 구분.
+- [11-11 Atlassian 진단·11-21 기록 정리](2026-11-11-atlassian-widget-timeout.md): 과거 문의·정정 이력과 현재 문서 정리를 구분. 원시 자료·새 문의·앱/인증 변경은 제외.
 
 - [11-20 비공개 Git 초안 작성 규칙](2026-11-20-private-draft-authoring-policy.md): 공개/비공개 작성 위치·저장과 게시 승인 경계를 저장소별 지침 PR로 분리. 원문 이전·기본 브랜치 반영·키·배포 미실행.
 
@@ -15,7 +22,7 @@
 
 - [11-17 Next.js 보안 업데이트](2026-11-17-next-cache-advisory.md): 신규 #362·KAN-82 분리, 안정 patch·보안 하한·본문/캐시 회귀와 기존 실험 실패 대조. 기존 Hono 사후 기록 보존과 후속 커밋·PR 요청·운영 미배포 범위를 구분.
 
-- [11-17 Hono Dependabot 보완](2026-11-17-hono-advisories.md): 실제 Prisma 의존성 patch·합성 보안 회귀·KAN-79 연결. 로컬 검증이며 공개 승인·커밋·푸시·PR·배포는 별도.
+- [11-17 Hono Dependabot 보완](2026-11-17-hono-advisories.md): PR #95 병합 당시 main CI·Production·Railway·5건 fixed 관측을 보존. 로컬 후속 기록의 공개 검수와 현재 운영 상태 재검증은 별도.
 
 - [11-14 검색 Drawer·자동완성](2026-11-14-search-drawer.md): PR #92 main 병합·운영 검증과 새 main 기준 CI 기하 비교 보완. 초안·stash·NAS 유지.
 

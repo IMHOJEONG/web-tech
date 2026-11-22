@@ -43,3 +43,15 @@ KAN-80의 후속으로 새 초안도 비공개 `heap-forge-content`에서 작성
 새 작업 공간은 고정 lockfile·ignore-scripts 오프라인 설치로 기존 패키지 1,419개를 재사용했으며 lockfile·설치 훅·대기 중 dotenv skill은 변경/승인하지 않았다. 최신 main 기준 콘텐츠 준비·공개 업로드 경계 44개가 통과했다. 초기 로컬 47개 중 3개는 미푸시 자동화 후보 기능의 회귀로, 이번 PR에 코드와 함께 옮기지 않았다. 최신 main의 기존 테스트·timeout/retry는 바꾸지 않는다. 신규 파일 포함 문서 검사 오류 0개·문서 10개 재승인 요구와 비공개 지침 3개의 대표 패턴 검출 0개를 확인했다. 이는 전체 비밀정보 전수 감사가 아니다.
 
 원래 24곳의 HEAD·미커밋 파일·인덱스·status와 두 저장소 stash 목록의 동일성을 재확인했다. 원문·자산·콘텐츠 lock·워크플로·패키지 파일은 기준 main과 같다. 원격 PR·CI의 최종 결과는 같은 검증 head의 KAN-80 3열 표와 PR 검사 결과에 연결하며, 로컬 검사 성공을 원격 CI·main 병합·운영 성공으로 표시하지 않는다.
+
+## 2026-11-20 후속: 두 저장소 병합·자동 배포 검증
+
+사용자 승인 후 공개 [PR #103](https://github.com/IMHOJEONG/web-tech/pull/103)과 비공개 [PR #1](https://github.com/IMHOJEONG/heap-forge-content/pull/1)의 최종 squash 메시지 전체를 `pnpm pr:squash`로 사전검사하고 같은 인수의 `--merge`로 병합했다. 실제 main 커밋은 각각 `2728665e5c8aca9496471fda100999c3f8dda0b6`과 `0e233270e566aeabcc0d434e48c178dfe77f64a5`다. 메시지 검사·head 고정·서버 규칙을 우회하지 않았으며 CodeRabbit 한도 예외도 사용하지 않았다.
+
+공개 PR은 별도 보안 main `02e308e8`과 검수 목록·월별 목차 2개에서 충돌했다. 추가 사용자 승인에 따라 양쪽 항목을 보존하고 합쳐진 목차만 재검수·해시 갱신했다. 통합 커밋 `5bcf5118`에서 포맷·문서·공개 경계 검사와 관련 회귀 115개가 통과했고 PR 검사 22개·미해결 리뷰 0개를 확인했다. 보안 패치는 main의 기존 변경을 수용한 것이며 이번 PR의 독립 조치로 보고하지 않는다.
+
+병합 SHA의 [main CI](https://github.com/IMHOJEONG/web-tech/actions/runs/44698814152)는 attempt 1의 13 job 모두 성공했다. [문서 검사](https://github.com/IMHOJEONG/web-tech/actions/runs/44698814151)와 같은 SHA의 CodeQL도 통과했다. Vercel 블로그·vuln-radar의 자동 배포는 GitHub의 SHA 연결과 CLI의 Production·READY·운영 도메인 alias를 대조했다. 별도 Railway 자동 상태도 success였으며 수동 배포·운영 설정은 변경하지 않았다. 블로그 `/ko`·`/ko/feed`·`/ko/docs`·`/sitemap.xml`은 HTTP 200, 사이트맵 loc 58개를 관측했다. 이는 응답 확인이며 실제 사용자 여정 전체의 수동 검증이나 새 글 게시 검증은 아니다. 개별 provider 배포 ID는 이번 정제본에서 생략한다.
+
+비공개 PR은 지침 3개만 병합했고 PR의 GitGuardian 검사는 통과했다. Actions workflow 0개, 해당 병합 SHA의 검사·배포 0개이므로 인증 CI·후속 배포가 실행됐다고 주장하지 않는다. 공개 병합 diff는 지침·검수 기록 13개뿐이고 콘텐츠 lock은 그대로다. 글 이전·게시·키 생성/등록·권한·NAS·운영 설정 변경은 하지 않았다.
+
+이번 병합 전후 작업 공간 27곳의 파일 bytes·인덱스·stash를 대조해 동일성을 확인했고, 이번 PR 작업 트리의 HEAD만 승인된 통합 커밋으로 변경됐다. 이후 사용자 승인으로 이 worklog의 정제 결과만 로컬 추가하며 새 stage·커밋·푸시는 하지 않는다. KAN-80의 기존 3열 표와 같은 Confluence 논의의 병합 답글에 실행 결과를 연결한다. 재사용할 저장·게시·인증 CI의 차이는 기존 Confluence 지식 문서에 병합 상태만 보완하고 새 ADR·지식 페이지는 만들지 않는다. 원시 로그·원문·비밀값은 기록하지 않는다.

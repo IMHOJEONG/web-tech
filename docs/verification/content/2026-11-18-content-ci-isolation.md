@@ -140,6 +140,44 @@ CodeRabbit 첫 리뷰는 완료했고 문서 보완 2건을 남겼다. 검증 �
 
 이번 범위에는 main 병합·수동 인증 CI 실행·운영 전환·NAS 변경이 없다. 원시 로그·trace·실제 응답·키는 공개하지 않는다. 기존 미커밋과 stash를 보존하고, CI 전용 브랜치에서만 공개 검수와 커밋을 수행한다.
 
+### 2026-11-20 PR #101 병합·일반 CI·Production 확인
+
+사용자 병합 승인 후 최종 head `cc8fc5ca9a50cfa72a14bfd37a243f51fd9b5717`와 미해결 리뷰 0개를 다시 확인했다. 위 절의 미병합 기록은 당시 상태이며 아래는 별도 승인 후의 결과다. 키 생성·등록과 실제 인증 콘텐츠 workflow 실행은 계속 제외했다.
+
+| 항목              | 관측 결과                                                                                                                                                                                                         |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 최종 메시지       | 저장소 `pr:squash`의 check-only와 `--merge` 모두 통과. 전달 메시지 SHA-256 `96c58e495350bd335fe57a72fc845227158549a1f529b9e3c2f024106e4e7b03`가 실제 main 커밋 메시지와 일치.                                     |
+| 병합              | [PR #101](https://github.com/IMHOJEONG/web-tech/pull/101) MERGED. main [c6465f48](https://github.com/IMHOJEONG/web-tech/commit/c6465f48c96aef681a42de77a584b25e69fd8525). 기존 main 이력 재작성·브랜치 삭제 없음. |
+| CodeRabbit        | 예상 head의 공식 check `135649077199`가 정확한 한도 초과 결과라 기존 정책으로 예외 처리. `reviewPerformed: false`이며 새 코드 분석 성공으로 계산하지 않음. 기존 문서 의견 2건은 보완·해결 상태 재조회.            |
+| main CI           | [44554030341](https://github.com/IMHOJEONG/web-tech/actions/runs/44554030341) attempt 1의 13개 job 모두 성공. 개별 E2E 내부 재시도 0회를 메타데이터만으로 주장하지 않음.                                          |
+| 문서·CodeQL       | 동일 main SHA의 [문서 44554030272](https://github.com/IMHOJEONG/web-tech/actions/runs/44554030272)와 [CodeQL 44554029236](https://github.com/IMHOJEONG/web-tech/actions/runs/44554029236) 성공.                   |
+| 블로그 Production | `READY`, target `production`, branch `main`, source SHA `c6465f48…`. 읽기 전용 배포 API와 공개 도메인의 배포가 일치. 배포 전 source는 `7fc4d127…`로 구분하며 provider 배포 ID는 정제본에서 생략.                  |
+| 공개 독자 검증    | 인증 없이 ko/en 각 목록 17개·3페이지, 상세 34개, 사이트맵 상세 34개 확인. 일반·본문 코드·빈 검색 10/1/0개와 승인 자산 15개 SHA-256 일치. 콘텐츠 revision은 기존 고정 발행본 유지.                                 |
+| 실제 Chromium     | ko/en × 1280/390px의 4조건에서 검색 제출 → 실제 Link 클릭 → 본문 확인. main 1개, pageerror·관측한 NAS 도메인 요청·가로 overflow 모두 0. 화면·trace·원문을 보관하지 않음.                                          |
+| 비공개 경계       | Git·검수 목록·release lock·빌드 스크립트·생성 원문 경로의 공개 요청 5개가 404이고 원문 표식 없음. 이는 해당 표본이며 전체 경로 보안 감사가 아님.                                                                  |
+| 미실행 확인       | 인증 콘텐츠 workflow 실행 수 0, Environment secret 수 0. 키 발급·등록·회전·NAS 변경 없음. 기존 Vercel 키 교체·이동 없음.                                                                                          |
+| 보존              | 다른 작업 트리 20곳의 HEAD·인덱스·status·수정 파일 해시와 작업 시작 stash 목록이 동일. 이번 브랜치에는 승인된 보고서·worklog 두 파일의 정제 결과만 로컬 기록.                                                     |
+
+실행 위치는 공개 코드 저장소 루트다. 첫 사전검사 명령은 병합 전에 사용한 형식이며 메시지 파일 경로는 예시다. 실제 검수한 제목·본문·footer만 넣고 키·원문은 넣지 않는다. 현재 PR은 이미 MERGED이므로 사전검사도 상태 검사에서 거절하는 것이 정상이며 `--merge`를 다시 실행하지 않는다. 나머지 명령은 병합 후 상태를 읽기 전용으로 확인한다.
+
+```sh
+pnpm pr:squash --repo IMHOJEONG/web-tech --pr 101 \
+  --expected-head cc8fc5ca9a50cfa72a14bfd37a243f51fd9b5717 \
+  --message-file /tmp/reviewed-squash-message.txt
+gh pr view 101 --repo IMHOJEONG/web-tech --json state,mergeCommit,mergedAt
+gh api repos/IMHOJEONG/web-tech/actions/runs/44554030341 \
+  --jq '{head_sha,status,conclusion,run_attempt}'
+vercel inspect heap-forge.app
+gh api 'repos/IMHOJEONG/web-tech/actions/workflows/docs-private-content.yml/runs?per_page=1' \
+  --jq '{total_count}'
+gh api repos/IMHOJEONG/web-tech/environments/docs-private-content/secrets \
+  --jq '{total_count,names:[.secrets[].name]}'
+```
+
+실제 검증은 저장소의 Node 24.22.1·pnpm 12.14.0을 사용했다. Vercel CLI 도움말 조회에서 sandbox의 mise/cache 쓰기 EPERM을 관측했고 실제 인증 메타데이터 조회는 권한을 승인받아 읽기 전용으로 수행했다. 배포 자체의 실패나 인증 CI 실행으로 분류하지 않는다. 공개 응답은 메모리에서만 검사했고 정제 집계만 저장소 밖 소유자 전용 임시 공간에 남겼다. 새 artifact 업로드·커밋·푸시는 하지 않았다.
+
+후속은 소유자 자격 증명과 분리된 실행 환경·App 런처·CI 전용 키를 준비한 뒤 실제 Bot dispatch와 사람 승인을 검증하는 것이다. 일반 CI·Vercel Production 성공으로 이 후속 완료를 대신하지 않는다. 다른 앱의 Vercel 자동 배포 성공은 메타데이터만 확인했으며 해당 앱의 기능 재검사는 이번 범위가 아니다.
+
 ## 관련 문서
 
 - [ADR-0033](../../architecture/adr-0033-content-ci-trust-boundary.md)

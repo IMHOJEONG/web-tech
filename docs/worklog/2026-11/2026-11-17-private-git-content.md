@@ -90,3 +90,19 @@ main `53ab14e5` 위 전용 브랜치에서 운영 고정 Git·검수 해시·공
 [리뷰 보완의 명령·결과·실패·한계](../../verification/content/2026-11-17-private-git-content.md#2026-11-19-pr-99-재현-절차-리뷰-보완)에 저장소 288개, 기존 Canvas 예제 4개, Chrome 이벤트 루프 10페이지의 정제 결과를 연결한다. Canvas 실험 API의 현재 headed 화면 재측정은 미실행이다. 기존 검증 보고서 3개와 이 worklog의 변경 bytes만 사용자 승인 범위로 재검수한다. 원시 자료·실제 원문·비밀값은 포함하지 않는다.
 
 다음은 이번 변경만 커밋·푸시하고 PR #99의 리뷰 해결·새 head의 원격 CI를 확인하는 것이다. 기존 미커밋·stash·비공개 자료를 보존하며 main 병합·배포·NAS/자격 증명 변경은 수행하지 않는다. 추적은 기존 KAN-80과 Confluence 공개 사본 정리 구역을 유지한다.
+
+## PR #99 병합·Production 확인 후 로컬 기록
+
+후속 사용자 승인으로 최종 메시지 전체와 정확한 head를 사전검사하고, 기존 공식 CodeRabbit 무료 한도 예외를 적용해 PR #99를 main `2677ab95`에 병합했다. 같은 SHA의 main CI·문서·CodeQL과 자동 Production 배포가 성공했고 공개 도메인도 새 배포를 가리킨다. [정제 검증 결과와 최초 요청 실패·재검증의 한계](../../verification/content/2026-11-17-private-git-content.md#pr-99-병합-후-운영-검증--로컬-기록)에 링크·배포 식별자·공개 전수·브라우저 이동을 기록한다.
+
+기존 미커밋·stash·비공개 자료·과거 이력은 건드리지 않았다. 병행 작업에서 커밋된 7개 파일은 시작 bytes와 같음을 확인했으며 되돌리지 않는다. KAN-80·Confluence와 PR에는 원격 근거를 연결한다. 이번 두 문서는 결과의 로컬 기록만 추가하며 새 공개 검수 해시·커밋·푸시·NAS/키/보호 설정 변경은 하지 않는다. 인증 CI 활성화·NAS 전용 글 수동 이전과 후속 문서 상태 갱신은 별도 작업이다.
+
+## 게시 자동화·현재 인증 경계 검토 · 로컬 기록
+
+2026-11-19 후속 읽기 전용 조회에서 콘텐츠 저장소의 협업자는 소유자 계정 1개, 등록 deploy key 1개는 read-only이며 Actions 기본 토큰은 read·PR 승인 불가였다. 콘텐츠 workflow는 0개다. 현재 에이전트 세션의 인증은 소유자의 관리자 권한이므로 사람과 AI의 쓰기 권한이 분리됐다고 판단하지 않는다. GitHub App 설치 권한 목록은 현재 토큰으로 조회할 수 없어 미확인이다. 비공개 저장소 ruleset·브랜치 보호 조회는 요금제 제한 403을 반환했다.
+
+공개 앱 저장소의 인증 workflow 코드는 main 고정 코드 SHA·별도 Environment·자기 승인 금지·관리자 우회 금지·최종 step의 읽기 키 사용을 요구한다. 실제 `docs-private-content` Environment 조회는 404, 인증 workflow 실행 이력은 0개, 일반 repository secret에 콘텐츠 키 등록도 없었다. 따라서 일반 PR의 합성 검사와 실제 Vercel Production 콘텐츠 빌드는 동작하지만 GitHub의 인증된 실제 콘텐츠 검증은 아직 운영 중이 아니다. 이 미준비 상태를 승인 기준 완화로 해결하지 않는다.
+
+현재 앱 lock의 콘텐츠 SHA 갱신은 수동이며 main 병합 후 Vercel 배포는 자동이다. 추천은 실행·승인 신원 분리 → 보호 Environment와 인증 CI 검증 → 사용자가 공개 승인한 정확한 bytes/콘텐츠 SHA만 검증 → 전용 봇의 lock SHA·URL 집합 갱신 PR 생성 → 기존 CI·승인·병합 → 자동 배포·공개 smoke 검사다. 인증 job은 PR 코드를 checkout하지 않고 검토된 main 코드로 후보 lock을 데이터로 검증해야 한다. 콘텐츠 read-only 키와 공개 앱 PR 작성 자격 증명을 분리하고, 원문·초안·원시 결과는 공개 PR/로그/artifact에 넣지 않는다.
+
+이는 설계 검토이며 workflow 실행·키 발급·Environment 생성·권한/보호 설정·커밋·푸시는 하지 않았다. 기존 검수 hash를 자동 승인하거나 고정 revision을 가변 main/latest로 바꾸지 않는다. 이 추가 기록은 로컬-only이며 공개 검수 해시는 갱신하지 않는다.

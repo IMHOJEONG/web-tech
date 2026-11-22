@@ -87,3 +87,31 @@ PR #91 리뷰에서 위치 판정 6개가 표준 CI 대상에서 빠진 점과 �
 - [작성·연결 가이드](../../runbooks/docs-article-toc-guide.md)
 - [목차 공통화 경계](../../architecture/docs-document-ui-reuse-policy.md)
 - [작업 기록](../../worklog/2026-11/2026-11-14-article-toc-ux.md)
+
+## 병합·Production 후속 확인
+
+2026-11-14 KST 사용자 승인에 따라 [PR #91](https://github.com/IMHOJEONG/web-tech/pull/91)을 squash 병합했다. 병합 전 마지막 head는 `1a5e27d2dc309b1da90424457b04e40da9527918`, 실제 main 병합 SHA는 `42a26e371c88f74844ad28d5bc9fc5a46482bfbf`다. 검증 보고서의 앞선 미배포 표시는 각 실행 시점의 기록이며 이 후속 결과와 구분한다.
+
+- 리뷰 2건은 수정·회귀 후 해결했다. 연결 도구의 쓰기 403은 기존 GitHub CLI 인증으로 재시도하고 실제 저장 결과를 확인했다.
+- 최종 메시지 전체와 head를 `pnpm pr:squash`로 사전 검사한 뒤 같은 인수의 `--merge`로 병합했다. 메시지 SHA-256은 `2495116938cc846186781c3cf89cbadef422392088d0f6c660765d669bc00ffa`다.
+- 재리뷰는 공식 CodeRabbit 앱의 한도 초과였다. 체크 `132447037608`은 같은 head·App 347564·정확한 한도 제목/summary를 만족해 기존 예외 정책을 적용했다. `reviewPerformed: false`이며 재리뷰 통과로 표시하지 않는다. 다른 CI·보안 검사는 성공했고 미해결 스레드는 없었다.
+- 같은 main SHA의 [CI](https://github.com/IMHOJEONG/web-tech/actions/runs/43595500214), [문서 검사](https://github.com/IMHOJEONG/web-tech/actions/runs/43595500273), [CodeQL](https://github.com/IMHOJEONG/web-tech/actions/runs/43595500173)이 모두 성공했다.
+- 같은 main SHA의 Vercel docs 배포를 CLI 53.1.1로 조회해 운영 도메인 연결·target `production`·상태 `READY`를 확인했다. Preview 성공만으로 대체하지 않았으며 개별 provider 배포 ID는 이번 정제본에서 생략한다.
+- 최초 PR Preview는 일반 요청의 302 Location이 Vercel `/sso-api`인지 확인한 뒤 공식 인증 경로로 목차·본문을 조회했다. 로컬 프로젝트 연결이 없던 첫 인증 조회는 확인 요구로 중단됐고, 저장소 밖 임시 연결에서 재시도했다. 새 프로젝트·환경변수·접근 보호 설정은 변경하지 않았다.
+
+운영 화면은 기존 `article-toc-navigation.spec.ts`를 임시 Playwright 설정으로 실행했다. 정적 서버 실행을 제외하고 baseURL만 `https://heap-forge.app`으로 바꿨으며 390×844·768×1024·1280×800, timeout 30초·expect 5초·workers 2·retries 0·trace off를 유지했다.
+
+```sh
+pnpm --filter docs exec playwright test --config=/private/tmp/docs-toc-production-20261114.config.mts
+```
+
+이 config와 실행 결과는 저장소 밖 임시 자료이며 공개 파일로 추가하지 않았다. 재현하려면 같은 환경의 임시 config에서 기존 spec과 위 조건을 연결해야 한다.
+
+| 운영 검사           | 관측 결과                                                                                                             |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| 목차 브라우저 회귀  | 14개 통과·데스크톱에서 모바일 전용 Escape 1개 skip. 라이트/다크, 실제 위치 표시, hash, focus, 큰 글자, 모션 감소 확인 |
+| 주요 공개 경로      | Feed·목록·검색·Web·Mobile·UI/UX·About·영문 Feed·robots·sitemap 10개 모두 200. 응답 본문을 끝까지 수신                 |
+| 비인증 revalidation | 토큰 없는 POST 401. 정상 토큰이나 캐시 만료는 사용하지 않음                                                           |
+| 배포 Runtime Logs   | 같은 배포의 최근 20분 error·5xx 조회 각각 0건. 전체 기간 무장애 증명은 아님                                           |
+
+이 후속 절은 사용자가 승인한 **로컬 정제 기록**이다. 병합 이후 새 커밋·푸시와 공개 검수 해시 갱신은 하지 않는다. 원시 응답·로그·캡처는 포함하지 않으며 NAS·기존 미커밋·stash도 변경하지 않았다. 실제 기기·Safari/Firefox·스크린리더 검증은 여전히 미실행이다.

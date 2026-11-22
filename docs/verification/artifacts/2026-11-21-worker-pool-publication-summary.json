@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-11-21",
+  "classification": "derived historical verification summary; no article excerpts, raw response bodies or request headers",
+  "sourceSha256": "16b3a24077cc71cc79c979dc7c25ba82c821c826e946464bc17af5a7468225aa",
+  "omittedFields": [
+    "articles[].description",
+    "articles[].first",
+    "articles[].last",
+    "deployment.id"
+  ],
+  "operationalRequestsPerformed": false,
+  "observation": {
+    "articles": [
+      {
+        "url": "https://heap-forge.app/ko/docs/category/be/node-js/worker-pool-queue-limit",
+        "observedAt": "2026-11-20T01:54:59.426582+00:00",
+        "status": 200,
+        "finalUrl": "https://heap-forge.app/ko/docs/category/be/node-js/worker-pool-queue-limit",
+        "canonical": "https://heap-forge.app/ko/docs/category/be/node-js/worker-pool-queue-limit",
+        "noindex": false,
+        "bodyChars": 13256,
+        "figures": ["admission", "http"],
+        "has503Result": true,
+        "hasQueueFlow": true,
+        "h1Count": 1,
+        "blogPosting": true
+      },
+      {
+        "url": "https://heap-forge.app/en/docs/category/be/node-js/worker-pool-queue-limit",
+        "observedAt": "2026-11-20T01:55:01.582020+00:00",
+        "status": 200,
+        "finalUrl": "https://heap-forge.app/en/docs/category/be/node-js/worker-pool-queue-limit",
+        "canonical": "https://heap-forge.app/en/docs/category/be/node-js/worker-pool-queue-limit",
+        "noindex": false,
+        "bodyChars": 13276,
+        "figures": ["admission", "http"],
+        "has503Result": true,
+        "hasQueueFlow": true,
+        "h1Count": 1,
+        "blogPosting": true
+      }
+    ],
+    "sitemap": {
+      "status": 200,
+      "count": 58,
+      "articleEntries": [
+        "https://heap-forge.app/ko/docs/category/be/node-js/worker-pool-queue-limit",
+        "https://heap-forge.app/en/docs/category/be/node-js/worker-pool-queue-limit"
+      ],
+      "occurrences": [1, 1]
+    },
+    "listing": {
+      "status": 200,
+      "newArticlePresent": true
+    },
+    "deployment": {
+      "state": "READY",
+      "target": "production",
+      "codeSha": "4dedd86e6ddddd12d36cd40cde1cd30d2edec5af",
+      "contentSha": "e07988e9cf6a899d750445b1cf14d7e10d1aca8d",
+      "alias": "https://heap-forge.app"
+    },
+    "browser": {
+      "widths": [1280, 390],
+      "bodyStartAndEndMatchLocal": true,
+      "tableCount": 2,
+      "figureCount": 2,
+      "missingTocTargets": 0,
+      "horizontalOverflow": false,
+      "mobileTargetTopPx": 96.1875,
+      "localCodeDisclosureExpanded": true
+    },
+    "checks": {
+      "sourceBindingAndExecution": 3,
+      "content": 51,
+      "rendererAndHeading": 28,
+      "privateDocuments": 18,
+      "reviewedAssets": 15,
+      "productionBuild": "passed",
+      "mainCI": "success",
+      "mainCodeQL": "success",
+      "mainDocumentation": "success"
+    },
+    "limits": [
+      "Chromium viewport emulation, not physical devices",
+      "Existing measurements retained, no new load benchmark",
+      "Python urllib received 403; curl and browser succeeded; cause not established",
+      "Raw streaming response requires reading the corresponding Suspense segment, not the initial empty wrapper"
+    ]
+  }
+}

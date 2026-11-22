@@ -30,7 +30,7 @@
 
 - [10-28 diff 코드 블록 표시](2026-10-28-diff-code-block.md): 공통 행 하이라이터·언어 보존·로컬/원격/모바일 복사·접기 회귀, 로컬-only.
 
-- [10-28 Node 보안 PR 병합·운영 확인](2026-10-28-node24-security-merge.md): 공식 squash 사전검사·리뷰 재요청·NAS 이미지 선택과 교체 순서 회귀, 필터 보존.
+- [10-28 Node 보안 PR 병합·운영 확인](2026-10-28-node24-security-merge.md): 보류·재개·공식 squash·main CI/이미지 게시/배포 증거. NAS 교체·flaky·rollback 후속 분리, 필터 보존.
 
 - [10-27 Node 24 보안 patch](2026-10-27-node24-security-patch.md): main 별도 브랜치·필터 보존·CI gate·두 backend digest pin·회귀.
 
@@ -44,7 +44,7 @@
 
 - [10-26 상세 오류 Content-Type 보완](2026-10-26-content-response-type.md)
 - [10-25 Primary 글자 대비와 브라우저 접근성](2026-10-25-primary-action-contrast.md)
-- [10-25 로컬·원격 본문 H1 경고 전환](2026-10-25-body-h1-warning.md)
+- [10-25 본문 H1 경고 전환](2026-10-25-body-h1-warning.md): 공용 경고 회귀·NAS 외부 관측 기록과 실제 이미지/H1 확인 한계. 10-28 별도 기록 PR 준비.
 - [10-25 나머지 보안 경고 10건 분리 조치](2026-10-25-remaining-advisories.md)
 - [10-25 Next.js Critical 패치·회귀](2026-10-25-next-critical.md)
 
@@ -77,6 +77,8 @@
 - [10-22 squash 최종 메시지 사전검사](2026-10-22-squash-merge-preflight.md)
 
 - [10-22 pnpm12 툴체인과 서명 유지](2026-10-22-pnpm12-toolchain.md)
+
+- [10-27 Node 런타임 보안 선행 조사](2026-10-27-node-runtime-security-review.md): 패치 이전 관측과 정상 Brotli 진단 예제, 10-28 별도 게시 준비.
 
 - [10-22 KAN-22 CI 증거 보관·이동 계측](2026-10-22-navigation-evidence-retention.md)
 
@@ -242,3 +244,7 @@
 - [10-05 OG 브라우저·Vercel 캐시 헤더 분리](2026-10-05-og-cache-header-boundary.md)
 
 - [10-19 PR #44 피드 리뷰 보완](2026-10-19-vuln-radar-feed-review.md)
+
+## 병합 후 검증 연결
+
+- [10-28 대비 병합·배포 후속](2026-10-25-primary-action-contrast.md#2026-10-28-독립-기록-pr-준비): 기존 #62/#63 병합·배포 증거와 GitHub Deployment ID 정정, 독립 기록 PR.

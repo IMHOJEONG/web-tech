@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-11-21",
+  "classification": "derived historical verification summary; no article excerpts, raw response bodies or request headers",
+  "sourceSha256": "7fa335e5b32693e3dc21b75e0f136d2ddd3f215af5b3267a9ff5d965bc1740fe",
+  "omittedFields": [],
+  "operationalRequestsPerformed": false,
+  "observation": {
+    "observedAt": "2026-11-20T02:14:18.250Z",
+    "node": "v24.22.1",
+    "os": "macOS 26.6.2",
+    "cpu": "Apple M1 Pro",
+    "iterations": 150000000,
+    "conditions": {
+      "idle": {
+        "count": 9,
+        "timerMs": {
+          "median": 20.8,
+          "min": 19.8,
+          "max": 21.8
+        },
+        "firstDataMs": {
+          "median": 42.1,
+          "min": 42,
+          "max": 42.2
+        },
+        "endMs": {
+          "median": 82.5,
+          "min": 81.6,
+          "max": 88.9
+        },
+        "compute": null
+      },
+      "main": {
+        "count": 9,
+        "timerMs": {
+          "median": 191.4,
+          "min": 190,
+          "max": 213.4
+        },
+        "firstDataMs": {
+          "median": 192.1,
+          "min": 190.6,
+          "max": 214
+        },
+        "endMs": {
+          "median": 192.3,
+          "min": 190.7,
+          "max": 214.2
+        },
+        "compute": {
+          "median": 190.9,
+          "min": 189.7,
+          "max": 212.8
+        }
+      },
+      "worker": {
+        "count": 9,
+        "timerMs": {
+          "median": 20.6,
+          "min": 19.6,
+          "max": 21.7
+        },
+        "firstDataMs": {
+          "median": 42.1,
+          "min": 41.9,
+          "max": 44.3
+        },
+        "endMs": {
+          "median": 82.3,
+          "min": 81.4,
+          "max": 84.2
+        },
+        "compute": {
+          "median": 191.3,
+          "min": 189.5,
+          "max": 247
+        }
+      }
+    },
+    "bytesPerRun": 16384,
+    "allPayloadsAndChecksumsMatch": true,
+    "mainBothCallbacksAfterCompute": 9,
+    "workerBothCallbacksDuringCompute": 9,
+    "sourceBindingTests": 2,
+    "contentTests": 51,
+    "draftValidation": {
+      "frontmatter": "passed",
+      "bodyStyle": "passed",
+      "codeParts": 6,
+      "diagrams": 2
+    },
+    "browser": {
+      "widths": [1280, 390],
+      "horizontalOverflow": false,
+      "missingTocTargets": 0,
+      "desktopHeadingTop": 96.2421875,
+      "mobileHeadingTop": 95.875,
+      "mobileTableScrollWidth": 576,
+      "mobileTableClientWidth": 356,
+      "codeDisclosureExpanded": true,
+      "robots": "noindex, nofollow"
+    },
+    "limits": [
+      "No remote network latency or packet capture measurement",
+      "Workers warmed before timing; no pool or creation-cost benchmark",
+      "Chromium viewport emulation, not real mobile devices",
+      "No production article suite or deployment in this task"
+    ]
+  }
+}
