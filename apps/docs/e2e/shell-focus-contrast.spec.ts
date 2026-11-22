@@ -1,4 +1,5 @@
 import { expect, test, type Locator } from '@playwright/test'
+import { openDrawerWithKeyboard } from './helpers/keyboard-drawer'
 
 // Shell controls use solid backgrounds; composite their ancestor alpha layers.
 async function contrast(locator: Locator, pseudo?: string) {
@@ -80,7 +81,9 @@ for (const theme of ['light', 'dark']) {
 
         const mobile = page.viewportSize()!.width < 640
         if (mobile)
-            await page.getByTestId('mobile-nav-drawer-trigger').press('Enter')
+            await openDrawerWithKeyboard(
+                page.getByTestId('mobile-nav-drawer-trigger')
+            )
         const nav = page.getByRole('navigation', {
             name: '주요 메뉴',
             exact: true,
@@ -93,7 +96,7 @@ for (const theme of ['light', 'dark']) {
         await expect(active).toHaveCSS('outline-width', '2px')
         if (mobile) await page.keyboard.press('Escape')
 
-        await page.getByTestId('search-drawer-trigger').press('Enter')
+        await openDrawerWithKeyboard(page.getByTestId('search-drawer-trigger'))
         const search = page.getByRole('dialog').getByRole('search', {
             name: '문서 검색',
             exact: true,
