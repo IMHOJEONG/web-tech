@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { expectEditorialPreview } from './helpers/document-preview'
+import { expectUiUxHubReady } from './helpers/uiux-hub'
 
 for (const locale of ['ko', 'en']) {
     for (const theme of ['light', 'dark']) {
@@ -12,12 +13,12 @@ for (const locale of ['ko', 'en']) {
             )
             await page.emulateMedia({ reducedMotion: 'reduce' })
             await page.goto(`/${locale}/ui-ux`)
-            const main = page.getByRole('main')
+            const main = await expectUiUxHubReady(page)
             await expect(
                 main.getByText(/UI\/UX 뉴스레터|THE UX NEWSLETTER/)
             ).toHaveCount(0)
             await expect(main.locator('input, button')).toHaveCount(0)
-            const featured = page.getByTestId('uiux-featured-articles')
+            const featured = main.getByTestId('uiux-featured-articles')
             await expect(featured.getByRole('link')).toHaveCount(3)
             await expect(
                 main.locator(
@@ -84,11 +85,13 @@ for (const locale of ['ko', 'en']) {
             await first.click({ position: { x: 8, y: 8 } })
             await expect(page).toHaveURL(new URL(href, page.url()).href)
             await page.goBack()
+            await expectUiUxHubReady(page)
             await first.focus()
             await first.press('Enter')
             await expect(page).toHaveURL(new URL(href, page.url()).href)
 
             await page.goBack()
+            await expectUiUxHubReady(page)
             await feedLink.click()
             await expect(page).toHaveURL(
                 new URL(`/${locale}/feed?topic=uiux`, page.url()).href
@@ -100,6 +103,7 @@ for (const locale of ['ko', 'en']) {
 test('UI/UX cards fit 320px and intermediate widths', async ({ page }) => {
     test.skip(page.viewportSize()?.width !== 1280, 'Run width sweep once.')
     await page.goto('/ko/ui-ux')
+    await expectUiUxHubReady(page)
     for (const width of [320, 640, 1024]) {
         await page.setViewportSize({ width, height: 844 })
         const cards = page.locator(
