@@ -11,6 +11,27 @@ export function readyDocsIndex(page: Page) {
     })
 }
 
+export function docsIndexDiscovery(page: Page) {
+    return readyDocsIndex(page).getByTestId('docs-index-discovery')
+}
+
+export function docsIndexDiscoverySummary(page: Page) {
+    return docsIndexDiscovery(page).locator(':scope > summary')
+}
+
+export async function openDocsIndexDiscovery(page: Page) {
+    const discovery = docsIndexDiscovery(page)
+    await expect(discovery).toHaveCount(1)
+    if (
+        !(await discovery.evaluate(
+            (element) => (element as HTMLDetailsElement).open
+        ))
+    ) {
+        await docsIndexDiscoverySummary(page).click()
+    }
+    await expect(discovery).toHaveAttribute('open')
+}
+
 export async function openDocsIndexFilters(page: Page) {
     const filters = visibleDocsIndexFilters(page)
     await expect(filters).toHaveCount(1)

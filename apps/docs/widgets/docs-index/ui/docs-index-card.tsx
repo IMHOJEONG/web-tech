@@ -6,6 +6,11 @@ import type { SearchData } from '~/lib/get-search-data'
 import { buildSearchResultItem } from '~/lib/search-result-contract'
 import { DocumentDateText } from '~/shared/ui/document-date-text'
 import { DocumentMetaText } from '~/shared/ui/document-meta-text'
+import { getDocsIndexCardLabels } from '../model/docs-index-card-labels'
+import {
+    docsIndexCardContent,
+    docsIndexCardSpacing,
+} from './docs-index-card-layout'
 
 type DocsIndexCardProps = {
     className?: string
@@ -26,11 +31,7 @@ export async function DocsIndexCard({
         ...(doc.readMinutes
             ? [t('card.readMinutes', { count: doc.readMinutes })]
             : []),
-        ...(doc.topicLabel &&
-        doc.topicLabel.toLowerCase() !== doc.section.toLowerCase()
-            ? [doc.topicLabel]
-            : []),
-        ...(doc.tags?.slice(0, 2).map((tag) => `#${tag}`) ?? []),
+        ...getDocsIndexCardLabels(doc),
     ]
 
     return (
@@ -38,13 +39,15 @@ export async function DocsIndexCard({
             href={doc.href}
             style={style}
             data-touch-target="docs-index"
+            data-docs-index-card=""
             className={cn(
-                'ds-focus-ring motion-layout group block min-w-0 rounded-sm py-6',
+                'ds-focus-ring motion-layout group block min-w-0 rounded-sm',
+                docsIndexCardSpacing,
                 className
             )}
         >
             <article className="min-w-0">
-                <div className="min-w-0 flex-1 space-y-3">
+                <div className={docsIndexCardContent}>
                     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                         <span className="font-mono text-xs font-medium tracking-wide text-[var(--docs-interactive-text)] uppercase">
                             {doc.section}
@@ -77,7 +80,7 @@ export async function DocsIndexCard({
                         )}
                     </div>
 
-                    <DocumentMetaText items={meta} />
+                    {meta.length > 0 && <DocumentMetaText items={meta} />}
                 </div>
             </article>
         </Link>

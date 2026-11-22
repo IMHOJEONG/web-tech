@@ -4,6 +4,7 @@ import type { SearchData } from '~/lib/get-search-data'
 import {
     getDocsIndexSectionMessageKey,
     getDocsIndexSectionSummary,
+    getDocsIndexLatestUpdate,
 } from './docs-index-summary.ts'
 
 function createDoc(overrides: Partial<SearchData> = {}): SearchData {
@@ -22,6 +23,33 @@ function createDoc(overrides: Partial<SearchData> = {}): SearchData {
         ...overrides,
     }
 }
+
+test('latest update uses modification dates without relying on publication order', () => {
+    const docs = Object.freeze([
+        Object.freeze(createDoc({ date: '2026-11-20' })),
+        Object.freeze(
+            createDoc({ date: '2026-08-24', updatedAt: '2026-11-21' })
+        ),
+    ])
+    assert.equal(getDocsIndexLatestUpdate(docs), '2026-11-21')
+    assert.equal(getDocsIndexLatestUpdate([...docs].reverse()), '2026-11-21')
+})
+
+test('latest update ignores missing dates and falls back from invalid modification dates', () => {
+    assert.equal(getDocsIndexLatestUpdate([]), null)
+    assert.equal(getDocsIndexLatestUpdate([{}]), null)
+    assert.equal(
+        getDocsIndexLatestUpdate([{ date: 'invalid', updatedAt: 'invalid' }]),
+        null
+    )
+    assert.equal(
+        getDocsIndexLatestUpdate([
+            { updatedAt: 'invalid', date: '2026-11-20' },
+            { updatedAt: '2026-11-19', date: 'invalid' },
+        ]),
+        '2026-11-20'
+    )
+})
 
 test('getDocsIndexSectionMessageKey maps section labels to message keys', () => {
     assert.equal(getDocsIndexSectionMessageKey('Web'), 'web')

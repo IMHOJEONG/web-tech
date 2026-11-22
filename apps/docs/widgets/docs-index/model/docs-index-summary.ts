@@ -12,6 +12,21 @@ export const DOCS_INDEX_SECTION_ORDER = [
 
 export type DocsIndexSectionKey = (typeof DOCS_INDEX_SECTION_ORDER)[number]
 
+export function getDocsIndexLatestUpdate(
+    docs: readonly Pick<SearchData, 'date' | 'updatedAt'>[]
+) {
+    let latest: { value: string; time: number } | undefined
+    for (const doc of docs) {
+        const value = [doc.updatedAt, doc.date].find(
+            (date) => date && Number.isFinite(Date.parse(date))
+        )
+        if (!value) continue
+        const time = Date.parse(value)
+        if (!latest || time > latest.time) latest = { value, time }
+    }
+    return latest?.value ?? null
+}
+
 export const DOCS_INDEX_SECTION_HREFS = {
     Web: '/web',
     Mobile: '/mobile',

@@ -1,7 +1,12 @@
 # 검증 보고서
 
+- [11-22 모바일 Drawer hydration 준비 상태](resilience/2026-11-22-drawer-hydration-readiness.md): 최초 CI의 재시도 통과와 통제 재현·기준 유지 회귀를 구분한다. 원격 재검증·병합은 별도.
+
 - [11-21 JavaScript 현대화 실제 적용](integration/2026-11-21-modern-javascript-implementation.md): 4곳 교체·Set 유지, 실제 타입 3진입점·API Chromium 7조건·전체 통합 26그룹 통과. [PR #106](https://github.com/IMHOJEONG/web-tech/pull/106) 검토 중·운영 미배포.
 - [11-20 JavaScript 현대화 5개 후보 재검증](integration/2026-11-20-modern-javascript-guidance.md): 실제 소스의 후보 4건·Set 오탐 1건과 Node·격리 타입 16조건. 앱 적용·브라우저 회귀는 미실행.
+- [11-20 문서 인덱스 카드 밀도](accessibility/2026-11-20-docs-index-card-density.md): 간격·중복 메타·검색 강조·전체 카드 이동·큰 글자·스켈레톤의 로컬 검사. 사용자 승인 후 작업별 로컬 커밋, 원격 반영은 별도.
+
+- [11-20 문서 인덱스 보조 탐색](accessibility/2026-11-20-docs-index-discovery.md): 기본 접힘·선택 유지·키보드·큰 글자와 기존 검색 회귀의 로컬 검증. 공개 반영은 별도.
 
 - [11-20 Effect TemplateLiteral ReDoS](security/2026-11-20-effect-redos.md): 직접·Prisma 간접 사본 3.22.4 통합, 구버전 격리 timeout 대조와 수정본 6개 회귀·소비자 호환·감사 0건. main·운영 반영은 별도.
 

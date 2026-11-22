@@ -1,5 +1,63 @@
 import { expect, test } from '@playwright/test'
 
+for (const rootFontSize of [16, 24]) {
+    test(`TOC rows keep text centered and same-depth labels aligned at ${rootFontSize}px`, async ({
+        page,
+    }) => {
+        await page.emulateMedia({ reducedMotion: 'reduce' })
+        await page.goto(
+            '/ko/docs/category/be/node-js/node-brotli-runtime-security'
+        )
+        await page.addStyleTag({
+            content: `html { font-size: ${rootFontSize}px; }`,
+        })
+        await page.evaluate(() => document.fonts.ready)
+        const mobile = (page.viewportSize()?.width ?? 0) < 1024
+        const panel = mobile
+            ? page.getByTestId('article-mobile-toc').locator('details')
+            : page.locator('aside details').first()
+        if ((await panel.getAttribute('open')) === null)
+            await panel.locator('summary').click()
+        const links = panel.locator('nav a[data-toc-depth]')
+        await expect(links).toHaveCount(4)
+        await expect(links.first()).toBeVisible()
+
+        const rows = await links.evaluateAll((elements) =>
+            elements.map((element) => {
+                const label = element.querySelector('span:last-child')!
+                const row = element.getBoundingClientRect()
+                const text = label.getBoundingClientRect()
+                return {
+                    depth: element.getAttribute('data-toc-depth'),
+                    left: text.left,
+                    height: row.height,
+                    centerOffset:
+                        text.top + text.height / 2 - (row.top + row.height / 2),
+                }
+            })
+        )
+        for (const row of rows) {
+            expect(Math.abs(row.centerOffset)).toBeLessThanOrEqual(1)
+            expect(row.height).toBeGreaterThanOrEqual(
+                (mobile ? 44 : 36) * (rootFontSize / 16)
+            )
+            const sameDepth = rows.filter((other) => other.depth === row.depth)
+            expect(
+                Math.max(...sameDepth.map((item) => item.left)) -
+                    Math.min(...sameDepth.map((item) => item.left))
+            ).toBeLessThanOrEqual(1)
+        }
+        expect(rows.find((row) => row.depth === '3')!.left).toBeGreaterThan(
+            rows.find((row) => row.depth === '2')!.left
+        )
+        expect(
+            await panel.evaluate(
+                (element) => element.scrollWidth - element.clientWidth
+            )
+        ).toBeLessThanOrEqual(1)
+    })
+}
+
 for (const theme of ['light', 'dark']) {
     test(`${theme}: TOC highlights the reading position and preserves anchors`, async ({
         page,

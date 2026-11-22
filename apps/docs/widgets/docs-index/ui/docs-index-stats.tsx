@@ -1,51 +1,34 @@
 import { getTranslations } from 'next-intl/server'
-import { getMotionOrderStyle } from './docs-index-motion'
 
 export async function DocsIndexStats({
-    totalDocs,
     sectionCount,
     latestUpdated,
 }: {
-    totalDocs: number
     sectionCount: number
     latestUpdated: string | null
 }) {
     const t = await getTranslations('docsIndex')
     return (
-        <section className="motion-layout grid gap-3 md:grid-cols-3">
-            <div
-                className="motion-layout motion-reveal rounded-2xl border border-border bg-surface-container-lowest p-4"
-                style={getMotionOrderStyle(0)}
-            >
-                <p className="text-xs font-semibold tracking-[0.16em] text-outline uppercase">
-                    {t('stats.totalDocs')}
-                </p>
-                <p className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
-                    {totalDocs}
-                </p>
-            </div>
-            <div
-                className="motion-layout motion-reveal rounded-2xl border border-border bg-surface-container-lowest p-4"
-                style={getMotionOrderStyle(1)}
-            >
-                <p className="text-xs font-semibold tracking-[0.16em] text-outline uppercase">
+        <dl
+            data-testid="docs-index-stats"
+            className="flex min-w-0 flex-wrap gap-x-6 gap-y-2 text-xs leading-5"
+        >
+            <div className="flex min-w-0 flex-wrap gap-x-2">
+                <dt className="text-on-surface-variant">
                     {t('stats.sections')}
-                </p>
-                <p className="mt-2 text-2xl font-bold tracking-tight text-on-surface">
+                </dt>
+                <dd className="font-mono font-semibold tabular-nums text-on-surface">
                     {sectionCount}
-                </p>
+                </dd>
             </div>
-            <div
-                className="motion-layout motion-reveal rounded-2xl border border-border bg-surface-container-lowest p-4"
-                style={getMotionOrderStyle(2)}
-            >
-                <p className="text-xs font-semibold tracking-[0.16em] text-outline uppercase">
+            <div className="flex min-w-0 flex-wrap gap-x-2">
+                <dt className="text-on-surface-variant">
                     {t('stats.latestUpdate')}
-                </p>
-                <p className="mt-2 text-base font-semibold tracking-tight text-on-surface">
+                </dt>
+                <dd className="font-mono text-on-surface">
                     {latestUpdated ?? t('stats.pending')}
-                </p>
+                </dd>
             </div>
-        </section>
+        </dl>
     )
 }
