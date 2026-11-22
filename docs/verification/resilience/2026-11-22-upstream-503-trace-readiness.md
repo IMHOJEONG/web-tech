@@ -29,6 +29,34 @@ pnpm --filter docs exec eslint \
 
 단독 회귀는 임시 Playwright 설정에서 `testMatch: 'completed-cause-trace.spec.ts'`, test timeout 30초·expect 10초·worker 1·retry 0으로 실행했다. Next webServer와 브라우저 프로젝트를 제외했으며 production 전체 검사로 합산하지 않는다. 합성 HTTP 서버는 고정 서비스 포트가 아닌 임의 loopback 포트를 사용한다.
 
+아래 명령은 **Git 밖의 격리된 공개 코드 export 루트**에서 실행한다. 원문·환경 파일을 제외한 export와 의존성 설치는 위 합성 콘텐츠 준비 절차를 따른다. Node 24.22.1·pnpm 12.14.0이 PATH에 있어야 하고 loopback listen 권한이 필요하다. 이 단독 검사에는 Chromium 설치·Next 빌드·3111/3112 서버가 필요하지 않다. reporter 결과는 저장소 밖의 임시 폴더에, 기록기의 합성 JSON은 Git이 아닌 export의 `apps/docs/test-results`에 남는다. 원시 결과를 공개 Git으로 옮기지 않는다.
+
+```sh
+# standalone trace regression (repository root)
+TRACE_WORK="$(mktemp -d)"
+chmod 700 "$TRACE_WORK"
+cat > "$TRACE_WORK/standalone.config.ts" <<'CONFIG'
+export default {
+    testDir: process.env.DOCS_TRACE_TEST_DIR,
+    testMatch: 'completed-cause-trace.spec.ts',
+    timeout: 30_000,
+    expect: { timeout: 10_000 },
+    workers: 1,
+    retries: 0,
+    reporter: 'list',
+    outputDir: process.env.DOCS_TRACE_OUTPUT_DIR,
+}
+CONFIG
+DOCS_TRACE_TEST_DIR="$PWD/apps/docs/article-e2e" \
+DOCS_TRACE_OUTPUT_DIR="$TRACE_WORK/results" \
+    pnpm --filter docs exec playwright test \
+    --config="$TRACE_WORK/standalone.config.ts" --repeat-each=3
+```
+
+기대 결과는 unnamed project 1개에서 **24 passed·failed 0·skipped 0·retry 0**이다. config에 `webServer`·`projects`를 추가하지 않으며, 이 24회를 두 프로젝트의 production 전체 214개로 합산하지 않는다.
+
+리뷰 보완 뒤 이 문서의 해당 shell 블록을 그대로 추출해 격리 export 루트에서 실행한 결과는 **24 passed·32.2초·실패 0**이었다. 앞선 단독 회귀와 별도 재현 절차 검증이며 새로운 고유 테스트 수로 합산하지 않는다.
+
 통제 순서:
 
 1. 기존 기록기 `attachRequestCauseTrace`를 붙인 합성 HTTP 서버에서 finish/close 이벤트 전달만 Promise gate로 보류한다. Next 서버·운영 기록기에 지연을 넣지는 않는다.
@@ -63,6 +91,7 @@ Artifact 상대 링크: **해당 없음**. 원시 CI 로그·요청 JSON·trace�
 - 앱 오류 처리·공개 API·캐시 정책·운영 계측 스키마는 변경하지 않았다. 새 ADR은 필요하지 않으며 [ADR-0008](../../architecture/adr-0008-request-lifecycle-observability.md)의 전체 운영 계측 미완료 상태도 유지한다.
 - 최초 조사는 로컬 미커밋으로 마쳤다. 이후 사용자가 이번 테스트 소스 3개·정제 문서/목차 4개와 공개 검수 해시만 작업별 커밋·푸시·PR 준비하고 CI·CodeRabbit을 확인하도록 승인했다. 이 문서 검수 시점에는 원격 결과가 아직 없으며 PR·연결 이슈에서 실제 head별 결과를 구분한다. main 병합·배포·NAS·키·기존 미커밋·stash·비공개 자료는 승인 범위에 없다.
 - 보존 대조에서 기준 작업 트리 38곳 중 원래 사용자 작업 트리를 포함한 37곳의 HEAD·인덱스·상태·dirty 파일 집계 해시가 일치했다. 별도 Desktop 작업 트리는 다른 세션에서 변경되어 전체 동일로 판정하지 않는다. 이번 수정은 새 작업 트리에만 있으며 stash는 0개로 동일하다. ignored 비공개 파일을 전수 읽어 검증한 것으로 주장하지 않는다.
+- 공개 검수 후 [PR #110](https://github.com/IMHOJEONG/web-tech/pull/110)의 최초 head `fa9b4feed5e479ef09f28b6e9d301cee10086108`은 [CI 45034246796](https://github.com/IMHOJEONG/web-tech/actions/runs/45034246796) 13개 job·문서·CodeQL 검사를 통과했다. Linux 상세 E2E는 **214 passed·기존 skip 2개·3.9분·retry 0**이었다. CodeRabbit의 단독 재현 설정·명령 누락 의견 1건을 이 문서에서 보완하며, 후속 head의 CI는 별도 결과로 확인한다. 원시 로그·trace는 첨부하지 않는다.
 
 ## 관련 문서
 
