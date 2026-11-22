@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-22 503 종료 계측 준비 상태](resilience/2026-11-22-upstream-503-trace-readiness.md): 실제 HTTP/파일 gate의 즉시 읽기 실패·회귀24회·Next 503 반복 및 전체214개 로컬 통과. 과거 CI 최초 원인은 미확정이며 공개 검수 후 PR 검증·운영 미배포를 구분.
+
 - [11-22 UI/UX 스트리밍 완료 준비 상태](resilience/2026-11-22-uiux-stream-readiness.md): 최초 CI의 재시도 통과와 통제 재현·기준 유지 회귀를 구분한다. 원격 재검증·병합은 별도.
 
 - [11-21 JavaScript 현대화 실제 적용](integration/2026-11-21-modern-javascript-implementation.md): 4곳 교체·Set 유지, 실제 타입 3진입점·API Chromium 7조건·전체 통합 26그룹 통과. [PR #106](https://github.com/IMHOJEONG/web-tech/pull/106) 검토 중·운영 미배포.
