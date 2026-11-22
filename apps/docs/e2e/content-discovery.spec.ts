@@ -1,10 +1,12 @@
 import { expect, test } from '@playwright/test'
+import { openDocsIndexDiscovery } from './helpers/docs-index'
 
 for (const locale of ['ko', 'en']) {
     test(`${locale}: tags and collections survive reload and allow ordered reading`, async ({
         page,
     }, testInfo) => {
         await page.goto(`/${locale}/docs`)
+        await openDocsIndexDiscovery(page)
         const tags = page.getByTestId('content-tag-filters')
         await tags.getByRole('link', { name: /^#react / }).click()
         await expect(page).toHaveURL(/tag=react/)
@@ -22,6 +24,7 @@ for (const locale of ['ko', 'en']) {
             })
             .click()
         await expect(page).toHaveURL(new RegExp(`/${locale}/docs$`))
+        await openDocsIndexDiscovery(page)
         await expect(
             tags.getByRole('link', {
                 name: locale === 'ko' ? '전체 태그' : 'All tags',
@@ -72,6 +75,7 @@ test('unknown filters do not silently broaden results and fit a 320px screen', a
         .getByRole('link', { name: '전체 문서 보기', exact: true })
         .click()
     await expect(page).toHaveURL(/\/ko\/docs$/)
+    await openDocsIndexDiscovery(page)
     await page.getByTestId('content-tag-filters').locator('summary').click()
     expect(
         await page.evaluate(

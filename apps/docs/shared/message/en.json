@@ -416,6 +416,7 @@
     "docsIndex": {
         "discovery": {
             "more": "Explore more documents",
+            "description": "Browse by section, tag or reading collection.",
             "recommendations": "Suggested searches",
             "tags": "Browse tags",
             "allTags": "All tags",
