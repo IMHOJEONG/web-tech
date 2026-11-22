@@ -1,5 +1,7 @@
 # 2026-11 작업 기록
 
+- [11-22 모바일 Drawer hydration 준비 상태](2026-11-22-drawer-hydration-readiness.md): 두 PR 재시도 조사의 준비 조건 보완·합성 회귀, 다른 미커밋·원시 자료 보존.
+
 - [11-21 JavaScript 현대화 실제 적용](2026-11-21-modern-javascript-implementation.md): 4곳 교체·오탐 유지·타입 선언 범위 한정, 실제 클라이언트와 통합 회귀 및 지식 문서 갱신.
 - [11-20 JavaScript 현대화 항목별 지식](2026-11-20-modern-javascript-guidance.md): 5곳 소스 대조·16조건 합성 검증과 개념·원리 문서 3종, KAN-83·Confluence 연결.
 - [11-20 목차 텍스트 세로 정렬](2026-11-20-toc-row-alignment.md): 한 줄 텍스트의 4px 상향 배치 보완과 기본·큰 글자 DOM 정렬 회귀. 사용자 로컬 확인 후 이번 변경만 공개 검수·커밋·푸시 승인, PR·배포는 별도.
