@@ -2,6 +2,7 @@
 
 - [11-21 JavaScript 현대화 실제 적용](2026-11-21-modern-javascript-implementation.md): 4곳 교체·오탐 유지·타입 선언 범위 한정, 실제 클라이언트와 통합 회귀 및 지식 문서 갱신.
 - [11-20 JavaScript 현대화 항목별 지식](2026-11-20-modern-javascript-guidance.md): 5곳 소스 대조·16조건 합성 검증과 개념·원리 문서 3종, KAN-83·Confluence 연결.
+- [11-20 외부 초안 미리보기 분리](2026-11-20-external-draft-preview.md): 원래4개 변경을 독립 작업 트리로 재구성하고 합성 회귀·화면 검사와 가이드를 보완. 사용자 승인 후 코드·회귀와 지침·정제 문서를 분리한 로컬 커밋.
 
 - [11-20 비공개 Git 초안 작성 규칙](2026-11-20-private-draft-authoring-policy.md): 공개/비공개 작성 위치·저장과 게시 승인 경계를 저장소별 지침 PR로 분리. 원문 이전·기본 브랜치 반영·키·배포 미실행.
 

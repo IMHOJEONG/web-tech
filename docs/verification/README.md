@@ -2,6 +2,7 @@
 
 - [11-21 JavaScript 현대화 실제 적용](integration/2026-11-21-modern-javascript-implementation.md): 4곳 교체·Set 유지, 실제 타입 3진입점·API Chromium 7조건·전체 통합 26그룹 통과. [PR #106](https://github.com/IMHOJEONG/web-tech/pull/106) 검토 중·운영 미배포.
 - [11-20 JavaScript 현대화 5개 후보 재검증](integration/2026-11-20-modern-javascript-guidance.md): 실제 소스의 후보 4건·Set 오탐 1건과 Node·격리 타입 16조건. 앱 적용·브라우저 회귀는 미실행.
+- [11-20 외부 초안 개발 미리보기](content/2026-11-20-external-draft-preview.md): 개발 전용 root·파일 상태·경로 경계와 합성 화면/noindex 확인. 사용자 승인 후 작업별 로컬 커밋이며 원격 반영은 별도.
 
 - [11-20 Effect TemplateLiteral ReDoS](security/2026-11-20-effect-redos.md): 직접·Prisma 간접 사본 3.22.4 통합, 구버전 격리 timeout 대조와 수정본 6개 회귀·소비자 호환·감사 0건. main·운영 반영은 별도.
 

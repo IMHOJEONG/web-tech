@@ -27,6 +27,7 @@ Also follow the workspace-level guide at `../../AGENTS.md`.
 ## 블로그 기고의 로컬 검증
 
 - 새 초안과 글 전용 이미지는 공개 `apps/docs/data`, `apps/docs/category`, `apps/docs/public`가 아니라 비공개 `IMHOJEONG/heap-forge-content`의 `data/`, `category/`, `public/`에서 작성한다. 공개 코드의 같은 이름 경로는 합성 검사·앱 자산·기존 보존 자료용이며 새 원문 저장소가 아니다. 세부 절차는 [기고 가이드](../../docs/runbooks/docs-contributor-guide.md)를 따른다.
+- 외부 콘텐츠 폴더의 초안은 개발 서버에만 `DOCS_LOCAL_DRAFT_ROOT` 절대 경로를 전달해 `/ko/preview/...`에서 확인한다. 실제 초안은 공개 checkout으로 복사하지 않고 해당 콘텐츠 폴더의 지침을 따른다. 이 미리보기 설정은 운영 발행본·공개 목록·검색·사이트맵이나 게시 승인을 바꾸지 않는다.
 - 글을 새로 작성하거나 예제를 수정할 때마다 주제에 맞는 로컬 테스트 저장소와
   원문 코드 바인딩을 연결합니다. 개인 실험실 경로·원시 데이터는 저장소 밖
   비공개 작업 기록에서 관리하며 공개 지침에 실제 개인 경로를 적지 않습니다.

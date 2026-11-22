@@ -647,11 +647,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "75b7f5b5ff788235c079cd46f07bd3e04c59a93a4e8b0b4bbebaa50c4b0f9da8",
+      "sha256": "3733feea66fd48934a70c90e02a638beb24d7f51f6bc43340d9233df75daa93c",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-21",
-      "note": "사용자가 승인한 이번 JavaScript 개선·관련 문서의 공개·커밋·푸시·PR 범위에서 실제 PR #106·검증 원본·반영 상태와 기존 실행 이력의 구분만 갱신함. 최종 bytes의 비밀값·개인 경로·권리·공개 의도를 재검수함. 다른 작업·원시 자료·병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 정리한 승인 커밋의 작업별 통합·푸시·PR/CI 검증과 기존 목차4개·보고서/worklog6개의 정제 보완·재검수·해시 갱신을 명시 승인함. 새 main과 원본의 링크·관측/실패/한계를 보존하고 로컬 재검증 결과만 최종 bytes로 검수함. 원문·초안·원시 자료·키·기존 PR 종료·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -689,11 +689,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "60fdd239b97429f51484c90d5a314d4c830b3eed179be5a8a719e45e5ffe999d",
+      "sha256": "401acd1fc450bc546e537ca7741ef9e2705236997766136415bd5e0e2d246b26",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-21",
-      "note": "사용자가 이번 JavaScript 개선과 관련 문서만 분리해 공개 검수 후 커밋·푸시·PR 생성과 CI 확인을 명시 요청함. 코드·합성 재현·판정·조건·실패·한계·관련 목차의 최종 bytes를 검수함. 개인 경로·비밀값·원고·원시 캡처/로그·외부 스킬·다른 작업 변경·병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 정리한 승인 커밋의 작업별 통합·푸시·PR/CI 검증과 기존 목차4개·보고서/worklog6개의 정제 보완·재검수·해시 갱신을 명시 승인함. 새 main과 원본의 링크·관측/실패/한계를 보존하고 로컬 재검증 결과만 최종 bytes로 검수함. 원문·초안·원시 자료·키·기존 PR 종료·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -759,11 +759,11 @@
     },
     {
       "path": "docs/runbooks/docs-contributor-guide.md",
-      "sha256": "8bb974e53bcdc52634080a1be418724da8edd6264612e6093a405fd14dee7874",
+      "sha256": "713bef67a92bc2df71920f4121c67867f67e02417fdca1527f4476b78d60b557",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-20",
-      "note": "사용자가 이번 초안 작성 규칙·가이드만 저장소별 커밋·푸시하고 공개 검수 후 PR/CI 확인을 명시 승인함. 비공개 초안 저장과 사람 공개/게시 승인, 레거시 안내 구분, preview 미연결 및 정제 결과를 최종 인덱스 bytes로 검수함. 실제 원문·자산·원시 자료·키·다른 미커밋/stash·미푸시 자동화·기본 브랜치 병합·운영 변경은 제외함.",
+      "note": "사용자가 외부 초안 미리보기 코드·회귀2개, 앱 작성 지침·기고 가이드2개, 정제 보고서·작업 기록·두 목차4개만 공개 검수·해시 등록·작업별 로컬 커밋하도록 승인함. 개발/운영 root 경계·합성 회귀와 최초 준비 실패/최종 결과·noindex의 한계·실제 추적 링크·로컬 커밋 상태를 검수함. root 지침·패키지·CI 설정·실제 초안·키·원시 자료·실제 경로·다른 미커밋/stash·푸시·운영 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -2038,6 +2038,34 @@
       "decision": "public-approved",
       "reviewedOn": "2026-11-21",
       "note": "사용자가 이번 JavaScript 개선과 관련 문서만 분리해 공개 검수 후 커밋·푸시·PR 생성과 CI 확인을 명시 요청함. 코드·합성 재현·판정·조건·실패·한계·관련 목차의 최종 bytes를 검수함. 개인 경로·비밀값·원고·원시 캡처/로그·외부 스킬·다른 작업 변경·병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/content/2026-11-20-external-draft-preview.md",
+      "sha256": "0bde76421b1f11d3938865631c25bc1f0ff2074ca6881012257fe04df7cdabc0",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 정리한 승인 커밋의 작업별 통합·푸시·PR/CI 검증과 기존 목차4개·보고서/worklog6개의 정제 보완·재검수·해시 갱신을 명시 승인함. 새 main과 원본의 링크·관측/실패/한계를 보존하고 로컬 재검증 결과만 최종 bytes로 검수함. 원문·초안·원시 자료·키·기존 PR 종료·main 병합·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-20-external-draft-preview.md",
+      "sha256": "aa0f7c0deb6217ca4c5474f8f87cb6c19dadef74cf34c6ae13b6ee21704d9c54",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-22",
+      "note": "사용자가 정리한 승인 커밋의 작업별 통합·푸시·PR/CI 검증과 기존 목차4개·보고서/worklog6개의 정제 보완·재검수·해시 갱신을 명시 승인함. 새 main과 원본의 링크·관측/실패/한계를 보존하고 로컬 재검증 결과만 최종 bytes로 검수함. 원문·초안·원시 자료·키·기존 PR 종료·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
