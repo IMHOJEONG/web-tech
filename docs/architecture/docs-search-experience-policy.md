@@ -19,6 +19,8 @@
 
 2026-11-21 로컬 구현에서 결과는 실제 문서 링크로 노출한다. Tab·방향키로 결과를 탐색하고 입력 Enter로 전체 검색을 제출한다. [ADR-0035](adr-0035-docs-search-drawer-link-focus.md)
 
+2026-11-23 PR #111 후속에서는 교체될 스트리밍 fallback의 검색 입력과 제출을 disabled/busy로 표시한다. 실제 결과 폼이 준비되기 전에 입력한 값이 화면 교체로 사라지지 않도록 하며, 준비된 화면의 입력·native GET·클라이언트 검색 계약은 유지한다. [검증](../verification/integration/2026-11-23-frontend-modernization-pr-review.md)
+
 현재 `docs` 앱의 검색 경험은 아래처럼 정의합니다.
 
 1. 별도 `/search` 라우트를 두지 않는다.

@@ -31,9 +31,13 @@ export function rehypeImageDimensions({
             return
 
         try {
-            const root = await realpath(publicRoot)
+            // Public image files are included explicitly in next.config.mjs.
+            // Keep dynamic, realpath-checked lookups out of whole-app tracing.
+            const root = await realpath(/* turbopackIgnore: true */ publicRoot)
             const pathname = decodeURIComponent(src.split(/[?#]/)[0]!)
-            const file = await realpath(path.resolve(root, `.${pathname}`))
+            const file = await realpath(
+                /* turbopackIgnore: true */ path.resolve(root, `.${pathname}`)
+            )
             if (!file.startsWith(root + path.sep)) return
             const { autoOrient } = await sharp(file).metadata()
             const { width: intrinsicWidth, height: intrinsicHeight } =

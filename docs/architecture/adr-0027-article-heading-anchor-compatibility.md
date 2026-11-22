@@ -5,7 +5,7 @@
 - 상태: 적용 중
 - 대상: docs의 `renderArticleContent` runtime MDX 본문·목차와 제목 스크롤 여백
 - 결정일: 2026-10-31
-- 최종 검토: 2026-10-31
+- 최종 검토: 2026-11-23
 - PR #81의 로컬 구현·회귀 범위다. main 병합·운영 배포는 별도이며 원격 HTML 정규화와 정적 `@next/mdx` loader의 ID 정책을 대체하지 않는다.
 
 ## 배경
@@ -20,6 +20,8 @@
 - 기존 h1~h4의 `slugifyHeading` 값이 canonical ID와 다르면 해당 제목 안에 높이 0·`aria-hidden` 호환 앵커를 둔다. 기존에 같은 ID가 중복됐다면 브라우저의 종전 첫 대상에 맞춰 한 곳만 소유한다. 명시된 ID와 충돌하면 호환 앵커를 중복 생성하지 않고 명시 ID를 유지한다. 이미 모호한 두 대상을 같은 fragment 하나로 모두 보존할 수 있다고 약속하지 않는다.
 - 정적인 native JSX 제목에 ID가 없으면 같은 충돌 할당에 참여시킨다. Markdown 제목만 들어가는 기존 TOC 범위와 H1 제외 설정은 유지한다. 본문 제목과 TOC의 수·depth가 예상과 다르면 잘못된 href를 내보내지 않고 실패한다.
 - h5·h6와 호환 앵커에도 기존 제목과 같은 header 기반 `scroll-margin-top`을 적용한다. 호환 span은 높이·탭 정지점·읽을 내용을 추가하지 않는다.
+
+2026-11-23 PR #111 후속에서는 스트리밍 본문을 재로딩할 때 초기 fragment 이동이 누락되는 경우를 보완한다. 본문과 폰트가 준비된 뒤에도 같은 fragment의 대상이 화면 밖이고 scrollY=0이면 한 번만 native scrollIntoView로 복구한다. 사용자 입력·hash 변경·unmount는 취소하며 기존 ID 할당·일반 목차 이동·탭 순서는 바꾸지 않는다. [검증과 범위](../verification/integration/2026-11-23-frontend-modernization-pr-review.md)
 
 작성자가 직접 중복 지정한 ID, 동적으로 계산한 ID, 컴포넌트가 실행 중 생성하는 DOM ID까지 정적 transform이 증명하지는 못한다. 동적 제목을 안정적인 외부 링크 대상으로 쓰려면 작성자가 고유한 정적 ID를 지정해야 한다. 이 변경은 그러한 코드를 임의 평가하거나 명시 ID를 자동 개명하지 않는다.
 

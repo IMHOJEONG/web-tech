@@ -12,6 +12,7 @@ type Props = {
     label: string
     placeholder: string
     submitLabel: string
+    disabled?: boolean
 }
 
 export function DocumentSearchForm({
@@ -20,6 +21,7 @@ export function DocumentSearchForm({
     label,
     placeholder,
     submitLabel,
+    disabled = false,
 }: Props) {
     const t = useTranslations('search.input')
     const inputId = useId()
@@ -32,7 +34,7 @@ export function DocumentSearchForm({
             action={action}
             method="get"
             onSubmit={handleSubmit}
-            aria-busy={isPending}
+            aria-busy={disabled || isPending}
             className="min-w-0 space-y-1.5"
         >
             <label
@@ -47,11 +49,12 @@ export function DocumentSearchForm({
                     id={inputId}
                     name="q"
                     type="search"
+                    disabled={disabled}
                     placeholder={placeholder}
                     className="min-h-11 min-w-0 flex-1 bg-transparent px-3 py-2 text-base text-on-surface placeholder:text-on-surface-variant"
                 />
                 <SearchSubmitButton
-                    isPending={isPending}
+                    isPending={disabled || isPending}
                     label={submitLabel}
                     variant="text"
                 />

@@ -7,6 +7,34 @@ import {
 import { holdDocsIndexCompletion } from './helpers/streamed-docs-index'
 
 for (const locale of ['ko', 'en']) {
+    test(`${locale}: streamed fallback cannot discard typed search text`, async ({
+        page,
+        baseURL,
+    }) => {
+        const target = new URL(`/${locale}/docs`, baseURL).href
+        const stream = await holdDocsIndexCompletion(page, target)
+        try {
+            await page.goto(target, { waitUntil: 'commit' })
+            const pending = page.getByTestId('content-pending')
+            await expect(pending.getByRole('searchbox')).toBeDisabled()
+            await expect(
+                pending.locator('button[type="submit"]')
+            ).toBeDisabled()
+            stream.release()
+            await expect(pending).toHaveCount(0)
+            const input = page.getByRole('main').getByRole('searchbox')
+            await expect(input).toBeEnabled()
+            await input.fill('React')
+            await input.press('Enter')
+            await expect(page).toHaveURL(
+                new URL(`/${locale}/docs?q=React`, baseURL).href
+            )
+            await expect(input).toHaveValue('React')
+        } finally {
+            await stream.dispose()
+        }
+    })
+
     test(`${locale}: streamed fallback cannot satisfy filter readiness`, async ({
         page,
         baseURL,

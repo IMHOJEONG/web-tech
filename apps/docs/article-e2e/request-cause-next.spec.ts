@@ -49,7 +49,8 @@ for (const ending of ['complete', 'client-abort', 'server-destroy'] as const) {
         page,
         request,
     }, testInfo) => {
-        await prepare(request)
+        await test.step('Reset the origin and drain previous body work', () =>
+            prepare(request))
         await control(request, 'hold')
         let dispatched = false
         await page.route('**/*', async (route) => {
@@ -80,8 +81,17 @@ for (const ending of ['complete', 'client-abort', 'server-destroy'] as const) {
                     new URL(response.url()).pathname === remotePath &&
                     response.request().headers()['next-router-prefetch'] === '1'
             )
-            await page.goto('/ko/docs/web/article-e2e-publication')
-            const response = await prefetched
+            await test.step('Open the source article', () =>
+                page.goto('/ko/docs/web/article-e2e-publication'))
+            // Prefetch is viewport-driven; typography can put this link below
+            // the fold, especially on mobile. Exercise the real Link trigger.
+            await page
+                .locator(`a[href="${remotePath}"]`)
+                .first()
+                .scrollIntoViewIfNeeded()
+            const response =
+                await test.step('Receive prefetch response headers', () =>
+                    prefetched)
             expect(response.status()).toBe(200)
             const id = response.headers()['x-article-request-id']!
             expect((await summary(id)).responseFinished).toBe(false)
@@ -158,9 +168,13 @@ test('request cause control: upstream-503 without navigation', async ({
         const response = await request.get(remotePath, {
             headers: { 'x-article-cause-probe': '1' },
         })
-        const result = await summary(
-            response.headers()['x-article-request-id']!
-        )
+        const id = response.headers()['x-article-request-id']!
+        // The response and its asynchronously persisted finish event need not
+        // become observable in the same tick.
+        await expect
+            .poll(async () => (await summary(id)).responseFinished)
+            .toBe(true)
+        const result = await summary(id)
         expect(result.omitted).toBe(0)
         expect(result.deliveryFailures).toBe(0)
         expect(result.responseFinished).toBe(true)

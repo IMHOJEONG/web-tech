@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-23 프런트엔드 현대화 PR 리뷰 보완](integration/2026-11-23-frontend-modernization-pr-review.md) — CI 실패 원인·리뷰 수정·새 head 재검증.
+
 - [11-22 Feed 렌더링 지연 실험](performance/2026-11-22-feed-offscreen-rendering.md) — 초기/스크롤 trace·키보드 비교 후 적용 보류.
 
 - [11-22 Feed 요청 취소](integration/2026-11-22-feed-request-cancellation.md) — 호출자 신호·8초 제한·캐시·재시도, 세 엔진 비교.
