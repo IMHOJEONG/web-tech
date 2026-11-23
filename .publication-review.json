@@ -647,11 +647,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "3e2e704c3d952838157f7ea2754742086e996a93357c2655eb2704871e46eb9d",
+      "sha256": "fab23be016c99c257db47f21fa268eb9dafcba8a821c21e824abbd96e43eea33",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
-      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. main과 PR 목차 항목을 보존하고 합성 로컬 회귀24회·503반복10회·전체214개 결과와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -689,11 +689,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "eaff83eabe17d094be6cffb33c33925ff6b4305f3cc2a2e56a020a4ee36e4f8a",
+      "sha256": "57cb1840eb28c28f0b8e389f84e6b0063c9eb7341d2e7abbb75ac6409babae8d",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
-      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. main과 PR 목차 항목을 보존하고 합성 로컬 회귀24회·503반복10회·전체214개 결과와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -2634,12 +2634,40 @@
       }
     },
     {
+      "path": "docs/verification/resilience/2026-11-22-upstream-503-trace-readiness.md",
+      "sha256": "3689fbb88d407f11da28aa01f093ccc69941e0cd82ba442cc1a9df2fe954f6c7",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. 기존 11-22 결과를 유지하고 main 동기화·합성 로컬 회귀24회·503반복10회·전체214개 및 첫 타입 준비 실패와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "apps/docs/public/fonts/NotoSansKR-LICENSE.txt",
       "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
       "kind": "asset",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
       "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-22-upstream-503-trace-readiness.md",
+      "sha256": "642c1aa495338e73d4d558d548db0acef9897cd0c574e8c173b7925dd2209f8c",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. 기존 11-22 결과를 유지하고 main 동기화·합성 로컬 회귀24회·503반복10회·전체214개 및 첫 타입 준비 실패와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

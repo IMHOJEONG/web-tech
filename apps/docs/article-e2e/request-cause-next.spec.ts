@@ -1,14 +1,12 @@
 import { readFile } from 'node:fs/promises'
 import { expect, test, type APIRequestContext } from '@playwright/test'
+import {
+    assertUpstreamFailureTrace,
+    completedCauseTrace,
+    type CauseTrace,
+} from './completed-cause-trace.ts'
 import { articleFixtureAuthorization } from './fixture-credentials.ts'
 
-type CauseTrace = {
-    requestId: string
-    responseFinished: boolean
-    omitted: number
-    deliveryFailures: number
-    events: { sequence: number; event: string; detail: { status?: number } }[]
-}
 const remotePath = '/ko/docs/web/article-e2e-remote'
 async function control(
     request: APIRequestContext,
@@ -169,35 +167,13 @@ test('request cause control: upstream-503 without navigation', async ({
             headers: { 'x-article-cause-probe': '1' },
         })
         const id = response.headers()['x-article-request-id']!
-        // The response and its asynchronously persisted finish event need not
-        // become observable in the same tick.
-        await expect
-            .poll(async () => (await summary(id)).responseFinished)
-            .toBe(true)
-        const result = await summary(id)
-        expect(result.omitted).toBe(0)
-        expect(result.deliveryFailures).toBe(0)
-        expect(result.responseFinished).toBe(true)
-        expect(
-            result.events.some(
-                (event) =>
-                    event.event === 'upstream-headers' &&
-                    event.detail.status === 503
-            )
-        ).toBe(true)
+        const result = await completedCauseTrace(() => summary(id))
         // A background 503 can coexist with a stale successful response. Prove
         // the render actually failed before diagnosing missing error telemetry.
         const renderedSuccessfulBody = (await response.text()).includes(
             'The remote article has finished rendering.'
         )
-        expect(
-            renderedSuccessfulBody,
-            'The 503 control must fail the render, not return a stale successful article'
-        ).toBe(false)
-        const names = result.events.map((event) => event.event)
-        expect(names).toContain('console-warning')
-        expect(names).toContain('console-error')
-        expect(names).not.toContain('framework-stream-error')
+        assertUpstreamFailureTrace(result, renderedSuccessfulBody)
         await testInfo.attach('request-cause', {
             body: JSON.stringify(
                 { ending: 'upstream-503', ...result },
