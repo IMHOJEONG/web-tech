@@ -12,7 +12,7 @@ const MainCard = ({ doc }: { doc: Partial<Metadata> }) => {
                     thumbnail={thumbnail}
                     alt=""
                     className="h-28 w-full shrink-0 rounded-md md:w-40"
-                    imageClassName="transition-transform duration-300 group-hover:scale-[1.03]"
+                    imageClassName="motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]"
                     sizes="(min-width: 768px) 160px, calc(100vw - 32px)"
                 />
             )}

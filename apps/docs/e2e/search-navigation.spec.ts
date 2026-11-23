@@ -158,6 +158,10 @@ for (const locale of ['ko', 'en']) {
         page,
     }) => {
         await page.goto(`/${locale}/docs`)
+        // Capture the usable form, not the replaceable streamed placeholder.
+        await expect(
+            page.getByRole('main').getByRole('searchbox')
+        ).toBeEnabled()
         const markup = await page
             .getByRole('main')
             .getByRole('search')

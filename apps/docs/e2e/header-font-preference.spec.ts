@@ -73,7 +73,7 @@ for (const locale of ['ko', 'en']) {
             await expectHeaderFits(page)
             const trigger = page.getByTestId('search-drawer-trigger')
             await trigger.click()
-            const input = page.getByRole('dialog').getByRole('combobox')
+            const input = page.getByRole('dialog').getByRole('searchbox')
             await expect(input).toBeFocused()
             const panel = page.locator(
                 `[id="${await trigger.getAttribute('aria-controls')}"]`

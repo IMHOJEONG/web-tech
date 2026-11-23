@@ -125,8 +125,8 @@ const feedPageResponseSchema = feedResponseSchema.extend({
   }),
 });
 
-export function searchFeed(search: FeedSearch) {
-  return getJson(feedSearchPath(search), feedPageResponseSchema);
+export function searchFeed(search: FeedSearch, signal?: AbortSignal) {
+  return getJson(feedSearchPath(search), feedPageResponseSchema, signal);
 }
 
 const vulnerabilityAdvisorySchema = z.object({

@@ -1,0 +1,605 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "e4e7dbf9e9a29e0f434d7884b29ef9e351eeac42",
+  "environment": "Actual Vite Feed route with synthetic API success and error responses",
+  "sourceHashes": {
+    "apps/vuln-radar/src/pages/feed/ui/feed-filter-bar.tsx": {
+      "before": "03f937095bd8508504e5800557565d0e86d7f9051c08c487410f4d659d771433",
+      "after": "5d2c4ba87445c4ade8d052840233aff127f0215be19e7a393b1d99ca1b9fb77c"
+    },
+    "apps/vuln-radar/src/pages/feed/ui/feed-page.tsx": {
+      "before": "bc5f4a6069015408c1bb96eb34f83f005ec00396efcfa06990bc2fc12fea0941",
+      "after": "5eca1cf257bac38e500dc5a41b561ee500c0385928c42ef17903c86321d4c7ff"
+    },
+    "apps/vuln-radar/src/pages/feed/ui/feed-vulnerability-card.tsx": {
+      "before": "97af0cac66a1e51798e9e97ffebb0d4494197df86917be2d4dc908392d30c21b",
+      "after": "94bd5b23ab6be7aa4171bc55376b4ba72e8937f92887d600604068bb334d5bfe"
+    }
+  },
+  "before": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "reducedMotion": false,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "reducedMotion": true,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "reducedMotion": false,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "reducedMotion": true,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "reducedMotion": false,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "reducedMotion": true,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "reducedMotion": false,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "reducedMotion": true,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "reducedMotion": false,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "reducedMotion": true,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "reducedMotion": false,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "reducedMotion": true,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    }
+  ],
+  "after": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "reducedMotion": false,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "reducedMotion": true,
+      "measurements": {
+        "card": {
+          "distancePx": 0,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 0,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 0,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "reducedMotion": false,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "reducedMotion": true,
+      "measurements": {
+        "card": {
+          "distancePx": 0,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 0,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 0,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "reducedMotion": false,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "reducedMotion": true,
+      "measurements": {
+        "card": {
+          "distancePx": 0,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 0,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 0,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "reducedMotion": false,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "reducedMotion": true,
+      "measurements": {
+        "card": {
+          "distancePx": 0,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 0,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 0,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "reducedMotion": false,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "reducedMotion": true,
+      "measurements": {
+        "card": {
+          "distancePx": 0,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 0,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 0,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "reducedMotion": false,
+      "measurements": {
+        "card": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 1,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 1,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "reducedMotion": true,
+      "measurements": {
+        "card": {
+          "distancePx": 0,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        },
+        "filter": {
+          "distancePx": 0,
+          "colorProperty": "color",
+          "colorFeedback": true
+        },
+        "retry": {
+          "distancePx": 0,
+          "colorProperty": "background-color",
+          "colorFeedback": true
+        }
+      },
+      "filterAndRetryPassed": true
+    }
+  ],
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed"
+  },
+  "unverified": ["native Safari", "physical mobile devices", "production"]
+}

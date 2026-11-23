@@ -591,11 +591,11 @@
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "31c55092aa5af42c9cc8394bbfae986ea0146fb75736d02e18052c8dcc92f047",
+      "sha256": "2bed4736c1f700739a3e9b09ee45067a46302f73fd28be0539e51214f1e3f5f7",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-20",
-      "note": "사용자가 이번 초안 작성 규칙·가이드만 저장소별 커밋·푸시하고 공개 검수 후 PR/CI 확인을 명시 승인함. 비공개 초안 저장과 사람 공개/게시 승인, 레거시 안내 구분, preview 미연결 및 정제 결과를 최종 인덱스 bytes로 검수함. 실제 원문·자산·원시 자료·키·다른 미커밋/stash·미푸시 자동화·기본 브랜치 병합·운영 변경은 제외함.",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -605,11 +605,11 @@
     },
     {
       "path": "docs/architecture/adr-0031-docs-search-drawer.md",
-      "sha256": "8d23a587de53ec2bad921c7eac4297b8412eabd1551cad2988ad23be024c2d71",
+      "sha256": "fdfe72915010c0f4b15f2acc6771c7f66225e4b9386bb809b4151ea38f3aab1d",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-15",
-      "note": "사용자가 PR #92 배포 기록·CI 기하 비교 후속의 최종 7개 파일과 문서 6개 해시 갱신을 공개·커밋·푸시하고 새 main 기반 후속 PR 검증 후 병합·배포하도록 명시 승인함. 운영 검증 정제 집계와 기존 main CI 실패·후속 로컬 검사를 구분해 검수함. 원시 로그·캡처·실제 응답·비밀값·기존 초안·stash·NAS 작업·이력 재작성·브랜치 정리는 제외함.",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -633,11 +633,11 @@
     },
     {
       "path": "docs/architecture/docs-search-experience-policy.md",
-      "sha256": "47e7a521d98cb8bde01d5c10fe2ebbe32c721e39783e9b9573ab033af77ba9a9",
+      "sha256": "f209cd778fd9f999243e762a0a4170dcea2aecff73832ca6c32bcdc89a4919a8",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-20",
-      "note": "사용자가 카드 밀도 코드·회귀 7개와 정제 문서 6개만 공개 검수·해시 등록·작업별 로컬 커밋하도록 승인함. 간격·중복 메타·기존 글자 크기 유지 정책, 합성 회귀의 최초 실패/수정과 최종 결과·관측 한계, 실제 추적 링크·로컬 커밋 상태를 검수함. 원시 로그·화면·합성 입력·비공개 원문·키·다른 작업·stash·푸시·PR·운영 변경은 제외함.",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR #111 리뷰2건과 나머지 CI 실패 원인의 수정·정제 검증 기록 반영·커밋·푸시·새 CI 확인을 명시 요청했다. 해당 범위의 원인·기존 실패 이력·최종 로컬 집계·실제 근거 링크·소스 해시·정책 보완을 검수했다. 원시 로그·trace·캡처·실제 응답·키·개인 경로·비공개 글·다른 작업은 제외했다. 원격 CI 확인은 새 head로 구분하며 main 병합·운영 배포 승인은 아니다.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -647,11 +647,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "fcbfb1dee5a288a77101ac441f111c74381eab549d7e166b78cd7775cf190b83",
+      "sha256": "fab23be016c99c257db47f21fa268eb9dafcba8a821c21e824abbd96e43eea33",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-22",
-      "note": "사용자가 이번 503 계측 보완·회귀·정제 문서만 공개 검수 후 작업별 커밋·푸시·PR 준비 및 원격 CI·CodeRabbit 확인을 승인함. 합성 HTTP 통제 재현·로컬 통과/실패 집계·과거 CI 원인 미확정·기존 목차 보존을 최종 인덱스 bytes로 검수함. 원시 로그·실제 응답·trace·비공개 원문·키·기존 미커밋·stash·main 병합·배포는 제외함.",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. main과 PR 목차 항목을 보존하고 합성 로컬 회귀24회·503반복10회·전체214개 결과와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -689,11 +689,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "8cb3b305d987391f141d95d8fd2f2c0ddb0038291e37d62b6a5bd09905cd1502",
+      "sha256": "57cb1840eb28c28f0b8e389f84e6b0063c9eb7341d2e7abbb75ac6409babae8d",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-22",
-      "note": "사용자가 이번 503 계측 보완·회귀·정제 문서만 공개 검수 후 작업별 커밋·푸시·PR 준비 및 원격 CI·CodeRabbit 확인을 승인함. 합성 HTTP 통제 재현·로컬 통과/실패 집계·과거 CI 원인 미확정·기존 목차 보존을 최종 인덱스 bytes로 검수함. 원시 로그·실제 응답·trace·비공개 원문·키·기존 미커밋·stash·main 병합·배포는 제외함.",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. main과 PR 목차 항목을 보존하고 합성 로컬 회귀24회·503반복10회·전체214개 결과와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -857,11 +857,11 @@
     },
     {
       "path": "docs/verification/artifacts/README.md",
-      "sha256": "24307a167bb8b9d01cf970c4c75e40b23ecc5e533466afb8669a04eeb6bf6032",
+      "sha256": "f4c71eee6d2fee97c59e28daf6cd1ab99bf39ef321f1cc2ce9bb7a47ee0cb669",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-22",
-      "note": "사용자가 정리한 승인 커밋의 작업별 통합·푸시·PR/CI 검증과 기존 목차4개·보고서/worklog6개의 정제 보완·재검수·해시 갱신을 명시 승인함. 새 main과 원본의 링크·관측/실패/한계를 보존하고 로컬 재검증 결과만 최종 bytes로 검수함. 원문·초안·원시 자료·키·기존 PR 종료·main 병합·배포는 제외함.",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -1585,11 +1585,11 @@
     },
     {
       "path": "docs/architecture/adr-0027-article-heading-anchor-compatibility.md",
-      "sha256": "e1cf5b8b0ca3a0d1b093ac7d3ef46ff21b5b60ed103b5127f231389c0d8d9f32",
+      "sha256": "eaf6cb9bf9fe7233557c3ed48aa5e53fbf7b56b1df69b83f0c72a7ff09817564",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-10-31",
-      "note": "사용자가 PR81 추가 목차 보완 최종 문서 4개와 승인 해시 4개 갱신의 공개·커밋·푸시를 명시 승인함. 자체 작성한 제목 ID 우선순위·기존 fragment 호환·정적 분석 한계의 설계 결정이며 원시 자료·초안·비밀값·제3자 매체는 제외함. main 병합·배포는 승인 범위가 아님.",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR #111 리뷰2건과 나머지 CI 실패 원인의 수정·정제 검증 기록 반영·커밋·푸시·새 CI 확인을 명시 요청했다. 해당 범위의 원인·기존 실패 이력·최종 로컬 집계·실제 근거 링크·소스 해시·정책 보완을 검수했다. 원시 로그·trace·캡처·실제 응답·키·개인 경로·비공개 글·다른 작업은 제외했다. 원격 CI 확인은 새 head로 구분하며 main 병합·운영 배포 승인은 아니다.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -1907,11 +1907,11 @@
     },
     {
       "path": "docs/knowledge/infra-tooling/javascript-abort-timeout.md",
-      "sha256": "a6a63a3a6361110f19e96c3cc8fe773962902542050e9d54e26e012bfb9629ea",
+      "sha256": "23e6f050175bd5cec01f3891a29c1174ce784d31b095b6daf28cd26f1bd94f79",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-21",
-      "note": "사용자가 승인한 이번 JavaScript 개선·관련 문서의 공개·커밋·푸시·PR 범위에서 실제 PR #106·검증 원본·반영 상태와 기존 실행 이력의 구분만 갱신함. 최종 bytes의 비밀값·개인 경로·권리·공개 의도를 재검수함. 다른 작업·원시 자료·병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -2648,12 +2648,894 @@
       }
     },
     {
+      "path": "apps/docs/public/fonts/NotoSansKR-LICENSE.txt",
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+      "kind": "asset",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/worklog/2026-11/2026-11-22-upstream-503-trace-readiness.md",
       "sha256": "0d5d282ffb02e08b6e3861dd8e778c92f2d249d0cae184e07a815a6f4330802d",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
       "note": "사용자가 승인한 이번 503 보완·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR/CI 확인 범위에서 기존 보고서/worklog의 단독 재현 설정·루트 명령·선행 조건을 보완해 재검수함. 문서 shell 블록 24회 재검증과 최초 head CI 결과·인과관계 미확정을 구분하고 최종 인덱스 bytes를 확인함. 원시 자료·비공개 원문·비밀값·다른 미커밋·stash·공통 설정·main 병합·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "apps/docs/public/fonts/NotoSansKRVariable.woff2",
+      "sha256": "ab8429c627b959cc2e1b7a543ebb34baaf37be15958c19996c4b13d7cfe5e6b3",
+      "kind": "asset",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/adr-0035-docs-search-drawer-link-focus.md",
+      "sha256": "68e4fad66b449dce7e7bbf627d792108523edf0fa63bcaa7d9c9186331875847",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-11-21-card-hover-motion.md",
+      "sha256": "272625de755997d928eac027894153f6e5594ae1c78c51808f4f9800f7c46772",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-11-21-frontend-modernization-audit.md",
+      "sha256": "3c275325fb8b0d5198a0021a7825b0d2df5c7a3a1dbf06ed1c724ca0747bb6d5",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-11-21-search-input-audit.md",
+      "sha256": "4c69653b7a37f6d797f9a22c40adb21fb441c3bb4644ade3c59c70df01a9d11f",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-11-21-vuln-radar-feed-focus.md",
+      "sha256": "c1e74fc9aaa3a45f722aaa6aaed54d0133500b2cba27547bf94bf2f0a654910e",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-11-21-vuln-radar-feed-hover-motion.md",
+      "sha256": "59bf36a91665c596ff7cf276b13c3a492a29b8f282c05dbbd90ee22bebdecd1f",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-11-21-vuln-radar-feed-label.md",
+      "sha256": "89846bddf1efb627208117ca9861098a9f648bfa04265a6a3152b69bd5f581ce",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-11-21-vuln-radar-feed-landmark.md",
+      "sha256": "e68f3e37636196351e4928571ccaae3e7ff0b3e6b5c60cc4d42045ebb3707e87",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-11-21-vuln-radar-feed-loading-motion.md",
+      "sha256": "8a5661ca46c94c7b66d347d5ec800e7018841b04d9b90ab8b52b230561f74918",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-11-21-vuln-radar-feed-pagination-focus.md",
+      "sha256": "edd79d7c9499b9788cec3bde21ec580429a85cba08cbcfc341fc0abb99374872",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/accessibility/2026-11-21-vuln-radar-feed-result-status.md",
+      "sha256": "86b9e0165a3394e52b06f9d9b790cad1ae1edf679afcddff93f4d38b3b6f06e5",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-card-hover-motion.json",
+      "sha256": "153e7a0eba08620deb1e216fdde57ded6fa027c7ab312bcf4e0d5e63993ecf60",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-drawer-focus-model.json",
+      "sha256": "d820137a674872c69bcba409b6634d66c10ea21549160b789606d556a83a4c75",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-drawer-link-focus.json",
+      "sha256": "7bc79e46e0a7dfe621e87cb4d73281eea78daf128d756239b518c1ec286bf1f0",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-drawer-safari-voiceover.json",
+      "sha256": "e35c458246df4edde5aa53574f30ee619c6889fb8fa897b5cbf0336be9071e7d",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-frontend-modernization-audit.json",
+      "sha256": "b5fb7525c346b3a1e53771e587dff942631da960228089226489a4397e0d65d6",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-search-input-audit.json",
+      "sha256": "36fb6396a9325fff5072c4a0715c55bc545ce4c7353e60014f335de9c1b06f85",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-search-input-labels.json",
+      "sha256": "43113bda5659b6c4860e5abb82c0c2c1a4625c5a0b52966f9841d891cfb069e9",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-vuln-radar-feed-focus.json",
+      "sha256": "805b18474923095a21ab3c1af39e1fd3e9b8ee046c2231738e41b0f7516abaa0",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-vuln-radar-feed-hover-motion.json",
+      "sha256": "cf71907c5af426f0cf0f45dacacc0166ccb8c13f5060b767b4c0f2a15e928a9d",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-vuln-radar-feed-label.json",
+      "sha256": "27f551d4068adaf9a4cd91d7a508efb09a6e57e637bd062c2597c27dc53c90c2",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-vuln-radar-feed-landmark.json",
+      "sha256": "121820d2290a698c1733ed76cb6979cb9030e0b8c0f194c909587b6281635d50",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-vuln-radar-feed-loading-motion.json",
+      "sha256": "df62306c59cb2d9dc6e0ba9dc02dd7178f74b2cabb19324779c7ff8710b2839e",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-vuln-radar-feed-pagination-focus.json",
+      "sha256": "3c392086fa6e9f023194c190579fbd01d53d73f2e986640386157fcbabf5c881",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-21-vuln-radar-feed-result-status.json",
+      "sha256": "cd2fccaf912b00f80c9b830b589d8bed7338546240ef46ab9a82bbd3d348142b",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-22-docs-article-images.json",
+      "sha256": "160fad259aae29ffa38b26b140953145793a7d8bb1622b91fe799a0637b4c867",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-22-docs-font-loading.json",
+      "sha256": "6af95d4e6e3e541d65d91573a8acd4872ed183666bbd6ef6b1fd707addbfbeea",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-22-docs-noto-sans-kr.json",
+      "sha256": "8a36c62de5ed789051e146a58238ed6fee7188fae63d99b7277e639b83fc6c3c",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-22-feed-offscreen-rendering.json",
+      "sha256": "13e53a741b29afe8dc489316b81bc6859a57ad020795d81cfee8154a1ee336d2",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-22-feed-request-cancellation.json",
+      "sha256": "9db0fda4c0d05d0ee9212ca38d90a479153f0edd220c90fc1cf017fd41a253eb",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-22-vuln-radar-route-splitting.json",
+      "sha256": "931c7d099bde706b429174f2c48cfbe2bdada30132c188901f34f744e46aa4a5",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/integration/2026-11-22-feed-request-cancellation.md",
+      "sha256": "841322641cacc33a230f7ef9869716aced303fa33932f5e6519ae5be4ec04d48",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/performance/2026-11-22-docs-article-images.md",
+      "sha256": "245d98545863b17bd71a57b4b6a534be7d0c68142b762bd8f1d8cea5e1503388",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/performance/2026-11-22-docs-font-loading.md",
+      "sha256": "163877332565f25ccc3e95f91878ba3481b5a3c22506d94b87050ce3b0ea1b8d",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/performance/2026-11-22-docs-noto-sans-kr.md",
+      "sha256": "5e7f65c7d8659c3c9484d942ff9c5d62af2a276e964d76f6899d078ecbd68675",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/performance/2026-11-22-feed-offscreen-rendering.md",
+      "sha256": "94d8436e55f2ce0d65bddd07aee64d54998d2ce44d65b7843bb1edb43fad6886",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/performance/2026-11-22-vuln-radar-route-splitting.md",
+      "sha256": "ee5a5032a32141c6bc3b0abdf7b010288eb9cb9762006affceb9356297f31947",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-21-card-hover-motion.md",
+      "sha256": "e8ea7dcb178574d4baad1c916dd8420a40db4d62236e9f1bb935618a7e278c0b",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-21-frontend-modernization-audit.md",
+      "sha256": "358e9c3208c48b22ba0caccc25520ecd9c018b8bfeee258b66790788474190a7",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-21-search-input-audit.md",
+      "sha256": "01751159955b87ef6617d35aaa6601ae941932b4e0cbed9745f3502eb343defc",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-21-vuln-radar-feed-focus.md",
+      "sha256": "eee8e04b00938754ba9b13fc7e01cffb2f55d7fa243038799426af747f42f6b6",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-21-vuln-radar-feed-hover-motion.md",
+      "sha256": "e2bf08d97c8d8c38e3582d1a028b5072d4ce9341ee6a2d557571391099e8bc29",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-21-vuln-radar-feed-label.md",
+      "sha256": "53db1f2bdc4b2302aa67b75b7b871293e384c817ba3fd5c1a2d2fc0287555fac",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-21-vuln-radar-feed-landmark.md",
+      "sha256": "dbdd549478c6c18e1e4006432431f25a262f8e34ff79d05e780cfe5f9bcfd6d3",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-21-vuln-radar-feed-loading-motion.md",
+      "sha256": "aab8765fae2736e945d84f7427bd7bf12c5a629298da5c359f3baf152e5aa0a0",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-21-vuln-radar-feed-pagination-focus.md",
+      "sha256": "651aa13792ce2096855d3e687d208d25dc1ef7d4bb391b7d16e09ab15057046c",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-21-vuln-radar-feed-result-status.md",
+      "sha256": "b03140df7c6e60dbeaa209dfad0e04d25af41f8972dd90e6055ec23475c34d41",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-22-docs-article-images.md",
+      "sha256": "2f1800f297595677d5461128d170e6a879e4ef7c438e1d5c26e3d585da90a741",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-22-docs-font-loading.md",
+      "sha256": "431149f6bf721544c77967a9d2c3ed1ec297f07323350500499e9e84b5d8251d",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-22-docs-noto-sans-kr.md",
+      "sha256": "7f0077d6fce4cbf851bb51f0638b55c34d1f007f368ec5d91195ffdd394db83a",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-22-feed-offscreen-rendering.md",
+      "sha256": "5e266695ac6c5b197c8bfece3a386dd8625fd249af6de94b573912392fa4ca91",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-22-feed-request-cancellation.md",
+      "sha256": "cd85cd1a816504740f8194f1caa0dbd4c389271000f1ed8c2146b6bd20a631ba",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-22-vuln-radar-route-splitting.md",
+      "sha256": "2fabeea2fc267d99ae496d2d04b3593184e381dd33dd5baaac2080087a33f905",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 현재 현대화 변경의 main PR 준비를 요청한 범위. 기존 로컬 커밋의 정제 기록·앱 자산과 통합 ADR·목차·작업 기록의 최종 bytes를 검수했다. 합성 결과와 과거 사용자 확인·미검증 범위를 구분하며, Noto 공식 OFL 고지를 유지한다. 원시 캡처·trace·실제 응답·인증 값·개인 경로·비공개 글과 다른 작업은 제외한다. Draft PR 전송 범위이며 main 병합·운영 배포 승인은 아니다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-23-frontend-modernization-main-pr.md",
+      "sha256": "b85604dc1e918ab6cba86ed26a13e314a7518a1ce4c7a188638854522077234a",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-23-frontend-modernization-pr-review.json",
+      "sha256": "b3970b00a6558f6fc86310ae69e1fba59324e159a5d42c17026c312a9aaffe48",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 리뷰·나머지 CI 실패 해결과 검증 기록의 커밋·푸시·새 CI 확인을 명시 요청한 범위. ec45bffd 원격 CI의197통과/프리페치1실패, 전체 로컬196통과/hidden fallback 선택2실패, 최종198통과/기존2생략의 정제 이력과 검사 소비자 보완을 검수했다. 원시 자료·비밀값·다른 작업·main 병합·운영 배포는 제외한다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/integration/2026-11-23-frontend-modernization-pr-review.md",
+      "sha256": "f5a2da16bc7f19585dada8a4fd2f20c36f82a9fc58a428ba2627d2db6de05431",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 리뷰·나머지 CI 실패 해결과 검증 기록의 커밋·푸시·새 CI 확인을 명시 요청한 범위. ec45bffd 원격 CI의197통과/프리페치1실패, 전체 로컬196통과/hidden fallback 선택2실패, 최종198통과/기존2생략의 정제 이력과 검사 소비자 보완을 검수했다. 원시 자료·비밀값·다른 작업·main 병합·운영 배포는 제외한다.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/adr-0024-advisory-review-rate-limit.md",
+      "sha256": "c568d260336619f244ccdc42d2ec6a052392d3d4e52f0244d3ffa7ffe54b8a12",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/adr-0037-coderabbit-file-limit-exception.md",
+      "sha256": "e5518981fac6175169b8202b5d749d00edfcc88cde99aee6da4b2c286f435f47",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/process/squash-merge-preflight.md",
+      "sha256": "9c97bd1e82d2c65b41ae9517125ff973c307c0c15a1196295a57b8a00116c3eb",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/resilience/2026-11-23-coderabbit-file-limit.md",
+      "sha256": "3d107eb313dadaed4324c73f3e064c84a0ed63b9b9bb12fe292bc2240a02d4f9",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-23-coderabbit-file-limit.json",
+      "sha256": "c2ed3aa0d1a813846f2a0375d76252c37908f63c764aa9014f6e0805cff7181f",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-23",
+      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,

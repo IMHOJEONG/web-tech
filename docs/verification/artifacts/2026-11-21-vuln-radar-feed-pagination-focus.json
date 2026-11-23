@@ -1,0 +1,164 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "80c135a3e9b1e8975e975ad31266b9f09c4a1937",
+  "environment": "Actual Vite Feed route with a delayed synthetic response for page 2",
+  "sourceHashes": {
+    "apps/vuln-radar/src/pages/feed/ui/feed-pagination.tsx": {
+      "before": "49fc1ab94398f1fc01c3af37ecfde016a6a3ef75330687231a63644a524d0ea8",
+      "after": "0167566b2b5d58b49e4aa5c349663c69482ee335ddaae565542a8ce8090ae8fa"
+    },
+    "apps/vuln-radar/src/pages/feed/ui/feed-page.tsx": {
+      "before": "5eca1cf257bac38e500dc5a41b561ee500c0385928c42ef17903c86321d4c7ff",
+      "after": "fc192d226ca9cd127f4bc783ed9fdb5af6016959e66344b28df106e618f35ba9"
+    }
+  },
+  "before": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "pendingFocus": "BODY",
+      "finalFocus": "BODY",
+      "requestsToPageTwo": 1,
+      "keyboardAndPointerGuardChecked": false,
+      "tabRoundTrip": false
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "pendingFocus": "BODY",
+      "finalFocus": "BODY",
+      "requestsToPageTwo": 1,
+      "keyboardAndPointerGuardChecked": false,
+      "tabRoundTrip": false
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "pendingFocus": "BODY",
+      "finalFocus": "BODY",
+      "requestsToPageTwo": 1,
+      "keyboardAndPointerGuardChecked": false,
+      "tabRoundTrip": false
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "pendingFocus": "BODY",
+      "finalFocus": "BODY",
+      "requestsToPageTwo": 1,
+      "keyboardAndPointerGuardChecked": false,
+      "tabRoundTrip": false
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "pendingFocus": "BODY",
+      "finalFocus": "BODY",
+      "requestsToPageTwo": 1,
+      "keyboardAndPointerGuardChecked": false,
+      "tabRoundTrip": false
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "pendingFocus": "BODY",
+      "finalFocus": "BODY",
+      "requestsToPageTwo": 1,
+      "keyboardAndPointerGuardChecked": false,
+      "tabRoundTrip": false
+    }
+  ],
+  "after": [
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 390,
+      "pendingFocus": "BUTTON",
+      "finalFocus": "BUTTON",
+      "requestsToPageTwo": 1,
+      "keyboardAndPointerGuardChecked": true,
+      "tabRoundTrip": true,
+      "tabModifier": null
+    },
+    {
+      "engine": "chromium",
+      "version": "151.0.7922.34",
+      "width": 1280,
+      "pendingFocus": "BUTTON",
+      "finalFocus": "BUTTON",
+      "requestsToPageTwo": 1,
+      "keyboardAndPointerGuardChecked": true,
+      "tabRoundTrip": true,
+      "tabModifier": null
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 390,
+      "pendingFocus": "BUTTON",
+      "finalFocus": "BUTTON",
+      "requestsToPageTwo": 1,
+      "keyboardAndPointerGuardChecked": true,
+      "tabRoundTrip": true,
+      "tabModifier": null
+    },
+    {
+      "engine": "firefox",
+      "version": "153.0",
+      "width": 1280,
+      "pendingFocus": "BUTTON",
+      "finalFocus": "BUTTON",
+      "requestsToPageTwo": 1,
+      "keyboardAndPointerGuardChecked": true,
+      "tabRoundTrip": true,
+      "tabModifier": null
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 390,
+      "pendingFocus": "BUTTON",
+      "finalFocus": "BUTTON",
+      "requestsToPageTwo": 1,
+      "keyboardAndPointerGuardChecked": true,
+      "tabRoundTrip": true,
+      "tabModifier": "Option"
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "width": 1280,
+      "pendingFocus": "BUTTON",
+      "finalFocus": "BUTTON",
+      "requestsToPageTwo": 1,
+      "keyboardAndPointerGuardChecked": true,
+      "tabRoundTrip": true,
+      "tabModifier": "Option"
+    }
+  ],
+  "checks": {
+    "libraryTestsPassed": 36,
+    "typecheck": "passed",
+    "lint": "passed"
+  },
+  "unverified": [
+    "native Safari and screen readers",
+    "focus on full page request failure",
+    "physical devices",
+    "production"
+  ],
+  "integration": {
+    "passed": 26,
+    "cleanup": true,
+    "hadExistingWorktreeChanges": true,
+    "runnerSha256": "d9a9998d5ae5370b1cc277d494e15180eac53e0813160d653b1486d3971a1b70",
+    "rawSha256": "7a8bc68bddc469ef302cb574c81b73cd6a5c4d9614686c56b61d699ddf027c97"
+  }
+}

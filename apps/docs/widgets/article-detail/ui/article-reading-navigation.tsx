@@ -50,7 +50,7 @@ function ArticleReadingNavigationCard({
     return (
         <Link
             href={item.href}
-            className="group flex min-w-0 flex-col gap-3 rounded-2xl border border-border bg-surface-container-lowest p-5 shadow-soft transition duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-surface-container-low focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+            className="group flex min-w-0 flex-col gap-3 rounded-2xl border border-border bg-surface-container-lowest p-5 shadow-soft transition-colors motion-safe:transition duration-200 motion-safe:hover:-translate-y-0.5 hover:border-primary/45 hover:bg-surface-container-low focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
         >
             <span className="text-xs font-semibold uppercase tracking-[0.18em] text-outline">
                 {label}

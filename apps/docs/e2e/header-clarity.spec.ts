@@ -18,7 +18,7 @@ for (const locale of ['ko', 'en']) {
             }
             const header = page.getByRole('banner')
             const trigger = page.getByTestId('search-drawer-trigger')
-            const input = page.getByRole('dialog').getByRole('combobox')
+            const input = page.getByRole('dialog').getByRole('searchbox')
             const width = page.viewportSize()!.width
             await expect(trigger).toBeVisible()
             await expect(trigger).toHaveAccessibleName(
@@ -91,7 +91,7 @@ test('header and expanded search fit narrow and breakpoint widths', async ({
         const header = page.getByRole('banner')
         const trigger = page.getByTestId('search-drawer-trigger')
         await trigger.click()
-        const input = page.getByRole('dialog').getByRole('combobox')
+        const input = page.getByRole('dialog').getByRole('searchbox')
         await expect(input).toBeVisible()
         const panelId = await trigger.getAttribute('aria-controls')
         const bounds = await page.locator(`[id="${panelId}"]`).boundingBox()

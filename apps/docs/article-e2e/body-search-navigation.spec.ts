@@ -60,7 +60,10 @@ for (const locale of ['ko', 'en']) {
                 await input.fill(`  ${keyword}  `)
                 if (location === 'header') {
                     await expect(
-                        page.getByRole('dialog').getByRole('option')
+                        page
+                            .getByRole('dialog')
+                            .getByRole('list')
+                            .getByRole('link')
                     ).toContainText('Publication cache probe V1')
                 }
 

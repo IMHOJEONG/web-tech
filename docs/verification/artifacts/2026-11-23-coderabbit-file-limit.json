@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-23",
+  "sourceHead": "a490e7f152d5e006df19fb51cc68fb4f822896ce",
+  "check": {
+    "id": 137279377986,
+    "appId": 347564,
+    "slug": "coderabbitai",
+    "owner": "coderabbitai",
+    "conclusion": "skipped",
+    "reportedFiles": 116,
+    "changedFiles": 118,
+    "fileLimit": 100,
+    "reviewPerformed": false
+  },
+  "validation": {
+    "squashTests": {
+      "passed": 96,
+      "failed": 0,
+      "skipped": 0
+    },
+    "repositoryTests": {
+      "passed": 339,
+      "failed": 0,
+      "skipped": 0
+    },
+    "typecheck": "passed",
+    "livePreflight": "check-only passed",
+    "messageSha256": "491ebfa01bfab4b7b1a522f04ad41b77347627ef346173c66a0202d7472bea08"
+  },
+  "sourceSha256": {
+    "scripts/squash-merge.mts": "874d7d055ca354d8516a9e94601bb7c308756977690b5a6838973f3795e63c95",
+    "scripts/squash-merge.test.mts": "f73b751fc1f23d9011bb070952e9b71447655de4928af43125431a94c3945395"
+  },
+  "limits": [
+    "No automated review performed",
+    "New commit CI and actual merge are subsequent checks",
+    "Provider internal file exclusions not inferred"
+  ]
+}

@@ -13,8 +13,9 @@ export class ApiError extends Error {
     status?: number | null;
     code: "network" | "http" | "parse";
     details?: unknown;
+    cause?: unknown;
   }) {
-    super(params.message);
+    super(params.message, { cause: params.cause });
     this.name = "ApiError";
     this.status = params.status ?? null;
     this.code = params.code;
@@ -31,14 +32,20 @@ function buildApiUrl(path: string) {
 export async function getJson<T>(
   path: string,
   schema: z.ZodType<T>,
+  signal?: AbortSignal,
 ): Promise<T> {
+  const timeoutSignal = AbortSignal.timeout(API_TIMEOUT_MS);
+  const requestSignal = signal
+    ? AbortSignal.any([signal, timeoutSignal])
+    : timeoutSignal;
+
   try {
     const response = await fetch(buildApiUrl(path), {
       method: "GET",
       headers: {
         Accept: "application/json",
       },
-      signal: AbortSignal.timeout(API_TIMEOUT_MS),
+      signal: requestSignal,
     });
 
     if (!response.ok) {
@@ -79,6 +86,10 @@ export async function getJson<T>(
 
     return parsed.data;
   } catch (error) {
+    if (signal?.aborted && requestSignal.reason === signal.reason) {
+      throw signal.reason;
+    }
+
     if (error instanceof ApiError) {
       throw error;
     }
@@ -89,6 +100,7 @@ export async function getJson<T>(
           ? error.message
           : "Unknown network error while loading data.",
       code: "network",
+      cause: error,
     });
   }
 }

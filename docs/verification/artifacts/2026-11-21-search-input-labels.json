@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "base": "a2c6505eda9b8555e033bbac629c84b687ba3b87",
+  "scope": "Local search label and input hint implementation",
+  "sourceSha256": {
+    "apps/docs/e2e/shell-focus-contrast.spec.ts": "c6c3afdfd253695c901e8681727f5f1aa15fa8ac32971413d834a261929de961",
+    "apps/docs/feature/search/model/use-search-keyword.ts": "f15a9d7928411053df7f51779acbb6e6c678a7aecfb726e6bbd4e863606ed336",
+    "apps/docs/feature/search/ui/document-search-form.tsx": "fa27772880162d26d312ac60b703d30a3ce9938517c0014438071cdb3efe87bd",
+    "apps/docs/feature/search/ui/search-drawer-content.tsx": "2f278f0b7244e8fe0d51d5689128d13bdbbfc07e3c8d6ba1e32cda16f69b225d",
+    "apps/docs/shared/message/en.json": "74be4ced9fd48a4143775090883d1052a9f1159f68d743effa60155a1cb38a04",
+    "apps/docs/shared/message/ko.json": "5067d34b4160ecfc566a55ce9bc6e1c6483c8c862499f289ce8f6e06a9749aec"
+  },
+  "guides": ["forms", "accessibility"],
+  "typecheck": "passed",
+  "lint": "passed",
+  "browser": {
+    "environments": 12,
+    "engines": {
+      "chromium": "151.0.7922.34",
+      "firefox": "153.0",
+      "webkit": "26.5"
+    },
+    "widths": [390, 1280],
+    "locales": ["ko", "en"],
+    "checks": {
+      "labelsAndHints": 12,
+      "clickFocus": 12,
+      "distinctIds": 12,
+      "editRetainsName": 12,
+      "layoutFits": 12,
+      "indexEnterNavigation": 12,
+      "initialFocus": 12,
+      "activeDescendant": 12,
+      "isComposingEnterBlocked": 12,
+      "keyCode229EnterBlocked": 12,
+      "compositionEnterEscapeBlocked": 12,
+      "optionArrowNavigation": 12,
+      "escapeRestoresTrigger": 12,
+      "emptyRelationsCleared": 12,
+      "focusPreservedDuringUpdates": 12,
+      "indexIMEGuards": 12,
+      "nativeGetContract": 12,
+      "explicitSearchNavigation": 12,
+      "noDocumentNavigationDuringIndexComposition": 12
+    },
+    "fontSizeByField": {
+      "index": ["16px"],
+      "drawer": ["16px"]
+    },
+    "pageErrors": 0
+  },
+  "existingPlaywright": {
+    "passed": 20,
+    "projects": ["chromium-mobile", "chromium-desktop"],
+    "scope": "Named contrast and focus tests, Escape restore, search history and native GET"
+  },
+  "fixture": "Isolated loopback synthetic posts and intercepted suggestions",
+  "limitations": [
+    "Physical virtual keyboard, OS IME and screen reader not verified",
+    "Production not verified"
+  ]
+}

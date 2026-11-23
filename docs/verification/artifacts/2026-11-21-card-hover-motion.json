@@ -1,0 +1,475 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "base": "082fcb6f7da330101af2ab1c894efc05d0170dff",
+  "status": "locally applied and verified; uncommitted",
+  "guide": {
+    "id": "motion",
+    "cliVersion": "1.0.1",
+    "runner": "pnpx",
+    "source": "GoogleChrome/modern-web-guidance"
+  },
+  "previousCommits": {
+    "code": "545428a4",
+    "records": "082fcb6f",
+    "scope": "Previous frontend work only; next card edits are not committed",
+    "hooks": "Both actual commits passed format/docs/publication and commitlint hooks",
+    "rangeChecks": "publication HEAD~2 and commitlint passed; zero problems/warnings"
+  },
+  "checks": {
+    "docsTypecheck": "passed",
+    "docsLint": "passed",
+    "sourceFormat": "5 files passed",
+    "diff": "passed",
+    "formatFiles": 11,
+    "format": "passed",
+    "documentationFiles": 6,
+    "documentationErrors": 0,
+    "documentationMode": "working-tree view; no staging"
+  },
+  "sourceSha256": {
+    "apps/docs/entities/category/ui/category-document-card.tsx": {
+      "before": "d5b09f2a6021c82b71121dd89913baad650459aea47447c46d6f30a1b94a7981",
+      "after": "12fb7f50c002e8817ceebaa830ba9e021043c89f26178fc1c38d603d8519c3bc"
+    },
+    "apps/docs/entities/document/ui/main-card.tsx": {
+      "before": "2007058e711d121f464d8db35ca1466e46a533ffb44e21b52b8ca336ce6dbea4",
+      "after": "ae82d9fb9efe74419dce5fa1ca00339902570a889fd8ec8dfd339c95ea663b2f"
+    },
+    "apps/docs/widgets/docs-index/ui/docs-index-sections.tsx": {
+      "before": "32513b8d91656a0229af03c862df9e3090442265dfdbb22310a1372c8bd9a307",
+      "after": "e22fa737f8858ddbf587574a5bcbd889990652f8b0ba3c87874f707b3063bf82"
+    },
+    "apps/docs/widgets/article-detail/ui/article-reading-navigation.tsx": {
+      "before": "2b39fda388c1a9a2d41921e8e1482cad69dd6831aee5ad0f80ece9a859a31996",
+      "after": "558bbd7b9a0fe9c980c494abcfaead96a4df52606398cecd7100ee685c96634e"
+    },
+    "apps/docs/widgets/article-detail/ui/article-related-documents.tsx": {
+      "before": "ea406fbdd0f06dfe61f431a8f559d77281581019691533f5fcacc49f5e70f55b",
+      "after": "2a72b309b6a713add80cd1460420d403e9d2adc18525cf554649fbb34ad1ae16"
+    }
+  },
+  "browserScope": "Source-extracted classes with real compiled app CSS in synthetic semantic links; not full React/Next routes",
+  "pages": 72,
+  "cardComparisons": 180,
+  "environmentPairs": 36,
+  "normalMotionPreservedCases": 90,
+  "reducedMotionRemovedCases": 90,
+  "feedbackPreservedCases": 180,
+  "focusPreservedCases": 180,
+  "keyboardEnterCases": 180,
+  "livePreferenceSwitchChecks": 90,
+  "pageErrors": 0,
+  "byEngine": {
+    "chromium": {
+      "version": "151.0.7922.34",
+      "comparisons": 60
+    },
+    "firefox": {
+      "version": "153.0",
+      "comparisons": 60
+    },
+    "webkit": {
+      "version": "26.5",
+      "comparisons": 60
+    }
+  },
+  "representativeReducedMotion": [
+    {
+      "phase": "before",
+      "engine": "chromium",
+      "measurements": [
+        {
+          "id": "category",
+          "dx": 0,
+          "dy": -4,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "hub",
+          "dx": -2.399993896484375,
+          "dy": -1.67999267578125,
+          "ratio": 1.0299999237060546,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "sections",
+          "dx": 0,
+          "dy": -2,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "reading",
+          "dx": 0,
+          "dy": -2,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "related",
+          "dx": 0,
+          "dy": -2,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        }
+      ]
+    },
+    {
+      "phase": "after",
+      "engine": "chromium",
+      "measurements": [
+        {
+          "id": "category",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "hub",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "sections",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "reading",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "related",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        }
+      ]
+    },
+    {
+      "phase": "before",
+      "engine": "firefox",
+      "measurements": [
+        {
+          "id": "category",
+          "dx": 0,
+          "dy": -4,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "hub",
+          "dx": -2.399993896484375,
+          "dy": -1.6833343505859375,
+          "ratio": 1.0299999237060546,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "sections",
+          "dx": 0,
+          "dy": -2,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "reading",
+          "dx": 0,
+          "dy": -2,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "related",
+          "dx": 0,
+          "dy": -2,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        }
+      ]
+    },
+    {
+      "phase": "after",
+      "engine": "firefox",
+      "measurements": [
+        {
+          "id": "category",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "hub",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "sections",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "reading",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "related",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        }
+      ]
+    },
+    {
+      "phase": "before",
+      "engine": "webkit",
+      "measurements": [
+        {
+          "id": "category",
+          "dx": 0,
+          "dy": -4,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "hub",
+          "dx": -2.4000015258789062,
+          "dy": -1.67999267578125,
+          "ratio": 1.0299999237060546,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "sections",
+          "dx": 0,
+          "dy": -2,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "reading",
+          "dx": 0,
+          "dy": -2,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "related",
+          "dx": 0,
+          "dy": -2,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        }
+      ]
+    },
+    {
+      "phase": "after",
+      "engine": "webkit",
+      "measurements": [
+        {
+          "id": "category",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "hub",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "sections",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "reading",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        },
+        {
+          "id": "related",
+          "dx": 0,
+          "dy": 0,
+          "ratio": 1,
+          "focus": {
+            "style": "solid",
+            "width": "2px"
+          },
+          "keyboardNavigation": true
+        }
+      ]
+    }
+  ],
+  "harnessCorrections": [
+    "Use the real grid parent context to blockify inline grid-item links",
+    "Use an explicit keyboard start button rather than wrapping reverse Tab through browser chrome",
+    "Use Option-Tab for default link traversal in macOS WebKit; reference official Apple Safari shortcuts"
+  ],
+  "keyboardReference": "https://support.apple.com/guide/safari/keyboard-shortcuts-and-gestures-cpsh003/mac",
+  "excludedDormantExample": "apps/docs/widgets/home-hero/ui/hero-section.tsx",
+  "limitations": [
+    "Source-extracted CSS verification, not actual React/Next data and route execution",
+    "No physical Safari/iOS, touch-device, screen-reader or production verification",
+    "No performance measurement; no new dependency or architecture decision"
+  ],
+  "tracking": {
+    "jira": "KAN-83",
+    "comment": "10127",
+    "knowledgePage": "19464193",
+    "operationsComment": "20250739",
+    "knowledgeVersion": 9,
+    "operationsVersion": 3,
+    "knowledgeAndOperationsReRead": true
+  },
+  "recordingCorrection": "Read-response heading id was rejected on first comment save; canonical HTML retained text/links and saved successfully",
+  "preservation": {
+    "baselineFiles": 2339,
+    "changedExistingFiles": 8,
+    "newRecordFiles": 3,
+    "otherExistingFilesUnchanged": 2331,
+    "indexEmpty": true,
+    "headUnchanged": true
+  }
+}

@@ -37,6 +37,7 @@ export async function DocsIndexPending({
             <PendingStatus />
             <div className="space-y-5">
                 <DocsSearchPanel
+                    disabled
                     keyword={keyword}
                     eyebrow={t(keyword ? 'search.eyebrow' : 'index.eyebrow')}
                     title={

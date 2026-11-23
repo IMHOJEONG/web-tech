@@ -1331,14 +1331,14 @@ async function main() {
               const pages = current.getByRole("navigation", {
                 name: "검색 결과 페이지",
               });
-              await expect(pages.getByRole("status")).toContainText("2 / 2");
+              await expect(pages.getByText("2 / 2")).toBeVisible();
               await expect(
                 pages.getByRole("button", { name: "다음", exact: true }),
               ).toBeDisabled();
               await pages
                 .getByRole("button", { name: "이전", exact: true })
                 .click();
-              await expect(pages.getByRole("status")).toContainText("1 / 2");
+              await expect(pages.getByText("1 / 2")).toBeVisible();
               await current.getByRole("textbox").fill(ids.beta);
               await expect(
                 current.getByText(ids.beta, { exact: true }),
@@ -1350,7 +1350,7 @@ async function main() {
                 current.getByText(ids.beta, { exact: true }),
               ).toBeVisible();
               await current.goBack();
-              await expect(pages.getByRole("status")).toContainText("2 / 2");
+              await expect(pages.getByText("2 / 2")).toBeVisible();
               assert.ok(
                 await current.evaluate(
                   () => document.documentElement.scrollWidth <= innerWidth,

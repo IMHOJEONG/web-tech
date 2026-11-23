@@ -391,10 +391,11 @@
             "error": "Search results could not be loaded. Please try again.",
             "retry": "Try again",
             "viewAll": "View all search results",
-            "keyboardHint": "↑ ↓ Select · Enter Open · Esc Close"
+            "keyboardHint": "↑ ↓ Move between results · Enter Search or open link · Esc Close"
         },
         "input": {
             "triggerLabel": "Search docs",
+            "queryLabel": "Search query",
             "placeholder": "Search the docs",
             "submitAriaLabel": "Search documents",
             "pendingLabel": "Loading search results",

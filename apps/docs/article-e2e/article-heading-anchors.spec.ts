@@ -20,17 +20,34 @@ async function openFixture(page: Page, hash = '') {
 }
 
 async function expectBelowHeader(heading: Locator) {
+    let position: unknown
     await expect
         .poll(() =>
-            heading.evaluate((element) => {
-                const top = element.getBoundingClientRect().top
-                const header = document
-                    .querySelector('header')!
-                    .getBoundingClientRect()
-                return top >= header.bottom + 8 && top < innerHeight * 0.75
-            })
+            heading
+                .evaluate((element) => {
+                    const top = element.getBoundingClientRect().top
+                    const header = document
+                        .querySelector('header')!
+                        .getBoundingClientRect()
+                    return {
+                        belowHeader: top >= header.bottom + 8,
+                        inUpperViewport: top < innerHeight * 0.75,
+                        top,
+                        headerBottom: header.bottom,
+                        scrollY,
+                        fontStatus: document.fonts.status,
+                    }
+                })
+                .then((value) => {
+                    position = value
+                    return value
+                })
         )
-        .toBe(true)
+        .toMatchObject({ belowHeader: true, inUpperViewport: true })
+        .catch((error) => {
+            console.info('Anchor geometry:', position)
+            throw error
+        })
 }
 
 async function followToc(page: Page, title: string, index = 0) {

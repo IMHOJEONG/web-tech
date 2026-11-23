@@ -164,6 +164,210 @@ const rateLimitedRun = {
   },
 };
 
+const fileLimitCheck = { ...quotaCheck, conclusion: "SKIPPED" };
+const fileLimited = {
+  ...ready,
+  changedFiles: 116,
+  statusCheckRollup: [...ready.statusCheckRollup, fileLimitCheck],
+};
+const fileLimitedRun = {
+  ...rateLimitedRun,
+  conclusion: "skipped",
+  output: {
+    title: "Review skipped: 116 files exceed the limit of 100",
+    summary:
+      "Result: Skipped - Review skipped: 116 files exceed the limit of 100\nRun ID: fixture",
+  },
+};
+
+for (const merge of [false, true]) {
+  test(`official file limit is correlated with the PR file count (merge=${merge})`, (t) => {
+    const options = { ...fixture(t), merge };
+    const { run, calls } = runner(fileLimited, [
+      { check_runs: [{ name: "Lint", conclusion: "success" }] },
+      { check_runs: [fileLimitedRun] },
+    ]);
+    const result = executeSquash(options, run);
+    assert.deepEqual(result.checkExceptions, [
+      {
+        checkName: "CodeRabbit",
+        checkRunId: fileLimitedRun.id,
+        headSha: sha,
+        reviewPerformed: false,
+        reason: "coderabbit-review-file-limit",
+        reportedFiles: 116,
+        changedFiles: 116,
+        fileLimit: 100,
+      },
+    ]);
+    assert.equal(
+      calls.some((c) => c.args[1] === "merge"),
+      merge,
+    );
+    const view = calls.find((c) => c.args[1] === "view")!;
+    assert.ok(
+      view.args[view.args.indexOf("--json") + 1].includes("changedFiles"),
+    );
+    if (merge) {
+      const call = calls.find((c) => c.args[1] === "merge")!;
+      assert.equal(
+        call.args[call.args.indexOf("--match-head-commit") + 1],
+        sha,
+      );
+    }
+  });
+}
+
+for (const [label, patch] of Object.entries({
+  "wrong app": { app: { ...fileLimitedRun.app, id: 1 } },
+  "wrong slug": { app: { ...fileLimitedRun.app, slug: "impostor" } },
+  "wrong owner": {
+    app: { ...fileLimitedRun.app, owner: { login: "impostor" } },
+  },
+  "stale head": { head_sha: "b".repeat(40) },
+  unfinished: { status: "in_progress" },
+  failure: { conclusion: "failure" },
+  "neutral mismatch": { conclusion: "neutral" },
+  "missing ID": { id: undefined },
+  "generic skip": {
+    output: { title: "Review skipped", summary: "Result: Skipped" },
+  },
+  "count in summary only": {
+    output: { ...fileLimitedRun.output, title: "Review skipped" },
+  },
+  "summary mismatch": {
+    output: {
+      ...fileLimitedRun.output,
+      summary: "Result: Skipped - Other reason",
+    },
+  },
+  "missing output": { output: null },
+})) {
+  test(`file-limit evidence rejects ${label}`, (t) => {
+    const { run, calls } = runner(fileLimited, [
+      { check_runs: [{ ...fileLimitedRun, ...patch }] },
+    ]);
+    assert.throws(
+      () => executeSquash({ ...fixture(t), merge: true }, run),
+      /Cannot verify/,
+    );
+    assert.equal(
+      calls.some((c) => c.args[1] === "merge"),
+      false,
+    );
+  });
+}
+
+for (const count of [undefined, 115, 100, 0, -1, 116.5, "116", null]) {
+  test(`file limit rejects uncorrelated PR file count ${String(count)}`, (t) => {
+    const { run, calls } = runner({ ...fileLimited, changedFiles: count }, [
+      { check_runs: [fileLimitedRun] },
+    ]);
+    assert.throws(
+      () => executeSquash({ ...fixture(t), merge: true }, run),
+      /Cannot verify/,
+    );
+    assert.equal(
+      calls.some((c) => c.args[1] === "merge"),
+      false,
+    );
+  });
+}
+
+for (const [count, limit] of [
+  [100, 100],
+  [116, 200],
+  ["0116", 100],
+  ["9007199254740992", 100],
+]) {
+  test(`file limit rejects unsupported report ${count}/${limit}`, (t) => {
+    const title = `Review skipped: ${count} files exceed the limit of ${limit}`;
+    const { run, calls } = runner(
+      { ...fileLimited, changedFiles: Number(count) },
+      [
+        {
+          check_runs: [
+            {
+              ...fileLimitedRun,
+              output: { title, summary: `Result: Skipped - ${title}` },
+            },
+          ],
+        },
+      ],
+    );
+    assert.throws(
+      () => executeSquash({ ...fixture(t), merge: true }, run),
+      /Cannot verify/,
+    );
+    assert.equal(
+      calls.some((c) => c.args[1] === "merge"),
+      false,
+    );
+  });
+}
+
+for (const patch of [
+  { reviewDecision: "CHANGES_REQUESTED" },
+  {
+    statusCheckRollup: [
+      fileLimitCheck,
+      { ...ready.statusCheckRollup[0], conclusion: "FAILURE" },
+    ],
+  },
+  {
+    statusCheckRollup: [
+      fileLimitCheck,
+      { ...quotaCheck, name: "Other", conclusion: "SKIPPED" },
+    ],
+  },
+  { statusCheckRollup: [fileLimitCheck] },
+]) {
+  test(`file limit does not excuse review or other check failures: ${JSON.stringify(patch)}`, (t) => {
+    const { run, calls } = runner({ ...fileLimited, ...patch }, [
+      { check_runs: [fileLimitedRun] },
+    ]);
+    assert.throws(
+      () => executeSquash({ ...fixture(t), merge: true }, run),
+      /PR must be open|Every reported CI/,
+    );
+    assert.equal(
+      calls.some((c) => c.args[1] === "merge"),
+      false,
+    );
+  });
+}
+
+test("file limit rejects duplicate official check runs", (t) => {
+  const { run, calls } = runner(fileLimited, [
+    { check_runs: [fileLimitedRun, { ...fileLimitedRun, id: 2 }] },
+  ]);
+  assert.throws(
+    () => executeSquash({ ...fixture(t), merge: true }, run),
+    /Cannot verify/,
+  );
+  assert.equal(
+    calls.some((c) => c.args[1] === "merge"),
+    false,
+  );
+});
+
+test("provider file count may be a subset of the PR total and both are audited", (t) => {
+  const { run } = runner({ ...fileLimited, changedFiles: 118 }, [
+    { check_runs: [fileLimitedRun] },
+  ]);
+  const result = executeSquash(fixture(t), run);
+  assert.deepEqual(result.checkExceptions[0], {
+    checkName: "CodeRabbit",
+    checkRunId: fileLimitedRun.id,
+    headSha: sha,
+    reviewPerformed: false,
+    reason: "coderabbit-review-file-limit",
+    reportedFiles: 116,
+    changedFiles: 118,
+    fileLimit: 100,
+  });
+});
+
 test("official rate-limit evidence is checked across pages and recorded without claiming review success", (t) => {
   const options = fixture(t);
   const { run, calls } = runner(limited, [
@@ -262,10 +466,6 @@ for (const [label, checks] of Object.entries({
   "CodeRabbit failure": [
     ...ready.statusCheckRollup,
     { ...quotaCheck, conclusion: "FAILURE" },
-  ],
-  "CodeRabbit skipped": [
-    ...ready.statusCheckRollup,
-    { ...quotaCheck, conclusion: "SKIPPED" },
   ],
   "CodeRabbit pending": [
     ...ready.statusCheckRollup,

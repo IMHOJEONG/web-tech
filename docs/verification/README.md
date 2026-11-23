@@ -1,6 +1,42 @@
 # 검증 보고서
 
-- [11-22 503 종료 계측 준비 상태](resilience/2026-11-22-upstream-503-trace-readiness.md): 실제 HTTP/파일 gate의 즉시 읽기 실패·회귀24회·Next 503 반복 및 전체214개 로컬 통과. 과거 CI 최초 원인은 미확정이며 공개 검수 후 PR 검증·운영 미배포를 구분.
+- [11-22 503 종료 계측 준비 상태](resilience/2026-11-22-upstream-503-trace-readiness.md): 실제 HTTP/파일 gate 회귀와 11-23 main 충돌 해결 후 단독24회·Next 503 반복10회·전체214개 로컬 통과. 과거 CI 최초 원인 미확정·후속 원격 검증·운영 미배포를 구분.
+
+- [11-23 CodeRabbit 파일 수 제한 예외](resilience/2026-11-23-coderabbit-file-limit.md) — 엄격한 증거 검증과 일반 skip 차단 유지.
+
+- [11-23 프런트엔드 현대화 PR 리뷰 보완](integration/2026-11-23-frontend-modernization-pr-review.md) — CI 실패 원인·리뷰 수정·새 head 재검증.
+
+- [11-22 Feed 렌더링 지연 실험](performance/2026-11-22-feed-offscreen-rendering.md) — 초기/스크롤 trace·키보드 비교 후 적용 보류.
+
+- [11-22 Feed 요청 취소](integration/2026-11-22-feed-request-cancellation.md) — 호출자 신호·8초 제한·캐시·재시도, 세 엔진 비교.
+
+- [11-22 Vuln Radar 화면 JS 분리 실험](performance/2026-11-22-vuln-radar-route-splitting.md) — 전체 요청·표시 지연 비교 후 제품 적용 보류.
+
+- [11-22 Noto Sans KR 적용](performance/2026-11-22-docs-noto-sans-kr.md) — Pretendard와 가독성·로딩·LCP·CLS 비교.
+
+- [11-22 폰트 로딩](performance/2026-11-22-docs-font-loading.md) — 언어·코드별 기준과 preload 제거 격리 실험. 한글 표시·LCP·CLS 후속 검증, 권장안 적용과 무료 서체 조사.
+
+- [11-22 MDX 본문 이미지](performance/2026-11-22-docs-article-images.md) — 지연 요청·종횡비·반응형 선택, 세 엔진 비교.
+
+- [11-21 Feed 페이지 이동 포커스](accessibility/2026-11-21-vuln-radar-feed-pagination-focus.md): 로딩·경계 페이지의 키보드 포커스와 중복 요청 방지 검증.
+
+- [11-21 Feed hover 모션](accessibility/2026-11-21-vuln-radar-feed-hover-motion.md): 세 엔진·두 폭·두 모션 설정에서 카드와 버튼 비교.
+
+- [11-21 Feed 로딩 모션](accessibility/2026-11-21-vuln-radar-feed-loading-motion.md): 세 엔진·두 폭·동작 설정의 12조건.
+
+- [11-21 Vuln Radar Feed 결과 상태](accessibility/2026-11-21-vuln-radar-feed-result-status.md): 동일 상태 노드, 검색 결과 0건·페이지 및 키보드 회귀.
+
+- [11-21 Vuln Radar Feed 검색 랜드마크](accessibility/2026-11-21-vuln-radar-feed-landmark.md): 검색·필터 영역의 이름과 검색·페이지 회귀.
+
+- [11-21 Vuln Radar Feed 검색 레이블](accessibility/2026-11-21-vuln-radar-feed-label.md): 보이는 레이블, 입력 보정 속성과 실시간 검색 회귀.
+
+- [11-21 Vuln Radar Feed 검색 입력 포커스](accessibility/2026-11-21-vuln-radar-feed-focus.md): 일반·강제 색상에서 검색 입력 표시와 검색·필터·페이지 회귀 검증.
+
+- [11-21 검색 입력과 Drawer 접근성](accessibility/2026-11-21-search-input-audit.md): 레이블·힌트, 실제 링크 키보드 회귀, Safari VoiceOver 로터·발화·문서 열기.
+
+- [11-21 카드 hover 모션](accessibility/2026-11-21-card-hover-motion.md): 이전 작업 커밋 후 실제 소비 카드 5곳의 이동·확대와 색상·포커스 보존 검증.
+
+- [11-21 프런트엔드 현대화 감사·적용](accessibility/2026-11-21-frontend-modernization-audit.md): 감사 후 사용자 승인으로 모션·이미지 3파일 적용, 최종 회귀 32개와 세 엔진 변경 전후 18조건 통과. 운영 미배포.
 
 - [11-22 UI/UX 스트리밍 완료 준비 상태](resilience/2026-11-22-uiux-stream-readiness.md): 최초 CI의 재시도 통과와 통제 재현·기준 유지 회귀를 구분한다. 원격 재검증·병합은 별도.
 

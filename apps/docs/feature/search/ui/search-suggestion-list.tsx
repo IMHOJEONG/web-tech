@@ -1,25 +1,23 @@
 'use client'
 
-import { cn } from '@web-tech/ui/lib/utils'
 import { FileText } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import type { KeyboardEventHandler, Ref } from 'react'
 import { Link } from '~/shared/i18n/navigation'
 import type { useSearchSuggestions } from '../model/use-search-suggestions'
 
 type Props = {
     search: ReturnType<typeof useSearchSuggestions>
-    listId: string
-    activeIndex: number
-    onActiveChange: (index: number) => void
+    listRef: Ref<HTMLUListElement>
+    onListKeyDown: KeyboardEventHandler<HTMLUListElement>
     onNavigate: () => void
     onSuggestion: (keyword: string) => void
 }
 
 export function SearchSuggestionList({
     search,
-    listId,
-    activeIndex,
-    onActiveChange,
+    listRef,
+    onListKeyDown,
     onNavigate,
     onSuggestion,
 }: Props) {
@@ -94,50 +92,18 @@ export function SearchSuggestionList({
                     </p>
                 ) : (
                     <ul
-                        id={listId}
-                        role="listbox"
-                        aria-label={t('results')}
+                        ref={listRef}
+                        role="list"
+                        onKeyDown={onListKeyDown}
                         className="space-y-2"
                     >
-                        {data.results.map((result, index) => (
-                            <li key={result.href} role="none">
+                        {data.results.map((result) => (
+                            <li key={result.href}>
                                 <Link
-                                    id={`${listId}-${index}`}
-                                    role="option"
-                                    aria-selected={activeIndex === index}
                                     href={result.href}
                                     prefetch={false}
-                                    onFocus={() => onActiveChange(index)}
-                                    onKeyDown={(event) => {
-                                        if (
-                                            event.defaultPrevented ||
-                                            event.nativeEvent.isComposing ||
-                                            event.nativeEvent.keyCode === 229 ||
-                                            (event.key !== 'ArrowDown' &&
-                                                event.key !== 'ArrowUp')
-                                        )
-                                            return
-                                        event.preventDefault()
-                                        const direction =
-                                            event.key === 'ArrowDown' ? 1 : -1
-                                        const nextIndex =
-                                            (index +
-                                                direction +
-                                                data.results.length) %
-                                            data.results.length
-                                        document
-                                            .getElementById(
-                                                `${listId}-${nextIndex}`
-                                            )
-                                            ?.focus({ preventScroll: true })
-                                    }}
                                     onNavigate={onNavigate}
-                                    className={cn(
-                                        'ds-focus-ring group flex min-w-0 gap-3 rounded-xl border p-4 transition-colors hover:border-primary/40 hover:bg-surface-container-low',
-                                        activeIndex === index
-                                            ? 'border-primary/70 bg-primary/10 ring-1 ring-inset ring-primary/30'
-                                            : 'border-outline-variant/70'
-                                    )}
+                                    className="ds-focus-ring group flex min-w-0 gap-3 rounded-xl border border-outline-variant/70 p-4 transition-colors hover:border-primary/40 hover:bg-surface-container-low focus-visible:border-primary/70 focus-visible:bg-primary/10"
                                 >
                                     <FileText
                                         aria-hidden="true"

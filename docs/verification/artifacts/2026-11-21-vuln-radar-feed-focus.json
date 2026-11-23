@@ -1,0 +1,142 @@
+{
+  "date": "2026-11-21",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "9c55b335012f47553d0fdb75052e5139d81dce08",
+  "source": "apps/vuln-radar/src/pages/feed/ui/feed-filter-bar.tsx",
+  "sourceSha256": {
+    "before": "790a0144209c97636a46b2b7d80b30d6b005016bc6f6c196b0f74587f0f7d70c",
+    "after": "0e1422ae7bb124bd4b35f68d9eaff572435822ea2767abe1d56d0ca739461816"
+  },
+  "app": "Vite+ v1.4.0 Feed route with intercepted synthetic Feed API",
+  "viewportsPx": [390, 1280],
+  "regularChecks": [
+    "Tab focus",
+    "Shift+Tab return",
+    "query",
+    "priority filter",
+    "next page",
+    "browser back"
+  ],
+  "initialHighlightEvaluation": {
+    "firefoxOutline": "rgb(51, 153, 255)",
+    "contrastAgainstSampledCanvas": 2.94
+  },
+  "browserChecks": {
+    "chromium": {
+      "version": "151.0.7922.34",
+      "regular": {
+        "viewportsPassed": [390, 1280],
+        "outlineBefore": "none",
+        "borderColorChangedOnFocusBefore": true,
+        "shadowVisibleOnFocusBefore": true,
+        "outlineAfter": {
+          "style": "solid",
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(255, 179, 179)"
+        },
+        "searchFilterPagingAndBack": true
+      },
+      "forcedColors": {
+        "viewportsPassed": [390, 1280],
+        "outlineBefore": "none",
+        "borderColorChangedOnFocusBefore": true,
+        "shadowVisibleOnFocusBefore": false,
+        "outlineAfter": {
+          "style": "solid",
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(0, 0, 0)"
+        },
+        "palette": {
+          "canvasText": "rgb(0, 0, 0)",
+          "canvas": "rgb(255, 255, 255)"
+        },
+        "searchFilterPagingAndBack": true
+      }
+    },
+    "firefox": {
+      "version": "153.0",
+      "regular": {
+        "viewportsPassed": [390, 1280],
+        "outlineBefore": "none",
+        "borderColorChangedOnFocusBefore": true,
+        "shadowVisibleOnFocusBefore": true,
+        "outlineAfter": {
+          "style": "solid",
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(255, 179, 179)"
+        },
+        "searchFilterPagingAndBack": true
+      },
+      "forcedColors": {
+        "viewportsPassed": [390, 1280],
+        "outlineBefore": "none",
+        "borderColorChangedOnFocusBefore": false,
+        "shadowVisibleOnFocusBefore": false,
+        "outlineAfter": {
+          "style": "solid",
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(0, 0, 0)"
+        },
+        "palette": {
+          "canvasText": "rgb(0, 0, 0)",
+          "canvas": "rgb(255, 255, 255)"
+        },
+        "searchFilterPagingAndBack": true
+      }
+    },
+    "webkit": {
+      "version": "26.5",
+      "regular": {
+        "viewportsPassed": [390, 1280],
+        "outlineBefore": "none",
+        "borderColorChangedOnFocusBefore": true,
+        "shadowVisibleOnFocusBefore": true,
+        "outlineAfter": {
+          "style": "solid",
+          "width": "2px",
+          "offset": "2px",
+          "color": "rgb(255, 179, 179)"
+        },
+        "searchFilterPagingAndBack": true
+      }
+    }
+  },
+  "libraryTests": {
+    "passed": 36,
+    "failed": 0
+  },
+  "typecheck": "passed",
+  "lint": "passed",
+  "unverified": [
+    "physical Windows forced colors",
+    "native Safari app",
+    "physical mobile device",
+    "production deployment"
+  ],
+  "integration": {
+    "passed": 26,
+    "failed": 0,
+    "workingTreeDirty": true,
+    "browser": "151.0.7922.34",
+    "databaseImage": "postgres:16-alpine",
+    "runnerSha256": "3d1e0fd21c430a1c00ac47fdd86b11ab105eafa8feed3a8e9541f4d7971bded9",
+    "feedCoverage": [
+      "real API browser feed filters, labels and detail navigation at 1280px",
+      "real API browser feed filters, labels and detail navigation at 390px",
+      "full DB feed search, literal query and stable server pages beyond legacy 25"
+    ],
+    "cleanup": {
+      "browserClosed": true,
+      "backendStopped": true,
+      "frontendStopped": true,
+      "databaseDisconnected": true,
+      "databaseRemoved": true,
+      "temporaryFilesRemoved": true
+    },
+    "rawReportSha256": "9edcd8533e978d0015b1cc5b34274e5d43e24c11af02dc2793cdd3a7fb1012d0"
+  }
+}

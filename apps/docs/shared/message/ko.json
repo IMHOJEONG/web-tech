@@ -388,10 +388,11 @@
             "error": "검색 결과를 불러오지 못했어요. 잠시 후 다시 시도해주세요.",
             "retry": "다시 시도",
             "viewAll": "전체 검색 결과 보기",
-            "keyboardHint": "↑ ↓ 문서 선택 · Enter 이동 · Esc 닫기"
+            "keyboardHint": "↑ ↓ 결과 탐색 · Enter 검색 또는 링크 열기 · Esc 닫기"
         },
         "input": {
             "triggerLabel": "문서 검색",
+            "queryLabel": "검색어",
             "placeholder": "문서를 검색해보세요",
             "submitAriaLabel": "문서 검색",
             "pendingLabel": "검색 결과를 불러오는 중",

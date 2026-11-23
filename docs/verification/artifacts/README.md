@@ -1,5 +1,49 @@
 # 검증 원본 증거
 
+- [11-23 CodeRabbit 파일 수 제한](2026-11-23-coderabbit-file-limit.json) — 공식 체크·두 파일 집계·사전검사·회귀와 소스 해시.
+
+- [11-23 프런트엔드 현대화 PR 리뷰 보완](2026-11-23-frontend-modernization-pr-review.json) — 정제된 원인·검사·소스 해시.
+
+- [11-22 Feed 화면 밖 렌더링](2026-11-22-feed-offscreen-rendering.json) — 보정·20실행·12조건·소스와 trace 해시.
+
+- [11-22 Feed 취소 정제 결과](2026-11-22-feed-request-cancellation.json) — API 36조건·전후 UI 12조건과 소스 해시.
+
+- [11-22 화면 JS 분리 비교](2026-11-22-vuln-radar-route-splitting.json) — 실제 번들·24회 초기 계측·6회 전환·12조건 회귀와 기준 복구.
+
+- [11-22 Noto Sans KR 비교](2026-11-22-docs-noto-sans-kr.json) — 원본·부분집합 해시, 반복 계측과 가독성 관측.
+
+- [11-22 폰트 로딩](2026-11-22-docs-font-loading.json) — 8조건의 기준·실험 요청량과 입력 해시. 한글 표시·LCP·CLS 후속 검증, 권장안 적용과 무료 서체 조사.
+
+- [11-22 MDX 본문 이미지](2026-11-22-docs-article-images.json) — 소스 해시와 브라우저 전후 관측.
+
+- [11-21 Feed 페이지 이동 포커스](2026-11-21-vuln-radar-feed-pagination-focus.json): [검증 보고서](../accessibility/2026-11-21-vuln-radar-feed-pagination-focus.md)의 브라우저 전후와 소스 해시.
+
+- [11-21 Feed hover 모션](2026-11-21-vuln-radar-feed-hover-motion.json): [검증 보고서](../accessibility/2026-11-21-vuln-radar-feed-hover-motion.md)의 이동 거리와 색상 피드백.
+
+- [11-21 Feed 로딩 모션](2026-11-21-vuln-radar-feed-loading-motion.json): [검증 보고서](../accessibility/2026-11-21-vuln-radar-feed-loading-motion.md)의 모션 설정 전후와 소스 해시.
+
+- [11-21 Vuln Radar Feed 결과 상태](2026-11-21-vuln-radar-feed-result-status.json): [검증 보고서](../accessibility/2026-11-21-vuln-radar-feed-result-status.md)의 DOM 전후 비교와 소스 해시.
+
+- [11-21 Vuln Radar Feed 검색 랜드마크](2026-11-21-vuln-radar-feed-landmark.json): [검증 보고서](../accessibility/2026-11-21-vuln-radar-feed-landmark.md)의 브라우저 전후 비교와 소스 해시.
+
+- [11-21 Vuln Radar Feed 검색 레이블](2026-11-21-vuln-radar-feed-label.json): [검증 보고서](../accessibility/2026-11-21-vuln-radar-feed-label.md)의 전후 관측과 소스 해시.
+
+- [11-21 Vuln Radar Feed 검색 입력 포커스](2026-11-21-vuln-radar-feed-focus.json): [검증 보고서](../accessibility/2026-11-21-vuln-radar-feed-focus.md)의 변경 전후 관측과 소스 해시.
+
+- [11-21 검색 입력 접근성 점검](2026-11-21-search-input-audit.json): [점검 보고서](../accessibility/2026-11-21-search-input-audit.md)의 12환경·소스 해시·관측과 한계.
+
+- [11-21 검색 입력 레이블과 힌트 적용](2026-11-21-search-input-labels.json): [후속 적용](../accessibility/2026-11-21-search-input-audit.md#후속-적용과-검증)의 12환경과 기존 회귀 20개 요약.
+
+- [11-21 검색 Drawer 포커스 모델](2026-11-21-drawer-focus-model.json): [포커스 후속 점검](../accessibility/2026-11-21-search-input-audit.md#drawer-포커스-모델-후속-점검과-제안)의 세 엔진 키보드 관측.
+
+- [11-21 검색 Drawer 실제 링크 포커스 적용](2026-11-21-drawer-link-focus.json): [적용과 회귀](../accessibility/2026-11-21-search-input-audit.md#실제-링크-포커스-적용과-회귀)의 검사 범위, 결과와 소스 해시.
+
+- [11-21 검색 Drawer 실제 Safari 점검](2026-11-21-drawer-safari-voiceover.json): [Safari 키보드와 VoiceOver 검증](../accessibility/2026-11-21-search-input-audit.md#실제-safari와-voiceover-점검)의 정제 결과.
+
+- [11-21 카드 hover 모션](2026-11-21-card-hover-motion.json): [검증 조건과 결과](../accessibility/2026-11-21-card-hover-motion.md)의 세 엔진 변경 전후 정제 요약.
+
+- [11-21 프런트엔드 현대화 감사·적용 요약](2026-11-21-frontend-modernization-audit.json): 최초 감사와 후속 구현·최종 해시·세 엔진 변경 전후 관측을 구분. [조건과 결과](../accessibility/2026-11-21-frontend-modernization-audit.md).
+
 - [11-21 JavaScript 실제 적용 정제 증거](2026-11-21-modern-javascript-implementation.json): 타입·소스 해시·실제 API 7조건과 통합 26그룹·정리 결과. [조건과 한계](../integration/2026-11-21-modern-javascript-implementation.md). 원시 출력·스크린샷은 저장소 밖 보존.
 - [11-20 JavaScript 현대화 재검증](2026-11-20-modern-javascript-guidance.json): 합성 16조건·타입 비교와 검토 소스 해시. [검증 조건과 한계](../integration/2026-11-20-modern-javascript-guidance.md).
 - 11-20 운영 기록 재검토: PR #68 보류·병합 후 JSON은 역사적 집계만 재구성하고 `publicReview`에 원본 blob·제외 필드를 기록했다. health/storage 응답 본문 필드와 불필요한 provider ID·별칭은 새 통합본에서 제외한다. 원본 stage·과거 커밋은 보존하며 현재 운영 재검증이 아니다.

@@ -87,3 +87,11 @@ const response = await fetch(url, { signal });
 - 관련 개념: [배열 복사·정렬](javascript-copying-arrays.md), [외부 Promise 완료 제어](javascript-promise-with-resolvers.md).
 
 실제 API 교체, 취소 입력 추가, 지원 브라우저 변경 시 이 문서의 적용 상태와 검증 보고서를 다시 연결한다. 문서 생성만으로 앱 적용 상태를 승격하지 않는다.
+
+## Feed 호출자 취소의 후속 연결
+
+2026-11-22 `queryFn`의 signal을 searchFeed와 getJson까지 전달했다. 외부 신호가 있으면 `AbortSignal.any([signal, timeoutSignal])`로 결합하며, 없으면 기존 timeout만 사용한다. 먼저 호출자 신호가 중단됐다면 원래 이유를 그대로 전달한다. timeout은 기존 ApiError network 분류와 cause를 유지한다. 신호를 받는 API 옵션을 추가하는 것만으로 화면이 취소되는 것은 아니며 queryFn에서 실제 신호를 소비해야 한다.
+
+TanStack Query는 소비된 signal의 취소 시 query 상태를 이전 상태로 돌린다. 완료된 신선한 결과 캐시는 유지되지만 이탈한 미완료 요청을 나중에 캐시로 채우던 동작은 중단된다. 실제 Feed 전후 비교에서 미완료 검색의 재방문 요청은 1→2회, 완료된 캐시의 왕복은 1→1회였다. 서버에서 이미 실행한 작업의 롤백은 보장하지 않는다.
+
+세 엔진에서 헤더·본문 취소와 실제 8초 제한의 이유를 구분하고, 검색/필터 교체·키보드 화면 이탈·캐시·재시도를 확인했다. [후속 검증과 한계](../../verification/integration/2026-11-22-feed-request-cancellation.md) · [API 재현 스크립트](../../../scripts/verify-vuln-radar-request-cancellation.mjs) · [TanStack Query 취소 설명](https://tanstack.com/query/latest/docs/framework/react/guides/query-cancellation).

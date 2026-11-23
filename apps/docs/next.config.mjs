@@ -108,6 +108,7 @@ const nextConfig = {
     outputFileTracingIncludes: {
         '/og/article.png': ['./public/fonts/Pretendard-Bold.otf'],
         '/*': [
+            './public/**/*.{png,jpg,jpeg,webp,gif,avif,svg}',
             `${contentTraceRoot}/data/**/*.md`,
             `${contentTraceRoot}/data/**/*.mdx`,
             `${contentTraceRoot}/category/**/*.md`,

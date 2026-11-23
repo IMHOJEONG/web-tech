@@ -17,7 +17,7 @@ const result = (query: string) => ({
     suggestions: query ? ['react-query'] : ['React', 'Accessibility'],
 })
 
-test('repeated query cycles cannot revive an old selection before the new response', async ({
+test('repeated query cycles cannot revive stale result links before the new response', async ({
     page,
 }) => {
     let release!: () => void
@@ -39,16 +39,18 @@ test('repeated query cycles cannot revive an old selection before the new respon
         await page.goto('/ko/about')
         await page.getByTestId('search-drawer-trigger').click()
         const drawer = page.getByRole('dialog')
-        const input = drawer.getByRole('combobox')
+        const input = drawer.getByRole('searchbox')
         await input.fill('React')
-        await expect(drawer.getByRole('option')).toContainText('React document')
+        const links = drawer.getByRole('list').getByRole('link')
+        await expect(links).toContainText('React document')
         await input.press('ArrowDown')
-        await expect(input).toHaveAttribute('aria-activedescendant', /.+/)
+        await expect(links.first()).toBeFocused()
         await input.fill('pending')
-        await expect(drawer.getByRole('option')).toHaveCount(0)
+        await expect(links).toHaveCount(0)
         await input.fill('React')
-        await expect(drawer.getByRole('option')).toHaveCount(0)
-        await expect(input).not.toHaveAttribute('aria-activedescendant')
+        await expect(links).toHaveCount(0)
+        await input.press('ArrowDown')
+        await expect(input).toBeFocused()
         await input.press('Enter')
         await expect(page).toHaveURL('/ko/docs?q=React')
         await expect(drawer).toBeHidden()
@@ -58,6 +60,44 @@ test('repeated query cycles cannot revive an old selection before the new respon
 })
 
 for (const locale of ['ko', 'en']) {
+    test(`${locale}: tab to a result and back then Enter submits the query`, async ({
+        page,
+        browserName,
+    }) => {
+        await page.route('**/api/search/suggestions?**', async (route) => {
+            const query =
+                new URL(route.request().url()).searchParams.get('q') ?? ''
+            await route.fulfill({ json: { ...result(query), suggestions: [] } })
+        })
+        await page.goto(`/${locale}/about`)
+        await page.getByTestId('search-drawer-trigger').click()
+        const drawer = page.getByRole('dialog')
+        const search = drawer.getByRole('search')
+        const input = search.getByRole('searchbox')
+        await input.fill('React')
+        const clear = search.getByRole('button', {
+            name: locale === 'ko' ? '검색어 지우기' : 'Clear search query',
+        })
+        const submit = search.locator('button[type="submit"]')
+        const link = drawer.getByRole('list').getByRole('link')
+        await expect(link).toHaveAttribute('href', `/${locale}${articleHref}`)
+
+        // The macOS WebKit runner uses Option-Tab for sequential link focus.
+        const tab = browserName === 'webkit' ? 'Alt+Tab' : 'Tab'
+        const back = browserName === 'webkit' ? 'Alt+Shift+Tab' : 'Shift+Tab'
+        for (const target of [clear, submit, link]) {
+            await page.keyboard.press(tab)
+            await expect(target).toBeFocused()
+        }
+        for (const target of [submit, clear, input]) {
+            await page.keyboard.press(back)
+            await expect(target).toBeFocused()
+        }
+        await page.keyboard.press('Enter')
+        await expect(page).toHaveURL(`/${locale}/docs?q=React`)
+        await expect(drawer).toBeHidden()
+    })
+
     test(`${locale}: same-query submission closes the drawer without another navigation`, async ({
         page,
     }) => {
@@ -70,7 +110,7 @@ for (const locale of ['ko', 'en']) {
         const historyLength = await page.evaluate(() => history.length)
         await page.getByTestId('search-drawer-trigger').click()
         const drawer = page.getByRole('dialog')
-        const input = drawer.getByRole('combobox')
+        const input = drawer.getByRole('searchbox')
         await expect(input).toHaveValue('React')
         await input.dispatchEvent('compositionstart')
         await input.press('Enter')
@@ -109,26 +149,30 @@ test('arrow keys follow focus inside the document list, not only the input', asy
     })
     await page.goto('/ko/about')
     await page.getByTestId('search-drawer-trigger').click()
-    const options = page.getByRole('dialog').getByRole('option')
-    await expect(options).toHaveCount(2)
-    await options.first().focus()
-    await options.first().press('ArrowDown')
-    await expect(options.nth(1)).toBeFocused()
-    await expect(options.nth(1)).toHaveAttribute('aria-selected', 'true')
-    await options.nth(1).press('ArrowUp')
-    await expect(options.first()).toBeFocused()
-    await expect(options.first()).toHaveAttribute('aria-selected', 'true')
-    await options.first().press('ArrowUp')
-    await expect(options.nth(1)).toBeFocused()
-    await options.nth(1).press('ArrowDown')
-    await expect(options.first()).toBeFocused()
-    await options.first().press('Enter')
+    const drawer = page.getByRole('dialog')
+    const input = drawer.getByRole('searchbox')
+    const links = drawer.getByRole('list').getByRole('link')
+    await expect(links).toHaveCount(2)
+    await input.dispatchEvent('keydown', {
+        key: 'ArrowDown',
+        isComposing: true,
+    })
+    await expect(input).toBeFocused()
+    await input.press('ArrowUp')
+    await expect(links.nth(1)).toBeFocused()
+    await page.keyboard.press('ArrowDown')
+    await expect(links.first()).toBeFocused()
+    await page.keyboard.press('ArrowUp')
+    await expect(links.nth(1)).toBeFocused()
+    await page.keyboard.press('ArrowDown')
+    await expect(links.first()).toBeFocused()
+    await page.keyboard.press('Enter')
     await expect(page).toHaveURL(new RegExp(`/ko${articleHref}$`))
     await expect(page.getByRole('dialog')).toBeHidden()
 })
 
 for (const locale of ['ko', 'en']) {
-    test(`${locale}: modal autocomplete debounces typing and supports keyboard selection`, async ({
+    test(`${locale}: modal autocomplete debounces typing and moves focus to a result link`, async ({
         page,
     }) => {
         const requested: string[] = []
@@ -141,7 +185,7 @@ for (const locale of ['ko', 'en']) {
         const trigger = page.getByTestId('search-drawer-trigger')
         await trigger.click()
         const drawer = page.getByRole('dialog')
-        const input = drawer.getByRole('combobox')
+        const input = drawer.getByRole('searchbox')
         await expect(input).toBeFocused()
         const bounds = (await drawer.boundingBox())!
         expect(bounds.width).toBeGreaterThanOrEqual(
@@ -153,25 +197,19 @@ for (const locale of ['ko', 'en']) {
                 return current.x + current.width
             })
             .toBeLessThanOrEqual(page.viewportSize()!.width + 1)
-        await expect(drawer.getByRole('option')).toHaveCount(1)
+        await expect(drawer.getByRole('list').getByRole('link')).toHaveCount(1)
         requested.length = 0
         await input.fill('r')
         await input.fill('re')
         await input.fill('rea')
-        await expect(drawer.getByRole('option')).toContainText('rea document')
+        await expect(drawer.getByRole('list').getByRole('link')).toContainText(
+            'rea document'
+        )
         expect(requested).toEqual(['rea'])
         await expect(page).toHaveURL(new RegExp(`/${locale}/about$`))
         await input.press('ArrowDown')
-        await expect(drawer.getByRole('option')).toHaveAttribute(
-            'aria-selected',
-            'true'
-        )
-        const selectedId = await drawer.getByRole('option').getAttribute('id')
-        await expect(input).toHaveAttribute(
-            'aria-activedescendant',
-            selectedId!
-        )
-        await input.press('Enter')
+        await expect(drawer.getByRole('list').getByRole('link')).toBeFocused()
+        await page.keyboard.press('Enter')
         await expect(page).toHaveURL(new RegExp(`/${locale}${articleHref}$`))
         await expect(drawer).toBeHidden()
     })
@@ -207,29 +245,31 @@ test('late results cannot replace the current query; failures have retry and emp
         await page.goto('/ko/about')
         await page.getByTestId('search-drawer-trigger').click()
         const drawer = page.getByRole('dialog')
-        const input = drawer.getByRole('combobox')
+        const input = drawer.getByRole('searchbox')
         await input.fill('slow')
         await expect.poll(() => slowStarted).toBe(true)
         await input.fill('fast')
-        await expect(drawer.getByRole('option')).toContainText('fast document')
-        release()
-        await expect(drawer.getByRole('option')).not.toContainText(
-            'slow document'
+        await expect(drawer.getByRole('list').getByRole('link')).toContainText(
+            'fast document'
         )
+        release()
+        await expect(
+            drawer.getByRole('list').getByRole('link')
+        ).not.toContainText('slow document')
         await input.fill('broken')
         await expect(
             drawer.getByText('검색 결과를 불러오지 못했어요.', { exact: false })
         ).toBeVisible()
         fail = false
         await drawer.getByRole('button', { name: '다시 시도' }).click()
-        await expect(drawer.getByRole('option')).toContainText(
+        await expect(drawer.getByRole('list').getByRole('link')).toContainText(
             'broken document'
         )
         await input.fill('nothing')
         await expect(
             drawer.getByText('일치하는 문서가 없어요.', { exact: false })
         ).toBeVisible()
-        await expect(drawer.getByRole('option')).toHaveCount(0)
+        await expect(drawer.getByRole('list').getByRole('link')).toHaveCount(0)
         await input.press('Escape')
         await expect(drawer).toBeHidden()
         await expect(page.getByTestId('search-drawer-trigger')).toBeFocused()
@@ -250,13 +290,41 @@ test('composition pauses suggestions and Escape does not close an active IME ses
     await page.goto('/ko/about')
     await page.getByTestId('search-drawer-trigger').click()
     const drawer = page.getByRole('dialog')
-    const input = drawer.getByRole('combobox')
-    await expect(drawer.getByRole('option')).toHaveCount(1)
+    const input = drawer.getByRole('searchbox')
+    const updateComposition = (value: string) =>
+        input.evaluate((element, text) => {
+            // Firefox fill() completes its own composition before it returns.
+            const setValue = Object.getOwnPropertyDescriptor(
+                HTMLInputElement.prototype,
+                'value'
+            )!.set!
+            setValue.call(element, text)
+            element.dispatchEvent(
+                new InputEvent('input', {
+                    bubbles: true,
+                    isComposing: true,
+                    inputType: 'insertCompositionText',
+                    data: text,
+                })
+            )
+        }, value)
+    await expect(drawer.getByRole('list').getByRole('link')).toHaveCount(1)
+    await input.press('ArrowDown')
+    await expect(drawer.getByRole('list').getByRole('link')).toBeFocused()
+    await input.dispatchEvent('compositionstart')
+    await expect(input).toBeFocused()
+    await input.dispatchEvent('compositionend')
+    await expect(drawer.getByRole('list').getByRole('link')).toHaveCount(1)
     queries.length = 0
     await input.dispatchEvent('compositionstart')
-    await input.fill('가'.repeat(41))
+    await updateComposition('가'.repeat(41))
+    await input.press('Enter')
     await input.press('Escape')
     await expect(drawer).toBeVisible()
+    await expect(page.getByTestId('search-drawer-trigger')).toHaveAttribute(
+        'aria-expanded',
+        'true'
+    )
     await input.dispatchEvent('compositionend')
     await expect(input).toHaveValue('가'.repeat(40))
     await expect.poll(() => queries).toEqual(['가'.repeat(40)])
@@ -266,13 +334,13 @@ test('composition pauses suggestions and Escape does not close an active IME ses
     expect(bounds!.x).toBeGreaterThanOrEqual(0)
     expect(bounds!.width).toBeLessThanOrEqual(391)
     await input.dispatchEvent('compositionstart')
-    await input.fill('나'.repeat(41))
+    await updateComposition('나'.repeat(41))
     await drawer.getByRole('button', { name: '검색 닫기' }).click()
     await expect(drawer).toBeHidden()
     await expect(page.getByTestId('search-drawer-trigger')).toBeFocused()
     await page.getByTestId('search-drawer-trigger').click()
     await expect(input).toHaveValue('나'.repeat(40))
-    await expect(drawer.getByRole('option')).toHaveCount(1)
+    await expect(drawer.getByRole('list').getByRole('link')).toHaveCount(1)
 })
 
 test('suggestion endpoint is bounded and uses the first normalized query', async ({
@@ -302,8 +370,10 @@ for (const theme of ['light', 'dark']) {
         await page.goto('/ko/about')
         await page.getByTestId('search-drawer-trigger').click()
         const drawer = page.getByRole('dialog')
-        await drawer.getByRole('combobox').fill('React')
-        await expect(drawer.getByRole('option').first()).toBeVisible()
+        await drawer.getByRole('searchbox').fill('React')
+        await expect(
+            drawer.getByRole('list').getByRole('link').first()
+        ).toBeVisible()
         await expect(
             drawer.getByRole('link', { name: '전체 검색 결과 보기' })
         ).toBeInViewport()

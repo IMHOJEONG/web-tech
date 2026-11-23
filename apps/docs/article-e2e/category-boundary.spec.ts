@@ -34,7 +34,10 @@ for (const path of [
     test(`preserves configured category: ${path}`, async ({ page }) => {
         const response = await page.goto(path)
         expect(response?.status()).toBe(200)
-        await expect(page.locator('main h1')).toBeVisible()
+        // Streaming temporarily keeps a hidden fallback beside the ready page.
+        await expect(
+            page.getByRole('main').getByRole('heading', { level: 1 })
+        ).toBeVisible()
         await expect(
             page.getByRole('heading', {
                 name: '요청한 문서를 찾지 못했습니다',

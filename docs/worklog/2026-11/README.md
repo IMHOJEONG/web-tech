@@ -1,6 +1,40 @@
 # 2026-11 작업 기록
 
-- [11-22 503 종료 계측 준비 상태](2026-11-22-upstream-503-trace-readiness.md): 기준 유지 helper·실제 HTTP/음성 회귀와 Next 전체214개 로컬 검증. 승인된 범위만 공개 검수·작업별 커밋·PR 검증하며 원시 자료·다른 미커밋·stash는 보존.
+- [11-22 503 종료 계측 준비 상태](2026-11-22-upstream-503-trace-readiness.md): 기준 유지 회귀와 11-23 최신 main 충돌 해결·전체214개 로컬 재검증. 최종 문서 재검수 후 동기화·검증 기록을 분리 커밋하며 기존 미커밋·초안·stash·NAS는 보존.
+
+- [11-23 프런트엔드 현대화 main PR 준비](2026-11-23-frontend-modernization-main-pr.md) — 최신 main에 통합·충돌 해결·검증 범위 구분.
+
+- [11-22 취소 커밋·Feed 렌더링 실험](2026-11-22-feed-offscreen-rendering.md) — 35c6b59e 커밋 후 비용 측정과 후보 보류.
+
+- [11-22 Feed 취소 신호](2026-11-22-feed-request-cancellation.md) — 검색·필터 교체와 이탈 시 요청 중단·캐시 회귀 검증.
+
+- [11-22 Noto 커밋·화면 JS 분리 검증](2026-11-22-vuln-radar-route-splitting.md) — f05f7f5f 커밋 후 분리 후보 측정·적용 보류.
+
+- [11-22 Noto Sans KR 적용](2026-11-22-docs-noto-sans-kr.md) — 서체 교체와 Pretendard 대비 검증.
+
+- [11-22 이미지 커밋·폰트 로딩](2026-11-22-docs-font-loading.md) — 본문 이미지 커밋 후 폰트 전송량 측정. 한글 표시·LCP·CLS 후속 검증, 권장안 적용과 무료 서체 조사.
+
+- [11-22 MDX 본문 이미지](2026-11-22-docs-article-images.md) — 첫 성능 후보 적용과 검증.
+
+- [11-21 hover 커밋·Feed 페이지 이동 포커스](2026-11-21-vuln-radar-feed-pagination-focus.md): hover 커밋, 페이지 이동 버튼 포커스 유지.
+
+- [11-21 Skeleton 커밋·Feed hover 모션](2026-11-21-vuln-radar-feed-hover-motion.md): Skeleton 커밋, 카드·버튼의 동작 줄이기 적용.
+
+- [11-21 VoiceOver 커밋·Feed 로딩 모션](2026-11-21-vuln-radar-feed-loading-motion.md): 사용자 발화 통과 커밋과 Skeleton 동작 줄이기 적용.
+
+- [11-21 Feed 랜드마크 커밋·결과 상태 개선](2026-11-21-vuln-radar-feed-result-status.md): 랜드마크 커밋, 검색 완료와 페이지 상태 영역 적용.
+
+- [11-21 Feed 레이블 커밋·검색 랜드마크](2026-11-21-vuln-radar-feed-landmark.md): 레이블 커밋, 검색·필터 영역의 역할과 이름 검증.
+
+- [11-21 Feed 포커스 커밋·검색 레이블 개선](2026-11-21-vuln-radar-feed-label.md): 포커스 커밋과 보이는 검색 레이블·입력 속성 적용.
+
+- [11-21 Vuln Radar Feed 검색 입력 포커스](2026-11-21-vuln-radar-feed-focus.md): 키보드 outline 적용과 일반·강제 색상 회귀.
+
+- [11-21 카드 커밋·검색 입력 접근성](2026-11-21-search-input-audit.md): 카드·레이블·Drawer 로컬 커밋, 키보드 회귀와 Safari VoiceOver 검증.
+
+- [11-21 이전 현대화 커밋·카드 모션 후속](2026-11-21-card-hover-motion.md): 두 로컬 커밋을 확인하고 카드 hover 이동·확대 한 주제를 별도로 적용·검증.
+
+- [11-21 프런트엔드 현대화 감사·적용](2026-11-21-frontend-modernization-audit.md): 감사·계획 후 사용자 승인으로 3파일 적용, 기존 회귀·세 엔진 검증과 설치/실행 확인.
 
 - [11-22 UI/UX 스트리밍 완료 준비 상태](2026-11-22-uiux-stream-readiness.md): 두 PR 재시도 조사의 준비 조건 보완·합성 회귀, 다른 미커밋·원시 자료 보존.
 
