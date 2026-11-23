@@ -2635,11 +2635,11 @@
     },
     {
       "path": "docs/verification/resilience/2026-11-22-upstream-503-trace-readiness.md",
-      "sha256": "b360b6d28a350fac806034ef0e8dae75235b410919c39134507af5a5c1f18f32",
+      "sha256": "3689fbb88d407f11da28aa01f093ccc69941e0cd82ba442cc1a9df2fe954f6c7",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
-      "note": "사용자가 승인한 이번 503 보완·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR/CI 확인 범위에서 기존 보고서/worklog의 단독 재현 설정·루트 명령·선행 조건을 보완해 재검수함. 문서 shell 블록 24회 재검증과 최초 head CI 결과·인과관계 미확정을 구분하고 최종 인덱스 bytes를 확인함. 원시 자료·비공개 원문·비밀값·다른 미커밋·stash·공통 설정·main 병합·배포는 제외함.",
+      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. 기존 11-22 결과를 유지하고 main 동기화·합성 로컬 회귀24회·503반복10회·전체214개 및 첫 타입 준비 실패와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -2663,11 +2663,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-22-upstream-503-trace-readiness.md",
-      "sha256": "0d5d282ffb02e08b6e3861dd8e778c92f2d249d0cae184e07a815a6f4330802d",
+      "sha256": "642c1aa495338e73d4d558d548db0acef9897cd0c574e8c173b7925dd2209f8c",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
-      "note": "사용자가 승인한 이번 503 보완·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR/CI 확인 범위에서 기존 보고서/worklog의 단독 재현 설정·루트 명령·선행 조건을 보완해 재검수함. 문서 shell 블록 24회 재검증과 최초 head CI 결과·인과관계 미확정을 구분하고 최종 인덱스 bytes를 확인함. 원시 자료·비공개 원문·비밀값·다른 미커밋·stash·공통 설정·main 병합·배포는 제외함.",
+      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. 기존 11-22 결과를 유지하고 main 동기화·합성 로컬 회귀24회·503반복10회·전체214개 및 첫 타입 준비 실패와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
