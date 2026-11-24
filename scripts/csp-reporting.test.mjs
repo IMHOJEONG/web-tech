@@ -109,6 +109,57 @@ test("modern and legacy produce the same safe groups and never retain private fi
   assert.equal(JSON.stringify(f.summaries).includes(privateMarker), false);
 });
 
+test("WebKit report-to single envelopes retain the same redaction under legacy MIME", async () => {
+  const f = fixture();
+  await f.collect(request());
+  const response = await f.collect(
+    request(modern()[0], { "content-type": "application/csp-report" }),
+  );
+  assert.equal(response.status, 204);
+  assert.deepEqual(f.summaries[1], f.summaries[0]);
+  assert.equal(JSON.stringify(f.summaries).includes(privateMarker), false);
+});
+
+test("single-envelope compatibility rejects other types, media and invalid bodies", async () => {
+  const f = fixture();
+  for (const value of [
+    { type: "deprecation", body: body() },
+    { type: "csp-violation", body: null },
+    { type: "csp-violation", body: [] },
+    { body: body() },
+  ]) {
+    assert.equal(
+      (
+        await f.collect(
+          request(value, { "content-type": "application/csp-report" }),
+        )
+      ).status,
+      400,
+    );
+  }
+  assert.equal((await f.collect(request(modern()[0]))).status, 400);
+  assert.equal(
+    (
+      await f.collect(
+        request(modern()[0], { "content-type": "application/json" }),
+      )
+    ).status,
+    415,
+  );
+  assert.equal(
+    (
+      await f.collect(
+        request(modern()[0], {
+          "content-type": "application/csp-report",
+          "content-length": "16385",
+        }),
+      )
+    ).status,
+    413,
+  );
+  assert.deepEqual(f.summaries, []);
+});
+
 test("a batch aggregates equivalent reports and drops unrelated or malformed entries", async () => {
   const f = fixture();
   const payload = [

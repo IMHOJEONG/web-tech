@@ -23,6 +23,20 @@ pnpm test:repo
 6. 운영 전 플랫폼의 전역 빈도·동시성·body ingress 제한과 access log의 IP/UA/query 보관을 따로 확인한다. 공개 report는 위조 가능하므로 집계가 권한·정책 변경을 실행해서는 안 된다.
 7. 배포 승인 후 HTTPS Preview에서 현대 batch·legacy 실제 브라우저 전달과 두 앱의 라우팅을 재확인한다. 그 뒤 Reporting-Endpoints+report-to와 필요한 legacy fallback을 연결하고 Report-Only를 충분히 관측한다. 이번 구현은 해당 헤더를 켜지 않는다. 원문 sample을 수집하도록 report-sample을 추가할 때도 별도 개인정보 검토가 필요하다.
 
+### 로컬 HTTPS 네이티브 전달
+
+OpenSSL과 설치된 Playwright 세 엔진을 준비하고 루트에서 다음을 실행한다.
+
+```sh
+pnpm exec node --experimental-strip-types scripts/verify-csp-https.mjs
+```
+
+report-to와 report-uri를 분리한12조건의204·정제·probe 유지를 검사한다. Chromium new headless·임시 SPKI pin·테스트용 short-reporting-delay와 다른 엔진의 격리 context 인증서 오류 무시를 사용한다. 시스템 신뢰는 바꾸지 않고 임시 키/profile·서버·브라우저를 종료한다. 운영 지연·공개 CA·실제 Preview 라우팅은 별도 검증한다.
+
+application/csp-report는 legacy csp-report 객체 외에, 해당 속성이 없고 type=csp-violation·객체 body인 WebKit 단일 현대식 envelope만 추가 허용한다. 동일 정제·요청 예산을 적용하고 generic JSON·현대 MIME singleton은 거절한다.
+
+플랫폼에서는 앱/환경별 POST /api/csp-report의 실제 트래픽·NAT·배치 빈도를 관측해 log→429를 검토한다. 비대화형 보고에는 challenge를 사용하지 않는다. 기존 규칙/draft를 보존하고 개별 기능의 요금제 오류와 rules 조회를 구분한다. [리전별 WAF 카운터](https://vercel.com/i/rate-limiting-algorithms)는 정확한 전역 예산이 아니며 공유 원자 저장소·실패 정책·비용 결정은 별도다. ingress/access log·실제 차단도 별도로 확인한다.
+
 ## 기대 결과
 
 | 조건                                                      | 응답                 | 로그                                                       |
@@ -47,6 +61,8 @@ pnpm test:repo
 - 활성화 후 문제: Reporting-Endpoints/Report-Only 연결을 되돌리는 것과 CSP enforcement를 되돌리는 것은 다르다. 기존 오프라인 CSP·backend proxy를 무관하게 끄지 않는다.
 
 ## 관련 검증
+
+- [11-25 HTTPS 복원·재검증](../verification/security/2026-11-25-csp-https-delivery.md)
 
 - [11-24 수집기 검증](../verification/security/2026-11-24-csp-report-collector.md)
 - [11-24 코드 생성·보고 준비](../verification/security/2026-11-24-csp-readiness.md)

@@ -5,7 +5,7 @@
 - 상태: 적용 중
 - 대상: docs·Vuln Radar의 로컬 /api/csp-report 구현. main·원격 배포·CSP 헤더 연결 전.
 - 결정일: 2026-11-24
-- 최종 검토: 2026-11-24
+- 최종 검토: 2026-11-25
 - 추적: [KAN-83](https://web-tech-service.atlassian.net/browse/KAN-83)
 
 ## 배경
@@ -23,6 +23,8 @@ application/reports+json batch와 application/csp-report 단일 형식을 구분
 처리기 인스턴스마다60초 고정 창에60요청을 허용한다. 본문 읽기 전에 동기적으로 예약해 동시 요청도 같은 예산을 쓴다. JSON 오류도 예산을 소비하며 제한 시429/Retry-After를 반환한다. IP별 저장소나 위조 가능한 forwarded header로 새 bucket을 만들지 않는다. 성공은204·본문 없음·no-store이며 거절도 입력을 반사하지 않는다.
 
 ## 대안과 영향
+
+2026-11-25 호환 보완: WebKit report-to의 legacy MIME·현대식 단일 envelope를 정확한 type/객체 body 조건으로 허용한다. 정제·보관·예산 경계는 그대로다. 임시 작업 트리 손실 후 코드를 복원한 [HTTPS 새 검증](../verification/security/2026-11-25-csp-https-delivery.md)을 연결하며 과거 원시 자료 복구와 구분한다.
 
 앱마다 parser를 복사하면 정제/제한 차이가 생기므로 공통 server subpath를 택했다. 새 외부 패키지는 추가하지 않고 두 workspace dependency 링크만 선언한다. 원문 전체 저장이나 임의 URL/헤더를 로그 키로 쓰는 방식은 제외한다. IP별 제한은 식별정보·신뢰할 proxy 경계가 추가되므로 이번에 도입하지 않는다.
 

@@ -283,20 +283,33 @@ export function createCspReportCollector(options: {
       return response(error instanceof ReportError ? error.status : 400);
     }
     const modern = mime === "application/reports+json";
+    // WebKit's report-to path uses a single modern envelope with legacy MIME.
+    // Require the exact type/body shape and retain every request budget.
+    const singleReport =
+      !modern &&
+      record(value) &&
+      !("csp-report" in value) &&
+      value.type === "csp-violation" &&
+      record(value.body);
     if (modern && (!Array.isArray(value) || value.length === 0))
       return response(400);
     if (Array.isArray(value) && value.length > CSP_REPORT_LIMITS.batch)
       return response(413);
-    if (!modern && (!record(value) || !record(value["csp-report"])))
+    if (
+      !modern &&
+      !singleReport &&
+      (!record(value) || !record(value["csp-report"]))
+    )
       return response(400);
     const entries: unknown[] = modern ? (value as unknown[]) : [value];
+    const modernFields = modern || singleReport;
     const groups = new Map<string, Group>();
     for (const entry of entries) {
-      if (!record(entry) || (modern && entry.type !== "csp-violation"))
+      if (!record(entry) || (modernFields && entry.type !== "csp-violation"))
         continue;
       const normalized = normalize(
-        entry[modern ? "body" : "csp-report"],
-        modern,
+        entry[modernFields ? "body" : "csp-report"],
+        modernFields,
         new URL(request.url).origin,
         options.app,
       );

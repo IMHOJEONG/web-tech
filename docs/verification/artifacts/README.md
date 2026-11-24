@@ -1,5 +1,6 @@
 # 검증 원본 증거
 
+- [11-25 CSP HTTPS 재검증 증거](2026-11-25-csp-https-delivery.json)
 - [11-24 CSP 수집기 정제 증거](2026-11-24-csp-report-collector.json)
 
 - [11-24 CSP 전후·강제 대조 정제 결과](2026-11-24-csp-readiness.json)

@@ -1,5 +1,6 @@
 # 검증 보고서
 
+- [11-25 CSP HTTPS 복원·재검증](security/2026-11-25-csp-https-delivery.md)
 - [11-24 CSP 수집기 정제·제한 검증](security/2026-11-24-csp-report-collector.md)
 
 - [11-24 CSP 자원·보고 경로와 jitless 검증](security/2026-11-24-csp-readiness.md)
