@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-24 CSP 자원·보고 경로와 jitless 검증](security/2026-11-24-csp-readiness.md)
+
 - [11-23 웹 보안 헤더·CSP 사전조사](security/2026-11-23-web-security-headers.md)
 
 - [11-22 503 종료 계측 준비 상태](resilience/2026-11-22-upstream-503-trace-readiness.md): 실제 HTTP/파일 gate 회귀와 11-23 main 충돌 해결 후 단독24회·Next 503 반복10회·전체214개 로컬 통과. 과거 CI 최초 원인 미확정·후속 원격 검증·운영 미배포를 구분.

@@ -647,11 +647,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "293d36be2c451d10867acc62bf99f6fa1d141c325616301db1552394ee832d9f",
+      "sha256": "667ff6c88c30aa6032f894ed5bdb0b588328e15f3a5714522c4837db05b1ea3f",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-24",
-      "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
+      "note": "사용자가 검토한 jitless 변경과 검증 기록의 커밋을 명시 요청함. 자원 목록·합성 CSP 전후/대조 결과·소스 해시·실패와 미검증 범위·목차를 검수함. 원시 보고·URL/코드 표본·쿠키·개인 경로·기존 병합 후 worklog·새 수집기 구현은 제외함. 푸시·배포 승인을 추정하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -689,11 +689,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "584a6b8e2aa5902d9b1200106993ce814d675b93e90d588b0206f79340dae529",
+      "sha256": "8f3ec4bed87f07418f4e04f7a06ad3a95e6b839732d801a25f7ec25ad3b55876",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-24",
-      "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
+      "note": "사용자가 검토한 jitless 변경과 검증 기록의 커밋을 명시 요청함. 자원 목록·합성 CSP 전후/대조 결과·소스 해시·실패와 미검증 범위·목차를 검수함. 원시 보고·URL/코드 표본·쿠키·개인 경로·기존 병합 후 worklog·새 수집기 구현은 제외함. 푸시·배포 승인을 추정하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -857,11 +857,11 @@
     },
     {
       "path": "docs/verification/artifacts/README.md",
-      "sha256": "3b1db573519c815c5f0f3b12fb25497f6235438bbec74f669336cc95e402ac57",
+      "sha256": "ebe96d50be1a32f9e117c016a58da9baa577e1301fa2508719c1df80b3183666",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-24",
-      "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
+      "note": "사용자가 검토한 jitless 변경과 검증 기록의 커밋을 명시 요청함. 자원 목록·합성 CSP 전후/대조 결과·소스 해시·실패와 미검증 범위·목차를 검수함. 원시 보고·URL/코드 표본·쿠키·개인 경로·기존 병합 후 worklog·새 수집기 구현은 제외함. 푸시·배포 승인을 추정하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -3578,6 +3578,48 @@
       "decision": "public-approved",
       "reviewedOn": "2026-11-24",
       "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/security/2026-11-24-csp-readiness.md",
+      "sha256": "19ec8befca51b1305f7d8fba9eb5b0a3c514a65d4d694da1375858d33741277a",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 검토한 jitless 변경과 검증 기록의 커밋을 명시 요청함. 자원 목록·합성 CSP 전후/대조 결과·소스 해시·실패와 미검증 범위·목차를 검수함. 원시 보고·URL/코드 표본·쿠키·개인 경로·기존 병합 후 worklog·새 수집기 구현은 제외함. 푸시·배포 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-24-csp-readiness.json",
+      "sha256": "43a567c4de86926c91d8020d111d5ff7d42085b4ca6e0a84eed37d10a96dd23b",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 검토한 jitless 변경과 검증 기록의 커밋을 명시 요청함. 자원 목록·합성 CSP 전후/대조 결과·소스 해시·실패와 미검증 범위·목차를 검수함. 원시 보고·URL/코드 표본·쿠키·개인 경로·기존 병합 후 worklog·새 수집기 구현은 제외함. 푸시·배포 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-24-csp-readiness.md",
+      "sha256": "ae3148354abba1b2a4ee768f402e4e06162e3cc51fe69f32805b123807017e7d",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 검토한 jitless 변경과 검증 기록의 커밋을 명시 요청함. 자원 목록·합성 CSP 전후/대조 결과·소스 해시·실패와 미검증 범위·목차를 검수함. 원시 보고·URL/코드 표본·쿠키·개인 경로·기존 병합 후 worklog·새 수집기 구현은 제외함. 푸시·배포 승인을 추정하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
