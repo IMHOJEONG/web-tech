@@ -6,7 +6,7 @@
       "destination": "/api/proxy?proxyPath=:path*"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api/csp-report(?:/)?$).*)",
       "destination": "/index.html"
     }
   ],

@@ -1,5 +1,7 @@
 # 운영 및 재현 절차
 
+- [CSP 보고 수집기 실행·활성화 전 점검](csp-report-collector.md)
+
 - [비공개 Git 콘텐츠 전환과 복구](docs-private-git-content.md): 검수된 고정 발행본·Vercel 전환·이전 배포 복구, 일반 PR과 비밀정보 분리.
 
 - [합성 PR 검사와 승인 콘텐츠 CI 실행](docs-private-content-ci.md): 키 없는 일반 CI와 승인 main 전용 검증의 준비 조건·차단·미활성 범위.

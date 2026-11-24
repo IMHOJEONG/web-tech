@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [11-24 CSP 수집기 정제 증거](2026-11-24-csp-report-collector.json)
+
 - [11-24 CSP 전후·강제 대조 정제 결과](2026-11-24-csp-readiness.json)
 
 - [11-23 웹 보안 헤더 전후12조건](2026-11-23-web-security-headers.json)

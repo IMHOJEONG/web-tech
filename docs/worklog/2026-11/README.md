@@ -1,5 +1,7 @@
 # 2026-11 작업 기록
 
+- [11-24 jitless 커밋과 CSP 보고 수집기](2026-11-24-csp-report-collector.md)
+
 - [11-24 보안 헤더 커밋과 CSP 후속](2026-11-24-csp-readiness.md)
 
 - [11-23 웹 보안 헤더·CSP 준비](2026-11-23-web-security-headers.md)

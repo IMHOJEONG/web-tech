@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-24 CSP 수집기 정제·제한 검증](security/2026-11-24-csp-report-collector.md)
+
 - [11-24 CSP 자원·보고 경로와 jitless 검증](security/2026-11-24-csp-readiness.md)
 
 - [11-23 웹 보안 헤더·CSP 사전조사](security/2026-11-23-web-security-headers.md)
