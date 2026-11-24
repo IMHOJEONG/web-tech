@@ -1,5 +1,7 @@
 # 2026-11 작업 기록
 
+- [11-23 웹 보안 헤더·CSP 준비](2026-11-23-web-security-headers.md)
+
 - [11-22 503 종료 계측 준비 상태](2026-11-22-upstream-503-trace-readiness.md): 기준 유지 회귀와 11-23 최신 main 충돌 해결·전체214개 로컬 재검증. 최종 문서 재검수 후 동기화·검증 기록을 분리 커밋하며 기존 미커밋·초안·stash·NAS는 보존.
 
 - [11-23 프런트엔드 현대화 main PR 준비](2026-11-23-frontend-modernization-main-pr.md) — 최신 main에 통합·충돌 해결·검증 범위 구분.

@@ -1,5 +1,7 @@
 # 검증 원본 증거
 
+- [11-23 웹 보안 헤더 전후12조건](2026-11-23-web-security-headers.json)
+
 - [11-23 CodeRabbit 파일 수 제한](2026-11-23-coderabbit-file-limit.json) — 공식 체크·두 파일 집계·사전검사·회귀와 소스 해시.
 
 - [11-23 프런트엔드 현대화 PR 리뷰 보완](2026-11-23-frontend-modernization-pr-review.json) — 정제된 원인·검사·소스 해시.

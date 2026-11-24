@@ -647,11 +647,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "fab23be016c99c257db47f21fa268eb9dafcba8a821c21e824abbd96e43eea33",
+      "sha256": "293d36be2c451d10867acc62bf99f6fa1d141c325616301db1552394ee832d9f",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-23",
-      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. main과 PR 목차 항목을 보존하고 합성 로컬 회귀24회·503반복10회·전체214개 결과와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -689,11 +689,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "57cb1840eb28c28f0b8e389f84e6b0063c9eb7341d2e7abbb75ac6409babae8d",
+      "sha256": "584a6b8e2aa5902d9b1200106993ce814d675b93e90d588b0206f79340dae529",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-23",
-      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. main과 PR 목차 항목을 보존하고 합성 로컬 회귀24회·503반복10회·전체214개 결과와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -857,11 +857,11 @@
     },
     {
       "path": "docs/verification/artifacts/README.md",
-      "sha256": "f4c71eee6d2fee97c59e28daf6cd1ab99bf39ef321f1cc2ce9bb7a47ee0cb669",
+      "sha256": "3b1db573519c815c5f0f3b12fb25497f6235438bbec74f669336cc95e402ac57",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-23",
-      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -3536,6 +3536,48 @@
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
       "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/security/2026-11-23-web-security-headers.md",
+      "sha256": "d70e98cd2055488b31f01204e422d3e4a0fe8fea2a0bf7d9c4a087a433012fb6",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-23-web-security-headers.json",
+      "sha256": "cdfde6891eb1e7eb312d231d0f1c7c0dbf8b5a6068e4894dddb892adb9bfa845",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-23-web-security-headers.md",
+      "sha256": "79c2b4eb89500c9f81ffb5aed4c329d6348206172241e6c9c8b44d3c7295569e",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
