@@ -50,6 +50,8 @@
 
 관련 가이드: optimize-image-priority·visually-stable-font-fallbacks·performance.
 
+2026-11-25. PR #112 병합 트리의 실제 Next 렌더와 공개 표본을 측정했다. 가로 도식의 비율 예약을 수정해 로컬 프로덕션 빌드에서 세 브라우저로 검증했다. 폰트 폴백 보정 후보는 개선이 없었다. [전체 페이지 검증](../verification/performance/2026-11-25-docs-production-cwv.md).
+
 - 한/영 본문, 이미지/이미지 없는 글, 두 폭의 실제 프로덕션 렌더에서 LCP 요소·폰트 첫 표시/전환·이미지 최적화 응답·출력 파일 추적을 확인한다. 동일 cache/CPU/네트워크로 반복한다.
 - 완료 조건: 합성 컴포넌트 관측과 전체 페이지 LCP/최대 session-window CLS를 분리한 보고서, 소스/빌드 기준, 재현 명령과 한계가 있다. fallback 줄 수 변화가 CLS의 원인으로 확인된 경우에만 보정 후보를 비교한다.
 - Noto Sans KR·라이선스 고지는 유지한다. LCP 요소를 확인하기 전 preload나 fetchPriority를 추가하지 않는다.

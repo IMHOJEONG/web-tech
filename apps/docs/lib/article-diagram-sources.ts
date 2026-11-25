@@ -1,8 +1,8 @@
-const portraitHeights = {
-    stages: 1096,
-    completion: 1028,
-    'local-architecture': 1240,
-    'service-infrastructure': 1364,
+const diagramHeights = {
+    stages: { portrait: 1096, landscape: 540 },
+    completion: { portrait: 1028, landscape: 620 },
+    'local-architecture': { portrait: 1240, landscape: 740 },
+    'service-infrastructure': { portrait: 1364, landscape: 600 },
 } as const
 
 export function getArticleDiagramSources(src: unknown) {
@@ -12,10 +12,11 @@ export function getArticleDiagramSources(src: unknown) {
             src
         )
     if (!match) return null
-    const name = match[1] as keyof typeof portraitHeights
+    const name = match[1] as keyof typeof diagramHeights
     return {
         portrait: src,
         landscape: src.replace('.png', '-wide.png'),
-        portraitHeight: portraitHeights[name],
+        portraitHeight: diagramHeights[name].portrait,
+        landscapeHeight: diagramHeights[name].landscape,
     }
 }

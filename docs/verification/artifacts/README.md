@@ -1,5 +1,6 @@
 # 검증 원본 증거
 
+- [11-25 Docs 프로덕션 이미지·한글 폰트 성능 표본](2026-11-25-docs-production-cwv.json)
 - [11-25 Feed 한글 조합 수정 증거](2026-11-25-feed-ime-fix.json)
 
 - [11-25 Feed 상호작용·IME 정제 증거](2026-11-25-feed-interaction-latency.json)

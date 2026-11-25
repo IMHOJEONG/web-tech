@@ -20,7 +20,11 @@ export const syntheticImages = [
         width: 720,
         height: sources.portraitHeight,
       },
-      { pathname: sources.landscape, width: 1600, height: 900 },
+      {
+        pathname: sources.landscape,
+        width: 1600,
+        height: sources.landscapeHeight,
+      },
     ];
   }),
   { pathname: "/diagrams/tcp-socket-endpoints.png", width: 720, height: 480 },

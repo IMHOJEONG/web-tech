@@ -647,11 +647,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "c3d78f67e24f8c9c16b63aca6fae3edec36ef9f1071df3b500aa152dff5c021d",
+      "sha256": "2866c90ae443ab33ce1a94ef6e2d9fb2fc9a294809f1a8512d6a36f943a173c3",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-25",
-      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
+      "note": "사용자가 Docs P2 문서·정제 증거 7개를 로컬 커밋에 포함하도록 명시 승인함. 합성 측정 및 공개 페이지 집계, 변경과 미검증 범위, 목차를 확인함. 월간 목차에는 이 P2 항목만 반영함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -689,11 +689,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "e700b065ee728808327925dd75c6210bf7e51da87e28450f69d871c8a7d1b74f",
+      "sha256": "22455118e05a3b76a644bbff92c748dd5ae35a8b16c9fef9975340ccde81ce0b",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-25",
-      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
+      "note": "사용자가 Docs P2 문서·정제 증거 7개를 로컬 커밋에 포함하도록 명시 승인함. 합성 측정 및 공개 페이지 집계, 변경과 미검증 범위, 목차를 확인함. 월간 목차에는 이 P2 항목만 반영함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -857,11 +857,11 @@
     },
     {
       "path": "docs/verification/artifacts/README.md",
-      "sha256": "d82e834e3bc70536954fd123bcb335fffff1c8404c74e95b33aa4ec7cc5ea392",
+      "sha256": "635c79603705e776ed95fe245aee6ab74305621aea569a8022cb61e426c48030",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-25",
-      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
+      "note": "사용자가 Docs P2 문서·정제 증거 7개를 로컬 커밋에 포함하도록 명시 승인함. 합성 측정 및 공개 페이지 집계, 변경과 미검증 범위, 목차를 확인함. 월간 목차에는 이 P2 항목만 반영함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -3755,11 +3755,11 @@
     },
     {
       "path": "docs/todo/modern-web-guidance.md",
-      "sha256": "b1fbd15c30e6f2664ab893b58babffaba369df700c15a37738e4774c1c85fb85",
+      "sha256": "8f5fbce1f04b13f2c42e4c5c192ffb46231551713c98ecb7c7a08417a0c63b27",
       "kind": "document",
       "decision": "public-approved",
       "reviewedOn": "2026-11-25",
-      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
+      "note": "사용자가 Docs P2 문서·정제 증거 7개를 로컬 커밋에 포함하도록 명시 승인함. 합성 측정 및 공개 페이지 집계, 변경과 미검증 범위, 목차를 확인함. 월간 목차에는 이 P2 항목만 반영함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -3844,6 +3844,48 @@
       "decision": "public-approved",
       "reviewedOn": "2026-11-25",
       "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-25-docs-production-cwv.json",
+      "sha256": "f802a275de67818d0c333c2a605214e57f416a668def709c2b09dbfc22b91b44",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 Docs P2 문서·정제 증거 7개를 로컬 커밋에 포함하도록 명시 승인함. 합성 측정 및 공개 페이지 집계, 변경과 미검증 범위, 목차를 확인함. 월간 목차에는 이 P2 항목만 반영함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/performance/2026-11-25-docs-production-cwv.md",
+      "sha256": "44c14d8e25e8a3525e0d9eae471e8b9a82c4917f8fbb15667cd5abe3a4b7198a",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 Docs P2 문서·정제 증거 7개를 로컬 커밋에 포함하도록 명시 승인함. 합성 측정 및 공개 페이지 집계, 변경과 미검증 범위, 목차를 확인함. 월간 목차에는 이 P2 항목만 반영함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-25-docs-production-cwv.md",
+      "sha256": "04726f25ac4a6e0b47c019bb56a73d8c1a48567bc3203747e34a96bb23b780e7",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 Docs P2 문서·정제 증거 7개를 로컬 커밋에 포함하도록 명시 승인함. 합성 측정 및 공개 페이지 집계, 변경과 미검증 범위, 목차를 확인함. 월간 목차에는 이 P2 항목만 반영함.",
       "checks": {
         "secrets": true,
         "personalData": true,
