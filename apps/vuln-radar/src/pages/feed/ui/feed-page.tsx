@@ -25,6 +25,7 @@ export function FeedPage() {
     void navigate({
       search: searchWithFilters(next),
       replace: next.query !== filters.query,
+      resetScroll: false,
     });
   };
   const feedQuery = useQuery({
@@ -157,7 +158,8 @@ export function FeedPage() {
         resultCount={pagination.total}
       />
 
-      {!updatingResults && (
+      {/* Retain the layout while a filter click can finish an IME composition. */}
+      <div className={updatingResults ? "contents invisible" : "contents"}>
         <FeedSummaryStrip
           labels={{
             total: t("feed.summaryTotal"),
@@ -167,7 +169,7 @@ export function FeedPage() {
           }}
           stats={stats}
         />
-      )}
+      </div>
 
       <FeedPagination
         pagination={pagination}
@@ -176,8 +178,11 @@ export function FeedPage() {
         onPageChange={(page) => void navigate({ search: { ...search, page } })}
       />
 
-      {!updatingResults &&
-        (filteredItems.length > 0 ? (
+      <div
+        className={updatingResults ? "contents invisible" : "contents"}
+        inert={updatingResults}
+      >
+        {filteredItems.length > 0 ? (
           <div className="grid gap-3">
             {filteredItems.map((item) => (
               <FeedVulnerabilityCard
@@ -221,7 +226,8 @@ export function FeedPage() {
               {t("feed.emptyBody")}
             </p>
           </article>
-        ))}
+        )}
+      </div>
     </section>,
   );
 }

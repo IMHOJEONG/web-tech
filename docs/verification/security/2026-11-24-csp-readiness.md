@@ -17,7 +17,30 @@ pnpm --filter vuln-radar test:lib
 
 새 Vite 프로덕션 결과물을 loopback HTTP 서버에서 제공하고 진단용 CSP를 응답에만 주입했다. script-src/style-src/connect-src는 self, object-src/base-uri는 none을 사용했다. 이 정책은 조사용 대조군이며 운영 권장 최종 정책이 아니다. init listener는 effectiveDirective·disposition·inline/eval/자원 분류·앱 번들/문서/기타 출처 분류만 집계한다. 원문 URL·검색어·소스 코드·쿠키·원시 보고는 보관하지 않는다. 고의의 인라인 probe가 Report-Only에서는 실행되고 강제 대조군에서는 막히는지도 확인한다.
 
-API503을 사용하는 baseline 세 엔진×Overview/Feed6조건, 강제 대조군6조건, jitless 적용 후 Overview503·정상 Feed1항목·잘못된 Feed schema의 세 엔진9조건을 구분했다. 반복 attribution 실행은 baseline의 출처 확인이며 새로운 독립 표본으로 합산하지 않는다. 임시 실행기는 저장소 밖, 정제 결과는 [artifact](../artifacts/2026-11-24-csp-readiness.json)에 둔다.
+API503을 사용하는 baseline 세 엔진×Overview/Feed6조건, 강제 대조군6조건, jitless 적용 후 Overview503·정상 Feed1항목·잘못된 Feed schema의 세 엔진9조건을 구분했다. 반복 attribution 실행은 baseline의 출처 확인이며 새로운 독립 표본으로 합산하지 않는다. 당시 임시 실행기의 정제 결과는 [artifact](../artifacts/2026-11-24-csp-readiness.json)에 둔다.
+
+### 저장소에서 브라우저 이벤트 다시 검증
+
+저장소 루트에서 Node.js 24.22.1, pnpm 12.14.0을 사용한다. 두 커밋이 로컬 Git에 있어야 하며, 의존성과 Playwright 브라우저 바이너리를 먼저 설치한다. 다음 명령은 각 커밋을 임시 폴더에 풀어 현재 작업 트리를 보존한다.
+
+```sh
+pnpm install --frozen-lockfile
+pnpm --filter docs exec playwright install chromium firefox webkit
+csp_repro_dir=$(mktemp -d)
+for csp_revision in 34784315 f7a7bd4f; do
+  mkdir "$csp_repro_dir/$csp_revision"
+  git archive "$csp_revision" | tar -xf - -C "$csp_repro_dir/$csp_revision"
+  pnpm --dir "$csp_repro_dir/$csp_revision" install --frozen-lockfile
+  pnpm --dir "$csp_repro_dir/$csp_revision" --filter vuln-radar build
+done
+node scripts/verify-vuln-radar-csp-readiness.mjs \
+  "$csp_repro_dir/34784315/apps/vuln-radar/dist" \
+  "$csp_repro_dir/f7a7bd4f/apps/vuln-radar/dist"
+```
+
+첫 인자는 보안 헤더 기준 빌드, 둘째는 브라우저 진입점에서 jitless를 켠 빌드다. 스크립트가 Playwright에서 같은 출처의 HTML과 자원을 제공하고 HTTP 503, 유효 항목 1개, 스키마가 맞지 않는 JSON을 합성한다. 각 화면의 결과 또는 재시도 버튼, 정책별 인라인 probe 동작, jitless의 앱 번들 eval 0건을 검사한다. 정상 실행은 정제한 브라우저 이벤트를 JSON으로 출력한다. 이 실행기의 범위는 `SecurityPolicyViolationEvent`이며, 아래 보고 전송 수치는 당시 loopback 수집 실험의 기록이다.
+
+2026-11-25 재실행에서 Chromium·Firefox·WebKit의 21개 조건이 통과했다. Report-Only 기준의 두 화면에서 Chromium과 Firefox는 각각 앱 번들 eval 2건, WebKit은 0건이었다. jitless의 9개 조건은 모두 0건이었다.
 
 ## 결과와 증거
 

@@ -1,43 +1,107 @@
 import assert from "node:assert/strict";
+import { execFileSync, spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { readFile, readdir, stat } from "node:fs/promises";
+import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { createRequire } from "node:module";
 import { join, resolve, extname, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parseArgs } from "node:util";
 import { gzipSync } from "node:zlib";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const require = createRequire(join(root, "apps/docs/package.json"));
-const { chromium, firefox, webkit } = require("@playwright/test");
+const { chromium, firefox, webkit, expect } = require("@playwright/test");
+const { values, positionals } = parseArgs({
+  allowPositionals: true,
+  options: {
+    functional: { type: "boolean" },
+    pilot: { type: "boolean" },
+    build: { type: "boolean" },
+  },
+});
+assert.ok(positionals.length <= 1, "Supply at most one dist directory");
 const dist = resolve(
-  process.argv[2] || "/private/tmp/web-tech-inp-baseline/dist",
+  positionals[0] ?? "/private/tmp/web-tech-inp-baseline/dist",
 );
-const pilot = process.argv.includes("--pilot");
-const mode = process.argv.includes("--functional")
-  ? "functional"
-  : "measurement";
+const pilot = Boolean(values.pilot);
+const mode = values.functional ? "functional" : "measurement";
 const requests = [];
 const observations = [];
 const calibrations = [];
 const ownedBrowsers = [];
-const sourceHashes = {};
-for (const name of [
+const sourcePaths = [
   "feed-page",
   "feed-filter-bar",
   "feed-vulnerability-card",
   "feed-pagination",
-]) {
-  const path = `apps/vuln-radar/src/pages/feed/ui/${name}.tsx`;
-  sourceHashes[path] = createHash("sha256")
-    .update(await readFile(join(root, path)))
-    .digest("hex");
+].map((name) => `apps/vuln-radar/src/pages/feed/ui/${name}.tsx`);
+async function hashFiles(directory, files) {
+  return Object.fromEntries(
+    await Promise.all(
+      files.map(async (file) => [
+        file,
+        createHash("sha256")
+          .update(await readFile(join(directory, file)))
+          .digest("hex"),
+      ]),
+    ),
+  );
 }
-const bundleHashes = {};
-for (const name of (await readdir(join(dist, "assets"))).sort())
-  bundleHashes[name] = createHash("sha256")
-    .update(await readFile(join(dist, "assets", name)))
-    .digest("hex");
+async function hashBundle() {
+  const assets = (await readdir(join(dist, "assets"))).sort();
+  return hashFiles(dist, [
+    "index.html",
+    ...assets.map((name) => `assets/${name}`),
+  ]);
+}
+const git = (...args) =>
+  execFileSync("git", args, { cwd: root, encoding: "utf8" });
+const provenancePath = join(dist, "feed-verification-build.json");
+if (values.build) {
+  const revision = git("rev-parse", "HEAD").trim();
+  const hasLocalChanges = Boolean(git("status", "--porcelain").trim());
+  const sourceHashes = await hashFiles(root, sourcePaths);
+  // A fresh output directory prevents mixing bundles from different builds.
+  await mkdir(dist);
+  const build = spawnSync(
+    "pnpm",
+    ["--filter", "vuln-radar", "exec", "vp", "build", "--outDir", dist],
+    {
+      cwd: root,
+      stdio: ["ignore", 2, 2],
+    },
+  );
+  assert.equal(build.status, 0, "Vuln Radar build failed");
+  assert.equal(git("rev-parse", "HEAD").trim(), revision);
+  assert.deepEqual(await hashFiles(root, sourcePaths), sourceHashes);
+  await writeFile(
+    provenancePath,
+    JSON.stringify(
+      {
+        revision,
+        hasLocalChanges,
+        sourceHashes,
+        bundleHashes: await hashBundle(),
+      },
+      null,
+      2,
+    ) + "\n",
+    { flag: "wx" },
+  );
+}
+const bundleHashes = await hashBundle();
+let buildProvenance = null;
+try {
+  buildProvenance = JSON.parse(await readFile(provenancePath, "utf8"));
+  assert.deepEqual(
+    buildProvenance.bundleHashes,
+    bundleHashes,
+    "Bundle hashes differ from build manifest",
+  );
+} catch (error) {
+  if (error.code !== "ENOENT") throw error;
+}
 const knownQuery = (q) =>
   ({
     "": "base",
@@ -86,6 +150,49 @@ function diagnostics() {
     since: 0,
   };
   window.__feedDiag = d;
+  const noteQuery = () => {
+    if (d.ime && !d.ime.ended) {
+      d.ime.urlHeld &&=
+        new URL(location.href).searchParams.get("q") === d.ime.initialQuery;
+    }
+  };
+  for (const method of ["pushState", "replaceState"]) {
+    const original = history[method];
+    history[method] = function (...args) {
+      const result = original.apply(this, args);
+      noteQuery();
+      return result;
+    };
+  }
+  const fetch = window.fetch;
+  window.fetch = function (input, ...rest) {
+    if (d.ime) {
+      const url = new URL(
+        input instanceof Request ? input.url : input,
+        location.href,
+      );
+      if (
+        url.origin === location.origin &&
+        url.pathname === "/api/backend/feed/search"
+      ) {
+        d.ime.requests.push({
+          afterCommit: d.ime.ended,
+          finalQuery: url.searchParams.get("q") === "보안",
+        });
+      }
+    }
+    return fetch.call(this, input, ...rest);
+  };
+  document.addEventListener(
+    "compositionend",
+    (event) => {
+      if (d.ime) {
+        noteQuery();
+        d.ime.ended = true;
+      }
+    },
+    true,
+  );
   const numeric = (v) => (Number.isFinite(v) ? v : null);
   if (d.supported.includes("event"))
     new PerformanceObserver((list) => {
@@ -166,12 +273,12 @@ function diagnostics() {
       true,
     );
   new MutationObserver(() => {
+    const title = document.querySelector("article.group h2");
     if (
       d.readyAt !== null ||
       !d.expected ||
-      !document
-        .querySelector("article.group h2")
-        ?.textContent.includes(d.expected)
+      !title?.textContent.includes(d.expected) ||
+      title.closest("[inert]")
     )
       return;
     const expected = d.expected;
@@ -181,7 +288,12 @@ function diagnostics() {
           d.readyAt = performance.now();
       }),
     );
-  }).observe(document, { childList: true, subtree: true, characterData: true });
+  }).observe(document, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+    attributeFilter: ["inert"],
+  });
 }
 function fixture(u) {
   const q = u.searchParams.get("q") || "";
@@ -214,13 +326,19 @@ function fixture(u) {
 }
 async function arm(page, q, priority, pageNumber) {
   await page.evaluate(
-    (expected) => {
+    ({ marker, ...expectedRequest }) => {
       const d = window.__feedDiag;
       d.since = performance.now();
-      d.expected = expected;
+      d.expected = marker;
+      d.expectedRequest = expectedRequest;
       d.readyAt = null;
     },
-    markerFor(q, priority, pageNumber),
+    {
+      marker: markerFor(q, priority, pageNumber),
+      q,
+      priority,
+      page: pageNumber,
+    },
   );
 }
 async function collect(page, action) {
@@ -239,24 +357,29 @@ async function collect(page, action) {
         (e) => e.name === "keydown" || e.name === "click" || e.name === "input",
       )?.start ?? d.since;
     const end = d.readyAt;
-    const resources = d.resources
-      .filter((e) => e.start >= d.since)
-      .map(({ q, ...r }) => r);
+    const resources = d.resources.filter((e) => e.start >= d.since);
+    const expected = d.expectedRequest;
+    const finalRequest = resources.findLast(
+      (e) =>
+        e.q === expected.q &&
+        e.priority === expected.priority &&
+        e.page === expected.page &&
+        e.responseStart > 0 &&
+        e.responseEnd <= end,
+    );
     return {
       action,
       elapsedFromFirstEvent: end - first,
       elapsedFromLastInput: lastInput === undefined ? null : end - lastInput,
       lastInputToRequest:
-        lastInput === undefined || !resources.length
+        lastInput === undefined || !finalRequest
           ? null
-          : resources.at(-1).start - lastInput,
-      responseEndToReady: resources.length
-        ? end - resources.at(-1).responseEnd
-        : null,
-      resources: resources.map((r) => ({
+          : finalRequest.start - lastInput,
+      responseEndToReady: finalRequest ? end - finalRequest.responseEnd : null,
+      resources: resources.map(({ q, ...r }) => ({
         ...r,
         start: r.start - d.since,
-        responseStart: r.responseStart - d.since,
+        responseStart: r.responseStart ? r.responseStart - d.since : null,
         responseEnd: r.responseEnd - d.since,
       })),
       events: d.events
@@ -364,28 +487,39 @@ async function scenario(browser, engine, width, cpu, repetition) {
       await input.fill("final");
       await page.locator("article.group h2").first().waitFor();
       if (cdp) {
-        const imeRequestStart = requests.length;
         await input.focus();
         await input.press(
           process.platform === "darwin" ? "Meta+A" : "Control+A",
         );
+        await page.evaluate(() => {
+          window.__feedDiag.ime = {
+            ended: false,
+            initialQuery: new URL(location.href).searchParams.get("q"),
+            urlHeld: true,
+            requests: [],
+          };
+        });
         await cdp.send("Input.imeSetComposition", {
           text: "보",
           selectionStart: 1,
           selectionEnd: 1,
         });
+        await expect(input).toHaveValue("보");
         await page.waitForTimeout(400);
-        const queryDuringComposition = new URL(page.url()).searchParams.get(
-          "q",
-        );
-        const requestsDuringComposition = requests
-          .slice(imeRequestStart)
-          .filter((r) => r.id === id).length;
         await cdp.send("Input.imeSetComposition", {
           text: "보안",
           selectionStart: 2,
           selectionEnd: 2,
         });
+        await expect(input).toHaveValue("보안");
+        await page.waitForTimeout(400);
+        assert.deepEqual(
+          await page.evaluate(() => ({
+            q: new URL(location.href).searchParams.get("q"),
+            requests: window.__feedDiag.ime.requests,
+          })),
+          { q: "final", requests: [] },
+        );
         await cdp.send("Input.insertText", { text: "보안" });
         await page.waitForFunction(
           () =>
@@ -399,6 +533,11 @@ async function scenario(browser, engine, width, cpu, repetition) {
               `${document.querySelector("input").value}:P1:p1:`,
             ),
         );
+        const boundary = await page.evaluate(() => {
+          const ime = window.__feedDiag.ime;
+          window.__feedDiag.ime = null;
+          return ime;
+        });
         imeResult = {
           expectedMatch: (await input.inputValue()) === "보안",
           observedLength: (await input.inputValue()).length,
@@ -406,13 +545,21 @@ async function scenario(browser, engine, width, cpu, repetition) {
             new URL(page.url()).searchParams.get("q") ===
             (await input.inputValue()),
           method: "CDP composition only; not OS IME",
-          urlHeldUntilCommit: queryDuringComposition === "final",
-          requestsDuringComposition,
-          committedRequests: requests
-            .slice(imeRequestStart)
-            .filter((r) => r.id === id && r.query === "korean").length,
+          compositionEndObserved: boundary.ended,
+          urlHeldUntilCommit:
+            boundary.urlHeld && boundary.initialQuery === "final",
+          requestsDuringComposition: boundary.requests.filter(
+            (r) => !r.afterCommit,
+          ).length,
+          committedRequests: boundary.requests.filter(
+            (r) => r.afterCommit && r.finalQuery,
+          ).length,
         };
-        // Keep the before/after outcome even when the baseline reproduces the bug.
+        assert.equal(
+          imeResult.compositionEndObserved,
+          true,
+          JSON.stringify(boundary),
+        );
         if (imeResult.expectedMatch) {
           assert.equal(imeResult.urlHeldUntilCommit, true);
           assert.equal(imeResult.requestsDuringComposition, 0);
@@ -444,18 +591,11 @@ async function scenario(browser, engine, width, cpu, repetition) {
             selectionStart: 1,
             selectionEnd: 1,
           });
+          await expect(input).toHaveValue("보안중");
           const p2 = page.getByRole("button", { name: "P2", exact: true });
-          await p2.focus();
-          await page.waitForFunction(() =>
-            document
-              .querySelector("article.group h2")
-              ?.textContent.includes("보안중:P1:p1:"),
-          );
-          await p2.press("Space");
-          await page.waitForFunction(() =>
-            document
-              .querySelector("article.group h2")
-              ?.textContent.includes("보안중:P2:p1:"),
+          await p2.click();
+          await expect(page.locator("article.group h2").first()).toContainText(
+            "보안중:P2:p1:",
           );
           assert.equal(await input.inputValue(), "보안중");
           const urlAfterBlur = new URL(page.url());
@@ -466,8 +606,33 @@ async function scenario(browser, engine, width, cpu, repetition) {
               .slice(beforeBlur)
               .filter((r) => r.id === id && r.query === "korean-blur-commit")
               .length,
-            2,
+            1,
           );
+          imeResult.nativeBlurCommitAndPointerFilter = true;
+
+          await input.focus();
+          await input.evaluate((field) =>
+            field.setSelectionRange(field.value.length, field.value.length),
+          );
+          await cdp.send("Input.imeSetComposition", {
+            text: "요",
+            selectionStart: 1,
+            selectionEnd: 1,
+          });
+          await expect(input).toHaveValue("보안중요");
+          const p1 = page.getByRole("button", { name: "P1", exact: true });
+          await p1.focus();
+          await expect(page.locator("article.group h2").first()).toContainText(
+            "보안중요:P2:p1:",
+          );
+          await p1.press("Space");
+          await expect(page.locator("article.group h2").first()).toContainText(
+            "보안중요:P1:p1:",
+          );
+          const urlAfterKey = new URL(page.url());
+          assert.equal(urlAfterKey.searchParams.get("q"), "보안중요");
+          assert.equal(urlAfterKey.searchParams.get("priority"), "P1");
+          await expect(input).toHaveValue("보안중요");
           imeResult.nativeBlurCommitThenKeyboardFilter = true;
         }
       }
@@ -689,13 +854,12 @@ try {
     }
   }
   result = {
-    date: "2026-11-25",
-    baseCommit: "bf316ae1",
+    executedAt: new Date().toISOString(),
     mode,
     pilot,
     apiDelayMs: 80,
     heldRequestDelayMs: 1200,
-    sourceHashes,
+    buildProvenance,
     bundleHashes,
     calibrations,
     observations,

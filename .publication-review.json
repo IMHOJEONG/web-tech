@@ -3587,11 +3587,11 @@
     },
     {
       "path": "docs/verification/security/2026-11-24-csp-readiness.md",
-      "sha256": "19ec8befca51b1305f7d8fba9eb5b0a3c514a65d4d694da1375858d33741277a",
+      "sha256": "7aaf1842edc8dc0cc9a517183167d9238c54cfa68968a768793271cc19f3017d",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-24",
-      "note": "사용자가 검토한 jitless 변경과 검증 기록의 커밋을 명시 요청함. 자원 목록·합성 CSP 전후/대조 결과·소스 해시·실패와 미검증 범위·목차를 검수함. 원시 보고·URL/코드 표본·쿠키·개인 경로·기존 병합 후 worklog·새 수집기 구현은 제외함. 푸시·배포 승인을 추정하지 않음.",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 PR #112 CSP 문서 리뷰 지적의 수정·커밋·푸시를 명시 요청함. 역사적 빌드·Playwright 사전 조건과 합성 fixture·정제 이벤트 재실행을 검수함. 실제 보고 원문과 운영 값은 포함하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
