@@ -1,5 +1,8 @@
 # 검증 원본 증거
 
+- [11-25 Feed 한글 조합 수정 증거](2026-11-25-feed-ime-fix.json)
+
+- [11-25 Feed 상호작용·IME 정제 증거](2026-11-25-feed-interaction-latency.json)
 - [11-25 CSP HTTPS 재검증 증거](2026-11-25-csp-https-delivery.json)
 - [11-24 CSP 수집기 정제 증거](2026-11-24-csp-report-collector.json)
 

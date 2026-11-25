@@ -1,5 +1,9 @@
 # 2026-11 작업 기록
 
+- [11-25 Feed 한글 조합 입력 수정](2026-11-25-feed-ime-fix.md)
+
+- [11-25 Feed 상호작용 기준선·IME 회귀](2026-11-25-feed-interaction-latency.md)
+- [11-25 Modern Web Guidance 후속 계획](2026-11-25-modern-web-next-plan.md)
 - [11-25 HTTPS 복원·커밋과 현대화 계획 준비](2026-11-25-csp-https-delivery.md)
 - [11-24 jitless 커밋과 CSP 보고 수집기](2026-11-24-csp-report-collector.md)
 
