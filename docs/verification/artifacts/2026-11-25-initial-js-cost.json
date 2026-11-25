@@ -1,0 +1,691 @@
+{
+  "date": "2026-11-25",
+  "repositoryBaseline": "5dc0e252f2c452b052faf3212eb6b1a0770a9806",
+  "precedingLocalCommit": "9630878d1f913cabd6b8a7eb5ad4aee138dacf08",
+  "source": "public deployed URLs",
+  "controls": {
+    "downloadBytesPerSecond": 200000,
+    "latencyMs": 80,
+    "cpuThrottle": 4,
+    "browserCache": false,
+    "bootWindowAfterReadinessMs": 1600
+  },
+  "samples": [
+    {
+      "app": "docs",
+      "page": "index",
+      "viewportWidth": 390,
+      "repetition": 1,
+      "condition": "baseline",
+      "readinessMs": 5755,
+      "navigationTtfbMs": 709,
+      "scriptDurationMs": 2117,
+      "maxLongFrameBlockingMs": 84,
+      "longFrames": 4,
+      "transfers": {
+        "next-script": {
+          "count": 18,
+          "bytes": 434250
+        },
+        "cloudflare-insights": {
+          "count": 1,
+          "bytes": 10478
+        },
+        "vercel-analytics": {
+          "count": 1,
+          "bytes": 2749
+        },
+        "vercel-speed-insights": {
+          "count": 1,
+          "bytes": 8289
+        }
+      },
+      "drawerFocusMs": 96,
+      "newDrawerScriptResponses": 0,
+      "topSampledScript": "3mi2yjt_fjycp.js",
+      "topSampledScriptSelfMs": 1330,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": 1,
+        "vercel-speed-insights": 3,
+        "cloudflare-insights": 12
+      }
+    },
+    {
+      "app": "docs",
+      "page": "index",
+      "viewportWidth": 390,
+      "repetition": 1,
+      "condition": "withoutSdkScripts",
+      "readinessMs": 6725,
+      "navigationTtfbMs": 728,
+      "scriptDurationMs": 3159,
+      "maxLongFrameBlockingMs": 80,
+      "longFrames": 3,
+      "transfers": {
+        "cloudflare-insights": {
+          "count": 1,
+          "bytes": 10478
+        },
+        "next-script": {
+          "count": 18,
+          "bytes": 438042
+        }
+      },
+      "drawerFocusMs": 77,
+      "newDrawerScriptResponses": 0,
+      "topSampledScript": "3mi2yjt_fjycp.js",
+      "topSampledScriptSelfMs": 2122,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": null,
+        "cloudflare-insights": 12
+      }
+    },
+    {
+      "app": "docs",
+      "page": "article",
+      "viewportWidth": 390,
+      "repetition": 1,
+      "condition": "baseline",
+      "readinessMs": 7080,
+      "navigationTtfbMs": 1000,
+      "scriptDurationMs": 3127,
+      "maxLongFrameBlockingMs": 98,
+      "longFrames": 4,
+      "transfers": {
+        "document-or-other-local": {
+          "count": 1,
+          "bytes": 1014
+        },
+        "cloudflare-insights": {
+          "count": 1,
+          "bytes": 10478
+        },
+        "next-script": {
+          "count": 18,
+          "bytes": 450043
+        },
+        "vercel-analytics": {
+          "count": 1,
+          "bytes": 2742
+        },
+        "vercel-speed-insights": {
+          "count": 1,
+          "bytes": 8293
+        }
+      },
+      "drawerFocusMs": 93,
+      "newDrawerScriptResponses": 0,
+      "topSampledScript": "3mi2yjt_fjycp.js",
+      "topSampledScriptSelfMs": 2084,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": 2,
+        "vercel-speed-insights": 3,
+        "cloudflare-insights": 16
+      }
+    },
+    {
+      "app": "docs",
+      "page": "article",
+      "viewportWidth": 390,
+      "repetition": 1,
+      "condition": "withoutSdkScripts",
+      "readinessMs": 6003,
+      "navigationTtfbMs": 925,
+      "scriptDurationMs": 2128,
+      "maxLongFrameBlockingMs": 83,
+      "longFrames": 4,
+      "transfers": {
+        "next-script": {
+          "count": 18,
+          "bytes": 446306
+        },
+        "document-or-other-local": {
+          "count": 1,
+          "bytes": 1025
+        },
+        "cloudflare-insights": {
+          "count": 1,
+          "bytes": 10478
+        }
+      },
+      "drawerFocusMs": 94,
+      "newDrawerScriptResponses": 0,
+      "topSampledScript": "3mi2yjt_fjycp.js",
+      "topSampledScriptSelfMs": 1311,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": null,
+        "cloudflare-insights": 16
+      }
+    },
+    {
+      "app": "docs",
+      "page": "index",
+      "viewportWidth": 1280,
+      "repetition": 1,
+      "condition": "baseline",
+      "readinessMs": 5634,
+      "navigationTtfbMs": 632,
+      "scriptDurationMs": 1876,
+      "maxLongFrameBlockingMs": 80,
+      "longFrames": 4,
+      "transfers": {
+        "next-script": {
+          "count": 18,
+          "bytes": 434441
+        },
+        "cloudflare-insights": {
+          "count": 1,
+          "bytes": 10478
+        },
+        "vercel-analytics": {
+          "count": 1,
+          "bytes": 2747
+        },
+        "vercel-speed-insights": {
+          "count": 1,
+          "bytes": 8288
+        }
+      },
+      "drawerFocusMs": 80,
+      "newDrawerScriptResponses": 0,
+      "topSampledScript": "3mi2yjt_fjycp.js",
+      "topSampledScriptSelfMs": 1214,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": 3,
+        "cloudflare-insights": 12
+      }
+    },
+    {
+      "app": "docs",
+      "page": "article",
+      "viewportWidth": 1280,
+      "repetition": 1,
+      "condition": "baseline",
+      "readinessMs": 5878,
+      "navigationTtfbMs": 886,
+      "scriptDurationMs": 2183,
+      "maxLongFrameBlockingMs": 81,
+      "longFrames": 4,
+      "transfers": {
+        "document-or-other-local": {
+          "count": 1,
+          "bytes": 991
+        },
+        "next-script": {
+          "count": 18,
+          "bytes": 446390
+        },
+        "cloudflare-insights": {
+          "count": 1,
+          "bytes": 10478
+        },
+        "vercel-analytics": {
+          "count": 1,
+          "bytes": 2748
+        },
+        "vercel-speed-insights": {
+          "count": 1,
+          "bytes": 8287
+        }
+      },
+      "drawerFocusMs": 84,
+      "newDrawerScriptResponses": 0,
+      "topSampledScript": "3mi2yjt_fjycp.js",
+      "topSampledScriptSelfMs": 1373,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": 1,
+        "vercel-speed-insights": 6,
+        "cloudflare-insights": 16
+      }
+    },
+    {
+      "app": "docs",
+      "page": "index",
+      "viewportWidth": 390,
+      "repetition": 2,
+      "condition": "withoutSdkScripts",
+      "readinessMs": 6706,
+      "navigationTtfbMs": 683,
+      "scriptDurationMs": 2894,
+      "maxLongFrameBlockingMs": 79,
+      "longFrames": 3,
+      "transfers": {
+        "cloudflare-insights": {
+          "count": 1,
+          "bytes": 10478
+        },
+        "next-script": {
+          "count": 18,
+          "bytes": 438015
+        }
+      },
+      "drawerFocusMs": 79,
+      "newDrawerScriptResponses": 0,
+      "topSampledScript": "3mi2yjt_fjycp.js",
+      "topSampledScriptSelfMs": 1951,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": null,
+        "cloudflare-insights": 15
+      }
+    },
+    {
+      "app": "docs",
+      "page": "index",
+      "viewportWidth": 390,
+      "repetition": 2,
+      "condition": "baseline",
+      "readinessMs": 5726,
+      "navigationTtfbMs": 708,
+      "scriptDurationMs": 2130,
+      "maxLongFrameBlockingMs": 80,
+      "longFrames": 4,
+      "transfers": {
+        "next-script": {
+          "count": 18,
+          "bytes": 434349
+        },
+        "cloudflare-insights": {
+          "count": 1,
+          "bytes": 10478
+        },
+        "vercel-analytics": {
+          "count": 1,
+          "bytes": 2743
+        },
+        "vercel-speed-insights": {
+          "count": 1,
+          "bytes": 8290
+        }
+      },
+      "drawerFocusMs": 82,
+      "newDrawerScriptResponses": 0,
+      "topSampledScript": "3mi2yjt_fjycp.js",
+      "topSampledScriptSelfMs": 1351,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": 2,
+        "vercel-speed-insights": 4,
+        "cloudflare-insights": 12
+      }
+    },
+    {
+      "app": "docs",
+      "page": "article",
+      "viewportWidth": 390,
+      "repetition": 2,
+      "condition": "withoutSdkScripts",
+      "readinessMs": 6057,
+      "navigationTtfbMs": 1024,
+      "scriptDurationMs": 2196,
+      "maxLongFrameBlockingMs": 79,
+      "longFrames": 4,
+      "transfers": {
+        "document-or-other-local": {
+          "count": 1,
+          "bytes": 987
+        },
+        "next-script": {
+          "count": 18,
+          "bytes": 446445
+        },
+        "cloudflare-insights": {
+          "count": 1,
+          "bytes": 10478
+        }
+      },
+      "drawerFocusMs": 85,
+      "newDrawerScriptResponses": 0,
+      "topSampledScript": "3mi2yjt_fjycp.js",
+      "topSampledScriptSelfMs": 1411,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": null,
+        "cloudflare-insights": 14
+      }
+    },
+    {
+      "app": "docs",
+      "page": "article",
+      "viewportWidth": 390,
+      "repetition": 2,
+      "condition": "baseline",
+      "readinessMs": 6030,
+      "navigationTtfbMs": 906,
+      "scriptDurationMs": 2038,
+      "maxLongFrameBlockingMs": 80,
+      "longFrames": 4,
+      "transfers": {
+        "document-or-other-local": {
+          "count": 1,
+          "bytes": 983
+        },
+        "next-script": {
+          "count": 18,
+          "bytes": 446382
+        },
+        "cloudflare-insights": {
+          "count": 1,
+          "bytes": 10478
+        },
+        "vercel-analytics": {
+          "count": 1,
+          "bytes": 2750
+        },
+        "vercel-speed-insights": {
+          "count": 1,
+          "bytes": 8286
+        }
+      },
+      "drawerFocusMs": 79,
+      "newDrawerScriptResponses": 0,
+      "topSampledScript": "3mi2yjt_fjycp.js",
+      "topSampledScriptSelfMs": 1280,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": 4,
+        "cloudflare-insights": 14
+      }
+    },
+    {
+      "app": "docs",
+      "page": "index",
+      "viewportWidth": 1280,
+      "repetition": 2,
+      "condition": "baseline",
+      "readinessMs": 6630,
+      "navigationTtfbMs": 599,
+      "scriptDurationMs": 2913,
+      "maxLongFrameBlockingMs": 85,
+      "longFrames": 4,
+      "transfers": {
+        "cloudflare-insights": {
+          "count": 1,
+          "bytes": 10478
+        },
+        "next-script": {
+          "count": 18,
+          "bytes": 438000
+        },
+        "vercel-analytics": {
+          "count": 1,
+          "bytes": 2751
+        },
+        "vercel-speed-insights": {
+          "count": 1,
+          "bytes": 8291
+        }
+      },
+      "drawerFocusMs": 85,
+      "newDrawerScriptResponses": 0,
+      "topSampledScript": "3mi2yjt_fjycp.js",
+      "topSampledScriptSelfMs": 1919,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": 4,
+        "cloudflare-insights": 8
+      }
+    },
+    {
+      "app": "docs",
+      "page": "article",
+      "viewportWidth": 1280,
+      "repetition": 2,
+      "condition": "baseline",
+      "readinessMs": 5778,
+      "navigationTtfbMs": 788,
+      "scriptDurationMs": 2153,
+      "maxLongFrameBlockingMs": 81,
+      "longFrames": 4,
+      "transfers": {
+        "document-or-other-local": {
+          "count": 1,
+          "bytes": 985
+        },
+        "next-script": {
+          "count": 18,
+          "bytes": 446361
+        },
+        "cloudflare-insights": {
+          "count": 1,
+          "bytes": 10478
+        },
+        "vercel-analytics": {
+          "count": 1,
+          "bytes": 2751
+        },
+        "vercel-speed-insights": {
+          "count": 1,
+          "bytes": 8287
+        }
+      },
+      "drawerFocusMs": 82,
+      "newDrawerScriptResponses": 0,
+      "topSampledScript": "3mi2yjt_fjycp.js",
+      "topSampledScriptSelfMs": 1401,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": 1,
+        "vercel-speed-insights": 4,
+        "cloudflare-insights": 16
+      }
+    },
+    {
+      "app": "vuln-radar",
+      "page": "overview",
+      "viewportWidth": 390,
+      "repetition": 1,
+      "condition": "baseline",
+      "readinessMs": 2524,
+      "navigationTtfbMs": 191,
+      "scriptDurationMs": 237,
+      "maxLongFrameBlockingMs": 120,
+      "longFrames": 4,
+      "transfers": {
+        "vite-app-script": {
+          "count": 1,
+          "bytes": 148243
+        }
+      },
+      "drawerFocusMs": null,
+      "newDrawerScriptResponses": null,
+      "topSampledScript": "index-DDp2Rw0p.js",
+      "topSampledScriptSelfMs": 225,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": null,
+        "cloudflare-insights": null
+      }
+    },
+    {
+      "app": "vuln-radar",
+      "page": "feed",
+      "viewportWidth": 390,
+      "repetition": 1,
+      "condition": "baseline",
+      "readinessMs": 1161,
+      "navigationTtfbMs": 60,
+      "scriptDurationMs": 213,
+      "maxLongFrameBlockingMs": 97,
+      "longFrames": 3,
+      "transfers": {
+        "vite-app-script": {
+          "count": 1,
+          "bytes": 148243
+        }
+      },
+      "drawerFocusMs": null,
+      "newDrawerScriptResponses": null,
+      "topSampledScript": "index-DDp2Rw0p.js",
+      "topSampledScriptSelfMs": 200,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": null,
+        "cloudflare-insights": null
+      }
+    },
+    {
+      "app": "vuln-radar",
+      "page": "overview",
+      "viewportWidth": 1280,
+      "repetition": 1,
+      "condition": "baseline",
+      "readinessMs": 1157,
+      "navigationTtfbMs": 36,
+      "scriptDurationMs": 239,
+      "maxLongFrameBlockingMs": 116,
+      "longFrames": 4,
+      "transfers": {
+        "vite-app-script": {
+          "count": 1,
+          "bytes": 148244
+        }
+      },
+      "drawerFocusMs": null,
+      "newDrawerScriptResponses": null,
+      "topSampledScript": "index-DDp2Rw0p.js",
+      "topSampledScriptSelfMs": 231,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": null,
+        "cloudflare-insights": null
+      }
+    },
+    {
+      "app": "vuln-radar",
+      "page": "feed",
+      "viewportWidth": 1280,
+      "repetition": 1,
+      "condition": "baseline",
+      "readinessMs": 1141,
+      "navigationTtfbMs": 29,
+      "scriptDurationMs": 223,
+      "maxLongFrameBlockingMs": 90,
+      "longFrames": 4,
+      "transfers": {
+        "vite-app-script": {
+          "count": 1,
+          "bytes": 148249
+        }
+      },
+      "drawerFocusMs": null,
+      "newDrawerScriptResponses": null,
+      "topSampledScript": "index-DDp2Rw0p.js",
+      "topSampledScriptSelfMs": 215,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": null,
+        "cloudflare-insights": null
+      }
+    },
+    {
+      "app": "vuln-radar",
+      "page": "overview",
+      "viewportWidth": 390,
+      "repetition": 2,
+      "condition": "baseline",
+      "readinessMs": 1152,
+      "navigationTtfbMs": 33,
+      "scriptDurationMs": 227,
+      "maxLongFrameBlockingMs": 106,
+      "longFrames": 3,
+      "transfers": {
+        "vite-app-script": {
+          "count": 1,
+          "bytes": 148246
+        }
+      },
+      "drawerFocusMs": null,
+      "newDrawerScriptResponses": null,
+      "topSampledScript": "index-DDp2Rw0p.js",
+      "topSampledScriptSelfMs": 224,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": null,
+        "cloudflare-insights": null
+      }
+    },
+    {
+      "app": "vuln-radar",
+      "page": "feed",
+      "viewportWidth": 390,
+      "repetition": 2,
+      "condition": "baseline",
+      "readinessMs": 1165,
+      "navigationTtfbMs": 50,
+      "scriptDurationMs": 220,
+      "maxLongFrameBlockingMs": 92,
+      "longFrames": 3,
+      "transfers": {
+        "vite-app-script": {
+          "count": 1,
+          "bytes": 148243
+        }
+      },
+      "drawerFocusMs": null,
+      "newDrawerScriptResponses": null,
+      "topSampledScript": "index-DDp2Rw0p.js",
+      "topSampledScriptSelfMs": 217,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": null,
+        "cloudflare-insights": null
+      }
+    },
+    {
+      "app": "vuln-radar",
+      "page": "overview",
+      "viewportWidth": 1280,
+      "repetition": 2,
+      "condition": "baseline",
+      "readinessMs": 1156,
+      "navigationTtfbMs": 39,
+      "scriptDurationMs": 232,
+      "maxLongFrameBlockingMs": 111,
+      "longFrames": 4,
+      "transfers": {
+        "vite-app-script": {
+          "count": 1,
+          "bytes": 148246
+        }
+      },
+      "drawerFocusMs": null,
+      "newDrawerScriptResponses": null,
+      "topSampledScript": "index-DDp2Rw0p.js",
+      "topSampledScriptSelfMs": 227,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": null,
+        "cloudflare-insights": null
+      }
+    },
+    {
+      "app": "vuln-radar",
+      "page": "feed",
+      "viewportWidth": 1280,
+      "repetition": 2,
+      "condition": "baseline",
+      "readinessMs": 1145,
+      "navigationTtfbMs": 34,
+      "scriptDurationMs": 221,
+      "maxLongFrameBlockingMs": 92,
+      "longFrames": 4,
+      "transfers": {
+        "vite-app-script": {
+          "count": 1,
+          "bytes": 148243
+        }
+      },
+      "drawerFocusMs": null,
+      "newDrawerScriptResponses": null,
+      "topSampledScript": "index-DDp2Rw0p.js",
+      "topSampledScriptSelfMs": 214,
+      "sampledExternalSelfMs": {
+        "vercel-analytics": null,
+        "vercel-speed-insights": null,
+        "cloudflare-insights": null
+      }
+    }
+  ]
+}

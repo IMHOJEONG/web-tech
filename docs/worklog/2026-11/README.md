@@ -1,5 +1,11 @@
 # 2026-11 작업 기록
 
+- [11-25 Docs·Vuln Radar 초기 JavaScript 비용](2026-11-25-initial-js-cost.md)
+
+- [11-25 Docs 프로덕션 이미지·한글 폰트 성능](2026-11-25-docs-production-cwv.md)
+
+- [11-25 PR #112 CI 확인과 코드 리뷰](2026-11-25-pr112-ci-review.md)
+
 - [11-25 Feed 한글 조합 입력 수정](2026-11-25-feed-ime-fix.md)
 
 - [11-25 Feed 상호작용 기준선·IME 회귀](2026-11-25-feed-interaction-latency.md)

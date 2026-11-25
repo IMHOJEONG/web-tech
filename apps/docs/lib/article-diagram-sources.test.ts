@@ -7,7 +7,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { writeSyntheticImages } from '../../../scripts/synthetic-docs-media.mts'
 
-test('responsive diagrams preserve portrait and landscape dimensions with synthetic files', async (t) => {
+test('responsive diagram metadata matches the public and synthetic dimensions', async (t) => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'synthetic-diagrams-'))
     t.after(() => fs.rmSync(root, { recursive: true, force: true }))
     writeSyntheticImages(root)
@@ -30,7 +30,12 @@ test('responsive diagrams preserve portrait and landscape dimensions with synthe
         assert.equal(portrait.readUInt32BE(16), 720)
         assert.equal(portrait.readUInt32BE(20), sources.portraitHeight)
         assert.equal(landscape.readUInt32BE(16), 1600)
-        assert.ok(landscape.readUInt32BE(20) < landscape.readUInt32BE(16))
+        assert.equal(landscape.readUInt32BE(20), sources.landscapeHeight)
+        const publicLandscape = await readFile(
+            new URL(`../public${sources.landscape}`, import.meta.url)
+        )
+        assert.equal(publicLandscape.readUInt32BE(16), 1600)
+        assert.equal(publicLandscape.readUInt32BE(20), sources.landscapeHeight)
     }
 })
 

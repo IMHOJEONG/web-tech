@@ -193,6 +193,8 @@ export const components = {
                     <source
                         media="(min-width: 640px)"
                         srcSet={diagram.landscape}
+                        width={1600}
+                        height={diagram.landscapeHeight}
                     />
                     <Image
                         {...(props as ImageProps)}

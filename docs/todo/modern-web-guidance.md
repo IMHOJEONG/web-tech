@@ -50,6 +50,8 @@
 
 관련 가이드: optimize-image-priority·visually-stable-font-fallbacks·performance.
 
+2026-11-25. PR #112 병합 트리의 실제 Next 렌더와 공개 표본을 측정했다. 가로 도식의 비율 예약을 수정해 로컬 프로덕션 빌드에서 세 브라우저로 검증했다. 폰트 폴백 보정 후보는 개선이 없었다. [전체 페이지 검증](../verification/performance/2026-11-25-docs-production-cwv.md).
+
 - 한/영 본문, 이미지/이미지 없는 글, 두 폭의 실제 프로덕션 렌더에서 LCP 요소·폰트 첫 표시/전환·이미지 최적화 응답·출력 파일 추적을 확인한다. 동일 cache/CPU/네트워크로 반복한다.
 - 완료 조건: 합성 컴포넌트 관측과 전체 페이지 LCP/최대 session-window CLS를 분리한 보고서, 소스/빌드 기준, 재현 명령과 한계가 있다. fallback 줄 수 변화가 CLS의 원인으로 확인된 경우에만 보정 후보를 비교한다.
 - Noto Sans KR·라이선스 고지는 유지한다. LCP 요소를 확인하기 전 preload나 fetchPriority를 추가하지 않는다.
@@ -57,6 +59,10 @@
 ### 4. P2 — 초기 JavaScript와 외부 스크립트 비용 재평가
 
 관련 가이드: identify-heavy-scripts·optimize-script-priority·performance.
+
+2026-11-25. 공개 Docs·Vuln Radar의 초기 JS와 Docs 분석 스크립트 차단 대조를 측정했다. Docs의 공통 React 런타임이 실행 표본에서 가장 큰 비중이었다. 로딩 정책 변경은 대조군의 일관된 개선이 확인될 때 검토한다. [초기 JS 비용 검증](../verification/performance/2026-11-25-initial-js-cost.md).
+
+후속 프로파일링에서 Docs의 헤더 안 모바일 메뉴가 가장 큰 렌더 구간으로 잡혔다. 메뉴 본문을 열 때 렌더링하는 후보는 첫 검색 활성화를 개선하지 못했다. [하이드레이션 결과](../verification/performance/2026-11-25-initial-js-cost.md#후속-검증--docs-헤더의-하이드레이션).
 
 - 초기 자원별 압축 전송·평가 시간·long frame·실제 사용 경로를 측정한다. 앱 코드와 분석/개발 전용 스크립트를 구분한다.
 - 완료 조건: 비용이 재현된 의존성/기능만 후보로 삼고 초기 화면·후속 이동·선로딩·실패 복구의 손익을 비교한다. 이전 lazy route/화면 밖 렌더링 보류안을 근거 없이 재적용하지 않는다.

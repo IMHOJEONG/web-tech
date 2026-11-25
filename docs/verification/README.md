@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-25 Docs·Vuln Radar 초기 JavaScript 비용](performance/2026-11-25-initial-js-cost.md)
+- [11-25 Docs 프로덕션 이미지·한글 폰트 성능](performance/2026-11-25-docs-production-cwv.md)
 - [11-25 Feed 상호작용 기준선·IME 대조](performance/2026-11-25-feed-interaction-latency.md)
 - [11-25 CSP HTTPS 복원·재검증](security/2026-11-25-csp-https-delivery.md)
 - [11-24 CSP 수집기 정제·제한 검증](security/2026-11-24-csp-report-collector.md)
