@@ -60,6 +60,10 @@
 
 관련 가이드: identify-heavy-scripts·optimize-script-priority·performance.
 
+2026-11-25. 공개 Docs·Vuln Radar의 초기 JS와 Docs 분석 스크립트 차단 대조를 측정했다. Docs의 공통 React 런타임이 실행 표본에서 가장 큰 비중이었다. 로딩 정책 변경은 대조군의 일관된 개선이 확인될 때 검토한다. [초기 JS 비용 검증](../verification/performance/2026-11-25-initial-js-cost.md).
+
+후속 프로파일링에서 Docs의 헤더 안 모바일 메뉴가 가장 큰 렌더 구간으로 잡혔다. 메뉴 본문을 열 때 렌더링하는 후보는 첫 검색 활성화를 개선하지 못했다. [하이드레이션 결과](../verification/performance/2026-11-25-initial-js-cost.md#후속-검증--docs-헤더의-하이드레이션).
+
 - 초기 자원별 압축 전송·평가 시간·long frame·실제 사용 경로를 측정한다. 앱 코드와 분석/개발 전용 스크립트를 구분한다.
 - 완료 조건: 비용이 재현된 의존성/기능만 후보로 삼고 초기 화면·후속 이동·선로딩·실패 복구의 손익을 비교한다. 이전 lazy route/화면 밖 렌더링 보류안을 근거 없이 재적용하지 않는다.
 - 분석 기능의 제거·동의 정책 변경·새 수집 SDK 도입은 독립적인 범위 결정이 필요하다.
