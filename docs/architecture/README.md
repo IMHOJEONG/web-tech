@@ -6,6 +6,8 @@
 
 ## ADR 상태
 
+- [ADR-0038: 정제된 CSP 보고 수집기](adr-0038-csp-report-collector.md): 로컬 적용. 공통 처리·정보 보관 경계·요청 예산이며 원격 배포와 정책 헤더 연결 전.
+
 - [ADR-0037: CodeRabbit 파일 수 제한 예외](adr-0037-coderabbit-file-limit-exception.md): PR 브랜치 적용. 공식 App·동일 head·PR 파일 수와 정확한 제한 응답의 상관 검증.
 
 - [ADR-0035: 검색 결과의 실제 링크 포커스](adr-0035-docs-search-drawer-link-focus.md): 적용 중. ADR-0031의 combobox·결과 포커스 항목을 부분 대체하며 입력 Enter와 링크 탐색을 분리한다. main·운영 반영은 이 PR 이후 확인한다.

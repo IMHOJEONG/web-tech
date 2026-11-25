@@ -1,5 +1,13 @@
 # 검증 보고서
 
+- [11-25 Feed 상호작용 기준선·IME 대조](performance/2026-11-25-feed-interaction-latency.md)
+- [11-25 CSP HTTPS 복원·재검증](security/2026-11-25-csp-https-delivery.md)
+- [11-24 CSP 수집기 정제·제한 검증](security/2026-11-24-csp-report-collector.md)
+
+- [11-24 CSP 자원·보고 경로와 jitless 검증](security/2026-11-24-csp-readiness.md)
+
+- [11-23 웹 보안 헤더·CSP 사전조사](security/2026-11-23-web-security-headers.md)
+
 - [11-22 503 종료 계측 준비 상태](resilience/2026-11-22-upstream-503-trace-readiness.md): 실제 HTTP/파일 gate 회귀와 11-23 main 충돌 해결 후 단독24회·Next 503 반복10회·전체214개 로컬 통과. 과거 CI 최초 원인 미확정·후속 원격 검증·운영 미배포를 구분.
 
 - [11-23 CodeRabbit 파일 수 제한 예외](resilience/2026-11-23-coderabbit-file-limit.md) — 엄격한 증거 검증과 일반 skip 차단 유지.

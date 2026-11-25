@@ -591,11 +591,11 @@
     },
     {
       "path": "docs/architecture/README.md",
-      "sha256": "2bed4736c1f700739a3e9b09ee45067a46302f73fd28be0539e51214f1e3f5f7",
+      "sha256": "1e3be69ea3e9767d3cb28c54e7e13f33ea099da63ad596923c09b0f43a4390f7",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-23",
-      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 검토한 CSP 수집기와 정제 검증 기록의 커밋을 요청함. 입력정제·자원예산·373회귀/20HTTP조건·실패와한계·소스해시·ADR/절차/목차를 검수함. 원시보고·서명URL·코드표본·쿠키/IP/UA·개인경로·기존병합후worklog·다음HTTPS작업은 제외함. 푸시·배포·방화벽변경 승인을 추정하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -647,11 +647,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "fab23be016c99c257db47f21fa268eb9dafcba8a821c21e824abbd96e43eea33",
+      "sha256": "c3d78f67e24f8c9c16b63aca6fae3edec36ef9f1071df3b500aa152dff5c021d",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-23",
-      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. main과 PR 목차 항목을 보존하고 합성 로컬 회귀24회·503반복10회·전체214개 결과와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -689,11 +689,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "57cb1840eb28c28f0b8e389f84e6b0063c9eb7341d2e7abbb75ac6409babae8d",
+      "sha256": "e700b065ee728808327925dd75c6210bf7e51da87e28450f69d871c8a7d1b74f",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-23",
-      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. main과 PR 목차 항목을 보존하고 합성 로컬 회귀24회·503반복10회·전체214개 결과와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -857,11 +857,11 @@
     },
     {
       "path": "docs/verification/artifacts/README.md",
-      "sha256": "f4c71eee6d2fee97c59e28daf6cd1ab99bf39ef321f1cc2ce9bb7a47ee0cb669",
+      "sha256": "d82e834e3bc70536954fd123bcb335fffff1c8404c74e95b33aa4ec7cc5ea392",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-23",
-      "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -1403,11 +1403,11 @@
     },
     {
       "path": "docs/runbooks/README.md",
-      "sha256": "a28afdb2f79c3740acaea08d448e0ca1871b50f1b1a8e25466438f1aa8e637e9",
+      "sha256": "ce29ac28a909af5bdf843383cd034dfd7b37802a352f7f793eec29649dc41b63",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-19",
-      "note": "사용자가 기존 승인된 글 17개·자산 15개 범위의 운영 전환 로더·설정·정제 문서를 별도 PR로 공개 검수·커밋·푸시하고 검증 뒤 병합·Production 전환하도록 승인함. 기존 실패·조건·한계·절차와 목차의 최종 bytes를 검수함. 실제 원문·키·원시 자료·기존 미커밋·stash·공개 원문/과거 이력/NAS 삭제는 제외함. 인증 CI 활성화는 후속으로 유지함.",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 검토한 CSP 수집기와 정제 검증 기록의 커밋을 요청함. 입력정제·자원예산·373회귀/20HTTP조건·실패와한계·소스해시·ADR/절차/목차를 검수함. 원시보고·서명URL·코드표본·쿠키/IP/UA·개인경로·기존병합후worklog·다음HTTPS작업은 제외함. 푸시·배포·방화벽변경 승인을 추정하지 않음.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -3536,6 +3536,314 @@
       "decision": "public-approved",
       "reviewedOn": "2026-11-23",
       "note": "사용자가 PR111 병합과 공식 CodeRabbit 파일 수 제한만 검증된 예외로 추가하는 보완·기록·커밋·푸시를 승인함. 공식 App·동일 head·정확한 사유·파일 집계와 정제 회귀 결과·미병합 상태를 검수함. 원시 로그·인증 값·개인정보·원본 checkout의 다른 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/security/2026-11-23-web-security-headers.md",
+      "sha256": "d70e98cd2055488b31f01204e422d3e4a0fe8fea2a0bf7d9c4a087a433012fb6",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-23-web-security-headers.json",
+      "sha256": "cdfde6891eb1e7eb312d231d0f1c7c0dbf8b5a6068e4894dddb892adb9bfa845",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-23-web-security-headers.md",
+      "sha256": "79c2b4eb89500c9f81ffb5aed4c329d6348206172241e6c9c8b44d3c7295569e",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 앞서 검토한 보안 헤더2개와 검증 기록의 커밋을 요청함. 합성12조건·설정 해시·실제 검증 범위·운영 미검증·CSP 후속 계획과 목차를 검수함. 원시 응답·서명 URL·쿠키·개인 경로·기존 병합 후 worklog는 제외함. 푸시·배포·다음 작업의 공개 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/security/2026-11-24-csp-readiness.md",
+      "sha256": "7aaf1842edc8dc0cc9a517183167d9238c54cfa68968a768793271cc19f3017d",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 PR #112 CSP 문서 리뷰 지적의 수정·커밋·푸시를 명시 요청함. 역사적 빌드·Playwright 사전 조건과 합성 fixture·정제 이벤트 재실행을 검수함. 실제 보고 원문과 운영 값은 포함하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-24-csp-readiness.json",
+      "sha256": "43a567c4de86926c91d8020d111d5ff7d42085b4ca6e0a84eed37d10a96dd23b",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 검토한 jitless 변경과 검증 기록의 커밋을 명시 요청함. 자원 목록·합성 CSP 전후/대조 결과·소스 해시·실패와 미검증 범위·목차를 검수함. 원시 보고·URL/코드 표본·쿠키·개인 경로·기존 병합 후 worklog·새 수집기 구현은 제외함. 푸시·배포 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-24-csp-readiness.md",
+      "sha256": "ae3148354abba1b2a4ee768f402e4e06162e3cc51fe69f32805b123807017e7d",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-24",
+      "note": "사용자가 검토한 jitless 변경과 검증 기록의 커밋을 명시 요청함. 자원 목록·합성 CSP 전후/대조 결과·소스 해시·실패와 미검증 범위·목차를 검수함. 원시 보고·URL/코드 표본·쿠키·개인 경로·기존 병합 후 worklog·새 수집기 구현은 제외함. 푸시·배포 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/architecture/adr-0038-csp-report-collector.md",
+      "sha256": "d4e2358c11caf107a25a868562c4570e353d7b4c4c039d1a2892cccddbfc77eb",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 HTTPS·WebKit 호환 후속과 정제 검증 기록의 커밋을 요청함. 기존 경계를 보존하고 복원/새 검증·로컬/운영 구분·관련 목차/절차를 검수함. 원시보고·민감값·개인경로·다른 작업·푸시·배포·방화벽 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/runbooks/csp-report-collector.md",
+      "sha256": "55093b2bb959648b115cf4726eb5fb7cef1ab8d26f59077ceac40c061f3b9d99",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 HTTPS·WebKit 호환 후속과 정제 검증 기록의 커밋을 요청함. 기존 경계를 보존하고 복원/새 검증·로컬/운영 구분·관련 목차/절차를 검수함. 원시보고·민감값·개인경로·다른 작업·푸시·배포·방화벽 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/security/2026-11-24-csp-report-collector.md",
+      "sha256": "cf1aceba89639df8251740ee9f22e204cf2469bb84ad34810dd8aa4cea0083a0",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 검토한 CSP 수집기와 정제 검증 기록의 커밋을 요청함. 입력정제·자원예산·373회귀/20HTTP조건·실패와한계·소스해시·ADR/절차/목차를 검수함. 원시보고·서명URL·코드표본·쿠키/IP/UA·개인경로·기존병합후worklog·다음HTTPS작업은 제외함. 푸시·배포·방화벽변경 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-24-csp-report-collector.json",
+      "sha256": "f030f140a6a3d9aec72b4f9dc164c528e5fbafbf00c9ac02461960e8e7a4bd3d",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 검토한 CSP 수집기와 정제 검증 기록의 커밋을 요청함. 입력정제·자원예산·373회귀/20HTTP조건·실패와한계·소스해시·ADR/절차/목차를 검수함. 원시보고·서명URL·코드표본·쿠키/IP/UA·개인경로·기존병합후worklog·다음HTTPS작업은 제외함. 푸시·배포·방화벽변경 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-24-csp-report-collector.md",
+      "sha256": "53287c366a5f26917a08f20d267125635260c3a50ea22246e21efddc6783cd5a",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 검토한 CSP 수집기와 정제 검증 기록의 커밋을 요청함. 입력정제·자원예산·373회귀/20HTTP조건·실패와한계·소스해시·ADR/절차/목차를 검수함. 원시보고·서명URL·코드표본·쿠키/IP/UA·개인경로·기존병합후worklog·다음HTTPS작업은 제외함. 푸시·배포·방화벽변경 승인을 추정하지 않음.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-25-csp-https-delivery.json",
+      "sha256": "0e5c9a4f96a621cfe9916e4cad78daa66874b0c084b8fa7ddcd87003fc5bb71b",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 검토한 HTTPS·WebKit 후속 변경과 정제 검증의 커밋을 요청함. 임시 작업 트리 손실 후 복원과 새375회귀/12HTTPS조건·소스해시·과거 자료 미복구·로컬/운영 경계를 검수함. 원시보고·개인경로·URL/쿼리값·키·쿠키/IP/UA·다른 작업·푸시/배포/방화벽 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/security/2026-11-25-csp-https-delivery.md",
+      "sha256": "5ac5cc31ce0ae777d5357ee8df52c860c8d5c0b00316d2ecf9a49eb321e5b85c",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 검토한 HTTPS·WebKit 후속 변경과 정제 검증의 커밋을 요청함. 임시 작업 트리 손실 후 복원과 새375회귀/12HTTPS조건·소스해시·과거 자료 미복구·로컬/운영 경계를 검수함. 원시보고·개인경로·URL/쿼리값·키·쿠키/IP/UA·다른 작업·푸시/배포/방화벽 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-25-csp-https-delivery.md",
+      "sha256": "ed2c9cf5c3091e92c635f3e339befbf3e4db52273e36363297a1bb471cba7dfa",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 검토한 HTTPS·WebKit 후속 변경과 정제 검증의 커밋을 요청함. 임시 작업 트리 손실 후 복원과 새375회귀/12HTTPS조건·소스해시·과거 자료 미복구·로컬/운영 경계를 검수함. 원시보고·개인경로·URL/쿼리값·키·쿠키/IP/UA·다른 작업·푸시/배포/방화벽 변경은 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/todo/README.md",
+      "sha256": "d10a7a8eb6f35ab97fa47acf981c32858715bd90d8a29a225a173d690df21e71",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/todo/modern-web-guidance.md",
+      "sha256": "b1fbd15c30e6f2664ab893b58babffaba369df700c15a37738e4774c1c85fb85",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-25-feed-ime-fix.json",
+      "sha256": "d6eefc3a023ef995c4a1f1ccbe21cbfb86dc3c9ce156c089816b632fac45a04c",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/artifacts/2026-11-25-feed-interaction-latency.json",
+      "sha256": "b01042dd3237640bec41be4c626de13ac4eebc261f2039d24c553403398d7e55",
+      "kind": "sanitized-evidence",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/performance/2026-11-25-feed-interaction-latency.md",
+      "sha256": "50d5f3e57d086b00438503f3b67a35b31b8b972b6d85d450e7cdbb2c40ac67a0",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-25-feed-ime-fix.md",
+      "sha256": "be958ac49172682c067c2b4e7e99fceb44319fe0b79a86d17f299b7306001060",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-25-feed-interaction-latency.md",
+      "sha256": "a43575a326c41031213cb6c33dada0c9373570afaefcd635b6457670938c2847",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-25-modern-web-next-plan.md",
+      "sha256": "9c07499290544dd37ba0ed93044d1f87809dd469f6be12c2be3138135f3f888c",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-25",
+      "note": "사용자가 파일별 경로와 SHA-256 목록으로 제시한 문서·정제 증거 11개 공개 및 main 대상 PR 생성을 명시 승인함. 승인 목록과 인덱스 파일 해시 일치 확인. 합성 시험 수치·실패·미검증 범위와 작업 기록을 포함함. 원시 로그·개인 경로·비밀값 제외.",
       "checks": {
         "secrets": true,
         "personalData": true,

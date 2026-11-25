@@ -1,0 +1,788 @@
+{
+  "date": "2026-11-25",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "402e2970",
+  "state": "fresh-reverification-after-temporary-worktree-loss",
+  "sourceSha256": {
+    "packages/api/csp-reporting.mts": "26145b7704fc3cca902f722e5b12610a7e318ba7b25d47b25ff677e4d9ab5d25",
+    "scripts/csp-reporting.test.mjs": "b370584467682982cf0e64f5048c8f80f4dad100a4d950f838a8fdb5644d9f2a",
+    "scripts/verify-csp-https.mjs": "c909a6c0e044bed2b6272d165e50fb6891e102c7b2df931fd32158cebf8ef764"
+  },
+  "checks": {
+    "repoPassed": 375,
+    "repoFailed": 0,
+    "repoSkipped": 0,
+    "coreCasesIncluded": 36,
+    "apiTypecheck": "pass",
+    "apiLint": "pass"
+  },
+  "nativeHttps": {
+    "date": "2026-11-25",
+    "observations": [
+      {
+        "engine": "chromium",
+        "browserVersion": "151.0.7922.34",
+        "app": "docs",
+        "mode": "report-to",
+        "delivered": true,
+        "secureContext": true,
+        "reportOnlyProbeRan": true,
+        "received": [
+          {
+            "caseId": "chromium-docs-report-to",
+            "mediaType": "application/reports+json",
+            "payloadFormat": "batch",
+            "status": 204,
+            "encrypted": true
+          }
+        ],
+        "summaries": [
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "docs",
+            "groups": [
+              {
+                "directive": "script-src-elem",
+                "disposition": "report",
+                "resource": "inline",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "chromiumDistribution": "new-headless",
+        "acceleratedReportingTimer": true
+      },
+      {
+        "engine": "chromium",
+        "browserVersion": "151.0.7922.34",
+        "app": "docs",
+        "mode": "legacy",
+        "delivered": true,
+        "secureContext": true,
+        "reportOnlyProbeRan": true,
+        "received": [
+          {
+            "caseId": "chromium-docs-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          },
+          {
+            "caseId": "chromium-docs-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          },
+          {
+            "caseId": "chromium-docs-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          }
+        ],
+        "summaries": [
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "docs",
+            "groups": [
+              {
+                "directive": "script-src-elem",
+                "disposition": "report",
+                "resource": "inline",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "docs",
+            "groups": [
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "other",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "docs",
+            "groups": [
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "network",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "chromiumDistribution": "new-headless",
+        "acceleratedReportingTimer": true
+      },
+      {
+        "engine": "chromium",
+        "browserVersion": "151.0.7922.34",
+        "app": "vuln-radar",
+        "mode": "report-to",
+        "delivered": true,
+        "secureContext": true,
+        "reportOnlyProbeRan": true,
+        "received": [
+          {
+            "caseId": "chromium-vuln-radar-report-to",
+            "mediaType": "application/reports+json",
+            "payloadFormat": "batch",
+            "status": 204,
+            "encrypted": true
+          }
+        ],
+        "summaries": [
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "vuln-radar",
+            "groups": [
+              {
+                "directive": "script-src-elem",
+                "disposition": "report",
+                "resource": "inline",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "chromiumDistribution": "new-headless",
+        "acceleratedReportingTimer": true
+      },
+      {
+        "engine": "chromium",
+        "browserVersion": "151.0.7922.34",
+        "app": "vuln-radar",
+        "mode": "legacy",
+        "delivered": true,
+        "secureContext": true,
+        "reportOnlyProbeRan": true,
+        "received": [
+          {
+            "caseId": "chromium-vuln-radar-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          },
+          {
+            "caseId": "chromium-vuln-radar-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          },
+          {
+            "caseId": "chromium-vuln-radar-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          }
+        ],
+        "summaries": [
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "vuln-radar",
+            "groups": [
+              {
+                "directive": "script-src-elem",
+                "disposition": "report",
+                "resource": "inline",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "vuln-radar",
+            "groups": [
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "other",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "vuln-radar",
+            "groups": [
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "network",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "chromiumDistribution": "new-headless",
+        "acceleratedReportingTimer": true
+      },
+      {
+        "engine": "firefox",
+        "browserVersion": "153.0",
+        "app": "docs",
+        "mode": "report-to",
+        "delivered": true,
+        "secureContext": true,
+        "reportOnlyProbeRan": true,
+        "received": [
+          {
+            "caseId": "firefox-docs-report-to",
+            "mediaType": "application/reports+json",
+            "payloadFormat": "batch",
+            "status": 204,
+            "encrypted": true
+          }
+        ],
+        "summaries": [
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "docs",
+            "groups": [
+              {
+                "directive": "script-src-elem",
+                "disposition": "report",
+                "resource": "inline",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              },
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "other",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              },
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "network",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "chromiumDistribution": null,
+        "acceleratedReportingTimer": false
+      },
+      {
+        "engine": "firefox",
+        "browserVersion": "153.0",
+        "app": "docs",
+        "mode": "legacy",
+        "delivered": true,
+        "secureContext": true,
+        "reportOnlyProbeRan": true,
+        "received": [
+          {
+            "caseId": "firefox-docs-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          },
+          {
+            "caseId": "firefox-docs-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          },
+          {
+            "caseId": "firefox-docs-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          }
+        ],
+        "summaries": [
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "docs",
+            "groups": [
+              {
+                "directive": "script-src-elem",
+                "disposition": "report",
+                "resource": "inline",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "docs",
+            "groups": [
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "network",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "docs",
+            "groups": [
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "other",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "chromiumDistribution": null,
+        "acceleratedReportingTimer": false
+      },
+      {
+        "engine": "firefox",
+        "browserVersion": "153.0",
+        "app": "vuln-radar",
+        "mode": "report-to",
+        "delivered": true,
+        "secureContext": true,
+        "reportOnlyProbeRan": true,
+        "received": [
+          {
+            "caseId": "firefox-vuln-radar-report-to",
+            "mediaType": "application/reports+json",
+            "payloadFormat": "batch",
+            "status": 204,
+            "encrypted": true
+          }
+        ],
+        "summaries": [
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "vuln-radar",
+            "groups": [
+              {
+                "directive": "script-src-elem",
+                "disposition": "report",
+                "resource": "inline",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              },
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "other",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              },
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "network",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "chromiumDistribution": null,
+        "acceleratedReportingTimer": false
+      },
+      {
+        "engine": "firefox",
+        "browserVersion": "153.0",
+        "app": "vuln-radar",
+        "mode": "legacy",
+        "delivered": true,
+        "secureContext": true,
+        "reportOnlyProbeRan": true,
+        "received": [
+          {
+            "caseId": "firefox-vuln-radar-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          },
+          {
+            "caseId": "firefox-vuln-radar-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          },
+          {
+            "caseId": "firefox-vuln-radar-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          }
+        ],
+        "summaries": [
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "vuln-radar",
+            "groups": [
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "other",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "vuln-radar",
+            "groups": [
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "network",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "vuln-radar",
+            "groups": [
+              {
+                "directive": "script-src-elem",
+                "disposition": "report",
+                "resource": "inline",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "chromiumDistribution": null,
+        "acceleratedReportingTimer": false
+      },
+      {
+        "engine": "webkit",
+        "browserVersion": "26.5",
+        "app": "docs",
+        "mode": "report-to",
+        "delivered": true,
+        "secureContext": true,
+        "reportOnlyProbeRan": true,
+        "received": [
+          {
+            "caseId": "webkit-docs-report-to",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "single-modern",
+            "status": 204,
+            "encrypted": true
+          },
+          {
+            "caseId": "webkit-docs-report-to",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "single-modern",
+            "status": 204,
+            "encrypted": true
+          }
+        ],
+        "summaries": [
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "docs",
+            "groups": [
+              {
+                "directive": "script-src-elem",
+                "disposition": "report",
+                "resource": "inline",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "docs",
+            "groups": [
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "other",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "chromiumDistribution": null,
+        "acceleratedReportingTimer": false
+      },
+      {
+        "engine": "webkit",
+        "browserVersion": "26.5",
+        "app": "docs",
+        "mode": "legacy",
+        "delivered": true,
+        "secureContext": true,
+        "reportOnlyProbeRan": true,
+        "received": [
+          {
+            "caseId": "webkit-docs-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          },
+          {
+            "caseId": "webkit-docs-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          }
+        ],
+        "summaries": [
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "docs",
+            "groups": [
+              {
+                "directive": "script-src-elem",
+                "disposition": "unknown",
+                "resource": "inline",
+                "document": "other",
+                "status": "unknown",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "docs",
+            "groups": [
+              {
+                "directive": "img-src",
+                "disposition": "unknown",
+                "resource": "other",
+                "document": "other",
+                "status": "unknown",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "chromiumDistribution": null,
+        "acceleratedReportingTimer": false
+      },
+      {
+        "engine": "webkit",
+        "browserVersion": "26.5",
+        "app": "vuln-radar",
+        "mode": "report-to",
+        "delivered": true,
+        "secureContext": true,
+        "reportOnlyProbeRan": true,
+        "received": [
+          {
+            "caseId": "webkit-vuln-radar-report-to",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "single-modern",
+            "status": 204,
+            "encrypted": true
+          },
+          {
+            "caseId": "webkit-vuln-radar-report-to",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "single-modern",
+            "status": 204,
+            "encrypted": true
+          }
+        ],
+        "summaries": [
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "vuln-radar",
+            "groups": [
+              {
+                "directive": "script-src-elem",
+                "disposition": "report",
+                "resource": "inline",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "vuln-radar",
+            "groups": [
+              {
+                "directive": "img-src",
+                "disposition": "report",
+                "resource": "other",
+                "document": "other",
+                "status": "2xx",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "chromiumDistribution": null,
+        "acceleratedReportingTimer": false
+      },
+      {
+        "engine": "webkit",
+        "browserVersion": "26.5",
+        "app": "vuln-radar",
+        "mode": "legacy",
+        "delivered": true,
+        "secureContext": true,
+        "reportOnlyProbeRan": true,
+        "received": [
+          {
+            "caseId": "webkit-vuln-radar-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          },
+          {
+            "caseId": "webkit-vuln-radar-legacy",
+            "mediaType": "application/csp-report",
+            "payloadFormat": "legacy",
+            "status": 204,
+            "encrypted": true
+          }
+        ],
+        "summaries": [
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "vuln-radar",
+            "groups": [
+              {
+                "directive": "script-src-elem",
+                "disposition": "unknown",
+                "resource": "inline",
+                "document": "other",
+                "status": "unknown",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "event": "csp-report-summary",
+            "schemaVersion": 1,
+            "app": "vuln-radar",
+            "groups": [
+              {
+                "directive": "img-src",
+                "disposition": "unknown",
+                "resource": "other",
+                "document": "other",
+                "status": "unknown",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "chromiumDistribution": null,
+        "acceleratedReportingTimer": false
+      }
+    ],
+    "requiredCases": 12,
+    "deliveredCases": 12,
+    "markerAbsentFromApplicationSummaries": true,
+    "scope": "Native browser requests to actual route adapters through a local HTTPS bridge; ephemeral self-signed certificate; not platform deployment or public CA validation",
+    "timing": "Chromium new-headless uses test-only short-reporting-delay; 8s observation window is not production latency",
+    "cleanup": {
+      "serverClosed": true,
+      "temporaryDirectoryRemoved": true,
+      "systemTrustChanged": false
+    }
+  },
+  "historicalEvidence": {
+    "source": "Jira KAN-83 comment10127 and Confluence knowledge v42",
+    "priorRunClaim": "12/12 native HTTPS; initial shell non-delivery and WebKit400 before compatibility fix",
+    "localOriginalsAvailable": false,
+    "note": "Prior temporary files are unavailable; current observations are a new run, not recovered raw originals."
+  },
+  "notVerified": [
+    "Vercel Preview rewrite",
+    "public CA trust",
+    "Next production trace",
+    "effective platform blocking",
+    "production delivery",
+    "Safari app and real devices"
+  ]
+}

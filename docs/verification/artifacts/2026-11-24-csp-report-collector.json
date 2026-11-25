@@ -1,0 +1,173 @@
+{
+  "date": "2026-11-24",
+  "baseHead": "f7a7bd4f09e80ad66dfe6201aa21de98ad72089f",
+  "state": "collector-local-uncommitted",
+  "limits": {
+    "bytes": 16384,
+    "batch": 10,
+    "bodyTimeoutMs": 2000,
+    "readOperations": 16384,
+    "requestsPerInstancePer60000Ms": 60
+  },
+  "sourceSha256": {
+    "packages/api/csp-reporting.mts": "cb92ab7f4e105a6d15f85a03da98fbcd3924c4b550f049783145fab83149ba09",
+    "packages/api/package.json": "e254674efc7b8059be3f4ab530219d4cfe7bf13eefb015b4f13d91df5fb2aa0b",
+    "apps/docs/app/api/csp-report/route.ts": "6d26a0fdef0adddb24302bd129908d28ab6f9bdab3b41882d4c9f9a898bade93",
+    "apps/docs/next.config.mjs": "28fd5a9a4128bf9763d1e6adba4b057318e29cba12dc1787b86bf9387cc1f67d",
+    "apps/docs/package.json": "4115827b72f46a26317933fb232f07e868b2538b30d42bf37743e124a3bde99f",
+    "apps/vuln-radar/api/csp-report.ts": "9fb4fba5ec1c10fa1e42657b9ccf0d981dbb3fd7a0e5ef0c5ea579d6f6a7e1ef",
+    "apps/vuln-radar/vercel.json": "f2f0370828a9890e1fda49f8856fe27a2d02b263f73a0ec0aa74d25ee39ebfea",
+    "apps/vuln-radar/package.json": "7b1eb9423c51ef0892f770d39344279214f58112c737cdcd7c0b008683ecf7c7",
+    "scripts/csp-reporting.test.mjs": "827182dd7ec991c07c24085afb17ba26ab32c7dd12378f996bee82cae8a80f81",
+    "pnpm-lock.yaml": "e9d236b8c823a44cf6a39374a1a183a550d8967d658c6861909405a6f6cb0f09"
+  },
+  "checks": {
+    "collectorRegressionTests": 34,
+    "rootRegressionTests": 373,
+    "failed": 0,
+    "skipped": 0,
+    "typecheck": ["api", "docs", "vuln-radar"],
+    "changedSourceLint": ["api", "docs", "vuln-radar"]
+  },
+  "http": {
+    "results": [
+      {
+        "app": "docs",
+        "case": "legacy",
+        "status": 204
+      },
+      {
+        "app": "docs",
+        "case": "modern",
+        "status": 204
+      },
+      {
+        "app": "docs",
+        "case": "invalid-json",
+        "status": 400
+      },
+      {
+        "app": "docs",
+        "case": "oversized",
+        "status": 413
+      },
+      {
+        "app": "docs",
+        "case": "batch-limit",
+        "status": 413
+      },
+      {
+        "app": "docs",
+        "case": "media-type",
+        "status": 415
+      },
+      {
+        "app": "vulnRadar",
+        "case": "legacy",
+        "status": 204
+      },
+      {
+        "app": "vulnRadar",
+        "case": "modern",
+        "status": 204
+      },
+      {
+        "app": "vulnRadar",
+        "case": "invalid-json",
+        "status": 400
+      },
+      {
+        "app": "vulnRadar",
+        "case": "oversized",
+        "status": 413
+      },
+      {
+        "app": "vulnRadar",
+        "case": "batch-limit",
+        "status": 413
+      },
+      {
+        "app": "vulnRadar",
+        "case": "media-type",
+        "status": 415
+      },
+      {
+        "app": "docs",
+        "case": "real-browser-legacy-report",
+        "engine": "chromium",
+        "received": true,
+        "reportOnlyExecutionPreserved": true
+      },
+      {
+        "app": "vulnRadar",
+        "case": "real-browser-legacy-report",
+        "engine": "chromium",
+        "received": true,
+        "reportOnlyExecutionPreserved": true
+      },
+      {
+        "app": "docs",
+        "case": "real-browser-legacy-report",
+        "engine": "firefox",
+        "received": true,
+        "reportOnlyExecutionPreserved": true
+      },
+      {
+        "app": "vulnRadar",
+        "case": "real-browser-legacy-report",
+        "engine": "firefox",
+        "received": true,
+        "reportOnlyExecutionPreserved": true
+      },
+      {
+        "app": "docs",
+        "case": "real-browser-legacy-report",
+        "engine": "webkit",
+        "received": true,
+        "reportOnlyExecutionPreserved": true
+      },
+      {
+        "app": "vulnRadar",
+        "case": "real-browser-legacy-report",
+        "engine": "webkit",
+        "received": true,
+        "reportOnlyExecutionPreserved": true
+      },
+      {
+        "app": "docs",
+        "case": "concurrent-http-rate-limit",
+        "requests": 65,
+        "accepted": 52,
+        "rejected": 13
+      },
+      {
+        "app": "vulnRadar",
+        "case": "concurrent-http-rate-limit",
+        "requests": 65,
+        "accepted": 52,
+        "rejected": 13
+      }
+    ],
+    "checks": 20,
+    "privateMarkerAbsentFromApplicationLogs": true,
+    "scope": "Actual Next dev HTTP route and Vercel fetch adapter over a local bridge; not Vercel deployment routing"
+  },
+  "initialFailures": [
+    {
+      "scope": "root tests in sandbox before final additions",
+      "passed": 368,
+      "failed": 2,
+      "reason": "Existing socket-based tests denied with EPERM; same suite rerun with local access allowed"
+    },
+    {
+      "scope": "temporary HTTP bridge",
+      "reason": "Cancellation double-closed its controller; helper fixed and HTTP cases rerun"
+    }
+  ],
+  "limitsOfEvidence": [
+    "Actual Next development HTTP route and actual Vercel fetch adapter through a loopback bridge",
+    "Vercel production routing and modern HTTPS browser batch delivery unverified",
+    "Per-instance budget is not distributed across cold starts or regions",
+    "Application logs exclude raw report fields; platform ingress/access logs remain a separate deployment check"
+  ]
+}

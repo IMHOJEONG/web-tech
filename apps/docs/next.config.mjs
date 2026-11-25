@@ -104,7 +104,7 @@ const nextConfig = {
     pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
     // Optionally, add any other Next.js config below,
     reactStrictMode: true,
-    transpilePackages: ['@web-tech/ui'],
+    transpilePackages: ['@web-tech/ui', '@web-tech/api'],
     outputFileTracingIncludes: {
         '/og/article.png': ['./public/fonts/Pretendard-Bold.otf'],
         '/*': [
@@ -127,6 +127,16 @@ const nextConfig = {
         : undefined,
     headers() {
         return [
+            {
+                source: '/:path*',
+                headers: [
+                    { key: 'X-Content-Type-Options', value: 'nosniff' },
+                    {
+                        key: 'Referrer-Policy',
+                        value: 'strict-origin-when-cross-origin',
+                    },
+                ],
+            },
             ...[
                 '/offline-worker.js',
                 '/offline-reader.js',

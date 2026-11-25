@@ -1,0 +1,604 @@
+{
+  "date": "2026-11-24",
+  "baseHead": "34784315ea3d2cff157720fdcee9ae03d7662942",
+  "state": "next-work-local-uncommitted",
+  "sourceSha256": {
+    "apps/vuln-radar/src/app/main.tsx": "3b502d9ed6d6ebc5c891cbc982c54f0506266bd732f0e7ede32cd507180d760d",
+    "apps/vuln-radar/src/app/configure-validation.ts": "3abfc5683577f7fa532835f61417de7f4ef42c970be57e3210e0a4c40804be06",
+    "apps/vuln-radar/src/shared/config/env.shared.ts": "31e2d656fbf383f910d0756a3ba52f98127cb9d9dd4087e5583243deeee2a5e5",
+    "apps/vuln-radar/src/shared/api/radar.ts": "de48707da94fdfbf050824abc8aee832009788e7776f0718228ad4236aad79fd",
+    "apps/docs/app/[locale]/layout.tsx": "80737eb380d16cb9ea45dbefad65471f0a57bb89edc75b7f929c429601849502",
+    "apps/docs/shared/config/react-inspection-tools.ts": "d5443ed57b17e146f014feb3bd491a30c43964f68989f9f87b3218b592d373a5",
+    "apps/docs/widgets/article-detail/ui/article-structured-data.tsx": "1d5c6b12419fc7773f23c3eb5f2890cb5befc78ea040def9006c98cb31e0f46a",
+    "apps/docs/widgets/app-shell/ui/performance-insights.tsx": "0c74ac58aadb61f85b2cbb176adcccc1183637b2a2851291586851334a0bc148"
+  },
+  "checks": {
+    "typecheck": "passed",
+    "changedSourceLint": "passed",
+    "libraryTests": {
+      "passed": 36,
+      "failed": 0,
+      "skipped": 0
+    },
+    "freshProductionBuild": "passed"
+  },
+  "experiments": {
+    "initialDualReporting": {
+      "date": "2026-11-24",
+      "conditions": 6,
+      "results": [
+        {
+          "engine": "chromium",
+          "route": "/overview",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:report:eval": 2
+            }
+          },
+          "afterProbe": {
+            "script-src:report:eval": 2,
+            "script-src-elem:report:inline": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "chromium",
+          "route": "/feed",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:report:eval": 2
+            }
+          },
+          "afterProbe": {
+            "script-src:report:eval": 2,
+            "script-src-elem:report:inline": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "firefox",
+          "route": "/overview",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:report:eval": 2
+            }
+          },
+          "afterProbe": {
+            "script-src:report:eval": 2,
+            "script-src-elem:report:inline": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "firefox",
+          "route": "/feed",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:report:eval": 2
+            }
+          },
+          "afterProbe": {
+            "script-src:report:eval": 2,
+            "script-src-elem:report:inline": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "webkit",
+          "route": "/overview",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "webkit",
+          "route": "/feed",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        }
+      ],
+      "transport": {
+        "legacy": 0,
+        "batch": 0,
+        "invalid": 2
+      },
+      "scope": "Fresh Vuln Radar production bundle; synthetic API503; diagnostic report-only policy; no application enforcement or production reports",
+      "privacy": "Counts only; no report URLs, paths, code samples, cookies, headers or raw payloads retained"
+    },
+    "beforeAttributed": {
+      "date": "2026-11-24",
+      "conditions": 6,
+      "results": [
+        {
+          "engine": "chromium",
+          "route": "/overview",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:report:eval:app-bundle": 2
+            }
+          },
+          "afterProbe": {
+            "script-src:report:eval:app-bundle": 2,
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "chromium",
+          "route": "/feed",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:report:eval:app-bundle": 2
+            }
+          },
+          "afterProbe": {
+            "script-src:report:eval:app-bundle": 2,
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "firefox",
+          "route": "/overview",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:report:eval:app-bundle": 2
+            }
+          },
+          "afterProbe": {
+            "script-src:report:eval:app-bundle": 2,
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "firefox",
+          "route": "/feed",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:report:eval:app-bundle": 2
+            }
+          },
+          "afterProbe": {
+            "script-src:report:eval:app-bundle": 2,
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "webkit",
+          "route": "/overview",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "webkit",
+          "route": "/feed",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        }
+      ],
+      "transport": {
+        "legacy": 14,
+        "batch": 0,
+        "invalid": 0
+      },
+      "scope": "Fresh Vuln Radar production bundle; synthetic API503; diagnostic report-only policy; no application enforcement or production reports",
+      "privacy": "Counts only; no report URLs, paths, code samples, cookies, headers or raw payloads retained"
+    },
+    "beforeEnforcedControl": {
+      "date": "2026-11-24",
+      "conditions": 6,
+      "results": [
+        {
+          "engine": "chromium",
+          "route": "/overview",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:enforce:eval:app-bundle": 1
+            }
+          },
+          "afterProbe": {
+            "script-src:enforce:eval:app-bundle": 1,
+            "script-src-elem:enforce:inline:other-or-empty": 1
+          },
+          "enforcedPolicyBlockedProbe": true
+        },
+        {
+          "engine": "chromium",
+          "route": "/feed",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:enforce:eval:app-bundle": 1
+            }
+          },
+          "afterProbe": {
+            "script-src:enforce:eval:app-bundle": 1,
+            "script-src-elem:enforce:inline:other-or-empty": 1
+          },
+          "enforcedPolicyBlockedProbe": true
+        },
+        {
+          "engine": "firefox",
+          "route": "/overview",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:enforce:eval:app-bundle": 1
+            }
+          },
+          "afterProbe": {
+            "script-src:enforce:eval:app-bundle": 1,
+            "script-src-elem:enforce:inline:other-or-empty": 1
+          },
+          "enforcedPolicyBlockedProbe": true
+        },
+        {
+          "engine": "firefox",
+          "route": "/feed",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:enforce:eval:app-bundle": 1
+            }
+          },
+          "afterProbe": {
+            "script-src:enforce:eval:app-bundle": 1,
+            "script-src-elem:enforce:inline:other-or-empty": 1
+          },
+          "enforcedPolicyBlockedProbe": true
+        },
+        {
+          "engine": "webkit",
+          "route": "/overview",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:enforce:eval:app-bundle": 1
+            }
+          },
+          "afterProbe": {
+            "script-src:enforce:eval:app-bundle": 1,
+            "script-src-elem:enforce:inline:other-or-empty": 1
+          },
+          "enforcedPolicyBlockedProbe": true
+        },
+        {
+          "engine": "webkit",
+          "route": "/feed",
+          "appLoadedWithSynthetic503": true,
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {
+              "script-src:enforce:eval:app-bundle": 1
+            }
+          },
+          "afterProbe": {
+            "script-src:enforce:eval:app-bundle": 1,
+            "script-src-elem:enforce:inline:other-or-empty": 1
+          },
+          "enforcedPolicyBlockedProbe": true
+        }
+      ],
+      "transport": {
+        "legacy": 12,
+        "batch": 0,
+        "invalid": 0
+      },
+      "scope": "Fresh Vuln Radar production bundle; synthetic API503; diagnostic enforced control policy; no application enforcement or production reports",
+      "privacy": "Counts only; no report URLs, paths, code samples, cookies, headers or raw payloads retained"
+    },
+    "afterJitless": {
+      "date": "2026-11-24",
+      "conditions": 9,
+      "results": [
+        {
+          "engine": "chromium",
+          "route": "/overview",
+          "scenario": "valid",
+          "appLoaded": true,
+          "feedValidation": "synthetic503",
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "chromium",
+          "route": "/feed",
+          "scenario": "valid",
+          "appLoaded": true,
+          "feedValidation": "accepted-valid",
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "chromium",
+          "route": "/feed",
+          "scenario": "invalid",
+          "appLoaded": true,
+          "feedValidation": "rejected-invalid",
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "firefox",
+          "route": "/overview",
+          "scenario": "valid",
+          "appLoaded": true,
+          "feedValidation": "synthetic503",
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "firefox",
+          "route": "/feed",
+          "scenario": "valid",
+          "appLoaded": true,
+          "feedValidation": "accepted-valid",
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "firefox",
+          "route": "/feed",
+          "scenario": "invalid",
+          "appLoaded": true,
+          "feedValidation": "rejected-invalid",
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "webkit",
+          "route": "/overview",
+          "scenario": "valid",
+          "appLoaded": true,
+          "feedValidation": "synthetic503",
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "webkit",
+          "route": "/feed",
+          "scenario": "valid",
+          "appLoaded": true,
+          "feedValidation": "accepted-valid",
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        },
+        {
+          "engine": "webkit",
+          "route": "/feed",
+          "scenario": "invalid",
+          "appLoaded": true,
+          "feedValidation": "rejected-invalid",
+          "beforeProbe": {
+            "scripts": 1,
+            "inlineScripts": 0,
+            "stylesheetLinks": 1,
+            "styleElements": 0,
+            "styleAttributes": 0,
+            "violations": {}
+          },
+          "afterProbe": {
+            "script-src-elem:report:inline:other-or-empty": 1
+          },
+          "reportOnlyDidNotBlockProbe": true
+        }
+      ],
+      "transport": {
+        "legacy": 9,
+        "batch": 0,
+        "invalid": 0
+      },
+      "scope": "Fresh jitless Vuln Radar production bundle; valid and invalid feed fixtures plus synthetic503; diagnostic report-only policy; no application enforcement or production reports",
+      "privacy": "Counts only; no report URLs, paths, code samples, cookies, headers or raw payloads retained"
+    }
+  },
+  "limits": [
+    "Vuln Radar only: fresh production bundle, synthetic API fixtures and loopback HTTP",
+    "docs source inventory only; no fresh docs production render",
+    "Modern report-to batch delivery and operational collection unverified",
+    "No production CSP header or collector deployed; VoiceOver skipped"
+  ]
+}

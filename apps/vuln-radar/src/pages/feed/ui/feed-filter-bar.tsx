@@ -1,4 +1,4 @@
-import { type ReactNode, useId } from "react";
+import { type ReactNode, useId, useRef, useState } from "react";
 import type {
   FeedFilters,
   FeedKevFilter,
@@ -37,6 +37,22 @@ export function FeedFilterBar({
   resultCount,
 }: FeedFilterBarProps) {
   const titleId = useId();
+  const queryId = useId();
+  const composing = useRef(false);
+  const [draft, setDraft] = useState({
+    sourceQuery: filters.query,
+    value: filters.query,
+  });
+  // Direct navigation and browser history can supply a different search value.
+  if (draft.sourceQuery !== filters.query) {
+    setDraft({ sourceQuery: filters.query, value: filters.query });
+  }
+
+  function publishQuery(value: string) {
+    if (value !== filters.query) {
+      onFiltersChange({ ...filters, query: value });
+    }
+  }
 
   return (
     <search
@@ -58,26 +74,42 @@ export function FeedFilterBar({
           </p>
         </div>
 
-        <label className="grid w-full gap-2 lg:max-w-[360px]">
-          <span className="text-sm font-medium text-radar-copy">
+        <div className="grid w-full gap-2 lg:max-w-[360px]">
+          <label
+            htmlFor={queryId}
+            className="text-sm font-medium text-radar-copy"
+          >
             {labels.searchLabel}
-          </span>
+          </label>
           <input
+            id={queryId}
             maxLength={120}
             autoCorrect="off"
             autoCapitalize="none"
             spellCheck={false}
-            value={filters.query}
-            onChange={(event) =>
-              onFiltersChange({
-                ...filters,
-                query: event.target.value,
-              })
-            }
+            value={draft.value}
+            onCompositionStart={() => {
+              composing.current = true;
+            }}
+            onChange={(event) => {
+              const value = event.currentTarget.value;
+              // Keep the controlled input in sync while the browser owns the composition.
+              setDraft({ sourceQuery: filters.query, value });
+              if (!composing.current && value !== draft.value) {
+                publishQuery(value);
+              }
+            }}
+            onCompositionEnd={(event) => {
+              if (!composing.current) return;
+              composing.current = false;
+              const value = event.currentTarget.value;
+              setDraft({ sourceQuery: filters.query, value });
+              publishQuery(value);
+            }}
             placeholder={labels.searchPlaceholder}
             className="min-h-11 rounded-sm border border-radar-border bg-radar-panel-strong px-3 text-sm text-white transition placeholder:text-radar-copy/38 focus:border-radar-primary/50 focus:shadow-[0_0_0_3px_rgba(255,179,179,0.08)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-radar-primary forced-colors:focus-visible:outline-[CanvasText]"
           />
-        </label>
+        </div>
       </div>
 
       <div className="mt-4 grid gap-3 lg:grid-cols-3">

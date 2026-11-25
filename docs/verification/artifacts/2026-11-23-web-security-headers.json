@@ -1,0 +1,151 @@
+{
+  "conditions": 12,
+  "results": [
+    {
+      "engine": "chromium",
+      "app": "docs",
+      "mode": "before",
+      "validScript": true,
+      "inlineScript": true,
+      "validStyle": true,
+      "wrongMimeExecuted": true,
+      "sameOriginReferrer": "full synthetic path/query",
+      "crossOriginReferrer": "origin only"
+    },
+    {
+      "engine": "chromium",
+      "app": "docs",
+      "mode": "after",
+      "validScript": true,
+      "inlineScript": true,
+      "validStyle": true,
+      "wrongMimeExecuted": false,
+      "sameOriginReferrer": "full synthetic path/query",
+      "crossOriginReferrer": "origin only"
+    },
+    {
+      "engine": "chromium",
+      "app": "vulnRadar",
+      "mode": "before",
+      "validScript": true,
+      "inlineScript": true,
+      "validStyle": true,
+      "wrongMimeExecuted": true,
+      "sameOriginReferrer": "full synthetic path/query",
+      "crossOriginReferrer": "origin only"
+    },
+    {
+      "engine": "chromium",
+      "app": "vulnRadar",
+      "mode": "after",
+      "validScript": true,
+      "inlineScript": true,
+      "validStyle": true,
+      "wrongMimeExecuted": false,
+      "sameOriginReferrer": "full synthetic path/query",
+      "crossOriginReferrer": "origin only"
+    },
+    {
+      "engine": "firefox",
+      "app": "docs",
+      "mode": "before",
+      "validScript": true,
+      "inlineScript": true,
+      "validStyle": true,
+      "wrongMimeExecuted": true,
+      "sameOriginReferrer": "full synthetic path/query",
+      "crossOriginReferrer": "origin only"
+    },
+    {
+      "engine": "firefox",
+      "app": "docs",
+      "mode": "after",
+      "validScript": true,
+      "inlineScript": true,
+      "validStyle": true,
+      "wrongMimeExecuted": false,
+      "sameOriginReferrer": "full synthetic path/query",
+      "crossOriginReferrer": "origin only"
+    },
+    {
+      "engine": "firefox",
+      "app": "vulnRadar",
+      "mode": "before",
+      "validScript": true,
+      "inlineScript": true,
+      "validStyle": true,
+      "wrongMimeExecuted": true,
+      "sameOriginReferrer": "full synthetic path/query",
+      "crossOriginReferrer": "origin only"
+    },
+    {
+      "engine": "firefox",
+      "app": "vulnRadar",
+      "mode": "after",
+      "validScript": true,
+      "inlineScript": true,
+      "validStyle": true,
+      "wrongMimeExecuted": false,
+      "sameOriginReferrer": "full synthetic path/query",
+      "crossOriginReferrer": "origin only"
+    },
+    {
+      "engine": "webkit",
+      "app": "docs",
+      "mode": "before",
+      "validScript": true,
+      "inlineScript": true,
+      "validStyle": true,
+      "wrongMimeExecuted": true,
+      "sameOriginReferrer": "full synthetic path/query",
+      "crossOriginReferrer": "origin only"
+    },
+    {
+      "engine": "webkit",
+      "app": "docs",
+      "mode": "after",
+      "validScript": true,
+      "inlineScript": true,
+      "validStyle": true,
+      "wrongMimeExecuted": false,
+      "sameOriginReferrer": "full synthetic path/query",
+      "crossOriginReferrer": "origin only"
+    },
+    {
+      "engine": "webkit",
+      "app": "vulnRadar",
+      "mode": "before",
+      "validScript": true,
+      "inlineScript": true,
+      "validStyle": true,
+      "wrongMimeExecuted": true,
+      "sameOriginReferrer": "full synthetic path/query",
+      "crossOriginReferrer": "origin only"
+    },
+    {
+      "engine": "webkit",
+      "app": "vulnRadar",
+      "mode": "after",
+      "validScript": true,
+      "inlineScript": true,
+      "validStyle": true,
+      "wrongMimeExecuted": false,
+      "sameOriginReferrer": "full synthetic path/query",
+      "crossOriginReferrer": "origin only"
+    }
+  ],
+  "nextRouteValidation": "passed",
+  "offlinePoliciesPreserved": true,
+  "date": "2026-11-23",
+  "baseHead": "b841d21ad76ee64790765315932e06739d60270e",
+  "state": "local-uncommitted",
+  "sourceSha256": {
+    "apps/docs/next.config.mjs": "3bbe5d5303c3e42f36de4d76cd2252e8b2869b7a3b7a18df836180b2211de019",
+    "apps/vuln-radar/vercel.json": "97bc8071c0e87c1704c9db958acf58a75b49f3c4af9b557766138f3dd0cbb3c7"
+  },
+  "limitations": [
+    "Synthetic HTTP responses using real configured values; not deployed app routing",
+    "Production fetch blocked or redirected to Vercel login; not counted as app headers",
+    "No CSP collector or rollout; no operational claim"
+  ]
+}
