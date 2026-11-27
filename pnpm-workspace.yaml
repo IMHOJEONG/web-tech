@@ -246,3 +246,5 @@ catalogs:
     tailwind-merge: "^3.4.0"
     use-debounce: "^10.1.0"
     zod: "^4.6.6"
+patchedDependencies:
+  next@16.4.6: patches/next@16.4.6.patch
