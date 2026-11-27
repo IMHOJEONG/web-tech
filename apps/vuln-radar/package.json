@@ -18,6 +18,7 @@
     "@tanstack/react-query": "catalog:fe-box",
     "@tanstack/react-router": "catalog:fe-box",
     "@supabase/supabase-js": "catalog:web",
+    "@web-tech/api": "workspace:*",
     "@web-tech/ui": "workspace:*",
     "@xyflow/react": "catalog:web",
     "class-variance-authority": "catalog:web",

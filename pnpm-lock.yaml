@@ -606,6 +606,9 @@ importers:
       '@vercel/speed-insights':
         specifier: ^2.0.0
         version: 2.0.0(next@16.4.6(patch_hash=5100d71c1ac91dbc109807e076f82772f42706e239e589b7cefc7ab8a5755b18)(@babel/core@7.29.6(supports-color@8.1.1))(@playwright/test@1.62.1)(@types/node@24.13.4)(babel-plugin-macros@3.1.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(sass@1.99.0))(react@19.2.6)
+      '@web-tech/api':
+        specifier: workspace:*
+        version: link:../../packages/api
       '@web-tech/docs-content-contract':
         specifier: workspace:*
         version: link:../../packages/docs-content-contract
@@ -899,6 +902,9 @@ importers:
       '@tanstack/react-router':
         specifier: catalog:fe-box
         version: 1.169.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@web-tech/api':
+        specifier: workspace:*
+        version: link:../../packages/api
       '@web-tech/ui':
         specifier: workspace:*
         version: link:../../packages/ui

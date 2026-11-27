@@ -53,6 +53,7 @@
         "@types/sanitize-html": "catalog:docs",
         "@vercel/analytics": "^2.0.1",
         "@vercel/speed-insights": "^2.0.0",
+        "@web-tech/api": "workspace:*",
         "@web-tech/docs-content-contract": "workspace:*",
         "@web-tech/ui": "workspace:*",
         "@xyflow/react": "catalog:docs",

@@ -2,6 +2,17 @@
 
 - [11-24 태블릿 UI/UX manifest 보완](2026-11-24-tablet-uiux-manifest-race.md): 별도 버그·공식 방식 패치·실제 메서드 회귀와 합성 콘텐츠 E2E. 기존 미커밋·stash·비공개 자료 보존, 로컬 작업만 진행.
 
+- [11-25 Feed 한글 조합 입력 수정](2026-11-25-feed-ime-fix.md)
+
+- [11-25 Feed 상호작용 기준선·IME 회귀](2026-11-25-feed-interaction-latency.md)
+- [11-25 Modern Web Guidance 후속 계획](2026-11-25-modern-web-next-plan.md)
+- [11-25 HTTPS 복원·커밋과 현대화 계획 준비](2026-11-25-csp-https-delivery.md)
+- [11-24 jitless 커밋과 CSP 보고 수집기](2026-11-24-csp-report-collector.md)
+
+- [11-24 보안 헤더 커밋과 CSP 후속](2026-11-24-csp-readiness.md)
+
+- [11-23 웹 보안 헤더·CSP 준비](2026-11-23-web-security-headers.md)
+
 - [11-22 503 종료 계측 준비 상태](2026-11-22-upstream-503-trace-readiness.md): 기준 유지 회귀와 11-23 최신 main 충돌 해결·전체214개 로컬 재검증. 최종 문서 재검수 후 동기화·검증 기록을 분리 커밋하며 기존 미커밋·초안·stash·NAS는 보존.
 
 - [11-23 프런트엔드 현대화 main PR 준비](2026-11-23-frontend-modernization-main-pr.md) — 최신 main에 통합·충돌 해결·검증 범위 구분.

@@ -1,5 +1,15 @@
 # 검증 원본 증거
 
+- [11-25 Feed 한글 조합 수정 증거](2026-11-25-feed-ime-fix.json)
+
+- [11-25 Feed 상호작용·IME 정제 증거](2026-11-25-feed-interaction-latency.json)
+- [11-25 CSP HTTPS 재검증 증거](2026-11-25-csp-https-delivery.json)
+- [11-24 CSP 수집기 정제 증거](2026-11-24-csp-report-collector.json)
+
+- [11-24 CSP 전후·강제 대조 정제 결과](2026-11-24-csp-readiness.json)
+
+- [11-23 웹 보안 헤더 전후12조건](2026-11-23-web-security-headers.json)
+
 - [11-23 CodeRabbit 파일 수 제한](2026-11-23-coderabbit-file-limit.json) — 공식 체크·두 파일 집계·사전검사·회귀와 소스 해시.
 
 - [11-23 프런트엔드 현대화 PR 리뷰 보완](2026-11-23-frontend-modernization-pr-review.json) — 정제된 원인·검사·소스 해시.

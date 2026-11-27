@@ -1,0 +1,173 @@
+{
+  "date": "2026-11-25",
+  "baseCommit": "bf316ae1",
+  "scope": "local production build; synthetic API and automated inputs; not field INP; result readiness uses DOM plus double rAF, not a paint timestamp",
+  "calibrations": [
+    {
+      "eventObserved": true,
+      "longFrameObserved": true,
+      "nativeImeControlMatched": true,
+      "reactImeControlMatched": true
+    }
+  ],
+  "sourceHashes": {
+    "apps/vuln-radar/src/pages/feed/ui/feed-page.tsx": "c62189f8a459304a6bc030fb78a40bda216c0fcab93d3746a459cb75b4740ea4",
+    "apps/vuln-radar/src/pages/feed/ui/feed-filter-bar.tsx": "321a095c7bfc6887136bb9b8fa1d1f61479ff5f491f6c3f1835d9252b1ff0c8f",
+    "apps/vuln-radar/src/pages/feed/ui/feed-vulnerability-card.tsx": "94bd5b23ab6be7aa4171bc55376b4ba72e8937f92887d600604068bb334d5bfe",
+    "apps/vuln-radar/src/pages/feed/ui/feed-pagination.tsx": "0167566b2b5d58b49e4aa5c349663c69482ee335ddaae565542a8ce8090ae8fa"
+  },
+  "bundleHashes": {
+    "index-CTb0Y-H6.js": "ac4af442664ad7038fcf3456cb6533fd2e20b92e1a84e34b22dd4a8026fc0055",
+    "index-Daj1VcGj.css": "6e501d75378f45b8e2bcdfce522130332332b2fd93749976a65d1e0e31d72dde"
+  },
+  "harnessSha256": "9d81153f6b1379cd5ac0f4ed0cf89ed1723539d89d2063286b2f67bc737560b9",
+  "baselineChromiumIme": [
+    {
+      "width": 390,
+      "ime": {
+        "expectedMatch": false,
+        "observedLength": 5,
+        "queryMatchesInput": true,
+        "method": "CDP composition only; not OS IME"
+      },
+      "partialRequestObserved": true
+    },
+    {
+      "width": 1280,
+      "ime": {
+        "expectedMatch": false,
+        "observedLength": 5,
+        "queryMatchesInput": true,
+        "method": "CDP composition only; not OS IME"
+      },
+      "partialRequestObserved": true
+    }
+  ],
+  "cases": [
+    {
+      "engine": "chromium",
+      "browserVersion": "151.0.7922.34",
+      "width": 390,
+      "functional": {
+        "currentResult": true,
+        "cancelledHeldRequest": true,
+        "queryPreserved": true,
+        "continuousLinks": 25,
+        "emptyState": true,
+        "directUrlAndHistory": true,
+        "imeSimulation": {
+          "expectedMatch": true,
+          "observedLength": 2,
+          "queryMatchesInput": true,
+          "method": "CDP composition only; not OS IME",
+          "urlHeldUntilCommit": true,
+          "requestsDuringComposition": 0,
+          "committedRequests": 1,
+          "cancelledWithoutRequest": true,
+          "nativeBlurCommitThenKeyboardFilter": true
+        }
+      },
+      "pageerrors": 0
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "151.0.7922.34",
+      "width": 1280,
+      "functional": {
+        "currentResult": true,
+        "cancelledHeldRequest": true,
+        "queryPreserved": true,
+        "continuousLinks": 25,
+        "emptyState": true,
+        "directUrlAndHistory": true,
+        "imeSimulation": {
+          "expectedMatch": true,
+          "observedLength": 2,
+          "queryMatchesInput": true,
+          "method": "CDP composition only; not OS IME",
+          "urlHeldUntilCommit": true,
+          "requestsDuringComposition": 0,
+          "committedRequests": 1,
+          "cancelledWithoutRequest": true,
+          "nativeBlurCommitThenKeyboardFilter": true
+        }
+      },
+      "pageerrors": 0
+    },
+    {
+      "engine": "firefox",
+      "browserVersion": "153.0",
+      "width": 390,
+      "functional": {
+        "currentResult": true,
+        "cancelledHeldRequest": true,
+        "queryPreserved": true,
+        "continuousLinks": 25,
+        "emptyState": true,
+        "directUrlAndHistory": true,
+        "imeSimulation": null
+      },
+      "pageerrors": 0
+    },
+    {
+      "engine": "firefox",
+      "browserVersion": "153.0",
+      "width": 1280,
+      "functional": {
+        "currentResult": true,
+        "cancelledHeldRequest": true,
+        "queryPreserved": true,
+        "continuousLinks": 25,
+        "emptyState": true,
+        "directUrlAndHistory": true,
+        "imeSimulation": null
+      },
+      "pageerrors": 0
+    },
+    {
+      "engine": "webkit",
+      "browserVersion": "26.5",
+      "width": 390,
+      "functional": {
+        "currentResult": true,
+        "cancelledHeldRequest": true,
+        "queryPreserved": true,
+        "continuousLinks": 25,
+        "emptyState": true,
+        "directUrlAndHistory": true,
+        "imeSimulation": null
+      },
+      "pageerrors": 0
+    },
+    {
+      "engine": "webkit",
+      "browserVersion": "26.5",
+      "width": 1280,
+      "functional": {
+        "currentResult": true,
+        "cancelledHeldRequest": true,
+        "queryPreserved": true,
+        "continuousLinks": 25,
+        "emptyState": true,
+        "directUrlAndHistory": true,
+        "imeSimulation": null
+      },
+      "pageerrors": 0
+    }
+  ],
+  "checks": {
+    "build": "pass",
+    "typecheck": "pass",
+    "targetedLint": "pass",
+    "libraryTestsPassed": 36
+  },
+  "limitations": {
+    "physicalIme": "unverified",
+    "firefoxAndWebKitComposition": "unverified",
+    "narrowViewportPointerWhileComposing": "click escaped after pointerdown because control moved; sequential blur then keyboard filter passes"
+  },
+  "cleanup": {
+    "serverClosed": true,
+    "browsersClosed": true
+  }
+}
