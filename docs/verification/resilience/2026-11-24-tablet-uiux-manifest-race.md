@@ -98,6 +98,21 @@ sleep·timeout 연장·retry 증가·worker 축소·skip으로 대체하지 않�
 최종 검수 해시를 다시 기록한다. 기존 카드 E2E·준비 helper·Playwright 설정의
 판정·worker·timeout·retry 변경은 없다. 원격 결과는 새 head 기준으로 별도 기록한다.
 
+PR [#114](https://github.com/IMHOJEONG/web-tech/pull/114)의 최초 head `904611ab`에서
+lint·타입·단위·CodeQL·Preview 빌드는 통과했지만 이미지 검사는
+`ERR_PNPM_PATCH_NOT_FOUND`로 실패했다. 원인은 두 백엔드 Dockerfile이 루트
+pnpm 설정만 복사하고 등록된 `patches/`는 설치 단계에 복사하지 않는 구성이다.
+이는 과거 JSON 오류와 별개의 새 패치 통합 누락이다. 사용자 추가 승인 후 두
+Dockerfile에 설치 전 패치 복사를 넣고 기존 설치 회귀에 누락·잘못된 순서의
+부정 조건을 추가했다. 이미지 tag·Node base·실제 NAS·배포 설정은 변경하지 않는다.
+이후 head의 실제 이미지 검사 결과는 최초 실패와 분리해 확인한다.
+
+설치·Node 보안 정책 회귀 23개와 `pnpm typecheck:toolchain`은 통과했다.
+CodeRabbit의 최초 리뷰도 동일한 Docker 입력 누락 1건을 지적했다. 제안은 실제
+실패 로그와 대조했으며 별도 CLI 설치나 유료 리뷰·검사 우회는 하지 않았다.
+실제 이미지 CI는 docs-backend 대상이고, vuln-radar-backend는 소스 입력·순서와
+기존 보안 정책의 회귀를 검사한 범위다. 후자의 실제 이미지 빌드는 미실행이다.
+
 ### 미확정 범위와 적용 한계
 
 - 승인된 backport는 Next의 개발 서버 CJS/ESM 갱신과 초기 manifest 쓰기에만 적용했다. `next start`·운영 콘텐츠 계약은 변경하지 않는다.

@@ -35,6 +35,10 @@
 
 ### 남은 검증 범위
 
+- PR [#114](https://github.com/IMHOJEONG/web-tech/pull/114)를 생성했다. 작업별 커밋은 patch `2f33c422`, 회귀 `027da7b1`, 정제 문서 `65b1d1a9`이며 보존 병합 `904611ab`에서 392개·타입·lint·공개/문서 검사를 다시 통과했다.
+- 최초 이미지 검사는 `ERR_PNPM_PATCH_NOT_FOUND`로 실패했다. 사용자 추가 승인으로 두 백엔드 Dockerfile과 기존 `scripts/install-pnpm.test.mts`만 보강한다. 운영 컨테이너·태그·runtime·키·워크플로는 바꾸지 않는다. 같은 문서 2개를 정제 갱신·재검수해 후속 커밋하며 새 head의 CI/리뷰와 구분한다.
+- 추가 설치·보안 회귀 23개와 툴체인 타입 검사 통과. CodeRabbit 최초 리뷰의 Major 1건도 같은 Docker 복사 누락으로 확인했다. 새 head에서 실제 docs-backend 이미지 빌드를 재검증하며, vuln-radar-backend의 실제 이미지 빌드는 이번에 실행하지 않는다.
+
 - 원래 CI에서 읽다 실패한 JSON 파일과 요청의 정확한 대응은 미확정이다.
 - 수정 전 별도 클릭 URL 실패 2건은 정확한 완료 지연 원인까지 확정하지 않았다.
 - 원격 CI·실기기·배포와 upstream 안정 릴리스 반영 여부는 별도 검증이 필요하다.
