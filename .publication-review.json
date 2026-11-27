@@ -2,6 +2,48 @@
   "version": 1,
   "entries": [
     {
+      "path": "docs/runbooks/test-authoring-ide-guide.md",
+      "sha256": "831c13dc2aeb0452bcc08d959cbe6bc8156de8c3183cfba6087d1b9cdd69ed7c",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-27",
+      "note": "사용자가 Next manifest 패치·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR·원격 CI/보조 리뷰 확인을 승인함. 합성 실험·공식 MIT 수정 출처·과거 원인 미확정·검증 범위·정제 수치·실제 추적 링크를 검수함. 원문·키·원시 로그/trace·기존 미커밋·stash·main 병합·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/verification/resilience/2026-11-24-tablet-uiux-manifest-race.md",
+      "sha256": "c1de8dc6854a38f6318e10c76d4cd3e6dc4f7e07f9c3df54b10d688960422fb2",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-27",
+      "note": "사용자가 Next manifest 패치·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR·원격 CI/보조 리뷰 확인을 승인함. 합성 실험·공식 MIT 수정 출처·과거 원인 미확정·검증 범위·정제 수치·실제 추적 링크를 검수함. 원문·키·원시 로그/trace·기존 미커밋·stash·main 병합·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
+      "path": "docs/worklog/2026-11/2026-11-24-tablet-uiux-manifest-race.md",
+      "sha256": "dbb9c4952540e18f0efcb645ae2aadecb452d4bdcb310fa18a88b74aa6a0f84c",
+      "kind": "document",
+      "decision": "public-approved",
+      "reviewedOn": "2026-11-27",
+      "note": "사용자가 Next manifest 패치·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR·원격 CI/보조 리뷰 확인을 승인함. 합성 실험·공식 MIT 수정 출처·과거 원인 미확정·검증 범위·정제 수치·실제 추적 링크를 검수함. 원문·키·원시 로그/trace·기존 미커밋·stash·main 병합·배포는 제외함.",
+      "checks": {
+        "secrets": true,
+        "personalData": true,
+        "rights": true,
+        "publicIntent": true
+      }
+    },
+    {
       "path": "docs/verification/security/2026-11-20-effect-redos.md",
       "sha256": "75e8c05505ff3fae070433cc705a93d7067ac87bfa3b320434f5e66a093b1348",
       "kind": "document",
@@ -647,11 +689,11 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sha256": "fab23be016c99c257db47f21fa268eb9dafcba8a821c21e824abbd96e43eea33",
+      "sha256": "3b6450af4fd71bb7458b24dad67971c1a260607351e33f27242b439aab416769",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-23",
-      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. main과 PR 목차 항목을 보존하고 합성 로컬 회귀24회·503반복10회·전체214개 결과와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-27",
+      "note": "사용자가 Next manifest 패치·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR·원격 CI/보조 리뷰 확인을 승인함. 합성 실험·공식 MIT 수정 출처·과거 원인 미확정·검증 범위·정제 수치·실제 추적 링크를 검수함. 원문·키·원시 로그/trace·기존 미커밋·stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -689,11 +731,11 @@
     },
     {
       "path": "docs/worklog/2026-11/README.md",
-      "sha256": "57cb1840eb28c28f0b8e389f84e6b0063c9eb7341d2e7abbb75ac6409babae8d",
+      "sha256": "632c571c1c90c2d52d88566e319bbe87651cb8bf3c5e1383c49d69f2ea249847",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-23",
-      "note": "사용자가 2026-11-23 PR110 main 충돌 해결 후 최종 문서4개와 해시4개 공개·작업별 커밋·푸시를 명시 승인함. main과 PR 목차 항목을 보존하고 합성 로컬 회귀24회·503반복10회·전체214개 결과와 후속 원격 검증 대기를 구분해 검수함. 원시 자료·비공개 원문·다른 미커밋·초안·stash·NAS·비밀값·main 병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-27",
+      "note": "사용자가 Next manifest 패치·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR·원격 CI/보조 리뷰 확인을 승인함. 합성 실험·공식 MIT 수정 출처·과거 원인 미확정·검증 범위·정제 수치·실제 추적 링크를 검수함. 원문·키·원시 로그/trace·기존 미커밋·stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -983,11 +1025,11 @@
     },
     {
       "path": "docs/knowledge/README.md",
-      "sha256": "a40af4271f3cfe698d95b6dea6ab857cabdff20c709047184995224cc401782a",
+      "sha256": "6b005ebc847272f638d17ad9f20a826abc29e402c85996a38d680491b4fc6069",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-21",
-      "note": "사용자가 승인한 이번 JavaScript 개선·관련 문서의 공개·커밋·푸시·PR 범위에서 실제 PR #106·검증 원본·반영 상태와 기존 실행 이력의 구분만 갱신함. 최종 bytes의 비밀값·개인 경로·권리·공개 의도를 재검수함. 다른 작업·원시 자료·병합·운영 배포는 제외함.",
+      "reviewedOn": "2026-11-27",
+      "note": "사용자가 Next manifest 패치·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR·원격 CI/보조 리뷰 확인을 승인함. 합성 실험·공식 MIT 수정 출처·과거 원인 미확정·검증 범위·정제 수치·실제 추적 링크를 검수함. 원문·키·원시 로그/trace·기존 미커밋·stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
