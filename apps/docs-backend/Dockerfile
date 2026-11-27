@@ -13,6 +13,7 @@ COPY scripts/install-pnpm.mts /opt/install-pnpm.mts
 RUN node --experimental-strip-types /opt/install-pnpm.mts /repo /opt/pnpm-bootstrap /pnpm
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json ./
+COPY patches ./patches
 COPY packages/eslint-config ./packages/eslint-config
 COPY packages/docs-content-contract ./packages/docs-content-contract
 COPY packages/typescript-config ./packages/typescript-config
