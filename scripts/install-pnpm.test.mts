@@ -236,3 +236,23 @@ test("both Docker install stages include the workspace patches before frozen ins
     );
   }
 });
+
+test("both Docker deploys use dedicated production lockfiles without relaxing patch validation", () => {
+  for (const app of ["docs-backend", "vuln-radar-backend"]) {
+    const dockerfile = readFileSync(
+      path.join(root, `apps/${app}/Dockerfile`),
+      "utf8",
+    );
+    const deploy = dockerfile.match(/^RUN pnpm[^\n]*\bdeploy\b[^\n]*/m)?.[0];
+    assert.ok(deploy, "locate production deployment");
+    assert.match(deploy, /--prod\b/);
+    assert.doesNotMatch(
+      deploy,
+      /--legacy\b|allowUnusedPatches|allow-unused-patches|--trust-lockfile/,
+    );
+  }
+  assert.doesNotMatch(
+    readFileSync(path.join(root, "pnpm-workspace.yaml"), "utf8"),
+    /(?:allowUnusedPatches|allow-unused-patches):\s*true|forceLegacyDeploy:\s*true/,
+  );
+});
