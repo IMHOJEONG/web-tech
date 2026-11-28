@@ -131,13 +131,25 @@ head `6326fa67`의 핵심 CI는 통과했고, 이미지 설치·Nest 빌드도 �
 - 로컬 probe는 `--ignore-scripts`로 실행해 의존성 묶음과 해석을 검사한 범위다. 실제 서버·DB·NAS·Railway에는 연결하지 않았다. Docker CI의 실제 빌드·스크립트 실행은 후속 head에서 별도로 확인한다.
 - CodeRabbit의 `6326fa67` 재리뷰는 공식 App347564의 `Review rate limited`·NEUTRAL이다. 최초 리뷰 1건의 수정과 새 head 재리뷰 완료를 혼동하지 않는다.
 
-### 적용 한계
+### 2026-11-28 원격 검증 결과
+
+검증한 코드 head는 `119ad88e2c4638d1821e6d152c12780a598d9737`이다.
+이 결과를 추가하는 후속 변경은 문서 2개·공개 검수 해시뿐이며, 그 후속 커밋의
+체크 상태는 [PR #114](https://github.com/IMHOJEONG/web-tech/pull/114)에서 별도로 확인한다.
+
+- [핵심 CI 46112494169](https://github.com/IMHOJEONG/web-tech/actions/runs/46112494169), [문서 검사](https://github.com/IMHOJEONG/web-tech/actions/runs/46112494113), [실제 docs-backend 이미지 빌드](https://github.com/IMHOJEONG/web-tech/actions/runs/46112494082)가 통과했다. CodeQL·GitGuardian·두 Vercel Preview 체크도 성공했다.
+- 태블릿175통과/25기존 skip, 데스크톱182/18skip, 모바일189/11skip, 상세214/2skip, CRP5·오프라인62·공용 UI68/소비자16개 통과다. 해당 CI 로그에서 retry 표식과 기존 JSON 파싱 오류는 관측되지 않았다. 이 관측을 모든 운영 오류의 부재로 확대하지 않는다.
+- 동일 head의 공식 CodeRabbit App347564 체크 `140879103494`는 `Finished`·SUCCESS·`Review completed`다. 최초 Major 1건의 수정과 실제 이미지 통과 근거를 [리뷰 답글](https://github.com/IMHOJEONG/web-tech/pull/114#discussion_r4725688404)에 연결했고 해당 스레드의 해결 상태를 재조회했다. 당시 미해결 스레드는 0개였다.
+- 이번 보존 대조에서 기존44개 중 초기부터 Git 조회가 불가능한3개는 미검증으로 남겼다. 조회 가능한 다른40개 작업 트리의 HEAD·인덱스·추적/미추적 수정 파일 바이트와 stash0개는 동일했다. ignored 비공개 자료를 전수 감사한 결과가 아니며 실제 원문·키·원시 자료는 작업하지 않았다.
+- PR은 검토 중으로 유지하고 main 병합·Production·실제 NAS/DB·실기기 검증은 하지 않았다. 이미지 workflow의 성공을 운영 컨테이너 교체 완료로 해석하지 않는다.
+
+### 운영 미검증 범위
 
 - 승인된 backport는 Next의 개발 서버 CJS/ESM 갱신과 초기 manifest 쓰기에만 적용했다. `next start`·운영 콘텐츠 계약은 변경하지 않는다.
 - 동기 read-modify-write는 한 개발 서버 프로세스의 요청 사이에서 await 경계를 없앤다. 여러 프로세스가 같은 `.next`를 공유하는 경우의 파일 잠금이나 정전·디스크 장애에 대한 원자적 쓰기를 보장하지 않는다.
 - 초기 CI의 JSON 입력·상관 ID가 없어 과거 원인을 확정하지 않는다. 후속 CI에서 동일 오류가 다시 나면 파일 식별과 요청 연계를 먼저 추가 조사한다.
 - `pnpm install --frozen-lockfile --ignore-scripts`와 이후 392개 회귀·타입·변경 파일 lint를 통과했다. offline 설치는 로컬 캐시 누락으로 실패했으며 온라인 frozen 재설치로 복구했다. 이 중간 설치 중 발생한 lint의 모듈 누락도 완결된 설치 후 재검사해 통과했다. 버전과 lockfile을 바꾸어 해결한 것이 아니다.
-- 원격 CI·태블릿 실기기·Production은 미검증이다. E2E는 격리 실행본에 적용한 같은 동작 변경이며 최종 등록본의 새 원격 설치·실행은 후속이다.
+- 11-24 로컬 E2E와 위의 119ad88e 원격 검증은 별개 기록이다. 태블릿 실기기·Production은 미검증이며 운영 전환은 별도 승인 대상이다.
 - upstream 수정이 포함된 안정 버전을 확인하면 패치·등록·lockfile을 함께 정리하고 같은 회귀를 실행한다. 버전 문자열만 보고 패치를 제거하지 않는다.
 
 ## 관련 문서
