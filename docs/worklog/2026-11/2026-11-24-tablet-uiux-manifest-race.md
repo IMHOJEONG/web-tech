@@ -33,7 +33,14 @@
 - 최초 조사 기준 `136ef3c4`는 보존하며 현재 main `5dc0e252`의 보안·IME 변경과 겹치는 lockfile/목차는 양쪽 항목을 보존해 통합한다. 최종 파일 bytes로 공개 검수 해시를 기록하고 새 head의 검사를 확인한다.
 - 이번에 새로 변경한 공통 지침·CI 설정은 없다. 기존 Confluence 개념 문서를 재사용하며 새로 확인한 실행 기록은 Jira와 원본 보고서에 연결한다.
 
-### 남은 검증 범위
+### 2026-11-28 기본 deploy 보완
+
+- `6326fa67`의 핵심 CI는 통과했다. 이미지 설치·빌드는 성공했지만 legacy deploy가 백엔드에서 쓰지 않는 Next 패치로 `ERR_PNPM_UNUSED_PATCH`를 냈다.
+- 사용자 추가 승인으로 두 Dockerfile의 `--legacy`만 제거하고 기본 전용 lockfile 경로를 사용한다. 전역 패치 검사·공급망 검사·기존 E2E 기준은 완화하지 않는다.
+- 새 guard는 변경 전 실패했고 변경 후 설치·보안 회귀 24개·툴체인 타입 검사가 통과했다. 격리 docs-backend131개·vuln-radar-backend127개 묶음이 완료됐고 registry integrity의 루트 pin 일치와 필요한 모듈 해석·Next/개발 CLI 부재를 확인했다. 실제 서버·DB·운영 배포는 미실행이다.
+- 새 원격 CI와 이미지 결과를 확인하며 CodeRabbit 공식 App의 재리뷰 한도는 검증 성공으로 처리하지 않는다. 최초 Major 1건과 후속 완료 여부를 구분한다.
+
+### 최초 PR 후속
 
 - PR [#114](https://github.com/IMHOJEONG/web-tech/pull/114)를 생성했다. 작업별 커밋은 patch `2f33c422`, 회귀 `027da7b1`, 정제 문서 `65b1d1a9`이며 보존 병합 `904611ab`에서 392개·타입·lint·공개/문서 검사를 다시 통과했다.
 - 최초 이미지 검사는 `ERR_PNPM_PATCH_NOT_FOUND`로 실패했다. 사용자 추가 승인으로 두 백엔드 Dockerfile과 기존 `scripts/install-pnpm.test.mts`만 보강한다. 운영 컨테이너·태그·runtime·키·워크플로는 바꾸지 않는다. 같은 문서 2개를 정제 갱신·재검수해 후속 커밋하며 새 head의 CI/리뷰와 구분한다.

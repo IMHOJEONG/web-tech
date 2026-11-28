@@ -113,7 +113,25 @@ CodeRabbit의 최초 리뷰도 동일한 Docker 입력 누락 1건을 지적했�
 실제 이미지 CI는 docs-backend 대상이고, vuln-radar-backend는 소스 입력·순서와
 기존 보안 정책의 회귀를 검사한 범위다. 후자의 실제 이미지 빌드는 미실행이다.
 
-### 미확정 범위와 적용 한계
+### 2026-11-28 배포 묶음의 전용 lockfile
+
+head `6326fa67`의 핵심 CI는 통과했고, 이미지 설치·Nest 빌드도 성공했다.
+하지만 마지막 `pnpm deploy --legacy --prod`는 Next가 없는 백엔드 그래프에서
+루트 Next 패치를 미사용으로 판정해 `ERR_PNPM_UNUSED_PATCH`로 실패했다.
+패치 파일 누락은 해결됐으며 이 두 번째 실패를 같은 오류로 취급하지 않는다.
+
+사용자 추가 승인 후 두 Dockerfile에서 `--legacy`만 제거해 현재 pnpm 12.14.0의
+기본 전용 lockfile 방식을 사용했다. 전역 `allowUnusedPatches`·공급망 검사 생략·
+버전 갱신은 하지 않는다. [pnpm deploy 공식 설명](https://pnpm.io/cli/deploy)의
+기본 경로와 legacy 경로를 구분한다.
+
+- 새 기본 deploy 회귀는 변경 전 실패, 변경 후 설치·보안 정책 회귀 24개와 툴체인 타입 검사가 통과했다.
+- 격리 로컬 기본 deploy는 docs-backend 131개, vuln-radar-backend 127개 패키지로 완료했다. 두 묶음의 registry 패키지 integrity는 루트 lockfile과 일치했다.
+- Nest·공용 콘텐츠 계약/docs-backend, Nest·Prisma 모듈 경로/vuln-radar-backend가 해석됐고 Next와 개발용 Nest CLI는 두 묶음에 없었다.
+- 로컬 probe는 `--ignore-scripts`로 실행해 의존성 묶음과 해석을 검사한 범위다. 실제 서버·DB·NAS·Railway에는 연결하지 않았다. Docker CI의 실제 빌드·스크립트 실행은 후속 head에서 별도로 확인한다.
+- CodeRabbit의 `6326fa67` 재리뷰는 공식 App347564의 `Review rate limited`·NEUTRAL이다. 최초 리뷰 1건의 수정과 새 head 재리뷰 완료를 혼동하지 않는다.
+
+### 적용 한계
 
 - 승인된 backport는 Next의 개발 서버 CJS/ESM 갱신과 초기 manifest 쓰기에만 적용했다. `next start`·운영 콘텐츠 계약은 변경하지 않는다.
 - 동기 read-modify-write는 한 개발 서버 프로세스의 요청 사이에서 await 경계를 없앤다. 여러 프로세스가 같은 `.next`를 공유하는 경우의 파일 잠금이나 정전·디스크 장애에 대한 원자적 쓰기를 보장하지 않는다.

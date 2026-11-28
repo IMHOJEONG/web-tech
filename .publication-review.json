@@ -17,11 +17,11 @@
     },
     {
       "path": "docs/verification/resilience/2026-11-24-tablet-uiux-manifest-race.md",
-      "sha256": "a1b2e1c6e2b70bcaa38683f89bd3f127b3865750ee254c5fe07cdeadf71d3895",
+      "sha256": "59fbe675af68be8ce91dbcf36d610f6fcfbd7dab1362b136f82b3fd360435b9d",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-27",
-      "note": "사용자가 Next manifest 패치·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR·원격 CI/보조 리뷰 확인을 승인함. 합성 실험·공식 MIT 수정 출처·과거 원인 미확정·검증 범위·정제 수치·실제 추적 링크를 검수함. 원문·키·원시 로그/trace·기존 미커밋·stash·main 병합·배포는 제외함.",
+      "reviewedOn": "2026-11-28",
+      "note": "사용자가 Next manifest 패치·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR·원격 CI/보조 리뷰 확인을 승인함. 추가 승인된 Docker 입력·기본 deploy 전환·합성 실험·공식 MIT 수정 출처·과거 원인 미확정·검증 범위·정제 수치·실제 추적 링크를 검수함. 원문·키·원시 로그/trace·기존 미커밋·stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
@@ -31,11 +31,11 @@
     },
     {
       "path": "docs/worklog/2026-11/2026-11-24-tablet-uiux-manifest-race.md",
-      "sha256": "68b4fbe4080c13bb62a323c68b6594595ad41280f80cff200084abb1f4a0b80c",
+      "sha256": "7d3d8da5fac1f1a4a90a23e49c39b1cf8ddfdc855d2bf6ecd65e5820f90db0f6",
       "kind": "document",
       "decision": "public-approved",
-      "reviewedOn": "2026-11-27",
-      "note": "사용자가 Next manifest 패치·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR·원격 CI/보조 리뷰 확인을 승인함. 합성 실험·공식 MIT 수정 출처·과거 원인 미확정·검증 범위·정제 수치·실제 추적 링크를 검수함. 원문·키·원시 로그/trace·기존 미커밋·stash·main 병합·배포는 제외함.",
+      "reviewedOn": "2026-11-28",
+      "note": "사용자가 Next manifest 패치·회귀·정제 문서의 공개 검수·작업별 커밋·푸시·PR·원격 CI/보조 리뷰 확인을 승인함. 추가 승인된 Docker 입력·기본 deploy 전환·합성 실험·공식 MIT 수정 출처·과거 원인 미확정·검증 범위·정제 수치·실제 추적 링크를 검수함. 원문·키·원시 로그/trace·기존 미커밋·stash·main 병합·배포는 제외함.",
       "checks": {
         "secrets": true,
         "personalData": true,
