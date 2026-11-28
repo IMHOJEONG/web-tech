@@ -1,5 +1,7 @@
 # 검증 보고서
 
+- [11-24 태블릿 UI/UX와 개발 manifest 경쟁 조건](resilience/2026-11-24-tablet-uiux-manifest-race.md): 실제 Next 메서드의 실패 재현·공식 방식 backport·기준 유지 로컬 회귀. 과거 CI 원인 확정과 원격 검증은 구분.
+
 - [11-25 Feed 상호작용 기준선·IME 대조](performance/2026-11-25-feed-interaction-latency.md)
 - [11-25 CSP HTTPS 복원·재검증](security/2026-11-25-csp-https-delivery.md)
 - [11-24 CSP 수집기 정제·제한 검증](security/2026-11-24-csp-report-collector.md)

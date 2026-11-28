@@ -1,5 +1,7 @@
 # 2026-11 작업 기록
 
+- [11-24 태블릿 UI/UX manifest 보완](2026-11-24-tablet-uiux-manifest-race.md): 별도 버그·공식 방식 패치·실제 메서드 회귀와 합성 콘텐츠 E2E. 기존 미커밋·stash·비공개 자료 보존, 로컬 작업만 진행.
+
 - [11-25 Feed 한글 조합 입력 수정](2026-11-25-feed-ime-fix.md)
 
 - [11-25 Feed 상호작용 기준선·IME 회귀](2026-11-25-feed-interaction-latency.md)

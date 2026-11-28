@@ -199,6 +199,40 @@ mise exec -- pnpm --filter docs exec playwright test e2e/search-query-policy.spe
 - 학습 중 바꾼 기대값·임시 skip·only는 복원하고 diff를 확인한다. 다른 작업자의 변경은 되돌리지 않는다.
 - IDE 버튼 실행은 이번 작업에서 직접 검증하지 않았다. 통합 터미널 명령과 공식 확장 절차를 안내했다.
 
+## 개발 서버 JSON 오류와 병렬 E2E
+
+`next dev`의 `Unexpected end of JSON input` 직후 ready main이 없으면 단순 hydration
+지연으로 취급하지 않는다. 서버의 오류 페이지·HTTP 상태·브라우저 오류를 대조하고,
+어떤 JSON을 읽었는지 확인한다. 응답 본문·인증값을 공개 로그에 출력하지 않는다.
+
+Next 16.4.6에는 공유 prerender manifest의 비동기 갱신 경로가 남아 있어 공식
+[수정 #100521](https://github.com/vercel/next.js/pull/100521)의 방식을 pnpm 패치로
+연결했다. `patches/next@16.4.6.patch`와 루트 `patchedDependencies`, lockfile의
+`patch_hash`가 한 변경 단위다. 설치된 Next 패키지의 MIT 고지·`license.md`를 유지한다.
+이는 단일 개발 서버 프로세스의 await 경계를 없애는 방어이며 여러 서버가 같은
+`.next`를 공유해도 안전하다는 뜻은 아니다.
+
+```sh
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm --filter @web-tech/docs-content-contract build
+pnpm --filter @web-tech/ui build
+pnpm --filter docs exec node --test lib/next-dev-manifest.test.ts
+pnpm --filter docs test:lib
+```
+
+테스트는 실제 설치 메서드를 호출하며 truncate 구간의 reader·병렬 경로 보존과
+손상 JSON/쓰기 오류의 실패 전파를 함께 검사한다. 실제 문서나 서버가 필요하지 않다.
+화면 E2E는 별도의 합성 콘텐츠 사본에서 원래 worker·timeout·retry 기준으로 확인한다.
+위 설치 명령이 hook을 설치하거나 브라우저를 내려받는 절차를 대체하지는 않는다.
+
+업그레이드 때는 정확한 새 배포본에 공식 수정이 들어 있는지 CJS/ESM 모두 확인한다.
+포함됐다면 패치 파일·설정·lockfile을 함께 갱신하고 같은 회귀를 실행한다. 미포함이면
+새 버전과 패치 충돌을 재검토한다. 적용 실패를 무시하거나 Next 보안 업데이트를
+낡은 패치 때문에 무기한 막지 않는다. 되돌릴 때도 이 세 파일을 검토된 같은 단위로
+변경하며 `git reset`·훅 우회로 다른 작업을 지우지 않는다.
+
+- [태블릿 UI/UX manifest 경쟁 조건 검증](../verification/resilience/2026-11-24-tablet-uiux-manifest-race.md)
+
 ## 관련 검증
 
 - [전체 테스트 목록](repository-test-inventory.md)
